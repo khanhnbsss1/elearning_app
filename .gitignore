@@ -48,3 +48,5 @@ Thumbs.db
 *.mov
 *.wmv
 
+webkit-flutter-admin-panel/WebKit_v3.0.0/WebKit/.dart_tool
+webkit-flutter-admin-panel/WebKit_v3.0.0/WebKit/build

@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -63,8 +54,40 @@ class DefaultFirebaseOptions {
     messagingSenderId: '577388184102',
     projectId: 'elearning-ca768',
     storageBucket: 'elearning-ca768.appspot.com',
-    androidClientId: '577388184102-em447obgr06mt1qphb8fe8qtg5sn7rpo.apps.googleusercontent.com',
+    androidClientId: '577388184102-400mjsugm1v10bgcq9ubkdfoe4b24lod.apps.googleusercontent.com',
     iosClientId: '577388184102-iumlma6tp7nogajc0lc4pbirrge6t6f8.apps.googleusercontent.com',
     iosBundleId: 'FFTCompany.elearninglms',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBMUnrD5uaHYWrOB7iDQEzgvZF_JAlhiPY',
+    appId: '1:577388184102:web:23f30b9d254c29cfabdce7',
+    messagingSenderId: '577388184102',
+    projectId: 'elearning-ca768',
+    authDomain: 'elearning-ca768.firebaseapp.com',
+    storageBucket: 'elearning-ca768.appspot.com',
+    measurementId: 'G-5YL19Q7B8P',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyCitq3FDRIwfhlQIiunUS5_-pK-NAxeOWE',
+    appId: '1:577388184102:ios:eb377ba833aa0386abdce7',
+    messagingSenderId: '577388184102',
+    projectId: 'elearning-ca768',
+    storageBucket: 'elearning-ca768.appspot.com',
+    androidClientId: '577388184102-400mjsugm1v10bgcq9ubkdfoe4b24lod.apps.googleusercontent.com',
+    iosClientId: '577388184102-s7bqus4i931udkn74p4gvdt34vlm7gjg.apps.googleusercontent.com',
+    iosBundleId: 'n',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyBMUnrD5uaHYWrOB7iDQEzgvZF_JAlhiPY',
+    appId: '1:577388184102:web:6a4ae8aa35ca249aabdce7',
+    messagingSenderId: '577388184102',
+    projectId: 'elearning-ca768',
+    authDomain: 'elearning-ca768.firebaseapp.com',
+    storageBucket: 'elearning-ca768.appspot.com',
+    measurementId: 'G-L65JT2SXXM',
+  );
+
 }

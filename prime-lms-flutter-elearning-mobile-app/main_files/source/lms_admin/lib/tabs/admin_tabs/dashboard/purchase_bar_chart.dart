@@ -128,7 +128,9 @@ class PurchaseBarChart extends ConsumerWidget {
 
   BarTouchTooltipData _getTouchData(BuildContext context, List<ChartModel> purchaseStats) {
     return BarTouchTooltipData(
-      tooltipBgColor: Theme.of(context).primaryColor,
+      getTooltipColor:(group) {
+        return Theme.of(context).primaryColor;
+      },
       getTooltipItem: (groupData, groupIndex, rod, rodIndex) {
         // Get Date
         final ChartModel model = purchaseStats[groupIndex];

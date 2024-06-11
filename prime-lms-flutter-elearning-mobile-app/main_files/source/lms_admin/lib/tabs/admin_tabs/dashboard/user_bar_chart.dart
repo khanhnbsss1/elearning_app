@@ -136,7 +136,7 @@ class UserBarChart extends ConsumerWidget {
 
   BarTouchTooltipData _getTouchData(BuildContext context, List<ChartModel> usersStat) {
     return BarTouchTooltipData(
-      tooltipBgColor: Theme.of(context).primaryColor,
+      getTooltipColor:(group) => Theme.of(context).primaryColor,
       getTooltipItem: (groupData, groupIndex, rod, rodIndex) {
         // Get Date
         final ChartModel model = usersStat[groupIndex];
