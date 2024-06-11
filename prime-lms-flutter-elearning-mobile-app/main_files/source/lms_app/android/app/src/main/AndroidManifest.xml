@@ -1,7 +1,11 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.fft_app">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <!-- <uses-permission android:name="com.android.vending.BILLING" /> -->
 
     <!-- Facebook login -->
@@ -23,13 +27,14 @@
             <data android:mimeType="*/*" />
         </intent>
    </queries>
-
-
+    
     <application
         android:label="Prime LMS"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDExO3b67M3YCnnStH1QAJtzzAvK5PA5hY"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "577388184102",
+    "project_id": "elearning-ca768",
+    "storage_bucket": "elearning-ca768.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:577388184102:android:68ccfa0dda807ee7abdce7",
+        "android_client_info": {
+          "package_name": "com.FFTCompany.elearninglms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "577388184102-400mjsugm1v10bgcq9ubkdfoe4b24lod.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.FFTCompany.elearninglms",
+            "certificate_hash": "03072795292adf92c296ce0ed6203c907a2b22ad"
+          }
+        },
+        {
+          "client_id": "577388184102-em447obgr06mt1qphb8fe8qtg5sn7rpo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.FFTCompany.elearninglms",
+            "certificate_hash": "6abdf594d8c7468f2a5a67a3f1b61517977a1860"
+          }
+        },
+        {
+          "client_id": "577388184102-jpokmaptu3of4rl83s172jf6c7t4gffs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIAMuapIP85deFBkBA8YLGchewjMOCEes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "577388184102-jpokmaptu3of4rl83s172jf6c7t4gffs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "577388184102-iumlma6tp7nogajc0lc4pbirrge6t6f8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "FFTCompany.elearninglms"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
