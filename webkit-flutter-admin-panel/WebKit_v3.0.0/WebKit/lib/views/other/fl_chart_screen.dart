@@ -273,7 +273,7 @@ class _FlChartScreenState extends State<FlChartScreen>
                                   maxY: 20,
                                   barTouchData: BarTouchData(
                                     touchTooltipData: BarTouchTooltipData(
-                                      tooltipBgColor: Colors.grey,
+                                      getTooltipColor: (group) => Colors.grey,
                                       getTooltipItem: (a, b, c, d) => null,
                                     ),
                                     touchCallback:
@@ -651,73 +651,82 @@ class _FlChartScreenState extends State<FlChartScreen>
                                     ScatterSpot(
                                       4,
                                       4,
-                                      color:
-                                          controller.selectedSpots.contains(0)
-                                              ? Colors.green
-                                              : Colors.blueGrey,
+                                      dotPainter: FlDotSquarePainter(
+                                        color: controller.selectedSpots.contains(0)
+                                            ? Colors.green
+                                            : Colors.blueGrey,
+                                      ),
                                     ),
                                     ScatterSpot(
                                       2,
                                       5,
-                                      color:
-                                          controller.selectedSpots.contains(1)
-                                              ? Colors.yellow
-                                              : Colors.blueGrey,
-                                      radius: 12,
+                                      dotPainter: FlDotCirclePainter(
+                                        color: controller.selectedSpots.contains(1)
+                                            ? Colors.yellow
+                                            : Colors.blueGrey,
+                                        radius: 12
+                                      ),
                                     ),
                                     ScatterSpot(
                                       4,
                                       5,
-                                      color:
-                                          controller.selectedSpots.contains(2)
+                                      dotPainter: FlDotCirclePainter(
+                                          color: controller.selectedSpots.contains(2)
                                               ? Colors.pink
                                               : Colors.blueGrey,
-                                      radius: 8,
+                                          radius: 8
+                                      ),
+                                      
                                     ),
                                     ScatterSpot(
                                       8,
                                       6,
-                                      color:
-                                          controller.selectedSpots.contains(3)
+                                      dotPainter: FlDotCirclePainter(
+                                          color: controller.selectedSpots.contains(3)
                                               ? Colors.orange
                                               : Colors.blueGrey,
-                                      radius: 20,
+                                          radius: 20
+                                      ),
                                     ),
                                     ScatterSpot(
                                       5,
                                       7,
-                                      color:
-                                          controller.selectedSpots.contains(4)
+                                      dotPainter: FlDotCirclePainter(
+                                          color: controller.selectedSpots.contains(4)
                                               ? Colors.purple
                                               : Colors.blueGrey,
-                                      radius: 14,
+                                          radius: 14
+                                      ),
                                     ),
                                     ScatterSpot(
                                       7,
                                       2,
-                                      color:
-                                          controller.selectedSpots.contains(5)
+                                      dotPainter: FlDotCirclePainter(
+                                          color: controller.selectedSpots.contains(5)
                                               ? Colors.blue
                                               : Colors.blueGrey,
-                                      radius: 18,
+                                          radius: 8
+                                      ),
                                     ),
                                     ScatterSpot(
                                       3,
                                       2,
-                                      color:
-                                          controller.selectedSpots.contains(6)
+                                      dotPainter: FlDotCirclePainter(
+                                          color: controller.selectedSpots.contains(6)
                                               ? Colors.red
                                               : Colors.blueGrey,
-                                      radius: 36,
+                                          radius: 36
+                                      ),
                                     ),
                                     ScatterSpot(
                                       2,
                                       8,
-                                      color:
-                                          controller.selectedSpots.contains(7)
+                                      dotPainter: FlDotCirclePainter(
+                                          color: controller.selectedSpots.contains(7)
                                               ? Colors.cyan
                                               : Colors.blueGrey,
-                                      radius: 22,
+                                          radius: 22
+                                      ),
                                     ),
                                   ],
                                   minX: 0,
@@ -760,9 +769,8 @@ class _FlChartScreenState extends State<FlChartScreen>
                                           : SystemMouseCursors.click;
                                     },
                                     touchTooltipData: ScatterTouchTooltipData(
-                                      tooltipBgColor: Colors.black,
-                                      getTooltipItems:
-                                          (ScatterSpot touchedBarSpot) {
+                                      getTooltipColor: (touchedSpot) => Colors.black,
+                                      getTooltipItems: (ScatterSpot touchedBarSpot) {
                                         return ScatterTooltipItem(
                                           'X: ',
                                           textStyle: TextStyle(
