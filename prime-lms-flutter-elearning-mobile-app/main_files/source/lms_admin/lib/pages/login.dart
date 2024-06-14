@@ -51,6 +51,8 @@ class _LoginState extends ConsumerState<Login> {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       _btnCtlr.start();
+      NextScreen.replaceAnimation(context, const Home());
+      return;
       UserCredential? userCredential = await AuthService().loginWithEmailPassword(emailCtlr.text, passwordCtrl.text);
       if (userCredential?.user != null) {
         debugPrint('Login Success');

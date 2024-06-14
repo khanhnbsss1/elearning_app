@@ -1,0 +1,137 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+import 'package:url_strategy/url_strategy.dart';
+import 'package:webkit/helpers/localizations/app_localization_delegate.dart';
+import 'package:webkit/routes/app_routes.dart';
+import 'package:webkit/routes/routes.dart';
+//import 'base/firebase_manager/firebase_options.dart';
+import 'base/enviroments/flavor_settings.dart';
+import 'base/firebase_manager/firebase_options.dart';
+import 'base/store/cache_storage.dart';
+import 'base/theme/colors_app.dart';
+import 'base/utils/file_utils.dart';
+import 'generated/l10n.dart';
+import 'helpers/localizations/bloc/main_bloc.dart';
+import 'helpers/localizations/language.dart';
+import 'helpers/services/navigation_service.dart';
+import 'helpers/storage/local_storage.dart';
+import 'helpers/theme/app_notifier.dart';
+import 'helpers/theme/app_style.dart';
+import 'helpers/theme/theme_customizer.dart';
+import 'l10n/l10n_extention.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
+  await FlavorSettings().setProductTypeByFlavor();
+  await initialService();
+  AppStyle.init();
+  await ThemeCustomizer.init();
+  ColorConst.setColorByFlavorType();
+  // await Translator.clearTrans();
+  // Translator.getUnTrans();
+  runApp( 
+      MultiBlocProvider(
+        providers: [
+          BlocProvider<MainBloc>(create: (_) => MainBloc(MainState(mainStatus: MainStatus.initial))..add(MainInitEvent()))
+        ],
+        child:
+        ChangeNotifierProvider<AppNotifier>(
+          create: (context) => AppNotifier(),
+          child: const MyApp(),
+        ),
+      ));
+}
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
+  FileUtils.PrintLog("Handling a background message: ${message.messageId}");
+}
+Future<void> initialService()async {
+  await SharedPreferencesStorage().initSharedPreferences();
+  //FirebaseManager.getInstance.initialFirebase();
+  await AuthorHelper.init();
+
+}
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<AppNotifier>(
+      builder: (_, notifier, ___) {
+        return BlocConsumer<MainBloc, MainState>(
+          listener: (context, state) {
+            switch(state.mainStatus){
+
+              case MainStatus.initial:
+
+                break;
+              case MainStatus.onchangeLanguage:
+
+                break;
+              case MainStatus.unKnown:
+                break;
+              case MainStatus.onEnableDarkMode:
+              // TODO: Handle this case.
+                ColorConst.setColorByFlavorType();
+                state.mainStatus = MainStatus.unKnown;
+                break;
+            }
+          },
+          builder: (BuildContext context, state)  {
+            return GetMaterialApp(
+              key: UniqueKey(),
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: ThemeCustomizer.instance.theme,
+              navigatorKey: NavigationService.navigatorKey,
+              initialRoute: Paths.dashboardPath,
+              getPages: getPageRoute(),
+              routingCallback: (value) {
+                /// call back moi lan chuyen page url
+                print(value);
+              },
+              builder: (context, child) {
+                NavigationService.registerContext(context, update: true);
+                return Directionality(textDirection: AppTheme.textDirection, child: child ?? Container());
+              },
+              localizationsDelegates: const [
+                S.delegate,
+                L10nX.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: state.supportedLanguages
+                  .map((language) => (language.scripCode==null)?Locale(language.languageCode!, language.country!):
+              Locale.fromSubtags(languageCode: language.languageCode!, countryCode: language.country!,scriptCode: language.scripCode) )
+                  .toList(),
+              locale: state.locale,
+              localeResolutionCallback: (locale, supportedLocales) {
+                for (var supportedLocale in supportedLocales) {
+                  if (supportedLocale.languageCode == locale?.languageCode &&
+                      supportedLocale.countryCode == locale?.countryCode) {
+                    return supportedLocale;
+                  }
+                }
+                return supportedLocales.first;
+              },
+              // home: ButtonsPage(),
+            );
+          },
+        );
+      },
+    );
+
+
+  }
+  
+}
