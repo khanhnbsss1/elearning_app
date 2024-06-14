@@ -26,17 +26,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "FAQs": MessageLookupByLibrary.simpleMessage("Faqs"),
         "Product": MessageLookupByLibrary.simpleMessage("Sản phẩm"),
         "account": MessageLookupByLibrary.simpleMessage("Ta khoản"),
+        "account_text": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "action": MessageLookupByLibrary.simpleMessage("Hành động"),
         "actions": MessageLookupByLibrary.simpleMessage("Hành động"),
         "add_product": MessageLookupByLibrary.simpleMessage("Thêm sản phẩm"),
         "add_products": MessageLookupByLibrary.simpleMessage("Thêm sản phẩm"),
         "animated": MessageLookupByLibrary.simpleMessage("Hoạt hình"),
+        "app_name": MessageLookupByLibrary.simpleMessage("aa"),
+        "appcept": MessageLookupByLibrary.simpleMessage("Chấp nhận"),
         "apps": MessageLookupByLibrary.simpleMessage("Ứng dụng"),
+        "are_you_ready_send_command": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn gửi lệnh?"),
         "are_you_sure_you_want_to_delete_history":
             MessageLookupByLibrary.simpleMessage(
                 "Bạn có chắc chắn muốn xóa lịch sử không?"),
         "area_chart": MessageLookupByLibrary.simpleMessage("Biểu đồ vùng"),
         "auth": MessageLookupByLibrary.simpleMessage("Xác thực"),
+        "authen_invalid": MessageLookupByLibrary.simpleMessage(
+            "Tên đăng nhập hoặc mật khẩu không đúng"),
         "back_to_log_in":
             MessageLookupByLibrary.simpleMessage("Quay lại để đăng nhập"),
         "background_indicator":
@@ -61,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bubble_chart":
             MessageLookupByLibrary.simpleMessage("Biểu đồ bong bóng"),
         "builder": MessageLookupByLibrary.simpleMessage("Người xây dựng"),
+        "button_close": MessageLookupByLibrary.simpleMessage("Đóng"),
         "button_group": MessageLookupByLibrary.simpleMessage("Nhóm nút"),
         "buttons": MessageLookupByLibrary.simpleMessage("Nút"),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
@@ -70,6 +78,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cards": MessageLookupByLibrary.simpleMessage("Thẻ"),
         "carousels": MessageLookupByLibrary.simpleMessage("Băng chuyền"),
         "category": MessageLookupByLibrary.simpleMessage("Danh mục"),
+        "change_password_text":
+            MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
         "clear": MessageLookupByLibrary.simpleMessage("Clear"),
         "click_me": MessageLookupByLibrary.simpleMessage("Nhấp vào tôi"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
@@ -87,6 +97,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmation": MessageLookupByLibrary.simpleMessage("Xác nhận?"),
         "contact_us":
             MessageLookupByLibrary.simpleMessage("Liên hệ với chúng tôi"),
+        "copy_right": MessageLookupByLibrary.simpleMessage(
+            "FFTSolution - Bản quyền 2022"),
         "create_product": MessageLookupByLibrary.simpleMessage("Tạo sản phẩm"),
         "created_at": MessageLookupByLibrary.simpleMessage("Được tạo vào"),
         "custom_indicator":
@@ -96,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dark": MessageLookupByLibrary.simpleMessage("Tối"),
         "dashboard": MessageLookupByLibrary.simpleMessage("Bảng điều khiển"),
         "date_of_birth": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
+        "date_str": MessageLookupByLibrary.simpleMessage("Ngày"),
         "date_time_pickers":
             MessageLookupByLibrary.simpleMessage("Bộ chọn ngày giờ"),
         "default_tabs": MessageLookupByLibrary.simpleMessage("Tab mặc định"),
@@ -109,6 +122,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "elevated_button": MessageLookupByLibrary.simpleMessage("Nút nâng cao"),
         "elevated_rounded_button":
             MessageLookupByLibrary.simpleMessage("Nút bo tròn nâng cao"),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
         "email_address": MessageLookupByLibrary.simpleMessage("Địa chỉ email"),
         "email_password":
             MessageLookupByLibrary.simpleMessage("Mật khẩu email"),
@@ -116,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Gửi câu hỏi của bạn cho chúng tôi qua email"),
         "enable_validation":
             MessageLookupByLibrary.simpleMessage("Bật xác thực"),
+        "english_text": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "example_form": MessageLookupByLibrary.simpleMessage("Mẫu ví dụ"),
         "extra_pages": MessageLookupByLibrary.simpleMessage("Trang bổ sung"),
         "faqs": MessageLookupByLibrary.simpleMessage("Câu hỏi thường gặp"),
@@ -127,7 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Loại nhãn nổi"),
         "floating_type": MessageLookupByLibrary.simpleMessage("Loại nổi"),
         "forgot_password":
-            MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
+            MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
         "forgot_password1":
             MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
         "form": MessageLookupByLibrary.simpleMessage("Biểu mẫu"),
@@ -142,6 +157,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "gender": MessageLookupByLibrary.simpleMessage("Giới tính"),
         "general": MessageLookupByLibrary.simpleMessage("Chung"),
         "google_map": MessageLookupByLibrary.simpleMessage("Bản đồ Google"),
+        "header_popup_biometric": MessageLookupByLibrary.simpleMessage(
+            "Xác thực sinh trắc của bạn để đăng nhập"),
+        "header_popup_fingerprint": MessageLookupByLibrary.simpleMessage(
+            "Xác thực vân tay của bạn để đăng nhập"),
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
         "i_agree_with": MessageLookupByLibrary.simpleMessage("Tôi đồng ý với "),
         "i_haven_t_account":
@@ -149,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "infinite": MessageLookupByLibrary.simpleMessage("Vô hạn"),
         "info": MessageLookupByLibrary.simpleMessage("Thông tin"),
+        "language_text": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "large": MessageLookupByLibrary.simpleMessage("Lớn"),
         "last_month": MessageLookupByLibrary.simpleMessage("Tháng trước"),
         "last_name": MessageLookupByLibrary.simpleMessage("Họ"),
@@ -162,21 +182,37 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Giấy phép & bản quyền"),
         "light": MessageLookupByLibrary.simpleMessage("Ánh sáng"),
         "literacy_rate": MessageLookupByLibrary.simpleMessage("Tỷ lệ biết chữ"),
+        "loading_message":
+            MessageLookupByLibrary.simpleMessage("Đang xử lý, vui lòng chờ..."),
         "locked": MessageLookupByLibrary.simpleMessage("Đã khóa"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "map": MessageLookupByLibrary.simpleMessage("Biểu đồ"),
         "medium": MessageLookupByLibrary.simpleMessage("Trung bình"),
+        "more": MessageLookupByLibrary.simpleMessage("Thêm"),
         "more_inputs": MessageLookupByLibrary.simpleMessage("Thêm đầu vào"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
+        "no_internet":
+            MessageLookupByLibrary.simpleMessage("Không có kết nối mạng"),
         "no_search_result":
             MessageLookupByLibrary.simpleMessage("Không có dữ liệu"),
         "no_shadow": MessageLookupByLibrary.simpleMessage("Không có bóng"),
+        "not_connect_to_server": MessageLookupByLibrary.simpleMessage(
+            "Không thể kết nối đến máy chủ"),
         "notifications": MessageLookupByLibrary.simpleMessage("Thông báo"),
+        "notify_error":
+            MessageLookupByLibrary.simpleMessage("Đã có lỗi xảy ra!"),
+        "notify_lable": MessageLookupByLibrary.simpleMessage("Thông báo"),
+        "notify_setup_faceid": MessageLookupByLibrary.simpleMessage(
+            "Bạn chưa cài đặt đăng nhập bằng khuôn mặt. Vui lòng đăng nhập vào tài khoản bằng mật khẩu và cài đặt xác thực khuôn mặt"),
+        "notify_setup_fingerprint": MessageLookupByLibrary.simpleMessage(
+            "Bạn chưa cài đặt đăng nhập bằng vân tay. Vui lòng đăng nhập vào tài khoản bằng mật khẩu và cài đặt xác thực vân tay"),
         "oK": MessageLookupByLibrary.simpleMessage("Đồng ý"),
         "of_arrivals": MessageLookupByLibrary.simpleMessage("số lượt đến"),
         "ok": MessageLookupByLibrary.simpleMessage("Đồng ý"),
         "on_delivery": MessageLookupByLibrary.simpleMessage("Khi giao hàng"),
+        "open_source_licenses_text":
+            MessageLookupByLibrary.simpleMessage("Giấy phép nguồn mở"),
         "opt_in_daily_newsletter_at_the_email":
             MessageLookupByLibrary.simpleMessage(
                 "Chọn nhận bản tin hàng ngày qua email"),
@@ -194,6 +230,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
         "phone": MessageLookupByLibrary.simpleMessage("Điện thoại"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
+        "phone_number_text":
+            MessageLookupByLibrary.simpleMessage("Số điện thoại"),
         "pie_chart": MessageLookupByLibrary.simpleMessage("Biểu đồ hình tròn"),
         "population_growth_of_various_countries":
             MessageLookupByLibrary.simpleMessage(
@@ -216,6 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "radial_chart":
             MessageLookupByLibrary.simpleMessage("Biểu đồ xuyên tâm"),
         "rating": MessageLookupByLibrary.simpleMessage("Xếp hạng"),
+        "re_create": MessageLookupByLibrary.simpleMessage("Tạo mới"),
         "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
@@ -226,8 +265,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hộp thoại bên phải"),
         "rounded_button": MessageLookupByLibrary.simpleMessage("Nút làm tròn"),
         "save": MessageLookupByLibrary.simpleMessage("Lưu"),
+        "save_account": MessageLookupByLibrary.simpleMessage("Lưu tài khoản"),
         "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
         "secondary": MessageLookupByLibrary.simpleMessage("Phụ"),
+        "security_text": MessageLookupByLibrary.simpleMessage("Bảo mật"),
         "select_date": MessageLookupByLibrary.simpleMessage("Chọn ngày"),
         "select_date_time":
             MessageLookupByLibrary.simpleMessage("Chọn ngày và giờ"),
@@ -245,9 +286,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "show": MessageLookupByLibrary.simpleMessage("Hiển thị"),
         "show_close_icon":
             MessageLookupByLibrary.simpleMessage("Hiển thị biểu tượng đóng"),
+        "show_hide_items":
+            MessageLookupByLibrary.simpleMessage("Ẩn và hiển thị các mục"),
+        "show_more": MessageLookupByLibrary.simpleMessage("Xem thêm"),
         "show_ok_action":
             MessageLookupByLibrary.simpleMessage("Hiển thị hành động đồng ý"),
+        "sign_in": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
+        "sign_in_with":
+            MessageLookupByLibrary.simpleMessage("Hoặc đăng nhập bằng"),
+        "sign_out_text": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
+        "sign_up": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "simple": MessageLookupByLibrary.simpleMessage("Đơn giản"),
+        "size_settings":
+            MessageLookupByLibrary.simpleMessage("Cài đặt kích thước"),
         "sku": MessageLookupByLibrary.simpleMessage("MÃ HÀNG"),
         "sliders": MessageLookupByLibrary.simpleMessage("Thanh trượt"),
         "small": MessageLookupByLibrary.simpleMessage("Nhỏ"),
@@ -255,6 +306,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "soft_indicator": MessageLookupByLibrary.simpleMessage("Chỉ báo mềm"),
         "soft_rounded_button":
             MessageLookupByLibrary.simpleMessage("Nút tròn mềm"),
+        "sort_list": MessageLookupByLibrary.simpleMessage("Danh sách Sắp xếp"),
         "standard": MessageLookupByLibrary.simpleMessage("Tiêu chuẩn"),
         "starter": MessageLookupByLibrary.simpleMessage("Câu hỏi thường gặp"),
         "static": MessageLookupByLibrary.simpleMessage("Tĩnh"),
@@ -265,10 +317,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "str_Landing": MessageLookupByLibrary.simpleMessage("Hạ cánh"),
         "str_NFT_dashboard":
             MessageLookupByLibrary.simpleMessage("Trang tổng quan NFT"),
+        "str_about": MessageLookupByLibrary.simpleMessage("Về chúng tôi"),
         "str_accept": MessageLookupByLibrary.simpleMessage("Đồng ý"),
         "str_calendar": MessageLookupByLibrary.simpleMessage("Lịch"),
+        "str_cancel": MessageLookupByLibrary.simpleMessage("Huỷ bỏ"),
         "str_chat": MessageLookupByLibrary.simpleMessage("Trò chuyện"),
         "str_coming_soon": MessageLookupByLibrary.simpleMessage("Sắp ra mắt"),
+        "str_confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
         "str_contacts": MessageLookupByLibrary.simpleMessage("Danh bạ"),
         "str_create_project": MessageLookupByLibrary.simpleMessage("Tạo dự án"),
         "str_customer": MessageLookupByLibrary.simpleMessage("Khách hàng"),
@@ -297,12 +352,43 @@ class MessageLookup extends MessageLookupByLibrary {
         "str_projects": MessageLookupByLibrary.simpleMessage("Dự án"),
         "str_quill_editor":
             MessageLookupByLibrary.simpleMessage("Trình soạn thảo Quill"),
+        "str_reset_password":
+            MessageLookupByLibrary.simpleMessage("Lấy lại mật khẩu"),
+        "str_reset_password_note": MessageLookupByLibrary.simpleMessage(
+            "Vui lòng nhập email bạn đã đăng ký!"),
         "str_timeLine": MessageLookupByLibrary.simpleMessage("Dòng thời gian"),
+        "str_type_email": MessageLookupByLibrary.simpleMessage("Nhập email"),
+        "str_update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
         "str_upload": MessageLookupByLibrary.simpleMessage("Tải lên"),
+        "str_warning": MessageLookupByLibrary.simpleMessage("Cảnh báo"),
+        "str_warning_detail": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn mở trang web của chúng tôi?"),
+        "string_back": MessageLookupByLibrary.simpleMessage("Quay lại"),
+        "string_begin_time": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
+        "string_cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
+        "string_done": MessageLookupByLibrary.simpleMessage("Hoàn tất"),
+        "string_end_time": MessageLookupByLibrary.simpleMessage("Kết thúc"),
+        "string_have_not_notify":
+            MessageLookupByLibrary.simpleMessage("Không có thông báo"),
+        "string_hotline": MessageLookupByLibrary.simpleMessage("Hotline"),
+        "string_info": MessageLookupByLibrary.simpleMessage("Thông tin"),
+        "string_newest": MessageLookupByLibrary.simpleMessage("Tin tức"),
+        "string_next": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
+        "string_no_more_old_data":
+            MessageLookupByLibrary.simpleMessage("Không có thông báo cũ hơn"),
+        "string_notify": MessageLookupByLibrary.simpleMessage("Thông báo"),
+        "string_payment": MessageLookupByLibrary.simpleMessage("Thanh toán"),
+        "string_time_setting":
+            MessageLookupByLibrary.simpleMessage("Cài đặt thời gian"),
         "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
         "subtitle_is_more_useful":
             MessageLookupByLibrary.simpleMessage("Phụ đề hữu ích hơn"),
         "success": MessageLookupByLibrary.simpleMessage("Thành công"),
+        "support_feedback":
+            MessageLookupByLibrary.simpleMessage("Phản hồi tới chúng tôi"),
+        "support_help": MessageLookupByLibrary.simpleMessage("Góp ý"),
+        "support_pay": MessageLookupByLibrary.simpleMessage("Hỗ trợ dịch vụ"),
+        "support_tech": MessageLookupByLibrary.simpleMessage("Hỗ trợ kỹ thuật"),
         "syncfusion_chart":
             MessageLookupByLibrary.simpleMessage("Biểu đồ đồng bộ hóa"),
         "syncfusion_charts":
@@ -312,12 +398,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "target": MessageLookupByLibrary.simpleMessage("Mục tiêu"),
         "terms_conditions":
             MessageLookupByLibrary.simpleMessage("điều khoản và điều kiện"),
+        "terms_of_service_text":
+            MessageLookupByLibrary.simpleMessage("Điều khoản Dịch vụ"),
         "text_actions":
             MessageLookupByLibrary.simpleMessage("Hành động văn bản"),
         "text_button": MessageLookupByLibrary.simpleMessage("Nút văn bản"),
         "text_rounded_button":
             MessageLookupByLibrary.simpleMessage("Nút làm tròn văn bản"),
+        "time_in_day_str": MessageLookupByLibrary.simpleMessage(" Ngày"),
+        "time_in_hour_str": MessageLookupByLibrary.simpleMessage("Giờ"),
+        "time_in_minute_str": MessageLookupByLibrary.simpleMessage("Phút"),
+        "time_in_month_str": MessageLookupByLibrary.simpleMessage("Tháng"),
+        "time_in_second_str": MessageLookupByLibrary.simpleMessage("Giây"),
+        "time_in_year_str": MessageLookupByLibrary.simpleMessage("Năm"),
+        "time_out_connection": MessageLookupByLibrary.simpleMessage(
+            "Quá thời gian chờ, vui lòng kiểm tra kết nối mạng của bạn"),
         "timeout": MessageLookupByLibrary.simpleMessage("Hết thời gian chờ"),
+        "title_popup_biometric":
+            MessageLookupByLibrary.simpleMessage("Đăng nhập bằng sinh trắc"),
+        "title_popup_faceid":
+            MessageLookupByLibrary.simpleMessage("Đăng nhập bằng khuôn mặt"),
+        "title_popup_fingerprint":
+            MessageLookupByLibrary.simpleMessage("Đăng nhập bằng vân tay"),
         "title_text": MessageLookupByLibrary.simpleMessage("Văn bản tiêu đề"),
         "toast": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "toast_text": MessageLookupByLibrary.simpleMessage("toast_text"),
@@ -333,11 +435,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "type_size": MessageLookupByLibrary.simpleMessage("Loại/kích thước"),
         "ui": MessageLookupByLibrary.simpleMessage("Giao diện người dùng"),
         "unlock": MessageLookupByLibrary.simpleMessage("Mở khóa"),
+        "use_fingerprint_text":
+            MessageLookupByLibrary.simpleMessage("Sử dụng dấu vân tay"),
+        "user_create": MessageLookupByLibrary.simpleMessage("Tạo người dùng"),
+        "user_detail":
+            MessageLookupByLibrary.simpleMessage("Thông tin người dùng"),
+        "user_name": MessageLookupByLibrary.simpleMessage("Tên đăng nhập"),
         "validation": MessageLookupByLibrary.simpleMessage("Xác thực"),
         "validation_forms":
             MessageLookupByLibrary.simpleMessage("Biểu mẫu xác thực"),
         "validations": MessageLookupByLibrary.simpleMessage("Người bắt đầu"),
+        "vehicle_tracking": MessageLookupByLibrary.simpleMessage("Theo dõi Xe"),
         "very_high": MessageLookupByLibrary.simpleMessage("Rất cao"),
+        "viet_nam_text": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "view_all": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
         "warning": MessageLookupByLibrary.simpleMessage("Cảnh báo"),
         "website_visits":
@@ -345,6 +455,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "wizard": MessageLookupByLibrary.simpleMessage("Wizard"),
         "world_countries_details": MessageLookupByLibrary.simpleMessage(
             "Chi tiết các quốc gia trên thế giới"),
+        "you_do_have_an_account":
+            MessageLookupByLibrary.simpleMessage("Bạn có tài khoản?"),
+        "you_do_not_have_an_account":
+            MessageLookupByLibrary.simpleMessage("Bạn chưa có tài khoản?"),
+        "your_address": MessageLookupByLibrary.simpleMessage("Địa chỉ của bạn"),
         "your_password_will_be_reset": MessageLookupByLibrary.simpleMessage(
             "Mật khẩu của bạn sẽ được đặt lại")
       };

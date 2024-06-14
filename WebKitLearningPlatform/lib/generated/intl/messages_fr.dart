@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "FAQs": MessageLookupByLibrary.simpleMessage("FAQ"),
         "Product": MessageLookupByLibrary.simpleMessage("Produit"),
         "account": MessageLookupByLibrary.simpleMessage("Compte"),
+        "account_text": MessageLookupByLibrary.simpleMessage("Compte"),
         "action": MessageLookupByLibrary.simpleMessage("Action"),
         "actions": MessageLookupByLibrary.simpleMessage("Actions"),
         "add_product":
@@ -34,13 +35,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ajouter des produits"),
         "alert": MessageLookupByLibrary.simpleMessage("Alerte"),
         "animated": MessageLookupByLibrary.simpleMessage("Animé"),
+        "app_name": MessageLookupByLibrary.simpleMessage("aa"),
+        "appcept": MessageLookupByLibrary.simpleMessage("Accepter"),
         "apps": MessageLookupByLibrary.simpleMessage("applications"),
+        "are_you_ready_send_command": MessageLookupByLibrary.simpleMessage(
+            "Etes-vous sûr de vouloir envoyer la commande ?"),
         "are_you_sure_you_want_to_delete_history":
             MessageLookupByLibrary.simpleMessage(
                 "Êtes-vous sûr de vouloir supprimer l\'historique ?"),
         "area_chart":
             MessageLookupByLibrary.simpleMessage("Graphique en aires"),
         "auth": MessageLookupByLibrary.simpleMessage("Authentification"),
+        "authen_invalid": MessageLookupByLibrary.simpleMessage(
+            "Le nom d\'utilisateur ou le mot de passe est incorrect"),
         "average_sales_comparison": MessageLookupByLibrary.simpleMessage(
             "Comparaison des ventes moyennes"),
         "back_to_log_in":
@@ -68,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "bubble_chart":
             MessageLookupByLibrary.simpleMessage("Graphique à bulles"),
         "builder": MessageLookupByLibrary.simpleMessage("Constructeur"),
+        "button_close": MessageLookupByLibrary.simpleMessage("Fermer"),
         "button_group":
             MessageLookupByLibrary.simpleMessage("Groupe de boutons"),
         "buttons": MessageLookupByLibrary.simpleMessage("Boutons"),
@@ -78,6 +86,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cards": MessageLookupByLibrary.simpleMessage("Cartes"),
         "carousels": MessageLookupByLibrary.simpleMessage("Carrousels"),
         "category": MessageLookupByLibrary.simpleMessage("Catégorie"),
+        "change_password_text":
+            MessageLookupByLibrary.simpleMessage("Changer le mot de passe"),
         "charts": MessageLookupByLibrary.simpleMessage("Graphiques"),
         "clear": MessageLookupByLibrary.simpleMessage("Clair"),
         "click_me": MessageLookupByLibrary.simpleMessage("Cliquez sur moi"),
@@ -97,6 +107,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Confirmez le mot de passe"),
         "confirmation": MessageLookupByLibrary.simpleMessage("Confirmation?"),
         "contact_us": MessageLookupByLibrary.simpleMessage("Contactez-nous"),
+        "copy_right": MessageLookupByLibrary.simpleMessage(
+            "FFTSolution - Copyright 2022"),
         "create_product":
             MessageLookupByLibrary.simpleMessage("Créer un produit"),
         "created_at": MessageLookupByLibrary.simpleMessage("Créé à"),
@@ -108,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dashboard": MessageLookupByLibrary.simpleMessage("Tableau de bord"),
         "date_of_birth":
             MessageLookupByLibrary.simpleMessage("Date de naissance"),
+        "date_str": MessageLookupByLibrary.simpleMessage("Date"),
         "date_time_pickers": MessageLookupByLibrary.simpleMessage(
             "Sélecteurs de date et d\'heure"),
         "default_tabs":
@@ -131,6 +144,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Envoyez-nous votre question par e-mail"),
         "enable_validation":
             MessageLookupByLibrary.simpleMessage("Activer la validation"),
+        "english_text": MessageLookupByLibrary.simpleMessage("Anglais"),
         "example_form":
             MessageLookupByLibrary.simpleMessage("Exemple de formulaire"),
         "extra_pages":
@@ -144,20 +158,24 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Type d\'étiquette flottante"),
         "floating_type": MessageLookupByLibrary.simpleMessage("Type flottant"),
         "forgot_password":
-            MessageLookupByLibrary.simpleMessage("Mot de passe oublié"),
+            MessageLookupByLibrary.simpleMessage("Mot de passe oublié ?"),
         "forgot_password1":
             MessageLookupByLibrary.simpleMessage("Mot de passe oublié?"),
         "form": MessageLookupByLibrary.simpleMessage("Former"),
         "forms": MessageLookupByLibrary.simpleMessage("Formes"),
         "frequently_asked_questions": MessageLookupByLibrary.simpleMessage(
             "Questions fréquemment posées"),
-        "full_name": MessageLookupByLibrary.simpleMessage("Nom et prénom"),
+        "full_name": MessageLookupByLibrary.simpleMessage("Nom complet"),
         "full_width": MessageLookupByLibrary.simpleMessage("Pleine largeur"),
         "gdp_growth_rate":
             MessageLookupByLibrary.simpleMessage("Taux de croissance du PIB"),
         "gender": MessageLookupByLibrary.simpleMessage("Genre"),
         "general": MessageLookupByLibrary.simpleMessage("GÉNÉRAL"),
         "google_map": MessageLookupByLibrary.simpleMessage("Google Map"),
+        "header_popup_biometric": MessageLookupByLibrary.simpleMessage(
+            "Authentifiez vos données biométriques pour vous connecter"),
+        "header_popup_fingerprint": MessageLookupByLibrary.simpleMessage(
+            "Vérifiez votre empreinte digitale pour vous connecter"),
         "home": MessageLookupByLibrary.simpleMessage("Maison"),
         "i_agree_with":
             MessageLookupByLibrary.simpleMessage("je suis d\'accord avec"),
@@ -166,6 +184,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "id": MessageLookupByLibrary.simpleMessage("IDENTIFIANT"),
         "infinite": MessageLookupByLibrary.simpleMessage("Infini"),
         "info": MessageLookupByLibrary.simpleMessage("Info"),
+        "language_text": MessageLookupByLibrary.simpleMessage("Langue"),
         "large": MessageLookupByLibrary.simpleMessage("Grand"),
         "last_month": MessageLookupByLibrary.simpleMessage("Le mois dernier"),
         "last_name": MessageLookupByLibrary.simpleMessage("Nom de famille"),
@@ -181,22 +200,38 @@ class MessageLookup extends MessageLookupByLibrary {
         "light": MessageLookupByLibrary.simpleMessage("Lumière"),
         "literacy_rate":
             MessageLookupByLibrary.simpleMessage("Taux d\'alphabétisation"),
+        "loading_message": MessageLookupByLibrary.simpleMessage(
+            "Traitement en cours, veuillez patienter..."),
         "locked": MessageLookupByLibrary.simpleMessage("Fermé à clé"),
         "login": MessageLookupByLibrary.simpleMessage("Connexion"),
         "map": MessageLookupByLibrary.simpleMessage("Carte"),
         "medium": MessageLookupByLibrary.simpleMessage("Moyen"),
         "messages": MessageLookupByLibrary.simpleMessage("messages"),
+        "more": MessageLookupByLibrary.simpleMessage("Plus"),
         "more_inputs": MessageLookupByLibrary.simpleMessage("Plus d\'entrées"),
         "name": MessageLookupByLibrary.simpleMessage("Nom"),
         "next": MessageLookupByLibrary.simpleMessage("Suivant"),
+        "no_internet":
+            MessageLookupByLibrary.simpleMessage("Aucune connexion réseau"),
         "no_search_result":
-            MessageLookupByLibrary.simpleMessage("Aucune donnée disponible"),
+            MessageLookupByLibrary.simpleMessage("Aucune donnée"),
         "no_shadow": MessageLookupByLibrary.simpleMessage("Pas d\'ombre"),
+        "not_connect_to_server": MessageLookupByLibrary.simpleMessage(
+            "Impossible de se connecter au serveur"),
         "notifications": MessageLookupByLibrary.simpleMessage("Avis"),
+        "notify_error": MessageLookupByLibrary.simpleMessage(
+            "Une erreur s\'est produite !"),
+        "notify_lable": MessageLookupByLibrary.simpleMessage("Notifications"),
+        "notify_setup_faceid": MessageLookupByLibrary.simpleMessage(
+            "Vous n\'avez pas configuré la connexion faciale. Veuillez vous connecter à votre compte avec un mot de passe et configurer l\'authentification faciale"),
+        "notify_setup_fingerprint": MessageLookupByLibrary.simpleMessage(
+            "Vous n\'avez pas configuré la connexion par empreinte digitale. Veuillez vous connecter à votre compte avec un mot de passe et configurer l\'authentification par empreinte digitale"),
         "oK": MessageLookupByLibrary.simpleMessage("D\'accord"),
         "of_arrivals": MessageLookupByLibrary.simpleMessage("des arrivées"),
         "ok": MessageLookupByLibrary.simpleMessage("D\'ACCORD"),
         "on_delivery": MessageLookupByLibrary.simpleMessage("À la livraison"),
+        "open_source_licenses_text":
+            MessageLookupByLibrary.simpleMessage("Licences open source"),
         "opt_in_daily_newsletter_at_the_email":
             MessageLookupByLibrary.simpleMessage(
                 "Inscrivez-vous à la newsletter quotidienne par e-mail"),
@@ -215,6 +250,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Mot de passe"),
         "phone": MessageLookupByLibrary.simpleMessage("Téléphone"),
         "phone_number":
+            MessageLookupByLibrary.simpleMessage("Numéro de téléphone"),
+        "phone_number_text":
             MessageLookupByLibrary.simpleMessage("Numéro de téléphone"),
         "pie_chart":
             MessageLookupByLibrary.simpleMessage("Diagramme circulaire"),
@@ -241,6 +278,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "radial_chart":
             MessageLookupByLibrary.simpleMessage("Diagramme radial"),
         "rating": MessageLookupByLibrary.simpleMessage("Notation"),
+        "re_create": MessageLookupByLibrary.simpleMessage("Créer un nouveau"),
         "register": MessageLookupByLibrary.simpleMessage("Enregistrer"),
         "reset_password": MessageLookupByLibrary.simpleMessage(
             "Réinitialiser le mot de passe"),
@@ -254,8 +292,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "sales_by_sales_person":
             MessageLookupByLibrary.simpleMessage("Ventes par vendeur"),
         "save": MessageLookupByLibrary.simpleMessage("Sauvegarder"),
+        "save_account":
+            MessageLookupByLibrary.simpleMessage("Enregistrer le compte"),
         "search": MessageLookupByLibrary.simpleMessage("Recherche"),
         "secondary": MessageLookupByLibrary.simpleMessage("Secondaire"),
+        "security_text": MessageLookupByLibrary.simpleMessage("Sécurité"),
         "select_date":
             MessageLookupByLibrary.simpleMessage("Sélectionner une date"),
         "select_date_time": MessageLookupByLibrary.simpleMessage(
@@ -279,11 +320,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "show": MessageLookupByLibrary.simpleMessage("Montrer"),
         "show_close_icon": MessageLookupByLibrary.simpleMessage(
             "Afficher l\'icône de fermeture"),
+        "show_hide_items": MessageLookupByLibrary.simpleMessage(
+            "Masquer et afficher les éléments"),
         "show_leading_icon": MessageLookupByLibrary.simpleMessage(
             "Afficher l\'icône principale"),
+        "show_more": MessageLookupByLibrary.simpleMessage("Afficher plus"),
         "show_ok_action":
             MessageLookupByLibrary.simpleMessage("Afficher l\'action correcte"),
+        "sign_in": MessageLookupByLibrary.simpleMessage("Connexion"),
+        "sign_in_with":
+            MessageLookupByLibrary.simpleMessage("Ou connectez-vous avec"),
+        "sign_out_text": MessageLookupByLibrary.simpleMessage("Déconnexion"),
+        "sign_up": MessageLookupByLibrary.simpleMessage("Inscrivez-vous"),
         "simple": MessageLookupByLibrary.simpleMessage("Simple"),
+        "size_settings":
+            MessageLookupByLibrary.simpleMessage("Paramètres de taille"),
         "sized_button":
             MessageLookupByLibrary.simpleMessage("Bouton de taille"),
         "sku": MessageLookupByLibrary.simpleMessage("UGS"),
@@ -294,6 +345,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Indicateur doux"),
         "soft_rounded_button":
             MessageLookupByLibrary.simpleMessage("Bouton arrondi doux"),
+        "sort_list": MessageLookupByLibrary.simpleMessage("Trier la liste"),
         "standard": MessageLookupByLibrary.simpleMessage("Standard"),
         "starter": MessageLookupByLibrary.simpleMessage("Entrée"),
         "static": MessageLookupByLibrary.simpleMessage("Statique"),
@@ -305,11 +357,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "str_Landing": MessageLookupByLibrary.simpleMessage("Atterrissage"),
         "str_NFT_dashboard":
             MessageLookupByLibrary.simpleMessage("Tableau de bord NFT"),
-        "str_accept": MessageLookupByLibrary.simpleMessage("De acuerdo"),
+        "str_about": MessageLookupByLibrary.simpleMessage("À propos de nous"),
+        "str_accept": MessageLookupByLibrary.simpleMessage("D\'accord"),
         "str_calendar": MessageLookupByLibrary.simpleMessage("Calendrier"),
+        "str_cancel": MessageLookupByLibrary.simpleMessage("Annuler"),
         "str_chat": MessageLookupByLibrary.simpleMessage("Chatter"),
         "str_coming_soon":
             MessageLookupByLibrary.simpleMessage("Bientôt disponible"),
+        "str_confirm": MessageLookupByLibrary.simpleMessage("Confirmer"),
         "str_contacts": MessageLookupByLibrary.simpleMessage("Contacts"),
         "str_create_project":
             MessageLookupByLibrary.simpleMessage("Créer un projet"),
@@ -342,12 +397,46 @@ class MessageLookup extends MessageLookupByLibrary {
         "str_projects": MessageLookupByLibrary.simpleMessage("Projets"),
         "str_quill_editor":
             MessageLookupByLibrary.simpleMessage("Éditeur de plumes"),
+        "str_reset_password":
+            MessageLookupByLibrary.simpleMessage("Récupérer le mot de passe"),
+        "str_reset_password_note": MessageLookupByLibrary.simpleMessage(
+            "Veuillez saisir l\'e-mail avec lequel vous vous êtes inscrit !"),
         "str_timeLine": MessageLookupByLibrary.simpleMessage("TimeLine"),
+        "str_type_email":
+            MessageLookupByLibrary.simpleMessage("Entrez l\'e-mail"),
+        "str_update": MessageLookupByLibrary.simpleMessage("Mise à jour"),
         "str_upload": MessageLookupByLibrary.simpleMessage("Télécharger"),
+        "str_warning": MessageLookupByLibrary.simpleMessage("Avertissement"),
+        "str_warning_detail": MessageLookupByLibrary.simpleMessage(
+            "Êtes-vous sûr de vouloir ouvrir notre site Web ?"),
+        "string_back": MessageLookupByLibrary.simpleMessage("Retour"),
+        "string_begin_time": MessageLookupByLibrary.simpleMessage("Démarrer"),
+        "string_cancel": MessageLookupByLibrary.simpleMessage("Annuler"),
+        "string_done": MessageLookupByLibrary.simpleMessage("Terminé"),
+        "string_end_time": MessageLookupByLibrary.simpleMessage("Fin"),
+        "string_have_not_notify":
+            MessageLookupByLibrary.simpleMessage("Aucune notification"),
+        "string_hotline": MessageLookupByLibrary.simpleMessage("Hotline"),
+        "string_info": MessageLookupByLibrary.simpleMessage("Informations"),
+        "string_newest": MessageLookupByLibrary.simpleMessage("Actualités"),
+        "string_next": MessageLookupByLibrary.simpleMessage("Suivant"),
+        "string_no_more_old_data":
+            MessageLookupByLibrary.simpleMessage("Aucune donnée plus ancienne"),
+        "string_notify": MessageLookupByLibrary.simpleMessage("Notifications"),
+        "string_payment": MessageLookupByLibrary.simpleMessage("Paiement"),
+        "string_time_setting":
+            MessageLookupByLibrary.simpleMessage("Réglage de l\'heure"),
         "submit": MessageLookupByLibrary.simpleMessage("Soumettre"),
         "subtitle_is_more_useful": MessageLookupByLibrary.simpleMessage(
             "Le sous-titre est plus utile"),
         "success": MessageLookupByLibrary.simpleMessage("Succès"),
+        "support_feedback":
+            MessageLookupByLibrary.simpleMessage("Commentaires à nous"),
+        "support_help": MessageLookupByLibrary.simpleMessage("Suggestions"),
+        "support_pay":
+            MessageLookupByLibrary.simpleMessage("Service d\'assistance"),
+        "support_tech":
+            MessageLookupByLibrary.simpleMessage("Support technique"),
         "syncfusion_chart": MessageLookupByLibrary.simpleMessage(
             "Graphique de synchronisation"),
         "syncfusion_charts": MessageLookupByLibrary.simpleMessage(
@@ -358,12 +447,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "target": MessageLookupByLibrary.simpleMessage("Cible"),
         "terms_conditions":
             MessageLookupByLibrary.simpleMessage("termes et conditions"),
+        "terms_of_service_text":
+            MessageLookupByLibrary.simpleMessage("Conditions d\'utilisation"),
         "text_actions":
             MessageLookupByLibrary.simpleMessage("Actions de texte"),
         "text_button": MessageLookupByLibrary.simpleMessage("Bouton Texte"),
         "text_rounded_button":
             MessageLookupByLibrary.simpleMessage("Bouton arrondi de texte"),
+        "time_in_day_str": MessageLookupByLibrary.simpleMessage("Jour"),
+        "time_in_hour_str": MessageLookupByLibrary.simpleMessage("Heure"),
+        "time_in_minute_str": MessageLookupByLibrary.simpleMessage("Minutes"),
+        "time_in_month_str": MessageLookupByLibrary.simpleMessage("Mois"),
+        "time_in_second_str": MessageLookupByLibrary.simpleMessage("Secondes"),
+        "time_in_year_str": MessageLookupByLibrary.simpleMessage("Année"),
+        "time_out_connection": MessageLookupByLibrary.simpleMessage(
+            "Délai dépassé, veuillez vérifier votre connexion réseau"),
         "timeout": MessageLookupByLibrary.simpleMessage("Temps libre"),
+        "title_popup_biometric": MessageLookupByLibrary.simpleMessage(
+            "Connectez-vous avec la biométrie"),
+        "title_popup_faceid":
+            MessageLookupByLibrary.simpleMessage("Connexion avec visage"),
+        "title_popup_fingerprint": MessageLookupByLibrary.simpleMessage(
+            "Connexion avec empreinte digitale"),
         "title_text": MessageLookupByLibrary.simpleMessage("Texte du titre"),
         "toast": MessageLookupByLibrary.simpleMessage("Griller"),
         "toast_text": MessageLookupByLibrary.simpleMessage("toast_text"),
@@ -381,12 +486,22 @@ class MessageLookup extends MessageLookupByLibrary {
         "type_size": MessageLookupByLibrary.simpleMessage("Type / taille"),
         "ui": MessageLookupByLibrary.simpleMessage("interface utilisateur"),
         "unlock": MessageLookupByLibrary.simpleMessage("Ouvrir"),
+        "use_fingerprint_text": MessageLookupByLibrary.simpleMessage(
+            "Utiliser l\'empreinte digitale"),
+        "user_create":
+            MessageLookupByLibrary.simpleMessage("Créer un utilisateur"),
+        "user_detail":
+            MessageLookupByLibrary.simpleMessage("Informations utilisateur"),
+        "user_name": MessageLookupByLibrary.simpleMessage("Nom de connexion"),
         "username": MessageLookupByLibrary.simpleMessage("Nom d\'utilisateur"),
         "validation": MessageLookupByLibrary.simpleMessage("Validation"),
         "validation_forms":
             MessageLookupByLibrary.simpleMessage("Formulaires de validation"),
         "validations": MessageLookupByLibrary.simpleMessage("Validations"),
+        "vehicle_tracking":
+            MessageLookupByLibrary.simpleMessage("Suivi des véhicules"),
         "very_high": MessageLookupByLibrary.simpleMessage("Très haut"),
+        "viet_nam_text": MessageLookupByLibrary.simpleMessage("Vietnamien"),
         "view_all": MessageLookupByLibrary.simpleMessage("Voir tout"),
         "warning": MessageLookupByLibrary.simpleMessage("Avertissement"),
         "website_visits":
@@ -395,6 +510,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "wizard": MessageLookupByLibrary.simpleMessage("Magicien"),
         "world_countries_details":
             MessageLookupByLibrary.simpleMessage("Détails des pays du monde"),
+        "you_do_have_an_account":
+            MessageLookupByLibrary.simpleMessage("Avez-vous un compte ?"),
+        "you_do_not_have_an_account": MessageLookupByLibrary.simpleMessage(
+            "Vous n\'avez pas encore de compte ?"),
+        "your_address": MessageLookupByLibrary.simpleMessage("Votre adresse"),
         "your_password_will_be_reset": MessageLookupByLibrary.simpleMessage(
             "Votre mot de passe sera réinitialisé"),
         "your_registration_process_is_finished":

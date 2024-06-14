@@ -50,6 +50,886 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `aa`
+  String get app_name {
+    return Intl.message(
+      'aa',
+      name: 'app_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error occurred!`
+  String get notify_error {
+    return Intl.message(
+      'An error occurred!',
+      name: 'notify_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username or password is incorrect`
+  String get authen_invalid {
+    return Intl.message(
+      'Username or password is incorrect',
+      name: 'authen_invalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accept`
+  String get appcept {
+    return Intl.message(
+      'Accept',
+      name: 'appcept',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Processing, please wait...`
+  String get loading_message {
+    return Intl.message(
+      'Processing, please wait...',
+      name: 'loading_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hide and show items`
+  String get show_hide_items {
+    return Intl.message(
+      'Hide and show items',
+      name: 'show_hide_items',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Size settings`
+  String get size_settings {
+    return Intl.message(
+      'Size settings',
+      name: 'size_settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sort List`
+  String get sort_list {
+    return Intl.message(
+      'Sort List',
+      name: 'sort_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vehicle Tracking`
+  String get vehicle_tracking {
+    return Intl.message(
+      'Vehicle Tracking',
+      name: 'vehicle_tracking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot password?`
+  String get forgot_password {
+    return Intl.message(
+      'Forgot password?',
+      name: 'forgot_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save account`
+  String get save_account {
+    return Intl.message(
+      'Save account',
+      name: 'save_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Or sign in with`
+  String get sign_in_with {
+    return Intl.message(
+      'Or sign in with',
+      name: 'sign_in_with',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You don't have an account yet?`
+  String get you_do_not_have_an_account {
+    return Intl.message(
+      'You don\'t have an account yet?',
+      name: 'you_do_not_have_an_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up`
+  String get sign_up {
+    return Intl.message(
+      'Sign up',
+      name: 'sign_up',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in`
+  String get sign_in {
+    return Intl.message(
+      'Sign in',
+      name: 'sign_in',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More`
+  String get more {
+    return Intl.message(
+      'More',
+      name: 'more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full name`
+  String get full_name {
+    return Intl.message(
+      'Full name',
+      name: 'full_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date of birth`
+  String get date_of_birth {
+    return Intl.message(
+      'Date of birth',
+      name: 'date_of_birth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your address`
+  String get your_address {
+    return Intl.message(
+      'Your address',
+      name: 'your_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you have an account?`
+  String get you_do_have_an_account {
+    return Intl.message(
+      'Do you have an account?',
+      name: 'you_do_have_an_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login name`
+  String get user_name {
+    return Intl.message(
+      'Login name',
+      name: 'user_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language_text {
+    return Intl.message(
+      'Language',
+      name: 'language_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get english_text {
+    return Intl.message(
+      'English',
+      name: 'english_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vietnamese`
+  String get viet_nam_text {
+    return Intl.message(
+      'Vietnamese',
+      name: 'viet_nam_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get account_text {
+    return Intl.message(
+      'Account',
+      name: 'account_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number`
+  String get phone_number_text {
+    return Intl.message(
+      'Phone number',
+      name: 'phone_number_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign out`
+  String get sign_out_text {
+    return Intl.message(
+      'Sign out',
+      name: 'sign_out_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Security`
+  String get security_text {
+    return Intl.message(
+      'Security',
+      name: 'security_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use fingerprint`
+  String get use_fingerprint_text {
+    return Intl.message(
+      'Use fingerprint',
+      name: 'use_fingerprint_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change password`
+  String get change_password_text {
+    return Intl.message(
+      'Change password',
+      name: 'change_password_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms of Service`
+  String get terms_of_service_text {
+    return Intl.message(
+      'Terms of Service',
+      name: 'terms_of_service_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open source licenses`
+  String get open_source_licenses_text {
+    return Intl.message(
+      'Open source licenses',
+      name: 'open_source_licenses_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Minute`
+  String get time_in_minute_str {
+    return Intl.message(
+      'Minute',
+      name: 'time_in_minute_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hour`
+  String get time_in_hour_str {
+    return Intl.message(
+      'Hour',
+      name: 'time_in_hour_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Day`
+  String get time_in_day_str {
+    return Intl.message(
+      'Day',
+      name: 'time_in_day_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Month`
+  String get time_in_month_str {
+    return Intl.message(
+      'Month',
+      name: 'time_in_month_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Year`
+  String get time_in_year_str {
+    return Intl.message(
+      'Year',
+      name: 'time_in_year_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seconds`
+  String get time_in_second_str {
+    return Intl.message(
+      'Seconds',
+      name: 'time_in_second_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Next`
+  String get string_next {
+    return Intl.message(
+      'Next',
+      name: 'string_next',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back`
+  String get string_back {
+    return Intl.message(
+      'Back',
+      name: 'string_back',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get string_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'string_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get string_done {
+    return Intl.message(
+      'Done',
+      name: 'string_done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time setting`
+  String get string_time_setting {
+    return Intl.message(
+      'Time setting',
+      name: 'string_time_setting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start`
+  String get string_begin_time {
+    return Intl.message(
+      'Start',
+      name: 'string_begin_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `End`
+  String get string_end_time {
+    return Intl.message(
+      'End',
+      name: 'string_end_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FFTSolution - Copyright 2022`
+  String get copy_right {
+    return Intl.message(
+      'FFTSolution - Copyright 2022',
+      name: 'copy_right',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `News`
+  String get string_newest {
+    return Intl.message(
+      'News',
+      name: 'string_newest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification`
+  String get string_notify {
+    return Intl.message(
+      'Notification',
+      name: 'string_notify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hotline`
+  String get string_hotline {
+    return Intl.message(
+      'Hotline',
+      name: 'string_hotline',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment`
+  String get string_payment {
+    return Intl.message(
+      'Payment',
+      name: 'string_payment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Information`
+  String get string_info {
+    return Intl.message(
+      'Information',
+      name: 'string_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No notification`
+  String get string_have_not_notify {
+    return Intl.message(
+      'No notification',
+      name: 'string_have_not_notify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No older data`
+  String get string_no_more_old_data {
+    return Intl.message(
+      'No older data',
+      name: 'string_no_more_old_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Agree`
+  String get str_accept {
+    return Intl.message(
+      'Agree',
+      name: 'str_accept',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get str_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'str_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No data`
+  String get no_search_result {
+    return Intl.message(
+      'No data',
+      name: 'no_search_result',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification`
+  String get notify_lable {
+    return Intl.message(
+      'Notification',
+      name: 'notify_lable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Close`
+  String get button_close {
+    return Intl.message(
+      'Close',
+      name: 'button_close',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify your fingerprint to log in`
+  String get header_popup_fingerprint {
+    return Intl.message(
+      'Verify your fingerprint to log in',
+      name: 'header_popup_fingerprint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Authenticate your biometrics to log in`
+  String get header_popup_biometric {
+    return Intl.message(
+      'Authenticate your biometrics to log in',
+      name: 'header_popup_biometric',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login with fingerprint`
+  String get title_popup_fingerprint {
+    return Intl.message(
+      'Login with fingerprint',
+      name: 'title_popup_fingerprint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in with biometrics`
+  String get title_popup_biometric {
+    return Intl.message(
+      'Log in with biometrics',
+      name: 'title_popup_biometric',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login with face`
+  String get title_popup_faceid {
+    return Intl.message(
+      'Login with face',
+      name: 'title_popup_faceid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have not set up face login. Please log in to your account with a password and set up face authentication`
+  String get notify_setup_faceid {
+    return Intl.message(
+      'You have not set up face login. Please log in to your account with a password and set up face authentication',
+      name: 'notify_setup_faceid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have not set up fingerprint login. Please log in to your account with a password and set up fingerprint authentication`
+  String get notify_setup_fingerprint {
+    return Intl.message(
+      'You have not set up fingerprint login. Please log in to your account with a password and set up fingerprint authentication',
+      name: 'notify_setup_fingerprint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get date_str {
+    return Intl.message(
+      'Date',
+      name: 'date_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create new`
+  String get re_create {
+    return Intl.message(
+      'Create new',
+      name: 're_create',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update`
+  String get str_update {
+    return Intl.message(
+      'Update',
+      name: 'str_update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Technical support`
+  String get support_tech {
+    return Intl.message(
+      'Technical support',
+      name: 'support_tech',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service Support`
+  String get support_pay {
+    return Intl.message(
+      'Service Support',
+      name: 'support_pay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Feedback to us`
+  String get support_feedback {
+    return Intl.message(
+      'Feedback to us',
+      name: 'support_feedback',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suggestions`
+  String get support_help {
+    return Intl.message(
+      'Suggestions',
+      name: 'support_help',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Warning`
+  String get str_warning {
+    return Intl.message(
+      'Warning',
+      name: 'str_warning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to open our website?`
+  String get str_warning_detail {
+    return Intl.message(
+      'Are you sure you want to open our website?',
+      name: 'str_warning_detail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `About us`
+  String get str_about {
+    return Intl.message(
+      'About us',
+      name: 'str_about',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get str_confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'str_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Recover password`
+  String get str_reset_password {
+    return Intl.message(
+      'Recover password',
+      name: 'str_reset_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the email you registered with!`
+  String get str_reset_password_note {
+    return Intl.message(
+      'Please enter the email you registered with!',
+      name: 'str_reset_password_note',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter email`
+  String get str_type_email {
+    return Intl.message(
+      'Enter email',
+      name: 'str_type_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create user`
+  String get user_create {
+    return Intl.message(
+      'Create user',
+      name: 'user_create',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User information`
+  String get user_detail {
+    return Intl.message(
+      'User information',
+      name: 'user_detail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show more`
+  String get show_more {
+    return Intl.message(
+      'Show more',
+      name: 'show_more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to send the command?`
+  String get are_you_ready_send_command {
+    return Intl.message(
+      'Are you sure you want to send the command?',
+      name: 'are_you_ready_send_command',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No network connection`
+  String get no_internet {
+    return Intl.message(
+      'No network connection',
+      name: 'no_internet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Timeout exceeded, please check your network connection`
+  String get time_out_connection {
+    return Intl.message(
+      'Timeout exceeded, please check your network connection',
+      name: 'time_out_connection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cannot connect to server`
+  String get not_connect_to_server {
+    return Intl.message(
+      'Cannot connect to server',
+      name: 'not_connect_to_server',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Elevated button`
   String get elevated_button {
     return Intl.message(
@@ -1410,16 +2290,6 @@ class S {
     );
   }
 
-  /// `Password`
-  String get password {
-    return Intl.message(
-      'Password',
-      name: 'password',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Basic input`
   String get basic_input {
     return Intl.message(
@@ -1640,16 +2510,6 @@ class S {
     );
   }
 
-  /// `Full name`
-  String get full_name {
-    return Intl.message(
-      'Full name',
-      name: 'full_name',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Clear`
   String get clear {
     return Intl.message(
@@ -1705,16 +2565,6 @@ class S {
     return Intl.message(
       'Phone number',
       name: 'phone_number',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Date of birth`
-  String get date_of_birth {
-    return Intl.message(
-      'Date of birth',
-      name: 'date_of_birth',
       desc: '',
       args: [],
     );
@@ -2070,16 +2920,6 @@ class S {
     );
   }
 
-  /// `Forgot password`
-  String get forgot_password {
-    return Intl.message(
-      'Forgot password',
-      name: 'forgot_password',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `I haven't account`
   String get i_haven_t_account {
     return Intl.message(
@@ -2405,26 +3245,6 @@ class S {
     return Intl.message(
       'Search',
       name: 'search',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No data available`
-  String get no_search_result {
-    return Intl.message(
-      'No data available',
-      name: 'no_search_result',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Agree`
-  String get str_accept {
-    return Intl.message(
-      'Agree',
-      name: 'str_accept',
       desc: '',
       args: [],
     );
