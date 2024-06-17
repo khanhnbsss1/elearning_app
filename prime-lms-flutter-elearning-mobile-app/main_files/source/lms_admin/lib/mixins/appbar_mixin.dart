@@ -43,7 +43,7 @@ mixin AppBarMixin implements UserMixin, Responsive {
           await AuthService().adminLogout().then((value) {
             ref.invalidate(userDataProvider);
             ref.invalidate(userRoleProvider);
-            NextScreen.replaceAnimation(context, const Login());
+            NextScreen.replaceAnimation(context, const LoginPage());
           });
         }
 

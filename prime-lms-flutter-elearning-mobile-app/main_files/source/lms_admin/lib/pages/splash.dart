@@ -32,7 +32,7 @@ class _InitialScreen1State extends ConsumerState<SplashScreen> {
       if (user != null) {
         _checkVerification(user);
       } else {
-        NextScreen.replaceAnimation(context, const Login());
+        NextScreen.replaceAnimation(context, const LoginPage());
       }
     });
     super.initState();
@@ -66,7 +66,7 @@ class _InitialScreen1State extends ConsumerState<SplashScreen> {
       // Not ADMIN or AUTHOR
       await AuthService().adminLogout().then((value) {
         openFailureToast(context, 'Access Denied');
-        NextScreen.replaceAnimation(context, const Login());
+        NextScreen.replaceAnimation(context, const LoginPage());
       });
     }
   }
@@ -74,7 +74,7 @@ class _InitialScreen1State extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: AppLogo(imageString: AssetsConfig.logo, width: 300)),
+      body: Center(child: AppLogo(imageString: ImageManager.logo, width: 300)),
     );
   }
 }

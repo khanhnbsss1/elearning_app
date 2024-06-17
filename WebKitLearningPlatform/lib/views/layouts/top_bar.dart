@@ -20,7 +20,7 @@ import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/images.dart';
-import 'package:webkit/views/auth/login.dart';
+import 'package:webkit/views/auth/login/login.dart';
 import 'package:webkit/widgets/custom_pop_menu.dart';
 
 import '../../helpers/services/navigation_service.dart';

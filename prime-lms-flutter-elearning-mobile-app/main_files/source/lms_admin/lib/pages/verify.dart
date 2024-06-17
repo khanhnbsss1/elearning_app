@@ -70,7 +70,7 @@ class _VerifyInfoState extends ConsumerState<VerifyInfo> {
                 flex: 1,
                 fit: FlexFit.tight,
                 child: SvgPicture.asset(
-                  AssetsConfig.verifyImageString,
+                  ImageManager.verifyImageString,
                   alignment: Alignment.center,
                   height: 400,
                   width: 400,

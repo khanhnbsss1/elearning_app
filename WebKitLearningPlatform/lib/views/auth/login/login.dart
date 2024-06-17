@@ -1,8 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/image_manager/images_constant.dart';
+import 'package:webkit/base/resizer/reponsive.dart';
+import 'package:webkit/components/app_logo.dart';
 import 'package:webkit/controller/auth/login_controller.dart';
 import 'package:webkit/helpers/extensions/string.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
@@ -162,8 +166,7 @@ class _LoginPageState extends State<LoginPage>
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 InkWell(
-                                  onTap: () => controller
-                                      .onChangeCheckBox(!controller.isChecked),
+                                  onTap: () => controller.onChangeCheckBox(!controller.isChecked),
                                   child: Row(
                                     children: [
                                       Checkbox(
@@ -228,8 +231,7 @@ class _LoginPageState extends State<LoginPage>
                                 onTap: controller.gotoRegister,
                                 elevation: 0,
                                 padding: MySpacing.x(16),
-                                splashColor:
-                                    contentTheme.secondary.withOpacity(0.1),
+                                splashColor: contentTheme.secondary.withOpacity(0.1),
                                 child: MyText.labelMedium(
                                   L10nX.getStr.i_haven_t_account,
                                   color: contentTheme.secondary,
@@ -248,5 +250,208 @@ class _LoginPageState extends State<LoginPage>
         },
       ),
     );
+  }
+}
+
+class LoginPage1 extends StatefulWidget {
+  const LoginPage1({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginState();
+}
+
+class _LoginState extends State<LoginPage> {
+  var emailCtlr = TextEditingController();
+  var passwordCtrl = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  final RoundedLoadingButtonController _btnCtlr = RoundedLoadingButtonController();
+  bool _obsecureText = true;
+  IconData _lockIcon = CupertinoIcons.eye_fill;
+
+  _onChangeVisiblity() {
+    if (_obsecureText == true) {
+      setState(() {
+        _obsecureText = false;
+        _lockIcon = CupertinoIcons.eye;
+      });
+    } else {
+      setState(() {
+        _obsecureText = true;
+        _lockIcon = CupertinoIcons.eye_fill;
+      });
+    }
+  }
+
+  void _handleLogin() async {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+      _btnCtlr.start();
+     // UserCredential? userCredential = await AuthService().loginWithEmailPassword(emailCtlr.text, passwordCtrl.text);
+     // LoginRequest loginRequest
+      //BlocProvider.of<LoginBloc>(context).add(LoginSubmittedEvent(loginRequest: loginRequest));
+/*      if (userCredential?.user != null) {
+        debugPrint('Login Success');
+      } else {
+        _btnCtlr.reset();
+        if (!mounted) return;
+      }*/
+    }
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: Colors.indigo.withOpacity(0.1),
+        child: Row(
+          children: [
+            Visibility(
+              visible: Responsive.isDesktop(context) || Responsive.isDesktopLarge(context),
+              child: Flexible(
+                flex: 1,
+                fit: FlexFit.tight,
+                child: ImageManager().getSvgImage(
+                  ImageManager.ic_svgLoginImageString,
+                  height: 400,
+                  width: 400,
+                ),
+              ),
+            ),
+            Flexible(
+              flex: 1,
+              // fit: FlexFit.tight,
+              child: Form(
+                key: formKey,
+                child: Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  alignment: Alignment.center,
+                  color: Colors.white,
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: _getHorizontalPadding(),
+                      vertical: 30.0,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const AppLogo(imageString: ImageManager.logo, height: 60, width: 250),
+                        Text(
+                          'Sign In to the Admin Panel',
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.blueGrey),
+                        ),
+                        const SizedBox(
+                          height: 50,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Email',
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              color: Colors.grey.shade100,
+                              child: TextFormField(
+                                keyboardType: TextInputType.emailAddress,
+                                controller: emailCtlr,
+                                validator: (value) {
+                                  if (value!.isEmpty) return 'Email is required';
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                  suffixIcon: IconButton(
+                                    onPressed: () => emailCtlr.clear(),
+                                    icon: const Icon(Icons.clear),
+                                  ),
+                                  hintText: 'Email Address',
+                                  border: InputBorder.none,
+                                  contentPadding: const EdgeInsets.all(15),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Text(
+                              'Password',
+                              style: Theme.of(context).textTheme.titleSmall,
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              color: Colors.grey.shade100,
+                              child: TextFormField(
+                                controller: passwordCtrl,
+                                obscureText: _obsecureText,
+                                validator: (value) {
+                                  if (value!.isEmpty) return 'Password is required';
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                    suffixIcon: Wrap(
+                                      children: [
+                                        IconButton(onPressed: _onChangeVisiblity, icon: Icon(_lockIcon)),
+                                        IconButton(onPressed: () => passwordCtrl.clear(), icon: const Icon(Icons.clear)),
+                                      ],
+                                    ),
+                                    hintText: 'Your Password',
+                                    border: InputBorder.none,
+                                    contentPadding: const EdgeInsets.all(15)),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 50,
+                            ),
+                            RoundedLoadingButton(
+                              onPressed: _handleLogin,
+                              controller: _btnCtlr,
+                              color: Theme.of(context).primaryColor,
+                              width: MediaQuery.of(context).size.width,
+                              borderRadius: 0,
+                              height: 55,
+                              animateOnTap: false,
+                              elevation: 0,
+                              child: Text(
+                                'Login',
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  double _getHorizontalPadding() {
+    if (Responsive.isDesktopLarge(context)) {
+      return 120;
+    } else if (Responsive.isDesktop(context)) {
+      return 80;
+    } else if (Responsive.isTablet(context)) {
+      return 100;
+    } else {
+      return 30;
+    }
   }
 }

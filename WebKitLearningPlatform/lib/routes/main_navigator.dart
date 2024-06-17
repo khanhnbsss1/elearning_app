@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/views/auth/login.dart';
+import 'package:webkit/views/auth/login/login.dart';
 
 class MainNavigator {
 

@@ -115,6 +115,8 @@ class ColorLightConst{
         break;
       case FlavorType.webUser:
         // TODO: Handle this case.
+      case FlavorType.mobileUser:
+        // TODO: Handle this case.
     }
   }
 

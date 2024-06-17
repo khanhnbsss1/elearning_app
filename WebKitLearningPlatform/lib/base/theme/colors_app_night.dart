@@ -208,6 +208,8 @@ class ColorNightConst{
           colorLinear9 = const Color(0xFF00C5FF);
         }
         break;
+      case FlavorType.mobileUser:
+        // TODO: Handle this case.
     }
   }
 

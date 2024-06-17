@@ -1,14 +1,15 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.fft_app">
 
     <application
-        android:label="webkit"
+        android:label="@string/app_name"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDKd8ZjV1tt3JcoAzrmmbGhocu8Jv0lQp0" />
-    
+            android:value="AIzaSyDExO3b67M3YCnnStH1QAJtzzAvK5PA5hY" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -3,6 +3,11 @@ class Assets {
   Assets._();
 
   static const String assetsDatasAustralia = 'assets/datas/australia.json';
+  static const String assetsLangAr = 'assets/lang/ar.json';
+  static const String assetsLangEn = 'assets/lang/en.json';
+  static const String assetsLangEs = 'assets/lang/es.json';
+  static const String assetsLangFr = 'assets/lang/fr.json';
+  static const String assetsLangHi = 'assets/lang/hi.json';
   static const String datasAustralia = 'assets/datas/australia.json';
   static const String datasChatData = 'assets/datas/chat_data.json';
   static const String datasContactsData = 'assets/datas/contacts_data.json';
@@ -115,6 +120,11 @@ class Assets {
   static const String nft1 = 'assets/images/nft/1.jpg';
   static const String nft2 = 'assets/images/nft/2.jpg';
   static const String nftEthereumEthLogo = 'assets/images/nft/ethereum-eth-logo.png';
+  static const String pngIcInformation = 'assets/images/png/ic_information.png';
+  static const String pngIcLoading = 'assets/images/png/icLoading.png';
+  static const String pngIcNoData = 'assets/images/png/icNoData.png';
+  static const String pngLoadingOnPage = 'assets/images/png/loading_on_page.png';
+  static const String pngSearch = 'assets/images/png/search.png';
   static const String shoppingImagesPhoto1 = 'assets/images/shopping_images/photo1.jpg';
   static const String shoppingImagesPhoto10 = 'assets/images/shopping_images/photo10.jpg';
   static const String shoppingImagesPhoto2 = 'assets/images/shopping_images/photo2.jpg';
@@ -125,5 +135,8 @@ class Assets {
   static const String shoppingImagesPhoto7 = 'assets/images/shopping_images/photo7.jpg';
   static const String shoppingImagesPhoto8 = 'assets/images/shopping_images/photo8.jpg';
   static const String shoppingImagesPhoto9 = 'assets/images/shopping_images/photo9.jpg';
+  static const String svgIcBan = 'assets/images/svg/ic_ban.svg';
+  static const String svgIcError = 'assets/images/svg/ic_error.svg';
+  static const String svgLogin = 'assets/images/svg/login.svg';
 
 }

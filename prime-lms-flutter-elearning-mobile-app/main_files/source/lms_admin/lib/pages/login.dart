@@ -18,14 +18,14 @@ import 'package:svg_flutter/svg.dart';
 
 import '../tabs/admin_tabs/app_settings/app_setting_providers.dart';
 
-class Login extends ConsumerStatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class LoginPage extends ConsumerStatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<Login> createState() => _LoginState();
+  ConsumerState<LoginPage> createState() => _LoginState();
 }
 
-class _LoginState extends ConsumerState<Login> {
+class _LoginState extends ConsumerState<LoginPage> {
   var emailCtlr = TextEditingController();
   var passwordCtrl = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -51,8 +51,6 @@ class _LoginState extends ConsumerState<Login> {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       _btnCtlr.start();
-      NextScreen.replaceAnimation(context, const Home());
-      return;
       UserCredential? userCredential = await AuthService().loginWithEmailPassword(emailCtlr.text, passwordCtrl.text);
       if (userCredential?.user != null) {
         debugPrint('Login Success');
@@ -104,7 +102,7 @@ class _LoginState extends ConsumerState<Login> {
                 flex: 1,
                 fit: FlexFit.tight,
                 child: SvgPicture.asset(
-                  AssetsConfig.loginImageString,
+                  ImageManager.loginImageString,
                   alignment: Alignment.center,
                   height: 400,
                   width: 400,
@@ -131,7 +129,7 @@ class _LoginState extends ConsumerState<Login> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const AppLogo(imageString: AssetsConfig.logo, height: 60, width: 250),
+                        const AppLogo(imageString: ImageManager.logo, height: 60, width: 250),
                         Text(
                           'Sign In to the Admin Panel',
                           style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.blueGrey),

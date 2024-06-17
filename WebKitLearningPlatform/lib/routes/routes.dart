@@ -26,8 +26,8 @@ import 'package:webkit/views/apps/shopping_customer/shopping_customer_screen.dar
 import 'package:webkit/views/auth/forgot_password.dart';
 import 'package:webkit/views/auth/forgot_password_2.dart';
 import 'package:webkit/views/auth/locked.dart';
-import 'package:webkit/views/auth/login.dart';
-import 'package:webkit/views/auth/login_2.dart';
+import 'package:webkit/views/auth/login/login.dart';
+import 'package:webkit/views/auth/login/login_2.dart';
 import 'package:webkit/views/auth/register.dart';
 import 'package:webkit/views/auth/register_2.dart';
 import 'package:webkit/views/auth/reset_password.dart';

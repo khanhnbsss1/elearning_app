@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../views/auth/login.dart';
+import '../views/auth/login/login.dart';
 import 'app_routes.dart';
 
 class AppPages {

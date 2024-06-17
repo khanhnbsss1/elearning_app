@@ -48,13 +48,9 @@ class LoginController extends MyController {
         basicValidator.validateForm();
         basicValidator.clearErrors();
       } else {
-        String nextUrl =
-            Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
-                    .queryParameters['next'] ??
-                "/dashboard";
-        Get.toNamed(
-          nextUrl,
-        );
+        String nextUrl = Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
+                    .queryParameters['next'] ?? "/dashboard";
+        Get.toNamed(nextUrl,);
       }
       loading = false;
       update();

@@ -19,35 +19,38 @@ class FlavorSettings {
     return flavorType;
   }
   Future<FlavorType> getFlavorSettingsInfo() async {
-    flavorType = FlavorType.webAdmin;
+    flavorType = FlavorType.webUser;
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     if (kIsWeb){
-      
-    }
-   else if (Platform.isAndroid) {
       switch (packageInfo.packageName) {
-        case "com.FFTCompany.webAdmin":
+        case "YAXChineseLearningAdmin":
           flavorType = FlavorType.webAdmin;
           break;
-        case "com.FFTCompany.webUser":
+        case "YAXChineseLearningUser":
           flavorType = FlavorType.webUser;
           break;
         default:
-          flavorType = FlavorType.webAdmin;
+          flavorType = FlavorType.webUser;
+      }
+    }
+   else if (Platform.isAndroid) {
+      switch (packageInfo.packageName) {
+        case "com.FFTCompany.YAXChineseLearning":
+          flavorType = FlavorType.mobileUser;
+          break;
+        default:
+          flavorType = FlavorType.mobileUser;
       }
     }
     else if (Platform.isIOS)
       {
         FileUtils.PrintLog("packageNameIOS:${packageInfo.packageName}");
         switch (packageInfo.packageName) {
-          case "FFTCompany.webAdmin":
-            flavorType = FlavorType.webAdmin;
-            break;
-          case "FFTCompany.webUser":
-            flavorType = FlavorType.webUser;
+          case "FFTCompany.YAXChineseLearning":
+            flavorType = FlavorType.mobileUser;
             break;
           default:
-            flavorType = FlavorType.webAdmin;
+            flavorType = FlavorType.mobileUser;
         }
       }
     return flavorType;
@@ -61,8 +64,11 @@ class FlavorSettings {
           PermissionManager().setProductType(ProductType.webAdminVersion);
           break;
         case FlavorType.webUser:
-          // TODO: Handle this case.
           PermissionManager().setProductType(ProductType.webUserVersion);
+          break;
+        case FlavorType.mobileUser:
+        // TODO: Handle this case.
+          PermissionManager().setProductType(ProductType.mobileUserVersion);
           break;
       }
     }
@@ -71,4 +77,5 @@ class FlavorSettings {
 enum FlavorType {
   webAdmin,
   webUser,
+  mobileUser
 }

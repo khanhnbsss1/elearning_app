@@ -73,10 +73,12 @@ class PermissionManager {
 enum ProductType {
   webAdminVersion,/// product voi full cac tinh nang va them tinh nang admin
   webUserVersion,/// product voi full cac tinh nang
+  mobileUserVersion
 }
 
 const Map<ProductType, String> mapProductTypeFlavorName = {
   ProductType.webUserVersion:"webAdmin",
   ProductType.webAdminVersion:"webUser",
+  ProductType.mobileUserVersion:"mobileUser",
 
 };

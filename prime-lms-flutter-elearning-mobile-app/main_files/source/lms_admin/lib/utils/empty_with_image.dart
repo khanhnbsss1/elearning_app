@@ -17,7 +17,7 @@ class EmptyPageWithImage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              image ?? AssetsConfig.noDataImage,
+              image ?? ImageManager.noDataImage,
               height: 200,
               width: 200,
             ),

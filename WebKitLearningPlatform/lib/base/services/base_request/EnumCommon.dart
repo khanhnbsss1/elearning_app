@@ -3,7 +3,7 @@ class CommonEnviroment {
 }
 
 const Map<DOMAIN_TYPE, String> LIVE_DOMAIN = {
-  DOMAIN_TYPE.MAIN: "https://navitrack.fft.com.vn:9092/api/",
+  DOMAIN_TYPE.MAIN: "http://192.168.0.47/api/",
   DOMAIN_TYPE.PAYMENT: "https://navitrack.fft.com.vn:8899/api/",
 };
 
@@ -36,35 +36,14 @@ enum DOMAIN_TYPE {
 enum SERVICE_TYPE {
   AUTHEN,
   SETTING,
-  BOOKING,
   USER,
-  MAP,
-  OCPP,
-  TRANSACTION,
-  OCPP_TRANSACTION,
-  QR_CODE,
-  PAYMENT,
-  HISTORY,
-  NOTIFICATION,
-  VOUCHER, 
-  
   NONE
 }
 
 const Map<SERVICE_TYPE, String> SERVICE = {
-  SERVICE_TYPE.AUTHEN: "auth",
+  SERVICE_TYPE.AUTHEN: "Account",
   SERVICE_TYPE.SETTING: "settings",
   SERVICE_TYPE.USER: "users",
-  SERVICE_TYPE.MAP: "map",
-  SERVICE_TYPE.BOOKING: "booking",
-  SERVICE_TYPE.OCPP: "OCPP",
-  SERVICE_TYPE.OCPP_TRANSACTION:"ocpp-transaction",
-  SERVICE_TYPE.TRANSACTION:"transaction",
-  SERVICE_TYPE.PAYMENT:"payment",
-  SERVICE_TYPE.QR_CODE:"qr-code",
-  SERVICE_TYPE.HISTORY:"History",
-  SERVICE_TYPE.NOTIFICATION:"notification",
-  SERVICE_TYPE.VOUCHER:"vouchers",
   SERVICE_TYPE.NONE: "",
 
 };

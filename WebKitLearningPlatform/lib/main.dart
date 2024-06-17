@@ -9,6 +9,7 @@ import 'package:webkit/helpers/localizations/app_localization_delegate.dart';
 import 'package:webkit/routes/app_routes.dart';
 import 'package:webkit/routes/routes.dart';
 //import 'base/firebase_manager/firebase_options.dart';
+import 'base/device/device_manager.dart';
 import 'base/enviroments/flavor_settings.dart';
 import 'base/firebase_manager/firebase_options.dart';
 import 'base/store/cache_storage.dart';
@@ -33,6 +34,7 @@ Future<void> main() async {
   AppStyle.init();
   await ThemeCustomizer.init();
   ColorConst.setColorByFlavorType();
+  DeviceInfoModel? deviceInfoModel =await DeviceManager().getDeviceInfo();
   // await Translator.clearTrans();
   // Translator.getUnTrans();
   runApp( 
