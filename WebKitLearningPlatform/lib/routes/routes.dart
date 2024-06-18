@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/landing_page/splash.dart';
 import 'package:webkit/views/apps/CRM/contacts_page.dart';
 import 'package:webkit/views/apps/CRM/opportunities.dart';
 import 'package:webkit/views/apps/calender.dart';
@@ -70,17 +71,20 @@ class AuthMiddleware extends GetMiddleware {
   RouteSettings? redirect(String? route) {
     return AuthService.isLoggedIn
         ? null
-        :  RouteSettings(name: Routes.loginRoute);
+        :  RouteSettings(name: Routes.landingPageRoute,);
   }
 }
 
 getPageRoute() {
   var routes = [
+
     GetPage(
         name: Routes.homeRoute,
         page: () =>  DashboardPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
-
+    GetPage(
+        name: Routes.landingPageRoute,
+        page: () =>  LandingPageSplash(key: UniqueKey(),),),
     GetPage(name: Routes.faqsRoute, page: () =>  FaqsPage()),
 
     GetPage(
@@ -275,7 +279,7 @@ getPageRoute() {
     ///---------------- Error ----------------///
 
     GetPage(
-        name: Routes.uiComingSoonRoute,
+        name: Routes.comingSoonRoute,
         page: () =>  ComingSoonPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
@@ -290,7 +294,7 @@ getPageRoute() {
         middlewares: [AuthMiddleware()]),
 
     GetPage(
-        name: Routes.uiMaintenanceRoute,
+        name: Routes.maintenanceRoute,
         page: () =>  MaintenancePage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
@@ -304,54 +308,54 @@ getPageRoute() {
     ///---------------- Form ----------------///
 
     GetPage(
-        name: Routes.uiFormBasicRoute,
+        name: Routes.formBasicRoute,
         page: () =>  BasicPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
     GetPage(
-        name: Routes.uiFormValidationRoute,
+        name: Routes.formValidationRoute,
         page: () =>  ValidationPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
     GetPage(
-        name: Routes.uiFormQuillEditorRoute,
+        name: Routes.formQuillEditorRoute,
         page: () =>  QuillEditor(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     GetPage(
-        name: Routes.uiFormFormMaskRoute,
+        name: Routes.formFormMaskRoute,
         page: () =>  FormMaskPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
     GetPage(
-        name: Routes.uiFormWizardRoute,
+        name: Routes.formWizardRoute,
         page: () =>  Wizard(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
     ///---------------- Other ----------------///
 
     GetPage(
-        name: Routes.uiFormBasicRoute,
+        name: Routes.formBasicRoute,
         page: () =>  BasicTable(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
     GetPage(
-        name: Routes.uiOtherSyncfusionChartsRoute,
+        name: Routes.otherSyncfusionChartsRoute,
         page: () =>  SyncFusionChart(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     GetPage(
-        name: Routes.uiOtherFlChartRoute,
+        name: Routes.otherFlChartRoute,
         page: () =>  FlChartScreen(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
     ///---------------- Maps ----------------///
 
     GetPage(
-        name: Routes.uiMapsSfMapsRoute,
+        name: Routes.mapsSfMapsRoute,
         page: () =>  SfMapPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
     GetPage(
-        name: Routes.uiMapsGoogleMapsRoute,
+        name: Routes.mapsGoogleMapsRoute,
         page: () =>  GoogleMapPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
   ];

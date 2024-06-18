@@ -81,7 +81,7 @@ class _LeftBarState extends State<LeftBar>
                 children: [
                   InkWell(
                       onTap: () {
-                        Get.toNamed('/dashboard');
+                        Get.toNamed(Routes.dashboardRoute);
                       },
                       child: Image.asset(
                         Images.logoIcon,
@@ -120,7 +120,7 @@ class _LeftBarState extends State<LeftBar>
                     iconData: LucideIcons.layoutDashboard,
                     title: L10nX.getStr.dashboard,
                     isCondensed: isCondensed,
-                    route: '/dashboard',
+                    route: Routes.dashboardRoute,
                   ),
                   labelWidget(L10nX.getStr.apps),
 
@@ -128,15 +128,51 @@ class _LeftBarState extends State<LeftBar>
                   NavigationItem(
                     iconData: LucideIcons.calendarDays,
                     title: L10nX.getStr.str_calendar,
-                    route: '/calender',
+                    route: Routes.calenderRoute,
                     isCondensed: isCondensed,
                   ),
                   //-----------------Chat-----------------//
                   NavigationItem(
                     iconData: LucideIcons.messageSquare,
                     title: L10nX.getStr.str_chat,
-                    route: '/chat',
+                    route: Routes.uiChatRoute,
                     isCondensed: isCondensed,
+                  ),
+                  //-----------------LandingPage-----------------//
+                  MenuWidget(
+                    iconData: LucideIcons.planeLanding,
+                    isCondensed: isCondensed,
+                    title: L10nX.getStr.landing_page,
+                    children: [
+                      MenuItem(
+                        title: L10nX.getStr.landing_page,
+                        route:  Routes.uiLandingRoute,
+                        isCondensed: widget.isCondensed,
+                      ),
+                      MenuItem(
+                        title: L10nX.getStr.landing_page,
+                        route:  Routes.landingPageRoute,
+                        isCondensed: widget.isCondensed,
+                      ),
+                    ],
+                  ),
+                  //-----------------Login-----------------//
+                  MenuWidget(
+                    iconData: LucideIcons.logIn,
+                    isCondensed: isCondensed,
+                    title: L10nX.getStr.login,
+                    children: [
+                      MenuItem(
+                        title: L10nX.getStr.login,
+                        route:  Routes.lockedRoute,
+                        isCondensed: widget.isCondensed,
+                      ),
+                      MenuItem(
+                        title: "${L10nX.getStr.login}1",
+                        route:  Routes.loginRoute1,
+                        isCondensed: widget.isCondensed,
+                      ),
+                    ],
                   ),
                   //-----------------Contact-----------------//
                   MenuWidget(
@@ -146,17 +182,17 @@ class _LeftBarState extends State<LeftBar>
                     children: [
                       MenuItem(
                         title: L10nX.getStr.str_members,
-                        route: '/contacts/members',
+                        route:  Routes.contactsMembersRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.profile,
-                        route: '/contacts/profile',
+                        route:  Routes.contactsProfileRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_edit_profile,
-                        route: '/contacts/edit-profile',
+                        route:  Routes.contactsEditProfileRoute,
                         isCondensed: widget.isCondensed,
                       ),
                     ],
@@ -170,12 +206,12 @@ class _LeftBarState extends State<LeftBar>
                     children: [
                       MenuItem(
                         title: L10nX.getStr.str_contacts,
-                        route: '/crm/contacts',
+                        route:  Routes.crmContactsRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_opportunities,
-                        route: '/crm/opportunities',
+                        route:  Routes.crmOpportunitiesPathRoute,
                         isCondensed: widget.isCondensed,
                       ),
                     ],
@@ -190,27 +226,27 @@ class _LeftBarState extends State<LeftBar>
                       MenuItem(
                         title: L10nX.getStr.products,
                         isCondensed: isCondensed,
-                        route: '/apps/ecommerce/products',
+                        route:  Routes.appsEcommerceProductsRoute,
                       ),
                       MenuItem(
                         title: L10nX.getStr.add_product,
                         isCondensed: isCondensed,
-                        route: '/apps/ecommerce/add_product',
+                        route:  Routes.appsEcommerceAddProductRoute,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_product_detail,
                         isCondensed: isCondensed,
-                        route: '/apps/ecommerce/product-detail',
+                        route:  Routes.appsEcommerceAddProductRoute,
                       ),
                       MenuItem(
                         title: L10nX.getStr.customers,
                         isCondensed: isCondensed,
-                        route: '/apps/ecommerce/customers',
+                        route:  Routes.appsEcommerceCustomersRoute,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_invoice,
                         isCondensed: isCondensed,
-                        route: '/apps/ecommerce/invoice',
+                        route:  Routes.appsEcommerceInvoiceRoute,
                       ),
                     ],
                   ),
@@ -222,12 +258,12 @@ class _LeftBarState extends State<LeftBar>
                     children: [
                       MenuItem(
                         title: L10nX.getStr.str_manager,
-                        route: '/apps/files',
+                        route:  Routes.appsFilesRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_upload,
-                        route: '/apps/file-uploader',
+                        route:  Routes.appsFileUploaderRoute,
                         isCondensed: widget.isCondensed,
                       ),
                     ],
@@ -241,17 +277,17 @@ class _LeftBarState extends State<LeftBar>
                     children: [
                       MenuItem(
                         title: L10nX.getStr.str_project_list,
-                        route: '/projects/project-list',
+                        route:  Routes.projectsProjectListRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_project_detail,
-                        route: '/projects/project-detail',
+                        route:  Routes.projectsProjectDetailRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_create_project,
-                        route: '/projects/create-project',
+                        route:  Routes.projectsCreateProjectRoute,
                         isCondensed: widget.isCondensed,
                       ),
                     ],
@@ -261,7 +297,7 @@ class _LeftBarState extends State<LeftBar>
                   NavigationItem(
                     iconData: LucideIcons.squareKanban,
                     title: "Kanban",
-                    route: '/kanban',
+                    route:  Routes.kanbanRoute,
                     isCondensed: isCondensed,
                   ),
 
@@ -269,25 +305,25 @@ class _LeftBarState extends State<LeftBar>
                   NavigationItem(
                     iconData: LucideIcons.circleDollarSign,
                     title: L10nX.getStr.str_NFT_dashboard,
-                    route: '/NFTDashboard',
+                    route: Routes.nFTDashboardRoute,
                     isCondensed: isCondensed,
                   ),
                   NavigationItem(
                     iconData: LucideIcons.shoppingCart,
                     title: L10nX.getStr.str_customer,
-                    route: '/shopping-customer',
+                    route:  Routes.shoppingCustomerRoute,
                     isCondensed: isCondensed,
                   ),
                   NavigationItem(
                     iconData: LucideIcons.dumbbell,
                     title: L10nX.getStr.str_fitness,
-                    route: '/fitness',
+                    route:  Routes.fitnessRoute,
                     isCondensed: isCondensed,
                   ),
                   NavigationItem(
                     iconData: LucideIcons.mailbox,
                     title: L10nX.getStr.str_mailbox,
-                    route: '/mila_box',
+                    route:  Routes.milaBoxRoute,
                     isCondensed: isCondensed,
                   ),
 
@@ -297,7 +333,7 @@ class _LeftBarState extends State<LeftBar>
                   NavigationItem(
                     iconData: LucideIcons.presentation,
                     title: L10nX.getStr.str_Landing,
-                    route: '/ui/landing',
+                    route:  Routes.uiLandingRoute,
                     isCondensed: isCondensed,
                   ),
 
@@ -314,47 +350,47 @@ class _LeftBarState extends State<LeftBar>
                       ),
                       MenuItem(
                         title: L10nX.getStr.login,
-                        route: '/auth/login1',
+                        route:  Routes.loginRoute1,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.register,
-                        route: '/auth/register',
+                        route:  Routes.signupRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.register,
-                        route: '/auth/register1',
+                        route:  Routes.signupRoute1,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.forgot_password,
-                        route: '/auth/forgot-password',
+                        route:  Routes.forgotPasswordRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.forgot_password,
-                        route: '/auth/forgot_password1',
+                        route:  Routes.forgotPasswordRoute1,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.reset_password,
-                        route: '/auth/reset_password',
+                        route:  Routes.resetPasswordRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.reset_password,
-                        route: '/auth/reset_password1',
+                        route:  Routes.resetPasswordRoute1,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.locked,
-                        route: '/auth/locked',
+                        route:  Routes.lockedRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.locked,
-                        route: '/auth/locked1',
+                        route:  Routes.lockedRoute1,
                         isCondensed: widget.isCondensed,
                       ),
                     ],
@@ -368,22 +404,22 @@ class _LeftBarState extends State<LeftBar>
                     children: [
                       MenuItem(
                         title: "ERROR-404",
-                        route: '/error-404',
+                        route:  Routes.uiError404Route,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: "ERROR-500",
-                        route: '/error-500',
+                        route:  Routes.uiError500Route,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_coming_soon,
-                        route: '/coming-soon',
+                        route:  Routes.comingSoonRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_maintenance,
-                        route: '/maintenance',
+                        route: Routes.maintenanceRoute,
                         isCondensed: widget.isCondensed,
                       ),
                     ],
@@ -397,18 +433,18 @@ class _LeftBarState extends State<LeftBar>
                     children: [
                       MenuItem(
                         title: L10nX.getStr.FAQs,
-                        route: '/faqs',
+                        route: Routes.faqsRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_pricing,
-                        route: '/pricing',
+                        route: Routes.pricingRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_timeLine,
                         isCondensed: isCondensed,
-                        route: '/timeline',
+                        route: Routes.timelineRoute,
                       ),
                     ],
                   ),
@@ -421,27 +457,27 @@ class _LeftBarState extends State<LeftBar>
                     children: [
                       MenuItem(
                         title: L10nX.getStr.basic,
-                        route: '/form/basic',
+                        route: Routes.formBasicRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_form_mask,
-                        route: '/form/form-mask',
+                        route: Routes.formFormMaskRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_quill_editor,
-                        route: '/form/quill-editor',
+                        route: Routes.formQuillEditorRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.validation,
-                        route: '/form/validation',
+                        route: Routes.formValidationRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.wizard,
-                        route: '/form/wizard',
+                        route: Routes.formWizardRoute,
                         isCondensed: widget.isCondensed,
                       ),
                     ],
@@ -454,37 +490,37 @@ class _LeftBarState extends State<LeftBar>
                     children: [
                       MenuItem(
                         title: L10nX.getStr.buttons,
-                        route: '/ui/buttons',
+                        route: Routes.uiButtonsRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.cards,
-                        route: '/ui/cards',
+                        route: Routes.uiCardsRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.tabs,
-                        route: '/ui/tabs',
+                        route: Routes.uiTabsRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.dialogs,
-                        route: '/ui/dialogs',
+                        route: Routes.uiDialogsRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.carousels,
-                        route: '/ui/carousels',
+                        route: Routes.uiCarouselsRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_drag_drop,
-                        route: '/ui/drag-drop',
+                        route: Routes.uiDragDropRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.notifications,
-                        route: '/ui/notification',
+                        route: Routes.uiNotificationRoute,
                         isCondensed: widget.isCondensed,
                       ),
                     ],
@@ -493,7 +529,7 @@ class _LeftBarState extends State<LeftBar>
                   NavigationItem(
                     iconData: LucideIcons.file,
                     title: L10nX.getStr.starter,
-                    route: '/starter',
+                    route: Routes.starterRoute,
                     isCondensed: isCondensed,
                   ),
                   //-----------------Other-----------------//
@@ -501,19 +537,19 @@ class _LeftBarState extends State<LeftBar>
                   NavigationItem(
                     iconData: LucideIcons.table2,
                     title: L10nX.getStr.basic_tables,
-                    route: '/other/basic_tables',
+                    route: Routes.otherBasicTablesRoute,
                     isCondensed: isCondensed,
                   ),
                   NavigationItem(
                     iconData: LucideIcons.barChartBig,
                     title: L10nX.getStr.syncfusion_charts,
-                    route: '/other/syncfusion_charts',
+                    route: Routes.otherSyncfusionChartsRoute,
                     isCondensed: isCondensed,
                   ),
                   NavigationItem(
                     iconData: LucideIcons.barChart,
                     title: "fl_chart",
-                    route: '/other/fl_chart',
+                    route: Routes.otherFlChartRoute,
                     isCondensed: isCondensed,
                   ),
                   //-----------------Maps-----------------//
@@ -524,12 +560,12 @@ class _LeftBarState extends State<LeftBar>
                     children: [
                       MenuItem(
                         title: "Sf Maps",
-                        route: '/maps/sf-maps',
+                        route: Routes.mapsSfMapsRoute,
                         isCondensed: widget.isCondensed,
                       ),
                       MenuItem(
                         title: "Google Maps",
-                        route: '/maps/google-maps',
+                        route: Routes.mapsGoogleMapsRoute,
                         isCondensed: widget.isCondensed,
                       ),
                     ],

@@ -168,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "infinite": MessageLookupByLibrary.simpleMessage("Infinite"),
         "info": MessageLookupByLibrary.simpleMessage("Info"),
+        "landing_page": MessageLookupByLibrary.simpleMessage("Landing page"),
         "language_text": MessageLookupByLibrary.simpleMessage("Language"),
         "large": MessageLookupByLibrary.simpleMessage("Large"),
         "last_month": MessageLookupByLibrary.simpleMessage("Last month"),

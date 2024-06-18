@@ -48,14 +48,14 @@ class AuthLayout extends StatelessWidget {
   Widget largeScreen(BuildContext context) {
     return Scaffold(
         key: controller.scaffoldKey,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.transparent,
         body: Stack(
           children: [
-            const Center(
+/*            const Center(
               child: Opacity(
                   opacity: 0.8,
                   child: BlurHash(hash: "LDLz?TMI00%N00I=M{%M00Rj~qRP")),
-            ),
+            ),*/
             Container(
               margin: MySpacing.top(100),
               width: MediaQuery.of(context).size.width,
@@ -71,8 +71,7 @@ class AuthLayout extends StatelessWidget {
                     // sizes: "xxl-3 lg-4 md-6 sm-8",
                     child: MyContainer(
                       paddingAll: 0,
-                      color: AdminTheme.theme.contentTheme.background
-                          .withAlpha(230),
+                      color: AdminTheme.theme.contentTheme.background.withAlpha(230),
                       child: child ?? Container(),
                     ),
                   ),

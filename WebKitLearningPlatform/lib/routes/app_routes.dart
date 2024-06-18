@@ -1,4 +1,5 @@
 abstract class Routes {
+  static const landingPageRoute = Paths.landingPagePath;
   static const homeRoute = Paths.homePath;
   static const loginRoute = Paths.loginPath;
   static const loginRoute1 = Paths.loginPath1;
@@ -23,21 +24,21 @@ abstract class Routes {
   static const uiNotificationRoute = Paths.uiNotificationPath ;
   static const uiReviewsRoute = Paths.uiReviewsPath ;
   static const uiLandingRoute = Paths.uiLandingPath;
-  static const uiComingSoonRoute = Paths.uiComingSoonPath ;
+  static const comingSoonRoute = Paths.uiComingSoonPath ;
   static const uiError404Route = Paths.uiError404Path ;
   static const uiError500Route = Paths.uiError500Path ;
-  static const uiMaintenanceRoute = Paths.uiMaintenancePath ;
+  static const maintenanceRoute = Paths.uiMaintenancePath ;
   static const uiChatRoute = Paths.uiChatPath ;
-  static const uiFormBasicRoute = Paths.uiFormBasicPath ;
-  static const uiFormValidationRoute = Paths.uiFormValidationPath ;
-  static const uiFormQuillEditorRoute = Paths.uiFormQuillEditorPath ;
-  static const uiFormFormMaskRoute = Paths.uiFormFormMaskPath;
-  static const uiFormWizardRoute = Paths.uiFormWizardPath ;
-  static const uiOtherBasicTablesRoute = Paths.uiOtherBasicTablesPath ;
-  static const uiOtherSyncfusionChartsRoute = Paths.uiOtherSyncfusionChartsPath ;
-  static const uiOtherFlChartRoute = Paths.uiOtherFlChartPath ;
-  static const uiMapsSfMapsRoute = Paths.uiMapsSfMapsPath ;
-  static const uiMapsGoogleMapsRoute = Paths.uiMapsGoogleMapsPath ;
+  static const formBasicRoute = Paths.uiFormBasicPath ;
+  static const formValidationRoute = Paths.uiFormValidationPath ;
+  static const formQuillEditorRoute = Paths.uiFormQuillEditorPath ;
+  static const formFormMaskRoute = Paths.uiFormFormMaskPath;
+  static const formWizardRoute = Paths.uiFormWizardPath ;
+  static const otherBasicTablesRoute = Paths.uiOtherBasicTablesPath ;
+  static const otherSyncfusionChartsRoute = Paths.uiOtherSyncfusionChartsPath ;
+  static const otherFlChartRoute = Paths.uiOtherFlChartPath ;
+  static const mapsSfMapsRoute = Paths.uiMapsSfMapsPath ;
+  static const mapsGoogleMapsRoute = Paths.uiMapsGoogleMapsPath ;
 
   static const faqsRoute = Paths.faqsPath ;
   static const pricingRoute = Paths.pricingPath ;
@@ -68,6 +69,7 @@ abstract class Routes {
 }
 
 abstract class Paths {
+  static const landingPagePath = "/landing_page";
   static const homePath = "/";
   static const loginPath = "/auth/login";
   static const loginPath1 = "/auth/login1";

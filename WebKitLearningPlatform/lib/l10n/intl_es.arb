@@ -351,5 +351,7 @@
   "str_timeLine": "Línea de tiempo",
   "str_form_mask": "Máscara de formulario",
   "str_quill_editor": "Editor de pluma",
-  "str_drag_drop": "Arrastrar y soltar"
+  "str_drag_drop": "Arrastrar y soltar",
+  "landing_page": "Landing page"
+
 }

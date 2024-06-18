@@ -72,8 +72,6 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
   closeMenu() {
     _overlayEntry?.remove();
     _overlayEntry1?.remove();
-    // if(_animationController.)
-    // _animationController.reverse();
     isMenuOpen = false;
   }
 

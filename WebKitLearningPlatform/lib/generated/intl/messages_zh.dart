@@ -148,6 +148,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "infinite": MessageLookupByLibrary.simpleMessage("无限"),
         "info": MessageLookupByLibrary.simpleMessage("信息"),
+        "landing_page": MessageLookupByLibrary.simpleMessage("Landing page"),
         "language_text": MessageLookupByLibrary.simpleMessage("语言"),
         "large": MessageLookupByLibrary.simpleMessage("大"),
         "last_month": MessageLookupByLibrary.simpleMessage("上个月"),

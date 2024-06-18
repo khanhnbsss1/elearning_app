@@ -3539,6 +3539,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Landing page`
+  String get landing_page {
+    return Intl.message(
+      'Landing page',
+      name: 'landing_page',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

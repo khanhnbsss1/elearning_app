@@ -24,7 +24,12 @@ import 'package:webkit/views/layouts/auth_layout.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
-
+  void show(BuildContext context) {
+    showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) => this);
+  }
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -52,198 +57,211 @@ class _LoginPageState extends State<LoginPage>
             duration: const Duration(milliseconds: 100),
             child: Padding(
               padding: MySpacing.all(16),
-              child: MyFlex(
-                contentPadding: false,
+              child: Stack(
                 children: [
-                  MyFlexItem(
-                    sizes: "lg-6",
-                    child: MyResponsive(
-                      builder: (_, __, type) {
-                        return type == MyScreenMediaType.xxl
-                            ? Image.asset(
-                                Images.login[3],
-                                fit: BoxFit.cover,
-                                height: 500,
-                              )
-                            : type == MyScreenMediaType.xl
+                  MyFlex(
+                    contentPadding: false,
+                    children: [
+                      MyFlexItem(
+                        sizes: "lg-6",
+                        child: MyResponsive(
+                          builder: (_, __, type) {
+                            return type == MyScreenMediaType.xxl
                                 ? Image.asset(
-                                    Images.login[3],
-                                    fit: BoxFit.cover,
-                                    height: 500,
-                                  )
+                              Images.login[3],
+                              fit: BoxFit.cover,
+                              height: 500,
+                            )
+                                : type == MyScreenMediaType.xl
+                                ? Image.asset(
+                              Images.login[3],
+                              fit: BoxFit.cover,
+                              height: 500,
+                            )
                                 : type == MyScreenMediaType.lg
-                                    ? Image.asset(
-                                        Images.login[3],
-                                        fit: BoxFit.cover,
-                                        height: 500,
-                                      )
-                                    : const SizedBox();
-                      },
-                    ),
-                  ),
-                  MyFlexItem(
-                    sizes: "lg-6",
-                    child: Padding(
-                      padding: MySpacing.y(28),
-                      child: Form(
-                        key: loginController.basicValidator.formKey,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: MyText.titleLarge(
-                                "Welcome",
-                                fontWeight: 600,
-                                fontSize: 24,
-                              ),
-                            ),
-                            Center(
-                              child: MyText.bodyMedium(
-                                "Login your account",
-                                fontSize: 16,
-                              ),
-                            ),
-                            MySpacing.height(40),
-                            MyText.bodyMedium(
-                              "Your Email",
-                            ),
-                            MySpacing.height(8),
-                            TextFormField(
-                              validator: controller.basicValidator
-                                  .getValidation('email'),
-                              controller: controller.basicValidator
-                                  .getController('email'),
-                              keyboardType: TextInputType.emailAddress,
-                              decoration: InputDecoration(
-                                  labelText: "Email Address",
-                                  labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                                  border: outlineInputBorder,
-                                  prefixIcon: const Icon(
-                                    LucideIcons.mail,
-                                    size: 20,
-                                  ),
-                                  contentPadding: MySpacing.all(16),
-                                  isCollapsed: true,
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never),
-                            ),
-                            MySpacing.height(16),
-                            MyText.labelMedium(
-                              L10nX.getStr.password,
-                            ),
-                            MySpacing.height(8),
-                            TextFormField(
-                              validator: controller.basicValidator
-                                  .getValidation('password'),
-                              controller: controller.basicValidator
-                                  .getController('password'),
-                              keyboardType: TextInputType.visiblePassword,
-                              obscureText: !controller.showPassword,
-                              decoration: InputDecoration(
-                                  labelText: "Password",
-                                  labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                                  border: outlineInputBorder,
-                                  prefixIcon: const Icon(
-                                    LucideIcons.lock,
-                                    size: 20,
-                                  ),
-                                  suffixIcon: InkWell(
-                                    onTap: controller.onChangeShowPassword,
-                                    child: Icon(
-                                      controller.showPassword
-                                          ? LucideIcons.eye 
-                                          : LucideIcons.eyeOff,
-                                      size: 20,
-                                    ),
-                                  ),
-                                  contentPadding: MySpacing.all(16),
-                                  isCollapsed: true,
-                                  floatingLabelBehavior:
-                                      FloatingLabelBehavior.never),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                ? Image.asset(
+                              Images.login[3],
+                              fit: BoxFit.cover,
+                              height: 500,
+                            )
+                                : const SizedBox();
+                          },
+                        ),
+                      ),
+                      MyFlexItem(
+                        sizes: "lg-6",
+                        child: Padding(
+                          padding: MySpacing.y(28),
+                          child: Form(
+                            key: loginController.basicValidator.formKey,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                InkWell(
-                                  onTap: () => controller.onChangeCheckBox(!controller.isChecked),
-                                  child: Row(
-                                    children: [
-                                      Checkbox(
-                                        onChanged: controller.onChangeCheckBox,
-                                        value: controller.isChecked,
-                                        activeColor: theme.colorScheme.primary,
-                                        materialTapTargetSize:
-                                            MaterialTapTargetSize.shrinkWrap,
-                                        visualDensity: getCompactDensity,
-                                      ),
-                                      MySpacing.width(16),
-                                      MyText.bodyMedium(
-                                        "Remember Me",
-                                      ),
-                                    ],
+                                Center(
+                                  child: MyText.titleLarge(
+                                    "Welcome",
+                                    fontWeight: 600,
+                                    fontSize: 24,
                                   ),
                                 ),
-                                MyButton.text(
-                                  onTap: controller.goToForgotPassword,
-                                  elevation: 0,
-                                  padding: MySpacing.xy(8, 0),
-                                  splashColor:
+                                Center(
+                                  child: MyText.bodyMedium(
+                                    "Login your account",
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                MySpacing.height(40),
+                                MyText.bodyMedium(
+                                  "Your Email",
+                                ),
+                                MySpacing.height(8),
+                                TextFormField(
+                                  validator: controller.basicValidator
+                                      .getValidation('email'),
+                                  controller: controller.basicValidator
+                                      .getController('email'),
+                                  keyboardType: TextInputType.emailAddress,
+                                  decoration: InputDecoration(
+                                      labelText: "Email Address",
+                                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                                      border: outlineInputBorder,
+                                      prefixIcon: const Icon(
+                                        LucideIcons.mail,
+                                        size: 20,
+                                      ),
+                                      contentPadding: MySpacing.all(16),
+                                      isCollapsed: true,
+                                      floatingLabelBehavior:
+                                      FloatingLabelBehavior.never),
+                                ),
+                                MySpacing.height(16),
+                                MyText.labelMedium(
+                                  L10nX.getStr.password,
+                                ),
+                                MySpacing.height(8),
+                                TextFormField(
+                                  validator: controller.basicValidator
+                                      .getValidation('password'),
+                                  controller: controller.basicValidator
+                                      .getController('password'),
+                                  keyboardType: TextInputType.visiblePassword,
+                                  obscureText: !controller.showPassword,
+                                  decoration: InputDecoration(
+                                      labelText: "Password",
+                                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                                      border: outlineInputBorder,
+                                      prefixIcon: const Icon(
+                                        LucideIcons.lock,
+                                        size: 20,
+                                      ),
+                                      suffixIcon: InkWell(
+                                        onTap: controller.onChangeShowPassword,
+                                        child: Icon(
+                                          controller.showPassword
+                                              ? LucideIcons.eye
+                                              : LucideIcons.eyeOff,
+                                          size: 20,
+                                        ),
+                                      ),
+                                      contentPadding: MySpacing.all(16),
+                                      isCollapsed: true,
+                                      floatingLabelBehavior:
+                                      FloatingLabelBehavior.never),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    InkWell(
+                                      onTap: () => controller.onChangeCheckBox(!controller.isChecked),
+                                      child: Row(
+                                        children: [
+                                          Checkbox(
+                                            onChanged: controller.onChangeCheckBox,
+                                            value: controller.isChecked,
+                                            activeColor: theme.colorScheme.primary,
+                                            materialTapTargetSize:
+                                            MaterialTapTargetSize.shrinkWrap,
+                                            visualDensity: getCompactDensity,
+                                          ),
+                                          MySpacing.width(16),
+                                          MyText.bodyMedium(
+                                            "Remember Me",
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    MyButton.text(
+                                      onTap: controller.goToForgotPassword,
+                                      elevation: 0,
+                                      padding: MySpacing.xy(8, 0),
+                                      splashColor:
                                       contentTheme.secondary.withOpacity(0.1),
-                                  child: MyText.labelSmall(
-                                    L10nX.getStr.forgot_password.capitalizeWords,
-                                    color: contentTheme.secondary,
+                                      child: MyText.labelSmall(
+                                        L10nX.getStr.forgot_password.capitalizeWords,
+                                        color: contentTheme.secondary,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                MySpacing.height(40),
+                                Center(
+                                  child: MyButton.rounded(
+                                    onTap: controller.onLogin,
+                                    elevation: 0,
+                                    padding: MySpacing.xy(20, 16),
+                                    backgroundColor: contentTheme.primary,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        controller.loading
+                                            ? SizedBox(
+                                          height: 14,
+                                          width: 14,
+                                          child: CircularProgressIndicator(
+                                            color: theme.colorScheme.onPrimary,
+                                            strokeWidth: 1.2,
+                                          ),
+                                        )
+                                            : Container(),
+                                        if (controller.loading) MySpacing.width(16),
+                                        MyText.bodySmall(
+                                          L10nX.getStr.login,
+                                          color: contentTheme.onPrimary,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Center(
+                                  child: MyButton.text(
+                                    onTap: controller.gotoRegister,
+                                    elevation: 0,
+                                    padding: MySpacing.x(16),
+                                    splashColor: contentTheme.secondary.withOpacity(0.1),
+                                    child: MyText.labelMedium(
+                                      L10nX.getStr.i_haven_t_account,
+                                      color: contentTheme.secondary,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
-                            MySpacing.height(40),
-                            Center(
-                              child: MyButton.rounded(
-                                onTap: controller.onLogin,
-                                elevation: 0,
-                                padding: MySpacing.xy(20, 16),
-                                backgroundColor: contentTheme.primary,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    controller.loading
-                                        ? SizedBox(
-                                            height: 14,
-                                            width: 14,
-                                            child: CircularProgressIndicator(
-                                              color: theme.colorScheme.onPrimary,
-                                              strokeWidth: 1.2,
-                                            ),
-                                          )
-                                        : Container(),
-                                    if (controller.loading) MySpacing.width(16),
-                                    MyText.bodySmall(
-                                      L10nX.getStr.login,
-                                      color: contentTheme.onPrimary,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Center(
-                              child: MyButton.text(
-                                onTap: controller.gotoRegister,
-                                elevation: 0,
-                                padding: MySpacing.x(16),
-                                splashColor: contentTheme.secondary.withOpacity(0.1),
-                                child: MyText.labelMedium(
-                                  L10nX.getStr.i_haven_t_account,
-                                  color: contentTheme.secondary,
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Icon(Icons.close),
+                    ),
+                  )
+                ]
               ),
             ),
           );
@@ -255,12 +273,17 @@ class _LoginPageState extends State<LoginPage>
 
 class LoginPage1 extends StatefulWidget {
   const LoginPage1({super.key});
-
+  void show(BuildContext context) {
+    showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) => this);
+  }
   @override
-  State<LoginPage> createState() => _LoginState();
+  State<LoginPage1> createState() => _LoginState();
 }
 
-class _LoginState extends State<LoginPage> {
+class _LoginState extends State<LoginPage1> {
   var emailCtlr = TextEditingController();
   var passwordCtrl = TextEditingController();
   final formKey = GlobalKey<FormState>();

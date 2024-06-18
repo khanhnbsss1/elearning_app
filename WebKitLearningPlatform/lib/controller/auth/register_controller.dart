@@ -64,6 +64,6 @@ class RegisterController extends MyController {
   }
 
   void gotoLogin() {
-    Get.toNamed(Routes.loginRoute);
+    Get.toNamed(Routes.landingPageRoute);
   }
 }

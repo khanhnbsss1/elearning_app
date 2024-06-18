@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/localizations/bloc/main.exports.dart';
 import 'package:webkit/helpers/localizations/language.dart';
 import 'package:webkit/helpers/theme/app_notifier.dart';
@@ -20,6 +21,7 @@ import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/images.dart';
+import 'package:webkit/routes/app_pages.dart';
 import 'package:webkit/views/auth/login/login.dart';
 import 'package:webkit/widgets/custom_pop_menu.dart';
 
@@ -180,7 +182,7 @@ class _TopBarState extends State<TopBar>
                       ),
                       MySpacing.width(4),
                       CustomPopupMenu(
-                        backdrop: true,
+                        backdrop: false,
                         onChange: (_) {},
                         offsetX: -60,
                         offsetY: 8,
@@ -405,9 +407,7 @@ class _TopBarState extends State<TopBar>
               key: UniqueKey(),
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onTap: () {
-                setState(() {
-                  Get.off(LoginPage());
-                });
+                AppPages.route(Routes.landingPageRoute, isReplace: true);
               },
               borderRadiusAll: AppStyle.buttonRadius.medium,
               padding: MySpacing.xy(8, 4),

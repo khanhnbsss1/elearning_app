@@ -352,5 +352,7 @@
   "str_timeLine": "时间线",
   "str_form_mask": "表单蒙版",
   "str_quill_editor": "Quill 编辑器",
-  "str_drag_drop": "拖放"
+  "str_drag_drop": "拖放",
+  "landing_page": "Landing page"
+
 }

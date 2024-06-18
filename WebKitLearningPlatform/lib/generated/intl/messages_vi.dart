@@ -168,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "infinite": MessageLookupByLibrary.simpleMessage("Vô hạn"),
         "info": MessageLookupByLibrary.simpleMessage("Thông tin"),
+        "landing_page": MessageLookupByLibrary.simpleMessage("Landing page"),
         "language_text": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "large": MessageLookupByLibrary.simpleMessage("Lớn"),
         "last_month": MessageLookupByLibrary.simpleMessage("Tháng trước"),

@@ -429,7 +429,7 @@ class BaseApiRequest {
           {
         MonitorLoading().dismiss();
         AuthorManager.getInstance.deleteCurrentLoginUserInfo();
-        AppPages.route(Routes.loginRoute, isReplace: true);
+        AppPages.route(Routes.landingPageRoute, isReplace: true);
         return ResponseCommon(
             errorCode: response.statusCode,
             message: response.statusMessage,
@@ -506,7 +506,7 @@ class BaseApiRequest {
             currentUserInfo.expiredAt = "";
             await UserHelper.getInstance.saveCurrentUserInfo(currentUserInfo);
           }
-          AppPages.route(Routes.loginRoute, isReplace: true);
+          AppPages.route(Routes.landingPageRoute, isReplace: true);
         }
       }
       else

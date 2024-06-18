@@ -26,6 +26,8 @@ import 'helpers/theme/theme_customizer.dart';
 import 'l10n/l10n_extention.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'landing_page/helper/colornotifier.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
@@ -43,10 +45,16 @@ Future<void> main() async {
           BlocProvider<MainBloc>(create: (_) => MainBloc(MainState(mainStatus: MainStatus.initial))..add(MainInitEvent()))
         ],
         child:
-        ChangeNotifierProvider<AppNotifier>(
-          create: (context) => AppNotifier(),
-          child: const MyApp(),
-        ),
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (context) => ColorNotifier()), 
+            ChangeNotifierProvider<AppNotifier>(create: (context) => AppNotifier()),
+          ],
+          builder: (context, child) {
+            return const MyApp();
+          },
+        )
+        
       ));
 }
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -95,7 +103,7 @@ class MyApp extends StatelessWidget {
               darkTheme: AppTheme.darkTheme,
               themeMode: ThemeCustomizer.instance.theme,
               navigatorKey: NavigationService.navigatorKey,
-              initialRoute: Paths.dashboardPath,
+              initialRoute: Routes.dashboardRoute,
               getPages: getPageRoute(),
               routingCallback: (value) {
                 /// call back moi lan chuyen page url
@@ -103,7 +111,19 @@ class MyApp extends StatelessWidget {
               },
               builder: (context, child) {
                 NavigationService.registerContext(context, update: true);
-                return Directionality(textDirection: AppTheme.textDirection, child: child ?? Container());
+                return Directionality(
+                  textDirection: AppTheme.textDirection,
+                  child: Overlay(
+                    initialEntries: [
+                      OverlayEntry(builder: (context) {
+                        return SelectionArea (
+                            selectionControls: materialTextSelectionControls,
+                            child: child ?? Container());
+                      })
+                    ],
+                  ),
+                );
+
               },
               localizationsDelegates: const [
                 S.delegate,

@@ -351,5 +351,6 @@
   "str_timeLine": "Dòng thời gian",
   "str_form_mask": "Mặt nạ biểu mẫu",
   "str_quill_editor": "Trình soạn thảo Quill",
-  "str_drag_drop": "Kéo thả"
+  "str_drag_drop": "Kéo thả",
+  "landing_page": "Landing page"
 }

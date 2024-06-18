@@ -351,5 +351,7 @@
   "str_timeLine": "TimeLine",
   "str_form_mask": "Masque de formulaire",
   "str_quill_editor": "Éditeur de plumes",
-  "str_drag_drop": "Glisser-déposer"
+  "str_drag_drop": "Glisser-déposer",
+  "landing_page": "Landing page"
+
 }

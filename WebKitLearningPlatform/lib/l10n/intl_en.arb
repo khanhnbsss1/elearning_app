@@ -349,5 +349,7 @@
   "str_timeLine": "TimeLine",
   "str_form_mask": "Form Mask",
   "str_quill_editor": "Quill Editor",
-  "str_drag_drop": "Drag drop"
+  "str_drag_drop": "Drag drop",
+  "landing_page": "Landing page"
+
 }
