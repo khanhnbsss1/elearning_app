@@ -1,21 +1,25 @@
 // ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/landing_page/mediaquery/mq.dart';
+import 'package:webkit/services/apis/course/models/course_list_response_model.dart';
 
 import '../../deshboard/deshboard.dart';
 import '../colornotifier.dart';
+import 'bloc/course_list_bloc.dart';
 
-class adventurehelp extends StatefulWidget {
-  const adventurehelp({super.key});
+class CourseList extends StatefulWidget {
+  const CourseList({super.key});
 
   @override
-  State<adventurehelp> createState() => _adventurehelpState();
+  State<CourseList> createState() => _CourseListState();
 }
 
-class _adventurehelpState extends State<adventurehelp> {
+class _CourseListState extends State<CourseList> {
   late ColorNotifier notifier;
 
   List chips = ['City', 'Beach', 'Outdoors', 'Romance'];
@@ -64,12 +68,34 @@ class _adventurehelpState extends State<adventurehelp> {
         .of(context)
         .size
         .width;
-    return LayoutBuilder(builder: (context, constraints) {
-      return adventure(constraints);
-    },);
+    return BlocProvider(
+        create: (context) {
+          return CourseListBloc(CourseListState())
+            ..add(CourseListInitEvent());
+        },
+        child: BlocConsumer<CourseListBloc, CourseListState>(
+            listener: (context, state) {
+              switch (state.blocStatus) {
+                case CourseListStatus.initial:
+                  break;
+                default:
+                  break;
+              }
+            },
+            builder: (BuildContext context, state) {
+              return LayoutBuilder(builder: (context, constraints) {
+                return buildCourseList(constraints: constraints, state: state);
+              },);
+            }));
+
   }
 
-  Widget adventure(constraints) {
+  Widget buildCourseList({required BoxConstraints constraints, required CourseListState state}) {
+    int lengthOfView = (state.isExpand??false)? constraints.maxWidth < 1300 ? 6 : 8: (state.courseListLandingPageResponseModel?.data??[]).length;
+    if(lengthOfView> (state.courseListLandingPageResponseModel?.data??[]).length)
+      {
+        lengthOfView = (state.courseListLandingPageResponseModel?.data??[]).length;
+      }
     return Container(
       width: constraints.maxWidth < 1300 ? constraints.maxWidth / 0.5 : constraints.maxWidth / 1.1,
       decoration: BoxDecoration(
@@ -81,13 +107,13 @@ class _adventurehelpState extends State<adventurehelp> {
         child: Column(
           crossAxisAlignment: constraints.maxWidth < 550 ? CrossAxisAlignment.center : CrossAxisAlignment.start,
           children: [
-            Text('Get inspiration for your next trip',
-              style: TextStyle(fontSize: constraints.maxWidth < 550 ? 28 : 50, fontFamily: 'gilroysemi',color: notifier.blackcolor),
-            ),
-            Text("sign up and we'll send the best deals to you", style: TextStyle(fontSize: constraints.maxWidth < 550 ? 18 : 25,
-                fontFamily: 'gilroymed',
-                color: notifier.greycolor),
-            ),
+            Text(
+                L10nX.getStr.courses_list, 
+                style: TextStyleConstant.textStyleBlack28w700.copyWith(fontSize: constraints.maxWidth < 550 ? 28 : 50,)
+            ), 
+            Text(
+            L10nX.getStr.register_to_enjoy_the_best_deals_for_you,
+            style: TextStyleConstant.textStyleBlack18w600.copyWith(fontSize: constraints.maxWidth < 550 ? 18 : 25, color: notifier.greycolor)),
             SizedBox(height: constraints.maxWidth < 550 ? 30 : 70,),
             constraints.maxWidth < 900 ? Column(
               children: [
@@ -415,12 +441,12 @@ class _adventurehelpState extends State<adventurehelp> {
                             height: 40,
                             child: ElevatedButton(
                               style: ButtonStyle(
-                                elevation: MaterialStateProperty.all(0),
-                                shape: MaterialStateProperty.all(
+                                elevation: WidgetStateProperty.all(0),
+                                shape: WidgetStateProperty.all(
                                     RoundedRectangleBorder(
                                       side: BorderSide(color: selectedindex == index ? notifier.buttoncolor : Colors.transparent),
                                         borderRadius: BorderRadius.circular(20))),
-                                backgroundColor: MaterialStateProperty.all(
+                                backgroundColor: WidgetStateProperty.all(
                                     selectedindex == index
                                         ? notifier.advchips
                                         : Colors.transparent),
@@ -539,7 +565,7 @@ class _adventurehelpState extends State<adventurehelp> {
               // height: constraints.maxWidth < 900 ? constraints.maxWidth / 0.152 : constraints.maxWidth < 1100 ? constraints.maxWidth / 0.66 : constraints.maxWidth < 1300 ? constraints.maxWidth / 1.35 : constraints.maxWidth / 1.8,
               width: constraints.maxWidth < 900 ? constraints.maxWidth / 0.2 : constraints.maxWidth < 1300 ? constraints.maxWidth / 0.5 : constraints.maxWidth / 1.2,
               child: GridView.builder(
-                itemCount: constraints.maxWidth < 1300 ? 6 : 8,
+                itemCount: lengthOfView,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -548,6 +574,7 @@ class _adventurehelpState extends State<adventurehelp> {
                     crossAxisSpacing: constraints.maxWidth / 40,
                     mainAxisExtent: constraints.maxWidth < 550 ? constraints.maxWidth / 0.917 : constraints.maxWidth < 700 ? constraints.maxWidth / 0.952 : constraints.maxWidth < 900 ? constraints.maxWidth / 0.98 : constraints.maxWidth < 1100 ? constraints.maxWidth / 1.9 : constraints.maxWidth < 1300 ? constraints.maxWidth / 2.9 : constraints.maxWidth / 3.8),
                 itemBuilder: (context, index) {
+                  CourseLandingPageInfo courseLandingPageInfo = (state.courseListLandingPageResponseModel?.data??[]).elementAt(index);
                   return Container(
                     decoration: BoxDecoration(
                         color: notifier.whitecolor,
@@ -563,8 +590,14 @@ class _adventurehelpState extends State<adventurehelp> {
                           ),
                           child: Stack(
                             children: [
-                              Image.asset(
-                               adventureimage[index],fit: BoxFit.cover,width: width / 1,
+                              (courseLandingPageInfo.image!.isNotEmpty)?
+                              Image.network(
+                                  (courseLandingPageInfo.image!.isNotEmpty)?courseLandingPageInfo.image!:'assets/deshboard/adventure/adventure5.png',
+                                  fit: BoxFit.cover,width: width / 1,
+                                  height: constraints.maxWidth < 300 ? constraints.maxWidth / 1.32 : constraints.maxWidth <550 ? constraints.maxWidth / 1.30 : constraints.maxWidth < 750 ? constraints.maxWidth / 1.26 : constraints.maxWidth < 900 ? constraints.maxWidth / 1.22 : constraints.maxWidth < 1100 ? constraints.maxWidth / 2.85 : constraints.maxWidth < 1300 ? constraints.maxWidth / 5 : constraints.maxWidth / 6.3):
+                              Image.network(
+                                  'assets/deshboard/adventure/adventure5.png',
+                                  fit: BoxFit.cover,width: width / 1,
                                   height: constraints.maxWidth < 300 ? constraints.maxWidth / 1.32 : constraints.maxWidth <550 ? constraints.maxWidth / 1.30 : constraints.maxWidth < 750 ? constraints.maxWidth / 1.26 : constraints.maxWidth < 900 ? constraints.maxWidth / 1.22 : constraints.maxWidth < 1100 ? constraints.maxWidth / 2.85 : constraints.maxWidth < 1300 ? constraints.maxWidth / 5 : constraints.maxWidth / 6.3),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

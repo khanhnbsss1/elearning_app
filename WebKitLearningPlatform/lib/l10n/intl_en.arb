@@ -1,6 +1,6 @@
 {
   "@@locale": "en",
-  "app_name": "aa",
+  "app_name": "YAX Chinese learning platform",
   "notify_error": "An error occurred!",
   "authen_invalid": "Username or password is incorrect",
   "appcept": "Accept",
@@ -350,6 +350,12 @@
   "str_form_mask": "Form Mask",
   "str_quill_editor": "Quill Editor",
   "str_drag_drop": "Drag drop",
-  "landing_page": "Landing page"
+  "landing_page": "Landing page",
+  "teacher_list": " Teacher list", 
+  "courses_list": "Course list", 
+  "lesson_list": "Lesson list", 
+  "level_str": "Level",
+  "teachers_teach_the_most":"Teachers who teach the most",
+  "register_to_enjoy_the_best_deals_for_you":"Register to enjoy the best deals for you"
 
 }

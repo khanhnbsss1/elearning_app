@@ -6,7 +6,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/localizations/bloc/main.exports.dart';
-import 'package:webkit/helpers/localizations/language.dart';
+import 'package:webkit/helpers/localizations/language_helper.dart';
 import 'package:webkit/helpers/theme/app_notifier.dart';
 import 'package:webkit/helpers/theme/app_style.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
@@ -43,193 +43,163 @@ class _TopBarState extends State<TopBar>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        return MainBloc(MainState(mainStatus: MainStatus.initial))..add(MainInitEvent());
-      },
-      child: BlocConsumer<MainBloc, MainState>(
-        listener: (context, state) {
-          switch(state.mainStatus)
-          {
-            case MainStatus.initial:
-              {
-                Locale locale = state.locale!;
-                mLanguageIndex = LANGUAGE_INDEX_MAPS[locale.languageCode]!;
-              }
-
-              break;
-            case MainStatus.onchangeLanguage:
-
-              break;
-            case MainStatus.unKnown:
-              break;
-            case MainStatus.onEnableDarkMode:
-            // TODO: Handle this case.
-              state.mainStatus = MainStatus.unKnown;
-              break;
-          }
-        },
-        builder: (BuildContext context, state) {
-          return MyCard(
-            shadow: MyShadow(position: MyShadowPosition.bottomRight, elevation: 0.5),
-            height: 60,
-            borderRadiusAll: 0,
-            padding: MySpacing.x(24),
-            color: topBarTheme.background.withAlpha(246),
+    return MyCard(
+      shadow: MyShadow(position: MyShadowPosition.bottomRight, elevation: 0.5),
+      height: 60,
+      borderRadiusAll: 0,
+      padding: MySpacing.x(24),
+      color: topBarTheme.background.withAlpha(246),
+      child: Row(
+        children: [
+          Row(
+            children: [
+              InkWell(
+                  splashColor: theme.colorScheme.onSurface,
+                  highlightColor: theme.colorScheme.onSurface,
+                  onTap: () {
+                    ThemeCustomizer.toggleLeftBarCondensed();
+                  },
+                  child: Icon(
+                    LucideIcons.menu,
+                    color: topBarTheme.onBackground,
+                  )),
+              MySpacing.width(24),
+              SizedBox(
+                width: 200,
+                child: TextFormField(
+                  maxLines: 1,
+                  style: MyTextStyle.bodyMedium(),
+                  decoration: InputDecoration(
+                      hintText: "search",
+                      hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                      border: outlineInputBorder,
+                      enabledBorder: outlineInputBorder,
+                      focusedBorder: focusedInputBorder,
+                      prefixIcon: const Align(
+                          alignment: Alignment.center,
+                          child: Icon(
+                            FeatherIcons.search,
+                            size: 14,
+                          )),
+                      prefixIconConstraints: const BoxConstraints(
+                          minWidth: 36,
+                          maxWidth: 36,
+                          minHeight: 32,
+                          maxHeight: 32),
+                      contentPadding: MySpacing.xy(16, 12),
+                      isCollapsed: true,
+                      floatingLabelBehavior: FloatingLabelBehavior.never),
+                ),
+              ),
+            ],
+          ),
+          Expanded(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Row(
-                  children: [
-                    InkWell(
-                        splashColor: theme.colorScheme.onSurface,
-                        highlightColor: theme.colorScheme.onSurface,
-                        onTap: () {
-                          ThemeCustomizer.toggleLeftBarCondensed();
-                        },
-                        child: Icon(
-                          LucideIcons.menu,
-                          color: topBarTheme.onBackground,
-                        )),
-                    MySpacing.width(24),
-                    SizedBox(
-                      width: 200,
-                      child: TextFormField(
-                        maxLines: 1,
-                        style: MyTextStyle.bodyMedium(),
-                        decoration: InputDecoration(
-                            hintText: "search",
-                            hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                            border: outlineInputBorder,
-                            enabledBorder: outlineInputBorder,
-                            focusedBorder: focusedInputBorder,
-                            prefixIcon: const Align(
-                                alignment: Alignment.center,
-                                child: Icon(
-                                  FeatherIcons.search,
-                                  size: 14,
-                                )),
-                            prefixIconConstraints: const BoxConstraints(
-                                minWidth: 36,
-                                maxWidth: 36,
-                                minHeight: 32,
-                                maxHeight: 32),
-                            contentPadding: MySpacing.xy(16, 12),
-                            isCollapsed: true,
-                            floatingLabelBehavior: FloatingLabelBehavior.never),
+                InkWell(
+                  onTap: () {
+                    ThemeCustomizer.setTheme(
+                        ThemeCustomizer.instance.theme == ThemeMode.dark
+                            ? ThemeMode.light
+                            : ThemeMode.dark);
+                  },
+                  child: Icon(
+                    ThemeCustomizer.instance.theme == ThemeMode.dark
+                        ? FeatherIcons.sun
+                        : FeatherIcons.moon,
+                    size: 18,
+                    color: topBarTheme.onBackground,
+                  ),
+                ),
+                MySpacing.width(12),
+                CustomPopupMenu(
+                  backdrop: true,
+                  hideFn: (_) => languageHideFn = _,
+                  onChange: (_) {},
+                  offsetX: -36,
+                  menu: Padding(
+                    padding: MySpacing.xy(8, 8),
+                    child: Center(
+                      child: ClipRRect(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        borderRadius: BorderRadius.circular(2),
+                        child:
+
+                        Image.asset(
+                          "assets/lang/${LanguageHelper().getCurrentLocale().languageCode??'vi'}.png",
+                          width: 24,
+                          height: 18,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ],
-                ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          ThemeCustomizer.setTheme(
-                              ThemeCustomizer.instance.theme == ThemeMode.dark
-                                  ? ThemeMode.light
-                                  : ThemeMode.dark);
-                        },
-                        child: Icon(
-                          ThemeCustomizer.instance.theme == ThemeMode.dark
-                              ? FeatherIcons.sun
-                              : FeatherIcons.moon,
-                          size: 18,
-                          color: topBarTheme.onBackground,
-                        ),
-                      ),
-                      MySpacing.width(12),
-                      CustomPopupMenu(
-                        backdrop: true,
-                        hideFn: (_) => languageHideFn = _,
-                        onChange: (_) {},
-                        offsetX: -36,
-                        menu: Padding(
-                          padding: MySpacing.xy(8, 8),
-                          child: Center(
-                            child: ClipRRect(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              borderRadius: BorderRadius.circular(2),
-                              child: 
-                                  
-                              Image.asset(
-                                "assets/lang/${state.locale?.languageCode??'vi'}.png",
-                                width: 24,
-                                height: 18,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
-                        menuBuilder: (_) => buildLanguageSelector(state, context),
-                      ),
-                      MySpacing.width(6),
-                      CustomPopupMenu(
-                        backdrop: true,
-                        onChange: (_) {},
-                        offsetX: -120,
-                        menu: Padding(
-                          padding: MySpacing.xy(8, 8),
-                          child: const Center(
-                            child: Icon(
-                              FeatherIcons.bell,
-                              size: 18,
-                            ),
-                          ),
-                        ),
-                        menuBuilder: (_) => buildNotifications(),
-                      ),
-                      MySpacing.width(4),
-                      CustomPopupMenu(
-                        backdrop: false,
-                        onChange: (_) {},
-                        offsetX: -60,
-                        offsetY: 8,
-                        menu: Padding(
-                          padding: MySpacing.xy(8, 8),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              MyContainer.rounded(
-                                  paddingAll: 0,
-                                  child: Image.asset(
-                                    Images.avatars[0],
-                                    height: 28,
-                                    width: 28,
-                                    fit: BoxFit.cover,
-                                  )),
-                              MySpacing.width(8),
-                              MyText.labelLarge("Den")
-                            ],
-                          ),
-                        ),
-                        menuBuilder: (context) {
-                          return  buildAccountMenu();
-                        },
-                      ),
-                    ],
                   ),
-                )
+                  menuBuilder: (_) => buildLanguageSelector( context),
+                ),
+                MySpacing.width(6),
+                CustomPopupMenu(
+                  backdrop: true,
+                  onChange: (_) {},
+                  offsetX: -120,
+                  menu: Padding(
+                    padding: MySpacing.xy(8, 8),
+                    child: const Center(
+                      child: Icon(
+                        FeatherIcons.bell,
+                        size: 18,
+                      ),
+                    ),
+                  ),
+                  menuBuilder: (_) => buildNotifications(),
+                ),
+                MySpacing.width(4),
+                CustomPopupMenu(
+                  backdrop: false,
+                  onChange: (_) {},
+                  offsetX: -60,
+                  offsetY: 8,
+                  menu: Padding(
+                    padding: MySpacing.xy(8, 8),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        MyContainer.rounded(
+                            paddingAll: 0,
+                            child: Image.asset(
+                              Images.avatars[0],
+                              height: 28,
+                              width: 28,
+                              fit: BoxFit.cover,
+                            )),
+                        MySpacing.width(8),
+                        MyText.labelLarge("Den")
+                      ],
+                    ),
+                  ),
+                  menuBuilder: (context) {
+                    return  buildAccountMenu();
+                  },
+                ),
               ],
             ),
-          );
-        },
+          )
+        ],
       ),
     );
-    
+
   }
 
-  Widget buildLanguageSelector(MainState state, BuildContext context) {
+  Widget buildLanguageSelector( BuildContext context) {
     List<Widget> childrenLanguage=[];
-    for(Language language in state.supportedLanguages)
+    for(LanguageInfo language in LanguageHelper().supportedLanguages)
       {
         childrenLanguage.add(MyButton.text(
           padding: MySpacing.xy(8, 4),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           splashColor: contentTheme.onBackground.withAlpha(20),
           onTap: () async {
-            changeLanguage(language, context);
+            LanguageHelper().changeLanguage(language, context);
           },
           child: Row(
             children: [
@@ -257,7 +227,7 @@ class _TopBarState extends State<TopBar>
       ),
     );
   }
-  void changeLanguage(Language language, BuildContext context) {
+  void changeLanguage(LanguageInfo language, BuildContext context) {
     Locale locale = LANGUAGE_MAPS[language.languageIndex]!;
     AppNotifier().changeLanguage(language, notify: false);
     BlocProvider.of<MainBloc>(NavigationService.globalContext!).add(MainChangeLanguageEvent(locale: locale));

@@ -4,18 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
+import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/constant/dimens_constant.dart';
 
-import '../helper/colornotifier.dart';
+import '../components/colornotifier.dart';
 import '../mediaquery/mq.dart';
 
-class endofpage extends StatefulWidget {
-  const endofpage({super.key});
+class EndOfPage extends StatefulWidget {
+  const EndOfPage({super.key});
 
   @override
-  State<endofpage> createState() => _endofpageState();
+  State<EndOfPage> createState() => _EndOfPageState();
 }
 
-class _endofpageState extends State<endofpage> {
+class _EndOfPageState extends State<EndOfPage> {
   late ColorNotifier notifier;
   List chips = [
     'Stays',
@@ -130,8 +132,7 @@ class _endofpageState extends State<endofpage> {
                     children: [
                       Row(
                         children: [
-                          SvgPicture.asset('assets/logo/kukuLogo.svg',
-                              height: constraints.maxWidth < 300 ? 27 : 35),
+                          ImageManager().getPngImage(ImageManager.logo, height: constraints.maxWidth < Dimens.size300 ? Dimens.size27 : Dimens.size35),
                           const SizedBox(width: 5),
                           Text(
                             'Kuku.io',
@@ -229,8 +230,7 @@ class _endofpageState extends State<endofpage> {
                         children: [
                           Row(
                             children: [
-                              SvgPicture.asset('assets/logo/kukuLogo.svg',
-                                  height: 35),
+                              ImageManager().getPngImage(ImageManager.logo, height: Dimens.size35),
                               const SizedBox(width: 5),
                               Text(
                                 'Kuku.io',

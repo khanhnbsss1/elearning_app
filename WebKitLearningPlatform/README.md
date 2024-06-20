@@ -21,7 +21,7 @@ samples, guidance on mobile development, and a full API reference.
       - flutter run -t lib/main.dart --flavor Webkit
   - Web:
     - Webkit
-      - flutter run web --dart-define=flavor=dev -t lib/main.dart
+      - flutter run -d chrome --dart-define=flavor=dev -t lib/main.dart -d chrome --web-browser-flag "--disable-web-security"
       - flutter run web --dart-define=flavor=stg -t lib/main.dart
       - flutter run web --dart-define=flavor=prod -t lib/main.dart
 
@@ -30,8 +30,9 @@ samples, guidance on mobile development, and a full API reference.
         - flutter pub run flutter_launcher_icons
     - Android
         - Webkit
-            - flutter build apk -t lib/main.dart --release --flavor FinancialAdmin --no-tree-shake-icons
+            - flutter build apk -t lib/main.dart --release --flavor YAXChineseLearning --no-tree-shake-icons
             - flutter build appbundle -t lib/main.dart --release --flavor FinancialAdmin  --no-tree-shake-icons
+            - flutter build apk --flavor YAXChineseLearning -t lib/main.dart --release
     - IOS
         - Webkit
             - flutter build ios -t lib/main.dart --flavor Webkit --no-tree-shake-icons

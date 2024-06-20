@@ -10,7 +10,7 @@ class InstanceManager{
     return _singletonBlocManager;
   }
   InstanceManager._internal();
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   BuildContext ?rootContext;
 
   bool firstLogin = true;

@@ -2,9 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webkit/landing_page/mediaquery/mq.dart';
 
-import '../../mediaquery/mq.dart';
-import '../colornotifier.dart';
+import 'colornotifier.dart';
+
 
 class nh extends StatefulWidget {
   const nh({super.key});
@@ -193,12 +194,12 @@ class _nhState extends State<nh> {
                         height: 35,
                         child: ElevatedButton(
                           style: ButtonStyle(
-                            elevation: MaterialStateProperty.all(0),
-                            shape: MaterialStateProperty.all(
+                            elevation: WidgetStateProperty.all(0),
+                            shape: WidgetStateProperty.all(
                                 RoundedRectangleBorder(
                                     side: BorderSide(color: selectedindex == index ? notifier.buttoncolor : Colors.transparent),
                                     borderRadius: BorderRadius.circular(20))),
-                            backgroundColor: MaterialStateProperty.all(
+                            backgroundColor: WidgetStateProperty.all(
                                 selectedindex == index
                                     ? notifier.advchips
                                     : Colors.transparent),

@@ -8,8 +8,8 @@ import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:webkit/landing_page/deshboard/deshboard.dart';
 
-import '../../mediaquery/mq.dart';
-import '../colornotifier.dart';
+import '../mediaquery/mq.dart';
+import 'colornotifier.dart';
 
 class help extends StatefulWidget {
   const help({super.key});

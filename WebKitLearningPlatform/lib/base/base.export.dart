@@ -4,7 +4,6 @@ export 'theme/theme_data.dart';
 export 'image_manager/images_constant.dart';
 export 'theme/colors_app.dart';
 export 'package:webkit/l10n/l10n_extention.dart';
-export 'package:webkit/generated/l10n.dart';
 export 'package:webkit/base/utils/file_utils.dart';
 export '../../../../base/widgets/sms_auto_fill/sms_auto_fill.dart';
 export 'package:webkit/base/constant/dummy_manager .dart';

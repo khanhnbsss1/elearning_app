@@ -1,7 +1,7 @@
 {
   "@@locale": "zh",
 
-  "app_name":"aa",
+  "app_name":"越爱学汉语学习平台",
   "notify_error": "发生错误！",
   "authen_invalid": "用户名或密码不正确",
   "appcept": "接受",
@@ -353,6 +353,11 @@
   "str_form_mask": "表单蒙版",
   "str_quill_editor": "Quill 编辑器",
   "str_drag_drop": "拖放",
-  "landing_page": "Landing page"
-
+  "landing_page": "Landing page",
+  "teacher_list": "教师列表", 
+  "courses_list": "课程列表", 
+  "lesson_list": "课程列表", 
+  "level_str": "级别",
+  "teachers_teach_the_most":"教得最多的老师",
+  "register_to_enjoy_the_best_deals_for_you":"注册即可享受最优惠的价格"
 }

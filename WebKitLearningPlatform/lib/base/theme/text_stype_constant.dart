@@ -31,6 +31,8 @@ double fontSize36 = Dimens.size36;
 double fontSize35 = Dimens.size35;
 double fontSize30 = Dimens.size32;
 double fontSize24 = Dimens.size26;
+double fontSize28 = Dimens.size28;
+
 double fontSize20 = Dimens.size22;
 double fontSize18 = Dimens.size18;
 double fontSize17 = Dimens.size17;
@@ -97,6 +99,7 @@ class TextStyleConstant{
   static 	TextStyle  textStyleBlack20w500 = baseStyle.copyWithCustom(fontSize: fontSize20, color: ColorConst.blackColor, fontWeight: fontWeight500);
 
   static 	TextStyle  textStyleBlack24w700 = baseStyle.copyWithCustom(fontSize: fontSize24, color: ColorConst.blackColor, fontWeight: fontWeight700);
+  static 	TextStyle  textStyleBlack28w700 = baseStyle.copyWithCustom(fontSize: fontSize28, color: ColorConst.blackColor, fontWeight: fontWeight700);
 
 
   static 	TextStyle  textStyleMainColor14w600 = baseStyle.copyWithCustom(fontSize: fontSize14, color: ColorConst.mainColor, fontWeight: fontWeight600);
@@ -231,6 +234,7 @@ class TextStyleConstant{
      textStyleBlack30w700 = baseStyle.copyWithCustom(fontSize: fontSize30, color: ColorConst.blackColor, fontWeight: fontWeight700);
      textStyleBlack10w500 = baseStyle.copyWithCustom(fontSize: fontSize10, color: ColorConst.blackColor, fontWeight: fontWeight500);
      textStyleBlack30w500 = baseStyle.copyWithCustom(fontSize: fontSize30, color: ColorConst.blackColor, fontWeight: fontWeight500);
+     textStyleBlack28w700 = baseStyle.copyWithCustom(fontSize: fontSize28, color: ColorConst.blackColor, fontWeight: fontWeight700);
   }
 }
 extension StringX on TextStyle {

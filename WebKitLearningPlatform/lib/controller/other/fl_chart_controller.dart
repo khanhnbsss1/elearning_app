@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:fl_chart/fl_chart.dart';
 
 import 'package:flutter/material.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/my_controller.dart';
 
 class FlChartController extends MyController {
@@ -105,20 +106,17 @@ class FlChartController extends MyController {
       );
 
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 16,
-    );
+    TextStyle style = TextStyleConstant.textStyleBlack16w600;
     Widget text;
     switch (value.toInt()) {
       case 2:
-        text = const Text('SEPT', style: style);
+        text =  Text('SEPT', style: style);
         break;
       case 7:
-        text = const Text('OCT', style: style);
+        text =  Text('OCT', style: style);
         break;
       case 12:
-        text = const Text('DEC', style: style);
+        text =  Text('DEC', style: style);
         break;
       default:
         text = const Text('');
@@ -133,10 +131,7 @@ class FlChartController extends MyController {
   }
 
   Widget leftTitleWidgets(double value, TitleMeta meta) {
-    const style = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 14,
-    );
+    TextStyle style = TextStyleConstant.textStyleBlack14w600;
     String text;
     switch (value.toInt()) {
       case 1:
@@ -421,10 +416,7 @@ class FlChartController extends MyController {
           ) {
             return BarTooltipItem(
               rod.toY.round().toString(),
-              const TextStyle(
-                color: Colors.cyan,
-                fontWeight: FontWeight.bold,
-              ),
+              TextStyleConstant.textStyleBlack14w600.copyWith(color: Colors.cyan,),
             );
           },
         ),
@@ -451,11 +443,7 @@ class FlChartController extends MyController {
       );
 
   Widget getTitles(double value, TitleMeta meta) {
-    final style = TextStyle(
-      color: Colors.blue.shade300,
-      fontWeight: FontWeight.bold,
-      fontSize: 14,
-    );
+    final style = TextStyleConstant.textStyleBlack14w600.copyWith(color: Colors.blue.shade300,);
     String text;
     switch (value.toInt()) {
       case 0:

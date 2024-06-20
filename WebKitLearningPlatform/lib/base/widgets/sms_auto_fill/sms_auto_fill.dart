@@ -52,10 +52,7 @@ class _SMSAutoFillState extends State<SMSAutoFill> {
           final defaultPinTheme = PinTheme(
             width: size,
             height: size,
-            textStyle: TextStyle(
-              fontSize: 22,
-              color: ColorConst.blackColor,
-            ),
+            textStyle: TextStyleConstant.textStyleBlack20w500,
             decoration: BoxDecoration(
               color: ColorConst.bgSettingButtonColor,
               borderRadius:  BorderRadius.all(Radius.circular(size/2)),

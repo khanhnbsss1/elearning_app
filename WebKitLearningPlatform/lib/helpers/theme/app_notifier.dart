@@ -5,7 +5,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:webkit/helpers/localizations/language.dart';
 import 'package:webkit/helpers/localizations/language_helper.dart';
 import 'package:webkit/helpers/storage/local_storage.dart';
 import 'package:webkit/helpers/theme/app_style.dart';
@@ -42,7 +41,7 @@ class AppNotifier extends ChangeNotifier {
     if (notify) notifyListeners();
   }
 
-  Future<void> changeLanguage(Language language,
+  Future<void> changeLanguage(LanguageInfo language,
       {
         bool notify = true,
         bool changeDirection = true,

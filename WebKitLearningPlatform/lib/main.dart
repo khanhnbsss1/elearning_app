@@ -5,19 +5,18 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'package:webkit/helpers/localizations/app_localization_delegate.dart';
 import 'package:webkit/routes/app_routes.dart';
 import 'package:webkit/routes/routes.dart';
-//import 'base/firebase_manager/firebase_options.dart';
 import 'base/device/device_manager.dart';
 import 'base/enviroments/flavor_settings.dart';
 import 'base/firebase_manager/firebase_options.dart';
+import 'base/resizer/fetch_pixels.dart';
 import 'base/store/cache_storage.dart';
 import 'base/theme/colors_app.dart';
 import 'base/utils/file_utils.dart';
 import 'generated/l10n.dart';
 import 'helpers/localizations/bloc/main_bloc.dart';
-import 'helpers/localizations/language.dart';
+import 'helpers/localizations/language_helper.dart';
 import 'helpers/services/navigation_service.dart';
 import 'helpers/storage/local_storage.dart';
 import 'helpers/theme/app_notifier.dart';
@@ -26,7 +25,7 @@ import 'helpers/theme/theme_customizer.dart';
 import 'l10n/l10n_extention.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'landing_page/helper/colornotifier.dart';
+import 'landing_page/components/colornotifier.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -74,6 +73,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FetchPixels(context);
     return Consumer<AppNotifier>(
       builder: (_, notifier, ___) {
         return BlocConsumer<MainBloc, MainState>(
@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
 
                 break;
               case MainStatus.onchangeLanguage:
-
+                state.mainStatus = MainStatus.unKnown;
                 break;
               case MainStatus.unKnown:
                 break;
@@ -96,57 +96,61 @@ class MyApp extends StatelessWidget {
             }
           },
           builder: (BuildContext context, state)  {
-            return GetMaterialApp(
-              key: UniqueKey(),
-              debugShowCheckedModeBanner: false,
-              theme: AppTheme.lightTheme,
-              darkTheme: AppTheme.darkTheme,
-              themeMode: ThemeCustomizer.instance.theme,
-              navigatorKey: NavigationService.navigatorKey,
-              initialRoute: Routes.dashboardRoute,
-              getPages: getPageRoute(),
-              routingCallback: (value) {
-                /// call back moi lan chuyen page url
-                print(value);
-              },
-              builder: (context, child) {
-                NavigationService.registerContext(context, update: true);
-                return Directionality(
-                  textDirection: AppTheme.textDirection,
-                  child: Overlay(
-                    initialEntries: [
-                      OverlayEntry(builder: (context) {
-                        return SelectionArea (
-                            selectionControls: materialTextSelectionControls,
-                            child: child ?? Container());
-                      })
-                    ],
-                  ),
-                );
+            return Consumer<AppNotifier>(
+              builder: (_, notifier, ___) {
+                return GetMaterialApp(
+                  key: UniqueKey(),
+                  debugShowCheckedModeBanner: false,
+                  theme: AppTheme.lightTheme,
+                  darkTheme: AppTheme.darkTheme,
+                  themeMode: ThemeCustomizer.instance.theme,
+                  navigatorKey: NavigationService.navigatorKey,
+                  initialRoute: Routes.dashboardRoute,
+                  getPages: getPageRoute(),
+                  routingCallback: (value) {
+                    /// call back moi lan chuyen page url
+                    print(value);
+                  },
+                  builder: (context, child) {
+                    NavigationService.registerContext(context, update: true);
+                    return Directionality(
+                      textDirection: AppTheme.textDirection,
+                      child: Overlay(
+                        initialEntries: [
+                          OverlayEntry(builder: (context) {
+                            return SelectionArea (
+                                selectionControls: materialTextSelectionControls,
+                                child: child ?? Container());
+                          })
+                        ],
+                      ),
+                    );
 
+                  },
+                  localizationsDelegates: const [
+                    S.delegate,
+                    L10nX.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: LanguageHelper().supportedLanguages
+                      .map((language) => (language.scripCode==null)?Locale(language.languageCode!, language.country!):
+                  Locale.fromSubtags(languageCode: language.languageCode!, countryCode: language.country!,scriptCode: language.scripCode) )
+                      .toList(),
+                  locale: LanguageHelper().getCurrentLocale(),
+                  localeResolutionCallback: (locale, supportedLocales) {
+                    for (var supportedLocale in supportedLocales) {
+                      if (supportedLocale.languageCode == locale?.languageCode &&
+                          supportedLocale.countryCode == locale?.countryCode) {
+                        return supportedLocale;
+                      }
+                    }
+                    return supportedLocales.first;
+                  },
+                  // home: ButtonsPage(),
+                );
               },
-              localizationsDelegates: const [
-                S.delegate,
-                L10nX.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: state.supportedLanguages
-                  .map((language) => (language.scripCode==null)?Locale(language.languageCode!, language.country!):
-              Locale.fromSubtags(languageCode: language.languageCode!, countryCode: language.country!,scriptCode: language.scripCode) )
-                  .toList(),
-              locale: state.locale,
-              localeResolutionCallback: (locale, supportedLocales) {
-                for (var supportedLocale in supportedLocales) {
-                  if (supportedLocale.languageCode == locale?.languageCode &&
-                      supportedLocale.countryCode == locale?.countryCode) {
-                    return supportedLocale;
-                  }
-                }
-                return supportedLocales.first;
-              },
-              // home: ButtonsPage(),
             );
           },
         );

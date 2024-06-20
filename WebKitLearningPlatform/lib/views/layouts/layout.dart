@@ -14,6 +14,8 @@ import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/images.dart';
+import 'package:webkit/routes/app_pages.dart';
+import 'package:webkit/routes/app_routes.dart';
 import 'package:webkit/views/layouts/left_bar.dart';
 import 'package:webkit/views/layouts/right_bar.dart';
 import 'package:webkit/views/layouts/top_bar.dart';
@@ -287,7 +289,9 @@ class Layout extends StatelessWidget {
             padding: MySpacing.xy(8, 8),
             child: MyButton(
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              onTap: () => {},
+              onTap: () {
+                AppPages.route(Routes.landingPageRoute, isReplace: true);
+              },
               borderRadiusAll: AppStyle.buttonRadius.medium,
               padding: MySpacing.xy(8, 4),
               splashColor: contentTheme.danger.withAlpha(28),

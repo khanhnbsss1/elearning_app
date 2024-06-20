@@ -1,6 +1,6 @@
 {
   "@@locale": "vi",
-  "app_name": "aa",
+  "app_name": "YAX Chinese learning platform",
   "notify_error": "Đã có lỗi xảy ra!",
   "authen_invalid": "Tên đăng nhập hoặc mật khẩu không đúng",
   "appcept": "Chấp nhận",
@@ -352,5 +352,11 @@
   "str_form_mask": "Mặt nạ biểu mẫu",
   "str_quill_editor": "Trình soạn thảo Quill",
   "str_drag_drop": "Kéo thả",
-  "landing_page": "Landing page"
+  "landing_page": "Landing page",
+  "teacher_list": " Danh sách giáo viên",
+  "courses_list": "Danh sách khóa học",
+  "lesson_list": "Danh sách bài học",
+  "level_str": "Cấp độ",
+  "teachers_teach_the_most":"Giáo viên dạy nhiều nhất",
+  "register_to_enjoy_the_best_deals_for_you":"Đăng ký để được hưởng những ưu đãi tốt nhất cho bạn"
 }

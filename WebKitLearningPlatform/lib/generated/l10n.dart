@@ -50,10 +50,10 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `aa`
+  /// `YAX Chinese learning platform`
   String get app_name {
     return Intl.message(
-      'aa',
+      'YAX Chinese learning platform',
       name: 'app_name',
       desc: '',
       args: [],
@@ -3549,6 +3549,66 @@ class S {
       args: [],
     );
   }
+
+  /// ` Teacher list`
+  String get teacher_list {
+    return Intl.message(
+      ' Teacher list',
+      name: 'teacher_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Course list`
+  String get courses_list {
+    return Intl.message(
+      'Course list',
+      name: 'courses_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lesson list`
+  String get lesson_list {
+    return Intl.message(
+      'Lesson list',
+      name: 'lesson_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Level`
+  String get level_str {
+    return Intl.message(
+      'Level',
+      name: 'level_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Teachers who teach the most`
+  String get teachers_teach_the_most {
+    return Intl.message(
+      'Teachers who teach the most',
+      name: 'teachers_teach_the_most',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register to enjoy the best deals for you`
+  String get register_to_enjoy_the_best_deals_for_you {
+    return Intl.message(
+      'Register to enjoy the best deals for you',
+      name: 'register_to_enjoy_the_best_deals_for_you',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -3557,8 +3617,6 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
-      Locale.fromSubtags(languageCode: 'es'),
-      Locale.fromSubtags(languageCode: 'fr'),
       Locale.fromSubtags(languageCode: 'vi'),
       Locale.fromSubtags(languageCode: 'zh'),
     ];

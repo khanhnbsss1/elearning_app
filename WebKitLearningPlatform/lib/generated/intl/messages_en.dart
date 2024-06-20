@@ -33,7 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_products": MessageLookupByLibrary.simpleMessage("Add products"),
         "alert": MessageLookupByLibrary.simpleMessage("Alert"),
         "animated": MessageLookupByLibrary.simpleMessage("Animated"),
-        "app_name": MessageLookupByLibrary.simpleMessage("aa"),
+        "app_name": MessageLookupByLibrary.simpleMessage(
+            "YAX Chinese learning platform"),
         "appcept": MessageLookupByLibrary.simpleMessage("Accept"),
         "apps": MessageLookupByLibrary.simpleMessage("Apps"),
         "are_you_ready_send_command": MessageLookupByLibrary.simpleMessage(
@@ -99,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "FFTSolution - Copyright 2022"),
+        "courses_list": MessageLookupByLibrary.simpleMessage("Course list"),
         "create_product":
             MessageLookupByLibrary.simpleMessage("Create product"),
         "created_at": MessageLookupByLibrary.simpleMessage("Created at"),
@@ -177,6 +179,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "last_week": MessageLookupByLibrary.simpleMessage("Last week"),
         "left": MessageLookupByLibrary.simpleMessage("Left"),
         "left_dialog": MessageLookupByLibrary.simpleMessage("Left dialog"),
+        "lesson_list": MessageLookupByLibrary.simpleMessage("Lesson list"),
+        "level_str": MessageLookupByLibrary.simpleMessage("Level"),
         "license_copyright":
             MessageLookupByLibrary.simpleMessage("License & copyright"),
         "light": MessageLookupByLibrary.simpleMessage("Light"),
@@ -254,6 +258,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "rating": MessageLookupByLibrary.simpleMessage("Rating"),
         "re_create": MessageLookupByLibrary.simpleMessage("Create new"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "register_to_enjoy_the_best_deals_for_you":
+            MessageLookupByLibrary.simpleMessage(
+                "Register to enjoy the best deals for you"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Reset password"),
         "result": MessageLookupByLibrary.simpleMessage("Result"),
@@ -401,6 +408,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tabs": MessageLookupByLibrary.simpleMessage("Tabs"),
         "tags": MessageLookupByLibrary.simpleMessage("Tags"),
         "target": MessageLookupByLibrary.simpleMessage("Target"),
+        "teacher_list": MessageLookupByLibrary.simpleMessage(" Teacher list"),
+        "teachers_teach_the_most":
+            MessageLookupByLibrary.simpleMessage("Teachers who teach the most"),
         "terms_conditions":
             MessageLookupByLibrary.simpleMessage("terms & conditions"),
         "terms_of_service_text":

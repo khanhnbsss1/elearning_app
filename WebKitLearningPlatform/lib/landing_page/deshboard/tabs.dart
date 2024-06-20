@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import '../helper/colornotifier.dart';
+import '../components/colornotifier.dart';
 import '../mediaquery/mq.dart';
 import 'deshboard.dart';
 

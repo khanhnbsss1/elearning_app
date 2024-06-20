@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webkit/base/base.export.dart';
 
+import 'components/colornotifier.dart';
 import 'deshboard/deshboard.dart';
-import 'helper/colornotifier.dart';
 
 class LandingPageSplash extends StatefulWidget {
   const LandingPageSplash({super.key});
@@ -22,7 +23,7 @@ class _LandingPageSplashState extends State<LandingPageSplash> {
 
   void initialization() async {
     await Future.delayed(
-      const Duration(seconds: 3),
+      const Duration(seconds: 1),
           () {
         Navigator.pushReplacement(
           context,
@@ -45,7 +46,7 @@ class _LandingPageSplashState extends State<LandingPageSplash> {
           children: [
             Image.asset('assets/splashImage/preloader.gif'),
             const SizedBox(height: 20,),
-            Text('Kuku.io',style: TextStyle(fontSize: 28,fontFamily: 'gilroybold',color: notifier.blackcolor),),
+            Text('Kuku.io',style: TextStyleConstant.textStyleBlack28w700),
           ],
         ),
       ),

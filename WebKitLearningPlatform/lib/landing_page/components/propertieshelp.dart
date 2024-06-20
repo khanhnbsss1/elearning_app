@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
-import '../../mediaquery/mq.dart';
-import '../colornotifier.dart';
+import '../mediaquery/mq.dart';
+import 'colornotifier.dart';
 
-class ph extends StatefulWidget {
-  const ph({super.key});
+class TeacherList extends StatefulWidget {
+  const TeacherList({super.key});
 
   @override
-  State<ph> createState() => _phState();
+  State<TeacherList> createState() => _TeacherListState();
 }
 
-class _phState extends State<ph> {
+class _TeacherListState extends State<TeacherList> {
   late ColorNotifier notifier;
   List propimage = [
     'assets/deshboard/properties/popPlaces1.png',
@@ -341,10 +341,10 @@ class _phState extends State<ph> {
             child: ElevatedButton(
                 style: ButtonStyle(
                     alignment: Alignment.center,
-                    elevation: MaterialStateProperty.all(0),
-                    side: MaterialStateProperty.all(BorderSide(color: isHover ? Colors.transparent : notifier.greycolor,width: 1)),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
-                    backgroundColor: MaterialStateProperty.all(isHover ? (notifier.isDark ? const Color(0xFF777E90) : notifier.blackcolor) : Colors.transparent),
+                    elevation: WidgetStateProperty.all(0),
+                    side: WidgetStateProperty.all(BorderSide(color: isHover ? Colors.transparent : notifier.greycolor,width: 1)),
+                    shape: WidgetStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+                    backgroundColor: WidgetStateProperty.all(isHover ? (notifier.isDark ? const Color(0xFF777E90) : notifier.blackcolor) : Colors.transparent),
                 ),
                 onPressed: () {
                   setState(() {

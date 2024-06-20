@@ -7,6 +7,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/theme/admin_theme.dart';
 import 'package:webkit/helpers/widgets/my.dart';
 import 'package:webkit/helpers/widgets/my_breadcrumb_item.dart';
@@ -116,10 +117,7 @@ class AppTheme {
       tickMarkShape: RoundSliderTickMarkShape(),
       inactiveTickMarkColor: Colors.red[100],
       valueIndicatorShape: PaddleSliderValueIndicatorShape(),
-      valueIndicatorTextStyle: TextStyle(
-        color: Color(0xffeeeeee),
-      ),
-    ),
+      valueIndicatorTextStyle: TextStyleConstant.textStyleBlack14w400.copyWith(color: Color(0xffeeeeee))),
     checkboxTheme: CheckboxThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(2),
@@ -208,9 +206,7 @@ class AppTheme {
       tickMarkShape: RoundSliderTickMarkShape(),
       inactiveTickMarkColor: Colors.red[100],
       valueIndicatorShape: PaddleSliderValueIndicatorShape(),
-      valueIndicatorTextStyle: TextStyle(
-        color: Colors.white,
-      ),
+      valueIndicatorTextStyle: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.whiteColor)
     ),
 
     ///Other Color

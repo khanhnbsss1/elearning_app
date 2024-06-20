@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../helper/colornotifier.dart';
+import '../components/colornotifier.dart';
 import '../mediaquery/mq.dart';
 
 class placeshelp extends StatefulWidget {

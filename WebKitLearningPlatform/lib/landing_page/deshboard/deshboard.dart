@@ -2,25 +2,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/landing_page/deshboard/places.dart';
+import 'package:webkit/helpers/localizations/language_helper.dart';
+import 'package:webkit/helpers/widgets/my_spacing.dart';
+import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/landing_page/deshboard/tabs.dart';
-import 'package:webkit/landing_page/helper/helperwidget/adventurehelp.dart';
-import 'package:webkit/landing_page/helper/helperwidget/propertieshelp.dart';
 import 'package:webkit/views/auth/login/login.dart';
 import 'package:webkit/views/auth/register.dart';
 
-import '../helper/colornotifier.dart';
-import '../helper/helperwidget/helperwidget.dart';
-import '../helper/helperwidget/naturehelp.dart';
+import '../components/colornotifier.dart';
+import '../components/course_list/course_list.dart';
+import '../components/helperwidget.dart';
 import '../mediaquery/mq.dart';
-import 'bookticket.dart';
-import 'browsebycategory.dart';
 import 'endofpage.dart';
-import 'hosthelp.dart';
+import '../components/teachet_list/teacher_list.dart';
 
 enum SampleItem { itemOne, itemTwo, itemThree }
 
@@ -42,9 +39,7 @@ class _DeshScreenState extends State<DeshScreen> {
     // TODO: implement initState
     super.initState();
     selectedvalue = Travelerstype[0];
-    sv = Travelerstype2[0];
-    selectedlangCode = languagecode[0];
-    selectedContr = langcontries[0];
+    sv = Travelerstype[0];
   }
 
   late TabController t1;
@@ -128,7 +123,6 @@ class _DeshScreenState extends State<DeshScreen> {
 
   String selectedvalue = '';
   List Travelerstype = ['Flights', 'Hotels', 'Homestays & Villas', 'Holiday Packages','Trains','Buses','Cabs'];
-  List Travelerstype2 = ['Flights', 'Hotels', 'Homestays & Villas', 'Holiday Packages','Trains','Buses','Cabs'];
 
   List profilemenuImages = [
     'assets/Icons/ticketIcon.svg',
@@ -158,11 +152,6 @@ class _DeshScreenState extends State<DeshScreen> {
 
   int selectedlang = 0;
   int ind = 0;
-  List languagecode = ['US', 'CN', 'ES', 'FR', 'VN'];
-  List language = ['English', '中国人', 'Española', 'Français', 'Tiếng Việt'];
-  List langcontries = ['USD', 'EUR', 'JPY', 'BTC'];
-  String selectedlangCode = '';
-  String selectedContr = '';
   String sv = '';
   int inde = 0;
 
@@ -222,111 +211,12 @@ class _DeshScreenState extends State<DeshScreen> {
                   children: [
                     Row(
                       children: [
-                        SvgPicture.asset('assets/logo/kukuLogo.svg',
-                            height: constraints.maxWidth < 300 ? 20 : height / 22),
+                        ImageManager().getPngImage(ImageManager.logo, height: constraints.maxWidth < 300 ? 20 : height / 22),
                         const SizedBox(width: 5),
                         Text('Kuku.io', style: TextStyle(
                           fontFamily: 'gilroybold',
                           color: notifier.blackcolor,
                           fontSize: constraints.maxWidth < 300 ? 20 : 24,
-                          ),
-                        ),
-                      ],
-                    ),
-                    constraints.maxWidth < 1000
-                        ? const SizedBox()
-                        : const SizedBox(width: 50),
-                    constraints.maxWidth < 1000
-                        ? const SizedBox()
-                        : Image.asset('assets/deshboard/Line.png', height: 50,
-                        color: notifier.sugestionbutton),
-                    SizedBox(width: constraints.maxWidth < 1000 ? 30 : 50),
-                    constraints.maxWidth < 800
-                        ? const SizedBox()
-                        : PopupMenuButton(
-                      tooltip: '',
-                      padding: const EdgeInsets.all(0),
-                      offset: const Offset(0, 30),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      // initialValue: selectedMenu,
-                      constraints: BoxConstraints(
-                        maxWidth: constraints.maxWidth / 5.5,
-                      ),
-                      color: notifier.whitecolor,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(selectedvalue.isEmpty ? 'Booking' : selectedvalue,
-                            style: TextStyle(
-                                fontFamily: 'gilroysemi',
-                                fontSize: 16,
-                                color: notifier.subgreycolor),
-                          ),
-                          const SizedBox(width: 10),
-                          Icon(
-                            Icons.keyboard_arrow_down_rounded,
-                            color: notifier.greycolor,
-                          ),
-                        ],
-                      ),
-                      onSelected: (SampleItem2 item) {
-                        setState(() {
-                          // selectedMenu = item;
-                        });
-                      },
-                      itemBuilder: (BuildContext context) =>
-                      <PopupMenuEntry<SampleItem2>>[
-                        PopupMenuItem<SampleItem2>(
-                          enabled: true,
-                          value: SampleItem2.itemOne,
-                          onTap: () {
-
-                          },
-                          child: StatefulBuilder(
-                            builder: (context, setState) {
-                              return SizedBox(
-                                width: constraints.maxWidth / 5.5,
-                                child: ListView.builder(
-                                   shrinkWrap: true,
-                                    itemCount: Travelerstype.length,
-                                    itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        selectedvalue = Travelerstype[index];
-                                      });
-                                    },
-                                    child: Container(
-                                      height: 45,
-                                      width: width / 6,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(22),
-                                          color: selectedvalue == Travelerstype[index]
-                                              ? notifier.blackcolor
-                                              : notifier.whitecolor),
-                                      child: Row(
-                                        children: [
-                                          const SizedBox(width: 20),
-                                          Text(
-                                            Travelerstype[index],
-                                            style: TextStyle(
-                                                color: selectedvalue ==
-                                                    Travelerstype[index]
-                                                    ? notifier.whitecolor
-                                                    : notifier.blackcolor,
-                                                fontSize: 14,
-                                                fontFamily: 'gilroysemi'),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },),
-                              );
-                            }
                           ),
                         ),
                       ],
@@ -353,7 +243,7 @@ class _DeshScreenState extends State<DeshScreen> {
                           ),
                           color: notifier.whitecolor,
                           child: Text(
-                            'Support',
+                            'Application',
                             style: TextStyle(
                                 color: supportHover
                                     ? notifier.blackcolor
@@ -428,20 +318,18 @@ class _DeshScreenState extends State<DeshScreen> {
                         ),
                       ],
                     ),
-                    constraints.maxWidth < 800
-                        ? const SizedBox()
-                        : Row(
+                    if (constraints.maxWidth < 800) const SizedBox() else Row(
                       children: [
                         PopupMenuButton(
                           tooltip: '',
                           padding: const EdgeInsets.all(0),
-                          offset: const Offset(100, 30),
+                          offset: const Offset(10, 30),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
                           // initialValue: selectedMenu,
                           constraints: const BoxConstraints(
-                            maxWidth: 300,
+                            maxWidth: 200,
                             maxHeight: 250,
                           ),
                           color: notifier.whitecolor,
@@ -461,7 +349,7 @@ class _DeshScreenState extends State<DeshScreen> {
                                 const SizedBox(
                                   width: 4,
                                 ),
-                                Text('Language', style: TextStyle(
+                                Text(L10nX.getStr.language_text, style: TextStyle(
                                     color: langHover
                                         ? notifier.blackcolor
                                         : notifier.subgreycolor,
@@ -479,118 +367,44 @@ class _DeshScreenState extends State<DeshScreen> {
                                 child: StatefulBuilder(
                                   builder: (context, setState) {
                                     return Row(
-                                        crossAxisAlignment: CrossAxisAlignment
-                                            .start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           SizedBox(
                                             child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment
-                                                  .start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
                                                 const SizedBox(height: 25),
-                                                for(int a = 0; a <
-                                                    languagecode.length; a++)
-                                                  Column(
-                                                      children: [
-                                                        InkWell(
-                                                          onTap: () {
-                                                            setState(() {
-                                                              selectedlangCode =
-                                                              languagecode[a];
-                                                            });
-                                                          },
-                                                          child: Row(
+                                                for(LanguageInfo language in LanguageHelper().supportedLanguages)
+                                                  InkWell(
+                                                    onTap: () {
+                                                      LanguageHelper().changeLanguage(language, context);
+                                                    },
+                                                    child: Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: [
+                                                          Row(
+                                                            mainAxisAlignment: MainAxisAlignment.start,
                                                             children: [
-                                                              const SizedBox(
-                                                                  width: 10),
-                                                              Text(
-                                                                '${languagecode[a]}',
-                                                                style: TextStyle(
-                                                                    fontFamily: 'gilroysemi',
-                                                                    fontSize: 12,
-                                                                    color: selectedlangCode
-                                                                        .contains(
-                                                                        languagecode[a])
-                                                                        ? notifier
-                                                                        .buttoncolor
-                                                                        : notifier
-                                                                        .subgreycolor),
-                                                                textAlign: TextAlign
-                                                                    .start,
-                                                              ),
-                                                              const SizedBox(
-                                                                  width: 20),
-                                                              Text(
-                                                                  '${language[a]}',
-                                                                  style: TextStyle(
-                                                                      fontFamily: 'gilroysemi',
-                                                                      fontSize: 16,
-                                                                      color: selectedlangCode
-                                                                          .contains(
-                                                                          languagecode[a])
-                                                                          ? notifier
-                                                                          .buttoncolor
-                                                                          : notifier
-                                                                          .subgreycolor),
-                                                                  textAlign: TextAlign
-                                                                      .start),
+                                                              ClipRRect(
+                                                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                                                  borderRadius: BorderRadius.circular(2),
+                                                                  child: Image.asset(
+                                                                    "assets/lang/${language.languageCode}.png",
+                                                                    width: 18,
+                                                                    height: 14,
+                                                                    fit: BoxFit.cover,
+                                                                  )),
+                                                              MySpacing.width(8),
+                                                              MyText.labelMedium(language.language??"")
                                                             ],
                                                           ),
-                                                        ),
-                                                        const SizedBox(
-                                                            height: 20),
-                                                      ]
+                                                          const SizedBox(height: 20),
+                                                        ],
+                                                    ),
                                                   ),
                                               ],
                                             ),
                                           ),
-                                          const SizedBox(width: 20),
-                                          SizedBox(
-                                              height: 230,
-                                              child: VerticalDivider(
-                                                color: notifier.sugestionbutton,
-                                                width: 10,)),
-                                          const SizedBox(width: 20),
-                                          Column(
-                                              crossAxisAlignment: CrossAxisAlignment
-                                                  .start,
-                                              children: [
-                                                const SizedBox(height: 25),
-                                                for(int i = 0; i <
-                                                    langcontries.length; i++)
-                                                  Column(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .start,
-                                                    children: [
-                                                      InkWell(
-                                                        onTap: () {
-                                                          setState(() {
-                                                            selectedContr =
-                                                            langcontries[i];
-                                                          });
-                                                        },
-                                                        child: Text(
-                                                            '${langcontries[i]}',
-                                                            style: TextStyle(
-                                                                fontFamily: 'gilroysemi',
-                                                                fontSize: 16,
-                                                                color: selectedContr
-                                                                    .contains(
-                                                                    langcontries[i])
-                                                                    ? notifier
-                                                                    .buttoncolor
-                                                                    : notifier
-                                                                    .subgreycolor),
-                                                            textAlign: TextAlign
-                                                                .start),
-                                                      ),
-                                                      const SizedBox(
-                                                          height: 20),
-                                                    ],
-                                                  ),
-                                              ],
-                                          ),
-                                          const SizedBox(width: 50),
                                         ],
                                     );
                                   },
@@ -598,7 +412,7 @@ class _DeshScreenState extends State<DeshScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(
+                      /*  const SizedBox(
                           width: 25,
                         ),
                         InkWell(
@@ -650,7 +464,7 @@ class _DeshScreenState extends State<DeshScreen> {
                               ),
                             ),
                           ),
-                        ),
+                        ),*/
                       ],
                     ),
                     SizedBox(
@@ -661,9 +475,7 @@ class _DeshScreenState extends State<DeshScreen> {
                       padding: const EdgeInsets.all(0),
                       offset: const Offset(0, 50),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius
-                            .circular(20),
-                      ),
+                        borderRadius: BorderRadius.circular(20),),
                       // initialValue: selectedMenu,
                       constraints: const BoxConstraints(
                         maxWidth: 310,
@@ -981,116 +793,6 @@ class _DeshScreenState extends State<DeshScreen> {
                     SizedBox(
                       width: constraints.maxWidth < 500 ? 10 : 25,
                     ),
-                    constraints.maxWidth < 800
-                        ? PopupMenuButton(
-                      tooltip: '',
-                      padding: const EdgeInsets.all(0),
-                      offset: const Offset(0, 30),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      // initialValue: selectedMenu,
-                      constraints: BoxConstraints(
-                        maxWidth: width / 1,
-                        maxHeight: 470,
-                      ),
-                      color: notifier.whitecolor,
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            'assets/Icons/draglineshorizontal.png',
-                            height: 8,
-                            color: notifier.subgreycolor,
-                          ),
-                        ],
-                      ),
-                      onSelected: (SampleItem2 item) {
-                        setState(() {
-                          // selectedMenu = item;
-                        });
-                      },
-                      itemBuilder: (BuildContext context) =>
-                      <PopupMenuEntry<SampleItem2>>[
-                        PopupMenuItem<SampleItem2>(
-                          enabled: true,
-                          value: SampleItem2.itemOne,
-                          onTap: () {
-                            setState(() {
-                              sv = Travelerstype2[inde];
-                            });
-                          },
-                          child: SizedBox(
-                            height: 435,
-                            child: Column(
-                              children: [
-                                const SizedBox(height: 10,),
-                                SizedBox(
-                                  height: 370,
-                                  width:  width / 1,
-                                  child: ListView.builder(
-                                    // shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    itemCount: Travelerstype2.length,
-                                    itemBuilder: (context, inde) {
-                                      return Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            Travelerstype2[inde],
-                                            style: TextStyle(
-                                                color: sv ==
-                                                    Travelerstype2[inde]
-                                                    ? notifier.blackcolor
-                                                    : notifier.subgreycolor,
-                                                fontFamily: 'gilroysemi',
-                                                fontSize: constraints.maxWidth <500 ? 18 : 22,
-                                                fontWeight: FontWeight.w700,
-                                                letterSpacing: 1),
-                                          ),
-                                          const SizedBox(height: 30),
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: height / 18,
-                                  width: width / 1,
-                                  child: ElevatedButton(
-                                    style: ButtonStyle(
-                                      backgroundColor: const WidgetStatePropertyAll(
-                                          Colors.transparent),
-                                      elevation:
-                                      const WidgetStatePropertyAll(0),
-                                      shape: WidgetStatePropertyAll(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                            const BorderRadius.all(
-                                              Radius.circular(20),
-                                            ),
-                                            side: BorderSide(
-                                                color: Colors.grey.shade300,
-                                                width: 2)),
-                                      ),
-                                    ),
-                                    onPressed: () {},
-                                    child: Text(
-                                      'List your property',
-                                      style: TextStyle(
-                                          fontFamily: 'gilroysemi',
-                                          fontSize: 16,
-                                          color: notifier.blackcolor),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                        : const SizedBox(),
                   ],
                 ),
               ],
@@ -1549,30 +1251,15 @@ class _DeshScreenState extends State<DeshScreen> {
             ),
           ),
           SizedBox(
-              height: constraints.maxWidth < 550 ? 70 : constraints.maxWidth /
-                  50),
-          Text('Explore life travel where you want',
-              style: TextStyle(
-                  fontFamily: 'gilroysemi',
-                  fontSize: constraints.maxWidth < 550 ? 28 : 45,
-                  color: notifier.blackcolor),
-              textAlign: TextAlign.center),
-          Text(
-            "Most popular places",
-            style: TextStyle(
-                fontFamily: 'gilroy',
-                fontSize: constraints.maxWidth < 700 ? 18 : 20,
-                color: notifier.greycolor),
-          ),
+              height: constraints.maxWidth < 550 ? 70 : constraints.maxWidth / 50),
+          const CourseList(),
           SizedBox(
             height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
                 ? constraints.maxWidth / 30
                 : constraints.maxWidth / 30,
           ),
-          const ph(),
-          SizedBox(height:constraints.maxWidth < 550 ? 60 : constraints.maxWidth / 10),
-          const adventurehelp(),
-          SizedBox(height: constraints.maxWidth < 550 ? 60 : constraints.maxWidth / 10),
+          const TeacherList(),
+          SizedBox(height: constraints.maxWidth < 550 ? 60 : constraints.maxWidth / 16),
           constraints.maxWidth < 800
               ? memory(constraints)
               : Stack(
@@ -1762,21 +1449,12 @@ class _DeshScreenState extends State<DeshScreen> {
               ),
             ],
           ),
-          SizedBox(
-              height: constraints.maxWidth < 550 ? 60 : constraints.maxWidth /
-                  16),
-          const hosthelp(),
-          SizedBox(
-              height: constraints.maxWidth < 550 ? 60 : constraints.maxWidth <
-                  900
-                  ? constraints.maxWidth / 10
-                  : constraints.maxWidth / 20),
           Divider(
             color: notifier.isDark ? notifier.subgreycolor : notifier
                 .sugestionbutton,
           ),
           SizedBox(height: constraints.maxWidth / 20),
-          const endofpage(),
+          const EndOfPage(),
         ],
       ),
     );

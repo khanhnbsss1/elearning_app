@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:webkit/base/base.export.dart';
 
 class ScannerErrorWidget extends StatelessWidget {
   const ScannerErrorWidget({super.key, required this.error});
@@ -34,11 +35,11 @@ class ScannerErrorWidget extends StatelessWidget {
             ),
             Text(
               errorMessage,
-              style: const TextStyle(color: Colors.white),
+              style:TextStyleConstant.textStyleBlack14w500.copyWith(color: Colors.white),
             ),
             Text(
               error.errorDetails?.message ?? '',
-              style: const TextStyle(color: Colors.white),
+              style: TextStyleConstant.textStyleBlack14w500.copyWith(color: Colors.white),
             ),
           ],
         ),

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/utils/key_manager.dart';
+import 'package:webkit/helpers/localizations/bloc/main.exports.dart';
+import 'package:webkit/helpers/services/navigation_service.dart';
+import 'package:webkit/helpers/theme/app_notifier.dart';
 
 class LanguageHelper{
   static final LanguageHelper _singletonLanguageHelper = LanguageHelper._internal();
@@ -9,16 +13,93 @@ class LanguageHelper{
     return _singletonLanguageHelper;
   }
   LanguageHelper._internal();
-  Future<void>setLocale(Locale locale) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(KeyManager.GetInstance().COUNTRY_CODE_KEY, locale.countryCode!);
-    await prefs.setString(KeyManager.GetInstance().LANGUAGE_CODE_KEY, locale.languageCode);
+
+
+  final List<LanguageInfo> supportedLanguages = [
+    LanguageInfo(languageCode: 'en', country: 'US', language: 'English', languageIndex: LANGUAGE_INDEX.ENGLISH, ),
+    LanguageInfo(languageCode: 'vi', country: 'VN', language: 'VietNam', languageIndex: LANGUAGE_INDEX.VIETNAMESE),
+    LanguageInfo(languageCode: 'zh', country: 'CN', language: 'Chinese', languageIndex: LANGUAGE_INDEX.CHINESE),
+  ];
+  Locale? _locale;
+  void setLocale(Locale inputLocale)  {
+    _locale = inputLocale;
+     SharedPreferencesStorage().saveString(KeyManager.GetInstance().COUNTRY_CODE_KEY, inputLocale.countryCode!);
+     SharedPreferencesStorage().saveString(KeyManager.GetInstance().LANGUAGE_CODE_KEY, inputLocale.languageCode);
   }
-  Future<Locale> getCurrentLocale()async{
-    final prefs = await SharedPreferences.getInstance();
-    String languageCode = prefs.getString(KeyManager.GetInstance().LANGUAGE_CODE_KEY)??"vi";
-    String countryCode = prefs.getString(KeyManager.GetInstance().COUNTRY_CODE_KEY)??"VN";
-    Locale locale = Locale(languageCode,countryCode);
-    return locale;
+  
+  Locale getCurrentLocale(){
+    if(_locale!=null)
+      {
+        return _locale!;
+      }
+    else
+      {
+        String languageCode = SharedPreferencesStorage().getString(KeyManager.GetInstance().LANGUAGE_CODE_KEY).isNotEmpty?SharedPreferencesStorage().getString(KeyManager.GetInstance().LANGUAGE_CODE_KEY):"vi";
+        String countryCode = SharedPreferencesStorage().getString(KeyManager.GetInstance().COUNTRY_CODE_KEY).isNotEmpty?SharedPreferencesStorage().getString(KeyManager.GetInstance().COUNTRY_CODE_KEY):"VN";
+        _locale = Locale(languageCode,countryCode);
+        return _locale!;
+      }
   }
+  void changeLanguage(LanguageInfo language, BuildContext context) {
+    Locale locale = LANGUAGE_MAPS[language.languageIndex]!;
+    AppNotifier().changeLanguage(language, notify: false);
+    BlocProvider.of<MainBloc>(NavigationService.globalContext!).add(MainChangeLanguageEvent(locale: locale));
+  }
+}
+
+enum LANGUAGE_INDEX{
+  VIETNAMESE,
+  ENGLISH,
+  SPANISH,
+  CHINESE,
+  GERMAN
+}
+const Map<LANGUAGE_INDEX, String>LANGUAGE_VIEW = {
+  LANGUAGE_INDEX.VIETNAMESE: "Tiếng Việt",
+  LANGUAGE_INDEX.ENGLISH: "English",
+  LANGUAGE_INDEX.SPANISH: "Spanish",
+  LANGUAGE_INDEX.CHINESE: "Chinese",
+  LANGUAGE_INDEX.GERMAN: "German",
+};
+const Map<LANGUAGE_INDEX, Locale> LANGUAGE_MAPS = {
+  LANGUAGE_INDEX.VIETNAMESE: Locale('vi','VN'),
+  LANGUAGE_INDEX.ENGLISH: Locale('en','US'),
+  LANGUAGE_INDEX.SPANISH: Locale('es','US'),
+  LANGUAGE_INDEX.CHINESE: Locale('zh','CN'),
+  LANGUAGE_INDEX.GERMAN: Locale('de','US'),
+};
+const Map<String, LANGUAGE_INDEX > LANGUAGE_INDEX_MAPS = {
+  'vi':LANGUAGE_INDEX.VIETNAMESE,
+  'en': LANGUAGE_INDEX.ENGLISH,
+  'es': LANGUAGE_INDEX.SPANISH,
+  'zh': LANGUAGE_INDEX.CHINESE,
+  'de': LANGUAGE_INDEX.GERMAN,
+};
+
+
+class LanguageInfo {
+  /// the country code (IT,AF..)
+  String? languageCode;
+  LANGUAGE_INDEX languageIndex;
+  /// the locale (en, es, da)
+  String? country;
+
+  /// the full name of language (English, Danish..)
+  String? language;
+
+  /// the full name of language (English, Danish..)
+  String? scripCode;
+  /// map of keys used based on industry type (service worker, route etc)
+  Map<String, String>? dictionary;
+  bool supportRTL;
+  LanguageInfo(
+      {
+        this.languageCode,
+        this.country,
+        this.language,
+        this.dictionary,
+        this.scripCode,
+        required this.languageIndex,
+        this.supportRTL = false
+      });
 }

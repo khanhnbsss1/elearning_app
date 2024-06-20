@@ -33,7 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_products": MessageLookupByLibrary.simpleMessage("添加产品"),
         "alert": MessageLookupByLibrary.simpleMessage("警报"),
         "animated": MessageLookupByLibrary.simpleMessage("动画"),
-        "app_name": MessageLookupByLibrary.simpleMessage("aa"),
+        "app_name": MessageLookupByLibrary.simpleMessage("越爱学汉语学习平台"),
         "appcept": MessageLookupByLibrary.simpleMessage("接受"),
         "apps": MessageLookupByLibrary.simpleMessage("应用程序"),
         "are_you_ready_send_command":
@@ -91,6 +91,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contact_us": MessageLookupByLibrary.simpleMessage("联系我们"),
         "copy_right":
             MessageLookupByLibrary.simpleMessage("FFTSolution - 版权所有 2022"),
+        "courses_list": MessageLookupByLibrary.simpleMessage("课程列表"),
         "create_product": MessageLookupByLibrary.simpleMessage("创建产品"),
         "created_at": MessageLookupByLibrary.simpleMessage("创建时间"),
         "custom_indicator": MessageLookupByLibrary.simpleMessage("自定义指标"),
@@ -157,6 +158,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "last_week": MessageLookupByLibrary.simpleMessage("上周"),
         "left": MessageLookupByLibrary.simpleMessage("左侧"),
         "left_dialog": MessageLookupByLibrary.simpleMessage("左侧对话框"),
+        "lesson_list": MessageLookupByLibrary.simpleMessage("课程列表"),
+        "level_str": MessageLookupByLibrary.simpleMessage("级别"),
         "license_copyright": MessageLookupByLibrary.simpleMessage("许可和版权"),
         "light": MessageLookupByLibrary.simpleMessage("浅色"),
         "literacy_rate": MessageLookupByLibrary.simpleMessage("识字率"),
@@ -223,6 +226,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "rating": MessageLookupByLibrary.simpleMessage("评分"),
         "re_create": MessageLookupByLibrary.simpleMessage("新建"),
         "register": MessageLookupByLibrary.simpleMessage("注册"),
+        "register_to_enjoy_the_best_deals_for_you":
+            MessageLookupByLibrary.simpleMessage("注册即可享受最优惠的价格"),
         "reset_password": MessageLookupByLibrary.simpleMessage("重置密码"),
         "result": MessageLookupByLibrary.simpleMessage("结果"),
         "revenue": MessageLookupByLibrary.simpleMessage("收入"),
@@ -345,6 +350,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tabs": MessageLookupByLibrary.simpleMessage("标签"),
         "tags": MessageLookupByLibrary.simpleMessage("标签"),
         "target": MessageLookupByLibrary.simpleMessage("目标"),
+        "teacher_list": MessageLookupByLibrary.simpleMessage("教师列表"),
+        "teachers_teach_the_most":
+            MessageLookupByLibrary.simpleMessage("教得最多的老师"),
         "terms_conditions": MessageLookupByLibrary.simpleMessage("条款和条件"),
         "terms_of_service_text": MessageLookupByLibrary.simpleMessage("服务条款"),
         "text_actions": MessageLookupByLibrary.simpleMessage("文本操作"),

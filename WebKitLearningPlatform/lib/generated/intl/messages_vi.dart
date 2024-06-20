@@ -32,7 +32,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_product": MessageLookupByLibrary.simpleMessage("Thêm sản phẩm"),
         "add_products": MessageLookupByLibrary.simpleMessage("Thêm sản phẩm"),
         "animated": MessageLookupByLibrary.simpleMessage("Hoạt hình"),
-        "app_name": MessageLookupByLibrary.simpleMessage("aa"),
+        "app_name": MessageLookupByLibrary.simpleMessage(
+            "YAX Chinese learning platform"),
         "appcept": MessageLookupByLibrary.simpleMessage("Chấp nhận"),
         "apps": MessageLookupByLibrary.simpleMessage("Ứng dụng"),
         "are_you_ready_send_command": MessageLookupByLibrary.simpleMessage(
@@ -99,6 +100,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Liên hệ với chúng tôi"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "FFTSolution - Bản quyền 2022"),
+        "courses_list":
+            MessageLookupByLibrary.simpleMessage("Danh sách khóa học"),
         "create_product": MessageLookupByLibrary.simpleMessage("Tạo sản phẩm"),
         "created_at": MessageLookupByLibrary.simpleMessage("Được tạo vào"),
         "custom_indicator":
@@ -179,6 +182,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "left": MessageLookupByLibrary.simpleMessage("Trái"),
         "left_dialog":
             MessageLookupByLibrary.simpleMessage("Hộp thoại bên trái"),
+        "lesson_list":
+            MessageLookupByLibrary.simpleMessage("Danh sách bài học"),
+        "level_str": MessageLookupByLibrary.simpleMessage("Cấp độ"),
         "license_copyright":
             MessageLookupByLibrary.simpleMessage("Giấy phép & bản quyền"),
         "light": MessageLookupByLibrary.simpleMessage("Ánh sáng"),
@@ -257,6 +263,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "rating": MessageLookupByLibrary.simpleMessage("Xếp hạng"),
         "re_create": MessageLookupByLibrary.simpleMessage("Tạo mới"),
         "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
+        "register_to_enjoy_the_best_deals_for_you":
+            MessageLookupByLibrary.simpleMessage(
+                "Đăng ký để được hưởng những ưu đãi tốt nhất cho bạn"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "result": MessageLookupByLibrary.simpleMessage("Kết quả"),
@@ -397,6 +406,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "system": MessageLookupByLibrary.simpleMessage("Hệ thống"),
         "tags": MessageLookupByLibrary.simpleMessage("Thẻ"),
         "target": MessageLookupByLibrary.simpleMessage("Mục tiêu"),
+        "teacher_list":
+            MessageLookupByLibrary.simpleMessage(" Danh sách giáo viên"),
+        "teachers_teach_the_most":
+            MessageLookupByLibrary.simpleMessage("Giáo viên dạy nhiều nhất"),
         "terms_conditions":
             MessageLookupByLibrary.simpleMessage("điều khoản và điều kiện"),
         "terms_of_service_text":

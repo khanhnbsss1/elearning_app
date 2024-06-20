@@ -30,7 +30,7 @@ class L10nX extends S {
       return instance;
     });
   }
-  static L10nX get getStr {
+  static S get getStr {
     BuildContext context = NavigationService.globalContext!;
     final instance = L10nX.maybeOf(context);
     assert(instance != null,
@@ -64,10 +64,7 @@ class AppLocalizationDelegatel10nX extends LocalizationsDelegate<L10nX> {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
       Locale.fromSubtags(languageCode: 'vi'),
-      Locale.fromSubtags(languageCode: 'fr'),
-      Locale.fromSubtags(languageCode: 'vi'),
       Locale.fromSubtags(languageCode: 'zh'),
-      Locale.fromSubtags(languageCode: 'es'),
 
     ];
   }
