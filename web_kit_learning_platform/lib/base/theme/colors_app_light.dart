@@ -4,25 +4,25 @@ import 'package:webkit/base/base.export.dart';
 export 'color_extentions.dart';
 class ColorLightConst{
   static Color backGroundColor =  const Color(0xffFFFFFF);
-  static Color primaryColor = const Color(0xff8DDB90);
+  static Color primaryColor = const Color(0xff9f0f0f);
   static Color mainColor = primaryColor;
   static Color mainColorWithOpacity50 = mainColor.withOpacity(0.5);
-  static Color iconColor = const Color(0xff17721A);
-  static Color buttonbgColor = const Color(0xffbcf6be);
-  static Color homeBg =  const Color(0xffBDE3BF);
+  static Color iconColor = primaryColor;
+  static Color buttonbgColor = primaryColor;
+  static Color homeBg =  const Color(0xffc9b9b9);
   static Color bgColor =  const Color(0xFFF7FCF7);
 
-  static Color buttonColor =  const Color(0xff17721A);
+  static Color buttonColor =  primaryColor;
   static Color textColor =   Colors.black87;
   static Color subtext = const Color(0xff545454);
   static Color shadowColor =  const Color(0xffE4EBE4);
   static Color borderColor =  const Color(0xffCFCFCF);
-  static Color progressColor =  const Color(0xffC2ECC4);
+  static Color progressColor =  const Color(0xfff8ecec);
   static Color containerShadow =  const Color(0x3882A483);
   static Color whiteColor =  Colors.white;
   static Color whiteColor70 =  Colors.white70;
   static Color whiteColor10 =  Colors.white10;
-  static Color textColorOnMainButton =   Colors.black87;
+  static Color textColorOnMainButton =  const Color(0xFFFFFFFF);
 
   
   static Color dividerColor =  const Color(0xff9B9B9B);
@@ -48,13 +48,13 @@ class ColorLightConst{
   static Color greyColor2 = const Color(0xFF8E8E8E);
   static Color greyColor = const Color(0xFF808080);
   
-  static Color colorLinear1 = const Color(0xffb0dcb1);
-  static Color colorLinear2 = const Color(0xff9bdc9e);
-  static Color colorLinear3 = const Color(0xff8DDB90);
+  static Color colorLinear1 = const Color(0xffb93838);
+  static Color colorLinear2 = const Color(0xffad2121);
+  static Color colorLinear3 = const Color(0xff9f0f0f);
 
   static Color mainColorForText =mainColor;
-  static Color textColorSelectTabBar = const Color(0xFF5AB708);
-  static Color backGroundColorUnSelectTabBar = const Color(0xFFDFEFBF);
+  static Color textColorSelectTabBar = const Color(0xffda4545);
+  static Color backGroundColorUnSelectTabBar = const Color(0xffd08c8c);
 
   static Color bgSettingButtonColor =  Colors.white;
   static Color bgDialogColor = const Color(0xFFF4FDF5);
@@ -68,37 +68,38 @@ class ColorLightConst{
   static Color colorLinear7 = const Color(0xFF80DAF3);
   static Color colorLinear8 = const Color(0xFF3CD0F8);
   static Color colorLinear9 = const Color(0xFF00C5FF);
-  
+  static Color onHoverColor = const Color(0xfffff1f1);
+
   static setColorByFlavorType() {
     FlavorType flavorType = FlavorSettings().getFlavorType();
     switch (flavorType) {
       case FlavorType.webAdmin:
       // TODO: Handle this case.
         {
-          mainColor = const Color(0xff5DB075);
+          mainColor = const Color(0xff9f0f0f);
           whiteColor = Colors.white;
           blackColor = Colors.black;
           backGroundColor = const Color(0xFFFFFFFF);
-          mainColorWithOpacity50 = const Color(0xFF87D09B); //mainColor.withOpacity(0.5);
-          buttonbgColor = const Color(0xffbcf6be);
-          homeBg = const Color(0xffBDE3BF);
+          mainColorWithOpacity50 = const Color(0xffa84747); //mainColor.withOpacity(0.5);
+          buttonbgColor = const Color(0xfff5a1a1);
+          homeBg = const Color(0xfff5a1a1);
           bgColor = const Color(0xFFF7FCF7);
-          buttonColor =  const Color(0xff17721A);
+          buttonColor =  const Color(0xff9f0f0f);
           textColor = Colors.black87;
           subtext = const Color(0xff545454);
           shadowColor = const Color(0xffE4EBE4);
           borderColor = const Color(0xffCFCFCF);
-          progressColor = const Color(0xffC2ECC4);
+          progressColor = const Color(0xfff5a1a1);
           containerShadow = const Color(0x3882A483);
           textColorOnMainButton =   Colors.black87;
-          colorLinear1 = const Color(0xffb0dcb1);
-          colorLinear2 = const Color(0xff9bdc9e);
-          colorLinear3 = const Color(0xff8DDB90);
+          colorLinear1 = const Color(0xffb93838);
+          colorLinear2 = const Color(0xffad2121);
+          colorLinear3 = const Color(0xff9f0f0f);
           
           yellowColor = Colors.amber;
           mainColorForText =mainColor;
-          textColorSelectTabBar = const Color(0xFF5AB708);
-          backGroundColorUnSelectTabBar = const Color(0xFFDFEFBF);
+          textColorSelectTabBar = const Color(0xff9f0f0f);
+          backGroundColorUnSelectTabBar = const Color(0xfff5a1a1);
           colorIconGrays =  blackColor54;
           bgSettingButtonColor =  Colors.white;
           bgDialogColor = const Color(0xFFF7FCF7);
@@ -111,6 +112,7 @@ class ColorLightConst{
           colorLinear7 = const Color(0xFF80DAF3);
           colorLinear8 = const Color(0xFF3CD0F8);
           colorLinear9 = const Color(0xFF00C5FF);
+          onHoverColor = const Color(0xfffff1f1);
         }
         break;
       case FlavorType.webUser:

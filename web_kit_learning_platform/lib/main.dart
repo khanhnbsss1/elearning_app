@@ -74,6 +74,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FetchPixels(context);
+    ColorConst.setColorByFlavorType();
     return Consumer<AppNotifier>(
       builder: (_, notifier, ___) {
         return BlocConsumer<MainBloc, MainState>(

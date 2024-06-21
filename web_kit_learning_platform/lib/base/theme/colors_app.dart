@@ -17,6 +17,7 @@ class ColorConst{
   static Color buttonbgColor = getLightMode()?ColorLightConst.buttonbgColor:ColorNightConst.buttonbgColor;
   static Color homeBg =  getLightMode()?ColorLightConst.homeBg:ColorNightConst.homeBg;
   static Color bgColor =  getLightMode()?ColorLightConst.bgColor:ColorNightConst.bgColor;
+  static Color onHoverColor =  getLightMode()?ColorLightConst.onHoverColor:ColorNightConst.onHoverColor;
   static Color textColorOnMainButton =   getLightMode()?ColorLightConst.textColorOnMainButton:ColorNightConst.textColorOnMainButton;
   static Color buttonColor =  getLightMode()?ColorLightConst.buttonColor:ColorNightConst.buttonColor;
   static Color textColor =   getLightMode()?ColorLightConst.textColor:ColorNightConst.textColor;
@@ -139,6 +140,7 @@ class ColorConst{
     bgSettingButtonColor = getLightMode()?ColorLightConst.bgSettingButtonColor:ColorNightConst.bgSettingButtonColor;
     bgDialogColor = getLightMode()?ColorLightConst.bgDialogColor:ColorNightConst.bgDialogColor;
     bgSelectButtonColor = getLightMode()?ColorLightConst.bgSelectButtonColor:ColorNightConst.bgSelectButtonColor;
+    onHoverColor =  getLightMode()?ColorLightConst.onHoverColor:ColorNightConst.onHoverColor;
 }
 
   static bool getLightMode(){

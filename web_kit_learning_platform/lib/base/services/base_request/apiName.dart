@@ -11,7 +11,7 @@ class ApiName {
 
   //user auth
   final String loginByUserName = "/login";
-  final String loginByPhone = "/login-phone";
+  final String loginByPhone = "/login-pin";
   final String registerUserByUserName = "/register";
   final String registerUserByPhone = "/register-phone";
   final String registerTeacherByUserName = "/register-teacher";

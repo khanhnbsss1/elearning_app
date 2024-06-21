@@ -3609,6 +3609,26 @@ class S {
       args: [],
     );
   }
+
+  /// `VND`
+  String get vnd_str {
+    return Intl.message(
+      'VND',
+      name: 'vnd_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register now`
+  String get register_now {
+    return Intl.message(
+      'Register now',
+      name: 'register_now',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

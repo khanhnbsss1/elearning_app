@@ -3,7 +3,14 @@ class CourseListLandingPageResponseModel {
   List<CourseLandingPageInfo>? data;
 
   CourseListLandingPageResponseModel({this.data});
-
+  CourseListLandingPageResponseModel.fromJsonList(dynamic json) {
+    if (json != null) {
+      data = <CourseLandingPageInfo>[];
+      json.forEach((v) {
+        data!.add(new CourseLandingPageInfo.fromJson(v));
+      });
+    }
+  }
   CourseListLandingPageResponseModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <CourseLandingPageInfo>[];

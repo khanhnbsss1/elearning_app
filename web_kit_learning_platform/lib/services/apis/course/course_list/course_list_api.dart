@@ -12,14 +12,14 @@ class LandingPageCourseListApi extends BaseApiRequest {
 
   Future<dynamic> call() async {
     await getAuthorization();
-    dynamic result = await postRequestAPI();
+    dynamic result = await getRequestAPI();
     if(result.runtimeType == ResponseCommon)
     {
       return CourseListLandingPageResponseModel(data: []);
     }
     else
     {
-      CourseListLandingPageResponseModel paymentHistoryResponseModel = CourseListLandingPageResponseModel.fromJson(result);
+      CourseListLandingPageResponseModel paymentHistoryResponseModel = CourseListLandingPageResponseModel.fromJsonList(result);
       return paymentHistoryResponseModel;
     }
 

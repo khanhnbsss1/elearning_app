@@ -356,6 +356,8 @@
   "lesson_list": "Lesson list", 
   "level_str": "Level",
   "teachers_teach_the_most":"Teachers who teach the most",
-  "register_to_enjoy_the_best_deals_for_you":"Register to enjoy the best deals for you"
+  "register_to_enjoy_the_best_deals_for_you":"Register to enjoy the best deals for you",
+  "vnd_str": "VND",
+  "register_now": "Register now"
 
 }

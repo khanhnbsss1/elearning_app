@@ -226,6 +226,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rating": MessageLookupByLibrary.simpleMessage("评分"),
         "re_create": MessageLookupByLibrary.simpleMessage("新建"),
         "register": MessageLookupByLibrary.simpleMessage("注册"),
+        "register_now": MessageLookupByLibrary.simpleMessage("立即注册"),
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage("注册即可享受最优惠的价格"),
         "reset_password": MessageLookupByLibrary.simpleMessage("重置密码"),
@@ -397,6 +398,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "very_high": MessageLookupByLibrary.simpleMessage("非常高"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("越南语"),
         "view_all": MessageLookupByLibrary.simpleMessage("查看全部"),
+        "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
         "warning": MessageLookupByLibrary.simpleMessage("警告"),
         "website_visits": MessageLookupByLibrary.simpleMessage("网站访问量"),
         "widgets": MessageLookupByLibrary.simpleMessage("小工具"),

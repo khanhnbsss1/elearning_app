@@ -13,6 +13,7 @@ class FetchPixels {
   FetchPixels(BuildContext context) {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
+    print("object");
   }
 
   static double getHeightPercentSize(double percent) {

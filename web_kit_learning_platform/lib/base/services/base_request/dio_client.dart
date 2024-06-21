@@ -6,7 +6,7 @@ class DioClient{
   static final DioClient _singletonDioClient = DioClient._internal();
   static DioClient get getInstance => _singletonDioClient;
   factory DioClient() {
-    HttpOverrides.global = MyHttpOverrides();
+    //HttpOverrides.global = MyHttpOverrides();
     return _singletonDioClient;
   }
   DioClient._internal();

@@ -263,6 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rating": MessageLookupByLibrary.simpleMessage("Xếp hạng"),
         "re_create": MessageLookupByLibrary.simpleMessage("Tạo mới"),
         "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
+        "register_now": MessageLookupByLibrary.simpleMessage("Đăng ký ngay"),
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage(
                 "Đăng ký để được hưởng những ưu đãi tốt nhất cho bạn"),
@@ -463,6 +464,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "very_high": MessageLookupByLibrary.simpleMessage("Rất cao"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "view_all": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
+        "vnd_str": MessageLookupByLibrary.simpleMessage("VNĐ"),
         "warning": MessageLookupByLibrary.simpleMessage("Cảnh báo"),
         "website_visits":
             MessageLookupByLibrary.simpleMessage("Lượt truy cập trang web"),

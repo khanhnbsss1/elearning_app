@@ -258,6 +258,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "rating": MessageLookupByLibrary.simpleMessage("Rating"),
         "re_create": MessageLookupByLibrary.simpleMessage("Create new"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "register_now": MessageLookupByLibrary.simpleMessage("Register now"),
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage(
                 "Register to enjoy the best deals for you"),
@@ -464,6 +465,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "very_high": MessageLookupByLibrary.simpleMessage("Very high"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "view_all": MessageLookupByLibrary.simpleMessage("View all"),
+        "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
         "warning": MessageLookupByLibrary.simpleMessage("Warning"),
         "website_visits":
             MessageLookupByLibrary.simpleMessage("Website visits"),

@@ -124,7 +124,7 @@ class BaseApiRequest {
     {
       requestHeader?.remove("Authorization");
     }
-    requestHeader?.addAll({'content-type': 'application/json', 'Access-Control-Allow-Origin': true, "Accept": "*/*"});
+    requestHeader?.addAll({'content-type': 'application/json', 'Access-Control-Allow-Origin': "*", "Accept": "*/*"});
     return requestHeader!;
   }
 

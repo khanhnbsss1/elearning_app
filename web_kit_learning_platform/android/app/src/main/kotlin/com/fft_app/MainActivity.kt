@@ -1,4 +1,4 @@
-package com.example.web_kit_learning_platform
+package com.fft_app
 
 import io.flutter.embedding.android.FlutterActivity
 

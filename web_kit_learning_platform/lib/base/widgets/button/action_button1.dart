@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:hovering/hovering.dart';
+import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 
 import '../../base.export.dart';
 
@@ -16,6 +18,7 @@ class ActionButton1 extends StatelessWidget {
   bool? enable;
   bool? enableLinearColor;
   EdgeInsetsGeometry? contentPadding;
+  
   ActionButton1(
       {super.key,
       this.enableBgColor,
@@ -31,26 +34,26 @@ class ActionButton1 extends StatelessWidget {
         this.contentPadding,
       this.enable}) {
     enableBgColor ??= ColorConst.buttonbgColor;
-    textStype ??= TextStyleConstant.textStyleBlack14w600.copyWith(color: ColorConst.textColorOnMainButton.withOpacity(0.8));
+    textStype ??= TextStyleConstant.textStyleBlack18w600.copyWith(color: ColorConst.whiteColor);
     radius ??= Dimens.size22;
-    height ??= Dimens.size40;
+    height ??= Dimens.size56;
     enable ??= true;
     enableLinearColor??=false;
+    
   }
   @override
   Widget build(BuildContext context) {
 // TODO: implement build
+    Color? color = enable! ?enableBgColor : enableBgColor!.withOpacity(0.3);
     return InkWell(
       onTap: () {
         if (onTap != null && enable!) {
           onTap!();
         }
       },
-      child: Material(
-        color: Colors.transparent,
-        clipBehavior: Clip.hardEdge,
-        borderRadius:BorderRadius.all(Radius.circular(radius??Dimens.size5)),
-        child: Card(
+      child: OnHoverWidget(
+        builder: (bool isHovered) { 
+          return Card(
             elevation: 3,
             shape: RoundedRectangleBorder(
                 borderRadius:
@@ -64,17 +67,17 @@ class ActionButton1 extends StatelessWidget {
                 gradient:(enableLinearColor??false)?
                 LinearGradient(
                     begin: Alignment.centerLeft,
-                  stops: const [
-                    0,
-                    0.6,
-                    1
-                  ],
-                  colors: [
-                  ColorConst.colorLinear1,
-                  ColorConst.colorLinear2,
-                  ColorConst.colorLinear3
-                  ]):null,
-                color: enable! ? enableBgColor : enableBgColor!.withOpacity(0.3),
+                    stops: const [
+                      0,
+                      0.6,
+                      1
+                    ],
+                    colors: [
+                      ColorConst.colorLinear1,
+                      ColorConst.colorLinear2,
+                      ColorConst.colorLinear3
+                    ]):null,
+                color: isHovered? color?.withOpacity(0.8): color ,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -92,7 +95,8 @@ class ActionButton1 extends StatelessWidget {
                 ],
               ),
             ),
-          ),
+          );
+        },
       ),
     );
   }

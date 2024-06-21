@@ -359,5 +359,8 @@
   "lesson_list": "课程列表", 
   "level_str": "级别",
   "teachers_teach_the_most":"教得最多的老师",
-  "register_to_enjoy_the_best_deals_for_you":"注册即可享受最优惠的价格"
+  "register_to_enjoy_the_best_deals_for_you":"注册即可享受最优惠的价格",
+  "vnd_str": "VND",
+  "register_now": "立即注册"
+
 }

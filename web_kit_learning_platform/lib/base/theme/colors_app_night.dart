@@ -5,10 +5,10 @@ export 'color_extentions.dart';
 
 class ColorNightConst{
   static Color backGroundColor = Colors.black87;
-  static Color primaryColor = const Color(0xff8DDB90);
+  static Color primaryColor = const Color(0xff9f0f0f);
   static Color mainColor = primaryColor;
   static Color mainColorWithOpacity50 = mainColor.withOpacity(0.5);
-  static Color iconColor = const Color(0xff17721A);
+  static Color iconColor = const Color(0xff9f0f0f);
 
   static Color buttonbgColor = const Color(0xffbcf6be);
   static Color homeBg =  const Color(0xffBDE3BF);
@@ -68,6 +68,8 @@ class ColorNightConst{
   static Color colorLinear7 = const Color(0xFF80DAF3);
   static Color colorLinear8 = const Color(0xFF3CD0F8);
   static Color colorLinear9 = const Color(0xFF00C5FF);
+  static Color onHoverColor = const Color(0xffd08c8c);
+
   static setColorByFlavorType() {
     FlavorType flavorType = FlavorSettings().getFlavorType();
     switch (flavorType) {
@@ -139,6 +141,7 @@ class ColorNightConst{
           colorLinear7 = const Color(0xFF80DAF3);
           colorLinear8 = const Color(0xFF3CD0F8);
           colorLinear9 = const Color(0xFF00C5FF);
+          onHoverColor = const Color(0xfffff1f1);
         }
         break;
       case FlavorType.webUser:
@@ -206,6 +209,7 @@ class ColorNightConst{
           colorLinear7 = const Color(0xFF80DAF3);
           colorLinear8 = const Color(0xFF3CD0F8);
           colorLinear9 = const Color(0xFF00C5FF);
+          onHoverColor = const Color(0xfffff1f1);
         }
         break;
       case FlavorType.mobileUser:
