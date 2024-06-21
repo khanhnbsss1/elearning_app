@@ -1,6 +1,6 @@
 {
-    "name": "webkit",
-    "short_name": "webkit",
+    "name": "web_kit_learning_platform",
+    "short_name": "web_kit_learning_platform",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

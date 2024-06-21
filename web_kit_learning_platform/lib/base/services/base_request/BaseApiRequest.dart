@@ -118,12 +118,13 @@ class BaseApiRequest {
     bool containAuthenParams = requestHeader!.keys.contains("Authorization");
     if(!containAuthenParams && userInfo!=null)
     {
-      requestHeader!.addAll({"Authorization":userInfo.token});
+      requestHeader?.addAll({"Authorization":userInfo.token});
     }
     if(!(isCheckToken??true))
     {
-      requestHeader!.remove("Authorization");
+      requestHeader?.remove("Authorization");
     }
+    requestHeader?.addAll({'content-type': 'application/json', 'Access-Control-Allow-Origin': true, "Accept": "*/*"});
     return requestHeader!;
   }
 
