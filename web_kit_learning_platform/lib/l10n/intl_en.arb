@@ -1,6 +1,9 @@
 {
   "@@locale": "en",
   "app_name": "YAX Chinese learning platform",
+  "app_email": "hello@pulse.com",
+  "app_phone": "+33 455 67 89 00",
+  "app_address": "Innovation St. 767,CA - USA",
   "notify_error": "An error occurred!",
   "authen_invalid": "Username or password is incorrect",
   "appcept": "Accept",
@@ -358,6 +361,6 @@
   "teachers_teach_the_most":"Teachers who teach the most",
   "register_to_enjoy_the_best_deals_for_you":"Register to enjoy the best deals for you",
   "vnd_str": "VND",
-  "register_now": "Register now"
-
+  "register_now": "Register now",
+  "subcribe_to_our_news_letter": "Subcribe to our newsletter"
 }

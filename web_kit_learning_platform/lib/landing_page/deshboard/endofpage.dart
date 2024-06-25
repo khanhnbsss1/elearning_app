@@ -135,7 +135,7 @@ class _EndOfPageState extends State<EndOfPage> {
                           ImageManager().getPngImage(ImageManager.logo, height: constraints.maxWidth < Dimens.size300 ? Dimens.size27 : Dimens.size35),
                           const SizedBox(width: 5),
                           Text(
-                            'Kuku.io',
+                            L10nX.getStr.app_name,
                             style: TextStyle(
                                 fontFamily: 'gilroybold',
                                 color: notifier.blackcolor,
@@ -213,7 +213,7 @@ class _EndOfPageState extends State<EndOfPage> {
                           );
                         },
                       )),
-                Text('Subcribe to our newsletter',
+                Text(L10nX.getStr.subcribe_to_our_news_letter,
                   style: TextStyle(
                       fontFamily: 'gilroysemi',
                       color: notifier.blackcolor),
@@ -233,7 +233,7 @@ class _EndOfPageState extends State<EndOfPage> {
                               ImageManager().getPngImage(ImageManager.logo, height: Dimens.size35),
                               const SizedBox(width: 5),
                               Text(
-                                'Kuku.io',
+                                L10nX.getStr.app_name,
                                 style: TextStyle(
                                   fontFamily: 'gilroybold',
                                   color: notifier.blackcolor,
@@ -291,7 +291,7 @@ class _EndOfPageState extends State<EndOfPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          Text('Subcribe to our newsletter',
+                          Text(L10nX.getStr.subcribe_to_our_news_letter,
                               style: TextStyle(
                                   fontFamily: 'gilroysemi',
                                   color: notifier.blackcolor)),
@@ -506,7 +506,7 @@ class _EndOfPageState extends State<EndOfPage> {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'Copyright © Make it Kuku.io\n| Designed by Make it Services - Powered by Kuku.io',
+                          'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services - Powered by ${L10nX.getStr.app_name}',
                           style: TextStyle(
                               fontSize: constraints.maxWidth < 500 ? 12 : 14,
                               fontFamily: 'gilroymed',
@@ -587,7 +587,7 @@ class _EndOfPageState extends State<EndOfPage> {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'Copyright © Make it Kuku.io\n| Designed by Make it Services - Powered by Kuku.io',
+                          'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services - Powered by ${L10nX.getStr.app_name}',
                           style: TextStyle(
                               fontSize: constraints.maxWidth < 300 ? 10 : 14,
                               fontFamily: 'gilroymed',

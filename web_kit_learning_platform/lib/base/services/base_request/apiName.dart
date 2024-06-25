@@ -37,7 +37,8 @@ class ApiName {
   /// landing page
 
   final String getCourseListLandingPage = "/get-course-landingpage";
-  final String getTeacherOrStudentListLandingPage = "/get-course-detail";
-  
+  final String getTeacherListLandingPage = "/get-landingpage-teacher";
+  final String getReviewListLandingPage = "/get-landingpage-review";
+
 }
 

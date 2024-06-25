@@ -33,7 +33,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_products": MessageLookupByLibrary.simpleMessage("添加产品"),
         "alert": MessageLookupByLibrary.simpleMessage("警报"),
         "animated": MessageLookupByLibrary.simpleMessage("动画"),
+        "app_address":
+            MessageLookupByLibrary.simpleMessage("Innovation St. 767,CA - USA"),
+        "app_email": MessageLookupByLibrary.simpleMessage("hello@pulse.com"),
         "app_name": MessageLookupByLibrary.simpleMessage("越爱学汉语学习平台"),
+        "app_phone": MessageLookupByLibrary.simpleMessage("+33 455 67 89 00"),
         "appcept": MessageLookupByLibrary.simpleMessage("接受"),
         "apps": MessageLookupByLibrary.simpleMessage("应用程序"),
         "are_you_ready_send_command":
@@ -335,6 +339,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("没有旧数据"),
         "string_notify": MessageLookupByLibrary.simpleMessage("通知"),
         "string_time_setting": MessageLookupByLibrary.simpleMessage("时间设置"),
+        "subcribe_to_our_news_letter":
+            MessageLookupByLibrary.simpleMessage("订阅我们的新闻通讯"),
         "submit": MessageLookupByLibrary.simpleMessage("提交"),
         "subtitle_is_more_useful":
             MessageLookupByLibrary.simpleMessage("副标题更有用"),

@@ -1,7 +1,9 @@
 {
   "@@locale": "zh",
-
   "app_name":"越爱学汉语学习平台",
+  "app_email": "hello@pulse.com",
+  "app_phone": "+33 455 67 89 00",
+  "app_address": "Innovation St. 767,CA - USA",
   "notify_error": "发生错误！",
   "authen_invalid": "用户名或密码不正确",
   "appcept": "接受",
@@ -361,6 +363,6 @@
   "teachers_teach_the_most":"教得最多的老师",
   "register_to_enjoy_the_best_deals_for_you":"注册即可享受最优惠的价格",
   "vnd_str": "VND",
-  "register_now": "立即注册"
-
+  "register_now": "立即注册",
+  "subcribe_to_our_news_letter": "订阅我们的新闻通讯"
 }

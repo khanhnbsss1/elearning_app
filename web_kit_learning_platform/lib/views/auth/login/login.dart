@@ -4,7 +4,6 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/image_manager/images_constant.dart';
 import 'package:webkit/base/resizer/reponsive.dart';
 import 'package:webkit/components/app_logo.dart';
 import 'package:webkit/controller/auth/login_controller.dart';

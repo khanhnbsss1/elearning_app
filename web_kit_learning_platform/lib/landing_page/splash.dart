@@ -46,7 +46,7 @@ class _LandingPageSplashState extends State<LandingPageSplash> {
           children: [
             Image.asset('assets/splashImage/preloader.gif'),
             const SizedBox(height: 20,),
-            Text('Kuku.io',style: TextStyleConstant.textStyleBlack28w700),
+            Text(L10nX.getStr.app_name,style: TextStyleConstant.textStyleBlack28w700),
           ],
         ),
       ),

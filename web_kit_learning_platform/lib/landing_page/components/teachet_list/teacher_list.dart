@@ -2,8 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+import 'package:universal_html/html.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/constant/dimens_constant.dart';
+import 'package:webkit/services/apis/user/models/landing_page_teacher_model.dart';
 
 import '../colornotifier.dart';
 import '../../mediaquery/mq.dart';
@@ -112,7 +116,7 @@ class _TeacherListState extends State<TeacherList> {
                     children: [
                       //buildListTeacher2(constraints),
                       //const SizedBox(height: 40),
-                      buildListTeacher1(constraints),
+                      buildListTeacher1(constraints:constraints, state: state),
                     ],
                   );
                 },
@@ -120,13 +124,20 @@ class _TeacherListState extends State<TeacherList> {
             }));
 
   }
-  Widget buildListTeacher1(constraints){
+  Widget buildListTeacher1({required BoxConstraints constraints, required TeacherListState state}){
+    List<Widget>teacherList = List.empty(growable: true);
+    for(LandingPageUserInfo landingPageUserInfo in state.landingPageUserListModel!.data!)
+      {
+        teacherList.add(buildTeacherItem1(landingPageUserInfo: landingPageUserInfo));
+      }
     return Column(
         children: [
           Padding(
             padding: EdgeInsets.only(left: constraints.maxWidth < 550 ? 10 : 50,right: constraints.maxWidth < 500 ? 5 : 50),
             child: SizedBox(
-                width: constraints.maxWidth < 1100 ? constraints.maxWidth / 1 : constraints.maxWidth < 1200 ? constraints.maxWidth / 1.09 : constraints.maxWidth / 1.2,
+                width: constraints.maxWidth < 1100 ? 
+                constraints.maxWidth / 1 : constraints.maxWidth < 1200 ? 
+                constraints.maxWidth / 1.09 : constraints.maxWidth / 1.2,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -139,99 +150,8 @@ class _TeacherListState extends State<TeacherList> {
                             style: TextStyleConstant.textStyleBlack28w700.copyWith(
                               fontSize: constraints.maxWidth < 550 ? 28 : 32,)
                         ),
-                        PopupMenuButton(
-                          tooltip: '',
-                          padding: const EdgeInsets.all(0),
-                          offset: const Offset(0, 60),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          // initialValue: selectedMenu,
-                          constraints: const BoxConstraints(
-                            maxWidth: 800,
-                            maxHeight: 400,
-                          ),
-                          color: notifier.whitecolor,
-                          child: Row(
-                            children: [
-                              Text(
-                                ' ${selectedvalue.isNotEmpty ? selectedvalue : selectedvalue = type[0]}',
-                                style: TextStyle(
-                                    fontFamily: 'gilroysemi',
-                                    fontSize: constraints.maxWidth < 550 ? 28 : 32,
-                                    color: notifier.buttoncolor),
-                              ),
-                              Icon(
-                                Icons.keyboard_arrow_down_rounded,
-                                color: notifier.buttoncolor,
-                              ),
-                            ],
-                          ),
-                          onSelected: (SampleItem2 item) {
-                            setState(() {
-                              // selectedMenu = item;
-                            });
-                          },
-                          itemBuilder: (BuildContext context) =>
-                          <PopupMenuEntry<SampleItem2>>[
-                            PopupMenuItem<SampleItem2>(
-                              enabled: true,
-                              value: SampleItem2.itemOne,
-                              onTap: () {
-                                setState(() {
-                                  selectedvalue = type[0];
-                                });
-                              },
-                              child: Text(
-                                type[0],
-                                style: TextStyle(
-                                    color: selectedvalue == type[0]
-                                        ? Colors.blue
-                                        : notifier.subgreycolor,
-                                    fontSize: constraints.maxWidth < 550 ? 28 : 32,
-                                    fontFamily: 'gilroysemi'),
-                              ),
-                            ),
-                            PopupMenuItem<SampleItem2>(
-                              enabled: true,
-                              value: SampleItem2.itemOne,
-                              onTap: () {
-                                setState(() {
-                                  selectedvalue = type[1];
-                                });
-                              },
-                              child: Text(
-                                type[1],
-                                style: TextStyle(
-                                    color: selectedvalue == type[1]
-                                        ? Colors.blue
-                                        : notifier.subgreycolor,
-                                    fontSize: constraints.maxWidth < 550 ? 28 : 32,
-                                    fontFamily: 'gilroysemi'),
-                              ),
-                            ),
-                            PopupMenuItem<SampleItem2>(
-                              enabled: true,
-                              value: SampleItem2.itemOne,
-                              onTap: () {
-                                setState(() {
-                                  selectedvalue = type[2];
-                                });
-                              },
-                              child: Text(
-                                type[2],
-                                style: TextStyle(
-                                    color: selectedvalue == type[2]
-                                        ? Colors.blue
-                                        : notifier.subgreycolor,
-                                    fontSize: constraints.maxWidth < 550 ? 28 : 32,
-                                    fontFamily: 'gilroysemi'),
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
-                    )
+                    ) 
                         : Row(
                       children: [
                         Text(
@@ -239,101 +159,10 @@ class _TeacherListState extends State<TeacherList> {
                             style: TextStyleConstant.textStyleBlack28w700.copyWith(
                               fontSize: constraints.maxWidth < 550 ? 28 : 32,)
                         ),
-                        PopupMenuButton(
-                          tooltip: '',
-                          padding: const EdgeInsets.all(0),
-                          offset: const Offset(0, 60),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          // initialValue: selectedMenu,
-                          constraints: const BoxConstraints(
-                            maxWidth: 800,
-                            maxHeight: 400,
-                          ),
-                          color: notifier.whitecolor,
-                          child: Row(
-                            children: [
-                              Text(
-                                ' ${selectedvalue.isNotEmpty ? selectedvalue : selectedvalue = type[0]}',
-                                style: TextStyle(
-                                    fontFamily: 'gilroysemi',
-                                    fontSize: 48,
-                                    color: notifier.buttoncolor),
-                              ),
-                              Icon(
-                                Icons.keyboard_arrow_down_rounded,
-                                color: notifier.buttoncolor,
-                              ),
-                            ],
-                          ),
-                          onSelected: (SampleItem2 item) {
-                            setState(() {
-                              // selectedMenu = item;
-                            });
-                          },
-                          itemBuilder: (BuildContext context) =>
-                          <PopupMenuEntry<SampleItem2>>[
-                            PopupMenuItem<SampleItem2>(
-                              enabled: true,
-                              value: SampleItem2.itemOne,
-                              onTap: () {
-                                setState(() {
-                                  selectedvalue = type[0];
-                                });
-                              },
-                              child: Text(
-                                type[0],
-                                style: TextStyle(
-                                    color: selectedvalue == type[0]
-                                        ? Colors.blue
-                                        : notifier.subgreycolor,
-                                    fontSize: 32,
-                                    fontFamily: 'gilroysemi'),
-                              ),
-                            ),
-                            PopupMenuItem<SampleItem2>(
-                              enabled: true,
-                              value: SampleItem2.itemOne,
-                              onTap: () {
-                                setState(() {
-                                  selectedvalue = type[1];
-                                });
-                              },
-                              child: Text(
-                                type[1],
-                                style: TextStyle(
-                                    color: selectedvalue == type[1]
-                                        ? Colors.blue
-                                        : notifier.subgreycolor,
-                                    fontSize: 32,
-                                    fontFamily: 'gilroysemi'),
-                              ),
-                            ),
-                            PopupMenuItem<SampleItem2>(
-                              enabled: true,
-                              value: SampleItem2.itemOne,
-                              onTap: () {
-                                setState(() {
-                                  selectedvalue = type[2];
-                                });
-                              },
-                              child: Text(
-                                type[2],
-                                style: TextStyle(
-                                    color: selectedvalue == type[2]
-                                        ? Colors.blue
-                                        : notifier.subgreycolor,
-                                    fontSize: 32,
-                                    fontFamily: 'gilroysemi'),
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                     constraints.maxWidth < 800
-                        ? const SizedBox()
+                        ? const SizedBox() 
                         : Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -349,10 +178,11 @@ class _TeacherListState extends State<TeacherList> {
                           ),
                           child: InkWell(
                               onTap: () {
-                                scrollCont.animateTo(double.parse("${a}00"),
-                                    curve:
-                                    const FlippedCurve(Easing.legacy),
-                                    duration: const Duration(seconds: 1));
+                                scrollCont.animateTo(
+                                    double.parse("${a}00"),
+                                    curve: const FlippedCurve(Easing.legacy),
+                                    duration: const Duration(seconds: 1)
+                                );
                                 setState(() {
                                   b = b - constraints.maxWidth < 500 ? 2 : 4;
                                 });
@@ -421,169 +251,14 @@ class _TeacherListState extends State<TeacherList> {
             ),
             child: Padding(
                 padding: EdgeInsets.only(top: 20,bottom: 20,left: constraints.maxWidth < 750 ? 20 : 20,),
-                child: Column(
+                child: state.landingPageUserListModel?.data?.length!=null && state.landingPageUserListModel!.data!.isNotEmpty?
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    constraints.maxWidth < 750 ?
-                    SizedBox(
-                      height: 330,
-                      child: ListView.builder(
-                        controller: scrollCont,
-                        scrollDirection: Axis.horizontal,
-                        itemCount: hostImage2.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Column(
-                                  children: [
-                                    SizedBox(
-                                      width: 210,
-                                      height: 270,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(100),
-                                        child: Image.asset(hostImage2[index],fit: BoxFit.cover),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 20),
-                                    Text('Anot Heller',style: TextStyle(color: notifier.blackcolor,fontSize: 16,fontFamily: 'gilroysemi',fontWeight: FontWeight.w500)),
-                                    // SizedBox(height: 10),
-                                    Text('\$47.00',style: TextStyle(color: notifier.blackcolor,fontSize: 12,fontFamily: 'gilroysemi')),
-                                  ],
-                                ),
-                                Positioned(
-                                  top: 250,
-                                  child: Container(
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                          color: notifier.isDark ? notifier.sugestionbutton : Colors.white,
-                                          borderRadius: BorderRadius.circular(20)
-                                      ),
-                                      child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          add[index]>0 ? const SizedBox() : const SizedBox(width: 20),
-                                          add[index]>0 ? IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                if(add[index]>0){
-                                                  add[index] -= 1;
-                                                }
-                                              });
-                                            }, icon: Icon(Icons.remove_circle_rounded,color: notifier.addHostcolor,size: 16),) : const SizedBox(),
-                                          Text(add[index]==0 ? 'Add' : '${add[index]}',style: TextStyle(
-                                              fontFamily: 'gilroysemi',color: notifier.blackcolor
-                                          ),),
-                                          IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                add[index] += 1;
-                                              });
-                                            }, icon: Icon(Icons.add_circle_rounded,color: notifier.addHostcolor,size: 16),),
-                                        ],
-                                      )
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                    )
-                        : Container(
-                      height: 700,
-                      alignment: Alignment.center,
-                      child: GridView.builder(
-                        controller: scrollCont,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          mainAxisExtent: 200,
-                          mainAxisSpacing: constraints.maxWidth / 18,
-                          crossAxisCount: constraints.maxWidth < 500 ? 1 : constraints.maxWidth < 750 ? 2 : constraints.maxWidth < 1100 ? 2 : 2,
-                        ),
-                        scrollDirection: Axis.horizontal,
-                        itemCount: constraints.maxWidth < 750 ? hostImage2.length : constraints.maxWidth < 900 ? 6 : hostImage2.length,
-                        itemBuilder: (context, index) {
-                          return Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Column(
-                                children: [
-                                  SizedBox(
-                                    width:  210,
-                                    height: 270,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(100),
-                                      child: Image.asset(hostImage2[index],fit: BoxFit.cover),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 20),
-                                  Text('Anot Heller',style: TextStyle(color: notifier.blackcolor,fontSize: 16,fontFamily: 'gilroysemi',fontWeight: FontWeight.w500)),
-                                  // SizedBox(height: 10),
-                                  Text('\$47.00',style: TextStyle(color: notifier.blackcolor,fontSize: 12,fontFamily: 'gilroysemi')),
-                                ],
-                              ),
-                              Positioned(
-                                top: 250,
-                                child: Container(
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                        color: notifier.isDark ? notifier.sugestionbutton : Colors.white,
-                                        borderRadius: BorderRadius.circular(20)
-                                    ),
-                                    child: add[index]>0 ? Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        add[index]>0 ? const SizedBox() : const SizedBox(width: 20),
-                                        add[index]>0 ? IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              if(add[index]>0){
-                                                add[index] -= 1;
-                                              }
-                                            });
-                                          }, icon: Icon(Icons.remove_circle_rounded,color: notifier.addHostcolor,size: 16),) : const SizedBox(),
-                                        Text(add[index]==0 ? 'Add' : '${add[index]}',style: TextStyle(
-                                            fontFamily: 'gilroysemi',color: notifier.blackcolor
-                                        ),),
-                                        IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              add[index] += 1;
-                                            });
-                                          }, icon: Icon(Icons.add_circle_rounded,color: notifier.addHostcolor,size: 16),),
-                                      ],
-                                    ) : InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          add[index] += 1;
-                                        });
-                                      },
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          add[index]>0 ? const SizedBox() : const SizedBox(width: 10),
-                                          add[index]>0 ? Icon(Icons.remove_circle_rounded,color: notifier.addHostcolor,size: 16) : const SizedBox(),
-                                          Text(add[index]==0 ? 'Add' : '${add[index]}',style: TextStyle(
-                                              fontFamily: 'gilroysemi',color: notifier.blackcolor
-                                          ),),
-                                          const SizedBox(width: 5),
-                                          Icon(Icons.add_circle_rounded,color: notifier.addHostcolor,size: 16),
-                                          add[index]>0 ? const SizedBox() : const SizedBox(width: 10),
-                                        ],
-                                      ),
-                                    )
-                                ),
-                              )
-                            ],
-                          );
-                        },
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: teacherList,
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -683,10 +358,64 @@ class _TeacherListState extends State<TeacherList> {
                       ),
                     ),
                   ],
-                )
+                ):SizedBox()
             ),
           ),
         ]
+    );
+  }
+  Widget buildTeacherItem1({required LandingPageUserInfo landingPageUserInfo}){
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(100),
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorConst.whiteColor,
+           // borderRadius: BorderRadius.circular(Dimens.size100)
+          ),
+          child: Column(
+           // alignment: Alignment.bottomCenter,
+            children: [
+              SizedBox(
+                //width:  210,
+                //height: Dimens.size340,
+                child: ImageManager().getImageByUrl(landingPageUserInfo.avatar??"",boxFit: BoxFit.cover),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: ColorConst.whiteColor,
+                    // borderRadius: BorderRadius.circular(Dimens.size100)
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                          landingPageUserInfo.fullname??"",
+                          style: TextStyle(
+                              color: notifier.blackcolor,
+                              fontSize: 16,fontFamily: 'gilroysemi',
+                              fontWeight: FontWeight.w500)),
+                      Text(
+                        landingPageUserInfo.position??"",
+                        style: TextStyle(
+                            color: notifier.blackcolor,
+                            fontSize: 12,fontFamily: 'gilroysemi'), 
+                        maxLines: 2,),
+                      Gap(Dimens.size20)
+                    ],
+                  ),
+                ),
+              ),
+              // SizedBox(height: 10),
+            ],
+          ),
+        ),
+      ),
     );
   }
   Widget buildListTeacher2(constraints) {

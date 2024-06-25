@@ -32,8 +32,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_product": MessageLookupByLibrary.simpleMessage("Thêm sản phẩm"),
         "add_products": MessageLookupByLibrary.simpleMessage("Thêm sản phẩm"),
         "animated": MessageLookupByLibrary.simpleMessage("Hoạt hình"),
+        "app_address":
+            MessageLookupByLibrary.simpleMessage("Innovation St. 767,CA - USA"),
+        "app_email": MessageLookupByLibrary.simpleMessage("hello@pulse.com"),
         "app_name": MessageLookupByLibrary.simpleMessage(
             "YAX Chinese learning platform"),
+        "app_phone": MessageLookupByLibrary.simpleMessage("+33 455 67 89 00"),
         "appcept": MessageLookupByLibrary.simpleMessage("Chấp nhận"),
         "apps": MessageLookupByLibrary.simpleMessage("Ứng dụng"),
         "are_you_ready_send_command": MessageLookupByLibrary.simpleMessage(
@@ -391,6 +395,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "string_payment": MessageLookupByLibrary.simpleMessage("Thanh toán"),
         "string_time_setting":
             MessageLookupByLibrary.simpleMessage("Cài đặt thời gian"),
+        "subcribe_to_our_news_letter": MessageLookupByLibrary.simpleMessage(
+            "Đăng ký nhận bản tin của chúng tôi"),
         "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
         "subtitle_is_more_useful":
             MessageLookupByLibrary.simpleMessage("Phụ đề hữu ích hơn"),

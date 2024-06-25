@@ -13,7 +13,7 @@ import 'package:webkit/views/auth/login/login.dart';
 import 'package:webkit/views/auth/register.dart';
 
 import '../components/colornotifier.dart';
-import '../components/course_list/course_list.dart';
+import '../components/course_list/review_list.dart';
 import '../components/helperwidget.dart';
 import '../mediaquery/mq.dart';
 import 'endofpage.dart';
@@ -186,7 +186,6 @@ class _DeshScreenState extends State<DeshScreen> {
       )),
     );
   }
-
   int tabHover = 0;
 
   Widget appbarleft(constraints) {
@@ -213,7 +212,7 @@ class _DeshScreenState extends State<DeshScreen> {
                       children: [
                         ImageManager().getPngImage(ImageManager.logo, height: constraints.maxWidth < 300 ? 20 : height / 22),
                         const SizedBox(width: 5),
-                        Text('Kuku.io', style: TextStyle(
+                        Text(L10nX.getStr.app_name, style: TextStyle(
                           fontFamily: 'gilroybold',
                           color: notifier.blackcolor,
                           fontSize: constraints.maxWidth < 300 ? 20 : 24,
@@ -827,7 +826,7 @@ class _DeshScreenState extends State<DeshScreen> {
                           fit: BoxFit.fill)
                           : Image.asset('assets/deshboard/winterlandscape.png',
                           fit: BoxFit.fill),
-                      Column(
+                      /*Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: constraints.maxWidth < 800
                             ? CrossAxisAlignment.center
@@ -931,7 +930,7 @@ class _DeshScreenState extends State<DeshScreen> {
                               ? const help()
                               : const Tabsbar(),
                       ],
-                    ),
+                    ),*/
                   ],
                 ),
               ),

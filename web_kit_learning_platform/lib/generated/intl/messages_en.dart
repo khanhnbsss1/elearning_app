@@ -33,8 +33,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_products": MessageLookupByLibrary.simpleMessage("Add products"),
         "alert": MessageLookupByLibrary.simpleMessage("Alert"),
         "animated": MessageLookupByLibrary.simpleMessage("Animated"),
+        "app_address":
+            MessageLookupByLibrary.simpleMessage("Innovation St. 767,CA - USA"),
+        "app_email": MessageLookupByLibrary.simpleMessage("hello@pulse.com"),
         "app_name": MessageLookupByLibrary.simpleMessage(
             "YAX Chinese learning platform"),
+        "app_phone": MessageLookupByLibrary.simpleMessage("+33 455 67 89 00"),
         "appcept": MessageLookupByLibrary.simpleMessage("Accept"),
         "apps": MessageLookupByLibrary.simpleMessage("Apps"),
         "are_you_ready_send_command": MessageLookupByLibrary.simpleMessage(
@@ -391,6 +395,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "string_payment": MessageLookupByLibrary.simpleMessage("Payment"),
         "string_time_setting":
             MessageLookupByLibrary.simpleMessage("Time setting"),
+        "subcribe_to_our_news_letter":
+            MessageLookupByLibrary.simpleMessage("Subcribe to our newsletter"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "subtitle_is_more_useful":
             MessageLookupByLibrary.simpleMessage("Subtitle is more useful"),

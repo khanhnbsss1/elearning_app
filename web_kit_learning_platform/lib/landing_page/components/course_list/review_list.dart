@@ -12,7 +12,7 @@ import 'package:webkit/landing_page/mediaquery/mq.dart';
 import 'package:webkit/services/apis/course/models/course_list_response_model.dart';
 
 import '../colornotifier.dart';
-import 'bloc/course_list_bloc.dart';
+import 'bloc/review_list_bloc.dart';
 
 class CourseList extends StatefulWidget {
   const CourseList({super.key});
@@ -31,13 +31,13 @@ class _CourseListState extends State<CourseList> {
     width = MediaQuery.of(context).size.width;
     return BlocProvider(
         create: (context) {
-          return CourseListBloc(CourseListState())
-            ..add(CourseListInitEvent());
+          return ReviewListBloc(ReviewListState())
+            ..add(ReviewListInitEvent());
         },
-        child: BlocConsumer<CourseListBloc, CourseListState>(
+        child: BlocConsumer<ReviewListBloc, ReviewListState>(
             listener: (context, state) {
               switch (state.blocStatus) {
-                case CourseListStatus.initial:
+                case ReviewListStatus.initial:
                   break;
                 default:
                   break;
@@ -51,7 +51,7 @@ class _CourseListState extends State<CourseList> {
 
   }
 
-  Widget buildCourseList({required BoxConstraints constraints, required CourseListState state}) {
+  Widget buildCourseList({required BoxConstraints constraints, required ReviewListState state}) {
     int lengthOfView = (state.isExpand??false)? constraints.maxWidth < 1300 ? 6 : 8: (state.courseListLandingPageResponseModel?.data??[]).length;
     if(lengthOfView> (state.courseListLandingPageResponseModel?.data??[]).length)
       {
@@ -111,7 +111,7 @@ class _CourseListState extends State<CourseList> {
                                       courseLandingPageInfo.image!,
                                       fit: BoxFit.cover,
                                       width: imageWidth,
-                                      height: imageHeight
+                                      height: imageHeight*2/4
                                   ):
                                   Image.network(
                                       'assets/deshboard/adventure/adventure5.png',

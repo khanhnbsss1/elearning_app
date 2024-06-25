@@ -60,6 +60,36 @@ class S {
     );
   }
 
+  /// `hello@pulse.com`
+  String get app_email {
+    return Intl.message(
+      'hello@pulse.com',
+      name: 'app_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `+33 455 67 89 00`
+  String get app_phone {
+    return Intl.message(
+      '+33 455 67 89 00',
+      name: 'app_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Innovation St. 767,CA - USA`
+  String get app_address {
+    return Intl.message(
+      'Innovation St. 767,CA - USA',
+      name: 'app_address',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `An error occurred!`
   String get notify_error {
     return Intl.message(
@@ -3625,6 +3655,16 @@ class S {
     return Intl.message(
       'Register now',
       name: 'register_now',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subcribe to our newsletter`
+  String get subcribe_to_our_news_letter {
+    return Intl.message(
+      'Subcribe to our newsletter',
+      name: 'subcribe_to_our_news_letter',
       desc: '',
       args: [],
     );

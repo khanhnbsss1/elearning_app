@@ -1,6 +1,9 @@
 {
   "@@locale": "vi",
   "app_name": "YAX Chinese learning platform",
+  "app_email": "hello@pulse.com",
+  "app_phone": "+33 455 67 89 00",
+  "app_address": "Innovation St. 767,CA - USA",
   "notify_error": "Đã có lỗi xảy ra!",
   "authen_invalid": "Tên đăng nhập hoặc mật khẩu không đúng",
   "appcept": "Chấp nhận",
@@ -360,5 +363,6 @@
   "teachers_teach_the_most":"Giáo viên dạy nhiều nhất",
   "register_to_enjoy_the_best_deals_for_you":"Đăng ký để được hưởng những ưu đãi tốt nhất cho bạn",
   "vnd_str": "VNĐ",
-  "register_now": "Đăng ký ngay"
+  "register_now": "Đăng ký ngay",
+  "subcribe_to_our_news_letter": "Đăng ký nhận bản tin của chúng tôi"
 }
