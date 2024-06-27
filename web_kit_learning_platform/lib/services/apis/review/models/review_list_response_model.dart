@@ -1,4 +1,12 @@
+enum UserTypeName{
+  teacher,
+  user
+}
+Map<UserTypeName, String>typeNameToStr={
+  UserTypeName.teacher:"Teacher",
+  UserTypeName.user:"User",
 
+};
 class ReviewListLandingPageResponseModel {
   List<ReviewLandingPageInfo>? data;
 
@@ -32,56 +40,40 @@ class ReviewListLandingPageResponseModel {
 class ReviewLandingPageInfo {
   int? id;
   String? name;
-  String? image;
-  String? producerName;
-  int? totalLectures;
-  int? totalSubjects;
-  String? language;
-  int? payment;
-  String? createdAt;
-  String? updatedAt;
-  int? ratePoint;
+  String? position;
+  String? review;
+  String? typeName;
+  String? avatar;
+  int? isShow;
 
   ReviewLandingPageInfo(
       {this.id,
         this.name,
-        this.image,
-        this.producerName,
-        this.totalLectures,
-        this.totalSubjects,
-        this.language,
-        this.payment,
-        this.createdAt,
-        this.updatedAt,
-        this.ratePoint});
+        this.position,
+        this.review,
+        this.typeName,
+        this.avatar,
+        this.isShow});
 
   ReviewLandingPageInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    image = json['image']??"";
-    producerName = json['producer_name'];
-    totalLectures = json['total_lectures'];
-    totalSubjects = json['total_subjects'];
-    language = json['language'];
-    payment = json['payment'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    ratePoint = json['rate_point'];
+    position = json['position'];
+    review = json['review'];
+    typeName = json['type_name'];
+    avatar = json['avatar'];
+    isShow = json['is_show'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
-    data['image'] = image;
-    data['producer_name'] = producerName;
-    data['total_lectures'] = totalLectures;
-    data['total_subjects'] = totalSubjects;
-    data['language'] = language;
-    data['payment'] = payment;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    data['rate_point'] = ratePoint;
+    data['position'] = position;
+    data['review'] = review;
+    data['type_name'] = typeName;
+    data['avatar'] = avatar;
+    data['is_show'] = isShow;
     return data;
   }
 }

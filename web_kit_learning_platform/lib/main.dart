@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -14,6 +15,7 @@ import 'base/resizer/fetch_pixels.dart';
 import 'base/store/cache_storage.dart';
 import 'base/theme/colors_app.dart';
 import 'base/utils/file_utils.dart';
+import 'base/widgets/common/responsive_info.dart';
 import 'generated/l10n.dart';
 import 'helpers/localizations/bloc/main_bloc.dart';
 import 'helpers/localizations/language_helper.dart';
@@ -50,6 +52,7 @@ Future<void> main() async {
             ChangeNotifierProvider<AppNotifier>(create: (context) => AppNotifier()),
           ],
           builder: (context, child) {
+            ResponsiveInfo().init(context);
             return const MyApp();
           },
         )
@@ -66,6 +69,7 @@ Future<void> initialService()async {
   await SharedPreferencesStorage().initSharedPreferences();
   //FirebaseManager.getInstance.initialFirebase();
   await AuthorHelper.init();
+  await ScreenUtil.ensureScreenSize();
 
 }
 class MyApp extends StatelessWidget {
@@ -113,6 +117,7 @@ class MyApp extends StatelessWidget {
                     print(value);
                   },
                   builder: (context, child) {
+                    ScreenUtil.init(context);
                     NavigationService.registerContext(context, update: true);
                     return Directionality(
                       textDirection: AppTheme.textDirection,

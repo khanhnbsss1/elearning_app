@@ -5,18 +5,8 @@ import 'package:webkit/base/services/base_request/models/response_error_objects.
 import 'package:webkit/services/apis/course/models/course_list_response_model.dart';
 import 'package:webkit/services/apis/user/models/landing_page_teacher_model.dart';
 
-enum UserTypeName{
-  teacher,
-  user
-}
-Map<UserTypeName, String>typeNameToStr={
-  UserTypeName.teacher:"Teacher",
-  UserTypeName.user:"User",
-
-};
-class LandingPageUserListApi extends BaseApiRequest {
-  UserTypeName typeName;
-  LandingPageUserListApi({required this.typeName}):super(
+class LandingPageTeacherListApi extends BaseApiRequest {
+  LandingPageTeacherListApi():super(
     serviceType: SERVICE_TYPE.LandingPages,
     apiName: ApiName.getInstance().getTeacherListLandingPage,
   );
@@ -33,11 +23,14 @@ class LandingPageUserListApi extends BaseApiRequest {
       LandingPageUserListModel paymentHistoryResponseModel = LandingPageUserListModel.fromJsonList(result);
       return paymentHistoryResponseModel;
     }
+    
+    
+    
 
   }
 
   Future<void> getAuthorization() async {
-    await setParamsAdd({"type": typeNameToStr[typeName]});
+    //await setParamsAdd({"type": typeNameToStr[typeName]});
   }
 
   @override

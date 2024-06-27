@@ -8,7 +8,9 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/localizations/language_helper.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
+import 'package:webkit/landing_page/components/review_list/review_list.dart';
 import 'package:webkit/landing_page/deshboard/tabs.dart';
+import 'package:webkit/services/apis/review/models/review_list_response_model.dart';
 import 'package:webkit/views/auth/login/login.dart';
 import 'package:webkit/views/auth/register.dart';
 
@@ -1258,6 +1260,24 @@ class _DeshScreenState extends State<DeshScreen> {
                 : constraints.maxWidth / 30,
           ),
           const TeacherList(),
+          SizedBox(
+            height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
+                ? constraints.maxWidth / 30
+                : constraints.maxWidth / 30,
+          ),
+          ReviewList(typeName: UserTypeName.teacher,),
+          SizedBox(
+            height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
+                ? constraints.maxWidth / 30
+                : constraints.maxWidth / 30,
+          ),
+          ReviewList(typeName: UserTypeName.user,),
+          SizedBox(
+            height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
+                ? constraints.maxWidth / 30
+                : constraints.maxWidth / 30,
+          ),
+         // const ReviewList(),
           SizedBox(height: constraints.maxWidth < 550 ? 60 : constraints.maxWidth / 16),
           constraints.maxWidth < 800
               ? memory(constraints)
@@ -1458,7 +1478,6 @@ class _DeshScreenState extends State<DeshScreen> {
       ),
     );
   }
-
   Widget memory(constraints) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

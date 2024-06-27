@@ -3669,6 +3669,26 @@ class S {
       args: [],
     );
   }
+
+  /// `What teachers say`
+  String get teacher_review_list_str {
+    return Intl.message(
+      'What teachers say',
+      name: 'teacher_review_list_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What students say`
+  String get student_review_list_str {
+    return Intl.message(
+      'What students say',
+      name: 'student_review_list_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

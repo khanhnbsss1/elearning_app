@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/services/apis/user/models/landing_page_teacher_model.dart';
-import 'package:webkit/services/apis/user/user_list/get_landing_page_user_list_api.dart';
+import 'package:webkit/services/apis/user/teacher_list/get_landing_page_teacher_list_api.dart';
 part 'teacher_list_event.dart';
 part 'teacher_list_state.dart';
 
@@ -17,7 +17,7 @@ class TeacherListBloc extends Bloc<TeacherListEvent, TeacherListState> {
       TeacherListInitEvent event,
       Emitter<TeacherListState> emit,
       ) async {
-    LandingPageUserListApi landingPageUserListApi = LandingPageUserListApi(typeName: UserTypeName.teacher);
+    LandingPageTeacherListApi landingPageUserListApi = LandingPageTeacherListApi();
     LandingPageUserListModel landingPageUserListModel= await landingPageUserListApi.call();
     emit(state.copyWith(
       landingPageUserListModel: landingPageUserListModel,

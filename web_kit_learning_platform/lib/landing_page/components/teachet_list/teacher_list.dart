@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
-import 'package:universal_html/html.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/services/apis/user/models/landing_page_teacher_model.dart';
 
 import '../colornotifier.dart';
@@ -126,7 +124,7 @@ class _TeacherListState extends State<TeacherList> {
   }
   Widget buildListTeacher1({required BoxConstraints constraints, required TeacherListState state}){
     List<Widget>teacherList = List.empty(growable: true);
-    for(LandingPageUserInfo landingPageUserInfo in state.landingPageUserListModel!.data!)
+    for(LandingPageUserInfo landingPageUserInfo in state.landingPageUserListModel?.data??[])
       {
         teacherList.add(buildTeacherItem1(landingPageUserInfo: landingPageUserInfo));
       }

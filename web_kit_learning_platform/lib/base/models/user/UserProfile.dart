@@ -6,7 +6,7 @@ enum UserType{
   none,
   DISTRIBUTOR, /// 1  admin
   PARTNER,///2  doi tac
-  CUSTOMER ///3  nguoi dung end user 
+  CUSTOMER, ///3  nguoi dung end user
 }
 class UserProfile {
   int? id;
