@@ -1,4 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -52,7 +53,6 @@ Future<void> main() async {
             ChangeNotifierProvider<AppNotifier>(create: (context) => AppNotifier()),
           ],
           builder: (context, child) {
-            ResponsiveInfo().init(context);
             return const MyApp();
           },
         )
@@ -105,6 +105,12 @@ class MyApp extends StatelessWidget {
               builder: (_, notifier, ___) {
                 return GetMaterialApp(
                   key: UniqueKey(),
+                  scrollBehavior: ScrollConfiguration.of(context).copyWith(
+                    dragDevices: {
+                      PointerDeviceKind.touch,
+                      PointerDeviceKind.mouse,
+                    },
+                  ),
                   debugShowCheckedModeBanner: false,
                   theme: AppTheme.lightTheme,
                   darkTheme: AppTheme.darkTheme,
@@ -118,6 +124,7 @@ class MyApp extends StatelessWidget {
                   },
                   builder: (context, child) {
                     ScreenUtil.init(context);
+                    ResponsiveInfo().init(context);
                     NavigationService.registerContext(context, update: true);
                     return Directionality(
                       textDirection: AppTheme.textDirection,

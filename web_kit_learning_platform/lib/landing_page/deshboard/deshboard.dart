@@ -1251,32 +1251,44 @@ class _DeshScreenState extends State<DeshScreen> {
               },
             ),
           ),
-          SizedBox(
-              height: constraints.maxWidth < 550 ? 70 : constraints.maxWidth / 50),
-          const CourseList(),
-          SizedBox(
-            height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
-                ? constraints.maxWidth / 30
-                : constraints.maxWidth / 30,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                SizedBox(
+                    height: constraints.maxWidth < 550 ? 70 : constraints.maxWidth / 50),
+                const CourseList(),
+                SizedBox(
+                  height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
+                      ? constraints.maxWidth / 30
+                      : constraints.maxWidth / 30,
+                ),
+                const TeacherList(),
+                SizedBox(
+                  height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
+                      ? constraints.maxWidth / 30
+                      : constraints.maxWidth / 30,
+                ),
+                ReviewList(
+                  key: UniqueKey(),
+                  typeName: UserTypeName.teacher,),
+                SizedBox(
+                  height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
+                      ? constraints.maxWidth / 30
+                      : constraints.maxWidth / 30,
+                ),
+                ReviewList(
+                  key: UniqueKey(),
+                  typeName: UserTypeName.user,),
+                SizedBox(
+                  height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
+                      ? constraints.maxWidth / 30
+                      : constraints.maxWidth / 30,
+                ),
+              ],
+            ),
           ),
-          const TeacherList(),
-          SizedBox(
-            height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
-                ? constraints.maxWidth / 30
-                : constraints.maxWidth / 30,
-          ),
-          ReviewList(typeName: UserTypeName.teacher,),
-          SizedBox(
-            height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
-                ? constraints.maxWidth / 30
-                : constraints.maxWidth / 30,
-          ),
-          ReviewList(typeName: UserTypeName.user,),
-          SizedBox(
-            height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
-                ? constraints.maxWidth / 30
-                : constraints.maxWidth / 30,
-          ),
+         
          // const ReviewList(),
           SizedBox(height: constraints.maxWidth < 550 ? 60 : constraints.maxWidth / 16),
           constraints.maxWidth < 800
