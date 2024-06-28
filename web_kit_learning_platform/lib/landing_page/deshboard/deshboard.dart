@@ -15,7 +15,7 @@ import 'package:webkit/views/auth/login/login.dart';
 import 'package:webkit/views/auth/register.dart';
 
 import '../components/colornotifier.dart';
-import '../components/course_list/review_list.dart';
+import '../components/course_list/course_list.dart';
 import '../components/helperwidget.dart';
 import '../mediaquery/mq.dart';
 import 'endofpage.dart';
@@ -40,91 +40,40 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    selectedvalue = Travelerstype[0];
-    sv = Travelerstype[0];
   }
 
   late TabController t1;
-
-  List pinIcon = [
-    'assets/Icons/locationicon.png',
-    'assets/Icons/calendaricon.png',
-    'assets/Icons/calendaricon.png',
-    'assets/Icons/profileicon.png'
-  ];
-  List pins = ['Location', 'Check in', 'Check out', 'Travelers'];
-  List hints = ['Where are you doing?', 'Add date', 'Add date', 'Travelers'];
-  List chips = ['Round-trip', 'One-way', '1 guest'];
+  
 
   List sugimage = [
-    'assets/deshboard/experience/paris.png',
-    'assets/deshboard/experience/singapore.png',
-    'assets/deshboard/experience/pattaya.png',
-    'assets/deshboard/experience/roma.png',
-    'assets/deshboard/experience/phuket.png',
-    'assets/deshboard/experience/bangkok.png'
+    'assets/deshboard/experience/difference_conversation1.svg',
+    'assets/deshboard/experience/difference_conversation2.svg',
+    'assets/deshboard/experience/difference_conversation3.svg',
+    'assets/deshboard/experience/difference_conversation4.svg',
+    'assets/deshboard/experience/difference_conversation5.svg',
+    'assets/deshboard/experience/difference_conversation6.svg'
   ];
-  List sug = [
-    'Paris',
-    'Singapore',
-    'Pattaya',
-    'Roma',
-    'Phuket',
-    'Bangkok'
+  List differentimage = [
+    'assets/deshboard/experience/difference_conversation1.svg',
+    'assets/deshboard/experience/difference_conversation2.svg',
+    'assets/deshboard/experience/difference_conversation3.svg',
+    'assets/deshboard/experience/difference_conversation4.svg',
   ];
-  List places = [
-    '200+ Tours',
-    '400+ Tours',
-    '500+ Tours',
-    '100+ Tours',
-    '700+ Tours',
-    '600+ Tours'
-  ];
-  List places2 = [
-    '200+\nTours',
-    '400+\n Tours',
-    '500+\n Tours',
-    '100+\n Tours',
-    '700+\n Tours',
-    '600+\n Tours'
-  ];
+  
   int selectedindex = 0;
   int sugindex = 0;
   double a = 2;
-  ScrollController sugcon = ScrollController();
+  ScrollController differrentController = ScrollController();
+  ScrollController whyChooseUsController = ScrollController();
 
   List<Color> suColor = [
     const Color(0xFF8BC5E5),
     const Color(0xFF92A5EF),
     const Color(0xFF58C27D)
   ];
-  List sunumber = ['01', '02', '03'];
-  List su1 = [
-    'Explore Beyond Boundaries',
-    'Book Your Journey with Ease!',
-    'Book, Pack, Explore'
-  ];
-  List s2 = [
-    'Immerse yourself in a world of seamless travel experiences with our intuitive booking platform.',
-    'Our platform lets you wander wisely, offering a streamlined booking experience for your dream destinations.',
-    'Book your adventure, pack your bags, and let the exploration begin.'
-  ];
-  List su2 = [
-    'Stacks is a production-ready library of stackable\ncontent blocks built in React Native.',
-    'Stacks is a production-ready library of stackable\ncontent blocks built in React Native.',
-    'Stacks is a production-ready library of stackable\ncontent blocks built in React Native.'
-  ];
+ 
+  
 
-
-  List abouttitle = ['Book & relax', 'Smart checklist', 'Save more'];
-  List aboutsubtitle = [
-    'We realize ideas from simple to complex, everything becomes easy to use.',
-    'We realize ideas from simple to complex, everything becomes easy to use.',
-    'We realize ideas from simple to complex, everything becomes easy to use.',
-  ];
-
-  String selectedvalue = '';
-  List Travelerstype = ['Flights', 'Hotels', 'Homestays & Villas', 'Holiday Packages','Trains','Buses','Cabs'];
 
   List profilemenuImages = [
     'assets/Icons/ticketIcon.svg',
@@ -151,11 +100,6 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
     'Help'
   ];
   List notNumber = ['2', '4', '6', '', '', ''];
-
-  int selectedlang = 0;
-  int ind = 0;
-  String sv = '';
-  int inde = 0;
 
   bool buttonhover = false;
   bool supportHover = false;
@@ -236,318 +180,18 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
             ),
           ),
           SizedBox(
-            height: constraints.maxWidth < 550
-                ? constraints.maxWidth / 5
-                : constraints.maxWidth / 15,
+            height: constraints.maxWidth / 30,
           ),
-          Padding(
-            padding: EdgeInsets.only(left: constraints.maxWidth < 500 ? 10 : 0,right: constraints.maxWidth < 500 ? 10 : 0),
-            child: Column(
-                children: [
-                  Text("Enjoy the travel experience with us",
-                      style: TextStyle(
-                          fontFamily: 'gilroysemi',
-                          fontSize: constraints.maxWidth < 550
-                              ? 28
-                              : 45,
-                          color: notifier.blackcolor),
-                      textAlign: TextAlign.center),
-                  Text(
-                    "Book your adventure, pack your bags and let the exploration begin.",
-                    style: TextStyle(
-                        fontFamily: 'gilroy',
-                        fontSize: constraints.maxWidth < 700 ? 18 : 20,
-                        color: notifier.greycolor),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-            ),
-          ),
-          SizedBox(
-            height: constraints.maxWidth < 550
-                ? 0
-                : constraints.maxWidth / 30,
-          ),
-          SizedBox(
-            height: 200,
-            width: constraints.maxWidth < 750
-                ? 410
-                : constraints.maxWidth < 1000
-                ? 780
-                : constraints.maxWidth > 1800
-                ? constraints.maxWidth / 1.1
-                : 1000,
-            child: ListView.builder(
-              shrinkWrap: true,
-              controller: sugcon,
-              scrollDirection: Axis.horizontal,
-              itemCount: sugimage.length,
-              itemBuilder: (context, sugindex) {
-                return SizedBox(
-                  height: 60,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: constraints.maxWidth < 750
-                            ? (sugindex==0 ? 10 : 0)
-                            : (sugindex==0 ? 10 : 0),
-                      ),
-                      Image.asset(sugimage[sugindex],
-                          height: constraints.maxWidth < 750
-                              ? 110
-                              : constraints.maxWidth < 1000
-                              ? 130
-                              : 150),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: constraints.maxWidth < 750
-                                ? 90
-                                : constraints.maxWidth < 1000
-                                ? 220
-                                : 140,
-                            child: Text(
-                              sug[sugindex],
-                              style: TextStyle(
-                                  color: notifier.blackcolor,
-                                  fontSize: 18, fontFamily: 'gilroymed'),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            height: constraints.maxWidth < 750 ? 55 : 25,
-                            width: constraints.maxWidth < 750 ? 70 : 100,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: notifier.sugestionbutton,
-                            ),
-                            alignment: Alignment.center,
-                            child: Text(constraints.maxWidth < 500 ? places2[sugindex] : places[sugindex],
-                                style: TextStyle(
-                                    fontFamily: 'gilroybold',
-                                    fontSize: 12,
-                                    color: notifier.blackcolor),
-                                textAlign: TextAlign.center),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: constraints.maxWidth < 750
-                            ? (sugindex==5 ? 0 : 16)
-                            : (sugindex==5 ? 0 : constraints.maxWidth / 24),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
+          buildDifferentListWidget(constraints: constraints),
+
           SizedBox(
             height: constraints.maxWidth / 30,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                      width: 2,
-                      color: (isHover) ? notifier.sugestionbutton : Colors
-                          .transparent),
-                ),
-                child: InkWell(
-                  onTap: () {
-                    sugcon.animateTo(double.parse("${a}00"),
-                        curve: const FlippedCurve(Easing.legacy),
-                        duration: const Duration(seconds: 1));
-                    setState(() {
-                      a = a - 4;
-                    });
-                  },
-                  onHover: (val) {
-                    setState(() {
-                      isHover = val;
-                    });
-                  },
-                  child: Padding(padding: const EdgeInsets.all(13),
-                    child: Image.asset(
-                      'assets/Icons/arrowlefticon.png',
-                      width: 15,
-                      color: notifier.subgreycolor,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 10),
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                      width: 2,
-                      color: (isHover2) ? notifier.sugestionbutton : Colors
-                          .transparent),
-                ),
-                child: InkWell(
-                  onTap: () {
-                    sugcon.animateTo(double.parse("${a}00"),
-                        curve: const FlippedCurve(Easing.legacy),
-                        duration: const Duration(seconds: 1));
-                    setState(() {
-                      a = a + 4;
-                    });
-                  },
-                  onHover: (val) {
-                    setState(() {
-                      isHover2 = val;
-                    });
-                  },
-                  child: Padding(padding: const EdgeInsets.all(13),
-                    child: Image.asset(
-                        'assets/Icons/arrowrighticon.png',
-                        width: 15,
-                        color: notifier.subgreycolor
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: constraints.maxWidth / 30,
-          ),
-          Text('Why choose us',
-              style: TextStyle(
-                  fontFamily: 'gilroysemi',
-                  fontSize: constraints.maxWidth < 550
-                      ? 28
-                      : 45,
-                  color: notifier.blackcolor),
-              textAlign: TextAlign.center),
-          Text(
-            "These popular destinations have a lot to offer",
-            style: TextStyle(
-                fontFamily: 'gilroy',
-                fontSize: constraints.maxWidth < 700 ? 18 : 20,
-                color: notifier.greycolor),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: constraints.maxWidth < 550 ? 0 : constraints.maxWidth < 800
-                ? constraints.maxWidth / 30
-                : constraints.maxWidth / 30,
-          ),
-          constraints.maxWidth < 800 ? Container(
-            alignment: Alignment.center,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemCount:  lottiecontent.length,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (context, index) {
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Lottie.asset(lottiecontent[index].lottiefile,
-                            height: 200),
-                        const SizedBox(height: 10),
-                        Text(lottiecontent[index].title,
-                            style: TextStyle(
-                                fontFamily: 'gilroysemi',
-                                fontSize: constraints.maxWidth < 500
-                                    ? 24
-                                    : constraints.maxWidth < 800
-                                    ? 28
-                                    : 24,
-                                color: notifier.blackcolor),
-                            textAlign: TextAlign.center),
-                        const SizedBox(height: 10),
-                        SizedBox(
-                          width: constraints.maxWidth < 800 ? 200 : 240,
-                          child: Text(lottiecontent[index].subtitle,
-                              style: TextStyle(
-                                  fontFamily: 'gilroysemi',
-                                  fontSize:
-                                  constraints.maxWidth < 500 ? 16 : constraints.maxWidth < 800 ? 18 : 14,
-                                  color: notifier.greycolor),
-                              textAlign: TextAlign.center),
-                        ),
-                        SizedBox(
-                          height: constraints.maxWidth < 1000 ? 50 : 0,
-                        ),
-                      ],
-                    ),
-                  ],
-                );
-              },
-            ),
-          ) :
-          Container(
-            height: 400,
-            width: width / 1,
-            alignment: Alignment.center,
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: lottiecontent.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.only(
-                      right: index == 0 ? 50 : 0, left: index == 2 ? 50 : 0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Lottie.asset(lottiecontent[index].lottiefile,
-                              height: 200),
-                          const SizedBox(height: 10),
-                          Text(lottiecontent[index].title,
-                              style: TextStyle(
-                                  fontFamily: 'gilroysemi',
-                                  fontSize: constraints.maxWidth < 800
-                                      ? 18
-                                      : 24,
-                                  color: notifier.blackcolor),
-                              textAlign: TextAlign.center),
-                          const SizedBox(height: 10),
-                          SizedBox(
-                            width: constraints.maxWidth < 800 ? 200 : 240,
-                            child: Text(lottiecontent[index].subtitle,
-                                style: TextStyle(
-                                    fontFamily: 'gilroysemi',
-                                    fontSize:
-                                    constraints.maxWidth < 800 ? 18 : 14,
-                                    color: notifier.greycolor),
-                                textAlign: TextAlign.center),
-                          ),
-                          SizedBox(
-                            height: constraints.maxWidth < 1000 ? 50 : 0,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
+
+
+
+
+          buildWhyChooseUsListWidget(constraints: constraints),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -567,7 +211,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       : constraints.maxWidth / 30,
                 ),
                 ReviewList(
-                  key: UniqueKey(),
+                  //key: UniqueKey(),
                   typeName: UserTypeName.teacher,),
                 SizedBox(
                   height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
@@ -575,7 +219,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       : constraints.maxWidth / 30,
                 ),
                 ReviewList(
-                  key: UniqueKey(),
+                 // key: UniqueKey(),
                   typeName: UserTypeName.user,),
                 SizedBox(
                   height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
@@ -982,250 +626,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
       ],
     );
   }
-
-  Widget flamrating(constraints) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-            padding: EdgeInsets.only(
-                bottom: 20,
-                left: constraints.maxWidth < 550 ? 10 : constraints.maxWidth <
-                    1000 ? 40 : 0,
-                right: constraints.maxWidth < 550 ? 10 : constraints.maxWidth <
-                    1000 ? 40 : 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: width / 1,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: su1.length,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 40,
-                            height: 25,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: suColor[index],
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Text(sunumber[index],
-                                style: TextStyle(
-                                    fontFamily: 'gilroysemi',
-                                    fontSize: 14,
-                                    color: notifier.whitecolor)),
-                          ),
-                          SizedBox(
-                            height: constraints.maxWidth < 550 ? 20 : 30,
-                          ),
-                          Text(su1[index],
-                              style: TextStyle(
-                                  fontFamily: 'gilroysemi',
-                                  fontSize: constraints.maxWidth < 550
-                                      ? 22
-                                      : 26,
-                                  color: notifier.blackcolor)),
-                          SizedBox(
-                            height: constraints.maxWidth < 550 ? 20 : 30,
-                          ),
-                          Text(s2[index],
-                              style: TextStyle(
-                                  fontFamily: 'gilroy',
-                                  fontSize: constraints.maxWidth < 550
-                                      ? 14
-                                      : 16,
-                                  color: notifier.blackcolor)),
-                          SizedBox(
-                            height: constraints.maxWidth < 550 ? 30 : 40,
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 45,
-                  child: ElevatedButton(
-                      style: ButtonStyle(
-                        elevation: WidgetStateProperty.all(0),
-                        shape: WidgetStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25))),
-                        backgroundColor:
-                        WidgetStateProperty.all(notifier.buttoncolor),
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        'Start Your Search',
-                         style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: 'gilroysemi',
-                            color: Colors.white),
-                      )),
-                ),
-              ],
-            )),
-        Stack(children: [
-          Padding(
-            padding: EdgeInsets.only(
-                top: 40,
-                bottom: 20,
-                left: constraints.maxWidth < 1000 ? 40 : 0,
-                right: constraints.maxWidth < 1000 ? 40 : 0),
-            child: SizedBox(
-              width: width / 1,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child:
-                Image.asset(
-                  'assets/deshboard/beachwalk.png', fit: BoxFit.cover,),
-              ),
-            ),
-          ),
-          Positioned(
-            top: constraints.maxWidth / 1.8,
-            right: constraints.maxWidth < 750
-                ? constraints.maxWidth / 1.75
-                : constraints.maxWidth < 800
-                ? constraints.maxWidth / 1.5
-                : constraints.maxWidth < 900
-                ? constraints.maxWidth / 1.5
-                : constraints.maxWidth < 1000
-                ? constraints.maxWidth / 1.5
-                : 770,
-            child: Container(
-                height: constraints.maxWidth < 750
-                    ? constraints.maxWidth / 8
-                    : constraints.maxWidth / 10,
-                width: constraints.maxWidth < 750
-                    ? constraints.maxWidth / 2.6
-                    : constraints.maxWidth / 3.2,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(constraints.maxWidth < 750
-                      ? constraints.maxWidth / 3
-                      : constraints.maxWidth / 18),
-                  color: const Color(0xFFFCFDFD),
-                  gradient: const LinearGradient(
-                      colors: [Color(0xFFFCFDFD), Colors.white70]),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(constraints.maxWidth / 50),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        'assets/deshboard/avatar.png',
-                        height: constraints.maxWidth < 750
-                            ? constraints.maxWidth / 15
-                            : constraints.maxWidth / 14,
-                      ),
-                      const SizedBox(width: 15),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Antone Heller',
-                            style: TextStyle(
-                              fontSize: constraints.maxWidth / 38,
-                              fontFamily: 'gilroysemi',
-                              color: notifier.textcolor,
-                            ),
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Icon(Icons.star_rounded,
-                                  color: notifier.yellowcolor,
-                                  size: constraints.maxWidth / 45),
-                              const SizedBox(width: 5),
-                              Text(
-                                '4.8',
-                                style: TextStyle(
-                                    fontSize: constraints.maxWidth / 50,
-                                    fontFamily: 'gilroysemi'),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                )),
-          ),
-          Positioned(
-            top: constraints.maxWidth / 1.15,
-            right: constraints.maxWidth < 1000 ? constraints.maxWidth / 8 : 700,
-            child: Container(
-                height: constraints.maxWidth < 750
-                    ? constraints.maxWidth / 8
-                    : constraints.maxWidth / 10,
-                width: constraints.maxWidth < 750
-                    ? constraints.maxWidth / 2.6
-                    : constraints.maxWidth / 3.2,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                        constraints.maxWidth < 750
-                            ? constraints.maxWidth / 3
-                            : constraints.maxWidth / 18),
-                    color: const Color(0xFFFCFDFD),
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Colors.black38, blurStyle: BlurStyle.normal)
-                    ]),
-                child: Padding(
-                  padding: EdgeInsets.all(constraints.maxWidth / 50),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        'assets/deshboard/avatar.png',
-                        height: constraints.maxWidth < 750
-                            ? constraints.maxWidth / 15
-                            : constraints.maxWidth / 14,
-                      ),
-                      const SizedBox(width: 15),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Antone Heller',
-                            style: TextStyle(
-                              fontSize: constraints.maxWidth / 38,
-                              fontFamily: 'gilroysemi',
-                              color: notifier.textcolor,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Icon(Icons.star_rounded,
-                                  color: notifier.yellowcolor,
-                                  size: constraints.maxWidth / 45),
-                              const SizedBox(width: 5),
-                              Text(
-                                '4.8',
-                                style: TextStyle(
-                                    fontSize: constraints.maxWidth / 50,
-                                    fontFamily: 'gilroysemi'),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                )),
-          ),
-        ]),
-      ],
-    );
-  }
+  
   
   Widget buildTabBar({required BoxConstraints constraints}){
     return Padding(
@@ -1830,6 +1231,332 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
           ),
         ],
       ),
+    );
+  }
+  Widget buildDifferentListWidget({required BoxConstraints constraints}){
+    List<Widget>listItem = List.empty(growable: true);
+    for(int index=0; index<sugimage.length ; index++)
+      {
+        listItem.add(buildSuggestItem(
+          constraints: constraints,
+          imageAssetName: sugimage[index],
+          content: L10nX().getStringByKey("medthod_content${index+1}"),
+          title: L10nX().getStringByKey("medthod_title${index+1}"),
+        ));
+      }
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: constraints.maxWidth < 550
+              ? constraints.maxWidth / 5
+              : constraints.maxWidth / 15,
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: constraints.maxWidth < 500 ? 10 : 0,right: constraints.maxWidth < 500 ? 10 : 0),
+          child: Column(
+            children: [
+              Text(L10nX.getStr.differences_in_teaching_methods,
+                  style: TextStyleConstant.textStyleBlack28w700.copyWith(
+                    color: notifier.blackcolor, 
+                    fontSize: constraints.maxWidth < 550 ? 28 : 45,),
+                  textAlign: TextAlign.center),
+              Text(
+                  L10nX.getStr.we_are_different_because_we_understand_what_you_need,
+                style: TextStyleConstant.textStyleBlack14w400.copyWith(
+                    fontSize: constraints.maxWidth < 700 ? 18 : 20,
+                    color: notifier.greycolor
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: constraints.maxWidth < 550
+              ? 0
+              : constraints.maxWidth / 30,
+        ),
+        Container(
+         // height: Dimens.size240,
+          constraints: BoxConstraints(
+            maxWidth: ResponsiveInfo.isPhone()
+                ? constraints.maxWidth -Dimens.size20
+                : constraints.maxWidth*3/4,
+          ),
+          child: SingleChildScrollView(
+            controller: differrentController,
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: listItem,
+            ),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                    width: 2,
+                    color: (isHover) ? notifier.sugestionbutton : Colors
+                        .transparent),
+              ),
+              child: InkWell(
+                onTap: () {
+                  differrentController.animateTo(double.parse("${a}00"),
+                      curve: const FlippedCurve(Easing.legacy),
+                      duration: const Duration(seconds: 1));
+                  setState(() {
+                    a = a - 4;
+                  });
+                },
+                onHover: (val) {
+                  setState(() {
+                    isHover = val;
+                  });
+                },
+                child: Padding(padding: const EdgeInsets.all(13),
+                  child: Image.asset(
+                    'assets/Icons/arrowlefticon.png',
+                    width: 15,
+                    color: notifier.subgreycolor,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 10),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                    width: 2,
+                    color: (isHover2) ? notifier.sugestionbutton : Colors
+                        .transparent),
+              ),
+              child: InkWell(
+                onTap: () {
+                  differrentController.animateTo(double.parse("${a}00"),
+                      curve: const FlippedCurve(Easing.legacy),
+                      duration: const Duration(seconds: 1));
+                  setState(() {
+                    a = a + 4;
+                  });
+                },
+                onHover: (val) {
+                  setState(() {
+                    isHover2 = val;
+                  });
+                },
+                child: Padding(padding: const EdgeInsets.all(13),
+                  child: Image.asset(
+                      'assets/Icons/arrowrighticon.png',
+                      width: 15,
+                      color: notifier.subgreycolor
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+  
+  Widget buildSuggestItem(
+      {
+        required BoxConstraints constraints,
+        required String imageAssetName,
+        String? title,
+        String? content
+      }){
+    return Padding(
+      padding:  EdgeInsets.symmetric(horizontal: Dimens.size36, vertical: Dimens.size20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: constraints.maxWidth < 750
+                ? (sugindex==0 ? 10 : 0)
+                : (sugindex==0 ? 10 : 0),
+          ),
+          ImageManager().getSvgImage(imageAssetName,
+              isSvgFolder: false,
+              height: constraints.maxWidth < 750
+                  ? 80
+                  : constraints.maxWidth < 1000
+                  ? 100
+                  : 120),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: constraints.maxWidth < 750 ? 200 : 300,
+                child: Text(
+                  title??"",
+                  style: TextStyleConstant.textStyleBlack18w600,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: constraints.maxWidth < 750 ? 200 : 300,
+                alignment: Alignment.center,
+                child: Text(content??"",
+                    style:TextStyleConstant.textStyleBlack12w400,
+                    textAlign: TextAlign.center,
+                  maxLines: 3,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            width: constraints.maxWidth < 750
+                ? (sugindex==5 ? 0 : 16)
+                : (sugindex==5 ? 0 : constraints.maxWidth / 24),
+          ),
+        ],
+      ),
+    );
+  }
+  
+  Widget buildWhyChooseUsListWidget({ required BoxConstraints constraints,}){
+    List<Widget>listItem = List.empty(growable: true);
+    for(int index=0; index<differentimage.length ; index++)
+    {
+      listItem.add(buildSuggestItem(
+        constraints: constraints,
+        imageAssetName: differentimage[index],
+        content: L10nX().getStringByKey("why_choose_content${index+1}"),
+        title: L10nX().getStringByKey("why_choose_title${index+1}"),
+      ));
+    }
+    return Column(
+      children: [
+        Text(L10nX.getStr.why_choose_us,
+            style: TextStyleConstant.textStyleBlack28w700.copyWith(
+                fontSize: constraints.maxWidth < 550
+                    ? 28
+                    : 45,
+                color: notifier.blackcolor
+            ),
+            textAlign: TextAlign.center),
+        Text(
+          L10nX.getStr.why_choose_us_sub_title,
+          style: TextStyle(
+              fontFamily: 'gilroy',
+              fontSize: constraints.maxWidth < 700 ? 18 : 20,
+              color: notifier.greycolor),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(
+          height: constraints.maxWidth < 550 ? 0 : constraints.maxWidth < 800
+              ? constraints.maxWidth / 30
+              : constraints.maxWidth / 30,
+        ),
+        Container(
+          // height: Dimens.size240,
+          constraints: BoxConstraints(
+            maxWidth: ResponsiveInfo.isPhone()
+                ? constraints.maxWidth -Dimens.size20
+                : constraints.maxWidth*3/4,
+          ),
+          child: SingleChildScrollView(
+            controller: whyChooseUsController,
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: listItem,
+            ),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                    width: 2,
+                    color: (isHover) ? notifier.sugestionbutton : Colors
+                        .transparent),
+              ),
+              child: InkWell(
+                onTap: () {
+                  whyChooseUsController.animateTo(double.parse("${a}00"),
+                      curve: const FlippedCurve(Easing.legacy),
+                      duration: const Duration(seconds: 1));
+                  setState(() {
+                    a = a - 4;
+                  });
+                },
+                onHover: (val) {
+                  setState(() {
+                    isHover = val;
+                  });
+                },
+                child: Padding(padding: const EdgeInsets.all(13),
+                  child: Image.asset(
+                    'assets/Icons/arrowlefticon.png',
+                    width: 15,
+                    color: notifier.subgreycolor,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 10),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(
+                    width: 2,
+                    color: (isHover2) ? notifier.sugestionbutton : Colors
+                        .transparent),
+              ),
+              child: InkWell(
+                onTap: () {
+                  whyChooseUsController.animateTo(double.parse("${a}00"),
+                      curve: const FlippedCurve(Easing.legacy),
+                      duration: const Duration(seconds: 1));
+                  setState(() {
+                    a = a + 4;
+                  });
+                },
+                onHover: (val) {
+                  setState(() {
+                    isHover2 = val;
+                  });
+                },
+                child: Padding(padding: const EdgeInsets.all(13),
+                  child: Image.asset(
+                      'assets/Icons/arrowrighticon.png',
+                      width: 15,
+                      color: notifier.subgreycolor
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

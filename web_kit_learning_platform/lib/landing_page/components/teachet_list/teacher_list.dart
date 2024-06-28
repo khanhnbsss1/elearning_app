@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/services/apis/user/models/landing_page_teacher_model.dart';
 
 import '../colornotifier.dart';
@@ -133,9 +134,7 @@ class _TeacherListState extends State<TeacherList> {
           Padding(
             padding: EdgeInsets.only(left: constraints.maxWidth < 550 ? 10 : 50,right: constraints.maxWidth < 500 ? 5 : 50),
             child: SizedBox(
-                width: constraints.maxWidth < 1100 ? 
-                constraints.maxWidth / 1 : constraints.maxWidth < 1200 ? 
-                constraints.maxWidth / 1.09 : constraints.maxWidth / 1.2,
+                width: constraints.maxWidth < 1300 ? constraints.maxWidth / 0.5 : constraints.maxWidth / 1.1,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -145,18 +144,24 @@ class _TeacherListState extends State<TeacherList> {
                       children: [
                         Text(
                             L10nX.getStr.teacher_list,
-                            style: TextStyleConstant.textStyleBlack28w700.copyWith(
-                              fontSize: constraints.maxWidth < 550 ? 28 : 32,)
-                        ),
+                          style: TextStyleConstant.textStyleBlack28w700.copyWith(
+                              fontSize: constraints.maxWidth < 550
+                                  ? 28
+                                  : 45,
+                              color: notifier.blackcolor
+                          ),),
                       ],
                     ) 
                         : Row(
                       children: [
                         Text(
-                            L10nX.getStr.teacher_list, 
-                            style: TextStyleConstant.textStyleBlack28w700.copyWith(
-                              fontSize: constraints.maxWidth < 550 ? 28 : 32,)
-                        ),
+                            L10nX.getStr.teacher_list,
+                          style: TextStyleConstant.textStyleBlack28w700.copyWith(
+                              fontSize: constraints.maxWidth < 550
+                                  ? 28
+                                  : 45,
+                              color: notifier.blackcolor
+                          ),),
                       ],
                     ),
                     constraints.maxWidth < 800
@@ -242,10 +247,10 @@ class _TeacherListState extends State<TeacherList> {
           ),
           const SizedBox(height: 20),
           Container(
-            width: constraints.maxWidth < 1100 ? constraints.maxWidth / 1 : constraints.maxWidth < 1200 ? constraints.maxWidth / 1.09 : constraints.maxWidth / 1.2,
+            width: constraints.maxWidth < 1300 ? constraints.maxWidth / 0.5 : constraints.maxWidth / 1.1,
             decoration: BoxDecoration(
               color: notifier.hostBGColor,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(30),
             ),
             child: Padding(
                 padding: EdgeInsets.only(top: 20,bottom: 20,left: constraints.maxWidth < 750 ? 20 : 20,),
@@ -255,6 +260,7 @@ class _TeacherListState extends State<TeacherList> {
                   children: [
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
+                      controller: scrollCont,
                       child: Row(
                         children: teacherList,
                       ),
@@ -364,55 +370,52 @@ class _TeacherListState extends State<TeacherList> {
   }
   Widget buildTeacherItem1({required LandingPageUserInfo landingPageUserInfo}){
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(100),
-        child: Container(
-          decoration: BoxDecoration(
-            color: ColorConst.whiteColor,
-           // borderRadius: BorderRadius.circular(Dimens.size100)
-          ),
-          child: Column(
-           // alignment: Alignment.bottomCenter,
-            children: [
-              SizedBox(
-                //width:  210,
-                //height: Dimens.size340,
+      padding: EdgeInsets.symmetric(horizontal: Dimens.size24, vertical: Dimens.size16),
+      child: Column(
+        children: [
+          ClipOval(
+            //borderRadius: BorderRadius.circular(Dimens.size200),
+            child: Container(
+              decoration: BoxDecoration(
+                color: ColorConst.whiteColor,
+               // borderRadius: BorderRadius.circular(Dimens.size100)
+              ),
+              child: SizedBox(
+                height: Dimens.size250,
+                width: Dimens.size200,
                 child: ImageManager().getImageByUrl(landingPageUserInfo.avatar??"",boxFit: BoxFit.cover),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: ColorConst.whiteColor,
-                    // borderRadius: BorderRadius.circular(Dimens.size100)
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                          landingPageUserInfo.fullname??"",
-                          style: TextStyle(
-                              color: notifier.blackcolor,
-                              fontSize: 16,fontFamily: 'gilroysemi',
-                              fontWeight: FontWeight.w500)),
-                      Text(
-                        landingPageUserInfo.position??"",
-                        style: TextStyle(
-                            color: notifier.blackcolor,
-                            fontSize: 12,fontFamily: 'gilroysemi'), 
-                        maxLines: 2,),
-                      Gap(Dimens.size20)
-                    ],
-                  ),
-                ),
-              ),
-              // SizedBox(height: 10),
-            ],
+            ),
           ),
-        ),
+          Gap(Dimens.size12),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              width: Dimens.size200,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                      landingPageUserInfo.fullname??"",
+                      textAlign: TextAlign.center,
+                      style: TextStyleConstant.textStyleBlack16w500),
+                  Text(
+                    landingPageUserInfo.position??"",
+                    style:TextStyleConstant.textStyleBlack12w400,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                  ),
+                  Gap(Dimens.size20)
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

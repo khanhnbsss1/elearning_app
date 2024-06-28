@@ -25,7 +25,14 @@ class ReviewList extends StatefulWidget {
 class _ReviewListState extends State<ReviewList> {
   late ColorNotifier notifier;
   bool isHover = false;
-  ScrollController controller = ScrollController();
+  ScrollController scrollCont = PageController();
+  int a = 4;
+  int b = 4;
+  bool isHover2 = false;
+  bool scrollHover = false;
+  bool scrollHover2 = false;
+  bool viewallHover = false;
+  bool imageHover = false;
   @override
   Widget build(BuildContext context) {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
@@ -60,68 +67,152 @@ class _ReviewListState extends State<ReviewList> {
         lengthOfView = (state.reviewListLandingPageResponseModel?.data??[]).length;
       }
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-            state.typeName == UserTypeName.teacher?L10nX.getStr.teacher_review_list_str:L10nX.getStr.student_review_list_str,
-            style: TextStyleConstant.textStyleBlack28w700.copyWith(fontSize: constraints.maxWidth < 550 ? 28 : 50,)
-        ),
-        SizedBox(height: constraints.maxWidth < 550 ? 30 : 40,),
-        Container(
-          width: constraints.maxWidth < 1300 ? constraints.maxWidth / 0.5 : constraints.maxWidth / 1.1,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: notifier.isDark ? Colors.transparent : const Color(0xFFF4F5F6),
-              border: Border.all(color: notifier.isDark ? notifier.sugestionbutton : Colors.transparent)
+    return SizedBox(
+      width: constraints.maxWidth < 1300 ? constraints.maxWidth / 0.5 : constraints.maxWidth / 1.1,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                  state.typeName == UserTypeName.teacher?L10nX.getStr.teacher_review_list_str:L10nX.getStr.student_review_list_str,
+                style: TextStyleConstant.textStyleBlack28w700.copyWith(
+                    fontSize: constraints.maxWidth < 550
+                        ? 28
+                        : 45,
+                    color: notifier.blackcolor
+                ),),
+              constraints.maxWidth < 800
+                  ? const SizedBox()
+                  : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          width: 2,
+                          color: (isHover)
+                              ? notifier.sugestionbutton
+                              : Colors.transparent),
+                    ),
+                    child: InkWell(
+                        onTap: () {
+                          scrollCont.animateTo(
+                              double.parse("${a}00"),
+                              curve: const FlippedCurve(Easing.legacy),
+                              duration: const Duration(seconds: 1)
+                          );
+                          setState(() {
+                            b = b - constraints.maxWidth < 500 ? 2 : 4;
+                          });
+                        },
+                        onHover: (val) {
+                          setState(() {
+                            isHover = val;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(13),
+                          child: Image.asset(
+                              'assets/Icons/arrowlefticon.png',
+                              width: 15,
+                              color: notifier.subgreycolor
+                          ),
+                        )),
+                  ),
+                  const SizedBox(width: 10),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          width: 2,
+                          color: (isHover2)
+                              ? notifier.sugestionbutton
+                              : Colors.transparent),
+                    ),
+                    child: InkWell(
+                        onTap: () {
+                          scrollCont.animateTo(double.parse("${a}00"),
+                              curve:
+                              const FlippedCurve(Easing.legacy),
+                              duration: const Duration(seconds: 1));
+                          setState(() {
+                            b = b + constraints.maxWidth < 500 ? 2 : 4;
+                          });
+                        },
+                        onHover: (val) {
+                          setState(() {
+                            isHover2 = val;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(13),
+                          child: Image.asset(
+                              'assets/Icons/arrowrighticon.png',
+                              width: 15,
+                              color: notifier.subgreycolor
+                          ),
+                        )),
+                  ),
+                ],
+              ),
+            ],
           ),
-          child: Padding(padding: EdgeInsets.only(
-              left: constraints.maxWidth < 900 ? 20 : 50,
-              right: constraints.maxWidth < 900 ? 20 : 50,
-              top: constraints.maxWidth < 900 ? 20 : 50,
-              bottom: constraints.maxWidth < 900 ? 20 : 25),
-            child: Column(
-              crossAxisAlignment: constraints.maxWidth < 550 ? CrossAxisAlignment.center : CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                SizedBox(
-                  // height: constraints.maxWidth < 900 ? constraints.maxWidth / 0.152 : constraints.maxWidth < 1100 ? constraints.maxWidth / 0.66 : constraints.maxWidth < 1300 ? constraints.maxWidth / 1.35 : constraints.maxWidth / 1.8,
-                  width: constraints.maxWidth < 900 ? constraints.maxWidth / 0.2 : constraints.maxWidth < 1300 ? constraints.maxWidth / 0.5 : constraints.maxWidth / 1.2,
-                  child: LayoutBuilder(
-                    builder: (BuildContext context, BoxConstraints constraints) {
-                      List<Widget> listOfCourse = List.empty(growable: true);
-                      for(ReviewLandingPageInfo reviewLandingPageInfo in state.reviewListLandingPageResponseModel?.data??[])
-                      {
-                        listOfCourse.add(buildReviewItem(constraints: constraints, reviewLandingPageInfo: reviewLandingPageInfo, state: state), 
-                          
-                        );
-                      }
-                      return Center(
-                        child: Scrollbar(
-                          thumbVisibility: false,
-                          trackVisibility: false,
-                          controller: controller,
+          SizedBox(height: constraints.maxWidth < 550 ? 30 : 40,),
+          Container(
+            width: constraints.maxWidth < 1300 ? constraints.maxWidth / 0.5 : constraints.maxWidth / 1.1,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: notifier.isDark ? Colors.transparent : const Color(0xFFF4F5F6),
+                border: Border.all(color: notifier.isDark ? notifier.sugestionbutton : Colors.transparent)
+            ),
+            child: Padding(padding: EdgeInsets.only(
+                left: constraints.maxWidth < 900 ? 20 : 50,
+                right: constraints.maxWidth < 900 ? 20 : 50,
+                top: constraints.maxWidth < 900 ? 20 : 50,
+                bottom: constraints.maxWidth < 900 ? 20 : 25),
+              child: Column(
+                crossAxisAlignment: constraints.maxWidth < 550 ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    // height: constraints.maxWidth < 900 ? constraints.maxWidth / 0.152 : constraints.maxWidth < 1100 ? constraints.maxWidth / 0.66 : constraints.maxWidth < 1300 ? constraints.maxWidth / 1.35 : constraints.maxWidth / 1.8,
+                    width: constraints.maxWidth < 900 ? constraints.maxWidth / 0.2 : constraints.maxWidth < 1300 ? constraints.maxWidth / 0.5 : constraints.maxWidth / 1.2,
+                    child: LayoutBuilder(
+                      builder: (BuildContext context, BoxConstraints constraints) {
+                        List<Widget> listOfCourse = List.empty(growable: true);
+                        for(ReviewLandingPageInfo reviewLandingPageInfo in state.reviewListLandingPageResponseModel?.data??[])
+                        {
+                          listOfCourse.add(buildReviewItem(constraints: constraints, reviewLandingPageInfo: reviewLandingPageInfo, state: state), 
+                            
+                          );
+                        }
+                        return Center(
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            controller: controller,
+                            controller: scrollCont,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               children: listOfCourse,
                             ),
                           ),
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
   Widget buildReviewItem({

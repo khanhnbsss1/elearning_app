@@ -106,6 +106,7 @@ class MyApp extends StatelessWidget {
                 return GetMaterialApp(
                   key: UniqueKey(),
                   scrollBehavior: ScrollConfiguration.of(context).copyWith(
+                    scrollbars: false,
                     dragDevices: {
                       PointerDeviceKind.touch,
                       PointerDeviceKind.mouse,

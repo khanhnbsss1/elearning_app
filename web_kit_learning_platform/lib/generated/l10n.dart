@@ -3689,6 +3689,246 @@ class S {
       args: [],
     );
   }
+
+  /// `Differences in teaching methods`
+  String get differences_in_teaching_methods {
+    return Intl.message(
+      'Differences in teaching methods',
+      name: 'differences_in_teaching_methods',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We are different because we understand what you need`
+  String get we_are_different_because_we_understand_what_you_need {
+    return Intl.message(
+      'We are different because we understand what you need',
+      name: 'we_are_different_because_we_understand_what_you_need',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Teach correct pronunciation from the beginning`
+  String get medthod_title1 {
+    return Intl.message(
+      'Teach correct pronunciation from the beginning',
+      name: 'medthod_title1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `After only 9 hours of studying, you can introduce yourself and have correct pronunciation,`
+  String get medthod_content1 {
+    return Intl.message(
+      'After only 9 hours of studying, you can introduce yourself and have correct pronunciation,',
+      name: 'medthod_content1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Focus on listening, speaking, communication`
+  String get medthod_title2 {
+    return Intl.message(
+      'Focus on listening, speaking, communication',
+      name: 'medthod_title2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Through a system of simulated communication exercises, the app supports in-depth speaking practice`
+  String get medthod_content2 {
+    return Intl.message(
+      'Through a system of simulated communication exercises, the app supports in-depth speaking practice',
+      name: 'medthod_content2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Awesome student community`
+  String get medthod_title3 {
+    return Intl.message(
+      'Awesome student community',
+      name: 'medthod_title3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Most of the students are office workers, managers... who go to school and have more relationships`
+  String get medthod_content3 {
+    return Intl.message(
+      'Most of the students are office workers, managers... who go to school and have more relationships',
+      name: 'medthod_content3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emotional Chinese Method`
+  String get medthod_title4 {
+    return Intl.message(
+      'Emotional Chinese Method',
+      name: 'medthod_title4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Learning method that helps you only spend 20% effort but achieve 80% effectiveness`
+  String get medthod_content4 {
+    return Intl.message(
+      'Learning method that helps you only spend 20% effort but achieve 80% effectiveness',
+      name: 'medthod_content4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emotional Chinese Method`
+  String get medthod_title5 {
+    return Intl.message(
+      'Emotional Chinese Method',
+      name: 'medthod_title5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Learning method that helps you only spend 20% effort but achieve 80% efficiency`
+  String get medthod_content5 {
+    return Intl.message(
+      'Learning method that helps you only spend 20% effort but achieve 80% efficiency',
+      name: 'medthod_content5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emotional Chinese Method`
+  String get medthod_title6 {
+    return Intl.message(
+      'Emotional Chinese Method',
+      name: 'medthod_title6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Learning method that helps you only spend 20% effort but achieve 80% effectiveness`
+  String get medthod_content6 {
+    return Intl.message(
+      'Learning method that helps you only spend 20% effort but achieve 80% effectiveness',
+      name: 'medthod_content6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Why choose us`
+  String get why_choose_us {
+    return Intl.message(
+      'Why choose us',
+      name: 'why_choose_us',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's take a look at some achievements of YAX Chinese learning`
+  String get why_choose_us_sub_title {
+    return Intl.message(
+      'Let\'s take a look at some achievements of YAX Chinese learning',
+      name: 'why_choose_us_sub_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reputation`
+  String get why_choose_title1 {
+    return Intl.message(
+      'Reputation',
+      name: 'why_choose_title1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selected to present live at the International Conference of the Confucius Institute, an agency of the Chinese Ministry of Education on Chinese language teaching.`
+  String get why_choose_content1 {
+    return Intl.message(
+      'Selected to present live at the International Conference of the Confucius Institute, an agency of the Chinese Ministry of Education on Chinese language teaching.',
+      name: 'why_choose_content1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Solid`
+  String get why_choose_title2 {
+    return Intl.message(
+      'Solid',
+      name: 'why_choose_title2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We have trained more than 20,000 face-to-face students and 250,000 online students domestically and internationally`
+  String get why_choose_content2 {
+    return Intl.message(
+      'We have trained more than 20,000 face-to-face students and 250,000 online students domestically and internationally',
+      name: 'why_choose_content2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Beloved`
+  String get why_choose_title3 {
+    return Intl.message(
+      'Beloved',
+      name: 'why_choose_title3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2000 feedback, 500,000 followers on facebook, 300,000 followers and 18 million views on youtube`
+  String get why_choose_content3 {
+    return Intl.message(
+      '2000 feedback, 500,000 followers on facebook, 300,000 followers and 18 million views on youtube',
+      name: 'why_choose_content3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Community Development`
+  String get why_choose_title4 {
+    return Intl.message(
+      'Community Development',
+      name: 'why_choose_title4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A gold sponsor for many consecutive years of the largest Chinese Debate Competition in the country.`
+  String get why_choose_content4 {
+    return Intl.message(
+      'A gold sponsor for many consecutive years of the largest Chinese Debate Competition in the country.',
+      name: 'why_choose_content4',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

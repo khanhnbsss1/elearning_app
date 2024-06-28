@@ -122,12 +122,10 @@ class Assets {
   static const String dummySocial3 = 'assets/images/dummy/social-3.jpg';
   static const String dummySocial4 = 'assets/images/dummy/social-4.jpg';
   static const String dummySocial5 = 'assets/images/dummy/social-5.jpg';
-  static const String experienceBangkok = 'assets/deshboard/experience/bangkok.png';
-  static const String experienceParis = 'assets/deshboard/experience/paris.png';
-  static const String experiencePattaya = 'assets/deshboard/experience/pattaya.png';
-  static const String experiencePhuket = 'assets/deshboard/experience/phuket.png';
-  static const String experienceRoma = 'assets/deshboard/experience/roma.png';
-  static const String experienceSingapore = 'assets/deshboard/experience/singapore.png';
+  static const String experienceDifferenceConversation1 = 'assets/deshboard/experience/difference_conversation1.svg';
+  static const String experienceDifferenceConversation2 = 'assets/deshboard/experience/difference_conversation2.svg';
+  static const String experienceDifferenceConversation3 = 'assets/deshboard/experience/difference_conversation3.svg';
+  static const String experienceDifferenceConversation4 = 'assets/deshboard/experience/difference_conversation4.svg';
   static const String foodFruitJuice = 'assets/images/food/fruit_juice.jpg';
   static const String foodFruits = 'assets/images/food/fruits.jpg';
   static const String foodVeggies = 'assets/images/food/veggies.jpg';
@@ -219,6 +217,10 @@ class Assets {
   static const String pngIcLoading = 'assets/images/png/icLoading.png';
   static const String pngIcNoData = 'assets/images/png/icNoData.png';
   static const String pngLoadingOnPage = 'assets/images/png/loading_on_page.png';
+  static const String pngLogo = 'assets/png/logo.png';
+  static const String pngLogoDark = 'assets/png/logo_dark.png';
+  static const String pngLogoDarkOutlight = 'assets/png/logo_dark_outlight.png';
+  static const String pngLogoOutline = 'assets/png/logo_outline.png';
   static const String pngSearch = 'assets/images/png/search.png';
   static const String profHostpic1 = 'assets/deshboard/prof/hostpic1.png';
   static const String profHostpic2 = 'assets/deshboard/prof/hostpic2.png';

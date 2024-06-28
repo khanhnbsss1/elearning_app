@@ -112,16 +112,18 @@ class ImageManager {
 
   Widget getSvgImage(String image,
       {
+        bool? isSvgFolder,
         double? width,
         double? height,
         Color? color,
         BoxFit boxFit = BoxFit.contain,
         Function()? onTap
       }) {
+     isSvgFolder??=true;
     return InkWell(
       onTap: onTap,
       child: SvgPicture.asset(
-        getSvgImagePath(image),
+        (isSvgFolder)?getSvgImagePath(image):image,
         color: color,
         width: width,
         height: height,

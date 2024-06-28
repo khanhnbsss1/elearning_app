@@ -6,32 +6,32 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/services/apis/course/course_list/course_list_api.dart';
 import 'package:webkit/services/apis/course/models/course_list_response_model.dart';
-part 'review_list_event.dart';
-part 'review_list_state.dart';
+part 'course_list_event.dart';
+part 'course_list_state.dart';
 
-class ReviewListBloc extends Bloc<ReviewListEvent, ReviewListState> {
-  ReviewListBloc(super.initialState) {
-    on<ReviewListInitEvent>(_onInit);
-    on<ReviewListOnExpandEvent>((event, emit) {
+class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
+  CourseListBloc(super.initialState) {
+    on<CourseListInitEvent>(_onInit);
+    on<CourseListOnExpandEvent>((event, emit) {
       emit(state.copyWith(
-        blocStatus: ReviewListStatus.onExpand,
+        blocStatus: CourseListStatus.onExpand,
         isExpand: event.isExpand
       ));
     });
   }
   
   Future<void> _onInit(
-      ReviewListInitEvent event,
-      Emitter<ReviewListState> emit,
+      CourseListInitEvent event,
+      Emitter<CourseListState> emit,
       ) async {
     emit(state.copyWith(
-        blocStatus:  ReviewListStatus.onLoading
+        blocStatus:  CourseListStatus.onLoading
     ));
     LandingPageCourseListApi courseListApi = LandingPageCourseListApi();
     CourseListLandingPageResponseModel courseListLandingPageResponseModel  =await courseListApi.call();
     emit(state.copyWith(
       courseListLandingPageResponseModel: courseListLandingPageResponseModel,
-      blocStatus:  ReviewListStatus.initial
+      blocStatus:  CourseListStatus.initial
     ));
   }
 
