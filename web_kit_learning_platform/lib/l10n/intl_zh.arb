@@ -88,6 +88,7 @@
   "user_create": "创建用户",
   "user_detail": "用户信息",
   "show_more": "显示更多",
+  "show_less": "显示较少",
   "are_you_ready_send_command": "您确定要发送命令吗？",
   "no_internet": "无网络连接",
   "time_out_connection": "超时，请检查您的网络连接",

@@ -1,30 +1,30 @@
-part of 'review_list_bloc.dart';
+part of 'course_list_bloc.dart';
 
-enum ReviewListStatus {
+enum CourseListStatus {
   onLoading, 
   initial,
   onExpand
 }
 
 @immutable
-class ReviewListState extends Equatable {
-  ReviewListStatus? blocStatus;
+class CourseListState extends Equatable {
+  CourseListStatus? blocStatus;
   CourseListLandingPageResponseModel? courseListLandingPageResponseModel;
   bool? isExpand;
-  ReviewListState({
+  CourseListState({
       this.blocStatus,
     this.courseListLandingPageResponseModel,
     this.isExpand
   });
 
 
-  ReviewListState copyWith({
-    ReviewListStatus? blocStatus,
+  CourseListState copyWith({
+    CourseListStatus? blocStatus,
     CourseListLandingPageResponseModel? courseListLandingPageResponseModel,
     bool? isExpand
   })
   {
-    return ReviewListState(
+    return CourseListState(
       blocStatus: blocStatus??this.blocStatus,
       courseListLandingPageResponseModel: courseListLandingPageResponseModel??this.courseListLandingPageResponseModel,
       isExpand: isExpand??this.isExpand,

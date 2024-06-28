@@ -88,6 +88,7 @@
   "user_create": "Tạo người dùng",
   "user_detail": "Thông tin người dùng",
   "show_more": "Xem thêm",
+  "show_less": "Thu gọn",
   "are_you_ready_send_command": "Bạn có chắc chắn muốn gửi lệnh?",
   "no_internet": "Không có kết nối mạng",
   "time_out_connection": "Quá thời gian chờ, vui lòng kiểm tra kết nối mạng của bạn",

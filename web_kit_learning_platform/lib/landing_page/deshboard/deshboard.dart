@@ -15,7 +15,8 @@ import 'package:webkit/views/auth/login/login.dart';
 import 'package:webkit/views/auth/register.dart';
 
 import '../components/colornotifier.dart';
-import '../components/course_list/review_list.dart';
+import '../components/course_list/course_list.dart';
+import '../components/review_list/review_list.dart';
 import '../components/helperwidget.dart';
 import '../mediaquery/mq.dart';
 import 'endofpage.dart';
@@ -827,6 +828,8 @@ class _DeshScreenState extends State<DeshScreen> {
                           height: constraints.maxWidth < 500 ? 400 : 600,
                           fit: BoxFit.fill)
                           : Image.asset('assets/deshboard/winterlandscape.png',
+                          height: 600,
+                          width: constraints.maxWidth,
                           fit: BoxFit.fill),
                       /*Column(
                         mainAxisSize: MainAxisSize.min,
@@ -1394,7 +1397,7 @@ class _DeshScreenState extends State<DeshScreen> {
                                         color: notifier.whitecolor),
                                   ),
                                 ),
-                                hintText: 'Enter youe phone number',
+                                hintText: 'Enter your phone number',
                                 hintStyle: TextStyle(
                                     fontFamily: 'gilroy',
                                     color: notifier.subgreycolor)),
@@ -1423,7 +1426,7 @@ class _DeshScreenState extends State<DeshScreen> {
                       ? 53
                       : constraints.maxWidth > 1600
                       ? constraints.maxWidth / 25
-                      : 65,
+                      : 75,
                   width: constraints.maxWidth < 1000
                       ? constraints.maxWidth / 5
                       : constraints.maxWidth > 1600
@@ -1460,13 +1463,13 @@ class _DeshScreenState extends State<DeshScreen> {
                               children: [
                                 Icon(Icons.star_rounded,
                                     color: notifier.yellowcolor,
-                                    size: constraints.maxWidth / 120),
+                                    size: constraints.maxWidth / 125),
                                 const SizedBox(width: 5),
                                 Text(
                                   '4.8',
                                   style: TextStyle(
                                       fontSize:
-                                      constraints.maxWidth / 120,
+                                      constraints.maxWidth / 125,
                                       fontFamily: 'gilroysemi'),
                                 ),
                               ],

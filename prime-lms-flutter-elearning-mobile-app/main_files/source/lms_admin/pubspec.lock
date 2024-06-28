@@ -341,18 +341,18 @@ packages:
     dependency: transitive
     description:
       name: flex_color_picker
-      sha256: "31b27677d8d8400e4cff5edb3f189f606dd964d608779b6ae1b7ddad37ea48c6"
+      sha256: "5c846437069fb7afdd7ade6bf37e628a71d2ab0787095ddcb1253bf9345d5f3a"
       url: "https://pub.dev"
     source: hosted
-    version: "3.5.0"
+    version: "3.4.1"
   flex_seed_scheme:
     dependency: transitive
     description:
       name: flex_seed_scheme
-      sha256: fb66cdb8ca89084e79efcad2bc2d9deb144666875116f08cdd8d9f8238c8b3ab
+      sha256: "4cee2f1d07259f77e8b36f4ec5f35499d19e74e17c7dce5b819554914082bc01"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.0"
+    version: "1.5.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -487,10 +487,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_plugin_android_lifecycle
-      sha256: c6b0b4c05c458e1c01ad9bcc14041dd7b1f6783d487be4386f793f47a8a4d03e
+      sha256: "8cf40eebf5dec866a6d1956ad7b4f7016e6c0cc69847ab946833b7d43743809f"
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.20"
+    version: "2.0.19"
   flutter_rating_bar:
     dependency: "direct main"
     description:
@@ -593,10 +593,10 @@ packages:
     dependency: transitive
     description:
       name: image_picker_android
-      sha256: "4161e1f843d8480d2e9025ee22411778c3c9eb7e40076dcf2da23d8242b7b51c"
+      sha256: "0f57fee1e8bfadf8cc41818bbcd7f72e53bb768a54d9496355d5e8a5681a19f1"
       url: "https://pub.dev"
     source: hosted
-    version: "0.8.12+3"
+    version: "0.8.12+1"
   image_picker_for_web:
     dependency: transitive
     description:
@@ -654,13 +654,13 @@ packages:
     source: hosted
     version: "1.1.0"
   intl:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: intl
-      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.19.0"
+    version: "0.18.1"
   js:
     dependency: transitive
     description:
@@ -793,10 +793,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_android
-      sha256: "9c96da072b421e98183f9ea7464898428e764bc0ce5567f27ec8693442e72514"
+      sha256: a248d8146ee5983446bf03ed5ea8f6533129a12b11f12057ad1b4a67a2b3b41d
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.5"
+    version: "2.2.4"
   path_provider_foundation:
     dependency: transitive
     description:
@@ -1031,10 +1031,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: ceb2625f0c24ade6ef6778d1de0b2e44f2db71fded235eb52295247feba8c5cf
+      sha256: "17cd5e205ea615e2c6ea7a77323a11712dffa0720a8a90540db57a01347f9ad9"
       url: "https://pub.dev"
     source: hosted
-    version: "6.3.3"
+    version: "6.3.2"
   url_launcher_ios:
     dependency: transitive
     description:
@@ -1143,10 +1143,10 @@ packages:
     dependency: transitive
     description:
       name: vm_service
-      sha256: "3923c89304b715fb1eb6423f017651664a03bf5f4b29983627c4da791f74a4ec"
+      sha256: e7d5ecd604e499358c5fe35ee828c0298a320d54455e791e9dcf73486bc8d9f0
       url: "https://pub.dev"
     source: hosted
-    version: "14.2.1"
+    version: "14.1.0"
   web:
     dependency: transitive
     description:
@@ -1159,10 +1159,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: a79dbe579cb51ecd6d30b17e0cae4e0ea15e2c0e66f69ad4198f22a6789e94f4
+      sha256: "0eaf06e3446824099858367950a813472af675116bf63f008a4c2a75ae13e9cb"
       url: "https://pub.dev"
     source: hosted
-    version: "5.5.1"
+    version: "5.5.0"
   xdg_directories:
     dependency: transitive
     description:
@@ -1188,5 +1188,5 @@ packages:
     source: hosted
     version: "2.1.4"
 sdks:
-  dart: ">=3.4.0 <4.0.0"
-  flutter: ">=3.22.0"
+  dart: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"

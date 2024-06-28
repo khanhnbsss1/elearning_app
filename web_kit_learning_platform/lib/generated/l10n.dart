@@ -920,6 +920,16 @@ class S {
     );
   }
 
+  /// `Show less`
+  String get show_less {
+    return Intl.message(
+      'Show less',
+      name: 'show_less',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Are you sure you want to send the command?`
   String get are_you_ready_send_command {
     return Intl.message(

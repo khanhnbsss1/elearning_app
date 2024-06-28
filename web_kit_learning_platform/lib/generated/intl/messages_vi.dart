@@ -303,6 +303,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hiển thị biểu tượng đóng"),
         "show_hide_items":
             MessageLookupByLibrary.simpleMessage("Ẩn và hiển thị các mục"),
+        "show_less": MessageLookupByLibrary.simpleMessage("Thu gọn"),
         "show_more": MessageLookupByLibrary.simpleMessage("Xem thêm"),
         "show_ok_action":
             MessageLookupByLibrary.simpleMessage("Hiển thị hành động đồng ý"),
@@ -395,6 +396,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "string_payment": MessageLookupByLibrary.simpleMessage("Thanh toán"),
         "string_time_setting":
             MessageLookupByLibrary.simpleMessage("Cài đặt thời gian"),
+        "student_review_list_str":
+            MessageLookupByLibrary.simpleMessage("Học viên nói gì"),
         "subcribe_to_our_news_letter": MessageLookupByLibrary.simpleMessage(
             "Đăng ký nhận bản tin của chúng tôi"),
         "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
@@ -415,6 +418,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "target": MessageLookupByLibrary.simpleMessage("Mục tiêu"),
         "teacher_list":
             MessageLookupByLibrary.simpleMessage(" Danh sách giáo viên"),
+        "teacher_review_list_str":
+            MessageLookupByLibrary.simpleMessage("Giảng viên nói gì"),
         "teachers_teach_the_most":
             MessageLookupByLibrary.simpleMessage("Giáo viên dạy nhiều nhất"),
         "terms_conditions":

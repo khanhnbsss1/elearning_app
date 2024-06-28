@@ -303,6 +303,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hide and show items"),
         "show_leading_icon":
             MessageLookupByLibrary.simpleMessage("Show leading icon"),
+        "show_less": MessageLookupByLibrary.simpleMessage("Show less"),
         "show_more": MessageLookupByLibrary.simpleMessage("Show more"),
         "show_ok_action":
             MessageLookupByLibrary.simpleMessage("Show ok action"),
@@ -395,6 +396,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "string_payment": MessageLookupByLibrary.simpleMessage("Payment"),
         "string_time_setting":
             MessageLookupByLibrary.simpleMessage("Time setting"),
+        "student_review_list_str":
+            MessageLookupByLibrary.simpleMessage("What students say"),
         "subcribe_to_our_news_letter":
             MessageLookupByLibrary.simpleMessage("Subcribe to our newsletter"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
@@ -416,6 +419,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tags": MessageLookupByLibrary.simpleMessage("Tags"),
         "target": MessageLookupByLibrary.simpleMessage("Target"),
         "teacher_list": MessageLookupByLibrary.simpleMessage(" Teacher list"),
+        "teacher_review_list_str":
+            MessageLookupByLibrary.simpleMessage("What teachers say"),
         "teachers_teach_the_most":
             MessageLookupByLibrary.simpleMessage("Teachers who teach the most"),
         "terms_conditions":

@@ -37,6 +37,7 @@ Future<void> main() async {
   await initialService();
   AppStyle.init();
   await ThemeCustomizer.init();
+
   ColorConst.setColorByFlavorType();
   DeviceInfoModel? deviceInfoModel =await DeviceManager().getDeviceInfo();
   // await Translator.clearTrans();

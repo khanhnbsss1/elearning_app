@@ -88,6 +88,7 @@
   "user_create": "Create user",
   "user_detail": "User information",
   "show_more": "Show more",
+  "show_less": "Show less",
   "are_you_ready_send_command": "Are you sure you want to send the command?",
   "no_internet": "No network connection",
   "time_out_connection": "Timeout exceeded, please check your network connection",
