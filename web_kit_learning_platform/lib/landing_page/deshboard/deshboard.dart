@@ -25,14 +25,14 @@ enum SampleItem { itemOne, itemTwo, itemThree }
 
 enum SampleItem2 { itemOne, itemTwo, itemThree, itemfour }
 
-class DeshScreen extends StatefulWidget {
-  const DeshScreen({super.key});
+class LandingPageScreen extends StatefulWidget {
+  const LandingPageScreen({super.key});
 
   @override
-  State<DeshScreen> createState() => _DeshScreenState();
+  State<LandingPageScreen> createState() => _LandingPageScreenState();
 }
 
-class _DeshScreenState extends State<DeshScreen> {
+class _LandingPageScreenState extends State<LandingPageScreen> {
   late ColorNotifier notifier;
   SampleItem? selectedMenu;
 
@@ -196,609 +196,7 @@ class _DeshScreenState extends State<DeshScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(
-            padding: EdgeInsets.only(
-                top: 12,
-                left: constraints.maxWidth / 10 < 800
-                    ? constraints.maxWidth / 15
-                    : constraints.maxWidth / 10,
-                right: constraints.maxWidth / 10 < 800
-                    ? constraints.maxWidth / 15
-                    : constraints.maxWidth / 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Row(
-                      children: [
-                        ImageManager().getPngImage(ImageManager.logo, height: constraints.maxWidth < 300 ? 20 : height / 22),
-                        const SizedBox(width: 5),
-                        Text(L10nX.getStr.app_name, style: TextStyle(
-                          fontFamily: 'gilroybold',
-                          color: notifier.blackcolor,
-                          fontSize: constraints.maxWidth < 300 ? 20 : 24,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    constraints.maxWidth < 1000
-                        ? const SizedBox()
-                        : Row(
-                      children: [
-                        PopupMenuButton(
-                          tooltip: '',
-                          padding: const EdgeInsets.all(0),
-                          offset: const Offset(120, 30),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          // initialValue: selectedMenu,
-                          constraints: const BoxConstraints(
-                            maxWidth:  315,
-                            maxHeight: 270,
-                          ),
-                          color: notifier.whitecolor,
-                          child: Text(
-                            'Application',
-                            style: TextStyle(
-                                color: supportHover
-                                    ? notifier.blackcolor
-                                    : notifier.subgreycolor,
-                                fontFamily: 'gilroysemi',
-                                fontSize: 16),
-                          ),
-                          itemBuilder: (BuildContext context) =>
-                          <PopupMenuEntry<SampleItem2>>[
-                            PopupMenuItem<SampleItem2>(
-                              enabled: true,
-                              value: SampleItem2.itemOne,
-                              onTap: () {},
-                              child: Row(
-                                  children: [
-                                    const SizedBox(width: 10),
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .start,
-                                      children: [
-                                        const SizedBox(height: 20),
-                                        Text('Downloads', style: TextStyle(
-                                            fontSize: 16,
-                                            color: notifier.subgreycolor,
-                                            fontFamily: 'gilroysemi')),
-                                        const SizedBox(height: 10),
-                                        SizedBox(
-                                          height: 100,
-                                          child: Column(
-                                            children: [
-                                              const SizedBox(height: 10),
-                                              SvgPicture.asset(
-                                                  'assets/deshboard/support/AppStoreBadge.svg',
-                                                  height: 40),
-                                              const SizedBox(height: 10),
-                                              SvgPicture.asset(
-                                                  'assets/deshboard/support/GooglePlayStoreBadge.svg',
-                                                  height: 40),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(height: 20),
-                                      ],
-                                    ),
-                                    const SizedBox(width: 30),
-                                    Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          const SizedBox(height: 20),
-                                          Text('Scan Code', style: TextStyle(
-                                              fontSize: 16,
-                                              color: notifier.subgreycolor,
-                                              fontFamily: 'gilroysemi')),
-                                          const SizedBox(height: 12),
-                                          SizedBox(
-                                            height: 100,
-                                            child: Image.asset(
-                                                'assets/deshboard/support/qrCode.png',
-                                                height: 100),
-                                          ),
-                                          const SizedBox(height: 20),
-                                        ]
-                                    ),
-                                    const SizedBox(width: 10),
-                                  ]
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 25,
-                        ),
-                      ],
-                    ),
-                    if (constraints.maxWidth < 800) const SizedBox() else Row(
-                      children: [
-                        PopupMenuButton(
-                          tooltip: '',
-                          padding: const EdgeInsets.all(0),
-                          offset: const Offset(10, 30),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          // initialValue: selectedMenu,
-                          constraints: const BoxConstraints(
-                            maxWidth: 200,
-                            maxHeight: 250,
-                          ),
-                          color: notifier.whitecolor,
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Image.asset(
-                                  'assets/Icons/langicon.png',
-                                  height: height / 45,
-                                  color: langHover
-                                      ? notifier.blackcolor
-                                      : notifier.subgreycolor,
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                Text(L10nX.getStr.language_text, style: TextStyle(
-                                    color: langHover
-                                        ? notifier.blackcolor
-                                        : notifier.subgreycolor,
-                                    fontSize: 14,
-                                    fontFamily: 'gilroysemi')),
-                              ],
-                            ),
-                          ),
-                          itemBuilder: (BuildContext context) =>
-                          <PopupMenuEntry<SampleItem2>>[
-                            PopupMenuItem<SampleItem2>(
-                                enabled: true,
-                                value: SampleItem2.itemOne,
-                                onTap: () {},
-                                child: StatefulBuilder(
-                                  builder: (context, setState) {
-                                    return Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                const SizedBox(height: 25),
-                                                for(LanguageInfo language in LanguageHelper().supportedLanguages)
-                                                  InkWell(
-                                                    onTap: () {
-                                                      LanguageHelper().changeLanguage(language, context);
-                                                    },
-                                                    child: Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: [
-                                                          Row(
-                                                            mainAxisAlignment: MainAxisAlignment.start,
-                                                            children: [
-                                                              ClipRRect(
-                                                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                                                  borderRadius: BorderRadius.circular(2),
-                                                                  child: Image.asset(
-                                                                    "assets/lang/${language.languageCode}.png",
-                                                                    width: 18,
-                                                                    height: 14,
-                                                                    fit: BoxFit.cover,
-                                                                  )),
-                                                              MySpacing.width(8),
-                                                              MyText.labelMedium(language.language??"")
-                                                            ],
-                                                          ),
-                                                          const SizedBox(height: 20),
-                                                        ],
-                                                    ),
-                                                  ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                    );
-                                  },
-                                ),
-                            ),
-                          ],
-                        ),
-                      /*  const SizedBox(
-                          width: 25,
-                        ),
-                        InkWell(
-                          onTap: () {
-
-                          },
-                          onHover: (value) {
-                            setState(() {
-                              bHover = value;
-                            });
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            height: height / 21,
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor:
-                                WidgetStatePropertyAll(
-                                    bHover
-                                        ? (notifier.isDark ? notifier
-                                        .sugestionbutton : notifier.blackcolor)
-                                        : Colors
-                                        .transparent),
-                                elevation:
-                                const WidgetStatePropertyAll(0),
-                                shape: WidgetStatePropertyAll(
-                                  RoundedRectangleBorder(
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
-                                      side: BorderSide(
-                                          color: bHover
-                                              ? Colors.transparent
-                                              : (notifier.isDark ? notifier
-                                              .sugestionbutton : Colors.grey
-                                              .shade300),
-                                          width: 2)),
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: Text(
-                                'List your property',
-                                style: TextStyle(
-                                    fontFamily: 'gilroysemi',
-                                    fontSize: 16,
-                                    color: bHover
-                                        ? Colors.white
-                                        : notifier.blackcolor),
-                              ),
-                            ),
-                          ),
-                        ),*/
-                      ],
-                    ),
-                    SizedBox(
-                      width: constraints.maxWidth < 500 ? 10 : 25,
-                    ),
-                    PopupMenuButton(
-                      tooltip: '',
-                      padding: const EdgeInsets.all(0),
-                      offset: const Offset(0, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),),
-                      // initialValue: selectedMenu,
-                      constraints: const BoxConstraints(
-                        maxWidth: 310,
-                        maxHeight: 540,
-                      ),
-                      color: notifier.whitecolor,
-                      child: SizedBox(
-                        child: notifier.isDark ? Image.asset(
-                            'assets/Icons/darkBellIcon.png', height: constraints.maxWidth < 300 ? 25 : 30) : Image
-                            .asset('assets/Icons/bellicon.png', height: constraints.maxWidth < 300 ? 25 : 30),
-                      ),
-                      itemBuilder: (context) =>
-                      <PopupMenuEntry<SampleItem2>>[
-                        PopupMenuItem(
-                            enabled: true,
-                            onTap: () {},
-                            child: Column(
-                              children: [
-                                const SizedBox(height: 10),
-                                for(int i = 0; i <
-                                    5; i++ )
-                                  Column(
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment: CrossAxisAlignment
-                                              .start,
-                                          children: [
-                                            Container(
-                                              height: 40,
-                                              width:  40,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape
-                                                    .circle,
-                                                color: notifier
-                                                    .lightgreencolor,
-                                              ),
-                                              alignment: Alignment
-                                                  .center,
-                                              child: SvgPicture
-                                                  .asset(
-                                                  'assets/Icons/paperIcon.svg',
-                                                  height: 20),
-                                            ),
-                                            const SizedBox(
-                                                width: 20),
-                                            Flexible(
-                                              child: Column(
-                                                children: [
-                                                  Text(
-                                                      'Wrapped Bitcoin is now listed on Unity Exchange',
-                                                      style: TextStyle(
-                                                          fontFamily: 'gilroysemi',
-                                                          fontSize: 14,
-                                                          color: notifier
-                                                              .blackcolor),
-                                                      maxLines: 2,
-                                                      softWrap: true),
-                                                  const SizedBox(height: 8),
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment
-                                                        .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                          '24m ago',
-                                                          style: TextStyle(
-                                                              fontFamily: 'gilroysemi',
-                                                              fontSize: 12,
-                                                              color: notifier
-                                                                  .subgreycolor)),
-                                                      Text(
-                                                          '●',
-                                                          style: TextStyle(
-                                                              color: notifier
-                                                                  .buttoncolor,
-                                                              fontSize: 10)),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(
-                                            height: 10),
-                                        i == 4
-                                            ? const SizedBox()
-                                            : Divider(
-                                            color: notifier
-                                                .subgreycolor
-                                        ),
-                                        const SizedBox(
-                                            height: 10),
-                                      ]
-                                  ),
-                                const SizedBox(height: 10),
-                                SizedBox(
-                                  height: 40,
-                                  width: width / 1,
-                                  child: ElevatedButton(
-                                    style: ButtonStyle(
-                                      elevation: const WidgetStatePropertyAll(
-                                          0),
-                                      backgroundColor: WidgetStatePropertyAll(
-                                          notifier.buttoncolor),
-                                      shape: WidgetStatePropertyAll(
-                                        RoundedRectangleBorder(
-                                          side: BorderSide(
-                                              color: notifier
-                                                  .buttoncolor,
-                                              width: 2),
-                                          borderRadius: const BorderRadius
-                                              .all(
-                                              Radius
-                                                  .circular(
-                                                  10)),
-                                        ),
-                                      ),
-                                    ),
-                                    onPressed: () {
-
-                                    },
-                                    child: const Text(
-                                        'See all notifications',
-                                        style: TextStyle(
-                                            fontFamily: 'gilroysemi',
-                                            fontSize: 12,
-                                            color: Colors.white)),
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                              ],
-                            )
-                        )
-                      ],),
-                    SizedBox(
-                      width: constraints.maxWidth < 500 ? 10 : 25,
-                    ),
-                    PopupMenuButton(
-                      tooltip: '',
-                      padding: const EdgeInsets.all(0),
-                      offset: const Offset(0, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      // initialValue: selectedMenu,
-                      constraints: BoxConstraints(
-                        maxWidth: width / 1,
-                        maxHeight: 400,
-                      ),
-                      color: notifier.whitecolor,
-                      child: Container(
-                        height: height / 19,
-                        decoration: BoxDecoration(
-                          color: notifier.lightgreencolor,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Image.asset(
-                          'assets/Icons/profileicon.png',
-                          height: constraints.maxWidth < 300 ? 30 : height / 45,
-                          scale: 2.5,
-                        ),
-                      ),
-                      onSelected: (SampleItem2 item) {
-                        setState(() {
-                          // selectedMenu = item;
-                        });
-                      },
-                      itemBuilder: (BuildContext context) =>
-                      <PopupMenuEntry<SampleItem2>>[
-                        PopupMenuItem<SampleItem2>(
-                          enabled: true,
-                          value: SampleItem2.itemOne,
-                          onTap: () {
-
-                          },
-                          child: SizedBox(
-                            height: 380,
-                            child: Column(
-                              children: [
-                                SizedBox(
-                                  height: 330,
-                                  width: 300,
-                                  child: ListView.builder(
-                                    itemCount: profilemenuImages.length,
-                                    itemBuilder: (context, inde) {
-                                      return Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment
-                                                .spaceBetween,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .start,
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    notifier.isDark ? profilemenuImagesDark[inde] : profilemenuImages[inde],
-                                                    height: 20,
-                                                  ),
-                                                  const SizedBox(width: 20),
-                                                  Text(
-                                                    profilemenuTags[inde],
-                                                    style: TextStyle(
-                                                        color: notifier
-                                                            .blackcolor,
-                                                        fontFamily: 'gilroymed',
-                                                        fontSize: 16,
-                                                        // fontWeight: FontWeight
-                                                        //     .w600,
-                                                        letterSpacing: 1),
-                                                  ),
-                                                  const SizedBox(
-                                                      height: 30),
-                                                ],
-                                              ),
-                                              Container(
-                                                height: 20,
-                                                width: 20,
-                                                decoration: BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    color: inde <= 2
-                                                        ? notifier.pinkcolor
-                                                        : Colors.transparent
-                                                ),
-                                                alignment: Alignment.center,
-                                                child: Text(notNumber[inde],
-                                                    style: const TextStyle(
-                                                        fontFamily: 'gilroy',
-                                                        color: Colors.white,
-                                                        fontSize: 10)),
-                                              ),
-                                            ],
-                                          ),
-                                          inde == 5
-                                              ? const SizedBox(height: 10)
-                                              : const SizedBox(height: 20),
-                                          inde == 2 ? Divider(
-                                              color: notifier.sugestionbutton
-                                          ) : const SizedBox(),
-                                          inde == 2
-                                              ? const SizedBox(height: 20)
-                                              : const SizedBox()
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                      height: 40,
-                                      width: 145,
-                                      child: ElevatedButton(
-                                        style: ButtonStyle(
-                                          elevation: const WidgetStatePropertyAll(
-                                              0),
-                                          backgroundColor: WidgetStatePropertyAll(
-                                              notifier.buttoncolor),
-                                          shape: const WidgetStatePropertyAll(
-                                            RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(20)),
-                                            ),
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          LoginPage().show(context);
-                                          //Get.toNamed(Paths.dashboardPath);
-                                        },
-                                        child:  Text(L10nX.getStr.login, style: TextStyle(
-                                            fontFamily: 'gilroymed',
-                                            fontSize: 12,
-                                            color: Colors.white)),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 10),
-                                    SizedBox(
-                                      height: 40,
-                                      width: 145,
-                                      child: ElevatedButton(
-                                        style: ButtonStyle(
-                                          elevation: const WidgetStatePropertyAll(
-                                              0),
-                                          backgroundColor: WidgetStatePropertyAll(
-                                              notifier.whitecolor),
-                                          shape: WidgetStatePropertyAll(
-                                            RoundedRectangleBorder(
-                                              side: BorderSide(
-                                                  color: notifier.buttoncolor,
-                                                  width: 2),
-                                              borderRadius: const BorderRadius
-                                                  .all(Radius.circular(20)),
-                                            ),
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          Register().show(context);
-                                        },
-                                        child: Text(L10nX.getStr.sign_up,
-                                            style: TextStyle(
-                                            fontFamily: 'gilroymed',
-                                            fontSize: 12,
-                                            color: notifier.buttoncolor)),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: constraints.maxWidth < 500 ? 10 : 25,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          buildTabBar(constraints: constraints),
           SizedBox(
             height: height / 45,
           ),
@@ -824,115 +222,14 @@ class _DeshScreenState extends State<DeshScreen> {
                     children: [
                       constraints.maxWidth < 800
                           ? Image.asset('assets/deshboard/winterlandscape.png',
-                          height: constraints.maxWidth < 500 ? 400 : 600,
-                          fit: BoxFit.fill)
+                          height: constraints.maxWidth < 500 ?250 : 400,
+                          fit: BoxFit.cover)
                           : Image.asset('assets/deshboard/winterlandscape.png',
-                          fit: BoxFit.fill),
-                      /*Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: constraints.maxWidth < 800
-                            ? CrossAxisAlignment.center
-                            : CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(flex: 1, child: Container()),
-                              Expanded(
-                                flex: 3,
-                                child: Column(
-                                  crossAxisAlignment: constraints.maxWidth < 800
-                                      ? CrossAxisAlignment.center
-                                      : CrossAxisAlignment.end,
-                                  children: [
-                                    SizedBox(
-                                      height: constraints.maxWidth < 800
-                                          ? constraints.maxWidth / 6.5
-                                          : constraints.maxWidth / 10,
-                                    ),
-                                    Text(
-                                      'Discover,\n Book, Enjoy',
-                                      style: TextStyle(
-                                          fontFamily: 'gilroybold',
-                                          fontSize: constraints.maxWidth < 800
-                                              ? constraints.maxWidth / 12
-                                              : constraints.maxWidth / 18.5,
-                                          color: notifier.textcolor,
-                                          height: 0.9,
-                                          letterSpacing: 2),
-                                      textAlign: constraints.maxWidth < 800
-                                          ? TextAlign.center
-                                          : TextAlign.end,
-                                    ),
-                                    SizedBox(
-                                      height: constraints.maxWidth < 500 ? 10 : 20,
-                                    ),
-                                    Text('Effortless travel start with.',
-                                        style: TextStyle(
-                                            fontFamily: 'gilroymed',
-                                            fontSize: constraints.maxWidth < 800
-                                                ? constraints.maxWidth / 30
-                                                : constraints.maxWidth / 57,
-                                            color: notifier.textcolor)),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
-                                    InkWell(
-                                      onTap: () {},
-                                      onHover: (value) {
-                                        setState(() {
-                                          searchHover3 = value;
-                                        });
-                                      },
-                                      child: AnimatedContainer(
-                                        duration: const Duration(milliseconds: 200),
-                                        height: 45,
-                                        child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              elevation: WidgetStateProperty.all(0),
-                                              shape: WidgetStateProperty.all(
-                                                  RoundedRectangleBorder(
-                                                      borderRadius:
-                                                      BorderRadius.circular(25))),
-                                              backgroundColor: WidgetStateProperty
-                                                  .all(
-                                                  searchHover3 ? Colors.indigoAccent
-                                                      .shade700 : notifier.buttoncolor),
-                                            ),
-                                            onPressed: () {},
-                                            child: const Text(
-                                              'Book Now',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontFamily: 'gilroysemi',
-                                                  color: Colors.white),
-                                            )),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: constraints.maxWidth < 800
-                                    ? constraints.maxWidth / 5.5
-                                    : width / 12,
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                              height: constraints.maxWidth < 700
-                                  ? constraints.maxWidth / 5.55
-                                  : constraints.maxWidth < 800
-                                  ? constraints.maxWidth / 10.25
-                                  : constraints.maxWidth < 1000
-                                  ? constraints.maxWidth / 7
-                                  : constraints.maxWidth < 2000
-                                  ? constraints.maxWidth / 6
-                                  : constraints.maxWidth / 5.5),
-                          constraints.maxWidth < 800
-                              ? const help()
-                              : const Tabsbar(),
-                      ],
-                    ),*/
+                        height: constraints.maxWidth < 500 ?400 : 600,
+                        width: constraints.maxWidth ,
+                        fit: BoxFit.cover,
+                        
+                      ),
                   ],
                 ),
               ),
@@ -1927,6 +1224,612 @@ class _DeshScreenState extends State<DeshScreen> {
           ),
         ]),
       ],
+    );
+  }
+  
+  Widget buildTabBar({required BoxConstraints constraints}){
+    return Padding(
+      padding: EdgeInsets.only(
+          top: 12,
+          left: constraints.maxWidth / 10 < 800
+              ? constraints.maxWidth / 15
+              : constraints.maxWidth / 10,
+          right: constraints.maxWidth / 10 < 800
+              ? constraints.maxWidth / 15
+              : constraints.maxWidth / 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Row(
+                children: [
+                  ImageManager().getPngImage(ImageManager.logo, height: constraints.maxWidth < 300 ? 20 : height / 22),
+                  const SizedBox(width: 5),
+                  Text(L10nX.getStr.app_name, style: TextStyle(
+                    fontFamily: 'gilroybold',
+                    color: notifier.blackcolor,
+                    fontSize: constraints.maxWidth < 300 ? 20 : 24,
+                  ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              constraints.maxWidth < 1000
+                  ? const SizedBox()
+                  : Row(
+                children: [
+                  PopupMenuButton(
+                    tooltip: '',
+                    padding: const EdgeInsets.all(0),
+                    offset: const Offset(120, 30),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    // initialValue: selectedMenu,
+                    constraints: const BoxConstraints(
+                      maxWidth:  315,
+                      maxHeight: 270,
+                    ),
+                    color: notifier.whitecolor,
+                    child: Text(
+                      'Application',
+                      style: TextStyle(
+                          color: supportHover
+                              ? notifier.blackcolor
+                              : notifier.subgreycolor,
+                          fontFamily: 'gilroysemi',
+                          fontSize: 16),
+                    ),
+                    itemBuilder: (BuildContext context) =>
+                    <PopupMenuEntry<SampleItem2>>[
+                      PopupMenuItem<SampleItem2>(
+                        enabled: true,
+                        value: SampleItem2.itemOne,
+                        onTap: () {},
+                        child: Row(
+                            children: [
+                              const SizedBox(width: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment
+                                    .start,
+                                children: [
+                                  const SizedBox(height: 20),
+                                  Text('Downloads', style: TextStyle(
+                                      fontSize: 16,
+                                      color: notifier.subgreycolor,
+                                      fontFamily: 'gilroysemi')),
+                                  const SizedBox(height: 10),
+                                  SizedBox(
+                                    height: 100,
+                                    child: Column(
+                                      children: [
+                                        const SizedBox(height: 10),
+                                        SvgPicture.asset(
+                                            'assets/deshboard/support/AppStoreBadge.svg',
+                                            height: 40),
+                                        const SizedBox(height: 10),
+                                        SvgPicture.asset(
+                                            'assets/deshboard/support/GooglePlayStoreBadge.svg',
+                                            height: 40),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20),
+                                ],
+                              ),
+                              const SizedBox(width: 30),
+                              Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const SizedBox(height: 20),
+                                    Text('Scan Code', style: TextStyle(
+                                        fontSize: 16,
+                                        color: notifier.subgreycolor,
+                                        fontFamily: 'gilroysemi')),
+                                    const SizedBox(height: 12),
+                                    SizedBox(
+                                      height: 100,
+                                      child: Image.asset(
+                                          'assets/deshboard/support/qrCode.png',
+                                          height: 100),
+                                    ),
+                                    const SizedBox(height: 20),
+                                  ]
+                              ),
+                              const SizedBox(width: 10),
+                            ]
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 25,
+                  ),
+                ],
+              ),
+              if (constraints.maxWidth < 800) const SizedBox() else Row(
+                children: [
+                  PopupMenuButton(
+                    tooltip: '',
+                    padding: const EdgeInsets.all(0),
+                    offset: const Offset(10, 30),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    // initialValue: selectedMenu,
+                    constraints: const BoxConstraints(
+                      maxWidth: 200,
+                      maxHeight: 250,
+                    ),
+                    color: notifier.whitecolor,
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Image.asset(
+                            'assets/Icons/langicon.png',
+                            height: height / 45,
+                            color: langHover
+                                ? notifier.blackcolor
+                                : notifier.subgreycolor,
+                          ),
+                          const SizedBox(
+                            width: 4,
+                          ),
+                          Text(L10nX.getStr.language_text, style: TextStyle(
+                              color: langHover
+                                  ? notifier.blackcolor
+                                  : notifier.subgreycolor,
+                              fontSize: 14,
+                              fontFamily: 'gilroysemi')),
+                        ],
+                      ),
+                    ),
+                    itemBuilder: (BuildContext context) =>
+                    <PopupMenuEntry<SampleItem2>>[
+                      PopupMenuItem<SampleItem2>(
+                        enabled: true,
+                        value: SampleItem2.itemOne,
+                        onTap: () {},
+                        child: StatefulBuilder(
+                          builder: (context, setState) {
+                            return Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(height: 25),
+                                      for(LanguageInfo language in LanguageHelper().supportedLanguages)
+                                        InkWell(
+                                          onTap: () {
+                                            LanguageHelper().changeLanguage(language, context);
+                                          },
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  ClipRRect(
+                                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                                      borderRadius: BorderRadius.circular(2),
+                                                      child: Image.asset(
+                                                        "assets/lang/${language.languageCode}.png",
+                                                        width: 18,
+                                                        height: 14,
+                                                        fit: BoxFit.cover,
+                                                      )),
+                                                  MySpacing.width(8),
+                                                  MyText.labelMedium(language.language??"")
+                                                ],
+                                              ),
+                                              const SizedBox(height: 20),
+                                            ],
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  /*  const SizedBox(
+                          width: 25,
+                        ),
+                        InkWell(
+                          onTap: () {
+
+                          },
+                          onHover: (value) {
+                            setState(() {
+                              bHover = value;
+                            });
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            height: height / 21,
+                            child: ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                WidgetStatePropertyAll(
+                                    bHover
+                                        ? (notifier.isDark ? notifier
+                                        .sugestionbutton : notifier.blackcolor)
+                                        : Colors
+                                        .transparent),
+                                elevation:
+                                const WidgetStatePropertyAll(0),
+                                shape: WidgetStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(20),
+                                      ),
+                                      side: BorderSide(
+                                          color: bHover
+                                              ? Colors.transparent
+                                              : (notifier.isDark ? notifier
+                                              .sugestionbutton : Colors.grey
+                                              .shade300),
+                                          width: 2)),
+                                ),
+                              ),
+                              onPressed: () {},
+                              child: Text(
+                                'List your property',
+                                style: TextStyle(
+                                    fontFamily: 'gilroysemi',
+                                    fontSize: 16,
+                                    color: bHover
+                                        ? Colors.white
+                                        : notifier.blackcolor),
+                              ),
+                            ),
+                          ),
+                        ),*/
+                ],
+              ),
+              SizedBox(
+                width: constraints.maxWidth < 500 ? 10 : 25,
+              ),
+              PopupMenuButton(
+                tooltip: '',
+                padding: const EdgeInsets.all(0),
+                offset: const Offset(0, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),),
+                // initialValue: selectedMenu,
+                constraints: const BoxConstraints(
+                  maxWidth: 310,
+                  maxHeight: 540,
+                ),
+                color: notifier.whitecolor,
+                child: SizedBox(
+                  child: notifier.isDark ? Image.asset(
+                      'assets/Icons/darkBellIcon.png', height: constraints.maxWidth < 300 ? 25 : 30) : Image
+                      .asset('assets/Icons/bellicon.png', height: constraints.maxWidth < 300 ? 25 : 30),
+                ),
+                itemBuilder: (context) =>
+                <PopupMenuEntry<SampleItem2>>[
+                  PopupMenuItem(
+                      enabled: true,
+                      onTap: () {},
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 10),
+                          for(int i = 0; i <
+                              5; i++ )
+                            Column(
+                                children: [
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .start,
+                                    children: [
+                                      Container(
+                                        height: 40,
+                                        width:  40,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape
+                                              .circle,
+                                          color: notifier
+                                              .lightgreencolor,
+                                        ),
+                                        alignment: Alignment
+                                            .center,
+                                        child: SvgPicture
+                                            .asset(
+                                            'assets/Icons/paperIcon.svg',
+                                            height: 20),
+                                      ),
+                                      const SizedBox(
+                                          width: 20),
+                                      Flexible(
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                                'Wrapped Bitcoin is now listed on Unity Exchange',
+                                                style: TextStyle(
+                                                    fontFamily: 'gilroysemi',
+                                                    fontSize: 14,
+                                                    color: notifier
+                                                        .blackcolor),
+                                                maxLines: 2,
+                                                softWrap: true),
+                                            const SizedBox(height: 8),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment
+                                                  .spaceBetween,
+                                              children: [
+                                                Text(
+                                                    '24m ago',
+                                                    style: TextStyle(
+                                                        fontFamily: 'gilroysemi',
+                                                        fontSize: 12,
+                                                        color: notifier
+                                                            .subgreycolor)),
+                                                Text(
+                                                    '●',
+                                                    style: TextStyle(
+                                                        color: notifier
+                                                            .buttoncolor,
+                                                        fontSize: 10)),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                      height: 10),
+                                  i == 4
+                                      ? const SizedBox()
+                                      : Divider(
+                                      color: notifier
+                                          .subgreycolor
+                                  ),
+                                  const SizedBox(
+                                      height: 10),
+                                ]
+                            ),
+                          const SizedBox(height: 10),
+                          SizedBox(
+                            height: 40,
+                            width: width / 1,
+                            child: ElevatedButton(
+                              style: ButtonStyle(
+                                elevation: const WidgetStatePropertyAll(
+                                    0),
+                                backgroundColor: WidgetStatePropertyAll(
+                                    notifier.buttoncolor),
+                                shape: WidgetStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: notifier
+                                            .buttoncolor,
+                                        width: 2),
+                                    borderRadius: const BorderRadius
+                                        .all(
+                                        Radius
+                                            .circular(
+                                            10)),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {
+
+                              },
+                              child: const Text(
+                                  'See all notifications',
+                                  style: TextStyle(
+                                      fontFamily: 'gilroysemi',
+                                      fontSize: 12,
+                                      color: Colors.white)),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      )
+                  )
+                ],),
+              SizedBox(
+                width: constraints.maxWidth < 500 ? 10 : 25,
+              ),
+              PopupMenuButton(
+                tooltip: '',
+                padding: const EdgeInsets.all(0),
+                offset: const Offset(0, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                // initialValue: selectedMenu,
+                constraints: BoxConstraints(
+                  maxWidth: width / 1,
+                  maxHeight: 400,
+                ),
+                color: notifier.whitecolor,
+                child: Container(
+                  height: height / 19,
+                  decoration: BoxDecoration(
+                    color: notifier.lightgreencolor,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.asset(
+                    'assets/Icons/profileicon.png',
+                    height: constraints.maxWidth < 300 ? 30 : height / 45,
+                    scale: 2.5,
+                  ),
+                ),
+                onSelected: (SampleItem2 item) {
+                  setState(() {
+                    // selectedMenu = item;
+                  });
+                },
+                itemBuilder: (BuildContext context) =>
+                <PopupMenuEntry<SampleItem2>>[
+                  PopupMenuItem<SampleItem2>(
+                    enabled: true,
+                    value: SampleItem2.itemOne,
+                    onTap: () {
+
+                    },
+                    child: SizedBox(
+                      height: 380,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 330,
+                            width: 300,
+                            child: ListView.builder(
+                              itemCount: profilemenuImages.length,
+                              itemBuilder: (context, inde) {
+                                return Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .spaceBetween,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .start,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+                                            SvgPicture.asset(
+                                              notifier.isDark ? profilemenuImagesDark[inde] : profilemenuImages[inde],
+                                              height: 20,
+                                            ),
+                                            const SizedBox(width: 20),
+                                            Text(
+                                              profilemenuTags[inde],
+                                              style: TextStyle(
+                                                  color: notifier
+                                                      .blackcolor,
+                                                  fontFamily: 'gilroymed',
+                                                  fontSize: 16,
+                                                  // fontWeight: FontWeight
+                                                  //     .w600,
+                                                  letterSpacing: 1),
+                                            ),
+                                            const SizedBox(
+                                                height: 30),
+                                          ],
+                                        ),
+                                        Container(
+                                          height: 20,
+                                          width: 20,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: inde <= 2
+                                                  ? notifier.pinkcolor
+                                                  : Colors.transparent
+                                          ),
+                                          alignment: Alignment.center,
+                                          child: Text(notNumber[inde],
+                                              style: const TextStyle(
+                                                  fontFamily: 'gilroy',
+                                                  color: Colors.white,
+                                                  fontSize: 10)),
+                                        ),
+                                      ],
+                                    ),
+                                    inde == 5
+                                        ? const SizedBox(height: 10)
+                                        : const SizedBox(height: 20),
+                                    inde == 2 ? Divider(
+                                        color: notifier.sugestionbutton
+                                    ) : const SizedBox(),
+                                    inde == 2
+                                        ? const SizedBox(height: 20)
+                                        : const SizedBox()
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                          Row(
+                            children: [
+                              SizedBox(
+                                height: 40,
+                                width: 145,
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    elevation: const WidgetStatePropertyAll(
+                                        0),
+                                    backgroundColor: WidgetStatePropertyAll(
+                                        notifier.buttoncolor),
+                                    shape: const WidgetStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20)),
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    LoginPage().show(context);
+                                    //Get.toNamed(Paths.dashboardPath);
+                                  },
+                                  child:  Text(L10nX.getStr.login, style: TextStyle(
+                                      fontFamily: 'gilroymed',
+                                      fontSize: 12,
+                                      color: Colors.white)),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              SizedBox(
+                                height: 40,
+                                width: 145,
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    elevation: const WidgetStatePropertyAll(
+                                        0),
+                                    backgroundColor: WidgetStatePropertyAll(
+                                        notifier.whitecolor),
+                                    shape: WidgetStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                        side: BorderSide(
+                                            color: notifier.buttoncolor,
+                                            width: 2),
+                                        borderRadius: const BorderRadius
+                                            .all(Radius.circular(20)),
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Register().show(context);
+                                  },
+                                  child: Text(L10nX.getStr.sign_up,
+                                      style: TextStyle(
+                                          fontFamily: 'gilroymed',
+                                          fontSize: 12,
+                                          color: notifier.buttoncolor)),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: constraints.maxWidth < 500 ? 10 : 25,
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

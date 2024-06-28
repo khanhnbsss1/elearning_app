@@ -23,12 +23,12 @@ class _LandingPageSplashState extends State<LandingPageSplash> {
 
   void initialization() async {
     await Future.delayed(
-      const Duration(seconds: 1),
+      const Duration(milliseconds: 10),
           () {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) =>  const DeshScreen(),
+            builder: (context) =>  const LandingPageScreen(),
           ),
         );
       },

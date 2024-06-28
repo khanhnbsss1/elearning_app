@@ -25,6 +25,7 @@ class ReviewList extends StatefulWidget {
 class _ReviewListState extends State<ReviewList> {
   late ColorNotifier notifier;
   bool isHover = false;
+  ScrollController controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
@@ -100,10 +101,11 @@ class _ReviewListState extends State<ReviewList> {
                       return Center(
                         child: Scrollbar(
                           thumbVisibility: false,
-                          thickness: 0,
                           trackVisibility: false,
+                          controller: controller,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
+                            controller: controller,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
@@ -126,6 +128,7 @@ class _ReviewListState extends State<ReviewList> {
     required BoxConstraints constraints, 
     required ReviewLandingPageInfo reviewLandingPageInfo,
     required ReviewListState state}) {
+    double width = ResponsiveInfo.isPhone()? MediaQuery.of(context).size.width-Dimens.size50: MediaQuery.of(context).size.width/2;
     return SizedBox(
       width: ResponsiveInfo.isPhone()? MediaQuery.of(context).size.width-Dimens.size50: MediaQuery.of(context).size.width/2,
       child: Padding(
@@ -136,105 +139,24 @@ class _ReviewListState extends State<ReviewList> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 color: notifier.isDark ? Colors.transparent : ColorConst.whiteColor,),
+            width: width,
+            constraints: BoxConstraints(
+              maxHeight: width*1/2
+            ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(30),
-                        child: SizedBox(
-                          width: width / 1,
-                          child: reviewLandingPageInfo.avatar!.isNotEmpty?
-                          ImageManager().getImageByUrl(reviewLandingPageInfo.avatar??"",
-                              boxFit: BoxFit.fill):
-                          Image.asset('assets/deshboard/latestdeals.png',
-                              fit: BoxFit.fill),
-                        ),
-                      ),
-                      Positioned(
-                        top: constraints.maxWidth < 600
-                            ? constraints.maxWidth / 1.1
-                            : constraints.maxWidth < 700
-                            ? constraints.maxWidth / 1.07
-                            : constraints.maxWidth / 1.03,
-                        right: constraints.maxWidth < 550
-                            ? constraints.maxWidth / 5
-                            : constraints.maxWidth < 600
-                            ? constraints.maxWidth / 4
-                            : constraints.maxWidth < 700
-                            ? constraints.maxWidth / 4
-                            : constraints.maxWidth / 4,
-                        child: Container(
-                          height: constraints.maxWidth < 550
-                              ? constraints.maxWidth / 8.3
-                              : constraints.maxWidth < 600
-                              ? constraints.maxWidth / 9
-                              : constraints.maxWidth < 700
-                              ? constraints.maxWidth / 10
-                              : constraints.maxWidth / 12,
-                          width: constraints.maxWidth < 550
-                              ? constraints.maxWidth / 2.7
-                              : constraints.maxWidth < 600
-                              ? constraints.maxWidth / 3
-                              : constraints.maxWidth / 3.5,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(40),
-                            color: const Color(0xFFFCFDFD),
-                            gradient: const LinearGradient(
-                                colors: [Color(0xFFFCFDFD), Colors.white70]),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(constraints.maxWidth < 550 ? 5 : 14),
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  'assets/deshboard/avatar.png',
-                                  height: constraints.maxWidth < 550 ? constraints
-                                      .maxWidth / 6 : constraints.maxWidth / 20,
-                                ),
-                                SizedBox(width: constraints.maxWidth < 300 ? 7 : 15),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Antone Heller',
-                                      style: TextStyle(
-                                        fontSize: constraints.maxWidth < 550 ? constraints
-                                            .maxWidth / 30 : constraints.maxWidth / 50,
-                                        fontFamily: 'gilroysemi',
-                                        color: notifier.textcolor,
-                                      ),
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(Icons.star_rounded,
-                                            color: notifier.yellowcolor,
-                                            size: constraints.maxWidth < 550 ? constraints
-                                                .maxWidth / 40 : constraints.maxWidth /
-                                                70),
-                                        const SizedBox(width: 5),
-                                        Text(
-                                          '4.8',
-                                          style: TextStyle(
-                                              fontSize: constraints.maxWidth < 550
-                                                  ? constraints.maxWidth / 50
-                                                  : constraints.maxWidth / 70,
-                                              fontFamily: 'gilroysemi'),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(30),
+                    child: SizedBox(
+                      width: width / 1,
+                      child: reviewLandingPageInfo.avatar!.isNotEmpty?
+                      ImageManager().getImageByUrl(reviewLandingPageInfo.avatar??"",
+                          boxFit: BoxFit.cover):
+                      Image.asset('assets/deshboard/latestdeals.png',
+                          fit: BoxFit.cover),
+                    ),
                   ),
                 ),
                 Expanded(
