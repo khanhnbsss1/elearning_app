@@ -110,6 +110,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "description": MessageLookupByLibrary.simpleMessage("描述"),
         "dialog_title": MessageLookupByLibrary.simpleMessage("对话框标题"),
         "dialogs": MessageLookupByLibrary.simpleMessage("对话框"),
+        "differences_in_teaching_methods":
+            MessageLookupByLibrary.simpleMessage("教学方法的差异"),
         "doughnut_chart": MessageLookupByLibrary.simpleMessage("环形图"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("电子商务"),
         "elevated_button": MessageLookupByLibrary.simpleMessage("凸起按钮"),
@@ -172,6 +174,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("登录"),
         "map": MessageLookupByLibrary.simpleMessage("地图"),
         "medium": MessageLookupByLibrary.simpleMessage("中"),
+        "medthod_content1": MessageLookupByLibrary.simpleMessage(
+            "仅经过9个小时的学习，你就可以自我介绍并拥有正确的发音，"),
+        "medthod_content2":
+            MessageLookupByLibrary.simpleMessage("通过模拟沟通练习系统，该应用支持深度口语练习"),
+        "medthod_content3":
+            MessageLookupByLibrary.simpleMessage("大部分学生都是上班族、经理……上学的人，人际关系比较多"),
+        "medthod_content4":
+            MessageLookupByLibrary.simpleMessage("让你只花20%的努力却达到80%效果的学习方法"),
+        "medthod_content5":
+            MessageLookupByLibrary.simpleMessage("帮助你只花20%的努力却达到80%效率的学习方法"),
+        "medthod_content6":
+            MessageLookupByLibrary.simpleMessage("让你只花20%的努力却达到80%效果的学习方法"),
+        "medthod_title1": MessageLookupByLibrary.simpleMessage("从头开始教正确的发音"),
+        "medthod_title2": MessageLookupByLibrary.simpleMessage("专注于听、说、沟通"),
+        "medthod_title3": MessageLookupByLibrary.simpleMessage("很棒的学生社区"),
+        "medthod_title4": MessageLookupByLibrary.simpleMessage("情感中国法"),
+        "medthod_title5": MessageLookupByLibrary.simpleMessage("情感中国法"),
+        "medthod_title6": MessageLookupByLibrary.simpleMessage("情感中国法"),
         "messages": MessageLookupByLibrary.simpleMessage("消息"),
         "more_inputs": MessageLookupByLibrary.simpleMessage("更多输入"),
         "name": MessageLookupByLibrary.simpleMessage("名称"),
@@ -411,7 +431,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "view_all": MessageLookupByLibrary.simpleMessage("查看全部"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
         "warning": MessageLookupByLibrary.simpleMessage("警告"),
+        "we_are_different_because_we_understand_what_you_need":
+            MessageLookupByLibrary.simpleMessage("我们与众不同，因为我们了解您的需求"),
         "website_visits": MessageLookupByLibrary.simpleMessage("网站访问量"),
+        "why_choose_content1":
+            MessageLookupByLibrary.simpleMessage("被选为中国教育部汉语教学机构孔子学院国际会议现场直播。"),
+        "why_choose_content2": MessageLookupByLibrary.simpleMessage(
+            "我们已在国内外培训了超过 20,000 名面对面学生和 250,000 名在线学生"),
+        "why_choose_content3": MessageLookupByLibrary.simpleMessage(
+            "2000 个反馈，Facebook 上有 500,000 名关注者，youtube 上有 300,000 名关注者和 1800 万次浏览"),
+        "why_choose_content4":
+            MessageLookupByLibrary.simpleMessage("连续多年成为全国最大的华文辩论赛金牌赞助商。"),
+        "why_choose_title1": MessageLookupByLibrary.simpleMessage("声誉"),
+        "why_choose_title2": MessageLookupByLibrary.simpleMessage("可靠"),
+        "why_choose_title3": MessageLookupByLibrary.simpleMessage("亲爱的"),
+        "why_choose_title4": MessageLookupByLibrary.simpleMessage("社区发展"),
+        "why_choose_us": MessageLookupByLibrary.simpleMessage("为什么选择我们"),
+        "why_choose_us_sub_title":
+            MessageLookupByLibrary.simpleMessage("我们来看看YAX中文学习的一些成果"),
         "widgets": MessageLookupByLibrary.simpleMessage("小工具"),
         "wizard": MessageLookupByLibrary.simpleMessage("向导"),
         "world_countries_details":

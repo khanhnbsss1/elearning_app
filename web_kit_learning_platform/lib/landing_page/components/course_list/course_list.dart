@@ -25,8 +25,20 @@ class CourseList extends StatefulWidget {
 }
 
 class _CourseListState extends State<CourseList> {
+  int b = 9;
+  bool scrollHover = false;
+  bool scrollHover2 = false;
   late ColorNotifier notifier;
   bool isHover = false;
+  ScrollController scrollCont = PageController();
+
+  void initState() {
+    super.initState();
+    scrollCont.addListener(() {
+      b = (scrollCont.position.extentAfter/100).toInt();
+    },);
+  }
+
   @override
   Widget build(BuildContext context) {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
@@ -92,7 +104,7 @@ class _CourseListState extends State<CourseList> {
               ? constraints.maxWidth / 0.5
               : constraints.maxWidth / 1.1,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
+              borderRadius: BorderRadius.circular(16),
               color: notifier.isDark
                   ? Colors.transparent
                   : const Color(0xFFF4F5F6),
@@ -102,13 +114,11 @@ class _CourseListState extends State<CourseList> {
                       : Colors.transparent)),
           child: Padding(
             padding: EdgeInsets.all(
-              constraints.maxWidth < 900 ? 20 : 30,
+              constraints.maxWidth < 900 ? 20 : 40,
             ),
             child: Column(
-              crossAxisAlignment: constraints.maxWidth < 550
-                  ? CrossAxisAlignment.center
-                  : CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
                   // height: constraints.maxWidth < 900 ? constraints.maxWidth / 0.152 : constraints.maxWidth < 1100 ? constraints.maxWidth / 0.66 : constraints.maxWidth < 1300 ? constraints.maxWidth / 1.35 : constraints.maxWidth / 1.8,
@@ -171,8 +181,10 @@ class _CourseListState extends State<CourseList> {
                                   ),
                                   width: constraints.maxWidth / (3 + 0.3),
                                   // width: constraints.maxWidth / (state.courseListLandingPageResponseModel!.data!.length + 0.2),
-                                  height: kIsWeb ? 700 : 350,
+                                  height: (constraints.maxWidth < 1300) ? constraints.maxWidth / 1.5
+                                        : constraints.maxWidth / 1.8,
                                   constraints: BoxConstraints(
+                                    minHeight: 750,
                                     minWidth: 350,
                                   ),
                                   clipBehavior: Clip.hardEdge,
@@ -240,7 +252,9 @@ class _CourseListState extends State<CourseList> {
                                                             fontWeight:
                                                                 FontWeight.bold,
                                                             fontSize:
-                                                                Dimens.size36,
+                                                                (constraints.maxWidth < 900) ? Dimens.size28
+                                                                : (constraints.maxWidth < 1300) ? Dimens.size32
+                                                                : Dimens.size36,
                                                             color: Colors.red),
                                                     textAlign: TextAlign.center,
                                                     maxLines: 2,
@@ -254,15 +268,16 @@ class _CourseListState extends State<CourseList> {
                                                 child: Text(
                                                   '${courseLandingPageInfo.introduction} \n  \n \n \n!' ??
                                                       "",
-                                                  maxLines: 4,
+                                                  maxLines: (constraints.maxWidth < 1300) ? 4 : 10,
                                                   overflow:
                                                       TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.justify,
                                                   style: TextStyleConstant
                                                       .textStyleBlack16w400
                                                       .copyWith(
                                                     fontFamily: 'gilroybold',
-                                                    fontSize: Dimens.size16,
+                                                    fontSize: (constraints.maxWidth < 900) ? Dimens.size14
+                                                        : (constraints.maxWidth < 1300) ? Dimens.size16
+                                                        : Dimens.size20,
                                                     color: notifier.isDark &&
                                                             isHovered
                                                         ? notifier.whitecolor
@@ -587,6 +602,7 @@ class _CourseListState extends State<CourseList> {
                       }
                       return Center(
                         child: SingleChildScrollView(
+                          controller: scrollCont,
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -597,52 +613,122 @@ class _CourseListState extends State<CourseList> {
                     },
                   ),
                 ),
-                SizedBox(
-                  height: constraints.maxWidth / 25,
-                ),
-                Center(
-                  child: InkWell(
-                    onTap: () {},
-                    onHover: (value) {
-                      setState(() {
-                        isHover = value;
-                      });
-                    },
-                    child: AnimatedContainer(
+                (constraints.maxWidth < 550) ? const SizedBox(height: 4) :const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
-                      height: 40,
-                      width: 100,
                       decoration: BoxDecoration(
-                        color: isHover
-                            ? (notifier.isDark
-                                ? const Color(0xFF777E90)
-                                : notifier.blackcolor)
-                            : Colors.transparent,
+                        shape: BoxShape.circle,
                         border: Border.all(
-                            color: isHover
-                                ? Colors.transparent
-                                : (notifier.isDark
-                                    ? const Color(0xFF777E90)
-                                    : Colors.grey.shade300),
-                            width: 2),
-                        borderRadius: BorderRadius.circular(16),
+                            width: 2,
+                            color: (scrollHover)
+                                ? notifier.sugestionbutton
+                                : Colors.transparent),
                       ),
-                      alignment: Alignment.center,
-                      child: Text(
-                        'View all',
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'gilroysemi',
-                            color: isHover
-                                ? (notifier.isDark
-                                    ? const Color(0xFFFFFFFF)
-                                    : notifier.whitecolor)
-                                : notifier.blackcolor),
-                      ),
+                      child: InkWell(
+                          onTap: () {
+                            if (scrollCont.offset > 0) {
+                              scrollCont.animateTo(
+                                scrollCont.offset - 200,
+                                duration: const Duration(milliseconds: 200),
+                                curve: Curves.easeInOut,
+                              );
+                            }
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(13),
+                            child: Image.asset(
+                                'assets/Icons/arrowlefticon.png',
+                                width: 15,
+                                color: notifier.subgreycolor),
+                          )),
                     ),
-                  ),
+                    const SizedBox(width: 10),
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                            width: 2,
+                            color: (scrollHover2)
+                                ? notifier.sugestionbutton
+                                : Colors.transparent),
+                      ),
+                      child: InkWell(
+                          onTap: () {
+                            if (scrollCont.offset <
+                                scrollCont.position.maxScrollExtent) {
+                              scrollCont.animateTo(
+                                scrollCont.offset + 200,
+                                duration: const Duration(milliseconds: 200),
+                                curve: Curves.easeInOut,
+                              );
+                            }
+                          },
+                          onHover: (val) {
+                            setState(() {
+                              scrollHover2 = val;
+                            });
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(13),
+                            child: Image.asset(
+                              'assets/Icons/arrowrighticon.png',
+                              width: 15,
+                              color: notifier.subgreycolor,
+                            ),
+                          )),
+                    ),
+                  ],
                 ),
+                // SizedBox(
+                //   height: constraints.maxWidth / 25,
+                // ),
+                // Center(
+                //   child: InkWell(
+                //     onTap: () {},
+                //     onHover: (value) {
+                //       setState(() {
+                //         isHover = value;
+                //       });
+                //     },
+                //     child: AnimatedContainer(
+                //       duration: const Duration(milliseconds: 200),
+                //       height: 40,
+                //       width: 100,
+                //       decoration: BoxDecoration(
+                //         color: isHover
+                //             ? (notifier.isDark
+                //                 ? const Color(0xFF777E90)
+                //                 : notifier.blackcolor)
+                //             : Colors.transparent,
+                //         border: Border.all(
+                //             color: isHover
+                //                 ? Colors.transparent
+                //                 : (notifier.isDark
+                //                     ? const Color(0xFF777E90)
+                //                     : Colors.grey.shade300),
+                //             width: 2),
+                //         borderRadius: BorderRadius.circular(16),
+                //       ),
+                //       alignment: Alignment.center,
+                //       child: Text(
+                //         'View all',
+                //         style: TextStyle(
+                //             fontSize: 14,
+                //             fontWeight: FontWeight.w500,
+                //             fontFamily: 'gilroysemi',
+                //             color: isHover
+                //                 ? (notifier.isDark
+                //                     ? const Color(0xFFFFFFFF)
+                //                     : notifier.whitecolor)
+                //                 : notifier.blackcolor),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

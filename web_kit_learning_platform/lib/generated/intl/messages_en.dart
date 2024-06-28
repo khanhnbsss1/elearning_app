@@ -122,6 +122,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "dialog_title": MessageLookupByLibrary.simpleMessage("Dialog title"),
         "dialogs": MessageLookupByLibrary.simpleMessage("Dialogs"),
+        "differences_in_teaching_methods": MessageLookupByLibrary.simpleMessage(
+            "Differences in teaching methods"),
         "doughnut_chart":
             MessageLookupByLibrary.simpleMessage("Doughnut chart"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("Ecommerce"),
@@ -195,6 +197,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "map": MessageLookupByLibrary.simpleMessage("Map"),
         "medium": MessageLookupByLibrary.simpleMessage("Medium"),
+        "medthod_content1": MessageLookupByLibrary.simpleMessage(
+            "After only 9 hours of studying, you can introduce yourself and have correct pronunciation,"),
+        "medthod_content2": MessageLookupByLibrary.simpleMessage(
+            "Through a system of simulated communication exercises, the app supports in-depth speaking practice"),
+        "medthod_content3": MessageLookupByLibrary.simpleMessage(
+            "Most of the students are office workers, managers... who go to school and have more relationships"),
+        "medthod_content4": MessageLookupByLibrary.simpleMessage(
+            "Learning method that helps you only spend 20% effort but achieve 80% effectiveness"),
+        "medthod_content5": MessageLookupByLibrary.simpleMessage(
+            "Learning method that helps you only spend 20% effort but achieve 80% efficiency"),
+        "medthod_content6": MessageLookupByLibrary.simpleMessage(
+            "Learning method that helps you only spend 20% effort but achieve 80% effectiveness"),
+        "medthod_title1": MessageLookupByLibrary.simpleMessage(
+            "Teach correct pronunciation from the beginning"),
+        "medthod_title2": MessageLookupByLibrary.simpleMessage(
+            "Focus on listening, speaking, communication"),
+        "medthod_title3":
+            MessageLookupByLibrary.simpleMessage("Awesome student community"),
+        "medthod_title4":
+            MessageLookupByLibrary.simpleMessage("Emotional Chinese Method"),
+        "medthod_title5":
+            MessageLookupByLibrary.simpleMessage("Emotional Chinese Method"),
+        "medthod_title6":
+            MessageLookupByLibrary.simpleMessage("Emotional Chinese Method"),
         "messages": MessageLookupByLibrary.simpleMessage("Messages"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "more_inputs": MessageLookupByLibrary.simpleMessage("More inputs"),
@@ -478,8 +504,27 @@ class MessageLookup extends MessageLookupByLibrary {
         "view_all": MessageLookupByLibrary.simpleMessage("View all"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
         "warning": MessageLookupByLibrary.simpleMessage("Warning"),
+        "we_are_different_because_we_understand_what_you_need":
+            MessageLookupByLibrary.simpleMessage(
+                "We are different because we understand what you need"),
         "website_visits":
             MessageLookupByLibrary.simpleMessage("Website visits"),
+        "why_choose_content1": MessageLookupByLibrary.simpleMessage(
+            "Selected to present live at the International Conference of the Confucius Institute, an agency of the Chinese Ministry of Education on Chinese language teaching."),
+        "why_choose_content2": MessageLookupByLibrary.simpleMessage(
+            "We have trained more than 20,000 face-to-face students and 250,000 online students domestically and internationally"),
+        "why_choose_content3": MessageLookupByLibrary.simpleMessage(
+            "2000 feedback, 500,000 followers on facebook, 300,000 followers and 18 million views on youtube"),
+        "why_choose_content4": MessageLookupByLibrary.simpleMessage(
+            "A gold sponsor for many consecutive years of the largest Chinese Debate Competition in the country."),
+        "why_choose_title1": MessageLookupByLibrary.simpleMessage("Reputation"),
+        "why_choose_title2": MessageLookupByLibrary.simpleMessage("Solid"),
+        "why_choose_title3": MessageLookupByLibrary.simpleMessage("Beloved"),
+        "why_choose_title4":
+            MessageLookupByLibrary.simpleMessage("Community Development"),
+        "why_choose_us": MessageLookupByLibrary.simpleMessage("Why choose us"),
+        "why_choose_us_sub_title": MessageLookupByLibrary.simpleMessage(
+            "Let\'s take a look at some achievements of YAX Chinese learning"),
         "widgets": MessageLookupByLibrary.simpleMessage("Widgets"),
         "wizard": MessageLookupByLibrary.simpleMessage("Wizard"),
         "world_countries_details":

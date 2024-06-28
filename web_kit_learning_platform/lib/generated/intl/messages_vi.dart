@@ -123,6 +123,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "dialog_title":
             MessageLookupByLibrary.simpleMessage("Tiêu đề hộp thoại"),
         "dialogs": MessageLookupByLibrary.simpleMessage("Hộp thoại"),
+        "differences_in_teaching_methods": MessageLookupByLibrary.simpleMessage(
+            "Sự khác biệt trong cách giảng dạy"),
         "doughnut_chart":
             MessageLookupByLibrary.simpleMessage("Biểu đồ bánh rán"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("Thương mại điện tử"),
@@ -199,6 +201,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "map": MessageLookupByLibrary.simpleMessage("Biểu đồ"),
         "medium": MessageLookupByLibrary.simpleMessage("Trung bình"),
+        "medthod_content1": MessageLookupByLibrary.simpleMessage(
+            "Chỉ sau 9 tiếng học, bạn đã có thể tự giới thiệu bản thân và có phát âm chuẩn"),
+        "medthod_content2": MessageLookupByLibrary.simpleMessage(
+            "Thông qua hệ thống bài tập giao tiếp giả lập, app hỗ trợ luyện nói chuyên sâu"),
+        "medthod_content3": MessageLookupByLibrary.simpleMessage(
+            "Học viên đa phần là dân công sở, quản lý... vừa đi học vừa có thêm mối quan hệ"),
+        "medthod_content4": MessageLookupByLibrary.simpleMessage(
+            "Phương pháp học giúp bạn chỉ mất 20% nỗ lực nhưng đạt 80% hiệu quả"),
+        "medthod_content5": MessageLookupByLibrary.simpleMessage(
+            "Phương pháp học giúp bạn chỉ mất 20% nỗ lực nhưng đạt 80% hiệu quả"),
+        "medthod_content6": MessageLookupByLibrary.simpleMessage(
+            "Phương pháp học giúp bạn chỉ mất 20% nỗ lực nhưng đạt 80% hiệu quả"),
+        "medthod_title1": MessageLookupByLibrary.simpleMessage(
+            "Dạy phát âm chuẩn ngay từ đầu"),
+        "medthod_title2": MessageLookupByLibrary.simpleMessage(
+            "Tập trung vào nghe nói, giao tiếp"),
+        "medthod_title3":
+            MessageLookupByLibrary.simpleMessage("Cộng đồng học viên cực chất"),
+        "medthod_title4": MessageLookupByLibrary.simpleMessage(
+            "Phương pháp Emotional Chinese"),
+        "medthod_title5": MessageLookupByLibrary.simpleMessage(
+            "Phương pháp Emotional Chinese"),
+        "medthod_title6": MessageLookupByLibrary.simpleMessage(
+            "Phương pháp Emotional Chinese"),
         "more": MessageLookupByLibrary.simpleMessage("Thêm"),
         "more_inputs": MessageLookupByLibrary.simpleMessage("Thêm đầu vào"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
@@ -477,8 +503,29 @@ class MessageLookup extends MessageLookupByLibrary {
         "view_all": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VNĐ"),
         "warning": MessageLookupByLibrary.simpleMessage("Cảnh báo"),
+        "we_are_different_because_we_understand_what_you_need":
+            MessageLookupByLibrary.simpleMessage(
+                "Chúng tôi khác biệt vì hiểu thứ bạn cần"),
         "website_visits":
             MessageLookupByLibrary.simpleMessage("Lượt truy cập trang web"),
+        "why_choose_content1": MessageLookupByLibrary.simpleMessage(
+            "Được lựa chọn trình bày trực tiếp tại Hội thảo Quốc tế của Viện Khổng Tử, cơ quan của Bộ giáo dục Trung Quốc về giảng dạy Tiếng Trung."),
+        "why_choose_content2": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi đã đào tạo hơn 20.000 học viên trực tiếp và 250.000 học viên online trong nước và quốc tế"),
+        "why_choose_content3": MessageLookupByLibrary.simpleMessage(
+            "2000 feedback, 500.000 lượt follow trên facebook, 300.000 lượt follow cùng 18 triệu lượt xem trên youtube"),
+        "why_choose_content4": MessageLookupByLibrary.simpleMessage(
+            "Là nhà tài trợ vàng nhiều năm liền cho Cuộc thi Tranh biện Tiếng Hoa lớn nhất cả nước."),
+        "why_choose_title1": MessageLookupByLibrary.simpleMessage("Uy tín"),
+        "why_choose_title2": MessageLookupByLibrary.simpleMessage("Vững chắc"),
+        "why_choose_title3":
+            MessageLookupByLibrary.simpleMessage("Được yêu mến"),
+        "why_choose_title4":
+            MessageLookupByLibrary.simpleMessage("Phát triển cộng đồng"),
+        "why_choose_us":
+            MessageLookupByLibrary.simpleMessage("Tại sao chọn chúng tôi"),
+        "why_choose_us_sub_title": MessageLookupByLibrary.simpleMessage(
+            "Cùng điểm qua một số thành tựu của YAX Chinese learning nhé"),
         "wizard": MessageLookupByLibrary.simpleMessage("Wizard"),
         "world_countries_details": MessageLookupByLibrary.simpleMessage(
             "Chi tiết các quốc gia trên thế giới"),
