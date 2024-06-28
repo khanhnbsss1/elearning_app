@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/services/apis/user/models/landing_page_teacher_model.dart';
 
 import '../colornotifier.dart';
@@ -87,7 +86,8 @@ class _TeacherListState extends State<TeacherList> {
   ];
   List hostrating = ['4.9', '4.8', '5.0', '4.7', '4.9', '4.8', '5.0', '4.7'];
 
-  List<int> add = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+  List<int> add = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
   @override
   Widget build(BuildContext context) {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
@@ -100,852 +100,777 @@ class _TeacherListState extends State<TeacherList> {
         },
         child: BlocConsumer<TeacherListBloc, TeacherListState>(
             listener: (context, state) {
-              switch (state.blocStatus) {
-                case TeacherListStatus.initial:
-
-                  break;
-                default:
-                  break;
-              }
+          switch (state.blocStatus) {
+            case TeacherListStatus.initial:
+              break;
+            default:
+              break;
+          }
+        }, builder: (BuildContext context, state) {
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              return Column(
+                children: [
+                  //buildListTeacher2(constraints),
+                  //const SizedBox(height: 40),
+                  buildListTeacher1(constraints: constraints, state: state),
+                ],
+              );
             },
-            builder: (BuildContext context, state) {
-              return LayoutBuilder(
-                builder: (context, constraints) {
-                  return Column(
-                    children: [
-                      //buildListTeacher2(constraints),
-                      //const SizedBox(height: 40),
-                      buildListTeacher1(constraints:constraints, state: state),
-                    ],
-                  );
-                },
-              );;
-            }));
-
+          );
+          ;
+        }));
   }
-  Widget buildListTeacher1({required BoxConstraints constraints, required TeacherListState state}){
-    List<Widget>teacherList = List.empty(growable: true);
-    for(LandingPageUserInfo landingPageUserInfo in state.landingPageUserListModel?.data??[])
-      {
-        teacherList.add(buildTeacherItem1(landingPageUserInfo: landingPageUserInfo));
-      }
-    return Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: constraints.maxWidth < 550 ? 10 : 50,right: constraints.maxWidth < 500 ? 5 : 50),
-            child: SizedBox(
-                width: constraints.maxWidth < 1300 ? constraints.maxWidth / 0.5 : constraints.maxWidth / 1.1,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    constraints.maxWidth < 1000
-                        ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                            L10nX.getStr.teacher_list,
-                          style: TextStyleConstant.textStyleBlack28w700.copyWith(
-                              fontSize: constraints.maxWidth < 550
-                                  ? 28
-                                  : 45,
-                              color: notifier.blackcolor
-                          ),),
-                      ],
-                    ) 
-                        : Row(
-                      children: [
-                        Text(
-                            L10nX.getStr.teacher_list,
-                          style: TextStyleConstant.textStyleBlack28w700.copyWith(
-                              fontSize: constraints.maxWidth < 550
-                                  ? 28
-                                  : 45,
-                              color: notifier.blackcolor
-                          ),),
-                      ],
-                    ),
-                    constraints.maxWidth < 800
-                        ? const SizedBox() 
-                        : Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                width: 2,
-                                color: (isHover)
-                                    ? notifier.sugestionbutton
-                                    : Colors.transparent),
-                          ),
-                          child: InkWell(
-                              onTap: () {
-                                scrollCont.animateTo(
-                                    double.parse("${a}00"),
-                                    curve: const FlippedCurve(Easing.legacy),
-                                    duration: const Duration(seconds: 1)
-                                );
-                                setState(() {
-                                  b = b - constraints.maxWidth < 500 ? 2 : 4;
-                                });
-                              },
-                              onHover: (val) {
-                                setState(() {
-                                  isHover = val;
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(13),
-                                child: Image.asset(
-                                    'assets/Icons/arrowlefticon.png',
-                                    width: 15,
-                                    color: notifier.subgreycolor
-                                ),
-                              )),
+
+  Widget buildListTeacher1(
+      {required BoxConstraints constraints, required TeacherListState state}) {
+    List<Widget> teacherList = List.empty(growable: true);
+    for (LandingPageUserInfo landingPageUserInfo
+        in state.landingPageUserListModel?.data ?? []) {
+      teacherList
+          .add(buildTeacherItem1(landingPageUserInfo: landingPageUserInfo));
+    }
+    return Column(children: [
+      Center(
+        child: Text(L10nX.getStr.teacher_list,
+            style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                .copyWith(
+                    fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                    color: notifier.blackcolor)),
+      ),
+      SizedBox(
+        height: constraints.maxWidth < 550 ? 10 : 20,
+      ),
+      Container(
+        width: constraints.maxWidth < 1300
+            ? constraints.maxWidth / 0.5
+            : constraints.maxWidth / 1.1,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color:
+                notifier.isDark ? Colors.transparent : const Color(0xFFF4F5F6),
+            border: Border.all(
+                color: notifier.isDark
+                    ? notifier.sugestionbutton
+                    : Colors.transparent)),
+        child: Padding(
+            padding: EdgeInsets.all(
+              constraints.maxWidth < 900 ? 20 : 30,
+            ),
+            child: state.landingPageUserListModel?.data?.length != null &&
+                    state.landingPageUserListModel!.data!.isNotEmpty
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: teacherList,
                         ),
-                        const SizedBox(width: 10),
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                width: 2,
-                                color: (isHover2)
-                                    ? notifier.sugestionbutton
-                                    : Colors.transparent),
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  width: 2,
+                                  color: (scrollHover)
+                                      ? notifier.sugestionbutton
+                                      : Colors.transparent),
+                            ),
+                            child: InkWell(
+                                onTap: () {
+                                  scrollCont.animateTo(double.parse("${a}00"),
+                                      curve: const FlippedCurve(Easing.legacy),
+                                      duration: const Duration(seconds: 1));
+                                  setState(() {
+                                    b = b - constraints.maxWidth < 500 ? 2 : 4;
+                                  });
+                                },
+                                onHover: (val) {
+                                  setState(() {
+                                    scrollHover = val;
+                                  });
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(13),
+                                  child: Image.asset(
+                                      'assets/Icons/arrowlefticon.png',
+                                      width: 15,
+                                      color: notifier.subgreycolor),
+                                )),
                           ),
-                          child: InkWell(
-                              onTap: () {
-                                scrollCont.animateTo(double.parse("${a}00"),
-                                    curve:
-                                    const FlippedCurve(Easing.legacy),
-                                    duration: const Duration(seconds: 1));
-                                setState(() {
-                                  b = b + constraints.maxWidth < 500 ? 2 : 4;
-                                });
-                              },
-                              onHover: (val) {
-                                setState(() {
-                                  isHover2 = val;
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(13),
-                                child: Image.asset(
+                          const SizedBox(width: 10),
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  width: 2,
+                                  color: (scrollHover2)
+                                      ? notifier.sugestionbutton
+                                      : Colors.transparent),
+                            ),
+                            child: InkWell(
+                                onTap: () {
+                                  scrollCont.animateTo(double.parse("${a}00"),
+                                      curve: const FlippedCurve(Easing.legacy),
+                                      duration: const Duration(seconds: 1));
+                                  setState(() {
+                                    b = b + constraints.maxWidth < 500 ? 2 : 4;
+                                  });
+                                },
+                                onHover: (val) {
+                                  setState(() {
+                                    scrollHover2 = val;
+                                  });
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(13),
+                                  child: Image.asset(
                                     'assets/Icons/arrowrighticon.png',
                                     width: 15,
-                                    color: notifier.subgreycolor
-                                ),
-                              )),
-                        ),
-                      ],
-                    ),
-                  ],
-                )
-            ),
-          ),
-          const SizedBox(height: 20),
-          Container(
-            width: constraints.maxWidth < 1300 ? constraints.maxWidth / 0.5 : constraints.maxWidth / 1.1,
-            decoration: BoxDecoration(
-              color: notifier.hostBGColor,
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Padding(
-                padding: EdgeInsets.only(top: 20,bottom: 20,left: constraints.maxWidth < 750 ? 20 : 20,),
-                child: state.landingPageUserListModel?.data?.length!=null && state.landingPageUserListModel!.data!.isNotEmpty?
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      controller: scrollCont,
-                      child: Row(
-                        children: teacherList,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    constraints.maxWidth < 750 ? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                width: 2,
-                                color: (scrollHover)
-                                    ? notifier.sugestionbutton
-                                    : Colors.transparent),
+                                    color: notifier.subgreycolor,
+                                  ),
+                                )),
                           ),
-                          child: InkWell(
-                              onTap: () {
-                                scrollCont.animateTo(double.parse("${a}00"),
-                                    curve:
-                                    const FlippedCurve(Easing.legacy),
-                                    duration: const Duration(seconds: 1));
-                                setState(() {
-                                  b = b - constraints.maxWidth < 500 ? 2 : 4;
-                                });
-                              },
-                              onHover: (val) {
-                                setState(() {
-                                  scrollHover = val;
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(13),
-                                child: Image.asset(
-                                    'assets/Icons/arrowlefticon.png',
-                                    width: 15,
-                                    color: notifier.subgreycolor
-                                ),
-                              )),
-                        ),
-                        const SizedBox(width: 10),
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                width: 2,
-                                color: (scrollHover2)
-                                    ? notifier.sugestionbutton
-                                    : Colors.transparent),
-                          ),
-                          child: InkWell(
-                              onTap: () {
-                                scrollCont.animateTo(double.parse("${a}00"),
-                                    curve:
-                                    const FlippedCurve(Easing.legacy),
-                                    duration: const Duration(seconds: 1));
-                                setState(() {
-                                  b = b + constraints.maxWidth < 500 ? 2 : 4;
-                                });
-                              },
-                              onHover: (val) {
-                                setState(() {
-                                  scrollHover2 = val;
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(13),
-                                child: Image.asset(
-                                  'assets/Icons/arrowrighticon.png',
-                                  width: 15,
-                                  color: notifier.subgreycolor,
-                                ),
-                              )),
-                        ),
-                      ],
-                    ) : SizedBox(
-                      height: 40,
-                      width: 100,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            elevation: const WidgetStatePropertyAll(0),
-                            backgroundColor: WidgetStatePropertyAll(viewallHover ? notifier.blackcolor : notifier.yellowcolor),
-                            shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),
-                            ),
-                            )
-                        ),
-                        onHover: (value) {
-                          setState(() {
-                            viewallHover = value;
-                          });
-                        },
-                        onPressed: () {
-
-                        }, child: Text('View All',style: TextStyle(fontFamily: 'gilroysemi',fontWeight: FontWeight.w500,fontSize: 12,color: viewallHover ? notifier.whitecolor : notifier.blackcolor)
+                        ],
                       ),
-                      ),
-                    ),
-                  ],
-                ):SizedBox()
-            ),
-          ),
-        ]
-    );
-  }
-  Widget buildTeacherItem1({required LandingPageUserInfo landingPageUserInfo}){
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Dimens.size24, vertical: Dimens.size16),
-      child: Column(
-        children: [
-          ClipOval(
-            //borderRadius: BorderRadius.circular(Dimens.size200),
-            child: Container(
-              decoration: BoxDecoration(
-                color: ColorConst.whiteColor,
-               // borderRadius: BorderRadius.circular(Dimens.size100)
-              ),
-              child: SizedBox(
-                height: Dimens.size250,
-                width: Dimens.size200,
-                child: ImageManager().getImageByUrl(landingPageUserInfo.avatar??"",boxFit: BoxFit.cover),
-              ),
-            ),
-          ),
-          Gap(Dimens.size12),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              width: Dimens.size200,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                      landingPageUserInfo.fullname??"",
-                      textAlign: TextAlign.center,
-                      style: TextStyleConstant.textStyleBlack16w500),
-                  Text(
-                    landingPageUserInfo.position??"",
-                    style:TextStyleConstant.textStyleBlack12w400,
-                    maxLines: 2,
-                    textAlign: TextAlign.center,
-                  ),
-                  Gap(Dimens.size20)
-                ],
-              ),
-            ),
-          ),
-        ],
+                      // SizedBox(
+                      //   height: 40,
+                      //   width: 100,
+                      //   child: ElevatedButton(
+                      //     style: ButtonStyle(
+                      //         elevation: const WidgetStatePropertyAll(0),
+                      //         backgroundColor: WidgetStatePropertyAll(
+                      //             viewallHover
+                      //                 ? notifier.blackcolor
+                      //                 : notifier.yellowcolor),
+                      //         shape: WidgetStatePropertyAll(
+                      //           RoundedRectangleBorder(
+                      //             borderRadius: BorderRadius.circular(20),
+                      //           ),
+                      //         )),
+                      //     onHover: (value) {
+                      //       setState(() {
+                      //         viewallHover = value;
+                      //       });
+                      //     },
+                      //     onPressed: () {},
+                      //     child: Text('View All',
+                      //         style: TextStyle(
+                      //             fontFamily: 'gilroysemi',
+                      //             fontWeight: FontWeight.w500,
+                      //             fontSize: 12,
+                      //             color: viewallHover
+                      //                 ? notifier.whitecolor
+                      //                 : notifier.blackcolor)),
+                      //   ),
+                      // ),
+                    ],
+                  )
+                : SizedBox()),
       ),
-    );
+    ]);
   }
-  Widget buildListTeacher2(constraints) {
-    return SizedBox(
-         width: constraints.maxWidth < 1100 ? constraints.maxWidth / 1 : constraints.maxWidth < 1200 ? constraints.maxWidth / 1.09 : constraints.maxWidth / 1.2,
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: constraints.maxWidth < 550 ? 10 : constraints.maxWidth < 1100 ? 50 : 0,
+
+  Widget buildTeacherItem1({required LandingPageUserInfo landingPageUserInfo}) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorConst.whiteColor,
           ),
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(
-                    right: constraints.maxWidth < 500
-                        ? 5
-                        :constraints.maxWidth < 800
-                        ? 50
-                        : constraints.maxWidth < 1100
-                            ? 50
-                            : 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    constraints.maxWidth < 1000
-                        ? Flexible(
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Exploring the top hotel',
-                                  style: TextStyle(
-                                      fontFamily: 'gilroysemi',
-                                      fontSize: constraints.maxWidth < 500
-                                          ? 28
-                                          : 32,
-                                      color: notifier.blackcolor),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                PopupMenuButton(
-                                  tooltip: '',
-                                  padding: const EdgeInsets.all(0),
-                                  offset: const Offset(0, 60),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  // initialValue: selectedMenu,
-                                  constraints: const BoxConstraints(
-                                    maxWidth: 800,
-                                    maxHeight: 400,
-                                  ),
-                                  color: notifier.whitecolor,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        ' ${selectedvalue2.isNotEmpty ? selectedvalue2 : selectedvalue2 = type[0]}',
-                                        style: TextStyle(
-                                            fontFamily: 'gilroysemi',
-                                            fontSize: constraints.maxWidth < 550 ? 28 : 32,
-                                            color: notifier.buttoncolor),
-                                      ),
-                                      Icon(
-                                        Icons.keyboard_arrow_down_rounded,
-                                        color: notifier.buttoncolor,
-                                      ),
-                                    ],
-                                  ),
-                                  onSelected: (SampleItem2 item) {
-                                    setState(() {
-                                      // selectedMenu = item;
-                                    });
-                                  },
-                                  itemBuilder: (BuildContext context) =>
-                                      <PopupMenuEntry<SampleItem2>>[
-                                    PopupMenuItem<SampleItem2>(
-                                      enabled: true,
-                                      value: SampleItem2.itemOne,
-                                      onTap: () {
-                                        setState(() {
-                                          selectedvalue2 = type[0];
-                                        });
-                                      },
-                                      child: Text(
-                                        type[0],
-                                        style: TextStyle(
-                                            color: selectedvalue2 == type[0]
-                                                ? Colors.blue
-                                                : notifier.subgreycolor,
-                                            fontSize: constraints.maxWidth < 550 ? 28 : 32,
-                                            fontFamily: 'gilroysemi'),
-                                      ),
-                                    ),
-                                    PopupMenuItem<SampleItem2>(
-                                      enabled: true,
-                                      value: SampleItem2.itemOne,
-                                      onTap: () {
-                                        setState(() {
-                                          selectedvalue2 = type[1];
-                                        });
-                                      },
-                                      child: Text(
-                                        type[1],
-                                        style: TextStyle(
-                                            color: selectedvalue2 == type[1]
-                                                ? Colors.blue
-                                                : notifier.subgreycolor,
-                                            fontSize: constraints.maxWidth < 550 ? 28 : 32,
-                                            fontFamily: 'gilroysemi'),
-                                      ),
-                                    ),
-                                    PopupMenuItem<SampleItem2>(
-                                      enabled: true,
-                                      value: SampleItem2.itemOne,
-                                      onTap: () {
-                                        setState(() {
-                                          selectedvalue2 = type[2];
-                                        });
-                                      },
-                                      child: Text(
-                                        type[2],
-                                        style: TextStyle(
-                                            color: selectedvalue2 == type[2]
-                                                ? Colors.blue
-                                                : notifier.subgreycolor,
-                                            fontSize: constraints.maxWidth < 550 ? 28 : 32,
-                                            fontFamily: 'gilroysemi'),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                        )
-                        : Row(
-                            children: [
-                              Text(
-                                'Exploring the top hotel',
-                                style: TextStyle(
-                                    fontFamily: 'gilroysemi',
-                                    fontSize: 48,
-                                    color: notifier.blackcolor),
-                              ),
-                              PopupMenuButton(
-                                tooltip: '',
-                                padding: const EdgeInsets.all(0),
-                                offset: const Offset(0, 60),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                // initialValue: selectedMenu,
-                                constraints: const BoxConstraints(
-                                  maxWidth: 800,
-                                  maxHeight: 400,
-                                ),
-                                color: notifier.whitecolor,
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      ' ${selectedvalue2.isNotEmpty ? selectedvalue2 : selectedvalue2 = type[0]}',
-                                      style: TextStyle(
-                                          fontFamily: 'gilroysemi',
-                                          fontSize: 48,
-                                          color: notifier.buttoncolor),
-                                    ),
-                                    Icon(
-                                      Icons.keyboard_arrow_down_rounded,
-                                      color: notifier.buttoncolor,
-                                    ),
-                                  ],
-                                ),
-                                onSelected: (SampleItem2 item) {
-                                  setState(() {
-                                    // selectedMenu = item;
-                                  });
-                                },
-                                itemBuilder: (BuildContext context) =>
-                                    <PopupMenuEntry<SampleItem2>>[
-                                  PopupMenuItem<SampleItem2>(
-                                    enabled: true,
-                                    value: SampleItem2.itemOne,
-                                    onTap: () {
-                                      setState(() {
-                                        selectedvalue2 = type[0];
-                                      });
-                                    },
-                                    child: Text(
-                                      type[0],
-                                      style: TextStyle(
-                                          color: selectedvalue2 == type[0]
-                                              ? Colors.blue
-                                              : notifier.subgreycolor,
-                                          fontSize: 40,
-                                          fontFamily: 'gilroysemi'),
-                                    ),
-                                  ),
-                                  PopupMenuItem<SampleItem2>(
-                                    enabled: true,
-                                    value: SampleItem2.itemOne,
-                                    onTap: () {
-                                      setState(() {
-                                        selectedvalue2 = type[1];
-                                      });
-                                    },
-                                    child: Text(
-                                      type[1],
-                                      style: TextStyle(
-                                          color: selectedvalue2 == type[1]
-                                              ? Colors.blue
-                                              : notifier.subgreycolor,
-                                          fontSize: 40,
-                                          fontFamily: 'gilroysemi'),
-                                    ),
-                                  ),
-                                  PopupMenuItem<SampleItem2>(
-                                    enabled: true,
-                                    value: SampleItem2.itemOne,
-                                    onTap: () {
-                                      setState(() {
-                                        selectedvalue2 = type[2];
-                                      });
-                                    },
-                                    child: Text(
-                                      type[2],
-                                      style: TextStyle(
-                                          color: selectedvalue2 == type[2]
-                                              ? Colors.blue
-                                              : notifier.subgreycolor,
-                                          fontSize: 40,
-                                          fontFamily: 'gilroysemi'),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                    constraints.maxWidth < 800
-                        ? const SizedBox()
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      width: 2,
-                                      color: (isHover)
-                                          ? notifier.sugestionbutton
-                                          : Colors.transparent),
-                                ),
-                                child: InkWell(
-                                    onTap: () {
-                                      pg.animateTo(double.parse("${a}00"),
-                                          curve:
-                                              const FlippedCurve(Easing.legacy),
-                                          duration: const Duration(seconds: 1));
-                                      setState(() {
-                                        a = a - constraints.maxWidth < 500 ? 2 : 4;
-                                      });
-                                    },
-                                    onHover: (val) {
-                                      setState(() {
-                                        isHover = val;
-                                      });
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(13),
-                                      child: Image.asset(
-                                        'assets/Icons/arrowlefticon.png',
-                                        width: 15,
-                                        color: notifier.subgreycolor
-                                      ),
-                                    )),
-                              ),
-                              const SizedBox(width: 10),
-                              AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      width: 2,
-                                      color: (isHover2)
-                                          ? notifier.sugestionbutton
-                                          : Colors.transparent),
-                                ),
-                                child: InkWell(
-                                    onTap: () {
-                                      pg.animateTo(double.parse("${a}00"),
-                                          curve:
-                                              const FlippedCurve(Easing.legacy),
-                                          duration: const Duration(seconds: 1));
-                                      setState(() {
-                                        a = a + constraints.maxWidth < 500 ? 2 : 4;
-                                      });
-                                    },
-                                    onHover: (val) {
-                                      setState(() {
-                                        isHover2 = val;
-                                      });
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(13),
-                                      child: Image.asset(
-                                        'assets/Icons/arrowrighticon.png',
-                                        width: 15,
-                                        color: notifier.subgreycolor
-                                      ),
-                                    )),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-              SizedBox(
-                height: 350,
-                child: ListView.builder(
-                  itemCount: hostplacesimage.length,
-                  controller: pg,
-                  physics: const ClampingScrollPhysics(),
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Row(
-                      children: [
-                        Stack(
-                          children: [
-                            AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              height: 310,
-                              width:  260,
-                              decoration: BoxDecoration(
-                                color: notifier.whitecolor,
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                    color: (hoverborder[index])
-                                        ? Colors.grey.shade400
-                                        : notifier.sugestionbutton),
-                              ),
-                              child: InkWell(
-                                onTap: () {},
-                                onHover: (value) {
-                                  setState(() {
-                                    hoverborder[index] = value;
-                                  });
-                                },
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                          topRight: Radius.circular(20),
-                                          topLeft: Radius.circular(20)),
-                                      child: Stack(
-                                        children: [
-                                          Image.asset(
-                                            hostplacesimage[index],
-                                            height: 180,
-                                            width: width / 1,
-                                            fit: BoxFit.fill,
-                                          ),
-                                          Positioned(
-                                              top: 10,
-                                              left: 10,
-                                              child: Container(
-                                                height: 22,
-                                                width: 50,
-                                                alignment: Alignment.center,
-                                                decoration: BoxDecoration(
-                                                    color: notifier.whitecolor,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Icon(Icons.star_rounded,
-                                                        color: notifier
-                                                            .yellowcolor,
-                                                        size: 14),
-                                                    Text(
-                                                      hostrating[index],
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: notifier.blackcolor,
-                                                          fontFamily:
-                                                              'gilroysemi'),
-                                                    )
-                                                  ],
-                                                ),
-                                              )),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(height: 60),
-                                    Text(
-                                      'Antone Heller',
-                                      style: TextStyle(
-                                          fontFamily: 'gilroysemi',
-                                          fontSize: 16,
-                                          color: notifier.blackcolor),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text('Gaylordside',
-                                        style: TextStyle(
-                                            fontFamily: 'gilroy',
-                                            fontSize: 14,
-                                            color: notifier.subgreycolor)),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 135,
-                              left: 87,
-                              child: Container(
-                                height: 85,
-                                width:  81,
-                                decoration: BoxDecoration(
-                                  color: notifier.whitecolor,
-                                  shape: BoxShape.circle,
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 140,
-                              left: 90,
-                              child: Container(
-                                height: 75,
-                                decoration: BoxDecoration(
-                                  color: notifier.whitecolor,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.asset(
-                                  hostimage[index],
-                                ),
-                              )
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                      ],
-                    );
-                  },
+                padding: const EdgeInsets.all(12.0),
+                child: SizedBox(
+                  width:  Dimens.size300,
+                  height: Dimens.size340,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: ImageManager().getImageByUrl(
+                        landingPageUserInfo.avatar ?? "",
+                        boxFit: BoxFit.cover),
+                  ),
                 ),
               ),
-              const SizedBox(height: 10),
-              constraints.maxWidth < 800
-                  ? Row(
-                      mainAxisAlignment: constraints.maxWidth < 550 ? MainAxisAlignment.center : MainAxisAlignment.start,
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: ColorConst.whiteColor,
+                    // borderRadius: BorderRadius.circular(Dimens.size100)
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                width: 2,
-                                color: (isHover)
-                                    ? notifier.sugestionbutton
-                                    : Colors.transparent),
-                          ),
-                          child: InkWell(
-                              onTap: () {
-                                pg.animateTo(double.parse("${a}00"),
-                                    curve:
-                                    const FlippedCurve(Easing.legacy),
-                                    duration: const Duration(seconds: 1));
-                                setState(() {
-                                  a = a - constraints.maxWidth < 500 ? 2 : 4;
-                                });
-                              },
-                              onHover: (val) {
-                                setState(() {
-                                  isHover = val;
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(13),
-                                child: Image.asset(
-                                  'assets/Icons/arrowlefticon.png',
-                                  width: 15,
-                                  color: notifier.subgreycolor,
-                                ),
-                              )),
+                        Text(landingPageUserInfo.fullname ?? "",
+                            style: TextStyle(
+                                color: notifier.blackcolor,
+                                fontSize: 16,
+                                fontFamily: 'gilroysemi',
+                                fontWeight: FontWeight.w500)),
+                        Text(
+                          landingPageUserInfo.position ?? "",
+                          style: TextStyle(
+                              color: notifier.blackcolor,
+                              fontSize: 12,
+                              fontFamily: 'gilroysemi'),
+                          maxLines: 2,
                         ),
-                        const SizedBox(width: 10),
-                        AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                width: 2,
-                                color: (isHover2)
-                                    ? notifier.sugestionbutton
-                                    : Colors.transparent),
-                          ),
-                          child: InkWell(
-                              onTap: () {
-                                pg.animateTo(double.parse("${a}00"),
-                                    curve:
-                                    const FlippedCurve(Easing.legacy),
-                                    duration: const Duration(seconds: 1));
-                                setState(() {
-                                  a = a + constraints.maxWidth < 500 ? 2 : 4;
-                                });
-                              },
-                              onHover: (val) {
-                                setState(() {
-                                  isHover2 = val;
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(13),
-                                child: Image.asset(
-                                  'assets/Icons/arrowrighticon.png',
-                                  width: 15,
-                                  color: notifier.subgreycolor,
-                                ),
-                              )),
-                        ),
+                        Gap(Dimens.size20)
                       ],
-                    )
-                  : const SizedBox(),
+                    ),
+                  ),
+                ),
+              ),
+              // SizedBox(height: 10),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
+
+// Widget buildListTeacher2(constraints) {
+//   return SizedBox(
+//        width: constraints.maxWidth < 1100 ? constraints.maxWidth / 1 : constraints.maxWidth < 1200 ? constraints.maxWidth / 1.09 : constraints.maxWidth / 1.2,
+//       child: Padding(
+//         padding: EdgeInsets.only(
+//           left: constraints.maxWidth < 550 ? 10 : constraints.maxWidth < 1100 ? 50 : 0,
+//         ),
+//         child: Column(
+//           children: [
+//             Padding(
+//               padding: EdgeInsets.only(
+//                   right: constraints.maxWidth < 500
+//                       ? 5
+//                       :constraints.maxWidth < 800
+//                       ? 50
+//                       : constraints.maxWidth < 1100
+//                           ? 50
+//                           : 0),
+//               child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   constraints.maxWidth < 1000
+//                       ? Flexible(
+//                         child: Column(
+//                             crossAxisAlignment: CrossAxisAlignment.start,
+//                             children: [
+//                               Text(
+//                                 'Exploring the top hotel',
+//                                 style: TextStyle(
+//                                     fontFamily: 'gilroysemi',
+//                                     fontSize: constraints.maxWidth < 500
+//                                         ? 28
+//                                         : 32,
+//                                     color: notifier.blackcolor),
+//                                 overflow: TextOverflow.ellipsis,
+//                               ),
+//                               PopupMenuButton(
+//                                 tooltip: '',
+//                                 padding: const EdgeInsets.all(0),
+//                                 offset: const Offset(0, 60),
+//                                 shape: RoundedRectangleBorder(
+//                                   borderRadius: BorderRadius.circular(20),
+//                                 ),
+//                                 // initialValue: selectedMenu,
+//                                 constraints: const BoxConstraints(
+//                                   maxWidth: 800,
+//                                   maxHeight: 400,
+//                                 ),
+//                                 color: notifier.whitecolor,
+//                                 child: Row(
+//                                   mainAxisAlignment: MainAxisAlignment.start,
+//                                   children: [
+//                                     Text(
+//                                       ' ${selectedvalue2.isNotEmpty ? selectedvalue2 : selectedvalue2 = type[0]}',
+//                                       style: TextStyle(
+//                                           fontFamily: 'gilroysemi',
+//                                           fontSize: constraints.maxWidth < 550 ? 28 : 32,
+//                                           color: notifier.buttoncolor),
+//                                     ),
+//                                     Icon(
+//                                       Icons.keyboard_arrow_down_rounded,
+//                                       color: notifier.buttoncolor,
+//                                     ),
+//                                   ],
+//                                 ),
+//                                 onSelected: (SampleItem2 item) {
+//                                   setState(() {
+//                                     // selectedMenu = item;
+//                                   });
+//                                 },
+//                                 itemBuilder: (BuildContext context) =>
+//                                     <PopupMenuEntry<SampleItem2>>[
+//                                   PopupMenuItem<SampleItem2>(
+//                                     enabled: true,
+//                                     value: SampleItem2.itemOne,
+//                                     onTap: () {
+//                                       setState(() {
+//                                         selectedvalue2 = type[0];
+//                                       });
+//                                     },
+//                                     child: Text(
+//                                       type[0],
+//                                       style: TextStyle(
+//                                           color: selectedvalue2 == type[0]
+//                                               ? Colors.blue
+//                                               : notifier.subgreycolor,
+//                                           fontSize: constraints.maxWidth < 550 ? 28 : 32,
+//                                           fontFamily: 'gilroysemi'),
+//                                     ),
+//                                   ),
+//                                   PopupMenuItem<SampleItem2>(
+//                                     enabled: true,
+//                                     value: SampleItem2.itemOne,
+//                                     onTap: () {
+//                                       setState(() {
+//                                         selectedvalue2 = type[1];
+//                                       });
+//                                     },
+//                                     child: Text(
+//                                       type[1],
+//                                       style: TextStyle(
+//                                           color: selectedvalue2 == type[1]
+//                                               ? Colors.blue
+//                                               : notifier.subgreycolor,
+//                                           fontSize: constraints.maxWidth < 550 ? 28 : 32,
+//                                           fontFamily: 'gilroysemi'),
+//                                     ),
+//                                   ),
+//                                   PopupMenuItem<SampleItem2>(
+//                                     enabled: true,
+//                                     value: SampleItem2.itemOne,
+//                                     onTap: () {
+//                                       setState(() {
+//                                         selectedvalue2 = type[2];
+//                                       });
+//                                     },
+//                                     child: Text(
+//                                       type[2],
+//                                       style: TextStyle(
+//                                           color: selectedvalue2 == type[2]
+//                                               ? Colors.blue
+//                                               : notifier.subgreycolor,
+//                                           fontSize: constraints.maxWidth < 550 ? 28 : 32,
+//                                           fontFamily: 'gilroysemi'),
+//                                     ),
+//                                   ),
+//                                 ],
+//                               ),
+//                             ],
+//                           ),
+//                       )
+//                       : Row(
+//                           children: [
+//                             Text(
+//                               'Exploring the top hotel',
+//                               style: TextStyle(
+//                                   fontFamily: 'gilroysemi',
+//                                   fontSize: 48,
+//                                   color: notifier.blackcolor),
+//                             ),
+//                             PopupMenuButton(
+//                               tooltip: '',
+//                               padding: const EdgeInsets.all(0),
+//                               offset: const Offset(0, 60),
+//                               shape: RoundedRectangleBorder(
+//                                 borderRadius: BorderRadius.circular(20),
+//                               ),
+//                               // initialValue: selectedMenu,
+//                               constraints: const BoxConstraints(
+//                                 maxWidth: 800,
+//                                 maxHeight: 400,
+//                               ),
+//                               color: notifier.whitecolor,
+//                               child: Row(
+//                                 children: [
+//                                   Text(
+//                                     ' ${selectedvalue2.isNotEmpty ? selectedvalue2 : selectedvalue2 = type[0]}',
+//                                     style: TextStyle(
+//                                         fontFamily: 'gilroysemi',
+//                                         fontSize: 48,
+//                                         color: notifier.buttoncolor),
+//                                   ),
+//                                   Icon(
+//                                     Icons.keyboard_arrow_down_rounded,
+//                                     color: notifier.buttoncolor,
+//                                   ),
+//                                 ],
+//                               ),
+//                               onSelected: (SampleItem2 item) {
+//                                 setState(() {
+//                                   // selectedMenu = item;
+//                                 });
+//                               },
+//                               itemBuilder: (BuildContext context) =>
+//                                   <PopupMenuEntry<SampleItem2>>[
+//                                 PopupMenuItem<SampleItem2>(
+//                                   enabled: true,
+//                                   value: SampleItem2.itemOne,
+//                                   onTap: () {
+//                                     setState(() {
+//                                       selectedvalue2 = type[0];
+//                                     });
+//                                   },
+//                                   child: Text(
+//                                     type[0],
+//                                     style: TextStyle(
+//                                         color: selectedvalue2 == type[0]
+//                                             ? Colors.blue
+//                                             : notifier.subgreycolor,
+//                                         fontSize: 40,
+//                                         fontFamily: 'gilroysemi'),
+//                                   ),
+//                                 ),
+//                                 PopupMenuItem<SampleItem2>(
+//                                   enabled: true,
+//                                   value: SampleItem2.itemOne,
+//                                   onTap: () {
+//                                     setState(() {
+//                                       selectedvalue2 = type[1];
+//                                     });
+//                                   },
+//                                   child: Text(
+//                                     type[1],
+//                                     style: TextStyle(
+//                                         color: selectedvalue2 == type[1]
+//                                             ? Colors.blue
+//                                             : notifier.subgreycolor,
+//                                         fontSize: 40,
+//                                         fontFamily: 'gilroysemi'),
+//                                   ),
+//                                 ),
+//                                 PopupMenuItem<SampleItem2>(
+//                                   enabled: true,
+//                                   value: SampleItem2.itemOne,
+//                                   onTap: () {
+//                                     setState(() {
+//                                       selectedvalue2 = type[2];
+//                                     });
+//                                   },
+//                                   child: Text(
+//                                     type[2],
+//                                     style: TextStyle(
+//                                         color: selectedvalue2 == type[2]
+//                                             ? Colors.blue
+//                                             : notifier.subgreycolor,
+//                                         fontSize: 40,
+//                                         fontFamily: 'gilroysemi'),
+//                                   ),
+//                                 ),
+//                               ],
+//                             ),
+//                           ],
+//                         ),
+//                   constraints.maxWidth < 800
+//                       ? const SizedBox()
+//                       : Row(
+//                           mainAxisAlignment: MainAxisAlignment.center,
+//                           children: [
+//                             AnimatedContainer(
+//                               duration: const Duration(milliseconds: 200),
+//                               decoration: BoxDecoration(
+//                                 shape: BoxShape.circle,
+//                                 border: Border.all(
+//                                     width: 2,
+//                                     color: (isHover)
+//                                         ? notifier.sugestionbutton
+//                                         : Colors.transparent),
+//                               ),
+//                               child: InkWell(
+//                                   onTap: () {
+//                                     pg.animateTo(double.parse("${a}00"),
+//                                         curve:
+//                                             const FlippedCurve(Easing.legacy),
+//                                         duration: const Duration(seconds: 1));
+//                                     setState(() {
+//                                       a = a - constraints.maxWidth < 500 ? 2 : 4;
+//                                     });
+//                                   },
+//                                   onHover: (val) {
+//                                     setState(() {
+//                                       isHover = val;
+//                                     });
+//                                   },
+//                                   child: Padding(
+//                                     padding: const EdgeInsets.all(13),
+//                                     child: Image.asset(
+//                                       'assets/Icons/arrowlefticon.png',
+//                                       width: 15,
+//                                       color: notifier.subgreycolor
+//                                     ),
+//                                   )),
+//                             ),
+//                             const SizedBox(width: 10),
+//                             AnimatedContainer(
+//                               duration: const Duration(milliseconds: 200),
+//                               decoration: BoxDecoration(
+//                                 shape: BoxShape.circle,
+//                                 border: Border.all(
+//                                     width: 2,
+//                                     color: (isHover2)
+//                                         ? notifier.sugestionbutton
+//                                         : Colors.transparent),
+//                               ),
+//                               child: InkWell(
+//                                   onTap: () {
+//                                     pg.animateTo(double.parse("${a}00"),
+//                                         curve:
+//                                             const FlippedCurve(Easing.legacy),
+//                                         duration: const Duration(seconds: 1));
+//                                     setState(() {
+//                                       a = a + constraints.maxWidth < 500 ? 2 : 4;
+//                                     });
+//                                   },
+//                                   onHover: (val) {
+//                                     setState(() {
+//                                       isHover2 = val;
+//                                     });
+//                                   },
+//                                   child: Padding(
+//                                     padding: const EdgeInsets.all(13),
+//                                     child: Image.asset(
+//                                       'assets/Icons/arrowrighticon.png',
+//                                       width: 15,
+//                                       color: notifier.subgreycolor
+//                                     ),
+//                                   )),
+//                             ),
+//                           ],
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//             SizedBox(
+//               height: 350,
+//               child: ListView.builder(
+//                 itemCount: hostplacesimage.length,
+//                 controller: pg,
+//                 physics: const ClampingScrollPhysics(),
+//                 scrollDirection: Axis.horizontal,
+//                 itemBuilder: (context, index) {
+//                   return Row(
+//                     children: [
+//                       Stack(
+//                         children: [
+//                           AnimatedContainer(
+//                             duration: const Duration(milliseconds: 200),
+//                             height: 310,
+//                             width:  260,
+//                             decoration: BoxDecoration(
+//                               color: notifier.whitecolor,
+//                               borderRadius: BorderRadius.circular(20),
+//                               border: Border.all(
+//                                   color: (hoverborder[index])
+//                                       ? Colors.grey.shade400
+//                                       : notifier.sugestionbutton),
+//                             ),
+//                             child: InkWell(
+//                               onTap: () {},
+//                               onHover: (value) {
+//                                 setState(() {
+//                                   hoverborder[index] = value;
+//                                 });
+//                               },
+//                               child: Column(
+//                                 crossAxisAlignment: CrossAxisAlignment.center,
+//                                 children: [
+//                                   ClipRRect(
+//                                     borderRadius: const BorderRadius.only(
+//                                         topRight: Radius.circular(20),
+//                                         topLeft: Radius.circular(20)),
+//                                     child: Stack(
+//                                       children: [
+//                                         Image.asset(
+//                                           hostplacesimage[index],
+//                                           height: 180,
+//                                           width: width / 1,
+//                                           fit: BoxFit.fill,
+//                                         ),
+//                                         Positioned(
+//                                             top: 10,
+//                                             left: 10,
+//                                             child: Container(
+//                                               height: 22,
+//                                               width: 50,
+//                                               alignment: Alignment.center,
+//                                               decoration: BoxDecoration(
+//                                                   color: notifier.whitecolor,
+//                                                   borderRadius:
+//                                                       BorderRadius.circular(
+//                                                           10)),
+//                                               child: Row(
+//                                                 crossAxisAlignment:
+//                                                     CrossAxisAlignment.center,
+//                                                 mainAxisAlignment:
+//                                                     MainAxisAlignment.center,
+//                                                 children: [
+//                                                   Icon(Icons.star_rounded,
+//                                                       color: notifier
+//                                                           .yellowcolor,
+//                                                       size: 14),
+//                                                   Text(
+//                                                     hostrating[index],
+//                                                     style: TextStyle(
+//                                                         fontSize: 12,
+//                                                         color: notifier.blackcolor,
+//                                                         fontFamily:
+//                                                             'gilroysemi'),
+//                                                   )
+//                                                 ],
+//                                               ),
+//                                             )),
+//                                       ],
+//                                     ),
+//                                   ),
+//                                   const SizedBox(height: 60),
+//                                   Text(
+//                                     'Antone Heller',
+//                                     style: TextStyle(
+//                                         fontFamily: 'gilroysemi',
+//                                         fontSize: 16,
+//                                         color: notifier.blackcolor),
+//                                   ),
+//                                   const SizedBox(height: 8),
+//                                   Text('Gaylordside',
+//                                       style: TextStyle(
+//                                           fontFamily: 'gilroy',
+//                                           fontSize: 14,
+//                                           color: notifier.subgreycolor)),
+//                                 ],
+//                               ),
+//                             ),
+//                           ),
+//                           Positioned(
+//                             top: 135,
+//                             left: 87,
+//                             child: Container(
+//                               height: 85,
+//                               width:  81,
+//                               decoration: BoxDecoration(
+//                                 color: notifier.whitecolor,
+//                                 shape: BoxShape.circle,
+//                               ),
+//                             ),
+//                           ),
+//                           Positioned(
+//                             top: 140,
+//                             left: 90,
+//                             child: Container(
+//                               height: 75,
+//                               decoration: BoxDecoration(
+//                                 color: notifier.whitecolor,
+//                                 shape: BoxShape.circle,
+//                               ),
+//                               child: Image.asset(
+//                                 hostimage[index],
+//                               ),
+//                             )
+//                           ),
+//                         ],
+//                       ),
+//                       const SizedBox(
+//                         width: 20,
+//                       ),
+//                     ],
+//                   );
+//                 },
+//               ),
+//             ),
+//             const SizedBox(height: 10),
+//             constraints.maxWidth < 800
+//                 ? Row(
+//                     mainAxisAlignment: constraints.maxWidth < 550 ? MainAxisAlignment.center : MainAxisAlignment.start,
+//                     children: [
+//                       AnimatedContainer(
+//                         duration: const Duration(milliseconds: 200),
+//                         decoration: BoxDecoration(
+//                           shape: BoxShape.circle,
+//                           border: Border.all(
+//                               width: 2,
+//                               color: (isHover)
+//                                   ? notifier.sugestionbutton
+//                                   : Colors.transparent),
+//                         ),
+//                         child: InkWell(
+//                             onTap: () {
+//                               pg.animateTo(double.parse("${a}00"),
+//                                   curve:
+//                                   const FlippedCurve(Easing.legacy),
+//                                   duration: const Duration(seconds: 1));
+//                               setState(() {
+//                                 a = a - constraints.maxWidth < 500 ? 2 : 4;
+//                               });
+//                             },
+//                             onHover: (val) {
+//                               setState(() {
+//                                 isHover = val;
+//                               });
+//                             },
+//                             child: Padding(
+//                               padding: const EdgeInsets.all(13),
+//                               child: Image.asset(
+//                                 'assets/Icons/arrowlefticon.png',
+//                                 width: 15,
+//                                 color: notifier.subgreycolor,
+//                               ),
+//                             )),
+//                       ),
+//                       const SizedBox(width: 10),
+//                       AnimatedContainer(
+//                         duration: const Duration(milliseconds: 200),
+//                         decoration: BoxDecoration(
+//                           shape: BoxShape.circle,
+//                           border: Border.all(
+//                               width: 2,
+//                               color: (isHover2)
+//                                   ? notifier.sugestionbutton
+//                                   : Colors.transparent),
+//                         ),
+//                         child: InkWell(
+//                             onTap: () {
+//                               pg.animateTo(double.parse("${a}00"),
+//                                   curve:
+//                                   const FlippedCurve(Easing.legacy),
+//                                   duration: const Duration(seconds: 1));
+//                               setState(() {
+//                                 a = a + constraints.maxWidth < 500 ? 2 : 4;
+//                               });
+//                             },
+//                             onHover: (val) {
+//                               setState(() {
+//                                 isHover2 = val;
+//                               });
+//                             },
+//                             child: Padding(
+//                               padding: const EdgeInsets.all(13),
+//                               child: Image.asset(
+//                                 'assets/Icons/arrowrighticon.png',
+//                                 width: 15,
+//                                 color: notifier.subgreycolor,
+//                               ),
+//                             )),
+//                       ),
+//                     ],
+//                   )
+//                 : const SizedBox(),
+//           ],
+//         ),
+//       ));
+// }
 }

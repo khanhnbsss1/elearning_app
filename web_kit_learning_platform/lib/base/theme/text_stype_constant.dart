@@ -110,7 +110,7 @@ class TextStyleConstant{
   static 	TextStyle titleTextColorOnBackgroundColorStyle16w600 = baseStyle.copyWithCustom(fontSize: fontSize16, color: ColorConst.normalTextColorOnMainColor, fontWeight: fontWeight600);
 
   static 	TextStyle mainTextColorOnBackgroundStyle18w700 = baseStyle.copyWithCustom(fontSize: fontSize18, color: ColorConst.normalTextColorOnMainColor, fontWeight: fontWeight700);
-  static 	TextStyle textColorbackGroundColorStyle14w400 = baseStyle.copyWithCustom(fontSize: fontSize14, color: ColorConst.normalTextColorOnMainColor, fontWeight: fontWeight400);
+  static 	TextStyle textColorBackGroundColorStyle14w400 = baseStyle.copyWithCustom(fontSize: fontSize14, color: ColorConst.normalTextColorOnMainColor, fontWeight: fontWeight400);
 
   static 	TextStyle  textStyleYellow14w500 = baseStyle.copyWithCustom(fontSize: fontSize14, color: ColorConst.yellowColor, fontWeight: fontWeight500);
   static 	TextStyle  textStyleYellow14w600 = baseStyle.copyWithCustom(fontSize: fontSize14, color: ColorConst.yellowColor, fontWeight: fontWeight600);
@@ -213,7 +213,7 @@ class TextStyleConstant{
      titleTextColorOnBackgroundColorStyle16w600 = baseStyle.copyWithCustom(fontSize: fontSize16, color: ColorConst.normalTextColorOnMainColor, fontWeight: fontWeight600);
 
      mainTextColorOnBackgroundStyle18w700 = baseStyle.copyWithCustom(fontSize: fontSize18, color: ColorConst.normalTextColorOnMainColor, fontWeight: fontWeight700);
-     textColorbackGroundColorStyle14w400 = baseStyle.copyWithCustom(fontSize: fontSize14, color: ColorConst.normalTextColorOnMainColor, fontWeight: fontWeight400);
+     textColorBackGroundColorStyle14w400 = baseStyle.copyWithCustom(fontSize: fontSize14, color: ColorConst.normalTextColorOnMainColor, fontWeight: fontWeight400);
 
      textStyleYellow14w500 = baseStyle.copyWithCustom(fontSize: fontSize14, color: ColorConst.yellowColor, fontWeight: fontWeight500);
      textStyleYellow14w600 = baseStyle.copyWithCustom(fontSize: fontSize14, color: ColorConst.yellowColor, fontWeight: fontWeight600);

@@ -41,6 +41,7 @@ class CourseLandingPageInfo {
   String? createdAt;
   String? updatedAt;
   int? ratePoint;
+  String?introduction;
 
   CourseLandingPageInfo(
       {this.id,
@@ -53,7 +54,8 @@ class CourseLandingPageInfo {
         this.payment,
         this.createdAt,
         this.updatedAt,
-        this.ratePoint});
+        this.introduction,
+        this.ratePoint,});
 
   CourseLandingPageInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -67,6 +69,7 @@ class CourseLandingPageInfo {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     ratePoint = json['rate_point'];
+    introduction = json['introduction'];
   }
 
   Map<String, dynamic> toJson() {
@@ -82,6 +85,8 @@ class CourseLandingPageInfo {
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['rate_point'] = ratePoint;
+    data['introduction'] = introduction;
+
     return data;
   }
 }

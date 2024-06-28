@@ -16,6 +16,7 @@ import 'package:webkit/views/auth/register.dart';
 
 import '../components/colornotifier.dart';
 import '../components/course_list/course_list.dart';
+import '../components/review_list/review_list.dart';
 import '../components/helperwidget.dart';
 import '../mediaquery/mq.dart';
 import 'endofpage.dart';
@@ -169,11 +170,114 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                           height: constraints.maxWidth < 500 ?250 : 400,
                           fit: BoxFit.cover)
                           : Image.asset('assets/deshboard/winterlandscape.png',
-                        height: constraints.maxWidth < 500 ?400 : 600,
-                        width: constraints.maxWidth ,
-                        fit: BoxFit.cover,
-                        
-                      ),
+                          height: 600,
+                          width: constraints.maxWidth,
+                          fit: BoxFit.fill),
+                      /*Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: constraints.maxWidth < 800
+                            ? CrossAxisAlignment.center
+                            : CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(flex: 1, child: Container()),
+                              Expanded(
+                                flex: 3,
+                                child: Column(
+                                  crossAxisAlignment: constraints.maxWidth < 800
+                                      ? CrossAxisAlignment.center
+                                      : CrossAxisAlignment.end,
+                                  children: [
+                                    SizedBox(
+                                      height: constraints.maxWidth < 800
+                                          ? constraints.maxWidth / 6.5
+                                          : constraints.maxWidth / 10,
+                                    ),
+                                    Text(
+                                      'Discover,\n Book, Enjoy',
+                                      style: TextStyle(
+                                          fontFamily: 'gilroybold',
+                                          fontSize: constraints.maxWidth < 800
+                                              ? constraints.maxWidth / 12
+                                              : constraints.maxWidth / 18.5,
+                                          color: notifier.textcolor,
+                                          height: 0.9,
+                                          letterSpacing: 2),
+                                      textAlign: constraints.maxWidth < 800
+                                          ? TextAlign.center
+                                          : TextAlign.end,
+                                    ),
+                                    SizedBox(
+                                      height: constraints.maxWidth < 500 ? 10 : 20,
+                                    ),
+                                    Text('Effortless travel start with.',
+                                        style: TextStyle(
+                                            fontFamily: 'gilroymed',
+                                            fontSize: constraints.maxWidth < 800
+                                                ? constraints.maxWidth / 30
+                                                : constraints.maxWidth / 57,
+                                            color: notifier.textcolor)),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    InkWell(
+                                      onTap: () {},
+                                      onHover: (value) {
+                                        setState(() {
+                                          searchHover3 = value;
+                                        });
+                                      },
+                                      child: AnimatedContainer(
+                                        duration: const Duration(milliseconds: 200),
+                                        height: 45,
+                                        child: ElevatedButton(
+                                            style: ButtonStyle(
+                                              elevation: WidgetStateProperty.all(0),
+                                              shape: WidgetStateProperty.all(
+                                                  RoundedRectangleBorder(
+                                                      borderRadius:
+                                                      BorderRadius.circular(25))),
+                                              backgroundColor: WidgetStateProperty
+                                                  .all(
+                                                  searchHover3 ? Colors.indigoAccent
+                                                      .shade700 : notifier.buttoncolor),
+                                            ),
+                                            onPressed: () {},
+                                            child: const Text(
+                                              'Book Now',
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontFamily: 'gilroysemi',
+                                                  color: Colors.white),
+                                            )),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: constraints.maxWidth < 800
+                                    ? constraints.maxWidth / 5.5
+                                    : width / 12,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                              height: constraints.maxWidth < 700
+                                  ? constraints.maxWidth / 5.55
+                                  : constraints.maxWidth < 800
+                                  ? constraints.maxWidth / 10.25
+                                  : constraints.maxWidth < 1000
+                                  ? constraints.maxWidth / 7
+                                  : constraints.maxWidth < 2000
+                                  ? constraints.maxWidth / 6
+                                  : constraints.maxWidth / 5.5),
+                          constraints.maxWidth < 800
+                              ? const help()
+                              : const Tabsbar(),
+                      ],
+                    ),*/
                   ],
                 ),
               ),
@@ -335,7 +439,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                         color: notifier.whitecolor),
                                   ),
                                 ),
-                                hintText: 'Enter youe phone number',
+                                hintText: 'Enter your phone number',
                                 hintStyle: TextStyle(
                                     fontFamily: 'gilroy',
                                     color: notifier.subgreycolor)),
@@ -364,7 +468,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       ? 53
                       : constraints.maxWidth > 1600
                       ? constraints.maxWidth / 25
-                      : 65,
+                      : 75,
                   width: constraints.maxWidth < 1000
                       ? constraints.maxWidth / 5
                       : constraints.maxWidth > 1600
@@ -401,13 +505,13 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                               children: [
                                 Icon(Icons.star_rounded,
                                     color: notifier.yellowcolor,
-                                    size: constraints.maxWidth / 120),
+                                    size: constraints.maxWidth / 125),
                                 const SizedBox(width: 5),
                                 Text(
                                   '4.8',
                                   style: TextStyle(
                                       fontSize:
-                                      constraints.maxWidth / 120,
+                                      constraints.maxWidth / 125,
                                       fontFamily: 'gilroysemi'),
                                 ),
                               ],

@@ -262,6 +262,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "show_close_icon": MessageLookupByLibrary.simpleMessage("显示关闭图标"),
         "show_hide_items": MessageLookupByLibrary.simpleMessage("隐藏和显示项目"),
         "show_leading_icon": MessageLookupByLibrary.simpleMessage("显示前导图标"),
+        "show_less": MessageLookupByLibrary.simpleMessage("显示较少"),
         "show_more": MessageLookupByLibrary.simpleMessage("显示更多"),
         "show_ok_action": MessageLookupByLibrary.simpleMessage("显示确定操作"),
         "sign_in": MessageLookupByLibrary.simpleMessage("登录"),
@@ -339,6 +340,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("没有旧数据"),
         "string_notify": MessageLookupByLibrary.simpleMessage("通知"),
         "string_time_setting": MessageLookupByLibrary.simpleMessage("时间设置"),
+        "student_review_list_str":
+            MessageLookupByLibrary.simpleMessage("学生怎么说"),
         "subcribe_to_our_news_letter":
             MessageLookupByLibrary.simpleMessage("订阅我们的新闻通讯"),
         "submit": MessageLookupByLibrary.simpleMessage("提交"),
@@ -358,6 +361,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tags": MessageLookupByLibrary.simpleMessage("标签"),
         "target": MessageLookupByLibrary.simpleMessage("目标"),
         "teacher_list": MessageLookupByLibrary.simpleMessage("教师列表"),
+        "teacher_review_list_str":
+            MessageLookupByLibrary.simpleMessage("老师怎么说"),
         "teachers_teach_the_most":
             MessageLookupByLibrary.simpleMessage("教得最多的老师"),
         "terms_conditions": MessageLookupByLibrary.simpleMessage("条款和条件"),

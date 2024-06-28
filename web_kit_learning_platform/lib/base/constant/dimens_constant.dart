@@ -16,10 +16,10 @@ class Dimens{
  static double size8 = FetchPixels.getPixelHeight(8.0);
  static double size9 = FetchPixels.getPixelHeight(9.0);
  static double size10 = FetchPixels.getPixelHeight(10.0);
+
  static double get size11 {
   return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?11.0:13.0);
  }
-
  static double get size12 {
   return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?12.0:14.0);
  }
