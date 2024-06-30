@@ -4,6 +4,9 @@ import 'package:webkit/controller/my_controller.dart';
 import 'package:webkit/helpers/services/auth_services.dart';
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
 import 'package:webkit/helpers/widgets/my_validators.dart';
+import 'package:webkit/services/apis/auth/login/login_request.dart';
+
+import '../../services/apis/auth/login/login_with_phone_api.dart';
 
 class LoginController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
@@ -39,18 +42,25 @@ class LoginController extends MyController {
   }
 
   Future<void> onLogin() async {
+    LoginRequest loginRequest = LoginRequest(
+      username: basicValidator.getController('email')?.text,
+      password: basicValidator.getController('password')?.text,
+    );
     if (basicValidator.validateForm()) {
       loading = true;
       update();
-      var errors = await AuthService.loginUser(basicValidator.getData());
-      if (errors != null) {
-        basicValidator.addErrors(errors);
+      LoginWithPhoneApi loginWithPhoneApi = LoginWithPhoneApi(loginRequest: loginRequest);
+      bool result = await loginWithPhoneApi.call();
+      if(result == true)
+      {
+        String nextUrl = Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
+            .queryParameters['next'] ?? "/dashboard";
+        Get.toNamed(nextUrl,);
+      }
+      else
+      {
         basicValidator.validateForm();
         basicValidator.clearErrors();
-      } else {
-        String nextUrl = Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
-                    .queryParameters['next'] ?? "/dashboard";
-        Get.toNamed(nextUrl,);
       }
       loading = false;
       update();
