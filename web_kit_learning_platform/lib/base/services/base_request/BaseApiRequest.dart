@@ -122,11 +122,14 @@ class BaseApiRequest {
   Future<Map<String, dynamic>> getHeaderAdd() async {
     AuthInfo? authInfo = await AuthorManager().getAuthInfo();
     bool containAuthenParams = requestHeader!.keys.contains("Authorization");
+
     if(!containAuthenParams && authInfo!=null)
     {
-      requestHeader?.addAll({"Authorization":authInfo.accessToken});
       DeviceInfoModel? deviceInfoModel = await DeviceManager().getDeviceInfo();
-      requestBody?.addAll({"deviceType":deviceInfoModel?.type});
+      requestHeader?.addAll({
+        "Authorization":authInfo.accessToken,
+        "deviceType":deviceInfoModel?.type
+      });
     }
     if(!(isCheckToken??true))
     {
@@ -321,7 +324,6 @@ class BaseApiRequest {
         sendTimeout: const Duration(seconds: timeout), // 30 seconds
         receiveTimeout: const Duration(seconds: timeout), // 3);
       );
-
       Response response = await DioClient().getDioClient().get(url, queryParameters: params, options: option);
       return await handleResponse(response: response, url: url, params: params);
     }
