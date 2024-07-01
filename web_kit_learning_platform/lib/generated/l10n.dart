@@ -3939,6 +3939,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Who this course is for ?`
+  String get who_this_course_is_for {
+    return Intl.message(
+      'Who this course is for ?',
+      name: 'who_this_course_is_for',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Find a `
+  String get who_this_course_is_for_subtitle {
+    return Intl.message(
+      'Find a ',
+      name: 'who_this_course_is_for_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

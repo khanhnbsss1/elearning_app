@@ -434,6 +434,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "we_are_different_because_we_understand_what_you_need":
             MessageLookupByLibrary.simpleMessage("我们与众不同，因为我们了解您的需求"),
         "website_visits": MessageLookupByLibrary.simpleMessage("网站访问量"),
+        "who_this_course_is_for":
+            MessageLookupByLibrary.simpleMessage("本课程适合哪些人？"),
+        "who_this_course_is_for_subtitle":
+            MessageLookupByLibrary.simpleMessage("找到一个只属于你的地方"),
         "why_choose_content1":
             MessageLookupByLibrary.simpleMessage("被选为中国教育部汉语教学机构孔子学院国际会议现场直播。"),
         "why_choose_content2": MessageLookupByLibrary.simpleMessage(

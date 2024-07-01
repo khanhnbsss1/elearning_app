@@ -26,7 +26,7 @@ class LandingPageCourseListApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    //await setParamsAdd({"type": typeNameToStr[typeName]});
+    // await setParamsAdd({"type": typeNameToStr[typeName]});
   }
 
   @override

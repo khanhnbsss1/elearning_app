@@ -637,6 +637,11 @@ class _CourseListState extends State<CourseList> {
                               );
                             }
                           },
+                          onHover: (val) {
+                            setState(() {
+                              scrollHover = val;
+                            });
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(13),
                             child: Image.asset(

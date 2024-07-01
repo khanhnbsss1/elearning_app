@@ -509,6 +509,10 @@ class MessageLookup extends MessageLookupByLibrary {
                 "We are different because we understand what you need"),
         "website_visits":
             MessageLookupByLibrary.simpleMessage("Website visits"),
+        "who_this_course_is_for":
+            MessageLookupByLibrary.simpleMessage("Who this course is for ?"),
+        "who_this_course_is_for_subtitle":
+            MessageLookupByLibrary.simpleMessage("Find a "),
         "why_choose_content1": MessageLookupByLibrary.simpleMessage(
             "Selected to present live at the International Conference of the Confucius Institute, an agency of the Chinese Ministry of Education on Chinese language teaching."),
         "why_choose_content2": MessageLookupByLibrary.simpleMessage(

@@ -18,6 +18,7 @@ import '../components/colornotifier.dart';
 import '../components/course_list/course_list.dart';
 import '../components/review_list/review_list.dart';
 import '../components/helperwidget.dart';
+import '../components/who_this_course_is_for/who_this_course_is_for.dart';
 import '../mediaquery/mq.dart';
 import 'endofpage.dart';
 import '../components/teachet_list/teacher_list.dart';
@@ -107,6 +108,8 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
 
   bool isHover = false;
   bool isHover2 = false;
+  bool isHover3 = false;
+  bool isHover4 = false;
   bool searchHover = false;
   bool searchHover2 = false;
   bool searchHover3 = false;
@@ -292,14 +295,14 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
             height: constraints.maxWidth / 30,
           ),
 
-
-
-
           buildWhyChooseUsListWidget(constraints: constraints),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
+                SizedBox(
+                    height: constraints.maxWidth < 550 ? 70 : constraints.maxWidth / 50),
+                const WhoThisCourseIsFor(),
                 SizedBox(
                     height: constraints.maxWidth < 550 ? 70 : constraints.maxWidth / 50),
                 const CourseList(),
@@ -1363,12 +1366,14 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
             children: [
               Text(L10nX.getStr.differences_in_teaching_methods,
                   style: TextStyleConstant.textStyleBlack28w700.copyWith(
+                    fontFamily: 'gilroysemi',
                     color: notifier.blackcolor, 
                     fontSize: constraints.maxWidth < 550 ? 28 : 45,),
                   textAlign: TextAlign.center),
               Text(
                   L10nX.getStr.we_are_different_because_we_understand_what_you_need,
                 style: TextStyleConstant.textStyleBlack14w400.copyWith(
+                    fontFamily: 'gilroysemi',
                     fontSize: constraints.maxWidth < 700 ? 18 : 20,
                     color: notifier.greycolor
                 ),
@@ -1414,12 +1419,13 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
               ),
               child: InkWell(
                 onTap: () {
-                  differrentController.animateTo(double.parse("${a}00"),
-                      curve: const FlippedCurve(Easing.legacy),
-                      duration: const Duration(seconds: 1));
-                  setState(() {
-                    a = a - 4;
-                  });
+                  if (differrentController.offset >= 0) {
+                    differrentController.animateTo(
+                      (constraints.maxWidth < 750) ? differrentController.offset - 225 : differrentController.offset - 370,
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeInOut,
+                    );
+                  }
                 },
                 onHover: (val) {
                   setState(() {
@@ -1447,12 +1453,13 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
               ),
               child: InkWell(
                 onTap: () {
-                  differrentController.animateTo(double.parse("${a}00"),
-                      curve: const FlippedCurve(Easing.legacy),
-                      duration: const Duration(seconds: 1));
-                  setState(() {
-                    a = a + 4;
-                  });
+                  if (differrentController.offset >= 0) {
+                    differrentController.animateTo(
+                      (constraints.maxWidth < 750) ? differrentController.offset + 225 : differrentController.offset + 370,
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeInOut,
+                    );
+                  }
                 },
                 onHover: (val) {
                   setState(() {
@@ -1506,10 +1513,13 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               SizedBox(
-                width: constraints.maxWidth < 750 ? 200 : 300,
+                width: constraints.maxWidth < 750 ? 225 : 325,
                 child: Text(
                   title??"",
-                  style: TextStyleConstant.textStyleBlack18w600,
+                  style: TextStyleConstant.textStyleBlack18w600.copyWith(
+                    fontFamily: 'gilroysemi',
+                    fontSize: constraints.maxWidth < 700 ? 16 : 18,
+                  ),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                 ),
@@ -1518,10 +1528,13 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                 height: 10,
               ),
               Container(
-                width: constraints.maxWidth < 750 ? 200 : 300,
+                width: constraints.maxWidth < 750 ? 225 : 325,
                 alignment: Alignment.center,
                 child: Text(content??"",
-                    style:TextStyleConstant.textStyleBlack12w400,
+                    style:TextStyleConstant.textStyleBlack12w400.copyWith(
+                      fontFamily: 'gilroysemi',
+                      fontSize: constraints.maxWidth < 700 ? 16 : 18,
+                    ),
                     textAlign: TextAlign.center,
                   maxLines: 3,
                 ),
@@ -1553,6 +1566,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
       children: [
         Text(L10nX.getStr.why_choose_us,
             style: TextStyleConstant.textStyleBlack28w700.copyWith(
+                fontFamily: 'gilroysemi',
                 fontSize: constraints.maxWidth < 550
                     ? 28
                     : 45,
@@ -1562,8 +1576,8 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
         Text(
           L10nX.getStr.why_choose_us_sub_title,
           style: TextStyle(
-              fontFamily: 'gilroy',
-              fontSize: constraints.maxWidth < 700 ? 18 : 20,
+              fontFamily: 'gilroysemi',
+              fontSize: constraints.maxWidth < 700 ? 16 : 18,
               color: notifier.greycolor),
           textAlign: TextAlign.center,
         ),
@@ -1599,21 +1613,22 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                 shape: BoxShape.circle,
                 border: Border.all(
                     width: 2,
-                    color: (isHover) ? notifier.sugestionbutton : Colors
+                    color: (isHover3) ? notifier.sugestionbutton : Colors
                         .transparent),
               ),
               child: InkWell(
                 onTap: () {
-                  whyChooseUsController.animateTo(double.parse("${a}00"),
-                      curve: const FlippedCurve(Easing.legacy),
-                      duration: const Duration(seconds: 1));
-                  setState(() {
-                    a = a - 4;
-                  });
+                  if (whyChooseUsController.offset > 0) {
+                    whyChooseUsController.animateTo(
+                      (constraints.maxWidth < 750) ? whyChooseUsController.offset - 225*2 : whyChooseUsController.offset - 325*2,
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeInOut,
+                    );
+                  }
                 },
                 onHover: (val) {
                   setState(() {
-                    isHover = val;
+                    isHover3 = val;
                   });
                 },
                 child: Padding(padding: const EdgeInsets.all(13),
@@ -1632,21 +1647,22 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                 shape: BoxShape.circle,
                 border: Border.all(
                     width: 2,
-                    color: (isHover2) ? notifier.sugestionbutton : Colors
+                    color: (isHover4) ? notifier.sugestionbutton : Colors
                         .transparent),
               ),
               child: InkWell(
                 onTap: () {
-                  whyChooseUsController.animateTo(double.parse("${a}00"),
-                      curve: const FlippedCurve(Easing.legacy),
-                      duration: const Duration(seconds: 1));
-                  setState(() {
-                    a = a + 4;
-                  });
+                  if (whyChooseUsController.offset >= 0) {
+                    whyChooseUsController.animateTo(
+                      (constraints.maxWidth < 750) ? whyChooseUsController.offset + 225*2 : whyChooseUsController.offset + 325*2,
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeInOut,
+                    );
+                  }
                 },
                 onHover: (val) {
                   setState(() {
-                    isHover2 = val;
+                    isHover4 = val;
                   });
                 },
                 child: Padding(padding: const EdgeInsets.all(13),

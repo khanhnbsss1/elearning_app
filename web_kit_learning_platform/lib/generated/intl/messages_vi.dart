@@ -508,6 +508,10 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Chúng tôi khác biệt vì hiểu thứ bạn cần"),
         "website_visits":
             MessageLookupByLibrary.simpleMessage("Lượt truy cập trang web"),
+        "who_this_course_is_for":
+            MessageLookupByLibrary.simpleMessage("Khóa học này dành cho ai ?"),
+        "who_this_course_is_for_subtitle":
+            MessageLookupByLibrary.simpleMessage("Hãy tìm nơi dành cho bạn!"),
         "why_choose_content1": MessageLookupByLibrary.simpleMessage(
             "Được lựa chọn trình bày trực tiếp tại Hội thảo Quốc tế của Viện Khổng Tử, cơ quan của Bộ giáo dục Trung Quốc về giảng dạy Tiếng Trung."),
         "why_choose_content2": MessageLookupByLibrary.simpleMessage(

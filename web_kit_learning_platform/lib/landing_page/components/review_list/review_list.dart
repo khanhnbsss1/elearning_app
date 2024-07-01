@@ -175,6 +175,11 @@ class _ReviewListState extends State<ReviewList> {
                                 );
                               }
                             },
+                            onHover: (val) {
+                              setState(() {
+                                scrollHover = val;
+                              });
+                            },
                             child: Padding(
                               padding: const EdgeInsets.all(13),
                               child: Image.asset(
@@ -220,7 +225,7 @@ class _ReviewListState extends State<ReviewList> {
                             )),
                       ),
                     ],
-                  ),
+                  )
                   // Row(
                   //   mainAxisAlignment: MainAxisAlignment.center,
                   //   children: [
@@ -401,7 +406,7 @@ class _ReviewListState extends State<ReviewList> {
                                 : Dimens.size200,
                             child: SingleChildScrollView(
                               child: ReadMoreText(
-                                ("${reviewLandingPageInfo.review!} ") * 10 ??
+                                ("\"${reviewLandingPageInfo.review!}\" ") * 10 ??
                                     "",
                                 trimMode: TrimMode.Line,
                                 trimLines: 2,
@@ -409,7 +414,7 @@ class _ReviewListState extends State<ReviewList> {
                                 trimCollapsedText: L10nX.getStr.show_more,
                                 trimExpandedText: L10nX.getStr.show_less,
                                 style: TextStyle(
-                                  fontFamily: 'gilroysemi',
+                                    fontStyle: FontStyle.italic,
                                   fontSize: (constraints.maxWidth < 550) ? Dimens.size14
                                       : (constraints.maxWidth < 750) ? Dimens.size16
                                       : (constraints.maxWidth < 900) ? Dimens.size18
