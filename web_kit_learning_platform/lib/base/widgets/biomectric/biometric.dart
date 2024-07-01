@@ -40,7 +40,7 @@ class BiometricAuthentication extends StatelessWidget {
                   return ButtonBiometric(
                     biometricSize: biometricSize,
                     icon:Image.asset(
-                      ImageManager.getPngImage(ImageManager.ic_biometric),
+                      ImageManager().getPngImagePath(ImageManager.ic_biometric),
                       color: ColorConst.mainColor,
                       width:  biometricSize,
                       height:  biometricSize,

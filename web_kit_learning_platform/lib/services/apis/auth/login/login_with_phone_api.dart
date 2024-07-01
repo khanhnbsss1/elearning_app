@@ -1,4 +1,5 @@
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/device/device_manager.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/base/services/base_request/EnumCommon.dart';
 import 'package:webkit/base/services/base_request/apiName.dart';
@@ -19,13 +20,12 @@ class LoginWithPhoneApi extends BaseApiRequest {
       isShowErrorPopup: false
   );
   Future<dynamic> call() async {
+    await getAuthorization();
     dynamic data = await postRequestAPI();
    if(data!=null && data.runtimeType !=ResponseCommon)
      {
        LoginResponse loginResponse = LoginResponse.fromJson(data);
        await UserHelper.getInstance.handleLogoutData();
-       IdentifierConst.username = "";
-       IdentifierConst.password = "";
        DataAccess.saveAccountLoginNearest(IdentifierConst.username);
        return true;
      }
@@ -33,6 +33,14 @@ class LoginWithPhoneApi extends BaseApiRequest {
      {
        return false;
      }
+  }
+  Future<void> getAuthorization() async {
+    DeviceInfoModel? deviceInfoModel = await DeviceManager().getDeviceInfo();
+    if(deviceInfoModel!=null)
+      {
+        loginRequest.serialNumber = deviceInfoModel.serialNumber;
+        loginRequest.type = deviceInfoModel.type;
+      }
   }
 
   @override
