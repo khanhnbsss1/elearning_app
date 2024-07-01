@@ -10,7 +10,7 @@ class ApiName {
   final int readTimeout = 20000;
 
   //user auth
-  final String loginByUserName = "/login";
+  final String login = "/login";
   final String loginByPhone = "/login-phone";
   final String registerUserByUserName = "/register";
   final String registerUserByPhone = "/register-phone";

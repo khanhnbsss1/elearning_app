@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/device/device_manager.dart';
 import 'package:webkit/base/widgets/common/alert_dialog/NotifyDialog.dart';
 import 'package:webkit/routes/app_pages.dart';
 import 'package:webkit/routes/app_routes.dart';
@@ -124,6 +125,8 @@ class BaseApiRequest {
     if(!containAuthenParams && authInfo!=null)
     {
       requestHeader?.addAll({"Authorization":authInfo.accessToken});
+      DeviceInfoModel? deviceInfoModel = await DeviceManager().getDeviceInfo();
+      requestBody?.addAll({"deviceType":deviceInfoModel?.type});
     }
     if(!(isCheckToken??true))
     {

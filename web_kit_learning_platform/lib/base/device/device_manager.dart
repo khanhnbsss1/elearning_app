@@ -21,12 +21,12 @@ class DeviceManager {
       if (Platform.isAndroid) {
         AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
         print("androidInfo ${androidInfo.toString()}");
-        deviceInfoModel = DeviceInfoModel(type: "phone", serialNumber: androidInfo.serialNumber);
+        deviceInfoModel = DeviceInfoModel(type: "Mobile", serialNumber: androidInfo.serialNumber);
 
       } else if (Platform.isIOS) {
         IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
         print("iosInfo ${iosInfo.toString()}");
-        deviceInfoModel = DeviceInfoModel(type: "phone", serialNumber: iosInfo.identifierForVendor);
+        deviceInfoModel = DeviceInfoModel(type: "Mobile", serialNumber: iosInfo.identifierForVendor);
 
 
       } else if (Platform.isLinux) {

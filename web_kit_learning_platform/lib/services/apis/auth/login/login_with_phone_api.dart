@@ -6,6 +6,7 @@ import 'package:webkit/base/services/base_request/apiName.dart';
 import 'package:webkit/base/services/base_request/models/response_error_objects.dart';
 import 'package:webkit/base/store/store.exports.dart';
 import 'package:webkit/base/widgets/biomectric/IdentifierConst.dart';
+import 'package:webkit/services/apis/user/get_user_detail_api.dart';
 import 'models/login_request.dart';
 import 'models/login_response.dart';
 
@@ -14,7 +15,7 @@ class LoginWithPhoneApi extends BaseApiRequest {
   LoginWithPhoneApi({required this.loginRequest})
       : super(
       serviceType: SERVICE_TYPE.AUTHEN,
-      apiName: ApiName.getInstance().loginByPhone,
+      apiName: ApiName.getInstance().login,
       isCheckToken: false,
       isShowErrorPopup: false,
     isShowToastError: false
@@ -28,7 +29,8 @@ class LoginWithPhoneApi extends BaseApiRequest {
        await UserManager.getInstance.handleLogoutData();
        await AuthorManager().saveAuthInfo(loginResponse);
        await UserManager().saveAccountLoginNearest(IdentifierConst.username);
-       
+       GetUserProfileInfoApi getUserProfileInfoApi = GetUserProfileInfoApi();
+       await getUserProfileInfoApi.call();
        return true;
      }
    else

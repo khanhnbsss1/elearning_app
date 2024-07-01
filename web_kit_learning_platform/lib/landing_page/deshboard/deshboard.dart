@@ -172,7 +172,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                           : Image.asset('assets/deshboard/winterlandscape.png',
                           height: 600,
                           width: constraints.maxWidth,
-                          fit: BoxFit.fill),
+                          fit: BoxFit.cover),
                   ],
                 ),
               ),

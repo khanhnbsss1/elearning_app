@@ -11,7 +11,6 @@ class GetUserProfileInfoApi extends BaseApiRequest {
   );
 
   Future<dynamic> call() async {
-    await getAuthorization();
     dynamic result = await getRequestAPI();
     if(result.runtimeType == ResponseCommon)
     {
@@ -24,9 +23,6 @@ class GetUserProfileInfoApi extends BaseApiRequest {
       return userProfile;
     }
     
-  }
-
-  Future<void> getAuthorization() async {
   }
 
   @override
