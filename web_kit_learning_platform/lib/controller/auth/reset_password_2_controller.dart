@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webkit/controller/my_controller.dart';
-import 'package:webkit/helpers/services/auth_services.dart';
+
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
 import 'package:webkit/helpers/widgets/my_validators.dart';
 
@@ -38,7 +38,7 @@ class ResetPassword2Controller extends MyController {
     if (basicValidator.validateForm()) {
       loading = true;
       update();
-      var errors = await AuthService.loginUser(basicValidator.getData());
+      var errors = null;
       if (errors != null) {
         basicValidator.addErrors(errors);
         basicValidator.validateForm();

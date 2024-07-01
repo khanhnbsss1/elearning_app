@@ -133,6 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Elevated rounded button"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "email_address": MessageLookupByLibrary.simpleMessage("Email address"),
+        "email_or_pass_invalid": MessageLookupByLibrary.simpleMessage(
+            "Invalid email or phone number"),
         "email_password":
             MessageLookupByLibrary.simpleMessage("Email password"),
         "email_us_your_question":
@@ -484,6 +486,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "trending_products":
             MessageLookupByLibrary.simpleMessage("Trending products"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),
+        "type_email_or_phone_number":
+            MessageLookupByLibrary.simpleMessage("Enter email or phone number"),
         "type_size": MessageLookupByLibrary.simpleMessage("Type / size"),
         "ui": MessageLookupByLibrary.simpleMessage("UI"),
         "unlock": MessageLookupByLibrary.simpleMessage("Unlock"),
@@ -510,9 +514,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "website_visits":
             MessageLookupByLibrary.simpleMessage("Website visits"),
         "who_this_course_is_for":
-            MessageLookupByLibrary.simpleMessage("Who this course is for ?"),
+            MessageLookupByLibrary.simpleMessage("Who is this course for?"),
         "who_this_course_is_for_subtitle":
-            MessageLookupByLibrary.simpleMessage("Find a "),
+            MessageLookupByLibrary.simpleMessage("Find the place for you!"),
         "why_choose_content1": MessageLookupByLibrary.simpleMessage(
             "Selected to present live at the International Conference of the Confucius Institute, an agency of the Chinese Ministry of Education on Chinese language teaching."),
         "why_choose_content2": MessageLookupByLibrary.simpleMessage(

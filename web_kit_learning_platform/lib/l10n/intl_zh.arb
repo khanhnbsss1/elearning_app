@@ -26,6 +26,7 @@
   "you_do_have_an_account": "您有帐户吗？",
   "email":"电子邮件",
   "user_name": "登录名",
+  "email_or_pass_invalid": "电子邮件或电话号码不正确",
   "language_text": "语言",
   "english_text": "英语",
   "viet_nam_text": "越南语",
@@ -392,7 +393,7 @@
   "why_choose_content3": "2000 个反馈，Facebook 上有 500,000 名关注者，youtube 上有 300,000 名关注者和 1800 万次浏览",
   "why_choose_title4": "社区发展",
   "why_choose_content4": "连续多年成为全国最大的华文辩论赛金牌赞助商。",
-
   "who_this_course_is_for": "本课程适合哪些人？",
-  "who_this_course_is_for_subtitle": "找到一个只属于你的地方"
+  "who_this_course_is_for_subtitle": "找到一个只属于你的地方",
+  "type_email_or_phone_number":"输入电子邮件或电话号码"
 }

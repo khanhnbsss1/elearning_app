@@ -122,7 +122,7 @@ class _LoginPageState extends State<LoginPage>
                                       .getController('email'),
                                   keyboardType: TextInputType.emailAddress,
                                   decoration: InputDecoration(
-                                      labelText: "Email Address",
+                                      labelText: L10nX.getStr.type_email_or_phone_number,
                                       labelStyle: MyTextStyle.bodySmall(xMuted: true),
                                       border: outlineInputBorder,
                                       prefixIcon: const Icon(
@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage>
                                   keyboardType: TextInputType.visiblePassword,
                                   obscureText: !controller.showPassword,
                                   decoration: InputDecoration(
-                                      labelText: "Password",
+                                      labelText: L10nX.getStr.password,
                                       labelStyle: MyTextStyle.bodySmall(xMuted: true),
                                       border: outlineInputBorder,
                                       prefixIcon: const Icon(

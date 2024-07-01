@@ -28,8 +28,10 @@ import 'package:webkit/widgets/custom_pop_menu.dart';
 import '../../helpers/services/navigation_service.dart';
 
 class TopBar extends StatefulWidget {
+  
   const TopBar({
     super.key, // this.onMenuIconTap,
+    
   });
 
   @override
@@ -43,153 +45,156 @@ class _TopBarState extends State<TopBar>
 
   @override
   Widget build(BuildContext context) {
-    return MyCard(
-      shadow: MyShadow(position: MyShadowPosition.bottomRight, elevation: 0.5),
-      height: 60,
-      borderRadiusAll: 0,
-      padding: MySpacing.x(24),
-      color: topBarTheme.background.withAlpha(246),
-      child: Row(
-        children: [
-          Row(
+    return FutureBuilder(
+      future: UserManager().getUserProfile(), 
+      builder: (context, snapshot) {
+        return MyCard(
+          shadow: MyShadow(position: MyShadowPosition.bottomRight, elevation: 0.5),
+          height: 60,
+          borderRadiusAll: 0,
+          padding: MySpacing.x(24),
+          color: topBarTheme.background.withAlpha(246),
+          child: Row(
             children: [
-              InkWell(
-                  splashColor: theme.colorScheme.onSurface,
-                  highlightColor: theme.colorScheme.onSurface,
-                  onTap: () {
-                    ThemeCustomizer.toggleLeftBarCondensed();
-                  },
-                  child: Icon(
-                    LucideIcons.menu,
-                    color: topBarTheme.onBackground,
-                  )),
-              MySpacing.width(24),
-              SizedBox(
-                width: 200,
-                child: TextFormField(
-                  maxLines: 1,
-                  style: MyTextStyle.bodyMedium(),
-                  decoration: InputDecoration(
-                      hintText: "search",
-                      hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                      border: outlineInputBorder,
-                      enabledBorder: outlineInputBorder,
-                      focusedBorder: focusedInputBorder,
-                      prefixIcon: const Align(
-                          alignment: Alignment.center,
-                          child: Icon(
-                            FeatherIcons.search,
-                            size: 14,
-                          )),
-                      prefixIconConstraints: const BoxConstraints(
-                          minWidth: 36,
-                          maxWidth: 36,
-                          minHeight: 32,
-                          maxHeight: 32),
-                      contentPadding: MySpacing.xy(16, 12),
-                      isCollapsed: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.never),
-                ),
-              ),
-            ],
-          ),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                InkWell(
-                  onTap: () {
-                    ThemeCustomizer.setTheme(
-                        ThemeCustomizer.instance.theme == ThemeMode.dark
-                            ? ThemeMode.light
-                            : ThemeMode.dark);
-                  },
-                  child: Icon(
-                    ThemeCustomizer.instance.theme == ThemeMode.dark
-                        ? FeatherIcons.sun
-                        : FeatherIcons.moon,
-                    size: 18,
-                    color: topBarTheme.onBackground,
+              Row(
+                children: [
+                  InkWell(
+                      splashColor: theme.colorScheme.onSurface,
+                      highlightColor: theme.colorScheme.onSurface,
+                      onTap: () {
+                        ThemeCustomizer.toggleLeftBarCondensed();
+                      },
+                      child: Icon(
+                        LucideIcons.menu,
+                        color: topBarTheme.onBackground,
+                      )),
+                  MySpacing.width(24),
+                  SizedBox(
+                    width: 200,
+                    child: TextFormField(
+                      maxLines: 1,
+                      style: MyTextStyle.bodyMedium(),
+                      decoration: InputDecoration(
+                          hintText: "search",
+                          hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                          border: outlineInputBorder,
+                          enabledBorder: outlineInputBorder,
+                          focusedBorder: focusedInputBorder,
+                          prefixIcon: const Align(
+                              alignment: Alignment.center,
+                              child: Icon(
+                                FeatherIcons.search,
+                                size: 14,
+                              )),
+                          prefixIconConstraints: const BoxConstraints(
+                              minWidth: 36,
+                              maxWidth: 36,
+                              minHeight: 32,
+                              maxHeight: 32),
+                          contentPadding: MySpacing.xy(16, 12),
+                          isCollapsed: true,
+                          floatingLabelBehavior: FloatingLabelBehavior.never),
+                    ),
                   ),
-                ),
-                MySpacing.width(12),
-                CustomPopupMenu(
-                  backdrop: true,
-                  hideFn: (_) => languageHideFn = _,
-                  onChange: (_) {},
-                  offsetX: -36,
-                  menu: Padding(
-                    padding: MySpacing.xy(8, 8),
-                    child: Center(
-                      child: ClipRRect(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        borderRadius: BorderRadius.circular(2),
-                        child:
+                ],
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        ThemeCustomizer.setTheme(
+                            ThemeCustomizer.instance.theme == ThemeMode.dark
+                                ? ThemeMode.light
+                                : ThemeMode.dark);
+                      },
+                      child: Icon(
+                        ThemeCustomizer.instance.theme == ThemeMode.dark
+                            ? FeatherIcons.sun
+                            : FeatherIcons.moon,
+                        size: 18,
+                        color: topBarTheme.onBackground,
+                      ),
+                    ),
+                    MySpacing.width(12),
+                    CustomPopupMenu(
+                      backdrop: true,
+                      hideFn: (_) => languageHideFn = _,
+                      onChange: (_) {},
+                      offsetX: -36,
+                      menu: Padding(
+                        padding: MySpacing.xy(8, 8),
+                        child: Center(
+                          child: ClipRRect(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            borderRadius: BorderRadius.circular(2),
+                            child:
 
-                        Image.asset(
-                          "assets/lang/${LanguageHelper().getCurrentLocale().languageCode??'vi'}.png",
-                          width: 24,
-                          height: 18,
-                          fit: BoxFit.cover,
+                            Image.asset(
+                              "assets/lang/${LanguageHelper().getCurrentLocale().languageCode??'vi'}.png",
+                              width: 24,
+                              height: 18,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ),
                       ),
+                      menuBuilder: (_) => buildLanguageSelector( context),
                     ),
-                  ),
-                  menuBuilder: (_) => buildLanguageSelector( context),
-                ),
-                MySpacing.width(6),
-                CustomPopupMenu(
-                  backdrop: true,
-                  onChange: (_) {},
-                  offsetX: -120,
-                  menu: Padding(
-                    padding: MySpacing.xy(8, 8),
-                    child: const Center(
-                      child: Icon(
-                        FeatherIcons.bell,
-                        size: 18,
+                    MySpacing.width(6),
+                    CustomPopupMenu(
+                      backdrop: true,
+                      onChange: (_) {},
+                      offsetX: -120,
+                      menu: Padding(
+                        padding: MySpacing.xy(8, 8),
+                        child: const Center(
+                          child: Icon(
+                            FeatherIcons.bell,
+                            size: 18,
+                          ),
+                        ),
                       ),
+                      menuBuilder: (_) => buildNotifications(),
                     ),
-                  ),
-                  menuBuilder: (_) => buildNotifications(),
-                ),
-                MySpacing.width(4),
-                CustomPopupMenu(
-                  backdrop: false,
-                  onChange: (_) {},
-                  offsetX: -60,
-                  offsetY: 8,
-                  menu: Padding(
-                    padding: MySpacing.xy(8, 8),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        MyContainer.rounded(
-                            paddingAll: 0,
-                            child: Image.asset(
-                              Images.avatars[0],
-                              height: 28,
-                              width: 28,
-                              fit: BoxFit.cover,
-                            )),
-                        MySpacing.width(8),
-                        MyText.labelLarge("Den")
-                      ],
+                    MySpacing.width(4),
+                    CustomPopupMenu(
+                      backdrop: false,
+                      onChange: (_) {},
+                      offsetX: -60,
+                      offsetY: 8,
+                      menu: Padding(
+                        padding: MySpacing.xy(8, 8),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            MyContainer.rounded(
+                                paddingAll: 0,
+                                child: Image.asset(
+                                  Images.avatars[0],
+                                  height: 28,
+                                  width: 28,
+                                  fit: BoxFit.cover,
+                                )),
+                            MySpacing.width(8),
+                            MyText.labelLarge("Den")
+                          ],
+                        ),
+                      ),
+                      menuBuilder: (context) {
+                        return  buildAccountMenu();
+                      },
                     ),
-                  ),
-                  menuBuilder: (context) {
-                    return  buildAccountMenu();
-                  },
+                  ],
                 ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-
+              )
+            ],
+          ),
+        );
+    },);
+    
   }
-
   Widget buildLanguageSelector( BuildContext context) {
     List<Widget> childrenLanguage=[];
     for(LanguageInfo language in LanguageHelper().supportedLanguages)
@@ -299,7 +304,6 @@ class _TopBarState extends State<TopBar>
       ),
     );
   }
-
   Widget buildAccountMenu() {
     return MyContainer.bordered(
       paddingAll: 0,
@@ -376,7 +380,8 @@ class _TopBarState extends State<TopBar>
             child: MyButton(
               key: UniqueKey(),
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              onTap: () {
+              onTap: () async {
+                await AuthorManager().handleLogout();
                 AppPages.route(Routes.landingPageRoute, isReplace: true);
               },
               borderRadiusAll: AppStyle.buttonRadius.medium,

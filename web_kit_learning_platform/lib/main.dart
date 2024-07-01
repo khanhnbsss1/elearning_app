@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:webkit/routes/app_routes.dart';
 import 'package:webkit/routes/routes.dart';
+import 'base/author/author_manager.dart';
 import 'base/device/device_manager.dart';
 import 'base/enviroments/flavor_settings.dart';
 import 'base/firebase_manager/firebase_options.dart';
@@ -21,7 +22,6 @@ import 'generated/l10n.dart';
 import 'helpers/localizations/bloc/main_bloc.dart';
 import 'helpers/localizations/language_helper.dart';
 import 'helpers/services/navigation_service.dart';
-import 'helpers/storage/local_storage.dart';
 import 'helpers/theme/app_notifier.dart';
 import 'helpers/theme/app_style.dart';
 import 'helpers/theme/theme_customizer.dart';
@@ -69,7 +69,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 Future<void> initialService()async {
   await SharedPreferencesStorage().initSharedPreferences();
   //FirebaseManager.getInstance.initialFirebase();
-  await AuthorHelper.init();
+  await AuthorManager().init();
   await ScreenUtil.ensureScreenSize();
 
 }

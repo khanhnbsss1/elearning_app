@@ -53,7 +53,6 @@ import 'package:webkit/views/ui/notifications.dart';
 import 'package:webkit/views/ui/reviews_page.dart';
 import 'package:webkit/views/ui/tabs_page.dart';
 
-import '../helpers/services/auth_services.dart';
 import '../views/auth/locked_2.dart';
 import '../views/dashboard.dart';
 import '../views/error_pages/coming_soon_page.dart';
@@ -69,7 +68,8 @@ import '../views/ui/nft_dashboard.dart';
 class AuthMiddleware extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
-    return AuthService.isLoggedIn
+    
+    return AuthorManager().isLoggedIn
         ? null
         :  RouteSettings(name: Routes.landingPageRoute,);
   }
@@ -99,7 +99,8 @@ getPageRoute() {
     GetPage(
         name: Routes.dashboardRoute,
         page: () =>  DashboardPage(key: UniqueKey(),),
-        middlewares: [AuthMiddleware()]),
+        middlewares: [AuthMiddleware()]
+    ),
     
     
     ///--------------- Ecommerce ---------------///

@@ -1,18 +1,7 @@
 import 'shared_preferences.dart';
 
 class DataAccess {
-
-  // Config account nearest
-  static Future<void> saveAccountLoginNearest(String account) async{
-    // save account login nearest
-    SharedPre.saveDataString(SharedPre.accountNearest, account.toLowerCase().trim());
-  }
-
-  static Future<String> getAccountLoginNearest() async{
-    // get account login nearest
-    String account = await SharedPre.readDataString(SharedPre.accountNearest);
-    return account;
-  }
+  
 
   // Config language
   static Future<void> saveLanguageCurrent(bool isVi) async{

@@ -5,8 +5,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/localizations/language_helper.dart';
-import 'package:webkit/helpers/storage/local_storage.dart';
 import 'package:webkit/helpers/theme/app_style.dart';
 import 'package:webkit/helpers/widgets/my.dart';
 
@@ -26,7 +26,7 @@ class AppNotifier extends ChangeNotifier {
 
     notifyListeners();
 
-    AuthorHelper.setCustomizer(themeCustomizer);
+    AuthorManager().setCustomizer(themeCustomizer);
   }
 
   Future<void> updateInStorage(ThemeCustomizer themeCustomizer) async {

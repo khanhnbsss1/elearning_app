@@ -9,6 +9,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/common/alert_dialog/NotifyDialog.dart';
 import 'package:webkit/routes/app_pages.dart';
 import 'package:webkit/routes/app_routes.dart';
+import 'package:webkit/services/apis/auth/login/models/login_response.dart';
 import 'BaseResponseAPI.dart';
 import 'EnumCommon.dart';
 import 'dio_client.dart';
@@ -27,7 +28,9 @@ class BaseApiRequest {
   DOMAIN_TYPE? domainType = DOMAIN_TYPE.MAIN;
   SERVICE_TYPE serviceType = SERVICE_TYPE.AUTHEN;
   bool? isShowErrorPopup;
+  bool?isShowToastError;
   bool? isCheckToken;
+  
   static const int timeout = 60;
   BaseApiRequest({
     this.enviromentDomain,
@@ -38,7 +41,8 @@ class BaseApiRequest {
     this.requestHeader,
     this.requestBody,
     this.isShowErrorPopup,
-    this.isCheckToken
+    this.isCheckToken,
+    this.isShowToastError
   }
       ) {
     enviromentDomain??= EVIROMENT_DOMAIN.LIVE_DOMAIN;
@@ -48,6 +52,7 @@ class BaseApiRequest {
     requestHeader ??=HashMap();
     requestHeader!["Content-Type"] = "application/json";
     isShowErrorPopup??=true;
+    isShowToastError??=true;
   }
 
   void setDomainType(DOMAIN_TYPE inputDomainType) {
@@ -114,11 +119,11 @@ class BaseApiRequest {
   }
 
   Future<Map<String, dynamic>> getHeaderAdd() async {
-    UserInfo? userInfo = await AuthorManager.getInstance.getCurrentSelectUserInfo();
+    AuthInfo? authInfo = await AuthorManager().getAuthInfo();
     bool containAuthenParams = requestHeader!.keys.contains("Authorization");
-    if(!containAuthenParams && userInfo!=null)
+    if(!containAuthenParams && authInfo!=null)
     {
-      requestHeader?.addAll({"Authorization":userInfo.token});
+      requestHeader?.addAll({"Authorization":authInfo.accessToken});
     }
     if(!(isCheckToken??true))
     {
@@ -429,7 +434,7 @@ class BaseApiRequest {
       else if (response.statusCode == 401 || response.statusCode == 403)// qua han token
           {
         MonitorLoading().dismiss();
-        AuthorManager.getInstance.deleteCurrentLoginUserInfo();
+        UserManager().deleteUserProfile();
         AppPages.route(Routes.landingPageRoute, isReplace: true);
         return ResponseCommon(
             errorCode: response.statusCode,
@@ -488,7 +493,10 @@ class BaseApiRequest {
     if(statusMessage==null) {
       return;
     }
-    ToastUtils.showToastError(statusMessage, position: ToastGravity.BOTTOM );
+    
+    if(isShowToastError??true) {
+      ToastUtils.showToastError(statusMessage, position: ToastGravity.TOP );
+    }
   }
 
   Future<void> handleDioExceptionError({Response? response,DioException? error}) async {
@@ -500,13 +508,7 @@ class BaseApiRequest {
         responseErrorCommon = ResponseCommon.fromJson(error.response!.data!);
         if(error.response!.statusCode !=null && (error.response!.statusCode ==401 ||error.response!.statusCode ==403 )  )
         {
-          UserInfo? currentUserInfo = await AuthorManager.getInstance.getCurrentSelectUserInfo();
-          if(currentUserInfo!=null)
-          {
-            currentUserInfo.token = "";
-            currentUserInfo.expiredAt = "";
-            await UserHelper.getInstance.saveCurrentUserInfo(currentUserInfo);
-          }
+          await AuthorManager().handleLogout();
           AppPages.route(Routes.landingPageRoute, isReplace: true);
         }
       }

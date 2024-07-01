@@ -310,6 +310,16 @@ class S {
     );
   }
 
+  /// `Invalid email or phone number`
+  String get email_or_pass_invalid {
+    return Intl.message(
+      'Invalid email or phone number',
+      name: 'email_or_pass_invalid',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Language`
   String get language_text {
     return Intl.message(
@@ -3940,20 +3950,30 @@ class S {
     );
   }
 
-  /// `Who this course is for ?`
+  /// `Enter email or phone number`
+  String get type_email_or_phone_number {
+    return Intl.message(
+      'Enter email or phone number',
+      name: 'type_email_or_phone_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Who is this course for?`
   String get who_this_course_is_for {
     return Intl.message(
-      'Who this course is for ?',
+      'Who is this course for?',
       name: 'who_this_course_is_for',
       desc: '',
       args: [],
     );
   }
 
-  /// `Find a `
+  /// `Find the place for you!`
   String get who_this_course_is_for_subtitle {
     return Intl.message(
-      'Find a ',
+      'Find the place for you!',
       name: 'who_this_course_is_for_subtitle',
       desc: '',
       args: [],

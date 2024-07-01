@@ -6,8 +6,8 @@ import 'package:webkit/base/services/base_request/apiName.dart';
 import 'package:webkit/base/services/base_request/models/response_error_objects.dart';
 import 'package:webkit/base/store/store.exports.dart';
 import 'package:webkit/base/widgets/biomectric/IdentifierConst.dart';
-import 'login_request.dart';
-import 'login_response.dart';
+import 'models/login_request.dart';
+import 'models/login_response.dart';
 
 class LoginWithPhoneApi extends BaseApiRequest {
   LoginRequest loginRequest;
@@ -15,18 +15,20 @@ class LoginWithPhoneApi extends BaseApiRequest {
       : super(
       serviceType: SERVICE_TYPE.AUTHEN,
       apiName: ApiName.getInstance().loginByPhone,
-      requestBody: loginRequest.toJson(),
       isCheckToken: false,
-      isShowErrorPopup: false
+      isShowErrorPopup: false,
+    isShowToastError: false
   );
   Future<dynamic> call() async {
     await getAuthorization();
     dynamic data = await postRequestAPI();
-   if(data!=null && data.runtimeType !=ResponseCommon)
+   if(data!=null && data.runtimeType ==ResponseCommon && data.data !=null)
      {
-       LoginResponse loginResponse = LoginResponse.fromJson(data);
-       await UserHelper.getInstance.handleLogoutData();
-       DataAccess.saveAccountLoginNearest(IdentifierConst.username);
+       AuthInfo loginResponse = AuthInfo.fromJson(data.data);
+       await UserManager.getInstance.handleLogoutData();
+       await AuthorManager().saveAuthInfo(loginResponse);
+       await UserManager().saveAccountLoginNearest(IdentifierConst.username);
+       
        return true;
      }
    else
@@ -40,6 +42,8 @@ class LoginWithPhoneApi extends BaseApiRequest {
       {
         loginRequest.serialNumber = deviceInfoModel.serialNumber;
         loginRequest.type = deviceInfoModel.type;
+        print("object");
+        await setApiBody(loginRequest.toJson());
       }
   }
 

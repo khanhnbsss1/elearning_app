@@ -119,6 +119,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("凸起圆形按钮"),
         "email": MessageLookupByLibrary.simpleMessage("电子邮件"),
         "email_address": MessageLookupByLibrary.simpleMessage("电子邮件地址"),
+        "email_or_pass_invalid":
+            MessageLookupByLibrary.simpleMessage("电子邮件或电话号码不正确"),
         "email_password": MessageLookupByLibrary.simpleMessage("邮箱密码"),
         "email_us_your_question":
             MessageLookupByLibrary.simpleMessage("通过电子邮件向我们发送您的问题"),
@@ -414,6 +416,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "tourism_number": MessageLookupByLibrary.simpleMessage("旅游业 - 人数"),
         "trending_products": MessageLookupByLibrary.simpleMessage("热门产品"),
         "type": MessageLookupByLibrary.simpleMessage("类型"),
+        "type_email_or_phone_number":
+            MessageLookupByLibrary.simpleMessage("输入电子邮件或电话号码"),
         "type_size": MessageLookupByLibrary.simpleMessage("类型/大小"),
         "ui": MessageLookupByLibrary.simpleMessage("用户界面"),
         "unlock": MessageLookupByLibrary.simpleMessage("解锁"),

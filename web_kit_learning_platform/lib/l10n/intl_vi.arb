@@ -26,6 +26,7 @@
   "you_do_have_an_account": "Bạn có tài khoản?",
   "email": "Email",
   "user_name": "Tên đăng nhập",
+  "email_or_pass_invalid": "Email hoặc số điện thoại không đúng",
   "language_text": "Ngôn ngữ",
   "english_text": "Tiếng Anh",
   "viet_nam_text": "Tiếng Việt",
@@ -394,7 +395,8 @@
   "why_choose_content3": "2000 feedback, 500.000 lượt follow trên facebook, 300.000 lượt follow cùng 18 triệu lượt xem trên youtube",
   "why_choose_title4": "Phát triển cộng đồng",
   "why_choose_content4": "Là nhà tài trợ vàng nhiều năm liền cho Cuộc thi Tranh biện Tiếng Hoa lớn nhất cả nước.",
-
+  "type_email_or_phone_number":"Nhập email hoặc số điện thoại",
   "who_this_course_is_for": "Khóa học này dành cho ai ?",
   "who_this_course_is_for_subtitle": "Hãy tìm nơi dành cho bạn!"
+  
 }

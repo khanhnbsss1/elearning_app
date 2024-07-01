@@ -14,19 +14,19 @@ class Storage {
   static const currentUserInfoKey = 'currentUserInfoKey';
   static const currentUserProfileInfoKey = 'currentUserProfileInfoKey';
   static const darkModeKey = 'darkModeKey';
+  static const currentAuthInfoKey = 'currentAuthInfoKey';
 
   // key encrypt
   static const languageCodeKey = "lang_code";
   static const domainTypeIndexKey = "domainTypeIndexKey";
   static const mapSettingInfoKey = "mapSettingInfoKey";
-  static const rootUserInfoKey = "rootUserInfoKey";
 
   static List<String> hardKeys = <String>[
     accessToken,
     refreshToken,
-    rootUserInfoKey,
     currentUserInfoKey,
-    mapSettingInfoKey
+    mapSettingInfoKey,
+    currentAuthInfoKey
   ];
   // quan ly cac key tuong minh
   static List<String> needSaveKeysLogoutSession = <String>[

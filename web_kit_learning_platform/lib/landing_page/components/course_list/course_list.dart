@@ -12,7 +12,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/table_common/animation/onhover_widget.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/landing_page/mediaquery/mq.dart';
-import 'package:webkit/services/apis/course/models/course_list_response_model.dart';
+import 'package:webkit/services/apis/landing_page/course/models/course_list_response_model.dart';
 
 import '../colornotifier.dart';
 import 'bloc/course_list_bloc.dart';

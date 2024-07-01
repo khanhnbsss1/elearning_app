@@ -11,7 +11,7 @@ class ApiName {
 
   //user auth
   final String loginByUserName = "/login";
-  final String loginByPhone = "/login-pin";
+  final String loginByPhone = "/login-phone";
   final String registerUserByUserName = "/register";
   final String registerUserByPhone = "/register-phone";
   final String registerTeacherByUserName = "/register-teacher";
@@ -39,6 +39,12 @@ class ApiName {
   final String getCourseListLandingPage = "/get-course-landingpage";
   final String getTeacherListLandingPage = "/get-landingpage-teacher";
   final String getReviewListLandingPage = "/get-landingpage-review";
+  
+  /// thong tin nguoi dung
+  final String createUser = "/create-course";
+  final String editUser = "/edit-user";
+  final String getUserDetail = "/get-user";
+
 
 }
 

@@ -26,6 +26,7 @@
   "you_do_have_an_account": "Do you have an account?",
   "email": "Email",
   "user_name": "Login name",
+  "email_or_pass_invalid": "Invalid email or phone number",
   "language_text": "Language",
   "english_text": "English",
   "viet_nam_text": "Vietnamese",
@@ -390,7 +391,7 @@
   "why_choose_content3": "2000 feedback, 500,000 followers on facebook, 300,000 followers and 18 million views on youtube",
   "why_choose_title4": "Community Development",
   "why_choose_content4": "A gold sponsor for many consecutive years of the largest Chinese Debate Competition in the country.",
-
-  "who_this_course_is_for": "Who this course is for ?",
-  "who_this_course_is_for_subtitle": "Find a "
+  "type_email_or_phone_number":"Enter email or phone number",
+  "who_this_course_is_for": "Who is this course for?",
+  "who_this_course_is_for_subtitle": "Find the place for you!"
 }

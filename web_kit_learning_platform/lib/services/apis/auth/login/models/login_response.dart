@@ -1,10 +1,10 @@
-class LoginResponse {
+class AuthInfo {
   String? accessToken;
   String? refreshToken;
   String? tokenType;
   int? expireAt;
 
-  LoginResponse(
+  AuthInfo(
       {
         this.accessToken, 
         this.refreshToken, 
@@ -12,7 +12,7 @@ class LoginResponse {
         this.expireAt
       });
 
-  LoginResponse.fromJson(Map<String, dynamic> json) {
+  AuthInfo.fromJson(Map<String, dynamic> json) {
     accessToken = json['access_token'];
     refreshToken = json['refresh_token'];
     tokenType = json['token_type'];

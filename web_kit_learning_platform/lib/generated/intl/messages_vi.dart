@@ -133,6 +133,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nút bo tròn nâng cao"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "email_address": MessageLookupByLibrary.simpleMessage("Địa chỉ email"),
+        "email_or_pass_invalid": MessageLookupByLibrary.simpleMessage(
+            "Email hoặc số điện thoại không đúng"),
         "email_password":
             MessageLookupByLibrary.simpleMessage("Mật khẩu email"),
         "email_us_your_question": MessageLookupByLibrary.simpleMessage(
@@ -484,6 +486,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "trending_products":
             MessageLookupByLibrary.simpleMessage("Sản phẩm đang thịnh hành"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
+        "type_email_or_phone_number": MessageLookupByLibrary.simpleMessage(
+            "Nhập email hoặc số điện thoại"),
         "type_size": MessageLookupByLibrary.simpleMessage("Loại/kích thước"),
         "ui": MessageLookupByLibrary.simpleMessage("Giao diện người dùng"),
         "unlock": MessageLookupByLibrary.simpleMessage("Mở khóa"),

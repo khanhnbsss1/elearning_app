@@ -15,7 +15,7 @@ class DeviceManager {
     DeviceInfoModel? deviceInfoModel;
     if (kIsWeb) {
       WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
-      deviceInfoModel = DeviceInfoModel(serialNumber: null, type: "web");
+      deviceInfoModel = DeviceInfoModel(serialNumber: "", type: "web");
       print(webBrowserInfo);
     } else {
       if (Platform.isAndroid) {

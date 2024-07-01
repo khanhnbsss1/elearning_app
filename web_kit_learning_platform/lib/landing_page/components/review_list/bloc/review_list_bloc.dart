@@ -4,10 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:webkit/services/apis/course/course_list/course_list_api.dart';
-import 'package:webkit/services/apis/course/models/course_list_response_model.dart';
-import 'package:webkit/services/apis/review/models/review_list_response_model.dart';
-import 'package:webkit/services/apis/review/review_list/review_list_api.dart';
+import 'package:webkit/services/apis/landing_page/review/models/review_list_response_model.dart';
+import 'package:webkit/services/apis/landing_page/review/review_list/review_list_api.dart';
 part 'review_list_event.dart';
 part 'review_list_state.dart';
 
