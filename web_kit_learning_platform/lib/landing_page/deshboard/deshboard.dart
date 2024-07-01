@@ -229,197 +229,6 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
             ),
           ),
          
-         // const ReviewList(),
-          SizedBox(height: constraints.maxWidth < 550 ? 60 : constraints.maxWidth / 16),
-          constraints.maxWidth < 800
-              ? memory(constraints)
-              : Stack(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/deshboard/latestdeals.png',
-                    height: constraints.maxWidth < 1100
-                        ? height / 1.7
-                        : height / 1.2,
-                  ),
-                  SizedBox(
-                    width: constraints.maxWidth / 12,
-                  ),
-                  SizedBox(
-                    width: constraints.maxWidth / 2.9,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Enjoy the trip with exciting discount',
-                            style: TextStyle(
-                                fontFamily: 'gilroybold',
-                                fontSize: constraints.maxWidth < 1000
-                                    ? constraints.maxWidth / 80
-                                    : constraints.maxWidth / 90,
-                                color: notifier.greycolor)),
-                        Text(
-                            'We recommend beautiful destionation every month',
-                            style: TextStyle(
-                                color: notifier.blackcolor,
-                                fontFamily: 'gilroysemi',
-                                fontSize: constraints.maxWidth / 30)),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'Effortless travels start with us.Book your adventure,pack your bags, and let the exploration begin',
-                          style: TextStyle(
-                              fontFamily: 'gilroysemi',
-                              fontSize: constraints.maxWidth / 90,
-                              color: notifier.subgreycolor),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: constraints.maxWidth / 5,
-                          child: TextField(
-                            decoration: InputDecoration(
-                                disabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide: BorderSide(
-                                      width: 1,
-                                      color: notifier.isDark ? const Color(
-                                          0xFF353945) : const Color(
-                                          0xFFE6E8EC)),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide: BorderSide(width: 2,
-                                      color: notifier.isDark ? const Color(
-                                          0xFF353945) : const Color(
-                                          0xFFE6E8EC)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide: BorderSide(
-                                      width: 1,
-                                      color: notifier.subgreycolor),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(25),
-                                  borderSide: BorderSide(width: 1,
-                                      color: notifier.isDark ? const Color(
-                                          0xFF23262F) : const Color(
-                                          0xFFE6E8EC)),
-                                ),
-                                suffixIcon: InkWell(
-                                  onTap: () {
-
-                                  },
-                                  onHover: (value) {
-                                    setState(() {
-                                      buttonhover = value;
-                                    });
-                                  },
-                                  child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 200),
-                                    margin: const EdgeInsets.only(right: 10),
-                                    decoration: BoxDecoration(
-                                        color: buttonhover ? Colors.blueAccent
-                                            .shade700 : notifier.buttoncolor,
-                                        shape: BoxShape.circle),
-                                    child: Image.asset(
-                                        'assets/Icons/arrowrighticon.png',
-                                        scale: 3,
-                                        width: 3,
-                                        color: notifier.whitecolor),
-                                  ),
-                                ),
-                                hintText: 'Enter your phone number',
-                                hintStyle: TextStyle(
-                                    fontFamily: 'gilroy',
-                                    color: notifier.subgreycolor)),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              Positioned(
-                top: constraints.maxWidth < 1100
-                    ? 330
-                    : constraints.maxWidth > 1600
-                    ? constraints.maxWidth / 2.1
-                    : 480,
-                left: constraints.maxWidth < 900
-                    ? constraints.maxWidth / 3.4
-                    : constraints.maxWidth < 1100
-                    ? constraints.maxWidth / 3.5
-                    : constraints.maxWidth < 1300
-                    ? constraints.maxWidth / 3.4
-                    : constraints.maxWidth / 3.4,
-                child: Container(
-                  height: constraints.maxWidth < 1100
-                      ? 53
-                      : constraints.maxWidth > 1600
-                      ? constraints.maxWidth / 25
-                      : 75,
-                  width: constraints.maxWidth < 1000
-                      ? constraints.maxWidth / 5
-                      : constraints.maxWidth > 1600
-                      ? constraints.maxWidth / 5
-                      : 220,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(40),
-                    color: Colors.white,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(14),
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          'assets/deshboard/avatar.png',
-                          height: constraints.maxWidth < 1100 ? constraints
-                              .maxWidth / 25 : constraints.maxWidth / 28,
-                        ),
-                        const SizedBox(width: 15),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Antone Heller',
-                              style: TextStyle(
-                                fontSize: constraints.maxWidth / 100,
-                                fontFamily: 'gilroysemi',
-                                color: notifier.textcolor,
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Icon(Icons.star_rounded,
-                                    color: notifier.yellowcolor,
-                                    size: constraints.maxWidth / 125),
-                                const SizedBox(width: 5),
-                                Text(
-                                  '4.8',
-                                  style: TextStyle(
-                                      fontSize:
-                                      constraints.maxWidth / 125,
-                                      fontFamily: 'gilroysemi'),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
           Divider(
             color: notifier.isDark ? notifier.subgreycolor : notifier
                 .sugestionbutton,
@@ -625,7 +434,6 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
       ],
     );
   }
-  
   
   Widget buildTabBar({required BoxConstraints constraints}){
     return FutureBuilder(
@@ -1044,15 +852,15 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
 
                       },
                       child: SizedBox(
-                        height: 380,
+                       // height: 380,
                         child: Column(
                           children: [
-                            SizedBox(
+                            /*SizedBox(
                               height: 330,
                               width: 300,
                               child: ListView.builder(
                                 itemCount: profilemenuImages.length,
-                                itemBuilder: (context, inde) {
+                                itemBuilder: (context, index) {
                                   return Column(
                                     children: [
                                       Row(
@@ -1065,12 +873,12 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                             crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
                                               SvgPicture.asset(
-                                                notifier.isDark ? profilemenuImagesDark[inde] : profilemenuImages[inde],
+                                                notifier.isDark ? profilemenuImagesDark[index] : profilemenuImages[index],
                                                 height: 20,
                                               ),
                                               const SizedBox(width: 20),
                                               Text(
-                                                profilemenuTags[inde],
+                                                profilemenuTags[index],
                                                 style: TextStyle(
                                                     color: notifier
                                                         .blackcolor,
@@ -1089,12 +897,12 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                             width: 20,
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
-                                                color: inde <= 2
+                                                color: index <= 2
                                                     ? notifier.pinkcolor
                                                     : Colors.transparent
                                             ),
                                             alignment: Alignment.center,
-                                            child: Text(notNumber[inde],
+                                            child: Text(notNumber[index],
                                                 style: const TextStyle(
                                                     fontFamily: 'gilroy',
                                                     color: Colors.white,
@@ -1102,79 +910,82 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                           ),
                                         ],
                                       ),
-                                      inde == 5
+                                      index == 5
                                           ? const SizedBox(height: 10)
                                           : const SizedBox(height: 20),
-                                      inde == 2 ? Divider(
+                                      index == 2 ? Divider(
                                           color: notifier.sugestionbutton
                                       ) : const SizedBox(),
-                                      inde == 2
+                                      index == 2
                                           ? const SizedBox(height: 20)
                                           : const SizedBox()
                                     ],
                                   );
                                 },
                               ),
-                            ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  height: 40,
-                                  width: 145,
-                                  child: ElevatedButton(
-                                    style: ButtonStyle(
-                                      elevation: const WidgetStatePropertyAll(
-                                          0),
-                                      backgroundColor: WidgetStatePropertyAll(
-                                          notifier.buttoncolor),
-                                      shape: const WidgetStatePropertyAll(
-                                        RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(20)),
+                            ),*/
+                            Padding(
+                              padding:  EdgeInsets.symmetric(vertical: Dimens.size10),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    height: 40,
+                                    width: 145,
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        elevation: const WidgetStatePropertyAll(
+                                            0),
+                                        backgroundColor: WidgetStatePropertyAll(
+                                            notifier.buttoncolor),
+                                        shape: const WidgetStatePropertyAll(
+                                          RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20)),
+                                          ),
                                         ),
                                       ),
+                                      onPressed: () {
+                                        LoginPage().show(context);
+                                        //Get.toNamed(Paths.dashboardPath);
+                                      },
+                                      child:  Text(L10nX.getStr.login, style: TextStyle(
+                                          fontFamily: 'gilroymed',
+                                          fontSize: 12,
+                                          color: Colors.white)),
                                     ),
-                                    onPressed: () {
-                                      LoginPage().show(context);
-                                      //Get.toNamed(Paths.dashboardPath);
-                                    },
-                                    child:  Text(L10nX.getStr.login, style: TextStyle(
-                                        fontFamily: 'gilroymed',
-                                        fontSize: 12,
-                                        color: Colors.white)),
                                   ),
-                                ),
-                                const SizedBox(width: 10),
-                                SizedBox(
-                                  height: 40,
-                                  width: 145,
-                                  child: ElevatedButton(
-                                    style: ButtonStyle(
-                                      elevation: const WidgetStatePropertyAll(
-                                          0),
-                                      backgroundColor: WidgetStatePropertyAll(
-                                          notifier.whitecolor),
-                                      shape: WidgetStatePropertyAll(
-                                        RoundedRectangleBorder(
-                                          side: BorderSide(
-                                              color: notifier.buttoncolor,
-                                              width: 2),
-                                          borderRadius: const BorderRadius
-                                              .all(Radius.circular(20)),
+                                  const SizedBox(width: 10),
+                                  SizedBox(
+                                    height: 40,
+                                    width: 145,
+                                    child: ElevatedButton(
+                                      style: ButtonStyle(
+                                        elevation: const WidgetStatePropertyAll(
+                                            0),
+                                        backgroundColor: WidgetStatePropertyAll(
+                                            notifier.whitecolor),
+                                        shape: WidgetStatePropertyAll(
+                                          RoundedRectangleBorder(
+                                            side: BorderSide(
+                                                color: notifier.buttoncolor,
+                                                width: 2),
+                                            borderRadius: const BorderRadius
+                                                .all(Radius.circular(20)),
+                                          ),
                                         ),
                                       ),
+                                      onPressed: () {
+                                        Register().show(context);
+                                      },
+                                      child: Text(L10nX.getStr.sign_up,
+                                          style: TextStyle(
+                                              fontFamily: 'gilroymed',
+                                              fontSize: 12,
+                                              color: notifier.buttoncolor)),
                                     ),
-                                    onPressed: () {
-                                      Register().show(context);
-                                    },
-                                    child: Text(L10nX.getStr.sign_up,
-                                        style: TextStyle(
-                                            fontFamily: 'gilroymed',
-                                            fontSize: 12,
-                                            color: notifier.buttoncolor)),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),
