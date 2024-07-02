@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/landing_page/components/course_list/landing_page_course_list.dart';
 import 'package:webkit/landing_page/splash.dart';
 import 'package:webkit/views/apps/CRM/contacts_page.dart';
 import 'package:webkit/views/apps/CRM/opportunities.dart';

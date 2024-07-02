@@ -25,7 +25,6 @@ export 'package:webkit/base/firebase_manager/fire_base_manager.dart';
 export 'package:webkit/base/models/user/UserProfile.dart';
 export 'package:webkit/base/store/cache_storage.dart';
 export 'package:webkit/base/widgets/common/alert_dialog/NotifyDialog.dart';
-export 'package:webkit/routes/app_routes.dart';
 export 'package:webkit/routes/app_pages.dart';
 
 

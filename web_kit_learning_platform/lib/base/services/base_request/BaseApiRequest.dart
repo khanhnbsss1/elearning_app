@@ -9,7 +9,6 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/device/device_manager.dart';
 import 'package:webkit/base/widgets/common/alert_dialog/NotifyDialog.dart';
 import 'package:webkit/routes/app_pages.dart';
-import 'package:webkit/routes/app_routes.dart';
 import 'package:webkit/services/apis/auth/login/models/login_response.dart';
 import 'BaseResponseAPI.dart';
 import 'EnumCommon.dart';

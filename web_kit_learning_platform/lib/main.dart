@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'package:webkit/routes/app_routes.dart';
+import 'package:webkit/routes/app_pages.dart';
 import 'package:webkit/routes/routes.dart';
 import 'base/author/author_manager.dart';
 import 'base/device/device_manager.dart';
