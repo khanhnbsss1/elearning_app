@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Bạn có chắc chắn muốn xóa lịch sử không?"),
         "area_chart": MessageLookupByLibrary.simpleMessage("Biểu đồ vùng"),
         "auth": MessageLookupByLibrary.simpleMessage("Xác thực"),
+        "auth_manager": MessageLookupByLibrary.simpleMessage("Trang quản lý"),
         "authen_invalid": MessageLookupByLibrary.simpleMessage(
             "Tên đăng nhập hoặc mật khẩu không đúng"),
         "back_to_log_in":
@@ -542,6 +543,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "you_do_not_have_an_account":
             MessageLookupByLibrary.simpleMessage("Bạn chưa có tài khoản?"),
         "your_address": MessageLookupByLibrary.simpleMessage("Địa chỉ của bạn"),
+        "your_course": MessageLookupByLibrary.simpleMessage("Khóa học của bạn"),
         "your_password_will_be_reset": MessageLookupByLibrary.simpleMessage(
             "Mật khẩu của bạn sẽ được đặt lại")
       };

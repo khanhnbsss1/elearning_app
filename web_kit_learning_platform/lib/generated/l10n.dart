@@ -3979,6 +3979,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Manager page`
+  String get auth_manager {
+    return Intl.message(
+      'Manager page',
+      name: 'auth_manager',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your course`
+  String get your_course {
+    return Intl.message(
+      'Your course',
+      name: 'your_course',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

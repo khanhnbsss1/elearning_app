@@ -395,5 +395,7 @@
   "why_choose_content4": "连续多年成为全国最大的华文辩论赛金牌赞助商。",
   "who_this_course_is_for": "本课程适合哪些人？",
   "who_this_course_is_for_subtitle": "找到一个只属于你的地方",
-  "type_email_or_phone_number":"输入电子邮件或电话号码"
+  "type_email_or_phone_number":"输入电子邮件或电话号码",
+  "auth_manager": "管理员页面",
+  "your_course": "你的课程"
 }

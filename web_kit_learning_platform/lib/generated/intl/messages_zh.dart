@@ -46,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("您确定要删除历史记录吗？"),
         "area_chart": MessageLookupByLibrary.simpleMessage("面积图"),
         "auth": MessageLookupByLibrary.simpleMessage("验证"),
+        "auth_manager": MessageLookupByLibrary.simpleMessage("管理员页面"),
         "authen_invalid": MessageLookupByLibrary.simpleMessage("用户名或密码不正确"),
         "average_sales_comparison":
             MessageLookupByLibrary.simpleMessage("平均销售额对比"),
@@ -466,6 +467,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "you_do_not_have_an_account":
             MessageLookupByLibrary.simpleMessage("您还没有帐户？"),
         "your_address": MessageLookupByLibrary.simpleMessage("您的地址"),
+        "your_course": MessageLookupByLibrary.simpleMessage("你的课程"),
         "your_password_will_be_reset":
             MessageLookupByLibrary.simpleMessage("您的密码将被重置"),
         "your_registration_process_is_finished":

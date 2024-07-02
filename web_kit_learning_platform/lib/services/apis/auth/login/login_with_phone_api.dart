@@ -27,11 +27,17 @@ class LoginWithPhoneApi extends BaseApiRequest {
      {
        AuthInfo loginResponse = AuthInfo.fromJson(data.data);
        await AuthorManager().handleLogout();
-       GetUserProfileInfoApi getUserProfileInfoApi = GetUserProfileInfoApi();
-       await getUserProfileInfoApi.call();
        await AuthorManager().saveAuthInfo(loginResponse);
        await UserManager().saveAccountLoginNearest(IdentifierConst.username);
-      
+       GetUserProfileInfoApi getUserProfileInfoApi = GetUserProfileInfoApi();
+       try{
+         await getUserProfileInfoApi.call();
+       }
+       catch(e)
+       {
+         await AuthorManager().handleLogout();
+         return false;
+       }
        return true;
      }
    else

@@ -397,7 +397,7 @@ class _TopBarState extends State<TopBar>
                   ),
                   MySpacing.width(8),
                   MyText.labelMedium(
-                    "Log out",
+                    L10nX.getStr.sign_out_text,
                     fontWeight: 600,
                     color: contentTheme.danger,
                   )

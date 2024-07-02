@@ -15,7 +15,7 @@ class DeviceManager {
     DeviceInfoModel? deviceInfoModel;
     if (kIsWeb) {
       WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
-      deviceInfoModel = DeviceInfoModel(serialNumber: "", type: "web");
+      deviceInfoModel = DeviceInfoModel(serialNumber: "", type: "Web");
       print(webBrowserInfo);
     } else {
       if (Platform.isAndroid) {
@@ -32,13 +32,13 @@ class DeviceManager {
       } else if (Platform.isLinux) {
         LinuxDeviceInfo linuxDeviceInfo = await deviceInfo.linuxInfo;
         print("linuxDeviceInfo ${linuxDeviceInfo.toString()}");
-        deviceInfoModel = DeviceInfoModel(type: "desktop", serialNumber: linuxDeviceInfo.machineId);
+        deviceInfoModel = DeviceInfoModel(type: "Desktop", serialNumber: linuxDeviceInfo.machineId);
 
 
       } else if (Platform.isMacOS) {
         MacOsDeviceInfo macOsDeviceInfo = await deviceInfo.macOsInfo;
         print("macOsDeviceInfo ${macOsDeviceInfo.toString()}");
-        deviceInfoModel = DeviceInfoModel(type: "desktop", serialNumber: macOsDeviceInfo.systemGUID);
+        deviceInfoModel = DeviceInfoModel(type: "Desktop", serialNumber: macOsDeviceInfo.systemGUID);
 
 
       } else if (Platform.isWindows) {

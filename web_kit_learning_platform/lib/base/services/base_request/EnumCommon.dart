@@ -45,7 +45,7 @@ enum SERVICE_TYPE {
 const Map<SERVICE_TYPE, String> SERVICE = {
   SERVICE_TYPE.AUTHEN: "Account",
   SERVICE_TYPE.SETTING: "settings",
-  SERVICE_TYPE.USER: "users",
+  SERVICE_TYPE.USER: "Users",
   SERVICE_TYPE.COURSE: "Course",
   SERVICE_TYPE.LandingPages: "LandingPages",
   SERVICE_TYPE.NONE: "",

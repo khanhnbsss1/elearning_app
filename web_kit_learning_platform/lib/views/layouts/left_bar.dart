@@ -121,8 +121,13 @@ class _LeftBarState extends State<LeftBar>
                     route: Routes.dashboardRoute,
                   ),
                   labelWidget(L10nX.getStr.apps),
-
                   //-----------------CALENDAR-----------------//
+                  NavigationItem(
+                    iconData: Icons.library_books,
+                    title: L10nX.getStr.your_course,
+                    route: Routes.uiChatRoute,
+                    isCondensed: isCondensed,
+                  ),
                   NavigationItem(
                     iconData: LucideIcons.calendarDays,
                     title: L10nX.getStr.str_calendar,
@@ -136,6 +141,7 @@ class _LeftBarState extends State<LeftBar>
                     route: Routes.uiChatRoute,
                     isCondensed: isCondensed,
                   ),
+                  
                   //-----------------LandingPage-----------------//
                   MenuWidget(
                     iconData: LucideIcons.planeLanding,

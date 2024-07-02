@@ -48,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Are you sure, you want to delete history?"),
         "area_chart": MessageLookupByLibrary.simpleMessage("Area chart"),
         "auth": MessageLookupByLibrary.simpleMessage("Auth"),
+        "auth_manager": MessageLookupByLibrary.simpleMessage("Manager page"),
         "authen_invalid": MessageLookupByLibrary.simpleMessage(
             "Username or password is incorrect"),
         "average_sales_comparison":
@@ -542,6 +543,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "you_do_not_have_an_account": MessageLookupByLibrary.simpleMessage(
             "You don\'t have an account yet?"),
         "your_address": MessageLookupByLibrary.simpleMessage("Your address"),
+        "your_course": MessageLookupByLibrary.simpleMessage("Your course"),
         "your_password_will_be_reset":
             MessageLookupByLibrary.simpleMessage("Your password will be reset"),
         "your_registration_process_is_finished":

@@ -125,17 +125,19 @@ class BaseApiRequest {
 
     if(!containAuthenParams && authInfo!=null)
     {
-      DeviceInfoModel? deviceInfoModel = await DeviceManager().getDeviceInfo();
       requestHeader?.addAll({
-        "Authorization":authInfo.accessToken,
-        "deviceType":deviceInfoModel?.type
+        "Authorization": "Bearer ${authInfo.accessToken}",
       });
     }
+    DeviceInfoModel? deviceInfoModel = await DeviceManager().getDeviceInfo();
+    requestHeader?.addAll({
+      "Device-Type":deviceInfoModel?.type
+    });
     if(!(isCheckToken??true))
     {
       requestHeader?.remove("Authorization");
     }
-    requestHeader?.addAll({'content-type': 'application/json', 'Access-Control-Allow-Origin': "*", "Accept": "*/*"});
+    //requestHeader?.addAll({'content-type': 'application/json', 'Access-Control-Allow-Origin': "*", "Accept": "*/*"});
     return requestHeader!;
   }
 

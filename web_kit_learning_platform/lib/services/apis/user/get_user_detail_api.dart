@@ -18,7 +18,7 @@ class GetUserProfileInfoApi extends BaseApiRequest {
     }
     else
     {
-      UserProfile userProfile = UserProfile.fromJson(result['data']);
+      UserProfile userProfile = UserProfile.fromJson(result);
       UserManager().saveUserProfileInfo(userProfile);
       return userProfile;
     }

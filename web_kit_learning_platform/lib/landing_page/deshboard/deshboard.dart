@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
@@ -9,6 +11,7 @@ import 'package:webkit/helpers/localizations/language_helper.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/landing_page/components/review_list/review_list.dart';
+import 'package:webkit/routes/app_pages.dart';
 import 'package:webkit/services/apis/landing_page/review/models/review_list_response_model.dart';
 import 'package:webkit/views/auth/login/login.dart';
 import 'package:webkit/views/auth/register.dart';
@@ -439,7 +442,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
     return FutureBuilder(
       future: UserManager().getUserProfile(), 
       builder: (context, snapshot) {
-        UserProfile? userProfile = null;
+        UserProfile? userProfile;
         if (snapshot.hasData){
           userProfile = snapshot.data as UserProfile;
         }
@@ -473,6 +476,37 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
             ),
             Row(
               children: [
+                Visibility(
+                  visible: userProfile!=null,
+                  child: SizedBox(
+                    height: 40,
+                    width: 145,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        elevation: const WidgetStatePropertyAll(
+                            0),
+                        backgroundColor: WidgetStatePropertyAll(
+                            ColorConst.whiteColor),
+                        shape: const WidgetStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(20)),
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        Get.toNamed(Routes.dashboardRoute);
+                        //Get.toNamed(Paths.dashboardPath);
+                      },
+                      child: Text(L10nX.getStr.auth_manager, style: TextStyle(
+                          fontFamily: 'gilroymed',
+                          fontSize: 16,
+                          color: supportHover
+                        ? notifier.blackcolor
+                        : notifier.subgreycolor,)),
+                    ),
+                  ),
+                ),
                 constraints.maxWidth < 1000
                     ? const SizedBox()
                     : Row(
@@ -855,136 +889,181 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                        // height: 380,
                         child: Column(
                           children: [
-                            /*SizedBox(
-                              height: 330,
-                              width: 300,
-                              child: ListView.builder(
-                                itemCount: profilemenuImages.length,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment
-                                            .spaceBetween,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment
-                                                .start,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: [
-                                              SvgPicture.asset(
-                                                notifier.isDark ? profilemenuImagesDark[index] : profilemenuImages[index],
-                                                height: 20,
-                                              ),
-                                              const SizedBox(width: 20),
-                                              Text(
-                                                profilemenuTags[index],
-                                                style: TextStyle(
-                                                    color: notifier
-                                                        .blackcolor,
-                                                    fontFamily: 'gilroymed',
-                                                    fontSize: 16,
-                                                    // fontWeight: FontWeight
-                                                    //     .w600,
-                                                    letterSpacing: 1),
-                                              ),
-                                              const SizedBox(
-                                                  height: 30),
-                                            ],
-                                          ),
-                                          Container(
-                                            height: 20,
-                                            width: 20,
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: index <= 2
-                                                    ? notifier.pinkcolor
-                                                    : Colors.transparent
+                            Visibility(
+                              visible: userProfile!=null,
+                              child: SizedBox(
+                                height: 330,
+                                width: 300,
+                                child: ListView.builder(
+                                  itemCount: profilemenuImages.length,
+                                  itemBuilder: (context, index) {
+                                    return Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment
+                                              .spaceBetween,
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment
+                                                  .start,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                SvgPicture.asset(
+                                                  notifier.isDark ? profilemenuImagesDark[index] : profilemenuImages[index],
+                                                  height: 20,
+                                                ),
+                                                const SizedBox(width: 20),
+                                                Text(
+                                                  profilemenuTags[index],
+                                                  style: TextStyle(
+                                                      color: notifier
+                                                          .blackcolor,
+                                                      fontFamily: 'gilroymed',
+                                                      fontSize: 16,
+                                                      // fontWeight: FontWeight
+                                                      //     .w600,
+                                                      letterSpacing: 1),
+                                                ),
+                                                const SizedBox(
+                                                    height: 30),
+                                              ],
                                             ),
-                                            alignment: Alignment.center,
-                                            child: Text(notNumber[index],
-                                                style: const TextStyle(
-                                                    fontFamily: 'gilroy',
-                                                    color: Colors.white,
-                                                    fontSize: 10)),
-                                          ),
-                                        ],
-                                      ),
-                                      index == 5
-                                          ? const SizedBox(height: 10)
-                                          : const SizedBox(height: 20),
-                                      index == 2 ? Divider(
-                                          color: notifier.sugestionbutton
-                                      ) : const SizedBox(),
-                                      index == 2
-                                          ? const SizedBox(height: 20)
-                                          : const SizedBox()
-                                    ],
-                                  );
-                                },
+                                            Container(
+                                              height: 20,
+                                              width: 20,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  color: index <= 2
+                                                      ? notifier.pinkcolor
+                                                      : Colors.transparent
+                                              ),
+                                              alignment: Alignment.center,
+                                              child: Text(notNumber[index],
+                                                  style: const TextStyle(
+                                                      fontFamily: 'gilroy',
+                                                      color: Colors.white,
+                                                      fontSize: 10)),
+                                            ),
+                                          ],
+                                        ),
+                                        index == 5
+                                            ? const SizedBox(height: 10)
+                                            : const SizedBox(height: 20),
+                                        index == 2 ? Divider(
+                                            color: notifier.sugestionbutton
+                                        ) : const SizedBox(),
+                                        index == 2
+                                            ? const SizedBox(height: 20)
+                                            : const SizedBox()
+                                      ],
+                                    );
+                                  },
+                                ),
                               ),
-                            ),*/
+                            ),
                             Padding(
                               padding:  EdgeInsets.symmetric(vertical: Dimens.size10),
-                              child: Row(
+                              child: Stack(
                                 children: [
-                                  SizedBox(
-                                    height: 40,
-                                    width: 145,
-                                    child: ElevatedButton(
-                                      style: ButtonStyle(
-                                        elevation: const WidgetStatePropertyAll(
-                                            0),
-                                        backgroundColor: WidgetStatePropertyAll(
-                                            notifier.buttoncolor),
-                                        shape: const WidgetStatePropertyAll(
-                                          RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20)),
+                                  Visibility(
+                                    visible: userProfile==null,
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          height: 40,
+                                          width: 145,
+                                          child: ElevatedButton(
+                                            style: ButtonStyle(
+                                              elevation: const WidgetStatePropertyAll(
+                                                  0),
+                                              backgroundColor: WidgetStatePropertyAll(
+                                                  notifier.buttoncolor),
+                                              shape: const WidgetStatePropertyAll(
+                                                RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(20)),
+                                                ),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              LoginPage().show(context);
+                                              //Get.toNamed(Paths.dashboardPath);
+                                            },
+                                            child:  Text(L10nX.getStr.login, style: TextStyle(
+                                                fontFamily: 'gilroymed',
+                                                fontSize: 12,
+                                                color: Colors.white)),
                                           ),
                                         ),
-                                      ),
-                                      onPressed: () {
-                                        LoginPage().show(context);
-                                        //Get.toNamed(Paths.dashboardPath);
-                                      },
-                                      child:  Text(L10nX.getStr.login, style: TextStyle(
-                                          fontFamily: 'gilroymed',
-                                          fontSize: 12,
-                                          color: Colors.white)),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10),
-                                  SizedBox(
-                                    height: 40,
-                                    width: 145,
-                                    child: ElevatedButton(
-                                      style: ButtonStyle(
-                                        elevation: const WidgetStatePropertyAll(
-                                            0),
-                                        backgroundColor: WidgetStatePropertyAll(
-                                            notifier.whitecolor),
-                                        shape: WidgetStatePropertyAll(
-                                          RoundedRectangleBorder(
-                                            side: BorderSide(
-                                                color: notifier.buttoncolor,
-                                                width: 2),
-                                            borderRadius: const BorderRadius
-                                                .all(Radius.circular(20)),
+                                        const SizedBox(width: 10),
+                                        SizedBox(
+                                          height: 40,
+                                          width: 145,
+                                          child: ElevatedButton(
+                                            style: ButtonStyle(
+                                              elevation: const WidgetStatePropertyAll(
+                                                  0),
+                                              backgroundColor: WidgetStatePropertyAll(
+                                                  notifier.whitecolor),
+                                              shape: WidgetStatePropertyAll(
+                                                RoundedRectangleBorder(
+                                                  side: BorderSide(
+                                                      color: notifier.buttoncolor,
+                                                      width: 2),
+                                                  borderRadius: const BorderRadius
+                                                      .all(Radius.circular(20)),
+                                                ),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Register().show(context);
+                                            },
+                                            child: Text(L10nX.getStr.sign_up,
+                                                style: TextStyle(
+                                                    fontFamily: 'gilroymed',
+                                                    fontSize: 12,
+                                                    color: notifier.buttoncolor)),
                                           ),
                                         ),
-                                      ),
-                                      onPressed: () {
-                                        Register().show(context);
-                                      },
-                                      child: Text(L10nX.getStr.sign_up,
-                                          style: TextStyle(
-                                              fontFamily: 'gilroymed',
-                                              fontSize: 12,
-                                              color: notifier.buttoncolor)),
+                                      ],
                                     ),
                                   ),
-                                ],
+                                  Visibility(
+                                    visible: userProfile!=null,
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          height: 40,
+                                          width: 145,
+                                          child: ElevatedButton(
+                                            style: ButtonStyle(
+                                              elevation: const WidgetStatePropertyAll(
+                                                  0),
+                                              backgroundColor: WidgetStatePropertyAll(
+                                                  ColorConst.whiteColor),
+                                              shape: const WidgetStatePropertyAll(
+                                                RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(20)),
+                                                ),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              AuthorManager().handleLogout();
+                                              AppPages.route(Routes.landingPageRoute, isReplace: true);
+                                            },
+                                            child: Text(L10nX.getStr.sign_out_text, style: TextStyle(
+                                                fontFamily: 'gilroymed',
+                                                fontSize: 12,
+                                                color: Colors.red)),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ]
                               ),
                             ),
                           ],

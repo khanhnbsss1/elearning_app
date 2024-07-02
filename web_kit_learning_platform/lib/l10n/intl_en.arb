@@ -393,5 +393,7 @@
   "why_choose_content4": "A gold sponsor for many consecutive years of the largest Chinese Debate Competition in the country.",
   "type_email_or_phone_number":"Enter email or phone number",
   "who_this_course_is_for": "Who is this course for?",
-  "who_this_course_is_for_subtitle": "Find the place for you!"
+  "who_this_course_is_for_subtitle": "Find the place for you!",
+  "auth_manager": "Manager page",
+  "your_course": "Your course"
 }

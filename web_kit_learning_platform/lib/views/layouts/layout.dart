@@ -1,6 +1,7 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/layouts/layout_controller.dart';
 import 'package:webkit/helpers/theme/admin_theme.dart';
 import 'package:webkit/helpers/theme/app_style.dart';
@@ -292,7 +293,7 @@ class Layout extends StatelessWidget {
                   ),
                   MySpacing.width(8),
                   MyText.labelMedium(
-                    "Log out",
+                    L10nX.getStr.sign_out_text,
                     fontWeight: 600,
                     color: contentTheme.danger,
                   )

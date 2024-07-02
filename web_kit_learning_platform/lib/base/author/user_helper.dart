@@ -27,6 +27,9 @@ class UserManager{
   }
 
   Future<UserProfile?> getUserProfile() async {
+    if(await AuthorManager().getAuthInfo()==null) {
+      return null;
+    }
     String rootUserStr = SharedPreferencesStorage().getString(Storage.currentUserInfoKey);
     UserProfile? userInfo;
     if(rootUserStr.isNotEmpty)
