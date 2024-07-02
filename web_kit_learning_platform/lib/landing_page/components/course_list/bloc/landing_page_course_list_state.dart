@@ -1,4 +1,4 @@
-part of 'course_list_bloc.dart';
+part of 'landing_page_course_list_bloc.dart';
 
 enum CourseListStatus {
   onLoading, 
@@ -7,24 +7,24 @@ enum CourseListStatus {
 }
 
 @immutable
-class CourseListState extends Equatable {
+class LandingPageCourseListState extends Equatable {
   CourseListStatus? blocStatus;
-  CourseListLandingPageResponseModel? courseListLandingPageResponseModel;
+  CourseListResponseModel? courseListLandingPageResponseModel;
   bool? isExpand;
-  CourseListState({
+  LandingPageCourseListState({
       this.blocStatus,
     this.courseListLandingPageResponseModel,
     this.isExpand
   });
 
 
-  CourseListState copyWith({
+  LandingPageCourseListState copyWith({
     CourseListStatus? blocStatus,
-    CourseListLandingPageResponseModel? courseListLandingPageResponseModel,
+    CourseListResponseModel? courseListLandingPageResponseModel,
     bool? isExpand
   })
   {
-    return CourseListState(
+    return LandingPageCourseListState(
       blocStatus: blocStatus??this.blocStatus,
       courseListLandingPageResponseModel: courseListLandingPageResponseModel??this.courseListLandingPageResponseModel,
       isExpand: isExpand??this.isExpand,

@@ -51,7 +51,7 @@ class RegisterController extends MyController {
         basicValidator.validateForm();
         basicValidator.clearErrors();
       }
-      Get.toNamed('/starter');
+      AppPages.routeName('/starter');
 
       loading = false;
       update();
@@ -64,6 +64,6 @@ class RegisterController extends MyController {
   }
 
   void gotoLogin() {
-    Get.toNamed(Routes.landingPageRoute);
+    AppPages.routeName(Routes.landingPageRoute);
   }
 }

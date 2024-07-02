@@ -3999,6 +3999,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Course`
+  String get course_str {
+    return Intl.message(
+      'Course',
+      name: 'course_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

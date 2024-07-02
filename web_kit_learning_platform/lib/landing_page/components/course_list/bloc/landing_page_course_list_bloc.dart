@@ -6,13 +6,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/services/apis/landing_page/course/course_list/course_list_api.dart';
 import 'package:webkit/services/apis/landing_page/course/models/course_list_response_model.dart';
-part 'course_list_event.dart';
-part 'course_list_state.dart';
+part 'landing_page_course_list_event.dart';
+part 'landing_page_course_list_state.dart';
 
-class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
-  CourseListBloc(super.initialState) {
-    on<CourseListInitEvent>(_onInit);
-    on<CourseListOnExpandEvent>((event, emit) {
+class LandingPageCourseListBloc extends Bloc<LandingPageCourseListEvent, LandingPageCourseListState> {
+  LandingPageCourseListBloc(super.initialState) {
+    on<LandingPageCourseListInitEvent>(_onInit);
+    on<LandingPageCourseListOnExpandEvent>((event, emit) {
       emit(state.copyWith(
         blocStatus: CourseListStatus.onExpand,
         isExpand: event.isExpand
@@ -21,14 +21,14 @@ class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
   }
   
   Future<void> _onInit(
-      CourseListInitEvent event,
-      Emitter<CourseListState> emit,
+      LandingPageCourseListInitEvent event,
+      Emitter<LandingPageCourseListState> emit,
       ) async {
     emit(state.copyWith(
         blocStatus:  CourseListStatus.onLoading
     ));
     LandingPageCourseListApi courseListApi = LandingPageCourseListApi();
-    CourseListLandingPageResponseModel courseListLandingPageResponseModel  =await courseListApi.call();
+    CourseListResponseModel courseListLandingPageResponseModel  =await courseListApi.call();
     emit(state.copyWith(
       courseListLandingPageResponseModel: courseListLandingPageResponseModel,
       blocStatus:  CourseListStatus.initial

@@ -15,11 +15,11 @@ class LandingPageCourseListApi extends BaseApiRequest {
     dynamic result = await getRequestAPI();
     if(result.runtimeType == ResponseCommon)
     {
-      return CourseListLandingPageResponseModel(data: []);
+      return CourseListResponseModel(data: []);
     }
     else
     {
-      CourseListLandingPageResponseModel paymentHistoryResponseModel = CourseListLandingPageResponseModel.fromJsonList(result);
+      CourseListResponseModel paymentHistoryResponseModel = CourseListResponseModel.fromJsonList(result);
       return paymentHistoryResponseModel;
     }
 

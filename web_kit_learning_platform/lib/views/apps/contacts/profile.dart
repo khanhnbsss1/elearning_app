@@ -20,6 +20,7 @@ import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/images.dart';
+import 'package:webkit/routes/app_pages.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -139,7 +140,7 @@ class _ProfilePageState extends State<ProfilePage>
                                       ),
                                       IconButton(
                                         onPressed: () {
-                                          Get.toNamed('/contacts/edit-profile');
+                                          AppPages.routeName('/contacts/edit-profile');
                                           setState(() {});
                                         },
                                         icon: const Icon(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/my_controller.dart';
 
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
@@ -53,7 +54,7 @@ class Login2Controller extends MyController {
             Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
                     .queryParameters['next'] ??
                 "/dashboard";
-        Get.toNamed(
+        AppPages.routeName(
           nextUrl,
         );
       }
@@ -63,7 +64,7 @@ class Login2Controller extends MyController {
   }
 
   void goToForgotPassword() {
-    Get.toNamed('/auth/forgot_password1');
+    AppPages.routeName('/auth/forgot_password1');
   }
 
   void gotoRegister() {

@@ -12,7 +12,7 @@ class AppPages {
 
   };
 
-  static route(String route,
+  static routeName(String route,
       {
         dynamic arguments,
         int? id,
@@ -34,6 +34,7 @@ class AppPages {
 
     }
     else {
+      
       Get.toNamed(
           route,
           arguments: arguments,

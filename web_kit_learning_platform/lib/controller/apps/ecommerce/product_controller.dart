@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:webkit/base/base.export.dart';
 
 import 'package:webkit/controller/my_controller.dart';
 
@@ -24,6 +25,6 @@ class ProductController extends MyController {
   }
 
   void goToCreateProduct() {
-    Get.toNamed('/apps/ecommerce/add_product');
+    AppPages.routeName('/apps/ecommerce/add_product');
   }
 }

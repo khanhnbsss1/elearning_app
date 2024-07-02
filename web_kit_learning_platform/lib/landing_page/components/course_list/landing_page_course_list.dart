@@ -15,16 +15,16 @@ import 'package:webkit/landing_page/mediaquery/mq.dart';
 import 'package:webkit/services/apis/landing_page/course/models/course_list_response_model.dart';
 
 import '../colornotifier.dart';
-import 'bloc/course_list_bloc.dart';
+import 'bloc/landing_page_course_list_bloc.dart';
 
-class CourseList extends StatefulWidget {
-  const CourseList({super.key});
+class LandingPageCourseList extends StatefulWidget {
+  const LandingPageCourseList({super.key});
 
   @override
-  State<CourseList> createState() => _CourseListState();
+  State<LandingPageCourseList> createState() => _LandingPageCourseListState();
 }
 
-class _CourseListState extends State<CourseList> {
+class _LandingPageCourseListState extends State<LandingPageCourseList> {
   int b = 9;
   bool scrollHover = false;
   bool scrollHover2 = false;
@@ -46,9 +46,9 @@ class _CourseListState extends State<CourseList> {
     width = MediaQuery.of(context).size.width;
     return BlocProvider(
         create: (context) {
-          return CourseListBloc(CourseListState())..add(CourseListInitEvent());
+          return LandingPageCourseListBloc(LandingPageCourseListState())..add(LandingPageCourseListInitEvent());
         },
-        child: BlocConsumer<CourseListBloc, CourseListState>(
+        child: BlocConsumer<LandingPageCourseListBloc, LandingPageCourseListState>(
             listener: (context, state) {
           switch (state.blocStatus) {
             case CourseListStatus.initial:
@@ -66,7 +66,7 @@ class _CourseListState extends State<CourseList> {
   }
 
   Widget buildCourseList(
-      {required BoxConstraints constraints, required CourseListState state}) {
+      {required BoxConstraints constraints, required LandingPageCourseListState state}) {
     int lengthOfView = (state.isExpand ?? false)
         ? constraints.maxWidth < 1300
             ? 6
@@ -152,7 +152,7 @@ class _CourseListState extends State<CourseList> {
                               ? constraints.maxWidth / 4
                               : constraints.maxWidth)
                           : Dimens.size300;
-                      for (CourseLandingPageInfo courseLandingPageInfo
+                      for (CourseInfo courseLandingPageInfo
                           in state.courseListLandingPageResponseModel?.data ??
                               []) {
                         listOfCourse.add(OnHoverWidget(

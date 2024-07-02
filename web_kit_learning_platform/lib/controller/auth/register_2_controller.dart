@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/my_controller.dart';
 
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
@@ -50,7 +51,7 @@ class Register2Controller extends MyController {
         basicValidator.validateForm();
         basicValidator.clearErrors();
       }
-      Get.toNamed('/starter');
+      AppPages.routeName('/starter');
 
       loading = false;
       update();
@@ -63,6 +64,6 @@ class Register2Controller extends MyController {
   }
 
   void gotoLogin() {
-    Get.toNamed('/auth/login1');
+    AppPages.routeName('/auth/login1');
   }
 }

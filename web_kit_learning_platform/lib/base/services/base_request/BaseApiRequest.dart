@@ -442,7 +442,7 @@ class BaseApiRequest {
           {
         MonitorLoading().dismiss();
         UserManager().deleteUserProfile();
-        AppPages.route(Routes.landingPageRoute, isReplace: true);
+        AppPages.routeName(Routes.landingPageRoute, isReplace: true);
         return ResponseCommon(
             errorCode: response.statusCode,
             message: response.statusMessage,
@@ -516,7 +516,7 @@ class BaseApiRequest {
         if(error.response!.statusCode !=null && (error.response!.statusCode ==401 ||error.response!.statusCode ==403 )  )
         {
           await AuthorManager().handleLogout();
-          AppPages.route(Routes.landingPageRoute, isReplace: true);
+          AppPages.routeName(Routes.landingPageRoute, isReplace: true);
         }
       }
       else

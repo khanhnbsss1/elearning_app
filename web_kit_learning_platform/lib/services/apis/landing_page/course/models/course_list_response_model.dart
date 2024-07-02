@@ -1,21 +1,21 @@
 
-class CourseListLandingPageResponseModel {
-  List<CourseLandingPageInfo>? data;
+class CourseListResponseModel {
+  List<CourseInfo>? data;
 
-  CourseListLandingPageResponseModel({this.data});
-  CourseListLandingPageResponseModel.fromJsonList(dynamic json) {
+  CourseListResponseModel({this.data});
+  CourseListResponseModel.fromJsonList(dynamic json) {
     if (json != null) {
-      data = <CourseLandingPageInfo>[];
+      data = <CourseInfo>[];
       json.forEach((v) {
-        data!.add(new CourseLandingPageInfo.fromJson(v));
+        data!.add(new CourseInfo.fromJson(v));
       });
     }
   }
-  CourseListLandingPageResponseModel.fromJson(Map<String, dynamic> json) {
+  CourseListResponseModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = <CourseLandingPageInfo>[];
+      data = <CourseInfo>[];
       json['data'].forEach((v) {
-        data!.add(new CourseLandingPageInfo.fromJson(v));
+        data!.add(new CourseInfo.fromJson(v));
       });
     }
   }
@@ -29,7 +29,7 @@ class CourseListLandingPageResponseModel {
   }
 }
 
-class CourseLandingPageInfo {
+class CourseInfo {
   int? id;
   String? name;
   String? image;
@@ -43,7 +43,7 @@ class CourseLandingPageInfo {
   int? ratePoint;
   String?introduction;
 
-  CourseLandingPageInfo(
+  CourseInfo(
       {this.id,
         this.name,
         this.image,
@@ -57,7 +57,7 @@ class CourseLandingPageInfo {
         this.introduction,
         this.ratePoint,});
 
-  CourseLandingPageInfo.fromJson(Map<String, dynamic> json) {
+  CourseInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     image = json['image']??"";

@@ -31,13 +31,13 @@ class ForgotPasswordController extends MyController {
         basicValidator.validateForm();
         basicValidator.clearErrors();
       }
-      Get.toNamed('/auth/reset_password');
+      AppPages.routeName('/auth/reset_password');
       loading = false;
       update();
     }
   }
 
   void gotoLogIn() {
-    Get.toNamed(Routes.loginRoute);
+    AppPages.routeName(Routes.loginRoute);
   }
 }

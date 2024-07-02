@@ -105,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Liên hệ với chúng tôi"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "FFTSolution - Bản quyền 2022"),
+        "course_str": MessageLookupByLibrary.simpleMessage("Khóa học"),
         "courses_list":
             MessageLookupByLibrary.simpleMessage("Danh sách khóa học"),
         "create_product": MessageLookupByLibrary.simpleMessage("Tạo sản phẩm"),

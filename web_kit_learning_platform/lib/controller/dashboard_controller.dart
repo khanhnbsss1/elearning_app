@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/my_controller.dart';
 
 import '../models/dashboard.dart';
@@ -150,10 +151,10 @@ class DashboardController extends MyController {
   }
 
   void goToProducts() {
-    Get.toNamed('/apps/ecommerce/products');
+    AppPages.routeName(Routes.appsEcommerceProductsRoute);
   }
 
   void goToCustomers() {
-    Get.toNamed('/apps/ecommerce/customers');
+    AppPages.routeName(Routes.appsEcommerceCustomersRoute);
   }
 }

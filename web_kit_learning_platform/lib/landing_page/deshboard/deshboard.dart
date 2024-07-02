@@ -17,7 +17,7 @@ import 'package:webkit/views/auth/login/login.dart';
 import 'package:webkit/views/auth/register.dart';
 
 import '../components/colornotifier.dart';
-import '../components/course_list/course_list.dart';
+import '../components/course_list/landing_page_course_list.dart';
 import '../components/who_this_course_is_for/who_this_course_is_for.dart';
 import '../mediaquery/mq.dart';
 import 'endofpage.dart';
@@ -200,7 +200,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                 const WhoThisCourseIsFor(),
                 SizedBox(
                     height: constraints.maxWidth < 550 ? 70 : constraints.maxWidth / 50),
-                const CourseList(),
+                const LandingPageCourseList(),
                 SizedBox(
                   height: constraints.maxWidth < 550 ? 50 : constraints.maxWidth < 800
                       ? constraints.maxWidth / 30
@@ -495,8 +495,8 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                         ),
                       ),
                       onPressed: () {
-                        Get.toNamed(Routes.dashboardRoute);
-                        //Get.toNamed(Paths.dashboardPath);
+                        AppPages.routeName(Routes.dashboardRoute);
+                        //AppPages.route(Paths.dashboardPath);
                       },
                       child: Text(L10nX.getStr.auth_manager, style: TextStyle(
                           fontFamily: 'gilroymed',
@@ -987,7 +987,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                             ),
                                             onPressed: () {
                                               LoginPage().show(context);
-                                              //Get.toNamed(Paths.dashboardPath);
+                                              //AppPages.route(Paths.dashboardPath);
                                             },
                                             child:  Text(L10nX.getStr.login, style: TextStyle(
                                                 fontFamily: 'gilroymed',
@@ -1052,7 +1052,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                             ),
                                             onPressed: () {
                                               AuthorManager().handleLogout();
-                                              AppPages.route(Routes.landingPageRoute, isReplace: true);
+                                              AppPages.routeName(Routes.landingPageRoute, isReplace: true);
                                             },
                                             child: Text(L10nX.getStr.sign_out_text, style: TextStyle(
                                                 fontFamily: 'gilroymed',

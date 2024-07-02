@@ -79,7 +79,7 @@ class _LeftBarState extends State<LeftBar>
                 children: [
                   InkWell(
                       onTap: () {
-                        Get.toNamed(Routes.dashboardRoute);
+                        AppPages.routeName(Routes.dashboardRoute);
                       },
                       child: Image.asset(
                         Images.logoIcon,
@@ -121,13 +121,26 @@ class _LeftBarState extends State<LeftBar>
                     route: Routes.dashboardRoute,
                   ),
                   labelWidget(L10nX.getStr.apps),
-                  //-----------------CALENDAR-----------------//
-                  NavigationItem(
+                  //-----------------Course-----------------//
+                  MenuWidget(
                     iconData: Icons.library_books,
-                    title: L10nX.getStr.your_course,
-                    route: Routes.uiChatRoute,
                     isCondensed: isCondensed,
+                    title: L10nX.getStr.course_str,
+                    children: [
+                      MenuItem(
+                        title: L10nX.getStr.your_course,
+                        route:  Routes.courseMyList,
+                        isCondensed: widget.isCondensed,
+                      ),
+                      MenuItem(
+                        title: L10nX.getStr.courses_list,
+                        route:  Routes.courseList,
+                        isCondensed: widget.isCondensed,
+                      ),
+                    ],
                   ),
+                  
+                  //-----------------CALENDAR-----------------//
                   NavigationItem(
                     iconData: LucideIcons.calendarDays,
                     title: L10nX.getStr.str_calendar,
@@ -850,7 +863,7 @@ class _MenuItemState extends State<MenuItem> with UIMixin {
     return GestureDetector(
       onTap: () {
         if (widget.route != null) {
-          Get.toNamed(widget.route!);
+          AppPages.routeName(widget.route!);
 
           // MyRouter.pushReplacementNamed(context, widget.route!, arguments: 1);
         }
@@ -918,7 +931,7 @@ class _NavigationItemState extends State<NavigationItem> with UIMixin {
     return GestureDetector(
       onTap: () {
         if (widget.route != null) {
-          Get.toNamed(widget.route!);
+          AppPages.routeName(widget.route!);
 
           // MyRouter.pushReplacementNamed(context, widget.route!, arguments: 1);
         }

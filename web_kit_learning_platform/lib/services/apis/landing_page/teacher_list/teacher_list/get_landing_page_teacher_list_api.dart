@@ -16,7 +16,7 @@ class LandingPageTeacherListApi extends BaseApiRequest {
     dynamic result = await getRequestAPI();
     if(result.runtimeType == ResponseCommon)
     {
-      return CourseListLandingPageResponseModel(data: []);
+      return CourseListResponseModel(data: []);
     }
     else
     {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/my_controller.dart';
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
 import 'package:webkit/helpers/widgets/my_validators.dart';
@@ -33,7 +34,7 @@ class Locked2Controller extends MyController {
       loading = true;
       update();
       await Future.delayed(Duration(seconds: 1));
-      Get.toNamed('/dashboard');
+      AppPages.routeName(Routes.dashboardRoute);
 
       loading = false;
       update();

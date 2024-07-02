@@ -96,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contact_us": MessageLookupByLibrary.simpleMessage("联系我们"),
         "copy_right":
             MessageLookupByLibrary.simpleMessage("FFTSolution - 版权所有 2022"),
+        "course_str": MessageLookupByLibrary.simpleMessage("Course"),
         "courses_list": MessageLookupByLibrary.simpleMessage("课程列表"),
         "create_product": MessageLookupByLibrary.simpleMessage("创建产品"),
         "created_at": MessageLookupByLibrary.simpleMessage("创建时间"),

@@ -318,7 +318,7 @@ class _TopBarState extends State<TopBar>
               children: [
                 MyButton(
                   onTap: () {
-                    Get.toNamed('/contacts/profile');
+                    AppPages.routeName('/contacts/profile');
                     setState(() {});
                   },
                   // onPressed: () =>
@@ -346,7 +346,7 @@ class _TopBarState extends State<TopBar>
                 MyButton(
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   onTap: () {
-                    Get.toNamed('/contacts/edit-profile');
+                    AppPages.routeName('/contacts/edit-profile');
                     setState(() {});
                   },
                   borderRadiusAll: AppStyle.buttonRadius.medium,
@@ -382,7 +382,7 @@ class _TopBarState extends State<TopBar>
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onTap: () async {
                 await AuthorManager().handleLogout();
-                AppPages.route(Routes.landingPageRoute, isReplace: true);
+                AppPages.routeName(Routes.landingPageRoute, isReplace: true);
               },
               borderRadiusAll: AppStyle.buttonRadius.medium,
               padding: MySpacing.xy(8, 4),

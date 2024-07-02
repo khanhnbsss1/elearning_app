@@ -105,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "FFTSolution - Copyright 2022"),
+        "course_str": MessageLookupByLibrary.simpleMessage("Course"),
         "courses_list": MessageLookupByLibrary.simpleMessage("Course list"),
         "create_product":
             MessageLookupByLibrary.simpleMessage("Create product"),

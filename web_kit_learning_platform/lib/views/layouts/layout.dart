@@ -278,7 +278,7 @@ class Layout extends StatelessWidget {
             child: MyButton(
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onTap: () {
-                AppPages.route(Routes.landingPageRoute, isReplace: true);
+                AppPages.routeName(Routes.landingPageRoute, isReplace: true);
               },
               borderRadiusAll: AppStyle.buttonRadius.medium,
               padding: MySpacing.xy(8, 4),

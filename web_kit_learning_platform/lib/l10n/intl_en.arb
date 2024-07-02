@@ -395,5 +395,6 @@
   "who_this_course_is_for": "Who is this course for?",
   "who_this_course_is_for_subtitle": "Find the place for you!",
   "auth_manager": "Manager page",
-  "your_course": "Your course"
+  "your_course": "Your course",
+  "course_str": "Course"
 }

@@ -53,7 +53,7 @@ class LoginController extends MyController {
       bool result = await loginWithPhoneApi.call();
       if(result == true)
       {
-        Get.toNamed(Routes.dashboardRoute);
+        AppPages.routeName(Routes.dashboardRoute);
       }
       else
       {
@@ -66,7 +66,7 @@ class LoginController extends MyController {
   }
 
   void goToForgotPassword() {
-    Get.toNamed('/auth/forgot_password');
+    AppPages.routeName('/auth/forgot_password');
   }
 
   void gotoRegister() {

@@ -13,6 +13,9 @@ abstract class Routes {
   static const lockedRoute = Paths.lockedPath;
   static const lockedRoute1 = Paths.lockedPath1;
 
+  static const courseList = Paths.courseList;
+  static const courseMyList = Paths.courseMyList;
+  static const courseDetail = Paths.courseDetail;
 
   static const uiButtonsRoute = Paths.uiButtonsPath;
   static const uiCardsRoute = Paths.uiCardsPath;
@@ -73,6 +76,9 @@ abstract class Paths {
   static const homePath = "/";
   static const loginPath = "/auth/login";
   static const loginPath1 = "/auth/login1";
+  static const courseList = '/course/list';
+  static const courseMyList = '/course/mylist';
+  static const courseDetail = '/course/detail';
 
   static const forgotPasswordPath = '/auth/forgot_password';
   static const forgotPasswordPath1 = '/auth/forgot_password1';

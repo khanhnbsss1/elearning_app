@@ -7,13 +7,8 @@ abstract class CourseListEvent extends Equatable {
 }
 
 class CourseListInitEvent extends CourseListEvent {
-  CourseListInitEvent(); 
-  @override
+  CourseListInitEvent()
+  {
+  }
   List<Object?> get props => [];
-}
-class CourseListOnExpandEvent extends CourseListEvent {
-  bool isExpand; 
-  CourseListOnExpandEvent({required this.isExpand});
-  @override
-  List<Object?> get props => [isExpand];
 }
