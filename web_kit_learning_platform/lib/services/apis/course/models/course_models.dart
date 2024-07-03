@@ -1,9 +1,10 @@
 
-class CourseListResponseModel {
+
+class CourseResponseModel {
   List<CourseInfo>? data;
 
-  CourseListResponseModel({this.data});
-  CourseListResponseModel.fromJsonList(dynamic json) {
+  CourseResponseModel({this.data});
+  CourseResponseModel.fromJsonList(dynamic json) {
     if (json != null) {
       data = <CourseInfo>[];
       json.forEach((v) {
@@ -11,7 +12,7 @@ class CourseListResponseModel {
       });
     }
   }
-  CourseListResponseModel.fromJson(Map<String, dynamic> json) {
+  CourseResponseModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
       data = <CourseInfo>[];
       json['data'].forEach((v) {
@@ -26,6 +27,10 @@ class CourseListResponseModel {
       dataOutput['data'] = data!.map((v) => v.toJson()).toList();
     }
     return dataOutput;
+  }
+
+  String toString() {
+    return 'CourseResponseModel(data: ${data?.map((course) => course.toString()).join(', ')})';
   }
 }
 
@@ -56,7 +61,6 @@ class CourseInfo {
         this.updatedAt,
         this.introduction,
         this.ratePoint,});
-
   CourseInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
@@ -88,5 +92,8 @@ class CourseInfo {
     data['introduction'] = introduction;
 
     return data;
+  }
+  String toString() {
+    return 'Course{id: $id, name: $name, image: $image, producerName: $producerName, totalLectures: $totalLectures, totalSubjects: $totalSubjects, language: $language, payment: $payment, createdAt: $createdAt, updatedAt: $updatedAt, ratePoint: $ratePoint, introduction: $introduction,}';
   }
 }

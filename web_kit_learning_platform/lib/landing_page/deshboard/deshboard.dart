@@ -12,7 +12,7 @@ import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/landing_page/components/review_list/review_list.dart';
 import 'package:webkit/routes/app_pages.dart';
-import 'package:webkit/services/apis/landing_page/review/models/review_list_response_model.dart';
+import 'package:webkit/services/apis/landing_page/review/models/landing_page_review_list_response_model.dart';
 import 'package:webkit/views/auth/login/login.dart';
 import 'package:webkit/views/auth/register.dart';
 

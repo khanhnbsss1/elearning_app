@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/services/apis/landing_page/teacher_list/models/landing_page_teacher_model.dart';
+import 'package:webkit/services/apis/landing_page/teacher_list/models/landing_page_teacher_list_model.dart';
 
 import '../colornotifier.dart';
 import '../../mediaquery/mq.dart';

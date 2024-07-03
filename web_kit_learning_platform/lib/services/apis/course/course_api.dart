@@ -1,28 +1,30 @@
+import 'dart:convert';
+
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/base/services/base_request/EnumCommon.dart';
 import 'package:webkit/base/services/base_request/apiName.dart';
-import 'package:webkit/base/services/base_request/models/response_error_objects.dart';
-import 'package:webkit/services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
 
-class LandingPageCourseListApi extends BaseApiRequest {
-  LandingPageCourseListApi():super(
+import '../../../base/services/base_request/models/response_error_objects.dart';
+import 'models/course_models.dart';
+
+class CourseApi extends BaseApiRequest {
+  CourseApi():super(
     serviceType: SERVICE_TYPE.COURSE,
-    apiName: ApiName.getInstance().getCourseListLandingPage,
+    apiName: ApiName.getInstance().getCourseList,
   );
 
   Future<dynamic> call() async {
     await getAuthorization();
-    dynamic result = await getRequestAPI();
+    dynamic result = await postRequestAPI();
     if(result.runtimeType == ResponseCommon)
     {
-      return CourseListResponseModel(data: []);
+      return CourseResponseModel(data: []);
     }
     else
     {
-      CourseListResponseModel paymentHistoryResponseModel = CourseListResponseModel.fromJsonList(result);
+      CourseResponseModel paymentHistoryResponseModel = CourseResponseModel.fromJsonList(result);
       return paymentHistoryResponseModel;
     }
-
   }
 
   Future<void> getAuthorization() async {

@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/services/apis/landing_page/course/course_list/course_list_api.dart';
-import 'package:webkit/services/apis/landing_page/course/models/course_list_response_model.dart';
+import 'package:webkit/services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
 part 'landing_page_course_list_event.dart';
 part 'landing_page_course_list_state.dart';
 
