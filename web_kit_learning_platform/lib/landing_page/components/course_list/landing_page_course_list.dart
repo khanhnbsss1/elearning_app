@@ -127,31 +127,31 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> {
                     builder:
                         (BuildContext context, BoxConstraints constraints) {
                       List<Widget> listOfCourse = List.empty(growable: true);
-                      double imageHeight = constraints.maxWidth < 300
-                          ? constraints.maxWidth / 1.32
-                          : constraints.maxWidth < 550
-                              ? constraints.maxWidth / 1.30
-                              : constraints.maxWidth < 750
-                                  ? constraints.maxWidth / 1.26
-                                  : constraints.maxWidth < 900
-                                      ? constraints.maxWidth / 1.22
-                                      : constraints.maxWidth < 1100
-                                          ? constraints.maxWidth / 2.85
-                                          : constraints.maxWidth < 1300
-                                              ? constraints.maxWidth / 5
-                                              : constraints.maxWidth / 6.3;
-                      double imageWidth = (kIsWeb
-                                  ? constraints.maxWidth / 4
-                                  : constraints.maxWidth) >
-                              Dimens.size300
-                          ? (kIsWeb
-                              ? constraints.maxWidth / 4
-                              : constraints.maxWidth)
-                          : Dimens.size300;
+                      // double imageHeight = constraints.maxWidth < 300
+                      //     ? constraints.maxWidth / 1.32
+                      //     : constraints.maxWidth < 550
+                      //         ? constraints.maxWidth / 1.30
+                      //         : constraints.maxWidth < 750
+                      //             ? constraints.maxWidth / 1.26
+                      //             : constraints.maxWidth < 900
+                      //                 ? constraints.maxWidth / 1.22
+                      //                 : constraints.maxWidth < 1100
+                      //                     ? constraints.maxWidth / 2.85
+                      //                     : constraints.maxWidth < 1300
+                      //                         ? constraints.maxWidth / 5
+                      //                         : constraints.maxWidth / 6.3;
+                      // double imageWidth = (kIsWeb
+                      //             ? constraints.maxWidth / 4
+                      //             : constraints.maxWidth) >
+                      //         Dimens.size300
+                      //     ? (kIsWeb
+                      //         ? constraints.maxWidth / 4
+                      //         : constraints.maxWidth)
+                      //     : Dimens.size300;
                       for (CourseInfo courseLandingPageInfo
                           in state.courseListLandingPageResponseModel?.data ??
                               []) {
-                        listOfCourse.add(CourseItem(constraints: constraints, courseInfo: courseLandingPageInfo, width: width, height: height));
+                        listOfCourse.add(CourseItem(constraints: constraints, courseInfo: courseLandingPageInfo));
                       }
                       return Center(
                         child: SingleChildScrollView(

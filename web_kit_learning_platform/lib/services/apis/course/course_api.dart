@@ -16,6 +16,7 @@ class CourseApi extends BaseApiRequest {
   Future<dynamic> call() async {
     await getAuthorization();
     dynamic result = await postRequestAPI();
+
     if(result.runtimeType == ResponseCommon)
     {
       return CourseResponseModel(data: []);
@@ -42,4 +43,5 @@ class CourseApi extends BaseApiRequest {
     // TODO: implement onRequestError
     super.onRequestError(statusCode, statusMessage);
   }
+
 }

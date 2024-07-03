@@ -50,10 +50,10 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `YAX Chinese learning platform`
+  /// `YAX Chinese Learning`
   String get app_name {
     return Intl.message(
-      'YAX Chinese learning platform',
+      'YAX Chinese Learning',
       name: 'app_name',
       desc: '',
       args: [],
@@ -85,6 +85,166 @@ class S {
     return Intl.message(
       'Innovation St. 767,CA - USA',
       name: 'app_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Application`
+  String get application {
+    return Intl.message(
+      'Application',
+      name: 'application',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Download`
+  String get download {
+    return Intl.message(
+      'Download',
+      name: 'download',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan code`
+  String get scan_code {
+    return Intl.message(
+      'Scan code',
+      name: 'scan_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark theme`
+  String get dark_theme {
+    return Intl.message(
+      'Dark theme',
+      name: 'dark_theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `send`
+  String get send {
+    return Intl.message(
+      'send',
+      name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Overview`
+  String get overview {
+    return Intl.message(
+      'Overview',
+      name: 'overview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quick links`
+  String get quick_links {
+    return Intl.message(
+      'Quick links',
+      name: 'quick_links',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blog`
+  String get blog {
+    return Intl.message(
+      'Blog',
+      name: 'blog',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Company`
+  String get company {
+    return Intl.message(
+      'Company',
+      name: 'company',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pricing`
+  String get pricing {
+    return Intl.message(
+      'Pricing',
+      name: 'pricing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact`
+  String get contact {
+    return Intl.message(
+      'Contact',
+      name: 'contact',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Utilities`
+  String get utilities {
+    return Intl.message(
+      'Utilities',
+      name: 'utilities',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Style guide`
+  String get style_guide {
+    return Intl.message(
+      'Style guide',
+      name: 'style_guide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Licensing`
+  String get licensing {
+    return Intl.message(
+      'Licensing',
+      name: 'licensing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change log`
+  String get change_log {
+    return Intl.message(
+      'Change log',
+      name: 'change_log',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your email`
+  String get enter_your_email {
+    return Intl.message(
+      'Enter your email',
+      name: 'enter_your_email',
       desc: '',
       args: [],
     );
@@ -3975,6 +4135,136 @@ class S {
     return Intl.message(
       'Find the place for you!',
       name: 'who_this_course_is_for_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Study at YAX Chinese learning platform, you will find "Speaking Chinese is as easy as eating candy`
+  String get who_this_course_is_for_comment {
+    return Intl.message(
+      'Study at YAX Chinese learning platform, you will find "Speaking Chinese is as easy as eating candy',
+      name: 'who_this_course_is_for_comment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chinese beginners`
+  String get who_this_course_is_for_table_title_1 {
+    return Intl.message(
+      'Chinese beginners',
+      name: 'who_this_course_is_for_table_title_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `People who want to learn communication, application`
+  String get who_this_course_is_for_table_title_2 {
+    return Intl.message(
+      'People who want to learn communication, application',
+      name: 'who_this_course_is_for_table_title_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `People who want to learn effectively but not hard`
+  String get who_this_course_is_for_table_title_3 {
+    return Intl.message(
+      'People who want to learn effectively but not hard',
+      name: 'who_this_course_is_for_table_title_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `People who like a positive learning environment, increasing motivation`
+  String get who_this_course_is_for_table_title_4 {
+    return Intl.message(
+      'People who like a positive learning environment, increasing motivation',
+      name: 'who_this_course_is_for_table_title_4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Acquaintances experiencing professional teaching services`
+  String get who_this_course_is_for_table_title_5 {
+    return Intl.message(
+      'Acquaintances experiencing professional teaching services',
+      name: 'who_this_course_is_for_table_title_5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For people who want to be sure to learn Chinese`
+  String get who_this_course_is_for_table_title_6 {
+    return Intl.message(
+      'For people who want to be sure to learn Chinese',
+      name: 'who_this_course_is_for_table_title_6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `YAX Chinese learning platform has a full range of courses for beginners, those who have studied before but have not found a suitable way to study, and want to study at a higher level.`
+  String get who_this_course_is_for_table_content_1 {
+    return Intl.message(
+      'YAX Chinese learning platform has a full range of courses for beginners, those who have studied before but have not found a suitable way to study, and want to study at a higher level.',
+      name: 'who_this_course_is_for_table_content_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suitable for those who want to learn communication, learn quickly to apply to life and work without losing the essential linguistic element.`
+  String get who_this_course_is_for_table_content_2 {
+    return Intl.message(
+      'Suitable for those who want to learn communication, learn quickly to apply to life and work without losing the essential linguistic element.',
+      name: 'who_this_course_is_for_table_content_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suitable for those who are busy with work, have little time, and want a learning style suitable for working people instead of plowing like they did when they were students.`
+  String get who_this_course_is_for_table_content_3 {
+    return Intl.message(
+      'Suitable for those who are busy with work, have little time, and want a learning style suitable for working people instead of plowing like they did when they were students.',
+      name: 'who_this_course_is_for_table_content_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `YAX Chinese learning platform is a place for learning without judgment, stimulating interest in learning through discovery, creating a sense of accomplishment, increasing motivation`
+  String get who_this_course_is_for_table_content_4 {
+    return Intl.message(
+      'YAX Chinese learning platform is a place for learning without judgment, stimulating interest in learning through discovery, creating a sense of accomplishment, increasing motivation',
+      name: 'who_this_course_is_for_table_content_4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suitable for those who are used to professionalism and dedicated customer care; do not like lack of rules and guarantees.`
+  String get who_this_course_is_for_table_content_5 {
+    return Intl.message(
+      'Suitable for those who are used to professionalism and dedicated customer care; do not like lack of rules and guarantees.',
+      name: 'who_this_course_is_for_table_content_5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suitable for those who value time and want to learn it all at once, without rambling on.`
+  String get who_this_course_is_for_table_content_6 {
+    return Intl.message(
+      'Suitable for those who value time and want to learn it all at once, without rambling on.',
+      name: 'who_this_course_is_for_table_content_6',
       desc: '',
       args: [],
     );

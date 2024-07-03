@@ -149,18 +149,14 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
             height: height / 45,
           ),
           Padding(
-            padding: EdgeInsets.only(
-                top: 10,
-                left: constraints.maxWidth < 760
-                    ? 10
-                    : constraints.maxWidth < 1000
-                    ? 0
-                    : constraints.maxWidth / 15,
-                right: constraints.maxWidth < 760
-                    ? 10
-                    : constraints.maxWidth < 1000
-                    ? 0
-                    : constraints.maxWidth / 15),
+            padding: EdgeInsets.symmetric(
+              horizontal: constraints.maxWidth < 760
+                  ? 10
+                  : constraints.maxWidth < 1000
+                  ? 0
+                  : constraints.maxWidth / 15,
+                vertical: 10,
+                ),
             child: SizedBox(
               width: width / 1,
               child: ClipRRect(
@@ -171,11 +167,12 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       constraints.maxWidth < 800
                           ? Image.asset('assets/deshboard/winterlandscape.png',
                           height: constraints.maxWidth < 500 ?250 : 400,
-                          fit: BoxFit.cover)
+                          width: constraints.maxWidth,
+                          fit: BoxFit.fill)
                           : Image.asset('assets/deshboard/winterlandscape.png',
                           height: 600,
                           width: constraints.maxWidth,
-                          fit: BoxFit.cover),
+                          fit: BoxFit.fill),
                   ],
                 ),
               ),
@@ -528,7 +525,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       ),
                       color: notifier.whitecolor,
                       child: Text(
-                        'Application',
+                        L10nX.getStr.application,
                         style: TextStyle(
                             color: supportHover
                                 ? notifier.blackcolor
@@ -550,7 +547,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                       .start,
                                   children: [
                                     const SizedBox(height: 20),
-                                    Text('Downloads', style: TextStyle(
+                                    Text(L10nX.getStr.download, style: TextStyle(
                                         fontSize: 16,
                                         color: notifier.subgreycolor,
                                         fontFamily: 'gilroysemi')),
@@ -578,7 +575,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       const SizedBox(height: 20),
-                                      Text('Scan Code', style: TextStyle(
+                                      Text(L10nX.getStr.scan_code, style: TextStyle(
                                           fontSize: 16,
                                           color: notifier.subgreycolor,
                                           fontFamily: 'gilroysemi')),
@@ -1111,14 +1108,14 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
           child: Column(
             children: [
               Text(L10nX.getStr.differences_in_teaching_methods,
-                  style: TextStyleConstant.textStyleBlack28w700.copyWith(
+                  style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
                     fontFamily: 'gilroysemi',
                     color: notifier.blackcolor, 
                     fontSize: constraints.maxWidth < 550 ? 28 : 45,),
                   textAlign: TextAlign.center),
               Text(
                   L10nX.getStr.we_are_different_because_we_understand_what_you_need,
-                style: TextStyleConstant.textStyleBlack14w400.copyWith(
+                style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
                     fontFamily: 'gilroysemi',
                     fontSize: constraints.maxWidth < 700 ? 18 : 20,
                     color: notifier.greycolor
@@ -1280,6 +1277,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                     style:TextStyleConstant.textStyleBlack12w400.copyWith(
                       fontFamily: 'gilroysemi',
                       fontSize: constraints.maxWidth < 700 ? 16 : 18,
+                      color: notifier.blackcolor,
                     ),
                     textAlign: TextAlign.center,
                   maxLines: 3,
@@ -1311,7 +1309,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
     return Column(
       children: [
         Text(L10nX.getStr.why_choose_us,
-            style: TextStyleConstant.textStyleBlack28w700.copyWith(
+            style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
                 fontFamily: 'gilroysemi',
                 fontSize: constraints.maxWidth < 550
                     ? 28
@@ -1321,7 +1319,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
             textAlign: TextAlign.center),
         Text(
           L10nX.getStr.why_choose_us_sub_title,
-          style: TextStyle(
+          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
               fontFamily: 'gilroysemi',
               fontSize: constraints.maxWidth < 700 ? 16 : 18,
               color: notifier.greycolor),

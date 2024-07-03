@@ -19,14 +19,11 @@ class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
 
   Future<void> _onInit(CourseListInitEvent event,
       Emitter<CourseListState> emit,) async {
-    emit(state.copyWith(
-        blocStatus:  CourseListStatus.onLoading
-    ));
     CourseApi courseApi = CourseApi();
     CourseResponseModel courseResponseModel = await courseApi.call();
-    print(courseResponseModel);
     emit(state.copyWith(
         courseResponseModel: courseResponseModel,
+      blocStatus: CourseStatus.initial
     ));
   }
 }

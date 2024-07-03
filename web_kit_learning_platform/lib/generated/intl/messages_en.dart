@@ -36,10 +36,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "app_address":
             MessageLookupByLibrary.simpleMessage("Innovation St. 767,CA - USA"),
         "app_email": MessageLookupByLibrary.simpleMessage("hello@pulse.com"),
-        "app_name": MessageLookupByLibrary.simpleMessage(
-            "YAX Chinese learning platform"),
+        "app_name":
+            MessageLookupByLibrary.simpleMessage("YAX Chinese Learning"),
         "app_phone": MessageLookupByLibrary.simpleMessage("+33 455 67 89 00"),
         "appcept": MessageLookupByLibrary.simpleMessage("Accept"),
+        "application": MessageLookupByLibrary.simpleMessage("Application"),
         "apps": MessageLookupByLibrary.simpleMessage("Apps"),
         "are_you_ready_send_command": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to send the command?"),
@@ -65,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "basic_input": MessageLookupByLibrary.simpleMessage("Basic input"),
         "basic_table": MessageLookupByLibrary.simpleMessage("Basic table"),
         "basic_tables": MessageLookupByLibrary.simpleMessage("Basic tables"),
+        "blog": MessageLookupByLibrary.simpleMessage("Blog"),
         "border_type": MessageLookupByLibrary.simpleMessage("Border type"),
         "bordered": MessageLookupByLibrary.simpleMessage("Bordered"),
         "bordered_indicator":
@@ -84,6 +86,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cards": MessageLookupByLibrary.simpleMessage("Cards"),
         "carousels": MessageLookupByLibrary.simpleMessage("Carousels"),
         "category": MessageLookupByLibrary.simpleMessage("Category"),
+        "change_log": MessageLookupByLibrary.simpleMessage("Change log"),
         "change_password_text":
             MessageLookupByLibrary.simpleMessage("Change password"),
         "charts": MessageLookupByLibrary.simpleMessage("Charts"),
@@ -93,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "code": MessageLookupByLibrary.simpleMessage("Code"),
         "color_variant": MessageLookupByLibrary.simpleMessage("Color variant"),
         "column_chart": MessageLookupByLibrary.simpleMessage("Column chart"),
+        "company": MessageLookupByLibrary.simpleMessage("Company"),
         "comparison_of_calories":
             MessageLookupByLibrary.simpleMessage("Comparison of calories"),
         "complete": MessageLookupByLibrary.simpleMessage("Complete"),
@@ -102,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm_password":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "confirmation": MessageLookupByLibrary.simpleMessage("Confirmation?"),
+        "contact": MessageLookupByLibrary.simpleMessage("Contact"),
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "FFTSolution - Copyright 2022"),
@@ -115,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "customers": MessageLookupByLibrary.simpleMessage("Customers"),
         "danger": MessageLookupByLibrary.simpleMessage("Danger"),
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
+        "dark_theme": MessageLookupByLibrary.simpleMessage("Dark theme"),
         "dashboard": MessageLookupByLibrary.simpleMessage("Dashboard"),
         "date_of_birth": MessageLookupByLibrary.simpleMessage("Date of birth"),
         "date_str": MessageLookupByLibrary.simpleMessage("Date"),
@@ -128,6 +134,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Differences in teaching methods"),
         "doughnut_chart":
             MessageLookupByLibrary.simpleMessage("Doughnut chart"),
+        "download": MessageLookupByLibrary.simpleMessage("Download"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("Ecommerce"),
         "elevated_button":
             MessageLookupByLibrary.simpleMessage("Elevated button"),
@@ -144,6 +151,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "enable_validation":
             MessageLookupByLibrary.simpleMessage("Enable validation"),
         "english_text": MessageLookupByLibrary.simpleMessage("English"),
+        "enter_your_email":
+            MessageLookupByLibrary.simpleMessage("Enter your email"),
         "example_form": MessageLookupByLibrary.simpleMessage("Example form"),
         "extra_pages": MessageLookupByLibrary.simpleMessage("Extra pages"),
         "faqs": MessageLookupByLibrary.simpleMessage("FAQs"),
@@ -194,6 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "level_str": MessageLookupByLibrary.simpleMessage("Level"),
         "license_copyright":
             MessageLookupByLibrary.simpleMessage("License & copyright"),
+        "licensing": MessageLookupByLibrary.simpleMessage("Licensing"),
         "light": MessageLookupByLibrary.simpleMessage("Light"),
         "literacy_rate": MessageLookupByLibrary.simpleMessage("Literacy rate"),
         "loading_message":
@@ -266,6 +276,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Outline rounded button"),
         "outline_style": MessageLookupByLibrary.simpleMessage("Outline style"),
         "output": MessageLookupByLibrary.simpleMessage("Output"),
+        "overview": MessageLookupByLibrary.simpleMessage("Overview"),
         "pages": MessageLookupByLibrary.simpleMessage("Pages"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
@@ -279,6 +290,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "positions": MessageLookupByLibrary.simpleMessage("Positions"),
         "prev": MessageLookupByLibrary.simpleMessage("Prev"),
         "price": MessageLookupByLibrary.simpleMessage("Price"),
+        "pricing": MessageLookupByLibrary.simpleMessage("Pricing"),
         "primary": MessageLookupByLibrary.simpleMessage("Primary"),
         "product": MessageLookupByLibrary.simpleMessage("Product"),
         "product_a": MessageLookupByLibrary.simpleMessage("Product a"),
@@ -291,6 +303,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "purchase_now": MessageLookupByLibrary.simpleMessage("Purchase now"),
         "pyramid_chart": MessageLookupByLibrary.simpleMessage("Pyramid chart"),
         "qty": MessageLookupByLibrary.simpleMessage("Qty"),
+        "quick_links": MessageLookupByLibrary.simpleMessage("Quick links"),
         "radial_chart": MessageLookupByLibrary.simpleMessage("Radial chart"),
         "rating": MessageLookupByLibrary.simpleMessage("Rating"),
         "re_create": MessageLookupByLibrary.simpleMessage("Create new"),
@@ -312,6 +325,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sales by sales person"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "save_account": MessageLookupByLibrary.simpleMessage("Save account"),
+        "scan_code": MessageLookupByLibrary.simpleMessage("Scan code"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "secondary": MessageLookupByLibrary.simpleMessage("Secondary"),
         "security_text": MessageLookupByLibrary.simpleMessage("Security"),
@@ -320,6 +334,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select date & time"),
         "select_range": MessageLookupByLibrary.simpleMessage("Select range"),
         "select_time": MessageLookupByLibrary.simpleMessage("Select time"),
+        "send": MessageLookupByLibrary.simpleMessage("send"),
         "set_profile_to_private":
             MessageLookupByLibrary.simpleMessage("Set profile to private"),
         "shadow": MessageLookupByLibrary.simpleMessage("Shadow"),
@@ -432,6 +447,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Time setting"),
         "student_review_list_str":
             MessageLookupByLibrary.simpleMessage("What students say"),
+        "style_guide": MessageLookupByLibrary.simpleMessage("Style guide"),
         "subcribe_to_our_news_letter":
             MessageLookupByLibrary.simpleMessage("Subcribe to our newsletter"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
@@ -503,6 +519,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "user_detail": MessageLookupByLibrary.simpleMessage("User information"),
         "user_name": MessageLookupByLibrary.simpleMessage("Login name"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
+        "utilities": MessageLookupByLibrary.simpleMessage("Utilities"),
         "validation": MessageLookupByLibrary.simpleMessage("Validation"),
         "validation_forms":
             MessageLookupByLibrary.simpleMessage("Validation forms"),
@@ -522,8 +539,45 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcome_str": MessageLookupByLibrary.simpleMessage("Welcome to"),
         "who_this_course_is_for":
             MessageLookupByLibrary.simpleMessage("Who is this course for?"),
+        "who_this_course_is_for_comment": MessageLookupByLibrary.simpleMessage(
+            "Study at YAX Chinese learning platform, you will find \"Speaking Chinese is as easy as eating candy"),
         "who_this_course_is_for_subtitle":
             MessageLookupByLibrary.simpleMessage("Find the place for you!"),
+        "who_this_course_is_for_table_content_1":
+            MessageLookupByLibrary.simpleMessage(
+                "YAX Chinese learning platform has a full range of courses for beginners, those who have studied before but have not found a suitable way to study, and want to study at a higher level."),
+        "who_this_course_is_for_table_content_2":
+            MessageLookupByLibrary.simpleMessage(
+                "Suitable for those who want to learn communication, learn quickly to apply to life and work without losing the essential linguistic element."),
+        "who_this_course_is_for_table_content_3":
+            MessageLookupByLibrary.simpleMessage(
+                "Suitable for those who are busy with work, have little time, and want a learning style suitable for working people instead of plowing like they did when they were students."),
+        "who_this_course_is_for_table_content_4":
+            MessageLookupByLibrary.simpleMessage(
+                "YAX Chinese learning platform is a place for learning without judgment, stimulating interest in learning through discovery, creating a sense of accomplishment, increasing motivation"),
+        "who_this_course_is_for_table_content_5":
+            MessageLookupByLibrary.simpleMessage(
+                "Suitable for those who are used to professionalism and dedicated customer care; do not like lack of rules and guarantees."),
+        "who_this_course_is_for_table_content_6":
+            MessageLookupByLibrary.simpleMessage(
+                "Suitable for those who value time and want to learn it all at once, without rambling on."),
+        "who_this_course_is_for_table_title_1":
+            MessageLookupByLibrary.simpleMessage("Chinese beginners"),
+        "who_this_course_is_for_table_title_2":
+            MessageLookupByLibrary.simpleMessage(
+                "People who want to learn communication, application"),
+        "who_this_course_is_for_table_title_3":
+            MessageLookupByLibrary.simpleMessage(
+                "People who want to learn effectively but not hard"),
+        "who_this_course_is_for_table_title_4":
+            MessageLookupByLibrary.simpleMessage(
+                "People who like a positive learning environment, increasing motivation"),
+        "who_this_course_is_for_table_title_5":
+            MessageLookupByLibrary.simpleMessage(
+                "Acquaintances experiencing professional teaching services"),
+        "who_this_course_is_for_table_title_6":
+            MessageLookupByLibrary.simpleMessage(
+                "For people who want to be sure to learn Chinese"),
         "why_choose_content1": MessageLookupByLibrary.simpleMessage(
             "Selected to present live at the International Conference of the Confucius Institute, an agency of the Chinese Ministry of Education on Chinese language teaching."),
         "why_choose_content2": MessageLookupByLibrary.simpleMessage(

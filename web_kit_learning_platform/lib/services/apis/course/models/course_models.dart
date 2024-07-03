@@ -93,7 +93,4 @@ class CourseInfo {
 
     return data;
   }
-  String toString() {
-    return 'Course{id: $id, name: $name, image: $image, producerName: $producerName, totalLectures: $totalLectures, totalSubjects: $totalSubjects, language: $language, payment: $payment, createdAt: $createdAt, updatedAt: $updatedAt, ratePoint: $ratePoint, introduction: $introduction,}';
-  }
 }

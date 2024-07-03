@@ -27,8 +27,12 @@ class Layout extends StatelessWidget {
   final LayoutController controller = LayoutController();
   final topBarTheme = AdminTheme.theme.topBarTheme;
   final contentTheme = AdminTheme.theme.contentTheme;
-
-  Layout({super.key, this.child});
+  bool? isScroll;
+  EdgeInsetsGeometry ?padding;
+  Layout({super.key, this.child, this.isScroll, this.padding}){
+    isScroll??=true;
+    padding??=MySpacing.fromLTRB(0, 58 + flexSpacing, 0, flexSpacing);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,12 +129,13 @@ class Layout extends StatelessWidget {
                 right: 0,
                 left: 0,
                 bottom: 0,
-                child: SingleChildScrollView(
-                  padding:
-                      MySpacing.fromLTRB(0, 58 + flexSpacing, 0, flexSpacing),
+                child: (isScroll??true)? SingleChildScrollView(
+                  padding: padding,
                   key: controller.scrollKey,
                   child: child,
-                ),
+                ):Padding(
+                  padding: padding!,
+                  child: child,),
               ),
               Positioned(top: 0, left: 0, right: 0, child: TopBar(key: UniqueKey(),)),
             ],

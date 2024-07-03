@@ -88,8 +88,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                               'assets/deshboard/prof/prof4.png',
                               fit: BoxFit.fill,
                               width: width * 0.45,
-                              height:
-                                  width < 1100 ? height / 1.8 : height / 1.4,
+                              height:width * 0.45,
                             ),
                           )
                         : SizedBox(),
@@ -100,495 +99,508 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                         : SizedBox(),
                     Flexible(
                       flex: 6,
-                      child: Table(
-                        children: [
-                          TableRow(children: [
-                            TableCell(
-                                child: Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: Container(
-                                width: (width < 900)
-                                    ? Dimens.size40
-                                    : (width < 1300)
-                                        ? Dimens.size50
-                                        : Dimens.size60,
-                                height: (width < 900)
-                                    ? Dimens.size40
-                                    : (width < 1300)
-                                        ? Dimens.size50
-                                        : Dimens.size60,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.red,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '01',
-                                    style: TextStyleConstant
-                                        .titleTextColorOnBackgroundColorStyle14w700
-                                        .copyWith(
-                                            fontSize: (width < 900)
-                                                ? Dimens.size18
-                                                : (width < 1300)
-                                                    ? Dimens.size20
-                                                    : Dimens.size24,
-                                            fontFamily: 'gilroybold',
-                                            color: notifier.whitecolor),
-                                  ),
-                                ),
-                              ),
-                            )),
-                            TableCell(
-                                child: Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: Container(
-                                width: (width < 900)
-                                    ? Dimens.size40
-                                    : (width < 1300)
-                                        ? Dimens.size50
-                                        : Dimens.size60,
-                                height: (width < 900)
-                                    ? Dimens.size40
-                                    : (width < 1300)
-                                        ? Dimens.size50
-                                        : Dimens.size60,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.red,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '02',
-                                    style: TextStyleConstant
-                                        .titleTextColorOnBackgroundColorStyle14w700
-                                        .copyWith(
-                                            fontSize: (width < 900)
-                                                ? Dimens.size18
-                                                : (width < 1300)
-                                                    ? Dimens.size20
-                                                    : Dimens.size24,
-                                            fontFamily: 'gilroybold',
-                                            color: notifier.whitecolor),
-                                  ),
-                                ),
-                              ),
-                            )),
-                          ]),
-                          TableRow(
-                            children: [
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Table(
+                          children: [
+                            TableRow(children: [
                               TableCell(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: 12, top: 12, bottom: 12),
-                                  child: Text(
-                                    'Người mới bắt đầu học Tiếng Trung',
-                                    maxLines: 2,
-                                    style: TextStyleConstant
-                                        .textStyleBlack16w400
-                                        .copyWith(
-                                      fontFamily: 'gilroybold',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: (width < 900)
-                                          ? Dimens.size14
-                                          : (width < 1300)
-                                              ? Dimens.size16
-                                              : Dimens.size20,
-                                      color: notifier.blackcolor,
+                                  child: Padding(
+                                padding: const EdgeInsets.only(right: 16),
+                                child: Container(
+                                  width: (width < 900)
+                                      ? Dimens.size40
+                                      : (width < 1300)
+                                          ? Dimens.size50
+                                          : Dimens.size60,
+                                  height: (width < 900)
+                                      ? Dimens.size40
+                                      : (width < 1300)
+                                          ? Dimens.size50
+                                          : Dimens.size60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.red,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '01',
+                                      style: TextStyleConstant
+                                          .titleTextColorOnBackgroundColorStyle14w700
+                                          .copyWith(
+                                              fontSize: (width < 900)
+                                                  ? Dimens.size18
+                                                  : (width < 1300)
+                                                      ? Dimens.size20
+                                                      : Dimens.size24,
+                                              fontFamily: 'gilroybold',
+                                              color: notifier.whitecolor),
                                     ),
                                   ),
                                 ),
-                              ),
+                              )),
                               TableCell(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: 16, top: 12, bottom: 12),
-                                  child: Text(
-                                    'Người muốn học giao tiếp, ứng dụng',
-                                    maxLines: 2,
-                                    style: TextStyleConstant
-                                        .textStyleBlack16w400
-                                        .copyWith(
-                                      fontFamily: 'gilroybold',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: (width < 900)
-                                          ? Dimens.size14
-                                          : (width < 1300)
-                                              ? Dimens.size16
-                                              : Dimens.size20,
-                                      color: notifier.blackcolor,
+                                  child: Padding(
+                                padding: const EdgeInsets.only(right: 16),
+                                child: Container(
+                                  width: (width < 900)
+                                      ? Dimens.size40
+                                      : (width < 1300)
+                                          ? Dimens.size50
+                                          : Dimens.size60,
+                                  height: (width < 900)
+                                      ? Dimens.size40
+                                      : (width < 1300)
+                                          ? Dimens.size50
+                                          : Dimens.size60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.red,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '02',
+                                      style: TextStyleConstant
+                                          .titleTextColorOnBackgroundColorStyle14w700
+                                          .copyWith(
+                                              fontSize: (width < 900)
+                                                  ? Dimens.size18
+                                                  : (width < 1300)
+                                                      ? Dimens.size20
+                                                      : Dimens.size24,
+                                              fontFamily: 'gilroybold',
+                                              color: notifier.whitecolor),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          TableRow(
-                            children: [
-                              TableCell(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 16),
-                                  child: Text(
-                                    '${L10nX.getStr.app_name} có đầy đủ các khóa cho người mới học, đã từng học nhưng chưa tìm được cách học phù hợp, muốn học lên trình độ cao hơn.',
-                                    style: TextStyleConstant
-                                        .textStyleBlack16w400
-                                        .copyWith(
-                                      fontFamily: 'gilroybold',
-                                      fontSize: (width < 900)
-                                          ? Dimens.size14
-                                          : (width < 1300)
-                                              ? Dimens.size16
-                                              : Dimens.size20,
-                                      color: notifier.blackcolor,
+                              )),
+                            ]),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 12, top: 12, bottom: 12),
+                                    child: Text(
+                                      L10nX.getStr.who_this_course_is_for_table_title_1,
+                                      maxLines: 2,
+                                      style: TextStyleConstant
+                                          .textStyleBlack16w400
+                                          .copyWith(
+                                        fontFamily: 'gilroybold',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: (width < 900)
+                                            ? Dimens.size14
+                                            : (width < 1300)
+                                                ? Dimens.size16
+                                                : Dimens.size20,
+                                        color: notifier.blackcolor,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              TableCell(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 16),
-                                  child: Text(
-                                    'Phù hợp với những anh chị muốn học giao tiếp, học nhanh để ứng dụng vào đời sống, công việc nhưng không mất đi yếu tố ngôn ngữ bản chất.',
-                                    style: TextStyleConstant
-                                        .textStyleBlack16w400
-                                        .copyWith(
-                                      fontFamily: 'gilroybold',
-                                      fontSize: (width < 900)
-                                          ? Dimens.size14
-                                          : (width < 1300)
-                                              ? Dimens.size16
-                                              : Dimens.size20,
-                                      color: notifier.blackcolor,
+                                TableCell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 16, top: 12, bottom: 12),
+                                    child: Text(
+                                      L10nX.getStr.who_this_course_is_for_table_title_2,
+                                      maxLines: 2,
+                                      style: TextStyleConstant
+                                          .textStyleBlack16w400
+                                          .copyWith(
+                                        fontFamily: 'gilroybold',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: (width < 900)
+                                            ? Dimens.size14
+                                            : (width < 1300)
+                                                ? Dimens.size16
+                                                : Dimens.size20,
+                                        color: notifier.blackcolor,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          TableRow(children: [
-                            TableCell(
-                                child: Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: Container(
-                                width: (width < 900)
-                                    ? Dimens.size40
-                                    : (width < 1300)
-                                        ? Dimens.size50
-                                        : Dimens.size60,
-                                height: (width < 900)
-                                    ? Dimens.size40
-                                    : (width < 1300)
-                                        ? Dimens.size50
-                                        : Dimens.size60,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.red,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '03',
-                                    style: TextStyleConstant
-                                        .titleTextColorOnBackgroundColorStyle14w700
-                                        .copyWith(
-                                            fontSize: (width < 900)
-                                                ? Dimens.size18
-                                                : (width < 1300)
-                                                    ? Dimens.size20
-                                                    : Dimens.size24,
-                                            fontFamily: 'gilroybold',
-                                            color: notifier.whitecolor),
-                                  ),
-                                ),
-                              ),
-                            )),
-                            TableCell(
-                                child: Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: Container(
-                                width: (width < 900)
-                                    ? Dimens.size40
-                                    : (width < 1300)
-                                        ? Dimens.size50
-                                        : Dimens.size60,
-                                height: (width < 900)
-                                    ? Dimens.size40
-                                    : (width < 1300)
-                                        ? Dimens.size50
-                                        : Dimens.size60,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.red,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '04',
-                                    style: TextStyleConstant
-                                        .titleTextColorOnBackgroundColorStyle14w700
-                                        .copyWith(
-                                            fontSize: (width < 900)
-                                                ? Dimens.size18
-                                                : (width < 1300)
-                                                    ? Dimens.size20
-                                                    : Dimens.size24,
-                                            fontFamily: 'gilroybold',
-                                            color: notifier.whitecolor),
-                                  ),
-                                ),
-                              ),
-                            )),
-                          ]),
-                          TableRow(
-                            children: [
-                              TableCell(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: 12, top: 12, bottom: 12),
-                                  child: Text(
-                                    'Người muốn học hiệu quả nhưng không vất vả',
-                                    style: TextStyleConstant
-                                        .textStyleBlack16w400
-                                        .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'gilroybold',
-                                      fontSize: (width < 900)
-                                          ? Dimens.size14
-                                          : (width < 1300)
-                                              ? Dimens.size16
-                                              : Dimens.size20,
-                                      color: notifier.blackcolor,
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      L10nX.getStr.who_this_course_is_for_table_content_1,
+                                      style: TextStyleConstant
+                                          .textStyleBlack16w400
+                                          .copyWith(
+                                        fontFamily: 'gilroybold',
+                                        fontSize: (width < 900)
+                                            ? Dimens.size14
+                                            : (width < 1300)
+                                                ? Dimens.size16
+                                                : Dimens.size20,
+                                        color: notifier.blackcolor,
+                                      ),
+                                      textAlign: TextAlign.justify,
                                     ),
                                   ),
                                 ),
-                              ),
-                              TableCell(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: 12, top: 12, bottom: 12),
-                                  child: Text(
-                                    'Người thích môi trường học tích cực, tăng động lực học.',
-                                    style: TextStyleConstant
-                                        .textStyleBlack16w400
-                                        .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'gilroybold',
-                                      fontSize: (width < 900)
-                                          ? Dimens.size14
-                                          : (width < 1300)
-                                              ? Dimens.size16
-                                              : Dimens.size20,
-                                      color: notifier.blackcolor,
+                                TableCell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      L10nX.getStr.who_this_course_is_for_table_content_2,
+                                      style: TextStyleConstant
+                                          .textStyleBlack16w400
+                                          .copyWith(
+                                        fontFamily: 'gilroybold',
+                                        fontSize: (width < 900)
+                                            ? Dimens.size14
+                                            : (width < 1300)
+                                                ? Dimens.size16
+                                                : Dimens.size20,
+                                        color: notifier.blackcolor,
+                                      ),
+                                      textAlign: TextAlign.justify,
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          TableRow(
-                            children: [
+                              ],
+                            ),
+                            TableRow(children: [
                               TableCell(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 16),
-                                  child: Text(
-                                    'Phù hợp với những anh chị bận rộn công việc, ít thời gian, muốn có cách học phù hợp với người đi làm thay vì cày cuốc như thời sinh viên. \n \n \n \n',
-                                    maxLines: 4,
-                                    style: TextStyleConstant
-                                        .textStyleBlack16w400
-                                        .copyWith(
-                                      fontFamily: 'gilroybold',
-                                      fontSize: (width < 900)
-                                          ? Dimens.size14
-                                          : (width < 1300)
-                                              ? Dimens.size16
-                                              : Dimens.size20,
-                                      color: notifier.blackcolor,
+                                  child: Padding(
+                                padding: const EdgeInsets.only(right: 16),
+                                child: Container(
+                                  width: (width < 900)
+                                      ? Dimens.size40
+                                      : (width < 1300)
+                                          ? Dimens.size50
+                                          : Dimens.size60,
+                                  height: (width < 900)
+                                      ? Dimens.size40
+                                      : (width < 1300)
+                                          ? Dimens.size50
+                                          : Dimens.size60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.red,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '03',
+                                      style: TextStyleConstant
+                                          .titleTextColorOnBackgroundColorStyle14w700
+                                          .copyWith(
+                                              fontSize: (width < 900)
+                                                  ? Dimens.size18
+                                                  : (width < 1300)
+                                                      ? Dimens.size20
+                                                      : Dimens.size24,
+                                              fontFamily: 'gilroybold',
+                                              color: notifier.whitecolor),
                                     ),
                                   ),
                                 ),
-                              ),
+                              )),
                               TableCell(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 16),
-                                  child: Text(
-                                    '${L10nX.getStr.app_name} là nơi học tập không có phát xét, kích thích hứng thú học qua việc khám phá, tạo cảm giác thành tựu, tăng động lực học. \n \n \n \n',
-                                    maxLines: 4,
-                                    style: TextStyleConstant
-                                        .textStyleBlack16w400
-                                        .copyWith(
-                                      fontFamily: 'gilroybold',
-                                      fontSize: (width < 900)
-                                          ? Dimens.size14
-                                          : (width < 1300)
-                                              ? Dimens.size16
-                                              : Dimens.size20,
-                                      color: notifier.blackcolor,
+                                  child: Padding(
+                                padding: const EdgeInsets.only(right: 16),
+                                child: Container(
+                                  width: (width < 900)
+                                      ? Dimens.size40
+                                      : (width < 1300)
+                                          ? Dimens.size50
+                                          : Dimens.size60,
+                                  height: (width < 900)
+                                      ? Dimens.size40
+                                      : (width < 1300)
+                                          ? Dimens.size50
+                                          : Dimens.size60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.red,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '04',
+                                      style: TextStyleConstant
+                                          .titleTextColorOnBackgroundColorStyle14w700
+                                          .copyWith(
+                                              fontSize: (width < 900)
+                                                  ? Dimens.size18
+                                                  : (width < 1300)
+                                                      ? Dimens.size20
+                                                      : Dimens.size24,
+                                              fontFamily: 'gilroybold',
+                                              color: notifier.whitecolor),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          TableRow(children: [
-                            TableCell(
-                                child: Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: Container(
-                                width: (width < 900)
-                                    ? Dimens.size40
-                                    : (width < 1300)
-                                        ? Dimens.size50
-                                        : Dimens.size60,
-                                height: (width < 900)
-                                    ? Dimens.size40
-                                    : (width < 1300)
-                                        ? Dimens.size50
-                                        : Dimens.size60,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.red,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '05',
-                                    style: TextStyleConstant
-                                        .titleTextColorOnBackgroundColorStyle14w700
-                                        .copyWith(
-                                            fontSize: (width < 900)
-                                                ? Dimens.size18
-                                                : (width < 1300)
-                                                    ? Dimens.size20
-                                                    : Dimens.size24,
-                                            fontFamily: 'gilroybold',
-                                            color: notifier.whitecolor),
-                                  ),
-                                ),
-                              ),
-                            )),
-                            TableCell(
-                                child: Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: Container(
-                                width: (width < 900)
-                                    ? Dimens.size40
-                                    : (width < 1300)
-                                        ? Dimens.size50
-                                        : Dimens.size60,
-                                height: (width < 900)
-                                    ? Dimens.size40
-                                    : (width < 1300)
-                                        ? Dimens.size50
-                                        : Dimens.size60,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.red,
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    '06',
-                                    style: TextStyleConstant
-                                        .titleTextColorOnBackgroundColorStyle14w700
-                                        .copyWith(
-                                            fontSize: (width < 900)
-                                                ? Dimens.size18
-                                                : (width < 1300)
-                                                    ? Dimens.size20
-                                                    : Dimens.size24,
-                                            fontFamily: 'gilroybold',
-                                            color: notifier.whitecolor),
-                                  ),
-                                ),
-                              ),
-                            )),
-                          ]),
-                          TableRow(
-                            children: [
-                              TableCell(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: 16, top: 12, bottom: 12),
-                                  child: Text(
-                                    'Người quen trải nghiệm dịch vụ giảng dạy chuyên nghiệp',
-                                    style: TextStyleConstant
-                                        .textStyleBlack16w400
-                                        .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'gilroybold',
-                                      fontSize: (width < 900)
-                                          ? Dimens.size14
-                                          : (width < 1300)
-                                              ? Dimens.size16
-                                              : Dimens.size20,
-                                      color: notifier.blackcolor,
+                              )),
+                            ]),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 12, top: 12, bottom: 12),
+                                    child: Text(
+                                      L10nX.getStr.who_this_course_is_for_table_title_3,
+                                      style: TextStyleConstant
+                                          .textStyleBlack16w400
+                                          .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'gilroybold',
+                                        fontSize: (width < 900)
+                                            ? Dimens.size14
+                                            : (width < 1300)
+                                                ? Dimens.size16
+                                                : Dimens.size20,
+                                        color: notifier.blackcolor,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              TableCell(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: 16, top: 12, bottom: 12),
-                                  child: Text(
-                                    'Dành cho người muốn chắc chắn học được Tiếng Trung',
-                                    style: TextStyleConstant
-                                        .textStyleBlack16w400
-                                        .copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'gilroybold',
-                                      fontSize: (width < 900)
-                                          ? Dimens.size14
-                                          : (width < 1300)
-                                              ? Dimens.size16
-                                              : Dimens.size20,
-                                      color: notifier.blackcolor,
+                                TableCell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 12, top: 12, bottom: 12),
+                                    child: Text(
+                                      L10nX.getStr.who_this_course_is_for_table_title_4,
+                                      style: TextStyleConstant
+                                          .textStyleBlack16w400
+                                          .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'gilroybold',
+                                        fontSize: (width < 900)
+                                            ? Dimens.size14
+                                            : (width < 1300)
+                                                ? Dimens.size16
+                                                : Dimens.size20,
+                                        color: notifier.blackcolor,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          TableRow(
-                            children: [
-                              TableCell(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 16),
-                                  child: Text(
-                                    'Phù hợp với những anh chị đã quen với sự chuyên nghiệp, chăm sóc khách hàng tận tâm; không thích sự thiếu quy củ, không được đảm bảo. \n \n \n \n',
-                                    maxLines: 4,
-                                    style: TextStyleConstant
-                                        .textStyleBlack16w400
-                                        .copyWith(
-                                      fontFamily: 'gilroybold',
-                                      fontSize: (width < 900)
-                                          ? Dimens.size14
-                                          : (width < 1300)
-                                              ? Dimens.size16
-                                              : Dimens.size20,
-                                      color: notifier.blackcolor,
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      L10nX.getStr.who_this_course_is_for_table_content_3,
+                                      maxLines: 4,
+                                      style: TextStyleConstant
+                                          .textStyleBlack16w400
+                                          .copyWith(
+                                        fontFamily: 'gilroybold',
+                                        fontSize: (width < 900)
+                                            ? Dimens.size14
+                                            : (width < 1300)
+                                                ? Dimens.size16
+                                                : Dimens.size20,
+                                        color: notifier.blackcolor,
+                                      ),
+                                      textAlign: TextAlign.justify,
+
                                     ),
                                   ),
                                 ),
-                              ),
-                              TableCell(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 16),
-                                  child: Text(
-                                    'Phù hợp với những người coi trọng thời gian, muốn học một lần được luôn, không kéo dài lan man. \n \n \n \n',
-                                    maxLines: 4,
-                                    style: TextStyleConstant
-                                        .textStyleBlack16w400
-                                        .copyWith(
-                                      fontFamily: 'gilroybold',
-                                      fontSize: (width < 900)
-                                          ? Dimens.size14
-                                          : (width < 1300)
-                                              ? Dimens.size16
-                                              : Dimens.size20,
-                                      color: notifier.blackcolor,
+                                TableCell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      L10nX.getStr.who_this_course_is_for_table_content_4,
+                                      maxLines: 4,
+                                      style: TextStyleConstant
+                                          .textStyleBlack16w400
+                                          .copyWith(
+                                        fontFamily: 'gilroybold',
+                                        fontSize: (width < 900)
+                                            ? Dimens.size14
+                                            : (width < 1300)
+                                                ? Dimens.size16
+                                                : Dimens.size20,
+                                        color: notifier.blackcolor,
+                                      ),
+                                      textAlign: TextAlign.justify,
+
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
+                              ],
+                            ),
+                            TableRow(children: [
+                              TableCell(
+                                  child: Padding(
+                                padding: const EdgeInsets.only(right: 16),
+                                child: Container(
+                                  width: (width < 900)
+                                      ? Dimens.size40
+                                      : (width < 1300)
+                                          ? Dimens.size50
+                                          : Dimens.size60,
+                                  height: (width < 900)
+                                      ? Dimens.size40
+                                      : (width < 1300)
+                                          ? Dimens.size50
+                                          : Dimens.size60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.red,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '05',
+                                      style: TextStyleConstant
+                                          .titleTextColorOnBackgroundColorStyle14w700
+                                          .copyWith(
+                                              fontSize: (width < 900)
+                                                  ? Dimens.size18
+                                                  : (width < 1300)
+                                                      ? Dimens.size20
+                                                      : Dimens.size24,
+                                              fontFamily: 'gilroybold',
+                                              color: notifier.whitecolor),
+                                    ),
+                                  ),
+                                ),
+                              )),
+                              TableCell(
+                                  child: Padding(
+                                padding: const EdgeInsets.only(right: 16),
+                                child: Container(
+                                  width: (width < 900)
+                                      ? Dimens.size40
+                                      : (width < 1300)
+                                          ? Dimens.size50
+                                          : Dimens.size60,
+                                  height: (width < 900)
+                                      ? Dimens.size40
+                                      : (width < 1300)
+                                          ? Dimens.size50
+                                          : Dimens.size60,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.red,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '06',
+                                      style: TextStyleConstant
+                                          .titleTextColorOnBackgroundColorStyle14w700
+                                          .copyWith(
+                                              fontSize: (width < 900)
+                                                  ? Dimens.size18
+                                                  : (width < 1300)
+                                                      ? Dimens.size20
+                                                      : Dimens.size24,
+                                              fontFamily: 'gilroybold',
+                                              color: notifier.whitecolor),
+                                    ),
+                                  ),
+                                ),
+                              )),
+                            ]),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 16, top: 12, bottom: 12),
+                                    child: Text(
+                                      L10nX.getStr.who_this_course_is_for_table_title_5,
+                                      style: TextStyleConstant
+                                          .textStyleBlack16w400
+                                          .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'gilroybold',
+                                        fontSize: (width < 900)
+                                            ? Dimens.size14
+                                            : (width < 1300)
+                                                ? Dimens.size16
+                                                : Dimens.size20,
+                                        color: notifier.blackcolor,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 16, top: 12, bottom: 12),
+                                    child: Text(
+                                      L10nX.getStr.who_this_course_is_for_table_title_6,
+                                      style: TextStyleConstant
+                                          .textStyleBlack16w400
+                                          .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        fontFamily: 'gilroybold',
+                                        fontSize: (width < 900)
+                                            ? Dimens.size14
+                                            : (width < 1300)
+                                                ? Dimens.size16
+                                                : Dimens.size20,
+                                        color: notifier.blackcolor,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: [
+                                TableCell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      L10nX.getStr.who_this_course_is_for_table_content_5,
+                                      maxLines: 4,
+                                      style: TextStyleConstant
+                                          .textStyleBlack16w400
+                                          .copyWith(
+                                        fontFamily: 'gilroybold',
+                                        fontSize: (width < 900)
+                                            ? Dimens.size14
+                                            : (width < 1300)
+                                                ? Dimens.size16
+                                                : Dimens.size20,
+                                        color: notifier.blackcolor,
+                                      ),
+                                      textAlign: TextAlign.justify,
+
+                                    ),
+                                  ),
+                                ),
+                                TableCell(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 16),
+                                    child: Text(
+                                      L10nX.getStr.who_this_course_is_for_table_content_6,
+                                      maxLines: 4,
+                                      style: TextStyleConstant
+                                          .textStyleBlack16w400
+                                          .copyWith(
+                                        fontFamily: 'gilroybold',
+                                        fontSize: (width < 900)
+                                            ? Dimens.size14
+                                            : (width < 1300)
+                                                ? Dimens.size16
+                                                : Dimens.size20,
+                                        color: notifier.blackcolor,
+                                      ),
+                                      textAlign: TextAlign.justify,
+
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -614,16 +626,17 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
   }
 
   Widget avatarAndComment() {
-    return (width < 900) ? Column(children: [
+    return (width < 900) ? Column(
+        children: [
       Image.asset(
         'assets/deshboard/prof/prof4.png',
         fit: BoxFit.fill,
         width: width * 0.6,
-        height: height / 2,
+        height: width * 0.6,
       ),
-      SizedBox(height: 8,),
+      SizedBox(height: 16,),
       Container(
-        width: width / 2,
+        width: width / 1.5,
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
@@ -639,15 +652,12 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
               //   'assets/deshboard/avatar.png',
               //   height: width < 1100 ? width / 25 : width / 28,
               // ),
-              Icon(
-                Icons.lightbulb_outline,
-                size: width / 25,
-                color: Colors.yellow,
-              ),
+              Image.asset('assets/Icons/lightbulbicon.png',
+                  height: width/25, color: notifier.yellowcolor),
               const SizedBox(width: 15),
               Expanded(
                 child: Text(
-                  'Học ở ${L10nX.getStr.app_name}, bạn sẽ thấy "Nói Tiếng Trung dễ như ăn kẹo"',
+                  L10nX.getStr.who_this_course_is_for_comment,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -673,8 +683,8 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
       width: width < 1000
           ? width / 4.5
           : width > 1600
-          ? width / 4.5
-          : width / 4.5,
+          ? width / 4.25
+          : width / 4.0,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
@@ -688,14 +698,11 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
             //   'assets/deshboard/avatar.png',
             //   height: width < 1100 ? width / 25 : width / 28,
             // ),
-            Icon(
-              Icons.lightbulb_outline,
-              size: width < 1100 ? width / 25 : width / 28,
-              color: Colors.yellow,
-            ),
+            Image.asset('assets/Icons/lightbulbicon.png',
+                height: width/25, color: notifier.yellowcolor),
             Expanded(
               child: Text(
-                'Học ở ${L10nX.getStr.app_name}, bạn sẽ thấy "Nói Tiếng Trung dễ như ăn kẹo"',
+                L10nX.getStr.who_this_course_is_for_comment,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
