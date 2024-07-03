@@ -1,20 +1,22 @@
 part of 'course_list_bloc.dart';
 
-enum CourseListStatus {
+enum CourseStatus {
   initial,
 }
 
 @immutable
 class CourseListState extends Equatable {
   CourseResponseModel? courseResponseModel;
-  CourseListStatus? blocStatus;
+  CourseStatus? blocStatus;
   CourseListState({
-      this.blocStatus, CourseResponseModel? courseResponseModel,});
+      this.blocStatus, this.courseResponseModel,}){
+    courseResponseModel??= CourseResponseModel(data: []);
+  }
 
 
   CourseListState copyWith({
     CourseResponseModel? courseResponseModel,
-    CourseListStatus? blocStatus,
+    CourseStatus? blocStatus,
   })
   {
     return CourseListState(

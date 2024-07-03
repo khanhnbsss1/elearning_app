@@ -516,8 +516,46 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lượt truy cập trang web"),
         "who_this_course_is_for":
             MessageLookupByLibrary.simpleMessage("Khóa học này dành cho ai ?"),
+        "who_this_course_is_for_comment": MessageLookupByLibrary.simpleMessage(
+            "Học ở YAX Chinese learning platform, bạn sẽ thấy \"Nói Tiếng Trung dễ như ăn kẹo\""),
         "who_this_course_is_for_subtitle":
             MessageLookupByLibrary.simpleMessage("Hãy tìm nơi dành cho bạn!"),
+        "who_this_course_is_for_table_content_1":
+            MessageLookupByLibrary.simpleMessage(
+                "YAX Chinese learning platform có đầy đủ các khóa cho người mới học, đã từng học nhưng chưa tìm được cách học phù hợp, muốn học lên trình độ cao hơn."),
+        "who_this_course_is_for_table_content_2":
+            MessageLookupByLibrary.simpleMessage(
+                "Phù hợp với những anh chị muốn học giao tiếp, học nhanh để ứng dụng vào đời sống, công việc nhưng không mất đi yếu tố ngôn ngữ bản chất."),
+        "who_this_course_is_for_table_content_3":
+            MessageLookupByLibrary.simpleMessage(
+                "Phù hợp với những anh chị bận rộn công việc, ít thời gian, muốn có cách học phù hợp với người đi làm thay vì cày cuốc như thời sinh viên. "),
+        "who_this_course_is_for_table_content_4":
+            MessageLookupByLibrary.simpleMessage(
+                "YAX Chinese learning platform là nơi học tập không có phát xét, kích thích hứng thú học qua việc khám phá, tạo cảm giác thành tựu, tăng động lực học"),
+        "who_this_course_is_for_table_content_5":
+            MessageLookupByLibrary.simpleMessage(
+                "Phù hợp với những anh chị đã quen với sự chuyên nghiệp, chăm sóc khách hàng tận tâm; không thích sự thiếu quy củ, không được đảm bảo. "),
+        "who_this_course_is_for_table_content_6":
+            MessageLookupByLibrary.simpleMessage(
+                "Phù hợp với những người coi trọng thời gian, muốn học một lần được luôn, không kéo dài lan man."),
+        "who_this_course_is_for_table_title_1":
+            MessageLookupByLibrary.simpleMessage(
+                "Người mới bắt đầu học Tiếng Trung"),
+        "who_this_course_is_for_table_title_2":
+            MessageLookupByLibrary.simpleMessage(
+                "Người muốn học giao tiếp, ứng dụng"),
+        "who_this_course_is_for_table_title_3":
+            MessageLookupByLibrary.simpleMessage(
+                "Người muốn học hiệu quả nhưng không vất vả"),
+        "who_this_course_is_for_table_title_4":
+            MessageLookupByLibrary.simpleMessage(
+                "Người thích môi trường học tích cực, tăng động lực học"),
+        "who_this_course_is_for_table_title_5":
+            MessageLookupByLibrary.simpleMessage(
+                "Người quen trải nghiệm dịch vụ giảng dạy chuyên nghiệp"),
+        "who_this_course_is_for_table_title_6":
+            MessageLookupByLibrary.simpleMessage(
+                "Dành cho người muốn chắc chắn học được Tiếng Trung"),
         "why_choose_content1": MessageLookupByLibrary.simpleMessage(
             "Được lựa chọn trình bày trực tiếp tại Hội thảo Quốc tế của Viện Khổng Tử, cơ quan của Bộ giáo dục Trung Quốc về giảng dạy Tiếng Trung."),
         "why_choose_content2": MessageLookupByLibrary.simpleMessage(

@@ -442,8 +442,40 @@ class MessageLookup extends MessageLookupByLibrary {
         "website_visits": MessageLookupByLibrary.simpleMessage("网站访问量"),
         "who_this_course_is_for":
             MessageLookupByLibrary.simpleMessage("本课程适合哪些人？"),
+        "who_this_course_is_for_comment": MessageLookupByLibrary.simpleMessage(
+            "在越爱学汉语学习平台学习，你会发现“说汉语就像吃糖一样简单”"),
         "who_this_course_is_for_subtitle":
             MessageLookupByLibrary.simpleMessage("找到一个只属于你的地方"),
+        "who_this_course_is_for_table_content_1":
+            MessageLookupByLibrary.simpleMessage(
+                "越爱学汉语学习平台有齐全的课程，适合初学者、学过但没有找到合适学习方式、想要更高层次学习的人。"),
+        "who_this_course_is_for_table_content_2":
+            MessageLookupByLibrary.simpleMessage(
+                "适合那些想要学习交流、快速学习应用到生活和工作中而又不失基本语言元素的人。"),
+        "who_this_course_is_for_table_content_3":
+            MessageLookupByLibrary.simpleMessage(
+                "适合那些工作忙、时间少、想要适合上班族的学习方式，而不是像学生时那样耕耘的人。"),
+        "who_this_course_is_for_table_content_4":
+            MessageLookupByLibrary.simpleMessage(
+                "越爱学汉语学习平台是一个不带评判地学习的地方，通过发现激发学习兴趣，创造成就感，增加动力"),
+        "who_this_course_is_for_table_content_5":
+            MessageLookupByLibrary.simpleMessage(
+                "适合那些习惯于专业精神和专注的客户服务；不喜欢缺乏规则和保证的人。"),
+        "who_this_course_is_for_table_content_6":
+            MessageLookupByLibrary.simpleMessage(
+                "适合那些重视时间并希望一次性学习所有内容而不是漫无目的的人。"),
+        "who_this_course_is_for_table_title_1":
+            MessageLookupByLibrary.simpleMessage("汉语初学者"),
+        "who_this_course_is_for_table_title_2":
+            MessageLookupByLibrary.simpleMessage("想要学习沟通、应用的人"),
+        "who_this_course_is_for_table_title_3":
+            MessageLookupByLibrary.simpleMessage("想要有效学习但不刻苦学习的人"),
+        "who_this_course_is_for_table_title_4":
+            MessageLookupByLibrary.simpleMessage("喜欢积极的学习环境、增加动力的人"),
+        "who_this_course_is_for_table_title_5":
+            MessageLookupByLibrary.simpleMessage("体验专业教学服务的熟人"),
+        "who_this_course_is_for_table_title_6":
+            MessageLookupByLibrary.simpleMessage("对于那些想一定要学习中文的人"),
         "why_choose_content1":
             MessageLookupByLibrary.simpleMessage("被选为中国教育部汉语教学机构孔子学院国际会议现场直播。"),
         "why_choose_content2": MessageLookupByLibrary.simpleMessage(

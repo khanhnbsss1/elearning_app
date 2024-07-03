@@ -517,8 +517,45 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Website visits"),
         "who_this_course_is_for":
             MessageLookupByLibrary.simpleMessage("Who is this course for?"),
+        "who_this_course_is_for_comment": MessageLookupByLibrary.simpleMessage(
+            "Study at YAX Chinese learning platform, you will find \"Speaking Chinese is as easy as eating candy"),
         "who_this_course_is_for_subtitle":
             MessageLookupByLibrary.simpleMessage("Find the place for you!"),
+        "who_this_course_is_for_table_content_1":
+            MessageLookupByLibrary.simpleMessage(
+                "YAX Chinese learning platform has a full range of courses for beginners, those who have studied before but have not found a suitable way to study, and want to study at a higher level."),
+        "who_this_course_is_for_table_content_2":
+            MessageLookupByLibrary.simpleMessage(
+                "Suitable for those who want to learn communication, learn quickly to apply to life and work without losing the essential linguistic element."),
+        "who_this_course_is_for_table_content_3":
+            MessageLookupByLibrary.simpleMessage(
+                "Suitable for those who are busy with work, have little time, and want a learning style suitable for working people instead of plowing like they did when they were students."),
+        "who_this_course_is_for_table_content_4":
+            MessageLookupByLibrary.simpleMessage(
+                "YAX Chinese learning platform is a place for learning without judgment, stimulating interest in learning through discovery, creating a sense of accomplishment, increasing motivation"),
+        "who_this_course_is_for_table_content_5":
+            MessageLookupByLibrary.simpleMessage(
+                "Suitable for those who are used to professionalism and dedicated customer care; do not like lack of rules and guarantees."),
+        "who_this_course_is_for_table_content_6":
+            MessageLookupByLibrary.simpleMessage(
+                "Suitable for those who value time and want to learn it all at once, without rambling on."),
+        "who_this_course_is_for_table_title_1":
+            MessageLookupByLibrary.simpleMessage("Chinese beginners"),
+        "who_this_course_is_for_table_title_2":
+            MessageLookupByLibrary.simpleMessage(
+                "People who want to learn communication, application"),
+        "who_this_course_is_for_table_title_3":
+            MessageLookupByLibrary.simpleMessage(
+                "People who want to learn effectively but not hard"),
+        "who_this_course_is_for_table_title_4":
+            MessageLookupByLibrary.simpleMessage(
+                "People who like a positive learning environment, increasing motivation"),
+        "who_this_course_is_for_table_title_5":
+            MessageLookupByLibrary.simpleMessage(
+                "Acquaintances experiencing professional teaching services"),
+        "who_this_course_is_for_table_title_6":
+            MessageLookupByLibrary.simpleMessage(
+                "For people who want to be sure to learn Chinese"),
         "why_choose_content1": MessageLookupByLibrary.simpleMessage(
             "Selected to present live at the International Conference of the Confucius Institute, an agency of the Chinese Ministry of Education on Chinese language teaching."),
         "why_choose_content2": MessageLookupByLibrary.simpleMessage(

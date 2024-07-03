@@ -11,9 +11,8 @@ import 'package:webkit/services/apis/landing_page/course/models/course_list_land
 import '../../services/apis/course/models/course_models.dart';
 
 class CourseItem extends StatelessWidget{
-  CourseItem({required this.constraints, required this.courseInfo, required this.width, required this.height,});
-  final double width;
-  final double height;
+  CourseItem({required this.constraints, required this.courseInfo, isGirdView});
+  bool isGirdView = false;
   BoxConstraints constraints;
   CourseInfo courseInfo;
   late ColorNotifier notifier;
@@ -82,7 +81,7 @@ class CourseItem extends StatelessWidget{
                           courseInfo
                               .image!,
                           fit: BoxFit.cover,
-                          width: width * 2,
+                          width: constraints.maxWidth * 2,
                           // height: imageHeight * 2 / 4
                         ),
                       )
@@ -92,8 +91,8 @@ class CourseItem extends StatelessWidget{
                         child: Image.network(
                             'assets/deshboard/adventure/adventure5.png',
                             fit: BoxFit.cover,
-                            width: width,
-                            height: height),
+                            width: constraints.maxWidth,
+                            height: constraints.maxHeight),
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.min,

@@ -149,18 +149,14 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
             height: height / 45,
           ),
           Padding(
-            padding: EdgeInsets.only(
-                top: 10,
-                left: constraints.maxWidth < 760
-                    ? 10
-                    : constraints.maxWidth < 1000
-                    ? 0
-                    : constraints.maxWidth / 15,
-                right: constraints.maxWidth < 760
-                    ? 10
-                    : constraints.maxWidth < 1000
-                    ? 0
-                    : constraints.maxWidth / 15),
+            padding: EdgeInsets.symmetric(
+              horizontal: constraints.maxWidth < 760
+                  ? 10
+                  : constraints.maxWidth < 1000
+                  ? 0
+                  : constraints.maxWidth / 15,
+                vertical: 10,
+                ),
             child: SizedBox(
               width: width / 1,
               child: ClipRRect(
@@ -171,6 +167,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       constraints.maxWidth < 800
                           ? Image.asset('assets/deshboard/winterlandscape.png',
                           height: constraints.maxWidth < 500 ?250 : 400,
+                          width: constraints.maxWidth,
                           fit: BoxFit.cover)
                           : Image.asset('assets/deshboard/winterlandscape.png',
                           height: 600,
@@ -1108,14 +1105,14 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
           child: Column(
             children: [
               Text(L10nX.getStr.differences_in_teaching_methods,
-                  style: TextStyleConstant.textStyleBlack28w700.copyWith(
+                  style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
                     fontFamily: 'gilroysemi',
                     color: notifier.blackcolor, 
                     fontSize: constraints.maxWidth < 550 ? 28 : 45,),
                   textAlign: TextAlign.center),
               Text(
                   L10nX.getStr.we_are_different_because_we_understand_what_you_need,
-                style: TextStyleConstant.textStyleBlack14w400.copyWith(
+                style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
                     fontFamily: 'gilroysemi',
                     fontSize: constraints.maxWidth < 700 ? 18 : 20,
                     color: notifier.greycolor
@@ -1308,7 +1305,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
     return Column(
       children: [
         Text(L10nX.getStr.why_choose_us,
-            style: TextStyleConstant.textStyleBlack28w700.copyWith(
+            style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
                 fontFamily: 'gilroysemi',
                 fontSize: constraints.maxWidth < 550
                     ? 28
@@ -1318,7 +1315,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
             textAlign: TextAlign.center),
         Text(
           L10nX.getStr.why_choose_us_sub_title,
-          style: TextStyle(
+          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
               fontFamily: 'gilroysemi',
               fontSize: constraints.maxWidth < 700 ? 16 : 18,
               color: notifier.greycolor),

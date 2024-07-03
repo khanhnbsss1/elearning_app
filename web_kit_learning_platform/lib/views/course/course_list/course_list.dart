@@ -11,6 +11,7 @@ import 'package:webkit/services/apis/course/models/course_models.dart';
 import 'package:webkit/views/course/course_list/bloc/course_list_bloc.dart';
 import '../../../base/constant/dimens_constant.dart';
 import '../../../helpers/theme/app_style.dart';
+import '../../../helpers/widgets/course_item_grid_view.dart';
 import '../../../helpers/widgets/my_button.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text.dart';
@@ -44,7 +45,7 @@ class _CourseListState extends State<CourseList>
       child: BlocConsumer<CourseListBloc, CourseListState>(
         listener: (context, state) {
           switch (state.blocStatus) {
-            case CourseListStatus.initial:
+            case CourseStatus.initial:
               break;
             default:
               break;
@@ -52,45 +53,30 @@ class _CourseListState extends State<CourseList>
         },
         builder: (BuildContext context, state) {
           return Layout(
+            isScroll: false,
+              padding: EdgeInsets.only(top: 35 + 16,bottom:  16),
               child: GetBuilder(
             init: controller,
             builder: (controller) {
               double width = MediaQuery.of(context).size.width;
               double height = MediaQuery.of(context).size.height;
               List<Widget> listOfCourse = List.empty(growable: true);
-              double imageHeight = height / 1.2;
-              // width < 300
-              //     ? width / 1.32
-              //     : width < 550
-              //         ? width / 1.30
-              //         : width < 750
-              //             ? width / 1.26
-              //             : width < 900
-              //                 ? width / 1.22
-              //                 : width < 1100
-              //                     ? width / 2.85
-              //                     : width < 1300
-              //                         ? width / 5
-              //                         : width / 6.3;
-              double imageWidth = width / 1.2;
+              double heightItem = height / 1.2;
+              double widthItem = width / 1.2;
               // (kIsWeb ? width / 4 : width) > Dimens.size300
               //     ? (kIsWeb ? width / 4 : width)
               //     : Dimens.size300;
 
               BoxConstraints constraints = BoxConstraints(
-                maxWidth: imageWidth,
-                maxHeight: imageHeight,
+                maxWidth: widthItem,
+                maxHeight: heightItem,
               );
 
-              for (CourseInfo courseInfo
-                  in state.courseResponseModel?.data ?? []) {
-                listOfCourse.add(CourseItem(
+              for (CourseInfo courseInfo in state.courseResponseModel?.data ?? []) {
+                listOfCourse.add(CourseItemGridView(
                     constraints: constraints,
-                    courseInfo: courseInfo,
-                    width: imageWidth,
-                    height: imageHeight));
+                    courseInfo: courseInfo,));
               }
-              ;
               return Column(
                 children: [
                   Padding(
@@ -129,12 +115,12 @@ class _CourseListState extends State<CourseList>
                                     decoration: InputDecoration(
                                       labelText: "Name",
                                       labelStyle:
-                                          MyTextStyle.bodySmall(xMuted: true),
+                                      MyTextStyle.bodySmall(xMuted: true),
                                       border: outlineInputBorder,
                                       contentPadding: MySpacing.all(16),
                                       isCollapsed: true,
                                       floatingLabelBehavior:
-                                          FloatingLabelBehavior.never,
+                                      FloatingLabelBehavior.never,
                                     ),
                                   ),
                                   MySpacing.height(16),
@@ -149,12 +135,12 @@ class _CourseListState extends State<CourseList>
                                     decoration: InputDecoration(
                                       labelText: "Address",
                                       labelStyle:
-                                          MyTextStyle.bodySmall(xMuted: true),
+                                      MyTextStyle.bodySmall(xMuted: true),
                                       border: outlineInputBorder,
                                       contentPadding: MySpacing.all(16),
                                       isCollapsed: true,
                                       floatingLabelBehavior:
-                                          FloatingLabelBehavior.never,
+                                      FloatingLabelBehavior.never,
                                     ),
                                   ),
                                 ],
@@ -233,21 +219,23 @@ class _CourseListState extends State<CourseList>
                                 contentPadding: MySpacing.xy(16, 12),
                                 isCollapsed: true,
                                 floatingLabelBehavior:
-                                    FloatingLabelBehavior.never),
+                                FloatingLabelBehavior.never),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Center(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: listOfCourse,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: width < 750 ? 1 : width < 1200 ? 2 : width < 1500 ? 3 : 4),
+                        itemBuilder: (_, index) => listOfCourse[index],
+                        itemCount: state.courseResponseModel?.data?.length,
+                        shrinkWrap: true,
                       ),
                     ),
-                  ),
+                  )
                 ],
               );
             },

@@ -3980,6 +3980,136 @@ class S {
     );
   }
 
+  /// `Study at YAX Chinese learning platform, you will find "Speaking Chinese is as easy as eating candy`
+  String get who_this_course_is_for_comment {
+    return Intl.message(
+      'Study at YAX Chinese learning platform, you will find "Speaking Chinese is as easy as eating candy',
+      name: 'who_this_course_is_for_comment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chinese beginners`
+  String get who_this_course_is_for_table_title_1 {
+    return Intl.message(
+      'Chinese beginners',
+      name: 'who_this_course_is_for_table_title_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `People who want to learn communication, application`
+  String get who_this_course_is_for_table_title_2 {
+    return Intl.message(
+      'People who want to learn communication, application',
+      name: 'who_this_course_is_for_table_title_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `People who want to learn effectively but not hard`
+  String get who_this_course_is_for_table_title_3 {
+    return Intl.message(
+      'People who want to learn effectively but not hard',
+      name: 'who_this_course_is_for_table_title_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `People who like a positive learning environment, increasing motivation`
+  String get who_this_course_is_for_table_title_4 {
+    return Intl.message(
+      'People who like a positive learning environment, increasing motivation',
+      name: 'who_this_course_is_for_table_title_4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Acquaintances experiencing professional teaching services`
+  String get who_this_course_is_for_table_title_5 {
+    return Intl.message(
+      'Acquaintances experiencing professional teaching services',
+      name: 'who_this_course_is_for_table_title_5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For people who want to be sure to learn Chinese`
+  String get who_this_course_is_for_table_title_6 {
+    return Intl.message(
+      'For people who want to be sure to learn Chinese',
+      name: 'who_this_course_is_for_table_title_6',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `YAX Chinese learning platform has a full range of courses for beginners, those who have studied before but have not found a suitable way to study, and want to study at a higher level.`
+  String get who_this_course_is_for_table_content_1 {
+    return Intl.message(
+      'YAX Chinese learning platform has a full range of courses for beginners, those who have studied before but have not found a suitable way to study, and want to study at a higher level.',
+      name: 'who_this_course_is_for_table_content_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suitable for those who want to learn communication, learn quickly to apply to life and work without losing the essential linguistic element.`
+  String get who_this_course_is_for_table_content_2 {
+    return Intl.message(
+      'Suitable for those who want to learn communication, learn quickly to apply to life and work without losing the essential linguistic element.',
+      name: 'who_this_course_is_for_table_content_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suitable for those who are busy with work, have little time, and want a learning style suitable for working people instead of plowing like they did when they were students.`
+  String get who_this_course_is_for_table_content_3 {
+    return Intl.message(
+      'Suitable for those who are busy with work, have little time, and want a learning style suitable for working people instead of plowing like they did when they were students.',
+      name: 'who_this_course_is_for_table_content_3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `YAX Chinese learning platform is a place for learning without judgment, stimulating interest in learning through discovery, creating a sense of accomplishment, increasing motivation`
+  String get who_this_course_is_for_table_content_4 {
+    return Intl.message(
+      'YAX Chinese learning platform is a place for learning without judgment, stimulating interest in learning through discovery, creating a sense of accomplishment, increasing motivation',
+      name: 'who_this_course_is_for_table_content_4',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suitable for those who are used to professionalism and dedicated customer care; do not like lack of rules and guarantees.`
+  String get who_this_course_is_for_table_content_5 {
+    return Intl.message(
+      'Suitable for those who are used to professionalism and dedicated customer care; do not like lack of rules and guarantees.',
+      name: 'who_this_course_is_for_table_content_5',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suitable for those who value time and want to learn it all at once, without rambling on.`
+  String get who_this_course_is_for_table_content_6 {
+    return Intl.message(
+      'Suitable for those who value time and want to learn it all at once, without rambling on.',
+      name: 'who_this_course_is_for_table_content_6',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Manager page`
   String get auth_manager {
     return Intl.message(
