@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "app_name": MessageLookupByLibrary.simpleMessage("越爱学汉语学习平台"),
         "app_phone": MessageLookupByLibrary.simpleMessage("+33 455 67 89 00"),
         "appcept": MessageLookupByLibrary.simpleMessage("接受"),
+        "application": MessageLookupByLibrary.simpleMessage("应用"),
         "apps": MessageLookupByLibrary.simpleMessage("应用程序"),
         "are_you_ready_send_command":
             MessageLookupByLibrary.simpleMessage("您确定要发送命令吗？"),
@@ -60,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "basic_input": MessageLookupByLibrary.simpleMessage("基本输入"),
         "basic_table": MessageLookupByLibrary.simpleMessage("基本表格"),
         "basic_tables": MessageLookupByLibrary.simpleMessage("基本表格"),
+        "blog": MessageLookupByLibrary.simpleMessage("博客"),
         "border_type": MessageLookupByLibrary.simpleMessage("边框类型"),
         "bordered": MessageLookupByLibrary.simpleMessage("有边框"),
         "bordered_indicator":
@@ -78,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cards": MessageLookupByLibrary.simpleMessage("卡片"),
         "carousels": MessageLookupByLibrary.simpleMessage("Carousels"),
         "category": MessageLookupByLibrary.simpleMessage("类别"),
+        "change_log": MessageLookupByLibrary.simpleMessage("变更日志"),
         "change_password_text": MessageLookupByLibrary.simpleMessage("更改密码"),
         "charts": MessageLookupByLibrary.simpleMessage("图表"),
         "clear": MessageLookupByLibrary.simpleMessage("清除"),
@@ -86,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "code": MessageLookupByLibrary.simpleMessage("代码"),
         "color_variant": MessageLookupByLibrary.simpleMessage("颜色变体"),
         "column_chart": MessageLookupByLibrary.simpleMessage("柱形图"),
+        "company": MessageLookupByLibrary.simpleMessage("公司"),
         "comparison_of_calories": MessageLookupByLibrary.simpleMessage("卡路里对比"),
         "complete": MessageLookupByLibrary.simpleMessage("完成"),
         "composition_of_ocean_water":
@@ -93,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("确认"),
         "confirm_password": MessageLookupByLibrary.simpleMessage("确认密码"),
         "confirmation": MessageLookupByLibrary.simpleMessage("确认吗？"),
+        "contact": MessageLookupByLibrary.simpleMessage("联系"),
         "contact_us": MessageLookupByLibrary.simpleMessage("联系我们"),
         "copy_right":
             MessageLookupByLibrary.simpleMessage("FFTSolution - 版权所有 2022"),
@@ -104,6 +109,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "customers": MessageLookupByLibrary.simpleMessage("客户"),
         "danger": MessageLookupByLibrary.simpleMessage("危险"),
         "dark": MessageLookupByLibrary.simpleMessage("深色"),
+        "dark_theme": MessageLookupByLibrary.simpleMessage("深色主题"),
         "dashboard": MessageLookupByLibrary.simpleMessage("仪表板"),
         "date_of_birth": MessageLookupByLibrary.simpleMessage("出生日期"),
         "date_str": MessageLookupByLibrary.simpleMessage("日期"),
@@ -115,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "differences_in_teaching_methods":
             MessageLookupByLibrary.simpleMessage("教学方法的差异"),
         "doughnut_chart": MessageLookupByLibrary.simpleMessage("环形图"),
+        "download": MessageLookupByLibrary.simpleMessage("下载"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("电子商务"),
         "elevated_button": MessageLookupByLibrary.simpleMessage("凸起按钮"),
         "elevated_rounded_button":
@@ -128,6 +135,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("通过电子邮件向我们发送您的问题"),
         "enable_validation": MessageLookupByLibrary.simpleMessage("启用验证"),
         "english_text": MessageLookupByLibrary.simpleMessage("英语"),
+        "enter_your_email": MessageLookupByLibrary.simpleMessage("输入您的电子邮件"),
         "example_form": MessageLookupByLibrary.simpleMessage("示例表格"),
         "extra_pages": MessageLookupByLibrary.simpleMessage("额外页面"),
         "faqs": MessageLookupByLibrary.simpleMessage("常见问题"),
@@ -171,6 +179,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lesson_list": MessageLookupByLibrary.simpleMessage("课程列表"),
         "level_str": MessageLookupByLibrary.simpleMessage("级别"),
         "license_copyright": MessageLookupByLibrary.simpleMessage("许可和版权"),
+        "licensing": MessageLookupByLibrary.simpleMessage("许可"),
         "light": MessageLookupByLibrary.simpleMessage("浅色"),
         "literacy_rate": MessageLookupByLibrary.simpleMessage("识字率"),
         "loading_message": MessageLookupByLibrary.simpleMessage("正在处理，请稍候..."),
@@ -228,6 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("轮廓圆形按钮"),
         "outline_style": MessageLookupByLibrary.simpleMessage("大纲样式"),
         "output": MessageLookupByLibrary.simpleMessage("输出"),
+        "overview": MessageLookupByLibrary.simpleMessage("概述"),
         "pages": MessageLookupByLibrary.simpleMessage("页面"),
         "password": MessageLookupByLibrary.simpleMessage("密码"),
         "phone": MessageLookupByLibrary.simpleMessage("电话"),
@@ -239,6 +249,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "positions": MessageLookupByLibrary.simpleMessage("位置"),
         "prev": MessageLookupByLibrary.simpleMessage("上一个"),
         "price": MessageLookupByLibrary.simpleMessage("价格"),
+        "pricing": MessageLookupByLibrary.simpleMessage("定价"),
         "primary": MessageLookupByLibrary.simpleMessage("主要"),
         "product": MessageLookupByLibrary.simpleMessage("产品"),
         "product_a": MessageLookupByLibrary.simpleMessage("产品 a"),
@@ -250,6 +261,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "purchase_now": MessageLookupByLibrary.simpleMessage("立即购买"),
         "pyramid_chart": MessageLookupByLibrary.simpleMessage("金字塔图表"),
         "qty": MessageLookupByLibrary.simpleMessage("数量"),
+        "quick_links": MessageLookupByLibrary.simpleMessage("快速链接"),
         "radial_chart": MessageLookupByLibrary.simpleMessage("径向图chart"),
         "rating": MessageLookupByLibrary.simpleMessage("评分"),
         "re_create": MessageLookupByLibrary.simpleMessage("新建"),
@@ -267,6 +279,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("销售人员销售额"),
         "save": MessageLookupByLibrary.simpleMessage("保存"),
         "save_account": MessageLookupByLibrary.simpleMessage("保存帐户"),
+        "scan_code": MessageLookupByLibrary.simpleMessage("扫描代码"),
         "search": MessageLookupByLibrary.simpleMessage("搜索"),
         "secondary": MessageLookupByLibrary.simpleMessage("次要"),
         "security_text": MessageLookupByLibrary.simpleMessage("安全"),
@@ -274,6 +287,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "select_date_time": MessageLookupByLibrary.simpleMessage("选择日期和时间"),
         "select_range": MessageLookupByLibrary.simpleMessage("选择范围"),
         "select_time": MessageLookupByLibrary.simpleMessage("选择时间"),
+        "send": MessageLookupByLibrary.simpleMessage("发送"),
         "set_profile_to_private":
             MessageLookupByLibrary.simpleMessage("将个人资料设置为私人"),
         "shadow": MessageLookupByLibrary.simpleMessage("阴影"),
@@ -366,6 +380,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "string_time_setting": MessageLookupByLibrary.simpleMessage("时间设置"),
         "student_review_list_str":
             MessageLookupByLibrary.simpleMessage("学生怎么说"),
+        "style_guide": MessageLookupByLibrary.simpleMessage("样式指南"),
         "subcribe_to_our_news_letter":
             MessageLookupByLibrary.simpleMessage("订阅我们的新闻通讯"),
         "submit": MessageLookupByLibrary.simpleMessage("提交"),
@@ -428,6 +443,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "user_detail": MessageLookupByLibrary.simpleMessage("用户信息"),
         "user_name": MessageLookupByLibrary.simpleMessage("登录名"),
         "username": MessageLookupByLibrary.simpleMessage("用户名"),
+        "utilities": MessageLookupByLibrary.simpleMessage("工具"),
         "validation": MessageLookupByLibrary.simpleMessage("验证"),
         "validation_forms": MessageLookupByLibrary.simpleMessage("验证表单"),
         "validations": MessageLookupByLibrary.simpleMessage("验证"),

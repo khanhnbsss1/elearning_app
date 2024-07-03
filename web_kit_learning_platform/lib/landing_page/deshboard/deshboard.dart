@@ -168,11 +168,11 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                           ? Image.asset('assets/deshboard/winterlandscape.png',
                           height: constraints.maxWidth < 500 ?250 : 400,
                           width: constraints.maxWidth,
-                          fit: BoxFit.cover)
+                          fit: BoxFit.fill)
                           : Image.asset('assets/deshboard/winterlandscape.png',
                           height: 600,
                           width: constraints.maxWidth,
-                          fit: BoxFit.cover),
+                          fit: BoxFit.fill),
                   ],
                 ),
               ),
@@ -522,7 +522,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       ),
                       color: notifier.whitecolor,
                       child: Text(
-                        'Application',
+                        L10nX.getStr.application,
                         style: TextStyle(
                             color: supportHover
                                 ? notifier.blackcolor
@@ -544,7 +544,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                       .start,
                                   children: [
                                     const SizedBox(height: 20),
-                                    Text('Downloads', style: TextStyle(
+                                    Text(L10nX.getStr.download, style: TextStyle(
                                         fontSize: 16,
                                         color: notifier.subgreycolor,
                                         fontFamily: 'gilroysemi')),
@@ -572,7 +572,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       const SizedBox(height: 20),
-                                      Text('Scan Code', style: TextStyle(
+                                      Text(L10nX.getStr.scan_code, style: TextStyle(
                                           fontSize: 16,
                                           color: notifier.subgreycolor,
                                           fontFamily: 'gilroysemi')),
@@ -1274,6 +1274,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                     style:TextStyleConstant.textStyleBlack12w400.copyWith(
                       fontFamily: 'gilroysemi',
                       fontSize: constraints.maxWidth < 700 ? 16 : 18,
+                      color: notifier.blackcolor,
                     ),
                     textAlign: TextAlign.center,
                   maxLines: 3,

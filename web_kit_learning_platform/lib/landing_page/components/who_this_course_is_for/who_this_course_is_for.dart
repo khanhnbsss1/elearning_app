@@ -652,11 +652,8 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
               //   'assets/deshboard/avatar.png',
               //   height: width < 1100 ? width / 25 : width / 28,
               // ),
-              Icon(
-                Icons.lightbulb_outline,
-                size: width / 25,
-                color: Colors.yellow,
-              ),
+              Image.asset('assets/Icons/lightbulbicon.png',
+                  height: width/25, color: notifier.yellowcolor),
               const SizedBox(width: 15),
               Expanded(
                 child: Text(
@@ -686,8 +683,8 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
       width: width < 1000
           ? width / 4.5
           : width > 1600
-          ? width / 4.5
-          : width / 4.5,
+          ? width / 4.25
+          : width / 4.0,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
@@ -701,14 +698,11 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
             //   'assets/deshboard/avatar.png',
             //   height: width < 1100 ? width / 25 : width / 28,
             // ),
-            Icon(
-              Icons.lightbulb_outline,
-              size: width < 1100 ? width / 25 : width / 28,
-              color: Colors.yellow,
-            ),
+            Image.asset('assets/Icons/lightbulbicon.png',
+                height: width/25, color: notifier.yellowcolor),
             Expanded(
               child: Text(
-                'Học ở ${L10nX.getStr.app_name}, bạn sẽ thấy "Nói Tiếng Trung dễ như ăn kẹo"',
+                L10nX.getStr.who_this_course_is_for_comment,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(

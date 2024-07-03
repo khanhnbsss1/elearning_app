@@ -50,10 +50,10 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `YAX Chinese learning platform`
+  /// `YAX Chinese Learning`
   String get app_name {
     return Intl.message(
-      'YAX Chinese learning platform',
+      'YAX Chinese Learning',
       name: 'app_name',
       desc: '',
       args: [],
@@ -85,6 +85,166 @@ class S {
     return Intl.message(
       'Innovation St. 767,CA - USA',
       name: 'app_address',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Application`
+  String get application {
+    return Intl.message(
+      'Application',
+      name: 'application',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Download`
+  String get download {
+    return Intl.message(
+      'Download',
+      name: 'download',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan code`
+  String get scan_code {
+    return Intl.message(
+      'Scan code',
+      name: 'scan_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark theme`
+  String get dark_theme {
+    return Intl.message(
+      'Dark theme',
+      name: 'dark_theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `send`
+  String get send {
+    return Intl.message(
+      'send',
+      name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Overview`
+  String get overview {
+    return Intl.message(
+      'Overview',
+      name: 'overview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quick links`
+  String get quick_links {
+    return Intl.message(
+      'Quick links',
+      name: 'quick_links',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blog`
+  String get blog {
+    return Intl.message(
+      'Blog',
+      name: 'blog',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Company`
+  String get company {
+    return Intl.message(
+      'Company',
+      name: 'company',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pricing`
+  String get pricing {
+    return Intl.message(
+      'Pricing',
+      name: 'pricing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact`
+  String get contact {
+    return Intl.message(
+      'Contact',
+      name: 'contact',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Utilities`
+  String get utilities {
+    return Intl.message(
+      'Utilities',
+      name: 'utilities',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Style guide`
+  String get style_guide {
+    return Intl.message(
+      'Style guide',
+      name: 'style_guide',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Licensing`
+  String get licensing {
+    return Intl.message(
+      'Licensing',
+      name: 'licensing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change log`
+  String get change_log {
+    return Intl.message(
+      'Change log',
+      name: 'change_log',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your email`
+  String get enter_your_email {
+    return Intl.message(
+      'Enter your email',
+      name: 'enter_your_email',
       desc: '',
       args: [],
     );

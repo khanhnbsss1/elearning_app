@@ -61,18 +61,18 @@ class _EndOfPageState extends State<EndOfPage> {
   ];
 
   List endElements = [
-    'Overview',
-    'Quick links',
-    'Utilitises',
-    'Home',
-    'Blog',
-    'Style guide',
-    'Company',
-    'Contact',
-    'Licensing',
-    'Pricing',
+    L10nX.getStr.overview,
+    L10nX.getStr.quick_links,
+    L10nX.getStr.utilities,
+    L10nX.getStr.home,
+    L10nX.getStr.blog,
+    L10nX.getStr.style_guide,
+    L10nX.getStr.company,
+    L10nX.getStr.contact,
+    L10nX.getStr.licensing,
+    L10nX.getStr.pricing,
     '',
-    'Changelog',
+    L10nX.getStr.change_log,
     '',
     '',
     '404'
@@ -156,7 +156,7 @@ class _EndOfPageState extends State<EndOfPage> {
                             width: 7,
                           ),
                           Text(
-                            'Dark theme',
+                            L10nX.getStr.dark_theme,
                             style: TextStyle(
                                 fontFamily: 'gilroysemi',
                                 fontSize: constraints.maxWidth < 300 ? 12 : 14,
@@ -254,7 +254,7 @@ class _EndOfPageState extends State<EndOfPage> {
                                 width: 7,
                               ),
                               Text(
-                                'Dark theme',
+                                L10nX.getStr.dark_theme,
                                 style: TextStyle(
                                     fontFamily: 'gilroysemi',
                                     fontSize: 14,
@@ -350,14 +350,14 @@ class _EndOfPageState extends State<EndOfPage> {
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     alignment: Alignment.center,
-                                    child: const Text('Send',
+                                    child: Text(L10nX.getStr.send,
                                         style: TextStyle(
                                             fontFamily: 'gilroysemi',
                                             color: Colors.white,
                                             fontSize: 16)),
                                   ),
                                 ),
-                                hintText: 'Enter youe Email',
+                                hintText: L10nX.getStr.enter_your_email,
                                 hintStyle: TextStyle(
                                     fontFamily: 'gilroy',
                                     color: notifier.subgreycolor),
@@ -424,14 +424,14 @@ class _EndOfPageState extends State<EndOfPage> {
                             borderRadius: BorderRadius.circular(20),
                           ),
                           alignment: Alignment.center,
-                          child: const Text('Send',
+                          child: Text(L10nX.getStr.send,
                               style: TextStyle(
                                   fontFamily: 'gilroysemi',
                                   color: Colors.white,
                                   fontSize: 16)),
                         ),
                       ),
-                      hintText: 'Enter youe Email',
+                      hintText: L10nX.getStr.enter_your_email,
                       hintStyle: TextStyle(
                           fontFamily: 'gilroy', color: notifier.subgreycolor),
                     ),
