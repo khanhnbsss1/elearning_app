@@ -96,7 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "contact_us": MessageLookupByLibrary.simpleMessage("联系我们"),
         "copy_right":
             MessageLookupByLibrary.simpleMessage("FFTSolution - 版权所有 2022"),
-        "course_str": MessageLookupByLibrary.simpleMessage("Course"),
+        "course_str": MessageLookupByLibrary.simpleMessage("课程"),
         "courses_list": MessageLookupByLibrary.simpleMessage("课程列表"),
         "create_product": MessageLookupByLibrary.simpleMessage("创建产品"),
         "created_at": MessageLookupByLibrary.simpleMessage("创建时间"),
@@ -155,6 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("验证您的指纹以登录"),
         "home": MessageLookupByLibrary.simpleMessage("主页"),
         "i_agree_with": MessageLookupByLibrary.simpleMessage("我同意"),
+        "i_am_teacher": MessageLookupByLibrary.simpleMessage("我是一名老师"),
         "i_haven_t_account": MessageLookupByLibrary.simpleMessage("我还没有账户"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "infinite": MessageLookupByLibrary.simpleMessage("无限"),
@@ -176,6 +177,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loading_message": MessageLookupByLibrary.simpleMessage("正在处理，请稍候..."),
         "locked": MessageLookupByLibrary.simpleMessage("已锁定"),
         "login": MessageLookupByLibrary.simpleMessage("登录"),
+        "login_your_account": MessageLookupByLibrary.simpleMessage("登录您的帐户"),
         "map": MessageLookupByLibrary.simpleMessage("地图"),
         "medium": MessageLookupByLibrary.simpleMessage("中"),
         "medthod_content1": MessageLookupByLibrary.simpleMessage(
@@ -257,6 +259,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_now": MessageLookupByLibrary.simpleMessage("立即注册"),
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage("注册即可享受最优惠的价格"),
+        "remember_me": MessageLookupByLibrary.simpleMessage("记住我"),
         "reset_password": MessageLookupByLibrary.simpleMessage("重置密码"),
         "result": MessageLookupByLibrary.simpleMessage("结果"),
         "revenue": MessageLookupByLibrary.simpleMessage("收入"),
@@ -440,6 +443,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "we_are_different_because_we_understand_what_you_need":
             MessageLookupByLibrary.simpleMessage("我们与众不同，因为我们了解您的需求"),
         "website_visits": MessageLookupByLibrary.simpleMessage("网站访问量"),
+        "welcome_str": MessageLookupByLibrary.simpleMessage("欢迎来到"),
         "who_this_course_is_for":
             MessageLookupByLibrary.simpleMessage("本课程适合哪些人？"),
         "who_this_course_is_for_subtitle":
@@ -469,6 +473,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("您还没有帐户？"),
         "your_address": MessageLookupByLibrary.simpleMessage("您的地址"),
         "your_course": MessageLookupByLibrary.simpleMessage("你的课程"),
+        "your_email": MessageLookupByLibrary.simpleMessage("您的电子邮件"),
         "your_password_will_be_reset":
             MessageLookupByLibrary.simpleMessage("您的密码将被重置"),
         "your_registration_process_is_finished":

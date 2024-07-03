@@ -4,10 +4,16 @@ import 'package:webkit/base/base.export.dart';
 
 enum UserType{
   none,
-  DISTRIBUTOR, /// 1  admin
-  PARTNER,///2  doi tac
-  CUSTOMER, ///3  nguoi dung end user
+  Teacher,///giao vien
+  User, /// hoc vien
+  Admin, ///   admin
 }
+Map<UserType, String>userTypeToStr={
+  UserType.none:"None",
+  UserType.Teacher:"Teacher",
+  UserType.User:"User",
+  UserType.Admin:"Admin",
+};
 class UserProfile {
   int? id;
   String? fullName;

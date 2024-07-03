@@ -5,12 +5,13 @@ import 'package:webkit/controller/my_controller.dart';
 
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
 import 'package:webkit/helpers/widgets/my_validators.dart';
+import 'package:webkit/services/apis/auth/register/models/register_request.dart';
+import 'package:webkit/services/apis/auth/register/register_with_phone_api.dart';
 
 class RegisterController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
 
-  bool showPassword = false, loading = false;
-
+  bool showPassword = false, loading = false, isChecked = false;
   @override
   void onInit() {
     super.onInit();
@@ -19,6 +20,13 @@ class RegisterController extends MyController {
       required: true,
       label: "Email",
       validators: [MyEmailValidator()],
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'phone',
+      required: true,
+      label: "phone",
+      //validators: [MyEmailValidator()],
       controller: TextEditingController(),
     );
     basicValidator.addField(
@@ -41,18 +49,30 @@ class RegisterController extends MyController {
     );
   }
 
-  Future<void> onLogin() async {
+  void onChangeCheckBox(bool? value) {
+    isChecked = value ?? isChecked;
+    update();
+  }
+  Future<void> onRegister() async {
+    RegisterRequest registerRequest = RegisterRequest(
+      username: basicValidator.getController('phone')?.text,
+      password: basicValidator.getController('password')?.text,
+      email: basicValidator.getController('email')?.text,
+      fullname: "${basicValidator.getController('first_name')?.text} ${basicValidator.getController('last_name')?.text}",
+      userType: userTypeToStr[isChecked?UserType.Teacher: UserType.User]
+    );
+    RegisterWithPhoneApi registerWithPhoneApi = RegisterWithPhoneApi(registerRequest: registerRequest);
+    dynamic data= await registerWithPhoneApi.call();
     if (basicValidator.validateForm()) {
       loading = true;
       update();
-      var errors = null;
+      var errors;
       if (errors != null) {
         basicValidator.addErrors(errors);
         basicValidator.validateForm();
         basicValidator.clearErrors();
       }
       AppPages.routeName('/starter');
-
       loading = false;
       update();
     }

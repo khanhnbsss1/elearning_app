@@ -400,7 +400,12 @@
   "who_this_course_is_for_subtitle": "Hãy tìm nơi dành cho bạn!",
   "auth_manager": "Trang quản lý",
   "your_course": "Khóa học của bạn",
-  "course_str": "Khóa học"
+  "course_str": "Khóa học",
+  "welcome_str": "Chào mừng đến với",
+  "login_your_account": "Đăng nhập tài khoản của bạn",
+  "your_email": "Email của bạn",
+  "remember_me": "Nhớ tôi",
+  "i_am_teacher": "Tôi là giáo viên"
   
   
 }

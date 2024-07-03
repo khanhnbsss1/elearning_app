@@ -175,6 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Verify your fingerprint to log in"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "i_agree_with": MessageLookupByLibrary.simpleMessage("I agree with "),
+        "i_am_teacher": MessageLookupByLibrary.simpleMessage("I am a teacher"),
         "i_haven_t_account":
             MessageLookupByLibrary.simpleMessage("I haven\'t account"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
@@ -199,6 +200,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Processing, please wait..."),
         "locked": MessageLookupByLibrary.simpleMessage("Locked"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "login_your_account":
+            MessageLookupByLibrary.simpleMessage("Login your account"),
         "map": MessageLookupByLibrary.simpleMessage("Map"),
         "medium": MessageLookupByLibrary.simpleMessage("Medium"),
         "medthod_content1": MessageLookupByLibrary.simpleMessage(
@@ -296,6 +299,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage(
                 "Register to enjoy the best deals for you"),
+        "remember_me": MessageLookupByLibrary.simpleMessage("Remember Me"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Reset password"),
         "result": MessageLookupByLibrary.simpleMessage("Result"),
@@ -515,6 +519,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "We are different because we understand what you need"),
         "website_visits":
             MessageLookupByLibrary.simpleMessage("Website visits"),
+        "welcome_str": MessageLookupByLibrary.simpleMessage("Welcome to"),
         "who_this_course_is_for":
             MessageLookupByLibrary.simpleMessage("Who is this course for?"),
         "who_this_course_is_for_subtitle":
@@ -545,6 +550,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "You don\'t have an account yet?"),
         "your_address": MessageLookupByLibrary.simpleMessage("Your address"),
         "your_course": MessageLookupByLibrary.simpleMessage("Your course"),
+        "your_email": MessageLookupByLibrary.simpleMessage("Your Email"),
         "your_password_will_be_reset":
             MessageLookupByLibrary.simpleMessage("Your password will be reset"),
         "your_registration_process_is_finished":

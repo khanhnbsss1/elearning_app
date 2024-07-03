@@ -396,5 +396,10 @@
   "who_this_course_is_for_subtitle": "Find the place for you!",
   "auth_manager": "Manager page",
   "your_course": "Your course",
-  "course_str": "Course"
+  "course_str": "Course",
+  "welcome_str": "Welcome to",
+  "login_your_account": "Login your account",
+  "your_email": "Your Email",
+  "remember_me": "Remember Me",
+  "i_am_teacher": "I am a teacher"
 }

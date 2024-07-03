@@ -176,6 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Xác thực vân tay của bạn để đăng nhập"),
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
         "i_agree_with": MessageLookupByLibrary.simpleMessage("Tôi đồng ý với "),
+        "i_am_teacher":
+            MessageLookupByLibrary.simpleMessage("Tôi là giáo viên"),
         "i_haven_t_account":
             MessageLookupByLibrary.simpleMessage("Tôi chưa có tài khoản"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
@@ -203,6 +205,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đang xử lý, vui lòng chờ..."),
         "locked": MessageLookupByLibrary.simpleMessage("Đã khóa"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
+        "login_your_account":
+            MessageLookupByLibrary.simpleMessage("Đăng nhập tài khoản của bạn"),
         "map": MessageLookupByLibrary.simpleMessage("Biểu đồ"),
         "medium": MessageLookupByLibrary.simpleMessage("Trung bình"),
         "medthod_content1": MessageLookupByLibrary.simpleMessage(
@@ -301,6 +305,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage(
                 "Đăng ký để được hưởng những ưu đãi tốt nhất cho bạn"),
+        "remember_me": MessageLookupByLibrary.simpleMessage("Nhớ tôi"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "result": MessageLookupByLibrary.simpleMessage("Kết quả"),
@@ -514,6 +519,8 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Chúng tôi khác biệt vì hiểu thứ bạn cần"),
         "website_visits":
             MessageLookupByLibrary.simpleMessage("Lượt truy cập trang web"),
+        "welcome_str":
+            MessageLookupByLibrary.simpleMessage("Chào mừng đến với"),
         "who_this_course_is_for":
             MessageLookupByLibrary.simpleMessage("Khóa học này dành cho ai ?"),
         "who_this_course_is_for_subtitle":
@@ -545,6 +552,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bạn chưa có tài khoản?"),
         "your_address": MessageLookupByLibrary.simpleMessage("Địa chỉ của bạn"),
         "your_course": MessageLookupByLibrary.simpleMessage("Khóa học của bạn"),
+        "your_email": MessageLookupByLibrary.simpleMessage("Email của bạn"),
         "your_password_will_be_reset": MessageLookupByLibrary.simpleMessage(
             "Mật khẩu của bạn sẽ được đặt lại")
       };

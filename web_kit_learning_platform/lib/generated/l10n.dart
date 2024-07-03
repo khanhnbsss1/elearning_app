@@ -4009,6 +4009,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Welcome to`
+  String get welcome_str {
+    return Intl.message(
+      'Welcome to',
+      name: 'welcome_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login your account`
+  String get login_your_account {
+    return Intl.message(
+      'Login your account',
+      name: 'login_your_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your Email`
+  String get your_email {
+    return Intl.message(
+      'Your Email',
+      name: 'your_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remember Me`
+  String get remember_me {
+    return Intl.message(
+      'Remember Me',
+      name: 'remember_me',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I am a teacher`
+  String get i_am_teacher {
+    return Intl.message(
+      'I am a teacher',
+      name: 'i_am_teacher',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

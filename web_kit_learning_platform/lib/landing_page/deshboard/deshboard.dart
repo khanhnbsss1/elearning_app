@@ -458,21 +458,24 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                Row(
-                  children: [
-                    ImageManager().getPngImage(ImageManager.logo, height: constraints.maxWidth < 300 ? 20 : height / 22),
-                    const SizedBox(width: 5),
-                    Text(L10nX.getStr.app_name, style: TextStyle(
+            Expanded(
+              child: Row(
+                children: [
+                  ImageManager().getPngImage(ImageManager.logo, height: constraints.maxWidth < 300 ? 20 : height / 22),
+                  const SizedBox(width: 5),
+                  Expanded(
+                    child: Text(L10nX.getStr.app_name, 
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
                       fontFamily: 'gilroybold',
                       color: notifier.blackcolor,
                       fontSize: constraints.maxWidth < 300 ? 20 : 24,
                     ),
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
             Row(
               children: [

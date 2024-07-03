@@ -51,11 +51,6 @@ class AuthLayout extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: Stack(
           children: [
-/*            const Center(
-              child: Opacity(
-                  opacity: 0.8,
-                  child: BlurHash(hash: "LDLz?TMI00%N00I=M{%M00Rj~qRP")),
-            ),*/
             Container(
               margin: MySpacing.top(100),
               width: MediaQuery.of(context).size.width,

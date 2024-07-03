@@ -15,36 +15,52 @@ class DeviceManager {
     DeviceInfoModel? deviceInfoModel;
     if (kIsWeb) {
       WebBrowserInfo webBrowserInfo = await deviceInfo.webBrowserInfo;
-      deviceInfoModel = DeviceInfoModel(serialNumber: "", type: "Web");
+      deviceInfoModel = DeviceInfoModel(serialNumber: "", type: "Web", platform: "Web");
       print(webBrowserInfo);
     } else {
       if (Platform.isAndroid) {
         AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
         print("androidInfo ${androidInfo.toString()}");
-        deviceInfoModel = DeviceInfoModel(type: "Mobile", serialNumber: androidInfo.serialNumber);
+        deviceInfoModel = DeviceInfoModel(
+            type: "Mobile",
+            serialNumber: androidInfo.serialNumber,
+          platform: "Android"
+        );
 
       } else if (Platform.isIOS) {
         IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
         print("iosInfo ${iosInfo.toString()}");
-        deviceInfoModel = DeviceInfoModel(type: "Mobile", serialNumber: iosInfo.identifierForVendor);
+        deviceInfoModel = DeviceInfoModel(
+            type: "Mobile",
+            platform: "ios",
+            serialNumber: iosInfo.identifierForVendor);
 
 
       } else if (Platform.isLinux) {
         LinuxDeviceInfo linuxDeviceInfo = await deviceInfo.linuxInfo;
         print("linuxDeviceInfo ${linuxDeviceInfo.toString()}");
-        deviceInfoModel = DeviceInfoModel(type: "Desktop", serialNumber: linuxDeviceInfo.machineId);
+        deviceInfoModel = DeviceInfoModel(
+            type: "Desktop",
+            platform: "linux",
+            serialNumber: linuxDeviceInfo.machineId);
 
 
       } else if (Platform.isMacOS) {
         MacOsDeviceInfo macOsDeviceInfo = await deviceInfo.macOsInfo;
         print("macOsDeviceInfo ${macOsDeviceInfo.toString()}");
-        deviceInfoModel = DeviceInfoModel(type: "Desktop", serialNumber: macOsDeviceInfo.systemGUID);
+        deviceInfoModel = DeviceInfoModel(
+            type: "Desktop",
+            platform: "macOs",
+            serialNumber: macOsDeviceInfo.systemGUID);
 
 
       } else if (Platform.isWindows) {
         WindowsDeviceInfo windowsDeviceInfo = await deviceInfo.windowsInfo;
         print("windowsDeviceInfo ${windowsDeviceInfo.toString()}");
-        deviceInfoModel = DeviceInfoModel(type: "desktop", serialNumber: windowsDeviceInfo.deviceId);
+        deviceInfoModel = DeviceInfoModel(
+            type: "desktop",
+            platform: "windows",
+            serialNumber: windowsDeviceInfo.deviceId);
 
       }
     
@@ -55,18 +71,21 @@ class DeviceManager {
 class DeviceInfoModel {
   String? serialNumber;
   String? type;
+  String? platform;
 
-  DeviceInfoModel({this.serialNumber, this.type});
+  DeviceInfoModel({this.serialNumber, this.type, this.platform});
 
   DeviceInfoModel.fromJson(Map<String, dynamic> json) {
     serialNumber = json['SerialNumber'];
     type = json['Type'];
+    platform = json['platform'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['SerialNumber'] = serialNumber;
     data['Type'] = type;
+    data['platform'] = platform;
     return data;
   }
 }

@@ -2,6 +2,7 @@ part of 'course_list_bloc.dart';
 
 enum CourseListStatus {
   initial,
+  onLoading
 }
 
 @immutable

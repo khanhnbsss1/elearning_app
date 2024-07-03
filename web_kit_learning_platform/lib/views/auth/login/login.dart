@@ -19,6 +19,8 @@ import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/images.dart';
+import 'package:webkit/views/auth/forgot_password.dart';
+import 'package:webkit/views/auth/register.dart';
 import 'package:webkit/views/layouts/auth_layout.dart';
 
 class LoginPage extends StatefulWidget {
@@ -99,27 +101,26 @@ class _LoginPageState extends State<LoginPage>
                               children: [
                                 Center(
                                   child: MyText.titleLarge(
-                                    "Welcome",
+                                    "${L10nX.getStr.welcome_str} ${L10nX.getStr.app_name}",
                                     fontWeight: 600,
+                                    textAlign: TextAlign.center,
                                     fontSize: 24,
                                   ),
                                 ),
                                 Center(
                                   child: MyText.bodyMedium(
-                                    "Login your account",
+                                    L10nX.getStr.login_your_account,
                                     fontSize: 16,
                                   ),
                                 ),
                                 MySpacing.height(40),
                                 MyText.bodyMedium(
-                                  "Your Email",
+                                  L10nX.getStr.your_email
                                 ),
                                 MySpacing.height(8),
                                 TextFormField(
-                                  validator: controller.basicValidator
-                                      .getValidation('email'),
-                                  controller: controller.basicValidator
-                                      .getController('email'),
+                                  validator: controller.basicValidator.getValidation('email'),
+                                  controller: controller.basicValidator.getController('email'),
                                   keyboardType: TextInputType.emailAddress,
                                   decoration: InputDecoration(
                                       labelText: L10nX.getStr.type_email_or_phone_number,
@@ -185,13 +186,16 @@ class _LoginPageState extends State<LoginPage>
                                           ),
                                           MySpacing.width(16),
                                           MyText.bodyMedium(
-                                            "Remember Me",
+                                            L10nX.getStr.remember_me
                                           ),
                                         ],
                                       ),
                                     ),
                                     MyButton.text(
-                                      onTap: controller.goToForgotPassword,
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                        ForgotPassword().show(context);
+                                      },
                                       elevation: 0,
                                       padding: MySpacing.xy(8, 0),
                                       splashColor:
@@ -234,7 +238,10 @@ class _LoginPageState extends State<LoginPage>
                                 ),
                                 Center(
                                   child: MyButton.text(
-                                    onTap: controller.gotoRegister,
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                      Register().show(context);
+                                    },
                                     elevation: 0,
                                     padding: MySpacing.x(16),
                                     splashColor: contentTheme.secondary.withOpacity(0.1),

@@ -18,6 +18,8 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/images.dart';
 import 'package:webkit/views/layouts/auth_layout.dart';
 
+import 'login/login.dart';
+
 class Register extends StatefulWidget {
   const Register({super.key});
   void show(BuildContext context) {
@@ -88,15 +90,8 @@ class _RegisterState extends State<Register>
                         children: [
                           Center(
                               child: MyText.titleLarge(
-                                L10nX.getStr.register,
+                                L10nX.getStr.register_now,
                             fontWeight: 700,
-                          )),
-                          MySpacing.height(10),
-                          Center(
-                              child: MyText.bodySmall(
-                            "don't_have_an_account?_create_your_\naccount,_it_takes_less_than_a_minute"
-                                .tr(),
-                            muted: true,
                           )),
                           MySpacing.height(45),
                           Row(
@@ -116,7 +111,7 @@ class _RegisterState extends State<Register>
                                           .getController('first_name'),
                                       keyboardType: TextInputType.emailAddress,
                                       decoration: InputDecoration(
-                                        labelText: "First Name",
+                                        labelText: L10nX.getStr.first_name,
                                         labelStyle:
                                             MyTextStyle.bodySmall(xMuted: true),
                                         border: outlineInputBorder,
@@ -149,7 +144,7 @@ class _RegisterState extends State<Register>
                                           .getController('last_name'),
                                       keyboardType: TextInputType.emailAddress,
                                       decoration: InputDecoration(
-                                        labelText: "Last Name",
+                                        labelText: L10nX.getStr.last_name,
                                         labelStyle:
                                             MyTextStyle.bodySmall(xMuted: true),
                                         border: outlineInputBorder,
@@ -180,7 +175,7 @@ class _RegisterState extends State<Register>
                                 controller.basicValidator.getController('email'),
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                              labelText: "Email Address",
+                              labelText: L10nX.getStr.email_address,
                               labelStyle: MyTextStyle.bodySmall(xMuted: true),
                               border: outlineInputBorder,
                               prefixIcon: const Icon(
@@ -194,7 +189,29 @@ class _RegisterState extends State<Register>
                           ),
                           MySpacing.height(20),
                           MyText.labelMedium(
-                            L10nX.getStr.email_password.capitalizeWords,
+                            L10nX.getStr.phone.capitalizeWords,
+                          ),
+                          MySpacing.height(4),
+                          TextFormField(
+                            validator: controller.basicValidator.getValidation('phone'),
+                            controller: controller.basicValidator.getController('phone'),
+                            keyboardType: TextInputType.phone,
+                            decoration: InputDecoration(
+                              labelText: L10nX.getStr.phone,
+                              labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              prefixIcon: const Icon(
+                                LucideIcons.phone,
+                                size: 20,
+                              ),
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior: FloatingLabelBehavior.never,
+                            ),
+                          ),
+                          MySpacing.height(20),
+                          MyText.labelMedium(
+                            L10nX.getStr.password.capitalizeWords,
                           ),
                           MySpacing.height(4),
                           TextFormField(
@@ -205,7 +222,7 @@ class _RegisterState extends State<Register>
                             keyboardType: TextInputType.visiblePassword,
                             obscureText: !controller.showPassword,
                             decoration: InputDecoration(
-                                labelText: "Password",
+                                labelText: L10nX.getStr.password,
                                 labelStyle: MyTextStyle.bodySmall(xMuted: true),
                                 border: outlineInputBorder,
                                 prefixIcon: const Icon(
@@ -226,10 +243,32 @@ class _RegisterState extends State<Register>
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never),
                           ),
+                          MySpacing.height(20),
+                          InkWell(
+                            onTap: () => controller.onChangeCheckBox(!controller.isChecked),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Checkbox(
+                                  onChanged: controller.onChangeCheckBox,
+                                  value: controller.isChecked,
+                                  activeColor: theme.colorScheme.primary,
+                                  materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                                  visualDensity: getCompactDensity,
+                                ),
+                                MySpacing.width(16),
+                                MyText.bodyMedium(
+                                    L10nX.getStr.i_am_teacher
+                                ),
+                              ],
+                            ),
+                          ),
                           MySpacing.height(30),
+
                           Center(
                             child: MyButton.rounded(
-                              onTap: controller.onLogin,
+                              onTap: controller.onRegister,
                               elevation: 0,
                               padding: MySpacing.xy(20, 16),
                               backgroundColor: contentTheme.primary,
@@ -257,13 +296,15 @@ class _RegisterState extends State<Register>
                           ),
                           Center(
                             child: MyButton.text(
-                              onTap: controller.gotoLogin,
+                              onTap: () {
+                                Navigator.pop(context);
+                                LoginPage().show(context);
+                              },
                               elevation: 0,
                               padding: MySpacing.x(16),
-                              splashColor:
-                                  contentTheme.secondary.withOpacity(0.1),
+                              splashColor: contentTheme.secondary.withOpacity(0.1),
                               child: MyText.labelMedium(
-                                'already_have_account_?',
+                                L10nX.getStr.you_do_have_an_account,
                                 color: contentTheme.secondary,
                               ),
                             ),

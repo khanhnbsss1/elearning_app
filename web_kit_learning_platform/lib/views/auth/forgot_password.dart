@@ -18,9 +18,16 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/images.dart';
 import 'package:webkit/views/layouts/auth_layout.dart';
 
-class ForgotPassword extends StatefulWidget {
-  const ForgotPassword({Key? key}) : super(key: key);
+import 'login/login.dart';
 
+class ForgotPassword extends StatefulWidget {
+  const ForgotPassword({super.key});
+  void show(BuildContext context) {
+    showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (context) => this);
+  }
   @override
   State<ForgotPassword> createState() => _ForgotPasswordState();
 }
@@ -163,7 +170,10 @@ class _ForgotPasswordState extends State<ForgotPassword>
                                     ),
                                   ),
                                   MyButton.text(
-                                    onTap: controller.gotoLogIn,
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      LoginPage().show(context);
+                                    },
                                     elevation: 0,
                                     padding: MySpacing.x(16),
                                     splashColor:

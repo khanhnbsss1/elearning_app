@@ -398,5 +398,10 @@
   "type_email_or_phone_number":"输入电子邮件或电话号码",
   "auth_manager": "管理员页面",
   "your_course": "你的课程",
-  "course_str": "Course"
+  "course_str": "课程",
+  "welcome_str": "欢迎来到",
+  "login_your_account": "登录您的帐户",
+  "your_email": "您的电子邮件",
+  "remember_me": "记住我",
+  "i_am_teacher": "我是一名老师"
 }
