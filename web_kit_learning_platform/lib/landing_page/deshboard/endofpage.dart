@@ -6,6 +6,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/constant/dimens_constant.dart';
+import 'package:webkit/base/widgets/static_view/static_view.dart';
 
 import '../components/colornotifier.dart';
 import '../mediaquery/mq.dart';
@@ -230,7 +231,8 @@ class _EndOfPageState extends State<EndOfPage> {
                         children: [
                           Row(
                             children: [
-                              ImageManager().getPngImage(ImageManager.logo, height: Dimens.size35),
+                              StaticView.buildLogo(),
+                              //ImageManager().getPngImage(ImageManager.logo, height: Dimens.size35),
                               const SizedBox(width: 5),
                               Text(
                                 L10nX.getStr.app_name,

@@ -7,6 +7,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/constant/dimens_constant.dart';
+import 'package:webkit/base/widgets/static_view/static_view.dart';
 import 'package:webkit/helpers/localizations/language_helper.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
@@ -457,8 +459,9 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
           children: [
             Expanded(
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  ImageManager().getPngImage(ImageManager.logo, height: constraints.maxWidth < 300 ? 20 : height / 22),
+                  StaticView.buildLogo(),
                   const SizedBox(width: 5),
                   Expanded(
                     child: Text(L10nX.getStr.app_name, 
@@ -617,27 +620,29 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       color: notifier.whitecolor,
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Image.asset(
-                              'assets/Icons/langicon.png',
-                              height: height / 45,
-                              color: langHover
-                                  ? notifier.blackcolor
-                                  : notifier.subgreycolor,
-                            ),
-                            const SizedBox(
-                              width: 4,
-                            ),
-                            Text(L10nX.getStr.language_text, style: TextStyle(
+                        child: Center(
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Image.asset(
+                                'assets/Icons/langicon.png',
+                                height: height / 45,
                                 color: langHover
                                     ? notifier.blackcolor
                                     : notifier.subgreycolor,
-                                fontSize: 14,
-                                fontFamily: 'gilroysemi')),
-                          ],
+                              ),
+                              const SizedBox(
+                                width: 4,
+                              ),
+                              Text(L10nX.getStr.language_text, style: TextStyle(
+                                  color: langHover
+                                      ? notifier.blackcolor
+                                      : notifier.subgreycolor,
+                                  fontSize: 14,
+                                  fontFamily: 'gilroysemi')),
+                            ],
+                          ),
                         ),
                       ),
                       itemBuilder: (BuildContext context) =>
@@ -651,41 +656,36 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                               return Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(height: 25),
-                                        for(LanguageInfo language in LanguageHelper().supportedLanguages)
-                                          InkWell(
-                                            onTap: () {
-                                              LanguageHelper().changeLanguage(language, context);
-                                            },
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      for(LanguageInfo language in LanguageHelper().supportedLanguages)
+                                        InkWell(
+                                          onTap: () {
+                                            LanguageHelper().changeLanguage(language, context);
+                                          },
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(vertical: Dimens.size10, horizontal: Dimens.size8),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  children: [
-                                                    ClipRRect(
-                                                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                                                        borderRadius: BorderRadius.circular(2),
-                                                        child: Image.asset(
-                                                          "assets/lang/${language.languageCode}.png",
-                                                          width: 18,
-                                                          height: 14,
-                                                          fit: BoxFit.cover,
-                                                        )),
-                                                    MySpacing.width(8),
-                                                    MyText.labelMedium(language.language??"")
-                                                  ],
-                                                ),
-                                                const SizedBox(height: 20),
+                                                ClipRRect(
+                                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                                    borderRadius: BorderRadius.circular(2),
+                                                    child: Image.asset(
+                                                      "assets/lang/${language.languageCode}.png",
+                                                      width: 18,
+                                                      height: 14,
+                                                      fit: BoxFit.cover,
+                                                    )),
+                                                MySpacing.width(8),
+                                                MyText.labelMedium(language.language??"")
                                               ],
                                             ),
                                           ),
-                                      ],
-                                    ),
+                                        ),
+                                    ],
                                   ),
                                 ],
                               );
