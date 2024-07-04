@@ -3,6 +3,8 @@ import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/constant/dimens_constant.dart';
+import 'package:webkit/base/widgets/static_view/static_view.dart';
 import 'package:webkit/helpers/services/url_service.dart';
 import 'package:webkit/helpers/theme/app_style.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
@@ -61,8 +63,10 @@ class _LeftBarState extends State<LeftBar>
   @override
   Widget build(BuildContext context) {
     isCondensed = widget.isCondensed;
+    Color textColor = ColorConst.whiteColor;
     return MyCard(
       paddingAll: 0,
+      color: ColorConst.whiteColor,
       shadow: MyShadow(position: MyShadowPosition.centerRight, elevation: 0.2),
       child: AnimatedContainer(
         color: leftBarTheme.background,
@@ -72,40 +76,32 @@ class _LeftBarState extends State<LeftBar>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 70,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                      onTap: () {
-                        AppPages.routeName(Routes.dashboardRoute);
-                      },
-                      child: Image.asset(
-                        Images.logoIcon,
-                        height: widget.isCondensed ? 24 : 32,
-                        color: contentTheme.primary,
-                      )),
-                  if (!widget.isCondensed)
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: MySpacing.width(16),
-                    ),
-                  if (!widget.isCondensed)
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: MyText.labelLarge(
-                        "Webkit",
-                        style: GoogleFonts.raleway(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w800,
-                          color: theme.colorScheme.primary,
-                          letterSpacing: 1,
-                        ),
-                        maxLines: 1,
+            Padding(
+              padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
+              child: Center(
+                child: InkWell(
+                  onTap: () {
+                    AppPages.routeName(Routes.dashboardRoute);
+                  },
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        //height: Dimens.size30,
+                        width: Dimens.size40,
+                        child:  StaticView.buildLogo(),
                       ),
-                    )
-                ],
+                     
+                      const SizedBox(width: 5),
+                      Expanded(
+                        child: Text(L10nX.getStr.app_name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyleConstant.textStyleBlack18w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
             Expanded(
