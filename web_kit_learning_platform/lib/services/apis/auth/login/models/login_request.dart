@@ -3,14 +3,15 @@ class LoginRequest {
   String? password;
   String? serialNumber;
   String? type;
-
-  LoginRequest({this.username, this.password, this.serialNumber, this.type});
+  String? platform;
+  LoginRequest({this.username, this.password, this.serialNumber, this.type, this.platform});
 
   LoginRequest.fromJson(Map<String, dynamic> json) {
     username = json['Username'];
     password = json['Password'];
     serialNumber = json['SerialNumber'];
     type = json['Type'];
+    platform = json['platform'];
   }
 
   Map<String, dynamic> toJson() {
@@ -19,6 +20,7 @@ class LoginRequest {
     data['Password'] = password;
     data['SerialNumber'] = serialNumber;
     data['Type'] = type;
+    data['platform'] = platform;
     return data;
   }
 }

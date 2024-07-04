@@ -63,19 +63,17 @@ class RegisterController extends MyController {
     );
     RegisterWithPhoneApi registerWithPhoneApi = RegisterWithPhoneApi(registerRequest: registerRequest);
     dynamic data= await registerWithPhoneApi.call();
-    if (basicValidator.validateForm()) {
       loading = true;
       update();
-      var errors;
-      if (errors != null) {
-        basicValidator.addErrors(errors);
-        basicValidator.validateForm();
+      if (data != true) {
         basicValidator.clearErrors();
       }
-      AppPages.routeName('/starter');
+      else
+        {
+          AppPages.routeName(Routes.landingPageRoute);
+        }
       loading = false;
       update();
-    }
   }
 
   void onChangeShowPassword() {

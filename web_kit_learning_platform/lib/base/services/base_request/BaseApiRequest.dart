@@ -464,7 +464,7 @@ class BaseApiRequest {
         }
         await onRequestError(response.statusCode, response.statusMessage);
         return ResponseCommon(
-            errorCode: response.statusCode,
+            errorCode: response.statusCode.toString(),
             message: response.statusMessage,
             success: false,
             data:  null

@@ -42,16 +42,16 @@ class _LoginPageState extends State<LoginPage>
   @override
   void initState() {
     super.initState();
-    
+    loginController = LoginController();
+    loginController.initUser();
   }
 
   @override
   Widget build(BuildContext context) {
-    loginController = LoginController();
     return AuthLayout(
-      key: UniqueKey(),
+      //key: UniqueKey(),
       child: GetBuilder<LoginController>(
-        key: UniqueKey(),
+        //key: UniqueKey(),
         init: loginController,
         builder: (controller) {
           return AnimatedSwitcher(

@@ -21,14 +21,16 @@ class LoginController extends MyController {
   @override
   Future<void> onInit() async {
     super.onInit();
-    String userName=  await UserManager().getAccountLoginNearest();
+    initUser();
+  }
+  void initUser() {
+    String userName=  UserManager().getAccountLoginNearest();
     emailOrPhone = userName;
     basicValidator.addField('email',
         required: true,
         label: "Email",
         validators: [MyEmailValidator()],
         controller: TextEditingController(text: emailOrPhone));
-
     basicValidator.addField('password',
         required: true,
         label: "Password",
@@ -63,12 +65,11 @@ class LoginController extends MyController {
       }
       else
       {
-        basicValidator.validateForm();
         basicValidator.clearErrors();
-        ToastUtils.showToastError(S.of(Get.context!).email_or_pass_invalid);
+       
       }
-     // loading = false;
-     // update();
+    loading = false;
+    update();
   }
 
   void goToForgotPassword() {
@@ -78,4 +79,5 @@ class LoginController extends MyController {
   void gotoRegister() {
     AppPages.routeName('/auth/register');
   }
-}
+  
+  }

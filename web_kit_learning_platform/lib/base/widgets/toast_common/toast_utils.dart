@@ -21,7 +21,7 @@ class ToastUtils {
         msg: msg,
         toastLength: Toast.LENGTH_LONG,
         gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
+        timeInSecForIosWeb: 3,
         backgroundColor: ColorConst.blackColor,
        textColor: ColorConst.whiteColor,
         fontSize: 16.0);
@@ -53,13 +53,14 @@ class ToastUtils {
   static Future<bool?> showToastError(String msg,
       {
         ToastGravity position = ToastGravity.TOP,
-      Toast inTime = Toast.LENGTH_LONG
+      Toast inTime = Toast.LENGTH_LONG,
+        timeShow = 3
       }) {
     return Fluttertoast.showToast(
         msg: msg,
         toastLength: inTime,
         gravity: position,
-        timeInSecForIosWeb: 1,
+        timeInSecForIosWeb: timeShow,
         backgroundColor: Colors.red, textColor: ColorConst.whiteColor,
         fontSize: 16.0);
   }

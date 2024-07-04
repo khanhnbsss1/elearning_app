@@ -1,3 +1,4 @@
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/device/device_manager.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/base/services/base_request/EnumCommon.dart';
@@ -18,12 +19,18 @@ class RegisterWithPhoneApi extends BaseApiRequest {
   Future<dynamic> call() async {
     await getAuthorization();
     dynamic data = await postRequestAPI();
-   if(data!=null && data.runtimeType ==ResponseCommon && data.data !=null)
+    if(data.runtimeType == String && (data as String).isEmpty){
+      ToastUtils.showToastSuccess(L10nX.getStr.success);
+      return true;
+    }
+    else if(data!=null && data.runtimeType ==ResponseCommon )
      {
-       return true;
+           ToastUtils.showToastError(data.message??"");
+           return false;
      }
    else
      {
+       ToastUtils.showToastError(L10nX.getStr.authen_invalid);
        return false;
      }
   }

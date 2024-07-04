@@ -45,12 +45,12 @@ class UserManager{
   // Config account nearest
   Future<void> saveAccountLoginNearest(String account) async{
     // save account login nearest
-    SharedPre.saveDataString(SharedPre.accountNearest, account.toLowerCase().trim());
+    SharedPreferencesStorage().saveString(SharedPre.accountNearest, account.toLowerCase().trim());
   }
 
-  Future<String> getAccountLoginNearest() async{
+  String getAccountLoginNearest() {
     // get account login nearest
-    String account = await SharedPre.readDataString(SharedPre.accountNearest);
+    String account = SharedPreferencesStorage().getString(SharedPre.accountNearest);
     return account;
   }
   // Define a function that inserts dogs into the database

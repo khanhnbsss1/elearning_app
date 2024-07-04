@@ -23,25 +23,35 @@ class LoginWithPhoneApi extends BaseApiRequest {
   Future<dynamic> call() async {
     await getAuthorization();
     dynamic data = await postRequestAPI();
-   if(data!=null && data.runtimeType ==ResponseCommon && data.data !=null)
+   if(data!=null && data.runtimeType ==ResponseCommon)
      {
-       AuthInfo loginResponse = AuthInfo.fromJson(data.data);
-       await AuthorManager().handleLogout();
-       await AuthorManager().saveAuthInfo(loginResponse);
-       IdentifierConst.username = loginRequest.username??"";
-       GetUserProfileInfoApi getUserProfileInfoApi = GetUserProfileInfoApi();
-       try{
-         await getUserProfileInfoApi.call();
-       }
-       catch(e)
-       {
-         await AuthorManager().handleLogout();
-         return false;
-       }
-       return true;
+       if(data.data!=null)
+         {
+           AuthInfo loginResponse = AuthInfo.fromJson(data.data);
+           await AuthorManager().handleLogout();
+           await AuthorManager().saveAuthInfo(loginResponse);
+           IdentifierConst.username = loginRequest.username??"";
+           GetUserProfileInfoApi getUserProfileInfoApi = GetUserProfileInfoApi();
+           try{
+             await getUserProfileInfoApi.call();
+           }
+           catch(e)
+           {
+             await AuthorManager().handleLogout();
+             return false;
+           }
+           return true;
+         }
+       else
+         {
+           ToastUtils.showToastError(data.message??"");
+           return false;
+         }
+
      }
    else
      {
+       ToastUtils.showToastError(L10nX.getStr.email_or_pass_invalid);
        return false;
      }
   }
@@ -51,6 +61,7 @@ class LoginWithPhoneApi extends BaseApiRequest {
       {
         loginRequest.serialNumber = deviceInfoModel.serialNumber;
         loginRequest.type = deviceInfoModel.type;
+        loginRequest.platform = deviceInfoModel.platform;
         print("object");
         await setApiBody(loginRequest.toJson());
       }
