@@ -5,12 +5,12 @@ export 'color_extentions.dart';
 
 class ColorNightConst{
   static Color backGroundColor = Colors.black87;
-  static Color primaryColor = const Color(0xff9f0f0f);
+  static Color primaryColor = const Color(0xF4930202);
   static Color mainColor = primaryColor;
   static Color mainColorWithOpacity50 = mainColor.withOpacity(0.5);
-  static Color iconColor = const Color(0xff9f0f0f);
+  static Color iconColor = const Color(0xF4930202);
 
-  static Color buttonbgColor = const Color(0xffbcf6be);
+  static Color buttonbgColor = primaryColor;
   static Color homeBg =  const Color(0xffBDE3BF);
   static Color bgColor =  const Color(0xFF242A24);
   static Color bgColor2 =  Colors.white24;
@@ -77,13 +77,13 @@ class ColorNightConst{
       // TODO: Handle this case.
         {
           backGroundColor = Colors.black87;
-          primaryColor = const Color(0xff8DDB90);
+          primaryColor = const Color(0xF4930202);
           mainColor = primaryColor;
           mainColorWithOpacity50 = mainColor.withOpacity(0.5);
-          iconColor = const Color(0xff17721A);
+          iconColor = const Color(0xF4930202);
 
-          buttonbgColor = const Color(0xffbcf6be);
-          homeBg =  const Color(0xffBDE3BF);
+          buttonbgColor = primaryColor;
+          homeBg =  const Color(0xF4FFF4F4);
           bgColor =  const Color(0xFF242A24);
           bgColor2 =  Colors.white24;
 

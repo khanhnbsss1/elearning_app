@@ -4,7 +4,7 @@ import 'package:webkit/base/base.export.dart';
 export 'color_extentions.dart';
 class ColorLightConst{
   static Color backGroundColor =  const Color(0xffFFFFFF);
-  static Color primaryColor = const Color(0xff9f0f0f);
+  static Color primaryColor = const Color(0xF4930202);
   static Color mainColor = primaryColor;
   static Color mainColorWithOpacity50 = mainColor.withOpacity(0.5);
   static Color iconColor = primaryColor;
@@ -50,7 +50,7 @@ class ColorLightConst{
   
   static Color colorLinear1 = const Color(0xffb93838);
   static Color colorLinear2 = const Color(0xffad2121);
-  static Color colorLinear3 = const Color(0xff9f0f0f);
+  static Color colorLinear3 = const Color(0xF4930202);
 
   static Color mainColorForText =mainColor;
   static Color textColorSelectTabBar = const Color(0xffda4545);
@@ -76,15 +76,15 @@ class ColorLightConst{
       case FlavorType.webAdmin:
       // TODO: Handle this case.
         {
-          mainColor = const Color(0xff9f0f0f);
+          mainColor =  const Color(0xF4930202);
           whiteColor = Colors.white;
           blackColor = Colors.black;
           backGroundColor = const Color(0xFFFFFFFF);
           mainColorWithOpacity50 = const Color(0xffa84747); //mainColor.withOpacity(0.5);
-          buttonbgColor = const Color(0xfff5a1a1);
-          homeBg = const Color(0xfff5a1a1);
+          buttonbgColor = const Color(0xffffeeee);
+          homeBg = const Color(0xffffeeee);
           bgColor = const Color(0xFFF7FCF7);
-          buttonColor =  const Color(0xff9f0f0f);
+          buttonColor =  const Color(0xF4930202);
           textColor = Colors.black87;
           subtext = const Color(0xff545454);
           shadowColor = const Color(0xffE4EBE4);
@@ -94,11 +94,11 @@ class ColorLightConst{
           textColorOnMainButton =   Colors.black87;
           colorLinear1 = const Color(0xffb93838);
           colorLinear2 = const Color(0xffad2121);
-          colorLinear3 = const Color(0xff9f0f0f);
+          colorLinear3 = const Color(0xF4930202);
           
           yellowColor = Colors.amber;
           mainColorForText =mainColor;
-          textColorSelectTabBar = const Color(0xff9f0f0f);
+          textColorSelectTabBar = const Color(0xF4930202);
           backGroundColorUnSelectTabBar = const Color(0xfff5a1a1);
           colorIconGrays =  blackColor54;
           bgSettingButtonColor =  Colors.white;
