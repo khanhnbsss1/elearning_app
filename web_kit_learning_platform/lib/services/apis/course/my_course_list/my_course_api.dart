@@ -4,13 +4,14 @@ import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/base/services/base_request/EnumCommon.dart';
 import 'package:webkit/base/services/base_request/apiName.dart';
 
-import '../../../base/services/base_request/models/response_error_objects.dart';
-import 'models/course_models.dart';
+import '../../../../base/services/base_request/models/response_error_objects.dart';
+import '../course_list/models/course_models.dart';
+import 'models/my_course_models.dart';
 
-class CourseApi extends BaseApiRequest {
-  CourseApi():super(
+class MyCourseApi extends BaseApiRequest {
+  MyCourseApi():super(
     serviceType: SERVICE_TYPE.COURSE,
-    apiName: ApiName.getInstance().getCourseList,
+    apiName: ApiName.getInstance().getMyCourses,
   );
 
   Future<dynamic> call() async {
@@ -19,11 +20,11 @@ class CourseApi extends BaseApiRequest {
 
     if(result.runtimeType == ResponseCommon)
     {
-      return CourseResponseModel(data: []);
+      return MyCourseResponseModel(data: []);
     }
     else
     {
-      CourseResponseModel paymentHistoryResponseModel = CourseResponseModel.fromJsonList(result);
+      MyCourseResponseModel paymentHistoryResponseModel = MyCourseResponseModel.fromJsonList(result);
       return paymentHistoryResponseModel;
     }
   }

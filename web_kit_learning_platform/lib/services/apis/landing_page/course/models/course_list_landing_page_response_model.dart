@@ -1,5 +1,5 @@
 
-import 'package:webkit/services/apis/course/models/course_models.dart';
+import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 
 class CourseListResponseModel {
   List<CourseLandingPageInfo>? data;

@@ -309,8 +309,8 @@ class _ReviewListState extends State<ReviewList> {
       required ReviewListState state}) {
     return Container(
       width: (constraints.maxWidth < 550) ? MediaQuery.sizeOf(context).width/ 1.2
-          : (constraints.maxWidth < 750) ? MediaQuery.sizeOf(context).width/ 1.6
-          : (constraints.maxWidth < 900) ? MediaQuery.sizeOf(context).width/ 2
+          : (constraints.maxWidth < 750) ? MediaQuery.sizeOf(context).width/ 1.2
+          : (constraints.maxWidth < 1150) ? MediaQuery.sizeOf(context).width/ 1.2
           : MediaQuery.sizeOf(context).width/ 2.4,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -397,7 +397,7 @@ class _ReviewListState extends State<ReviewList> {
                             ],
                           ),
                           SizedBox(
-                            height: constraints.maxWidth < 550 ? 18 : 20,
+                            height: constraints.maxWidth < 550 ? 6 : 20,
                           ),
                           SizedBox(
                             height: (constraints.maxWidth < 550) ? Dimens.size50

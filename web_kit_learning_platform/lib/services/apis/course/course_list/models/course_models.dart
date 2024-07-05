@@ -47,6 +47,8 @@ class CourseInfo {
   String? updatedAt;
   int? ratePoint;
   String?introduction;
+  String? gradeName;
+  int? isStandard;
 
   CourseInfo(
       {this.id,
@@ -60,7 +62,9 @@ class CourseInfo {
         this.createdAt,
         this.updatedAt,
         this.introduction,
-        this.ratePoint,});
+        this.ratePoint,
+        this.gradeName,
+        this.isStandard});
   CourseInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
@@ -74,6 +78,8 @@ class CourseInfo {
     updatedAt = json['updated_at'];
     ratePoint = json['rate_point'];
     introduction = json['introduction'];
+    gradeName = json['grade_name'];
+    isStandard = json['is_standard'];
   }
 
   Map<String, dynamic> toJson() {
@@ -90,7 +96,8 @@ class CourseInfo {
     data['updated_at'] = updatedAt;
     data['rate_point'] = ratePoint;
     data['introduction'] = introduction;
-
+    data['grade_name'] = gradeName;
+    data['is_standard'] = isStandard;
     return data;
   }
 }

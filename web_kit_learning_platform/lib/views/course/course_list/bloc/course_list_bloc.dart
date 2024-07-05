@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:webkit/services/apis/course/course_api.dart';
-import 'package:webkit/services/apis/course/models/course_models.dart';
+import 'package:webkit/services/apis/course/course_list/course_api.dart';
+import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import 'package:webkit/services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
 
 part 'course_list_event.dart';

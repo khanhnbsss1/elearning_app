@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+import 'package:universal_html/html.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
+import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
 import 'package:webkit/services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
-
-import '../../services/apis/course/models/course_models.dart';
+import '../../services/apis/course/course_list/models/course_models.dart';
 
 class CourseItem extends StatelessWidget{
   CourseItem({required this.constraints, required this.courseInfo, isGirdView});
@@ -47,11 +48,12 @@ class CourseItem extends StatelessWidget{
               ),
               width: constraints.maxWidth / (3 + 0.3),
               // width: constraints.maxWidth / (state.courseListLandingPageResponseModel!.data!.length + 0.2),
-              height: (constraints.maxWidth < 1300) ? constraints.maxWidth / 1.5
-                  : constraints.maxWidth / 1.8,
+              height: (constraints.maxWidth < 1300) ? constraints.maxWidth / 1
+                  : constraints.maxWidth / 3,
               constraints: BoxConstraints(
                 minHeight: 750,
-                minWidth: 350,
+                maxHeight: (constraints.maxWidth < 1300) ? 850 : 750,
+                minWidth: constraints.maxWidth < 576 ? constraints.maxWidth - 8 : 350,
               ),
               clipBehavior: Clip.hardEdge,
               // margin: EdgeInsets.all(Dimens.size16),
@@ -118,8 +120,8 @@ class CourseItem extends StatelessWidget{
                                     fontWeight:
                                     FontWeight.bold,
                                     fontSize:
-                                    (constraints.maxWidth < 900) ? Dimens.size28
-                                        : (constraints.maxWidth < 1300) ? Dimens.size32
+                                    (constraints.maxWidth < 900) ? Dimens.size20
+                                        : (constraints.maxWidth < 1100) ? Dimens.size24
                                         : Dimens.size36,
                                     color: Colors.red),
                                 textAlign: TextAlign.center,
@@ -127,22 +129,22 @@ class CourseItem extends StatelessWidget{
                               ),
                             ],
                           ),
-                          Gap(Dimens.size16),
+                          (constraints.maxWidth < 1100) ? Gap(Dimens.size4) :Gap(Dimens.size16),
                           Container(
                             height: 96,
                             alignment: Alignment.center,
                             child: Text(
                               '${courseInfo.introduction} \n  \n \n \n!' ??
                                   "",
-                              maxLines: (constraints.maxWidth < 1300) ? 4 : 10,
+                              maxLines: (constraints.maxWidth < 1100) ? 2 : 10,
                               overflow:
                               TextOverflow.ellipsis,
                               style: TextStyleConstant
                                   .textStyleBlack16w400
                                   .copyWith(
                                 fontFamily: 'gilroybold',
-                                fontSize: (constraints.maxWidth < 900) ? Dimens.size14
-                                    : (constraints.maxWidth < 1300) ? Dimens.size16
+                                fontSize: (constraints.maxWidth < 900) ? Dimens.size12
+                                    : (constraints.maxWidth < 1100) ? Dimens.size14
                                     : Dimens.size20,
                                 color: notifier.isDark &&
                                     isHovered
@@ -177,7 +179,8 @@ class CourseItem extends StatelessWidget{
                                 Column(
                                   children: [
                                     Icon(Icons.check,
-                                        size: Dimens.size24,
+                                        size: (constraints.maxWidth < 1100) ? Dimens.size16
+                                            :Dimens.size24,
                                         color: Colors.red),
                                   ],
                                 ),
@@ -192,7 +195,8 @@ class CourseItem extends StatelessWidget{
                                               .copyWith(
                                             fontFamily:
                                             'gilroybold',
-                                            fontSize: Dimens
+                                            fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
+                                                :Dimens
                                                 .size20,
                                             color: notifier
                                                 .isDark &&
@@ -219,8 +223,8 @@ class CourseItem extends StatelessWidget{
                                           .copyWith(
                                         fontFamily:
                                         'gilroybold',
-                                        fontSize:
-                                        Dimens.size20,
+                                        fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
+                                            : Dimens.size20,
                                         color: notifier
                                             .isDark &&
                                             isHovered
@@ -258,7 +262,8 @@ class CourseItem extends StatelessWidget{
                                 Column(
                                   children: [
                                     Icon(Icons.check,
-                                        size: Dimens.size24,
+                                        size: (constraints.maxWidth < 1100) ? Dimens.size16
+                                            :Dimens.size24,
                                         color: Colors.red),
                                   ],
                                 ),
@@ -273,8 +278,8 @@ class CourseItem extends StatelessWidget{
                                               .copyWith(
                                             fontFamily:
                                             'gilroybold',
-                                            fontSize: Dimens
-                                                .size20,
+                                            fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
+                                                :Dimens.size20,
                                             color: notifier
                                                 .isDark &&
                                                 isHovered
@@ -300,8 +305,8 @@ class CourseItem extends StatelessWidget{
                                           .copyWith(
                                         fontFamily:
                                         'gilroybold',
-                                        fontSize:
-                                        Dimens.size20,
+                                        fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
+                                            : Dimens.size20,
                                         color: notifier
                                             .isDark &&
                                             isHovered
@@ -446,7 +451,8 @@ class CourseItem extends StatelessWidget{
                       Spacer(),
                       Padding(
                         padding:
-                        EdgeInsets.all(Dimens.size16),
+                        EdgeInsets.all((constraints.maxWidth < 1100) ? Dimens.size4
+                            :Dimens.size16),
                         child: Center(
                           child: ActionButton1(
                             onTap: () {},

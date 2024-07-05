@@ -6,10 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/landing_page/mediaquery/mq.dart';
-import 'package:webkit/services/apis/course/models/course_models.dart';
 import 'package:webkit/services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
 import 'package:webkit/helpers/widgets/course_item.dart';
 
+import '../../../services/apis/course/course_list/models/course_models.dart';
 import '../colornotifier.dart';
 import 'bloc/landing_page_course_list_bloc.dart';
 

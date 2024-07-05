@@ -20,6 +20,7 @@ class WhoThisCourseIsFor extends StatefulWidget {
 
 class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
   late ColorNotifier notifier;
+  final double splitScreenWidth = 1050;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +47,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
       ),
       LayoutBuilder(
         builder: (context, constraints) {
-          return (width > 900)
+          return (width > splitScreenWidth)
               ? buildWhoThisCourseIsFor(constraints: constraints)
               : Column(
                   children: [
@@ -76,19 +77,19 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                       ? notifier.sugestionbutton
                       : Colors.transparent)),
           child: Padding(
-            padding: EdgeInsets.all(width < 900 ? 20 : 40),
+            padding: EdgeInsets.all(width < 1050 ? 16 : 40),
             child: Stack(
               children: [
                 Row(
                   children: [
-                    (width > 900)
+                    (width > splitScreenWidth)
                         ? Flexible(
                             flex: 4,
                             child: Image.asset(
                               'assets/deshboard/prof/prof4.png',
                               fit: BoxFit.fill,
                               width: width * 0.45,
-                              height:width * 0.45,
+                              height:width * 0.4,
                             ),
                           )
                         : SizedBox(),
@@ -605,7 +606,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                     ),
                   ],
                 ),
-                (constraints.maxWidth > 900)
+                (constraints.maxWidth > splitScreenWidth)
                     ? Positioned(
                         top: width < 1100 ? height / 2.1 : height / 1.6,
                         left: width < 900
@@ -626,7 +627,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
   }
 
   Widget avatarAndComment() {
-    return (width < 900) ? Column(
+    return (width < splitScreenWidth) ? Column(
         children: [
       Image.asset(
         'assets/deshboard/prof/prof4.png',
