@@ -58,16 +58,6 @@ class _MyCourseListState extends State<MyCourseList>
                   double width = MediaQuery.of(context).size.width;
                   double height = MediaQuery.of(context).size.height;
                   List<Widget> listOfCourse = List.empty(growable: true);
-                  double heightItem = height / 1.2;
-                  double widthItem = width / 1.2;
-                  // (kIsWeb ? width / 4 : width) > Dimens.size300
-                  //     ? (kIsWeb ? width / 4 : width)
-                  //     : Dimens.size300;
-
-                  BoxConstraints constraints = BoxConstraints(
-                    maxWidth: widthItem,
-                    maxHeight: heightItem,
-                  );
 
                   for (CourseInfo courseInfo in state.myCourseResponseModel?.data ?? []) {
                     listOfCourse.add(CourseItemGridView(
