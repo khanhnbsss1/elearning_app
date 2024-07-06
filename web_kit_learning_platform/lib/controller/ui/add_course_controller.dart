@@ -13,6 +13,7 @@ class AddCourseController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
 
   bool showPassword = false, loading = false, isChecked = false;
+  // List<TextEditingController> lectureControllers = [];
 
   @override
   void onInit() {
@@ -20,14 +21,12 @@ class AddCourseController extends MyController {
     basicValidator.addField(
       'id',
       label: "id",
-      validators: [MyEmailValidator()],
       controller: TextEditingController(),
     );
     basicValidator.addField(
       'name',
       required: true,
       label: "name",
-      //validators: [MyEmailValidator()],
       controller: TextEditingController(),
     );
     basicValidator.addField(
@@ -43,7 +42,6 @@ class AddCourseController extends MyController {
     basicValidator.addField(
       'total_subjects',
       label: 'Total subjects',
-      validators: [MyLengthValidator(min: 6, max: 10)],
       controller: TextEditingController(),
     );
     basicValidator.addField(
@@ -125,6 +123,27 @@ class AddCourseController extends MyController {
       label: 'Is active',
       controller: TextEditingController(),
     );
+
+    // basicValidator.addField(
+    //   'sub_name',
+    //   label: 'Subject name',
+    //   controller: lectureControllers[0],
+    // );
+    // basicValidator.addField(
+    //   'lecture_name',
+    //   label: 'Lecture name',
+    //   controller: lectureControllers[0],
+    // );
+    // basicValidator.addField(
+    //   'lecture_link',
+    //   label: 'Lecture link',
+    //   controller: lectureControllers[0],
+    // );
+    // basicValidator.addField(
+    //   'lecture_mode',
+    //   label: 'Lecture mode',
+    //   controller: lectureControllers[0],
+    // );
   }
 
   void onChangeCheckBox(bool? value) {
@@ -133,6 +152,15 @@ class AddCourseController extends MyController {
   }
 
   Future<void> onAddCourse() async {
+    // List<Lectures> lectures = [];
+    // for (int i = 0; i < lectureControllers.length; i++) {
+    //   lectures.add(Lectures(
+    //     subName: basicValidator.getController('lecture_name_$i')?.text,
+    //     lectureName: basicValidator.getController('lecture_name_$i')?.text,
+    //     lectureLink: basicValidator.getController('lecture_link_$i')?.text,
+    //     lectureMode: basicValidator.getController('lecture_mode_$i')?.text,
+    //   ));
+    // }
     AddCourseRequest addCourseRequest = AddCourseRequest(
       id: basicValidator.getController('id')?.hashCode,
       name: basicValidator.getController('name')!.text,
@@ -159,6 +187,7 @@ class AddCourseController extends MyController {
       infoObj: basicValidator.getController('info_obj')?.text,
       infoResult: basicValidator.getController('info_result')?.text,
       isActive: basicValidator.getController('is_active')?.hashCode,
+      // lectures: lectures,
     );
   }
 }

@@ -71,7 +71,7 @@ class _MyCourseListState extends State<MyCourseList>
 
                   for (CourseInfo courseInfo in state.myCourseResponseModel?.data ?? []) {
                     listOfCourse.add(CourseItemGridView(
-                      courseInfo: courseInfo, width: 350, height: 500,));
+                      courseInfo: courseInfo));
                   }
                   return Column(
                     children: [

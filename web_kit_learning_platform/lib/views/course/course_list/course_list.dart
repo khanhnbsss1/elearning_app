@@ -74,8 +74,7 @@ class _CourseListState extends State<CourseList>
                   for (CourseInfo courseInfo
                       in state.courseResponseModel?.data ?? []) {
                     listOfCourse.add(CourseItemGridView(
-                      courseInfo: courseInfo, width: ((width - 350)/ gridViewItemRowCount), height: 350,
-                    ));
+                      courseInfo: courseInfo,));
                   }
                   return Column(
                     children: [
@@ -139,38 +138,38 @@ class _CourseListState extends State<CourseList>
                           ],
                         ),
                       ),
-                      // Expanded(
-                      //   child: Padding(
-                      //     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      //     child: GridView.builder(
-                      //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: width < 550 ? 1 :width < 1150 ? 3 : 4, crossAxisSpacing: 16, mainAxisSpacing: 16, childAspectRatio: 5/6),
-                      //       itemBuilder: (_, index) => listOfCourse[index],
-                      //       itemCount: state.courseResponseModel?.data?.length,
-                      //       // shrinkWrap: true,
-                      //     ),
-                      //   ),
-                      // )
                       Expanded(
                         child: Padding(
-                          padding: EdgeInsets.all(16),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: Column(
-                              children: [
-                                for (int i = 0; i < gridViewItemColumnCount; i += 1)
-                                  Row(
-                                    children: [
-                                      for (int j = 0; j < gridViewItemRowCount; j++)
-                                        if (i * 4 + j < state.courseResponseModel!.data!.length)
-                                          listOfCourse[i*4+j]
-                                      else SizedBox(),
-                                    ],
-                                  ),
-                              ],
-                            ),
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: GridView.builder(
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: width < 550 ? 1 :width < 1150 ? 3 : 4, crossAxisSpacing: 16, mainAxisSpacing: 16, childAspectRatio: 5/6),
+                            itemBuilder: (_, index) => listOfCourse[index],
+                            itemCount: state.courseResponseModel?.data?.length,
+                            // shrinkWrap: true,
                           ),
                         ),
                       )
+                      // Expanded(
+                      //   child: Padding(
+                      //     padding: EdgeInsets.all(16),
+                      //     child: SingleChildScrollView(
+                      //       scrollDirection: Axis.vertical,
+                      //       child: Column(
+                      //         children: [
+                      //           for (int i = 0; i < gridViewItemColumnCount; i += 1)
+                      //             Row(
+                      //               children: [
+                      //                 for (int j = 0; j < gridViewItemRowCount; j++)
+                      //                   if (i * 4 + j < state.courseResponseModel!.data!.length)
+                      //                     listOfCourse[i*4+j]
+                      //                 else SizedBox(),
+                      //               ],
+                      //             ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ),
+                      // )
                     ],
                   );
                 },

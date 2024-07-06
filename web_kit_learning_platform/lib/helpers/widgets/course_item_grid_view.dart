@@ -16,16 +16,15 @@ import 'package:webkit/views/layouts/left_bar.dart';
 import '../../services/apis/course/course_list/models/course_models.dart';
 
 class CourseItemGridView extends StatelessWidget {
-  final double width;
-  final double height;
   CourseItemGridView({
-    required this.courseInfo, required this.width, required this.height,
+    required this.courseInfo,
   });
 
   CourseInfo courseInfo;
   late ColorNotifier notifier;
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width - 254;
     notifier = Provider.of<ColorNotifier>(context, listen: true);
     return OnHoverWidget(
       builder: (isHovered) {
@@ -38,8 +37,6 @@ class CourseItemGridView extends StatelessWidget {
               : notifier.whitecolor,
           elevation: 5,
           child: Container(
-            width: width,
-            height: height,
             decoration: BoxDecoration(
               color: isHovered && !notifier.isDark
                   // ? Color.fromRGBO(255, 243, 94, 1.0)
@@ -91,8 +88,8 @@ class CourseItemGridView extends StatelessWidget {
                             .textStyleBlack16w600
                             .copyWith(
                             fontWeight: FontWeight.bold,
-                            fontSize:
-                             Dimens.size24,
+                            // fontSize: Dimens.size24,
+                            fontSize: width < 550 ? width/1.5 : width < 800 ? width/60 :width < 1150 ? width/50 : width/60,
                             color: Color.fromRGBO(163, 20, 19, 1.0)),
                         maxLines: 2,
                       ),
@@ -105,8 +102,8 @@ class CourseItemGridView extends StatelessWidget {
                             .copyWith(
                           fontWeight: FontWeight.w100,
                           fontFamily: 'gilroybold',
-                          fontSize:
-                           Dimens.size18,
+                          // fontSize: Dimens.size18,
+                          fontSize: width < 550 ? width/1.5 :width < 800 ? width/80 : width < 1150 ? width/75 : width/80,
                           color: notifier.subgreycolor,
                         ),
                       ),
@@ -123,10 +120,8 @@ class CourseItemGridView extends StatelessWidget {
                           Text('${courseInfo.totalLectures} bài giảng - ${courseInfo.gradeName} - ${(courseInfo.isStandard == 1) ? 'Chính quy' : 'Không chính quy'} ',
                           style: TextStyle(
                             fontFamily: 'gilroybold',
-                            fontSize:
-
-                                Dimens.size16,
-
+                            // fontSize: Dimens.size16,
+                            fontSize: width < 550 ? width/1.5 :width < 800 ? width/75 :width < 1150 ? width/70 : width/75,
                             color: notifier.subgreycolor,
                           ),),
                           Spacer(),
@@ -176,7 +171,8 @@ class CourseItemGridView extends StatelessWidget {
                               StarRating(
                                 rating: (courseInfo.ratePoint ?? 0)
                                     .toDouble(),
-                                size: Dimens.size24,
+                                // size: Dimens.size24,
+                                size: width < 550 ? width/1.5 :width < 800 ? width/70 :width < 1150 ? width/65 : width/70,
                                 allowHalfRating: true,
                                 onRatingChanged: (rating) {},
                               ),
@@ -192,7 +188,8 @@ class CourseItemGridView extends StatelessWidget {
                                     : notifier.isDark && !isHovered
                                     ? notifier.blackcolor
                                     : notifier.blackcolor,
-                                size: Dimens.size24 ,
+                                // size: Dimens.size24 ,
+                                size: width < 550 ? width/1.5 :width < 800 ? width/70 :width < 1150 ? width/65 : width/70,
                               ),
                               Text(
                                   NumberHelper()
@@ -207,8 +204,9 @@ class CourseItemGridView extends StatelessWidget {
                                         : notifier.isDark && !isHovered
                                         ? notifier.blackcolor
                                         : notifier.blackcolor,
-                                    fontSize: Dimens.size18,
-                                    fontWeight: FontWeight.bold
+                                    // fontSize: Dimens.size18,
+                                      fontSize: width < 550 ? width/1.5 :width < 800 ? width/70 :width < 1150 ? width/65 : width/70,
+                                      fontWeight: FontWeight.bold
                                   )),
                               Text(" ${L10nX.getStr.vnd_str}",
                                   style: TextStyleConstant
@@ -221,7 +219,8 @@ class CourseItemGridView extends StatelessWidget {
                                           !isHovered
                                           ? notifier.blackcolor
                                           : notifier.blackcolor,
-                                    fontSize: Dimens.size18,
+                                    // fontSize: Dimens.size18,
+                                    fontSize: width < 550 ? width/1.5 :width < 800 ? width/70 :width < 1150 ? width/65 : width/70,
                                   )),
                             ],
                           ),
