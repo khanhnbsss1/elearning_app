@@ -8,7 +8,6 @@ class DioClient{
   static final DioClient _singletonDioClient = DioClient._internal();
   static DioClient get getInstance => _singletonDioClient;
   factory DioClient() {
-    //HttpOverrides.global = MyHttpOverrides();
     return _singletonDioClient;
   }
   DioClient._internal();
@@ -27,7 +26,7 @@ class DioClient{
       InterceptorsWrapper(
         onRequest: (options, handler) async {
           // Add the access token to the request header
-          AuthInfo? authInfo = await AuthorManager().getAuthInfo();
+          AuthInfo? authInfo = AuthorManager().getAuthInfo();
 
           if(authInfo!=null)
           {

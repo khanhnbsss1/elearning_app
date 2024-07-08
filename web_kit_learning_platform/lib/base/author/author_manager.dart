@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/theme/theme_customizer.dart';
 import 'package:webkit/services/apis/auth/login/models/login_response.dart';
+import 'package:webkit/services/apis/auth/refreshToken/refresh_token_api.dart';
 
 class AuthorManager {
   static final AuthorManager _singletonAuthorManager = AuthorManager._internal();
   static AuthorManager get getInstance => _singletonAuthorManager;
-
   factory AuthorManager() {
     return _singletonAuthorManager;
   }
@@ -15,6 +15,7 @@ class AuthorManager {
 
   static const String _loggedInUserKey = "isLoggedIn";
   static const String _themeCustomizerKey = "theme_customizer";
+  bool allowCallRefreshToken = true;
   bool isLoggedIn= false;
   Future<void> init() async {
     await initData();
@@ -53,7 +54,7 @@ class AuthorManager {
   }
 
 
-  Future<AuthInfo?> getAuthInfo() async {
+  AuthInfo? getAuthInfo() {
     String authStr = SharedPreferencesStorage().getString(Storage.currentAuthInfoKey);
     AuthInfo? userInfo;
     if(authStr.isNotEmpty)
@@ -66,10 +67,32 @@ class AuthorManager {
     SharedPreferencesStorage().removeByKey(Storage.currentAuthInfoKey);
   }
 
+  Future<void> refreshToken() async {
+    if(allowCallRefreshToken==false) {
+      return;
+    }
+    allowCallRefreshToken = false;
+    AuthInfo? authInfo = getAuthInfo();
+    RefreshTokenApi refreshTokenApi = RefreshTokenApi(authInfo: authInfo);
+    await refreshTokenApi.call();
+    allowCallRefreshToken = true;
+  }
+  bool isValidToken(){
+    /// ham nay kiem tra xem token co con han khong
+    AuthInfo? authInfo = getAuthInfo();
+    if(authInfo==null) {
+      return false;
+    }
+    DateTime now =DateTime.now();
+    int nowInTimestamp = now.toUtc().millisecondsSinceEpoch~/1000;
+    bool isInvalidToken = nowInTimestamp> authInfo.expireAt!;
+    return isInvalidToken;
+  }
   Future<void> handleLogout() async {
     await removeAuthInfo();
     AuthorManager().deleteDataWhenLogout();
     UserManager().handleLogoutData();
     setLoggedInUser(false);
   }
+  
 }

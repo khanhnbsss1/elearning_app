@@ -441,9 +441,7 @@ class BaseApiRequest {
       }
       else if (response.statusCode == 401 || response.statusCode == 403)// qua han token
           {
-        MonitorLoading().dismiss();
-        UserManager().deleteUserProfile();
-        AppPages.routeName(Routes.landingPageRoute, isReplace: true);
+        await AuthorManager().refreshToken();
         return ResponseCommon(
             errorCode: response.statusCode,
             message: response.statusMessage,
@@ -516,8 +514,7 @@ class BaseApiRequest {
         responseErrorCommon = ResponseCommon.fromJson(error.response!.data!);
         if(error.response!.statusCode !=null && (error.response!.statusCode ==401 ||error.response!.statusCode ==403 )  )
         {
-          await AuthorManager().handleLogout();
-          AppPages.routeName(Routes.landingPageRoute, isReplace: true);
+          await AuthorManager().refreshToken();
         }
       }
       else

@@ -27,4 +27,17 @@ class AuthInfo {
     data['expire_at'] = expireAt;
     return data;
   }
+
+  AuthInfo copyWith(
+  {String? accessToken,
+    String? refreshToken,
+    String? tokenType,
+    int? expireAt}){
+    return AuthInfo(
+      refreshToken: refreshToken??this.refreshToken,
+      accessToken: accessToken??this.accessToken,
+      tokenType: tokenType??this.tokenType,
+      expireAt: expireAt??this.expireAt,
+    );
+  }
 }
