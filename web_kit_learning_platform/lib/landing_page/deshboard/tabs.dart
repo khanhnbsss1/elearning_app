@@ -142,8 +142,8 @@ class _TabsbarState extends State<Tabsbar> {
                                           'assets/Icons/tabIcon/flightblackicon.png',
                                           height: 30),
                                       child: const Text(
-                                        'Fights', style: TextStyle(
-                                        fontFamily: 'gilroysemi',
+                                        'Fights', style: baseStyle.copyWith(
+                                        
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -158,8 +158,8 @@ class _TabsbarState extends State<Tabsbar> {
                                           'assets/Icons/tabIcon/hotelblackicon.png',
                                           height: 30),
                                       child: const Text(
-                                        'Hotels', style: TextStyle(
-                                        fontFamily: 'gilroysemi',
+                                        'Hotels', style: baseStyle.copyWith(
+                                        
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -177,8 +177,8 @@ class _TabsbarState extends State<Tabsbar> {
                                           height: 30),
                                       child: const Text(
                                         'Homestays\n& Villas',
-                                        style: TextStyle(
-                                          fontFamily: 'gilroysemi',
+                                        style: baseStyle.copyWith(
+                                          
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
                                         ),
@@ -196,8 +196,8 @@ class _TabsbarState extends State<Tabsbar> {
                                           height: 30),
                                       child: const Text(
                                         'Holiday\nPackages',
-                                        style: TextStyle(
-                                          fontFamily: 'gilroysemi',
+                                        style: baseStyle.copyWith(
+                                          
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
                                         ),
@@ -214,8 +214,8 @@ class _TabsbarState extends State<Tabsbar> {
                                           'assets/Icons/tabIcon/trainblackicon.png',
                                           height: 30),
                                       child: const Text(
-                                        'Trains', style: TextStyle(
-                                        fontFamily: 'gilroysemi',
+                                        'Trains', style: baseStyle.copyWith(
+                                        
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -230,8 +230,8 @@ class _TabsbarState extends State<Tabsbar> {
                                           'assets/Icons/tabIcon/busblackicon.png',
                                           height: 30),
                                       child: const Text(
-                                        'Buses', style: TextStyle(
-                                        fontFamily: 'gilroysemi',
+                                        'Buses', style: baseStyle.copyWith(
+                                        
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -246,8 +246,8 @@ class _TabsbarState extends State<Tabsbar> {
                                           'assets/Icons/tabIcon/taxiblackicon.png',
                                           height: 30),
                                       child: const Text(
-                                        'Cabs', style: TextStyle(
-                                        fontFamily: 'gilroysemi',
+                                        'Cabs', style: baseStyle.copyWith(
+                                        
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -334,7 +334,7 @@ class _TabsbarState extends State<Tabsbar> {
                             setState(() {
                               selectedchip = index;
                             });
-                          }, child: Text(tabchips[index], style: TextStyle(
+                          }, child: Text(tabchips[index], style: baseStyle.copyWith(
                           fontFamily: 'gilroybold',
                           fontSize: 14,
                           color: (chipsHover1[index] ||
@@ -379,8 +379,8 @@ class _TabsbarState extends State<Tabsbar> {
                       crossAxisAlignment:
                       CrossAxisAlignment.start,
                       children: [
-                        Text('From', style: TextStyle(
-                            fontFamily: 'gilroysemi', color: notifier
+                        Text('From', style: baseStyle.copyWith(
+                             color: notifier
                             .blackcolor, fontSize: constraints.maxWidth < 1000
                             ? constraints.maxWidth / 110
                             : constraints.maxWidth / 120)),
@@ -396,7 +396,7 @@ class _TabsbarState extends State<Tabsbar> {
                               ? constraints.maxWidth / 60
                               : constraints.maxWidth / 60,
                           child: TextField(
-                            style: TextStyle(
+                            style: baseStyle.copyWith(
                                 fontSize: constraints
                                     .maxWidth <
                                     1000
@@ -445,7 +445,7 @@ class _TabsbarState extends State<Tabsbar> {
                         const SizedBox(height: 10),
                         Text(
                           'Where are you going?',
-                          style: TextStyle(
+                          style: baseStyle.copyWith(
                               fontSize: constraints
                                   .maxWidth <
                                   1000
@@ -483,8 +483,8 @@ class _TabsbarState extends State<Tabsbar> {
                         crossAxisAlignment:
                         CrossAxisAlignment.start,
                         children: [
-                          Text('To', style: TextStyle(
-                              fontFamily: 'gilroysemi', color: notifier
+                          Text('To', style: baseStyle.copyWith(
+                               color: notifier
                               .blackcolor, fontSize: constraints.maxWidth < 1000
                               ? constraints.maxWidth / 110
                               : constraints.maxWidth / 120)),
@@ -502,7 +502,7 @@ class _TabsbarState extends State<Tabsbar> {
                                 ? constraints.maxWidth / 60
                                 : constraints.maxWidth / 60,
                             child: TextField(
-                              style: TextStyle(
+                              style: baseStyle.copyWith(
                                   fontSize: constraints
                                       .maxWidth <
                                       1000
@@ -551,7 +551,7 @@ class _TabsbarState extends State<Tabsbar> {
                           const SizedBox(height: 10),
                           Text(
                             'Where are you going?',
-                            style: TextStyle(
+                            style: baseStyle.copyWith(
                                 fontSize: constraints
                                     .maxWidth <
                                     1000
@@ -594,8 +594,8 @@ class _TabsbarState extends State<Tabsbar> {
                         children: [
                           Row(
                             children: [
-                              Text('Departure', style: TextStyle(
-                                  fontFamily: 'gilroysemi',
+                              Text('Departure', style: baseStyle.copyWith(
+                                  
                                   color: notifier.blackcolor,
                                   fontSize: constraints.maxWidth < 1000
                                       ? constraints.maxWidth / 110
@@ -621,7 +621,7 @@ class _TabsbarState extends State<Tabsbar> {
                             child: RichText(
                                 text: TextSpan(
                                     text: DateFormat.d().format(DateTime.now()),
-                                    style: TextStyle(
+                                    style: baseStyle.copyWith(
                                         fontSize: constraints
                                             .maxWidth <
                                             1000
@@ -642,7 +642,7 @@ class _TabsbarState extends State<Tabsbar> {
                                         text: " ${DateFormat.MMM().format(
                                             DateTime.now())}'${DateFormat.y()
                                             .format(DateTime.now())}",
-                                        style: TextStyle(
+                                        style: baseStyle.copyWith(
                                           fontSize: constraints
                                               .maxWidth <
                                               1000
@@ -664,7 +664,7 @@ class _TabsbarState extends State<Tabsbar> {
                           const SizedBox(height: 10),
                           Text(
                             DateFormat.EEEE().format(DateTime.now()),
-                            style: TextStyle(
+                            style: baseStyle.copyWith(
                                 fontSize: constraints
                                     .maxWidth <
                                     1000
@@ -713,8 +713,8 @@ class _TabsbarState extends State<Tabsbar> {
                         children: [
                           Row(
                             children: [
-                              Text('Return', style: TextStyle(
-                                  fontFamily: 'gilroysemi',
+                              Text('Return', style: baseStyle.copyWith(
+                                  
                                   color: notifier.blackcolor,
                                   fontSize: constraints.maxWidth < 1500
                                       ? constraints.maxWidth / 110
@@ -741,7 +741,7 @@ class _TabsbarState extends State<Tabsbar> {
                                   text: TextSpan(
                                       text: DateFormat.d().format(
                                           DateTime.now()),
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                           fontSize: constraints
                                               .maxWidth <
                                               1000
@@ -762,7 +762,7 @@ class _TabsbarState extends State<Tabsbar> {
                                           text: " ${DateFormat.MMM().format(
                                               DateTime.now())}'${DateFormat.y()
                                               .format(DateTime.now())}",
-                                          style: TextStyle(
+                                          style: baseStyle.copyWith(
                                             fontSize: constraints
                                                 .maxWidth <
                                                 1000
@@ -783,7 +783,7 @@ class _TabsbarState extends State<Tabsbar> {
                           const SizedBox(height: 10),
                           Text(
                             DateFormat.EEEE().format(DateTime.now()),
-                            style: TextStyle(
+                            style: baseStyle.copyWith(
                                 fontSize: constraints
                                     .maxWidth <
                                     1000
@@ -844,8 +844,8 @@ class _TabsbarState extends State<Tabsbar> {
                             children: [
                               Row(
                                 children: [
-                                  Text('Travellers & Class', style: TextStyle(
-                                      fontFamily: 'gilroysemi',
+                                  Text('Travellers & Class', style: baseStyle.copyWith(
+                                      
                                       color: notifier.blackcolor,
                                       fontSize: constraints.maxWidth < 1500
                                           ? constraints.maxWidth / 110
@@ -869,7 +869,7 @@ class _TabsbarState extends State<Tabsbar> {
                                 child: RichText(
                                   text: TextSpan(
                                     text: "1",
-                                    style: TextStyle(
+                                    style: baseStyle.copyWith(
                                         fontSize: constraints
                                             .maxWidth <
                                             1000
@@ -888,7 +888,7 @@ class _TabsbarState extends State<Tabsbar> {
                                     children: [
                                       TextSpan(
                                         text: " Traveller",
-                                        style: TextStyle(
+                                        style: baseStyle.copyWith(
                                           fontSize: constraints
                                               .maxWidth <
                                               1000
@@ -908,7 +908,7 @@ class _TabsbarState extends State<Tabsbar> {
                               ),
                               const SizedBox(height: 10),
                               Text('Economy/Premium Economy',
-                                style: TextStyle(
+                                style: baseStyle.copyWith(
                                     fontSize: constraints
                                         .maxWidth <
                                         1000
@@ -977,10 +977,10 @@ class _TabsbarState extends State<Tabsbar> {
                                                         .spaceBetween,
                                                     children: [
                                                       Text(ageType[index],
-                                                          style: TextStyle(
+                                                          style: baseStyle.copyWith(
                                                               color: notifier
                                                                   .blackcolor,
-                                                              fontFamily: 'gilroysemi',
+                                                              
                                                               fontSize: 16)),
                                                       Row(
                                                         crossAxisAlignment: CrossAxisAlignment
@@ -1032,8 +1032,8 @@ class _TabsbarState extends State<Tabsbar> {
                                                                 .center,
                                                             child: Text(
                                                                 '${add[index]}',
-                                                                style: TextStyle(
-                                                                    fontFamily: 'gilroysemi',
+                                                                style: baseStyle.copyWith(
+                                                                    
                                                                     fontSize: 18,
                                                                     color: notifier
                                                                         .blackcolor)),
@@ -1071,7 +1071,7 @@ class _TabsbarState extends State<Tabsbar> {
                                                     ],
                                                   ),
                                                   Text(ageRange[index],
-                                                      style: TextStyle(
+                                                      style: baseStyle.copyWith(
                                                           color: notifier
                                                               .subgreycolor,
                                                           fontFamily: 'gilroymed',
@@ -1190,7 +1190,7 @@ class _TabsbarState extends State<Tabsbar> {
                 DateRangePickerMonthViewSettings(
                   viewHeaderStyle:
                   DateRangePickerViewHeaderStyle(
-                    textStyle: TextStyle(
+                    textStyle: baseStyle.copyWith(
                         color: notifier.blackcolor,
                         fontFamily:
                         'gilroymed',
@@ -1227,7 +1227,7 @@ class _TabsbarState extends State<Tabsbar> {
                     fontSize: 14),
                 headerStyle:
                 DateRangePickerHeaderStyle(
-                  textStyle: TextStyle(
+                  textStyle: baseStyle.copyWith(
                       color: notifier.blackcolor,
                       fontFamily:
                       'gilroysemi',
@@ -1299,7 +1299,7 @@ class _TabsbarState extends State<Tabsbar> {
                             setState(() {
                               selectedtrainchip = index;
                             });
-                          }, child: Text(hotelchips[index], style: TextStyle(
+                          }, child: Text(hotelchips[index], style: baseStyle.copyWith(
                           fontFamily: 'gilroybold',
                           fontSize: 14,
                           color: (chipsHover2[index] ||
@@ -1343,8 +1343,8 @@ class _TabsbarState extends State<Tabsbar> {
                       crossAxisAlignment:
                       CrossAxisAlignment.start,
                       children: [
-                        Text('From', style: TextStyle(
-                            fontFamily: 'gilroysemi', color: notifier
+                        Text('From', style: baseStyle.copyWith(
+                             color: notifier
                             .blackcolor, fontSize: constraints.maxWidth < 1000
                             ? constraints.maxWidth / 110
                             : constraints.maxWidth / 120)),
@@ -1360,7 +1360,7 @@ class _TabsbarState extends State<Tabsbar> {
                               ? constraints.maxWidth / 60
                               : constraints.maxWidth / 60,
                           child: TextField(
-                            style: TextStyle(
+                            style: baseStyle.copyWith(
                                 fontSize: constraints
                                     .maxWidth <
                                     1000
@@ -1409,7 +1409,7 @@ class _TabsbarState extends State<Tabsbar> {
                         const SizedBox(height: 10),
                         Text(
                           'Where are you going?',
-                          style: TextStyle(
+                          style: baseStyle.copyWith(
                               fontSize: constraints
                                   .maxWidth <
                                   1000
@@ -1452,8 +1452,8 @@ class _TabsbarState extends State<Tabsbar> {
                         children: [
                           Row(
                             children: [
-                              Text('Check In', style: TextStyle(
-                                  fontFamily: 'gilroysemi',
+                              Text('Check In', style: baseStyle.copyWith(
+                                  
                                   color: notifier.blackcolor,
                                   fontSize: constraints.maxWidth < 1000
                                       ? constraints.maxWidth / 110
@@ -1479,7 +1479,7 @@ class _TabsbarState extends State<Tabsbar> {
                             child: RichText(
                                 text: TextSpan(
                                     text: DateFormat.d().format(DateTime.now()),
-                                    style: TextStyle(
+                                    style: baseStyle.copyWith(
                                         fontSize: constraints
                                             .maxWidth <
                                             1000
@@ -1500,7 +1500,7 @@ class _TabsbarState extends State<Tabsbar> {
                                         text: " ${DateFormat.MMM().format(
                                             DateTime.now())}'${DateFormat.y()
                                             .format(DateTime.now())}",
-                                        style: TextStyle(
+                                        style: baseStyle.copyWith(
                                           fontSize: constraints
                                               .maxWidth <
                                               1000
@@ -1521,7 +1521,7 @@ class _TabsbarState extends State<Tabsbar> {
                           const SizedBox(height: 10),
                           Text(
                             DateFormat.EEEE().format(DateTime.now()),
-                            style: TextStyle(
+                            style: baseStyle.copyWith(
                                 fontSize: constraints
                                     .maxWidth <
                                     1000
@@ -1567,8 +1567,8 @@ class _TabsbarState extends State<Tabsbar> {
                           children: [
                             Row(
                               children: [
-                                Text('Check Out', style: TextStyle(
-                                    fontFamily: 'gilroysemi',
+                                Text('Check Out', style: baseStyle.copyWith(
+                                    
                                     color: notifier.blackcolor,
                                     fontSize: constraints.maxWidth < 1500
                                         ? constraints.maxWidth / 110
@@ -1595,7 +1595,7 @@ class _TabsbarState extends State<Tabsbar> {
                                   text: TextSpan(
                                       text: DateFormat.d().format(
                                           DateTime.now()),
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                           fontSize: constraints
                                               .maxWidth <
                                               1000
@@ -1616,7 +1616,7 @@ class _TabsbarState extends State<Tabsbar> {
                                           text: " ${DateFormat.MMM().format(
                                               DateTime.now())}'${DateFormat.y()
                                               .format(DateTime.now())}",
-                                          style: TextStyle(
+                                          style: baseStyle.copyWith(
                                             fontSize: constraints
                                                 .maxWidth <
                                                 1000
@@ -1637,7 +1637,7 @@ class _TabsbarState extends State<Tabsbar> {
                             const SizedBox(height: 10),
                             Text(
                               DateFormat.EEEE().format(DateTime.now()),
-                              style: TextStyle(
+                              style: baseStyle.copyWith(
                                   fontSize: constraints
                                       .maxWidth <
                                       1000
@@ -1697,8 +1697,8 @@ class _TabsbarState extends State<Tabsbar> {
                           children: [
                             Row(
                               children: [
-                                Text('Guest & Rooms', style: TextStyle(
-                                    fontFamily: 'gilroysemi',
+                                Text('Guest & Rooms', style: baseStyle.copyWith(
+                                    
                                     color: notifier.blackcolor,
                                     fontSize: constraints.maxWidth < 1500
                                         ? constraints.maxWidth / 110
@@ -1722,7 +1722,7 @@ class _TabsbarState extends State<Tabsbar> {
                               child: RichText(
                                   text: TextSpan(
                                       text: "1",
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                           fontSize: constraints
                                               .maxWidth <
                                               1000
@@ -1741,7 +1741,7 @@ class _TabsbarState extends State<Tabsbar> {
                                       children: [
                                         TextSpan(
                                           text: " Traveller",
-                                          style: TextStyle(
+                                          style: baseStyle.copyWith(
                                             fontSize: constraints
                                                 .maxWidth <
                                                 1000
@@ -1761,7 +1761,7 @@ class _TabsbarState extends State<Tabsbar> {
                             ),
                             const SizedBox(height: 10),
                             Text('Economy/Premium Economy',
-                              style: TextStyle(
+                              style: baseStyle.copyWith(
                                   fontSize: constraints
                                       .maxWidth <
                                       1000
@@ -1830,10 +1830,10 @@ class _TabsbarState extends State<Tabsbar> {
                                                       .spaceBetween,
                                                   children: [
                                                     Text(ageType[index],
-                                                        style: TextStyle(
+                                                        style: baseStyle.copyWith(
                                                             color: notifier
                                                                 .blackcolor,
-                                                            fontFamily: 'gilroysemi',
+                                                            
                                                             fontSize: 16)),
                                                     Row(
                                                       crossAxisAlignment: CrossAxisAlignment
@@ -1885,8 +1885,8 @@ class _TabsbarState extends State<Tabsbar> {
                                                               .center,
                                                           child: Text(
                                                               '${add2[index]}',
-                                                              style: TextStyle(
-                                                                  fontFamily: 'gilroysemi',
+                                                              style: baseStyle.copyWith(
+                                                                  
                                                                   fontSize: 18,
                                                                   color: notifier
                                                                       .blackcolor)),
@@ -1923,7 +1923,7 @@ class _TabsbarState extends State<Tabsbar> {
                                                   ],
                                                 ),
                                                 Text(ageRange[index],
-                                                    style: TextStyle(
+                                                    style: baseStyle.copyWith(
                                                         color: notifier
                                                             .subgreycolor,
                                                         fontFamily: 'gilroymed',
@@ -2043,7 +2043,7 @@ class _TabsbarState extends State<Tabsbar> {
                             setState(() {
                               selectedtrainchip = index;
                             });
-                          }, child: Text(hotelchips[index], style: TextStyle(
+                          }, child: Text(hotelchips[index], style: baseStyle.copyWith(
                           fontFamily: 'gilroybold',
                           fontSize: 14,
                           color: (chipsHover2[index] ||
@@ -2092,7 +2092,7 @@ class _TabsbarState extends State<Tabsbar> {
                                     });
                                   },
                                   child: Text(checkTrain[index],
-                                      style: TextStyle(fontFamily: 'gilroysemi',
+                                      style: baseStyle.copyWith(
                                           fontSize: 14,
                                           color: check[index] ? Colors.black : const Color(0xFFE6E8EC))),
                                 ),
@@ -2137,8 +2137,8 @@ class _TabsbarState extends State<Tabsbar> {
                       crossAxisAlignment:
                       CrossAxisAlignment.start,
                       children: [
-                        Text('From', style: TextStyle(
-                            fontFamily: 'gilroysemi', color: notifier
+                        Text('From', style: baseStyle.copyWith(
+                             color: notifier
                             .blackcolor, fontSize: constraints.maxWidth < 1000
                             ? constraints.maxWidth / 110
                             : constraints.maxWidth / 120)),
@@ -2154,7 +2154,7 @@ class _TabsbarState extends State<Tabsbar> {
                               ? constraints.maxWidth / 60
                               : constraints.maxWidth / 60,
                           child: TextField(
-                            style: TextStyle(
+                            style: baseStyle.copyWith(
                                 fontSize: constraints
                                     .maxWidth <
                                     1000
@@ -2203,7 +2203,7 @@ class _TabsbarState extends State<Tabsbar> {
                         const SizedBox(height: 10),
                         Text(
                           'Where are you going?',
-                          style: TextStyle(
+                          style: baseStyle.copyWith(
                               fontSize: constraints
                                   .maxWidth <
                                   1000
@@ -2241,8 +2241,8 @@ class _TabsbarState extends State<Tabsbar> {
                         crossAxisAlignment:
                         CrossAxisAlignment.start,
                         children: [
-                          Text('To', style: TextStyle(
-                              fontFamily: 'gilroysemi', color: notifier
+                          Text('To', style: baseStyle.copyWith(
+                               color: notifier
                               .blackcolor, fontSize: constraints.maxWidth < 1000
                               ? constraints.maxWidth / 110
                               : constraints.maxWidth / 120)),
@@ -2260,7 +2260,7 @@ class _TabsbarState extends State<Tabsbar> {
                                 ? constraints.maxWidth / 60
                                 : constraints.maxWidth / 60,
                             child: TextField(
-                              style: TextStyle(
+                              style: baseStyle.copyWith(
                                   fontSize: constraints
                                       .maxWidth <
                                       1000
@@ -2309,7 +2309,7 @@ class _TabsbarState extends State<Tabsbar> {
                           const SizedBox(height: 10),
                           Text(
                             'Where are you going?',
-                            style: TextStyle(
+                            style: baseStyle.copyWith(
                                 fontSize: constraints
                                     .maxWidth <
                                     1000
@@ -2354,8 +2354,8 @@ class _TabsbarState extends State<Tabsbar> {
                         children: [
                           Row(
                             children: [
-                              Text('Travel Date', style: TextStyle(
-                                  fontFamily: 'gilroysemi',
+                              Text('Travel Date', style: baseStyle.copyWith(
+                                  
                                   color: notifier.blackcolor,
                                   fontSize: constraints.maxWidth < 1500
                                       ? constraints.maxWidth / 110
@@ -2381,7 +2381,7 @@ class _TabsbarState extends State<Tabsbar> {
                             child: RichText(
                                 text: TextSpan(
                                     text: DateFormat.d().format(DateTime.now()),
-                                    style: TextStyle(
+                                    style: baseStyle.copyWith(
                                         fontSize: constraints
                                             .maxWidth <
                                             1000
@@ -2402,7 +2402,7 @@ class _TabsbarState extends State<Tabsbar> {
                                         text: " ${DateFormat.MMM().format(
                                             DateTime.now())}'${DateFormat.y()
                                             .format(DateTime.now())}",
-                                        style: TextStyle(
+                                        style: baseStyle.copyWith(
                                           fontSize: constraints
                                               .maxWidth <
                                               1000
@@ -2425,7 +2425,7 @@ class _TabsbarState extends State<Tabsbar> {
                           ),
                           Text(
                             DateFormat.EEEE().format(DateTime.now()),
-                            style: TextStyle(
+                            style: baseStyle.copyWith(
                                 fontSize: constraints
                                     .maxWidth <
                                     1000
@@ -2485,8 +2485,8 @@ class _TabsbarState extends State<Tabsbar> {
                           children: [
                             Row(
                               children: [
-                                Text('Class', style: TextStyle(
-                                    fontFamily: 'gilroysemi',
+                                Text('Class', style: baseStyle.copyWith(
+                                    
                                     color: notifier.blackcolor,
                                     fontSize: constraints.maxWidth < 1500
                                         ? constraints.maxWidth / 110
@@ -2508,7 +2508,7 @@ class _TabsbarState extends State<Tabsbar> {
                               //     ? constraints.maxWidth / 60
                               //     : constraints.maxWidth / 60,
                               child: Text(
-                                  'All', style: TextStyle(fontSize: constraints
+                                  'All', style: baseStyle.copyWith(fontSize: constraints
                                   .maxWidth <
                                   1000
                                   ? constraints.maxWidth / 60
@@ -2525,7 +2525,7 @@ class _TabsbarState extends State<Tabsbar> {
                             ),
                             const SizedBox(height: 10),
                             Text('All Class',
-                              style: TextStyle(
+                              style: baseStyle.copyWith(
                                   fontSize: constraints
                                       .maxWidth <
                                       1000
@@ -2641,8 +2641,8 @@ class _TabsbarState extends State<Tabsbar> {
                       crossAxisAlignment:
                       CrossAxisAlignment.start,
                       children: [
-                        Text('From', style: TextStyle(
-                            fontFamily: 'gilroysemi', color: notifier
+                        Text('From', style: baseStyle.copyWith(
+                             color: notifier
                             .blackcolor, fontSize: constraints.maxWidth < 1000
                             ? constraints.maxWidth / 110
                             : constraints.maxWidth / 120)),
@@ -2658,7 +2658,7 @@ class _TabsbarState extends State<Tabsbar> {
                               ? constraints.maxWidth / 60
                               : constraints.maxWidth / 60,
                           child: TextField(
-                            style: TextStyle(
+                            style: baseStyle.copyWith(
                                 fontSize: constraints
                                     .maxWidth <
                                     1000
@@ -2707,7 +2707,7 @@ class _TabsbarState extends State<Tabsbar> {
                         const SizedBox(height: 10),
                         Text(
                           'Where are you going?',
-                          style: TextStyle(
+                          style: baseStyle.copyWith(
                               fontSize: constraints
                                   .maxWidth <
                                   1000
@@ -2745,8 +2745,8 @@ class _TabsbarState extends State<Tabsbar> {
                         crossAxisAlignment:
                         CrossAxisAlignment.start,
                         children: [
-                          Text('To', style: TextStyle(
-                              fontFamily: 'gilroysemi', color: notifier
+                          Text('To', style: baseStyle.copyWith(
+                               color: notifier
                               .blackcolor, fontSize: constraints.maxWidth < 1000
                               ? constraints.maxWidth / 110
                               : constraints.maxWidth / 120)),
@@ -2764,7 +2764,7 @@ class _TabsbarState extends State<Tabsbar> {
                                 ? constraints.maxWidth / 60
                                 : constraints.maxWidth / 60,
                             child: TextField(
-                              style: TextStyle(
+                              style: baseStyle.copyWith(
                                   fontSize: constraints
                                       .maxWidth <
                                       1000
@@ -2813,7 +2813,7 @@ class _TabsbarState extends State<Tabsbar> {
                           const SizedBox(height: 10),
                           Text(
                             'Where are you going?',
-                            style: TextStyle(
+                            style: baseStyle.copyWith(
                                 fontSize: constraints
                                     .maxWidth <
                                     1000
@@ -2859,8 +2859,8 @@ class _TabsbarState extends State<Tabsbar> {
                           children: [
                             Row(
                               children: [
-                                Text('Travel Date', style: TextStyle(
-                                    fontFamily: 'gilroysemi',
+                                Text('Travel Date', style: baseStyle.copyWith(
+                                    
                                     color: notifier.blackcolor,
                                     fontSize: constraints.maxWidth < 1500
                                         ? constraints.maxWidth / 110
@@ -2886,7 +2886,7 @@ class _TabsbarState extends State<Tabsbar> {
                               child: RichText(
                                 text: TextSpan(
                                   text: DateFormat.d().format(DateTime.now()),
-                                  style: TextStyle(
+                                  style: baseStyle.copyWith(
                                       fontSize: constraints
                                           .maxWidth <
                                           1000
@@ -2897,7 +2897,7 @@ class _TabsbarState extends State<Tabsbar> {
                                           ? constraints.maxWidth / 60
                                           : constraints.maxWidth / 60,
                                       color: notifier.blackcolor,
-                                      fontFamily: 'gilroysemi',
+                                      
                                       fontWeight:
                                       FontWeight.w600
                                   ),
@@ -2906,7 +2906,7 @@ class _TabsbarState extends State<Tabsbar> {
                                       text: " ${DateFormat.MMM().format(
                                           DateTime.now())}'${DateFormat.y()
                                           .format(DateTime.now())}",
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                         fontSize: constraints
                                             .maxWidth <
                                             1000
@@ -2929,7 +2929,7 @@ class _TabsbarState extends State<Tabsbar> {
                             ),
                             Text(
                               DateFormat.EEEE().format(DateTime.now()),
-                              style: TextStyle(
+                              style: baseStyle.copyWith(
                                   fontSize: constraints
                                       .maxWidth <
                                       1000

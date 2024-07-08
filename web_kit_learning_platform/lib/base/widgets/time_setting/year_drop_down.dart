@@ -123,7 +123,7 @@ class YearDropDownState extends State<YearDropDown>{
       // hintDay: 'Day', // optional
       // hintMonth: 'Month', // optional
       // hintYear: 'Year', // optional
-      // hintTextStyle: TextStyle(color: Colors.grey), // optional
+      // hintTextStyle: baseStyle.copyWith(color: Colors.grey), // optional
     );
   }
 

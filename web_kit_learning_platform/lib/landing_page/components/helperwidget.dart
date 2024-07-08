@@ -125,8 +125,8 @@ class _helpState extends State<help> {
                                             height: 30),
                                     child: Text(
                                       'Flights',
-                                      style: TextStyle(
-                                        fontFamily: 'gilroysemi',
+                                      style: baseStyle.copyWith(
+                                        
                                         fontSize:
                                             constraints.maxWidth < 700 ? 12 : 14,
                                         fontWeight: FontWeight.w500,
@@ -145,8 +145,8 @@ class _helpState extends State<help> {
                                             height: 30),
                                     child: Text(
                                       'Hotels',
-                                      style: TextStyle(
-                                        fontFamily: 'gilroysemi',
+                                      style: baseStyle.copyWith(
+                                        
                                         fontSize:
                                             constraints.maxWidth < 700 ? 12 : 14,
                                         fontWeight: FontWeight.w500,
@@ -167,8 +167,8 @@ class _helpState extends State<help> {
                                             height: 30),
                                     child: Text(
                                       'Homestays &\n Villas',
-                                      style: TextStyle(
-                                        fontFamily: 'gilroysemi',
+                                      style: baseStyle.copyWith(
+                                        
                                         fontSize:
                                             constraints.maxWidth < 700 ? 11 : 13,
                                         fontWeight: FontWeight.w500,
@@ -191,8 +191,8 @@ class _helpState extends State<help> {
                                             height: 30),
                                     child: Text(
                                       'Holiday\nPackages',
-                                      style: TextStyle(
-                                        fontFamily: 'gilroysemi',
+                                      style: baseStyle.copyWith(
+                                        
                                         fontSize:
                                             constraints.maxWidth < 700 ? 12 : 14,
                                         fontWeight: FontWeight.w500,
@@ -214,8 +214,8 @@ class _helpState extends State<help> {
                                             height: 30),
                                     child: Text(
                                       'Trains',
-                                      style: TextStyle(
-                                        fontFamily: 'gilroysemi',
+                                      style: baseStyle.copyWith(
+                                        
                                         fontSize:
                                             constraints.maxWidth < 700 ? 12 : 14,
                                         fontWeight: FontWeight.w500,
@@ -234,8 +234,8 @@ class _helpState extends State<help> {
                                             height: 30),
                                     child: Text(
                                       'Buses',
-                                      style: TextStyle(
-                                        fontFamily: 'gilroysemi',
+                                      style: baseStyle.copyWith(
+                                        
                                         fontSize:
                                             constraints.maxWidth < 700 ? 12 : 14,
                                         fontWeight: FontWeight.w500,
@@ -254,8 +254,8 @@ class _helpState extends State<help> {
                                             height: 30),
                                     child: Text(
                                       'Cabs',
-                                      style: TextStyle(
-                                        fontFamily: 'gilroysemi',
+                                      style: baseStyle.copyWith(
+                                        
                                         fontSize:
                                             constraints.maxWidth < 700 ? 12 : 14,
                                         fontWeight: FontWeight.w500,
@@ -312,17 +312,17 @@ class _helpState extends State<help> {
                 monthCellStyle: DateRangePickerMonthCellStyle(
                   todayCellDecoration: BoxDecoration(
                       color: notifier.buttoncolor, shape: BoxShape.circle),
-                  textStyle: TextStyle(
+                  textStyle: baseStyle.copyWith(
                     fontFamily: 'gilroymed',
                     color: notifier.subgreycolor,
                     fontSize: constraints.maxWidth < 550 ? 10 : 14,
                   ),
-                  blackoutDateTextStyle: TextStyle(
+                  blackoutDateTextStyle: baseStyle.copyWith(
                     fontFamily: 'gilroymed',
                     color: notifier.blackcolor,
                     fontSize: constraints.maxWidth < 550 ? 10 : 14,
                   ),
-                  todayTextStyle: TextStyle(
+                  todayTextStyle: baseStyle.copyWith(
                     fontFamily: 'gilroymed',
                     fontSize: constraints.maxWidth < 550 ? 10 : 14,
                     color: notifier.blackcolor,
@@ -330,7 +330,7 @@ class _helpState extends State<help> {
                 ),
                 monthViewSettings: DateRangePickerMonthViewSettings(
                   viewHeaderStyle: DateRangePickerViewHeaderStyle(
-                    textStyle: TextStyle(
+                    textStyle: baseStyle.copyWith(
                         color: notifier.blackcolor,
                         fontFamily: 'gilroymed',
                         fontSize: constraints.maxWidth < 550 ? 10 : 14),
@@ -345,18 +345,18 @@ class _helpState extends State<help> {
                 selectionColor: notifier.blackcolor,
                 selectionRadius: 50,
                 viewSpacing: 30,
-                selectionTextStyle: TextStyle(
+                selectionTextStyle: baseStyle.copyWith(
                     color: notifier.blackwhitecolor,
                     fontFamily: 'gilroymed',
                     fontSize: constraints.maxWidth < 550 ? 10 : 14),
                 headerStyle: DateRangePickerHeaderStyle(
-                  textStyle: TextStyle(
+                  textStyle: baseStyle.copyWith(
                       color: notifier.blackwhitecolor,
-                      fontFamily: 'gilroysemi',
+                      
                       fontSize: constraints.maxWidth < 550 ? 10 : 14),
                 ),
                 selectionMode: DateRangePickerSelectionMode.range,
-                rangeTextStyle: TextStyle(
+                rangeTextStyle: baseStyle.copyWith(
                     color: notifier.blackcolor,
                     fontFamily: 'gilroymed',
                     fontSize: constraints.maxWidth < 550 ? 10 : 14),
@@ -421,7 +421,7 @@ class _helpState extends State<help> {
                               });
                             },
                             child: Text(Tabchips[index],
-                                style: TextStyle(
+                                style: baseStyle.copyWith(
                                     fontFamily: 'gilroybold',
                                     fontSize: 14,
                                     color: (chipsHover1[index] ||
@@ -466,8 +466,8 @@ class _helpState extends State<help> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('From',
-                                style: TextStyle(
-                                    fontFamily: 'gilroysemi',
+                                style: baseStyle.copyWith(
+                                    
                                     color: notifier.blackcolor,
                                     fontSize: constraints.maxWidth < 500
                                         ? constraints.maxWidth / 35
@@ -484,13 +484,13 @@ class _helpState extends State<help> {
                               //         ? constraints.maxWidth / 40
                               //         : constraints.maxWidth / 40,
                               child: TextField(
-                                style: TextStyle(
+                                style: baseStyle.copyWith(
                                     fontSize: constraints.maxWidth < 500
                                         ? constraints.maxWidth / 25
                                         : constraints.maxWidth < 750
                                             ? constraints.maxWidth / 40
                                             : constraints.maxWidth / 40,
-                                    fontFamily: 'gilroysemi',
+                                    
                                     color: notifier.blackcolor,
                                     fontWeight: FontWeight.w600),
                                 decoration: InputDecoration(
@@ -506,14 +506,14 @@ class _helpState extends State<help> {
                                         borderSide: BorderSide(
                                             color: Colors.transparent)),
                                     hintText: 'Location',
-                                    hintStyle: TextStyle(
+                                    hintStyle: baseStyle.copyWith(
                                         color: notifier.blackcolor,
                                         fontSize: constraints.maxWidth < 500
                                             ? constraints.maxWidth / 25
                                             : constraints.maxWidth < 750
                                                 ? constraints.maxWidth / 40
                                                 : constraints.maxWidth / 40,
-                                        fontFamily: 'gilroysemi',
+                                        
                                         fontWeight: FontWeight.w600)),
                               ),
                             ),
@@ -522,7 +522,7 @@ class _helpState extends State<help> {
                             ),
                             Text(
                               'Where are you going?',
-                              style: TextStyle(
+                              style: baseStyle.copyWith(
                                   fontSize: constraints.maxWidth < 500
                                       ? constraints.maxWidth / 35
                                       : constraints.maxWidth < 750
@@ -556,8 +556,8 @@ class _helpState extends State<help> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('To',
-                                style: TextStyle(
-                                    fontFamily: 'gilroysemi',
+                                style: baseStyle.copyWith(
+                                    
                                     color: notifier.blackcolor,
                                     fontSize: constraints.maxWidth < 500
                                         ? constraints.maxWidth / 35
@@ -574,13 +574,13 @@ class _helpState extends State<help> {
                               //         ? constraints.maxWidth / 40
                               //         : constraints.maxWidth / 40,
                               child: TextField(
-                                style: TextStyle(
+                                style: baseStyle.copyWith(
                                     fontSize: constraints.maxWidth < 500
                                         ? constraints.maxWidth / 25
                                         : constraints.maxWidth < 750
                                             ? constraints.maxWidth / 40
                                             : constraints.maxWidth / 40,
-                                    fontFamily: 'gilroysemi',
+                                    
                                     color: notifier.blackcolor,
                                     fontWeight: FontWeight.w600),
                                 decoration: InputDecoration(
@@ -596,14 +596,14 @@ class _helpState extends State<help> {
                                         borderSide: BorderSide(
                                             color: Colors.transparent)),
                                     hintText: 'Location',
-                                    hintStyle: TextStyle(
+                                    hintStyle: baseStyle.copyWith(
                                         color: notifier.blackcolor,
                                         fontSize: constraints.maxWidth < 500
                                             ? constraints.maxWidth / 25
                                             : constraints.maxWidth < 750
                                                 ? constraints.maxWidth / 40
                                                 : constraints.maxWidth / 40,
-                                        fontFamily: 'gilroysemi',
+                                        
                                         fontWeight: FontWeight.w600)),
                               ),
                             ),
@@ -612,7 +612,7 @@ class _helpState extends State<help> {
                             ),
                             Text(
                               'Where are you going?',
-                              style: TextStyle(
+                              style: baseStyle.copyWith(
                                   fontSize: constraints.maxWidth < 500
                                       ? constraints.maxWidth / 35
                                       : constraints.maxWidth < 750
@@ -656,8 +656,8 @@ class _helpState extends State<help> {
                                 Row(
                                   children: [
                                     Text('Departure',
-                                        style: TextStyle(
-                                            fontFamily: 'gilroysemi',
+                                        style: baseStyle.copyWith(
+                                            
                                             color: notifier.blackcolor,
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 35
@@ -683,20 +683,20 @@ class _helpState extends State<help> {
                                     text: TextSpan(
                                       text:
                                           DateFormat.d().format(DateTime.now()),
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                           color: notifier.blackcolor,
                                           fontSize: constraints.maxWidth < 500
                                               ? constraints.maxWidth / 25
                                               : constraints.maxWidth < 750
                                                   ? constraints.maxWidth / 40
                                                   : constraints.maxWidth / 40,
-                                          fontFamily: 'gilroysemi',
+                                          
                                           fontWeight: FontWeight.w600),
                                       children: [
                                         TextSpan(
                                           text:
                                               " ${DateFormat.MMM().format(DateTime.now())}'${DateFormat.y().format(DateTime.now())}",
-                                          style: TextStyle(
+                                          style: baseStyle.copyWith(
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 30
                                                 : constraints.maxWidth < 750
@@ -712,7 +712,7 @@ class _helpState extends State<help> {
                                 const SizedBox(height: 6),
                                 Text(
                                   DateFormat.EEEE().format(DateTime.now()),
-                                  style: TextStyle(
+                                  style: baseStyle.copyWith(
                                       fontSize: constraints.maxWidth < 500
                                           ? constraints.maxWidth / 35
                                           : constraints.maxWidth < 750
@@ -752,8 +752,8 @@ class _helpState extends State<help> {
                                 Row(
                                   children: [
                                     Text('Return',
-                                        style: TextStyle(
-                                            fontFamily: 'gilroysemi',
+                                        style: baseStyle.copyWith(
+                                            
                                             color: notifier.blackcolor,
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 35
@@ -779,20 +779,20 @@ class _helpState extends State<help> {
                                     text: TextSpan(
                                       text:
                                       DateFormat.d().format(DateTime.now()),
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                           color: notifier.blackcolor,
                                           fontSize: constraints.maxWidth < 500
                                               ? constraints.maxWidth / 25
                                               : constraints.maxWidth < 750
                                               ? constraints.maxWidth / 40
                                               : constraints.maxWidth / 40,
-                                          fontFamily: 'gilroysemi',
+                                          
                                           fontWeight: FontWeight.w600),
                                       children: [
                                         TextSpan(
                                           text:
                                           " ${DateFormat.MMM().format(DateTime.now())}'${DateFormat.y().format(DateTime.now())}",
-                                          style: TextStyle(
+                                          style: baseStyle.copyWith(
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 30
                                                 : constraints.maxWidth < 750
@@ -808,7 +808,7 @@ class _helpState extends State<help> {
                                 const SizedBox(height: 6),
                                 Text(
                                   DateFormat.EEEE().format(DateTime.now()),
-                                  style: TextStyle(
+                                  style: baseStyle.copyWith(
                                       fontSize: constraints.maxWidth < 500
                                           ? constraints.maxWidth / 35
                                           : constraints.maxWidth < 750
@@ -863,8 +863,8 @@ class _helpState extends State<help> {
                                 Row(
                                   children: [
                                     Text('Travellers & Class',
-                                        style: TextStyle(
-                                            fontFamily: 'gilroysemi',
+                                        style: baseStyle.copyWith(
+                                            
                                             color: notifier.blackcolor,
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 35
@@ -887,19 +887,19 @@ class _helpState extends State<help> {
                                   child: RichText(
                                     text: TextSpan(
                                       text: "1",
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                           fontSize: constraints.maxWidth < 500
                                               ? constraints.maxWidth / 25
                                               : constraints.maxWidth < 750
                                                   ? constraints.maxWidth / 40
                                                   : constraints.maxWidth / 40,
                                           color: notifier.blackcolor,
-                                          fontFamily: 'gilroysemi',
+                                          
                                           fontWeight: FontWeight.w600),
                                       children: [
                                         TextSpan(
                                           text: " Traveller",
-                                          style: TextStyle(
+                                          style: baseStyle.copyWith(
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 30
                                                 : constraints.maxWidth < 750
@@ -915,7 +915,7 @@ class _helpState extends State<help> {
                                 const SizedBox(height: 6),
                                 Text(
                                   'Economy/Premium Economy',
-                                  style: TextStyle(
+                                  style: baseStyle.copyWith(
                                       fontSize: constraints.maxWidth < 500
                                           ? constraints.maxWidth / 35
                                           : constraints.maxWidth < 750
@@ -982,7 +982,7 @@ class _helpState extends State<help> {
                                                                 .spaceBetween,
                                                         children: [
                                                           Text(ageType[index],
-                                                              style: TextStyle(
+                                                              style: baseStyle.copyWith(
                                                                   color: notifier
                                                                       .blackcolor,
                                                                   fontFamily:
@@ -1041,7 +1041,7 @@ class _helpState extends State<help> {
                                                                         .center,
                                                                 child: Text(
                                                                     '${add[index]}',
-                                                                    style: TextStyle(
+                                                                    style: baseStyle.copyWith(
                                                                         fontFamily:
                                                                             'gilroysemi',
                                                                         fontSize:
@@ -1087,7 +1087,7 @@ class _helpState extends State<help> {
                                                         ],
                                                       ),
                                                       Text(ageRange[index],
-                                                          style: TextStyle(
+                                                          style: baseStyle.copyWith(
                                                               color: notifier
                                                                   .subgreycolor,
                                                               fontFamily:
@@ -1208,7 +1208,7 @@ class _helpState extends State<help> {
                             });
                           },
                           child: Text(hotelchips[index],
-                              style: TextStyle(
+                              style: baseStyle.copyWith(
                                   fontFamily: 'gilroybold',
                                   fontSize: 14,
                                   color: (chipsHover2[index] || selectedtrainchip == index) ? notifier.whitecolor : notifier.blackcolor))),
@@ -1249,8 +1249,8 @@ class _helpState extends State<help> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('From',
-                                style: TextStyle(
-                                    fontFamily: 'gilroysemi',
+                                style: baseStyle.copyWith(
+                                    
                                     color: notifier.blackcolor,
                                     fontSize: constraints.maxWidth < 500
                                         ? constraints.maxWidth / 35
@@ -1267,13 +1267,13 @@ class _helpState extends State<help> {
                               //         ? constraints.maxWidth / 40
                               //         : constraints.maxWidth / 40,
                               child: TextField(
-                                style: TextStyle(
+                                style: baseStyle.copyWith(
                                     fontSize: constraints.maxWidth < 500
                                         ? constraints.maxWidth / 25
                                         : constraints.maxWidth < 750
                                         ? constraints.maxWidth / 40
                                         : constraints.maxWidth / 40,
-                                    fontFamily: 'gilroysemi',
+                                    
                                     color: notifier.blackcolor,
                                     fontWeight: FontWeight.w600),
                                 decoration: InputDecoration(
@@ -1289,14 +1289,14 @@ class _helpState extends State<help> {
                                         borderSide: BorderSide(
                                             color: Colors.transparent)),
                                     hintText: 'Location',
-                                    hintStyle: TextStyle(
+                                    hintStyle: baseStyle.copyWith(
                                         color: notifier.blackcolor,
                                         fontSize: constraints.maxWidth < 500
                                             ? constraints.maxWidth / 25
                                             : constraints.maxWidth < 750
                                             ? constraints.maxWidth / 40
                                             : constraints.maxWidth / 40,
-                                        fontFamily: 'gilroysemi',
+                                        
                                         fontWeight: FontWeight.w600)),
                               ),
                             ),
@@ -1305,7 +1305,7 @@ class _helpState extends State<help> {
                             ),
                             Text(
                               'Where are you going?',
-                              style: TextStyle(
+                              style: baseStyle.copyWith(
                                   fontSize: constraints.maxWidth < 500
                                       ? constraints.maxWidth / 35
                                       : constraints.maxWidth < 750
@@ -1349,8 +1349,8 @@ class _helpState extends State<help> {
                                 Row(
                                   children: [
                                     Text('Departure',
-                                        style: TextStyle(
-                                            fontFamily: 'gilroysemi',
+                                        style: baseStyle.copyWith(
+                                            
                                             color: notifier.blackcolor,
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 35
@@ -1376,20 +1376,20 @@ class _helpState extends State<help> {
                                     text: TextSpan(
                                       text:
                                       DateFormat.d().format(DateTime.now()),
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                           color: notifier.blackcolor,
                                           fontSize: constraints.maxWidth < 500
                                               ? constraints.maxWidth / 25
                                               : constraints.maxWidth < 750
                                               ? constraints.maxWidth / 40
                                               : constraints.maxWidth / 40,
-                                          fontFamily: 'gilroysemi',
+                                          
                                           fontWeight: FontWeight.w600),
                                       children: [
                                         TextSpan(
                                           text:
                                           " ${DateFormat.MMM().format(DateTime.now())}'${DateFormat.y().format(DateTime.now())}",
-                                          style: TextStyle(
+                                          style: baseStyle.copyWith(
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 30
                                                 : constraints.maxWidth < 750
@@ -1405,7 +1405,7 @@ class _helpState extends State<help> {
                                 const SizedBox(height: 6),
                                 Text(
                                   DateFormat.EEEE().format(DateTime.now()),
-                                  style: TextStyle(
+                                  style: baseStyle.copyWith(
                                       fontSize: constraints.maxWidth < 500
                                           ? constraints.maxWidth / 35
                                           : constraints.maxWidth < 750
@@ -1445,8 +1445,8 @@ class _helpState extends State<help> {
                                 Row(
                                   children: [
                                     Text('Return',
-                                        style: TextStyle(
-                                            fontFamily: 'gilroysemi',
+                                        style: baseStyle.copyWith(
+                                            
                                             color: notifier.blackcolor,
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 35
@@ -1472,20 +1472,20 @@ class _helpState extends State<help> {
                                     text: TextSpan(
                                       text:
                                       DateFormat.d().format(DateTime.now()),
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                           color: notifier.blackcolor,
                                           fontSize: constraints.maxWidth < 500
                                               ? constraints.maxWidth / 25
                                               : constraints.maxWidth < 750
                                               ? constraints.maxWidth / 40
                                               : constraints.maxWidth / 40,
-                                          fontFamily: 'gilroysemi',
+                                          
                                           fontWeight: FontWeight.w600),
                                       children: [
                                         TextSpan(
                                           text:
                                           " ${DateFormat.MMM().format(DateTime.now())}'${DateFormat.y().format(DateTime.now())}",
-                                          style: TextStyle(
+                                          style: baseStyle.copyWith(
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 30
                                                 : constraints.maxWidth < 750
@@ -1501,7 +1501,7 @@ class _helpState extends State<help> {
                                 const SizedBox(height: 6),
                                 Text(
                                   DateFormat.EEEE().format(DateTime.now()),
-                                  style: TextStyle(
+                                  style: baseStyle.copyWith(
                                       fontSize: constraints.maxWidth < 500
                                           ? constraints.maxWidth / 35
                                           : constraints.maxWidth < 750
@@ -1556,8 +1556,8 @@ class _helpState extends State<help> {
                                 Row(
                                   children: [
                                     Text('Travellers & Class',
-                                        style: TextStyle(
-                                            fontFamily: 'gilroysemi',
+                                        style: baseStyle.copyWith(
+                                            
                                             color: notifier.blackcolor,
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 35
@@ -1580,19 +1580,19 @@ class _helpState extends State<help> {
                                   child: RichText(
                                     text: TextSpan(
                                       text: "1",
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                           fontSize: constraints.maxWidth < 500
                                               ? constraints.maxWidth / 25
                                               : constraints.maxWidth < 750
                                               ? constraints.maxWidth / 40
                                               : constraints.maxWidth / 40,
                                           color: notifier.blackcolor,
-                                          fontFamily: 'gilroysemi',
+                                          
                                           fontWeight: FontWeight.w600),
                                       children: [
                                         TextSpan(
                                           text: " Traveller",
-                                          style: TextStyle(
+                                          style: baseStyle.copyWith(
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 30
                                                 : constraints.maxWidth < 750
@@ -1608,7 +1608,7 @@ class _helpState extends State<help> {
                                 const SizedBox(height: 6),
                                 Text(
                                   'Economy/Premium Economy',
-                                  style: TextStyle(
+                                  style: baseStyle.copyWith(
                                       fontSize: constraints.maxWidth < 500
                                           ? constraints.maxWidth / 35
                                           : constraints.maxWidth < 750
@@ -1675,7 +1675,7 @@ class _helpState extends State<help> {
                                                             .spaceBetween,
                                                         children: [
                                                           Text(ageType[index],
-                                                              style: TextStyle(
+                                                              style: baseStyle.copyWith(
                                                                   color: notifier
                                                                       .blackcolor,
                                                                   fontFamily:
@@ -1734,7 +1734,7 @@ class _helpState extends State<help> {
                                                                     .center,
                                                                 child: Text(
                                                                     '${add[index]}',
-                                                                    style: TextStyle(
+                                                                    style: baseStyle.copyWith(
                                                                         fontFamily:
                                                                         'gilroysemi',
                                                                         fontSize:
@@ -1780,7 +1780,7 @@ class _helpState extends State<help> {
                                                         ],
                                                       ),
                                                       Text(ageRange[index],
-                                                          style: TextStyle(
+                                                          style: baseStyle.copyWith(
                                                               color: notifier
                                                                   .subgreycolor,
                                                               fontFamily:
@@ -1909,7 +1909,7 @@ class _helpState extends State<help> {
                               });
                             },
                             child: Text(hotelchips[index],
-                                style: TextStyle(
+                                style: baseStyle.copyWith(
                                     fontFamily: 'gilroybold',
                                     fontSize: 14,
                                     color: (chipsHover2[index] ||
@@ -1963,8 +1963,8 @@ class _helpState extends State<help> {
                               });
                             },
                             child: Text(checkTrain[index],
-                                style: TextStyle(
-                                    fontFamily: 'gilroysemi',
+                                style: baseStyle.copyWith(
+                                    
                                     fontSize: 12,
                                     color: check[index] ? Colors.black : Colors.white)),
                           ),
@@ -2006,8 +2006,8 @@ class _helpState extends State<help> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('From',
-                                style: TextStyle(
-                                    fontFamily: 'gilroysemi',
+                                style: baseStyle.copyWith(
+                                    
                                     color: notifier.blackcolor,
                                     fontSize: constraints.maxWidth < 500
                                         ? constraints.maxWidth / 35
@@ -2024,13 +2024,13 @@ class _helpState extends State<help> {
                               //         ? constraints.maxWidth / 40
                               //         : constraints.maxWidth / 40,
                               child: TextField(
-                                style: TextStyle(
+                                style: baseStyle.copyWith(
                                     fontSize: constraints.maxWidth < 500
                                         ? constraints.maxWidth / 25
                                         : constraints.maxWidth < 750
                                         ? constraints.maxWidth / 40
                                         : constraints.maxWidth / 40,
-                                    fontFamily: 'gilroysemi',
+                                    
                                     color: notifier.blackcolor,
                                     fontWeight: FontWeight.w600),
                                 decoration: InputDecoration(
@@ -2046,14 +2046,14 @@ class _helpState extends State<help> {
                                         borderSide: BorderSide(
                                             color: Colors.transparent)),
                                     hintText: 'Location',
-                                    hintStyle: TextStyle(
+                                    hintStyle: baseStyle.copyWith(
                                         color: notifier.blackcolor,
                                         fontSize: constraints.maxWidth < 500
                                             ? constraints.maxWidth / 25
                                             : constraints.maxWidth < 750
                                             ? constraints.maxWidth / 40
                                             : constraints.maxWidth / 40,
-                                        fontFamily: 'gilroysemi',
+                                        
                                         fontWeight: FontWeight.w600)),
                               ),
                             ),
@@ -2062,7 +2062,7 @@ class _helpState extends State<help> {
                             ),
                             Text(
                               'Where are you going?',
-                              style: TextStyle(
+                              style: baseStyle.copyWith(
                                   fontSize: constraints.maxWidth < 500
                                       ? constraints.maxWidth / 35
                                       : constraints.maxWidth < 750
@@ -2096,8 +2096,8 @@ class _helpState extends State<help> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('To',
-                                style: TextStyle(
-                                    fontFamily: 'gilroysemi',
+                                style: baseStyle.copyWith(
+                                    
                                     color: notifier.blackcolor,
                                     fontSize: constraints.maxWidth < 500
                                         ? constraints.maxWidth / 35
@@ -2114,13 +2114,13 @@ class _helpState extends State<help> {
                               //         ? constraints.maxWidth / 40
                               //         : constraints.maxWidth / 40,
                               child: TextField(
-                                style: TextStyle(
+                                style: baseStyle.copyWith(
                                     fontSize: constraints.maxWidth < 500
                                         ? constraints.maxWidth / 25
                                         : constraints.maxWidth < 750
                                         ? constraints.maxWidth / 40
                                         : constraints.maxWidth / 40,
-                                    fontFamily: 'gilroysemi',
+                                    
                                     color: notifier.blackcolor,
                                     fontWeight: FontWeight.w600),
                                 decoration: InputDecoration(
@@ -2136,14 +2136,14 @@ class _helpState extends State<help> {
                                         borderSide: BorderSide(
                                             color: Colors.transparent)),
                                     hintText: 'Location',
-                                    hintStyle: TextStyle(
+                                    hintStyle: baseStyle.copyWith(
                                         color: notifier.blackcolor,
                                         fontSize: constraints.maxWidth < 500
                                             ? constraints.maxWidth / 25
                                             : constraints.maxWidth < 750
                                             ? constraints.maxWidth / 40
                                             : constraints.maxWidth / 40,
-                                        fontFamily: 'gilroysemi',
+                                        
                                         fontWeight: FontWeight.w600)),
                               ),
                             ),
@@ -2152,7 +2152,7 @@ class _helpState extends State<help> {
                             ),
                             Text(
                               'Where are you going?',
-                              style: TextStyle(
+                              style: baseStyle.copyWith(
                                   fontSize: constraints.maxWidth < 500
                                       ? constraints.maxWidth / 35
                                       : constraints.maxWidth < 750
@@ -2196,8 +2196,8 @@ class _helpState extends State<help> {
                                 Row(
                                   children: [
                                     Text('Travel Date',
-                                        style: TextStyle(
-                                            fontFamily: 'gilroysemi',
+                                        style: baseStyle.copyWith(
+                                            
                                             color: notifier.blackcolor,
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 35
@@ -2223,20 +2223,20 @@ class _helpState extends State<help> {
                                     text: TextSpan(
                                       text:
                                       DateFormat.d().format(DateTime.now()),
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                           color: notifier.blackcolor,
                                           fontSize: constraints.maxWidth < 500
                                               ? constraints.maxWidth / 25
                                               : constraints.maxWidth < 750
                                               ? constraints.maxWidth / 40
                                               : constraints.maxWidth / 40,
-                                          fontFamily: 'gilroysemi',
+                                          
                                           fontWeight: FontWeight.w600),
                                       children: [
                                         TextSpan(
                                           text:
                                           " ${DateFormat.MMM().format(DateTime.now())}'${DateFormat.y().format(DateTime.now())}",
-                                          style: TextStyle(
+                                          style: baseStyle.copyWith(
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 30
                                                 : constraints.maxWidth < 750
@@ -2252,7 +2252,7 @@ class _helpState extends State<help> {
                                 const SizedBox(height: 6),
                                 Text(
                                   DateFormat.EEEE().format(DateTime.now()),
-                                  style: TextStyle(
+                                  style: baseStyle.copyWith(
                                       fontSize: constraints.maxWidth < 500
                                           ? constraints.maxWidth / 35
                                           : constraints.maxWidth < 750
@@ -2307,8 +2307,8 @@ class _helpState extends State<help> {
                                 Row(
                                   children: [
                                     Text('Class',
-                                        style: TextStyle(
-                                            fontFamily: 'gilroysemi',
+                                        style: baseStyle.copyWith(
+                                            
                                             color: notifier.blackcolor,
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 35
@@ -2331,19 +2331,19 @@ class _helpState extends State<help> {
                                   child: RichText(
                                     text: TextSpan(
                                       text: "1",
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                           fontSize: constraints.maxWidth < 500
                                               ? constraints.maxWidth / 25
                                               : constraints.maxWidth < 750
                                               ? constraints.maxWidth / 40
                                               : constraints.maxWidth / 40,
                                           color: notifier.blackcolor,
-                                          fontFamily: 'gilroysemi',
+                                          
                                           fontWeight: FontWeight.w600),
                                       children: [
                                         TextSpan(
                                           text: " Traveller",
-                                          style: TextStyle(
+                                          style: baseStyle.copyWith(
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 30
                                                 : constraints.maxWidth < 750
@@ -2359,7 +2359,7 @@ class _helpState extends State<help> {
                                 const SizedBox(height: 6),
                                 Text(
                                   'All Class',
-                                  style: TextStyle(
+                                  style: baseStyle.copyWith(
                                       fontSize: constraints.maxWidth < 500
                                           ? constraints.maxWidth / 35
                                           : constraints.maxWidth < 750
@@ -2426,7 +2426,7 @@ class _helpState extends State<help> {
                                                             .spaceBetween,
                                                         children: [
                                                           Text(ageType[index],
-                                                              style: TextStyle(
+                                                              style: baseStyle.copyWith(
                                                                   color: notifier
                                                                       .blackcolor,
                                                                   fontFamily:
@@ -2485,7 +2485,7 @@ class _helpState extends State<help> {
                                                                     .center,
                                                                 child: Text(
                                                                     '${add[index]}',
-                                                                    style: TextStyle(
+                                                                    style: baseStyle.copyWith(
                                                                         fontFamily:
                                                                         'gilroysemi',
                                                                         fontSize:
@@ -2531,7 +2531,7 @@ class _helpState extends State<help> {
                                                         ],
                                                       ),
                                                       Text(ageRange[index],
-                                                          style: TextStyle(
+                                                          style: baseStyle.copyWith(
                                                               color: notifier
                                                                   .subgreycolor,
                                                               fontFamily:
@@ -2638,8 +2638,8 @@ class _helpState extends State<help> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('From',
-                                style: TextStyle(
-                                    fontFamily: 'gilroysemi',
+                                style: baseStyle.copyWith(
+                                    
                                     color: notifier.blackcolor,
                                     fontSize: constraints.maxWidth < 500
                                         ? constraints.maxWidth / 35
@@ -2656,13 +2656,13 @@ class _helpState extends State<help> {
                               //         ? constraints.maxWidth / 40
                               //         : constraints.maxWidth / 40,
                               child: TextField(
-                                style: TextStyle(
+                                style: baseStyle.copyWith(
                                     fontSize: constraints.maxWidth < 500
                                         ? constraints.maxWidth / 25
                                         : constraints.maxWidth < 750
                                         ? constraints.maxWidth / 40
                                         : constraints.maxWidth / 40,
-                                    fontFamily: 'gilroysemi',
+                                    
                                     color: notifier.blackcolor,
                                     fontWeight: FontWeight.w600),
                                 decoration: InputDecoration(
@@ -2678,14 +2678,14 @@ class _helpState extends State<help> {
                                         borderSide: BorderSide(
                                             color: Colors.transparent)),
                                     hintText: 'Location',
-                                    hintStyle: TextStyle(
+                                    hintStyle: baseStyle.copyWith(
                                         color: notifier.blackcolor,
                                         fontSize: constraints.maxWidth < 500
                                             ? constraints.maxWidth / 25
                                             : constraints.maxWidth < 750
                                             ? constraints.maxWidth / 40
                                             : constraints.maxWidth / 40,
-                                        fontFamily: 'gilroysemi',
+                                        
                                         fontWeight: FontWeight.w600)),
                               ),
                             ),
@@ -2694,7 +2694,7 @@ class _helpState extends State<help> {
                             ),
                             Text(
                               'Where are you going?',
-                              style: TextStyle(
+                              style: baseStyle.copyWith(
                                   fontSize: constraints.maxWidth < 500
                                       ? constraints.maxWidth / 35
                                       : constraints.maxWidth < 750
@@ -2738,8 +2738,8 @@ class _helpState extends State<help> {
                                 Row(
                                   children: [
                                     Text('Return',
-                                        style: TextStyle(
-                                            fontFamily: 'gilroysemi',
+                                        style: baseStyle.copyWith(
+                                            
                                             color: notifier.blackcolor,
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 35
@@ -2765,20 +2765,20 @@ class _helpState extends State<help> {
                                     text: TextSpan(
                                       text:
                                       DateFormat.d().format(DateTime.now()),
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                           color: notifier.blackcolor,
                                           fontSize: constraints.maxWidth < 500
                                               ? constraints.maxWidth / 25
                                               : constraints.maxWidth < 750
                                               ? constraints.maxWidth / 40
                                               : constraints.maxWidth / 40,
-                                          fontFamily: 'gilroysemi',
+                                          
                                           fontWeight: FontWeight.w600),
                                       children: [
                                         TextSpan(
                                           text:
                                           " ${DateFormat.MMM().format(DateTime.now())}'${DateFormat.y().format(DateTime.now())}",
-                                          style: TextStyle(
+                                          style: baseStyle.copyWith(
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 30
                                                 : constraints.maxWidth < 750
@@ -2794,7 +2794,7 @@ class _helpState extends State<help> {
                                 const SizedBox(height: 6),
                                 Text(
                                   DateFormat.EEEE().format(DateTime.now()),
-                                  style: TextStyle(
+                                  style: baseStyle.copyWith(
                                       fontSize: constraints.maxWidth < 500
                                           ? constraints.maxWidth / 35
                                           : constraints.maxWidth < 750
@@ -2849,8 +2849,8 @@ class _helpState extends State<help> {
                                 Row(
                                   children: [
                                     Text('Travellers & Class',
-                                        style: TextStyle(
-                                            fontFamily: 'gilroysemi',
+                                        style: baseStyle.copyWith(
+                                            
                                             color: notifier.blackcolor,
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 35
@@ -2873,19 +2873,19 @@ class _helpState extends State<help> {
                                   child: RichText(
                                     text: TextSpan(
                                       text: "1",
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                           fontSize: constraints.maxWidth < 500
                                               ? constraints.maxWidth / 25
                                               : constraints.maxWidth < 750
                                               ? constraints.maxWidth / 40
                                               : constraints.maxWidth / 40,
                                           color: notifier.blackcolor,
-                                          fontFamily: 'gilroysemi',
+                                          
                                           fontWeight: FontWeight.w600),
                                       children: [
                                         TextSpan(
                                           text: " Traveller",
-                                          style: TextStyle(
+                                          style: baseStyle.copyWith(
                                             fontSize: constraints.maxWidth < 500
                                                 ? constraints.maxWidth / 30
                                                 : constraints.maxWidth < 750
@@ -2901,7 +2901,7 @@ class _helpState extends State<help> {
                                 const SizedBox(height: 6),
                                 Text(
                                   'Economy/Premium Economy',
-                                  style: TextStyle(
+                                  style: baseStyle.copyWith(
                                       fontSize: constraints.maxWidth < 500
                                           ? constraints.maxWidth / 35
                                           : constraints.maxWidth < 750
@@ -2968,7 +2968,7 @@ class _helpState extends State<help> {
                                                             .spaceBetween,
                                                         children: [
                                                           Text(ageType[index],
-                                                              style: TextStyle(
+                                                              style: baseStyle.copyWith(
                                                                   color: notifier
                                                                       .blackcolor,
                                                                   fontFamily:
@@ -3027,7 +3027,7 @@ class _helpState extends State<help> {
                                                                     .center,
                                                                 child: Text(
                                                                     '${add[index]}',
-                                                                    style: TextStyle(
+                                                                    style: baseStyle.copyWith(
                                                                         fontFamily:
                                                                         'gilroysemi',
                                                                         fontSize:
@@ -3073,7 +3073,7 @@ class _helpState extends State<help> {
                                                         ],
                                                       ),
                                                       Text(ageRange[index],
-                                                          style: TextStyle(
+                                                          style: baseStyle.copyWith(
                                                               color: notifier
                                                                   .subgreycolor,
                                                               fontFamily:
@@ -3172,8 +3172,8 @@ class _helpState extends State<help> {
               Row(
                 children: [
                   Text('Travellers & Class',
-                      style: TextStyle(
-                          fontFamily: 'gilroysemi',
+                      style: baseStyle.copyWith(
+                          
                           color: notifier.blackcolor,
                           fontSize: constraints.maxWidth < 550
                               ? constraints.maxWidth / 35
@@ -3195,19 +3195,19 @@ class _helpState extends State<help> {
                 child: RichText(
                   text: TextSpan(
                     text: "1",
-                    style: TextStyle(
+                    style: baseStyle.copyWith(
                         color: notifier.blackcolor,
                         fontSize: constraints.maxWidth < 550
                             ? constraints.maxWidth / 25
                             : constraints.maxWidth < 750
                                 ? constraints.maxWidth / 40
                                 : constraints.maxWidth / 40,
-                        fontFamily: 'gilroysemi',
+                        
                         fontWeight: FontWeight.w600),
                     children: [
                       TextSpan(
                         text: " Traveller",
-                        style: TextStyle(
+                        style: baseStyle.copyWith(
                           fontSize: constraints.maxWidth < 550
                               ? constraints.maxWidth / 30
                               : constraints.maxWidth < 750
@@ -3223,7 +3223,7 @@ class _helpState extends State<help> {
               const SizedBox(height: 6),
               Text(
                 'Economy/Premium Economy',
-                style: TextStyle(
+                style: baseStyle.copyWith(
                     fontSize: constraints.maxWidth < 550
                         ? constraints.maxWidth / 35
                         : constraints.maxWidth < 750
@@ -3268,16 +3268,16 @@ class _helpState extends State<help> {
       child: SfDateRangePicker(
         backgroundColor: notifier.whitecolor,
         headerStyle: DateRangePickerHeaderStyle(
-          textStyle: TextStyle(color: notifier.blackcolor),
+          textStyle: baseStyle.copyWith(color: notifier.blackcolor),
         ),
         monthViewSettings: DateRangePickerMonthViewSettings(
             viewHeaderStyle: DateRangePickerViewHeaderStyle(
-          textStyle: TextStyle(color: notifier.blackcolor),
+          textStyle: baseStyle.copyWith(color: notifier.blackcolor),
         )),
         allowViewNavigation: true,
         showNavigationArrow: true,
         monthCellStyle: DateRangePickerMonthCellStyle(
-          textStyle: TextStyle(
+          textStyle: baseStyle.copyWith(
               color: notifier.blackcolor, fontWeight: FontWeight.bold),
           todayTextStyle: const TextStyle(
               color: Color(0xff883DCF), fontWeight: FontWeight.w600),

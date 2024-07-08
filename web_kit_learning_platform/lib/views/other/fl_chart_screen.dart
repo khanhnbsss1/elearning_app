@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/other/fl_chart_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_breadcrumb.dart';
@@ -773,7 +774,7 @@ class _FlChartScreenState extends State<FlChartScreen>
                                       getTooltipItems: (ScatterSpot touchedBarSpot) {
                                         return ScatterTooltipItem(
                                           'X: ',
-                                          textStyle: TextStyle(
+                                          textStyle: baseStyle.copyWith(
                                             height: 1.2,
                                             color: Colors.grey[100],
                                             fontStyle: FontStyle.italic,
@@ -791,7 +792,7 @@ class _FlChartScreenState extends State<FlChartScreen>
                                             ),
                                             TextSpan(
                                               text: 'Y: ',
-                                              style: TextStyle(
+                                              style: baseStyle.copyWith(
                                                 height: 1.2,
                                                 color: Colors.grey[100],
                                                 fontStyle: FontStyle.italic,
@@ -914,7 +915,7 @@ class _FlChartScreenState extends State<FlChartScreen>
                                                 duration: const Duration(
                                                     milliseconds: 300),
                                                 curve: Curves.easeInToLinear,
-                                                style: TextStyle(
+                                                style: baseStyle.copyWith(
                                                   color: isSelected
                                                       ? value.color
                                                       : Colors.grey,
@@ -956,7 +957,7 @@ class _FlChartScreenState extends State<FlChartScreen>
                                   radarBorderData: const BorderSide(
                                       color: Colors.transparent),
                                   titlePositionPercentageOffset: 0.2,
-                                  titleTextStyle: TextStyle(
+                                  titleTextStyle: baseStyle.copyWith(
                                       color: Colors.black, fontSize: 14),
                                   getTitle: (index, angle) {
                                     final usedAngle =
@@ -1024,7 +1025,7 @@ class _FlChartScreenState extends State<FlChartScreen>
             value: 40,
             title: '40%',
             radius: radius,
-            titleStyle: TextStyle(
+            titleStyle: baseStyle.copyWith(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
               color: const Color(0xffffffff),
@@ -1043,7 +1044,7 @@ class _FlChartScreenState extends State<FlChartScreen>
             value: 30,
             title: '30%',
             radius: radius,
-            titleStyle: TextStyle(
+            titleStyle: baseStyle.copyWith(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
               color: const Color(0xffffffff),
@@ -1062,7 +1063,7 @@ class _FlChartScreenState extends State<FlChartScreen>
             value: 16,
             title: '16%',
             radius: radius,
-            titleStyle: TextStyle(
+            titleStyle: baseStyle.copyWith(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
               color: const Color(0xffffffff),
@@ -1081,7 +1082,7 @@ class _FlChartScreenState extends State<FlChartScreen>
             value: 15,
             title: '15%',
             radius: radius,
-            titleStyle: TextStyle(
+            titleStyle: baseStyle.copyWith(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
               color: const Color(0xffffffff),
@@ -1113,7 +1114,7 @@ class _FlChartScreenState extends State<FlChartScreen>
             value: 40,
             title: '40%',
             radius: radius,
-            titleStyle: TextStyle(
+            titleStyle: baseStyle.copyWith(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
               // color: Colors.mainTextColor1,
@@ -1126,7 +1127,7 @@ class _FlChartScreenState extends State<FlChartScreen>
             value: 30,
             title: '30%',
             radius: radius,
-            titleStyle: TextStyle(
+            titleStyle: baseStyle.copyWith(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
               // color: Colors.mainTextColor1,
@@ -1139,7 +1140,7 @@ class _FlChartScreenState extends State<FlChartScreen>
             value: 15,
             title: '15%',
             radius: radius,
-            titleStyle: TextStyle(
+            titleStyle: baseStyle.copyWith(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
               // color: Colors.mainTextColor1,
@@ -1152,7 +1153,7 @@ class _FlChartScreenState extends State<FlChartScreen>
             value: 15,
             title: '15%',
             radius: radius,
-            titleStyle: TextStyle(
+            titleStyle: baseStyle.copyWith(
               fontSize: fontSize,
               fontWeight: FontWeight.bold,
               // color: Colors.mainTextColor1,

@@ -83,9 +83,9 @@ class _nhState extends State<nh> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                  Flexible(child: Text('Quick and easy trip planner',
-                   style: TextStyle(
+                   style: baseStyle.copyWith(
                        fontSize: constraints.maxWidth < 300 ? 26 : constraints.maxWidth < 500 ? 28 : 40,
-                       fontFamily: 'gilroysemi',
+                       
                        color: notifier.blackcolor),
                    maxLines: 2,
                    overflow: TextOverflow.ellipsis,
@@ -172,9 +172,9 @@ class _nhState extends State<nh> {
             SizedBox(
               width : width / 1,
               child: Text('Pick a vibe and explore the top destination in India',
-                  style: TextStyle(
+                  style: baseStyle.copyWith(
                       fontSize: constraints.maxWidth < 300 ? 16 : constraints.maxWidth < 550 ? 18 : 22,
-                      fontFamily: 'gilroysemi',
+                      
                       color: notifier.subgreycolor),
                 maxLines: 2,
                 textAlign: constraints.maxWidth < 550 ? TextAlign.center : TextAlign.start,
@@ -223,8 +223,8 @@ class _nhState extends State<nh> {
                             //         .buttoncolor : notifier.blackcolor,alignment: Alignment.center),
                             AnimatedContainer(
                               duration: const Duration(milliseconds: 200),
-                              child: Text(chips[index], style: TextStyle(
-                                  fontFamily: 'gilroysemi',
+                              child: Text(chips[index], style: baseStyle.copyWith(
+                                  
                                   color: (selectedindex == index || chipshover[index]) ? notifier
                                       .buttoncolor : notifier.blackcolor),textAlign: TextAlign.center,),
                               )
@@ -371,7 +371,7 @@ class _nhState extends State<nh> {
                                         ),
                                         child: Text(
                                           offertag[index],
-                                          style: TextStyle(
+                                          style: baseStyle.copyWith(
                                               fontFamily: 'gilroybold',
                                               fontSize: 16,
                                               color: notifier.isDark ? Colors.white : notifier.whitecolor),
@@ -384,8 +384,8 @@ class _nhState extends State<nh> {
                                           children: [
                                             Text(
                                               natureproplist[index],
-                                              style: TextStyle(
-                                                  fontFamily: 'gilroysemi',
+                                              style: baseStyle.copyWith(
+                                                  
                                                   fontSize: 12,
                                                   color: notifier.subgreycolor),
                                             ),

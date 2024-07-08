@@ -86,9 +86,8 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> {
         ),
         Center(
           child: Text(L10nX.getStr.register_to_enjoy_the_best_deals_for_you,
-              style: TextStyleConstant
-                  .titleTextColorOnBackgroundColorStyle14w400
-                  .copyWith(
+              textAlign: TextAlign.center,
+              style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
                       fontSize: constraints.maxWidth < 550 ? 18 : 20,
                       color: notifier.greycolor)),
         ),
@@ -274,10 +273,10 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> {
                 //       alignment: Alignment.center,
                 //       child: Text(
                 //         'View all',
-                //         style: TextStyle(
+                //         style: baseStyle.copyWith(
                 //             fontSize: 14,
                 //             fontWeight: FontWeight.w500,
-                //             fontFamily: 'gilroysemi',
+                //             
                 //             color: isHover
                 //                 ? (notifier.isDark
                 //                     ? const Color(0xFFFFFFFF)

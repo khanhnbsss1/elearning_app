@@ -43,8 +43,8 @@ class _browsecategoryState extends State<browsecategory> {
   Widget browse(constraints){
     return Column(
       children: [
-        Text('Super easy booking',style: TextStyle(fontFamily: 'gilroysemi',color: notifier.blackcolor,fontSize: constraints.maxWidth < 550 ? 28 : constraints.maxWidth < 900 ? 36 : 48,),),
-        Text("Redefines the luxury",style: TextStyle(fontFamily: 'gilroymed',fontSize: constraints.maxWidth < 900 ? 18 : 26,color: notifier.subgreycolor),),
+        Text('Super easy booking',style: baseStyle.copyWith(color: notifier.blackcolor,fontSize: constraints.maxWidth < 550 ? 28 : constraints.maxWidth < 900 ? 36 : 48,),),
+        Text("Redefines the luxury",style: baseStyle.copyWith(fontFamily: 'gilroymed',fontSize: constraints.maxWidth < 900 ? 18 : 26,color: notifier.subgreycolor),),
         SizedBox(height: constraints.maxWidth < 550 ? 20 : 50,),
         Padding(padding: EdgeInsets.only(left:constraints.maxWidth < 550 ? 10 : constraints.maxWidth < 800 ? 50 : constraints.maxWidth < 1300 ? 100 : scroll ? 50 : 150),
             child: SizedBox(
@@ -83,14 +83,14 @@ class _browsecategoryState extends State<browsecategory> {
                                     borderRadius: BorderRadius.circular(12),
                                     color: notifier.sugestionbutton,
                                   ),
-                                  child: Text(categoryreach[index],style: TextStyle(fontFamily: 'gilroysemi',fontSize: 14 ,color: notifier.blackcolor),),
+                                  child: Text(categoryreach[index],style: baseStyle.copyWith(fontSize: 14 ,color: notifier.blackcolor),),
                                 ),
                                 const SizedBox(height: 75,),
                                 Image.asset('assets/Icons/buildingtreeicon.png',height: 20,color: notifier.isDark ? const Color(0xFFFCFCFD) :  notifier.subgreycolor),
                                 const SizedBox(height: 30,),
-                                Text('City house',style: TextStyle(fontFamily: 'gilroysemi',fontSize: 18 ,color: notifier.blackcolor)),
+                                Text('City house',style: baseStyle.copyWith(fontSize: 18 ,color: notifier.blackcolor)),
                                 const SizedBox(height: 7,),
-                                Text('Small description',style: TextStyle(fontFamily: 'gilroysemi',fontSize: 12 ,color: notifier.subgreycolor)),
+                                Text('Small description',style: baseStyle.copyWith(fontSize: 12 ,color: notifier.subgreycolor)),
                               ],
                             ),
                           ),

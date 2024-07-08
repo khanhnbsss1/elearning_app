@@ -119,7 +119,7 @@ class _bookticketState extends State<bookticket> {
                                 onPressed: () {},
                                 child: const Text(
                                   'Book Now',
-                                  style: TextStyle(fontSize: 16, fontFamily: 'gilroysemi', color: Colors.white),
+                                  style: baseStyle.copyWith(fontSize: 16,  color: Colors.white),
                                 )),
                           ))
                       : const SizedBox(),

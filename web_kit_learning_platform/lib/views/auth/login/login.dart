@@ -5,6 +5,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/resizer/reponsive.dart';
+import 'package:webkit/base/widgets/static_view/static_view.dart';
 import 'package:webkit/components/app_logo.dart';
 import 'package:webkit/controller/auth/login_controller.dart';
 import 'package:webkit/helpers/extensions/string.dart';
@@ -368,7 +369,7 @@ class _LoginState extends State<LoginPage1> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const AppLogo(imageString: ImageManager.logo, height: 60, width: 250),
+                        StaticView.buildLogo(),
                         Text(
                           'Sign In to the Admin Panel',
                           style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.blueGrey),

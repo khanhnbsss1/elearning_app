@@ -79,16 +79,16 @@ class _TeacherListState extends State<TeacherList> {
                           height: 30,
                         ),
                         Text(proptitle[index],
-                            style: TextStyle(
+                            style: baseStyle.copyWith(
                                 color: notifier.blackcolor,
-                                fontFamily: 'gilroysemi',
+                                
                                 fontSize: 18)),
                         const SizedBox(
                           height: 10,
                         ),
                         Text(
                           propsubtitle[index],
-                          style: TextStyle(
+                          style: baseStyle.copyWith(
                               fontFamily: 'gilroymed',
                               fontSize: constraints.maxWidth < 800 ? 18 : 16,
                               color: notifier.greycolor),
@@ -206,16 +206,16 @@ class _TeacherListState extends State<TeacherList> {
                         height: 30,
                       ),
                       Text(proptitle[index],
-                          style: TextStyle(
+                          style: baseStyle.copyWith(
                               color: notifier.blackcolor,
-                              fontFamily: 'gilroysemi',
+                              
                               fontSize: 18)),
                       const SizedBox(
                         height: 10,
                       ),
                       Text(
                         propsubtitle[index],
-                        style: TextStyle(
+                        style: baseStyle.copyWith(
                             fontFamily: 'gilroymed',
                             fontSize: constraints.maxWidth < 1050 ? 18 : 16,
                             color: notifier.greycolor),
@@ -252,16 +252,16 @@ class _TeacherListState extends State<TeacherList> {
                         height: 30,
                       ),
                       Text(proptitle[index],
-                          style: TextStyle(
+                          style: baseStyle.copyWith(
                               color: notifier.blackcolor,
-                              fontFamily: 'gilroysemi',
+                              
                               fontSize: 18)),
                       const SizedBox(
                         height: 10,
                       ),
                       Text(
                         propsubtitle[index],
-                        style: TextStyle(
+                        style: baseStyle.copyWith(
                             fontFamily: 'gilroymed',
                             fontSize:
                             constraints.maxWidth < 800 ? 18 : 16,
@@ -301,16 +301,16 @@ class _TeacherListState extends State<TeacherList> {
                     height: 30,
                   ),
                   Text(proptitle[index],
-                      style: TextStyle(
+                      style: baseStyle.copyWith(
                           color: notifier.blackcolor,
-                          fontFamily: 'gilroysemi',
+                          
                           fontSize: 18)),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
                     propsubtitle[index],
-                    style: TextStyle(
+                    style: baseStyle.copyWith(
                         fontFamily: 'gilroymed',
                         fontSize:
                         constraints.maxWidth < 800 ? 18 : 16,
@@ -361,8 +361,8 @@ class _TeacherListState extends State<TeacherList> {
                     ),
                     const SizedBox(width: 10,),
                     Text('Load More' ,
-                      style: TextStyle(
-                          fontFamily: 'gilroysemi',
+                      style: baseStyle.copyWith(
+                          
                           fontSize: 14,
                           color: isHover ? Colors.white : notifier.greycolor),
                     ),

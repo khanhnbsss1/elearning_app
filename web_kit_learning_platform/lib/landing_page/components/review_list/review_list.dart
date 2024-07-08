@@ -365,7 +365,7 @@ class _ReviewListState extends State<ReviewList> {
                                 style: TextStyleConstant
                                     .titleTextColorOnBackgroundColorStyle16w600
                                     .copyWith(
-                                        fontFamily: 'gilroysemi',
+                                        
                                         color: Colors.red,
                                         fontWeight: FontWeight.w600,
                                         fontSize:
@@ -383,7 +383,7 @@ class _ReviewListState extends State<ReviewList> {
                             children: [
                               Flexible(
                                 child: Text(reviewLandingPageInfo.position ?? "",
-                                    style: TextStyle(
+                                    style: baseStyle.copyWith(
                                       fontFamily: 'gilroybold',
                                       fontSize: (constraints.maxWidth < 550) ? Dimens.size10
                                           : (constraints.maxWidth < 750) ? Dimens.size12
@@ -412,7 +412,7 @@ class _ReviewListState extends State<ReviewList> {
                                 colorClickableText: Colors.pink,
                                 trimCollapsedText: L10nX.getStr.show_more,
                                 trimExpandedText: L10nX.getStr.show_less,
-                                style: TextStyle(
+                                style: baseStyle.copyWith(
                                     fontStyle: FontStyle.italic,
                                   fontSize: (constraints.maxWidth < 550) ? Dimens.size14
                                       : (constraints.maxWidth < 750) ? Dimens.size16

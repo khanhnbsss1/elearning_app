@@ -374,7 +374,7 @@ class CourseItem extends StatelessWidget{
                                           decimalDigits:
                                           0)
                                           .trim(),
-                                      style: TextStyle(
+                                      style: baseStyle.copyWith(
                                           fontFamily:
                                           'gilroysemi',
                                           color: notifier

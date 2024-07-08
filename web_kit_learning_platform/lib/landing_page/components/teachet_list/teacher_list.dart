@@ -297,18 +297,18 @@ class _TeacherListState extends State<TeacherList> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(landingPageUserInfo.fullname ?? "",
-                            style: TextStyle(
+                            style: baseStyle.copyWith(
                                 color: notifier.blackcolor,
                                 fontSize:  (constraints.maxWidth < 900)
                                             ? Dimens.size16
                                             : (constraints.maxWidth < 1300)
                                                 ? Dimens.size18
                                                 : Dimens.size24,
-                                fontFamily: 'gilroysemi',
+                                
                                 fontWeight: FontWeight.w500)),
                         Text(
                           landingPageUserInfo.position ?? "",
-                          style: TextStyle(
+                          style: baseStyle.copyWith(
                               color: notifier.blackcolor,
                               fontSize: (constraints.maxWidth < 900)
                                           ? Dimens.size12

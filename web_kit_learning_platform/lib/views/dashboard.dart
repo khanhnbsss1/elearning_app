@@ -137,8 +137,8 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                                                   text: TextSpan(
                                                     text: 'Upgrade Your Plan From a ',
                                                     style: MyTextStyle.bodyMedium(fontSize: 16),
-                                                    children: const <TextSpan>[
-                                                      TextSpan(text: 'Free trial,', style: TextStyle(fontWeight: FontWeight.bold)),
+                                                    children:  <TextSpan>[
+                                                      TextSpan(text: 'Free trial,', style: baseStyle.copyWith(fontWeight: FontWeight.bold)),
                                                       TextSpan(text: "to 'Premium plan'"),
                                                     ],
                                                   ),

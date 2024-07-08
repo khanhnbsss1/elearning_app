@@ -236,7 +236,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                 .sugestionbutton,
           ),
           SizedBox(height: constraints.maxWidth / 20),
-          const EndOfPage(),
+          EndOfPage(),
         ],
       ),
     );
@@ -255,7 +255,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                   : CrossAxisAlignment.start,
               children: [
                 Text('Enjoy the Trip with exciting Discount',
-                  style: TextStyle(
+                  style: baseStyle.copyWith(
                     fontFamily: 'gilroybold',
                     fontSize: 16,
                     color: notifier.greycolor,
@@ -266,8 +266,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                   height: constraints.maxWidth < 550 ? 10 : 20,
                 ),
                 Text('We Recommend Beautiful Destination Every Month',
-                    style: TextStyle(
-                        fontFamily: 'gilroysemi',
+                    style: baseStyle.copyWith(
                         color: notifier.blackcolor,
                         fontWeight: FontWeight.w600,
                         fontSize: constraints.maxWidth < 550 ? 28 : 38),
@@ -279,8 +278,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                 ),
                 Text(
                   'Effortless travel starts with us. Book your adventure, pack your bags, and let the exploration begin.',
-                  style: TextStyle(
-                      fontFamily: 'gilroysemi',
+                  style: baseStyle.copyWith(
                       fontSize: 16,
                       color: notifier.subgreycolor),
                   textAlign: constraints.maxWidth < 550
@@ -294,8 +292,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                   height: 50,
                   width: 300,
                   child: TextField(
-                    style: TextStyle(
-                      fontFamily: 'gilroysemi',
+                    style: baseStyle.copyWith(
                       color: notifier.blackcolor,
                     ),
                     decoration: InputDecoration(
@@ -331,7 +328,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                               scale: 3, width: 3, color: notifier.whitecolor),
                         ),
                         hintText: 'Enter youe phone number',
-                        hintStyle: TextStyle(
+                        hintStyle: baseStyle.copyWith(
                             fontFamily: 'gilroy',
                             color: notifier.subgreycolor)),
                   ),
@@ -399,10 +396,9 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                         children: [
                           Text(
                             'Antone Heller',
-                            style: TextStyle(
+                            style: baseStyle.copyWith(
                               fontSize: constraints.maxWidth < 550 ? constraints
                                   .maxWidth / 30 : constraints.maxWidth / 50,
-                              fontFamily: 'gilroysemi',
                               color: notifier.textcolor,
                             ),
                           ),
@@ -416,11 +412,11 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                               const SizedBox(width: 5),
                               Text(
                                 '4.8',
-                                style: TextStyle(
+                                style: baseStyle.copyWith(
                                     fontSize: constraints.maxWidth < 550
                                         ? constraints.maxWidth / 50
                                         : constraints.maxWidth / 70,
-                                    fontFamily: 'gilroysemi'),
+                                    ),
                               ),
                             ],
                           ),
@@ -467,7 +463,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                     child: Text(L10nX.getStr.app_name, 
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
+                      style: baseStyle.copyWith(
                       fontFamily: 'gilroybold',
                       color: notifier.blackcolor,
                       fontSize: constraints.maxWidth < 300 ? 20 : 24,
@@ -501,7 +497,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                         AppPages.routeName(Routes.dashboardRoute);
                         //AppPages.route(Paths.dashboardPath);
                       },
-                      child: Text(L10nX.getStr.auth_manager, style: TextStyle(
+                      child: Text(L10nX.getStr.auth_manager, style: baseStyle.copyWith(
                           fontFamily: 'gilroymed',
                           fontSize: 16,
                           color: supportHover
@@ -529,11 +525,10 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       color: notifier.whitecolor,
                       child: Text(
                         L10nX.getStr.application,
-                        style: TextStyle(
+                        style: baseStyle.copyWith(
                             color: supportHover
                                 ? notifier.blackcolor
                                 : notifier.subgreycolor,
-                            fontFamily: 'gilroysemi',
                             fontSize: 16),
                       ),
                       itemBuilder: (BuildContext context) =>
@@ -550,10 +545,10 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                       .start,
                                   children: [
                                     const SizedBox(height: 20),
-                                    Text(L10nX.getStr.download, style: TextStyle(
+                                    Text(L10nX.getStr.download, style: baseStyle.copyWith(
                                         fontSize: 16,
                                         color: notifier.subgreycolor,
-                                        fontFamily: 'gilroysemi')),
+                                    )),
                                     const SizedBox(height: 10),
                                     SizedBox(
                                       height: 100,
@@ -578,10 +573,10 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       const SizedBox(height: 20),
-                                      Text(L10nX.getStr.scan_code, style: TextStyle(
+                                      Text(L10nX.getStr.scan_code, style: baseStyle.copyWith(
                                           fontSize: 16,
                                           color: notifier.subgreycolor,
-                                          fontFamily: 'gilroysemi')),
+                                      )),
                                       const SizedBox(height: 12),
                                       SizedBox(
                                         height: 100,
@@ -635,12 +630,12 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                               const SizedBox(
                                 width: 4,
                               ),
-                              Text(L10nX.getStr.language_text, style: TextStyle(
+                              Text(L10nX.getStr.language_text, style: baseStyle.copyWith(
                                   color: langHover
                                       ? notifier.blackcolor
                                       : notifier.subgreycolor,
                                   fontSize: 14,
-                                  fontFamily: 'gilroysemi')),
+                              )),
                             ],
                           ),
                         ),
@@ -757,8 +752,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                               children: [
                                                 Text(
                                                     'Wrapped Bitcoin is now listed on Unity Exchange',
-                                                    style: TextStyle(
-                                                        fontFamily: 'gilroysemi',
+                                                    style: baseStyle.copyWith(
                                                         fontSize: 14,
                                                         color: notifier
                                                             .blackcolor),
@@ -771,14 +765,13 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                                   children: [
                                                     Text(
                                                         '24m ago',
-                                                        style: TextStyle(
-                                                            fontFamily: 'gilroysemi',
+                                                        style: baseStyle.copyWith(
                                                             fontSize: 12,
                                                             color: notifier
                                                                 .subgreycolor)),
                                                     Text(
                                                         '●',
-                                                        style: TextStyle(
+                                                        style: baseStyle.copyWith(
                                                             color: notifier
                                                                 .buttoncolor,
                                                             fontSize: 10)),
@@ -828,10 +821,9 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                   onPressed: () {
 
                                   },
-                                  child: const Text(
+                                  child:  Text(
                                       'See all notifications',
-                                      style: TextStyle(
-                                          fontFamily: 'gilroysemi',
+                                      style: baseStyle.copyWith(
                                           fontSize: 12,
                                           color: Colors.white)),
                                 ),
@@ -915,7 +907,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                                 const SizedBox(width: 20),
                                                 Text(
                                                   profilemenuTags[index],
-                                                  style: TextStyle(
+                                                  style: baseStyle.copyWith(
                                                       color: notifier
                                                           .blackcolor,
                                                       fontFamily: 'gilroymed',
@@ -939,7 +931,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                               ),
                                               alignment: Alignment.center,
                                               child: Text(notNumber[index],
-                                                  style: const TextStyle(
+                                                  style: baseStyle.copyWith(
                                                       fontFamily: 'gilroy',
                                                       color: Colors.white,
                                                       fontSize: 10)),
@@ -989,7 +981,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                               LoginPage().show(context);
                                               //AppPages.route(Paths.dashboardPath);
                                             },
-                                            child:  Text(L10nX.getStr.login, style: TextStyle(
+                                            child:  Text(L10nX.getStr.login, style: baseStyle.copyWith(
                                                 fontFamily: 'gilroymed',
                                                 fontSize: 12,
                                                 color: Colors.white)),
@@ -1019,7 +1011,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                               Register().show(context);
                                             },
                                             child: Text(L10nX.getStr.sign_up,
-                                                style: TextStyle(
+                                                style: baseStyle.copyWith(
                                                     fontFamily: 'gilroymed',
                                                     fontSize: 12,
                                                     color: notifier.buttoncolor)),
@@ -1054,7 +1046,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                               AuthorManager().handleLogout();
                                               AppPages.routeName(Routes.landingPageRoute, isReplace: true);
                                             },
-                                            child: Text(L10nX.getStr.sign_out_text, style: TextStyle(
+                                            child: Text(L10nX.getStr.sign_out_text, style: baseStyle.copyWith(
                                                 fontFamily: 'gilroymed',
                                                 fontSize: 12,
                                                 color: Colors.red)),
@@ -1099,7 +1091,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
-          height: constraints.maxWidth < 550
+          height:  ResponsiveInfo.isPhone()
               ? constraints.maxWidth / 5
               : constraints.maxWidth / 15,
         ),
@@ -1109,15 +1101,13 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
             children: [
               Text(L10nX.getStr.differences_in_teaching_methods,
                   style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
-                    fontFamily: 'gilroysemi',
                     color: notifier.blackcolor, 
-                    fontSize: constraints.maxWidth < 550 ? 28 : 45,),
+                    fontSize:  ResponsiveInfo.isPhone() ? 28 : 45,),
                   textAlign: TextAlign.center),
               Text(
                   L10nX.getStr.we_are_different_because_we_understand_what_you_need,
                 style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
-                    fontFamily: 'gilroysemi',
-                    fontSize: constraints.maxWidth < 700 ? 18 : 20,
+                    fontSize:  ResponsiveInfo.isPhone() ? 18 : 20,
                     color: notifier.greycolor
                 ),
                 textAlign: TextAlign.center,
@@ -1126,7 +1116,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
           ),
         ),
         SizedBox(
-          height: constraints.maxWidth < 550
+          height:  ResponsiveInfo.isPhone()
               ? 0
               : constraints.maxWidth / 30,
         ),
@@ -1233,64 +1223,54 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
       }){
     return Padding(
       padding:  EdgeInsets.symmetric(horizontal: Dimens.size36, vertical: Dimens.size20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: constraints.maxWidth < 750
-                ? (sugindex==0 ? 10 : 0)
-                : (sugindex==0 ? 10 : 0),
-          ),
-          ImageManager().getSvgImage(imageAssetName,
-              isSvgFolder: false,
-              height: constraints.maxWidth < 750
-                  ? 80
-                  : constraints.maxWidth < 1000
-                  ? 100
-                  : 120),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                width: constraints.maxWidth < 750 ? 225 : 325,
-                child: Text(
+      child: SizedBox(
+        width: ResponsiveInfo.isPhone()?(constraints.maxWidth -Dimens.size36*2 -Dimens.size20)
+            : Dimens.size340,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ImageManager().getSvgImage(imageAssetName,
+                isSvgFolder: false,
+                height: constraints.maxWidth < 750
+                    ? 80
+                    : constraints.maxWidth < 1000
+                    ? 100
+                    : 120),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
                   title??"",
                   style: TextStyleConstant.textStyleBlack18w600.copyWith(
-                    fontFamily: 'gilroysemi',
-                    fontSize: constraints.maxWidth < 700 ? 16 : 18,
+                    fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
                   ),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                width: constraints.maxWidth < 750 ? 225 : 325,
-                alignment: Alignment.center,
-                child: Text(content??"",
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(content??"",
                     style:TextStyleConstant.textStyleBlack12w400.copyWith(
-                      fontFamily: 'gilroysemi',
-                      fontSize: constraints.maxWidth < 700 ? 16 : 18,
+                      fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
                       color: notifier.blackcolor,
                     ),
                     textAlign: TextAlign.center,
                   maxLines: 3,
                 ),
-              ),
-            ],
-          ),
-          SizedBox(
-            width: constraints.maxWidth < 750
-                ? (sugindex==5 ? 0 : 16)
-                : (sugindex==5 ? 0 : constraints.maxWidth / 24),
-          ),
-        ],
+              ],
+            ),
+            SizedBox(
+              width: ResponsiveInfo.isPhone()
+                  ? (sugindex==5 ? 0 : 16)
+                  : (sugindex==5 ? 0 : constraints.maxWidth / 24),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -1306,121 +1286,122 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
         title: L10nX().getStringByKey("why_choose_title${index+1}"),
       ));
     }
-    return Column(
-      children: [
-        Text(L10nX.getStr.why_choose_us,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
+      child: Column(
+        children: [
+          Text(L10nX.getStr.why_choose_us,
+              style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
+                  fontSize:  ResponsiveInfo.isPhone()
+                      ? 28
+                      : 45,
+                  color: notifier.blackcolor
+              ),
+              textAlign: TextAlign.center),
+          Text(
+            L10nX.getStr.why_choose_us_sub_title,
             style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
-                fontFamily: 'gilroysemi',
-                fontSize: constraints.maxWidth < 550
-                    ? 28
-                    : 45,
-                color: notifier.blackcolor
-            ),
-            textAlign: TextAlign.center),
-        Text(
-          L10nX.getStr.why_choose_us_sub_title,
-          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
-              fontFamily: 'gilroysemi',
-              fontSize: constraints.maxWidth < 700 ? 16 : 18,
-              color: notifier.greycolor),
-          textAlign: TextAlign.center,
-        ),
-        SizedBox(
-          height: constraints.maxWidth < 550 ? 0 : constraints.maxWidth < 800
-              ? constraints.maxWidth / 30
-              : constraints.maxWidth / 30,
-        ),
-        Container(
-          // height: Dimens.size240,
-          constraints: BoxConstraints(
-            maxWidth: ResponsiveInfo.isPhone()
-                ? constraints.maxWidth -Dimens.size20
-                : constraints.maxWidth*3/4,
+                fontSize: constraints.maxWidth < 700 ? 16 : 18,
+                color: notifier.greycolor),
+            textAlign: TextAlign.center,
           ),
-          child: SingleChildScrollView(
-            controller: whyChooseUsController,
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: listItem,
-            ),
+          SizedBox(
+            height: constraints.maxWidth < 550 ? 0 : constraints.maxWidth < 800
+                ? constraints.maxWidth / 30
+                : constraints.maxWidth / 30,
           ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                    width: 2,
-                    color: (isHover3) ? notifier.sugestionbutton : Colors
-                        .transparent),
+          Container(
+            // height: Dimens.size240,
+            constraints: BoxConstraints(
+              maxWidth: ResponsiveInfo.isPhone()
+                  ? constraints.maxWidth -Dimens.size20
+                  : constraints.maxWidth*3/4,
+            ),
+            child: SingleChildScrollView(
+              controller: whyChooseUsController,
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: listItem,
               ),
-              child: InkWell(
-                onTap: () {
-                  if (whyChooseUsController.offset > 0) {
-                    whyChooseUsController.animateTo(
-                      (constraints.maxWidth < 750) ? whyChooseUsController.offset - 225*2 : whyChooseUsController.offset - 325*2,
-                      duration: const Duration(milliseconds: 200),
-                      curve: Curves.easeInOut,
-                    );
-                  }
-                },
-                onHover: (val) {
-                  setState(() {
-                    isHover3 = val;
-                  });
-                },
-                child: Padding(padding: const EdgeInsets.all(13),
-                  child: Image.asset(
-                    'assets/Icons/arrowlefticon.png',
-                    width: 15,
-                    color: notifier.subgreycolor,
-                  ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                      width: 2,
+                      color: (isHover3) ? notifier.sugestionbutton : Colors
+                          .transparent),
                 ),
-              ),
-            ),
-            const SizedBox(width: 10),
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                    width: 2,
-                    color: (isHover4) ? notifier.sugestionbutton : Colors
-                        .transparent),
-              ),
-              child: InkWell(
-                onTap: () {
-                  if (whyChooseUsController.offset >= 0) {
-                    whyChooseUsController.animateTo(
-                      (constraints.maxWidth < 750) ? whyChooseUsController.offset + 225*2 : whyChooseUsController.offset + 325*2,
-                      duration: const Duration(milliseconds: 200),
-                      curve: Curves.easeInOut,
-                    );
-                  }
-                },
-                onHover: (val) {
-                  setState(() {
-                    isHover4 = val;
-                  });
-                },
-                child: Padding(padding: const EdgeInsets.all(13),
-                  child: Image.asset(
-                      'assets/Icons/arrowrighticon.png',
+                child: InkWell(
+                  onTap: () {
+                    if (whyChooseUsController.offset > 0) {
+                      whyChooseUsController.animateTo(
+                        (constraints.maxWidth < 750) ? whyChooseUsController.offset - 225*2 : whyChooseUsController.offset - 325*2,
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.easeInOut,
+                      );
+                    }
+                  },
+                  onHover: (val) {
+                    setState(() {
+                      isHover3 = val;
+                    });
+                  },
+                  child: Padding(padding: const EdgeInsets.all(13),
+                    child: Image.asset(
+                      'assets/Icons/arrowlefticon.png',
                       width: 15,
-                      color: notifier.subgreycolor
+                      color: notifier.subgreycolor,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
+              const SizedBox(width: 10),
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                      width: 2,
+                      color: (isHover4) ? notifier.sugestionbutton : Colors
+                          .transparent),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    if (whyChooseUsController.offset >= 0) {
+                      whyChooseUsController.animateTo(
+                        (constraints.maxWidth < 750) ? whyChooseUsController.offset + 225*2 : whyChooseUsController.offset + 325*2,
+                        duration: const Duration(milliseconds: 200),
+                        curve: Curves.easeInOut,
+                      );
+                    }
+                  },
+                  onHover: (val) {
+                    setState(() {
+                      isHover4 = val;
+                    });
+                  },
+                  child: Padding(padding: const EdgeInsets.all(13),
+                    child: Image.asset(
+                        'assets/Icons/arrowrighticon.png',
+                        width: 15,
+                        color: notifier.subgreycolor
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

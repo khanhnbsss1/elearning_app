@@ -661,9 +661,9 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                   L10nX.getStr.who_this_course_is_for_comment,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: baseStyle.copyWith(
                     fontSize: Dimens.size12,
-                    fontFamily: 'gilroysemi',
+                    
                     fontWeight: FontWeight.bold,
                     color: notifier.textcolor,
                   ),
@@ -706,9 +706,9 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                 L10nX.getStr.who_this_course_is_for_comment,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
+                style: baseStyle.copyWith(
                   fontSize: width / 75,
-                  fontFamily: 'gilroysemi',
+                  
                   fontWeight: FontWeight.bold,
                   color: notifier.textcolor,
                 ),
