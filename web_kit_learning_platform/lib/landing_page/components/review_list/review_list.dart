@@ -313,7 +313,7 @@ class _ReviewListState extends State<ReviewList> {
           : (constraints.maxWidth < 1150) ? MediaQuery.sizeOf(context).width/ 1.2
           : MediaQuery.sizeOf(context).width/ 2.4,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        padding: const EdgeInsets.all( 12.0),
         child: Card(
           elevation: 5,
           shape:
@@ -329,19 +329,17 @@ class _ReviewListState extends State<ReviewList> {
               children: [
                 Flexible(
                   flex: 5,
-                  child: Container(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: reviewLandingPageInfo.avatar!.isNotEmpty
-                            ? ImageManager().getImageByUrl(
-                                reviewLandingPageInfo.avatar ?? "",
-                                boxFit: BoxFit.fill)
-                            : Image.asset(
-                                'assets/deshboard/latestdeals.png',
-                                fit: BoxFit.fill),
-                      ),
+                  child: Padding(
+                    padding: (constraints.maxWidth < 550) ? EdgeInsets.only(top: 16.0, bottom: 4.0, left: 16, right: 16) : EdgeInsets.all(16),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: reviewLandingPageInfo.avatar!.isNotEmpty
+                          ? ImageManager().getImageByUrl(
+                              reviewLandingPageInfo.avatar ?? "",
+                              boxFit: BoxFit.fill)
+                          : Image.asset(
+                              'assets/deshboard/latestdeals.png',
+                              fit: BoxFit.fill),
                     ),
                   ),
                 ),
@@ -385,8 +383,8 @@ class _ReviewListState extends State<ReviewList> {
                                 child: Text(reviewLandingPageInfo.position ?? "",
                                     style: baseStyle.copyWith(
                                       fontFamily: 'gilroybold',
-                                      fontSize: (constraints.maxWidth < 550) ? Dimens.size10
-                                          : (constraints.maxWidth < 750) ? Dimens.size12
+                                      fontSize: (constraints.maxWidth < 550) ? Dimens.size12
+                                          : (constraints.maxWidth < 750) ? Dimens.size13
                                           : (constraints.maxWidth < 900) ? Dimens.size14
                                           : (constraints.maxWidth < 1300) ? Dimens.size16
                                           : Dimens.size20,
@@ -400,7 +398,7 @@ class _ReviewListState extends State<ReviewList> {
                             height: constraints.maxWidth < 550 ? 6 : 20,
                           ),
                           SizedBox(
-                            height: (constraints.maxWidth < 550) ? Dimens.size50
+                            height: (constraints.maxWidth < 550) ? Dimens.size70
                                 : (constraints.maxWidth < 1300) ? Dimens.size150
                                 : Dimens.size200,
                             child: SingleChildScrollView(

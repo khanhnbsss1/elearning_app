@@ -357,8 +357,9 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                             ),
                           ),
                           const SizedBox(height: 20),
-                          Text(
-                            'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services - Powered by ${L10nX.getStr.app_name}',
+                          Text( (constraints.maxWidth < 950 && constraints.maxWidth > 550)
+                              ? 'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services  \n Powered by ${L10nX.getStr.app_name}'
+                              : 'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services Powered by ${L10nX.getStr.app_name}',
                             style: baseStyle.copyWith(
                                 fontSize: constraints.maxWidth < 300 ? 10 : 14,
                                 fontFamily: 'gilroymed',

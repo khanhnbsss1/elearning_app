@@ -59,9 +59,17 @@ class _MyCourseListState extends State<MyCourseList>
                   double height = MediaQuery.of(context).size.height;
                   List<Widget> listOfCourse = List.empty(growable: true);
 
-                  for (CourseInfo courseInfo in state.myCourseResponseModel?.data ?? []) {
-                    listOfCourse.add(CourseItemGridView(
-                      courseInfo: courseInfo));
+                  if (state.myCourseResponseModel == null) {
+                    print('============================\n');
+                    return Center(
+                        child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    for (CourseInfo courseInfo in state.myCourseResponseModel
+                        ?.data ?? []) {
+                      listOfCourse.add(CourseItemGridView(
+                          courseInfo: courseInfo));
+                    }
                   }
                   return Column(
                     children: [
@@ -127,17 +135,17 @@ class _MyCourseListState extends State<MyCourseList>
                           ],
                         ),
                       ),
-                      Expanded(
+                      (listOfCourse.isNotEmpty) ? Expanded(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: GridView.builder(
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: width < 750 ? 1 : width < 1000 ? 2 : width < 1500 ? 3 : 4, crossAxisSpacing: 20, mainAxisSpacing: 20, childAspectRatio: 1 - 0.1),
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: width < 550 ? 1 : width < 850 ? 2 : width < 1150 ? 3 : 4, crossAxisSpacing: 16, mainAxisSpacing: 16, childAspectRatio: 5/6),
                             itemBuilder: (_, index) => listOfCourse[index],
                             itemCount: state.myCourseResponseModel?.data?.length,
                             shrinkWrap: true,
                           ),
                         ),
-                      )
+                      ) : SizedBox(),
                     ],
                   );
                 },

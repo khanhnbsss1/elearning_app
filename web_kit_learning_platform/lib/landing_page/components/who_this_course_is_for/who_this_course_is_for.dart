@@ -271,7 +271,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                             TableRow(children: [
                               TableCell(
                                   child: Padding(
-                                padding: const EdgeInsets.only(right: 16),
+                                padding: const EdgeInsets.only(right: 16, top: 8),
                                 child: Container(
                                   width: (width < 900)
                                       ? Dimens.size40
@@ -306,7 +306,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                               )),
                               TableCell(
                                   child: Padding(
-                                padding: const EdgeInsets.only(right: 16),
+                                padding: const EdgeInsets.only(right: 16, top: 8),
                                 child: Container(
                                   width: (width < 900)
                                       ? Dimens.size40
@@ -437,7 +437,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                             TableRow(children: [
                               TableCell(
                                   child: Padding(
-                                padding: const EdgeInsets.only(right: 16),
+                                padding: const EdgeInsets.only(right: 16, top: 8),
                                 child: Container(
                                   width: (width < 900)
                                       ? Dimens.size40
@@ -472,7 +472,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                               )),
                               TableCell(
                                   child: Padding(
-                                padding: const EdgeInsets.only(right: 16),
+                                padding: const EdgeInsets.only(right: 16, top: 8),
                                 child: Container(
                                   width: (width < 900)
                                       ? Dimens.size40
@@ -662,8 +662,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: baseStyle.copyWith(
-                    fontSize: Dimens.size12,
-                    
+                    fontSize: Dimens.size14,
                     fontWeight: FontWeight.bold,
                     color: notifier.textcolor,
                   ),

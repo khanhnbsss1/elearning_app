@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ColorNotifier with ChangeNotifier {
-get blackcolor => isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
+get  blackcolor => isDark ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
 get blackwhitecolor => isDark ? const Color(0xFF000000) : const Color(0xFFFFFFFF);
 get backgroundColor => isDark ? const Color(0xFF141416) : const Color(0xFFFFFFFF);
 get whitecolor => isDark ? const Color(0xFF23262F) : const Color(0xFFFFFFFF);

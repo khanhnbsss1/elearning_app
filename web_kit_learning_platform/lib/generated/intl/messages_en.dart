@@ -36,8 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "app_address":
             MessageLookupByLibrary.simpleMessage("Innovation St. 767,CA - USA"),
         "app_email": MessageLookupByLibrary.simpleMessage("hello@pulse.com"),
-        "app_name":
-            MessageLookupByLibrary.simpleMessage("YAX Chinese Learning"),
+        "app_name": MessageLookupByLibrary.simpleMessage("YAX Chinese"),
         "app_phone": MessageLookupByLibrary.simpleMessage("+33 455 67 89 00"),
         "appcept": MessageLookupByLibrary.simpleMessage("Accept"),
         "application": MessageLookupByLibrary.simpleMessage("Application"),

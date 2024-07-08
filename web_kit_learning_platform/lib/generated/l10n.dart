@@ -50,10 +50,10 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `YAX Chinese Learning`
+  /// `YAX Chinese`
   String get app_name {
     return Intl.message(
-      'YAX Chinese Learning',
+      'YAX Chinese',
       name: 'app_name',
       desc: '',
       args: [],

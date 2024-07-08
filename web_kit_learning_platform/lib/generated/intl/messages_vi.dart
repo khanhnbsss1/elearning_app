@@ -35,8 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "app_address":
             MessageLookupByLibrary.simpleMessage("Innovation St. 767,CA - USA"),
         "app_email": MessageLookupByLibrary.simpleMessage("hello@pulse.com"),
-        "app_name":
-            MessageLookupByLibrary.simpleMessage("YAX Chinese Learning"),
+        "app_name": MessageLookupByLibrary.simpleMessage("YAX Chinese"),
         "app_phone": MessageLookupByLibrary.simpleMessage("+33 455 67 89 00"),
         "appcept": MessageLookupByLibrary.simpleMessage("Chấp nhận"),
         "application": MessageLookupByLibrary.simpleMessage("Ứng dụng"),
@@ -132,7 +131,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tiêu đề hộp thoại"),
         "dialogs": MessageLookupByLibrary.simpleMessage("Hộp thoại"),
         "differences_in_teaching_methods": MessageLookupByLibrary.simpleMessage(
-            "Sự khác biệt trong cách giảng dạy"),
+            "Sự khác biệt trong giảng dạy"),
         "doughnut_chart":
             MessageLookupByLibrary.simpleMessage("Biểu đồ bánh rán"),
         "download": MessageLookupByLibrary.simpleMessage("Tải xuống"),

@@ -70,7 +70,6 @@ class _CourseListState extends State<CourseList>
                   //     ? (kIsWeb ? width / 4 : width)
                   //     : Dimens.size300;
 
-
                   for (CourseInfo courseInfo
                       in state.courseResponseModel?.data ?? []) {
                     listOfCourse.add(CourseItemGridView(
@@ -138,17 +137,17 @@ class _CourseListState extends State<CourseList>
                           ],
                         ),
                       ),
-                      Expanded(
+                      (listOfCourse.isNotEmpty) ? Expanded(
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: GridView.builder(
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: width < 550 ? 1 :width < 1150 ? 3 : 4, crossAxisSpacing: 16, mainAxisSpacing: 16, childAspectRatio: 5/6),
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: width < 550 ? 1 : width < 850 ? 2 : width < 1150 ? 3 : 4, crossAxisSpacing: 16, mainAxisSpacing: 16, childAspectRatio: 5/6),
                             itemBuilder: (_, index) => listOfCourse[index],
                             itemCount: state.courseResponseModel?.data?.length,
                             // shrinkWrap: true,
                           ),
                         ),
-                      )
+                      ) : SizedBox()
                       // Expanded(
                       //   child: Padding(
                       //     padding: EdgeInsets.all(16),

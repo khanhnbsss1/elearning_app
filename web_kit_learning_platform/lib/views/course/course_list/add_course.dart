@@ -5,27 +5,25 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/controller/auth/register_controller.dart';
-import 'package:webkit/helpers/extensions/string.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_button.dart';
-import 'package:webkit/helpers/widgets/my_flex.dart';
-import 'package:webkit/helpers/widgets/my_flex_item.dart';
-import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
-import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/images.dart';
-import 'package:webkit/landing_page/mediaquery/mq.dart';
-import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
+import 'package:webkit/views/course/course_list/add_lectures.dart';
 import 'package:webkit/views/course/course_list/course_mode.dart';
-import 'package:webkit/views/layouts/auth_layout.dart';
-
 import '../../../controller/ui/add_course_controller.dart';
 import '../../../services/apis/course/add_course_request.dart';
+import 'package:flutter/material.dart';
+import 'package:multi_dropdown/enum/app_enums.dart';
+import 'package:multi_dropdown/models/chip_config.dart';
+import 'package:multi_dropdown/models/network_config.dart';
+import 'package:multi_dropdown/models/value_item.dart';
+import 'package:multi_dropdown/multiselect_dropdown.dart';
+import 'package:multi_dropdown/widgets/hint_text.dart';
+import 'package:multi_dropdown/widgets/selection_chip.dart';
+import 'package:multi_dropdown/widgets/single_selected_item.dart';
 
 class AddCourse extends StatefulWidget {
   const AddCourse({super.key});
@@ -42,8 +40,11 @@ class AddCourse extends StatefulWidget {
 class _AddCourseState extends State<AddCourse>
     with SingleTickerProviderStateMixin, UIMixin {
 
+  final MultiSelectController multiSelectController = MultiSelectController();
   late AddCourseController controller;
   late AnimationController animationController;
+
+  Color color = Color.fromRGBO(163, 20, 19, 1.0);
   @override
   void initState() {
     super.initState();
@@ -51,8 +52,9 @@ class _AddCourseState extends State<AddCourse>
     animationController = AnimationController(vsync: this);
   }
 
-  List<String> _items = [];
   List<Lectures> lectures = [];
+  bool isChecked = false;
+  bool value = false;
 
   @override
   Widget build(BuildContext context) {
@@ -63,76 +65,36 @@ class _AddCourseState extends State<AddCourse>
       'Tiếng Anh',
       'Tiếng Nhật',
     ];
-    List categoryIdList = [
-      '1',
-      '2',
-      '3',
-      '4',
+
+    List tagList = [
+      'HSK1',
+      'China',
+      'HSK2',
+      'VietNam'
     ];
+
+    List<bool> tagListCheckBox = List<bool>.filled(tagList.length, false);
+
+
     List gradeNameList = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5'];
     String? value1;
     String? value2;
-    String? value3;
 
-    File? _selectedImage;
-    final ImagePicker _imagePicker = ImagePicker();
+    File? selectedImage;
+    final ImagePicker imagePicker = ImagePicker();
 
-    final GlobalKey<AnimatedListState> _listKey = GlobalKey();
 
-    void _addItem() {
-      setState(() {
-        _items.add('New Item');
-        _listKey.currentState?.insertItem(0);
-        print('_items: $_items');
-      });
-    }
-
-    void _removeItem(int index) {
-      setState(() {
-        _items.removeAt(index);
-        _listKey.currentState?.removeItem(index, (context, animation) {
-          return FadeTransition(
-            opacity: animation,
-            child: ListTile(
-              title: Text(_items[index]),
-            ),
-          );
-        });
-        print('_items: $_items');
-
-      });
-    }
-
-    // void _addItem() {
+    // void addItem() {
     //   setState(() {
-    //     lectures.add(Lectures(
-    //       id: lectures.length + 1,
-    //       subName: '',
-    //       lectureName: '',
-    //       lectureLink: '',
-    //       lectureMode: '',
-    //     ));
-    //     _listKey.currentState?.insertItem(lectures.length - 1);
-    //     print('_items: $_items');
+    //     _items.add('New Item');
     //   });
     // }
     //
-    // void _removeItem(int index) {
+    // void removeItem(int index) {
     //   setState(() {
-    //     lectures.removeAt(index);
-    //     _listKey.currentState?.removeItem(index, (context, animation) {
-    //       return FadeTransition(
-    //         opacity: animation,
-    //         child: ListTile(
-    //           title: SizedBox(),
-    //         ),
-    //       );
-    //     });
+    //     _items.removeAt(index);
     //   });
     // }
-    String? _selectedOption = 'Free';
-    bool _isPremium = false;
-    final _paymentController = TextEditingController();
 
     return Material(
         color: theme.cardTheme.color,
@@ -150,7 +112,8 @@ class _AddCourseState extends State<AddCourse>
                       onTap: () {
                         Navigator.of(context).pop();
                       },
-                      child: Icon(Icons.close),
+                      child: Icon(Icons.close,
+                      color: color,),
                     ),
                   ),
                   Center(
@@ -172,7 +135,7 @@ class _AddCourseState extends State<AddCourse>
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    MyText.labelMedium('Name'),
+                                    MyText.labelMedium('Course name *'),
                                     MySpacing.height(4),
                                     TextFormField(
                                       validator: controller.basicValidator
@@ -185,9 +148,10 @@ class _AddCourseState extends State<AddCourse>
                                         labelStyle:
                                             MyTextStyle.bodySmall(xMuted: true),
                                         border: outlineInputBorder,
-                                        prefixIcon: const Icon(
+                                        prefixIcon: Icon(
                                           LucideIcons.user,
                                           size: 20,
+                                          color: color,
                                         ),
                                         contentPadding: MySpacing.all(16),
                                         isCollapsed: true,
@@ -204,118 +168,54 @@ class _AddCourseState extends State<AddCourse>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     MyText.labelMedium(
-                                      'Category',
+                                      'Category *',
                                     ),
                                     MySpacing.height(4),
-                                    TextFormField(
-                                      validator: controller.basicValidator
-                                          .getValidation('categoryId'),
-                                      controller: controller.basicValidator
-                                          .getController('categoryId'),
-                                      keyboardType: TextInputType.number,
+                                    DropdownButtonFormField(
+                                      dropdownColor: theme.cardTheme.color,
                                       decoration: InputDecoration(
-                                        labelText: 'Category Id',
+                                        labelText: value2 ?? 'Category',
                                         labelStyle:
-                                            MyTextStyle.bodySmall(xMuted: true),
+                                        MyTextStyle.bodySmall(xMuted: true),
                                         border: outlineInputBorder,
-                                        prefixIcon: const Icon(
-                                          LucideIcons.user,
+                                        prefixIcon: Icon(
+                                          LucideIcons.phone,
                                           size: 20,
+                                          color: color,
                                         ),
                                         contentPadding: MySpacing.all(16),
                                         isCollapsed: true,
                                         floatingLabelBehavior:
-                                            FloatingLabelBehavior.never,
+                                        FloatingLabelBehavior.never,
                                       ),
-                                    ),
+                                      items: categoryNameList.map((element) {
+                                        return DropdownMenuItem(
+                                          value: element,
+                                          child: Text(element),
+                                        );
+                                      }).toList(),
+                                      onChanged: (value) => setState(
+                                              () => value2 = value as String?),
+                                    )
                                   ],
                                 ),
                               ),
-                            ],
-                          ),
-                          MySpacing.height(20),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    MyText.labelMedium(
-                                      'Info object',
-                                    ),
-                                    MySpacing.height(4),
-                                    TextFormField(
-                                      validator: controller.basicValidator
-                                          .getValidation('info_obj'),
-                                      controller: controller.basicValidator
-                                          .getController('info_obj'),
-                                      keyboardType: TextInputType.number,
-                                      decoration: InputDecoration(
-                                        labelText: 'Info object',
-                                        labelStyle:
-                                            MyTextStyle.bodySmall(xMuted: true),
-                                        border: outlineInputBorder,
-                                        prefixIcon: const Icon(
-                                          LucideIcons.user,
-                                          size: 20,
-                                        ),
-                                        contentPadding: MySpacing.all(16),
-                                        isCollapsed: true,
-                                        floatingLabelBehavior:
-                                            FloatingLabelBehavior.never,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              MySpacing.width(20),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    MyText.labelMedium('Duration'),
-                                    MySpacing.height(4),
-                                    TextFormField(
-                                      validator: controller.basicValidator
-                                          .getValidation('durian'),
-                                      controller: controller.basicValidator
-                                          .getController('durian'),
-                                      keyboardType: TextInputType.text,
-                                      decoration: InputDecoration(
-                                        labelText: 'durian',
-                                        labelStyle:
-                                            MyTextStyle.bodySmall(xMuted: true),
-                                        border: outlineInputBorder,
-                                        prefixIcon: const Icon(
-                                          LucideIcons.user,
-                                          size: 20,
-                                        ),
-                                        contentPadding: MySpacing.all(16),
-                                        isCollapsed: true,
-                                        floatingLabelBehavior:
-                                            FloatingLabelBehavior.never,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              MySpacing.width(20),
                               // Expanded(
                               //   child: Column(
                               //     crossAxisAlignment: CrossAxisAlignment.start,
                               //     children: [
                               //       MyText.labelMedium(
-                              //         'Payment',
+                              //         'Category',
                               //       ),
                               //       MySpacing.height(4),
                               //       TextFormField(
                               //         validator: controller.basicValidator
-                              //             .getValidation('payment'),
+                              //             .getValidation('category_name'),
                               //         controller: controller.basicValidator
-                              //             .getController('payment'),
+                              //             .getController('category_name'),
                               //         keyboardType: TextInputType.number,
                               //         decoration: InputDecoration(
-                              //           labelText: 'Payment',
+                              //           labelText: 'Category name',
                               //           labelStyle:
                               //               MyTextStyle.bodySmall(xMuted: true),
                               //           border: outlineInputBorder,
@@ -332,143 +232,125 @@ class _AddCourseState extends State<AddCourse>
                               //     ],
                               //   ),
                               // ),
-                              Expanded(child: ModeOptionWidget()),
                             ],
-                          ),
-                          MySpacing.height(20),
-                          MyText.labelMedium(
-                            'Image',
-                          ),
-                          MySpacing.height(4),
-                          TextFormField(
-                            validator: controller.basicValidator
-                                .getValidation('image'),
-                            controller: controller.basicValidator
-                                .getController('image'),
-                            keyboardType: TextInputType.url,
-                            decoration: InputDecoration(
-                              labelText: 'image',
-                              labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                              border: outlineInputBorder,
-                              prefixIcon: const Icon(
-                                LucideIcons.mail,
-                                size: 20,
-                              ),
-                              contentPadding: MySpacing.all(16),
-                              isCollapsed: true,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.never,
-                              suffixIcon: IconButton(
-                                icon: Icon(Icons.image),
-                                onPressed: () async {
-                                  final pickedFile = await _imagePicker
-                                      .pickImage(source: ImageSource.gallery);
-                                  setState(() {
-                                    if (pickedFile != null) {
-                                      _selectedImage = File(pickedFile.path);
-                                      // Update the text field with the selected image path
-                                      controller.basicValidator
-                                          .getController('image')
-                                          ?.text = _selectedImage!.path;
-                                    } else {
-                                      _selectedImage = null;
-                                    }
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                          MySpacing.height(20),
-                          MyText.labelMedium(
-                            'Video review',
-                          ),
-                          MySpacing.height(4),
-                          TextFormField(
-                            validator: controller.basicValidator
-                                .getValidation('image'),
-                            controller: controller.basicValidator
-                                .getController('image'),
-                            keyboardType: TextInputType.url,
-                            decoration: InputDecoration(
-                              labelText: 'image',
-                              labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                              border: outlineInputBorder,
-                              prefixIcon: const Icon(
-                                LucideIcons.mail,
-                                size: 20,
-                              ),
-                              contentPadding: MySpacing.all(16),
-                              isCollapsed: true,
-                              floatingLabelBehavior:
-                                  FloatingLabelBehavior.never,
-                              suffixIcon: IconButton(
-                                icon: Icon(Icons.video_call),
-                                onPressed: () async {
-                                  final pickedFile = await _imagePicker
-                                      .pickVideo(source: ImageSource.gallery);
-                                  setState(() {
-                                    if (pickedFile != null) {
-                                      _selectedImage = File(pickedFile.path);
-                                      // Update the text field with the selected image path
-                                      controller.basicValidator
-                                          .getController('image')
-                                          ?.text = _selectedImage!.path;
-                                    } else {
-                                      _selectedImage = null;
-                                    }
-                                  });
-                                },
-                              ),
-                            ),
                           ),
                           MySpacing.height(20),
                           Row(
                             children: [
                               Expanded(
-                                flex: 4,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     MyText.labelMedium(
-                                      'Category name',
+                                      'Image',
                                     ),
                                     MySpacing.height(4),
-                                    DropdownButtonFormField(
-                                      dropdownColor: theme.cardTheme.color,
+                                    TextFormField(
+                                      validator: controller.basicValidator
+                                          .getValidation('image'),
+                                      controller: controller.basicValidator
+                                          .getController('image'),
+                                      keyboardType: TextInputType.url,
                                       decoration: InputDecoration(
-                                        labelText: value2 ?? 'Category name',
-                                        labelStyle:
-                                            MyTextStyle.bodySmall(xMuted: true),
+                                        labelText: 'Image',
+                                        labelStyle: MyTextStyle.bodySmall(xMuted: true),
                                         border: outlineInputBorder,
-                                        prefixIcon: const Icon(
-                                          LucideIcons.phone,
+                                        prefixIcon: Icon(
+                                          LucideIcons.mail,
                                           size: 20,
+                                          color: color,
                                         ),
                                         contentPadding: MySpacing.all(16),
                                         isCollapsed: true,
                                         floatingLabelBehavior:
-                                            FloatingLabelBehavior.never,
+                                        FloatingLabelBehavior.never,
+                                        suffixIcon: IconButton(
+                                          icon: Icon(Icons.image),
+                                          onPressed: () async {
+                                            final pickedFile = await imagePicker
+                                                .pickImage(source: ImageSource.gallery);
+                                            setState(() {
+                                              if (pickedFile != null) {
+                                                selectedImage = File(pickedFile.path);
+                                                // Update the text field with the selected image path
+                                                controller.basicValidator
+                                                    .getController('image')
+                                                    ?.text = selectedImage!.path;
+                                              } else {
+                                                selectedImage = null;
+                                              }
+                                            });
+                                          },
+                                        ),
                                       ),
-                                      items: categoryNameList.map((element) {
-                                        return DropdownMenuItem(
-                                          value: element,
-                                          child: Text(element),
-                                        );
-                                      }).toList(),
-                                      onChanged: (value) => setState(
-                                          () => value2 = value as String?),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
                               MySpacing.width(20),
                               Expanded(
-                                flex: 4,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     MyText.labelMedium(
-                                      'Grade name',
+                                      'Video review',
+                                    ),
+
+                                    MySpacing.height(4),
+                                    TextFormField(
+                                      validator: controller.basicValidator
+                                          .getValidation('video_review'),
+                                      controller: controller.basicValidator
+                                          .getController('Video_review'),
+                                      keyboardType: TextInputType.url,
+                                      decoration: InputDecoration(
+                                        labelText: 'Youtube url',
+                                        labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                                        border: outlineInputBorder,
+                                        prefixIcon: Icon(
+                                          LucideIcons.mail,
+                                          size: 20,
+                                          color: color,
+                                        ),
+                                        contentPadding: MySpacing.all(16),
+                                        isCollapsed: true,
+                                        floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                        suffixIcon: IconButton(
+                                          icon: Icon(Icons.video_call),
+                                          onPressed: () async {
+                                            final pickedFile = await imagePicker
+                                                .pickVideo(source: ImageSource.gallery);
+                                            setState(() {
+                                              if (pickedFile != null) {
+                                                selectedImage = File(pickedFile.path);
+                                                // Update the text field with the selected image path
+                                                controller.basicValidator
+                                                    .getController('image')
+                                                    ?.text = selectedImage!.path;
+                                              } else {
+                                                selectedImage = null;
+                                              }
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          MySpacing.height(20),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    MyText.labelMedium(
+                                      'Grade',
                                     ),
                                     MySpacing.height(4),
                                     DropdownButtonFormField(
@@ -476,16 +358,17 @@ class _AddCourseState extends State<AddCourse>
                                       decoration: InputDecoration(
                                         labelText: value1 ?? 'Grade name',
                                         labelStyle:
-                                            MyTextStyle.bodySmall(xMuted: true),
+                                        MyTextStyle.bodySmall(xMuted: true),
                                         border: outlineInputBorder,
-                                        prefixIcon: const Icon(
+                                        prefixIcon: Icon(
                                           LucideIcons.phone,
                                           size: 20,
+                                          color: color,
                                         ),
                                         contentPadding: MySpacing.all(16),
                                         isCollapsed: true,
                                         floatingLabelBehavior:
-                                            FloatingLabelBehavior.never,
+                                        FloatingLabelBehavior.never,
                                       ),
                                       items: gradeNameList.map((element) {
                                         return DropdownMenuItem(
@@ -494,8 +377,8 @@ class _AddCourseState extends State<AddCourse>
                                         );
                                       }).toList(),
                                       onChanged: (value) => setState(
-                                          () => value1 = value as String?),
-                                    )
+                                              () => value1 = value as String?),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -506,41 +389,216 @@ class _AddCourseState extends State<AddCourse>
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     MyText.labelMedium(
-                                      'Category Id',
+                                      'Tags',
                                     ),
                                     MySpacing.height(4),
                                     DropdownButtonFormField(
                                       dropdownColor: theme.cardTheme.color,
                                       decoration: InputDecoration(
-                                        labelText: value3 ?? 'Category Id',
+                                        labelText: value1 ?? 'Tags',
                                         labelStyle:
-                                            MyTextStyle.bodySmall(xMuted: true),
+                                        MyTextStyle.bodySmall(xMuted: true),
                                         border: outlineInputBorder,
-                                        prefixIcon: const Icon(
+                                        prefixIcon: Icon(
                                           LucideIcons.phone,
                                           size: 20,
+                                          color: color,
                                         ),
                                         contentPadding: MySpacing.all(16),
                                         isCollapsed: true,
                                         floatingLabelBehavior:
-                                            FloatingLabelBehavior.never,
+                                        FloatingLabelBehavior.never,
                                       ),
-                                      items: categoryIdList.map((element) {
+                                      items: tagList.map((element) {
                                         return DropdownMenuItem(
                                           value: element,
-                                          child: Text(element),
+                                          child: Row(
+                                            children: [
+                                              InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    // tagListCheckBox = !tagListCheckBox;
+                                                  });
+                                                },
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.circular(1),
+                                                      border: Border.all(
+                                                        color: Colors.black87,
+                                                      ),
+                                                    ),
+                                                    width: 24,
+                                                    height: 24,
+                                                    child: value ? Icon(
+                                                      Icons.check,
+                                                      size: 18,
+                                                      color: color,
+                                                    ) : null
+                                                ),),
+                                              MySpacing.width(20),
+                                              Text(element),
+                                            ],
+                                          )
                                         );
                                       }).toList(),
                                       onChanged: (value) => setState(
-                                          () => value3 = value as String?),
-                                    )
+                                              () => value1 = value as String?),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              MySpacing.width(20),
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    MyText.labelMedium(
+                                      'Stardard *',
+                                    ),
+                                    MySpacing.height(15),
+                                    InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          value = !value;
+                                        });
+                                      },
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(1),
+                                            border: Border.all(
+                                              color: Colors.black87,
+                                            ),
+                                          ),
+                                          width: 24,
+                                          height: 24,
+                                          child: value ? Icon(
+                                            Icons.check,
+                                            size: 18,
+                                            color: color,
+                                          ) : null
+                                      ),),
+                                    MySpacing.height(15),
+                                  ],
+                                ),
+                              ),
+                              // MySpacing.width(20),
+                              Expanded(
+                                  flex: 3,
+                                  child: ModeOptionWidget()),
+                            ],
+                          ),
+
+                          MySpacing.height(20),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    MyText.labelMedium('Proceduce name'),
+                                    MySpacing.height(4),
+                                    TextFormField(
+                                      validator: controller.basicValidator
+                                          .getValidation('producer_name'),
+                                      controller: controller.basicValidator
+                                          .getController('producer_name'),
+                                      keyboardType: TextInputType.text,
+                                      decoration: InputDecoration(
+                                        labelText: 'Proceduce name',
+                                        labelStyle:
+                                        MyTextStyle.bodySmall(xMuted: true),
+                                        border: outlineInputBorder,
+                                        prefixIcon: Icon(
+                                          LucideIcons.user,
+                                          size: 20,
+                                          color: color,
+                                        ),
+                                        contentPadding: MySpacing.all(16),
+                                        isCollapsed: true,
+                                        floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              MySpacing.width(20),
+                              Expanded(
+                                flex: 2,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    MyText.labelMedium('Course duration *'),
+                                    MySpacing.height(4),
+                                    TextFormField(
+                                      validator: controller.basicValidator
+                                          .getValidation('durian'),
+                                      controller: controller.basicValidator
+                                          .getController('durian'),
+                                      keyboardType: TextInputType.text,
+                                      decoration: InputDecoration(
+                                        labelText: 'Course duration',
+                                        labelStyle:
+                                        MyTextStyle.bodySmall(xMuted: true),
+                                        border: outlineInputBorder,
+                                        prefixIcon: Icon(
+                                          LucideIcons.user,
+                                          size: 20,
+                                          color: color,
+                                        ),
+                                        contentPadding: MySpacing.all(16),
+                                        isCollapsed: true,
+                                        floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              MySpacing.width(20),
+                              Expanded(
+                                flex: 4,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    MyText.labelMedium(
+                                      'Who is the course for ?',
+                                    ),
+                                    MySpacing.height(4),
+                                    TextFormField(
+                                      validator: controller.basicValidator
+                                          .getValidation('info_obj'),
+                                      controller: controller.basicValidator
+                                          .getController('info_obj'),
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        labelText: 'Info object',
+                                        labelStyle:
+                                        MyTextStyle.bodySmall(xMuted: true),
+                                        border: outlineInputBorder,
+                                        prefixIcon: Icon(
+                                          LucideIcons.user,
+                                          size: 20,
+                                          color: color,
+                                        ),
+                                        contentPadding: MySpacing.all(16),
+                                        isCollapsed: true,
+                                        floatingLabelBehavior:
+                                        FloatingLabelBehavior.never,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
+
                           MySpacing.height(20),
-                          MyText.labelMedium('Introduction'),
+                          MyText.labelMedium('Course introduction'),
                           TextFormField(
                             validator: controller.basicValidator
                                 .getValidation('introduction'),
@@ -563,7 +621,7 @@ class _AddCourseState extends State<AddCourse>
                             maxLines: 10,
                           ),
                           MySpacing.height(20),
-                          MyText.labelMedium('Info result'),
+                          MyText.labelMedium('What will you achieve after the course?'),
                           MySpacing.height(4),
                           TextFormField(
                             validator: controller.basicValidator
@@ -593,182 +651,61 @@ class _AddCourseState extends State<AddCourse>
                               MyText.labelMedium('Lecture'),
                               Spacer(),
                               // SizedBox(width: 100,),
-                              IconButton(
-                                icon: Icon(Icons.add, size: 18),
-                                onPressed: () {
-                                  _addItem();
-                                },
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.delete, size: 18, color: Colors.red),
-                                onPressed: () {
-                                  _removeItem(_items.length - 1);
-                                },
-                              ),
+                              // IconButton(
+                              //   icon: Icon(Icons.add, size: 18),
+                              //   onPressed: () {
+                              //     addItem();
+                              //   },
+                              // ),
+                              // IconButton(
+                              //   icon: Icon(Icons.delete, size: 18, color: Colors.red),
+                              //   onPressed: () {
+                              //     removeItem(_items.length - 1);
+                              //   },
+                              // ),
                             ],
                           ),
                           MySpacing.height(4),
                           Container(
-                            // decoration: BoxDecoration(
-                            //     borderRadius: BorderRadius.all(Radius.circular(4)),
-                            //     border: Border.all(
-                            //           width: 1,
-                            //           strokeAlign: 0,
-                            //           color: Colors.black),
-                            // ),
-                            height: 500,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(Radius.circular(4)),
+                              border: Border.all(
+                                  width: 1,
+                                  strokeAlign: 0,
+                                  color: Colors.black),
+                            ),
+                            height: 1000,
                             width: double.infinity,
-                            child: AnimatedList(
-                              key: _listKey,
-                              initialItemCount: _items.length + 1,
-                              itemBuilder: (context, index, animation) {
-                                return SlideTransition(
-                                  position: Tween<Offset>(
-                                    begin: Offset(1, 0),
-                                    end: Offset(0, 0),
-                                  ).animate(animation),
-                                  child: ListTile(
-                                    title: Card(
-                                      elevation: 10,
-                                      child: Container(
-                                        margin: EdgeInsets.all(16),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      MyText.labelMedium(
-                                                        'Sub name',
-                                                      ),
-                                                      MySpacing.height(4),
-                                                      TextFormField(
-                                                        validator: controller.basicValidator
-                                                            .getValidation('sub_name'),
-                                                        controller: controller.basicValidator
-                                                            .getController('sub_name'),
-                                                        keyboardType: TextInputType.number,
-                                                        decoration: InputDecoration(
-                                                          labelText: 'Subject name',
-                                                          labelStyle:
-                                                          MyTextStyle.bodySmall(xMuted: true),
-                                                          border: outlineInputBorder,
-                                                          prefixIcon: const Icon(
-                                                            LucideIcons.user,
-                                                            size: 20,
-                                                          ),
-                                                          contentPadding: MySpacing.all(16),
-                                                          isCollapsed: true,
-                                                          floatingLabelBehavior:
-                                                          FloatingLabelBehavior.never,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                MySpacing.width(20),
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      MyText.labelMedium('Lecturn name'),
-                                                      MySpacing.height(4),
-                                                      TextFormField(
-                                                        validator: controller.basicValidator
-                                                            .getValidation('lecture_name'),
-                                                        controller: controller.basicValidator
-                                                            .getController('lecture_name'),
-                                                        keyboardType: TextInputType.text,
-                                                        decoration: InputDecoration(
-                                                          labelText: 'Lecture name',
-                                                          labelStyle:
-                                                          MyTextStyle.bodySmall(xMuted: true),
-                                                          border: outlineInputBorder,
-                                                          prefixIcon: const Icon(
-                                                            LucideIcons.user,
-                                                            size: 20,
-                                                          ),
-                                                          contentPadding: MySpacing.all(16),
-                                                          isCollapsed: true,
-                                                          floatingLabelBehavior:
-                                                          FloatingLabelBehavior.never,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                MySpacing.width(20),
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      MyText.labelMedium(
-                                                        'Lecture mode',
-                                                      ),
-                                                      MySpacing.height(4),
-                                                      TextFormField(
-                                                        validator: controller.basicValidator
-                                                            .getValidation('lecture_mode'),
-                                                        controller: controller.basicValidator
-                                                            .getController('lecture_mode'),
-                                                        keyboardType: TextInputType.number,
-                                                        decoration: InputDecoration(
-                                                          labelText: 'Lecture name',
-                                                          labelStyle:
-                                                          MyTextStyle.bodySmall(xMuted: true),
-                                                          border: outlineInputBorder,
-                                                          prefixIcon: const Icon(
-                                                            LucideIcons.user,
-                                                            size: 20,
-                                                          ),
-                                                          contentPadding: MySpacing.all(16),
-                                                          isCollapsed: true,
-                                                          floatingLabelBehavior:
-                                                          FloatingLabelBehavior.never,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            MySpacing.height(20),
-                                            MyText.labelMedium(
-                                              'Lecture link',
-                                            ),
-                                            MySpacing.height(4),
-                                            TextFormField(
-                                              validator: controller.basicValidator
-                                                  .getValidation('lecture_link'),
-                                              controller: controller.basicValidator
-                                                  .getController('lecture_link'),
-                                              keyboardType: TextInputType.number,
-                                              decoration: InputDecoration(
-                                                labelText: 'Lecture link',
-                                                labelStyle:
-                                                MyTextStyle.bodySmall(xMuted: true),
-                                                border: outlineInputBorder,
-                                                prefixIcon: const Icon(
-                                                  LucideIcons.user,
-                                                  size: 20,
-                                                ),
-                                                contentPadding: MySpacing.all(16),
-                                                isCollapsed: true,
-                                                floatingLabelBehavior:
-                                                FloatingLabelBehavior.never,
-                                              ),
-                                            ),
-                                            MySpacing.height(20),
-                                          ],
-                                        ),
-                                      ),
+                            child: AddLectures(color: color, controller: controller, lectures: lectures,),
+                          ),
+                          Center(
+                            child: MyButton.rounded(
+                              onTap: controller.onAddCourse,
+                              elevation: 0,
+                              padding: MySpacing.xy(20, 16),
+                              backgroundColor: contentTheme.primary,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  controller.loading
+                                      ? SizedBox(
+                                    height: 14,
+                                    width: 14,
+                                    child: CircularProgressIndicator(
+                                      color: theme.colorScheme.onPrimary,
+                                      strokeWidth: 1.2,
                                     ),
+                                  )
+                                      : Container(),
+                                  if (controller.loading) MySpacing.width(16),
+                                  MyText.bodySmall(
+                                    'Add Course',
+                                    color: contentTheme.onPrimary,
                                   ),
-                                );
-                              },
-                            ),),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),

@@ -3,20 +3,20 @@ class CommonEnviroment {
 }
 
 const Map<DOMAIN_TYPE, String> LIVE_DOMAIN = {
-  DOMAIN_TYPE.MAIN: "http://192.168.0.47:8989/api/",
-  // DOMAIN_TYPE.MAIN: "https://5d7a-118-70-125-12.ngrok-free.app/",
+   DOMAIN_TYPE.MAIN: "http://192.168.0.47:8989/api/",
+  //DOMAIN_TYPE.MAIN: "https://69bf-118-70-125-12.ngrok-free.app/",
   DOMAIN_TYPE.PAYMENT: "https://navitrack.fft.com.vn:8899/api/",
 };
 
 const Map<DOMAIN_TYPE, String> UAT_DOMAIN = {
-  DOMAIN_TYPE.MAIN: "http://192.168.0.47:8989/api/",
-  // DOMAIN_TYPE.MAIN: "https://5d7a-118-70-125-12.ngrok-free.app/",
+  // DOMAIN_TYPE.MAIN: "http://192.168.0.47:8989/api/",
+  DOMAIN_TYPE.MAIN: "https://69bf-118-70-125-12.ngrok-free.app/",
   DOMAIN_TYPE.PAYMENT: "https://navitrack.fft.com.vn:8899/api/",
 };
 
 const Map<DOMAIN_TYPE, String> DEV_DOMAIN = {
-  DOMAIN_TYPE.MAIN: "http://192.168.0.47:8989/api/",
-  // DOMAIN_TYPE.MAIN: "https://5d7a-118-70-125-12.ngrok-free.app/",
+  // DOMAIN_TYPE.MAIN: "http://192.168.0.47:8989/api/",
+  DOMAIN_TYPE.MAIN: "https://69bf-118-70-125-12.ngrok-free.app/",
   DOMAIN_TYPE.PAYMENT: "https://navitrack.fft.com.vn:8899/api/",
 };
 

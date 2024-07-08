@@ -51,8 +51,8 @@ class CourseItem extends StatelessWidget{
               height: (constraints.maxWidth < 1300) ? constraints.maxWidth / 1
                   : constraints.maxWidth / 3,
               constraints: BoxConstraints(
-                minHeight: 750,
-                maxHeight: (constraints.maxWidth < 1300) ? 850 : 750,
+                minHeight: (constraints.maxWidth < 550) ? 600 : 750,
+                maxHeight: (constraints.maxWidth < 550) ? 650 : (constraints.maxWidth < 1300) ? 850 : 850,
                 minWidth: constraints.maxWidth < 576 ? constraints.maxWidth - 8 : 350,
               ),
               clipBehavior: Clip.hardEdge,
@@ -109,9 +109,8 @@ class CourseItem extends StatelessWidget{
                             children: [
                               const SizedBox(height: 8),
                               Text(
-                                courseInfo
-                                    .name ??
-                                    "" '\n',
+                                '${courseInfo
+                                  .name}\n\n',
                                 overflow:
                                 TextOverflow.ellipsis,
                                 style: TextStyleConstant
@@ -121,7 +120,7 @@ class CourseItem extends StatelessWidget{
                                     FontWeight.bold,
                                     fontSize:
                                     (constraints.maxWidth < 900) ? Dimens.size20
-                                        : (constraints.maxWidth < 1100) ? Dimens.size24
+                                        : (constraints.maxWidth < 1100) ? Dimens.size22
                                         : Dimens.size36,
                                     color: Colors.red),
                                 textAlign: TextAlign.center,
@@ -136,15 +135,15 @@ class CourseItem extends StatelessWidget{
                             child: Text(
                               '${courseInfo.introduction} \n  \n \n \n!' ??
                                   "",
-                              maxLines: (constraints.maxWidth < 1100) ? 2 : 10,
+                              maxLines: (constraints.maxWidth < 550) ? 2 : (constraints.maxWidth < 1100) ? 3 : 4,
                               overflow:
                               TextOverflow.ellipsis,
                               style: TextStyleConstant
                                   .textStyleBlack16w400
                                   .copyWith(
                                 fontFamily: 'gilroybold',
-                                fontSize: (constraints.maxWidth < 900) ? Dimens.size12
-                                    : (constraints.maxWidth < 1100) ? Dimens.size14
+                                fontSize: (constraints.maxWidth < 900) ? Dimens.size16
+                                    : (constraints.maxWidth < 1100) ? Dimens.size18
                                     : Dimens.size20,
                                 color: notifier.isDark &&
                                     isHovered
@@ -388,26 +387,16 @@ class CourseItem extends StatelessWidget{
                                               .blackcolor
                                               : notifier
                                               .blackcolor,
-                                          fontSize: constraints
-                                              .maxWidth <
-                                              550
-                                              ? constraints
-                                              .maxWidth /
-                                              35
-                                              : constraints
-                                              .maxWidth <
-                                              700
-                                              ? constraints
-                                              .maxWidth /
-                                              40
-                                              : constraints.maxWidth <
-                                              900
-                                              ? constraints.maxWidth /
-                                              50
+                                          fontSize:  constraints.maxWidth < 550
+                                              ? constraints.maxWidth / 30
+                                              : constraints.maxWidth < 700
+                                              ? constraints.maxWidth / 35
+                                              : constraints.maxWidth < 900
+                                              ? constraints.maxWidth / 45
                                               : constraints.maxWidth < 1100
-                                              ? constraints.maxWidth / 70
+                                              ? constraints.maxWidth / 50
                                               : constraints.maxWidth < 1300
-                                              ? constraints.maxWidth / 90
+                                              ? constraints.maxWidth / 70
                                               : constraints.maxWidth / 110)),
                                   Text(
                                       " (${L10nX.getStr.vnd_str})",
@@ -425,16 +414,10 @@ class CourseItem extends StatelessWidget{
                                               .blackcolor
                                               : notifier
                                               .blackcolor,
-                                          fontSize: constraints
-                                              .maxWidth <
-                                              550
-                                              ? constraints
-                                              .maxWidth /
-                                              30
-                                              : constraints.maxWidth <
-                                              700
-                                              ? constraints.maxWidth /
-                                              35
+                                          fontSize: constraints.maxWidth < 550
+                                              ? constraints.maxWidth / 30
+                                              : constraints.maxWidth < 700
+                                              ? constraints.maxWidth / 35
                                               : constraints.maxWidth < 900
                                               ? constraints.maxWidth / 45
                                               : constraints.maxWidth < 1100
