@@ -11,7 +11,7 @@ enum LoginStatus {
 @immutable
 class LoginState extends Equatable {
    LoginStatus? loginStatus;
-   UserInfo? currentUserInfo;
+   UserProfile? currentUserInfo;
    LoginRequest? loginRequest;
    LoginState(
        {
@@ -21,7 +21,7 @@ class LoginState extends Equatable {
        });
   LoginState copyWith({
     LoginStatus? loginStatus,
-    UserInfo? currentUserInfo,
+    UserProfile? currentUserInfo,
     LoginRequest? loginRequest
   })
   {

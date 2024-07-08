@@ -101,7 +101,7 @@ class BiometricAuthentication extends StatelessWidget {
           return ButtonBiometric(
             biometricSize: biometricSize,
             icon: Image.asset(
-              ImageManager.getPngImage(
+              ImageManager().getPngImagePath(
                   ImageManager.ic_biometric),
                   color: ColorConst.mainColor,
                   width: biometricSize,
@@ -114,7 +114,7 @@ class BiometricAuthentication extends StatelessWidget {
           return ButtonBiometric(
             biometricSize: biometricSize,
             icon: Image.asset(
-              ImageManager.getPngImage(
+              ImageManager().getPngImagePath(
                   ImageManager.ic_biometric),
               color: ColorConst.mainColor,
               width: biometricSize,
@@ -129,7 +129,7 @@ class BiometricAuthentication extends StatelessWidget {
           IdentifierConst.biometricType = BiometricTypeDevice.face;
           return ButtonBiometric(
             biometricSize: biometricSize,
-            icon: Image.asset(ImageManager.getPngImage(
+            icon: Image.asset(ImageManager().getPngImagePath(
                 ImageManager.ic_face_id),
               color: ColorConst.mainColor,
               width: biometricSize!=null?biometricSize!:Dimens.size50,
@@ -155,7 +155,7 @@ class BiometricAuthentication extends StatelessWidget {
           return ButtonBiometric(
             biometricSize: biometricSize,
             icon: Image.asset(
-              ImageManager.getPngImage(
+              ImageManager().getPngImagePath(
                   ImageManager.ic_biometric),
               color: ColorConst.mainColor,
               width: biometricSize,

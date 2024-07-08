@@ -122,8 +122,7 @@ class _ListBodyCommonState extends State<ListBodyCommon> {
                 width: Dimens.size20,
                 height: Dimens.size20,
                 child: Image.asset(
-                    ImageManager().getPngImagePath(
-                        ImageManager.ic_resize),
+                    ImageManager().getPngImagePath(ImageManager.ic_resize),
                   color: widget.expandIconColor,
                 ),
               ),

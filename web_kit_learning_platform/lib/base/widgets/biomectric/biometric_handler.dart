@@ -253,14 +253,14 @@ class BiometricHandler{
     } else if (IdentifierConst.biometricType == BiometricTypeDevice.face){
       return
           Image.asset(
-            ImageManager.getPngImage(ImageManager.ic_face_id),
+            ImageManager().getPngImagePath(ImageManager.ic_face_id),
             width: iconSize??Dimens.size25,
             color:isActive?ColorConst.mainColor:inativeColor,
             height: iconSize??Dimens.size25,
           );
     }
     return Image.asset(
-      ImageManager.getPngImage(ImageManager.ic_biometric),
+      ImageManager().getPngImagePath(ImageManager.ic_biometric),
       width: iconSize??Dimens.size25,
       color: isActive?ColorConst.mainColor:inativeColor,
       height: iconSize??Dimens.size25,

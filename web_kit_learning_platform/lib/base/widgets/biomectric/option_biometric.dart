@@ -96,7 +96,7 @@ class _OptionBiometricState extends State<OptionBiometric> {
       return Row(
         children: [
           SvgPicture.asset(
-            ImageManager.getSvgImage(ImageManager.ic_face_id),
+            ImageManager().getSvgImagePath(ImageManager.ic_face_id),
             color: ColorConst.mainColor,
             width: Dimens.size30,
             height: Dimens.size30,
