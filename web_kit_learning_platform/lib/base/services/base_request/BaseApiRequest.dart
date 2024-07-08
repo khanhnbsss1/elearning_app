@@ -125,7 +125,9 @@ class BaseApiRequest {
     if(!containAuthenParams && authInfo!=null)
     {
       requestHeader?.addAll({
+      "ngrok-skip-browser-warning": true,
         "Authorization": "Bearer ${authInfo.accessToken}",
+        
       });
     }
     DeviceInfoModel? deviceInfoModel = await DeviceManager().getDeviceInfo();
