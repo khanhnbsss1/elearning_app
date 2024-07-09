@@ -45,7 +45,7 @@ class _browsecategoryState extends State<browsecategory> {
     return Column(
       children: [
         Text('Super easy booking',style: baseStyle.copyWith(color: notifier.blackcolor,fontSize: constraints.maxWidth < 550 ? 28 : constraints.maxWidth < 900 ? 36 : 48,),),
-        Text("Redefines the luxury",style: baseStyle.copyWith(fontFamily: 'gilroymed',fontSize: constraints.maxWidth < 900 ? 18 : 26,color: notifier.subgreycolor),),
+        Text("Redefines the luxury",style: baseStyle.copyWith(fontSize: constraints.maxWidth < 900 ? 18 : 26,color: notifier.subgreycolor),),
         SizedBox(height: constraints.maxWidth < 550 ? 20 : 50,),
         Padding(padding: EdgeInsets.only(left:constraints.maxWidth < 550 ? 10 : constraints.maxWidth < 800 ? 50 : constraints.maxWidth < 1300 ? 100 : scroll ? 50 : 150),
             child: SizedBox(

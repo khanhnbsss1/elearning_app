@@ -314,17 +314,17 @@ class _helpState extends State<help> {
                   todayCellDecoration: BoxDecoration(
                       color: notifier.buttoncolor, shape: BoxShape.circle),
                   textStyle: baseStyle.copyWith(
-                    fontFamily: 'gilroymed',
+                    
                     color: notifier.subgreycolor,
                     fontSize: constraints.maxWidth < 550 ? 10 : 14,
                   ),
                   blackoutDateTextStyle: baseStyle.copyWith(
-                    fontFamily: 'gilroymed',
+                    
                     color: notifier.blackcolor,
                     fontSize: constraints.maxWidth < 550 ? 10 : 14,
                   ),
                   todayTextStyle: baseStyle.copyWith(
-                    fontFamily: 'gilroymed',
+                    
                     fontSize: constraints.maxWidth < 550 ? 10 : 14,
                     color: notifier.blackcolor,
                   ),
@@ -333,7 +333,7 @@ class _helpState extends State<help> {
                   viewHeaderStyle: DateRangePickerViewHeaderStyle(
                     textStyle: baseStyle.copyWith(
                         color: notifier.blackcolor,
-                        fontFamily: 'gilroymed',
+                        
                         fontSize: constraints.maxWidth < 550 ? 10 : 14),
                   ),
                 ),
@@ -348,7 +348,7 @@ class _helpState extends State<help> {
                 viewSpacing: 30,
                 selectionTextStyle: baseStyle.copyWith(
                     color: notifier.blackwhitecolor,
-                    fontFamily: 'gilroymed',
+                    
                     fontSize: constraints.maxWidth < 550 ? 10 : 14),
                 headerStyle: DateRangePickerHeaderStyle(
                   textStyle: baseStyle.copyWith(
@@ -359,7 +359,7 @@ class _helpState extends State<help> {
                 selectionMode: DateRangePickerSelectionMode.range,
                 rangeTextStyle: baseStyle.copyWith(
                     color: notifier.blackcolor,
-                    fontFamily: 'gilroymed',
+                    
                     fontSize: constraints.maxWidth < 550 ? 10 : 14),
               ),
             ),
@@ -423,7 +423,7 @@ class _helpState extends State<help> {
                             },
                             child: Text(Tabchips[index],
                                 style: baseStyle.copyWith(
-                                    fontFamily: 'gilroybold',
+                                    
                                     fontSize: 14,
                                     color: (chipsHover1[index] ||
                                             selectedchip == index)
@@ -529,7 +529,7 @@ class _helpState extends State<help> {
                                       : constraints.maxWidth < 750
                                           ? constraints.maxWidth / 70
                                           : constraints.maxWidth / 70,
-                                  fontFamily: 'gilroymed',
+                                  
                                   color: Colors.grey.shade500),
                             ),
                           ],
@@ -619,7 +619,7 @@ class _helpState extends State<help> {
                                       : constraints.maxWidth < 750
                                           ? constraints.maxWidth / 70
                                           : constraints.maxWidth / 70,
-                                  fontFamily: 'gilroymed',
+                                  
                                   color: Colors.grey.shade500),
                             ),
                           ],
@@ -703,7 +703,7 @@ class _helpState extends State<help> {
                                                 : constraints.maxWidth < 750
                                                     ? constraints.maxWidth / 50
                                                     : constraints.maxWidth / 50,
-                                            fontFamily: 'gilroy',
+                                            
                                           ),
                                         ),
                                       ],
@@ -719,7 +719,7 @@ class _helpState extends State<help> {
                                           : constraints.maxWidth < 750
                                               ? constraints.maxWidth / 70
                                               : constraints.maxWidth / 70,
-                                      fontFamily: 'gilroymed',
+                                      
                                       color: Colors.grey.shade500),
                                 ),
                               ],
@@ -799,7 +799,7 @@ class _helpState extends State<help> {
                                                 : constraints.maxWidth < 750
                                                 ? constraints.maxWidth / 50
                                                 : constraints.maxWidth / 50,
-                                            fontFamily: 'gilroy',
+                                            
                                           ),
                                         ),
                                       ],
@@ -815,7 +815,7 @@ class _helpState extends State<help> {
                                           : constraints.maxWidth < 750
                                           ? constraints.maxWidth / 70
                                           : constraints.maxWidth / 70,
-                                      fontFamily: 'gilroymed',
+                                      
                                       color: Colors.grey.shade500),
                                 ),
                               ],
@@ -906,7 +906,7 @@ class _helpState extends State<help> {
                                                 : constraints.maxWidth < 750
                                                     ? constraints.maxWidth / 50
                                                     : constraints.maxWidth / 50,
-                                            fontFamily: 'gilroy',
+                                            
                                           ),
                                         ),
                                       ],
@@ -922,7 +922,7 @@ class _helpState extends State<help> {
                                           : constraints.maxWidth < 750
                                               ? constraints.maxWidth / 70
                                               : constraints.maxWidth / 70,
-                                      fontFamily: 'gilroymed',
+                                      
                                       color: Colors.grey.shade500),
                                 ),
                               ],
@@ -986,8 +986,7 @@ class _helpState extends State<help> {
                                                               style: baseStyle.copyWith(
                                                                   color: notifier
                                                                       .blackcolor,
-                                                                  fontFamily:
-                                                                      'gilroysemi',
+                                                                  
                                                                   fontSize:
                                                                       16)),
                                                           Row(
@@ -1043,8 +1042,7 @@ class _helpState extends State<help> {
                                                                 child: Text(
                                                                     '${add[index]}',
                                                                     style: baseStyle.copyWith(
-                                                                        fontFamily:
-                                                                            'gilroysemi',
+                                                                        
                                                                         fontSize:
                                                                             18,
                                                                         color: notifier
@@ -1091,8 +1089,6 @@ class _helpState extends State<help> {
                                                           style: baseStyle.copyWith(
                                                               color: notifier
                                                                   .subgreycolor,
-                                                              fontFamily:
-                                                                  'gilroymed',
                                                               fontSize: 12)),
                                                     ],
                                                   ),
@@ -1210,7 +1206,7 @@ class _helpState extends State<help> {
                           },
                           child: Text(hotelchips[index],
                               style: baseStyle.copyWith(
-                                  fontFamily: 'gilroybold',
+                                  
                                   fontSize: 14,
                                   color: (chipsHover2[index] || selectedtrainchip == index) ? notifier.whitecolor : notifier.blackcolor))),
                       const SizedBox(
@@ -1312,7 +1308,7 @@ class _helpState extends State<help> {
                                       : constraints.maxWidth < 750
                                       ? constraints.maxWidth / 70
                                       : constraints.maxWidth / 70,
-                                  fontFamily: 'gilroymed',
+                                  
                                   color: Colors.grey.shade500),
                             ),
                           ],
@@ -1396,7 +1392,7 @@ class _helpState extends State<help> {
                                                 : constraints.maxWidth < 750
                                                 ? constraints.maxWidth / 50
                                                 : constraints.maxWidth / 50,
-                                            fontFamily: 'gilroy',
+                                            
                                           ),
                                         ),
                                       ],
@@ -1412,7 +1408,7 @@ class _helpState extends State<help> {
                                           : constraints.maxWidth < 750
                                           ? constraints.maxWidth / 70
                                           : constraints.maxWidth / 70,
-                                      fontFamily: 'gilroymed',
+                                      
                                       color: Colors.grey.shade500),
                                 ),
                               ],
@@ -1492,7 +1488,7 @@ class _helpState extends State<help> {
                                                 : constraints.maxWidth < 750
                                                 ? constraints.maxWidth / 50
                                                 : constraints.maxWidth / 50,
-                                            fontFamily: 'gilroy',
+                                            
                                           ),
                                         ),
                                       ],
@@ -1508,7 +1504,7 @@ class _helpState extends State<help> {
                                           : constraints.maxWidth < 750
                                           ? constraints.maxWidth / 70
                                           : constraints.maxWidth / 70,
-                                      fontFamily: 'gilroymed',
+                                      
                                       color: Colors.grey.shade500),
                                 ),
                               ],
@@ -1599,7 +1595,7 @@ class _helpState extends State<help> {
                                                 : constraints.maxWidth < 750
                                                 ? constraints.maxWidth / 50
                                                 : constraints.maxWidth / 50,
-                                            fontFamily: 'gilroy',
+                                            
                                           ),
                                         ),
                                       ],
@@ -1615,7 +1611,7 @@ class _helpState extends State<help> {
                                           : constraints.maxWidth < 750
                                           ? constraints.maxWidth / 70
                                           : constraints.maxWidth / 70,
-                                      fontFamily: 'gilroymed',
+                                      
                                       color: Colors.grey.shade500),
                                 ),
                               ],
@@ -1679,8 +1675,7 @@ class _helpState extends State<help> {
                                                               style: baseStyle.copyWith(
                                                                   color: notifier
                                                                       .blackcolor,
-                                                                  fontFamily:
-                                                                  'gilroysemi',
+                                                                  
                                                                   fontSize:
                                                                   16)),
                                                           Row(
@@ -1736,8 +1731,7 @@ class _helpState extends State<help> {
                                                                 child: Text(
                                                                     '${add[index]}',
                                                                     style: baseStyle.copyWith(
-                                                                        fontFamily:
-                                                                        'gilroysemi',
+                                                                       
                                                                         fontSize:
                                                                         18,
                                                                         color: notifier
@@ -1784,8 +1778,7 @@ class _helpState extends State<help> {
                                                           style: baseStyle.copyWith(
                                                               color: notifier
                                                                   .subgreycolor,
-                                                              fontFamily:
-                                                              'gilroymed',
+                                                              
                                                               fontSize: 12)),
                                                     ],
                                                   ),
@@ -1911,7 +1904,7 @@ class _helpState extends State<help> {
                             },
                             child: Text(hotelchips[index],
                                 style: baseStyle.copyWith(
-                                    fontFamily: 'gilroybold',
+                                    
                                     fontSize: 14,
                                     color: (chipsHover2[index] ||
                                             selectedtrainchip == index)
@@ -2069,7 +2062,7 @@ class _helpState extends State<help> {
                                       : constraints.maxWidth < 750
                                       ? constraints.maxWidth / 70
                                       : constraints.maxWidth / 70,
-                                  fontFamily: 'gilroymed',
+                                  
                                   color: Colors.grey.shade500),
                             ),
                           ],
@@ -2159,7 +2152,7 @@ class _helpState extends State<help> {
                                       : constraints.maxWidth < 750
                                       ? constraints.maxWidth / 70
                                       : constraints.maxWidth / 70,
-                                  fontFamily: 'gilroymed',
+                                  
                                   color: Colors.grey.shade500),
                             ),
                           ],
@@ -2243,7 +2236,7 @@ class _helpState extends State<help> {
                                                 : constraints.maxWidth < 750
                                                 ? constraints.maxWidth / 50
                                                 : constraints.maxWidth / 50,
-                                            fontFamily: 'gilroy',
+                                            
                                           ),
                                         ),
                                       ],
@@ -2259,7 +2252,7 @@ class _helpState extends State<help> {
                                           : constraints.maxWidth < 750
                                           ? constraints.maxWidth / 70
                                           : constraints.maxWidth / 70,
-                                      fontFamily: 'gilroymed',
+                                      
                                       color: Colors.grey.shade500),
                                 ),
                               ],
@@ -2350,7 +2343,7 @@ class _helpState extends State<help> {
                                                 : constraints.maxWidth < 750
                                                 ? constraints.maxWidth / 50
                                                 : constraints.maxWidth / 50,
-                                            fontFamily: 'gilroy',
+                                            
                                           ),
                                         ),
                                       ],
@@ -2366,7 +2359,7 @@ class _helpState extends State<help> {
                                           : constraints.maxWidth < 750
                                           ? constraints.maxWidth / 70
                                           : constraints.maxWidth / 70,
-                                      fontFamily: 'gilroymed',
+                                      
                                       color: Colors.grey.shade500),
                                 ),
                               ],
@@ -2430,8 +2423,7 @@ class _helpState extends State<help> {
                                                               style: baseStyle.copyWith(
                                                                   color: notifier
                                                                       .blackcolor,
-                                                                  fontFamily:
-                                                                  'gilroysemi',
+                                                                  
                                                                   fontSize:
                                                                   16)),
                                                           Row(
@@ -2487,8 +2479,7 @@ class _helpState extends State<help> {
                                                                 child: Text(
                                                                     '${add[index]}',
                                                                     style: baseStyle.copyWith(
-                                                                        fontFamily:
-                                                                        'gilroysemi',
+                                                                       
                                                                         fontSize:
                                                                         18,
                                                                         color: notifier
@@ -2535,8 +2526,7 @@ class _helpState extends State<help> {
                                                           style: baseStyle.copyWith(
                                                               color: notifier
                                                                   .subgreycolor,
-                                                              fontFamily:
-                                                              'gilroymed',
+                                                              
                                                               fontSize: 12)),
                                                     ],
                                                   ),
@@ -2701,7 +2691,7 @@ class _helpState extends State<help> {
                                       : constraints.maxWidth < 750
                                       ? constraints.maxWidth / 70
                                       : constraints.maxWidth / 70,
-                                  fontFamily: 'gilroymed',
+                                  
                                   color: Colors.grey.shade500),
                             ),
                           ],
@@ -2785,7 +2775,7 @@ class _helpState extends State<help> {
                                                 : constraints.maxWidth < 750
                                                 ? constraints.maxWidth / 50
                                                 : constraints.maxWidth / 50,
-                                            fontFamily: 'gilroy',
+                                            
                                           ),
                                         ),
                                       ],
@@ -2801,7 +2791,7 @@ class _helpState extends State<help> {
                                           : constraints.maxWidth < 750
                                           ? constraints.maxWidth / 70
                                           : constraints.maxWidth / 70,
-                                      fontFamily: 'gilroymed',
+                                      
                                       color: Colors.grey.shade500),
                                 ),
                               ],
@@ -2892,7 +2882,7 @@ class _helpState extends State<help> {
                                                 : constraints.maxWidth < 750
                                                 ? constraints.maxWidth / 50
                                                 : constraints.maxWidth / 50,
-                                            fontFamily: 'gilroy',
+                                            
                                           ),
                                         ),
                                       ],
@@ -2908,7 +2898,7 @@ class _helpState extends State<help> {
                                           : constraints.maxWidth < 750
                                           ? constraints.maxWidth / 70
                                           : constraints.maxWidth / 70,
-                                      fontFamily: 'gilroymed',
+                                      
                                       color: Colors.grey.shade500),
                                 ),
                               ],
@@ -2972,8 +2962,7 @@ class _helpState extends State<help> {
                                                               style: baseStyle.copyWith(
                                                                   color: notifier
                                                                       .blackcolor,
-                                                                  fontFamily:
-                                                                  'gilroysemi',
+                                                                  
                                                                   fontSize:
                                                                   16)),
                                                           Row(
@@ -3029,8 +3018,7 @@ class _helpState extends State<help> {
                                                                 child: Text(
                                                                     '${add[index]}',
                                                                     style: baseStyle.copyWith(
-                                                                        fontFamily:
-                                                                        'gilroysemi',
+                                                                       
                                                                         fontSize:
                                                                         18,
                                                                         color: notifier
@@ -3077,8 +3065,6 @@ class _helpState extends State<help> {
                                                           style: baseStyle.copyWith(
                                                               color: notifier
                                                                   .subgreycolor,
-                                                              fontFamily:
-                                                              'gilroymed',
                                                               fontSize: 12)),
                                                     ],
                                                   ),
@@ -3214,7 +3200,7 @@ class _helpState extends State<help> {
                               : constraints.maxWidth < 750
                                   ? constraints.maxWidth / 50
                                   : constraints.maxWidth / 50,
-                          fontFamily: 'gilroy',
+                          
                         ),
                       ),
                     ],
@@ -3230,7 +3216,7 @@ class _helpState extends State<help> {
                         : constraints.maxWidth < 750
                             ? constraints.maxWidth / 70
                             : constraints.maxWidth / 70,
-                    fontFamily: 'gilroymed',
+                    
                     color: Colors.grey.shade500),
               ),
             ],

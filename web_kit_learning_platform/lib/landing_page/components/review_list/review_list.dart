@@ -382,7 +382,7 @@ class _ReviewListState extends State<ReviewList> {
                               Flexible(
                                 child: Text(reviewLandingPageInfo.position ?? "",
                                     style: baseStyle.copyWith(
-                                      fontFamily: 'gilroybold',
+                                      
                                       fontSize: (constraints.maxWidth < 550) ? Dimens.size12
                                           : (constraints.maxWidth < 750) ? Dimens.size13
                                           : (constraints.maxWidth < 900) ? Dimens.size14

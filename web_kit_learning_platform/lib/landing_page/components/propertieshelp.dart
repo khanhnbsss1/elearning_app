@@ -90,7 +90,7 @@ class _TeacherListState extends State<TeacherList> {
                         Text(
                           propsubtitle[index],
                           style: baseStyle.copyWith(
-                              fontFamily: 'gilroymed',
+                              
                               fontSize: constraints.maxWidth < 800 ? 18 : 16,
                               color: notifier.greycolor),
                         ),
@@ -217,7 +217,7 @@ class _TeacherListState extends State<TeacherList> {
                       Text(
                         propsubtitle[index],
                         style: baseStyle.copyWith(
-                            fontFamily: 'gilroymed',
+                            
                             fontSize: constraints.maxWidth < 1050 ? 18 : 16,
                             color: notifier.greycolor),
                       )
@@ -263,7 +263,7 @@ class _TeacherListState extends State<TeacherList> {
                       Text(
                         propsubtitle[index],
                         style: baseStyle.copyWith(
-                            fontFamily: 'gilroymed',
+                            
                             fontSize:
                             constraints.maxWidth < 800 ? 18 : 16,
                             color: notifier.greycolor),
@@ -312,7 +312,7 @@ class _TeacherListState extends State<TeacherList> {
                   Text(
                     propsubtitle[index],
                     style: baseStyle.copyWith(
-                        fontFamily: 'gilroymed',
+                        
                         fontSize:
                         constraints.maxWidth < 800 ? 18 : 16,
                         color: notifier.greycolor),

@@ -332,7 +332,7 @@ class _TabsbarState extends State<Tabsbar> {
                               selectedchip = index;
                             });
                           }, child: Text(tabchips[index], style: baseStyle.copyWith(
-                          fontFamily: 'gilroybold',
+                          
                           fontSize: 14,
                           color: (chipsHover1[index] ||
                               selectedchip == index)
@@ -403,8 +403,7 @@ class _TabsbarState extends State<Tabsbar> {
                                     1300
                                     ? constraints.maxWidth / 60
                                     : constraints.maxWidth / 60,
-                                fontFamily:
-                                'gilroysemi',
+                                
                                 color: notifier.blackcolor,
                                 fontWeight:
                                 FontWeight.w600),
@@ -432,8 +431,7 @@ class _TabsbarState extends State<Tabsbar> {
                                         1300
                                         ? constraints.maxWidth / 60
                                         : constraints.maxWidth / 60,
-                                    fontFamily:
-                                    'gilroysemi',
+                                   
                                     fontWeight:
                                     FontWeight
                                         .w600)),
@@ -452,7 +450,7 @@ class _TabsbarState extends State<Tabsbar> {
                                   1300
                                   ? constraints.maxWidth / 105
                                   : constraints.maxWidth / 100,
-                              fontFamily: 'gilroymed',
+                              
                               color: Colors
                                   .grey.shade500),
                         ),
@@ -509,8 +507,7 @@ class _TabsbarState extends State<Tabsbar> {
                                       1300
                                       ? constraints.maxWidth / 60
                                       : constraints.maxWidth / 60,
-                                  fontFamily:
-                                  'gilroysemi',
+                                 
                                   color: notifier.blackcolor,
                                   fontWeight:
                                   FontWeight.w600),
@@ -538,8 +535,7 @@ class _TabsbarState extends State<Tabsbar> {
                                           1300
                                           ? constraints.maxWidth / 60
                                           : constraints.maxWidth / 60,
-                                      fontFamily:
-                                      'gilroysemi',
+                                     
                                       fontWeight:
                                       FontWeight
                                           .w600)),
@@ -558,7 +554,7 @@ class _TabsbarState extends State<Tabsbar> {
                                     1300
                                     ? constraints.maxWidth / 105
                                     : constraints.maxWidth / 100,
-                                fontFamily: 'gilroymed',
+                                
                                 color: Colors
                                     .grey.shade500),
                           ),
@@ -629,8 +625,7 @@ class _TabsbarState extends State<Tabsbar> {
                                             ? constraints.maxWidth / 60
                                             : constraints.maxWidth / 60,
                                         color: notifier.blackcolor,
-                                        fontFamily:
-                                        'gilroysemi',
+                                       
                                         fontWeight:
                                         FontWeight.w600
                                     ),
@@ -650,8 +645,7 @@ class _TabsbarState extends State<Tabsbar> {
                                               ? constraints.maxWidth / 85
                                               : constraints.maxWidth / 85,
                                           color: notifier.blackcolor,
-                                          fontFamily:
-                                          'gilroy',
+                                          
                                         ),
                                       ),
                                     ]
@@ -671,8 +665,7 @@ class _TabsbarState extends State<Tabsbar> {
                                     1300
                                     ? constraints.maxWidth / 105
                                     : constraints.maxWidth / 100,
-                                fontFamily:
-                                'gilroymed',
+                                
                                 color: Colors
                                     .grey.shade500),
                           ),
@@ -748,8 +741,7 @@ class _TabsbarState extends State<Tabsbar> {
                                               1300
                                               ? constraints.maxWidth / 60
                                               : constraints.maxWidth / 60,
-                                          fontFamily:
-                                          'gilroysemi',
+                                          
                                           color: notifier.blackcolor,
                                           fontWeight:
                                           FontWeight.w600
@@ -769,8 +761,7 @@ class _TabsbarState extends State<Tabsbar> {
                                                 1300
                                                 ? constraints.maxWidth / 90
                                                 : constraints.maxWidth / 85,
-                                            fontFamily:
-                                            'gilroy',
+                                            
                                           ),
                                         ),
                                       ]
@@ -790,8 +781,7 @@ class _TabsbarState extends State<Tabsbar> {
                                     1300
                                     ? constraints.maxWidth / 105
                                     : constraints.maxWidth / 100,
-                                fontFamily:
-                                'gilroymed',
+                                
                                 color: Colors
                                     .grey.shade500),
                           ),
@@ -877,8 +867,7 @@ class _TabsbarState extends State<Tabsbar> {
                                             ? constraints.maxWidth / 60
                                             : constraints.maxWidth / 60,
                                         color: notifier.blackcolor,
-                                        fontFamily:
-                                        'gilroysemi',
+                                       
                                         fontWeight:
                                         FontWeight.w600
                                     ),
@@ -895,8 +884,7 @@ class _TabsbarState extends State<Tabsbar> {
                                               1300
                                               ? constraints.maxWidth / 85
                                               : constraints.maxWidth / 85,
-                                          fontFamily:
-                                          'gilroy',
+                                          
                                         ),
                                       ),
                                     ],
@@ -915,8 +903,7 @@ class _TabsbarState extends State<Tabsbar> {
                                         1300
                                         ? constraints.maxWidth / 105
                                         : constraints.maxWidth / 100,
-                                    fontFamily:
-                                    'gilroymed',
+                                    
                                     color: Colors
                                         .grey.shade500),
                               ),
@@ -1071,7 +1058,7 @@ class _TabsbarState extends State<Tabsbar> {
                                                       style: baseStyle.copyWith(
                                                           color: notifier
                                                               .subgreycolor,
-                                                          fontFamily: 'gilroymed',
+                                                          
                                                           fontSize: 12)),
                                                 ],
                                               ),
@@ -1165,20 +1152,17 @@ class _TabsbarState extends State<Tabsbar> {
                   textStyle:
                   TextStyle(
                     color: notifier.blackcolor,
-                    fontFamily:
-                    'gilroymed',
+                    
                     fontSize: 14,
                   ),
                   blackoutDateTextStyle:
                   const TextStyle(
-                    fontFamily:
-                    'gilroymed',
+                    
                     fontSize: 14,
                   ),
                   todayTextStyle:
                   TextStyle(
-                    fontFamily:
-                    'gilroymed',
+                    
                     fontSize: 14,
                     color: notifier.blackcolor,
                   ),
@@ -1189,8 +1173,7 @@ class _TabsbarState extends State<Tabsbar> {
                   DateRangePickerViewHeaderStyle(
                     textStyle: baseStyle.copyWith(
                         color: notifier.blackcolor,
-                        fontFamily:
-                        'gilroymed',
+                        
                         fontSize: 14),
                   ),
                 ),
@@ -1219,15 +1202,13 @@ class _TabsbarState extends State<Tabsbar> {
                 selectionTextStyle:
                 TextStyle(
                     color: notifier.blackwhitecolor,
-                    fontFamily:
-                    'gilroymed',
+                    
                     fontSize: 14),
                 headerStyle:
                 DateRangePickerHeaderStyle(
                   textStyle: baseStyle.copyWith(
                       color: notifier.blackcolor,
-                      fontFamily:
-                      'gilroysemi',
+                     
                       fontSize: 18),
                 ),
                 selectionMode:
@@ -1236,8 +1217,7 @@ class _TabsbarState extends State<Tabsbar> {
                 rangeTextStyle:
                 TextStyle(
                     color: notifier.blackcolor,
-                    fontFamily:
-                    'gilroymed',
+                    
                     fontSize: 14),
               ),
             ),
@@ -1297,7 +1277,7 @@ class _TabsbarState extends State<Tabsbar> {
                               selectedtrainchip = index;
                             });
                           }, child: Text(hotelchips[index], style: baseStyle.copyWith(
-                          fontFamily: 'gilroybold',
+                          
                           fontSize: 14,
                           color: (chipsHover2[index] ||
                               selectedtrainchip == index) ? notifier
@@ -1367,8 +1347,7 @@ class _TabsbarState extends State<Tabsbar> {
                                     1300
                                     ? constraints.maxWidth / 60
                                     : constraints.maxWidth / 60,
-                                fontFamily:
-                                'gilroysemi',
+                                
                                 color: notifier.blackcolor,
                                 fontWeight:
                                 FontWeight.w600),
@@ -1396,8 +1375,7 @@ class _TabsbarState extends State<Tabsbar> {
                                         1300
                                         ? constraints.maxWidth / 60
                                         : constraints.maxWidth / 60,
-                                    fontFamily:
-                                    'gilroysemi',
+                                   
                                     fontWeight:
                                     FontWeight
                                         .w600)),
@@ -1416,7 +1394,7 @@ class _TabsbarState extends State<Tabsbar> {
                                   1300
                                   ? constraints.maxWidth / 105
                                   : constraints.maxWidth / 100,
-                              fontFamily: 'gilroymed',
+                              
                               color: Colors
                                   .grey.shade500),
                         ),
@@ -1487,8 +1465,7 @@ class _TabsbarState extends State<Tabsbar> {
                                             ? constraints.maxWidth / 60
                                             : constraints.maxWidth / 60,
                                         color: notifier.blackcolor,
-                                        fontFamily:
-                                        'gilroysemi',
+                                       
                                         fontWeight:
                                         FontWeight.w600
                                     ),
@@ -1507,8 +1484,7 @@ class _TabsbarState extends State<Tabsbar> {
                                               1300
                                               ? constraints.maxWidth / 85
                                               : constraints.maxWidth / 85,
-                                          fontFamily:
-                                          'gilroy',
+                                          
                                         ),
                                       ),
                                     ]
@@ -1528,8 +1504,7 @@ class _TabsbarState extends State<Tabsbar> {
                                     1300
                                     ? constraints.maxWidth / 105
                                     : constraints.maxWidth / 100,
-                                fontFamily:
-                                'gilroymed',
+                                
                                 color: Colors
                                     .grey.shade500),
                           ),
@@ -1603,8 +1578,7 @@ class _TabsbarState extends State<Tabsbar> {
                                               ? constraints.maxWidth / 60
                                               : constraints.maxWidth / 60,
                                           color: notifier.blackcolor,
-                                          fontFamily:
-                                          'gilroysemi',
+                                          
                                           fontWeight:
                                           FontWeight.w600
                                       ),
@@ -1623,8 +1597,7 @@ class _TabsbarState extends State<Tabsbar> {
                                                 1300
                                                 ? constraints.maxWidth / 90
                                                 : constraints.maxWidth / 85,
-                                            fontFamily:
-                                            'gilroy',
+                                            
                                           ),
                                         ),
                                       ]
@@ -1644,8 +1617,7 @@ class _TabsbarState extends State<Tabsbar> {
                                       1300
                                       ? constraints.maxWidth / 105
                                       : constraints.maxWidth / 100,
-                                  fontFamily:
-                                  'gilroymed',
+                                  
                                   color: Colors
                                       .grey.shade500),
                             ),
@@ -1730,8 +1702,7 @@ class _TabsbarState extends State<Tabsbar> {
                                               ? constraints.maxWidth / 60
                                               : constraints.maxWidth / 60,
                                           color: notifier.blackcolor,
-                                          fontFamily:
-                                          'gilroysemi',
+                                          
                                           fontWeight:
                                           FontWeight.w600
                                       ),
@@ -1748,8 +1719,7 @@ class _TabsbarState extends State<Tabsbar> {
                                                 1300
                                                 ? constraints.maxWidth / 85
                                                 : constraints.maxWidth / 85,
-                                            fontFamily:
-                                            'gilroy',
+                                            
                                           ),
                                         ),
                                       ]
@@ -1768,8 +1738,7 @@ class _TabsbarState extends State<Tabsbar> {
                                       1300
                                       ? constraints.maxWidth / 105
                                       : constraints.maxWidth / 100,
-                                  fontFamily:
-                                  'gilroymed',
+                                  
                                   color: Colors
                                       .grey.shade500),
                             ),
@@ -1923,7 +1892,7 @@ class _TabsbarState extends State<Tabsbar> {
                                                     style: baseStyle.copyWith(
                                                         color: notifier
                                                             .subgreycolor,
-                                                        fontFamily: 'gilroymed',
+                                                        
                                                         fontSize: 12)),
                                               ],
                                             ),
@@ -2041,7 +2010,7 @@ class _TabsbarState extends State<Tabsbar> {
                               selectedtrainchip = index;
                             });
                           }, child: Text(hotelchips[index], style: baseStyle.copyWith(
-                          fontFamily: 'gilroybold',
+                          
                           fontSize: 14,
                           color: (chipsHover2[index] ||
                               selectedtrainchip == index) ? notifier
@@ -2161,8 +2130,7 @@ class _TabsbarState extends State<Tabsbar> {
                                     1300
                                     ? constraints.maxWidth / 60
                                     : constraints.maxWidth / 60,
-                                fontFamily:
-                                'gilroysemi',
+                                
                                 color: notifier.blackcolor,
                                 fontWeight:
                                 FontWeight.w600),
@@ -2190,8 +2158,7 @@ class _TabsbarState extends State<Tabsbar> {
                                         1300
                                         ? constraints.maxWidth / 60
                                         : constraints.maxWidth / 60,
-                                    fontFamily:
-                                    'gilroysemi',
+                                   
                                     fontWeight:
                                     FontWeight
                                         .w600)),
@@ -2210,7 +2177,7 @@ class _TabsbarState extends State<Tabsbar> {
                                   1300
                                   ? constraints.maxWidth / 105
                                   : constraints.maxWidth / 100,
-                              fontFamily: 'gilroymed',
+                              
                               color: Colors
                                   .grey.shade500),
                         ),
@@ -2267,8 +2234,7 @@ class _TabsbarState extends State<Tabsbar> {
                                       1300
                                       ? constraints.maxWidth / 60
                                       : constraints.maxWidth / 60,
-                                  fontFamily:
-                                  'gilroysemi',
+                                 
                                   color: notifier.blackcolor,
                                   fontWeight:
                                   FontWeight.w600),
@@ -2296,8 +2262,7 @@ class _TabsbarState extends State<Tabsbar> {
                                           1300
                                           ? constraints.maxWidth / 60
                                           : constraints.maxWidth / 60,
-                                      fontFamily:
-                                      'gilroysemi',
+                                     
                                       fontWeight:
                                       FontWeight
                                           .w600)),
@@ -2316,7 +2281,7 @@ class _TabsbarState extends State<Tabsbar> {
                                     1300
                                     ? constraints.maxWidth / 105
                                     : constraints.maxWidth / 100,
-                                fontFamily: 'gilroymed',
+                                
                                 color: Colors
                                     .grey.shade500),
                           ),
@@ -2389,8 +2354,7 @@ class _TabsbarState extends State<Tabsbar> {
                                             ? constraints.maxWidth / 60
                                             : constraints.maxWidth / 60,
                                         color: notifier.blackcolor,
-                                        fontFamily:
-                                        'gilroysemi',
+                                       
                                         fontWeight:
                                         FontWeight.w600
                                     ),
@@ -2409,8 +2373,7 @@ class _TabsbarState extends State<Tabsbar> {
                                               1300
                                               ? constraints.maxWidth / 90
                                               : constraints.maxWidth / 85,
-                                          fontFamily:
-                                          'gilroy',
+                                          
                                         ),
                                       ),
                                     ]
@@ -2432,8 +2395,7 @@ class _TabsbarState extends State<Tabsbar> {
                                     1300
                                     ? constraints.maxWidth / 105
                                     : constraints.maxWidth / 100,
-                                fontFamily:
-                                'gilroymed',
+                                
                                 color: Colors
                                     .grey.shade500),
                           ),
@@ -2515,8 +2477,7 @@ class _TabsbarState extends State<Tabsbar> {
                                   ? constraints.maxWidth / 60
                                   : constraints.maxWidth / 60,
                                   color: notifier.blackcolor,
-                                  fontFamily:
-                                  'gilroysemi',
+                                 
                                   fontWeight:
                                   FontWeight.w600)),
                             ),
@@ -2532,8 +2493,7 @@ class _TabsbarState extends State<Tabsbar> {
                                       1300
                                       ? constraints.maxWidth / 105
                                       : constraints.maxWidth / 100,
-                                  fontFamily:
-                                  'gilroymed',
+                                  
                                   color: Colors
                                       .grey.shade500),
                             ),
@@ -2665,8 +2625,7 @@ class _TabsbarState extends State<Tabsbar> {
                                     1300
                                     ? constraints.maxWidth / 60
                                     : constraints.maxWidth / 60,
-                                fontFamily:
-                                'gilroysemi',
+                                
                                 color: notifier.blackcolor,
                                 fontWeight:
                                 FontWeight.w600),
@@ -2694,8 +2653,7 @@ class _TabsbarState extends State<Tabsbar> {
                                         1300
                                         ? constraints.maxWidth / 60
                                         : constraints.maxWidth / 60,
-                                    fontFamily:
-                                    'gilroysemi',
+                                   
                                     fontWeight:
                                     FontWeight
                                         .w600)),
@@ -2714,7 +2672,7 @@ class _TabsbarState extends State<Tabsbar> {
                                   1300
                                   ? constraints.maxWidth / 105
                                   : constraints.maxWidth / 100,
-                              fontFamily: 'gilroymed',
+                              
                               color: Colors
                                   .grey.shade500),
                         ),
@@ -2771,8 +2729,7 @@ class _TabsbarState extends State<Tabsbar> {
                                       1300
                                       ? constraints.maxWidth / 60
                                       : constraints.maxWidth / 60,
-                                  fontFamily:
-                                  'gilroysemi',
+                                 
                                   color: notifier.blackcolor,
                                   fontWeight:
                                   FontWeight.w600),
@@ -2800,8 +2757,7 @@ class _TabsbarState extends State<Tabsbar> {
                                           1300
                                           ? constraints.maxWidth / 60
                                           : constraints.maxWidth / 60,
-                                      fontFamily:
-                                      'gilroysemi',
+                                     
                                       fontWeight:
                                       FontWeight
                                           .w600)),
@@ -2820,7 +2776,7 @@ class _TabsbarState extends State<Tabsbar> {
                                     1300
                                     ? constraints.maxWidth / 105
                                     : constraints.maxWidth / 100,
-                                fontFamily: 'gilroymed',
+                                
                                 color: Colors
                                     .grey.shade500),
                           ),
@@ -2913,8 +2869,7 @@ class _TabsbarState extends State<Tabsbar> {
                                             1300
                                             ? constraints.maxWidth / 90
                                             : constraints.maxWidth / 85,
-                                        fontFamily:
-                                        'gilroy',
+                                        
                                       ),
                                     ),
                                   ],
@@ -2936,8 +2891,7 @@ class _TabsbarState extends State<Tabsbar> {
                                       1300
                                       ? constraints.maxWidth / 105
                                       : constraints.maxWidth / 100,
-                                  fontFamily:
-                                  'gilroymed',
+                                  
                                   color: Colors
                                       .grey.shade500),
                             ),

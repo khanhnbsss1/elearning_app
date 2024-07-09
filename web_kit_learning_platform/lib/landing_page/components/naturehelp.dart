@@ -373,7 +373,7 @@ class _nhState extends State<nh> {
                                         child: Text(
                                           offertag[index],
                                           style: baseStyle.copyWith(
-                                              fontFamily: 'gilroybold',
+                                              
                                               fontSize: 16,
                                               color: notifier.isDark ? Colors.white : notifier.whitecolor),
                                         ),

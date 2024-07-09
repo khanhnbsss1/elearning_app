@@ -100,7 +100,7 @@ class BiometricHandler{
                                       fontSize: titleSize,
                                       fontWeight: FontWeight.w600,
                                       color: ColorConst.whiteColor,
-                                      fontFamily: TextStyleConstant.fontFamily)),
+                                  )),
                             ],
                           ),
                           InkWell(
@@ -146,7 +146,6 @@ class BiometricHandler{
                           fontSize: contentSize,
                           fontWeight: FontWeight.w400,
                           color: ColorConst.subtext,
-                          fontFamily: TextStyleConstant.fontFamily
                       ),
                     ),
                   ],

@@ -144,7 +144,7 @@ class CourseItem extends StatelessWidget{
                               style: TextStyleConstant
                                   .textStyleBlack16w400
                                   .copyWith(
-                                fontFamily: 'gilroybold',
+                                
                                 fontSize: (constraints.maxWidth < 900) ? Dimens.size16
                                     : (constraints.maxWidth < 1100) ? Dimens.size18
                                     : Dimens.size20,
@@ -195,8 +195,7 @@ class CourseItem extends StatelessWidget{
                                           style: TextStyleConstant
                                               .textStyleBlack16w400
                                               .copyWith(
-                                            fontFamily:
-                                            'gilroybold',
+                                            
                                             fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
                                                 :Dimens
                                                 .size20,
@@ -223,8 +222,7 @@ class CourseItem extends StatelessWidget{
                                       style: TextStyleConstant
                                           .textStyleBlack12w400
                                           .copyWith(
-                                        fontFamily:
-                                        'gilroybold',
+                                        
                                         fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
                                             : Dimens.size20,
                                         color: notifier
@@ -278,8 +276,7 @@ class CourseItem extends StatelessWidget{
                                           style: TextStyleConstant
                                               .textStyleBlack16w400
                                               .copyWith(
-                                            fontFamily:
-                                            'gilroybold',
+                                            
                                             fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
                                                 :Dimens.size20,
                                             color: notifier
@@ -305,8 +302,7 @@ class CourseItem extends StatelessWidget{
                                       style: TextStyleConstant
                                           .textStyleBlack12w400
                                           .copyWith(
-                                        fontFamily:
-                                        'gilroybold',
+                                        
                                         fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
                                             : Dimens.size20,
                                         color: notifier
@@ -377,8 +373,7 @@ class CourseItem extends StatelessWidget{
                                           0)
                                           .trim(),
                                       style: baseStyle.copyWith(
-                                          fontFamily:
-                                          'gilroysemi',
+                                          
                                           color: notifier
                                               .isDark &&
                                               isHovered

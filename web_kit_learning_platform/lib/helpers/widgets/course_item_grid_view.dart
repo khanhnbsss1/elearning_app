@@ -101,7 +101,7 @@ class CourseItemGridView extends StatelessWidget {
                             .textStyleBlack12w400
                             .copyWith(
                           fontWeight: FontWeight.w100,
-                          fontFamily: 'gilroybold',
+                          
                           // fontSize: Dimens.size18,
                           fontSize: width < 600 ? width/50 :width < 800 ? width/80 : width < 1150 ? width/75 : width/85,
                           color: notifier.subgreycolor,
@@ -119,7 +119,7 @@ class CourseItemGridView extends StatelessWidget {
                         children: [
                           Text('${courseInfo.totalLectures} bài giảng - ${courseInfo.gradeName} - ${(courseInfo.isStandard == 1) ? 'Chính quy' : 'Không chính quy'} ',
                           style: baseStyle.copyWith(
-                            fontFamily: 'gilroybold',
+                            
                             // fontSize: Dimens.size16,
                             fontSize: width < 600 ? width/50 :width < 800 ? width/75 :width < 1150 ? width/70 : width/80,
                             color: notifier.subgreycolor,
@@ -128,7 +128,7 @@ class CourseItemGridView extends StatelessWidget {
                           Spacer(),
                           // Text('Cấp độ: ${courseInfo.gradeName}',
                           // style: baseStyle.copyWith(
-                          //     fontFamily: 'gilroybold',
+                          //     
                           //     fontSize:
                           //     // constraints.maxWidth < 550
                           //     //     ? Dimens.size26

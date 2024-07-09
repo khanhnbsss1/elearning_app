@@ -134,7 +134,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                                   : (width < 1300)
                                                       ? Dimens.size20
                                                       : Dimens.size24,
-                                              fontFamily: 'gilroybold',
+                                              
                                               color: notifier.whitecolor),
                                     ),
                                   ),
@@ -169,7 +169,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                                   : (width < 1300)
                                                       ? Dimens.size20
                                                       : Dimens.size24,
-                                              fontFamily: 'gilroybold',
+                                              
                                               color: notifier.whitecolor),
                                     ),
                                   ),
@@ -188,7 +188,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                       style: TextStyleConstant
                                           .textStyleBlack16w400
                                           .copyWith(
-                                        fontFamily: 'gilroybold',
+                                        
                                         fontWeight: FontWeight.bold,
                                         fontSize: (width < 900)
                                             ? Dimens.size14
@@ -210,7 +210,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                       style: TextStyleConstant
                                           .textStyleBlack16w400
                                           .copyWith(
-                                        fontFamily: 'gilroybold',
+                                        
                                         fontWeight: FontWeight.bold,
                                         fontSize: (width < 900)
                                             ? Dimens.size14
@@ -234,7 +234,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                       style: TextStyleConstant
                                           .textStyleBlack16w400
                                           .copyWith(
-                                        fontFamily: 'gilroybold',
+                                        
                                         fontSize: (width < 900)
                                             ? Dimens.size14
                                             : (width < 1300)
@@ -254,7 +254,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                       style: TextStyleConstant
                                           .textStyleBlack16w400
                                           .copyWith(
-                                        fontFamily: 'gilroybold',
+                                        
                                         fontSize: (width < 900)
                                             ? Dimens.size14
                                             : (width < 1300)
@@ -298,7 +298,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                                   : (width < 1300)
                                                       ? Dimens.size20
                                                       : Dimens.size24,
-                                              fontFamily: 'gilroybold',
+                                              
                                               color: notifier.whitecolor),
                                     ),
                                   ),
@@ -333,7 +333,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                                   : (width < 1300)
                                                       ? Dimens.size20
                                                       : Dimens.size24,
-                                              fontFamily: 'gilroybold',
+                                              
                                               color: notifier.whitecolor),
                                     ),
                                   ),
@@ -352,7 +352,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                           .textStyleBlack16w400
                                           .copyWith(
                                         fontWeight: FontWeight.bold,
-                                        fontFamily: 'gilroybold',
+                                        
                                         fontSize: (width < 900)
                                             ? Dimens.size14
                                             : (width < 1300)
@@ -373,7 +373,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                           .textStyleBlack16w400
                                           .copyWith(
                                         fontWeight: FontWeight.bold,
-                                        fontFamily: 'gilroybold',
+                                        
                                         fontSize: (width < 900)
                                             ? Dimens.size14
                                             : (width < 1300)
@@ -396,7 +396,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                       style: TextStyleConstant
                                           .textStyleBlack16w400
                                           .copyWith(
-                                        fontFamily: 'gilroybold',
+                                        
                                         fontSize: (width < 900)
                                             ? Dimens.size14
                                             : (width < 1300)
@@ -417,7 +417,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                       style: TextStyleConstant
                                           .textStyleBlack16w400
                                           .copyWith(
-                                        fontFamily: 'gilroybold',
+                                        
                                         fontSize: (width < 900)
                                             ? Dimens.size14
                                             : (width < 1300)
@@ -462,7 +462,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                                   : (width < 1300)
                                                       ? Dimens.size20
                                                       : Dimens.size24,
-                                              fontFamily: 'gilroybold',
+                                              
                                               color: notifier.whitecolor),
                                     ),
                                   ),
@@ -497,7 +497,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                                   : (width < 1300)
                                                       ? Dimens.size20
                                                       : Dimens.size24,
-                                              fontFamily: 'gilroybold',
+                                              
                                               color: notifier.whitecolor),
                                     ),
                                   ),
@@ -516,7 +516,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                           .textStyleBlack16w400
                                           .copyWith(
                                         fontWeight: FontWeight.bold,
-                                        fontFamily: 'gilroybold',
+                                        
                                         fontSize: (width < 900)
                                             ? Dimens.size14
                                             : (width < 1300)
@@ -537,7 +537,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                           .textStyleBlack16w400
                                           .copyWith(
                                         fontWeight: FontWeight.bold,
-                                        fontFamily: 'gilroybold',
+                                        
                                         fontSize: (width < 900)
                                             ? Dimens.size14
                                             : (width < 1300)
@@ -560,7 +560,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                       style: TextStyleConstant
                                           .textStyleBlack16w400
                                           .copyWith(
-                                        fontFamily: 'gilroybold',
+                                        
                                         fontSize: (width < 900)
                                             ? Dimens.size14
                                             : (width < 1300)
@@ -581,7 +581,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                       style: TextStyleConstant
                                           .textStyleBlack16w400
                                           .copyWith(
-                                        fontFamily: 'gilroybold',
+                                        
                                         fontSize: (width < 900)
                                             ? Dimens.size14
                                             : (width < 1300)

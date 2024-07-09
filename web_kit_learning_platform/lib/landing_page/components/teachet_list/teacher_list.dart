@@ -315,7 +315,7 @@ class _TeacherListState extends State<TeacherList> {
                                           : (constraints.maxWidth < 1300)
                                               ? Dimens.size14
                                               : Dimens.size20,
-                              fontFamily: 'gilroysemi'),
+                              ),
                           maxLines: 2,
                         ),
                         Gap(Dimens.size20)

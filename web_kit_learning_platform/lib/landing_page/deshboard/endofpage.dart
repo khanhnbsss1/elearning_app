@@ -154,7 +154,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                                 Text(
                                   L10nX.getStr.app_name,
                                   style: baseStyle.copyWith(
-                                    fontFamily: 'gilroybold',
+                                    
                                     color: notifier.blackcolor,
                                     fontSize: 24,
                                   ),
@@ -206,85 +206,83 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                           ],
                         ),
                       ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(L10nX.getStr.subcribe_to_our_news_letter,
-                                style: baseStyle.copyWith(
-                                    
-                                    color: notifier.blackcolor)),
-                            const SizedBox(height: 20),
-                            SizedBox(
-                              height: 60,
-                              width: 300,
-                              child: TextField(
-                                style: baseStyle.copyWith(color: notifier.blackcolor),
-                                decoration: InputDecoration(
-                                  disabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                    borderSide: BorderSide(
-                                        width: 1,
-                                        color: notifier.isDark
-                                            ? const Color(0xFF353945)
-                                            : const Color(0xFFE6E8EC)),
-                                  ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                    borderSide: BorderSide(
-                                        width: 2,
-                                        color: notifier.isDark
-                                            ? const Color(0xFF353945)
-                                            : const Color(0xFFE6E8EC)),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                    borderSide: BorderSide(
-                                        width: 1, color: notifier.subgreycolor),
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(25),
-                                    borderSide: BorderSide(
-                                        width: 1,
-                                        color: notifier.isDark
-                                            ? const Color(0xFF23262F)
-                                            : const Color(0xFFE6E8EC)),
-                                  ),
-                                  suffixIcon: InkWell(
-                                    onTap: () {},
-                                    onHover: (value) {
-                                      setState(() {
-                                        tfHover = value;
-                                      });
-                                    },
-                                    child: AnimatedContainer(
-                                      width: 70,
-                                      height: 40,
-                                      duration: const Duration(milliseconds: 200),
-                                      margin: const EdgeInsets.only(right: 5),
-                                      decoration: BoxDecoration(
-                                        color: tfHover
-                                            ? Colors.indigoAccent.shade700
-                                            : notifier.buttoncolor,
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      alignment: Alignment.center,
-                                      child: Text(L10nX.getStr.send,
-                                          style: baseStyle.copyWith(
-                                              
-                                              color: Colors.white,
-                                              fontSize: 16)),
-                                    ),
-                                  ),
-                                  hintText: L10nX.getStr.enter_your_email,
-                                  hintStyle: baseStyle.copyWith(
-                                      fontFamily: 'gilroy',
-                                      color: notifier.subgreycolor),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(L10nX.getStr.subcribe_to_our_news_letter,
+                              style: baseStyle.copyWith(
+                                  
+                                  color: notifier.blackcolor)),
+                          const SizedBox(height: 20),
+                          SizedBox(
+                            height: 60,
+                            width: 300,
+                            child: TextField(
+                              style: baseStyle.copyWith(color: notifier.blackcolor),
+                              decoration: InputDecoration(
+                                disabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                  borderSide: BorderSide(
+                                      width: 1,
+                                      color: notifier.isDark
+                                          ? const Color(0xFF353945)
+                                          : const Color(0xFFE6E8EC)),
                                 ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                  borderSide: BorderSide(
+                                      width: 2,
+                                      color: notifier.isDark
+                                          ? const Color(0xFF353945)
+                                          : const Color(0xFFE6E8EC)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                  borderSide: BorderSide(
+                                      width: 1, color: notifier.subgreycolor),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                  borderSide: BorderSide(
+                                      width: 1,
+                                      color: notifier.isDark
+                                          ? const Color(0xFF23262F)
+                                          : const Color(0xFFE6E8EC)),
+                                ),
+                                suffixIcon: InkWell(
+                                  onTap: () {},
+                                  onHover: (value) {
+                                    setState(() {
+                                      tfHover = value;
+                                    });
+                                  },
+                                  child: AnimatedContainer(
+                                    width: 70,
+                                    height: 40,
+                                    duration: const Duration(milliseconds: 200),
+                                    margin: const EdgeInsets.only(right: 5),
+                                    decoration: BoxDecoration(
+                                      color: tfHover
+                                          ? Colors.indigoAccent.shade700
+                                          : notifier.buttoncolor,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(L10nX.getStr.send,
+                                        style: baseStyle.copyWith(
+                                            
+                                            color: Colors.white,
+                                            fontSize: 16)),
+                                  ),
+                                ),
+                                hintText: L10nX.getStr.enter_your_email,
+                                hintStyle: baseStyle.copyWith(
+                                    
+                                    color: notifier.subgreycolor),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -295,19 +293,12 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: contacts.length,
+                        shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          return Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(contactsImage[index], height: 20),
-                              const SizedBox(width: 10),
-                              Text(contacts[index],
-                                  style: baseStyle.copyWith(
-                                      
-                                      color: notifier.subgreycolor,
-                                      fontSize: 16)),
-                              const SizedBox(width: 20),
-                            ],
+                          return buildContactInfoItem(
+                              contacts: contacts[index],
+                              icon: contactsImage[index]
+
                           );
                         },
                       )),
@@ -359,14 +350,14 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                               : 'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services Powered by ${L10nX.getStr.app_name}',
                             style: baseStyle.copyWith(
                                 fontSize: constraints.maxWidth < 300 ? 10 : 14,
-                                fontFamily: 'gilroymed',
+                                
                                 color: notifier.isDark
                                     ? notifier.subgreycolor
                                     : notifier.blackcolor),
                           ),
                         ],
                       ),
-                      SizedBox(
+                      /*SizedBox(
                         height: 200,
                         width:  400,
                         child: GridView.builder(
@@ -394,7 +385,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                             );
                           },
                         ),
-                      ),
+                      ),*/
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -439,108 +430,108 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                           Text(
                             L10nX.getStr.app_name,
                             style: baseStyle.copyWith(
-                                fontFamily: 'gilroybold',
                                 color: notifier.blackcolor,
                                 fontSize: constraints.maxWidth < 300 ? 16 : 24),
                           ),
                         ],
                       ),
                       const SizedBox(height: 10),
-                      SizedBox(
-                          width: width / 1,
-                          height: 50,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: contacts.length,
-                            itemBuilder: (context, index) {
-                              return Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(contactsImage[index],
-                                      height: 20),
-                                  const SizedBox(width: 10),
-                                  Text(contacts[index],
-                                      style: baseStyle.copyWith(
-                                          
-                                          color: notifier.subgreycolor,
-                                          fontSize: 16)),
-                                  const SizedBox(width: 20),
-                                ],
-                              );
-                            },
-                          )),
-                      Text(L10nX.getStr.subcribe_to_our_news_letter,
-                        style: baseStyle.copyWith(
-                            color: notifier.blackcolor),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: SizedBox(
+                            width: width / 1,
+                            //height: 50,
+                            child: ListView.builder(
+                              scrollDirection: Axis.vertical,
+                              itemCount: contacts.length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return buildContactInfoItem(
+                                    contacts: contacts[index],
+                                    icon: contactsImage[index]
+                                  
+                                );
+                              },
+                            )),
                       ),
                       const SizedBox(height: 10),
                     ]),
-                SizedBox(
-                  height: 60,
-                  width: constraints.maxWidth / 1,
-                  child: TextField(
-                    style: baseStyle.copyWith(color: notifier.blackcolor),
-                    decoration: InputDecoration(
-                      disabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25),
-                        borderSide: BorderSide(
-                            width: 1,
-                            color: notifier.isDark
-                                ? const Color(0xFF353945)
-                                : const Color(0xFFE6E8EC)),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25),
-                        borderSide: BorderSide(
-                            width: 2,
-                            color: notifier.isDark
-                                ? const Color(0xFF353945)
-                                : const Color(0xFFE6E8EC)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25),
-                        borderSide:
-                        BorderSide(width: 1, color: notifier.subgreycolor),
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(25),
-                        borderSide: BorderSide(
-                            width: 1,
-                            color: notifier.isDark
-                                ? const Color(0xFF23262F)
-                                : const Color(0xFFE6E8EC)),
-                      ),
-                      suffixIcon: InkWell(
-                        onTap: () {},
-                        onHover: (value) {
-                          setState(() {
-                            tfHover = value;
-                          });
-                        },
-                        child: AnimatedContainer(
-                          width: 70,
-                          height: 40,
-                          duration: const Duration(milliseconds: 200),
-                          margin: const EdgeInsets.only(right: 5),
-                          decoration: BoxDecoration(
-                            color: tfHover
-                                ? Colors.indigoAccent.shade700
-                                : notifier.buttoncolor,
-                            borderRadius: BorderRadius.circular(20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(L10nX.getStr.subcribe_to_our_news_letter,
+                      style: baseStyle.copyWith(
+                          color: notifier.blackcolor),
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: 60,
+                      width: constraints.maxWidth / 1,
+                      child: TextField(
+                        style: baseStyle.copyWith(color: notifier.blackcolor),
+                        decoration: InputDecoration(
+                          disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide(
+                                width: 1,
+                                color: notifier.isDark
+                                    ? const Color(0xFF353945)
+                                    : const Color(0xFFE6E8EC)),
                           ),
-                          alignment: Alignment.center,
-                          child: Text(L10nX.getStr.send,
-                              style: baseStyle.copyWith(
-                                  
-                                  color: Colors.white,
-                                  fontSize: 16)),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide(
+                                width: 2,
+                                color: notifier.isDark
+                                    ? const Color(0xFF353945)
+                                    : const Color(0xFFE6E8EC)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide:
+                            BorderSide(width: 1, color: notifier.subgreycolor),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide(
+                                width: 1,
+                                color: notifier.isDark
+                                    ? const Color(0xFF23262F)
+                                    : const Color(0xFFE6E8EC)),
+                          ),
+                          suffixIcon: InkWell(
+                            onTap: () {},
+                            onHover: (value) {
+                              setState(() {
+                                tfHover = value;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              width: 70,
+                              height: 40,
+                              duration: const Duration(milliseconds: 200),
+                              margin: const EdgeInsets.only(right: 5),
+                              decoration: BoxDecoration(
+                                color: tfHover
+                                    ? Colors.indigoAccent.shade700
+                                    : notifier.buttoncolor,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(L10nX.getStr.send,
+                                  style: baseStyle.copyWith(
+                                      
+                                      color: Colors.white,
+                                      fontSize: 16)),
+                            ),
+                          ),
+                          hintText: L10nX.getStr.enter_your_email,
+                          hintStyle: baseStyle.copyWith(
+                               color: notifier.subgreycolor),
                         ),
                       ),
-                      hintText: L10nX.getStr.enter_your_email,
-                      hintStyle: baseStyle.copyWith(
-                          fontFamily: 'gilroy', color: notifier.subgreycolor),
                     ),
-                  ),
+                  ],
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -633,7 +624,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                           'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services - Powered by ${L10nX.getStr.app_name}',
                           style: baseStyle.copyWith(
                               fontSize: constraints.maxWidth < 500 ? 12 : 14,
-                              fontFamily: 'gilroymed',
+                              
                               color: notifier.isDark
                                   ? notifier.subgreycolor
                                   : notifier.blackcolor),
@@ -641,7 +632,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                       ],
                     ),
                     const SizedBox(height: 40),
-                    SizedBox(
+                   /* SizedBox(
                       height: 200,
                       width: width / 1,
                       child: GridView.builder(
@@ -671,7 +662,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                           );
                         },
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -682,6 +673,24 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
     },
     );
   }
-  
+  Widget buildContactInfoItem({required String contacts, required String icon}){
+    return SizedBox(
+      height: 30,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SvgPicture.asset(icon,
+              height: 20),
+          const SizedBox(width: 10),
+          Text(contacts,
+              style: baseStyle.copyWith(
+      
+                  color: notifier.subgreycolor,
+                  fontSize: 16)),
+          const SizedBox(width: 20),
+        ],
+      ),
+    );
+  }
 }
 

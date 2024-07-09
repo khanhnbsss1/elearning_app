@@ -256,7 +256,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
               children: [
                 Text('Enjoy the Trip with exciting Discount',
                   style: baseStyle.copyWith(
-                    fontFamily: 'gilroybold',
+                    
                     fontSize: 16,
                     color: notifier.greycolor,
                   ),
@@ -329,7 +329,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                         ),
                         hintText: 'Enter youe phone number',
                         hintStyle: baseStyle.copyWith(
-                            fontFamily: 'gilroy',
+                            
                             color: notifier.subgreycolor)),
                   ),
                 ),
@@ -464,7 +464,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: baseStyle.copyWith(
-                      fontFamily: 'gilroybold',
+                      
                       color: notifier.blackcolor,
                       fontSize: constraints.maxWidth < 300 ? 20 : 24,
                     ),
@@ -476,29 +476,26 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
             Row(
               children: [
                 Visibility(
-                  visible: userProfile!=null,
-                  child: SizedBox(
-                    height: 40,
-                    width: 145,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        elevation: const WidgetStatePropertyAll(
-                            0),
-                        backgroundColor: WidgetStatePropertyAll(
-                            ColorConst.whiteColor),
-                        shape: const WidgetStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(20)),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {
+                  visible: userProfile!=null && ResponsiveInfo.isTablet(),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
+                    child: PopupMenuButton(
+                      onOpened: () {
                         AppPages.routeName(Routes.dashboardRoute);
-                        //AppPages.route(Paths.dashboardPath);
+
+                      },
+                      tooltip: L10nX.getStr.auth_manager,
+                      itemBuilder: (BuildContext context) { 
+                        return [
+                          PopupMenuItem<String>(
+                            enabled: false,
+                            value: '',
+                            onTap: () {},
+                            child: SizedBox()
+                          ),
+                        ];
                       },
                       child: Text(L10nX.getStr.auth_manager, style: baseStyle.copyWith(
-                          fontFamily: 'gilroymed',
                           fontSize: 16,
                           color: supportHover
                         ? notifier.blackcolor
@@ -847,7 +844,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                   // initialValue: selectedMenu,
                   constraints: BoxConstraints(
                     maxWidth: width / 1,
-                    maxHeight: 400,
+                    maxHeight: 450,
                   ),
                   color: notifier.whitecolor,
                   child: Container(
@@ -856,6 +853,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       color: notifier.lightgreencolor,
                       shape: BoxShape.circle,
                     ),
+                    clipBehavior: Clip.hardEdge,
                     child: userProfile!=null && (userProfile.avatar??"").isNotEmpty?
                         ImageManager().getImageByUrl(userProfile.avatar??""):
                     Image.asset(
@@ -877,189 +875,206 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       onTap: () {
 
                       },
-                      child: SizedBox(
-                       // height: 380,
-                        child: Column(
-                          children: [
-                            Visibility(
-                              visible: userProfile!=null,
-                              child: SizedBox(
-                                height: 330,
-                                width: 300,
-                                child: ListView.builder(
-                                  itemCount: profilemenuImages.length,
-                                  itemBuilder: (context, index) {
-                                    return Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment
-                                              .spaceBetween,
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment
-                                                  .start,
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              children: [
-                                                SvgPicture.asset(
-                                                  notifier.isDark ? profilemenuImagesDark[index] : profilemenuImages[index],
-                                                  height: 20,
-                                                ),
-                                                const SizedBox(width: 20),
-                                                Text(
-                                                  profilemenuTags[index],
-                                                  style: baseStyle.copyWith(
-                                                      color: notifier
-                                                          .blackcolor,
-                                                      fontFamily: 'gilroymed',
-                                                      fontSize: 16,
-                                                      // fontWeight: FontWeight
-                                                      //     .w600,
-                                                      letterSpacing: 1),
-                                                ),
-                                                const SizedBox(
-                                                    height: 30),
-                                              ],
-                                            ),
-                                            Container(
-                                              height: 20,
-                                              width: 20,
-                                              decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  color: index <= 2
-                                                      ? notifier.pinkcolor
-                                                      : Colors.transparent
-                                              ),
-                                              alignment: Alignment.center,
-                                              child: Text(notNumber[index],
-                                                  style: baseStyle.copyWith(
-                                                      fontFamily: 'gilroy',
-                                                      color: Colors.white,
-                                                      fontSize: 10)),
-                                            ),
-                                          ],
-                                        ),
-                                        index == 5
-                                            ? const SizedBox(height: 10)
-                                            : const SizedBox(height: 20),
-                                        index == 2 ? Divider(
-                                            color: notifier.sugestionbutton
-                                        ) : const SizedBox(),
-                                        index == 2
-                                            ? const SizedBox(height: 20)
-                                            : const SizedBox()
-                                      ],
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding:  EdgeInsets.symmetric(vertical: Dimens.size10),
-                              child: Stack(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Visibility(
+                            visible: userProfile!=null && ResponsiveInfo.isPhone(),
+                            child: InkWell(
+                              onTap: () {
+                                AppPages.routeName(Routes.dashboardRoute);
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Visibility(
-                                    visible: userProfile==null,
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          height: 40,
-                                          width: 145,
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              elevation: const WidgetStatePropertyAll(
-                                                  0),
-                                              backgroundColor: WidgetStatePropertyAll(
-                                                  notifier.buttoncolor),
-                                              shape: const WidgetStatePropertyAll(
-                                                RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(20)),
-                                                ),
-                                              ),
-                                            ),
-                                            onPressed: () {
-                                              LoginPage().show(context);
-                                              //AppPages.route(Paths.dashboardPath);
-                                            },
-                                            child:  Text(L10nX.getStr.login, style: baseStyle.copyWith(
-                                                fontFamily: 'gilroymed',
-                                                fontSize: 12,
-                                                color: Colors.white)),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 10),
-                                        SizedBox(
-                                          height: 40,
-                                          width: 145,
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              elevation: const WidgetStatePropertyAll(
-                                                  0),
-                                              backgroundColor: WidgetStatePropertyAll(
-                                                  notifier.whitecolor),
-                                              shape: WidgetStatePropertyAll(
-                                                RoundedRectangleBorder(
-                                                  side: BorderSide(
-                                                      color: notifier.buttoncolor,
-                                                      width: 2),
-                                                  borderRadius: const BorderRadius
-                                                      .all(Radius.circular(20)),
-                                                ),
-                                              ),
-                                            ),
-                                            onPressed: () {
-                                              Register().show(context);
-                                            },
-                                            child: Text(L10nX.getStr.sign_up,
-                                                style: baseStyle.copyWith(
-                                                    fontFamily: 'gilroymed',
-                                                    fontSize: 12,
-                                                    color: notifier.buttoncolor)),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: userProfile!=null,
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        SizedBox(
-                                          height: 40,
-                                          width: 145,
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              elevation: const WidgetStatePropertyAll(
-                                                  0),
-                                              backgroundColor: WidgetStatePropertyAll(
-                                                  ColorConst.whiteColor),
-                                              shape: const WidgetStatePropertyAll(
-                                                RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.all(
-                                                      Radius.circular(20)),
-                                                ),
-                                              ),
-                                            ),
-                                            onPressed: () {
-                                              AuthorManager().handleLogout();
-                                              AppPages.routeName(Routes.landingPageRoute, isReplace: true);
-                                            },
-                                            child: Text(L10nX.getStr.sign_out_text, style: baseStyle.copyWith(
-                                                fontFamily: 'gilroymed',
-                                                fontSize: 12,
-                                                color: Colors.red)),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ]
+                                  const SizedBox(width: 4),
+                                  Icon(Icons.home_outlined, size: Dimens.size25, color: ColorConst.blackColor,),
+                                  const SizedBox(width: 20),
+                                  Text(L10nX.getStr.auth_manager, style: baseStyle.copyWith(
+                                    fontSize: 16,
+                                    color: notifier.blackcolor,)),
+                                  const SizedBox(
+                                      height: 30),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(height: 20),
+                          Visibility(
+                            visible: userProfile!=null,
+                            child: SizedBox(
+                              height: 330,
+                              width: 300,
+                              child: ListView.builder(
+                                itemCount: profilemenuImages.length,
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              SvgPicture.asset(
+                                                notifier.isDark ? profilemenuImagesDark[index] : profilemenuImages[index],
+                                                height: Dimens.size20
+                                              ),
+                                              const SizedBox(width: 20),
+                                              Text(
+                                                profilemenuTags[index],
+                                                style: baseStyle.copyWith(
+                                                    color: notifier.blackcolor,
+                                                    fontSize: 16,
+                                                    // fontWeight: FontWeight
+                                                    //     .w600,
+                                                    letterSpacing: 1),
+                                              ),
+                                              const SizedBox(
+                                                  height: 30),
+                                            ],
+                                          ),
+                                          Container(
+                                            height: 20,
+                                            width: 20,
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: index <= 2
+                                                    ? notifier.pinkcolor
+                                                    : Colors.transparent
+                                            ),
+                                            alignment: Alignment.center,
+                                            child: Text(notNumber[index],
+                                                style: baseStyle.copyWith(
+                                                    
+                                                    color: Colors.white,
+                                                    fontSize: 10)),
+                                          ),
+                                        ],
+                                      ),
+                                      index == 5
+                                          ? const SizedBox(height: 10)
+                                          : const SizedBox(height: 20),
+                                      index == 2 ? Divider(
+                                          color: notifier.sugestionbutton
+                                      ) : const SizedBox(),
+                                      index == 2
+                                          ? const SizedBox(height: 20)
+                                          : const SizedBox()
+                                    ],
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:  EdgeInsets.symmetric(vertical: Dimens.size10),
+                            child: Stack(
+                              children: [
+                                Visibility(
+                                  visible: userProfile==null,
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 40,
+                                        width: 145,
+                                        child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            elevation: const WidgetStatePropertyAll(
+                                                0),
+                                            backgroundColor: WidgetStatePropertyAll(
+                                                notifier.buttoncolor),
+                                            shape: const WidgetStatePropertyAll(
+                                              RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(20)),
+                                              ),
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            LoginPage().show(context);
+                                            //AppPages.route(Paths.dashboardPath);
+                                          },
+                                          child:  Text(L10nX.getStr.login, style: baseStyle.copyWith(
+                                              
+                                              fontSize: 12,
+                                              color: Colors.white)),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 10),
+                                      SizedBox(
+                                        height: 40,
+                                        width: 145,
+                                        child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            elevation: const WidgetStatePropertyAll(
+                                                0),
+                                            backgroundColor: WidgetStatePropertyAll(
+                                                notifier.whitecolor),
+                                            shape: WidgetStatePropertyAll(
+                                              RoundedRectangleBorder(
+                                                side: BorderSide(
+                                                    color: notifier.buttoncolor,
+                                                    width: 2),
+                                                borderRadius: const BorderRadius
+                                                    .all(Radius.circular(20)),
+                                              ),
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            Register().show(context);
+                                          },
+                                          child: Text(L10nX.getStr.sign_up,
+                                              style: baseStyle.copyWith(
+                                                  
+                                                  fontSize: 12,
+                                                  color: notifier.buttoncolor)),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: userProfile!=null,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: 40,
+                                        width: 145,
+                                        child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            elevation: const WidgetStatePropertyAll(
+                                                0),
+                                            backgroundColor: WidgetStatePropertyAll(
+                                                ColorConst.whiteColor),
+                                            shape: const WidgetStatePropertyAll(
+                                              RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(20)),
+                                              ),
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            AuthorManager().handleLogout();
+                                            AppPages.routeName(Routes.landingPageRoute, isReplace: true);
+                                          },
+                                          child: Text(L10nX.getStr.sign_out_text, style: baseStyle.copyWith(
+                                              
+                                              fontSize: 12,
+                                              color: Colors.red)),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ]
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

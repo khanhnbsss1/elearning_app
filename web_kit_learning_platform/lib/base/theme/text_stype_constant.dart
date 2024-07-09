@@ -13,6 +13,7 @@ TextStyle getBaseTextStyle({FontWeight? fontWeight}){
       fontStyle: FontStyle.normal,
       fontWeight: fontWeight??fontWeight400,
       color: ColorConst.blackColor,
+      
       height: height_1_4
     ).copyWithCustom(
       fontWeight: fontWeight??fontWeight400,
