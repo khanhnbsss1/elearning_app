@@ -393,7 +393,6 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                     padding: const EdgeInsets.only(right: 16),
                                     child: Text(
                                       L10nX.getStr.who_this_course_is_for_table_content_3,
-                                      maxLines: 4,
                                       style: TextStyleConstant
                                           .textStyleBlack16w400
                                           .copyWith(
@@ -415,7 +414,6 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                     padding: const EdgeInsets.only(right: 16),
                                     child: Text(
                                       L10nX.getStr.who_this_course_is_for_table_content_4,
-                                      maxLines: 4,
                                       style: TextStyleConstant
                                           .textStyleBlack16w400
                                           .copyWith(
@@ -559,7 +557,6 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                     padding: const EdgeInsets.only(right: 16),
                                     child: Text(
                                       L10nX.getStr.who_this_course_is_for_table_content_5,
-                                      maxLines: 4,
                                       style: TextStyleConstant
                                           .textStyleBlack16w400
                                           .copyWith(
@@ -581,7 +578,6 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                                     padding: const EdgeInsets.only(right: 16),
                                     child: Text(
                                       L10nX.getStr.who_this_course_is_for_table_content_6,
-                                      maxLines: 4,
                                       style: TextStyleConstant
                                           .textStyleBlack16w400
                                           .copyWith(

@@ -108,23 +108,26 @@ class CourseItem extends StatelessWidget{
                             CrossAxisAlignment.center,
                             children: [
                               const SizedBox(height: 8),
-                              Text(
-                                '${courseInfo
-                                  .name}\n\n',
-                                overflow:
-                                TextOverflow.ellipsis,
-                                style: TextStyleConstant
-                                    .textStyleBlack16w600
-                                    .copyWith(
-                                    fontWeight:
-                                    FontWeight.bold,
-                                    fontSize:
-                                    (constraints.maxWidth < 900) ? Dimens.size20
-                                        : (constraints.maxWidth < 1100) ? Dimens.size22
-                                        : Dimens.size36,
-                                    color: Colors.red),
-                                textAlign: TextAlign.center,
-                                maxLines: 2,
+                              Container(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  '${courseInfo
+                                    .name}',
+                                  overflow:
+                                  TextOverflow.ellipsis,
+                                  style: TextStyleConstant
+                                      .textStyleBlack16w600
+                                      .copyWith(
+                                      fontWeight:
+                                      FontWeight.bold,
+                                      fontSize:
+                                      (constraints.maxWidth < 900) ? Dimens.size20
+                                          : (constraints.maxWidth < 1100) ? Dimens.size22
+                                          : Dimens.size36,
+                                      color: Colors.red),
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                ),
                               ),
                             ],
                           ),
@@ -388,16 +391,16 @@ class CourseItem extends StatelessWidget{
                                               : notifier
                                               .blackcolor,
                                           fontSize:  constraints.maxWidth < 550
-                                              ? constraints.maxWidth / 30
+                                              ? constraints.maxWidth / 20
                                               : constraints.maxWidth < 700
                                               ? constraints.maxWidth / 35
                                               : constraints.maxWidth < 900
-                                              ? constraints.maxWidth / 45
+                                              ? constraints.maxWidth / 40
                                               : constraints.maxWidth < 1100
                                               ? constraints.maxWidth / 50
                                               : constraints.maxWidth < 1300
-                                              ? constraints.maxWidth / 70
-                                              : constraints.maxWidth / 110)),
+                                              ? constraints.maxWidth / 65
+                                              : constraints.maxWidth / 100)),
                                   Text(
                                       " (${L10nX.getStr.vnd_str})",
                                       style: TextStyleConstant

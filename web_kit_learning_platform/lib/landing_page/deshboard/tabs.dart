@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import '../../base/theme/text_stype_constant.dart';
 import '../components/colornotifier.dart';
 import '../mediaquery/mq.dart';
 import 'deshboard.dart';
@@ -141,9 +142,8 @@ class _TabsbarState extends State<Tabsbar> {
                                           height: 30) : Image.asset(
                                           'assets/Icons/tabIcon/flightblackicon.png',
                                           height: 30),
-                                      child: const Text(
+                                      child: Text(
                                         'Fights', style: baseStyle.copyWith(
-                                        
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -157,9 +157,8 @@ class _TabsbarState extends State<Tabsbar> {
                                           height: 30) : Image.asset(
                                           'assets/Icons/tabIcon/hotelblackicon.png',
                                           height: 30),
-                                      child: const Text(
+                                      child: Text(
                                         'Hotels', style: baseStyle.copyWith(
-                                        
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -175,7 +174,7 @@ class _TabsbarState extends State<Tabsbar> {
                                           height: 30) : Image.asset(
                                           'assets/Icons/tabIcon/homestayblackicon.png',
                                           height: 30),
-                                      child: const Text(
+                                      child: Text(
                                         'Homestays\n& Villas',
                                         style: baseStyle.copyWith(
                                           
@@ -194,7 +193,7 @@ class _TabsbarState extends State<Tabsbar> {
                                           height: 30) : Image.asset(
                                           'assets/Icons/tabIcon/holidayblackicon.png',
                                           height: 30),
-                                      child: const Text(
+                                      child: Text(
                                         'Holiday\nPackages',
                                         style: baseStyle.copyWith(
                                           
@@ -213,9 +212,8 @@ class _TabsbarState extends State<Tabsbar> {
                                           height: 30) : Image.asset(
                                           'assets/Icons/tabIcon/trainblackicon.png',
                                           height: 30),
-                                      child: const Text(
+                                      child: Text(
                                         'Trains', style: baseStyle.copyWith(
-                                        
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -229,9 +227,8 @@ class _TabsbarState extends State<Tabsbar> {
                                           height: 30) : Image.asset(
                                           'assets/Icons/tabIcon/busblackicon.png',
                                           height: 30),
-                                      child: const Text(
+                                      child: Text(
                                         'Buses', style: baseStyle.copyWith(
-                                        
                                         fontSize: 14,
                                         fontWeight: FontWeight.w500,
                                       ),
@@ -245,7 +242,7 @@ class _TabsbarState extends State<Tabsbar> {
                                           height: 30) : Image.asset(
                                           'assets/Icons/tabIcon/taxiblackicon.png',
                                           height: 30),
-                                      child: const Text(
+                                      child: Text(
                                         'Cabs', style: baseStyle.copyWith(
                                         
                                         fontSize: 14,

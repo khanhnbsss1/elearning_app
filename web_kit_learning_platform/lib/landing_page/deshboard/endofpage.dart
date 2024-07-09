@@ -5,11 +5,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/constant/dimens_constant.dart';
-import 'package:webkit/base/widgets/responsive/ui_responsive.dart';
 import 'package:webkit/base/widgets/responsive/ui_responsive.dart';
 import 'package:webkit/base/widgets/static_view/static_view.dart';
-import 'package:webkit/components/app_logo.dart';
 
 import '../components/colornotifier.dart';
 import '../mediaquery/mq.dart';

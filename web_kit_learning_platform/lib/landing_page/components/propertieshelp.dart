@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
+import '../../base/theme/text_stype_constant.dart';
 import '../mediaquery/mq.dart';
 import 'colornotifier.dart';
 

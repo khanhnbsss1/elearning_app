@@ -27,7 +27,7 @@ import 'helpers/theme/app_style.dart';
 import 'helpers/theme/theme_customizer.dart';
 import 'l10n/l10n_extention.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import '../../base/theme/text_stype_constant.dart';
 import 'landing_page/components/colornotifier.dart';
 
 Future<void> main() async {

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../base/theme/text_stype_constant.dart';
 import '../components/colornotifier.dart';
 import '../mediaquery/mq.dart';
 

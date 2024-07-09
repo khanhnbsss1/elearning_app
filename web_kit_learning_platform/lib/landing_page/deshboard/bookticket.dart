@@ -117,7 +117,7 @@ class _bookticketState extends State<bookticket> {
                                   backgroundColor: WidgetStateProperty.all(buttonHover ? Colors.indigoAccent.shade700 : notifier.buttoncolor),
                                 ),
                                 onPressed: () {},
-                                child: const Text(
+                                child: Text(
                                   'Book Now',
                                   style: baseStyle.copyWith(fontSize: 16,  color: Colors.white),
                                 )),

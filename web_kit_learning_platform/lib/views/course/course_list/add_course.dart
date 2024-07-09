@@ -71,6 +71,14 @@ class _AddCourseState extends State<AddCourse>
       'China',
       'HSK2',
       'VietNam'
+          'HSK1',
+      'China',
+      'HSK2',
+      'VietNam'
+          'HSK1',
+      'China',
+      'HSK2',
+      'VietNam'
     ];
 
     List<bool> tagListCheckBox = List<bool>.filled(tagList.length, false);
@@ -392,58 +400,58 @@ class _AddCourseState extends State<AddCourse>
                                       'Tags',
                                     ),
                                     MySpacing.height(4),
-                                    DropdownButtonFormField(
-                                      dropdownColor: theme.cardTheme.color,
-                                      decoration: InputDecoration(
-                                        labelText: value1 ?? 'Tags',
-                                        labelStyle:
-                                        MyTextStyle.bodySmall(xMuted: true),
-                                        border: outlineInputBorder,
-                                        prefixIcon: Icon(
-                                          LucideIcons.phone,
-                                          size: 20,
-                                          color: color,
-                                        ),
-                                        contentPadding: MySpacing.all(16),
-                                        isCollapsed: true,
-                                        floatingLabelBehavior:
-                                        FloatingLabelBehavior.never,
-                                      ),
-                                      items: tagList.map((element) {
-                                        return DropdownMenuItem(
-                                          value: element,
-                                          child: Row(
-                                            children: [
-                                              InkWell(
-                                                onTap: () {
-                                                  setState(() {
-                                                    // tagListCheckBox = !tagListCheckBox;
-                                                  });
-                                                },
-                                                child: Container(
-                                                    decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.circular(1),
-                                                      border: Border.all(
-                                                        color: Colors.black87,
-                                                      ),
-                                                    ),
-                                                    width: 24,
-                                                    height: 24,
-                                                    child: value ? Icon(
-                                                      Icons.check,
-                                                      size: 18,
-                                                      color: color,
-                                                    ) : null
-                                                ),),
-                                              MySpacing.width(20),
-                                              Text(element),
-                                            ],
-                                          )
-                                        );
-                                      }).toList(),
-                                      onChanged: (value) => setState(
-                                              () => value1 = value as String?),
-                                    ),
+                                    // DropdownButtonFormField(
+                                    //   dropdownColor: theme.cardTheme.color,
+                                    //   decoration: InputDecoration(
+                                    //     labelText: value1 ?? 'Tags',
+                                    //     labelStyle:
+                                    //     MyTextStyle.bodySmall(xMuted: true),
+                                    //     border: outlineInputBorder,
+                                    //     prefixIcon: Icon(
+                                    //       LucideIcons.phone,
+                                    //       size: 20,
+                                    //       color: color,
+                                    //     ),
+                                    //     contentPadding: MySpacing.all(16),
+                                    //     isCollapsed: true,
+                                    //     floatingLabelBehavior:
+                                    //     FloatingLabelBehavior.never,
+                                    //   ),
+                                    //   items: tagList.map((element) {
+                                    //     return DropdownMenuItem(
+                                    //       value: element,
+                                    //       child: Row(
+                                    //         children: [
+                                    //           InkWell(
+                                    //             onTap: () {
+                                    //               setState(() {
+                                    //                 // tagListCheckBox = !tagListCheckBox;
+                                    //               });
+                                    //             },
+                                    //             child: Container(
+                                    //                 decoration: BoxDecoration(
+                                    //                   borderRadius: BorderRadius.circular(1),
+                                    //                   border: Border.all(
+                                    //                     color: Colors.black87,
+                                    //                   ),
+                                    //                 ),
+                                    //                 width: 24,
+                                    //                 height: 24,
+                                    //                 child: value ? Icon(
+                                    //                   Icons.check,
+                                    //                   size: 18,
+                                    //                   color: color,
+                                    //                 ) : null
+                                    //             ),),
+                                    //           MySpacing.width(20),
+                                    //           Text(element),
+                                    //         ],
+                                    //       )
+                                    //     );
+                                    //   }).toList(),
+                                    //   onChanged: (value) => setState(
+                                    //           () => value1 = value as String?),
+                                    // ),
                                   ],
                                 ),
                               ),
