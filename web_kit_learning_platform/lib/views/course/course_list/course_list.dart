@@ -8,7 +8,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/widgets/course_item.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/views/course/course_list/add_course.dart';
+import 'package:webkit/views/course/course_list/course_detail.dart';
 import 'package:webkit/views/course/course_list/bloc/course_list_bloc.dart';
 import '../../../base/constant/dimens_constant.dart';
 import '../../../helpers/theme/app_style.dart';
@@ -84,7 +84,7 @@ class _CourseListState extends State<CourseList>
                           children: [
                             MyButton(
                               onTap: () {
-                                AddCourse().show(context);
+                                CourseDetail().show(context);
                               },
                               elevation: 0,
                               padding: MySpacing.xy(12, 16),

@@ -10,7 +10,7 @@ class ColorLightConst{
   static Color iconColor = primaryColor;
   static Color buttonbgColor = primaryColor;
   static Color homeBg =  const Color(0xffc9b9b9);
-  static Color bgColor =  const Color(0xFFF7FCF7);
+  static Color bgColor =  const Color(0x00f5f5f5);
 
   static Color buttonColor =  primaryColor;
   static Color textColor =   Colors.black87;
@@ -83,7 +83,7 @@ class ColorLightConst{
           mainColorWithOpacity50 = const Color(0xffa84747); //mainColor.withOpacity(0.5);
           buttonbgColor = const Color(0xffffeeee);
           homeBg = const Color(0xffffeeee);
-          bgColor = const Color(0xFFF7FCF7);
+          bgColor = const Color(0x00f5f5f5);
           buttonColor =  const Color(0xF4930202);
           textColor = Colors.black87;
           subtext = const Color(0xff545454);

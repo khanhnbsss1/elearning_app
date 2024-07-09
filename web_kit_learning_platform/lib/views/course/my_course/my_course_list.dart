@@ -5,7 +5,7 @@ import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/views/course/course_list/add_course.dart';
+import 'package:webkit/views/course/course_list/course_detail.dart';
 import '../../../helpers/theme/app_style.dart';
 import '../../../helpers/widgets/course_item_grid_view.dart';
 import '../../../helpers/widgets/my_button.dart';
