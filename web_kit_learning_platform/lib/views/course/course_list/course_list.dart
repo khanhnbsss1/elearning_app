@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_pagination/flutter_pagination.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/widgets/course_item.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
+import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 import 'package:webkit/views/course/course_list/course_detail.dart';
 import 'package:webkit/views/course/course_list/bloc/course_list_bloc.dart';
 import '../../../base/constant/dimens_constant.dart';
@@ -39,6 +41,10 @@ class _CourseListState extends State<CourseList>
     controller = Get.put(MemberListController());
   }
 
+  int? page = 1;
+  final int pageItemCount = 16;
+  late int pageCount;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -63,7 +69,11 @@ class _CourseListState extends State<CourseList>
                 builder: (controller) {
                   double width = MediaQuery.of(context).size.width;
                   double height = MediaQuery.of(context).size.height;
-                  double gridViewItemRowCount = width > 1400 ? 4 : width > 1150 ? 3 : 1;
+                  double gridViewItemRowCount = width > 1400
+                      ? 4
+                      : width > 1150
+                          ? 3
+                          : 1;
                   double gridViewItemColumnCount = 2;
                   List<Widget> listOfCourse = List.empty(growable: true);
                   // (kIsWeb ? width / 4 : width) > Dimens.size300
@@ -73,7 +83,8 @@ class _CourseListState extends State<CourseList>
                   for (CourseInfo courseInfo
                       in state.courseResponseModel?.data ?? []) {
                     listOfCourse.add(CourseItemGridView(
-                      courseInfo: courseInfo,));
+                      courseInfo: courseInfo,
+                    ));
                   }
                   return Column(
                     children: [
@@ -137,17 +148,29 @@ class _CourseListState extends State<CourseList>
                           ],
                         ),
                       ),
-                      (listOfCourse.isNotEmpty) ? Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: GridView.builder(
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: width < 550 ? 1 : width < 850 ? 2 : width < 1150 ? 3 : 4, crossAxisSpacing: 16, mainAxisSpacing: 16, childAspectRatio: 5/6),
-                            itemBuilder: (_, index) => listOfCourse[index],
-                            itemCount: state.courseResponseModel?.data?.length,
-                            // shrinkWrap: true,
-                          ),
-                        ),
-                      ) : SizedBox()
+                      Expanded(
+                        child: (listOfCourse.isNotEmpty)
+                            ? Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                child: GridView.builder(
+                                  shrinkWrap: true,
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: width < 550 ? 1 : width < 850 ? 2 : width < 1150 ? 3 : 4,
+                                          crossAxisSpacing: 16,
+                                          mainAxisSpacing: 16,
+                                          childAspectRatio: 5 / 6),
+                                  itemBuilder: (_, index) {
+                                    return listOfCourse[index];
+                                    },
+                                  itemCount: state.courseResponseModel?.data?.length,
+                                  // shrinkWrap: true,
+                                ),
+                              )
+                            : CircularProgressIndicator(),
+                      ),
+                      SizedBox(height: 8,),
+                      PaginationWidget()
                       // Expanded(
                       //   child: Padding(
                       //     padding: EdgeInsets.all(16),
@@ -178,3 +201,47 @@ class _CourseListState extends State<CourseList>
     );
   }
 }
+
+class PaginationWidget extends StatefulWidget {
+  const PaginationWidget({super.key});
+
+  @override
+  State<PaginationWidget> createState() => _PaginationWidgetState();
+}
+
+class _PaginationWidgetState extends State<PaginationWidget> {
+  int? page = 1;
+  bool isSelected = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      spacing: 0,
+      children: List<Widget>.generate(10,
+            (int index) {
+          return Padding(
+            padding: const EdgeInsets.only(right: 4.0),
+            child: SizedBox(
+              height: 30,
+                width: 30,
+              child: FloatingActionButton(
+                mini: true,
+                  shape: CircleBorder(
+                    side: BorderSide(style: BorderStyle.solid)),
+                  foregroundColor: isSelected? Colors.white : Colors.black,
+                  backgroundColor: isSelected? Colors.blue : Colors.grey, // change text color
+                onPressed: () {
+                  setState(() {
+                    isSelected =!isSelected;
+                  });
+                },
+                child: Text('${index + 1}'),
+              ),
+            ),
+          );
+        },
+      ).toList(),
+    );
+  }
+}
+

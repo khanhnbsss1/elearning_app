@@ -151,9 +151,8 @@ class _AddLecturesState extends State<AddLectures>
                                         .getController('sub_name'),
                                     keyboardType: TextInputType.number,
                                     decoration: InputDecoration(
-                                      label: Text('Subject name'),
-                                      labelStyle:
-                                          MyTextStyle.bodySmall(xMuted: true),
+                                      labelText: 'Subject name',
+
                                       border: outlineInputBorder,
                                       prefixIcon: Icon(
                                         LucideIcons.user,
@@ -344,7 +343,7 @@ class _AddLecturesState extends State<AddLectures>
         content: Form(
           key: formKey,
           child: SizedBox(
-            width: 250,
+            width: 800,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [

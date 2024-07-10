@@ -97,20 +97,28 @@ class _CourseDetailState extends State<CourseDetail>
       builder: (controller) {
         return Material(
           child: CustomDialog1(
-            headerColor: ColorConst.bgColor,
+            headerColor: color,
             title: 'Add course',
-            titleStyle: TextStyle(fontSize: 24),
+            titleStyle: TextStyle(fontSize: 24, color: Colors.white),
             radius: 0,
             width: MediaQuery.of(context).size.width,
             mainAxisSizeParent: MainAxisSize.max,
             enableCloseButton: true,
             child: Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(children: [
-                  Container(
-                    color: ColorConst.bgColor,
-                    child: Padding(
+              child: Container(
+                decoration: BoxDecoration(
+                  // color: Color.fromRGBO(255, 233, 233, 1.0),
+                  border: Border(
+                      top: BorderSide(
+                        width: 1,
+                        color: Colors.black,
+                      )
+                  ),
+                ),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(children: [
+                    Padding(
                       padding: EdgeInsets.all(Dimens.size16),
                       child: Form(
                         key: controller.basicValidator.formKey,
@@ -152,8 +160,8 @@ class _CourseDetailState extends State<CourseDetail>
                         ),
                       ),
                     ),
-                  ),
-                ]),
+                  ]),
+                ),
               ),
             ),
           ),
@@ -165,557 +173,603 @@ class _CourseDetailState extends State<CourseDetail>
   Widget buildCourseSummaryInfo(){
     return Card(
       child: ExpandWidget(
-        title: 'Course details',
+        expandColor: Color.fromRGBO(255, 233, 233, 1.0),
+        title: 'Course',
         titleStyle: TextStyle(
-          fontSize: 18
+          fontSize: 18,
+          color: Colors.white,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            MySpacing.height(20),
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MyText.labelMedium('Course name: *'),
-                      MySpacing.height(4),
-                      TextFormField(
-                        validator: controller.basicValidator
-                            .getValidation('name'),
-                        controller: controller.basicValidator
-                            .getController('name'),
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          labelText: 'name',
-                          labelStyle:
-                          MyTextStyle.bodySmall(xMuted: true),
-                          border: outlineInputBorder,
-                          prefixIcon: Icon(
-                            LucideIcons.user,
-                            size: 20,
-                            color: color,
-                          ),
-                          contentPadding: MySpacing.all(16),
-                          isCollapsed: true,
-                          floatingLabelBehavior:
-                          FloatingLabelBehavior.never,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                MySpacing.width(20),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MyText.labelMedium(
-                        'Category: *',
-                      ),
-                      MySpacing.height(4),
-                      DropdownButtonFormField(
-                        dropdownColor: theme.cardTheme.color,
-                        decoration: InputDecoration(
-                          labelText: value2 ?? 'Category',
-                          labelStyle:
-                          MyTextStyle.bodySmall(xMuted: true),
-                          border: outlineInputBorder,
-                          prefixIcon: Icon(
-                            LucideIcons.phone,
-                            size: 20,
-                            color: color,
-                          ),
-                          contentPadding: MySpacing.all(16),
-                          isCollapsed: true,
-                          floatingLabelBehavior:
-                          FloatingLabelBehavior.never,
-                        ),
-                        items: categoryNameList.map((element) {
-                          return DropdownMenuItem(
-                            value: element,
-                            child: Text(element),
-                          );
-                        }).toList(),
-                        onChanged: (value) => setState(
-                                () => value2 = value as String?),
-                      )
-                    ],
-                  ),
-                ),
-                // Expanded(
-                //   child: Column(
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: [
-                //       MyText.labelMedium(
-                //         'Category',
-                //       ),
-                //       MySpacing.height(4),
-                //       TextFormField(
-                //         validator: controller.basicValidator
-                //             .getValidation('category_name'),
-                //         controller: controller.basicValidator
-                //             .getController('category_name'),
-                //         keyboardType: TextInputType.number,
-                //         decoration: InputDecoration(
-                //           labelText: 'Category name',
-                //           labelStyle:
-                //               MyTextStyle.bodySmall(xMuted: true),
-                //           border: outlineInputBorder,
-                //           prefixIcon: const Icon(
-                //             LucideIcons.user,
-                //             size: 20,
-                //           ),
-                //           contentPadding: MySpacing.all(16),
-                //           isCollapsed: true,
-                //           floatingLabelBehavior:
-                //               FloatingLabelBehavior.never,
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-              ],
-            ),
-            MySpacing.height(20),
-            MySpacing.height(20),
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MyText.labelMedium(
-                        'Image: ',
-                      ),
-                      MySpacing.height(4),
-                      TextFormField(
-                        validator: controller.basicValidator
-                            .getValidation('image'),
-                        controller: controller.basicValidator
-                            .getController('image'),
-                        keyboardType: TextInputType.url,
-                        decoration: InputDecoration(
-                          labelText: 'Image',
-                          labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                          border: outlineInputBorder,
-                          prefixIcon: Icon(
-                            LucideIcons.mail,
-                            size: 20,
-                            color: color,
-                          ),
-                          contentPadding: MySpacing.all(16),
-                          isCollapsed: true,
-                          floatingLabelBehavior:
-                          FloatingLabelBehavior.never,
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.image),
-                            onPressed: () async {
-                              final pickedFile = await imagePicker
-                                  .pickImage(source: ImageSource.gallery);
-                              setState(() {
-                                if (pickedFile != null) {
-                                  selectedImage = File(pickedFile.path);
-                                  // Update the text field with the selected image path
-                                  controller.basicValidator
-                                      .getController('image')
-                                      ?.text = selectedImage!.path;
-                                } else {
-                                  selectedImage = null;
-                                }
-                              });
-                            },
+        titleGradient: const [Color.fromRGBO(169, 59, 58, 1.0), Color.fromRGBO(255, 131, 131, 1.0),],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Divider(
+              //   color: Color.fromRGBO(94, 94, 94, 1.0),
+              //   thickness: 1,
+              // ),
+              // MySpacing.height(20),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MyText.labelMedium('Course name: *'),
+                        MySpacing.height(4),
+                        Container(
+                          color: ColorConst.whiteColor,
+                          child: TextFormField(
+                            validator: controller.basicValidator
+                                .getValidation('name'),
+                            controller: controller.basicValidator
+                                .getController('name'),
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              labelText: 'name',
+                              labelStyle:
+                              MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              prefixIcon: Icon(
+                                LucideIcons.user,
+                                size: 20,
+                                color: color,
+                              ),
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                              FloatingLabelBehavior.never,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                MySpacing.width(20),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MyText.labelMedium(
-                        'Video review: ',
-                      ),
-      
-                      MySpacing.height(4),
-                      TextFormField(
-                        validator: controller.basicValidator
-                            .getValidation('video_review'),
-                        controller: controller.basicValidator
-                            .getController('Video_review'),
-                        keyboardType: TextInputType.url,
-                        decoration: InputDecoration(
-                          labelText: 'Youtube url',
-                          labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                          border: outlineInputBorder,
-                          prefixIcon: Icon(
-                            LucideIcons.mail,
-                            size: 20,
-                            color: color,
-                          ),
-                          contentPadding: MySpacing.all(16),
-                          isCollapsed: true,
-                          floatingLabelBehavior:
-                          FloatingLabelBehavior.never,
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.video_call),
-                            onPressed: () async {
-                              final pickedFile = await imagePicker
-                                  .pickVideo(source: ImageSource.gallery);
-                              setState(() {
-                                if (pickedFile != null) {
-                                  selectedImage = File(pickedFile.path);
-                                  // Update the text field with the selected image path
-                                  controller.basicValidator
-                                      .getController('image')
-                                      ?.text = selectedImage!.path;
-                                } else {
-                                  selectedImage = null;
-                                }
-                              });
-                            },
-                          ),
+                  MySpacing.width(20),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MyText.labelMedium(
+                          'Category: *',
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            MySpacing.height(20),
-            // Row(
-            //   children: [
-            //     Expanded(
-            //       flex: 2,
-            //       child: Column(
-            //         crossAxisAlignment: CrossAxisAlignment.start,
-            //         children: [
-            //           MyText.labelMedium(
-            //             'Grade',
-            //           ),
-            //           MySpacing.height(4),
-            //           DropdownButtonFormField(
-            //             dropdownColor: theme.cardTheme.color,
-            //             decoration: InputDecoration(
-            //               labelText: value1 ?? 'Grade name',
-            //               labelStyle:
-            //               MyTextStyle.bodySmall(xMuted: true),
-            //               border: outlineInputBorder,
-            //               prefixIcon: Icon(
-            //                 LucideIcons.phone,
-            //                 size: 20,
-            //                 color: color,
-            //               ),
-            //               contentPadding: MySpacing.all(16),
-            //               isCollapsed: true,
-            //               floatingLabelBehavior:
-            //               FloatingLabelBehavior.never,
-            //             ),
-            //             items: gradeNameList.map((element) {
-            //               return DropdownMenuItem(
-            //                 value: element,
-            //                 child: Text(element),
-            //               );
-            //             }).toList(),
-            //             onChanged: (value) => setState(
-            //                     () => value1 = value as String?),
-            //           ),
-            //         ],
-            //       ),
-            //     ),
-            //     MySpacing.width(20),
-            //     // MySpacing.width(20),
-            //   ],
-            // ),
-      
-            MySpacing.height(20),
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MyText.labelMedium('Proceduce name:'),
-                      MySpacing.height(4),
-                      TextFormField(
-                        validator: controller.basicValidator
-                            .getValidation('producer_name'),
-                        controller: controller.basicValidator
-                            .getController('producer_name'),
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          labelText: 'Proceduce name',
-                          labelStyle:
-                          MyTextStyle.bodySmall(xMuted: true),
-                          border: outlineInputBorder,
-                          prefixIcon: Icon(
-                            LucideIcons.user,
-                            size: 20,
-                            color: color,
+                        MySpacing.height(4),
+                        Container(
+                          color: ColorConst.whiteColor,
+                          child: DropdownButtonFormField(
+                            dropdownColor: theme.cardTheme.color,
+                            decoration: InputDecoration(
+                              labelText: value2 ?? 'Category',
+                              labelStyle:
+                              MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              prefixIcon: Icon(
+                                LucideIcons.phone,
+                                size: 20,
+                                color: color,
+                              ),
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                              FloatingLabelBehavior.never,
+                            ),
+                            items: categoryNameList.map((element) {
+                              return DropdownMenuItem(
+                                value: element,
+                                child: Text(element),
+                              );
+                            }).toList(),
+                            onChanged: (value) => setState(
+                                    () => value2 = value as String?),
                           ),
-                          contentPadding: MySpacing.all(16),
-                          isCollapsed: true,
-                          floatingLabelBehavior:
-                          FloatingLabelBehavior.never,
-                        ),
-                      ),
-                    ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                MySpacing.width(20),
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MyText.labelMedium('Course duration: *'),
-                      MySpacing.height(4),
-                      TextFormField(
-                        validator: controller.basicValidator
-                            .getValidation('durian'),
-                        controller: controller.basicValidator
-                            .getController('durian'),
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          labelText: 'Course duration',
-                          labelStyle:
-                          MyTextStyle.bodySmall(xMuted: true),
-                          border: outlineInputBorder,
-                          prefixIcon: Icon(
-                            LucideIcons.user,
-                            size: 20,
-                            color: color,
-                          ),
-                          contentPadding: MySpacing.all(16),
-                          isCollapsed: true,
-                          floatingLabelBehavior:
-                          FloatingLabelBehavior.never,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                MySpacing.width(20),
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MyText.labelMedium(
-                        'Who is the course for ?',
-                      ),
-                      MySpacing.height(4),
-                      TextFormField(
-                        validator: controller.basicValidator
-                            .getValidation('info_obj'),
-                        controller: controller.basicValidator
-                            .getController('info_obj'),
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: 'Info object',
-                          labelStyle:
-                          MyTextStyle.bodySmall(xMuted: true),
-                          border: outlineInputBorder,
-                          prefixIcon: Icon(
-                            LucideIcons.user,
-                            size: 20,
-                            color: color,
-                          ),
-                          contentPadding: MySpacing.all(16),
-                          isCollapsed: true,
-                          floatingLabelBehavior:
-                          FloatingLabelBehavior.never,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                MySpacing.width(20),
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MyText.labelMedium(
-                        'Grade: ',
-                      ),
-                      MySpacing.height(4),
-                      DropdownButtonFormField(
-                        dropdownColor: theme.cardTheme.color,
-                        decoration: InputDecoration(
-                          labelText: value1 ?? 'Grade name',
-                          labelStyle:
-                          MyTextStyle.bodySmall(xMuted: true),
-                          border: outlineInputBorder,
-                          prefixIcon: Icon(
-                            LucideIcons.phone,
-                            size: 20,
-                            color: color,
-                          ),
-                          contentPadding: MySpacing.all(16),
-                          isCollapsed: true,
-                          floatingLabelBehavior:
-                          FloatingLabelBehavior.never,
-                        ),
-                        items: gradeNameList.map((element) {
-                          return DropdownMenuItem(
-                            value: element,
-                            child: Text(element),
-                          );
-                        }).toList(),
-                        onChanged: (value) => setState(
-                                () => value1 = value as String?),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-      
-            MySpacing.height(20),
-            MyText.labelMedium('Course introduction: '),
-            TextFormField(
-              validator: controller.basicValidator
-                  .getValidation('introduction'),
-              controller: controller.basicValidator
-                  .getController('introduction'),
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  labelText: 'Introduction',
-                  labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                  border: outlineInputBorder,
-                  // prefixIcon: const Icon(
-                  //   LucideIcons.lock,
-                  //   size: 20,
+                  // Expanded(
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       MyText.labelMedium(
+                  //         'Category',
+                  //       ),
+                  //       MySpacing.height(4),
+                  //       TextFormField(
+                  //         validator: controller.basicValidator
+                  //             .getValidation('category_name'),
+                  //         controller: controller.basicValidator
+                  //             .getController('category_name'),
+                  //         keyboardType: TextInputType.number,
+                  //         decoration: InputDecoration(
+                  //           labelText: 'Category name',
+                  //           labelStyle:
+                  //               MyTextStyle.bodySmall(xMuted: true),
+                  //           border: outlineInputBorder,
+                  //           prefixIcon: const Icon(
+                  //             LucideIcons.user,
+                  //             size: 20,
+                  //           ),
+                  //           contentPadding: MySpacing.all(16),
+                  //           isCollapsed: true,
+                  //           floatingLabelBehavior:
+                  //               FloatingLabelBehavior.never,
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
                   // ),
-                  contentPadding: MySpacing.all(16),
-                  isCollapsed: true,
-                  floatingLabelBehavior:
-                  FloatingLabelBehavior.never),
-              minLines: 5,
-              maxLines: 10,
-            ),
-            MySpacing.height(20),
-            MyText.labelMedium('What will you achieve after the course?'),
-            MySpacing.height(4),
-            TextFormField(
-              validator: controller.basicValidator
-                  .getValidation('info_result'),
-              controller: controller.basicValidator
-                  .getController('info_result'),
-              keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                  labelText: 'Info result',
-                  labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                  border: outlineInputBorder,
-                  // prefixIcon: const Icon(
-                  //   LucideIcons.lock,
-                  //   size: 20,
-                  // ),
-                  contentPadding: MySpacing.all(16),
-                  isCollapsed: true,
-                  floatingLabelBehavior:
-                  FloatingLabelBehavior.never),
-              minLines: 5,
-              maxLines: 10,
-            ),
-            MySpacing.height(20),
-            Row(
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Column(
+                ],
+              ),
+              // MySpacing.height(20),
+              MySpacing.height(20),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MyText.labelMedium(
+                          'Image: ',
+                        ),
+                        MySpacing.height(4),
+                        Container(
+                          color: ColorConst.whiteColor,
+                          child: TextFormField(
+                            validator: controller.basicValidator
+                                .getValidation('image'),
+                            controller: controller.basicValidator
+                                .getController('image'),
+                            keyboardType: TextInputType.url,
+                            decoration: InputDecoration(
+                              labelText: 'Image',
+                              labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              prefixIcon: Icon(
+                                LucideIcons.mail,
+                                size: 20,
+                                color: color,
+                              ),
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                              FloatingLabelBehavior.never,
+                              suffixIcon: IconButton(
+                                icon: Icon(Icons.image),
+                                onPressed: () async {
+                                  final pickedFile = await imagePicker
+                                      .pickImage(source: ImageSource.gallery);
+                                  setState(() {
+                                    if (pickedFile != null) {
+                                      selectedImage = File(pickedFile.path);
+                                      // Update the text field with the selected image path
+                                      controller.basicValidator
+                                          .getController('image')
+                                          ?.text = selectedImage!.path;
+                                    } else {
+                                      selectedImage = null;
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  MySpacing.width(20),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MyText.labelMedium(
+                          'Video review: ',
+                        ),
+
+                        MySpacing.height(4),
+                        Container(
+                          color: ColorConst.whiteColor,
+                          child: TextFormField(
+                            validator: controller.basicValidator
+                                .getValidation('video_review'),
+                            controller: controller.basicValidator
+                                .getController('Video_review'),
+                            keyboardType: TextInputType.url,
+                            decoration: InputDecoration(
+                              labelText: 'Youtube url',
+                              labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              prefixIcon: Icon(
+                                LucideIcons.mail,
+                                size: 20,
+                                color: color,
+                              ),
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                              FloatingLabelBehavior.never,
+                              suffixIcon: IconButton(
+                                icon: Icon(Icons.video_call),
+                                onPressed: () async {
+                                  final pickedFile = await imagePicker
+                                      .pickVideo(source: ImageSource.gallery);
+                                  setState(() {
+                                    if (pickedFile != null) {
+                                      selectedImage = File(pickedFile.path);
+                                      // Update the text field with the selected image path
+                                      controller.basicValidator
+                                          .getController('image')
+                                          ?.text = selectedImage!.path;
+                                    } else {
+                                      selectedImage = null;
+                                    }
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              MySpacing.height(20),
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       flex: 2,
+              //       child: Column(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [
+              //           MyText.labelMedium(
+              //             'Grade',
+              //           ),
+              //           MySpacing.height(4),
+              //           DropdownButtonFormField(
+              //             dropdownColor: theme.cardTheme.color,
+              //             decoration: InputDecoration(
+              //               labelText: value1 ?? 'Grade name',
+              //               labelStyle:
+              //               MyTextStyle.bodySmall(xMuted: true),
+              //               border: outlineInputBorder,
+              //               prefixIcon: Icon(
+              //                 LucideIcons.phone,
+              //                 size: 20,
+              //                 color: color,
+              //               ),
+              //               contentPadding: MySpacing.all(16),
+              //               isCollapsed: true,
+              //               floatingLabelBehavior:
+              //               FloatingLabelBehavior.never,
+              //             ),
+              //             items: gradeNameList.map((element) {
+              //               return DropdownMenuItem(
+              //                 value: element,
+              //                 child: Text(element),
+              //               );
+              //             }).toList(),
+              //             onChanged: (value) => setState(
+              //                     () => value1 = value as String?),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //     MySpacing.width(20),
+              //     // MySpacing.width(20),
+              //   ],
+              // ),
+              // MySpacing.height(20),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MyText.labelMedium('Proceduce name:'),
+                        MySpacing.height(4),
+                        Container(
+                          color: ColorConst.whiteColor,
+                          child: TextFormField(
+                            validator: controller.basicValidator
+                                .getValidation('producer_name'),
+                            controller: controller.basicValidator
+                                .getController('producer_name'),
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              labelText: 'Proceduce name',
+                              labelStyle:
+                              MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              prefixIcon: Icon(
+                                LucideIcons.user,
+                                size: 20,
+                                color: color,
+                              ),
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                              FloatingLabelBehavior.never,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  MySpacing.width(20),
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MyText.labelMedium('Course duration: *'),
+                        MySpacing.height(4),
+                        Container(
+                          color: ColorConst.whiteColor,
+                          child: TextFormField(
+                            validator: controller.basicValidator
+                                .getValidation('durian'),
+                            controller: controller.basicValidator
+                                .getController('durian'),
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              labelText: 'Course duration',
+                              labelStyle:
+                              MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              prefixIcon: Icon(
+                                LucideIcons.user,
+                                size: 20,
+                                color: color,
+                              ),
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                              FloatingLabelBehavior.never,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  MySpacing.width(20),
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MyText.labelMedium(
+                          'Who is the course for ?',
+                        ),
+                        MySpacing.height(4),
+                        Container(
+                          color: ColorConst.whiteColor,
+                          child: TextFormField(
+                            validator: controller.basicValidator
+                                .getValidation('info_obj'),
+                            controller: controller.basicValidator
+                                .getController('info_obj'),
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              labelText: 'Info object',
+                              labelStyle:
+                              MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              prefixIcon: Icon(
+                                LucideIcons.user,
+                                size: 20,
+                                color: color,
+                              ),
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                              FloatingLabelBehavior.never,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  MySpacing.width(20),
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MyText.labelMedium(
+                          'Grade: ',
+                        ),
+                        MySpacing.height(4),
+                        Container(
+                          color: ColorConst.whiteColor,
+                          child: DropdownButtonFormField(
+                            dropdownColor: theme.cardTheme.color,
+                            decoration: InputDecoration(
+                              labelText: value1 ?? 'Grade name',
+                              labelStyle:
+                              MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              prefixIcon: Icon(
+                                LucideIcons.phone,
+                                size: 20,
+                                color: color,
+                              ),
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                              FloatingLabelBehavior.never,
+                            ),
+                            items: gradeNameList.map((element) {
+                              return DropdownMenuItem(
+                                value: element,
+                                child: Text(element),
+                              );
+                            }).toList(),
+                            onChanged: (value) => setState(
+                                    () => value1 = value as String?),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              MySpacing.height(20),
+              MyText.labelMedium('Course introduction: '),
+              MySpacing.height(4),
+              Container(
+                color: ColorConst.whiteColor,
+                child: TextFormField(
+                  validator: controller.basicValidator
+                      .getValidation('introduction'),
+                  controller: controller.basicValidator
+                      .getController('introduction'),
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                      labelText: 'Introduction',
+                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                      border: outlineInputBorder,
+                      // prefixIcon: const Icon(
+                      //   LucideIcons.lock,
+                      //   size: 20,
+                      // ),
+                      contentPadding: MySpacing.all(16),
+                      isCollapsed: true,
+                      floatingLabelBehavior:
+                      FloatingLabelBehavior.never),
+                  minLines: 5,
+                  maxLines: 10,
+                ),
+              ),
+              MySpacing.height(20),
+              MyText.labelMedium('What will you achieve after the course?'),
+              MySpacing.height(4),
+              Container(
+                color: ColorConst.whiteColor,
+                child: TextFormField(
+                  validator: controller.basicValidator
+                      .getValidation('info_result'),
+                  controller: controller.basicValidator
+                      .getController('info_result'),
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                      labelText: 'Info result',
+                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                      border: outlineInputBorder,
+                      // prefixIcon: const Icon(
+                      //   LucideIcons.lock,
+                      //   size: 20,
+                      // ),
+                      contentPadding: MySpacing.all(16),
+                      isCollapsed: true,
+                      floatingLabelBehavior:
+                      FloatingLabelBehavior.never),
+                  minLines: 5,
+                  maxLines: 10,
+                ),
+              ),
+              MySpacing.height(20),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        MyText.labelMedium(
+                          'Stardard: *',
+                        ),
+                        MySpacing.height(15),
+                        Padding(
+                          padding: EdgeInsets.only(left: 20),
+                          child: Container(
+                            color: ColorConst.whiteColor,
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  value = !value;
+                                });
+                              },
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(1),
+                                    border: Border.all(
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                  width: 24,
+                                  height: 24,
+                                  child: value ? Icon(
+                                    Icons.check,
+                                    size: 18,
+                                    color: color,
+                                  ) : null
+                              ),),
+                          ),
+                        ),
+                        MySpacing.height(15),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                      flex: 5,
+                      child: ModeOptionWidget()),
+                  SizedBox(width: 20,),
+                  Expanded(flex: 8 ,child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       MyText.labelMedium(
-                        'Stardard: *',
+                        'Accompany course: ',
                       ),
-                      MySpacing.height(15),
-                      Padding(
-                        padding: EdgeInsets.only(left: 20),
-                        child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              value = !value;
-                            });
-                          },
-                          child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(1),
-                                border: Border.all(
-                                  color: Colors.black87,
-                                ),
-                              ),
-                              width: 24,
-                              height: 24,
-                              child: value ? Icon(
-                                Icons.check,
-                                size: 18,
-                                color: color,
-                              ) : null
-                          ),),
-                      ),
-                      MySpacing.height(15),
-                    ],
-                  ),
-                ),
-                Expanded(
-                    flex: 5,
-                    child: ModeOptionWidget()),
-                SizedBox(width: 20,),
-                Expanded(flex: 8 ,child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    MyText.labelMedium(
-                      'Accompany course: ',
-                    ),
-                    MySpacing.height(4),
-                    DropdownButtonFormField(
-                      dropdownColor: theme.cardTheme.color,
-                      decoration: InputDecoration(
-                        labelText: value1 ?? 'Accompany course',
-                        labelStyle:
-                        MyTextStyle.bodySmall(xMuted: true),
-                        border: outlineInputBorder,
-                        prefixIcon: Icon(
-                          LucideIcons.book,
-                          size: 20,
-                          color: color,
+                      MySpacing.height(4),
+                      Container(
+                        color: ColorConst.whiteColor,
+                        child: DropdownButtonFormField(
+                          dropdownColor: theme.cardTheme.color,
+                          decoration: InputDecoration(
+                            labelText: value1 ?? 'Accompany course',
+                            labelStyle:
+                            MyTextStyle.bodySmall(xMuted: true),
+                            border: outlineInputBorder,
+                            prefixIcon: Icon(
+                              LucideIcons.book,
+                              size: 20,
+                              color: color,
+                            ),
+                            contentPadding: MySpacing.all(16),
+                            isCollapsed: true,
+                            floatingLabelBehavior:
+                            FloatingLabelBehavior.never,
+                          ),
+                          items: accompanyCourse.map((element) {
+                            return DropdownMenuItem(
+                              value: element,
+                              child: Text(element),
+                            );
+                          }).toList(),
+                          onChanged: (value) => setState(
+                                  () => value1 = value as String?),
                         ),
-                        contentPadding: MySpacing.all(16),
-                        isCollapsed: true,
-                        floatingLabelBehavior:
-                        FloatingLabelBehavior.never,
                       ),
-                      items: accompanyCourse.map((element) {
-                        return DropdownMenuItem(
-                          value: element,
-                          child: Text(element),
-                        );
-                      }).toList(),
-                      onChanged: (value) => setState(
-                              () => value1 = value as String?),
-                    ),
-                  ],
-                ),),
-      
-              ],
-            ),
-            MyText.labelMedium(
-              'Tags: *',
-            ),
-            MySpacing.height(4),
-            TagDropDown(tags: tagList,),
-            MySpacing.height(20),
-          ],
+                    ],
+                  ),),
+
+                ],
+              ),
+              MyText.labelMedium(
+                'Tags: *',
+              ),
+              MySpacing.height(4),
+              TagDropDown(tags: tagList,),
+              MySpacing.height(20),
+            ],
+          ),
         ),
       ),
     );
@@ -723,10 +777,12 @@ class _CourseDetailState extends State<CourseDetail>
   Widget addLectures(){
     return Card(
       child: ExpandWidget(
+        // expandColor: Color.fromRGBO(255, 233, 233, 1.0),
         title: 'Lectures',
         titleStyle: TextStyle(
           fontSize: 18
         ),
+        titleGradient: [color, Color.fromRGBO(255, 233, 233, 1.0),],
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

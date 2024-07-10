@@ -145,7 +145,7 @@ class _MyCourseListState extends State<MyCourseList>
                             shrinkWrap: true,
                           ),
                         ),
-                      ) : SizedBox(),
+                      ) : CircularProgressIndicator(),
                     ],
                   );
                 },

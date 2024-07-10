@@ -49,8 +49,8 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                     ),
                     items: widget.tags.map((tag) => DropdownMenuItem(
                       enabled: !selectedValues.contains(tag),
-                      child: !selectedValues.contains(tag) ? Text(tag) : Text(tag,style: TextStyle(color: Colors.black12),),
                       value: tag,
+                      child: !selectedValues.contains(tag) ? Text(tag) : Text(tag,style: TextStyle(color: Colors.black12),),
                     )).toList(),
                     onChanged: (String? value) {
                       setState(() {
@@ -112,23 +112,7 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
             },
           ),
           Spacer(),
-          // TextFormField(
-          //   controller: tagController,
-          //   decoration: InputDecoration(
-          //       labelText: 'Add tag',
-          //       labelStyle: MyTextStyle.bodySmall(xMuted: true),
-          //       border: outlineInputBorder,
-          //       contentPadding: EdgeInsets.all(16),
-          //       isCollapsed: true,
-          //       floatingLabelBehavior:
-          //       FloatingLabelBehavior.never),
-          //   validator: (value) {
-          //     if (widget.tags.contains(value) || value!.isEmpty) {
-          //       return 'Please enter lecture link';
-          //     }
-          //     return null;
-          //   },
-          // ),
+
           TextButton(
             child: Text('Add tag', style: TextStyle(color: color),),
             onPressed: () {
