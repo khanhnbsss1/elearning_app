@@ -121,7 +121,7 @@ class CourseItemGridView extends StatelessWidget {
                           style: baseStyle.copyWith(
                             
                             // fontSize: Dimens.size16,
-                            fontSize: width < 600 ? width/50 :width < 800 ? width/75 :width < 1150 ? width/70 : width/80,
+                            fontSize: width < 600 ? width/55 :width < 800 ? width/80 :width < 1150 ? width/75 : width/85,
                             color: notifier.subgreycolor,
                           ),
                           maxLines: 2,),

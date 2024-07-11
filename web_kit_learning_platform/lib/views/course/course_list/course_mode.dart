@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../base/theme/colors_app.dart';
 import '../../../helpers/theme/app_theme.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text.dart';
@@ -63,18 +64,21 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
             Expanded(
               flex: 3,
               child: SizedBox(
-                child: TextFormField(
-                  controller: _paymentController,
-                  enabled: _mode == Mode.PREMIUM,
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.attach_money,
-                      color: (_mode == Mode.PREMIUM)
-                          ? Colors.black87
-                          : Colors.black12,
+                child: Container(
+                  color: ColorConst.whiteColor,
+                  child: TextFormField(
+                    controller: _paymentController,
+                    enabled: _mode == Mode.PREMIUM,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.attach_money,
+                        color: (_mode == Mode.PREMIUM)
+                            ? Colors.black87
+                            : Colors.black12,
+                      ),
+                      labelText: 'Payment',
+                      border: OutlineInputBorder(),
                     ),
-                    labelText: 'Payment',
-                    border: OutlineInputBorder(),
                   ),
                 ),
               ),

@@ -138,7 +138,7 @@ class CustomDialog1 extends StatelessWidgetCommon{
                               Container(
                                 height: isTablet?Dimens.size60:Dimens.size50,
                                 decoration: BoxDecoration(
-                                  color: headerColor??ColorConst.mainColor,
+                                  color: headerColor??ColorConst.whiteColor,
                                   borderRadius: BorderRadius.vertical(top: Radius.circular(radius!)),
                                 ),
                                 child: Padding(

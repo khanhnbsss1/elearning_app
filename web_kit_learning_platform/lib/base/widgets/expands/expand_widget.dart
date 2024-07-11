@@ -18,6 +18,7 @@ class ExpandWidget extends StatefulWidget{
   double? radius;
   bool? enableDivider;
   Color? dividerColor;
+  List<Color>? titleGradient;
   ExpandWidget({
     super.key,
     this.title,
@@ -31,12 +32,14 @@ class ExpandWidget extends StatefulWidget{
     this.expandColor,
     this.enableDivider,
     this.radius,
-    this.dividerColor
+    this.dividerColor,
+    this.titleGradient,
   }){
     titleStyle??=TextStyleConstant.textStyleBlack16w600;
     enableExpand??=true;
     enableDivider??=false;
     radius??=Dimens.size8;
+    titleGradient??=null;
   }
   @override
   State<StatefulWidget> createState() {
@@ -121,6 +124,17 @@ class ExpandWidgetState extends State<ExpandWidget>with SingleTickerProviderStat
                 child: Container(
                   constraints: BoxConstraints(
                     minHeight: Dimens.size35,
+                  ),
+                  decoration: BoxDecoration(
+                    gradient: widget.titleGradient != null ? LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment(0.8, 1),
+                      colors: <Color>[
+                        widget.titleGradient![0],
+                        widget.titleGradient![1],
+                      ], // Gradient from https://learnui.design/tools/gradient-generator.html
+                      tileMode: TileMode.mirror,
+                    ) : null,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
