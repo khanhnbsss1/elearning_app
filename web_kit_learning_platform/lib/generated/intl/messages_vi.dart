@@ -132,6 +132,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "dialogs": MessageLookupByLibrary.simpleMessage("Hộp thoại"),
         "differences_in_teaching_methods": MessageLookupByLibrary.simpleMessage(
             "Sự khác biệt trong giảng dạy"),
+        "differences_in_teaching_methods_1":
+            MessageLookupByLibrary.simpleMessage("Sự "),
+        "differences_in_teaching_methods_2":
+            MessageLookupByLibrary.simpleMessage("khác biệt "),
+        "differences_in_teaching_methods_3":
+            MessageLookupByLibrary.simpleMessage(" trong giảng dạy"),
         "doughnut_chart":
             MessageLookupByLibrary.simpleMessage("Biểu đồ bánh rán"),
         "download": MessageLookupByLibrary.simpleMessage("Tải xuống"),
@@ -446,9 +452,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "string_time_setting":
             MessageLookupByLibrary.simpleMessage("Cài đặt thời gian"),
         "student_review_list_str":
-            MessageLookupByLibrary.simpleMessage("Học viên nói gì"),
-        "style_guide":
-            MessageLookupByLibrary.simpleMessage("Hướng dẫn phong cách"),
+            MessageLookupByLibrary.simpleMessage("Cảm nhận của học viên"),
+        "style_guide": MessageLookupByLibrary.simpleMessage("Phong cách"),
         "subcribe_to_our_news_letter": MessageLookupByLibrary.simpleMessage(
             "Đăng ký nhận bản tin của chúng tôi"),
         "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
@@ -470,7 +475,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "teacher_list":
             MessageLookupByLibrary.simpleMessage(" Danh sách giáo viên"),
         "teacher_review_list_str":
-            MessageLookupByLibrary.simpleMessage("Giảng viên nói gì"),
+            MessageLookupByLibrary.simpleMessage("Chuyên gia nói gì"),
         "teachers_teach_the_most":
             MessageLookupByLibrary.simpleMessage("Giáo viên dạy nhiều nhất"),
         "terms_conditions":
@@ -596,6 +601,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phát triển cộng đồng"),
         "why_choose_us":
             MessageLookupByLibrary.simpleMessage("Tại sao chọn chúng tôi"),
+        "why_choose_us_1": MessageLookupByLibrary.simpleMessage("Tại sao "),
+        "why_choose_us_2": MessageLookupByLibrary.simpleMessage("chọn "),
+        "why_choose_us_3": MessageLookupByLibrary.simpleMessage("chúng tôi"),
         "why_choose_us_sub_title": MessageLookupByLibrary.simpleMessage(
             "Cùng điểm qua một số thành tựu của YAX Chinese learning nhé"),
         "wizard": MessageLookupByLibrary.simpleMessage("Wizard"),

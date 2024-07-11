@@ -98,33 +98,37 @@ class _TeacherListState extends State<TeacherList> {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
-    return BlocProvider(
-        create: (context) {
-          return TeacherListBloc(TeacherListState())
-            ..add(TeacherListInitEvent());
-        },
-        child: BlocConsumer<TeacherListBloc, TeacherListState>(
-            listener: (context, state) {
-          switch (state.blocStatus) {
-            case TeacherListStatus.initial:
-              break;
-            default:
-              break;
-          }
-        }, builder: (BuildContext context, state) {
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              return Column(
-                children: [
-                  //buildListTeacher2(constraints),
-                  //const SizedBox(height: 40),
-                  buildListTeacher1(constraints: constraints, state: state),
-                ],
-              );
-            },
-          );
-          ;
-        }));
+    return Container(
+      width: width,
+      // color: Colors.green,
+      child: BlocProvider(
+          create: (context) {
+            return TeacherListBloc(TeacherListState())
+              ..add(TeacherListInitEvent());
+          },
+          child: BlocConsumer<TeacherListBloc, TeacherListState>(
+              listener: (context, state) {
+            switch (state.blocStatus) {
+              case TeacherListStatus.initial:
+                break;
+              default:
+                break;
+            }
+          }, builder: (BuildContext context, state) {
+            return LayoutBuilder(
+              builder: (context, constraints) {
+                return Column(
+                  children: [
+                    //buildListTeacher2(constraints),
+                    //const SizedBox(height: 40),
+                    buildListTeacher1(constraints: constraints, state: state),
+                  ],
+                );
+              },
+            );
+            ;
+          })),
+    );
   }
 
   Widget buildListTeacher1(
@@ -136,24 +140,14 @@ class _TeacherListState extends State<TeacherList> {
           landingPageUserInfo: landingPageUserInfo, constraints: constraints));
     }
     return Column(children: [
-      Center(
-        child: Text(L10nX.getStr.teacher_list,
-            style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
-                .copyWith(
-                    fontSize: constraints.maxWidth < 550 ? 28 : 45,
-                    color: notifier.blackcolor)),
-      ),
-      SizedBox(
-        height: constraints.maxWidth < 550 ? 10 : 20,
-      ),
       Container(
         width: constraints.maxWidth < 1300
             ? constraints.maxWidth / 0.5
             : constraints.maxWidth / 1.1,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
-            color:
-                notifier.isDark ? Colors.transparent : const Color(0xFFF4F5F6),
+            // color:
+            //     notifier.isDark ? Colors.transparent : const Color(0xFFF4F5F6),
             border: Border.all(
                 color: notifier.isDark
                     ? notifier.sugestionbutton
@@ -167,6 +161,17 @@ class _TeacherListState extends State<TeacherList> {
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      Center(
+                        child: Text(L10nX.getStr.teacher_list,
+                            style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                                .copyWith(
+                                fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                                fontWeight: FontWeight.bold,
+                                color: notifier.blackcolor)),
+                      ),
+                      SizedBox(
+                        height: constraints.maxWidth < 550 ? 10 : 20,
+                      ),
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         controller: scrollCont,
@@ -261,71 +266,79 @@ class _TeacherListState extends State<TeacherList> {
       required BoxConstraints constraints}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: Container(
-          decoration: BoxDecoration(
-            color: ColorConst.whiteColor,
-          ),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: SizedBox(
-                  width: Dimens.size300,
-                  height: Dimens.size340,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: ImageManager().getImageByUrl(
-                        landingPageUserInfo.avatar ?? "",
-                        boxFit: BoxFit.cover),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: ColorConst.whiteColor,
-                    // borderRadius: BorderRadius.circular(Dimens.size100)
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(landingPageUserInfo.fullname ?? "",
-                            style: baseStyle.copyWith(
-                                color: notifier.blackcolor,
-                                fontSize:  (constraints.maxWidth < 900)
-                                            ? Dimens.size16
-                                            : (constraints.maxWidth < 1300)
-                                                ? Dimens.size18
-                                                : Dimens.size24,
-                                
-                                fontWeight: FontWeight.w500)),
-                        Text(
-                          landingPageUserInfo.position ?? "",
-                          style: baseStyle.copyWith(
-                              color: notifier.blackcolor,
-                              fontSize: (constraints.maxWidth < 900)
-                                          ? Dimens.size12
-                                          : (constraints.maxWidth < 1300)
-                                              ? Dimens.size14
-                                              : Dimens.size20,
-                              ),
-                          maxLines: 2,
-                        ),
-                        Gap(Dimens.size20)
-                      ],
+      child: Card(
+        elevation: 10,
+        // decoration: BoxDecoration(
+        //   border: Border.all(
+        //     color: Colors.black,
+        //   )
+        // ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Container(
+            decoration: BoxDecoration(
+              color: ColorConst.whiteColor,
+            ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: SizedBox(
+                    width: Dimens.size300,
+                    height: Dimens.size340,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: ImageManager().getImageByUrl(
+                          landingPageUserInfo.avatar ?? "",
+                          boxFit: BoxFit.cover),
                     ),
                   ),
                 ),
-              ),
-              // SizedBox(height: 10),
-            ],
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: ColorConst.whiteColor,
+                      // borderRadius: BorderRadius.circular(Dimens.size100)
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(landingPageUserInfo.fullname ?? "",
+                              style: baseStyle.copyWith(
+                                  color: notifier.blackcolor,
+                                  fontSize:  (constraints.maxWidth < 900)
+                                              ? Dimens.size16
+                                              : (constraints.maxWidth < 1300)
+                                                  ? Dimens.size18
+                                                  : Dimens.size24,
+
+                                  fontWeight: FontWeight.w500)),
+                          Text(
+                            landingPageUserInfo.position ?? "",
+                            style: baseStyle.copyWith(
+                                color: notifier.blackcolor,
+                                fontSize: (constraints.maxWidth < 900)
+                                            ? Dimens.size12
+                                            : (constraints.maxWidth < 1300)
+                                                ? Dimens.size14
+                                                : Dimens.size20,
+                                ),
+                            maxLines: 2,
+                          ),
+                          Gap(Dimens.size20)
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                // SizedBox(height: 10),
+              ],
+            ),
           ),
         ),
       ),

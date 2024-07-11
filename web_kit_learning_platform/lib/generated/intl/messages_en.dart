@@ -131,6 +131,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "dialogs": MessageLookupByLibrary.simpleMessage("Dialogs"),
         "differences_in_teaching_methods": MessageLookupByLibrary.simpleMessage(
             "Differences in teaching methods"),
+        "differences_in_teaching_methods_1":
+            MessageLookupByLibrary.simpleMessage(""),
+        "differences_in_teaching_methods_2":
+            MessageLookupByLibrary.simpleMessage("Differences"),
+        "differences_in_teaching_methods_3":
+            MessageLookupByLibrary.simpleMessage(" in teaching methods"),
         "doughnut_chart":
             MessageLookupByLibrary.simpleMessage("Doughnut chart"),
         "download": MessageLookupByLibrary.simpleMessage("Download"),
@@ -445,7 +451,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "string_time_setting":
             MessageLookupByLibrary.simpleMessage("Time setting"),
         "student_review_list_str":
-            MessageLookupByLibrary.simpleMessage("What students say"),
+            MessageLookupByLibrary.simpleMessage("Students\' comments"),
         "style_guide": MessageLookupByLibrary.simpleMessage("Style guide"),
         "subcribe_to_our_news_letter":
             MessageLookupByLibrary.simpleMessage("Subcribe to our newsletter"),
@@ -469,7 +475,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "target": MessageLookupByLibrary.simpleMessage("Target"),
         "teacher_list": MessageLookupByLibrary.simpleMessage(" Teacher list"),
         "teacher_review_list_str":
-            MessageLookupByLibrary.simpleMessage("What teachers say"),
+            MessageLookupByLibrary.simpleMessage("What professors say"),
         "teachers_teach_the_most":
             MessageLookupByLibrary.simpleMessage("Teachers who teach the most"),
         "terms_conditions":
@@ -591,6 +597,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "why_choose_title4":
             MessageLookupByLibrary.simpleMessage("Community Development"),
         "why_choose_us": MessageLookupByLibrary.simpleMessage("Why choose us"),
+        "why_choose_us_1": MessageLookupByLibrary.simpleMessage("Why "),
+        "why_choose_us_2": MessageLookupByLibrary.simpleMessage("choose "),
+        "why_choose_us_3": MessageLookupByLibrary.simpleMessage("us"),
         "why_choose_us_sub_title": MessageLookupByLibrary.simpleMessage(
             "Let\'s take a look at some achievements of YAX Chinese learning"),
         "widgets": MessageLookupByLibrary.simpleMessage("Widgets"),

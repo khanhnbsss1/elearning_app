@@ -120,285 +120,315 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
           void Function(void Function()) setState) {
         return LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) { 
-            return Padding(
-              padding: EdgeInsets.only(
-                  left: constraints.maxWidth < 500
-                      ? 10
-                      : constraints.maxWidth < 900
-                      ? constraints.maxWidth / 20
-                      : constraints.maxWidth < 1300
-                      ? constraints.maxWidth / 15
-                      : constraints.maxWidth / 8,
-                  right: constraints.maxWidth < 500
-                      ? 10
-                      : constraints.maxWidth < 900
-                      ? constraints.maxWidth / 20
-                      : constraints.maxWidth < 1300
-                      ? constraints.maxWidth / 15
-                      : constraints.maxWidth / 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    StaticView.buildLogo(),
-                                    //ImageManager().getPngImage(ImageManager.logo, height: Dimens.size35),
-                                    const SizedBox(width: 5),
-                                    Text(
-                                      L10nX.getStr.app_name,
-                                      style: baseStyle.copyWith(
-
-                                        color: notifier.blackcolor,
-                                        fontSize: 24,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                // const SizedBox(
-                                //   height: 20,
-                                // ),
-                                // Row(
-                                //   crossAxisAlignment: CrossAxisAlignment.center,
-                                //   children: [
-                                //     Image.asset('assets/Icons/lightbulbicon.png',
-                                //         height: 20, color: notifier.subgreycolor),
-                                //     const SizedBox(
-                                //       width: 7,
-                                //     ),
-                                //     Text(
-                                //       L10nX.getStr.dark_theme,
-                                //       style: baseStyle.copyWith(
-                                //
-                                //           fontSize: 14,
-                                //           color: notifier.subgreycolor,
-                                //           fontWeight: FontWeight.w600,
-                                //           letterSpacing: 1),
-                                //     ),
-                                //     const SizedBox(
-                                //       width: 7,
-                                //     ),
-                                //     SizedBox(
-                                //       height: 29,
-                                //       child: FlutterSwitch(
-                                //         height: 23.0,
-                                //         width: 45.0,
-                                //         padding: 4.0,
-                                //         toggleSize: 16.0,
-                                //         borderRadius: 15.0,
-                                //         inactiveToggleColor: notifier.buttoncolor,
-                                //         activeColor: notifier.buttoncolor,
-                                //         inactiveColor: notifier.sugestionbutton,
-                                //         value: notifier.isDark,
-                                //         onToggle: (bool value) {
-                                //           notifier.isAvailable(value);
-                                //         },
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
-                              ],
-                            ),
-                          ),
-                          // Column(
-                          //   crossAxisAlignment: CrossAxisAlignment.end,
-                          //   children: [
-                          //     Text(L10nX.getStr.subcribe_to_our_news_letter,
-                          //         style: baseStyle.copyWith(
-                          //
-                          //             color: notifier.blackcolor)),
-                          //     const SizedBox(height: 20),
-                          //     SizedBox(
-                          //       height: 60,
-                          //       width: 300,
-                          //       child: TextField(
-                          //         style: baseStyle.copyWith(color: notifier.blackcolor),
-                          //         decoration: InputDecoration(
-                          //           disabledBorder: OutlineInputBorder(
-                          //             borderRadius: BorderRadius.circular(25),
-                          //             borderSide: BorderSide(
-                          //                 width: 1,
-                          //                 color: notifier.isDark
-                          //                     ? const Color(0xFF353945)
-                          //                     : const Color(0xFFE6E8EC)),
-                          //           ),
-                          //           enabledBorder: OutlineInputBorder(
-                          //             borderRadius: BorderRadius.circular(25),
-                          //             borderSide: BorderSide(
-                          //                 width: 2,
-                          //                 color: notifier.isDark
-                          //                     ? const Color(0xFF353945)
-                          //                     : const Color(0xFFE6E8EC)),
-                          //           ),
-                          //           focusedBorder: OutlineInputBorder(
-                          //             borderRadius: BorderRadius.circular(25),
-                          //             borderSide: BorderSide(
-                          //                 width: 1, color: notifier.subgreycolor),
-                          //           ),
-                          //           border: OutlineInputBorder(
-                          //             borderRadius: BorderRadius.circular(25),
-                          //             borderSide: BorderSide(
-                          //                 width: 1,
-                          //                 color: notifier.isDark
-                          //                     ? const Color(0xFF23262F)
-                          //                     : const Color(0xFFE6E8EC)),
-                          //           ),
-                          //           suffixIcon: InkWell(
-                          //             onTap: () {},
-                          //             onHover: (value) {
-                          //               setState(() {
-                          //                 tfHover = value;
-                          //               });
-                          //             },
-                          //             child: AnimatedContainer(
-                          //               width: 70,
-                          //               height: 40,
-                          //               duration: const Duration(milliseconds: 200),
-                          //               margin: const EdgeInsets.only(right: 5),
-                          //               decoration: BoxDecoration(
-                          //                 color: tfHover
-                          //                     ? Colors.indigoAccent.shade700
-                          //                     : notifier.buttoncolor,
-                          //                 borderRadius: BorderRadius.circular(20),
-                          //               ),
-                          //               alignment: Alignment.center,
-                          //               child: Text(L10nX.getStr.send,
-                          //                   style: baseStyle.copyWith(
-                          //
-                          //                       color: Colors.white,
-                          //                       fontSize: 16)),
-                          //             ),
-                          //           ),
-                          //           hintText: L10nX.getStr.enter_your_email,
-                          //           hintStyle: baseStyle.copyWith(
-                          //
-                          //               color: notifier.subgreycolor),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-                        ],
-                      ),
-                      const SizedBox(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Column(
-                          //height: 50,
-                            children: [ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              itemCount: contacts.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return buildContactInfoItem(
-                                    contacts: contacts[index],
-                                    icon: contactsImage[index]
-
-                                );
-                              },
-                            )]),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  const SizedBox(height: 30),
-                  Divider(
-                    color: notifier.isDark
-                        ? notifier.subgreycolor
-                        : notifier.sugestionbutton,
-                  ),
-                  const SizedBox(height: 30),
-                  Row(
+            return Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: constraints.maxWidth < 500
+                          ? 10
+                          : constraints.maxWidth < 900
+                          ? constraints.maxWidth / 20
+                          : constraints.maxWidth < 1300
+                          ? constraints.maxWidth / 15
+                          : constraints.maxWidth / 8,
+                      right: constraints.maxWidth < 500
+                          ? 10
+                          : constraints.maxWidth < 900
+                          ? constraints.maxWidth / 20
+                          : constraints.maxWidth < 1300
+                          ? constraints.maxWidth / 15
+                          : constraints.maxWidth / 8),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: 40,
-                            // width: 300,
-                            child: ListView.builder(
-                              itemCount: logos.length,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return Row(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Container(
-                                      height: 40,
-                                      padding: const EdgeInsets.all(6),
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: notifier.subgreycolor,
-                                        ),
-                                      ),
-                                      child: SvgPicture.asset(notifier.isDark ? logosDark[index] : logos[index],
-                                          height: 20),
-                                    ),
-                                    const SizedBox(width: 10),
-                                  ],
-                                );
-                              },
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Text( (constraints.maxWidth < 950 && constraints.maxWidth > 550)
-                              ? 'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services  \n Powered by ${L10nX.getStr.app_name}'
-                              : 'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services Powered by ${L10nX.getStr.app_name}',
-                            style: baseStyle.copyWith(
-                                fontSize: constraints.maxWidth < 300 ? 10 : 14,
+                                    Row(
+                                      children: [
+                                        StaticView.buildLogo(),
+                                        //ImageManager().getPngImage(ImageManager.logo, height: Dimens.size35),
+                                        const SizedBox(width: 5),
+                                        Text(
+                                          L10nX.getStr.app_name,
+                                          style: baseStyle.copyWith(
 
-                                color: notifier.isDark
-                                    ? notifier.subgreycolor
-                                    : notifier.blackcolor),
+                                            color: notifier.blackcolor,
+                                            fontSize: 24,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    // const SizedBox(
+                                    //   height: 20,
+                                    // ),
+                                    // Row(
+                                    //   crossAxisAlignment: CrossAxisAlignment.center,
+                                    //   children: [
+                                    //     Image.asset('assets/Icons/lightbulbicon.png',
+                                    //         height: 20, color: notifier.subgreycolor),
+                                    //     const SizedBox(
+                                    //       width: 7,
+                                    //     ),
+                                    //     Text(
+                                    //       L10nX.getStr.dark_theme,
+                                    //       style: baseStyle.copyWith(
+                                    //
+                                    //           fontSize: 14,
+                                    //           color: notifier.subgreycolor,
+                                    //           fontWeight: FontWeight.w600,
+                                    //           letterSpacing: 1),
+                                    //     ),
+                                    //     const SizedBox(
+                                    //       width: 7,
+                                    //     ),
+                                    //     SizedBox(
+                                    //       height: 29,
+                                    //       child: FlutterSwitch(
+                                    //         height: 23.0,
+                                    //         width: 45.0,
+                                    //         padding: 4.0,
+                                    //         toggleSize: 16.0,
+                                    //         borderRadius: 15.0,
+                                    //         inactiveToggleColor: notifier.buttoncolor,
+                                    //         activeColor: notifier.buttoncolor,
+                                    //         inactiveColor: notifier.sugestionbutton,
+                                    //         value: notifier.isDark,
+                                    //         onToggle: (bool value) {
+                                    //           notifier.isAvailable(value);
+                                    //         },
+                                    //       ),
+                                    //     ),
+                                    //   ],
+                                    // ),
+                                  ],
+                                ),
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(L10nX.getStr.subcribe_to_our_news_letter,
+                                      style: baseStyle.copyWith(
+
+                                          color: notifier.blackcolor)),
+                                  const SizedBox(height: 20),
+                                  SizedBox(
+                                    height: 60,
+                                    width: 300,
+                                    child: TextField(
+                                      style: baseStyle.copyWith(color: notifier.blackcolor),
+                                      decoration: InputDecoration(
+                                        disabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(25),
+                                          borderSide: BorderSide(
+                                              width: 1,
+                                              color: notifier.isDark
+                                                  ? const Color(0xFF353945)
+                                                  : const Color(0xFFE6E8EC)),
+                                        ),
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(25),
+                                          borderSide: BorderSide(
+                                              width: 2,
+                                              color: notifier.isDark
+                                                  ? const Color(0xFF353945)
+                                                  : const Color(0xFFE6E8EC)),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(25),
+                                          borderSide: BorderSide(
+                                              width: 1, color: notifier.subgreycolor),
+                                        ),
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(25),
+                                          borderSide: BorderSide(
+                                              width: 1,
+                                              color: notifier.isDark
+                                                  ? const Color(0xFF23262F)
+                                                  : const Color(0xFFE6E8EC)),
+                                        ),
+                                        suffixIcon: InkWell(
+                                          onTap: () {},
+                                          onHover: (value) {
+                                            setState(() {
+                                              tfHover = value;
+                                            });
+                                          },
+                                          child: AnimatedContainer(
+                                            width: 70,
+                                            height: 40,
+                                            duration: const Duration(milliseconds: 200),
+                                            margin: const EdgeInsets.only(right: 5),
+                                            decoration: BoxDecoration(
+                                              color: tfHover
+                                                  ? Colors.indigoAccent.shade700
+                                                  : notifier.buttoncolor,
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                            alignment: Alignment.center,
+                                            child: Text(L10nX.getStr.send,
+                                                style: baseStyle.copyWith(
+
+                                                    color: Colors.white,
+                                                    fontSize: 16)),
+                                          ),
+                                        ),
+                                        hintText: L10nX.getStr.enter_your_email,
+                                        hintStyle: baseStyle.copyWith(
+
+                                            color: notifier.subgreycolor),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
+                          const SizedBox(),
                         ],
                       ),
-                      /*SizedBox(
-                        height: 200,
-                        width:  400,
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                          itemCount: endElements.length,
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              mainAxisExtent: 40,
-                              crossAxisSpacing: 50),
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {},
-                              onHover: (value) {
-                                setState(() {
-                                  elementsHover[index] = value;
-                                });
-                              },
-                              child: Text(
-                                endElements[index],
-                                style: baseStyle.copyWith(
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: SingleChildScrollView(
+                          child: SizedBox(
+                            height: 50,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: contacts.length,
+                                itemBuilder: (context, index) {
+                                  return buildContactInfoItem(
+                                      contacts: contacts[index],
+                                      icon: contactsImage[index]
 
-                                    fontSize: 16,
-                                    color: elementsHover[index] ? notifier.buttoncolor : notifier.subgreycolor),
-                              ),
-                            );
-                          },
+                                  );
+                                },
+                              )),
                         ),
-                      ),*/
+                      ),
+                      const SizedBox(height: 10),
+                      const SizedBox(height: 30),
+                      Divider(
+                        color: notifier.isDark
+                            ? notifier.subgreycolor
+                            : notifier.sugestionbutton,
+                      ),
+                      const SizedBox(height: 30),
                     ],
+                  )),
+                Container(
+                  color: notifier.redcolor,
+                  child: Padding(
+                    // padding: const EdgeInsets.only(
+                    //     left: constraints.maxWidth < 500
+                    //         ? 10
+                    //         : constraints.maxWidth < 900
+                    //         ? constraints.maxWidth / 20
+                    //         : constraints.maxWidth < 1300
+                    //         ? constraints.maxWidth / 15
+                    //         : constraints.maxWidth / 8,
+                    //     right: constraints.maxWidth < 500
+                    //         ? 10
+                    //         : constraints.maxWidth < 900
+                    //         ? constraints.maxWidth / 20
+                    //         : constraints.maxWidth < 1300
+                    //         ? constraints.maxWidth / 15
+                    //         : constraints.maxWidth / 8),
+                    padding: EdgeInsets.all(30),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 40,
+                              // width: 300,
+                              child: ListView.builder(
+                                itemCount: logos.length,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return Row(
+                                    children: [
+                                      Container(
+                                        height: 40,
+                                        padding: const EdgeInsets.all(6),
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: notifier.whitecolor,
+                                          ),
+                                        ),
+                                        child: SvgPicture.asset(notifier.isDark ? logos[index] : logos[index],color: Colors.white,
+                                            height: 20),
+                                      ),
+                                      const SizedBox(width: 10),
+                                    ],
+                                  );
+                                },
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+                            Text( (constraints.maxWidth < 950 && constraints.maxWidth > 550)
+                                ? 'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services  \n Powered by ${L10nX.getStr.app_name}'
+                                : 'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services Powered by ${L10nX.getStr.app_name}',
+                              style: baseStyle.copyWith(
+                                  fontSize: constraints.maxWidth < 300 ? 10 : 14,
+
+                                  color: notifier.whitecolor),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          // color: Colors.green,
+                          height: 220,
+                          width:  500,
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            itemCount: endElements.length,
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3,
+                                mainAxisExtent: 40,
+                                crossAxisSpacing: 25),
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {},
+                                onHover: (value) {
+                                  setState(() {
+                                    elementsHover[index] = value;
+                                  });
+                                },
+                                child: Container(
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      endElements[index],
+                                      style: baseStyle.copyWith(
+
+                                          fontSize: 16,
+                                          color: elementsHover[index] ? notifier.subgreycolor : notifier.whitecolor),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  const SizedBox(height: 20),
-                ],
-              ));
+                ),
+
+              ],
+            );
           },
         );
     },
@@ -428,118 +458,115 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Row(
+                  children: [
+                    StaticView.buildLogo(),
+                    const SizedBox(width: 5),
+                    Text(
+                      L10nX.getStr.app_name,
+                      style: baseStyle.copyWith(
+                          color: notifier.blackcolor,
+                          fontSize: constraints.maxWidth < 300 ? 16 : 24),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: contacts.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: buildContactInfoItem(
+                            contacts: contacts[index],
+                            icon: contactsImage[index]
+
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(height: 10),
                 Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          StaticView.buildLogo(),
-                          const SizedBox(width: 5),
-                          Text(
-                            L10nX.getStr.app_name,
-                            style: baseStyle.copyWith(
-                                color: notifier.blackcolor,
-                                fontSize: constraints.maxWidth < 300 ? 16 : 24),
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(L10nX.getStr.subcribe_to_our_news_letter,
+                      style: baseStyle.copyWith(
+                          color: notifier.blackcolor),
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: 60,
+                      width: constraints.maxWidth / 1,
+                      child: TextField(
+                        style: baseStyle.copyWith(color: notifier.blackcolor),
+                        decoration: InputDecoration(
+                          disabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide(
+                                width: 1,
+                                color: notifier.isDark
+                                    ? const Color(0xFF353945)
+                                    : const Color(0xFFE6E8EC)),
                           ),
-                        ],
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide(
+                                width: 2,
+                                color: notifier.isDark
+                                    ? const Color(0xFF353945)
+                                    : const Color(0xFFE6E8EC)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide:
+                            BorderSide(width: 1, color: notifier.subgreycolor),
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25),
+                            borderSide: BorderSide(
+                                width: 1,
+                                color: notifier.isDark
+                                    ? const Color(0xFF23262F)
+                                    : const Color(0xFFE6E8EC)),
+                          ),
+                          suffixIcon: InkWell(
+                            onTap: () {},
+                            onHover: (value) {
+                              setState(() {
+                                tfHover = value;
+                              });
+                            },
+                            child: AnimatedContainer(
+                              width: 70,
+                              height: 40,
+                              duration: const Duration(milliseconds: 200),
+                              margin: const EdgeInsets.only(right: 5),
+                              decoration: BoxDecoration(
+                                color: tfHover
+                                    ? Colors.indigoAccent.shade700
+                                    : notifier.buttoncolor,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              alignment: Alignment.center,
+                              child: Text(L10nX.getStr.send,
+                                  style: baseStyle.copyWith(
+
+                                      color: Colors.white,
+                                      fontSize: 16)),
+                            ),
+                          ),
+                          hintText: L10nX.getStr.enter_your_email,
+                          hintStyle: baseStyle.copyWith(
+                               color: notifier.subgreycolor),
+                        ),
                       ),
-                      const SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Column(
-                            //height: 50,
-                            children: [ListView.builder(
-                              scrollDirection: Axis.vertical,
-                              itemCount: contacts.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return buildContactInfoItem(
-                                    contacts: contacts[index],
-                                    icon: contactsImage[index]
-                                  
-                                );
-                              },
-                            )]),
-                      ),
-                      const SizedBox(height: 10),
-                    ]),
-                // Column(
-                //   crossAxisAlignment: CrossAxisAlignment.end,
-                //   children: [
-                //     Text(L10nX.getStr.subcribe_to_our_news_letter,
-                //       style: baseStyle.copyWith(
-                //           color: notifier.blackcolor),
-                //     ),
-                //     const SizedBox(height: 10),
-                //     SizedBox(
-                //       height: 60,
-                //       width: constraints.maxWidth / 1,
-                //       child: TextField(
-                //         style: baseStyle.copyWith(color: notifier.blackcolor),
-                //         decoration: InputDecoration(
-                //           disabledBorder: OutlineInputBorder(
-                //             borderRadius: BorderRadius.circular(25),
-                //             borderSide: BorderSide(
-                //                 width: 1,
-                //                 color: notifier.isDark
-                //                     ? const Color(0xFF353945)
-                //                     : const Color(0xFFE6E8EC)),
-                //           ),
-                //           enabledBorder: OutlineInputBorder(
-                //             borderRadius: BorderRadius.circular(25),
-                //             borderSide: BorderSide(
-                //                 width: 2,
-                //                 color: notifier.isDark
-                //                     ? const Color(0xFF353945)
-                //                     : const Color(0xFFE6E8EC)),
-                //           ),
-                //           focusedBorder: OutlineInputBorder(
-                //             borderRadius: BorderRadius.circular(25),
-                //             borderSide:
-                //             BorderSide(width: 1, color: notifier.subgreycolor),
-                //           ),
-                //           border: OutlineInputBorder(
-                //             borderRadius: BorderRadius.circular(25),
-                //             borderSide: BorderSide(
-                //                 width: 1,
-                //                 color: notifier.isDark
-                //                     ? const Color(0xFF23262F)
-                //                     : const Color(0xFFE6E8EC)),
-                //           ),
-                //           suffixIcon: InkWell(
-                //             onTap: () {},
-                //             onHover: (value) {
-                //               setState(() {
-                //                 tfHover = value;
-                //               });
-                //             },
-                //             child: AnimatedContainer(
-                //               width: 70,
-                //               height: 40,
-                //               duration: const Duration(milliseconds: 200),
-                //               margin: const EdgeInsets.only(right: 5),
-                //               decoration: BoxDecoration(
-                //                 color: tfHover
-                //                     ? Colors.indigoAccent.shade700
-                //                     : notifier.buttoncolor,
-                //                 borderRadius: BorderRadius.circular(20),
-                //               ),
-                //               alignment: Alignment.center,
-                //               child: Text(L10nX.getStr.send,
-                //                   style: baseStyle.copyWith(
-                //
-                //                       color: Colors.white,
-                //                       fontSize: 16)),
-                //             ),
-                //           ),
-                //           hintText: L10nX.getStr.enter_your_email,
-                //           hintStyle: baseStyle.copyWith(
-                //                color: notifier.subgreycolor),
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
+                    ),
+                  ],
+                ),
                 // const SizedBox(height: 10),
                 // Row(
                 //   mainAxisSize: MainAxisSize.max,
@@ -639,7 +666,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                       ],
                     ),
                     const SizedBox(height: 40),
-                   /* SizedBox(
+                   SizedBox(
                       height: 200,
                       width: width / 1,
                       child: GridView.builder(
@@ -669,7 +696,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                           );
                         },
                       ),
-                    ),*/
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -681,25 +708,20 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
     );
   }
   Widget buildContactInfoItem({required String contacts, required String icon}){
-    return Container(
-      padding: EdgeInsets.only(bottom: 8),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SvgPicture.asset(icon,
-              height: 20),
-          const SizedBox(width: 10),
-          Flexible( // Wrap the Text with Flexible
-            child: Text(contacts,
-              style: baseStyle.copyWith(
-                  overflow: TextOverflow.ellipsis,
-                  color: notifier.subgreycolor,
-                  fontSize: 16),
-              maxLines: 2,),
-          ),
-          const SizedBox(width: 20),
-        ],
-      ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SvgPicture.asset(icon,
+            height: 20),
+        const SizedBox(width: 10),
+        Text(contacts,
+          style: baseStyle.copyWith(
+              overflow: TextOverflow.ellipsis,
+              color: notifier.subgreycolor,
+              fontSize: 16),
+          maxLines: 2,),
+        const SizedBox(width: 20),
+      ],
     );
   }
 }

@@ -3850,20 +3850,20 @@ class S {
     );
   }
 
-  /// `What teachers say`
+  /// `What professors say`
   String get teacher_review_list_str {
     return Intl.message(
-      'What teachers say',
+      'What professors say',
       name: 'teacher_review_list_str',
       desc: '',
       args: [],
     );
   }
 
-  /// `What students say`
+  /// `Students' comments`
   String get student_review_list_str {
     return Intl.message(
-      'What students say',
+      'Students\' comments',
       name: 'student_review_list_str',
       desc: '',
       args: [],
@@ -3875,6 +3875,36 @@ class S {
     return Intl.message(
       'Differences in teaching methods',
       name: 'differences_in_teaching_methods',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ``
+  String get differences_in_teaching_methods_1 {
+    return Intl.message(
+      '',
+      name: 'differences_in_teaching_methods_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Differences`
+  String get differences_in_teaching_methods_2 {
+    return Intl.message(
+      'Differences',
+      name: 'differences_in_teaching_methods_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` in teaching methods`
+  String get differences_in_teaching_methods_3 {
+    return Intl.message(
+      ' in teaching methods',
+      name: 'differences_in_teaching_methods_3',
       desc: '',
       args: [],
     );
@@ -4015,6 +4045,36 @@ class S {
     return Intl.message(
       'Why choose us',
       name: 'why_choose_us',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Why `
+  String get why_choose_us_1 {
+    return Intl.message(
+      'Why ',
+      name: 'why_choose_us_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `choose `
+  String get why_choose_us_2 {
+    return Intl.message(
+      'choose ',
+      name: 'why_choose_us_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `us`
+  String get why_choose_us_3 {
+    return Intl.message(
+      'us',
+      name: 'why_choose_us_3',
       desc: '',
       args: [],
     );

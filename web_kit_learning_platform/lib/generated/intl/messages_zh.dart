@@ -120,6 +120,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "dialogs": MessageLookupByLibrary.simpleMessage("对话框"),
         "differences_in_teaching_methods":
             MessageLookupByLibrary.simpleMessage("教学方法的差异"),
+        "differences_in_teaching_methods_1":
+            MessageLookupByLibrary.simpleMessage("教学方法的"),
+        "differences_in_teaching_methods_2":
+            MessageLookupByLibrary.simpleMessage("差异"),
+        "differences_in_teaching_methods_3":
+            MessageLookupByLibrary.simpleMessage(""),
         "doughnut_chart": MessageLookupByLibrary.simpleMessage("环形图"),
         "download": MessageLookupByLibrary.simpleMessage("下载"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("电子商务"),
@@ -381,8 +387,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("没有旧数据"),
         "string_notify": MessageLookupByLibrary.simpleMessage("通知"),
         "string_time_setting": MessageLookupByLibrary.simpleMessage("时间设置"),
-        "student_review_list_str":
-            MessageLookupByLibrary.simpleMessage("学生怎么说"),
+        "student_review_list_str": MessageLookupByLibrary.simpleMessage("学生感言"),
         "style_guide": MessageLookupByLibrary.simpleMessage("样式指南"),
         "subcribe_to_our_news_letter":
             MessageLookupByLibrary.simpleMessage("订阅我们的新闻通讯"),
@@ -404,7 +409,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "target": MessageLookupByLibrary.simpleMessage("目标"),
         "teacher_list": MessageLookupByLibrary.simpleMessage("教师列表"),
         "teacher_review_list_str":
-            MessageLookupByLibrary.simpleMessage("老师怎么说"),
+            MessageLookupByLibrary.simpleMessage("教授们怎么说"),
         "teachers_teach_the_most":
             MessageLookupByLibrary.simpleMessage("教得最多的老师"),
         "terms_conditions": MessageLookupByLibrary.simpleMessage("条款和条件"),
@@ -509,6 +514,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "why_choose_title3": MessageLookupByLibrary.simpleMessage("亲爱的"),
         "why_choose_title4": MessageLookupByLibrary.simpleMessage("社区发展"),
         "why_choose_us": MessageLookupByLibrary.simpleMessage("为什么选择我们"),
+        "why_choose_us_1": MessageLookupByLibrary.simpleMessage("为什么"),
+        "why_choose_us_2": MessageLookupByLibrary.simpleMessage("选择"),
+        "why_choose_us_3": MessageLookupByLibrary.simpleMessage("我们"),
         "why_choose_us_sub_title":
             MessageLookupByLibrary.simpleMessage("我们来看看YAX中文学习的一些成果"),
         "widgets": MessageLookupByLibrary.simpleMessage("小工具"),

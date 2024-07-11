@@ -40,25 +40,39 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
-    return BlocProvider(
-        create: (context) {
-          return LandingPageCourseListBloc(LandingPageCourseListState())..add(LandingPageCourseListInitEvent());
-        },
-        child: BlocConsumer<LandingPageCourseListBloc, LandingPageCourseListState>(
-            listener: (context, state) {
-          switch (state.blocStatus) {
-            case CourseListStatus.initial:
-              break;
-            default:
-              break;
-          }
-        }, builder: (BuildContext context, state) {
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              return buildCourseList(constraints: constraints, state: state);
-            },
-          );
-        }));
+    return Container(
+      width: width,
+      decoration: BoxDecoration(
+        image: DecorationImage( image: AssetImage('assets/deshboard/landingpage1.jpg'),fit: BoxFit.fill),
+      ),
+      //  decoration: BoxDecoration( gradient: LinearGradient(
+      //       begin: Alignment.center,
+      //       end: Alignment.bottomCenter,
+      //       colors: [
+      //         Colors.white,
+      //         Color.fromRGBO(246, 122, 122, 1.0),
+      //       ]
+      //   ),),
+      child: BlocProvider(
+          create: (context) {
+            return LandingPageCourseListBloc(LandingPageCourseListState())..add(LandingPageCourseListInitEvent());
+          },
+          child: BlocConsumer<LandingPageCourseListBloc, LandingPageCourseListState>(
+              listener: (context, state) {
+            switch (state.blocStatus) {
+              case CourseListStatus.initial:
+                break;
+              default:
+                break;
+            }
+          }, builder: (BuildContext context, state) {
+            return LayoutBuilder(
+              builder: (context, constraints) {
+                return buildCourseList(constraints: constraints, state: state);
+              },
+            );
+          })),
+    );
   }
 
   Widget buildCourseList(
@@ -76,33 +90,15 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> {
 
     return Column(
       children: [
-        Center(
-          child: Text(L10nX.getStr.courses_list,
-              style: TextStyleConstant
-                  .titleTextColorOnBackgroundColorStyle14w400
-                  .copyWith(
-                      fontSize: constraints.maxWidth < 550 ? 28 : 45,
-                      color: notifier.blackcolor)),
-        ),
-        Center(
-          child: Text(L10nX.getStr.register_to_enjoy_the_best_deals_for_you,
-              textAlign: TextAlign.center,
-              style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
-                      fontSize: constraints.maxWidth < 550 ? 18 : 20,
-                      color: notifier.greycolor)),
-        ),
-        SizedBox(
-          height: constraints.maxWidth < 550 ? 10 : 20,
-        ),
         Container(
           width: constraints.maxWidth < 1300
               ? constraints.maxWidth / 0.5
               : constraints.maxWidth / 1.1,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: notifier.isDark
-                  ? Colors.transparent
-                  : const Color(0xFFF4F5F6),
+              // color: notifier.isDark
+              //     ? Colors.transparent
+              //     : const Color(0xFFF4F5F6),
               border: Border.all(
                   color: notifier.isDark
                       ? notifier.sugestionbutton
@@ -115,6 +111,25 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> {
               crossAxisAlignment: CrossAxisAlignment.center,
               // mainAxisSize: MainAxisSize.min,
               children: [
+                Center(
+                  child: Text(L10nX.getStr.courses_list,
+                      style: TextStyleConstant
+                          .titleTextColorOnBackgroundColorStyle14w400
+                          .copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                          color: notifier.blackcolor)),
+                ),
+                Center(
+                  child: Text(L10nX.getStr.register_to_enjoy_the_best_deals_for_you,
+                      textAlign: TextAlign.center,
+                      style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
+                          fontSize: constraints.maxWidth < 550 ? 18 : 20,
+                          color: Colors.black54)),
+                ),
+                SizedBox(
+                  height: constraints.maxWidth < 550 ? 10 : 20,
+                ),
                 Container(
                   // height: constraints.maxWidth < 900 ? constraints.maxWidth / 0.152 : constraints.maxWidth < 1100 ? constraints.maxWidth / 0.66 : constraints.maxWidth < 1300 ? constraints.maxWidth / 1.35 : constraints.maxWidth / 1.8,
                   width: constraints.maxWidth < 900
