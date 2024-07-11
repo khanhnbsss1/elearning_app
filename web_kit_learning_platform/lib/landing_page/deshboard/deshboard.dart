@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/base/widgets/static_view/static_view.dart';
+import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/helpers/localizations/language_helper.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
@@ -39,12 +40,6 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
   late ColorNotifier notifier;
   SampleItem? selectedMenu;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
   late TabController t1;
 
   List sugimage = [
@@ -65,19 +60,8 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
   int selectedindex = 0;
   int sugindex = 0;
   double a = 2;
-  ScrollController mainController = ScrollController();
   ScrollController differrentController = ScrollController();
   ScrollController whyChooseUsController = ScrollController();
-
-  List<String> landingPageTitles = [
-    'Trang chủ',
-    'Phương pháp',
-    'Thành tựu',
-    'Đối tượng dạy học',
-    'Giảng viên',
-    'Khóa học',
-    'Cảm nhận'
-  ];
 
   List<Color> suColor = [
     const Color(0xFF8BC5E5),
@@ -123,13 +107,40 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
   bool searchHover3 = false;
   bool bHover = false;
   bool langHover = false;
+  int tabHover = 0;
+
+  List<String> landingPageTitles = [
+    'Trang chủ',
+    'Phương pháp',
+    'Thành tựu',
+    'Đối tượng',
+    'Giảng viên',
+    'Khóa học',
+    'Cảm nhận'
+  ];
 
   @override
   Widget build(BuildContext context) {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
+
+    if (width < 550) {
+      return buildMobile(context);
+    } else {
+      return buildDesktop(context);
+    }
+  }
+
+  Widget buildMobile(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 0.0),
+          child: buildTabBar(constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width)),
+        )
+      ),
+      endDrawer: CustomDrawer(),
       backgroundColor: notifier.backgroundColor,
       body: SafeArea(child: LayoutBuilder(
         builder: (context, constraints) {
@@ -139,195 +150,238 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
     );
   }
 
-  int tabHover = 0;
+  Widget buildDesktop(BuildContext context) {
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(0.0),
+        child: Container(),
+      ),
+      backgroundColor: notifier.backgroundColor,
+      body: SafeArea(child: LayoutBuilder(
+        builder: (context, constraints) {
+          return appbarleft(constraints);
+        },
+      )),
+    );
+  }
 
+
+  bool showCard = false;
+  final ScrollController _mainController = ScrollController();
+  @override
+  void initState() {
+    super.initState();
+    _mainController.addListener(() {
+      if (_mainController.offset > 300) {
+        setState(() {
+          showCard = true;
+        });
+      } else {
+        setState(() {
+          showCard = false;
+        });
+      }
+    });
+  }
   Widget appbarleft(constraints) {
+    double width = MediaQuery.of(context).size.width;
+    double itemCardWidth = (width < 1100) ? 90 : 140;
     return Stack(
       children: [
         SingleChildScrollView(
-        controller: mainController,
-        scrollDirection: Axis.vertical,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              key: GlobalObjectKey(0),
-            ),
-            buildTabBar(constraints: constraints),
-            SizedBox(
-              height: height / 45,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: constraints.maxWidth < 760
-                    ? 10
-                    : constraints.maxWidth < 1000
-                        ? 0
-                        : constraints.maxWidth / 15,
-                vertical: 10,
+          controller: _mainController,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                key: GlobalObjectKey(0),
               ),
-              child: SizedBox(
-                width: width / 1,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      constraints.maxWidth < 800
-                          ? Image.asset('assets/deshboard/winterlandscape.png',
-                              height: constraints.maxWidth < 500 ? 250 : 400,
-                              width: constraints.maxWidth,
-                              fit: BoxFit.fill)
-                          : Image.asset('assets/deshboard/winterlandscape.png',
-                              height: 600,
-                              width: constraints.maxWidth,
-                              fit: BoxFit.fill),
-                    ],
+              (width > 550) ? buildTabBar(constraints: constraints) : SizedBox(),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: constraints.maxWidth < 760
+                      ? 10
+                      : constraints.maxWidth < 1000
+                          ? 0
+                          : constraints.maxWidth / 15,
+                  vertical: 10,
+                ),
+                child: SizedBox(
+                  width: width / 1,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        constraints.maxWidth < 800
+                            ? Image.asset('assets/deshboard/winterlandscape.png',
+                                height: constraints.maxWidth < 500 ? 250 : 400,
+                                width: constraints.maxWidth,
+                                fit: BoxFit.fill)
+                            : Image.asset('assets/deshboard/winterlandscape.png',
+                                height: 600,
+                                width: constraints.maxWidth,
+                                fit: BoxFit.fill),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              key: GlobalObjectKey(1),
-              height: constraints.maxWidth / 30,
-            ),
-            buildDifferentListWidget(constraints: constraints),
-            SizedBox(
-              height: constraints.maxWidth / 30,
-            ),
-            buildWhyChooseUsListWidget(constraints: constraints),
-            Column(
-              children: [
-                SizedBox(
+              SizedBox(
+                key: GlobalObjectKey(1),
+                height: width < 550 ? 10 : 100,
+              ),
+              buildDifferentListWidget(constraints: constraints),
+              Column(
+                children: [
+                  SizedBox(
+                      key: GlobalObjectKey(3),
+                    height: width < 550 ? 10 : 100,
+                  ),
+                  const WhoThisCourseIsFor(),
+                  SizedBox(
+                      key: GlobalObjectKey(4),
+                    height: width < 550 ? 10 : 100,
+                  ),
+                  const TeacherList(),
+                  SizedBox(
+                    key: GlobalObjectKey(5),
+                    height: width < 550 ? 10 : 100,
+                  ),
+                  const LandingPageCourseList(),
+                  SizedBox(
+                    key: GlobalObjectKey(6),
+                    height: width < 550 ? 10 : 100,
+                  ),
+                  ReviewList(
+                    //key: UniqueKey(),
+                    typeName: UserTypeName.teacher,
+                  ),
+                  SizedBox(
                     key: GlobalObjectKey(2),
-                    height: constraints.maxWidth < 550
-                        ? 70
-                        : constraints.maxWidth / 50),
-                const WhoThisCourseIsFor(),
-                SizedBox(
-                    key: GlobalObjectKey(3),
-                    height: constraints.maxWidth < 550
-                        ? 70
-                        : constraints.maxWidth / 50),
-                const TeacherList(),
-                SizedBox(
-                  key: GlobalObjectKey(4),
-                  height: constraints.maxWidth < 550
-                      ? 50
-                      : constraints.maxWidth < 800
-                          ? constraints.maxWidth / 30
-                          : constraints.maxWidth / 30,
-                ),
-                const LandingPageCourseList(),
-                SizedBox(
-                  key: GlobalObjectKey(5),
-                  height: constraints.maxWidth < 550
-                      ? 50
-                      : constraints.maxWidth < 800
-                          ? constraints.maxWidth / 30
-                          : constraints.maxWidth / 30,
-                ),
-                ReviewList(
-                  //key: UniqueKey(),
-                  typeName: UserTypeName.teacher,
-                ),
-                SizedBox(
-                  key: GlobalObjectKey(6),
-                  height: constraints.maxWidth < 550
-                      ? 50
-                      : constraints.maxWidth < 800
-                          ? constraints.maxWidth / 30
-                          : constraints.maxWidth / 30,
-                ),
-                ReviewList(
-                  // key: UniqueKey(),
-                  typeName: UserTypeName.user,
-                ),
-                SizedBox(
-                  height: constraints.maxWidth < 550
-                      ? 50
-                      : constraints.maxWidth < 800
-                          ? constraints.maxWidth / 30
-                          : constraints.maxWidth / 30,
-                ),
-              ],
-            ),
-            Divider(
-              color: notifier.isDark
-                  ? notifier.subgreycolor
-                  : notifier.sugestionbutton,
-            ),
-            SizedBox(height: constraints.maxWidth / 20),
-            // Container(
-            //   color: Colors.red,
-            //   height: 50, // fixed height
-            //   child: ListView.builder(
-            //     scrollDirection: Axis.horizontal, // make it horizontal
-            //     itemCount: 7,
-            //     itemBuilder: (context, index) {
-            //       return InkWell(
-            //           onTap: () {
-            //             Scrollable.ensureVisible(
-            //                 GlobalObjectKey(index).currentContext!,
-            //                 duration: Duration(seconds: 1),
-            //                 curve: Curves.easeInOutCubic);
-            //           },
-            //           child: Padding(
-            //             padding: const EdgeInsets.all(8.0),
-            //             child: TextButton(
-            //                 onPressed: () {  },
-            //                 child: Text('$index')),
-            //           ),
-            //         );
-            //     },
-            //   ),
-            // ),
-            Wrap(
-              spacing: 20,
-              children: List<Widget>.generate( 7,
-                (int index) {
-                  return FloatingActionButton(
-                    elevation: 0,
-                    foregroundColor: Colors.black,
-                    backgroundColor: Colors.white,
-                    // change text color
-                    onPressed: () {
-                      Scrollable.ensureVisible(
-                          GlobalObjectKey(index).currentContext!,
-                          duration: Duration(seconds: 1),
-                          curve: Curves.easeInOutCubic);
-                    },
-                    child: Expanded(
-                      child: Text(landingPageTitles[index], style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        decoration: TextDecoration.underline,
-                      ),),
-                    ),
-                  );
-                },
-              ).toList(),
-            ),
-            SizedBox(height: 30,),
-            EndOfPage(),
-          ],
+                    height: width < 550 ? 50 : 100,
+                  ),
+                  buildWhyChooseUsListWidget(constraints: constraints),
+                  SizedBox(
+                    key: GlobalObjectKey(7),
+                    height: width < 550 ? 10 : 100,
+                  ),
+                  ReviewList(
+                    // key: UniqueKey(),
+                    typeName: UserTypeName.user,
+                  ),
+                  SizedBox(
+                    height: width < 550 ? 10 : 100,
+                  ),
+                ],
+              ),
+              Divider(
+                color: notifier.isDark
+                    ? notifier.subgreycolor
+                    : notifier.sugestionbutton,
+              ),
+              SizedBox(height: 30,),
+              // SizedBox(height: constraints.maxWidth / 20),
+              // Container(
+              //   color: Colors.red,
+              //   height: 50, // fixed height
+              //   child: ListView.builder(
+              //     scrollDirection: Axis.horizontal, // make it horizontal
+              //     itemCount: 7,
+              //     itemBuilder: (context, index) {
+              //       return InkWell(
+              //           onTap: () {
+              //             Scrollable.ensureVisible(
+              //                 GlobalObjectKey(index).currentContext!,
+              //                 duration: Duration(seconds: 1),
+              //                 curve: Curves.easeInOutCubic);
+              //           },
+              //           child: Padding(
+              //             padding: const EdgeInsets.all(8.0),
+              //             child: TextButton(
+              //                 onPressed: () {  },
+              //                 child: Text('$index')),
+              //           ),
+              //         );
+              //     },
+              //   ),
+              // ),
+              EndOfPage(),
+            ],
+          ),),
+          Positioned(
+          right: 20,
+          bottom: 20,
+          child: FloatingActionButton(
+            backgroundColor: Color.fromRGBO(143, 20, 17, 1.0),
+              hoverColor: Color.fromRGBO(134, 16, 14, 1.0),
+              onPressed: () {
+                Scrollable.ensureVisible(GlobalObjectKey(0).currentContext!,
+              duration: Duration(seconds: 1),
+              curve: Curves.easeInOutCubic);
+              },
+              child: Icon(Icons.arrow_upward),
+              ),
         ),
-      ),
-      Positioned(
-        right: 20,
-        bottom: 20,
-        child: FloatingActionButton(
-          backgroundColor: notifier.redcolor,
-            onPressed: () {
-              Scrollable.ensureVisible(GlobalObjectKey(0).currentContext!,
-            duration: Duration(seconds: 1),
-            curve: Curves.easeInOutCubic);
-            },
-            child: Icon(Icons.arrow_upward),
+         (showCard && width > 750) ? Positioned(
+            top: width < 1100 ? 10 : 20,
+            left: (width - (7*itemCardWidth + 120)) / 2,
+            right: (width - (7*itemCardWidth + 120)) / 2,
+            child: Card(
+              shadowColor: Colors.red,
+              surfaceTintColor: Colors.green,
+              elevation: 10,
+              child: Row(
+                children: [
+                  SizedBox(width: 10,),
+                  StaticView.buildLogo(size: 28),
+                  SizedBox(width: 10,),
+                  Wrap(
+                    children: List<Widget>.generate( 7,
+                          (int index) {
+                        return SizedBox(
+                          height: 50,
+                          width: itemCardWidth,
+                          child: GestureDetector(
+                            child: OnHoverWidget(
+                              builder: (isHovered) {
+                                  return Center(
+                                    child: TextButton(
+                                      style: TextButton.styleFrom(
+                                        overlayColor: Colors.white,
+                                      ),
+                                      onPressed: () {
+                                        Scrollable.ensureVisible(
+                                            GlobalObjectKey(index).currentContext!,
+                                            duration: Duration(seconds: 1),
+                                            curve: Curves.easeInOutCubic);
+                                      },
+                                      child: Text(landingPageTitles[index],
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: (width < 1100) ? 10 : 18,
+                                          color: (isHovered) ? notifier.redcolor : Colors.black,
+                                          decoration: (isHovered) ? TextDecoration.underline : TextDecoration.none,
+                                          decorationColor: notifier.redcolor,
+                                          decorationThickness: 2
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                            ),
+                          ),
+                        );
+                      },
+                    ).toList(),
+                  ),
+                ],
+              ),
             ),
-      )]
-    );
+          ) : SizedBox(),
+        ]
+      );
   }
 
   Widget memory(constraints) {
@@ -421,7 +475,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                           child: Image.asset('assets/Icons/arrowrighticon.png',
                               scale: 3, width: 3, color: notifier.whitecolor),
                         ),
-                        hintText: 'Enter youe phone number',
+                        hintText: 'Enter your phone number',
                         hintStyle:
                             baseStyle.copyWith(color: notifier.subgreycolor)),
                   ),
@@ -539,11 +593,13 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
         }
         return Padding(
           padding: EdgeInsets.only(
-              top: 12,
-              left: constraints.maxWidth / 10 < 800
+              top: constraints.maxWidth < 550 ? 0 : 12,
+              left: constraints.maxWidth < 550 ? 0
+                  : constraints.maxWidth / 10 < 800
                   ? constraints.maxWidth / 15
                   : constraints.maxWidth / 10,
-              right: constraints.maxWidth / 10 < 800
+              right: constraints.maxWidth < 550 ? 0
+                  : constraints.maxWidth / 10 < 800
                   ? constraints.maxWidth / 15
                   : constraints.maxWidth / 10),
           child: Row(
@@ -555,7 +611,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                   children: [
                     StaticView.buildLogo(),
                     const SizedBox(width: 5),
-                    Expanded(
+                    (constraints.maxWidth < 550) ? SizedBox() : Expanded(
                       child: Text(
                         L10nX.getStr.app_name,
                         maxLines: 1,
@@ -1294,37 +1350,40 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                 right: constraints.maxWidth < 500 ? 10 : 0),
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(L10nX.getStr.differences_in_teaching_methods_1,
-                        style: TextStyleConstant
-                            .titleTextColorOnBackgroundColorStyle14w400
-                            .copyWith(
-                          color: notifier.blackcolor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                        ),
-                        textAlign: TextAlign.center),
-                    Text(L10nX.getStr.differences_in_teaching_methods_2,
-                        style: TextStyleConstant
-                            .titleTextColorOnBackgroundColorStyle14w400
-                            .copyWith(
-                          color: notifier.redcolor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                        ),
-                        textAlign: TextAlign.center),
-                    Text(L10nX.getStr.differences_in_teaching_methods_3,
-                        style: TextStyleConstant
-                            .titleTextColorOnBackgroundColorStyle14w400
-                            .copyWith(
-                          color: notifier.blackcolor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                        ),
-                        textAlign: TextAlign.center),
-                  ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(L10nX.getStr.differences_in_teaching_methods_1,
+                          style: TextStyleConstant
+                              .titleTextColorOnBackgroundColorStyle14w400
+                              .copyWith(
+                            color: notifier.blackcolor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
+                          ),
+                          textAlign: TextAlign.center),
+                      Text(L10nX.getStr.differences_in_teaching_methods_2,
+                          style: TextStyleConstant
+                              .titleTextColorOnBackgroundColorStyle14w400
+                              .copyWith(
+                            color: notifier.redcolor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
+                          ),
+                          textAlign: TextAlign.center),
+                      Text(L10nX.getStr.differences_in_teaching_methods_3,
+                          style: TextStyleConstant
+                              .titleTextColorOnBackgroundColorStyle14w400
+                              .copyWith(
+                            color: notifier.blackcolor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
+                          ),
+                          textAlign: TextAlign.center),
+                    ],
+                  ),
                 ),
                 Text(
                   L10nX.getStr
@@ -1705,3 +1764,150 @@ List<lottieAnim> lottiecontent = [
         'Our platform lets you wander wisely, offering a streamlined booking experience for your dream destinations.',
   ),
 ];
+
+class CustomDrawer extends StatelessWidget {
+  List logos = [
+    'assets/logo/linkdinLogo.svg',
+    'assets/logo/twitterxLogo.svg',
+    'assets/logo/facebookLogo.svg'
+  ];
+
+  List contactsImage = [
+    'assets/Icons/emailicon.svg',
+    'assets/Icons/phoneicon.svg',
+    'assets/Icons/gpsicon.svg'
+  ];
+
+  List contacts = [
+    'hello@pulse.com',
+    '0932130000',
+    'Số 26 Đường 57A, phường Tân \nTạo, Quận Bình Tân, TPHCM'
+  ];
+
+  List<String> landingPageTitles = [
+    'Trang chủ',
+    'Phương pháp',
+    'Thành tựu',
+    'Đối tượng',
+    'Giảng viên',
+    'Khóa học',
+    'Cảm nhận'
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            DrawerHeader(
+              child: StaticView.buildLogo(size: 30),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: List<Widget>.generate(
+                7,
+                    (int index) {
+                  return Container(
+                    width: 250,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          width: 1,
+                          color: Color(0XD9D9D9FF),
+                        )
+                      )
+                    ),
+                    height: 30,
+                    child: GestureDetector(
+                      child: OnHoverWidget(
+                        builder: (isHovered) {
+                          return Align(
+                            alignment: Alignment.centerLeft,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                overlayColor: Colors.black,
+                              ),
+                              onPressed: () {
+                                Scrollable.ensureVisible(
+                                    GlobalObjectKey(index).currentContext!,
+                                    duration: Duration(seconds: 1),
+                                    curve: Curves.easeInOutCubic);
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(landingPageTitles[index],
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ).toList(),
+            ),
+            SizedBox(height: 12,),
+            SizedBox(
+              height: 40,
+              // width: 300,
+              child: ListView.builder(
+                itemCount: logos.length,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return Row(
+                    children: [
+                      Container(
+                        height: 40,
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                              color: Colors.black
+                          ),
+                        ),
+                        child: SvgPicture.asset(logos[index], color: Colors.black,
+                            height: 20),
+                      ),
+                      const SizedBox(width: 10),
+                    ],
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 12,),
+            ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: contacts.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Column(
+                    children: [
+                      Container(
+                        child: EndOfPage.buildContactInfoItem(
+                            textColor: Colors.black,
+                            contacts: contacts[index],
+                            icon: contactsImage[index]
+                        ),
+                      ),
+                      SizedBox(height: 12,),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

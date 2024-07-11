@@ -40,6 +40,7 @@ class _ReviewListState extends State<ReviewList> {
     width = MediaQuery.of(context).size.width;
     return Container(
       width: width,
+      decoration: BoxDecoration(image: DecorationImage( image: AssetImage('assets/deshboard/landingpage5.jpg'),fit: BoxFit.fill),),
       // color: Colors.green,
       child: BlocProvider(
           create: (context) {
@@ -325,8 +326,6 @@ class _ReviewListState extends State<ReviewList> {
                         ),
                         LayoutBuilder(
                           builder: (context, constraints) {
-                            print(constraints.maxWidth);
-                            print(constraints.maxHeight);
                             return ConstrainedBox(
                               constraints: BoxConstraints(maxHeight: constraints.maxWidth / 2),
                               child: SingleChildScrollView(
