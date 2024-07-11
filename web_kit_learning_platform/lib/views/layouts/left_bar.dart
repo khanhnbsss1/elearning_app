@@ -135,6 +135,24 @@ class _LeftBarState extends State<LeftBar>
                       ),
                     ],
                   ),
+                  //-----------------VideoPlayer-----------------//
+                  MenuWidget(
+                    iconData: Icons.video_collection_outlined,
+                    isCondensed: isCondensed,
+                    title: L10nX.getStr.video_player,
+                    children: [
+                      MenuItem(
+                        title: L10nX.getStr.video_player,
+                        route:  Routes.videoPlayer,
+                        isCondensed: widget.isCondensed,
+                      ),
+                      MenuItem(
+                        title: L10nX.getStr.youtube_player,
+                        route:  Routes.videoPlayer,
+                        isCondensed: widget.isCondensed,
+                      ),
+                    ],
+                  ),
                   
                   //-----------------CALENDAR-----------------//
                   NavigationItem(

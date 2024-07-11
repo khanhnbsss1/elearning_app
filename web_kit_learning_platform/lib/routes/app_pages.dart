@@ -68,7 +68,9 @@ abstract class Routes {
   static const courseList = Paths.courseList;
   static const courseMyList = Paths.courseMyList;
   static const courseDetail = Paths.courseDetail;
-
+  
+  static const videoPlayer = Paths.videoPlayer;
+  
   static const uiButtonsRoute = Paths.uiButtonsPath;
   static const uiCardsRoute = Paths.uiCardsPath;
   static const uiTabsRoute = Paths.uiTabsPath;
@@ -131,6 +133,9 @@ abstract class Paths {
   static const courseList = '/course/list';
   static const courseMyList = '/course/mylist';
   static const courseDetail = '/course/detail';
+  static const videoPlayer = '/videoPlayer';
+
+  
 
   static const forgotPasswordPath = '/auth/forgot_password';
   static const forgotPasswordPath1 = '/auth/forgot_password1';

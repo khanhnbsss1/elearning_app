@@ -107,7 +107,6 @@ dependencies:
       
 #  for landing homepage: 
   flutter_spinkit: ^5.2.1
-  youtube_player_flutter: ^9.0.1
   toggle_switch: ^2.3.0
   flutter_switch: ^0.3.2
   intl: ^0.19.0
@@ -119,7 +118,7 @@ dependencies:
   multi_dropdown: ^2.1.4
   flutter_scroll_to_top: ^2.3.0
 dependency_overrides:
-  file_picker: ^8.0.5
+  file_picker: ^8.0.6
   google_maps_flutter: ^2.7.0
   intl: ^0.19.0
 dev_dependencies:

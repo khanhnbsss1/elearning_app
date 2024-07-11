@@ -54,6 +54,8 @@ import 'package:webkit/views/ui/drag_drop.dart';
 import 'package:webkit/views/ui/notifications.dart';
 import 'package:webkit/views/ui/reviews_page.dart';
 import 'package:webkit/views/ui/tabs_page.dart';
+import 'package:webkit/views/video_player/model/video_model.dart';
+import 'package:webkit/views/video_player/video_player.dart';
 
 import '../views/auth/locked_2.dart';
 import '../views/dashboard.dart';
@@ -94,6 +96,19 @@ getPageRoute() {
         name: Routes.courseList,
         page: () =>  CourseList(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: Routes.videoPlayer,
+        page: () {
+          final arguments = Get.arguments;
+          return VideoPlayer(videoPlayerModel: VideoPlayerModel(
+            title: "Test youtube player",
+            link: "https://www.youtube.com/watch?v=E-Iv7YqHMJ0&list=RDE-Iv7YqHMJ0&start_radio=1"
+          ));
+
+          //return VideoPlayer(videoPlayerModel: arguments['videoPlayerModel'],);
+        },
+        middlewares: [AuthMiddleware()]),
+    
     GetPage(
         name: Routes.courseMyList,
         page: () =>  MyCourseList(key: UniqueKey(),),
