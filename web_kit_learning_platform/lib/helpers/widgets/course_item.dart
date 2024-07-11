@@ -3,12 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
-import 'package:universal_html/html.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
-import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
-import 'package:webkit/services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
 import '../../services/apis/course/course_list/models/course_models.dart';
 
 class CourseItem extends StatelessWidget{
