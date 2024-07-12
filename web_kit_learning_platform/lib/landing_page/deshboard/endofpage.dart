@@ -279,8 +279,8 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                                             margin: const EdgeInsets.only(right: 5),
                                             decoration: BoxDecoration(
                                               color: tfHover
-                                                  ? Colors.indigoAccent.shade700
-                                                  : notifier.buttoncolor,
+                                                  ? Color.fromRGBO(134, 16, 14, 1.0)
+                                                  : notifier.redcolor,
                                               borderRadius: BorderRadius.circular(20),
                                             ),
                                             alignment: Alignment.center,
@@ -303,35 +303,35 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                             ],
                           ),
                           const SizedBox(),
-                          Wrap(
-                            alignment: WrapAlignment.center,
-                            spacing: 20,
-                            children: List<Widget>.generate( 7,
-                                  (int index) {
-                                return Container(
-                                  width: 130,
-                                  child: FloatingActionButton(
-                                    hoverColor: Colors.grey,
-                                    elevation: 0,
-                                    foregroundColor: Colors.black,
-                                    backgroundColor: Colors.white,
-                                    // change text color
-                                    onPressed: () {
-                                      Scrollable.ensureVisible(
-                                          GlobalObjectKey(index).currentContext!,
-                                          duration: Duration(seconds: 1),
-                                          curve: Curves.easeInOutCubic);
-                                    },
-                                    child: Text(landingPageTitles[index], style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                      decoration: TextDecoration.underline,
-                                    ),),
-                                  ),
-                                );
-                              },
-                            ).toList(),
-                          ),
+                          // Wrap(
+                          //   alignment: WrapAlignment.center,
+                          //   spacing: 20,
+                          //   children: List<Widget>.generate( 7,
+                          //         (int index) {
+                          //       return Container(
+                          //         width: 130,
+                          //         child: FloatingActionButton(
+                          //           hoverColor: Colors.grey,
+                          //           elevation: 0,
+                          //           foregroundColor: Colors.black,
+                          //           backgroundColor: Colors.white,
+                          //           // change text color
+                          //           onPressed: () {
+                          //             Scrollable.ensureVisible(
+                          //                 GlobalObjectKey(index).currentContext!,
+                          //                 duration: Duration(seconds: 1),
+                          //                 curve: Curves.easeInOutCubic);
+                          //           },
+                          //           child: Text(landingPageTitles[index], style: TextStyle(
+                          //             fontWeight: FontWeight.bold,
+                          //             fontSize: 20,
+                          //             decoration: TextDecoration.underline,
+                          //           ),),
+                          //         ),
+                          //       );
+                          //     },
+                          //   ).toList(),
+                          // ),
                         ],
                       ),
                       Divider(
@@ -781,22 +781,22 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
     );
   }
   static Widget buildContactInfoItem({required String contacts, required String icon, required Color textColor}){
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          SvgPicture.asset(icon,
-              height: 20),
-          const SizedBox(width: 10),
-          Text(contacts,
+    return Row(
+      children: [
+        SvgPicture.asset(icon,
+            height: 20),
+        const SizedBox(width: 10),
+        SizedBox(
+          width: (width > 550) ? (width - 60) * 3/11 - 90 : width ,
+          child: Text(contacts,
             style: baseStyle.copyWith(
                 overflow: TextOverflow.ellipsis,
                 color: textColor,
                 fontSize: 16),
             maxLines: 2,),
-          const SizedBox(width: 20),
-        ],
-      ),
+        ),
+        const SizedBox(width: 20),
+      ],
     );
   }
 

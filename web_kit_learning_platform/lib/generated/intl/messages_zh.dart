@@ -47,7 +47,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("您确定要删除历史记录吗？"),
         "area_chart": MessageLookupByLibrary.simpleMessage("面积图"),
         "auth": MessageLookupByLibrary.simpleMessage("验证"),
-        "auth_manager": MessageLookupByLibrary.simpleMessage("管理员页面"),
         "authen_invalid": MessageLookupByLibrary.simpleMessage("用户名或密码不正确"),
         "average_sales_comparison":
             MessageLookupByLibrary.simpleMessage("平均销售额对比"),
@@ -184,6 +183,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "left": MessageLookupByLibrary.simpleMessage("左侧"),
         "left_dialog": MessageLookupByLibrary.simpleMessage("左侧对话框"),
         "lesson_list": MessageLookupByLibrary.simpleMessage("课程列表"),
+        "lets_study": MessageLookupByLibrary.simpleMessage("来学习吧"),
         "level_str": MessageLookupByLibrary.simpleMessage("级别"),
         "license_copyright": MessageLookupByLibrary.simpleMessage("许可和版权"),
         "licensing": MessageLookupByLibrary.simpleMessage("许可"),
@@ -408,8 +408,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tags": MessageLookupByLibrary.simpleMessage("标签"),
         "target": MessageLookupByLibrary.simpleMessage("目标"),
         "teacher_list": MessageLookupByLibrary.simpleMessage("教师列表"),
-        "teacher_review_list_str":
-            MessageLookupByLibrary.simpleMessage("教授们怎么说"),
+        "teacher_review_list_str": MessageLookupByLibrary.simpleMessage("专家点评"),
         "teachers_teach_the_most":
             MessageLookupByLibrary.simpleMessage("教得最多的老师"),
         "terms_conditions": MessageLookupByLibrary.simpleMessage("条款和条件"),
@@ -457,6 +456,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "validations": MessageLookupByLibrary.simpleMessage("验证"),
         "vehicle_tracking": MessageLookupByLibrary.simpleMessage("车辆追踪"),
         "very_high": MessageLookupByLibrary.simpleMessage("非常高"),
+        "video_player": MessageLookupByLibrary.simpleMessage("视频播放器"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("越南语"),
         "view_all": MessageLookupByLibrary.simpleMessage("查看全部"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
@@ -479,7 +479,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "适合那些想要学习交流、快速学习应用到生活和工作中而又不失基本语言元素的人。"),
         "who_this_course_is_for_table_content_3":
             MessageLookupByLibrary.simpleMessage(
-                "适合那些工作忙、时间少、想要适合上班族的学习方式，而不是像学生时那样耕耘的人。"),
+                "适合那些工作忙wwww、时间少、想要适合上班族的学习方式，而不是像学生时那样耕耘的人。"),
         "who_this_course_is_for_table_content_4":
             MessageLookupByLibrary.simpleMessage(
                 "越爱学汉语学习平台是一个不带评判地学习的地方，通过发现激发学习兴趣，创造成就感，增加动力"),
@@ -514,8 +514,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "why_choose_title3": MessageLookupByLibrary.simpleMessage("亲爱的"),
         "why_choose_title4": MessageLookupByLibrary.simpleMessage("社区发展"),
         "why_choose_us": MessageLookupByLibrary.simpleMessage("为什么选择我们"),
-        "why_choose_us_1": MessageLookupByLibrary.simpleMessage("为什么"),
-        "why_choose_us_2": MessageLookupByLibrary.simpleMessage("选择"),
+        "why_choose_us_1": MessageLookupByLibrary.simpleMessage("我们"),
+        "why_choose_us_2": MessageLookupByLibrary.simpleMessage("什么成就？"),
         "why_choose_us_3": MessageLookupByLibrary.simpleMessage("我们"),
         "why_choose_us_sub_title":
             MessageLookupByLibrary.simpleMessage("我们来看看YAX中文学习的一些成果"),
@@ -533,6 +533,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "your_password_will_be_reset":
             MessageLookupByLibrary.simpleMessage("您的密码将被重置"),
         "your_registration_process_is_finished":
-            MessageLookupByLibrary.simpleMessage("您的注册过程已完成")
+            MessageLookupByLibrary.simpleMessage("您的注册过程已完成"),
+        "youtube_player": MessageLookupByLibrary.simpleMessage("YouTube 播放器")
       };
 }

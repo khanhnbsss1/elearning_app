@@ -47,7 +47,6 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Bạn có chắc chắn muốn xóa lịch sử không?"),
         "area_chart": MessageLookupByLibrary.simpleMessage("Biểu đồ vùng"),
         "auth": MessageLookupByLibrary.simpleMessage("Xác thực"),
-        "auth_manager": MessageLookupByLibrary.simpleMessage("Trang quản lý"),
         "authen_invalid": MessageLookupByLibrary.simpleMessage(
             "Tên đăng nhập hoặc mật khẩu không đúng"),
         "back_to_log_in":
@@ -210,6 +209,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hộp thoại bên trái"),
         "lesson_list":
             MessageLookupByLibrary.simpleMessage("Danh sách bài học"),
+        "lets_study": MessageLookupByLibrary.simpleMessage("Vào học!"),
         "level_str": MessageLookupByLibrary.simpleMessage("Cấp độ"),
         "license_copyright":
             MessageLookupByLibrary.simpleMessage("Giấy phép & bản quyền"),
@@ -475,7 +475,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "teacher_list":
             MessageLookupByLibrary.simpleMessage(" Danh sách giáo viên"),
         "teacher_review_list_str":
-            MessageLookupByLibrary.simpleMessage("Chuyên gia nói gì"),
+            MessageLookupByLibrary.simpleMessage("Lời nhận xét của chuyên gia"),
         "teachers_teach_the_most":
             MessageLookupByLibrary.simpleMessage("Giáo viên dạy nhiều nhất"),
         "terms_conditions":
@@ -532,6 +532,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "validations": MessageLookupByLibrary.simpleMessage("Người bắt đầu"),
         "vehicle_tracking": MessageLookupByLibrary.simpleMessage("Theo dõi Xe"),
         "very_high": MessageLookupByLibrary.simpleMessage("Rất cao"),
+        "video_player":
+            MessageLookupByLibrary.simpleMessage("Trình phát video"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "view_all": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VNĐ"),
@@ -601,9 +603,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phát triển cộng đồng"),
         "why_choose_us":
             MessageLookupByLibrary.simpleMessage("Tại sao chọn chúng tôi"),
-        "why_choose_us_1": MessageLookupByLibrary.simpleMessage("Tại sao "),
-        "why_choose_us_2": MessageLookupByLibrary.simpleMessage("chọn "),
-        "why_choose_us_3": MessageLookupByLibrary.simpleMessage("chúng tôi"),
+        "why_choose_us_1": MessageLookupByLibrary.simpleMessage("Chúng tôi "),
+        "why_choose_us_2": MessageLookupByLibrary.simpleMessage("đã đạt được "),
+        "why_choose_us_3": MessageLookupByLibrary.simpleMessage("những gì"),
         "why_choose_us_sub_title": MessageLookupByLibrary.simpleMessage(
             "Cùng điểm qua một số thành tựu của YAX Chinese learning nhé"),
         "wizard": MessageLookupByLibrary.simpleMessage("Wizard"),
@@ -617,6 +619,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "your_course": MessageLookupByLibrary.simpleMessage("Khóa học của bạn"),
         "your_email": MessageLookupByLibrary.simpleMessage("Email của bạn"),
         "your_password_will_be_reset": MessageLookupByLibrary.simpleMessage(
-            "Mật khẩu của bạn sẽ được đặt lại")
+            "Mật khẩu của bạn sẽ được đặt lại"),
+        "youtube_player":
+            MessageLookupByLibrary.simpleMessage("Trình phát Youtube")
       };
 }

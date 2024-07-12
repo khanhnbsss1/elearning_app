@@ -3850,20 +3850,20 @@ class S {
     );
   }
 
-  /// `What professors say`
+  /// `Expert comments`
   String get teacher_review_list_str {
     return Intl.message(
-      'What professors say',
+      'Expert comments',
       name: 'teacher_review_list_str',
       desc: '',
       args: [],
     );
   }
 
-  /// `Students' comments`
+  /// `Students comments`
   String get student_review_list_str {
     return Intl.message(
-      'Students\' comments',
+      'Students comments',
       name: 'student_review_list_str',
       desc: '',
       args: [],
@@ -4050,30 +4050,30 @@ class S {
     );
   }
 
-  /// `Why `
+  /// `What did we `
   String get why_choose_us_1 {
     return Intl.message(
-      'Why ',
+      'What did we ',
       name: 'why_choose_us_1',
       desc: '',
       args: [],
     );
   }
 
-  /// `choose `
+  /// `achieve `
   String get why_choose_us_2 {
     return Intl.message(
-      'choose ',
+      'achieve ',
       name: 'why_choose_us_2',
       desc: '',
       args: [],
     );
   }
 
-  /// `us`
+  /// `?`
   String get why_choose_us_3 {
     return Intl.message(
-      'us',
+      '?',
       name: 'why_choose_us_3',
       desc: '',
       args: [],
@@ -4330,11 +4330,11 @@ class S {
     );
   }
 
-  /// `Manager page`
-  String get auth_manager {
+  /// `Let's study!`
+  String get lets_study {
     return Intl.message(
-      'Manager page',
-      name: 'auth_manager',
+      'Let\'s study!',
+      name: 'lets_study',
       desc: '',
       args: [],
     );
@@ -4405,6 +4405,26 @@ class S {
     return Intl.message(
       'I am a teacher',
       name: 'i_am_teacher',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video player`
+  String get video_player {
+    return Intl.message(
+      'Video player',
+      name: 'video_player',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Youtube player`
+  String get youtube_player {
+    return Intl.message(
+      'Youtube player',
+      name: 'youtube_player',
       desc: '',
       args: [],
     );

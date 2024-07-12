@@ -681,7 +681,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
-            color: Colors.white,
+            color: Colors.black12,
             // color: notifier.isDark
             //     ? Colors.transparent
             //     : const Color(0xFFF4F5F6),

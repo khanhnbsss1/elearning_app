@@ -43,16 +43,8 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> {
     return Container(
       width: width,
       decoration: BoxDecoration(
-        image: DecorationImage( image: AssetImage('assets/deshboard/landingpage1.jpg'),fit: BoxFit.fill),
+        image: DecorationImage( image: AssetImage('assets/deshboard/landingpage2.jpg'),fit: BoxFit.fill),
       ),
-      //  decoration: BoxDecoration( gradient: LinearGradient(
-      //       begin: Alignment.center,
-      //       end: Alignment.bottomCenter,
-      //       colors: [
-      //         Colors.white,
-      //         Color.fromRGBO(246, 122, 122, 1.0),
-      //       ]
-      //   ),),
       child: BlocProvider(
           create: (context) {
             return LandingPageCourseListBloc(LandingPageCourseListState())..add(LandingPageCourseListInitEvent());

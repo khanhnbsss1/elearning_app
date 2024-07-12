@@ -40,7 +40,7 @@ class _ReviewListState extends State<ReviewList> {
     width = MediaQuery.of(context).size.width;
     return Container(
       width: width,
-      decoration: BoxDecoration(image: DecorationImage( image: AssetImage('assets/deshboard/landingpage5.jpg'),fit: BoxFit.fill),),
+      decoration: BoxDecoration(image: DecorationImage( image: AssetImage('assets/deshboard/landingpage6.jpg'),fit: (width < 1100) ? BoxFit.contain : BoxFit.fill),),
       // color: Colors.green,
       child: BlocProvider(
           create: (context) {
@@ -99,7 +99,7 @@ class _ReviewListState extends State<ReviewList> {
                         : Colors.transparent)),
             child: Padding(
               padding: EdgeInsets.all(
-                constraints.maxWidth < 900 ? 20 : 30,
+                constraints.maxWidth < 550 ? 20 : 45,
               ),
               child: Column(
                 children: [
@@ -121,9 +121,9 @@ class _ReviewListState extends State<ReviewList> {
                   SizedBox(
                     // height: constraints.maxWidth < 900 ? constraints.maxWidth / 0.152 : constraints.maxWidth < 1100 ? constraints.maxWidth / 0.66 : constraints.maxWidth < 1300 ? constraints.maxWidth / 1.35 : constraints.maxWidth / 1.8,
                     width: constraints.maxWidth < 900
-                        ? constraints.maxWidth / 0.2
+                        ? constraints.maxWidth / 0.15
                         : constraints.maxWidth < 1300
-                            ? constraints.maxWidth / 0.5
+                            ? constraints.maxWidth / 0.45
                             : constraints.maxWidth / 1.2,
                     child: LayoutBuilder(
                       builder: (BuildContext context, BoxConstraints constraints) {
@@ -139,9 +139,6 @@ class _ReviewListState extends State<ReviewList> {
                         }
                         return Center(
                           child: Scrollbar(
-                            thumbVisibility: false,
-                            thickness: 0,
-                            trackVisibility: false,
                             child: SingleChildScrollView(
                               controller: scrollCont,
                               scrollDirection: Axis.horizontal,
@@ -246,16 +243,16 @@ class _ReviewListState extends State<ReviewList> {
       required ReviewLandingPageInfo reviewLandingPageInfo,
       required ReviewListState state}) {
     return Container(
-      width: (constraints.maxWidth < 550) ? MediaQuery.sizeOf(context).width/ 1.2
-          : (constraints.maxWidth < 750) ? MediaQuery.sizeOf(context).width/ 1.2
-          : (constraints.maxWidth < 1150) ? MediaQuery.sizeOf(context).width/ 1.2
+      width: (constraints.maxWidth < 550) ? MediaQuery.sizeOf(context).width/ 1.1
+          : (constraints.maxWidth < 750) ? MediaQuery.sizeOf(context).width/ 1.1
+          : (constraints.maxWidth < 1150) ? MediaQuery.sizeOf(context).width/ 1.1
           : MediaQuery.sizeOf(context).width/ 2.4,
       child: Padding(
         padding: const EdgeInsets.all( 12.0),
         child: Card(
-          elevation: 5,
+          elevation: 10,
           shape:
-              BeveledRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),

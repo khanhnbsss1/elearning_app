@@ -87,13 +87,6 @@ class _TeacherListState extends State<TeacherList> {
 
   List<int> add = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   @override
-  void initState() {
-    super.initState();
-    scrollCont.addListener(() {
-      b = (scrollCont.position.extentAfter/100).toInt();
-    },);
-  }
-  @override
   Widget build(BuildContext context) {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
     height = MediaQuery.of(context).size.height;
@@ -197,7 +190,7 @@ class _TeacherListState extends State<TeacherList> {
                                 onTap: () {
                                   if (scrollCont.offset > 0) {
                                     scrollCont.animateTo(
-                                      scrollCont.offset - 200,
+                                      scrollCont.offset - 300,
                                       duration: const Duration(milliseconds: 200),
                                       curve: Curves.easeInOut,
                                     );
@@ -232,7 +225,7 @@ class _TeacherListState extends State<TeacherList> {
                                   if (scrollCont.offset <
                                       scrollCont.position.maxScrollExtent) {
                                     scrollCont.animateTo(
-                                      scrollCont.offset + 200,
+                                      scrollCont.offset + 300,
                                       duration: const Duration(milliseconds: 200),
                                       curve: Curves.easeInOut,
                                     );
@@ -268,78 +261,73 @@ class _TeacherListState extends State<TeacherList> {
       padding: const EdgeInsets.all(8.0),
       child: Card(
         elevation: 10,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16)
+        ),
         // decoration: BoxDecoration(
         //   border: Border.all(
         //     color: Colors.black,
         //   )
         // ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: Container(
-            decoration: BoxDecoration(
-              color: ColorConst.whiteColor,
-            ),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: SizedBox(
-                    width: Dimens.size300,
-                    height: Dimens.size340,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: ImageManager().getImageByUrl(
-                          landingPageUserInfo.avatar ?? "",
-                          boxFit: BoxFit.cover),
-                    ),
-                  ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Container(
+                width: Dimens.size300,
+                height: Dimens.size340,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: ImageManager().getImageByUrl(
+                      landingPageUserInfo.avatar ?? "",
+                      boxFit: BoxFit.cover),
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: ColorConst.whiteColor,
-                      // borderRadius: BorderRadius.circular(Dimens.size100)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(landingPageUserInfo.fullname ?? "",
-                              style: baseStyle.copyWith(
-                                  color: notifier.blackcolor,
-                                  fontSize:  (constraints.maxWidth < 900)
-                                              ? Dimens.size16
-                                              : (constraints.maxWidth < 1300)
-                                                  ? Dimens.size18
-                                                  : Dimens.size24,
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: ColorConst.whiteColor,
+                  borderRadius: BorderRadius.circular(Dimens.size16)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(landingPageUserInfo.fullname ?? "",
+                          style: baseStyle.copyWith(
+                              color: notifier.blackcolor,
+                              fontSize:  (constraints.maxWidth < 900)
+                                          ? Dimens.size16
+                                          : (constraints.maxWidth < 1300)
+                                              ? Dimens.size18
+                                              : Dimens.size24,
 
-                                  fontWeight: FontWeight.w500)),
-                          Text(
-                            landingPageUserInfo.position ?? "",
-                            style: baseStyle.copyWith(
-                                color: notifier.blackcolor,
-                                fontSize: (constraints.maxWidth < 900)
-                                            ? Dimens.size12
-                                            : (constraints.maxWidth < 1300)
-                                                ? Dimens.size14
-                                                : Dimens.size20,
-                                ),
-                            maxLines: 2,
-                          ),
-                          Gap(Dimens.size20)
-                        ],
+                              fontWeight: FontWeight.w500)),
+                      Text(
+                        landingPageUserInfo.position ?? "",
+                        style: baseStyle.copyWith(
+                            color: notifier.blackcolor,
+                            fontSize: (constraints.maxWidth < 900)
+                                        ? Dimens.size12
+                                        : (constraints.maxWidth < 1300)
+                                            ? Dimens.size14
+                                            : Dimens.size20,
+                            ),
+                        maxLines: 2,
                       ),
-                    ),
+                      Gap(Dimens.size20)
+                    ],
                   ),
                 ),
-                // SizedBox(height: 10),
-              ],
+              ),
             ),
-          ),
+            // SizedBox(height: 10),
+          ],
         ),
       ),
     );

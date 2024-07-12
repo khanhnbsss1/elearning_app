@@ -1,20 +1,15 @@
 // ignore_for_file: camel_case_types, non_constant_identifier_names
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:smooth_scroll_multiplatform/smooth_scroll_multiplatform.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/base/widgets/static_view/static_view.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/helpers/localizations/language_helper.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/landing_page/components/review_list/review_list.dart';
-import 'package:webkit/routes/app_pages.dart';
 import 'package:webkit/services/apis/landing_page/review/models/landing_page_review_list_response_model.dart';
 import 'package:webkit/views/auth/login/login.dart';
 import 'package:webkit/views/auth/register.dart';
@@ -113,11 +108,11 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
   List<String> landingPageTitles = [
     'Trang chủ',
     'Phương pháp',
-    'Thành tựu',
     'Đối tượng',
     'Giảng viên',
     'Khóa học',
-    'Cảm nhận'
+    'Cảm nhận',
+    'Thành tựu',
   ];
 
   ShowCardModel showCardModel = ShowCardModel();
@@ -229,53 +224,77 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                     ),
                   ),
                 ),
+                SizedBox(height: 20,),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+                child: Divider(
+                  color: Colors.black12,
+                ),
+              ),
                 SizedBox(
                   key: GlobalObjectKey(1),
                   height: width < 550 ? 10 : 100,
                 ),
                 buildDifferentListWidget(constraints: constraints),
-                Column(
-                  children: [
-                    SizedBox(
-                      key: GlobalObjectKey(3),
-                      height: width < 550 ? 10 : 100,
-                    ),
-                    const WhoThisCourseIsFor(),
-                    SizedBox(
-                      key: GlobalObjectKey(4),
-                      height: width < 550 ? 10 : 100,
-                    ),
-                    const TeacherList(),
-                    SizedBox(
-                      key: GlobalObjectKey(5),
-                      height: width < 550 ? 10 : 100,
-                    ),
-                    const LandingPageCourseList(),
-                    SizedBox(
-                      key: GlobalObjectKey(6),
-                      height: width < 550 ? 10 : 100,
-                    ),
-                    ReviewList(
-                      //key: UniqueKey(),
-                      typeName: UserTypeName.teacher,
-                    ),
-                    SizedBox(
-                      key: GlobalObjectKey(2),
-                      height: width < 550 ? 50 : 100,
-                    ),
-                    buildWhyChooseUsListWidget(constraints: constraints),
-                    SizedBox(
-                      key: GlobalObjectKey(7),
-                      height: width < 550 ? 10 : 100,
-                    ),
-                    ReviewList(
-                      // key: UniqueKey(),
-                      typeName: UserTypeName.user,
-                    ),
-                    SizedBox(
-                      height: width < 550 ? 10 : 100,
-                    ),
-                  ],
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+                child: Divider(
+                  color: Colors.black12,
+                ),
+              ),
+                SizedBox(
+                  key: GlobalObjectKey(2),
+                  height: width < 550 ? 10 : 100,
+                ),
+                const WhoThisCourseIsFor(),
+                SizedBox(
+                  key: GlobalObjectKey(3),
+                  height: width < 550 ? 10 : 100,
+                ),
+                const TeacherList(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+                child: Divider(
+                  color: Colors.black12,
+                ),
+              ),
+                SizedBox(
+                  key: GlobalObjectKey(4),
+                  height: width < 550 ? 10 : 100,
+                ),
+                const LandingPageCourseList(),
+                SizedBox(
+                  key: GlobalObjectKey(5),
+                  height: width < 550 ? 10 : 100,
+                ),
+                ReviewList(
+                  //key: UniqueKey(),
+                  typeName: UserTypeName.teacher,
+                ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+                child: Divider(
+                  color: Colors.black12,
+                ),
+              ),
+                SizedBox(
+                  key: GlobalObjectKey(6),
+                  height: width < 550 ? 50 : 100,
+                ),
+                buildWhyChooseUsListWidget(constraints: constraints),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+                child: Divider(
+                  color: Colors.black12,
+                ),
+              ),
+                SizedBox(
+                  key: GlobalObjectKey(7),
+                  height: width < 550 ? 10 : 100,
+                ),
+                ReviewList(
+                  // key: UniqueKey(),
+                  typeName: UserTypeName.user,
                 ),
                 Divider(
                   color: notifier.isDark
@@ -422,7 +441,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                         onOpened: () {
                           AppPages.routeName(Routes.dashboardRoute);
                         },
-                        tooltip: L10nX.getStr.auth_manager,
+                        tooltip: L10nX.getStr.lets_study,
                         itemBuilder: (BuildContext context) {
                           return [
                             PopupMenuItem<String>(
@@ -432,7 +451,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                 child: SizedBox()),
                           ];
                         },
-                        child: Text(L10nX.getStr.auth_manager,
+                        child: Text(L10nX.getStr.lets_study,
                             style: baseStyle.copyWith(
                               fontSize: 16,
                               color: supportHover
@@ -864,7 +883,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                                       color: ColorConst.blackColor,
                                     ),
                                     const SizedBox(width: 20),
-                                    Text(L10nX.getStr.auth_manager,
+                                    Text(L10nX.getStr.lets_study,
                                         style: baseStyle.copyWith(
                                           fontSize: 16,
                                           color: notifier.blackcolor,
@@ -1137,38 +1156,40 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                 right: constraints.maxWidth < 500 ? 10 : 0),
             child: Column(
               children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
                     children: [
-                      Text(L10nX.getStr.differences_in_teaching_methods_1,
-                          style: TextStyleConstant
-                              .titleTextColorOnBackgroundColorStyle14w400
-                              .copyWith(
-                            color: notifier.blackcolor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                          ),
-                          textAlign: TextAlign.center),
-                      Text(L10nX.getStr.differences_in_teaching_methods_2,
-                          style: TextStyleConstant
-                              .titleTextColorOnBackgroundColorStyle14w400
-                              .copyWith(
-                            color: notifier.redcolor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                          ),
-                          textAlign: TextAlign.center),
-                      Text(L10nX.getStr.differences_in_teaching_methods_3,
-                          style: TextStyleConstant
-                              .titleTextColorOnBackgroundColorStyle14w400
-                              .copyWith(
-                            color: notifier.blackcolor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                          ),
-                          textAlign: TextAlign.center),
+                      TextSpan(
+                        text: L10nX.getStr.differences_in_teaching_methods_1,
+                        style: TextStyleConstant
+                            .titleTextColorOnBackgroundColorStyle14w400
+                            .copyWith(
+                          fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
+                          color: notifier.blackcolor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: L10nX.getStr.differences_in_teaching_methods_2,
+                        style: TextStyleConstant
+                            .titleTextColorOnBackgroundColorStyle14w400
+                            .copyWith(
+                          fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
+                          color: notifier.redcolor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      TextSpan(
+                        text: L10nX.getStr.differences_in_teaching_methods_3,
+                        style: TextStyleConstant
+                            .titleTextColorOnBackgroundColorStyle14w400
+                            .copyWith(
+                          fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
+                          color: notifier.blackcolor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -1221,11 +1242,15 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                 ),
                 child: InkWell(
                   onTap: () {
+                    double itemWidth = ResponsiveInfo.isPhone()
+                        ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
+                        : (constraints.maxWidth < 1100)
+                        ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
+                        :(constraints.maxWidth < 1600)
+                        ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
+                        :Dimens.size340;
                     if (differrentController.offset >= 0) {
-                      differrentController.animateTo(
-                        (constraints.maxWidth < 750)
-                            ? differrentController.offset - 225
-                            : differrentController.offset - 370,
+                      differrentController.animateTo(differrentController.offset - itemWidth - 36*2,
                         duration: const Duration(milliseconds: 200),
                         curve: Curves.easeInOut,
                       );
@@ -1259,11 +1284,15 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                 ),
                 child: InkWell(
                   onTap: () {
+                    double itemWidth = ResponsiveInfo.isPhone()
+                        ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
+                        : (constraints.maxWidth < 1100)
+                        ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
+                        :(constraints.maxWidth < 1600)
+                        ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
+                        :Dimens.size340;
                     if (differrentController.offset >= 0) {
-                      differrentController.animateTo(
-                        (constraints.maxWidth < 750)
-                            ? differrentController.offset + 225
-                            : differrentController.offset + 370,
+                      differrentController.animateTo(differrentController.offset + itemWidth + 36*2,
                         duration: const Duration(milliseconds: 200),
                         curve: Curves.easeInOut,
                       );
@@ -1299,7 +1328,11 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
       child: SizedBox(
         width: ResponsiveInfo.isPhone()
             ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
-            : Dimens.size340,
+            : (constraints.maxWidth < 1100)
+            ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
+            :(constraints.maxWidth < 1600)
+            ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
+            :Dimens.size340,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -1369,10 +1402,12 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
         padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(L10nX.getStr.why_choose_us_1,
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                children: [
+                  TextSpan(
+                    text: L10nX.getStr.why_choose_us_1,
                     style: TextStyleConstant
                         .titleTextColorOnBackgroundColorStyle14w400
                         .copyWith(
@@ -1380,8 +1415,9 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       color: notifier.blackcolor,
                       fontWeight: FontWeight.bold,
                     ),
-                    textAlign: TextAlign.center),
-                Text(L10nX.getStr.why_choose_us_2,
+                  ),
+                  TextSpan(
+                    text: L10nX.getStr.why_choose_us_2,
                     style: TextStyleConstant
                         .titleTextColorOnBackgroundColorStyle14w400
                         .copyWith(
@@ -1389,8 +1425,9 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       color: notifier.redcolor,
                       fontWeight: FontWeight.bold,
                     ),
-                    textAlign: TextAlign.center),
-                Text(L10nX.getStr.why_choose_us_3,
+                  ),
+                  TextSpan(
+                    text: L10nX.getStr.why_choose_us_3,
                     style: TextStyleConstant
                         .titleTextColorOnBackgroundColorStyle14w400
                         .copyWith(
@@ -1398,8 +1435,9 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       color: notifier.blackcolor,
                       fontWeight: FontWeight.bold,
                     ),
-                    textAlign: TextAlign.center),
-              ],
+                  ),
+                ],
+              ),
             ),
             Text(
               L10nX.getStr.why_choose_us_sub_title,
@@ -1574,11 +1612,11 @@ class CustomDrawer extends StatelessWidget {
   List<String> landingPageTitles = [
     'Trang chủ',
     'Phương pháp',
-    'Thành tựu',
     'Đối tượng',
     'Giảng viên',
     'Khóa học',
-    'Cảm nhận'
+    'Cảm nhận',
+    'Thành tựu',
   ];
 
   @override

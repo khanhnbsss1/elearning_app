@@ -52,7 +52,7 @@ class CourseItem extends StatelessWidget{
                   : constraints.maxWidth / 2,
               constraints: BoxConstraints(
                 // minHeight: (constraints.maxWidth < 550) ? 630 : (constraints.maxWidth < 1300) ? 750 : 1250,
-                maxHeight: (constraints.maxWidth < 550) ? 650 : (constraints.maxWidth < 1100)  ? 750 : (constraints.maxWidth < 1300) ? 850 : 1300,
+                maxHeight: (constraints.maxWidth < 550) ? 650 : (constraints.maxWidth < 1100)  ? 850 : (constraints.maxWidth < 1300) ? 900 : 1300,
                 minWidth: constraints.maxWidth < 576 ? constraints.maxWidth - 8 : 350,
               ),
               clipBehavior: Clip.hardEdge,

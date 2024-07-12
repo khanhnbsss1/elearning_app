@@ -48,7 +48,6 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Are you sure, you want to delete history?"),
         "area_chart": MessageLookupByLibrary.simpleMessage("Area chart"),
         "auth": MessageLookupByLibrary.simpleMessage("Auth"),
-        "auth_manager": MessageLookupByLibrary.simpleMessage("Manager page"),
         "authen_invalid": MessageLookupByLibrary.simpleMessage(
             "Username or password is incorrect"),
         "average_sales_comparison":
@@ -205,6 +204,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "left": MessageLookupByLibrary.simpleMessage("Left"),
         "left_dialog": MessageLookupByLibrary.simpleMessage("Left dialog"),
         "lesson_list": MessageLookupByLibrary.simpleMessage("Lesson list"),
+        "lets_study": MessageLookupByLibrary.simpleMessage("Let\'s study!"),
         "level_str": MessageLookupByLibrary.simpleMessage("Level"),
         "license_copyright":
             MessageLookupByLibrary.simpleMessage("License & copyright"),
@@ -451,7 +451,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "string_time_setting":
             MessageLookupByLibrary.simpleMessage("Time setting"),
         "student_review_list_str":
-            MessageLookupByLibrary.simpleMessage("Students\' comments"),
+            MessageLookupByLibrary.simpleMessage("Students comments"),
         "style_guide": MessageLookupByLibrary.simpleMessage("Style guide"),
         "subcribe_to_our_news_letter":
             MessageLookupByLibrary.simpleMessage("Subcribe to our newsletter"),
@@ -475,7 +475,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "target": MessageLookupByLibrary.simpleMessage("Target"),
         "teacher_list": MessageLookupByLibrary.simpleMessage(" Teacher list"),
         "teacher_review_list_str":
-            MessageLookupByLibrary.simpleMessage("What professors say"),
+            MessageLookupByLibrary.simpleMessage("Expert comments"),
         "teachers_teach_the_most":
             MessageLookupByLibrary.simpleMessage("Teachers who teach the most"),
         "terms_conditions":
@@ -532,6 +532,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "vehicle_tracking":
             MessageLookupByLibrary.simpleMessage("Vehicle Tracking"),
         "very_high": MessageLookupByLibrary.simpleMessage("Very high"),
+        "video_player": MessageLookupByLibrary.simpleMessage("Video player"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "view_all": MessageLookupByLibrary.simpleMessage("View all"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
@@ -597,9 +598,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "why_choose_title4":
             MessageLookupByLibrary.simpleMessage("Community Development"),
         "why_choose_us": MessageLookupByLibrary.simpleMessage("Why choose us"),
-        "why_choose_us_1": MessageLookupByLibrary.simpleMessage("Why "),
-        "why_choose_us_2": MessageLookupByLibrary.simpleMessage("choose "),
-        "why_choose_us_3": MessageLookupByLibrary.simpleMessage("us"),
+        "why_choose_us_1": MessageLookupByLibrary.simpleMessage("What did we "),
+        "why_choose_us_2": MessageLookupByLibrary.simpleMessage("achieve "),
+        "why_choose_us_3": MessageLookupByLibrary.simpleMessage("?"),
         "why_choose_us_sub_title": MessageLookupByLibrary.simpleMessage(
             "Let\'s take a look at some achievements of YAX Chinese learning"),
         "widgets": MessageLookupByLibrary.simpleMessage("Widgets"),
@@ -617,6 +618,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Your password will be reset"),
         "your_registration_process_is_finished":
             MessageLookupByLibrary.simpleMessage(
-                "Your registration process is finished")
+                "Your registration process is finished"),
+        "youtube_player": MessageLookupByLibrary.simpleMessage("Youtube player")
       };
 }
