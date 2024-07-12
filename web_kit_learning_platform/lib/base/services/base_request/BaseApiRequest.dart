@@ -121,7 +121,9 @@ class BaseApiRequest {
   Future<Map<String, dynamic>> getHeaderAdd() async {
     AuthInfo? authInfo = await AuthorManager().getAuthInfo();
     bool containAuthenParams = requestHeader!.keys.contains("Authorization");
-
+    requestHeader?.addAll({
+      "ngrok-skip-browser-warning": true
+    });
     if(!containAuthenParams && authInfo!=null)
     {
       requestHeader?.addAll({

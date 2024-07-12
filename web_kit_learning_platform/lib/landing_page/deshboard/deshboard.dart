@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:smooth_scroll_multiplatform/smooth_scroll_multiplatform.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/base/widgets/static_view/static_view.dart';
@@ -164,152 +165,137 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
       )),
     );
   }
-
-
   bool showCard = false;
   final ScrollController _mainController = ScrollController();
   @override
   void initState() {
     super.initState();
-    _mainController.addListener(() {
-      if (_mainController.offset > 300) {
-        setState(() {
-          showCard = true;
-        });
-      } else {
-        setState(() {
-          showCard = false;
-        });
-      }
-    });
   }
   Widget appbarleft(constraints) {
     double width = MediaQuery.of(context).size.width;
     double itemCardWidth = (width < 1100) ? 90 : 140;
     return Stack(
       children: [
-        SingleChildScrollView(
-          controller: _mainController,
+        CustomChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                key: GlobalObjectKey(0),
-              ),
-              (width > 550) ? buildTabBar(constraints: constraints) : SizedBox(),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: constraints.maxWidth < 760
-                      ? 10
-                      : constraints.maxWidth < 1000
-                          ? 0
-                          : constraints.maxWidth / 15,
-                  vertical: 10,
+            children:  [
+                SizedBox(
+                  key: GlobalObjectKey(0),
                 ),
-                child: SizedBox(
-                  width: width / 1,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        constraints.maxWidth < 800
-                            ? Image.asset('assets/deshboard/winterlandscape.png',
-                                height: constraints.maxWidth < 500 ? 250 : 400,
-                                width: constraints.maxWidth,
-                                fit: BoxFit.fill)
-                            : Image.asset('assets/deshboard/winterlandscape.png',
-                                height: 600,
-                                width: constraints.maxWidth,
-                                fit: BoxFit.fill),
-                      ],
+                (width > 550) ? buildTabBar(constraints: constraints) : SizedBox(),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: constraints.maxWidth < 760
+                        ? 10
+                        : constraints.maxWidth < 1000
+                        ? 0
+                        : constraints.maxWidth / 15,
+                    vertical: 10,
+                  ),
+                  child: SizedBox(
+                    width: width / 1,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        children: [
+                          constraints.maxWidth < 800
+                              ? Image.asset('assets/deshboard/winterlandscape.png',
+                              height: constraints.maxWidth < 500 ? 250 : 400,
+                              width: constraints.maxWidth,
+                              fit: BoxFit.fill)
+                              : Image.asset('assets/deshboard/winterlandscape.png',
+                              height: 600,
+                              width: constraints.maxWidth,
+                              fit: BoxFit.fill),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                key: GlobalObjectKey(1),
-                height: width < 550 ? 10 : 100,
-              ),
-              buildDifferentListWidget(constraints: constraints),
-              Column(
-                children: [
-                  SizedBox(
+                SizedBox(
+                  key: GlobalObjectKey(1),
+                  height: width < 550 ? 10 : 100,
+                ),
+                buildDifferentListWidget(constraints: constraints),
+                Column(
+                  children: [
+                    SizedBox(
                       key: GlobalObjectKey(3),
-                    height: width < 550 ? 10 : 100,
-                  ),
-                  const WhoThisCourseIsFor(),
-                  SizedBox(
+                      height: width < 550 ? 10 : 100,
+                    ),
+                    const WhoThisCourseIsFor(),
+                    SizedBox(
                       key: GlobalObjectKey(4),
-                    height: width < 550 ? 10 : 100,
-                  ),
-                  const TeacherList(),
-                  SizedBox(
-                    key: GlobalObjectKey(5),
-                    height: width < 550 ? 10 : 100,
-                  ),
-                  const LandingPageCourseList(),
-                  SizedBox(
-                    key: GlobalObjectKey(6),
-                    height: width < 550 ? 10 : 100,
-                  ),
-                  ReviewList(
-                    //key: UniqueKey(),
-                    typeName: UserTypeName.teacher,
-                  ),
-                  SizedBox(
-                    key: GlobalObjectKey(2),
-                    height: width < 550 ? 50 : 100,
-                  ),
-                  buildWhyChooseUsListWidget(constraints: constraints),
-                  SizedBox(
-                    key: GlobalObjectKey(7),
-                    height: width < 550 ? 10 : 100,
-                  ),
-                  ReviewList(
-                    // key: UniqueKey(),
-                    typeName: UserTypeName.user,
-                  ),
-                  SizedBox(
-                    height: width < 550 ? 10 : 100,
-                  ),
-                ],
-              ),
-              Divider(
-                color: notifier.isDark
-                    ? notifier.subgreycolor
-                    : notifier.sugestionbutton,
-              ),
-              SizedBox(height: 30,),
-              // SizedBox(height: constraints.maxWidth / 20),
-              // Container(
-              //   color: Colors.red,
-              //   height: 50, // fixed height
-              //   child: ListView.builder(
-              //     scrollDirection: Axis.horizontal, // make it horizontal
-              //     itemCount: 7,
-              //     itemBuilder: (context, index) {
-              //       return InkWell(
-              //           onTap: () {
-              //             Scrollable.ensureVisible(
-              //                 GlobalObjectKey(index).currentContext!,
-              //                 duration: Duration(seconds: 1),
-              //                 curve: Curves.easeInOutCubic);
-              //           },
-              //           child: Padding(
-              //             padding: const EdgeInsets.all(8.0),
-              //             child: TextButton(
-              //                 onPressed: () {  },
-              //                 child: Text('$index')),
-              //           ),
-              //         );
-              //     },
-              //   ),
-              // ),
-              EndOfPage(),
-            ],
-          ),),
+                      height: width < 550 ? 10 : 100,
+                    ),
+                    const TeacherList(),
+                    SizedBox(
+                      key: GlobalObjectKey(5),
+                      height: width < 550 ? 10 : 100,
+                    ),
+                    const LandingPageCourseList(),
+                    SizedBox(
+                      key: GlobalObjectKey(6),
+                      height: width < 550 ? 10 : 100,
+                    ),
+                    ReviewList(
+                      //key: UniqueKey(),
+                      typeName: UserTypeName.teacher,
+                    ),
+                    SizedBox(
+                      key: GlobalObjectKey(2),
+                      height: width < 550 ? 50 : 100,
+                    ),
+                    buildWhyChooseUsListWidget(constraints: constraints),
+                    SizedBox(
+                      key: GlobalObjectKey(7),
+                      height: width < 550 ? 10 : 100,
+                    ),
+                    ReviewList(
+                      // key: UniqueKey(),
+                      typeName: UserTypeName.user,
+                    ),
+                    SizedBox(
+                      height: width < 550 ? 10 : 100,
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: notifier.isDark
+                      ? notifier.subgreycolor
+                      : notifier.sugestionbutton,
+                ),
+                SizedBox(height: 30,),
+                // SizedBox(height: constraints.maxWidth / 20),
+                // Container(
+                //   color: Colors.red,
+                //   height: 50, // fixed height
+                //   child: ListView.builder(
+                //     scrollDirection: Axis.horizontal, // make it horizontal
+                //     itemCount: 7,
+                //     itemBuilder: (context, index) {
+                //       return InkWell(
+                //           onTap: () {
+                //             Scrollable.ensureVisible(
+                //                 GlobalObjectKey(index).currentContext!,
+                //                 duration: Duration(seconds: 1),
+                //                 curve: Curves.easeInOutCubic);
+                //           },
+                //           child: Padding(
+                //             padding: const EdgeInsets.all(8.0),
+                //             child: TextButton(
+                //                 onPressed: () {  },
+                //                 child: Text('$index')),
+                //           ),
+                //         );
+                //     },
+                //   ),
+                // ),
+                EndOfPage(),
+              ],
+          ),
+        ),
           Positioned(
           right: 20,
           bottom: 20,
@@ -383,205 +369,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
         ]
       );
   }
-
-  Widget memory(constraints) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(10),
-          child: SizedBox(
-            // width: constraints.maxWidth / 1.35,
-            child: Column(
-              crossAxisAlignment: constraints.maxWidth < 550
-                  ? CrossAxisAlignment.center
-                  : CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Enjoy the Trip with exciting Discount',
-                  style: baseStyle.copyWith(
-                    fontSize: 16,
-                    color: notifier.greycolor,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(
-                  height: constraints.maxWidth < 550 ? 10 : 20,
-                ),
-                Text('We Recommend Beautiful Destination Every Month',
-                    style: baseStyle.copyWith(
-                        color: notifier.blackcolor,
-                        fontWeight: FontWeight.w600,
-                        fontSize: constraints.maxWidth < 550 ? 28 : 38),
-                    textAlign: constraints.maxWidth < 550
-                        ? TextAlign.center
-                        : TextAlign.start),
-                SizedBox(
-                  height: constraints.maxWidth < 550 ? 18 : 20,
-                ),
-                Text(
-                  'Effortless travel starts with us. Book your adventure, pack your bags, and let the exploration begin.',
-                  style: baseStyle.copyWith(
-                      fontSize: 16, color: notifier.subgreycolor),
-                  textAlign: constraints.maxWidth < 550
-                      ? TextAlign.center
-                      : TextAlign.start,
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                SizedBox(
-                  height: 50,
-                  width: 300,
-                  child: TextField(
-                    style: baseStyle.copyWith(
-                      color: notifier.blackcolor,
-                    ),
-                    decoration: InputDecoration(
-                        disabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25),
-                          borderSide: BorderSide(
-                              width: 1,
-                              color: notifier.isDark
-                                  ? const Color(0xFF353945)
-                                  : const Color(0xFFE6E8EC)),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25),
-                          borderSide: BorderSide(
-                              width: 2,
-                              color: notifier.isDark
-                                  ? const Color(0xFF353945)
-                                  : const Color(0xFFE6E8EC)),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25),
-                          borderSide: BorderSide(
-                              width: 1, color: notifier.subgreycolor),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25),
-                          borderSide: BorderSide(
-                              width: 1,
-                              color: notifier.isDark
-                                  ? const Color(0xFF23262F)
-                                  : const Color(0xFFE6E8EC)),
-                        ),
-                        suffixIcon: Container(
-                          margin: const EdgeInsets.only(right: 10),
-                          decoration: BoxDecoration(
-                              color: notifier.buttoncolor,
-                              shape: BoxShape.circle),
-                          child: Image.asset('assets/Icons/arrowrighticon.png',
-                              scale: 3, width: 3, color: notifier.whitecolor),
-                        ),
-                        hintText: 'Enter your phone number',
-                        hintStyle:
-                            baseStyle.copyWith(color: notifier.subgreycolor)),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(30),
-              child: SizedBox(
-                width: width / 1,
-                child: Image.asset('assets/deshboard/latestdeals.png',
-                    fit: BoxFit.fill),
-              ),
-            ),
-            Positioned(
-              top: constraints.maxWidth < 600
-                  ? constraints.maxWidth / 1.1
-                  : constraints.maxWidth < 700
-                      ? constraints.maxWidth / 1.07
-                      : constraints.maxWidth / 1.03,
-              right: constraints.maxWidth < 550
-                  ? constraints.maxWidth / 5
-                  : constraints.maxWidth < 600
-                      ? constraints.maxWidth / 4
-                      : constraints.maxWidth < 700
-                          ? constraints.maxWidth / 4
-                          : constraints.maxWidth / 4,
-              child: Container(
-                height: constraints.maxWidth < 550
-                    ? constraints.maxWidth / 8.3
-                    : constraints.maxWidth < 600
-                        ? constraints.maxWidth / 9
-                        : constraints.maxWidth < 700
-                            ? constraints.maxWidth / 10
-                            : constraints.maxWidth / 12,
-                width: constraints.maxWidth < 550
-                    ? constraints.maxWidth / 2.7
-                    : constraints.maxWidth < 600
-                        ? constraints.maxWidth / 3
-                        : constraints.maxWidth / 3.5,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(40),
-                  color: const Color(0xFFFCFDFD),
-                  gradient: const LinearGradient(
-                      colors: [Color(0xFFFCFDFD), Colors.white70]),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(constraints.maxWidth < 550 ? 5 : 14),
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        'assets/deshboard/avatar.png',
-                        height: constraints.maxWidth < 550
-                            ? constraints.maxWidth / 6
-                            : constraints.maxWidth / 20,
-                      ),
-                      SizedBox(width: constraints.maxWidth < 300 ? 7 : 15),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Antone Heller',
-                            style: baseStyle.copyWith(
-                              fontSize: constraints.maxWidth < 550
-                                  ? constraints.maxWidth / 30
-                                  : constraints.maxWidth / 50,
-                              color: notifier.textcolor,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Icon(Icons.star_rounded,
-                                  color: notifier.yellowcolor,
-                                  size: constraints.maxWidth < 550
-                                      ? constraints.maxWidth / 40
-                                      : constraints.maxWidth / 70),
-                              const SizedBox(width: 5),
-                              Text(
-                                '4.8',
-                                style: baseStyle.copyWith(
-                                  fontSize: constraints.maxWidth < 550
-                                      ? constraints.maxWidth / 50
-                                      : constraints.maxWidth / 70,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
+  
   Widget buildTabBar({required BoxConstraints constraints}) {
     Locale currentLocale = LanguageHelper.getInstance.getCurrentLocale();
     return FutureBuilder(
