@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/landing_page/deshboard/deshboard.dart';
 
 import '../../base/theme/text_stype_constant.dart';
@@ -374,7 +375,7 @@ class _helpState extends State<help> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 10),
-        SingleChildScrollView(
+        CustomChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -1854,7 +1855,7 @@ class _helpState extends State<help> {
     return Column(
       children: [
         const SizedBox(height: 10),
-        SingleChildScrollView(
+        CustomChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [

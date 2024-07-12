@@ -120,6 +120,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
     'Cảm nhận'
   ];
 
+  ShowCardModel showCardModel = ShowCardModel();
   @override
   Widget build(BuildContext context) {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
@@ -165,11 +166,25 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
       )),
     );
   }
-  bool showCard = false;
   final ScrollController _mainController = ScrollController();
   @override
   void initState() {
     super.initState();
+    _mainController.addListener(() {
+      if (_mainController.offset > 300) {
+        if(showCardModel.showCard==false)
+          {
+            showCardModel.onChangerShowCard(true);
+          }
+
+      } else {
+        if(showCardModel.showCard==true)
+          {
+            showCardModel.onChangerShowCard(false);
+
+          }
+      }
+    });
   }
   Widget appbarleft(constraints) {
     double width = MediaQuery.of(context).size.width;
@@ -177,6 +192,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
     return Stack(
       children: [
         CustomChildScrollView(
+          controller: _mainController,
           child: Column(
             children:  [
                 SizedBox(
@@ -267,31 +283,6 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       : notifier.sugestionbutton,
                 ),
                 SizedBox(height: 30,),
-                // SizedBox(height: constraints.maxWidth / 20),
-                // Container(
-                //   color: Colors.red,
-                //   height: 50, // fixed height
-                //   child: ListView.builder(
-                //     scrollDirection: Axis.horizontal, // make it horizontal
-                //     itemCount: 7,
-                //     itemBuilder: (context, index) {
-                //       return InkWell(
-                //           onTap: () {
-                //             Scrollable.ensureVisible(
-                //                 GlobalObjectKey(index).currentContext!,
-                //                 duration: Duration(seconds: 1),
-                //                 curve: Curves.easeInOutCubic);
-                //           },
-                //           child: Padding(
-                //             padding: const EdgeInsets.all(8.0),
-                //             child: TextButton(
-                //                 onPressed: () {  },
-                //                 child: Text('$index')),
-                //           ),
-                //         );
-                //     },
-                //   ),
-                // ),
                 EndOfPage(),
               ],
           ),
@@ -300,6 +291,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
           right: 20,
           bottom: 20,
           child: FloatingActionButton(
+            heroTag: "arrow_upward",
             backgroundColor: Color.fromRGBO(143, 20, 17, 1.0),
               hoverColor: Color.fromRGBO(134, 16, 14, 1.0),
               onPressed: () {
@@ -310,63 +302,70 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
               child: Icon(Icons.arrow_upward),
               ),
         ),
-         (showCard && width > 750) ? Positioned(
-            top: width < 1100 ? 10 : 20,
-            left: (width - (7*itemCardWidth + 120)) / 2,
-            right: (width - (7*itemCardWidth + 120)) / 2,
-            child: Card(
-              shadowColor: Colors.red,
-              surfaceTintColor: Colors.green,
-              elevation: 10,
-              child: Row(
-                children: [
-                  SizedBox(width: 10,),
-                  StaticView.buildLogo(size: 28),
-                  SizedBox(width: 10,),
-                  Wrap(
-                    children: List<Widget>.generate( 7,
-                          (int index) {
-                        return SizedBox(
-                          height: 50,
-                          width: itemCardWidth,
-                          child: GestureDetector(
-                            child: OnHoverWidget(
-                              builder: (isHovered) {
-                                  return Center(
-                                    child: TextButton(
-                                      style: TextButton.styleFrom(
-                                        overlayColor: Colors.white,
-                                      ),
-                                      onPressed: () {
-                                        Scrollable.ensureVisible(
-                                            GlobalObjectKey(index).currentContext!,
-                                            duration: Duration(seconds: 1),
-                                            curve: Curves.easeInOutCubic);
-                                      },
-                                      child: Text(landingPageTitles[index],
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: (width < 1100) ? 10 : 18,
-                                          color: (isHovered) ? notifier.redcolor : Colors.black,
-                                          decoration: (isHovered) ? TextDecoration.underline : TextDecoration.none,
-                                          decorationColor: notifier.redcolor,
-                                          decorationThickness: 2
+        ListenableBuilder(
+          listenable: showCardModel, 
+          builder: (BuildContext context, Widget? child) { 
+            return Visibility(
+              visible: showCardModel.showCard && width > 750,
+              child: Positioned(
+                top: width < 1100 ? 10 : 20,
+                left: (width - (7*itemCardWidth + 120)) / 2,
+                right: (width - (7*itemCardWidth + 120)) / 2,
+                child: Card(
+                  shadowColor: Colors.red,
+                  surfaceTintColor: Colors.green,
+                  elevation: 10,
+                  child: Row(
+                    children: [
+                      SizedBox(width: 10,),
+                      StaticView.buildLogo(size: 28),
+                      SizedBox(width: 10,),
+                      Wrap(
+                        children: List<Widget>.generate( 7,
+                              (int index) {
+                            return SizedBox(
+                              height: 50,
+                              width: itemCardWidth,
+                              child: GestureDetector(
+                                child: OnHoverWidget(
+                                  builder: (isHovered) {
+                                    return Center(
+                                      child: TextButton(
+                                        style: TextButton.styleFrom(
+                                          overlayColor: Colors.white,
+                                        ),
+                                        onPressed: () {
+                                          Scrollable.ensureVisible(
+                                              GlobalObjectKey(index).currentContext!,
+                                              duration: Duration(seconds: 1),
+                                              curve: Curves.easeInOutCubic);
+                                        },
+                                        child: Text(landingPageTitles[index],
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: (width < 1100) ? 10 : 18,
+                                              color: (isHovered) ? notifier.redcolor : Colors.black,
+                                              decoration: (isHovered) ? TextDecoration.underline : TextDecoration.none,
+                                              decorationColor: notifier.redcolor,
+                                              decorationThickness: 2
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  );
-                                },
-                            ),
-                          ),
-                        );
-                      },
-                    ).toList(),
+                                    );
+                                  },
+                                ),
+                              ),
+                            );
+                          },
+                        ).toList(),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ) : SizedBox(),
-        ]
+            );
+          },),
+      ]
       );
   }
   
@@ -1697,5 +1696,14 @@ class CustomDrawer extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+class ShowCardModel with ChangeNotifier {
+  bool  _showCard = false;
+  bool get showCard => _showCard;
+
+  void onChangerShowCard(bool showCard) {
+    _showCard = showCard;
+    notifyListeners();
   }
 }

@@ -116,7 +116,7 @@ class DateTimePicker{
                   ),
                 ),
                 Expanded(
-                  child: SingleChildScrollView(
+                  child: CustomChildScrollView(
                     child: Column(
                       children: [
                         CalendarDatePicker2(

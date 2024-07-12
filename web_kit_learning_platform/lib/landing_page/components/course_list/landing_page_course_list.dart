@@ -163,8 +163,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> {
                       //         : constraints.maxWidth)
                       //     : Dimens.size300;
                       for (CourseInfo courseLandingPageInfo
-                          in state.courseListLandingPageResponseModel?.data ??
-                              []) {
+                          in state.courseListLandingPageResponseModel?.data ?? []) {
                         listOfCourse.add(CourseItem(constraints: constraints, courseInfo: courseLandingPageInfo));
                       }
                       return Center(

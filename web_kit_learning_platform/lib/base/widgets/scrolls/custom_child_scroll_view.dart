@@ -7,24 +7,30 @@ class CustomChildScrollView extends StatelessWidget{
     this.animationCurve,
     this.durationMS,
     this.physics, 
-    this.scrollSpeed
+    this.scrollSpeed,
+    this.scrollDirection,
+    this.controller
   });
   Widget? child;
   ScrollPhysics? physics;
-  int? durationMS = 380;
-  double? scrollSpeed = 2;
+  int? durationMS = 1000;
+  double? scrollSpeed = 1000;
   Curve? animationCurve;
+  Axis? scrollDirection;
+  ScrollController? controller;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return DynMouseScroll(
-      animationCurve: animationCurve??Curves. easeOutQuart,
-      durationMS: durationMS??380,
-      scrollSpeed: scrollSpeed??2,
+      animationCurve: animationCurve??Curves.linear,
+      durationMS: durationMS??100,
+      scrollSpeed: scrollSpeed??100,
+      controller: controller,
       mobilePhysics: physics??BouncingScrollPhysics(),
       builder: (buildContext , scrollController , scrollPhysics ) {
         return SingleChildScrollView(
           controller: scrollController,
+          scrollDirection: scrollDirection??Axis.vertical,
           physics: scrollPhysics,
           child: child,
         );
