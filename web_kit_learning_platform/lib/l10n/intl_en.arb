@@ -438,5 +438,7 @@
   "login_your_account": "Login your account",
   "your_email": "Your Email",
   "remember_me": "Remember Me",
-  "i_am_teacher": "I am a teacher"
+  "i_am_teacher": "I am a teacher",
+  "video_player": "Video player",
+  "youtube_player": "Youtube player"
 }

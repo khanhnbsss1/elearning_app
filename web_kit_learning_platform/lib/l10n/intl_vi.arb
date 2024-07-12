@@ -438,7 +438,10 @@
   "login_your_account": "Đăng nhập tài khoản của bạn",
   "your_email": "Email của bạn",
   "remember_me": "Nhớ tôi",
-  "i_am_teacher": "Tôi là giáo viên"
+  "i_am_teacher": "Tôi là giáo viên",
+
+  "video_player": "Trình phát video",
+  "youtube_player": "Trình phát Youtube"
   
   
 }

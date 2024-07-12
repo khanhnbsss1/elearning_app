@@ -426,7 +426,7 @@
   "who_this_course_is_for_table_title_6": "对于那些想一定要学习中文的人",
   "who_this_course_is_for_table_content_1": "越爱学汉语学习平台有齐全的课程，适合初学者、学过但没有找到合适学习方式、想要更高层次学习的人。",
   "who_this_course_is_for_table_content_2": "适合那些想要学习交流、快速学习应用到生活和工作中而又不失基本语言元素的人。",
-  "who_this_course_is_for_table_content_3": "适合那些工作忙、时间少、想要适合上班族的学习方式，而不是像学生时那样耕耘的人。",
+  "who_this_course_is_for_table_content_3": "适合那些工作忙wwww、时间少、想要适合上班族的学习方式，而不是像学生时那样耕耘的人。",
   "who_this_course_is_for_table_content_4": "越爱学汉语学习平台是一个不带评判地学习的地方，通过发现激发学习兴趣，创造成就感，增加动力",
   "who_this_course_is_for_table_content_5": "适合那些习惯于专业精神和专注的客户服务；不喜欢缺乏规则和保证的人。",
   "who_this_course_is_for_table_content_6": "适合那些重视时间并希望一次性学习所有内容而不是漫无目的的人。",
@@ -438,5 +438,7 @@
   "login_your_account": "登录您的帐户",
   "your_email": "您的电子邮件",
   "remember_me": "记住我",
-  "i_am_teacher": "我是一名老师"
+  "i_am_teacher": "我是一名老师",
+  "video_player": "视频播放器",
+  "youtube_player": "YouTube 播放器"
 }
