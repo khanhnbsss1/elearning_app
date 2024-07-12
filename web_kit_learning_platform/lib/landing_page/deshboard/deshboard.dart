@@ -340,11 +340,10 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
                       StaticView.buildLogo(size: 28),
                       SizedBox(width: 10,),
                       Wrap(
-                        children: List<Widget>.generate( 7,
-                              (int index) {
+                        children: List<Widget>.generate( 7, (int index) {
                             return SizedBox(
                               height: 50,
-                              width: itemCardWidth,
+                              //width: itemCardWidth,
                               child: GestureDetector(
                                 child: OnHoverWidget(
                                   builder: (isHovered) {

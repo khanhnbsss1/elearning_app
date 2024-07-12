@@ -102,153 +102,156 @@ class CustomDialog1 extends StatelessWidgetCommon{
           maxHeight:  MediaQuery.sizeOf(context).height,
           maxWidth: MediaQuery.sizeOf(context).width,
         ),
-        child: Dialog(
-          insetPadding: insetPadding ??  EdgeInsets.symmetric(horizontal: Dimens.size10),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius!)),
-          alignment: alignment!,
-          child: Container(
-                width: widthSize,
-                height: height,
-                decoration: BoxDecoration(
-                  color: headerColor??ColorConst.mainColor,
-                  borderRadius: BorderRadius.circular(radius!,),
-                ),
-                constraints: const BoxConstraints(
-                  minWidth: 12,
-                  minHeight: 12,
-                ),
-                child: SafeArea(
-                  child: Container(
-                    height: height,
-                    decoration: BoxDecoration(
-                      color: bodyBackGroundColor,
-                      borderRadius: BorderRadius.circular(radius!,),
-                    ),
-                    padding: EdgeInsets.only(bottom: radius??0),
-                    child: Column(
-                      mainAxisSize: mainAxisSizeParent!,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Visibility(
-                          visible: enableHeader!,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                height: isTablet?Dimens.size60:Dimens.size50,
-                                decoration: BoxDecoration(
-                                  color: headerColor??ColorConst.whiteColor,
-                                  borderRadius: BorderRadius.vertical(top: Radius.circular(radius!)),
-                                ),
-                                child: Padding(
-                                  padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Visibility(
-                                        visible: enableBackButton??false,
-                                        child: InkWell(
+        child: Material(
+          elevation: 5,
+          child: Dialog(
+            insetPadding: insetPadding ??  EdgeInsets.symmetric(horizontal: Dimens.size10),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius!)),
+            alignment: alignment!,
+            child: Container(
+                  width: widthSize,
+                  height: height,
+                  decoration: BoxDecoration(
+                    color: headerColor??ColorConst.mainColor,
+                    borderRadius: BorderRadius.circular(radius!,),
+                  ),
+                  constraints: const BoxConstraints(
+                    minWidth: 12,
+                    minHeight: 12,
+                  ),
+                  child: SafeArea(
+                    child: Container(
+                      height: height,
+                      decoration: BoxDecoration(
+                        color: bodyBackGroundColor,
+                        borderRadius: BorderRadius.circular(radius!,),
+                      ),
+                      padding: EdgeInsets.only(bottom: radius??0),
+                      child: Column(
+                        mainAxisSize: mainAxisSizeParent!,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Visibility(
+                            visible: enableHeader!,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  height: isTablet?Dimens.size60:Dimens.size50,
+                                  decoration: BoxDecoration(
+                                    color: headerColor??ColorConst.whiteColor,
+                                    borderRadius: BorderRadius.vertical(top: Radius.circular(radius!)),
+                                  ),
+                                  child: Padding(
+                                    padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Visibility(
+                                          visible: enableBackButton??false,
+                                          child: InkWell(
+                                              onTap: (){
+                                                if(enableBackButton!)
+                                                  {
+                                                    if(backButtonCallback!=null)
+                                                      {
+                                                        backButtonCallback!();
+                                                      }
+                                                    else
+                                                      {
+                                                        Navigator.of(context).pop();
+                                                      }
+                                                  }
+                                              },
+                                              child: Padding(
+                                                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                                                child: Icon(
+                                                  Icons.arrow_back_ios_rounded,
+                                                  size: Dimens.size20,
+                                                  color: enableBackButton!?ColorConst.colorIconGrays:Colors.transparent,
+                                                ),
+                                              )),
+                                        ),
+                                        Expanded(
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment: titleAlignment??MainAxisAlignment.start,
+                                            children: [
+                                              titleIcon??const SizedBox.shrink(),
+                                              Gap(Dimens.size5),
+                                              Text(
+                                                  title!,
+                                                  style: titleStyle??TextStyleConstant.textStyleBlack20w700),
+                                            ],
+                                          ),
+                                        ),
+                                        enableCloseButton!?
+                                        InkWell(
                                             onTap: (){
-                                              if(enableBackButton!)
-                                                {
-                                                  if(backButtonCallback!=null)
-                                                    {
-                                                      backButtonCallback!();
-                                                    }
-                                                  else
-                                                    {
-                                                      Navigator.of(context).pop();
-                                                    }
-                                                }
+                                              Navigator.of(context).pop();
                                             },
                                             child: Padding(
-                                              padding: const EdgeInsets.symmetric(vertical: 4.0),
+                                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                               child: Icon(
-                                                Icons.arrow_back_ios_rounded,
+                                                Icons.close,
                                                 size: Dimens.size20,
-                                                color: enableBackButton!?ColorConst.whiteColor:Colors.transparent,
+                                                color: ColorConst.colorIconGrays,
                                               ),
-                                            )),
-                                      ),
-                                      Expanded(
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment: titleAlignment??MainAxisAlignment.start,
-                                          children: [
-                                            titleIcon??const SizedBox.shrink(),
-                                            Gap(Dimens.size5),
-                                            Text(
-                                                title!,
-                                                style: titleStyle??TextStyleConstant.textStyleBlack20w700.copyWith(color: ColorConst.whiteColor)),
-                                          ],
-                                        ),
-                                      ),
-                                      enableCloseButton!?
-                                      InkWell(
-                                          onTap: (){
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                            child: Icon(
-                                              Icons.close,
-                                              size: Dimens.size20,
-                                              color: ColorConst.whiteColor,
-                                            ),
-                                          )):
-                                      SizedBox(width: Dimens.size20,),
-                                    ],
+                                            )):
+                                        SizedBox(width: Dimens.size20,),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Visibility(
-                                visible: enableHeaderDivider??false,
-                                child: Divider(
-                                  color: ColorConst.greyColor1,
-                                  height: 1,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Visibility(
-                          visible: mainAxisSizeParent==MainAxisSize.min,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: bodyBackGroundColor,
-                                borderRadius: BorderRadius.vertical(bottom: Radius.circular(radius!)),
-                                //border: const Border(bottom: BorderSide(color: Colors.white), right: BorderSide(color: Colors.white), left: BorderSide(color: Colors.white))
-                            ),
-                            child: Column(
-                              children: [
-                                child,
+                                Visibility(
+                                  visible: enableHeaderDivider??false,
+                                  child: Divider(
+                                    color: ColorConst.greyColor1,
+                                    height: 1,
+                                  ),
+                                )
                               ],
-                            )),
-                        ),
-                        Visibility(
-                          visible: mainAxisSizeParent==MainAxisSize.max,
-                          child: Expanded(
-                            child: Container(
-                                decoration: BoxDecoration(
-                                    color: bodyBackGroundColor,
-                                    borderRadius: BorderRadius.vertical(bottom: Radius.circular(radius!)),
-                                    //border: const Border(bottom: BorderSide(color: Colors.white), right: BorderSide(color: Colors.white), left: BorderSide(color: Colors.white))
-                                ),
-                                child: Column(
-                                  children: [
-                                    child,
-                                  ],
-                                )),
+                            ),
                           ),
-                        ),
-                      ],
+                          Visibility(
+                            visible: mainAxisSizeParent==MainAxisSize.min,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: bodyBackGroundColor,
+                                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(radius!)),
+                                  //border: const Border(bottom: BorderSide(color: Colors.white), right: BorderSide(color: Colors.white), left: BorderSide(color: Colors.white))
+                              ),
+                              child: Column(
+                                children: [
+                                  child,
+                                ],
+                              )),
+                          ),
+                          Visibility(
+                            visible: mainAxisSizeParent==MainAxisSize.max,
+                            child: Expanded(
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: bodyBackGroundColor,
+                                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(radius!)),
+                                      //border: const Border(bottom: BorderSide(color: Colors.white), right: BorderSide(color: Colors.white), left: BorderSide(color: Colors.white))
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      child,
+                                    ],
+                                  )),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                )
-              ),
+                  )
+                ),
+          ),
         ),
       ),
     );

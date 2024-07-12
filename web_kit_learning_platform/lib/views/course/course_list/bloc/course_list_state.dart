@@ -9,9 +9,14 @@ enum CourseStatus {
 class CourseListState extends Equatable {
   CourseResponseModel? courseResponseModel;
   CourseStatus? blocStatus;
+  SearchCommonRequest? searchCommonRequest;
   CourseListState({
-      this.blocStatus, this.courseResponseModel,}){
-    courseResponseModel??= CourseResponseModel(data: []);
+      this.blocStatus, 
+    this.courseResponseModel,
+    this.searchCommonRequest
+  }){
+    courseResponseModel??= CourseResponseModel(content: []);
+    searchCommonRequest??= SearchCommonRequest(filterType: "ALL", pageNumber: 0, pageSize: 10, keyword: "");
   }
 
 

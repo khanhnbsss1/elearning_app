@@ -57,7 +57,7 @@ class ColorLightConst{
   static Color backGroundColorUnSelectTabBar = const Color(0xffd08c8c);
 
   static Color bgSettingButtonColor =  Colors.white;
-  static Color bgDialogColor = const Color(0xFFF4FDF5);
+  static Color bgDialogColor = const Color(0xfff1f1f1);
   static Color bgSelectButtonColor = const Color(0xFFE7E7E7);
   static Color yellowColor = const Color(0xFFE2BD07);
   
@@ -102,7 +102,7 @@ class ColorLightConst{
           backGroundColorUnSelectTabBar = const Color(0xfff5a1a1);
           colorIconGrays =  blackColor54;
           bgSettingButtonColor =  Colors.white;
-          bgDialogColor = const Color(0xFFF7FCF7);
+          bgDialogColor = const Color(0xfffaf7f7);
           bgSelectButtonColor = const Color(0xFFE7E7E7);
           
           colorLinear4 = const Color(0xFF36D1DC);

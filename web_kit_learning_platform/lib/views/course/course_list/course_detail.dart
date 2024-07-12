@@ -16,6 +16,7 @@ import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/views/course/course_list/lectures_detail.dart';
 import 'package:webkit/views/course/course_list/course_mode.dart';
 import 'package:webkit/views/course/course_list/tag_drop_down.dart';
+import 'package:webkit/views/layouts/layout.dart';
 import '../../../controller/ui/add_course_controller.dart';
 import '../../../services/apis/course/add_course_request.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
@@ -41,7 +42,6 @@ class _CourseDetailState extends State<CourseDetail>
   late AddCourseController controller;
   late AnimationController animationController;
 
-  Color color = Color.fromRGBO(163, 20, 19, 1.0);
   @override
   void initState() {
     super.initState();
@@ -97,13 +97,14 @@ class _CourseDetailState extends State<CourseDetail>
       builder: (controller) {
         return Material(
           child: CustomDialog1(
-            headerColor: color,
             title: 'Add course',
-            titleStyle: TextStyle(fontSize: 24, color: Colors.white),
-            radius: 0,
+            titleAlignment: MainAxisAlignment.center,
+            //radius: 20,
             width: MediaQuery.of(context).size.width,
+            height:  MediaQuery.of(context).size.height-Dimens.size20,
             mainAxisSizeParent: MainAxisSize.max,
             enableCloseButton: true,
+            bodyBackGroundColor: ColorConst.bgDialogColor,
             child: Expanded(
               child: Container(
                 decoration: BoxDecoration(
@@ -111,56 +112,54 @@ class _CourseDetailState extends State<CourseDetail>
                   border: Border(
                       top: BorderSide(
                         width: 1,
-                        color: Colors.black,
+                        color: ColorConst.colorHintTextSearch,
                       )
                   ),
                 ),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
-                  child: Column(children: [
-                    Padding(
-                      padding: EdgeInsets.all(Dimens.size16),
-                      child: Form(
-                        key: controller.basicValidator.formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            buildCourseSummaryInfo(),
-                            SizedBox(height: 16,),
-                            addLectures(),
-                            Center(
-                              child: MyButton.rounded(
-                                onTap: controller.onAddCourse,
-                                elevation: 0,
-                                padding: MySpacing.xy(20, 16),
-                                backgroundColor: color,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    controller.loading
-                                        ? SizedBox(
-                                      height: 14,
-                                      width: 14,
-                                      child: CircularProgressIndicator(
-                                        color: theme.colorScheme.onPrimary,
-                                        strokeWidth: 1.2,
-                                      ),
-                                    )
-                                        : Container(),
-                                    if (controller.loading) MySpacing.width(16),
-                                    MyText.bodySmall(
-                                      'Submit',
-                                      color: contentTheme.onPrimary,
+                  child: Padding(
+                    padding: EdgeInsets.all(Dimens.size16),
+                    child: Form(
+                      key: controller.basicValidator.formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          buildCourseSummaryInfo(),
+                          SizedBox(height: 16,),
+                          addLectures(),
+                          Center(
+                            child: MyButton.rounded(
+                              onTap: controller.onAddCourse,
+                              elevation: 0,
+                              padding: MySpacing.xy(20, 16),
+                              backgroundColor: ColorConst.whiteColor,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  controller.loading
+                                      ? SizedBox(
+                                    height: 14,
+                                    width: 14,
+                                    child: CircularProgressIndicator(
+                                      color: theme.colorScheme.onPrimary,
+                                      strokeWidth: 1.2,
                                     ),
-                                  ],
-                                ),
+                                  )
+                                      : Container(),
+                                  if (controller.loading) MySpacing.width(16),
+                                  MyText.bodySmall(
+                                    'Submit',
+                                    color: contentTheme.onPrimary,
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
-                  ]),
+                  ),
                 ),
               ),
             ),
@@ -173,13 +172,9 @@ class _CourseDetailState extends State<CourseDetail>
   Widget buildCourseSummaryInfo(){
     return Card(
       child: ExpandWidget(
-        expandColor: Color.fromRGBO(255, 233, 233, 1.0),
+       // expandColor: Color.fromRGBO(255, 233, 233, 1.0),
         title: 'Course',
-        titleStyle: TextStyle(
-          fontSize: 18,
-          color: Colors.white,
-        ),
-        titleGradient: const [Color.fromRGBO(169, 59, 58, 1.0), Color.fromRGBO(255, 131, 131, 1.0),],
+        //titleGradient: const [Color.fromRGBO(169, 59, 58, 1.0), Color.fromRGBO(255, 131, 131, 1.0),],
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
@@ -215,7 +210,7 @@ class _CourseDetailState extends State<CourseDetail>
                               prefixIcon: Icon(
                                 LucideIcons.user,
                                 size: 20,
-                                color: color,
+                                color: ColorConst.colorIconGrays,
                               ),
                               contentPadding: MySpacing.all(16),
                               isCollapsed: true,
@@ -248,7 +243,7 @@ class _CourseDetailState extends State<CourseDetail>
                               prefixIcon: Icon(
                                 LucideIcons.phone,
                                 size: 20,
-                                color: color,
+                                color: ColorConst.colorIconGrays,
                               ),
                               contentPadding: MySpacing.all(16),
                               isCollapsed: true,
@@ -329,7 +324,7 @@ class _CourseDetailState extends State<CourseDetail>
                               prefixIcon: Icon(
                                 LucideIcons.mail,
                                 size: 20,
-                                color: color,
+                                color: ColorConst.colorIconGrays,
                               ),
                               contentPadding: MySpacing.all(16),
                               isCollapsed: true,
@@ -384,7 +379,7 @@ class _CourseDetailState extends State<CourseDetail>
                               prefixIcon: Icon(
                                 LucideIcons.mail,
                                 size: 20,
-                                color: color,
+                                color: ColorConst.colorIconGrays,
                               ),
                               contentPadding: MySpacing.all(16),
                               isCollapsed: true,
@@ -487,7 +482,7 @@ class _CourseDetailState extends State<CourseDetail>
                               prefixIcon: Icon(
                                 LucideIcons.user,
                                 size: 20,
-                                color: color,
+                                color: ColorConst.colorIconGrays,
                               ),
                               contentPadding: MySpacing.all(16),
                               isCollapsed: true,
@@ -523,7 +518,7 @@ class _CourseDetailState extends State<CourseDetail>
                               prefixIcon: Icon(
                                 LucideIcons.user,
                                 size: 20,
-                                color: color,
+                                color: ColorConst.colorIconGrays,
                               ),
                               contentPadding: MySpacing.all(16),
                               isCollapsed: true,
@@ -561,7 +556,7 @@ class _CourseDetailState extends State<CourseDetail>
                               prefixIcon: Icon(
                                 LucideIcons.user,
                                 size: 20,
-                                color: color,
+                                color: ColorConst.colorIconGrays,
                               ),
                               contentPadding: MySpacing.all(16),
                               isCollapsed: true,
@@ -595,7 +590,7 @@ class _CourseDetailState extends State<CourseDetail>
                               prefixIcon: Icon(
                                 LucideIcons.phone,
                                 size: 20,
-                                color: color,
+                                color: ColorConst.colorIconGrays,
                               ),
                               contentPadding: MySpacing.all(16),
                               isCollapsed: true,
@@ -707,7 +702,7 @@ class _CourseDetailState extends State<CourseDetail>
                                   child: value ? Icon(
                                     Icons.check,
                                     size: 18,
-                                    color: color,
+                                    color: ColorConst.colorIconGrays,
                                   ) : null
                               ),),
                           ),
@@ -740,7 +735,7 @@ class _CourseDetailState extends State<CourseDetail>
                             prefixIcon: Icon(
                               LucideIcons.book,
                               size: 20,
-                              color: color,
+                              color: ColorConst.colorIconGrays,
                             ),
                             contentPadding: MySpacing.all(16),
                             isCollapsed: true,
@@ -782,7 +777,7 @@ class _CourseDetailState extends State<CourseDetail>
         titleStyle: TextStyle(
           fontSize: 18
         ),
-        titleGradient: [color, Color.fromRGBO(255, 233, 233, 1.0),],
+        //titleGradient: [ColorConst.bgColor, Color.fromRGBO(255, 233, 233, 1.0),],
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -797,7 +792,7 @@ class _CourseDetailState extends State<CourseDetail>
               constraints: BoxConstraints(
                 minHeight: 100
               ),
-              child: AddLectures(color: color, controller: controller, lectures: lectures,),
+              child: AddLectures(color: ColorConst.colorIconGrays, controller: controller, lectures: lectures,),
             ),
           ],
         ),

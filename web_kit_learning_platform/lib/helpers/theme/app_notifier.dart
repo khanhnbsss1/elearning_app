@@ -22,10 +22,8 @@ class AppNotifier extends ChangeNotifier {
   }
 
   updateTheme(ThemeCustomizer themeCustomizer) {
-    _changeTheme();
-
     notifyListeners();
-
+    _changeTheme();
     AuthorManager().setCustomizer(themeCustomizer);
   }
 

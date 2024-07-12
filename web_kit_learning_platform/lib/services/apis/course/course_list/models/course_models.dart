@@ -1,39 +1,50 @@
 
-
-class CourseResponseModel {
-  List<CourseInfo>? data;
-
-  CourseResponseModel({this.data});
-  CourseResponseModel.fromJsonList(dynamic json) {
-    if (json != null) {
-      data = <CourseInfo>[];
-      json.forEach((v) {
-        data!.add(new CourseInfo.fromJson(v));
-      });
-    }
+class PageModel{
+  PageModel({this.total, this.pageSize, this.pageNumber});
+  int? total;
+  int? pageSize;
+  int? pageNumber;
+  int getCurrentPage(){
+    int pageIndex = pageNumber??1;
+    return pageIndex<1?1:pageIndex;
   }
+  int getTotalPage(){
+    int totalPage = ((total??1)~/ (pageSize??1));
+    return totalPage<1?1:totalPage;
+  }
+  int getTotalElement(){
+    int totalElement = (total??1);
+    return totalElement<1?1:totalElement;
+  }
+}
+class CourseResponseModel extends PageModel{
+  List<CourseInfo>? content;
+
+  CourseResponseModel({super.total, super.pageSize, super.pageNumber, this.content});
   CourseResponseModel.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
-      data = <CourseInfo>[];
-      json['data'].forEach((v) {
-        data!.add(new CourseInfo.fromJson(v));
+    total = json['total'];
+    pageSize = json['pageSize'];
+    pageNumber = json['pageNumber'];
+    if (json['content'] != null) {
+      content = <CourseInfo>[];
+      json['content'].forEach((v) {
+        content!.add(new CourseInfo.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> dataOutput = <String, dynamic>{};
-    if (data != null) {
-      dataOutput['data'] = data!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['total'] = total;
+    data['pageSize'] = pageSize;
+    data['pageNumber'] = pageNumber;
+    if (content != null) {
+      data['content'] = content!.map((v) => v.toJson()).toList();
     }
-    return dataOutput;
+    return data;
   }
 
-  String toString() {
-    return 'CourseResponseModel(data: ${data?.map((course) => course.toString()).join(', ')})';
-  }
 }
-
 class CourseInfo {
   int? id;
   String? name;
@@ -44,11 +55,16 @@ class CourseInfo {
   String? language;
   int? payment;
   String? createdAt;
+  String? mode;
   String? updatedAt;
   int? ratePoint;
-  String?introduction;
+  String? introduction;
+  String? categoryName;
   String? gradeName;
+  int? gradeId;
+  int? categoryId;
   int? isStandard;
+  List<String>? tags;
 
   CourseInfo(
       {this.id,
@@ -60,26 +76,37 @@ class CourseInfo {
         this.language,
         this.payment,
         this.createdAt,
+        this.mode,
         this.updatedAt,
-        this.introduction,
         this.ratePoint,
+        this.introduction,
+        this.categoryName,
         this.gradeName,
-        this.isStandard});
+        this.gradeId,
+        this.categoryId,
+        this.isStandard,
+        this.tags});
+
   CourseInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    image = json['image']??"";
+    image = json['image'];
     producerName = json['producer_name'];
     totalLectures = json['total_lectures'];
     totalSubjects = json['total_subjects'];
     language = json['language'];
     payment = json['payment'];
     createdAt = json['created_at'];
+    mode = json['mode'];
     updatedAt = json['updated_at'];
     ratePoint = json['rate_point'];
     introduction = json['introduction'];
+    categoryName = json['category_name'];
     gradeName = json['grade_name'];
+    gradeId = json['grade_id'];
+    categoryId = json['category_id'];
     isStandard = json['is_standard'];
+    tags = json['tags'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
@@ -93,11 +120,16 @@ class CourseInfo {
     data['language'] = language;
     data['payment'] = payment;
     data['created_at'] = createdAt;
+    data['mode'] = mode;
     data['updated_at'] = updatedAt;
     data['rate_point'] = ratePoint;
     data['introduction'] = introduction;
+    data['category_name'] = categoryName;
     data['grade_name'] = gradeName;
+    data['grade_id'] = gradeId;
+    data['category_id'] = categoryId;
     data['is_standard'] = isStandard;
+    data['tags'] = tags;
     return data;
   }
 }

@@ -30,7 +30,7 @@ class ApiName {
   ///course 
   final String createCourse = "/create-course";
   final String updateCourse = "/update-course";
-  final String getCourseList = "/get-course-list";
+  final String getCourseList = "/filter-courses";
   final String getMyCourses = "/get-my-courses";
   final String getCourseDetail = "/get-course-detail";
   final String deleteCourse = "/delete-course";

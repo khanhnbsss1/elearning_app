@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_custom_pagination/flutter_custom_pagination.dart';
 import 'package:flutter_pagination/flutter_pagination.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/widgets/course_item.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
@@ -81,7 +83,7 @@ class _CourseListState extends State<CourseList>
                   //     : Dimens.size300;
 
                   for (CourseInfo courseInfo
-                      in state.courseResponseModel?.data ?? []) {
+                      in state.courseResponseModel?.content ?? []) {
                     listOfCourse.add(CourseItemGridView(
                       courseInfo: courseInfo,
                     ));
@@ -123,8 +125,7 @@ class _CourseListState extends State<CourseList>
                                 style: MyTextStyle.bodyMedium(),
                                 decoration: InputDecoration(
                                     hintText: "search",
-                                    hintStyle:
-                                        MyTextStyle.bodySmall(xMuted: true),
+                                    hintStyle: MyTextStyle.bodySmall(xMuted: true),
                                     border: outlineInputBorder,
                                     enabledBorder: outlineInputBorder,
                                     focusedBorder: focusedInputBorder,
@@ -163,35 +164,37 @@ class _CourseListState extends State<CourseList>
                                   itemBuilder: (_, index) {
                                     return listOfCourse[index];
                                     },
-                                  itemCount: state.courseResponseModel?.data?.length,
+                                  itemCount: state.courseResponseModel?.content?.length,
                                   // shrinkWrap: true,
                                 ),
                               )
                             : CircularProgressIndicator(),
                       ),
                       SizedBox(height: 8,),
-                      PaginationWidget()
-                      // Expanded(
-                      //   child: Padding(
-                      //     padding: EdgeInsets.all(16),
-                      //     child: SingleChildScrollView(
-                      //       scrollDirection: Axis.vertical,
-                      //       child: Column(
-                      //         children: [
-                      //           for (int i = 0; i < gridViewItemColumnCount; i += 1)
-                      //             Row(
-                      //               children: [
-                      //                 for (int j = 0; j < gridViewItemRowCount; j++)
-                      //                   if (i * 4 + j < state.courseResponseModel!.data!.length)
-                      //                     listOfCourse[i*4+j]
-                      //                 else SizedBox(),
-                      //               ],
-                      //             ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ),
-                      // )
+                      FlutterCustomPagination(
+                        key: GlobalKey(debugLabel: (state.courseResponseModel?.total??0).toString()),
+                        currentPage: state.courseResponseModel!.getCurrentPage(),
+                        limitPerPage: state.courseResponseModel!.getTotalPage(),
+                        totalDataCount: state.courseResponseModel!.getTotalPage(),
+                        onPreviousPage: (p0) {
+                         // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                        },
+                        onBackToFirstPage: (p0) {
+                         // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                        },
+                        onNextPage: (p0) {
+                         // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                        },
+                        onGoToLastPage: (p0) {
+                         // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                        },
+                        backgroundColor: ColorConst.whiteColor,
+                        textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                        previousPageIcon: Icons.keyboard_arrow_left,
+                        backToFirstPageIcon: Icons.first_page,
+                        nextPageIcon: Icons.keyboard_arrow_right,
+                        goToLastPageIcon: Icons.last_page,
+                      ),
                     ],
                   );
                 },

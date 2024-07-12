@@ -80,94 +80,90 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     FetchPixels(context);
     ColorConst.setColorByFlavorType();
-    return Consumer<AppNotifier>(
-      builder: (_, notifier, ___) {
-        return BlocConsumer<MainBloc, MainState>(
-          listener: (context, state) {
-            switch(state.mainStatus){
-
-              case MainStatus.initial:
-
-                break;
-              case MainStatus.onchangeLanguage:
-                state.mainStatus = MainStatus.unKnown;
-                break;
-              case MainStatus.unKnown:
-                break;
-              case MainStatus.onEnableDarkMode:
-              // TODO: Handle this case.
-                ColorConst.setColorByFlavorType();
-                state.mainStatus = MainStatus.unKnown;
-                break;
-            }
+    return BlocConsumer<MainBloc, MainState>(
+      listener: (context, state) {
+        switch(state.mainStatus){
+    
+          case MainStatus.initial:
+    
+            break;
+          case MainStatus.onchangeLanguage:
+            state.mainStatus = MainStatus.unKnown;
+            break;
+          case MainStatus.unKnown:
+            break;
+          case MainStatus.onEnableDarkMode:
+          // TODO: Handle this case.
+            ColorConst.setColorByFlavorType();
+            state.mainStatus = MainStatus.unKnown;
+            break;
+        }
+      },
+      builder: (BuildContext context, state)  {
+        return GetMaterialApp(
+          key: UniqueKey(),
+          scrollBehavior: ScrollConfiguration.of(context).copyWith(
+            scrollbars: false,
+            dragDevices: {
+              PointerDeviceKind.touch,
+              PointerDeviceKind.mouse,
+            },
+          ),
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: ThemeCustomizer.instance.theme,
+          navigatorKey: NavigationService.navigatorKey,
+          initialRoute: Routes.dashboardRoute,
+          getPages: getPageRoute(),
+          routingCallback: (value) {
+            /// call back moi lan chuyen page url
+            print(value);
           },
-          builder: (BuildContext context, state)  {
-            return Consumer<AppNotifier>(
-              builder: (_, notifier, ___) {
-                return GetMaterialApp(
-                  key: UniqueKey(),
-                  scrollBehavior: ScrollConfiguration.of(context).copyWith(
-                    scrollbars: false,
-                    dragDevices: {
-                      PointerDeviceKind.touch,
-                      PointerDeviceKind.mouse,
-                    },
-                  ),
-                  debugShowCheckedModeBanner: false,
-                  theme: AppTheme.lightTheme,
-                  darkTheme: AppTheme.darkTheme,
-                  themeMode: ThemeCustomizer.instance.theme,
-                  navigatorKey: NavigationService.navigatorKey,
-                  initialRoute: Routes.dashboardRoute,
-                  getPages: getPageRoute(),
-                  routingCallback: (value) {
-                    /// call back moi lan chuyen page url
-                    print(value);
-                  },
-                  builder: (context, child) {
-                    ScreenUtil.init(context);
-                    ResponsiveInfo().init(context);
-                    NavigationService.registerContext(context, update: true);
-                    return Directionality(
-                      textDirection: AppTheme.textDirection,
-                      child: Overlay(
-                        initialEntries: [
-                          OverlayEntry(builder: (context) {
-                            return SelectionArea (
-                                selectionControls: materialTextSelectionControls,
-                                child: child ?? Container());
-                          })
-                        ],
-                      ),
-                    );
-
-                  },
-                  localizationsDelegates: const [
-                    S.delegate,
-                    L10nX.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                  supportedLocales: LanguageHelper().supportedLanguages
-                      .map((language) => (language.scripCode==null)?Locale(language.languageCode!, language.country!):
-                  Locale.fromSubtags(languageCode: language.languageCode!, countryCode: language.country!,scriptCode: language.scripCode) )
-                      .toList(),
-                  locale: LanguageHelper().getCurrentLocale(),
-                  localeResolutionCallback: (locale, supportedLocales) {
-                    for (var supportedLocale in supportedLocales) {
-                      if (supportedLocale.languageCode == locale?.languageCode &&
-                          supportedLocale.countryCode == locale?.countryCode) {
-                        return supportedLocale;
-                      }
-                    }
-                    return supportedLocales.first;
-                  },
-                  // home: ButtonsPage(),
-                );
-              },
+          builder: (context, child) {
+            ScreenUtil.init(context);
+            ResponsiveInfo().init(context);
+            NavigationService.registerContext(context, update: true);
+            return Directionality(
+              textDirection: AppTheme.textDirection,
+              child: Overlay(
+                initialEntries: [
+                  OverlayEntry(builder: (context) {
+                    return Consumer<AppNotifier>(
+                        builder: (_, notifier, ___) {
+                          return SelectionArea (
+                            key: UniqueKey(),
+                            selectionControls: materialTextSelectionControls,
+                            child: child ?? Container());
+                        });
+                  })
+                ],
+              ),
             );
+            
           },
+          localizationsDelegates: const [
+            S.delegate,
+            L10nX.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: LanguageHelper().supportedLanguages
+              .map((language) => (language.scripCode==null)?Locale(language.languageCode!, language.country!):
+          Locale.fromSubtags(languageCode: language.languageCode!, countryCode: language.country!,scriptCode: language.scripCode) )
+              .toList(),
+          locale: LanguageHelper().getCurrentLocale(),
+          localeResolutionCallback: (locale, supportedLocales) {
+            for (var supportedLocale in supportedLocales) {
+              if (supportedLocale.languageCode == locale?.languageCode &&
+                  supportedLocale.countryCode == locale?.countryCode) {
+                return supportedLocale;
+              }
+            }
+            return supportedLocales.first;
+          },
+          // home: ButtonsPage(),
         );
       },
     );

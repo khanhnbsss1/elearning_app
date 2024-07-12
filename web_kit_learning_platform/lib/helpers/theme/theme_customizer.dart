@@ -61,12 +61,11 @@ class ThemeCustomizer {
     AdminTheme.setTheme();
     AppStyle.changeMyTheme();
     if (NavigationService.globalContext != null) {
-      Provider.of<AppNotifier>(NavigationService.globalContext!, listen: false)
-          .updateTheme(instance);
+      Provider.of<AppNotifier>(NavigationService.globalContext!, listen: false).updateTheme(instance);
     }
-    for (var value in _notifier) {
+/*    for (var value in _notifier) {
       value(oldInstance, instance);
-    }
+    }*/
   }
 
   static void notify() {

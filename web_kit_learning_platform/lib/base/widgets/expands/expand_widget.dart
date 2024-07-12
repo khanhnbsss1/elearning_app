@@ -94,105 +94,111 @@ class ExpandWidgetState extends State<ExpandWidget>with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-   return Container(
-     decoration: BoxDecoration(
-       color: widget.expandColor??ColorConst.whiteColor,
-       borderRadius: BorderRadius.circular(widget.radius!)
-     ),
+   return Material(
+     elevation: 3,
+     color: widget.expandColor??ColorConst.whiteColor,
+     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.radius!),),
+     child: Container(
+       decoration: BoxDecoration(
+         color: widget.expandColor??ColorConst.whiteColor,
+         borderRadius: BorderRadius.circular(widget.radius!),
+         //border: Border.all(color: ColorConst.colorHintTextSearch)
+       ),
+       
+       child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              color: widget.expandColor,
+              alignment: Alignment.centerLeft,
+              child: InkWell(
+                onTap: () {
+                  if(widget.enableExpand==true)
+                    {
+                      setState(() {
+                        _isExpand= !_isExpand;
+                        _runExpandCheck();
+                      });
+                    }
      
-     child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            color: widget.expandColor,
-            alignment: Alignment.centerLeft,
-            child: InkWell(
-              onTap: () {
-                if(widget.enableExpand==true)
-                  {
-                    setState(() {
-                      _isExpand= !_isExpand;
-                      _runExpandCheck();
-                    });
-                  }
-
-              },
-              child: Padding(
-                padding: widget.paddingHeader?? EdgeInsets.symmetric(horizontal: Dimens.size8, vertical: Dimens.size8),
-                child: Container(
-                  constraints: BoxConstraints(
-                    minHeight: Dimens.size35,
-                  ),
-                  decoration: BoxDecoration(
-                    gradient: widget.titleGradient != null ? LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment(0.8, 1),
-                      colors: <Color>[
-                        widget.titleGradient![0],
-                        widget.titleGradient![1],
-                      ], // Gradient from https://learnui.design/tools/gradient-generator.html
-                      tileMode: TileMode.mirror,
-                    ) : null,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Text(
-                            widget.title??"",
-                            textAlign: widget.textAlignTitle??TextAlign.start,
-                            style: widget.titleStyle!,
-                        ),
-                      ),
-                      Visibility(
-                        visible: widget.enableExpand??true,
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: InkWell(
-                            onTap: (){
-                              setState(() {
-                                _isExpand= !_isExpand;
-                                _runExpandCheck();
-                              });
-                            },
-                            child: Icon(
-                              _isExpand?Icons.arrow_drop_down_sharp:Icons.arrow_drop_up_outlined,
-                              size: Dimens.size25,
-                              color: ColorConst.greyColor,),
+                },
+                child: Padding(
+                  padding: widget.paddingHeader?? EdgeInsets.symmetric(horizontal: Dimens.size8, vertical: Dimens.size8),
+                  child: Container(
+                    constraints: BoxConstraints(
+                      minHeight: Dimens.size35,
+                    ),
+                    decoration: BoxDecoration(
+                      gradient: widget.titleGradient != null ? LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment(0.8, 1),
+                        colors: <Color>[
+                          widget.titleGradient![0],
+                          widget.titleGradient![1],
+                        ], // Gradient from https://learnui.design/tools/gradient-generator.html
+                        tileMode: TileMode.mirror,
+                      ) : null,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Text(
+                              widget.title??"",
+                              textAlign: widget.textAlignTitle??TextAlign.start,
+                              style: widget.titleStyle!,
                           ),
                         ),
-                      )
-                    ],
+                        Visibility(
+                          visible: widget.enableExpand??true,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: InkWell(
+                              onTap: (){
+                                setState(() {
+                                  _isExpand= !_isExpand;
+                                  _runExpandCheck();
+                                });
+                              },
+                              child: Icon(
+                                _isExpand?Icons.arrow_drop_down_sharp:Icons.arrow_drop_up_outlined,
+                                size: Dimens.size25,
+                                color: ColorConst.greyColor,),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          SizeTransition(
-            axisAlignment: 1.0,
-            sizeFactor: animation,
-            child: Container(
-              color: widget.expandColor,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Visibility(
-                    visible: widget.enableDivider??false,
-                    child: Divider(color: widget.dividerColor??ColorConst.greyColor.withOpacity(0.5),),
-                  ),
-                  Padding(
-                    padding: widget.paddingChild??EdgeInsets.symmetric(horizontal: Dimens.size8, vertical: Dimens.size8),
-                    child: widget.child??const SizedBox.shrink(),
-                  ),
-                ],
+            SizeTransition(
+              axisAlignment: 1.0,
+              sizeFactor: animation,
+              child: Container(
+                color: widget.expandColor,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Visibility(
+                      visible: widget.enableDivider??false,
+                      child: Divider(color: widget.dividerColor??ColorConst.greyColor.withOpacity(0.5),),
+                    ),
+                    Padding(
+                      padding: widget.paddingChild??EdgeInsets.symmetric(horizontal: Dimens.size8, vertical: Dimens.size8),
+                      child: widget.child??const SizedBox.shrink(),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
+     ),
    );
   }
 

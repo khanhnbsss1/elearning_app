@@ -42,14 +42,13 @@ class LeftbarObserver {
 class LeftBar extends StatefulWidget {
   final bool isCondensed;
 
-  const LeftBar({Key? key, this.isCondensed = false}) : super(key: key);
+  const LeftBar({super.key, this.isCondensed = false});
 
   @override
   _LeftBarState createState() => _LeftBarState();
 }
 
-class _LeftBarState extends State<LeftBar>
-    with SingleTickerProviderStateMixin, UIMixin {
+class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, UIMixin {
   final ThemeCustomizer customizer = ThemeCustomizer.instance;
 
   bool isCondensed = false;
@@ -925,12 +924,11 @@ class NavigationItem extends StatefulWidget {
   final String? route;
 
   const NavigationItem(
-      {Key? key,
+      {super.key,
       this.iconData,
       required this.title,
       this.isCondensed = false,
-      this.route})
-      : super(key: key);
+      this.route});
 
   @override
   _NavigationItemState createState() => _NavigationItemState();
