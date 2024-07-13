@@ -1,13 +1,13 @@
-class CourseFiltterListInfo {
-  List<CourseFiltterInfo>? data;
+class CourseFilterListInfo {
+  List<CourseFilterInfo>? data;
 
-  CourseFiltterListInfo({this.data});
+  CourseFilterListInfo({this.data});
 
-  CourseFiltterListInfo.fromJson(Map<String, dynamic> json) {
+  CourseFilterListInfo.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = <CourseFiltterInfo>[];
+      data = <CourseFilterInfo>[];
       json['data'].forEach((v) {
-        data!.add(new CourseFiltterInfo.fromJson(v));
+        data!.add(new CourseFilterInfo.fromJson(v));
       });
     }
   }
@@ -21,22 +21,22 @@ class CourseFiltterListInfo {
   }
 }
 
-class CourseFiltterInfo {
+class CourseFilterInfo {
   int? id;
-  String? filtterType;
+  String? filterType;
   String? name;
-  List<SubFiltter>? subFiltter;
+  List<SubFilter>? subFilter;
 
-  CourseFiltterInfo({this.id, this.filtterType, this.name, this.subFiltter});
+  CourseFilterInfo({this.id, this.filterType, this.name, this.subFilter});
 
-  CourseFiltterInfo.fromJson(Map<String, dynamic> json) {
+  CourseFilterInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    filtterType = json['filtterType'];
+    filterType = json['filterType'];
     name = json['name'];
-    if (json['sub_filtter'] != null) {
-      subFiltter = <SubFiltter>[];
-      json['sub_filtter'].forEach((v) {
-        subFiltter!.add(new SubFiltter.fromJson(v));
+    if (json['sub_filter'] != null) {
+      subFilter = <SubFilter>[];
+      json['sub_filter'].forEach((v) {
+        subFilter!.add(new SubFilter.fromJson(v));
       });
     }
   }
@@ -44,24 +44,24 @@ class CourseFiltterInfo {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['filtterType'] = filtterType;
+    data['filterType'] = filterType;
     data['name'] = name;
-    if (this.subFiltter != null) {
-      data['sub_filtter'] = subFiltter!.map((v) => v.toJson()).toList();
+    if (subFilter != null) {
+      data['sub_filter'] = subFilter!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class SubFiltter {
+class SubFilter {
   int? id;
   String? language;
   String? gradeName;
   String? name;
 
-  SubFiltter({this.id, this.language, this.gradeName, this.name});
+  SubFilter({this.id, this.language, this.gradeName, this.name});
 
-  SubFiltter.fromJson(Map<String, dynamic> json) {
+  SubFilter.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     language = json['language'];
     gradeName = json['grade_name'];

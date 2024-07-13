@@ -16,7 +16,7 @@ enum CourseDetailAction{
 class CourseDetailApi extends BaseApiRequest {
   CourseDetailApi():super(
     serviceType: SERVICE_TYPE.COURSE,
-    apiName: ApiName.getInstance().getCourseList,
+    apiName: ApiName.getInstance().getCourseDetail,
   );
 
   Future<dynamic> call() async {
@@ -25,11 +25,11 @@ class CourseDetailApi extends BaseApiRequest {
 
     if(result.runtimeType == ResponseCommon)
     {
-      return CourseResponseModel(data: []);
+      return CourseResponseModel(content: []);
     }
     else
     {
-      CourseResponseModel paymentHistoryResponseModel = CourseResponseModel.fromJsonList(result);
+      CourseResponseModel paymentHistoryResponseModel = CourseResponseModel.fromJson(result);
       return paymentHistoryResponseModel;
     }
   }

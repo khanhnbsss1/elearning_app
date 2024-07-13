@@ -121,10 +121,8 @@ class _ListBodyCommonState extends State<ListBodyCommon> {
               SizedBox(
                 width: Dimens.size20,
                 height: Dimens.size20,
-                child: Image.asset(
-                    ImageManager().getPngImagePath(ImageManager.ic_resize),
-                  color: widget.expandIconColor,
-                ),
+                child: Transform.rotate(angle: 90,
+                child: Icon(Icons.drag_handle_outlined, color: widget.expandIconColor,)),
               ),
               Container(
                 width: Dimens.size5,

@@ -2,11 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/static_view/static_view.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
+import 'package:webkit/controller/ui/landing_controller.dart';
 import 'package:webkit/helpers/localizations/language_helper.dart';
+import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/landing_page/components/review_list/review_list.dart';
@@ -32,7 +35,7 @@ class LandingPageScreen extends StatefulWidget {
   State<LandingPageScreen> createState() => _LandingPageScreenState();
 }
 
-class _LandingPageScreenState extends State<LandingPageScreen> {
+class _LandingPageScreenState extends State<LandingPageScreen>  with SingleTickerProviderStateMixin, UIMixin{
   late ColorNotifier notifier;
   SampleItem? selectedMenu;
 
@@ -122,7 +125,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
 
-    if (width < 550) {
+    if (ResponsiveInfo.isPhone()) {
       return buildMobile(context);
     } else {
       return buildDesktop(context);
@@ -162,9 +165,12 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
     );
   }
   final ScrollController _mainController = ScrollController();
+  late LandingController controller;
+
   @override
   void initState() {
     super.initState();
+    controller = Get.put(LandingController(this));
     _mainController.addListener(() {
       if (_mainController.offset > 300) {
         if(showCardModel.showCard==false)
@@ -188,122 +194,127 @@ class _LandingPageScreenState extends State<LandingPageScreen> {
       children: [
         CustomChildScrollView(
           controller: _mainController,
-          child: Column(
-            children:  [
-                SizedBox(
-                  key: GlobalObjectKey(0),
-                ),
-                (width > 550) ? buildTabBar(constraints: constraints) : SizedBox(),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: constraints.maxWidth < 760
-                        ? 10
-                        : constraints.maxWidth < 1000
-                        ? 0
-                        : constraints.maxWidth / 15,
-                    vertical: 10,
+          child: GetBuilder(
+            init: controller,
+            builder: (GetxController controller) {
+              return Column(
+                children:  [
+                  SizedBox(
+                    key: GlobalObjectKey(0),
                   ),
-                  child: SizedBox(
-                    width: width / 1,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Stack(
-                        clipBehavior: Clip.none,
-                        children: [
-                          constraints.maxWidth < 800
-                              ? Image.asset('assets/deshboard/winterlandscape.png',
-                              height: constraints.maxWidth < 500 ? 250 : 400,
-                              width: constraints.maxWidth,
-                              fit: BoxFit.fill)
-                              : Image.asset('assets/deshboard/winterlandscape.png',
-                              height: 600,
-                              width: constraints.maxWidth,
-                              fit: BoxFit.fill),
-                        ],
+                  (width > 550) ? buildTabBar(constraints: constraints) : SizedBox(),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: constraints.maxWidth < 760
+                          ? 10
+                          : constraints.maxWidth < 1000
+                          ? 0
+                          : constraints.maxWidth / 15,
+                      vertical: 10,
+                    ),
+                    child: SizedBox(
+                      width: width / 1,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            constraints.maxWidth < 800
+                                ? Image.asset('assets/deshboard/winterlandscape.png',
+                                height: constraints.maxWidth < 500 ? 250 : 400,
+                                width: constraints.maxWidth,
+                                fit: BoxFit.fill)
+                                : Image.asset('assets/deshboard/winterlandscape.png',
+                                height: 600,
+                                width: constraints.maxWidth,
+                                fit: BoxFit.fill),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(height: 20,),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-                child: Divider(
-                  color: Colors.black12,
-                ),
-              ),
-                SizedBox(
-                  key: GlobalObjectKey(1),
-                  height: width < 550 ? 10 : 100,
-                ),
-                buildDifferentListWidget(constraints: constraints),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-                child: Divider(
-                  color: Colors.black12,
-                ),
-              ),
-                SizedBox(
-                  key: GlobalObjectKey(2),
-                  height: width < 550 ? 10 : 100,
-                ),
-                const WhoThisCourseIsFor(),
-                SizedBox(
-                  key: GlobalObjectKey(3),
-                  height: width < 550 ? 10 : 100,
-                ),
-                const TeacherList(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-                child: Divider(
-                  color: Colors.black12,
-                ),
-              ),
-                SizedBox(
-                  key: GlobalObjectKey(4),
-                  height: width < 550 ? 10 : 100,
-                ),
-                const LandingPageCourseList(),
-                SizedBox(
-                  key: GlobalObjectKey(5),
-                  height: width < 550 ? 10 : 100,
-                ),
-                ReviewList(
-                  //key: UniqueKey(),
-                  typeName: UserTypeName.teacher,
-                ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-                child: Divider(
-                  color: Colors.black12,
-                ),
-              ),
-                SizedBox(
-                  key: GlobalObjectKey(6),
-                  height: width < 550 ? 50 : 100,
-                ),
-                buildWhyChooseUsListWidget(constraints: constraints),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-                child: Divider(
-                  color: Colors.black12,
-                ),
-              ),
-                SizedBox(
-                  key: GlobalObjectKey(7),
-                  height: width < 550 ? 10 : 100,
-                ),
-                ReviewList(
-                  // key: UniqueKey(),
-                  typeName: UserTypeName.user,
-                ),
-                Divider(
-                  color: notifier.isDark
-                      ? notifier.subgreycolor
-                      : notifier.sugestionbutton,
-                ),
-                SizedBox(height: 30,),
-                EndOfPage(),
-              ],
+                  SizedBox(height: 20,),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+                    child: Divider(
+                      color: Colors.black12,
+                    ),
+                  ),
+                  SizedBox(
+                    key: GlobalObjectKey(1),
+                    height: width < 550 ? 10 : 100,
+                  ),
+                  buildDifferentListWidget(constraints: constraints),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+                    child: Divider(
+                      color: Colors.black12,
+                    ),
+                  ),
+                  SizedBox(
+                    key: GlobalObjectKey(2),
+                    height: width < 550 ? 10 : 100,
+                  ),
+                  const WhoThisCourseIsFor(),
+                  SizedBox(
+                    key: GlobalObjectKey(3),
+                    height: width < 550 ? 10 : 100,
+                  ),
+                  const TeacherList(),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+                    child: Divider(
+                      color: Colors.black12,
+                    ),
+                  ),
+                  SizedBox(
+                    key: GlobalObjectKey(4),
+                    height: width < 550 ? 10 : 100,
+                  ),
+                  const LandingPageCourseList(),
+                  SizedBox(
+                    key: GlobalObjectKey(5),
+                    height: width < 550 ? 10 : 100,
+                  ),
+                  ReviewList(
+                    //key: UniqueKey(),
+                    typeName: UserTypeName.teacher,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+                    child: Divider(
+                      color: Colors.black12,
+                    ),
+                  ),
+                  SizedBox(
+                    key: GlobalObjectKey(6),
+                    height: width < 550 ? 50 : 100,
+                  ),
+                  buildWhyChooseUsListWidget(constraints: constraints),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+                    child: Divider(
+                      color: Colors.black12,
+                    ),
+                  ),
+                  SizedBox(
+                    key: GlobalObjectKey(7),
+                    height: width < 550 ? 10 : 100,
+                  ),
+                  ReviewList(
+                    // key: UniqueKey(),
+                    typeName: UserTypeName.user,
+                  ),
+                  Divider(
+                    color: notifier.isDark
+                        ? notifier.subgreycolor
+                        : notifier.sugestionbutton,
+                  ),
+                  SizedBox(height: 30,),
+                  EndOfPage(),
+                ],
+              );
+            },
           ),
         ),
           Positioned(

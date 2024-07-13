@@ -1,21 +1,20 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/device/device_manager.dart';
-import 'package:webkit/base/widgets/common/alert_dialog/NotifyDialog.dart';
-import 'package:webkit/routes/app_pages.dart';
 import 'package:webkit/services/apis/auth/login/models/login_response.dart';
 import 'BaseResponseAPI.dart';
 import 'EnumCommon.dart';
 import 'dio_client.dart';
 import 'internet_checker_handler.dart';
 import 'models/response_error_objects.dart';
-
+export  'package:webkit/base/services/base_request/EnumCommon.dart';
+export 'package:webkit/base/services/base_request/apiName.dart';
+export 'package:webkit/base/services/base_request/models/response_error_objects.dart';
 class BaseApiRequest {
   Map<String, dynamic>? paramsAdd = HashMap(); // Is a HashMap
   Map<String, dynamic>? requestHeader = HashMap(); // Is a HashMap
