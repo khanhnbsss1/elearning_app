@@ -1,0 +1,81 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "fzyzcjy",
+      "name": "fzyzcjy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5236035?v=4",
+      "profile": "https://github.com/fzyzcjy",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas"
+      ]
+    },
+    {
+      "login": "Hixie",
+      "name": "Ian Hickson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/551196?v=4",
+      "profile": "http://ln.hixie.ch/",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "dnfield",
+      "name": "Dan Field",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8620741?v=4",
+      "profile": "https://github.com/dnfield",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "jonahwilliams",
+      "name": "Jonah Williams",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8975114?v=4",
+      "profile": "https://github.com/jonahwilliams",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "gaaclarke",
+      "name": "gaaclarke",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30870216?v=4",
+      "profile": "https://github.com/gaaclarke",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "Nayuta403",
+      "name": "Nayuta403",
+      "avatar_url": "https://avatars.githubusercontent.com/u/40540394?v=4",
+      "profile": "https://juejin.cn/user/4309694831660711",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "pajlada",
+      "name": "pajlada",
+      "avatar_url": "https://avatars.githubusercontent.com/u/962989?v=4",
+      "profile": "https://pajlada.se/",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "flutter_smooth",
+  "projectOwner": "fzyzcjy"
+}

@@ -1,0 +1,28 @@
+name: smooth_dev
+description: A new Flutter package project.
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: '>=2.18.0 <3.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  clock: ^1.0.0
+  collection: ^1.16.0
+  convenient_test_dev:
+    path: /Users/tom/RefCode/flutter_convenient_test/packages/convenient_test_dev
+  flutter:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+  image: ^3.2.0
+  smooth: ^0.0.1
+  test_api: ^0.4.2
+
+dev_dependencies:
+  lint: ^1.10.0
+
+dependency_overrides:
+  smooth:
+    path: ../smooth
