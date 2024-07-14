@@ -104,8 +104,12 @@ dependencies:
     git:
       url: https://github.com/scopendo/flutter_rounded_loading_button.git
       ref: master
-      
-#  for landing homepage: 
+#  smooth:
+#    git:
+#      url: https://github.com/fzyzcjy/flutter_smooth.git
+#      ref: master
+#      path: packages/smooth
+  #  for landing homepage:
   flutter_spinkit: ^5.2.1
   toggle_switch: ^2.3.0
   flutter_switch: ^0.3.2

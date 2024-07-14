@@ -35,7 +35,7 @@ class LandingPageScreen extends StatefulWidget {
   State<LandingPageScreen> createState() => _LandingPageScreenState();
 }
 
-class _LandingPageScreenState extends State<LandingPageScreen>  with SingleTickerProviderStateMixin, UIMixin{
+class _LandingPageScreenState extends State<LandingPageScreen>  with SingleTickerProviderStateMixin, UIMixin, AutomaticKeepAliveClientMixin{
   late ColorNotifier notifier;
   SampleItem? selectedMenu;
 
@@ -68,32 +68,6 @@ class _LandingPageScreenState extends State<LandingPageScreen>  with SingleTicke
     const Color(0xFF58C27D)
   ];
 
-  List profilemenuImages = [
-    'assets/Icons/ticketIcon.svg',
-    'assets/Icons/heartIcon.svg',
-    'assets/Icons/messageIcon.svg',
-    'assets/Icons/teacherIcon.svg',
-    'assets/Icons/flagIcon.svg',
-    'assets/Icons/securityuserIcon.svg'
-  ];
-  List profilemenuImagesDark = [
-    'assets/Icons/ticketIconDark.svg',
-    'assets/Icons/heartIconDark.svg',
-    'assets/Icons/messageIconDark.svg',
-    'assets/Icons/teacherIconDark.svg',
-    'assets/Icons/flagIconDark.svg',
-    'assets/Icons/securityuserIconDark.svg'
-  ];
-  List profilemenuTags = [
-    'Booking',
-    'Wishlist',
-    'Message',
-    'Host your home',
-    'Host an experience',
-    'Help'
-  ];
-  List notNumber = ['2', '4', '6', '', '', ''];
-
   bool buttonhover = false;
   bool supportHover = false;
 
@@ -119,6 +93,8 @@ class _LandingPageScreenState extends State<LandingPageScreen>  with SingleTicke
   ];
 
   ShowCardModel showCardModel = ShowCardModel();
+  final ScrollController _mainController = ScrollController();
+  List<Widget>listWiget= [];
   @override
   Widget build(BuildContext context) {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
@@ -164,13 +140,10 @@ class _LandingPageScreenState extends State<LandingPageScreen>  with SingleTicke
       )),
     );
   }
-  final ScrollController _mainController = ScrollController();
-  //late LandingController controller;
-  List<Widget>listWiget= [];
+
   @override
   void initState() {
     super.initState();
-    //controller = Get.put(LandingController(this));
     _mainController.addListener(() {
       if (_mainController.offset > 300) {
         if(showCardModel.showCard==false)
@@ -310,139 +283,12 @@ class _LandingPageScreenState extends State<LandingPageScreen>  with SingleTicke
       }
     return Stack(
       children: [
-        ListView.builder(
+        SingleChildScrollView(
           controller: _mainController,
-        itemCount: listWiget.length,
-          shrinkWrap: true,
-          cacheExtent: 2000,
-          itemBuilder: (context, index) {
-          return listWiget.elementAt(index);
-        },),
-       /* CustomChildScrollView(
-          controller: _mainController,
-          child: GetBuilder(
-            init: controller,
-            builder: (GetxController controller) {
-              return Column(
-                children:  [
-                  SizedBox(
-                    key: GlobalObjectKey(0),
-                  ),
-                  (width > 550) ? buildTabBar(constraints: constraints) : SizedBox(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: constraints.maxWidth < 760
-                          ? 10
-                          : constraints.maxWidth < 1000
-                          ? 0
-                          : constraints.maxWidth / 15,
-                      vertical: 10,
-                    ),
-                    child: SizedBox(
-                      width: width / 1,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            constraints.maxWidth < 800
-                                ? Image.asset('assets/deshboard/winterlandscape.png',
-                                height: constraints.maxWidth < 500 ? 250 : 400,
-                                width: constraints.maxWidth,
-                                fit: BoxFit.fill)
-                                : Image.asset('assets/deshboard/winterlandscape.png',
-                                height: 600,
-                                width: constraints.maxWidth,
-                                fit: BoxFit.fill),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 20,),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-                    child: Divider(
-                      color: Colors.black12,
-                    ),
-                  ),
-                  SizedBox(
-                    key: GlobalObjectKey(1),
-                    height: width < 550 ? 10 : 100,
-                  ),
-                  buildDifferentListWidget(constraints: constraints),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-                    child: Divider(
-                      color: Colors.black12,
-                    ),
-                  ),
-                  SizedBox(
-                    key: GlobalObjectKey(2),
-                    height: width < 550 ? 10 : 100,
-                  ),
-                  const WhoThisCourseIsFor(),
-                  SizedBox(
-                    key: GlobalObjectKey(3),
-                    height: width < 550 ? 10 : 100,
-                  ),
-                  const TeacherList(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-                    child: Divider(
-                      color: Colors.black12,
-                    ),
-                  ),
-                  SizedBox(
-                    key: GlobalObjectKey(4),
-                    height: width < 550 ? 10 : 100,
-                  ),
-                  const LandingPageCourseList(),
-                  SizedBox(
-                    key: GlobalObjectKey(5),
-                    height: width < 550 ? 10 : 100,
-                  ),
-                  ReviewList(
-                    //key: UniqueKey(),
-                    typeName: UserTypeName.teacher,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-                    child: Divider(
-                      color: Colors.black12,
-                    ),
-                  ),
-                  SizedBox(
-                    key: GlobalObjectKey(6),
-                    height: width < 550 ? 50 : 100,
-                  ),
-                  buildWhyChooseUsListWidget(constraints: constraints),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-                    child: Divider(
-                      color: Colors.black12,
-                    ),
-                  ),
-                  SizedBox(
-                    key: GlobalObjectKey(7),
-                    height: width < 550 ? 10 : 100,
-                  ),
-                  ReviewList(
-                    // key: UniqueKey(),
-                    typeName: UserTypeName.user,
-                  ),
-                  Divider(
-                    color: notifier.isDark
-                        ? notifier.subgreycolor
-                        : notifier.sugestionbutton,
-                  ),
-                  SizedBox(height: 30,),
-                  EndOfPage(),
-                ],
-              );
-            },
+          child: Column(
+            children:  listWiget,
           ),
-        ),*/
+        ),
         Positioned(
           right: 20,
           bottom: 20,
@@ -1691,6 +1537,10 @@ class _LandingPageScreenState extends State<LandingPageScreen>  with SingleTicke
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
 
 class lottieAnim {

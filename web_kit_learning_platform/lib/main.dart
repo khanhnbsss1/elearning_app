@@ -31,6 +31,7 @@ import '../../base/theme/text_stype_constant.dart';
 import 'landing_page/components/colornotifier.dart';
 
 Future<void> main() async {
+  //SmoothWidgetsFlutterBinding.ensureInitialized(); // add this line
   WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
   await FlavorSettings().setProductTypeByFlavor();

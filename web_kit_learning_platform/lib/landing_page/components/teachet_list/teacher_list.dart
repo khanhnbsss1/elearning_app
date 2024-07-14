@@ -18,7 +18,7 @@ class TeacherList extends StatefulWidget {
   State<TeacherList> createState() => _TeacherListState();
 }
 
-class _TeacherListState extends State<TeacherList> {
+class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClientMixin{
   bool isHover = false;
   bool isHover2 = false;
 
@@ -332,4 +332,8 @@ class _TeacherListState extends State<TeacherList> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

@@ -20,7 +20,7 @@ class LandingPageCourseList extends StatefulWidget {
   State<LandingPageCourseList> createState() => _LandingPageCourseListState();
 }
 
-class _LandingPageCourseListState extends State<LandingPageCourseList> {
+class _LandingPageCourseListState extends State<LandingPageCourseList> with AutomaticKeepAliveClientMixin{
   int b = 9;
   bool scrollHover = false;
   bool scrollHover2 = false;
@@ -225,57 +225,17 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> {
                     ),
                   ],
                 ),
-                // SizedBox(
-                //   height: constraints.maxWidth / 25,
-                // ),
-                // Center(
-                //   child: InkWell(
-                //     onTap: () {},
-                //     onHover: (value) {
-                //       setState(() {
-                //         isHover = value;
-                //       });
-                //     },
-                //     child: AnimatedContainer(
-                //       duration: const Duration(milliseconds: 200),
-                //       height: 40,
-                //       width: 100,
-                //       decoration: BoxDecoration(
-                //         color: isHover
-                //             ? (notifier.isDark
-                //                 ? const Color(0xFF777E90)
-                //                 : notifier.blackcolor)
-                //             : Colors.transparent,
-                //         border: Border.all(
-                //             color: isHover
-                //                 ? Colors.transparent
-                //                 : (notifier.isDark
-                //                     ? const Color(0xFF777E90)
-                //                     : Colors.grey.shade300),
-                //             width: 2),
-                //         borderRadius: BorderRadius.circular(16),
-                //       ),
-                //       alignment: Alignment.center,
-                //       child: Text(
-                //         'View all',
-                //         style: baseStyle.copyWith(
-                //             fontSize: 14,
-                //             fontWeight: FontWeight.w500,
-                //             
-                //             color: isHover
-                //                 ? (notifier.isDark
-                //                     ? const Color(0xFFFFFFFF)
-                //                     : notifier.whitecolor)
-                //                 : notifier.blackcolor),
-                //       ),
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),
         ),
       ],
     );
+  }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive {
+    return true;
   }
 }
