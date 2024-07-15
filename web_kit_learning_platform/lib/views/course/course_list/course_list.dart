@@ -149,51 +149,56 @@ class _CourseListState extends State<CourseList>
                           ],
                         ),
                       ),
-                      Expanded(
-                        child: (listOfCourse.isNotEmpty)
-                            ? Padding(
+                      (listOfCourse.isEmpty) ? CircularProgressIndicator() : Expanded(
+                        child: Padding(
                                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                child: GridView.builder(
-                                  shrinkWrap: true,
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: width < 550 ? 1 : width < 850 ? 2 : width < 1150 ? 3 : 4,
-                                          crossAxisSpacing: 16,
-                                          mainAxisSpacing: 16,
-                                          childAspectRatio: 5 / 6),
-                                  itemBuilder: (_, index) {
-                                    return listOfCourse[index];
-                                    },
-                                  itemCount: state.courseResponseModel?.content?.length,
-                                  // shrinkWrap: true,
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.vertical,
+                                  child: Column(
+                                      children: [
+                                        GridView.builder(
+                                          shrinkWrap: true,
+                                          gridDelegate:
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: width < 550 ? 1 : width < 850 ? 2 : width < 1150 ? 3 : 4,
+                                                  crossAxisSpacing: 16,
+                                                  mainAxisSpacing: 16,
+                                                  childAspectRatio: 5 / 6),
+                                          itemBuilder: (_, index) {
+                                            return listOfCourse[index];
+                                            },
+                                          itemCount: state.courseResponseModel?.content?.length,
+                                          // shrinkWrap: true,
+                                        ),
+                                        SizedBox(height: 8,),
+                                        (state.courseResponseModel!.getTotalPage() > 1) ? FlutterCustomPagination(
+                                          key: GlobalKey(debugLabel: (state.courseResponseModel?.total??0).toString()),
+                                          currentPage: state.courseResponseModel!.getCurrentPage(),
+                                          limitPerPage: state.courseResponseModel!.getTotalPage(),
+                                          totalDataCount: state.courseResponseModel!.getTotalPage(),
+                                          onPreviousPage: (p0) {
+                                            // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                                          },
+                                          onBackToFirstPage: (p0) {
+                                            // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                                          },
+                                          onNextPage: (p0) {
+                                            // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                                          },
+                                          onGoToLastPage: (p0) {
+                                            // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                                          },
+                                          backgroundColor: ColorConst.whiteColor,
+                                          textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                                          previousPageIcon: Icons.keyboard_arrow_left,
+                                          backToFirstPageIcon: Icons.first_page,
+                                          nextPageIcon: Icons.keyboard_arrow_right,
+                                          goToLastPageIcon: Icons.last_page,
+                                        ) : SizedBox(),
+                                      ],
+                                    ),
                                 ),
                               )
-                            : CircularProgressIndicator(),
-                      ),
-                      SizedBox(height: 8,),
-                      FlutterCustomPagination(
-                        key: GlobalKey(debugLabel: (state.courseResponseModel?.total??0).toString()),
-                        currentPage: state.courseResponseModel!.getCurrentPage(),
-                        limitPerPage: state.courseResponseModel!.getTotalPage(),
-                        totalDataCount: state.courseResponseModel!.getTotalPage(),
-                        onPreviousPage: (p0) {
-                         // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
-                        },
-                        onBackToFirstPage: (p0) {
-                         // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
-                        },
-                        onNextPage: (p0) {
-                         // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
-                        },
-                        onGoToLastPage: (p0) {
-                         // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
-                        },
-                        backgroundColor: ColorConst.whiteColor,
-                        textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
-                        previousPageIcon: Icons.keyboard_arrow_left,
-                        backToFirstPageIcon: Icons.first_page,
-                        nextPageIcon: Icons.keyboard_arrow_right,
-                        goToLastPageIcon: Icons.last_page,
                       ),
                     ],
                   );
@@ -204,47 +209,3 @@ class _CourseListState extends State<CourseList>
     );
   }
 }
-
-class PaginationWidget extends StatefulWidget {
-  const PaginationWidget({super.key});
-
-  @override
-  State<PaginationWidget> createState() => _PaginationWidgetState();
-}
-
-class _PaginationWidgetState extends State<PaginationWidget> {
-  int? page = 1;
-  bool isSelected = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 0,
-      children: List<Widget>.generate(10,
-            (int index) {
-          return Padding(
-            padding: const EdgeInsets.only(right: 4.0),
-            child: SizedBox(
-              height: 30,
-                width: 30,
-              child: FloatingActionButton(
-                mini: true,
-                  shape: CircleBorder(
-                    side: BorderSide(style: BorderStyle.solid)),
-                  foregroundColor: isSelected? Colors.white : Colors.black,
-                  backgroundColor: isSelected? Colors.blue : Colors.grey, // change text color
-                onPressed: () {
-                  setState(() {
-                    isSelected =!isSelected;
-                  });
-                },
-                child: Text('${index + 1}'),
-              ),
-            ),
-          );
-        },
-      ).toList(),
-    );
-  }
-}
-

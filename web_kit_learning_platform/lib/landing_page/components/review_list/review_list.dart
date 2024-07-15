@@ -18,7 +18,7 @@ import 'bloc/review_list_bloc.dart';
 class ReviewList extends StatefulWidget {
   ReviewList({super.key, required this.typeName});
 
-  UserTypeName typeName;
+  final UserTypeName typeName;
 
   @override
   State<ReviewList> createState() => _ReviewListState();
@@ -311,7 +311,7 @@ class _ReviewListState extends State<ReviewList> {
                               child: Text(reviewLandingPageInfo.position ?? "",
                                   style: baseStyle.copyWith(
 
-                                    fontSize: (constraints.maxWidth / 70 > 10) ? constraints.maxWidth / 72 : 10,
+                                    fontSize: (constraints.maxWidth / 60 > 10) ? constraints.maxWidth / 60 : 10,
                                     color: notifier.greycolor,
                                   ),
                                   textAlign: TextAlign.center),
@@ -327,7 +327,7 @@ class _ReviewListState extends State<ReviewList> {
                               constraints: BoxConstraints(maxHeight: constraints.maxWidth / 2),
                               child: SingleChildScrollView(
                                 child: ReadMoreText(
-                                  ("\"${reviewLandingPageInfo.review!}\" ") * 10?? "",
+                                  ("\"${(reviewLandingPageInfo.review!+" ") * 10}\" ")?? "",
                                   trimMode: TrimMode.Line,
                                   trimLines: 2,
                                   colorClickableText: Colors.pink,
@@ -335,12 +335,10 @@ class _ReviewListState extends State<ReviewList> {
                                   trimExpandedText: L10nX.getStr.show_less,
                                   style: baseStyle.copyWith(
                                     fontStyle: FontStyle.italic,
-                                    fontSize: (constraints.maxWidth / 20 > 12) ? constraints.maxWidth / 20 : 12,
+                                    fontSize: (constraints.maxWidth / 25 > 16) ? constraints.maxWidth / 25 : 16,
                                     color: notifier.blackcolor,
                                   ),
-                                  textAlign: constraints.maxWidth < 550
-                                      ? TextAlign.center
-                                      : TextAlign.start,
+                                  textAlign: TextAlign.justify,
                                 ),
                               ),
                             );

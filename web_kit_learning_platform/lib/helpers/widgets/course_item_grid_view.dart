@@ -61,17 +61,18 @@ class CourseItemGridView extends StatelessWidget {
                       )),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      (courseInfo.image!.isNotEmpty)
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: Image.network(
-                                courseInfo.image!,
-                                fit: BoxFit.fill,
-                                // width: constraints.maxWidth * 0.5,
-                                // height: imageHeight * 2 / 4
-                              ),
-                            )
-                          : ClipRRect(
+                      // (courseInfo.image!.isNotEmpty)
+                      //     ? ClipRRect(
+                      //         borderRadius: BorderRadius.circular(16),
+                      //         child: Image.network(
+                      //           courseInfo.image!,
+                      //           fit: BoxFit.fill,
+                      //           // width: constraints.maxWidth * 0.5,
+                      //           // height: imageHeight * 2 / 4
+                      //         ),
+                      //       )
+                      //     :
+                      ClipRRect(
                               borderRadius: BorderRadius.circular(16),
                               child: Image.network(
                                   'assets/deshboard/adventure/adventure5.png',

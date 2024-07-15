@@ -85,16 +85,6 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
     'Số 26 Đường 57A, phường Tân Tạo, Quận Bình Tân, TPHCM'
   ];
 
-  List<String> landingPageTitles = [
-    'Trang chủ',
-    'Phương pháp',
-    'Thành tựu',
-    'Đối tượng',
-    'Giảng viên',
-    'Khóa học',
-    'Cảm nhận'
-  ];
-
   List<bool> elementsHover = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
 
   @override
@@ -689,14 +679,11 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                           itemCount: contacts.length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
-                            return SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: buildContactInfoItem(
-                                  textColor: Colors.white,
-                                  contacts: contacts[index],
-                                  icon: contactsImage[index]
+                            return buildContactInfoItem(
+                                textColor: Colors.white,
+                                contacts: contacts[index],
+                                icon: contactsImage[index]
 
-                              ),
                             );
                           },
                         ),
@@ -784,16 +771,17 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
     return Row(
       children: [
         SvgPicture.asset(icon,
-            height: 20),
+            height: 20, color: Colors.white,),
         const SizedBox(width: 10),
-        SizedBox(
-          width: (width > 550) ? (width - 60) * 3/11 - 90 : width ,
-          child: Text(contacts,
-            style: baseStyle.copyWith(
-                overflow: TextOverflow.ellipsis,
-                color: textColor,
-                fontSize: 16),
-            maxLines: 2,),
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Text(contacts,
+              style: baseStyle.copyWith(
+                  color: textColor,
+                  fontSize: 16),
+              maxLines: 2,),
+          ),
         ),
         const SizedBox(width: 20),
       ],

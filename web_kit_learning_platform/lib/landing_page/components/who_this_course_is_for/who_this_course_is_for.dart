@@ -10,15 +10,10 @@ import '../../../l10n/l10n_extention.dart';
 import '../../mediaquery/mq.dart';
 import '../colornotifier.dart';
 
-class WhoThisCourseIsFor extends StatefulWidget {
-  const WhoThisCourseIsFor({super.key});
+class WhoThisCourseIsFor extends StatelessWidget {
 
-  @override
-  State<WhoThisCourseIsFor> createState() => _WhoThisCourseIsForState();
-}
-
-class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
   late ColorNotifier notifier;
+
   final double splitScreenWidth = 1050;
 
   @override
@@ -33,7 +28,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
           gradient: LinearGradient(
               begin: Alignment.center,
               end: Alignment.bottomCenter,
-              colors: [
+              colors: const [
                 Colors.white,
                 Color.fromRGBO(246, 122, 122, 1.0),
                   ]
@@ -619,14 +614,14 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                     ),
                     (constraints.maxWidth > splitScreenWidth)
                         ? Positioned(
-                            top: width < 1100 ? height / 2.1 : height / 1.6,
+                            bottom: width < 1100 ? height / 12.1 : height / 18.6,
                             left: width < 900
                                 ? width / 7
                                 : width < 1100
                                     ? width / 8.5
                                     : width < 1300
-                                        ? width / 9
-                                        : width / 10,
+                                        ? width / 20
+                                        : width / 20,
                             child: avatarAndComment())
                         : SizedBox(),
                   ],
@@ -719,14 +714,14 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
     ) : Container(
       height: width < 1100
           ? height / 3
-          : width > 1600
+          : width < 1600
           ? height / 4
           : height / 5,
-      width: width < 1000
+      width: width < 1100
           ? width / 4.5
-          : width > 1600
-          ? width / 4.25
-          : width / 4.0,
+          : width < 1600
+          ? width / 3.5
+          : width / 3.75,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
@@ -749,7 +744,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor> {
                 overflow: TextOverflow.ellipsis,
                 style: baseStyle.copyWith(
                   fontSize: width / 75,
-                  
+
                   fontWeight: FontWeight.bold,
                   color: notifier.textcolor,
                 ),
