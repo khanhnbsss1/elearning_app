@@ -125,7 +125,8 @@ class MyApp extends StatelessWidget {
             ScreenUtil.init(context);
             ResponsiveInfo().init(context);
             NavigationService.registerContext(context, update: true);
-            return Directionality(
+           return child ?? Container();
+/*            return Directionality(
               textDirection: AppTheme.textDirection,
               child: Overlay(
                 initialEntries: [
@@ -140,7 +141,7 @@ class MyApp extends StatelessWidget {
                   })
                 ],
               ),
-            );
+            );*/
             
           },
           localizationsDelegates: const [

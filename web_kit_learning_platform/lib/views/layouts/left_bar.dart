@@ -152,7 +152,60 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       ),
                     ],
                   ),
-                  
+                  //-----------------Danh sach giao vien-----------------//
+                  MenuWidget(
+                    iconData: Icons.people,
+                    isCondensed: isCondensed,
+                    title: L10nX.getStr.teacher_str,
+                    children: [
+                      MenuItem(
+                        title: L10nX.getStr.teacher_list,
+                        route:  Routes.calenderRoute,
+                        isCondensed: widget.isCondensed,
+                      ),
+                      MenuItem(
+                        title: L10nX.getStr.create_teacher,
+                        route:  Routes.calenderRoute,
+                        isCondensed: widget.isCondensed,
+                      ),
+                    ],
+                  ),
+                  //-----------------Danh sach hoc viên-----------------//
+                  MenuWidget(
+                    iconData: Icons.people,
+                    isCondensed: isCondensed,
+                    title: L10nX.getStr.student_str,
+                    children: [
+                      MenuItem(
+                        title: L10nX.getStr.student_list,
+                        route:  Routes.calenderRoute,
+                        isCondensed: widget.isCondensed,
+                      ),
+                      MenuItem(
+                        title: L10nX.getStr.create_student,
+                        route:  Routes.calenderRoute,
+                        isCondensed: widget.isCondensed,
+                      ),
+                    ],
+                  ),
+                  //-----------------Danh sach hoc liệu-----------------//
+                  MenuWidget(
+                    iconData: Icons.library_books_rounded,
+                    isCondensed: isCondensed,
+                    title: L10nX.getStr.document_str,
+                    children: [
+                      MenuItem(
+                        title: L10nX.getStr.document_list,
+                        route:  Routes.calenderRoute,
+                        isCondensed: widget.isCondensed,
+                      ),
+                      MenuItem(
+                        title: L10nX.getStr.create_document,
+                        route:  Routes.calenderRoute,
+                        isCondensed: widget.isCondensed,
+                      ),
+                    ],
+                  ),
                   //-----------------CALENDAR-----------------//
                   NavigationItem(
                     iconData: LucideIcons.calendarDays,
