@@ -93,8 +93,9 @@ class _LandingPageScreenState extends State<LandingPageScreen>  with SingleTicke
   ];
 
   ShowCardModel showCardModel = ShowCardModel();
-  final ScrollController _mainController = ScrollController();
+  ScrollController _mainController = ScrollController();
   List<Widget>listWiget= [];
+  late double oldWidth=0;
   @override
   Widget build(BuildContext context) {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
@@ -163,124 +164,126 @@ class _LandingPageScreenState extends State<LandingPageScreen>  with SingleTicke
   Widget appbarleft(constraints) {
     double width = MediaQuery.of(context).size.width;
     double itemCardWidth = (width < 1100) ? 90 : 140;
-    if(listWiget.isEmpty)
-      {
-        listWiget.addAll({
-          SizedBox(
-            key: GlobalObjectKey(0),
+    if(oldWidth!= width || listWiget.isEmpty)
+    {
+      oldWidth = width;
+      listWiget.clear();
+      listWiget.addAll({
+        SizedBox(
+          key: GlobalObjectKey(0),
+        ),
+        (width > 550) ? buildTabBar(constraints: constraints) : SizedBox(),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: constraints.maxWidth < 760
+                ? 10
+                : constraints.maxWidth < 1000
+                ? 0
+                : constraints.maxWidth / 15,
+            vertical: 10,
           ),
-          (width > 550) ? buildTabBar(constraints: constraints) : SizedBox(),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: constraints.maxWidth < 760
-                  ? 10
-                  : constraints.maxWidth < 1000
-                  ? 0
-                  : constraints.maxWidth / 15,
-              vertical: 10,
-            ),
-            child: SizedBox(
-              width: width / 1,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    constraints.maxWidth < 800
-                        ? Image.asset('assets/deshboard/winterlandscape.png',
-                        height: constraints.maxWidth < 500 ? 250 : 400,
-                        width: constraints.maxWidth,
-                        fit: BoxFit.fill)
-                        : Image.asset('assets/deshboard/winterlandscape.png',
-                        height: 600,
-                        width: constraints.maxWidth,
-                        fit: BoxFit.fill),
-                  ],
-                ),
+          child: SizedBox(
+            width: width / 1,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  ResponsiveInfo.isPhone()?
+                  Image.asset('assets/deshboard/winterlandscape.png',
+                      height: constraints.maxWidth < 500 ? 250 : 400,
+                      width: constraints.maxWidth,
+                      fit: BoxFit.cover)
+                      : Image.asset('assets/deshboard/winterlandscape.png',
+                      height: 600,
+                      width: constraints.maxWidth,
+                      fit: BoxFit.cover),
+                ],
               ),
             ),
           ),
-          SizedBox(height: 20,),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-            child: Divider(
-              color: Colors.black12,
-            ),
+        ),
+        SizedBox(height: 20,),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+          child: Divider(
+            color: Colors.black12,
           ),
-          SizedBox(
-            key: GlobalObjectKey(1),
-            height: width < 550 ? 10 : 100,
+        ),
+        SizedBox(
+          key: GlobalObjectKey(1),
+          height: width < 550 ? 10 : 100,
+        ),
+        buildDifferentListWidget(constraints: constraints),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+          child: Divider(
+            color: Colors.black12,
           ),
-          buildDifferentListWidget(constraints: constraints),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-            child: Divider(
-              color: Colors.black12,
-            ),
+        ),
+        SizedBox(
+          key: GlobalObjectKey(2),
+          height: width < 550 ? 10 : 100,
+        ),
+        WhoThisCourseIsFor(),
+        SizedBox(
+          key: GlobalObjectKey(3),
+          height: width < 550 ? 10 : 100,
+        ),
+        const TeacherList(),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+          child: Divider(
+            color: Colors.black12,
           ),
-          SizedBox(
-            key: GlobalObjectKey(2),
-            height: width < 550 ? 10 : 100,
+        ),
+        SizedBox(
+          key: GlobalObjectKey(4),
+          height: width < 550 ? 10 : 100,
+        ),
+        const LandingPageCourseList(),
+        SizedBox(
+          key: GlobalObjectKey(5),
+          height: width < 550 ? 10 : 100,
+        ),
+        ReviewList(
+          //key: UniqueKey(),
+          typeName: UserTypeName.teacher,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+          child: Divider(
+            color: Colors.black12,
           ),
-          const WhoThisCourseIsFor(),
-          SizedBox(
-            key: GlobalObjectKey(3),
-            height: width < 550 ? 10 : 100,
+        ),
+        SizedBox(
+          key: GlobalObjectKey(6),
+          height: width < 550 ? 50 : 100,
+        ),
+        buildWhyChooseUsListWidget(constraints: constraints),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+          child: Divider(
+            color: Colors.black12,
           ),
-          const TeacherList(),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-            child: Divider(
-              color: Colors.black12,
-            ),
-          ),
-          SizedBox(
-            key: GlobalObjectKey(4),
-            height: width < 550 ? 10 : 100,
-          ),
-          const LandingPageCourseList(),
-          SizedBox(
-            key: GlobalObjectKey(5),
-            height: width < 550 ? 10 : 100,
-          ),
-          ReviewList(
-            //key: UniqueKey(),
-            typeName: UserTypeName.teacher,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-            child: Divider(
-              color: Colors.black12,
-            ),
-          ),
-          SizedBox(
-            key: GlobalObjectKey(6),
-            height: width < 550 ? 50 : 100,
-          ),
-          buildWhyChooseUsListWidget(constraints: constraints),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: width * 1/4),
-            child: Divider(
-              color: Colors.black12,
-            ),
-          ),
-          SizedBox(
-            key: GlobalObjectKey(7),
-            height: width < 550 ? 10 : 100,
-          ),
-          ReviewList(
-            // key: UniqueKey(),
-            typeName: UserTypeName.user,
-          ),
-          Divider(
-            color: notifier.isDark
-                ? notifier.subgreycolor
-                : notifier.sugestionbutton,
-          ),
-          SizedBox(height: 30,),
-          EndOfPage(),
-        });
-      }
+        ),
+        SizedBox(
+          key: GlobalObjectKey(7),
+          height: width < 550 ? 10 : 100,
+        ),
+        ReviewList(
+          // key: UniqueKey(),
+          typeName: UserTypeName.user,
+        ),
+        Divider(
+          color: notifier.isDark
+              ? notifier.subgreycolor
+              : notifier.sugestionbutton,
+        ),
+        SizedBox(height: 30,),
+        EndOfPage(),
+      });
+    }
     return Stack(
       children: [
         SingleChildScrollView(

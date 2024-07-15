@@ -48,8 +48,8 @@ class CourseItem extends StatelessWidget{
               ),
               width: constraints.maxWidth / (3 + 0.3),
               // width: constraints.maxWidth / (state.courseListLandingPageResponseModel!.data!.length + 0.2),
-              height: (constraints.maxWidth < 550) ? constraints.maxWidth / 0.5 : (constraints.maxWidth < 1100)  ? constraints.maxWidth : (constraints.maxWidth < 1300) ? constraints.maxWidth / 1.7
-                  : constraints.maxWidth / 2,
+              /*height: (constraints.maxWidth < 550) ? constraints.maxWidth / 0.5 : (constraints.maxWidth < 1100)  ? constraints.maxWidth : (constraints.maxWidth < 1300) ? constraints.maxWidth / 1.7
+                  : constraints.maxWidth / 2,*/
               constraints: BoxConstraints(
                 // minHeight: (constraints.maxWidth < 550) ? 630 : (constraints.maxWidth < 1300) ? 750 : 1250,
                 maxHeight: (constraints.maxWidth < 550) ? 650 : (constraints.maxWidth < 1100)  ? 850 : (constraints.maxWidth < 1300) ? 900 : 1300,
@@ -82,9 +82,9 @@ class CourseItem extends StatelessWidget{
                         child: Image.network(
                           courseInfo
                               .image!,
-                          fit: BoxFit.fill,
-                          width: constraints.maxWidth * 2,
-                          // height: imageHeight * 2 / 4
+                          fit: BoxFit.cover,
+                          //width: constraints.maxWidth * 2, 
+                          //  height: constraints.maxWidth
                         ),
                       )
                           : ClipRRect(
@@ -94,12 +94,12 @@ class CourseItem extends StatelessWidget{
                             'assets/deshboard/adventure/adventure5.png',
                             fit: BoxFit.cover,
                             width: constraints.maxWidth,
-                            height: constraints.maxHeight),
+                            //height: constraints.maxHeight
+                        ),
                       ),
                       Column(
                         mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment:
-                        MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Column(
                             mainAxisAlignment:
@@ -160,198 +160,110 @@ class CourseItem extends StatelessWidget{
                             ),
                           ),
                           Gap(Dimens.size16),
-                          Table(
-                            columnWidths: {
-                              0: FlexColumnWidth(
-                                  constraints.maxWidth /
-                                      (3 + 0.3) *
-                                      0.1),
-                              1: FlexColumnWidth(
-                                  constraints.maxWidth /
-                                      (3 + 0.3) *
-                                      0.4),
-                              2: FlexColumnWidth(
-                                  constraints.maxWidth /
-                                      (3 + 0.3) *
-                                      0.5),
-                            },
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              TableRow(children: [
-                                Column(
-                                  children: [
-                                    Icon(Icons.check,
-                                        size: (constraints.maxWidth < 1100) ? Dimens.size16
-                                            :Dimens.size24,
-                                        color: Colors.red),
-                                  ],
-                                ),
-                                Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment
-                                        .start,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(Icons.check,
+                                            size: (constraints.maxWidth < 1100) ? Dimens.size16
+                                                :Dimens.size16,
+                                            color: Colors.red),
+                                        Gap(Dimens.size4),
+                                        Text('Số buổi học:',
+                                            style: TextStyleConstant
+                                                .textStyleBlack16w400
+                                                .copyWith(
+
+                                              fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
+                                                  :Dimens
+                                                  .size18,
+                                              color: notifier
+                                                  .isDark &&
+                                                  isHovered
+                                                  ? notifier
+                                                  .whitecolor
+                                                  : notifier.isDark &&
+                                                  !isHovered
+                                                  ? notifier
+                                                  .blackcolor
+                                                  : notifier
+                                                  .blackcolor,
+                                              fontWeight:
+                                              FontWeight
+                                                  .bold,
+                                            )),
+                                        Gap(Dimens.size4),
+                                      ]),
+                                  Gap(Dimens.size16),
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        Icon(Icons.check,
+                                            size: (constraints.maxWidth < 1100) ? Dimens.size16
+                                                :Dimens.size16,
+                                            color: Colors.red),
+                                        Gap(Dimens.size4),
+                                        Text('Giáo trình:',
+                                            style: TextStyleConstant
+                                                .textStyleBlack16w400
+                                                .copyWith(
+
+                                              fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
+                                                  :Dimens.size18,
+                                              color: notifier
+                                                  .isDark &&
+                                                  isHovered
+                                                  ? notifier
+                                                  .whitecolor
+                                                  : notifier.isDark &&
+                                                  !isHovered
+                                                  ? notifier
+                                                  .blackcolor
+                                                  : notifier
+                                                  .blackcolor,
+                                              fontWeight:
+                                              FontWeight
+                                                  .bold,
+                                            )),
+                                        Gap(Dimens.size4),
+                                      ]),
+                                  Gap(Dimens.size16),
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      Text('Số buổi học:',
-                                          style: TextStyleConstant
-                                              .textStyleBlack16w400
-                                              .copyWith(
-                                            
-                                            fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
-                                                :Dimens
-                                                .size18,
-                                            color: notifier
-                                                .isDark &&
-                                                isHovered
-                                                ? notifier
-                                                .whitecolor
-                                                : notifier.isDark &&
-                                                !isHovered
-                                                ? notifier
-                                                .blackcolor
-                                                : notifier
-                                                .blackcolor,
-                                            fontWeight:
-                                            FontWeight
-                                                .bold,
-                                          ))
-                                    ]),
-                                Column(
-                                  children: [
-                                    Text(
-                                      '${courseInfo.totalLectures}',
-                                      style: TextStyleConstant
-                                          .textStyleBlack12w400
-                                          .copyWith(
-                                        
-                                        fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
-                                            : Dimens.size18,
-                                        color: notifier
-                                            .isDark &&
-                                            isHovered
-                                            ? notifier
-                                            .whitecolor
-                                            : notifier.isDark &&
-                                            !isHovered
-                                            ? notifier
-                                            .blackcolor
-                                            : notifier
-                                            .blackcolor,
+                                      StarRating(
+                                        rating: (courseInfo
+                                            .ratePoint ??
+                                            0)
+                                            .toDouble(),
+                                        allowHalfRating: true,
+                                        onRatingChanged:
+                                            (rating) {},
                                       ),
-                                    )
-                                  ],
-                                )
-                              ]),
-                              TableRow(children: const [
-                                Column(
-                                  children: [
-                                    Text(''),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Text(''),
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Text(''),
-                                  ],
-                                ),
-                              ]),
-                              TableRow(children: [
-                                Column(
-                                  children: [
-                                    Icon(Icons.check,
-                                        size: (constraints.maxWidth < 1100) ? Dimens.size16
-                                            :Dimens.size20,
-                                        color: Colors.red),
-                                  ],
-                                ),
-                                Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment
-                                        .start,
-                                    children: [
-                                      Text('Giáo trình:',
-                                          style: TextStyleConstant
-                                              .textStyleBlack16w400
-                                              .copyWith(
-                                            
-                                            fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
-                                                :Dimens.size18,
-                                            color: notifier
-                                                .isDark &&
-                                                isHovered
-                                                ? notifier
-                                                .whitecolor
-                                                : notifier.isDark &&
-                                                !isHovered
-                                                ? notifier
-                                                .blackcolor
-                                                : notifier
-                                                .blackcolor,
-                                            fontWeight:
-                                            FontWeight
-                                                .bold,
-                                          ))
-                                    ]),
-                                Column(
-                                  children: [
-                                    Text(
-                                      'Emotional Chinese',
-                                      style: TextStyleConstant
-                                          .textStyleBlack12w400
-                                          .copyWith(
-                                        
-                                        fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
-                                            : Dimens.size18,
-                                        color: notifier
-                                            .isDark &&
-                                            isHovered
-                                            ? notifier
-                                            .whitecolor
-                                            : notifier.isDark &&
-                                            !isHovered
-                                            ? notifier
-                                            .blackcolor
-                                            : notifier
-                                            .blackcolor,
-                                      ),
-                                    )
-                                  ],
-                                )
-                              ]),
-                            ],
-                          ),
-                          (constraints.maxWidth < 550)  ? Gap(Dimens.size8) : Gap(Dimens.size24),
-                          SizedBox(
-                            width: double.infinity,
-                            child: Row(
-                              mainAxisAlignment:
-                              MainAxisAlignment
-                                  .spaceBetween,
-                              crossAxisAlignment:
-                              CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment
-                                      .center,
-                                  children: [
-                                    StarRating(
-                                      rating: (courseInfo
-                                          .ratePoint ??
-                                          0)
-                                          .toDouble(),
-                                      allowHalfRating: true,
-                                      onRatingChanged:
-                                          (rating) {},
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.attach_money,
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${courseInfo.totalLectures}',
+                                    style: TextStyleConstant
+                                        .textStyleBlack12w400
+                                        .copyWith(
+
+                                      fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
+                                          : Dimens.size18,
                                       color: notifier
                                           .isDark &&
                                           isHovered
@@ -364,73 +276,114 @@ class CourseItem extends StatelessWidget{
                                           : notifier
                                           .blackcolor,
                                     ),
-                                    Text(
-                                        NumberHelper()
-                                            .numberToString(
-                                            courseInfo
-                                                .payment,
-                                            decimalDigits:
-                                            0)
-                                            .trim(),
-                                        style: baseStyle.copyWith(
-                                            overflow: TextOverflow.ellipsis,
-                                            color: notifier
-                                                .isDark &&
-                                                isHovered
-                                                ? notifier
-                                                .whitecolor
-                                                : notifier.isDark &&
-                                                !isHovered
-                                                ? notifier
-                                                .blackcolor
-                                                : notifier
-                                                .blackcolor,
-                                            fontSize:  constraints.maxWidth < 550
-                                                ? constraints.maxWidth / 20
-                                                : constraints.maxWidth < 700
-                                                ? constraints.maxWidth / 35
-                                                : constraints.maxWidth < 900
-                                                ? constraints.maxWidth / 40
-                                                : constraints.maxWidth < 1100
-                                                ? constraints.maxWidth / 50
-                                                : constraints.maxWidth < 1300
-                                                ? constraints.maxWidth / 65
-                                                : constraints.maxWidth / 100)),
-                                    Text(
-                                        " (${L10nX.getStr.vnd_str})",
-                                        style: TextStyleConstant
-                                            .textStyleBlack16w400
-                                            .copyWith(
-                                            color: notifier
-                                                .isDark &&
-                                                isHovered
-                                                ? notifier
-                                                .whitecolor
-                                                : notifier.isDark &&
-                                                !isHovered
-                                                ? notifier
-                                                .blackcolor
-                                                : notifier
-                                                .blackcolor,
-                                            fontSize: constraints.maxWidth < 550
-                                                ? constraints.maxWidth / 30
-                                                : constraints.maxWidth < 700
-                                                ? constraints.maxWidth / 35
-                                                : constraints.maxWidth < 900
-                                                ? constraints.maxWidth / 45
-                                                : constraints.maxWidth < 1100
-                                                ? constraints.maxWidth / 60
-                                                : constraints.maxWidth < 1300
-                                                ? constraints.maxWidth / 80
-                                                : constraints.maxWidth / 110)),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                  ),
+                                  Gap(Dimens.size16),
+                                  Text(
+                                    'Emotional Chinese',
+                                    style: TextStyleConstant
+                                        .textStyleBlack12w400
+                                        .copyWith(
+
+                                      fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
+                                          : Dimens.size18,
+                                      color: notifier
+                                          .isDark &&
+                                          isHovered
+                                          ? notifier
+                                          .whitecolor
+                                          : notifier.isDark &&
+                                          !isHovered
+                                          ? notifier
+                                          .blackcolor
+                                          : notifier
+                                          .blackcolor,
+                                    ),
+                                  ),
+                                  Gap(Dimens.size16),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.attach_money,
+                                        color: notifier
+                                            .isDark &&
+                                            isHovered
+                                            ? notifier
+                                            .whitecolor
+                                            : notifier.isDark &&
+                                            !isHovered
+                                            ? notifier
+                                            .blackcolor
+                                            : notifier
+                                            .blackcolor,
+                                      ),
+                                      Text(
+                                          NumberHelper()
+                                              .numberToString(
+                                              courseInfo
+                                                  .payment,
+                                              decimalDigits:
+                                              0)
+                                              .trim(),
+                                          style: baseStyle.copyWith(
+                                              overflow: TextOverflow.ellipsis,
+                                              color: notifier
+                                                  .isDark &&
+                                                  isHovered
+                                                  ? notifier
+                                                  .whitecolor
+                                                  : notifier.isDark &&
+                                                  !isHovered
+                                                  ? notifier
+                                                  .blackcolor
+                                                  : notifier
+                                                  .blackcolor,
+                                              fontSize:  constraints.maxWidth < 550
+                                                  ? constraints.maxWidth / 20
+                                                  : constraints.maxWidth < 700
+                                                  ? constraints.maxWidth / 35
+                                                  : constraints.maxWidth < 900
+                                                  ? constraints.maxWidth / 40
+                                                  : constraints.maxWidth < 1100
+                                                  ? constraints.maxWidth / 50
+                                                  : constraints.maxWidth < 1300
+                                                  ? constraints.maxWidth / 65
+                                                  : constraints.maxWidth / 100)),
+                                      Text(
+                                          " (${L10nX.getStr.vnd_str})",
+                                          style: TextStyleConstant
+                                              .textStyleBlack16w400
+                                              .copyWith(
+                                              color: notifier
+                                                  .isDark &&
+                                                  isHovered
+                                                  ? notifier
+                                                  .whitecolor
+                                                  : notifier.isDark &&
+                                                  !isHovered
+                                                  ? notifier
+                                                  .blackcolor
+                                                  : notifier
+                                                  .blackcolor,
+                                              fontSize: constraints.maxWidth < 550
+                                                  ? constraints.maxWidth / 30
+                                                  : constraints.maxWidth < 700
+                                                  ? constraints.maxWidth / 35
+                                                  : constraints.maxWidth < 900
+                                                  ? constraints.maxWidth / 45
+                                                  : constraints.maxWidth < 1100
+                                                  ? constraints.maxWidth / 60
+                                                  : constraints.maxWidth < 1300
+                                                  ? constraints.maxWidth / 80
+                                                  : constraints.maxWidth / 110)),
+                                    ],
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
                         ],
                       ),
-                      Spacer(),
+                      Gap(Dimens.size16),
                       Padding(
                         padding:
                         EdgeInsets.all((constraints.maxWidth < 1100) ? Dimens.size4
