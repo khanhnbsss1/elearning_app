@@ -441,7 +441,14 @@
   "i_am_teacher": "Tôi là giáo viên",
 
   "video_player": "Trình phát video",
-  "youtube_player": "Trình phát Youtube"
-  
-  
+  "youtube_player": "Trình phát Youtube",
+  "teacher_str": "Giáo viên",
+  "student_str": "Học viên",
+  "student_list": "Danh sách học viên",
+  "create_student": "Tạo học viên",
+  "create_teacher": "Tạo giáo viên",
+  "document_str": "Tài Liệu",
+  "document_list": "Danh sách tài Liệu",
+  "create_document": "Tạo tài Liệu"
+
 }

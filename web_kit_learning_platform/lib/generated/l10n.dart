@@ -4429,6 +4429,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Teacher`
+  String get teacher_str {
+    return Intl.message(
+      'Teacher',
+      name: 'teacher_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Student`
+  String get student_str {
+    return Intl.message(
+      'Student',
+      name: 'student_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `List of students`
+  String get student_list {
+    return Intl.message(
+      'List of students',
+      name: 'student_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create student`
+  String get create_student {
+    return Intl.message(
+      'Create student',
+      name: 'create_student',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create teacher`
+  String get create_teacher {
+    return Intl.message(
+      'Create teacher',
+      name: 'create_teacher',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Document`
+  String get document_str {
+    return Intl.message(
+      'Document',
+      name: 'document_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `List of documents`
+  String get document_list {
+    return Intl.message(
+      'List of documents',
+      name: 'document_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Document`
+  String get create_document {
+    return Intl.message(
+      'Create Document',
+      name: 'create_document',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

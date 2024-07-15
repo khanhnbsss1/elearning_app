@@ -139,6 +139,9 @@ class _ReviewListState extends State<ReviewList> {
                         }
                         return Center(
                           child: Scrollbar(
+                            controller: scrollCont,
+                            thumbVisibility: false,
+                            trackVisibility: false,
                             child: SingleChildScrollView(
                               controller: scrollCont,
                               scrollDirection: Axis.horizontal,

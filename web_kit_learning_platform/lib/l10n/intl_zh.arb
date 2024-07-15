@@ -440,5 +440,13 @@
   "remember_me": "记住我",
   "i_am_teacher": "我是一名老师",
   "video_player": "视频播放器",
-  "youtube_player": "YouTube 播放器"
+  "youtube_player": "YouTube 播放器",
+  "teacher_str": "老师",
+  "student_str": "学生",
+  "student_list": "学生名单",
+  "create_student": "创建学生",
+  "create_teacher": "创建教师",
+  "document_str": "文档",
+  "document_list": "文档列表",
+  "create_document": "创建文档"
 }

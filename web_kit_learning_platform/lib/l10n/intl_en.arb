@@ -440,5 +440,13 @@
   "remember_me": "Remember Me",
   "i_am_teacher": "I am a teacher",
   "video_player": "Video player",
-  "youtube_player": "Youtube player"
+  "youtube_player": "Youtube player",
+  "teacher_str": "Teacher",
+  "student_str": "Student",
+  "student_list": "List of students",
+  "create_student": "Create student",
+  "create_teacher": "Create teacher",
+  "document_str": "Document",
+  "document_list": "List of documents",
+  "create_document": "Create Document"
 }
