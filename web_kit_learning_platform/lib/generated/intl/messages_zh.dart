@@ -102,7 +102,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("FFTSolution - 版权所有 2022"),
         "course_str": MessageLookupByLibrary.simpleMessage("课程"),
         "courses_list": MessageLookupByLibrary.simpleMessage("课程列表"),
+        "create_document": MessageLookupByLibrary.simpleMessage("创建文档"),
         "create_product": MessageLookupByLibrary.simpleMessage("创建产品"),
+        "create_student": MessageLookupByLibrary.simpleMessage("创建学生"),
+        "create_teacher": MessageLookupByLibrary.simpleMessage("创建教师"),
         "created_at": MessageLookupByLibrary.simpleMessage("创建时间"),
         "custom_indicator": MessageLookupByLibrary.simpleMessage("自定义指标"),
         "customers": MessageLookupByLibrary.simpleMessage("客户"),
@@ -125,6 +128,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("差异"),
         "differences_in_teaching_methods_3":
             MessageLookupByLibrary.simpleMessage(""),
+        "document_list": MessageLookupByLibrary.simpleMessage("文档列表"),
+        "document_str": MessageLookupByLibrary.simpleMessage("文档"),
         "doughnut_chart": MessageLookupByLibrary.simpleMessage("环形图"),
         "download": MessageLookupByLibrary.simpleMessage("下载"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("电子商务"),
@@ -387,7 +392,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("没有旧数据"),
         "string_notify": MessageLookupByLibrary.simpleMessage("通知"),
         "string_time_setting": MessageLookupByLibrary.simpleMessage("时间设置"),
+        "student_list": MessageLookupByLibrary.simpleMessage("学生名单"),
         "student_review_list_str": MessageLookupByLibrary.simpleMessage("学生感言"),
+        "student_str": MessageLookupByLibrary.simpleMessage("学生"),
         "style_guide": MessageLookupByLibrary.simpleMessage("样式指南"),
         "subcribe_to_our_news_letter":
             MessageLookupByLibrary.simpleMessage("订阅我们的新闻通讯"),
@@ -409,6 +416,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "target": MessageLookupByLibrary.simpleMessage("目标"),
         "teacher_list": MessageLookupByLibrary.simpleMessage("教师列表"),
         "teacher_review_list_str": MessageLookupByLibrary.simpleMessage("专家点评"),
+        "teacher_str": MessageLookupByLibrary.simpleMessage("老师"),
         "teachers_teach_the_most":
             MessageLookupByLibrary.simpleMessage("教得最多的老师"),
         "terms_conditions": MessageLookupByLibrary.simpleMessage("条款和条件"),

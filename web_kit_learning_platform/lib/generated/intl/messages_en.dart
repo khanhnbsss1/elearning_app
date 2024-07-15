@@ -110,8 +110,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "FFTSolution - Copyright 2022"),
         "course_str": MessageLookupByLibrary.simpleMessage("Course"),
         "courses_list": MessageLookupByLibrary.simpleMessage("Course list"),
+        "create_document":
+            MessageLookupByLibrary.simpleMessage("Create Document"),
         "create_product":
             MessageLookupByLibrary.simpleMessage("Create product"),
+        "create_student":
+            MessageLookupByLibrary.simpleMessage("Create student"),
+        "create_teacher":
+            MessageLookupByLibrary.simpleMessage("Create teacher"),
         "created_at": MessageLookupByLibrary.simpleMessage("Created at"),
         "custom_indicator":
             MessageLookupByLibrary.simpleMessage("Custom indicator"),
@@ -136,6 +142,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Differences"),
         "differences_in_teaching_methods_3":
             MessageLookupByLibrary.simpleMessage(" in teaching methods"),
+        "document_list":
+            MessageLookupByLibrary.simpleMessage("List of documents"),
+        "document_str": MessageLookupByLibrary.simpleMessage("Document"),
         "doughnut_chart":
             MessageLookupByLibrary.simpleMessage("Doughnut chart"),
         "download": MessageLookupByLibrary.simpleMessage("Download"),
@@ -450,8 +459,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "string_payment": MessageLookupByLibrary.simpleMessage("Payment"),
         "string_time_setting":
             MessageLookupByLibrary.simpleMessage("Time setting"),
+        "student_list":
+            MessageLookupByLibrary.simpleMessage("List of students"),
         "student_review_list_str":
             MessageLookupByLibrary.simpleMessage("Students comments"),
+        "student_str": MessageLookupByLibrary.simpleMessage("Student"),
         "style_guide": MessageLookupByLibrary.simpleMessage("Style guide"),
         "subcribe_to_our_news_letter":
             MessageLookupByLibrary.simpleMessage("Subcribe to our newsletter"),
@@ -476,6 +488,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "teacher_list": MessageLookupByLibrary.simpleMessage(" Teacher list"),
         "teacher_review_list_str":
             MessageLookupByLibrary.simpleMessage("Expert comments"),
+        "teacher_str": MessageLookupByLibrary.simpleMessage("Teacher"),
         "teachers_teach_the_most":
             MessageLookupByLibrary.simpleMessage("Teachers who teach the most"),
         "terms_conditions":

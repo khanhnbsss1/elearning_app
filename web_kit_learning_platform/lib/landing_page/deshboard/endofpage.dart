@@ -167,48 +167,6 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                                         ),
                                       ],
                                     ),
-                                    // const SizedBox(
-                                    //   height: 20,
-                                    // ),
-                                    // Row(
-                                    //   crossAxisAlignment: CrossAxisAlignment.center,
-                                    //   children: [
-                                    //     Image.asset('assets/Icons/lightbulbicon.png',
-                                    //         height: 20, color: notifier.subgreycolor),
-                                    //     const SizedBox(
-                                    //       width: 7,
-                                    //     ),
-                                    //     Text(
-                                    //       L10nX.getStr.dark_theme,
-                                    //       style: baseStyle.copyWith(
-                                    //
-                                    //           fontSize: 14,
-                                    //           color: notifier.subgreycolor,
-                                    //           fontWeight: FontWeight.w600,
-                                    //           letterSpacing: 1),
-                                    //     ),
-                                    //     const SizedBox(
-                                    //       width: 7,
-                                    //     ),
-                                    //     SizedBox(
-                                    //       height: 29,
-                                    //       child: FlutterSwitch(
-                                    //         height: 23.0,
-                                    //         width: 45.0,
-                                    //         padding: 4.0,
-                                    //         toggleSize: 16.0,
-                                    //         borderRadius: 15.0,
-                                    //         inactiveToggleColor: notifier.buttoncolor,
-                                    //         activeColor: notifier.buttoncolor,
-                                    //         inactiveColor: notifier.sugestionbutton,
-                                    //         value: notifier.isDark,
-                                    //         onToggle: (bool value) {
-                                    //           notifier.isAvailable(value);
-                                    //         },
-                                    //       ),
-                                    //     ),
-                                    //   ],
-                                    // ),
                                   ],
                                 ),
                               ),
@@ -293,35 +251,6 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                             ],
                           ),
                           const SizedBox(),
-                          // Wrap(
-                          //   alignment: WrapAlignment.center,
-                          //   spacing: 20,
-                          //   children: List<Widget>.generate( 7,
-                          //         (int index) {
-                          //       return Container(
-                          //         width: 130,
-                          //         child: FloatingActionButton(
-                          //           hoverColor: Colors.grey,
-                          //           elevation: 0,
-                          //           foregroundColor: Colors.black,
-                          //           backgroundColor: Colors.white,
-                          //           // change text color
-                          //           onPressed: () {
-                          //             Scrollable.ensureVisible(
-                          //                 GlobalObjectKey(index).currentContext!,
-                          //                 duration: Duration(seconds: 1),
-                          //                 curve: Curves.easeInOutCubic);
-                          //           },
-                          //           child: Text(landingPageTitles[index], style: TextStyle(
-                          //             fontWeight: FontWeight.bold,
-                          //             fontSize: 20,
-                          //             decoration: TextDecoration.underline,
-                          //           ),),
-                          //         ),
-                          //       );
-                          //     },
-                          //   ).toList(),
-                          // ),
                         ],
                       ),
                       Divider(
@@ -334,21 +263,6 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                 Container(
                   color: notifier.redcolor,
                   child: Padding(
-                    // padding: const EdgeInsets.only(
-                    //     left: constraints.maxWidth < 500
-                    //         ? 10
-                    //         : constraints.maxWidth < 900
-                    //         ? constraints.maxWidth / 20
-                    //         : constraints.maxWidth < 1300
-                    //         ? constraints.maxWidth / 15
-                    //         : constraints.maxWidth / 8,
-                    //     right: constraints.maxWidth < 500
-                    //         ? 10
-                    //         : constraints.maxWidth < 900
-                    //         ? constraints.maxWidth / 20
-                    //         : constraints.maxWidth < 1300
-                    //         ? constraints.maxWidth / 15
-                    //         : constraints.maxWidth / 8),
                     padding: EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
