@@ -83,9 +83,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
     return Column(
       children: [
         Container(
-          width: constraints.maxWidth < 1300
-              ? constraints.maxWidth / 0.5
-              : constraints.maxWidth / 1.1,
+          width: constraints.maxWidth < 1300 ? constraints.maxWidth / 0.5 : constraints.maxWidth / 1.1,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               // color: notifier.isDark
@@ -95,138 +93,134 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                   color: notifier.isDark
                       ? notifier.sugestionbutton
                       : Colors.transparent)),
-          child: Padding(
-            padding: EdgeInsets.all(
-              constraints.maxWidth < 900 ? 20 : 40,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisSize: MainAxisSize.min,
-              children: [
-                Center(
-                  child: Text(L10nX.getStr.courses_list,
-                      style: TextStyleConstant
-                          .titleTextColorOnBackgroundColorStyle14w400
-                          .copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: constraints.maxWidth < 550 ? 28 : 45,
-                          color: notifier.blackcolor)),
-                ),
-                Center(
-                  child: Text(L10nX.getStr.register_to_enjoy_the_best_deals_for_you,
-                      textAlign: TextAlign.center,
-                      style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
-                          fontSize: constraints.maxWidth < 550 ? 18 : 20,
-                          color: Colors.black54)),
-                ),
-                SizedBox(
-                  height: constraints.maxWidth < 550 ? 10 : 20,
-                ),
-                Container(
-                  // height: constraints.maxWidth < 900 ? constraints.maxWidth / 0.152 : constraints.maxWidth < 1100 ? constraints.maxWidth / 0.66 : constraints.maxWidth < 1300 ? constraints.maxWidth / 1.35 : constraints.maxWidth / 1.8,
-                  width: constraints.maxWidth < 900
-                      ? constraints.maxWidth / 0.2
-                      : constraints.maxWidth < 1300
-                          ? constraints.maxWidth / 0.5
-                          : constraints.maxWidth / 1.2,
-                  child: LayoutBuilder(
-                    builder:
-                        (BuildContext context, BoxConstraints constraints) {
-                      List<Widget> listOfCourse = List.empty(growable: true);
-                      for (CourseInfo courseLandingPageInfo
-                          in state.courseListLandingPageResponseModel?.data ?? []) {
-                        listOfCourse.add(CourseItem(constraints: constraints, courseInfo: courseLandingPageInfo));
-                      }
-                      return Center(
-                        child: SingleChildScrollView(
-                          controller: scrollCont,
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: listOfCourse,
-                          ),
+          padding: EdgeInsets.all(
+            constraints.maxWidth < 900 ? 20 : 40,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Center(
+                child: Text(L10nX.getStr.courses_list,
+                    style: TextStyleConstant
+                        .titleTextColorOnBackgroundColorStyle14w400
+                        .copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                        color: notifier.blackcolor)),
+              ),
+              Center(
+                child: Text(L10nX.getStr.register_to_enjoy_the_best_deals_for_you,
+                    textAlign: TextAlign.center,
+                    style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
+                        fontSize: constraints.maxWidth < 550 ? 18 : 20,
+                        color: Colors.black54)),
+              ),
+              SizedBox(
+                height: constraints.maxWidth < 550 ? 10 : 20,
+              ),
+              Container(
+                // height: constraints.maxWidth < 900 ? constraints.maxWidth / 0.152 : constraints.maxWidth < 1100 ? constraints.maxWidth / 0.66 : constraints.maxWidth < 1300 ? constraints.maxWidth / 1.35 : constraints.maxWidth / 1.8,
+                width: constraints.maxWidth < 900
+                    ? constraints.maxWidth / 0.2
+                    : constraints.maxWidth < 1300
+                        ? constraints.maxWidth / 0.5
+                        : constraints.maxWidth / 1.2,
+                child: LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    List<Widget> listOfCourse = List.empty(growable: true);
+                    for (CourseInfo courseLandingPageInfo
+                        in state.courseListLandingPageResponseModel?.data ?? []) {
+                      listOfCourse.add(CourseItem(constraints: constraints, courseInfo: courseLandingPageInfo));
+                    }
+                    return Center(
+                      child: SingleChildScrollView(
+                        controller: scrollCont,
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: listOfCourse,
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
-                (constraints.maxWidth < 550) ? const SizedBox(height: 4) :const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                            width: 2,
-                            color: (scrollHover)
-                                ? notifier.sugestionbutton
-                                : Colors.transparent),
-                      ),
-                      child: InkWell(
-                          onTap: () {
-                            if (scrollCont.offset > 0) {
-                              scrollCont.animateTo(
-                                scrollCont.offset - 200,
-                                duration: const Duration(milliseconds: 200),
-                                curve: Curves.easeInOut,
-                              );
-                            }
-                          },
-                          onHover: (val) {
-                            setState(() {
-                              scrollHover = val;
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(13),
-                            child: Image.asset(
-                                'assets/Icons/arrowlefticon.png',
-                                width: 15,
-                                color: notifier.subgreycolor),
-                          )),
+              ),
+              (constraints.maxWidth < 550) ? const SizedBox(height: 4) :const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          width: 2,
+                          color: (scrollHover)
+                              ? notifier.sugestionbutton
+                              : Colors.transparent),
                     ),
-                    const SizedBox(width: 10),
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                            width: 2,
-                            color: (scrollHover2)
-                                ? notifier.sugestionbutton
-                                : Colors.transparent),
-                      ),
-                      child: InkWell(
-                          onTap: () {
-                            if (scrollCont.offset <
-                                scrollCont.position.maxScrollExtent) {
-                              scrollCont.animateTo(
-                                scrollCont.offset + 200,
-                                duration: const Duration(milliseconds: 200),
-                                curve: Curves.easeInOut,
-                              );
-                            }
-                          },
-                          onHover: (val) {
-                            setState(() {
-                              scrollHover2 = val;
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(13),
-                            child: Image.asset(
-                              'assets/Icons/arrowrighticon.png',
+                    child: InkWell(
+                        onTap: () {
+                          if (scrollCont.offset > 0) {
+                            scrollCont.animateTo(
+                              scrollCont.offset - 200,
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.easeInOut,
+                            );
+                          }
+                        },
+                        onHover: (val) {
+                          setState(() {
+                            scrollHover = val;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(13),
+                          child: Image.asset(
+                              'assets/Icons/arrowlefticon.png',
                               width: 15,
-                              color: notifier.subgreycolor,
-                            ),
-                          )),
+                              color: notifier.subgreycolor),
+                        )),
+                  ),
+                  const SizedBox(width: 10),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          width: 2,
+                          color: (scrollHover2)
+                              ? notifier.sugestionbutton
+                              : Colors.transparent),
                     ),
-                  ],
-                ),
-              ],
-            ),
+                    child: InkWell(
+                        onTap: () {
+                          if (scrollCont.offset <
+                              scrollCont.position.maxScrollExtent) {
+                            scrollCont.animateTo(
+                              scrollCont.offset + 200,
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.easeInOut,
+                            );
+                          }
+                        },
+                        onHover: (val) {
+                          setState(() {
+                            scrollHover2 = val;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(13),
+                          child: Image.asset(
+                            'assets/Icons/arrowrighticon.png',
+                            width: 15,
+                            color: notifier.subgreycolor,
+                          ),
+                        )),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ],

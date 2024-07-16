@@ -24,7 +24,7 @@ class ReviewList extends StatefulWidget {
   State<ReviewList> createState() => _ReviewListState();
 }
 
-class _ReviewListState extends State<ReviewList> {
+class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientMixin{
   late ColorNotifier notifier;
   int b = 9;
 
@@ -358,4 +358,8 @@ class _ReviewListState extends State<ReviewList> {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

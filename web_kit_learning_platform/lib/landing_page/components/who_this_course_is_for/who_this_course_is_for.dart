@@ -10,8 +10,13 @@ import '../../../l10n/l10n_extention.dart';
 import '../../mediaquery/mq.dart';
 import '../colornotifier.dart';
 
-class WhoThisCourseIsFor extends StatelessWidget {
+class WhoThisCourseIsFor extends StatefulWidget {
 
+  @override
+  State<WhoThisCourseIsFor> createState() => _WhoThisCourseIsForState();
+}
+
+class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>  with AutomaticKeepAliveClientMixin{
   late ColorNotifier notifier;
 
   final double splitScreenWidth = 1050;
@@ -755,4 +760,8 @@ class WhoThisCourseIsFor extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
