@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:universal_html/html.dart';
 import 'package:webkit/base/theme/colors_app.dart';
-
+import 'package:file_picker/file_picker.dart';
 import '../../../controller/ui/add_course_controller.dart';
 import '../../../helpers/theme/app_theme.dart';
 import '../../../helpers/utils/ui_mixins.dart';
@@ -10,6 +14,7 @@ import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../../services/apis/course/add_course_request.dart';
+import 'course_mode.dart';
 
 class AddLectures extends StatefulWidget {
   final Color color;
@@ -77,6 +82,23 @@ class _AddLecturesState extends State<AddLectures>
       subjects.removeAt(index);
     });
   }
+
+  // String? _filePath;
+
+  // FilePickerResult? result = await FilePicker.platform.pickFiles();
+  //
+  // void _pickFile() async {
+  //   FilePickerResult? result = await FilePicker.platform.pickFiles(
+  //     type: FileType.custom,
+  //     allowedExtensions: ['pdf'],
+  //   );
+  //
+  //   if (result != null) {
+  //     setState(() {
+  //       _filePath = result.files.single.path;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -330,9 +352,11 @@ class _AddLecturesState extends State<AddLectures>
   void _addLectureDialog({
     required int subjectIndex,
   }) {
+    FilePickerResult? result;
     final formKey = GlobalKey<FormState>();
     final lectureNameController = TextEditingController();
     final lectureLinkController = TextEditingController();
+    final documentLinkController = TextEditingController();
     String mode = 'FREE';
 
     showDialog(
@@ -345,12 +369,15 @@ class _AddLecturesState extends State<AddLectures>
           child: SizedBox(
             width: 800,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
+                MyText.labelMedium('Lecture name'),
+                SizedBox(height: 4,),
                 TextFormField(
                   controller: lectureNameController,
                   decoration: InputDecoration(
-                      labelText: 'Lecture name',
+                      labelText: 'Lecture name: ',
                       labelStyle: MyTextStyle.bodySmall(xMuted: true),
                       border: outlineInputBorder,
                       contentPadding: MySpacing.all(16),
@@ -366,6 +393,8 @@ class _AddLecturesState extends State<AddLectures>
                 SizedBox(
                   height: 16,
                 ),
+                MyText.labelMedium('Lecture link: '),
+                SizedBox(height: 4,),
                 TextFormField(
                   controller: lectureLinkController,
                   decoration: InputDecoration(
@@ -385,37 +414,70 @@ class _AddLecturesState extends State<AddLectures>
                 SizedBox(
                   height: 16,
                 ),
-                DropdownButtonFormField(
-                  dropdownColor: theme.cardTheme.color,
+                // DropdownButtonFormField(
+                //   dropdownColor: theme.cardTheme.color,
+                //   decoration: InputDecoration(
+                //     labelText: mode,
+                //     labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                //     border: outlineInputBorder,
+                //     prefixIcon: Icon(
+                //       LucideIcons.check,
+                //       size: 20,
+                //       color: color,
+                //     ),
+                //     contentPadding: MySpacing.all(16),
+                //     isCollapsed: true,
+                //     floatingLabelBehavior: FloatingLabelBehavior.never,
+                //   ),
+                //   items: const [
+                //     DropdownMenuItem<String>(
+                //       value: 'FREE',
+                //       child: Text('Free'),
+                //     ),
+                //     DropdownMenuItem<String>(
+                //       value: 'PREMIUM',
+                //       child: Text('Premium'),
+                //     )
+                //   ],
+                //   onChanged: (newValue) {
+                //     setState(() {
+                //       mode = newValue!;
+                //     });
+                //   },
+                // ),
+                MyText.labelMedium('Document: '),
+                SizedBox(height: 4,),
+                TextFormField(
+                  controller: documentLinkController,
                   decoration: InputDecoration(
-                    labelText: mode,
-                    labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                    border: outlineInputBorder,
-                    prefixIcon: Icon(
-                      LucideIcons.check,
-                      size: 20,
-                      color: color,
+                      labelText: 'Youtube url, pdf',
+                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                      border: outlineInputBorder,
+                      contentPadding: MySpacing.all(16),
+                      isCollapsed: true,
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.image),
+                      onPressed: () async {
+                        FilePickerResult? result = await FilePicker.platform.pickFiles(
+                          type: FileType.custom,
+                          allowedExtensions: ['pdf'],
+                        );
+                        setState(() {
+                          if (result != null) {
+                            documentLinkController.text = result.names[0]!;
+                          } else {
+                          }
+                        });
+                      },
                     ),
-                    contentPadding: MySpacing.all(16),
-                    isCollapsed: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
                   ),
-                  items: const [
-                    DropdownMenuItem<String>(
-                      value: 'FREE',
-                      child: Text('Free'),
-                    ),
-                    DropdownMenuItem<String>(
-                      value: 'PREMIUM',
-                      child: Text('Premium'),
-                    )
-                  ],
-                  onChanged: (newValue) {
-                    setState(() {
-                      mode = newValue!;
-                    });
-                  },
-                )
+                ),
+                SizedBox(height: 16,),
+                Row(children: [
+                  Expanded(flex: 7, child: ModeOptionWidget(mode: DropdownMode.FREE,)),
+                  Expanded(flex: 3, child: SizedBox()),
+                ],),
               ],
             ),
           ),
@@ -458,4 +520,12 @@ class Subject {
   List<Lectures> lectures;
 
   Subject({required this.subName, required this.lectures});
+}
+
+class Vocabulary {
+  String word;
+  String definition;
+  String pronunciation;
+
+  Vocabulary({required this.word,required this.definition, required this.pronunciation});
 }

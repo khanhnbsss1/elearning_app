@@ -111,7 +111,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "course_str": MessageLookupByLibrary.simpleMessage("Khóa học"),
         "courses_list":
             MessageLookupByLibrary.simpleMessage("Danh sách khóa học"),
+        "create_document": MessageLookupByLibrary.simpleMessage("Tạo tài Liệu"),
         "create_product": MessageLookupByLibrary.simpleMessage("Tạo sản phẩm"),
+        "create_student": MessageLookupByLibrary.simpleMessage("Tạo học viên"),
+        "create_teacher": MessageLookupByLibrary.simpleMessage("Tạo giáo viên"),
         "created_at": MessageLookupByLibrary.simpleMessage("Được tạo vào"),
         "custom_indicator":
             MessageLookupByLibrary.simpleMessage("Chỉ báo tùy chỉnh"),
@@ -137,6 +140,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("khác biệt "),
         "differences_in_teaching_methods_3":
             MessageLookupByLibrary.simpleMessage(" trong giảng dạy"),
+        "document_list":
+            MessageLookupByLibrary.simpleMessage("Danh sách tài Liệu"),
+        "document_str": MessageLookupByLibrary.simpleMessage("Tài Liệu"),
         "doughnut_chart":
             MessageLookupByLibrary.simpleMessage("Biểu đồ bánh rán"),
         "download": MessageLookupByLibrary.simpleMessage("Tải xuống"),
@@ -451,8 +457,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "string_payment": MessageLookupByLibrary.simpleMessage("Thanh toán"),
         "string_time_setting":
             MessageLookupByLibrary.simpleMessage("Cài đặt thời gian"),
+        "student_list":
+            MessageLookupByLibrary.simpleMessage("Danh sách học viên"),
         "student_review_list_str":
             MessageLookupByLibrary.simpleMessage("Cảm nhận của học viên"),
+        "student_str": MessageLookupByLibrary.simpleMessage("Học viên"),
         "style_guide": MessageLookupByLibrary.simpleMessage("Phong cách"),
         "subcribe_to_our_news_letter": MessageLookupByLibrary.simpleMessage(
             "Đăng ký nhận bản tin của chúng tôi"),
@@ -476,6 +485,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(" Danh sách giáo viên"),
         "teacher_review_list_str":
             MessageLookupByLibrary.simpleMessage("Lời nhận xét của chuyên gia"),
+        "teacher_str": MessageLookupByLibrary.simpleMessage("Giáo viên"),
         "teachers_teach_the_most":
             MessageLookupByLibrary.simpleMessage("Giáo viên dạy nhiều nhất"),
         "terms_conditions":

@@ -1,26 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../../base/theme/colors_app.dart';
+import '../../../controller/ui/add_course_controller.dart';
 import '../../../helpers/theme/app_theme.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 
-enum Mode { FREE, PREMIUM }
+enum DropdownMode { FREE, PREMIUM }
 
 class ModeOptionWidget extends StatefulWidget {
+  final DropdownMode? mode;
+
+  ModeOptionWidget({required this.mode,});
   @override
   _ModeOptionWidget createState() => _ModeOptionWidget();
 }
 
 class _ModeOptionWidget extends State<ModeOptionWidget> {
-  String? _selectedOption = 'Free';
-  bool _isPremium = false;
-  final _paymentController = TextEditingController();
-  Mode? _mode = Mode.FREE;
 
+  DropdownMode? _mode;
+  @override
+  void initState() {
+    super.initState();
+    _mode = widget.mode??DropdownMode.PREMIUM;
+  }
   @override
   Widget build(BuildContext context) {
+    // final controller = Get.find<AddCourseController>();
+
+    // return widget.mode == Mode.PREMIUM ?
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -35,10 +46,10 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
               flex: 3,
               child: ListTile(
                 title: const Text('FREE'),
-                leading: Radio<Mode>(
-                  value: Mode.FREE,
+                leading: Radio<DropdownMode>(
+                  value: DropdownMode.FREE,
                   groupValue: _mode,
-                  onChanged: (Mode? value) {
+                  onChanged: (DropdownMode? value) {
                     setState(() {
                       _mode = value;
                     });
@@ -49,11 +60,12 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
             Expanded(
               flex: 4,
               child: ListTile(
+                enabled: widget.mode == DropdownMode.PREMIUM,
                 title: const Text('PREMIUM'),
-                leading: Radio<Mode>(
-                  value: Mode.PREMIUM,
+                leading: Radio<DropdownMode>(
+                  value: DropdownMode.PREMIUM,
                   groupValue: _mode,
-                  onChanged: (Mode? value) {
+                  onChanged: (DropdownMode? value) {
                     setState(() {
                       _mode = value;
                     });
@@ -67,12 +79,11 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
                 child: Container(
                   color: ColorConst.whiteColor,
                   child: TextFormField(
-                    controller: _paymentController,
-                    enabled: _mode == Mode.PREMIUM,
+                    enabled: _mode == DropdownMode.PREMIUM,
                     decoration: InputDecoration(
                       prefixIcon: Icon(
                         Icons.attach_money,
-                        color: (_mode == Mode.PREMIUM)
+                        color: (_mode == DropdownMode.PREMIUM)
                             ? Colors.black87
                             : Colors.black12,
                       ),
@@ -87,5 +98,14 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
         ),
       ],
     );
+    //     : Row(
+    //   children: [
+    //     MyText.labelMedium(
+    //       'Payment: ',
+    //     ),
+    //     // MySpacing.height(4),
+    //     Text('FREE',),
+    //   ],
+    // );
   }
 }

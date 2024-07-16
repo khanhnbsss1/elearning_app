@@ -60,7 +60,6 @@ class _MyCourseListState extends State<MyCourseList>
                   List<Widget> listOfCourse = List.empty(growable: true);
 
                   if (state.myCourseResponseModel == null) {
-                    print('============================\n');
                     return Center(
                         child: CircularProgressIndicator(),
                     );
@@ -78,32 +77,6 @@ class _MyCourseListState extends State<MyCourseList>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            // MyButton(
-                            //   onTap: () {
-                            //     showDialog(
-                            //       context: context,
-                            //       builder: (context) => AddCourseForm(),
-                            //     );
-                            //   },
-                            //   elevation: 0,
-                            //   padding: MySpacing.xy(12, 16),
-                            //   backgroundColor: contentTheme.primary,
-                            //   borderRadiusAll: AppStyle.buttonRadius.medium,
-                            //   child: Row(
-                            //     children: [
-                            //       Icon(
-                            //         LucideIcons.plusCircle,
-                            //         color: contentTheme.light,
-                            //         size: 16,
-                            //       ),
-                            //       MySpacing.width(16),
-                            //       MyText.bodySmall(
-                            //         "Add New",
-                            //         color: contentTheme.onPrimary,
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
                             SizedBox(
                               width: 200,
                               child: TextFormField(

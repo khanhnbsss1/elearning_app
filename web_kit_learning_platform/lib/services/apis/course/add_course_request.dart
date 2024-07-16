@@ -58,7 +58,8 @@ class AddCourseRequest {
         this.typeName,
         this.isActive,
         this.lectures,
-        this.tags});
+        this.tags,
+      });
 
   AddCourseRequest.fromJson(Map<String, dynamic> json) {
     id = json['id'];

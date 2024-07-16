@@ -151,6 +151,11 @@ class AddCourseController extends MyController {
     update();
   }
 
+  void setCourseName(String value) {
+    basicValidator.getController('name')!.text = value;
+    update();
+  }
+
   Future<void> onAddCourse() async {
     // List<Lectures> lectures = [];
     // for (int i = 0; i < lectureControllers.length; i++) {

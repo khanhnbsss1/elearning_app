@@ -128,6 +128,7 @@ dependencies:
   smooth_scroll_multiplatform: 
     path: lib/plugins/smooth_scroll_multiplatform-1.0.8
   flutter_custom_pagination: ^0.2.0
+  dropdown_search: ^5.0.6
 dependency_overrides:
   file_picker: ^8.0.6
   google_maps_flutter: ^2.7.0

@@ -428,8 +428,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                   children: [
                     Visibility(
                       visible: userProfile != null &&
-                          MediaQuery.of(context).size.width > 550 &&
-                          MediaQuery.of(context).size.width < 1100,
+                          MediaQuery.of(context).size.width > 550,
                       child: Padding(
                         padding:
                             EdgeInsets.symmetric(horizontal: Dimens.size16),

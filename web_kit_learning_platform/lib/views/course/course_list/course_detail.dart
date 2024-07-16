@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
@@ -13,6 +14,7 @@ import 'package:webkit/helpers/widgets/my_button.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
+import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import 'package:webkit/views/course/course_list/lectures_detail.dart';
 import 'package:webkit/views/course/course_list/course_mode.dart';
 import 'package:webkit/views/course/course_list/tag_drop_down.dart';
@@ -20,9 +22,11 @@ import 'package:webkit/views/layouts/layout.dart';
 import '../../../controller/ui/add_course_controller.dart';
 import '../../../services/apis/course/add_course_request.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
+import 'package:file_picker/file_picker.dart';
 
 class CourseDetail extends StatefulWidget {
-  const CourseDetail({super.key});
+  final List<CourseInfo>? courseInfo;
+  const CourseDetail({super.key, required this.courseInfo});
 
   void show(BuildContext context) {
     showGeneralDialog(
@@ -41,12 +45,13 @@ class _CourseDetailState extends State<CourseDetail>
   final MultiSelectController multiSelectController = MultiSelectController();
   late AddCourseController controller;
   late AnimationController animationController;
-
+  late List<CourseInfo> coursesInfo;
   @override
   void initState() {
     super.initState();
     controller = Get.put(AddCourseController());
     animationController = AnimationController(vsync: this);
+    coursesInfo = widget.courseInfo!;
   }
 
   List<Lectures> lectures = [];
@@ -90,8 +95,26 @@ class _CourseDetailState extends State<CourseDetail>
 
   File? selectedImage;
   final ImagePicker imagePicker = ImagePicker();
+
+  List<String> listOfProduceNames = [];
+  List<String> listOfCourses = [];
+  List<String> listOfTags = [];
+
   @override
   Widget build(BuildContext context) {
+  for (CourseInfo courseInfo in coursesInfo) {
+    if (!listOfProduceNames.contains(courseInfo.producerName) && courseInfo.producerName != null) {
+      listOfProduceNames.add(courseInfo.producerName??"");
+    }
+    if (!listOfProduceNames.contains(courseInfo.name) && courseInfo.name != null) {
+      listOfCourses.add(courseInfo.name??"");
+    }
+    for (String tag in courseInfo.tags??[]) {
+          if (!listOfTags.contains(tag)) {
+            listOfTags.add(tag ?? "");
+          }
+        }
+    }
     return GetBuilder<AddCourseController>(
       init: controller,
       builder: (controller) {
@@ -174,6 +197,9 @@ class _CourseDetailState extends State<CourseDetail>
       child: ExpandWidget(
        // expandColor: Color.fromRGBO(255, 233, 233, 1.0),
         title: 'Course',
+        titleStyle: TextStyle(
+            fontSize: 18
+        ),
         //titleGradient: const [Color.fromRGBO(169, 59, 58, 1.0), Color.fromRGBO(255, 131, 131, 1.0),],
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -197,6 +223,9 @@ class _CourseDetailState extends State<CourseDetail>
                         Container(
                           color: ColorConst.whiteColor,
                           child: TextFormField(
+                            onChanged: (value) => {
+                              controller.setCourseName(value)
+                            },
                             validator: controller.basicValidator
                                 .getValidation('name'),
                             controller: controller.basicValidator
@@ -306,7 +335,7 @@ class _CourseDetailState extends State<CourseDetail>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         MyText.labelMedium(
-                          'Image: ',
+                          'Background image: ',
                         ),
                         MySpacing.height(4),
                         Container(
@@ -333,8 +362,7 @@ class _CourseDetailState extends State<CourseDetail>
                               suffixIcon: IconButton(
                                 icon: Icon(Icons.image),
                                 onPressed: () async {
-                                  final pickedFile = await imagePicker
-                                      .pickImage(source: ImageSource.gallery);
+                                  final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
                                   setState(() {
                                     if (pickedFile != null) {
                                       selectedImage = File(pickedFile.path);
@@ -360,7 +388,7 @@ class _CourseDetailState extends State<CourseDetail>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         MyText.labelMedium(
-                          'Video review: ',
+                          'Video preview: ',
                         ),
 
                         MySpacing.height(4),
@@ -412,51 +440,6 @@ class _CourseDetailState extends State<CourseDetail>
                 ],
               ),
               MySpacing.height(20),
-              // Row(
-              //   children: [
-              //     Expanded(
-              //       flex: 2,
-              //       child: Column(
-              //         crossAxisAlignment: CrossAxisAlignment.start,
-              //         children: [
-              //           MyText.labelMedium(
-              //             'Grade',
-              //           ),
-              //           MySpacing.height(4),
-              //           DropdownButtonFormField(
-              //             dropdownColor: theme.cardTheme.color,
-              //             decoration: InputDecoration(
-              //               labelText: value1 ?? 'Grade name',
-              //               labelStyle:
-              //               MyTextStyle.bodySmall(xMuted: true),
-              //               border: outlineInputBorder,
-              //               prefixIcon: Icon(
-              //                 LucideIcons.phone,
-              //                 size: 20,
-              //                 color: color,
-              //               ),
-              //               contentPadding: MySpacing.all(16),
-              //               isCollapsed: true,
-              //               floatingLabelBehavior:
-              //               FloatingLabelBehavior.never,
-              //             ),
-              //             items: gradeNameList.map((element) {
-              //               return DropdownMenuItem(
-              //                 value: element,
-              //                 child: Text(element),
-              //               );
-              //             }).toList(),
-              //             onChanged: (value) => setState(
-              //                     () => value1 = value as String?),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //     MySpacing.width(20),
-              //     // MySpacing.width(20),
-              //   ],
-              // ),
-              // MySpacing.height(20),
               Row(
                 children: [
                   Expanded(
@@ -464,33 +447,10 @@ class _CourseDetailState extends State<CourseDetail>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        MyText.labelMedium('Proceduce name:'),
+                        MyText.labelMedium('Author:'),
                         MySpacing.height(4),
-                        Container(
-                          color: ColorConst.whiteColor,
-                          child: TextFormField(
-                            validator: controller.basicValidator
-                                .getValidation('producer_name'),
-                            controller: controller.basicValidator
-                                .getController('producer_name'),
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              labelText: 'Proceduce name',
-                              labelStyle:
-                              MyTextStyle.bodySmall(xMuted: true),
-                              border: outlineInputBorder,
-                              prefixIcon: Icon(
-                                LucideIcons.user,
-                                size: 20,
-                                color: ColorConst.colorIconGrays,
-                              ),
-                              contentPadding: MySpacing.all(16),
-                              isCollapsed: true,
-                              floatingLabelBehavior:
-                              FloatingLabelBehavior.never,
-                            ),
-                          ),
-                        ),
+                        dropDownSearchCustom(listOfProduceNames),
+
                       ],
                     ),
                   ),
@@ -549,7 +509,7 @@ class _CourseDetailState extends State<CourseDetail>
                                 .getController('info_obj'),
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
-                              labelText: 'Info object',
+                              labelText: 'Object',
                               labelStyle:
                               MyTextStyle.bodySmall(xMuted: true),
                               border: outlineInputBorder,
@@ -612,7 +572,6 @@ class _CourseDetailState extends State<CourseDetail>
                   ),
                 ],
               ),
-
               MySpacing.height(20),
               MyText.labelMedium('Course introduction: '),
               MySpacing.height(4),
@@ -652,7 +611,7 @@ class _CourseDetailState extends State<CourseDetail>
                       .getController('info_result'),
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                      labelText: 'Info result',
+                      labelText: 'Result after the course',
                       labelStyle: MyTextStyle.bodySmall(xMuted: true),
                       border: outlineInputBorder,
                       // prefixIcon: const Icon(
@@ -671,7 +630,7 @@ class _CourseDetailState extends State<CourseDetail>
               Row(
                 children: [
                   Expanded(
-                    flex: 2,
+                    flex: 1,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -713,7 +672,7 @@ class _CourseDetailState extends State<CourseDetail>
                   ),
                   Expanded(
                       flex: 5,
-                      child: ModeOptionWidget()),
+                      child: ModeOptionWidget(mode: DropdownMode.PREMIUM)),
                   SizedBox(width: 20,),
                   Expanded(flex: 8 ,child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -723,35 +682,37 @@ class _CourseDetailState extends State<CourseDetail>
                         'Accompany course: ',
                       ),
                       MySpacing.height(4),
-                      Container(
-                        color: ColorConst.whiteColor,
-                        child: DropdownButtonFormField(
-                          dropdownColor: theme.cardTheme.color,
-                          decoration: InputDecoration(
-                            labelText: value1 ?? 'Accompany course',
-                            labelStyle:
-                            MyTextStyle.bodySmall(xMuted: true),
-                            border: outlineInputBorder,
-                            prefixIcon: Icon(
-                              LucideIcons.book,
-                              size: 20,
-                              color: ColorConst.colorIconGrays,
-                            ),
-                            contentPadding: MySpacing.all(16),
-                            isCollapsed: true,
-                            floatingLabelBehavior:
-                            FloatingLabelBehavior.never,
-                          ),
-                          items: accompanyCourse.map((element) {
-                            return DropdownMenuItem(
-                              value: element,
-                              child: Text(element),
-                            );
-                          }).toList(),
-                          onChanged: (value) => setState(
-                                  () => value1 = value as String?),
-                        ),
-                      ),
+                      // Container(
+                      //   color: ColorConst.whiteColor,
+                      //   child: DropdownButtonFormField(
+                      //     dropdownColor: theme.cardTheme.color,
+                      //     decoration: InputDecoration(
+                      //       labelText: value1 ?? 'Accompany course',
+                      //       labelStyle:
+                      //       MyTextStyle.bodySmall(xMuted: true),
+                      //       border: outlineInputBorder,
+                      //       prefixIcon: Icon(
+                      //         LucideIcons.book,
+                      //         size: 20,
+                      //         color: ColorConst.colorIconGrays,
+                      //       ),
+                      //       contentPadding: MySpacing.all(16),
+                      //       isCollapsed: true,
+                      //       floatingLabelBehavior:
+                      //       FloatingLabelBehavior.never,
+                      //     ),
+                      //     items: accompanyCourse.map((element) {
+                      //       return DropdownMenuItem(
+                      //         value: element,
+                      //         child: Text(element),
+                      //       );
+                      //     }).toList(),
+                      //     onChanged: (value) => setState(() {
+                      //       print(controller.basicValidator.getController('course_mode'));
+                      //     }),
+                      //   ),
+                      // ),
+                      dropDownSearchCustom(listOfCourses),
                     ],
                   ),),
 
@@ -761,8 +722,9 @@ class _CourseDetailState extends State<CourseDetail>
                 'Tags: *',
               ),
               MySpacing.height(4),
-              TagDropDown(tags: tagList,),
+              TagDropDown(tags: listOfTags),
               MySpacing.height(20),
+
             ],
           ),
         ),
@@ -801,6 +763,37 @@ class _CourseDetailState extends State<CourseDetail>
   }
   Widget listLecture(){
     return SizedBox();
+  }
+
+  Widget dropDownSearchCustom(List<String> list){
+    return DropdownSearch<String>(
+      popupProps: PopupProps.menu(
+        constraints: BoxConstraints(
+          maxHeight: (65 + list.length * 50 < 210) ? 65 + list.length * 50 : 210,
+        ),
+        showSearchBox: true,
+        searchDelay: Duration(seconds: 0),
+        showSelectedItems: true,
+      ),
+      items: list,
+      dropdownDecoratorProps: DropDownDecoratorProps(
+        dropdownSearchDecoration: InputDecoration(
+          hintText: "Accompany course",
+          hintStyle: MyTextStyle.bodySmall(xMuted: true),
+          border: outlineInputBorder,
+          prefixIcon: Icon(
+            LucideIcons.book,
+            size: 20,
+            color: ColorConst.colorIconGrays,
+          ),
+          contentPadding: MySpacing.all(16),
+          isCollapsed: true,
+          floatingLabelBehavior:
+          FloatingLabelBehavior.never,
+        ),
+      ),
+      onChanged: print,
+    );
   }
 }
 
