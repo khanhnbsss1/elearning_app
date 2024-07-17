@@ -186,25 +186,32 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                 : constraints.maxWidth / 15,
             vertical: 10,
           ),
-          child: SizedBox(
-            width: width / 1,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  ResponsiveInfo.isPhone()?
-                  Image.asset('assets/deshboard/winterlandscape.png',
-                      height: constraints.maxWidth < 500 ? 250 : 400,
-                      width: constraints.maxWidth,
-                      fit: BoxFit.cover)
-                      : Image.asset('assets/deshboard/winterlandscape.png',
-                      height: 600,
-                      width: constraints.maxWidth,
-                      fit: BoxFit.cover),
-                ],
-              ),
-            ),
+          child: StatefulBuilder(
+            builder: (BuildContext context, void Function(void Function()) setState) { 
+              return  SizedBox(
+                width: width / 1,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+                    return Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        ResponsiveInfo.isPhone()?
+                        Image.asset('assets/deshboard/winterlandscape.png',
+                            height: constraints.maxWidth < 500 ? 250 : 400,
+                            width: constraints.maxWidth,
+                            fit: BoxFit.cover)
+                            : Image.asset('assets/deshboard/winterlandscape.png',
+                            height: 600,
+                            width: constraints.maxWidth,
+                            fit: BoxFit.cover),
+                      ],
+                    );
+                  },
+                  ),
+                ),
+              );
+            },
           ),
         ),
         SizedBox(height: 20,),
@@ -331,38 +338,43 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                       SizedBox(width: 10,),
                       Wrap(
                         children: List<Widget>.generate( 7, (int index) {
-                            return SizedBox(
-                              height: 50,
-                              //width: itemCardWidth,
-                              child: GestureDetector(
+                            return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+                              return  SizedBox(
+                                height: 50,
+                                //width: itemCardWidth,
                                 child: OnHoverWidget(
                                   builder: (isHovered) {
-                                    return Center(
-                                      child: TextButton(
-                                        style: TextButton.styleFrom(
-                                          overlayColor: Colors.white,
-                                        ),
-                                        onPressed: () {
-                                          Scrollable.ensureVisible(
-                                              GlobalObjectKey(index).currentContext!,
-                                              duration: Duration(seconds: 1),
-                                              curve: Curves.easeInOutCubic);
-                                        },
-                                        child: Text(landingPageTitles[index],
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: (width < 1100) ? 10 : 18,
-                                              color: (isHovered) ? notifier.redcolor : Colors.black,
-                                              decoration: (isHovered) ? TextDecoration.underline : TextDecoration.none,
-                                              decorationColor: notifier.redcolor,
-                                              decorationThickness: 2
+                                    return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+                                      return Center(
+                                        child: TextButton(
+                                          style: TextButton.styleFrom(
+                                            overlayColor: Colors.white,
+                                          ),
+                                          onPressed: () {
+                                            Scrollable.ensureVisible(
+                                                GlobalObjectKey(index).currentContext!,
+                                                duration: Duration(seconds: 1),
+                                                curve: Curves.easeInOutCubic);
+                                          },
+                                          child: Text(landingPageTitles[index],
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: (width < 1100) ? 10 : 18,
+                                                color: (isHovered) ? notifier.redcolor : Colors.black,
+                                                decoration: (isHovered) ? TextDecoration.underline : TextDecoration.none,
+                                                decorationColor: notifier.redcolor,
+                                                decorationThickness: 2
+                                            ),
                                           ),
                                         ),
-                                      ),
+                                      );
+                                    },
                                     );
                                   },
                                 ),
-                              ),
+                              );
+                            },
+                              
                             );
                           },
                         ).toList(),
@@ -379,739 +391,520 @@ class _LandingPageScreenState extends State<LandingPageScreen>
   
   Widget buildTabBar({required BoxConstraints constraints}) {
     Locale currentLocale = LanguageHelper.getInstance.getCurrentLocale();
-    return FutureBuilder(
-      future: UserManager().getUserProfile(),
-      builder: (context, snapshot) {
-        UserProfile? userProfile;
-        if (snapshot.hasData) {
-          userProfile = snapshot.data as UserProfile;
-        }
-        return Padding(
-          padding: EdgeInsets.only(
-              top: constraints.maxWidth < 550 ? 0 : 12,
-              left: constraints.maxWidth < 550 ? 0
-                  : constraints.maxWidth / 10 < 800
-                  ? constraints.maxWidth / 15
-                  : constraints.maxWidth / 10,
-              right: constraints.maxWidth < 550 ? 0
-                  : constraints.maxWidth / 10 < 800
-                  ? constraints.maxWidth / 15
-                  : constraints.maxWidth / 10),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    StaticView.buildLogo(),
-                    const SizedBox(width: 5),
-                    (constraints.maxWidth < 550) ? SizedBox() : Expanded(
-                      child: Text(
-                        L10nX.getStr.app_name,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: baseStyle.copyWith(
-                          color: notifier.blackcolor,
-                          fontSize: constraints.maxWidth < 300 ? 20 : 24,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Row(
+    return StatefulBuilder(
+      builder: (BuildContext context, void Function(void Function()) setState) {  
+        return FutureBuilder(
+          future: UserManager().getUserProfile(),
+          builder: (context, snapshot) {
+            UserProfile? userProfile;
+            if (snapshot.hasData) {
+              userProfile = snapshot.data as UserProfile;
+            }
+            return Padding(
+              padding: EdgeInsets.only(
+                  top: constraints.maxWidth < 550 ? 0 : 12,
+                  left: constraints.maxWidth < 550 ? 0
+                      : constraints.maxWidth / 10 < 800
+                      ? constraints.maxWidth / 15
+                      : constraints.maxWidth / 10,
+                  right: constraints.maxWidth < 550 ? 0
+                      : constraints.maxWidth / 10 < 800
+                      ? constraints.maxWidth / 15
+                      : constraints.maxWidth / 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Visibility(
-                    visible: userProfile != null && ResponsiveInfo.isTablet(),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
-                      child: PopupMenuButton(
-                        onOpened: () {
-                          AppPages.routeName(Routes.dashboardRoute);
-                        },
-                        tooltip: L10nX.getStr.lets_study,
-                        itemBuilder: (BuildContext context) {
-                          return [
-                            PopupMenuItem<String>(
-                                enabled: false,
-                                value: '',
-                                onTap: () {},
-                                child: SizedBox()),
-                          ];
-                        },
-                        child: Text(L10nX.getStr.lets_study,
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        StaticView.buildLogo(),
+                        const SizedBox(width: 5),
+                        (constraints.maxWidth < 550) ? SizedBox() : Expanded(
+                          child: Text(
+                            L10nX.getStr.app_name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                             style: baseStyle.copyWith(
-                              fontSize: 16,
-                              color: supportHover
-                                  ? notifier.blackcolor
-                                  : notifier.subgreycolor,
-                            )),
-                      ),
+                              color: notifier.blackcolor,
+                              fontSize: constraints.maxWidth < 300 ? 20 : 24,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  constraints.maxWidth < 1000
-                      ? const SizedBox()
-                      : Row(
+                  Row(
+                    children: [
+                      Visibility(
+                        visible: userProfile != null && ResponsiveInfo.isTablet(),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
+                          child: PopupMenuButton(
+                            onOpened: () {
+                              AppPages.routeName(Routes.dashboardRoute);
+                            },
+                            tooltip: L10nX.getStr.lets_study,
+                            itemBuilder: (BuildContext context) {
+                              return [
+                                PopupMenuItem<String>(
+                                    enabled: false,
+                                    value: '',
+                                    onTap: () {},
+                                    child: SizedBox()),
+                              ];
+                            },
+                            child: Text(L10nX.getStr.lets_study,
+                                style: baseStyle.copyWith(
+                                  fontSize: 16,
+                                  color: supportHover
+                                      ? notifier.blackcolor
+                                      : notifier.subgreycolor,
+                                )),
+                          ),
+                        ),
+                      ),
+                      constraints.maxWidth < 1000
+                          ? const SizedBox()
+                          : Row(
+                        children: [
+                          PopupMenuButton(
+                            tooltip: '',
+                            padding: const EdgeInsets.all(0),
+                            offset: const Offset(120, 30),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            // initialValue: selectedMenu,
+                            constraints: const BoxConstraints(
+                              maxWidth: 315,
+                              maxHeight: 270,
+                            ),
+                            color: notifier.whitecolor,
+                            child: Text(
+                              L10nX.getStr.application,
+                              style: baseStyle.copyWith(
+                                  color: supportHover
+                                      ? notifier.blackcolor
+                                      : notifier.subgreycolor,
+                                  fontSize: 16),
+                            ),
+                            itemBuilder: (BuildContext context) =>
+                            <PopupMenuEntry<SampleItem2>>[
+                              PopupMenuItem<SampleItem2>(
+                                enabled: true,
+                                value: SampleItem2.itemOne,
+                                onTap: () {},
+                                child: Row(children: [
+                                  const SizedBox(width: 10),
+                                  Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      const SizedBox(height: 20),
+                                      Text(L10nX.getStr.download,
+                                          style: baseStyle.copyWith(
+                                            fontSize: 16,
+                                            color: notifier.subgreycolor,
+                                          )),
+                                      const SizedBox(height: 10),
+                                      SizedBox(
+                                        height: 100,
+                                        child: Column(
+                                          children: [
+                                            const SizedBox(height: 10),
+                                            SvgPicture.asset(
+                                                'assets/deshboard/support/AppStoreBadge.svg',
+                                                height: 40),
+                                            const SizedBox(height: 10),
+                                            SvgPicture.asset(
+                                                'assets/deshboard/support/GooglePlayStoreBadge.svg',
+                                                height: 40),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 20),
+                                    ],
+                                  ),
+                                  const SizedBox(width: 30),
+                                  Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(height: 20),
+                                        Text(L10nX.getStr.scan_code,
+                                            style: baseStyle.copyWith(
+                                              fontSize: 16,
+                                              color: notifier.subgreycolor,
+                                            )),
+                                        const SizedBox(height: 12),
+                                        SizedBox(
+                                          height: 100,
+                                          child: Image.asset(
+                                              'assets/deshboard/support/qrCode.png',
+                                              height: 100),
+                                        ),
+                                        const SizedBox(height: 20),
+                                      ]),
+                                  const SizedBox(width: 10),
+                                ]),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 25,
+                          ),
+                        ],
+                      ),
+                      if (constraints.maxWidth < 800)
+                        const SizedBox()
+                      else
+                        Row(
                           children: [
                             PopupMenuButton(
                               tooltip: '',
                               padding: const EdgeInsets.all(0),
-                              offset: const Offset(120, 30),
+                              offset: const Offset(10, 30),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               // initialValue: selectedMenu,
                               constraints: const BoxConstraints(
-                                maxWidth: 315,
-                                maxHeight: 270,
+                                maxWidth: 200,
+                                maxHeight: 250,
                               ),
                               color: notifier.whitecolor,
-                              child: Text(
-                                L10nX.getStr.application,
-                                style: baseStyle.copyWith(
-                                    color: supportHover
-                                        ? notifier.blackcolor
-                                        : notifier.subgreycolor,
-                                    fontSize: 16),
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                child: Center(
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      ClipRRect(
+                                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                                          borderRadius: BorderRadius.circular(2),
+                                          child: Image.asset(
+                                            "assets/lang/${currentLocale.languageCode}.png",
+                                            width: 18,
+                                            height: 14,
+                                            fit: BoxFit.cover,
+                                          )),
+                                      MySpacing.width(8),
+                                      MyText.labelMedium(
+                                          currentLocale.countryCode ?? "")
+                                    ],
+                                  ),
+                                ),
                               ),
                               itemBuilder: (BuildContext context) =>
-                                  <PopupMenuEntry<SampleItem2>>[
+                              <PopupMenuEntry<SampleItem2>>[
                                 PopupMenuItem<SampleItem2>(
                                   enabled: true,
                                   value: SampleItem2.itemOne,
                                   onTap: () {},
-                                  child: Row(children: [
-                                    const SizedBox(width: 10),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(height: 20),
-                                        Text(L10nX.getStr.download,
-                                            style: baseStyle.copyWith(
-                                              fontSize: 16,
-                                              color: notifier.subgreycolor,
-                                            )),
-                                        const SizedBox(height: 10),
-                                        SizedBox(
-                                          height: 100,
-                                          child: Column(
+                                  child: StatefulBuilder(
+                                    builder: (context, setState) {
+                                      return Row(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              const SizedBox(height: 10),
-                                              SvgPicture.asset(
-                                                  'assets/deshboard/support/AppStoreBadge.svg',
-                                                  height: 40),
-                                              const SizedBox(height: 10),
-                                              SvgPicture.asset(
-                                                  'assets/deshboard/support/GooglePlayStoreBadge.svg',
-                                                  height: 40),
+                                              for (LanguageInfo language
+                                              in LanguageHelper()
+                                                  .supportedLanguages)
+                                                InkWell(
+                                                  onTap: () {
+                                                    LanguageHelper().changeLanguage(
+                                                        language, context);
+                                                  },
+                                                  child: Padding(
+                                                    padding: EdgeInsets.symmetric(
+                                                        vertical: Dimens.size10,
+                                                        horizontal: Dimens.size8),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                      children: [
+                                                        ClipRRect(
+                                                            clipBehavior: Clip
+                                                                .antiAliasWithSaveLayer,
+                                                            borderRadius:
+                                                            BorderRadius
+                                                                .circular(2),
+                                                            child: Image.asset(
+                                                              "assets/lang/${language.languageCode}.png",
+                                                              width: 18,
+                                                              height: 14,
+                                                              fit: BoxFit.cover,
+                                                            )),
+                                                        MySpacing.width(8),
+                                                        MyText.labelMedium(
+                                                            language.language ?? "")
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
                                             ],
                                           ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      SizedBox(
+                        width: constraints.maxWidth < 500 ? 10 : 25,
+                      ),
+                  
+                      SizedBox(
+                        width: constraints.maxWidth < 500 ? 10 : 25,
+                      ),
+                      PopupMenuButton(
+                        tooltip: '',
+                        padding: const EdgeInsets.all(0),
+                        offset: const Offset(0, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        // initialValue: selectedMenu,
+                        constraints: BoxConstraints(
+                          maxWidth: width / 1,
+                          maxHeight: 450,
+                        ),
+                        color: notifier.whitecolor,
+                        child: Container(
+                          height: height / 19,
+                          decoration: BoxDecoration(
+                            color: notifier.lightgreencolor,
+                            shape: BoxShape.circle,
+                          ),
+                          clipBehavior: Clip.hardEdge,
+                          child: userProfile != null &&
+                              (userProfile.avatar ?? "").isNotEmpty
+                              ? ImageManager()
+                              .getImageByUrl(userProfile.avatar ?? "")
+                              : Image.asset(
+                            'assets/Icons/profileicon.png',
+                            height:
+                            constraints.maxWidth < 300 ? 30 : height / 45,
+                            scale: 2.5,
+                          ),
+                        ),
+                        onSelected: (SampleItem2 item) {
+                          setState(() {
+                            // selectedMenu = item;
+                          });
+                        },
+                        itemBuilder: (BuildContext context) =>
+                        <PopupMenuEntry<SampleItem2>>[
+                          PopupMenuItem<SampleItem2>(
+                            enabled: true,
+                            value: SampleItem2.itemOne,
+                            onTap: () {},
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Visibility(
+                                  visible: userProfile != null &&
+                                      ResponsiveInfo.isPhone(),
+                                  child: InkWell(
+                                    onTap: () {
+                                      AppPages.routeName(Routes.dashboardRoute);
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: [
+                                        const SizedBox(width: 4),
+                                        Icon(
+                                          Icons.home_outlined,
+                                          size: Dimens.size25,
+                                          color: ColorConst.blackColor,
                                         ),
-                                        const SizedBox(height: 20),
+                                        const SizedBox(width: 20),
+                                        Text(L10nX.getStr.lets_study,
+                                            style: baseStyle.copyWith(
+                                              fontSize: 16,
+                                              color: notifier.blackcolor,
+                                            )),
+                                        const SizedBox(height: 30),
                                       ],
                                     ),
-                                    const SizedBox(width: 30),
-                                    Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const SizedBox(height: 20),
-                                          Text(L10nX.getStr.scan_code,
-                                              style: baseStyle.copyWith(
-                                                fontSize: 16,
-                                                color: notifier.subgreycolor,
-                                              )),
-                                          const SizedBox(height: 12),
-                                          SizedBox(
-                                            height: 100,
-                                            child: Image.asset(
-                                                'assets/deshboard/support/qrCode.png',
-                                                height: 100),
+                                  ),
+                                ),
+                                Visibility(
+                                    visible: ResponsiveInfo.isPhone(),
+                                    child: Column(
+                                      children: [
+                                        for (LanguageInfo language
+                                        in LanguageHelper().supportedLanguages)
+                                          InkWell(
+                                            onTap: () {
+                                              LanguageHelper().changeLanguage(
+                                                  language, context);
+                                            },
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: Dimens.size12,
+                                                  horizontal: Dimens.size30),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                                children: [
+                                                  ClipRRect(
+                                                      clipBehavior: Clip
+                                                          .antiAliasWithSaveLayer,
+                                                      borderRadius:
+                                                      BorderRadius.circular(2),
+                                                      child: Image.asset(
+                                                        "assets/lang/${language.languageCode}.png",
+                                                        width: 18,
+                                                        height: 14,
+                                                        fit: BoxFit.cover,
+                                                      )),
+                                                  MySpacing.width(8),
+                                                  MyText.labelMedium(
+                                                      language.language ?? "")
+                                                ],
+                                              ),
+                                            ),
                                           ),
-                                          const SizedBox(height: 20),
-                                        ]),
-                                    const SizedBox(width: 10),
+                                      ],
+                                    )),
+                                const SizedBox(height: 20),
+                                Padding(
+                                  padding:
+                                  EdgeInsets.symmetric(vertical: Dimens.size10),
+                                  child: Stack(children: [
+                                    Visibility(
+                                      visible: userProfile == null,
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                            height: 40,
+                                            width: 145,
+                                            child: ElevatedButton(
+                                              style: ButtonStyle(
+                                                elevation:
+                                                const WidgetStatePropertyAll(0),
+                                                backgroundColor:
+                                                WidgetStatePropertyAll(
+                                                    notifier.buttoncolor),
+                                                shape: const WidgetStatePropertyAll(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.all(
+                                                        Radius.circular(20)),
+                                                  ),
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                LoginPage().show(context);
+                                                //AppPages.route(Paths.dashboardPath);
+                                              },
+                                              child: Text(L10nX.getStr.login,
+                                                  style: baseStyle.copyWith(
+                                                      fontSize: 12,
+                                                      color: Colors.white)),
+                                            ),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          SizedBox(
+                                            height: 40,
+                                            width: 145,
+                                            child: ElevatedButton(
+                                              style: ButtonStyle(
+                                                elevation:
+                                                const WidgetStatePropertyAll(0),
+                                                backgroundColor:
+                                                WidgetStatePropertyAll(
+                                                    notifier.whitecolor),
+                                                shape: WidgetStatePropertyAll(
+                                                  RoundedRectangleBorder(
+                                                    side: BorderSide(
+                                                        color: notifier.buttoncolor,
+                                                        width: 2),
+                                                    borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(20)),
+                                                  ),
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                Register().show(context);
+                                              },
+                                              child: Text(L10nX.getStr.sign_up,
+                                                  style: baseStyle.copyWith(
+                                                      fontSize: 12,
+                                                      color: notifier.buttoncolor)),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Visibility(
+                                      visible: userProfile != null,
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          SizedBox(
+                                            height: 40,
+                                            width: 145,
+                                            child: ElevatedButton(
+                                              style: ButtonStyle(
+                                                elevation:
+                                                const WidgetStatePropertyAll(0),
+                                                backgroundColor:
+                                                WidgetStatePropertyAll(
+                                                    ColorConst.whiteColor),
+                                                shape: const WidgetStatePropertyAll(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.all(
+                                                        Radius.circular(20)),
+                                                  ),
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                AuthorManager().handleLogout();
+                                                AppPages.routeName(
+                                                    Routes.landingPageRoute,
+                                                    isReplace: true);
+                                              },
+                                              child: Text(
+                                                  L10nX.getStr.sign_out_text,
+                                                  style: baseStyle.copyWith(
+                                                      fontSize: 12,
+                                                      color: Colors.red)),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ]),
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              width: 25,
-                            ),
-                          ],
-                        ),
-                  if (constraints.maxWidth < 800)
-                    const SizedBox()
-                  else
-                    Row(
-                      children: [
-                        PopupMenuButton(
-                          tooltip: '',
-                          padding: const EdgeInsets.all(0),
-                          offset: const Offset(10, 30),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
                           ),
-                          // initialValue: selectedMenu,
-                          constraints: const BoxConstraints(
-                            maxWidth: 200,
-                            maxHeight: 250,
-                          ),
-                          color: notifier.whitecolor,
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            child: Center(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  // Image.asset(
-                                  //   'assets/Icons/langicon.png',
-                                  //   height: height / 45,
-                                  //   color: langHover
-                                  //       ? notifier.blackcolor
-                                  //       : notifier.subgreycolor,
-                                  // ),
-                                  // const SizedBox(
-                                  //   width: 4,
-                                  // ),
-                                  // Text(L10nX.getStr.language_text, style: baseStyle.copyWith(
-                                  //     color: langHover
-                                  //         ? notifier.blackcolor
-                                  //         : notifier.subgreycolor,
-                                  //     fontSize: 14,
-                                  // )),
-                                  ClipRRect(
-                                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      borderRadius: BorderRadius.circular(2),
-                                      child: Image.asset(
-                                        "assets/lang/${currentLocale.languageCode}.png",
-                                        width: 18,
-                                        height: 14,
-                                        fit: BoxFit.cover,
-                                      )),
-                                  MySpacing.width(8),
-                                  MyText.labelMedium(
-                                      currentLocale.countryCode ?? "")
-                                ],
-                              ),
-                            ),
-                          ),
-                          itemBuilder: (BuildContext context) =>
-                              <PopupMenuEntry<SampleItem2>>[
-                            PopupMenuItem<SampleItem2>(
-                              enabled: true,
-                              value: SampleItem2.itemOne,
-                              onTap: () {},
-                              child: StatefulBuilder(
-                                builder: (context, setState) {
-                                  return Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          for (LanguageInfo language
-                                              in LanguageHelper()
-                                                  .supportedLanguages)
-                                            InkWell(
-                                              onTap: () {
-                                                LanguageHelper().changeLanguage(
-                                                    language, context);
-                                              },
-                                              child: Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: Dimens.size10,
-                                                    horizontal: Dimens.size8),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    ClipRRect(
-                                                        clipBehavior: Clip
-                                                            .antiAliasWithSaveLayer,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(2),
-                                                        child: Image.asset(
-                                                          "assets/lang/${language.languageCode}.png",
-                                                          width: 18,
-                                                          height: 14,
-                                                          fit: BoxFit.cover,
-                                                        )),
-                                                    MySpacing.width(8),
-                                                    MyText.labelMedium(
-                                                        language.language ?? "")
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                        ],
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  SizedBox(
-                    width: constraints.maxWidth < 500 ? 10 : 25,
-                  ),
-                  // Visibility(
-                  //   visible: userProfile!=null,
-                  //   child: PopupMenuButton(
-                  //     tooltip: '',
-                  //     padding: const EdgeInsets.all(0),
-                  //     offset: const Offset(0, 50),
-                  //     shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(20),),
-                  //     // initialValue: selectedMenu,
-                  //     constraints: const BoxConstraints(
-                  //       maxWidth: 310,
-                  //       maxHeight: 540,
-                  //     ),
-                  //     color: notifier.whitecolor,
-                  //     child: SizedBox(
-                  //       child: notifier.isDark ? Image.asset(
-                  //           'assets/Icons/darkBellIcon.png', height: constraints.maxWidth < 300 ? 25 : 30) : Image
-                  //           .asset('assets/Icons/bellicon.png', height: constraints.maxWidth < 300 ? 25 : 30),
-                  //     ),
-                  //     itemBuilder: (context) =>
-                  //     <PopupMenuEntry<SampleItem2>>[
-                  //       PopupMenuItem(
-                  //           enabled: true,
-                  //           onTap: () {},
-                  //           child: Column(
-                  //             children: [
-                  //               const SizedBox(height: 10),
-                  //               for(int i = 0; i <
-                  //                   5; i++ )
-                  //                 Column(
-                  //                     children: [
-                  //                       Row(
-                  //                         crossAxisAlignment: CrossAxisAlignment
-                  //                             .start,
-                  //                         children: [
-                  //                           Container(
-                  //                             height: 40,
-                  //                             width:  40,
-                  //                             decoration: BoxDecoration(
-                  //                               shape: BoxShape
-                  //                                   .circle,
-                  //                               color: notifier
-                  //                                   .lightgreencolor,
-                  //                             ),
-                  //                             alignment: Alignment
-                  //                                 .center,
-                  //                             child: SvgPicture
-                  //                                 .asset(
-                  //                                 'assets/Icons/paperIcon.svg',
-                  //                                 height: 20),
-                  //                           ),
-                  //                           const SizedBox(
-                  //                               width: 20),
-                  //                           Flexible(
-                  //                             child: Column(
-                  //                               children: [
-                  //                                 Text(
-                  //                                     'Wrapped Bitcoin is now listed on Unity Exchange',
-                  //                                     style: baseStyle.copyWith(
-                  //                                         fontSize: 14,
-                  //                                         color: notifier
-                  //                                             .blackcolor),
-                  //                                     maxLines: 2,
-                  //                                     softWrap: true),
-                  //                                 const SizedBox(height: 8),
-                  //                                 Row(
-                  //                                   mainAxisAlignment: MainAxisAlignment
-                  //                                       .spaceBetween,
-                  //                                   children: [
-                  //                                     Text(
-                  //                                         '24m ago',
-                  //                                         style: baseStyle.copyWith(
-                  //                                             fontSize: 12,
-                  //                                             color: notifier
-                  //                                                 .subgreycolor)),
-                  //                                     Text(
-                  //                                         '●',
-                  //                                         style: baseStyle.copyWith(
-                  //                                             color: notifier
-                  //                                                 .buttoncolor,
-                  //                                             fontSize: 10)),
-                  //                                   ],
-                  //                                 ),
-                  //                               ],
-                  //                             ),
-                  //                           ),
-                  //                         ],
-                  //                       ),
-                  //                       const SizedBox(
-                  //                           height: 10),
-                  //                       i == 4
-                  //                           ? const SizedBox()
-                  //                           : Divider(
-                  //                           color: notifier
-                  //                               .subgreycolor
-                  //                       ),
-                  //                       const SizedBox(
-                  //                           height: 10),
-                  //                     ]
-                  //                 ),
-                  //               const SizedBox(height: 10),
-                  //               SizedBox(
-                  //                 height: 40,
-                  //                 width: width / 1,
-                  //                 child: ElevatedButton(
-                  //                   style: ButtonStyle(
-                  //                     elevation: const WidgetStatePropertyAll(
-                  //                         0),
-                  //                     backgroundColor: WidgetStatePropertyAll(
-                  //                         notifier.buttoncolor),
-                  //                     shape: WidgetStatePropertyAll(
-                  //                       RoundedRectangleBorder(
-                  //                         side: BorderSide(
-                  //                             color: notifier
-                  //                                 .buttoncolor,
-                  //                             width: 2),
-                  //                         borderRadius: const BorderRadius
-                  //                             .all(
-                  //                             Radius
-                  //                                 .circular(
-                  //                                 10)),
-                  //                       ),
-                  //                     ),
-                  //                   ),
-                  //                   onPressed: () {
-                  //
-                  //                   },
-                  //                   child:  Text(
-                  //                       'See all notifications',
-                  //                       style: baseStyle.copyWith(
-                  //                           fontSize: 12,
-                  //                           color: Colors.white)),
-                  //                 ),
-                  //               ),
-                  //               const SizedBox(height: 10),
-                  //             ],
-                  //           )
-                  //       )
-                  //     ],),
-                  // ),
-                  SizedBox(
-                    width: constraints.maxWidth < 500 ? 10 : 25,
-                  ),
-                  PopupMenuButton(
-                    tooltip: '',
-                    padding: const EdgeInsets.all(0),
-                    offset: const Offset(0, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    // initialValue: selectedMenu,
-                    constraints: BoxConstraints(
-                      maxWidth: width / 1,
-                      maxHeight: 450,
-                    ),
-                    color: notifier.whitecolor,
-                    child: Container(
-                      height: height / 19,
-                      decoration: BoxDecoration(
-                        color: notifier.lightgreencolor,
-                        shape: BoxShape.circle,
+                        ],
                       ),
-                      clipBehavior: Clip.hardEdge,
-                      child: userProfile != null &&
-                              (userProfile.avatar ?? "").isNotEmpty
-                          ? ImageManager()
-                              .getImageByUrl(userProfile.avatar ?? "")
-                          : Image.asset(
-                              'assets/Icons/profileicon.png',
-                              height:
-                                  constraints.maxWidth < 300 ? 30 : height / 45,
-                              scale: 2.5,
-                            ),
-                    ),
-                    onSelected: (SampleItem2 item) {
-                      setState(() {
-                        // selectedMenu = item;
-                      });
-                    },
-                    itemBuilder: (BuildContext context) =>
-                        <PopupMenuEntry<SampleItem2>>[
-                      PopupMenuItem<SampleItem2>(
-                        enabled: true,
-                        value: SampleItem2.itemOne,
-                        onTap: () {},
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Visibility(
-                              visible: userProfile != null &&
-                                  ResponsiveInfo.isPhone(),
-                              child: InkWell(
-                                onTap: () {
-                                  AppPages.routeName(Routes.dashboardRoute);
-                                },
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    const SizedBox(width: 4),
-                                    Icon(
-                                      Icons.home_outlined,
-                                      size: Dimens.size25,
-                                      color: ColorConst.blackColor,
-                                    ),
-                                    const SizedBox(width: 20),
-                                    Text(L10nX.getStr.lets_study,
-                                        style: baseStyle.copyWith(
-                                          fontSize: 16,
-                                          color: notifier.blackcolor,
-                                        )),
-                                    const SizedBox(height: 30),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Visibility(
-                                visible: ResponsiveInfo.isPhone(),
-                                child: Column(
-                                  children: [
-                                    for (LanguageInfo language
-                                        in LanguageHelper().supportedLanguages)
-                                      InkWell(
-                                        onTap: () {
-                                          LanguageHelper().changeLanguage(
-                                              language, context);
-                                        },
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: Dimens.size12,
-                                              horizontal: Dimens.size30),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              ClipRRect(
-                                                  clipBehavior: Clip
-                                                      .antiAliasWithSaveLayer,
-                                                  borderRadius:
-                                                      BorderRadius.circular(2),
-                                                  child: Image.asset(
-                                                    "assets/lang/${language.languageCode}.png",
-                                                    width: 18,
-                                                    height: 14,
-                                                    fit: BoxFit.cover,
-                                                  )),
-                                              MySpacing.width(8),
-                                              MyText.labelMedium(
-                                                  language.language ?? "")
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                  ],
-                                )),
-                            const SizedBox(height: 20),
-                            // Visibility(
-                            //   visible: userProfile!=null,
-                            //   child: SizedBox(
-                            //     height: 330,
-                            //     width: 300,
-                            //     child: ListView.builder(
-                            //       itemCount: profilemenuImages.length,
-                            //       itemBuilder: (context, index) {
-                            //         return Column(
-                            //           children: [
-                            //             Row(
-                            //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //               children: [
-                            //                 Row(
-                            //                   mainAxisAlignment: MainAxisAlignment.start,
-                            //                   crossAxisAlignment: CrossAxisAlignment.center,
-                            //                   children: [
-                            //                     SvgPicture.asset(
-                            //                       notifier.isDark ? profilemenuImagesDark[index] : profilemenuImages[index],
-                            //                       height: Dimens.size20
-                            //                     ),
-                            //                     const SizedBox(width: 20),
-                            //                     Text(
-                            //                       profilemenuTags[index],
-                            //                       style: baseStyle.copyWith(
-                            //                           color: notifier.blackcolor,
-                            //                           fontSize: 16,
-                            //                           // fontWeight: FontWeight
-                            //                           //     .w600,
-                            //                           letterSpacing: 1),
-                            //                     ),
-                            //                     const SizedBox(
-                            //                         height: 30),
-                            //                   ],
-                            //                 ),
-                            //                 Container(
-                            //                   height: 20,
-                            //                   width: 20,
-                            //                   decoration: BoxDecoration(
-                            //                       shape: BoxShape.circle,
-                            //                       color: index <= 2
-                            //                           ? notifier.pinkcolor
-                            //                           : Colors.transparent
-                            //                   ),
-                            //                   alignment: Alignment.center,
-                            //                   child: Text(notNumber[index],
-                            //                       style: baseStyle.copyWith(
-                            //
-                            //                           color: Colors.white,
-                            //                           fontSize: 10)),
-                            //                 ),
-                            //               ],
-                            //             ),
-                            //             index == 5
-                            //                 ? const SizedBox(height: 10)
-                            //                 : const SizedBox(height: 20),
-                            //             index == 2 ? Divider(
-                            //                 color: notifier.sugestionbutton
-                            //             ) : const SizedBox(),
-                            //             index == 2
-                            //                 ? const SizedBox(height: 20)
-                            //                 : const SizedBox()
-                            //           ],
-                            //         );
-                            //       },
-                            //     ),
-                            //   ),
-                            // ),
-                            Padding(
-                              padding:
-                                  EdgeInsets.symmetric(vertical: Dimens.size10),
-                              child: Stack(children: [
-                                Visibility(
-                                  visible: userProfile == null,
-                                  child: Row(
-                                    children: [
-                                      SizedBox(
-                                        height: 40,
-                                        width: 145,
-                                        child: ElevatedButton(
-                                          style: ButtonStyle(
-                                            elevation:
-                                                const WidgetStatePropertyAll(0),
-                                            backgroundColor:
-                                                WidgetStatePropertyAll(
-                                                    notifier.buttoncolor),
-                                            shape: const WidgetStatePropertyAll(
-                                              RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(20)),
-                                              ),
-                                            ),
-                                          ),
-                                          onPressed: () {
-                                            LoginPage().show(context);
-                                            //AppPages.route(Paths.dashboardPath);
-                                          },
-                                          child: Text(L10nX.getStr.login,
-                                              style: baseStyle.copyWith(
-                                                  fontSize: 12,
-                                                  color: Colors.white)),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      SizedBox(
-                                        height: 40,
-                                        width: 145,
-                                        child: ElevatedButton(
-                                          style: ButtonStyle(
-                                            elevation:
-                                                const WidgetStatePropertyAll(0),
-                                            backgroundColor:
-                                                WidgetStatePropertyAll(
-                                                    notifier.whitecolor),
-                                            shape: WidgetStatePropertyAll(
-                                              RoundedRectangleBorder(
-                                                side: BorderSide(
-                                                    color: notifier.buttoncolor,
-                                                    width: 2),
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(20)),
-                                              ),
-                                            ),
-                                          ),
-                                          onPressed: () {
-                                            Register().show(context);
-                                          },
-                                          child: Text(L10nX.getStr.sign_up,
-                                              style: baseStyle.copyWith(
-                                                  fontSize: 12,
-                                                  color: notifier.buttoncolor)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Visibility(
-                                  visible: userProfile != null,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        height: 40,
-                                        width: 145,
-                                        child: ElevatedButton(
-                                          style: ButtonStyle(
-                                            elevation:
-                                                const WidgetStatePropertyAll(0),
-                                            backgroundColor:
-                                                WidgetStatePropertyAll(
-                                                    ColorConst.whiteColor),
-                                            shape: const WidgetStatePropertyAll(
-                                              RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(20)),
-                                              ),
-                                            ),
-                                          ),
-                                          onPressed: () {
-                                            AuthorManager().handleLogout();
-                                            AppPages.routeName(
-                                                Routes.landingPageRoute,
-                                                isReplace: true);
-                                          },
-                                          child: Text(
-                                              L10nX.getStr.sign_out_text,
-                                              style: baseStyle.copyWith(
-                                                  fontSize: 12,
-                                                  color: Colors.red)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ]),
-                            ),
-                          ],
-                        ),
+                      SizedBox(
+                        width: constraints.maxWidth < 500 ? 10 : 25,
                       ),
                     ],
                   ),
-                  SizedBox(
-                    width: constraints.maxWidth < 500 ? 10 : 25,
-                  ),
                 ],
               ),
-            ],
-          ),
+            );
+          },
         );
       },
     );
@@ -1127,322 +920,70 @@ class _LandingPageScreenState extends State<LandingPageScreen>
         title: L10nX().getStringByKey("medthod_title${index + 1}"),
       ));
     }
-    return Container(
-      // color: Colors.red,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // Container(
-          //   color: Colors.red,
-          //   height:  ResponsiveInfo.isPhone()
-          //       ? constraints.maxWidth / 5
-          //       : constraints.maxWidth / 15,
-          // ),
-          Padding(
-            padding: EdgeInsets.only(
-                left: constraints.maxWidth < 500 ? 10 : 0,
-                right: constraints.maxWidth < 500 ? 10 : 0),
-            child: Column(
-              children: [
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: L10nX.getStr.differences_in_teaching_methods_1,
-                        style: TextStyleConstant
-                            .titleTextColorOnBackgroundColorStyle14w400
-                            .copyWith(
-                          fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                          color: notifier.blackcolor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      TextSpan(
-                        text: L10nX.getStr.differences_in_teaching_methods_2,
-                        style: TextStyleConstant
-                            .titleTextColorOnBackgroundColorStyle14w400
-                            .copyWith(
-                          fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                          color: notifier.redcolor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      TextSpan(
-                        text: L10nX.getStr.differences_in_teaching_methods_3,
-                        style: TextStyleConstant
-                            .titleTextColorOnBackgroundColorStyle14w400
-                            .copyWith(
-                          fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                          color: notifier.blackcolor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Text(
-                  L10nX.getStr
-                      .we_are_different_because_we_understand_what_you_need,
-                  style: TextStyleConstant
-                      .titleTextColorOnBackgroundColorStyle14w400
-                      .copyWith(
-                          fontSize: ResponsiveInfo.isPhone() ? 18 : 20,
-                          color: notifier.greycolor),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: ResponsiveInfo.isPhone() ? 0 : constraints.maxWidth / 30,
-          ),
-          Container(
-            // height: Dimens.size240,
-            constraints: BoxConstraints(
-              maxWidth: ResponsiveInfo.isPhone()
-                  ? constraints.maxWidth - Dimens.size20
-                  : constraints.maxWidth * 3 / 4,
-            ),
-            child: SingleChildScrollView(
-              controller: differrentController,
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: listItem,
-              ),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                      width: 2,
-                      color: (isHover)
-                          ? notifier.sugestionbutton
-                          : Colors.transparent),
-                ),
-                child: InkWell(
-                  onTap: () {
-                    double itemWidth = ResponsiveInfo.isPhone()
-                        ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
-                        : (constraints.maxWidth < 1100)
-                        ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
-                        :(constraints.maxWidth < 1600)
-                        ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
-                        :Dimens.size340;
-                    if (differrentController.offset >= 0) {
-                      differrentController.animateTo(differrentController.offset - itemWidth - 36*2,
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.easeInOut,
-                      );
-                    }
-                  },
-                  onHover: (val) {
-                    setState(() {
-                      isHover = val;
-                    });
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(13),
-                    child: Image.asset(
-                      'assets/Icons/arrowlefticon.png',
-                      width: 15,
-                      color: notifier.subgreycolor,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 10),
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                      width: 2,
-                      color: (isHover2)
-                          ? notifier.sugestionbutton
-                          : Colors.transparent),
-                ),
-                child: InkWell(
-                  onTap: () {
-                    double itemWidth = ResponsiveInfo.isPhone()
-                        ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
-                        : (constraints.maxWidth < 1100)
-                        ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
-                        :(constraints.maxWidth < 1600)
-                        ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
-                        :Dimens.size340;
-                    if (differrentController.offset >= 0) {
-                      differrentController.animateTo(differrentController.offset + itemWidth + 36*2,
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.easeInOut,
-                      );
-                    }
-                  },
-                  onHover: (val) {
-                    setState(() {
-                      isHover2 = val;
-                    });
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(13),
-                    child: Image.asset('assets/Icons/arrowrighticon.png',
-                        width: 15, color: notifier.subgreycolor),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildSuggestItem(
-      {required BoxConstraints constraints,
-      required String imageAssetName,
-      String? title,
-      String? content}) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: Dimens.size36, vertical: Dimens.size20),
-      child: SizedBox(
-        width: ResponsiveInfo.isPhone()
-            ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
-            : (constraints.maxWidth < 1100)
-            ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
-            :(constraints.maxWidth < 1600)
-            ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
-            :Dimens.size340,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
+    return StatefulBuilder(
+      builder: (BuildContext context, void Function(void Function()) setState) {  
+        return Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ImageManager().getSvgImage(imageAssetName,
-                isSvgFolder: false,
-                height: constraints.maxWidth < 750
-                    ? 80
-                    : constraints.maxWidth < 1000
-                        ? 100
-                        : 120),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  title ?? "",
-                  style: TextStyleConstant.textStyleBlack18w600.copyWith(
-                    fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
-                    color: notifier.blackcolor,
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  content ?? "",
-                  style: TextStyleConstant.textStyleBlack12w400.copyWith(
-                    fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
-                    color: notifier.blackcolor,
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 3,
-                ),
-              ],
-            ),
-            SizedBox(
-              width: ResponsiveInfo.isPhone()
-                  ? (sugindex == 5 ? 0 : 16)
-                  : (sugindex == 5 ? 0 : constraints.maxWidth / 24),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildWhyChooseUsListWidget({
-    required BoxConstraints constraints,
-  }) {
-    List<Widget> listItem = List.empty(growable: true);
-    for (int index = 0; index < differentimage.length; index++) {
-      listItem.add(buildSuggestItem(
-        constraints: constraints,
-        imageAssetName: differentimage[index],
-        content: L10nX().getStringByKey("why_choose_content${index + 1}"),
-        title: L10nX().getStringByKey("why_choose_title${index + 1}"),
-      ));
-    }
-    return Container(
-      // color: Colors.green,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
-        child: Column(
-          children: [
-            RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
+            Padding(
+              padding: EdgeInsets.only(
+                  left: constraints.maxWidth < 500 ? 10 : 0,
+                  right: constraints.maxWidth < 500 ? 10 : 0),
+              child: Column(
                 children: [
-                  TextSpan(
-                    text: L10nX.getStr.why_choose_us_1,
-                    style: TextStyleConstant
-                        .titleTextColorOnBackgroundColorStyle14w400
-                        .copyWith(
-                      fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                      color: notifier.blackcolor,
-                      fontWeight: FontWeight.bold,
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: L10nX.getStr.differences_in_teaching_methods_1,
+                          style: TextStyleConstant
+                              .titleTextColorOnBackgroundColorStyle14w400
+                              .copyWith(
+                            fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
+                            color: notifier.blackcolor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: L10nX.getStr.differences_in_teaching_methods_2,
+                          style: TextStyleConstant
+                              .titleTextColorOnBackgroundColorStyle14w400
+                              .copyWith(
+                            fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
+                            color: notifier.redcolor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: L10nX.getStr.differences_in_teaching_methods_3,
+                          style: TextStyleConstant
+                              .titleTextColorOnBackgroundColorStyle14w400
+                              .copyWith(
+                            fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
+                            color: notifier.blackcolor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  TextSpan(
-                    text: L10nX.getStr.why_choose_us_2,
+                  Text(
+                    L10nX.getStr
+                        .we_are_different_because_we_understand_what_you_need,
                     style: TextStyleConstant
                         .titleTextColorOnBackgroundColorStyle14w400
                         .copyWith(
-                      fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                      color: notifier.redcolor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextSpan(
-                    text: L10nX.getStr.why_choose_us_3,
-                    style: TextStyleConstant
-                        .titleTextColorOnBackgroundColorStyle14w400
-                        .copyWith(
-                      fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                      color: notifier.blackcolor,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        fontSize: ResponsiveInfo.isPhone() ? 18 : 20,
+                        color: notifier.greycolor),
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
             ),
-            Text(
-              L10nX.getStr.why_choose_us_sub_title,
-              style: TextStyleConstant
-                  .titleTextColorOnBackgroundColorStyle14w400
-                  .copyWith(
-                      fontSize: constraints.maxWidth < 700 ? 16 : 18,
-                      color: notifier.greycolor),
-              textAlign: TextAlign.center,
-            ),
             SizedBox(
-              height: constraints.maxWidth < 550
-                  ? 0
-                  : constraints.maxWidth < 800
-                      ? constraints.maxWidth / 30
-                      : constraints.maxWidth / 30,
+              height: ResponsiveInfo.isPhone() ? 0 : constraints.maxWidth / 30,
             ),
             Container(
               // height: Dimens.size240,
@@ -1452,7 +993,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     : constraints.maxWidth * 3 / 4,
               ),
               child: SingleChildScrollView(
-                controller: whyChooseUsController,
+                controller: differrentController,
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -1471,17 +1012,21 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     shape: BoxShape.circle,
                     border: Border.all(
                         width: 2,
-                        color: (isHover3)
+                        color: (isHover)
                             ? notifier.sugestionbutton
                             : Colors.transparent),
                   ),
                   child: InkWell(
                     onTap: () {
-                      if (whyChooseUsController.offset > 0) {
-                        whyChooseUsController.animateTo(
-                          (constraints.maxWidth < 750)
-                              ? whyChooseUsController.offset - 225 * 2
-                              : whyChooseUsController.offset - 325 * 2,
+                      double itemWidth = ResponsiveInfo.isPhone()
+                          ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
+                          : (constraints.maxWidth < 1100)
+                          ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
+                          :(constraints.maxWidth < 1600)
+                          ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
+                          :Dimens.size340;
+                      if (differrentController.offset >= 0) {
+                        differrentController.animateTo(differrentController.offset - itemWidth - 36*2,
                           duration: const Duration(milliseconds: 200),
                           curve: Curves.easeInOut,
                         );
@@ -1489,7 +1034,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     },
                     onHover: (val) {
                       setState(() {
-                        isHover3 = val;
+                        isHover = val;
                       });
                     },
                     child: Padding(
@@ -1509,17 +1054,21 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     shape: BoxShape.circle,
                     border: Border.all(
                         width: 2,
-                        color: (isHover4)
+                        color: (isHover2)
                             ? notifier.sugestionbutton
                             : Colors.transparent),
                   ),
                   child: InkWell(
                     onTap: () {
-                      if (whyChooseUsController.offset >= 0) {
-                        whyChooseUsController.animateTo(
-                          (constraints.maxWidth < 750)
-                              ? whyChooseUsController.offset + 225 * 2
-                              : whyChooseUsController.offset + 325 * 2,
+                      double itemWidth = ResponsiveInfo.isPhone()
+                          ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
+                          : (constraints.maxWidth < 1100)
+                          ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
+                          :(constraints.maxWidth < 1600)
+                          ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
+                          :Dimens.size340;
+                      if (differrentController.offset >= 0) {
+                        differrentController.animateTo(differrentController.offset + itemWidth + 36*2,
                           duration: const Duration(milliseconds: 200),
                           curve: Curves.easeInOut,
                         );
@@ -1527,7 +1076,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     },
                     onHover: (val) {
                       setState(() {
-                        isHover4 = val;
+                        isHover2 = val;
                       });
                     },
                     child: Padding(
@@ -1540,8 +1089,251 @@ class _LandingPageScreenState extends State<LandingPageScreen>
               ],
             ),
           ],
-        ),
-      ),
+        );
+      },
+    );
+  }
+
+  Widget buildSuggestItem(
+      {required BoxConstraints constraints,
+      required String imageAssetName,
+      String? title,
+      String? content}) {
+    return StatefulBuilder(
+      builder: (BuildContext context, void Function(void Function()) setState) {
+        return Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: Dimens.size36, vertical: Dimens.size20),
+          child: SizedBox(
+            width: ResponsiveInfo.isPhone()
+                ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
+                : (constraints.maxWidth < 1100)
+                ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
+                :(constraints.maxWidth < 1600)
+                ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
+                :Dimens.size340,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ImageManager().getSvgImage(imageAssetName,
+                    isSvgFolder: false,
+                    height: constraints.maxWidth < 750
+                        ? 80
+                        : constraints.maxWidth < 1000
+                        ? 100
+                        : 120),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      title ?? "",
+                      style: TextStyleConstant.textStyleBlack18w600.copyWith(
+                        fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
+                        color: notifier.blackcolor,
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      content ?? "",
+                      style: TextStyleConstant.textStyleBlack12w400.copyWith(
+                        fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
+                        color: notifier.blackcolor,
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 3,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  width: ResponsiveInfo.isPhone()
+                      ? (sugindex == 5 ? 0 : 16)
+                      : (sugindex == 5 ? 0 : constraints.maxWidth / 24),
+                ),
+              ],
+            ),
+          ));
+      },
+    );
+  }
+
+  Widget buildWhyChooseUsListWidget({
+    required BoxConstraints constraints,
+  }) {
+    List<Widget> listItem = List.empty(growable: true);
+    for (int index = 0; index < differentimage.length; index++) {
+      listItem.add(buildSuggestItem(
+        constraints: constraints,
+        imageAssetName: differentimage[index],
+        content: L10nX().getStringByKey("why_choose_content${index + 1}"),
+        title: L10nX().getStringByKey("why_choose_title${index + 1}"),
+      ));
+    }
+    return StatefulBuilder(
+      builder: (BuildContext context, void Function(void Function()) setState) { 
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
+          child: Column(
+            children: [
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: L10nX.getStr.why_choose_us_1,
+                      style: TextStyleConstant
+                          .titleTextColorOnBackgroundColorStyle14w400
+                          .copyWith(
+                        fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
+                        color: notifier.blackcolor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: L10nX.getStr.why_choose_us_2,
+                      style: TextStyleConstant
+                          .titleTextColorOnBackgroundColorStyle14w400
+                          .copyWith(
+                        fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
+                        color: notifier.redcolor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextSpan(
+                      text: L10nX.getStr.why_choose_us_3,
+                      style: TextStyleConstant
+                          .titleTextColorOnBackgroundColorStyle14w400
+                          .copyWith(
+                        fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
+                        color: notifier.blackcolor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                L10nX.getStr.why_choose_us_sub_title,
+                style: TextStyleConstant
+                    .titleTextColorOnBackgroundColorStyle14w400
+                    .copyWith(
+                    fontSize: constraints.maxWidth < 700 ? 16 : 18,
+                    color: notifier.greycolor),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: constraints.maxWidth < 550
+                    ? 0
+                    : constraints.maxWidth < 800
+                    ? constraints.maxWidth / 30
+                    : constraints.maxWidth / 30,
+              ),
+              Container(
+                // height: Dimens.size240,
+                constraints: BoxConstraints(
+                  maxWidth: ResponsiveInfo.isPhone()
+                      ? constraints.maxWidth - Dimens.size20
+                      : constraints.maxWidth * 3 / 4,
+                ),
+                child: SingleChildScrollView(
+                  controller: whyChooseUsController,
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: listItem,
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          width: 2,
+                          color: (isHover3)
+                              ? notifier.sugestionbutton
+                              : Colors.transparent),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        if (whyChooseUsController.offset > 0) {
+                          whyChooseUsController.animateTo(
+                            (constraints.maxWidth < 750)
+                                ? whyChooseUsController.offset - 225 * 2
+                                : whyChooseUsController.offset - 325 * 2,
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.easeInOut,
+                          );
+                        }
+                      },
+                      onHover: (val) {
+                        setState(() {
+                          isHover3 = val;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(13),
+                        child: Image.asset(
+                          'assets/Icons/arrowlefticon.png',
+                          width: 15,
+                          color: notifier.subgreycolor,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          width: 2,
+                          color: (isHover4)
+                              ? notifier.sugestionbutton
+                              : Colors.transparent),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        if (whyChooseUsController.offset >= 0) {
+                          whyChooseUsController.animateTo(
+                            (constraints.maxWidth < 750)
+                                ? whyChooseUsController.offset + 225 * 2
+                                : whyChooseUsController.offset + 325 * 2,
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.easeInOut,
+                          );
+                        }
+                      },
+                      onHover: (val) {
+                        setState(() {
+                          isHover4 = val;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(13),
+                        child: Image.asset('assets/Icons/arrowrighticon.png',
+                            width: 15, color: notifier.subgreycolor),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
