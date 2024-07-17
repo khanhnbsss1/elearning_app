@@ -3,13 +3,11 @@ class CourseFilterListInfo {
 
   CourseFilterListInfo({this.data});
 
-  CourseFilterListInfo.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
+  CourseFilterListInfo.fromJson(dynamic json) {
       data = <CourseFilterInfo>[];
-      json['data'].forEach((v) {
+      json.forEach((v) {
         data!.add(new CourseFilterInfo.fromJson(v));
       });
-    }
   }
 
   Map<String, dynamic> toJson() {
@@ -33,9 +31,9 @@ class CourseFilterInfo {
     id = json['id'];
     filterType = json['filterType'];
     name = json['name'];
-    if (json['sub_filter'] != null) {
+    if (json['subFilter'] != null) {
       subFilter = <SubFilter>[];
-      json['sub_filter'].forEach((v) {
+      json['subFilter'].forEach((v) {
         subFilter!.add(new SubFilter.fromJson(v));
       });
     }
@@ -47,7 +45,7 @@ class CourseFilterInfo {
     data['filterType'] = filterType;
     data['name'] = name;
     if (subFilter != null) {
-      data['sub_filter'] = subFilter!.map((v) => v.toJson()).toList();
+      data['subFilter'] = subFilter!.map((v) => v.toJson()).toList();
     }
     return data;
   }

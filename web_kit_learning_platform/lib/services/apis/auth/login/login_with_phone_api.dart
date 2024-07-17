@@ -34,6 +34,7 @@ class LoginWithPhoneApi extends BaseApiRequest {
            GetUserProfileInfoApi getUserProfileInfoApi = GetUserProfileInfoApi();
            try{
              await getUserProfileInfoApi.call();
+             await InstanceManager().getFilterCourse();
            }
            catch(e)
            {

@@ -1,3 +1,4 @@
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 
 import 'models/course_filtter_info.dart';
@@ -5,12 +6,12 @@ import 'models/course_filtter_info.dart';
 class GetCourseFilterApi extends BaseApiRequest {
   GetCourseFilterApi():super(
     serviceType: SERVICE_TYPE.COURSE,
-    apiName: ApiName.getInstance().getCourseDetail,
+    apiName: ApiName.getInstance().getFilterCourse,
   );
 
   Future<dynamic> call() async {
     await getAuthorization();
-    dynamic result = await postRequestAPI();
+    dynamic result = await getRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {
@@ -18,8 +19,8 @@ class GetCourseFilterApi extends BaseApiRequest {
     }
     else
     {
-      CourseFilterListInfo courseFilterListInfo = CourseFilterListInfo.fromJson(result);
-      return courseFilterListInfo;
+      InstanceManager().courseFilterListInfo = CourseFilterListInfo.fromJson(result);
+      return InstanceManager().courseFilterListInfo;
     }
   }
 
