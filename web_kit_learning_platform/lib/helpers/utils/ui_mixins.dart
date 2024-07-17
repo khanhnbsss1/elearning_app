@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:webkit/helpers/theme/admin_theme.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/widgets/my_dashed_divider.dart';
-import 'package:webkit/helpers/widgets/my_navigation_mixin.dart';
 
 mixin UIMixin {
   // ThemeData get theme => AppStyle.theme;
@@ -45,19 +44,6 @@ mixin UIMixin {
         borderRadius: BorderRadius.all(Radius.circular(radius)),
         borderSide: BorderSide(width: 1, color: theme.colorScheme.primary),
       );
-
-  Widget getBackButton(MyNavigationMixin navigationMixin) {
-    return InkWell(
-      onTap: navigationMixin.goBack,
-      child: Center(
-        child: Icon(
-          Icons.chevron_left_rounded,
-          size: 26,
-          color: theme.colorScheme.onSurface,
-        ),
-      ),
-    );
-  }
 
   Widget getDashedDivider() {
     return MyDashedDivider(

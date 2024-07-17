@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -27,14 +28,14 @@ import 'helpers/theme/app_style.dart';
 import 'helpers/theme/theme_customizer.dart';
 import 'l10n/l10n_extention.dart';
 import 'package:firebase_core/firebase_core.dart';
-import '../../base/theme/text_stype_constant.dart';
 import 'landing_page/components/colornotifier.dart';
 
 Future<void> main() async {
   //SmoothWidgetsFlutterBinding.ensureInitialized(); // add this line
-  WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();
-  await FlavorSettings().setProductTypeByFlavor();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  FlutterNativeSplash.remove();
   await initialService();
   AppStyle.init();
   await ThemeCustomizer.init();
@@ -70,6 +71,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 Future<void> initialService()async {
   await SharedPreferencesStorage().initSharedPreferences();
   //FirebaseManager.getInstance.initialFirebase();
+  await FlavorSettings().setProductTypeByFlavor();
   await AuthorManager().init();
   await ScreenUtil.ensureScreenSize();
 
@@ -102,7 +104,7 @@ class MyApp extends StatelessWidget {
       },
       builder: (BuildContext context, state)  {
         return GetMaterialApp(
-          key: UniqueKey(),
+          key: UniqueKey(),//Key(LanguageHelper().getCurrentLocale().languageCode),
           scrollBehavior: ScrollConfiguration.of(context).copyWith(
             scrollbars: false,
             dragDevices: {
@@ -125,8 +127,7 @@ class MyApp extends StatelessWidget {
             ScreenUtil.init(context);
             ResponsiveInfo().init(context);
             NavigationService.registerContext(context, update: true);
-           return child ?? Container();
-/*            return Directionality(
+            return Directionality(
               textDirection: AppTheme.textDirection,
               child: Overlay(
                 initialEntries: [
@@ -134,15 +135,14 @@ class MyApp extends StatelessWidget {
                     return Consumer<AppNotifier>(
                         builder: (_, notifier, ___) {
                           return SelectionArea (
-                            key: UniqueKey(),
-                            selectionControls: materialTextSelectionControls,
-                            child: child ?? Container());
+                              key: UniqueKey(),
+                              selectionControls: materialTextSelectionControls,
+                              child: child ?? Container());
                         });
                   })
                 ],
               ),
-            );*/
-            
+            );      
           },
           localizationsDelegates: const [
             S.delegate,

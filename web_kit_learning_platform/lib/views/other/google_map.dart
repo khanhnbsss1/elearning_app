@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/other/google_map_controller.dart';
 import 'package:webkit/helpers/extensions/string.dart';
@@ -25,19 +24,16 @@ class GoogleMapPage extends StatefulWidget {
 
 class _GoogleMapPageState extends State<GoogleMapPage>
     with SingleTickerProviderStateMixin, UIMixin {
-  late GoogleMapPageController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = Get.put(GoogleMapPageController());
   }
 
   @override
   Widget build(BuildContext context) {
     return Layout(
       child: GetBuilder(
-        init: controller,
         builder: (controller) {
           return Column(
             children: [

@@ -245,117 +245,121 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
       {required BoxConstraints constraints,
       required ReviewLandingPageInfo reviewLandingPageInfo,
       required ReviewListState state}) {
-    return Container(
-      width: (constraints.maxWidth < 550) ? MediaQuery.sizeOf(context).width/ 1.1
-          : (constraints.maxWidth < 750) ? MediaQuery.sizeOf(context).width/ 1.1
-          : (constraints.maxWidth < 1150) ? MediaQuery.sizeOf(context).width/ 1.1
-          : MediaQuery.sizeOf(context).width/ 2.4,
-      child: Padding(
-        padding: const EdgeInsets.all( 12.0),
-        child: Card(
-          elevation: 10,
-          shape:
+    return StatefulBuilder(
+      builder: (BuildContext context, void Function(void Function()) setState) { 
+        return SizedBox(
+          width: (constraints.maxWidth < 550) ? MediaQuery.sizeOf(context).width/ 1.1
+              : (constraints.maxWidth < 750) ? MediaQuery.sizeOf(context).width/ 1.1
+              : (constraints.maxWidth < 1150) ? MediaQuery.sizeOf(context).width/ 1.1
+              : MediaQuery.sizeOf(context).width/ 2.4,
+          child: Padding(
+            padding: const EdgeInsets.all( 12.0),
+            child: Card(
+              elevation: 10,
+              shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color:
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color:
                   notifier.isDark ? Colors.transparent : ColorConst.whiteColor,
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: reviewLandingPageInfo.avatar!.isNotEmpty
-                          ? ImageManager().getImageByUrl(
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 5,
+                      child: Padding(
+                        padding: EdgeInsets.all(16),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: reviewLandingPageInfo.avatar!.isNotEmpty
+                              ? ImageManager().getImageByUrl(
                               reviewLandingPageInfo.avatar ?? "",
                               boxFit: BoxFit.fill)
-                          : Image.asset(
+                              : Image.asset(
                               'assets/deshboard/latestdeals.png',
                               fit: BoxFit.fill),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                Flexible(
-                  flex: 5,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 16, top: 16, bottom: 16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: constraints.maxWidth < 550
-                          ? CrossAxisAlignment.center
-                          : CrossAxisAlignment.start,
-                      children: [
-                        Row(
+                    Flexible(
+                      flex: 5,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 16, top: 16, bottom: 16),
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: constraints.maxWidth < 550
+                              ? CrossAxisAlignment.center
+                              : CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              reviewLandingPageInfo.name ?? "",
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyleConstant
-                                  .titleTextColorOnBackgroundColorStyle16w600
-                                  .copyWith(
-                                      color: notifier.redcolor,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: (constraints.maxWidth / 45 > 14) ? constraints.maxWidth / 45 : 14,),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Flexible(
-                              child: Text(reviewLandingPageInfo.position ?? "",
-                                  style: baseStyle.copyWith(
-
-                                    fontSize: (constraints.maxWidth / 60 > 10) ? constraints.maxWidth / 60 : 10,
-                                    color: notifier.greycolor,
-                                  ),
-                                  textAlign: TextAlign.center),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: constraints.maxWidth < 550 ? 0 : 8,
-                        ),
-                        LayoutBuilder(
-                          builder: (context, constraints) {
-                            return ConstrainedBox(
-                              constraints: BoxConstraints(maxHeight: constraints.maxWidth / 2),
-                              child: SingleChildScrollView(
-                                child: ReadMoreText(
-                                  ("\"${(reviewLandingPageInfo.review!+" ") * 10}\" ")?? "",
-                                  trimMode: TrimMode.Line,
-                                  trimLines: 2,
-                                  colorClickableText: Colors.pink,
-                                  trimCollapsedText: L10nX.getStr.show_more,
-                                  trimExpandedText: L10nX.getStr.show_less,
-                                  style: baseStyle.copyWith(
-                                    fontStyle: FontStyle.italic,
-                                    fontSize: (constraints.maxWidth / 25 > 16) ? constraints.maxWidth / 25 : 16,
-                                    color: notifier.blackcolor,
-                                  ),
-                                  textAlign: TextAlign.justify,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  reviewLandingPageInfo.name ?? "",
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyleConstant
+                                      .titleTextColorOnBackgroundColorStyle16w600
+                                      .copyWith(
+                                    color: notifier.redcolor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: (constraints.maxWidth / 45 > 14) ? constraints.maxWidth / 45 : 14,),
+                                  textAlign: TextAlign.center,
                                 ),
-                              ),
-                            );
-                          },
-                        )
-                      ],
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Flexible(
+                                  child: Text(reviewLandingPageInfo.position ?? "",
+                                      style: baseStyle.copyWith(
+
+                                        fontSize: (constraints.maxWidth / 60 > 10) ? constraints.maxWidth / 60 : 10,
+                                        color: notifier.greycolor,
+                                      ),
+                                      textAlign: TextAlign.center),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: constraints.maxWidth < 550 ? 0 : 8,
+                            ),
+                            LayoutBuilder(
+                              builder: (context, constraints) {
+                                return ConstrainedBox(
+                                  constraints: BoxConstraints(maxHeight: constraints.maxWidth / 2),
+                                  child: SingleChildScrollView(
+                                    child: ReadMoreText(
+                                      ("\"${(reviewLandingPageInfo.review!+" ") * 10}\" ")?? "",
+                                      trimMode: TrimMode.Line,
+                                      trimLines: 2,
+                                      colorClickableText: Colors.pink,
+                                      trimCollapsedText: L10nX.getStr.show_more,
+                                      trimExpandedText: L10nX.getStr.show_less,
+                                      style: baseStyle.copyWith(
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: (constraints.maxWidth / 25 > 16) ? constraints.maxWidth / 25 : 16,
+                                        color: notifier.blackcolor,
+                                      ),
+                                      textAlign: TextAlign.justify,
+                                    ),
+                                  ),
+                                );
+                              },
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 

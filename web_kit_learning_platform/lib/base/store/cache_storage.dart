@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_html/html.dart'if (kIsWeb) "dart:html" as html_cache;
+import 'package:universal_html/html.dart'if (kIsWeb) 'package:web/web.dart' as html_cache;
 
 import '../utils/file_utils.dart';
 

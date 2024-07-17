@@ -257,79 +257,84 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
   Widget buildTeacherItem1(
       {required LandingPageUserInfo landingPageUserInfo,
       required BoxConstraints constraints}) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Card(
-        elevation: 10,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16)
-        ),
-        // decoration: BoxDecoration(
-        //   border: Border.all(
-        //     color: Colors.black,
-        //   )
-        // ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Container(
-                width: Dimens.size300,
-                height: Dimens.size340,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: ImageManager().getImageByUrl(
-                      landingPageUserInfo.avatar ?? "",
-                      boxFit: BoxFit.cover),
-                ),
-              ),
+    return StatefulBuilder(
+      builder: (BuildContext context, void Function(void Function()) setState) { 
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Card(
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16)
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: ColorConst.whiteColor,
-                  borderRadius: BorderRadius.circular(Dimens.size16)
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(landingPageUserInfo.fullname ?? "",
-                          style: baseStyle.copyWith(
-                              color: notifier.blackcolor,
-                              fontSize:  (constraints.maxWidth < 900)
-                                          ? Dimens.size16
-                                          : (constraints.maxWidth < 1300)
-                                              ? Dimens.size18
-                                              : Dimens.size24,
-
-                              fontWeight: FontWeight.w500)),
-                      Text(
-                        landingPageUserInfo.position ?? "",
-                        style: baseStyle.copyWith(
-                            color: notifier.blackcolor,
-                            fontSize: (constraints.maxWidth < 900)
-                                        ? Dimens.size12
-                                        : (constraints.maxWidth < 1300)
-                                            ? Dimens.size14
-                                            : Dimens.size20,
-                            ),
-                        maxLines: 2,
-                      ),
-                      Gap(Dimens.size20)
-                    ],
+            // decoration: BoxDecoration(
+            //   border: Border.all(
+            //     color: Colors.black,
+            //   )
+            // ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Container(
+                    width: Dimens.size300,
+                    height: Dimens.size340,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: ImageManager().getImageByUrl(
+                          landingPageUserInfo.avatar ?? "",
+                          boxFit: BoxFit.cover),
+                    ),
                   ),
                 ),
-              ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: ColorConst.whiteColor,
+                        borderRadius: BorderRadius.circular(Dimens.size16)
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(landingPageUserInfo.fullname ?? "",
+                              style: baseStyle.copyWith(
+                                  color: notifier.blackcolor,
+                                  fontSize:  (constraints.maxWidth < 900)
+                                      ? Dimens.size16
+                                      : (constraints.maxWidth < 1300)
+                                      ? Dimens.size18
+                                      : Dimens.size24,
+
+                                  fontWeight: FontWeight.w500)),
+                          Text(
+                            landingPageUserInfo.position ?? "",
+                            style: baseStyle.copyWith(
+                              color: notifier.blackcolor,
+                              fontSize: (constraints.maxWidth < 900)
+                                  ? Dimens.size12
+                                  : (constraints.maxWidth < 1300)
+                                  ? Dimens.size14
+                                  : Dimens.size20,
+                            ),
+                            maxLines: 2,
+                          ),
+                          Gap(Dimens.size20)
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                // SizedBox(height: 10),
+              ],
             ),
-            // SizedBox(height: 10),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
+      
     );
   }
 

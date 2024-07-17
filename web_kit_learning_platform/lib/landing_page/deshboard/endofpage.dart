@@ -2,13 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
-import 'package:universal_html/js.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/responsive/ui_responsive.dart';
 import 'package:webkit/base/widgets/static_view/static_view.dart';
-import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 
 import '../components/colornotifier.dart';
 import '../mediaquery/mq.dart';
@@ -160,7 +157,6 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                                         Text(
                                           L10nX.getStr.app_name,
                                           style: baseStyle.copyWith(
-
                                             color: notifier.blackcolor,
                                             fontSize: 24,
                                           ),
@@ -326,24 +322,27 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                                     mainAxisExtent: 40,
                                     crossAxisSpacing: 25),
                                 itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: () {},
-                                    onHover: (value) {
-                                      setState(() {
-                                        elementsHover[index] = value;
-                                      });
-                                    },
-                                    child: Container(
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          endElements[index],
-                                          style: baseStyle.copyWith(
-                                              fontSize: 16,
-                                              color: elementsHover[index] ? notifier.subgreycolor : notifier.whitecolor),
+                                  return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+                                    return InkWell(
+                                      onTap: () {},
+                                      onHover: (value) {
+                                        setState(() {
+                                          elementsHover[index] = value;
+                                        });
+                                      },
+                                      child: Container(
+                                        child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text(
+                                            endElements[index],
+                                            style: baseStyle.copyWith(
+                                                fontSize: 16,
+                                                color: elementsHover[index] ? notifier.subgreycolor : notifier.whitecolor),
+                                          ),
                                         ),
                                       ),
-                                    ),
+                                    );
+                                  },
                                   );
                                 },
                               ),
@@ -365,22 +364,26 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                                     shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder: (context, index) {
-                                      return Row(
-                                        children: [
-                                          Container(
-                                            height: 40,
-                                            padding: const EdgeInsets.all(6),
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                color: notifier.whitecolor,
+                                      return StatefulBuilder(
+                                        builder: (BuildContext context, void Function(void Function()) setState) {
+                                          return Row(
+                                            children: [
+                                              Container(
+                                                height: 40,
+                                                padding: const EdgeInsets.all(6),
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  border: Border.all(
+                                                    color: notifier.whitecolor,
+                                                  ),
+                                                ),
+                                                child: SvgPicture.asset(notifier.isDark ? logos[index] : logos[index],color: Colors.white,
+                                                    height: 20),
                                               ),
-                                            ),
-                                            child: SvgPicture.asset(notifier.isDark ? logos[index] : logos[index],color: Colors.white,
-                                                height: 20),
-                                          ),
-                                          const SizedBox(width: 10),
-                                        ],
+                                              const SizedBox(width: 10),
+                                            ],
+                                          );
+                                        },
                                       );
                                     },
                                   ),
@@ -611,22 +614,26 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return Row(
-                              children: [
-                                Container(
-                                  height: 40,
-                                  padding: const EdgeInsets.all(6),
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: Colors.white
+                            return StatefulBuilder(
+                              builder: (BuildContext context, void Function(void Function()) setState) { 
+                                return Row(
+                                  children: [
+                                    Container(
+                                      height: 40,
+                                      padding: const EdgeInsets.all(6),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: Colors.white
+                                        ),
+                                      ),
+                                      child: SvgPicture.asset(logos[index], color: Colors.white,
+                                          height: 20),
                                     ),
-                                  ),
-                                  child: SvgPicture.asset(logos[index], color: Colors.white,
-                                      height: 20),
-                                ),
-                                const SizedBox(width: 10),
-                              ],
+                                    const SizedBox(width: 10),
+                                  ],
+                                );
+                              },
                             );
                           },
                         ),
@@ -645,19 +652,23 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                             crossAxisSpacing: constraints.maxWidth < 500 ? constraints.maxWidth / 10 : constraints.maxWidth / 5,
                           ),
                           itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {},
-                              onHover: (value) {
-                                setState(() {
-                                  elementsHover[index] = value;
-                                });
+                            return StatefulBuilder(
+                              builder: (BuildContext context, void Function(void Function()) setState) { 
+                                return InkWell(
+                                  onTap: () {},
+                                  onHover: (value) {
+                                    setState(() {
+                                      elementsHover[index] = value;
+                                    });
+                                  },
+                                  child: Text(
+                                    endElements[index],
+                                    style: baseStyle.copyWith(
+                                        fontSize: constraints.maxWidth < 500 ? 14 : 16,
+                                        color: Colors.white),
+                                  ),
+                                );
                               },
-                              child: Text(
-                                endElements[index],
-                                style: baseStyle.copyWith(
-                                    fontSize: constraints.maxWidth < 500 ? 14 : 16,
-                                    color: Colors.white),
-                              ),
                             );
                           },
                         ),
@@ -682,23 +693,27 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
     );
   }
   static Widget buildContactInfoItem({required String contacts, required String icon, required Color textColor}){
-    return Row(
-      children: [
-        SvgPicture.asset(icon,
-            height: 20, color: Colors.white,),
-        const SizedBox(width: 10),
-        Expanded(
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Text(contacts,
-              style: baseStyle.copyWith(
-                  color: textColor,
-                  fontSize: 16),
-              maxLines: 2,),
-          ),
-        ),
-        const SizedBox(width: 20),
-      ],
+    return StatefulBuilder(
+      builder: (BuildContext context, void Function(void Function()) setState) {  
+        return Row(
+          children: [
+            SvgPicture.asset(icon,
+              height: 20, color: Colors.white,),
+            const SizedBox(width: 10),
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Text(contacts,
+                  style: baseStyle.copyWith(
+                      color: textColor,
+                      fontSize: 16),
+                  maxLines: 2,),
+              ),
+            ),
+            const SizedBox(width: 20),
+          ],
+        );
+      },
     );
   }
 

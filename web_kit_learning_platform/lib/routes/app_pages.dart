@@ -13,7 +13,7 @@ class AppPages {
   static routeName(String route,
       {
         dynamic arguments,
-        int? id,
+        //int? id,
         bool? preventDuplicates,
         bool? isReplace,
         Map<String, String>? parameters,
@@ -23,7 +23,7 @@ class AppPages {
       Get.offAllNamed(
           route,
           arguments: arguments,
-          id: id, parameters: parameters)?.then((value) {
+          parameters: parameters)?.then((value) {
         if (callback != null) {
           callback(value);
         }
@@ -36,7 +36,8 @@ class AppPages {
       Get.toNamed(
           route,
           arguments: arguments,
-          id: id, preventDuplicates: preventDuplicates ?? false, parameters: parameters)?.then((value) {
+         // id: id, 
+          preventDuplicates: preventDuplicates ?? false, parameters: parameters)?.then((value) {
         if (callback != null) {
           callback(value);
         }

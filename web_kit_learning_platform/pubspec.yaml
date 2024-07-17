@@ -43,7 +43,7 @@ dependencies:
   provider: ^6.1.2
   url_launcher: ^6.3.0
 
-  syncfusion_flutter_charts: ^26.1.38
+  syncfusion_flutter_charts: ^26.1.41+1
   flutter_blurhash: ^0.8.2
   feather_icons: ^1.2.0
   url_strategy: ^0.2.0
@@ -54,15 +54,17 @@ dependencies:
 
   font_awesome_flutter: ^10.7.0
   table_calendar: ^3.1.2
-  syncfusion_flutter_maps: ^26.1.38
-  maps_launcher: ^2.2.1
+  syncfusion_flutter_maps: ^26.1.42
   socket_io_client: ^2.0.3+1
+  #get: ^5.0.0-release-candidate-6
   get: ^4.6.6
-  syncfusion_flutter_calendar: ^26.1.38
-  syncfusion_flutter_datepicker: ^26.1.38
+  syncfusion_flutter_calendar: ^26.1.42
+  syncfusion_flutter_datepicker: ^26.1.42
   appflowy_board: ^0.1.2
   timelines: ^0.1.0
   countup: ^0.1.4
+  dropdown_search: ^5.0.6
+  
   image_picker: ^1.1.2
   lucide_icons: ^0.257.0
   google_fonts: ^6.2.1
@@ -71,24 +73,22 @@ dependencies:
   
   package_info_plus: ^8.0.0
   device_info_plus: ^10.1.0
-  permission_handler: ^11.3.1
   flutter_screenutil: ^5.9.3
-  flutter_local_notifications: ^17.1.2
-  firebase_messaging: ^15.0.1
-  firebase_crashlytics: ^4.0.1
-  firebase_analytics: ^11.0.1
+  flutter_local_notifications: ^17.2.1+2
+  firebase_messaging: ^15.0.3
+  firebase_crashlytics: ^4.0.3
+  firebase_analytics: ^11.2.0
   easy_localization: ^3.0.7
   universal_html: ^2.2.4
-  flutter_secure_storage: ^9.2.2
-  responsive_builder: ^0.7.0
+  responsive_builder: ^0.7.1
   local_auth: ^2.2.0
   gap: ^3.0.1
   flutter_easyloading: ^3.0.5
   flutter_bloc: ^8.1.6
   equatable: ^2.0.5
-  flash: ^3.1.0
+  flash: ^3.1.1
   fluttertoast: ^8.2.6
-  dio: ^5.4.3+1
+  dio: ^5.5.0+1
   image_gallery_saver: ^2.0.3
   share_plus: ^9.0.0
   pull_to_refresh: ^2.0.0
@@ -97,9 +97,10 @@ dependencies:
   screenshot:
     path: lib/plugins/screenshot
   pinput: ^5.0.0
-  calendar_date_picker2: ^1.1.2
-  datepicker_dropdown: ^0.1.1+1
+  calendar_date_picker2: ^1.1.5
+  datepicker_dropdown: ^0.1.4
   connectivity_plus: ^6.0.3
+  flutter_native_splash: ^2.4.1
   rounded_loading_button:
     git:
       url: https://github.com/scopendo/flutter_rounded_loading_button.git
@@ -124,15 +125,17 @@ dependencies:
   video_player: ^2.9.1
   youtube_player_flutter: ^9.0.1
   youtube_player_iframe: ^5.1.3
-  flutter_inappwebview: ^6.0.0
+ # flutter_inappwebview: ^6.0.0
   smooth_scroll_multiplatform: 
     path: lib/plugins/smooth_scroll_multiplatform-1.0.8
   flutter_custom_pagination: ^0.2.0
-  dropdown_search: ^5.0.6
+  
+
 dependency_overrides:
   file_picker: ^8.0.6
-  google_maps_flutter: ^2.7.0
+ # google_maps_flutter: ^2.7.0
   intl: ^0.19.0
+  web: 0.5.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
