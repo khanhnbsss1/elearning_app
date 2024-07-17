@@ -11,6 +11,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/widgets/course_item.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
+import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 import 'package:webkit/views/course/course_list/course_detail.dart';
 import 'package:webkit/views/course/course_list/bloc/course_list_bloc.dart';
@@ -63,148 +64,138 @@ class _CourseListState extends State<CourseList>
           }
         },
         builder: (BuildContext context, state) {
-          return Layout(
-              isScroll: false,
-              padding: EdgeInsets.only(top: 35 + 16, bottom: 16),
-              child: GetBuilder(
-                init: controller,
-                builder: (controller) {
-                  double width = MediaQuery.of(context).size.width;
-                  double height = MediaQuery.of(context).size.height;
-                  double gridViewItemRowCount = width > 1400
-                      ? 4
-                      : width > 1150
+          return MyResponsive(
+            builder: (context , boxConstraints , myScreenMediaType ) {
+              return Layout(
+                  isScroll: false,
+                  padding: EdgeInsets.only(top: 35 + 16, bottom: 16),
+                  child: GetBuilder(
+                    init: controller,
+                    builder: (controller) {
+                      double width = MediaQuery.of(context).size.width;
+                      double height = MediaQuery.of(context).size.height;
+                      double gridViewItemRowCount = width > 1400
+                          ? 4
+                          : width > 1150
                           ? 3
                           : 1;
-                  double gridViewItemColumnCount = 2;
-                  List<Widget> listOfCourse = List.empty(growable: true);
-                  // (kIsWeb ? width / 4 : width) > Dimens.size300
-                  //     ? (kIsWeb ? width / 4 : width)
-                  //     : Dimens.size300;
-
-                  for (CourseInfo courseInfo
-                      in state.courseResponseModel?.content ?? []) {
-                    listOfCourse.add(CourseItemGridView(
-                      courseInfo: courseInfo,
-                    ));
-                  }
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            MyButton(
-                              onTap: () {
-                                CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
-                              },
-                              elevation: 0,
-                              padding: MySpacing.xy(12, 16),
-                              backgroundColor: contentTheme.primary,
-                              borderRadiusAll: AppStyle.buttonRadius.medium,
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    LucideIcons.plusCircle,
-                                    color: contentTheme.light,
-                                    size: 16,
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                MyButton(
+                                  onTap: () {
+                                    CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
+                                  },
+                                  elevation: 0,
+                                  padding: MySpacing.xy(12, 16),
+                                  backgroundColor: contentTheme.primary,
+                                  borderRadiusAll: AppStyle.buttonRadius.medium,
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        LucideIcons.plusCircle,
+                                        color: contentTheme.light,
+                                        size: 16,
+                                      ),
+                                      MySpacing.width(16),
+                                      MyText.bodySmall(
+                                        "Add New",
+                                        color: contentTheme.onPrimary,
+                                      ),
+                                    ],
                                   ),
-                                  MySpacing.width(16),
-                                  MyText.bodySmall(
-                                    "Add New",
-                                    color: contentTheme.onPrimary,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              width: 200,
-                              child: TextFormField(
-                                maxLines: 1,
-                                style: MyTextStyle.bodyMedium(),
-                                decoration: InputDecoration(
-                                    hintText: "search",
-                                    hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                                    border: outlineInputBorder,
-                                    enabledBorder: outlineInputBorder,
-                                    focusedBorder: focusedInputBorder,
-                                    prefixIcon: const Align(
-                                        alignment: Alignment.center,
-                                        child: Icon(
-                                          LucideIcons.search,
-                                          size: 14,
-                                        )),
-                                    prefixIconConstraints: const BoxConstraints(
-                                        minWidth: 36,
-                                        maxWidth: 36,
-                                        minHeight: 32,
-                                        maxHeight: 32),
-                                    contentPadding: MySpacing.xy(16, 12),
-                                    isCollapsed: true,
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.never),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      (listOfCourse.isEmpty) ? CircularProgressIndicator() : Expanded(
-                        child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.vertical,
-                                  child: Column(
-                                      children: [
-                                        GridView.builder(
-                                          shrinkWrap: true,
-                                          gridDelegate:
-                                              SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: width < 550 ? 1 : width < 850 ? 2 : width < 1150 ? 3 : 4,
-                                                  crossAxisSpacing: 16,
-                                                  mainAxisSpacing: 16,
-                                                  childAspectRatio: 5 / 6),
-                                          itemBuilder: (_, index) {
-                                            return listOfCourse[index];
-                                            },
-                                          itemCount: state.courseResponseModel?.content?.length,
-                                          // shrinkWrap: true,
-                                        ),
-                                        SizedBox(height: 8,),
-                                        (state.courseResponseModel!.getTotalPage() > 1) ? FlutterCustomPagination(
-                                          key: GlobalKey(debugLabel: (state.courseResponseModel?.total??0).toString()),
-                                          currentPage: state.courseResponseModel!.getCurrentPage(),
-                                          limitPerPage: state.courseResponseModel!.getTotalPage(),
-                                          totalDataCount: state.courseResponseModel!.getTotalPage(),
-                                          onPreviousPage: (p0) {
-                                            // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
-                                          },
-                                          onBackToFirstPage: (p0) {
-                                            // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
-                                          },
-                                          onNextPage: (p0) {
-                                            // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
-                                          },
-                                          onGoToLastPage: (p0) {
-                                            // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
-                                          },
-                                          backgroundColor: ColorConst.whiteColor,
-                                          textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
-                                          previousPageIcon: Icons.keyboard_arrow_left,
-                                          backToFirstPageIcon: Icons.first_page,
-                                          nextPageIcon: Icons.keyboard_arrow_right,
-                                          goToLastPageIcon: Icons.last_page,
-                                        ) : SizedBox(),
-                                      ],
-                                    ),
                                 ),
-                              )
-                      ),
-                    ],
-                  );
-                },
-              ));
+                                SizedBox(
+                                  width: 200,
+                                  child: TextFormField(
+                                    maxLines: 1,
+                                    style: MyTextStyle.bodyMedium(),
+                                    decoration: InputDecoration(
+                                        hintText: "search",
+                                        hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                                        border: outlineInputBorder,
+                                        enabledBorder: outlineInputBorder,
+                                        focusedBorder: focusedInputBorder,
+                                        prefixIcon: const Align(
+                                            alignment: Alignment.center,
+                                            child: Icon(
+                                              LucideIcons.search,
+                                              size: 14,
+                                            )),
+                                        prefixIconConstraints: const BoxConstraints(
+                                            minWidth: 36,
+                                            maxWidth: 36,
+                                            minHeight: 32,
+                                            maxHeight: 32),
+                                        contentPadding: MySpacing.xy(16, 12),
+                                        isCollapsed: true,
+                                        floatingLabelBehavior:
+                                        FloatingLabelBehavior.never),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          myScreenMediaType.isMobile?
+                          buildCourseList(state: state):
+                          Expanded(child: buildCourseList(state: state)),
+                          SizedBox(height: 8,),
+                          FlutterCustomPagination(
+                            key: GlobalKey(debugLabel: (state.courseResponseModel?.total??0).toString()),
+                            currentPage: state.courseResponseModel!.getCurrentPage(),
+                            limitPerPage: state.courseResponseModel!.getTotalPage(),
+                            totalDataCount: state.courseResponseModel!.getTotalPage(),
+                            onPreviousPage: (p0) {
+                              // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                            },
+                            onBackToFirstPage: (p0) {
+                              // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                            },
+                            onNextPage: (p0) {
+                              // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                            },
+                            onGoToLastPage: (p0) {
+                              // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                            },
+                            backgroundColor: ColorConst.whiteColor,
+                            textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                            previousPageIcon: Icons.keyboard_arrow_left,
+                            backToFirstPageIcon: Icons.first_page,
+                            nextPageIcon: Icons.keyboard_arrow_right,
+                            goToLastPageIcon: Icons.last_page,
+                          ),
+                        ],
+                      );
+                    },
+                  ));
+            },);
+          
         },
+      ),
+    );
+  }
+  Widget buildCourseList({required CourseListState state}){
+    List<Widget> listOfCourse = List.empty(growable: true);
+
+    for (CourseInfo courseInfo in state.courseResponseModel?.content ?? []) {
+      listOfCourse.add(CourseItemGridView(courseInfo: courseInfo,));
+    }
+    return  (listOfCourse.isEmpty) ? 
+    Center(child: CircularProgressIndicator()) : 
+    SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(
+        children: [
+          Wrap(
+            alignment: WrapAlignment.start,
+            children: listOfCourse,
+          ),
+        ],
       ),
     );
   }

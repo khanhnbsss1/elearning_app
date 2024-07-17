@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_custom_pagination/flutter_custom_pagination.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
+import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/views/course/course_list/course_detail.dart';
 import '../../../helpers/theme/app_style.dart';
 import '../../../helpers/widgets/course_item_grid_view.dart';
@@ -52,79 +55,105 @@ class _MyCourseListState extends State<MyCourseList>
           return Layout(
               isScroll: false,
               padding: EdgeInsets.only(top: 35 + 16,bottom:  16),
-              child: GetBuilder(
-                init: controller,
-                builder: (controller) {
-                  double width = MediaQuery.of(context).size.width;
-                  double height = MediaQuery.of(context).size.height;
-                  List<Widget> listOfCourse = List.empty(growable: true);
-
-                  if (state.myCourseResponseModel == null) {
-                    return Center(
+              child: MyResponsive(builder: (buildContext , boxConstraints , myScreenMediaType ) { 
+                return  GetBuilder(
+                  init: controller,
+                  builder: (controller) {
+                    if (state.myCourseResponseModel == null) {
+                      return Center(
                         child: CircularProgressIndicator(),
-                    );
-                  } else {
-                    for (CourseInfo courseInfo in state.myCourseResponseModel
-                        ?.data ?? []) {
-                      listOfCourse.add(CourseItemGridView(
-                          courseInfo: courseInfo));
+                      );
                     }
-                  }
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            SizedBox(
-                              width: 200,
-                              child: TextFormField(
-                                maxLines: 1,
-                                style: MyTextStyle.bodyMedium(),
-                                decoration: InputDecoration(
-                                    hintText: "search",
-                                    hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                                    border: outlineInputBorder,
-                                    enabledBorder: outlineInputBorder,
-                                    focusedBorder: focusedInputBorder,
-                                    prefixIcon: const Align(
-                                        alignment: Alignment.center,
-                                        child: Icon(
-                                          LucideIcons.search,
-                                          size: 14,
-                                        )),
-                                    prefixIconConstraints: const BoxConstraints(
-                                        minWidth: 36,
-                                        maxWidth: 36,
-                                        minHeight: 32,
-                                        maxHeight: 32),
-                                    contentPadding: MySpacing.xy(16, 12),
-                                    isCollapsed: true,
-                                    floatingLabelBehavior:
-                                    FloatingLabelBehavior.never),
+
+                    return Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                width: 200,
+                                child: TextFormField(
+                                  maxLines: 1,
+                                  style: MyTextStyle.bodyMedium(),
+                                  decoration: InputDecoration(
+                                      hintText: "search",
+                                      hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                                      border: outlineInputBorder,
+                                      enabledBorder: outlineInputBorder,
+                                      focusedBorder: focusedInputBorder,
+                                      prefixIcon: const Align(
+                                          alignment: Alignment.center,
+                                          child: Icon(
+                                            LucideIcons.search,
+                                            size: 14,
+                                          )),
+                                      prefixIconConstraints: const BoxConstraints(
+                                          minWidth: 36,
+                                          maxWidth: 36,
+                                          minHeight: 32,
+                                          maxHeight: 32),
+                                      contentPadding: MySpacing.xy(16, 12),
+                                      isCollapsed: true,
+                                      floatingLabelBehavior:
+                                      FloatingLabelBehavior.never),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      (listOfCourse.isNotEmpty) ? Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: GridView.builder(
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: width < 550 ? 1 : width < 850 ? 2 : width < 1150 ? 3 : 4, crossAxisSpacing: 16, mainAxisSpacing: 16, childAspectRatio: 5/6),
-                            itemBuilder: (_, index) => listOfCourse[index],
-                            itemCount: state.myCourseResponseModel?.data?.length,
-                            shrinkWrap: true,
+                            ],
                           ),
-                        ),
-                      ) : CircularProgressIndicator(),
-                    ],
-                  );
-                },
+                          myScreenMediaType.isMobile?buildCourseList(state: state):Expanded(child: buildCourseList(state: state)),
+                          SizedBox(height: 8,),
+                          FlutterCustomPagination(
+                            key: GlobalKey(debugLabel: (state.myCourseResponseModel?.total??0).toString()),
+                            currentPage: state.myCourseResponseModel!.getCurrentPage(),
+                            limitPerPage: state.myCourseResponseModel!.getTotalPage(),
+                            totalDataCount: state.myCourseResponseModel!.getTotalPage(),
+                            onPreviousPage: (p0) {
+                              // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                            },
+                            onBackToFirstPage: (p0) {
+                              // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                            },
+                            onNextPage: (p0) {
+                              // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                            },
+                            onGoToLastPage: (p0) {
+                              // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                            },
+                            backgroundColor: ColorConst.whiteColor,
+                            textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                            previousPageIcon: Icons.keyboard_arrow_left,
+                            backToFirstPageIcon: Icons.first_page,
+                            nextPageIcon: Icons.keyboard_arrow_right,
+                            goToLastPageIcon: Icons.last_page,
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
               ));
         },
       ),
     );
+  }
+  Widget buildCourseList({required MyCourseListState state}){
+    List<Widget> listOfCourse = List.empty(growable: true);
+    for (CourseInfo courseInfo in state.myCourseResponseModel
+        ?.content ?? []) {
+      listOfCourse.add(CourseItemGridView(
+          courseInfo: courseInfo));
+    }
+    return (listOfCourse.isNotEmpty) ? Wrap(
+      alignment: WrapAlignment.start,
+      crossAxisAlignment: WrapCrossAlignment.start,
+      runAlignment: WrapAlignment.start,
+      children: listOfCourse,
+    ) : Center(child: CircularProgressIndicator());
   }
 }

@@ -7,17 +7,17 @@ enum MyCourseListStatus {
 @immutable
 class MyCourseListState extends Equatable {
   MyCourseListStatus? blocStatus;
-  MyCourseResponseModel? myCourseResponseModel;
+  CourseResponseModel? myCourseResponseModel;
 
   MyCourseListState({
     this.blocStatus, this.myCourseResponseModel}) {
-    myCourseResponseModel ??= MyCourseResponseModel(data: []);
+    myCourseResponseModel ??= CourseResponseModel(content: []);
   }
 
 
   MyCourseListState copyWith({
     MyCourseListStatus? blocStatus,
-    MyCourseResponseModel? myCourseResponseModel,
+    CourseResponseModel? myCourseResponseModel,
   })
   {
     return MyCourseListState(

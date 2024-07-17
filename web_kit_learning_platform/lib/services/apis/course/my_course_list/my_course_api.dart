@@ -6,7 +6,6 @@ import 'package:webkit/base/services/base_request/apiName.dart';
 
 import '../../../../base/services/base_request/models/response_error_objects.dart';
 import '../course_list/models/course_models.dart';
-import 'models/my_course_models.dart';
 
 class MyCourseApi extends BaseApiRequest {
   MyCourseApi():super(
@@ -20,12 +19,12 @@ class MyCourseApi extends BaseApiRequest {
 
     if(result.runtimeType == ResponseCommon)
     {
-      return MyCourseResponseModel(data: []);
+      return CourseResponseModel(content: []);
     }
     else
     {
-      MyCourseResponseModel paymentHistoryResponseModel = MyCourseResponseModel.fromJsonList(result);
-      return paymentHistoryResponseModel;
+      CourseResponseModel courseResponseModel = CourseResponseModel.fromJson(result);
+      return courseResponseModel;
     }
   }
 
