@@ -300,23 +300,27 @@ class _LandingPageScreenState extends State<LandingPageScreen>
         SingleChildScrollView(
           controller: _mainController,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children:  listWiget,
           ),
         ),
         Positioned(
           right: 20,
           bottom: 20,
-          child: FloatingActionButton(
-            heroTag: "arrow_upward",
-            backgroundColor: Color.fromRGBO(143, 20, 17, 1.0),
+          child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+            return FloatingActionButton(
+              heroTag: "arrow_upward",
+              backgroundColor: Color.fromRGBO(143, 20, 17, 1.0),
               hoverColor: Color.fromRGBO(134, 16, 14, 1.0),
               onPressed: () {
                 Scrollable.ensureVisible(GlobalObjectKey(0).currentContext!,
-              duration: Duration(seconds: 1),
-              curve: Curves.easeInOutCubic);
+                    duration: Duration(seconds: 1),
+                    curve: Curves.easeInOutCubic);
               },
               child: Icon(Icons.arrow_upward),
-              ),
+            );
+          },
+          ),
         ),
         ListenableBuilder(
           listenable: showCardModel, 
@@ -1407,115 +1411,107 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      width: MediaQuery.of(context).size.width*3/4,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            DrawerHeader(
-              child: StaticView.buildLogo(size: 30),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: List<Widget>.generate(
-                7,
-                    (int index) {
-                  return Container(
-                    width: 250,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              DrawerHeader(
+                child: StaticView.buildLogo(size: 30),
+              ),
+              ListView.builder(
+                itemCount: 7,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
+                  return  Container(
+                   // width: 250,
                     decoration: BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 1,
-                          color: Color(0XD9D9D9FF),
+                        border: Border(
+                            bottom: BorderSide(
+                              width: 1,
+                              color: Color(0XD9D9D9FF),
+                            )
                         )
-                      )
                     ),
-                    height: 30,
-                    child: GestureDetector(
-                      child: OnHoverWidget(
-                        builder: (isHovered) {
-                          return Align(
-                            alignment: Alignment.centerLeft,
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                overlayColor: Colors.black,
-                              ),
-                              onPressed: () {
-                                Scrollable.ensureVisible(
-                                    GlobalObjectKey(index).currentContext!,
-                                    duration: Duration(seconds: 1),
-                                    curve: Curves.easeInOutCubic);
-                                Navigator.of(context).pop();
-                              },
-                              child: Text(landingPageTitles[index],
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                ),
-                              ),
+                    //height: 30,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: TextButton(
+                          iconAlignment: IconAlignment.end,
+                          style: TextButton.styleFrom(
+                            overlayColor: Colors.black,
+                            iconColor: ColorConst.blackColor
+                          ),
+                          onPressed: () {
+                            Scrollable.ensureVisible(
+                                GlobalObjectKey(index).currentContext!,
+                                duration: Duration(seconds: 1),
+                                curve: Curves.easeInOutCubic);
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(landingPageTitles[index],
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
                             ),
-                          );
-                        },
+                          ),
+                        ),
                       ),
                     ),
                   );
-                },
-              ).toList(),
-            ),
-            SizedBox(height: 12,),
-            SizedBox(
-              height: 40,
-              // width: 300,
-              child: ListView.builder(
-                itemCount: logos.length,
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return Row(
-                    children: [
-                      Container(
-                        height: 40,
-                        padding: const EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              color: Colors.black
+                },);
+              },),
+              SizedBox(height: 12,),
+              SizedBox(
+                height: 40,
+                // width: 300,
+                child: ListView.builder(
+                  itemCount: logos.length,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return Row(
+                      children: [
+                        Container(
+                          height: 40,
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                                color: Colors.black
+                            ),
                           ),
+                          child: SvgPicture.asset(logos[index], color: ColorConst.blackColor,
+                              height: 20),
                         ),
-                        child: SvgPicture.asset(logos[index], color: Colors.black,
-                            height: 20),
-                      ),
-                      const SizedBox(width: 10),
-                    ],
+                        const SizedBox(width: 10),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              SizedBox(height: 12,),
+              ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: contacts.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return EndOfPage.buildContactInfoItem(
+                      textColor: Colors.black,
+                      contacts: contacts[index],
+                      icon: contactsImage[index]
                   );
                 },
               ),
-            ),
-            SizedBox(height: 12,),
-            ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: contacts.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Column(
-                    children: [
-                      Container(
-                        child: EndOfPage.buildContactInfoItem(
-                            textColor: Colors.black,
-                            contacts: contacts[index],
-                            icon: contactsImage[index]
-                        ),
-                      ),
-                      SizedBox(height: 12,),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

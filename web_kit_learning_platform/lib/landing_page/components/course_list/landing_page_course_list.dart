@@ -79,7 +79,6 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
       lengthOfView =
           (state.courseListLandingPageResponseModel?.data ?? []).length;
     }
-
     return Column(
       children: [
         Container(

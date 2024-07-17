@@ -589,21 +589,19 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
+                      ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: contacts.length,
+                        shrinkWrap: true,
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: contacts.length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return buildContactInfoItem(
-                                textColor: Colors.white,
-                                contacts: contacts[index],
-                                icon: contactsImage[index]
-
-                            );
-                          },
-                        ),
+                        itemBuilder: (context, index) {
+                          return buildContactInfoItem(
+                              textColor: Colors.white,
+                              contacts: contacts[index],
+                              icon: contactsImage[index]
+                      
+                          );
+                        },
                       ),
                       SizedBox(height: 8,),
                       SizedBox(
@@ -695,23 +693,24 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
   static Widget buildContactInfoItem({required String contacts, required String icon, required Color textColor}){
     return StatefulBuilder(
       builder: (BuildContext context, void Function(void Function()) setState) {  
-        return Row(
-          children: [
-            SvgPicture.asset(icon,
-              height: 20, color: Colors.white,),
-            const SizedBox(width: 10),
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Text(contacts,
-                  style: baseStyle.copyWith(
-                      color: textColor,
-                      fontSize: 16),
-                  maxLines: 2,),
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4),
+          child: Row(
+            children: [
+              SvgPicture.asset(icon, height: 20, color: ColorConst.blackColor,),
+              const SizedBox(width: 10),
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Text(contacts,
+                    style: baseStyle.copyWith(
+                        color: textColor,
+                        fontSize: 16),
+                    maxLines: 2,),
+                ),
               ),
-            ),
-            const SizedBox(width: 20),
-          ],
+            ],
+          ),
         );
       },
     );
