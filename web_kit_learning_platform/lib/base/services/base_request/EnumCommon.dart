@@ -42,7 +42,8 @@ enum SERVICE_TYPE {
   USER,
   COURSE,
   LandingPages,
-  NONE
+  NONE,
+  Vocabulary,
 }
 
 const Map<SERVICE_TYPE, String> SERVICE = {
@@ -52,5 +53,5 @@ const Map<SERVICE_TYPE, String> SERVICE = {
   SERVICE_TYPE.COURSE: "Course",
   SERVICE_TYPE.LandingPages: "LandingPages",
   SERVICE_TYPE.NONE: "",
-
+  SERVICE_TYPE.Vocabulary: "Vocabulary"
 };

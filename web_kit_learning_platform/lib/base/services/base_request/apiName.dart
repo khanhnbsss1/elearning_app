@@ -47,6 +47,7 @@ class ApiName {
   final String editUser = "/edit-user";
   final String getUserDetail = "/get-user";
 
-
+ /// them tu dien
+  final String addWord = "/create-vocabulary";
 }
 

@@ -129,6 +129,7 @@ dependencies:
   smooth_scroll_multiplatform: 
     path: lib/plugins/smooth_scroll_multiplatform-1.0.8
   flutter_custom_pagination: ^0.2.0
+  amplify_flutter: ^2.3.0
   
 
 dependency_overrides:

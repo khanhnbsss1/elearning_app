@@ -15,6 +15,7 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 import 'package:webkit/views/course/course_detail/course_detail.dart';
+import 'package:webkit/views/course/course_list/add_words.dart';
 import 'package:webkit/views/course/course_list/bloc/course_list_bloc.dart';
 import '../../../base/constant/dimens_constant.dart';
 import '../../../helpers/theme/app_style.dart';
@@ -85,7 +86,8 @@ class _CourseListState extends State<CourseList>
                           children: [
                             state.courseType== CourseType.courseList?MyButton(
                               onTap: () {
-                                CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
+                                // CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
+                                AddWords().show(context);
                               },
                               elevation: 0,
                               padding: MySpacing.xy(12, 16),
@@ -166,6 +168,7 @@ class _CourseListState extends State<CourseList>
                           ],
                         ),
                       ),
+
                       myScreenMediaType.isMobile?
                       buildCourseList(state: state):
                       Expanded(child: buildCourseList(state: state)),

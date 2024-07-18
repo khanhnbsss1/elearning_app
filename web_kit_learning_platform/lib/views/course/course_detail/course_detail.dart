@@ -102,17 +102,17 @@ class _CourseDetailState extends State<CourseDetail>
   @override
   Widget build(BuildContext context) {
   for (CourseInfo courseInfo in coursesInfo) {
-    if (!listOfProduceNames.contains(courseInfo.producerName) && courseInfo.producerName != null) {
+    if (!listOfProduceNames.contains(courseInfo.producerName) && courseInfo.producerName != "") {
       listOfProduceNames.add(courseInfo.producerName??"");
     }
-    if (!listOfAccompanyCourses.contains(courseInfo.name) && courseInfo.name != null) {
+    if (!listOfAccompanyCourses.contains(courseInfo.name) && courseInfo.name != "") {
       listOfAccompanyCourses.add(courseInfo.name??"");
     }
-    if (!listOfGradeNames.contains(courseInfo.gradeName) && courseInfo.gradeName != null) {
+    if (!listOfGradeNames.contains(courseInfo.gradeName) && courseInfo.gradeName != "") {
       listOfGradeNames.add(courseInfo.gradeName??"");
     }
     for (String tag in courseInfo.tags??[]) {
-          if (!listOfTags.contains(tag)) {
+          if (!listOfTags.contains(tag)  && tag != "") {
             listOfTags.add(tag ?? "");
           }
         }
@@ -226,9 +226,6 @@ class _CourseDetailState extends State<CourseDetail>
                         Container(
                           color: ColorConst.whiteColor,
                           child: TextFormField(
-                            onChanged: (value) => {
-                              controller.setCourseName(value)
-                            },
                             validator: controller.basicValidator
                                 .getValidation('name'),
                             controller: controller.basicValidator
@@ -657,7 +654,6 @@ class _CourseDetailState extends State<CourseDetail>
                       customDropDownSearchCustom(list: listOfAccompanyCourses, hintText: 'Accompany Course'),
                     ],
                   ),),
-
                 ],
               ),
               MyText.labelMedium(

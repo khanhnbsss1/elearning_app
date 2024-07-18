@@ -1,13 +1,19 @@
-import 'dart:io';
-
+import 'dart:io' as io;
+import 'dart:html';
+import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/theme/colors_app.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:webkit/controller/add_word_controller.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/my_screen_media_type.dart';
+import 'package:webkit/services/apis/words/word_model.dart';
 import 'package:webkit/views/layouts/layout.dart';
 import '../../../base/theme/text_stype_constant.dart';
 import '../../../helpers/utils/ui_mixins.dart';
@@ -47,15 +53,16 @@ class _AddWordsState extends State<AddWords>
   @override
   void initState() {
     super.initState();
-      exampleTextControllers
-          .add(new TextEditingController());
-      exampleMeaningControllers
-          .add(new TextEditingController());
-      exampleSimplifiedControllers
-          .add(new TextEditingController());
-      exampleSoundControllers
-          .add(new TextEditingController());
-      savedExample.add(false);
+    exampleTextControllers
+        .add(new TextEditingController());
+    exampleMeaningControllers
+        .add(new TextEditingController());
+    exampleSimplifiedControllers
+        .add(new TextEditingController());
+    exampleSoundControllers
+        .add(new TextEditingController());
+    savedExample.add(false);
+    addWordController = Get.put(AddWordController());
   }
 
   List<ExampleForm> examples = [];
@@ -86,10 +93,7 @@ class _AddWordsState extends State<AddWords>
     });
   }
 
-  final TextEditingController wordTextController = TextEditingController();
-  final TextEditingController wordMeaningController = TextEditingController();
-  final TextEditingController wordSimplifiedController = TextEditingController();
-  final TextEditingController wordSoundController = TextEditingController();
+  late AddWordController addWordController;
 
   final List<TextEditingController> exampleTextControllers = [];
   final List<TextEditingController> exampleMeaningControllers = [];
@@ -165,310 +169,145 @@ class _AddWordsState extends State<AddWords>
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: (myScreenMediaType.isTablet ||
-                        myScreenMediaType.isMobile ||
-                        myScreenMediaType.isLaptop)
+                    myScreenMediaType.isMobile ||
+                    myScreenMediaType.isLaptop)
                     ? Column(
-                        children: [
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 3,
-                                child: TextFormField(
-                                  controller: wordTextController,
-                                  decoration: InputDecoration(
-                                    labelText: 'Word',
-                                    labelStyle:
-                                        MyTextStyle.bodySmall(xMuted: true),
-                                    border: outlineInputBorder.copyWith(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    contentPadding: MySpacing.all(16),
-                                    isCollapsed: true,
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.never,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 16,
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: TextFormField(
-                                  controller: wordSimplifiedController,
-                                  decoration: InputDecoration(
-                                    labelText: 'Simplified',
-                                    labelStyle:
-                                        MyTextStyle.bodySmall(xMuted: true),
-                                    border: outlineInputBorder.copyWith(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    contentPadding: MySpacing.all(16),
-                                    isCollapsed: true,
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.never,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                flex: 3,
-                                child: TextFormField(
-                                  controller: wordMeaningController,
-                                  decoration: InputDecoration(
-                                    labelText: 'Meaning',
-                                    labelStyle:
-                                        MyTextStyle.bodySmall(xMuted: true),
-                                    border: outlineInputBorder.copyWith(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    contentPadding: MySpacing.all(16),
-                                    isCollapsed: true,
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.never,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 16,
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: TextFormField(
-                                  controller: wordTextController,
-                                  decoration: InputDecoration(
-                                    labelText: 'Grade',
-                                    labelStyle:
-                                        MyTextStyle.bodySmall(xMuted: true),
-                                    border: outlineInputBorder.copyWith(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    contentPadding: MySpacing.all(16),
-                                    isCollapsed: true,
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.never,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                  flex: 2,
-                                  child: IconButton(
-                                    style: TextButton.styleFrom(
-                                        backgroundColor: notifier.redcolor,
-                                        foregroundColor: Colors.white),
-                                    onPressed: () async {
-                                      FilePickerResult? result =
-                                          await FilePicker.platform.pickFiles(
-                                        type: FileType.custom,
-                                        allowedExtensions: ['wav'],
-                                      );
-                                      setState(() {
-                                        if (result != null) {
-                                          wordSoundController.text =
-                                              result.names[0]!;
-                                        } else {}
-                                      });
-                                    },
-                                    icon: Icon(Icons.upload_file, size: 14),
-                                  )),
-                              SizedBox(
-                                width: 4,
-                              ),
-                              Expanded(
-                                flex: 12,
-                                child: TextFormField(
-                                  controller: wordSoundController,
-                                  decoration: InputDecoration(
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                    labelText: wordSoundController.text == ""
-                                        ? 'Upload sound file'
-                                        : wordSoundController.text,
-                                    labelStyle:
-                                        MyTextStyle.bodySmall(xMuted: true),
-                                    border: outlineInputBorder.copyWith(
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    contentPadding: MySpacing.all(16),
-                                    isCollapsed: true,
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.never,
-                                    suffixIcon: (wordSoundController.text != "")
-                                        ? IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                wordSoundController.text = "";
-                                              });
-                                            },
-                                            icon: Icon(
-                                              Icons.close_sharp,
-                                              color: Colors.red,
-                                            ),
-                                          )
-                                        : null,
-                                  ),
-                                ),
-                              ),
-                              Expanded(flex: 2, child: SizedBox()),
-                            ],
-                          ),
-                        ],
-                      )
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: customTextFormField1(controller: 'traditional', label: 'Word'),
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: customTextFormField1(controller: 'simplified', label: 'Simplified'),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: customTextFormField1(controller: 'translation_vn', label: 'Meaning'),
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: customTextFormField1(controller: 'pinyin_tones', label: 'Pinyin tones'),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                            flex: 2,
+                            child: IconButton(
+                              style: TextButton.styleFrom(
+                                  backgroundColor: notifier.redcolor,
+                                  foregroundColor: Colors.white),
+                              onPressed: () async {
+                                FilePickerResult? result =
+                                await FilePicker.platform.pickFiles(
+                                  type: FileType.custom,
+                                  allowedExtensions: ['wav'],
+                                );
+
+                                setState(() {
+                                  if (result != null) {
+                                    addWordController.basicValidator.getController('audio')?.text = result.names[0]!;
+                                  } else {}
+                                });
+                              },
+                              icon: Icon(Icons.upload_file, size: 14),
+                            )),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Expanded(
+                          flex: 12,
+                          child: customTextFormField1(controller: 'audio', label: 'Upload sound file(.WAV)', audio: true),
+                        ),
+                        Expanded(flex: 2, child: SizedBox()),
+                      ],
+                    ),
+                  ],
+                )
                     : Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(flex: 2, child: SizedBox()),
-                          Expanded(
-                            flex: 3,
-                            child: TextFormField(
-                              controller: wordTextController,
-                              decoration: InputDecoration(
-                                labelText: 'Word',
-                                labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                                border: outlineInputBorder.copyWith(
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                contentPadding: MySpacing.all(16),
-                                isCollapsed: true,
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: TextFormField(
-                              controller: wordSimplifiedController,
-                              decoration: InputDecoration(
-                                labelText: 'Simplified',
-                                labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                                border: outlineInputBorder.copyWith(
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                contentPadding: MySpacing.all(16),
-                                isCollapsed: true,
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: TextFormField(
-                              controller: wordMeaningController,
-                              decoration: InputDecoration(
-                                labelText: 'Meaning',
-                                labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                                border: outlineInputBorder.copyWith(
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                contentPadding: MySpacing.all(16),
-                                isCollapsed: true,
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Expanded(
-                            flex: 3,
-                            child: TextFormField(
-                              controller: wordTextController,
-                              decoration: InputDecoration(
-                                labelText: 'Grade',
-                                labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                                border: outlineInputBorder.copyWith(
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                contentPadding: MySpacing.all(16),
-                                isCollapsed: true,
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 16,
-                          ),
-                          Expanded(
-                              flex: 1,
-                              child: IconButton(
-                                style: TextButton.styleFrom(
-                                    backgroundColor: notifier.redcolor,
-                                    foregroundColor: Colors.white),
-                                onPressed: () async {
-                                  FilePickerResult? result =
-                                      await FilePicker.platform.pickFiles(
-                                    type: FileType.custom,
-                                    allowedExtensions: ['wav'],
-                                  );
-                                  setState(() {
-                                    if (result != null) {
-                                      wordSoundController.text =
-                                          result.names[0]!;
-                                    } else {}
-                                  });
-                                },
-                                icon: Icon(Icons.upload_file, size: 14),
-                              )),
-                          Expanded(
-                            flex: 6,
-                            child: TextFormField(
-                              controller: wordSoundController,
-                              decoration: InputDecoration(
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                labelText: wordSoundController.text == ""
-                                    ? 'Upload sound file'
-                                    : wordSoundController.text,
-                                labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                                border: outlineInputBorder.copyWith(
-                                  borderRadius: BorderRadius.circular(25),
-                                ),
-                                contentPadding: MySpacing.all(16),
-                                isCollapsed: true,
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                suffixIcon: (wordSoundController.text != "")
-                                    ? IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            wordSoundController.text = "";
-                                          });
-                                        },
-                                        icon: Icon(
-                                          Icons.close_sharp,
-                                          color: Colors.red,
-                                        ),
-                                      )
-                                    : null,
-                              ),
-                            ),
-                          ),
-                          Expanded(flex: 2, child: SizedBox()),
-                        ],
-                      ),
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(flex: 2, child: SizedBox()),
+                    Expanded(
+                      flex: 3,
+                      child: customTextFormField1(controller: 'traditional', label: 'Word'),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: customTextFormField1(controller: 'simplified', label: 'Simplified'),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child:  customTextFormField1(controller: 'translation_vn', label: 'Meaning'),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child:  customTextFormField1(controller: 'pinyin_tones', label: 'Pinyin tones'),
+                    ),
+                    SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                        flex: 1,
+                        child: IconButton(
+                          style: TextButton.styleFrom(
+                              backgroundColor: notifier.redcolor,
+                              foregroundColor: Colors.white),
+                          onPressed: () async {
+                            FilePickerResult? result = await FilePicker.platform.pickFiles(
+                            type: FileType.custom,
+                              allowedExtensions: ['wav'],
+                            );
+
+                            // final platformFile = result?.files.single.path;
+                            // print(platformFile);
+                            // File file = File(platformFile);
+
+                            setState(() {
+                              if (result != null) {
+                                addWordController.basicValidator.getController('audio')?.text = result.names[0]!;
+                              }
+                            }
+                            );
+                          },
+                          icon: Icon(Icons.upload_file, size: 14),
+                        )),
+                    Expanded(
+                      flex: 6,
+                      child:  customTextFormField1(controller: 'audio', label: 'Upload sound file(.WAV)', audio: true),
+                    ),
+                    Expanded(flex: 2, child: SizedBox()),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 16,
@@ -498,12 +337,12 @@ class _AddWordsState extends State<AddWords>
                               itemBuilder: (context, exampleIndex) {
                                 return Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  const EdgeInsets.symmetric(vertical: 8.0),
                                   child: Container(
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
                                         border:
-                                            Border.all(color: Colors.black38)),
+                                        Border.all(color: Colors.black38)),
                                     child: Padding(
                                       padding: const EdgeInsets.only(
                                           right: 12,
@@ -511,7 +350,7 @@ class _AddWordsState extends State<AddWords>
                                           bottom: 12,
                                           top: 0),
                                       child: (myScreenMediaType.isTablet ||
-                                              myScreenMediaType.isMobile )
+                                          myScreenMediaType.isMobile )
                                           ? Column(
                                           children: [
                                             Row(
@@ -591,7 +430,7 @@ class _AddWordsState extends State<AddWords>
                                               height: 8,
                                             ),
                                             // text fields
-                                            customTextFormField(
+                                            customTextFormField2(
                                               controller:
                                               exampleTextControllers,
                                               index: exampleIndex,
@@ -602,7 +441,7 @@ class _AddWordsState extends State<AddWords>
                                             SizedBox(
                                               height: 4,
                                             ),
-                                            customTextFormField(
+                                            customTextFormField2(
                                               controller:
                                               exampleMeaningControllers,
                                               index: exampleIndex,
@@ -613,7 +452,7 @@ class _AddWordsState extends State<AddWords>
                                             SizedBox(
                                               height: 4,
                                             ),
-                                            customTextFormField(
+                                            customTextFormField2(
                                               controller:
                                               exampleSimplifiedControllers,
                                               index: exampleIndex,
@@ -624,7 +463,7 @@ class _AddWordsState extends State<AddWords>
                                             SizedBox(
                                               height: 4,
                                             ),
-                                            customTextFormField(
+                                            customTextFormField2(
                                               controller:
                                               exampleSoundControllers,
                                               index: exampleIndex,
@@ -760,7 +599,7 @@ class _AddWordsState extends State<AddWords>
                                                   Expanded(
                                                     flex: 10,
                                                     child:
-                                                    customTextFormField(
+                                                    customTextFormField2(
                                                       controller:
                                                       exampleTextControllers,
                                                       index: exampleIndex,
@@ -774,7 +613,7 @@ class _AddWordsState extends State<AddWords>
                                                   Expanded(
                                                     flex: 10,
                                                     child:
-                                                    customTextFormField(
+                                                    customTextFormField2(
                                                       controller:
                                                       exampleMeaningControllers,
                                                       index: exampleIndex,
@@ -802,7 +641,7 @@ class _AddWordsState extends State<AddWords>
                                                   Expanded(
                                                     flex: 10,
                                                     child:
-                                                    customTextFormField(
+                                                    customTextFormField2(
                                                       controller:
                                                       exampleSimplifiedControllers,
                                                       index: exampleIndex,
@@ -816,7 +655,7 @@ class _AddWordsState extends State<AddWords>
                                                   Expanded(
                                                       flex: 10,
                                                       child:
-                                                      customTextFormField(
+                                                      customTextFormField2(
                                                         controller:
                                                         exampleSoundControllers,
                                                         index:
@@ -867,8 +706,8 @@ class _AddWordsState extends State<AddWords>
                                 // nếu tất cả ví dụ đã có được lưu thì mới được thêm mới
                                 bool allExamplesSaved = true;
                                 for (int index = 0;
-                                    index < exampleTextControllers.length;
-                                    index++) {
+                                index < exampleTextControllers.length;
+                                index++) {
                                   if (savedExample[index] == false) {
                                     allExamplesSaved = false;
                                     break;
@@ -928,12 +767,14 @@ class _AddWordsState extends State<AddWords>
               ),
               Center(
                   child: TextButton(
-                style: TextButton.styleFrom(
-                    backgroundColor: notifier.redcolor,
-                    foregroundColor: Colors.white),
-                onPressed: () {},
-                child: Text('Submit', style: TextStyleConstant.textStyleBlack16w400.copyWith(color: Colors.white)),
-              )),
+                    style: TextButton.styleFrom(
+                        backgroundColor: notifier.redcolor,
+                        foregroundColor: Colors.white),
+                    onPressed: () {
+                      addWordController.onAddWord();
+                    },
+                    child: Text('Submit', style: TextStyleConstant.textStyleBlack16w400.copyWith(color: Colors.white)),
+                  )),
               SizedBox(height: 12,),
             ],
           ),
@@ -942,12 +783,50 @@ class _AddWordsState extends State<AddWords>
     );
   }
 
-  Widget customTextFormField(
+  Widget customTextFormField1({
+    required String controller,
+    required String label,
+    bool audio = false,
+  }){
+    return TextFormField(
+      validator: addWordController.basicValidator.getValidation(controller),
+      controller: addWordController.basicValidator.getController(controller),
+      decoration: InputDecoration(
+        enabledBorder: audio ? InputBorder.none : null,
+        focusedBorder: audio ? InputBorder.none : null,
+        labelText: label,
+        labelStyle: MyTextStyle.bodySmall(xMuted: true),
+        border: outlineInputBorder.copyWith(
+          borderRadius: BorderRadius.circular(25),
+        ),
+        contentPadding: MySpacing.all(16),
+        isCollapsed: true,
+        floatingLabelBehavior:
+        FloatingLabelBehavior.never,
+        suffixIcon: (addWordController.basicValidator.getController(controller)?.text != "" && audio)
+            ? IconButton(
+          onPressed: () {
+            setState(() {
+              addWordController.basicValidator.getController(controller)?.text = "";
+            });
+          },
+          icon: Icon(
+            Icons.close_sharp,
+            color: Colors.red,
+          ),
+        )
+            : null,
+      ),
+    );
+  }
+
+
+  Widget customTextFormField2(
       {required List<TextEditingController> controller,
-      required int index,
-      required String value,
-      required List<bool> enabled,
-      String? getFile}) {
+        required int index,
+        required String value,
+        required List<bool> enabled,
+        String? getFile}) {
     return TextFormField(
       enabled: !enabled[index],
       controller: controller[index],
@@ -963,38 +842,38 @@ class _AddWordsState extends State<AddWords>
         suffixIcon: (getFile == "")
             ? SizedBox()
             : Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  (controller[index].text == "")
-                      ? SizedBox()
-                      : IconButton(
-                          onPressed: () {
-                            setState(() {
-                              controller[index].text = "";
-                            });
-                          },
-                          icon: (!enabled[index]) ? Icon(
-                            Icons.close_sharp,
-                            color: Colors.red,
-                          ) : SizedBox()),
-                  IconButton(
-                    onPressed: () async {
-                      FilePickerResult? result =
-                          await FilePicker.platform.pickFiles(
-                        type: FileType.custom,
-                        allowedExtensions: ['$getFile'],
-                      );
-                      setState(() {
-                        if (result != null) {
-                          controller[index].text = result.names[0]!;
-                        } else {}
-                      });
-                    },
-                    icon: Icon(Icons.upload_file),
-                  ),
-                ],
-              ),
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            (controller[index].text == "")
+                ? SizedBox()
+                : IconButton(
+                onPressed: () {
+                  setState(() {
+                    controller[index].text = "";
+                  });
+                },
+                icon: (!enabled[index]) ? Icon(
+                  Icons.close_sharp,
+                  color: Colors.red,
+                ) : SizedBox()),
+            IconButton(
+              onPressed: () async {
+                FilePickerResult? result =
+                await FilePicker.platform.pickFiles(
+                  type: FileType.custom,
+                  allowedExtensions: ['$getFile'],
+                );
+                setState(() {
+                  if (result != null) {
+                    controller[index].text = result.names[0]!;
+                  } else {}
+                });
+              },
+              icon: Icon(Icons.upload_file),
+            ),
+          ],
+        ),
       ),
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -1014,7 +893,7 @@ class ExampleForm {
 
   ExampleForm(
       {required this.example,
-      required this.meaning,
-      required this.simplified,
-      required this.soundFile});
+        required this.meaning,
+        required this.simplified,
+        required this.soundFile});
 }
