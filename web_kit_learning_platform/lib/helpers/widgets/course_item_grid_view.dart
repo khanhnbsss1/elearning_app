@@ -24,7 +24,7 @@ class CourseItemGridView extends StatelessWidget {
   late ColorNotifier notifier;
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width - 254;
+    double width = MediaQuery.of(context).size.width;
     notifier = Provider.of<ColorNotifier>(context, listen: true);
     return Container(
       width: MediaQuery.of(context).size.width* (ResponsiveInfo.isPhone()?1:1/5),
@@ -101,7 +101,7 @@ class CourseItemGridView extends StatelessWidget {
                                 .copyWith(
                                 fontWeight: FontWeight.bold,
                                 // fontSize: Dimens.size24,
-                                fontSize: ResponsiveInfo.isPhone()?Dimens.size16:Dimens.size18,
+                                fontSize: ResponsiveInfo.isPhone()?Dimens.size20:Dimens.size18,
                                 color: Color.fromRGBO(163, 20, 19, 1.0)),
                             maxLines: width < 550 ? 1 : 2,
                           ),
@@ -115,7 +115,7 @@ class CourseItemGridView extends StatelessWidget {
                               fontWeight: FontWeight.w100,
 
                               // fontSize: Dimens.size18,
-                              fontSize: ResponsiveInfo.isPhone()?Dimens.size13:Dimens.size15,
+                              fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300 ? Dimens.size10 :Dimens.size15,
                               color: notifier.subgreycolor,
                             ),
                           ),
@@ -125,7 +125,7 @@ class CourseItemGridView extends StatelessWidget {
                                 style: baseStyle.copyWith(
 
                                   // fontSize: Dimens.size16,
-                                  fontSize: ResponsiveInfo.isPhone()?Dimens.size13:Dimens.size15,
+                                  fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
                                   color: notifier.subgreycolor,
                                 ),
                                 maxLines: 2,),
@@ -147,7 +147,7 @@ class CourseItemGridView extends StatelessWidget {
                                     rating: (courseInfo.ratePoint ?? 0)
                                         .toDouble(),
                                     // size: Dimens.size24,
-                                    size: ResponsiveInfo.isPhone()?Dimens.size18:Dimens.size22,
+                                    size: ResponsiveInfo.isPhone()?Dimens.size18: width < 1300  ? Dimens.size12 :Dimens.size22,
                                     allowHalfRating: true,
                                     onRatingChanged: (rating) {},
                                   ),
@@ -164,7 +164,7 @@ class CourseItemGridView extends StatelessWidget {
                                         ? notifier.blackcolor
                                         : notifier.blackcolor,
                                     // size: Dimens.size24 ,
-                                    size: ResponsiveInfo.isPhone()?Dimens.size18:Dimens.size22,
+                                    size: ResponsiveInfo.isPhone()?Dimens.size18: width < 1300  ? Dimens.size10 :Dimens.size22,
                                   ),
                                   Text(
                                       NumberHelper()
@@ -180,7 +180,7 @@ class CourseItemGridView extends StatelessWidget {
                                               ? notifier.blackcolor
                                               : notifier.blackcolor,
                                           // fontSize: Dimens.size18,
-                                          fontSize: ResponsiveInfo.isPhone()?13:15,
+                                          fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
                                           fontWeight: FontWeight.bold
                                       )),
                                   Text(" ${L10nX.getStr.vnd_str}",
@@ -195,7 +195,7 @@ class CourseItemGridView extends StatelessWidget {
                                             ? notifier.blackcolor
                                             : notifier.blackcolor,
                                         // fontSize: Dimens.size18,
-                                        fontSize: width < 600 ? width/50 :width < 800 ? width/70 :width < 1150 ? width/65 : width/75,
+                                        fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
                                       )),
                                 ],
                               ),

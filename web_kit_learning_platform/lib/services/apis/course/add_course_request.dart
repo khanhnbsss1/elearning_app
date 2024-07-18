@@ -148,13 +148,16 @@ class Lectures {
   String? lectureName;
   String? lectureLink;
   String? lectureMode;
+  String? document;
 
   Lectures(
       {this.id,
         this.subName,
         this.lectureName,
         this.lectureLink,
-        this.lectureMode});
+        this.lectureMode,
+        this.document
+      });
 
   Lectures.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -162,6 +165,7 @@ class Lectures {
     lectureName = json['lecture_name'];
     lectureLink = json['lecture_link'];
     lectureMode = json['lecture_mode'];
+    document = json['document'];
   }
 
   Map<String, dynamic> toJson() {
@@ -171,6 +175,7 @@ class Lectures {
     data['lecture_name'] = this.lectureName;
     data['lecture_link'] = this.lectureLink;
     data['lecture_mode'] = this.lectureMode;
+    data['document'] = this.document;
     return data;
   }
 }
