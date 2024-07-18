@@ -13,6 +13,7 @@ import 'package:webkit/helpers/widgets/course_item.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
+import 'package:webkit/views/course/course_list/add_words.dart';
 import 'package:webkit/views/course/course_list/course_detail.dart';
 import 'package:webkit/views/course/course_list/bloc/course_list_bloc.dart';
 import '../../../base/constant/dimens_constant.dart';
@@ -105,6 +106,29 @@ class _CourseListState extends State<CourseList>
                                       MySpacing.width(16),
                                       MyText.bodySmall(
                                         "Add New",
+                                        color: contentTheme.onPrimary,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                MyButton(
+                                  onTap: () {
+                                    AddWords().show(context);
+                                  },
+                                  elevation: 0,
+                                  padding: MySpacing.xy(12, 16),
+                                  backgroundColor: contentTheme.primary,
+                                  borderRadiusAll: AppStyle.buttonRadius.medium,
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        LucideIcons.plusCircle,
+                                        color: contentTheme.light,
+                                        size: 16,
+                                      ),
+                                      MySpacing.width(16),
+                                      MyText.bodySmall(
+                                        "Add new word",
                                         color: contentTheme.onPrimary,
                                       ),
                                     ],

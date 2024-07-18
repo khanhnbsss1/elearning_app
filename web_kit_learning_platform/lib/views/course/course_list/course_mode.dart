@@ -9,23 +9,23 @@ import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 
-enum DropdownMode { FREE, PREMIUM }
 
 class ModeOptionWidget extends StatefulWidget {
-  final DropdownMode? mode;
+  final String? mode;
+  final void Function(String?) onChanged;
 
-  ModeOptionWidget({required this.mode,});
+  ModeOptionWidget({required this.mode, required this.onChanged,});
   @override
   _ModeOptionWidget createState() => _ModeOptionWidget();
 }
 
 class _ModeOptionWidget extends State<ModeOptionWidget> {
 
-  DropdownMode? _mode;
+  String? _mode;
   @override
   void initState() {
     super.initState();
-    _mode = widget.mode??DropdownMode.PREMIUM;
+    _mode = widget.mode??'PREMIUM';
   }
   @override
   Widget build(BuildContext context) {
@@ -46,13 +46,14 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
               flex: 3,
               child: ListTile(
                 title: const Text('FREE'),
-                leading: Radio<DropdownMode>(
-                  value: DropdownMode.FREE,
+                leading: Radio<String>(
+                  value: 'FREE',
                   groupValue: _mode,
-                  onChanged: (DropdownMode? value) {
+                  onChanged: (String? value) {
                     setState(() {
                       _mode = value;
                     });
+                    widget.onChanged(value);
                   },
                 ),
               ),
@@ -60,15 +61,16 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
             Expanded(
               flex: 4,
               child: ListTile(
-                enabled: widget.mode == DropdownMode.PREMIUM,
+                enabled: widget.mode == 'PREMIUM',
                 title: const Text('PREMIUM'),
-                leading: Radio<DropdownMode>(
-                  value: DropdownMode.PREMIUM,
+                leading: Radio<String>(
+                  value: 'PREMIUM',
                   groupValue: _mode,
-                  onChanged: (DropdownMode? value) {
+                  onChanged: (String? value) {
                     setState(() {
                       _mode = value;
                     });
+                    widget.onChanged(value);
                   },
                 ),
               ),
@@ -79,11 +81,11 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
                 child: Container(
                   color: ColorConst.whiteColor,
                   child: TextFormField(
-                    enabled: _mode == DropdownMode.PREMIUM,
+                    enabled: _mode == 'PREMIUM',
                     decoration: InputDecoration(
                       prefixIcon: Icon(
                         Icons.attach_money,
-                        color: (_mode == DropdownMode.PREMIUM)
+                        color: (_mode == 'PREMIUM')
                             ? Colors.black87
                             : Colors.black12,
                       ),
@@ -98,14 +100,5 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
         ),
       ],
     );
-    //     : Row(
-    //   children: [
-    //     MyText.labelMedium(
-    //       'Payment: ',
-    //     ),
-    //     // MySpacing.height(4),
-    //     Text('FREE',),
-    //   ],
-    // );
   }
 }

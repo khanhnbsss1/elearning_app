@@ -697,7 +697,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
           padding: const EdgeInsets.symmetric(vertical: 4),
           child: Row(
             children: [
-              SvgPicture.asset(icon, height: 20, color: ColorConst.blackColor,),
+              SvgPicture.asset(icon, height: 20, color: Colors.white,),
               const SizedBox(width: 10),
               Expanded(
                 child: SingleChildScrollView(

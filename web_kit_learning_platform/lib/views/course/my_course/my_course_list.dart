@@ -107,29 +107,31 @@ class _MyCourseListState extends State<MyCourseList>
                           ),
                           myScreenMediaType.isMobile?buildCourseList(state: state):Expanded(child: buildCourseList(state: state)),
                           SizedBox(height: 8,),
-                          FlutterCustomPagination(
-                            key: GlobalKey(debugLabel: (state.myCourseResponseModel?.total??0).toString()),
-                            currentPage: state.myCourseResponseModel!.getCurrentPage(),
-                            limitPerPage: state.myCourseResponseModel!.getTotalPage(),
-                            totalDataCount: state.myCourseResponseModel!.getTotalPage(),
-                            onPreviousPage: (p0) {
-                              // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
-                            },
-                            onBackToFirstPage: (p0) {
-                              // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
-                            },
-                            onNextPage: (p0) {
-                              // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
-                            },
-                            onGoToLastPage: (p0) {
-                              // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
-                            },
-                            backgroundColor: ColorConst.whiteColor,
-                            textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
-                            previousPageIcon: Icons.keyboard_arrow_left,
-                            backToFirstPageIcon: Icons.first_page,
-                            nextPageIcon: Icons.keyboard_arrow_right,
-                            goToLastPageIcon: Icons.last_page,
+                          Center(
+                            child: FlutterCustomPagination(
+                              key: GlobalKey(debugLabel: (state.myCourseResponseModel?.total??0).toString()),
+                              currentPage: state.myCourseResponseModel!.getCurrentPage(),
+                              limitPerPage: state.myCourseResponseModel!.getTotalPage(),
+                              totalDataCount: state.myCourseResponseModel!.getTotalPage(),
+                              onPreviousPage: (p0) {
+                                // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                              },
+                              onBackToFirstPage: (p0) {
+                                // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                              },
+                              onNextPage: (p0) {
+                                // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                              },
+                              onGoToLastPage: (p0) {
+                                // BlocProvider.of<PaymentHistoryBloc>(context).add(PaymentHistorySelectPageEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(page: p0)));
+                              },
+                              backgroundColor: ColorConst.whiteColor,
+                              textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                              previousPageIcon: Icons.keyboard_arrow_left,
+                              backToFirstPageIcon: Icons.first_page,
+                              nextPageIcon: Icons.keyboard_arrow_right,
+                              goToLastPageIcon: Icons.last_page,
+                            ),
                           ),
                         ],
                       ),

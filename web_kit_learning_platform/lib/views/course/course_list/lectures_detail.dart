@@ -51,13 +51,16 @@ class _AddLecturesState extends State<AddLectures>
       {required int subjectIndex,
       required String lectureName,
       required String lectureLink,
-      required String lectureMode}) {
+      required String document,
+      required String lectureMode,
+      }) {
     setState(() {
       subjects[subjectIndex].lectures.add(Lectures(
             id: lectures.length + 1,
             subName: '',
             lectureName: lectureName,
             lectureLink: lectureLink,
+            document: document,
             lectureMode: lectureMode,
           ));
     });
@@ -296,37 +299,43 @@ class _AddLecturesState extends State<AddLectures>
                                       child: Row(
                                         children: [
                                           Expanded(
-                                            flex: 4,
+                                            flex: 6,
                                             child: Text(
-                                                '${lectureIndex + 1}. Lecture Name: ${subjects[subjectIndex].lectures[lectureIndex].lectureName}'),
+                                                '${lectureIndex + 1}. Name: ${subjects[subjectIndex].lectures[lectureIndex].lectureName}',
+                                              overflow: TextOverflow.ellipsis,),
                                           ),
+                                          SizedBox(width: 8,),
                                           Expanded(
-                                            flex: 4,
+                                            flex: 8,
                                             child: Text(
-                                                'Lecture Link: ${subjects[subjectIndex].lectures[lectureIndex].lectureLink}'),
+                                                'Link: ${subjects[subjectIndex].lectures[lectureIndex].lectureLink}',
+                                            overflow: TextOverflow.ellipsis,),
+                                          ),
+                                          SizedBox(width: 8,),
+                                          Expanded(
+                                            flex: 8,
+                                            child: Text(
+                                                'Document: ${subjects[subjectIndex].lectures[lectureIndex].document}',
+                                              overflow: TextOverflow.ellipsis,),
+                                          ),
+                                          SizedBox(width: 8,),
+                                          Expanded(
+                                            flex: 3,
+                                            child: Text(
+                                                'Mode: ${subjects[subjectIndex].lectures[lectureIndex].lectureMode}',
+                                              overflow: TextOverflow.ellipsis,),
                                           ),
                                           Expanded(
                                             flex: 1,
-                                            child: Text(
-                                                'Lecture Mode: ${subjects[subjectIndex].lectures[lectureIndex].lectureMode}'),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Align(
-                                              alignment: Alignment.centerRight,
-                                              child: ElevatedButton(
-                                                  onPressed: () {
-                                                    removeLecture(
-                                                        lectureIndex:
-                                                            lectureIndex,
-                                                        subjectIndex:
-                                                            subjectIndex);
-                                                  },
-                                                  child: Icon(Icons.remove)),
-                                            ),
+                                            child: IconButton(
+                                                onPressed: () {
+                                                  removeLecture(
+                                                      lectureIndex:
+                                                          lectureIndex,
+                                                      subjectIndex:
+                                                          subjectIndex);
+                                                },
+                                                icon: Icon(Icons.delete)),
                                           )
                                         ],
                                       ),
@@ -414,37 +423,6 @@ class _AddLecturesState extends State<AddLectures>
                 SizedBox(
                   height: 16,
                 ),
-                // DropdownButtonFormField(
-                //   dropdownColor: theme.cardTheme.color,
-                //   decoration: InputDecoration(
-                //     labelText: mode,
-                //     labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                //     border: outlineInputBorder,
-                //     prefixIcon: Icon(
-                //       LucideIcons.check,
-                //       size: 20,
-                //       color: color,
-                //     ),
-                //     contentPadding: MySpacing.all(16),
-                //     isCollapsed: true,
-                //     floatingLabelBehavior: FloatingLabelBehavior.never,
-                //   ),
-                //   items: const [
-                //     DropdownMenuItem<String>(
-                //       value: 'FREE',
-                //       child: Text('Free'),
-                //     ),
-                //     DropdownMenuItem<String>(
-                //       value: 'PREMIUM',
-                //       child: Text('Premium'),
-                //     )
-                //   ],
-                //   onChanged: (newValue) {
-                //     setState(() {
-                //       mode = newValue!;
-                //     });
-                //   },
-                // ),
                 MyText.labelMedium('Document: '),
                 SizedBox(height: 4,),
                 TextFormField(
@@ -467,6 +445,7 @@ class _AddLecturesState extends State<AddLectures>
                           if (result != null) {
                             documentLinkController.text = result.names[0]!;
                           } else {
+                            documentLinkController.text = "No document";
                           }
                         });
                       },
@@ -475,7 +454,11 @@ class _AddLecturesState extends State<AddLectures>
                 ),
                 SizedBox(height: 16,),
                 Row(children: [
-                  Expanded(flex: 7, child: ModeOptionWidget(mode: DropdownMode.FREE,)),
+                  Expanded(flex: 7, child: ModeOptionWidget(mode: 'FREE', onChanged: (value) {
+                    if (value != null) {
+                      mode = value;
+                    }
+                  },)),
                   Expanded(flex: 3, child: SizedBox()),
                 ],),
               ],
@@ -504,6 +487,7 @@ class _AddLecturesState extends State<AddLectures>
                         subjectIndex: subjectIndex,
                         lectureName: lectureNameController.text,
                         lectureLink: lectureLinkController.text,
+                        document: documentLinkController.text,
                         lectureMode: mode);
                     Navigator.of(context).pop();
                   }
@@ -520,12 +504,4 @@ class Subject {
   List<Lectures> lectures;
 
   Subject({required this.subName, required this.lectures});
-}
-
-class Vocabulary {
-  String word;
-  String definition;
-  String pronunciation;
-
-  Vocabulary({required this.word,required this.definition, required this.pronunciation});
 }
