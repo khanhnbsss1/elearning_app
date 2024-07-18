@@ -7,13 +7,13 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:universal_html/html.dart';
 import 'package:webkit/base/theme/colors_app.dart';
 import 'package:file_picker/file_picker.dart';
-import '../../../controller/ui/add_course_controller.dart';
-import '../../../helpers/theme/app_theme.dart';
-import '../../../helpers/utils/ui_mixins.dart';
-import '../../../helpers/widgets/my_spacing.dart';
-import '../../../helpers/widgets/my_text.dart';
-import '../../../helpers/widgets/my_text_style.dart';
-import '../../../services/apis/course/add_course_request.dart';
+import '../../../../controller/ui/add_course_controller.dart';
+import '../../../../helpers/theme/app_theme.dart';
+import '../../../../helpers/utils/ui_mixins.dart';
+import '../../../../helpers/widgets/my_spacing.dart';
+import '../../../../helpers/widgets/my_text.dart';
+import '../../../../helpers/widgets/my_text_style.dart';
+import '../../../../services/apis/course/add_course_request.dart';
 import 'course_mode.dart';
 
 class AddLectures extends StatefulWidget {

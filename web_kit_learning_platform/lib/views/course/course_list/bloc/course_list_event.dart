@@ -7,8 +7,13 @@ abstract class CourseListEvent extends Equatable {
 }
 
 class CourseListInitEvent extends CourseListEvent {
-  CourseListInitEvent()
-  {
-  }
+  CourseListInitEvent();  
+  @override
   List<Object?> get props => [];
+}
+class CourseListOnSearchByFilterEvent extends CourseListEvent {
+  SearchCommonRequest searchCommonRequest;
+  CourseListOnSearchByFilterEvent({required this.searchCommonRequest} );
+  @override
+  List<Object?> get props => [searchCommonRequest];
 }

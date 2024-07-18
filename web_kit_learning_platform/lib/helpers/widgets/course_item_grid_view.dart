@@ -29,7 +29,7 @@ class CourseItemGridView extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width* (ResponsiveInfo.isPhone()?1:1/5),
       constraints: BoxConstraints(
-        minWidth: 300,
+        minWidth: 330,
         maxWidth: 500
       ),
       child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 

@@ -15,11 +15,13 @@ class GetCourseFilterApi extends BaseApiRequest {
 
     if(result.runtimeType == ResponseCommon)
     {
-      return CourseFilterListInfo(data: []);
+      return CourseFilterListInfo(data: [CourseFilterInfo(filterType: "ALL", id: -1,name: "All",selectSubFilter: null, subFilter: [])]);
     }
     else
     {
-      InstanceManager().courseFilterListInfo = CourseFilterListInfo.fromJson(result);
+      (InstanceManager().courseFilterListInfo.data??[]).clear();
+      (InstanceManager().courseFilterListInfo.data??[]).add(CourseFilterInfo(filterType: "ALL", id: -1,name: "All",selectSubFilter: null, subFilter: []));
+      (InstanceManager().courseFilterListInfo.data??[]).addAll(CourseFilterListInfo.fromJson(result).data??[]);
       return InstanceManager().courseFilterListInfo;
     }
   }

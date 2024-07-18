@@ -104,12 +104,15 @@ class MyApp extends StatelessWidget {
       },
       builder: (BuildContext context, state)  {
         return GetMaterialApp(
-          key: UniqueKey(),//Key(LanguageHelper().getCurrentLocale().languageCode),
+          key: Key(LanguageHelper().getCurrentLocale().languageCode),
+          useInheritedMediaQuery: true,
           scrollBehavior: ScrollConfiguration.of(context).copyWith(
             scrollbars: false,
             dragDevices: {
               PointerDeviceKind.touch,
               PointerDeviceKind.mouse,
+              PointerDeviceKind.trackpad,
+              PointerDeviceKind.stylus
             },
           ),
           debugShowCheckedModeBanner: false,
@@ -135,7 +138,7 @@ class MyApp extends StatelessWidget {
                     return Consumer<AppNotifier>(
                         builder: (_, notifier, ___) {
                           return SelectionArea (
-                              key: UniqueKey(),
+                              //key: UniqueKey(),
                               selectionControls: materialTextSelectionControls,
                               child: child ?? Container());
                         });

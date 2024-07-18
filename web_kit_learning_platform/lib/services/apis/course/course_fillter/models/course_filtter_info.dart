@@ -1,7 +1,9 @@
 class CourseFilterListInfo {
   List<CourseFilterInfo>? data;
 
-  CourseFilterListInfo({this.data});
+  CourseFilterListInfo({this.data}){
+    data??=[];
+  }
 
   CourseFilterListInfo.fromJson(dynamic json) {
       data = <CourseFilterInfo>[];
@@ -23,18 +25,19 @@ class CourseFilterInfo {
   int? id;
   String? filterType;
   String? name;
-  List<SubFilter>? subFilter;
+  SubFilterInfo? selectSubFilter;/// bien them vao de chon luc chon
+  List<SubFilterInfo>? subFilter;
 
-  CourseFilterInfo({this.id, this.filterType, this.name, this.subFilter});
+  CourseFilterInfo({this.id, this.filterType, this.name, this.subFilter, this.selectSubFilter});
 
   CourseFilterInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     filterType = json['filterType'];
     name = json['name'];
     if (json['subFilter'] != null) {
-      subFilter = <SubFilter>[];
+      subFilter = <SubFilterInfo>[];
       json['subFilter'].forEach((v) {
-        subFilter!.add(new SubFilter.fromJson(v));
+        subFilter!.add(new SubFilterInfo.fromJson(v));
       });
     }
   }
@@ -51,15 +54,15 @@ class CourseFilterInfo {
   }
 }
 
-class SubFilter {
+class SubFilterInfo {
   int? id;
   String? language;
   String? gradeName;
   String? name;
 
-  SubFilter({this.id, this.language, this.gradeName, this.name});
+  SubFilterInfo({this.id, this.language, this.gradeName, this.name});
 
-  SubFilter.fromJson(Map<String, dynamic> json) {
+  SubFilterInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     language = json['language'];
     gradeName = json['grade_name'];

@@ -30,12 +30,13 @@ class InstanceManager{
   void handlerChangeCurrentUser(){
     onChangeCurrentUser();
   }
-  Future<void> getFilterCourse() async {
+  Future<CourseFilterListInfo> getFilterCourse() async {
     if((courseFilterListInfo.data??[]).isNotEmpty) {
-      return;
+      return courseFilterListInfo;
     }
     GetCourseFilterApi getCourseFilterApi = GetCourseFilterApi();
-    await getCourseFilterApi.call();
+    return await getCourseFilterApi.call();
+    
   }
 }
 

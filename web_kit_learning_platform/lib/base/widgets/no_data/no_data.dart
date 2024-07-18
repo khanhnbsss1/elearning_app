@@ -21,7 +21,7 @@ class NoData extends StatelessWidget {
           SizedBox(
             width: width,
               height: height,
-              child: Image.asset(ImageManager().getPngImagePath(ImageManager.icNoData))),
+              child: Icon(Icons.note_alt_outlined, size: width?? Dimens.size80,)),
            Gap(Dimens.size16),
           Text(
               title!,

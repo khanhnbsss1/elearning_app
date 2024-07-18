@@ -2,9 +2,9 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import '../../../helpers/theme/app_theme.dart';
-import '../../../helpers/utils/ui_mixins.dart';
-import '../../../helpers/widgets/my_text_style.dart';
+import 'package:webkit/helpers/theme/app_theme.dart';
+import 'package:webkit/helpers/utils/ui_mixins.dart';
+import 'package:webkit/helpers/widgets/my_text_style.dart';
 
 class TagDropDown extends StatefulWidget {
   final List<String> tags; // List of tags
