@@ -1,48 +1,38 @@
-class AddCourseDictionary {
+class AddCourseFilterModel {
   String? datetime;
   String? errorCode;
   String? message;
-  List<Data>? data;
+  List<Filter>? data;
   bool? success;
 
-  AddCourseDictionary(
+  AddCourseFilterModel(
       {this.datetime, this.errorCode, this.message, this.data, this.success});
 
-  AddCourseDictionary.fromJson(Map<String, dynamic> json) {
-    datetime = json['datetime'];
-    errorCode = json['errorCode'];
-    message = json['message'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+  AddCourseFilterModel.fromJson(dynamic json) {
+      data = <Filter>[];
+      json.forEach((v) {
+        data!.add(new Filter.fromJson(v));
       });
-    }
-    success = json['success'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['datetime'] = this.datetime;
-    data['errorCode'] = this.errorCode;
-    data['message'] = this.message;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
-    data['success'] = this.success;
     return data;
   }
 }
 
-class Data {
+class Filter {
   int? id;
   String? name;
   String? filterType;
   List<SubFilter>? subFilter;
 
-  Data({this.id, this.name, this.filterType, this.subFilter});
+  Filter({this.id, this.name, this.filterType, this.subFilter});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Filter.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     filterType = json['filterType'];

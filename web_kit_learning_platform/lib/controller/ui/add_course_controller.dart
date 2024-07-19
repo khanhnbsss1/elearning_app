@@ -17,7 +17,6 @@ class AddCourseController extends MyController {
 
   bool showPassword = false, loading = false, isChecked = false;
   // List<TextEditingController> lectureControllers = [];
-
   @override
   void onInit() {
     super.onInit();
@@ -129,7 +128,7 @@ class AddCourseController extends MyController {
     basicValidator.addField(
       'tags',
       label: 'Tags',
-      required: true,
+      // required: true,
       controller: TextEditingController(),
     );
     basicValidator.addField(
@@ -179,10 +178,20 @@ class AddCourseController extends MyController {
     //     lectureMode: basicValidator.getController('lecture_mode_$i')?.text,
     //   ));
     // }
+
+    // List<String> tags = (basicValidator.getController('tags')?.text ?? '')
+    //     .split(',')
+    //     .map((tag) => tag.trim())
+    //     .toList();
+
+    // String tagsString = tags.map((tag) => tag.id.toString()).join(',');
+
+    // print(tagsString);
+
     AddCourseRequest addCourseRequest = AddCourseRequest(
-      id: basicValidator.getController('id')?.hashCode,
+      id: int.parse(basicValidator.getController('id')?.text ?? '0'),
       name: basicValidator.getController('name')!.text,
-      image: basicValidator.getController('image')?.text,
+      image: basicValidator.getController('image')?.text ?? "",
       totalLectures: int.parse(
           basicValidator.getController('total_lectures')?.text ?? '0'),
       totalSubjects: int.parse(
@@ -204,12 +213,13 @@ class AddCourseController extends MyController {
       videoPreview: basicValidator.getController('video_preview')?.text,
       infoObj: basicValidator.getController('info_obj')?.text,
       infoResult: basicValidator.getController('info_result')?.text,
-      isActive: basicValidator.getController('is_active')?.hashCode,
+      isActive: int.parse(basicValidator.getController('is_active')?.text ?? '0'),
       accompanyCourse: basicValidator.getController('accompany_course')?.text ?? '',
+      tags: basicValidator.getController('tags')?.text ?? '',
       // lectures: lectures,
     );
     // print(addCourseRequest.toString());
-    // AddCourseApi addCourseApi = AddCourseApi(addCourseRequest: addCourseRequest);
-    // addCourseApi.call();
+    AddCourseApi addCourseApi = AddCourseApi(addCourseRequest: addCourseRequest);
+    addCourseApi.call();
   }
 }

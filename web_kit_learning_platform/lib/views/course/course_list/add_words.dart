@@ -1,5 +1,9 @@
 import 'dart:io' as io;
-import 'dart:html';
+import 'dart:typed_data';
+// import 'dart:html';
+import 'package:file/file.dart';
+import 'package:file/memory.dart';
+
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +24,8 @@ import '../../../helpers/utils/ui_mixins.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../../landing_page/components/colornotifier.dart';
+import 'package:universal_io/io.dart';
+
 
 class AddWords extends StatefulWidget {
   void show(BuildContext context) {
@@ -139,6 +145,16 @@ class _AddWordsState extends State<AddWords>
     return true;
   }
 
+  File createFileFromBytes(String fileName, String fileType, Uint8List fileContent) {
+    final fileSystem = MemoryFileSystem();
+
+    final file = fileSystem.file(fileName);
+
+    file.writeAsBytesSync(fileContent);
+
+    return file;
+  }
+
   @override
   Widget build(BuildContext context) {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
@@ -218,15 +234,21 @@ class _AddWordsState extends State<AddWords>
                                   backgroundColor: notifier.redcolor,
                                   foregroundColor: Colors.white),
                               onPressed: () async {
-                                FilePickerResult? result =
-                                await FilePicker.platform.pickFiles(
+                                FilePickerResult? result = await FilePicker.platform.pickFiles(
                                   type: FileType.custom,
                                   allowedExtensions: ['wav'],
                                 );
 
+                                String? fileName = result?.names[0];
+                                String fileType = 'wav';
+                                Uint8List? fileContent = result?.files.first.bytes;
+
+                                File file = createFileFromBytes(fileName!, fileType, fileContent!);
+
                                 setState(() {
                                   if (result != null) {
                                     addWordController.basicValidator.getController('audio')?.text = result.names[0]!;
+                                    addWordController.setAudioFile(file);
                                   } else {}
                                 });
                               },
@@ -284,20 +306,22 @@ class _AddWordsState extends State<AddWords>
                               foregroundColor: Colors.white),
                           onPressed: () async {
                             FilePickerResult? result = await FilePicker.platform.pickFiles(
-                            type: FileType.custom,
+                              type: FileType.custom,
                               allowedExtensions: ['wav'],
                             );
 
-                            // final platformFile = result?.files.single.path;
-                            // print(platformFile);
-                            // File file = File(platformFile);
+                            String? fileName = result?.names[0];
+                            String fileType = 'wav';
+                            Uint8List? fileContent = result?.files.first.bytes;
 
+                            File file = createFileFromBytes(fileName!, fileType, fileContent!);
+                            print(file.readAsBytesSync());
                             setState(() {
                               if (result != null) {
                                 addWordController.basicValidator.getController('audio')?.text = result.names[0]!;
-                              }
-                            }
-                            );
+                                addWordController.setAudioFile(file);
+                              } else {}
+                            });
                           },
                           icon: Icon(Icons.upload_file, size: 14),
                         )),

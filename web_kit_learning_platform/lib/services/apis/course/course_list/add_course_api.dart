@@ -15,6 +15,30 @@ class AddCourseApi extends BaseApiRequest {
   AddCourseApi({required this.addCourseRequest}):super(
     serviceType: SERVICE_TYPE.COURSE,
     apiName: ApiName.getInstance().createCourse,
+      requestBody: {
+        'image': addCourseRequest.image,
+        'data': {
+          'id': addCourseRequest.id,
+          'name': addCourseRequest.name,
+          'producer_name': addCourseRequest.producerName,
+          'language': addCourseRequest.language,
+          'introduction': addCourseRequest.introduction,
+          'payment': addCourseRequest.payment,
+          'rate_point': addCourseRequest.ratePoint,
+          'durian': addCourseRequest.durian,
+          'course_mode': addCourseRequest.courseMode,
+          'grade_name': addCourseRequest.gradeName,
+          'category_id': addCourseRequest.categoryId,
+          'is_standard': addCourseRequest.isStandard,
+          'category_name': addCourseRequest.categoryName,
+          'video_preview': addCourseRequest.videoPreview,
+          'info_obj': addCourseRequest.infoObj,
+          'info_result': addCourseRequest.infoResult,
+          'is_active': addCourseRequest.isActive,
+          'accompany_course': addCourseRequest.accompanyCourse,
+        },
+        'tags': addCourseRequest.tags,
+      }
   );
 
   Future<dynamic> call() async {

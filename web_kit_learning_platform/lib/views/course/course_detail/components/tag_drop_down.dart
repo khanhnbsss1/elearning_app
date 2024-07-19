@@ -7,7 +7,7 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 
 class TagDropDown extends StatefulWidget {
-  final List<String> tags;
+  final List<String?> tags;
   final Function(List<String>) onAddTags;
   final Function(List<String>) onRemoveTags;
 
@@ -52,7 +52,7 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                     items: widget.tags.map((tag) => DropdownMenuItem(
                       enabled: !selectedValues.contains(tag),
                       value: tag,
-                      child: !selectedValues.contains(tag) ? Text(tag) : Text(tag),
+                      child: !selectedValues.contains(tag) ? Text(tag!) : Text(tag!),
                     )).toList(),
                     onChanged: (String? value) {
                       setState(() {

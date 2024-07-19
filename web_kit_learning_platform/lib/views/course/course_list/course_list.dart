@@ -86,8 +86,8 @@ class _CourseListState extends State<CourseList>
                           children: [
                             state.courseType== CourseType.courseList?MyButton(
                               onTap: () {
-                                CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
-                                // AddWords().show(context);
+                                // CourseDetail().show(context);
+                                AddWords().show(context);
                               },
                               elevation: 0,
                               padding: MySpacing.xy(12, 16),
@@ -108,6 +108,30 @@ class _CourseListState extends State<CourseList>
                                 ],
                               ),
                             ):SizedBox(),
+                            MyButton(
+                              onTap: () {
+                                CourseDetail().show(context);
+                                // AddWords().show(context);
+                              },
+                              elevation: 0,
+                              padding: MySpacing.xy(12, 16),
+                              backgroundColor: contentTheme.primary,
+                              borderRadiusAll: AppStyle.buttonRadius.medium,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    LucideIcons.plusCircle,
+                                    color: contentTheme.light,
+                                    size: 16,
+                                  ),
+                                  MySpacing.width(16),
+                                  MyText.bodySmall(
+                                    "Add New",
+                                    color: contentTheme.onPrimary,
+                                  ),
+                                ],
+                              ),
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [

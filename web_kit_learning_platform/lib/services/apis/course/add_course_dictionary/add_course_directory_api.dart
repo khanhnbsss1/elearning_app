@@ -9,17 +9,27 @@ import 'package:webkit/base/services/base_request/models/search_common_request.d
 import '../../../../base/services/base_request/models/response_error_objects.dart';
 import '../add_course_request.dart';
 import '../course_list/models/course_models.dart';
+import 'add_course_directory_model.dart';
 
-class AddCourseDirectory extends BaseApiRequest {
-  AddCourseDirectory addCourseDictionary;
-  AddCourseDirectory({required this.addCourseDictionary}):super(
+class AddCourseFilterApi extends BaseApiRequest {
+  AddCourseFilterApi():super(
     serviceType: SERVICE_TYPE.COURSE,
-    apiName: ApiName.getInstance().createCourse,
+    apiName: ApiName.getInstance().addCourseDirectory,
   );
 
   Future<dynamic> call() async {
     await getAuthorization();
-    dynamic result = await postRequestAPI();
+    dynamic result = await getRequestAPI();
+
+    if(result.runtimeType == ResponseCommon)
+    {
+      return AddCourseFilterModel(data: []);
+    }
+    else
+    {
+      AddCourseFilterModel addCourseFilterModel = AddCourseFilterModel.fromJson(result);
+      return addCourseFilterModel;
+    }
   }
 
   Future<void> getAuthorization() async {
@@ -38,3 +48,4 @@ class AddCourseDirectory extends BaseApiRequest {
   }
 
 }
+
