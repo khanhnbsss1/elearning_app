@@ -86,8 +86,8 @@ class _CourseListState extends State<CourseList>
                           children: [
                             state.courseType== CourseType.courseList?MyButton(
                               onTap: () {
-                                // CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
-                                AddWords().show(context);
+                                CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
+                                // AddWords().show(context);
                               },
                               elevation: 0,
                               padding: MySpacing.xy(12, 16),

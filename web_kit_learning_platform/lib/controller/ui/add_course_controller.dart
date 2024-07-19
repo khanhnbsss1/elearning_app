@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/controller/my_controller.dart';
 
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
@@ -8,6 +9,8 @@ import 'package:webkit/helpers/widgets/my_validators.dart';
 import 'package:webkit/services/apis/auth/register/models/register_request.dart';
 import 'package:webkit/services/apis/auth/register/register_with_phone_api.dart';
 import 'package:webkit/services/apis/course/add_course_request.dart';
+import 'package:webkit/services/apis/course/course_list/add_course_api.dart';
+import 'package:webkit/services/apis/course/course_list/course_api.dart';
 
 class AddCourseController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
@@ -123,7 +126,17 @@ class AddCourseController extends MyController {
       label: 'Is active',
       controller: TextEditingController(),
     );
-
+    basicValidator.addField(
+      'tags',
+      label: 'Tags',
+      required: true,
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'accompany_course',
+      label: 'Accompany course',
+      controller: TextEditingController(),
+    );
     // basicValidator.addField(
     //   'sub_name',
     //   label: 'Subject name',
@@ -177,7 +190,7 @@ class AddCourseController extends MyController {
       producerName: basicValidator.getController('producer_name')?.text,
       language: basicValidator.getController('language')!.text,
       introduction: basicValidator.getController('introduction')?.text,
-      payment: int.parse(basicValidator.getController('payment')?.text ?? '0'),
+      payment: (basicValidator.getController('course_mode')?.text == 'FREE') ? 0 : int.parse(basicValidator.getController('payment')?.text ?? '0'),
       ratePoint:
           int.parse(basicValidator.getController('rate_point')?.text ?? '0'),
       durian: basicValidator.getController('durian')!.text,
@@ -186,13 +199,17 @@ class AddCourseController extends MyController {
       categoryId:
           int.parse(basicValidator.getController('category_id')?.text ?? '0'),
       isStandard:
-          int.parse(basicValidator.getController('is_standard')!.text ?? '0'),
+          int.parse(basicValidator.getController('is_standard')!.text),
       categoryName: basicValidator.getController('category_name')?.text,
       videoPreview: basicValidator.getController('video_preview')?.text,
       infoObj: basicValidator.getController('info_obj')?.text,
       infoResult: basicValidator.getController('info_result')?.text,
       isActive: basicValidator.getController('is_active')?.hashCode,
+      accompanyCourse: basicValidator.getController('accompany_course')?.text ?? '',
       // lectures: lectures,
     );
+    // print(addCourseRequest.toString());
+    // AddCourseApi addCourseApi = AddCourseApi(addCourseRequest: addCourseRequest);
+    // addCourseApi.call();
   }
 }

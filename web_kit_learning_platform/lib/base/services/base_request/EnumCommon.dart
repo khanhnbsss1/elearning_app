@@ -10,7 +10,7 @@ const Map<DOMAIN_TYPE, String> LIVE_DOMAIN = {
 
 const Map<DOMAIN_TYPE, String> UAT_DOMAIN = {
   //DOMAIN_TYPE.MAIN: "http://192.168.0.47:8989/api/",
-   DOMAIN_TYPE.MAIN: "https://e996-118-70-125-12.ngrok-free.app/api/",
+  //  DOMAIN_TYPE.MAIN: "https://e996-118-70-125-12.ngrok-free.app/api/",
   DOMAIN_TYPE.PAYMENT: "https://navitrack.fft.com.vn:8899/api/",
 };
 
