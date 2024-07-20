@@ -5,7 +5,7 @@ class AddWordsApi extends BaseApiRequest {
   WordInfo word;
   AddWordsApi({required this.word}) : super(
       serviceType: SERVICE_TYPE.Vocabulary,
-      apiName: ApiName.getInstance().addWord,
+      apiName: ApiName().addVocabulary,
     requestBody: {
         'data': {
           'simplified':word.simplified,

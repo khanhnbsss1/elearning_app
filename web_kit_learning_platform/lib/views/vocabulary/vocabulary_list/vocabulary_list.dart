@@ -5,6 +5,8 @@ import 'package:gap/gap.dart';
 import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/constant/dimens_constant.dart';
+import 'package:webkit/base/widgets/pages_common/list_body_page_common.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
@@ -67,40 +69,19 @@ class _VocabularyListState extends State<VocabularyList>
               return Layout(
                   isScroll: false,
                   padding: EdgeInsets.only(top: 35 + 16, bottom: 16),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            state.vocabularyType== VocabularyType.vocabularyList?MyButton(
-                              onTap: () {
-                                // CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
-                                AddWords().show(context);
-                              },
-                              elevation: 0,
-                              padding: MySpacing.xy(12, 16),
-                              backgroundColor: contentTheme.primary,
-                              borderRadiusAll: AppStyle.buttonRadius.medium,
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    LucideIcons.plusCircle,
-                                    color: contentTheme.light,
-                                    size: 16,
-                                  ),
-                                  MySpacing.width(16),
-                                  MyText.bodySmall(
-                                    "Add New",
-                                    color: contentTheme.onPrimary,
-                                  ),
-                                ],
-                              ),
-                            ):SizedBox(),
-                            Row(
+                  child: ListBodyCommon(
+                    minOfWidthOfListRatio: 0.1,
+                    maxOfWidthOfListRatio: 0.5,
+                    widthOfListRatio: 0.2,
+                    list:  Stack(
+                      children: [
+                        Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 FilterCoursePopupMenu(onSelect: (p0) {
@@ -108,93 +89,111 @@ class _VocabularyListState extends State<VocabularyList>
                                       searchCommonRequest: state.searchCommonRequest!.copyWith(filterType: p0.filterType,gradeId: p0.selectSubFilter?.id,)));
                                 },),
                                 Gap(Dimens.size10),
-                                SizedBox(
-                                  width: 200,
-                                  height: Dimens.size40,
-                                  child: Form(
-                                    key: formKey,
-                                    child: TextFormField(
-                                      maxLines: 1,
-                                      onChanged: (value) {
-                  
-                                      },
-                                      onFieldSubmitted: (value) {
-                                        BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
-                                      },
-                                      onTapOutside: (event) {
-                                      },
-                                      style: MyTextStyle.bodyMedium(),
-                                      decoration: InputDecoration(
-                                          hintText: L10nX.getStr.search,
-                                          fillColor: ColorConst.whiteColor,
-                                          filled: true,
-                                          hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                                          border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                          enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                          focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                          prefixIcon: const Align(
-                                              alignment: Alignment.center,
-                                              child: Icon(
-                                                LucideIcons.search,
-                                                size: 14,
-                                              )),
-                                          prefixIconConstraints: const BoxConstraints(
-                                              minWidth: 36,
-                                              maxWidth: 36,
-                                              minHeight: 32,
-                                              maxHeight: 32),
-                                          contentPadding: MySpacing.xy(16, 12),
-                                          //isCollapsed: true,
-                                          floatingLabelBehavior: FloatingLabelBehavior.auto),
+                                Expanded(
+                                  child: SizedBox(
+                                    height: Dimens.size40,
+                                    child: Form(
+                                      key: formKey,
+                                      child: TextFormField(
+                                        maxLines: 1,
+                                        onChanged: (value) {
+                                                        
+                                        },
+                                        onFieldSubmitted: (value) {
+                                          BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                        },
+                                        onTapOutside: (event) {
+                                        },
+                                        style: MyTextStyle.bodyMedium(),
+                                        decoration: InputDecoration(
+                                            hintText: L10nX.getStr.search,
+                                            fillColor: ColorConst.whiteColor,
+                                            filled: true,
+                                            hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                                            border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                            enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                            focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                            prefixIcon: const Align(
+                                                alignment: Alignment.center,
+                                                child: Icon(
+                                                  LucideIcons.search,
+                                                  size: 14,
+                                                )),
+                                            prefixIconConstraints: const BoxConstraints(
+                                                minWidth: 36,
+                                                maxWidth: 36,
+                                                minHeight: 32,
+                                                maxHeight: 32),
+                                            contentPadding: MySpacing.xy(16, 12),
+                                            //isCollapsed: true,
+                                            floatingLabelBehavior: FloatingLabelBehavior.auto),
+                                      ),
                                     ),
                                   ),
                                 ),
                                 Gap(Dimens.size10),
-                                ActionButton1(
-                                  text: S.of(context).search,
-                                  height: Dimens.size40,
-                                  radius: Dimens.size16,
-                                )
+                                InkWell(
+                                    onTap: () {
+                                      // CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
+                                      AddWords().show(context);
+                                    },
+                                    child: Icon(Icons.search_rounded, color: ColorConst.mainColor,size: Dimens.size50,)),
                               ],
                             ),
-                          ],
-                        ),
-                      ),
-
-                      myScreenMediaType.isMobile?
-                      buildVocabularyList(state: state):
-                      Expanded(child: buildVocabularyList(state: state)),
-                      SizedBox(height: 8,),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FlutterCustomPagination(
-                            key: GlobalKey(debugLabel: (state.vocabularyResponseModel?.total??0).toString()),
-                            currentPage: state.vocabularyResponseModel!.getCurrentPage(),
-                            limitPerPage: state.vocabularyResponseModel!.getTotalPage(),
-                            totalDataCount: state.vocabularyResponseModel!.getTotalPage(),
-                            onPreviousPage: (p0) {
-                              BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
-                            },
-                            onBackToFirstPage: (p0) {
-                              BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
-                            },
-                            onNextPage: (p0) {
-                              BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
-                            },
-                            onGoToLastPage: (p0) {
-                              BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
-                            },
-                            backgroundColor: ColorConst.whiteColor,
-                            textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
-                            previousPageIcon: Icons.keyboard_arrow_left,
-                            backToFirstPageIcon: Icons.first_page,
-                            nextPageIcon: Icons.keyboard_arrow_right,
-                            goToLastPageIcon: Icons.last_page,
+                          ),
+                          myScreenMediaType.isMobile?
+                          buildVocabularyList(state: state):
+                          Expanded(child: buildVocabularyList(state: state)),
+                          SizedBox(height: 8,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FlutterCustomPagination(
+                                key: GlobalKey(debugLabel: (state.vocabularyResponseModel?.total??0).toString()),
+                                currentPage: state.vocabularyResponseModel!.getCurrentPage(),
+                                limitPerPage: state.vocabularyResponseModel!.getTotalPage(),
+                                totalDataCount: state.vocabularyResponseModel!.getTotalPage(),
+                                onPreviousPage: (p0) {
+                                  BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                                },
+                                onBackToFirstPage: (p0) {
+                                  BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                                },
+                                onNextPage: (p0) {
+                                  BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                                },
+                                onGoToLastPage: (p0) {
+                                  BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                                },
+                                backgroundColor: ColorConst.whiteColor,
+                                textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                                previousPageIcon: Icons.keyboard_arrow_left,
+                                backToFirstPageIcon: Icons.first_page,
+                                nextPageIcon: Icons.keyboard_arrow_right,
+                                goToLastPageIcon: Icons.last_page,
+                              ),
+                            ],
                           ),
                         ],
                       ),
-                    ],
+                        Visibility(
+                          visible:  state.vocabularyType== VocabularyType.vocabularyList,
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: Padding(
+                              padding:  EdgeInsets.only(bottom: Dimens.size40),
+                              child: InkWell(
+                                  onTap: () {
+                                    // CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
+                                    AddWords().show(context);
+                                  },
+                                  child: Icon(Icons.add_circle_outlined, color: ColorConst.mainColor,size: Dimens.size50,)),
+                            ),
+                          ),
+                        )
+                      ]
+                    ),
+                    body: SizedBox(),
                   ));
             },);
           

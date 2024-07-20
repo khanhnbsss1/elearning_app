@@ -32,7 +32,7 @@ class ListBodyCommon extends StatefulWidget {
     crossAxisAlignment ??= CrossAxisAlignment.center;
     maxOfWidthOfListRatio ??= 0.5;
     minOfWidthOfListRatio ??= 0.05;
-    expandIconColor??=ColorConst.whiteColor;
+    expandIconColor??=ColorConst.blackColor;
   }
 
   @override
@@ -118,11 +118,22 @@ class _ListBodyCommonState extends State<ListBodyCommon> {
                 width: Dimens.size5,
                 color: Colors.transparent,
               ),
-              SizedBox(
+              Container(
                 width: Dimens.size20,
-                height: Dimens.size20,
-                child: Transform.rotate(angle: 90,
-                child: Icon(Icons.drag_handle_outlined, color: widget.expandIconColor,)),
+                //height: Dimens.size20,
+                color: Colors.transparent,
+                child: Stack(
+                    children: 
+                    [
+                      Center(
+                        child: Container(
+                          width: 2,
+                          color: ColorConst.whiteColor,
+                        ),
+                      ),
+                      Center(child: Icon(Icons.code_rounded, color: widget.expandIconColor,))
+                    ]
+                ),
               ),
               Container(
                 width: Dimens.size5,
