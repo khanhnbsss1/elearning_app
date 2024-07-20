@@ -15,6 +15,15 @@ import 'models/response_error_objects.dart';
 export  'package:webkit/base/services/base_request/EnumCommon.dart';
 export 'package:webkit/base/services/base_request/apiName.dart';
 export 'package:webkit/base/services/base_request/models/response_error_objects.dart';
+
+enum BodyMethod{
+  none,
+  formData,
+  xWwwFromUrlEncode,
+  raw,
+  binary,
+  graphQL
+}
 class BaseApiRequest {
   Map<String, dynamic>? paramsAdd = HashMap(); // Is a HashMap
   Map<String, dynamic>? requestHeader = HashMap(); // Is a HashMap
@@ -29,6 +38,7 @@ class BaseApiRequest {
   bool? isShowErrorPopup;
   bool?isShowToastError;
   bool? isCheckToken;
+  BodyMethod? bodyMethod;
   
   static const int timeout = 60;
   BaseApiRequest({
@@ -39,6 +49,7 @@ class BaseApiRequest {
     this.paramsAdd,
     this.requestHeader,
     this.requestBody,
+    this.bodyMethod,
     this.isShowErrorPopup,
     this.isCheckToken,
     this.isShowToastError
@@ -52,6 +63,8 @@ class BaseApiRequest {
     requestHeader!["Content-Type"] = "application/json";
     isShowErrorPopup??=true;
     isShowToastError??=true;
+    bodyMethod??=BodyMethod.raw;
+
   }
 
   void setDomainType(DOMAIN_TYPE inputDomainType) {
@@ -148,7 +161,34 @@ class BaseApiRequest {
   }
 
   Future<Map<String, dynamic>> getBodyAdd() async {
-    return requestBody!;
+    dynamic bodyFinal;
+    switch(bodyMethod){
+      case BodyMethod.formData:
+      // TODO: Handle this case.
+        {
+          bodyFinal = FormData.fromMap(requestBody??{},ListFormat.multiCompatible,true);
+          break;
+        }
+      case BodyMethod.xWwwFromUrlEncode:
+      // TODO: Handle this case.
+        bodyFinal = requestBody;
+        break;
+      case BodyMethod.raw:
+      // TODO: Handle this case.
+        bodyFinal = requestBody;
+        break;
+      case BodyMethod.binary:
+      // TODO: Handle this case.
+        bodyFinal = requestBody;
+        break;
+      case BodyMethod.graphQL:
+      // TODO: Handle this case.
+        bodyFinal = requestBody;
+        break;
+      default:
+        break;
+    }
+    return bodyFinal;
   }
 
   Future<void> setParamsBase() async {}

@@ -61,13 +61,13 @@ class AddWordController extends MyController {
 
   Future<void> onAddWord() async {
 
-    Word word = Word(
+    WordInfo word = WordInfo(
       simplified: basicValidator.getController('simplified')?.text,
       traditional: basicValidator.getController('traditional')?.text,
       pinyinTones: basicValidator.getController('pinyin_tones')?.text,
       translationVn: basicValidator.getController('translation_vn')?.text,
       audio: _audioFile,
-      created_by: 'long1',
+      createdBy: 'long1',
     );
     AddWordsApi addWordsApi = AddWordsApi(word: word);
     print('api called');

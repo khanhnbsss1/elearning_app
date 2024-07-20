@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -205,6 +206,13 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                         isCondensed: widget.isCondensed,
                       ),
                     ],
+                  ),
+                  //----------------Tu vung------------------//
+                  NavigationItem(
+                    iconData: CupertinoIcons.book_solid,
+                    title: L10nX.getStr.vocabulary_str,
+                    route: Routes.vocabularyList,
+                    isCondensed: isCondensed,
                   ),
                   //-----------------CALENDAR-----------------//
                   NavigationItem(

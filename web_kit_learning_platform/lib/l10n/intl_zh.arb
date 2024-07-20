@@ -448,5 +448,6 @@
   "create_teacher": "创建教师",
   "document_str": "文档",
   "document_list": "文档列表",
-  "create_document": "创建文档"
+  "create_document": "创建文档",
+  "vocabulary_str": "閱讀"
 }

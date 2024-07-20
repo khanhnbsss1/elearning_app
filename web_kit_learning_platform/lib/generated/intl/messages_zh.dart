@@ -468,6 +468,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("越南语"),
         "view_all": MessageLookupByLibrary.simpleMessage("查看全部"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
+        "vocabulary_str": MessageLookupByLibrary.simpleMessage("閱讀"),
         "warning": MessageLookupByLibrary.simpleMessage("警告"),
         "we_are_different_because_we_understand_what_you_need":
             MessageLookupByLibrary.simpleMessage("我们与众不同，因为我们了解您的需求"),

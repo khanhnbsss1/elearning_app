@@ -448,5 +448,6 @@
   "create_teacher": "Create teacher",
   "document_str": "Document",
   "document_list": "List of documents",
-  "create_document": "Create Document"
+  "create_document": "Create Document",
+  "vocabulary_str": "Vocabulary"
 }

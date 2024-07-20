@@ -549,6 +549,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "view_all": MessageLookupByLibrary.simpleMessage("View all"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
+        "vocabulary_str": MessageLookupByLibrary.simpleMessage("Vocabulary"),
         "warning": MessageLookupByLibrary.simpleMessage("Warning"),
         "we_are_different_because_we_understand_what_you_need":
             MessageLookupByLibrary.simpleMessage(

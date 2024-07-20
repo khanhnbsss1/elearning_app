@@ -449,6 +449,11 @@
   "create_teacher": "Tạo giáo viên",
   "document_str": "Tài Liệu",
   "document_list": "Danh sách tài Liệu",
-  "create_document": "Tạo tài Liệu"
+  "create_document": "Tạo tài Liệu",
+  "vocabulary_str": "Từ vựng",
+  "simplified_str": "Tiếng Trung Giản thể",
+  "traditional_str": "Tiếng Trung Phồn thể",
+  "translation_en_str": "Tiếng Anh",
+  "translation_vn_str": "Tiếng Việt"
 
 }

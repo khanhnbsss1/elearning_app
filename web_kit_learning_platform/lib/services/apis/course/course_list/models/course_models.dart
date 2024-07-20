@@ -1,22 +1,6 @@
 
-class PageModel{
-  PageModel({this.total, this.pageSize, this.pageNumber});
-  int? total;
-  int? pageSize;
-  int? pageNumber;
-  int getCurrentPage(){
-    int pageIndex = pageNumber??1;
-    return pageIndex<1?1:pageIndex;
-  }
-  int getTotalPage(){
-    int totalPage = ((total??1)~/ (pageSize??1));
-    return totalPage<1?1:totalPage;
-  }
-  int getTotalElement(){
-    int totalElement = (total??1);
-    return totalElement<1?1:totalElement;
-  }
-}
+import 'package:webkit/base/services/base_request/models/page_model.dart';
+
 class CourseResponseModel extends PageModel{
   List<CourseInfo>? content;
 

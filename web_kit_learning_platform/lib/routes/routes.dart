@@ -56,6 +56,7 @@ import 'package:webkit/views/ui/reviews_page.dart';
 import 'package:webkit/views/ui/tabs_page.dart';
 import 'package:webkit/views/video_player/model/video_model.dart';
 import 'package:webkit/views/video_player/video_player.dart';
+import 'package:webkit/views/vocabulary/vocabulary_list/vocabulary_list.dart';
 
 import '../views/auth/locked_2.dart';
 import '../views/dashboard.dart';
@@ -96,6 +97,13 @@ getPageRoute() {
         name: Routes.courseList,
         page: () =>  CourseList(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
+
+    ///--------------- Course ---------------///
+    GetPage(
+        name: Routes.vocabularyList,
+        page: () =>  VocabularyList(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]),
+    
     GetPage(
         name: Routes.videoPlayer,
         page: () {

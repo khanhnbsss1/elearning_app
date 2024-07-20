@@ -4509,6 +4509,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Vocabulary`
+  String get vocabulary_str {
+    return Intl.message(
+      'Vocabulary',
+      name: 'vocabulary_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

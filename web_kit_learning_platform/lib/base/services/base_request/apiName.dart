@@ -48,6 +48,8 @@ class ApiName {
   final String getUserDetail = "/get-user";
 
  /// them tu dien
-  final String addWord = "/create-vocabulary";
+  final String addVocabulary = "/create-vocabulary";
+  final String getListVocabulary = "/get-list";
+
 }
 

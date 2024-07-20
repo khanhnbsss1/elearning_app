@@ -547,6 +547,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "view_all": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VNĐ"),
+        "vocabulary_str": MessageLookupByLibrary.simpleMessage("Từ vựng"),
         "warning": MessageLookupByLibrary.simpleMessage("Cảnh báo"),
         "we_are_different_because_we_understand_what_you_need":
             MessageLookupByLibrary.simpleMessage(
