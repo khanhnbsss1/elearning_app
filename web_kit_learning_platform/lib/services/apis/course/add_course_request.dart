@@ -27,7 +27,8 @@ class AddCourseRequest {
   String? typeName;
   int? isActive;
   List<Lectures>? lectures;
-  List<Tags>? tags;
+  String? tags;
+  String? accompanyCourse;
 
   AddCourseRequest(
       {this.id,
@@ -59,6 +60,7 @@ class AddCourseRequest {
         this.isActive,
         this.lectures,
         this.tags,
+        this.accompanyCourse,
       });
 
   AddCourseRequest.fromJson(Map<String, dynamic> json) {
@@ -89,18 +91,20 @@ class AddCourseRequest {
     categoryName = json['category_name'];
     typeName = json['type_name'];
     isActive = json['is_active'];
+    accompanyCourse = json['accompany_course'];
+    tags = json['tags'];
     if (json['lectures'] != null) {
       lectures = <Lectures>[];
       json['lectures'].forEach((v) {
         lectures!.add(new Lectures.fromJson(v));
       });
     }
-    if (json['tags'] != null) {
-      tags = <Tags>[];
-      json['tags'].forEach((v) {
-        tags!.add(new Tags.fromJson(v));
-      });
-    }
+    // if (json['tags'] != null) {
+    //   tags = <Tags>[];
+    //   json['tags'].forEach((v) {
+    //     tags!.add(new Tags.fromJson(v));
+    //   });
+    // }
   }
 
   Map<String, dynamic> toJson() {
@@ -132,12 +136,14 @@ class AddCourseRequest {
     data['category_name'] = this.categoryName;
     data['type_name'] = this.typeName;
     data['is_active'] = this.isActive;
+    data['accompany_course'] = this.accompanyCourse;
+    data['tags'] = this.tags;
     if (this.lectures != null) {
       data['lectures'] = this.lectures!.map((v) => v.toJson()).toList();
     }
-    if (this.tags != null) {
-      data['tags'] = this.tags!.map((v) => v.toJson()).toList();
-    }
+    // if (this.tags != null) {
+    //   data['tags'] = this.tags!.map((v) => v.toJson()).toList();
+    // }
     return data;
   }
 }

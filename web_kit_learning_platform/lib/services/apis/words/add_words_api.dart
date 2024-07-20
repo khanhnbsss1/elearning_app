@@ -5,7 +5,17 @@ class AddWordsApi extends BaseApiRequest {
   WordInfo word;
   AddWordsApi({required this.word}) : super(
       serviceType: SERVICE_TYPE.Vocabulary,
-      apiName: ApiName.getInstance().addVocabulary,
+      apiName: ApiName.getInstance().addWord,
+    requestBody: {
+        'data': {
+          'simplified':word.simplified,
+          'traditional':word.traditional,
+          'pinyin_tones':word.pinyinTones,
+          'translation_vn':word.translationVn,
+          'created_by':'long1'
+        },
+        'audio': word.audio,
+    }
   );
   Future<dynamic> call() async {
     await getAuthorization();

@@ -7,6 +7,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:universal_html/html.dart';
 import 'package:webkit/base/theme/colors_app.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 import '../../../../controller/ui/add_course_controller.dart';
 import '../../../../helpers/theme/app_theme.dart';
 import '../../../../helpers/utils/ui_mixins.dart';
@@ -20,25 +21,29 @@ class AddLectures extends StatefulWidget {
   final Color color;
   final AddCourseController controller;
   final List<Lectures> lectures;
+  final void Function(List<Subject>,List<Lectures>) onChanged;
 
   const AddLectures({
     super.key,
     required this.color,
     required this.controller,
     required this.lectures,
+    required this.onChanged,
   });
 
   @override
   State<AddLectures> createState() => _AddLecturesState();
 }
 
+List<Subject> subjects = [];
+List<Lectures> lectures = [];
+
 class _AddLecturesState extends State<AddLectures>
     with SingleTickerProviderStateMixin, UIMixin {
   late TextEditingController lectureController;
   late AddCourseController controller;
   late Color color;
-  List<Subject> subjects = [];
-  List<Lectures> lectures = [];
+
 
   void initState() {
     super.initState();
@@ -47,12 +52,13 @@ class _AddLecturesState extends State<AddLectures>
     lectures = widget.lectures;
   }
 
+
   void addLecture(
       {required int subjectIndex,
       required String lectureName,
       required String lectureLink,
       required String document,
-      required String lectureMode,
+      required String? lectureMode,
       }) {
     setState(() {
       subjects[subjectIndex].lectures.add(Lectures(
@@ -109,13 +115,9 @@ class _AddLecturesState extends State<AddLectures>
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-          height: 8,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 16.0),
-          child: Align(
-            alignment: Alignment.topRight,
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
             child: SizedBox(
               width: 150,
               child: ElevatedButton(
@@ -150,201 +152,183 @@ class _AddLecturesState extends State<AddLectures>
               shrinkWrap: true,
               itemBuilder: (context, subjectIndex) {
                 return Container(
-                  padding: EdgeInsets.all(16),
-                  margin: EdgeInsets.all(16),
+                  margin: EdgeInsets.only(right: 12, left: 12, bottom: 12),
                   decoration: BoxDecoration(
-                      border: Border.all(color: ColorConst.blackColor),
+                      border: Border.all(color: Colors.black38),
                       borderRadius: BorderRadius.circular(10)),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Row(
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: MyText.labelMedium(
+                              'Subject',
+                            ),
+                          ),
+                          Spacer(),
+                          IconButton(
+                            icon: Icon(Icons.delete,
+                                size: 18, color: Colors.red),
+                            onPressed: () {
+                              removeSubject(subjectIndex);
+                            },
+                          ),
+                        ],
+                      ),
+                      MySpacing.height(4),
+                      Row(
+                        children: [
                           Expanded(
-                            child: Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  MyText.labelMedium(
-                                    'Subject',
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 16.0),
+                              child: TextFormField(
+                                validator: controller.basicValidator
+                                    .getValidation('sub_name'),
+                                controller: controller.basicValidator
+                                    .getController('sub_name'),
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  labelText: 'Subject name',
+        
+                                  border: outlineInputBorder,
+                                  prefixIcon: Icon(
+                                    LucideIcons.user,
+                                    size: 20,
+                                    color: color,
                                   ),
-                                  MySpacing.height(4),
-                                  TextFormField(
-                                    validator: controller.basicValidator
-                                        .getValidation('sub_name'),
-                                    controller: controller.basicValidator
-                                        .getController('sub_name'),
-                                    keyboardType: TextInputType.number,
-                                    decoration: InputDecoration(
-                                      labelText: 'Subject name',
-
-                                      border: outlineInputBorder,
-                                      prefixIcon: Icon(
-                                        LucideIcons.user,
-                                        size: 20,
-                                        color: color,
-                                      ),
-                                      contentPadding: MySpacing.all(16),
-                                      isCollapsed: true,
-                                      floatingLabelBehavior:
-                                          FloatingLabelBehavior.never,
-                                    ),
-                                  ),
-                                ],
+                                  contentPadding: MySpacing.all(16),
+                                  isCollapsed: true,
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                ),
                               ),
                             ),
                           ),
                           Expanded(
-                            child: Container(
-                              child: Column(
-                                children: [
-                                  Align(
-                                    alignment: Alignment.topRight,
-                                    child: IconButton(
-                                      icon: Icon(Icons.delete,
-                                          size: 18, color: Colors.red),
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 16.0),
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: SizedBox(
+                                  width: 150,
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.white,
+                                        // background color
+                                        side: BorderSide(
+                                            width: 1,
+                                            color: Colors.black), // border
+                                      ),
                                       onPressed: () {
-                                        removeSubject(subjectIndex);
+                                        _addLectureDialog(
+                                            subjectIndex: subjectIndex);
                                       },
-                                    ),
-                                  ),
-                                  SizedBox(height: 16,),
-                                  Align(
-                                    alignment: Alignment.topRight,
-                                    child: SizedBox(
-                                      width: 150,
-                                      child: ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.white,
-                                            // background color
-                                            side: BorderSide(
-                                                width: 1,
-                                                color: Colors.black), // border
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.add,
+                                            color: color,
                                           ),
-                                          onPressed: () {
-                                            _addLectureDialog(
-                                                subjectIndex: subjectIndex);
-                                          },
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Icons.add,
-                                                color: color,
-                                              ),
-                                              Text(
-                                                'Add lecture',
-                                                style: TextStyle(color: color),
-                                              ),
-                                            ],
-                                          )),
-                                    ),
-                                  ),
-                                ],
+                                          Text(
+                                            'Add lecture',
+                                            style: TextStyle(color: color),
+                                          ),
+                                        ],
+                                      )),
+                                ),
                               ),
                             ),
                           ),
                         ],
                       ),
-                      MySpacing.height(10),
                       // lectures.add(Lectures(id: 1, lectureName: '',lectureLink: '', lectureMode: '')),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: Column(
-                          children: [
-                            // Align(
-                            //   alignment: Alignment.topRight,
-                            //   child: SizedBox(
-                            //     width: 150,
-                            //     child: ElevatedButton(
-                            //         style: ElevatedButton.styleFrom(
-                            //           backgroundColor: Colors.white,
-                            //           // background color
-                            //           side: BorderSide(
-                            //               width: 1,
-                            //               color: Colors.black), // border
-                            //         ),
-                            //         onPressed: () {
-                            //           _addLectureDialog(
-                            //               subjectIndex: subjectIndex);
-                            //         },
-                            //         child: Row(
-                            //           children: [
-                            //             Icon(
-                            //               Icons.add,
-                            //               color: color,
-                            //             ),
-                            //             Text(
-                            //               'Add lecture',
-                            //               style: TextStyle(color: color),
-                            //             ),
-                            //           ],
-                            //         )),
-                            //   ),
-                            // ),
-                            ListView.builder(
-                              itemCount: subjects[subjectIndex].lectures.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, lectureIndex) {
-                                return Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        border:
-                                            Border.all(color: Colors.black)),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 16),
-                                      child: Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 6,
-                                            child: Text(
-                                                '${lectureIndex + 1}. Name: ${subjects[subjectIndex].lectures[lectureIndex].lectureName}',
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Column(
+                            children: [
+                              ListView.builder(
+                                itemCount: subjects[subjectIndex].lectures.length,
+                                shrinkWrap: true,
+                                itemBuilder: (context, lectureIndex) {
+                                  return Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          border:
+                                              Border.all(color: Colors.black38)),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                                flex: 1,
+                                                child:Text('${lectureIndex + 1}.')
+                                            ),
+                                            Expanded(
+                                              flex: 8,
+                                              child: Text(
+                                                  'Name: ${subjects[subjectIndex].lectures[lectureIndex].lectureName}',
+                                                overflow: TextOverflow.ellipsis,),
+                                            ),
+                                            SizedBox(width: 8,),
+                                            Expanded(
+                                              flex: 8,
+                                              child: Text(
+                                                  'Link: ${subjects[subjectIndex].lectures[lectureIndex].lectureLink}',
                                               overflow: TextOverflow.ellipsis,),
-                                          ),
-                                          SizedBox(width: 8,),
-                                          Expanded(
-                                            flex: 8,
-                                            child: Text(
-                                                'Link: ${subjects[subjectIndex].lectures[lectureIndex].lectureLink}',
-                                            overflow: TextOverflow.ellipsis,),
-                                          ),
-                                          SizedBox(width: 8,),
-                                          Expanded(
-                                            flex: 8,
-                                            child: Text(
-                                                'Document: ${subjects[subjectIndex].lectures[lectureIndex].document}',
-                                              overflow: TextOverflow.ellipsis,),
-                                          ),
-                                          SizedBox(width: 8,),
-                                          Expanded(
-                                            flex: 3,
-                                            child: Text(
-                                                'Mode: ${subjects[subjectIndex].lectures[lectureIndex].lectureMode}',
-                                              overflow: TextOverflow.ellipsis,),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: IconButton(
-                                                onPressed: () {
-                                                  removeLecture(
-                                                      lectureIndex:
-                                                          lectureIndex,
-                                                      subjectIndex:
-                                                          subjectIndex);
-                                                },
-                                                icon: Icon(Icons.delete)),
-                                          )
-                                        ],
+                                            ),
+                                            SizedBox(width: 8,),
+                                            Expanded(
+                                              flex: 8,
+                                              child: Text(
+                                                  'Document: ${subjects[subjectIndex].lectures[lectureIndex].document}',
+                                                overflow: TextOverflow.ellipsis,),
+                                            ),
+                                            SizedBox(width: 8,),
+                                            Expanded(
+                                              flex: 3,
+                                              child: Text(
+                                                  'Mode: ${subjects[subjectIndex].lectures[lectureIndex].lectureMode}',
+                                                overflow: TextOverflow.ellipsis,),
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    width: 2,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.red,
+                                                    ),
+                                                  ),
+                                                  IconButton(
+                                                      onPressed: () {
+                                                        removeLecture(
+                                                            lectureIndex:
+                                                                lectureIndex,
+                                                            subjectIndex:
+                                                                subjectIndex);
+                                                      },
+                                                      icon: Icon(Icons.delete)),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       )
                     ],
@@ -365,8 +349,9 @@ class _AddLecturesState extends State<AddLectures>
     final formKey = GlobalKey<FormState>();
     final lectureNameController = TextEditingController();
     final lectureLinkController = TextEditingController();
+    final lectureModeController = TextEditingController();
     final documentLinkController = TextEditingController();
-    String mode = 'FREE';
+    final String? mode = controller.basicValidator.getController('course_mode')?.text;
 
     showDialog(
       barrierDismissible: false,
@@ -376,7 +361,7 @@ class _AddLecturesState extends State<AddLectures>
         content: Form(
           key: formKey,
           child: SizedBox(
-            width: 800,
+            width: 500,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
@@ -454,12 +439,18 @@ class _AddLecturesState extends State<AddLectures>
                 ),
                 SizedBox(height: 16,),
                 Row(children: [
-                  Expanded(flex: 7, child: ModeOptionWidget(mode: 'FREE', onChanged: (value) {
-                    if (value != null) {
-                      mode = value;
-                    }
-                  },)),
-                  Expanded(flex: 3, child: SizedBox()),
+                  Expanded(flex: 7, child: ModeOptionWidget(mode: controller.basicValidator.getController('course_mode')?.text,
+                    onModeChanged: (value) {
+                    lectureModeController.text = value!;
+                    print('aaaaaaaaaaaaaaa');
+                    print(lectureModeController.text);
+                  },
+                    onPaymentChanged: (int? value) {
+                    },
+                    disablePayment: true,
+                    disablePremiumMode: controller.basicValidator.getController('course_mode')?.text == 'FREE' ? true : false,
+                  )),
+                  // Expanded(flex: 3, child: SizedBox()),
                 ],),
               ],
             ),
@@ -488,7 +479,8 @@ class _AddLecturesState extends State<AddLectures>
                         lectureName: lectureNameController.text,
                         lectureLink: lectureLinkController.text,
                         document: documentLinkController.text,
-                        lectureMode: mode);
+                        lectureMode: (lectureModeController.text == '') ? mode : lectureModeController.text);
+                    widget.onChanged(subjects, lectures);
                     Navigator.of(context).pop();
                   }
                 });
@@ -499,6 +491,13 @@ class _AddLecturesState extends State<AddLectures>
   }
 }
 
+void setLectureModeToFree() {
+  for (var subject in subjects) {
+    for (var lecture in subject.lectures) {
+      lecture.lectureMode = 'FREE';
+    }
+  }
+}
 class Subject {
   String subName;
   List<Lectures> lectures;

@@ -35,7 +35,8 @@ class ApiName {
   final String getCourseDetail = "/get-course-detail";
   final String deleteCourse = "/delete-course";
   final String getFilterCourse = "/filter-directory";
-  
+  final String addCourseDirectory = "/add-course-directory";
+
   /// landing page
 
   final String getCourseListLandingPage = "/get-course-landingpage";

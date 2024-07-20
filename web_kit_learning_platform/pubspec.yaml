@@ -130,6 +130,10 @@ dependencies:
     path: lib/plugins/smooth_scroll_multiplatform-1.0.8
   flutter_custom_pagination: ^0.2.0
   amplify_flutter: ^2.3.0
+  html: ^0.15.4
+  http: ^1.2.2
+  universal_io: ^2.2.2
+  file: ^7.0.0
   
 
 dependency_overrides:

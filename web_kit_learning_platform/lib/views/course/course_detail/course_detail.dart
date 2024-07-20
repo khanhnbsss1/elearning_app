@@ -1,31 +1,38 @@
-import 'dart:io';
+// import 'dart:io';
+import 'dart:html';
 
+import 'package:dio/dio.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:universal_html/html.dart';
+import 'package:universal_html/html.dart';
+import 'package:universal_html/html.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/expands/expand_widget.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my_button.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
-import 'package:webkit/views/course/course_list/components/lectures_detail.dart';
-import 'package:webkit/views/course/course_list/components/course_mode.dart';
-import 'package:webkit/views/course/course_list/components/tag_drop_down.dart';
+import 'package:webkit/views/course/course_detail/bloc/add_course_directory_bloc.dart';
 import '../../../controller/ui/add_course_controller.dart';
 import '../../../services/apis/course/add_course_request.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
-import 'package:file_picker/file_picker.dart';
+import 'components/course_mode.dart';
+import 'components/lectures_detail.dart';
+import 'components/tag_drop_down.dart';
 
 class CourseDetail extends StatefulWidget {
-  final List<CourseInfo>? courseInfo;
-  const CourseDetail({super.key, required this.courseInfo});
+  const CourseDetail({super.key});
 
   void show(BuildContext context) {
     showGeneralDialog(
@@ -40,6 +47,7 @@ class CourseDetail extends StatefulWidget {
 
 class _CourseDetailState extends State<CourseDetail>
     with SingleTickerProviderStateMixin, UIMixin {
+
   final MultiSelectController multiSelectController = MultiSelectController();
   late AddCourseController controller;
   late AnimationController animationController;
@@ -49,74 +57,115 @@ class _CourseDetailState extends State<CourseDetail>
     super.initState();
     controller = Get.put(AddCourseController());
     animationController = AnimationController(vsync: this);
-    coursesInfo = widget.courseInfo!;
+    controller.basicValidator.getController('course_mode')?.text = 'FREE';
+    controller.basicValidator.getController('is_standard')?.text = '0';
+    controller.basicValidator.getController('id')?.text = '100';
+    controller.basicValidator.getController('total_lectures')?.text = '0';
+    controller.basicValidator.getController('total_subjects')?.text = '0';
+    controller.basicValidator.getController('payment')?.text = '0';
+    controller.basicValidator.getController('rate_point')?.text = '0';
+    controller.basicValidator.getController('category_id')?.text = '0';
+    controller.basicValidator.getController('is_active')?.text = '0';
+    controller.basicValidator.getController('language')?.text = 'CN';
   }
 
   List<Lectures> lectures = [];
-  bool isChecked = false;
   bool value = false;
-  List categoryNameList = [
-  'Tiếng Trung',
-  'Tiếng Việt',
-  'Tiếng Anh',
-  'Tiếng Nhật',
-  ];
 
-  List<String> tagList = [
-  'HSK1',
-  'China',
-  'HSK2',
-  'VietNam'
-  'HSK3',
-  'HSK4',
-  'HSK5',
-  'A1',
-  'A2',
-  'B1',
-  'B2',
-  'C1',
-  'C2',
-  ];
-
-  List<String> accompanyCourse = [
-    'Sơ cấp nói',
-    'Trung cấp nói',
-    'Cao cấp nói',
-    'Sơ cấp nghe',
-    'Trung cấp nghe',
-    'Cao cấp nghe'
-  ];
-
-  List gradeNameList = ['HSK1', 'HSK2', 'HSK3', 'HSK4', 'HSK5'];
-  String? value1;
   String? value2;
 
   File? selectedImage;
   final ImagePicker imagePicker = ImagePicker();
 
-  List<String> listOfProduceNames = [];
-  List<String> listOfGradeNames = [];
-  List<String> listOfAccompanyCourses = [];
-  List<String> listOfTags = [];
+  Map<int,String> listOfCategoryName = {};
+  Map<int,String> listOfProduceNames = {};
+  Map<int,String> listOfGradeNames = {};
+  Map<int,String> listOfAccompanyCourses = {};
+  Map<int,String> listOfTags = {};
+
+  int? getIdFromName(Map<int, String> map, String name) {
+    try {
+      return map.entries
+          .firstWhere((entry) => entry.value == name)
+          .key;
+    } catch (e) {
+      return null;
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
-  for (CourseInfo courseInfo in coursesInfo) {
-    if (!listOfProduceNames.contains(courseInfo.producerName) && courseInfo.producerName != "") {
-      listOfProduceNames.add(courseInfo.producerName??"");
-    }
-    if (!listOfAccompanyCourses.contains(courseInfo.name) && courseInfo.name != "") {
-      listOfAccompanyCourses.add(courseInfo.name??"");
-    }
-    if (!listOfGradeNames.contains(courseInfo.gradeName) && courseInfo.gradeName != "") {
-      listOfGradeNames.add(courseInfo.gradeName??"");
-    }
-    for (String tag in courseInfo.tags??[]) {
-          if (!listOfTags.contains(tag)  && tag != "") {
-            listOfTags.add(tag ?? "");
-          }
-        }
-    }
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: BlocProvider(
+        create: (context) {
+          return AddCourseFilterBloc(AddCourseFilterState())..add(AddCourseFilterInitEvent());
+        },
+        child: BlocConsumer<AddCourseFilterBloc, AddCourseFilterState>(
+          listener: (context, state) {
+            switch (state.blocStatus) {
+              case AddCourseFilterStatus.initial:
+                break;
+              default:
+                break;
+            }
+          }, builder: (BuildContext context, state) {
+            return LayoutBuilder(
+                builder: (context, constraints) {
+                  return buildAddCourse(constraints: constraints, state: state);
+                },
+            );
+        },
+        )
+      ),
+    );
+  }
+
+  Widget buildAddCourse(
+  {required BoxConstraints constraints,required AddCourseFilterState state}) {
+    state.addCourseFilterModel?.data?.forEach((data) {
+      switch (data.filterType) {
+        case 'CATEGORY':
+          data.subFilter!.where((e) => e.name != null).forEach((e) {
+            if (!listOfCategoryName.containsValue(e.name!)) {
+              listOfCategoryName[e.id!] = e.name!;
+            }
+          });
+          break;
+        case 'AUTHOR':
+          data.subFilter!.where((e) => e.name != null).forEach((e) {
+            if (!listOfProduceNames.containsValue(e.name!)) {
+              listOfProduceNames[e.id!] = e.name!;
+            }
+          });
+          break;
+        case 'GRADE':
+          data.subFilter!.where((e) => e.name != null).forEach((e) {
+            if (!listOfGradeNames.containsValue(e.name!)) {
+              listOfGradeNames[e.id!] = e.name!;
+            }
+          });
+          break;
+        case 'ACCOMPANY':
+          data.subFilter!.where((e) => e.name != null).forEach((e) {
+            if (!listOfAccompanyCourses.containsValue(e.name!)) {
+              listOfAccompanyCourses[e.id!] = e.name!;
+            }
+          });
+          break;
+        case 'TAG':
+          data.subFilter!.where((e) => e.name != null).forEach((e) {
+            if (!listOfTags.containsValue(e.name!)) {
+              listOfTags[e.id!] = e.name!;
+            }
+          });
+          break;
+        default:
+          break;
+      }
+    });
+
     return GetBuilder<AddCourseController>(
       init: controller,
       builder: (controller) {
@@ -125,7 +174,7 @@ class _CourseDetailState extends State<CourseDetail>
             title: 'New course',
             titleAlignment: MainAxisAlignment.center,
             //radius: 20,
-            width: MediaQuery.of(context).size.width,
+            width: MediaQuery.of  (context).size.width,
             height:  MediaQuery.of(context).size.height-Dimens.size20,
             mainAxisSizeParent: MainAxisSize.max,
             enableCloseButton: true,
@@ -160,7 +209,150 @@ class _CourseDetailState extends State<CourseDetail>
                                 style: TextStyleConstant.textStyleBlack16w400.copyWith(
                                   color: Colors.black,
                                 ), ),
-                              onPressed: () {  },
+                              onPressed: () {
+                                controller.basicValidator.getController('accompany_course')!.text = getIdFromName(listOfAccompanyCourses, controller.basicValidator.getController('accompany_course')!.text).toString();
+                                controller.basicValidator.getController('category_id')!.text = getIdFromName(listOfCategoryName, controller.basicValidator.getController('category_name')!.text).toString();
+                                controller.basicValidator.getController('grade_name')!.text = getIdFromName(listOfGradeNames, controller.basicValidator.getController('grade_name')!.text).toString();
+                                List<String> tags = controller.basicValidator.getController('tags')!.text.split(',');
+                                List<int> tagIds = tags.map((tag) => getIdFromName(listOfTags, tag))
+                                    .where((id) => id != null)
+                                    .cast<int>()
+                                    .toList();
+                                String tagIdsString = tagIds.join(',');
+                                controller.basicValidator.getController('tags')?.text = tagIdsString;
+                                try {
+                                  print('id: ${controller.basicValidator.getController('id')?.hashCode}');
+                                } catch (e) {
+                                  print('id error: $e');
+                                }
+
+                                try {
+                                  print('name: ${controller.basicValidator.getController('name')!.text}');
+                                } catch (e) {
+                                  print('name error: $e');
+                                }
+
+                                try {
+                                  print('image: ${controller.basicValidator.getController('image')?.text}');
+                                } catch (e) {
+                                  print('image error: $e');
+                                }
+
+                                try {
+                                  print('totalLectures: ${int.parse(controller.basicValidator.getController('total_lectures')?.text ?? '0')}');
+                                } catch (e) {
+                                  print('totalLectures error: $e');
+                                }
+
+                                try {
+                                  print('totalSubjects: ${int.parse(controller.basicValidator.getController('total_subjects')?.text ?? '0')}');
+                                } catch (e) {
+                                  print('totalSubjects error: $e');
+                                }
+
+                                try {
+                                  print('producerName: ${controller.basicValidator.getController('producer_name')?.text}');
+                                } catch (e) {
+                                  print('producerName error: $e');
+                                }
+
+                                try {
+                                  print('language: ${controller.basicValidator.getController('language')!.text}');
+                                } catch (e) {
+                                  print('language error: $e');
+                                }
+
+                                try {
+                                  print('introduction: ${controller.basicValidator.getController('introduction')?.text}');
+                                } catch (e) {
+                                  print('introduction error: $e');
+                                }
+
+                                try {
+                                  print('payment: ${int.parse(controller.basicValidator.getController('payment')?.text ?? '0')}');
+                                } catch (e) {
+                                  print('payment error: $e');
+                                }
+
+                                try {
+                                  print('ratePoint: ${int.parse(controller.basicValidator.getController('rate_point')?.text ?? '0')}');
+                                } catch (e) {
+                                  print('ratePoint error: $e');
+                                }
+
+                                try {
+                                  print('durian: ${controller.basicValidator.getController('durian')!.text}');
+                                } catch (e) {
+                                  print('durian error: $e');
+                                }
+
+                                try {
+                                  print('courseMode: ${controller.basicValidator.getController('course_mode')!.text}');
+                                } catch (e) {
+                                  print('courseMode error: $e');
+                                }
+
+                                try {
+                                  print('gradeName: ${controller.basicValidator.getController('grade_name')?.text}');
+                                } catch (e) {
+                                  print('gradeName error: $e');
+                                }
+
+                                try {
+                                  print('categoryId: ${int.parse(controller.basicValidator.getController('category_id')?.text ?? '0')}');
+                                } catch (e) {
+                                  print('categoryId error: $e');
+                                }
+
+                                try {
+                                  print('isStandard: ${int.parse(controller.basicValidator.getController('is_standard')!.text ?? '0')}');
+                                } catch (e) {
+                                  print('isStandard error: $e');
+                                }
+
+                                try {
+                                  print('categoryName: ${controller.basicValidator.getController('category_name')?.text}');
+                                } catch (e) {
+                                  print('categoryName error: $e');
+                                }
+
+                                try {
+                                  print('videoPreview: ${controller.basicValidator.getController('video_preview')?.text}');
+                                } catch (e) {
+                                  print('videoPreview error: $e');
+                                }
+
+                                try {
+                                  print('infoObj: ${controller.basicValidator.getController('info_obj')?.text}');
+                                } catch (e) {
+                                  print('infoObj error: $e');
+                                }
+
+                                try {
+                                  print('infoResult: ${controller.basicValidator.getController('info_result')?.text}');
+                                } catch (e) {
+                                  print('infoResult error: $e');
+                                }
+
+                                try {
+                                  print('isActive: ${controller.basicValidator.getController('is_active')?.hashCode}');
+                                } catch (e) {
+                                  print('isActive error: $e');
+                                }
+
+                                try {
+                                  print('accompanyCourse: ${controller.basicValidator.getController('accompany_course')?.text ?? ''}');
+                                } catch (e) {
+                                  print('accompanyCourse error: $e');
+                                }
+
+                                try {
+                                  print('tags: ${controller.basicValidator.getController('tags')?.text ?? ''}');
+                                } catch (e) {
+                                  print('tags error: $e');
+                                }
+                                controller.onAddCourse();
+                              },
                             ),
                             // MyButton.rounded(
                             //   onTap: controller.onAddCourse,
@@ -198,8 +390,106 @@ class _CourseDetailState extends State<CourseDetail>
         );
       },
     );
-
   }
+
+  // Future<void> uploadFile() async {
+  //   // Create an input element to select the file
+  //   final FileUploadInputElement uploadInput = FileUploadInputElement();
+  //   uploadInput.accept = 'image/*'; // Adjust file types if needed
+  //   uploadInput.click();
+  //
+  //   uploadInput.onChange.listen((event) async {
+  //     final files = uploadInput.files;
+  //
+  //     if (files!.length > 0) {
+  //       final file = files[0];
+  //
+  //       // Debugging: Log file details
+  //       print('File selected: ${file.name}, size: ${file.size} bytes');
+  //
+  //       // Create FormData
+  //       // final formData = FormData();
+  //       // formData.appendBlob('file', file, file.name);
+  //       // dynamic text  = [
+  //       //   {
+  //       //     "id": 0,
+  //       //     "name": "Khóa học luyện thi  tiếng Trung",
+  //       //     "image": "http://navitrack.camdvr.org:9000/elearning/CN/courses/CourseTest_20240625.jpg?AWSAccessKeyId=LIgVcqy3d8rJzBM4&Expires=2034661189&Signature=MLh7bNigrR2hoiHh9TV589Qr23A%3D",
+  //       //     "producer_name": "long1",
+  //       //     "language": "CN",
+  //       //     "introduction": "",
+  //       //     "info_obj": "",
+  //       //     "info_result": "",
+  //       //     "day_from": "2024-01-01",
+  //       //     "day_to": "2024-06-01",
+  //       //     "payment": 50000,
+  //       //     "update_by": "0348074377",
+  //       //     "category": "CQ",
+  //       //     "grade_id": 1,
+  //       //     "is_active": 1,
+  //       //     "video_preview": "",
+  //       //     "durian": "8 hours",
+  //       //     "mode": "public",
+  //       //     "is_standard": 1
+  //       //   }
+  //       // ];
+  //
+  //       // Create FormData
+  //       final formData = FormData.fromMap({
+  //         'file': await MultipartFile.fromBytes(
+  //           await file.arrayBuffer(),
+  //           filename: file.name,
+  //         ),
+  //       });
+  //
+  //       // Initialize Dio
+  //       final dio = Dio();
+  //
+  //       try {
+  //         final response = await dio.post(
+  //           'http://192.168.0.47:8989/upload-file',
+  //           data: 'file',
+  //           options: Options(
+  //             headers: {
+  //               'Content-Type': 'multipart/form-data',
+  //             },
+  //           ),
+  //         );
+  //
+  //         if (response.statusCode == 200) {
+  //           print('File uploaded successfully!');
+  //         } else {
+  //           print('File upload failed with status: ${response.statusCode}');
+  //         }
+  //       } catch (e) {
+  //         print('Error uploading file: $e');
+  //       }
+  //     }});
+  //
+  //   //     formData.appendBlob('data',text);
+  //   //     formData.appendBlob('tags',"1,2" as Blob);
+  //   //     // Create and send the request
+  //   //     final request = HttpRequest();
+  //   //     request
+  //   //       ..open('POST', 'http://192.168.0.47:8989/api/Course/create-course')
+  //   //       ..setRequestHeader('Content-Type', 'multipart/form-data',)
+  //   //       ..setRequestHeader('Device-Type', 'Web')
+  //   //       ..setRequestHeader('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiMDM0ODA3NDM3NyIsImp0aSI6ImZhYmM3YjI3LTU2ZDgtNGRhZC05MmNmLWRmMTc4ZWI5NDMwNyIsImV4cCI6MTcyMTQ3MTQzNn0.NrSGIfm9BwEEfDm11KzwCmCiWG6YypoTX733ExBA8fs')
+  //   //       ..onLoadEnd.listen((e) {
+  //   //         if (request.status == 200) {
+  //   //           print('File uploaded successfully!');
+  //   //         } else {
+  //   //           print('File upload failed with status: ${request.status}');
+  //   //         }
+  //   //       })
+  //   //       ..send(formData);
+  //   //   } else {
+  //   //     print('No files found in the input');
+  //   //   }
+  //   // });
+  // }
+
+
   Widget buildCourseSummaryInfo(){
     return Card(
       child: ExpandWidget(
@@ -279,14 +569,15 @@ class _CourseDetailState extends State<CourseDetail>
                               floatingLabelBehavior:
                               FloatingLabelBehavior.never,
                             ),
-                            items: categoryNameList.map((element) {
-                              return DropdownMenuItem(
-                                value: element,
-                                child: Text(element),
+                            items: listOfCategoryName.entries.map((entry) {
+                              return DropdownMenuItem<String>(
+                                value: entry.value,
+                                child: Text(entry.value),
                               );
                             }).toList(),
+
                             onChanged: (value) => setState(
-                                    () => value2 = value as String?),
+                                    () => controller.basicValidator.getController('category_name')?.text = value!),
                           ),
                         )
                       ],
@@ -330,18 +621,18 @@ class _CourseDetailState extends State<CourseDetail>
                               suffixIcon: IconButton(
                                 icon: Icon(Icons.image),
                                 onPressed: () async {
-                                  final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
-                                  setState(() {
-                                    if (pickedFile != null) {
-                                      selectedImage = File(pickedFile.path);
-                                      // Update the text field with the selected image path
-                                      controller.basicValidator
-                                          .getController('image')
-                                          ?.text = selectedImage!.path;
-                                    } else {
-                                      selectedImage = null;
-                                    }
-                                  });
+                                  // final pickedFile = await imagePicker.pickImage(source: ImageSource.gallery);
+                                  // setState(() {
+                                  //   if (pickedFile != null) {
+                                  //     selectedImage = File(pickedFile.path);
+                                  //     // Update the text field with the selected image path
+                                  //     controller.basicValidator
+                                  //         .getController('image')
+                                  //         ?.text = selectedImage!.path;
+                                  //   } else {
+                                  //     selectedImage = null;
+                                  //   }
+                                  // });
                                 },
                               ),
                             ),
@@ -366,7 +657,7 @@ class _CourseDetailState extends State<CourseDetail>
                             validator: controller.basicValidator
                                 .getValidation('video_review'),
                             controller: controller.basicValidator
-                                .getController('Video_review'),
+                                .getController('video_review'),
                             keyboardType: TextInputType.url,
                             decoration: InputDecoration(
                               labelText: 'Youtube url',
@@ -381,22 +672,23 @@ class _CourseDetailState extends State<CourseDetail>
                               isCollapsed: true,
                               floatingLabelBehavior:
                               FloatingLabelBehavior.never,
-                              suffixIcon: IconButton(
-                                icon: Icon(Icons.video_call),
+                              suffixIcon: ElevatedButton(
+                                child: Icon(Icons.video_call),
                                 onPressed: () async {
-                                  final pickedFile = await imagePicker
-                                      .pickVideo(source: ImageSource.gallery);
-                                  setState(() {
-                                    if (pickedFile != null) {
-                                      selectedImage = File(pickedFile.path);
-                                      // Update the text field with the selected image path
-                                      controller.basicValidator
-                                          .getController('image')
-                                          ?.text = selectedImage!.path;
-                                    } else {
-                                      selectedImage = null;
-                                    }
-                                  });
+                                  // uploadFile();
+                                  // final pickedFile = await imagePicker
+                                  //     .pickVideo(source: ImageSource.gallery);
+                                  // setState(() {
+                                  //   if (pickedFile != null) {
+                                  //     selectedImage = File(pickedFile.path);
+                                  //     // Update the text field with the selected image path
+                                  //     controller.basicValidator
+                                  //         .getController('image')
+                                  //         ?.text = selectedImage!.path;
+                                  //   } else {
+                                  //     selectedImage = null;
+                                  //   }
+                                  // });
                                 },
                               ),
                             ),
@@ -417,7 +709,10 @@ class _CourseDetailState extends State<CourseDetail>
                       children: [
                         MyText.labelMedium('Author:'),
                         MySpacing.height(4),
-                        customDropDownSearchCustom(list: listOfProduceNames,hintText:'Author'),
+                        customDropDownSearch(
+                            list: listOfProduceNames.values.toList(),
+                            hintText:'Author',
+                            controller: controller.basicValidator.getController('producer_name')),
                       ],
                     ),
                   ),
@@ -505,7 +800,7 @@ class _CourseDetailState extends State<CourseDetail>
                           'Grade: ',
                         ),
                         MySpacing.height(4),
-                        customDropDownSearchCustom(list: listOfGradeNames, hintText: 'GradeName')
+                        customDropDownSearch(list: listOfGradeNames.values.toList(), hintText: 'GradeName', controller: controller.basicValidator.getController('grade_name'))
                       ],
                     ),
                   ),
@@ -586,6 +881,8 @@ class _CourseDetailState extends State<CourseDetail>
                               onTap: () {
                                 setState(() {
                                   value = !value;
+                                  value == true ? controller.basicValidator.getController('is_standard')?.text = '1'
+                                  : controller.basicValidator.getController('is_standard')?.text = '0';
                                 });
                               },
                               child: Container(
@@ -611,7 +908,19 @@ class _CourseDetailState extends State<CourseDetail>
                   ),
                   Expanded(
                       flex: 5,
-                      child: ModeOptionWidget(mode: 'PREMIUM', onChanged: (String? value ) {  },)),
+                      child: ModeOptionWidget(mode: 'FREE',
+                        onModeChanged: (String? value) {
+                          controller.basicValidator.getController('course_mode')?.text = value!;
+                          setState(() {
+                            setLectureModeToFree();
+                          });
+                          print(controller.basicValidator.getController('course_mode')?.text = value!);
+                      },
+                        onPaymentChanged: (int? value) {
+                          controller.basicValidator.getController('payment')?.text = value!.toString();
+                        },
+                        disablePayment: false, disablePremiumMode: false,
+                      )),
                   SizedBox(width: 20,),
                   Expanded(flex: 8 ,child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -651,7 +960,7 @@ class _CourseDetailState extends State<CourseDetail>
                       //     }),
                       //   ),
                       // ),
-                      customDropDownSearchCustom(list: listOfAccompanyCourses, hintText: 'Accompany Course'),
+                      customDropDownSearch(list: listOfAccompanyCourses.values.toList(), hintText: 'Accompany Course', controller: controller.basicValidator.getController('accompany_course')),
                     ],
                   ),),
                 ],
@@ -660,7 +969,16 @@ class _CourseDetailState extends State<CourseDetail>
                 'Tags: *',
               ),
               MySpacing.height(4),
-              TagDropDown(tags: listOfTags),
+              TagDropDown(tags: listOfTags.values.toList(),
+                onAddTags: (tags) {
+                  controller.basicValidator.getController('tags')?.text = tags.join(',');
+                }, onRemoveTags: (tags ) {
+                  final currentTags = controller.basicValidator.getController('tags')?.text.split(',').map((tag) => tag.trim()).toList();
+                  final removedTags = currentTags?.where((tag) => !tags.contains(tag)).toList();
+                  final newTags = tags.where((tag) => !currentTags!.contains(tag)).toList();
+
+                  controller.basicValidator.getController('tags')?.text = [...newTags, ...?currentTags?.where((tag) => !removedTags!.contains(tag))].join(',');
+                },),
               MySpacing.height(20),
 
             ],
@@ -685,14 +1003,22 @@ class _CourseDetailState extends State<CourseDetail>
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
                 border: Border.all(
-                  color: Colors.black38
+                  color: Colors.black
                 ),
                 color: ColorConst.whiteColor
               ),
               constraints: BoxConstraints(
                 minHeight: 100
               ),
-              child: AddLectures(color: ColorConst.colorIconGrays, controller: controller, lectures: lectures,),
+              child: AddLectures(color: ColorConst.colorIconGrays, controller: controller, lectures: lectures,
+                onChanged: (subjects, lectures) {
+                  controller.basicValidator.getController('total_subjects')?.text = subjects.length.toString();
+                  int totalLectures = 0;
+                  for (int i = 0; i < subjects.length; i++) {
+                    totalLectures += subjects[i].lectures.length;
+                  }
+                  controller.basicValidator.getController('total_lectures')?.text = totalLectures.toString();
+                },),
             ),
           ],
         ),
@@ -703,7 +1029,7 @@ class _CourseDetailState extends State<CourseDetail>
     return SizedBox();
   }
 
-  Widget customDropDownSearchCustom({required List<String> list,required String hintText}){
+  Widget customDropDownSearch({required List<String?> list,required String hintText, required TextEditingController? controller}){
     return DropdownSearch<String>(
       popupProps: PopupProps.menu(
         constraints: BoxConstraints(
@@ -713,7 +1039,7 @@ class _CourseDetailState extends State<CourseDetail>
         searchDelay: Duration(seconds: 0),
         showSelectedItems: true,
       ),
-      items: list,
+      items: list.map((e) => e ?? '').toList(),
       dropdownDecoratorProps: DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
           hintText: hintText,
@@ -730,7 +1056,9 @@ class _CourseDetailState extends State<CourseDetail>
           FloatingLabelBehavior.never,
         ),
       ),
-      onChanged: print,
+      onChanged: (value) {
+        controller?.text = value??"";
+      },
     );
   }
 }

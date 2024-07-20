@@ -1,7 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
+import 'package:flutter/services.dart';
 import '../../../../base/theme/colors_app.dart';
 import '../../../../controller/ui/add_course_controller.dart';
 import '../../../../helpers/theme/app_theme.dart';
@@ -12,15 +13,18 @@ import '../../../../helpers/widgets/my_text_style.dart';
 
 class ModeOptionWidget extends StatefulWidget {
   final String? mode;
-  final void Function(String?) onChanged;
+  final void Function(String?) onModeChanged;
+  final void Function(int?) onPaymentChanged;
+  bool disablePremiumMode = false;
+  bool disablePayment = false;
 
-  ModeOptionWidget({required this.mode, required this.onChanged,});
+  ModeOptionWidget({required this.mode, required this.onModeChanged, required this.onPaymentChanged,required this.disablePayment, required this.disablePremiumMode});
   @override
   _ModeOptionWidget createState() => _ModeOptionWidget();
 }
 
 class _ModeOptionWidget extends State<ModeOptionWidget> {
-
+  TextEditingController controller = new TextEditingController();
   String? _mode;
   @override
   void initState() {
@@ -52,16 +56,15 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
                   onChanged: (String? value) {
                     setState(() {
                       _mode = value;
+                      widget.onModeChanged(value);
                     });
-                    widget.onChanged(value);
                   },
                 ),
               ),
             ),
-            Expanded(
+            (widget.disablePremiumMode != true) ? Expanded(
               flex: 4,
               child: ListTile(
-                enabled: widget.mode == 'PREMIUM',
                 title: const Text('PREMIUM'),
                 leading: Radio<String>(
                   value: 'PREMIUM',
@@ -69,18 +72,20 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
                   onChanged: (String? value) {
                     setState(() {
                       _mode = value;
+                      widget.onModeChanged(value);
                     });
-                    widget.onChanged(value);
                   },
                 ),
               ),
-            ),
-            Expanded(
+            ) : SizedBox(),
+              Expanded(
               flex: 3,
-              child: SizedBox(
+              child: (widget.disablePayment != true) ? SizedBox(
                 child: Container(
                   color: ColorConst.whiteColor,
                   child: TextFormField(
+                    controller: controller,
+                    keyboardType: TextInputType.number,
                     enabled: _mode == 'PREMIUM',
                     decoration: InputDecoration(
                       prefixIcon: Icon(
@@ -92,10 +97,13 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
                       labelText: 'Payment',
                       border: OutlineInputBorder(),
                     ),
+                    onChanged: (value){
+                      widget.onPaymentChanged(value as int?);
+                    },
                   ),
                 ),
-              ),
-            ),
+              ): SizedBox(),
+            ) ,
           ],
         ),
       ],
