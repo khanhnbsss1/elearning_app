@@ -160,13 +160,13 @@ class BaseApiRequest {
     return paramsAdd!;
   }
 
-  Future<Map<String, dynamic>> getBodyAdd() async {
+  Future< dynamic> getBodyAdd() async {
     dynamic bodyFinal;
     switch(bodyMethod){
       case BodyMethod.formData:
       // TODO: Handle this case.
         {
-          bodyFinal = FormData.fromMap(requestBody??{},ListFormat.multiCompatible,true);
+          bodyFinal = FormData.fromMap(requestBody??{},ListFormat.multi,false);
           break;
         }
       case BodyMethod.xWwwFromUrlEncode:
@@ -337,7 +337,7 @@ class BaseApiRequest {
     var option = Options(headers: await getHeaderAdd());
     String url = await getFullUrl();
     Map<String, dynamic> params = await getParamsFinal();
-    Map<String, dynamic> body = await getBodyAdd();
+    dynamic body = await getBodyAdd();
     try{
       var option = Options(
         headers: await getHeaderAdd(),
@@ -406,7 +406,7 @@ class BaseApiRequest {
   Future<dynamic> requestPutWithDio() async {
     String url = await getFullUrl();
     Map<String, dynamic> params =  await getParamsFinal();
-    Map<String, dynamic> body = await getBodyAdd();
+    dynamic body = await getBodyAdd();
     DioClient().getDioClient().options = DioClient().getDioClient().options.copyWith(headers: await getHeaderAdd(), validateStatus: (_) => true,);
     try{
       var option = Options(

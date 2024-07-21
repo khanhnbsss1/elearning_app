@@ -1,11 +1,13 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+
 class WordInfo {
   String? simplified;
   String? traditional;
   String? pinyinTones;
   String? translationVn;
-  File? audio;
+  MultipartFile? audio;
   String? createdBy;
 
   WordInfo(

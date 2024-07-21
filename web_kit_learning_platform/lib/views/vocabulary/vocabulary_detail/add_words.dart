@@ -1,3 +1,6 @@
+import 'dart:typed_data';
+// import 'dart:html';
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +13,7 @@ import '../../../helpers/utils/ui_mixins.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../../landing_page/components/colornotifier.dart';
+
 
 class AddWords extends StatefulWidget {
   void show(BuildContext context) {
@@ -208,15 +212,21 @@ class _AddWordsState extends State<AddWords>
                                   backgroundColor: notifier.redcolor,
                                   foregroundColor: Colors.white),
                               onPressed: () async {
-                                FilePickerResult? result =
-                                await FilePicker.platform.pickFiles(
+                                FilePickerResult? result = await FilePicker.platform.pickFiles(
                                   type: FileType.custom,
                                   allowedExtensions: ['wav'],
                                 );
+                                dio.MultipartFile file = dio.MultipartFile.fromBytes(result!.files.first.bytes!.toList(growable: true),filename: result.names[0]);
+                               /* String? fileName = result?.names[0];
+                                String fileType = 'wav';
+                                Uint8List? fileContent = result?.files.first.bytes;
+
+                                File file = createFileFromBytes(fileName!, fileType, fileContent!);*/
 
                                 setState(() {
                                   if (result != null) {
                                     addWordController.basicValidator.getController('audio')?.text = result.names[0]!;
+                                    addWordController.setAudioFile(file);
                                   } else {}
                                 });
                               },
@@ -274,21 +284,17 @@ class _AddWordsState extends State<AddWords>
                               foregroundColor: Colors.white),
                           onPressed: () async {
                             FilePickerResult? result = await FilePicker.platform.pickFiles(
-                            type: FileType.custom,
+                              type: FileType.custom,
                               allowedExtensions: ['wav'],
                             );
                             
 
-                            // final platformFile = result?.files.single.path;
-                            // print(platformFile);
-                            // File file = File(platformFile);
+                            dio.MultipartFile file = dio.MultipartFile.fromBytes(result!.files.first.bytes!.toList(growable: true),filename: result.names[0]);
 
-                            setState(() async {
-                              if (result != null) {
+                            setState(() {
                               addWordController.basicValidator.getController('audio')?.text = result.names[0]!;
-                              }
-                            }
-                            );
+                              addWordController.setAudioFile(file);
+                            });
                           },
                           icon: Icon(Icons.upload_file, size: 14),
                         )),

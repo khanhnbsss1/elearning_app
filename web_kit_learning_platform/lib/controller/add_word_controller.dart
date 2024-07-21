@@ -1,12 +1,10 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
-import 'package:webkit/models/user.dart';
 import 'package:webkit/services/apis/words/add_words_api.dart';
 import 'package:webkit/services/apis/words/word_model.dart';
-import 'package:webkit/views/course/course_list/add_words.dart';
 
 import 'my_controller.dart';
 
@@ -53,9 +51,9 @@ class AddWordController extends MyController {
     );
   }
 
-  File? _audioFile;
+  MultipartFile? _audioFile;
 
-  void setAudioFile(File file) {
+  void setAudioFile(MultipartFile file) {
     _audioFile = file;
   }
 
