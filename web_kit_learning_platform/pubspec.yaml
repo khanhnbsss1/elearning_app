@@ -134,7 +134,6 @@ dependencies:
   http: ^1.2.2
   universal_io: ^2.2.2
   file: ^7.0.0
-  
 
 dependency_overrides:
   file_picker: ^8.0.6

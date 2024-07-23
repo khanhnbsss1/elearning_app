@@ -9,7 +9,7 @@ class StaticView{
         return Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(Dimens.size30),
-              color: ColorConst.primaryColor
+              color: ColorConst.whiteColor
           ),
           clipBehavior: Clip.hardEdge,
 

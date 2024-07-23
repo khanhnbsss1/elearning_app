@@ -17,3 +17,9 @@ class VocabularyListOnSearchByFilterEvent extends VocabularyListEvent {
   @override
   List<Object?> get props => [searchCommonRequest];
 }
+class VocabularyListOnSelectVocabularyEvent extends VocabularyListEvent {
+  VocabularyInfo selectVocabularyInfo;
+  VocabularyListOnSelectVocabularyEvent({required this.selectVocabularyInfo} );
+  @override
+  List<Object?> get props => [selectVocabularyInfo];
+}

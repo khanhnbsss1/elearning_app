@@ -31,7 +31,7 @@ class ImageManager {
 
   
   //png
-  static const String logo = 'logo.png';
+  static const String logo = 'logo.jpg';
   static const String icNoData = 'icNoData.png';
   static const String icLoading = 'icLoading.png';
   static const String ic_loading_on_page_png = 'loading_on_page.png';

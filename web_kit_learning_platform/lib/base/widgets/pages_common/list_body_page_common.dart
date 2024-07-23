@@ -123,12 +123,11 @@ class _ListBodyCommonState extends State<ListBodyCommon> {
                 //height: Dimens.size20,
                 color: Colors.transparent,
                 child: Stack(
-                    children: 
-                    [
+                    children: [
                       Center(
                         child: Container(
                           width: 2,
-                          color: ColorConst.whiteColor,
+                          //color: ColorConst.whiteColor,
                         ),
                       ),
                       Center(child: Icon(Icons.code_rounded, color: widget.expandIconColor,))

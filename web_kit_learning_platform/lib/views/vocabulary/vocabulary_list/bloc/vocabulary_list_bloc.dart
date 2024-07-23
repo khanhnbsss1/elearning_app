@@ -16,6 +16,11 @@ class VocabularyListBloc extends Bloc<VocabularyListEvent, VocabularyListState> 
   VocabularyListBloc(super.initialState) {
     on<VocabularyListInitEvent>(_onInit);
     on<VocabularyListOnSearchByFilterEvent>(_onSearchByParams);
+    on<VocabularyListOnSelectVocabularyEvent>((event, emit) async {
+      emit(state.copyWith(
+          selectVocabularyInfo: event.selectVocabularyInfo
+      ));
+    });
   }
 
   Future<void> _onInit(VocabularyListInitEvent event,
@@ -45,6 +50,9 @@ class VocabularyListBloc extends Bloc<VocabularyListEvent, VocabularyListState> 
             blocStatus: VocabularyStatus.onLoadEnd,
           searchCommonRequest: searchCommonRequest
         ));
+        if((vocabularyResponseModel.content??[]).isNotEmpty) {
+          add(VocabularyListOnSelectVocabularyEvent(selectVocabularyInfo: (vocabularyResponseModel.content??[]).first));
+        }
       }
     else if(state.vocabularyType ==VocabularyType.myVocabularyList)
       {
@@ -55,6 +63,11 @@ class VocabularyListBloc extends Bloc<VocabularyListEvent, VocabularyListState> 
             blocStatus: VocabularyStatus.onLoadEnd,
             searchCommonRequest: searchCommonRequest
         ));
+        if((vocabularyResponseModel.content??[]).isNotEmpty) {
+          add(VocabularyListOnSelectVocabularyEvent(selectVocabularyInfo: (vocabularyResponseModel.content??[]).first));
+        }
       }
+   
+
   }
 }

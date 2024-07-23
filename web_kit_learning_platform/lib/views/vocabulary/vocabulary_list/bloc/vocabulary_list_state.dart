@@ -17,11 +17,13 @@ class VocabularyListState extends Equatable {
   VocabularyStatus? blocStatus;
   SearchCommonRequest? searchCommonRequest;
   VocabularyType? vocabularyType;
+  VocabularyInfo? selectVocabularyInfo;
   VocabularyListState({
       this.blocStatus, 
     this.vocabularyResponseModel,
     this.searchCommonRequest,
-    this.vocabularyType
+    this.vocabularyType,
+    this.selectVocabularyInfo
   }){
     vocabularyResponseModel??= VocabularyResponseModel(content: []);
     searchCommonRequest??= SearchCommonRequest(filterType: "ALL", pageNumber: 0, pageSize: 10, keyword: "");
@@ -33,7 +35,8 @@ class VocabularyListState extends Equatable {
     VocabularyResponseModel? vocabularyResponseModel,
     VocabularyStatus? blocStatus,
     SearchCommonRequest? searchCommonRequest,
-    VocabularyType? vocabularyType
+    VocabularyType? vocabularyType,
+    VocabularyInfo? selectVocabularyInfo
   })
   {
     return VocabularyListState(
@@ -41,10 +44,11 @@ class VocabularyListState extends Equatable {
       vocabularyResponseModel: vocabularyResponseModel??this.vocabularyResponseModel,
       searchCommonRequest: searchCommonRequest??this.searchCommonRequest,
       vocabularyType: vocabularyType??this.vocabularyType,
+      selectVocabularyInfo: selectVocabularyInfo??this.selectVocabularyInfo,
 
     );
   }
   @override
-  List<Object?> get props => [blocStatus, vocabularyResponseModel, searchCommonRequest,vocabularyType];
+  List<Object?> get props => [blocStatus, vocabularyResponseModel, searchCommonRequest,vocabularyType, selectVocabularyInfo];
 
 }

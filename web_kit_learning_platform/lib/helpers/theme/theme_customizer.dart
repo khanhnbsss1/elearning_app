@@ -17,7 +17,12 @@ typedef ThemeChangeCallback = void Function(
     ThemeCustomizer oldVal, ThemeCustomizer newVal);
 
 class ThemeCustomizer {
-  ThemeCustomizer();
+  static final ThemeCustomizer _singletonBlocThemeCustomizer = ThemeCustomizer._internal();
+  static ThemeCustomizer get getInstance => _singletonBlocThemeCustomizer;
+  factory ThemeCustomizer() {
+    return _singletonBlocThemeCustomizer;
+  }
+  ThemeCustomizer._internal();
 
   static final List<ThemeChangeCallback> _notifier = [];
   

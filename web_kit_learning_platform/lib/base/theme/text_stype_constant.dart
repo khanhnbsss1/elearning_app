@@ -149,7 +149,7 @@ class TextStyleConstant{
      fontSize13 = Dimens.size14;
      fontSize12 = Dimens.size13;
      fontSize10 = Dimens.size11;
-
+     fontSize28 = Dimens.size28;
      FontWeight fontWeight200 = FontWeight.w200;
      fontWeight300 = FontWeight.w300;
      fontWeight400 = FontWeight.w400;
@@ -204,7 +204,7 @@ class TextStyleConstant{
      textStyleBlack20w500 = baseStyle.copyWithCustom(fontSize: fontSize20, color: ColorConst.blackColor, fontWeight: fontWeight500);
 
      textStyleBlack24w700 = baseStyle.copyWithCustom(fontSize: fontSize24, color: ColorConst.blackColor, fontWeight: fontWeight700);
-
+     textStyleBlack28w700 = baseStyle.copyWithCustom(fontSize: fontSize28, color: ColorConst.blackColor, fontWeight: fontWeight700);
 
      textStyleMainColor14w600 = baseStyle.copyWithCustom(fontSize: fontSize14, color: ColorConst.mainColor, fontWeight: fontWeight600);
      textStyleMainColor18w700 = baseStyle.copyWithCustom(fontSize: fontSize18, color: ColorConst.mainColor, fontWeight: fontWeight700);

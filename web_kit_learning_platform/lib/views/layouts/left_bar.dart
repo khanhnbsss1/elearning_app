@@ -41,9 +41,7 @@ class LeftbarObserver {
 }
 
 class LeftBar extends StatefulWidget {
-  final bool isCondensed;
-
-  const LeftBar({super.key, this.isCondensed = false});
+  LeftBar({super.key});
 
   @override
   _LeftBarState createState() => _LeftBarState();
@@ -52,7 +50,6 @@ class LeftBar extends StatefulWidget {
 class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, UIMixin {
   final ThemeCustomizer customizer = ThemeCustomizer.instance;
 
-  bool isCondensed = false;
   String path = UrlService.getCurrentUrl();
 
   @override
@@ -62,7 +59,6 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
 
   @override
   Widget build(BuildContext context) {
-    isCondensed = widget.isCondensed;
     Color textColor = ColorConst.whiteColor;
     return MyCard(
       paddingAll: 0,
@@ -70,8 +66,8 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
       shadow: MyShadow(position: MyShadowPosition.centerRight, elevation: 0.2),
       child: AnimatedContainer(
         color: leftBarTheme.background,
-        width: isCondensed ? 70 : 254,
-        curve: Curves.easeInOut,
+        width: ThemeCustomizer().leftBarCondensed ? 70 : 254,
+        curve: Curves.easeOut,
         duration: const Duration(milliseconds: 200),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,18 +81,34 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                   },
                   child: Row(
                     children: [
-                      SizedBox(
-                        //height: Dimens.size30,
-                        width: Dimens.size40,
-                        child:  StaticView.buildLogo(),
+                      InkWell(
+                        onTap: () {
+                          setState(() {
+                            ThemeCustomizer().leftBarCondensed=!ThemeCustomizer().leftBarCondensed;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Icon(Icons.menu, size: Dimens.size20,),
+                        ),
                       ),
-                     
+                      Visibility(
+                        visible: !ThemeCustomizer().leftBarCondensed,
+                        child: SizedBox(
+                          //height: Dimens.size30,
+                          width: Dimens.size40,
+                          child:  StaticView.buildLogo(),
+                        ),
+                      ),
                       const SizedBox(width: 5),
                       Expanded(
-                        child: Text(L10nX.getStr.app_name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyleConstant.textStyleBlack18w600,
+                        child: Visibility(
+                          visible: !ThemeCustomizer().leftBarCondensed,
+                          child: Text(L10nX.getStr.app_name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyleConstant.textStyleBlack16w600,
+                          ),
                         ),
                       ),
                     ],
@@ -113,97 +125,97 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                   NavigationItem(
                     iconData: LucideIcons.layoutDashboard,
                     title: L10nX.getStr.dashboard,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     route: Routes.dashboardRoute,
                   ),
                   labelWidget(L10nX.getStr.apps),
                   //-----------------Course-----------------//
                   MenuWidget(
                     iconData: Icons.library_books,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.course_str,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.your_course,
                         route:  Routes.courseMyList,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.courses_list,
                         route:  Routes.courseList,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
                   //-----------------VideoPlayer-----------------//
                   MenuWidget(
                     iconData: Icons.video_collection_outlined,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.video_player,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.video_player,
                         route:  Routes.videoPlayer,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.youtube_player,
                         route:  Routes.videoPlayer,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
                   //-----------------Danh sach giao vien-----------------//
                   MenuWidget(
                     iconData: Icons.people,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.teacher_str,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.teacher_list,
                         route:  Routes.calenderRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.create_teacher,
                         route:  Routes.calenderRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
                   //-----------------Danh sach hoc viên-----------------//
                   MenuWidget(
                     iconData: Icons.people,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.student_str,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.student_list,
                         route:  Routes.calenderRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.create_student,
                         route:  Routes.calenderRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
                   //-----------------Danh sach hoc liệu-----------------//
                   MenuWidget(
                     iconData: Icons.library_books_rounded,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.document_str,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.document_list,
                         route:  Routes.calenderRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.create_document,
                         route:  Routes.calenderRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
@@ -212,79 +224,84 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     iconData: CupertinoIcons.book_solid,
                     title: L10nX.getStr.vocabulary_str,
                     route: Routes.vocabularyList,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    onPress: () {
+                      setState(() {
+                        ThemeCustomizer().leftBarCondensed= !ThemeCustomizer().leftBarCondensed;
+                      });
+                    },
                   ),
                   //-----------------CALENDAR-----------------//
                   NavigationItem(
                     iconData: LucideIcons.calendarDays,
                     title: L10nX.getStr.str_calendar,
                     route: Routes.calenderRoute,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                   ),
                   //-----------------Chat-----------------//
                   NavigationItem(
                     iconData: LucideIcons.messageSquare,
                     title: L10nX.getStr.str_chat,
                     route: Routes.uiChatRoute,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                   ),
                   
                   //-----------------LandingPage-----------------//
                   MenuWidget(
                     iconData: LucideIcons.planeLanding,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.landing_page,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.landing_page,
                         route:  Routes.uiLandingRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.landing_page,
                         route:  Routes.landingPageRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
                   //-----------------Login-----------------//
                   MenuWidget(
                     iconData: LucideIcons.logIn,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.login,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.login,
                         route:  Routes.lockedRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: "${L10nX.getStr.login}1",
                         route:  Routes.loginRoute1,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
                   //-----------------Contact-----------------//
                   MenuWidget(
                     iconData: LucideIcons.contact,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.str_contacts,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.str_members,
                         route:  Routes.contactsMembersRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.profile,
                         route:  Routes.contactsProfileRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_edit_profile,
                         route:  Routes.contactsEditProfileRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
@@ -292,18 +309,18 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                   //-----------------CRM-----------------//
                   MenuWidget(
                     iconData: LucideIcons.users,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.str_CRM,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.str_contacts,
                         route:  Routes.crmContactsRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_opportunities,
                         route:  Routes.crmOpportunitiesPathRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
@@ -311,32 +328,32 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                   // -----------------Ecommerce-----------------//
                   MenuWidget(
                     iconData: LucideIcons.store,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.ecommerce,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.products,
-                        isCondensed: isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                         route:  Routes.appsEcommerceProductsRoute,
                       ),
                       MenuItem(
                         title: L10nX.getStr.add_product,
-                        isCondensed: isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                         route:  Routes.appsEcommerceAddProductRoute,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_product_detail,
-                        isCondensed: isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                         route:  Routes.appsEcommerceAddProductRoute,
                       ),
                       MenuItem(
                         title: L10nX.getStr.customers,
-                        isCondensed: isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                         route:  Routes.appsEcommerceCustomersRoute,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_invoice,
-                        isCondensed: isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                         route:  Routes.appsEcommerceInvoiceRoute,
                       ),
                     ],
@@ -344,18 +361,18 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                   //-----------------File-----------------//
                   MenuWidget(
                     iconData: LucideIcons.folderPlus,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: "File",
                     children: [
                       MenuItem(
                         title: L10nX.getStr.str_manager,
                         route:  Routes.appsFilesRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_upload,
                         route:  Routes.appsFileUploaderRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
@@ -363,23 +380,23 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                   //-----------------Project-----------------//
                   MenuWidget(
                     iconData: LucideIcons.briefcase,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.str_projects,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.str_project_list,
                         route:  Routes.projectsProjectListRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_project_detail,
                         route:  Routes.projectsProjectDetailRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_create_project,
                         route:  Routes.projectsCreateProjectRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
@@ -389,7 +406,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     iconData: LucideIcons.squareKanban,
                     title: "Kanban",
                     route:  Routes.kanbanRoute,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                   ),
 
                   //-----------------NFT Dashboard-----------------//
@@ -397,25 +414,25 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     iconData: LucideIcons.circleDollarSign,
                     title: L10nX.getStr.str_NFT_dashboard,
                     route: Routes.nFTDashboardRoute,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                   ),
                   NavigationItem(
                     iconData: LucideIcons.shoppingCart,
                     title: L10nX.getStr.str_customer,
                     route:  Routes.shoppingCustomerRoute,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                   ),
                   NavigationItem(
                     iconData: LucideIcons.dumbbell,
                     title: L10nX.getStr.str_fitness,
                     route:  Routes.fitnessRoute,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                   ),
                   NavigationItem(
                     iconData: LucideIcons.mailbox,
                     title: L10nX.getStr.str_mailbox,
                     route:  Routes.milaBoxRoute,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                   ),
 
                   labelWidget(L10nX.getStr.pages),
@@ -425,64 +442,64 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     iconData: LucideIcons.presentation,
                     title: L10nX.getStr.str_Landing,
                     route:  Routes.uiLandingRoute,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                   ),
 
                   //-----------------Auth-----------------//
                   MenuWidget(
                     iconData: LucideIcons.shieldAlert,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.auth,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.login,
                         route: Routes.loginRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.login,
                         route:  Routes.loginRoute1,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.register,
                         route:  Routes.signupRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.register,
                         route:  Routes.signupRoute1,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.forgot_password,
                         route:  Routes.forgotPasswordRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.forgot_password,
                         route:  Routes.forgotPasswordRoute1,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.reset_password,
                         route:  Routes.resetPasswordRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.reset_password,
                         route:  Routes.resetPasswordRoute1,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.locked,
                         route:  Routes.lockedRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.locked,
                         route:  Routes.lockedRoute1,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
@@ -490,28 +507,28 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                   //-----------------Error-----------------//
                   MenuWidget(
                     iconData: LucideIcons.alertCircle,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: 'Error',
                     children: [
                       MenuItem(
                         title: "ERROR-404",
                         route:  Routes.uiError404Route,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: "ERROR-500",
                         route:  Routes.uiError500Route,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_coming_soon,
                         route:  Routes.comingSoonRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_maintenance,
                         route: Routes.maintenanceRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
@@ -519,22 +536,22 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                   //-----------------Extra Pages-----------------//
                   MenuWidget(
                     iconData: LucideIcons.bookOpenCheck,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.str_extra_pages,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.FAQs,
                         route: Routes.faqsRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_pricing,
                         route: Routes.pricingRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_timeLine,
-                        isCondensed: isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                         route: Routes.timelineRoute,
                       ),
                     ],
@@ -543,76 +560,76 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                   //-----------------Forms-----------------//
                   MenuWidget(
                     iconData: LucideIcons.formInput,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.form,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.basic,
                         route: Routes.formBasicRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_form_mask,
                         route: Routes.formFormMaskRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_quill_editor,
                         route: Routes.formQuillEditorRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.validation,
                         route: Routes.formValidationRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.wizard,
                         route: Routes.formWizardRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
                   //-----------------UI Widget-----------------//
                   MenuWidget(
                     iconData: LucideIcons.layoutGrid,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.widgets,
                     children: [
                       MenuItem(
                         title: L10nX.getStr.buttons,
                         route: Routes.uiButtonsRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.cards,
                         route: Routes.uiCardsRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.tabs,
                         route: Routes.uiTabsRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.dialogs,
                         route: Routes.uiDialogsRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.carousels,
                         route: Routes.uiCarouselsRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.str_drag_drop,
                         route: Routes.uiDragDropRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: L10nX.getStr.notifications,
                         route: Routes.uiNotificationRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
@@ -621,7 +638,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     iconData: LucideIcons.file,
                     title: L10nX.getStr.starter,
                     route: Routes.starterRoute,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                   ),
                   //-----------------Other-----------------//
                   labelWidget(L10nX.getStr.other),
@@ -629,41 +646,41 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     iconData: LucideIcons.table2,
                     title: L10nX.getStr.basic_tables,
                     route: Routes.otherBasicTablesRoute,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                   ),
                   NavigationItem(
                     iconData: LucideIcons.barChartBig,
                     title: L10nX.getStr.syncfusion_charts,
                     route: Routes.otherSyncfusionChartsRoute,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                   ),
                   NavigationItem(
                     iconData: LucideIcons.barChart,
                     title: "fl_chart",
                     route: Routes.otherFlChartRoute,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                   ),
                   //-----------------Maps-----------------//
                   MenuWidget(
                     iconData: LucideIcons.map,
-                    isCondensed: isCondensed,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.map,
                     children: [
                       MenuItem(
                         title: "Sf Maps",
                         route: Routes.mapsSfMapsRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                       MenuItem(
                         title: "Google Maps",
                         route: Routes.mapsGoogleMapsRoute,
-                        isCondensed: widget.isCondensed,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],
                   ),
 
                   MySpacing.height(16),
-                  if (!isCondensed)
+                  if (!ThemeCustomizer().leftBarCondensed)
                     Center(
                       child: MyButton(
                           borderRadiusAll: AppStyle.buttonRadius.small,
@@ -689,7 +706,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
   }
 
   Widget labelWidget(String label) {
-    return isCondensed
+    return ThemeCustomizer().leftBarCondensed
         ? MySpacing.empty()
         : Container(
             padding: MySpacing.xy(24, 8),
@@ -778,7 +795,7 @@ class _MenuWidgetState extends State<MenuWidget>
     // var route = Uri.base.fragment;
     // isActive = widget.children.any((element) => element.route == route);
 
-    if (widget.isCondensed) {
+    if (ThemeCustomizer().leftBarCondensed) {
       return CustomPopupMenu(
         backdrop: true,
         show: popupShowing,
@@ -962,7 +979,7 @@ class _MenuItemState extends State<MenuItem> with UIMixin {
           width: MediaQuery.of(context).size.width,
           padding: MySpacing.xy(18, 7),
           child: MyText.bodySmall(
-            "${widget.isCondensed ? "" : "- "}  ${widget.title}",
+            "${ThemeCustomizer().leftBarCondensed ? "" : "- "}  ${widget.title}",
             overflow: TextOverflow.clip,
             maxLines: 1,
             textAlign: TextAlign.left,
@@ -983,13 +1000,16 @@ class NavigationItem extends StatefulWidget {
   final String title;
   final bool isCondensed;
   final String? route;
+  final void Function()? onPress;
 
   const NavigationItem(
       {super.key,
       this.iconData,
       required this.title,
       this.isCondensed = false,
-      this.route});
+      this.route,
+        this.onPress
+      });
 
   @override
   _NavigationItemState createState() => _NavigationItemState();
@@ -1003,11 +1023,16 @@ class _NavigationItemState extends State<NavigationItem> with UIMixin {
     bool isActive = UrlService.getCurrentUrl() == widget.route;
     return GestureDetector(
       onTap: () {
+        if(widget.onPress!=null)
+        {
+          widget.onPress!();
+        }
         if (widget.route != null) {
           AppPages.routeName(widget.route!);
 
           // MyRouter.pushReplacementNamed(context, widget.route!, arguments: 1);
         }
+
       },
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
@@ -1040,12 +1065,12 @@ class _NavigationItemState extends State<NavigationItem> with UIMixin {
                     size: 20,
                   ),
                 ),
-              if (!widget.isCondensed)
+              if (!ThemeCustomizer().leftBarCondensed)
                 Flexible(
                   fit: FlexFit.loose,
                   child: MySpacing.width(16),
                 ),
-              if (!widget.isCondensed)
+              if (!ThemeCustomizer().leftBarCondensed)
                 Expanded(
                   flex: 3,
                   child: MyText.labelLarge(

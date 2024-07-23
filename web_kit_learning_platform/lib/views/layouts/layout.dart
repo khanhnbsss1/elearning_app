@@ -118,28 +118,35 @@ class Layout extends StatelessWidget {
     return Scaffold(
       key: controller.scaffoldKey,
       endDrawer: RightBar(),
-      body: Row(
+      body: Stack(
         children: [
-          LeftBar(isCondensed: ThemeCustomizer.instance.leftBarCondensed),
-          Expanded(
-              child: Stack(
+          
+          Row(
             children: [
-              Positioned(
-                top: 0,
-                right: 0,
-                left: 0,
-                bottom: 0,
-                child: (isScroll??true)? SingleChildScrollView(
-                  padding: padding,
-                  key: controller.scrollKey,
-                  child: child,
-                ):Padding(
-                  padding: padding!,
-                  child: child,),
+              SizedBox(width: Dimens.size70,),
+              Expanded(
+                child: Stack(
+                  children: [
+                    Positioned(
+                  top: 0,
+                  right: 0,
+                  left: 0,
+                  bottom: 0,
+                  child: (isScroll??true)? SingleChildScrollView(
+                    padding: padding,
+                    key: controller.scrollKey,
+                    child: child,
+                  ):Padding(
+                    padding: padding!,
+                    child: child,),
+                ), 
+                    Positioned(top: 0, left: 0, right: 0, child: TopBar(key: UniqueKey(),)),
+                  ],
+                ),
               ),
-              Positioned(top: 0, left: 0, right: 0, child: TopBar(key: UniqueKey(),)),
             ],
-          )),
+          ),
+          LeftBar(),
         ],
       ),
     );

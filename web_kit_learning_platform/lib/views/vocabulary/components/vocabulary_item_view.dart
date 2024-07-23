@@ -31,7 +31,7 @@ class VocabularyItemView extends StatelessWidget {
                     : notifier.whitecolor,
                 border: Border(
                   bottom: BorderSide(
-                    color: ColorConst.colorIconGrays,
+                    color: ColorConst.dividerColor,
                     width: 1
                   )
                 )
