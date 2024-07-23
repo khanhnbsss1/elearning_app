@@ -168,6 +168,8 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         controller: scrollCont,
+                        physics: const NeverScrollableScrollPhysics(),
+
                         child: Row(
                           children: teacherList,
                         ),

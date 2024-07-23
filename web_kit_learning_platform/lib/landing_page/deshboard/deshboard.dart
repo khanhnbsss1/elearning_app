@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/widgets/scroll/custom_scroll_controller.dart';
 import 'package:webkit/base/widgets/static_view/static_view.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/controller/ui/landing_controller.dart';
@@ -97,7 +98,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
   ];
 
   ShowCardModel showCardModel = ShowCardModel();
-  ScrollController _mainController = ScrollController();
+  final ScrollController _mainController = ScrollController();
   List<Widget>listWiget= [];
   late double oldWidth=0;
   @override
@@ -186,32 +187,22 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                 : constraints.maxWidth / 15,
             vertical: 10,
           ),
-          child: StatefulBuilder(
-            builder: (BuildContext context, void Function(void Function()) setState) { 
-              return  SizedBox(
-                width: width / 1,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
-                    return Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        ResponsiveInfo.isPhone()?
-                        Image.asset('assets/deshboard/winterlandscape.png',
-                            height: constraints.maxWidth < 500 ? 250 : 400,
-                            width: constraints.maxWidth,
-                            fit: BoxFit.cover)
-                            : Image.asset('assets/deshboard/winterlandscape.png',
-                            height: 600,
-                            width: constraints.maxWidth,
-                            fit: BoxFit.cover),
-                      ],
-                    );
-                  },
-                  ),
-                ),
-              );
-            },
+          child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+            return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: ResponsiveInfo.isPhone()?
+              Image.asset('assets/deshboard/winterlandscape.png',
+                  height: constraints.maxWidth < 500 ? 250 : 400,
+                  width: constraints.maxWidth,
+                  fit: BoxFit.cover)
+                  : Image.asset('assets/deshboard/winterlandscape.png',
+                  height: 600,
+                  width: constraints.maxWidth,
+                  fit: BoxFit.cover),
+            );
+          },
           ),
         ),
         SizedBox(height: 20,),
@@ -295,10 +286,22 @@ class _LandingPageScreenState extends State<LandingPageScreen>
         EndOfPage(),
       });
     }
+    String text = "If your app has frequent background activity with some idle time, Flutter might use that opportunity to collect the created objects without performance impact.";
+    String finaleText = "";
+    for(int index =0 ; index<1000; index++)
+      {
+      finaleText += text;
+      }
+/*    return SingleChildScrollView(
+      child: Text(
+          finaleText
+      ),
+    );*/
     return Stack(
       children: [
-        SingleChildScrollView(
+        CustomChildScrollView(
           controller: _mainController,
+          scrollSpeed: 100,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children:  listWiget,
@@ -999,6 +1002,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
               child: SingleChildScrollView(
                 controller: differrentController,
                 scrollDirection: Axis.horizontal,
+                physics: const NeverScrollableScrollPhysics(),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -1010,86 +1014,90 @@ class _LandingPageScreenState extends State<LandingPageScreen>
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        width: 2,
-                        color: (isHover)
-                            ? notifier.sugestionbutton
-                            : Colors.transparent),
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      double itemWidth = ResponsiveInfo.isPhone()
-                          ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
-                          : (constraints.maxWidth < 1100)
-                          ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
-                          :(constraints.maxWidth < 1600)
-                          ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
-                          :Dimens.size340;
-                      if (differrentController.offset >= 0) {
-                        differrentController.animateTo(differrentController.offset - itemWidth - 36*2,
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.easeInOut,
-                        );
-                      }
-                    },
-                    onHover: (val) {
-                      setState(() {
-                        isHover = val;
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(13),
-                      child: Image.asset(
-                        'assets/Icons/arrowlefticon.png',
-                        width: 15,
-                        color: notifier.subgreycolor,
+                StatefulBuilder(builder: (context, setState) {
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          width: 2,
+                          color: (isHover)
+                              ? notifier.sugestionbutton
+                              : Colors.transparent),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        double itemWidth = ResponsiveInfo.isPhone()
+                            ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
+                            : (constraints.maxWidth < 1100)
+                            ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
+                            :(constraints.maxWidth < 1600)
+                            ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
+                            :Dimens.size340;
+                        if (differrentController.offset >= 0) {
+                          differrentController.animateTo(differrentController.offset - itemWidth - 36*2,
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.easeInOut,
+                          );
+                        }
+                      },
+                      onHover: (val) {
+                        setState(() {
+                          isHover = val;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(13),
+                        child: Image.asset(
+                          'assets/Icons/arrowlefticon.png',
+                          width: 15,
+                          color: notifier.subgreycolor,
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                },),
                 const SizedBox(width: 10),
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        width: 2,
-                        color: (isHover2)
-                            ? notifier.sugestionbutton
-                            : Colors.transparent),
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      double itemWidth = ResponsiveInfo.isPhone()
-                          ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
-                          : (constraints.maxWidth < 1100)
-                          ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
-                          :(constraints.maxWidth < 1600)
-                          ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
-                          :Dimens.size340;
-                      if (differrentController.offset >= 0) {
-                        differrentController.animateTo(differrentController.offset + itemWidth + 36*2,
-                          duration: const Duration(milliseconds: 200),
-                          curve: Curves.easeInOut,
-                        );
-                      }
-                    },
-                    onHover: (val) {
-                      setState(() {
-                        isHover2 = val;
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(13),
-                      child: Image.asset('assets/Icons/arrowrighticon.png',
-                          width: 15, color: notifier.subgreycolor),
+                StatefulBuilder(builder: (context, setState) {
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          width: 2,
+                          color: (isHover2)
+                              ? notifier.sugestionbutton
+                              : Colors.transparent),
                     ),
-                  ),
-                ),
+                    child: InkWell(
+                      onTap: () {
+                        double itemWidth = ResponsiveInfo.isPhone()
+                            ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
+                            : (constraints.maxWidth < 1100)
+                            ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
+                            :(constraints.maxWidth < 1600)
+                            ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
+                            :Dimens.size340;
+                        if (differrentController.offset >= 0) {
+                          differrentController.animateTo(differrentController.offset + itemWidth + 36*2,
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.easeInOut,
+                          );
+                        }
+                      },
+                      onHover: (val) {
+                        setState(() {
+                          isHover2 = val;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(13),
+                        child: Image.asset('assets/Icons/arrowrighticon.png',
+                            width: 15, color: notifier.subgreycolor),
+                      ),
+                    ),
+                  );
+                },)
               ],
             ),
           ],
@@ -1249,6 +1257,8 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                 child: SingleChildScrollView(
                   controller: whyChooseUsController,
                   scrollDirection: Axis.horizontal,
+                  physics: const NeverScrollableScrollPhysics(),
+
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,

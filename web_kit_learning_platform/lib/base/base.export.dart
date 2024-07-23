@@ -21,7 +21,7 @@ export 'package:webkit/base/widgets/button/BackButtonCustom.dart';
 export 'package:webkit/base/widgets/widgets.export.dart';
 export 'package:webkit/base/author/user_helper.dart';
 export 'package:webkit/base/author/author_manager.dart';
-export 'package:webkit/base/firebase_manager/fire_base_manager.dart';
+//export 'package:webkit/base/firebase_manager/fire_base_manager.dart';
 export 'package:webkit/base/models/user/UserProfile.dart';
 export 'package:webkit/base/store/cache_storage.dart';
 export 'package:webkit/base/widgets/common/alert_dialog/NotifyDialog.dart';

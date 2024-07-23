@@ -1,7 +1,8 @@
+import 'dart:js_interop_unsafe';
 import 'dart:typed_data';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:universal_html/html.dart'if (kIsWeb) 'package:web/web.dart' as html_cache;
+import 'package:web/web.dart' as html_cache;
 
 import '../utils/file_utils.dart';
 
@@ -310,15 +311,15 @@ class LocalStorage {
   }
 
   bool keyIsExit(String key) {
-    if (html_cache.window.localStorage.containsKey(key)) {
+    if (html_cache.window.localStorage.has(key)) {
       return true;
     }
     return false;
   }
 
   void removeByKey(String key) {
-    if (html_cache.window.localStorage.containsKey(key)) {
-      html_cache.window.localStorage.remove(key);
+    if (html_cache.window.localStorage.has(key)) {
+      html_cache.window.localStorage.removeItem(key);
     }
     if (Storage.dynamicKeys.contains(key)) {
       Storage.dynamicKeys.remove(key);
@@ -443,8 +444,8 @@ class SessionStorage {
   }
 
   void removeByKey(String key) {
-    if (html_cache.window.sessionStorage.containsKey(key)) {
-      html_cache.window.sessionStorage.remove(key);
+    if (html_cache.window.sessionStorage.has(key)) {
+      html_cache.window.sessionStorage.removeItem(key);
     }
   }
 

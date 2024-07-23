@@ -144,6 +144,8 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
                             trackVisibility: false,
                             child: SingleChildScrollView(
                               controller: scrollCont,
+                              physics: const NeverScrollableScrollPhysics(),
+
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -160,75 +162,79 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              width: 2,
-                              color: (scrollHover)
-                                  ? notifier.sugestionbutton
-                                  : Colors.transparent),
-                        ),
-                        child: InkWell(
-                            onTap: () {
-                              if (scrollCont.offset > 0) {
-                                scrollCont.animateTo(
-                                  scrollCont.offset - 200,
-                                  duration: const Duration(milliseconds: 200),
-                                  curve: Curves.easeInOut,
-                                );
-                              }
-                            },
-                            onHover: (val) {
-                              setState(() {
-                                scrollHover = val;
-                              });
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(13),
-                              child: Image.asset(
-                                  'assets/Icons/arrowlefticon.png',
-                                  width: 15,
-                                  color: notifier.subgreycolor),
-                            )),
-                      ),
+                     StatefulBuilder(builder: (context, setState) {
+                       return  AnimatedContainer(
+                         duration: const Duration(milliseconds: 200),
+                         decoration: BoxDecoration(
+                           shape: BoxShape.circle,
+                           border: Border.all(
+                               width: 2,
+                               color: (scrollHover)
+                                   ? notifier.sugestionbutton
+                                   : Colors.transparent),
+                         ),
+                         child: InkWell(
+                             onTap: () {
+                               if (scrollCont.offset > 0) {
+                                 scrollCont.animateTo(
+                                   scrollCont.offset - 200,
+                                   duration: const Duration(milliseconds: 200),
+                                   curve: Curves.easeInOut,
+                                 );
+                               }
+                             },
+                             onHover: (val) {
+                               setState(() {
+                                 scrollHover = val;
+                               });
+                             },
+                             child: Padding(
+                               padding: const EdgeInsets.all(13),
+                               child: Image.asset(
+                                   'assets/Icons/arrowlefticon.png',
+                                   width: 15,
+                                   color: notifier.subgreycolor),
+                             )),
+                       );
+                     },),
                       const SizedBox(width: 10),
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              width: 2,
-                              color: (scrollHover2)
-                                  ? notifier.sugestionbutton
-                                  : Colors.transparent),
-                        ),
-                        child: InkWell(
-                            onTap: () {
-                              if (scrollCont.offset <
-                                  scrollCont.position.maxScrollExtent) {
-                                scrollCont.animateTo(
-                                  scrollCont.offset + 200,
-                                  duration: const Duration(milliseconds: 200),
-                                  curve: Curves.easeInOut,
-                                );
-                              }
-                            },
-                            onHover: (val) {
-                              setState(() {
-                                scrollHover2 = val;
-                              });
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(13),
-                              child: Image.asset(
-                                'assets/Icons/arrowrighticon.png',
-                                width: 15,
-                                color: notifier.subgreycolor,
-                              ),
-                            )),
-                      ),
+                      StatefulBuilder(builder: (context, setState) {
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                                width: 2,
+                                color: (scrollHover2)
+                                    ? notifier.sugestionbutton
+                                    : Colors.transparent),
+                          ),
+                          child: InkWell(
+                              onTap: () {
+                                if (scrollCont.offset <
+                                    scrollCont.position.maxScrollExtent) {
+                                  scrollCont.animateTo(
+                                    scrollCont.offset + 200,
+                                    duration: const Duration(milliseconds: 200),
+                                    curve: Curves.easeInOut,
+                                  );
+                                }
+                              },
+                              onHover: (val) {
+                                setState(() {
+                                  scrollHover2 = val;
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(13),
+                                child: Image.asset(
+                                  'assets/Icons/arrowrighticon.png',
+                                  width: 15,
+                                  color: notifier.subgreycolor,
+                                ),
+                              )),
+                        );
+                      },)
                     ],
                   )
                 ],

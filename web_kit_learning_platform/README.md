@@ -24,6 +24,7 @@ samples, guidance on mobile development, and a full API reference.
       - flutter run -d chrome --dart-define=flavor=dev=FLUTTER_WEB_USE_SKIA=true -t lib/main.dart -d chrome headless-server --web-port=8888
       - flutter run web --dart-define=flavor=stg -t lib/main.dart
       - flutter run web --dart-define=flavor=prod -t lib/main.dart
+      - flutter run web --wasm
 
 - Build
     - Create app icon for android an ios

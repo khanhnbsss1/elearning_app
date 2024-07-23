@@ -1,20 +1,13 @@
 // import 'dart:io';
-import 'dart:html';
-
-import 'package:dio/dio.dart';
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:file/file.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:universal_html/html.dart';
-import 'package:universal_html/html.dart';
-import 'package:universal_html/html.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/expands/expand_widget.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';

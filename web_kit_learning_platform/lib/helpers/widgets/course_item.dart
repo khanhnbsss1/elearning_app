@@ -76,8 +76,8 @@ class CourseItem extends StatelessWidget{
                             borderRadius:
                             BorderRadius.circular(16),
                             child: Image.network(
-                              courseInfo
-                                  .image!,
+                              courseInfo.image!,
+                              //"https://docs.flutter.dev/assets/images/dash/dash-fainting.gif",
                               fit: BoxFit.cover,
                               //width: constraints.maxWidth * 2, 
                               //  height: constraints.maxWidth

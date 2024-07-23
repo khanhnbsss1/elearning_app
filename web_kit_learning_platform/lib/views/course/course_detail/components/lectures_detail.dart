@@ -1,15 +1,9 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:universal_html/html.dart';
-import 'package:webkit/base/theme/colors_app.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 import '../../../../controller/ui/add_course_controller.dart';
-import '../../../../helpers/theme/app_theme.dart';
 import '../../../../helpers/utils/ui_mixins.dart';
 import '../../../../helpers/widgets/my_spacing.dart';
 import '../../../../helpers/widgets/my_text.dart';

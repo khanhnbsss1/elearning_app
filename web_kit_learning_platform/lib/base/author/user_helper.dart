@@ -16,7 +16,7 @@ class UserManager{
   Future<void> handleLogoutData() async {
     UserProfile? userInfos = await getUserProfile();
     if(userInfos!=null){
-      FirebaseManager().removeSubscribeTopic(userInfos.id.toString());
+      //FirebaseManager().removeSubscribeTopic(userInfos.id.toString());
     }
     InstanceManager().clearAllInstanceData();
 

@@ -26,7 +26,7 @@ class CustomChildScrollView extends StatelessWidget{
       durationMS: durationMS??0,
       scrollSpeed: scrollSpeed??5,
       controller: controller,
-      mobilePhysics: physics??BouncingScrollPhysics(),
+      mobilePhysics: physics??BouncingScrollPhysics(decelerationRate: ScrollDecelerationRate.fast),
       builder: (buildContext , scrollController , scrollPhysics ) {
         return SingleChildScrollView(
           controller: scrollController,
