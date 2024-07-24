@@ -72,8 +72,16 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
+            Container(
+              height: 60,
               padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: ColorConst.dividerColor.withOpacity(0.2)
+                  )
+                )
+              ),
               child: Center(
                 child: InkWell(
                   onTap: () {

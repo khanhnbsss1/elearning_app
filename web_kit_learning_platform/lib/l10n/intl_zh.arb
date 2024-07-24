@@ -5,6 +5,7 @@
   "app_phone": "+33 455 67 89 00",
   "app_address": "Innovation St. 767,CA - USA",
   "application": "应用",
+  "unknown_str": "未知",
   "download": "下载",
   "scan_code": "扫描代码",
   "dark_theme": "深色主题",
@@ -449,5 +450,12 @@
   "document_str": "文档",
   "document_list": "文档列表",
   "create_document": "创建文档",
-  "vocabulary_str": "閱讀"
+  "vocabulary_str": "閱讀",
+  "simplified_str": "简化",
+  "traditional_str": "传统",
+  "translation_en_str": "英语",
+  "translation_vn_str": "越南语",
+  "pinyin_str": "转录",
+  "pinyin_tone_str": "转录",
+  "category_word": "类别"
 }

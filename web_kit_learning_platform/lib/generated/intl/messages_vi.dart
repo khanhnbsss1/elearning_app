@@ -84,6 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cards": MessageLookupByLibrary.simpleMessage("Thẻ"),
         "carousels": MessageLookupByLibrary.simpleMessage("Băng chuyền"),
         "category": MessageLookupByLibrary.simpleMessage("Danh mục"),
+        "category_word": MessageLookupByLibrary.simpleMessage("Từ loại"),
         "change_log": MessageLookupByLibrary.simpleMessage("Nhật ký thay đổi"),
         "change_password_text":
             MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
@@ -300,6 +301,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "phone_number_text":
             MessageLookupByLibrary.simpleMessage("Số điện thoại"),
         "pie_chart": MessageLookupByLibrary.simpleMessage("Biểu đồ hình tròn"),
+        "pinyin_str": MessageLookupByLibrary.simpleMessage("Phiên âm"),
+        "pinyin_tone_str": MessageLookupByLibrary.simpleMessage("Phiên âm"),
         "population_growth_of_various_countries":
             MessageLookupByLibrary.simpleMessage(
                 "Tăng trưởng dân số ở nhiều quốc gia"),
@@ -374,6 +377,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_out_text": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "simple": MessageLookupByLibrary.simpleMessage("Đơn giản"),
+        "simplified_str": MessageLookupByLibrary.simpleMessage("Giản thể"),
         "size_settings":
             MessageLookupByLibrary.simpleMessage("Cài đặt kích thước"),
         "sku": MessageLookupByLibrary.simpleMessage("MÃ HÀNG"),
@@ -521,6 +525,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "total_revenue": MessageLookupByLibrary.simpleMessage("Tổng doanh thu"),
         "tourism_number":
             MessageLookupByLibrary.simpleMessage("Du lịch - con số"),
+        "traditional_str": MessageLookupByLibrary.simpleMessage("Phồn thể"),
+        "translation_en_str": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
+        "translation_vn_str":
+            MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "trending_products":
             MessageLookupByLibrary.simpleMessage("Sản phẩm đang thịnh hành"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),
@@ -528,6 +536,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Nhập email hoặc số điện thoại"),
         "type_size": MessageLookupByLibrary.simpleMessage("Loại/kích thước"),
         "ui": MessageLookupByLibrary.simpleMessage("Giao diện người dùng"),
+        "unknown_str": MessageLookupByLibrary.simpleMessage("Không xác định"),
         "unlock": MessageLookupByLibrary.simpleMessage("Mở khóa"),
         "use_fingerprint_text":
             MessageLookupByLibrary.simpleMessage("Sử dụng dấu vân tay"),

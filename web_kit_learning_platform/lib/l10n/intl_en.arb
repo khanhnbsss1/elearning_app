@@ -5,6 +5,7 @@
   "app_phone": "+33 455 67 89 00",
   "app_address": "Innovation St. 767,CA - USA",
   "application": "Application",
+  "unknown_str": "Unknown",
   "download": "Download",
   "scan_code": "Scan code",
   "dark_theme": "Dark theme",
@@ -449,5 +450,12 @@
   "document_str": "Document",
   "document_list": "List of documents",
   "create_document": "Create Document",
-  "vocabulary_str": "Vocabulary"
+  "vocabulary_str": "Vocabulary",
+  "simplified_str": "Simplified",
+  "traditional_str": "Traditional",
+  "translation_en_str": "English",
+  "translation_vn_str": "Vietnamese",
+  "pinyin_str": "Pinyin",
+  "pinyin_tone_str": "Pinyin tone",
+  "category_word": "Category"
 }

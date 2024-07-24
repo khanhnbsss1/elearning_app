@@ -14,7 +14,7 @@ class ListBodyCommon extends StatefulWidget {
   Color? expandIconColor ;
   MainAxisAlignment? mainAxisAlignment = MainAxisAlignment.start;
   CrossAxisAlignment? crossAxisAlignment = CrossAxisAlignment.center;
-
+  bool? enableDragIcon;
   ListBodyCommon(
       {
         super.key,
@@ -26,13 +26,15 @@ class ListBodyCommon extends StatefulWidget {
         this.minOfWidthOfListRatio,
         this.widthOfListRatio = 0.3,
         this.expandIconColor,
-        this.heightOfPage
+        this.heightOfPage,
+        this.enableDragIcon
       }) {
     mainAxisAlignment ??= MainAxisAlignment.start;
     crossAxisAlignment ??= CrossAxisAlignment.center;
     maxOfWidthOfListRatio ??= 0.5;
     minOfWidthOfListRatio ??= 0.05;
     expandIconColor??=ColorConst.blackColor;
+    enableDragIcon??true;
   }
 
   @override
@@ -122,16 +124,19 @@ class _ListBodyCommonState extends State<ListBodyCommon> {
                 width: Dimens.size20,
                 //height: Dimens.size20,
                 color: Colors.transparent,
-                child: Stack(
-                    children: [
-                      Center(
-                        child: Container(
-                          width: 2,
-                          //color: ColorConst.whiteColor,
+                child: Visibility(
+                  visible: widget.enableDragIcon??true,
+                  child: Stack(
+                      children: [
+                        Center(
+                          child: Container(
+                            width: 2,
+                            //color: ColorConst.whiteColor,
+                          ),
                         ),
-                      ),
-                      Center(child: Icon(Icons.code_rounded, color: widget.expandIconColor,))
-                    ]
+                        Center(child: Icon(Icons.code_rounded, color: widget.expandIconColor,))
+                      ]
+                  ),
                 ),
               ),
               Container(

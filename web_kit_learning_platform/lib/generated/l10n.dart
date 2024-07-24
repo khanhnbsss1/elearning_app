@@ -100,6 +100,16 @@ class S {
     );
   }
 
+  /// `Unknown`
+  String get unknown_str {
+    return Intl.message(
+      'Unknown',
+      name: 'unknown_str',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Download`
   String get download {
     return Intl.message(
@@ -4515,6 +4525,76 @@ class S {
     return Intl.message(
       'Vocabulary',
       name: 'vocabulary_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Simplified`
+  String get simplified_str {
+    return Intl.message(
+      'Simplified',
+      name: 'simplified_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Traditional`
+  String get traditional_str {
+    return Intl.message(
+      'Traditional',
+      name: 'traditional_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get translation_en_str {
+    return Intl.message(
+      'English',
+      name: 'translation_en_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vietnamese`
+  String get translation_vn_str {
+    return Intl.message(
+      'Vietnamese',
+      name: 'translation_vn_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pinyin`
+  String get pinyin_str {
+    return Intl.message(
+      'Pinyin',
+      name: 'pinyin_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pinyin tone`
+  String get pinyin_tone_str {
+    return Intl.message(
+      'Pinyin tone',
+      name: 'pinyin_tone_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category`
+  String get category_word {
+    return Intl.message(
+      'Category',
+      name: 'category_word',
       desc: '',
       args: [],
     );

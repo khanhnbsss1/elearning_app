@@ -84,6 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cards": MessageLookupByLibrary.simpleMessage("Cards"),
         "carousels": MessageLookupByLibrary.simpleMessage("Carousels"),
         "category": MessageLookupByLibrary.simpleMessage("Category"),
+        "category_word": MessageLookupByLibrary.simpleMessage("Category"),
         "change_log": MessageLookupByLibrary.simpleMessage("Change log"),
         "change_password_text":
             MessageLookupByLibrary.simpleMessage("Change password"),
@@ -298,6 +299,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "phone_number_text":
             MessageLookupByLibrary.simpleMessage("Phone number"),
         "pie_chart": MessageLookupByLibrary.simpleMessage("Pie chart"),
+        "pinyin_str": MessageLookupByLibrary.simpleMessage("Pinyin"),
+        "pinyin_tone_str": MessageLookupByLibrary.simpleMessage("Pinyin tone"),
         "population_growth_of_various_countries":
             MessageLookupByLibrary.simpleMessage(
                 "Population growth of various countries"),
@@ -375,6 +378,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sign_out_text": MessageLookupByLibrary.simpleMessage("Sign out"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
         "simple": MessageLookupByLibrary.simpleMessage("Simple"),
+        "simplified_str": MessageLookupByLibrary.simpleMessage("Simplified"),
         "size_settings": MessageLookupByLibrary.simpleMessage("Size settings"),
         "sized_button": MessageLookupByLibrary.simpleMessage("Sized button"),
         "sku": MessageLookupByLibrary.simpleMessage("SKU"),
@@ -523,6 +527,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "total_revenue": MessageLookupByLibrary.simpleMessage("Total revenue"),
         "tourism_number":
             MessageLookupByLibrary.simpleMessage("Tourism - number"),
+        "traditional_str": MessageLookupByLibrary.simpleMessage("Traditional"),
+        "translation_en_str": MessageLookupByLibrary.simpleMessage("English"),
+        "translation_vn_str":
+            MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "trending_products":
             MessageLookupByLibrary.simpleMessage("Trending products"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),
@@ -530,6 +538,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter email or phone number"),
         "type_size": MessageLookupByLibrary.simpleMessage("Type / size"),
         "ui": MessageLookupByLibrary.simpleMessage("UI"),
+        "unknown_str": MessageLookupByLibrary.simpleMessage("Unknown"),
         "unlock": MessageLookupByLibrary.simpleMessage("Unlock"),
         "use_fingerprint_text":
             MessageLookupByLibrary.simpleMessage("Use fingerprint"),

@@ -76,6 +76,7 @@ Future<void> initialService()async {
   await ScreenUtil.ensureScreenSize();
 
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
