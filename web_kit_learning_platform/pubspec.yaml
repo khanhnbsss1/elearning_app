@@ -135,6 +135,7 @@ dependencies:
   universal_io: ^2.2.2
   file: ^7.0.0
   just_audio: ^0.9.39
+  syncfusion_flutter_datagrid: ^26.1.42
 dependency_overrides:
   file_picker: ^8.0.6
  # google_maps_flutter: ^2.7.0

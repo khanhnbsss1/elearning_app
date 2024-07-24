@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import '../../../../controller/ui/add_course_controller.dart';
 import '../../../../helpers/utils/ui_mixins.dart';
 import '../../../../helpers/widgets/my_spacing.dart';
 import '../../../../helpers/widgets/my_text.dart';
 import '../../../../helpers/widgets/my_text_style.dart';
-import '../../../../services/apis/course/add_course_request.dart';
 import 'course_mode.dart';
 
 class AddLectures extends StatefulWidget {
@@ -339,7 +339,6 @@ class _AddLecturesState extends State<AddLectures>
   void _addLectureDialog({
     required int subjectIndex,
   }) {
-    FilePickerResult? result;
     final formKey = GlobalKey<FormState>();
     final lectureNameController = TextEditingController();
     final lectureLinkController = TextEditingController();
@@ -436,8 +435,6 @@ class _AddLecturesState extends State<AddLectures>
                   Expanded(flex: 7, child: ModeOptionWidget(mode: controller.basicValidator.getController('course_mode')?.text,
                     onModeChanged: (value) {
                     lectureModeController.text = value!;
-                    print('aaaaaaaaaaaaaaa');
-                    print(lectureModeController.text);
                   },
                     onPaymentChanged: (int? value) {
                     },

@@ -33,64 +33,116 @@ class CourseInfo {
   int? id;
   String? name;
   String? image;
-  String? producerName;
   int? totalLectures;
   int? totalSubjects;
+  String? producerName;
   String? language;
+  String? introduction;
+  String? infoObj;
+  String? infoResult;
+  String? dayFrom;
+  String? dayTo;
   int? payment;
   String? createdAt;
-  String? mode;
   String? updatedAt;
+  String? createdBy;
+  String? updatedBy;
   int? ratePoint;
-  String? introduction;
-  String? categoryName;
+  String? durian;
+  String? videoPreview;
+  String? courseMode;
   String? gradeName;
-  int? gradeId;
   int? categoryId;
   int? isStandard;
-  List<String>? tags;
+  String? categoryName;
+  String? typeName;
+  int? isActive;
+  List<Lectures>? lectures;
+  List<Tags>? tags;
+  String? accompanyCourse;
 
   CourseInfo(
       {this.id,
         this.name,
         this.image,
-        this.producerName,
         this.totalLectures,
         this.totalSubjects,
+        this.producerName,
         this.language,
+        this.introduction,
+        this.infoObj,
+        this.infoResult,
+        this.dayFrom,
+        this.dayTo,
         this.payment,
         this.createdAt,
-        this.mode,
         this.updatedAt,
+        this.createdBy,
+        this.updatedBy,
         this.ratePoint,
-        this.introduction,
-        this.categoryName,
+        this.durian,
+        this.videoPreview,
+        this.courseMode,
         this.gradeName,
-        this.gradeId,
         this.categoryId,
         this.isStandard,
-        this.tags});
+        this.categoryName,
+        this.typeName,
+        this.isActive,
+        this.lectures,
+        this.tags,
+        this.accompanyCourse,
+      });
 
   CourseInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     image = json['image'];
-    producerName = json['producer_name'];
     totalLectures = json['total_lectures'];
     totalSubjects = json['total_subjects'];
+    producerName = json['producer_name'];
     language = json['language'];
+    introduction = json['introduction'];
+    infoObj = json['info_obj'];
+    infoResult = json['info_result'];
+    dayFrom = json['day_from'];
+    dayTo = json['day_to'];
     payment = json['payment'];
     createdAt = json['created_at'];
-    mode = json['mode'];
     updatedAt = json['updated_at'];
+    createdBy = json['created_by'];
+    updatedBy = json['updated_by'];
     ratePoint = json['rate_point'];
-    introduction = json['introduction'];
-    categoryName = json['category_name'];
+    durian = json['durian'];
+    videoPreview = json['video_preview'];
+    courseMode = json['course_mode'];
     gradeName = json['grade_name'];
-    gradeId = json['grade_id'];
     categoryId = json['category_id'];
     isStandard = json['is_standard'];
-    tags = json['tags'].cast<String>();
+    categoryName = json['category_name'];
+    typeName = json['type_name'];
+    isActive = json['is_active'];
+    accompanyCourse = json['accompany_course'];
+    tags = [];
+/*    if (json['tags'] != null) {
+      tags = <Tags>[];
+      json['tags'].forEach((v) {
+        tags?.add(new Tags.fromJson(v));
+      });
+    }*/
+    lectures=[];
+    if (json['lectures'] != null) {
+      lectures = <Lectures>[];
+      json['lectures'].forEach((v) {
+        lectures?.add(new Lectures.fromJson(v));
+      });
+    }
+    // if (json['tags'] != null) {
+    //   tags = <Tags>[];
+    //   json['tags'].forEach((v) {
+    //     tags!.add(new Tags.fromJson(v));
+    //   });
+    // }
   }
 
   Map<String, dynamic> toJson() {
@@ -98,22 +150,95 @@ class CourseInfo {
     data['id'] = id;
     data['name'] = name;
     data['image'] = image;
-    data['producer_name'] = producerName;
     data['total_lectures'] = totalLectures;
     data['total_subjects'] = totalSubjects;
+    data['producer_name'] = producerName;
     data['language'] = language;
+    data['introduction'] = introduction;
+    data['info_obj'] = infoObj;
+    data['info_result'] = infoResult;
+    data['day_from'] = dayFrom;
+    data['day_to'] = dayTo;
     data['payment'] = payment;
     data['created_at'] = createdAt;
-    data['mode'] = mode;
     data['updated_at'] = updatedAt;
+    data['created_by'] = createdBy;
+    data['updated_by'] = updatedBy;
     data['rate_point'] = ratePoint;
-    data['introduction'] = introduction;
-    data['category_name'] = categoryName;
+    data['durian'] = durian;
+    data['video_preview'] = videoPreview;
+    data['course_mode'] = courseMode;
     data['grade_name'] = gradeName;
-    data['grade_id'] = gradeId;
     data['category_id'] = categoryId;
     data['is_standard'] = isStandard;
-    data['tags'] = tags;
+    data['category_name'] = categoryName;
+    data['type_name'] = typeName;
+    data['is_active'] = isActive;
+    data['accompany_course'] = accompanyCourse;
+    //data['tags'] = tags;
+    if (lectures != null) {
+      data['lectures'] = (lectures??[]).map((v) => v.toJson()).toList();
+    }
+    if (tags != null) {
+       data['tags'] = (tags??[]).map((v) => v.toJson()).toList();
+     }
+    return data;
+  }
+}
+
+class Lectures {
+  int? id;
+  String? subName;
+  String? lectureName;
+  String? lectureLink;
+  String? lectureMode;
+  String? document;
+
+  Lectures(
+      {this.id,
+        this.subName,
+        this.lectureName,
+        this.lectureLink,
+        this.lectureMode,
+        this.document
+      });
+
+  Lectures.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    subName = json['sub_name'];
+    lectureName = json['lecture_name'];
+    lectureLink = json['lecture_link'];
+    lectureMode = json['lecture_mode'];
+    document = json['document'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['sub_name'] = subName;
+    data['lecture_name'] = lectureName;
+    data['lecture_link'] = lectureLink;
+    data['lecture_mode'] = lectureMode;
+    data['document'] = document;
+    return data;
+  }
+}
+
+class Tags {
+  int? id;
+  String? name;
+
+  Tags({this.id, this.name});
+
+  Tags.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
     return data;
   }
 }

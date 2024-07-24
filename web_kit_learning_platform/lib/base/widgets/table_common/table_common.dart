@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import '../../base.export.dart';
-import '../no_data/no_data.dart';
 import '../scroll/custom_single_child_scroll_view.dart';
 import 'animation/onhover_widget.dart';
 import 'bloc/table_common_bloc.dart';
@@ -208,7 +207,7 @@ abstract class TableCommon extends StatelessWidget {
     for(String key in initColumnInfo.keys)
       {
 
-        String columnName =  L10nX.of(buildContext!).getStringByKey(key);
+        String columnName =  L10nX().getStringByKey(key);
         if(columnName =='Transalate missing key')
           {
             columnName = key;

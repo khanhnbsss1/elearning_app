@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/controller/my_controller.dart';
-
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
-import 'package:webkit/helpers/widgets/my_validators.dart';
-import 'package:webkit/services/apis/auth/register/models/register_request.dart';
-import 'package:webkit/services/apis/auth/register/register_with_phone_api.dart';
-import 'package:webkit/services/apis/course/add_course_request.dart';
 import 'package:webkit/services/apis/course/course_list/add_course_api.dart';
-import 'package:webkit/services/apis/course/course_list/course_api.dart';
+import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 
 class AddCourseController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
@@ -188,7 +180,7 @@ class AddCourseController extends MyController {
 
     // print(tagsString);
 
-    AddCourseRequest addCourseRequest = AddCourseRequest(
+    CourseInfo addCourseRequest = CourseInfo(
       id: int.parse(basicValidator.getController('id')?.text ?? '0'),
       name: basicValidator.getController('name')!.text,
       image: basicValidator.getController('image')?.text ?? "",
@@ -215,7 +207,7 @@ class AddCourseController extends MyController {
       infoResult: basicValidator.getController('info_result')?.text,
       isActive: int.parse(basicValidator.getController('is_active')?.text ?? '0'),
       accompanyCourse: basicValidator.getController('accompany_course')?.text ?? '',
-      tags: basicValidator.getController('tags')?.text ?? '',
+      //tags: basicValidator.getController('tags')?.text ?? '',
       // lectures: lectures,
     );
     // print(addCourseRequest.toString());

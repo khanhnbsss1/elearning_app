@@ -40,6 +40,7 @@ import 'package:webkit/views/forms/form_mask.dart';
 import 'package:webkit/views/forms/quill_editor.dart';
 import 'package:webkit/views/forms/validation.dart';
 import 'package:webkit/views/forms/wizard.dart';
+import 'package:webkit/views/lessson/lesson_list/lesson_list.dart';
 import 'package:webkit/views/other/basic_table.dart';
 import 'package:webkit/views/other/fl_chart_screen.dart';
 import 'package:webkit/views/other/google_map.dart';
@@ -103,7 +104,11 @@ getPageRoute() {
         name: Routes.vocabularyList,
         page: () =>  VocabularyList(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
-    
+    ///--------------- Course ---------------///
+    GetPage(
+        name: Routes.lessonList,
+        page: () =>  LessonList(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]),
     GetPage(
         name: Routes.videoPlayer,
         page: () {

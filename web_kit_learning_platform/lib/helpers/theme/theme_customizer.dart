@@ -96,7 +96,10 @@ class ThemeCustomizer {
     instance.leftBarCondensed = !instance.leftBarCondensed;
     _notify();
   }
-
+  void toggleLeftBarCondensedByValue({bool? leftBarCondensed}) {
+    instance.leftBarCondensed = leftBarCondensed??!instance.leftBarCondensed;
+    _notify();
+  }
   ThemeCustomizer clone() {
     var tc = ThemeCustomizer();
     tc.theme = theme;

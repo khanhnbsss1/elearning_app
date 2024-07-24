@@ -44,6 +44,7 @@ class _CourseListState extends State<CourseList>
   late MemberListController controller;
   GlobalKey<FormState>? formKey = GlobalKey();
   ScrollController scrollController=ScrollController();
+  TextEditingController editingController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -84,10 +85,10 @@ class _CourseListState extends State<CourseList>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            state.courseType== CourseType.courseList?MyButton(
+                            state.courseType == CourseType.courseList?
+                            MyButton(
                               onTap: () {
-                                // CourseDetail().show(context);
-                                AddWords().show(context);
+                                CourseDetail().show(context);
                               },
                               elevation: 0,
                               padding: MySpacing.xy(12, 16),
@@ -108,30 +109,6 @@ class _CourseListState extends State<CourseList>
                                 ],
                               ),
                             ):SizedBox(),
-                            MyButton(
-                              onTap: () {
-                                CourseDetail().show(context);
-                                // AddWords().show(context);
-                              },
-                              elevation: 0,
-                              padding: MySpacing.xy(12, 16),
-                              backgroundColor: contentTheme.primary,
-                              borderRadiusAll: AppStyle.buttonRadius.medium,
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    LucideIcons.plusCircle,
-                                    color: contentTheme.light,
-                                    size: 16,
-                                  ),
-                                  MySpacing.width(16),
-                                  MyText.bodySmall(
-                                    "Add New",
-                                    color: contentTheme.onPrimary,
-                                  ),
-                                ],
-                              ),
-                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -150,6 +127,7 @@ class _CourseListState extends State<CourseList>
                                       onChanged: (value) {
                   
                                       },
+                                      controller: editingController,
                                       onFieldSubmitted: (value) {
                                         BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
                                       },
@@ -186,13 +164,17 @@ class _CourseListState extends State<CourseList>
                                   text: S.of(context).search,
                                   height: Dimens.size40,
                                   radius: Dimens.size16,
+                                  onTap: () {
+                                    BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(
+                                        searchCommonRequest: state.searchCommonRequest!.copyWith(keyword:editingController.text )));
+
+                                  },
                                 )
                               ],
                             ),
                           ],
                         ),
                       ),
-
                       myScreenMediaType.isMobile?
                       buildCourseList(state: state):
                       Expanded(child: buildCourseList(state: state)),
@@ -240,7 +222,9 @@ class _CourseListState extends State<CourseList>
     for (CourseInfo courseInfo in state.courseResponseModel?.content ?? []) {
       listOfCourse.add(CourseItemGridView(courseInfo: courseInfo,));
     }
-    switch (state.blocStatus){
+    
+    switch (state.blocStatus)
+    {
       case null:
         // TODO: Handle this case.
       case CourseStatus.initial:
@@ -262,7 +246,7 @@ class _CourseListState extends State<CourseList>
               scrollDirection: Axis.vertical,
               controller: scrollController,
               child: Wrap(
-                alignment: WrapAlignment.spaceBetween,
+                alignment: WrapAlignment.start,
                 crossAxisAlignment: WrapCrossAlignment.start,
                 runAlignment: WrapAlignment.spaceBetween,
                 children: listOfCourse,

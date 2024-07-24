@@ -27,9 +27,9 @@ class CourseItemGridView extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     notifier = Provider.of<ColorNotifier>(context, listen: true);
     return Container(
-      width: MediaQuery.of(context).size.width* (ResponsiveInfo.isPhone()?1:1/5),
+      width: MediaQuery.of(context).size.width* (ResponsiveInfo.isPhone()?1:1/6),
       constraints: BoxConstraints(
-        minWidth: 330,
+        minWidth: 350,
         maxWidth: 500
       ),
       child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 

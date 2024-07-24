@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
+import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/services/apis/words/add_words_api.dart';
 import 'package:webkit/services/apis/words/word_model.dart';
 
@@ -10,7 +11,9 @@ import 'my_controller.dart';
 
 class AddWordController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
-
+  MultipartFile? _audioFile;
+  VocabularyInfo ? vocabularyInfo;
+  AddWordController({this.vocabularyInfo});
   @override
   void onInit() {
     super.onInit();
@@ -18,46 +21,48 @@ class AddWordController extends MyController {
       'simplified',
       required: true,
       label: "Simplified",
-      controller: TextEditingController(),
+      controller: TextEditingController(text: vocabularyInfo?.simplified??""),
     );
     basicValidator.addField(
       'traditional',
       required: true,
       label: "Traditional",
-      controller: TextEditingController(),
+      controller: TextEditingController(text: vocabularyInfo?.traditional??""),
     );
     basicValidator.addField(
       'pinyin_tones',
       required: true,
       label: "Pinyin tones",
-      controller: TextEditingController(),
+      controller: TextEditingController(text: vocabularyInfo?.pinyinTones??""),
     );
     basicValidator.addField(
       'translation_vn',
       required: true,
       label: "Translation VN",
-      controller: TextEditingController(),
+      controller: TextEditingController(text: vocabularyInfo?.translationVn??""),
     );
     basicValidator.addField(
       'audio',
       required: true,
       label: 'Audio',
-      controller: TextEditingController(),
+      controller: TextEditingController(text: vocabularyInfo?.audio??""),
     );
     basicValidator.addField(
       'created_by',
       label: 'created_by',
       required: true,
+      controller: TextEditingController(text: vocabularyInfo?.createdBy ??""),
     );
   }
 
-  MultipartFile? _audioFile;
 
   void setAudioFile(MultipartFile file) {
     _audioFile = file;
   }
-
-  Future<void> onAddWord() async {
+  void setVocabularyInfo(VocabularyInfo ?vocabularyInfoInput) {
+    vocabularyInfo = vocabularyInfoInput;
+  }
+  Future<bool> onAddWord() async {
 
     WordInfo word = WordInfo(
       simplified: basicValidator.getController('simplified')?.text,
@@ -71,5 +76,6 @@ class AddWordController extends MyController {
     print('api called');
     print(basicValidator.getController('audio')?.text,);
     dynamic data = await addWordsApi.call();
+    return true;
   }
 }

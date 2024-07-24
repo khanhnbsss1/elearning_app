@@ -18,7 +18,6 @@ import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import 'package:webkit/views/course/course_detail/bloc/add_course_directory_bloc.dart';
 import '../../../controller/ui/add_course_controller.dart';
-import '../../../services/apis/course/add_course_request.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 import 'components/course_mode.dart';
 import 'components/lectures_detail.dart';

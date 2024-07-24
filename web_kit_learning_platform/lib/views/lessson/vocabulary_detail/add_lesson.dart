@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/theme/colors_app.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:webkit/controller/add_word_controller.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
+import '../../../base/theme/text_stype_constant.dart';
 import '../../../helpers/utils/ui_mixins.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
@@ -135,6 +137,7 @@ class _AddWordsState extends State<AddWords>
               SizedBox(
                 height: 12,
               ),
+
               // thêm từ mới
               Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -652,8 +655,8 @@ class _AddWordsState extends State<AddWords>
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          InkWell(
-                            onTap: () {
+                          TextButton(
+                            onPressed: () {
                               // nếu không có ví dụ nào thì sẽ thêm mới
                               if (exampleTextControllers.isEmpty) {
                                 setState(() {
@@ -712,7 +715,17 @@ class _AddWordsState extends State<AddWords>
                                 }
                               }
                             },
-                            child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,),
+                            style: TextButton.styleFrom(
+                                backgroundColor: notifier.redcolor,
+                                foregroundColor: Colors.white),
+                            child: Center(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: const [
+                                  Icon(Icons.add),
+                                ],
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -737,6 +750,7 @@ class _AddWordsState extends State<AddWords>
       }),
     );
   }
+
   Widget customTextFormField1({
     required String controller,
     required String label,

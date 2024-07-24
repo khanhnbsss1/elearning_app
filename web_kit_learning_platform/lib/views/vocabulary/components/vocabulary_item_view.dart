@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
@@ -11,6 +10,7 @@ class VocabularyItemView extends StatelessWidget {
     required this.vocabularyInfo,
   });
 
+  
   VocabularyInfo vocabularyInfo;
   late ColorNotifier notifier;
   @override

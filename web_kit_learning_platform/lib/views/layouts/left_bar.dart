@@ -235,475 +235,480 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     isCondensed: ThemeCustomizer().leftBarCondensed,
                     onPress: () {
                       setState(() {
-                        ThemeCustomizer().leftBarCondensed= !ThemeCustomizer().leftBarCondensed;
+                        ThemeCustomizer().leftBarCondensed= true;
+                      });
+                    },
+                  ),
+                  //----------------Bai hoc------------------//
+                  NavigationItem(
+                    iconData: Icons.edit_document,
+                    title: L10nX.getStr.lesson_list,
+                    route: Routes.lessonList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    onPress: () {
+                      setState(() {
+                        ThemeCustomizer().leftBarCondensed= true;
                       });
                     },
                   ),
                   //-----------------CALENDAR-----------------//
-                  NavigationItem(
-                    iconData: LucideIcons.calendarDays,
-                    title: L10nX.getStr.str_calendar,
-                    route: Routes.calenderRoute,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                  ),
-                  //-----------------Chat-----------------//
-                  NavigationItem(
-                    iconData: LucideIcons.messageSquare,
-                    title: L10nX.getStr.str_chat,
-                    route: Routes.uiChatRoute,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                  ),
-                  
-                  //-----------------LandingPage-----------------//
-                  MenuWidget(
-                    iconData: LucideIcons.planeLanding,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.landing_page,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      MenuItem(
+                      labelWidget(L10nX.getStr.other),
+                      NavigationItem(
+                        iconData: LucideIcons.calendarDays,
+                        title: L10nX.getStr.str_calendar,
+                        route: Routes.calenderRoute,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                      ),
+                      //-----------------Chat-----------------//
+                      NavigationItem(
+                        iconData: LucideIcons.messageSquare,
+                        title: L10nX.getStr.str_chat,
+                        route: Routes.uiChatRoute,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                      ),
+                      //-----------------LandingPage-----------------//
+                      MenuWidget(
+                        iconData: LucideIcons.planeLanding,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
                         title: L10nX.getStr.landing_page,
+                        children: [
+                          MenuItem(
+                            title: L10nX.getStr.landing_page,
+                            route:  Routes.uiLandingRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.landing_page,
+                            route:  Routes.landingPageRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                        ],
+                      ),
+                      //-----------------Login-----------------//
+                      MenuWidget(
+                        iconData: LucideIcons.logIn,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        title: L10nX.getStr.login,
+                        children: [
+                          MenuItem(
+                            title: L10nX.getStr.login,
+                            route:  Routes.lockedRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: "${L10nX.getStr.login}1",
+                            route:  Routes.loginRoute1,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                        ],
+                      ),
+                      //-----------------Contact-----------------//
+                      MenuWidget(
+                        iconData: LucideIcons.contact,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        title: L10nX.getStr.str_contacts,
+                        children: [
+                          MenuItem(
+                            title: L10nX.getStr.str_members,
+                            route:  Routes.contactsMembersRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.profile,
+                            route:  Routes.contactsProfileRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.str_edit_profile,
+                            route:  Routes.contactsEditProfileRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                        ],
+                      ),
+                      //-----------------CRM-----------------//
+                      MenuWidget(
+                        iconData: LucideIcons.users,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        title: L10nX.getStr.str_CRM,
+                        children: [
+                          MenuItem(
+                            title: L10nX.getStr.str_contacts,
+                            route:  Routes.crmContactsRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.str_opportunities,
+                            route:  Routes.crmOpportunitiesPathRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                        ],
+                      ),
+                      // -----------------Ecommerce-----------------//
+                      MenuWidget(
+                        iconData: LucideIcons.store,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        title: L10nX.getStr.ecommerce,
+                        children: [
+                          MenuItem(
+                            title: L10nX.getStr.products,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                            route:  Routes.appsEcommerceProductsRoute,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.add_product,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                            route:  Routes.appsEcommerceAddProductRoute,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.str_product_detail,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                            route:  Routes.appsEcommerceAddProductRoute,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.customers,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                            route:  Routes.appsEcommerceCustomersRoute,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.str_invoice,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                            route:  Routes.appsEcommerceInvoiceRoute,
+                          ),
+                        ],
+                      ),
+                      //-----------------File-----------------//
+                      MenuWidget(
+                        iconData: LucideIcons.folderPlus,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        title: "File",
+                        children: [
+                          MenuItem(
+                            title: L10nX.getStr.str_manager,
+                            route:  Routes.appsFilesRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.str_upload,
+                            route:  Routes.appsFileUploaderRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                        ],
+                      ),
+                      //-----------------Project-----------------//
+                      MenuWidget(
+                        iconData: LucideIcons.briefcase,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        title: L10nX.getStr.str_projects,
+                        children: [
+                          MenuItem(
+                            title: L10nX.getStr.str_project_list,
+                            route:  Routes.projectsProjectListRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.str_project_detail,
+                            route:  Routes.projectsProjectDetailRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.str_create_project,
+                            route:  Routes.projectsCreateProjectRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                        ],
+                      ),
+                      //-----------------KanBan-----------------//
+                      NavigationItem(
+                        iconData: LucideIcons.squareKanban,
+                        title: "Kanban",
+                        route:  Routes.kanbanRoute,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                      ),
+                      //-----------------NFT Dashboard-----------------//
+                      NavigationItem(
+                        iconData: LucideIcons.circleDollarSign,
+                        title: L10nX.getStr.str_NFT_dashboard,
+                        route: Routes.nFTDashboardRoute,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                      ),
+                      NavigationItem(
+                        iconData: LucideIcons.shoppingCart,
+                        title: L10nX.getStr.str_customer,
+                        route:  Routes.shoppingCustomerRoute,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                      ),
+                      NavigationItem(
+                        iconData: LucideIcons.dumbbell,
+                        title: L10nX.getStr.str_fitness,
+                        route:  Routes.fitnessRoute,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                      ),
+                      NavigationItem(
+                        iconData: LucideIcons.mailbox,
+                        title: L10nX.getStr.str_mailbox,
+                        route:  Routes.milaBoxRoute,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                      ),
+                      labelWidget(L10nX.getStr.pages),
+                      //-----------------Landing-----------------//
+                      NavigationItem(
+                        iconData: LucideIcons.presentation,
+                        title: L10nX.getStr.str_Landing,
                         route:  Routes.uiLandingRoute,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
-                      MenuItem(
-                        title: L10nX.getStr.landing_page,
-                        route:  Routes.landingPageRoute,
+                      //-----------------Auth-----------------//
+                      MenuWidget(
+                        iconData: LucideIcons.shieldAlert,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        title: L10nX.getStr.auth,
+                        children: [
+                          MenuItem(
+                            title: L10nX.getStr.login,
+                            route: Routes.loginRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.login,
+                            route:  Routes.loginRoute1,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.register,
+                            route:  Routes.signupRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.register,
+                            route:  Routes.signupRoute1,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.forgot_password,
+                            route:  Routes.forgotPasswordRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.forgot_password,
+                            route:  Routes.forgotPasswordRoute1,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.reset_password,
+                            route:  Routes.resetPasswordRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.reset_password,
+                            route:  Routes.resetPasswordRoute1,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.locked,
+                            route:  Routes.lockedRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.locked,
+                            route:  Routes.lockedRoute1,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                        ],
+                      ),
+                      //-----------------Error-----------------//
+                      MenuWidget(
+                        iconData: LucideIcons.alertCircle,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        title: 'Error',
+                        children: [
+                          MenuItem(
+                            title: "ERROR-404",
+                            route:  Routes.uiError404Route,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: "ERROR-500",
+                            route:  Routes.uiError500Route,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.str_coming_soon,
+                            route:  Routes.comingSoonRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.str_maintenance,
+                            route: Routes.maintenanceRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                        ],
+                      ),
+                      //-----------------Extra Pages-----------------//
+                      MenuWidget(
+                        iconData: LucideIcons.bookOpenCheck,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        title: L10nX.getStr.str_extra_pages,
+                        children: [
+                          MenuItem(
+                            title: L10nX.getStr.FAQs,
+                            route: Routes.faqsRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.str_pricing,
+                            route: Routes.pricingRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.str_timeLine,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                            route: Routes.timelineRoute,
+                          ),
+                        ],
+                      ),
+                      //-----------------Forms-----------------//
+                      MenuWidget(
+                        iconData: LucideIcons.formInput,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        title: L10nX.getStr.form,
+                        children: [
+                          MenuItem(
+                            title: L10nX.getStr.basic,
+                            route: Routes.formBasicRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.str_form_mask,
+                            route: Routes.formFormMaskRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.str_quill_editor,
+                            route: Routes.formQuillEditorRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.validation,
+                            route: Routes.formValidationRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.wizard,
+                            route: Routes.formWizardRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                        ],
+                      ),
+                      //-----------------UI Widget-----------------//
+                      MenuWidget(
+                        iconData: LucideIcons.layoutGrid,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        title: L10nX.getStr.widgets,
+                        children: [
+                          MenuItem(
+                            title: L10nX.getStr.buttons,
+                            route: Routes.uiButtonsRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.cards,
+                            route: Routes.uiCardsRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.tabs,
+                            route: Routes.uiTabsRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.dialogs,
+                            route: Routes.uiDialogsRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.carousels,
+                            route: Routes.uiCarouselsRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.str_drag_drop,
+                            route: Routes.uiDragDropRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: L10nX.getStr.notifications,
+                            route: Routes.uiNotificationRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                        ],
+                      ),
+                      NavigationItem(
+                        iconData: LucideIcons.file,
+                        title: L10nX.getStr.starter,
+                        route: Routes.starterRoute,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
+                      //-----------------Other-----------------//
+                      labelWidget(L10nX.getStr.other),
+                      NavigationItem(
+                        iconData: LucideIcons.table2,
+                        title: L10nX.getStr.basic_tables,
+                        route: Routes.otherBasicTablesRoute,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                      ),
+                      NavigationItem(
+                        iconData: LucideIcons.barChartBig,
+                        title: L10nX.getStr.syncfusion_charts,
+                        route: Routes.otherSyncfusionChartsRoute,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                      ),
+                      NavigationItem(
+                        iconData: LucideIcons.barChart,
+                        title: "fl_chart",
+                        route: Routes.otherFlChartRoute,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                      ),
+                      //-----------------Maps-----------------//
+                      MenuWidget(
+                        iconData: LucideIcons.map,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        title: L10nX.getStr.map,
+                        children: [
+                          MenuItem(
+                            title: "Sf Maps",
+                            route: Routes.mapsSfMapsRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                          MenuItem(
+                            title: "Google Maps",
+                            route: Routes.mapsGoogleMapsRoute,
+                            isCondensed: ThemeCustomizer().leftBarCondensed,
+                          ),
+                        ],
+                      ),
+                      MySpacing.height(16),
+                      if (!ThemeCustomizer().leftBarCondensed)
+                        Center(
+                          child: MyButton(
+                              borderRadiusAll: AppStyle.buttonRadius.small,
+                              elevation: 0,
+                              padding: MySpacing.xy(12, 16),
+                              onTap: () {
+                                UrlService.goToPurchase();
+                              },
+                              backgroundColor: theme.colorScheme.primary,
+                              child: MyText.labelMedium(
+                                L10nX.getStr.purchase_now,
+                                color: theme.colorScheme.onPrimary,
+                              )),
+                        ),
+                      MySpacing.height(32),
                     ],
-                  ),
-                  //-----------------Login-----------------//
-                  MenuWidget(
-                    iconData: LucideIcons.logIn,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.login,
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.login,
-                        route:  Routes.lockedRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: "${L10nX.getStr.login}1",
-                        route:  Routes.loginRoute1,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                    ],
-                  ),
-                  //-----------------Contact-----------------//
-                  MenuWidget(
-                    iconData: LucideIcons.contact,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.str_contacts,
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.str_members,
-                        route:  Routes.contactsMembersRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.profile,
-                        route:  Routes.contactsProfileRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.str_edit_profile,
-                        route:  Routes.contactsEditProfileRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                    ],
-                  ),
+                  )
 
-                  //-----------------CRM-----------------//
-                  MenuWidget(
-                    iconData: LucideIcons.users,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.str_CRM,
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.str_contacts,
-                        route:  Routes.crmContactsRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.str_opportunities,
-                        route:  Routes.crmOpportunitiesPathRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                    ],
-                  ),
-
-                  // -----------------Ecommerce-----------------//
-                  MenuWidget(
-                    iconData: LucideIcons.store,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.ecommerce,
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.products,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        route:  Routes.appsEcommerceProductsRoute,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.add_product,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        route:  Routes.appsEcommerceAddProductRoute,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.str_product_detail,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        route:  Routes.appsEcommerceAddProductRoute,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.customers,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        route:  Routes.appsEcommerceCustomersRoute,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.str_invoice,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        route:  Routes.appsEcommerceInvoiceRoute,
-                      ),
-                    ],
-                  ),
-                  //-----------------File-----------------//
-                  MenuWidget(
-                    iconData: LucideIcons.folderPlus,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: "File",
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.str_manager,
-                        route:  Routes.appsFilesRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.str_upload,
-                        route:  Routes.appsFileUploaderRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                    ],
-                  ),
-
-                  //-----------------Project-----------------//
-                  MenuWidget(
-                    iconData: LucideIcons.briefcase,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.str_projects,
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.str_project_list,
-                        route:  Routes.projectsProjectListRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.str_project_detail,
-                        route:  Routes.projectsProjectDetailRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.str_create_project,
-                        route:  Routes.projectsCreateProjectRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                    ],
-                  ),
-
-                  //-----------------KanBan-----------------//
-                  NavigationItem(
-                    iconData: LucideIcons.squareKanban,
-                    title: "Kanban",
-                    route:  Routes.kanbanRoute,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                  ),
-
-                  //-----------------NFT Dashboard-----------------//
-                  NavigationItem(
-                    iconData: LucideIcons.circleDollarSign,
-                    title: L10nX.getStr.str_NFT_dashboard,
-                    route: Routes.nFTDashboardRoute,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                  ),
-                  NavigationItem(
-                    iconData: LucideIcons.shoppingCart,
-                    title: L10nX.getStr.str_customer,
-                    route:  Routes.shoppingCustomerRoute,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                  ),
-                  NavigationItem(
-                    iconData: LucideIcons.dumbbell,
-                    title: L10nX.getStr.str_fitness,
-                    route:  Routes.fitnessRoute,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                  ),
-                  NavigationItem(
-                    iconData: LucideIcons.mailbox,
-                    title: L10nX.getStr.str_mailbox,
-                    route:  Routes.milaBoxRoute,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                  ),
-
-                  labelWidget(L10nX.getStr.pages),
-
-                  //-----------------Landing-----------------//
-                  NavigationItem(
-                    iconData: LucideIcons.presentation,
-                    title: L10nX.getStr.str_Landing,
-                    route:  Routes.uiLandingRoute,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                  ),
-
-                  //-----------------Auth-----------------//
-                  MenuWidget(
-                    iconData: LucideIcons.shieldAlert,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.auth,
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.login,
-                        route: Routes.loginRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.login,
-                        route:  Routes.loginRoute1,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.register,
-                        route:  Routes.signupRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.register,
-                        route:  Routes.signupRoute1,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.forgot_password,
-                        route:  Routes.forgotPasswordRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.forgot_password,
-                        route:  Routes.forgotPasswordRoute1,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.reset_password,
-                        route:  Routes.resetPasswordRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.reset_password,
-                        route:  Routes.resetPasswordRoute1,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.locked,
-                        route:  Routes.lockedRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.locked,
-                        route:  Routes.lockedRoute1,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                    ],
-                  ),
-
-                  //-----------------Error-----------------//
-                  MenuWidget(
-                    iconData: LucideIcons.alertCircle,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: 'Error',
-                    children: [
-                      MenuItem(
-                        title: "ERROR-404",
-                        route:  Routes.uiError404Route,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: "ERROR-500",
-                        route:  Routes.uiError500Route,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.str_coming_soon,
-                        route:  Routes.comingSoonRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.str_maintenance,
-                        route: Routes.maintenanceRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                    ],
-                  ),
-
-                  //-----------------Extra Pages-----------------//
-                  MenuWidget(
-                    iconData: LucideIcons.bookOpenCheck,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.str_extra_pages,
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.FAQs,
-                        route: Routes.faqsRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.str_pricing,
-                        route: Routes.pricingRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.str_timeLine,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        route: Routes.timelineRoute,
-                      ),
-                    ],
-                  ),
-
-                  //-----------------Forms-----------------//
-                  MenuWidget(
-                    iconData: LucideIcons.formInput,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.form,
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.basic,
-                        route: Routes.formBasicRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.str_form_mask,
-                        route: Routes.formFormMaskRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.str_quill_editor,
-                        route: Routes.formQuillEditorRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.validation,
-                        route: Routes.formValidationRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.wizard,
-                        route: Routes.formWizardRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                    ],
-                  ),
-                  //-----------------UI Widget-----------------//
-                  MenuWidget(
-                    iconData: LucideIcons.layoutGrid,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.widgets,
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.buttons,
-                        route: Routes.uiButtonsRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.cards,
-                        route: Routes.uiCardsRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.tabs,
-                        route: Routes.uiTabsRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.dialogs,
-                        route: Routes.uiDialogsRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.carousels,
-                        route: Routes.uiCarouselsRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.str_drag_drop,
-                        route: Routes.uiDragDropRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.notifications,
-                        route: Routes.uiNotificationRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                    ],
-                  ),
-
-                  NavigationItem(
-                    iconData: LucideIcons.file,
-                    title: L10nX.getStr.starter,
-                    route: Routes.starterRoute,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                  ),
-                  //-----------------Other-----------------//
-                  labelWidget(L10nX.getStr.other),
-                  NavigationItem(
-                    iconData: LucideIcons.table2,
-                    title: L10nX.getStr.basic_tables,
-                    route: Routes.otherBasicTablesRoute,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                  ),
-                  NavigationItem(
-                    iconData: LucideIcons.barChartBig,
-                    title: L10nX.getStr.syncfusion_charts,
-                    route: Routes.otherSyncfusionChartsRoute,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                  ),
-                  NavigationItem(
-                    iconData: LucideIcons.barChart,
-                    title: "fl_chart",
-                    route: Routes.otherFlChartRoute,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                  ),
-                  //-----------------Maps-----------------//
-                  MenuWidget(
-                    iconData: LucideIcons.map,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.map,
-                    children: [
-                      MenuItem(
-                        title: "Sf Maps",
-                        route: Routes.mapsSfMapsRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: "Google Maps",
-                        route: Routes.mapsGoogleMapsRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                    ],
-                  ),
-
-                  MySpacing.height(16),
-                  if (!ThemeCustomizer().leftBarCondensed)
-                    Center(
-                      child: MyButton(
-                          borderRadiusAll: AppStyle.buttonRadius.small,
-                          elevation: 0,
-                          padding: MySpacing.xy(12, 16),
-                          onTap: () {
-                            UrlService.goToPurchase();
-                          },
-                          backgroundColor: theme.colorScheme.primary,
-                          child: MyText.labelMedium(
-                            L10nX.getStr.purchase_now,
-                            color: theme.colorScheme.onPrimary,
-                          )),
-                    ),
-                  MySpacing.height(32),
                 ],
               ),
             ))
