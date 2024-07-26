@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/theme/colors_app.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:webkit/controller/add_word_controller.dart';
+import 'package:webkit/controller/ui/add_word_controller.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import '../../../base/theme/text_stype_constant.dart';

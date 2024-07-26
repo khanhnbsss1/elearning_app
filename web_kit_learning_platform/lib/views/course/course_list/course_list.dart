@@ -20,6 +20,7 @@ import 'package:webkit/views/vocabulary/vocabulary_detail/add_words.dart';
 import '../../../base/constant/dimens_constant.dart';
 import '../../../helpers/theme/app_style.dart';
 import '../../../helpers/widgets/course_item_grid_view.dart';
+import '../../../helpers/widgets/course_item_grid_view2.dart';
 import '../../../helpers/widgets/my_button.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text.dart';
@@ -85,6 +86,7 @@ class _CourseListState extends State<CourseList>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            SizedBox(width: 500,),
                             state.courseType == CourseType.courseList?
                             MyButton(
                               onTap: () {
@@ -220,7 +222,7 @@ class _CourseListState extends State<CourseList>
     List<Widget> listOfCourse = List.empty(growable: true);
 
     for (CourseInfo courseInfo in state.courseResponseModel?.content ?? []) {
-      listOfCourse.add(CourseItemGridView(courseInfo: courseInfo,));
+      listOfCourse.add(CourseItemGridView2(courseInfo: courseInfo,));
     }
     
     switch (state.blocStatus)

@@ -7,11 +7,11 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 
 class TagDropDown extends StatefulWidget {
-  final List<String?> tags;
+  final Set<String?> tags;
   final Function(List<String>) onAddTags;
   final Function(List<String>) onRemoveTags;
 
-  TagDropDown({required this.tags, required this.onAddTags, required this.onRemoveTags});
+  TagDropDown({required this.tags,required this.onAddTags,required this.onRemoveTags});
 
   @override
   _MyDropdownButtonState createState() => _MyDropdownButtonState();
@@ -42,7 +42,7 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                       prefixIcon: Icon(
                         LucideIcons.tag,
                         size: 20,
-                        // color: color,
+                        color: color,
                       ),
                       contentPadding: EdgeInsets.all(16),
                       isCollapsed: true,
@@ -57,7 +57,7 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                     onChanged: (String? value) {
                       setState(() {
                           selectedValues.add(value!);
-                          widget.onAddTags(selectedValues);
+                          widget.onAddTags!(selectedValues);
                       });
                     },
                     hint: Text('Select tags'),
@@ -79,7 +79,7 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                 onDeleted: () {
                   setState(() {
                     selectedValues.remove(tag);
-                    widget.onRemoveTags(selectedValues);
+                    widget.onRemoveTags!(selectedValues);
                   });
                 },
               ),

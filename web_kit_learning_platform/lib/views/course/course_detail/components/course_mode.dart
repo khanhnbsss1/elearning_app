@@ -15,10 +15,10 @@ class ModeOptionWidget extends StatefulWidget {
   final String? mode;
   final void Function(String?) onModeChanged;
   final void Function(int?) onPaymentChanged;
-  bool disablePremiumMode = false;
-  bool disablePayment = false;
+  bool? disablePremiumMode = false;
+  bool? disablePayment = false;
 
-  ModeOptionWidget({required this.mode, required this.onModeChanged, required this.onPaymentChanged,required this.disablePayment, required this.disablePremiumMode});
+  ModeOptionWidget({required this.mode,required this.onModeChanged,required this.onPaymentChanged,this.disablePayment,this.disablePremiumMode});
   @override
   _ModeOptionWidget createState() => _ModeOptionWidget();
 }
@@ -56,7 +56,7 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
                   onChanged: (String? value) {
                     setState(() {
                       _mode = value;
-                      widget.onModeChanged(value);
+                      widget.onModeChanged!(value);
                     });
                   },
                 ),
@@ -72,7 +72,8 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
                   onChanged: (String? value) {
                     setState(() {
                       _mode = value;
-                      widget.onModeChanged(value);
+                      print(value);
+                      widget.onModeChanged!(value);
                     });
                   },
                 ),
@@ -98,7 +99,7 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
                       border: OutlineInputBorder(),
                     ),
                     onChanged: (value){
-                      widget.onPaymentChanged(value as int?);
+                      widget.onPaymentChanged!(value as int?);
                     },
                   ),
                 ),

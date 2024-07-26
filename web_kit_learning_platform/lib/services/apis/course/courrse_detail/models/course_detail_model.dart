@@ -208,6 +208,7 @@ class LecturesInfo {
   int? courseId;
   String? lectureName;
   String? link;
+  String? docLink;
   String? mode;
   String? note;
   String? createdBy;
@@ -219,6 +220,7 @@ class LecturesInfo {
         this.lectureName,
         this.link,
         this.mode,
+        this.docLink,
         this.note,
         this.createdBy});
 
@@ -228,6 +230,7 @@ class LecturesInfo {
     courseId = json['course_id'];
     lectureName = json['lecture_name'];
     link = json['link'];
+    docLink = json['doc_link'];
     mode = json['mode'];
     note = json['note'];
     createdBy = json['created_by'];
@@ -240,6 +243,7 @@ class LecturesInfo {
     data['course_id'] = courseId;
     data['lecture_name'] = lectureName;
     data['link'] = link;
+    data['doc_link'] = docLink;
     data['mode'] = mode;
     data['note'] = note;
     data['created_by'] = createdBy;

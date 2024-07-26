@@ -7,7 +7,7 @@ import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabular
 import 'package:webkit/services/apis/words/add_words_api.dart';
 import 'package:webkit/services/apis/words/word_model.dart';
 
-import 'my_controller.dart';
+import '../my_controller.dart';
 
 class AddWordController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
