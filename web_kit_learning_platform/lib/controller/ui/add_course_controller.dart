@@ -17,6 +17,7 @@ class AddCourseController extends MyController {
   Map<int,String> listOfGradeNames = {};
   Map<int,String> listOfAccompanyCourses = {};
   Map<int,String> listOfTags = {};
+  Map<int,String> listOfDiscounts = {};
   @override
   void onInit() {
     super.onInit();
@@ -147,6 +148,21 @@ class AddCourseController extends MyController {
       label: 'Accompany course',
       controller: TextEditingController(),
     );
+    basicValidator.addField(
+      'payment_mode',
+      label: 'Payment',
+      controller: TextEditingController(text: "FREE"),
+    );
+    basicValidator.addField(
+      'payment_value',
+      label: 'PaymentValue',
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'payment_discount',
+      label: 'PaymentDiscount',
+      controller: TextEditingController(),
+    );
   }
 
   void onChangeCheckBox(bool? value) {
@@ -183,43 +199,46 @@ class AddCourseController extends MyController {
   Future<CourseInfo?> getCourseInfoFromUI({required CourseInfo courseInfo}) async {
     basicValidator.getController('accompany_course')!.text = getIdFromName(listOfAccompanyCourses, basicValidator.getController('accompany_course')!.text??"").toString();
    // basicValidator.getController('category_id')!.text = getIdFromName(listOfCategoryName, basicValidator.getController('category_name')!.text??"").toString();
-    basicValidator.getController('grade_name')!.text = getIdFromName(listOfGradeNames, basicValidator.getController('grade_name')!.text??"").toString();
     List<String>? tags =basicValidator.getController('tags')!.text.split(',');
     List<Tags> tagsList = [];
+    int? gradleId = getIdFromName(listOfGradeNames, basicValidator.getController('grade_name')!.text??"");
+    basicValidator.getController('grade_name')!.text = listOfGradeNames[getIdFromName(listOfGradeNames, basicValidator.getController('grade_name')!.text??"")]??"";
     UserProfile? userProfile = await UserManager().getUserProfile();
-    for(String tag in tags){
-      tagsList.add(Tags(name: tag, id: 0));
-    }
-    //List<int> tagIds = (tags??[]).map((tag) => getIdFromName(listOfTags, tag)).where((id) => id != null).cast<int>().toList();
-    //String tagIdsString = tagIds.join(',');
-   // basicValidator.getController('tags')?.text = tagIdsString;
+    for(int tagKey in listOfTags.keys)
+      {
+        if(tags.contains(listOfTags[tagKey]))
+          {
+            tagsList.add(Tags(name: listOfTags[tagKey], id: tagKey));
+          }
+      }
     CourseInfo addCourseRequest = courseInfo.copyWith(
-      id: int.parse(basicValidator.getController('id')?.text ?? '0'),
+      id: int.tryParse(basicValidator.getController('id')?.text ?? '0'),
       name: basicValidator.getController('name')!.text,
       image: basicValidator.getController('image')?.text ?? "",
-      totalLectures: int.parse(basicValidator.getController('total_lectures')?.text ?? '0'),
-      totalSubjects: int.parse(basicValidator.getController('total_subjects')?.text ?? '0'),
+      totalLectures: int.tryParse(basicValidator.getController('total_lectures')?.text ?? '0'),
+      totalSubjects: int.tryParse(basicValidator.getController('total_subjects')?.text ?? '0'),
       producerName: basicValidator.getController('producer_name')?.text,
       language: basicValidator.getController('language')!.text,
       introduction: basicValidator.getController('introduction')?.text,
-      payment: (basicValidator.getController('course_mode')?.text == 'FREE') ? 0 : int.parse(basicValidator.getController('payment')?.text ?? '0'),
-      ratePoint:
-          int.parse(basicValidator.getController('rate_point')?.text ?? '0'),
+      payment: (basicValidator.getController('payment_mode')?.text == 'FREE') ? 0 : int.tryParse(basicValidator.getController('payment_value')?.text ?? '0'),
+      ratePoint: int.tryParse(basicValidator.getController('rate_point')?.text ?? '0'),
       durian: basicValidator.getController('durian')!.text,
       courseMode: basicValidator.getController('course_mode')!.text,
       gradeName: basicValidator.getController('grade_name')?.text,
-      categoryId:
-          int.parse(basicValidator.getController('category_id')?.text ?? '0'),
-      isStandard: int.parse(basicValidator.getController('is_standard')!.text),
+      categoryId: int.tryParse(basicValidator.getController('category_id')?.text ?? '0'),
+      isStandard: int.tryParse(basicValidator.getController('is_standard')!.text),
       categoryName: basicValidator.getController('category_name')?.text,
       videoPreview: basicValidator.getController('video_preview')?.text,
       infoObj: basicValidator.getController('info_obj')?.text,
       infoResult: basicValidator.getController('info_result')?.text,
-      isActive: int.parse(basicValidator.getController('is_active')?.text ?? '0'),
+      isActive: int.tryParse(basicValidator.getController('is_active')?.text ?? '0'),
       accompanyCourse: basicValidator.getController('accompany_course')?.text ?? '',
+      
       tags: tagsList,
       createdBy: userProfile?.userName,
-      updatedBy: userProfile?.userName
+      updatedBy: userProfile?.userName,
+      gradeId: gradleId,
+      mode: basicValidator.getController('payment_mode')?.text??"FREE",
       //tags: basicValidator.getController('tags')?.text ?? '',
       // lectures: lectures,
     );

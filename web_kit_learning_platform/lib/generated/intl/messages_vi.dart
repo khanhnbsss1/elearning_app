@@ -346,7 +346,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Tăng trưởng dân số ở nhiều quốc gia"),
         "positions": MessageLookupByLibrary.simpleMessage("Vị trí"),
-        "premium_str": MessageLookupByLibrary.simpleMessage("CAO CẤP"),
+        "premium_str": MessageLookupByLibrary.simpleMessage("TRẢ PHÍ"),
         "presale_str": MessageLookupByLibrary.simpleMessage("Bán trước"),
         "prev": MessageLookupByLibrary.simpleMessage("Trước"),
         "preview_str": MessageLookupByLibrary.simpleMessage("Xem trước"),

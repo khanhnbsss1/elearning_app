@@ -13,6 +13,7 @@ class AddCourseApi extends BaseApiRequest {
   Future<dynamic> call() async {
     await getAuthorization();
     dynamic result = await postRequestAPI();
+    return result;
   }
 
   Future<void> getAuthorization() async {

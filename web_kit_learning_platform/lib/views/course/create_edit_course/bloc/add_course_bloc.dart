@@ -61,12 +61,57 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     state.controller?.basicValidator.getController('info_obj')?.text = state.courseInfo?.infoObj??'';
     state.controller?.basicValidator.getController('info_result')?.text = state.courseInfo?.infoResult??'';
     state.controller?.basicValidator.getController('accompany_course')?.text = state.courseInfo?.accompanyCourse??'';
-/*    if((courseInfo?.tags??[]).isNotEmpty)
-      {
-        controller?.listOfTags = (courseInfo?.tags??[]).last.toMapDropDown();
-      }*/
+
     GetAddCourseFilterApi addCourseFilterApi = GetAddCourseFilterApi();
     GetAddCourseFilterModel addCourseFilterModel = await addCourseFilterApi.call();
+    addCourseFilterModel.data?.forEach((data) {
+      switch (data.filterType) {
+        case 'CATEGORY':
+          data.subFilter!.where((e) => e.name != null).forEach((e) {
+            if (!state.controller!.listOfCategoryName.containsValue(e.name!)) {
+              state.controller!.listOfCategoryName[e.id!] = e.name!;
+            }
+          });
+          break;
+        case 'AUTHOR':
+          data.subFilter!.where((e) => e.name != null).forEach((e) {
+            if (!state.controller!.listOfProduceNames.containsValue(e.name!)) {
+              state.controller!.listOfProduceNames[e.id!] = e.name!;
+            }
+          });
+          break;
+        case 'GRADE':
+          data.subFilter!.where((e) => e.name != null).forEach((e) {
+            if (!state.controller!.listOfGradeNames.containsValue(e.name!)) {
+              state.controller!.listOfGradeNames[e.id!] = e.name!;
+            }
+          });
+          break;
+        case 'ACCOMPANY':
+          data.subFilter!.where((e) => e.name != null).forEach((e) {
+            if (!state.controller!.listOfAccompanyCourses.containsValue(e.name!)) {
+              state.controller!.listOfAccompanyCourses[e.id!] = e.name!;
+            }
+          });
+          break;
+        case 'TAG':
+          data.subFilter!.where((e) => e.name != null).forEach((e) {
+            if (!state.controller!.listOfTags.containsValue(e.name!)) {
+              state.controller!.listOfTags[e.id!] = e.name!;
+            }
+          });
+        case 'DISCOUNT':
+          data.subFilter!.where((e) => e.name != null).forEach((e) {
+            if (!state.controller!.listOfDiscounts.containsValue(e.name!)) {
+              state.controller!.listOfDiscounts[e.id!] = e.name!;
+            }
+          });
+          break;
+        default:
+          break;
+      }
+    });
+
     emit(state.copyWith(
         addCourseFilterModel: addCourseFilterModel,
         blocStatus:  AddCourseStatus.initial,
@@ -103,12 +148,17 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
       videoPreview: state.courseInfo?.videoPreview
     );
     AddCourseApi addCourseApi = AddCourseApi(addCourseRequest: courseInfo!);
-    dynamic data = addCourseApi.call();
+    dynamic data = await addCourseApi.call();
     MonitorLoading().dismiss();
     if(data.runtimeType==int)
     {
       courseInfo.id = data as int;
+      ToastUtils.showToastSuccess(L10nX.getStr.success);
     }
+    else
+      {
+
+      }
     emit(state.copyWith(
         blocStatus:  AddCourseStatus.onSubmitAdd,
       courseInfo: courseInfo
@@ -145,7 +195,7 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     dynamic data = await uploadFileApi.call();
     if(data.runtimeType == String && (data as String).isNotEmpty)
     {
-      state.courseInfo?.image = data;
+      state.courseInfo?.videoPreview = data;
     }
     emit(state.copyWith(
         blocStatus:  AddCourseStatus.onSubmitAdd

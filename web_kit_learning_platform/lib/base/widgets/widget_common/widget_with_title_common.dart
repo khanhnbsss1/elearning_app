@@ -211,7 +211,7 @@ class _WidgetWithRowTitleCommonState extends State<WidgetWithRowTitleCommon> {
                             widget.title!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: widget.titleStyle??TextStyleConstant.textStyleBlack14w400),
+                            style: widget.titleStyle??TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600)),
                       ),
                     ),
                     Gap(Dimens.size2),

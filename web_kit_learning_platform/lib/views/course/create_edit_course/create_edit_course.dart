@@ -196,7 +196,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
               Visibility(
                 visible: position >0 && state.courseInfo?.id != 0,
                 child: ActionButton1(
-                  text: L10nX.getStr.preview_str,
+                  text: L10nX.getStr.string_back,
                   onTap: () {
                     setState(() {
                       position = position-1;

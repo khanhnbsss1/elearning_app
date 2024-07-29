@@ -1,4 +1,5 @@
 
+import 'package:get/get.dart';
 import 'package:webkit/base/services/base_request/models/page_model.dart';
 
 class CourseResponseModel extends PageModel{
@@ -61,6 +62,7 @@ class CourseInfo {
   List<Tags>? tags;
   String? accompanyCourse;
   String? mode;
+  int? gradeId;
 
   CourseInfo(
       {this.id,
@@ -93,7 +95,8 @@ class CourseInfo {
         this.lectures,
         this.tags,
         this.accompanyCourse,
-        this.mode
+        this.mode,
+        this.gradeId
       });
 
   CourseInfo.initial(){
@@ -124,9 +127,10 @@ class CourseInfo {
     categoryName = "";
     typeName = "";
     isActive = 0;
-    accompanyCourse = "";
+    accompanyCourse = "0";
     tags = [];
     mode ="public";
+    gradeId=0;
   }
   CourseInfo copyWith({
     int? id,
@@ -159,7 +163,8 @@ class CourseInfo {
     List<Lectures>? lectures,
     List<Tags>? tags,
     String? accompanyCourse,
-    String? mode
+    String? mode,
+    int? gradeId
 }){
     return CourseInfo(
       id : id??this.id,
@@ -193,7 +198,7 @@ class CourseInfo {
       tags : tags ??this.tags,
       lectures:lectures??this.lectures,
       mode:mode??this.mode,
-
+      gradeId:gradeId??this.gradeId,
     );
   
   }
@@ -262,7 +267,7 @@ class CourseInfo {
     isActive = json['is_active'];
     accompanyCourse = json['accompany_course'];
     mode = json['mode'];
-
+    gradeId = json['grade_id'];
     tags = [];
 /*    if (json['tags'] != null) {
       tags = <Tags>[];
@@ -277,56 +282,54 @@ class CourseInfo {
         lectures?.add(new Lectures.fromJson(v));
       });
     }
-    // if (json['tags'] != null) {
-    //   tags = <Tags>[];
-    //   json['tags'].forEach((v) {
-    //     tags!.add(new Tags.fromJson(v));
-    //   });
-    // }
+
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id != 0?id:0;
-    data['name'] = name;
-    data['image'] = image;
-    data['total_lectures'] = totalLectures;
-    data['total_subjects'] = totalSubjects;
-    data['producer_name'] = producerName;
-    data['language'] = language;
-    data['introduction'] = introduction;
-    data['info_obj'] = infoObj;
-    data['info_result'] = infoResult;
-    data['day_from'] = dayFrom;
-    data['day_to'] = dayTo;
-    data['payment'] = payment;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    data['created_by'] = createdBy;
-    data['updated_by'] = updatedBy;
-    data['rate_point'] = ratePoint;
-    data['durian'] = durian;
-    data['video_preview'] = videoPreview;
-    data['course_mode'] = courseMode;
-    data['grade_name'] = gradeName;
-    data['category_id'] = categoryId;
-    data['is_standard'] = isStandard;
-    data['category_name'] = categoryName;
-    data['type_name'] = typeName;
-    data['is_active'] = isActive;
-    data['accompany_course'] = accompanyCourse;
-    data['mode'] = mode;
-
+    data['name'] = name??"";
+    data['image'] = image??"";
+    data['total_lectures'] = totalLectures??0;
+    data['total_subjects'] = totalSubjects??0;
+    data['producer_name'] = producerName??"";
+    data['language'] = language??"";
+    data['introduction'] = introduction??"";
+    data['info_obj'] = infoObj??"";
+    data['info_result'] = infoResult??"";
+    data['day_from'] = dayFrom??"";
+    data['day_to'] = dayTo??"";
+    data['payment'] = payment??"";
+    data['created_at'] = createdAt??"";
+    data['updated_at'] = updatedAt??"";
+    data['created_by'] = createdBy??"";
+    data['updated_by'] = updatedBy??"";
+    data['rate_point'] = ratePoint??0;
+    data['durian'] = durian??"";
+    data['video_preview'] = videoPreview??"";
+    data['course_mode'] = courseMode??"";
+    data['grade_name'] = gradeName??"";
+    data['category_id'] = categoryId??0;
+    data['is_standard'] = isStandard??0;
+    data['category_name'] = categoryName??"";
+    data['type_name'] = typeName??"";
+    data['is_active'] = isActive??0;
+    data['accompany_course'] = accompanyCourse??"";
+    data['mode'] = mode??"FREE";
+    data['grade_id'] = gradeId??0;
+    
     //data['tags'] = tags;
     if (lectures != null) {
       data['lectures'] = (lectures??[]).map((v) => v.toJson()).toList();
     }
     if (tags != null) {
-       data['tags'] = (tags??[]).map((v) => v.toJsonString()).toList().toString();
+      String tagsStr = '';
+      for(Tags tags in tags??[])
+        {
+          tagsStr += '${tags.id},'; 
+        }
+       data['tags'] = tagsStr.replaceFirst(',', '',tagsStr.length-1);
      }
-    data.removeWhere((key, value) {
-      return value==null;
-    },);
     return data;
   }
 }
@@ -386,11 +389,11 @@ class Tags {
     data['name'] = name;
     return data;
   }
-  String toJsonString() {
+  int toJsonString() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
-    return data['name'];
+    return data['id'];
   }
 
   Map<int, String> toMapDropDown() {
