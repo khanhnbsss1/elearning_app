@@ -3,8 +3,8 @@ class CommonEnviroment {
 }
 
 const Map<DOMAIN_TYPE, String> LIVE_DOMAIN = {
-   //DOMAIN_TYPE.MAIN: "http://192.168.0.47:8989/api/",
-  DOMAIN_TYPE.MAIN: "https://984a-118-70-125-12.ngrok-free.app/api/",
+  DOMAIN_TYPE.MAIN: "http://192.168.0.47:8989/api/",
+ // DOMAIN_TYPE.MAIN: "https://984a-118-70-125-12.ngrok-free.app/api/",
   DOMAIN_TYPE.PAYMENT: "https://navitrack.fft.com.vn:8899/api/",
 };
 
@@ -45,6 +45,7 @@ enum SERVICE_TYPE {
   LandingPages,
   NONE,
   Vocabulary,
+  Storage
 }
 
 const Map<SERVICE_TYPE, String> SERVICE = {
@@ -55,5 +56,7 @@ const Map<SERVICE_TYPE, String> SERVICE = {
   SERVICE_TYPE.VOCABULARY: "Vocabulary",
   SERVICE_TYPE.LandingPages: "LandingPages",
   SERVICE_TYPE.NONE: "",
-  SERVICE_TYPE.Vocabulary: "Vocabulary"
+  SERVICE_TYPE.Vocabulary: "Vocabulary",
+  SERVICE_TYPE.Storage: "Storage"
+
 };

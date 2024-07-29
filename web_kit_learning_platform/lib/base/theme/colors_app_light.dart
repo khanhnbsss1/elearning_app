@@ -37,6 +37,8 @@ class ColorLightConst{
 
   static Color colorHintTextSearch =  blackColor45;
   static Color colorIconGrays =  Colors.black87;
+  static Color colorIconRed =  mainColor.withOpacity(0.6);
+
   static Color bgToastSuccess = const Color(0xFFE9F7F0);
   static Color bgToastError = const Color(0xFFFFE8E7);
   static Color bgToastDangerous = const Color(0xFFFFF3E9);
@@ -104,7 +106,8 @@ class ColorLightConst{
           bgSettingButtonColor =  Colors.white;
           bgDialogColor = const Color(0xfffaf7f7);
           bgSelectButtonColor = const Color(0xFFE7E7E7);
-          
+          colorIconRed =  mainColor.withOpacity(0.6);
+
           colorLinear4 = const Color(0xFF36D1DC);
           colorLinear5 = const Color(0xFF15CFDC);
           colorLinear6 = const Color(0xFF5B86E5);

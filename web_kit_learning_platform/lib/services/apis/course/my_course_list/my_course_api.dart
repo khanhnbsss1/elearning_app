@@ -6,7 +6,6 @@ import 'package:webkit/base/services/base_request/EnumCommon.dart';
 import 'package:webkit/base/services/base_request/apiName.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 
-import '../../../../base/services/base_request/models/response_error_objects.dart';
 import '../course_list/models/course_models.dart';
 
 class MyCourseApi extends BaseApiRequest {

@@ -4,7 +4,8 @@ enum VocabularyStatus {
   initial,
   onLoading,
   onSearchByParams,
-  onLoadEnd
+  onLoadEnd,
+  onSelectWord
 }
 enum VocabularyType{
   vocabularyList,

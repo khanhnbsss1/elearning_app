@@ -26,14 +26,15 @@ class _FilterCoursePopupMenuState extends State<FilterCoursePopupMenu> {
       future: InstanceManager().getFilterCourse(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if(!snapshot.hasData) {
-          return Icon(Icons.filter_alt_outlined, size: Dimens.size30,);
+          return Icon(Icons.filter_alt_outlined, size: Dimens.size30,color: ColorConst.mainColor,);
         }
         courseFilterListInfo = snapshot.data as CourseFilterListInfo;
        return SizedBox(
          child: PopupMenuButton<CourseFilterInfo>(
            initialValue: selectedItem,
+            color: ColorConst.whiteColor,
             tooltip: "",
-            icon: Icon(Icons.filter_alt_outlined, size: Dimens.size30, color: ColorConst.colorIconGrays,),
+            icon: Icon(Icons.filter_alt_outlined, size: Dimens.size30, color: ColorConst.mainColor,),
            onSelected: (CourseFilterInfo item) {
            },
            itemBuilder: (context) {
@@ -84,6 +85,7 @@ class _FilterCoursePopupMenuState extends State<FilterCoursePopupMenu> {
                                 showMenu(
                                     context: context,
                                     useRootNavigator: true,
+                                    color: ColorConst.whiteColor,
                                     position: RelativeRect.fromLTRB(position.dx, position.dy, MediaQuery.of(context).size.width -position.dx, 0),
                                     items: getListSubFilterMenuItem(
                                       data: courseFilterInfo.subFilter??[],

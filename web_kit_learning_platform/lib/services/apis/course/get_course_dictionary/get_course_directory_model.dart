@@ -1,14 +1,14 @@
-class AddCourseFilterModel {
+class GetAddCourseFilterModel {
   String? datetime;
   String? errorCode;
   String? message;
   List<Filter>? data;
   bool? success;
 
-  AddCourseFilterModel(
+  GetAddCourseFilterModel(
       {this.datetime, this.errorCode, this.message, this.data, this.success});
 
-  AddCourseFilterModel.fromJson(dynamic json) {
+  GetAddCourseFilterModel.fromJson(dynamic json) {
       data = <Filter>[];
       json.forEach((v) {
         data!.add(new Filter.fromJson(v));

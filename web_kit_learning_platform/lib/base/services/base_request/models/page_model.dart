@@ -8,7 +8,7 @@ class PageModel{
     return pageIndex<1?1:pageIndex;
   }
   int getTotalPage(){
-    int totalPage = ((total??1)~/ (pageSize??1));
+    int totalPage = ((total??1)~/ ((pageSize??0)>0?pageSize!:1));
     return totalPage<1?1:totalPage;
   }
   int getTotalElement(){

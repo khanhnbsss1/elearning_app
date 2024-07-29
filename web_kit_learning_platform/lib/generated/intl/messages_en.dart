@@ -25,12 +25,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "Basic": MessageLookupByLibrary.simpleMessage("Basic"),
         "FAQs": MessageLookupByLibrary.simpleMessage("Faqs"),
         "Product": MessageLookupByLibrary.simpleMessage("Product"),
+        "accompany_course_str":
+            MessageLookupByLibrary.simpleMessage("Accompany course"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
         "account_text": MessageLookupByLibrary.simpleMessage("Account"),
         "action": MessageLookupByLibrary.simpleMessage("Action"),
+        "action_str": MessageLookupByLibrary.simpleMessage("Action"),
         "actions": MessageLookupByLibrary.simpleMessage("Actions"),
+        "add_discount_str":
+            MessageLookupByLibrary.simpleMessage("Add discount"),
+        "add_lectures_from_another_course_str":
+            MessageLookupByLibrary.simpleMessage(
+                "Add lectures from another course"),
         "add_product": MessageLookupByLibrary.simpleMessage("Add product"),
         "add_products": MessageLookupByLibrary.simpleMessage("Add products"),
+        "adjust_your_course_availability_date_str":
+            MessageLookupByLibrary.simpleMessage(
+                "Adjust your course availability date"),
         "alert": MessageLookupByLibrary.simpleMessage("Alert"),
         "animated": MessageLookupByLibrary.simpleMessage("Animated"),
         "app_address":
@@ -47,13 +58,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Are you sure, you want to delete history?"),
         "area_chart": MessageLookupByLibrary.simpleMessage("Area chart"),
+        "attack_link_str": MessageLookupByLibrary.simpleMessage("Attack link"),
         "auth": MessageLookupByLibrary.simpleMessage("Auth"),
         "authen_invalid": MessageLookupByLibrary.simpleMessage(
             "Username or password is incorrect"),
+        "author_str": MessageLookupByLibrary.simpleMessage("Author"),
         "average_sales_comparison":
             MessageLookupByLibrary.simpleMessage("Average sales comparison"),
         "back_to_log_in":
             MessageLookupByLibrary.simpleMessage("Back to log in"),
+        "background_image_str":
+            MessageLookupByLibrary.simpleMessage("Background image"),
         "background_indicator":
             MessageLookupByLibrary.simpleMessage("Background indicator"),
         "balance": MessageLookupByLibrary.simpleMessage("Balance"),
@@ -84,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cards": MessageLookupByLibrary.simpleMessage("Cards"),
         "carousels": MessageLookupByLibrary.simpleMessage("Carousels"),
         "category": MessageLookupByLibrary.simpleMessage("Category"),
+        "category_str": MessageLookupByLibrary.simpleMessage("Category"),
         "category_word": MessageLookupByLibrary.simpleMessage("Category"),
         "change_log": MessageLookupByLibrary.simpleMessage("Change log"),
         "change_password_text":
@@ -107,19 +123,31 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmation": MessageLookupByLibrary.simpleMessage("Confirmation?"),
         "contact": MessageLookupByLibrary.simpleMessage("Contact"),
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
+        "content_str": MessageLookupByLibrary.simpleMessage("Content"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "FFTSolution - Copyright 2022"),
+        "course_category_str":
+            MessageLookupByLibrary.simpleMessage("Course category"),
+        "course_create": MessageLookupByLibrary.simpleMessage("Create course"),
+        "course_delete": MessageLookupByLibrary.simpleMessage("Delete course"),
+        "course_edit": MessageLookupByLibrary.simpleMessage("Edit course"),
         "course_str": MessageLookupByLibrary.simpleMessage("Course"),
         "courses_list": MessageLookupByLibrary.simpleMessage("Course list"),
         "create_document":
             MessageLookupByLibrary.simpleMessage("Create Document"),
+        "create_lecture_str":
+            MessageLookupByLibrary.simpleMessage("Create lecture"),
         "create_product":
             MessageLookupByLibrary.simpleMessage("Create product"),
+        "create_quiz_str": MessageLookupByLibrary.simpleMessage("Create quiz"),
         "create_student":
             MessageLookupByLibrary.simpleMessage("Create student"),
         "create_teacher":
             MessageLookupByLibrary.simpleMessage("Create teacher"),
         "created_at": MessageLookupByLibrary.simpleMessage("Created at"),
+        "creating_a_detailed_pricing_plan_str":
+            MessageLookupByLibrary.simpleMessage(
+                "Creating a detailed pricing plan for your course requires considering various factors. Here’s a breakdown to help you structure your pricing"),
         "custom_indicator":
             MessageLookupByLibrary.simpleMessage("Custom indicator"),
         "customers": MessageLookupByLibrary.simpleMessage("Customers"),
@@ -143,12 +171,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Differences"),
         "differences_in_teaching_methods_3":
             MessageLookupByLibrary.simpleMessage(" in teaching methods"),
+        "discount_str": MessageLookupByLibrary.simpleMessage("Discount"),
         "document_list":
             MessageLookupByLibrary.simpleMessage("List of documents"),
         "document_str": MessageLookupByLibrary.simpleMessage("Document"),
+        "documents_str": MessageLookupByLibrary.simpleMessage("Documents"),
         "doughnut_chart":
             MessageLookupByLibrary.simpleMessage("Doughnut chart"),
         "download": MessageLookupByLibrary.simpleMessage("Download"),
+        "duration_str": MessageLookupByLibrary.simpleMessage("Duration"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("Ecommerce"),
         "elevated_button":
             MessageLookupByLibrary.simpleMessage("Elevated button"),
@@ -183,6 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "form": MessageLookupByLibrary.simpleMessage("Form"),
         "forms": MessageLookupByLibrary.simpleMessage("Forms"),
+        "free_str": MessageLookupByLibrary.simpleMessage("FREE"),
         "frequently_asked_questions":
             MessageLookupByLibrary.simpleMessage("Frequently asked questions"),
         "full_name": MessageLookupByLibrary.simpleMessage("Full name"),
@@ -192,11 +224,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "general": MessageLookupByLibrary.simpleMessage("GENERAL"),
         "google_map": MessageLookupByLibrary.simpleMessage("Google map"),
+        "grade_name_str": MessageLookupByLibrary.simpleMessage("Grade name"),
+        "grade_str": MessageLookupByLibrary.simpleMessage("Grade"),
         "header_popup_biometric": MessageLookupByLibrary.simpleMessage(
             "Authenticate your biometrics to log in"),
         "header_popup_fingerprint": MessageLookupByLibrary.simpleMessage(
             "Verify your fingerprint to log in"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "how_long_does_the_course_last_str":
+            MessageLookupByLibrary.simpleMessage(
+                "How long does the course last?"),
         "i_agree_with": MessageLookupByLibrary.simpleMessage("I agree with "),
         "i_am_teacher": MessageLookupByLibrary.simpleMessage("I am a teacher"),
         "i_haven_t_account":
@@ -204,6 +241,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "infinite": MessageLookupByLibrary.simpleMessage("Infinite"),
         "info": MessageLookupByLibrary.simpleMessage("Info"),
+        "introduction_str":
+            MessageLookupByLibrary.simpleMessage("Introduction"),
         "landing_page": MessageLookupByLibrary.simpleMessage("Landing page"),
         "language_text": MessageLookupByLibrary.simpleMessage("Language"),
         "large": MessageLookupByLibrary.simpleMessage("Large"),
@@ -211,6 +250,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "last_name": MessageLookupByLibrary.simpleMessage("Last name"),
         "last_order_at": MessageLookupByLibrary.simpleMessage("Last order at"),
         "last_week": MessageLookupByLibrary.simpleMessage("Last week"),
+        "lecture_link_str":
+            MessageLookupByLibrary.simpleMessage("Lecture link"),
+        "lecture_name_str":
+            MessageLookupByLibrary.simpleMessage("Lecture name"),
         "left": MessageLookupByLibrary.simpleMessage("Left"),
         "left_dialog": MessageLookupByLibrary.simpleMessage("Left dialog"),
         "lesson_list": MessageLookupByLibrary.simpleMessage("Lesson list"),
@@ -294,6 +337,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "overview": MessageLookupByLibrary.simpleMessage("Overview"),
         "pages": MessageLookupByLibrary.simpleMessage("Pages"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "payment_str": MessageLookupByLibrary.simpleMessage("Payment"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone number"),
         "phone_number_text":
@@ -305,9 +349,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Population growth of various countries"),
         "positions": MessageLookupByLibrary.simpleMessage("Positions"),
+        "premium_str": MessageLookupByLibrary.simpleMessage("PREMIUM"),
+        "presale_str": MessageLookupByLibrary.simpleMessage("Presale"),
         "prev": MessageLookupByLibrary.simpleMessage("Prev"),
+        "preview_str": MessageLookupByLibrary.simpleMessage("Preview"),
         "price": MessageLookupByLibrary.simpleMessage("Price"),
         "pricing": MessageLookupByLibrary.simpleMessage("Pricing"),
+        "pricing_plan_str":
+            MessageLookupByLibrary.simpleMessage("Pricing plan"),
         "primary": MessageLookupByLibrary.simpleMessage("Primary"),
         "product": MessageLookupByLibrary.simpleMessage("Product"),
         "product_a": MessageLookupByLibrary.simpleMessage("Product a"),
@@ -342,8 +391,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sales by sales person"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "save_account": MessageLookupByLibrary.simpleMessage("Save account"),
+        "save_update_str": MessageLookupByLibrary.simpleMessage("Save update"),
         "scan_code": MessageLookupByLibrary.simpleMessage("Scan code"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
+        "search_tags_str": MessageLookupByLibrary.simpleMessage("Search tags"),
         "secondary": MessageLookupByLibrary.simpleMessage("Secondary"),
         "security_text": MessageLookupByLibrary.simpleMessage("Security"),
         "select_date": MessageLookupByLibrary.simpleMessage("Select date"),
@@ -365,6 +416,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "show": MessageLookupByLibrary.simpleMessage("Show"),
         "show_close_icon":
             MessageLookupByLibrary.simpleMessage("Show close icon"),
+        "show_course_in_landing_page_str":
+            MessageLookupByLibrary.simpleMessage("Show course in Landing page"),
         "show_hide_items":
             MessageLookupByLibrary.simpleMessage("Hide and show items"),
         "show_leading_icon":
@@ -391,6 +444,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Soft rounded button"),
         "sort_list": MessageLookupByLibrary.simpleMessage("Sort List"),
         "standard": MessageLookupByLibrary.simpleMessage("Standard"),
+        "standard_str": MessageLookupByLibrary.simpleMessage("Standard"),
         "starter": MessageLookupByLibrary.simpleMessage("Starter"),
         "static": MessageLookupByLibrary.simpleMessage("Static"),
         "static_dialog": MessageLookupByLibrary.simpleMessage("Static dialog"),
@@ -471,6 +525,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "style_guide": MessageLookupByLibrary.simpleMessage("Style guide"),
         "subcribe_to_our_news_letter":
             MessageLookupByLibrary.simpleMessage("Subcribe to our newsletter"),
+        "subject_name_str":
+            MessageLookupByLibrary.simpleMessage("Subject name"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "subtitle_is_more_useful":
             MessageLookupByLibrary.simpleMessage("Subtitle is more useful"),
@@ -540,6 +596,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "ui": MessageLookupByLibrary.simpleMessage("UI"),
         "unknown_str": MessageLookupByLibrary.simpleMessage("Unknown"),
         "unlock": MessageLookupByLibrary.simpleMessage("Unlock"),
+        "upload_image_str":
+            MessageLookupByLibrary.simpleMessage("Upload image"),
+        "upload_youtube_url_str":
+            MessageLookupByLibrary.simpleMessage("Upload youtube url"),
+        "uploading_file":
+            MessageLookupByLibrary.simpleMessage("Uploading file ...."),
         "use_fingerprint_text":
             MessageLookupByLibrary.simpleMessage("Use fingerprint"),
         "user_create": MessageLookupByLibrary.simpleMessage("Create user"),
@@ -555,6 +617,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vehicle Tracking"),
         "very_high": MessageLookupByLibrary.simpleMessage("Very high"),
         "video_player": MessageLookupByLibrary.simpleMessage("Video player"),
+        "video_preview_str":
+            MessageLookupByLibrary.simpleMessage("Video preview"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "view_all": MessageLookupByLibrary.simpleMessage("View all"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
@@ -566,6 +630,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "website_visits":
             MessageLookupByLibrary.simpleMessage("Website visits"),
         "welcome_str": MessageLookupByLibrary.simpleMessage("Welcome to"),
+        "what_will_you_achieve_after_the_course_str":
+            MessageLookupByLibrary.simpleMessage(
+                "What will you achieve after the course? "),
         "who_this_course_is_for":
             MessageLookupByLibrary.simpleMessage("Who is this course for?"),
         "who_this_course_is_for_comment": MessageLookupByLibrary.simpleMessage(
@@ -628,6 +695,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Let\'s take a look at some achievements of YAX Chinese learning"),
         "widgets": MessageLookupByLibrary.simpleMessage("Widgets"),
         "wizard": MessageLookupByLibrary.simpleMessage("Wizard"),
+        "word_str": MessageLookupByLibrary.simpleMessage("Word"),
         "world_countries_details":
             MessageLookupByLibrary.simpleMessage("World countries details"),
         "you_do_have_an_account":

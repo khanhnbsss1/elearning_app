@@ -18,7 +18,8 @@ class VocabularyListBloc extends Bloc<VocabularyListEvent, VocabularyListState> 
     on<VocabularyListOnSearchByFilterEvent>(_onSearchByParams);
     on<VocabularyListOnSelectVocabularyEvent>((event, emit) async {
       emit(state.copyWith(
-          selectVocabularyInfo: event.selectVocabularyInfo
+          selectVocabularyInfo: event.selectVocabularyInfo,
+        blocStatus: VocabularyStatus.onSelectWord
       ));
     });
   }

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:hovering/hovering.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 
@@ -18,6 +19,7 @@ class ActionButton1 extends StatelessWidget {
   bool? enable;
   bool? enableLinearColor;
   EdgeInsetsGeometry? contentPadding;
+  Widget? preIcon;
   
   ActionButton1(
       {super.key,
@@ -32,11 +34,12 @@ class ActionButton1 extends StatelessWidget {
         this.borderWidth,
         this.enableLinearColor,
         this.contentPadding,
+        this.preIcon,
       this.enable}) {
     enableBgColor ??= ColorConst.buttonbgColor;
     textStype ??= TextStyleConstant.textStyleBlack16w600.copyWith(color: ColorConst.whiteColor);
     radius ??= Dimens.size22;
-    height ??= Dimens.size56;
+    height ??= Dimens.size45;
     enable ??= true;
     enableLinearColor??=false;
     
@@ -54,10 +57,8 @@ class ActionButton1 extends StatelessWidget {
       child: OnHoverWidget(
         builder: (bool isHovered) { 
           return Card(
-            elevation: 3,
-            shape: RoundedRectangleBorder(
-                borderRadius:
-                BorderRadius.circular(radius??Dimens.size5)),
+            elevation: 5,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius??Dimens.size5)),
             child: Container(
               height: height,
               width: width,
@@ -84,11 +85,24 @@ class ActionButton1 extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: contentPadding??EdgeInsets.symmetric(vertical: Dimens.size4, horizontal: Dimens.size10),
+                    padding: contentPadding??EdgeInsets.symmetric(vertical: Dimens.size4, horizontal: Dimens.size16),
                     child: Center(
-                      child: Text(
-                        text!,
-                        style: enable! ?textStype:textStype!.copyWith(color: textStype!.color!.withOpacity(0.5)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if(preIcon!=null)
+                            Row(
+                              children: [
+                                preIcon!,
+                                Gap(Dimens.size16)
+                              ],
+                            ),
+                          
+                          Text(
+                            text!,
+                            style: enable! ?textStype:textStype!.copyWith(color: textStype!.color!.withOpacity(0.5)),
+                          ),
+                        ],
                       ),
                     ),
                   ),

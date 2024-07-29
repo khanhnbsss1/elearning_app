@@ -239,7 +239,7 @@ class BaseApiRequest {
     return url;
   }
 
-  Future<void> setApiBody(Map<String, dynamic> bodyAdd) async {
+  Future<void> setApiBody(dynamic bodyAdd) async {
     requestBody!.addAll(bodyAdd);
   }
   Future<dynamic> postRequestAPI() async {
@@ -432,7 +432,7 @@ class BaseApiRequest {
         required String url,
         Options? option,
         Map<String, dynamic> params =const {},
-        Map<String, dynamic> body=const{}
+        dynamic body=const{}
       }) async {
     if(response.runtimeType == DioException)
     {

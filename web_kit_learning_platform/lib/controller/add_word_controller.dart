@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/services/apis/words/add_words_api.dart';
-import 'package:webkit/services/apis/words/word_model.dart';
+import 'package:webkit/services/apis/words/word_info.dart';
 
 import 'my_controller.dart';
 

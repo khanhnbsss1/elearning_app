@@ -107,10 +107,7 @@ class Layout extends StatelessWidget {
       // extendBodyBehindAppBar: true,
       // appBar: TopBar(
       drawer: LeftBar(),
-      body: SingleChildScrollView(
-        key: controller.scrollKey,
-        child: child,
-      ),
+      body: SingleChildScrollView(child: child),
     );
   }
 
@@ -123,7 +120,8 @@ class Layout extends StatelessWidget {
           
           Row(
             children: [
-              SizedBox(width: Dimens.size70,),
+              //SizedBox(width: Dimens.size70,),
+              LeftBar(),
               Expanded(
                 child: Stack(
                   children: [
@@ -146,7 +144,7 @@ class Layout extends StatelessWidget {
               ),
             ],
           ),
-          LeftBar(),
+         // LeftBar(),
         ],
       ),
     );

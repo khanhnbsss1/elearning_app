@@ -38,6 +38,7 @@ class ColorNightConst{
   static Color normalTextColorOnMainColor =  blackColor54;
   static Color colorHintTextSearch =  Colors.white;
   static Color colorIconGrays =  Colors.white;
+  static Color colorIconRed =  mainColor.withOpacity(0.6);
   static Color bgToastSuccess = const Color(0xFFE9F7F0);
   static Color bgToastError = const Color(0xFFFFE8E7);
   static Color bgToastDangerous = const Color(0xFFFFF3E9);
@@ -81,6 +82,7 @@ class ColorNightConst{
           mainColor = primaryColor;
           mainColorWithOpacity50 = mainColor.withOpacity(0.5);
           iconColor = const Color(0xF4930202);
+          
 
           buttonbgColor = primaryColor;
           homeBg =  const Color(0xF4FFF4F4);
@@ -110,6 +112,7 @@ class ColorNightConst{
           normalTextColorOnMainColor =  blackColor54;
           colorHintTextSearch =  Colors.white60;
           colorIconGrays =  Colors.white;
+          colorIconRed =  mainColor.withOpacity(0.6);
           bgToastSuccess = const Color(0xFFE9F7F0);
           bgToastError = const Color(0xFFFFE8E7);
           bgToastDangerous = const Color(0xFFFFF3E9);

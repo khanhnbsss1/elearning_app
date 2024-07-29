@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -131,22 +132,25 @@ class MyApp extends StatelessWidget {
             ScreenUtil.init(context);
             ResponsiveInfo().init(context);
             NavigationService.registerContext(context, update: true);
-            return Directionality(
-              textDirection: AppTheme.textDirection,
-              child: Overlay(
-                initialEntries: [
-                  OverlayEntry(builder: (context) {
-                    return Consumer<AppNotifier>(
-                        builder: (_, notifier, ___) {
-                          return SelectionArea (
+            return EasyLoading.init(builder: (context, child) {
+              return Directionality(
+                textDirection: AppTheme.textDirection,
+                child: Overlay(
+                  initialEntries: [
+                    OverlayEntry(builder: (context) {
+                      return Consumer<AppNotifier>(
+                          builder: (_, notifier, ___) {
+                            return SelectionArea (
                               //key: UniqueKey(),
-                              selectionControls: materialTextSelectionControls,
-                              child: child ?? Container());
-                        });
-                  })
-                ],
-              ),
-            );      
+                                selectionControls: materialTextSelectionControls,
+                                child: child ?? Container());
+                          });
+                    })
+                  ],
+                ),
+              );
+            },)(context,child);
+            
           },
           localizationsDelegates: const [
             S.delegate,

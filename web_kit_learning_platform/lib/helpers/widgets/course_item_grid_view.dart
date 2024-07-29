@@ -30,7 +30,7 @@ class CourseItemGridView extends StatelessWidget {
       width: MediaQuery.of(context).size.width* (ResponsiveInfo.isPhone()?1:1/6),
       constraints: BoxConstraints(
         minWidth: 350,
-        maxWidth: 500
+        //maxWidth: 500
       ),
       child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
         return  LayoutBuilder(builder: (context, constraints) {
@@ -70,27 +70,25 @@ class CourseItemGridView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          (courseInfo.image!.isNotEmpty)
-                              ? ClipRRect(
-                            borderRadius: BorderRadius.circular(16),
-                            child: Image.network(
-                              courseInfo.image!,
-                              fit: BoxFit.cover,
-                              width: constraints.maxWidth * 0.9, 
-                              height: constraints.maxWidth * 0.5
-                            ),
-                          )
-                              :
                           ClipRRect(
                             borderRadius: BorderRadius.circular(16),
-                            child: Image.network(
-                              'assets/deshboard/adventure/adventure5.png',
-                                fit: BoxFit.cover,
-                                width: constraints.maxWidth * 1,
-                                height: constraints.maxWidth * 0.5
-                              // width: constraints.maxWidth,
-                              // height: constraints.maxHeight
-                            ),
+                            child:
+                            Image.network(
+                                courseInfo.image!.isNotEmpty?
+                                courseInfo.image!:
+                                'assets/deshboard/adventure/adventure5.png',
+                                  fit: BoxFit.cover,
+                                  width: constraints.maxWidth * 0.9, 
+                                  height: constraints.maxWidth * 0.5,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.network(
+                                  'assets/deshboard/adventure/adventure5.png',
+                                  fit: BoxFit.cover,
+                                  width: constraints.maxWidth * 0.9,
+                                  height: constraints.maxWidth * 0.5,
+                                );
+                              },
+                                )
                           ),
                           SizedBox(height: 4,),
                           Text(

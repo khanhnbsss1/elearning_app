@@ -44,7 +44,9 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
   void initState() {
     super.initState();
     controller = Get.put(MemberListController());
-    ThemeCustomizer().toggleLeftBarCondensedByValue(leftBarCondensed: true);
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      ThemeCustomizer().toggleLeftBarCondensedByValue(leftBarCondensed: true);
+    });
   }
 
   int? page = 1;
@@ -63,24 +65,53 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
           switch (state.blocStatus) {
             case VocabularyStatus.initial:
               break;
+              // TODO: Handle this case.
+            case VocabularyStatus.onSelectWord:
+              {
+                if(ResponsiveInfo.isPhone())
+                {
+                  showGeneralDialog(
+                    context: context, 
+                    pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+                      return Material(
+                          child: Dialog(
+                            insetPadding: EdgeInsets.zero,
+                            child: SizedBox(
+                                height: MediaQuery.of(context).size.height/2,
+                                width: MediaQuery.of(context).size.width*0.95,
+                                child: buildVocabularyDetail(state: state)),
+                          ));
+                    },
+                  );
+                }
+              }
+              break;
             default:
               break;
+              // TODO: Handle this case.
           }
         },
         builder: (BuildContext context, state) {
           return MyResponsive(
             builder: (context , boxConstraints , myScreenMediaType ) {
-              return Layout(
-                  isScroll: false,
-                  padding: EdgeInsets.only(top: 35 + 16, bottom: 16),
-                  child: ListBodyCommon(
-                    minOfWidthOfListRatio: 0.1,
-                    maxOfWidthOfListRatio: 0.2,
-                    widthOfListRatio: 0.2,
-                    enableDragIcon: false,
-                    list: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType),
-                    body: buildVocabularyDetail(state: state),
-                  ));
+              if(!myScreenMediaType.isMobile)
+                {
+                  return Layout(
+                      isScroll: false,
+                      padding: EdgeInsets.only(top: 35 + 16, bottom: 16),
+                      child: ListBodyCommon(
+                        minOfWidthOfListRatio: 0.1,
+                        maxOfWidthOfListRatio: 0.2,
+                        widthOfListRatio: 0.2,
+                        enableDragIcon: false,
+                        list: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType),
+                        body: buildVocabularyDetail(state: state),
+                      ));
+                }
+              else
+                {
+                  return Material(child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
+                }
             },);
           
         },
@@ -104,8 +135,6 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
-            myScreenMediaType.isMobile?
-            buildVocabularyList(state: state, context: context):
             Expanded(child: buildVocabularyList(state: state, context: context)),
             SizedBox(height: 8,),
             Row(
@@ -249,12 +278,14 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
       case VocabularyStatus.onSearchByParams:
         // TODO: Handle this case.
         return Center(child: CircularProgressIndicator());
+      case VocabularyStatus.onSelectWord:
       case VocabularyStatus.onLoadEnd:
         // TODO: Handle this case.
         return  (listOfVocabulary.isEmpty) ?
         Center(child:NoData()) :
         Scrollbar(
           controller: scrollController,
+          thickness: Dimens.size10,
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             controller: scrollController,
@@ -272,116 +303,134 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
   Widget buildVocabularyDetail({required VocabularyListState state}){
     return Container(
       decoration: BoxDecoration(
-        color: ColorConst.mainColor.withOpacity(0.02)
+        color: ColorConst.whiteColor
       ),
-      child: Column(
+      child: Stack(
         children: [
-          Container(
-            height: MediaQuery.of(context).size.height/5,
-            decoration: BoxDecoration(
-              color: ColorConst.mainColor
-            ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(state.selectVocabularyInfo?.simplified??"", style: TextStyleConstant.textStyleBlack28w700.copyWith(color: ColorConst.whiteColor, fontSize: Dimens.size60),),
-                ],
+          Column(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?1/8:1/5),
+              decoration: BoxDecoration(
+                color: ColorConst.mainColor
               ),
-            ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
+              child: Center(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Visibility(
-                      visible: (state.selectVocabularyInfo?.pinyinTones??"").isNotEmpty,
-                      child: WidgetWithColumnTitleCommon(
-                        title: "${L10nX.getStr.pinyin_tone_str}: ",
-                        titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                        child: Row(
-                          children: [
-                            Text(state.selectVocabularyInfo?.pinyinTones??""),
-                            Gap(Dimens.size4),
-                            Visibility(
-                              //visible: (state.selectVocabularyInfo?.audio??"").isNotEmpty,
-                                child: StatefulBuilder(
-                                  builder: (BuildContext context, void Function(void Function()) setState) { 
-                                    return InkWell(
-                                        onTap: () async {
-                                          final player = AudioPlayer();
-                                          player.playerStateStream.listen((event) {
-                                            switch(event.processingState){
-                                              case ProcessingState.idle:
-                                              // TODO: Handle this case.
-                                              case ProcessingState.loading:
-                                              // TODO: Handle this case.
-                                              case ProcessingState.buffering:
-                                              // TODO: Handle this case.
-                                              case ProcessingState.ready:
-                                              // TODO: Handle this case.
-                                              setState(() {
-                                                isOnVolume = true;
-                                              },);
-                                              case ProcessingState.completed:
-                                              // TODO: Handle this case.
-                                                setState(() {
-                                                  isOnVolume = false;
-                                                },);
-                                            }
-                                          },);// Create a player
-                                          await player.setUrl('https://foo.com/bar.mp3');
-                                          player.play();
-                                        },
-                                        child: AudioSpeaker(url: state.selectVocabularyInfo?.audio??"",));
-                                  },
-                                ))
-                          ],
-                        ),
-                      ),
-                    ),
-                    Gap(Dimens.size10),
-                    WidgetWithColumnTitleCommon(
-                      title: "${L10nX.getStr.category_word}: ",
-                      titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                      child: Text((state.selectVocabularyInfo?.categoryWord??"").isNotEmpty?state.selectVocabularyInfo?.categoryWord??"":L10nX.getStr.unknown_str),
-                    ),
-                    Gap(Dimens.size10),
-                    Visibility(
-                      visible: (state.selectVocabularyInfo?.translationVn??"").isNotEmpty,
-                      child: WidgetWithColumnTitleCommon(
-                        title: "${L10nX.getStr.viet_nam_text}: ",
-                        titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                        child: Text(state.selectVocabularyInfo?.translationVn??""),
-                      ),
-                    ),
-                    Gap(Dimens.size10),
-                    Gap(Dimens.size10),
-                    Visibility(
-                      visible: (state.selectVocabularyInfo?.traditional??"").isNotEmpty,
-                      child: WidgetWithColumnTitleCommon(
-                        title: "${L10nX.getStr.traditional_str}: ",
-                        titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                        child: Text(state.selectVocabularyInfo?.traditional??""),
-                      ),
-                    ),
-                    Visibility(
-                      visible: (state.selectVocabularyInfo?.translationEn??"").isNotEmpty,
-                      child: WidgetWithColumnTitleCommon(
-                        title: "${L10nX.getStr.english_text}: ",
-                        titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                        child: Text(state.selectVocabularyInfo?.translationEn??""),
-                      ),
-                    ),
+                    Text(state.selectVocabularyInfo?.simplified??"", style: TextStyleConstant.textStyleBlack28w700.copyWith(color: ColorConst.whiteColor, fontSize: Dimens.size60),),
                   ],
                 ),
               ),
             ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      Visibility(
+                        visible: (state.selectVocabularyInfo?.pinyinTones??"").isNotEmpty,
+                        child: WidgetWithColumnTitleCommon(
+                          title: "${L10nX.getStr.pinyin_tone_str}: ",
+                          titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                          child: Row(
+                            children: [
+                              Text(state.selectVocabularyInfo?.pinyinTones??""),
+                              Gap(Dimens.size4),
+                              Visibility(
+                                //visible: (state.selectVocabularyInfo?.audio??"").isNotEmpty,
+                                  child: StatefulBuilder(
+                                    builder: (BuildContext context, void Function(void Function()) setState) { 
+                                      return InkWell(
+                                          onTap: () async {
+                                            final player = AudioPlayer();
+                                            player.playerStateStream.listen((event) {
+                                              switch(event.processingState){
+                                                case ProcessingState.idle:
+                                                // TODO: Handle this case.
+                                                case ProcessingState.loading:
+                                                // TODO: Handle this case.
+                                                case ProcessingState.buffering:
+                                                // TODO: Handle this case.
+                                                case ProcessingState.ready:
+                                                // TODO: Handle this case.
+                                                setState(() {
+                                                  isOnVolume = true;
+                                                },);
+                                                case ProcessingState.completed:
+                                                // TODO: Handle this case.
+                                                  setState(() {
+                                                    isOnVolume = false;
+                                                  },);
+                                              }
+                                            },);// Create a player
+                                            await player.setUrl('https://foo.com/bar.mp3');
+                                            player.play();
+                                          },
+                                          child: AudioSpeaker(url: state.selectVocabularyInfo?.audio??"",));
+                                    },
+                                  ))
+                            ],
+                          ),
+                        ),
+                      ),
+                      Gap(Dimens.size10),
+                      WidgetWithColumnTitleCommon(
+                        title: "${L10nX.getStr.category_word}: ",
+                        titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                        child: Text((state.selectVocabularyInfo?.categoryWord??"").isNotEmpty?state.selectVocabularyInfo?.categoryWord??"":L10nX.getStr.unknown_str),
+                      ),
+                      Gap(Dimens.size10),
+                      Visibility(
+                        visible: (state.selectVocabularyInfo?.translationVn??"").isNotEmpty,
+                        child: WidgetWithColumnTitleCommon(
+                          title: "${L10nX.getStr.viet_nam_text}: ",
+                          titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                          child: Text(state.selectVocabularyInfo?.translationVn??""),
+                        ),
+                      ),
+                      Gap(Dimens.size10),
+                      Gap(Dimens.size10),
+                      Visibility(
+                        visible: (state.selectVocabularyInfo?.traditional??"").isNotEmpty,
+                        child: WidgetWithColumnTitleCommon(
+                          title: "${L10nX.getStr.traditional_str}: ",
+                          titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                          child: Text(state.selectVocabularyInfo?.traditional??""),
+                        ),
+                      ),
+                      Visibility(
+                        visible: (state.selectVocabularyInfo?.translationEn??"").isNotEmpty,
+                        child: WidgetWithColumnTitleCommon(
+                          title: "${L10nX.getStr.english_text}: ",
+                          titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                          child: Text(state.selectVocabularyInfo?.translationEn??""),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+          Visibility(
+            visible: ResponsiveInfo.isPhone(),
+            child: Align(
+              alignment:Alignment.topRight ,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Icon(Icons.close, color: ColorConst.whiteColor,size: Dimens.size20,),
+                ),
+              ),
+            ),
           )
-          
-        ],
+        ]
       ),
     );
   }

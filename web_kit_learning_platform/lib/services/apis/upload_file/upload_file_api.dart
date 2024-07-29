@@ -3,30 +3,35 @@ import 'dart:convert';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/services/apis/words/word_info.dart';
 
-class AddWordsApi extends BaseApiRequest {
-  WordInfo word;
-  AddWordsApi({required this.word}) : super(
-      serviceType: SERVICE_TYPE.Vocabulary,
-      apiName: ApiName().addVocabulary,
+import '../../../base/base.export.dart';
+import 'models/upload_file_info.dart';
+
+class UploadFileApi extends BaseApiRequest {
+  UploadFileInfo fileInfo;
+  UploadFileApi({required this.fileInfo}) : super(
+      serviceType: SERVICE_TYPE.Storage,
+      apiName: ApiName().addUploadFile,
     bodyMethod: BodyMethod.formData,
   );
   Future<dynamic> call() async {
     await getAuthorization();
-    dynamic data = await postRequestAPI();
-    return data;
+    try{
+      MonitorLoading().showLoading(L10nX.getStr.uploading_file);
+      dynamic data = await postRequestAPI();
+      MonitorLoading().dismiss();
+      return data;
+    }
+    catch(e){
+      MonitorLoading().dismiss();
+      return "";
+    }
   }
 
   Future<void> getAuthorization() async {
     // TODO: implement getAuthorization
     await setApiBody({
-      'data': jsonEncode({
-        'simplified':word.simplified,
-        'traditional':word.traditional,
-        'pinyin_tones':word.pinyinTones,
-        'translation_vn':word.translationVn,
-        'created_by':'long1'
-      }),
-      'audio': word.audio,
+      'data': fileInfo.getDataType(),
+      'file': fileInfo.file,
     });
   }
 

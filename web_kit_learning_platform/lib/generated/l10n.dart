@@ -4599,6 +4599,442 @@ class S {
       args: [],
     );
   }
+
+  /// `Create course`
+  String get course_create {
+    return Intl.message(
+      'Create course',
+      name: 'course_create',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit course`
+  String get course_edit {
+    return Intl.message(
+      'Edit course',
+      name: 'course_edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete course`
+  String get course_delete {
+    return Intl.message(
+      'Delete course',
+      name: 'course_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Introduction`
+  String get introduction_str {
+    return Intl.message(
+      'Introduction',
+      name: 'introduction_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Content`
+  String get content_str {
+    return Intl.message(
+      'Content',
+      name: 'content_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pricing plan`
+  String get pricing_plan_str {
+    return Intl.message(
+      'Pricing plan',
+      name: 'pricing_plan_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create quiz`
+  String get create_quiz_str {
+    return Intl.message(
+      'Create quiz',
+      name: 'create_quiz_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save update`
+  String get save_update_str {
+    return Intl.message(
+      'Save update',
+      name: 'save_update_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preview`
+  String get preview_str {
+    return Intl.message(
+      'Preview',
+      name: 'preview_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category`
+  String get category_str {
+    return Intl.message(
+      'Category',
+      name: 'category_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Course category`
+  String get course_category_str {
+    return Intl.message(
+      'Course category',
+      name: 'course_category_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Background image`
+  String get background_image_str {
+    return Intl.message(
+      'Background image',
+      name: 'background_image_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video preview`
+  String get video_preview_str {
+    return Intl.message(
+      'Video preview',
+      name: 'video_preview_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload image`
+  String get upload_image_str {
+    return Intl.message(
+      'Upload image',
+      name: 'upload_image_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload youtube url`
+  String get upload_youtube_url_str {
+    return Intl.message(
+      'Upload youtube url',
+      name: 'upload_youtube_url_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Author`
+  String get author_str {
+    return Intl.message(
+      'Author',
+      name: 'author_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Duration`
+  String get duration_str {
+    return Intl.message(
+      'Duration',
+      name: 'duration_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'Course object_str' key
+
+  /// `Grade`
+  String get grade_str {
+    return Intl.message(
+      'Grade',
+      name: 'grade_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How long does the course last?`
+  String get how_long_does_the_course_last_str {
+    return Intl.message(
+      'How long does the course last?',
+      name: 'how_long_does_the_course_last_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Grade name`
+  String get grade_name_str {
+    return Intl.message(
+      'Grade name',
+      name: 'grade_name_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What will you achieve after the course? `
+  String get what_will_you_achieve_after_the_course_str {
+    return Intl.message(
+      'What will you achieve after the course? ',
+      name: 'what_will_you_achieve_after_the_course_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Standard`
+  String get standard_str {
+    return Intl.message(
+      'Standard',
+      name: 'standard_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Show course in Landing page`
+  String get show_course_in_landing_page_str {
+    return Intl.message(
+      'Show course in Landing page',
+      name: 'show_course_in_landing_page_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accompany course`
+  String get accompany_course_str {
+    return Intl.message(
+      'Accompany course',
+      name: 'accompany_course_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FREE`
+  String get free_str {
+    return Intl.message(
+      'FREE',
+      name: 'free_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PREMIUM`
+  String get premium_str {
+    return Intl.message(
+      'PREMIUM',
+      name: 'premium_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search tags`
+  String get search_tags_str {
+    return Intl.message(
+      'Search tags',
+      name: 'search_tags_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add lectures from another course`
+  String get add_lectures_from_another_course_str {
+    return Intl.message(
+      'Add lectures from another course',
+      name: 'add_lectures_from_another_course_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lecture name`
+  String get lecture_name_str {
+    return Intl.message(
+      'Lecture name',
+      name: 'lecture_name_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subject name`
+  String get subject_name_str {
+    return Intl.message(
+      'Subject name',
+      name: 'subject_name_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lecture link`
+  String get lecture_link_str {
+    return Intl.message(
+      'Lecture link',
+      name: 'lecture_link_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Documents`
+  String get documents_str {
+    return Intl.message(
+      'Documents',
+      name: 'documents_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Word`
+  String get word_str {
+    return Intl.message(
+      'Word',
+      name: 'word_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment`
+  String get payment_str {
+    return Intl.message(
+      'Payment',
+      name: 'payment_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Action`
+  String get action_str {
+    return Intl.message(
+      'Action',
+      name: 'action_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Attack link`
+  String get attack_link_str {
+    return Intl.message(
+      'Attack link',
+      name: 'attack_link_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create lecture`
+  String get create_lecture_str {
+    return Intl.message(
+      'Create lecture',
+      name: 'create_lecture_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Creating a detailed pricing plan for your course requires considering various factors. Here’s a breakdown to help you structure your pricing`
+  String get creating_a_detailed_pricing_plan_str {
+    return Intl.message(
+      'Creating a detailed pricing plan for your course requires considering various factors. Here’s a breakdown to help you structure your pricing',
+      name: 'creating_a_detailed_pricing_plan_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'normal_sale:_str' key
+
+  /// `Presale`
+  String get presale_str {
+    return Intl.message(
+      'Presale',
+      name: 'presale_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add discount`
+  String get add_discount_str {
+    return Intl.message(
+      'Add discount',
+      name: 'add_discount_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  // skipped getter for the 'availability Course_str' key
+
+  /// `Discount`
+  String get discount_str {
+    return Intl.message(
+      'Discount',
+      name: 'discount_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Adjust your course availability date`
+  String get adjust_your_course_availability_date_str {
+    return Intl.message(
+      'Adjust your course availability date',
+      name: 'adjust_your_course_availability_date_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Uploading file ....`
+  String get uploading_file {
+    return Intl.message(
+      'Uploading file ....',
+      name: 'uploading_file',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

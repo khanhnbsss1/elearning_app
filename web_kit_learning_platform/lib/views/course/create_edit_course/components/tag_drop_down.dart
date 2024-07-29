@@ -2,8 +2,10 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
+import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 
 class TagDropDown extends StatefulWidget {
@@ -29,38 +31,39 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
           Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+                SizedBox(
                   width: 200,
-                  child: DropdownButtonFormField(
-                    menuMaxHeight: 500,
-                    dropdownColor: theme.cardTheme.color,
-                    decoration: InputDecoration(
-                      label: Text('Select tags'),
-                      labelStyle:
-                      MyTextStyle.bodySmall(xMuted: true),
-                      border: outlineInputBorder,
-                      prefixIcon: Icon(
-                        LucideIcons.tag,
-                        size: 20,
-                        // color: color,
+                  child:  DropdownSearch<String>(
+                    popupProps: PopupProps.menu(
+                      constraints: BoxConstraints(
+                        maxHeight: (65 + widget.tags.length * 50 < 210) ? 65 + widget.tags.length * 50 : 210,
                       ),
-                      contentPadding: EdgeInsets.all(16),
-                      isCollapsed: true,
-                      floatingLabelBehavior:
-                      FloatingLabelBehavior.never,
+                      showSearchBox: true,
+                      searchDelay: Duration(seconds: 0),
+                      showSelectedItems: true,
                     ),
-                    items: widget.tags.map((tag) => DropdownMenuItem(
-                      enabled: !selectedValues.contains(tag),
-                      value: tag,
-                      child: !selectedValues.contains(tag) ? Text(tag!) : Text(tag!),
-                    )).toList(),
-                    onChanged: (String? value) {
+                    items: widget.tags.map((e) => e ?? '').toList(),
+                    dropdownDecoratorProps: DropDownDecoratorProps(
+                      dropdownSearchDecoration: InputDecoration(
+                        hintText: 'Select tags',
+                        hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                        border: outlineInputBorder,
+                        prefixIcon: Icon(
+                          LucideIcons.book,
+                          size: 20,
+                          color: ColorConst.colorIconRed,
+                        ),
+                        contentPadding: MySpacing.all(16),
+                        isCollapsed: true,
+                        floatingLabelBehavior:
+                        FloatingLabelBehavior.never,
+                      ),
+                    ),
+                    onChanged: (value) {
                       setState(() {
-                          selectedValues.add(value!);
-                          widget.onAddTags(selectedValues);
-                      });
-                    },
-                    hint: Text('Select tags'),
+                        selectedValues.add(value!);
+                        widget.onAddTags(selectedValues);
+                      });      },
                   ),
                 ),
                 SizedBox(width: 10,),

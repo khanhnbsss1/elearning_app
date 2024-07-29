@@ -21,14 +21,11 @@ class ImageManager {
   static const svgFolder = "svg/";
   static const iconFolder = "icons/";
   
-  
-  
   //svg
   static const String ic_svgLoginImageString = 'login.svg';
   static const String ic_success = 'ic_success.svg';
   static const String ic_error = 'ic_error.svg';
   static const String ic_ban = 'ic_ban.svg';
-
   
   //png
   static const String logo = 'logo.jpg';
@@ -37,8 +34,6 @@ class ImageManager {
   static const String ic_loading_on_page_png = 'loading_on_page.png';
   static const String icSearch = 'icSearch.png';
   static const String  ic_information_png ="ic_information.png";
-
-  
   
   /*------------------------------------*/
    String getPngImageIpad(String name) {

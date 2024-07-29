@@ -30,8 +30,8 @@ class BackButtonCustom extends StatelessWidget{
               ),
               alignment: Alignment.center,
               child: Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  size: Dimens.size15,
+                  Icons.arrow_back,
+                  size: Dimens.size36,
                   color: color??ColorConst.blackColor
               ),
             ),

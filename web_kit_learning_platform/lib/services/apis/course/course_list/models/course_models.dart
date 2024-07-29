@@ -60,6 +60,7 @@ class CourseInfo {
   List<Lectures>? lectures;
   List<Tags>? tags;
   String? accompanyCourse;
+  String? mode;
 
   CourseInfo(
       {this.id,
@@ -92,7 +93,144 @@ class CourseInfo {
         this.lectures,
         this.tags,
         this.accompanyCourse,
+        this.mode
       });
+
+  CourseInfo.initial(){
+    id=0;
+    name = "";
+    image = "";
+    totalLectures = 0;
+    totalSubjects = 0;
+    producerName = "";
+    language = "";
+    introduction = "";
+    infoObj = "";
+    infoResult = "";
+    dayFrom = "";
+    dayTo = "";
+    payment = 0;
+    createdAt = "";
+    updatedAt = "";
+    createdBy = "";
+    updatedBy = "";
+    ratePoint = 0;
+    durian = "";
+    videoPreview = "";
+    courseMode = "";
+    gradeName = ("0");
+    categoryId = 0;
+    isStandard = 0;
+    categoryName = "";
+    typeName = "";
+    isActive = 0;
+    accompanyCourse = "";
+    tags = [];
+    mode ="public";
+  }
+  CourseInfo copyWith({
+    int? id,
+    String? name,
+    String? image,
+    int? totalLectures,
+    int? totalSubjects,
+    String? producerName,
+    String? language,
+    String? introduction,
+    String? infoObj,
+    String? infoResult,
+    String? dayFrom,
+    String? dayTo,
+    int? payment,
+    String? createdAt, 
+    String? updatedAt,
+    String? createdBy,
+    String? updatedBy,
+    int? ratePoint,
+    String? durian,
+    String? videoPreview,
+    String? courseMode,
+    String? gradeName,
+    int? categoryId,
+    int? isStandard,
+    String? categoryName,
+    String? typeName,
+    int? isActive,
+    List<Lectures>? lectures,
+    List<Tags>? tags,
+    String? accompanyCourse,
+    String? mode
+}){
+    return CourseInfo(
+      id : id??this.id,
+      name : name ??this.name,
+      image : image ??this.image,
+      totalLectures : totalLectures ??this.totalLectures,
+      totalSubjects : totalSubjects ??this.totalSubjects,
+      producerName : producerName ??this.producerName,
+      language : language ??this.language,
+      introduction : introduction ??this.introduction,
+      infoObj : infoObj ??this.infoObj,
+      infoResult : infoResult ??this.infoResult,
+      dayFrom : dayFrom ??this.dayFrom,
+      dayTo : dayTo ??this.dayTo,
+      payment : payment ??this.payment,
+      createdAt : createdAt ??this.createdAt,
+      updatedAt : updatedAt ??this.updatedAt,
+      createdBy : createdBy ??this.createdBy,
+      updatedBy : updatedBy ??this.updatedBy,
+      ratePoint : ratePoint ??this.ratePoint,
+      durian : durian ??this.durian,
+      videoPreview : videoPreview ??this.videoPreview,
+      courseMode : courseMode ??this.courseMode,
+      gradeName : gradeName ??this.gradeName,
+      categoryId : categoryId ??this.categoryId,
+      isStandard : isStandard ??this.isStandard,
+      categoryName : categoryName ??this.categoryName,
+      typeName : typeName ??this.typeName,
+      isActive : isActive ??this.isActive,
+      accompanyCourse : accompanyCourse ??this.accompanyCourse,
+      tags : tags ??this.tags,
+      lectures:lectures??this.lectures,
+      mode:mode??this.mode,
+
+    );
+  
+  }
+  CourseInfo.copyWithObject(CourseInfo json) {
+    id = json.id??id;
+    name = json.name??name;
+    image = json.image??image;
+    totalLectures = json.totalLectures??totalLectures;
+    totalSubjects = json.totalSubjects??totalSubjects;
+    producerName = json.producerName??producerName;
+    language = json.language??language;
+    introduction = json.introduction??introduction;
+    infoObj = json.infoObj??infoObj;
+    infoResult = json.infoResult??infoResult;
+    dayFrom = json.dayFrom??dayFrom;
+    dayTo = json.dayTo??dayTo;
+    payment = json.payment??payment;
+    createdAt = json.createdAt??createdAt;
+    updatedAt = json.updatedAt??updatedAt;
+    createdBy = json.createdBy??createdBy;
+    updatedBy = json.updatedBy??updatedBy;
+    ratePoint = json.ratePoint??ratePoint;
+    durian = json.durian??durian;
+    videoPreview = json.videoPreview??videoPreview;
+    courseMode = json.courseMode??courseMode;
+    gradeName = json.gradeName??gradeName;
+    categoryId = json.categoryId??categoryId;
+    isStandard =json.isStandard??isStandard;
+    categoryName = json.categoryName??categoryName;
+    typeName = json.typeName??typeName;
+    isActive = json.isActive??isActive;
+    accompanyCourse = json.accompanyCourse??accompanyCourse;
+    tags = json.tags??tags;
+    lectures=json.lectures??lectures;
+    mode=json.mode??mode;
+
+  }
 
   CourseInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -123,6 +261,8 @@ class CourseInfo {
     typeName = json['type_name'];
     isActive = json['is_active'];
     accompanyCourse = json['accompany_course'];
+    mode = json['mode'];
+
     tags = [];
 /*    if (json['tags'] != null) {
       tags = <Tags>[];
@@ -147,7 +287,7 @@ class CourseInfo {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
+    data['id'] = id != 0?id:0;
     data['name'] = name;
     data['image'] = image;
     data['total_lectures'] = totalLectures;
@@ -175,13 +315,18 @@ class CourseInfo {
     data['type_name'] = typeName;
     data['is_active'] = isActive;
     data['accompany_course'] = accompanyCourse;
+    data['mode'] = mode;
+
     //data['tags'] = tags;
     if (lectures != null) {
       data['lectures'] = (lectures??[]).map((v) => v.toJson()).toList();
     }
     if (tags != null) {
-       data['tags'] = (tags??[]).map((v) => v.toJson()).toList();
+       data['tags'] = (tags??[]).map((v) => v.toJsonString()).toList().toString();
      }
+    data.removeWhere((key, value) {
+      return value==null;
+    },);
     return data;
   }
 }
@@ -239,6 +384,18 @@ class Tags {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
+    return data;
+  }
+  String toJsonString() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    return data['name'];
+  }
+
+  Map<int, String> toMapDropDown() {
+    final Map<int, String> data = <int, String>{};
+    data[id??0] = name??"";
     return data;
   }
 }

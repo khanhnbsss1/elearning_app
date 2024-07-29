@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/theme/admin_theme.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/widgets/my_dashed_divider.dart';
@@ -19,7 +20,7 @@ mixin UIMixin {
   // theme.colorScheme. get theme.colorScheme. => theme.theme.colorScheme.;
 
   OutlineInputBorder get outlineInputBorder => OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(4)),
+        borderRadius: BorderRadius.all(Radius.circular(Dimens.size20)),
         borderSide: BorderSide(
             width: 1,
             strokeAlign: 0,

@@ -89,7 +89,7 @@ class TextStyleConstant{
 
   static 	TextStyle  textStyleBlack14w600 = baseStyle.copyWithCustom(fontSize: fontSize14, color: ColorConst.blackColor, fontWeight: fontWeight600);
   static 	TextStyle  textStyleBlack16w600 = baseStyle.copyWithCustom( fontSize: fontSize13, color: ColorConst.blackColor, fontWeight: fontWeight600);
-  static 	TextStyle  textStyleBlack16w500 = baseStyle.copyWithCustom( fontSize: fontSize16, color: ColorConst.blackColor, fontWeight: fontWeight600);
+  static 	TextStyle  textStyleBlack16w500 = baseStyle.copyWithCustom( fontSize: fontSize16, color: ColorConst.blackColor, fontWeight: fontWeight500);
 
   static 	TextStyle  textStyleBlack16w700 = baseStyle.copyWithCustom(fontSize: fontSize16, color: ColorConst.blackColor, fontWeight: fontWeight700);
 

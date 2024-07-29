@@ -1,14 +1,22 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/my_controller.dart';
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
-import 'package:webkit/services/apis/course/course_list/add_course_api.dart';
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 
 class AddCourseController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
 
   bool showPassword = false, loading = false, isChecked = false;
-  // List<TextEditingController> lectureControllers = [];
+  MultipartFile ?_imageFile;
+  MultipartFile ?_previewVideo;
+  
+  Map<int,String> listOfCategoryName = {};
+  Map<int,String> listOfProduceNames = {};
+  Map<int,String> listOfGradeNames = {};
+  Map<int,String> listOfAccompanyCourses = {};
+  Map<int,String> listOfTags = {};
   @override
   void onInit() {
     super.onInit();
@@ -26,6 +34,11 @@ class AddCourseController extends MyController {
     basicValidator.addField(
       'image',
       label: 'Image',
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'video_review',
+      label: 'video_review',
       controller: TextEditingController(),
     );
     basicValidator.addField(
@@ -87,8 +100,14 @@ class AddCourseController extends MyController {
     );
     basicValidator.addField(
       'is_standard',
-      required: true,
+      required: false,
       label: 'Is standard',
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'is_show_course_in_landing_page',
+      required: false,
+      label: 'Is is_show_course_in_landing_page',
       controller: TextEditingController(),
     );
     basicValidator.addField(
@@ -128,26 +147,6 @@ class AddCourseController extends MyController {
       label: 'Accompany course',
       controller: TextEditingController(),
     );
-    // basicValidator.addField(
-    //   'sub_name',
-    //   label: 'Subject name',
-    //   controller: lectureControllers[0],
-    // );
-    // basicValidator.addField(
-    //   'lecture_name',
-    //   label: 'Lecture name',
-    //   controller: lectureControllers[0],
-    // );
-    // basicValidator.addField(
-    //   'lecture_link',
-    //   label: 'Lecture link',
-    //   controller: lectureControllers[0],
-    // );
-    // basicValidator.addField(
-    //   'lecture_mode',
-    //   label: 'Lecture mode',
-    //   controller: lectureControllers[0],
-    // );
   }
 
   void onChangeCheckBox(bool? value) {
@@ -159,35 +158,47 @@ class AddCourseController extends MyController {
     basicValidator.getController('name')!.text = value;
     update();
   }
-
-  Future<void> onAddCourse() async {
-    // List<Lectures> lectures = [];
-    // for (int i = 0; i < lectureControllers.length; i++) {
-    //   lectures.add(Lectures(
-    //     subName: basicValidator.getController('lecture_name_$i')?.text,
-    //     lectureName: basicValidator.getController('lecture_name_$i')?.text,
-    //     lectureLink: basicValidator.getController('lecture_link_$i')?.text,
-    //     lectureMode: basicValidator.getController('lecture_mode_$i')?.text,
-    //   ));
-    // }
-
-    // List<String> tags = (basicValidator.getController('tags')?.text ?? '')
-    //     .split(',')
-    //     .map((tag) => tag.trim())
-    //     .toList();
-
-    // String tagsString = tags.map((tag) => tag.id.toString()).join(',');
-
-    // print(tagsString);
-
-    CourseInfo addCourseRequest = CourseInfo(
+  void setImage(MultipartFile imageFile) {
+    _imageFile= imageFile;
+    update();
+  }
+  MultipartFile? getImage(MultipartFile imageFile) {
+    return _imageFile;
+  }
+  
+  void setVideoPreView(MultipartFile file) {
+    _previewVideo= file;
+    update();
+  }
+  MultipartFile? getVideoPreView(MultipartFile imageFile) {
+    return _previewVideo;
+  }
+  int? getIdFromName(Map<int, String> map, String name) {
+    try {
+      return map.entries.firstWhere((entry) => entry.value == name).key;
+    } catch (e) {
+      return null;
+    }
+  }
+  Future<CourseInfo?> getCourseInfoFromUI({required CourseInfo courseInfo}) async {
+    basicValidator.getController('accompany_course')!.text = getIdFromName(listOfAccompanyCourses, basicValidator.getController('accompany_course')!.text??"").toString();
+   // basicValidator.getController('category_id')!.text = getIdFromName(listOfCategoryName, basicValidator.getController('category_name')!.text??"").toString();
+    basicValidator.getController('grade_name')!.text = getIdFromName(listOfGradeNames, basicValidator.getController('grade_name')!.text??"").toString();
+    List<String>? tags =basicValidator.getController('tags')!.text.split(',');
+    List<Tags> tagsList = [];
+    UserProfile? userProfile = await UserManager().getUserProfile();
+    for(String tag in tags){
+      tagsList.add(Tags(name: tag, id: 0));
+    }
+    //List<int> tagIds = (tags??[]).map((tag) => getIdFromName(listOfTags, tag)).where((id) => id != null).cast<int>().toList();
+    //String tagIdsString = tagIds.join(',');
+   // basicValidator.getController('tags')?.text = tagIdsString;
+    CourseInfo addCourseRequest = courseInfo.copyWith(
       id: int.parse(basicValidator.getController('id')?.text ?? '0'),
       name: basicValidator.getController('name')!.text,
       image: basicValidator.getController('image')?.text ?? "",
-      totalLectures: int.parse(
-          basicValidator.getController('total_lectures')?.text ?? '0'),
-      totalSubjects: int.parse(
-          basicValidator.getController('total_subjects')?.text ?? '0'),
+      totalLectures: int.parse(basicValidator.getController('total_lectures')?.text ?? '0'),
+      totalSubjects: int.parse(basicValidator.getController('total_subjects')?.text ?? '0'),
       producerName: basicValidator.getController('producer_name')?.text,
       language: basicValidator.getController('language')!.text,
       introduction: basicValidator.getController('introduction')?.text,
@@ -199,19 +210,19 @@ class AddCourseController extends MyController {
       gradeName: basicValidator.getController('grade_name')?.text,
       categoryId:
           int.parse(basicValidator.getController('category_id')?.text ?? '0'),
-      isStandard:
-          int.parse(basicValidator.getController('is_standard')!.text),
+      isStandard: int.parse(basicValidator.getController('is_standard')!.text),
       categoryName: basicValidator.getController('category_name')?.text,
       videoPreview: basicValidator.getController('video_preview')?.text,
       infoObj: basicValidator.getController('info_obj')?.text,
       infoResult: basicValidator.getController('info_result')?.text,
       isActive: int.parse(basicValidator.getController('is_active')?.text ?? '0'),
       accompanyCourse: basicValidator.getController('accompany_course')?.text ?? '',
+      tags: tagsList,
+      createdBy: userProfile?.userName,
+      updatedBy: userProfile?.userName
       //tags: basicValidator.getController('tags')?.text ?? '',
       // lectures: lectures,
     );
-    // print(addCourseRequest.toString());
-    AddCourseApi addCourseApi = AddCourseApi(addCourseRequest: addCourseRequest);
-    addCourseApi.call();
+    return addCourseRequest;
   }
 }
