@@ -505,6 +505,14 @@
   "Khóa học có sẵn_str": "Khóa học có sẵn",
   "discount_str": "Giảm giá",
   "just_your_course_availability_date_str": "Điều chỉnh ngày có khóa học của bạn",
-  "uploading_file": "Đang tải file lên...."
-
+  "uploading_file": "Đang tải file lên....",
+  "detail_str": "Chi tiết",
+  "edit_str": "Chỉnh sửa",
+  "delete_str": "Xóa",
+  "search_subject_str": "Tìm kiếm chủ đề",
+  "create_subject_str": "Tạo chủ đề",
+  "delete_subject_str": "Xóa chủ đề",
+  "search_lesson_str": "Tìm kiếm bài học",
+  "create_lesson_str": "Tạo bài học",
+  "delete_lesson_str": "Xóa bài học"
 }

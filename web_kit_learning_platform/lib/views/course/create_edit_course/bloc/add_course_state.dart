@@ -17,6 +17,7 @@ enum AddCourseStatus {
 class AddCourseState extends Equatable {
   AddCourseStatus? blocStatus;
   CourseInfo? courseInfo;
+  CoursePageType? coursePageType;
   AddCourseController? controller;
   GetAddCourseFilterModel? addCourseFilterModel;
   bool? initial;
@@ -25,9 +26,11 @@ class AddCourseState extends Equatable {
     this.addCourseFilterModel,
     this.initial,
     this.courseInfo,
-    this.controller
+    this.controller,
+    this.coursePageType
   }){
     courseInfo??=CourseInfo.initial();
+    coursePageType??=CoursePageType.create;
     controller??= Get.put(AddCourseController());
   }
 
@@ -37,7 +40,8 @@ class AddCourseState extends Equatable {
     GetAddCourseFilterModel? addCourseFilterModel,
     bool? initial,
     CourseInfo? courseInfo,
-    AddCourseController? controller
+    AddCourseController? controller,
+    CoursePageType? coursePageType
   })
   {
     return AddCourseState(
@@ -46,10 +50,12 @@ class AddCourseState extends Equatable {
       initial: initial??this.initial,
       courseInfo: courseInfo??this.courseInfo,
       controller: controller??this.controller,
+      coursePageType: coursePageType??this.coursePageType,
+
     );
   }
   @override
-  List<Object?> get props => [blocStatus, addCourseFilterModel, initial, courseInfo, controller];
+  List<Object?> get props => [blocStatus, addCourseFilterModel, initial, courseInfo, controller, coursePageType];
 
 }
 

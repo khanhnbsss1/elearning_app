@@ -267,7 +267,6 @@ class _CourseListState extends State<CourseList>
                 ],
               );
             },);
-          
         },
       ),
     );
@@ -275,8 +274,22 @@ class _CourseListState extends State<CourseList>
   Widget buildCourseList({required CourseListState state}){
     List<Widget> listOfCourse = List.empty(growable: true);
 
+    bool? enableEdit = state.userProfile?.getPermission().contains("");
     for (CourseInfo courseInfo in state.courseResponseModel?.content ?? []) {
-      listOfCourse.add(CourseItemGridView(courseInfo: courseInfo,));
+      
+      listOfCourse.add(CourseItemGridView(
+        courseInfo: courseInfo,
+        enableEdit: enableEdit,
+        onDelete: (p0) {
+          
+        },
+        onEdit: (p0) {
+          CreateEditCourse(coursePageType: CoursePageType.edit, courseInfo: p0,).show(context);
+        },
+        onViewDetail: (p0) {
+          
+        },
+      ));
     }
     
     switch (state.blocStatus)

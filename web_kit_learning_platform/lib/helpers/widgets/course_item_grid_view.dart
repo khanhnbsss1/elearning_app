@@ -9,18 +9,28 @@ import 'package:webkit/helpers/widgets/my.dart';
 import 'package:webkit/helpers/widgets/my_card.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
+import 'package:webkit/l10n/l10n_extention.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
 import 'package:webkit/services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:webkit/views/layouts/left_bar.dart';
 import '../../services/apis/course/course_list/models/course_models.dart';
+enum CourseItemAction { viewDetail, edit, delete }
 
 class CourseItemGridView extends StatelessWidget {
   CourseItemGridView({
     required this.courseInfo,
-  });
+    this.enableEdit,
+    this.onViewDetail,
+    this.onDelete,
+    this.onEdit
+  }){
+    enableEdit??=false;
+  }
 
   CourseInfo courseInfo;
+  bool? enableEdit;
+  Function(CourseInfo)? onEdit, onDelete, onViewDetail;
   late ColorNotifier notifier;
   @override
   Widget build(BuildContext context) {
@@ -56,9 +66,11 @@ class CourseItemGridView extends StatelessWidget {
                   ),
 
                   clipBehavior: Clip.hardEdge,
-                  child: Padding(
-                    padding: (width > 550) ? const EdgeInsets.all(12.0) : EdgeInsets.all(4),
-                    child: Container(
+                  child: Stack(
+                    children: [
+                      Padding(
+                      padding: (width > 550) ? const EdgeInsets.all(12.0) : EdgeInsets.all(4),
+                      child: Container(
                       padding: EdgeInsets.all(12.0),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
@@ -111,7 +123,7 @@ class CourseItemGridView extends StatelessWidget {
                                 .textStyleBlack12w400
                                 .copyWith(
                               fontWeight: FontWeight.w100,
-
+                                              
                               // fontSize: Dimens.size18,
                               fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300 ? Dimens.size10 :Dimens.size15,
                               color: notifier.subgreycolor,
@@ -121,7 +133,7 @@ class CourseItemGridView extends StatelessWidget {
                             children: [
                               Text('${courseInfo.totalLectures} bài giảng - ${courseInfo.gradeName??""} - ${(courseInfo.isStandard == 1) ? 'Chính quy' : 'Không chính quy'} ',
                                 style: baseStyle.copyWith(
-
+                                              
                                   // fontSize: Dimens.size16,
                                   fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
                                   color: notifier.subgreycolor,
@@ -149,7 +161,7 @@ class CourseItemGridView extends StatelessWidget {
                                     allowHalfRating: true,
                                     onRatingChanged: (rating) {},
                                   ),
-
+                                              
                                 ],
                               ),
                               Row(
@@ -171,7 +183,7 @@ class CourseItemGridView extends StatelessWidget {
                                           decimalDigits: 0)
                                           .trim(),
                                       style: baseStyle.copyWith(
-
+                                              
                                           color: notifier.isDark && isHovered
                                               ? notifier.whitecolor
                                               : notifier.isDark && !isHovered
@@ -201,7 +213,61 @@ class CourseItemGridView extends StatelessWidget {
                           ),
                         ],
                       ),
+                                              ),
                     ),
+                      Visibility(
+                        visible: enableEdit??false,
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: PopupMenuButton<CourseItemAction>(
+                            color: ColorConst.whiteColor,
+                            tooltip: "",
+                            //icon: Icon(Icons.filter_alt_outlined, size: Dimens.size30, color: ColorConst.mainColor,),
+                            onSelected: (CourseItemAction item) {
+                              switch(item){
+                                
+                                case CourseItemAction.viewDetail:
+                                  // TODO: Handle this case.
+                                if(onViewDetail!=null)
+                                  {
+                                    onViewDetail!(courseInfo);
+                                  }
+                                  break;
+                                case CourseItemAction.edit:
+                                  // TODO: Handle this case.
+                                  if(onEdit!=null)
+                                  {
+                                    onEdit!(courseInfo);
+                                  }
+                                  break;
+                                case CourseItemAction.delete:
+                                  // TODO: Handle this case.
+                                  if(onDelete!=null)
+                                  {
+                                    onDelete!(courseInfo);
+                                  }
+                                  break;
+                              }
+                            },
+                            itemBuilder: (BuildContext context) => <PopupMenuEntry<CourseItemAction>>[
+                              PopupMenuItem<CourseItemAction>(
+                                value: CourseItemAction.viewDetail,
+                                child: Text(L10nX.getStr.detail_str),
+                              ),
+                              PopupMenuItem<CourseItemAction>(
+                                value: CourseItemAction.edit,
+                                child: Text(L10nX.getStr.edit_str),
+                              ),
+                              PopupMenuItem<CourseItemAction>(
+                                value: CourseItemAction.delete,
+                                child: Text(L10nX.getStr.delete_str),
+                              ),
+                            ],
+                        
+                          ),
+                        ),
+                      )
+                    ]
                   ),
                 ),
               );

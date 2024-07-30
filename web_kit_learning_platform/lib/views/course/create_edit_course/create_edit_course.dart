@@ -1,19 +1,17 @@
 // import 'dart:io';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:file/file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
-import 'package:get/instance_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
-import '../../../controller/ui/add_course_controller.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 import 'bloc/add_course_bloc.dart';
 import 'components/course_introduction.dart';
+import 'components/create_lession_list.dart';
 
 enum CoursePageType{
   create,
@@ -63,7 +61,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return AddCourseBloc(AddCourseState())..add(AddCourseInitEvent());
+        return AddCourseBloc(AddCourseState(courseInfo: widget.courseInfo,))..add(AddCourseInitEvent());
       },
       child: BlocConsumer<AddCourseBloc, AddCourseState>(
         listener: (context, state) {
@@ -87,6 +85,8 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
   }
 
   Widget buildCourseCommonPage({required BuildContext buildContext, required AddCourseState state}){
+    bool isExitCourse = (state.courseInfo?.id!=null) && (state.courseInfo?.id!=0);
+
     return Container(
       decoration: BoxDecoration(
         color: ColorConst.whiteColor
@@ -112,10 +112,10 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(L10nX.getStr.course_create, style: TextStyleConstant.textStyleBlack30w700,),
+                        Text(isExitCourse?L10nX.getStr.course_edit:L10nX.getStr.course_create, style: TextStyleConstant.textStyleBlack30w700,),
                         Visibility(
                           visible: ResponsiveInfo.isTablet(),
-                          child: Text("Course / Course list / Create course", style: TextStyleConstant.textStyleBlack16w400.copyWith(color: ColorConst.colorHintTextSearch),),
+                          child: Text("Course / Course list / ${!isExitCourse?"Create course":"Edit course"}", style: TextStyleConstant.textStyleBlack16w400.copyWith(color: ColorConst.colorHintTextSearch),),
                         )
                       ],
                     )
@@ -229,7 +229,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
   }
   
   Widget tabBar({ required AddCourseState state}) {
-    bool isExitCourse = (state.courseInfo?.id!=null);
+    bool isExitCourse = (state.courseInfo?.id!=null) && (state.courseInfo?.id!=0);
     TextStyle textStyle = TextStyleConstant.textStyleBlack15w700.copyWith(
         color: isExitCourse?(position == 0?ColorConst.textColorSelectTabBar : ColorConst.subtext):ColorConst.greyColor.withOpacity(0.3));
     return Material(
@@ -252,6 +252,8 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
             indicator: BoxDecoration(border: Border(bottom: BorderSide(color: ColorConst.mainColor))),
             onTap: (index) {
                if(!isExitCourse) {
+                 _pageController.jumpToPage(0);
+                 _tabController.animateTo(0);
                  return;
                }
               _pageController.jumpToPage(index);
@@ -260,70 +262,40 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
               });
             },
             tabs: [
-              Tab(
-                child: Container(
-                  height:(Dimens.size40),
-                  width:(Dimens.size150),
-                  alignment: Alignment.center,
-                  child: Center(
-                    child: Text(
-                      S.of(context).introduction_str,
-                      style: TextStyleConstant.textStyleBlack15w700.copyWith(color: position == 0  ?ColorConst.textColorSelectTabBar : ColorConst.subtext),
-                      maxLines: 1,
-                    ),
-                  ),
-                ),
-              ),
-              Tab(
-                child: Container(
-                  height:(Dimens.size40),
-                 // width:(Dimens.size108),
-                  alignment: Alignment.center,
-                  child: Center(
-                    child: Text(
-                      S.of(context).content_str,
-                      style: textStyle,
-                      maxLines: 1,
-                    ),
-                  ),
-                ),
-              ),
-              Tab(
-                child: Container(
-                  height:(Dimens.size40),
-                 // width:(Dimens.size108),
-                  alignment: Alignment.center,
-                  child: Center(
-                    child: Text(
-                      S.of(context).pricing_plan_str,
-                      style: textStyle,
-                      maxLines: 1,
-                    ),
-                  ),
-                ),
-              ),
-              Tab(
-                child: Container(
-                  height:(Dimens.size40),
-                  //width:(Dimens.size108),
-                  alignment: Alignment.center,
-                  child: Center(
-                    child: Text(
-                      S.of(context).create_quiz_str,
-                      style: textStyle,
-                      maxLines: 1,
-                    ),
-                  ),
-                ),
-              )
+              buildTabItem(state: state, title: S.of(context).introduction_str, index:0),
+              buildTabItem(state: state, title: S.of(context).content_str, index: 1),
+              buildTabItem(state: state, title: S.of(context).pricing_plan_str, index: 2),
+              buildTabItem(state: state, title: S.of(context).create_quiz_str, index: 3),
+
             ],
             controller: _tabController,
           ),
         ),
     );
   }
+  Tab buildTabItem( { required int index,required AddCourseState state, required String title}){
+    bool isExitCourse = (state.courseInfo?.id!=null) && (state.courseInfo?.id!=0);
+    TextStyle textStyle = TextStyleConstant.textStyleBlack15w700.copyWith(
+        color: isExitCourse?(position == index?ColorConst.textColorSelectTabBar : ColorConst.subtext):ColorConst.greyColor.withOpacity(0.3));
+    if(index==0){
+      textStyle = TextStyleConstant.textStyleBlack15w700.copyWith(color: position == 0  ?ColorConst.textColorSelectTabBar : ColorConst.subtext);
+    }
+    return Tab(
+      child: Container(
+        height:(Dimens.size40),
+        alignment: Alignment.center,
+        child: Center(
+          child: Text(
+            title,
+            style: textStyle,
+            maxLines: 1,
+          ),
+        ),
+      ),
+    );
+  }
   Widget buildPageView({required BuildContext context, required AddCourseState state}) {
-    bool isExitCourse = (state.courseInfo?.id!=null);
+    bool isExitCourse = (state.courseInfo?.id!=null) && (state.courseInfo?.id!=0);
     return Padding(
       padding: EdgeInsets.only(bottom: Dimens.size16, left: Dimens.size16, right: Dimens.size16),
       child: PageView(
@@ -332,13 +304,15 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
         scrollDirection: Axis.horizontal,
         children: [
           CourseIntroductionPage(),
-          SizedBox(),
+          CourseLinkLessonListPage(),
           SizedBox(),
           SizedBox()
           ],
         
         onPageChanged: (value) {
           if(!isExitCourse) {
+            _pageController.jumpToPage(0);
+            _tabController.animateTo(0);
             return;
           }
           _tabController.animateTo(value);

@@ -506,5 +506,14 @@
   "availability Course_str": "Availability Course",
   "discount_str": "Discount",
   "adjust_your_course_availability_date_str": "Adjust your course availability date",
-  "uploading_file": "Uploading file ...."
+  "uploading_file": "Uploading file ....",
+  "detail_str": "Detail",
+  "edit_str": "Edit",
+  "delete_str": "Delete",
+  "search_subject_str": "Search for a topic",
+  "create_subject_str": "Create a topic",
+  "delete_subject_str": "Delete a topic",
+  "search_lesson_str": "Search for a lesson",
+  "create_lesson_str": "Create a lesson",
+  "delete_lesson_str": "Delete a lesson"
 }

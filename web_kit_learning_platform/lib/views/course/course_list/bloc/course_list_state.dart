@@ -17,11 +17,13 @@ class CourseListState extends Equatable {
   CourseStatus? blocStatus;
   SearchCommonRequest? searchCommonRequest;
   CourseType? courseType;
+  UserProfile? userProfile;
   CourseListState({
       this.blocStatus, 
     this.courseResponseModel,
     this.searchCommonRequest,
-    this.courseType
+    this.courseType,
+    this.userProfile
   }){
     courseResponseModel??= CourseResponseModel(content: []);
     searchCommonRequest??= SearchCommonRequest(filterType: "ALL", pageNumber: 0, pageSize: 10, keyword: "");
@@ -33,7 +35,8 @@ class CourseListState extends Equatable {
     CourseResponseModel? courseResponseModel,
     CourseStatus? blocStatus,
     SearchCommonRequest? searchCommonRequest,
-    CourseType? courseType
+    CourseType? courseType,
+    UserProfile? userProfile
   })
   {
     return CourseListState(
@@ -41,10 +44,10 @@ class CourseListState extends Equatable {
       courseResponseModel: courseResponseModel??this.courseResponseModel,
       searchCommonRequest: searchCommonRequest??this.searchCommonRequest,
       courseType: courseType??this.courseType,
-
+      userProfile: userProfile??this.userProfile,
     );
   }
   @override
-  List<Object?> get props => [blocStatus, courseResponseModel, searchCommonRequest,courseType];
+  List<Object?> get props => [blocStatus, courseResponseModel, searchCommonRequest,courseType,userProfile];
 
 }
