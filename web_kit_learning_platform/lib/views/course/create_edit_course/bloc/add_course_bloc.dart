@@ -6,9 +6,13 @@ import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/ui/add_course_controller.dart';
 import 'package:webkit/services/apis/course/add_course/add_course_api.dart';
+import 'package:webkit/services/apis/course/course_detail/get_course_detail_api.dart';
+import 'package:webkit/services/apis/course/course_detail/link_lesson_api.dart';
+import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_api.dart';
 import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_model.dart';
+import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/services/apis/upload_file/upload_file_api.dart';
 import 'package:webkit/views/course/create_edit_course/create_edit_course.dart';
@@ -24,12 +28,27 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     on<AddCourseUploadVideoPreViewEvent>(_onUploadVideoPreview);
     on<AddCourseLinkDiscountEvent>(_onLinkDiscount);
     on<AddCourseLinkLessonEvent>(_onLinkLesson);
+    on<AddCourseUpdateCourseFromApiEvent>(_onUpdateCourseFromAPI);
 
     on<AddCourseUpdateControllerEvent>((event, emit) {
       // TODO: implement event handler
       emit(state.copyWith(
         blocStatus: AddCourseStatus.onUpdateController,
         controller: event.addCourseController
+      ));
+    });
+    on<AddCourseUpdateSubjectListEvent>((event, emit) {
+      // TODO: implement event handler
+      emit(state.copyWith(
+          blocStatus: AddCourseStatus.onUpdateSubjectList,
+          subjectList: event.subjectList
+      ));
+    });
+    on<AddCourseUpdateCurrentSubjectEvent>((event, emit) {
+      // TODO: implement event handler
+      emit(state.copyWith(
+          blocStatus: AddCourseStatus.onUpdateCurrentSubject,
+          currentSubject: event.subject
       ));
     });
   }
@@ -41,6 +60,19 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     emit(state.copyWith(
         blocStatus:  AddCourseStatus.onLoading
     ));
+    if(state.courseInfo?.id!=null && state.courseInfo?.id!=0)
+      {
+        CourseDetailApi courseDetailApi = CourseDetailApi(courseId: state.courseInfo!.id!);
+        CourseInfo courseInfo = await courseDetailApi.call();
+        state.courseInfo = courseInfo;
+        for(LessonInfo lessonInfo in state.courseInfo?.lectures??[]){
+          if(lessonInfo.subName!=null && !state.subjectList!.contains(lessonInfo.subName) && lessonInfo.subName!.isNotEmpty)
+            {
+              state.subjectList?.add(lessonInfo.subName!);
+            }
+        }
+      }
+    
     state.controller?.basicValidator.getController('course_mode')?.text = state.courseInfo?.courseMode??'FREE';
     state.controller?.basicValidator.getController('is_standard')?.text = (state.courseInfo?.isStandard??0).toString();
     state.controller?.basicValidator.getController('id')?.text =( state.courseInfo?.id??0).toString();
@@ -63,6 +95,7 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     state.controller?.basicValidator.getController('info_result')?.text = state.courseInfo?.infoResult??'';
     state.controller?.basicValidator.getController('accompany_course')?.text = state.courseInfo?.accompanyCourse??'';
 
+    
     GetAddCourseFilterApi addCourseFilterApi = GetAddCourseFilterApi();
     GetAddCourseFilterModel addCourseFilterModel = await addCourseFilterApi.call();
     addCourseFilterModel.data?.forEach((data) {
@@ -116,6 +149,8 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     emit(state.copyWith(
         addCourseFilterModel: addCourseFilterModel,
         blocStatus:  AddCourseStatus.initial,
+      courseInfo: state.courseInfo,
+      subjectList: state.subjectList,
       controller: state.controller
     ));
   }
@@ -206,13 +241,20 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
       AddCourseLinkLessonEvent event,
       Emitter<AddCourseState> emit,
       ) async {
+    MonitorLoading().showLoading("");
     emit(state.copyWith(
         blocStatus:  AddCourseStatus.onLoading
     ));
-
-    emit(state.copyWith(
-        blocStatus:  AddCourseStatus.onSubmitAdd
-    ));
+    LinkLessonApi lessonApi = LinkLessonApi(courseId: event.courseId, lessonId: event.lessonId, subject: event.subject);
+    dynamic data = await lessonApi.call();
+    MonitorLoading().dismiss();
+    if(data)
+      {
+        add(AddCourseUpdateCourseFromApiEvent());
+      }
+    else
+      {
+      }
   }
   Future<void> _onLinkDiscount(
       AddCourseLinkDiscountEvent event,
@@ -224,6 +266,21 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
 
     emit(state.copyWith(
         blocStatus:  AddCourseStatus.onSubmitAdd
+    ));
+  }
+  Future<void> _onUpdateCourseFromAPI(
+      AddCourseUpdateCourseFromApiEvent event,
+      Emitter<AddCourseState> emit,
+      )async {
+    if(state.courseInfo?.id!=null && state.courseInfo?.id!=0)
+    {
+      CourseDetailApi courseDetailApi = CourseDetailApi(courseId: state.courseInfo!.id!);
+      CourseInfo courseInfo = await courseDetailApi.call();
+      state.courseInfo = courseInfo;
+    }
+    emit(state.copyWith(
+      blocStatus: AddCourseStatus.onUpdateCourseFromApi,
+      courseInfo: state.courseInfo
     ));
   }
 }

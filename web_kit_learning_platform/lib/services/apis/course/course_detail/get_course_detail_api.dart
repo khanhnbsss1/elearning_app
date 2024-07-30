@@ -6,6 +6,7 @@ import 'package:webkit/base/services/base_request/apiName.dart';
 
 import '../../../../base/services/base_request/models/response_error_objects.dart';
 import '../course_list/models/course_models.dart';
+import 'models/course_detail_model.dart';
 
 enum CourseDetailAction{ 
   view,
@@ -14,7 +15,8 @@ enum CourseDetailAction{
   delete
 }
 class CourseDetailApi extends BaseApiRequest {
-  CourseDetailApi():super(
+  int courseId;
+  CourseDetailApi({required this.courseId}):super(
     serviceType: SERVICE_TYPE.COURSE,
     apiName: ApiName.getInstance().getCourseDetail,
   );
@@ -25,17 +27,17 @@ class CourseDetailApi extends BaseApiRequest {
 
     if(result.runtimeType == ResponseCommon)
     {
-      return CourseResponseModel(content: []);
+      return null;
     }
     else
     {
-      CourseResponseModel paymentHistoryResponseModel = CourseResponseModel.fromJson(result);
-      return paymentHistoryResponseModel;
+      CourseInfo courseInfo = CourseInfo.fromJson(result);
+      return courseInfo;
     }
   }
 
   Future<void> getAuthorization() async {
-    // await setParamsAdd({"type": typeNameToStr[typeName]});
+     await setApiBody({"courseId": courseId});
   }
 
   @override

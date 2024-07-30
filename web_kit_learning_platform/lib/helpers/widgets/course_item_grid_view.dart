@@ -14,6 +14,7 @@ import 'package:webkit/landing_page/components/colornotifier.dart';
 import 'package:webkit/services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:webkit/views/layouts/left_bar.dart';
+import '../../services/apis/course/course_detail/models/course_detail_model.dart';
 import '../../services/apis/course/course_list/models/course_models.dart';
 enum CourseItemAction { viewDetail, edit, delete }
 

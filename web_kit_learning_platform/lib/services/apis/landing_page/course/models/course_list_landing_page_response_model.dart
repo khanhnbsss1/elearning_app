@@ -1,4 +1,5 @@
 
+import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 
 class CourseListResponseModel {
@@ -33,32 +34,20 @@ class CourseListResponseModel {
 
 @override
 class CourseLandingPageInfo extends CourseInfo{
-  int? id;
-  String? name;
-  String? image;
-  String? producerName;
-  int? totalLectures;
-  int? totalSubjects;
-  String? language;
-  int? payment;
-  String? createdAt;
-  String? updatedAt;
-  int? ratePoint;
-  String?introduction;
-
+  
   CourseLandingPageInfo(
-      {this.id,
-        this.name,
-        this.image,
-        this.producerName,
-        this.totalLectures,
-        this.totalSubjects,
-        this.language,
-        this.payment,
-        this.createdAt,
-        this.updatedAt,
-        this.introduction,
-        this.ratePoint,});
+      {super.id,
+        super.name,
+        super.image,
+        super.producerName,
+        super.totalLectures,
+        super.totalSubjects,
+        super.language,
+        super.payment,
+        super.createdAt,
+        super.updatedAt,
+        super.introduction,
+        super.ratePoint,});
 
   CourseLandingPageInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];

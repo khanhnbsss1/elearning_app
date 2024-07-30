@@ -1,7 +1,7 @@
 
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 
-import '../course_list/models/course_models.dart';
+import '../course_detail/models/course_detail_model.dart';
 
 class AddCourseApi extends BaseApiRequest {
   CourseInfo addCourseRequest;

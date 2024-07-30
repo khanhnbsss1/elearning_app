@@ -9,6 +9,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
+import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/views/course/course_list/bloc/course_list_bloc.dart';
 import 'package:webkit/views/course/create_edit_course/create_edit_course.dart';
 import '../../../helpers/theme/app_style.dart';

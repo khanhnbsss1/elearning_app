@@ -37,6 +37,11 @@ class ApiName {
   final String getFilterCourse = "/filter-directory";
   final String addCourseDirectory = "/add-course-directory";
 
+  ///Lesson
+  final String getLessonList = "/get-list-filter";
+  final String linkLesson = "/update-lecture-course";
+  final String unlinkLesson = "/unlink-lecture-course";
+
   /// landing page
 
   final String getCourseListLandingPage = "/get-course-landingpage";

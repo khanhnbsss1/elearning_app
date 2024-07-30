@@ -49,7 +49,35 @@ class AddCourseLinkDiscountEvent extends AddCourseEvent {
 }
 
 class AddCourseLinkLessonEvent extends AddCourseEvent {
-  AddCourseLinkLessonEvent();
+  int courseId;
+  int lessonId;
+  String subject;
+  AddCourseLinkLessonEvent({required this.subject, required this.courseId, required this.lessonId});
+  @override
+  List<Object?> get props => [subject, courseId, lessonId];
+}
+
+class AddCourseUnLinkLinkLessonEvent extends AddCourseEvent {
+  int courseId;
+  int lessonId;
+  AddCourseUnLinkLinkLessonEvent({required this.courseId, required this.lessonId});
+  @override
+  List<Object?> get props => [courseId, lessonId];
+}
+class AddCourseUpdateCourseFromApiEvent extends AddCourseEvent {
+  AddCourseUpdateCourseFromApiEvent();
   @override
   List<Object?> get props => [];
+}
+class AddCourseUpdateSubjectListEvent extends AddCourseEvent {
+  List<String>subjectList;
+  AddCourseUpdateSubjectListEvent({required this.subjectList});
+  @override
+  List<Object?> get props => [subjectList];
+}
+class AddCourseUpdateCurrentSubjectEvent extends AddCourseEvent {
+  String subject;
+  AddCourseUpdateCurrentSubjectEvent({required this.subject});
+  @override
+  List<Object?> get props => [subject];
 }

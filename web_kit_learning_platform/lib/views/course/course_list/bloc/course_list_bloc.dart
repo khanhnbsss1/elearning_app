@@ -44,7 +44,7 @@ class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
   Future<void> callCourseApi({required SearchCommonRequest searchCommonRequest}) async {
     if(state.courseType ==CourseType.courseList)
       {
-        CourseApi courseApi = CourseApi(searchCommonRequest: state.searchCommonRequest!);
+        GetCourseListApi courseApi = GetCourseListApi(searchCommonRequest: state.searchCommonRequest!);
         CourseResponseModel courseResponseModel = await courseApi.call();
         emit(state.copyWith(
             courseResponseModel: courseResponseModel,

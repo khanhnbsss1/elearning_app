@@ -8,6 +8,7 @@ import 'package:webkit/base/widgets/table_common/animation/animation.exports.dar
 import 'package:webkit/helpers/widgets/my_screen_media.dart';
 import 'package:webkit/helpers/widgets/my_screen_media_type.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
+import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import '../../services/apis/course/course_list/models/course_models.dart';
 
 class CourseItem extends StatelessWidget{

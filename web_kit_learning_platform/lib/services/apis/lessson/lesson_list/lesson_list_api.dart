@@ -2,36 +2,32 @@
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
-import '../course_list/models/course_models.dart';
+import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 
-class GetCourseListApi extends BaseApiRequest {
+class GetLessonListApi extends BaseApiRequest {
   SearchCommonRequest searchCommonRequest;
-  GetCourseListApi({required this.searchCommonRequest}):super(
-    serviceType: SERVICE_TYPE.COURSE,
-    apiName: ApiName.getInstance().getCourseList,
+  GetLessonListApi({required this.searchCommonRequest}):super(
+    serviceType: SERVICE_TYPE.LESSON,
+    apiName: ApiName.getInstance().getLessonList,
   );
 
-  Future<dynamic> call() async {
+  Future<LessonListResponseModel> call() async {
     await getAuthorization();
-    dynamic result = await postRequestAPI();
+    dynamic result = await getRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {
-      return CourseResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
+      return LessonListResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
     }
     else
     {
-      CourseResponseModel paymentHistoryResponseModel = CourseResponseModel.fromJson(result);
+      LessonListResponseModel paymentHistoryResponseModel = LessonListResponseModel.fromList(result);
       return paymentHistoryResponseModel;
     }
   }
 
   Future<void> getAuthorization() async {
-    UserProfile? userProfile = await UserManager().getUserProfile();
-    if(userProfile!=null) {
-      searchCommonRequest = searchCommonRequest.copyWith(userId: userProfile.id);
-    }
-     await setApiBody(searchCommonRequest.toJson());
+     await setParamsAdd({"keyword":searchCommonRequest.keyword});
   }
 
   @override

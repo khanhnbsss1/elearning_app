@@ -1,16 +1,25 @@
+import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:hovering/hovering.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/services/base_request/models/search_common_request.dart';
+import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/controller/ui/add_course_controller.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
+import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
+import 'package:webkit/services/apis/lessson/lesson_list/lesson_list_api.dart';
+import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
+import 'package:syncfusion_flutter_core/theme.dart';
 
 class CourseLinkLessonListPage extends StatefulWidget {
   CourseLinkLessonListPage({super.key});
@@ -28,6 +37,7 @@ class CourseLinkLessonListPage extends StatefulWidget {
 class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with SingleTickerProviderStateMixin, UIMixin {
   late List<CourseInfo> coursesInfo;
   var position = 0;
+  ScrollController scrollController=ScrollController();
 
   @override
   void initState() {
@@ -72,17 +82,10 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
           child: Column(
             children: [
               buildSearchBar(state: state, context: context),
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
+              Expanded(
                 child: Padding(
                   padding: EdgeInsets.all(Dimens.size16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      buildLessonTableList(state: state, context: context)
-                    ],
-                  ),
+                  child: buildLessonTableList(state: state, context: context),
                 ),
               ),
             ],
@@ -97,70 +100,200 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.max,
       children: [
-        subjectDropDownSearch(onSelectSubject: (p0) {
-          
+        subjectDropDownSearch(
+          state: state,
+          context: context,
+          onSelectSubject: (p0) {
+            
         },),
-        lessonDropDownSearch(onSelectLesson: (p0) {
-          
+        lessonDropDownSearch(
+          context: context,
+          onSelectLesson: (p0) {
+            BlocProvider.of<AddCourseBloc>(context).add(AddCourseLinkLessonEvent(
+                subject: state.currentSubject??"Test", 
+                courseId: state.courseInfo!.id!, 
+                lessonId: p0.id!));
         },)
       ],
     );
   }
   Widget buildLessonTableList({required AddCourseState state, required BuildContext context}){
-    return SizedBox();
+    LessonDataSource employeeDataSource = LessonDataSource(
+        lessonData: state.courseInfo?.lectures??[],
+      onDelete: (p0) {
+        
+      },
+      onEdit: (p0) {
+        
+      },
+      onViewDetail: (p0) {
+        
+      },
+    );
+    return SfDataGridTheme(
+      data: SfDataGridThemeData(
+          headerColor: ColorConst.mainColor.withOpacity(0.1), 
+      ),
+      child: SfDataGrid(
+        source: employeeDataSource,
+        columnWidthMode: ColumnWidthMode.fill,
+        isScrollbarAlwaysShown: false,
+        gridLinesVisibility: GridLinesVisibility.both,
+        rowHeight: Dimens.size80,
+        showHorizontalScrollbar: true,
+        columns: <GridColumn>[
+          GridColumn(
+              columnName: 'id',
+              maximumWidth: Dimens.size100,
+              label: Container(
+                  padding: EdgeInsets.all(16.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    'ID',
+                  ))),
+          GridColumn(
+              columnName: L10nX.getStr.lecture_name_str,
+              label: Container(
+                  padding: EdgeInsets.all(8.0),
+                  alignment: Alignment.center,
+                  child: Text(L10nX.getStr.lecture_name_str))),
+          GridColumn(
+              columnName: L10nX.getStr.subject_name_str,
+              label: Container(
+                  padding: EdgeInsets.all(8.0),
+                  alignment: Alignment.center,
+                  child: Text(
+                    L10nX.getStr.subject_name_str,
+                    overflow: TextOverflow.ellipsis,
+                  ))),
+          GridColumn(
+              columnName: L10nX.getStr.lecture_link_str,
+              label: Container(
+                  padding: EdgeInsets.all(8.0),
+                  alignment: Alignment.center,
+                  child: Text(L10nX.getStr.lecture_link_str))),
+          GridColumn(
+              columnName: L10nX.getStr.document_str,
+              label: Container(
+                  padding: EdgeInsets.all(8.0),
+                  alignment: Alignment.center,
+                  child: Text(L10nX.getStr.document_str))),
+          GridColumn(
+              columnName: L10nX.getStr.word_str,
+              label: Container(
+                  padding: EdgeInsets.all(8.0),
+                  alignment: Alignment.center,
+                  child: Text(L10nX.getStr.word_str))),
+          GridColumn(
+              columnName: L10nX.getStr.payment_str,
+              maximumWidth: Dimens.size100,
+              label: Container(
+                  padding: EdgeInsets.all(8.0),
+                  alignment: Alignment.center,
+                  child: Text(L10nX.getStr.payment_str))),
+          GridColumn(
+              columnName: L10nX.getStr.action_str,
+              maximumWidth: Dimens.size120,
+              label: Container(
+                  padding: EdgeInsets.all(8.0),
+                  alignment: Alignment.center,
+                  child: Text(L10nX.getStr.action_str))),
+      
+        ],
+      ),
+    );
   }
 
-  Widget subjectDropDownSearch({Function(String)? onSelectSubject}) {
+  Widget subjectDropDownSearch({Function(String)? onSelectSubject, required AddCourseState state,required BuildContext context}) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
           width: Dimens.size300,
-          child: DropdownSearch<String>(
-          popupProps: PopupProps.menu(
-            constraints: BoxConstraints(
-              maxHeight:  Dimens.size210
-            ),
-            showSearchBox: true,
-            searchDelay: Duration(seconds: 0),
-            showSelectedItems: true,
-          ),
-          asyncItems: (text) {
-            return getSubjectList(text);
-          },
-          dropdownDecoratorProps: DropDownDecoratorProps(
-            dropdownSearchDecoration: InputDecoration(
-              hintText: L10nX.getStr.search_subject_str,
-              labelText: L10nX.getStr.search_subject_str,
-              hintTextDirection: AppTheme.textDirection,
-              labelStyle: TextStyleConstant.textStyleBlack14w400,
-              hintStyle: TextStyleConstant.textStyleBlack14w400,
-              border: outlineInputBorder,
-              prefixIcon: Icon(
-                LucideIcons.book,
-                size: 20,
-                color: ColorConst.colorIconRed,
-              ),
-              suffixIcon: Icon(
-                LucideIcons.search,
-                size: 20,
-                color: ColorConst.colorIconRed,
-              ),
-              contentPadding: MySpacing.all(16),
-              isCollapsed: true,
-              floatingLabelBehavior: FloatingLabelBehavior.never,
-            ),
-          ),
-          onChanged: (value) {
-            if(onSelectSubject!=null)
-              {
-                onSelectSubject(value??"");
-              }
-          },
-          onSaved: (newValue) {
-            
-          },
+          child: StatefulBuilder(
+            builder: (BuildContext context, void Function(void Function()) setState) {
+              return DropDownSearchField(
+                textFieldConfiguration: TextFieldConfiguration(
+                  autofocus: true,
+                  style: DefaultTextStyle.of(context).style.copyWith(
+                      fontStyle: FontStyle.italic
+                  ),
+                  decoration: InputDecoration(
+                    //hintText: L10nX.getStr.search_lesson_str,
+                    labelText: L10nX.getStr.search_subject_str,
+                    hintTextDirection: AppTheme.textDirection,
+                    labelStyle: TextStyleConstant.textStyleBlack14w400,
+                    hintStyle: TextStyleConstant.textStyleBlack14w400,
+                    border: outlineInputBorder,
+                    prefixIcon: Icon(
+                      Icons.topic,
+                      size: 20,
+                      color: ColorConst.colorIconRed,
+                    ),
+                    suffixIcon: Icon(
+                      LucideIcons.search,
+                      size: 20,
+                      color: ColorConst.colorIconRed,
+                    ),
+                    contentPadding: MySpacing.all(16),
+                    isCollapsed: true,
+                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                  ),
                 ),
+
+                suggestionsCallback: (pattern) async {
+                  return await getSubjectList(keyWord: pattern, state: state);
+                },
+
+                itemBuilder: (context, suggestion) {
+                  return OnHoverWidget(
+                    builder: (bool isHovered) {
+                      return  Container(
+                        decoration: BoxDecoration(
+                            color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
+                            border: Border(
+                                bottom: BorderSide(color: ColorConst.dividerColor)
+                            )
+                        ),
+                        child: ListTile(
+                          leading: Icon(Icons.topic),
+                          title: Text(suggestion??""),
+                        ),
+                      );
+                    },
+                  );
+                },
+                onSuggestionSelected: (suggestion) {
+
+                  if(onSelectSubject!=null)
+                    {
+                      onSelectSubject(suggestion);
+                    }
+                },
+                transitionBuilder: (context, child, controller) {
+                  return Container(
+                    constraints: BoxConstraints(
+                        maxHeight: Dimens.size300
+                    ),
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                        color: ColorConst.whiteColor,
+                        borderRadius: BorderRadius.circular(Dimens.size10)
+                    ),
+                    padding: EdgeInsets.all(Dimens.size8),
+                    child: FadeTransition(
+                      opacity: CurvedAnimation(
+                          parent: controller!,
+                          curve: Curves.fastOutSlowIn
+                      ),
+                      child: child,
+                    ),
+                  );
+                },
+                displayAllSuggestionWhenTap: false,
+              );
+              },
+          ),
         ),
         Gap(Dimens.size16),
         InkWell(
@@ -171,55 +304,93 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
       ]
     );
   }
-  Widget lessonDropDownSearch({Function(String)? onSelectLesson}) {
+  Widget lessonDropDownSearch({Function(LessonInfo)? onSelectLesson, required BuildContext context}) {
     return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
             width: Dimens.size300,
-            child: DropdownSearch<String>(
-              popupProps: PopupProps.menu(
-                constraints: BoxConstraints(
-                    maxHeight:  Dimens.size210
-                ),
-                showSearchBox: true,
-                searchDelay: Duration(seconds: 0),
-                showSelectedItems: true,
-              ),
-              asyncItems: (text) {
-                return getSubjectList(text);
-              },
-              dropdownDecoratorProps: DropDownDecoratorProps(
-                dropdownSearchDecoration: InputDecoration(
-                  hintText: L10nX.getStr.search_lesson_str,
-                  labelText: L10nX.getStr.search_lesson_str,
-                  hintTextDirection: AppTheme.textDirection,
-                  labelStyle: TextStyleConstant.textStyleBlack14w400,
-                  hintStyle: TextStyleConstant.textStyleBlack14w400,
-                  border: outlineInputBorder,
-                  prefixIcon: Icon(
-                    LucideIcons.book,
-                    size: 20,
-                    color: ColorConst.colorIconRed,
-                  ),
-                  suffixIcon: Icon(
-                    LucideIcons.search,
-                    size: 20,
-                    color: ColorConst.colorIconRed,
-                  ),
-                  contentPadding: MySpacing.all(16),
-                  isCollapsed: true,
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
-                ),
-              ),
-              onChanged: (value) {
-                if(onSelectLesson!=null)
-                {
-                  onSelectLesson(value??"");
-                }
-              },
-              onSaved: (newValue) {
-
+            child: StatefulBuilder(
+              builder: (BuildContext context, void Function(void Function()) setState) { 
+                return DropDownSearchField(
+                    textFieldConfiguration: TextFieldConfiguration(
+                        autofocus: true,
+                        style: DefaultTextStyle.of(context).style.copyWith(
+                            fontStyle: FontStyle.italic
+                        ),
+                        decoration: InputDecoration(
+                          //hintText: L10nX.getStr.search_lesson_str,
+                          labelText: L10nX.getStr.search_lesson_str,
+                          hintTextDirection: AppTheme.textDirection,
+                          labelStyle: TextStyleConstant.textStyleBlack14w400,
+                          hintStyle: TextStyleConstant.textStyleBlack14w400,
+                          border: outlineInputBorder,
+                          prefixIcon: Icon(
+                            Icons.edit_document,
+                            size: 20,
+                            color: ColorConst.colorIconRed,
+                          ),
+                          suffixIcon: Icon(
+                            LucideIcons.search,
+                            size: 20,
+                            color: ColorConst.colorIconRed,
+                          ),
+                          contentPadding: MySpacing.all(16),
+                          isCollapsed: true,
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                        ),
+                    ),
+                    
+                    suggestionsCallback: (pattern) async {
+                      return await getLessonList(pattern);
+                    },
+                  
+                    itemBuilder: (context, suggestion) {
+                      return OnHoverWidget(
+                        builder: (bool isHovered) { 
+                          return  Container(
+                            decoration: BoxDecoration(
+                              color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
+                              border: Border(
+                                bottom: BorderSide(color: ColorConst.dividerColor)
+                              )
+                            ),
+                            child: ListTile(
+                              leading: Icon(Icons.edit_document),
+                              title: Text(suggestion.lectureName??""),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    onSuggestionSelected: (suggestion) {
+                      if(onSelectLesson!=null)
+                        {
+                          onSelectLesson(suggestion);
+                        }
+                    }, 
+                  transitionBuilder: (context, child, controller) {
+                    return Container(
+                      constraints: BoxConstraints(
+                          maxHeight: Dimens.size300
+                      ),
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                          color: ColorConst.whiteColor,
+                          borderRadius: BorderRadius.circular(Dimens.size10)
+                      ),
+                      padding: EdgeInsets.all(Dimens.size8),
+                      child: FadeTransition(
+                        opacity: CurvedAnimation(
+                            parent: controller!,
+                            curve: Curves.fastOutSlowIn
+                        ),
+                        child: child,
+                      ),
+                    );
+                  },
+                  displayAllSuggestionWhenTap: false,
+                );
               },
             ),
           ),
@@ -233,12 +404,108 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
         ]
     );
   }
-  Future<List<String>>getSubjectList(String keyWord) async{
+  Future<List<String>>getSubjectList({required String keyWord, required AddCourseState state,}) async{
     List<String> listSubject=[];
+    for(String lessonInfo in state.subjectList??[])
+      {
+        if(!listSubject.contains(lessonInfo) && (lessonInfo??"").isNotEmpty && (lessonInfo??"").toLowerCase().contains(keyWord.toLowerCase()))
+          {
+            listSubject.add(lessonInfo??"");
+          }
+      }
     return listSubject;
   }
-  Future<List<String>>getLessonList(String keyWord) async{
-    List<String> listLesson=[];
-    return listLesson;
+  Future<List<LessonInfo>>getLessonList(String keyWord) async{
+    if(keyWord.isEmpty) {
+      return [];
+    }
+    GetLessonListApi getLessonListApi= GetLessonListApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord));
+    LessonListResponseModel data = await getLessonListApi.call();
+    return data.content??[];
+  }
+  
+}
+class LessonDataSource extends DataGridSource {
+  /// Creates the employee data source class with required details.
+  Function(LessonInfo) onViewDetail, onEdit, onDelete; 
+  LessonDataSource({required List<LessonInfo> lessonData, required this.onDelete, required this.onEdit, required this.onViewDetail}) {
+    _lessonData = lessonData.map<DataGridRow>((e) {
+      List<Widget> wordList = [];
+      for(int index =0; index <10; index++){
+        wordList.add(
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: ColorConst.whiteColor,
+                  borderRadius: BorderRadius.circular(Dimens.size20),
+                  border: Border.all(color: ColorConst.blackColor, width: 1)
+                ), 
+                  padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: Dimens.size16),
+                  child: Text("data", style: TextStyleConstant.textStyleBlack14w400,)),
+            ));
+      }
+      
+      return  DataGridRow(
+          cells: [
+            DataGridCell<Widget>(columnName: 'id', value: Text(e.id.toString(), style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.lecture_name_str, value:Text(e.lectureName??"", style: TextStyleConstant.textStyleBlack14w400,) ),
+            DataGridCell<Widget>(columnName: L10nX.getStr.subject_name_str, value: Text(e.subName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.lecture_link_str, value: Text(e.lectureLink??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.document_str, value: Text("abcsssij", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.word_str, value: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: wordList,
+              ),
+            )),
+            DataGridCell<Widget>(columnName: L10nX.getStr.payment_str, value: Text(e.lectureMode??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.payment_str, value: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () {
+                  },
+                  child: Icon(Icons.remove_red_eye, size: Dimens.size20,color: ColorConst.colorIconGrays,),
+                ),
+                Gap(Dimens.size10),
+                InkWell(
+                  onTap: () {
+
+                  },
+                  child: Icon(Icons.note_alt_outlined, size: Dimens.size20,color: ColorConst.colorIconGrays,),
+                ),
+                Gap(Dimens.size10),
+                InkWell(
+                  onTap: () {
+
+                  },
+                  child: Icon(Icons.delete_forever, size: Dimens.size20,color: Colors.red,),
+                ),
+                Gap(Dimens.size10),
+              ],
+            )),
+
+          ]);
+    },).toList();
+  }
+
+  List<DataGridRow> _lessonData = [];
+
+  @override
+  List<DataGridRow> get rows => _lessonData;
+
+  @override
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    return DataGridRowAdapter(
+        cells: row.getCells().map<Widget>((e) {
+          return Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(8.0),
+            child: e.value,
+          );
+        }).toList());
   }
 }

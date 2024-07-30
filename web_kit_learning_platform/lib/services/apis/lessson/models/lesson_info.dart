@@ -1,44 +1,76 @@
+
+import 'package:webkit/base/services/base_request/models/page_model.dart';
+
+class LessonListResponseModel extends PageModel{
+  List<LessonInfo>? content;
+
+  LessonListResponseModel({super.total, super.pageSize, super.pageNumber, this.content});
+  LessonListResponseModel.fromJson(Map<String, dynamic> json) {
+    total = json['total'];
+    pageSize = json['pageSize'];
+    pageNumber = json['pageNumber'];
+    if (json['content'] != null) {
+      content = <LessonInfo>[];
+      json['content'].forEach((v) {
+        content!.add(new LessonInfo.fromJson(v));
+      });
+    }
+  }
+  LessonListResponseModel.fromList( dynamic json) {
+    if (json!= null) {
+      content = <LessonInfo>[];
+      json.forEach((v) {
+        content!.add(new LessonInfo.fromJson(v));
+      });
+    }
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['total'] = total;
+    data['pageSize'] = pageSize;
+    data['pageNumber'] = pageNumber;
+    if (content != null) {
+      data['content'] = content!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+
+}
+
 class LessonInfo {
   int? id;
   String? subName;
-  int? courseId;
   String? lectureName;
-  String? link;
-  String? mode;
-  String? note;
-  String? createdBy;
+  String? lectureLink;
+  String? lectureMode;
+  String? document;
 
   LessonInfo(
       {this.id,
         this.subName,
-        this.courseId,
         this.lectureName,
-        this.link,
-        this.mode,
-        this.note,
-        this.createdBy});
+        this.lectureLink,
+        this.lectureMode,
+        this.document
+      });
 
   LessonInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     subName = json['sub_name'];
-    courseId = json['course_id'];
-    lectureName = json['lecture_name'];
-    link = json['link'];
-    mode = json['mode'];
-    note = json['note'];
-    createdBy = json['created_by'];
+    lectureName = json['lecture_name']?? json['name'];
+    lectureLink = json['lecture_link'];
+    lectureMode = json['lecture_mode'];
+    document = json['document'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['sub_name'] = subName;
-    data['course_id'] = courseId;
     data['lecture_name'] = lectureName;
-    data['link'] = link;
-    data['mode'] = mode;
-    data['note'] = note;
-    data['created_by'] = createdBy;
+    data['lecture_link'] = lectureLink;
+    data['lecture_mode'] = lectureMode;
+    data['document'] = document;
     return data;
   }
 }

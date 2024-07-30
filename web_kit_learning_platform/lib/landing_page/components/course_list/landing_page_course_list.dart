@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/landing_page/mediaquery/mq.dart';
+import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
 import 'package:webkit/helpers/widgets/course_item.dart';
 

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/my_controller.dart';
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
+import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
+import 'package:webkit/services/apis/tags/models/tag_info.dart';
 
 class AddCourseController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
@@ -205,7 +207,7 @@ class AddCourseController extends MyController {
     basicValidator.getController('accompany_course')!.text = getIdFromName(listOfAccompanyCourses, basicValidator.getController('accompany_course')!.text??"").toString();
    // basicValidator.getController('category_id')!.text = getIdFromName(listOfCategoryName, basicValidator.getController('category_name')!.text??"").toString();
     List<String>? tags =basicValidator.getController('tags')!.text.split(',');
-    List<Tags> tagsList = [];
+    List<TagsInfo> tagsList = [];
     int? gradleId = getIdFromName(listOfGradeNames, basicValidator.getController('grade_name')!.text??"");
     basicValidator.getController('grade_name')!.text = listOfGradeNames[getIdFromName(listOfGradeNames, basicValidator.getController('grade_name')!.text??"")]??"";
     UserProfile? userProfile = await UserManager().getUserProfile();
@@ -213,7 +215,7 @@ class AddCourseController extends MyController {
       {
         if(tags.contains(listOfTags[tagKey]))
           {
-            tagsList.add(Tags(name: listOfTags[tagKey], id: tagKey));
+            tagsList.add(TagsInfo(name: listOfTags[tagKey], id: tagKey));
           }
       }
     CourseInfo addCourseRequest = courseInfo.copyWith(

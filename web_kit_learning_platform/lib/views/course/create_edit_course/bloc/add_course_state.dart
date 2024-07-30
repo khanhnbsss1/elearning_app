@@ -10,7 +10,11 @@ enum AddCourseStatus {
   onUploadImage,
   onUploadVideoPreview,
   onLinkLesson,
-  onLinkDiscount
+  onUnlinkLesson,
+  onLinkDiscount,
+  onUpdateCourseFromApi,
+  onUpdateSubjectList,
+  onUpdateCurrentSubject
 }
 
 @immutable
@@ -21,17 +25,22 @@ class AddCourseState extends Equatable {
   AddCourseController? controller;
   GetAddCourseFilterModel? addCourseFilterModel;
   bool? initial;
+  String? currentSubject;
+  List<String>?subjectList;
   AddCourseState({
     this.blocStatus,
     this.addCourseFilterModel,
     this.initial,
     this.courseInfo,
     this.controller,
-    this.coursePageType
+    this.coursePageType,
+    this.currentSubject,
+    this.subjectList
   }){
     courseInfo??=CourseInfo.initial();
     coursePageType??=CoursePageType.create;
     controller??= Get.put(AddCourseController());
+    subjectList??=[];
   }
 
 
@@ -41,7 +50,9 @@ class AddCourseState extends Equatable {
     bool? initial,
     CourseInfo? courseInfo,
     AddCourseController? controller,
-    CoursePageType? coursePageType
+    CoursePageType? coursePageType,
+    String? currentSubject,
+    List<String>?subjectList
   })
   {
     return AddCourseState(
@@ -51,11 +62,13 @@ class AddCourseState extends Equatable {
       courseInfo: courseInfo??this.courseInfo,
       controller: controller??this.controller,
       coursePageType: coursePageType??this.coursePageType,
+      currentSubject: currentSubject??this.currentSubject,
+      subjectList: subjectList??this.subjectList,
 
     );
   }
   @override
-  List<Object?> get props => [blocStatus, addCourseFilterModel, initial, courseInfo, controller, coursePageType];
+  List<Object?> get props => [blocStatus, addCourseFilterModel, initial, courseInfo, controller, coursePageType, currentSubject, subjectList];
 
 }
 

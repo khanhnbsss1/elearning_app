@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
+import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import '../../../../controller/ui/add_course_controller.dart';
 import '../../../../helpers/utils/ui_mixins.dart';
 import '../../../../helpers/widgets/my_spacing.dart';
@@ -14,8 +15,8 @@ import 'course_mode.dart';
 class AddLectures extends StatefulWidget {
   final Color color;
   final AddCourseController controller;
-  final List<Lectures> lectures;
-  final void Function(List<Subject>,List<Lectures>) onChanged;
+  final List<LessonInfo> lectures;
+  final void Function(List<Subject>,List<LessonInfo>) onChanged;
 
   const AddLectures({
     super.key,
@@ -30,7 +31,7 @@ class AddLectures extends StatefulWidget {
 }
 
 List<Subject> subjects = [];
-List<Lectures> lectures = [];
+List<LessonInfo> lectures = [];
 
 class _AddLecturesState extends State<AddLectures>
     with SingleTickerProviderStateMixin, UIMixin {
@@ -39,6 +40,7 @@ class _AddLecturesState extends State<AddLectures>
   late Color color;
 
 
+  @override
   void initState() {
     super.initState();
     controller = widget.controller;
@@ -55,7 +57,7 @@ class _AddLecturesState extends State<AddLectures>
       required String? lectureMode,
       }) {
     setState(() {
-      subjects[subjectIndex].lectures.add(Lectures(
+      subjects[subjectIndex].lectures.add(LessonInfo(
             id: lectures.length + 1,
             subName: '',
             lectureName: lectureName,
@@ -491,7 +493,7 @@ void setLectureModeToFree() {
 }
 class Subject {
   String subName;
-  List<Lectures> lectures;
+  List<LessonInfo> lectures;
 
   Subject({required this.subName, required this.lectures});
 }
