@@ -93,6 +93,9 @@ class UserProfile {
     data['position'] = position;
     return data;
   }
+  String getPermission(){
+    return "";
+  }
 }
 
 class ServicePriceInfo {

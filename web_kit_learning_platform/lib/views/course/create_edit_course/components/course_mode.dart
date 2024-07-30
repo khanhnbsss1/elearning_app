@@ -1,14 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:flutter/services.dart';
 import '../../../../base/theme/colors_app.dart';
-import '../../../../controller/ui/add_course_controller.dart';
-import '../../../../helpers/theme/app_theme.dart';
 import '../../../../helpers/widgets/my_spacing.dart';
 import '../../../../helpers/widgets/my_text.dart';
-import '../../../../helpers/widgets/my_text_style.dart';
 
 
 class ModeOptionWidget extends StatefulWidget {

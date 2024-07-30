@@ -503,5 +503,16 @@
   "availability Course_str": "课程可用性",
   "discount_str": "折扣",
   "adjust_your_course_availability_date_str": "调整课程可用日期",
-  "uploading_file": "正在上传文件......"
+  "uploading_file": "正在上传文件......",
+  "detail_str": "详细信息",
+  "edit_str": "编辑",
+  "delete_str": "删除",
+
+  236 / 5,000
+  "search_subject_str": "搜索主题",
+  "create_subject_str": "创建主题",
+  "delete_subject_str": "删除主题",
+  "search_lesson_str": "搜索课程",
+  "create_lesson_str": "创建课程",
+  "delete_lesson_str": "删除课程"
 }

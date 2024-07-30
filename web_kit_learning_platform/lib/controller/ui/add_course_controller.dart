@@ -163,6 +163,11 @@ class AddCourseController extends MyController {
       label: 'PaymentDiscount',
       controller: TextEditingController(),
     );
+    basicValidator.addField(
+      'payment_discount',
+      label: 'PaymentDiscount',
+      controller: TextEditingController(),
+    );
   }
 
   void onChangeCheckBox(bool? value) {

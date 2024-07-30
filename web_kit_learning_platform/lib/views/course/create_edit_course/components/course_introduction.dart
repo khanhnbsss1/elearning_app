@@ -844,22 +844,10 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
     }
     return DropdownSearch<String>(
       popupProps: PopupProps.menu(
-/*
-        containerBuilder: (context, popupWidget) {
-          return Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.vertical(bottom: Radius.circular(Dimens.size16))
-            ),
-            child: popupWidget,
-          );
-        },
-*/
         constraints: BoxConstraints(
           maxHeight: (65 + list.length * 50 < 210) ? 65 + list.length * 50 : 210,
         ),
         showSearchBox: true,
-        
         searchDelay: Duration(seconds: 0),
         showSelectedItems: true,
       ),

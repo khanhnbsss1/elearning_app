@@ -5035,6 +5035,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Detail`
+  String get detail_str {
+    return Intl.message(
+      'Detail',
+      name: 'detail_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit`
+  String get edit_str {
+    return Intl.message(
+      'Edit',
+      name: 'edit_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete_str {
+    return Intl.message(
+      'Delete',
+      name: 'delete_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for a topic`
+  String get search_subject_str {
+    return Intl.message(
+      'Search for a topic',
+      name: 'search_subject_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create a topic`
+  String get create_subject_str {
+    return Intl.message(
+      'Create a topic',
+      name: 'create_subject_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete a topic`
+  String get delete_subject_str {
+    return Intl.message(
+      'Delete a topic',
+      name: 'delete_subject_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for a lesson`
+  String get search_lesson_str {
+    return Intl.message(
+      'Search for a lesson',
+      name: 'search_lesson_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create a lesson`
+  String get create_lesson_str {
+    return Intl.message(
+      'Create a lesson',
+      name: 'create_lesson_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete a lesson`
+  String get delete_lesson_str {
+    return Intl.message(
+      'Delete a lesson',
+      name: 'delete_lesson_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

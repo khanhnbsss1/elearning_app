@@ -1,3 +1,7 @@
+import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/tags/models/tag_info.dart';
+import 'package:webkit/services/apis/topic/model/topic_info.dart';
+
 class CourseDetail {
   int? id;
   String? name;
@@ -26,7 +30,7 @@ class CourseDetail {
   String? categoryName;
   String? typeName;
   int? isActive;
-  List<LecturesInfo>? lectures;
+  List<LessonInfo>? lectures;
   List<TagsInfo>? tags;
   List<Subjects>? subjects;
   CourseDetail(
@@ -91,9 +95,9 @@ class CourseDetail {
     isActive = json['is_active'];
     subjects = [];
     if (json['lectures'] != null) {
-      lectures = <LecturesInfo>[];
+      lectures = <LessonInfo>[];
       json['lectures'].forEach((v) {
-        lectures!.add(new LecturesInfo.fromJson(v));
+        lectures!.add(new LessonInfo.fromJson(v));
       });
       addLectureToSubject();
     }
@@ -146,30 +150,30 @@ class CourseDetail {
   }
 
   void addLectureToSubject(){
-    for(LecturesInfo lecturesInfo in lectures??[]){
+    for(LessonInfo lessonInfo in lectures??[]){
       if((subjects??[]).isEmpty)
       {
-        subjects?.add(Subjects(subName: lecturesInfo.subName, lectures: [lecturesInfo]));
+        subjects?.add(Subjects(subName: lessonInfo.subName, lectures: [lessonInfo]));
       }
       else
       {
         int index =0;
         for(index =0; index<(subjects??[]).length; index++){
-          if(((subjects??[]).elementAt(index).lectures??[]).first.subName == lecturesInfo.subName)
+          if(((subjects??[]).elementAt(index).lectures??[]).first.subName == lessonInfo.subName)
           {
-            ((subjects??[])[index].lectures??[]).add(lecturesInfo);
+            ((subjects??[])[index].lectures??[]).add(lessonInfo);
             break;
           }
         }
         if(index == (subjects??[]).length){/// truong hop cua co Subjects cho lecture nay
-          subjects?.add(Subjects(subName: lecturesInfo.subName, lectures: [lecturesInfo]));
+          subjects?.add(Subjects(subName: lessonInfo.subName, lectures: [lessonInfo]));
         }
 
       }
     }
   }
-  List<LecturesInfo> convertSubjectToLectureList(){
-    List<LecturesInfo> lectures = [];
+  List<LessonInfo> convertSubjectToLectureList(){
+    List<LessonInfo> lectures = [];
     for(Subjects subjects in subjects??[])
     {
       lectures.addAll(subjects.lectures??[]);
@@ -177,91 +181,5 @@ class CourseDetail {
     return lectures;
   }
 }
-class Subjects {
-  String? subName;
-  List<LecturesInfo>? lectures;
-  Subjects({this.subName, this.lectures}){
-    lectures??=[];
-  }
-  Subjects.fromJson(Map<String, dynamic> json) {
-    subName = json['sub_name'];
-    if (json['lectures'] != null) {
-      lectures = <LecturesInfo>[];
-      json['lectures'].forEach((v) {
-        lectures!.add(new LecturesInfo.fromJson(v));
-      });
-    }
-  }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['sub_name'] = subName;
-    if (lectures != null) {
-      data['lectures'] = lectures!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-class LecturesInfo {
-  int? id;
-  String? subName;
-  int? courseId;
-  String? lectureName;
-  String? link;
-  String? mode;
-  String? note;
-  String? createdBy;
 
-  LecturesInfo(
-      {this.id,
-        this.subName,
-        this.courseId,
-        this.lectureName,
-        this.link,
-        this.mode,
-        this.note,
-        this.createdBy});
-
-  LecturesInfo.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    subName = json['sub_name'];
-    courseId = json['course_id'];
-    lectureName = json['lecture_name'];
-    link = json['link'];
-    mode = json['mode'];
-    note = json['note'];
-    createdBy = json['created_by'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['sub_name'] = subName;
-    data['course_id'] = courseId;
-    data['lecture_name'] = lectureName;
-    data['link'] = link;
-    data['mode'] = mode;
-    data['note'] = note;
-    data['created_by'] = createdBy;
-    return data;
-  }
-}
-
-class TagsInfo {
-  int? id;
-  String? name;
-
-  TagsInfo({this.id, this.name});
-
-  TagsInfo.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    return data;
-  }
-}

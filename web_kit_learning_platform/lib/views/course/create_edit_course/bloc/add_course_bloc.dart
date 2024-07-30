@@ -11,6 +11,7 @@ import 'package:webkit/services/apis/course/get_course_dictionary/get_course_dir
 import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_model.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/services/apis/upload_file/upload_file_api.dart';
+import 'package:webkit/views/course/create_edit_course/create_edit_course.dart';
 part 'add_course_event.dart';
 part 'add_course_state.dart';
 
