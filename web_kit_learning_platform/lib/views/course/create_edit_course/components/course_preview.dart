@@ -1,12 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_rating/flutter_rating.dart';
-import 'package:get/get_state_manager/src/simple/get_widget_cache.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/theme/text_stype_constant.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
-import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
+import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 
 import '../../../../helpers/utils/ui_mixins.dart';
 
