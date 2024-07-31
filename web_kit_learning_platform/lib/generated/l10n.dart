@@ -4982,7 +4982,15 @@ class S {
     );
   }
 
-  // skipped getter for the 'normal_sale:_str' key
+  /// `Normal sale`
+  String get normal_sale_str {
+    return Intl.message(
+      'Normal sale',
+      name: 'normal_sale_str',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `Presale`
   String get presale_str {
@@ -5004,7 +5012,15 @@ class S {
     );
   }
 
-  // skipped getter for the 'availability Course_str' key
+  /// `Availability Course`
+  String get availability_course_str {
+    return Intl.message(
+      'Availability Course',
+      name: 'availability_course_str',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `Discount`
   String get discount_str {

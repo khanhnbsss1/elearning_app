@@ -16,7 +16,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:webkit/views/layouts/left_bar.dart';
 import '../../services/apis/course/course_detail/models/course_detail_model.dart';
 import '../../services/apis/course/course_list/models/course_models.dart';
-enum CourseItemAction { viewDetail, edit, delete }
+enum CourseItemAction { viewDetail, edit, delete , study}
 
 class CourseItemGridView extends StatelessWidget {
   CourseItemGridView({
@@ -24,14 +24,15 @@ class CourseItemGridView extends StatelessWidget {
     this.enableEdit,
     this.onViewDetail,
     this.onDelete,
-    this.onEdit
+    this.onEdit,
+    this.onStudy,
   }){
     enableEdit??=false;
   }
 
   CourseInfo courseInfo;
   bool? enableEdit;
-  Function(CourseInfo)? onEdit, onDelete, onViewDetail;
+  Function(CourseInfo)? onEdit, onDelete, onViewDetail, onStudy;
   late ColorNotifier notifier;
   @override
   Widget build(BuildContext context) {
@@ -248,6 +249,12 @@ class CourseItemGridView extends StatelessWidget {
                                     onDelete!(courseInfo);
                                   }
                                   break;
+                                case CourseItemAction.study:
+                                  // TODO: Handle this case.
+                                  if(onStudy!=null)
+                                  {
+                                    onStudy!(courseInfo);
+                                  }
                               }
                             },
                             itemBuilder: (BuildContext context) => <PopupMenuEntry<CourseItemAction>>[
@@ -262,6 +269,10 @@ class CourseItemGridView extends StatelessWidget {
                               PopupMenuItem<CourseItemAction>(
                                 value: CourseItemAction.delete,
                                 child: Text(L10nX.getStr.delete_str),
+                              ),
+                              PopupMenuItem<CourseItemAction>(
+                                value: CourseItemAction.study,
+                                child: Text(L10nX.getStr.lets_study),
                               ),
                             ],
                         

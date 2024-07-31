@@ -19,6 +19,7 @@ enum CoursePageType{
   create,
   edit
 }
+
 class CreateEditCourse extends StatefulWidget {
   CreateEditCourse({super.key, this.courseInfo, required this.coursePageType, this.onNext});
   CourseInfo? courseInfo;
