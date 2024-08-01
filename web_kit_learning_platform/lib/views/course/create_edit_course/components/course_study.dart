@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/widgets/my_tab_indicator_style.dart';
@@ -11,6 +12,7 @@ import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import 'package:webkit/views/course/create_edit_course/components/build_tab_bar.dart';
+import 'package:webkit/views/course/create_edit_course/components/lectures_detail.dart';
 
 import '../../../../helpers/utils/ui_mixins.dart';
 import '../../../../helpers/widgets/my_spacing.dart';
@@ -44,6 +46,14 @@ class _CourseStudyState extends State<CourseStudy>
   void initState() {
     super.initState();
     tabController = TabController(length: 3, vsync: this);
+    likeCheck = List.filled(reviewCount, false);
+    dislikeCheck = List.filled(reviewCount, false);
+    showReply = List.filled(reviewCount, false);
+    checkLecture = List.generate(subjectCount, (index) => List.filled(lectureCount, false));
+    showSubject = List.filled(
+      subjectCount,
+      false,
+    );
   }
 
   final List<String> courseObject = [
@@ -83,45 +93,6 @@ class _CourseStudyState extends State<CourseStudy>
   }
 
   int position = 0;
-
-  Widget buildTabBar() {
-    TextStyle textStyle = TextStyleConstant.textStyleBlack15w700.copyWith(
-        color: (position == 0
-            ? ColorConst.textColorSelectTabBar
-            : ColorConst.subtext));
-    return Center(
-      child: Card(
-        elevation: 5,
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.5,
-          constraints: BoxConstraints(
-            maxWidth: 800,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: TabBar(
-            indicatorColor: ColorConst.mainColor,
-            dividerColor: Colors.transparent,
-            labelColor: ColorConst.mainColor,
-            indicator: BoxDecoration(
-                border:
-                    Border(bottom: BorderSide(color: ColorConst.mainColor))),
-            splashBorderRadius: BorderRadius.circular(12),
-            overlayColor:
-                WidgetStateProperty.all(Colors.black.withOpacity(0.1)),
-            dividerHeight: 0,
-            controller: tabController,
-            tabs: [
-              Tab(text: 'Introduction'),
-              Tab(text: 'Content'),
-              Tab(text: 'Test'),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   Widget buildInfo() {
     return SingleChildScrollView(
@@ -231,16 +202,19 @@ class _CourseStudyState extends State<CourseStudy>
                 color: ColorConst.textColor,
               ),
             ),
-            SizedBox(height: 4,),
+            SizedBox(
+              height: 4,
+            ),
             Row(
               children: [
                 Text(
                   'Giảng viên: ${widget.courseInfo.producerName!}',
-                  style: TextStyle(fontWeight: FontWeight.normal,
-                  fontSize: 20,
-                  color: ColorConst.textColor,
+                  style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 20,
+                    color: ColorConst.textColor,
+                  ),
                 ),
-    ),
                 Spacer(),
                 StarRating(
                   color: Colors.yellow,
@@ -274,10 +248,25 @@ class _CourseStudyState extends State<CourseStudy>
     );
   }
 
-  List<bool> showLecture = List.filled(3, false, growable: true);
-  int tappedIndex = -1;
+  List<bool> showSubject = [];
+  List<List<bool>> checkLecture = [[]];
+  int subjectCount = 4;
+  int lectureCount = 3;
+
+  double _checkProgression({required int subjectIndex}) {
+    int finished = 0;
+    for (bool check in checkLecture[subjectIndex].toList()) {
+      if (check) finished++;
+    }
+    return finished / checkLecture[subjectIndex].length;
+  }
 
   Widget buildLectureList() {
+    for (int i = 0; i < subjectCount; i++) {
+      for (int j = 0; j < lectureCount; j++) {
+        print('=======  ${checkLecture[i][j]} $i  $j');
+      }
+    }
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -286,8 +275,8 @@ class _CourseStudyState extends State<CourseStudy>
             padding: const EdgeInsets.only(left: 32.0),
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: 3,
-              itemBuilder: (context, index) {
+              itemCount: subjectCount,
+              itemBuilder: (context, subjectIndex) {
                 return Column(
                   children: [
                     InkWell(
@@ -299,18 +288,70 @@ class _CourseStudyState extends State<CourseStudy>
                             margin: EdgeInsets.all(16),
                             child: Row(
                               children: [
-                                (!showLecture[index])
-                                    ? Icon(Icons.add)
-                                    : Icon(Icons.horizontal_rule_outlined),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Subject $subjectIndex: Subject $subjectIndex name',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 32.0),
+                                      child: Row(
+                                        children: [
+                                          Text('Tiến độ: '),
+                                          Align(
+                                            child: Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.2,
+                                              height: 20,
+                                              constraints: BoxConstraints(
+                                                minWidth: 50,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: Colors.grey,
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                              child: Stack(children: [
+                                                Positioned(
+                                                  left: 0,
+                                                  child: Container(
+                                                    width: MediaQuery.of(context).size.width * 0.2 * _checkProgression(subjectIndex: subjectIndex),
+                                                    height: 20,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.red,
+                                                      borderRadius: BorderRadius.circular(20),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Center(child: Text('${( _checkProgression(subjectIndex: subjectIndex) * 100).floor()} %', style: TextStyle(color: Colors.white),)),
+                                              ]),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                                (!showSubject[subjectIndex])
+                                    ? Icon(
+                                        Icons.arrow_drop_down,
+                                        size: 32,
+                                      )
+                                    : Icon(Icons.arrow_drop_up, size: 32),
                                 SizedBox(
                                   width: 4,
                                 ),
-                                Text('Subject $index: Subject $index name'),
-                                Spacer(),
-                                Checkbox(
-                                  value: false,
-                                  onChanged: (bool? value) {},
-                                )
                               ],
                             ),
                           ),
@@ -318,37 +359,76 @@ class _CourseStudyState extends State<CourseStudy>
                       ),
                       onTap: () {
                         setState(() {
-                          showLecture[index] = !showLecture[index];
+                          showSubject[subjectIndex] =
+                              !showSubject[subjectIndex];
                         });
                       },
                     ),
                     AnimatedSize(
                       curve: Curves.fastOutSlowIn,
                       duration: Duration(milliseconds: 200),
-                      child: showLecture[index]
+                      child: showSubject[subjectIndex]
                           ? Container(
                               margin: EdgeInsets.all(16),
                               child: ListView.builder(
                                 shrinkWrap: true,
-                                itemCount: 3,
+                                itemCount: lectureCount,
                                 itemBuilder: (context, lectureIndex) {
-                                  return Container(
-                                    margin: EdgeInsets.only(
-                                        left: 32,
-                                        top: 16,
-                                        bottom: 16,
-                                        right: 32),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                            'Lecture $index: Lecture $lectureIndex name'),
-                                        Spacer(),
-                                        Checkbox(
-                                          value: false,
-                                          onChanged: (bool? value) {},
-                                        )
-                                      ],
-                                    ),
+                                  return Column(
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            left: 32,
+                                            top: 16,
+                                            bottom: 16,
+                                            right: 32),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                                'Subject $subjectIndex: Lecture $lectureIndex name'),
+                                            Spacer(),
+                                            InkWell(
+                                              onTap: () {
+                                                print('Subject $subjectIndex: Lecture $lectureIndex name');
+                                                setState(() {
+                                                  // print(_checkProgression(subjectIndex: subjectIndex));
+                                                  // print('   ');
+                                                  // print(subjectIndex);
+                                                  // print('$subjectIndex   $lectureIndex  ${checkLecture[subjectIndex][lectureIndex]} ');
+
+                                                  checkLecture[subjectIndex][lectureIndex] = !checkLecture[subjectIndex][lectureIndex];
+                                                });
+                                              },
+                                              child: Container(
+                                                width: 24,
+                                                height: 24,
+                                                decoration: BoxDecoration(
+                                                    border: Border.all(
+                                                  color: Colors.red,
+                                                )),
+                                                child: Align(
+                                                  alignment: Alignment.center,
+                                                  child:
+                                                      checkLecture[subjectIndex][lectureIndex]
+                                                          ? Icon(
+                                                              Icons.check,
+                                                              color: Colors.red,
+                                                            )
+                                                          : SizedBox(),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0),
+                                        child: Divider(
+                                          color: Colors.black.withOpacity(0.1),
+                                        ),
+                                      )
+                                    ],
                                   );
                                 },
                               ),
@@ -789,13 +869,28 @@ class _CourseStudyState extends State<CourseStudy>
         SizedBox(
           height: 4,
         ),
-        Divider(color: Colors.black.withOpacity(0.2),),
+        Divider(
+          color: Colors.black.withOpacity(0.2),
+        ),
         SizedBox(
           height: 4,
         ),
       ],
     );
   }
+
+  Review review = Review(
+    username: 'username 1',
+    text: '',
+    rating: 5,
+    likeCount: 0,
+    dislikeCount: 0,
+    avatar: null,
+  );
+
+  List<Review> listOfReview = [];
+
+  int reviewCount = 10;
 
   Widget buildStudyReview() {
     return SingleChildScrollView(
@@ -809,17 +904,27 @@ class _CourseStudyState extends State<CourseStudy>
           SizedBox(
             height: 16,
           ),
-          buildStudyReviewItemUser(),
+          buildStudyReviewItemUser(replyCheck: false),
           SizedBox(
             height: 500,
             child: ListView.builder(
                 shrinkWrap: true,
-                itemCount: 10,
+                itemCount: reviewCount,
                 itemBuilder: (context, index) {
+                  listOfReview.add(
+                    Review(
+                      username: 'username $index',
+                      text: 'review $index',
+                      rating: 5,
+                      likeCount: 0,
+                      dislikeCount: 0,
+                      avatar: null,
+                    ),
+                  );
                   return Column(
                     children: [
                       buildStudyReviewItem(
-                          'username $index', 'review $index', 4),
+                          review: listOfReview[index], index: index),
                       SizedBox(
                         height: 16,
                       )
@@ -832,23 +937,28 @@ class _CourseStudyState extends State<CourseStudy>
     );
   }
 
-  Widget buildStudyReviewItemUser() {
+  Widget buildStudyReviewItemUser({required bool replyCheck}) {
+    double _rating = 5;
     TextEditingController controller = TextEditingController();
-    final List<String> _menuItems = ['Item 1', 'Item 2', 'Item 3'];
+    final List<String> menuItems = ['Item 1', 'Item 2', 'Item 3'];
     bool check = false;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          flex: 1,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: 60, maxHeight: 60),
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Icon(Icons.face),
+        Visibility(
+          visible: !replyCheck,
+          child: Expanded(
+            flex: 1,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 60, maxHeight: 60),
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: Icon(Icons.face),
+              ),
             ),
           ),
         ),
+        SizedBox(width: 8),
         Expanded(
             flex: 9,
             child: Column(
@@ -864,9 +974,13 @@ class _CourseStudyState extends State<CourseStudy>
                       width: 8,
                     ),
                     StarRating(
-                      rating: 5,
-                      size: 16,
-                    )
+                      rating: _rating,
+                      onRatingChanged: (rating) {
+                        setState(() {
+                          _rating = rating;
+                        });
+                      },
+                    ),
                   ],
                 ),
                 Stack(children: [
@@ -874,7 +988,7 @@ class _CourseStudyState extends State<CourseStudy>
                     controller: controller,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                      labelText: 'Review...',
+                      labelText: replyCheck ? 'Trả lời...' : 'Bình luận...',
                       alignLabelWithHint: true,
                       floatingLabelAlignment: FloatingLabelAlignment.start,
                       labelStyle: MyTextStyle.bodySmall(xMuted: true),
@@ -887,8 +1001,8 @@ class _CourseStudyState extends State<CourseStudy>
                       isCollapsed: true,
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                     ),
-                    minLines: 5,
-                    maxLines: 10,
+                    minLines: 3,
+                    maxLines: 6,
                     onChanged: (value) {
                       // setState(() {
                       //   controller.text = value;
@@ -905,7 +1019,7 @@ class _CourseStudyState extends State<CourseStudy>
                           controller.text += value;
                         },
                         itemBuilder: (context) {
-                          return _menuItems.map((item) {
+                          return menuItems.map((item) {
                             return PopupMenuItem<String>(
                               value: item,
                               child: Text(item),
@@ -919,7 +1033,7 @@ class _CourseStudyState extends State<CourseStudy>
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: ActionButton1(
-                      text: 'Bình luận',
+                      text: replyCheck ? 'Trả lời' : 'Bình luận',
                     ),
                   ),
                 ),
@@ -929,57 +1043,139 @@ class _CourseStudyState extends State<CourseStudy>
     );
   }
 
-  Widget buildStudyReviewItem(String username, String review, double rating) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          flex: 1,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: 60, maxHeight: 60),
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Icon(Icons.face),
+  List<bool> likeCheck = [];
+  List<bool> dislikeCheck = [];
+  List<bool> showReply = [];
+
+  Widget buildStudyReviewItem({required Review review, required int index}) {
+    return Column(children: [
+      Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 1,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 60, maxHeight: 60),
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: Icon(Icons.face),
+              ),
             ),
           ),
-        ),
-        Expanded(
-            flex: 9,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 8),
-                Row(
-                  children: [
-                    Text(
-                      username,
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    StarRating(
-                      rating: rating,
-                      size: 16,
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Container(
-                  child: Text(
-                    review,
-                    style: TextStyle(
-                      fontSize: 16,
+          SizedBox(width: 8),
+          Expanded(
+              flex: 9,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Text(
+                        review.username,
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      StarRating(
+                        rating: review.rating,
+                        size: 16,
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Container(
+                    child: Text(
+                      review.text,
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
                     ),
                   ),
-                )
-              ],
-            )),
-      ],
-    );
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 16,
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.thumb_up_alt_rounded,
+                          color: (likeCheck[index]) ? Colors.red : Colors.grey,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            likeCheck[index] = !likeCheck[index];
+                            (likeCheck[index])
+                                ? review.likeCount++
+                                : review.likeCount--;
+                          });
+                        },
+                      ),
+                      SizedBox(
+                        width: 4,
+                      ),
+                      Text('${review.likeCount}'),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.thumb_down_alt_rounded,
+                          color:
+                              (dislikeCheck[index]) ? Colors.red : Colors.grey,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            dislikeCheck[index] = !dislikeCheck[index];
+                            (dislikeCheck[index])
+                                ? review.dislikeCount++
+                                : review.dislikeCount--;
+                          });
+                        },
+                      ),
+                      SizedBox(
+                        width: 4,
+                      ),
+                      Text('${review.dislikeCount}'),
+                      SizedBox(
+                        width: 32,
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              showReply = List.filled(reviewCount, false);
+                              showReply[index] = !showReply[index];
+                            });
+                          },
+                          child: Text('Reply')),
+                    ],
+                  ),
+                  Visibility(
+                      visible: showReply[index],
+                      child: Padding(
+                          padding: EdgeInsets.only(left: 60),
+                          child: Container(
+                              // width: MediaQuery.of(context).size.width,
+                              child:
+                                  buildStudyReviewItemUser(replyCheck: true))))
+                ],
+              )),
+        ],
+      ),
+      Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24),
+        child: Divider(
+          color: Colors.black.withOpacity(0.1),
+        ),
+      )
+    ]);
   }
 
   Future<UserProfile?> getProfile() async {
@@ -994,4 +1190,22 @@ class _CourseStudyState extends State<CourseStudy>
   Widget buildTest() {
     return Placeholder();
   }
+}
+
+class Review {
+  final String username;
+  final String text;
+  final double rating;
+  int likeCount;
+  int dislikeCount;
+  final Image? avatar;
+
+  Review({
+    required this.username,
+    required this.text,
+    required this.rating,
+    required this.likeCount,
+    required this.dislikeCount,
+    required this.avatar,
+  });
 }
