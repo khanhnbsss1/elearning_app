@@ -20,6 +20,7 @@ class WidgetWithColumnTitleCommon extends StatefulWidget {
   AlignmentGeometry? alignmentGeometry;
   EdgeInsetsGeometry? childPadding;
   TextStyle? titleStyle;
+  Widget ?titleWidget;
   WidgetWithColumnTitleCommon({
     super.key,
     this.onTap,
@@ -34,7 +35,8 @@ class WidgetWithColumnTitleCommon extends StatefulWidget {
     this.titleMainAxisAlignment,
     this.alignmentGeometry,
     this.childPadding,
-    this.titleStyle
+    this.titleStyle,
+    this.titleWidget
   }){
     height = height??Dimens.size40;
     bgColor ??=ColorConst.whiteColor;
@@ -69,37 +71,46 @@ class _WidgetWithColumnTitleCommonState extends State<WidgetWithColumnTitleCommo
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        widget.title!.isNotEmpty?
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal:0.0, vertical: 4.0),
-          child: Row(
-            mainAxisAlignment: widget.titleMainAxisAlignment!,
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Align(
-                alignment: widget.alignmentGeometry!,
-                child: Tooltip(
-                  message:  widget.title!,
-                  child: Text(
-                      widget.title!,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: widget.titleStyle??TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600)),
+        Visibility(
+            visible: widget.titleWidget!=null,
+            child: SizedBox(
+              child: widget.titleWidget,
+            )
+        ),
+        Visibility(
+          visible: widget.titleWidget==null,
+          child: widget.title!.isNotEmpty?
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal:0.0, vertical: 4.0),
+            child: Row(
+              mainAxisAlignment: widget.titleMainAxisAlignment!,
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: widget.alignmentGeometry!,
+                  child: Tooltip(
+                    message:  widget.title!,
+                    child: Text(
+                        widget.title!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: widget.titleStyle??TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600)),
+                  ),
                 ),
-              ),
-              Gap(Dimens.size2),
-              Visibility(
-                  visible: widget.isRequirement??false,
-                  child:  Icon(
-                    Icons.star,
-                    size: Dimens.size10,
-                    color: Colors.red,)
-              )
-            ],
-          ),
-        ):
-        const SizedBox.shrink(),
+                Gap(Dimens.size2),
+                Visibility(
+                    visible: widget.isRequirement??false,
+                    child:  Icon(
+                      Icons.star,
+                      size: Dimens.size10,
+                      color: Colors.red,)
+                )
+              ],
+            ),
+          ):
+          const SizedBox.shrink(),
+        ),
         Align(
             alignment: widget.alignmentGeometry!,
             child: Padding(

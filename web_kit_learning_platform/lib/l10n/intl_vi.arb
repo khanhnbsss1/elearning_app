@@ -512,7 +512,10 @@
   "search_subject_str": "Tìm kiếm chủ đề",
   "create_subject_str": "Tạo chủ đề",
   "delete_subject_str": "Xóa chủ đề",
+  "subject_is_exit_str": "Chủ đề đã tồn tại",
+  "please_choose_a_subject": "Vui lòng chọn một chủ đề",
   "search_lesson_str": "Tìm kiếm bài học",
   "create_lesson_str": "Tạo bài học",
   "delete_lesson_str": "Xóa bài học"
+  
 }

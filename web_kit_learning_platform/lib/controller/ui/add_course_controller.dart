@@ -18,8 +18,11 @@ class AddCourseController extends MyController {
   Map<int,String> listOfProduceNames = {};
   Map<int,String> listOfGradeNames = {};
   Map<int,String> listOfAccompanyCourses = {};
-  Map<int,String> listOfTags = {};
+  List<TagsInfo> listOfTags = [];
   Map<int,String> listOfDiscounts = {};
+  List<TextEditingController>controllerInfoObject=[];
+  List<TextEditingController>controllerResultObject=[];
+
   @override
   void onInit() {
     super.onInit();
@@ -39,11 +42,7 @@ class AddCourseController extends MyController {
       label: 'Image',
       controller: TextEditingController(),
     );
-    basicValidator.addField(
-      'video_review',
-      label: 'video_review',
-      controller: TextEditingController(),
-    );
+
     basicValidator.addField(
       'total_lectures',
       label: 'Total lectures',
@@ -139,12 +138,7 @@ class AddCourseController extends MyController {
       label: 'Is active',
       controller: TextEditingController(),
     );
-    basicValidator.addField(
-      'tags',
-      label: 'Tags',
-      // required: true,
-      controller: TextEditingController(),
-    );
+
     basicValidator.addField(
       'accompany_course',
       label: 'Accompany course',
@@ -172,6 +166,44 @@ class AddCourseController extends MyController {
     );
   }
 
+  void setInfoObjectController(List<String>items){
+    controllerInfoObject.clear();
+    for(int index =0; index<items.length; index++){
+      controllerInfoObject.add(TextEditingController(text: items.elementAt(index)));
+    }
+  }
+  List<TextEditingController> getListInfoObjectController(){
+      return controllerInfoObject;
+  }
+  TextEditingController getInfoObjectController(int index){
+    return controllerInfoObject.elementAt(index);
+  }
+  void insertInfoObjectController({required TextEditingController textEditingController} ){
+    controllerInfoObject.add(textEditingController);
+  }
+  void removeInfoObjectController({required TextEditingController textEditingController} ){
+    controllerInfoObject.remove(textEditingController);
+  }
+  
+  void setResultObjectController(List<String>items){
+    controllerResultObject.clear();
+    for(int index =0; index<items.length; index++){
+      controllerResultObject.add(TextEditingController(text: items.elementAt(index)));
+    }
+  }
+  List<TextEditingController> getListResultObjectController(){
+    return controllerResultObject;
+  }
+  void insertResultObjectController({required TextEditingController textEditingController} ){
+    controllerResultObject.add(textEditingController);
+  }
+  void removeResultObjectController({required TextEditingController textEditingController} ){
+    controllerResultObject.remove(textEditingController);
+  }
+  TextEditingController getResultObjectController(int index){
+    return controllerResultObject.elementAt(index);
+  }
+  
   void onChangeCheckBox(bool? value) {
     isChecked = value ?? isChecked;
     update();
@@ -204,20 +236,24 @@ class AddCourseController extends MyController {
     }
   }
   Future<CourseInfo?> getCourseInfoFromUI({required CourseInfo courseInfo}) async {
-    basicValidator.getController('accompany_course')!.text = getIdFromName(listOfAccompanyCourses, basicValidator.getController('accompany_course')!.text??"").toString();
-   // basicValidator.getController('category_id')!.text = getIdFromName(listOfCategoryName, basicValidator.getController('category_name')!.text??"").toString();
-    List<String>? tags =basicValidator.getController('tags')!.text.split(',');
-    List<TagsInfo> tagsList = [];
     int? gradleId = getIdFromName(listOfGradeNames, basicValidator.getController('grade_name')!.text??"");
     basicValidator.getController('grade_name')!.text = listOfGradeNames[getIdFromName(listOfGradeNames, basicValidator.getController('grade_name')!.text??"")]??"";
     UserProfile? userProfile = await UserManager().getUserProfile();
-    for(int tagKey in listOfTags.keys)
+    List<String> infoObject = [];
+    List<String> resultObject = [];
+
+    for(TextEditingController textEditingController in getListInfoObjectController())
       {
-        if(tags.contains(listOfTags[tagKey]))
-          {
-            tagsList.add(TagsInfo(name: listOfTags[tagKey], id: tagKey));
-          }
+        if(textEditingController.text.isNotEmpty) {
+          infoObject.add(textEditingController.text);
+        }
       }
+    for(TextEditingController textEditingController in getListResultObjectController())
+    {
+      if(textEditingController.text.isNotEmpty) {
+        resultObject.add(textEditingController.text);
+      }
+    }
     CourseInfo addCourseRequest = courseInfo.copyWith(
       id: int.tryParse(basicValidator.getController('id')?.text ?? '0'),
       name: basicValidator.getController('name')!.text,
@@ -236,18 +272,14 @@ class AddCourseController extends MyController {
       isStandard: int.tryParse(basicValidator.getController('is_standard')!.text),
       categoryName: basicValidator.getController('category_name')?.text,
       videoPreview: basicValidator.getController('video_preview')?.text,
-      infoObj: basicValidator.getController('info_obj')?.text,
-      infoResult: basicValidator.getController('info_result')?.text,
+      infoObj: infoObject.join("&&&"),
+      infoResult: resultObject.join("&&&"),
       isActive: int.tryParse(basicValidator.getController('is_active')?.text ?? '0'),
-      accompanyCourse: basicValidator.getController('accompany_course')?.text ?? '',
-      
-      tags: tagsList,
+      accompanyCourse: (basicValidator.getController('accompany_course')?.text??"").isNotEmpty? basicValidator.getController('accompany_course')?.text:'',
       createdBy: userProfile?.userName,
       updatedBy: userProfile?.userName,
       gradeId: gradleId,
       mode: basicValidator.getController('payment_mode')?.text??"FREE",
-      //tags: basicValidator.getController('tags')?.text ?? '',
-      // lectures: lectures,
     );
     return addCourseRequest;
   }

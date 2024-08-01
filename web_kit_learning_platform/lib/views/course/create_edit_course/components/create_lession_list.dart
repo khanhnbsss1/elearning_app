@@ -14,6 +14,7 @@ import 'package:webkit/controller/ui/add_course_controller.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
+import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import 'package:webkit/services/apis/lessson/lesson_list/lesson_list_api.dart';
@@ -38,7 +39,10 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
   late List<CourseInfo> coursesInfo;
   var position = 0;
   ScrollController scrollController=ScrollController();
+  final TextEditingController _subjectDropdownSearchFieldController = TextEditingController();
+  final TextEditingController _lessonDropdownSearchFieldController = TextEditingController();
 
+  
   @override
   void initState() {
     super.initState();
@@ -104,7 +108,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
           state: state,
           context: context,
           onSelectSubject: (p0) {
-            
+            BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateCurrentSubjectEvent(subject: p0));
         },),
         lessonDropDownSearch(
           context: context,
@@ -121,7 +125,11 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
     LessonDataSource employeeDataSource = LessonDataSource(
         lessonData: state.courseInfo?.lectures??[],
       onDelete: (p0) {
-        
+        BlocProvider.of<AddCourseBloc>(context).add(AddCourseUnLinkLessonEvent(
+            courseId: state.courseInfo!.id!, 
+            lessonId: p0.id!,
+          subject: p0.subName??""
+        ));
       },
       onEdit: (p0) {
         
@@ -214,7 +222,8 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
             builder: (BuildContext context, void Function(void Function()) setState) {
               return DropDownSearchField(
                 textFieldConfiguration: TextFieldConfiguration(
-                  autofocus: true,
+                  autofocus: false,
+                   controller: _subjectDropdownSearchFieldController,
                   style: DefaultTextStyle.of(context).style.copyWith(
                       fontStyle: FontStyle.italic
                   ),
@@ -240,11 +249,10 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                   ),
                 ),
-
                 suggestionsCallback: (pattern) async {
                   return await getSubjectList(keyWord: pattern, state: state);
                 },
-
+                keepSuggestionsOnSuggestionSelected: true,
                 itemBuilder: (context, suggestion) {
                   return OnHoverWidget(
                     builder: (bool isHovered) {
@@ -264,9 +272,9 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   );
                 },
                 onSuggestionSelected: (suggestion) {
-
                   if(onSelectSubject!=null)
                     {
+                      _subjectDropdownSearchFieldController.text = suggestion;
                       onSelectSubject(suggestion);
                     }
                 },
@@ -298,6 +306,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
         Gap(Dimens.size16),
         InkWell(
           onTap: () {
+            _addSubjectDialog(context);
           },
           child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size50,),
         )
@@ -312,9 +321,10 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
             width: Dimens.size300,
             child: StatefulBuilder(
               builder: (BuildContext context, void Function(void Function()) setState) { 
-                return DropDownSearchField(
+                return DropDownSearchFormField(
                     textFieldConfiguration: TextFieldConfiguration(
                         autofocus: true,
+                        controller: _lessonDropdownSearchFieldController,
                         style: DefaultTextStyle.of(context).style.copyWith(
                             fontStyle: FontStyle.italic
                         ),
@@ -364,10 +374,19 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                       );
                     },
                     onSuggestionSelected: (suggestion) {
-                      if(onSelectLesson!=null)
+                      if((BlocProvider.of<AddCourseBloc>(context).state.currentSubject??'').isEmpty)
                         {
+                          ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
+                          return;
+                        }
+                      setState(() {
+                        if(onSelectLesson!=null)
+                        {
+                          _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
                           onSelectLesson(suggestion);
                         }
+                      },);
+
                     }, 
                   transitionBuilder: (context, child, controller) {
                     return Container(
@@ -390,6 +409,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                     );
                   },
                   displayAllSuggestionWhenTap: false,
+                  hideSuggestionsOnKeyboardHide: true,
                 );
               },
             ),
@@ -423,7 +443,61 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
     LessonListResponseModel data = await getLessonListApi.call();
     return data.content??[];
   }
-  
+  void _addSubjectDialog(BuildContext context) {
+    final tagController = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text(L10nX.getStr.create_subject_str),
+        content: TextFormField(
+          controller: tagController,
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+              labelText: L10nX.getStr.create_subject_str,
+              labelStyle: MyTextStyle.bodySmall(xMuted: true),
+              border: outlineInputBorder,
+              contentPadding: EdgeInsets.all(16),
+              isCollapsed: true,
+              floatingLabelBehavior:
+              FloatingLabelBehavior.never),
+        ),
+        actions: [
+          Row(
+            children: [
+              ActionButton1(
+                text: L10nX.getStr.create_subject_str,
+                onTap: () {
+                  List<String> list = BlocProvider.of<AddCourseBloc>(context).state.subjectList??[];
+                  if(list.contains(tagController.text))
+                  {
+                    ToastUtils.showToastError(L10nX.getStr.subject_is_exit_str);
+                  }
+                  else
+                  {
+                    ToastUtils.showToastError(L10nX.getStr.success);
+                    list.add(tagController.text);
+                    BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateSubjectListEvent(subjectList: list));
+                    Navigator.of(context).pop();
+                  }
+                },
+              ),
+              Gap(Dimens.size50),
+              ActionButton1(
+                text: L10nX.getStr.close,
+                enableBgColor: ColorConst.whiteColor,
+                textStype: TextStyleConstant.textStyleBlack14w400,
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+
+        ],
+      ),
+    );
+  }
+
 }
 class LessonDataSource extends DataGridSource {
   /// Creates the employee data source class with required details.
@@ -467,21 +541,22 @@ class LessonDataSource extends DataGridSource {
               children: [
                 InkWell(
                   onTap: () {
+                    onViewDetail(e);
                   },
                   child: Icon(Icons.remove_red_eye, size: Dimens.size20,color: ColorConst.colorIconGrays,),
                 ),
                 Gap(Dimens.size10),
                 InkWell(
                   onTap: () {
-
+                    onEdit(e);
                   },
                   child: Icon(Icons.note_alt_outlined, size: Dimens.size20,color: ColorConst.colorIconGrays,),
                 ),
                 Gap(Dimens.size10),
                 InkWell(
                   onTap: () {
-
-                  },
+                    onDelete(e);
+                    },
                   child: Icon(Icons.delete_forever, size: Dimens.size20,color: Colors.red,),
                 ),
                 Gap(Dimens.size10),

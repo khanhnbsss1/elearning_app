@@ -14,7 +14,8 @@ enum AddCourseStatus {
   onLinkDiscount,
   onUpdateCourseFromApi,
   onUpdateSubjectList,
-  onUpdateCurrentSubject
+  onUpdateCurrentSubject,
+  unKnown
 }
 
 @immutable
@@ -27,6 +28,8 @@ class AddCourseState extends Equatable {
   bool? initial;
   String? currentSubject;
   List<String>?subjectList;
+  List<String>?whoThisCourseIsFor;
+  List<String>?whatWillYouAchieveAfterTheCourseStr;
   AddCourseState({
     this.blocStatus,
     this.addCourseFilterModel,
@@ -35,12 +38,16 @@ class AddCourseState extends Equatable {
     this.controller,
     this.coursePageType,
     this.currentSubject,
-    this.subjectList
+    this.subjectList,
+    this.whoThisCourseIsFor,
+    this.whatWillYouAchieveAfterTheCourseStr
   }){
     courseInfo??=CourseInfo.initial();
     coursePageType??=CoursePageType.create;
     controller??= Get.put(AddCourseController());
     subjectList??=[];
+    whoThisCourseIsFor??=[];
+    whatWillYouAchieveAfterTheCourseStr??=[];
   }
 
 
@@ -52,7 +59,9 @@ class AddCourseState extends Equatable {
     AddCourseController? controller,
     CoursePageType? coursePageType,
     String? currentSubject,
-    List<String>?subjectList
+    List<String>?subjectList,
+    List<String>?whoThisCourseIsFor,
+    List<String>?whatWillYouAchieveAfterTheCourseStr
   })
   {
     return AddCourseState(
@@ -64,11 +73,21 @@ class AddCourseState extends Equatable {
       coursePageType: coursePageType??this.coursePageType,
       currentSubject: currentSubject??this.currentSubject,
       subjectList: subjectList??this.subjectList,
+      whoThisCourseIsFor: whoThisCourseIsFor??this.whoThisCourseIsFor,
+      whatWillYouAchieveAfterTheCourseStr: whatWillYouAchieveAfterTheCourseStr??this.whatWillYouAchieveAfterTheCourseStr,
 
     );
   }
   @override
-  List<Object?> get props => [blocStatus, addCourseFilterModel, initial, courseInfo, controller, coursePageType, currentSubject, subjectList];
+  List<Object?> get props => [
+    blocStatus, 
+    addCourseFilterModel, 
+    initial, courseInfo, 
+    controller, coursePageType, 
+    currentSubject, subjectList, 
+    whoThisCourseIsFor,
+    whatWillYouAchieveAfterTheCourseStr
+  ];
 
 }
 

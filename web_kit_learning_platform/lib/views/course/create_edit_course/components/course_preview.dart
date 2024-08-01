@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/helpers/widgets/my_tab_indicator_style.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
-import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 
 import '../../../../helpers/utils/ui_mixins.dart';
 import '../../../../services/apis/course/course_detail/models/course_detail_model.dart';
@@ -105,15 +102,6 @@ class _CourseStudyState extends State<CoursePreview>
                       ? widget.courseInfo.image!
                       : 'assets/deshboard/adventure/adventure5.png',
                   fit: BoxFit.cover,
-// width: constraints.maxWidth * 0.9,
-// errorBuilder: (context, error, stackTrace) {
-//   return Image.network(
-//     'assets/deshboard/adventure/adventure5.png',
-//     fit: BoxFit.cover,
-//     // width: constraints.maxWidth * 0.9,
-//     // height: constraints.maxWidth * 0.5,
-//   );
-// },
                 )),
           ),
           Positioned(

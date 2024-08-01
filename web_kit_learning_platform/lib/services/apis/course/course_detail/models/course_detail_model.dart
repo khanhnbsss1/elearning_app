@@ -1,3 +1,4 @@
+import 'package:webkit/helpers/extensions/extensions.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 import 'package:webkit/services/apis/topic/model/topic_info.dart';
@@ -244,17 +245,11 @@ class CourseInfo {
     categoryName = json['category_name'];
     typeName = json['type_name'];
     isActive = json['is_active'];
-    accompanyCourse = json['accompany_course'];
+    accompanyCourse = (json['accompany_course']??'0').toString();
     mode = json['mode'];
     gradeId = json['grade_id'];
     subjects = json['subjects'];
     tags = [];
-/*    if (json['tags'] != null) {
-      tags = <Tags>[];
-      json['tags'].forEach((v) {
-        tags?.add(new Tags.fromJson(v));
-      });
-    }*/
     lectures=[];
     if (json['lectures'] != null) {
       lectures = <LessonInfo>[];
@@ -262,9 +257,14 @@ class CourseInfo {
         lectures?.add(new LessonInfo.fromJson(v));
       });
     }
+    if (json['tags'] != null) {
+      tags = <TagsInfo>[];
+      json['tags'].forEach((v) {
+        tags?.add(new TagsInfo.fromJson(v));
+      });
+    }
 
   }
-
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id != 0?id:0;
@@ -273,44 +273,157 @@ class CourseInfo {
     data['total_lectures'] = totalLectures??0;
     data['total_subjects'] = totalSubjects??0;
     data['producer_name'] = producerName??"";
-    data['language'] = language??"";
-    data['introduction'] = introduction??"";
-    data['info_obj'] = infoObj??"";
-    data['info_result'] = infoResult??"";
-    data['day_from'] = dayFrom??"";
-    data['day_to'] = dayTo??"";
-    data['payment'] = payment??"";
-    data['created_at'] = createdAt??"";
-    data['updated_at'] = updatedAt??"";
-    data['created_by'] = createdBy??"";
-    data['updated_by'] = updatedBy??"";
-    data['rate_point'] = ratePoint??0;
-    data['durian'] = durian??"";
-    data['video_preview'] = videoPreview??"";
-    data['course_mode'] = courseMode??"";
-    data['grade_name'] = gradeName??"";
-    data['category_id'] = categoryId??0;
-    data['is_standard'] = isStandard??0;
-    data['category_name'] = categoryName??"";
-    data['type_name'] = typeName??"";
-    data['is_active'] = isActive??0;
-    data['accompany_course'] = accompanyCourse??"";
-    data['mode'] = mode??"FREE";
-    data['grade_id'] = gradeId??0;
-
-    //data['tags'] = tags;
-    if (lectures != null) {
-      data['lectures'] = (lectures??[]).map((v) => v.toJson()).toList();
+    if((language??"").isNotEmpty)
+    {
+      data['language'] = language??"";
     }
-    if (tags != null) {
+    if((introduction??"").isNotEmpty)
+    {
+      data['introduction'] = introduction??"";
+    }
+    if((infoObj??"").isNotEmpty)
+    {
+      data['info_obj'] = infoObj??"";
+    }
+    if((infoResult??"").isNotEmpty)
+    {
+      data['info_result'] = infoResult??"";
+    }
+/*    if((dayFrom??"").isNotEmpty)
+    {
+      data['day_from'] = dayFrom??"";
+    }
+    if((dayTo??"").isNotEmpty)
+    {
+      data['day_to'] = dayTo??"";
+    }*/
+    if((payment!=null))
+    {
+      data['payment'] = payment??0;
+    }
+/*    if((createdAt??"").isNotEmpty)
+    {
+      data['created_at'] = createdAt??"";
+    }
+    if((updatedAt??"").isNotEmpty)
+    {
+      data['updated_at'] = updatedAt??"";
+    }*/
+    if((createdBy??"").isNotEmpty)
+    {
+      data['created_by'] = createdBy??"";
+    }
+    if((updatedBy??"").isNotEmpty)
+    {
+      data['updated_by'] = updatedBy??"";
+    }
+    if((ratePoint!=null))
+    {
+      data['rate_point'] = ratePoint??0;
+    }
+    data['durian'] = (durian??"").isNotEmpty?(durian??""):'0';
+
+    if((videoPreview??"").isNotEmpty)
+    {
+      data['video_preview'] = videoPreview??"";
+    }
+    if((courseMode??"").isNotEmpty)
+    {
+      data['course_mode'] = courseMode??"";
+    }
+    if((gradeName??"").isNotEmpty)
+    {
+      data['grade_name'] = gradeName??"";
+    }
+    if((categoryId!=null))
+    {
+      data['category_id'] = categoryId??0;
+    }
+    if((isStandard!=null))
+    {
+      data['is_standard'] = isStandard??0;
+    }
+    if((categoryName??'').isNotEmpty)
+    {
+      data['category_name'] = categoryName??"";
+    }
+    if((typeName??'').isNotEmpty)
+    {
+      data['type_name'] = typeName??"";
+    }
+    if((isActive!=null))
+    {
+      data['is_active'] = isActive??"";
+    }
+    if((accompanyCourse??'').isNotEmpty)
+    {
+      data['accompany_course'] = (accompanyCourse??'0').toInt();
+    }
+    if((mode??'').isNotEmpty)
+    {
+      data['mode'] = mode??"";
+    }
+    if((gradeId!=null))
+    {
+      data['grade_id'] = gradeId??0;
+    }
+
+    if (tags != null && tags!.isNotEmpty) {
       String tagsStr = '';
       for(TagsInfo tags in tags??[])
       {
         tagsStr += '${tags.id},';
       }
-      data['tags'] = tagsStr.replaceFirst(',', '',tagsStr.length-1);
+      if(tagsStr.isNotEmpty)
+      {
+        data['tags'] = tagsStr.replaceFirst(',', '',tagsStr.length-1);
+      }
     }
     return data;
+  }
+  List<String> getListInfoObj(){
+    List<String> listInfoObject = (infoObj??"").split("&&&");
+    return listInfoObject;
+  }
+  void setListInfoObj(List<String> listInfoObject){
+    infoObj =listInfoObject.join("&&&");
+  }
+  void insertInfoObject(String infoObject){
+    List<String> listInfoObject = getListInfoObj();
+    listInfoObject.add(infoObject);
+    setListInfoObj(listInfoObject);
+  }
+
+  void removeInfoObject(String infoObject){
+    List<String> listInfoObject = getListInfoObj();
+    listInfoObject.remove(infoObject);
+    setListInfoObj(listInfoObject);
+  }
+
+  
+  List<String> getListInfoResult(){
+    List<String> listInfoObject = (infoResult??"").split("&&&");
+    return listInfoObject;
+  }
+
+  void setListInfoResult(List<String> listInfoResult){
+    infoResult =listInfoResult.join("&&&");
+  }
+
+  void insertInfoResult(String infoObject){
+    List<String> listInfoObject = getListInfoResult();
+    listInfoObject.add(infoObject);
+    setListInfoResult(listInfoObject);
+  }
+
+  void removeInfoResult(String infoObject){
+    List<String> listInfoObject = getListInfoResult();
+    listInfoObject.remove(infoObject);
+    setListInfoResult(listInfoObject);
+  }
+  
+  List<String>getListTagsStr(){
+    return (tags??[]).map((e) => (e.name??""),).toList();
   }
   void addLectureToSubject(){
     for(LessonInfo lessonInfo in lectures??[]){

@@ -3,26 +3,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
+import 'package:webkit/services/apis/tags/models/tag_info.dart';
 
 class TagDropDown extends StatefulWidget {
-  final List<String?> tags;
-  final Function(List<String>) onAddTags;
-  final Function(List<String>) onRemoveTags;
+  final List<TagsInfo> allTags;
+  final List<TagsInfo>? exitsTags;
+  final Function(TagsInfo) onAddTags;
+  final Function(TagsInfo) onRemoveTags;
 
-  TagDropDown({required this.tags, required this.onAddTags, required this.onRemoveTags});
+  TagDropDown({required this.allTags, required this.onAddTags, required this.onRemoveTags, this.exitsTags});
 
   @override
   _MyDropdownButtonState createState() => _MyDropdownButtonState();
 }
 
 class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProviderStateMixin, UIMixin {
-  List<String> selectedValues = [];
   Color color = Color.fromRGBO(163, 20, 19, 1.0);
-  List<String> listOfTag = [];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,16 +32,22 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
               children: [
                 SizedBox(
                   width: 200,
-                  child:  DropdownSearch<String>(
+                  child:  DropdownSearch<TagsInfo>(
                     popupProps: PopupProps.menu(
                       constraints: BoxConstraints(
-                        maxHeight: (65 + widget.tags.length * 50 < 210) ? 65 + widget.tags.length * 50 : 210,
+                        maxHeight: (65 + widget.allTags.length * 50 < 210) ? 65 + widget.allTags.length * 50 : 210,
                       ),
                       showSearchBox: true,
                       searchDelay: Duration(seconds: 0),
-                      showSelectedItems: true,
+                      itemBuilder: (context, item, isSelected) {
+                        return ListTile(
+                          title: Text(item.name??'',style: TextStyleConstant.textStyleBlack14w400,),
+                        );
+                      },
+                      //showSelectedItems: true,
                     ),
-                    items: widget.tags.map((e) => e ?? '').toList(),
+                    items: widget.allTags,
+                    itemAsString: (item) => item.name??"",
                     dropdownDecoratorProps: DropDownDecoratorProps(
                       dropdownSearchDecoration: InputDecoration(
                         hintText: 'Select tags',
@@ -60,10 +65,16 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                       ),
                     ),
                     onChanged: (value) {
-                      setState(() {
-                        selectedValues.add(value!);
-                        widget.onAddTags(selectedValues);
-                      });      },
+                      
+                      if(value!=null && [...(widget.exitsTags??[]).where((element) {return element.id == value.id;},)].isEmpty)
+                        {                      
+                          setState(() {
+                           // widget.exitsTags?.add(value);
+                            widget.onAddTags(value);
+                        });
+                        }
+     
+                      },
                   ),
                 ),
                 SizedBox(width: 10,),
@@ -74,15 +85,15 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
               ]),
           SizedBox(height: 20,),
           Wrap(
-            children: selectedValues.map((tag) => Padding(
+            children: (widget.exitsTags??[]).map((tag) => Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: Chip(
                 deleteIconColor: color,
-                label: Text(tag),
+                label: Text(tag.name??''),
                 onDeleted: () {
                   setState(() {
-                    selectedValues.remove(tag);
-                    widget.onRemoveTags(selectedValues);
+                    //widget.exitsTags?.removeWhere((element) => tag == element,);
+                    widget.onRemoveTags(tag);
                   });
                 },
               ),
@@ -94,7 +105,6 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
 
   void _addTagDialog() {
     final tagController = TextEditingController();
-
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
@@ -124,11 +134,11 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
             child: Text('Add tag', style: TextStyle(color: color),),
             onPressed: () {
               if (tagController.text.isNotEmpty) {
-                if (widget.tags.contains(tagController.text)) {
+                if (widget.allTags.contains(TagsInfo(name: tagController.text))) {
                   _showErrorDialog('Tag already exists');
                 } else {
                   setState(() {
-                    widget.tags.add(tagController.text);
+                 //   widget.allTags.add(tagController.text);
                   });
                   Navigator.of(context).pop();
                 }

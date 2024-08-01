@@ -80,7 +80,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
           return Material(
             child: LayoutBuilder(
                 builder: (context, constraints) {
-                  return buildCourseCommonPage(state: state, buildContext: context);
+                  return buildCourseCommonPage(state: state, context: context);
                 },
             ),
           );
@@ -89,7 +89,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
     );
   }
 
-  Widget buildCourseCommonPage({required BuildContext buildContext, required AddCourseState state}){
+  Widget buildCourseCommonPage({required BuildContext context, required AddCourseState state}){
     bool isExitCourse = (state.courseInfo?.id!=null) && (state.courseInfo?.id!=0);
 
     return Container(
@@ -111,7 +111,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    BackButtonCustom(buildContext: buildContext),
+                    BackButtonCustom(buildContext: context),
                     Gap(Dimens.size16),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,7 +134,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
                           children: [
                             InkWell(
                               onTap: () {
-                                
+                                BlocProvider.of<AddCourseBloc>(buildContext).add(AddCourseSubmitUpdateEvent(addCourseController: state.controller!));
                               },
                               child: Tooltip(
                                 message: L10nX.getStr.save_update_str,
@@ -147,7 +147,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
 
                               },
                               child: Tooltip(
-                                message: L10nX.getStr.save_update_str,
+                                message: L10nX.getStr.preview_str,
                                 child: Icon(Icons.remove_red_eye, size: Dimens.size30,color: ColorConst.colorIconGrays,),
                               ),
                             ),
@@ -163,7 +163,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
                             ActionButton1(
                               text: L10nX.getStr.save_update_str,
                               onTap: () async {
-                                 await onSubmitCourse(state: state);
+                                BlocProvider.of<AddCourseBloc>(buildContext).add(AddCourseSubmitUpdateEvent(addCourseController: state.controller!));
                               },
                             ),
                             Gap(Dimens.size16),
@@ -197,7 +197,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
                 child: ActionButton1(
                   text: L10nX.getStr.course_create,
                   onTap: () {
-                    BlocProvider.of<AddCourseBloc>(buildContext).add(AddCourseSubmitAddEvent(addCourseController: state.controller!));
+                    BlocProvider.of<AddCourseBloc>(context).add(AddCourseSubmitAddEvent(addCourseController: state.controller!));
                   },
                 ),
               ),
@@ -332,8 +332,5 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
     );
   }
   
-  Future<void> onSubmitCourse({required AddCourseState state}) async {
-    await state.controller?.getCourseInfoFromUI(courseInfo: state.courseInfo!);
-  }
 }
 
