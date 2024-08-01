@@ -13,9 +13,10 @@ class AddCourseInitEvent extends AddCourseEvent {
 }
 class AddCourseUpdateControllerEvent extends AddCourseEvent {
   AddCourseController addCourseController;
-  AddCourseUpdateControllerEvent({required this.addCourseController});
+  CourseInfo? courseInfo;
+  AddCourseUpdateControllerEvent({required this.addCourseController, this.courseInfo});
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [addCourseController, courseInfo];
 }
 class AddCourseSubmitAddEvent extends AddCourseEvent {
   AddCourseSubmitAddEvent({required this.addCourseController});
@@ -57,12 +58,13 @@ class AddCourseLinkLessonEvent extends AddCourseEvent {
   List<Object?> get props => [subject, courseId, lessonId];
 }
 
-class AddCourseUnLinkLinkLessonEvent extends AddCourseEvent {
+class AddCourseUnLinkLessonEvent extends AddCourseEvent {
   int courseId;
   int lessonId;
-  AddCourseUnLinkLinkLessonEvent({required this.courseId, required this.lessonId});
+  String subject;
+  AddCourseUnLinkLessonEvent({required this.courseId, required this.lessonId, required this.subject});
   @override
-  List<Object?> get props => [courseId, lessonId];
+  List<Object?> get props => [courseId, lessonId, subject];
 }
 class AddCourseUpdateCourseFromApiEvent extends AddCourseEvent {
   AddCourseUpdateCourseFromApiEvent();
@@ -80,4 +82,10 @@ class AddCourseUpdateCurrentSubjectEvent extends AddCourseEvent {
   AddCourseUpdateCurrentSubjectEvent({required this.subject});
   @override
   List<Object?> get props => [subject];
+}
+class AddCourseUpdateCourseInfoEvent extends AddCourseEvent {
+  CourseInfo courseInfo;
+  AddCourseUpdateCourseInfoEvent({required this.courseInfo});
+  @override
+  List<Object?> get props => [courseInfo];
 }

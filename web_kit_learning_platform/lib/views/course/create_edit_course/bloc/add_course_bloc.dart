@@ -9,10 +9,13 @@ import 'package:webkit/services/apis/course/add_course/add_course_api.dart';
 import 'package:webkit/services/apis/course/course_detail/get_course_detail_api.dart';
 import 'package:webkit/services/apis/course/course_detail/link_lesson_api.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:webkit/services/apis/course/course_detail/ulink_lesson_api.dart';
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_api.dart';
 import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_model.dart';
+import 'package:webkit/services/apis/course/update_course/update_course_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/tags/models/tag_info.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/services/apis/upload_file/upload_file_api.dart';
 import 'package:webkit/views/course/create_edit_course/create_edit_course.dart';
@@ -28,13 +31,15 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     on<AddCourseUploadVideoPreViewEvent>(_onUploadVideoPreview);
     on<AddCourseLinkDiscountEvent>(_onLinkDiscount);
     on<AddCourseLinkLessonEvent>(_onLinkLesson);
-    on<AddCourseUpdateCourseFromApiEvent>(_onUpdateCourseFromAPI);
+    on<AddCourseUnLinkLessonEvent>(_onUnLinkLesson);
 
+    on<AddCourseUpdateCourseFromApiEvent>(_onUpdateCourseFromAPI);
     on<AddCourseUpdateControllerEvent>((event, emit) {
       // TODO: implement event handler
       emit(state.copyWith(
         blocStatus: AddCourseStatus.onUpdateController,
-        controller: event.addCourseController
+        controller: event.addCourseController,
+        courseInfo: event.courseInfo
       ));
     });
     on<AddCourseUpdateSubjectListEvent>((event, emit) {
@@ -49,6 +54,13 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
       emit(state.copyWith(
           blocStatus: AddCourseStatus.onUpdateCurrentSubject,
           currentSubject: event.subject
+      ));
+    });
+    on<AddCourseUpdateCourseInfoEvent>((event, emit) {
+      // TODO: implement event handler
+      emit(state.copyWith(
+          blocStatus: AddCourseStatus.onUpdateCurrentSubject,
+          courseInfo: event.courseInfo
       ));
     });
   }
@@ -71,6 +83,8 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
               state.subjectList?.add(lessonInfo.subName!);
             }
         }
+        state.controller?.setInfoObjectController(state.courseInfo?.getListInfoObj()??[]);
+        state.controller?.setResultObjectController(state.courseInfo?.getListInfoResult()??[]);
       }
     
     state.controller?.basicValidator.getController('course_mode')?.text = state.courseInfo?.courseMode??'FREE';
@@ -78,12 +92,15 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     state.controller?.basicValidator.getController('id')?.text =( state.courseInfo?.id??0).toString();
     state.controller?.basicValidator.getController('total_lectures')?.text = (state.courseInfo?.totalLectures??0).toString();
     state.controller?.basicValidator.getController('total_subjects')?.text = (state.courseInfo?.totalSubjects??0).toString();
-    state.controller?.basicValidator.getController('payment')?.text = (state.courseInfo?.payment??0).toString();
+    state.controller?.basicValidator.getController('payment_mode')?.text = (state.courseInfo?.mode??0).toString();
     state.controller?.basicValidator.getController('rate_point')?.text = (state.courseInfo?.ratePoint??0).toString();
     state.controller?.basicValidator.getController('category_id')?.text = (state.courseInfo?.categoryId??0).toString();
     state.controller?.basicValidator.getController('is_active')?.text = (state.courseInfo?.isActive??0).toString();
     state.controller?.basicValidator.getController('language')?.text = state.courseInfo?.language??'CN';
+    state.controller?.basicValidator.getController('durian')?.text = state.courseInfo?.durian??'';
+    state.controller?.basicValidator.getController('payment_value')?.text = (state.courseInfo?.payment??0).toString();
 
+    
     state.controller?.basicValidator.getController('name')?.text = state.courseInfo?.name??'jooko';
     state.controller?.basicValidator.getController('image')?.text = state.courseInfo?.image??'';
     state.controller?.basicValidator.getController('introduction')?.text = state.courseInfo?.introduction??'';
@@ -91,8 +108,6 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     state.controller?.basicValidator.getController('producer_name')?.text = state.courseInfo?.producerName??'';
     state.controller?.basicValidator.getController('category_name')?.text = state.courseInfo?.categoryName??'';
     state.controller?.basicValidator.getController('video_preview')?.text = state.courseInfo?.videoPreview??'';
-    state.controller?.basicValidator.getController('info_obj')?.text = state.courseInfo?.infoObj??'';
-    state.controller?.basicValidator.getController('info_result')?.text = state.courseInfo?.infoResult??'';
     state.controller?.basicValidator.getController('accompany_course')?.text = state.courseInfo?.accompanyCourse??'';
 
     
@@ -130,8 +145,9 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
           break;
         case 'TAG':
           data.subFilter!.where((e) => e.name != null).forEach((e) {
-            if (!state.controller!.listOfTags.containsValue(e.name!)) {
-              state.controller!.listOfTags[e.id!] = e.name!;
+            
+            if (state.controller!.listOfTags.where((element) => element.id == e.id,).isEmpty) {
+              state.controller!.listOfTags.add(TagsInfo(id: e.id, name: e.name));
             }
           });
         case 'DISCOUNT':
@@ -164,6 +180,25 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
       controller: event.addCourseController,
       blocStatus:  AddCourseStatus.onLoading,
     ));
+
+    MonitorLoading().showLoading("");
+    CourseInfo? courseInfo = await state.controller?.getCourseInfoFromUI(courseInfo: state.courseInfo!);
+    courseInfo = courseInfo?.copyWith(
+        image: state.courseInfo?.image,
+        videoPreview: state.courseInfo?.videoPreview
+    );
+    UpdateCourseApi updateCourseApi = UpdateCourseApi(addCourseRequest: courseInfo!);
+    dynamic data = await updateCourseApi.call();
+    MonitorLoading().dismiss();
+    if(data.runtimeType==String && (data as String).isEmpty)
+    {
+      //courseInfo.id = data as int;
+      ToastUtils.showToastSuccess(L10nX.getStr.success);
+    }
+    else
+    {
+
+    }
     
     emit(state.copyWith(
         blocStatus:  AddCourseStatus.onSubmitUpdate
@@ -256,6 +291,26 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
       {
       }
   }
+  Future<void> _onUnLinkLesson(
+      AddCourseUnLinkLessonEvent event,
+      Emitter<AddCourseState> emit,
+      ) async {
+    MonitorLoading().showLoading("");
+    emit(state.copyWith(
+        blocStatus:  AddCourseStatus.onLoading
+    ));
+    UnLinkLessonApi lessonApi = UnLinkLessonApi(courseId: event.courseId, lessonId: event.lessonId,subject: event.subject);
+    dynamic data = await lessonApi.call();
+    MonitorLoading().dismiss();
+    if(data)
+    {
+      add(AddCourseUpdateCourseFromApiEvent());
+    }
+    else
+    {
+    }
+  }
+  
   Future<void> _onLinkDiscount(
       AddCourseLinkDiscountEvent event,
       Emitter<AddCourseState> emit,

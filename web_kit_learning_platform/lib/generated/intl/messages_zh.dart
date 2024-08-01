@@ -139,7 +139,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "date_str": MessageLookupByLibrary.simpleMessage("日期"),
         "date_time_pickers": MessageLookupByLibrary.simpleMessage("日期时间选择器"),
         "default_tabs": MessageLookupByLibrary.simpleMessage("默认标签"),
+        "delete_str": MessageLookupByLibrary.simpleMessage("删除"),
         "description": MessageLookupByLibrary.simpleMessage("描述"),
+        "detail_str": MessageLookupByLibrary.simpleMessage("详细信息"),
         "dialog_title": MessageLookupByLibrary.simpleMessage("对话框标题"),
         "dialogs": MessageLookupByLibrary.simpleMessage("对话框"),
         "differences_in_teaching_methods":
@@ -158,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "download": MessageLookupByLibrary.simpleMessage("下载"),
         "duration_str": MessageLookupByLibrary.simpleMessage("持续时间"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("电子商务"),
+        "edit_str": MessageLookupByLibrary.simpleMessage("编辑"),
         "elevated_button": MessageLookupByLibrary.simpleMessage("凸起按钮"),
         "elevated_rounded_button":
             MessageLookupByLibrary.simpleMessage("凸起圆形按钮"),

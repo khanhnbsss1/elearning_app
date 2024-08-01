@@ -160,7 +160,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "date_time_pickers":
             MessageLookupByLibrary.simpleMessage("Date time pickers"),
         "default_tabs": MessageLookupByLibrary.simpleMessage("Default tabs"),
+        "delete_str": MessageLookupByLibrary.simpleMessage("Delete"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "detail_str": MessageLookupByLibrary.simpleMessage("Detail"),
         "dialog_title": MessageLookupByLibrary.simpleMessage("Dialog title"),
         "dialogs": MessageLookupByLibrary.simpleMessage("Dialogs"),
         "differences_in_teaching_methods": MessageLookupByLibrary.simpleMessage(
@@ -181,6 +183,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "download": MessageLookupByLibrary.simpleMessage("Download"),
         "duration_str": MessageLookupByLibrary.simpleMessage("Duration"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("Ecommerce"),
+        "edit_str": MessageLookupByLibrary.simpleMessage("Edit"),
         "elevated_button":
             MessageLookupByLibrary.simpleMessage("Elevated button"),
         "elevated_rounded_button":

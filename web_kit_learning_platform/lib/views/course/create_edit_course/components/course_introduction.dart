@@ -1,7 +1,6 @@
 // import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -18,7 +17,6 @@ import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
-import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
@@ -77,6 +75,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           default:
             break;
         }
+        state.blocStatus= AddCourseStatus.unKnown;
       },
       builder: (BuildContext context, state) {
         return Material(
@@ -141,12 +140,26 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           Row(
             children: [
               Expanded(
-                child: buildCourseName(state: state, context: context),
+                child: Row(
+                  children: [
+                    Expanded(child: buildCourseName(state: state, context: context)),
+                    MySpacing.width(20),
+                    Expanded(
+                      child: buildCategory(state: state, context: context),
+                    ),
+                  ],
+                ),
+              ),
+
+              MySpacing.width(20),
+              Expanded(
+                child: buildGrade(state: state, context: context),
               ),
               MySpacing.width(20),
               Expanded(
-                child: buildCategory(state: state, context: context),
+                child: buildAuthor(state: state, context: context),
               ),
+
             ],
           ),
           // MySpacing.height(20),
@@ -160,47 +173,32 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
               Expanded(
                 child: buildVideoPreview(state: state, context: context),
               ),
+              MySpacing.width(20),
+              Expanded(child: buildDuration(state: state, context: context)),
             ],
           ),
           MySpacing.height(20),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: buildAuthor(state: state, context: context),
-              ),
-              MySpacing.width(20),
-              Expanded(
-                flex: 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    buildDuration(state: state, context: context),
-                  ],
-                ),
-              ),
-              MySpacing.width(20),
-              Expanded(
-                flex: 2,
-                child: buildWhoThisCourse(state: state, context: context),
-              ),
-              MySpacing.width(20),
-              Expanded(
-                flex: 2,
-                child: buildGrade(state: state, context: context),
-              ),
-            ],
-          ),
+
           MySpacing.height(20),
           buildIntroduction(state: state, context: context),
           MySpacing.height(20),
-          buildWhatWillYouAchieve(state: state, context: context),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+            Expanded(
+              child: buildWhoThisCourse(state: state, context: context),
+            ),
+            Gap(Dimens.size50),
+            Expanded(
+                child: buildWhatWillYouAchieve(state: state, context: context)),
+            
+          ]),
           MySpacing.height(20),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              buildShowCourseInLandingPage(state: state, context: context),
+              buildPaymentWidget(state: state, context: context),
+              MySpacing.height(20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -215,11 +213,9 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
               ),
             ],
           ),
-          MySpacing.height(20),
-          buildPaymentWidget(state: state, context: context),
+
           MySpacing.height(20),
           buildTags(state: state, context: context),
-          
           MySpacing.height(20),
         ],
       ),
@@ -228,7 +224,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
 
   Widget buildCourseSummaryInfoMobile({required AddCourseState state, required BuildContext context}) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
+      padding: EdgeInsets.symmetric(horizontal: Dimens.size8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
@@ -246,15 +242,17 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           MySpacing.height(16),
           buildIntroduction(state: state, context: context),
           MySpacing.height(16),
-          buildWhatWillYouAchieve(state: state, context: context),
+          buildWhoThisCourse(state: state, context: context),
           MySpacing.height(16),
-          buildShowCourseInLandingPage(state: state, context: context),
+          buildWhatWillYouAchieve(state: state, context: context),
+        /*  MySpacing.height(16),
+          buildShowCourseInLandingPage(state: state, context: context),*/
           MySpacing.height(16),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               buildStandard(state: state, context: context),
-              Gap(Dimens.size20),
+              Gap(Dimens.size12),
               Expanded(
                 child: buildAccompanyCourse(state: state, context: context),
               )
@@ -316,6 +314,8 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           isCollapsed: true,
           floatingLabelBehavior: FloatingLabelBehavior.never,
         ),
+        
+        value: state.courseInfo?.categoryId??0,
         items: state.controller!.listOfCategoryName.entries.map((entry) {
           return DropdownMenuItem<int>(
             value: entry.key,
@@ -373,9 +373,9 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
       isRequirement: true,
       // titleStyle: ,
       child: TextFormField(
-        validator: state.controller?.basicValidator.getValidation('video_review'),
-        controller: state.controller?.basicValidator.getController('video_review'),
-        keyboardType: TextInputType.url,
+        validator: state.controller?.basicValidator.getValidation('video_preview'),
+        controller: state.controller?.basicValidator.getController('video_preview'),
+        keyboardType: TextInputType.text,
         decoration: InputDecoration(
           labelText: 'Youtube url',
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
@@ -393,7 +393,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                 FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['mp4']);
                 MultipartFile file = MultipartFile.fromBytes(result!.files.first.bytes!.toList(growable: true), filename: result.names[0]);
                 setState(() {
-                  state.controller?.basicValidator.getController('video_review')?.text = result.files.first.name ?? "";
+                  state.controller?.basicValidator.getController('video_preview')?.text = result.files.first.name ?? "";
                 });
                 BlocProvider.of<AddCourseBloc>(context).add(AddCourseUploadVideoPreViewEvent(uploadFileInfo: UploadFileInfo(data: SubjectType.courses, file: file)));
               },
@@ -444,26 +444,80 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
   }
 
   Widget buildWhoThisCourse({required AddCourseState state, required BuildContext context}) {
-    return WidgetWithColumnTitleCommon(
-      title: '${L10nX.getStr.who_this_course_is_for} ?',
-      child: TextFormField(
-        validator: state.controller?.basicValidator.getValidation('info_obj'),
-        controller: state.controller?.basicValidator.getController('info_obj'),
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(
-          labelText: '${L10nX.getStr.who_this_course_is_for} ?',
-          labelStyle: MyTextStyle.bodySmall(xMuted: true),
-          border: outlineInputBorder,
-          prefixIcon: Icon(
-            LucideIcons.user,
-            size: 20,
-            color: ColorConst.colorIconRed,
-          ),
-          contentPadding: MySpacing.all(16),
-          isCollapsed: true,
-          floatingLabelBehavior: FloatingLabelBehavior.never,
-        ),
-      ),
+    return StatefulBuilder(
+      builder: (BuildContext context, void Function(void Function()) setState) {
+        List<Widget> listWhoThisCourseWidget=[];
+        for(TextEditingController infoObjectController in state.controller?.getListInfoObjectController()??[])
+        {
+          listWhoThisCourseWidget.add(
+              Column(
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: infoObjectController,
+                          onFieldSubmitted: (value) {
+
+                          },
+                          onEditingComplete: () {
+
+                          },
+                          onTapOutside: (event) {
+
+                          },
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: '${L10nX.getStr.who_this_course_is_for} ?',
+                            labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                            border: outlineInputBorder,
+                            prefixIcon: Icon(
+                              LucideIcons.user,
+                              size: 20,
+                              color: ColorConst.colorIconRed,
+                            ),
+                            contentPadding: MySpacing.all(16),
+                            isCollapsed: true,
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                          ),
+                        ),
+                      ),
+                      Gap(Dimens.size10),
+                      InkWell(
+                        onTap: () {
+                          state.controller?.removeInfoObjectController(textEditingController: infoObjectController);
+                          BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(addCourseController: state.controller!));
+                        },
+                        child: Icon(Icons.remove_circle_outline, color: ColorConst.mainColor, size: Dimens.size20,),
+                      )
+                    ],
+                  ),
+                  Gap(Dimens.size10)
+                ],
+              )
+          );
+        }
+        return WidgetWithColumnTitleCommon(
+          titleWidget: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(L10nX.getStr.who_this_course_is_for,style: TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600)),
+              Gap(Dimens.size10),
+              InkWell(
+                onTap: () {
+                  state.controller?.insertInfoObjectController(textEditingController: TextEditingController());
+                  BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(addCourseController: state.controller!));
+                },
+                child: Icon(Icons.add_circle, color: ColorConst.mainColor, size: Dimens.size20,),
+              ),
+            ],),
+          child:Column(
+            mainAxisSize: MainAxisSize.min,
+            children: listWhoThisCourseWidget,
+          )
+        );
+      },
     );
   }
 
@@ -473,7 +527,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         child: customDropDownSearch(
             list: state.controller!.listOfGradeNames,
             hintText: '${L10nX.getStr.grade_name_str}...',
-            selectItem: (state.courseInfo?.gradeName ?? '0').toInt(),
+            selectItem: (state.courseInfo?.gradeName),
             controller: state.controller?.basicValidator.getController('grade_name')));
   }
 
@@ -504,75 +558,105 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
   }
 
   Widget buildWhatWillYouAchieve({required AddCourseState state, required BuildContext context}) {
-    return WidgetWithColumnTitleCommon(
-      title: L10nX.getStr.what_will_you_achieve_after_the_course_str,
-      child: TextFormField(
-        validator: state.controller?.basicValidator.getValidation('info_result'),
-        controller: state.controller?.basicValidator.getController('info_result'),
-        keyboardType: TextInputType.multiline,
-        textInputAction: TextInputAction.newline,
-        decoration: InputDecoration(
-            //labelText: 'Result after the course',
-            labelStyle: MyTextStyle.bodySmall(xMuted: true),
-            labelText: 'Result after the course',
-            alignLabelWithHint: true,
-            floatingLabelAlignment: FloatingLabelAlignment.start,
-            border: outlineInputBorder,
-            // prefixIcon: const Icon(
-            //   LucideIcons.lock,
-            //   size: 20,
-            // ),
-            contentPadding: MySpacing.all(16),
-            isCollapsed: true,
-            floatingLabelBehavior: FloatingLabelBehavior.never),
-        minLines: 5,
-        maxLines: 10,
-      ),
-    );
-  }
+    return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
+      List<Widget> listWhoThisCourseWidget=[];
+      for(TextEditingController infoObjectController in state.controller?.getListResultObjectController()??[])
+      {
+        listWhoThisCourseWidget.add(
+            Column(
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        key: UniqueKey(),
+                        controller: infoObjectController,
+                        onFieldSubmitted: (value) {
 
-  Widget buildShowCourseInLandingPage({required AddCourseState state, required BuildContext context}) {
-    return WidgetWithRowTitleCommon(
-      titleWidget: InkWell(
-        onTap: () {
-          setState(() {
-            valueIsShowInLandingPage = !valueIsShowInLandingPage;
-            valueIsShowInLandingPage == true
-                ? state.controller?.basicValidator.getController('is_show_course_in_landing_page')?.text = '1'
-                : state.controller?.basicValidator.getController('is_show_course_in_landing_page')?.text = '0';
-          });
-        },
-        child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(1),
-              border: Border.all(
-                color: Colors.black87,
-              ),
+                        },
+                        onEditingComplete: () {
+
+                        },
+                        onTapOutside: (event) {
+
+                        },
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          labelText: '${L10nX.getStr.what_will_you_achieve_after_the_course_str} ?',
+                          labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                          border: outlineInputBorder,
+                          prefixIcon: Icon(
+                            LucideIcons.user,
+                            size: 20,
+                            color: ColorConst.colorIconRed,
+                          ),
+                          contentPadding: MySpacing.all(16),
+                          isCollapsed: true,
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                        ),
+                      ),
+                    ),
+                    Gap(Dimens.size10),
+                    InkWell(
+                      onTap: () {
+                        state.controller?.removeResultObjectController(textEditingController: infoObjectController);
+                        BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(addCourseController: state.controller!));
+                      },
+                      child: Icon(Icons.remove_circle_outline, color: ColorConst.mainColor, size: Dimens.size20,),
+                    )
+                  ],
+                ),
+                Gap(Dimens.size10),
+              ],
+            )
+        );
+      }
+      return WidgetWithColumnTitleCommon(
+        titleWidget: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(L10nX.getStr.what_will_you_achieve_after_the_course_str,style: TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600)),
+            Gap(Dimens.size10),
+            InkWell(
+              onTap: () {
+                state.controller?.insertResultObjectController(textEditingController: TextEditingController());
+                BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(addCourseController: state.controller!));
+              },
+              child: Icon(Icons.add_circle, color: ColorConst.mainColor, size: Dimens.size20,),
+            )
+          ],),
+        child: Column(
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: listWhoThisCourseWidget,
             ),
-            width: 20,
-            height: 20,
-            child: valueIsShowInLandingPage
-                ? Icon(
-                    Icons.check,
-                    size: 15,
-                    color: ColorConst.colorIconGrays,
-                  )
-                : null),
-      ),
-      child: Text(
-        L10nX.getStr.show_course_in_landing_page_str,
-        style: TextStyleConstant.textStyleBlack14w400,
-      ),
+            Gap(Dimens.size10),
+            
+          ],
+        ),
+      );
+    },
     );
   }
-
+  
   Widget buildStandard({required AddCourseState state, required BuildContext context}) {
     return WidgetWithRowTitleCommon(
         titleWidget: InkWell(
           onTap: () {
             setState(() {
-              valueIsStandard = !valueIsStandard;
+              if(state.courseInfo?.isStandard==1)
+                {
+
+                  state.courseInfo?.isStandard =  0;
+                }
+              else
+                {
+                  state.courseInfo?.isStandard =  1;
+                }
               state.controller?.basicValidator.getController('is_standard')?.text = valueIsStandard == true ? '1' : '0';
+              BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(courseInfo:  state.courseInfo, addCourseController: state.controller!));
             });
           },
           child: Container(
@@ -585,7 +669,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
               ),
               width: 20,
               height: 20,
-              child: valueIsStandard
+              child: (state.courseInfo?.isStandard==1)
                   ? Icon(
                       Icons.check,
                       size: 15,
@@ -613,18 +697,15 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
       title: "${L10nX.getStr.tags}: ",
       isRequirement: true,
       child: TagDropDown(
-        tags: state.controller!.listOfTags.values.toList(),
+        allTags: state.controller!.listOfTags,
         onAddTags: (tags) {
-          state.controller?.basicValidator.getController('tags')?.text = tags.join(',');
+          (state.courseInfo?.tags??[]).add(tags);
           BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(addCourseController: state.controller!));
         },
+        exitsTags: state.courseInfo?.tags,
         onRemoveTags: (tags) {
-          final currentTags = state.controller?.basicValidator.getController('tags')?.text.split(',').map((tag) => tag.trim()).toList();
-          final removedTags = currentTags?.where((tag) => !tags.contains(tag)).toList();
-
-          final newTags = tags.where((tag) => !currentTags!.contains(tag)).toList();
-          state.controller?.basicValidator.getController('tags')?.text = [...newTags, ...?currentTags?.where((tag) => !removedTags!.contains(tag))].join(',');
-          BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(addCourseController: state.controller!));
+          (state.courseInfo?.tags??[]).removeWhere((element) => element.name == tags,);
+          BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateCourseInfoEvent(courseInfo: state.courseInfo!));
         },
       ),
     );
@@ -640,10 +721,19 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
               WidgetWithRowTitleCommon(
                   titleWidget: InkWell(
                     onTap: () {
-                      setState(() {
-                        valuePaymentMode = !valuePaymentMode;
-                        state.controller?.basicValidator.getController('payment_mode')?.text = valuePaymentMode == true ? 'FREE' : 'PREMIUM';
-                      });
+                        setState(() {
+                          if(state.courseInfo?.mode=='FREE')
+                          {
+
+                            state.courseInfo?.mode =  'PREMIUM';
+                          }
+                          else
+                          {
+                            state.courseInfo?.mode =  'FREE';
+                          }
+                          state.controller?.basicValidator.getController('payment_mode')?.text = state.courseInfo?.mode??"FREE";
+                          BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(courseInfo:  state.courseInfo, addCourseController: state.controller!));
+                        });
                     },
                     child: Container(
                         decoration: BoxDecoration(
@@ -655,7 +745,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                         ),
                         width: 20,
                         height: 20,
-                        child: !valuePaymentMode
+                        child: ((state.courseInfo?.mode??"FREE")=="FREE")
                             ? Icon(
                                 Icons.check,
                                 size: 15,
@@ -673,8 +763,17 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                   titleWidget: InkWell(
                     onTap: () {
                       setState(() {
-                        valuePaymentMode = !valuePaymentMode;
-                        state.controller?.basicValidator.getController('payment_mode')?.text = valuePaymentMode == true ? 'FREE' : 'PREMIUM';
+                        if(state.courseInfo?.mode=='FREE')
+                        {
+
+                          state.courseInfo?.mode =  'PREMIUM';
+                        }
+                        else
+                        {
+                          state.courseInfo?.mode =  'FREE';
+                        }
+                        state.controller?.basicValidator.getController('payment_mode')?.text = state.courseInfo?.mode??"FREE";
+                        BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(courseInfo:  state.courseInfo, addCourseController: state.controller!));
                       });
                     },
                     child: Container(
@@ -687,7 +786,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                         ),
                         width: 20,
                         height: 20,
-                        child: valuePaymentMode
+                        child:  (state.courseInfo?.mode??"FREE")=="PREMIUM"
                             ? Icon(
                           Icons.check,
                           size: 15,
@@ -840,7 +939,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
   }
 
   Widget customDropDownSearch({required Map<int, String> list, required String hintText, required TextEditingController? controller, dynamic selectItem}) {
-    String selectString = selectItem.toString();
+    String selectString = (selectItem??"").toString();
     if (selectItem.runtimeType == int) {
       selectString = list[selectItem as int] ?? "";
     }

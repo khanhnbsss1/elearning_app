@@ -38,7 +38,10 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
   late List<CourseInfo> coursesInfo;
   var position = 0;
   ScrollController scrollController=ScrollController();
+  final TextEditingController _subjectDropdownSearchFieldController = TextEditingController();
+  final TextEditingController _lessonDropdownSearchFieldController = TextEditingController();
 
+  
   @override
   void initState() {
     super.initState();
@@ -104,7 +107,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
           state: state,
           context: context,
           onSelectSubject: (p0) {
-            
+            BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateCurrentSubjectEvent(subject: p0));
         },),
         lessonDropDownSearch(
           context: context,
@@ -121,7 +124,11 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
     LessonDataSource employeeDataSource = LessonDataSource(
         lessonData: state.courseInfo?.lectures??[],
       onDelete: (p0) {
-        
+        BlocProvider.of<AddCourseBloc>(context).add(AddCourseUnLinkLessonEvent(
+            courseId: state.courseInfo!.id!, 
+            lessonId: p0.id!,
+          subject: p0.subName??""
+        ));
       },
       onEdit: (p0) {
         
@@ -214,7 +221,8 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
             builder: (BuildContext context, void Function(void Function()) setState) {
               return DropDownSearchField(
                 textFieldConfiguration: TextFieldConfiguration(
-                  autofocus: true,
+                  autofocus: false,
+                   controller: _subjectDropdownSearchFieldController,
                   style: DefaultTextStyle.of(context).style.copyWith(
                       fontStyle: FontStyle.italic
                   ),
@@ -240,11 +248,10 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                   ),
                 ),
-
                 suggestionsCallback: (pattern) async {
                   return await getSubjectList(keyWord: pattern, state: state);
                 },
-
+                keepSuggestionsOnSuggestionSelected: true,
                 itemBuilder: (context, suggestion) {
                   return OnHoverWidget(
                     builder: (bool isHovered) {
@@ -264,9 +271,9 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   );
                 },
                 onSuggestionSelected: (suggestion) {
-
                   if(onSelectSubject!=null)
                     {
+                      _subjectDropdownSearchFieldController.text = suggestion;
                       onSelectSubject(suggestion);
                     }
                 },
@@ -312,9 +319,10 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
             width: Dimens.size300,
             child: StatefulBuilder(
               builder: (BuildContext context, void Function(void Function()) setState) { 
-                return DropDownSearchField(
+                return DropDownSearchFormField(
                     textFieldConfiguration: TextFieldConfiguration(
                         autofocus: true,
+                        controller: _lessonDropdownSearchFieldController,
                         style: DefaultTextStyle.of(context).style.copyWith(
                             fontStyle: FontStyle.italic
                         ),
@@ -364,10 +372,14 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                       );
                     },
                     onSuggestionSelected: (suggestion) {
-                      if(onSelectLesson!=null)
+                      setState(() {
+                        if(onSelectLesson!=null)
                         {
+                          _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
                           onSelectLesson(suggestion);
                         }
+                      },);
+
                     }, 
                   transitionBuilder: (context, child, controller) {
                     return Container(
@@ -390,6 +402,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                     );
                   },
                   displayAllSuggestionWhenTap: false,
+                  hideSuggestionsOnKeyboardHide: true,
                 );
               },
             ),
@@ -467,21 +480,22 @@ class LessonDataSource extends DataGridSource {
               children: [
                 InkWell(
                   onTap: () {
+                    onViewDetail(e);
                   },
                   child: Icon(Icons.remove_red_eye, size: Dimens.size20,color: ColorConst.colorIconGrays,),
                 ),
                 Gap(Dimens.size10),
                 InkWell(
                   onTap: () {
-
+                    onEdit(e);
                   },
                   child: Icon(Icons.note_alt_outlined, size: Dimens.size20,color: ColorConst.colorIconGrays,),
                 ),
                 Gap(Dimens.size10),
                 InkWell(
                   onTap: () {
-
-                  },
+                    onDelete(e);
+                    },
                   child: Icon(Icons.delete_forever, size: Dimens.size20,color: Colors.red,),
                 ),
                 Gap(Dimens.size10),

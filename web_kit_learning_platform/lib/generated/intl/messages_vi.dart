@@ -155,7 +155,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "date_time_pickers":
             MessageLookupByLibrary.simpleMessage("Bộ chọn ngày giờ"),
         "default_tabs": MessageLookupByLibrary.simpleMessage("Tab mặc định"),
+        "delete_str": MessageLookupByLibrary.simpleMessage("Xóa"),
         "description": MessageLookupByLibrary.simpleMessage("Mô tả"),
+        "detail_str": MessageLookupByLibrary.simpleMessage("Chi tiết"),
         "dialog_title":
             MessageLookupByLibrary.simpleMessage("Tiêu đề hộp thoại"),
         "dialogs": MessageLookupByLibrary.simpleMessage("Hộp thoại"),
@@ -177,6 +179,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "download": MessageLookupByLibrary.simpleMessage("Tải xuống"),
         "duration_str": MessageLookupByLibrary.simpleMessage("Thời lượng"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("Thương mại điện tử"),
+        "edit_str": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "elevated_button": MessageLookupByLibrary.simpleMessage("Nút nâng cao"),
         "elevated_rounded_button":
             MessageLookupByLibrary.simpleMessage("Nút bo tròn nâng cao"),
