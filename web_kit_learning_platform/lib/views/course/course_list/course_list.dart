@@ -291,7 +291,7 @@ class _CourseListState extends State<CourseList>
           CreateEditCourse(coursePageType: CoursePageType.edit, courseInfo: p0,).show(context);
         },
         onViewDetail: (p0) {
-          CoursePreview2(courseInfo: courseInfo,).show(context);
+          CoursePreview(courseInfo: courseInfo,).show(context);
         },
         onStudy:  (p0) {
           CourseStudy(courseInfo: courseInfo,).show(context);
