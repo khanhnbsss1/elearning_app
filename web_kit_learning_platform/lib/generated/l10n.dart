@@ -5112,6 +5112,28 @@ class S {
     );
   }
 
+  // skipped getter for the 'subject_is_exit str' key
+
+  /// `Please choose a subject`
+  String get please_choose_a_subject {
+    return Intl.message(
+      'Please choose a subject',
+      name: 'please_choose_a_subject',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subject already exists`
+  String get subject_is_exit_str {
+    return Intl.message(
+      'Subject already exists',
+      name: 'subject_is_exit_str',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Search for a lesson`
   String get search_lesson_str {
     return Intl.message(

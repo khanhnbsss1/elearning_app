@@ -20,7 +20,8 @@ class UnLinkLessonApi extends BaseApiRequest {
       return null;
     }
     else
-    {
+    {     
+      ToastUtils.showToastSuccess(L10nX.getStr.success);
       return result;
     }
   }

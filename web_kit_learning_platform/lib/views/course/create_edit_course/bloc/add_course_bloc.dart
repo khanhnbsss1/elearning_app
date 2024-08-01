@@ -302,7 +302,7 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     UnLinkLessonApi lessonApi = UnLinkLessonApi(courseId: event.courseId, lessonId: event.lessonId,subject: event.subject);
     dynamic data = await lessonApi.call();
     MonitorLoading().dismiss();
-    if(data)
+    if(data.runtimeType==String && (data as String).isEmpty)
     {
       add(AddCourseUpdateCourseFromApiEvent());
     }

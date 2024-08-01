@@ -57,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "auth": MessageLookupByLibrary.simpleMessage("验证"),
         "authen_invalid": MessageLookupByLibrary.simpleMessage("用户名或密码不正确"),
         "author_str": MessageLookupByLibrary.simpleMessage("作者"),
+        "availability_course_str":
+            MessageLookupByLibrary.simpleMessage("课程可用性"),
         "average_sales_comparison":
             MessageLookupByLibrary.simpleMessage("平均销售额对比"),
         "back_to_log_in": MessageLookupByLibrary.simpleMessage("返回登录"),
@@ -121,9 +123,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "courses_list": MessageLookupByLibrary.simpleMessage("课程列表"),
         "create_document": MessageLookupByLibrary.simpleMessage("创建文档"),
         "create_lecture_str": MessageLookupByLibrary.simpleMessage("创建讲座"),
+        "create_lesson_str": MessageLookupByLibrary.simpleMessage("创建课程"),
         "create_product": MessageLookupByLibrary.simpleMessage("创建产品"),
         "create_quiz_str": MessageLookupByLibrary.simpleMessage("创建测验"),
         "create_student": MessageLookupByLibrary.simpleMessage("创建学生"),
+        "create_subject_str": MessageLookupByLibrary.simpleMessage("创建主题"),
         "create_teacher": MessageLookupByLibrary.simpleMessage("创建教师"),
         "created_at": MessageLookupByLibrary.simpleMessage("创建时间"),
         "creating_a_detailed_pricing_plan_str":
@@ -139,7 +143,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "date_str": MessageLookupByLibrary.simpleMessage("日期"),
         "date_time_pickers": MessageLookupByLibrary.simpleMessage("日期时间选择器"),
         "default_tabs": MessageLookupByLibrary.simpleMessage("默认标签"),
+        "delete_lesson_str": MessageLookupByLibrary.simpleMessage("删除课程"),
         "delete_str": MessageLookupByLibrary.simpleMessage("删除"),
+        "delete_subject_str": MessageLookupByLibrary.simpleMessage("删除主题"),
         "description": MessageLookupByLibrary.simpleMessage("描述"),
         "detail_str": MessageLookupByLibrary.simpleMessage("详细信息"),
         "dialog_title": MessageLookupByLibrary.simpleMessage("对话框标题"),
@@ -261,6 +267,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_internet": MessageLookupByLibrary.simpleMessage("无网络连接"),
         "no_search_result": MessageLookupByLibrary.simpleMessage("没有数据"),
         "no_shadow": MessageLookupByLibrary.simpleMessage("无阴影"),
+        "normal_sale_str": MessageLookupByLibrary.simpleMessage("正常销售"),
         "not_connect_to_server":
             MessageLookupByLibrary.simpleMessage("无法连接到服务器"),
         "notifications": MessageLookupByLibrary.simpleMessage("通知"),
@@ -296,6 +303,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pie_chart": MessageLookupByLibrary.simpleMessage("饼图"),
         "pinyin_str": MessageLookupByLibrary.simpleMessage("转录"),
         "pinyin_tone_str": MessageLookupByLibrary.simpleMessage("转录"),
+        "please_choose_a_subject":
+            MessageLookupByLibrary.simpleMessage("请选择主题"),
         "population_growth_of_various_countries":
             MessageLookupByLibrary.simpleMessage("各国人口增长"),
         "positions": MessageLookupByLibrary.simpleMessage("位置"),
@@ -339,6 +348,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "save_update_str": MessageLookupByLibrary.simpleMessage("保存更新"),
         "scan_code": MessageLookupByLibrary.simpleMessage("扫描代码"),
         "search": MessageLookupByLibrary.simpleMessage("搜索"),
+        "search_lesson_str": MessageLookupByLibrary.simpleMessage("搜索课程"),
+        "search_subject_str": MessageLookupByLibrary.simpleMessage("搜索主题"),
         "search_tags_str": MessageLookupByLibrary.simpleMessage("搜索标签"),
         "secondary": MessageLookupByLibrary.simpleMessage("次要"),
         "security_text": MessageLookupByLibrary.simpleMessage("安全"),
@@ -447,6 +458,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "style_guide": MessageLookupByLibrary.simpleMessage("样式指南"),
         "subcribe_to_our_news_letter":
             MessageLookupByLibrary.simpleMessage("订阅我们的新闻通讯"),
+        "subject_is_exit_str": MessageLookupByLibrary.simpleMessage("主题已存在"),
         "subject_name_str": MessageLookupByLibrary.simpleMessage("科目名称"),
         "submit": MessageLookupByLibrary.simpleMessage("提交"),
         "subtitle_is_more_useful":

@@ -14,6 +14,7 @@ import 'package:webkit/controller/ui/add_course_controller.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
+import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import 'package:webkit/services/apis/lessson/lesson_list/lesson_list_api.dart';
@@ -305,6 +306,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
         Gap(Dimens.size16),
         InkWell(
           onTap: () {
+            _addSubjectDialog(context);
           },
           child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size50,),
         )
@@ -372,6 +374,11 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                       );
                     },
                     onSuggestionSelected: (suggestion) {
+                      if((BlocProvider.of<AddCourseBloc>(context).state.currentSubject??'').isEmpty)
+                        {
+                          ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
+                          return;
+                        }
                       setState(() {
                         if(onSelectLesson!=null)
                         {
@@ -436,7 +443,61 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
     LessonListResponseModel data = await getLessonListApi.call();
     return data.content??[];
   }
-  
+  void _addSubjectDialog(BuildContext context) {
+    final tagController = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text(L10nX.getStr.create_subject_str),
+        content: TextFormField(
+          controller: tagController,
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+              labelText: L10nX.getStr.create_subject_str,
+              labelStyle: MyTextStyle.bodySmall(xMuted: true),
+              border: outlineInputBorder,
+              contentPadding: EdgeInsets.all(16),
+              isCollapsed: true,
+              floatingLabelBehavior:
+              FloatingLabelBehavior.never),
+        ),
+        actions: [
+          Row(
+            children: [
+              ActionButton1(
+                text: L10nX.getStr.create_subject_str,
+                onTap: () {
+                  List<String> list = BlocProvider.of<AddCourseBloc>(context).state.subjectList??[];
+                  if(list.contains(tagController.text))
+                  {
+                    ToastUtils.showToastError(L10nX.getStr.subject_is_exit_str);
+                  }
+                  else
+                  {
+                    ToastUtils.showToastError(L10nX.getStr.success);
+                    list.add(tagController.text);
+                    BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateSubjectListEvent(subjectList: list));
+                    Navigator.of(context).pop();
+                  }
+                },
+              ),
+              Gap(Dimens.size50),
+              ActionButton1(
+                text: L10nX.getStr.close,
+                enableBgColor: ColorConst.whiteColor,
+                textStype: TextStyleConstant.textStyleBlack14w400,
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+
+        ],
+      ),
+    );
+  }
+
 }
 class LessonDataSource extends DataGridSource {
   /// Creates the employee data source class with required details.
