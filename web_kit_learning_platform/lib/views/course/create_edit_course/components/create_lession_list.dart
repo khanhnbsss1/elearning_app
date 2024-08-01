@@ -379,15 +379,16 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                           ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
                           return;
                         }
-                      setState(() {
                         if(onSelectLesson!=null)
                         {
                           _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
                           onSelectLesson(suggestion);
                         }
-                      },);
-
-                    }, 
+                        else
+                          {
+                            ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                          }
+                    },
                   transitionBuilder: (context, child, controller) {
                     return Container(
                       constraints: BoxConstraints(
@@ -399,13 +400,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                           borderRadius: BorderRadius.circular(Dimens.size10)
                       ),
                       padding: EdgeInsets.all(Dimens.size8),
-                      child: FadeTransition(
-                        opacity: CurvedAnimation(
-                            parent: controller!,
-                            curve: Curves.fastOutSlowIn
-                        ),
-                        child: child,
-                      ),
+                      child: child,
                     );
                   },
                   displayAllSuggestionWhenTap: false,

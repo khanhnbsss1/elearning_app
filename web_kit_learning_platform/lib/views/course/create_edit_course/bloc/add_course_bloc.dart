@@ -283,13 +283,15 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     LinkLessonApi lessonApi = LinkLessonApi(courseId: event.courseId, lessonId: event.lessonId, subject: event.subject);
     dynamic data = await lessonApi.call();
     MonitorLoading().dismiss();
-    if(data)
-      {
-        add(AddCourseUpdateCourseFromApiEvent());
-      }
+    if(data.runtimeType==String && (data as String).isEmpty)
+    {
+      ToastUtils.showToastSuccess(L10nX.getStr.success);
+      add(AddCourseUpdateCourseFromApiEvent());
+    }
     else
-      {
-      }
+    {
+
+    }
   }
   Future<void> _onUnLinkLesson(
       AddCourseUnLinkLessonEvent event,
@@ -304,6 +306,7 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     MonitorLoading().dismiss();
     if(data.runtimeType==String && (data as String).isEmpty)
     {
+      ToastUtils.showToastSuccess(L10nX.getStr.success);
       add(AddCourseUpdateCourseFromApiEvent());
     }
     else

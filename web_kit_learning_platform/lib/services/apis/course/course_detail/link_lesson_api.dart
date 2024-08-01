@@ -29,7 +29,7 @@ class LinkLessonApi extends BaseApiRequest {
     await setApiBody({
       "id":lessonId,
       "courseId":courseId,
-      "subject":subject
+      "subName":subject.toString()
     });
   }
 
