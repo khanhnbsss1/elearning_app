@@ -11,8 +11,8 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/views/course/course_list/bloc/course_list_bloc.dart';
-import 'package:webkit/views/course/create_edit_course/components/course_preview.dart';
-import 'package:webkit/views/course/create_edit_course/components/course_study.dart';
+import 'package:webkit/views/course/course_detail/course_preview.dart';
+import 'package:webkit/views/course/course_detail/course_study.dart';
 import 'package:webkit/views/course/create_edit_course/create_edit_course.dart';
 import '../../../helpers/theme/app_style.dart';
 import '../../../helpers/widgets/course_item_grid_view.dart';
@@ -20,9 +20,7 @@ import '../../../helpers/widgets/my_button.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text.dart';
 import '../../../helpers/widgets/my_text_style.dart';
-import '../../../services/apis/course/course_list/models/course_models.dart';
 import '../../layouts/layout.dart';
-import '../create_edit_course/components/course_preview_2.dart';
 import 'components/filter_menu_item.dart';
 
 class CourseList extends StatefulWidget {

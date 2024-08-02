@@ -11,10 +11,9 @@ import 'package:webkit/services/apis/course/course_detail/models/course_detail_m
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
-import 'package:webkit/views/course/create_edit_course/components/course_preview_2.dart';
 import 'bloc/add_course_bloc.dart';
 import 'components/course_introduction.dart';
-import 'components/course_preview.dart';
+import '../course_detail/course_preview.dart';
 import 'components/create_lession_list.dart';
 
 enum CoursePageType{
@@ -144,7 +143,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
                             Gap(Dimens.size16),
                             InkWell(
                               onTap: () {
-
+                                CoursePreview(courseInfo: state.courseInfo!,).show(context);
                               },
                               child: Tooltip(
                                 message: L10nX.getStr.preview_str,
@@ -315,7 +314,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
           CourseLinkLessonListPage(),
           SizedBox(),
           SizedBox()
-          ],
+        ],
         
         onPageChanged: (value) {
           if(!isExitCourse) {

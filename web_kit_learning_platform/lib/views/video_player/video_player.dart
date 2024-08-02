@@ -21,19 +21,39 @@ class VideoPlayerState extends  State<VideoPlayer>{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-   return Material(
+    if(checkVideoFromYoutube()){
+     return YoutubePlayerPage(videoPlayerModel: widget.videoPlayerModel,);
+   }
+   else
+   {
+     return FlutterVideoPlayerPage(videoPlayerModel: widget.videoPlayerModel,);
+   }
+    /* Material(
      child: CustomDialog1(
          title: widget.videoPlayerModel.title,
          titleAlignment: MainAxisAlignment.center,
          insetPadding: EdgeInsets.symmetric(vertical: Dimens.size10),
          width: MediaQuery.of(context).size.width*(ResponsiveInfo.isPhone()?1: 1),
          enableBackButton: false,
-         enableCloseButton: true,
+         enableCloseButton: false,
          radius: 0,
          mainAxisSizeParent: MainAxisSize.max,
-         child: Expanded(child: YoutubePlayerPage(videoPlayerModel: widget.videoPlayerModel,))
+         child: Expanded(
+             child: LayoutBuilder(builder: (context, constraints) {
+               if(checkVideoFromYoutube()){
+                 return YoutubePlayerPage(videoPlayerModel: widget.videoPlayerModel,);
+               }
+               else
+                 {
+                   return FlutterVideoPlayerPage(videoPlayerModel: widget.videoPlayerModel,);
+                 }
+             },)
+         )
      ),
-   );
+   );*/
+  }
+  bool checkVideoFromYoutube(){
+    return widget.videoPlayerModel.link.contains("youtube.com");
   }
   
 }

@@ -1,6 +1,7 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/provider.dart';
@@ -28,10 +29,12 @@ import 'package:webkit/widgets/custom_pop_menu.dart';
 import '../../helpers/services/navigation_service.dart';
 
 class TopBar extends StatefulWidget {
-  
-  const TopBar({
+  Widget? title;
+  bool? showBackButton;
+  TopBar({
     super.key, // this.onMenuIconTap,
-    
+    this.title,
+    this.showBackButton
   });
 
   @override
@@ -55,93 +58,100 @@ class _TopBarState extends State<TopBar>
           padding: MySpacing.x(24),
           color: topBarTheme.background.withAlpha(246),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              InkWell(
-                onTap: () {
-                  ThemeCustomizer.setTheme(
-                      ThemeCustomizer.instance.theme == ThemeMode.dark
-                          ? ThemeMode.light
-                          : ThemeMode.dark);
-                },
-                child: Icon(
-                  ThemeCustomizer.instance.theme == ThemeMode.dark
-                      ? FeatherIcons.sun
-                      : FeatherIcons.moon,
-                  size: 18,
-                  color: topBarTheme.onBackground,
+              ( widget.showBackButton??false)? BackButtonCustom(buildContext: context): Gap(Dimens.size200), 
+              widget.title??SizedBox(),
+              Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: () {
+                    ThemeCustomizer.setTheme(
+                        ThemeCustomizer.instance.theme == ThemeMode.dark
+                            ? ThemeMode.light
+                            : ThemeMode.dark);
+                  },
+                  child: Icon(
+                    ThemeCustomizer.instance.theme == ThemeMode.dark
+                        ? FeatherIcons.sun
+                        : FeatherIcons.moon,
+                    size: 18,
+                    color: topBarTheme.onBackground,
+                  ),
                 ),
-              ),
-              MySpacing.width(12),
-              CustomPopupMenu(
-                backdrop: true,
-                hideFn: (_) => languageHideFn = _,
-                onChange: (_) {},
-                offsetX: -36,
-                menu: Padding(
-                  padding: MySpacing.xy(8, 8),
-                  child: Center(
-                    child: ClipRRect(
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      borderRadius: BorderRadius.circular(2),
-                      child:
-                    
-                      Image.asset(
-                        "assets/lang/${LanguageHelper().getCurrentLocale().languageCode??'vi'}.png",
-                        width: 24,
-                        height: 18,
-                        fit: BoxFit.cover,
+                MySpacing.width(12),
+                CustomPopupMenu(
+                  backdrop: true,
+                  hideFn: (_) => languageHideFn = _,
+                  onChange: (_) {},
+                  offsetX: -36,
+                  menu: Padding(
+                    padding: MySpacing.xy(8, 8),
+                    child: Center(
+                      child: ClipRRect(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        borderRadius: BorderRadius.circular(2),
+                        child:
+                      
+                        Image.asset(
+                          "assets/lang/${LanguageHelper().getCurrentLocale().languageCode??'vi'}.png",
+                          width: 24,
+                          height: 18,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
+                  menuBuilder: (_) => buildLanguageSelector( context),
                 ),
-                menuBuilder: (_) => buildLanguageSelector( context),
-              ),
-              MySpacing.width(6),
-              CustomPopupMenu(
-                backdrop: true,
-                onChange: (_) {},
-                offsetX: -120,
-                menu: Padding(
-                  padding: MySpacing.xy(8, 8),
-                  child: const Center(
-                    child: Icon(
-                      FeatherIcons.bell,
-                      size: 18,
+                MySpacing.width(6),
+                CustomPopupMenu(
+                  backdrop: true,
+                  onChange: (_) {},
+                  offsetX: -120,
+                  menu: Padding(
+                    padding: MySpacing.xy(8, 8),
+                    child: const Center(
+                      child: Icon(
+                        FeatherIcons.bell,
+                        size: 18,
+                      ),
                     ),
                   ),
+                  menuBuilder: (_) => buildNotifications(),
                 ),
-                menuBuilder: (_) => buildNotifications(),
-              ),
-              MySpacing.width(4),
-              CustomPopupMenu(
-                backdrop: false,
-                onChange: (_) {},
-                offsetX: -60,
-                offsetY: 8,
-                menu: Padding(
-                  padding: MySpacing.xy(8, 8),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      MyContainer.rounded(
-                          paddingAll: 0,
-                          child: Image.asset(
-                            Images.avatars[0],
-                            height: 28,
-                            width: 28,
-                            fit: BoxFit.cover,
-                          )),
-                      MySpacing.width(8),
-                      MyText.labelLarge("Den")
-                    ],
+                MySpacing.width(4),
+                CustomPopupMenu(
+                  backdrop: false,
+                  onChange: (_) {},
+                  offsetX: -60,
+                  offsetY: 8,
+                  menu: Padding(
+                    padding: MySpacing.xy(8, 8),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        MyContainer.rounded(
+                            paddingAll: 0,
+                            child: Image.asset(
+                              Images.avatars[0],
+                              height: 28,
+                              width: 28,
+                              fit: BoxFit.cover,
+                            )),
+                        MySpacing.width(8),
+                        MyText.labelLarge("Den")
+                      ],
+                    ),
                   ),
+                  menuBuilder: (context) {
+                    return  buildAccountMenu();
+                  },
                 ),
-                menuBuilder: (context) {
-                  return  buildAccountMenu();
-                },
-              ),
-            ],
+              ],
+            ),
+            ]
           ),
         );
     },);

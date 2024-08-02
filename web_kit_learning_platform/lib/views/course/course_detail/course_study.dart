@@ -4,20 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rating/flutter_rating.dart';
-import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_workers/utils/debouncer.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/helpers/widgets/my_tab_indicator_style.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
-import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
-import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import 'package:webkit/views/course/create_edit_course/components/build_tab_bar.dart';
-import 'package:webkit/views/course/create_edit_course/components/lectures_detail.dart';
 
-import '../../../../helpers/utils/ui_mixins.dart';
-import '../../../../helpers/widgets/my_spacing.dart';
-import '../../../../helpers/widgets/my_text_style.dart';
-import '../../../../services/apis/course/course_detail/models/course_detail_model.dart';
+import '../../../helpers/utils/ui_mixins.dart';
+import '../../../helpers/widgets/my_spacing.dart';
+import '../../../helpers/widgets/my_text_style.dart';
+import '../../../services/apis/course/course_detail/models/course_detail_model.dart';
 
 class CourseStudy extends StatefulWidget {
   final CourseInfo courseInfo;

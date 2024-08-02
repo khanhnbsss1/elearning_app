@@ -18,35 +18,49 @@ class _FlutterVideoPlayerPageState extends State<FlutterVideoPlayerPage> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.networkUrl(Uri.parse(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'))
-      ..initialize().then((_) {
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'))..initialize().then((_) {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        setState(() {});
+        setState(() {
+          print("object");
+        });
       });
+    _controller.addListener(() {
+      if(_controller.value.isCompleted)
+        {
+          setState(() {
+            
+          });
+        }
+    },);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: _controller.value.isInitialized
-            ? AspectRatio(
+        child: _controller.value.isInitialized ? AspectRatio(
           aspectRatio: _controller.value.aspectRatio,
-          child: VideoPlayer(_controller),
-        )
-            : Container(),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            _controller.value.isPlaying
-                ? _controller.pause()
-                : _controller.play();
-          });
-        },
-        child: Icon(
-          _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-        ),
+          child: Stack(
+              children: [
+                VideoPlayer(_controller),
+                Center(
+                  child: FloatingActionButton(
+                    backgroundColor: Colors.transparent,
+                    onPressed: () {
+                      setState(() {
+                        _controller.value.isPlaying
+                            ? _controller.pause()
+                            : _controller.play();
+                      });
+                    },
+                    child: Icon(
+                      _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                    ),
+                  ),
+                )
+              ]
+          ),
+        ) : Container(),
       ),
     );
   }

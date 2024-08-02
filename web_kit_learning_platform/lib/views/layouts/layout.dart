@@ -23,13 +23,14 @@ import 'package:webkit/widgets/custom_pop_menu.dart';
 
 class Layout extends StatelessWidget {
   final Widget? child;
-
+  Widget? title;
+  bool?showBackButton;
   final LayoutController controller = LayoutController();
   final topBarTheme = AdminTheme.theme.topBarTheme;
   final contentTheme = AdminTheme.theme.contentTheme;
   bool? isScroll;
   EdgeInsetsGeometry ?padding;
-  Layout({super.key, this.child, this.isScroll, this.padding}){
+  Layout({super.key, this.child, this.isScroll, this.padding, this.title, this.showBackButton}){
     isScroll??=true;
     padding??=MySpacing.fromLTRB(0, 58 + flexSpacing, 0, flexSpacing);
   }
@@ -50,6 +51,7 @@ class Layout extends StatelessWidget {
       key: controller.scaffoldKey,
       appBar: AppBar(
         elevation: 0,
+        title: title,
         actions: [
           InkWell(
             onTap: () {
@@ -117,7 +119,6 @@ class Layout extends StatelessWidget {
       endDrawer: RightBar(),
       body: Stack(
         children: [
-          
           Row(
             children: [
               //SizedBox(width: Dimens.size70,),
@@ -138,7 +139,7 @@ class Layout extends StatelessWidget {
                     padding: padding!,
                     child: child,),
                 ), 
-                    Positioned(top: 0, left: 0, right: 0, child: TopBar(key: UniqueKey(),)),
+                    Positioned(top: 0, left: 0, right: 0, child: TopBar(key: UniqueKey(), title: title,showBackButton: showBackButton,)),
                   ],
                 ),
               ),
