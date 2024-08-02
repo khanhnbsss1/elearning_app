@@ -15,6 +15,7 @@ class ListBodyCommon extends StatefulWidget {
   MainAxisAlignment? mainAxisAlignment = MainAxisAlignment.start;
   CrossAxisAlignment? crossAxisAlignment = CrossAxisAlignment.center;
   bool? enableDragIcon;
+  Color? diverWall;
   ListBodyCommon(
       {
         super.key,
@@ -27,7 +28,8 @@ class ListBodyCommon extends StatefulWidget {
         this.widthOfListRatio = 0.3,
         this.expandIconColor,
         this.heightOfPage,
-        this.enableDragIcon
+        this.enableDragIcon,
+        this.diverWall
       }) {
     mainAxisAlignment ??= MainAxisAlignment.start;
     crossAxisAlignment ??= CrossAxisAlignment.center;
@@ -112,7 +114,7 @@ class _ListBodyCommonState extends State<ListBodyCommon> {
           BlocProvider.of<ListBodyCommonBloc>(context).add(ListBodyCommonDragEvent(dx: details.delta.dx));
         },
         child: Padding(
-          padding: EdgeInsets.only(top: Dimens.size70),
+          padding: EdgeInsets.only(top: Dimens.size0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -122,7 +124,6 @@ class _ListBodyCommonState extends State<ListBodyCommon> {
               ),
               Container(
                 width: Dimens.size20,
-                //height: Dimens.size20,
                 color: Colors.transparent,
                 child: Visibility(
                   visible: widget.enableDragIcon??true,
@@ -131,7 +132,7 @@ class _ListBodyCommonState extends State<ListBodyCommon> {
                         Center(
                           child: Container(
                             width: 2,
-                            //color: ColorConst.whiteColor,
+                            color: widget.diverWall,
                           ),
                         ),
                         Center(child: Icon(Icons.code_rounded, color: widget.expandIconColor,))

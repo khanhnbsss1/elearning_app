@@ -77,62 +77,61 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
             isScroll: false,
             child: Container(
               decoration: BoxDecoration(color: ColorConst.whiteColor),
-              child: Padding(
-                padding: EdgeInsets.only(top: Dimens.size50, bottom: Dimens.size16, left: Dimens.size16, right: Dimens.size16),
-                child: Stack(children: [
-                  SingleChildScrollView(
-                    controller: _mainController,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        children: [
-                          ListenableBuilder(
-                            listenable: showTabBarModel,
-                            builder: (BuildContext context, Widget? child) {
-                              return buildTitle();
-                            },
-                          ),
-                          SizedBox(
-                            height: 16,
-                          ),
-                          ListenableBuilder(
-                            listenable: showTabBarModel,
-                            builder: (BuildContext context, Widget? child) {
-                              return Stack(
-                                children: [
-                                  Visibility(
-                                    visible: showTabBarModel.position == 0,
-                                    child: CourseIntro(),
-                                  ),
-                                  Visibility(
-                                    visible: showTabBarModel.position == 1,
-                                    child: LectureList(),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
+              padding: EdgeInsets.only(top: Dimens.size50, bottom: Dimens.size16, left: Dimens.size16, right: Dimens.size16),
 
-                        ],
-                      ),
+              child: Stack(children: [
+                SingleChildScrollView(
+                  controller: _mainController,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        ListenableBuilder(
+                          listenable: showTabBarModel,
+                          builder: (BuildContext context, Widget? child) {
+                            return buildTitle();
+                          },
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        ListenableBuilder(
+                          listenable: showTabBarModel,
+                          builder: (BuildContext context, Widget? child) {
+                            return Stack(
+                              children: [
+                                Visibility(
+                                  visible: showTabBarModel.position == 0,
+                                  child: CourseIntro(),
+                                ),
+                                Visibility(
+                                  visible: showTabBarModel.position == 1,
+                                  child: LectureList(),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+
+                      ],
                     ),
                   ),
-                  ListenableBuilder(
-                    listenable: showTabBarModel,
-                    builder: (BuildContext context, Widget? child) {
-                      return Visibility(
-                        visible: showTabBarModel.showTabBar,
-                        child: Align(
-                            alignment: Alignment.topCenter,
-                            child: Padding(
-                              padding: EdgeInsets.all(Dimens.size16),
-                              child: buildTabBar(),
-                            )),
-                      );
-                    },
-                  ),
-                ]),
-              ),
+                ),
+                ListenableBuilder(
+                  listenable: showTabBarModel,
+                  builder: (BuildContext context, Widget? child) {
+                    return Visibility(
+                      visible: showTabBarModel.showTabBar,
+                      child: Align(
+                          alignment: Alignment.topCenter,
+                          child: Padding(
+                            padding: EdgeInsets.all(Dimens.size16),
+                            child: buildTabBar(),
+                          )),
+                    );
+                  },
+                ),
+              ]),
             ))
     );
   }
