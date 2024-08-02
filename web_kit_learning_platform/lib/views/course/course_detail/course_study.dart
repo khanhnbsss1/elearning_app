@@ -90,16 +90,13 @@ class _CourseStudyState extends State<CourseStudy>
       child: Container(
         decoration: BoxDecoration(color: ColorConst.whiteColor),
         padding: EdgeInsets.only(top: Dimens.size50, bottom: Dimens.size16, left: Dimens.size16, right: Dimens.size16),
-        child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
-          return BuildTabBar(
-            widgets: [
-              buildInfo(),
-              buildStudy(),
-              buildTest(),
-            ],
-            titles: const ['Introduction', 'Study', 'Test'],
-          );
-        },
+        child: BuildTabBar(
+          widgets: [
+            buildInfo(),
+            buildStudy(),
+            buildTest(),
+          ],
+          titles: const ['Introduction', 'Study', 'Test'],
         ),
       ),
       
