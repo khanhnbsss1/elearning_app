@@ -1,20 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/views/course/course_study/course_study_introduction.dart';
 import 'package:webkit/views/course/course_study/course_study_study.dart';
 import 'package:webkit/views/course/course_study/course_study_test.dart';
 import 'package:webkit/views/course/create_edit_course/components/build_tab_bar.dart';
-import 'package:webkit/views/video_player/model/video_model.dart';
-import 'package:webkit/views/video_player/video_player.dart';
 import '../../../helpers/utils/ui_mixins.dart';
 import '../../../services/apis/course/course_detail/models/course_detail_model.dart';
+import '../../layouts/layout.dart';
+import '../course_detail/bloc/course_detail_bloc.dart';
 
-class CourseStudy extends StatefulWidget {
+class CourseStudy1 extends StatefulWidget {
   final CourseInfo courseInfo;
 
-  const CourseStudy({
+  const CourseStudy1({
     super.key,
     required this.courseInfo,
   });
@@ -27,10 +28,10 @@ class CourseStudy extends StatefulWidget {
   }
 
   @override
-  State<CourseStudy> createState() => _CourseStudyState();
+  State<CourseStudy1> createState() => _CourseStudyState();
 }
 
-class _CourseStudyState extends State<CourseStudy>
+class _CourseStudyState extends State<CourseStudy1>
     with SingleTickerProviderStateMixin, UIMixin {
   late TabController tabController;
 
@@ -42,46 +43,54 @@ class _CourseStudyState extends State<CourseStudy>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(S.of(context).lets_study),
-        centerTitle: true,
-      ),
-      body: BuildTabBar(
-        widgets: [
-          CourseStudyIntroduction(
-            courseInfo: widget.courseInfo,
-          ),
-          CourseStudyStudy(courseInfo: widget.courseInfo),
-          CourseStudyTest(courseInfo: widget.courseInfo),
-        ],
-        titles: ['Introduction', 'Study', 'Test'],
-      ),
-    );
-  }
-
-  Widget buildVideo() {
-    return SizedBox(
-      height: 450,
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: 400,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          // child: Image.network(
-          //   widget.courseInfo.image!.isNotEmpty
-          //       ? widget.courseInfo.image!
-          //       : 'assets/deshboard/adventure/adventure5.png',
-          //   fit: BoxFit.cover,
-          // )
-          child: VideoPlayer(
-            videoPlayerModel: VideoPlayerModel(
-                title: "", 
-                link: "https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4"//widget.courseInfo.videoPreview ?? ""
+    return BlocProvider(
+      create: (context) {
+        return CourseDetailBloc(CourseDetailState(courseInfo: widget.courseInfo))
+          ..add(CourseDetailInitEvent());
+      },
+      child: BlocConsumer<CourseDetailBloc, CourseDetailState>(
+        listener: (context, state) {
+          switch (state.blocStatus) {
+            case AddCourseStatus.initial:
+              break;
+            default:
+              break;
+          }
+        },
+        builder: (BuildContext context, state) {
+          return Layout(
+            title: Text(
+              L10nX.getStr.lets_study,
+              style: TextStyleConstant.textStyleBlack20w700,
             ),
-          ),
-        ),
+            padding: EdgeInsets.zero,
+            showBackButton: true,
+            isScroll: false,
+            child: Container(
+              decoration: BoxDecoration(color: ColorConst.whiteColor),
+              padding: EdgeInsets.only(
+                  top: Dimens.size50,
+                  bottom: Dimens.size16,
+                  left: Dimens.size16,
+                  right: Dimens.size16),
+              child: StatefulBuilder(
+                builder:
+                    (BuildContext context, void Function(void Function()) setState) {
+                  return BuildTabBar(
+                    widgets: [
+                      CourseStudyIntroduction(
+                        courseInfo: state.courseInfo!,
+                      ),
+                      CourseStudyStudy(courseInfo: state.courseInfo!),
+                      CourseStudyTest(courseInfo: state.courseInfo!),
+                    ],
+                    titles: const ['Introduction', 'Study', 'Test'],
+                  );
+                },
+              ),
+            ),
+          );
+        },
       ),
     );
   }

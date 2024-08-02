@@ -8,6 +8,7 @@ import '../../../base/models/user/UserProfile.dart';
 import '../../../base/theme/colors_app.dart';
 import '../../../base/widgets/audio/audio_speaker.dart';
 import '../../../base/widgets/button/action_button1.dart';
+import '../../../base/widgets/pages_common/list_body_page_common.dart';
 import '../../../helpers/utils/ui_mixins.dart';
 import '../../../helpers/widgets/my_responsiv.dart';
 import '../../../helpers/widgets/my_spacing.dart';
@@ -44,35 +45,34 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
 
   @override
   Widget build(BuildContext context) {
-    return MyResponsive(
-      builder: (BuildContext, BoxConstraints, MyScreenMediaType) {
-        return (!MyScreenMediaType.isMobile)
-            ? Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SizedBox(
+    return StatefulBuilder(
+      builder: (BuildContext context, void Function(void Function()) setState) {
+        return MyResponsive(
+          builder: (buildContext, boxConstraints, myScreenMediaType) {
+            return (!myScreenMediaType.isMobile)
+                ? Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SizedBox(
                   height: MediaQuery.of(context).size.height,
-                  child: Row(
-                    children: [
-                      Expanded(
-                          flex: 6,
-                          child: Align(
-                              alignment: Alignment.topLeft,
-                              child: buildStudySection())),
-                      Flexible(
-                          flex: 4,
-                          child: Align(
-                              alignment: Alignment.topCenter,
-                              child: buildLectureList())),
-                    ],
-                  ),
-                ),
-              )
-            : Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SingleChildScrollView(
-                  child: buildStudySection(),
-                ),
-              );
+                  child: ListBodyCommon(
+                      minOfWidthOfListRatio: 0.5,
+                      maxOfWidthOfListRatio: 0.9,
+                      widthOfListRatio: 0.7,
+                      enableDragIcon: true,
+                      diverWall: ColorConst.dividerColor,
+                      list: buildStudySection(),
+                      body: Align(
+                          alignment: Alignment.topCenter,
+                          child: buildLectureList()))),
+            )
+                : Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SingleChildScrollView(
+                child: buildStudySection(),
+              ),
+            );
+          },
+        );
       },
     );
   }
@@ -114,12 +114,6 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
         height: 400,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
-          // child: Image.network(
-          //   widget.courseInfo.image!.isNotEmpty
-          //       ? widget.courseInfo.image!
-          //       : 'assets/deshboard/adventure/adventure5.png',
-          //   fit: BoxFit.cover,
-          // )
           child: VideoPlayer(
             videoPlayerModel: VideoPlayerModel(
                 title: "",
@@ -186,136 +180,144 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
   }
 
   Widget buildLectureList() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            (MediaQuery.of(context).size.width < 550)
-                ? Text('Danh sách bài học: ',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
-                    ))
-                : SizedBox(),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: subjectCount,
-              itemBuilder: (context, subjectIndex) {
-                return Column(
-                  children: [
-                    InkWell(
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Card(
-                          elevation: 5,
-                          child: Container(
-                            margin: EdgeInsets.all(16),
-                            child: Row(
-                              children: [
-                                Flexible(
-                                  flex: 10,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              (MediaQuery.of(context).size.width < 550)
+                  ? Text('Danh sách bài học: ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red,
+                  ))
+                  : SizedBox(),
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: subjectCount,
+                itemBuilder: (context, subjectIndex) {
+                  return StatefulBuilder(
+                    builder: (BuildContext context,
+                        void Function(void Function()) setState) {
+                      return Column(
+                        children: [
+                          InkWell(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Card(
+                                elevation: 5,
+                                child: Container(
+                                  margin: EdgeInsets.all(16),
+                                  child: Row(
                                     children: [
-                                      Text(
-                                        'Subject $subjectIndex: Subject $subjectIndex name Subject $subjectIndex: Subject $subjectIndex name Subject $subjectIndex: Subject $subjectIndex name ',
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 8,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 32.0),
-                                        child: Row(
+                                      Flexible(
+                                        flex: 10,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                           children: [
-                                            (MediaQuery.of(context).size.width >
-                                                    1050)
-                                                ? Text('Tiến độ: ')
-                                                : SizedBox(),
-                                            Container(
-                                              width: MediaQuery.of(context)
+                                            Text(
+                                              'Subject $subjectIndex: Subject $subjectIndex name Subject $subjectIndex: Subject $subjectIndex name Subject $subjectIndex: Subject $subjectIndex name ',
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Padding(
+                                              padding:
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 32.0),
+                                              child: Row(
+                                                children: [
+                                                  (MediaQuery.of(context)
                                                       .size
-                                                      .width *
-                                                  0.15,
-                                              height: 20,
-                                              constraints: BoxConstraints(
-                                                minWidth: 100,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey,
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                              ),
-                                              child: Stack(children: [
-                                                Positioned(
-                                                  left: 0,
-                                                  child: Container(
-                                                    width: MediaQuery.of(
-                                                                context)
-                                                            .size
-                                                            .width *
-                                                        0.2 *
-                                                        _checkProgression(
-                                                            subjectIndex:
-                                                                subjectIndex),
+                                                      .width >
+                                                      1050)
+                                                      ? Text('Tiến độ: ')
+                                                      : SizedBox(),
+                                                  Container(
+                                                    width:
+                                                    constraints.maxWidth /
+                                                        2,
                                                     height: 20,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.red,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20),
+                                                    constraints: BoxConstraints(
+                                                      minWidth: 100,
                                                     ),
-                                                  ),
-                                                ),
-                                                Center(
-                                                    child: Text(
-                                                  '${(_checkProgression(subjectIndex: subjectIndex) * 100).floor()} %',
-                                                  style: TextStyle(
-                                                      color: Colors.white),
-                                                )),
-                                              ]),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.grey,
+                                                      borderRadius:
+                                                      BorderRadius.circular(
+                                                          20),
+                                                    ),
+                                                    child: Stack(children: [
+                                                      Positioned(
+                                                          left: 0,
+                                                          child: Container(
+                                                            width: constraints
+                                                                .maxWidth /
+                                                                2 *
+                                                                _checkProgression(
+                                                                    subjectIndex:
+                                                                    subjectIndex),
+                                                            height: 20,
+                                                            decoration:
+                                                            BoxDecoration(
+                                                              color: Colors.red,
+                                                              borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                  20),
+                                                            ),
+                                                          )),
+                                                      Center(
+                                                          child: Text(
+                                                            '${(_checkProgression(subjectIndex: subjectIndex) * 100).floor()} %',
+                                                            style: TextStyle(
+                                                                color:
+                                                                Colors.white),
+                                                          )),
+                                                    ]),
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                ),
-                                Spacer(),
-                                Flexible(
-                                  flex: 1,
-                                  child: (!showSubject[subjectIndex])
-                                      ? Icon(
+                                      Spacer(),
+                                      Flexible(
+                                        flex: 1,
+                                        child: (!showSubject[subjectIndex])
+                                            ? Icon(
                                           Icons.arrow_drop_down,
                                           size: 32,
                                         )
-                                      : Icon(Icons.arrow_drop_up, size: 32),
+                                            : Icon(Icons.arrow_drop_up,
+                                            size: 32),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ],
+                              ),
                             ),
+                            onTap: () {
+                              setState(() {
+                                showSubject[subjectIndex] =
+                                !showSubject[subjectIndex];
+                              });
+                            },
                           ),
-                        ),
-                      ),
-                      onTap: () {
-                        setState(() {
-                          showSubject[subjectIndex] =
-                              !showSubject[subjectIndex];
-                        });
-                      },
-                    ),
-                    AnimatedSize(
-                      curve: Curves.fastOutSlowIn,
-                      duration: Duration(milliseconds: 200),
-                      child: showSubject[subjectIndex]
-                          ? Container(
+                          AnimatedSize(
+                            curve: Curves.fastOutSlowIn,
+                            duration: Duration(milliseconds: 200),
+                            child: showSubject[subjectIndex]
+                                ? Container(
                               margin: EdgeInsets.all(16),
                               child: ListView.builder(
                                 shrinkWrap: true,
@@ -336,7 +338,8 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                                               child: Text(
                                                 'Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name ',
                                                 maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
+                                                overflow:
+                                                TextOverflow.ellipsis,
                                               ),
                                             ),
                                             Spacer(),
@@ -345,29 +348,36 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                                               child: InkWell(
                                                 onTap: () {
                                                   setState(() {
-                                                    checkLecture[subjectIndex]
-                                                            [lectureIndex] =
-                                                        !checkLecture[
-                                                                subjectIndex]
-                                                            [lectureIndex];
+                                                    checkLecture[
+                                                    subjectIndex]
+                                                    [
+                                                    lectureIndex] =
+                                                    !checkLecture[
+                                                    subjectIndex]
+                                                    [
+                                                    lectureIndex];
                                                   });
                                                 },
                                                 child: Container(
                                                   width: 24,
                                                   height: 24,
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                    color: Colors.red,
-                                                  )),
+                                                  decoration:
+                                                  BoxDecoration(
+                                                      border:
+                                                      Border.all(
+                                                        color: Colors.red,
+                                                      )),
                                                   child: Align(
-                                                    alignment: Alignment.center,
+                                                    alignment:
+                                                    Alignment.center,
                                                     child: checkLecture[
-                                                                subjectIndex]
-                                                            [lectureIndex]
+                                                    subjectIndex]
+                                                    [lectureIndex]
                                                         ? Icon(
-                                                            Icons.check,
-                                                            color: Colors.red,
-                                                          )
+                                                      Icons.check,
+                                                      color: Colors
+                                                          .red,
+                                                    )
                                                         : SizedBox(),
                                                   ),
                                                 ),
@@ -377,10 +387,12 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.symmetric(
+                                        padding:
+                                        const EdgeInsets.symmetric(
                                             horizontal: 8.0),
                                         child: Divider(
-                                          color: Colors.black.withOpacity(0.1),
+                                          color: Colors.black
+                                              .withOpacity(0.1),
                                         ),
                                       )
                                     ],
@@ -388,15 +400,18 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                                 },
                               ),
                             )
-                          : SizedBox(),
-                    ),
-                  ],
-                );
-              },
-            ),
-          ],
-        ),
-      ),
+                                : SizedBox(),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -495,7 +510,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                               onTap: () async {
                                 final player = AudioPlayer();
                                 player.playerStateStream.listen(
-                                  (event) {
+                                      (event) {
                                     switch (event.processingState) {
                                       case ProcessingState.idle:
                                       // TODO: Handle this case.
@@ -504,16 +519,16 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                                       case ProcessingState.buffering:
                                       // TODO: Handle this case.
                                       case ProcessingState.ready:
-                                        // TODO: Handle this case.
+                                      // TODO: Handle this case.
                                         setState(
-                                          () {
+                                              () {
                                             isOnVolume = true;
                                           },
                                         );
                                       case ProcessingState.completed:
-                                        // TODO: Handle this case.
+                                      // TODO: Handle this case.
                                         setState(
-                                          () {
+                                              () {
                                             isOnVolume = false;
                                           },
                                         );
@@ -584,31 +599,35 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
           ),
           buildStudyReviewItemUser(replyCheck: false),
           SizedBox(
-            height: 500,
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: reviewCount,
-                itemBuilder: (context, index) {
-                  listOfReview.add(
-                    Review(
-                      username: 'username $index',
-                      text: 'review $index',
-                      rating: 5,
-                      likeCount: 0,
-                      dislikeCount: 0,
-                      avatar: null,
-                    ),
-                  );
-                  return Column(
-                    children: [
-                      buildStudyReviewItem(
-                          review: listOfReview[index], index: index),
-                      SizedBox(
-                        height: 16,
-                      )
-                    ],
-                  );
-                }),
+              height: 500,
+              child: StatefulBuilder(
+                builder: (BuildContext context, void Function(void Function()) setState) {
+                  return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: reviewCount,
+                      itemBuilder: (context, index) {
+                        listOfReview.add(
+                          Review(
+                            username: 'username $index',
+                            text: 'review $index',
+                            rating: 5,
+                            likeCount: 0,
+                            dislikeCount: 0,
+                            avatar: null,
+                          ),
+                        );
+                        return Column(
+                          children: [
+                            buildStudyReviewItem(
+                                review: listOfReview[index], index: index),
+                            SizedBox(
+                              height: 16,
+                            )
+                          ],
+                        );
+                      });
+                },
+              )
           )
         ],
       ),

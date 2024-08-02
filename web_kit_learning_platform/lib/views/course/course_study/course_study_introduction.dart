@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 
 import '../../../base/widgets/button/action_button1.dart';
@@ -17,25 +18,22 @@ class CourseStudyIntroduction extends StatefulWidget {
 }
 
 class _CourseStudyIntroductionState extends State<CourseStudyIntroduction> {
-  final List<String> courseObject = [
-    'Dành cho các bạn mới học Tiếng Trung',
-    'Dành cho các bạn tự học Tiếng Trung nhưng không hiệu quả',
-    'Dành cho các bạn đã từng học Tiếng Trung nhưng mất gốc và quên kiến thức',
-    'Dành cho các bạn có nhu cầu sử dụng Tiếng Trung cơ bản trong giao tiếp thường ngày'
-  ];
+  late List<String> courseObject = widget.courseInfo.infoObj?.split("&&&").map((e) => e.trim()).toList() ?? [];
 
-  final List<String> courseResult = [
-    'Bạn nhận được gì sau khóa học này?',
-    'Nắm được 500 từ vựng cơ bản, 400 từ vựng mở rộng, 100 cấu trúc ngữ pháp thông dụng',
-    'Sử dụng thành thạo Tiếng Trung ở mức cơ bản, giao tiếp được các chủ đề trong cuộc sống và công việc',
-    'Bắt đầu dịch được những văn bản, video cơ bản bằng Tiếng Trung',
-    'Thêm điểm cộng khi tham gia phỏng vấn',
-    'Đủ năng lực thi được chứng chỉ Tiếng Trung sơ cấp',
-    'Đủ năng lực thi Tiếng Trung tốt nghiệp THPT hoặc xét tuyển đại học'
-  ];
+  late List<String> courseResult = widget.courseInfo.infoResult?.split("&&&").map((e) => e.trim()).toList() ?? [];
+  @override
+  void initState() {
+    super.initState();
+  }
+  //
+  // courseObject = widget.courseInfo.infoObj?.split("&&&").map((e) => e.trim()).toList() ?? [];
+  // courseResult = widget.courseInfo.infoResult?.split("&&&").map((e) => e.trim()).toList() ?? [];
 
   @override
   Widget build(BuildContext context) {
+    for (String s in courseObject) {
+      print('==========================> ${s}');
+    }
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -91,24 +89,13 @@ class _CourseStudyIntroductionState extends State<CourseStudyIntroduction> {
 
   Widget buildVideo() {
     return SizedBox(
+      width: MediaQuery.of(context).size.width,
       height: 450,
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: 400,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          // child: Image.network(
-          //   widget.courseInfo.image!.isNotEmpty
-          //       ? widget.courseInfo.image!
-          //       : 'assets/deshboard/adventure/adventure5.png',
-          //   fit: BoxFit.cover,
-          // )
-          child: VideoPlayer(
-            videoPlayerModel: VideoPlayerModel(
-                title: "", 
-                link:"https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4"// widget.courseInfo.videoPreview ?? ""
-            ),
-          ),
+      child: VideoPlayer(
+        videoPlayerModel: VideoPlayerModel(
+            title: "",
+            link:
+            "https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4" //widget.courseInfo.videoPreview ?? ""
         ),
       ),
     );
@@ -149,22 +136,23 @@ class _CourseStudyIntroductionState extends State<CourseStudyIntroduction> {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 32.0),
-          child: (widget.courseInfo.infoResult == null)
+          child: (widget.courseInfo.infoResult != null)
               ? ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: courseObject.length,
-                  itemBuilder: (context, index) => Row(
-                        children: [
-                          Icon(
-                            Icons.check,
-                            color: Colors.red,
-                          ),
-                          SizedBox(
-                            width: 24,
-                          ),
-                          Text(courseObject[index])
-                        ],
-                      ))
+              shrinkWrap: true,
+              itemCount: courseObject.length,
+              itemBuilder: (context, index) => Row(
+                children: [
+                  Icon(
+                    Icons.check,
+                    color: Colors.red,
+                  ),
+                  SizedBox(
+                    width: 24,
+                  ),
+                  Text(courseObject[index]),
+                  SizedBox(height: Dimens.size10,)
+                ],
+              ))
               : Text('${widget.courseInfo.infoResult}'),
         ),
       ],
@@ -187,22 +175,22 @@ class _CourseStudyIntroductionState extends State<CourseStudyIntroduction> {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 32.0),
-          child: (widget.courseInfo.infoResult == null)
+          child: (widget.courseInfo.infoResult != null)
               ? ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: courseResult.length,
-                  itemBuilder: (context, index) => Row(
-                        children: [
-                          Icon(
-                            Icons.check,
-                            color: Colors.red,
-                          ),
-                          SizedBox(
-                            width: 24,
-                          ),
-                          Text(courseResult[index])
-                        ],
-                      ))
+              shrinkWrap: true,
+              itemCount: courseResult.length,
+              itemBuilder: (context, index) => Row(
+                children: [
+                  Icon(
+                    Icons.check,
+                    color: Colors.red,
+                  ),
+                  SizedBox(
+                    width: 24,
+                  ),
+                  Text(courseResult[index])
+                ],
+              ))
               : Text('${widget.courseInfo.infoResult}'),
         ),
       ],
@@ -265,8 +253,8 @@ class _CourseStudyIntroductionState extends State<CourseStudyIntroduction> {
             child: Container(
               decoration: BoxDecoration(
                   border: Border.all(
-                color: Colors.black.withOpacity(0.1),
-              )),
+                    color: Colors.black.withOpacity(0.1),
+                  )),
               width: 400,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -353,7 +341,7 @@ class _CourseStudyIntroductionState extends State<CourseStudyIntroduction> {
                     Container(
                       decoration: BoxDecoration(
                           border:
-                              Border.all(color: Colors.black.withOpacity(0.1))),
+                          Border.all(color: Colors.black.withOpacity(0.1))),
                       child: Padding(
                         padding: const EdgeInsets.all(16),
                         child: Column(

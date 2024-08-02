@@ -53,7 +53,7 @@ class CourseDetailState extends Equatable {
   @override
   List<Object?> get props => [
     blocStatus, 
-   courseInfo,
+    courseInfo,
     courseObject,
     courseResult
   ];
