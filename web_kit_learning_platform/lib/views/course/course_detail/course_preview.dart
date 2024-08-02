@@ -64,7 +64,7 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
     return BlocProvider(
         create: (context) {
           return CourseDetailBloc(CourseDetailState(courseInfo: widget.courseInfo))
-            ..add(CourseDetailnitEvent());
+            ..add(CourseDetailInitEvent());
         },
         child: BlocConsumer<CourseDetailBloc, CourseDetailState>(
             listener: (context, state) {

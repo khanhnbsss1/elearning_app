@@ -6,6 +6,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/views/course/create_edit_course/components/build_tab_bar.dart';
+import 'package:webkit/views/video_player/model/video_model.dart';
+import 'package:webkit/views/video_player/video_player.dart';
 
 import '../../../helpers/utils/ui_mixins.dart';
 import '../../../helpers/widgets/my_spacing.dart';
@@ -153,12 +155,14 @@ class _CourseStudyState extends State<CourseStudy>
         height: 400,
         child: ClipRRect(
             borderRadius: BorderRadius.circular(16),
-            child: Image.network(
-              widget.courseInfo.image!.isNotEmpty
-                  ? widget.courseInfo.image!
-                  : 'assets/deshboard/adventure/adventure5.png',
-              fit: BoxFit.cover,
-            )),
+            // child: Image.network(
+            //   widget.courseInfo.image!.isNotEmpty
+            //       ? widget.courseInfo.image!
+            //       : 'assets/deshboard/adventure/adventure5.png',
+            //   fit: BoxFit.cover,
+            // )
+          child: VideoPlayer(videoPlayerModel: VideoPlayerModel(title: "", link: widget.courseInfo.videoPreview??""),),
+        ),
       ),
     );
   }
@@ -169,14 +173,7 @@ class _CourseStudyState extends State<CourseStudy>
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 400,
-        child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: Image.network(
-              widget.courseInfo.image!.isNotEmpty
-                  ? widget.courseInfo.image!
-                  : 'assets/deshboard/adventure/adventure5.png',
-              fit: BoxFit.cover,
-            )),
+        child: VideoPlayer(videoPlayerModel: VideoPlayerModel(title: "", link: widget.courseInfo.videoPreview??""),),
       ),
     );
   }
@@ -255,11 +252,6 @@ class _CourseStudyState extends State<CourseStudy>
   }
 
   Widget buildLectureList() {
-    for (int i = 0; i < subjectCount; i++) {
-      for (int j = 0; j < lectureCount; j++) {
-        print('=======  ${checkLecture[i][j]} $i  $j');
-      }
-    }
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -382,13 +374,7 @@ class _CourseStudyState extends State<CourseStudy>
                                             Spacer(),
                                             InkWell(
                                               onTap: () {
-                                                print('Subject $subjectIndex: Lecture $lectureIndex name');
                                                 setState(() {
-                                                  // print(_checkProgression(subjectIndex: subjectIndex));
-                                                  // print('   ');
-                                                  // print(subjectIndex);
-                                                  // print('$subjectIndex   $lectureIndex  ${checkLecture[subjectIndex][lectureIndex]} ');
-
                                                   checkLecture[subjectIndex][lectureIndex] = !checkLecture[subjectIndex][lectureIndex];
                                                 });
                                               },
@@ -566,145 +552,148 @@ class _CourseStudyState extends State<CourseStudy>
 // }
 
   Widget buildInfoCard() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Container(
-            decoration: BoxDecoration(
-                border: Border.all(
-              color: Colors.black.withOpacity(0.1),
-            )),
-            width: 400,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.network(
-                        (widget.courseInfo.videoPreview == null)
-                            ? 'assets/deshboard/adventure/adventure5.png'
-                            : widget.courseInfo.videoPreview!,
-                        fit: BoxFit.fill,
-                      )),
-                  SizedBox(
-                    height: 24,
-                  ),
-                  Center(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text('Phân loại:'),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text('Tác giả: '),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text('Thời lượng: '),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text('Nội dung: '),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text('Chính quy: '),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text('ID: '),
-                          ],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(
+                color: Colors.black.withOpacity(0.1),
+              )),
+              width: 400,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.network(
+                          (widget.courseInfo.image == null)
+                              ? 'assets/deshboard/adventure/adventure5.png'
+                              : widget.courseInfo.image!,
+                          fit: BoxFit.fill,
                         ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                    ),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    Center(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text('Phân loại:'),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text('Tác giả: '),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text('Thời lượng: '),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text('Nội dung: '),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text('Chính quy: '),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text('ID: '),
+                            ],
+                          ),
+                          SizedBox(
+                            width: 30,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(widget.courseInfo.gradeName ?? '-'),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(widget.courseInfo.producerName ?? '-'),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(widget.courseInfo.durian ?? '-'),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                  '${widget.courseInfo.totalSubjects} chủ đề, ${widget.courseInfo.totalLectures} bài học'),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text('${widget.courseInfo.isStandard ?? '0'}'),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text('${widget.courseInfo.id ?? '0'}'),
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 24,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Colors.black.withOpacity(0.1))),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
                           children: [
-                            Text(widget.courseInfo.gradeName ?? '-'),
-                            SizedBox(
-                              height: 8,
+                            Text(
+                              '${widget.courseInfo.payment! / 0.8} VND',
+                              style: TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  color: Colors.black45,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400),
                             ),
-                            Text(widget.courseInfo.producerName ?? '-'),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(widget.courseInfo.durian ?? '-'),
                             SizedBox(
                               height: 8,
                             ),
                             Text(
-                                '${widget.courseInfo.totalSubjects} chủ đề, ${widget.courseInfo.totalLectures} bài học'),
+                              '${widget.courseInfo.payment!} VND',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: Color(0xFFFFC711),
+                                  fontStyle: FontStyle.italic,
+                                  color: Color(0xFFFFC711),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
+                            ),
                             SizedBox(
                               height: 8,
                             ),
-                            Text('${widget.courseInfo.isStandard ?? '0'}'),
-                            SizedBox(
-                              height: 8,
+                            ActionButton1(
+                              text: 'Đăng ký ngay',
                             ),
-                            Text('${widget.courseInfo.id ?? '0'}'),
                           ],
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 24,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Colors.black.withOpacity(0.1))),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        children: [
-                          Text(
-                            '${widget.courseInfo.payment! / 0.8} VND',
-                            style: TextStyle(
-                                decoration: TextDecoration.lineThrough,
-                                color: Colors.black45,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            '${widget.courseInfo.payment!} VND',
-                            style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                decorationColor: Color(0xFFFFC711),
-                                fontStyle: FontStyle.italic,
-                                color: Color(0xFFFFC711),
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          ActionButton1(
-                            text: 'Đăng ký ngay',
-                          ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                ],
+                    SizedBox(
+                      height: 8,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

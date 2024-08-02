@@ -6,8 +6,8 @@ abstract class CourseDetailEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class CourseDetailnitEvent extends CourseDetailEvent {
-  CourseDetailnitEvent();
+class CourseDetailInitEvent extends CourseDetailEvent {
+  CourseDetailInitEvent();
   @override
   List<Object?> get props => [];
 }
