@@ -264,6 +264,9 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
               setState(() {
                 position == value;
                 showTabBarModel.onChangerShowTitle(value);
+                if(value!=0) {
+                  showTabBarModel.onChangerShowCard(true);
+                }
               });
             },
             tabs: [
@@ -462,7 +465,7 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
         ),
         Padding(
           padding: const EdgeInsets.only(left: 32.0),
-          child: (_state.courseInfo?.infoResult == null)
+          child: (_state.courseInfo?.infoResult != null)
               ? ListView.builder(
                   shrinkWrap: true,
                   itemCount: _state.courseObject?.length,
@@ -500,7 +503,7 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
         ),
         Padding(
           padding: const EdgeInsets.only(left: 32.0),
-          child: (_state.courseInfo?.infoResult == null)
+          child: (_state.courseInfo?.infoResult != null)
               ? ListView.builder(
                   shrinkWrap: true,
                   itemCount: _state.courseResult?.length,
