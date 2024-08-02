@@ -514,5 +514,6 @@
   "please_choose_a_subject": "请选择主题",
   "search_lesson_str": "搜索课程",
   "create_lesson_str": "创建课程",
-  "delete_lesson_str": "删除课程"
+  "delete_lesson_str": "删除课程",
+  "subject_str": "主题"
 }

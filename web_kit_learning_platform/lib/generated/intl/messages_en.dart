@@ -549,6 +549,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Subject already exists"),
         "subject_name_str":
             MessageLookupByLibrary.simpleMessage("Subject name"),
+        "subject_str": MessageLookupByLibrary.simpleMessage("Subject"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "subtitle_is_more_useful":
             MessageLookupByLibrary.simpleMessage("Subtitle is more useful"),

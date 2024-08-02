@@ -540,6 +540,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "subject_is_exit_str":
             MessageLookupByLibrary.simpleMessage("Chủ đề đã tồn tại"),
         "subject_name_str": MessageLookupByLibrary.simpleMessage("Tên chủ đề"),
+        "subject_str": MessageLookupByLibrary.simpleMessage("Chủ đề"),
         "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
         "subtitle_is_more_useful":
             MessageLookupByLibrary.simpleMessage("Phụ đề hữu ích hơn"),
