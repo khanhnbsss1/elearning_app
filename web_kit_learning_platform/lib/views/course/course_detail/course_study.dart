@@ -161,7 +161,12 @@ class _CourseStudyState extends State<CourseStudy>
             //       : 'assets/deshboard/adventure/adventure5.png',
             //   fit: BoxFit.cover,
             // )
-          child: VideoPlayer(videoPlayerModel: VideoPlayerModel(title: "", link: widget.courseInfo.videoPreview??""),),
+          child: VideoPlayer(
+            videoPlayerModel: VideoPlayerModel(
+              title: "", 
+              link: "https://www.youtube.com/watch?v=NGl9izvlVKA&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ"//widget.courseInfo.videoPreview??""
+            )
+            ,),
         ),
       ),
     );
@@ -173,7 +178,10 @@ class _CourseStudyState extends State<CourseStudy>
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 400,
-        child: VideoPlayer(videoPlayerModel: VideoPlayerModel(title: "", link: widget.courseInfo.videoPreview??""),),
+        child: VideoPlayer(videoPlayerModel: VideoPlayerModel(
+            title: "", 
+            link: "https://www.youtube.com/watch?v=NGl9izvlVKA&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ",//widget.courseInfo.videoPreview??""
+        ),),
       ),
     );
   }

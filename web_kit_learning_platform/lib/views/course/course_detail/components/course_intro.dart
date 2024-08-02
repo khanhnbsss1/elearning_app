@@ -51,6 +51,10 @@ class CourseIntro extends StatelessWidget{
             SizedBox(
               height: 16,
             ),
+            Divider(color: ColorConst.dividerColor,),
+            SizedBox(
+              height: 16,
+            ),
             buildInfoBoxInfoObj(),
             SizedBox(
               height: 16,
@@ -101,6 +105,7 @@ class CourseIntro extends StatelessWidget{
               shrinkWrap: true,
               itemCount: _state.courseObject?.length,
               itemBuilder: (context, index) => Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Icon(
                     Icons.check,
@@ -109,7 +114,7 @@ class CourseIntro extends StatelessWidget{
                   SizedBox(
                     width: 24,
                   ),
-                  Text((_state.courseObject??[])[index])
+                  Expanded(child: Text((_state.courseObject??[])[index], maxLines: 5,))
                 ],
               ))
               : Text('${_state.courseInfo?.infoResult}'),
@@ -138,6 +143,7 @@ class CourseIntro extends StatelessWidget{
               shrinkWrap: true,
               itemCount: _state.courseResult?.length,
               itemBuilder: (context, index) => Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Icon(
                     Icons.check,
@@ -146,7 +152,7 @@ class CourseIntro extends StatelessWidget{
                   SizedBox(
                     width: 24,
                   ),
-                  Text((_state.courseResult??[])[index])
+                  Expanded(child: Text((_state.courseResult??[])[index], maxLines: 5,))
                 ],
               ))
               : Text('${_state.courseInfo?.infoResult}'),

@@ -295,6 +295,12 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
   }
 
   Widget buildCategory({required AddCourseState state, required BuildContext context}) {
+    dynamic selectItem = (state.controller!.listOfCategoryName.entries.where((element) => element.key == state.courseInfo?.categoryId,));
+    int? selectKey ;
+    if(selectItem.isNotEmpty)
+      {
+        selectKey= selectItem.first.key;
+      }
     return WidgetWithColumnTitleCommon(
       title: '${L10nX.getStr.category_str}: ',
       isRequirement: true,
@@ -303,6 +309,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         dropdownColor: theme.cardTheme.color,
         decoration: InputDecoration(
           labelText: value2 ?? 'Category',
+          
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
           border: outlineInputBorder,
           prefixIcon: Icon(
@@ -315,7 +322,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           floatingLabelBehavior: FloatingLabelBehavior.never,
         ),
         
-        value: state.courseInfo?.categoryId??0,
+        value: selectKey,
         items: state.controller!.listOfCategoryName.entries.map((entry) {
           return DropdownMenuItem<int>(
             value: entry.key,

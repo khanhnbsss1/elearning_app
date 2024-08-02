@@ -19,6 +19,8 @@ class ExpandWidget extends StatefulWidget{
   double? radius;
   bool? enableDivider;
   Color? dividerColor;
+  Color? borderColor;
+
   List<Color>? titleGradient;
   Color? titleExpandColor;
   Color? titleCollapseColor;
@@ -39,7 +41,8 @@ class ExpandWidget extends StatefulWidget{
     this.titleGradient,
     this.enablePrefixExpand,
     this.titleCollapseColor, 
-    this.titleExpandColor
+    this.titleExpandColor,
+    this.borderColor
   }){
     titleStyle??=TextStyleConstant.textStyleBlack16w600;
     enableSubfixExpand??=true;
@@ -47,6 +50,7 @@ class ExpandWidget extends StatefulWidget{
     enableDivider??=false;
     radius??=Dimens.size8;
     titleGradient??=null;
+    borderColor??=Colors.transparent;
   }
   @override
   State<StatefulWidget> createState() {
@@ -101,24 +105,23 @@ class ExpandWidgetState extends State<ExpandWidget>with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-   return Material(
-     elevation: 3,
-     color: widget.expandColor??ColorConst.whiteColor,
-     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.radius!),),
+   return Card(
+     elevation: 1,
+     shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(widget.radius!), ),
      child: Container(
        decoration: BoxDecoration(
          color: widget.expandColor??ColorConst.whiteColor,
          borderRadius: BorderRadius.circular(widget.radius!),
-         //border: Border.all(color: ColorConst.colorHintTextSearch)
+         border: Border.all(color: widget.borderColor!)
        ),
-       
+       clipBehavior: Clip.hardEdge,
        child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              color: widget.expandColor,
+              color: widget.expandColor??ColorConst.whiteColor,
               alignment: Alignment.centerLeft,
               child: InkWell(
                 onTap: () {

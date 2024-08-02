@@ -40,13 +40,14 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
   int position = 0;
 
   final ScrollController _mainController = ScrollController();
-
+  double _mainControllerPosition=0;
   @override
   void initState() {
     super.initState();
 
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: 2, vsync: this);
     _mainController.addListener(() {
+      _mainControllerPosition= _mainController.position.pixels;
       if (_mainController.offset > 400) {
         if (showTabBarModel.showTabBar == false) {
           showTabBarModel.onChangerShowCard(true);
@@ -88,31 +89,30 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
                           ListenableBuilder(
                             listenable: showTabBarModel,
                             builder: (BuildContext context, Widget? child) {
-                              return Visibility(
-                                visible: showTabBarModel.position == 0,
-                                child: buildTitle(),
-                              );
+                              return buildTitle();
                             },
                           ),
                           SizedBox(
                             height: 16,
                           ),
-                          Stack(
-                            children: [
-                              Visibility(
-                                visible: tabController.index == 0,
-                                child: CourseIntro(),
-                              ),
-                              Visibility(
-                                visible: tabController.index == 1,
-                                child: LectureList(),
-                              ),
-                              Visibility(
-                                visible: tabController.index == 2,
-                                child: Text("It's sunny here"),
-                              ),
-                            ],
+                          ListenableBuilder(
+                            listenable: showTabBarModel,
+                            builder: (BuildContext context, Widget? child) {
+                              return Stack(
+                                children: [
+                                  Visibility(
+                                    visible: showTabBarModel.position == 0,
+                                    child: CourseIntro(),
+                                  ),
+                                  Visibility(
+                                    visible: showTabBarModel.position == 1,
+                                    child: LectureList(),
+                                  ),
+                                ],
+                              );
+                            },
                           ),
+
                         ],
                       ),
                     ),
@@ -150,13 +150,19 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
         builder: (BuildContext context, state) {
           return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
             return SizedBox(
-              height: 450,
+              height: 500,
               child: Stack(
                 children: [
-                  SizedBox(
+                  Container(
                     width: constraints.maxWidth,
                     height: 400,
-                    child: VideoPlayer(videoPlayerModel: VideoPlayerModel(title: "", link: state.courseInfo?.videoPreview ?? ""),),
+                    decoration: BoxDecoration(
+                      color: ColorConst.blackColor
+                    ),
+                    child: VideoPlayer(videoPlayerModel: VideoPlayerModel(
+                        title: "", 
+                        link:"https://www.youtube.com/watch?v=NGl9izvlVKA&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ",// state.courseInfo?.videoPreview ?? ""
+                    ),),
                   ),
                   Positioned(
                     bottom: 0,
@@ -266,13 +272,12 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
                 dividerHeight: 0,
                 controller: tabController,
                 onTap: (value) {
-                  setState(() {
                     position == value;
                     showTabBarModel.onChangerShowTitle(value);
-                    if (value != 0) {
+                    if (value != 0 && _mainControllerPosition> 400) {
                       showTabBarModel.onChangerShowCard(true);
                     }
-                  });
+                   // _mainController.jumpTo(_mainControllerPosition);
                 },
                 tabs: [
                   Tab(
@@ -284,12 +289,6 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
                   Tab(
                     child: Text(
                       L10nX.getStr.content_str,
-                      style: TextStyleConstant.textStyleBlack14w400,
-                    ),
-                  ),
-                  Tab(
-                    child: Text(
-                      L10nX.getStr.quick_links,
                       style: TextStyleConstant.textStyleBlack14w400,
                     ),
                   ),

@@ -44,6 +44,7 @@ class LectureList extends StatelessWidget{
                   SizedBox(
                     height: 16,
                   ),
+                  Divider(color: ColorConst.dividerColor,),
                   SingleChildScrollView(child: buildSubjectList(state: state)),
                 ],
               );
@@ -76,12 +77,18 @@ class LectureList extends StatelessWidget{
         lessonIndex ++;
         listLesson.add(
             Container(
-              margin: EdgeInsets.only(left: 32, top: 16, bottom: 16),
+              padding: EdgeInsets.symmetric( vertical: 16),
+              margin: EdgeInsets.symmetric(horizontal: 32),
               decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: ColorConst.dividerColor, ))
+                  //border: Border(bottom: BorderSide(color: ColorConst.dividerColor, ))
               ),
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
                 children: [
+                  Text("-"),
+                  Gap(Dimens.size10),
                   Text('${L10nX.getStr.lecture_name_str} $lessonIndex: ${lessonInfo.lectureName}'),
                 ],
               ),
@@ -92,7 +99,10 @@ class LectureList extends StatelessWidget{
       title: '${L10nX.getStr.subject_str} ${subjectIndex.toString()}: ${subjects.subName}',
       enablePrefixExpand: true,
       enableSubfixExpand: false,
+      expandColor: Color(0x00ff0000),
       titleExpandColor: ColorConst.mainColor,
+      borderColor: ColorConst.colorIconGrays.withOpacity(0.1),
+      enableDivider: true,
       child: Row(
         children: [
           Container(
