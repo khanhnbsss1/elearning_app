@@ -248,7 +248,6 @@ class CourseInfo {
     accompanyCourse = (json['accompany_course']??'0').toString();
     mode = json['mode'];
     gradeId = json['grade_id'];
-    subjects = json['subjects'];
     tags = [];
     lectures=[];
     if (json['lectures'] != null) {
@@ -263,6 +262,7 @@ class CourseInfo {
         tags?.add(new TagsInfo.fromJson(v));
       });
     }
+    subjects = getListSubjectAndLesson();
 
   }
   Map<String, dynamic> toJson() {
@@ -425,28 +425,30 @@ class CourseInfo {
   List<String>getListTagsStr(){
     return (tags??[]).map((e) => (e.name??""),).toList();
   }
-  void addLectureToSubject(){
+  List<Subjects>?  getListSubjectAndLesson(){
+    List<Subjects>? subjects = [];
     for(LessonInfo lessonInfo in lectures??[]){
       if((subjects??[]).isEmpty)
       {
-        subjects?.add(Subjects(subName: lessonInfo.subName, lectures: [lessonInfo]));
+        subjects.add(Subjects(subName: lessonInfo.subName, lectures: [lessonInfo]));
       }
       else
       {
         int index =0;
         for(index =0; index<(subjects??[]).length; index++){
-          if(((subjects??[]).elementAt(index).lectures??[]).first.subName == lessonInfo.subName)
+          if(((subjects).elementAt(index).lectures??[]).first.subName == lessonInfo.subName)
           {
-            ((subjects??[])[index].lectures??[]).add(lessonInfo);
+            ((subjects)[index].lectures??[]).add(lessonInfo);
             break;
           }
         }
         if(index == (subjects??[]).length){/// truong hop cua co Subjects cho lecture nay
-          subjects?.add(Subjects(subName: lessonInfo.subName, lectures: [lessonInfo]));
+          subjects.add(Subjects(subName: lessonInfo.subName, lectures: [lessonInfo]));
         }
 
       }
     }
+    return subjects;
   }
   List<LessonInfo> convertSubjectToLectureList(){
     List<LessonInfo> lectures = [];
