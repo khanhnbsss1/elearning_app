@@ -1,51 +1,36 @@
-import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/helpers/widgets/my_responsiv.dart';
-import 'package:webkit/helpers/widgets/my_screen_media_type.dart';
-import 'package:webkit/services/apis/words/word_info.dart';
-import 'package:webkit/views/course/create_edit_course/components/build_tab_bar.dart';
-import 'package:webkit/views/video_player/model/video_model.dart';
-import 'package:webkit/views/video_player/video_player.dart';
+import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 
+import '../../../base/author/user_helper.dart';
+import '../../../base/models/user/UserProfile.dart';
+import '../../../base/theme/colors_app.dart';
 import '../../../base/widgets/audio/audio_speaker.dart';
+import '../../../base/widgets/button/action_button1.dart';
 import '../../../helpers/utils/ui_mixins.dart';
+import '../../../helpers/widgets/my_responsiv.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
-import '../../../services/apis/course/course_detail/models/course_detail_model.dart';
+import '../../../services/apis/words/word_info.dart';
+import '../../video_player/model/video_model.dart';
+import '../../video_player/video_player.dart';
+import '../create_edit_course/components/build_tab_bar.dart';
 
-class CourseStudy extends StatefulWidget {
+class CourseStudyStudy extends StatefulWidget {
   final CourseInfo courseInfo;
 
-  const CourseStudy({
-    super.key,
-    required this.courseInfo,
-  });
-
-  void show(BuildContext context) {
-    showGeneralDialog(
-      context: context,
-      pageBuilder: (context, animation, secondaryAnimation) => this,
-    );
-  }
+  const CourseStudyStudy({super.key, required this.courseInfo});
 
   @override
-  State<CourseStudy> createState() => _CourseStudyState();
+  State<CourseStudyStudy> createState() => _CourseStudyStudyState();
 }
 
-class _CourseStudyState extends State<CourseStudy>
+class _CourseStudyStudyState extends State<CourseStudyStudy>
     with SingleTickerProviderStateMixin, UIMixin {
-  late TabController tabController;
-
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 3, vsync: this);
     likeCheck = List.filled(reviewCount, false);
     dislikeCheck = List.filled(reviewCount, false);
     showReply = List.filled(reviewCount, false);
@@ -57,96 +42,64 @@ class _CourseStudyState extends State<CourseStudy>
     );
   }
 
-  final List<String> courseObject = [
-    'Dành cho các bạn mới học Tiếng Trung',
-    'Dành cho các bạn tự học Tiếng Trung nhưng không hiệu quả',
-    'Dành cho các bạn đã từng học Tiếng Trung nhưng mất gốc và quên kiến thức',
-    'Dành cho các bạn có nhu cầu sử dụng Tiếng Trung cơ bản trong giao tiếp thường ngày'
-  ];
-
-  final List<String> courseResult = [
-    'Bạn nhận được gì sau khóa học này?',
-    'Nắm được 500 từ vựng cơ bản, 400 từ vựng mở rộng, 100 cấu trúc ngữ pháp thông dụng',
-    'Sử dụng thành thạo Tiếng Trung ở mức cơ bản, giao tiếp được các chủ đề trong cuộc sống và công việc',
-    'Bắt đầu dịch được những văn bản, video cơ bản bằng Tiếng Trung',
-    'Thêm điểm cộng khi tham gia phỏng vấn',
-    'Đủ năng lực thi được chứng chỉ Tiếng Trung sơ cấp',
-    'Đủ năng lực thi Tiếng Trung tốt nghiệp THPT hoặc xét tuyển đại học'
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(S.of(context).lets_study),
-        centerTitle: true,
-      ),
-      body: BuildTabBar(
-        widgets: [
-          buildInfo(),
-          buildStudy(),
-          buildTest(),
-        ],
-        titles: ['Introduction', 'Study', 'Test'],
-      ),
+    return MyResponsive(
+      builder: (BuildContext, BoxConstraints, MyScreenMediaType) {
+        return (!MyScreenMediaType.isMobile)
+            ? Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: Row(
+                    children: [
+                      Expanded(
+                          flex: 6,
+                          child: Align(
+                              alignment: Alignment.topLeft,
+                              child: buildStudySection())),
+                      Flexible(
+                          flex: 4,
+                          child: Align(
+                              alignment: Alignment.topCenter,
+                              child: buildLectureList())),
+                    ],
+                  ),
+                ),
+              )
+            : Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SingleChildScrollView(
+                  child: buildStudySection(),
+                ),
+              );
+      },
     );
   }
 
-  int position = 0;
-
-  Widget buildInfo() {
+  Widget buildStudySection() {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: Row(
-            children: [
-              Expanded(
-                  flex: 6,
-                  child: Align(
-                      alignment: Alignment.topLeft, child: buildInfoBox())),
-              Flexible(
-                  flex: 4,
-                  child: Align(
-                      alignment: Alignment.topCenter, child: buildInfoCard())),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildInfoBox() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             buildVideo(),
-            SizedBox(
-              height: 16,
+            buildStudyTitle(),
+            (MediaQuery.of(context).size.width < 550)
+                ? buildLectureList()
+                : SizedBox(),
+            // SizedBox(
+            //   height: 16,
+            // ),
+            BuildTabBar(
+              widgets: [
+                buildStudyOverview(),
+                buildStudyReview(),
+                buildStudyQuiz(),
+              ],
+              titles: const ['Overview', 'Review', 'Quiz'],
             ),
-            buildInfoBoxIntroduction(),
-            SizedBox(
-              height: 16,
-            ),
-            buildInfoBoxInfoObj(),
-            SizedBox(
-              height: 16,
-            ),
-            buildInfoBoxInfoResult(),
-            SizedBox(
-              height: 16,
-            ),
-            buildInfoBoxTag(),
-// SizedBox(
-//   height: 16,
-// ),
-// buildInfoRelatedCourse(),
           ],
         ),
       ),
@@ -217,25 +170,6 @@ class _CourseStudyState extends State<CourseStudy>
     );
   }
 
-  Widget buildInfoBoxIntroduction() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Giới thiệu khóa học: ',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.red,
-          ),
-        ),
-        SizedBox(
-          height: 16,
-        ),
-        Text('${widget.courseInfo.introduction}'),
-      ],
-    );
-  }
-
   List<bool> showSubject = [];
   List<List<bool>> checkLecture = [[]];
   int subjectCount = 4;
@@ -281,7 +215,8 @@ class _CourseStudyState extends State<CourseStudy>
                                 Flexible(
                                   flex: 10,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Subject $subjectIndex: Subject $subjectIndex name Subject $subjectIndex: Subject $subjectIndex name Subject $subjectIndex: Subject $subjectIndex name ',
@@ -321,7 +256,8 @@ class _CourseStudyState extends State<CourseStudy>
                                                 Positioned(
                                                   left: 0,
                                                   child: Container(
-                                                    width: MediaQuery.of(context)
+                                                    width: MediaQuery.of(
+                                                                context)
                                                             .size
                                                             .width *
                                                         0.2 *
@@ -332,7 +268,8 @@ class _CourseStudyState extends State<CourseStudy>
                                                     decoration: BoxDecoration(
                                                       color: Colors.red,
                                                       borderRadius:
-                                                          BorderRadius.circular(20),
+                                                          BorderRadius.circular(
+                                                              20),
                                                     ),
                                                   ),
                                                 ),
@@ -354,11 +291,12 @@ class _CourseStudyState extends State<CourseStudy>
                                 Flexible(
                                   flex: 1,
                                   child: (!showSubject[subjectIndex])
-                                    ? Icon(
-                                  Icons.arrow_drop_down,
-                                  size: 32,
-                                )
-                                    : Icon(Icons.arrow_drop_up, size: 32),),
+                                      ? Icon(
+                                          Icons.arrow_drop_down,
+                                          size: 32,
+                                        )
+                                      : Icon(Icons.arrow_drop_up, size: 32),
+                                ),
                               ],
                             ),
                           ),
@@ -366,7 +304,8 @@ class _CourseStudyState extends State<CourseStudy>
                       ),
                       onTap: () {
                         setState(() {
-                          showSubject[subjectIndex] = !showSubject[subjectIndex];
+                          showSubject[subjectIndex] =
+                              !showSubject[subjectIndex];
                         });
                       },
                     ),
@@ -420,14 +359,14 @@ class _CourseStudyState extends State<CourseStudy>
                                                   )),
                                                   child: Align(
                                                     alignment: Alignment.center,
-                                                    child:
-                                                        checkLecture[subjectIndex]
-                                                                [lectureIndex]
-                                                            ? Icon(
-                                                                Icons.check,
-                                                                color: Colors.red,
-                                                              )
-                                                            : SizedBox(),
+                                                    child: checkLecture[
+                                                                subjectIndex]
+                                                            [lectureIndex]
+                                                        ? Icon(
+                                                            Icons.check,
+                                                            color: Colors.red,
+                                                          )
+                                                        : SizedBox(),
                                                   ),
                                                 ),
                                               ),
@@ -452,342 +391,6 @@ class _CourseStudyState extends State<CourseStudy>
                   ],
                 );
               },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildInfoBoxInfoObj() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Khóa học này dành cho: ',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.red,
-          ),
-        ),
-        SizedBox(
-          height: 16,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 32.0),
-          child: (widget.courseInfo.infoResult == null)
-              ? ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: courseObject.length,
-                  itemBuilder: (context, index) => Row(
-                        children: [
-                          Icon(
-                            Icons.check,
-                            color: Colors.red,
-                          ),
-                          SizedBox(
-                            width: 24,
-                          ),
-                          Text(courseObject[index])
-                        ],
-                      ))
-              : Text('${widget.courseInfo.infoResult}'),
-        ),
-      ],
-    );
-  }
-
-  Widget buildInfoBoxInfoResult() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Bạn nhận được gì sau khóa học này:',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.red,
-          ),
-        ),
-        SizedBox(
-          height: 16,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 32.0),
-          child: (widget.courseInfo.infoResult == null)
-              ? ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: courseResult.length,
-                  itemBuilder: (context, index) => Row(
-                        children: [
-                          Icon(
-                            Icons.check,
-                            color: Colors.red,
-                          ),
-                          SizedBox(
-                            width: 24,
-                          ),
-                          Text(courseResult[index])
-                        ],
-                      ))
-              : Text('${widget.courseInfo.infoResult}'),
-        ),
-      ],
-    );
-  }
-
-  Widget buildInfoBoxTag() {
-    final tags = widget.courseInfo.tags;
-    try {
-      print(widget.courseInfo.lectures?.first);
-    } catch (e) {
-      print(e);
-    }
-    if (tags == null || tags.isEmpty) {
-      return const Text(
-        "Tags: No tags",
-        style: TextStyle(fontSize: 14),
-      );
-    } else {
-      return Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            "Tags:   ",
-            style: const TextStyle(fontSize: 16),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: tags.map((tag) {
-                return Row(
-                  children: [
-                    Text(
-                      tag.name ?? "Unnamed tags",
-                      style: TextStyle(
-                        decoration: TextDecoration.underline,
-                        decorationColor: Colors.red,
-                        color: Colors.red,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 16,
-                    ),
-                  ],
-                );
-              }).toList(),
-            ),
-          )
-        ],
-      );
-    }
-  }
-
-// Widget buildInfoRelatedCourse() {
-//
-// }
-
-  Widget buildInfoCard() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  border: Border.all(
-                color: Colors.black.withOpacity(0.1),
-              )),
-              width: 400,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.network(
-                        (widget.courseInfo.image == null)
-                            ? 'assets/deshboard/adventure/adventure5.png'
-                            : widget.courseInfo.image!,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text('Phân loại:'),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text('Tác giả: '),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text('Thời lượng: '),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text('Nội dung: '),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text('Chính quy: '),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text('ID: '),
-                            ],
-                          ),
-                          SizedBox(
-                            width: 30,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(widget.courseInfo.gradeName ?? '-'),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(widget.courseInfo.producerName ?? '-'),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(widget.courseInfo.durian ?? '-'),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(
-                                  '${widget.courseInfo.totalSubjects} chủ đề, ${widget.courseInfo.totalLectures} bài học'),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text('${widget.courseInfo.isStandard ?? '0'}'),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text('${widget.courseInfo.id ?? '0'}'),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 24,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          border:
-                              Border.all(color: Colors.black.withOpacity(0.1))),
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          children: [
-                            Text(
-                              '${widget.courseInfo.payment! / 0.8} VND',
-                              style: TextStyle(
-                                  decoration: TextDecoration.lineThrough,
-                                  color: Colors.black45,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              '${widget.courseInfo.payment!} VND',
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: Color(0xFFFFC711),
-                                  fontStyle: FontStyle.italic,
-                                  color: Color(0xFFFFC711),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            ActionButton1(
-                              text: 'Đăng ký ngay',
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildStudy() {
-    return MyResponsive(
-      builder: (BuildContext, BoxConstraints, MyScreenMediaType) {
-        return (!MyScreenMediaType.isMobile)
-            ? Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: Row(
-                    children: [
-                      Expanded(
-                          flex: 6,
-                          child: Align(
-                              alignment: Alignment.topLeft,
-                              child: buildStudySection())),
-                      Flexible(
-                          flex: 4,
-                          child: Align(
-                              alignment: Alignment.topCenter,
-                              child: buildLectureList())),
-                    ],
-                  ),
-                ),
-              )
-            : Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SingleChildScrollView(
-                  child: buildStudySection(),
-                ),
-              );
-      },
-    );
-  }
-
-  Widget buildStudySection() {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildVideo(),
-            buildStudyTitle(),
-            (MediaQuery.of(context).size.width < 550)
-                ? buildLectureList()
-                : SizedBox(),
-            // SizedBox(
-            //   height: 16,
-            // ),
-            BuildTabBar(
-              widgets: [
-                buildStudyOverview(),
-                buildStudyReview(),
-                buildStudyQuiz(),
-              ],
-              titles: const ['Overview', 'Review', 'Quiz'],
             ),
           ],
         ),
@@ -847,14 +450,12 @@ class _CourseStudyState extends State<CourseStudy>
                 itemCount: 20,
                 itemBuilder: (context, index) {
                   return buildWordItem(
-                    word: WordInfo(
-                        simplified: '吃',
-                        traditional: '吃',
-                        pinyinTones: 'chī',
-                        translationVn: 'ăn',
-                        audio: null
-                    )
-                      );
+                      word: WordInfo(
+                          simplified: '吃',
+                          traditional: '吃',
+                          pinyinTones: 'chī',
+                          translationVn: 'ăn',
+                          audio: null));
                 }),
           )
         ],
@@ -863,6 +464,7 @@ class _CourseStudyState extends State<CourseStudy>
   }
 
   bool isOnVolume = false;
+
   Widget buildWordItem({required WordInfo word}) {
     return Column(
       children: [
@@ -885,34 +487,43 @@ class _CourseStudyState extends State<CourseStudy>
                         width: 16,
                       ),
                       StatefulBuilder(
-                        builder: (BuildContext context, void Function(void Function()) setState) {
+                        builder: (BuildContext context,
+                            void Function(void Function()) setState) {
                           return InkWell(
                               onTap: () async {
                                 final player = AudioPlayer();
-                                player.playerStateStream.listen((event) {
-                                  switch(event.processingState){
-                                    case ProcessingState.idle:
-                                    // TODO: Handle this case.
-                                    case ProcessingState.loading:
-                                    // TODO: Handle this case.
-                                    case ProcessingState.buffering:
-                                    // TODO: Handle this case.
-                                    case ProcessingState.ready:
-                                    // TODO: Handle this case.
-                                      setState(() {
-                                        isOnVolume = true;
-                                      },);
-                                    case ProcessingState.completed:
-                                    // TODO: Handle this case.
-                                      setState(() {
-                                        isOnVolume = false;
-                                      },);
-                                  }
-                                },);// Create a player
+                                player.playerStateStream.listen(
+                                  (event) {
+                                    switch (event.processingState) {
+                                      case ProcessingState.idle:
+                                      // TODO: Handle this case.
+                                      case ProcessingState.loading:
+                                      // TODO: Handle this case.
+                                      case ProcessingState.buffering:
+                                      // TODO: Handle this case.
+                                      case ProcessingState.ready:
+                                        // TODO: Handle this case.
+                                        setState(
+                                          () {
+                                            isOnVolume = true;
+                                          },
+                                        );
+                                      case ProcessingState.completed:
+                                        // TODO: Handle this case.
+                                        setState(
+                                          () {
+                                            isOnVolume = false;
+                                          },
+                                        );
+                                    }
+                                  },
+                                ); // Create a player
                                 await player.setUrl('https://foo.com/bar.mp3');
                                 player.play();
                               },
-                              child: AudioSpeaker(url: word.audio?.filename??"",));
+                              child: AudioSpeaker(
+                                url: word.audio?.filename ?? "",
+                              ));
                         },
                       )
                     ],
@@ -1257,10 +868,6 @@ class _CourseStudyState extends State<CourseStudy>
         Text('data')
       ],
     );
-  }
-
-  Widget buildTest() {
-    return Placeholder();
   }
 }
 

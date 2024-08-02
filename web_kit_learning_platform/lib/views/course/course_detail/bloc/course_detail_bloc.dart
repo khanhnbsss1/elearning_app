@@ -14,6 +14,8 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
     on<CourseDetailInitEvent>(_onInit);
   }
 
+
+
   Future<void> _onInit(
       CourseDetailInitEvent event,
       Emitter<CourseDetailState> emit,

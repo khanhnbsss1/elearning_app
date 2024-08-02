@@ -370,7 +370,8 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                                           },
                                           child: AudioSpeaker(url: state.selectVocabularyInfo?.audio??"",));
                                     },
-                                  ))
+                                  )
+                              )
                             ],
                           ),
                         ),
