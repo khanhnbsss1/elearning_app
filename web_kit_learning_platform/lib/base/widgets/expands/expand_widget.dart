@@ -10,7 +10,8 @@ class ExpandWidget extends StatefulWidget{
   TextStyle? titleStyle;
   Widget? child;
   bool? initExpand;
-  bool? enableExpand;
+  bool? enableSubfixExpand;
+  bool? enablePrefixExpand;
   EdgeInsetsGeometry? paddingChild;
   EdgeInsetsGeometry? paddingHeader;
   TextAlign? textAlignTitle;
@@ -19,6 +20,8 @@ class ExpandWidget extends StatefulWidget{
   bool? enableDivider;
   Color? dividerColor;
   List<Color>? titleGradient;
+  Color? titleExpandColor;
+  Color? titleCollapseColor;
   ExpandWidget({
     super.key,
     this.title,
@@ -27,16 +30,20 @@ class ExpandWidget extends StatefulWidget{
     this.initExpand,
     this.paddingChild,
     this.paddingHeader,
-    this.enableExpand,
+    this.enableSubfixExpand,
     this.textAlignTitle,
     this.expandColor,
     this.enableDivider,
     this.radius,
     this.dividerColor,
     this.titleGradient,
+    this.enablePrefixExpand,
+    this.titleCollapseColor, 
+    this.titleExpandColor
   }){
     titleStyle??=TextStyleConstant.textStyleBlack16w600;
-    enableExpand??=true;
+    enableSubfixExpand??=true;
+    enablePrefixExpand??=false;
     enableDivider??=false;
     radius??=Dimens.size8;
     titleGradient??=null;
@@ -59,7 +66,7 @@ class ExpandWidgetState extends State<ExpandWidget>with SingleTickerProviderStat
     _runExpandCheck();
 
     _isExpand = widget.initExpand??true;
-    if(widget.enableExpand==false){
+    if(widget.enableSubfixExpand==false){
       _isExpand=true;
     }
   }
@@ -115,7 +122,7 @@ class ExpandWidgetState extends State<ExpandWidget>with SingleTickerProviderStat
               alignment: Alignment.centerLeft,
               child: InkWell(
                 onTap: () {
-                  if(widget.enableExpand==true)
+                  if(widget.enableSubfixExpand==true)
                     {
                       setState(() {
                         _isExpand= !_isExpand;
@@ -145,15 +152,33 @@ class ExpandWidgetState extends State<ExpandWidget>with SingleTickerProviderStat
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        Visibility(
+                          visible: widget.enablePrefixExpand??true,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: InkWell(
+                              onTap: (){
+                                setState(() {
+                                  _isExpand= !_isExpand;
+                                  _runExpandCheck();
+                                });
+                              },
+                              child: Icon(
+                                _isExpand?Icons.remove:Icons.add,
+                                size: Dimens.size25,
+                                color: (_isExpand?widget.titleExpandColor: widget.titleCollapseColor)??ColorConst.greyColor,),
+                            ),
+                          ),
+                        ),
                         Expanded(
                           child: Text(
                               widget.title??"",
                               textAlign: widget.textAlignTitle??TextAlign.start,
-                              style: widget.titleStyle!,
+                              style: widget.titleStyle?.copyWith(color:  (_isExpand?widget.titleExpandColor: widget.titleCollapseColor)),
                           ),
                         ),
                         Visibility(
-                          visible: widget.enableExpand??true,
+                          visible: widget.enableSubfixExpand??true,
                           child: Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: InkWell(
@@ -166,7 +191,7 @@ class ExpandWidgetState extends State<ExpandWidget>with SingleTickerProviderStat
                               child: Icon(
                                 _isExpand?Icons.arrow_drop_down_sharp:Icons.arrow_drop_up_outlined,
                                 size: Dimens.size25,
-                                color: ColorConst.greyColor,),
+                                color: (_isExpand?widget.titleExpandColor: widget.titleCollapseColor)??ColorConst.greyColor,),
                             ),
                           ),
                         )

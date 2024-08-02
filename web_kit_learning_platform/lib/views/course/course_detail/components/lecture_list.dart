@@ -29,84 +29,23 @@ class LectureList extends StatelessWidget{
           _state = state;
           return StatefulBuilder(
             builder: (context, setState) {
-              return SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Gap(Dimens.size50),
-                    Text(
-                      L10nX.getStr.lesson_list,
-                      style: TextStyleConstant.textStyleBlack20w700,
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 32.0),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: 3,
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              InkWell(
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Card(
-                                    elevation: 5,
-                                    child: Container(
-                                      margin: EdgeInsets.all(16),
-                                      child: Row(
-                                        children: [
-                                          (!showLecture[index]) ? Icon(Icons.add) : Icon(Icons.horizontal_rule_outlined),
-                                          SizedBox(
-                                            width: 4,
-                                          ),
-                                          Text('Subject $index: Subject $index name'),
-                                          Spacer(),
-                                          Checkbox(
-                                            value: false,
-                                            onChanged: (bool? value) {
-                                              value = !value!;
-                                            },
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                onTap: () {
-                                  setState(() {
-                                    showLecture[index] = !showLecture[index];
-                                  });
-                                },
-                              ),
-                              AnimatedSize(
-                                curve: Curves.fastOutSlowIn,
-                                duration: Duration(milliseconds: 200),
-                                child: showLecture[index]
-                                    ? Container(
-                                  margin: EdgeInsets.all(16),
-                                  child: ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: 3,
-                                    itemBuilder: (context, lectureIndex) {
-                                      return Container(
-                                        margin: EdgeInsets.only(left: 32, top: 16, bottom: 16),
-                                        child: Text('Lecture $index: Lecture $lectureIndex name'),
-                                      );
-                                    },
-                                  ),
-                                )
-                                    : SizedBox(),
-                              ),
-                            ],
-                          );
-                        },
+              return Column(
+                children: [
+                  Gap(Dimens.size50),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        L10nX.getStr.lesson_list,
+                        style: TextStyleConstant.textStyleBlack20w700,
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  SingleChildScrollView(child: buildSubjectList(state: state)),
+                ],
               );
             },
           );
@@ -138,16 +77,38 @@ class LectureList extends StatelessWidget{
         listLesson.add(
             Container(
               margin: EdgeInsets.only(left: 32, top: 16, bottom: 16),
-              child: Text('${L10nX.getStr.lecture_name_str} $lessonIndex: ${lessonInfo.lectureName}'),
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(color: ColorConst.dividerColor, ))
+              ),
+              child: Row(
+                children: [
+                  Text('${L10nX.getStr.lecture_name_str} $lessonIndex: ${lessonInfo.lectureName}'),
+                ],
+              ),
             )
         );
       }
     return ExpandWidget(
-      title: '${L10nX.getStr.subject_name_str} ${subjectIndex.toString()}: ${subjects.subName}',
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children:listLesson,
+      title: '${L10nX.getStr.subject_str} ${subjectIndex.toString()}: ${subjects.subName}',
+      enablePrefixExpand: true,
+      enableSubfixExpand: false,
+      titleExpandColor: ColorConst.mainColor,
+      child: Row(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              border: Border(left: BorderSide(color: ColorConst.dividerColor))
+            ),
+            child: Column(
+              
+            ),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children:listLesson,
+          ),
+        ],
       ),
     );
   }

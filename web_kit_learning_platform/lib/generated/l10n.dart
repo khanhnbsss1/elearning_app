@@ -5163,6 +5163,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Subject`
+  String get subject_str {
+    return Intl.message(
+      'Subject',
+      name: 'subject_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

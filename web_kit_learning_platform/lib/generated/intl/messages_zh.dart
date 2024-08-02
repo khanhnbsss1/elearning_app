@@ -460,6 +460,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("订阅我们的新闻通讯"),
         "subject_is_exit_str": MessageLookupByLibrary.simpleMessage("主题已存在"),
         "subject_name_str": MessageLookupByLibrary.simpleMessage("科目名称"),
+        "subject_str": MessageLookupByLibrary.simpleMessage("主题"),
         "submit": MessageLookupByLibrary.simpleMessage("提交"),
         "subtitle_is_more_useful":
             MessageLookupByLibrary.simpleMessage("副标题更有用"),
