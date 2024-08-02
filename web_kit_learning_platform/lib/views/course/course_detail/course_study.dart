@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/widgets/expands/expand_widget.dart';
 import 'package:webkit/base/widgets/pages_common/list_body_page_common.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/my_screen_media_type.dart';
@@ -89,13 +90,16 @@ class _CourseStudyState extends State<CourseStudy>
       child: Container(
         decoration: BoxDecoration(color: ColorConst.whiteColor),
         padding: EdgeInsets.only(top: Dimens.size50, bottom: Dimens.size16, left: Dimens.size16, right: Dimens.size16),
-        child: BuildTabBar(
-          widgets: [
-            buildInfo(),
-            buildStudy(),
-            buildTest(),
-          ],
-          titles: const ['Introduction', 'Study', 'Test'],
+        child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+          return BuildTabBar(
+            widgets: [
+              buildInfo(),
+              buildStudy(),
+              buildTest(),
+            ],
+            titles: const ['Introduction', 'Study', 'Test'],
+          );
+        },
         ),
       ),
       
@@ -266,178 +270,182 @@ class _CourseStudyState extends State<CourseStudy>
               shrinkWrap: true,
               itemCount: subjectCount,
               itemBuilder: (context, subjectIndex) {
-                return Column(
-                  children: [
-                    InkWell(
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Card(
-                          elevation: 5,
-                          child: Container(
-                            margin: EdgeInsets.all(16),
-                            child: Row(
-                              children: [
-                                Flexible(
-                                  flex: 10,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Subject $subjectIndex: Subject $subjectIndex name Subject $subjectIndex: Subject $subjectIndex name Subject $subjectIndex: Subject $subjectIndex name ',
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
+                return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+                  return Column(
+                    children: [
+                      InkWell(
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Card(
+                            elevation: 5,
+                            child: Container(
+                              margin: EdgeInsets.all(16),
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    flex: 10,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Subject $subjectIndex: Subject $subjectIndex name Subject $subjectIndex: Subject $subjectIndex name Subject $subjectIndex: Subject $subjectIndex name ',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 8,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 32.0),
-                                        child: Row(
-                                          children: [
-                                            (MediaQuery.of(context).size.width > 1050)
-                                                ? Text('Tiến độ: ')
-                                                : SizedBox(),
-                                            Container(
-                                              width: constraints.maxWidth/2,
-                                              height: 20,
-                                              constraints: BoxConstraints(
-                                                minWidth: 100,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey,
-                                                borderRadius:
-                                                BorderRadius.circular(20),
-                                              ),
-                                              child: Stack(children: [
-                                                Positioned(
-                                                    left: 0,
-                                                    child: Container(
-                                                      width: constraints.maxWidth/2 * _checkProgression(subjectIndex: subjectIndex),
-                                                      height: 20,
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.red,
-                                                        borderRadius: BorderRadius.circular(20),
-                                                      ),
-                                                    )
+                                        SizedBox(
+                                          height: 8,
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 32.0),
+                                          child: Row(
+                                            children: [
+                                              (MediaQuery.of(context).size.width > 1050)
+                                                  ? Text('Tiến độ: ')
+                                                  : SizedBox(),
+                                              Container(
+                                                width: constraints.maxWidth/2,
+                                                height: 20,
+                                                constraints: BoxConstraints(
+                                                  minWidth: 100,
                                                 ),
-                                                Center(
-                                                    child: Text(
-                                                      '${(_checkProgression(subjectIndex: subjectIndex) * 100).floor()} %',
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                    )),
-                                              ]),
-                                            )
-                                          ],
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey,
+                                                  borderRadius:
+                                                  BorderRadius.circular(20),
+                                                ),
+                                                child: Stack(
+                                                    children: [
+                                                      Positioned(
+                                                          left: 0,
+                                                          child: Container(
+                                                            width: constraints.maxWidth/2 * _checkProgression(subjectIndex: subjectIndex),
+                                                            height: 20,
+                                                            decoration: BoxDecoration(
+                                                              color: Colors.red,
+                                                              borderRadius: BorderRadius.circular(20),
+                                                            ),
+                                                          )
+                                                      ),
+                                                      Center(
+                                                          child: Text(
+                                                            '${(_checkProgression(subjectIndex: subjectIndex) * 100).floor()} %',
+                                                            style: TextStyle(
+                                                                color: Colors.white),
+                                                          )),
+                                                    ]),
+                                              )
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Spacer(),
-                                Flexible(
-                                  flex: 1,
-                                  child: (!showSubject[subjectIndex])
-                                      ? Icon(
-                                    Icons.arrow_drop_down,
-                                    size: 32,
-                                  )
-                                      : Icon(Icons.arrow_drop_up, size: 32),),
-                              ],
+                                  Spacer(),
+                                  Flexible(
+                                    flex: 1,
+                                    child: (!showSubject[subjectIndex])
+                                        ? Icon(
+                                      Icons.arrow_drop_down,
+                                      size: 32,
+                                    )
+                                        : Icon(Icons.arrow_drop_up, size: 32),),
+                                ],
+                              ),
                             ),
                           ),
                         ),
+                        onTap: () {
+                          setState(() {
+                            showSubject[subjectIndex] = !showSubject[subjectIndex];
+                          });
+                        },
                       ),
-                      onTap: () {
-                        setState(() {
-                          showSubject[subjectIndex] = !showSubject[subjectIndex];
-                        });
-                      },
-                    ),
-                    AnimatedSize(
-                      curve: Curves.fastOutSlowIn,
-                      duration: Duration(milliseconds: 200),
-                      child: showSubject[subjectIndex]
-                          ? Container(
-                        margin: EdgeInsets.all(16),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: lectureCount,
-                          itemBuilder: (context, lectureIndex) {
-                            return Column(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(
-                                      left: 32,
-                                      top: 16,
-                                      bottom: 16,
-                                      right: 32),
-                                  child: Row(
-                                    children: [
-                                      Flexible(
-                                        flex: 10,
-                                        child: Text(
-                                          'Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name ',
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      Flexible(
-                                        flex: 1,
-                                        child: InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              checkLecture[subjectIndex]
-                                              [lectureIndex] =
-                                              !checkLecture[
-                                              subjectIndex]
-                                              [lectureIndex];
-                                            });
-                                          },
-                                          child: Container(
-                                            width: 24,
-                                            height: 24,
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color: Colors.red,
-                                                )),
-                                            child: Align(
-                                              alignment: Alignment.center,
-                                              child:
-                                              checkLecture[subjectIndex]
-                                              [lectureIndex]
-                                                  ? Icon(
-                                                Icons.check,
-                                                color: Colors.red,
-                                              )
-                                                  : SizedBox(),
-                                            ),
+                      AnimatedSize(
+                        curve: Curves.fastOutSlowIn,
+                        duration: Duration(milliseconds: 200),
+                        child: showSubject[subjectIndex]
+                            ? Container(
+                          margin: EdgeInsets.all(16),
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: lectureCount,
+                            itemBuilder: (context, lectureIndex) {
+                              return Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(
+                                        left: 32,
+                                        top: 16,
+                                        bottom: 16,
+                                        right: 32),
+                                    child: Row(
+                                      children: [
+                                        Flexible(
+                                          flex: 10,
+                                          child: Text(
+                                            'Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name ',
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
-                                      )
-                                    ],
+                                        Spacer(),
+                                        Flexible(
+                                          flex: 1,
+                                          child: InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                checkLecture[subjectIndex]
+                                                [lectureIndex] =
+                                                !checkLecture[
+                                                subjectIndex]
+                                                [lectureIndex];
+                                              });
+                                            },
+                                            child: Container(
+                                              width: 24,
+                                              height: 24,
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: Colors.red,
+                                                  )),
+                                              child: Align(
+                                                alignment: Alignment.center,
+                                                child:
+                                                checkLecture[subjectIndex]
+                                                [lectureIndex]
+                                                    ? Icon(
+                                                  Icons.check,
+                                                  color: Colors.red,
+                                                )
+                                                    : SizedBox(),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Divider(
-                                    color: Colors.black.withOpacity(0.1),
-                                  ),
-                                )
-                              ],
-                            );
-                          },
-                        ),
-                      )
-                          : SizedBox(),
-                    ),
-                  ],
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: Divider(
+                                      color: Colors.black.withOpacity(0.1),
+                                    ),
+                                  )
+                                ],
+                              );
+                            },
+                          ),
+                        )
+                            : SizedBox(),
+                      ),
+                    ],
+                  );
+                },
                 );
               },
             ),
