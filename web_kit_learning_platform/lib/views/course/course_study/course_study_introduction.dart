@@ -105,7 +105,9 @@ class _CourseStudyIntroductionState extends State<CourseStudyIntroduction> {
           // )
           child: VideoPlayer(
             videoPlayerModel: VideoPlayerModel(
-                title: "", link: widget.courseInfo.videoPreview ?? ""),
+                title: "", 
+                link:"https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4"// widget.courseInfo.videoPreview ?? ""
+            ),
           ),
         ),
       ),
