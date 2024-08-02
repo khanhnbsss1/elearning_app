@@ -28,21 +28,29 @@ class _BuildTabBarState extends State<BuildTabBar>
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            buildTabBar(),
-            SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: TabBarView(
-                controller: tabController,
-                children: <Widget>[
-                  ...widget.widgets,
-                ],
-              ),
+      child: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                // buildTabBar(),
+                SizedBox(height: 30,),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: TabBarView(
+                    controller: tabController,
+                    children: <Widget>[
+                      ...widget.widgets,
+                    ],
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          Align(
+              alignment: Alignment.topCenter,
+              child: Positioned(child: buildTabBar())),
+        ],
       ),
     );
   }
@@ -54,34 +62,32 @@ class _BuildTabBarState extends State<BuildTabBar>
         color: (position == 0
             ? ColorConst.textColorSelectTabBar
             : ColorConst.subtext));
-    return Center(
-      child: Card(
-        elevation: 5,
-        child: Container(
-          width: MediaQuery.of(context).size.width * 0.5,
-          constraints: BoxConstraints(
-            maxWidth: 800,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: TabBar(
-            indicatorColor: ColorConst.mainColor,
-            dividerColor: Colors.transparent,
-            labelColor: ColorConst.mainColor,
-            indicator: BoxDecoration(
-                border:
-                Border(bottom: BorderSide(color: ColorConst.mainColor))),
-            splashBorderRadius: BorderRadius.circular(12),
-            overlayColor:
-            WidgetStateProperty.all(Colors.black.withOpacity(0.1)),
-            dividerHeight: 0,
-            controller: tabController,
-            tabs: [
-              for (String title in widget.titles)
-                Tab(text: title),
-            ],
-          ),
+    return Card(
+      elevation: 5,
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.5,
+        constraints: BoxConstraints(
+          maxWidth: 800,
+        ),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: TabBar(
+          indicatorColor: ColorConst.mainColor,
+          dividerColor: Colors.transparent,
+          labelColor: ColorConst.mainColor,
+          indicator: BoxDecoration(
+              border:
+              Border(bottom: BorderSide(color: ColorConst.mainColor))),
+          splashBorderRadius: BorderRadius.circular(12),
+          overlayColor:
+          WidgetStateProperty.all(Colors.black.withOpacity(0.1)),
+          dividerHeight: 0,
+          controller: tabController,
+          tabs: [
+            for (String title in widget.titles)
+              Tab(text: title),
+          ],
         ),
       ),
     );

@@ -4,11 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/helpers/widgets/my_responsiv.dart';
+import 'package:webkit/helpers/widgets/my_screen_media_type.dart';
+import 'package:webkit/services/apis/words/word_info.dart';
 import 'package:webkit/views/course/create_edit_course/components/build_tab_bar.dart';
 import 'package:webkit/views/video_player/model/video_model.dart';
 import 'package:webkit/views/video_player/video_player.dart';
 
+import '../../../base/widgets/audio/audio_speaker.dart';
 import '../../../helpers/utils/ui_mixins.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
@@ -44,7 +49,8 @@ class _CourseStudyState extends State<CourseStudy>
     likeCheck = List.filled(reviewCount, false);
     dislikeCheck = List.filled(reviewCount, false);
     showReply = List.filled(reviewCount, false);
-    checkLecture = List.generate(subjectCount, (index) => List.filled(lectureCount, false));
+    checkLecture = List.generate(
+        subjectCount, (index) => List.filled(lectureCount, false));
     showSubject = List.filled(
       subjectCount,
       false,
@@ -101,10 +107,10 @@ class _CourseStudyState extends State<CourseStudy>
                   flex: 6,
                   child: Align(
                       alignment: Alignment.topLeft, child: buildInfoBox())),
-              Expanded(
+              Flexible(
                   flex: 4,
                   child: Align(
-                      alignment: Alignment.centerLeft, child: buildInfoCard())),
+                      alignment: Alignment.topCenter, child: buildInfoCard())),
             ],
           ),
         ),
@@ -120,7 +126,7 @@ class _CourseStudyState extends State<CourseStudy>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildTitle(),
+            buildVideo(),
             SizedBox(
               height: 16,
             ),
@@ -147,33 +153,25 @@ class _CourseStudyState extends State<CourseStudy>
     );
   }
 
-  Widget buildTitle() {
+  Widget buildVideo() {
     return SizedBox(
       height: 450,
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 400,
         child: ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            // child: Image.network(
-            //   widget.courseInfo.image!.isNotEmpty
-            //       ? widget.courseInfo.image!
-            //       : 'assets/deshboard/adventure/adventure5.png',
-            //   fit: BoxFit.cover,
-            // )
-          child: VideoPlayer(videoPlayerModel: VideoPlayerModel(title: "", link: widget.courseInfo.videoPreview??""),),
+          borderRadius: BorderRadius.circular(16),
+          // child: Image.network(
+          //   widget.courseInfo.image!.isNotEmpty
+          //       ? widget.courseInfo.image!
+          //       : 'assets/deshboard/adventure/adventure5.png',
+          //   fit: BoxFit.cover,
+          // )
+          child: VideoPlayer(
+            videoPlayerModel: VideoPlayerModel(
+                title: "", link: widget.courseInfo.videoPreview ?? ""),
+          ),
         ),
-      ),
-    );
-  }
-
-  Widget buildStudyVideo() {
-    return SizedBox(
-      height: 450,
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: 400,
-        child: VideoPlayer(videoPlayerModel: VideoPlayerModel(title: "", link: widget.courseInfo.videoPreview??""),),
       ),
     );
   }
@@ -252,13 +250,20 @@ class _CourseStudyState extends State<CourseStudy>
   }
 
   Widget buildLectureList() {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 32.0),
-            child: ListView.builder(
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            (MediaQuery.of(context).size.width < 550)
+                ? Text('Danh sách bài học: ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red,
+                    ))
+                : SizedBox(),
+            ListView.builder(
               shrinkWrap: true,
               itemCount: subjectCount,
               itemBuilder: (context, subjectIndex) {
@@ -273,33 +278,39 @@ class _CourseStudyState extends State<CourseStudy>
                             margin: EdgeInsets.all(16),
                             child: Row(
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Subject $subjectIndex: Subject $subjectIndex name',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                                Flexible(
+                                  flex: 10,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Subject $subjectIndex: Subject $subjectIndex name Subject $subjectIndex: Subject $subjectIndex name Subject $subjectIndex: Subject $subjectIndex name ',
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 8,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 32.0),
-                                      child: Row(
-                                        children: [
-                                          Text('Tiến độ: '),
-                                          Align(
-                                            child: Container(
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 32.0),
+                                        child: Row(
+                                          children: [
+                                            (MediaQuery.of(context).size.width >
+                                                    1050)
+                                                ? Text('Tiến độ: ')
+                                                : SizedBox(),
+                                            Container(
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  0.2,
+                                                  0.15,
                                               height: 20,
                                               constraints: BoxConstraints(
-                                                minWidth: 50,
+                                                minWidth: 100,
                                               ),
                                               decoration: BoxDecoration(
                                                 color: Colors.grey,
@@ -310,33 +321,44 @@ class _CourseStudyState extends State<CourseStudy>
                                                 Positioned(
                                                   left: 0,
                                                   child: Container(
-                                                    width: MediaQuery.of(context).size.width * 0.2 * _checkProgression(subjectIndex: subjectIndex),
+                                                    width: MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                        0.2 *
+                                                        _checkProgression(
+                                                            subjectIndex:
+                                                                subjectIndex),
                                                     height: 20,
                                                     decoration: BoxDecoration(
                                                       color: Colors.red,
-                                                      borderRadius: BorderRadius.circular(20),
+                                                      borderRadius:
+                                                          BorderRadius.circular(20),
                                                     ),
                                                   ),
                                                 ),
-                                                Center(child: Text('${( _checkProgression(subjectIndex: subjectIndex) * 100).floor()} %', style: TextStyle(color: Colors.white),)),
+                                                Center(
+                                                    child: Text(
+                                                  '${(_checkProgression(subjectIndex: subjectIndex) * 100).floor()} %',
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                )),
                                               ]),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                                 Spacer(),
-                                (!showSubject[subjectIndex])
+                                Flexible(
+                                  flex: 1,
+                                  child: (!showSubject[subjectIndex])
                                     ? Icon(
-                                        Icons.arrow_drop_down,
-                                        size: 32,
-                                      )
-                                    : Icon(Icons.arrow_drop_up, size: 32),
-                                SizedBox(
-                                  width: 4,
-                                ),
+                                  Icons.arrow_drop_down,
+                                  size: 32,
+                                )
+                                    : Icon(Icons.arrow_drop_up, size: 32),),
                               ],
                             ),
                           ),
@@ -344,8 +366,7 @@ class _CourseStudyState extends State<CourseStudy>
                       ),
                       onTap: () {
                         setState(() {
-                          showSubject[subjectIndex] =
-                              !showSubject[subjectIndex];
+                          showSubject[subjectIndex] = !showSubject[subjectIndex];
                         });
                       },
                     ),
@@ -369,31 +390,45 @@ class _CourseStudyState extends State<CourseStudy>
                                             right: 32),
                                         child: Row(
                                           children: [
-                                            Text(
-                                                'Subject $subjectIndex: Lecture $lectureIndex name'),
+                                            Flexible(
+                                              flex: 10,
+                                              child: Text(
+                                                'Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name Subject $subjectIndex: Lecture $lectureIndex name ',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
                                             Spacer(),
-                                            InkWell(
-                                              onTap: () {
-                                                setState(() {
-                                                  checkLecture[subjectIndex][lectureIndex] = !checkLecture[subjectIndex][lectureIndex];
-                                                });
-                                              },
-                                              child: Container(
-                                                width: 24,
-                                                height: 24,
-                                                decoration: BoxDecoration(
-                                                    border: Border.all(
-                                                  color: Colors.red,
-                                                )),
-                                                child: Align(
-                                                  alignment: Alignment.center,
-                                                  child:
-                                                      checkLecture[subjectIndex][lectureIndex]
-                                                          ? Icon(
-                                                              Icons.check,
-                                                              color: Colors.red,
-                                                            )
-                                                          : SizedBox(),
+                                            Flexible(
+                                              flex: 1,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    checkLecture[subjectIndex]
+                                                            [lectureIndex] =
+                                                        !checkLecture[
+                                                                subjectIndex]
+                                                            [lectureIndex];
+                                                  });
+                                                },
+                                                child: Container(
+                                                  width: 24,
+                                                  height: 24,
+                                                  decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                    color: Colors.red,
+                                                  )),
+                                                  child: Align(
+                                                    alignment: Alignment.center,
+                                                    child:
+                                                        checkLecture[subjectIndex]
+                                                                [lectureIndex]
+                                                            ? Icon(
+                                                                Icons.check,
+                                                                color: Colors.red,
+                                                              )
+                                                            : SizedBox(),
+                                                  ),
                                                 ),
                                               ),
                                             )
@@ -418,8 +453,8 @@ class _CourseStudyState extends State<CourseStudy>
                 );
               },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -568,13 +603,13 @@ class _CourseStudyState extends State<CourseStudy>
                 child: Column(
                   children: [
                     ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: Image.network(
-                          (widget.courseInfo.image == null)
-                              ? 'assets/deshboard/adventure/adventure5.png'
-                              : widget.courseInfo.image!,
-                          fit: BoxFit.fill,
-                        ),
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.network(
+                        (widget.courseInfo.image == null)
+                            ? 'assets/deshboard/adventure/adventure5.png'
+                            : widget.courseInfo.image!,
+                        fit: BoxFit.fill,
+                      ),
                     ),
                     SizedBox(
                       height: 24,
@@ -698,23 +733,36 @@ class _CourseStudyState extends State<CourseStudy>
   }
 
   Widget buildStudy() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        child: Row(
-          children: [
-            Expanded(
-                flex: 6,
-                child: Align(
-                    alignment: Alignment.topLeft, child: buildStudySection())),
-            Expanded(
-                flex: 4,
-                child: Align(
-                    alignment: Alignment.topCenter, child: buildLectureList())),
-          ],
-        ),
-      ),
+    return MyResponsive(
+      builder: (BuildContext, BoxConstraints, MyScreenMediaType) {
+        return (!MyScreenMediaType.isMobile)
+            ? Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: Row(
+                    children: [
+                      Expanded(
+                          flex: 6,
+                          child: Align(
+                              alignment: Alignment.topLeft,
+                              child: buildStudySection())),
+                      Flexible(
+                          flex: 4,
+                          child: Align(
+                              alignment: Alignment.topCenter,
+                              child: buildLectureList())),
+                    ],
+                  ),
+                ),
+              )
+            : Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SingleChildScrollView(
+                  child: buildStudySection(),
+                ),
+              );
+      },
     );
   }
 
@@ -725,11 +773,14 @@ class _CourseStudyState extends State<CourseStudy>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildStudyVideo(),
+            buildVideo(),
             buildStudyTitle(),
-            SizedBox(
-              height: 16,
-            ),
+            (MediaQuery.of(context).size.width < 550)
+                ? buildLectureList()
+                : SizedBox(),
+            // SizedBox(
+            //   height: 16,
+            // ),
             BuildTabBar(
               widgets: [
                 buildStudyOverview(),
@@ -750,7 +801,7 @@ class _CourseStudyState extends State<CourseStudy>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 16,
+            height: 30,
           ),
           Text(
             'Introduction: ',
@@ -796,11 +847,14 @@ class _CourseStudyState extends State<CourseStudy>
                 itemCount: 20,
                 itemBuilder: (context, index) {
                   return buildWordItem(
-                      index: index,
-                      simplified: '吃',
-                      pinyin_tones: 'chī',
-                      translation_vn: 'ăn',
-                      audio: '');
+                    word: WordInfo(
+                        simplified: '吃',
+                        traditional: '吃',
+                        pinyinTones: 'chī',
+                        translationVn: 'ăn',
+                        audio: null
+                    )
+                      );
                 }),
           )
         ],
@@ -808,12 +862,8 @@ class _CourseStudyState extends State<CourseStudy>
     );
   }
 
-  Widget buildWordItem(
-      {required int index,
-      required String simplified,
-      required String pinyin_tones,
-      required String translation_vn,
-      required String audio}) {
+  bool isOnVolume = false;
+  Widget buildWordItem({required WordInfo word}) {
     return Column(
       children: [
         Padding(
@@ -825,16 +875,48 @@ class _CourseStudyState extends State<CourseStudy>
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('$pinyin_tones'),
+                  Text('${word.pinyinTones}'),
                   Row(
                     children: [
                       // Text('$index.'),
-                      Text('$simplified : '),
-                      Text('$translation_vn'),
+                      Text('${word.simplified} : '),
+                      Text('${word.translationVn}'),
                       SizedBox(
                         width: 16,
                       ),
-                      IconButton(onPressed: () {}, icon: Icon(Icons.volume_up)),
+                      StatefulBuilder(
+                        builder: (BuildContext context, void Function(void Function()) setState) {
+                          return InkWell(
+                              onTap: () async {
+                                final player = AudioPlayer();
+                                player.playerStateStream.listen((event) {
+                                  switch(event.processingState){
+                                    case ProcessingState.idle:
+                                    // TODO: Handle this case.
+                                    case ProcessingState.loading:
+                                    // TODO: Handle this case.
+                                    case ProcessingState.buffering:
+                                    // TODO: Handle this case.
+                                    case ProcessingState.ready:
+                                    // TODO: Handle this case.
+                                      setState(() {
+                                        isOnVolume = true;
+                                      },);
+                                    case ProcessingState.completed:
+                                    // TODO: Handle this case.
+                                      setState(() {
+                                        isOnVolume = false;
+                                      },);
+                                  }
+                                },);// Create a player
+                                await player.setUrl('https://foo.com/bar.mp3');
+                                player.play();
+                                print('played');
+
+                              },
+                              child: AudioSpeaker(url: word.audio?.filename??"",));
+                        },
+                      )
                     ],
                   ),
                 ],
@@ -879,6 +961,9 @@ class _CourseStudyState extends State<CourseStudy>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(
+            height: 30,
+          ),
           Text(
             '4 Reviews',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -1166,7 +1251,14 @@ class _CourseStudyState extends State<CourseStudy>
   }
 
   Widget buildStudyQuiz() {
-    return SizedBox();
+    return Column(
+      children: [
+        SizedBox(
+          height: 30,
+        ),
+        Text('data')
+      ],
+    );
   }
 
   Widget buildTest() {
