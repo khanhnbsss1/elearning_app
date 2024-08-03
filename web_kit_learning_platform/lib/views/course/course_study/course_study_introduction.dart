@@ -267,6 +267,15 @@ class _CourseStudyIntroductionState extends State<CourseStudyIntroduction> {
                             ? 'assets/deshboard/adventure/adventure5.png'
                             : widget.courseInfo.image!,
                         fit: BoxFit.fill,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.network(
+                            'assets/deshboard/adventure/adventure5.png',
+                            fit: BoxFit.fill,
+                            errorBuilder: (context, error, stackTrace) {
+                              return SizedBox();
+                            },
+                          );
+                        },
                       ),
                     ),
                     SizedBox(

@@ -38,15 +38,15 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
-  shared_preferences: ^2.2.3
+  shared_preferences: ^2.3.1
   intl_utils: ^2.8.7
   provider: ^6.1.2
   url_launcher: ^6.3.0
 
-  syncfusion_flutter_charts: ^26.1.41+1
+  syncfusion_flutter_charts: ^26.2.7
   flutter_blurhash: ^0.8.2
   feather_icons: ^1.2.0
-  url_strategy: ^0.2.0
+  url_strategy: ^0.3.0
   flutter_colorpicker: ^1.1.0
   quill_html_editor: ^2.2.8
   flutter_pagination: ^0.0.8
@@ -54,12 +54,12 @@ dependencies:
 
   font_awesome_flutter: ^10.7.0
   table_calendar: ^3.1.2
-  syncfusion_flutter_maps: ^26.1.42
+  syncfusion_flutter_maps: ^26.2.7
   socket_io_client: ^2.0.3+1
   #get: ^5.0.0-release-candidate-6
   get: ^4.6.6
-  syncfusion_flutter_calendar: ^26.1.42
-  syncfusion_flutter_datepicker: ^26.1.42
+  syncfusion_flutter_calendar: ^26.2.7
+  syncfusion_flutter_datepicker: ^26.2.7
   appflowy_board: ^0.1.2
   timelines: ^0.1.0
   countup: ^0.1.4
@@ -71,13 +71,13 @@ dependencies:
   fl_chart: ^0.68.0
   flutter_svg: ^2.0.10+1
   
-  package_info_plus: ^8.0.0
-  device_info_plus: ^10.1.0
+  package_info_plus: ^8.0.1
+  device_info_plus: ^10.1.1
   flutter_screenutil: ^5.9.3
   flutter_local_notifications: ^17.2.1+2
-  firebase_messaging: ^15.0.3
-  firebase_crashlytics: ^4.0.3
-  firebase_analytics: ^11.2.0
+  firebase_messaging: ^15.0.4
+  firebase_crashlytics: ^4.0.4
+  firebase_analytics: ^11.2.1
   easy_localization: ^3.0.7
   universal_html: ^2.2.4
   responsive_builder: ^0.7.1

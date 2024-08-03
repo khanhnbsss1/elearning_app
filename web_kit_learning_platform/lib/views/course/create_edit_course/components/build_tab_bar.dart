@@ -49,7 +49,7 @@ class _BuildTabBarState extends State<BuildTabBar>
           ),
           Align(
               alignment: Alignment.topCenter,
-              child: Positioned(child: buildTabBar())),
+              child: buildTabBar()),
         ],
       ),
     );

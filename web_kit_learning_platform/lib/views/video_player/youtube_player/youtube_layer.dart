@@ -71,6 +71,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
           controller: _controller,
           backgroundColor: ColorConst.blackColor,
           aspectRatio: constraints.maxWidth/constraints.maxHeight,
+          
           builder: (context, player) {
             return LayoutBuilder(
               builder: (context, constraints) {

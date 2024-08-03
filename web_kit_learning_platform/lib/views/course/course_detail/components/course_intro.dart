@@ -225,8 +225,17 @@ class CourseIntro extends StatelessWidget{
                   ClipRRect(
                       borderRadius: BorderRadius.circular(16),
                       child: Image.network(
-                        (_state.courseInfo?.videoPreview??'').isEmpty ? 'assets/deshboard/adventure/adventure5.png' : _state.courseInfo?.videoPreview??"",
+                        (_state.courseInfo?.image??'').isEmpty ? 'assets/deshboard/adventure/adventure5.png' : _state.courseInfo?.image??"",
                         fit: BoxFit.fill,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.network(
+                            'assets/deshboard/adventure/adventure5.png',
+                            fit: BoxFit.fill,
+                            errorBuilder: (context, error, stackTrace) {
+                              return SizedBox();
+                            },
+                          );
+                        },
                       )),
                   SizedBox(
                     height: 24,

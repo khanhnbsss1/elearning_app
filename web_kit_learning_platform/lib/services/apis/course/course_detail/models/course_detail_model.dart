@@ -425,10 +425,10 @@ class CourseInfo {
   List<String>getListTagsStr(){
     return (tags??[]).map((e) => (e.name??""),).toList();
   }
-  List<Subjects>?  getListSubjectAndLesson(){
+  List<Subjects>  getListSubjectAndLesson(){
     List<Subjects>? subjects = [];
     for(LessonInfo lessonInfo in lectures??[]){
-      if((subjects??[]).isEmpty)
+      if((subjects).isEmpty)
       {
         subjects.add(Subjects(subName: lessonInfo.subName, lectures: [lessonInfo]));
       }
@@ -442,7 +442,7 @@ class CourseInfo {
             break;
           }
         }
-        if(index == (subjects??[]).length){/// truong hop cua co Subjects cho lecture nay
+        if(index == (subjects).length){/// truong hop cua co Subjects cho lecture nay
           subjects.add(Subjects(subName: lessonInfo.subName, lectures: [lessonInfo]));
         }
 
