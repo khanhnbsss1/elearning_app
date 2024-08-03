@@ -349,7 +349,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                                                 Flexible(
                                                   flex: 10,
                                                   child: Text(
-                                                    '${L10nX.getStr.lecture_name_str} $subjectIndex: ${lessonInfo.lectureName}',
+                                                    '${L10nX.getStr.lecture_name_str} $lectureIndex: ${lessonInfo.lectureName}',
                                                     maxLines: 2,
                                                     overflow:
                                                     TextOverflow.ellipsis,
