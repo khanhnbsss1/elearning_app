@@ -24,15 +24,22 @@ import 'package:webkit/widgets/custom_pop_menu.dart';
 class Layout extends StatelessWidget {
   final Widget? child;
   Widget? title;
-  bool?showBackButton;
+  bool? showBackButton;
   final LayoutController controller = LayoutController();
   final topBarTheme = AdminTheme.theme.topBarTheme;
   final contentTheme = AdminTheme.theme.contentTheme;
   bool? isScroll;
-  EdgeInsetsGeometry ?padding;
-  Layout({super.key, this.child, this.isScroll, this.padding, this.title, this.showBackButton}){
-    isScroll??=true;
-    padding??=MySpacing.fromLTRB(0, 58 + flexSpacing, 0, flexSpacing);
+  EdgeInsetsGeometry? padding;
+
+  Layout(
+      {super.key,
+      this.child,
+      this.isScroll,
+      this.padding,
+      this.title,
+      this.showBackButton}) {
+    isScroll ??= true;
+    padding ??= MySpacing.fromLTRB(0, 58 + flexSpacing, 0, flexSpacing);
   }
 
   @override
@@ -127,25 +134,36 @@ class Layout extends StatelessWidget {
                 child: Stack(
                   children: [
                     Positioned(
-                  top: 0,
-                  right: 0,
-                  left: 0,
-                  bottom: 0,
-                  child: (isScroll??true)? SingleChildScrollView(
-                    padding: padding,
-                    key: controller.scrollKey,
-                    child: child,
-                  ):Padding(
-                    padding: padding!,
-                    child: child,),
-                ), 
-                    Positioned(top: 0, left: 0, right: 0, child: TopBar(key: UniqueKey(), title: title,showBackButton: showBackButton,)),
+                      top: 0,
+                      right: 0,
+                      left: 0,
+                      bottom: 0,
+                      child: (isScroll ?? true)
+                          ? SingleChildScrollView(
+                              padding: padding,
+                              key: controller.scrollKey,
+                              child: child,
+                            )
+                          : Padding(
+                              padding: padding!,
+                              child: child,
+                            ),
+                    ),
+                    Positioned(
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        child: TopBar(
+                          key: UniqueKey(),
+                          title: title,
+                          showBackButton: showBackButton,
+                        )),
                   ],
                 ),
               ),
             ],
           ),
-         // LeftBar(),
+          // LeftBar(),
         ],
       ),
     );

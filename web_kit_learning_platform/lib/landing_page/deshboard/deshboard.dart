@@ -107,7 +107,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
 
-    if (ResponsiveInfo.isPhone()) {
+    if (width < 550) {
       return buildMobile(context);
     } else {
       return buildDesktop(context);

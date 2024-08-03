@@ -12,6 +12,7 @@ import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/views/course/course_list/bloc/course_list_bloc.dart';
 import 'package:webkit/views/course/course_detail/course_preview.dart';
+import 'package:webkit/views/course/course_list/components/my_grid_view.dart';
 import 'package:webkit/views/course/create_edit_course/create_edit_course.dart';
 import '../../../helpers/theme/app_style.dart';
 import '../../../helpers/widgets/course_item_grid_view.dart';
@@ -19,6 +20,7 @@ import '../../../helpers/widgets/my_button.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text.dart';
 import '../../../helpers/widgets/my_text_style.dart';
+import '../../../landing_page/mediaquery/mq.dart';
 import '../../layouts/layout.dart';
 import '../course_study/course_study.dart';
 import 'components/filter_menu_item.dart';
@@ -123,7 +125,7 @@ class _CourseListState extends State<CourseList>
                                                   child: TextFormField(
                                                     maxLines: 1,
                                                     onChanged: (value) {
-                                                      
+
                                                     },
                                                     controller: editingController,
                                                     onFieldSubmitted: (value) {
@@ -166,7 +168,7 @@ class _CourseListState extends State<CourseList>
                                                 child: TextFormField(
                                                   maxLines: 1,
                                                   onChanged: (value) {
-                    
+
                                                   },
                                                   controller: editingController,
                                                   onFieldSubmitted: (value) {
@@ -209,14 +211,14 @@ class _CourseListState extends State<CourseList>
                                               onTap: () {
                                                 BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(
                                                     searchCommonRequest: state.searchCommonRequest!.copyWith(keyword:editingController.text )));
-                                                                  
+
                                               },
                                             ):
                                                 InkWell(
                                                   onTap: () {
                                                     BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(
                                                         searchCommonRequest: state.searchCommonRequest!.copyWith(keyword:editingController.text )));
-                                        
+
                                                   },
                                                   child: Icon(Icons.search, color: ColorConst.mainColor,),
                                                 ),
@@ -310,6 +312,7 @@ class _CourseListState extends State<CourseList>
         return Center(child: CircularProgressIndicator());
       case CourseStatus.onLoadEnd:
         // TODO: Handle this case.
+        double width = MediaQuery.of(context).size.width ;
         return  (listOfCourse.isEmpty) ?
         Center(child:NoData()) :
         Align(
@@ -319,19 +322,43 @@ class _CourseListState extends State<CourseList>
             thickness: 15,
             radius: Radius.circular(0),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.only(top: 16.0, left: 16, right: 16),
               child: Row(
                 children: [
                   Expanded(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      controller: scrollController,
-                      child: Wrap(
-                        alignment: WrapAlignment.start,
-                        crossAxisAlignment: WrapCrossAlignment.start,
-                        runAlignment: WrapAlignment.start,
-                        children: listOfCourse,
-                        
+                    child: Center(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        controller: scrollController,
+                        child: Wrap(
+                          spacing: 16,
+                          runSpacing: 16,
+                          alignment: WrapAlignment.start,
+                          crossAxisAlignment: WrapCrossAlignment.start,
+                          runAlignment: WrapAlignment.start,
+                          children: listOfCourse,
+                        ),
+
+                        // child: GridView.builder(
+                        //   shrinkWrap: true,
+                        //   gridDelegate:
+                        //   SliverGridDelegateWithMaxCrossAxisExtent(
+                        //       // crossAxisCount: width < 550 ? 1 : width < 850 ? 2 : width < 1150 ? 3 : 4,
+                        //       crossAxisSpacing: 16,
+                        //       mainAxisSpacing: 16,
+                        //       // childAspectRatio: 9/10,
+                        //       maxCrossAxisExtent: 400
+                        //     ,
+                        //   ),
+                        //   itemBuilder: (_, index) {
+                        //     return listOfCourse[index];
+                        //   },
+                        //   itemCount: listOfCourse.length
+                        //   // shrinkWrap: true,
+                        // ),
+
+                        // child: MyGridView(item: listOfCourse,),
+
                       ),
                     ),
                   ),

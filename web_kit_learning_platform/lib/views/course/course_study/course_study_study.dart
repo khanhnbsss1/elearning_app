@@ -269,12 +269,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                                                         Positioned(
                                                             left: 0,
                                                             child: Container(
-                                                              width: constraints
-                                                                  .maxWidth /
-                                                                  2 *
-                                                                  _checkProgression(
-                                                                      subjectIndex:
-                                                                      subjectIndex),
+                                                              width: constraints.maxWidth / 2 * _checkProgression(subjectIndex: subjectIndex),
                                                               height: 20,
                                                               decoration:
                                                               BoxDecoration(

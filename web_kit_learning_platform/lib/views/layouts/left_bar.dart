@@ -15,6 +15,8 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_button.dart';
 import 'package:webkit/helpers/widgets/my_card.dart';
 import 'package:webkit/helpers/widgets/my_container.dart';
+import 'package:webkit/helpers/widgets/my_screen_media.dart';
+import 'package:webkit/helpers/widgets/my_screen_media_type.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/images.dart';
@@ -70,7 +72,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
         shadow: MyShadow(position: MyShadowPosition.centerRight, elevation: 0.2),
         child: AnimatedContainer(
           color: leftBarTheme.background,
-          width: ThemeCustomizer().leftBarCondensed ? 70 : 254,
+          width: ThemeCustomizer().leftBarCondensed ? 70 : 250,
           curve: Curves.easeOut,
           duration: const Duration(milliseconds: 200),
           child: Column(
@@ -78,7 +80,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
             children: [
               Container(
                 height: 60,
-                padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
+                // padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
                 decoration: BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
@@ -86,7 +88,8 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     )
                   )
                 ),
-                child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 24.0),
                   child: InkWell(
                     onTap: () {
                       AppPages.routeName(Routes.dashboardRoute);
@@ -99,16 +102,16 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                               ThemeCustomizer().leftBarCondensed=!ThemeCustomizer().leftBarCondensed;
                             });
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Icon(Icons.menu, size: Dimens.size20,),
+                          child: Visibility(
+                              visible: MediaQuery.of(context).size.width > 550,
+                              child: Icon(Icons.menu, size: 20,)
                           ),
                         ),
                         Visibility(
                           visible: !ThemeCustomizer().leftBarCondensed,
                           child: SizedBox(
                             //height: Dimens.size30,
-                            width: Dimens.size40,
+                            width: Dimens.size60,
                             child:  StaticView.buildLogo(),
                           ),
                         ),
@@ -248,6 +251,18 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       iconData: Icons.edit_document,
                       title: L10nX.getStr.lesson_list,
                       route: Routes.lessonList,
+                      isCondensed: ThemeCustomizer().leftBarCondensed,
+                      onPress: () {
+                        setState(() {
+                          ThemeCustomizer().leftBarCondensed= true;
+                        });
+                      },
+                    ),
+                    //----------------Landing Page------------------//
+                    NavigationItem(
+                      iconData: LucideIcons.planeLanding,
+                      title: L10nX.getStr.landing_page,
+                      route: Routes.landingPageRoute,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
                       onPress: () {
                         setState(() {
