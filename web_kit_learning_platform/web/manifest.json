@@ -31,5 +31,22 @@
             "type": "image/png",
             "purpose": "maskable"
         }
-    ]
+    ],
+    "hosting": {
+        "public": "web",
+        "rewrites":[
+            {
+                "source": "**",
+                "destination": "/index.html"
+            }
+        ],
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ],
+        "frameworksBackend": {
+            "region": "asia-east1"
+        }
+    }
 }
