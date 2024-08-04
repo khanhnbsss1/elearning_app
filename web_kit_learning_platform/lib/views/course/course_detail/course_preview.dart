@@ -57,7 +57,8 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
           showTabBarModel.onChangerShowCard(false);
         }
       }
-    });
+    }
+    );
   }
 
   @override

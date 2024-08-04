@@ -14,6 +14,7 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/landing_page/components/review_list/review_list.dart';
+import 'package:webkit/models/user.dart';
 import 'package:webkit/services/apis/landing_page/review/models/landing_page_review_list_response_model.dart';
 import 'package:webkit/views/auth/login/login.dart';
 import 'package:webkit/views/auth/register.dart';
@@ -101,38 +102,52 @@ class _LandingPageScreenState extends State<LandingPageScreen>
   final ScrollController _mainController = ScrollController();
   List<Widget>listWiget= [];
   late double oldWidth=0;
+
+  Future<UserProfile?> getUser() async{
+    UserProfile? userProfile = await UserManager().getUserProfile();
+    return userProfile;
+  }
   @override
   Widget build(BuildContext context) {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
 
-    if (width < 550) {
-      return buildMobile(context);
-    } else {
-      return buildDesktop(context);
-    }
+    return FutureBuilder(
+      future: getUser(),
+      builder: (context, snapshot) {
+        UserProfile? userProfile = snapshot.data;
+        if (width < 550) {
+          return buildMobile(context, userProfile);
+        } else {
+          return buildDesktop(context, userProfile);
+        }
+      });
   }
 
-  Widget buildMobile(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 0.0),
-          child: buildTabBar(constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width)),
-        )
-      ),
-      endDrawer: CustomDrawer(),
-      backgroundColor: notifier.backgroundColor,
-      body: SafeArea(child: LayoutBuilder(
-        builder: (context, constraints) {
-          return appbarleft(constraints);
-        },
-      )),
-    );
+  Widget buildMobile(BuildContext context, UserProfile? userProfile) {
+      return Scaffold(
+        appBar: AppBar(
+            title: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 0.0),
+              child: buildTabBar(
+                  constraints: BoxConstraints(maxWidth: MediaQuery
+                      .of(context)
+                      .size
+                      .width,), userProfile: userProfile),
+            )
+        ),
+        endDrawer: CustomDrawer(),
+        backgroundColor: notifier.backgroundColor,
+        body: SafeArea(child: LayoutBuilder(
+          builder: (context, constraints) {
+            return appbarLeft(constraints, userProfile);
+          },
+        )),
+      );
   }
 
-  Widget buildDesktop(BuildContext context) {
+  Widget buildDesktop(BuildContext context, UserProfile? userProfile) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(0.0),
@@ -141,7 +156,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
       backgroundColor: notifier.backgroundColor,
       body: SafeArea(child: LayoutBuilder(
         builder: (context, constraints) {
-          return appbarleft(constraints);
+          return appbarLeft(constraints, userProfile);
         },
       )),
     );
@@ -166,9 +181,11 @@ class _LandingPageScreenState extends State<LandingPageScreen>
       }
     });
   }
-  Widget appbarleft(constraints) {
+
+  Widget appbarLeft(constraints, UserProfile? userProfile) {
     double width = MediaQuery.of(context).size.width;
     double itemCardWidth = (width < 1100) ? 90 : 140;
+
     if(oldWidth!= width || listWiget.isEmpty)
     {
       oldWidth = width;
@@ -177,30 +194,53 @@ class _LandingPageScreenState extends State<LandingPageScreen>
         SizedBox(
           key: GlobalObjectKey(0),
         ),
-        (width > 550) ? buildTabBar(constraints: constraints) : SizedBox(),
+        (width > 550) ? buildTabBar(constraints: constraints, userProfile: userProfile) : SizedBox(),
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: constraints.maxWidth < 760
                 ? 10
                 : constraints.maxWidth < 1000
-                ? 0
+                ? 10
                 : constraints.maxWidth / 15,
             vertical: 10,
           ),
-          child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: ResponsiveInfo.isPhone()?
-              Image.asset('assets/deshboard/winterlandscape.png',
-                  height: constraints.maxWidth < 500 ? 250 : 400,
-                  width: constraints.maxWidth,
-                  fit: BoxFit.cover)
-                  : Image.asset('assets/deshboard/winterlandscape.png',
-                  height: 600,
-                  width: constraints.maxWidth,
-                  fit: BoxFit.cover),
+          child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
+            return Stack(
+              children: [
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: ResponsiveInfo.isPhone()?
+                      Image.asset('assets/deshboard/winterlandscape.png',
+                          height: constraints.maxWidth < 500 ? 250 : 400,
+                          width: constraints.maxWidth,
+                          fit: BoxFit.cover)
+                          : Image.asset('assets/deshboard/winterlandscape.png',
+                          height: 600,
+                          width: constraints.maxWidth,
+                          fit: BoxFit.cover),
+                    );
+                  },
+                ),
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: Center(
+                    child: ActionButton1(
+                      onTap: () {
+                        userProfile == null ?
+                        LoginPage().show(context) : AppPages.routeName(Routes.dashboardRoute);;
+                      },
+                      text: 'Get started',
+                    ),
+                  ),
+                )
+              ],
             );
           },
           ),
@@ -310,7 +350,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
         Positioned(
           right: 20,
           bottom: 20,
-          child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+          child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
             return FloatingActionButton(
               heroTag: "arrow_upward",
               backgroundColor: Color.fromRGBO(143, 20, 17, 1.0),
@@ -325,13 +365,13 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           },
           ),
         ),
-        ListenableBuilder(
-          listenable: showCardModel, 
-          builder: (BuildContext context, Widget? child) { 
-            return Visibility(
-              visible: showCardModel.showCard && width > 750,
-              child: Align(
-                 alignment: Alignment.topCenter,
+        Positioned(
+          child: Visibility(
+            visible: MediaQuery.of(context).size.width > 550,
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: EdgeInsets.only(top: (MediaQuery.of(context).size.width < 1050) ? 60 : 30),
                 child: Card(
                   margin: EdgeInsets.only(top: width < 1100 ? 10 : 20),
                   shadowColor: Colors.red,
@@ -345,13 +385,13 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                       SizedBox(width: 10,),
                       Wrap(
                         children: List<Widget>.generate( 7, (int index) {
-                            return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+                            return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
                               return  SizedBox(
                                 height: 50,
                                 //width: itemCardWidth,
                                 child: OnHoverWidget(
                                   builder: (isHovered) {
-                                    return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+                                    return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
                                       return Center(
                                         child: TextButton(
                                           style: TextButton.styleFrom(
@@ -381,7 +421,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                 ),
                               );
                             },
-                              
+
                             );
                           },
                         ).toList(),
@@ -390,34 +430,28 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                   ),
                 ),
               ),
-            );
-          },),
+            ),
+          ),
+        ),
       ]
       );
   }
-  
-  Widget buildTabBar({required BoxConstraints constraints}) {
+
+  Widget buildTabBar({required BoxConstraints constraints, required UserProfile? userProfile}) {
     Locale currentLocale = LanguageHelper.getInstance.getCurrentLocale();
     return StatefulBuilder(
-      builder: (BuildContext context, void Function(void Function()) setState) {  
-        return FutureBuilder(
-          future: UserManager().getUserProfile(),
-          builder: (context, snapshot) {
-            UserProfile? userProfile;
-            if (snapshot.hasData) {
-              userProfile = snapshot.data as UserProfile;
-            }
-            return Padding(
+      builder: (BuildContext context, void Function(void Function()) setState) {
+        return Padding(
               padding: EdgeInsets.only(
                   top: constraints.maxWidth < 550 ? 0 : 12,
                   left: constraints.maxWidth < 550 ? 0
-                      : constraints.maxWidth / 10 < 800
-                      ? constraints.maxWidth / 15
-                      : constraints.maxWidth / 10,
+                      : constraints.maxWidth < 1050
+                      ? 20
+                      : 40,
                   right: constraints.maxWidth < 550 ? 0
-                      : constraints.maxWidth / 10 < 800
-                      ? constraints.maxWidth / 15
-                      : constraints.maxWidth / 10),
+                      : constraints.maxWidth < 1050
+                      ? 20
+                      : 40),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -434,7 +468,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                             overflow: TextOverflow.ellipsis,
                             style: baseStyle.copyWith(
                               color: notifier.blackcolor,
-                              fontSize: constraints.maxWidth < 300 ? 20 : 24,
+                              fontSize: constraints.maxWidth < 550 ? 20 : 24,
                             ),
                           ),
                         ),
@@ -563,9 +597,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                           ),
                         ],
                       ),
-                      if (constraints.maxWidth < 800)
-                        const SizedBox()
-                      else
+
                         Row(
                           children: [
                             PopupMenuButton(
@@ -577,8 +609,8 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                               ),
                               // initialValue: selectedMenu,
                               constraints: const BoxConstraints(
-                                maxWidth: 200,
-                                maxHeight: 250,
+                                maxWidth: 130,
+                                maxHeight: 150,
                               ),
                               color: notifier.whitecolor,
                               child: AnimatedContainer(
@@ -671,7 +703,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                       SizedBox(
                         width: constraints.maxWidth < 500 ? 10 : 25,
                       ),
-                  
+
                       SizedBox(
                         width: constraints.maxWidth < 500 ? 10 : 25,
                       ),
@@ -689,7 +721,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                         ),
                         color: notifier.whitecolor,
                         child: Container(
-                          height: height / 19,
+                          height: constraints.maxWidth < 550 ? 30 : 50,
                           decoration: BoxDecoration(
                             color: notifier.lightgreencolor,
                             shape: BoxShape.circle,
@@ -701,8 +733,6 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                               .getImageByUrl(userProfile.avatar ?? "")
                               : Image.asset(
                             'assets/Icons/profileicon.png',
-                            height:
-                            constraints.maxWidth < 300 ? 30 : height / 45,
                             scale: 2.5,
                           ),
                         ),
@@ -748,46 +778,46 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                     ),
                                   ),
                                 ),
-                                Visibility(
-                                    visible: ResponsiveInfo.isPhone(),
-                                    child: Column(
-                                      children: [
-                                        for (LanguageInfo language
-                                        in LanguageHelper().supportedLanguages)
-                                          InkWell(
-                                            onTap: () {
-                                              LanguageHelper().changeLanguage(
-                                                  language, context);
-                                            },
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: Dimens.size12,
-                                                  horizontal: Dimens.size30),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                                children: [
-                                                  ClipRRect(
-                                                      clipBehavior: Clip
-                                                          .antiAliasWithSaveLayer,
-                                                      borderRadius:
-                                                      BorderRadius.circular(2),
-                                                      child: Image.asset(
-                                                        "assets/lang/${language.languageCode}.png",
-                                                        width: 18,
-                                                        height: 14,
-                                                        fit: BoxFit.cover,
-                                                      )),
-                                                  MySpacing.width(8),
-                                                  MyText.labelMedium(
-                                                      language.language ?? "")
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                      ],
-                                    )),
-                                const SizedBox(height: 20),
+                                // Visibility(
+                                //     visible: ResponsiveInfo.isPhone(),
+                                //     child: Column(
+                                //       children: [
+                                //         for (LanguageInfo language
+                                //         in LanguageHelper().supportedLanguages)
+                                //           InkWell(
+                                //             onTap: () {
+                                //               LanguageHelper().changeLanguage(
+                                //                   language, context);
+                                //             },
+                                //             child: Padding(
+                                //               padding: EdgeInsets.symmetric(
+                                //                   vertical: Dimens.size12,
+                                //                   horizontal: Dimens.size30),
+                                //               child: Row(
+                                //                 mainAxisAlignment:
+                                //                 MainAxisAlignment.start,
+                                //                 children: [
+                                //                   ClipRRect(
+                                //                       clipBehavior: Clip
+                                //                           .antiAliasWithSaveLayer,
+                                //                       borderRadius:
+                                //                       BorderRadius.circular(2),
+                                //                       child: Image.asset(
+                                //                         "assets/lang/${language.languageCode}.png",
+                                //                         width: 18,
+                                //                         height: 14,
+                                //                         fit: BoxFit.cover,
+                                //                       )),
+                                //                   MySpacing.width(8),
+                                //                   MyText.labelMedium(
+                                //                       language.language ?? "")
+                                //                 ],
+                                //               ),
+                                //             ),
+                                //           ),
+                                //       ],
+                                //     )),
+                                // const SizedBox(height: 20),
                                 Padding(
                                   padding:
                                   EdgeInsets.symmetric(vertical: Dimens.size10),
@@ -911,8 +941,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                 ],
               ),
             );
-          },
-        );
+
       },
     );
   }
@@ -928,7 +957,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
       ));
     }
     return StatefulBuilder(
-      builder: (BuildContext context, void Function(void Function()) setState) {  
+      builder: (BuildContext context, void Function(void Function()) setState) {
         return Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -1189,7 +1218,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
       ));
     }
     return StatefulBuilder(
-      builder: (BuildContext context, void Function(void Function()) setState) { 
+      builder: (BuildContext context, void Function(void Function()) setState) {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
           child: Column(

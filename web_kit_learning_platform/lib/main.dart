@@ -32,6 +32,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'landing_page/components/colornotifier.dart';
 
 Future<void> main() async {
+  final DateTime startTime = DateTime.now();
   //SmoothWidgetsFlutterBinding.ensureInitialized(); // add this line
   setPathUrlStrategy();
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -62,6 +63,7 @@ Future<void> main() async {
         )
         
       ));
+
 }
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -83,14 +85,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final DateTime startTime = DateTime.now();
     FetchPixels(context);
     ColorConst.setColorByFlavorType();
     return BlocConsumer<MainBloc, MainState>(
       listener: (context, state) {
         switch(state.mainStatus){
-    
+
           case MainStatus.initial:
-    
+
             break;
           case MainStatus.onchangeLanguage:
             state.mainStatus = MainStatus.unKnown;
@@ -150,8 +153,9 @@ class MyApp extends StatelessWidget {
                 ),
               );
             },)(context,child);
-            
+
           },
+
           localizationsDelegates: const [
             S.delegate,
             L10nX.delegate,
@@ -171,8 +175,10 @@ class MyApp extends StatelessWidget {
                 return supportedLocale;
               }
             }
+
             return supportedLocales.first;
           },
+
           // home: ButtonsPage(),
         );
       },

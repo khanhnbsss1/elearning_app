@@ -326,7 +326,8 @@ class _CourseListState extends State<CourseList>
               child: Row(
                 children: [
                   Expanded(
-                    child: Center(
+                    child: Align(
+                      alignment: Alignment.topCenter,
                       child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         controller: scrollController,
