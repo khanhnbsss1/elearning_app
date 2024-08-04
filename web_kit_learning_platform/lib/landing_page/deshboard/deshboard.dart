@@ -100,54 +100,52 @@ class _LandingPageScreenState extends State<LandingPageScreen>
 
   ShowCardModel showCardModel = ShowCardModel();
   final ScrollController _mainController = ScrollController();
-  List<Widget>listWiget= [];
-  late double oldWidth=0;
+  List<Widget> listWiget = [];
+  late double oldWidth = 0;
 
-  Future<UserProfile?> getUser() async{
-    UserProfile? userProfile = await UserManager().getUserProfile();
-    return userProfile;
-  }
   @override
   Widget build(BuildContext context) {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
-    height = MediaQuery.of(context).size.height;
-    width = MediaQuery.of(context).size.width;
+    height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    width = MediaQuery
+        .of(context)
+        .size
+        .width;
 
-    return FutureBuilder(
-      future: getUser(),
-      builder: (context, snapshot) {
-        UserProfile? userProfile = snapshot.data;
-        if (width < 550) {
-          return buildMobile(context, userProfile);
-        } else {
-          return buildDesktop(context, userProfile);
-        }
-      });
+    if (width < 550) {
+      return buildMobile(context);
+    } else {
+      return buildDesktop(context);
+    }
   }
 
-  Widget buildMobile(BuildContext context, UserProfile? userProfile) {
-      return Scaffold(
-        appBar: AppBar(
-            title: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 0.0),
-              child: buildTabBar(
-                  constraints: BoxConstraints(maxWidth: MediaQuery
+  Widget buildMobile(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 0.0),
+            child: buildTabBar(
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery
                       .of(context)
                       .size
-                      .width,), userProfile: userProfile),
-            )
-        ),
-        endDrawer: CustomDrawer(),
-        backgroundColor: notifier.backgroundColor,
-        body: SafeArea(child: LayoutBuilder(
-          builder: (context, constraints) {
-            return appbarLeft(constraints, userProfile);
-          },
-        )),
-      );
+                      .width,
+                )),
+          )),
+      endDrawer: CustomDrawer(),
+      backgroundColor: notifier.backgroundColor,
+      body: SafeArea(child: LayoutBuilder(
+        builder: (context, constraints) {
+          return appbarLeft(constraints);
+        },
+      )),
+    );
   }
 
-  Widget buildDesktop(BuildContext context, UserProfile? userProfile) {
+  Widget buildDesktop(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(0.0),
@@ -156,7 +154,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
       backgroundColor: notifier.backgroundColor,
       body: SafeArea(child: LayoutBuilder(
         builder: (context, constraints) {
-          return appbarLeft(constraints, userProfile);
+          return appbarLeft(constraints);
         },
       )),
     );
@@ -167,34 +165,33 @@ class _LandingPageScreenState extends State<LandingPageScreen>
     super.initState();
     _mainController.addListener(() {
       if (_mainController.offset > 300) {
-        if(showCardModel.showCard==false)
-          {
-            showCardModel.onChangerShowCard(true);
-          }
-
+        if (showCardModel.showCard == false) {
+          showCardModel.onChangerShowCard(true);
+        }
       } else {
-        if(showCardModel.showCard==true)
-          {
-            showCardModel.onChangerShowCard(false);
-
-          }
+        if (showCardModel.showCard == true) {
+          showCardModel.onChangerShowCard(false);
+        }
       }
     });
   }
 
-  Widget appbarLeft(constraints, UserProfile? userProfile) {
-    double width = MediaQuery.of(context).size.width;
+  Widget appbarLeft(constraints) {
+    double width = MediaQuery
+        .of(context)
+        .size
+        .width;
     double itemCardWidth = (width < 1100) ? 90 : 140;
+    bool isHovered = false;
 
-    if(oldWidth!= width || listWiget.isEmpty)
-    {
+    if (oldWidth != width || listWiget.isEmpty) {
       oldWidth = width;
       listWiget.clear();
       listWiget.addAll({
         SizedBox(
           key: GlobalObjectKey(0),
         ),
-        (width > 550) ? buildTabBar(constraints: constraints, userProfile: userProfile) : SizedBox(),
+        (width > 550) ? buildTabBar(constraints: constraints) : SizedBox(),
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: constraints.maxWidth < 760
@@ -204,50 +201,92 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                 : constraints.maxWidth / 15,
             vertical: 10,
           ),
-          child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
-            return Stack(
-              children: [
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: ResponsiveInfo.isPhone()?
-                      Image.asset('assets/deshboard/winterlandscape.png',
-                          height: constraints.maxWidth < 500 ? 250 : 400,
-                          width: constraints.maxWidth,
-                          fit: BoxFit.cover)
-                          : Image.asset('assets/deshboard/winterlandscape.png',
-                          height: 600,
-                          width: constraints.maxWidth,
-                          fit: BoxFit.cover),
+          child: StatefulBuilder(
+            builder: (BuildContext context,
+                void Function(void Function()) setState) {
+              return FutureBuilder(
+                  future: UserManager().getUserProfile(),
+                  builder: (context, snapshot) {
+                    UserProfile? userProfile;
+                    if (snapshot.hasData) {
+                      userProfile = snapshot.data as UserProfile;
+                    }
+                    print('${userProfile == null} appbar left');
+                    return Stack(
+                      children: [
+                        LayoutBuilder(
+                          builder: (context, constraints) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: ResponsiveInfo.isPhone()
+                                  ? Image.asset(
+                                  'assets/deshboard/winterlandscape.png',
+                                  height: constraints.maxWidth < 500
+                                      ? 250
+                                      : 400,
+                                  width: constraints.maxWidth,
+                                  fit: BoxFit.cover)
+                                  : Image.asset(
+                                  'assets/deshboard/winterlandscape.png',
+                                  height: 600,
+                                  width: constraints.maxWidth,
+                                  fit: BoxFit.cover),
+                            );
+                          },
+                        ),
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          bottom: 0,
+                          child: Center(
+                              child: MouseRegion(
+                                onEnter: (_) =>
+                                    setState(() => isHovered = true),
+                                onExit: (_) =>
+                                    setState(() => isHovered = false),
+                                child: GestureDetector(
+                                  child: AnimatedContainer(
+                                    duration: Duration(milliseconds: 100),
+                                    transform: Matrix4.identity()
+                                      ..scale(isHovered ? 1.2 : 1.0),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        userProfile == null
+                                            ? LoginPage().show(context)
+                                            : AppPages.routeName(
+                                            Routes.dashboardRoute);
+                                      },
+                                      style: TextButton.styleFrom(
+                                        backgroundColor: ColorConst.mainColor,
+                                        foregroundColor: ColorConst
+                                            .whiteColor,
+                                      ),
+                                      child: Text(
+                                        L10nX.getStr.lets_study,
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )),
+                        )
+                      ],
                     );
-                  },
-                ),
-                Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: Center(
-                    child: ActionButton1(
-                      onTap: () {
-                        userProfile == null ?
-                        LoginPage().show(context) : AppPages.routeName(Routes.dashboardRoute);;
-                      },
-                      text: 'Get started',
-                    ),
-                  ),
-                )
-              ],
-            );
-          },
+                  });
+            },
           ),
         ),
-        SizedBox(height: 20,),
+        SizedBox(
+          height: 20,
+        ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+          padding: EdgeInsets.symmetric(horizontal: width * 1 / 4),
           child: Divider(
             color: Colors.black12,
           ),
@@ -258,7 +297,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
         ),
         buildDifferentListWidget(constraints: constraints),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+          padding: EdgeInsets.symmetric(horizontal: width * 1 / 4),
           child: Divider(
             color: Colors.black12,
           ),
@@ -274,7 +313,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
         ),
         const TeacherList(),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+          padding: EdgeInsets.symmetric(horizontal: width * 1 / 4),
           child: Divider(
             color: Colors.black12,
           ),
@@ -293,7 +332,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           typeName: UserTypeName.teacher,
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+          padding: EdgeInsets.symmetric(horizontal: width * 1 / 4),
           child: Divider(
             color: Colors.black12,
           ),
@@ -304,7 +343,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
         ),
         buildWhyChooseUsListWidget(constraints: constraints),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 1/4),
+          padding: EdgeInsets.symmetric(horizontal: width * 1 / 4),
           child: Divider(
             color: Colors.black12,
           ),
@@ -322,35 +361,38 @@ class _LandingPageScreenState extends State<LandingPageScreen>
               ? notifier.subgreycolor
               : notifier.sugestionbutton,
         ),
-        SizedBox(height: 30,),
+        SizedBox(
+          height: 30,
+        ),
         EndOfPage(),
       });
     }
-    String text = "If your app has frequent background activity with some idle time, Flutter might use that opportunity to collect the created objects without performance impact.";
+    String text =
+        "If your app has frequent background activity with some idle time, Flutter might use that opportunity to collect the created objects without performance impact.";
     String finaleText = "";
-    for(int index =0 ; index<1000; index++)
-      {
+    for (int index = 0; index < 1000; index++) {
       finaleText += text;
-      }
+    }
 /*    return SingleChildScrollView(
       child: Text(
           finaleText
       ),
     );*/
-    return Stack(
-      children: [
-        CustomChildScrollView(
-          controller: _mainController,
-          scrollSpeed: 100,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children:  listWiget,
-          ),
+    return Stack(children: [
+      CustomChildScrollView(
+        controller: _mainController,
+        scrollSpeed: 100,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: listWiget,
         ),
-        Positioned(
-          right: 20,
-          bottom: 20,
-          child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
+      ),
+      Positioned(
+        right: 20,
+        bottom: 20,
+        child: StatefulBuilder(
+          builder:
+              (BuildContext context, void Function(void Function()) setState) {
             return FloatingActionButton(
               heroTag: "arrow_upward",
               backgroundColor: Color.fromRGBO(143, 20, 17, 1.0),
@@ -363,241 +405,282 @@ class _LandingPageScreenState extends State<LandingPageScreen>
               child: Icon(Icons.arrow_upward),
             );
           },
-          ),
         ),
-        Positioned(
-          child: Visibility(
-            visible: MediaQuery.of(context).size.width > 550,
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: EdgeInsets.only(top: (MediaQuery.of(context).size.width < 1050) ? 60 : 30),
-                child: Card(
-                  margin: EdgeInsets.only(top: width < 1100 ? 10 : 20),
-                  shadowColor: Colors.red,
-                  surfaceTintColor: Colors.green,
-                  elevation: 5,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SizedBox(width: 10,),
-                      StaticView.buildLogo(size: 28),
-                      SizedBox(width: 10,),
-                      Wrap(
-                        children: List<Widget>.generate( 7, (int index) {
-                            return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
-                              return  SizedBox(
+      ),
+      Positioned(
+        child: Visibility(
+          visible: MediaQuery
+              .of(context)
+              .size
+              .width > 550,
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  top: (MediaQuery
+                      .of(context)
+                      .size
+                      .width < 1050) ? 60 : 30),
+              child: Card(
+                margin: EdgeInsets.only(top: width < 1100 ? 10 : 20),
+                shadowColor: Colors.red,
+                surfaceTintColor: Colors.green,
+                elevation: 5,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      width: 10,
+                    ),
+                    StaticView.buildLogo(size: 28),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Wrap(
+                      children: List<Widget>.generate(
+                        7,
+                            (int index) {
+                          return StatefulBuilder(
+                            builder: (BuildContext context,
+                                void Function(void Function()) setState) {
+                              return SizedBox(
                                 height: 50,
                                 //width: itemCardWidth,
                                 child: OnHoverWidget(
                                   builder: (isHovered) {
-                                    return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
-                                      return Center(
-                                        child: TextButton(
-                                          style: TextButton.styleFrom(
-                                            overlayColor: Colors.white,
-                                          ),
-                                          onPressed: () {
-                                            Scrollable.ensureVisible(
-                                                GlobalObjectKey(index).currentContext!,
-                                                duration: Duration(seconds: 1),
-                                                curve: Curves.easeInOutCubic);
-                                          },
-                                          child: Text(landingPageTitles[index],
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: (width < 1100) ? 10 : 18,
-                                                color: (isHovered) ? notifier.redcolor : Colors.black,
-                                                decoration: (isHovered) ? TextDecoration.underline : TextDecoration.none,
-                                                decorationColor: notifier.redcolor,
-                                                decorationThickness: 2
+                                    return StatefulBuilder(
+                                      builder: (BuildContext context,
+                                          void Function(void Function())
+                                          setState) {
+                                        return Center(
+                                          child: TextButton(
+                                            style: TextButton.styleFrom(
+                                              overlayColor: Colors.white,
+                                            ),
+                                            onPressed: () {
+                                              Scrollable.ensureVisible(
+                                                  GlobalObjectKey(index)
+                                                      .currentContext!,
+                                                  duration:
+                                                  Duration(seconds: 1),
+                                                  curve: Curves.easeInOutCubic);
+                                            },
+                                            child: Text(
+                                              landingPageTitles[index],
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize:
+                                                  (width < 1100) ? 10 : 18,
+                                                  color: (isHovered)
+                                                      ? notifier.redcolor
+                                                      : Colors.black,
+                                                  decoration: (isHovered)
+                                                      ? TextDecoration.underline
+                                                      : TextDecoration.none,
+                                                  decorationColor:
+                                                  notifier.redcolor,
+                                                  decorationThickness: 2),
                                             ),
                                           ),
-                                        ),
-                                      );
-                                    },
+                                        );
+                                      },
                                     );
                                   },
                                 ),
                               );
                             },
-
-                            );
-                          },
-                        ).toList(),
-                      ),
-                    ],
-                  ),
+                          );
+                        },
+                      ).toList(),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
         ),
-      ]
-      );
+      ),
+    ]);
   }
 
-  Widget buildTabBar({required BoxConstraints constraints, required UserProfile? userProfile}) {
+  Widget buildTabBar({required BoxConstraints constraints}) {
     Locale currentLocale = LanguageHelper.getInstance.getCurrentLocale();
     return StatefulBuilder(
       builder: (BuildContext context, void Function(void Function()) setState) {
-        return Padding(
-              padding: EdgeInsets.only(
-                  top: constraints.maxWidth < 550 ? 0 : 12,
-                  left: constraints.maxWidth < 550 ? 0
-                      : constraints.maxWidth < 1050
-                      ? 20
-                      : 40,
-                  right: constraints.maxWidth < 550 ? 0
-                      : constraints.maxWidth < 1050
-                      ? 20
-                      : 40),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        StaticView.buildLogo(),
-                        const SizedBox(width: 5),
-                        (constraints.maxWidth < 550) ? SizedBox() : Expanded(
-                          child: Text(
-                            L10nX.getStr.app_name,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: baseStyle.copyWith(
-                              color: notifier.blackcolor,
-                              fontSize: constraints.maxWidth < 550 ? 20 : 24,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Visibility(
-                        visible: userProfile != null && ResponsiveInfo.isTablet(),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
-                          child: PopupMenuButton(
-                            onOpened: () {
-                              AppPages.routeName(Routes.dashboardRoute);
-                            },
-                            tooltip: L10nX.getStr.lets_study,
-                            itemBuilder: (BuildContext context) {
-                              return [
-                                PopupMenuItem<String>(
-                                    enabled: false,
-                                    value: '',
-                                    onTap: () {},
-                                    child: SizedBox()),
-                              ];
-                            },
-                            child: Text(L10nX.getStr.lets_study,
-                                style: baseStyle.copyWith(
-                                  fontSize: 16,
-                                  color: supportHover
-                                      ? notifier.blackcolor
-                                      : notifier.subgreycolor,
-                                )),
-                          ),
-                        ),
-                      ),
-                      constraints.maxWidth < 1000
-                          ? const SizedBox()
-                          : Row(
+        return FutureBuilder(
+            future: UserManager().getUserProfile(),
+            builder: (context, snapshot) {
+              UserProfile? userProfile;
+              if (snapshot.hasData) {
+                userProfile = snapshot.data as UserProfile;
+              }
+              print('${userProfile == null} tab bar');
+              return Padding(
+                padding: EdgeInsets.only(
+                    top: constraints.maxWidth < 550 ? 0 : 12,
+                    left: constraints.maxWidth < 550
+                        ? 0
+                        : constraints.maxWidth < 1050
+                        ? 20
+                        : 40,
+                    right: constraints.maxWidth < 550
+                        ? 0
+                        : constraints.maxWidth < 1050
+                        ? 20
+                        : 40),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          PopupMenuButton(
-                            tooltip: '',
-                            padding: const EdgeInsets.all(0),
-                            offset: const Offset(120, 30),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            // initialValue: selectedMenu,
-                            constraints: const BoxConstraints(
-                              maxWidth: 315,
-                              maxHeight: 270,
-                            ),
-                            color: notifier.whitecolor,
+                          StaticView.buildLogo(),
+                          const SizedBox(width: 5),
+                          (constraints.maxWidth < 550)
+                              ? SizedBox()
+                              : Expanded(
                             child: Text(
-                              L10nX.getStr.application,
+                              L10nX.getStr.app_name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: baseStyle.copyWith(
-                                  color: supportHover
-                                      ? notifier.blackcolor
-                                      : notifier.subgreycolor,
-                                  fontSize: 16),
+                                color: notifier.blackcolor,
+                                fontSize:
+                                constraints.maxWidth < 550 ? 20 : 24,
+                              ),
                             ),
-                            itemBuilder: (BuildContext context) =>
-                            <PopupMenuEntry<SampleItem2>>[
-                              PopupMenuItem<SampleItem2>(
-                                enabled: true,
-                                value: SampleItem2.itemOne,
-                                onTap: () {},
-                                child: Row(children: [
-                                  const SizedBox(width: 10),
-                                  Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      const SizedBox(height: 20),
-                                      Text(L10nX.getStr.download,
-                                          style: baseStyle.copyWith(
-                                            fontSize: 16,
-                                            color: notifier.subgreycolor,
-                                          )),
-                                      const SizedBox(height: 10),
-                                      SizedBox(
-                                        height: 100,
-                                        child: Column(
-                                          children: [
-                                            const SizedBox(height: 10),
-                                            SvgPicture.asset(
-                                                'assets/deshboard/support/AppStoreBadge.svg',
-                                                height: 40),
-                                            const SizedBox(height: 10),
-                                            SvgPicture.asset(
-                                                'assets/deshboard/support/GooglePlayStoreBadge.svg',
-                                                height: 40),
-                                          ],
-                                        ),
-                                      ),
-                                      const SizedBox(height: 20),
-                                    ],
-                                  ),
-                                  const SizedBox(width: 30),
-                                  Column(
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Visibility(
+                          visible:
+                          // userProfile != null && ResponsiveInfo.isTablet(),
+                          false,
+                          child: Padding(
+                            padding:
+                            EdgeInsets.symmetric(horizontal: Dimens.size16),
+                            child: PopupMenuButton(
+                              onOpened: () {
+                                AppPages.routeName(Routes.dashboardRoute);
+                              },
+                              tooltip: L10nX.getStr.lets_study,
+                              itemBuilder: (BuildContext context) {
+                                return [
+                                  PopupMenuItem<String>(
+                                      enabled: false,
+                                      value: '',
+                                      onTap: () {},
+                                      child: SizedBox()),
+                                ];
+                              },
+                              child: Text(L10nX.getStr.lets_study,
+                                  style: baseStyle.copyWith(
+                                    fontSize: 16,
+                                    color: supportHover
+                                        ? notifier.blackcolor
+                                        : notifier.subgreycolor,
+                                  )),
+                            ),
+                          ),
+                        ),
+                        constraints.maxWidth < 1000
+                            ? const SizedBox()
+                            : Row(
+                          children: [
+                            PopupMenuButton(
+                              tooltip: '',
+                              padding: const EdgeInsets.all(0),
+                              offset: const Offset(120, 30),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              // initialValue: selectedMenu,
+                              constraints: const BoxConstraints(
+                                maxWidth: 315,
+                                maxHeight: 270,
+                              ),
+                              color: notifier.whitecolor,
+                              child: Text(
+                                L10nX.getStr.application,
+                                style: baseStyle.copyWith(
+                                    color: supportHover
+                                        ? notifier.blackcolor
+                                        : notifier.subgreycolor,
+                                    fontSize: 16),
+                              ),
+                              itemBuilder: (BuildContext context) =>
+                              <PopupMenuEntry<SampleItem2>>[
+                                PopupMenuItem<SampleItem2>(
+                                  enabled: true,
+                                  value: SampleItem2.itemOne,
+                                  onTap: () {},
+                                  child: Row(children: [
+                                    const SizedBox(width: 10),
+                                    Column(
                                       crossAxisAlignment:
                                       CrossAxisAlignment.start,
                                       children: [
                                         const SizedBox(height: 20),
-                                        Text(L10nX.getStr.scan_code,
+                                        Text(L10nX.getStr.download,
                                             style: baseStyle.copyWith(
                                               fontSize: 16,
-                                              color: notifier.subgreycolor,
+                                              color:
+                                              notifier.subgreycolor,
                                             )),
-                                        const SizedBox(height: 12),
+                                        const SizedBox(height: 10),
                                         SizedBox(
                                           height: 100,
-                                          child: Image.asset(
-                                              'assets/deshboard/support/qrCode.png',
-                                              height: 100),
+                                          child: Column(
+                                            children: [
+                                              const SizedBox(height: 10),
+                                              SvgPicture.asset(
+                                                  'assets/deshboard/support/AppStoreBadge.svg',
+                                                  height: 40),
+                                              const SizedBox(height: 10),
+                                              SvgPicture.asset(
+                                                  'assets/deshboard/support/GooglePlayStoreBadge.svg',
+                                                  height: 40),
+                                            ],
+                                          ),
                                         ),
                                         const SizedBox(height: 20),
-                                      ]),
-                                  const SizedBox(width: 10),
-                                ]),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 25,
-                          ),
-                        ],
-                      ),
-
+                                      ],
+                                    ),
+                                    const SizedBox(width: 30),
+                                    Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        children: [
+                                          const SizedBox(height: 20),
+                                          Text(L10nX.getStr.scan_code,
+                                              style: baseStyle.copyWith(
+                                                fontSize: 16,
+                                                color:
+                                                notifier.subgreycolor,
+                                              )),
+                                          const SizedBox(height: 12),
+                                          SizedBox(
+                                            height: 100,
+                                            child: Image.asset(
+                                                'assets/deshboard/support/qrCode.png',
+                                                height: 100),
+                                          ),
+                                          const SizedBox(height: 20),
+                                        ]),
+                                    const SizedBox(width: 10),
+                                  ]),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 25,
+                            ),
+                          ],
+                        ),
                         Row(
                           children: [
                             PopupMenuButton(
@@ -617,15 +700,19 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                 duration: const Duration(milliseconds: 200),
                                 child: Center(
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.center,
                                     mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                     children: [
                                       ClipRRect(
-                                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                                          borderRadius: BorderRadius.circular(2),
+                                          clipBehavior:
+                                          Clip.antiAliasWithSaveLayer,
+                                          borderRadius:
+                                          BorderRadius.circular(2),
                                           child: Image.asset(
-                                            "assets/lang/${currentLocale.languageCode}.png",
+                                            "assets/lang/${currentLocale
+                                                .languageCode}.png",
                                             width: 18,
                                             height: 14,
                                             fit: BoxFit.cover,
@@ -659,32 +746,40 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                                   .supportedLanguages)
                                                 InkWell(
                                                   onTap: () {
-                                                    LanguageHelper().changeLanguage(
+                                                    LanguageHelper()
+                                                        .changeLanguage(
                                                         language, context);
                                                   },
                                                   child: Padding(
-                                                    padding: EdgeInsets.symmetric(
-                                                        vertical: Dimens.size10,
-                                                        horizontal: Dimens.size8),
+                                                    padding:
+                                                    EdgeInsets.symmetric(
+                                                        vertical:
+                                                        Dimens.size10,
+                                                        horizontal:
+                                                        Dimens.size8),
                                                     child: Row(
                                                       mainAxisAlignment:
-                                                      MainAxisAlignment.start,
+                                                      MainAxisAlignment
+                                                          .start,
                                                       children: [
                                                         ClipRRect(
                                                             clipBehavior: Clip
                                                                 .antiAliasWithSaveLayer,
                                                             borderRadius:
                                                             BorderRadius
-                                                                .circular(2),
+                                                                .circular(
+                                                                2),
                                                             child: Image.asset(
-                                                              "assets/lang/${language.languageCode}.png",
+                                                              "assets/lang/${language
+                                                                  .languageCode}.png",
                                                               width: 18,
                                                               height: 14,
                                                               fit: BoxFit.cover,
                                                             )),
                                                         MySpacing.width(8),
                                                         MyText.labelMedium(
-                                                            language.language ?? "")
+                                                            language.language ??
+                                                                "")
                                                       ],
                                                     ),
                                                   ),
@@ -700,248 +795,267 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                             ),
                           ],
                         ),
-                      SizedBox(
-                        width: constraints.maxWidth < 500 ? 10 : 25,
-                      ),
-
-                      SizedBox(
-                        width: constraints.maxWidth < 500 ? 10 : 25,
-                      ),
-                      PopupMenuButton(
-                        tooltip: '',
-                        padding: const EdgeInsets.all(0),
-                        offset: const Offset(0, 50),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
+                        SizedBox(
+                          width: constraints.maxWidth < 500 ? 10 : 25,
                         ),
-                        // initialValue: selectedMenu,
-                        constraints: BoxConstraints(
-                          maxWidth: width / 1,
-                          maxHeight: 450,
+                        SizedBox(
+                          width: constraints.maxWidth < 500 ? 10 : 25,
                         ),
-                        color: notifier.whitecolor,
-                        child: Container(
-                          height: constraints.maxWidth < 550 ? 30 : 50,
-                          decoration: BoxDecoration(
-                            color: notifier.lightgreencolor,
-                            shape: BoxShape.circle,
+                        PopupMenuButton(
+                          tooltip: '',
+                          padding: const EdgeInsets.all(0),
+                          offset: const Offset(0, 50),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          clipBehavior: Clip.hardEdge,
-                          child: userProfile != null &&
-                              (userProfile.avatar ?? "").isNotEmpty
-                              ? ImageManager()
-                              .getImageByUrl(userProfile.avatar ?? "")
-                              : Image.asset(
-                            'assets/Icons/profileicon.png',
-                            scale: 2.5,
+                          // initialValue: selectedMenu,
+                          constraints: BoxConstraints(
+                            maxWidth: width / 1,
+                            maxHeight: 450,
                           ),
-                        ),
-                        onSelected: (SampleItem2 item) {
-                          setState(() {
-                            // selectedMenu = item;
-                          });
-                        },
-                        itemBuilder: (BuildContext context) =>
-                        <PopupMenuEntry<SampleItem2>>[
-                          PopupMenuItem<SampleItem2>(
-                            enabled: true,
-                            value: SampleItem2.itemOne,
-                            onTap: () {},
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Visibility(
-                                  visible: userProfile != null &&
-                                      ResponsiveInfo.isPhone(),
-                                  child: InkWell(
-                                    onTap: () {
-                                      AppPages.routeName(Routes.dashboardRoute);
-                                    },
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      children: [
-                                        const SizedBox(width: 4),
-                                        Icon(
-                                          Icons.home_outlined,
-                                          size: Dimens.size25,
-                                          color: ColorConst.blackColor,
-                                        ),
-                                        const SizedBox(width: 20),
-                                        Text(L10nX.getStr.lets_study,
-                                            style: baseStyle.copyWith(
-                                              fontSize: 16,
-                                              color: notifier.blackcolor,
-                                            )),
-                                        const SizedBox(height: 30),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                // Visibility(
-                                //     visible: ResponsiveInfo.isPhone(),
-                                //     child: Column(
-                                //       children: [
-                                //         for (LanguageInfo language
-                                //         in LanguageHelper().supportedLanguages)
-                                //           InkWell(
-                                //             onTap: () {
-                                //               LanguageHelper().changeLanguage(
-                                //                   language, context);
-                                //             },
-                                //             child: Padding(
-                                //               padding: EdgeInsets.symmetric(
-                                //                   vertical: Dimens.size12,
-                                //                   horizontal: Dimens.size30),
-                                //               child: Row(
-                                //                 mainAxisAlignment:
-                                //                 MainAxisAlignment.start,
-                                //                 children: [
-                                //                   ClipRRect(
-                                //                       clipBehavior: Clip
-                                //                           .antiAliasWithSaveLayer,
-                                //                       borderRadius:
-                                //                       BorderRadius.circular(2),
-                                //                       child: Image.asset(
-                                //                         "assets/lang/${language.languageCode}.png",
-                                //                         width: 18,
-                                //                         height: 14,
-                                //                         fit: BoxFit.cover,
-                                //                       )),
-                                //                   MySpacing.width(8),
-                                //                   MyText.labelMedium(
-                                //                       language.language ?? "")
-                                //                 ],
-                                //               ),
-                                //             ),
-                                //           ),
-                                //       ],
-                                //     )),
-                                // const SizedBox(height: 20),
-                                Padding(
-                                  padding:
-                                  EdgeInsets.symmetric(vertical: Dimens.size10),
-                                  child: Stack(children: [
-                                    Visibility(
-                                      visible: userProfile == null,
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            height: 40,
-                                            width: 145,
-                                            child: ElevatedButton(
-                                              style: ButtonStyle(
-                                                elevation:
-                                                const WidgetStatePropertyAll(0),
-                                                backgroundColor:
-                                                WidgetStatePropertyAll(
-                                                    notifier.buttoncolor),
-                                                shape: const WidgetStatePropertyAll(
-                                                  RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.all(
-                                                        Radius.circular(20)),
-                                                  ),
-                                                ),
-                                              ),
-                                              onPressed: () {
-                                                LoginPage().show(context);
-                                                //AppPages.route(Paths.dashboardPath);
-                                              },
-                                              child: Text(L10nX.getStr.login,
-                                                  style: baseStyle.copyWith(
-                                                      fontSize: 12,
-                                                      color: Colors.white)),
-                                            ),
-                                          ),
-                                          const SizedBox(width: 10),
-                                          SizedBox(
-                                            height: 40,
-                                            width: 145,
-                                            child: ElevatedButton(
-                                              style: ButtonStyle(
-                                                elevation:
-                                                const WidgetStatePropertyAll(0),
-                                                backgroundColor:
-                                                WidgetStatePropertyAll(
-                                                    notifier.whitecolor),
-                                                shape: WidgetStatePropertyAll(
-                                                  RoundedRectangleBorder(
-                                                    side: BorderSide(
-                                                        color: notifier.buttoncolor,
-                                                        width: 2),
-                                                    borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(20)),
-                                                  ),
-                                                ),
-                                              ),
-                                              onPressed: () {
-                                                Register().show(context);
-                                              },
-                                              child: Text(L10nX.getStr.sign_up,
-                                                  style: baseStyle.copyWith(
-                                                      fontSize: 12,
-                                                      color: notifier.buttoncolor)),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Visibility(
-                                      visible: userProfile != null,
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                            height: 40,
-                                            width: 145,
-                                            child: ElevatedButton(
-                                              style: ButtonStyle(
-                                                elevation:
-                                                const WidgetStatePropertyAll(0),
-                                                backgroundColor:
-                                                WidgetStatePropertyAll(
-                                                    ColorConst.whiteColor),
-                                                shape: const WidgetStatePropertyAll(
-                                                  RoundedRectangleBorder(
-                                                    borderRadius: BorderRadius.all(
-                                                        Radius.circular(20)),
-                                                  ),
-                                                ),
-                                              ),
-                                              onPressed: () {
-                                                AuthorManager().handleLogout();
-                                                AppPages.routeName(
-                                                    Routes.landingPageRoute,
-                                                    isReplace: true);
-                                              },
-                                              child: Text(
-                                                  L10nX.getStr.sign_out_text,
-                                                  style: baseStyle.copyWith(
-                                                      fontSize: 12,
-                                                      color: Colors.red)),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ]),
-                                ),
-                              ],
+                          color: notifier.whitecolor,
+                          child: Container(
+                            height: constraints.maxWidth < 550 ? 30 : 50,
+                            decoration: BoxDecoration(
+                              color: notifier.lightgreencolor,
+                              shape: BoxShape.circle,
+                            ),
+                            clipBehavior: Clip.hardEdge,
+                            child: userProfile != null &&
+                                (userProfile.avatar ?? "").isNotEmpty
+                                ? ImageManager()
+                                .getImageByUrl(userProfile.avatar ?? "")
+                                : Image.asset(
+                              'assets/Icons/profileicon.png',
+                              scale: 2.5,
                             ),
                           ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: constraints.maxWidth < 500 ? 10 : 25,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-
+                          onSelected: (SampleItem2 item) {
+                            setState(() {
+                              // selectedMenu = item;
+                            });
+                          },
+                          itemBuilder: (BuildContext context) =>
+                          <PopupMenuEntry<SampleItem2>>[
+                            PopupMenuItem<SampleItem2>(
+                              enabled: true,
+                              value: SampleItem2.itemOne,
+                              onTap: () {},
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Visibility(
+                                    visible: userProfile != null &&
+                                        ResponsiveInfo.isPhone(),
+                                    child: InkWell(
+                                      onTap: () {
+                                        AppPages.routeName(
+                                            Routes.dashboardRoute);
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        children: [
+                                          const SizedBox(width: 4),
+                                          Icon(
+                                            Icons.home_outlined,
+                                            size: Dimens.size25,
+                                            color: ColorConst.blackColor,
+                                          ),
+                                          const SizedBox(width: 20),
+                                          Text(L10nX.getStr.lets_study,
+                                              style: baseStyle.copyWith(
+                                                fontSize: 16,
+                                                color: notifier.blackcolor,
+                                              )),
+                                          const SizedBox(height: 30),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  // Visibility(
+                                  //     visible: ResponsiveInfo.isPhone(),
+                                  //     child: Column(
+                                  //       children: [
+                                  //         for (LanguageInfo language
+                                  //         in LanguageHelper().supportedLanguages)
+                                  //           InkWell(
+                                  //             onTap: () {
+                                  //               LanguageHelper().changeLanguage(
+                                  //                   language, context);
+                                  //             },
+                                  //             child: Padding(
+                                  //               padding: EdgeInsets.symmetric(
+                                  //                   vertical: Dimens.size12,
+                                  //                   horizontal: Dimens.size30),
+                                  //               child: Row(
+                                  //                 mainAxisAlignment:
+                                  //                 MainAxisAlignment.start,
+                                  //                 children: [
+                                  //                   ClipRRect(
+                                  //                       clipBehavior: Clip
+                                  //                           .antiAliasWithSaveLayer,
+                                  //                       borderRadius:
+                                  //                       BorderRadius.circular(2),
+                                  //                       child: Image.asset(
+                                  //                         "assets/lang/${language.languageCode}.png",
+                                  //                         width: 18,
+                                  //                         height: 14,
+                                  //                         fit: BoxFit.cover,
+                                  //                       )),
+                                  //                   MySpacing.width(8),
+                                  //                   MyText.labelMedium(
+                                  //                       language.language ?? "")
+                                  //                 ],
+                                  //               ),
+                                  //             ),
+                                  //           ),
+                                  //       ],
+                                  //     )),
+                                  // const SizedBox(height: 20),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: Dimens.size10),
+                                    child: Stack(children: [
+                                      Visibility(
+                                        visible: userProfile == null,
+                                        child: Row(
+                                          children: [
+                                            SizedBox(
+                                              height: 40,
+                                              width: 145,
+                                              child: ElevatedButton(
+                                                style: ButtonStyle(
+                                                  elevation:
+                                                  const WidgetStatePropertyAll(
+                                                      0),
+                                                  backgroundColor:
+                                                  WidgetStatePropertyAll(
+                                                      notifier.buttoncolor),
+                                                  shape:
+                                                  const WidgetStatePropertyAll(
+                                                    RoundedRectangleBorder(
+                                                      borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              20)),
+                                                    ),
+                                                  ),
+                                                ),
+                                                onPressed: () {
+                                                  LoginPage().show(context);
+                                                  //AppPages.route(Paths.dashboardPath);
+                                                },
+                                                child: Text(L10nX.getStr.login,
+                                                    style: baseStyle.copyWith(
+                                                        fontSize: 12,
+                                                        color: Colors.white)),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 10),
+                                            SizedBox(
+                                              height: 40,
+                                              width: 145,
+                                              child: ElevatedButton(
+                                                style: ButtonStyle(
+                                                  elevation:
+                                                  const WidgetStatePropertyAll(
+                                                      0),
+                                                  backgroundColor:
+                                                  WidgetStatePropertyAll(
+                                                      notifier.whitecolor),
+                                                  shape: WidgetStatePropertyAll(
+                                                    RoundedRectangleBorder(
+                                                      side: BorderSide(
+                                                          color: notifier
+                                                              .buttoncolor,
+                                                          width: 2),
+                                                      borderRadius:
+                                                      const BorderRadius
+                                                          .all(
+                                                          Radius.circular(
+                                                              20)),
+                                                    ),
+                                                  ),
+                                                ),
+                                                onPressed: () {
+                                                  Register().show(context);
+                                                },
+                                                child: Text(
+                                                    L10nX.getStr.sign_up,
+                                                    style: baseStyle.copyWith(
+                                                        fontSize: 12,
+                                                        color: notifier
+                                                            .buttoncolor)),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Visibility(
+                                        visible: userProfile != null,
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                              height: 40,
+                                              width: 145,
+                                              child: ElevatedButton(
+                                                style: ButtonStyle(
+                                                  elevation:
+                                                  const WidgetStatePropertyAll(
+                                                      0),
+                                                  backgroundColor:
+                                                  WidgetStatePropertyAll(
+                                                      ColorConst
+                                                          .whiteColor),
+                                                  shape:
+                                                  const WidgetStatePropertyAll(
+                                                    RoundedRectangleBorder(
+                                                      borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              20)),
+                                                    ),
+                                                  ),
+                                                ),
+                                                onPressed: () {
+                                                  AuthorManager()
+                                                      .handleLogout();
+                                                  AppPages.routeName(
+                                                      Routes.landingPageRoute,
+                                                      isReplace: true);
+                                                },
+                                                child: Text(
+                                                    L10nX.getStr.sign_out_text,
+                                                    style: baseStyle.copyWith(
+                                                        fontSize: 12,
+                                                        color: Colors.red)),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ]),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: constraints.maxWidth < 500 ? 10 : 25,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            });
       },
     );
   }
@@ -1043,90 +1157,108 @@ class _LandingPageScreenState extends State<LandingPageScreen>
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                StatefulBuilder(builder: (context, setState) {
-                  return AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          width: 2,
-                          color: (isHover)
-                              ? notifier.sugestionbutton
-                              : Colors.transparent),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        double itemWidth = ResponsiveInfo.isPhone()
-                            ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
-                            : (constraints.maxWidth < 1100)
-                            ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
-                            :(constraints.maxWidth < 1600)
-                            ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
-                            :Dimens.size340;
-                        if (differrentController.offset >= 0) {
-                          differrentController.animateTo(differrentController.offset - itemWidth - 36*2,
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeInOut,
-                          );
-                        }
-                      },
-                      onHover: (val) {
-                        setState(() {
-                          isHover = val;
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(13),
-                        child: Image.asset(
-                          'assets/Icons/arrowlefticon.png',
-                          width: 15,
-                          color: notifier.subgreycolor,
+                StatefulBuilder(
+                  builder: (context, setState) {
+                    return AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                            width: 2,
+                            color: (isHover)
+                                ? notifier.sugestionbutton
+                                : Colors.transparent),
+                      ),
+                      child: InkWell(
+                        onTap: () {
+                          double itemWidth = ResponsiveInfo.isPhone()
+                              ? (constraints.maxWidth -
+                              Dimens.size36 * 2 -
+                              Dimens.size20)
+                              : (constraints.maxWidth < 1100)
+                              ? ((constraints.maxWidth) * 3 / 4 -
+                              Dimens.size36 * 4) /
+                              2
+                              : (constraints.maxWidth < 1600)
+                              ? ((constraints.maxWidth) * 3 / 4 -
+                              Dimens.size36 * 6) /
+                              3
+                              : Dimens.size340;
+                          if (differrentController.offset >= 0) {
+                            differrentController.animateTo(
+                              differrentController.offset - itemWidth - 36 * 2,
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.easeInOut,
+                            );
+                          }
+                        },
+                        onHover: (val) {
+                          setState(() {
+                            isHover = val;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(13),
+                          child: Image.asset(
+                            'assets/Icons/arrowlefticon.png',
+                            width: 15,
+                            color: notifier.subgreycolor,
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },),
+                    );
+                  },
+                ),
                 const SizedBox(width: 10),
-                StatefulBuilder(builder: (context, setState) {
-                  return AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          width: 2,
-                          color: (isHover2)
-                              ? notifier.sugestionbutton
-                              : Colors.transparent),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        double itemWidth = ResponsiveInfo.isPhone()
-                            ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
-                            : (constraints.maxWidth < 1100)
-                            ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
-                            :(constraints.maxWidth < 1600)
-                            ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
-                            :Dimens.size340;
-                        if (differrentController.offset >= 0) {
-                          differrentController.animateTo(differrentController.offset + itemWidth + 36*2,
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeInOut,
-                          );
-                        }
-                      },
-                      onHover: (val) {
-                        setState(() {
-                          isHover2 = val;
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(13),
-                        child: Image.asset('assets/Icons/arrowrighticon.png',
-                            width: 15, color: notifier.subgreycolor),
+                StatefulBuilder(
+                  builder: (context, setState) {
+                    return AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                            width: 2,
+                            color: (isHover2)
+                                ? notifier.sugestionbutton
+                                : Colors.transparent),
                       ),
-                    ),
-                  );
-                },)
+                      child: InkWell(
+                        onTap: () {
+                          double itemWidth = ResponsiveInfo.isPhone()
+                              ? (constraints.maxWidth -
+                              Dimens.size36 * 2 -
+                              Dimens.size20)
+                              : (constraints.maxWidth < 1100)
+                              ? ((constraints.maxWidth) * 3 / 4 -
+                              Dimens.size36 * 4) /
+                              2
+                              : (constraints.maxWidth < 1600)
+                              ? ((constraints.maxWidth) * 3 / 4 -
+                              Dimens.size36 * 6) /
+                              3
+                              : Dimens.size340;
+                          if (differrentController.offset >= 0) {
+                            differrentController.animateTo(
+                              differrentController.offset + itemWidth + 36 * 2,
+                              duration: const Duration(milliseconds: 200),
+                              curve: Curves.easeInOut,
+                            );
+                          }
+                        },
+                        onHover: (val) {
+                          setState(() {
+                            isHover2 = val;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(13),
+                          child: Image.asset('assets/Icons/arrowrighticon.png',
+                              width: 15, color: notifier.subgreycolor),
+                        ),
+                      ),
+                    );
+                  },
+                )
               ],
             ),
           ],
@@ -1135,72 +1267,73 @@ class _LandingPageScreenState extends State<LandingPageScreen>
     );
   }
 
-  Widget buildSuggestItem(
-      {required BoxConstraints constraints,
-      required String imageAssetName,
-      String? title,
-      String? content}) {
+  Widget buildSuggestItem({required BoxConstraints constraints,
+    required String imageAssetName,
+    String? title,
+    String? content}) {
     return StatefulBuilder(
       builder: (BuildContext context, void Function(void Function()) setState) {
         return Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: Dimens.size36, vertical: Dimens.size20),
-          child: SizedBox(
-            width: ResponsiveInfo.isPhone()
-                ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
-                : (constraints.maxWidth < 1100)
-                ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 4) / 2
-                :(constraints.maxWidth < 1600)
-                ? ((constraints.maxWidth) * 3/4 - Dimens.size36 * 6) / 3
-                :Dimens.size340,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ImageManager().getSvgImage(imageAssetName,
-                    isSvgFolder: false,
-                    height: constraints.maxWidth < 750
-                        ? 80
-                        : constraints.maxWidth < 1000
-                        ? 100
-                        : 120),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      title ?? "",
-                      style: TextStyleConstant.textStyleBlack18w600.copyWith(
-                        fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
-                        color: notifier.blackcolor,
+            padding: EdgeInsets.symmetric(
+                horizontal: Dimens.size36, vertical: Dimens.size20),
+            child: SizedBox(
+              width: ResponsiveInfo.isPhone()
+                  ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
+                  : (constraints.maxWidth < 1100)
+                  ? ((constraints.maxWidth) * 3 / 4 - Dimens.size36 * 4) / 2
+                  : (constraints.maxWidth < 1600)
+                  ? ((constraints.maxWidth) * 3 / 4 -
+                  Dimens.size36 * 6) /
+                  3
+                  : Dimens.size340,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ImageManager().getSvgImage(imageAssetName,
+                      isSvgFolder: false,
+                      height: constraints.maxWidth < 750
+                          ? 80
+                          : constraints.maxWidth < 1000
+                          ? 100
+                          : 120),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        title ?? "",
+                        style: TextStyleConstant.textStyleBlack18w600.copyWith(
+                          fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
+                          color: notifier.blackcolor,
+                        ),
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
                       ),
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      content ?? "",
-                      style: TextStyleConstant.textStyleBlack12w400.copyWith(
-                        fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
-                        color: notifier.blackcolor,
+                      const SizedBox(
+                        height: 10,
                       ),
-                      textAlign: TextAlign.center,
-                      maxLines: 3,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  width: ResponsiveInfo.isPhone()
-                      ? (sugindex == 5 ? 0 : 16)
-                      : (sugindex == 5 ? 0 : constraints.maxWidth / 24),
-                ),
-              ],
-            ),
-          ));
+                      Text(
+                        content ?? "",
+                        style: TextStyleConstant.textStyleBlack12w400.copyWith(
+                          fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
+                          color: notifier.blackcolor,
+                        ),
+                        textAlign: TextAlign.center,
+                        maxLines: 3,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: ResponsiveInfo.isPhone()
+                        ? (sugindex == 5 ? 0 : 16)
+                        : (sugindex == 5 ? 0 : constraints.maxWidth / 24),
+                  ),
+                ],
+              ),
+            ));
       },
     );
   }
@@ -1287,7 +1420,6 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                   controller: whyChooseUsController,
                   scrollDirection: Axis.horizontal,
                   physics: const NeverScrollableScrollPhysics(),
-
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -1402,19 +1534,19 @@ List<lottieAnim> lottiecontent = [
     lottiefile: 'assets/deshboard/travel1.json',
     title: 'Exclusive trip',
     subtitle:
-        'From exotic destinations to hidden gems, our user-friendly interface makes planning your next adventure a breeze',
+    'From exotic destinations to hidden gems, our user-friendly interface makes planning your next adventure a breeze',
   ),
   lottieAnim(
     lottiefile: 'assets/deshboard/travel2.json',
     title: 'Your journey',
     subtitle:
-        'From dreamy destinations to personalized itineraries, we empower you to shape your journey.',
+    'From dreamy destinations to personalized itineraries, we empower you to shape your journey.',
   ),
   lottieAnim(
     lottiefile: 'assets/deshboard/travel3.json',
     title: 'Book simply',
     subtitle:
-        'Our platform lets you wander wisely, offering a streamlined booking experience for your dream destinations.',
+    'Our platform lets you wander wisely, offering a streamlined booking experience for your dream destinations.',
   ),
 ];
 
@@ -1450,7 +1582,10 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: MediaQuery.of(context).size.width*3/4,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width * 3 / 4,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: SingleChildScrollView(
@@ -1465,49 +1600,53 @@ class CustomDrawer extends StatelessWidget {
                 itemCount: 7,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
-                return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
-                  return  Container(
-                   // width: 250,
-                    decoration: BoxDecoration(
-                        border: Border(
-                            bottom: BorderSide(
-                              width: 1,
-                              color: Color(0XD9D9D9FF),
-                            )
-                        )
-                    ),
-                    //height: 30,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: TextButton(
-                          iconAlignment: IconAlignment.end,
-                          style: TextButton.styleFrom(
-                            overlayColor: Colors.black,
-                            iconColor: ColorConst.blackColor
-                          ),
-                          onPressed: () {
-                            Scrollable.ensureVisible(
-                                GlobalObjectKey(index).currentContext!,
-                                duration: Duration(seconds: 1),
-                                curve: Curves.easeInOutCubic);
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(landingPageTitles[index],
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
+                  return StatefulBuilder(
+                    builder: (BuildContext context,
+                        void Function(void Function()) setState) {
+                      return Container(
+                        // width: 250,
+                        decoration: BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(
+                                  width: 1,
+                                  color: Color(0XD9D9D9FF),
+                                ))),
+                        //height: 30,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: TextButton(
+                              iconAlignment: IconAlignment.end,
+                              style: TextButton.styleFrom(
+                                  overlayColor: Colors.black,
+                                  iconColor: ColorConst.blackColor),
+                              onPressed: () {
+                                Scrollable.ensureVisible(
+                                    GlobalObjectKey(index).currentContext!,
+                                    duration: Duration(seconds: 1),
+                                    curve: Curves.easeInOutCubic);
+                                Navigator.of(context).pop();
+                              },
+                              child: Text(
+                                landingPageTitles[index],
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   );
-                },);
-              },),
-              SizedBox(height: 12,),
+                },
+              ),
+              SizedBox(
+                height: 12,
+              ),
               SizedBox(
                 height: 40,
                 // width: 300,
@@ -1523,12 +1662,10 @@ class CustomDrawer extends StatelessWidget {
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            border: Border.all(
-                                color: Colors.black
-                            ),
+                            border: Border.all(color: Colors.black),
                           ),
-                          child: SvgPicture.asset(logos[index], color: ColorConst.blackColor,
-                              height: 20),
+                          child: SvgPicture.asset(logos[index],
+                              color: ColorConst.blackColor, height: 20),
                         ),
                         const SizedBox(width: 10),
                       ],
@@ -1536,7 +1673,9 @@ class CustomDrawer extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: 12,),
+              SizedBox(
+                height: 12,
+              ),
               ListView.builder(
                 scrollDirection: Axis.vertical,
                 itemCount: contacts.length,
@@ -1545,8 +1684,7 @@ class CustomDrawer extends StatelessWidget {
                   return EndOfPage.buildContactInfoItem(
                       textColor: Colors.black,
                       contacts: contacts[index],
-                      icon: contactsImage[index]
-                  );
+                      icon: contactsImage[index]);
                 },
               ),
             ],
@@ -1556,8 +1694,10 @@ class CustomDrawer extends StatelessWidget {
     );
   }
 }
+
 class ShowCardModel with ChangeNotifier {
-  bool  _showCard = false;
+  bool _showCard = false;
+
   bool get showCard => _showCard;
 
   void onChangerShowCard(bool showCard) {
