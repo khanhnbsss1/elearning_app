@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 const PORT = 60000;
-const HOST = '192.168.1.234:9090';
+const HOST = '0.0.0.0';
 
 // Serve static files from the project directory
 app.use(express.static('.'));
