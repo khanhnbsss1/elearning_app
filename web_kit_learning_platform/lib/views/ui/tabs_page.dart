@@ -509,7 +509,7 @@ class _TabsPageState extends State<TabsPage>
                             TabBar(
                               controller: controller.customTabController2,
                               isScrollable: true,
-                              physics: const NeverScrollableScrollPhysics(),
+                              // physics: const NeverScrollableScrollPhysics(),
                               indicator: MyTabIndicator(
                                   indicatorColor: contentTheme.primary,
                                   indicatorStyle: MyTabIndicatorStyle.circle,

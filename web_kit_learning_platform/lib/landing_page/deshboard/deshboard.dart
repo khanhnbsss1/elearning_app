@@ -103,17 +103,15 @@ class _LandingPageScreenState extends State<LandingPageScreen>
   List<Widget> listWiget = [];
   late double oldWidth = 0;
 
+  List<GlobalObjectKey> navigationKey =
+      List.generate(8, (index) => GlobalObjectKey(index));
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     notifier = Provider.of<ColorNotifier>(context, listen: true);
-    height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
 
     if (width < 550) {
       return buildMobile(context);
@@ -125,15 +123,13 @@ class _LandingPageScreenState extends State<LandingPageScreen>
   Widget buildMobile(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 0.0),
             child: buildTabBar(
                 constraints: BoxConstraints(
-                  maxWidth: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
-                )),
+              maxWidth: MediaQuery.of(context).size.width,
+            )),
           )),
       endDrawer: CustomDrawer(),
       backgroundColor: notifier.backgroundColor,
@@ -177,10 +173,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
   }
 
   Widget appbarLeft(constraints) {
-    double width = MediaQuery
-        .of(context)
-        .size
-        .width;
+    double width = MediaQuery.of(context).size.width;
     double itemCardWidth = (width < 1100) ? 90 : 140;
     bool isHovered = false;
 
@@ -189,7 +182,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
       listWiget.clear();
       listWiget.addAll({
         SizedBox(
-          key: GlobalObjectKey(0),
+          key: navigationKey[0],
         ),
         (width > 550) ? buildTabBar(constraints: constraints) : SizedBox(),
         Padding(
@@ -197,8 +190,8 @@ class _LandingPageScreenState extends State<LandingPageScreen>
             horizontal: constraints.maxWidth < 760
                 ? 10
                 : constraints.maxWidth < 1000
-                ? 10
-                : constraints.maxWidth / 15,
+                    ? 10
+                    : constraints.maxWidth / 15,
             vertical: 10,
           ),
           child: StatefulBuilder(
@@ -211,7 +204,6 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     if (snapshot.hasData) {
                       userProfile = snapshot.data as UserProfile;
                     }
-                    print('${userProfile == null} appbar left');
                     return Stack(
                       children: [
                         LayoutBuilder(
@@ -220,19 +212,22 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: ResponsiveInfo.isPhone()
-                                  ? Image.asset(
-                                  'assets/deshboard/winterlandscape.png',
-                                  height: constraints.maxWidth < 500
-                                      ? 250
-                                      : 400,
-                                  width: constraints.maxWidth,
-                                  fit: BoxFit.cover)
-                                  : Image.asset(
-                                  'assets/deshboard/winterlandscape.png',
-                                  height: 600,
-                                  width: constraints.maxWidth,
-                                  fit: BoxFit.cover),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: ResponsiveInfo.isPhone()
+                                    ? Image.asset(
+                                        'assets/deshboard/winterlandscape.png',
+                                        height: constraints.maxWidth < 500
+                                            ? 250
+                                            : 400,
+                                        width: constraints.maxWidth,
+                                        fit: BoxFit.cover)
+                                    : Image.asset(
+                                        'assets/deshboard/winterlandscape.png',
+                                        height: 600,
+                                        width: constraints.maxWidth,
+                                        fit: BoxFit.cover),
+                              ),
                             );
                           },
                         ),
@@ -243,38 +238,35 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                           bottom: 0,
                           child: Center(
                               child: MouseRegion(
-                                onEnter: (_) =>
-                                    setState(() => isHovered = true),
-                                onExit: (_) =>
-                                    setState(() => isHovered = false),
-                                child: GestureDetector(
-                                  child: AnimatedContainer(
-                                    duration: Duration(milliseconds: 100),
-                                    transform: Matrix4.identity()
-                                      ..scale(isHovered ? 1.2 : 1.0),
-                                    child: TextButton(
-                                      onPressed: () {
-                                        userProfile == null
-                                            ? LoginPage().show(context)
-                                            : AppPages.routeName(
+                            onEnter: (_) => setState(() => isHovered = true),
+                            onExit: (_) => setState(() => isHovered = false),
+                            child: GestureDetector(
+                              child: AnimatedContainer(
+                                duration: Duration(milliseconds: 100),
+                                transform: Matrix4.identity()
+                                  ..scale(isHovered ? 1.2 : 1.0),
+                                child: TextButton(
+                                  onPressed: () {
+                                    userProfile == null
+                                        ? LoginPage().show(context)
+                                        : AppPages.routeName(
                                             Routes.dashboardRoute);
-                                      },
-                                      style: TextButton.styleFrom(
-                                        backgroundColor: ColorConst.mainColor,
-                                        foregroundColor: ColorConst
-                                            .whiteColor,
-                                      ),
-                                      child: Text(
-                                        L10nX.getStr.lets_study,
-                                        style: TextStyle(
-                                          fontSize: 24,
-                                          color: Colors.white,
-                                        ),
-                                      ),
+                                  },
+                                  style: TextButton.styleFrom(
+                                    backgroundColor: ColorConst.mainColor,
+                                    foregroundColor: ColorConst.whiteColor,
+                                  ),
+                                  child: Text(
+                                    L10nX.getStr.lets_study,
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
-                              )),
+                              ),
+                            ),
+                          )),
                         )
                       ],
                     );
@@ -292,7 +284,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           ),
         ),
         SizedBox(
-          key: GlobalObjectKey(1),
+          key: navigationKey[1],
           height: width < 550 ? 10 : 100,
         ),
         buildDifferentListWidget(constraints: constraints),
@@ -303,12 +295,12 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           ),
         ),
         SizedBox(
-          key: GlobalObjectKey(2),
+          key: navigationKey[2],
           height: width < 550 ? 10 : 100,
         ),
         WhoThisCourseIsFor(),
         SizedBox(
-          key: GlobalObjectKey(3),
+          key: navigationKey[3],
           height: width < 550 ? 10 : 100,
         ),
         const TeacherList(),
@@ -319,12 +311,12 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           ),
         ),
         SizedBox(
-          key: GlobalObjectKey(4),
+          key: navigationKey[4],
           height: width < 550 ? 10 : 100,
         ),
         const LandingPageCourseList(),
         SizedBox(
-          key: GlobalObjectKey(5),
+          key: navigationKey[5],
           height: width < 550 ? 10 : 100,
         ),
         ReviewList(
@@ -338,7 +330,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           ),
         ),
         SizedBox(
-          key: GlobalObjectKey(6),
+          key: navigationKey[6],
           height: width < 550 ? 50 : 100,
         ),
         buildWhyChooseUsListWidget(constraints: constraints),
@@ -349,7 +341,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           ),
         ),
         SizedBox(
-          key: GlobalObjectKey(7),
+          key: navigationKey[7],
           height: width < 550 ? 10 : 100,
         ),
         ReviewList(
@@ -409,18 +401,12 @@ class _LandingPageScreenState extends State<LandingPageScreen>
       ),
       Positioned(
         child: Visibility(
-          visible: MediaQuery
-              .of(context)
-              .size
-              .width > 550,
+          visible: MediaQuery.of(context).size.width > 550,
           child: Align(
             alignment: Alignment.topCenter,
             child: Padding(
               padding: EdgeInsets.only(
-                  top: (MediaQuery
-                      .of(context)
-                      .size
-                      .width < 1050) ? 60 : 30),
+                  top: (MediaQuery.of(context).size.width < 1050) ? 60 : 30),
               child: Card(
                 margin: EdgeInsets.only(top: width < 1100 ? 10 : 20),
                 shadowColor: Colors.red,
@@ -439,7 +425,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     Wrap(
                       children: List<Widget>.generate(
                         7,
-                            (int index) {
+                        (int index) {
                           return StatefulBuilder(
                             builder: (BuildContext context,
                                 void Function(void Function()) setState) {
@@ -451,7 +437,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                     return StatefulBuilder(
                                       builder: (BuildContext context,
                                           void Function(void Function())
-                                          setState) {
+                                              setState) {
                                         return Center(
                                           child: TextButton(
                                             style: TextButton.styleFrom(
@@ -462,7 +448,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                                   GlobalObjectKey(index)
                                                       .currentContext!,
                                                   duration:
-                                                  Duration(seconds: 1),
+                                                      Duration(seconds: 1),
                                                   curve: Curves.easeInOutCubic);
                                             },
                                             child: Text(
@@ -470,7 +456,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize:
-                                                  (width < 1100) ? 10 : 18,
+                                                      (width < 1100) ? 10 : 18,
                                                   color: (isHovered)
                                                       ? notifier.redcolor
                                                       : Colors.black,
@@ -478,7 +464,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                                       ? TextDecoration.underline
                                                       : TextDecoration.none,
                                                   decorationColor:
-                                                  notifier.redcolor,
+                                                      notifier.redcolor,
                                                   decorationThickness: 2),
                                             ),
                                           ),
@@ -521,13 +507,13 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     left: constraints.maxWidth < 550
                         ? 0
                         : constraints.maxWidth < 1050
-                        ? 20
-                        : 40,
+                            ? 20
+                            : 40,
                     right: constraints.maxWidth < 550
                         ? 0
                         : constraints.maxWidth < 1050
-                        ? 20
-                        : 40),
+                            ? 20
+                            : 40),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -540,17 +526,17 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                           (constraints.maxWidth < 550)
                               ? SizedBox()
                               : Expanded(
-                            child: Text(
-                              L10nX.getStr.app_name,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: baseStyle.copyWith(
-                                color: notifier.blackcolor,
-                                fontSize:
-                                constraints.maxWidth < 550 ? 20 : 24,
-                              ),
-                            ),
-                          ),
+                                  child: Text(
+                                    L10nX.getStr.app_name,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: baseStyle.copyWith(
+                                      color: notifier.blackcolor,
+                                      fontSize:
+                                          constraints.maxWidth < 550 ? 20 : 24,
+                                    ),
+                                  ),
+                                ),
                         ],
                       ),
                     ),
@@ -558,11 +544,11 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                       children: [
                         Visibility(
                           visible:
-                          // userProfile != null && ResponsiveInfo.isTablet(),
-                          false,
+                              // userProfile != null && ResponsiveInfo.isTablet(),
+                              false,
                           child: Padding(
                             padding:
-                            EdgeInsets.symmetric(horizontal: Dimens.size16),
+                                EdgeInsets.symmetric(horizontal: Dimens.size16),
                             child: PopupMenuButton(
                               onOpened: () {
                                 AppPages.routeName(Routes.dashboardRoute);
@@ -587,100 +573,100 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                             ),
                           ),
                         ),
-                        constraints.maxWidth < 1000
-                            ? const SizedBox()
-                            : Row(
-                          children: [
-                            PopupMenuButton(
-                              tooltip: '',
-                              padding: const EdgeInsets.all(0),
-                              offset: const Offset(120, 30),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              // initialValue: selectedMenu,
-                              constraints: const BoxConstraints(
-                                maxWidth: 315,
-                                maxHeight: 270,
-                              ),
-                              color: notifier.whitecolor,
-                              child: Text(
-                                L10nX.getStr.application,
-                                style: baseStyle.copyWith(
-                                    color: supportHover
-                                        ? notifier.blackcolor
-                                        : notifier.subgreycolor,
-                                    fontSize: 16),
-                              ),
-                              itemBuilder: (BuildContext context) =>
-                              <PopupMenuEntry<SampleItem2>>[
-                                PopupMenuItem<SampleItem2>(
-                                  enabled: true,
-                                  value: SampleItem2.itemOne,
-                                  onTap: () {},
-                                  child: Row(children: [
-                                    const SizedBox(width: 10),
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(height: 20),
-                                        Text(L10nX.getStr.download,
-                                            style: baseStyle.copyWith(
-                                              fontSize: 16,
-                                              color:
-                                              notifier.subgreycolor,
-                                            )),
-                                        const SizedBox(height: 10),
-                                        SizedBox(
-                                          height: 100,
-                                          child: Column(
-                                            children: [
-                                              const SizedBox(height: 10),
-                                              SvgPicture.asset(
-                                                  'assets/deshboard/support/AppStoreBadge.svg',
-                                                  height: 40),
-                                              const SizedBox(height: 10),
-                                              SvgPicture.asset(
-                                                  'assets/deshboard/support/GooglePlayStoreBadge.svg',
-                                                  height: 40),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(height: 20),
-                                      ],
-                                    ),
-                                    const SizedBox(width: 30),
-                                    Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          const SizedBox(height: 20),
-                                          Text(L10nX.getStr.scan_code,
-                                              style: baseStyle.copyWith(
-                                                fontSize: 16,
-                                                color:
-                                                notifier.subgreycolor,
-                                              )),
-                                          const SizedBox(height: 12),
-                                          SizedBox(
-                                            height: 100,
-                                            child: Image.asset(
-                                                'assets/deshboard/support/qrCode.png',
-                                                height: 100),
-                                          ),
-                                          const SizedBox(height: 20),
-                                        ]),
-                                    const SizedBox(width: 10),
-                                  ]),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 25,
-                            ),
-                          ],
-                        ),
+                        // constraints.maxWidth < 1000
+                        //     ? const SizedBox()
+                        //     : Row(
+                        //   children: [
+                        //     PopupMenuButton(
+                        //       tooltip: '',
+                        //       padding: const EdgeInsets.all(0),
+                        //       offset: const Offset(120, 30),
+                        //       shape: RoundedRectangleBorder(
+                        //         borderRadius: BorderRadius.circular(20),
+                        //       ),
+                        //       // initialValue: selectedMenu,
+                        //       constraints: const BoxConstraints(
+                        //         maxWidth: 315,
+                        //         maxHeight: 270,
+                        //       ),
+                        //       color: notifier.whitecolor,
+                        //       child: Text(
+                        //         L10nX.getStr.application,
+                        //         style: baseStyle.copyWith(
+                        //             color: supportHover
+                        //                 ? notifier.blackcolor
+                        //                 : notifier.subgreycolor,
+                        //             fontSize: 16),
+                        //       ),
+                        //       itemBuilder: (BuildContext context) =>
+                        //       <PopupMenuEntry<SampleItem2>>[
+                        //         PopupMenuItem<SampleItem2>(
+                        //           enabled: true,
+                        //           value: SampleItem2.itemOne,
+                        //           onTap: () {},
+                        //           child: Row(children: [
+                        //             const SizedBox(width: 10),
+                        //             Column(
+                        //               crossAxisAlignment:
+                        //               CrossAxisAlignment.start,
+                        //               children: [
+                        //                 const SizedBox(height: 20),
+                        //                 Text(L10nX.getStr.download,
+                        //                     style: baseStyle.copyWith(
+                        //                       fontSize: 16,
+                        //                       color:
+                        //                       notifier.subgreycolor,
+                        //                     )),
+                        //                 const SizedBox(height: 10),
+                        //                 SizedBox(
+                        //                   height: 100,
+                        //                   child: Column(
+                        //                     children: [
+                        //                       const SizedBox(height: 10),
+                        //                       SvgPicture.asset(
+                        //                           'assets/deshboard/support/AppStoreBadge.svg',
+                        //                           height: 40),
+                        //                       const SizedBox(height: 10),
+                        //                       SvgPicture.asset(
+                        //                           'assets/deshboard/support/GooglePlayStoreBadge.svg',
+                        //                           height: 40),
+                        //                     ],
+                        //                   ),
+                        //                 ),
+                        //                 const SizedBox(height: 20),
+                        //               ],
+                        //             ),
+                        //             const SizedBox(width: 30),
+                        //             Column(
+                        //                 crossAxisAlignment:
+                        //                 CrossAxisAlignment.start,
+                        //                 children: [
+                        //                   const SizedBox(height: 20),
+                        //                   Text(L10nX.getStr.scan_code,
+                        //                       style: baseStyle.copyWith(
+                        //                         fontSize: 16,
+                        //                         color:
+                        //                         notifier.subgreycolor,
+                        //                       )),
+                        //                   const SizedBox(height: 12),
+                        //                   SizedBox(
+                        //                     height: 100,
+                        //                     child: Image.asset(
+                        //                         'assets/deshboard/support/qrCode.png',
+                        //                         height: 100),
+                        //                   ),
+                        //                   const SizedBox(height: 20),
+                        //                 ]),
+                        //             const SizedBox(width: 10),
+                        //           ]),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //     const SizedBox(
+                        //       width: 25,
+                        //     ),
+                        //   ],
+                        // ),
                         Row(
                           children: [
                             PopupMenuButton(
@@ -701,18 +687,17 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                 child: Center(
                                   child: Row(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.center,
+                                        CrossAxisAlignment.center,
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       ClipRRect(
                                           clipBehavior:
-                                          Clip.antiAliasWithSaveLayer,
+                                              Clip.antiAliasWithSaveLayer,
                                           borderRadius:
-                                          BorderRadius.circular(2),
+                                              BorderRadius.circular(2),
                                           child: Image.asset(
-                                            "assets/lang/${currentLocale
-                                                .languageCode}.png",
+                                            "assets/lang/${currentLocale.languageCode}.png",
                                             width: 18,
                                             height: 14,
                                             fit: BoxFit.cover,
@@ -725,7 +710,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                 ),
                               ),
                               itemBuilder: (BuildContext context) =>
-                              <PopupMenuEntry<SampleItem2>>[
+                                  <PopupMenuEntry<SampleItem2>>[
                                 PopupMenuItem<SampleItem2>(
                                   enabled: true,
                                   value: SampleItem2.itemOne,
@@ -734,44 +719,43 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                     builder: (context, setState) {
                                       return Row(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               for (LanguageInfo language
-                                              in LanguageHelper()
-                                                  .supportedLanguages)
+                                                  in LanguageHelper()
+                                                      .supportedLanguages)
                                                 InkWell(
                                                   onTap: () {
                                                     LanguageHelper()
                                                         .changeLanguage(
-                                                        language, context);
+                                                            language, context);
                                                   },
                                                   child: Padding(
                                                     padding:
-                                                    EdgeInsets.symmetric(
-                                                        vertical:
-                                                        Dimens.size10,
-                                                        horizontal:
-                                                        Dimens.size8),
+                                                        EdgeInsets.symmetric(
+                                                            vertical:
+                                                                Dimens.size10,
+                                                            horizontal:
+                                                                Dimens.size8),
                                                     child: Row(
                                                       mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .start,
+                                                          MainAxisAlignment
+                                                              .start,
                                                       children: [
                                                         ClipRRect(
                                                             clipBehavior: Clip
                                                                 .antiAliasWithSaveLayer,
                                                             borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                2),
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        2),
                                                             child: Image.asset(
-                                                              "assets/lang/${language
-                                                                  .languageCode}.png",
+                                                              "assets/lang/${language.languageCode}.png",
                                                               width: 18,
                                                               height: 14,
                                                               fit: BoxFit.cover,
@@ -822,13 +806,13 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                             ),
                             clipBehavior: Clip.hardEdge,
                             child: userProfile != null &&
-                                (userProfile.avatar ?? "").isNotEmpty
+                                    (userProfile.avatar ?? "").isNotEmpty
                                 ? ImageManager()
-                                .getImageByUrl(userProfile.avatar ?? "")
+                                    .getImageByUrl(userProfile.avatar ?? "")
                                 : Image.asset(
-                              'assets/Icons/profileicon.png',
-                              scale: 2.5,
-                            ),
+                                    'assets/Icons/profileicon.png',
+                                    scale: 2.5,
+                                  ),
                           ),
                           onSelected: (SampleItem2 item) {
                             setState(() {
@@ -836,7 +820,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                             });
                           },
                           itemBuilder: (BuildContext context) =>
-                          <PopupMenuEntry<SampleItem2>>[
+                              <PopupMenuEntry<SampleItem2>>[
                             PopupMenuItem<SampleItem2>(
                               enabled: true,
                               value: SampleItem2.itemOne,
@@ -854,9 +838,9 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                       },
                                       child: Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                            MainAxisAlignment.start,
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                            CrossAxisAlignment.center,
                                         children: [
                                           const SizedBox(width: 4),
                                           Icon(
@@ -929,18 +913,18 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                               child: ElevatedButton(
                                                 style: ButtonStyle(
                                                   elevation:
-                                                  const WidgetStatePropertyAll(
-                                                      0),
+                                                      const WidgetStatePropertyAll(
+                                                          0),
                                                   backgroundColor:
-                                                  WidgetStatePropertyAll(
-                                                      notifier.buttoncolor),
+                                                      WidgetStatePropertyAll(
+                                                          notifier.buttoncolor),
                                                   shape:
-                                                  const WidgetStatePropertyAll(
+                                                      const WidgetStatePropertyAll(
                                                     RoundedRectangleBorder(
                                                       borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(
-                                                              20)),
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  20)),
                                                     ),
                                                   ),
                                                 ),
@@ -961,11 +945,11 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                               child: ElevatedButton(
                                                 style: ButtonStyle(
                                                   elevation:
-                                                  const WidgetStatePropertyAll(
-                                                      0),
+                                                      const WidgetStatePropertyAll(
+                                                          0),
                                                   backgroundColor:
-                                                  WidgetStatePropertyAll(
-                                                      notifier.whitecolor),
+                                                      WidgetStatePropertyAll(
+                                                          notifier.whitecolor),
                                                   shape: WidgetStatePropertyAll(
                                                     RoundedRectangleBorder(
                                                       side: BorderSide(
@@ -973,10 +957,10 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                                               .buttoncolor,
                                                           width: 2),
                                                       borderRadius:
-                                                      const BorderRadius
-                                                          .all(
-                                                          Radius.circular(
-                                                              20)),
+                                                          const BorderRadius
+                                                              .all(
+                                                              Radius.circular(
+                                                                  20)),
                                                     ),
                                                   ),
                                                 ),
@@ -999,7 +983,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                              MainAxisAlignment.center,
                                           children: [
                                             SizedBox(
                                               height: 40,
@@ -1007,19 +991,19 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                               child: ElevatedButton(
                                                 style: ButtonStyle(
                                                   elevation:
-                                                  const WidgetStatePropertyAll(
-                                                      0),
+                                                      const WidgetStatePropertyAll(
+                                                          0),
                                                   backgroundColor:
-                                                  WidgetStatePropertyAll(
-                                                      ColorConst
-                                                          .whiteColor),
+                                                      WidgetStatePropertyAll(
+                                                          ColorConst
+                                                              .whiteColor),
                                                   shape:
-                                                  const WidgetStatePropertyAll(
+                                                      const WidgetStatePropertyAll(
                                                     RoundedRectangleBorder(
                                                       borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(
-                                                              20)),
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  20)),
                                                     ),
                                                   ),
                                                 ),
@@ -1125,15 +1109,15 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     style: TextStyleConstant
                         .titleTextColorOnBackgroundColorStyle14w400
                         .copyWith(
-                        fontSize: ResponsiveInfo.isPhone() ? 18 : 20,
-                        color: notifier.greycolor),
+                            fontSize: ResponsiveInfo.isPhone() ? 18 : 20,
+                            color: notifier.greycolor),
                     textAlign: TextAlign.center,
                   ),
                 ],
               ),
             ),
             SizedBox(
-              height: ResponsiveInfo.isPhone() ? 0 : constraints.maxWidth / 30,
+              height: ResponsiveInfo.isPhone() ? 0 : 16,
             ),
             Container(
               // height: Dimens.size240,
@@ -1141,13 +1125,14 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                 maxWidth: ResponsiveInfo.isPhone()
                     ? constraints.maxWidth - Dimens.size20
                     : constraints.maxWidth * 3 / 4,
+                maxHeight: constraints.maxWidth < 550 ? 200 : 300
               ),
-              height: 300,
               child: Center(
                 child: ListView(
+                  shrinkWrap: true,
                   controller: differrentController,
                   scrollDirection: Axis.horizontal,
-                  physics: const NeverScrollableScrollPhysics(),
+                  // physics: const NeverScrollableScrollPhysics(),
                   children: listItem,
                 ),
               ),
@@ -1172,17 +1157,17 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                         onTap: () {
                           double itemWidth = ResponsiveInfo.isPhone()
                               ? (constraints.maxWidth -
-                              Dimens.size36 * 2 -
-                              Dimens.size20)
+                                  Dimens.size36 * 2 -
+                                  Dimens.size20)
                               : (constraints.maxWidth < 1100)
-                              ? ((constraints.maxWidth) * 3 / 4 -
-                              Dimens.size36 * 4) /
-                              2
-                              : (constraints.maxWidth < 1600)
-                              ? ((constraints.maxWidth) * 3 / 4 -
-                              Dimens.size36 * 6) /
-                              3
-                              : Dimens.size340;
+                                  ? ((constraints.maxWidth) * 3 / 4 -
+                                          Dimens.size36 * 4) /
+                                      2
+                                  : (constraints.maxWidth < 1600)
+                                      ? ((constraints.maxWidth) * 3 / 4 -
+                                              Dimens.size36 * 6) /
+                                          3
+                                      : Dimens.size340;
                           if (differrentController.offset >= 0) {
                             differrentController.animateTo(
                               differrentController.offset - itemWidth - 36 * 2,
@@ -1225,17 +1210,17 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                         onTap: () {
                           double itemWidth = ResponsiveInfo.isPhone()
                               ? (constraints.maxWidth -
-                              Dimens.size36 * 2 -
-                              Dimens.size20)
+                                  Dimens.size36 * 2 -
+                                  Dimens.size20)
                               : (constraints.maxWidth < 1100)
-                              ? ((constraints.maxWidth) * 3 / 4 -
-                              Dimens.size36 * 4) /
-                              2
-                              : (constraints.maxWidth < 1600)
-                              ? ((constraints.maxWidth) * 3 / 4 -
-                              Dimens.size36 * 6) /
-                              3
-                              : Dimens.size340;
+                                  ? ((constraints.maxWidth) * 3 / 4 -
+                                          Dimens.size36 * 4) /
+                                      2
+                                  : (constraints.maxWidth < 1600)
+                                      ? ((constraints.maxWidth) * 3 / 4 -
+                                              Dimens.size36 * 6) /
+                                          3
+                                      : Dimens.size340;
                           if (differrentController.offset >= 0) {
                             differrentController.animateTo(
                               differrentController.offset + itemWidth + 36 * 2,
@@ -1266,75 +1251,68 @@ class _LandingPageScreenState extends State<LandingPageScreen>
     );
   }
 
-  Widget buildSuggestItem({required BoxConstraints constraints,
-    required String imageAssetName,
-    String? title,
-    String? content}) {
-    return StatefulBuilder(
-      builder: (BuildContext context, void Function(void Function()) setState) {
-        return Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: Dimens.size36, vertical: Dimens.size20),
-            child: SizedBox(
-              width: ResponsiveInfo.isPhone()
-                  ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
-                  : (constraints.maxWidth < 1100)
+  Widget buildSuggestItem(
+      {required BoxConstraints constraints,
+      required String imageAssetName,
+      String? title,
+      String? content}) {
+    return Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: Dimens.size36, vertical: Dimens.size20),
+        child: SizedBox(
+          width: ResponsiveInfo.isPhone()
+              ? (constraints.maxWidth - Dimens.size36 * 2 - Dimens.size20)
+              : (constraints.maxWidth < 1100)
                   ? ((constraints.maxWidth) * 3 / 4 - Dimens.size36 * 4) / 2
                   : (constraints.maxWidth < 1600)
-                  ? ((constraints.maxWidth) * 3 / 4 -
-                  Dimens.size36 * 6) /
-                  3
-                  : Dimens.size340,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ImageManager().getSvgImage(imageAssetName,
-                      isSvgFolder: false,
-                      height: constraints.maxWidth < 750
-                          ? 80
-                          : constraints.maxWidth < 1000
-                          ? 100
-                          : 120),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        title ?? "",
-                        style: TextStyleConstant.textStyleBlack18w600.copyWith(
-                          fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
-                          color: notifier.blackcolor,
-                        ),
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        content ?? "",
-                        style: TextStyleConstant.textStyleBlack12w400.copyWith(
-                          fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
-                          color: notifier.blackcolor,
-                        ),
-                        textAlign: TextAlign.center,
-                        maxLines: 3,
-                      ),
-                    ],
+                      ? ((constraints.maxWidth) * 3 / 4 -
+                              Dimens.size36 * 6) /
+                          3
+                      : Dimens.size340,
+          child: Align(
+            alignment: Alignment.center,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              // mainAxisSize: MainAxisSize.min,
+              children: [
+                ImageManager().getSvgImage(imageAssetName,
+                    isSvgFolder: false,
+                    height: constraints.maxWidth < 750
+                        ? 80
+                        : constraints.maxWidth < 1000
+                            ? 100
+                            : 120),
+                Text(
+                  title ?? "",
+                  style: TextStyleConstant.textStyleBlack18w600.copyWith(
+                    fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
+                    color: notifier.blackcolor,
                   ),
-                  SizedBox(
-                    width: ResponsiveInfo.isPhone()
-                        ? (sugindex == 5 ? 0 : 16)
-                        : (sugindex == 5 ? 0 : constraints.maxWidth / 24),
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  content ?? "",
+                  style: TextStyleConstant.textStyleBlack12w400.copyWith(
+                    fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
+                    color: notifier.blackcolor,
                   ),
-                ],
-              ),
-            ));
-      },
-    );
+                  textAlign: TextAlign.center,
+                  maxLines: 3,
+                ),
+                // SizedBox(
+                //   width: ResponsiveInfo.isPhone()
+                //       ? (sugindex == 5 ? 0 : 16)
+                //       : (sugindex == 5 ? 0 : constraints.maxWidth / 24),
+                // ),
+              ],
+            ),
+          ),
+        ));
   }
 
   Widget buildWhyChooseUsListWidget({
@@ -1397,16 +1375,16 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                 style: TextStyleConstant
                     .titleTextColorOnBackgroundColorStyle14w400
                     .copyWith(
-                    fontSize: constraints.maxWidth < 700 ? 16 : 18,
-                    color: notifier.greycolor),
+                        fontSize: constraints.maxWidth < 700 ? 16 : 18,
+                        color: notifier.greycolor),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
                 height: constraints.maxWidth < 550
                     ? 0
                     : constraints.maxWidth < 800
-                    ? constraints.maxWidth / 30
-                    : constraints.maxWidth / 30,
+                        ? constraints.maxWidth / 30
+                        : constraints.maxWidth / 30,
               ),
               Container(
                 // height: Dimens.size240,
@@ -1415,12 +1393,12 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                       ? constraints.maxWidth - Dimens.size20
                       : constraints.maxWidth * 3 / 4,
                 ),
-                height: 300,
+                height: constraints.maxWidth < 550 ? 250 : 300,
                 child: ListView(
                   controller: whyChooseUsController,
                   scrollDirection: Axis.horizontal,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children:  listItem,
+                  // physics: const NeverScrollableScrollPhysics(),
+                  children: listItem,
                 ),
               ),
               Row(
@@ -1530,19 +1508,19 @@ List<lottieAnim> lottiecontent = [
     lottiefile: 'assets/deshboard/travel1.json',
     title: 'Exclusive trip',
     subtitle:
-    'From exotic destinations to hidden gems, our user-friendly interface makes planning your next adventure a breeze',
+        'From exotic destinations to hidden gems, our user-friendly interface makes planning your next adventure a breeze',
   ),
   lottieAnim(
     lottiefile: 'assets/deshboard/travel2.json',
     title: 'Your journey',
     subtitle:
-    'From dreamy destinations to personalized itineraries, we empower you to shape your journey.',
+        'From dreamy destinations to personalized itineraries, we empower you to shape your journey.',
   ),
   lottieAnim(
     lottiefile: 'assets/deshboard/travel3.json',
     title: 'Book simply',
     subtitle:
-    'Our platform lets you wander wisely, offering a streamlined booking experience for your dream destinations.',
+        'Our platform lets you wander wisely, offering a streamlined booking experience for your dream destinations.',
   ),
 ];
 
@@ -1578,10 +1556,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: MediaQuery
-          .of(context)
-          .size
-          .width * 3 / 4,
+      width: MediaQuery.of(context).size.width * 3 / 4,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: SingleChildScrollView(
@@ -1604,9 +1579,9 @@ class CustomDrawer extends StatelessWidget {
                         decoration: BoxDecoration(
                             border: Border(
                                 bottom: BorderSide(
-                                  width: 1,
-                                  color: Color(0XD9D9D9FF),
-                                ))),
+                          width: 1,
+                          color: Color(0XD9D9D9FF),
+                        ))),
                         //height: 30,
                         child: Align(
                           alignment: Alignment.centerLeft,

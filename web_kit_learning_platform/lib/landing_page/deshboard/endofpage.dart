@@ -642,7 +642,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                         width: width / 1,
                         child: GridView.builder(
                           shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
+                          // physics: const NeverScrollableScrollPhysics(),
                           itemCount: endElements.length,
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,

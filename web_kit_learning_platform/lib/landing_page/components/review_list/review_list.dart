@@ -24,7 +24,8 @@ class ReviewList extends StatefulWidget {
   State<ReviewList> createState() => _ReviewListState();
 }
 
-class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientMixin{
+class _ReviewListState extends State<ReviewList>
+    with AutomaticKeepAliveClientMixin {
   late ColorNotifier notifier;
   int b = 9;
 
@@ -40,7 +41,11 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
     width = MediaQuery.of(context).size.width;
     return Container(
       width: width,
-      decoration: BoxDecoration(image: DecorationImage( image: AssetImage('assets/deshboard/landingpage6.jpg'),fit: (width < 1100) ? BoxFit.contain : BoxFit.fill),),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage('assets/deshboard/landingpage6.jpg'),
+            fit: (width < 1100) ? BoxFit.contain : BoxFit.fill),
+      ),
       // color: Colors.green,
       child: BlocProvider(
           create: (context) {
@@ -111,9 +116,9 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
                         style: TextStyleConstant
                             .titleTextColorOnBackgroundColorStyle14w400
                             .copyWith(
-                            fontWeight: FontWeight.bold,
-                            fontSize: constraints.maxWidth < 550 ? 28 : 45,
-                            color: notifier.blackcolor)),
+                                fontWeight: FontWeight.bold,
+                                fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                                color: notifier.blackcolor)),
                   ),
                   SizedBox(
                     height: constraints.maxWidth < 550 ? 10 : 20,
@@ -126,10 +131,12 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
                             ? constraints.maxWidth / 0.45
                             : constraints.maxWidth / 1.2,
                     child: LayoutBuilder(
-                      builder: (BuildContext context, BoxConstraints constraints) {
+                      builder:
+                          (BuildContext context, BoxConstraints constraints) {
                         List<Widget> listOfCourse = List.empty(growable: true);
                         for (ReviewLandingPageInfo reviewLandingPageInfo
-                            in state.reviewListLandingPageResponseModel?.data ?? []) {
+                            in state.reviewListLandingPageResponseModel?.data ??
+                                []) {
                           listOfCourse.add(
                             buildReviewItem(
                                 constraints: constraints,
@@ -138,96 +145,109 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
                           );
                         }
                         return Center(
-                          child: SizedBox(
-                            height: 400,
-                            child: ListView(
-                              controller: scrollCont,
-                              physics: const NeverScrollableScrollPhysics(),
-                              scrollDirection: Axis.horizontal,
-                              children:  listOfCourse,
+                            child: Scrollbar(
+                          controller: scrollCont,
+                          thumbVisibility: false,
+                          trackVisibility: false,
+                          child: SingleChildScrollView(
+                            controller: scrollCont,
+                            // physics: const NeverScrollableScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: listOfCourse,
                             ),
                           ),
-                        );
+                        ));
                       },
                     ),
                   ),
-                  (constraints.maxWidth < 550) ? const SizedBox(height: 4) :const SizedBox(height: 16),
+                  (constraints.maxWidth < 550)
+                      ? const SizedBox(height: 4)
+                      : const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                     StatefulBuilder(builder: (context, setState) {
-                       return  AnimatedContainer(
-                         duration: const Duration(milliseconds: 200),
-                         decoration: BoxDecoration(
-                           shape: BoxShape.circle,
-                           border: Border.all(
-                               width: 2,
-                               color: (scrollHover)
-                                   ? notifier.sugestionbutton
-                                   : Colors.transparent),
-                         ),
-                         child: InkWell(
-                             onTap: () {
-                               if (scrollCont.offset > 0) {
-                                 scrollCont.animateTo(
-                                   scrollCont.offset - 200,
-                                   duration: const Duration(milliseconds: 200),
-                                   curve: Curves.easeInOut,
-                                 );
-                               }
-                             },
-                             onHover: (val) {
-                               setState(() {
-                                 scrollHover = val;
-                               });
-                             },
-                             child: Padding(
-                               padding: const EdgeInsets.all(13),
-                               child: Image.asset(
-                                   'assets/Icons/arrowlefticon.png',
-                                   width: 15,
-                                   color: notifier.subgreycolor),
-                             )),
-                       );
-                     },),
+                      StatefulBuilder(
+                        builder: (context, setState) {
+                          return AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  width: 2,
+                                  color: (scrollHover)
+                                      ? notifier.sugestionbutton
+                                      : Colors.transparent),
+                            ),
+                            child: InkWell(
+                                onTap: () {
+                                  if (scrollCont.offset > 0) {
+                                    scrollCont.animateTo(
+                                      scrollCont.offset - 200,
+                                      duration:
+                                          const Duration(milliseconds: 200),
+                                      curve: Curves.easeInOut,
+                                    );
+                                  }
+                                },
+                                onHover: (val) {
+                                  setState(() {
+                                    scrollHover = val;
+                                  });
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(13),
+                                  child: Image.asset(
+                                      'assets/Icons/arrowlefticon.png',
+                                      width: 15,
+                                      color: notifier.subgreycolor),
+                                )),
+                          );
+                        },
+                      ),
                       const SizedBox(width: 10),
-                      StatefulBuilder(builder: (context, setState) {
-                        return AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                width: 2,
-                                color: (scrollHover2)
-                                    ? notifier.sugestionbutton
-                                    : Colors.transparent),
-                          ),
-                          child: InkWell(
-                              onTap: () {
-                                if (scrollCont.offset <
-                                    scrollCont.position.maxScrollExtent) {
-                                  scrollCont.animateTo(
-                                    scrollCont.offset + 200,
-                                    duration: const Duration(milliseconds: 200),
-                                    curve: Curves.easeInOut,
-                                  );
-                                }
-                              },
-                              onHover: (val) {
-                                setState(() {
-                                  scrollHover2 = val;
-                                });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(13),
-                                child: Image.asset(
-                                  'assets/Icons/arrowrighticon.png',
-                                  width: 15,
-                                  color: notifier.subgreycolor,
-                                ),
-                              )),
-                        );
-                      },)
+                      StatefulBuilder(
+                        builder: (context, setState) {
+                          return AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  width: 2,
+                                  color: (scrollHover2)
+                                      ? notifier.sugestionbutton
+                                      : Colors.transparent),
+                            ),
+                            child: InkWell(
+                                onTap: () {
+                                  if (scrollCont.offset <
+                                      scrollCont.position.maxScrollExtent) {
+                                    scrollCont.animateTo(
+                                      scrollCont.offset + 200,
+                                      duration:
+                                          const Duration(milliseconds: 200),
+                                      curve: Curves.easeInOut,
+                                    );
+                                  }
+                                },
+                                onHover: (val) {
+                                  setState(() {
+                                    scrollHover2 = val;
+                                  });
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(13),
+                                  child: Image.asset(
+                                    'assets/Icons/arrowrighticon.png',
+                                    width: 15,
+                                    color: notifier.subgreycolor,
+                                  ),
+                                )),
+                          );
+                        },
+                      )
                     ],
                   )
                 ],
@@ -235,7 +255,6 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
             ),
           ),
         ),
-
       ],
     );
   }
@@ -245,23 +264,27 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
       required ReviewLandingPageInfo reviewLandingPageInfo,
       required ReviewListState state}) {
     return StatefulBuilder(
-      builder: (BuildContext context, void Function(void Function()) setState) { 
+      builder: (BuildContext context, void Function(void Function()) setState) {
         return SizedBox(
-          width: (constraints.maxWidth < 550) ? MediaQuery.sizeOf(context).width/ 1.1
-              : (constraints.maxWidth < 750) ? MediaQuery.sizeOf(context).width/ 1.1
-              : (constraints.maxWidth < 1150) ? MediaQuery.sizeOf(context).width/ 1.1
-              : MediaQuery.sizeOf(context).width/ 2.4,
+          width: (constraints.maxWidth < 550)
+              ? MediaQuery.sizeOf(context).width / 1.1
+              : (constraints.maxWidth < 750)
+                  ? MediaQuery.sizeOf(context).width / 1.1
+                  : (constraints.maxWidth < 1150)
+                      ? MediaQuery.sizeOf(context).width / 1.1
+                      : MediaQuery.sizeOf(context).width / 2.4,
           child: Padding(
-            padding: const EdgeInsets.all( 12.0),
+            padding: const EdgeInsets.all(12.0),
             child: Card(
               elevation: 10,
-              shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                  color:
-                  notifier.isDark ? Colors.transparent : ColorConst.whiteColor,
+                  color: notifier.isDark
+                      ? Colors.transparent
+                      : ColorConst.whiteColor,
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -274,18 +297,18 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
                           borderRadius: BorderRadius.circular(12),
                           child: reviewLandingPageInfo.avatar!.isNotEmpty
                               ? ImageManager().getImageByUrl(
-                              reviewLandingPageInfo.avatar ?? "",
-                              boxFit: BoxFit.fill)
-                              : Image.asset(
-                              'assets/deshboard/latestdeals.png',
-                              fit: BoxFit.fill),
+                                  reviewLandingPageInfo.avatar ?? "",
+                                  boxFit: BoxFit.fill)
+                              : Image.asset('assets/deshboard/latestdeals.png',
+                                  fit: BoxFit.fill),
                         ),
                       ),
                     ),
                     Flexible(
                       flex: 5,
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 16, top: 16, bottom: 16),
+                        padding: const EdgeInsets.only(
+                            right: 16, top: 16, bottom: 16),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: constraints.maxWidth < 550
@@ -303,7 +326,10 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
                                       .copyWith(
                                     color: notifier.redcolor,
                                     fontWeight: FontWeight.w600,
-                                    fontSize: (constraints.maxWidth / 45 > 14) ? constraints.maxWidth / 45 : 14,),
+                                    fontSize: (constraints.maxWidth / 45 > 14)
+                                        ? constraints.maxWidth / 45
+                                        : 14,
+                                  ),
                                   textAlign: TextAlign.center,
                                 ),
                               ],
@@ -312,13 +338,16 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Flexible(
-                                  child: Text(reviewLandingPageInfo.position ?? "",
-                                      style: baseStyle.copyWith(
-
-                                        fontSize: (constraints.maxWidth / 60 > 10) ? constraints.maxWidth / 60 : 10,
-                                        color: notifier.greycolor,
-                                      ),
-                                      textAlign: TextAlign.center),
+                                  child:
+                                      Text(reviewLandingPageInfo.position ?? "",
+                                          style: baseStyle.copyWith(
+                                            fontSize:
+                                                (constraints.maxWidth / 60 > 10)
+                                                    ? constraints.maxWidth / 60
+                                                    : 10,
+                                            color: notifier.greycolor,
+                                          ),
+                                          textAlign: TextAlign.center),
                                 ),
                               ],
                             ),
@@ -328,10 +357,12 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
                             LayoutBuilder(
                               builder: (context, constraints) {
                                 return ConstrainedBox(
-                                  constraints: BoxConstraints(maxHeight: constraints.maxWidth / 2),
+                                  constraints: BoxConstraints(
+                                      maxHeight: constraints.maxWidth / 2),
                                   child: SingleChildScrollView(
                                     child: ReadMoreText(
-                                      ("\"${(reviewLandingPageInfo.review!+" ") * 10}\" ")?? "",
+                                      ("\"${(reviewLandingPageInfo.review! + " ") * 10}\" ") ??
+                                          "",
                                       trimMode: TrimMode.Line,
                                       trimLines: 2,
                                       colorClickableText: Colors.pink,
@@ -339,7 +370,10 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
                                       trimExpandedText: L10nX.getStr.show_less,
                                       style: baseStyle.copyWith(
                                         fontStyle: FontStyle.italic,
-                                        fontSize: (constraints.maxWidth / 25 > 16) ? constraints.maxWidth / 25 : 16,
+                                        fontSize:
+                                            (constraints.maxWidth / 25 > 16)
+                                                ? constraints.maxWidth / 25
+                                                : 16,
                                         color: notifier.blackcolor,
                                       ),
                                       textAlign: TextAlign.justify,
