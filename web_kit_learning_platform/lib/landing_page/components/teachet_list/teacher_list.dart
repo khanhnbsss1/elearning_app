@@ -165,12 +165,18 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
                       SizedBox(
                         height: constraints.maxWidth < 550 ? 10 : 20,
                       ),
-                      SizedBox(
-                        height: constraints.maxWidth < 550 ? 470 : 410,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          controller: scrollCont,
-                          // physics: const NeverScrollableScrollPhysics(),
+                      // SizedBox(
+                      //   height: constraints.maxWidth < 550 ? 470 : 410,
+                      //   child: ListView(
+                      //     scrollDirection: Axis.horizontal,
+                      //     controller: scrollCont,
+                      //     // physics: const NeverScrollableScrollPhysics(),
+                      //     children: teacherList,
+                      //   ),
+                      // ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
                           children: teacherList,
                         ),
                       ),

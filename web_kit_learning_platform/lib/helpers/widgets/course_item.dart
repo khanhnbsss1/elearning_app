@@ -9,6 +9,7 @@ import 'package:webkit/helpers/widgets/my_screen_media.dart';
 import 'package:webkit/helpers/widgets/my_screen_media_type.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
+import '../../base/widgets/text/read_more_text_custom.dart';
 import '../../services/apis/course/course_list/models/course_models.dart';
 
 class CourseItem extends StatelessWidget{
@@ -132,29 +133,53 @@ class CourseItem extends StatelessWidget{
                               Container(
                                 height: (constraints.maxWidth < 1300) ? 96 : 120,
                                 alignment: Alignment.center,
-                                child: Text(
-                                  '${courseInfo.introduction} \n  \n \n \n!' ??
-                                      "",
-                                  maxLines: (constraints.maxWidth < 550) ? 2 : (constraints.maxWidth < 1100) ? 3 : 4,
-                                  overflow:
-                                  TextOverflow.ellipsis,
-                                  style: TextStyleConstant
-                                      .textStyleBlack16w400
-                                      .copyWith(
-                                    fontSize: (constraints.maxWidth < 900) ? Dimens.size16
-                                        : (constraints.maxWidth < 1100) ? Dimens.size18
-                                        : Dimens.size20,
-                                    color: notifier.isDark &&
-                                        isHovered
-                                        ? notifier.whitecolor
-                                        : notifier.isDark &&
-                                        !isHovered
-                                        ? notifier
-                                        .blackcolor
-                                        : notifier
-                                        .blackcolor,
+                                child: SingleChildScrollView(
+                                  child: ReadMoreText(
+                                    ("${(courseInfo.introduction)} ")?? "",
+                                    trimMode: TrimMode.Line,
+                                    trimLines: (constraints.maxWidth < 550)? 2 : (constraints.maxWidth < 1100)? 3 : 4,
+                                    colorClickableText: Colors.pink,
+                                    trimCollapsedText: L10nX.getStr.show_more,
+                                    trimExpandedText: L10nX.getStr.show_less,
+                                    style: TextStyleConstant.textStyleBlack16w400.copyWith(
+                                      fontSize: (constraints.maxWidth < 900) ? Dimens.size16
+                                          : (constraints.maxWidth < 1100) ? Dimens.size18
+                                          : Dimens.size20,
+                                      color: notifier.isDark &&
+                                          isHovered
+                                          ? notifier.whitecolor
+                                          : notifier.isDark &&
+                                          !isHovered
+                                          ? notifier
+                                          .blackcolor
+                                          : notifier
+                                          .blackcolor,
+                                    ),
                                   ),
                                 ),
+                                // Text(
+                                //   '${courseInfo.introduction} \n  \n \n \n!' ??
+                                //       "",
+                                //   maxLines: (constraints.maxWidth < 550) ? 2 : (constraints.maxWidth < 1100) ? 3 : 4,
+                                //   overflow:
+                                //   TextOverflow.ellipsis,
+                                //   style: TextStyleConstant
+                                //       .textStyleBlack16w400
+                                //       .copyWith(
+                                //     fontSize: (constraints.maxWidth < 900) ? Dimens.size16
+                                //         : (constraints.maxWidth < 1100) ? Dimens.size18
+                                //         : Dimens.size20,
+                                //     color: notifier.isDark &&
+                                //         isHovered
+                                //         ? notifier.whitecolor
+                                //         : notifier.isDark &&
+                                //         !isHovered
+                                //         ? notifier
+                                //         .blackcolor
+                                //         : notifier
+                                //         .blackcolor,
+                                //   ),
+                                // ),
                               ),
                               Gap(Dimens.size16),
                               Row(
@@ -236,7 +261,7 @@ class CourseItem extends StatelessWidget{
                                   ),
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         Text(

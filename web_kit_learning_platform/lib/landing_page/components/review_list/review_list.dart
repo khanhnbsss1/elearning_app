@@ -270,8 +270,6 @@ class _ReviewListState extends State<ReviewList>
               ? MediaQuery.sizeOf(context).width / 1.1
               : (constraints.maxWidth < 750)
                   ? MediaQuery.sizeOf(context).width / 1.1
-                  : (constraints.maxWidth < 1150)
-                      ? MediaQuery.sizeOf(context).width / 1.1
                       : MediaQuery.sizeOf(context).width / 2.4,
           child: Padding(
             padding: const EdgeInsets.all(12.0),
@@ -361,7 +359,7 @@ class _ReviewListState extends State<ReviewList>
                                       maxHeight: constraints.maxWidth / 2),
                                   child: SingleChildScrollView(
                                     child: ReadMoreText(
-                                      ("\"${(reviewLandingPageInfo.review! + " ") * 10}\" ") ??
+                                      ("\"${(reviewLandingPageInfo.review!)}\" ") ??
                                           "",
                                       trimMode: TrimMode.Line,
                                       trimLines: 2,

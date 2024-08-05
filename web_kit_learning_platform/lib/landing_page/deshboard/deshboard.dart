@@ -406,7 +406,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
             alignment: Alignment.topCenter,
             child: Padding(
               padding: EdgeInsets.only(
-                  top: (MediaQuery.of(context).size.width < 1050) ? 60 : 30),
+                  top: (MediaQuery.of(context).size.width < 1050) ? 60 : 50),
               child: Card(
                 margin: EdgeInsets.only(top: width < 1100 ? 10 : 20),
                 shadowColor: Colors.red,
@@ -1125,7 +1125,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                 maxWidth: ResponsiveInfo.isPhone()
                     ? constraints.maxWidth - Dimens.size20
                     : constraints.maxWidth * 3 / 4,
-                maxHeight: constraints.maxWidth < 550 ? 200 : 300
+                maxHeight: constraints.maxWidth < 550 ? 220 : 300
               ),
               child: Center(
                 child: ListView(
@@ -1135,6 +1135,13 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                   // physics: const NeverScrollableScrollPhysics(),
                   children: listItem,
                 ),
+                // child: SingleChildScrollView(
+                //   controller: differrentController,
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //     children: listItem,
+                //   ),
+                // ),
               ),
             ),
             Row(
@@ -1304,11 +1311,11 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                   textAlign: TextAlign.center,
                   maxLines: 3,
                 ),
-                // SizedBox(
-                //   width: ResponsiveInfo.isPhone()
-                //       ? (sugindex == 5 ? 0 : 16)
-                //       : (sugindex == 5 ? 0 : constraints.maxWidth / 24),
-                // ),
+                SizedBox(
+                  width: ResponsiveInfo.isPhone()
+                      ? (sugindex == 5 ? 0 : 16)
+                      : (sugindex == 5 ? 0 : constraints.maxWidth / 24),
+                ),
               ],
             ),
           ),
@@ -1393,13 +1400,20 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                       ? constraints.maxWidth - Dimens.size20
                       : constraints.maxWidth * 3 / 4,
                 ),
-                height: constraints.maxWidth < 550 ? 250 : 300,
+                height: constraints.maxWidth < 550 ? 220 : 300,
                 child: ListView(
                   controller: whyChooseUsController,
                   scrollDirection: Axis.horizontal,
                   // physics: const NeverScrollableScrollPhysics(),
                   children: listItem,
                 ),
+                // child: SingleChildScrollView(
+                //   controller: whyChooseUsController,
+                //   scrollDirection: Axis.horizontal,
+                //   child: Row(
+                //       children: listItem,
+                //   ),
+                // ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1647,17 +1661,24 @@ class CustomDrawer extends StatelessWidget {
               SizedBox(
                 height: 12,
               ),
-              ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: contacts.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return EndOfPage.buildContactInfoItem(
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  EndOfPage.buildContactInfoItem(
                       textColor: Colors.black,
-                      contacts: contacts[index],
-                      icon: contactsImage[index]);
-                },
-              ),
+                      contacts: contacts[0],
+                      icon: contactsImage[0]),
+                  EndOfPage.buildContactInfoItem(
+                      textColor: Colors.black,
+                      contacts: contacts[1],
+                      icon: contactsImage[1]),
+                  EndOfPage.buildContactInfoItem(
+                      textColor: Colors.black,
+                      contacts: contacts[2],
+                      icon: contactsImage[2])
+                ],
+              )
             ],
           ),
         ),

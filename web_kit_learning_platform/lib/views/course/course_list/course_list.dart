@@ -332,29 +332,29 @@ class _CourseListState extends State<CourseList>
                 children: [
                   Expanded(
                     child: Align(
-                      alignment: Alignment.topLeft,
+                      alignment: Alignment.topCenter,
                       child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         controller: scrollController,
-/*                        child: Wrap(
+                        child: Wrap(
                           spacing: 16,
                           runSpacing: 16,
                           alignment: WrapAlignment.start,
                           crossAxisAlignment: WrapCrossAlignment.start,
                           runAlignment: WrapAlignment.start,
                           children: listOfCourse,
-                        ),*/
+                        ),
 
-                         child: GridView.count(
-                           primary: false,
-                           //padding: const EdgeInsets.all(20),
-                           crossAxisSpacing: 16,
-                           childAspectRatio: (widthItem)/(heightOfItem)-0.05,
-                           mainAxisSpacing: 16,
-                           crossAxisCount: numberRow,
-                           shrinkWrap: true,
-                           children: listOfCourse,
-                         )
+                         // child: GridView.count(
+                         //   primary: false,
+                         //   //padding: const EdgeInsets.all(20),
+                         //   crossAxisSpacing: 16,
+                         //   childAspectRatio: (widthItem)/(heightOfItem)-0.05,
+                         //   mainAxisSpacing: 16,
+                         //   crossAxisCount: numberRow,
+                         //   shrinkWrap: true,
+                         //   children: listOfCourse,
+                         // )
 
                         // child: MyGridView(item: listOfCourse,),
 

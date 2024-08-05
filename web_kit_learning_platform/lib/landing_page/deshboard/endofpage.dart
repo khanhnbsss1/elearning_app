@@ -268,37 +268,42 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                           flex: 3,
                           child: Padding(
                             padding: const EdgeInsets.all(12.0),
-                            child: SingleChildScrollView(
-                              child: Container(
-                                  decoration:BoxDecoration(
-                                      border: Border(
-                                          right: BorderSide(
-                                            color: notifier.subgreycolor,
-                                          )
-                                      )
-                                  ),
-                                  height: 200,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(right: 12.0),
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.vertical,
-                                      itemCount: contacts.length,
-                                      itemBuilder: (context, index) {
-                                        return Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            buildContactInfoItem(
-                                                textColor: Colors.white,
-                                                contacts: contacts[index],
-                                                icon: contactsImage[index]
-                                            ),
-                                            SizedBox(height: 20,),
-                                          ],
-                                        );
-                                      },
-                                    ),
-                                  )),
-                            ),
+                            child: Container(
+                                decoration:BoxDecoration(
+                                    border: Border(
+                                        right: BorderSide(
+                                          color: notifier.subgreycolor,
+                                        )
+                                    )
+                                ),
+                                height: 200,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 12.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      buildContactInfoItem(
+                                          textColor: Colors.white,
+                                          contacts: contacts[0],
+                                          icon: contactsImage[0]
+                                      ),
+                                      SizedBox(height: 20,),
+                                      buildContactInfoItem(
+                                          textColor: Colors.white,
+                                          contacts: contacts[1],
+                                          icon: contactsImage[1]
+                                      ),
+                                      SizedBox(height: 20,),
+                                      buildContactInfoItem(
+                                          textColor: Colors.white,
+                                          contacts: contacts[2],
+                                          icon: contactsImage[2]
+                                      ),
+                                      SizedBox(height: 20,),
+                                    ],
+                                  )
+                                )),
                           ),
                         ),
                         Expanded(
@@ -589,19 +594,29 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: contacts.length,
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        itemBuilder: (context, index) {
-                          return buildContactInfoItem(
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          buildContactInfoItem(
                               textColor: Colors.white,
-                              contacts: contacts[index],
-                              icon: contactsImage[index]
-                      
-                          );
-                        },
+                              contacts: contacts[0],
+                              icon: contactsImage[0]
+                          ),
+                          SizedBox(height: 20,),
+                          buildContactInfoItem(
+                              textColor: Colors.white,
+                              contacts: contacts[1],
+                              icon: contactsImage[1]
+                          ),
+                          SizedBox(height: 20,),
+                          buildContactInfoItem(
+                              textColor: Colors.white,
+                              contacts: contacts[2],
+                              icon: contactsImage[2]
+                          ),
+                          SizedBox(height: 20,),
+                        ],
                       ),
                       SizedBox(height: 8,),
                       SizedBox(
