@@ -47,14 +47,14 @@ class CourseItemGridView extends StatelessWidget {
         }
       },
       child: Container(
-        width: width < 800
+        width: width < 1050
             ? width
             // : width < 950
             //     ? (width - 250 - 16*4) * 1 / 2
                 : width < 1350
                     ? (width - 250 - 16*3) * 1 / 2
                     : (width - 250 - 16*6) * 1 / 4,
-        // constraints: BoxConstraints(minWidth: 250,),
+        constraints: BoxConstraints(maxWidth: 500,),
         child: StatefulBuilder(
           builder:
               (BuildContext context, void Function(void Function()) setState) {
@@ -78,7 +78,7 @@ class CourseItemGridView extends StatelessWidget {
                         //     : width -  250 < 1150
                         //     ? (width - 250 - 16*4) * 1 / 3
                         //     : (width - 250 - 16*5) * 1 / 4,
-                        constraints: BoxConstraints(minWidth: 300, maxWidth: 450),
+                        // constraints: BoxConstraints(minWidth: 300, maxWidth: 450),
                         decoration: BoxDecoration(
                           color: isHovered && !notifier.isDark
                               // ? Color.fromRGBO(255, 243, 94, 1.0)
