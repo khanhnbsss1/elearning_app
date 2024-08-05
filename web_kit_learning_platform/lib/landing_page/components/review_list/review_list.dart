@@ -138,20 +138,13 @@ class _ReviewListState extends State<ReviewList>  with AutomaticKeepAliveClientM
                           );
                         }
                         return Center(
-                          child: Scrollbar(
-                            controller: scrollCont,
-                            thumbVisibility: false,
-                            trackVisibility: false,
-                            child: SingleChildScrollView(
+                          child: SizedBox(
+                            height: 400,
+                            child: ListView(
                               controller: scrollCont,
                               physics: const NeverScrollableScrollPhysics(),
-
                               scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: listOfCourse,
-                              ),
+                              children:  listOfCourse,
                             ),
                           ),
                         );

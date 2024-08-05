@@ -87,7 +87,7 @@ class CourseItem extends StatelessWidget{
                               : ClipRRect(
                             borderRadius:
                             BorderRadius.circular(16),
-                            child: Image.network(
+                            child: Image.asset(
                               'assets/deshboard/adventure/adventure5.png',
                               fit: BoxFit.cover,
                               width: constraints.maxWidth,
