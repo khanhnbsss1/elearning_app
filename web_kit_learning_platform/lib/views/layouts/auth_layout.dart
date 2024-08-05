@@ -65,6 +65,7 @@ class AuthLayout extends StatelessWidget {
                     sizes: "xxl-8 lg-8 md-9 sm-10",
                     // sizes: "xxl-3 lg-4 md-6 sm-8",
                     child: MyContainer(
+                      borderRadius: BorderRadius.circular(20),
                       paddingAll: 0,
                       color: AdminTheme.theme.contentTheme.background.withAlpha(230),
                       child: child ?? Container(),

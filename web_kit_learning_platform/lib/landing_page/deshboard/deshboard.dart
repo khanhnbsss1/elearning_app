@@ -103,8 +103,11 @@ class _LandingPageScreenState extends State<LandingPageScreen>
   List<Widget> listWiget = [];
   late double oldWidth = 0;
 
+  List<GlobalObjectKey> navigationKey = List.generate(8, (index) => GlobalObjectKey(index));
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     notifier = Provider.of<ColorNotifier>(context, listen: true);
     height = MediaQuery
         .of(context)
@@ -125,6 +128,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
   Widget buildMobile(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 0.0),
             child: buildTabBar(
@@ -184,12 +188,12 @@ class _LandingPageScreenState extends State<LandingPageScreen>
     double itemCardWidth = (width < 1100) ? 90 : 140;
     bool isHovered = false;
 
-    if (oldWidth != width || listWiget.isEmpty) {
+    if (listWiget.isEmpty) {
       oldWidth = width;
       listWiget.clear();
       listWiget.addAll({
         SizedBox(
-          key: GlobalObjectKey(0),
+          key: navigationKey[0],
         ),
         (width > 550) ? buildTabBar(constraints: constraints) : SizedBox(),
         Padding(
@@ -220,19 +224,22 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                               ),
-                              child: ResponsiveInfo.isPhone()
-                                  ? Image.asset(
-                                  'assets/deshboard/winterlandscape.png',
-                                  height: constraints.maxWidth < 500
-                                      ? 250
-                                      : 400,
-                                  width: constraints.maxWidth,
-                                  fit: BoxFit.cover)
-                                  : Image.asset(
-                                  'assets/deshboard/winterlandscape.png',
-                                  height: 600,
-                                  width: constraints.maxWidth,
-                                  fit: BoxFit.cover),
+                              child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                child: ResponsiveInfo.isPhone()
+                                    ? Image.asset(
+                                    'assets/deshboard/winterlandscape.png',
+                                    height: constraints.maxWidth < 500
+                                        ? 250
+                                        : 400,
+                                    width: constraints.maxWidth,
+                                    fit: BoxFit.cover)
+                                    : Image.asset(
+                                    'assets/deshboard/winterlandscape.png',
+                                    height: 600,
+                                    width: constraints.maxWidth,
+                                    fit: BoxFit.cover),
+                              ),
                             );
                           },
                         ),
@@ -292,7 +299,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           ),
         ),
         SizedBox(
-          key: GlobalObjectKey(1),
+          key: navigationKey[1],
           height: width < 550 ? 10 : 100,
         ),
         buildDifferentListWidget(constraints: constraints),
@@ -303,12 +310,12 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           ),
         ),
         SizedBox(
-          key: GlobalObjectKey(2),
+          key: navigationKey[2],
           height: width < 550 ? 10 : 100,
         ),
         WhoThisCourseIsFor(),
         SizedBox(
-          key: GlobalObjectKey(3),
+          key: navigationKey[3],
           height: width < 550 ? 10 : 100,
         ),
         const TeacherList(),
@@ -319,12 +326,12 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           ),
         ),
         SizedBox(
-          key: GlobalObjectKey(4),
+          key: navigationKey[4],
           height: width < 550 ? 10 : 100,
         ),
         const LandingPageCourseList(),
         SizedBox(
-          key: GlobalObjectKey(5),
+          key: navigationKey[5],
           height: width < 550 ? 10 : 100,
         ),
         ReviewList(
@@ -338,7 +345,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           ),
         ),
         SizedBox(
-          key: GlobalObjectKey(6),
+          key: navigationKey[6],
           height: width < 550 ? 50 : 100,
         ),
         buildWhyChooseUsListWidget(constraints: constraints),
@@ -349,7 +356,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           ),
         ),
         SizedBox(
-          key: GlobalObjectKey(7),
+          key: navigationKey[7],
           height: width < 550 ? 10 : 100,
         ),
         ReviewList(
@@ -587,100 +594,100 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                             ),
                           ),
                         ),
-                        constraints.maxWidth < 1000
-                            ? const SizedBox()
-                            : Row(
-                          children: [
-                            PopupMenuButton(
-                              tooltip: '',
-                              padding: const EdgeInsets.all(0),
-                              offset: const Offset(120, 30),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              // initialValue: selectedMenu,
-                              constraints: const BoxConstraints(
-                                maxWidth: 315,
-                                maxHeight: 270,
-                              ),
-                              color: notifier.whitecolor,
-                              child: Text(
-                                L10nX.getStr.application,
-                                style: baseStyle.copyWith(
-                                    color: supportHover
-                                        ? notifier.blackcolor
-                                        : notifier.subgreycolor,
-                                    fontSize: 16),
-                              ),
-                              itemBuilder: (BuildContext context) =>
-                              <PopupMenuEntry<SampleItem2>>[
-                                PopupMenuItem<SampleItem2>(
-                                  enabled: true,
-                                  value: SampleItem2.itemOne,
-                                  onTap: () {},
-                                  child: Row(children: [
-                                    const SizedBox(width: 10),
-                                    Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(height: 20),
-                                        Text(L10nX.getStr.download,
-                                            style: baseStyle.copyWith(
-                                              fontSize: 16,
-                                              color:
-                                              notifier.subgreycolor,
-                                            )),
-                                        const SizedBox(height: 10),
-                                        SizedBox(
-                                          height: 100,
-                                          child: Column(
-                                            children: [
-                                              const SizedBox(height: 10),
-                                              SvgPicture.asset(
-                                                  'assets/deshboard/support/AppStoreBadge.svg',
-                                                  height: 40),
-                                              const SizedBox(height: 10),
-                                              SvgPicture.asset(
-                                                  'assets/deshboard/support/GooglePlayStoreBadge.svg',
-                                                  height: 40),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(height: 20),
-                                      ],
-                                    ),
-                                    const SizedBox(width: 30),
-                                    Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          const SizedBox(height: 20),
-                                          Text(L10nX.getStr.scan_code,
-                                              style: baseStyle.copyWith(
-                                                fontSize: 16,
-                                                color:
-                                                notifier.subgreycolor,
-                                              )),
-                                          const SizedBox(height: 12),
-                                          SizedBox(
-                                            height: 100,
-                                            child: Image.asset(
-                                                'assets/deshboard/support/qrCode.png',
-                                                height: 100),
-                                          ),
-                                          const SizedBox(height: 20),
-                                        ]),
-                                    const SizedBox(width: 10),
-                                  ]),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              width: 25,
-                            ),
-                          ],
-                        ),
+                        // constraints.maxWidth < 1000
+                        //     ? const SizedBox()
+                        //     : Row(
+                        //   children: [
+                        //     PopupMenuButton(
+                        //       tooltip: '',
+                        //       padding: const EdgeInsets.all(0),
+                        //       offset: const Offset(120, 30),
+                        //       shape: RoundedRectangleBorder(
+                        //         borderRadius: BorderRadius.circular(20),
+                        //       ),
+                        //       // initialValue: selectedMenu,
+                        //       constraints: const BoxConstraints(
+                        //         maxWidth: 315,
+                        //         maxHeight: 270,
+                        //       ),
+                        //       color: notifier.whitecolor,
+                        //       child: Text(
+                        //         L10nX.getStr.application,
+                        //         style: baseStyle.copyWith(
+                        //             color: supportHover
+                        //                 ? notifier.blackcolor
+                        //                 : notifier.subgreycolor,
+                        //             fontSize: 16),
+                        //       ),
+                        //       itemBuilder: (BuildContext context) =>
+                        //       <PopupMenuEntry<SampleItem2>>[
+                        //         PopupMenuItem<SampleItem2>(
+                        //           enabled: true,
+                        //           value: SampleItem2.itemOne,
+                        //           onTap: () {},
+                        //           child: Row(children: [
+                        //             const SizedBox(width: 10),
+                        //             Column(
+                        //               crossAxisAlignment:
+                        //               CrossAxisAlignment.start,
+                        //               children: [
+                        //                 const SizedBox(height: 20),
+                        //                 Text(L10nX.getStr.download,
+                        //                     style: baseStyle.copyWith(
+                        //                       fontSize: 16,
+                        //                       color:
+                        //                       notifier.subgreycolor,
+                        //                     )),
+                        //                 const SizedBox(height: 10),
+                        //                 SizedBox(
+                        //                   height: 100,
+                        //                   child: Column(
+                        //                     children: [
+                        //                       const SizedBox(height: 10),
+                        //                       SvgPicture.asset(
+                        //                           'assets/deshboard/support/AppStoreBadge.svg',
+                        //                           height: 40),
+                        //                       const SizedBox(height: 10),
+                        //                       SvgPicture.asset(
+                        //                           'assets/deshboard/support/GooglePlayStoreBadge.svg',
+                        //                           height: 40),
+                        //                     ],
+                        //                   ),
+                        //                 ),
+                        //                 const SizedBox(height: 20),
+                        //               ],
+                        //             ),
+                        //             const SizedBox(width: 30),
+                        //             Column(
+                        //                 crossAxisAlignment:
+                        //                 CrossAxisAlignment.start,
+                        //                 children: [
+                        //                   const SizedBox(height: 20),
+                        //                   Text(L10nX.getStr.scan_code,
+                        //                       style: baseStyle.copyWith(
+                        //                         fontSize: 16,
+                        //                         color:
+                        //                         notifier.subgreycolor,
+                        //                       )),
+                        //                   const SizedBox(height: 12),
+                        //                   SizedBox(
+                        //                     height: 100,
+                        //                     child: Image.asset(
+                        //                         'assets/deshboard/support/qrCode.png',
+                        //                         height: 100),
+                        //                   ),
+                        //                   const SizedBox(height: 20),
+                        //                 ]),
+                        //             const SizedBox(width: 10),
+                        //           ]),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //     const SizedBox(
+                        //       width: 25,
+                        //     ),
+                        //   ],
+                        // ),
                         Row(
                           children: [
                             PopupMenuButton(
