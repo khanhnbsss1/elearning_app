@@ -161,6 +161,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
                           children: [
                             ActionButton1(
                               text: L10nX.getStr.save_update_str,
+                              enable: isExitCourse,
                               onTap: () async {
                                 BlocProvider.of<AddCourseBloc>(buildContext).add(AddCourseSubmitUpdateEvent(addCourseController: state.controller!));
                               },
@@ -169,6 +170,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
                             ActionButton1(
                               preIcon: Icon(Icons.remove_red_eye, color: ColorConst.colorIconGrays,),
                               text: L10nX.getStr.preview_str,
+                              enable: isExitCourse,
                               textStype: TextStyleConstant.textStyleBlack16w600,
                               enableBgColor: ColorConst.whiteColor,
                               onTap: () {
