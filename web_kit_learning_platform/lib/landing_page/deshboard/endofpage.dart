@@ -320,6 +320,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                               ),
                               height: 200,
                               child: GridView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: endElements.length,
                                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -335,15 +336,13 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                                           elementsHover[index] = value;
                                         });
                                       },
-                                      child: Container(
-                                        child: Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            endElements[index],
-                                            style: baseStyle.copyWith(
-                                                fontSize: 16,
-                                                color: elementsHover[index] ? notifier.subgreycolor : notifier.whitecolor),
-                                          ),
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          endElements[index],
+                                          style: baseStyle.copyWith(
+                                              fontSize: 16,
+                                              color: elementsHover[index] ? notifier.subgreycolor : notifier.whitecolor),
                                         ),
                                       ),
                                     );
@@ -656,6 +655,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                         height: 200,
                         width: width / 1,
                         child: GridView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           // physics: const NeverScrollableScrollPhysics(),
                           itemCount: endElements.length,
@@ -712,16 +712,14 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
           padding: const EdgeInsets.symmetric(vertical: 4),
           child: Row(
             children: [
-              SvgPicture.asset(icon, height: 20, color: Colors.white,),
+              SvgPicture.asset(icon, height: 20, color: textColor,),
               const SizedBox(width: 10),
               Expanded(
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Text(contacts,
-                    style: baseStyle.copyWith(
-                        color: textColor,
-                        fontSize: 16),
-                    maxLines: 2,),
+                child: Text(contacts,
+                  style: baseStyle.copyWith(
+                      color: textColor,
+                      fontSize: 16),
+                  maxLines: 10,
                 ),
               ),
             ],

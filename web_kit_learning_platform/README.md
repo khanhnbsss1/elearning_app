@@ -46,7 +46,7 @@ samples, guidance on mobile development, and a full API reference.
         - flutter build web --dart-define=FLUTTER_WEB_CANVASKIT_FORCE_CPU_ONLY=true --release
         - flutter build web --web-renderer html --release
         - flutter build web --dart-define=FLUTTER_WEB_USE_SKIA=true --web-renderer html --release 
-        - flutter build web --dart-define=FLUTTER_WEB_USE_SKIA=true --wasm --web-renderer canvaskit --release
+        - flutter build web --dart-define=FLUTTER_WEB_USE_SKIA=true --web-renderer canvaskit --release
         -  flutter build web --wasm
     -deploy web:
         - webdev: ^3.5.0

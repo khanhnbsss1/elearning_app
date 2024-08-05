@@ -12,8 +12,9 @@ import 'package:webkit/services/apis/course/course_detail/models/course_detail_m
 import '../../base/widgets/text/read_more_text_custom.dart';
 import '../../services/apis/course/course_list/models/course_models.dart';
 
-class CourseItem extends StatelessWidget{
+class CourseItem extends StatelessWidget {
   CourseItem({required this.constraints, required this.courseInfo, isGirdView});
+
   bool isGirdView = false;
   BoxConstraints constraints;
   CourseInfo courseInfo;
@@ -25,35 +26,43 @@ class CourseItem extends StatelessWidget{
     notifier = Provider.of<ColorNotifier>(context, listen: true);
 
     return StatefulBuilder(
-      builder: (BuildContext context, void Function(void Function()) setState) { 
+      builder: (BuildContext context, void Function(void Function()) setState) {
         return OnHoverWidget(
           builder: (isHovered) {
             return Padding(
               padding: (constraints.maxWidth < 550)
                   ? EdgeInsets.only(right: 4.0)
                   : (constraints.maxWidth < 800)
-                  ? EdgeInsets.only(right: 8)
-                  : EdgeInsets.only(right: 16),
+                      ? EdgeInsets.only(right: 8)
+                      : EdgeInsets.only(right: 16),
               child: Card(
                 color: isHovered && !notifier.isDark
                     ? ColorConst.onHoverColor
                     : isHovered && notifier.isDark
-                    ? ColorConst.backGroundColor
-                    : notifier.whitecolor,
+                        ? ColorConst.backGroundColor
+                        : notifier.whitecolor,
                 elevation: 5,
                 child: Container(
                   decoration: BoxDecoration(
                     color: isHovered && !notifier.isDark
                         ? ColorConst.onHoverColor
                         : isHovered && notifier.isDark
-                        ? ColorConst.backGroundColor
-                        : notifier.whitecolor,
+                            ? ColorConst.backGroundColor
+                            : notifier.whitecolor,
                     borderRadius: BorderRadius.circular(16),
                   ),
                   width: constraints.maxWidth / (3 + 0.3),
                   constraints: BoxConstraints(
-                    maxHeight: (constraints.maxWidth < 550) ? 650 : (constraints.maxWidth < 1100)  ? 850 : (constraints.maxWidth < 1300) ? 900 : 1300,
-                    minWidth: constraints.maxWidth < 576 ? constraints.maxWidth - 8 : 350,
+                    maxHeight: (constraints.maxWidth < 550)
+                        ? 650
+                        : (constraints.maxWidth < 1100)
+                            ? 850
+                            : (constraints.maxWidth < 1300)
+                                ? 900
+                                : 1300,
+                    minWidth: constraints.maxWidth < 576
+                        ? constraints.maxWidth - 8
+                        : 350,
                   ),
                   clipBehavior: Clip.hardEdge,
                   child: Padding(
@@ -61,99 +70,105 @@ class CourseItem extends StatelessWidget{
                     child: Container(
                       padding: EdgeInsets.all(12.0),
                       decoration: BoxDecoration(
-                          borderRadius:
-                          BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(16),
                           border: Border.all(
                             width: 2,
-                            color: (isHovered)
-                                ? Colors.red
-                                : notifier.whitecolor,
+                            color:
+                                (isHovered) ? Colors.red : notifier.whitecolor,
                           )),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          (courseInfo
-                              .image!.isNotEmpty)
-                              ? ClipRRect(
-                            borderRadius:
-                            BorderRadius.circular(16),
-                            child: Image.network(
-                              courseInfo.image!,
-                              //"https://docs.flutter.dev/assets/images/dash/dash-fainting.gif",
-                              fit: BoxFit.cover,
-                              //width: constraints.maxWidth * 2, 
-                              //  height: constraints.maxWidth
-                            ),
-                          )
-                              : ClipRRect(
-                            borderRadius:
-                            BorderRadius.circular(16),
-                            child: Image.asset(
-                              'assets/deshboard/adventure/adventure5.png',
-                              fit: BoxFit.cover,
-                              width: constraints.maxWidth,
-                              //height: constraints.maxHeight
-                            ),
-                          ),
+                          (courseInfo.image!.isNotEmpty)
+                              ? Container(
+                                  height: 300,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(16),
+                                    child: Image.network(
+                                      courseInfo.image!,
+                                      //"https://docs.flutter.dev/assets/images/dash/dash-fainting.gif",
+                                      fit: BoxFit.cover,
+                                      //width: constraints.maxWidth * 2,
+                                      //  height: constraints.maxWidth
+                                    ),
+                                  ),
+                                )
+                              : SizedBox(
+                                  height: 300,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(16),
+                                    child: Image.asset(
+                                      'assets/deshboard/adventure/adventure5.png',
+                                      fit: BoxFit.cover,
+                                      width: constraints.maxWidth,
+                                      //height: constraints.maxHeight
+                                    ),
+                                  ),
+                                ),
                           Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Column(
-                                mainAxisAlignment:
-                                MainAxisAlignment.start,
-                                crossAxisAlignment:
-                                CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   const SizedBox(height: 8),
                                   Container(
                                     alignment: Alignment.center,
                                     child: Text(
-                                      '${courseInfo
-                                          .name}',
-                                      overflow:
-                                      TextOverflow.ellipsis,
+                                      '${courseInfo.name}',
+                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyleConstant
                                           .textStyleBlack16w600
                                           .copyWith(
-                                          fontWeight:
-                                          FontWeight.bold,
-                                          fontSize:
-                                          (constraints.maxWidth < 900) ? Dimens.size20
-                                              : (constraints.maxWidth < 1100) ? Dimens.size22
-                                              : Dimens.size24,
-                                          color: Colors.red),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize:
+                                                  (constraints.maxWidth < 900)
+                                                      ? Dimens.size20
+                                                      : (constraints.maxWidth <
+                                                              1100)
+                                                          ? Dimens.size22
+                                                          : Dimens.size24,
+                                              color: Colors.red),
                                       textAlign: TextAlign.center,
                                       maxLines: 2,
                                     ),
                                   ),
                                 ],
                               ),
-                              (constraints.maxWidth < 1100) ? Gap(Dimens.size4) :Gap(Dimens.size16),
+                              (constraints.maxWidth < 1100)
+                                  ? Gap(Dimens.size4)
+                                  : Gap(Dimens.size16),
                               Container(
-                                height: (constraints.maxWidth < 1300) ? 96 : 120,
+                                height:
+                                    (constraints.maxWidth < 1300) ? 96 : 120,
                                 alignment: Alignment.center,
                                 child: SingleChildScrollView(
                                   child: ReadMoreText(
-                                    ("${(courseInfo.introduction)} ")?? "",
+                                    ("${(courseInfo.introduction)} ") ?? "",
                                     trimMode: TrimMode.Line,
-                                    trimLines: (constraints.maxWidth < 550)? 2 : (constraints.maxWidth < 1100)? 3 : 4,
+                                    trimLines: (constraints.maxWidth < 550)
+                                        ? 2
+                                        : (constraints.maxWidth < 1100)
+                                            ? 3
+                                            : 4,
                                     colorClickableText: Colors.pink,
                                     trimCollapsedText: L10nX.getStr.show_more,
                                     trimExpandedText: L10nX.getStr.show_less,
-                                    style: TextStyleConstant.textStyleBlack16w400.copyWith(
-                                      fontSize: (constraints.maxWidth < 900) ? Dimens.size16
-                                          : (constraints.maxWidth < 1100) ? Dimens.size18
-                                          : Dimens.size20,
-                                      color: notifier.isDark &&
-                                          isHovered
+                                    style: TextStyleConstant
+                                        .textStyleBlack16w400
+                                        .copyWith(
+                                      fontSize: (constraints.maxWidth < 900)
+                                          ? Dimens.size16
+                                          : (constraints.maxWidth < 1100)
+                                              ? Dimens.size18
+                                              : Dimens.size20,
+                                      color: notifier.isDark && isHovered
                                           ? notifier.whitecolor
-                                          : notifier.isDark &&
-                                          !isHovered
-                                          ? notifier
-                                          .blackcolor
-                                          : notifier
-                                          .blackcolor,
+                                          : notifier.isDark && !isHovered
+                                              ? notifier.blackcolor
+                                              : notifier.blackcolor,
                                     ),
                                   ),
                                 ),
@@ -186,74 +201,74 @@ class CourseItem extends StatelessWidget{
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: [
                                             Icon(Icons.check,
-                                                size: (constraints.maxWidth < 1100) ? Dimens.size16
-                                                    :Dimens.size16,
+                                                size: (constraints.maxWidth <
+                                                        1100)
+                                                    ? Dimens.size16
+                                                    : Dimens.size16,
                                                 color: Colors.red),
                                             Gap(Dimens.size4),
                                             Text('Số buổi học:',
                                                 style: TextStyleConstant
                                                     .textStyleBlack16w400
                                                     .copyWith(
-
-                                                  fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
-                                                      :Dimens
-                                                      .size18,
-                                                  color: notifier
-                                                      .isDark &&
-                                                      isHovered
-                                                      ? notifier
-                                                      .whitecolor
+                                                  fontSize:
+                                                      (constraints.maxWidth <
+                                                              1100)
+                                                          ? Dimens.size14
+                                                          : Dimens.size18,
+                                                  color: notifier.isDark &&
+                                                          isHovered
+                                                      ? notifier.whitecolor
                                                       : notifier.isDark &&
-                                                      !isHovered
-                                                      ? notifier
-                                                      .blackcolor
-                                                      : notifier
-                                                      .blackcolor,
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .bold,
+                                                              !isHovered
+                                                          ? notifier.blackcolor
+                                                          : notifier.blackcolor,
+                                                  fontWeight: FontWeight.bold,
                                                 )),
                                             Gap(Dimens.size4),
                                           ]),
                                       Gap(Dimens.size16),
                                       Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: [
                                             Icon(Icons.check,
-                                                size: (constraints.maxWidth < 1100) ? Dimens.size16
-                                                    :Dimens.size16,
+                                                size: (constraints.maxWidth <
+                                                        1100)
+                                                    ? Dimens.size16
+                                                    : Dimens.size16,
                                                 color: Colors.red),
                                             Gap(Dimens.size4),
                                             Text('Giáo trình:',
                                                 style: TextStyleConstant
                                                     .textStyleBlack16w400
                                                     .copyWith(
-
-                                                  fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
-                                                      :Dimens.size18,
-                                                  color: notifier
-                                                      .isDark &&
-                                                      isHovered
-                                                      ? notifier
-                                                      .whitecolor
+                                                  fontSize:
+                                                      (constraints.maxWidth <
+                                                              1100)
+                                                          ? Dimens.size14
+                                                          : Dimens.size18,
+                                                  color: notifier.isDark &&
+                                                          isHovered
+                                                      ? notifier.whitecolor
                                                       : notifier.isDark &&
-                                                      !isHovered
-                                                      ? notifier
-                                                      .blackcolor
-                                                      : notifier
-                                                      .blackcolor,
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .bold,
+                                                              !isHovered
+                                                          ? notifier.blackcolor
+                                                          : notifier.blackcolor,
+                                                  fontWeight: FontWeight.bold,
                                                 )),
                                             Gap(Dimens.size4),
                                           ]),
@@ -261,28 +276,25 @@ class CourseItem extends StatelessWidget{
                                   ),
                                   Expanded(
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
                                       children: [
                                         Text(
                                           '${courseInfo.totalLectures}',
                                           style: TextStyleConstant
                                               .textStyleBlack12w400
                                               .copyWith(
-
-                                            fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
-                                                : Dimens.size18,
-                                            color: notifier
-                                                .isDark &&
-                                                isHovered
-                                                ? notifier
-                                                .whitecolor
-                                                : notifier.isDark &&
-                                                !isHovered
-                                                ? notifier
-                                                .blackcolor
-                                                : notifier
-                                                .blackcolor,
+                                            fontSize:
+                                                (constraints.maxWidth < 1100)
+                                                    ? Dimens.size14
+                                                    : Dimens.size18,
+                                            color: notifier.isDark && isHovered
+                                                ? notifier.whitecolor
+                                                : notifier.isDark && !isHovered
+                                                    ? notifier.blackcolor
+                                                    : notifier.blackcolor,
                                           ),
                                         ),
                                         Gap(Dimens.size16),
@@ -290,19 +302,16 @@ class CourseItem extends StatelessWidget{
                                           'Emotional Chinese',
                                           style: TextStyleConstant
                                               .textStyleBlack12w400
-                                              .copyWith(fontSize: (constraints.maxWidth < 1100) ? Dimens.size14
-                                              : Dimens.size18,
-                                            color: notifier
-                                                .isDark &&
-                                                isHovered
-                                                ? notifier
-                                                .whitecolor
-                                                : notifier.isDark &&
-                                                !isHovered
-                                                ? notifier
-                                                .blackcolor
-                                                : notifier
-                                                .blackcolor,
+                                              .copyWith(
+                                            fontSize:
+                                                (constraints.maxWidth < 1100)
+                                                    ? Dimens.size14
+                                                    : Dimens.size18,
+                                            color: notifier.isDark && isHovered
+                                                ? notifier.whitecolor
+                                                : notifier.isDark && !isHovered
+                                                    ? notifier.blackcolor
+                                                    : notifier.blackcolor,
                                           ),
                                         ),
                                       ],
@@ -313,10 +322,12 @@ class CourseItem extends StatelessWidget{
                               Gap(Dimens.size16),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   StarRating(
-                                    rating: (courseInfo.ratePoint ?? 0).toDouble(),
+                                    rating:
+                                        (courseInfo.ratePoint ?? 0).toDouble(),
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {},
                                   ),
@@ -325,44 +336,49 @@ class CourseItem extends StatelessWidget{
                                     children: [
                                       Icon(
                                         Icons.attach_money,
-                                        color: notifier
-                                            .isDark &&
-                                            isHovered
-                                            ? notifier
-                                            .whitecolor
-                                            : notifier.isDark &&
-                                            !isHovered
-                                            ? notifier
-                                            .blackcolor
-                                            : notifier
-                                            .blackcolor,
+                                        color: notifier.isDark && isHovered
+                                            ? notifier.whitecolor
+                                            : notifier.isDark && !isHovered
+                                                ? notifier.blackcolor
+                                                : notifier.blackcolor,
                                       ),
                                       Text(
                                           "${NumberHelper().numberToString(courseInfo.payment, decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
                                           style: baseStyle.copyWith(
                                               overflow: TextOverflow.ellipsis,
-                                              color: notifier
-                                                  .isDark &&
-                                                  isHovered
-                                                  ? notifier
-                                                  .whitecolor
+                                              color: notifier.isDark &&
+                                                      isHovered
+                                                  ? notifier.whitecolor
                                                   : notifier.isDark &&
-                                                  !isHovered
-                                                  ? notifier
-                                                  .blackcolor
-                                                  : notifier
-                                                  .blackcolor,
-                                              fontSize:  constraints.maxWidth < 550
+                                                          !isHovered
+                                                      ? notifier.blackcolor
+                                                      : notifier.blackcolor,
+                                              fontSize: constraints.maxWidth <
+                                                      550
                                                   ? constraints.maxWidth / 20
                                                   : constraints.maxWidth < 700
-                                                  ? constraints.maxWidth / 35
-                                                  : constraints.maxWidth < 900
-                                                  ? constraints.maxWidth / 40
-                                                  : constraints.maxWidth < 1100
-                                                  ? constraints.maxWidth / 50
-                                                  : constraints.maxWidth < 1300
-                                                  ? constraints.maxWidth / 65
-                                                  : constraints.maxWidth / 100)),
+                                                      ? constraints.maxWidth /
+                                                          35
+                                                      : constraints.maxWidth <
+                                                              900
+                                                          ? constraints
+                                                                  .maxWidth /
+                                                              40
+                                                          : constraints
+                                                                      .maxWidth <
+                                                                  1100
+                                                              ? constraints
+                                                                      .maxWidth /
+                                                                  50
+                                                              : constraints
+                                                                          .maxWidth <
+                                                                      1300
+                                                                  ? constraints
+                                                                          .maxWidth /
+                                                                      65
+                                                                  : constraints
+                                                                          .maxWidth /
+                                                                      100)),
                                     ],
                                   )
                                 ],
@@ -371,9 +387,10 @@ class CourseItem extends StatelessWidget{
                           ),
                           Gap(Dimens.size16),
                           Padding(
-                            padding:
-                            EdgeInsets.all((constraints.maxWidth < 1100) ? Dimens.size4
-                                :Dimens.size16),
+                            padding: EdgeInsets.all(
+                                (constraints.maxWidth < 1100)
+                                    ? Dimens.size4
+                                    : Dimens.size16),
                             child: Center(
                               child: ActionButton1(
                                 onTap: () {},
@@ -394,5 +411,4 @@ class CourseItem extends StatelessWidget{
       },
     );
   }
-
 }

@@ -266,7 +266,7 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
       {required LandingPageUserInfo landingPageUserInfo,
       required BoxConstraints constraints}) {
     return StatefulBuilder(
-      builder: (BuildContext context, void Function(void Function()) setState) { 
+      builder: (BuildContext context, void Function(void Function()) setState) {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Card(
@@ -342,7 +342,7 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
           ),
         );
       },
-      
+
     );
   }
 
