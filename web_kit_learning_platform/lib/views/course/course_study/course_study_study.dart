@@ -245,16 +245,12 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                                                     horizontal: 32.0),
                                                 child: Row(
                                                   children: [
-                                                    (MediaQuery.of(context)
-                                                        .size
-                                                        .width >
-                                                        1050)
+                                                    (MediaQuery.of(context).size.width > 1050)
                                                         ? Text('Tiến độ: ')
                                                         : SizedBox(),
                                                     Container(
                                                       width:
-                                                      constraints.maxWidth /
-                                                          2,
+                                                      constraints.maxWidth / 2,
                                                       height: 20,
                                                       constraints: BoxConstraints(
                                                         minWidth: 100,
@@ -276,8 +272,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                                                                 color: Colors.red,
                                                                 borderRadius:
                                                                 BorderRadius
-                                                                    .circular(
-                                                                    20),
+                                                                    .circular(20),
                                                               ),
                                                             )),
                                                         Center(

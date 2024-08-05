@@ -47,17 +47,9 @@ class CourseItemGridView extends StatelessWidget {
         }
       },
       child: Container(
-        width: width < 1050
-            ? width
-            // : width < 950
-            //     ? (width - 250 - 16*4) * 1 / 2
-                : width < 1350
-                    ? (width - 250 - 16*3) * 1 / 2
-                    : (width - 250 - 16*6) * 1 / 4,
-        constraints: BoxConstraints(maxWidth: 500,),
+        constraints: BoxConstraints(maxWidth: 400, minWidth: 350),
         child: StatefulBuilder(
-          builder:
-              (BuildContext context, void Function(void Function()) setState) {
+          builder: (BuildContext context, void Function(void Function()) setState) {
             return LayoutBuilder(
               builder: (context, constraints) {
                 return OnHoverWidget(
@@ -107,76 +99,69 @@ class CourseItemGridView extends StatelessWidget {
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Flexible(
-                                    child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(16),
-                                        child: Image.network(
-                                          courseInfo.image!.isNotEmpty
-                                              ? courseInfo.image!
-                                              : 'assets/deshboard/adventure/adventure5.png',
-                                          fit: BoxFit.cover,
-                                          width: constraints.maxWidth * 0.9,
-                                          height: constraints.maxWidth * 0.5,
-                                          errorBuilder:
-                                              (context, error, stackTrace) {
-                                            return Image.network(
-                                              'assets/deshboard/adventure/adventure5.png',
-                                              fit: BoxFit.cover,
-                                              width: constraints.maxWidth * 0.9,
-                                              height: constraints.maxWidth * 0.5,
-                                            );
-                                          },
-                                        )),
-                                  ),
+                                  ClipRRect(
+                                      borderRadius: BorderRadius.circular(16),
+                                      child: Image.network(
+                                        courseInfo.image!.isNotEmpty
+                                            ? courseInfo.image!
+                                            : 'assets/deshboard/adventure/adventure5.png',
+                                        fit: BoxFit.cover,
+                                        width: constraints.maxWidth * 0.9,
+                                        height: constraints.maxWidth * 0.5,
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                          return Image.network(
+                                            'assets/deshboard/adventure/adventure5.png',
+                                            fit: BoxFit.cover,
+                                            width: constraints.maxWidth * 0.9,
+                                            height: constraints.maxWidth * 0.5,
+                                          );
+                                        },
+                                      )),
                                   SizedBox(
                                     height: 4,
                                   ),
-                                  Flexible(
-                                    child: Text(
-                                      '${courseInfo.name} \n' ?? "",
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyleConstant
-                                          .textStyleBlack16w600
-                                          .copyWith(
-                                              fontWeight: FontWeight.bold,
-                                              // fontSize: Dimens.size24,
-                                              // fontSize: ResponsiveInfo.isPhone()?Dimens.size20:Dimens.size18,
-                                              fontSize: Dimens.size18,
-                                              color: Color.fromRGBO(
-                                                  163, 20, 19, 1.0)),
-                                      maxLines: width < 550 ? 1 : 2,
-                                    ),
+                                  Text(
+                                    '${courseInfo.name} \n' ?? "",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyleConstant
+                                        .textStyleBlack16w600
+                                        .copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            // fontSize: Dimens.size24,
+                                            // fontSize: ResponsiveInfo.isPhone()?Dimens.size20:Dimens.size18,
+                                            fontSize: Dimens.size18,
+                                            color: Color.fromRGBO(
+                                                163, 20, 19, 1.0)),
+                                    maxLines: width < 550 ? 1 : 2,
                                   ),
                                   Gap(Dimens.size4),
-                                  Flexible(
-                                    child: Text(
-                                      courseInfo.producerName ?? "",
-                                      maxLines: 1,
-                                      style: TextStyleConstant
-                                          .textStyleBlack12w400
-                                          .copyWith(
-                                        fontWeight: FontWeight.w100,
-                                    
-                                        // fontSize: Dimens.size18,
-                                        // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300 ? Dimens.size10 :Dimens.size15,
-                                        fontSize: Dimens.size15,
-                                        color: notifier.subgreycolor,
-                                      ),
+                                  Text(
+                                    courseInfo.producerName ?? "",
+                                    maxLines: 1,
+                                    style: TextStyleConstant
+                                        .textStyleBlack12w400
+                                        .copyWith(
+                                      fontWeight: FontWeight.w100,
+                                  
+                                      // fontSize: Dimens.size18,
+                                      // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300 ? Dimens.size10 :Dimens.size15,
+                                      fontSize: Dimens.size15,
+                                      color: notifier.subgreycolor,
                                     ),
                                   ),
-                                  Flexible(
-                                    child: Text(
-                                      '${courseInfo.totalLectures} bài giảng - ${courseInfo.gradeName ?? ""} - ${(courseInfo.isStandard == 1) ? 'Chính quy' : 'Không chính quy'} ',
-                                      style: baseStyle.copyWith(
-                                        // fontSize: Dimens.size16,
-                                        // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
-                                        fontSize: Dimens.size15,
-                                        color: notifier.subgreycolor,
-                                      ),
-                                      maxLines: 1,
+                                  Text(
+                                    '${courseInfo.totalLectures} bài giảng - ${courseInfo.gradeName ?? ""} - ${(courseInfo.isStandard == 1) ? 'Chính quy' : 'Không chính quy'} ',
+                                    style: baseStyle.copyWith(
+                                      // fontSize: Dimens.size16,
+                                      // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
+                                      fontSize: Dimens.size15,
+                                      color: notifier.subgreycolor,
                                     ),
+                                    maxLines: 1,
                                   ),
                                   Gap(Dimens.size4),
                                   Row(
@@ -216,20 +201,10 @@ class CourseItemGridView extends StatelessWidget {
                                               size: Dimens.size22,
                                               // size: ResponsiveInfo.isPhone()?Dimens.size18: width < 1300  ? Dimens.size10 :Dimens.size22,
                                             ),
-                                            Text(
-                                                NumberHelper()
-                                                    .numberToString(
-                                                        courseInfo.payment,
-                                                        decimalDigits: 0)
-                                                    .trim(),
-                                                style: baseStyle.copyWith(
-                                                    color: notifier.isDark &&
-                                                            isHovered
-                                                        ? notifier.whitecolor
-                                                        : notifier.isDark &&
-                                                                !isHovered
-                                                            ? notifier.blackcolor
-                                                            : notifier.blackcolor,
+                                            Text(NumberHelper().numberToString(courseInfo.payment, decimalDigits: 0).trim(),
+                                                maxLines: 1,
+                                                overflow: TextOverflow.visible,
+                                                style: baseStyle.copyWith(color: notifier.isDark && isHovered ? notifier.whitecolor : notifier.isDark && !isHovered ? notifier.blackcolor : notifier.blackcolor,
                                                     fontSize: Dimens.size15,
                                                     // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
                                                     fontWeight: FontWeight.bold)),

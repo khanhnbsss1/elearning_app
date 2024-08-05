@@ -236,8 +236,8 @@ class _CourseListState extends State<CourseList>
                               ),
                             ),
                             myScreenMediaType.isMobile?
-                            buildCourseList(state: state):
-                            Expanded(child: buildCourseList(state: state)),
+                            buildCourseList(state: state, boxConstraints: boxConstraints):
+                            Expanded(child: buildCourseList(state: state, boxConstraints: boxConstraints)),
                             SizedBox(height: 8,),
                           ],
                         )),
@@ -275,28 +275,33 @@ class _CourseListState extends State<CourseList>
       ),
     );
   }
-  Widget buildCourseList({required CourseListState state}){
+  Widget buildCourseList({required CourseListState state, required BoxConstraints boxConstraints}){
     List<Widget> listOfCourse = List.empty(growable: true);
-
+    
+    
     bool? enableEdit = state.userProfile?.getPermission().contains("");
+    double maxWidthItem = 400;
+    double heightOfItem = 450;
+    int numberRow = (boxConstraints.maxWidth / maxWidthItem).toInt();
+    double widthItem = (boxConstraints.maxWidth -(32* numberRow))/numberRow;
     for (CourseInfo courseInfo in state.courseResponseModel?.content ?? []) {
-      
-      listOfCourse.add(CourseItemGridView(
-        courseInfo: courseInfo,
-        enableEdit: enableEdit,
-        onDelete: (p0) {
+      listOfCourse.add(
+          CourseItemGridView(
+            courseInfo: courseInfo, 
+            enableEdit: enableEdit, 
+            onDelete: (p0) {
           
-        },
-        onEdit: (p0) {
+                    },
+                    onEdit: (p0) {
           CreateEditCourse(coursePageType: CoursePageType.edit, courseInfo: p0,).show(context);
-        },
-        onViewDetail: (p0) {
+                    },
+                    onViewDetail: (p0) {
           CoursePreview(courseInfo: courseInfo,).show(context);
-        },
-        onStudy:  (p0) {
+                    },
+                    onStudy:  (p0) {
           CourseStudy1(courseInfo: courseInfo,).show(context);
-        },
-      ));
+                    },
+                  ));
     }
     
     switch (state.blocStatus)
@@ -327,36 +332,29 @@ class _CourseListState extends State<CourseList>
                 children: [
                   Expanded(
                     child: Align(
-                      alignment: Alignment.topCenter,
+                      alignment: Alignment.topLeft,
                       child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         controller: scrollController,
-                        child: Wrap(
+/*                        child: Wrap(
                           spacing: 16,
                           runSpacing: 16,
                           alignment: WrapAlignment.start,
                           crossAxisAlignment: WrapCrossAlignment.start,
                           runAlignment: WrapAlignment.start,
                           children: listOfCourse,
-                        ),
+                        ),*/
 
-                        // child: GridView.builder(
-                        //   shrinkWrap: true,
-                        //   gridDelegate:
-                        //   SliverGridDelegateWithMaxCrossAxisExtent(
-                        //       // crossAxisCount: width < 550 ? 1 : width < 850 ? 2 : width < 1150 ? 3 : 4,
-                        //       crossAxisSpacing: 16,
-                        //       mainAxisSpacing: 16,
-                        //       // childAspectRatio: 9/10,
-                        //       maxCrossAxisExtent: 400
-                        //     ,
-                        //   ),
-                        //   itemBuilder: (_, index) {
-                        //     return listOfCourse[index];
-                        //   },
-                        //   itemCount: listOfCourse.length
-                        //   // shrinkWrap: true,
-                        // ),
+                         child: GridView.count(
+                           primary: false,
+                           //padding: const EdgeInsets.all(20),
+                           crossAxisSpacing: 16,
+                           childAspectRatio: (widthItem)/(heightOfItem)-0.05,
+                           mainAxisSpacing: 16,
+                           crossAxisCount: numberRow,
+                           shrinkWrap: true,
+                           children: listOfCourse,
+                         )
 
                         // child: MyGridView(item: listOfCourse,),
 
