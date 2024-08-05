@@ -379,9 +379,9 @@ class _LandingPageScreenState extends State<LandingPageScreen>
       ),
     );*/
     return Stack(children: [
-      CustomChildScrollView(
+      SingleChildScrollView(
         controller: _mainController,
-        scrollSpeed: 100,
+        //scrollSpeed: 100,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: listWiget,
@@ -1142,13 +1142,12 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     ? constraints.maxWidth - Dimens.size20
                     : constraints.maxWidth * 3 / 4,
               ),
-              child: SingleChildScrollView(
-                controller: differrentController,
-                scrollDirection: Axis.horizontal,
-                physics: const NeverScrollableScrollPhysics(),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
+              height: 300,
+              child: Center(
+                child: ListView(
+                  controller: differrentController,
+                  scrollDirection: Axis.horizontal,
+                  physics: const NeverScrollableScrollPhysics(),
                   children: listItem,
                 ),
               ),
@@ -1416,15 +1415,12 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                       ? constraints.maxWidth - Dimens.size20
                       : constraints.maxWidth * 3 / 4,
                 ),
-                child: SingleChildScrollView(
+                height: 300,
+                child: ListView(
                   controller: whyChooseUsController,
                   scrollDirection: Axis.horizontal,
                   physics: const NeverScrollableScrollPhysics(),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: listItem,
-                  ),
+                  children:  listItem,
                 ),
               ),
               Row(
