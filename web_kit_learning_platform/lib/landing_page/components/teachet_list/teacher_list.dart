@@ -281,7 +281,7 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
               children: [
                 Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Container(
+                  child: SizedBox(
                     width: Dimens.size300,
                     height: Dimens.size340,
                     child: ClipRRect(
