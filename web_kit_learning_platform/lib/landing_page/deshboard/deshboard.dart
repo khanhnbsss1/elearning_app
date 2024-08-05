@@ -359,17 +359,6 @@ class _LandingPageScreenState extends State<LandingPageScreen>
         EndOfPage(),
       });
     }
-    String text =
-        "If your app has frequent background activity with some idle time, Flutter might use that opportunity to collect the created objects without performance impact.";
-    String finaleText = "";
-    for (int index = 0; index < 1000; index++) {
-      finaleText += text;
-    }
-/*    return SingleChildScrollView(
-      child: Text(
-          finaleText
-      ),
-    );*/
     return Stack(children: [
       SingleChildScrollView(
         controller: _mainController,
