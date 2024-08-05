@@ -145,7 +145,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                     return Center(
                       child: SingleChildScrollView(
                         controller: scrollCont,
-                        physics: const NeverScrollableScrollPhysics(),
+                        // physics: const NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
