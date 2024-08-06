@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/src/multipart_file.dart';
+import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
@@ -16,9 +17,12 @@ import 'package:file_picker/src/file_picker_result.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
+import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
+import 'package:webkit/services/apis/vocabulary/vocabulary_list/vocabulary_list_api.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
 import 'package:webkit/views/course/create_edit_course/components/course_mode.dart';
 import 'package:webkit/views/course/create_edit_course/components/tag_drop_down.dart';
+import 'package:webkit/views/vocabulary/vocabulary_list/vocabulary_list.dart';
 import '../../../base/theme/colors_app.dart';
 import '../../../base/widgets/common/responsive_info.dart';
 import '../../../base/widgets/widget_common/widget_with_title_common.dart';
@@ -373,7 +377,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
                   ),
 
                   suggestionsCallback: (pattern) async {
-                    return await getLessonFilterList(pattern);
+                    return await getWordFilterList(pattern);
                   },
 
                   itemBuilder: (context, suggestion) {
@@ -387,8 +391,8 @@ class _CreateEditLesson extends State<CreateEditLesson>
                               )
                           ),
                           child: ListTile(
-                            leading: Icon(Icons.edit_document),
-                            title: Text(suggestion.lectureName??""),
+                            leading: Icon(Icons.book),
+                            title: Text(suggestion.simplified??""),
                           ),
                         );
                       },
@@ -441,12 +445,12 @@ class _CreateEditLesson extends State<CreateEditLesson>
         ]
     );
   }
-  Future<List<LessonInfo>>getLessonFilterList(String keyWord) async{
+  Future<List<VocabularyInfo>>getWordFilterList(String keyWord) async{
     if(keyWord.isEmpty) {
       return [];
     }
-    GetLessonListFilterApi getLessonListApi= GetLessonListFilterApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord));
-    LessonListResponseModel data = await getLessonListApi.call();
+    GetListVocabularyApi getLessonListApi= GetListVocabularyApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord));
+    VocabularyResponseModel data = await getLessonListApi.call();
     return data.content??[];
   }
 }
