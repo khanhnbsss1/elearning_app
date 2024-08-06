@@ -10,21 +10,24 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:file_picker/src/file_picker_result.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
 import 'package:webkit/views/course/create_edit_course/components/course_mode.dart';
 import 'package:webkit/views/course/create_edit_course/components/tag_drop_down.dart';
-import '../../../../base/theme/colors_app.dart';
-import '../../../../base/widgets/common/responsive_info.dart';
-import '../../../../base/widgets/widget_common/widget_with_title_common.dart';
-import '../../../../helpers/widgets/my_spacing.dart';
-import '../../../../helpers/widgets/my_text_style.dart';
+import '../../../base/theme/colors_app.dart';
+import '../../../base/widgets/common/responsive_info.dart';
+import '../../../base/widgets/widget_common/widget_with_title_common.dart';
+import '../../../helpers/widgets/my_spacing.dart';
+import '../../../helpers/widgets/my_text_style.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 
-class CreateEditLesson extends StatefulWidget {
-  final CourseInfo? courseInfo;
+import 'lesson_detail_bloc/lesson_detail_bloc.dart';
 
-  const CreateEditLesson({super.key, required this.courseInfo});
+class CreateEditLesson extends StatefulWidget {
+
+   LessonInfo? lessonInfo;
+   CreateEditLesson({super.key, this.lessonInfo});
 
   void show(BuildContext context) {
     showDialog(
@@ -33,14 +36,8 @@ class CreateEditLesson extends StatefulWidget {
         builder: (BuildContext context) {
           return Dialog(
             child: SizedBox(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width * (ResponsiveInfo.isTablet() ? 0.4 : 0.9),
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height * (ResponsiveInfo.isTablet() ? 0.8 : 0.9),
+                width: MediaQuery.of(context).size.width * (ResponsiveInfo.isTablet() ? 0.4 : 0.9),
+                height: MediaQuery.of(context).size.height * (ResponsiveInfo.isTablet() ? 0.8 : 0.9),
                 child: this
             ),
           );
@@ -70,18 +67,18 @@ class _CreateEditLesson extends State<CreateEditLesson>
   Widget lectureDetail() {
     return BlocProvider(
       create: (context) {
-        return AddCourseBloc(AddCourseState(courseInfo: widget.courseInfo,))
-          ..add(AddCourseInitEvent());
+        return LessonDetailBloc(LessonDetailState(lessonInfo: widget.lessonInfo,))
+          ..add(LessonDetailInitEvent());
       },
-      child: BlocConsumer<AddCourseBloc, AddCourseState>(
+      child: BlocConsumer<LessonDetailBloc, LessonDetailState>(
         listener: (context, state) {
           switch (state.blocStatus) {
-            case AddCourseStatus.initial:
+            case LessonDetailStatus.initial:
               break;
             default:
               break;
           }
-          state.blocStatus = AddCourseStatus.unKnown;
+          state.blocStatus = LessonDetailStatus.unKnown;
         },
         builder: (BuildContext context, state) {
           return Material(
@@ -129,8 +126,6 @@ class _CreateEditLesson extends State<CreateEditLesson>
       isRequirement: true,
       // titleStyle: ,
       child: TextFormField(
-        // validator: state.controller?.basicValidator.getValidation('name'),
-        // controller: state.controller?.basicValidator.getController('name'),
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
           labelText: 'Lecture name',

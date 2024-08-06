@@ -18,7 +18,7 @@ import 'package:webkit/services/apis/lessson/lesson_list/lesson_list_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
-import 'package:webkit/views/course/create_edit_course/lesson/create_edit_lesson.dart';
+import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
 
 class CourseLinkLessonListPage extends StatefulWidget {
   CourseLinkLessonListPage({super.key});
@@ -412,7 +412,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
           Gap(Dimens.size16),
           InkWell(
             onTap: () {
-              CreateEditLesson(courseInfo: state.courseInfo,).show(context);
+              CreateEditLesson().show(context);
             },
             child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size50,),
           )
