@@ -21,6 +21,7 @@ import 'package:webkit/services/apis/lessson/lesson_list/lesson_list_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:webkit/views/course/create_edit_course/lesson/create_edit_lesson.dart';
 
 class CourseLinkLessonListPage extends StatefulWidget {
   CourseLinkLessonListPage({super.key});
@@ -111,6 +112,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
             BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateCurrentSubjectEvent(subject: p0));
         },),
         lessonDropDownSearch(
+          state: state,
           context: context,
           onSelectLesson: (p0) {
             BlocProvider.of<AddCourseBloc>(context).add(AddCourseLinkLessonEvent(
@@ -313,7 +315,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
       ]
     );
   }
-  Widget lessonDropDownSearch({Function(LessonInfo)? onSelectLesson, required BuildContext context}) {
+  Widget lessonDropDownSearch({Function(LessonInfo)? onSelectLesson, required AddCourseState state, required BuildContext context}) {
     return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -412,7 +414,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
           Gap(Dimens.size16),
           InkWell(
             onTap: () {
-
+              CreateEditLesson(courseInfo: state.courseInfo,).show(context);
             },
             child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size50,),
           )

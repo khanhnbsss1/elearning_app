@@ -39,6 +39,7 @@ class ApiName {
 
   ///Lesson
   final String getLessonList = "/get-list-filter";
+  final String createLesson = "/create-lecture";
   final String linkLesson = "/update-lecture-course";
   final String unlinkLesson = "/unlink-lecture-course";
 

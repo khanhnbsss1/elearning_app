@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import '../../../../base/theme/colors_app.dart';
+import '../../../../base/theme/text_stype_constant.dart';
 import '../../../../helpers/widgets/my_spacing.dart';
 import '../../../../helpers/widgets/my_text.dart';
-
 
 class ModeOptionWidget extends StatefulWidget {
   final String? mode;
   final void Function(String?) onModeChanged;
   final void Function(int?) onPaymentChanged;
-  bool disablePremiumMode = false;
-  bool disablePayment = false;
+  bool? disablePremiumMode;
+  bool? disablePayment;
 
-  ModeOptionWidget({required this.mode, required this.onModeChanged, required this.onPaymentChanged,required this.disablePayment, required this.disablePremiumMode});
+  ModeOptionWidget(
+      {required this.mode,
+      required this.onModeChanged,
+      required this.onPaymentChanged,
+      this.disablePayment,
+      this.disablePremiumMode}) {
+    disablePayment ??= false;
+    disablePremiumMode ??= false;
+  }
+
   @override
   _ModeOptionWidget createState() => _ModeOptionWidget();
 }
@@ -19,23 +28,24 @@ class ModeOptionWidget extends StatefulWidget {
 class _ModeOptionWidget extends State<ModeOptionWidget> {
   TextEditingController controller = new TextEditingController();
   String? _mode;
+
   @override
   void initState() {
     super.initState();
-    _mode = widget.mode??'PREMIUM';
+    _mode = widget.mode ?? 'PREMIUM';
   }
+
   @override
   Widget build(BuildContext context) {
-    // final controller = Get.find<AddCourseController>();
-
-    // return widget.mode == Mode.PREMIUM ?
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        MyText.labelMedium(
-          'Payment *',
-        ),
+        Text('Payment: *',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyleConstant.textStyleBlack13w500
+                .copyWith(fontWeight: FontWeight.w600)),
         MySpacing.height(4),
         Row(
           children: [
@@ -55,48 +65,52 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
                 ),
               ),
             ),
-            (widget.disablePremiumMode != true) ? Expanded(
-              flex: 4,
-              child: ListTile(
-                title: const Text('PREMIUM'),
-                leading: Radio<String>(
-                  value: 'PREMIUM',
-                  groupValue: _mode,
-                  onChanged: (String? value) {
-                    setState(() {
-                      _mode = value;
-                      widget.onModeChanged(value);
-                    });
-                  },
-                ),
-              ),
-            ) : SizedBox(),
-              Expanded(
-              flex: 3,
-              child: (widget.disablePayment != true) ? SizedBox(
-                child: Container(
-                  color: ColorConst.whiteColor,
-                  child: TextFormField(
-                    controller: controller,
-                    keyboardType: TextInputType.number,
-                    enabled: _mode == 'PREMIUM',
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.attach_money,
-                        color: (_mode == 'PREMIUM')
-                            ? Colors.black87
-                            : Colors.black12,
+            (widget.disablePremiumMode != true)
+                ? Expanded(
+                    flex: 4,
+                    child: ListTile(
+                      title: const Text('PREMIUM'),
+                      leading: Radio<String>(
+                        value: 'PREMIUM',
+                        groupValue: _mode,
+                        onChanged: (String? value) {
+                          setState(() {
+                            _mode = value;
+                            widget.onModeChanged(value);
+                          });
+                        },
                       ),
-                      labelText: 'Payment',
-                      border: OutlineInputBorder(),
                     ),
-                    onChanged: (value){
-                      widget.onPaymentChanged(value as int?);
-                    },
-                  ),
-                ),
-              ): SizedBox(),
-            ) ,
+                  )
+                : SizedBox(),
+            Expanded(
+              flex: 3,
+              child: (widget.disablePayment != true)
+                  ? SizedBox(
+                      child: Container(
+                        color: ColorConst.whiteColor,
+                        child: TextFormField(
+                          controller: controller,
+                          keyboardType: TextInputType.number,
+                          enabled: _mode == 'PREMIUM',
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.attach_money,
+                              color: (_mode == 'PREMIUM')
+                                  ? Colors.black87
+                                  : Colors.black12,
+                            ),
+                            labelText: 'Payment',
+                            border: OutlineInputBorder(),
+                          ),
+                          onChanged: (value) {
+                            widget.onPaymentChanged(value as int?);
+                          },
+                        ),
+                      ),
+                    )
+                  : SizedBox(),
+            ),
           ],
         ),
       ],

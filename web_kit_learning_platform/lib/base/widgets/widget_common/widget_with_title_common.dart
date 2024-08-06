@@ -1,15 +1,19 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+
+import '../../../helpers/widgets/my_spacing.dart';
 
 class WidgetWithColumnTitleCommon extends StatefulWidget {
 
   String? title;
   final Function()? onTap;
   final Function(String value)? onTapOutSide;
+  final Function(bool value)? onCheckChanged;
   bool ?enable;
   double? height;
   Color? bgColor;
@@ -21,10 +25,12 @@ class WidgetWithColumnTitleCommon extends StatefulWidget {
   EdgeInsetsGeometry? childPadding;
   TextStyle? titleStyle;
   Widget ?titleWidget;
+  bool? enableAttachFile;
   WidgetWithColumnTitleCommon({
     super.key,
     this.onTap,
     this.onTapOutSide,
+    this.onCheckChanged,
     this.enable,
     this.height,
     this.bgColor,
@@ -36,7 +42,8 @@ class WidgetWithColumnTitleCommon extends StatefulWidget {
     this.alignmentGeometry,
     this.childPadding,
     this.titleStyle,
-    this.titleWidget
+    this.titleWidget,
+    this.enableAttachFile,
   }){
     height = height??Dimens.size40;
     bgColor ??=ColorConst.whiteColor;
@@ -46,6 +53,7 @@ class WidgetWithColumnTitleCommon extends StatefulWidget {
     isRequirement??=false;
     titleMainAxisAlignment??= MainAxisAlignment.start;
     alignmentGeometry??= Alignment.centerLeft;
+    enableAttachFile??=false;
   }
 
   @override
@@ -64,6 +72,7 @@ class _WidgetWithColumnTitleCommonState extends State<WidgetWithColumnTitleCommo
     super.dispose();
   }
 
+  bool check = false;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -105,7 +114,51 @@ class _WidgetWithColumnTitleCommonState extends State<WidgetWithColumnTitleCommo
                       Icons.star,
                       size: Dimens.size10,
                       color: Colors.red,)
-                )
+                ),
+                Spacer(),
+                Visibility(
+                    visible: widget.enableAttachFile == true,
+                    child: SizedBox(
+                      child: Row(
+                        children: [
+                          Text(
+                            'Attach link',
+                            style: widget.titleStyle??TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600),),
+                          MySpacing.width(8),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                check = !check;
+                                if(widget.onCheckChanged != null) {
+                                  widget.onCheckChanged!(check);
+                                }
+                              });
+                            },
+                            child: Container(
+                              width: 24,
+                              height: 24,
+                              decoration:
+                              BoxDecoration(
+                                  border:
+                                  Border.all(
+                                    color: Colors.red,
+                                  )),
+                              child: Align(
+                                alignment:
+                                Alignment.center,
+                                child: check
+                                    ? Icon(
+                                  Icons.check,
+                                  color: Colors
+                                      .red,
+                                )
+                                    : SizedBox(),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )),
               ],
             ),
           ):
