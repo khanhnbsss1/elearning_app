@@ -1,10 +1,8 @@
 import 'package:drop_down_search_field/drop_down_search_field.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:hovering/hovering.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
@@ -16,7 +14,6 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
-import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import 'package:webkit/services/apis/lessson/lesson_list/lesson_list_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
@@ -330,8 +327,8 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                         style: DefaultTextStyle.of(context).style.copyWith(
                             fontStyle: FontStyle.italic
                         ),
+                        
                         decoration: InputDecoration(
-                          //hintText: L10nX.getStr.search_lesson_str,
                           labelText: L10nX.getStr.search_lesson_str,
                           hintTextDirection: AppTheme.textDirection,
                           labelStyle: TextStyleConstant.textStyleBlack14w400,
@@ -377,19 +374,20 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                     },
                     onSuggestionSelected: (suggestion) {
                       if((BlocProvider.of<AddCourseBloc>(context).state.currentSubject??'').isEmpty)
-                        {
-                          ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
-                          return;
-                        }
-                        if(onSelectLesson!=null)
-                        {
-                          _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
-                          onSelectLesson(suggestion);
-                        }
-                        else
-                          {
-                            ToastUtils.showToastError(L10nX.getStr.unknown_str);
-                          }
+                      {
+                        ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
+                        return;
+                      }
+                      if(onSelectLesson!=null)
+                      {
+                        _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
+                        onSelectLesson(suggestion);
+                      }
+                      else
+                      {
+                        ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                      }
+                      print("object");
                     },
                   transitionBuilder: (context, child, controller) {
                     return Container(
@@ -522,7 +520,7 @@ class LessonDataSource extends DataGridSource {
             DataGridCell<Widget>(columnName: 'id', value: Text(e.id.toString(), style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.lecture_name_str, value:Text(e.lectureName??"", style: TextStyleConstant.textStyleBlack14w400,) ),
             DataGridCell<Widget>(columnName: L10nX.getStr.subject_name_str, value: Text(e.subName??"", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.lecture_link_str, value: Text(e.lectureLink??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.lecture_link_str, value: Text(e.link??"", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.document_str, value: Text("abcsssij", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.word_str, value: SingleChildScrollView(
               scrollDirection: Axis.horizontal,

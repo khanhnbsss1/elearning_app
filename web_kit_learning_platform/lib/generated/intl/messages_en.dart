@@ -374,6 +374,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pricing_plan_str":
             MessageLookupByLibrary.simpleMessage("Pricing plan"),
         "primary": MessageLookupByLibrary.simpleMessage("Primary"),
+        "primary_course":
+            MessageLookupByLibrary.simpleMessage("Primary course"),
         "product": MessageLookupByLibrary.simpleMessage("Product"),
         "product_a": MessageLookupByLibrary.simpleMessage("Product a"),
         "product_b": MessageLookupByLibrary.simpleMessage("Product b"),

@@ -17,9 +17,9 @@ class LessonListOnSearchByFilterEvent extends LessonListEvent {
   @override
   List<Object?> get props => [searchCommonRequest];
 }
-class LessonListOnSelectVocabularyEvent extends LessonListEvent {
-  VocabularyInfo selectVocabularyInfo;
-  LessonListOnSelectVocabularyEvent({required this.selectVocabularyInfo} );
+class LessonListOnSelectLessonEvent extends LessonListEvent {
+  LessonInfo selectLessonInfo;
+  LessonListOnSelectLessonEvent({required this.selectLessonInfo} );
   @override
-  List<Object?> get props => [selectVocabularyInfo];
+  List<Object?> get props => [selectLessonInfo];
 }

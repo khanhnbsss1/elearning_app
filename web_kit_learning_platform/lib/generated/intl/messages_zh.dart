@@ -316,6 +316,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pricing": MessageLookupByLibrary.simpleMessage("定价"),
         "pricing_plan_str": MessageLookupByLibrary.simpleMessage("定价方案"),
         "primary": MessageLookupByLibrary.simpleMessage("主要"),
+        "primary_course": MessageLookupByLibrary.simpleMessage("常规课程"),
         "product": MessageLookupByLibrary.simpleMessage("产品"),
         "product_a": MessageLookupByLibrary.simpleMessage("产品 a"),
         "product_b": MessageLookupByLibrary.simpleMessage("产品 b"),

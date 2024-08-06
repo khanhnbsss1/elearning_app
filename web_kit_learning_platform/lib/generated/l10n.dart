@@ -5173,6 +5173,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Primary course`
+  String get primary_course {
+    return Intl.message(
+      'Primary course',
+      name: 'primary_course',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -107,7 +107,7 @@ getPageRoute() {
     ///--------------- Course ---------------///
     GetPage(
         name: Routes.lessonList,
-        page: () =>  LessonList(key: UniqueKey(),),
+        page: () =>  LessonListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: Routes.videoPlayer,

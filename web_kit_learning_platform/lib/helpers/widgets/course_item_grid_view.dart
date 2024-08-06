@@ -47,12 +47,7 @@ class CourseItemGridView extends StatelessWidget {
         }
       },
       child: Container(
-        width: width < 1050
-            ? width
-            : width < 1350
-            ? (width - 250 - 16*3) * 1 / 3
-            : (width - 250 - 16*6) * 1 / 4,
-        constraints: BoxConstraints(maxWidth: 400, minWidth: 270),
+        constraints: BoxConstraints(maxWidth: 400, minWidth: 320),
         child: StatefulBuilder(
           builder: (BuildContext context, void Function(void Function()) setState) {
             return LayoutBuilder(

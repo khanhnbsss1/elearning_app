@@ -61,7 +61,7 @@ class _AddLecturesState extends State<AddLectures>
             id: lectures.length + 1,
             subName: '',
             lectureName: lectureName,
-            lectureLink: lectureLink,
+            link: lectureLink,
             document: document,
             lectureMode: lectureMode,
           ));
@@ -277,7 +277,7 @@ class _AddLecturesState extends State<AddLectures>
                                             Expanded(
                                               flex: 8,
                                               child: Text(
-                                                  'Link: ${subjects[subjectIndex].lectures[lectureIndex].lectureLink}',
+                                                  'Link: ${subjects[subjectIndex].lectures[lectureIndex].link}',
                                               overflow: TextOverflow.ellipsis,),
                                             ),
                                             SizedBox(width: 8,),

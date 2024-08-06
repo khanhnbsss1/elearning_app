@@ -370,6 +370,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pricing_plan_str":
             MessageLookupByLibrary.simpleMessage("Kế hoạch định giá"),
         "primary": MessageLookupByLibrary.simpleMessage("Chính"),
+        "primary_course":
+            MessageLookupByLibrary.simpleMessage("Khóa học chính quy"),
         "product": MessageLookupByLibrary.simpleMessage("Sản phẩm"),
         "product_a": MessageLookupByLibrary.simpleMessage("Sản phẩm a"),
         "product_b": MessageLookupByLibrary.simpleMessage("Sản phẩm b"),

@@ -41,26 +41,29 @@ class LessonInfo {
   int? id;
   String? subName;
   String? lectureName;
-  String? lectureLink;
+  String? link;
   String? lectureMode;
   String? document;
 
+  String? docLink;
   LessonInfo(
       {this.id,
         this.subName,
         this.lectureName,
-        this.lectureLink,
+        this.link,
         this.lectureMode,
-        this.document
+        this.document,
+        this.docLink
       });
 
   LessonInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     subName = json['sub_name'];
     lectureName = json['lecture_name']?? json['name'];
-    lectureLink = json['lecture_link'];
+    link = json['lecture_link'];
     lectureMode = json['lecture_mode'];
     document = json['document'];
+    docLink = json['doc_link'];
   }
 
   Map<String, dynamic> toJson() {
@@ -68,9 +71,10 @@ class LessonInfo {
     data['id'] = id;
     data['sub_name'] = subName;
     data['lecture_name'] = lectureName;
-    data['lecture_link'] = lectureLink;
+    data['lecture_link'] = link;
     data['lecture_mode'] = lectureMode;
     data['document'] = document;
+    data['doc_link'] = this.docLink;
     return data;
   }
 }

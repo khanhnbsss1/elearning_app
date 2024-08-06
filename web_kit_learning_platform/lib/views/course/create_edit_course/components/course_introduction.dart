@@ -16,6 +16,7 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
+import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
@@ -131,94 +132,150 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
   }
 
   Widget buildCourseSummaryInfoWeb({required AddCourseState state, required BuildContext context}) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(child: buildCourseName(state: state, context: context)),
-                    MySpacing.width(20),
-                    Expanded(
-                      child: buildCategory(state: state, context: context),
-                    ),
-                  ],
-                ),
-              ),
+    double widthUnit = Dimens.size150;
+    double maxWidthRow = widthUnit*2;
 
-              MySpacing.width(20),
-              Expanded(
-                child: buildGrade(state: state, context: context),
-              ),
-              MySpacing.width(20),
-              Expanded(
-                child: buildAuthor(state: state, context: context),
-              ),
-
-            ],
-          ),
-          // MySpacing.height(20),
-          MySpacing.height(20),
-          Row(
-            children: [
-              Expanded(
-                child: buildBackgroundImage(state: state, context: context),
-              ),
-              MySpacing.width(20),
-              Expanded(
-                child: buildVideoPreview(state: state, context: context),
-              ),
-              MySpacing.width(20),
-              Expanded(child: buildDuration(state: state, context: context)),
-            ],
-          ),
-          MySpacing.height(20),
-
-          MySpacing.height(20),
-          buildIntroduction(state: state, context: context),
-          MySpacing.height(20),
-          Row(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        int rowNumber = (MediaQuery.of(context).size.width/maxWidthRow).toInt();
+        double maxWidthItem = maxWidthRow;
+        double heightOfItem = 100;
+        int numberRow = ((constraints.maxWidth / maxWidthItem)/2).toInt()*2;
+        if(numberRow<1) {
+          numberRow=1;
+        }
+        double widthItem = (constraints.maxWidth -(50* numberRow))/numberRow;
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-            Expanded(
-              child: buildWhoThisCourse(state: state, context: context),
-            ),
-            Gap(Dimens.size50),
-            Expanded(
-                child: buildWhatWillYouAchieve(state: state, context: context)),
-            
-          ]),
-          MySpacing.height(20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              buildPaymentWidget(state: state, context: context),
-              MySpacing.height(20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
+              GridView.count(
+                crossAxisSpacing: 24,
+                childAspectRatio: (widthItem)/(heightOfItem),
+                mainAxisSpacing: 24,
+                crossAxisCount: numberRow,
+                shrinkWrap: true,
                 children: [
-                  buildStandard(state: state, context: context),
-                  Gap(Dimens.size20),
                   SizedBox(
-                    width: Dimens.size200 * 2,
-                    child: buildAccompanyCourse(state: state, context: context),
-                  )
+                      width: widthUnit*2,
+                      child: Row(
+                        children: [
+                          Expanded(child: buildCourseName(state: state, context: context)),
+                        ],
+                      )),
+                  SizedBox(
+                    width: widthUnit,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: buildAuthor(state: state, context: context),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: widthUnit,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: buildGrade(state: state, context: context),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: widthUnit,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: buildCategory(state: state, context: context),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: widthUnit,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: buildDuration(state: state, context: context),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: widthUnit*2,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: buildBackgroundImage(state: state, context: context),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: widthUnit*2,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: buildVideoPreview(state: state, context: context),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Gap(Dimens.size24),
+              Row(
+                children: [
+                  Expanded(
+                    child: buildIntroduction(state: state, context: context),
+                  ),
+                ],
+              ),
+              Gap(Dimens.size24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(child: buildWhatWillYouAchieve(state: state, context: context)),
+                  Gap(Dimens.size50),
+                  Expanded(child: buildWhoThisCourse(state: state, context: context)),
+                ],
+              ),
+              Gap(Dimens.size24),
+              buildPaymentWidget(state: state, context: context),
+              Gap(Dimens.size24),
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                runAlignment: WrapAlignment.spaceBetween,
+                runSpacing: Dimens.size20,
+                spacing: Dimens.size20,
+                children: [
+                  SizedBox(
+                    width: maxWidthRow,
+                      child: buildTags(state: state, context: context)),
+                  SizedBox(
+                      width: maxWidthRow*1.5,
+                      child: WidgetWithColumnTitleCommon(
+                        title: L10nX.getStr.primary_course,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            buildStandard(state: state, context: context),
+                            Gap(Dimens.size20),
+                            Expanded(child: buildAccompanyCourse(state: state, context: context)),
+                          ],
+                        ),
+                      )),
                 ],
               ),
             ],
           ),
-
-          MySpacing.height(20),
-          buildTags(state: state, context: context),
-          MySpacing.height(20),
-        ],
-      ),
+        );
+      }, 
     );
   }
 
@@ -268,6 +325,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
     );
   }
 
+  
   Widget buildCourseName({required AddCourseState state, required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
       title: '${L10nX.getStr.name}: ',
@@ -571,9 +629,10 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
       {
         listWhoThisCourseWidget.add(
             Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Row(
-                  mainAxisSize: MainAxisSize.max,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Expanded(
                       child: TextFormField(
@@ -622,8 +681,11 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
       return WidgetWithColumnTitleCommon(
         titleWidget: Row(
           mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Text(L10nX.getStr.what_will_you_achieve_after_the_course_str,style: TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600)),
+            Text(L10nX.getStr.what_will_you_achieve_after_the_course_str,
+                overflow:TextOverflow.clip,
+                style: TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600)),
             Gap(Dimens.size10),
             InkWell(
               onTap: () {
@@ -634,14 +696,8 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
             )
           ],),
         child: Column(
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: listWhoThisCourseWidget,
-            ),
-            Gap(Dimens.size10),
-            
-          ],
+          mainAxisSize: MainAxisSize.min,
+          children: listWhoThisCourseWidget,
         ),
       );
     },
@@ -686,7 +742,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         ),
         crossAxisAlignment: CrossAxisAlignment.end,
         child: Text(
-          L10nX.getStr.standard,
+          L10nX.getStr.primary_course,
           style: TextStyleConstant.textStyleBlack14w400,
         ));
   }
@@ -720,59 +776,22 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
 
   Widget buildPaymentWidget({required AddCourseState state, required BuildContext context}) {
     if (ResponsiveInfo.isTablet()) {
-      return WidgetWithRowTitleCommon(
-          title: '${L10nX.getStr.payment_str}: ',
-          isRequirement: true,
-          child: Row(
-            children: [
-              WidgetWithRowTitleCommon(
-                  titleWidget: InkWell(
-                    onTap: () {
-                        setState(() {
-                          if(state.courseInfo?.mode=='FREE')
-                          {
-
-                            state.courseInfo?.mode =  'PREMIUM';
-                          }
-                          else
-                          {
-                            state.courseInfo?.mode =  'FREE';
-                          }
-                          state.controller?.basicValidator.getController('payment_mode')?.text = state.courseInfo?.mode??"FREE";
-                          BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(courseInfo:  state.courseInfo, addCourseController: state.controller!));
-                        });
-                    },
-                    child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(1),
-                          color: Colors.white,
-                          border: Border.all(
-                            color: Colors.black87,
-                          ),
-                        ),
-                        width: 20,
-                        height: 20,
-                        child: ((state.courseInfo?.mode??"FREE")=="FREE")
-                            ? Icon(
-                                Icons.check,
-                                size: 15,
-                                color: ColorConst.colorIconGrays,
-                              )
-                            : null),
-                  ),
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  child: Text(
-                    L10nX.getStr.free_str,
-                    style: TextStyleConstant.textStyleBlack14w400,
-                  )),
-              Gap(Dimens.size20),
-              WidgetWithRowTitleCommon(
-                  titleWidget: InkWell(
-                    onTap: () {
+      return Wrap(
+        alignment: WrapAlignment.start,
+        runAlignment: WrapAlignment.start,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 20,
+        children: [
+          Text('${L10nX.getStr.payment_str}: ', style: TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight: FontWeight.w600),),
+          SizedBox(
+            width: Dimens.size120,
+            child: WidgetWithRowTitleCommon(
+                titleWidget: InkWell(
+                  onTap: () {
                       setState(() {
                         if(state.courseInfo?.mode=='FREE')
                         {
-
+                  
                           state.courseInfo?.mode =  'PREMIUM';
                         }
                         else
@@ -782,63 +801,109 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                         state.controller?.basicValidator.getController('payment_mode')?.text = state.courseInfo?.mode??"FREE";
                         BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(courseInfo:  state.courseInfo, addCourseController: state.controller!));
                       });
-                    },
-                    child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(1),
-                          color: Colors.white,
-                          border: Border.all(
-                            color: Colors.black87,
-                          ),
+                  },
+                  child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(1),
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.black87,
                         ),
-                        width: 20,
-                        height: 20,
-                        child:  (state.courseInfo?.mode??"FREE")=="PREMIUM"
-                            ? Icon(
-                          Icons.check,
-                          size: 15,
-                          color: ColorConst.colorIconGrays,
-                        )
-                            : null),
-                  ),
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  child: Text(
-                    L10nX.getStr.premium_str,
-                    style: TextStyleConstant.textStyleBlack14w400,
-                  )),
-              Gap(Dimens.size20),
-              SizedBox(
-                width: Dimens.size250,
-                child: TextFormField(
-                  validator: state.controller?.basicValidator.getValidation('payment_value'),
-                  controller: state.controller?.basicValidator.getController('payment_value'),
-                  keyboardType: TextInputType.number,
-                  textInputAction: TextInputAction.go,
-                  decoration: InputDecoration(
-                    //labelText: 'Result after the course',
-                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                      labelText: L10nX.getStr.price,
-                      alignLabelWithHint: true,
-                      floatingLabelAlignment: FloatingLabelAlignment.start,
-                      border: outlineInputBorder,
-                      contentPadding: MySpacing.all(16),
-                      isCollapsed: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.never),
-                  minLines: 1,
-                  maxLines: 1,
+                      ),
+                      width: 20,
+                      height: 20,
+                      child: ((state.courseInfo?.mode??"FREE")=="FREE")
+                          ? Icon(
+                              Icons.check,
+                              size: 15,
+                              color: ColorConst.colorIconGrays,
+                            )
+                          : null),
                 ),
-              ),
-              Gap(Dimens.size20),
-              SizedBox(
-                width: Dimens.size250,
-                child: customDropDownSearch(
-                  list: state.controller!.listOfAccompanyCourses,
-                  hintText: "${L10nX.getStr.discount_str}...",
-                  selectItem: "80.0",
-                  controller: state.controller?.basicValidator.getController('payment_discount')),
-              ),
-            ],
-          ));
+                crossAxisAlignment: CrossAxisAlignment.end,
+                child: Text(
+                  L10nX.getStr.free_str,
+                  style: TextStyleConstant.textStyleBlack14w400,
+                )),
+          ),
+          SizedBox(
+            width: Dimens.size120,
+            child: WidgetWithRowTitleCommon(
+                titleWidget: InkWell(
+                  onTap: () {
+                    setState(() {
+                      if(state.courseInfo?.mode=='FREE')
+                      {
+                  
+                        state.courseInfo?.mode =  'PREMIUM';
+                      }
+                      else
+                      {
+                        state.courseInfo?.mode =  'FREE';
+                      }
+                      state.controller?.basicValidator.getController('payment_mode')?.text = state.courseInfo?.mode??"FREE";
+                      BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(courseInfo:  state.courseInfo, addCourseController: state.controller!));
+                    });
+                  },
+                  child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(1),
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.black87,
+                        ),
+                      ),
+                      width: 20,
+                      height: 20,
+                      child:  (state.courseInfo?.mode??"FREE")=="PREMIUM"
+                          ? Icon(
+                        Icons.check,
+                        size: 15,
+                        color: ColorConst.colorIconGrays,
+                      )
+                          : null),
+                ),
+                crossAxisAlignment: CrossAxisAlignment.end,
+                child: Text(
+                  L10nX.getStr.premium_str,
+                  style: TextStyleConstant.textStyleBlack14w400,
+                )),
+          ),
+          Container(
+            constraints: BoxConstraints(
+              maxWidth: Dimens.size250,
+            ),
+            child: TextFormField(
+              validator: state.controller?.basicValidator.getValidation('payment_value'),
+              controller: state.controller?.basicValidator.getController('payment_value'),
+              keyboardType: TextInputType.number,
+              textInputAction: TextInputAction.go,
+              decoration: InputDecoration(
+                //labelText: 'Result after the course',
+                  labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                  labelText: L10nX.getStr.price,
+                  alignLabelWithHint: true,
+                  floatingLabelAlignment: FloatingLabelAlignment.start,
+                  border: outlineInputBorder,
+                  contentPadding: MySpacing.all(16),
+                  isCollapsed: true,
+                  floatingLabelBehavior: FloatingLabelBehavior.never),
+              minLines: 1,
+              maxLines: 1,
+            ),
+          ),
+          Container(
+            constraints: BoxConstraints(
+              maxWidth: Dimens.size250,
+            ),
+            child: customDropDownSearch(
+              list: state.controller!.listOfAccompanyCourses,
+              hintText: "${L10nX.getStr.discount_str}...",
+              selectItem: "80.0",
+              controller: state.controller?.basicValidator.getController('payment_discount')),
+          ),
+        ],
+      );
     } else {
       return WidgetWithColumnTitleCommon(
           title: '${L10nX.getStr.payment_str}: ',

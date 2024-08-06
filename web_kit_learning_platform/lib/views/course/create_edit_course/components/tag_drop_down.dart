@@ -30,9 +30,8 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
           Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  width: 200,
-                  child:  DropdownSearch<TagsInfo>(
+                Expanded(
+                  child: DropdownSearch<TagsInfo>(
                     popupProps: PopupProps.menu(
                       constraints: BoxConstraints(
                         maxHeight: (65 + widget.allTags.length * 50 < 210) ? 65 + widget.allTags.length * 50 : 210,
@@ -73,7 +72,7 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                             widget.onAddTags(value);
                         });
                         }
-     
+                     
                       },
                   ),
                 ),

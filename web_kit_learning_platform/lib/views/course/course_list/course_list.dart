@@ -283,23 +283,22 @@ class _CourseListState extends State<CourseList>
     double maxWidthItem = 400;
     double heightOfItem = 450;
     int numberRow = (boxConstraints.maxWidth / maxWidthItem).toInt();
-    double widthItem = (boxConstraints.maxWidth -(32* numberRow))/numberRow;
+    double widthItem = (boxConstraints.maxWidth -(50* numberRow))/numberRow;
     for (CourseInfo courseInfo in state.courseResponseModel?.content ?? []) {
       listOfCourse.add(
           CourseItemGridView(
             courseInfo: courseInfo, 
             enableEdit: enableEdit, 
             onDelete: (p0) {
-          
                     },
-                    onEdit: (p0) {
-          CreateEditCourse(coursePageType: CoursePageType.edit, courseInfo: p0,).show(context);
+            onEdit: (p0) {
+              CreateEditCourse(coursePageType: CoursePageType.edit, courseInfo: p0,).show(context);
                     },
                     onViewDetail: (p0) {
-          CoursePreview(courseInfo: courseInfo,).show(context);
+              CoursePreview(courseInfo: courseInfo,).show(context);
                     },
                     onStudy:  (p0) {
-          CourseStudy1(courseInfo: courseInfo,).show(context);
+              CourseStudy1(courseInfo: courseInfo,).show(context);
                     },
                   ));
     }
@@ -336,25 +335,24 @@ class _CourseListState extends State<CourseList>
                       child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         controller: scrollController,
-                        child: Wrap(
+/*                        child: Wrap(
                           spacing: 16,
                           runSpacing: 16,
                           alignment: WrapAlignment.start,
                           crossAxisAlignment: WrapCrossAlignment.start,
                           runAlignment: WrapAlignment.start,
                           children: listOfCourse,
-                        ),
+                        ),*/
 
-                         // child: GridView.count(
-                         //   primary: false,
-                         //   //padding: const EdgeInsets.all(20),
-                         //   crossAxisSpacing: 16,
-                         //   childAspectRatio: (widthItem)/(heightOfItem)-0.05,
-                         //   mainAxisSpacing: 16,
-                         //   crossAxisCount: numberRow,
-                         //   shrinkWrap: true,
-                         //   children: listOfCourse,
-                         // )
+                          child: GridView.count(
+                            //padding: const EdgeInsets.all(20),
+                            crossAxisSpacing: 24,
+                            childAspectRatio: (widthItem)/(heightOfItem)-0.05,
+                            mainAxisSpacing: 24,
+                            crossAxisCount: numberRow,
+                            shrinkWrap: true,
+                            children: listOfCourse,
+                          )
 
                         // child: MyGridView(item: listOfCourse,),
 

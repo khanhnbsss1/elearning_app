@@ -5,6 +5,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
+import 'package:webkit/services/apis/lessson/lesson_list/lesson_list_api.dart';
+import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/vocabulary_list_api.dart';
 
@@ -16,9 +18,10 @@ class LessonListBloc extends Bloc<LessonListEvent, LessonListState> {
   LessonListBloc(super.initialState) {
     on<LessonListInitEvent>(_onInit);
     on<LessonListOnSearchByFilterEvent>(_onSearchByParams);
-    on<LessonListOnSelectVocabularyEvent>((event, emit) async {
+    on<LessonListOnSelectLessonEvent>((event, emit) async {
       emit(state.copyWith(
-          selectVocabularyInfo: event.selectVocabularyInfo
+          selectLessonInfo: event.selectLessonInfo,
+        blocStatus: LessonListStatus.onSelectLesson
       ));
     });
   }
@@ -26,47 +29,32 @@ class LessonListBloc extends Bloc<LessonListEvent, LessonListState> {
   Future<void> _onInit(LessonListInitEvent event,
       Emitter<LessonListState> emit,) async {
     emit(state.copyWith(
-        blocStatus: VocabularyStatus.onLoading,
+        blocStatus: LessonListStatus.onLoading,
     ));
-    await callCourseApi(searchCommonRequest: state.searchCommonRequest!);
+    await callLessonListApi(searchCommonRequest: state.searchCommonRequest!);
   }
 
   Future<void> _onSearchByParams(LessonListOnSearchByFilterEvent event,
       Emitter<LessonListState> emit,) async {
     emit(state.copyWith(
-        blocStatus: VocabularyStatus.onLoading,
+        blocStatus: LessonListStatus.onLoading,
         searchCommonRequest: event.searchCommonRequest
     ));
-    await callCourseApi(searchCommonRequest: event.searchCommonRequest);
+    await callLessonListApi(searchCommonRequest: event.searchCommonRequest);
   }
   
-  Future<void> callCourseApi({required SearchCommonRequest searchCommonRequest}) async {
-    if(state.vocabularyType ==VocabularyType.vocabularyList)
-      {
-        VocabularyApi courseApi = VocabularyApi(searchCommonRequest: state.searchCommonRequest!);
-        VocabularyResponseModel vocabularyResponseModel = await courseApi.call();
+  Future<void> callLessonListApi({required SearchCommonRequest searchCommonRequest}) async {
+
+    GetLessonListApi courseApi = GetLessonListApi(searchCommonRequest: state.searchCommonRequest!);
+    LessonListResponseModel lessonListResponseModel = await courseApi.call();
         emit(state.copyWith(
-            vocabularyResponseModel: vocabularyResponseModel,
-            blocStatus: VocabularyStatus.onLoadEnd,
+            lessonListResponseModel: lessonListResponseModel,
+            blocStatus: LessonListStatus.onLoadEnd,
           searchCommonRequest: searchCommonRequest
         ));
-        if((vocabularyResponseModel.content??[]).isNotEmpty) {
-          add(LessonListOnSelectVocabularyEvent(selectVocabularyInfo: (vocabularyResponseModel.content??[]).first));
+        if((lessonListResponseModel.content??[]).isNotEmpty) {
+          add(LessonListOnSelectLessonEvent(selectLessonInfo: (lessonListResponseModel.content??[]).first));
         }
-      }
-    else if(state.vocabularyType ==VocabularyType.myVocabularyList)
-      {
-        VocabularyApi myCourseApi = VocabularyApi(searchCommonRequest: searchCommonRequest);
-        VocabularyResponseModel vocabularyResponseModel = await myCourseApi.call();
-        emit(state.copyWith(
-            vocabularyResponseModel: vocabularyResponseModel,
-            blocStatus: VocabularyStatus.onLoadEnd,
-            searchCommonRequest: searchCommonRequest
-        ));
-        if((vocabularyResponseModel.content??[]).isNotEmpty) {
-          add(LessonListOnSelectVocabularyEvent(selectVocabularyInfo: (vocabularyResponseModel.content??[]).first));
-        }
-      }
    
 
   }

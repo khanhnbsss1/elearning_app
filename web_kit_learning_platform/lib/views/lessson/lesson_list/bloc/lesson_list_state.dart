@@ -1,54 +1,46 @@
 part of 'lesson_list_bloc.dart';
 
-enum VocabularyStatus {
+enum LessonListStatus {
   initial,
   onLoading,
   onSearchByParams,
-  onLoadEnd
-}
-enum VocabularyType{
-  vocabularyList,
-  myVocabularyList
+  onLoadEnd,
+  onSelectLesson
 }
 
 @immutable
 class LessonListState extends Equatable {
-  VocabularyResponseModel? vocabularyResponseModel;
-  VocabularyStatus? blocStatus;
+  LessonListResponseModel? lessonListResponseModel;
+  LessonListStatus? blocStatus;
   SearchCommonRequest? searchCommonRequest;
-  VocabularyType? vocabularyType;
-  VocabularyInfo? selectVocabularyInfo;
+  LessonInfo? selectLessonInfo;
   LessonListState({
       this.blocStatus, 
-    this.vocabularyResponseModel,
+    this.lessonListResponseModel,
     this.searchCommonRequest,
-    this.vocabularyType,
-    this.selectVocabularyInfo
+    this.selectLessonInfo
   }){
-    vocabularyResponseModel??= VocabularyResponseModel(content: []);
+    lessonListResponseModel??= LessonListResponseModel(content: []);
     searchCommonRequest??= SearchCommonRequest(filterType: "ALL", pageNumber: 0, pageSize: 10, keyword: "");
-    vocabularyType??= VocabularyType.vocabularyList;
   }
 
 
   LessonListState copyWith({
-    VocabularyResponseModel? vocabularyResponseModel,
-    VocabularyStatus? blocStatus,
+    LessonListResponseModel? lessonListResponseModel,
+    LessonListStatus? blocStatus,
     SearchCommonRequest? searchCommonRequest,
-    VocabularyType? vocabularyType,
-    VocabularyInfo? selectVocabularyInfo
+    LessonInfo? selectLessonInfo
   })
   {
     return LessonListState(
       blocStatus: blocStatus??this.blocStatus,
-      vocabularyResponseModel: vocabularyResponseModel??this.vocabularyResponseModel,
+      lessonListResponseModel: lessonListResponseModel??this.lessonListResponseModel,
       searchCommonRequest: searchCommonRequest??this.searchCommonRequest,
-      vocabularyType: vocabularyType??this.vocabularyType,
-      selectVocabularyInfo: selectVocabularyInfo??this.selectVocabularyInfo,
+      selectLessonInfo: selectLessonInfo??this.selectLessonInfo,
 
     );
   }
   @override
-  List<Object?> get props => [blocStatus, vocabularyResponseModel, searchCommonRequest,vocabularyType, selectVocabularyInfo];
+  List<Object?> get props => [blocStatus, lessonListResponseModel, searchCommonRequest, selectLessonInfo];
 
 }
