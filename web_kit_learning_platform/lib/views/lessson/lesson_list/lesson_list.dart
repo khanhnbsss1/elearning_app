@@ -21,6 +21,7 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/views/lessson/components/lesson_item_view.dart';
+import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
 import 'package:webkit/views/vocabulary/components/vocabulary_item_view.dart';
 import 'package:webkit/views/vocabulary/vocabulary_detail/add_words.dart';
 import '../../../helpers/widgets/my_spacing.dart';
@@ -81,7 +82,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                 {
                   return Layout(
                       isScroll: false,
-                      padding: EdgeInsets.only(top: 35 + 16, bottom: 16),
+                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
                 }
               else
@@ -105,13 +106,16 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
     return Container(
       color: ColorConst.whiteColor,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(vertical: 16.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
-            Expanded(child: buildLessonList(state: state, context: context)),
+            Expanded(child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: buildLessonList(state: state, context: context),
+            )),
             SizedBox(height: 8,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -160,66 +164,72 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
               bottom: BorderSide(color: ColorConst.dividerColor)
           )
       ),
-      padding: EdgeInsets.symmetric(vertical: Dimens.size8),
+      padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(
-            child: SizedBox(
-              height: Dimens.size40,
-              child: Form(
-                key: formKey,
-                child: TextFormField(
-                  maxLines: 1,
-                  controller: textEditingController,
-                  onChanged: (value) {
-                    
-                  },
-                  onFieldSubmitted: (value) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
-                  },
-                  onTapOutside: (event) {
-                  },
-                  style: MyTextStyle.bodyMedium(),
-                  decoration: InputDecoration(
-                      hintText: L10nX.getStr.search,
-                      fillColor: ColorConst.whiteColor,
-                      filled: true,
-                      hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                      border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                      enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                      focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                      prefixIcon: const Align(
-                          alignment: Alignment.center,
-                          child: Icon(
-                            LucideIcons.search,
-                            size: 14,
-                          )),
-                      prefixIconConstraints: const BoxConstraints(
-                          minWidth: 36,
-                          maxWidth: 36,
-                          minHeight: 32,
-                          maxHeight: 32),
-                      contentPadding: MySpacing.xy(16, 12),
-                      //isCollapsed: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.auto),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: Dimens.size40,
+                width: Dimens.size250,
+                child: Form(
+                  key: formKey,
+                  child: TextFormField(
+                    maxLines: 1,
+                    controller: textEditingController,
+                    onChanged: (value) {
+                      
+                    },
+                    onFieldSubmitted: (value) {
+                      BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                    },
+                    onTapOutside: (event) {
+                    },
+                    style: MyTextStyle.bodyMedium(),
+                    decoration: InputDecoration(
+                        hintText: L10nX.getStr.search,
+                        fillColor: ColorConst.whiteColor,
+                        filled: true,
+                        hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                        border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                        enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                        focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                        prefixIcon: const Align(
+                            alignment: Alignment.center,
+                            child: Icon(
+                              LucideIcons.search,
+                              size: 14,
+                            )),
+                        prefixIconConstraints: const BoxConstraints(
+                            minWidth: 36,
+                            maxWidth: 36,
+                            minHeight: 32,
+                            maxHeight: 32),
+                        contentPadding: MySpacing.xy(16, 12),
+                        //isCollapsed: true,
+                        floatingLabelBehavior: FloatingLabelBehavior.auto),
+                  ),
                 ),
               ),
-            ),
+              Gap(Dimens.size10),
+              InkWell(
+                  onTap: () {
+                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                  },
+                  child: Icon(Icons.search_rounded, color: ColorConst.mainColor,size: Dimens.size40,)),
+            ],
           ),
-          Gap(Dimens.size10),
-          InkWell(
-              onTap: () {
-                BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
-              },
-              child: Icon(Icons.search_rounded, color: ColorConst.mainColor,size: Dimens.size40,)),
+         
           Row(
             children: [
               Gap(Dimens.size10),
               InkWell(
                   onTap: () {
                     // CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
-                    AddWords().show(context);
+                    CreateEditLesson().show(context);
                   },
                   child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
             ],
@@ -229,16 +239,27 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
     );
   }
   Widget buildLessonList({required LessonListState state, required BuildContext context}){
-    List<Widget> listOfVocabulary = List.empty(growable: true);
+    List<Widget> listOfLesson = List.empty(growable: true);
 
     for (LessonInfo lessonInfo in state.lessonListResponseModel?.content ?? []) {
-      listOfVocabulary.add(
+      listOfLesson.add(
         InkWell(
           onTap: () {
             BlocProvider.of<LessonListBloc>(context).add(LessonListOnSelectLessonEvent(selectLessonInfo: lessonInfo));
           },
-          child: LessonItemView(lessonInfo: lessonInfo,),)
-          
+          child: LessonItemView(
+            lessonInfo: lessonInfo,
+            onViewDetail: (p0) {
+              
+            },
+            onEdit: (p0) {
+              
+            },
+            onDelete: (p0) {
+              
+            },
+          ),
+        )
       );
     }
     switch (state.blocStatus){
@@ -254,7 +275,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
       case LessonListStatus.onSelectLesson:
       case LessonListStatus.onLoadEnd:
         // TODO: Handle this case.
-        return  (listOfVocabulary.isEmpty) ?
+        return  (listOfLesson.isEmpty) ?
         Center(child:NoData()) :
         Scrollbar(
           controller: scrollController,
@@ -266,7 +287,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
               alignment: WrapAlignment.spaceBetween,
               crossAxisAlignment: WrapCrossAlignment.start,
               runAlignment: WrapAlignment.spaceBetween,
-              children: listOfVocabulary,
+              children: listOfLesson,
             ),
           ),
         );

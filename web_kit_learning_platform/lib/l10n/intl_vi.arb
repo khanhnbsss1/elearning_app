@@ -496,7 +496,7 @@
   "word_str": "Từ",
   "thanh toán_str": "Thanh toán",
   "action_str": "Hành động",
-  "Attack_link_str": "Liên kết tấn công",
+  "attack_link_str": "Liên kết ",
   "create_lecture_str": "Tạo bài giảng",
   "creating_a_detailed_pricing_plan_str": "Việc tạo kế hoạch định giá chi tiết cho khóa học của bạn đòi hỏi phải xem xét nhiều yếu tố khác nhau. Dưới đây là bảng phân tích để giúp bạn cấu trúc mức giá của mình",
   "normal_sale_str": "Bán bình thường",
@@ -518,6 +518,7 @@
   "create_lesson_str": "Tạo bài học",
   "delete_lesson_str": "Xóa bài học",
   "subject_str": "Chủ đề",
-  "primary_course": "Khóa học chính quy"
-  
+  "primary_course": "Khóa học chính quy",
+  "video_str": "Video",
+  "payment_str": "Thanh toán"
 }

@@ -122,7 +122,7 @@ class _WidgetWithColumnTitleCommonState extends State<WidgetWithColumnTitleCommo
                       child: Row(
                         children: [
                           Text(
-                            'Attach link',
+                            L10nX.getStr.attack_link_str,
                             style: widget.titleStyle??TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600),),
                           MySpacing.width(8),
                           InkWell(

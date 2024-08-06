@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:webkit/base/base.export.dart';
 import '../../../../base/theme/colors_app.dart';
 import '../../../../base/theme/text_stype_constant.dart';
 import '../../../../helpers/widgets/my_spacing.dart';
@@ -41,7 +43,7 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text('Payment: *',
+        Text('${L10nX.getStr.payment_str}: *',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyleConstant.textStyleBlack13w500
@@ -52,7 +54,7 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
             Expanded(
               flex: 3,
               child: ListTile(
-                title: const Text('FREE'),
+                title:  Text(L10nX.getStr.free_str),
                 leading: Radio<String>(
                   value: 'FREE',
                   groupValue: _mode,
@@ -69,7 +71,7 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
                 ? Expanded(
                     flex: 4,
                     child: ListTile(
-                      title: const Text('PREMIUM'),
+                      title:  Text(L10nX.getStr.premium_str),
                       leading: Radio<String>(
                         value: 'PREMIUM',
                         groupValue: _mode,
@@ -92,6 +94,9 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
                         child: TextFormField(
                           controller: controller,
                           keyboardType: TextInputType.number,
+                          inputFormatters: [ 
+                            FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+                          ],
                           enabled: _mode == 'PREMIUM',
                           decoration: InputDecoration(
                             prefixIcon: Icon(

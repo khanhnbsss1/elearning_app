@@ -21,7 +21,7 @@ class LessonListState extends Equatable {
     this.selectLessonInfo
   }){
     lessonListResponseModel??= LessonListResponseModel(content: []);
-    searchCommonRequest??= SearchCommonRequest(filterType: "ALL", pageNumber: 0, pageSize: 10, keyword: "");
+    searchCommonRequest??= SearchCommonRequest(pageNumber: 0, pageSize: 10, keyword: "B");
   }
 
 

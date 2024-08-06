@@ -5,9 +5,9 @@ import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'models/vocabulary_models.dart';
 
-class VocabularyApi extends BaseApiRequest {
+class GetListVocabularyApi extends BaseApiRequest {
   SearchCommonRequest searchCommonRequest;
-  VocabularyApi({required this.searchCommonRequest}):super(
+  GetListVocabularyApi({required this.searchCommonRequest}):super(
     serviceType: SERVICE_TYPE.VOCABULARY,
     apiName: ApiName.getInstance().getListVocabulary,
   );

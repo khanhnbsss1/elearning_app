@@ -1,3 +1,4 @@
+import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -6,6 +7,9 @@ import 'package:dio/src/multipart_file.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/services/base_request/models/search_common_request.dart';
+import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
+import 'package:webkit/helpers/theme/app_style.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:file_picker/src/file_picker_result.dart';
@@ -50,14 +54,32 @@ class CreateEditLesson extends StatefulWidget {
 
 class _CreateEditLesson extends State<CreateEditLesson>
     with TickerProviderStateMixin, UIMixin {
+  final TextEditingController _wordDropdownSearchFieldController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('data'),
-        centerTitle: true,
+    return Material(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(Dimens.size20))
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(0),
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(L10nX.getStr.create_lesson_str, style: TextStyleConstant.textStyleBlack20w700,),
+              centerTitle: true,
+            ),
+            body: Container(
+              
+              decoration: BoxDecoration(
+                border: Border(top: BorderSide(color: ColorConst.dividerColor, width: 1)),
+                color: ColorConst.whiteColor
+              ), 
+                child: lectureDetail()),
+          ),
+        ),
       ),
-      body: lectureDetail(),
     );
   }
 
@@ -81,38 +103,42 @@ class _CreateEditLesson extends State<CreateEditLesson>
           state.blocStatus = LessonDetailStatus.unKnown;
         },
         builder: (BuildContext context, state) {
-          return Material(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        buildLectureName(context: context),
-                        MySpacing.height(16),
-                        buildLectureLink(context: context),
-                        MySpacing.height(16),
-                        buildLecture(context: context),
-                        MySpacing.height(16),
-                        buildLectureDocuments(context: context),
-                        MySpacing.height(16),
-                        buildLectureMode(context: context),
-                        MySpacing.height(16),
-                        buildLectureWords(context: context),
-                        MySpacing.height(16),
-                        ActionButton1(
-                          text: 'submit',
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            buildLectureName(context: context),
+                            MySpacing.height(16),
+                            buildLecture(context: context),
+                            MySpacing.height(16),
+                            buildLectureLink(context: context),
+                            MySpacing.height(16),
+                            buildLectureDocuments(context: context),
+                            MySpacing.height(16),
+                            buildLectureMode(context: context),
+                            MySpacing.height(16),
+                            buildLectureWords(context: context),
+                            MySpacing.height(16),
+                          ],
                         ),
-                        MySpacing.height(16),
-                      ],
+                      ),
                     ),
-                  ),
-                );
-              },
-            ),
+                    ActionButton1(
+                      text: L10nX.getStr.create_lesson_str,
+                      width: Dimens.size150,
+                    ),
+                  ],
+                ),
+              );
+            },
           );
         },
       ),
@@ -122,13 +148,13 @@ class _CreateEditLesson extends State<CreateEditLesson>
   Widget buildLectureName({required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
       // title: '${L10nX.getStr.name}: ',
-      title: 'Lecture name',
+      title: L10nX.getStr.lecture_name_str,
       isRequirement: true,
       // titleStyle: ,
       child: TextFormField(
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
-          labelText: 'Lecture name',
+          labelText: L10nX.getStr.lecture_name_str,
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
           border: outlineInputBorder,
           prefixIcon: Icon(
@@ -144,10 +170,10 @@ class _CreateEditLesson extends State<CreateEditLesson>
     );
   }
 
-  Widget buildLectureLink({required BuildContext context}) {
+  Widget buildLecture({required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
       // title: '${L10nX.getStr.name}: ',
-      title: 'Subject',
+      title: L10nX.getStr.description,
       isRequirement: true,
       // titleStyle: ,
       child: TextFormField(
@@ -155,7 +181,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
         // controller: state.controller?.basicValidator.getController('name'),
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
-          labelText: 'Subject',
+          labelText: L10nX.getStr.description,
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
           border: outlineInputBorder,
           prefixIcon: Icon(
@@ -172,10 +198,10 @@ class _CreateEditLesson extends State<CreateEditLesson>
   }
 
   bool enableLectureLink = false;
-  Widget buildLecture({required BuildContext context}) {
+  Widget buildLectureLink({required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
       // title: '${L10nX.getStr.name}: ',
-      title: 'Lecture',
+      title: L10nX.getStr.lecture_link_str,
       isRequirement: true,
       enableAttachFile: true,
       onCheckChanged: (bool value){
@@ -226,7 +252,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
   Widget buildLectureDocuments({required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
       // title: '${L10nX.getStr.name}: ',
-      title: 'Documents',
+      title: L10nX.getStr.document_str,
       isRequirement: true,
       enableAttachFile: true,
       onCheckChanged: (bool value) {
@@ -240,7 +266,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
         // controller: state.controller?.basicValidator.getController('name'),
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
-          labelText: 'Name',
+          labelText: L10nX.getStr.document_str,
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
           border: outlineInputBorder,
           prefixIcon: Icon(
@@ -284,12 +310,13 @@ class _CreateEditLesson extends State<CreateEditLesson>
       },
     );
   }
-  List<TagsInfo>listOfTags = [TagsInfo(id: 1,name: '1'
+  List<TagsInfo>listOfTags = [
+    TagsInfo(id: 1,name: '1'
   ),];
   Widget buildLectureWords({required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
       // title: '${L10nX.getStr.name}: ',
-      title: 'Lecture name',
+      title: L10nX.getStr.lecture_name_str,
       isRequirement: true,
       child: TagDropDown(
         // allTags: state.controller!.listOfTags,
@@ -306,5 +333,120 @@ class _CreateEditLesson extends State<CreateEditLesson>
         },
       ),
     );
+  }
+  Widget wordsDropDownSearch({Function(LessonInfo)? onSelectLesson, required AddCourseState state, required BuildContext context}) {
+    return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: Dimens.size300,
+            child: StatefulBuilder(
+              builder: (BuildContext context, void Function(void Function()) setState) {
+                return DropDownSearchFormField(
+                  textFieldConfiguration: TextFieldConfiguration(
+                    autofocus: true,
+                    controller: _wordDropdownSearchFieldController,
+                    style: DefaultTextStyle.of(context).style.copyWith(
+                        fontStyle: FontStyle.italic
+                    ),
+
+                    decoration: InputDecoration(
+                      labelText: L10nX.getStr.search_lesson_str,
+                      hintTextDirection: AppTheme.textDirection,
+                      labelStyle: TextStyleConstant.textStyleBlack14w400,
+                      hintStyle: TextStyleConstant.textStyleBlack14w400,
+                      border: outlineInputBorder,
+                      prefixIcon: Icon(
+                        Icons.edit_document,
+                        size: 20,
+                        color: ColorConst.colorIconRed,
+                      ),
+                      suffixIcon: Icon(
+                        LucideIcons.search,
+                        size: 20,
+                        color: ColorConst.colorIconRed,
+                      ),
+                      contentPadding: MySpacing.all(16),
+                      isCollapsed: true,
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                    ),
+                  ),
+
+                  suggestionsCallback: (pattern) async {
+                    return await getLessonFilterList(pattern);
+                  },
+
+                  itemBuilder: (context, suggestion) {
+                    return OnHoverWidget(
+                      builder: (bool isHovered) {
+                        return  Container(
+                          decoration: BoxDecoration(
+                              color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
+                              border: Border(
+                                  bottom: BorderSide(color: ColorConst.dividerColor)
+                              )
+                          ),
+                          child: ListTile(
+                            leading: Icon(Icons.edit_document),
+                            title: Text(suggestion.lectureName??""),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  onSuggestionSelected: (suggestion) {
+                    if((BlocProvider.of<AddCourseBloc>(context).state.currentSubject??'').isEmpty)
+                    {
+                      ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
+                      return;
+                    }
+                    if(onSelectLesson!=null)
+                    {
+                      _wordDropdownSearchFieldController.text = suggestion.lectureName??"";
+                      onSelectLesson(suggestion);
+                    }
+                    else
+                    {
+                      ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                    }
+                    print("object");
+                  },
+                  transitionBuilder: (context, child, controller) {
+                    return Container(
+                      constraints: BoxConstraints(
+                          maxHeight: Dimens.size300
+                      ),
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                          color: ColorConst.whiteColor,
+                          borderRadius: BorderRadius.circular(Dimens.size10)
+                      ),
+                      padding: EdgeInsets.all(Dimens.size8),
+                      child: child,
+                    );
+                  },
+                  displayAllSuggestionWhenTap: false,
+                  hideSuggestionsOnKeyboardHide: true,
+                );
+              },
+            ),
+          ),
+          Gap(Dimens.size16),
+          InkWell(
+            onTap: () {
+              CreateEditLesson().show(context);
+            },
+            child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size50,),
+          )
+        ]
+    );
+  }
+  Future<List<LessonInfo>>getLessonFilterList(String keyWord) async{
+    if(keyWord.isEmpty) {
+      return [];
+    }
+    GetLessonListFilterApi getLessonListApi= GetLessonListFilterApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord));
+    LessonListResponseModel data = await getLessonListApi.call();
+    return data.content??[];
   }
 }

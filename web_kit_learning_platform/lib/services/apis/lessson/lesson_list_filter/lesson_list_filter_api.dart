@@ -4,16 +4,16 @@ import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 
-class GetLessonListApi extends BaseApiRequest {
+class GetLessonListFilterApi extends BaseApiRequest {
   SearchCommonRequest searchCommonRequest;
-  GetLessonListApi({required this.searchCommonRequest}):super(
+  GetLessonListFilterApi({required this.searchCommonRequest}):super(
     serviceType: SERVICE_TYPE.LESSON,
-    apiName: ApiName.getInstance().getLessonList,
+    apiName: ApiName.getInstance().getLessonListFilter,
   );
 
   Future<LessonListResponseModel> call() async {
     await getAuthorization();
-    dynamic result = await postRequestAPI();
+    dynamic result = await getRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {
@@ -27,7 +27,7 @@ class GetLessonListApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-     await setApiBody(searchCommonRequest.toJson());
+     await setParamsAdd({"keyword":searchCommonRequest.keyword});
   }
 
   @override

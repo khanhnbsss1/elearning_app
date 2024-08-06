@@ -38,10 +38,11 @@ class ApiName {
   final String addCourseDirectory = "/add-course-directory";
 
   ///Lesson
-  final String getLessonList = "/get-list-filter";
+  final String getLessonListFilter = "/get-list-filter";
   final String createLesson = "/create-lecture";
   final String linkLesson = "/update-lecture-course";
   final String unlinkLesson = "/unlink-lecture-course";
+  final String getLessonList = "/get-list";
 
   /// landing page
 

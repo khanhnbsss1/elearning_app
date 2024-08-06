@@ -98,7 +98,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                 {
                   return Layout(
                       isScroll: false,
-                      padding: EdgeInsets.only(top: 35 + 16, bottom: 16),
+                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
                       child: ListBodyCommon(
                         minOfWidthOfListRatio: 0.1,
                         maxOfWidthOfListRatio: 0.2,

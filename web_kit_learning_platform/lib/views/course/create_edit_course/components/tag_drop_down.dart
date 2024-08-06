@@ -91,7 +91,6 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                 label: Text(tag.name??''),
                 onDeleted: () {
                   setState(() {
-                    //widget.exitsTags?.removeWhere((element) => tag == element,);
                     widget.onRemoveTags(tag);
                   });
                 },

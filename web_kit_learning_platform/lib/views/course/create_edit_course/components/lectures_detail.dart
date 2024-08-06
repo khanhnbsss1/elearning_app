@@ -53,7 +53,7 @@ class _AddLecturesState extends State<AddLectures>
       {required int subjectIndex,
       required String lectureName,
       required String lectureLink,
-      required String document,
+      required int? docId,
       required String? lectureMode,
       }) {
     setState(() {
@@ -62,8 +62,8 @@ class _AddLecturesState extends State<AddLectures>
             subName: '',
             lectureName: lectureName,
             link: lectureLink,
-            document: document,
-            lectureMode: lectureMode,
+            docId: docId,
+            mode: lectureMode,
           ));
     });
   }
@@ -284,14 +284,14 @@ class _AddLecturesState extends State<AddLectures>
                                             Expanded(
                                               flex: 8,
                                               child: Text(
-                                                  'Document: ${subjects[subjectIndex].lectures[lectureIndex].document}',
+                                                  'Document: ${subjects[subjectIndex].lectures[lectureIndex].docName}',
                                                 overflow: TextOverflow.ellipsis,),
                                             ),
                                             SizedBox(width: 8,),
                                             Expanded(
                                               flex: 3,
                                               child: Text(
-                                                  'Mode: ${subjects[subjectIndex].lectures[lectureIndex].lectureMode}',
+                                                  'Mode: ${subjects[subjectIndex].lectures[lectureIndex].mode}',
                                                 overflow: TextOverflow.ellipsis,),
                                             ),
                                             Expanded(
@@ -471,7 +471,7 @@ class _AddLecturesState extends State<AddLectures>
                         subjectIndex: subjectIndex,
                         lectureName: lectureNameController.text,
                         lectureLink: lectureLinkController.text,
-                        document: documentLinkController.text,
+                        docId: 0,
                         lectureMode: (lectureModeController.text == '') ? mode : lectureModeController.text);
                     widget.onChanged(subjects, lectures);
                     Navigator.of(context).pop();
@@ -487,7 +487,7 @@ class _AddLecturesState extends State<AddLectures>
 void setLectureModeToFree() {
   for (var subject in subjects) {
     for (var lecture in subject.lectures) {
-      lecture.lectureMode = 'FREE';
+      lecture.mode = 'FREE';
     }
   }
 }

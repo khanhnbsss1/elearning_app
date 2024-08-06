@@ -44,7 +44,7 @@ class VocabularyListBloc extends Bloc<VocabularyListEvent, VocabularyListState> 
   Future<void> callCourseApi({required SearchCommonRequest searchCommonRequest}) async {
     if(state.vocabularyType ==VocabularyType.vocabularyList)
       {
-        VocabularyApi courseApi = VocabularyApi(searchCommonRequest: state.searchCommonRequest!);
+        GetListVocabularyApi courseApi = GetListVocabularyApi(searchCommonRequest: state.searchCommonRequest!);
         VocabularyResponseModel vocabularyResponseModel = await courseApi.call();
         emit(state.copyWith(
             vocabularyResponseModel: vocabularyResponseModel,
@@ -57,7 +57,7 @@ class VocabularyListBloc extends Bloc<VocabularyListEvent, VocabularyListState> 
       }
     else if(state.vocabularyType ==VocabularyType.myVocabularyList)
       {
-        VocabularyApi myCourseApi = VocabularyApi(searchCommonRequest: searchCommonRequest);
+        GetListVocabularyApi myCourseApi = GetListVocabularyApi(searchCommonRequest: searchCommonRequest);
         VocabularyResponseModel vocabularyResponseModel = await myCourseApi.call();
         emit(state.copyWith(
             vocabularyResponseModel: vocabularyResponseModel,

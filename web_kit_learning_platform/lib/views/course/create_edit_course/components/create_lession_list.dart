@@ -15,6 +15,7 @@ import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/lessson/lesson_list/lesson_list_api.dart';
+import 'package:webkit/services/apis/lessson/lesson_list_filter/lesson_list_filter_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
@@ -351,7 +352,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                     ),
                     
                     suggestionsCallback: (pattern) async {
-                      return await getLessonList(pattern);
+                      return await getLessonFilterList(pattern);
                     },
                   
                     itemBuilder: (context, suggestion) {
@@ -430,11 +431,11 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
       }
     return listSubject;
   }
-  Future<List<LessonInfo>>getLessonList(String keyWord) async{
+  Future<List<LessonInfo>>getLessonFilterList(String keyWord) async{
     if(keyWord.isEmpty) {
       return [];
     }
-    GetLessonListApi getLessonListApi= GetLessonListApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord));
+    GetLessonListFilterApi getLessonListApi= GetLessonListFilterApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord));
     LessonListResponseModel data = await getLessonListApi.call();
     return data.content??[];
   }
@@ -529,7 +530,7 @@ class LessonDataSource extends DataGridSource {
                 children: wordList,
               ),
             )),
-            DataGridCell<Widget>(columnName: L10nX.getStr.payment_str, value: Text(e.lectureMode??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.payment_str, value: Text(e.mode??"", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.payment_str, value: Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,

@@ -42,28 +42,43 @@ class LessonInfo {
   String? subName;
   String? lectureName;
   String? link;
-  String? lectureMode;
-  String? document;
-
-  String? docLink;
+  int? docId;
+  String? docName;
+  String? mode;
+  String? createdAt;
+  String? updatedAt;
+  String? createdBy;
+  String? updatedBy;
+  String? note;
+  
   LessonInfo(
       {this.id,
         this.subName,
         this.lectureName,
         this.link,
-        this.lectureMode,
-        this.document,
-        this.docLink
+        this.docId,
+        this.docName,
+        this.mode,
+        this.createdAt,
+        this.updatedAt,
+        this.createdBy,
+        this.updatedBy,
+        this.note
       });
 
   LessonInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     subName = json['sub_name'];
     lectureName = json['lecture_name']?? json['name'];
-    link = json['lecture_link'];
-    lectureMode = json['lecture_mode'];
-    document = json['document'];
-    docLink = json['doc_link'];
+    link = json['lecture_link']??json['link'];
+    docId = json['doc_id'];
+    docName = json['docName'];
+    mode = json['mode'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    createdBy = json['created_by'];
+    updatedBy = json['updated_by'];
+    note = json['note'];
   }
 
   Map<String, dynamic> toJson() {
@@ -72,9 +87,15 @@ class LessonInfo {
     data['sub_name'] = subName;
     data['lecture_name'] = lectureName;
     data['lecture_link'] = link;
-    data['lecture_mode'] = lectureMode;
-    data['document'] = document;
-    data['doc_link'] = this.docLink;
+    data['doc_id'] = docId;
+    data['docName'] = docName;
+    data['link'] = link;
+    data['mode'] = mode;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['created_by'] = createdBy;
+    data['updated_by'] = updatedBy;
+    data['note'] = note;
     return data;
   }
 }

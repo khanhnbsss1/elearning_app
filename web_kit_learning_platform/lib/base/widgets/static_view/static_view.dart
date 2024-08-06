@@ -6,16 +6,15 @@ class StaticView{
     size??35;
     return StatefulBuilder(
       builder: (BuildContext context, void Function(void Function()) setState) {  
-        return Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimens.size30),
-              color: ColorConst.whiteColor
-          ),
-          clipBehavior: Clip.hardEdge,
-
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal:8.0),
-            child: ImageManager().getPngImage(ImageManager.logo, height: size),
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(Dimens.size30),
+                color: ColorConst.whiteColor
+            ),
+            clipBehavior: Clip.hardEdge,
+            child: ImageManager().getPngImage(ImageManager.logo, height: size,),
           ),
         );
       },

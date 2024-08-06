@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
@@ -8,8 +9,14 @@ import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 class LessonItemView extends StatelessWidget {
   LessonItemView({
     required this.lessonInfo,
+    this.onViewDetail,
+    this.onEdit,
+    this.onDelete,
   });
 
+  Function(LessonInfo)?onViewDetail;
+  Function(LessonInfo)?onEdit;
+  Function(LessonInfo)?onDelete;
 
   LessonInfo lessonInfo;
   late ColorNotifier notifier;
@@ -25,14 +32,14 @@ class LessonItemView extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isHovered && !notifier.isDark
                 // ? Color.fromRGBO(255, 243, 94, 1.0)
-                    ? Color.fromRGBO(252, 173, 106, 1.0)
+                    ? ColorConst.mainColor.withOpacity(0.05)
                     : isHovered && notifier.isDark
                     ? ColorConst.backGroundColor
                     : notifier.whitecolor,
                 border: Border(
                   bottom: BorderSide(
                     color: ColorConst.dividerColor,
-                    width: 1
+                    width: 0.5
                   )
                 )
               ),
@@ -42,6 +49,7 @@ class LessonItemView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       '${lessonInfo.lectureName} \n' ?? "",
@@ -55,6 +63,33 @@ class LessonItemView extends StatelessWidget {
                           color: Color.fromRGBO(163, 20, 19, 1.0)),
                       maxLines: 1,
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            
+                          },
+                          child: Icon(Icons.remove_red_eye, color: ColorConst.colorIconRed,size: Dimens.size20,),
+                        ),
+                        Gap(Dimens.size6),
+                        InkWell(
+                          onTap: () {
+
+                          },
+                          child: Icon(Icons.edit, color: ColorConst.colorIconRed,size: Dimens.size20,),
+                        ),
+                        Gap(Dimens.size6),
+                        InkWell(
+                          onTap: () {
+
+                          },
+                          child: Icon(Icons.delete, color: ColorConst.colorIconRed,size: Dimens.size20,),
+                        ),
+                        Gap(Dimens.size6),
+                      ],
+                    )
                   ],
                 ),
               ),

@@ -64,7 +64,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
     Color textColor = ColorConst.whiteColor;
     return Container(
       decoration: BoxDecoration(
-        //border: Border(right: BorderSide(color: ColorConst.dividerColor.withOpacity(0.2)))
+        border: Border(right: BorderSide(color: ColorConst.mainColor.withOpacity(0.2)))
       ),
       child: MyCard(
         paddingAll: 0,
@@ -81,13 +81,6 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
               Container(
                 height: 60,
                 // padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: ColorConst.dividerColor.withOpacity(0.2)
-                    )
-                  )
-                ),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 24.0),
                   child: InkWell(
@@ -143,7 +136,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       isCondensed: ThemeCustomizer().leftBarCondensed,
                       route: Routes.dashboardRoute,
                     ),
-                    labelWidget(L10nX.getStr.apps),
+                   // labelWidget(L10nX.getStr.apps),
                     //-----------------Course-----------------//
                     MenuWidget(
                       iconData: Icons.library_books,
