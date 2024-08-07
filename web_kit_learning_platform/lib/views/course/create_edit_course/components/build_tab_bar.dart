@@ -34,7 +34,7 @@ class _BuildTabBarState extends State<BuildTabBar>
             child: Column(
               children: [
                 // buildTabBar(),
-                SizedBox(height: 30,),
+                SizedBox(height: 60,),
                 SizedBox(
                   height: MediaQuery.of(context).size.height,
                   child: TabBarView(
@@ -63,7 +63,8 @@ class _BuildTabBarState extends State<BuildTabBar>
             ? ColorConst.textColorSelectTabBar
             : ColorConst.subtext));
     return Card(
-      elevation: 5,
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16),),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.5,
         constraints: BoxConstraints(
@@ -71,14 +72,13 @@ class _BuildTabBarState extends State<BuildTabBar>
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: ColorConst.dividerColor,width: 0.5)
         ),
         child: TabBar(
           indicatorColor: ColorConst.mainColor,
           dividerColor: Colors.transparent,
           labelColor: ColorConst.mainColor,
-          indicator: BoxDecoration(
-              border:
-              Border(bottom: BorderSide(color: ColorConst.mainColor))),
+          indicator: BoxDecoration(border: Border(bottom: BorderSide(color: ColorConst.mainColor))),
           splashBorderRadius: BorderRadius.circular(12),
           overlayColor:
           WidgetStateProperty.all(Colors.black.withOpacity(0.1)),

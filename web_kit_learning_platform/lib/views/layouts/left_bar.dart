@@ -263,6 +263,18 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                         });
                       },
                     ),
+                    //----------------Test------------------//
+                    NavigationItem(
+                      iconData: Icons.quiz,
+                      title: L10nX.getStr.test_str,
+                      route: Routes.testList,
+                      isCondensed: ThemeCustomizer().leftBarCondensed,
+                      onPress: () {
+                        setState(() {
+                          ThemeCustomizer().leftBarCondensed= true;
+                        });
+                      },
+                    ),
                     //----------------Landing Page------------------//
                     NavigationItem(
                       iconData: LucideIcons.planeLanding,

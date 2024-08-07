@@ -535,6 +535,11 @@
   "remove_test":"删除测试",
   "remove_example":"删除示例",
   "remove_course":"删除课程",
-  "you_want_remove": "您要删除吗"
+  "you_want_remove": "您要删除吗",
+  "test_list": "测试列表",
+  "test_add": "创建测试",
+  "test_remove": "删除测试",
+  "test_update": "更新测试",
+  "test_str": "测试"
 
 }

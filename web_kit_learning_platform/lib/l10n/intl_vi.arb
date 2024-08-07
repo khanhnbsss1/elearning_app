@@ -538,5 +538,11 @@
   "remove_test":"Xóa bài test",
   "remove_example":"Xóa ví dụ",
   "remove_course":"Xóa khóa học",
-  "you_want_remove": "Bạn có muốn xóa"
+  "you_want_remove": "Bạn có muốn xóa",
+  "test_list": "Danh sách bài test",
+  "test_add": "Tạo bài test",
+  "test_remove": "Xóa bài test",
+  "test_update": "Cập nhật bài test",
+  "test_str": "Bài test"
+
 }

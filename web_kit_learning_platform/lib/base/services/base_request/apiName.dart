@@ -67,11 +67,17 @@ class ApiName {
   final String addUploadMultiFile = "/upload-multiple-file";
 
   ///tag
-  /// thong tin nguoi dung
   final String getTagsList = "/get-tags";
   final String createTag = "/create-tag";
   final String updateTag = "/update-tag";
   final String deleteTag = "/delete-tag";
+
+  ///test
+  final String getTestList = "/get-tests";
+  final String createTest = "/create-test";
+  final String updateTest = "/update-test";
+  final String deleteTest = "/delete-test";
+  final String detailTest = "/get-test-detail";
 
 }
 

@@ -14,7 +14,6 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
-import 'package:webkit/services/apis/lessson/lesson_list/lesson_list_api.dart';
 import 'package:webkit/services/apis/lessson/lesson_list_filter/lesson_list_filter_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
@@ -35,8 +34,6 @@ class CourseLinkLessonListPage extends StatefulWidget {
 }
 
 class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with SingleTickerProviderStateMixin, UIMixin {
-  late List<CourseInfo> coursesInfo;
-  var position = 0;
   ScrollController scrollController=ScrollController();
   final TextEditingController _subjectDropdownSearchFieldController = TextEditingController();
   final TextEditingController _lessonDropdownSearchFieldController = TextEditingController();

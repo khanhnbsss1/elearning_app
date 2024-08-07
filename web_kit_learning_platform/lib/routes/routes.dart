@@ -48,6 +48,7 @@ import 'package:webkit/views/other/sfmap_page.dart';
 import 'package:webkit/views/other/synsfusion_chart.dart';
 import 'package:webkit/views/starter.dart';
 import 'package:webkit/views/tags/tag_list/tag_list.dart';
+import 'package:webkit/views/test/test_list/test_list.dart';
 import 'package:webkit/views/ui/buttons_page.dart';
 import 'package:webkit/views/ui/cards_page.dart';
 import 'package:webkit/views/ui/carousels.dart';
@@ -114,6 +115,12 @@ getPageRoute() {
     GetPage(
         name: Routes.tagList,
         page: () =>  TagListPage(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]),
+
+    ///--------------- Test ---------------///
+    GetPage(
+        name: Routes.testList,
+        page: () =>  TestListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: Routes.videoPlayer,

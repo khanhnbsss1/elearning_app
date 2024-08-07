@@ -1,0 +1,207 @@
+import 'package:drop_down_search_field/drop_down_search_field.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/services/base_request/models/search_common_request.dart';
+import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
+import 'package:webkit/controller/ui/add_course_controller.dart';
+import 'package:webkit/helpers/theme/app_theme.dart';
+import 'package:webkit/helpers/utils/ui_mixins.dart';
+import 'package:webkit/helpers/widgets/my_spacing.dart';
+import 'package:webkit/helpers/widgets/my_text_style.dart';
+import 'package:webkit/services/apis/lessson/lesson_list_filter/lesson_list_filter_api.dart';
+import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
+import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
+
+class CourseLinkTestListPage extends StatefulWidget {
+  CourseLinkTestListPage({super.key});
+  void show(BuildContext context) {
+    showGeneralDialog(
+      context: context,
+      pageBuilder: (context, animation, secondaryAnimation) => this,
+    );
+  }
+
+  @override
+  State<CourseLinkTestListPage> createState() => _CourseIntroductionPageState();
+}
+
+class _CourseIntroductionPageState extends State<CourseLinkTestListPage> with SingleTickerProviderStateMixin, UIMixin {
+  ScrollController scrollController=ScrollController();
+  final TextEditingController _subjectDropdownSearchFieldController = TextEditingController();
+  final TextEditingController _lessonDropdownSearchFieldController = TextEditingController();
+
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<AddCourseBloc, AddCourseState>(
+      listener: (context, state) {
+        switch (state.blocStatus) {
+          case AddCourseStatus.initial:
+            break;
+          default:
+            break;
+        }
+      },
+      builder: (BuildContext context, state) {
+        return Material(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return buildLessonList(constraints: constraints, state: state, context: context);
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget buildLessonList({required BoxConstraints constraints, required AddCourseState state, required BuildContext context}) {
+    return GetBuilder<AddCourseController>(
+      init: state.controller,
+      builder: (controller) {
+        return Container(
+          decoration: BoxDecoration(
+            // color: Color.fromRGBO(255, 233, 233, 1.0),
+            border: Border.all(
+              color: ColorConst.colorHintTextSearch,
+            ),
+          ),
+          padding: EdgeInsets.all(Dimens.size16),
+          child: Column(
+            children: [
+              
+            ],
+          ),
+        );
+      },
+    );
+  }
+  
+  Widget firstTestDropDownSearch({Function(LessonInfo)? onSelectLesson, required AddCourseState state, required BuildContext context}) {
+    return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: Dimens.size300,
+            child: StatefulBuilder(
+              builder: (BuildContext context, void Function(void Function()) setState) {
+                return DropDownSearchFormField(
+                  textFieldConfiguration: TextFieldConfiguration(
+                    autofocus: true,
+                    controller: _lessonDropdownSearchFieldController,
+                    style: DefaultTextStyle.of(context).style.copyWith(
+                        fontStyle: FontStyle.italic
+                    ),
+
+                    decoration: InputDecoration(
+                      labelText: L10nX.getStr.search_lesson_str,
+                      hintTextDirection: AppTheme.textDirection,
+                      labelStyle: TextStyleConstant.textStyleBlack14w400,
+                      hintStyle: TextStyleConstant.textStyleBlack14w400,
+                      border: outlineInputBorder,
+                      prefixIcon: Icon(
+                        Icons.edit_document,
+                        size: 20,
+                        color: ColorConst.colorIconRed,
+                      ),
+                      suffixIcon: Icon(
+                        LucideIcons.search,
+                        size: 20,
+                        color: ColorConst.colorIconRed,
+                      ),
+                      contentPadding: MySpacing.all(16),
+                      isCollapsed: true,
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                    ),
+                  ),
+
+                  suggestionsCallback: (pattern) async {
+                    return await getTestFilterList(pattern);
+                  },
+
+                  itemBuilder: (context, suggestion) {
+                    return OnHoverWidget(
+                      builder: (bool isHovered) {
+                        return  Container(
+                          decoration: BoxDecoration(
+                              color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
+                              border: Border(
+                                  bottom: BorderSide(color: ColorConst.dividerColor)
+                              )
+                          ),
+                          child: ListTile(
+                            leading: Icon(Icons.edit_document),
+                            title: Text(suggestion.lectureName??""),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  onSuggestionSelected: (suggestion) {
+                    if((BlocProvider.of<AddCourseBloc>(context).state.currentSubject??'').isEmpty)
+                    {
+                      ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
+                      return;
+                    }
+                    if(onSelectLesson!=null)
+                    {
+                      _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
+                      onSelectLesson(suggestion);
+                    }
+                    else
+                    {
+                      ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                    }
+                    print("object");
+                  },
+                  transitionBuilder: (context, child, controller) {
+                    return Container(
+                      constraints: BoxConstraints(
+                          maxHeight: Dimens.size300
+                      ),
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                          color: ColorConst.whiteColor,
+                          borderRadius: BorderRadius.circular(Dimens.size10)
+                      ),
+                      padding: EdgeInsets.all(Dimens.size8),
+                      child: child,
+                    );
+                  },
+                  displayAllSuggestionWhenTap: false,
+                  hideSuggestionsOnKeyboardHide: true,
+                );
+              },
+            ),
+          ),
+          Gap(Dimens.size16),
+          InkWell(
+            onTap: () {
+              CreateEditLesson().show(context);
+            },
+            child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size50,),
+          )
+        ]
+    );
+  }
+  Future<List<LessonInfo>>getTestFilterList(String keyWord) async{
+    if(keyWord.isEmpty) {
+      return [];
+    }
+    GetLessonListFilterApi getLessonListApi= GetLessonListFilterApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord));
+    LessonListResponseModel data = await getLessonListApi.call();
+    return data.content??[];
+  }
+
+}

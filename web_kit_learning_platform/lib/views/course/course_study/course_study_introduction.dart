@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
 import 'package:webkit/views/course/course_detail/components/course_intro.dart';
 
 import '../../../base/widgets/button/action_button1.dart';
@@ -9,9 +11,8 @@ import '../../video_player/model/video_model.dart';
 import '../../video_player/video_player.dart';
 
 class CourseStudyIntroduction extends StatefulWidget {
-  final CourseInfo courseInfo;
 
-  const CourseStudyIntroduction({super.key, required this.courseInfo});
+  const CourseStudyIntroduction({super.key, });
 
   @override
   State<CourseStudyIntroduction> createState() =>
@@ -19,24 +20,33 @@ class CourseStudyIntroduction extends StatefulWidget {
 }
 
 class _CourseStudyIntroductionState extends State<CourseStudyIntroduction> {
-  late List<String> courseObject = widget.courseInfo.infoObj?.split("&&&").map((e) => e.trim()).toList() ?? [];
 
-  late List<String> courseResult = widget.courseInfo.infoResult?.split("&&&").map((e) => e.trim()).toList() ?? [];
+  late CourseDetailState _state;
+
   @override
   void initState() {
     super.initState();
   }
-  //
-  // courseObject = widget.courseInfo.infoObj?.split("&&&").map((e) => e.trim()).toList() ?? [];
-  // courseResult = widget.courseInfo.infoResult?.split("&&&").map((e) => e.trim()).toList() ?? [];
-
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: buildInfoBox(),
-      ),
+    return BlocConsumer<CourseDetailBloc, CourseDetailState>(
+      listener: (context, state) {
+        switch (state.blocStatus) {
+          case AddCourseStatus.initial:
+            break;
+          default:
+            break;
+        }
+      },
+      builder: (BuildContext context, state) {
+        _state = state;
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: buildInfoBox(),
+          ),
+        );
+      },
     );
   }
 

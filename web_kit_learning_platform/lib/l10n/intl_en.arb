@@ -540,7 +540,12 @@
   "remove_test":"Remove test",
   "remove_example":"Remove example",
   "remove_course":"Remove course",
-  "you_want_remove": "Do you want to remove"
+  "you_want_remove": "Do you want to remove",
+  "test_list": "List of tests",
+  "test_add": "Create test",
+  "test_remove": "Delete test",
+  "test_update": "Update test",
+  "test_str": "Test"
 
 
 }

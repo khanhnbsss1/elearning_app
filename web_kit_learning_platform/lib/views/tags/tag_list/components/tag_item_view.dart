@@ -53,7 +53,7 @@ class TagItemView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${tagInfo.name} \n' ?? "",
+                      '${tagInfo.id}. ${tagInfo.name} \n' ?? "",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyleConstant
                           .normalTextOnBackGroundColorStyle16w600.copyWith(

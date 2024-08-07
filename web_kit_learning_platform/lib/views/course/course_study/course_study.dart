@@ -48,49 +48,35 @@ class _CourseStudyState extends State<CourseStudy1>
         return CourseDetailBloc(CourseDetailState(courseInfo: widget.courseInfo))
           ..add(CourseDetailInitEvent());
       },
-      child: BlocConsumer<CourseDetailBloc, CourseDetailState>(
-        listener: (context, state) {
-          switch (state.blocStatus) {
-            case AddCourseStatus.initial:
-              break;
-            default:
-              break;
-          }
-        },
-        builder: (BuildContext context, state) {
-          return Layout(
-            title: Text(
-              L10nX.getStr.lets_study,
-              style: TextStyleConstant.textStyleBlack20w700,
-            ),
-            padding: EdgeInsets.zero,
-            showBackButton: true,
-            isScroll: false,
-            child: Container(
-              decoration: BoxDecoration(color: ColorConst.whiteColor),
-              padding: EdgeInsets.only(
-                  top: Dimens.size50,
-                  bottom: Dimens.size16,
-                  left: Dimens.size16,
-                  right: Dimens.size16),
-              child: StatefulBuilder(
-                builder:
-                    (BuildContext context, void Function(void Function()) setState) {
-                  return BuildTabBar(
-                    widgets: [
-                      CourseStudyIntroduction(
-                        courseInfo: state.courseInfo!,
-                      ),
-                      CourseStudyStudy(courseInfo: state.courseInfo!),
-                      CourseStudyTest(courseInfo: state.courseInfo!),
-                    ],
-                    titles: const ['Introduction', 'Study', 'Test'],
-                  );
-                },
-              ),
-            ),
-          );
-        },
+      child: Layout(
+        title: Text(
+          widget.courseInfo.name??'',
+          style: TextStyleConstant.textStyleBlack20w700,
+        ),
+        padding: EdgeInsets.zero,
+        showBackButton: true,
+        isScroll: false,
+        child: Container(
+          decoration: BoxDecoration(color: ColorConst.whiteColor),
+          padding: EdgeInsets.only(
+              top: Dimens.size50,
+              bottom: Dimens.size16,
+              left: Dimens.size16,
+              right: Dimens.size16),
+          child: StatefulBuilder(
+            builder:
+                (BuildContext context, void Function(void Function()) setState) {
+              return BuildTabBar(
+                widgets: const [
+                  CourseStudyIntroduction(),
+                  CourseStudyStudy(),
+                  CourseStudyTest(),
+                ],
+                titles: const ['Introduction', 'Study', 'Test'],
+              );
+            },
+          ),
+        ),
       ),
     );
   }

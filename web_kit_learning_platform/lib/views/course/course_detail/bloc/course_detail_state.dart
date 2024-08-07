@@ -3,18 +3,7 @@ part of 'course_detail_bloc.dart';
 enum AddCourseStatus {
   onLoading,
   initial,
-  onUpdateController,
-  onSubmitAdd,
-  onSubmitUpdate, 
-  onExpand,
-  onUploadImage,
-  onUploadVideoPreview,
-  onLinkLesson,
-  onUnlinkLesson,
-  onLinkDiscount,
-  onUpdateCourseFromApi,
-  onUpdateSubjectList,
-  onUpdateCurrentSubject,
+  onSelectLesson,
   unKnown
 }
 
@@ -24,14 +13,22 @@ class CourseDetailState extends Equatable {
   CourseInfo? courseInfo;
   List<String>? courseObject = [];
   List<String>? courseResult = [];
+  LessonInfo? selectLessonInfo;
+  List<bool>? showSubject = [];
+  List<List<bool>>?checkLecture = [];
   CourseDetailState({
     this.blocStatus,
     this.courseInfo,
     this.courseObject,
-    this.courseResult
+    this.courseResult,
+    this.selectLessonInfo,
+    this.checkLecture,
+    this.showSubject
 
   }){
     courseInfo??=CourseInfo.initial();
+    checkLecture??=[];
+    showSubject??=[];
   }
 
 
@@ -39,7 +36,10 @@ class CourseDetailState extends Equatable {
     AddCourseStatus? blocStatus,
     CourseInfo? courseInfo,
     List<String>? courseObject,
-    List<String>? courseResult
+    List<String>? courseResult,
+    LessonInfo? selectLessonInfo, 
+    List<bool>? showSubject, 
+    List<List<bool>>?checkLecture 
   })
   {
     return CourseDetailState(
@@ -47,6 +47,9 @@ class CourseDetailState extends Equatable {
          courseInfo: courseInfo??this.courseInfo,
       courseObject: courseObject??this.courseObject,
       courseResult: courseResult??this.courseResult,
+      selectLessonInfo: selectLessonInfo??this.selectLessonInfo,
+      showSubject: showSubject??this.showSubject,
+      checkLecture: checkLecture??this.checkLecture,
 
     );
   }
@@ -55,7 +58,10 @@ class CourseDetailState extends Equatable {
     blocStatus, 
     courseInfo,
     courseObject,
-    courseResult
+    courseResult,
+    selectLessonInfo,
+    showSubject,
+    checkLecture
   ];
 
 }

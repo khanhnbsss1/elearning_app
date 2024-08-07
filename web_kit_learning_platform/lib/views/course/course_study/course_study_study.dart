@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gap/gap.dart';
 import 'package:just_audio/just_audio.dart';
@@ -8,14 +9,9 @@ import 'package:webkit/services/apis/course/course_detail/models/course_detail_m
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/topic/model/topic_info.dart';
 import 'package:webkit/services/apis/vocabulary/words/word_info.dart';
-import 'package:webkit/views/course/create_edit_course/components/lectures_detail.dart';
+import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
 
-import '../../../base/author/user_helper.dart';
-import '../../../base/models/user/UserProfile.dart';
-import '../../../base/theme/colors_app.dart';
 import '../../../base/widgets/audio/audio_speaker.dart';
-import '../../../base/widgets/button/action_button1.dart';
-import '../../../base/widgets/pages_common/list_body_page_common.dart';
 import '../../../helpers/utils/ui_mixins.dart';
 import '../../../helpers/widgets/my_responsiv.dart';
 import '../../../helpers/widgets/my_spacing.dart';
@@ -25,18 +21,18 @@ import '../../video_player/video_player.dart';
 import '../create_edit_course/components/build_tab_bar.dart';
 
 class CourseStudyStudy extends StatefulWidget {
-  final CourseInfo courseInfo;
-
-  const CourseStudyStudy({super.key, required this.courseInfo});
+  const CourseStudyStudy({super.key});
 
   @override
   State<CourseStudyStudy> createState() => _CourseStudyStudyState();
 }
 
-class _CourseStudyStudyState extends State<CourseStudyStudy>
-    with SingleTickerProviderStateMixin, UIMixin {
+class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerProviderStateMixin, UIMixin {
   ScrollController subjectScrollController = ScrollController();
   ScrollController lessonDetailScrollController = ScrollController();
+  late CourseDetailState _state;
+  late BuildContext _blocContext;
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -44,44 +40,80 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
     likeCheck = List.filled(reviewCount, false);
     dislikeCheck = List.filled(reviewCount, false);
     showReply = List.filled(reviewCount, false);
-    for(Subjects subject  in widget.courseInfo.getListSubjectAndLesson())
-      {
-        checkLecture.add(
-          List.filled((subject.lectures??[]).length, false)
-        );
-      }
-    showSubject = List.filled(
-      (widget.courseInfo.getListSubjectAndLesson()??[]).length,
-      false,
-    );
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return StatefulBuilder(
-      builder: (BuildContext context, void Function(void Function()) setState) {
-        return MyResponsive(
-          builder: (buildContext, boxConstraints, myScreenMediaType) {
-            return Scaffold(
-               // appBar: 
-              endDrawer: boxConstraints.maxWidth<600? buildSubjectList():null,
-              backgroundColor: ColorConst.whiteColor,
-              body: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Expanded(child: buildStudySection()),
-                   Visibility(
-                     visible: boxConstraints.maxWidth>600, 
-                       child: Row(
-                         crossAxisAlignment: CrossAxisAlignment.start,
-                         children: [
-                           VerticalDivider(color: ColorConst.dividerColor,),
-                           buildSubjectList(),
-                         ],
-                       )),
-                 ],
-               ),
-            );
+    return BlocConsumer<CourseDetailBloc, CourseDetailState>(
+      listener: (context, state) {
+        switch (state.blocStatus) {
+          case AddCourseStatus.initial:
+            
+            break;
+          default:
+            break;
+        }
+      },
+      builder: (BuildContext context, state) {
+        _blocContext = context;
+        _state = state;
+        return StatefulBuilder(
+          builder: (BuildContext context, void Function(void Function()) setState) {
+            return (state.courseInfo?.getListSubjectAndLesson()??[]).isNotEmpty?MyResponsive(
+              builder: (buildContext, boxConstraints, myScreenMediaType) {
+                return Scaffold(
+                  key: _scaffoldKey,
+                  backgroundColor: ColorConst.whiteColor,
+                  body: SingleChildScrollView(
+                    controller: lessonDetailScrollController,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                            child: Column(
+                          children: [
+                            buildStudySection(),
+                            Visibility(
+                              visible: boxConstraints.maxWidth <= 800,
+                              child: Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Text(L10nX.getStr.lesson_list, style: TextStyleConstant.textStyleBlack18w600,),
+                                      ],
+                                    ),
+                                    buildSubjectList(),
+                                  ],
+                                ),
+                              ),)
+                          ],
+                        )),
+                        Visibility(
+                            visible: boxConstraints.maxWidth > 800,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                VerticalDivider(
+                                  color: ColorConst.dividerColor,
+                                ),
+                                Column(
+                                  children: [
+                                    Gap(Dimens.size16),
+                                    buildSubjectList(),
+                                  ],
+                                ),
+                              ],
+                            )),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ):Center(child: NoData());
           },
         );
       },
@@ -95,6 +127,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Gap(Dimens.size10),
             buildVideo(),
             buildStudyTitle(),
             BuildTabBar(
@@ -120,9 +153,10 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: VideoPlayer(
-            videoPlayerModel: VideoPlayerModel(
-                title: "",
-                link: "https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4"//widget.courseInfo.videoPreview ?? ""
+            videoPlayerModel: VideoPlayerModel(title: "", 
+                link: 
+                //(_state.selectLessonInfo?.link??"").isNotEmpty?(_state.selectLessonInfo?.link??""):
+                "https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4" //_state.courseInfo?.videoPreview ?? ""
             ),
           ),
         ),
@@ -136,34 +170,14 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Gap(Dimens.size16),
             Text(
-              widget.courseInfo.name!,
+              'Bài giảng: ${_state.selectLessonInfo?.lectureName!}',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 24,
+                fontSize: 20,
                 color: ColorConst.textColor,
               ),
-            ),
-            SizedBox(
-              height: 4,
-            ),
-            Row(
-              children: [
-                Text(
-                  'Giảng viên: ${widget.courseInfo.producerName!}',
-                  style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 20,
-                    color: ColorConst.textColor,
-                  ),
-                ),
-                Spacer(),
-                StarRating(
-                  color: Colors.yellow,
-                  allowHalfRating: true,
-                  rating: widget.courseInfo.ratePoint!.toDouble(),
-                ),
-              ],
             ),
           ],
         ),
@@ -171,247 +185,224 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
     );
   }
 
-  List<bool> showSubject = [];
-  List<List<bool>> checkLecture = [];
-  int subjectCount = 4;
-  int lectureCount = 3;
+ 
 
   double _checkProgression({required int subjectIndex}) {
     int finished = 0;
-    for (bool check in checkLecture[subjectIndex].toList()) {
+    for (bool check in _state.checkLecture![subjectIndex].toList()) {
       if (check) finished++;
     }
-    return finished /( (checkLecture[subjectIndex].isNotEmpty)?checkLecture[subjectIndex].length:1);
+    return finished / ((_state.checkLecture![subjectIndex].isNotEmpty) ? _state.checkLecture![subjectIndex].length : 1);
   }
 
   Widget buildSubjectList() {
-    return SizedBox(
+    return Container(
       width: Dimens.size400,
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          return SingleChildScrollView(
-            controller: subjectScrollController,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  (MediaQuery.of(context).size.width < 550)
-                      ? Text('Danh sách bài học: ',
+      decoration: BoxDecoration(
+          border: Border.all(
+              color: ColorConst.dividerColor, 
+              width: 0.2
+          ),
+        borderRadius: BorderRadius.circular(20)
+      ),
+      child: SingleChildScrollView(
+        controller: subjectScrollController,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              (MediaQuery.of(context).size.width < 550)
+                  ? Text('Danh sách bài học: ',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.red,
                       ))
-                      : SizedBox(),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    controller: subjectScrollController,
-                    itemCount: (widget.courseInfo.getListSubjectAndLesson()??[]).length,
-                    itemBuilder: (context, subjectIndex) {
-                      return StatefulBuilder(
-                        builder: (BuildContext context, void Function(void Function()) setState) {
-                          Subjects subject =(widget.courseInfo.getListSubjectAndLesson()??[]).elementAt(subjectIndex);
-                          return StreamBuilder<Object>(
-                            stream: null,
-                            builder: (context, snapshot) {
-                              return Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  InkWell(
-                                    child: Card(
-                                      elevation: 1,
-                                      child: Container(
-                                        margin: EdgeInsets.all(16),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Text(
-                                                    '${L10nX.getStr.subject_str} $subjectIndex: ${subject.subName}',
-                                                    maxLines: 2,
-                                                    overflow: TextOverflow.ellipsis,
-                                                    style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 8,
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                                                    child: Row(
-                                                      children: [
-                                                        (MediaQuery.of(context).size.width > 1050) ? Text('Tiến độ: ') : SizedBox(),
-                                                        Container(
-                                                          width: constraints.maxWidth / 2,
-                                                          height: 20,
-                                                          constraints: BoxConstraints(
-                                                            minWidth: 100,
-                                                          ),
-                                                          decoration: BoxDecoration(
-                                                            color: Colors.grey,
-                                                            borderRadius:
-                                                            BorderRadius.circular(
-                                                                20),
-                                                          ),
-                                                          child: Stack(
-                                                              children: [
-                                                                Container(
-                                                                  width: constraints.maxWidth / 2 * _checkProgression(subjectIndex: subjectIndex),
-                                                                  height: 20,
-                                                                  decoration:
-                                                                  BoxDecoration(
-                                                                    color: Colors.red,
-                                                                    borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(20),
-                                                                  ),
-                                                                ),
-                                                            Center(
-                                                                child: Text(
-                                                                  '${(_checkProgression(subjectIndex: subjectIndex) * 100).floor()} %',
-                                                                  style: TextStyle(
-                                                                      color:
-                                                                      Colors.white),
-                                                                )),
-                                                          ]),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Gap(Dimens.size16),
-                                            (!showSubject[subjectIndex])
-                                                ? Icon(
-                                              Icons.arrow_drop_down,
-                                              size: 32,
-                                            )
-                                                : Icon(Icons.arrow_drop_up,
-                                                size: 32),
-                                          ],
+                  : SizedBox(),
+              ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                controller: subjectScrollController,
+                itemCount: (_state.courseInfo?.getListSubjectAndLesson() ?? []).length,
+                itemBuilder: (context, subjectIndex) {
+                  return StatefulBuilder(
+                    builder: (BuildContext context, void Function(void Function()) setState) {
+                      Subjects subject = (_state.courseInfo?.getListSubjectAndLesson() ?? []).elementAt(subjectIndex);
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          InkWell(
+                            child: Card(
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),),
+                              child: Container(
+                                margin: EdgeInsets.all(16),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          '${L10nX.getStr.subject_str} $subjectIndex: ${subject.subName}',
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
-                                      ),
+                                        Gap(Dimens.size16),
+                                        (!_state.showSubject![subjectIndex])
+                                            ? Icon(
+                                          Icons.arrow_drop_down,
+                                          size: 32,
+                                        )
+                                            : Icon(Icons.arrow_drop_up, size: 32),
+                                      ],
                                     ),
-                                    onTap: () {
-                                      setState(() {
-                                        showSubject[subjectIndex] =
-                                        !showSubject[subjectIndex];
-                                      });
-                                    },
-                                  ),
-                                  buildLessonItemList(subjectIndex: subjectIndex, subject: subject)
-                                ],
-                              );
-                            }
-                          );
-                        },
+                                    SizedBox(
+                                      height: 8,
+                                    ),
+                                    Row(
+                                      children: [
+                                        (MediaQuery.of(context).size.width > 1050) ? Text('Tiến độ: ') : SizedBox(),
+                                        Expanded(
+                                          child: LayoutBuilder(
+                                            builder: (context, constraints) {
+                                              return Container(
+                                                width: constraints.maxWidth,
+                                                height: 20,
+                                                constraints: BoxConstraints(
+                                                  minWidth: 100,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey,
+                                                  borderRadius: BorderRadius.circular(20),
+                                                ),
+                                                child: Stack(children: [
+                                                  Container(
+                                                    width: constraints.maxWidth * _checkProgression(subjectIndex: subjectIndex),
+                                                    height: 20,
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.red,
+                                                      borderRadius: BorderRadius.circular(20),
+                                                    ),
+                                                  ),
+                                                  Center(
+                                                      child: Text(
+                                                        '${(_checkProgression(subjectIndex: subjectIndex) * 100).floor()} %',
+                                                        style: TextStyle(color: Colors.white),
+                                                      )),
+                                                ]),
+                                              );
+                                            },
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            onTap: () {
+                              setState(() {
+                                _state. showSubject![subjectIndex] = !_state.showSubject![subjectIndex];
+                              });
+                            },
+                          ),
+                          buildLessonItemList(subjectIndex: subjectIndex, subject: subject,)
+                        ],
                       );
                     },
-                  ),
-                ],
+                  );
+                },
               ),
-            ),
-          );
-        },
+            ],
+          ),
+        ),
       ),
     );
   }
 
-  Widget buildLessonItemList({required Subjects subject, required int subjectIndex}){
-    return  AnimatedSize(
+  Widget buildLessonItemList({required Subjects subject, required int subjectIndex, }) {
+    return AnimatedSize(
       curve: Curves.fastOutSlowIn,
       duration: Duration(milliseconds: 200),
-      child: showSubject[subjectIndex]
+      child: _state.showSubject![subjectIndex]
           ? Container(
-        margin: EdgeInsets.all(16),
-        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height/3),
-        child: SingleChildScrollView(
-          controller: subjectScrollController,
-          child: ListView.builder(
-            shrinkWrap: true,
-            controller: subjectScrollController,
-            itemCount: (subject.lectures??[]).length,
-            itemBuilder: (context, lectureIndex) {
-              LessonInfo lessonInfo = (subject.lectures??[]).elementAt(lectureIndex);
-              return Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                        left: 32,
-                        top: 16,
-                        bottom: 16,
-                        right: 32),
-                    child: Row(
-                      children: [
-                        Flexible(
-                          flex: 10,
-                          child: Text(
-                            '${L10nX.getStr.lecture_name_str} $lectureIndex: ${lessonInfo.lectureName}',
-                            maxLines: 2,
-                            overflow:
-                            TextOverflow.ellipsis,
-                          ),
-                        ),
-                        Spacer(),
-                        Flexible(
-                          flex: 1,
-                          child: InkWell(
-                            onTap: () {
-                              setState(() {
-                                checkLecture[subjectIndex][lectureIndex] = !checkLecture[subjectIndex][lectureIndex];
-                              });
-                            },
-                            child: Container(
-                              width: 24,
-                              height: 24,
-                              decoration:
-                              BoxDecoration(
-                                  border:
-                                  Border.all(
-                                    color: Colors.red,
-                                  )),
-                              child: Align(
-                                alignment:
-                                Alignment.center,
-                                child: checkLecture[subjectIndex][lectureIndex]
-                                    ? Icon(
-                                  Icons.check,
-                                  color: Colors
-                                      .red,
+              margin: EdgeInsets.all(16),
+              constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height / 2),
+              child: SingleChildScrollView(
+                controller: subjectScrollController,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  controller: subjectScrollController,
+                  itemCount: (subject.lectures ?? []).length,
+                  itemBuilder: (context, lectureIndex) {
+                    LessonInfo lessonInfo = (subject.lectures ?? []).elementAt(lectureIndex);
+                    bool isSelectLesson = lessonInfo.id == _state.selectLessonInfo?.id;
+                    return InkWell(
+                      onTap: () {
+                        BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailSelectLessonEvent(selectLessonInfo: lessonInfo));
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: isSelectLesson?ColorConst.mainColor.withOpacity(0.05): ColorConst.whiteColor,
+                              border: Border(bottom: BorderSide(color: Colors.black.withOpacity(0.1),width: 0.5))
+                            ),
+                            padding: EdgeInsets.all(Dimens.size16),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    '$subjectIndex.$lectureIndex. ${L10nX.getStr.lecture_name_str} $lectureIndex: ${lessonInfo.lectureName}',
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                Gap(Dimens.size10),
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      _state.checkLecture![subjectIndex][lectureIndex] = !_state.checkLecture![subjectIndex][lectureIndex];
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 24,
+                                    height: 24,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                      color: Colors.red,
+                                    )),
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: _state.checkLecture![subjectIndex][lectureIndex]
+                                          ? Icon(
+                                              Icons.check,
+                                              color: Colors.red,
+                                            )
+                                          : SizedBox(),
+                                    ),
+                                  ),
                                 )
-                                    : SizedBox(),
-                              ),
+                              ],
                             ),
                           ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                    const EdgeInsets.symmetric(
-                        horizontal: 8.0),
-                    child: Divider(
-                      color: Colors.black
-                          .withOpacity(0.1),
-                    ),
-                  )
-                ],
-              );
-            },
-          ),
-        ),
-      )
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            )
           : SizedBox(),
     );
   }
+
   Widget buildStudyOverview() {
     return SingleChildScrollView(
       controller: lessonDetailScrollController,
@@ -431,7 +422,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
           SizedBox(
             height: 4,
           ),
-          Text('${widget.courseInfo.introduction}'),
+          Text('${_state.courseInfo?.introduction}'),
           SizedBox(
             height: 16,
           ),
@@ -464,13 +455,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
               controller: lessonDetailScrollController,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                return buildWordItem(
-                    word: WordInfo(
-                        simplified: '吃',
-                        traditional: '吃',
-                        pinyinTones: 'chī',
-                        translationVn: 'ăn',
-                        audio: null));
+                return buildWordItem(word: WordInfo(simplified: '吃', traditional: '吃', pinyinTones: 'chī', translationVn: 'ăn', audio: null));
               })
         ],
       ),
@@ -501,13 +486,12 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                         width: 16,
                       ),
                       StatefulBuilder(
-                        builder: (BuildContext context,
-                            void Function(void Function()) setState) {
+                        builder: (BuildContext context, void Function(void Function()) setState) {
                           return InkWell(
                               onTap: () async {
                                 final player = AudioPlayer();
                                 player.playerStateStream.listen(
-                                      (event) {
+                                  (event) {
                                     switch (event.processingState) {
                                       case ProcessingState.idle:
                                       // TODO: Handle this case.
@@ -516,16 +500,16 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                                       case ProcessingState.buffering:
                                       // TODO: Handle this case.
                                       case ProcessingState.ready:
-                                      // TODO: Handle this case.
+                                        // TODO: Handle this case.
                                         setState(
-                                              () {
+                                          () {
                                             isOnVolume = true;
                                           },
                                         );
                                       case ProcessingState.completed:
-                                      // TODO: Handle this case.
+                                        // TODO: Handle this case.
                                         setState(
-                                              () {
+                                          () {
                                             isOnVolume = false;
                                           },
                                         );
@@ -545,8 +529,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                 ],
               ),
               Spacer(),
-              IconButton(
-                  onPressed: () {}, icon: Icon(Icons.remove_red_eye_outlined)),
+              IconButton(onPressed: () {}, icon: Icon(Icons.remove_red_eye_outlined)),
               SizedBox(
                 width: 16,
               ),
@@ -615,8 +598,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                         );
                         return Column(
                           children: [
-                            buildStudyReviewItem(
-                                review: listOfReview[index], index: index),
+                            buildStudyReviewItem(review: listOfReview[index], index: index),
                             SizedBox(
                               height: 16,
                             )
@@ -624,8 +606,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                         );
                       });
                 },
-              )
-          )
+              ))
         ],
       ),
     );
@@ -806,9 +787,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                         onPressed: () {
                           setState(() {
                             likeCheck[index] = !likeCheck[index];
-                            (likeCheck[index])
-                                ? review.likeCount++
-                                : review.likeCount--;
+                            (likeCheck[index]) ? review.likeCount++ : review.likeCount--;
                           });
                         },
                       ),
@@ -822,15 +801,12 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                       IconButton(
                         icon: Icon(
                           Icons.thumb_down_alt_rounded,
-                          color:
-                              (dislikeCheck[index]) ? Colors.red : Colors.grey,
+                          color: (dislikeCheck[index]) ? Colors.red : Colors.grey,
                         ),
                         onPressed: () {
                           setState(() {
                             dislikeCheck[index] = !dislikeCheck[index];
-                            (dislikeCheck[index])
-                                ? review.dislikeCount++
-                                : review.dislikeCount--;
+                            (dislikeCheck[index]) ? review.dislikeCount++ : review.dislikeCount--;
                           });
                         },
                       ),
@@ -857,8 +833,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                           padding: EdgeInsets.only(left: 60),
                           child: Container(
                               // width: MediaQuery.of(context).size.width,
-                              child:
-                                  buildStudyReviewItemUser(replyCheck: true))))
+                              child: buildStudyReviewItemUser(replyCheck: true))))
                 ],
               )),
         ],

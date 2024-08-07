@@ -5373,6 +5373,56 @@ class S {
       args: [],
     );
   }
+
+  /// `List of tests`
+  String get test_list {
+    return Intl.message(
+      'List of tests',
+      name: 'test_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create test`
+  String get test_add {
+    return Intl.message(
+      'Create test',
+      name: 'test_add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete test`
+  String get test_remove {
+    return Intl.message(
+      'Delete test',
+      name: 'test_remove',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update test`
+  String get test_update {
+    return Intl.message(
+      'Update test',
+      name: 'test_update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Test`
+  String get test_str {
+    return Intl.message(
+      'Test',
+      name: 'test_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

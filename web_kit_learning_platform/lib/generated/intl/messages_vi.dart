@@ -586,6 +586,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("điều khoản và điều kiện"),
         "terms_of_service_text":
             MessageLookupByLibrary.simpleMessage("Điều khoản Dịch vụ"),
+        "test_add": MessageLookupByLibrary.simpleMessage("Tạo bài test"),
+        "test_list": MessageLookupByLibrary.simpleMessage("Danh sách bài test"),
+        "test_remove": MessageLookupByLibrary.simpleMessage("Xóa bài test"),
+        "test_str": MessageLookupByLibrary.simpleMessage("Bài test"),
+        "test_update":
+            MessageLookupByLibrary.simpleMessage("Cập nhật bài test"),
         "text_actions":
             MessageLookupByLibrary.simpleMessage("Hành động văn bản"),
         "text_button": MessageLookupByLibrary.simpleMessage("Nút văn bản"),

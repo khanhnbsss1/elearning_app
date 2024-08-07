@@ -600,6 +600,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("terms & conditions"),
         "terms_of_service_text":
             MessageLookupByLibrary.simpleMessage("Terms of Service"),
+        "test_add": MessageLookupByLibrary.simpleMessage("Create test"),
+        "test_list": MessageLookupByLibrary.simpleMessage("List of tests"),
+        "test_remove": MessageLookupByLibrary.simpleMessage("Delete test"),
+        "test_str": MessageLookupByLibrary.simpleMessage("Test"),
+        "test_update": MessageLookupByLibrary.simpleMessage("Update test"),
         "text_actions": MessageLookupByLibrary.simpleMessage("Text actions"),
         "text_button": MessageLookupByLibrary.simpleMessage("Text button"),
         "text_rounded_button":
