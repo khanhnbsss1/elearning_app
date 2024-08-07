@@ -1,30 +1,34 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_pagination/flutter_custom_pagination.dart';
 import 'package:gap/gap.dart';
 import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/theme/theme_customizer.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
-import 'package:webkit/views/lessson/components/lesson_item_view.dart';
+import 'package:webkit/services/apis/tags/models/tag_info.dart';
 import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../layouts/layout.dart';
-import 'bloc/lesson_list_bloc.dart';
+import 'bloc/tag_list_bloc.dart';
+import 'components/add_tag.dart';
+import 'components/tag_item_view.dart';
 
-class LessonListPage extends StatefulWidget {
-  LessonListPage({super.key});
+class TagListPage extends StatefulWidget {
+  TagListPage({super.key});
   @override
-  State<LessonListPage> createState() => _LessonListPageState();
+  State<TagListPage> createState() => _TagListPageState();
 }
 
-class _LessonListPageState extends State<LessonListPage> with SingleTickerProviderStateMixin, UIMixin {
+class _TagListPageState extends State<TagListPage> with SingleTickerProviderStateMixin, UIMixin {
   late MemberListController controller;
  TextEditingController textEditingController = TextEditingController();
   GlobalKey<FormState>? formKey = GlobalKey();
@@ -47,15 +51,15 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return LessonListBloc(LessonListState())..add(LessonListInitEvent());
+        return TagListBloc(TagListState())..add(TagListInitEvent());
       },
-      child: BlocConsumer<LessonListBloc, LessonListState>(
+      child: BlocConsumer<TagListBloc, TagListState>(
         listener: (context, state) {
           switch (state.blocStatus) {
-            case LessonListStatus.initial:
+            case TagListStatus.initial:
               break;
               // TODO: Handle this case.
-            case LessonListStatus.onSelectLesson:
+            case TagListStatus.onSelectTag:
               {
               }
               break;
@@ -92,7 +96,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
     required MyScreenMediaType myScreenMediaType,
     required BoxConstraints boxConstraints,
     required BuildContext context,
-    required LessonListState state
+    required TagListState state
   }
       ){
     return Container(
@@ -106,28 +110,28 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
             buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
             Expanded(child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: buildLessonList(state: state, context: context),
+              child: buildTagList(state: state, context: context),
             )),
             SizedBox(height: 8,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FlutterCustomPagination(
-                  key: GlobalKey(debugLabel: (state.lessonListResponseModel?.total??0).toString()),
-                  currentPage: state.lessonListResponseModel!.getCurrentPage(),
-                  limitPerPage: state.lessonListResponseModel!.getTotalPage(),
-                  totalDataCount: state.lessonListResponseModel!.getTotalPage(),
+                  key: GlobalKey(debugLabel: (state.tagListResponseModel?.total??0).toString()),
+                  currentPage: state.tagListResponseModel!.getCurrentPage(),
+                  limitPerPage: state.tagListResponseModel!.getTotalPage(),
+                  totalDataCount: state.tagListResponseModel!.getTotalPage(),
                   onPreviousPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
                   },
                   onBackToFirstPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
                   },
                   onNextPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
                   },
                   onGoToLastPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
                   },
                   backgroundColor: ColorConst.whiteColor,
                   textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
@@ -148,7 +152,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
     required MyScreenMediaType myScreenMediaType,
     required BoxConstraints boxConstraints,
     required BuildContext context,
-    required LessonListState state
+    required TagListState state
   }){
     return Container(
       decoration: BoxDecoration(
@@ -176,7 +180,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                       
                     },
                     onFieldSubmitted: (value) {
-                      BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                      BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
                     },
                     onTapOutside: (event) {
                     },
@@ -209,7 +213,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
               Gap(Dimens.size10),
               InkWell(
                   onTap: () {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                   },
                   child: Icon(Icons.search_rounded, color: ColorConst.mainColor,size: Dimens.size40,)),
             ],
@@ -221,7 +225,9 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
               InkWell(
                   onTap: () {
                     // CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
-                    CreateEditLesson(lessonActionType: LessonActionType.create,).show(context);
+                    AddTagPage(tagPageAction: TagPageAction.create,).show(context, callBack: (p0) {
+                      BlocProvider.of<TagListBloc>(context).add(TagListInitEvent());
+                    },);
                   },
                   child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
             ],
@@ -230,24 +236,33 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
       ),
     );
   }
-  Widget buildLessonList({required LessonListState state, required BuildContext context}){
+  Widget buildTagList({required TagListState state, required BuildContext context}){
     List<Widget> listOfLesson = List.empty(growable: true);
 
-    for (LessonInfo lessonInfo in state.lessonListResponseModel?.content ?? []) {
+    for (TagsInfo lessonInfo in state.tagListResponseModel?.content ?? []) {
       listOfLesson.add(
         InkWell(
           onTap: () {
-            BlocProvider.of<LessonListBloc>(context).add(LessonListOnSelectLessonEvent(selectLessonInfo: lessonInfo));
+            BlocProvider.of<TagListBloc>(context).add(TagListOnSelectTagEvent(selectTagInfo: lessonInfo));
           },
-          child: LessonItemView(
-            lessonInfo: lessonInfo,
+          child: TagItemView(
+            tagInfo: lessonInfo,
             onViewDetail: (p0) {
-              CreateEditLesson(lessonActionType: LessonActionType.view, lessonInfo: p0,).show(context);
+              AddTagPage(tagPageAction: TagPageAction.view,).show(context);
             },
             onEdit: (p0) {
-              CreateEditLesson(lessonActionType: LessonActionType.edit,lessonInfo: p0,).show(context);
+              AddTagPage(tagsInfo: p0,tagPageAction: TagPageAction.edit,).show(context, callBack: (p0) {
+                BlocProvider.of<TagListBloc>(context).add(TagListInitEvent());
+              },);
             },
             onDelete: (p0) {
+              ConfirmPopupPage(
+                title: L10nX.getStr.remove_tags,
+                content: L10nX.getStr.you_want_remove,
+                onAccept: () {
+                  BlocProvider.of<TagListBloc>(context).add(TagListOnDeleteTagEvent(selectTagInfo: p0));
+                },
+              ).show(context);
             },
           ),
         )
@@ -256,15 +271,15 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
     switch (state.blocStatus){
       case null:
         // TODO: Handle this case.
-      case LessonListStatus.initial:
+      case TagListStatus.initial:
         // TODO: Handle this case.
-      case LessonListStatus.onLoading:
+      case TagListStatus.onLoading:
         // TODO: Handle this case.
-      case LessonListStatus.onSearchByParams:
+      case TagListStatus.onSearchByParams:
         // TODO: Handle this case.
         return Center(child: CircularProgressIndicator());
-      case LessonListStatus.onSelectLesson:
-      case LessonListStatus.onLoadEnd:
+      case TagListStatus.onSelectTag:
+      case TagListStatus.onLoadEnd:
         // TODO: Handle this case.
         return  (listOfLesson.isEmpty) ?
         Center(child:NoData()) :
@@ -274,10 +289,9 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             controller: scrollController,
-            child: Wrap(
-              alignment: WrapAlignment.spaceBetween,
-              crossAxisAlignment: WrapCrossAlignment.start,
-              runAlignment: WrapAlignment.spaceBetween,
+            child: Column(
+              mainAxisAlignment:MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: listOfLesson,
             ),
           ),

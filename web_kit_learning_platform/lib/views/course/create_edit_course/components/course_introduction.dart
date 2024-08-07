@@ -424,7 +424,11 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
               setState(() {
                 state.controller?.basicValidator.getController('image')?.text = result.files.first.name ?? "";
               });
-              BlocProvider.of<AddCourseBloc>(context).add(AddCourseUploadImageEvent(uploadFileInfo: UploadFileInfo(data: SubjectType.courses, file: file)));
+              BlocProvider.of<AddCourseBloc>(context).add(AddCourseUploadImageEvent(uploadFileInfo: UploadFileInfo(
+                  data: SubjectType.courses, 
+                  fileName: result.files.first.name,
+                  file: file
+              )));
             },
           ),
         ),
@@ -460,7 +464,11 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                 setState(() {
                   state.controller?.basicValidator.getController('video_preview')?.text = result.files.first.name ?? "";
                 });
-                BlocProvider.of<AddCourseBloc>(context).add(AddCourseUploadVideoPreViewEvent(uploadFileInfo: UploadFileInfo(data: SubjectType.courses, file: file)));
+                BlocProvider.of<AddCourseBloc>(context).add(AddCourseUploadVideoPreViewEvent(
+                    uploadFileInfo: UploadFileInfo(
+                        data: SubjectType.courses,
+                        fileName: result.files.first.name,
+                        file: file)));
               },
               child: Icon(
                 Icons.video_call,

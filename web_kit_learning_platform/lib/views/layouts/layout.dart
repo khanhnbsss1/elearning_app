@@ -116,7 +116,7 @@ class Layout extends StatelessWidget {
       // extendBodyBehindAppBar: true,
       // appBar: TopBar(
       drawer: LeftBar(),
-      body: SingleChildScrollView(child: child),
+      body: (isScroll ?? true)?SingleChildScrollView(child: child):child,
     );
   }
 

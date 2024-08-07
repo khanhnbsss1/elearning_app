@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
-import 'package:webkit/services/apis/words/add_words_api.dart';
-import 'package:webkit/services/apis/words/word_info.dart';
+import 'package:webkit/services/apis/vocabulary/words/add_words_api.dart';
+import 'package:webkit/services/apis/vocabulary/words/word_info.dart';
 
 import 'my_controller.dart';
 
@@ -48,6 +48,13 @@ class AddWordController extends MyController {
       controller: TextEditingController(text: vocabularyInfo?.audio??""),
     );
     basicValidator.addField(
+      'image',
+      required: true,
+      label: 'Image',
+      controller: TextEditingController(text: vocabularyInfo?.image??""),
+    );
+    
+    basicValidator.addField(
       'created_by',
       label: 'created_by',
       required: true,
@@ -69,7 +76,6 @@ class AddWordController extends MyController {
       traditional: basicValidator.getController('traditional')?.text,
       pinyinTones: basicValidator.getController('pinyin_tones')?.text,
       translationVn: basicValidator.getController('translation_vn')?.text,
-      audio: _audioFile,
       createdBy: 'long1',
     );
     AddWordsApi addWordsApi = AddWordsApi(word: word);

@@ -34,11 +34,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "actions": MessageLookupByLibrary.simpleMessage("Actions"),
         "add_discount_str":
             MessageLookupByLibrary.simpleMessage("Add discount"),
+        "add_examples_str":
+            MessageLookupByLibrary.simpleMessage("Add examples"),
         "add_lectures_from_another_course_str":
             MessageLookupByLibrary.simpleMessage(
                 "Add lectures from another course"),
         "add_product": MessageLookupByLibrary.simpleMessage("Add product"),
         "add_products": MessageLookupByLibrary.simpleMessage("Add products"),
+        "add_tags": MessageLookupByLibrary.simpleMessage("Add tags"),
         "adjust_your_course_availability_date_str":
             MessageLookupByLibrary.simpleMessage(
                 "Adjust your course availability date"),
@@ -144,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_product":
             MessageLookupByLibrary.simpleMessage("Create product"),
         "create_quiz_str": MessageLookupByLibrary.simpleMessage("Create quiz"),
+        "create_str": MessageLookupByLibrary.simpleMessage("Create"),
         "create_student":
             MessageLookupByLibrary.simpleMessage("Create student"),
         "create_subject_str":
@@ -212,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_your_email":
             MessageLookupByLibrary.simpleMessage("Enter your email"),
         "example_form": MessageLookupByLibrary.simpleMessage("Example form"),
+        "examples_str": MessageLookupByLibrary.simpleMessage("Examples"),
         "extra_pages": MessageLookupByLibrary.simpleMessage("Extra pages"),
         "faqs": MessageLookupByLibrary.simpleMessage("FAQs"),
         "filled": MessageLookupByLibrary.simpleMessage("Filled"),
@@ -284,6 +289,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login_your_account":
             MessageLookupByLibrary.simpleMessage("Login your account"),
         "map": MessageLookupByLibrary.simpleMessage("Map"),
+        "meaning_str": MessageLookupByLibrary.simpleMessage("Meaning"),
         "medium": MessageLookupByLibrary.simpleMessage("Medium"),
         "medthod_content1": MessageLookupByLibrary.simpleMessage(
             "After only 9 hours of studying, you can introduce yourself and have correct pronunciation,"),
@@ -313,6 +319,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "more_inputs": MessageLookupByLibrary.simpleMessage("More inputs"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "new_word_str": MessageLookupByLibrary.simpleMessage("New word"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
         "no_internet":
             MessageLookupByLibrary.simpleMessage("No network connection"),
@@ -361,6 +368,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinyin_tone_str": MessageLookupByLibrary.simpleMessage("Pinyin tone"),
         "please_choose_a_subject":
             MessageLookupByLibrary.simpleMessage("Please choose a subject"),
+        "please_fill_in_all_missing_fields_str":
+            MessageLookupByLibrary.simpleMessage(
+                "Please fill in all missing fields"),
+        "please_save_all_examples_before_adding_new_examples_str":
+            MessageLookupByLibrary.simpleMessage(
+                "Please save all examples before adding new examples"),
         "population_growth_of_various_countries":
             MessageLookupByLibrary.simpleMessage(
                 "Population growth of various countries"),
@@ -397,6 +410,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Register to enjoy the best deals for you"),
         "remember_me": MessageLookupByLibrary.simpleMessage("Remember Me"),
+        "remove_course": MessageLookupByLibrary.simpleMessage("Remove course"),
+        "remove_example":
+            MessageLookupByLibrary.simpleMessage("Remove example"),
+        "remove_lesson": MessageLookupByLibrary.simpleMessage("Remove lesson"),
+        "remove_tags": MessageLookupByLibrary.simpleMessage("Remove tags"),
+        "remove_test": MessageLookupByLibrary.simpleMessage("Remove test"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Reset password"),
         "result": MessageLookupByLibrary.simpleMessage("Result"),
@@ -465,6 +484,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "soft_rounded_button":
             MessageLookupByLibrary.simpleMessage("Soft rounded button"),
         "sort_list": MessageLookupByLibrary.simpleMessage("Sort List"),
+        "sound_str": MessageLookupByLibrary.simpleMessage("Sound"),
         "standard": MessageLookupByLibrary.simpleMessage("Standard"),
         "standard_str": MessageLookupByLibrary.simpleMessage("Standard"),
         "starter": MessageLookupByLibrary.simpleMessage("Starter"),
@@ -621,8 +641,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "ui": MessageLookupByLibrary.simpleMessage("UI"),
         "unknown_str": MessageLookupByLibrary.simpleMessage("Unknown"),
         "unlock": MessageLookupByLibrary.simpleMessage("Unlock"),
+        "upload_file": MessageLookupByLibrary.simpleMessage("Upload file"),
         "upload_image_str":
             MessageLookupByLibrary.simpleMessage("Upload image"),
+        "upload_sound_file_str":
+            MessageLookupByLibrary.simpleMessage("Upload sound file"),
         "upload_youtube_url_str":
             MessageLookupByLibrary.simpleMessage("Upload youtube url"),
         "uploading_file":
@@ -641,6 +664,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "vehicle_tracking":
             MessageLookupByLibrary.simpleMessage("Vehicle Tracking"),
         "very_high": MessageLookupByLibrary.simpleMessage("Very high"),
+        "video_link": MessageLookupByLibrary.simpleMessage("Video"),
         "video_player": MessageLookupByLibrary.simpleMessage("Video player"),
         "video_preview_str":
             MessageLookupByLibrary.simpleMessage("Video preview"),
@@ -727,6 +751,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Do you have an account?"),
         "you_do_not_have_an_account": MessageLookupByLibrary.simpleMessage(
             "You don\'t have an account yet?"),
+        "you_want_remove":
+            MessageLookupByLibrary.simpleMessage("Do you want to remove"),
         "your_address": MessageLookupByLibrary.simpleMessage("Your address"),
         "your_course": MessageLookupByLibrary.simpleMessage("Your course"),
         "your_email": MessageLookupByLibrary.simpleMessage("Your Email"),
@@ -735,6 +761,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "your_registration_process_is_finished":
             MessageLookupByLibrary.simpleMessage(
                 "Your registration process is finished"),
+        "youtube_link":
+            MessageLookupByLibrary.simpleMessage("Youtube video link"),
         "youtube_player": MessageLookupByLibrary.simpleMessage("Youtube player")
       };
 }

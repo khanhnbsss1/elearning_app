@@ -19,7 +19,7 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
-import 'package:webkit/views/vocabulary/vocabulary_detail/add_words.dart';
+import 'package:webkit/views/vocabulary/vocabulary_detail/create_edit_words.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../layouts/layout.dart';
@@ -110,7 +110,12 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                 }
               else
                 {
-                  return Material(child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
+                  return Layout(
+                    isScroll: false,
+                    child: buildLeftPage(
+                          state: state, 
+                          boxConstraints: boxConstraints, 
+                          context: context, myScreenMediaType: myScreenMediaType));
                 }
             },);
           
@@ -245,7 +250,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                 InkWell(
                     onTap: () {
                       // CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
-                      AddWords().show(context);
+                      CreateEditWordsPage().show(context);
                     },
                     child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
               ],

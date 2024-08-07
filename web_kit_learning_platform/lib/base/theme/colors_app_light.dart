@@ -26,7 +26,7 @@ class ColorLightConst{
 
   
   static Color dividerColor =  const Color(0xff9B9B9B);
-  static Color normalTextColorOnMainColor =  blackColor54;
+  static Color normalTextColorOnMainColor =  blackColor87;
   static Color blackColor =  Colors.black;
   static Color blackColor54 =  Colors.black54;
   static Color blackColor45 =  Colors.black45;

@@ -38,6 +38,7 @@ class VocabularyInfo {
   String? translationVn;
   int? lectureId;
   String? audio;
+  String? image;
   String? categoryWord;
   int? gradeId;
   String? createdAt;
@@ -60,7 +61,9 @@ class VocabularyInfo {
         this.createdAt,
         this.updatedAt,
         this.createdBy,
-        this.updatedBy});
+        this.updatedBy,
+        this.image
+      });
 
   VocabularyInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -78,6 +81,8 @@ class VocabularyInfo {
     updatedAt = json['updated_at'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
+    image = json['image'];
+
   }
 
   Map<String, dynamic> toJson() {
@@ -97,6 +102,7 @@ class VocabularyInfo {
     data['updated_at'] = updatedAt;
     data['created_by'] = createdBy;
     data['updated_by'] = updatedBy;
+    data['image'] = image;
     return data;
   }
 }

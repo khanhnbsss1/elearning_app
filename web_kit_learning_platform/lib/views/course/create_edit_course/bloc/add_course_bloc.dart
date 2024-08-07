@@ -245,10 +245,10 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     ));
 
     UploadFileApi uploadFileApi = UploadFileApi(fileInfo: event.uploadFileInfo);
-    dynamic data = await uploadFileApi.call();
-    if(data.runtimeType == String && (data as String).isNotEmpty)
+    UploadFileResponseInfo? data = await uploadFileApi.call();
+    if(data!=null )
       {
-        state.courseInfo?.image = data;
+        state.courseInfo?.image = data.link;
       }
     emit(state.copyWith(
         blocStatus:  AddCourseStatus.onSubmitAdd,
@@ -263,10 +263,10 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
         blocStatus:  AddCourseStatus.onLoading
     ));
     UploadFileApi uploadFileApi = UploadFileApi(fileInfo: event.uploadFileInfo);
-    dynamic data = await uploadFileApi.call();
-    if(data.runtimeType == String && (data as String).isNotEmpty)
+    UploadFileResponseInfo? data = await uploadFileApi.call();
+    if(data!=null )
     {
-      state.courseInfo?.videoPreview = data;
+      state.courseInfo?.videoPreview = data.link;
     }
     emit(state.copyWith(
         blocStatus:  AddCourseStatus.onSubmitAdd

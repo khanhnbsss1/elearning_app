@@ -516,5 +516,25 @@
   "create_lesson_str": "创建课程",
   "delete_lesson_str": "删除课程",
   "subject_str": "主题",
-  "primary_course": "常规课程"
+  "primary_course": "常规课程",
+  "please_fill_in_all_missing_fields_str": "请填写所有缺失字段",
+  "new_word_str": "新词",
+  "meaning_str": "含义",
+  "upload_sound_file_str": "上传声音文件",
+  "add_examples_str": "添加示例",
+  "examples_str": "示例",
+  "sound_str": "声音",
+  "please_save_all_examples_before_adding_new_examples_str": "添加新示例前，请保存所有示例",
+  "create_str": "创建",
+  "add_tags":"添加标签",
+  "video_link": "视频",
+  "youtube_link":"Youtube video link",
+  "upload_file": "上传文件",
+  "remove_tags":"删除标签",
+  "remove_lesson":"删除课程",
+  "remove_test":"删除测试",
+  "remove_example":"删除示例",
+  "remove_course":"删除课程",
+  "you_want_remove": "您要删除吗"
+
 }

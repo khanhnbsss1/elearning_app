@@ -520,5 +520,27 @@
   "create_lesson_str": "Create a lesson",
   "delete_lesson_str": "Delete a lesson",
   "subject_str": "Subject",
-  "primary_course": "Primary course"
+  "primary_course": "Primary course",
+  
+  "please_fill_in_all_missing_fields_str": "Please fill in all missing fields",
+  "new_word_str": "New word",
+  "meaning_str": "Meaning",
+  "upload_sound_file_str": "Upload sound file",
+  "add_examples_str": "Add examples",
+  "examples_str": "Examples",
+  "sound_str": "Sound",
+  "please_save_all_examples_before_adding_new_examples_str": "Please save all examples before adding new examples",
+  "create_str": "Create",
+  "add_tags":"Add tags",
+  "video_link": "Video",
+  "youtube_link":"Youtube video link",
+  "upload_file": "Upload file",
+  "remove_tags":"Remove tags",
+  "remove_lesson":"Remove lesson",
+  "remove_test":"Remove test",
+  "remove_example":"Remove example",
+  "remove_course":"Remove course",
+  "you_want_remove": "Do you want to remove"
+
+
 }

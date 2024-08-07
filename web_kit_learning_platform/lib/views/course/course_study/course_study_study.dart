@@ -5,6 +5,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/topic/model/topic_info.dart';
+import 'package:webkit/services/apis/vocabulary/words/word_info.dart';
 import 'package:webkit/views/course/create_edit_course/components/lectures_detail.dart';
 
 import '../../../base/author/user_helper.dart';
@@ -17,7 +18,6 @@ import '../../../helpers/utils/ui_mixins.dart';
 import '../../../helpers/widgets/my_responsiv.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
-import '../../../services/apis/words/word_info.dart';
 import '../../video_player/model/video_model.dart';
 import '../../video_player/video_player.dart';
 import '../create_edit_course/components/build_tab_bar.dart';
@@ -535,7 +535,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy>
                                 player.play();
                               },
                               child: AudioSpeaker(
-                                url: word.audio?.filename ?? "",
+                                url: word.audio?.link ?? "",
                               ));
                         },
                       )

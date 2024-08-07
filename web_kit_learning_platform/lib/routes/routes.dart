@@ -47,6 +47,7 @@ import 'package:webkit/views/other/google_map.dart';
 import 'package:webkit/views/other/sfmap_page.dart';
 import 'package:webkit/views/other/synsfusion_chart.dart';
 import 'package:webkit/views/starter.dart';
+import 'package:webkit/views/tags/tag_list/tag_list.dart';
 import 'package:webkit/views/ui/buttons_page.dart';
 import 'package:webkit/views/ui/cards_page.dart';
 import 'package:webkit/views/ui/carousels.dart';
@@ -108,6 +109,11 @@ getPageRoute() {
     GetPage(
         name: Routes.lessonList,
         page: () =>  LessonListPage(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]),
+    ///--------------- Tags ---------------///
+    GetPage(
+        name: Routes.tagList,
+        page: () =>  TagListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: Routes.videoPlayer,

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/words/word_info.dart';
 
 import '../../../base/base.export.dart';
 import 'models/upload_file_info.dart';
@@ -13,17 +12,21 @@ class UploadFileApi extends BaseApiRequest {
       apiName: ApiName().addUploadFile,
     bodyMethod: BodyMethod.formData,
   );
-  Future<dynamic> call() async {
+  Future<UploadFileResponseInfo?> call() async {
     await getAuthorization();
     try{
       MonitorLoading().showLoading(L10nX.getStr.uploading_file);
       dynamic data = await postRequestAPI();
       MonitorLoading().dismiss();
-      return data;
+      if(data!=null && data.runtimeType!= ResponseCommon)
+        {
+          UploadFileResponseInfo uploadFileResponseInfo = UploadFileResponseInfo.fromJson(data);
+          return uploadFileResponseInfo;
+        }
     }
     catch(e){
       MonitorLoading().dismiss();
-      return "";
+      return null;
     }
   }
 
@@ -31,6 +34,7 @@ class UploadFileApi extends BaseApiRequest {
     // TODO: implement getAuthorization
     await setApiBody({
       'data': fileInfo.getDataType(),
+      'fileName': fileInfo.file?.filename??"",
       'file': fileInfo.file,
     });
   }

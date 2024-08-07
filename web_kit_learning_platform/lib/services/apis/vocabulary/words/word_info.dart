@@ -1,13 +1,13 @@
-import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 
 class WordInfo {
   String? simplified;
   String? traditional;
   String? pinyinTones;
   String? translationVn;
-  MultipartFile? audio;
+  UploadFileResponseInfo? audio;
   String? createdBy;
 
   WordInfo(

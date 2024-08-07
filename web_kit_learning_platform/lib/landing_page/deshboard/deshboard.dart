@@ -678,12 +678,13 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                           enabled: true,
                           value: SampleItem2.itemOne,
                           onTap: () {},
-                          child: Column(
+                          child:
+                          Column(
                             mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment:CrossAxisAlignment.center ,
                             children: [
                               Visibility(
-                                visible: userProfile != null &&
-                                    ResponsiveInfo.isPhone(),
+                                visible: userProfile != null && ResponsiveInfo.isPhone(),
                                 child: InkWell(
                                   onTap: () {
                                     AppPages.routeName(Routes.dashboardRoute);
@@ -711,123 +712,125 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: Dimens.size10),
-                                child: Stack(children: [
-                                  Visibility(
-                                    visible: userProfile == null,
-                                    child: Row(
-                                      children: [
-                                        SizedBox(
-                                          height: 40,
-                                          width: 145,
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              elevation:
-                                                  const WidgetStatePropertyAll(
-                                                      0),
-                                              backgroundColor:
-                                                  WidgetStatePropertyAll(
-                                                      notifier.buttoncolor),
-                                              shape:
-                                                  const WidgetStatePropertyAll(
-                                                RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(20)),
+                                padding: EdgeInsets.symmetric(vertical: Dimens.size10),
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                    children: [
+                                      Visibility(
+                                        visible: userProfile == null,
+                                        child: Center(
+                                          child: Column(
+                                            children: [
+                                              SizedBox(
+                                                height: 40,
+                                                width: 145,
+                                                child: ElevatedButton(
+                                                  style: ButtonStyle(
+                                                    elevation:
+                                                        const WidgetStatePropertyAll(
+                                                            0),
+                                                    backgroundColor:
+                                                        WidgetStatePropertyAll(
+                                                            notifier.buttoncolor),
+                                                    shape:
+                                                        const WidgetStatePropertyAll(
+                                                      RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(20)),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  onPressed: () {
+                                                    LoginPage().show(context);
+                                                    //AppPages.route(Paths.dashboardPath);
+                                                  },
+                                                  child: Text(L10nX.getStr.login,
+                                                      style: baseStyle.copyWith(
+                                                          fontSize: 12,
+                                                          color: Colors.white)),
                                                 ),
                                               ),
-                                            ),
-                                            onPressed: () {
-                                              LoginPage().show(context);
-                                              //AppPages.route(Paths.dashboardPath);
-                                            },
-                                            child: Text(L10nX.getStr.login,
-                                                style: baseStyle.copyWith(
-                                                    fontSize: 12,
-                                                    color: Colors.white)),
-                                          ),
-                                        ),
-                                        const SizedBox(width: 10),
-                                        SizedBox(
-                                          height: 40,
-                                          width: 145,
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              elevation:
-                                                  const WidgetStatePropertyAll(
-                                                      0),
-                                              backgroundColor:
-                                                  WidgetStatePropertyAll(
-                                                      notifier.whitecolor),
-                                              shape: WidgetStatePropertyAll(
-                                                RoundedRectangleBorder(
-                                                  side: BorderSide(
-                                                      color:
-                                                          notifier.buttoncolor,
-                                                      width: 2),
-                                                  borderRadius:
-                                                      const BorderRadius.all(
-                                                          Radius.circular(20)),
+                                              const SizedBox(height: 16),
+                                              SizedBox(
+                                                height: 40,
+                                                width: 145,
+                                                child: ElevatedButton(
+                                                  style: ButtonStyle(
+                                                    elevation:
+                                                        const WidgetStatePropertyAll(
+                                                            0),
+                                                    backgroundColor:
+                                                        WidgetStatePropertyAll(
+                                                            notifier.whitecolor),
+                                                    shape: WidgetStatePropertyAll(
+                                                      RoundedRectangleBorder(
+                                                        side: BorderSide(
+                                                            color:
+                                                                notifier.buttoncolor,
+                                                            width: 2),
+                                                        borderRadius:
+                                                            const BorderRadius.all(
+                                                                Radius.circular(20)),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  onPressed: () {
+                                                    Register().show(context);
+                                                  },
+                                                  child: Text(L10nX.getStr.sign_up,
+                                                      style: baseStyle.copyWith(
+                                                          fontSize: 12,
+                                                          color:
+                                                              notifier.buttoncolor)),
                                                 ),
                                               ),
-                                            ),
-                                            onPressed: () {
-                                              Register().show(context);
-                                            },
-                                            child: Text(L10nX.getStr.sign_up,
-                                                style: baseStyle.copyWith(
-                                                    fontSize: 12,
-                                                    color:
-                                                        notifier.buttoncolor)),
+                                            ],
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: userProfile != null,
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        SizedBox(
-                                          height: 40,
-                                          width: 145,
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              elevation:
-                                                  const WidgetStatePropertyAll(
-                                                      0),
-                                              backgroundColor:
-                                                  WidgetStatePropertyAll(
-                                                      ColorConst.whiteColor),
-                                              shape:
-                                                  const WidgetStatePropertyAll(
-                                                RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(20)),
+                                      ),
+                                      Visibility(
+                                        visible: userProfile != null,
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                              height: 40,
+                                              width: 145,
+                                              child: ElevatedButton(
+                                                style: ButtonStyle(
+                                                  elevation:
+                                                      const WidgetStatePropertyAll(
+                                                          0),
+                                                  backgroundColor:
+                                                      WidgetStatePropertyAll(
+                                                          ColorConst.whiteColor),
+                                                  shape:
+                                                      const WidgetStatePropertyAll(
+                                                    RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(20)),
+                                                    ),
+                                                  ),
                                                 ),
+                                                onPressed: () {
+                                                  AuthorManager().handleLogout();
+                                                  AppPages.routeName(
+                                                      Routes.landingPageRoute,
+                                                      isReplace: true);
+                                                },
+                                                child: Text(
+                                                    L10nX.getStr.sign_out_text,
+                                                    style: baseStyle.copyWith(
+                                                        fontSize: 12,
+                                                        color: Colors.red)),
                                               ),
                                             ),
-                                            onPressed: () {
-                                              AuthorManager().handleLogout();
-                                              AppPages.routeName(
-                                                  Routes.landingPageRoute,
-                                                  isReplace: true);
-                                            },
-                                            child: Text(
-                                                L10nX.getStr.sign_out_text,
-                                                style: baseStyle.copyWith(
-                                                    fontSize: 12,
-                                                    color: Colors.red)),
-                                          ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
+                                      ),
                                 ]),
                               ),
                             ],

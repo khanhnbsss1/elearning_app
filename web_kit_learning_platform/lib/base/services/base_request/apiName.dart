@@ -40,10 +40,13 @@ class ApiName {
   ///Lesson
   final String getLessonListFilter = "/get-list-filter";
   final String createLesson = "/create-lecture";
+  final String deleteLesson = "/delete-lecturee";
+  final String updateLesson = "/update-lecturee";
+  final String getDetailLesson = "/get-detail";
   final String linkLesson = "/update-lecture-course";
   final String unlinkLesson = "/unlink-lecture-course";
   final String getLessonList = "/get-list";
-
+  
   /// landing page
 
   final String getCourseListLandingPage = "/get-course-landingpage";
@@ -62,6 +65,13 @@ class ApiName {
   /// file
   final String addUploadFile = "/upload-file";
   final String addUploadMultiFile = "/upload-multiple-file";
+
+  ///tag
+  /// thong tin nguoi dung
+  final String getTagsList = "/get-tags";
+  final String createTag = "/create-tag";
+  final String updateTag = "/update-tag";
+  final String deleteTag = "/delete-tag";
 
 }
 

@@ -5,6 +5,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 
 import '../../../helpers/widgets/my_spacing.dart';
 
@@ -122,7 +123,7 @@ class _WidgetWithColumnTitleCommonState extends State<WidgetWithColumnTitleCommo
                       child: Row(
                         children: [
                           Text(
-                            L10nX.getStr.attack_link_str,
+                            L10nX.getStr.upload_file,
                             style: widget.titleStyle??TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600),),
                           MySpacing.width(8),
                           InkWell(

@@ -7,6 +7,7 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
+import 'package:webkit/views/tags/tag_list/components/add_tag.dart';
 
 class TagDropDown extends StatefulWidget {
   final List<TagsInfo> allTags;
@@ -78,7 +79,9 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                 ),
                 SizedBox(width: 10,),
                 IconButton(onPressed: (){
-                  _addTagDialog();
+                  AddTagPage(tagPageAction: TagPageAction.create,).show(context, callBack: (value) {
+                    widget.onAddTags(value);
+                  },);
                 }, icon: Icon(Icons.add_circle_rounded, color: color,),
                 )
               ]),
@@ -98,73 +101,6 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
             )).toList(),
           ),
         ]
-    );
-  }
-
-  void _addTagDialog() {
-    final tagController = TextEditingController();
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: Text('Add tags'),
-        content: TextFormField(
-          controller: tagController,
-          keyboardType: TextInputType.text,
-          decoration: InputDecoration(
-              labelText: 'Add tag',
-              labelStyle: MyTextStyle.bodySmall(xMuted: true),
-              border: outlineInputBorder,
-              contentPadding: EdgeInsets.all(16),
-              isCollapsed: true,
-              floatingLabelBehavior:
-              FloatingLabelBehavior.never),
-        ),
-        actions: [
-          TextButton(
-            child: Text('Close', style: TextStyle(color: color),),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          Spacer(),
-
-          TextButton(
-            child: Text('Add tag', style: TextStyle(color: color),),
-            onPressed: () {
-              if (tagController.text.isNotEmpty) {
-                if (widget.allTags.contains(TagsInfo(name: tagController.text))) {
-                  _showErrorDialog('Tag already exists');
-                } else {
-                  setState(() {
-                 //   widget.allTags.add(tagController.text);
-                  });
-                  Navigator.of(context).pop();
-                }
-              } else {
-                _showErrorDialog('Please enter a valid tag');
-              }
-            },
-          ),
-        ],
-      ),
-    );
-  }
-
-
-  void _showErrorDialog(String message) {
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        content: Text(message),
-        actions: [
-          TextButton(
-            child: Text('OK'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      ),
     );
   }
 }

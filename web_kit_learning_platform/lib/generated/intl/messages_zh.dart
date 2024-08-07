@@ -32,10 +32,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "action_str": MessageLookupByLibrary.simpleMessage("操作"),
         "actions": MessageLookupByLibrary.simpleMessage("操作"),
         "add_discount_str": MessageLookupByLibrary.simpleMessage("添加折扣"),
+        "add_examples_str": MessageLookupByLibrary.simpleMessage("添加示例"),
         "add_lectures_from_another_course_str":
             MessageLookupByLibrary.simpleMessage("从其他课程添加讲座"),
         "add_product": MessageLookupByLibrary.simpleMessage("添加产品"),
         "add_products": MessageLookupByLibrary.simpleMessage("添加产品"),
+        "add_tags": MessageLookupByLibrary.simpleMessage("添加标签"),
         "adjust_your_course_availability_date_str":
             MessageLookupByLibrary.simpleMessage("调整课程可用日期"),
         "alert": MessageLookupByLibrary.simpleMessage("警报"),
@@ -126,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_lesson_str": MessageLookupByLibrary.simpleMessage("创建课程"),
         "create_product": MessageLookupByLibrary.simpleMessage("创建产品"),
         "create_quiz_str": MessageLookupByLibrary.simpleMessage("创建测验"),
+        "create_str": MessageLookupByLibrary.simpleMessage("创建"),
         "create_student": MessageLookupByLibrary.simpleMessage("创建学生"),
         "create_subject_str": MessageLookupByLibrary.simpleMessage("创建主题"),
         "create_teacher": MessageLookupByLibrary.simpleMessage("创建教师"),
@@ -181,6 +184,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "english_text": MessageLookupByLibrary.simpleMessage("英语"),
         "enter_your_email": MessageLookupByLibrary.simpleMessage("输入您的电子邮件"),
         "example_form": MessageLookupByLibrary.simpleMessage("示例表格"),
+        "examples_str": MessageLookupByLibrary.simpleMessage("示例"),
         "extra_pages": MessageLookupByLibrary.simpleMessage("额外页面"),
         "faqs": MessageLookupByLibrary.simpleMessage("常见问题"),
         "filled": MessageLookupByLibrary.simpleMessage("已填写"),
@@ -241,6 +245,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("登录"),
         "login_your_account": MessageLookupByLibrary.simpleMessage("登录您的帐户"),
         "map": MessageLookupByLibrary.simpleMessage("地图"),
+        "meaning_str": MessageLookupByLibrary.simpleMessage("含义"),
         "medium": MessageLookupByLibrary.simpleMessage("中"),
         "medthod_content1": MessageLookupByLibrary.simpleMessage(
             "仅经过9个小时的学习,你就可以自我介绍并拥有正确的发音,"),
@@ -263,6 +268,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "messages": MessageLookupByLibrary.simpleMessage("消息"),
         "more_inputs": MessageLookupByLibrary.simpleMessage("更多输入"),
         "name": MessageLookupByLibrary.simpleMessage("名称"),
+        "new_word_str": MessageLookupByLibrary.simpleMessage("新词"),
         "next": MessageLookupByLibrary.simpleMessage("下一步"),
         "no_internet": MessageLookupByLibrary.simpleMessage("无网络连接"),
         "no_search_result": MessageLookupByLibrary.simpleMessage("没有数据"),
@@ -305,6 +311,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinyin_tone_str": MessageLookupByLibrary.simpleMessage("转录"),
         "please_choose_a_subject":
             MessageLookupByLibrary.simpleMessage("请选择主题"),
+        "please_fill_in_all_missing_fields_str":
+            MessageLookupByLibrary.simpleMessage("请填写所有缺失字段"),
+        "please_save_all_examples_before_adding_new_examples_str":
+            MessageLookupByLibrary.simpleMessage("添加新示例前，请保存所有示例"),
         "population_growth_of_various_countries":
             MessageLookupByLibrary.simpleMessage("各国人口增长"),
         "positions": MessageLookupByLibrary.simpleMessage("位置"),
@@ -336,6 +346,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage("注册即可享受最优惠的价格"),
         "remember_me": MessageLookupByLibrary.simpleMessage("记住我"),
+        "remove_course": MessageLookupByLibrary.simpleMessage("删除课程"),
+        "remove_example": MessageLookupByLibrary.simpleMessage("删除示例"),
+        "remove_lesson": MessageLookupByLibrary.simpleMessage("删除课程"),
+        "remove_tags": MessageLookupByLibrary.simpleMessage("删除标签"),
+        "remove_test": MessageLookupByLibrary.simpleMessage("删除测试"),
         "reset_password": MessageLookupByLibrary.simpleMessage("重置密码"),
         "result": MessageLookupByLibrary.simpleMessage("结果"),
         "revenue": MessageLookupByLibrary.simpleMessage("收入"),
@@ -391,6 +406,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "soft_indicator": MessageLookupByLibrary.simpleMessage("软指标"),
         "soft_rounded_button": MessageLookupByLibrary.simpleMessage("软圆形按钮"),
         "sort_list": MessageLookupByLibrary.simpleMessage("排序列表"),
+        "sound_str": MessageLookupByLibrary.simpleMessage("声音"),
         "standard": MessageLookupByLibrary.simpleMessage("标准"),
         "standard_str": MessageLookupByLibrary.simpleMessage("标准"),
         "starter": MessageLookupByLibrary.simpleMessage("入门"),
@@ -521,7 +537,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "ui": MessageLookupByLibrary.simpleMessage("用户界面"),
         "unknown_str": MessageLookupByLibrary.simpleMessage("未知"),
         "unlock": MessageLookupByLibrary.simpleMessage("解锁"),
+        "upload_file": MessageLookupByLibrary.simpleMessage("上传文件"),
         "upload_image_str": MessageLookupByLibrary.simpleMessage("上传图片"),
+        "upload_sound_file_str": MessageLookupByLibrary.simpleMessage("上传声音文件"),
         "upload_youtube_url_str":
             MessageLookupByLibrary.simpleMessage("上传 YouTube 网址"),
         "uploading_file": MessageLookupByLibrary.simpleMessage("正在上传文件......"),
@@ -536,6 +554,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "validations": MessageLookupByLibrary.simpleMessage("验证"),
         "vehicle_tracking": MessageLookupByLibrary.simpleMessage("车辆追踪"),
         "very_high": MessageLookupByLibrary.simpleMessage("非常高"),
+        "video_link": MessageLookupByLibrary.simpleMessage("视频"),
         "video_player": MessageLookupByLibrary.simpleMessage("视频播放器"),
         "video_preview_str": MessageLookupByLibrary.simpleMessage("视频预览"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("越南语"),
@@ -612,6 +631,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("您有帐户吗？"),
         "you_do_not_have_an_account":
             MessageLookupByLibrary.simpleMessage("您还没有帐户？"),
+        "you_want_remove": MessageLookupByLibrary.simpleMessage("您要删除吗"),
         "your_address": MessageLookupByLibrary.simpleMessage("您的地址"),
         "your_course": MessageLookupByLibrary.simpleMessage("你的课程"),
         "your_email": MessageLookupByLibrary.simpleMessage("您的电子邮件"),
@@ -619,6 +639,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("您的密码将被重置"),
         "your_registration_process_is_finished":
             MessageLookupByLibrary.simpleMessage("您的注册过程已完成"),
+        "youtube_link":
+            MessageLookupByLibrary.simpleMessage("Youtube video link"),
         "youtube_player": MessageLookupByLibrary.simpleMessage("YouTube 播放器")
       };
 }

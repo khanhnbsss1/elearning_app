@@ -5183,6 +5183,196 @@ class S {
       args: [],
     );
   }
+
+  /// `Please fill in all missing fields`
+  String get please_fill_in_all_missing_fields_str {
+    return Intl.message(
+      'Please fill in all missing fields',
+      name: 'please_fill_in_all_missing_fields_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New word`
+  String get new_word_str {
+    return Intl.message(
+      'New word',
+      name: 'new_word_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Meaning`
+  String get meaning_str {
+    return Intl.message(
+      'Meaning',
+      name: 'meaning_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload sound file`
+  String get upload_sound_file_str {
+    return Intl.message(
+      'Upload sound file',
+      name: 'upload_sound_file_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add examples`
+  String get add_examples_str {
+    return Intl.message(
+      'Add examples',
+      name: 'add_examples_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Examples`
+  String get examples_str {
+    return Intl.message(
+      'Examples',
+      name: 'examples_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sound`
+  String get sound_str {
+    return Intl.message(
+      'Sound',
+      name: 'sound_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please save all examples before adding new examples`
+  String get please_save_all_examples_before_adding_new_examples_str {
+    return Intl.message(
+      'Please save all examples before adding new examples',
+      name: 'please_save_all_examples_before_adding_new_examples_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create`
+  String get create_str {
+    return Intl.message(
+      'Create',
+      name: 'create_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add tags`
+  String get add_tags {
+    return Intl.message(
+      'Add tags',
+      name: 'add_tags',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video`
+  String get video_link {
+    return Intl.message(
+      'Video',
+      name: 'video_link',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Youtube video link`
+  String get youtube_link {
+    return Intl.message(
+      'Youtube video link',
+      name: 'youtube_link',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload file`
+  String get upload_file {
+    return Intl.message(
+      'Upload file',
+      name: 'upload_file',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove tags`
+  String get remove_tags {
+    return Intl.message(
+      'Remove tags',
+      name: 'remove_tags',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove lesson`
+  String get remove_lesson {
+    return Intl.message(
+      'Remove lesson',
+      name: 'remove_lesson',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove test`
+  String get remove_test {
+    return Intl.message(
+      'Remove test',
+      name: 'remove_test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove example`
+  String get remove_example {
+    return Intl.message(
+      'Remove example',
+      name: 'remove_example',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove course`
+  String get remove_course {
+    return Intl.message(
+      'Remove course',
+      name: 'remove_course',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you want to remove`
+  String get you_want_remove {
+    return Intl.message(
+      'Do you want to remove',
+      name: 'you_want_remove',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -34,11 +34,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "actions": MessageLookupByLibrary.simpleMessage("Hành động"),
         "add_discount_str":
             MessageLookupByLibrary.simpleMessage("Thêm giảm giá"),
+        "add_examples_str": MessageLookupByLibrary.simpleMessage("Thêm ví dụ"),
         "add_lectures_from_another_course_str":
             MessageLookupByLibrary.simpleMessage(
                 "Thêm bài giảng từ khóa học khác"),
         "add_product": MessageLookupByLibrary.simpleMessage("Thêm sản phẩm"),
         "add_products": MessageLookupByLibrary.simpleMessage("Thêm sản phẩm"),
+        "add_tags": MessageLookupByLibrary.simpleMessage("Thêm thẻ"),
         "animated": MessageLookupByLibrary.simpleMessage("Hoạt hình"),
         "app_address":
             MessageLookupByLibrary.simpleMessage("Innovation St. 767,CA - USA"),
@@ -54,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Bạn có chắc chắn muốn xóa lịch sử không?"),
         "area_chart": MessageLookupByLibrary.simpleMessage("Biểu đồ vùng"),
+        "attack_link_str": MessageLookupByLibrary.simpleMessage("Liên kết "),
         "auth": MessageLookupByLibrary.simpleMessage("Xác thực"),
         "authen_invalid": MessageLookupByLibrary.simpleMessage(
             "Tên đăng nhập hoặc mật khẩu không đúng"),
@@ -139,6 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_product": MessageLookupByLibrary.simpleMessage("Tạo sản phẩm"),
         "create_quiz_str":
             MessageLookupByLibrary.simpleMessage("Tạo bài kiểm tra"),
+        "create_str": MessageLookupByLibrary.simpleMessage("Tạo"),
         "create_student": MessageLookupByLibrary.simpleMessage("Tạo học viên"),
         "create_subject_str":
             MessageLookupByLibrary.simpleMessage("Tạo chủ đề"),
@@ -205,6 +209,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_your_email":
             MessageLookupByLibrary.simpleMessage("Điền email của bạn"),
         "example_form": MessageLookupByLibrary.simpleMessage("Mẫu ví dụ"),
+        "examples_str": MessageLookupByLibrary.simpleMessage("Ví dụ"),
         "extra_pages": MessageLookupByLibrary.simpleMessage("Trang bổ sung"),
         "faqs": MessageLookupByLibrary.simpleMessage("Câu hỏi thường gặp"),
         "filled": MessageLookupByLibrary.simpleMessage("Lấp đầy"),
@@ -280,6 +285,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login_your_account":
             MessageLookupByLibrary.simpleMessage("Đăng nhập tài khoản của bạn"),
         "map": MessageLookupByLibrary.simpleMessage("Biểu đồ"),
+        "meaning_str": MessageLookupByLibrary.simpleMessage("Ý nghĩa"),
         "medium": MessageLookupByLibrary.simpleMessage("Trung bình"),
         "medthod_content1": MessageLookupByLibrary.simpleMessage(
             "Chỉ sau 9 tiếng học, bạn đã có thể tự giới thiệu bản thân và có phát âm chuẩn"),
@@ -308,6 +314,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "more": MessageLookupByLibrary.simpleMessage("Thêm"),
         "more_inputs": MessageLookupByLibrary.simpleMessage("Thêm đầu vào"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
+        "new_word_str": MessageLookupByLibrary.simpleMessage("Từ mới"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
         "no_internet":
             MessageLookupByLibrary.simpleMessage("Không có kết nối mạng"),
@@ -357,6 +364,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "pinyin_tone_str": MessageLookupByLibrary.simpleMessage("Phiên âm"),
         "please_choose_a_subject":
             MessageLookupByLibrary.simpleMessage("Vui lòng chọn một chủ đề"),
+        "please_fill_in_all_missing_fields_str":
+            MessageLookupByLibrary.simpleMessage(
+                "Vui lòng điền vào tất cả các trường còn thiếu"),
         "population_growth_of_various_countries":
             MessageLookupByLibrary.simpleMessage(
                 "Tăng trưởng dân số ở nhiều quốc gia"),
@@ -394,6 +404,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Đăng ký để được hưởng những ưu đãi tốt nhất cho bạn"),
         "remember_me": MessageLookupByLibrary.simpleMessage("Nhớ tôi"),
+        "remove_course": MessageLookupByLibrary.simpleMessage("Xóa khóa học"),
+        "remove_example": MessageLookupByLibrary.simpleMessage("Xóa ví dụ"),
+        "remove_lesson": MessageLookupByLibrary.simpleMessage("Xóa bài học"),
+        "remove_tags": MessageLookupByLibrary.simpleMessage("Xóa thẻ"),
+        "remove_test": MessageLookupByLibrary.simpleMessage("Xóa bài test"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "result": MessageLookupByLibrary.simpleMessage("Kết quả"),
@@ -457,6 +472,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "soft_rounded_button":
             MessageLookupByLibrary.simpleMessage("Nút tròn mềm"),
         "sort_list": MessageLookupByLibrary.simpleMessage("Danh sách Sắp xếp"),
+        "sound_str": MessageLookupByLibrary.simpleMessage("Âm thanh"),
         "standard": MessageLookupByLibrary.simpleMessage("Tiêu chuẩn"),
         "standard_str": MessageLookupByLibrary.simpleMessage("Tiêu chuẩn"),
         "starter": MessageLookupByLibrary.simpleMessage("Câu hỏi thường gặp"),
@@ -612,8 +628,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "ui": MessageLookupByLibrary.simpleMessage("Giao diện người dùng"),
         "unknown_str": MessageLookupByLibrary.simpleMessage("Không xác định"),
         "unlock": MessageLookupByLibrary.simpleMessage("Mở khóa"),
+        "upload_file": MessageLookupByLibrary.simpleMessage("Tải file lên"),
         "upload_image_str":
             MessageLookupByLibrary.simpleMessage("Tải hình ảnh lên"),
+        "upload_sound_file_str":
+            MessageLookupByLibrary.simpleMessage("Tải tập tin âm thanh lên"),
         "upload_youtube_url_str":
             MessageLookupByLibrary.simpleMessage("Tải url youtube lên"),
         "uploading_file":
@@ -631,6 +650,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "validations": MessageLookupByLibrary.simpleMessage("Người bắt đầu"),
         "vehicle_tracking": MessageLookupByLibrary.simpleMessage("Theo dõi Xe"),
         "very_high": MessageLookupByLibrary.simpleMessage("Rất cao"),
+        "video_link": MessageLookupByLibrary.simpleMessage("Video"),
         "video_player":
             MessageLookupByLibrary.simpleMessage("Trình phát video"),
         "video_preview_str":
@@ -721,11 +741,15 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bạn có tài khoản?"),
         "you_do_not_have_an_account":
             MessageLookupByLibrary.simpleMessage("Bạn chưa có tài khoản?"),
+        "you_want_remove":
+            MessageLookupByLibrary.simpleMessage("Bạn có muốn xóa"),
         "your_address": MessageLookupByLibrary.simpleMessage("Địa chỉ của bạn"),
         "your_course": MessageLookupByLibrary.simpleMessage("Khóa học của bạn"),
         "your_email": MessageLookupByLibrary.simpleMessage("Email của bạn"),
         "your_password_will_be_reset": MessageLookupByLibrary.simpleMessage(
             "Mật khẩu của bạn sẽ được đặt lại"),
+        "youtube_link":
+            MessageLookupByLibrary.simpleMessage("Youtube video link"),
         "youtube_player":
             MessageLookupByLibrary.simpleMessage("Trình phát Youtube")
       };

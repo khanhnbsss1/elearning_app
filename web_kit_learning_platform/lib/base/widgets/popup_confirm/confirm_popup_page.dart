@@ -56,10 +56,12 @@ class ConfirmPopupPageState extends State<ConfirmPopupPage> with SingleTickerPro
           title: widget.title,
           titleAlignment: MainAxisAlignment.center,
           insetPadding: EdgeInsets.zero,
-          width: MediaQuery.of(context).size.width*(!isTablet?0.95: 0.7),
+          width: MediaQuery.of(context).size.width*(!isTablet? 0.9: 0.3),
           enableBackButton: false,
           enableCloseButton: true,
           mainAxisSizeParent: MainAxisSize.min,
+          bodyBackGroundColor: ColorConst.whiteColor,
+          enableHeaderDivider: true,
           child: Column(
             children: [
               Padding(
@@ -82,6 +84,8 @@ class ConfirmPopupPageState extends State<ConfirmPopupPage> with SingleTickerPro
                           Navigator.of(context).pop();
                         },
                         text: S.of(context).str_cancel,
+                        enableBgColor: ColorConst.whiteColor,
+                        textStype: TextStyleConstant.textStyleBlack16w600,
                         height: Dimens.size40),
                     Gap(Dimens.size20),
                     ActionButton1(

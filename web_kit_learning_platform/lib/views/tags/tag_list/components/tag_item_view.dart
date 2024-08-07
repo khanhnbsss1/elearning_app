@@ -5,20 +5,21 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/tags/models/tag_info.dart';
 
-class LessonItemView extends StatelessWidget {
-  LessonItemView({
-    required this.lessonInfo,
+class TagItemView extends StatelessWidget {
+  TagItemView({
+    required this.tagInfo,
     this.onViewDetail,
     this.onEdit,
     this.onDelete,
   });
 
-  Function(LessonInfo)?onViewDetail;
-  Function(LessonInfo)?onEdit;
-  Function(LessonInfo)?onDelete;
+  Function(TagsInfo)?onViewDetail;
+  Function(TagsInfo)?onEdit;
+  Function(TagsInfo)?onDelete;
 
-  LessonInfo lessonInfo;
+  TagsInfo tagInfo;
   late ColorNotifier notifier;
   @override
   Widget build(BuildContext context) {
@@ -52,15 +53,15 @@ class LessonItemView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${lessonInfo.lectureName} \n' ?? "",
+                      '${tagInfo.name} \n' ?? "",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyleConstant
-                          .normalTextOnBackGroundColorStyle16w400
-                          .copyWith(
+                          .normalTextOnBackGroundColorStyle16w600.copyWith(
                           fontWeight: FontWeight.bold,
+                          
                           // fontSize: Dimens.size24,
                           fontSize: ResponsiveInfo.isPhone()?Dimens.size20:Dimens.size18,
-                         // color: Color.fromRGBO(163, 20, 19, 1.0)
+                          //color: Color.fromRGBO(163, 20, 19, 1.0)
                       ),
                       maxLines: 1,
                     ),
@@ -68,21 +69,17 @@ class LessonItemView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        InkWell(
+/*                        InkWell(
                           onTap: () {
-                            if(onViewDetail!=null)
-                              {
-                                onViewDetail!(lessonInfo);
-                              }
+                            
                           },
                           child: Icon(Icons.remove_red_eye, color: ColorConst.colorIconRed,size: Dimens.size20,),
-                        ),
+                        ),*/
                         Gap(Dimens.size6),
                         InkWell(
                           onTap: () {
-                            if(onEdit!=null)
-                            {
-                              onEdit!(lessonInfo);
+                            if(onEdit!=null) {
+                              onEdit!(tagInfo);
                             }
                           },
                           child: Icon(Icons.edit, color: ColorConst.colorIconRed,size: Dimens.size20,),
@@ -90,9 +87,8 @@ class LessonItemView extends StatelessWidget {
                         Gap(Dimens.size6),
                         InkWell(
                           onTap: () {
-                            if(onDelete!=null)
-                            {
-                              onDelete!(lessonInfo);
+                            if(onDelete!=null) {
+                              onDelete!(tagInfo);
                             }
                           },
                           child: Icon(Icons.delete, color: ColorConst.colorIconRed,size: Dimens.size20,),

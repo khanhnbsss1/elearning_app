@@ -7,8 +7,13 @@ abstract class LessonDetailEvent extends Equatable {
 }
 
 class LessonDetailInitEvent extends LessonDetailEvent {
-  LessonDetailInitEvent()
-  {
-  }
+  LessonDetailInitEvent();
+  @override
   List<Object?> get props => [];
+}
+class LessonDetailUpdateWordsEvent extends LessonDetailEvent {
+  List<VocabularyInfo>listOfWord;
+  LessonDetailUpdateWordsEvent({required this.listOfWord});
+  @override
+  List<Object?> get props => [listOfWord];
 }

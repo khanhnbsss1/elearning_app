@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/words/word_info.dart';
+import 'package:webkit/services/apis/vocabulary/words/word_info.dart';
 
 class AddWordsApi extends BaseApiRequest {
   WordInfo word;

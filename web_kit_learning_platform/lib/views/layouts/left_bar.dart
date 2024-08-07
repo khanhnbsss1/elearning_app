@@ -78,7 +78,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 height: 60,
                 // padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
                 child: Padding(
@@ -96,7 +96,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                             });
                           },
                           child: Visibility(
-                              visible: MediaQuery.of(context).size.width > 550,
+                              //visible: MediaQuery.of(context).size.width > 550,
                               child: Icon(Icons.menu, size: 20,)
                           ),
                         ),
@@ -244,6 +244,18 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       iconData: Icons.edit_document,
                       title: L10nX.getStr.lesson_list,
                       route: Routes.lessonList,
+                      isCondensed: ThemeCustomizer().leftBarCondensed,
+                      onPress: () {
+                        setState(() {
+                          ThemeCustomizer().leftBarCondensed= true;
+                        });
+                      },
+                    ),
+                    //----------------Tag------------------//
+                    NavigationItem(
+                      iconData: Icons.tag,
+                      title: L10nX.getStr.tags,
+                      route: Routes.tagList,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
                       onPress: () {
                         setState(() {
