@@ -45,7 +45,7 @@ class LectureList extends StatelessWidget{
                     height: 16,
                   ),
                   Divider(color: ColorConst.dividerColor,),
-                  SingleChildScrollView(child: buildSubjectList(state: state)),
+                  buildSubjectList(state: state),
                 ],
               );
             },

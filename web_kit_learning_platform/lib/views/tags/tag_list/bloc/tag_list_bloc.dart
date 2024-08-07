@@ -69,7 +69,5 @@ class TagListBloc extends Bloc<TagListEvent, TagListState> {
       {
         add(TagListInitEvent());
       }
-
-
   }
 }

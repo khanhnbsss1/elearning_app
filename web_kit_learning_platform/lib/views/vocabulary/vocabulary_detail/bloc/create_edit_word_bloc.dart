@@ -47,10 +47,10 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     
     UploadFileApi uploadFileApi = UploadFileApi(fileInfo: event.data);
     UploadFileResponseInfo? data = await uploadFileApi.call();
-    state.addWordController?.basicValidator.getController('audio')?.text = event.data.fileName??"";
 
     if(data!=null)
       {
+        state.addWordController?.basicValidator.getController('audio')?.text = event.data.fileName??"";
         emit(state.copyWith(
           blocStatus: CreateEditWordStatus.onUploadAudio,
           audio: data,
@@ -71,6 +71,7 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     UploadFileResponseInfo? data = await uploadFileApi.call();
     if(data!=null)
     {
+      state.addWordController?.basicValidator.getController('image')?.text = event.data.fileName??"";
       emit(state.copyWith(
           blocStatus: CreateEditWordStatus.onUploadImage,
           image: data

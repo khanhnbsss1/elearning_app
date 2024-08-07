@@ -2,15 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
 
 class CourseIntro extends StatelessWidget{
   late CourseDetailState _state;
+  ScrollController controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return  buildInfo(context);
   }
+  
   Widget buildInfo(BuildContext context) {
     return BlocConsumer<CourseDetailBloc, CourseDetailState>(
         listener: (context, state) {
@@ -23,53 +26,61 @@ class CourseIntro extends StatelessWidget{
         },
         builder: (BuildContext context, state) {
           _state = state;
-          return SingleChildScrollView(
+          return MyResponsive(builder: (buildContext , constraints , myScreenMediaType ) { 
+            return SingleChildScrollView(
+              controller: controller,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: Row(
-                    children: [
-                      Expanded(flex: 6, child: Align(alignment: Alignment.topLeft, child: buildInfoBox(context))),
-                      Expanded(flex: 4, child: Align(alignment: Alignment.centerLeft, child: buildInfoCard())),
-                    ],
-                  ),
+                child: constraints.maxWidth> 800?Row(
+                  children: [
+                    Expanded(child: buildInfoBox(context)),
+                    SizedBox(
+                      width: Dimens.size400,
+                      child: buildInfoCard()),
+                  ],
+                ):
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    buildInfoBox(context),
+                    buildInfoCard()
+                  ],
                 ),
               ),
             );
+          },
+          );
         });
   }
   Widget buildInfoBox(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildInfoBoxIntroduction(),
-            SizedBox(
-              height: 16,
-            ),
-            Divider(color: ColorConst.dividerColor,),
-            SizedBox(
-              height: 16,
-            ),
-            buildInfoBoxInfoObj(),
-            SizedBox(
-              height: 16,
-            ),
-            buildInfoBoxInfoResult(),
-            SizedBox(
-              height: 16,
-            ),
-            buildInfoBoxTag(),
-// SizedBox(
-//   height: 16,
-// ),
-// buildInfoRelatedCourse(),
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildInfoBoxIntroduction(),
+          SizedBox(
+            height: 16,
+          ),
+          Divider(color: ColorConst.dividerColor,),
+          SizedBox(
+            height: 16,
+          ),
+          buildInfoBoxInfoObj(),
+          SizedBox(
+            height: 16,
+          ),
+          buildInfoBoxInfoResult(),
+          SizedBox(
+            height: 16,
+          ),
+          buildInfoBoxTag(),
+      // SizedBox(
+      //   height: 16,
+      // ),
+      // buildInfoRelatedCourse(),
+        ],
       ),
     );
   }
@@ -103,6 +114,7 @@ class CourseIntro extends StatelessWidget{
           child: (_state.courseInfo?.infoResult != null)
               ? ListView.builder(
               shrinkWrap: true,
+              controller: controller,
               itemCount: _state.courseObject?.length,
               itemBuilder: (context, index) => Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,6 +153,7 @@ class CourseIntro extends StatelessWidget{
           child: (_state.courseInfo?.infoResult != null)
               ? ListView.builder(
               shrinkWrap: true,
+              controller: controller,
               itemCount: _state.courseResult?.length,
               itemBuilder: (context, index) => Row(
                 crossAxisAlignment: CrossAxisAlignment.start,

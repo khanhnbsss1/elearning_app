@@ -33,9 +33,6 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
   void initState() {
     super.initState();
     controller = Get.put(MemberListController());
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      ThemeCustomizer().toggleLeftBarCondensedByValue(leftBarCondensed: true);
-    });
   }
 
   int? page = 1;

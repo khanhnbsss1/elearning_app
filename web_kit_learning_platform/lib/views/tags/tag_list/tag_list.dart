@@ -37,9 +37,6 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
   void initState() {
     super.initState();
     controller = Get.put(MemberListController());
-    WidgetsBinding.instance.addPostFrameCallback((_){
-      ThemeCustomizer().toggleLeftBarCondensedByValue(leftBarCondensed: true);
-    });
   }
 
   int? page = 1;
