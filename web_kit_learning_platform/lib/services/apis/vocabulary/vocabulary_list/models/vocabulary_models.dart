@@ -1,4 +1,6 @@
 import 'package:webkit/base/services/base_request/models/page_model.dart';
+import 'package:webkit/services/apis/sentence/models/sentence_info.dart';
+import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 
 class VocabularyResponseModel extends PageModel{
   List<VocabularyInfo>? content;
@@ -32,27 +34,29 @@ class VocabularyInfo {
   int? id;
   String? simplified;
   String? traditional;
-  String? pinyin;
   String? pinyinTones;
-  String? translationEn;
   String? translationVn;
-  int? lectureId;
-  String? audio;
-  String? image;
-  String? categoryWord;
   int? gradeId;
+  int? lectureId;
   String? createdAt;
   String? updatedAt;
   String? createdBy;
   String? updatedBy;
+  String? audio;
+  String? audioLink;
+  int? audioId;
+  String? imageLink;
+  int? imageId;
+  String? categoryWord;
+  List<SentenceInfo>? sentenceInfos;
 
+  UploadFileResponseInfo? audioFileInfo;
+  UploadFileResponseInfo? imageFileInfo;
   VocabularyInfo(
       {this.id,
         this.simplified,
         this.traditional,
-        this.pinyin,
         this.pinyinTones,
-        this.translationEn,
         this.translationVn,
         this.lectureId,
         this.audio,
@@ -62,26 +66,44 @@ class VocabularyInfo {
         this.updatedAt,
         this.createdBy,
         this.updatedBy,
-        this.image
-      });
+        this.imageLink,
+        this.imageId,
+        this.audioId, 
+        this.audioLink,
+        this.audioFileInfo,
+        this.sentenceInfos,
+        this.imageFileInfo,
+      }){
+    sentenceInfos??=[];
+    if((sentenceInfos??[]).isEmpty)
+      {
+        sentenceInfos?.add(SentenceInfo(id: 0));
+      }
+  }
 
   VocabularyInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     simplified = json['simplified'];
     traditional = json['traditional'];
-    pinyin = json['pinyin'];
     pinyinTones = json['pinyin_tones'];
-    translationEn = json['translation_en'];
     translationVn = json['translation_vn'];
+    gradeId = json['grade_id'];
     lectureId = json['lecture_id'];
     audio = json['audio'];
-    categoryWord = json['category_word'];
-    gradeId = json['grade_id'];
+    audioId = json['audio_id'];
+    audioLink = json['audio_link'];
+    imageLink = json['image_link'];
+    imageId = json['image_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
-    image = json['image'];
+    if (json['example'] != null) {
+      sentenceInfos = <SentenceInfo>[];
+      json['example'].forEach((v) {
+        sentenceInfos?.add(new SentenceInfo.fromJson(v));
+      });
+    }
 
   }
 
@@ -90,19 +112,23 @@ class VocabularyInfo {
     data['id'] = id;
     data['simplified'] = simplified;
     data['traditional'] = traditional;
-    data['pinyin'] = pinyin;
     data['pinyin_tones'] = pinyinTones;
-    data['translation_en'] = translationEn;
     data['translation_vn'] = translationVn;
+    data['grade_id'] = gradeId;
     data['lecture_id'] = lectureId;
     data['audio'] = audio;
+    data['audio_id'] = audioId;
+    data['audio_link'] = audioLink;
+    data['image_id'] = imageId;
+    data['image_link'] = imageLink;
     data['category_word'] = categoryWord;
-    data['grade_id'] = gradeId;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     data['created_by'] = createdBy;
     data['updated_by'] = updatedBy;
-    data['image'] = image;
+    if (sentenceInfos != null) {
+      data['example'] = sentenceInfos!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }

@@ -137,7 +137,6 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        int rowNumber = (MediaQuery.of(context).size.width/maxWidthRow).toInt();
         double maxWidthItem = maxWidthRow;
         double heightOfItem = 100;
         int numberRow = ((constraints.maxWidth / maxWidthItem)/2).toInt()*2;

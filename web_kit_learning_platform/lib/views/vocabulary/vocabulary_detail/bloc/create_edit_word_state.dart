@@ -7,6 +7,8 @@ enum CreateEditWordStatus {
   onSubmit,
   onLoading,
   onError,
+  onSaveSentence,
+  onCreateNewSentence,
   unknown
 }
 
@@ -18,10 +20,7 @@ class CreateEditWordState extends Equatable {
   UploadFileResponseInfo? audio;
   UploadFileResponseInfo? image;
   AddWordController? addWordController;
-  List<TextEditingController>? exampleTextControllers = [];
-  List<TextEditingController>? exampleMeaningControllers = [];
-  List<TextEditingController>? exampleSimplifiedControllers = [];
-  List<TextEditingController>? exampleSoundControllers = [];
+  WordsPageActionType? wordsPageActionType;
   CreateEditWordState({
       this.blocStatus,
     this.documentModel,
@@ -29,15 +28,9 @@ class CreateEditWordState extends Equatable {
     this.image, 
     this.audio,
     this.addWordController,
-    this.exampleMeaningControllers,
-    this.exampleSimplifiedControllers,
-    this.exampleSoundControllers,
-    this.exampleTextControllers
+    this.wordsPageActionType,
   }){
-    exampleTextControllers ??= [];
-    exampleMeaningControllers ??= [];
-    exampleSimplifiedControllers ??= [];
-    exampleSoundControllers ??= [];
+    vocabularyInfo??=VocabularyInfo();
     addWordController ??= Get.put(AddWordController(vocabularyInfo: vocabularyInfo));
   }
 
@@ -49,11 +42,7 @@ class CreateEditWordState extends Equatable {
     UploadFileResponseInfo? audio,
     UploadFileResponseInfo? image,
     AddWordController? addWordController,
-    List<TextEditingController>? exampleTextControllers,
-    List<TextEditingController>? exampleMeaningControllers,
-    List<TextEditingController>? exampleSimplifiedControllers,
-    List<TextEditingController>? exampleSoundControllers,
-
+    WordsPageActionType? wordsPageActionType
   })
   {
     return CreateEditWordState(
@@ -63,10 +52,7 @@ class CreateEditWordState extends Equatable {
       audio: audio??this.audio,
       image: image??this.image,
       addWordController: addWordController??this.addWordController,
-      exampleTextControllers: exampleTextControllers??this.exampleTextControllers,
-      exampleMeaningControllers: exampleMeaningControllers??this.exampleMeaningControllers,
-      exampleSimplifiedControllers: exampleSimplifiedControllers??this.exampleSimplifiedControllers,
-      exampleSoundControllers: exampleSoundControllers??this.exampleSoundControllers,
+      wordsPageActionType: wordsPageActionType??this.wordsPageActionType,
 
     );
   }
@@ -78,10 +64,7 @@ class CreateEditWordState extends Equatable {
     image, 
     audio,
     addWordController,
-    exampleTextControllers,
-    exampleMeaningControllers,
-    exampleSimplifiedControllers,
-    exampleSoundControllers
+    wordsPageActionType,
   ];
 
 }

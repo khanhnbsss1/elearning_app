@@ -144,8 +144,11 @@ class _CreateEditLesson extends State<CreateEditLesson>
                     ),
                     Divider(color: ColorConst.dividerColor.withOpacity(0.3),),
                     ActionButton1(
-                      text: widget.lessonActionType == LessonActionType.create?L10nX.getStr.create_lesson_str:L10nX.getStr.edit_str,
+                      text: widget.lessonActionType == LessonActionType.create?L10nX.getStr.create_lesson_str:L10nX.getStr.str_update,
                       width: Dimens.size150,
+                      onTap: () {
+                        
+                      },
                     ),
                   ],
                 ),

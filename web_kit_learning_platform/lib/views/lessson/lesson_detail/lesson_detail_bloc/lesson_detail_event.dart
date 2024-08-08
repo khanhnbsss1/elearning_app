@@ -17,3 +17,9 @@ class LessonDetailUpdateWordsEvent extends LessonDetailEvent {
   @override
   List<Object?> get props => [listOfWord];
 }
+class LessonDetailUpdateLessonEvent extends LessonDetailEvent {
+  LessonInfo lessonInfo;
+  LessonDetailUpdateLessonEvent({required this.lessonInfo});
+  @override
+  List<Object?> get props => [lessonInfo];
+}

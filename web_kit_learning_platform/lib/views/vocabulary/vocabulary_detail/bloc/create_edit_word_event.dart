@@ -24,3 +24,30 @@ class CreateEditWordUploadImageEvent extends CreateEditWordEvent {
   @override
   List<Object?> get props => [data];
 }
+
+class CreateEditWordCreateWordEvent extends CreateEditWordEvent {
+  CreateEditWordState state;
+  CreateEditWordCreateWordEvent({required this.state});
+  @override
+  List<Object?> get props => [state];
+}
+
+class CreateEditWordOnSaveSentenceEvent extends CreateEditWordEvent {
+  SentenceInfo sentenceInfo;
+  CreateEditWordOnSaveSentenceEvent({required this.sentenceInfo});
+  @override
+  List<Object?> get props => [sentenceInfo];
+}
+
+class CreateEditWordOnAddNewSentenceEvent extends CreateEditWordEvent {
+  CreateEditWordOnAddNewSentenceEvent();
+  @override
+  List<Object?> get props => [];
+}
+
+class CreateEditWordOnRemoveSentenceEvent extends CreateEditWordEvent {
+  SentenceInfo sentenceInfo;
+  CreateEditWordOnRemoveSentenceEvent({required this.sentenceInfo});
+  @override
+  List<Object?> get props => [sentenceInfo];
+}

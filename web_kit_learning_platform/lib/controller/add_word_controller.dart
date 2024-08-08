@@ -4,14 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
-import 'package:webkit/services/apis/vocabulary/words/add_words_api.dart';
-import 'package:webkit/services/apis/vocabulary/words/word_info.dart';
-
 import 'my_controller.dart';
 
 class AddWordController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
-  MultipartFile? _audioFile;
   VocabularyInfo ? vocabularyInfo;
   AddWordController({this.vocabularyInfo});
   @override
@@ -51,9 +47,8 @@ class AddWordController extends MyController {
       'image',
       required: true,
       label: 'Image',
-      controller: TextEditingController(text: vocabularyInfo?.image??""),
+      controller: TextEditingController(text: vocabularyInfo?.imageLink??""),
     );
-    
     basicValidator.addField(
       'created_by',
       label: 'created_by',
@@ -61,27 +56,8 @@ class AddWordController extends MyController {
       controller: TextEditingController(text: vocabularyInfo?.createdBy ??""),
     );
   }
-
-
-  void setAudioFile(MultipartFile file) {
-    _audioFile = file;
-  }
+  
   void setVocabularyInfo(VocabularyInfo ?vocabularyInfoInput) {
     vocabularyInfo = vocabularyInfoInput;
-  }
-  Future<bool> onAddWord() async {
-
-    WordInfo word = WordInfo(
-      simplified: basicValidator.getController('simplified')?.text,
-      traditional: basicValidator.getController('traditional')?.text,
-      pinyinTones: basicValidator.getController('pinyin_tones')?.text,
-      translationVn: basicValidator.getController('translation_vn')?.text,
-      createdBy: 'long1',
-    );
-    AddWordsApi addWordsApi = AddWordsApi(word: word);
-    print('api called');
-    print(basicValidator.getController('audio')?.text,);
-    dynamic data = await addWordsApi.call();
-    return true;
   }
 }

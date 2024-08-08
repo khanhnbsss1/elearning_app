@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/vocabulary/words/word_info.dart';
+import '../vocabulary_list/models/vocabulary_models.dart';
 
 class AddWordsApi extends BaseApiRequest {
-  WordInfo word;
+  VocabularyInfo word;
   AddWordsApi({required this.word}) : super(
       serviceType: SERVICE_TYPE.Vocabulary,
       apiName: ApiName().addVocabulary,

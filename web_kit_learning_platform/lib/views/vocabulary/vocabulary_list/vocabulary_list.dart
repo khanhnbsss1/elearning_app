@@ -406,14 +406,6 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                           child: Text(state.selectVocabularyInfo?.traditional??""),
                         ),
                       ),
-                      Visibility(
-                        visible: (state.selectVocabularyInfo?.translationEn??"").isNotEmpty,
-                        child: WidgetWithColumnTitleCommon(
-                          title: "${L10nX.getStr.english_text}: ",
-                          titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                          child: Text(state.selectVocabularyInfo?.translationEn??""),
-                        ),
-                      ),
                     ],
                   ),
                 ),

@@ -5,6 +5,7 @@ import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gap/gap.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/widgets/common/alert_dialog/loading.export.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/topic/model/topic_info.dart';
@@ -49,7 +50,6 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
       listener: (context, state) {
         switch (state.blocStatus) {
           case AddCourseStatus.initial:
-            
             break;
           default:
             break;
@@ -58,6 +58,11 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
       builder: (BuildContext context, state) {
         _blocContext = context;
         _state = state;
+        if(state.blocStatus== AddCourseStatus.onLoading) {
+          return Center(
+            child: LoadingLogo(loadingType: LoadingType.loadOnPage,),
+          );
+        }
         return StatefulBuilder(
           builder: (BuildContext context, void Function(void Function()) setState) {
             return (state.courseInfo?.getListSubjectAndLesson()??[]).isNotEmpty?MyResponsive(
@@ -130,6 +135,9 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
             Gap(Dimens.size10),
             buildVideo(),
             buildStudyTitle(),
+            buildStudyUI(),
+            buildQuiz(),
+/*
             BuildTabBar(
               widgets: [
                 buildStudyOverview(),
@@ -137,7 +145,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                 buildStudyQuiz(),
               ],
               titles: const ['Overview', 'Review', 'Quiz'],
-            ),
+            ),*/
           ],
         ),
       ),
@@ -403,7 +411,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
     );
   }
 
-  Widget buildStudyOverview() {
+  Widget buildStudyUI() {
     return SingleChildScrollView(
       controller: lessonDetailScrollController,
       child: Column(
@@ -422,7 +430,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           SizedBox(
             height: 4,
           ),
-          Text('${_state.courseInfo?.introduction}'),
+          Text(_state.selectLessonInfo?.note??""),
           SizedBox(
             height: 16,
           ),
@@ -436,7 +444,13 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           SizedBox(
             height: 4,
           ),
-          Text('Chưa lấy dữ liệu'),
+          InkWell(
+            onTap: () {
+              
+            }, 
+              child: Text(
+                _state.selectLessonInfo?.docName??'', 
+                style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.blue),)),
           SizedBox(
             height: 16,
           ),
@@ -450,6 +464,13 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           SizedBox(
             height: 8,
           ),
+/*          ListView.builder(
+              itemCount: 20,
+              controller: _state.selectLessonInfo.,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return buildWordItem(word: WordInfo(simplified: '吃', traditional: '吃', pinyinTones: 'chī', translationVn: 'ăn', audio: null));
+              })*/
           ListView.builder(
               itemCount: 20,
               controller: lessonDetailScrollController,
@@ -679,10 +700,6 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                     minLines: 3,
                     maxLines: 6,
                     onChanged: (value) {
-                      // setState(() {
-                      //   controller.text = value;
-                      //   (controller.text.isEmpty) ? check = false : check = true;
-                      // });
                     },
                   ),
                   Positioned(
@@ -852,13 +869,22 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
     return userInfo;
   }
 
-  Widget buildStudyQuiz() {
+  Widget buildQuiz() {
     return Column(
-      children: [
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const [
         SizedBox(
           height: 30,
         ),
-        Text('data')
+        SizedBox(
+          height: 30,
+        ),
+        Text(
+          'Quiz: ', style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.red,
+          ),
+        ),
       ],
     );
   }

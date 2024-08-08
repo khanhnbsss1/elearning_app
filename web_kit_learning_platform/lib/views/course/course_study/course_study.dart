@@ -66,14 +66,7 @@ class _CourseStudyState extends State<CourseStudy1>
           child: StatefulBuilder(
             builder:
                 (BuildContext context, void Function(void Function()) setState) {
-              return BuildTabBar(
-                widgets: const [
-                  CourseStudyIntroduction(),
-                  CourseStudyStudy(),
-                  CourseStudyTest(),
-                ],
-                titles: const ['Introduction', 'Study', 'Test'],
-              );
+              return CourseStudyStudy();
             },
           ),
         ),
