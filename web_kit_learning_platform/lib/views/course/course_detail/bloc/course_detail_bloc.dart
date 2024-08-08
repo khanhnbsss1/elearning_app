@@ -17,47 +17,47 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
   CourseDetailBloc(super.initialState) {
     on<CourseDetailInitEvent>(_onInit);
     on<CourseDetailSelectLessonEvent>((event, emit) async {
+      emit(state.copyWith(
+        blocStatus: AddCourseStatus.unKnown,
+      ));
       MonitorLoading().showLoading('');
-      GetLessonDetailApi getLessonDetailApi = GetLessonDetailApi(lessonId: event.selectLessonInfo.id??0);
+      GetLessonDetailApi getLessonDetailApi = GetLessonDetailApi(lessonId: event.selectLessonInfo.id ?? 0);
       state.selectLessonInfo = await getLessonDetailApi.call();
       MonitorLoading().dismiss();
-      emit(state.copyWith(
-        blocStatus: AddCourseStatus.onSelectLesson,
-        selectLessonInfo: state.selectLessonInfo
-      ));
+      emit(state.copyWith(blocStatus: AddCourseStatus.onSelectLesson, selectLessonInfo: state.selectLessonInfo));
     });
   }
 
-
-
   Future<void> _onInit(
-      CourseDetailInitEvent event,
-      Emitter<CourseDetailState> emit,
-      ) async {
+    CourseDetailInitEvent event,
+    Emitter<CourseDetailState> emit,
+  ) async {
+    emit(state.copyWith(blocStatus: AddCourseStatus.onLoading));
+    CourseDetailApi courseDetailApi = CourseDetailApi(courseId: state.courseInfo!.id!);
+    CourseInfo courseInfo = await courseDetailApi.call();
+    state.courseInfo = courseInfo;
+    state.courseResult = state.courseInfo?.getListInfoResult() ?? [];
+    state.courseObject = state.courseInfo?.getListInfoObj() ?? [];
+    if (courseInfo.getListSubjectAndLesson().isNotEmpty) {
+      state.selectLessonInfo = (courseInfo.getListSubjectAndLesson().first.lectures ?? []).first;
+      for (Subjects subject in state.courseInfo!.getListSubjectAndLesson()) {
+        state.checkLecture?.add(List.filled((subject.lectures ?? []).length, false));
+      }
+      state.showSubject = List.filled(
+        (state.courseInfo!.getListSubjectAndLesson()).length,
+        true,
+      );
+    }
+
     emit(state.copyWith(
-        blocStatus:  AddCourseStatus.onLoading
-    ));
-        CourseDetailApi courseDetailApi = CourseDetailApi(courseId: state.courseInfo!.id!);
-        CourseInfo courseInfo = await courseDetailApi.call();
-        state.courseInfo = courseInfo;
-        state.courseResult = state.courseInfo?.getListInfoResult()??[];
-        state.courseObject = state.courseInfo?.getListInfoObj()??[];
-        if(courseInfo.getListSubjectAndLesson().isNotEmpty) {
-          state.selectLessonInfo= (courseInfo.getListSubjectAndLesson().first.lectures??[]).first;
-          for (Subjects subject in state.courseInfo!.getListSubjectAndLesson()) {
-            state.checkLecture?.add(List.filled((subject.lectures ?? []).length, false));
-          }
-          state.showSubject = List.filled((state.courseInfo!.getListSubjectAndLesson()).length, false,);
-        }
-    
-        
-    emit(state.copyWith(
-        blocStatus:  AddCourseStatus.initial,
-      courseInfo: state.courseInfo,
-      courseObject: state.courseObject,
-        courseResult: state.courseResult,
-      selectLessonInfo: state.selectLessonInfo
-    ));
+        blocStatus: AddCourseStatus.initial, 
+        courseInfo: state.courseInfo, 
+        courseObject: state.courseObject, 
+        courseResult: state.courseResult, 
+        selectLessonInfo: state.selectLessonInfo));
+    if(state.selectLessonInfo!=null)
+      {
+        add(CourseDetailSelectLessonEvent(selectLessonInfo: state.selectLessonInfo!));
+      }
   }
 }
-
