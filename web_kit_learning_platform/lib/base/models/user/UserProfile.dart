@@ -32,6 +32,7 @@ class UserProfile {
   String? updatedBy;
   String? countryName;
   String? position;
+  String? email;
 
   UserProfile(
       {this.id,
@@ -50,7 +51,8 @@ class UserProfile {
         this.updatedAt,
         this.updatedBy,
         this.countryName,
-        this.position});
+        this.position,
+        this.email});
 
   UserProfile.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -70,6 +72,7 @@ class UserProfile {
     updatedBy = json['updated_by'];
     countryName = json['country_name'];
     position = json['position'];
+    email = json['email'];
   }
 
   Map<String, dynamic> toJson() {
@@ -91,10 +94,53 @@ class UserProfile {
     data['updated_by'] = updatedBy;
     data['country_name'] = countryName;
     data['position'] = position;
+    data['email'] = email;
     return data;
   }
   String getPermission(){
     return "";
+  }
+
+  UserProfile copyWith({
+    int? id,
+    String? fullName,
+    String? userName,
+    String? bankAccount,
+    String? bankName,
+    String? identityId,
+    String? gender,
+    String? birthday,
+    String? phoneNumber,
+    String? avatar,
+    String? typeName,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? countryName,
+    String? position,
+    String? email,
+  }) {
+    return UserProfile(
+      id: id ?? this.id,
+      fullName: fullName ?? this.fullName,
+      userName: userName ?? this.userName,
+      bankAccount: bankAccount ?? this.bankAccount,
+      bankName: bankName ?? this.bankName,
+      identityId: identityId ?? this.identityId,
+      gender: gender ?? this.gender,
+      birthday: birthday ?? this.birthday,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      avatar: avatar ?? this.avatar,
+      typeName: typeName ?? this.typeName,
+      createdAt: createdAt ?? this.createdAt,
+      createdBy: createdBy ?? this.createdBy,
+      updatedAt: updatedAt ?? this.updatedAt,
+      updatedBy: updatedBy ?? this.updatedBy,
+      countryName: countryName ?? this.countryName,
+      position: position ?? this.position,
+      email: email ?? this.email,
+    );
   }
 }
 

@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:webkit/base/author/user_helper.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/apps/contact/edit_profile_controller.dart';
 import 'package:webkit/helpers/theme/app_style.dart';
 import 'package:webkit/helpers/utils/my_shadow.dart';
@@ -23,6 +26,9 @@ import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/images.dart';
 import 'package:webkit/views/layouts/layout.dart';
+
+import '../../../base/models/user/UserProfile.dart';
+import '../../../routes/app_pages.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -44,204 +50,403 @@ class _EditProfileState extends State<EditProfile>
   final ImagePicker picker = ImagePicker();
 
   XFile? imageFile;
+  bool changePassword = false;
+
+  int? year;
+  int? month;
+  int? day;
+  TextEditingController yearController = TextEditingController();
+  TextEditingController monthController = TextEditingController();
+  TextEditingController dayController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Layout(
-      child: GetBuilder(
-        init: controller,
-        builder: (controller) {
-          return Column(
-            children: [
-              Padding(
-                padding: MySpacing.x(flexSpacing),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return FutureBuilder(
+        future: UserManager().getUserProfile(),
+        builder: (context, snapshot) {
+          UserProfile? userProfile = snapshot.data;
+          String fullName = userProfile?.fullName ?? "Trịnh Hải Long";
+          String firstName = fullName
+              .split(" ")
+              .sublist(0, fullName.split(" ").length - 1)
+              .join(" ");
+          String lastName = fullName.split(" ").last;
+          return Layout(
+            child: GetBuilder(
+              init: controller,
+              builder: (controller) {
+                return Column(
                   children: [
-                    MyText.titleMedium(
-                      "Edit Profile",
-                      fontWeight: 600,
+                    Padding(
+                      padding: MySpacing.x(flexSpacing),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          MyText.titleMedium(
+                            "Edit Profile",
+                            fontWeight: 600,
+                          ),
+                          MyBreadcrumb(
+                            children: [
+                              MyBreadcrumbItem(name: "Contact"),
+                              MyBreadcrumbItem(
+                                  name: "Edit Profile", active: true),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    MyBreadcrumb(
-                      children: [
-                        MyBreadcrumbItem(name: "Contact"),
-                        MyBreadcrumbItem(name: "Edit Profile", active: true),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              MySpacing.height(flexSpacing),
-              Padding(
-                padding: MySpacing.x(flexSpacing / 2),
-                child: MyFlex(
-                  children: [
-                    MyFlexItem(
-                      sizes: "lg-6",
-                      child: MyCard(
-                        shadow: MyShadow(elevation: 0.5),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            InkWell(
-                              onTap: () async {
-                                imageFile = await picker.pickImage(
-                                    source: ImageSource.gallery);
-                                debugPrint(
-                                    "imageFile!.path --------------------->>> ${imageFile!.path}");
-                                setState(() {});
-                              },
-                              child: Stack(
-                                alignment: Alignment.bottomRight,
+                    MySpacing.height(flexSpacing),
+                    Padding(
+                      padding: MySpacing.x(flexSpacing / 2),
+                      child: MyFlex(
+                        children: [
+                          MyFlexItem(
+                            sizes: "lg-6",
+                            child: MyCard(
+                              shadow: MyShadow(elevation: 0.5),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  imageFile == null
-                                      ? MyContainer.rounded(
-                                          height: 150,
-                                          width: 150,
-                                          paddingAll: 0,
-                                          clipBehavior:
-                                              Clip.antiAliasWithSaveLayer,
-                                          child: Image.asset(
-                                            Images.avatars[0],
-                                            fit: BoxFit.cover,
-                                          ))
-                                      : MyContainer.rounded(
-                                          paddingAll: 0,
-                                          clipBehavior:
-                                              Clip.antiAliasWithSaveLayer,
-                                          child: Image.file(
-                                              File(imageFile!.path),
-                                              fit: BoxFit.cover),
-                                        ),
+                                  MyText.titleMedium(
+                                    "User Infomation",
+                                    fontWeight: 600,
+                                  ),
+                                  Center(
+                                    child: InkWell(
+                                      onTap: () async {
+                                        imageFile = await picker.pickImage(
+                                            source: ImageSource.gallery);
+                                        debugPrint(
+                                            "imageFile!.path --------------------->>> ${imageFile!.path}");
+                                        setState(() {});
+                                      },
+                                      child: Stack(
+                                        alignment: Alignment.bottomRight,
+                                        children: [
+                                          imageFile == null
+                                              ? MyContainer.rounded(
+                                                  height: 150,
+                                                  width: 150,
+                                                  paddingAll: 0,
+                                                  clipBehavior: Clip
+                                                      .antiAliasWithSaveLayer,
+                                                  child: Image.asset(
+                                                    Images.avatars[0],
+                                                    fit: BoxFit.cover,
+                                                  ))
+                                              : MyContainer.rounded(
+                                                  paddingAll: 0,
+                                                  clipBehavior: Clip
+                                                      .antiAliasWithSaveLayer,
+                                                  child: Image.file(
+                                                      File(imageFile!.path),
+                                                      fit: BoxFit.cover),
+                                                ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  MySpacing.height(20),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: buildTextField(
+                                                fieldTitle: "First Name",
+                                                hintText:
+                                                    "Enter your First Name",
+                                                value: firstName),
+                                          ),
+                                          MySpacing.width(10),
+                                          Expanded(
+                                            child: buildTextField(
+                                                fieldTitle: "Last Name",
+                                                hintText:
+                                                    "Enter your Last Name",
+                                                value: lastName),
+                                          ),
+                                        ],
+                                      ),
+                                      MySpacing.height(20),
+                                      buildTextField(
+                                          fieldTitle: "Identity Id",
+                                          hintText: "Enter your Identity",
+                                          value: userProfile?.identityId ?? ""),
+                                      MySpacing.height(20),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: buildTextField(
+                                                fieldTitle: "Role",
+                                                hintText: "Enter your role",
+                                                value: userProfile?.typeName ??
+                                                    "User"),
+                                          ),
+                                          MySpacing.width(10),
+                                          Expanded(
+                                            child: buildTextField(
+                                                fieldTitle: "Gender",
+                                                hintText: "Enter your gender",
+                                                value: userProfile?.gender ??
+                                                    "Male"),
+                                          ),
+                                        ],
+                                      ),
+                                      MySpacing.height(20),
+                                      MyText.labelMedium(
+                                        'Birthday',
+                                      ),
+                                      MySpacing.height(4),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: customDropDownSearch(
+                                              list: List<int>.generate(
+                                                DateTime.now().year - 1970 + 1,
+                                                    (int index) => DateTime.now().year - index,
+                                              ),
+                                              hintText: 'Year',
+                                              controller: yearController,
+                                            ),
+                                          ),
+                                          MySpacing.width(16),
+                                          Expanded(
+                                            child: customDropDownSearch(
+                                              list: List<int>.generate(
+                                                  12, (int index) => 1 + index),
+                                              hintText: 'Month',
+                                              controller: monthController,
+                                            ),
+                                          ),
+                                          MySpacing.width(16),
+                                          Expanded(
+                                            child: customDropDownSearch(
+                                              list: (yearController
+                                                  .text.isNotEmpty &&
+                                                  monthController
+                                                      .text.isNotEmpty)
+                                                  ? List<int>.generate(
+                                                  getDaysInMonth(
+                                                      int.parse(
+                                                          yearController
+                                                              .text),
+                                                      int.parse(
+                                                          monthController
+                                                              .text)),
+                                                      (int index) => 1 + index)
+                                                  : [],
+                                              hintText: 'Day',
+                                              controller: dayController,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      MySpacing.height(20),
+                                      buildTextField(
+                                          fieldTitle: "Phone Number",
+                                          hintText: "Enter your phone number",
+                                          value:
+                                              userProfile?.phoneNumber ?? ""),
+                                      MySpacing.height(20),
+                                      buildTextField(
+                                          fieldTitle: "Country",
+                                          hintText: "Enter country",
+                                          value:
+                                              userProfile?.countryName ?? ""),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ),
-                            MySpacing.height(20),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          ),
+                          MyFlexItem(
+                            sizes: "lg-6",
+                            child: Column(
                               children: [
-                                buildTextField(
-                                    "First Name", "Enter your First Name"),
-                                MySpacing.height(20),
-                                buildTextField(
-                                    "Last Name", "Enter your Last Name"),
-                                MySpacing.height(20),
-                                MyText.labelMedium(
-                                  "Email address",
-                                ),
-                                MySpacing.height(8),
-                                Form(
-                                  autovalidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  child: TextFormField(
-                                    validator: (value) {
-                                      if (value != null && value.isEmpty) {
-                                        return 'Email is required';
-                                      }
-                                      if (value != null &&
-                                          !MyStringUtils.isEmail(value)) {
-                                        return 'Invalid Email';
-                                      }
-                                      return null;
-                                    },
-                                    decoration: InputDecoration(
-                                      hintText: "Enter Email Address",
-                                      hintStyle:
-                                          MyTextStyle.bodySmall(xMuted: true),
-                                      border: outlineInputBorder,
-                                      enabledBorder: outlineInputBorder,
-                                      focusedBorder: focusedInputBorder,
-                                      contentPadding: MySpacing.all(16),
-                                      isCollapsed: true,
-                                    ),
-                                  ),
-                                ),
-                                MySpacing.height(20),
-                                MyText.labelMedium(
-                                  "Contact Number",
-                                ),
-                                MySpacing.height(8),
-                                TextFormField(
-                                  inputFormatters: [
-                                    LengthLimitingTextInputFormatter(10),
-                                    PhoneInputFormatter(),
-                                  ],
-                                  decoration: InputDecoration(
-                                    hintText: "Enter Contact Number",
-                                    hintStyle:
-                                        MyTextStyle.bodySmall(xMuted: true),
-                                    border: outlineInputBorder,
-                                    enabledBorder: outlineInputBorder,
-                                    focusedBorder: focusedInputBorder,
-                                    contentPadding: MySpacing.all(16),
-                                    isCollapsed: true,
-                                  ),
-                                ),
-                                MySpacing.height(20),
-                                buildTextField("Address", "Enter Address"),
-                                MySpacing.height(20),
-                                MyText.labelMedium(
-                                  "password",
-                                ),
-                                MySpacing.height(8),
-                                TextFormField(
-                                  validator: controller.validation
-                                      .getValidation('password'),
-                                  controller: controller.validation
-                                      .getController('password'),
-                                  keyboardType: TextInputType.visiblePassword,
-                                  obscureText: !controller.showPassword,
-                                  decoration: InputDecoration(
-                                    hintText: "Password",
-                                    hintStyle:
-                                        MyTextStyle.bodySmall(xMuted: true),
-                                    border: outlineInputBorder,
-                                    enabledBorder: outlineInputBorder,
-                                    focusedBorder: focusedInputBorder,
-                                    suffixIcon: InkWell(
-                                      onTap: controller.onChangeShowPassword,
-                                      child: Icon(
-                                        controller.showPassword
-                                            ? LucideIcons.eye
-                                            : LucideIcons.eyeOff,
-                                        size: 18,
+                                MyCard(
+                                  shadow: MyShadow(elevation: 0.5),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      MyText.titleMedium(
+                                        "Account Infomation",
+                                        fontWeight: 600,
                                       ),
-                                    ),
-                                    contentPadding: MySpacing.all(16),
-                                    isCollapsed: true,
-                                    floatingLabelBehavior:
-                                        FloatingLabelBehavior.never,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          buildTextField(
+                                              fieldTitle: "Username",
+                                              hintText: "",
+                                              value:
+                                                  userProfile?.userName ?? "",
+                                              onEdit: false),
+                                          MySpacing.height(20),
+                                          Visibility(
+                                            visible: !changePassword,
+                                            child: MyButton(
+                                              onTap: () {
+                                                setState(() {
+                                                  changePassword =
+                                                      !changePassword;
+                                                  print(changePassword);
+                                                });
+                                              },
+                                              elevation: 0,
+                                              padding: MySpacing.xy(20, 16),
+                                              backgroundColor:
+                                                  ColorConst.mainColor,
+                                              borderRadiusAll:
+                                                  AppStyle.buttonRadius.medium,
+                                              child: MyText.bodySmall(
+                                                'Change password',
+                                                color: ColorConst.whiteColor,
+                                              ),
+                                            ),
+                                          ),
+                                          Visibility(
+                                            visible: changePassword,
+                                            child: Column(
+                                              children: [
+                                                buildTextField(
+                                                    fieldTitle: "Old Password",
+                                                    hintText:
+                                                        "Enter your old password",
+                                                    value: "",
+                                                    obscure: true),
+                                                MySpacing.height(20),
+                                                buildTextField(
+                                                    fieldTitle:
+                                                        "Change Password",
+                                                    hintText:
+                                                        "Enter your password",
+                                                    value: "",
+                                                    obscure: true),
+                                                MySpacing.height(20),
+                                                buildTextField(
+                                                    fieldTitle:
+                                                        "Confirm Password",
+                                                    hintText:
+                                                        "Comfirm your password",
+                                                    value: "",
+                                                    obscure: true),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                MySpacing.height(20),
-                                MyButton(
-                                  onTap: () {},
-                                  elevation: 0,
-                                  padding: MySpacing.xy(20, 16),
-                                  backgroundColor: contentTheme.primary,
-                                  borderRadiusAll: AppStyle.buttonRadius.medium,
-                                  child: MyText.bodySmall(
-                                    'Save',
-                                    color: contentTheme.onPrimary,
+                                MySpacing.height(16),
+                                MyCard(
+                                  shadow: MyShadow(elevation: 0.5),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      MyText.titleMedium(
+                                        "Billing Infomation",
+                                        fontWeight: 600,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          buildTextField(
+                                              fieldTitle: "Bank Account",
+                                              hintText:
+                                                  "Enter your Bank account",
+                                              value: userProfile?.bankAccount ??
+                                                  ""),
+                                          MySpacing.height(20),
+                                          buildTextField(
+                                              fieldTitle: "Bank Name",
+                                              hintText: "Enter your Bank Name",
+                                              value:
+                                                  userProfile?.bankName ?? ""),
+                                          MySpacing.height(20),
+                                          MyButton(
+                                            onTap: () {},
+                                            elevation: 0,
+                                            padding: MySpacing.xy(20, 16),
+                                            backgroundColor:
+                                                ColorConst.mainColor,
+                                            borderRadiusAll:
+                                                AppStyle.buttonRadius.medium,
+                                            child: MyText.bodySmall(
+                                              'Change payment method',
+                                              color: ColorConst.whiteColor,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
+                    MySpacing.height(10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        MyButton(
+                          onTap: () {
+                            AppPages.routeName(Routes.dashboardRoute);
+                          },
+                          elevation: 0,
+                          padding: MySpacing.xy(20, 16),
+                          backgroundColor: ColorConst.whiteColor,
+                          borderRadiusAll: AppStyle.buttonRadius.medium,
+                          child: MyText.bodySmall(
+                            'Cancel',
+                            color: ColorConst.mainColor,
+                          ),
+                        ),
+                        MySpacing.width(10),
+                        MyButton(
+                          onTap: () {
+                            AppPages.routeName(Routes.dashboardRoute);
+                          },
+                          elevation: 0,
+                          padding: MySpacing.xy(20, 16),
+                          backgroundColor: ColorConst.mainColor,
+                          borderRadiusAll: AppStyle.buttonRadius.medium,
+                          child: MyText.bodySmall(
+                            'Save',
+                            color: ColorConst.whiteColor,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
-                ),
-              ),
-            ],
+                );
+              },
+            ),
           );
-        },
-      ),
-    );
+        });
   }
 
-  Widget buildTextField(String fieldTitle, String hintText) {
+  Widget buildTextField(
+      {bool? onEdit,
+      bool? obscure,
+      bool? onShowPassword,
+      required String fieldTitle,
+      required String hintText,
+      required String value}) {
+    onShowPassword ??= false;
+    obscure ??= false;
+    onEdit ??= true;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -249,18 +454,107 @@ class _EditProfileState extends State<EditProfile>
           fieldTitle,
         ),
         MySpacing.height(8),
-        TextFormField(
-          decoration: InputDecoration(
-            hintText: hintText,
-            hintStyle: MyTextStyle.bodySmall(xMuted: true),
-            border: outlineInputBorder,
-            contentPadding: MySpacing.all(16),
-            isCollapsed: true,
-            floatingLabelBehavior: FloatingLabelBehavior.never,
-          ),
-        ),
+        StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+          return TextFormField(
+            obscureText: obscure! && !onShowPassword!,
+            enabled: onEdit,
+            initialValue: value,
+            decoration: InputDecoration(
+              hintText: hintText,
+              hintStyle: MyTextStyle.bodySmall(xMuted: true),
+              border: outlineInputBorder,
+              enabledBorder: outlineInputBorder,
+              focusedBorder: focusedInputBorder,
+              contentPadding: MySpacing.all(16),
+              isCollapsed: true,
+              floatingLabelBehavior: FloatingLabelBehavior.never,
+              suffixIcon: (obscure && onShowPassword!)
+                  ? IconButton(
+                      onPressed: () {
+                        setState(() {
+                          onShowPassword = !onShowPassword!;
+                        });
+                      },
+                      icon: Icon(
+                        Icons.visibility_off,
+                        size: 20,
+                      ))
+                  : (obscure && !onShowPassword!)
+                      ? IconButton(
+                          onPressed: () {
+                            setState(() {
+                              onShowPassword = !onShowPassword!;
+                            });
+                          },
+                          icon: Icon(
+                            Icons.visibility,
+                            size: 20,
+                          ))
+                      : SizedBox(),
+            ),
+          );
+        }),
       ],
     );
+  }
+
+  Widget customDropDownSearch({
+    required List<int> list,
+    required String hintText,
+    required TextEditingController? controller,
+  }) {
+    return DropdownSearch<int>(
+      popupProps: PopupProps.menu(
+        constraints: BoxConstraints(
+          maxHeight:
+              (65 + list.length * 50 < 210) ? 65 + list.length * 50 : 210,
+        ),
+        showSearchBox: true,
+        searchDelay: Duration(milliseconds: 300),
+        showSelectedItems: false,
+      ),
+      items: list.toList(),
+      // selectedItem: selectItem ?? 0,
+      dropdownDecoratorProps: DropDownDecoratorProps(
+        dropdownSearchDecoration: InputDecoration(
+          hintText: hintText,
+          labelText: hintText,
+          hintTextDirection: AppTheme.textDirection,
+          labelStyle: TextStyleConstant.textStyleBlack14w400,
+          hintStyle: TextStyleConstant.textStyleBlack14w400,
+          border: outlineInputBorder,
+          contentPadding: MySpacing.all(16),
+          isCollapsed: true,
+          floatingLabelBehavior: FloatingLabelBehavior.never,
+        ),
+      ),
+      onChanged: (value) {
+        controller?.text = (value ?? 0).toString();
+      },
+    );
+  }
+
+  int getDaysInMonth(int year, int month) {
+    if (month == DateTime.february) {
+      final bool isLeapYear =
+          (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0);
+      return isLeapYear ? 29 : 28;
+    }
+    const List<int> daysInMonth = <int>[
+      31,
+      -1,
+      31,
+      30,
+      31,
+      30,
+      31,
+      31,
+      30,
+      31,
+      30,
+      31
+    ];
+    return daysInMonth[month - 1];
   }
 }
 

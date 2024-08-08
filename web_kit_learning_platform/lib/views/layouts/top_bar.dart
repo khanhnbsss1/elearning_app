@@ -141,7 +141,8 @@ class _TopBarState extends State<TopBar>
                               fit: BoxFit.cover,
                             )),
                         MySpacing.width(8),
-                        MyText.labelLarge("Den")
+                        // MyText.labelLarge('${snapshot.data?.fullName}')
+                        MyText.labelLarge('Den')
                       ],
                     ),
                   ),
