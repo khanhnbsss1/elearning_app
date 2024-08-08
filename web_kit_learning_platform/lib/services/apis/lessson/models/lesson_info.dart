@@ -1,5 +1,6 @@
 
 import 'package:webkit/base/services/base_request/models/page_model.dart';
+import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 
 class LessonListResponseModel extends PageModel{
   List<LessonInfo>? content;
@@ -50,7 +51,7 @@ class LessonInfo {
   String? createdBy;
   String? updatedBy;
   String? note;
-  
+  UploadFileResponseInfo? documentUploadInfo;
   LessonInfo(
       {this.id,
         this.subName,
@@ -63,7 +64,8 @@ class LessonInfo {
         this.updatedAt,
         this.createdBy,
         this.updatedBy,
-        this.note
+        this.note,
+        this.documentUploadInfo
       });
 
   LessonInfo.fromJson(Map<String, dynamic> json) {
@@ -83,18 +85,30 @@ class LessonInfo {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['sub_name'] = subName;
+    if(id!=null) {
+      data['id'] = id;
+    }
+    if(subName!=null) {
+      data['sub_name'] = subName;
+    }
     data['lecture_name'] = lectureName;
     data['lecture_link'] = link;
-    data['doc_id'] = docId;
-    data['docName'] = docName;
+    data['file_id'] = docId;
+    data['doc_name'] = docName;
     data['link'] = link;
     data['mode'] = mode;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    data['created_by'] = createdBy;
-    data['updated_by'] = updatedBy;
+    if(createdAt!=null) {
+      data['created_at'] = createdAt;
+    }
+    if(updatedAt!=null) {
+      data['updated_at'] = updatedAt;
+    }
+    if(createdBy!=null) {
+      data['created_by'] = createdBy;
+    }
+    if(updatedBy!=null) {
+      data['updated_by'] = updatedBy;
+    }
     data['note'] = note;
     return data;
   }

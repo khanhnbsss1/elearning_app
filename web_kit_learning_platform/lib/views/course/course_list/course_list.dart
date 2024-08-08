@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_pagination/flutter_custom_pagination.dart';
@@ -10,9 +9,9 @@ import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:webkit/views/course/course_detail/course_study/course_study.dart';
 import 'package:webkit/views/course/course_list/bloc/course_list_bloc.dart';
 import 'package:webkit/views/course/course_detail/course_preview.dart';
-import 'package:webkit/views/course/course_list/components/my_grid_view.dart';
 import 'package:webkit/views/course/create_edit_course/create_edit_course.dart';
 import '../../../helpers/theme/app_style.dart';
 import '../../../helpers/widgets/course_item_grid_view.dart';
@@ -20,9 +19,7 @@ import '../../../helpers/widgets/my_button.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text.dart';
 import '../../../helpers/widgets/my_text_style.dart';
-import '../../../landing_page/mediaquery/mq.dart';
 import '../../layouts/layout.dart';
-import '../course_study/course_study.dart';
 import 'components/filter_menu_item.dart';
 
 class CourseList extends StatefulWidget {

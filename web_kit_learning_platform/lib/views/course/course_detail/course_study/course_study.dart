@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/views/course/course_study/course_study_introduction.dart';
-import 'package:webkit/views/course/course_study/course_study_study.dart';
-import 'package:webkit/views/course/course_study/course_study_test.dart';
 import 'package:webkit/views/course/create_edit_course/components/build_tab_bar.dart';
-import '../../../helpers/utils/ui_mixins.dart';
-import '../../../services/apis/course/course_detail/models/course_detail_model.dart';
-import '../../layouts/layout.dart';
-import '../course_detail/bloc/course_detail_bloc.dart';
+import '../../../../helpers/utils/ui_mixins.dart';
+import '../../../../services/apis/course/course_detail/models/course_detail_model.dart';
+import '../../../layouts/layout.dart';
+import '../../course_detail/bloc/course_detail_bloc.dart';
+import 'course_study_study.dart';
 
 class CourseStudy1 extends StatefulWidget {
   final CourseInfo courseInfo;

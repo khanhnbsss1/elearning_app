@@ -7,6 +7,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/views/course/create_edit_course/components/course_mode.dart';
 import 'package:webkit/views/lessson/components/search_word_drop_down.dart';
 import '../../../base/widgets/widget_common/widget_with_title_common.dart';
@@ -52,6 +53,9 @@ class _CreateEditLesson extends State<CreateEditLesson>
   TextEditingController editingControllerLectureDescription = TextEditingController();
   TextEditingController editingControllerLectureVideoLink = TextEditingController();
   TextEditingController editingControllerLectureDocuments = TextEditingController();
+
+  String mode = 'FREE';
+  int price = 0;
 
   late bool enableEdit;
 
@@ -136,7 +140,9 @@ class _CreateEditLesson extends State<CreateEditLesson>
                             MySpacing.height(16),
                             buildLectureMode(context: context),
                             MySpacing.height(16),
-                            buildLectureWords(context: context, state: state),
+                            Visibility(
+                              visible: state.lessonInfo?.id!=null,
+                                child: buildLectureWords(context: context, state: state)),
                             MySpacing.height(16),
                           ],
                         ),
@@ -147,8 +153,33 @@ class _CreateEditLesson extends State<CreateEditLesson>
                       text: widget.lessonActionType == LessonActionType.create?L10nX.getStr.create_lesson_str:L10nX.getStr.str_update,
                       width: Dimens.size150,
                       onTap: () {
-                        
-                      },
+                        state.lessonInfo??= LessonInfo();
+                        state.lessonInfo?.lectureName = editingControllerLectureName.text;
+                        state.lessonInfo?.note = editingControllerLectureDescription.text;
+                        state.lessonInfo?.link = editingControllerLectureVideoLink.text;
+                        state.lessonInfo?.docName = editingControllerLectureName.text;
+                        state.lessonInfo?.mode = mode;
+                        switch(widget.lessonActionType){
+                          
+                          case LessonActionType.view:
+                            // TODO: Handle this case.
+                            break;
+                          case LessonActionType.edit:
+                            // TODO: Handle this case.
+                              {
+                                BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateLessonEvent(lessonInfo: state.lessonInfo!));
+                              }
+                            break;
+                          case LessonActionType.create:
+                            // TODO: Handle this case.
+                          {
+                            BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailCreateLessonEvent(lessonInfo: state.lessonInfo!));
+                          }
+                            break;
+                          default: 
+                            break;
+                        }
+                        },
                     ),
                   ],
                 ),
@@ -306,14 +337,16 @@ class _CreateEditLesson extends State<CreateEditLesson>
               icon: Icon(Icons.upload_file),
               onPressed: () async {
                 FilePickerResult? result = await FilePicker.platform.pickFiles(
-                    type: FileType.custom, allowedExtensions: ['png', 'jpg']);
-                MultipartFile file = MultipartFile.fromBytes(
-                    result!.files.first.bytes!.toList(growable: true),
-                    filename: result.names[0]);
-                setState(() {
-                  // state.controller?.basicValidator.getController('image')?.text = result.files.first.name ?? "";
-                });
-                // BlocProvider.of<LessonDetailBloc>(context).add(AddCourseUploadImageEvent(uploadFileInfo: UploadFileInfo(data: SubjectType.courses, file: file)));
+                    type: FileType.custom, allowedExtensions: [
+                      'pdf', 'word', 'pptx', 'pptm', 'pdf', 'xps', 'potx', 'potm', 'xml','xlsx','xlsx', 'xlsb', 'xls', 'xls', 'xlt' ]);
+                if(result!=null)
+                  {
+                    MultipartFile file = MultipartFile.fromBytes(result.files.first.bytes!.toList(growable: true), filename: result.names[0]);
+                    editingControllerLectureDocuments.text = file.filename??"";
+                    BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUploadDocumentEvent(
+                        docInfo: UploadFileInfo(data: SubjectType.lectures, file: file)));
+                  }
+
               },
             ),
           ),
@@ -326,10 +359,11 @@ class _CreateEditLesson extends State<CreateEditLesson>
     return ModeOptionWidget(mode: '',
       onModeChanged: (String? value)
       {
+        mode = value??"FREE";
       },
       onPaymentChanged: (int? price)
       {
-
+        price = price;
       },
     );
   }

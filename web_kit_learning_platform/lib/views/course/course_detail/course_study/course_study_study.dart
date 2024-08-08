@@ -6,20 +6,18 @@ import 'package:gap/gap.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/common/alert_dialog/loading.export.dart';
-import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/topic/model/topic_info.dart';
 import 'package:webkit/services/apis/vocabulary/words/word_info.dart';
 import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
 
-import '../../../base/widgets/audio/audio_speaker.dart';
-import '../../../helpers/utils/ui_mixins.dart';
-import '../../../helpers/widgets/my_responsiv.dart';
-import '../../../helpers/widgets/my_spacing.dart';
-import '../../../helpers/widgets/my_text_style.dart';
-import '../../video_player/model/video_model.dart';
-import '../../video_player/video_player.dart';
-import '../create_edit_course/components/build_tab_bar.dart';
+import '../../../../base/widgets/audio/audio_speaker.dart';
+import '../../../../helpers/utils/ui_mixins.dart';
+import '../../../../helpers/widgets/my_responsiv.dart';
+import '../../../../helpers/widgets/my_spacing.dart';
+import '../../../../helpers/widgets/my_text_style.dart';
+import '../../../video_player/model/video_model.dart';
+import '../../../video_player/video_player.dart';
 
 class CourseStudyStudy extends StatefulWidget {
   const CourseStudyStudy({super.key});

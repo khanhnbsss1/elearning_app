@@ -4,6 +4,9 @@ enum LessonDetailStatus {
   initial,
   onLoading,
   onUpdateWord,
+  onUploadDoc,
+  onCreateLesson,
+  onUpdateLesson,
   unKnown
 }
 

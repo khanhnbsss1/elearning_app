@@ -6,9 +6,9 @@ import 'package:webkit/services/apis/course/course_detail/models/course_detail_m
 import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
 import 'package:webkit/views/course/course_detail/components/course_intro.dart';
 
-import '../../../base/widgets/button/action_button1.dart';
-import '../../video_player/model/video_model.dart';
-import '../../video_player/video_player.dart';
+import '../../../../base/widgets/button/action_button1.dart';
+import '../../../video_player/model/video_model.dart';
+import '../../../video_player/video_player.dart';
 
 class CourseStudyIntroduction extends StatefulWidget {
 

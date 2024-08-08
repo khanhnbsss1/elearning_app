@@ -46,8 +46,7 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
         Text('${L10nX.getStr.payment_str}: *',
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: TextStyleConstant.textStyleBlack13w500
-                .copyWith(fontWeight: FontWeight.w600)),
+            style: TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight: FontWeight.w600)),
         MySpacing.height(4),
         Row(
           children: [
@@ -85,7 +84,7 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
                     ),
                   )
                 : SizedBox(),
-            Expanded(
+            /*Expanded(
               flex: 3,
               child: (widget.disablePayment != true)
                   ? SizedBox(
@@ -115,7 +114,7 @@ class _ModeOptionWidget extends State<ModeOptionWidget> {
                       ),
                     )
                   : SizedBox(),
-            ),
+            ),*/
           ],
         ),
       ],
