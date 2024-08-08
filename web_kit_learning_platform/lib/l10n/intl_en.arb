@@ -519,6 +519,8 @@
   "search_lesson_str": "Search for a lesson",
   "create_lesson_str": "Create a lesson",
   "delete_lesson_str": "Delete a lesson",
+  "edit_lesson_str": "Edit a lesson",
+
   "subject_str": "Subject",
   "primary_course": "Primary course",
   

@@ -169,6 +169,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "download": MessageLookupByLibrary.simpleMessage("下载"),
         "duration_str": MessageLookupByLibrary.simpleMessage("持续时间"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("电子商务"),
+        "edit_lesson_str": MessageLookupByLibrary.simpleMessage("编辑课程"),
         "edit_str": MessageLookupByLibrary.simpleMessage("编辑"),
         "elevated_button": MessageLookupByLibrary.simpleMessage("凸起按钮"),
         "elevated_rounded_button":

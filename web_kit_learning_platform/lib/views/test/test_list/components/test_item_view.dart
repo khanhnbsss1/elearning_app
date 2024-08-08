@@ -56,11 +56,9 @@ class TestItemView extends StatelessWidget {
                       '${info.id}. ${info.name} \n' ?? "",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyleConstant
-                          .normalTextOnBackGroundColorStyle16w600.copyWith(
-                          fontWeight: FontWeight.bold,
-                          
+                          .normalTextOnBackGroundColorStyle16w400.copyWith(                         
                           // fontSize: Dimens.size24,
-                          fontSize: ResponsiveInfo.isPhone()?Dimens.size20:Dimens.size18,
+                          fontSize: ResponsiveInfo.isPhone()?Dimens.size18:Dimens.size16,
                           //color: Color.fromRGBO(163, 20, 19, 1.0)
                       ),
                       maxLines: 1,
@@ -76,7 +74,7 @@ class TestItemView extends StatelessWidget {
                               onViewDetail!(info);
                             }
                           },
-                          child: Icon(Icons.remove_red_eye, color: ColorConst.colorIconRed,size: Dimens.size20,),
+                          child: Icon(Icons.remove_red_eye, color: ColorConst.colorIconGrays.withOpacity(0.5),size: Dimens.size20,),
                         ),
                         Gap(Dimens.size6),
                         InkWell(
@@ -85,7 +83,7 @@ class TestItemView extends StatelessWidget {
                               onEdit!(info);
                             }
                           },
-                          child: Icon(Icons.edit, color: ColorConst.colorIconRed,size: Dimens.size20,),
+                          child: Icon(Icons.edit, color: ColorConst.colorIconGrays.withOpacity(0.5),size: Dimens.size20,),
                         ),
                         Gap(Dimens.size6),
                         InkWell(
@@ -94,7 +92,7 @@ class TestItemView extends StatelessWidget {
                               onDelete!(info);
                             }
                           },
-                          child: Icon(Icons.delete, color: ColorConst.colorIconRed,size: Dimens.size20,),
+                          child: Icon(Icons.delete, color: ColorConst.colorIconGrays.withOpacity(0.5),size: Dimens.size20,),
                         ),
                         Gap(Dimens.size6),
                       ],

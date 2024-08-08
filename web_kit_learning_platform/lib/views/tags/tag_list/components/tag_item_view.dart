@@ -56,12 +56,8 @@ class TagItemView extends StatelessWidget {
                       '${tagInfo.id}. ${tagInfo.name} \n' ?? "",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyleConstant
-                          .normalTextOnBackGroundColorStyle16w600.copyWith(
-                          fontWeight: FontWeight.bold,
-                          
-                          // fontSize: Dimens.size24,
-                          fontSize: ResponsiveInfo.isPhone()?Dimens.size20:Dimens.size18,
-                          //color: Color.fromRGBO(163, 20, 19, 1.0)
+                          .normalTextOnBackGroundColorStyle16w400.copyWith(                         
+                          fontSize: ResponsiveInfo.isPhone()?Dimens.size18:Dimens.size16,
                       ),
                       maxLines: 1,
                     ),
@@ -82,7 +78,7 @@ class TagItemView extends StatelessWidget {
                               onEdit!(tagInfo);
                             }
                           },
-                          child: Icon(Icons.edit, color: ColorConst.colorIconRed,size: Dimens.size20,),
+                          child: Icon(Icons.edit, color: ColorConst.colorIconGrays.withOpacity(0.5),size: Dimens.size20,),
                         ),
                         Gap(Dimens.size6),
                         InkWell(
@@ -91,7 +87,7 @@ class TagItemView extends StatelessWidget {
                               onDelete!(tagInfo);
                             }
                           },
-                          child: Icon(Icons.delete, color: ColorConst.colorIconRed,size: Dimens.size20,),
+                          child: Icon(Icons.delete, color: ColorConst.colorIconGrays.withOpacity(0.5),size: Dimens.size20,),
                         ),
                         Gap(Dimens.size6),
                       ],

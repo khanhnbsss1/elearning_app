@@ -191,6 +191,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "download": MessageLookupByLibrary.simpleMessage("Tải xuống"),
         "duration_str": MessageLookupByLibrary.simpleMessage("Thời lượng"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("Thương mại điện tử"),
+        "edit_lesson_str":
+            MessageLookupByLibrary.simpleMessage("Chỉnh sửa bài học"),
         "edit_str": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "elevated_button": MessageLookupByLibrary.simpleMessage("Nút nâng cao"),
         "elevated_rounded_button":

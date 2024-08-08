@@ -85,7 +85,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
           iconTheme: IconThemeData(
             color: ColorConst.whiteColor, //change your color here
           ),
-          title: Text(L10nX.getStr.create_lesson_str, style: TextStyleConstant.textStyleBlack20w700.copyWith(color: ColorConst.whiteColor),),
+          title: Text( widget.lessonInfo?.id!=null?L10nX.getStr.edit_lesson_str:L10nX.getStr.create_lesson_str, style: TextStyleConstant.textStyleBlack20w700.copyWith(color: ColorConst.whiteColor),),
           centerTitle: true,
         ),
         body: Container(
@@ -206,7 +206,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
           border: outlineInputBorder,
           prefixIcon: Icon(
-            LucideIcons.user,
+            Icons.title,
             size: 20,
             color: ColorConst.colorIconRed,
           ),
@@ -235,7 +235,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
           border: outlineInputBorder,
           prefixIcon: Icon(
-            LucideIcons.user,
+            Icons.note_alt_outlined,
             size: 20,
             color: ColorConst.colorIconRed,
           ),
@@ -272,7 +272,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
           border: outlineInputBorder,
           prefixIcon: Icon(
-            LucideIcons.user,
+            LucideIcons.video,
             size: 20,
             color: ColorConst.colorIconRed,
           ),
@@ -324,7 +324,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
           border: outlineInputBorder,
           prefixIcon: Icon(
-            LucideIcons.user,
+            LucideIcons.link,
             size: 20,
             color: ColorConst.colorIconRed,
           ),

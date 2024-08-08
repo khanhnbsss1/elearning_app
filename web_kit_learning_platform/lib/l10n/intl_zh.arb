@@ -515,6 +515,7 @@
   "search_lesson_str": "搜索课程",
   "create_lesson_str": "创建课程",
   "delete_lesson_str": "删除课程",
+  "edit_lesson_str": "编辑课程",
   "subject_str": "主题",
   "primary_course": "常规课程",
   "please_fill_in_all_missing_fields_str": "请填写所有缺失字段",

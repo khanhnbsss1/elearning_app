@@ -5164,6 +5164,16 @@ class S {
     );
   }
 
+  /// `Edit a lesson`
+  String get edit_lesson_str {
+    return Intl.message(
+      'Edit a lesson',
+      name: 'edit_lesson_str',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Subject`
   String get subject_str {
     return Intl.message(
