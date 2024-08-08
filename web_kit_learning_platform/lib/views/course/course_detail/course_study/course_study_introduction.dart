@@ -1,12 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
 import 'package:webkit/views/course/course_detail/components/course_intro.dart';
 
-import '../../../../base/widgets/button/action_button1.dart';
 import '../../../video_player/model/video_model.dart';
 import '../../../video_player/video_player.dart';
 

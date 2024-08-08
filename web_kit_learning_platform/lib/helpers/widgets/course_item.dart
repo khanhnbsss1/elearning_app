@@ -393,7 +393,9 @@ class CourseItem extends StatelessWidget {
                                     : Dimens.size16),
                             child: Center(
                               child: ActionButton1(
-                                onTap: () {},
+                                onTap: () {
+                                  AppPages.routeName(Routes.courseList);
+                                },
                                 text: L10nX.getStr.register_now,
                                 width: Dimens.size200,
                               ),

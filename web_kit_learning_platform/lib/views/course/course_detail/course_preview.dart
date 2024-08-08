@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating/flutter_rating.dart';
+import 'package:gap/gap.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/views/layouts/layout.dart';
@@ -12,6 +13,7 @@ import '../../../services/apis/course/course_detail/models/course_detail_model.d
 import 'bloc/course_detail_bloc.dart';
 import 'components/course_intro.dart';
 import 'components/lecture_list.dart';
+import 'course_study/course_study.dart';
 
 class CoursePreview extends StatefulWidget {
   CourseInfo courseInfo;
@@ -153,135 +155,154 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
         },
         builder: (BuildContext context, state) {
           return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-            return SizedBox(
-              height: 500,
-              child: Stack(
-                children: [
-                  Container(
-                    width: constraints.maxWidth,
-                    height: 420,
-                    decoration: BoxDecoration(
-                      color: ColorConst.blackColor
-                    ),
-                    child: VideoPlayer(videoPlayerModel: VideoPlayerModel(
-                        title: "", 
-                        link:"https://www.youtube.com/watch?v=NGl9izvlVKA&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ",// state.courseInfo?.videoPreview ?? ""
-                    ),),
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: constraints.maxWidth,
+                  height: 420,
+                  decoration: BoxDecoration(
+                    color: ColorConst.blackColor
                   ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          constraints: BoxConstraints(
-                            maxWidth: 800,
-                            minWidth: 300,
-                            minHeight: Dimens.size100,
-                            maxHeight: Dimens.size250
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colors.black.withOpacity(0.1),
-                            ),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          padding: EdgeInsets.all(Dimens.size16),
-                          child:constraints.maxWidth> 450? 
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Column(
+                  child: VideoPlayer(videoPlayerModel: VideoPlayerModel(
+                      title: "", 
+                      link:"https://www.youtube.com/watch?v=NGl9izvlVKA&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ",// state.courseInfo?.videoPreview ?? ""
+                  ),),
+                ),
+                Gap(Dimens.size10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      constraints: BoxConstraints(
+                        maxWidth: 800,
+                        minWidth: 300,
+                        minHeight: Dimens.size100,
+                        maxHeight: Dimens.size250
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                          color: Colors.black.withOpacity(0.1),
+                        ),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      padding: EdgeInsets.all(Dimens.size16),
+                      child:constraints.maxWidth> 450? 
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
                                     mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          MyText.titleLarge(
-                                            state.courseInfo?.name ?? "",
-                                            style: TextStyle(fontWeight: FontWeight.bold),
-                                            color: ColorConst.textColor,
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          StarRating(
-                                            color: Colors.yellow,
-                                            allowHalfRating: true,
-                                            rating: (state.courseInfo?.ratePoint ?? 0).toDouble(),
-                                          ),
-                                        ],
+                                      MyText.titleLarge(
+                                        state.courseInfo?.name ?? "",
+                                        style: TextStyle(fontWeight: FontWeight.bold),
+                                        color: ColorConst.textColor,
                                       ),
                                     ],
                                   ),
-                                ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      StarRating(
+                                        color: Colors.yellow,
+                                        allowHalfRating: true,
+                                        rating: (state.courseInfo?.ratePoint ?? 0).toDouble(),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
-                              ActionButton1(
-                                text: L10nX.getStr.register_now,
-                              ),
-                            ],
-                          ):
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                            ),
+                          ),
+                /*                              ActionButton1(
+                            text: L10nX.getStr.register_now,
+                          ),*/
+                          ActionButton1(
+                            text: L10nX.getStr.lets_study,
+                            onTap: () {
+/*                              AppPages.routeName(Routes.courseStudy,arguments: {
+                                "courseInfo":state.courseInfo
+                              });*/
+                              CourseStudy1(
+                                courseInfo: state.courseInfo!,
+                              ).show(context);
+                            },
+                          ),
+                        ],
+                      ):
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        MyText.titleLarge(
-                                          state.courseInfo?.name ?? "",
-                                          style: TextStyle(fontWeight: FontWeight.bold),
-                                          color: ColorConst.textColor,
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        StarRating(
-                                          color: Colors.yellow,
-                                          allowHalfRating: true,
-                                          rating: (state.courseInfo?.ratePoint ?? 0).toDouble(),
-                                        ),
-                                      ],
+                                    MyText.titleLarge(
+                                      state.courseInfo?.name ?? "",
+                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                      color: ColorConst.textColor,
                                     ),
                                   ],
                                 ),
-                              ),
-                              ActionButton1(
-                                text: L10nX.getStr.register_now,
-                              ),
-                              SizedBox(
-                                width: 16,
-                              ),
-                            ],
-                          )
-                          ,
-                        ),
-                        buildTabBar()
-                      ],
+                                Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    StarRating(
+                                      color: Colors.yellow,
+                                      allowHalfRating: true,
+                                      rating: (state.courseInfo?.ratePoint ?? 0).toDouble(),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          /*ActionButton1(
+                            text: L10nX.getStr.register_now,
+                          ),*/
+                          ActionButton1(
+                            text: L10nX.getStr.lets_study,
+                            onTap: () {
+/*                              AppPages.routeName(Routes.courseStudy,arguments: {
+                                "courseInfo":state.courseInfo
+                              });*/
+                              CourseStudy1(
+                                courseInfo: state.courseInfo!,
+                              ).show(context);
+                            },
+                          ),
+                          
+                          SizedBox(
+                            width: 16,
+                          ),
+                        ],
+                      )
+                      ,
                     ),
-                  )
-                ],
-              ),
+                    buildTabBar()
+                  ],
+                )
+              ],
             );
           },
           );

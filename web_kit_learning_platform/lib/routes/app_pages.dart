@@ -70,7 +70,9 @@ abstract class Routes {
   static const courseMyList = Paths.courseMyList;
   static const courseDetail = Paths.courseDetail;
   static const vocabularyList = Paths.vocabularyList;
-  
+
+  static const courseStudy = Paths.courseStudy;
+
   static const vocabularyDetail = Paths.vocabularyDetail;
   static const videoPlayer = Paths.videoPlayer;
   static const lessonList = Paths.lessonList;
@@ -137,6 +139,8 @@ abstract class Paths {
   static const loginPath = "/auth/login";
   static const loginPath1 = "/auth/login1";
   static const courseList = '/course/list';
+  static const courseStudy = '/course/courseStudy';
+  
   static const courseMyList = '/course/mylist';
   static const courseDetail = '/course/detail';
   static const videoPlayer = '/videoPlayer';

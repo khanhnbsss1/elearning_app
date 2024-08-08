@@ -417,7 +417,7 @@ class BaseApiRequest {
         receiveTimeout: const Duration(seconds: timeout), // 3);
       );
       Response response =  await DioClient().getDioClient().put(url, queryParameters: params, data: body,options: option);
-      return await handleResponse(response: response, url: url, params: params);
+      return await handleResponse(response: response, url: url, params: params, body: body);
     }
     catch(e){
       handleResponse(response: e, url: url,params: params, body: body);
@@ -500,7 +500,7 @@ class BaseApiRequest {
                 '\n params:$params,'
                 '\n requestBody:$body,'
                 ' \n ressponse: $response \n\n');
-        if(response.data!=null && response.data["message"]!=null) {
+        if(response.data!=null && response.data!='' && response.data["message"]!=null) {
           response.statusMessage= response.data["message"];
         }
         await onRequestError(response.statusCode, response.statusMessage);

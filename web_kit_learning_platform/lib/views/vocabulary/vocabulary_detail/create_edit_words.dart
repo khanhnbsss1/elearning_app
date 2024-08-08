@@ -69,6 +69,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
           }
         }, builder: (BuildContext context, state) {
           _state = state;
+          bool enable = widget.wordsPageActionType != WordsPageActionType.view;
           return Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimens.size20)),
             clipBehavior: Clip.hardEdge,
@@ -106,10 +107,30 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                 mainAxisSpacing: 24,
                                 shrinkWrap: true,
                                 children: [
-                                  customTextFormField1(controller: 'traditional', myScreenMediaType: myScreenMediaType, label: L10nX.getStr.vocabulary_str, constraints: constraints),
-                                  customTextFormField1(controller: 'simplified', myScreenMediaType: myScreenMediaType, label: L10nX.getStr.simplified_str, constraints: constraints),
-                                  customTextFormField1(controller: 'translation_vn', myScreenMediaType: myScreenMediaType, label: L10nX.getStr.meaning_str, constraints: constraints),
-                                  customTextFormField1(controller: 'pinyin_tones', myScreenMediaType: myScreenMediaType, label: L10nX.getStr.pinyin_tone_str, constraints: constraints),
+                                  customTextFormField1(
+                                      controller: 'traditional',
+                                      enable: enable,
+                                      myScreenMediaType: myScreenMediaType,
+                                      label: L10nX.getStr.vocabulary_str,
+                                      constraints: constraints),
+                                  customTextFormField1(
+                                      controller: 'simplified',
+                                      enable: enable,
+                                      myScreenMediaType: myScreenMediaType, 
+                                      label: L10nX.getStr.simplified_str, 
+                                      constraints: constraints),
+                                  customTextFormField1(
+                                      controller: 'translation_vn',
+                                      enable: enable,
+                                      myScreenMediaType: myScreenMediaType, 
+                                      label: L10nX.getStr.meaning_str, 
+                                      constraints: constraints),
+                                  customTextFormField1(
+                                      controller: 'pinyin_tones',
+                                      enable: enable,
+                                      myScreenMediaType: myScreenMediaType,
+                                      label: L10nX.getStr.pinyin_tone_str,
+                                      constraints: constraints),
                                 ],
                               ),
                               SizedBox(
@@ -123,6 +144,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                       controller: 'audio',
                                       constraints: constraints,
                                       myScreenMediaType: myScreenMediaType,
+                                      enable: enable,
                                       label: L10nX.getStr.upload_sound_file_str,
                                       isLink: true,
                                       onUpload: () async {
@@ -147,6 +169,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                     child: customTextFormField1(
                                       controller: 'image',
                                       constraints: constraints,
+                                      enable: enable,
                                       myScreenMediaType: myScreenMediaType,
                                       label: L10nX.getStr.upload_image_str,
                                       isLink: true,
@@ -255,7 +278,8 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
       {required String controller,
       required String label,
       double? width,
-      bool isLink = false,
+      bool isLink = false, 
+      bool? enable,
       Function()? onUpload,
       required BoxConstraints constraints,
       required MyScreenMediaType myScreenMediaType}) {
@@ -264,6 +288,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
             child: TextFormField(
             validator: _state.addWordController?.basicValidator.getValidation(controller),
             controller: _state.addWordController?.basicValidator.getController(controller),
+            readOnly: !(enable??true),
             decoration: InputDecoration(
               enabledBorder: isLink ? InputBorder.none : null,
               focusedBorder: isLink ? InputBorder.none : null,
@@ -275,19 +300,39 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
               contentPadding: MySpacing.all(16),
               isCollapsed: true,
               floatingLabelBehavior: FloatingLabelBehavior.never,
-              suffixIcon: (_state.addWordController?.basicValidator.getController(controller)?.text != "" && isLink)
-                  ? IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _state.addWordController?.basicValidator.getController(controller)?.text = "";
-                        });
+                prefixIcon:  Visibility(
+                  visible: (enable??true) && isLink,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: IconButton(
+                      style: TextButton.styleFrom(backgroundColor: notifier.whitecolor, foregroundColor: Colors.white),
+                      onPressed: () async {
+                        if (onUpload != null) {
+                          onUpload();
+                        }
                       },
                       icon: Icon(
-                        Icons.close_sharp,
-                        color: Colors.red,
+                        Icons.cloud_upload_rounded,
+                        size: 14,
+                        color: ColorConst.mainColor,
                       ),
-                    )
-                  : null,
+                    ),
+                  ),
+                ),
+              suffixIcon: Visibility(
+                visible: (enable??true) &&  (_state.addWordController?.basicValidator.getController(controller)?.text != ""),
+                child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _state.addWordController?.basicValidator.getController(controller)?.text = "";
+                          });
+                        },
+                        icon: Icon(
+                          Icons.close_sharp,
+                          color: Colors.red,
+                        ),
+                      ),
+                  )
             ),
           ))
         : Container(
@@ -302,9 +347,8 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                     child: TextFormField(
                       validator: _state.addWordController?.basicValidator.getValidation(controller),
                       controller: _state.addWordController?.basicValidator.getController(controller),
+                      readOnly: !(enable??true),
                       decoration: InputDecoration(
-                        //enabledBorder: isLink ? InputBorder.none : null,
-                        // focusedBorder: isLink ? InputBorder.none : null,
                         labelText: label,
                         labelStyle: MyTextStyle.bodySmall(xMuted: true),
                         border: outlineInputBorder.copyWith(
@@ -313,40 +357,45 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                         contentPadding: MySpacing.all(16),
                         isCollapsed: true,
                         floatingLabelBehavior: FloatingLabelBehavior.never,
-                        prefixIcon: (isLink)
-                            ? Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: IconButton(
-                                  style: TextButton.styleFrom(backgroundColor: notifier.whitecolor, foregroundColor: Colors.white),
-                                  onPressed: () async {
-                                    if (onUpload != null) {
-                                      onUpload();
-                                    }
-                                  },
-                                  icon: Icon(
-                                    Icons.cloud_upload_rounded,
-                                    size: 14,
-                                    color: ColorConst.mainColor,
+                        prefixIcon:  Visibility(
+                          visible: (enable??true) && isLink,
+                          child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: IconButton(
+                                    style: TextButton.styleFrom(backgroundColor: notifier.whitecolor, foregroundColor: Colors.white),
+                                    onPressed: () async {
+                                      if (onUpload != null) {
+                                        onUpload();
+                                      }
+                                    },
+                                    icon: Icon(
+                                      Icons.cloud_upload_rounded,
+                                      size: 14,
+                                      color: ColorConst.mainColor,
+                                    ),
                                   ),
                                 ),
-                              )
-                            : null, 
-                        suffixIcon: (_state.addWordController?.basicValidator.getController(controller)?.text != "")
-                            ? Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _state.addWordController?.basicValidator.getController(controller)?.text = "";
-                                    });
-                                  },
-                                  icon: Icon(
-                                    Icons.close_sharp,
-                                    color: ColorConst.colorIconGrays,
+                        ),
+                          
+                        suffixIcon:
+                            Visibility(
+                              visible: (enable??true) &&  (_state.addWordController?.basicValidator.getController(controller)?.text != ""),
+                              child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _state.addWordController?.basicValidator.getController(controller)?.text = "";
+                                      });
+                                    },
+                                    icon: Icon(
+                                      Icons.close_sharp,
+                                      color: ColorConst.colorIconGrays,
+                                    ),
                                   ),
                                 ),
-                              )
-                            : null,
+                            )
+    
                       ),
                     ),
                   ),

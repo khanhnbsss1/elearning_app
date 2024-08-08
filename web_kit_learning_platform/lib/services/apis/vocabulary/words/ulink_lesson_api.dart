@@ -1,29 +1,38 @@
-
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
-import 'package:webkit/services/apis/tags/models/tag_info.dart';
 
-
-class UpdateLessonApi extends BaseApiRequest {
-  LessonInfo lessonInfo;
-  UpdateLessonApi({required this.lessonInfo}):super(
+class UnLinkWordApi extends BaseApiRequest {
+  int courseId;
+  int lessonId;
+  String subject;
+  UnLinkWordApi({required this.courseId, required this.lessonId, required this.subject}):super(
     serviceType: SERVICE_TYPE.LESSON,
-    apiName: ApiName.getInstance().updateLesson,
+    apiName: ApiName.getInstance().unlinkLesson,
   );
 
   Future<dynamic> call() async {
     await getAuthorization();
-    dynamic result = await putRequestAPI();
-    if(result.runtimeType == String && (result as String).isEmpty)
+    dynamic result = await postRequestAPI();
+
+    if(result.runtimeType == ResponseCommon)
     {
-      ToastUtils.showToastSuccess(L10nX.getStr.success);
+      ToastUtils.showToastError((result as ResponseCommon).message??"");
+      return null;
     }
-    return result;
+    else
+    {     
+      ToastUtils.showToastSuccess(L10nX.getStr.success);
+      return result;
+    }
   }
 
   Future<void> getAuthorization() async {
-    await setApiBody(lessonInfo.toJson());
+    await setApiBody({
+      "id":lessonId,
+      "courseId":courseId,
+      "subName":subject,
+
+    });
   }
 
   @override

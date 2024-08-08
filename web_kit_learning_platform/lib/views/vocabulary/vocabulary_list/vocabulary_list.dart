@@ -269,7 +269,20 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
           onTap: () {
             BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSelectVocabularyEvent(selectVocabularyInfo: vocabularyInfo));
           },
-          child: VocabularyItemView(vocabularyInfo: vocabularyInfo,),)
+          child: VocabularyItemView(
+            vocabularyInfo: vocabularyInfo,
+            onDelete: (p0) {
+
+            },
+            onEdit: (p0) {
+              CreateEditWordsPage(vocabularyInfo: p0,wordsPageActionType: WordsPageActionType.edit,).show(context);
+
+            },
+            onViewDetail: (p0) {
+              CreateEditWordsPage(vocabularyInfo: p0,wordsPageActionType: WordsPageActionType.view,).show(context);
+            },
+          ),)
+            
           
       );
     }

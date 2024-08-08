@@ -306,72 +306,68 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
               SizedBox(
                 height: 8,
               ),
-              Positioned(
-                right: 0,
-                top: 8,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Opacity(
-                      opacity: enaAbleSaveSentenceInfo ? 1.0 : 0.1,
-                      child: IgnorePointer(
-                        ignoring: !enaAbleSaveSentenceInfo,
-                        child: InkWell(
-                          onTap: () {
-                            if(widget.onSaveSentenceInfo!=null)
-                              {
-                                widget.sentenceInfo?.chineseSentence = chineseSentenceController.text;
-                                widget.sentenceInfo?.translationVn = translationVNSentenceController.text;
-                                widget.sentenceInfo?.pinyionSentence = pinyionSentenceController.text;
-                                widget.sentenceInfo?.audioLink = audioSentenceController.text;
-                                widget.onSaveSentenceInfo!(widget.sentenceInfo!);
-                              }
-                          },
-                          child: Icon(
-                            Icons.save_as_outlined,
-                          ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Opacity(
+                    opacity: enaAbleSaveSentenceInfo ? 1.0 : 0.1,
+                    child: IgnorePointer(
+                      ignoring: !enaAbleSaveSentenceInfo,
+                      child: InkWell(
+                        onTap: () {
+                          if(widget.onSaveSentenceInfo!=null)
+                            {
+                              widget.sentenceInfo?.chineseSentence = chineseSentenceController.text;
+                              widget.sentenceInfo?.translationVn = translationVNSentenceController.text;
+                              widget.sentenceInfo?.pinyionSentence = pinyionSentenceController.text;
+                              widget.sentenceInfo?.audioLink = audioSentenceController.text;
+                              widget.onSaveSentenceInfo!(widget.sentenceInfo!);
+                            }
+                        },
+                        child: Icon(
+                          Icons.save_as_outlined,
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 8,
-                    ),
-/*
-                    Opacity(
-                      opacity: enaAbleSaveSentenceInfo ? 1.0 : 0.1,
-                      child: IgnorePointer(
-                        ignoring: !enaAbleSaveSentenceInfo,
-                        child: InkWell(
-                            onTap: () {
-                            },
-                            child: Icon(
-                              Icons.edit,
-                            )),
-                      ),
-                    ),
-*/
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Opacity(
-                      opacity: enaAbleSaveSentenceInfo ? 1.0 : 0.1,
-                      child: IgnorePointer(
-                        child: InkWell(
+                  ),
+                  SizedBox(
+                    height: 8,
+                  ),
+              /*
+                  Opacity(
+                    opacity: enaAbleSaveSentenceInfo ? 1.0 : 0.1,
+                    child: IgnorePointer(
+                      ignoring: !enaAbleSaveSentenceInfo,
+                      child: InkWell(
                           onTap: () {
-                            if(widget.onRemoveSentenceInfo!=null)
-                              {
-                                widget.onRemoveSentenceInfo!(widget.sentenceInfo!);
-                              }
                           },
                           child: Icon(
-                            Icons.close_sharp,
-                            color: !enaAbleSaveSentenceInfo ? Colors.black : Colors.red,
-                          ),
+                            Icons.edit,
+                          )),
+                    ),
+                  ),
+              */
+                  SizedBox(
+                    height: 8,
+                  ),
+                  Opacity(
+                    opacity: enaAbleSaveSentenceInfo ? 1.0 : 0.1,
+                    child: IgnorePointer(
+                      child: InkWell(
+                        onTap: () {
+                          if(widget.onRemoveSentenceInfo!=null)
+                            {
+                              widget.onRemoveSentenceInfo!(widget.sentenceInfo!);
+                            }
+                        },
+                        child: Icon(
+                          Icons.close_sharp,
+                          color: !enaAbleSaveSentenceInfo ? Colors.black : Colors.red,
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
 
             ],

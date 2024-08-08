@@ -40,8 +40,8 @@ class ApiName {
   ///Lesson
   final String getLessonListFilter = "/get-list-filter";
   final String createLesson = "/create-lecture";
-  final String deleteLesson = "/delete-lecturee";
-  final String updateLesson = "/update-lecturee";
+  final String deleteLesson = "/delete-lecture";
+  final String updateLesson = "/update-lecture";
   final String getDetailLesson = "/get-detail";
   final String linkLesson = "/update-lecture-course";
   final String unlinkLesson = "/unlink-lecture-course";

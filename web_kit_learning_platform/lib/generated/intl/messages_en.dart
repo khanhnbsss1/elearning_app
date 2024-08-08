@@ -197,6 +197,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "download": MessageLookupByLibrary.simpleMessage("Download"),
         "duration_str": MessageLookupByLibrary.simpleMessage("Duration"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("Ecommerce"),
+        "edit_lesson_str":
+            MessageLookupByLibrary.simpleMessage("Edit a lesson"),
         "edit_str": MessageLookupByLibrary.simpleMessage("Edit"),
         "elevated_button":
             MessageLookupByLibrary.simpleMessage("Elevated button"),

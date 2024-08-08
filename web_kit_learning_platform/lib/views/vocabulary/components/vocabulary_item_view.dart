@@ -73,6 +73,16 @@ class VocabularyItemView extends StatelessWidget {
                             Gap(Dimens.size6),
                             InkWell(
                               onTap: () {
+                                if(onViewDetail!=null)
+                                {
+                                  onViewDetail!(vocabularyInfo);
+                                }
+                              },
+                              child: Icon(Icons.remove_red_eye, color: ColorConst.colorIconGrays.withOpacity(0.5),size: Dimens.size15,),
+                            ),
+                            Gap(Dimens.size6),
+                            InkWell(
+                              onTap: () {
                                 if(onEdit!=null)
                                 {
                                   onEdit!(vocabularyInfo);
