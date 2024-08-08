@@ -1,6 +1,7 @@
 
 import 'package:webkit/base/services/base_request/models/page_model.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
+import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 
 class LessonListResponseModel extends PageModel{
   List<LessonInfo>? content;
@@ -52,6 +53,7 @@ class LessonInfo {
   String? updatedBy;
   String? note;
   UploadFileResponseInfo? documentUploadInfo;
+  List<VocabularyInfo>? vocabularies;
   LessonInfo(
       {this.id,
         this.subName,
@@ -81,6 +83,12 @@ class LessonInfo {
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
     note = json['note'];
+    if (json['vocabularies'] != null) {
+      vocabularies = <VocabularyInfo>[];
+      json['vocabularies'].forEach((v) {
+        vocabularies!.add(new VocabularyInfo.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {

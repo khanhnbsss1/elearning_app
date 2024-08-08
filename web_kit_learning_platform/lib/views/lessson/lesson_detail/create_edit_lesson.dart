@@ -334,7 +334,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
           suffixIcon: Visibility(
             visible: enableDocumentsLink,
             child: IconButton(
-              icon: Icon(Icons.upload_file),
+              icon: Icon(Icons.cloud_upload_rounded, color: ColorConst.mainColor,),
               onPressed: () async {
                 FilePickerResult? result = await FilePicker.platform.pickFiles(
                     type: FileType.custom, allowedExtensions: [

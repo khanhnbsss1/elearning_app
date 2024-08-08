@@ -135,15 +135,6 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
             buildStudyTitle(),
             buildStudyUI(),
             buildQuiz(),
-/*
-            BuildTabBar(
-              widgets: [
-                buildStudyOverview(),
-                buildStudyReview(),
-                buildStudyQuiz(),
-              ],
-              titles: const ['Overview', 'Review', 'Quiz'],
-            ),*/
           ],
         ),
       ),
@@ -506,41 +497,9 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                       ),
                       StatefulBuilder(
                         builder: (BuildContext context, void Function(void Function()) setState) {
-                          return InkWell(
-                              onTap: () async {
-                                final player = AudioPlayer();
-                                player.playerStateStream.listen(
-                                  (event) {
-                                    switch (event.processingState) {
-                                      case ProcessingState.idle:
-                                      // TODO: Handle this case.
-                                      case ProcessingState.loading:
-                                      // TODO: Handle this case.
-                                      case ProcessingState.buffering:
-                                      // TODO: Handle this case.
-                                      case ProcessingState.ready:
-                                        // TODO: Handle this case.
-                                        setState(
-                                          () {
-                                            isOnVolume = true;
-                                          },
-                                        );
-                                      case ProcessingState.completed:
-                                        // TODO: Handle this case.
-                                        setState(
-                                          () {
-                                            isOnVolume = false;
-                                          },
-                                        );
-                                    }
-                                  },
-                                ); // Create a player
-                                await player.setUrl('https://foo.com/bar.mp3');
-                                player.play();
-                              },
-                              child: AudioSpeaker(
-                                url: word.audio?.link ?? "",
-                              ));
+                          return AudioSpeaker(
+                            url: word.audio?.link ?? "",
+                          );
                         },
                       )
                     ],

@@ -33,6 +33,7 @@ import 'package:webkit/views/auth/register.dart';
 import 'package:webkit/views/auth/register_2.dart';
 import 'package:webkit/views/auth/reset_password.dart';
 import 'package:webkit/views/auth/reset_password_2.dart';
+import 'package:webkit/views/course/course_detail/course_study/course_study.dart';
 import 'package:webkit/views/course/course_list/course_list.dart';
 import 'package:webkit/views/course/my_course/my_course_list.dart';
 import 'package:webkit/views/forms/basic_page.dart';
@@ -100,7 +101,13 @@ getPageRoute() {
         name: Routes.courseList,
         page: () =>  CourseList(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
-
+    GetPage(
+        name: Routes.courseStudy,
+        page: () {
+          final arguments = Get.arguments;
+          return CourseStudy1(key: UniqueKey(),courseInfo: arguments['courseInfo'] ,);
+        },
+        middlewares: [AuthMiddleware()]),
     ///--------------- Course ---------------///
     GetPage(
         name: Routes.vocabularyList,
