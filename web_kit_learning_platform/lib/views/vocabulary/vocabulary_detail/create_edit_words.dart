@@ -257,8 +257,8 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
       width: double.infinity,
       child: Container(
         padding: EdgeInsets.all(16),
-        margin: EdgeInsets.all(16),
-        decoration: BoxDecoration(border: Border.all(color: ColorConst.blackColor), borderRadius: BorderRadius.circular(10)),
+        margin: EdgeInsets.all(8),
+        decoration: BoxDecoration(border: Border.all(color: ColorConst.blackColor, width: 0.5), borderRadius: BorderRadius.circular(20)),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

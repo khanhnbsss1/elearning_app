@@ -109,7 +109,9 @@ class VocabularyInfo {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
+    if(id!=null) {
+      data['id'] = id;
+    }
     data['simplified'] = simplified;
     data['traditional'] = traditional;
     data['pinyin_tones'] = pinyinTones;
@@ -160,12 +162,12 @@ class VocabularyInfo {
         if((sentenceInfos?.length??0) >1)
           {
             sentenceInfos?.removeLast();
-            data['example'] = sentenceInfos!.map((v) => v.toJson()).toList();
+            data['examples'] = sentenceInfos!.map((v) => v.toJson()).toList();
           }
       }
       else
         {
-          data['example'] = sentenceInfos!.map((v) => v.toJson()).toList();
+          data['examples'] = sentenceInfos!.map((v) => v.toJson()).toList();
         }
     }
     return data;

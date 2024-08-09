@@ -22,13 +22,20 @@ class LessonDetailState extends Equatable {
   LessonActionType? lessonActionType;
   LessonInfo? lessonInfo;
   List<VocabularyInfo>?listOfWord;
+  List<VocabularyInfo>?listOfWordAdd;
+  List<VocabularyInfo>?listOfWordRemove;
+
   LessonDetailState({
     this.blocStatus,
     this.lessonActionType,
     this.lessonInfo,
-    this.listOfWord
+    this.listOfWord,
+    this.listOfWordAdd,
+    this.listOfWordRemove
   }){
     listOfWord??=[];
+    listOfWordAdd??=[];
+    listOfWordRemove??=[];
   }
 
 
@@ -36,7 +43,9 @@ class LessonDetailState extends Equatable {
     LessonDetailStatus? blocStatus,
     LessonActionType? lessonActionType,
     LessonInfo? lessonInfo,
-    List<VocabularyInfo>?listOfWord
+    List<VocabularyInfo>?listOfWord,
+    List<VocabularyInfo>?listOfWordAdd,
+    List<VocabularyInfo>?listOfWordRemove
   })
   {
     return LessonDetailState(
@@ -44,10 +53,11 @@ class LessonDetailState extends Equatable {
       lessonActionType: lessonActionType??this.lessonActionType,
       lessonInfo: lessonInfo??this.lessonInfo,
       listOfWord: listOfWord??this.listOfWord,
-
+      listOfWordAdd: listOfWordAdd??this.listOfWordAdd,
+      listOfWordRemove: listOfWordRemove??this.listOfWordRemove,
     );
   }
   @override
-  List<Object?> get props => [blocStatus,lessonActionType,lessonInfo, listOfWord];
+  List<Object?> get props => [blocStatus,lessonActionType,lessonInfo, listOfWord, listOfWordAdd];
 
 }

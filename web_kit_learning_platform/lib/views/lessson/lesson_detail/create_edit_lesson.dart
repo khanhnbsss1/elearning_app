@@ -373,14 +373,32 @@ class _CreateEditLesson extends State<CreateEditLesson>
       isRequirement: true,
       child: SearchWordDropDown(
         exitsWords: state.listOfWord??[],
-        allWords: [],
+        allWords: const [],
         onAddWords: (tags) {
+          state.listOfWordAdd!.add(tags);
           state.listOfWord!.add(tags);
-           BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateWordsEvent(listOfWord: state.listOfWord??[]));
+          if((state.listOfWordRemove??[]).where((element) => element.id == tags.id).isNotEmpty)
+            {
+              (state.listOfWordRemove??[]).removeWhere((element) => element.id == tags.id,);
+            }
+           BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateWordsEvent(
+               listOfWord: state.listOfWord??[], 
+               listOfWordAdd: state.listOfWordAdd,
+             listOfWordRemove: state.listOfWordRemove
+           ));
         },
         onRemoveWords: (tags) {
            (state.listOfWord??[]).removeWhere((element) => element.id == tags.id,);
-           BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateWordsEvent(listOfWord: state.listOfWord??[]));
+           (state.listOfWordRemove??[]).add(tags);
+           if((state.listOfWordAdd??[]).where((element) => element.id == tags.id).isNotEmpty)
+           {
+             (state.listOfWordAdd??[]).removeWhere((element) => element.id == tags.id,);
+           }
+           BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateWordsEvent(
+               listOfWord: state.listOfWord??[],
+               listOfWordAdd: state.listOfWordAdd,
+               listOfWordRemove: state.listOfWordRemove
+           ));
         },
       ),
     );

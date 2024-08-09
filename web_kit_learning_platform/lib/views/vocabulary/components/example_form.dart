@@ -257,33 +257,37 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
                                       color: Colors.red,
                                     )
                                         : SizedBox()),
-                                IconButton(
-                                  onPressed: () async {
-                                    FilePickerResult? result = await FilePicker.platform.pickFiles(
-                                      type: FileType.custom,
-                                      allowedExtensions: ['wav', 'mp3'],
-                                    );
-                                    if(result==null) {
-                                      return;
-                                    }
-                                    MultipartFile file = MultipartFile.fromBytes(result.files.first.bytes!.toList(growable: true), filename: result.names[0]);
-                                    UploadFileApi uploadFileApi= UploadFileApi(fileInfo: UploadFileInfo(
-                                        data: SubjectType.vocabulary,
-                                        fileName: result.files.first.name,
-                                        file: file
-                                    ));
-                                    UploadFileResponseInfo? resultUpload = await uploadFileApi.call();
-                                      if (resultUpload != null) {
-                                        setState(() {
-                                          widget.sentenceInfo?.audioFileInfo = resultUpload;
-                                          widget.sentenceInfo?.audioId = resultUpload.id;
-                                          widget.sentenceInfo?.audioLink = resultUpload.link;
-                                          audioSentenceController.text = result.names[0]!;
-                                        });
-
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                  child: IconButton(
+                                    style: TextButton.styleFrom(backgroundColor: ColorConst.whiteColor, foregroundColor: Colors.white),
+                                    onPressed: () async {
+                                      FilePickerResult? result = await FilePicker.platform.pickFiles(
+                                        type: FileType.custom,
+                                        allowedExtensions: ['wav', 'mp3'],
+                                      );
+                                      if(result==null) {
+                                        return;
                                       }
-                                  },
-                                  icon: Icon(Icons.upload_file),
+                                      MultipartFile file = MultipartFile.fromBytes(result.files.first.bytes!.toList(growable: true), filename: result.names[0]);
+                                      UploadFileApi uploadFileApi= UploadFileApi(fileInfo: UploadFileInfo(
+                                          data: SubjectType.vocabulary,
+                                          fileName: result.files.first.name,
+                                          file: file
+                                      ));
+                                      UploadFileResponseInfo? resultUpload = await uploadFileApi.call();
+                                        if (resultUpload != null) {
+                                          setState(() {
+                                            widget.sentenceInfo?.audioFileInfo = resultUpload;
+                                            widget.sentenceInfo?.audioId = resultUpload.id;
+                                            widget.sentenceInfo?.audioLink = resultUpload.link;
+                                            audioSentenceController.text = result.names[0]!;
+                                          });
+                                  
+                                        }
+                                    },
+                                    icon: Icon(Icons.cloud_upload_rounded, color:  ColorConst.mainColor, size: 14,),
+                                  ),
                                 ),
                               ],
                             ),
