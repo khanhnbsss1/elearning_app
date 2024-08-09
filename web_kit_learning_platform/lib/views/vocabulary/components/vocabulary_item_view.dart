@@ -39,7 +39,7 @@ class VocabularyItemView extends StatelessWidget {
                 border: Border(
                   bottom: BorderSide(
                     color: ColorConst.dividerColor,
-                    width: 1
+                    width: 0.3
                   )
                 )
               ),
@@ -59,8 +59,7 @@ class VocabularyItemView extends StatelessWidget {
                           .copyWith(
                           fontWeight: FontWeight.bold,
                           // fontSize: Dimens.size24,
-                          fontSize: ResponsiveInfo.isPhone()?Dimens.size20:Dimens.size18,
-                          color: Color.fromRGBO(163, 20, 19, 1.0)),
+                          fontSize: ResponsiveInfo.isPhone()?Dimens.size20:Dimens.size18,),
                       maxLines: 1,
                     ),
                     Row(
@@ -71,35 +70,71 @@ class VocabularyItemView extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Gap(Dimens.size6),
-                            InkWell(
-                              onTap: () {
-                                if(onViewDetail!=null)
-                                {
-                                  onViewDetail!(vocabularyInfo);
-                                }
-                              },
-                              child: Icon(Icons.remove_red_eye, color: ColorConst.colorIconGrays.withOpacity(0.5),size: Dimens.size15,),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: ColorConst.mainColor.withOpacity(0.02),
+                                  borderRadius: BorderRadius.circular(Dimens.size40)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: InkWell(
+                                    onTap: () {
+                                      if(onViewDetail!=null)
+                                      {
+                                        onViewDetail!(vocabularyInfo);
+                                      }
+                                    },
+                                    child: Icon(Icons.remove_red_eye, color: ColorConst.mainColor.withOpacity(0.5),size: Dimens.size15,),
+                                  ),
+                                ),
+                              ),
                             ),
+                            
                             Gap(Dimens.size6),
-                            InkWell(
-                              onTap: () {
-                                if(onEdit!=null)
-                                {
-                                  onEdit!(vocabularyInfo);
-                                }
-                              },
-                              child: Icon(Icons.edit, color: ColorConst.colorIconGrays.withOpacity(0.5),size: Dimens.size15,),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: ColorConst.mainColor.withOpacity(0.02),
+                                  borderRadius: BorderRadius.circular(Dimens.size40)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                    child:  InkWell(
+                                      onTap: () {
+                                        if(onEdit!=null)
+                                        {
+                                          onEdit!(vocabularyInfo);
+                                        }
+                                      },
+                                      child: Icon(Icons.edit, color: ColorConst.mainColor.withOpacity(0.5),size: Dimens.size15,),
+                                    ),
+                                ),
+                              ),
                             ),
+                           
                             Gap(Dimens.size6),
-                            InkWell(
-                              onTap: () {
-                                if(onDelete!=null)
-                                {
-                                  onDelete!(vocabularyInfo);
-                                }
-                              },
-                              child: Icon(Icons.delete, color: ColorConst.colorIconGrays.withOpacity(0.5),size: Dimens.size15,),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: ColorConst.mainColor.withOpacity(0.02),
+                                  borderRadius: BorderRadius.circular(Dimens.size40)
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: InkWell(
+                                    onTap: () {
+                                      if(onDelete!=null)
+                                      {
+                                        onDelete!(vocabularyInfo);
+                                      }
+                                    },
+                                    child: Icon(Icons.delete, color: ColorConst.mainColor.withOpacity(0.5),size: Dimens.size15,),
+                                  ),
+                                ),
+                              ),
                             ),
+                            
                             Gap(Dimens.size6),
                           ],
                         )

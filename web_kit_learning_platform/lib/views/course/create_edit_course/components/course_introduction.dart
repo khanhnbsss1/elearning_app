@@ -101,6 +101,8 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
             border: Border.all(
               color: ColorConst.colorHintTextSearch,
             ),
+              borderRadius: BorderRadius.circular(Dimens.size20)
+
           ),
           padding: EdgeInsets.all(Dimens.size16),
           child: SingleChildScrollView(

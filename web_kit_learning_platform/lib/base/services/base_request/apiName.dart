@@ -61,7 +61,10 @@ class ApiName {
  /// them tu dien
   final String addVocabulary = "/create-vocabulary";
   final String getListVocabulary = "/get-list";
-  
+  final String updateVocabulary = "/update-vocabulary";
+  final String linkVocabulary = "/link-vocabulary";
+  final String unlinkVocabulary = "/unlink-multiple-vocabulary";
+
   /// file
   final String addUploadFile = "/upload-file";
   final String addUploadMultiFile = "/upload-multiple-file";

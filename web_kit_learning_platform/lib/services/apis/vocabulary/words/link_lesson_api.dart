@@ -1,13 +1,13 @@
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
+import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 
-class UnLinkWordApi extends BaseApiRequest {
-  int courseId;
+class LinkWordApi extends BaseApiRequest {
+  List<VocabularyInfo> vocabularyInfos;
   int lessonId;
-  String subject;
-  UnLinkWordApi({required this.courseId, required this.lessonId, required this.subject}):super(
+  LinkWordApi({required this.vocabularyInfos, required this.lessonId,}):super(
     serviceType: SERVICE_TYPE.LESSON,
-    apiName: ApiName.getInstance().unlinkLesson,
+    apiName: ApiName.getInstance().linkVocabulary,
   );
 
   Future<dynamic> call() async {
@@ -20,18 +20,15 @@ class UnLinkWordApi extends BaseApiRequest {
       return null;
     }
     else
-    {     
-      ToastUtils.showToastSuccess(L10nX.getStr.success);
+    {
       return result;
     }
   }
 
   Future<void> getAuthorization() async {
     await setApiBody({
-      "id":lessonId,
-      "courseId":courseId,
-      "subName":subject,
-
+      "vocabularyIds":vocabularyInfos.map((e) => e.id,).toList().join(','),
+      "lectureId":lessonId,
     });
   }
 

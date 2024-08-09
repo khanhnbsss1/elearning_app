@@ -107,18 +107,17 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                             visible: boxConstraints.maxWidth > 800,
                             child: Container(
                               decoration: BoxDecoration(
-                                border: Border(left: BorderSide(
-                                  color: ColorConst.colorIconGrays,
-                                  width: 0.5
-                                ))
+  /*                              border: Border(left: BorderSide(
+                                  color: ColorConst.blackColor,
+                                  width: 0.1
+                                ))*/
                               ),
-                              padding: EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 16, top: 32),
                               constraints: BoxConstraints(
                                 minHeight: MediaQuery.of(context).size.height
                               ),
                               child: Column(
                                 children: [
-                                  Gap(Dimens.size16),
                                   buildSubjectList(),
                                 ],
                               ),
@@ -154,19 +153,19 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   }
 
   Widget buildVideo() {
-    return SizedBox(
+    return Container(
       height: 450,
+      decoration: BoxDecoration(
+        color: Colors.black
+      ),
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 400,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: VideoPlayer(
-            videoPlayerModel: VideoPlayerModel(title: "", 
-                link: 
-                //(_state.selectLessonInfo?.link??"").isNotEmpty?(_state.selectLessonInfo?.link??""):
-                "https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4" //_state.courseInfo?.videoPreview ?? ""
-            ),
+        child: VideoPlayer(
+          videoPlayerModel: VideoPlayerModel(title: "", 
+              link: 
+              //(_state.selectLessonInfo?.link??"").isNotEmpty?(_state.selectLessonInfo?.link??""):
+              "https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4" //_state.courseInfo?.videoPreview ?? ""
           ),
         ),
       ),
@@ -246,7 +245,8 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                             InkWell(
                               child: Card(
                                 elevation: 1,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16),),
+                                
                                 child: Container(
                                   margin: EdgeInsets.all(16),
                                   child: Column(
@@ -288,7 +288,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                                                     minWidth: 100,
                                                   ),
                                                   decoration: BoxDecoration(
-                                                    color: Colors.grey,
+                                                    color: Color(0xFFcccccc),
                                                     borderRadius: BorderRadius.circular(20),
                                                   ),
                                                   child: Stack(children: [
@@ -296,7 +296,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                                                       width: constraints.maxWidth * _checkProgression(subjectIndex: subjectIndex),
                                                       height: 20,
                                                       decoration: BoxDecoration(
-                                                        color: Colors.red,
+                                                        color: Color(0xFF666666),
                                                         borderRadius: BorderRadius.circular(20),
                                                       ),
                                                     ),
@@ -371,7 +371,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                               children: [
                                 Expanded(
                                   child: Text(
-                                    '$subjectIndex.$lectureIndex. ${L10nX.getStr.lecture_name_str} $lectureIndex: ${lessonInfo.lectureName}',
+                                    '$subjectIndex.$lectureIndex. ${lessonInfo.lectureName}',
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                   ),
@@ -388,7 +388,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                                     height: 24,
                                     decoration: BoxDecoration(
                                         border: Border.all(
-                                      color: Colors.red,
+                                      color: ColorConst.colorIconGrays,
                                     )),
                                     child: Align(
                                       alignment: Alignment.center,

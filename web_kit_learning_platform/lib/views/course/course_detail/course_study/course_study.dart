@@ -1,9 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/views/course/create_edit_course/components/build_tab_bar.dart';
 import '../../../../helpers/utils/ui_mixins.dart';
 import '../../../../services/apis/course/course_detail/models/course_detail_model.dart';
 import '../../../layouts/layout.dart';
@@ -52,7 +49,7 @@ class _CourseStudyState extends State<CourseStudy1>
           style: TextStyleConstant.textStyleBlack20w700,
         ),
         padding: EdgeInsets.zero,
-        showBackButton: true,
+        showBackButton: false,
         isScroll: false,
         child: Container(
           decoration: BoxDecoration(color: ColorConst.whiteColor),

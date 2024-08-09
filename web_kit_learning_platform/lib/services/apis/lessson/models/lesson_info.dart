@@ -83,7 +83,7 @@ class LessonInfo {
     lectureName = json['lecture_name']?? json['name'];
     link = json['lecture_link']??json['link'];
     docId = json['doc_id'];
-    docName = json['docName'];
+    docName = json['doc_name'];
     mode = json['mode'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -115,27 +115,26 @@ class LessonInfo {
     if(docId!=null) {
       data['file_id'] = docId;
     }
-    if(docName!=null&&docName!.isNotEmpty) {
+/*    if(docName!=null&&docName!.isNotEmpty) {
       data['doc_name'] = docName;
-    }
+    }*/
     if(link!=null) {
       data['link'] = link;
     }
-    if(docLink!=null&&docLink!.isNotEmpty) {
+/*    if(docLink!=null&&docLink!.isNotEmpty) {
       data['doc_link'] = docLink;
-    }
+    }*/
     if(mode!=null) {
       data['mode'] = mode;
     }
-
-
+    
     if(testId!=null) {
       data['test_id'] = testId;
     }
     
-    if(testName!=null && testName!.isNotEmpty) {
+/*    if(testName!=null && testName!.isNotEmpty) {
       data['test_name'] = testName;
-    }
+    }*/
 
     if(createdAt!=null&&createdAt!.isNotEmpty) {
       data['created_at'] = createdAt;

@@ -11,7 +11,6 @@ import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/services/apis/tags/models/tag_info.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
@@ -152,7 +151,7 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
     return Container(
       decoration: BoxDecoration(
           border: Border(
-              bottom: BorderSide(color: ColorConst.dividerColor)
+              bottom: BorderSide(color: ColorConst.dividerColor, width: 0.2)
           )
       ),
       padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),

@@ -105,7 +105,11 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                         widthOfListRatio: 0.2,
                         enableDragIcon: false,
                         list: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType),
-                        body: buildVocabularyDetail(state: state),
+                        body: Container(
+                          decoration: BoxDecoration(
+                            border: Border(left: BorderSide(color: ColorConst.mainColor, width: 0.1))
+                          ),
+                            child: buildVocabularyDetail(state: state)),
                       ));
                 }
               else
@@ -186,7 +190,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
     return Container(
       decoration: BoxDecoration(
           border: Border(
-              bottom: BorderSide(color: ColorConst.dividerColor)
+              bottom: BorderSide(color: ColorConst.blackColor, width: 0.2)
           )
       ),
       padding: EdgeInsets.symmetric(vertical: Dimens.size8),
@@ -250,7 +254,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                 InkWell(
                     onTap: () {
                       // CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
-                      CreateEditWordsPage().show(context);
+                      CreateEditWordsPage(wordsPageActionType: WordsPageActionType.create, key: UniqueKey(),).show(context);
                     },
                     child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
               ],
@@ -275,11 +279,16 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
 
             },
             onEdit: (p0) {
-              CreateEditWordsPage(vocabularyInfo: p0,wordsPageActionType: WordsPageActionType.edit,).show(context);
-
+              CreateEditWordsPage(
+                key: UniqueKey(),
+                vocabularyInfo: p0,
+                wordsPageActionType: WordsPageActionType.edit,).show(context);
             },
             onViewDetail: (p0) {
-              CreateEditWordsPage(vocabularyInfo: p0,wordsPageActionType: WordsPageActionType.view,).show(context);
+              CreateEditWordsPage(
+                key: UniqueKey(),
+                vocabularyInfo: p0,
+                wordsPageActionType: WordsPageActionType.view,).show(context);
             },
           ),)
             

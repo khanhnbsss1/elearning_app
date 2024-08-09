@@ -52,43 +52,92 @@ class TagItemView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      '${tagInfo.id}. ${tagInfo.name} \n' ?? "",
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyleConstant
-                          .normalTextOnBackGroundColorStyle16w400.copyWith(                         
-                          fontSize: ResponsiveInfo.isPhone()?Dimens.size18:Dimens.size16,
-                      ),
-                      maxLines: 1,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              color: ColorConst.mainColor.withOpacity(0.05),
+                              borderRadius: BorderRadius.circular(Dimens.size40)
+                          ),
+                          width: Dimens.size50,
+                          height: Dimens.size50,
+                          
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: Text(
+                                '${tagInfo.id}',
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyleConstant
+                                    .normalTextOnBackGroundColorStyle16w400.copyWith(
+                                  color: ColorConst.mainColor,
+                                  fontSize: ResponsiveInfo.isPhone()?Dimens.size18:Dimens.size16,
+                                ),
+                                maxLines: 1,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Gap(Dimens.size8),
+                        Text(
+                          '${tagInfo.name}' ?? "",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyleConstant
+                              .normalTextOnBackGroundColorStyle16w400.copyWith(
+                            fontSize: ResponsiveInfo.isPhone()?Dimens.size18:Dimens.size16,
+                          ),
+                          maxLines: 1,
+                        ),
+                      ],
                     ),
+                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-/*                        InkWell(
-                          onTap: () {
-                            
-                          },
-                          child: Icon(Icons.remove_red_eye, color: ColorConst.colorIconRed,size: Dimens.size20,),
-                        ),*/
                         Gap(Dimens.size6),
-                        InkWell(
-                          onTap: () {
-                            if(onEdit!=null) {
-                              onEdit!(tagInfo);
-                            }
-                          },
-                          child: Icon(Icons.edit, color: ColorConst.colorIconGrays.withOpacity(0.5),size: Dimens.size20,),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: ColorConst.mainColor.withOpacity(0.02),
+                              borderRadius: BorderRadius.circular(Dimens.size40)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: InkWell(
+                                onTap: () {
+                                  if(onEdit!=null) {
+                                    onEdit!(tagInfo);
+                                  }
+                                },
+                                child: Icon(Icons.edit, color: ColorConst.mainColor.withOpacity(0.5),size: Dimens.size20,),
+                              ),
+                            ),
+                          ),
                         ),
+                        
                         Gap(Dimens.size6),
-                        InkWell(
-                          onTap: () {
-                            if(onDelete!=null) {
-                              onDelete!(tagInfo);
-                            }
-                          },
-                          child: Icon(Icons.delete, color: ColorConst.colorIconGrays.withOpacity(0.5),size: Dimens.size20,),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: ColorConst.mainColor.withOpacity(0.02),
+                              borderRadius: BorderRadius.circular(Dimens.size40)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: InkWell(
+                                onTap: () {
+                                  if(onDelete!=null) {
+                                    onDelete!(tagInfo);
+                                  }
+                                },
+                                child: Icon(Icons.delete, color: ColorConst.mainColor.withOpacity(0.5),size: Dimens.size20,),
+                              ),
+                            ),
+                          ),
                         ),
+                        
                         Gap(Dimens.size6),
                       ],
                     )

@@ -30,7 +30,7 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
   TextEditingController translationVNSentenceController = TextEditingController();
   TextEditingController pinyionSentenceController = TextEditingController();
   TextEditingController audioSentenceController = TextEditingController();
-  List<String>oldText =[];
+  List<String> oldText =[];
   @override
   void initState() {
     // TODO: implement initState
@@ -112,6 +112,7 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
                             ),
                           ),
                           onChanged: (value) {
+                            updateDataToSentenceInfo();
                             if(value.isNotEmpty && oldText.elementAt(0).isEmpty || value.isEmpty && oldText.elementAt(0).isNotEmpty)
                               {
                                 setState(() {
@@ -166,6 +167,8 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
                             return null;
                           },
                           onChanged: (value) {
+                            updateDataToSentenceInfo();
+
                             if(value.isNotEmpty && oldText.elementAt(1).isEmpty || value.isEmpty && oldText.elementAt(1).isNotEmpty)
                             {
                               setState(() {
@@ -215,6 +218,8 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
                             return null;
                           },
                           onChanged: (value) {
+                            updateDataToSentenceInfo();
+
                             if(value.isNotEmpty && oldText.elementAt(2).isEmpty || value.isEmpty && oldText.elementAt(2).isNotEmpty)
                             {
                               setState(() {
@@ -252,38 +257,44 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
                                       color: Colors.red,
                                     )
                                         : SizedBox()),
-                                IconButton(
-                                  onPressed: () async {
-                                    FilePickerResult? result = await FilePicker.platform.pickFiles(
-                                      type: FileType.custom,
-                                      allowedExtensions: ['wav', 'mp3'],
-                                    );
-                                    if(result==null) {
-                                      return;
-                                    }
-                                    MultipartFile file = MultipartFile.fromBytes(result.files.first.bytes!.toList(growable: true), filename: result.names[0]);
-                                    UploadFileApi uploadFileApi= UploadFileApi(fileInfo: UploadFileInfo(
-                                        data: SubjectType.vocabulary,
-                                        fileName: result.files.first.name,
-                                        file: file
-                                    ));
-                                    UploadFileResponseInfo? resultUpload = await uploadFileApi.call();
-                                      if (resultUpload != null) {
-                                        setState(() {
-                                          widget.sentenceInfo?.audioFileInfo = resultUpload;
-                                          widget.sentenceInfo?.audioId = resultUpload.id;
-                                          widget.sentenceInfo?.audioLink = resultUpload.link;
-                                          audioSentenceController.text = result.names[0]!;
-                                        });
-
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                                  child: IconButton(
+                                    style: TextButton.styleFrom(backgroundColor: ColorConst.whiteColor, foregroundColor: Colors.white),
+                                    onPressed: () async {
+                                      FilePickerResult? result = await FilePicker.platform.pickFiles(
+                                        type: FileType.custom,
+                                        allowedExtensions: ['wav', 'mp3'],
+                                      );
+                                      if(result==null) {
+                                        return;
                                       }
-                                  },
-                                  icon: Icon(Icons.upload_file),
+                                      MultipartFile file = MultipartFile.fromBytes(result.files.first.bytes!.toList(growable: true), filename: result.names[0]);
+                                      UploadFileApi uploadFileApi= UploadFileApi(fileInfo: UploadFileInfo(
+                                          data: SubjectType.vocabulary,
+                                          fileName: result.files.first.name,
+                                          file: file
+                                      ));
+                                      UploadFileResponseInfo? resultUpload = await uploadFileApi.call();
+                                        if (resultUpload != null) {
+                                          setState(() {
+                                            widget.sentenceInfo?.audioFileInfo = resultUpload;
+                                            widget.sentenceInfo?.audioId = resultUpload.id;
+                                            widget.sentenceInfo?.audioLink = resultUpload.link;
+                                            audioSentenceController.text = result.names[0]!;
+                                          });
+                                  
+                                        }
+                                    },
+                                    icon: Icon(Icons.cloud_upload_rounded, color:  ColorConst.mainColor, size: 14,),
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                           validator: (value) {
+                            updateDataToSentenceInfo();
+
                             if (value == null || value.isEmpty) {
                               return 'Please enter $value';
                             }
@@ -333,20 +344,6 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
                   SizedBox(
                     height: 8,
                   ),
-              /*
-                  Opacity(
-                    opacity: enaAbleSaveSentenceInfo ? 1.0 : 0.1,
-                    child: IgnorePointer(
-                      ignoring: !enaAbleSaveSentenceInfo,
-                      child: InkWell(
-                          onTap: () {
-                          },
-                          child: Icon(
-                            Icons.edit,
-                          )),
-                    ),
-                  ),
-              */
                   SizedBox(
                     height: 8,
                   ),
@@ -375,5 +372,12 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
         ),
       ),
     );
+  }
+  void updateDataToSentenceInfo(){
+      widget.sentenceInfo?.chineseSentence = chineseSentenceController.text;
+      widget.sentenceInfo?.translationVn = translationVNSentenceController.text;
+      widget.sentenceInfo?.pinyionSentence = pinyionSentenceController.text;
+      widget.sentenceInfo?.audioLink = audioSentenceController.text;
+    
   }
 }

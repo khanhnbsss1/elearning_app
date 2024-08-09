@@ -13,9 +13,12 @@ class LessonDetailInitEvent extends LessonDetailEvent {
 }
 class LessonDetailUpdateWordsEvent extends LessonDetailEvent {
   List<VocabularyInfo>listOfWord;
-  LessonDetailUpdateWordsEvent({required this.listOfWord});
+  List<VocabularyInfo>?listOfWordRemove;
+  List<VocabularyInfo>?listOfWordAdd;
+
+  LessonDetailUpdateWordsEvent({required this.listOfWord, this.listOfWordAdd, this.listOfWordRemove});
   @override
-  List<Object?> get props => [listOfWord];
+  List<Object?> get props => [listOfWord, listOfWordAdd, listOfWordRemove];
 }
 class LessonDetailUpdateLessonEvent extends LessonDetailEvent {
   LessonInfo lessonInfo;

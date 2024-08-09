@@ -9,6 +9,7 @@ enum CreateEditWordStatus {
   onError,
   onSaveSentence,
   onCreateNewSentence,
+  onUpdateWord,
   unknown
 }
 
@@ -31,7 +32,7 @@ class CreateEditWordState extends Equatable {
     this.wordsPageActionType,
   }){
     vocabularyInfo??=VocabularyInfo();
-    addWordController ??= Get.put(AddWordController(vocabularyInfo: vocabularyInfo));
+    addWordController ??= AddWordController(vocabularyInfo: vocabularyInfo);
   }
 
 

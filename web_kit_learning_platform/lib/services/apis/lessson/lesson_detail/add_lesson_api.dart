@@ -16,7 +16,7 @@ class AddLessonApi extends BaseApiRequest {
   Future<dynamic> call() async {
     await getAuthorization();
     dynamic result = await postRequestAPI();
-    if(result.runtimeType == String && (result as String).isEmpty)
+    if(result.runtimeType == int)
     {
       ToastUtils.showToastSuccess(L10nX.getStr.success);
     }

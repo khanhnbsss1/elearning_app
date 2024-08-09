@@ -49,27 +49,17 @@ class CreateEditLesson extends StatefulWidget {
 
 class _CreateEditLesson extends State<CreateEditLesson>
     with TickerProviderStateMixin, UIMixin {
-  TextEditingController editingControllerLectureName = TextEditingController();
-  TextEditingController editingControllerLectureDescription = TextEditingController();
-  TextEditingController editingControllerLectureVideoLink = TextEditingController();
-  TextEditingController editingControllerLectureDocuments = TextEditingController();
+ 
 
   String mode = 'FREE';
   int price = 0;
-
+  late LessonDetailState _state;
   late bool enableEdit;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    if(widget.lessonInfo?.id!=null)
-      {
-        editingControllerLectureName.text = widget.lessonInfo?.lectureName??"";
-        editingControllerLectureDescription.text = widget.lessonInfo?.note??"";
-        editingControllerLectureVideoLink.text = widget.lessonInfo?.link??"";
-        editingControllerLectureDocuments.text = widget.lessonInfo?.docName??"";
-      }
     enableEdit = widget.lessonActionType!=LessonActionType.view;
   }
   @override
@@ -118,6 +108,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
           state.blocStatus = LessonDetailStatus.unKnown;
         },
         builder: (BuildContext context, state) {
+          _state= state;
           return LayoutBuilder(
             builder: (context, constraints) {
               return Padding(
@@ -154,10 +145,10 @@ class _CreateEditLesson extends State<CreateEditLesson>
                       width: Dimens.size150,
                       onTap: () {
                         state.lessonInfo??= LessonInfo();
-                        state.lessonInfo?.lectureName = editingControllerLectureName.text;
-                        state.lessonInfo?.note = editingControllerLectureDescription.text;
-                        state.lessonInfo?.link = editingControllerLectureVideoLink.text;
-                        state.lessonInfo?.docName = editingControllerLectureName.text;
+                        state.lessonInfo?.lectureName = state.editingControllerLectureName?.text;
+                        state.lessonInfo?.note = state.editingControllerLectureDescription?.text;
+                        state.lessonInfo?.link = state.editingControllerLectureVideoLink?.text;
+                        state.lessonInfo?.docName = state.editingControllerLectureName?.text;
                         state.lessonInfo?.mode = mode;
                         switch(widget.lessonActionType){
                           
@@ -199,7 +190,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
       // titleStyle: ,
       child: TextFormField(
         keyboardType: TextInputType.text,
-        controller: editingControllerLectureName,
+        controller: _state.editingControllerLectureName,
         enabled: enableEdit,
         decoration: InputDecoration(
           labelText: L10nX.getStr.lecture_name_str,
@@ -229,7 +220,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
         // controller: state.controller?.basicValidator.getController('name'),
         keyboardType: TextInputType.text,
         enabled: enableEdit,
-        controller: editingControllerLectureDescription,
+        controller: _state.editingControllerLectureDescription,
         decoration: InputDecoration(
           labelText: L10nX.getStr.description,
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
@@ -265,7 +256,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
         // validator: state.controller?.basicValidator.getValidation('name'),
         // controller: state.controller?.basicValidator.getController('name'),
         keyboardType: TextInputType.text,
-        controller: editingControllerLectureVideoLink,
+        controller: _state.editingControllerLectureVideoLink,
         enabled: enableEdit,
         decoration: InputDecoration(
           labelText: 'Link or youtube',
@@ -318,7 +309,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
         // controller: state.controller?.basicValidator.getController('name'),
         keyboardType: TextInputType.text,
         enabled: enableEdit,
-        controller: editingControllerLectureDocuments,
+        controller: _state.editingControllerLectureDocuments,
         decoration: InputDecoration(
           labelText: L10nX.getStr.document_str,
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
@@ -342,7 +333,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
                 if(result!=null)
                   {
                     MultipartFile file = MultipartFile.fromBytes(result.files.first.bytes!.toList(growable: true), filename: result.names[0]);
-                    editingControllerLectureDocuments.text = file.filename??"";
+                    _state.editingControllerLectureDocuments?.text = file.filename??"";
                     BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUploadDocumentEvent(
                         docInfo: UploadFileInfo(data: SubjectType.lectures, file: file)));
                   }
@@ -373,14 +364,32 @@ class _CreateEditLesson extends State<CreateEditLesson>
       isRequirement: true,
       child: SearchWordDropDown(
         exitsWords: state.listOfWord??[],
-        allWords: [],
+        allWords: const [],
         onAddWords: (tags) {
+          state.listOfWordAdd!.add(tags);
           state.listOfWord!.add(tags);
-           BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateWordsEvent(listOfWord: state.listOfWord??[]));
+          if((state.listOfWordRemove??[]).where((element) => element.id == tags.id).isNotEmpty)
+            {
+              (state.listOfWordRemove??[]).removeWhere((element) => element.id == tags.id,);
+            }
+           BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateWordsEvent(
+               listOfWord: state.listOfWord??[], 
+               listOfWordAdd: state.listOfWordAdd,
+             listOfWordRemove: state.listOfWordRemove
+           ));
         },
         onRemoveWords: (tags) {
            (state.listOfWord??[]).removeWhere((element) => element.id == tags.id,);
-           BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateWordsEvent(listOfWord: state.listOfWord??[]));
+           (state.listOfWordRemove??[]).add(tags);
+           if((state.listOfWordAdd??[]).where((element) => element.id == tags.id).isNotEmpty)
+           {
+             (state.listOfWordAdd??[]).removeWhere((element) => element.id == tags.id,);
+           }
+           BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateWordsEvent(
+               listOfWord: state.listOfWord??[],
+               listOfWordAdd: state.listOfWordAdd,
+               listOfWordRemove: state.listOfWordRemove
+           ));
         },
       ),
     );
