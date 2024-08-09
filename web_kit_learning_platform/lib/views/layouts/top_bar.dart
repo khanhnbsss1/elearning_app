@@ -60,7 +60,7 @@ class _TopBarState extends State<TopBar>
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ( widget.showBackButton??false)? BackButtonCustom(buildContext: context): Gap(Dimens.size200), 
+              ( widget.showBackButton??false)? BackButtonCustom(buildContext: context): SizedBox(), 
               widget.title??SizedBox(),
               Row(
               mainAxisAlignment: MainAxisAlignment.end,
