@@ -579,6 +579,11 @@ class BaseApiRequest {
       if(isShowErrorPopup!){
         NotifyDialog.showDialogOneButton(description: responseErrorCommon.message);
       }
+      else
+        {
+          ToastUtils.showToastError(responseErrorCommon.message??'');
+
+        }
       await onRequestError(int.tryParse(responseErrorCommon.errorCode??"",), responseErrorCommon.message??"");
     }
   }
@@ -618,6 +623,10 @@ class BaseApiRequest {
     if(isShowErrorPopup!) {
       NotifyDialog.showDialogOneButton(description: message);
     }
+    else
+      {
+        ToastUtils.showToastError(message);
+      }
 
   }
   Future<void> handleDataError(dynamic data) async {
@@ -625,6 +634,10 @@ class BaseApiRequest {
     if(isShowErrorPopup!){
       NotifyDialog.showDialogOneButton(description: requesstResponseErrorModel.message);
     }
+    else
+      {
+        ToastUtils.showToastError(requesstResponseErrorModel.message??'');
+      }
 
     await onRequestError(int.tryParse(requesstResponseErrorModel.errorCode!,), requesstResponseErrorModel.message);
   }
