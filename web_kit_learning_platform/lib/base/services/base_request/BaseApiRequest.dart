@@ -61,7 +61,7 @@ class BaseApiRequest {
     requestBody ??=HashMap();
     requestHeader ??=HashMap();
     requestHeader!["Content-Type"] = "application/json";
-    isShowErrorPopup??=true;
+    isShowErrorPopup=false;
     isShowToastError??=true;
     bodyMethod??=BodyMethod.raw;
 
@@ -615,7 +615,9 @@ class BaseApiRequest {
         }
         break;
     }
-    NotifyDialog.showDialogOneButton(description: message);
+    if(isShowErrorPopup!) {
+      NotifyDialog.showDialogOneButton(description: message);
+    }
 
   }
   Future<void> handleDataError(dynamic data) async {
