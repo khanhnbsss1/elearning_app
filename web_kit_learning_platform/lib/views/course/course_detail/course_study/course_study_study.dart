@@ -108,17 +108,16 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                             child: Container(
                               decoration: BoxDecoration(
                                 border: Border(left: BorderSide(
-                                  color: ColorConst.colorIconGrays,
-                                  width: 0.5
+                                  color: ColorConst.colorIconGrays.withOpacity(0.5),
+                                  width: 0.2
                                 ))
                               ),
-                              padding: EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 16, top: 16),
                               constraints: BoxConstraints(
                                 minHeight: MediaQuery.of(context).size.height
                               ),
                               child: Column(
                                 children: [
-                                  Gap(Dimens.size16),
                                   buildSubjectList(),
                                 ],
                               ),
