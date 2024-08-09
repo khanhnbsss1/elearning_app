@@ -409,7 +409,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
               padding: EdgeInsets.only(
                   top: (MediaQuery.of(context).size.width < 1050) ? 60 : 80),
               child: Card(
-                margin: EdgeInsets.only(top: width < 1100 ? 10 : 20),
+                margin: EdgeInsets.only(top: 20),
                 shadowColor: Colors.red,
                 surfaceTintColor: Colors.green,
                 elevation: 5,
@@ -546,34 +546,28 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     ),
                     Row(
                       children: [
-                        TextButton(
-                          onPressed: () {
-                            userProfile == null
-                                ? LoginPage().show(context)
-                                : AppPages.routeName(
-                                Routes.dashboardRoute);
-                          },
-                          style: TextButton.styleFrom(
-                            backgroundColor:
-                            ColorConst.mainColor,
-                            foregroundColor:
-                            ColorConst.whiteColor,
-                          ),
-                          child: Text(
-                            L10nX.getStr.lets_study,
-                            style: TextStyle(
-                              fontSize: 24,
-                              color: Colors.white,
-                            ),
-                            // Text(
-                            //   L10nX.getStr.slogan,
-                            //   style: TextStyle(
-                            //     fontSize: 24,
-                            //     color: Colors.black,
-                            //   ),
-                            // ),
-                          ),
-                        ),
+                        // TextButton(
+                        //   onPressed: () {
+                        //     userProfile == null
+                        //         ? LoginPage().show(context)
+                        //         : AppPages.routeName(
+                        //         Routes.dashboardRoute);
+                        //   },
+                        //   child: Text(
+                        //     L10nX.getStr.lets_study,
+                        //     style: TextStyle(
+                        //       fontSize: 20,
+                        //       color: Colors.black,
+                        //     ),
+                        //     // Text(
+                        //     //   L10nX.getStr.slogan,
+                        //     //   style: TextStyle(
+                        //     //     fontSize: 24,
+                        //     //     color: Colors.black,
+                        //     //   ),
+                        //     // ),
+                        //   ),
+                        // ),
                         SizedBox(
                           width: 16,
                         ),
@@ -764,9 +758,31 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                         child: Center(
                                           child: Column(
                                             children: [
+                                              // TextButton(
+                                              //   onPressed: () {
+                                              //     userProfile == null
+                                              //         ? LoginPage().show(context)
+                                              //         : AppPages.routeName(
+                                              //         Routes.dashboardRoute);
+                                              //   },
+                                              //   child: Text(
+                                              //     L10nX.getStr.lets_study,
+                                              //     style: TextStyle(
+                                              //       fontSize: 20,
+                                              //       color: Colors.black,
+                                              //     ),
+                                              //     // Text(
+                                              //     //   L10nX.getStr.slogan,
+                                              //     //   style: TextStyle(
+                                              //     //     fontSize: 24,
+                                              //     //     color: Colors.black,
+                                              //     //   ),
+                                              //     // ),
+                                              //   ),
+                                              // ),
                                               SizedBox(
                                                 height: 40,
-                                                width: 145,
+                                                width: 120,
                                                 child: ElevatedButton(
                                                   style: ButtonStyle(
                                                     elevation:
@@ -800,7 +816,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                               const SizedBox(height: 16),
                                               SizedBox(
                                                 height: 40,
-                                                width: 145,
+                                                width: 120,
                                                 child: ElevatedButton(
                                                   style: ButtonStyle(
                                                     elevation:
