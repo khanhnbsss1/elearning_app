@@ -18,12 +18,10 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
     on<CourseDetailInitEvent>(_onInit);
     on<CourseDetailSelectLessonEvent>((event, emit) async {
       emit(state.copyWith(
-        blocStatus: AddCourseStatus.unKnown,
+        blocStatus: AddCourseStatus.onLoadingSelectLesson,
       ));
-      MonitorLoading().showLoading('');
       GetLessonDetailApi getLessonDetailApi = GetLessonDetailApi(lessonId: event.selectLessonInfo.id ?? 0);
       state.selectLessonInfo = await getLessonDetailApi.call();
-      MonitorLoading().dismiss();
       emit(state.copyWith(blocStatus: AddCourseStatus.onSelectLesson, selectLessonInfo: state.selectLessonInfo));
     });
   }

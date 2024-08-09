@@ -55,10 +55,9 @@ class VocabularyItemView extends StatelessWidget {
                       '${vocabularyInfo.simplified} \n' ?? "",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyleConstant
-                          .textStyleBlack16w600
+                          .normalTextOnBackGroundColorStyle16w400
                           .copyWith(
-                          fontWeight: FontWeight.bold,
-                          // fontSize: Dimens.size24,
+                          fontWeight: FontWeight.w500,
                           fontSize: ResponsiveInfo.isPhone()?Dimens.size20:Dimens.size18,),
                       maxLines: 1,
                     ),

@@ -143,9 +143,27 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           children: [
             Gap(Dimens.size10),
             buildVideo(),
-            buildStudyTitle(),
-            buildStudyUI(),
-            buildQuiz(),
+            Visibility(
+              visible: _state.blocStatus == AddCourseStatus.onLoadingSelectLesson,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(100),
+                    child: LoadingLogo(loadingType: LoadingType.loadOnPage,),
+                  ),
+                )
+            ),
+            Visibility(
+              visible: _state.blocStatus!= AddCourseStatus.onLoadingSelectLesson,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  buildStudyTitle(),
+                  buildStudyUI(),
+                  buildQuiz(),
+                ],
+              ),
+            ),
+
           ],
         ),
       ),
