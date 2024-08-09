@@ -180,7 +180,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "differences_in_teaching_methods_2":
             MessageLookupByLibrary.simpleMessage("khác biệt "),
         "differences_in_teaching_methods_3":
-            MessageLookupByLibrary.simpleMessage(" trong giảng dạy"),
+            MessageLookupByLibrary.simpleMessage("trong giảng dạy"),
         "discount_str": MessageLookupByLibrary.simpleMessage("Giảm giá"),
         "document_list":
             MessageLookupByLibrary.simpleMessage("Danh sách tài Liệu"),
@@ -273,7 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hộp thoại bên trái"),
         "lesson_list":
             MessageLookupByLibrary.simpleMessage("Danh sách bài học"),
-        "lets_study": MessageLookupByLibrary.simpleMessage("Vào học!"),
+        "lets_study": MessageLookupByLibrary.simpleMessage("Vào học !"),
         "level_str": MessageLookupByLibrary.simpleMessage("Cấp độ"),
         "license_copyright":
             MessageLookupByLibrary.simpleMessage("Giấy phép & bản quyền"),

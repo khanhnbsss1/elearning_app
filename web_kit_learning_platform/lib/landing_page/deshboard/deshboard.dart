@@ -216,70 +216,70 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                 borderRadius: BorderRadius.circular(20),
                                 child: ResponsiveInfo.isPhone()
                                     ? Image.asset(
-                                        'assets/deshboard/winterlandscape.png',
+                                        'assets/deshboard/background.jpg',
                                         height: constraints.maxWidth < 500
                                             ? 250
                                             : 400,
                                         width: constraints.maxWidth,
-                                        fit: BoxFit.cover)
+                                        fit: BoxFit.fill)
                                     : Image.asset(
-                                        'assets/deshboard/winterlandscape.png',
+                                        'assets/deshboard/background.jpg',
                                         height: 600,
                                         width: constraints.maxWidth,
-                                        fit: BoxFit.cover),
+                                        fit: BoxFit.fitWidth),
                               ),
                             );
                           },
                         ),
-                        Positioned(
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          bottom: 100,
-                          child: Align(
-                              alignment: Alignment.bottomCenter,
-                              child: MouseRegion(
-                                onEnter: (_) =>
-                                    setState(() => isHovered = true),
-                                onExit: (_) =>
-                                    setState(() => isHovered = false),
-                                child: GestureDetector(
-                                  child: AnimatedContainer(
-                                    duration: Duration(milliseconds: 100),
-                                    transform: Matrix4.identity()
-                                      ..scale(isHovered ? 1.2 : 1.0),
-                                    child: TextButton(
-                                      onPressed: () {
-                                        userProfile == null
-                                            ? LoginPage().show(context)
-                                            : AppPages.routeName(
-                                                Routes.dashboardRoute);
-                                      },
-                                      style: TextButton.styleFrom(
-                                        backgroundColor:
-                                            ColorConst.mainColor,
-                                        foregroundColor:
-                                            ColorConst.whiteColor,
-                                      ),
-                                      child: Text(
-                                        L10nX.getStr.lets_study,
-                                        style: TextStyle(
-                                          fontSize: 24,
-                                          color: Colors.white,
-                                        ),
-                                        // Text(
-                                        //   L10nX.getStr.slogan,
-                                        //   style: TextStyle(
-                                        //     fontSize: 24,
-                                        //     color: Colors.black,
-                                        //   ),
-                                        // ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )),
-                        )
+                        // Positioned(
+                        //   top: 0,
+                        //   left: 0,
+                        //   right: 0,
+                        //   bottom: 100,
+                        //   child: Align(
+                        //       alignment: Alignment.bottomCenter,
+                        //       child: MouseRegion(
+                        //         onEnter: (_) =>
+                        //             setState(() => isHovered = true),
+                        //         onExit: (_) =>
+                        //             setState(() => isHovered = false),
+                        //         child: GestureDetector(
+                        //           child: AnimatedContainer(
+                        //             duration: Duration(milliseconds: 100),
+                        //             transform: Matrix4.identity()
+                        //               ..scale(isHovered ? 1.2 : 1.0),
+                        //             child: TextButton(
+                        //               onPressed: () {
+                        //                 userProfile == null
+                        //                     ? LoginPage().show(context)
+                        //                     : AppPages.routeName(
+                        //                         Routes.dashboardRoute);
+                        //               },
+                        //               style: TextButton.styleFrom(
+                        //                 backgroundColor:
+                        //                     ColorConst.mainColor,
+                        //                 foregroundColor:
+                        //                     ColorConst.whiteColor,
+                        //               ),
+                        //               child: Text(
+                        //                 L10nX.getStr.lets_study,
+                        //                 style: TextStyle(
+                        //                   fontSize: 24,
+                        //                   color: Colors.white,
+                        //                 ),
+                        //                 // Text(
+                        //                 //   L10nX.getStr.slogan,
+                        //                 //   style: TextStyle(
+                        //                 //     fontSize: 24,
+                        //                 //     color: Colors.black,
+                        //                 //   ),
+                        //                 // ),
+                        //               ),
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       )),
+                        // )
                       ],
                     );
                   });
@@ -520,7 +520,6 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                   children: [
                     Expanded(
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           InkWell(
                               onTap: () {
@@ -547,6 +546,37 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     ),
                     Row(
                       children: [
+                        TextButton(
+                          onPressed: () {
+                            userProfile == null
+                                ? LoginPage().show(context)
+                                : AppPages.routeName(
+                                Routes.dashboardRoute);
+                          },
+                          style: TextButton.styleFrom(
+                            backgroundColor:
+                            ColorConst.mainColor,
+                            foregroundColor:
+                            ColorConst.whiteColor,
+                          ),
+                          child: Text(
+                            L10nX.getStr.lets_study,
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                            ),
+                            // Text(
+                            //   L10nX.getStr.slogan,
+                            //   style: TextStyle(
+                            //     fontSize: 24,
+                            //     color: Colors.black,
+                            //   ),
+                            // ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 16,
+                        ),
                         PopupMenuButton(
                           tooltip: '',
                           padding: const EdgeInsets.all(0),
