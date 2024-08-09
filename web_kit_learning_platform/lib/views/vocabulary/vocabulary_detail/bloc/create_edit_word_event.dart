@@ -32,6 +32,12 @@ class CreateEditWordCreateWordEvent extends CreateEditWordEvent {
   List<Object?> get props => [state];
 }
 
+class CreateEditWordUpdateWordEvent extends CreateEditWordEvent {
+  CreateEditWordState state;
+  CreateEditWordUpdateWordEvent({required this.state});
+  @override
+  List<Object?> get props => [state];
+}
 class CreateEditWordOnSaveSentenceEvent extends CreateEditWordEvent {
   SentenceInfo sentenceInfo;
   CreateEditWordOnSaveSentenceEvent({required this.sentenceInfo});

@@ -30,7 +30,7 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
   TextEditingController translationVNSentenceController = TextEditingController();
   TextEditingController pinyionSentenceController = TextEditingController();
   TextEditingController audioSentenceController = TextEditingController();
-  List<String>oldText =[];
+  List<String> oldText =[];
   @override
   void initState() {
     // TODO: implement initState
@@ -112,6 +112,7 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
                             ),
                           ),
                           onChanged: (value) {
+                            updateDataToSentenceInfo();
                             if(value.isNotEmpty && oldText.elementAt(0).isEmpty || value.isEmpty && oldText.elementAt(0).isNotEmpty)
                               {
                                 setState(() {
@@ -166,6 +167,8 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
                             return null;
                           },
                           onChanged: (value) {
+                            updateDataToSentenceInfo();
+
                             if(value.isNotEmpty && oldText.elementAt(1).isEmpty || value.isEmpty && oldText.elementAt(1).isNotEmpty)
                             {
                               setState(() {
@@ -215,6 +218,8 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
                             return null;
                           },
                           onChanged: (value) {
+                            updateDataToSentenceInfo();
+
                             if(value.isNotEmpty && oldText.elementAt(2).isEmpty || value.isEmpty && oldText.elementAt(2).isNotEmpty)
                             {
                               setState(() {
@@ -284,6 +289,8 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
                             ),
                           ),
                           validator: (value) {
+                            updateDataToSentenceInfo();
+
                             if (value == null || value.isEmpty) {
                               return 'Please enter $value';
                             }
@@ -333,20 +340,6 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
                   SizedBox(
                     height: 8,
                   ),
-              /*
-                  Opacity(
-                    opacity: enaAbleSaveSentenceInfo ? 1.0 : 0.1,
-                    child: IgnorePointer(
-                      ignoring: !enaAbleSaveSentenceInfo,
-                      child: InkWell(
-                          onTap: () {
-                          },
-                          child: Icon(
-                            Icons.edit,
-                          )),
-                    ),
-                  ),
-              */
                   SizedBox(
                     height: 8,
                   ),
@@ -375,5 +368,12 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
         ),
       ),
     );
+  }
+  void updateDataToSentenceInfo(){
+      widget.sentenceInfo?.chineseSentence = chineseSentenceController.text;
+      widget.sentenceInfo?.translationVn = translationVNSentenceController.text;
+      widget.sentenceInfo?.pinyionSentence = pinyionSentenceController.text;
+      widget.sentenceInfo?.audioLink = audioSentenceController.text;
+    
   }
 }

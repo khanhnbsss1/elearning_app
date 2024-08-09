@@ -250,7 +250,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                 InkWell(
                     onTap: () {
                       // CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
-                      CreateEditWordsPage().show(context);
+                      CreateEditWordsPage(wordsPageActionType: WordsPageActionType.create, key: UniqueKey(),).show(context);
                     },
                     child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
               ],
@@ -275,11 +275,16 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
 
             },
             onEdit: (p0) {
-              CreateEditWordsPage(vocabularyInfo: p0,wordsPageActionType: WordsPageActionType.edit,).show(context);
-
+              CreateEditWordsPage(
+                key: UniqueKey(),
+                vocabularyInfo: p0,
+                wordsPageActionType: WordsPageActionType.edit,).show(context);
             },
             onViewDetail: (p0) {
-              CreateEditWordsPage(vocabularyInfo: p0,wordsPageActionType: WordsPageActionType.view,).show(context);
+              CreateEditWordsPage(
+                key: UniqueKey(),
+                vocabularyInfo: p0,
+                wordsPageActionType: WordsPageActionType.view,).show(context);
             },
           ),)
             

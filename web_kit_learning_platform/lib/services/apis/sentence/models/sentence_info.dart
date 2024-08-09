@@ -56,7 +56,7 @@ class SentenceInfo {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id']=id;
+    //data['id']=id;
     data['chinese_sentence']=chineseSentence;
     data['pinyion_sentence']=pinyionSentence;
     data['translation_vn']=translationVn;

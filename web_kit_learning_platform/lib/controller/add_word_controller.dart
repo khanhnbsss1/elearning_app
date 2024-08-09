@@ -9,7 +9,9 @@ import 'my_controller.dart';
 class AddWordController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
   VocabularyInfo ? vocabularyInfo;
-  AddWordController({this.vocabularyInfo});
+  AddWordController({this.vocabularyInfo}){
+    onInit();
+  }
   @override
   void onInit() {
     super.onInit();
@@ -41,7 +43,7 @@ class AddWordController extends MyController {
       'audio',
       required: true,
       label: 'Audio',
-      controller: TextEditingController(text: vocabularyInfo?.audio??""),
+      controller: TextEditingController(text: vocabularyInfo?.audioLink??""),
     );
     basicValidator.addField(
       'image',

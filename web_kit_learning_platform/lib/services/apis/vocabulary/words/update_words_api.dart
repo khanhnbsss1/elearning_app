@@ -1,18 +1,23 @@
 import 'dart:convert';
 
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import '../vocabulary_list/models/vocabulary_models.dart';
 
-class AddWordsApi extends BaseApiRequest {
+class UpdateWordsApi extends BaseApiRequest {
   VocabularyInfo word;
-  AddWordsApi({required this.word}) : super(
+  UpdateWordsApi({required this.word}) : super(
       serviceType: SERVICE_TYPE.Vocabulary,
-      apiName: ApiName().addVocabulary,
-   // bodyMethod: BodyMethod.formData,
+      apiName: ApiName().updateVocabulary,
+  //  bodyMethod: BodyMethod.formData,
   );
   Future<dynamic> call() async {
     await getAuthorization();
-    dynamic data = await postRequestAPI();
+    dynamic data = await putRequestAPI();
+    if(data.runtimeType == String && (data as String).isEmpty)
+      {
+        ToastUtils.showToastSuccess(L10nX.getStr.success);
+      }
     return data;
   }
 

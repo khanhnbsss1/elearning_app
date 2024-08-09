@@ -29,13 +29,16 @@ class CreateEditWordsPage extends StatefulWidget {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return Dialog(
+            key: UniqueKey(),
             child: SizedBox(
-                width: MediaQuery.of(context).size.width * (ResponsiveInfo.isTablet() ? 0.6 : 0.9), height: MediaQuery.of(context).size.height * (ResponsiveInfo.isTablet() ? 0.7 : 0.8), child: this),
+                width: MediaQuery.of(context).size.width * (ResponsiveInfo.isTablet() ? 0.6 : 0.9), 
+                height: MediaQuery.of(context).size.height * (ResponsiveInfo.isTablet() ? 0.7 : 0.8),
+                child: this),
           );
         });
   }
 
-  CreateEditWordsPage({this.vocabularyInfo, this.wordsPageActionType}) {
+  CreateEditWordsPage({super.key,this.vocabularyInfo, this.wordsPageActionType}) {
     wordsPageActionType ??= WordsPageActionType.create;
   }
   VocabularyInfo? vocabularyInfo;
@@ -67,7 +70,8 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
             default:
               break;
           }
-        }, builder: (BuildContext context, state) {
+        }, 
+            builder: (BuildContext context, state) {
           _state = state;
           bool enable = widget.wordsPageActionType != WordsPageActionType.view;
           return Container(
@@ -198,13 +202,46 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                       Padding(
                         padding: const EdgeInsets.all(16),
                         child: Center(
-                            child: ActionButton1(
-                          text: L10nX.getStr.create_str,
-                          width: Dimens.size120,
-                          onTap: () {
-                            BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordCreateWordEvent(state: _state));
-                          },
-                        )),
+                            child: Stack(
+                              children:[
+                                Visibility(
+                                  visible: widget.wordsPageActionType != WordsPageActionType.view,
+                                  child: ActionButton1(
+                                    text:widget.wordsPageActionType == WordsPageActionType.edit?L10nX.getStr.str_update: L10nX.getStr.create_str,
+                                    width: Dimens.size120,
+                                    onTap: () {
+                                      switch(widget.wordsPageActionType){
+                                        
+                                        case null:
+                                          // TODO: Handle this case.
+                                        case WordsPageActionType.view:
+                                          // TODO: Handle this case.
+                                          break;
+                                        case WordsPageActionType.edit:
+                                          // TODO: Handle this case.
+                                          BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordUpdateWordEvent(state: _state));
+
+                                          break;
+                                        case WordsPageActionType.create:
+                                          // TODO: Handle this case.
+                                          BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordCreateWordEvent(state: _state));
+                                          break;
+                                      }
+                                    },
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: widget.wordsPageActionType == WordsPageActionType.view,
+                                  child: ActionButton1(
+                                    text:L10nX.getStr.close,
+                                    width: Dimens.size120,
+                                    onTap: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ),
+                              ] 
+                            )),
                       ),
                     ],
                   ),

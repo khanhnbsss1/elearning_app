@@ -13,6 +13,7 @@ import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/services/apis/upload_file/upload_file_api.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/services/apis/vocabulary/words/add_words_api.dart';
+import 'package:webkit/services/apis/vocabulary/words/update_words_api.dart';
 import 'package:webkit/views/vocabulary/vocabulary_detail/create_edit_words.dart';
 part 'create_edit_word_event.dart';
 part 'create_edit_word_state.dart';
@@ -23,6 +24,8 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     on<CreateEditWordUploadAudioEvent>(_onUploadAudio);
     on<CreateEditWordUploadImageEvent>(_onUploadImage);
     on<CreateEditWordCreateWordEvent>(_onCreateWord);
+    on<CreateEditWordUpdateWordEvent>(_onUpdateWord);
+
     on<CreateEditWordOnSaveSentenceEvent>(_onSaveSentenceInfo);
     on<CreateEditWordOnAddNewSentenceEvent>((event, emit) {
       if((state.vocabularyInfo?.sentenceInfos??[]).isNotEmpty && state.vocabularyInfo!.sentenceInfos!.last.isValidate())
@@ -61,6 +64,12 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
       CreateEditWordInitEvent event,
       Emitter<CreateEditWordState> emit,
       ) async {
+    
+    if((state.vocabularyInfo?.sentenceInfos??[]).isEmpty)
+      {
+        state.vocabularyInfo?.sentenceInfos = [];
+        state.vocabularyInfo?.sentenceInfos?.add(SentenceInfo(id: 0));
+      }
     emit(state.copyWith(
       blocStatus: CreateEditWordStatus.initial,
     ));
@@ -134,6 +143,7 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
       traditional:  event.state.addWordController?.basicValidator.getController('traditional')?.text,
       pinyinTones:  event.state.addWordController?.basicValidator.getController('pinyin_tones')?.text,
       audio:  event.state.addWordController?.basicValidator.getController('audio')?.text,
+      translationVn:  event.state.addWordController?.basicValidator.getController('translation_vn')?.text,
       createdBy: userProfile?.userName??"",
     );
     AddWordsApi addWordsApi = AddWordsApi(word: word);
@@ -142,6 +152,32 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     emit(event.state.copyWith(
       blocStatus: CreateEditWordStatus.onSubmit,
       vocabularyInfo: word,
+    ));
+  }  
+  Future<void> _onUpdateWord(
+      CreateEditWordUpdateWordEvent event,
+      Emitter<CreateEditWordState> emit,
+      ) async {
+    emit(state.copyWith(
+      blocStatus: CreateEditWordStatus.onLoading,
+    ));
+
+    UserProfile? userProfile = await UserManager().getUserProfile();
+    MonitorLoading().showLoading("");
+    state.vocabularyInfo?.simplified =  event.state.addWordController?.basicValidator.getController('simplified')?.text;
+    state.vocabularyInfo?.traditional =  event.state.addWordController?.basicValidator.getController('traditional')?.text;
+    state.vocabularyInfo?.translationVn =  event.state.addWordController?.basicValidator.getController('translation_vn')?.text;
+
+    state.vocabularyInfo?.pinyinTones =  event.state.addWordController?.basicValidator.getController('pinyin_tones')?.text;
+    state.vocabularyInfo?.audio =  event.state.addWordController?.basicValidator.getController('audio')?.text;
+    UpdateWordsApi addWordsApi = UpdateWordsApi(word: state.vocabularyInfo!);
+    dynamic data = await addWordsApi.call();
+    MonitorLoading().dismiss();
+
+
+    emit(event.state.copyWith(
+      blocStatus: CreateEditWordStatus.onUpdateWord,
+      vocabularyInfo: state.vocabularyInfo,
     ));
   }
 

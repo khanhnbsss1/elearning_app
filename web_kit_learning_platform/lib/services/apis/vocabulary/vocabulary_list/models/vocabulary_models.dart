@@ -114,20 +114,59 @@ class VocabularyInfo {
     data['traditional'] = traditional;
     data['pinyin_tones'] = pinyinTones;
     data['translation_vn'] = translationVn;
-    data['grade_id'] = gradeId;
-    data['lecture_id'] = lectureId;
-    data['audio'] = audio;
-    data['audio_id'] = audioId;
-    data['audio_link'] = audioLink;
-    data['image_id'] = imageId;
-    data['image_link'] = imageLink;
-    data['category_word'] = categoryWord;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    data['created_by'] = createdBy;
-    data['updated_by'] = updatedBy;
-    if (sentenceInfos != null) {
-      data['example'] = sentenceInfos!.map((v) => v.toJson()).toList();
+    if(gradeId!=null) {
+      data['grade_id'] = gradeId;
+    }
+    if(lectureId!=null) {
+      data['lecture_id'] = lectureId;
+    }
+
+    if(audio!=null&& audio!.isNotEmpty) {
+      data['audio'] = audio;
+    }
+
+    if(audioId!=null) {
+      data['audio_id'] = audioId;
+    }
+    if(audioLink!=null&& audioLink!.isNotEmpty) {
+      data['audio_link'] = audioLink;
+    }
+
+    if(imageId!=null) {
+      data['image_id'] = imageId;
+    }
+    if(imageLink!=null&& imageLink!.isNotEmpty) {
+      data['image_link'] = imageLink;
+    }
+
+    if(categoryWord!=null && categoryWord!.isNotEmpty) {
+      data['category_word'] = categoryWord;
+    }
+
+    if(createdAt!=null&& createdAt!.isNotEmpty) {
+      data['created_at'] = createdAt;
+    }
+    if(updatedAt!=null&& updatedAt!.isNotEmpty) {
+      data['updated_at'] = updatedAt;
+    }
+    if(createdBy!=null&& createdBy!.isNotEmpty) {
+      data['created_by'] = createdBy;
+    }
+    if(updatedBy!=null&& updatedBy!.isNotEmpty) {
+      data['updated_by'] = updatedBy;
+    }
+    if (sentenceInfos != null && sentenceInfos!.isNotEmpty) {
+      if(!sentenceInfos!.last.isValidate()) {
+        if((sentenceInfos?.length??0) >1)
+          {
+            sentenceInfos?.removeLast();
+            data['example'] = sentenceInfos!.map((v) => v.toJson()).toList();
+          }
+      }
+      else
+        {
+          data['example'] = sentenceInfos!.map((v) => v.toJson()).toList();
+        }
     }
     return data;
   }
