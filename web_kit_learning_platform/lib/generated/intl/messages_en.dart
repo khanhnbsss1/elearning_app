@@ -479,6 +479,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sized_button": MessageLookupByLibrary.simpleMessage("Sized button"),
         "sku": MessageLookupByLibrary.simpleMessage("SKU"),
         "sliders": MessageLookupByLibrary.simpleMessage("Sliders"),
+        "slogan": MessageLookupByLibrary.simpleMessage("Personalized learning"),
         "small": MessageLookupByLibrary.simpleMessage("Small"),
         "soft_button": MessageLookupByLibrary.simpleMessage("Soft button"),
         "soft_indicator":

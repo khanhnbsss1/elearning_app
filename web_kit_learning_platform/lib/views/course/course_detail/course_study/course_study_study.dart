@@ -208,10 +208,6 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
     return Container(
       width: Dimens.size400,
       decoration: BoxDecoration(
-          border: Border.all(
-              color: ColorConst.dividerColor, 
-              width: 0.2
-          ),
         borderRadius: BorderRadius.circular(20)
       ),
       child: RawScrollbar(

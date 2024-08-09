@@ -4340,6 +4340,16 @@ class S {
     );
   }
 
+  /// `Personalized learning`
+  String get slogan {
+    return Intl.message(
+      'Personalized learning',
+      name: 'slogan',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Let's study!`
   String get lets_study {
     return Intl.message(

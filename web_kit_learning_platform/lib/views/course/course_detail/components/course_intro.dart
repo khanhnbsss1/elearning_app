@@ -1,19 +1,57 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating/flutter_rating.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
 
-class CourseIntro extends StatelessWidget{
+import '../../../../helpers/widgets/my_text.dart';
+import '../course_preview.dart';
+import '../course_study/course_study.dart';
+import 'lecture_list.dart';
+
+class CourseIntro extends StatefulWidget{
+  @override
+  State<CourseIntro> createState() => _CourseIntroState();
+}
+
+class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin, UIMixin{
   late CourseDetailState _state;
+
   ScrollController controller = ScrollController();
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return  buildInfo(context);
   }
-  
+  int position = 0;
+
+  double _mainControllerPosition=0;
+  late TabController tabController;
+  final ScrollController _mainController = ScrollController();
+  ShowTabBarModel showTabBarModel = ShowTabBarModel();
+
+  @override
+  void initState() {
+    super.initState();
+
+    tabController = TabController(length: 2, vsync: this);
+    _mainController.addListener(() {
+      _mainControllerPosition= _mainController.position.pixels;
+      if (_mainController.offset > 400) {
+        if (showTabBarModel.showTabBar == false) {
+          showTabBarModel.onChangerShowCard(true);
+        }
+      } else {
+        if (showTabBarModel.showTabBar == true) {
+          showTabBarModel.onChangerShowCard(false);
+        }
+      }
+    }
+    );
+  }
   Widget buildInfo(BuildContext context) {
     return BlocConsumer<CourseDetailBloc, CourseDetailState>(
         listener: (context, state) {
@@ -26,14 +64,16 @@ class CourseIntro extends StatelessWidget{
         },
         builder: (BuildContext context, state) {
           _state = state;
-          return MyResponsive(builder: (buildContext , constraints , myScreenMediaType ) { 
+          return MyResponsive(builder: (buildContext , constraints , myScreenMediaType ) {
             return SingleChildScrollView(
               controller: controller,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: constraints.maxWidth> 800?Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(child: buildInfoBox(context)),
+                    Expanded(child: buildInfoBox(context, constraints, state)),
                     SizedBox(
                       width: Dimens.size400,
                       child: buildInfoCard()),
@@ -43,7 +83,7 @@ class CourseIntro extends StatelessWidget{
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    buildInfoBox(context),
+                    buildInfoBox(context, constraints, state),
                     buildInfoCard()
                   ],
                 ),
@@ -53,29 +93,168 @@ class CourseIntro extends StatelessWidget{
           );
         });
   }
-  Widget buildInfoBox(BuildContext context) {
+
+  Widget buildInfoBox(BuildContext context, BoxConstraints constraints, CourseDetailState state) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildInfoBoxIntroduction(),
-          SizedBox(
-            height: 16,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              constraints.maxWidth> 450?
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              MyText.titleLarge(
+                                state.courseInfo?.name ?? "",
+                                style: TextStyleConstant.titleTextColorOnBackgroundColorStyle16w600.copyWith(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                color: ColorConst.textColor,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              StarRating(
+                                color: Colors.yellow,
+                                allowHalfRating: true,
+                                rating: (state.courseInfo?.ratePoint ?? 0).toDouble(),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  /*                              ActionButton1(
+                          text: L10nX.getStr.register_now,
+                        ),*/
+                  ActionButton1(
+                    text: L10nX.getStr.lets_study,
+                    onTap: () {
+              /*                              AppPages.routeName(Routes.courseStudy,arguments: {
+                              "courseInfo":state.courseInfo
+                            });*/
+                      CourseStudy1(
+                        courseInfo: state.courseInfo!,
+                      ).show(context);
+                    },
+                  ),
+                ],
+              ):
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            MyText.titleLarge(
+                              state.courseInfo?.name ?? "",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                              color: ColorConst.textColor,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            StarRating(
+                              color: Colors.yellow,
+                              allowHalfRating: true,
+                              rating: (state.courseInfo?.ratePoint ?? 0).toDouble(),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  /*ActionButton1(
+                          text: L10nX.getStr.register_now,
+                        ),*/
+                  ActionButton1(
+                    text: L10nX.getStr.lets_study,
+                    onTap: () {
+              /*                              AppPages.routeName(Routes.courseStudy,arguments: {
+                              "courseInfo":state.courseInfo
+                            });*/
+                      CourseStudy1(
+                        courseInfo: state.courseInfo!,
+                      ).show(context);
+                    },
+                  ),
+
+                  SizedBox(
+                    width: 16,
+                  ),
+                ],
+              ),
+              buildTabBar(),
+              ListenableBuilder(
+                listenable: showTabBarModel,
+                builder: (BuildContext context, Widget? child) {
+                  return Stack(
+                    children: [
+                      Visibility(
+                        visible: showTabBarModel.position == 0,
+                        child: Column(
+                          children: [
+                            buildInfoBoxIntroduction(),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Divider(color: ColorConst.dividerColor,),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            buildInfoBoxInfoObj(),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            buildInfoBoxInfoResult(),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            buildInfoBoxTag(),
+                          ],
+                        )
+                      ),
+                      Visibility(
+                        visible: showTabBarModel.position == 1,
+                        child: LectureList(),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ],
           ),
-          Divider(color: ColorConst.dividerColor,),
-          SizedBox(
-            height: 16,
-          ),
-          buildInfoBoxInfoObj(),
-          SizedBox(
-            height: 16,
-          ),
-          buildInfoBoxInfoResult(),
-          SizedBox(
-            height: 16,
-          ),
-          buildInfoBoxTag(),
+
       // SizedBox(
       //   height: 16,
       // ),
@@ -84,6 +263,65 @@ class CourseIntro extends StatelessWidget{
       ),
     );
   }
+
+  Widget buildTabBar() {
+    TextStyleConstant.textStyleBlack15w700.copyWith(color: (position == 0 ? ColorConst.textColorSelectTabBar : ColorConst.subtext));
+    return Column
+      (
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Card(
+            elevation: 5,
+            child: Container(
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width * 0.5,
+              constraints: BoxConstraints(
+                maxWidth: 800,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: TabBar(
+                indicatorColor: ColorConst.mainColor,
+                dividerColor: Colors.transparent,
+                labelColor: ColorConst.mainColor,
+                indicator: BoxDecoration(border: Border(bottom: BorderSide(color: ColorConst.mainColor))),
+                splashBorderRadius: BorderRadius.circular(12),
+                overlayColor: WidgetStateProperty.all(Colors.black.withOpacity(0.1)),
+                dividerHeight: 0,
+                controller: tabController,
+                onTap: (value) {
+                  position == value;
+                  showTabBarModel.onChangerShowTitle(value);
+                  if (value != 0 && _mainControllerPosition> 400) {
+                    showTabBarModel.onChangerShowCard(true);
+                  }
+                  // _mainController.jumpTo(_mainControllerPosition);
+                },
+                tabs: [
+                  Tab(
+                    child: Text(
+                      L10nX.getStr.introduction_str,
+                      style: TextStyleConstant.textStyleBlack14w400,
+                    ),
+                  ),
+                  Tab(
+                    child: Text(
+                      L10nX.getStr.content_str,
+                      style: TextStyleConstant.textStyleBlack14w400,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ]);
+
+  }
+
   Widget buildInfoBoxIntroduction() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,10 +329,11 @@ class CourseIntro extends StatelessWidget{
         SizedBox(
           height: 16,
         ),
-        Text('${_state.courseInfo?.introduction}'),
+        Text('${_state.courseInfo?.introduction??"hello"}'),
       ],
     );
   }
+
   Widget buildInfoBoxInfoObj() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,6 +373,7 @@ class CourseIntro extends StatelessWidget{
       ],
     );
   }
+
   Widget buildInfoBoxInfoResult() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -220,13 +460,15 @@ class CourseIntro extends StatelessWidget{
       );
     }
   }
+
   Widget buildInfoCard() {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(16.0),
+        Card(
+          elevation: 5,
           child: Container(
             decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                   color: Colors.black.withOpacity(0.1),
                 )),
@@ -319,7 +561,9 @@ class CourseIntro extends StatelessWidget{
                     height: 24,
                   ),
                   Container(
-                    decoration: BoxDecoration(border: Border.all(color: Colors.black.withOpacity(0.1))),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: Colors.black.withOpacity(0.1))),
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
@@ -362,5 +606,4 @@ class CourseIntro extends StatelessWidget{
       ],
     );
   }
-
 }

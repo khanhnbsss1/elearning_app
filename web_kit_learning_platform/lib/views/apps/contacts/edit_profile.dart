@@ -26,9 +26,9 @@ import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/images.dart';
 import 'package:webkit/views/layouts/layout.dart';
-
 import '../../../base/models/user/UserProfile.dart';
 import '../../../routes/app_pages.dart';
+import 'build_text_field.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -59,6 +59,8 @@ class _EditProfileState extends State<EditProfile>
   TextEditingController monthController = TextEditingController();
   TextEditingController dayController = TextEditingController();
 
+  bool enableEdit = false;
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -86,11 +88,65 @@ class _EditProfileState extends State<EditProfile>
                             "Edit Profile",
                             fontWeight: 600,
                           ),
-                          MyBreadcrumb(
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              MyBreadcrumbItem(name: "Contact"),
-                              MyBreadcrumbItem(
-                                  name: "Edit Profile", active: true),
+                              Visibility(
+                                visible: enableEdit == true,
+                                child: MyButton(
+                                  onTap: () {
+                                    setState(() {
+                                      enableEdit = false;
+                                    });
+                                  },
+                                  elevation: 0,
+                                  padding: MySpacing.xy(20, 16),
+                                  backgroundColor: ColorConst.whiteColor,
+                                  borderRadiusAll: AppStyle.buttonRadius.medium,
+                                  child: MyText.bodySmall(
+                                    'Cancel',
+                                    color: ColorConst.mainColor,
+                                  ),
+                                ),
+                              ),
+                              MySpacing.width(10),
+                              Visibility(
+                                visible: enableEdit == false,
+                                child: MyButton(
+                                  onTap: () {
+                                    setState(() {
+                                      enableEdit = true;
+                                    });
+                                  },
+                                  elevation: 0,
+                                  padding: MySpacing.xy(20, 16),
+                                  backgroundColor: ColorConst.mainColor,
+                                  borderRadiusAll: AppStyle.buttonRadius.medium,
+                                  child: MyText.bodySmall(
+                                    'Edit',
+                                    color: ColorConst.whiteColor,
+                                  ),
+                                ),
+                              ),
+                              MySpacing.width(10),
+                              Visibility(
+                                visible: enableEdit == true,
+                                child: MyButton(
+                                  onTap: () {
+                                    setState(() {
+                                      enableEdit = false;
+                                    });
+                                  },
+                                  elevation: 0,
+                                  padding: MySpacing.xy(20, 16),
+                                  backgroundColor: ColorConst.mainColor,
+                                  borderRadiusAll: AppStyle.buttonRadius.medium,
+                                  child: MyText.bodySmall(
+                                    'Save Change',
+                                    color: ColorConst.whiteColor,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ],
@@ -155,7 +211,8 @@ class _EditProfileState extends State<EditProfile>
                                       Row(
                                         children: [
                                           Expanded(
-                                            child: buildTextField(
+                                            child: BuildTextField(
+                                                enableEdit: enableEdit,
                                                 fieldTitle: "First Name",
                                                 hintText:
                                                     "Enter your First Name",
@@ -163,7 +220,8 @@ class _EditProfileState extends State<EditProfile>
                                           ),
                                           MySpacing.width(10),
                                           Expanded(
-                                            child: buildTextField(
+                                            child: BuildTextField(
+                                                enableEdit: enableEdit,
                                                 fieldTitle: "Last Name",
                                                 hintText:
                                                     "Enter your Last Name",
@@ -172,7 +230,8 @@ class _EditProfileState extends State<EditProfile>
                                         ],
                                       ),
                                       MySpacing.height(20),
-                                      buildTextField(
+                                      BuildTextField(
+                                          enableEdit: enableEdit,
                                           fieldTitle: "Identity Id",
                                           hintText: "Enter your Identity",
                                           value: userProfile?.identityId ?? ""),
@@ -180,7 +239,8 @@ class _EditProfileState extends State<EditProfile>
                                       Row(
                                         children: [
                                           Expanded(
-                                            child: buildTextField(
+                                            child: BuildTextField(
+                                                enableEdit: enableEdit,
                                                 fieldTitle: "Role",
                                                 hintText: "Enter your role",
                                                 value: userProfile?.typeName ??
@@ -188,7 +248,8 @@ class _EditProfileState extends State<EditProfile>
                                           ),
                                           MySpacing.width(10),
                                           Expanded(
-                                            child: buildTextField(
+                                            child: BuildTextField(
+                                                enableEdit: enableEdit,
                                                 fieldTitle: "Gender",
                                                 hintText: "Enter your gender",
                                                 value: userProfile?.gender ??
@@ -197,9 +258,7 @@ class _EditProfileState extends State<EditProfile>
                                         ],
                                       ),
                                       MySpacing.height(20),
-                                      MyText.labelMedium(
-                                        'Birthday',
-                                      ),
+                                      MyText.labelMedium("Birthday"),
                                       MySpacing.height(4),
                                       Row(
                                         children: [
@@ -207,52 +266,68 @@ class _EditProfileState extends State<EditProfile>
                                             child: customDropDownSearch(
                                               list: List<int>.generate(
                                                 DateTime.now().year - 1970 + 1,
-                                                    (int index) => DateTime.now().year - index,
+                                                (int index) =>
+                                                    DateTime.now().year - index,
                                               ),
                                               hintText: 'Year',
                                               controller: yearController,
+                                              enableEdit: enableEdit,
                                             ),
                                           ),
                                           MySpacing.width(16),
-                                          Expanded(
-                                            child: customDropDownSearch(
-                                              list: List<int>.generate(
-                                                  12, (int index) => 1 + index),
-                                              hintText: 'Month',
-                                              controller: monthController,
-                                            ),
+                                          ValueListenableBuilder(
+                                            valueListenable: yearController,
+                                            builder: (context, value, child) {
+                                              return Expanded(
+                                                child: customDropDownSearch(
+                                                  list: List<int>.generate(12,
+                                                      (int index) => 1 + index),
+                                                  hintText: 'Month',
+                                                  controller: monthController,
+                                                  enableEdit: enableEdit,
+                                                ),
+                                              );
+                                            },
                                           ),
                                           MySpacing.width(16),
-                                          Expanded(
-                                            child: customDropDownSearch(
-                                              list: (yearController
-                                                  .text.isNotEmpty &&
-                                                  monthController
-                                                      .text.isNotEmpty)
-                                                  ? List<int>.generate(
-                                                  getDaysInMonth(
-                                                      int.parse(
-                                                          yearController
-                                                              .text),
-                                                      int.parse(
-                                                          monthController
-                                                              .text)),
-                                                      (int index) => 1 + index)
-                                                  : [],
-                                              hintText: 'Day',
-                                              controller: dayController,
-                                            ),
-                                          ),
+                                          ValueListenableBuilder(
+                                              valueListenable: monthController,
+                                              builder: (context, value, child) {
+                                                return Expanded(
+                                                  child: customDropDownSearch(
+                                                    list: (yearController.text
+                                                                .isNotEmpty &&
+                                                            monthController.text
+                                                                .isNotEmpty)
+                                                        ? List<int>.generate(
+                                                            getDaysInMonth(
+                                                                int.parse(
+                                                                    yearController
+                                                                        .text),
+                                                                int.parse(
+                                                                    monthController
+                                                                        .text)),
+                                                            (int index) =>
+                                                                1 + index)
+                                                        : [],
+                                                    hintText: 'Day',
+                                                    controller: dayController,
+                                                    enableEdit: enableEdit,
+                                                  ),
+                                                );
+                                              }),
                                         ],
                                       ),
                                       MySpacing.height(20),
-                                      buildTextField(
+                                      BuildTextField(
+                                          enableEdit: enableEdit,
                                           fieldTitle: "Phone Number",
                                           hintText: "Enter your phone number",
                                           value:
                                               userProfile?.phoneNumber ?? ""),
                                       MySpacing.height(20),
-                                      buildTextField(
+                                      BuildTextField(
+                                          enableEdit: enableEdit,
                                           fieldTitle: "Country",
                                           hintText: "Enter country",
                                           value:
@@ -281,15 +356,16 @@ class _EditProfileState extends State<EditProfile>
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          buildTextField(
+                                          BuildTextField(
+                                              enableEdit: enableEdit,
                                               fieldTitle: "Username",
                                               hintText: "",
                                               value:
                                                   userProfile?.userName ?? "",
-                                              onEdit: false),
+                                              ),
                                           MySpacing.height(20),
                                           Visibility(
-                                            visible: !changePassword,
+                                            visible: !changePassword && enableEdit,
                                             child: MyButton(
                                               onTap: () {
                                                 setState(() {
@@ -311,7 +387,7 @@ class _EditProfileState extends State<EditProfile>
                                             ),
                                           ),
                                           Visibility(
-                                            visible: changePassword,
+                                            visible: changePassword && enableEdit,
                                             child: Column(
                                               children: [
                                                 buildTextField(
@@ -359,30 +435,35 @@ class _EditProfileState extends State<EditProfile>
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          buildTextField(
+                                          BuildTextField(
+                                              enableEdit: enableEdit,
                                               fieldTitle: "Bank Account",
                                               hintText:
                                                   "Enter your Bank account",
                                               value: userProfile?.bankAccount ??
                                                   ""),
                                           MySpacing.height(20),
-                                          buildTextField(
+                                          BuildTextField(
+                                              enableEdit: enableEdit,
                                               fieldTitle: "Bank Name",
                                               hintText: "Enter your Bank Name",
                                               value:
                                                   userProfile?.bankName ?? ""),
                                           MySpacing.height(20),
-                                          MyButton(
-                                            onTap: () {},
-                                            elevation: 0,
-                                            padding: MySpacing.xy(20, 16),
-                                            backgroundColor:
-                                                ColorConst.mainColor,
-                                            borderRadiusAll:
-                                                AppStyle.buttonRadius.medium,
-                                            child: MyText.bodySmall(
-                                              'Change payment method',
-                                              color: ColorConst.whiteColor,
+                                          Visibility(
+                                            visible:  enableEdit,
+                                            child: MyButton(
+                                              onTap: () {},
+                                              elevation: 0,
+                                              padding: MySpacing.xy(20, 16),
+                                              backgroundColor:
+                                                  ColorConst.mainColor,
+                                              borderRadiusAll:
+                                                  AppStyle.buttonRadius.medium,
+                                              child: MyText.bodySmall(
+                                                'Change payment method',
+                                                color: ColorConst.whiteColor,
+                                              ),
                                             ),
                                           )
                                         ],
@@ -396,39 +477,6 @@ class _EditProfileState extends State<EditProfile>
                         ],
                       ),
                     ),
-                    MySpacing.height(10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        MyButton(
-                          onTap: () {
-                            AppPages.routeName(Routes.dashboardRoute);
-                          },
-                          elevation: 0,
-                          padding: MySpacing.xy(20, 16),
-                          backgroundColor: ColorConst.whiteColor,
-                          borderRadiusAll: AppStyle.buttonRadius.medium,
-                          child: MyText.bodySmall(
-                            'Cancel',
-                            color: ColorConst.mainColor,
-                          ),
-                        ),
-                        MySpacing.width(10),
-                        MyButton(
-                          onTap: () {
-                            AppPages.routeName(Routes.dashboardRoute);
-                          },
-                          elevation: 0,
-                          padding: MySpacing.xy(20, 16),
-                          backgroundColor: ColorConst.mainColor,
-                          borderRadiusAll: AppStyle.buttonRadius.medium,
-                          child: MyText.bodySmall(
-                            'Save',
-                            color: ColorConst.whiteColor,
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 );
               },
@@ -436,65 +484,65 @@ class _EditProfileState extends State<EditProfile>
           );
         });
   }
-
   Widget buildTextField(
-      {bool? onEdit,
+      {
       bool? obscure,
       bool? onShowPassword,
+      bool? enableEdit,
       required String fieldTitle,
       required String hintText,
       required String value}) {
+    enableEdit??= true;
     onShowPassword ??= false;
     obscure ??= false;
-    onEdit ??= true;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        MyText.labelMedium(
-          fieldTitle,
-        ),
-        MySpacing.height(8),
-        StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
-          return TextFormField(
-            obscureText: obscure! && !onShowPassword!,
-            enabled: onEdit,
-            initialValue: value,
-            decoration: InputDecoration(
-              hintText: hintText,
-              hintStyle: MyTextStyle.bodySmall(xMuted: true),
-              border: outlineInputBorder,
-              enabledBorder: outlineInputBorder,
-              focusedBorder: focusedInputBorder,
-              contentPadding: MySpacing.all(16),
-              isCollapsed: true,
-              floatingLabelBehavior: FloatingLabelBehavior.never,
-              suffixIcon: (obscure && onShowPassword!)
-                  ? IconButton(
-                      onPressed: () {
-                        setState(() {
-                          onShowPassword = !onShowPassword!;
-                        });
-                      },
-                      icon: Icon(
-                        Icons.visibility_off,
-                        size: 20,
-                      ))
-                  : (obscure && !onShowPassword!)
-                      ? IconButton(
-                          onPressed: () {
-                            setState(() {
-                              onShowPassword = !onShowPassword!;
-                            });
-                          },
-                          icon: Icon(
-                            Icons.visibility,
-                            size: 20,
-                          ))
-                      : SizedBox(),
+    return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MyText.labelMedium(
+              fieldTitle,
             ),
-          );
-        }),
-      ],
+            MySpacing.height(8),
+            TextFormField(
+              obscureText: obscure! && !onShowPassword!,
+              initialValue: value,
+              decoration: InputDecoration(
+                hintText: hintText,
+                hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                border: outlineInputBorder,
+                enabledBorder: outlineInputBorder,
+                focusedBorder: focusedInputBorder,
+                contentPadding: MySpacing.all(16),
+                isCollapsed: true,
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                suffixIcon: (obscure && onShowPassword!)
+                    ? IconButton(
+                        onPressed: () {
+                          setState(() {
+                            onShowPassword = !onShowPassword!;
+                          });
+                        },
+                        icon: Icon(
+                          Icons.visibility_off,
+                          size: 20,
+                        ))
+                    : (obscure && !onShowPassword!)
+                        ? IconButton(
+                            onPressed: () {
+                              setState(() {
+                                onShowPassword = !onShowPassword!;
+                              });
+                            },
+                            icon: Icon(
+                              Icons.visibility,
+                              size: 20,
+                            ))
+                        : SizedBox(),
+              ),
+            ),
+          ],
+        );
+      }
     );
   }
 
@@ -502,8 +550,11 @@ class _EditProfileState extends State<EditProfile>
     required List<int> list,
     required String hintText,
     required TextEditingController? controller,
+    required bool enableEdit,
+    String? value,
   }) {
     return DropdownSearch<int>(
+      enabled: enableEdit,
       popupProps: PopupProps.menu(
         constraints: BoxConstraints(
           maxHeight:
@@ -517,11 +568,10 @@ class _EditProfileState extends State<EditProfile>
       // selectedItem: selectItem ?? 0,
       dropdownDecoratorProps: DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
-          hintText: hintText,
-          labelText: hintText,
+          enabled: enableEdit,
+          hintText: "Select $hintText",
+          labelText: value,
           hintTextDirection: AppTheme.textDirection,
-          labelStyle: TextStyleConstant.textStyleBlack14w400,
-          hintStyle: TextStyleConstant.textStyleBlack14w400,
           border: outlineInputBorder,
           contentPadding: MySpacing.all(16),
           isCollapsed: true,

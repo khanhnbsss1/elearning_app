@@ -468,6 +468,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cài đặt kích thước"),
         "sku": MessageLookupByLibrary.simpleMessage("MÃ HÀNG"),
         "sliders": MessageLookupByLibrary.simpleMessage("Thanh trượt"),
+        "slogan": MessageLookupByLibrary.simpleMessage("Học tập cá nhân"),
         "small": MessageLookupByLibrary.simpleMessage("Nhỏ"),
         "soft_button": MessageLookupByLibrary.simpleMessage("Nút mềm"),
         "soft_indicator": MessageLookupByLibrary.simpleMessage("Chỉ báo mềm"),

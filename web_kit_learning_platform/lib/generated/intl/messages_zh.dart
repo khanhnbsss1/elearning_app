@@ -402,6 +402,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sized_button": MessageLookupByLibrary.simpleMessage("尺寸按钮"),
         "sku": MessageLookupByLibrary.simpleMessage("SKU"),
         "sliders": MessageLookupByLibrary.simpleMessage("滑块"),
+        "slogan": MessageLookupByLibrary.simpleMessage("个性化学习"),
         "small": MessageLookupByLibrary.simpleMessage("小"),
         "soft_button": MessageLookupByLibrary.simpleMessage("软按钮"),
         "soft_indicator": MessageLookupByLibrary.simpleMessage("软指标"),

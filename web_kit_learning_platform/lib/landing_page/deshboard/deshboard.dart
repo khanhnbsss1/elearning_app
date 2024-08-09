@@ -235,38 +235,50 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                           top: 0,
                           left: 0,
                           right: 0,
-                          bottom: 0,
-                          child: Center(
+                          bottom: 100,
+                          child: Align(
+                              alignment: Alignment.bottomCenter,
                               child: MouseRegion(
-                            onEnter: (_) => setState(() => isHovered = true),
-                            onExit: (_) => setState(() => isHovered = false),
-                            child: GestureDetector(
-                              child: AnimatedContainer(
-                                duration: Duration(milliseconds: 100),
-                                transform: Matrix4.identity()
-                                  ..scale(isHovered ? 1.2 : 1.0),
-                                child: TextButton(
-                                  onPressed: () {
-                                    userProfile == null
-                                        ? LoginPage().show(context)
-                                        : AppPages.routeName(
-                                            Routes.dashboardRoute);
-                                  },
-                                  style: TextButton.styleFrom(
-                                    backgroundColor: ColorConst.mainColor,
-                                    foregroundColor: ColorConst.whiteColor,
-                                  ),
-                                  child: Text(
-                                    L10nX.getStr.lets_study,
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      color: Colors.white,
+                                onEnter: (_) =>
+                                    setState(() => isHovered = true),
+                                onExit: (_) =>
+                                    setState(() => isHovered = false),
+                                child: GestureDetector(
+                                  child: AnimatedContainer(
+                                    duration: Duration(milliseconds: 100),
+                                    transform: Matrix4.identity()
+                                      ..scale(isHovered ? 1.2 : 1.0),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        userProfile == null
+                                            ? LoginPage().show(context)
+                                            : AppPages.routeName(
+                                                Routes.dashboardRoute);
+                                      },
+                                      style: TextButton.styleFrom(
+                                        backgroundColor:
+                                            ColorConst.mainColor,
+                                        foregroundColor:
+                                            ColorConst.whiteColor,
+                                      ),
+                                      child: Text(
+                                        L10nX.getStr.lets_study,
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          color: Colors.white,
+                                        ),
+                                        // Text(
+                                        //   L10nX.getStr.slogan,
+                                        //   style: TextStyle(
+                                        //     fontSize: 24,
+                                        //     color: Colors.black,
+                                        //   ),
+                                        // ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          )),
+                              )),
                         )
                       ],
                     );
@@ -395,7 +407,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
             alignment: Alignment.topCenter,
             child: Padding(
               padding: EdgeInsets.only(
-                  top: (MediaQuery.of(context).size.width < 1050) ? 60 : 50),
+                  top: (MediaQuery.of(context).size.width < 1050) ? 60 : 80),
               child: Card(
                 margin: EdgeInsets.only(top: width < 1100 ? 10 : 20),
                 shadowColor: Colors.red,
@@ -678,13 +690,13 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                           enabled: true,
                           value: SampleItem2.itemOne,
                           onTap: () {},
-                          child:
-                          Column(
+                          child: Column(
                             mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment:CrossAxisAlignment.center ,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Visibility(
-                                visible: userProfile != null && ResponsiveInfo.isPhone(),
+                                visible: userProfile != null &&
+                                    ResponsiveInfo.isPhone(),
                                 child: InkWell(
                                   onTap: () {
                                     AppPages.routeName(Routes.dashboardRoute);
@@ -712,9 +724,10 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.symmetric(vertical: Dimens.size10),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: Dimens.size10),
                                 child: Stack(
-                                  alignment: Alignment.center,
+                                    alignment: Alignment.center,
                                     children: [
                                       Visibility(
                                         visible: userProfile == null,
@@ -731,13 +744,15 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                                             0),
                                                     backgroundColor:
                                                         WidgetStatePropertyAll(
-                                                            notifier.buttoncolor),
+                                                            notifier
+                                                                .buttoncolor),
                                                     shape:
                                                         const WidgetStatePropertyAll(
                                                       RoundedRectangleBorder(
                                                         borderRadius:
                                                             BorderRadius.all(
-                                                                Radius.circular(20)),
+                                                                Radius.circular(
+                                                                    20)),
                                                       ),
                                                     ),
                                                   ),
@@ -745,7 +760,8 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                                     LoginPage().show(context);
                                                     //AppPages.route(Paths.dashboardPath);
                                                   },
-                                                  child: Text(L10nX.getStr.login,
+                                                  child: Text(
+                                                      L10nX.getStr.login,
                                                       style: baseStyle.copyWith(
                                                           fontSize: 12,
                                                           color: Colors.white)),
@@ -762,27 +778,32 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                                             0),
                                                     backgroundColor:
                                                         WidgetStatePropertyAll(
-                                                            notifier.whitecolor),
-                                                    shape: WidgetStatePropertyAll(
+                                                            notifier
+                                                                .whitecolor),
+                                                    shape:
+                                                        WidgetStatePropertyAll(
                                                       RoundedRectangleBorder(
                                                         side: BorderSide(
-                                                            color:
-                                                                notifier.buttoncolor,
+                                                            color: notifier
+                                                                .buttoncolor,
                                                             width: 2),
                                                         borderRadius:
-                                                            const BorderRadius.all(
-                                                                Radius.circular(20)),
+                                                            const BorderRadius
+                                                                .all(
+                                                                Radius.circular(
+                                                                    20)),
                                                       ),
                                                     ),
                                                   ),
                                                   onPressed: () {
                                                     Register().show(context);
                                                   },
-                                                  child: Text(L10nX.getStr.sign_up,
+                                                  child: Text(
+                                                      L10nX.getStr.sign_up,
                                                       style: baseStyle.copyWith(
                                                           fontSize: 12,
-                                                          color:
-                                                              notifier.buttoncolor)),
+                                                          color: notifier
+                                                              .buttoncolor)),
                                                 ),
                                               ),
                                             ],
@@ -793,7 +814,8 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                         visible: userProfile != null,
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             SizedBox(
                                               height: 40,
@@ -805,18 +827,21 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                                           0),
                                                   backgroundColor:
                                                       WidgetStatePropertyAll(
-                                                          ColorConst.whiteColor),
+                                                          ColorConst
+                                                              .whiteColor),
                                                   shape:
                                                       const WidgetStatePropertyAll(
                                                     RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.all(
-                                                              Radius.circular(20)),
+                                                              Radius.circular(
+                                                                  20)),
                                                     ),
                                                   ),
                                                 ),
                                                 onPressed: () {
-                                                  AuthorManager().handleLogout();
+                                                  AuthorManager()
+                                                      .handleLogout();
                                                   AppPages.routeName(
                                                       Routes.landingPageRoute,
                                                       isReplace: true);
@@ -831,7 +856,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                           ],
                                         ),
                                       ),
-                                ]),
+                                    ]),
                               ),
                             ],
                           ),
@@ -1213,7 +1238,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                   controller: whyChooseUsController,
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                      children: listItem,
+                    children: listItem,
                   ),
                 ),
               ),
