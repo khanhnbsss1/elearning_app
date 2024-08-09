@@ -150,7 +150,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
     return Container(
       decoration: BoxDecoration(
           border: Border(
-              bottom: BorderSide(color: ColorConst.dividerColor)
+              bottom: BorderSide(color: ColorConst.dividerColor, width: 0.1)
           )
       ),
       padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),

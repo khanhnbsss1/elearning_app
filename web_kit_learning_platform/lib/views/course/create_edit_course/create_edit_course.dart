@@ -12,6 +12,7 @@ import 'package:webkit/services/apis/course/course_list/models/course_models.dar
 import 'package:multi_dropdown/multiselect_dropdown.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'bloc/add_course_bloc.dart';
+import 'components/add_test_list.dart';
 import 'components/course_introduction.dart';
 import '../course_detail/course_preview.dart';
 import 'components/create_lession_list.dart';
@@ -314,8 +315,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
         children: [
           CourseIntroductionPage(),
           CourseLinkLessonListPage(),
-         // SizedBox(),
-          SizedBox()
+          CourseLinkTestListPage()
         ],
         
         onPageChanged: (value) {

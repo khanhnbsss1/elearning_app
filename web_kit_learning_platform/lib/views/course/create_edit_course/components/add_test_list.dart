@@ -15,8 +15,9 @@ import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/services/apis/lessson/lesson_list_filter/lesson_list_filter_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/test/get_test_list_api.dart';
+import 'package:webkit/services/apis/test/models/test_info.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
-import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
 
 class CourseLinkTestListPage extends StatefulWidget {
@@ -58,7 +59,7 @@ class _CourseIntroductionPageState extends State<CourseLinkTestListPage> with Si
         return Material(
           child: LayoutBuilder(
             builder: (context, constraints) {
-              return buildLessonList(constraints: constraints, state: state, context: context);
+              return buildTestList(constraints: constraints, state: state, context: context);
             },
           ),
         );
@@ -66,7 +67,7 @@ class _CourseIntroductionPageState extends State<CourseLinkTestListPage> with Si
     );
   }
 
-  Widget buildLessonList({required BoxConstraints constraints, required AddCourseState state, required BuildContext context}) {
+  Widget buildTestList({required BoxConstraints constraints, required AddCourseState state, required BuildContext context}) {
     return GetBuilder<AddCourseController>(
       init: state.controller,
       builder: (controller) {
@@ -76,19 +77,44 @@ class _CourseIntroductionPageState extends State<CourseLinkTestListPage> with Si
             border: Border.all(
               color: ColorConst.colorHintTextSearch,
             ),
+              borderRadius: BorderRadius.circular(Dimens.size20)
+
           ),
           padding: EdgeInsets.all(Dimens.size16),
-          child: Column(
-            children: [
-              
-            ],
+          child: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      firstTestDropDownSearch(context: context, state: state, title: L10nX.getStr.search_lesson_str, onSelectTest: (p0) {
+                      },),
+                    ],
+                  ),
+                  Gap(Dimens.size16),
+                  Row(
+                    children: [
+                      firstTestDropDownSearch(context: context, state: state, title: L10nX.getStr.search_lesson_str, onSelectTest: (p0) {
+                      },),
+                    ],
+                  ),
+                ],
+              );
+            },
           ),
         );
       },
     );
   }
   
-  Widget firstTestDropDownSearch({Function(LessonInfo)? onSelectLesson, required AddCourseState state, required BuildContext context}) {
+  Widget firstTestDropDownSearch(
+      {
+        Function(TestInfo)? onSelectTest, 
+        required AddCourseState state, 
+        required BuildContext context,
+        required String title
+      }) {
     return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -105,7 +131,7 @@ class _CourseIntroductionPageState extends State<CourseLinkTestListPage> with Si
                     ),
 
                     decoration: InputDecoration(
-                      labelText: L10nX.getStr.search_lesson_str,
+                      labelText: title, 
                       hintTextDirection: AppTheme.textDirection,
                       labelStyle: TextStyleConstant.textStyleBlack14w400,
                       hintStyle: TextStyleConstant.textStyleBlack14w400,
@@ -154,10 +180,10 @@ class _CourseIntroductionPageState extends State<CourseLinkTestListPage> with Si
                       ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
                       return;
                     }
-                    if(onSelectLesson!=null)
+                    if(onSelectTest!=null)
                     {
                       _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
-                      onSelectLesson(suggestion);
+                      onSelectTest(suggestion);
                     }
                     else
                     {
@@ -186,21 +212,21 @@ class _CourseIntroductionPageState extends State<CourseLinkTestListPage> with Si
             ),
           ),
           Gap(Dimens.size16),
-          InkWell(
+/*          InkWell(
             onTap: () {
               CreateEditLesson().show(context);
             },
             child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size50,),
-          )
+          )*/
         ]
     );
   }
-  Future<List<LessonInfo>>getTestFilterList(String keyWord) async{
+  Future<List<TestInfo>>getTestFilterList(String keyWord) async{
     if(keyWord.isEmpty) {
       return [];
     }
-    GetLessonListFilterApi getLessonListApi= GetLessonListFilterApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord));
-    LessonListResponseModel data = await getLessonListApi.call();
+    GetTestListApi getLessonListApi= GetTestListApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord));
+    TestListResponseModel data = await getLessonListApi.call();
     return data.content??[];
   }
 

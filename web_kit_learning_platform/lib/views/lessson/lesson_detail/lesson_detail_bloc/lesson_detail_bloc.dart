@@ -5,7 +5,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/services/apis/course/course_detail/ulink_lesson_api.dart';
 import 'package:webkit/services/apis/lessson/lesson_detail/add_lesson_api.dart';
 import 'package:webkit/services/apis/lessson/lesson_detail/get_lesson_detail.dart';
 import 'package:webkit/services/apis/lessson/lesson_detail/update_lesson_api.dart';

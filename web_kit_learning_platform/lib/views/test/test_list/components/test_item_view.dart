@@ -40,7 +40,7 @@ class TestItemView extends StatelessWidget {
                 border: Border(
                   bottom: BorderSide(
                     color: ColorConst.dividerColor,
-                    width: 0.5
+                    width: 0.2
                   )
                 )
               ),
@@ -52,48 +52,117 @@ class TestItemView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      '${info.id}. ${info.name} \n' ?? "",
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyleConstant
-                          .normalTextOnBackGroundColorStyle16w400.copyWith(                         
-                          // fontSize: Dimens.size24,
-                          fontSize: ResponsiveInfo.isPhone()?Dimens.size18:Dimens.size16,
-                          //color: Color.fromRGBO(163, 20, 19, 1.0)
-                      ),
-                      maxLines: 1,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              color: ColorConst.mainColor.withOpacity(0.05),
+                              borderRadius: BorderRadius.circular(Dimens.size40)
+                          ),
+                          width: Dimens.size50,
+                          height: Dimens.size50,
+
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: Text(
+                                '${info.id}',
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyleConstant
+                                    .normalTextOnBackGroundColorStyle16w400.copyWith(
+                                  // fontSize: Dimens.size24,
+                                  color: ColorConst.mainColor,
+                                  fontSize: ResponsiveInfo.isPhone()?Dimens.size18:Dimens.size16,
+                                  //color: Color.fromRGBO(163, 20, 19, 1.0)
+                                ),
+                                maxLines: 1,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Gap(Dimens.size8),
+                        Text(
+                          '${info.name}' ?? "",
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyleConstant
+                              .normalTextOnBackGroundColorStyle16w400.copyWith(
+                            // fontSize: Dimens.size24,
+                            fontSize: ResponsiveInfo.isPhone()?Dimens.size18:Dimens.size16,
+                            //color: Color.fromRGBO(163, 20, 19, 1.0)
+                          ),
+                          maxLines: 1,
+                        ),
+                      ],
                     ),
+                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        InkWell(
-                          onTap: () {
+                        Container(
+                          decoration: BoxDecoration(
+                              color: ColorConst.mainColor.withOpacity(0.02),
+                              borderRadius: BorderRadius.circular(Dimens.size40)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: InkWell(
+                                onTap: () {
 
-                            if(onViewDetail!=null) {
-                              onViewDetail!(info);
-                            }
-                          },
-                          child: Icon(Icons.remove_red_eye, color: ColorConst.colorIconGrays.withOpacity(0.5),size: Dimens.size20,),
+                                  if(onViewDetail!=null) {
+                                    onViewDetail!(info);
+                                  }
+                                },
+                                child: Icon(Icons.remove_red_eye, color: ColorConst.mainColor.withOpacity(0.5),size: Dimens.size20,),
+                              ),
+                            ),
+                          ),
                         ),
+                        
                         Gap(Dimens.size6),
-                        InkWell(
-                          onTap: () {
-                            if(onEdit!=null) {
-                              onEdit!(info);
-                            }
-                          },
-                          child: Icon(Icons.edit, color: ColorConst.colorIconGrays.withOpacity(0.5),size: Dimens.size20,),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: ColorConst.mainColor.withOpacity(0.02),
+                              borderRadius: BorderRadius.circular(Dimens.size40)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: InkWell(
+                                onTap: () {
+                                  if(onEdit!=null) {
+                                    onEdit!(info);
+                                  }
+                                },
+                                child: Icon(Icons.edit, color: ColorConst.mainColor.withOpacity(0.5),size: Dimens.size20,),
+                              ),
+                            ),
+                          ),
                         ),
+                        
                         Gap(Dimens.size6),
-                        InkWell(
-                          onTap: () {
-                            if(onDelete!=null) {
-                              onDelete!(info);
-                            }
-                          },
-                          child: Icon(Icons.delete, color: ColorConst.colorIconGrays.withOpacity(0.5),size: Dimens.size20,),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: ColorConst.mainColor.withOpacity(0.02),
+                              borderRadius: BorderRadius.circular(Dimens.size40)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: InkWell(
+                                onTap: () {
+                                  if(onDelete!=null) {
+                                    onDelete!(info);
+                                  }
+                                },
+                                child: Icon(Icons.delete, color: ColorConst.mainColor.withOpacity(0.5),size: Dimens.size20,),
+                              ),
+                            ),
+                          ),
                         ),
+                        
                         Gap(Dimens.size6),
                       ],
                     )

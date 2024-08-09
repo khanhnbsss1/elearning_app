@@ -77,6 +77,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
             border: Border.all(
               color: ColorConst.colorHintTextSearch,
             ),
+            borderRadius: BorderRadius.circular(Dimens.size20)
           ),
           padding: EdgeInsets.all(Dimens.size16),
           child: Column(
@@ -84,7 +85,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
               buildSearchBar(state: state, context: context),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.all(Dimens.size16),
+                  padding: EdgeInsets.symmetric(vertical:  Dimens.size16),
                   child: buildLessonTableList(state: state, context: context),
                 ),
               ),
