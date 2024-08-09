@@ -51,11 +51,13 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
         GetLessonDetailApi getLessonDetailApi = GetLessonDetailApi(lessonId: state.lessonInfo?.id??0);
         state.lessonInfo = (await getLessonDetailApi.call())?? state.lessonInfo;
         state.listOfWord = [...state.lessonInfo?.vocabularies??[]];
+        state.editingControllerLectureName?.text = state.lessonInfo?.lectureName??"";
+        state.editingControllerLectureDescription?.text = state.lessonInfo?.note??"";
+        state.editingControllerLectureVideoLink?.text = state.lessonInfo?.link??"";
+        state.editingControllerLectureDocuments?.text = state.lessonInfo?.docName??"";
       }
     emit(state.copyWith(
       blocStatus: LessonDetailStatus.initial,
-      lessonInfo: state.lessonInfo,
-      listOfWord: state.listOfWord,
     ));
   }
   Future<void> _onUpdateLesson(

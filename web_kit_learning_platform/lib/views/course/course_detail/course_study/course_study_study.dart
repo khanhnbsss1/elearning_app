@@ -375,7 +375,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                               children: [
                                 Expanded(
                                   child: Text(
-                                    '$subjectIndex.$lectureIndex. ${L10nX.getStr.lecture_name_str} $lectureIndex: ${lessonInfo.lectureName}',
+                                    '$subjectIndex.$lectureIndex. ${lessonInfo.lectureName}',
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                   ),

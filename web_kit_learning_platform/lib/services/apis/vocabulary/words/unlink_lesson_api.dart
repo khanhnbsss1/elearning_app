@@ -26,8 +26,9 @@ class UnLinkWordApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
+    String listId = vocabularyInfos.map((e) => e.id,).toList().join(',');
     await setApiBody({
-      "vocabularyIds":vocabularyInfos.map((e) => e.id,).toList().join(','),
+      "vocabularyIds":listId,
       "lectureId":lessonId,
     });
   }

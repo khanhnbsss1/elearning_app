@@ -83,7 +83,7 @@ class LessonInfo {
     lectureName = json['lecture_name']?? json['name'];
     link = json['lecture_link']??json['link'];
     docId = json['doc_id'];
-    docName = json['docName'];
+    docName = json['doc_name'];
     mode = json['mode'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
