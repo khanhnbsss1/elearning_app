@@ -3,7 +3,9 @@ part of 'course_detail_bloc.dart';
 enum AddCourseStatus {
   onLoading,
   initial,
+  onLoadingSelectLesson,
   onSelectLesson,
+  
   unKnown
 }
 
