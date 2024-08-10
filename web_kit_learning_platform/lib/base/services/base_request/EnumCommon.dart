@@ -3,8 +3,8 @@ class CommonEnviroment {
 }
 
 const Map<DOMAIN_TYPE, String> LIVE_DOMAIN = {
-  DOMAIN_TYPE.MAIN: "http://navitrack.camdvr.org:8888/api/",
- // DOMAIN_TYPE.MAIN: "https://984a-118-70-125-12.ngrok-free.app/api/",
+  DOMAIN_TYPE.MAIN: "https://navitrack.fft.com.vn:8888/api/",
+  //DOMAIN_TYPE.MAIN: "https://ffda-118-70-125-12.ngrok-free.app/api/",
   DOMAIN_TYPE.PAYMENT: "https://navitrack.fft.com.vn:8899/api/",
 };
 
