@@ -1,9 +1,6 @@
-import 'dart:convert';
 
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/base/services/base_request/EnumCommon.dart';
-import 'package:webkit/base/services/base_request/apiName.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 
 import '../course_list/models/course_models.dart';

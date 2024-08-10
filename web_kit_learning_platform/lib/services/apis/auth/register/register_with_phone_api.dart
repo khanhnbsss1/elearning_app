@@ -1,9 +1,6 @@
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/device/device_manager.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/base/services/base_request/EnumCommon.dart';
-import 'package:webkit/base/services/base_request/apiName.dart';
-import 'package:webkit/base/services/base_request/models/response_error_objects.dart';
 import 'models/register_request.dart';
 
 class RegisterWithPhoneApi extends BaseApiRequest {

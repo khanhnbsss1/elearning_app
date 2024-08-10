@@ -2,7 +2,6 @@
 import 'package:webkit/base/base.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'loading.common.dart';
 class NotifyDialog {
   static List<BuildContext>showContextList = List.empty(growable: true);
   static bool isShowingDialog = false;

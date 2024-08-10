@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 
@@ -28,6 +27,7 @@ class UploadFileApi extends BaseApiRequest {
       MonitorLoading().dismiss();
       return null;
     }
+    return null;
   }
 
   Future<void> getAuthorization() async {

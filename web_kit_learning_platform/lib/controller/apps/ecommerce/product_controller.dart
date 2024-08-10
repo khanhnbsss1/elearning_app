@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
 
 import 'package:webkit/controller/my_controller.dart';

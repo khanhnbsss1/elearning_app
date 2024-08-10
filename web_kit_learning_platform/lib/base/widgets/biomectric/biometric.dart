@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/widgets/widgets.export.dart';
 import 'package:flutter/material.dart';
 
 import 'IdentifierConst.dart';

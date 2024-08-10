@@ -7,7 +7,6 @@ import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/forms/form_mask_controller.dart';
-import 'package:webkit/helpers/extensions/string.dart';
 import 'package:webkit/helpers/utils/my_string_utils.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_breadcrumb.dart';
@@ -22,7 +21,7 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class FormMaskPage extends StatefulWidget {
-  const FormMaskPage({Key? key}) : super(key: key);
+  const FormMaskPage({super.key});
 
   @override
   State<FormMaskPage> createState() => _FormMaskPageState();

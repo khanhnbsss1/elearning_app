@@ -1,8 +1,5 @@
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/base/services/base_request/EnumCommon.dart';
-import 'package:webkit/base/services/base_request/apiName.dart';
-import 'package:webkit/base/services/base_request/models/response_error_objects.dart';
 
 class GetUserProfileInfoApi extends BaseApiRequest {
   GetUserProfileInfoApi():super(

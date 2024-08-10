@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating/flutter_rating.dart';
@@ -329,7 +328,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
         SizedBox(
           height: 16,
         ),
-        Text('${_state.courseInfo?.introduction??"hello"}'),
+        Text(_state.courseInfo?.introduction??"hello"),
       ],
     );
   }

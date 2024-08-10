@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/my_controller.dart';
 
@@ -26,11 +25,7 @@ class ForgotPasswordController extends MyController {
     if (basicValidator.validateForm()) {
       loading = true;
       update();
-      var errors = null;
-      if (errors != null) {
-        basicValidator.validateForm();
-        basicValidator.clearErrors();
-      }
+      var errors;
       AppPages.routeName('/auth/reset_password');
       loading = false;
       update();

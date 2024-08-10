@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 
 class TagItemView extends StatelessWidget {

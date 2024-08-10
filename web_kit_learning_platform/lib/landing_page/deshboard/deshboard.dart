@@ -2,19 +2,15 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/widgets/scroll/custom_scroll_controller.dart';
 import 'package:webkit/base/widgets/static_view/static_view.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
-import 'package:webkit/controller/ui/landing_controller.dart';
 import 'package:webkit/helpers/localizations/language_helper.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/landing_page/components/review_list/review_list.dart';
-import 'package:webkit/models/user.dart';
 import 'package:webkit/services/apis/landing_page/review/models/landing_page_review_list_response_model.dart';
 import 'package:webkit/views/auth/login/login.dart';
 import 'package:webkit/views/auth/register.dart';

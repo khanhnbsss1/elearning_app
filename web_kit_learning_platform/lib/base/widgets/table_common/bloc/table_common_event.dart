@@ -8,15 +8,18 @@ abstract class TableCommonEvent extends Equatable {
 
 class TableCommonInitEvent extends TableCommonEvent {
   const TableCommonInitEvent();
+  @override
   List<Object?> get props => [];
 }
 
 class TableCommonUpdateColumnSizeEvent extends TableCommonEvent {
   TableColumnInfo tableColumnInfo;
   TableCommonUpdateColumnSizeEvent({required this.tableColumnInfo});
+  @override
   List<Object?> get props => [tableColumnInfo];
 }
 class TableCommonRefreshTableEvent extends TableCommonEvent {
   TableCommonRefreshTableEvent();
+  @override
   List<Object?> get props => [];
 }

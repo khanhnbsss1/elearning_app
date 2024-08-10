@@ -5,7 +5,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/models/user/UserProfile.dart';
 import 'package:webkit/services/apis/auth/login/models/login_request.dart';
 import 'package:webkit/services/apis/auth/login/login_with_phone_api.dart';
 

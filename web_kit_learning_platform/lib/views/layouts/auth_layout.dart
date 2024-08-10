@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:webkit/controller/layouts/auth_layout_controller.dart';
 import 'package:webkit/helpers/theme/admin_theme.dart';

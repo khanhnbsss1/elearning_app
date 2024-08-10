@@ -10,7 +10,6 @@ import 'package:webkit/helpers/localizations/language_helper.dart';
 import 'package:webkit/helpers/theme/app_style.dart';
 import 'package:webkit/helpers/widgets/my.dart';
 
-import '../localizations/bloc/main_bloc.dart';
 import 'theme_customizer.dart';
 
 class AppNotifier extends ChangeNotifier {

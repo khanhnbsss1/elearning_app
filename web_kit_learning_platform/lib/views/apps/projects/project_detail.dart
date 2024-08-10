@@ -25,7 +25,7 @@ import 'package:webkit/images.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class ProjectDetail extends StatefulWidget {
-  const ProjectDetail({Key? key}) : super(key: key);
+  const ProjectDetail({super.key});
 
   @override
   State<ProjectDetail> createState() => _ProjectDetailState();

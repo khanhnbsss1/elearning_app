@@ -23,7 +23,7 @@ import 'package:webkit/images.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key}) : super(key: key);
+  const ChatPage({super.key});
 
   @override
   State<ChatPage> createState() => _ChatPageState();
@@ -256,7 +256,7 @@ class _ChatPageState extends State<ChatPage>
                                         elevation: 0,
                                         borderRadiusAll: 8,
                                         backgroundColor: theme
-                                            .colorScheme.background
+                                            .colorScheme.surface
                                             .withAlpha(5),
                                         splashColor: theme
                                             .colorScheme.onSurface

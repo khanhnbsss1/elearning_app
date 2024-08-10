@@ -1,14 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_pagination/flutter_custom_pagination.dart';
 import 'package:gap/gap.dart';
 import 'package:get/instance_manager.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:toggle_switch/toggle_switch.dart';
-import 'package:universal_html/html.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/base/widgets/pages_common/list_body_page_common.dart';

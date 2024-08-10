@@ -91,7 +91,7 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
     notifier = Provider.of<ColorNotifier>(context, listen: true);
     height = MediaQuery.of(context).size.height;
     width = MediaQuery.of(context).size.width;
-    return Container(
+    return SizedBox(
       width: width,
       // color: Colors.green,
       child: BlocProvider(
@@ -119,7 +119,6 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
                 );
               },
             );
-            ;
           })),
     );
   }

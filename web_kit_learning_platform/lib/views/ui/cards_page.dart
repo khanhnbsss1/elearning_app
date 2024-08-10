@@ -25,7 +25,7 @@ import 'package:webkit/images.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class CardsPage extends StatefulWidget {
-  const CardsPage({Key? key}) : super(key: key);
+  const CardsPage({super.key});
 
   @override
   State<CardsPage> createState() => _CardsPageState();
@@ -615,7 +615,7 @@ class _CardsPageState extends State<CardsPage>
                                                     LucideIcons.chevronDown,
                                                     size: 22,
                                                     color: theme.colorScheme
-                                                        .onBackground,
+                                                        .onSurface,
                                                   ),
                                                 )
                                               ],

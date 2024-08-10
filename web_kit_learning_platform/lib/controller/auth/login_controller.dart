@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/biomectric/IdentifierConst.dart';
 import 'package:webkit/controller/my_controller.dart';
 
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
 import 'package:webkit/helpers/widgets/my_validators.dart';
-import 'package:webkit/routes/app_pages.dart';
 import 'package:webkit/services/apis/auth/login/models/login_request.dart';
 
 import '../../services/apis/auth/login/login_with_phone_api.dart';

@@ -5,16 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lucide_icons/lucide_icons.dart';
-import 'package:webkit/base/author/user_helper.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/apps/contact/edit_profile_controller.dart';
 import 'package:webkit/helpers/theme/app_style.dart';
 import 'package:webkit/helpers/utils/my_shadow.dart';
-import 'package:webkit/helpers/utils/my_string_utils.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb_item.dart';
 import 'package:webkit/helpers/widgets/my_button.dart';
 import 'package:webkit/helpers/widgets/my_card.dart';
 import 'package:webkit/helpers/widgets/my_container.dart';
@@ -26,8 +21,6 @@ import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/images.dart';
 import 'package:webkit/views/layouts/layout.dart';
-import '../../../base/models/user/UserProfile.dart';
-import '../../../routes/app_pages.dart';
 import 'build_text_field.dart';
 
 class EditProfile extends StatefulWidget {

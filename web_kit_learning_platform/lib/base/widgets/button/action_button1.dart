@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:hovering/hovering.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 
 import '../../base.export.dart';

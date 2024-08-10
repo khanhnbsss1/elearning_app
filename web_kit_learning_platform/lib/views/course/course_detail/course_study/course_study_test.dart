@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 
 import '../../course_detail/bloc/course_detail_bloc.dart';
 

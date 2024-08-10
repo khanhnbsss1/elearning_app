@@ -46,6 +46,7 @@ class QrCodeModel {
     data['data'] = this.data;
     return data;
   }
+  @override
   String toString() {
     String dataStr = base64.encode(utf8.encode(jsonEncode(toJson())));
     return dataStr;

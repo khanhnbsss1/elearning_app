@@ -131,7 +131,7 @@ class BaseApiRequest {
   }
 
   Future<Map<String, dynamic>> getHeaderAdd() async {
-    AuthInfo? authInfo = await AuthorManager().getAuthInfo();
+    AuthInfo? authInfo = AuthorManager().getAuthInfo();
     bool containAuthenParams = requestHeader!.keys.contains("Authorization");
     requestHeader?.addAll({
       "ngrok-skip-browser-warning": true
@@ -285,7 +285,7 @@ class BaseApiRequest {
       return await handleResponse(response: response, url: url, option: Options(headers: requestHeader));
     }
     catch(e){
-      FileUtils.PrintLog(' \n error: ${e} \n\n');
+      FileUtils.PrintLog(' \n error: $e \n\n');
     }
 
   }
@@ -328,7 +328,7 @@ class BaseApiRequest {
     }
     catch(e){
       handleResponse(response: e, url: url);
-      FileUtils.PrintLog(' \n error: ${e} \n\n');
+      FileUtils.PrintLog(' \n error: $e \n\n');
     }
 
   }
@@ -374,7 +374,7 @@ class BaseApiRequest {
     catch(e){
       handleResponse(response: e, url: url,params: params,);
 
-      FileUtils.PrintLog(' \n error: ${e} \n\n');
+      FileUtils.PrintLog(' \n error: $e \n\n');
     }
 
 

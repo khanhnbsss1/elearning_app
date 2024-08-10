@@ -136,6 +136,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "course_create": MessageLookupByLibrary.simpleMessage("Create course"),
         "course_delete": MessageLookupByLibrary.simpleMessage("Delete course"),
         "course_edit": MessageLookupByLibrary.simpleMessage("Edit course"),
+        "course_object_str":
+            MessageLookupByLibrary.simpleMessage("Course object"),
         "course_str": MessageLookupByLibrary.simpleMessage("Course"),
         "courses_list": MessageLookupByLibrary.simpleMessage("Course list"),
         "create_document":

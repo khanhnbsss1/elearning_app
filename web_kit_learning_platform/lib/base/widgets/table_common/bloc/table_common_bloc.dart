@@ -8,7 +8,7 @@ part 'table_common_event.dart';
 part 'table_common_state.dart';
 
 class TableCommonBloc extends Bloc<TableCommonEvent, TableCommonState> {
-  TableCommonBloc(TableCommonState initialState) : super(initialState) {
+  TableCommonBloc(super.initialState) {
     on<TableCommonInitEvent>(_onInit);
     on<TableCommonUpdateColumnSizeEvent>(_onUpdateColumnSize);
     on<TableCommonRefreshTableEvent>((event, emit) async {

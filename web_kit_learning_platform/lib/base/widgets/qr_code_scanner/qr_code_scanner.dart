@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 import 'package:gap/gap.dart';
 import 'package:webkit/base/widgets/qr_code_scanner/scanner_error_widget.dart';
 import 'package:flutter/material.dart';

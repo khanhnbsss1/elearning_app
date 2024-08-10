@@ -387,7 +387,7 @@ class AppTheme {
     highlightColor: Color(0xffeeeeee),
     colorScheme: ColorScheme.fromSeed(
             seedColor: Color(0xff3C4EC5), brightness: Brightness.light)
-        .copyWith(background: Color(0xffffffff))
+        .copyWith(surface: Color(0xffffffff))
         .copyWith(error: Color(0xfff0323c)),
   );
 
@@ -503,7 +503,7 @@ class AppTheme {
     splashColor: Colors.white.withAlpha(56),
     colorScheme: ColorScheme.fromSeed(
             seedColor: Color(0xff069DEF), brightness: Brightness.dark)
-        .copyWith(background: Color(0xff161616))
+        .copyWith(surface: Color(0xff161616))
         .copyWith(error: Colors.orange),
   );
 

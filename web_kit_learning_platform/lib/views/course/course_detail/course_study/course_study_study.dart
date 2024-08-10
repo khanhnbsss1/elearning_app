@@ -1,15 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gap/gap.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/common/alert_dialog/loading.export.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/topic/model/topic_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
-import 'package:webkit/services/apis/vocabulary/words/word_info.dart';
 import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
 
 import '../../../../base/widgets/audio/audio_speaker.dart';
@@ -34,7 +31,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   ScrollController lessonDetailScrollController = ScrollController();
   late CourseDetailState _state;
   late BuildContext _blocContext;
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -171,22 +168,27 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   }
 
   Widget buildVideo() {
-    return Container(
-      height: 450,
-      decoration: BoxDecoration(
-        color: Colors.black
-      ),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: 400,
-        child: VideoPlayer(
-          videoPlayerModel: VideoPlayerModel(title: "", 
-              link: 
-              //(_state.selectLessonInfo?.link??"").isNotEmpty?(_state.selectLessonInfo?.link??""):
-              "https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4" //_state.courseInfo?.videoPreview ?? ""
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return Container(
+         // height: 450,
+          decoration: BoxDecoration(
+              color: Colors.black
           ),
-        ),
-      ),
+          constraints: BoxConstraints(
+            maxHeight: ResponsiveInfo.isPhone()?constraints.maxWidth:MediaQuery.sizeOf(context).height*2/3,
+            maxWidth: constraints.maxWidth
+          ),
+          child: VideoPlayer(
+            videoPlayerModel: VideoPlayerModel(title: "",
+                link:
+                //(_state.selectLessonInfo?.link??"").isNotEmpty?(_state.selectLessonInfo?.link??""):
+                "https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4" //_state.courseInfo?.videoPreview ?? ""
+            ),
+          ),
+        );
+
+      },
     );
   }
 
@@ -617,7 +619,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   }
 
   Widget buildStudyReviewItemUser({required bool replyCheck}) {
-    double _rating = 5;
+    double rating = 5;
     TextEditingController controller = TextEditingController();
     final List<String> menuItems = ['Item 1', 'Item 2', 'Item 3'];
     bool check = false;
@@ -653,10 +655,10 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                       width: 8,
                     ),
                     StarRating(
-                      rating: _rating,
+                      rating: rating,
                       onRatingChanged: (rating) {
                         setState(() {
-                          _rating = rating;
+                          rating = rating;
                         });
                       },
                     ),

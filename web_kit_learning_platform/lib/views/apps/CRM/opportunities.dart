@@ -21,7 +21,7 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class OpportunitiesPage extends StatefulWidget {
-  const OpportunitiesPage({Key? key}) : super(key: key);
+  const OpportunitiesPage({super.key});
 
   @override
   State<OpportunitiesPage> createState() => _OpportunitiesPageState();

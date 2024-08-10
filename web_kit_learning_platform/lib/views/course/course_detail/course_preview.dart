@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating/flutter_rating.dart';
-import 'package:gap/gap.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/views/layouts/layout.dart';
 import 'package:webkit/views/video_player/model/video_model.dart';
 import 'package:webkit/views/video_player/video_player.dart';
@@ -12,8 +9,6 @@ import '../../../helpers/utils/ui_mixins.dart';
 import '../../../services/apis/course/course_detail/models/course_detail_model.dart';
 import 'bloc/course_detail_bloc.dart';
 import 'components/course_intro.dart';
-import 'components/lecture_list.dart';
-import 'course_study/course_study.dart';
 
 class CoursePreview extends StatefulWidget {
   CourseInfo courseInfo;

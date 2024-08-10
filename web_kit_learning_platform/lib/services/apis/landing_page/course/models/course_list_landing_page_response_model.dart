@@ -1,6 +1,5 @@
 
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
-import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 
 class CourseListResponseModel {
   List<CourseLandingPageInfo>? data;
@@ -64,6 +63,7 @@ class CourseLandingPageInfo extends CourseInfo{
     introduction = json['introduction'];
   }
 
+  @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;

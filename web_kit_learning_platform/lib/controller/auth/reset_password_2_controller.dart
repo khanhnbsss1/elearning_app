@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/my_controller.dart';
 
@@ -39,12 +38,7 @@ class ResetPassword2Controller extends MyController {
     if (basicValidator.validateForm()) {
       loading = true;
       update();
-      var errors = null;
-      if (errors != null) {
-        basicValidator.addErrors(errors);
-        basicValidator.validateForm();
-        basicValidator.clearErrors();
-      }
+      var errors;
       AppPages.routeName(Routes.dashboardRoute);
       loading = false;
       update();

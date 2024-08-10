@@ -4,8 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:pinput/pinput.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/add_word_controller.dart';
 import 'package:webkit/services/apis/sentence/models/sentence_info.dart';

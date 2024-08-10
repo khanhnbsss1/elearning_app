@@ -44,21 +44,15 @@ class Login2Controller extends MyController {
     if (basicValidator.validateForm()) {
       loading = true;
       update();
-      var errors = null;
-      if (errors != null) {
-        basicValidator.addErrors(errors);
-        basicValidator.validateForm();
-        basicValidator.clearErrors();
-      } else {
-        String nextUrl =
-            Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
-                    .queryParameters['next'] ??
-                "/dashboard";
-        AppPages.routeName(
-          nextUrl,
-        );
-      }
-      loading = false;
+      var errors;
+      String nextUrl =
+          Uri.parse(ModalRoute.of(Get.context!)?.settings.name ?? "")
+                  .queryParameters['next'] ??
+              "/dashboard";
+      AppPages.routeName(
+        nextUrl,
+      );
+          loading = false;
       update();
     }
   }

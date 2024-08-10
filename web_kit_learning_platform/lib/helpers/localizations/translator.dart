@@ -1,11 +1,8 @@
-import 'dart:convert';
 import 'dart:developer';
 
-import 'package:flutter/services.dart';
 import 'package:get/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'bloc/main_bloc.dart';
 
 class Translator {
   static Map<String, String>? _localizedStrings;

@@ -131,6 +131,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "course_delete": MessageLookupByLibrary.simpleMessage("Xóa khóa học"),
         "course_edit":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa khóa học"),
+        "course_object_str":
+            MessageLookupByLibrary.simpleMessage("Đối tượng khóa học"),
         "course_str": MessageLookupByLibrary.simpleMessage("Khóa học"),
         "courses_list":
             MessageLookupByLibrary.simpleMessage("Danh sách khóa học"),

@@ -17,7 +17,7 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class ReviewsPage extends StatefulWidget {
-  const ReviewsPage({Key? key}) : super(key: key);
+  const ReviewsPage({super.key});
 
   @override
   State<ReviewsPage> createState() => _ReviewsPageState();

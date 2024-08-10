@@ -1,16 +1,13 @@
 // ignore_for_file: camel_case_types
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/landing_page/mediaquery/mq.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
-import 'package:webkit/services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
 import 'package:webkit/helpers/widgets/course_item.dart';
 
-import '../../../services/apis/course/course_list/models/course_models.dart';
 import '../colornotifier.dart';
 import 'bloc/landing_page_course_list_bloc.dart';
 
@@ -29,6 +26,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
   bool isHover = false;
   ScrollController scrollCont = ScrollController();
 
+  @override
   void initState() {
     super.initState();
     scrollCont.addListener(() {
@@ -117,7 +115,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
               SizedBox(
                 height: constraints.maxWidth < 550 ? 10 : 20,
               ),
-              Container(
+              SizedBox(
                 // height: constraints.maxWidth < 900 ? constraints.maxWidth / 0.152 : constraints.maxWidth < 1100 ? constraints.maxWidth / 0.66 : constraints.maxWidth < 1300 ? constraints.maxWidth / 1.35 : constraints.maxWidth / 1.8,
                 width: constraints.maxWidth < 900
                     ? constraints.maxWidth / 0.2

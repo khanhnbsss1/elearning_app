@@ -1,9 +1,7 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import '../../../../controller/ui/add_course_controller.dart';
 import '../../../../helpers/utils/ui_mixins.dart';

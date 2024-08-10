@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/instance_manager.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/controller/other/google_map_controller.dart';
 import 'package:webkit/helpers/extensions/string.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_breadcrumb.dart';
@@ -16,7 +14,7 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class GoogleMapPage extends StatefulWidget {
-  const GoogleMapPage({Key? key}) : super(key: key);
+  const GoogleMapPage({super.key});
 
   @override
   State<GoogleMapPage> createState() => _GoogleMapPageState();

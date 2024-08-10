@@ -16,9 +16,7 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
-import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
-import 'package:multi_dropdown/multiselect_dropdown.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
@@ -39,7 +37,6 @@ class CourseIntroductionPage extends StatefulWidget {
 }
 
 class _CourseIntroductionPageState extends State<CourseIntroductionPage> with SingleTickerProviderStateMixin, UIMixin {
-  final MultiSelectController multiSelectController = MultiSelectController();
   late List<CourseInfo> coursesInfo;
   var position = 0;
 

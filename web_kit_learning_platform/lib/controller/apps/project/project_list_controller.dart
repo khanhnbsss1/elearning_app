@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/my_controller.dart';
 import 'package:webkit/helpers/widgets/my_text_utils.dart';

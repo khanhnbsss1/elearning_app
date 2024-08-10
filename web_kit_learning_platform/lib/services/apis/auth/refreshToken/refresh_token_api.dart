@@ -1,11 +1,7 @@
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/device/device_manager.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/base/services/base_request/EnumCommon.dart';
-import 'package:webkit/base/services/base_request/apiName.dart';
-import 'package:webkit/base/services/base_request/models/response_error_objects.dart';
 import 'package:webkit/services/apis/auth/login/models/login_response.dart';
-import 'package:webkit/services/apis/user/get_user_detail_api.dart';
 
 import 'models/refresh_token_request.dart';
 class RefreshTokenApi extends BaseApiRequest {

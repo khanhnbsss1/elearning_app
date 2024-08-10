@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:webkit/base/base.export.dart';
 import 'package:webkit/views/video_player/video_player/video_player.dart';
 import 'package:webkit/views/video_player/youtube_player/youtube_layer.dart';
 

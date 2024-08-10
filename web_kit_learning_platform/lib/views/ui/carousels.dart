@@ -4,7 +4,6 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/ui/carousels_controller.dart';
-import 'package:webkit/helpers/extensions/string.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_breadcrumb.dart';
 import 'package:webkit/helpers/widgets/my_breadcrumb_item.dart';
@@ -18,7 +17,7 @@ import 'package:webkit/images.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class Carousels extends StatefulWidget {
-  const Carousels({Key? key}) : super(key: key);
+  const Carousels({super.key});
 
   @override
   State<Carousels> createState() => _CarouselsState();

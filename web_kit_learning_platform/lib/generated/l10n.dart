@@ -4780,7 +4780,15 @@ class S {
     );
   }
 
-  // skipped getter for the 'Course object_str' key
+  /// `Course object`
+  String get course_object_str {
+    return Intl.message(
+      'Course object',
+      name: 'course_object_str',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `Grade`
   String get grade_str {
@@ -5121,8 +5129,6 @@ class S {
       args: [],
     );
   }
-
-  // skipped getter for the 'subject_is_exit str' key
 
   /// `Please choose a subject`
   String get please_choose_a_subject {

@@ -3,7 +3,6 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/ui/drag_drop_controller.dart';
-import 'package:webkit/helpers/extensions/string.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/utils/utils.dart';
 import 'package:webkit/helpers/widgets/my_breadcrumb.dart';
@@ -18,7 +17,7 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class DragDropPage extends StatefulWidget {
-  const DragDropPage({Key? key}) : super(key: key);
+  const DragDropPage({super.key});
 
   @override
   State<DragDropPage> createState() => _DragDropPageState();

@@ -1,16 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
-import 'package:webkit/helpers/widgets/my_screen_media.dart';
 import 'package:webkit/helpers/widgets/my_screen_media_type.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import '../../base/widgets/text/read_more_text_custom.dart';
-import '../../services/apis/course/course_list/models/course_models.dart';
 
 class CourseItem extends StatelessWidget {
   CourseItem({required this.constraints, required this.courseInfo, isGirdView});
@@ -80,7 +77,7 @@ class CourseItem extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           (courseInfo.image!.isNotEmpty)
-                              ? Container(
+                              ? SizedBox(
                                   height: 300,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(16),

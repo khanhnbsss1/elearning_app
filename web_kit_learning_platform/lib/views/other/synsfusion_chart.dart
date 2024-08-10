@@ -21,7 +21,7 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class SyncFusionChart extends StatefulWidget {
-  const SyncFusionChart({Key? key}) : super(key: key);
+  const SyncFusionChart({super.key});
 
   @override
   State<SyncFusionChart> createState() => _SyncFusionChartState();

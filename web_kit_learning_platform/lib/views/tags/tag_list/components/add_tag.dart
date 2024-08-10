@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/services/apis/tags/add_tag_api.dart';
@@ -79,7 +80,7 @@ class AddTagPageState extends State<AddTagPage>with UIMixin {
                 text: widget.tagPageAction== TagPageAction.edit?L10nX.getStr.edit_str:L10nX.getStr.create_str,
                 width: Dimens.size120,
                 onTap: () async {
-                  var tagApi;
+                  dynamic tagApi;
                   if(widget.tagsInfo?.id!=null){ /// th edit tag
                     tagApi = UpdateTagApi(tagInfo: widget.tagsInfo!);
                   }

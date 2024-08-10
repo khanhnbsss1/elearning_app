@@ -12,6 +12,7 @@ class EditProfileController extends MyController {
     update();
   }
 
+  @override
   void onInit() {
     super.onInit();
     validation.addField(

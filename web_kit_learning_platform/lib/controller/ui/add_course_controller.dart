@@ -4,7 +4,6 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/my_controller.dart';
 import 'package:webkit/helpers/widgets/my_form_validator.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
-import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 
 class AddCourseController extends MyController {

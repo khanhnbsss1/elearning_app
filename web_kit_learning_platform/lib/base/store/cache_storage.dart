@@ -495,7 +495,7 @@ class CookieStorage {
   }
 
   Map convertToMap() {
-    final cookie = html_cache.window.document.cookie!;
+    final cookie = html_cache.window.document.cookie;
     final entity = cookie.split("; ").map((item) {
       final split = item.split("=");
       return MapEntry(split[0], split[1]);

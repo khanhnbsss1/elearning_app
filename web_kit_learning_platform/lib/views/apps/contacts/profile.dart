@@ -21,13 +21,11 @@ import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/images.dart';
-import 'package:webkit/routes/app_pages.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
-import '../../../base/author/user_helper.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -141,7 +139,7 @@ class _ProfilePageState extends State<ProfilePage>
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           MyText.bodyMedium(
-                                            "${userProfile?.fullName??"Amanda"}",
+                                            userProfile?.fullName??"Amanda",
                                             fontWeight: 600,
                                             fontSize: 16,
                                           ),
@@ -236,7 +234,7 @@ class _ProfilePageState extends State<ProfilePage>
                                           elevation: 0,
                                           borderRadiusAll: 8,
                                           backgroundColor: theme
-                                              .colorScheme.background
+                                              .colorScheme.surface
                                               .withAlpha(5),
                                           splashColor: theme
                                               .colorScheme.onSurface

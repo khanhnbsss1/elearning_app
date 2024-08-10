@@ -4,7 +4,6 @@ import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/apps/ecommerce/customers_controller.dart';
-import 'package:webkit/helpers/extensions/string.dart';
 import 'package:webkit/helpers/theme/app_style.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/utils/utils.dart';
@@ -19,7 +18,7 @@ import 'package:webkit/models/customer.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class Customers extends StatefulWidget {
-  const Customers({Key? key}) : super(key: key);
+  const Customers({super.key});
 
   @override
   State<Customers> createState() => _CustomersState();

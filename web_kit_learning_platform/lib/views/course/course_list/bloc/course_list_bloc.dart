@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:webkit/base/author/user_helper.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/services/apis/course/course_list/course_api.dart';

@@ -121,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "course_create": MessageLookupByLibrary.simpleMessage("创建课程"),
         "course_delete": MessageLookupByLibrary.simpleMessage("删除课程"),
         "course_edit": MessageLookupByLibrary.simpleMessage("编辑课程"),
+        "course_object_str": MessageLookupByLibrary.simpleMessage("课程对象"),
         "course_str": MessageLookupByLibrary.simpleMessage("课程"),
         "courses_list": MessageLookupByLibrary.simpleMessage("课程列表"),
         "create_document": MessageLookupByLibrary.simpleMessage("创建文档"),

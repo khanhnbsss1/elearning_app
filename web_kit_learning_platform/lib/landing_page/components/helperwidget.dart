@@ -9,7 +9,6 @@ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/landing_page/deshboard/deshboard.dart';
 
-import '../../base/theme/text_stype_constant.dart';
 import '../mediaquery/mq.dart';
 import 'colornotifier.dart';
 

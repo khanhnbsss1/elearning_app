@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/base/widgets/static_view/static_view.dart';
 import 'package:webkit/helpers/services/url_service.dart';
 import 'package:webkit/helpers/theme/app_style.dart';
@@ -15,11 +12,8 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_button.dart';
 import 'package:webkit/helpers/widgets/my_card.dart';
 import 'package:webkit/helpers/widgets/my_container.dart';
-import 'package:webkit/helpers/widgets/my_screen_media.dart';
-import 'package:webkit/helpers/widgets/my_screen_media_type.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
-import 'package:webkit/images.dart';
 import 'package:webkit/widgets/custom_pop_menu.dart';
 
 typedef LeftbarMenuFunction = void Function(String key);
@@ -987,12 +981,12 @@ class MenuItem extends StatefulWidget {
   final String? route;
 
   const MenuItem({
-    Key? key,
+    super.key,
     this.iconData,
     required this.title,
     this.isCondensed = false,
     this.route,
-  }) : super(key: key);
+  });
 
   @override
   _MenuItemState createState() => _MenuItemState();

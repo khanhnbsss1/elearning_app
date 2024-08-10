@@ -8,8 +8,6 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
-import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
-import 'package:multi_dropdown/multiselect_dropdown.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'bloc/add_course_bloc.dart';
 import 'components/add_test_list.dart';
@@ -39,7 +37,6 @@ class CreateEditCourse extends StatefulWidget {
 
 class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerProviderStateMixin, UIMixin {
 
-  final MultiSelectController multiSelectController = MultiSelectController();
   late AnimationController animationController;
   late List<CourseInfo> coursesInfo;
   late TabController _tabController ;

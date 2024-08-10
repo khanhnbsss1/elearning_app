@@ -4,7 +4,6 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:webkit/base/base.export.dart';
-import '../utils/file_utils.dart';
 import 'firebase_options.dart';
 import 'notification/local_notification.dart';
 import 'notification/main_notification.dart';
@@ -158,7 +157,7 @@ class FirebaseManager {
   Future<void> replaceSubscribeTopic(String oldTopic, String newTopic) async {
    await _fcmUnSubscribeMultiTopic(fcmSubscribeTopicNameList);
    List<String> fcmSubscribeTopicNameListTemp = [...fcmSubscribeTopicNameList];
-    if(fcmSubscribeTopicNameListTemp.contains(oldTopic));
+    if(fcmSubscribeTopicNameListTemp.contains(oldTopic)) {}
     {
       fcmSubscribeTopicNameListTemp.remove(oldTopic);
     }
@@ -194,7 +193,7 @@ class FirebaseManager {
   }
   Future<void> removeSubscribeTopic(String topic) async {
     topic = navitrackTopicPre +  topic;
-    if(fcmSubscribeTopicNameList.contains(topic));
+    if(fcmSubscribeTopicNameList.contains(topic)) {}
     {
       await _fcmUnSubscribeTopic(topic);
       fcmSubscribeTopicNameList.remove(topic);

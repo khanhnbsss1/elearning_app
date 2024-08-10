@@ -8,7 +8,6 @@ abstract class MyCourseListEvent extends Equatable {
 
 class MyCourseListInitEvent extends MyCourseListEvent {
   MyCourseListInitEvent()
-  {
-  }
+;  @override
   List<Object?> get props => [];
 }

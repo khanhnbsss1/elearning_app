@@ -1,13 +1,9 @@
 // ignore_for_file: camel_case_types
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating/flutter_rating.dart';
-import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/widgets/table_common/animation/onhover_widget.dart';
 import 'package:webkit/landing_page/mediaquery/mq.dart';
 import 'package:readmore/readmore.dart';
 import 'package:webkit/services/apis/landing_page/review/models/landing_page_review_list_response_model.dart';

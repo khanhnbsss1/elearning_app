@@ -1,21 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
-import 'package:webkit/helpers/widgets/my.dart';
-import 'package:webkit/helpers/widgets/my_card.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
-import 'package:webkit/helpers/widgets/my_text_style.dart';
-import 'package:webkit/l10n/l10n_extention.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
-import 'package:webkit/services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:webkit/views/layouts/left_bar.dart';
 import '../../services/apis/course/course_detail/models/course_detail_model.dart';
-import '../../services/apis/course/course_list/models/course_models.dart';
 
 enum CourseItemAction { viewDetail, edit, delete, study }
 

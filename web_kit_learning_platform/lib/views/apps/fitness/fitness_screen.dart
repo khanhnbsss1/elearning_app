@@ -398,7 +398,7 @@ class _FitnessScreenState extends State<FitnessScreen>
                                                     child: MyText.bodySmall(
                                                       behavior.toString(),
                                                       color: theme.colorScheme
-                                                          .onBackground,
+                                                          .onSurface,
                                                       fontWeight: 600,
                                                     ),
                                                   );
@@ -416,13 +416,13 @@ class _FitnessScreenState extends State<FitnessScreen>
                                                       controller.selectedOutPut
                                                           .toString(),
                                                       color: theme.colorScheme
-                                                          .onBackground,
+                                                          .onSurface,
                                                     ),
                                                     Icon(
                                                       LucideIcons.chevronDown,
                                                       size: 22,
                                                       color: theme.colorScheme
-                                                          .onBackground,
+                                                          .onSurface,
                                                     )
                                                   ],
                                                 ),

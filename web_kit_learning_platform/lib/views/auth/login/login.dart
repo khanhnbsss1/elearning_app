@@ -6,7 +6,6 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/resizer/reponsive.dart';
 import 'package:webkit/base/widgets/static_view/static_view.dart';
-import 'package:webkit/components/app_logo.dart';
 import 'package:webkit/controller/auth/login_controller.dart';
 import 'package:webkit/helpers/extensions/string.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
@@ -411,8 +410,9 @@ class _LoginState extends State<LoginPage1> {
                                 keyboardType: TextInputType.emailAddress,
                                 controller: emailCtlr,
                                 validator: (value) {
-                                  if (value!.isEmpty)
+                                  if (value!.isEmpty) {
                                     return 'Email is required';
+                                  }
                                   return null;
                                 },
                                 decoration: InputDecoration(
@@ -442,8 +442,9 @@ class _LoginState extends State<LoginPage1> {
                                 controller: passwordCtrl,
                                 obscureText: _obsecureText,
                                 validator: (value) {
-                                  if (value!.isEmpty)
+                                  if (value!.isEmpty) {
                                     return 'Password is required';
+                                  }
                                   return null;
                                 },
                                 decoration: InputDecoration(

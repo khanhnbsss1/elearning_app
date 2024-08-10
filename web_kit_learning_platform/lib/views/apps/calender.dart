@@ -15,7 +15,7 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class Calender extends StatefulWidget {
-  const Calender({Key? key}) : super(key: key);
+  const Calender({super.key});
 
   @override
   State<Calender> createState() => _CalenderState();

@@ -228,7 +228,9 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                 ),
                               ),
                             ),
-                            myScreenMediaType.isMobile ? buildCourseList(state: state, boxConstraints: boxConstraints) : Expanded(child: buildCourseList(state: state, boxConstraints: boxConstraints)),
+                            myScreenMediaType.isMobile ?
+                            Expanded(child: buildCourseList(state: state, boxConstraints: boxConstraints)) :
+                            Expanded(child: buildCourseList(state: state, boxConstraints: boxConstraints)),
                             SizedBox(
                               height: 8,
                             ),
@@ -321,7 +323,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                 alignment: Alignment.topLeft,
                 child: Scrollbar(
                   controller: scrollController,
-                  thickness: 15,
+                  thickness: ResponsiveInfo.isPhone()?5: 15,
                   radius: Radius.circular(0),
                   child: Padding(
                     padding: const EdgeInsets.only(top: 16.0, left: 16, right: 16),
@@ -330,31 +332,16 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                         Expanded(
                           child: Align(
                             alignment: Alignment.topCenter,
-                            child: SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                controller: scrollController,
-/*                        child: Wrap(
-                          spacing: 16,
-                          runSpacing: 16,
-                          alignment: WrapAlignment.start,
-                          crossAxisAlignment: WrapCrossAlignment.start,
-                          runAlignment: WrapAlignment.start,
-                          children: listOfCourse,
-                        ),*/
-
-                                child: GridView.count(
-                                  //padding: const EdgeInsets.all(20),
-                                  crossAxisSpacing: 24,
-                                  childAspectRatio: (widthItem) / (heightOfItem) - 0.05,
-                                  mainAxisSpacing: 24,
-                                  crossAxisCount: numberRow,
-                                  shrinkWrap: true,
-                                  children: listOfCourse,
-                                )
-
-                                // child: MyGridView(item: listOfCourse,),
-
-                                ),
+                            child: GridView.count(
+                              //padding: const EdgeInsets.all(20),
+                              controller: scrollController,
+                              crossAxisSpacing: 24,
+                              childAspectRatio: (widthItem) / (heightOfItem) - 0.05,
+                              mainAxisSpacing: 24,
+                              crossAxisCount: numberRow,
+                              shrinkWrap: true,
+                              children: listOfCourse,
+                            ),
                           ),
                         ),
                       ],

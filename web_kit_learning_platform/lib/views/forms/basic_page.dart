@@ -24,7 +24,7 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class BasicPage extends StatefulWidget {
-  const BasicPage({Key? key}) : super(key: key);
+  const BasicPage({super.key});
 
   @override
   State<BasicPage> createState() => _BasicPageState();
@@ -661,7 +661,7 @@ class _BasicPageState extends State<BasicPage>
                                                     LucideIcons.chevronDown,
                                                     size: 22,
                                                     color: theme.colorScheme
-                                                        .onBackground,
+                                                        .onSurface,
                                                   ),
                                                 )
                                               ],
@@ -713,7 +713,7 @@ class _BasicPageState extends State<BasicPage>
                                                     LucideIcons.chevronDown,
                                                     size: 22,
                                                     color: theme.colorScheme
-                                                        .onBackground,
+                                                        .onSurface,
                                                   ),
                                                 )
                                               ],

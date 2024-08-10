@@ -1,7 +1,4 @@
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/base/services/base_request/EnumCommon.dart';
-import 'package:webkit/base/services/base_request/apiName.dart';
-import 'package:webkit/base/services/base_request/models/response_error_objects.dart';
 import 'package:webkit/services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
 
 class LandingPageCourseListApi extends BaseApiRequest {

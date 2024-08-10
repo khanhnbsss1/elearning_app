@@ -1,13 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:webkit/base/base.export.dart';
 import '../model/video_model.dart';
 
-import 'package:flutter/foundation.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart' as youtube_player_flutter;
 
 ///
 
@@ -70,17 +67,20 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
         return YoutubePlayerScaffold(
           controller: _controller,
           backgroundColor: ColorConst.blackColor,
-          aspectRatio: constraints.maxWidth/constraints.maxHeight,
-          
+          //aspectRatio: constraints.maxWidth/constraints.maxHeight,
           builder: (context, player) {
             return LayoutBuilder(
               builder: (context, constraints) {
-                return Column(
-                  children: [
-                    Expanded(child: player),
-                    const VideoPositionIndicator(),
-                    //const VideoPositionSeeker(),
-                  ],
+                return SizedBox(
+                  height: constraints.maxHeight,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(child: player),
+                      const VideoPositionIndicator(),
+                      //const VideoPositionSeeker(),
+                    ],
+                  ),
                 );
               },
             );

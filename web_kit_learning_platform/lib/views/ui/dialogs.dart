@@ -20,7 +20,7 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class Dialogs extends StatefulWidget {
-  const Dialogs({Key? key}) : super(key: key);
+  const Dialogs({super.key});
 
   @override
   State<Dialogs> createState() => _DialogsState();

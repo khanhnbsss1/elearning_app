@@ -478,7 +478,7 @@
   "upload_youtube_url_str": "Tải url youtube lên",
   "author_str": "Tác giả",
   "duration_str": "Thời lượng",
-  "Course object_str": "Đối tượng khóa học",
+  "course_object_str": "Đối tượng khóa học",
   "grade_str": "Lớp",
   "how_long_does_the_course_last_str": "Khóa học kéo dài bao lâu?",
   "grade_name_str": "Tên lớp",

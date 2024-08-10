@@ -313,7 +313,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     showActiveLabel = widget.showActiveLabel ?? true;
     activeContainerColor =
         widget.activeContainerColor ?? theme.primaryColor.withAlpha(100);
-    backgroundColor = widget.backgroundColor ?? theme.colorScheme.background;
+    backgroundColor = widget.backgroundColor ?? theme.colorScheme.surface;
     activeTitleStyle = widget.activeTitleStyle;
     titleStyle = widget.titleStyle;
     activeTitleColor = widget.activeTitleColor;

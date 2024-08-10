@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/services/apis/lessson/lesson_list/lesson_list_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
-import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
-import 'package:webkit/services/apis/vocabulary/vocabulary_list/vocabulary_list_api.dart';
 
 part 'lesson_list_event.dart';
 

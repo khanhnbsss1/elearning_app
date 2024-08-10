@@ -146,7 +146,7 @@ class CourseInfo {
     return CourseInfo(
       id : id??this.id,
       name : name ??this.name,
-      image : image ??this.image,
+      image : (image??'').isNotEmpty ? image:this.image,
       totalLectures : totalLectures ??this.totalLectures,
       totalSubjects : totalSubjects ??this.totalSubjects,
       producerName : producerName ??this.producerName,
@@ -163,7 +163,7 @@ class CourseInfo {
       updatedBy : updatedBy ??this.updatedBy,
       ratePoint : ratePoint ??this.ratePoint,
       durian : durian ??this.durian,
-      videoPreview : videoPreview ??this.videoPreview,
+      videoPreview : ((videoPreview??'').isNotEmpty)? videoPreview: this.videoPreview,
       courseMode : courseMode ??this.courseMode,
       gradeName : gradeName ??this.gradeName,
       categoryId : categoryId ??this.categoryId,

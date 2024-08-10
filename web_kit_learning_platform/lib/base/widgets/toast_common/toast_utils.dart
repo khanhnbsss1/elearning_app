@@ -1,5 +1,4 @@
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/widgets/widgets.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';

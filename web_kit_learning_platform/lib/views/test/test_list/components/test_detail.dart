@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
-import 'package:webkit/services/apis/tags/add_tag_api.dart';
-import 'package:webkit/services/apis/tags/models/tag_info.dart';
-import 'package:webkit/services/apis/tags/update_tag_api.dart';
 import 'package:webkit/services/apis/test/add_test_api.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
 import 'package:webkit/services/apis/test/update_test_api.dart';
@@ -82,7 +80,7 @@ class TestDetailPageState extends State<TestDetailPage>with UIMixin {
                 text: widget.tagPageAction== TestPageAction.edit?L10nX.getStr.edit_str:L10nX.getStr.create_str,
                 width: Dimens.size120,
                 onTap: () async {
-                  var tagApi;
+                  dynamic tagApi;
                   if(widget.tagsInfo?.id!=null){ /// th edit tag
                     tagApi = UpdateTestApi(info: widget.tagsInfo!);
                   }

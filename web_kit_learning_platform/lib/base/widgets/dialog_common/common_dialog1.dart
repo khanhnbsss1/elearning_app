@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import '../../base.export.dart';
-import '../widgets.export.dart';
 
 class CustomDialog1 extends StatelessWidgetCommon{
   /// This [CustomDialog1] show app dialog common

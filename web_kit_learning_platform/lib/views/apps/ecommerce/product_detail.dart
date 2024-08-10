@@ -20,7 +20,7 @@ import 'package:webkit/views/layouts/layout.dart';
 import '../../../controller/apps/ecommerce/product_detail_controller.dart';
 
 class ProductDetail extends StatefulWidget {
-  const ProductDetail({Key? key}) : super(key: key);
+  const ProductDetail({super.key});
 
   @override
   State<ProductDetail> createState() => _ProductDetailState();

@@ -476,7 +476,7 @@
   "upload_youtube_url_str": "上传 YouTube 网址",
   "author_str": "作者",
   "duration_str": "持续时间",
-  "Course object_str": "课程对象",
+  "course_object_str": "课程对象",
   "grade_str":  "成绩",
   "how_long_does_the_course_last_str": "课程持续多长时间？",
   "grade_name_str": "成绩名称",
