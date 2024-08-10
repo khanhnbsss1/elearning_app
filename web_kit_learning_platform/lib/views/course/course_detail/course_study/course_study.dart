@@ -46,7 +46,7 @@ class _CourseStudyState extends State<CourseStudy1>
       child: Layout(
         title: Text(
           widget.courseInfo.name??'',
-          style: TextStyleConstant.textStyleBlack20w700,
+          style: TextStyleConstant.textStyleBlack16w600,
         ),
         padding: EdgeInsets.zero,
         showBackButton: false,
@@ -55,7 +55,7 @@ class _CourseStudyState extends State<CourseStudy1>
           decoration: BoxDecoration(color: ColorConst.whiteColor),
           padding: EdgeInsets.only(
               top: Dimens.size50,
-              bottom: Dimens.size16,
+              //bottom: Dimens.size16,
               left: Dimens.size16,
               right: Dimens.size16),
           child: StatefulBuilder(

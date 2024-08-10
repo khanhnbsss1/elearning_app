@@ -37,6 +37,7 @@ class CreateEditLesson extends StatefulWidget {
             child: SizedBox(
                 width: MediaQuery.of(context).size.width * (ResponsiveInfo.isTablet() ? 0.4 : 0.9),
                 height: MediaQuery.of(context).size.height * (ResponsiveInfo.isTablet() ? 0.8 : 0.9),
+                key: UniqueKey(),
                 child: this
             ),
           );

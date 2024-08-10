@@ -21,7 +21,9 @@ class AddCourseController extends MyController {
   Map<int,String> listOfDiscounts = {};
   List<TextEditingController>controllerInfoObject=[];
   List<TextEditingController>controllerResultObject=[];
-
+  AddCourseController(){
+    onInit();
+  }
   @override
   void onInit() {
     super.onInit();

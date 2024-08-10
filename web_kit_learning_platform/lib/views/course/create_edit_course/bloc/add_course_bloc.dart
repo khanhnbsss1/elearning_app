@@ -85,6 +85,12 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
         state.controller?.setInfoObjectController(state.courseInfo?.getListInfoObj()??[]);
         state.controller?.setResultObjectController(state.courseInfo?.getListInfoResult()??[]);
       }
+    else
+      {
+        state.controller?.setInfoObjectController(state.courseInfo?.getListInfoObj()??[]);
+        state.controller?.setResultObjectController(state.courseInfo?.getListInfoResult()??[]);
+
+      }
     
     state.controller?.basicValidator.getController('course_mode')?.text = state.courseInfo?.courseMode??'FREE';
     state.controller?.basicValidator.getController('is_standard')?.text = (state.courseInfo?.isStandard??0).toString();

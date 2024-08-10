@@ -942,14 +942,18 @@ class _MenuWidgetState extends State<MenuWidget>
                     ),
                     MySpacing.width(18),
                     Expanded(
-                      child: MyText.labelLarge(
+                      child:
+                      Text(
                         widget.title,
                         maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.start,
-                        color: isHover || isActive
-                            ? leftBarTheme.activeItemColor
-                            : leftBarTheme.onBackground,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyleConstant.textStyleBlack13w400.copyWith(
+                          color: isHover || isActive
+                              ? leftBarTheme.activeItemColor
+                              : leftBarTheme.onBackground,
+                          fontWeight: (isActive || isHover) ? FontWeight.w500: FontWeight.w400,
+                        ),
                       ),
                     ),
                   ],
@@ -1025,17 +1029,20 @@ class _MenuItemState extends State<MenuItem> with UIMixin {
               : Colors.transparent,
           width: MediaQuery.of(context).size.width,
           padding: MySpacing.xy(18, 7),
-          child: MyText.bodySmall(
+          child:
+          Text(
             "${ThemeCustomizer().leftBarCondensed ? "" : "- "}  ${widget.title}",
             overflow: TextOverflow.clip,
             maxLines: 1,
             textAlign: TextAlign.left,
-            fontSize: 12.5,
-            color: isActive || isHover
-                ? leftBarTheme.activeItemColor
-                : leftBarTheme.onBackground,
-            fontWeight: isActive || isHover ? 600 : 500,
+            style: TextStyleConstant.textStyleBlack12w400.copyWith(
+              color: isActive || isHover
+                  ? leftBarTheme.activeItemColor
+                  : leftBarTheme.onBackground,
+              fontWeight: (isActive || isHover) ? FontWeight.w500: FontWeight.w400,
+            ),
           ),
+
         ),
       ),
     );
@@ -1120,13 +1127,15 @@ class _NavigationItemState extends State<NavigationItem> with UIMixin {
               if (!ThemeCustomizer().leftBarCondensed)
                 Expanded(
                   flex: 3,
-                  child: MyText.labelLarge(
-                    widget.title,
+                  child: Text(
+                  widget.title,
                     overflow: TextOverflow.clip,
                     maxLines: 1,
-                    color: isActive || isHover
-                        ? leftBarTheme.activeItemColor
-                        : leftBarTheme.onBackground,
+                    style: TextStyleConstant.textStyleBlack13w400.copyWith(
+                      color:  isActive || isHover
+                          ? leftBarTheme.activeItemColor
+                          : leftBarTheme.onBackground,
+                    ),
                   ),
                 )
             ],
