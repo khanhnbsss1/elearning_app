@@ -241,7 +241,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "general": MessageLookupByLibrary.simpleMessage("Chung"),
         "google_map": MessageLookupByLibrary.simpleMessage("Bản đồ Google"),
         "grade_name_str": MessageLookupByLibrary.simpleMessage("Tên lớp"),
-        "grade_str": MessageLookupByLibrary.simpleMessage("Lớp"),
+        "grade_str": MessageLookupByLibrary.simpleMessage("Cấp độ"),
         "header_popup_biometric": MessageLookupByLibrary.simpleMessage(
             "Xác thực sinh trắc của bạn để đăng nhập"),
         "header_popup_fingerprint": MessageLookupByLibrary.simpleMessage(
@@ -359,6 +359,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "overview": MessageLookupByLibrary.simpleMessage("Tổng quan"),
         "pages": MessageLookupByLibrary.simpleMessage("Trang"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+        "payment_str": MessageLookupByLibrary.simpleMessage("Thanh toán"),
         "phone": MessageLookupByLibrary.simpleMessage("Điện thoại"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
         "phone_number_text":

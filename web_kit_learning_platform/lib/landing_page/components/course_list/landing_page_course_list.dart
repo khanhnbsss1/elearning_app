@@ -129,17 +129,6 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                         in state.courseListLandingPageResponseModel?.data ?? []) {
                       listOfCourse.add(CourseItem(constraints: constraints, courseInfo: courseLandingPageInfo));
                     }
-                    // return SizedBox(
-                    //   height: 600,
-                    //   child: Center(
-                    //     child: ListView(
-                    //       scrollDirection: Axis.horizontal,
-                    //       shrinkWrap: true,
-                    //       controller: scrollCont,
-                    //       clipBehavior: Clip.hardEdge,
-                    //       children: listOfCourse,),
-                    //   ),
-                    // );
                     return Center(
                       child: SingleChildScrollView(
                         controller: scrollCont,

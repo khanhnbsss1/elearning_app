@@ -594,7 +594,8 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
 
   Widget buildGrade({required AddCourseState state, required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
-        title: '${L10nX.getStr.grade_str} ?',
+        title: '${L10nX.getStr.grade_str}',
+        isRequirement: true,
         child: customDropDownSearch(
             list: state.controller!.listOfGradeNames,
             hintText: '${L10nX.getStr.grade_name_str}...',
@@ -604,7 +605,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
 
   Widget buildIntroduction({required AddCourseState state, required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
-      title: '${L10nX.getStr.introduction_str} ?',
+      title: L10nX.getStr.introduction_str,
       child: TextFormField(
         validator: state.controller?.basicValidator.getValidation('introduction'),
         controller: state.controller?.basicValidator.getController('introduction'),
@@ -615,10 +616,6 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
             floatingLabelAlignment: FloatingLabelAlignment.start,
             labelStyle: MyTextStyle.bodySmall(xMuted: true),
             border: outlineInputBorder,
-            // prefixIcon: const Icon(
-            //   LucideIcons.lock,
-            //   size: 20,
-            // ),
             contentPadding: MySpacing.all(16),
             isCollapsed: true,
             floatingLabelBehavior: FloatingLabelBehavior.never),
@@ -879,34 +876,51 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
             constraints: BoxConstraints(
               maxWidth: Dimens.size250,
             ),
-            child: TextFormField(
-              validator: state.controller?.basicValidator.getValidation('payment_value'),
-              controller: state.controller?.basicValidator.getController('payment_value'),
-              keyboardType: TextInputType.number,
-              textInputAction: TextInputAction.go,
-              decoration: InputDecoration(
-                //labelText: 'Result after the course',
-                  labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                  labelText: L10nX.getStr.price,
-                  alignLabelWithHint: true,
-                  floatingLabelAlignment: FloatingLabelAlignment.start,
-                  border: outlineInputBorder,
-                  contentPadding: MySpacing.all(16),
-                  isCollapsed: true,
-                  floatingLabelBehavior: FloatingLabelBehavior.never),
-              minLines: 1,
-              maxLines: 1,
+            child: WidgetWithRowTitleCommon(
+              title: "${L10nX.getStr.price} (VNĐ): ",
+              child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: Dimens.size150,
+                ),
+                child: TextFormField(
+                  validator: state.controller?.basicValidator.getValidation('payment_value'),
+                  controller: state.controller?.basicValidator.getController('payment_value'),
+                  keyboardType: TextInputType.number,
+                  enabled: (state.courseInfo?.mode??"FREE")=="PREMIUM",
+                  textInputAction: TextInputAction.go,
+                  decoration: InputDecoration(
+                    //labelText: 'Result after the course',
+                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                      labelText: L10nX.getStr.price,
+                      alignLabelWithHint: true,
+                      floatingLabelAlignment: FloatingLabelAlignment.start,
+                      border: outlineInputBorder,
+                      contentPadding: MySpacing.all(16),
+                      isCollapsed: true,
+                      floatingLabelBehavior: FloatingLabelBehavior.never),
+                  minLines: 1,
+                  maxLines: 1,
+                ),
+              ),
             ),
           ),
           Container(
             constraints: BoxConstraints(
-              maxWidth: Dimens.size250,
+              maxWidth: Dimens.size300,
             ),
-            child: customDropDownSearch(
-              list: state.controller!.listOfAccompanyCourses,
-              hintText: "${L10nX.getStr.discount_str}...",
-              selectItem: "80.0",
-              controller: state.controller?.basicValidator.getController('payment_discount')),
+            child: WidgetWithRowTitleCommon(
+              title: "${L10nX.getStr.discount_str}: ",
+              child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: Dimens.size200,
+                ),
+                child: customDropDownSearch(
+                  list: {},//state.controller!.listOfAccompanyCourses,
+                  hintText: "${L10nX.getStr.discount_str}...",
+                  selectItem: "80.0",
+                  controller: state.controller?.basicValidator.getController('payment_discount')),
+              ),
+            ),
           ),
         ],
       );

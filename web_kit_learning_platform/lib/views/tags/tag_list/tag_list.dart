@@ -113,8 +113,8 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                 FlutterCustomPagination(
                   key: GlobalKey(debugLabel: (state.tagListResponseModel?.total??0).toString()),
                   currentPage: state.tagListResponseModel!.getCurrentPage(),
-                  limitPerPage: state.tagListResponseModel!.getTotalPage(),
-                  totalDataCount: state.tagListResponseModel!.getTotalPage(),
+                  limitPerPage: state.tagListResponseModel!.pageSize??10,
+                  totalDataCount: state.tagListResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
                     BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
                   },

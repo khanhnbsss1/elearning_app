@@ -353,7 +353,7 @@ class CourseInfo {
     }
     if((isActive!=null))
     {
-      data['is_active'] = isActive??"";
+      data['is_active'] = isActive??"1";
     }
     if((accompanyCourse??'').isNotEmpty)
     {

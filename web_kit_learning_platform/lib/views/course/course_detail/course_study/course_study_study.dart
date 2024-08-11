@@ -136,7 +136,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   Widget buildStudySection() {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -153,13 +153,16 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
             ),
             Visibility(
               visible: _state.blocStatus!= AddCourseStatus.onLoadingSelectLesson,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  buildStudyTitle(),
-                  buildStudyUI(),
-                  buildQuiz(),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildStudyTitle(),
+                    buildStudyUI(),
+                    buildQuiz(),
+                  ],
+                ),
               ),
             ),
 

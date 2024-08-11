@@ -148,8 +148,8 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                 FlutterCustomPagination(
                   key: GlobalKey(debugLabel: (state.vocabularyResponseModel?.total??0).toString()),
                   currentPage: state.vocabularyResponseModel!.getCurrentPage(),
-                  limitPerPage: state.vocabularyResponseModel!.getTotalPage(),
-                  totalDataCount: state.vocabularyResponseModel!.getTotalPage(),
+                  limitPerPage: state.vocabularyResponseModel!.pageSize??10,
+                  totalDataCount: state.vocabularyResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
                     BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
                   },

@@ -113,8 +113,8 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                 FlutterCustomPagination(
                   key: GlobalKey(debugLabel: (state.listResponseModel?.total??0).toString()),
                   currentPage: state.listResponseModel!.getCurrentPage(),
-                  limitPerPage: state.listResponseModel!.getTotalPage(),
-                  totalDataCount: state.listResponseModel!.getTotalPage(),
+                  limitPerPage: state.listResponseModel!.pageSize??10,
+                  totalDataCount: state.listResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
                     BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
                   },

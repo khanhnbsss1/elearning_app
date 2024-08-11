@@ -239,10 +239,10 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                   ),
                   Center(
                     child: FlutterCustomPagination(
-                      key: GlobalKey(debugLabel: (state.courseResponseModel?.total ?? 0).toString()),
+                      key: UniqueKey(),
                       currentPage: state.courseResponseModel!.getCurrentPage(),
-                      limitPerPage: state.courseResponseModel!.getTotalPage(),
-                      totalDataCount: state.courseResponseModel!.getTotalPage(),
+                      limitPerPage: state.courseResponseModel!.pageSize??10,
+                      totalDataCount: state.courseResponseModel!.getTotalElement(),
                       onPreviousPage: (p0) {
                         BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
                       },
@@ -277,7 +277,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
 
     bool? enableEdit = state.userProfile?.getPermission().contains("");
     double maxWidthItem = 400;
-    double heightOfItem = 450;
+    double heightOfItem = 470;
     int numberRow = (boxConstraints.maxWidth / maxWidthItem).toInt();
     double widthItem = (boxConstraints.maxWidth - (50 * numberRow)) / numberRow;
     for (CourseInfo courseInfo in state.courseResponseModel?.content ?? []) {
@@ -336,7 +336,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                               //padding: const EdgeInsets.all(20),
                               controller: scrollController,
                               crossAxisSpacing: 24,
-                              childAspectRatio: (widthItem) / (heightOfItem) - 0.05,
+                              childAspectRatio: (widthItem) / (heightOfItem) - 0.1,
                               mainAxisSpacing: 24,
                               crossAxisCount: numberRow,
                               shrinkWrap: true,

@@ -53,14 +53,6 @@ class CourseItemGridView extends StatelessWidget {
                               : notifier.whitecolor,
                       elevation: 5,
                       child: Container(
-                        // width: width < 550
-                        //     ? width
-                        //     : width - 250 < 750
-                        //     ? (width - 250 - 16*3) * 1 / 2
-                        //     : width -  250 < 1150
-                        //     ? (width - 250 - 16*4) * 1 / 3
-                        //     : (width - 250 - 16*5) * 1 / 4,
-                        // constraints: BoxConstraints(minWidth: 300, maxWidth: 450),
                         decoration: BoxDecoration(
                           color: isHovered && !notifier.isDark
                               // ? Color.fromRGBO(255, 243, 94, 1.0)
@@ -71,11 +63,10 @@ class CourseItemGridView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16),
                         ),
                         clipBehavior: Clip.hardEdge,
-                        child: Stack(children: [
+                        child: Stack(
+                            children: [
                           Padding(
-                            padding: (width > 550)
-                                ? const EdgeInsets.all(12.0)
-                                : EdgeInsets.all(4),
+                            padding: (width > 550) ? const EdgeInsets.all(12.0) : EdgeInsets.all(4),
                             child: Container(
                               padding: EdgeInsets.all(12.0),
                               decoration: BoxDecoration(
@@ -90,7 +81,7 @@ class CourseItemGridView extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
+                                mainAxisSize: MainAxisSize.min,
                                 children: [
                                   ClipRRect(
                                       borderRadius: BorderRadius.circular(16),
@@ -154,67 +145,69 @@ class CourseItemGridView extends StatelessWidget {
                                     maxLines: 1,
                                   ),
                                   Gap(Dimens.size4),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.stretch,
                                     children: [
-                                      Flexible(
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            StarRating(
-                                              rating: (courseInfo.ratePoint ?? 0)
-                                                  .toDouble(),
-                                              // size: Dimens.size24,
-                                              // size: ResponsiveInfo.isPhone()?Dimens.size18: width < 1300  ? Dimens.size12 :Dimens.size22,
-                                              size: Dimens.size22,
-                                              allowHalfRating: true,
-                                              onRatingChanged: (rating) {},
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Flexible(
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                          children: [
-                                            Icon(
-                                              Icons.attach_money,
-                                              color: notifier.isDark && isHovered
-                                                  ? notifier.whitecolor
-                                                  : notifier.isDark && !isHovered
-                                                      ? notifier.blackcolor
-                                                      : notifier.blackcolor,
-                                              size: Dimens.size22,
-                                              // size: ResponsiveInfo.isPhone()?Dimens.size18: width < 1300  ? Dimens.size10 :Dimens.size22,
-                                            ),
-                                            Text(NumberHelper().numberToString(courseInfo.payment, decimalDigits: 0).trim(),
-                                                maxLines: 1,
-                                                overflow: TextOverflow.visible,
-                                                style: baseStyle.copyWith(color: notifier.isDark && isHovered ? notifier.whitecolor : notifier.isDark && !isHovered ? notifier.blackcolor : notifier.blackcolor,
+                                      Wrap(
+                                        runAlignment: WrapAlignment.spaceBetween,
+                                        alignment: WrapAlignment.spaceBetween,
+                                        spacing: Dimens.size10,
+                                        runSpacing: Dimens.size5,
+                                        children: [
+                                          Row(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              StarRating(
+                                                rating: (courseInfo.ratePoint ?? 0)
+                                                    .toDouble(),
+                                                // size: Dimens.size24,
+                                                // size: ResponsiveInfo.isPhone()?Dimens.size18: width < 1300  ? Dimens.size12 :Dimens.size22,
+                                                size: Dimens.size22,
+                                                allowHalfRating: true,
+                                                onRatingChanged: (rating) {},
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Icon(
+                                                Icons.attach_money,
+                                                color: notifier.isDark && isHovered
+                                                    ? notifier.whitecolor
+                                                    : notifier.isDark && !isHovered
+                                                        ? notifier.blackcolor
+                                                        : notifier.blackcolor,
+                                                size: Dimens.size22,
+                                                // size: ResponsiveInfo.isPhone()?Dimens.size18: width < 1300  ? Dimens.size10 :Dimens.size22,
+                                              ),
+                                              Text(NumberHelper().numberToString(courseInfo.payment, decimalDigits: 0).trim(),
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.visible,
+                                                  style: baseStyle.copyWith(color: notifier.isDark && isHovered ? notifier.whitecolor : notifier.isDark && !isHovered ? notifier.blackcolor : notifier.blackcolor,
+                                                      fontSize: Dimens.size15,
+                                                      // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
+                                                      fontWeight: FontWeight.bold)),
+                                              Text(" ${L10nX.getStr.vnd_str}",
+                                                  style: TextStyleConstant
+                                                      .textStyleBlack16w400
+                                                      .copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: notifier.isDark &&
+                                                            isHovered
+                                                        ? notifier.whitecolor
+                                                        : notifier.isDark &&
+                                                                !isHovered
+                                                            ? notifier.blackcolor
+                                                            : notifier.blackcolor,
                                                     fontSize: Dimens.size15,
                                                     // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
-                                                    fontWeight: FontWeight.bold)),
-                                            Text(" ${L10nX.getStr.vnd_str}",
-                                                style: TextStyleConstant
-                                                    .textStyleBlack16w400
-                                                    .copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: notifier.isDark &&
-                                                          isHovered
-                                                      ? notifier.whitecolor
-                                                      : notifier.isDark &&
-                                                              !isHovered
-                                                          ? notifier.blackcolor
-                                                          : notifier.blackcolor,
-                                                  fontSize: Dimens.size15,
-                                                  // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
-                                                )),
-                                          ],
-                                        ),
+                                                  )),
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),

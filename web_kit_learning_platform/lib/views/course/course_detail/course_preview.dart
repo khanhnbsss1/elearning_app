@@ -98,21 +98,7 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
                       ],
                     ),
                   ),
-                ), 
-              //     ListenableBuilder(
-              //       listenable: showTabBarModel,
-              //       builder: (BuildContext context, Widget? child) {
-              //         return Visibility(
-              //           visible: showTabBarModel.showTabBar,
-              //           child: Align(
-              //               alignment: Alignment.topCenter,
-              //               child: Padding(
-              //                 padding: EdgeInsets.all(Dimens.size16),
-              //                 child: buildTabBar(),
-              //               )),
-              //     );
-              //   },
-              // ),
+                ),
               ]),
             ))
     );
@@ -134,10 +120,13 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  width: constraints.maxWidth,
-                  height: 420,
+                  //height: 420,
                   decoration: BoxDecoration(
-                    color: ColorConst.blackColor
+                      color: Colors.black
+                  ),
+                  constraints: BoxConstraints(
+                      maxHeight: ResponsiveInfo.isPhone()?constraints.maxWidth:MediaQuery.sizeOf(context).height*3/4,
+                      maxWidth: constraints.maxWidth
                   ),
                   child: VideoPlayer(videoPlayerModel: VideoPlayerModel(
                       title: "", 
@@ -149,63 +138,6 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
           },
           );
         });
-  }
-
-  Widget buildTabBar() {
-    TextStyleConstant.textStyleBlack15w700.copyWith(color: (position == 0 ? ColorConst.textColorSelectTabBar : ColorConst.subtext));
-    return Column
-      (
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Card(
-            elevation: 5,
-            child: Container(
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width * 0.5,
-              constraints: BoxConstraints(
-                maxWidth: 800,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: TabBar(
-                indicatorColor: ColorConst.mainColor,
-                dividerColor: Colors.transparent,
-                labelColor: ColorConst.mainColor,
-                indicator: BoxDecoration(border: Border(bottom: BorderSide(color: ColorConst.mainColor))),
-                splashBorderRadius: BorderRadius.circular(12),
-                overlayColor: WidgetStateProperty.all(Colors.black.withOpacity(0.1)),
-                dividerHeight: 0,
-                controller: tabController,
-                onTap: (value) {
-                    position == value;
-                    showTabBarModel.onChangerShowTitle(value);
-                    if (value != 0 && _mainControllerPosition> 400) {
-                      showTabBarModel.onChangerShowCard(true);
-                    }
-                   // _mainController.jumpTo(_mainControllerPosition);
-                },
-                tabs: [
-                  Tab(
-                    child: Text(
-                      L10nX.getStr.introduction_str,
-                      style: TextStyleConstant.textStyleBlack14w400,
-                    ),
-                  ),
-                  Tab(
-                    child: Text(
-                      L10nX.getStr.content_str,
-                      style: TextStyleConstant.textStyleBlack14w400,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ]);
   }
 
   int tappedIndex = -1;

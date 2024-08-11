@@ -75,7 +75,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                     Expanded(child: buildInfoBox(context, constraints, state)),
                     SizedBox(
                       width: Dimens.size400,
-                      child: buildInfoCard()),
+                      child: buildInfoCard(state: state)),
                   ],
                 ):
                 Column(
@@ -83,7 +83,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     buildInfoBox(context, constraints, state),
-                    buildInfoCard()
+                    buildInfoCard(state: state)
                   ],
                 ),
               ),
@@ -119,13 +119,15 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                           Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              MyText.titleLarge(
-                                state.courseInfo?.name ?? "",
-                                style: TextStyleConstant.titleTextColorOnBackgroundColorStyle16w600.copyWith(
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
+                              Expanded(
+                                child: MyText.titleLarge(
+                                  state.courseInfo?.name ?? "",
+                                  style: TextStyleConstant.titleTextColorOnBackgroundColorStyle16w600.copyWith(
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  color: ColorConst.textColor,
                                 ),
-                                color: ColorConst.textColor,
                               ),
                             ],
                           ),
@@ -149,9 +151,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                   ActionButton1(
                     text: L10nX.getStr.lets_study,
                     onTap: () {
-              /*                              AppPages.routeName(Routes.courseStudy,arguments: {
-                              "courseInfo":state.courseInfo
-                            });*/
+                      Navigator.of(context).pop();
                       CourseStudy1(
                         courseInfo: state.courseInfo!,
                       ).show(context);
@@ -421,16 +421,18 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
       print(e);
     }
     if (tags == null || tags.isEmpty) {
-      return const Text(
-        "Tags: No tags",
+      return Text(
+        "${L10nX.getStr.tags}: No tags",
         style: TextStyle(fontSize: 14),
       );
     } else {
       return Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Text(
-            "Tags:   ",
+
+            "${L10nX.getStr.tags}:   ",
             style: const TextStyle(fontSize: 16),
           ),
           SingleChildScrollView(
@@ -460,7 +462,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
     }
   }
 
-  Widget buildInfoCard() {
+  Widget buildInfoCard({required CourseDetailState state}) {
     return Column(
       children: [
         Card(
@@ -492,7 +494,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                         },
                       )),
                   SizedBox(
-                    height: 24,
+                    height: 16,
                   ),
                   Center(
                     child: Row(
@@ -514,14 +516,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                               height: 8,
                             ),
                             Text('Nội dung: '),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text('Chính quy: '),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text('ID: '),
+
                           ],
                         ),
                         SizedBox(
@@ -546,11 +541,6 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                             SizedBox(
                               height: 8,
                             ),
-                            Text('${_state.courseInfo?.isStandard ?? '0'}'),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text('${_state.courseInfo?.id ?? '0'}'),
                           ],
                         )
                       ],
@@ -588,7 +578,13 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                             height: 8,
                           ),
                           ActionButton1(
-                            text: L10nX.getStr.register_now,
+                            text: L10nX.getStr.lets_study,
+                            onTap: () {
+                              Navigator.of(context).pop();
+                              CourseStudy1(
+                                courseInfo: state.courseInfo!,
+                              ).show(context);
+                            },
                           ),
                         ],
                       ),

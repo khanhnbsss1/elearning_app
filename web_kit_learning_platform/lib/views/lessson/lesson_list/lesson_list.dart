@@ -111,8 +111,8 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                 FlutterCustomPagination(
                   key: GlobalKey(debugLabel: (state.lessonListResponseModel?.total??0).toString()),
                   currentPage: state.lessonListResponseModel!.getCurrentPage(),
-                  limitPerPage: state.lessonListResponseModel!.getTotalPage(),
-                  totalDataCount: state.lessonListResponseModel!.getTotalPage(),
+                  limitPerPage: state.lessonListResponseModel!.pageSize??10,
+                  totalDataCount: state.lessonListResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
                     BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
                   },
