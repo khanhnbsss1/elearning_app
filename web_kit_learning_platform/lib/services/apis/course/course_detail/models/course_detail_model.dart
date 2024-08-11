@@ -37,6 +37,7 @@ class CourseInfo {
   String? accompanyCourse;
   String? mode;
   int? gradeId;
+  int? imageId;
 
   CourseInfo(
       {this.id,
@@ -72,6 +73,7 @@ class CourseInfo {
         this.mode,
         this.gradeId,
         this.subjects,
+        this.imageId
       });
 
   CourseInfo.initial(){
@@ -107,6 +109,7 @@ class CourseInfo {
     mode ="public";
     gradeId=0;
     subjects = [];
+    imageId=0;
   }
   CourseInfo copyWith({
     int? id,
@@ -141,7 +144,8 @@ class CourseInfo {
     String? accompanyCourse,
     String? mode,
     int? gradeId,
-    List<Subjects>? subjects
+    List<Subjects>? subjects,
+    int? imageId
   }){
     return CourseInfo(
       id : id??this.id,
@@ -177,6 +181,8 @@ class CourseInfo {
       mode:mode??this.mode,
       gradeId:gradeId??this.gradeId,
       subjects:subjects??this.subjects,
+      imageId:imageId??this.imageId,
+
 
     );
 
@@ -214,6 +220,7 @@ class CourseInfo {
     lectures=json.lectures??lectures;
     mode=json.mode??mode;
     subjects=json.subjects??subjects;
+    imageId=json.imageId??imageId;
 
   }
 
@@ -276,6 +283,10 @@ class CourseInfo {
     if((language??"").isNotEmpty)
     {
       data['language'] = language??"";
+    }
+    if(imageId!=null)
+    {
+      data['file_id'] = imageId??0;
     }
     if((introduction??"").isNotEmpty)
     {

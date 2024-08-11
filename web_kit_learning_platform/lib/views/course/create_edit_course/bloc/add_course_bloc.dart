@@ -254,6 +254,7 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     if(data!=null )
       {
         state.courseInfo?.image = data.link;
+        state.courseInfo?.imageId = data.id;
       }
     emit(state.copyWith(
         blocStatus:  AddCourseStatus.onSubmitAdd,
