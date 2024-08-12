@@ -88,7 +88,6 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
   }
 
   Widget buildAddCourse({required BoxConstraints constraints, required AddCourseState state, required BuildContext context}) {
-
     return GetBuilder<AddCourseController>(
       init: state.controller,
       builder: (controller) {

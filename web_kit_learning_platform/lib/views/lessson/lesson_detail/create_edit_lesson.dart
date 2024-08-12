@@ -336,7 +336,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
                     MultipartFile file = MultipartFile.fromBytes(result.files.first.bytes!.toList(growable: true), filename: result.names[0]);
                     _state.editingControllerLectureDocuments?.text = file.filename??"";
                     BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUploadDocumentEvent(
-                        docInfo: UploadFileInfo(data: SubjectType.lectures, file: file)));
+                        docInfo: UploadFileInfo(data: SubjectType.documents, file: file)));
                   }
 
               },

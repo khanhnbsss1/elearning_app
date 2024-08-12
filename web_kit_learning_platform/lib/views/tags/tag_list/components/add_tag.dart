@@ -94,7 +94,7 @@ class AddTagPageState extends State<AddTagPage>with UIMixin {
                   MonitorLoading().dismiss();
                   if(data.runtimeType == String && (data as String).isEmpty)
                     {
-                      Navigator.of(context).pop(widget.tagsInfo);
+                      Navigator.of(context).pop();
                     }
                 },
               ),

@@ -154,7 +154,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
             Visibility(
               visible: _state.blocStatus!= AddCourseStatus.onLoadingSelectLesson,
               child: Padding(
-                padding: const EdgeInsets.all(16),
+                padding:  EdgeInsets.symmetric(vertical: 16, horizontal: Dimens.size32),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -362,7 +362,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
       child: _state.showSubject![subjectIndex]
           ? Container(
               margin: EdgeInsets.all(0),
-              constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height / 2),
+              constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
               child: SingleChildScrollView(
                 controller: subjectScrollController,
                 child: ListView.builder(
@@ -381,7 +381,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                           Container(
                             margin: EdgeInsets.symmetric(horizontal: 4),
                             decoration: BoxDecoration(
-                              color: isSelectLesson?ColorConst.mainColor.withOpacity(0.05): ColorConst.whiteColor,
+                              color: isSelectLesson?ColorConst.greyColor1.withOpacity(0.05): ColorConst.whiteColor,
                               border: Border(bottom: BorderSide(color: ColorConst.blackColor,width: 0.2))
                             ),
                             padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size32),
