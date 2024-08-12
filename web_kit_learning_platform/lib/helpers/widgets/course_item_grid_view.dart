@@ -66,42 +66,41 @@ class CourseItemGridView extends StatelessWidget {
                         child: Stack(
                             children: [
                           Padding(
-                            padding: (width > 550) ? const EdgeInsets.all(12.0) : EdgeInsets.all(4),
+                            padding:  const EdgeInsets.all(12.0),
                             child: Container(
                               padding: EdgeInsets.all(12.0),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(16),
-                                  // border: Border.all(
-                                  //   width: 2,
-                                  //   color: (isHovered)
-                                  //       ? Colors.deepPurple
-                                  //       : notifier.whitecolor,
-                                  // )
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.min,
+                                mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(16),
-                                      child: Image.network(
-                                        courseInfo.image!.isNotEmpty
-                                            ? courseInfo.image!
-                                            : 'assets/deshboard/adventure/adventure5.png',
-                                        fit: BoxFit.cover,
-                                        width: constraints.maxWidth * 0.9,
-                                        height: constraints.maxWidth * 0.5,
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          return Image.network(
-                                            'assets/deshboard/adventure/adventure5.png',
-                                            fit: BoxFit.cover,
-                                            width: constraints.maxWidth * 0.9,
-                                            height: constraints.maxWidth * 0.5,
-                                          );
-                                        },
-                                      )),
+                                  Container(
+                                    constraints: BoxConstraints(
+                                      maxHeight: 175
+                                    ),
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(16),
+                                        child: Image.network(
+                                          courseInfo.image!.isNotEmpty
+                                              ? courseInfo.image!
+                                              : 'assets/deshboard/adventure/adventure5.png',
+                                          fit: BoxFit.cover,
+                                          width: constraints.maxWidth * 0.9,
+                                          height: constraints.maxWidth * 0.5,
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return Image.network(
+                                              'assets/deshboard/adventure/adventure5.png',
+                                              fit: BoxFit.cover,
+                                              width: constraints.maxWidth * 0.9,
+                                              height: constraints.maxWidth * 0.5,
+                                            );
+                                          },
+                                        )),
+                                  ),
                                   SizedBox(
                                     height: 4,
                                   ),
@@ -117,7 +116,7 @@ class CourseItemGridView extends StatelessWidget {
                                             fontSize: Dimens.size18,
                                             color: Color.fromRGBO(
                                                 163, 20, 19, 1.0)),
-                                    maxLines: width < 550 ? 1 : 2,
+                                    maxLines: 2,
                                   ),
                                   Gap(Dimens.size4),
                                   Text(
@@ -142,7 +141,8 @@ class CourseItemGridView extends StatelessWidget {
                                       fontSize: Dimens.size15,
                                       color: notifier.subgreycolor,
                                     ),
-                                    maxLines: 1,
+                                    overflow: TextOverflow.clip,
+                                    maxLines: 2,
                                   ),
                                   Gap(Dimens.size4),
                                   Column(
