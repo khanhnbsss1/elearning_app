@@ -154,7 +154,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                     ),
                                                   )
                                                 : SizedBox(
-                                                    height: Dimens.size40,
+                                                    height: Dimens.size50,
                                                     width: Dimens.size200,
                                                     child: Form(
                                                       key: formKey,
@@ -176,16 +176,14 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                             border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
                                                             enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
                                                             focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                                            prefixIcon: const Align(
-                                                                alignment: Alignment.center,
-                                                                child: Icon(
-                                                                  LucideIcons.search,
-                                                                  size: 14,
-                                                                )),
-                                                            prefixIconConstraints: const BoxConstraints(minWidth: 36, maxWidth: 36, minHeight: 32, maxHeight: 32),
-                                                            contentPadding: MySpacing.xy(16, 12),
+                                                            prefixIcon: Icon(
+                                                              LucideIcons.search,
+                                                              size: 16,
+                                                            ),
+                                                            // prefixIconConstraints: const BoxConstraints(minWidth: 36, maxWidth: 36, minHeight: 32, maxHeight: 32),
+                                                            contentPadding: MySpacing.xy(16, 4),
                                                             //isCollapsed: true,
-                                                            floatingLabelBehavior: FloatingLabelBehavior.auto),
+                                                            floatingLabelBehavior: FloatingLabelBehavior.never),
                                                       ),
                                                     ),
                                                   ),

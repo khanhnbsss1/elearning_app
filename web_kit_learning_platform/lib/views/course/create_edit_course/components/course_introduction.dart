@@ -814,15 +814,11 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                 titleWidget: InkWell(
                   onTap: () {
                       setState(() {
-                        if(state.courseInfo?.mode=='FREE')
-                        {
-                  
-                          state.courseInfo?.mode =  'PREMIUM';
-                        }
-                        else
-                        {
-                          state.courseInfo?.mode =  'FREE';
-                        }
+                        (state.courseInfo?.mode=='FREE') ?
+                        state.courseInfo?.mode = 'PREMIUM'
+                            : (state.courseInfo?.mode=='PREMIUM')
+                            ? state.courseInfo?.mode =  'FREE'
+                            : state.courseInfo?.mode =  'FREE';
                         state.controller?.basicValidator.getController('payment_mode')?.text = state.courseInfo?.mode??"FREE";
                         BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(courseInfo:  state.courseInfo, addCourseController: state.controller!));
                       });
@@ -857,16 +853,12 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                 titleWidget: InkWell(
                   onTap: () {
                     setState(() {
-                      if(state.courseInfo?.mode=='FREE')
-                      {
-                  
-                        state.courseInfo?.mode =  'PREMIUM';
-                      }
-                      else
-                      {
-                        state.courseInfo?.mode =  'FREE';
-                      }
-                      state.controller?.basicValidator.getController('payment_mode')?.text = state.courseInfo?.mode??"FREE";
+                      (state.courseInfo?.mode=='FREE') ?
+                       state.courseInfo?.mode = 'PREMIUM'
+                        : (state.courseInfo?.mode=='PREMIUM')
+                      ? state.courseInfo?.mode =  'FREE'
+                      : state.courseInfo?.mode =  'PREMIUM';
+                      state.controller?.basicValidator.getController('payment_mode')?.text = state.courseInfo?.mode??"PREMIUM";
                       BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(courseInfo:  state.courseInfo, addCourseController: state.controller!));
                     });
                   },
@@ -880,7 +872,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                       ),
                       width: 20,
                       height: 20,
-                      child:  (state.courseInfo?.mode??"FREE")=="PREMIUM"
+                      child:  (state.courseInfo?.mode??"PREMIUM")=="PREMIUM"
                           ? Icon(
                         Icons.check,
                         size: 15,
@@ -899,10 +891,10 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
               maxWidth: Dimens.size250,
             ),
             child: WidgetWithRowTitleCommon(
-              title: "${L10nX.getStr.price} (VNĐ): ",
+              title: "${L10nX.getStr.price} ",
               child: Container(
                 constraints: BoxConstraints(
-                  maxWidth: Dimens.size150,
+                  maxWidth: Dimens.size200,
                 ),
                 child: TextFormField(
                   validator: state.controller?.basicValidator.getValidation('payment_value'),
@@ -911,6 +903,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                   enabled: (state.courseInfo?.mode??"FREE")=="PREMIUM",
                   textInputAction: TextInputAction.go,
                   decoration: InputDecoration(
+                    suffix: Text("VND"),
                     //labelText: 'Result after the course',
                       labelStyle: MyTextStyle.bodySmall(xMuted: true),
                       labelText: L10nX.getStr.price,
@@ -936,11 +929,17 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                 constraints: BoxConstraints(
                   maxWidth: Dimens.size200,
                 ),
-                child: customDropDownSearch(
-                  list: {},//state.controller!.listOfAccompanyCourses,
-                  hintText: "${L10nX.getStr.discount_str}...",
-                  selectItem: "80.0",
-                  controller: state.controller?.basicValidator.getController('payment_discount')),
+                child: Opacity(
+                  opacity: ((state.courseInfo?.mode)=="PREMIUM") ? 1 : 0.2,
+                  child: IgnorePointer(
+                    ignoring: (state.courseInfo?.mode)=="FREE",
+                    child: customDropDownSearch(
+                      list: {},//state.controller!.listOfAccompanyCourses,
+                      hintText: "${L10nX.getStr.discount_str}...",
+                      selectItem: "80.0",
+                      controller: state.controller?.basicValidator.getController('payment_discount')),
+                  ),
+                ),
               ),
             ),
           ),
@@ -1058,6 +1057,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
       selectString = list[selectItem as int] ?? "";
     }
     return DropdownSearch<String>(
+      // enabled: (state.courseInfo?.mode??"PREMIUM")=="PREMIUM",
       popupProps: PopupProps.menu(
         constraints: BoxConstraints(
           maxHeight: (65 + list.length * 50 < 210) ? 65 + list.length * 50 : 210,
