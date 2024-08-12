@@ -44,6 +44,7 @@ enum SERVICE_TYPE {
   LESSON,
   TAGS,
   TEST,
+  QUIZ,
   VOCABULARY,
   LandingPages,
   NONE,
@@ -63,6 +64,7 @@ const Map<SERVICE_TYPE, String> SERVICE = {
   SERVICE_TYPE.Storage: "Storage",
   SERVICE_TYPE.LESSON: "Lectures",
   SERVICE_TYPE.TAGS: "Tags",
-  SERVICE_TYPE.TEST: "Tests"
+  SERVICE_TYPE.TEST: "Tests",
+  SERVICE_TYPE.QUIZ: "Quizs"
 
 };

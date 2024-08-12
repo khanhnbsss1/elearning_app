@@ -5449,6 +5449,56 @@ class S {
       args: [],
     );
   }
+
+  /// `List of quizzes`
+  String get quiz_list {
+    return Intl.message(
+      'List of quizzes',
+      name: 'quiz_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create quiz`
+  String get quiz_add {
+    return Intl.message(
+      'Create quiz',
+      name: 'quiz_add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete quiz`
+  String get quiz_remove {
+    return Intl.message(
+      'Delete quiz',
+      name: 'quiz_remove',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update quiz`
+  String get quiz_update {
+    return Intl.message(
+      'Update quiz',
+      name: 'quiz_update',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Quizzes`
+  String get quiz_str {
+    return Intl.message(
+      'Quizzes',
+      name: 'quiz_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
