@@ -103,7 +103,7 @@ class CourseInfo {
     isStandard = 0;
     categoryName = "";
     typeName = "";
-    isActive = 0;
+    isActive = 1;
     accompanyCourse = "0";
     tags = [];
     mode ="public";

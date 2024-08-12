@@ -4190,10 +4190,10 @@ class S {
     );
   }
 
-  /// `Who is this course for?`
+  /// `Who is this course for ?`
   String get who_this_course_is_for {
     return Intl.message(
-      'Who is this course for?',
+      'Who is this course for ?',
       name: 'who_this_course_is_for',
       desc: '',
       args: [],
@@ -4210,10 +4210,10 @@ class S {
     );
   }
 
-  /// `Study at YAX Chinese learning platform, you will find "Speaking Chinese is as easy as eating candy`
+  /// `Study at YAX Chinese learning platform, you will find "Speaking Chinese is as easy as eating candy"`
   String get who_this_course_is_for_comment {
     return Intl.message(
-      'Study at YAX Chinese learning platform, you will find "Speaking Chinese is as easy as eating candy',
+      'Study at YAX Chinese learning platform, you will find "Speaking Chinese is as easy as eating candy"',
       name: 'who_this_course_is_for_comment',
       desc: '',
       args: [],
@@ -4820,10 +4820,10 @@ class S {
     );
   }
 
-  /// `What will you achieve after the course? `
+  /// `What will you achieve after the course ?`
   String get what_will_you_achieve_after_the_course_str {
     return Intl.message(
-      'What will you achieve after the course? ',
+      'What will you achieve after the course ?',
       name: 'what_will_you_achieve_after_the_course_str',
       desc: '',
       args: [],

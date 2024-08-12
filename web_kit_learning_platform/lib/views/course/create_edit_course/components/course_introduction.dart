@@ -540,7 +540,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                           },
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            labelText: '${L10nX.getStr.who_this_course_is_for} ?',
+                            labelText: L10nX.getStr.who_this_course_is_for,
                             labelStyle: MyTextStyle.bodySmall(xMuted: true),
                             border: outlineInputBorder,
                             prefixIcon: Icon(
@@ -652,7 +652,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                         },
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: '${L10nX.getStr.what_will_you_achieve_after_the_course_str} ?',
+                          labelText: L10nX.getStr.what_will_you_achieve_after_the_course_str,
                           labelStyle: MyTextStyle.bodySmall(xMuted: true),
                           border: outlineInputBorder,
                           prefixIcon: Icon(

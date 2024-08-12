@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:webkit/base/base.export.dart';
+import '../../../../helpers/theme/theme_customizer.dart';
 import '../../../../helpers/utils/ui_mixins.dart';
 import '../../../../services/apis/course/course_detail/models/course_detail_model.dart';
 import '../../../layouts/layout.dart';
@@ -34,6 +35,9 @@ class _CourseStudyState extends State<CourseStudy1>
   void initState() {
     super.initState();
     tabController = TabController(length: 3, vsync: this);
+    // WidgetsBinding.instance.addPostFrameCallback((_){
+    //   ThemeCustomizer().toggleLeftBarCondensedByValue(leftBarCondensed: true);
+    // });
   }
 
   @override

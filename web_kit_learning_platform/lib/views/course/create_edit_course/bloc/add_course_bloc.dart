@@ -100,7 +100,7 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     state.controller?.basicValidator.getController('payment_mode')?.text = (state.courseInfo?.mode??0).toString();
     state.controller?.basicValidator.getController('rate_point')?.text = (state.courseInfo?.ratePoint??0).toString();
     state.controller?.basicValidator.getController('category_id')?.text = (state.courseInfo?.categoryId??0).toString();
-    state.controller?.basicValidator.getController('is_active')?.text = (state.courseInfo?.isActive??0).toString();
+    state.controller?.basicValidator.getController('is_active')?.text = (state.courseInfo?.isActive??1).toString();
     state.controller?.basicValidator.getController('language')?.text = state.courseInfo?.language??'CN';
     state.controller?.basicValidator.getController('durian')?.text = state.courseInfo?.durian??'';
     state.controller?.basicValidator.getController('payment_value')?.text = (state.courseInfo?.payment??0).toString();

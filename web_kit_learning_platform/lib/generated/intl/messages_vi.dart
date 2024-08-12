@@ -688,7 +688,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chào mừng đến với"),
         "what_will_you_achieve_after_the_course_str":
             MessageLookupByLibrary.simpleMessage(
-                "Bạn sẽ đạt được gì sau khóa học?"),
+                "Bạn sẽ đạt được gì sau khóa học ?"),
         "who_this_course_is_for":
             MessageLookupByLibrary.simpleMessage("Khóa học này dành cho ai ?"),
         "who_this_course_is_for_comment": MessageLookupByLibrary.simpleMessage(

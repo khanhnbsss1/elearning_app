@@ -696,11 +696,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "welcome_str": MessageLookupByLibrary.simpleMessage("Welcome to"),
         "what_will_you_achieve_after_the_course_str":
             MessageLookupByLibrary.simpleMessage(
-                "What will you achieve after the course? "),
+                "What will you achieve after the course ?"),
         "who_this_course_is_for":
-            MessageLookupByLibrary.simpleMessage("Who is this course for?"),
+            MessageLookupByLibrary.simpleMessage("Who is this course for ?"),
         "who_this_course_is_for_comment": MessageLookupByLibrary.simpleMessage(
-            "Study at YAX Chinese learning platform, you will find \"Speaking Chinese is as easy as eating candy"),
+            "Study at YAX Chinese learning platform, you will find \"Speaking Chinese is as easy as eating candy\""),
         "who_this_course_is_for_subtitle":
             MessageLookupByLibrary.simpleMessage("Find the place for you!"),
         "who_this_course_is_for_table_content_1":

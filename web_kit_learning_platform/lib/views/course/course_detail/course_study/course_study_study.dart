@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating/flutter_rating.dart';
@@ -28,7 +29,7 @@ class CourseStudyStudy extends StatefulWidget {
 class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerProviderStateMixin, UIMixin {
   ScrollController subjectScrollController = ScrollController();
   ScrollController subjectScrollControllerBar = ScrollController();
-
+  ScrollController studySectionScrollController = ScrollController();
   ScrollController lessonDetailScrollController = ScrollController();
   late CourseDetailState _state;
   late BuildContext _blocContext;
@@ -70,37 +71,46 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                 return Scaffold(
                   key: _scaffoldKey,
                   backgroundColor: ColorConst.whiteColor,
-                  body: SingleChildScrollView(
-                    controller: lessonDetailScrollController,
+                  body: Padding(
+                    padding: const EdgeInsets.only(top: 50),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                            child: Column(
-                          children: [
-                            buildStudySection(),
-                            Visibility(
-                              visible: boxConstraints.maxWidth <= 800,
-                              child: Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Text(L10nX.getStr.lesson_list, style: TextStyleConstant.textStyleBlack18w600,),
-                                      ],
-                                    ),
-                                    buildSubjectList(),
-                                  ],
+                            child: Scrollbar(
+                              controller: studySectionScrollController,
+                              thickness: 10,
+                              trackVisibility: true,
+                              thumbVisibility: true,
+                              child: SingleChildScrollView(
+                                controller: studySectionScrollController,
+                                scrollDirection: Axis.vertical,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 14.0),
+                                  child: Column(
+                                    children: [
+                                      buildStudySection(),
+                                      Visibility(
+                                        visible: boxConstraints.maxWidth <= 800,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(16),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  Text(L10nX.getStr.lesson_list, style: TextStyleConstant.textStyleBlack18w600,),
+                                                ],
+                                              ),
+                                              buildSubjectList(),
+                                            ],
+                                          ),
+                                        ),)
+                                    ],
+                                  ),
                                 ),
-                              ),)
-                          ],
-                        )),
-                        Container(
-                          color: Colors.red,
-                          width: 1,
-                        ),
+                              ),
+                            )),
                         Visibility(
                             visible: boxConstraints.maxWidth > 800,
                             child: Container(
@@ -115,10 +125,12 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                               constraints: BoxConstraints(
                                 minHeight: MediaQuery.of(context).size.height
                               ),
-                              child: Column(
-                                children: [
-                                  buildSubjectList(),
-                                ],
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    buildSubjectList(),
+                                  ],
+                                ),
                               ),
                             )),
                       ],
@@ -135,39 +147,36 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
 
   Widget buildStudySection() {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Gap(Dimens.size10),
-            buildVideo(),
-            Visibility(
-              visible: _state.blocStatus == AddCourseStatus.onLoadingSelectLesson,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(100),
-                    child: LoadingLogo(loadingType: LoadingType.loadOnPage,),
-                  ),
-                )
-            ),
-            Visibility(
-              visible: _state.blocStatus!= AddCourseStatus.onLoadingSelectLesson,
-              child: Padding(
-                padding:  EdgeInsets.symmetric(vertical: 16, horizontal: Dimens.size32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    buildStudyTitle(),
-                    buildStudyUI(),
-                    buildQuiz(),
-                  ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Gap(Dimens.size10),
+          buildVideo(),
+          Visibility(
+            visible: _state.blocStatus == AddCourseStatus.onLoadingSelectLesson,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(100),
+                  child: LoadingLogo(loadingType: LoadingType.loadOnPage,),
                 ),
+              )
+          ),
+          Visibility(
+            visible: _state.blocStatus!= AddCourseStatus.onLoadingSelectLesson,
+            child: Padding(
+              padding:  EdgeInsets.symmetric(vertical: 16, horizontal: Dimens.size32),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  buildStudyTitle(),
+                  buildStudyUI(),
+                  buildQuiz(),
+                ],
               ),
             ),
+          ),
 
-          ],
-        ),
+        ],
       ),
     );
   }
@@ -256,7 +265,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
               ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                controller: subjectScrollController,
+                // controller: subjectScrollController,
                 padding: EdgeInsets.zero,
                 itemCount: (_state.courseInfo?.getListSubjectAndLesson() ?? []).length,
                 itemBuilder: (context, subjectIndex) {
@@ -364,10 +373,10 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
               margin: EdgeInsets.all(0),
               constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
               child: SingleChildScrollView(
-                controller: subjectScrollController,
+                // controller: subjectScrollController,
                 child: ListView.builder(
                   shrinkWrap: true,
-                  controller: subjectScrollController,
+                  // controller: subjectScrollController,
                   itemCount: (subject.lectures ?? []).length,
                   itemBuilder: (context, lectureIndex) {
                     LessonInfo lessonInfo = (subject.lectures ?? []).elementAt(lectureIndex);
@@ -435,7 +444,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
 
   Widget buildStudyUI() {
     return SingleChildScrollView(
-      controller: lessonDetailScrollController,
+      // controller: lessonDetailScrollController,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -488,7 +497,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           ),
           ListView.builder(
               itemCount: (_state.selectLessonInfo?.vocabularies??[]).length,
-              controller: lessonDetailScrollController,
+              // controller: lessonDetailScrollController,
               shrinkWrap: true,
               itemBuilder: (context, index) {
                 VocabularyInfo vocabularyInfo = (_state.selectLessonInfo?.vocabularies??[]).elementAt(index);

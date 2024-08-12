@@ -28,7 +28,7 @@ class VideoPlayerState extends  State<VideoPlayer>{
      return FlutterVideoPlayerPage(videoPlayerModel: widget.videoPlayerModel,);
    }
     /* Material(
-     child: CustomDialog1(
+    child: CustomDialog1(
          title: widget.videoPlayerModel.title,
          titleAlignment: MainAxisAlignment.center,
          insetPadding: EdgeInsets.symmetric(vertical: Dimens.size10),
