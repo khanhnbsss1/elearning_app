@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/base/widgets/common/alert_dialog/loading.export.dart';
@@ -54,7 +56,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           default:
             break;
         }
-        
+
       },
       builder: (BuildContext context, state) {
         _blocContext = context;
@@ -71,7 +73,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                 return Scaffold(
                   key: _scaffoldKey,
                   backgroundColor: ColorConst.whiteColor,
-                  body: Padding(
+                  body: (_state.blocStatus != AddCourseStatus.onLoadingSelectLesson) ? Padding(
                     padding: const EdgeInsets.only(top: 50),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,7 +91,8 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                                   padding: const EdgeInsets.only(right: 14.0),
                                   child: Column(
                                     children: [
-                                      buildStudySection(),
+                                      (_state.blocStatus != AddCourseStatus.onLoadingSelectLesson) ? buildStudySection() :
+                                      LoadingLogo(loadingType: LoadingType.loadOnPage,),
                                       Visibility(
                                         visible: boxConstraints.maxWidth <= 800,
                                         child: Padding(
@@ -135,7 +138,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                             )),
                       ],
                     ),
-                  ),
+                  ) : LoadingLogo(loadingType: LoadingType.loadOnPage,),
                 );
               },
             ):Center(child: NoData());
@@ -151,31 +154,22 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Gap(Dimens.size10),
-          buildVideo(),
-          Visibility(
-            visible: _state.blocStatus == AddCourseStatus.onLoadingSelectLesson,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(100),
-                  child: LoadingLogo(loadingType: LoadingType.loadOnPage,),
+          Column(
+            children: [
+              buildVideo(),
+              Padding(
+                padding:  EdgeInsets.symmetric(vertical: 16, horizontal: Dimens.size32),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildStudyTitle(),
+                    buildStudyUI(),
+                    buildQuiz(),
+                  ],
                 ),
-              )
-          ),
-          Visibility(
-            visible: _state.blocStatus!= AddCourseStatus.onLoadingSelectLesson,
-            child: Padding(
-              padding:  EdgeInsets.symmetric(vertical: 16, horizontal: Dimens.size32),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  buildStudyTitle(),
-                  buildStudyUI(),
-                  buildQuiz(),
-                ],
               ),
-            ),
-          ),
-
+            ],
+          )
         ],
       ),
     );
@@ -184,6 +178,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   Widget buildVideo() {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
+        print('rebuild build video');
         return Container(
          // height: 450,
           decoration: BoxDecoration(
@@ -196,7 +191,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           child: VideoPlayer(
             videoPlayerModel: VideoPlayerModel(title: "",
                 link:
-                //(_state.selectLessonInfo?.link??"").isNotEmpty?(_state.selectLessonInfo?.link??""):
+                (_state.selectLessonInfo?.link??"").isNotEmpty?(_state.selectLessonInfo?.link??""):
                 "https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4" //_state.courseInfo?.videoPreview ?? ""
             ),
           ),
@@ -227,7 +222,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
     );
   }
 
- 
+
 
   double _checkProgression({required int subjectIndex}) {
     int finished = 0;
@@ -346,7 +341,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                             ),
                             onTap: () {
                               setState(() {
-                                _state. showSubject![subjectIndex] = !_state.showSubject![subjectIndex];
+                                _state.showSubject![subjectIndex] = !_state.showSubject![subjectIndex];
                               });
                             },
                           ),
@@ -477,10 +472,10 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           ),
           InkWell(
             onTap: () {
-              
-            }, 
+
+            },
               child: Text(
-                _state.selectLessonInfo?.docName??'', 
+                _state.selectLessonInfo?.docName??'',
                 style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.blue),)),
           SizedBox(
             height: 16,

@@ -150,7 +150,6 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
           break;
         case 'TAG':
           data.subFilter!.where((e) => e.name != null).forEach((e) {
-            
             if (state.controller!.listOfTags.where((element) => element.id == e.id,).isEmpty) {
               state.controller!.listOfTags.add(TagsInfo(id: e.id, name: e.name));
             }

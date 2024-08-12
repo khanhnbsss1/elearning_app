@@ -306,7 +306,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
     return Padding(
       padding: EdgeInsets.only(bottom: Dimens.size16, left: Dimens.size16, right: Dimens.size16),
       child: PageView(
-        physics: const BouncingScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         scrollDirection: Axis.horizontal,
         children: [

@@ -237,11 +237,12 @@ class AddCourseController extends MyController {
     }
   }
   Future<CourseInfo?> getCourseInfoFromUI({required CourseInfo courseInfo}) async {
-    int? gradleId = getIdFromName(listOfGradeNames, basicValidator.getController('grade_name')!.text??"");
+    int? gradleId = getIdFromName(listOfGradeNames, basicValidator.getController('grade_name')!.text);
     basicValidator.getController('grade_name')!.text = listOfGradeNames[getIdFromName(listOfGradeNames, basicValidator.getController('grade_name')!.text??"")]??"";
     UserProfile? userProfile = await UserManager().getUserProfile();
     List<String> infoObject = [];
     List<String> resultObject = [];
+    int? categoryId = getIdFromName(listOfCategoryName, basicValidator.getController('category_name')!.text??"");
 
     for(TextEditingController textEditingController in getListInfoObjectController())
       {
@@ -269,7 +270,7 @@ class AddCourseController extends MyController {
       durian: basicValidator.getController('durian')!.text,
       courseMode: basicValidator.getController('course_mode')!.text,
       gradeName: basicValidator.getController('grade_name')?.text,
-      categoryId: int.tryParse(basicValidator.getController('category_id')?.text ?? '0'),
+      categoryId: categoryId,
       isStandard: int.tryParse(basicValidator.getController('is_standard')!.text),
       categoryName: basicValidator.getController('category_name')?.text,
       videoPreview: basicValidator.getController('video_preview')?.text,

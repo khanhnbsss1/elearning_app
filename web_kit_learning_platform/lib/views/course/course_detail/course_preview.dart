@@ -130,7 +130,8 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
                   ),
                   child: VideoPlayer(videoPlayerModel: VideoPlayerModel(
                       title: "", 
-                      link:"https://www.youtube.com/watch?v=NGl9izvlVKA&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ",// state.courseInfo?.videoPreview ?? ""
+                      // link:"https://www.youtube.com/watch?v=NGl9izvlVKA&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ",
+                    link: state.courseInfo?.videoPreview ?? "",
                   ),),
                 ),
               ],

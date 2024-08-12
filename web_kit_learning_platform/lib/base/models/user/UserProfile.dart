@@ -53,7 +53,7 @@ class UserProfile {
 
   UserProfile.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    fullName = json['fullname'];
+    fullName = json['fullName'];
     userName = json['user_name'];
     bankAccount = json['bank_account'];
     bankName = json['bank_name'];
@@ -75,7 +75,7 @@ class UserProfile {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['fullname'] = fullName;
+    data['fullName'] = fullName;
     data['user_name'] = userName;
     data['bank_account'] = bankAccount;
     data['bank_name'] = bankName;

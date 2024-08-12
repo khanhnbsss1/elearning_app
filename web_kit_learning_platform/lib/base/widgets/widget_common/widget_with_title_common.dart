@@ -83,83 +83,86 @@ class _WidgetWithColumnTitleCommonState extends State<WidgetWithColumnTitleCommo
               child: widget.titleWidget,
             )
         ),
-        Visibility(
-          visible: widget.titleWidget==null,
-          child: widget.title!.isNotEmpty?
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal:0.0, vertical: 4.0),
-            child: Row(
-              mainAxisAlignment: widget.titleMainAxisAlignment!,
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Align(
-                  alignment: widget.alignmentGeometry!,
-                  child: Tooltip(
-                    message:  widget.title!,
-                    child: Text(
-                        widget.title!,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: widget.titleStyle??TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600)),
+        Padding(
+          padding: const EdgeInsets.only(left: 4.0),
+          child: Visibility(
+            visible: widget.titleWidget==null,
+            child: widget.title!.isNotEmpty?
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal:0.0, vertical: 4.0),
+              child: Row(
+                mainAxisAlignment: widget.titleMainAxisAlignment!,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: widget.alignmentGeometry!,
+                    child: Tooltip(
+                      message:  widget.title!,
+                      child: Text(
+                          widget.title!,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: widget.titleStyle??TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600)),
+                    ),
                   ),
-                ),
-                Gap(Dimens.size2),
-                Visibility(
-                    visible: widget.isRequirement??false,
-                    child:  Icon(
-                      Icons.star,
-                      size: Dimens.size10,
-                      color: Colors.red,)
-                ),
-                Spacer(),
-                Visibility(
-                    visible: widget.enableAttachFile == true,
-                    child: SizedBox(
-                      child: Row(
-                        children: [
-                          Text(
-                            L10nX.getStr.upload_file,
-                            style: widget.titleStyle??TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600),),
-                          MySpacing.width(8),
-                          InkWell(
-                            onTap: () {
-                              setState(() {
-                                check = !check;
-                                if(widget.onCheckChanged != null) {
-                                  widget.onCheckChanged!(check);
-                                }
-                              });
-                            },
-                            child: Container(
-                              width: 24,
-                              height: 24,
-                              decoration:
-                              BoxDecoration(
-                                  border:
-                                  Border.all(
-                                    color: Colors.red,
-                                  )),
-                              child: Align(
-                                alignment:
-                                Alignment.center,
-                                child: check
-                                    ? Icon(
-                                  Icons.check,
-                                  color: Colors
-                                      .red,
-                                )
-                                    : SizedBox(),
+                  Gap(Dimens.size2),
+                  Visibility(
+                      visible: widget.isRequirement??false,
+                      child:  Icon(
+                        Icons.star,
+                        size: Dimens.size10,
+                        color: Colors.red,)
+                  ),
+                  Spacer(),
+                  Visibility(
+                      visible: widget.enableAttachFile == true,
+                      child: SizedBox(
+                        child: Row(
+                          children: [
+                            Text(
+                              L10nX.getStr.upload_file,
+                              style: widget.titleStyle??TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600),),
+                            MySpacing.width(8),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  check = !check;
+                                  if(widget.onCheckChanged != null) {
+                                    widget.onCheckChanged!(check);
+                                  }
+                                });
+                              },
+                              child: Container(
+                                width: 24,
+                                height: 24,
+                                decoration:
+                                BoxDecoration(
+                                    border:
+                                    Border.all(
+                                      color: Colors.red,
+                                    )),
+                                child: Align(
+                                  alignment:
+                                  Alignment.center,
+                                  child: check
+                                      ? Icon(
+                                    Icons.check,
+                                    color: Colors
+                                        .red,
+                                  )
+                                      : SizedBox(),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )),
-              ],
-            ),
-          ):
-          const SizedBox.shrink(),
+                          ],
+                        ),
+                      )),
+                ],
+              ),
+            ):
+            const SizedBox.shrink(),
+          ),
         ),
         Align(
             alignment: widget.alignmentGeometry!,
@@ -236,66 +239,58 @@ class _WidgetWithRowTitleCommonState extends State<WidgetWithRowTitleCommon> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: (){
-        if(widget.enable! && widget.onTap!=null)
-        {
-          widget.onTap!();
-        }
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Visibility(
-            visible: widget.titleWidget!=null,
-              child: SizedBox(
-                child: widget.titleWidget,
-              )
-          ),
-          Visibility(
-            visible: widget.titleWidget==null,
-              child: widget.title!.isNotEmpty?
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal:0.0, vertical: 4.0),
-                child: Row(
-                  mainAxisAlignment: widget.titleMainAxisAlignment!,
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: widget.crossAxisAlignment!,
-                  children: [
-                    Align(
-                      alignment: widget.alignmentGeometry!,
-                      child: Tooltip(
-                        message:  widget.title!,
-                        child: Text(
-                            widget.title!,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: widget.titleStyle??TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600)),
-                      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Visibility(
+          visible: widget.titleWidget!=null,
+            child: SizedBox(
+              child: widget.titleWidget,
+            )
+        ),
+        Visibility(
+          visible: widget.titleWidget==null,
+            child: widget.title!.isNotEmpty?
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal:0.0, vertical: 4.0),
+              child: Row(
+                mainAxisAlignment: widget.titleMainAxisAlignment!,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: widget.crossAxisAlignment!,
+                children: [
+                  Align(
+                    alignment: widget.alignmentGeometry!,
+                    child: Tooltip(
+                      message:  widget.title!,
+                      child: Text(
+                          widget.title!,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: widget.titleStyle??TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600)),
                     ),
-                    Gap(Dimens.size2),
-                    Visibility(
-                        visible: widget.isRequirement??false,
-                        child:  Icon(
-                          Icons.star,
-                          size: Dimens.size10,
-                          color: Colors.red,)
-                    )
-                  ],
-                ),
-              ):
-              const SizedBox.shrink(),
-          ),
-          Align(
-              alignment: widget.alignmentGeometry!,
-              child: Padding(
-                padding: widget.childPadding??EdgeInsets.symmetric(horizontal: Dimens.size4, vertical: Dimens.size8),
-                child: widget.child??const SizedBox.shrink(),
-              )),
-        ],
-      ),
+                  ),
+                  Gap(Dimens.size2),
+                  Visibility(
+                      visible: widget.isRequirement??false,
+                      child:  Icon(
+                        Icons.star,
+                        size: Dimens.size10,
+                        color: Colors.red,)
+                  )
+                ],
+              ),
+            ):
+            const SizedBox.shrink(),
+        ),
+        Align(
+            alignment: widget.alignmentGeometry!,
+            child: Padding(
+              padding: widget.childPadding??EdgeInsets.symmetric(horizontal: Dimens.size4, vertical: Dimens.size8),
+              child: widget.child??const SizedBox.shrink(),
+            )),
+      ],
     );
   }
 }

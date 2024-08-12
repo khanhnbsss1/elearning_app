@@ -173,22 +173,11 @@ class CourseItemGridView extends StatelessWidget {
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              Icon(
-                                                Icons.attach_money,
-                                                color: notifier.isDark && isHovered
-                                                    ? notifier.whitecolor
-                                                    : notifier.isDark && !isHovered
-                                                        ? notifier.blackcolor
-                                                        : notifier.blackcolor,
-                                                size: Dimens.size22,
-                                                // size: ResponsiveInfo.isPhone()?Dimens.size18: width < 1300  ? Dimens.size10 :Dimens.size22,
-                                              ),
                                               Text(NumberHelper().numberToString(courseInfo.payment, decimalDigits: 0).trim(),
                                                   maxLines: 1,
                                                   overflow: TextOverflow.visible,
                                                   style: baseStyle.copyWith(color: notifier.isDark && isHovered ? notifier.whitecolor : notifier.isDark && !isHovered ? notifier.blackcolor : notifier.blackcolor,
                                                       fontSize: Dimens.size15,
-                                                      // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
                                                       fontWeight: FontWeight.bold)),
                                               Text(" ${L10nX.getStr.vnd_str}",
                                                   style: TextStyleConstant

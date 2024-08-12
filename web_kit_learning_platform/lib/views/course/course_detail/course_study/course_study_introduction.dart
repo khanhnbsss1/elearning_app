@@ -64,6 +64,10 @@ class _CourseStudyIntroductionState extends State<CourseStudyIntroduction> {
   }
 
   Widget buildVideo() {
+    return BlocConsumer<CourseDetailBloc, CourseDetailState>(
+  listener: (context, state) {
+  },
+  builder: (context, state) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: 450,
@@ -71,9 +75,12 @@ class _CourseStudyIntroductionState extends State<CourseStudyIntroduction> {
         videoPlayerModel: VideoPlayerModel(
             title: "",
             link:
-            "https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4" //widget.courseInfo.videoPreview ?? ""
+            // "https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4" 
+            state.courseInfo?.videoPreview ?? "",
         ),
       ),
     );
+  },
+);
   }
 }

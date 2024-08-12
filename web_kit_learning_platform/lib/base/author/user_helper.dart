@@ -34,6 +34,7 @@ class UserManager{
     UserProfile? userInfo;
     if(rootUserStr.isNotEmpty)
     {
+
       userInfo = UserProfile.fromJson(jsonDecode(rootUserStr));
     }
     return userInfo;

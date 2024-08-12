@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/biomectric/IdentifierConst.dart';
@@ -28,12 +29,12 @@ class LoginController extends MyController {
         required: true,
         label: "Email",
         validators: [MyEmailValidator()],
-        controller: TextEditingController(text: emailOrPhone));
+        controller: TextEditingController(text: (kDebugMode) ? "0348074377" : emailOrPhone));
     basicValidator.addField('password',
         required: true,
         label: "Password",
         validators: [MyLengthValidator(min: 6, max: 10)],
-        controller: TextEditingController(text: password));
+        controller: TextEditingController(text: (kDebugMode) ? "Ll@123456" : password));
   }
   void onChangeShowPassword() {
     showPassword = !showPassword;
