@@ -456,6 +456,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           floatingLabelBehavior: FloatingLabelBehavior.never,
           suffixIcon: InkWell(
               onTap: () async {
+                return;
                 FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['mp4']);
                 MultipartFile file = MultipartFile.fromBytes(result!.files.first.bytes!.toList(growable: true), filename: result.names[0]);
                 setState(() {
