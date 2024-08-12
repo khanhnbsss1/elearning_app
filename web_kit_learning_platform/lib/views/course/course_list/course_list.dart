@@ -277,7 +277,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
 
     bool? enableEdit = state.userProfile?.getPermission().contains("");
     double maxWidthItem = 400;
-    double heightOfItem = 470;
+    double heightOfItem = 460;
     int numberRow = (boxConstraints.maxWidth / maxWidthItem).toInt();
     double widthItem = (boxConstraints.maxWidth - (50 * numberRow)) / numberRow;
     for (CourseInfo courseInfo in state.courseResponseModel?.content ?? []) {
@@ -332,7 +332,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                         Expanded(
                           child: Align(
                             alignment: Alignment.topCenter,
-                            child: GridView.count(
+                            child: numberRow>1?GridView.count(
                               //padding: const EdgeInsets.all(20),
                               controller: scrollController,
                               crossAxisSpacing: 24,
@@ -340,6 +340,11 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                               mainAxisSpacing: 24,
                               crossAxisCount: numberRow,
                               shrinkWrap: true,
+                              children: listOfCourse,
+                            ): ListView(
+                              shrinkWrap: true,
+                              controller: scrollController,
+                              scrollDirection: Axis.vertical,
                               children: listOfCourse,
                             ),
                           ),
