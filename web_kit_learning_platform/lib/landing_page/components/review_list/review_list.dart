@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/landing_page/mediaquery/mq.dart';
 import 'package:readmore/readmore.dart';
+import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 import 'package:webkit/services/apis/landing_page/review/models/landing_page_review_list_response_model.dart';
 
 import '../colornotifier.dart';
@@ -38,6 +39,7 @@ class _ReviewListState extends State<ReviewList>
     return Container(
       width: width,
       decoration: BoxDecoration(
+        color: ColorConst.whiteColor,
         image: DecorationImage(
             image: AssetImage('assets/deshboard/landingpage6.jpg'),
             fit: (width < 1100) ? BoxFit.contain : BoxFit.fill),
@@ -88,16 +90,9 @@ class _ReviewListState extends State<ReviewList>
           child: Container(
             width: constraints.maxWidth < 1300
                 ? constraints.maxWidth / 0.5
-                : constraints.maxWidth / 1.1,
+                : constraints.maxWidth,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                // color: notifier.isDark
-                //     ? Colors.transparent
-                //     : const Color(0xFFF4F5F6),
-                border: Border.all(
-                    color: notifier.isDark
-                        ? notifier.sugestionbutton
-                        : Colors.transparent)),
+                borderRadius: BorderRadius.circular(16),),
             child: Padding(
               padding: EdgeInsets.all(
                 constraints.maxWidth < 550 ? 20 : 45,
@@ -261,12 +256,11 @@ class _ReviewListState extends State<ReviewList>
       required ReviewListState state}) {
     return StatefulBuilder(
       builder: (BuildContext context, void Function(void Function()) setState) {
-        return SizedBox(
-          width: (constraints.maxWidth < 550)
-              ? MediaQuery.sizeOf(context).width / 1.1
-              : (constraints.maxWidth < 750)
-                  ? MediaQuery.sizeOf(context).width / 1.1
-                      : MediaQuery.sizeOf(context).width / 2.4,
+        return Container(
+          width: ResponsiveInfo.isPhone()?constraints.maxWidth: 600,
+          constraints: BoxConstraints(
+            minWidth: 500
+          ),
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Card(
@@ -283,23 +277,22 @@ class _ReviewListState extends State<ReviewList>
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      flex: 5,
+                    SizedBox(
+                      width: Dimens.size250,
                       child: Padding(
                         padding: EdgeInsets.all(16),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: reviewLandingPageInfo.avatar!.isNotEmpty
                               ? ImageManager().getImageByUrl(
-                                  reviewLandingPageInfo.avatar ?? "",
-                                  boxFit: BoxFit.fill)
+                              reviewLandingPageInfo.avatar ?? "",
+                              boxFit: BoxFit.fill)
                               : Image.asset('assets/deshboard/latestdeals.png',
-                                  fit: BoxFit.fill),
+                              fit: BoxFit.fill),
                         ),
                       ),
                     ),
-                    Flexible(
-                      flex: 5,
+                    Expanded(
                       child: Padding(
                         padding: const EdgeInsets.only(
                             right: 16, top: 16, bottom: 16),
@@ -333,15 +326,15 @@ class _ReviewListState extends State<ReviewList>
                               children: [
                                 Flexible(
                                   child:
-                                      Text(reviewLandingPageInfo.position ?? "",
-                                          style: baseStyle.copyWith(
-                                            fontSize:
-                                                (constraints.maxWidth / 60 > 10)
-                                                    ? constraints.maxWidth / 60
-                                                    : 10,
-                                            color: notifier.greycolor,
-                                          ),
-                                          textAlign: TextAlign.center),
+                                  Text(reviewLandingPageInfo.position ?? "",
+                                      style: baseStyle.copyWith(
+                                        fontSize:
+                                        (constraints.maxWidth / 60 > 10)
+                                            ? constraints.maxWidth / 60
+                                            : 10,
+                                        color: notifier.greycolor,
+                                      ),
+                                      textAlign: TextAlign.center),
                                 ),
                               ],
                             ),
@@ -365,9 +358,9 @@ class _ReviewListState extends State<ReviewList>
                                       style: baseStyle.copyWith(
                                         fontStyle: FontStyle.italic,
                                         fontSize:
-                                            (constraints.maxWidth / 25 > 16)
-                                                ? constraints.maxWidth / 25
-                                                : 16,
+                                        (constraints.maxWidth / 25 > 16)
+                                            ? constraints.maxWidth / 25
+                                            : 16,
                                         color: notifier.blackcolor,
                                       ),
                                       textAlign: TextAlign.justify,

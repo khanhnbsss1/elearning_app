@@ -77,6 +77,9 @@ class ImageManager {
         height: height,
         fit: boxFit,
         scale: FetchPixels.getScale(),
+        errorBuilder: (context, error, stackTrace) {
+          return NoData();
+        },
       ),
     );
   }

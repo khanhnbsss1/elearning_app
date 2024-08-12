@@ -120,7 +120,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
           builder: (BuildContext context, BoxConstraints constraints) { 
             return Column(
               children: [
-                Padding(
+               /* Padding(
                   padding: EdgeInsets.only(
                       left: constraints.maxWidth < 500
                           ? 10
@@ -255,7 +255,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                             : notifier.sugestionbutton,
                       ),
                     ],
-                  )),
+                  )),*/
                 Container(
                   color: notifier.redcolor,
                   child: Padding(
@@ -265,7 +265,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          flex: 3,
+                          flex: 1,
                           child: Padding(
                             padding: const EdgeInsets.all(12.0),
                             child: Container(
@@ -306,7 +306,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                                 )),
                           ),
                         ),
-                        Expanded(
+                        /*Expanded(
                           flex: 5,
                           child: Padding(
                             padding: const EdgeInsets.all(12.0),
@@ -352,9 +352,9 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                               ),
                             ),
                           ),
-                        ),
+                        ),*/
                         Expanded(
-                          flex: 3,
+                          flex: 1,
                           child: Padding(
                             padding: const EdgeInsets.only(left: 12.0),
                             child: Column(
@@ -454,129 +454,6 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(L10nX.getStr.subcribe_to_our_news_letter,
-                          style: baseStyle.copyWith(
-                              color: notifier.blackcolor),
-                        ),
-                        const SizedBox(height: 10),
-                        SizedBox(
-                          height: 60,
-                          width: constraints.maxWidth / 1,
-                          child: TextField(
-                            style: baseStyle.copyWith(color: notifier.blackcolor),
-                            decoration: InputDecoration(
-                              disabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide: BorderSide(
-                                    width: 1,
-                                    color: notifier.isDark
-                                        ? const Color(0xFF353945)
-                                        : const Color(0xFFE6E8EC)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide: BorderSide(
-                                    width: 2,
-                                    color: notifier.isDark
-                                        ? const Color(0xFF353945)
-                                        : const Color(0xFFE6E8EC)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide:
-                                BorderSide(width: 1, color: notifier.subgreycolor),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide: BorderSide(
-                                    width: 1,
-                                    color: notifier.isDark
-                                        ? const Color(0xFF23262F)
-                                        : const Color(0xFFE6E8EC)),
-                              ),
-                              suffixIcon: InkWell(
-                                onTap: () {},
-                                onHover: (value) {
-                                  setState(() {
-                                    tfHover = value;
-                                  });
-                                },
-                                child: AnimatedContainer(
-                                  width: 70,
-                                  height: 40,
-                                  duration: const Duration(milliseconds: 200),
-                                  margin: const EdgeInsets.only(right: 5),
-                                  decoration: BoxDecoration(
-                                    color: tfHover
-                                        ? Colors.indigoAccent.shade700
-                                        : notifier.buttoncolor,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.send,
-                                      style: baseStyle.copyWith(
-
-                                          color: Colors.white,
-                                          fontSize: 16)),
-                                ),
-                              ),
-                              hintText: L10nX.getStr.enter_your_email,
-                              hintStyle: baseStyle.copyWith(
-                                   color: notifier.subgreycolor),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    // const SizedBox(height: 10),
-                    // Row(
-                    //   mainAxisSize: MainAxisSize.max,
-                    //   mainAxisAlignment: MainAxisAlignment.end,
-                    //   children: [
-                    //     Image.asset('assets/Icons/lightbulbicon.png',
-                    //         height: constraints.maxWidth < 300 ? 14 : 20,
-                    //         color: notifier.subgreycolor),
-                    //     const SizedBox(
-                    //       width: 7,
-                    //     ),
-                    //     Text(
-                    //       L10nX.getStr.dark_theme,
-                    //       style: baseStyle.copyWith(
-                    //
-                    //           fontSize: constraints.maxWidth < 300 ? 12 : 14,
-                    //           color: notifier.subgreycolor,
-                    //           fontWeight: FontWeight.w600,
-                    //           letterSpacing: 1),
-                    //     ),
-                    //     const SizedBox(
-                    //       width: 7,
-                    //     ),
-                    //     SizedBox(
-                    //       height: 29,
-                    //       child: FlutterSwitch(
-                    //         height: 23.0,
-                    //         width: constraints.maxWidth < 300 ? 40.0 : 45.0,
-                    //         padding: 4.0,
-                    //         toggleSize: 16.0,
-                    //         borderRadius: 15.0,
-                    //         inactiveToggleColor: notifier.buttoncolor,
-                    //         activeColor: notifier.buttoncolor,
-                    //         inactiveColor: notifier.sugestionbutton,
-                    //         value: notifier.isDark,
-                    //         onToggle: (bool value) {
-                    //           setState(() {
-                    //             notifier.isAvailable(value);
-                    //           });
-                    //         },
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    const SizedBox(),
                     const SizedBox(height: 30),
                     Divider(
                       color: notifier.isDark
@@ -651,42 +528,6 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                         ),
                       ),
                       SizedBox(height: 8,),
-                      SizedBox(
-                        height: 200,
-                        width: width / 1,
-                        child: GridView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          // physics: const NeverScrollableScrollPhysics(),
-                          itemCount: endElements.length,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            mainAxisExtent: 40,
-                            crossAxisSpacing: constraints.maxWidth < 500 ? constraints.maxWidth / 10 : constraints.maxWidth / 5,
-                          ),
-                          itemBuilder: (context, index) {
-                            return StatefulBuilder(
-                              builder: (BuildContext context, void Function(void Function()) setState) { 
-                                return InkWell(
-                                  onTap: () {},
-                                  onHover: (value) {
-                                    setState(() {
-                                      elementsHover[index] = value;
-                                    });
-                                  },
-                                  child: Text(
-                                    endElements[index],
-                                    style: baseStyle.copyWith(
-                                        fontSize: constraints.maxWidth < 500 ? 14 : 16,
-                                        color: Colors.white),
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 8),
                       Text(
                         'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services - Powered by ${L10nX.getStr.app_name}',
                         style: baseStyle.copyWith(

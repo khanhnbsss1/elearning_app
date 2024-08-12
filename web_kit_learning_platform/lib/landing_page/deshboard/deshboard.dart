@@ -356,11 +356,6 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           // key: UniqueKey(),
           typeName: UserTypeName.user,
         ),
-        Divider(
-          color: notifier.isDark
-              ? notifier.subgreycolor
-              : notifier.sugestionbutton,
-        ),
         SizedBox(
           height: 30,
         ),
@@ -715,24 +710,21 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Visibility(
-                                visible: userProfile != null &&
-                                    ResponsiveInfo.isPhone(),
+                                visible: userProfile != null && ResponsiveInfo.isPhone(),
                                 child: InkWell(
                                   onTap: () {
                                     AppPages.routeName(Routes.dashboardRoute);
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      const SizedBox(width: 4),
                                       Icon(
                                         Icons.home_outlined,
                                         size: Dimens.size25,
                                         color: ColorConst.blackColor,
                                       ),
-                                      const SizedBox(width: 20),
+                                      const SizedBox(width: 8),
                                       Text(L10nX.getStr.lets_study,
                                           style: baseStyle.copyWith(
                                             fontSize: 16,
@@ -754,28 +746,6 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                         child: Center(
                                           child: Column(
                                             children: [
-                                              // TextButton(
-                                              //   onPressed: () {
-                                              //     userProfile == null
-                                              //         ? LoginPage().show(context)
-                                              //         : AppPages.routeName(
-                                              //         Routes.dashboardRoute);
-                                              //   },
-                                              //   child: Text(
-                                              //     L10nX.getStr.lets_study,
-                                              //     style: TextStyle(
-                                              //       fontSize: 20,
-                                              //       color: Colors.black,
-                                              //     ),
-                                              //     // Text(
-                                              //     //   L10nX.getStr.slogan,
-                                              //     //   style: TextStyle(
-                                              //     //     fontSize: 24,
-                                              //     //     color: Colors.black,
-                                              //     //   ),
-                                              //     // ),
-                                              //   ),
-                                              // ),
                                               SizedBox(
                                                 height: 40,
                                                 width: 120,
@@ -854,48 +824,31 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                       ),
                                       Visibility(
                                         visible: userProfile != null,
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            SizedBox(
-                                              height: 40,
-                                              width: 145,
-                                              child: ElevatedButton(
-                                                style: ButtonStyle(
-                                                  elevation:
-                                                      const WidgetStatePropertyAll(
-                                                          0),
-                                                  backgroundColor:
-                                                      WidgetStatePropertyAll(
-                                                          ColorConst
-                                                              .whiteColor),
-                                                  shape:
-                                                      const WidgetStatePropertyAll(
-                                                    RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  20)),
-                                                    ),
-                                                  ),
-                                                ),
-                                                onPressed: () {
-                                                  AuthorManager()
-                                                      .handleLogout();
-                                                  AppPages.routeName(
-                                                      Routes.landingPageRoute,
-                                                      isReplace: true);
-                                                },
-                                                child: Text(
-                                                    L10nX.getStr.sign_out_text,
-                                                    style: baseStyle.copyWith(
-                                                        fontSize: 12,
-                                                        color: Colors.red)),
+                                        child: InkWell(
+                                          onTap: () {
+                                            AuthorManager().handleLogout();
+                                            AppPages.routeName(
+                                                Routes.landingPageRoute,
+                                                isReplace: true);
+                                          },
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              Icon(
+                                                Icons.logout,
+                                                size: Dimens.size25,
+                                                color: ColorConst.blackColor,
                                               ),
-                                            ),
-                                          ],
+                                              const SizedBox(width: 8),
+                                              Text(
+                                                  L10nX.getStr.sign_out_text,
+                                                  style: baseStyle.copyWith(
+                                                      fontSize: 12,
+                                                      color: Colors.red)),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ]),

@@ -4350,10 +4350,10 @@ class S {
     );
   }
 
-  /// `Let's study!`
+  /// `Let's study`
   String get lets_study {
     return Intl.message(
-      'Let\'s study!',
+      'Let\'s study',
       name: 'lets_study',
       desc: '',
       args: [],
