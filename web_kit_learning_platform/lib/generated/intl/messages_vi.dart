@@ -399,6 +399,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Biểu đồ kim tự tháp"),
         "qty": MessageLookupByLibrary.simpleMessage("Số lượng"),
         "quick_links": MessageLookupByLibrary.simpleMessage("Liên kết nhanh"),
+        "quiz_add": MessageLookupByLibrary.simpleMessage("Tạo các câu hỏi"),
+        "quiz_list":
+            MessageLookupByLibrary.simpleMessage("Danh sách các câu hỏi"),
+        "quiz_remove": MessageLookupByLibrary.simpleMessage("Xóa các câu hỏi"),
+        "quiz_str": MessageLookupByLibrary.simpleMessage("Các câu hỏi"),
+        "quiz_update":
+            MessageLookupByLibrary.simpleMessage("Cập nhật các câu hỏi"),
         "radial_chart":
             MessageLookupByLibrary.simpleMessage("Biểu đồ xuyên tâm"),
         "rating": MessageLookupByLibrary.simpleMessage("Xếp hạng"),

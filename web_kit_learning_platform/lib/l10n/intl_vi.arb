@@ -546,6 +546,10 @@
   "test_add": "Tạo bài test",
   "test_remove": "Xóa bài test",
   "test_update": "Cập nhật bài test",
-  "test_str": "Bài test"
-
+  "test_str": "Bài test",
+  "quiz_list": "Danh sách các câu hỏi",
+  "quiz_add": "Tạo các câu hỏi",
+  "quiz_remove": "Xóa các câu hỏi",
+  "quiz_update": "Cập nhật các câu hỏi",
+  "quiz_str": "Các câu hỏi"
 }

@@ -542,6 +542,13 @@
   "test_add": "创建测试",
   "test_remove": "删除测试",
   "test_update": "更新测试",
-  "test_str": "测试"
+  "test_str": "测试",
+  "quiz_list": "问题列表",
+  "quiz_add": "创建问题",
+  "quiz_remove": "删除问题",
+  "quiz_update": "更新问题",
+  "quiz_str": "问题"
+
+
 
 }

@@ -82,5 +82,10 @@ class ApiName {
   final String deleteTest = "/delete-test";
   final String detailTest = "/get-test-detail";
 
+  final String createQuiz = "/create-question";
+  final String deleteQuiz = "/delete-question";
+  final String getQuizList = "/get-questions";
+  final String updateQuiz = "/update-question";
+
 }
 

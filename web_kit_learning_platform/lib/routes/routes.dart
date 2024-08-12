@@ -47,6 +47,7 @@ import 'package:webkit/views/other/fl_chart_screen.dart';
 import 'package:webkit/views/other/google_map.dart';
 import 'package:webkit/views/other/sfmap_page.dart';
 import 'package:webkit/views/other/synsfusion_chart.dart';
+import 'package:webkit/views/quiz/test_list/quiz_list.dart';
 import 'package:webkit/views/starter.dart';
 import 'package:webkit/views/tags/tag_list/tag_list.dart';
 import 'package:webkit/views/test/test_list/test_list.dart';
@@ -128,6 +129,10 @@ getPageRoute() {
     GetPage(
         name: Routes.testList,
         page: () =>  TestListPage(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: Routes.quizList,
+        page: () =>  QuizListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: Routes.videoPlayer,

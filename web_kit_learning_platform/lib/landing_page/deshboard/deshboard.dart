@@ -542,28 +542,28 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     ),
                     Row(
                       children: [
-                        // TextButton(
-                        //   onPressed: () {
-                        //     userProfile == null
-                        //         ? LoginPage().show(context)
-                        //         : AppPages.routeName(
-                        //         Routes.dashboardRoute);
-                        //   },
-                        //   child: Text(
-                        //     L10nX.getStr.lets_study,
-                        //     style: TextStyle(
-                        //       fontSize: 20,
-                        //       color: Colors.black,
-                        //     ),
-                        //     // Text(
-                        //     //   L10nX.getStr.slogan,
-                        //     //   style: TextStyle(
-                        //     //     fontSize: 24,
-                        //     //     color: Colors.black,
-                        //     //   ),
-                        //     // ),
-                        //   ),
-                        // ),
+                        TextButton(
+                          onPressed: () {
+                            userProfile == null
+                                ? LoginPage().show(context)
+                                : AppPages.routeName(
+                                Routes.dashboardRoute);
+                          },
+                          child: Text(
+                            L10nX.getStr.lets_study,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                            ),
+                            // Text(
+                            //   L10nX.getStr.slogan,
+                            //   style: TextStyle(
+                            //     fontSize: 24,
+                            //     color: Colors.black,
+                            //   ),
+                            // ),
+                          ),
+                        ),
                         SizedBox(
                           width: 16,
                         ),

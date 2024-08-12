@@ -547,7 +547,14 @@
   "test_add": "Create test",
   "test_remove": "Delete test",
   "test_update": "Update test",
-  "test_str": "Test"
+  "test_str": "Test",
+  "quiz_list": "List of quizzes",
+  "quiz_add": "Create quiz",
+  "quiz_remove": "Delete quiz",
+  "quiz_update": "Update quiz",
+  "quiz_str": "Quizzes"
+
+
 
 
 }
