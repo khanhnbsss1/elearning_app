@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types, non_constant_identifier_names
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -177,7 +178,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
       oldWidth = width;
       _mainController = ScrollController();
       _mainController.addListener(() {
-        if (_mainController.offset > 300) {
+        if (_mainController.offset > 200) {
           if (showCardModel.showCard == false) {
             showCardModel.onChangerShowCard(true);
           }
@@ -193,6 +194,10 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           key: navigationKey[0],
         ),
         (width > 550) ? buildTabBar(constraints: constraints) : SizedBox(),
+        Visibility(
+          visible: width > 550,
+          child: buildNavigatorBar(),
+        ),
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: constraints.maxWidth < 760
@@ -403,99 +408,104 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           },
         ),
       ),
-      Positioned(
-        child: Visibility(
-          visible: MediaQuery.of(context).size.width > 550 && showCardModel._showCard == true,
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: EdgeInsets.only(
-                  top: (MediaQuery.of(context).size.width < 1050) ? 60 : 80),
-              child: Card(
-                margin: EdgeInsets.only(top: 20),
-                shadowColor: Colors.red,
-                surfaceTintColor: Colors.green,
-                elevation: 5,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(
-                      width: 10,
-                    ),
-                    (width > 750) ? StaticView.buildLogo(size: 28) : SizedBox(),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Wrap(
-                      children: List<Widget>.generate(
-                        7,
-                        (int index) {
+      ListenableBuilder(
+          listenable: showCardModel,
+          builder: (BuildContext context, Widget? child) {
+            return Visibility(
+              visible: showCardModel.showCard && width > 550,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: buildNavigatorBar()
+                ),
+              ),
+            );
+          }),
+    ]);
+  }
+
+  Widget buildNavigatorBar() {
+    return Card(
+      margin: EdgeInsets.only(top: 20),
+      shadowColor: Colors.red,
+      surfaceTintColor: Colors.green,
+      elevation: 5,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SizedBox(
+            width: 10,
+          ),
+          (width > 750) ? StaticView.buildLogo(size: 28) : SizedBox(),
+          SizedBox(
+            width: 10,
+          ),
+          Wrap(
+            children: List<Widget>.generate(
+              7,
+                  (int index) {
+                return StatefulBuilder(
+                  builder: (BuildContext context,
+                      void Function(void Function()) setState) {
+                    return SizedBox(
+                      height: 50,
+                      //width: itemCardWidth,
+                      child: OnHoverWidget(
+                        builder: (isHovered) {
                           return StatefulBuilder(
                             builder: (BuildContext context,
-                                void Function(void Function()) setState) {
-                              return SizedBox(
-                                height: 50,
-                                //width: itemCardWidth,
-                                child: OnHoverWidget(
-                                  builder: (isHovered) {
-                                    return StatefulBuilder(
-                                      builder: (BuildContext context,
-                                          void Function(void Function())
-                                              setState) {
-                                        return Center(
-                                          child: TextButton(
-                                            style: TextButton.styleFrom(
-                                              overlayColor: Colors.white,
-                                            ),
-                                            onPressed: () {
-                                              Scrollable.ensureVisible(
-                                                  GlobalObjectKey(index)
-                                                      .currentContext!,
-                                                  duration:
-                                                      Duration(seconds: 1),
-                                                  curve: Curves.easeInOutCubic);
-                                            },
-                                            child: Text(
-                                              landingPageTitles[index],
-                                              style: TextStyleConstant
-                                                  .bodyMedium
-                                                  .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: (width < 1100)
-                                                          ? 10
-                                                          : 18,
-                                                      color: (isHovered)
-                                                          ? notifier.redcolor
-                                                          : Colors.black,
-                                                      decoration: (isHovered)
-                                                          ? TextDecoration
-                                                              .underline
-                                                          : TextDecoration.none,
-                                                      decorationColor:
-                                                          notifier.redcolor,
-                                                      decorationThickness: 2),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    );
+                                void Function(void Function())
+                                setState) {
+                              return Center(
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    overlayColor: Colors.white,
+                                  ),
+                                  onPressed: () {
+                                    Scrollable.ensureVisible(
+                                        GlobalObjectKey(index)
+                                            .currentContext!,
+                                        duration:
+                                        Duration(seconds: 1),
+                                        curve: Curves.easeInOutCubic);
                                   },
+                                  child: Text(
+                                    landingPageTitles[index],
+                                    style: TextStyleConstant
+                                        .bodyMedium
+                                        .copyWith(
+                                        fontWeight:
+                                        FontWeight.bold,
+                                        fontSize: (width < 1100)
+                                            ? 10
+                                            : 18,
+                                        color: (isHovered)
+                                            ? notifier.redcolor
+                                            : Colors.black,
+                                        decoration: (isHovered)
+                                            ? TextDecoration
+                                            .underline
+                                            : TextDecoration.none,
+                                        decorationColor:
+                                        notifier.redcolor,
+                                        decorationThickness: 2),
+                                  ),
                                 ),
                               );
                             },
                           );
                         },
-                      ).toList(),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ).toList(),
           ),
-        ),
+        ],
       ),
-    ]);
+    );
   }
 
   Widget buildTabBar({required BoxConstraints constraints}) {
@@ -1203,8 +1213,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     ),
                   ),
                   Text(
-                    L10nX.getStr
-                        .why_choose_us_sub_title,
+                    L10nX.getStr.why_choose_us_sub_title,
                     style: TextStyleConstant.titleSmall.copyWith(
                         fontWeight: FontWeight.w400,
                         color: ColorConst.blackColor45),
@@ -1253,17 +1262,17 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                               onTap: () {
                                 double itemWidth = ResponsiveInfo.isPhone()
                                     ? (constraints.maxWidth -
-                                    Dimens.size36 * 2 -
-                                    Dimens.size20)
+                                        Dimens.size36 * 2 -
+                                        Dimens.size20)
                                     : (constraints.maxWidth < 1100)
-                                    ? ((constraints.maxWidth) * 3 / 4 -
-                                    Dimens.size36 * 4) /
-                                    2
-                                    : (constraints.maxWidth < 1600)
-                                    ? ((constraints.maxWidth) * 3 / 4 -
-                                    Dimens.size36 * 6) /
-                                    3
-                                    : Dimens.size340;
+                                        ? ((constraints.maxWidth) * 3 / 4 -
+                                                Dimens.size36 * 4) /
+                                            2
+                                        : (constraints.maxWidth < 1600)
+                                            ? ((constraints.maxWidth) * 3 / 4 -
+                                                    Dimens.size36 * 6) /
+                                                3
+                                            : Dimens.size340;
                                 if (differrentController.offset >= 0) {
                                   differrentController.animateTo(
                                     differrentController.offset -
@@ -1309,17 +1318,17 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                               onTap: () {
                                 double itemWidth = ResponsiveInfo.isPhone()
                                     ? (constraints.maxWidth -
-                                    Dimens.size36 * 2 -
-                                    Dimens.size20)
+                                        Dimens.size36 * 2 -
+                                        Dimens.size20)
                                     : (constraints.maxWidth < 1100)
-                                    ? ((constraints.maxWidth) * 3 / 4 -
-                                    Dimens.size36 * 4) /
-                                    2
-                                    : (constraints.maxWidth < 1600)
-                                    ? ((constraints.maxWidth) * 3 / 4 -
-                                    Dimens.size36 * 6) /
-                                    3
-                                    : Dimens.size340;
+                                        ? ((constraints.maxWidth) * 3 / 4 -
+                                                Dimens.size36 * 4) /
+                                            2
+                                        : (constraints.maxWidth < 1600)
+                                            ? ((constraints.maxWidth) * 3 / 4 -
+                                                    Dimens.size36 * 6) /
+                                                3
+                                            : Dimens.size340;
                                 if (differrentController.offset >= 0) {
                                   differrentController.animateTo(
                                     differrentController.offset +
