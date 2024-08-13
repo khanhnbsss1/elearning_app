@@ -275,7 +275,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hộp thoại bên trái"),
         "lesson_list":
             MessageLookupByLibrary.simpleMessage("Danh sách bài học"),
-        "lets_study": MessageLookupByLibrary.simpleMessage("Vào học !"),
+        "lets_study": MessageLookupByLibrary.simpleMessage("Vào học"),
         "level_str": MessageLookupByLibrary.simpleMessage("Cấp độ"),
         "license_copyright":
             MessageLookupByLibrary.simpleMessage("Giấy phép & bản quyền"),

@@ -1,78 +1,86 @@
 import 'package:webkit/base/services/base_request/models/page_model.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
 
+import 'package:webkit/base/services/base_request/models/page_model.dart';
+import 'package:webkit/services/apis/question/models/question_info.dart';
+
 class QuizInfo {
   int? id;
-  int? courseId;
-  int? lectureId;
-  String? language;
-  String? typeQuiz;
-  String? name;
-  String? courseName;
-  String? subName;
-  String? lectureName;
+  String? questionName;
+  int? weightage;
+  String? typeQuestion;
+  String? questionLink;
   String? createdAt;
   String? createdBy;
-  String? updatedAt;
-  String? updatedBy;
-  List<QuestionInfo>? quizDTOs;
+  Null? updatedAt;
+  List<Answer>? answer;
 
   QuizInfo(
       {this.id,
-        this.courseId,
-        this.lectureId,
-        this.language,
-        this.typeQuiz,
-        this.name,
-        this.courseName,
-        this.subName,
-        this.lectureName,
+        this.questionName,
+        this.weightage,
+        this.typeQuestion,
+        this.questionLink,
         this.createdAt,
         this.createdBy,
         this.updatedAt,
-        this.updatedBy,
-        this.quizDTOs});
+        this.answer});
 
   QuizInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    courseId = json['course_id'];
-    lectureId = json['lecture_id'];
-    language = json['language'];
-    typeQuiz = json['type_quiz'];
-    name = json['name'];
-    courseName = json['course_name'];
-    subName = json['sub_name'];
-    lectureName = json['lecture_name'];
+    questionName = json['question_name'];
+    weightage = json['weightage'];
+    typeQuestion = json['type_question'];
+    questionLink = json['question_link'];
     createdAt = json['created_at'];
     createdBy = json['created_by'];
     updatedAt = json['updated_at'];
-    updatedBy = json['updated_by'];
-    if (json['quizDTOs'] != null) {
-      quizDTOs = <QuestionInfo>[];
-      json['quizDTOs'].forEach((v) {
-        quizDTOs!.add(new QuestionInfo.fromJson(v));
+    if (json['answer'] != null) {
+      answer = <Answer>[];
+      json['answer'].forEach((v) {
+        answer!.add(new Answer.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] =id;
-    data['course_id'] =courseId;
-    data['lecture_id'] =lectureId;
-    data['language'] =language;
-    data['type_quiz'] =typeQuiz;
-    data['name'] =name;
-    data['course_name'] =courseName;
-    data['sub_name'] =subName;
-    data['lecture_name'] =lectureName;
-    data['created_at'] =createdAt;
-    data['created_by'] =createdBy;
-    data['updated_at'] =updatedAt;
-    data['updated_by'] =updatedBy;
-    if (quizDTOs != null) {
-      data['quizDTOs'] =quizDTOs!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['question_name'] = this.questionName;
+    data['weightage'] = this.weightage;
+    data['type_question'] = this.typeQuestion;
+    data['question_link'] = this.questionLink;
+    data['created_at'] = this.createdAt;
+    data['created_by'] = this.createdBy;
+    data['updated_at'] = this.updatedAt;
+    if (this.answer != null) {
+      data['answer'] = this.answer!.map((v) => v.toJson()).toList();
     }
+    return data;
+  }
+}
+
+class Answer {
+  int? answerId;
+  String? answer;
+  String? typeAnswer;
+  int? rightAnswer;
+
+  Answer({this.answerId, this.answer, this.typeAnswer, this.rightAnswer});
+
+  Answer.fromJson(Map<String, dynamic> json) {
+    answerId = json['answer_id'];
+    answer = json['answer'];
+    typeAnswer = json['type_answer'];
+    rightAnswer = json['right_answer'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['answer_id'] = this.answerId;
+    data['answer'] = this.answer;
+    data['type_answer'] = this.typeAnswer;
+    data['right_answer'] = this.rightAnswer;
     return data;
   }
 }

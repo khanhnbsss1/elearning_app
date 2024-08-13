@@ -261,149 +261,94 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                   child: Padding(
                     padding: EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 0),
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          flex: 1,
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Container(
-                                decoration:BoxDecoration(
-                                    border: Border(
-                                        right: BorderSide(
-                                          color: notifier.subgreycolor,
-                                        )
-                                    )
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 40,
+                                // width: 300,
+                                child: ListView.builder(
+                                  itemCount: logos.length,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) {
+                                    return StatefulBuilder(
+                                      builder: (BuildContext context, void Function(void Function()) setState) {
+                                        return Row(
+                                          children: [
+                                            Container(
+                                              height: 40,
+                                              padding: const EdgeInsets.all(6),
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                  color: notifier.whitecolor,
+                                                ),
+                                              ),
+                                              child: SvgPicture.asset(notifier.isDark ? logos[index] : logos[index],color: Colors.white,
+                                                  height: 20),
+                                            ),
+                                            const SizedBox(width: 10),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
                                 ),
-                                height: 200,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 12.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      buildContactInfoItem(
-                                          textColor: Colors.white,
-                                          contacts: contacts[0],
-                                          icon: contactsImage[0]
-                                      ),
-                                      SizedBox(height: 20,),
-                                      buildContactInfoItem(
-                                          textColor: Colors.white,
-                                          contacts: contacts[1],
-                                          icon: contactsImage[1]
-                                      ),
-                                      SizedBox(height: 20,),
-                                      buildContactInfoItem(
-                                          textColor: Colors.white,
-                                          contacts: contacts[2],
-                                          icon: contactsImage[2]
-                                      ),
-                                      SizedBox(height: 20,),
-                                    ],
-                                  )
-                                )),
+                              ),
+                              const SizedBox(height: 20),
+                              Text( (constraints.maxWidth < 950 && constraints.maxWidth > 550)
+                                  ? 'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services  \n Powered by ${L10nX.getStr.app_name}'
+                                  : 'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services Powered by ${L10nX.getStr.app_name}',
+                                style: TextStyleConstant.bodySmall.copyWith(
+                                    color: notifier.whitecolor),
+                              ),
+                              const SizedBox(height: 20),
+
+                            ],
                           ),
                         ),
-                        /*Expanded(
-                          flex: 5,
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Container(
+
+                        Expanded(
+                          child: Container(
+                              padding: const EdgeInsets.all(12.0),
+                              margin: const EdgeInsets.only(left: 12.0),
                               decoration:BoxDecoration(
                                   border: Border(
-                                      right: BorderSide(
+                                      left: BorderSide(
                                         color: notifier.subgreycolor,
                                       )
                                   )
                               ),
                               height: 200,
-                              child: GridView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: endElements.length,
-                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3,
-                                    mainAxisExtent: 40,
-                                    crossAxisSpacing: 25),
-                                itemBuilder: (context, index) {
-                                  return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
-                                    return InkWell(
-                                      onTap: () {},
-                                      onHover: (value) {
-                                        setState(() {
-                                          elementsHover[index] = value;
-                                        });
-                                      },
-                                      child: Align(
-                                        alignment: Alignment.center,
-                                        child: Text(
-                                          endElements[index],
-                                          style: baseStyle.copyWith(
-                                              fontSize: 16,
-                                              color: elementsHover[index] ? notifier.subgreycolor : notifier.whitecolor),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                        ),*/
-                        Expanded(
-                          flex: 1,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 12.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                  height: 40,
-                                  // width: 300,
-                                  child: ListView.builder(
-                                    itemCount: logos.length,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (context, index) {
-                                      return StatefulBuilder(
-                                        builder: (BuildContext context, void Function(void Function()) setState) {
-                                          return Row(
-                                            children: [
-                                              Container(
-                                                height: 40,
-                                                padding: const EdgeInsets.all(6),
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                    color: notifier.whitecolor,
-                                                  ),
-                                                ),
-                                                child: SvgPicture.asset(notifier.isDark ? logos[index] : logos[index],color: Colors.white,
-                                                    height: 20),
-                                              ),
-                                              const SizedBox(width: 10),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  buildContactInfoItem(
+                                      textColor: Colors.white,
+                                      contacts: contacts[0],
+                                      icon: contactsImage[0]
                                   ),
-                                ),
-                                const SizedBox(height: 20),
-                                Text( (constraints.maxWidth < 950 && constraints.maxWidth > 550)
-                                    ? 'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services  \n Powered by ${L10nX.getStr.app_name}'
-                                    : 'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services Powered by ${L10nX.getStr.app_name}',
-                                  style: baseStyle.copyWith(
-                                      fontSize: constraints.maxWidth < 300 ? 10 : 14,
-
-                                      color: notifier.whitecolor),
-                                ),
-                              ],
-                            ),
-                          ),
+                                  SizedBox(height: 20,),
+                                  buildContactInfoItem(
+                                      textColor: Colors.white,
+                                      contacts: contacts[1],
+                                      icon: contactsImage[1]
+                                  ),
+                                  SizedBox(height: 20,),
+                                  buildContactInfoItem(
+                                      textColor: Colors.white,
+                                      contacts: contacts[2],
+                                      icon: contactsImage[2]
+                                  ),
+                                  SizedBox(height: 20,),
+                                ],
+                              )),
                         ),
                       ],
                     ),
@@ -442,18 +387,18 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        StaticView.buildLogo(),
-                        const SizedBox(width: 5),
-                        Text(
-                          L10nX.getStr.app_name,
-                          style: baseStyle.copyWith(
-                              color: notifier.blackcolor,
-                              fontSize: constraints.maxWidth < 300 ? 16 : 24),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   children: [
+                    //     StaticView.buildLogo(),
+                    //     const SizedBox(width: 5),
+                    //     Text(
+                    //       L10nX.getStr.app_name,
+                    //       style: baseStyle.copyWith(
+                    //           color: notifier.blackcolor,
+                    //           fontSize: constraints.maxWidth < 300 ? 16 : 24),
+                    //     ),
+                    //   ],
+                    // ),
                     const SizedBox(height: 30),
                     Divider(
                       color: notifier.isDark
@@ -530,8 +475,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                       SizedBox(height: 8,),
                       Text(
                         'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services - Powered by ${L10nX.getStr.app_name}',
-                        style: baseStyle.copyWith(
-                            fontSize: constraints.maxWidth < 500 ? 12 : 14,
+                        style: TextStyleConstant.bodySmall.copyWith(
                             color: notifier.whitecolor),
                       ),
                       SizedBox(height: 8),
@@ -557,9 +501,9 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
               const SizedBox(width: 10),
               Expanded(
                 child: Text(contacts,
-                  style: baseStyle.copyWith(
+                  style: TextStyleConstant.bodyMedium.copyWith(
                       color: textColor,
-                      fontSize: 16),
+                  ),
                   maxLines: 10,
                 ),
               ),

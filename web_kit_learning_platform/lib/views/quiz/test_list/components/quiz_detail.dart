@@ -46,7 +46,7 @@ class QuizDetailPageState extends State<QuizDetailPage>with UIMixin {
     super.initState();
     if(widget.tagsInfo?.id!=null)
     {
-      tagController.text = widget.tagsInfo?.name??"";
+      tagController.text = widget.tagsInfo?.questionName??"";
     }
   }
   @override
@@ -58,7 +58,7 @@ class QuizDetailPageState extends State<QuizDetailPage>with UIMixin {
         controller: tagController,
         keyboardType: TextInputType.text,
         onChanged: (value) {
-          widget.tagsInfo?.name = value;
+          widget.tagsInfo?.questionName = value;
         },
         enabled: widget.tagPageAction != QuizPageAction.view,
         decoration: InputDecoration(

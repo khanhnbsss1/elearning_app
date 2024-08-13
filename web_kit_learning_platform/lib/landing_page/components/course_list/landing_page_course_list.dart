@@ -99,18 +99,16 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
               Center(
                 child: Text(L10nX.getStr.courses_list,
                     style: TextStyleConstant
-                        .titleTextColorOnBackgroundColorStyle14w400
+                        .titleLarge
                         .copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: constraints.maxWidth < 550 ? 28 : 45,
-                        color: notifier.blackcolor)),
+                        color: ColorConst.blackColor)),
               ),
               Center(
                 child: Text(L10nX.getStr.register_to_enjoy_the_best_deals_for_you,
                     textAlign: TextAlign.center,
-                    style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400.copyWith(
-                        fontSize: constraints.maxWidth < 550 ? 18 : 20,
-                        color: Colors.black54)),
+                    style: TextStyleConstant.titleSmall.copyWith(
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black45)),
               ),
               SizedBox(
                 height: constraints.maxWidth < 550 ? 10 : 20,
@@ -130,7 +128,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                       listOfCourse.add(CourseItem(constraints: constraints, courseInfo: courseLandingPageInfo));
                     }
                     return SizedBox(
-                      height: 570,
+                      height: 700,
                       child: Center(
                         child: ListView(
                           shrinkWrap: true,
@@ -159,6 +157,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                                   : Colors.transparent),
                         ),
                         child: InkWell(
+                            hoverColor: Colors.transparent,
                             onTap: () {
                               if (scrollCont.offset > 0) {
                                 scrollCont.animateTo(
@@ -196,6 +195,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                                 : Colors.transparent),
                       ),
                       child: InkWell(
+                          hoverColor: Colors.transparent,
                           onTap: () {
                             if (scrollCont.offset <
                                 scrollCont.position.maxScrollExtent) {

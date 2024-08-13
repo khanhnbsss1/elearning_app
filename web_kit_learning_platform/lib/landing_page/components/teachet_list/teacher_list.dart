@@ -155,10 +155,8 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
                     children: [
                       Center(
                         child: Text(L10nX.getStr.teacher_list,
-                            style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                            style: TextStyleConstant.titleLarge
                                 .copyWith(
-                                fontSize: constraints.maxWidth < 550 ? 28 : 45,
-                                fontWeight: FontWeight.bold,
                                 color: notifier.blackcolor)),
                       ),
                       SizedBox(
@@ -194,6 +192,7 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
                                       : Colors.transparent),
                             ),
                             child: InkWell(
+                                hoverColor: Colors.transparent,
                                 onTap: () {
                                   if (scrollCont.offset > 0) {
                                     scrollCont.animateTo(
@@ -228,6 +227,7 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
                                       : Colors.transparent),
                             ),
                             child: InkWell(
+                                hoverColor: Colors.transparent,
                                 onTap: () {
                                   if (scrollCont.offset <
                                       scrollCont.position.maxScrollExtent) {
@@ -308,26 +308,13 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(landingPageUserInfo.fullname ?? "",
-                              style: baseStyle.copyWith(
+                              style: TextStyleConstant.titleSmall.copyWith(
                                   color: notifier.blackcolor,
-                                  fontSize:  (constraints.maxWidth < 900)
-                                      ? Dimens.size16
-                                      : (constraints.maxWidth < 1300)
-                                      ? Dimens.size18
-                                      : Dimens.size24,
-
-                                  fontWeight: FontWeight.w500)),
+                                  )),
                           Text(
                             landingPageUserInfo.position ?? "",
-                            style: baseStyle.copyWith(
-                              color: notifier.blackcolor,
-                              fontSize: (constraints.maxWidth < 900)
-                                  ? Dimens.size12
-                                  : (constraints.maxWidth < 1300)
-                                  ? Dimens.size14
-                                  : Dimens.size20,
-                            ),
-                            maxLines: 2,
+                            style: TextStyleConstant.bodyMedium.copyWith(
+                              color: notifier.blackcolor,)
                           ),
                           Gap(Dimens.size20)
                         ],

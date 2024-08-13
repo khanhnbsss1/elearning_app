@@ -19,7 +19,7 @@ class AddCourseController extends MyController {
   Map<int,String> listOfAccompanyCourses = {};
   List<TagsInfo> listOfTags = [];
   Map<int,String> listOfDiscounts = {};
-  List<TextEditingController>controllerInfoObject=[];
+  List<TextEditingController> controllerInfoObject=[];
   List<TextEditingController>controllerResultObject=[];
   AddCourseController(){
     onInit();

@@ -7,6 +7,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:pinput/pinput.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/controller/ui/add_course_controller.dart';
@@ -137,7 +138,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
     return LayoutBuilder(
       builder: (context, constraints) {
         double maxWidthItem = maxWidthRow;
-        double heightOfItem = 81;
+        double heightOfItem = 85;
         int numberRow = ((constraints.maxWidth / maxWidthItem)/2).toInt()*2;
         if(numberRow<1) {
           numberRow=1;
@@ -152,7 +153,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
               GridView.count(
                 crossAxisSpacing: 24,
                 childAspectRatio: (widthItem)/(heightOfItem),
-                mainAxisSpacing: 24,
+                mainAxisSpacing: 0,
                 crossAxisCount: numberRow,
                 shrinkWrap: true,
                 children: [
@@ -225,7 +226,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                   ),
                 ],
               ),
-              Gap(Dimens.size24),
+              Gap(Dimens.size12),
               Row(
                 children: [
                   Expanded(
@@ -233,7 +234,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                   ),
                 ],
               ),
-              Gap(Dimens.size24),
+              Gap(Dimens.size12),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -243,9 +244,9 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                   Expanded(child: buildWhoThisCourse(state: state, context: context)),
                 ],
               ),
-              Gap(Dimens.size24),
+              Gap(Dimens.size12),
               buildPaymentWidget(state: state, context: context),
-              Gap(Dimens.size24),
+              Gap(Dimens.size12),
               // Wrap(
               //   alignment: WrapAlignment.spaceBetween,
               //   runAlignment: WrapAlignment.spaceBetween,
@@ -932,7 +933,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                 child: Opacity(
                   opacity: ((state.courseInfo?.mode)=="PREMIUM") ? 1 : 0.2,
                   child: IgnorePointer(
-                    ignoring: (state.courseInfo?.mode)=="FREE",
+                    ignoring: (state.courseInfo?.mode)!="PREMIUM",
                     child: customDropDownSearch(
                       list: {},//state.controller!.listOfAccompanyCourses,
                       hintText: "${L10nX.getStr.discount_str}...",
@@ -1022,30 +1023,42 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                 ],
               ),
               Gap(Dimens.size20),
-              TextFormField(
-                validator: state.controller?.basicValidator.getValidation('payment_value'),
-                controller: state.controller?.basicValidator.getController('payment_value'),
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.go,
-                decoration: InputDecoration(
-                  //labelText: 'Result after the course',
-                    labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                    labelText: L10nX.getStr.price,
-                    alignLabelWithHint: true,
-                    floatingLabelAlignment: FloatingLabelAlignment.start,
-                    border: outlineInputBorder,
-                    contentPadding: MySpacing.all(16),
-                    isCollapsed: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.never),
-                minLines: 1,
-                maxLines: 1,
+              Opacity(
+                opacity: valuePaymentMode==false ? 0.2 : 1,
+                child: IgnorePointer(
+                  ignoring: valuePaymentMode==false,
+                  child: TextFormField(
+                    validator: state.controller?.basicValidator.getValidation('payment_value'),
+                    controller: state.controller?.basicValidator.getController('payment_value'),
+                    keyboardType: TextInputType.number,
+                    textInputAction: TextInputAction.go,
+                    decoration: InputDecoration(
+                      //labelText: 'Result after the course',
+                        labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                        labelText: L10nX.getStr.price,
+                        alignLabelWithHint: true,
+                        floatingLabelAlignment: FloatingLabelAlignment.start,
+                        border: outlineInputBorder,
+                        contentPadding: MySpacing.all(16),
+                        isCollapsed: true,
+                        floatingLabelBehavior: FloatingLabelBehavior.never),
+                    minLines: 1,
+                    maxLines: 1,
+                  ),
+                ),
               ),
               Gap(Dimens.size20),
-              customDropDownSearch(
-                  list: state.controller!.listOfAccompanyCourses,
-                  hintText: "${L10nX.getStr.discount_str}...",
-                  selectItem: "80.0",
-                  controller: state.controller?.basicValidator.getController('payment_discount')),
+              Opacity(
+                opacity: valuePaymentMode==false ? 0.2 : 1,
+                child: IgnorePointer(
+                  ignoring: valuePaymentMode==false,
+                  child: customDropDownSearch(
+                      list: state.controller!.listOfAccompanyCourses,
+                      hintText: "${L10nX.getStr.discount_str}...",
+                      selectItem: "80.0",
+                      controller: state.controller?.basicValidator.getController('payment_discount')),
+                ),
+              ),
             ],
           ));
     }

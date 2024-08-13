@@ -95,7 +95,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
   ];
 
   ShowCardModel showCardModel = ShowCardModel();
-  final ScrollController _mainController = ScrollController();
+  ScrollController _mainController = ScrollController();
   List<Widget> listWiget = [];
   late double oldWidth = 0;
 
@@ -175,6 +175,18 @@ class _LandingPageScreenState extends State<LandingPageScreen>
 
     if (oldWidth != width || listWiget.isEmpty) {
       oldWidth = width;
+      _mainController = ScrollController();
+      _mainController.addListener(() {
+        if (_mainController.offset > 300) {
+          if (showCardModel.showCard == false) {
+            showCardModel.onChangerShowCard(true);
+          }
+        } else {
+          if (showCardModel.showCard == true) {
+            showCardModel.onChangerShowCard(false);
+          }
+        }
+      });
       listWiget.clear();
       listWiget.addAll({
         SizedBox(
@@ -393,7 +405,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
       ),
       Positioned(
         child: Visibility(
-          visible: MediaQuery.of(context).size.width > 550,
+          visible: MediaQuery.of(context).size.width > 550 && showCardModel._showCard == true,
           child: Align(
             alignment: Alignment.topCenter,
             child: Padding(
@@ -410,7 +422,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     SizedBox(
                       width: 10,
                     ),
-                    StaticView.buildLogo(size: 28),
+                    (width > 750) ? StaticView.buildLogo(size: 28) : SizedBox(),
                     SizedBox(
                       width: 10,
                     ),
@@ -445,19 +457,24 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                             },
                                             child: Text(
                                               landingPageTitles[index],
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize:
-                                                      (width < 1100) ? 10 : 18,
-                                                  color: (isHovered)
-                                                      ? notifier.redcolor
-                                                      : Colors.black,
-                                                  decoration: (isHovered)
-                                                      ? TextDecoration.underline
-                                                      : TextDecoration.none,
-                                                  decorationColor:
-                                                      notifier.redcolor,
-                                                  decorationThickness: 2),
+                                              style: TextStyleConstant
+                                                  .bodyMedium
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: (width < 1100)
+                                                          ? 10
+                                                          : 18,
+                                                      color: (isHovered)
+                                                          ? notifier.redcolor
+                                                          : Colors.black,
+                                                      decoration: (isHovered)
+                                                          ? TextDecoration
+                                                              .underline
+                                                          : TextDecoration.none,
+                                                      decorationColor:
+                                                          notifier.redcolor,
+                                                      decorationThickness: 2),
                                             ),
                                           ),
                                         );
@@ -513,6 +530,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                       child: Row(
                         children: [
                           InkWell(
+                              hoverColor: Colors.transparent,
                               onTap: () {
                                 Scaffold.of(context).openDrawer();
                               },
@@ -525,10 +543,9 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                     L10nX.getStr.app_name,
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
-                                    style: baseStyle.copyWith(
+                                    style:
+                                        TextStyleConstant.titleMedium.copyWith(
                                       color: notifier.blackcolor,
-                                      fontSize:
-                                          constraints.maxWidth < 550 ? 20 : 24,
                                     ),
                                   ),
                                 ),
@@ -541,12 +558,11 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                           onPressed: () {
                             userProfile == null
                                 ? LoginPage().show(context)
-                                : AppPages.routeName(
-                                Routes.dashboardRoute);
+                                : AppPages.routeName(Routes.dashboardRoute);
                           },
                           child: Text(
                             L10nX.getStr.lets_study,
-                            style: TextStyle(
+                            style: TextStyleConstant.titleMedium.copyWith(
                               fontSize: 20,
                               color: Colors.black,
                             ),
@@ -620,6 +636,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                               in LanguageHelper()
                                                   .supportedLanguages)
                                             InkWell(
+                                              hoverColor: Colors.transparent,
                                               onTap: () {
                                                 LanguageHelper().changeLanguage(
                                                     language, context);
@@ -710,14 +727,17 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Visibility(
-                                visible: userProfile != null && ResponsiveInfo.isPhone(),
+                                visible: userProfile != null &&
+                                    ResponsiveInfo.isPhone(),
                                 child: InkWell(
+                                  hoverColor: Colors.transparent,
                                   onTap: () {
                                     AppPages.routeName(Routes.dashboardRoute);
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Icon(
                                         Icons.home_outlined,
@@ -825,6 +845,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                       Visibility(
                                         visible: userProfile != null,
                                         child: InkWell(
+                                          hoverColor: Colors.transparent,
                                           onTap: () {
                                             AuthorManager().handleLogout();
                                             AppPages.routeName(
@@ -833,8 +854,10 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                           },
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
                                             children: [
                                               Icon(
                                                 Icons.logout,
@@ -842,8 +865,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                                 color: ColorConst.blackColor,
                                               ),
                                               const SizedBox(width: 8),
-                                              Text(
-                                                  L10nX.getStr.sign_out_text,
+                                              Text(L10nX.getStr.sign_out_text,
                                                   style: baseStyle.copyWith(
                                                       fontSize: 12,
                                                       color: Colors.red)),
@@ -865,219 +887,6 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                 ),
               );
             });
-      },
-    );
-  }
-
-  Widget buildDifferentListWidget({required BoxConstraints constraints}) {
-    List<Widget> listItem = List.empty(growable: true);
-    for (int index = 0; index < sugimage.length; index++) {
-      listItem.add(buildSuggestItem(
-        constraints: constraints,
-        imageAssetName: sugimage[index],
-        content: L10nX().getStringByKey("medthod_content${index + 1}"),
-        title: L10nX().getStringByKey("medthod_title${index + 1}"),
-      ));
-    }
-    return StatefulBuilder(
-      builder: (BuildContext context, void Function(void Function()) setState) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                  left: constraints.maxWidth < 500 ? 10 : 0,
-                  right: constraints.maxWidth < 500 ? 10 : 0),
-              child: Column(
-                children: [
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: L10nX.getStr.differences_in_teaching_methods_1,
-                          style: TextStyleConstant
-                              .titleTextColorOnBackgroundColorStyle14w400
-                              .copyWith(
-                            fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                            color: notifier.blackcolor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        TextSpan(
-                          text: L10nX.getStr.differences_in_teaching_methods_2,
-                          style: TextStyleConstant
-                              .titleTextColorOnBackgroundColorStyle14w400
-                              .copyWith(
-                            fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                            color: notifier.redcolor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        TextSpan(
-                          text: L10nX.getStr.differences_in_teaching_methods_3,
-                          style: TextStyleConstant
-                              .titleTextColorOnBackgroundColorStyle14w400
-                              .copyWith(
-                            fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                            color: notifier.blackcolor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                    L10nX.getStr
-                        .we_are_different_because_we_understand_what_you_need,
-                    style: TextStyleConstant
-                        .titleTextColorOnBackgroundColorStyle14w400
-                        .copyWith(
-                            fontSize: ResponsiveInfo.isPhone() ? 18 : 20,
-                            color: notifier.greycolor),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: ResponsiveInfo.isPhone() ? 0 : 16,
-            ),
-            Container(
-              // height: Dimens.size240,
-              constraints: BoxConstraints(
-                  maxWidth: ResponsiveInfo.isPhone()
-                      ? constraints.maxWidth - Dimens.size20
-                      : constraints.maxWidth * 3 / 4,
-                  maxHeight: constraints.maxWidth < 550 ? 220 : 300),
-              child: Center(
-                // child: ListView(
-                //   shrinkWrap: true,
-                //   controller: differrentController,
-                //   scrollDirection: Axis.horizontal,
-                //   // physics: const NeverScrollableScrollPhysics(),
-                //   children: listItem,
-                // ),
-                child: SingleChildScrollView(
-                  controller: differrentController,
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: listItem,
-                  ),
-                ),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                StatefulBuilder(
-                  builder: (context, setState) {
-                    return AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                            width: 2,
-                            color: (isHover)
-                                ? notifier.sugestionbutton
-                                : Colors.transparent),
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          double itemWidth = ResponsiveInfo.isPhone()
-                              ? (constraints.maxWidth -
-                                  Dimens.size36 * 2 -
-                                  Dimens.size20)
-                              : (constraints.maxWidth < 1100)
-                                  ? ((constraints.maxWidth) * 3 / 4 -
-                                          Dimens.size36 * 4) /
-                                      2
-                                  : (constraints.maxWidth < 1600)
-                                      ? ((constraints.maxWidth) * 3 / 4 -
-                                              Dimens.size36 * 6) /
-                                          3
-                                      : Dimens.size340;
-                          if (differrentController.offset >= 0) {
-                            differrentController.animateTo(
-                              differrentController.offset - itemWidth - 36 * 2,
-                              duration: const Duration(milliseconds: 200),
-                              curve: Curves.easeInOut,
-                            );
-                          }
-                        },
-                        onHover: (val) {
-                          setState(() {
-                            isHover = val;
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(13),
-                          child: Image.asset(
-                            'assets/Icons/arrowlefticon.png',
-                            width: 15,
-                            color: notifier.subgreycolor,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(width: 10),
-                StatefulBuilder(
-                  builder: (context, setState) {
-                    return AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                            width: 2,
-                            color: (isHover2)
-                                ? notifier.sugestionbutton
-                                : Colors.transparent),
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          double itemWidth = ResponsiveInfo.isPhone()
-                              ? (constraints.maxWidth -
-                                  Dimens.size36 * 2 -
-                                  Dimens.size20)
-                              : (constraints.maxWidth < 1100)
-                                  ? ((constraints.maxWidth) * 3 / 4 -
-                                          Dimens.size36 * 4) /
-                                      2
-                                  : (constraints.maxWidth < 1600)
-                                      ? ((constraints.maxWidth) * 3 / 4 -
-                                              Dimens.size36 * 6) /
-                                          3
-                                      : Dimens.size340;
-                          if (differrentController.offset >= 0) {
-                            differrentController.animateTo(
-                              differrentController.offset + itemWidth + 36 * 2,
-                              duration: const Duration(milliseconds: 200),
-                              curve: Curves.easeInOut,
-                            );
-                          }
-                        },
-                        onHover: (val) {
-                          setState(() {
-                            isHover2 = val;
-                          });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(13),
-                          child: Image.asset('assets/Icons/arrowrighticon.png',
-                              width: 15, color: notifier.subgreycolor),
-                        ),
-                      ),
-                    );
-                  },
-                )
-              ],
-            ),
-          ],
-        );
       },
     );
   }
@@ -1114,8 +923,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                             : 120),
                 Text(
                   title ?? "",
-                  style: TextStyleConstant.textStyleBlack18w600.copyWith(
-                    fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
+                  style: TextStyleConstant.titleSmall.copyWith(
                     color: notifier.blackcolor,
                   ),
                   textAlign: TextAlign.center,
@@ -1126,8 +934,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                 ),
                 Text(
                   content ?? "",
-                  style: TextStyleConstant.textStyleBlack12w400.copyWith(
-                    fontSize: ResponsiveInfo.isPhone() ? 16 : 18,
+                  style: TextStyleConstant.bodyMedium.copyWith(
                     color: notifier.blackcolor,
                   ),
                   textAlign: TextAlign.center,
@@ -1144,6 +951,208 @@ class _LandingPageScreenState extends State<LandingPageScreen>
         ));
   }
 
+  Widget buildDifferentListWidget({required BoxConstraints constraints}) {
+    List<Widget> listItem = List.empty(growable: true);
+    for (int index = 0; index < sugimage.length; index++) {
+      listItem.add(buildSuggestItem(
+        constraints: constraints,
+        imageAssetName: sugimage[index],
+        content: L10nX().getStringByKey("medthod_content${index + 1}"),
+        title: L10nX().getStringByKey("medthod_title${index + 1}"),
+      ));
+    }
+    return StatefulBuilder(
+      builder: (BuildContext context, void Function(void Function()) setState) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                  left: constraints.maxWidth < 500 ? 10 : 0,
+                  right: constraints.maxWidth < 500 ? 10 : 0),
+              child: Column(
+                children: [
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: L10nX.getStr.differences_in_teaching_methods_1,
+                          style: TextStyleConstant.titleLarge.copyWith(
+                            color: ColorConst.blackColor,
+                          ),
+                        ),
+                        TextSpan(
+                          text: L10nX.getStr.differences_in_teaching_methods_2,
+                          style: TextStyleConstant.titleLarge.copyWith(
+                            color: notifier.redcolor,
+                          ),
+                        ),
+                        TextSpan(
+                          text: L10nX.getStr.differences_in_teaching_methods_3,
+                          style: TextStyleConstant.titleLarge.copyWith(
+                            color: ColorConst.blackColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Text(
+                    L10nX.getStr
+                        .we_are_different_because_we_understand_what_you_need,
+                    style: TextStyleConstant.titleSmall.copyWith(
+                        fontWeight: FontWeight.w400,
+                        color: ColorConst.blackColor45),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: ResponsiveInfo.isPhone() ? 0 : 16,
+            ),
+            Container(
+              // height: Dimens.size240,
+              constraints: BoxConstraints(
+                  maxWidth: ResponsiveInfo.isPhone()
+                      ? constraints.maxWidth - Dimens.size20
+                      : constraints.maxWidth * 3 / 4,
+                  maxHeight: constraints.maxWidth < 550 ? 250 : 300),
+              child: Column(
+                children: [
+                  SingleChildScrollView(
+                    controller: differrentController,
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: listItem,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      StatefulBuilder(
+                        builder: (context, setState) {
+                          return AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  width: 2,
+                                  color: (isHover)
+                                      ? notifier.sugestionbutton
+                                      : Colors.transparent),
+                            ),
+                            child: InkWell(
+                              hoverColor: Colors.transparent,
+                              onTap: () {
+                                double itemWidth = ResponsiveInfo.isPhone()
+                                    ? (constraints.maxWidth -
+                                        Dimens.size36 * 2 -
+                                        Dimens.size20)
+                                    : (constraints.maxWidth < 1100)
+                                        ? ((constraints.maxWidth) * 3 / 4 -
+                                                Dimens.size36 * 4) /
+                                            2
+                                        : (constraints.maxWidth < 1600)
+                                            ? ((constraints.maxWidth) * 3 / 4 -
+                                                    Dimens.size36 * 6) /
+                                                3
+                                            : Dimens.size340;
+                                if (differrentController.offset >= 0) {
+                                  differrentController.animateTo(
+                                    differrentController.offset -
+                                        itemWidth -
+                                        36 * 2,
+                                    duration: const Duration(milliseconds: 200),
+                                    curve: Curves.easeInOut,
+                                  );
+                                }
+                              },
+                              onHover: (val) {
+                                setState(() {
+                                  isHover = val;
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(13),
+                                child: Image.asset(
+                                  'assets/Icons/arrowlefticon.png',
+                                  width: 15,
+                                  color: notifier.subgreycolor,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      const SizedBox(width: 10),
+                      StatefulBuilder(
+                        builder: (context, setState) {
+                          return AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  width: 2,
+                                  color: (isHover2)
+                                      ? notifier.sugestionbutton
+                                      : Colors.transparent),
+                            ),
+                            child: InkWell(
+                              hoverColor: Colors.transparent,
+                              onTap: () {
+                                double itemWidth = ResponsiveInfo.isPhone()
+                                    ? (constraints.maxWidth -
+                                        Dimens.size36 * 2 -
+                                        Dimens.size20)
+                                    : (constraints.maxWidth < 1100)
+                                        ? ((constraints.maxWidth) * 3 / 4 -
+                                                Dimens.size36 * 4) /
+                                            2
+                                        : (constraints.maxWidth < 1600)
+                                            ? ((constraints.maxWidth) * 3 / 4 -
+                                                    Dimens.size36 * 6) /
+                                                3
+                                            : Dimens.size340;
+                                if (differrentController.offset >= 0) {
+                                  differrentController.animateTo(
+                                    differrentController.offset +
+                                        itemWidth +
+                                        36 * 2,
+                                    duration: const Duration(milliseconds: 200),
+                                    curve: Curves.easeInOut,
+                                  );
+                                }
+                              },
+                              onHover: (val) {
+                                setState(() {
+                                  isHover2 = val;
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(13),
+                                child: Image.asset(
+                                    'assets/Icons/arrowrighticon.png',
+                                    width: 15,
+                                    color: notifier.subgreycolor),
+                              ),
+                            ),
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Widget buildWhyChooseUsListWidget({
     required BoxConstraints constraints,
   }) {
@@ -1158,165 +1167,191 @@ class _LandingPageScreenState extends State<LandingPageScreen>
     }
     return StatefulBuilder(
       builder: (BuildContext context, void Function(void Function()) setState) {
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
-          child: Column(
-            children: [
-              RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: L10nX.getStr.why_choose_us_1,
-                      style: TextStyleConstant
-                          .titleTextColorOnBackgroundColorStyle14w400
-                          .copyWith(
-                        fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                        color: notifier.blackcolor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextSpan(
-                      text: L10nX.getStr.why_choose_us_2,
-                      style: TextStyleConstant
-                          .titleTextColorOnBackgroundColorStyle14w400
-                          .copyWith(
-                        fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                        color: notifier.redcolor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    TextSpan(
-                      text: L10nX.getStr.why_choose_us_3,
-                      style: TextStyleConstant
-                          .titleTextColorOnBackgroundColorStyle14w400
-                          .copyWith(
-                        fontSize: ResponsiveInfo.isPhone() ? 28 : 45,
-                        color: notifier.blackcolor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Text(
-                L10nX.getStr.why_choose_us_sub_title,
-                style: TextStyleConstant
-                    .titleTextColorOnBackgroundColorStyle14w400
-                    .copyWith(
-                        fontSize: constraints.maxWidth < 700 ? 16 : 18,
-                        color: notifier.greycolor),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: constraints.maxWidth < 550
-                    ? 0
-                    : constraints.maxWidth < 800
-                        ? constraints.maxWidth / 30
-                        : constraints.maxWidth / 30,
-              ),
-              Container(
-                // height: Dimens.size240,
-                constraints: BoxConstraints(
-                  maxWidth: ResponsiveInfo.isPhone()
-                      ? constraints.maxWidth - Dimens.size20
-                      : constraints.maxWidth * 3 / 4,
-                ),
-                height: constraints.maxWidth < 550 ? 220 : 300,
-                // child: ListView(
-                //   controller: whyChooseUsController,
-                //   scrollDirection: Axis.horizontal,
-                //   // physics: const NeverScrollableScrollPhysics(),
-                //   children: listItem,
-                // ),
-                child: SingleChildScrollView(
-                  controller: whyChooseUsController,
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: listItem,
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                  left: constraints.maxWidth < 500 ? 10 : 0,
+                  right: constraints.maxWidth < 500 ? 10 : 0),
+              child: Column(
                 children: [
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          width: 2,
-                          color: (isHover3)
-                              ? notifier.sugestionbutton
-                              : Colors.transparent),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        if (whyChooseUsController.offset > 0) {
-                          whyChooseUsController.animateTo(
-                            (constraints.maxWidth < 750)
-                                ? whyChooseUsController.offset - 225 * 2
-                                : whyChooseUsController.offset - 325 * 2,
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeInOut,
-                          );
-                        }
-                      },
-                      onHover: (val) {
-                        setState(() {
-                          isHover3 = val;
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(13),
-                        child: Image.asset(
-                          'assets/Icons/arrowlefticon.png',
-                          width: 15,
-                          color: notifier.subgreycolor,
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: L10nX.getStr.why_choose_us_1,
+                          style: TextStyleConstant.titleLarge.copyWith(
+                            color: ColorConst.blackColor,
+                          ),
                         ),
-                      ),
+                        TextSpan(
+                          text: L10nX.getStr.why_choose_us_2,
+                          style: TextStyleConstant.titleLarge.copyWith(
+                            color: notifier.redcolor,
+                          ),
+                        ),
+                        TextSpan(
+                          text: L10nX.getStr.why_choose_us_3,
+                          style: TextStyleConstant.titleLarge.copyWith(
+                            color: ColorConst.blackColor,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(width: 10),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                          width: 2,
-                          color: (isHover4)
-                              ? notifier.sugestionbutton
-                              : Colors.transparent),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        if (whyChooseUsController.offset >= 0) {
-                          whyChooseUsController.animateTo(
-                            (constraints.maxWidth < 750)
-                                ? whyChooseUsController.offset + 225 * 2
-                                : whyChooseUsController.offset + 325 * 2,
-                            duration: const Duration(milliseconds: 200),
-                            curve: Curves.easeInOut,
-                          );
-                        }
-                      },
-                      onHover: (val) {
-                        setState(() {
-                          isHover4 = val;
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(13),
-                        child: Image.asset('assets/Icons/arrowrighticon.png',
-                            width: 15, color: notifier.subgreycolor),
-                      ),
-                    ),
+                  Text(
+                    L10nX.getStr
+                        .why_choose_us_sub_title,
+                    style: TextStyleConstant.titleSmall.copyWith(
+                        fontWeight: FontWeight.w400,
+                        color: ColorConst.blackColor45),
+                    textAlign: TextAlign.center,
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: ResponsiveInfo.isPhone() ? 0 : 16,
+            ),
+            Container(
+              // height: Dimens.size240,
+              constraints: BoxConstraints(
+                  maxWidth: ResponsiveInfo.isPhone()
+                      ? constraints.maxWidth - Dimens.size20
+                      : constraints.maxWidth * 3 / 4,
+                  maxHeight: constraints.maxWidth < 550 ? 250 : 300),
+              child: Column(
+                children: [
+                  SingleChildScrollView(
+                    controller: differrentController,
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: listItem,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      StatefulBuilder(
+                        builder: (context, setState) {
+                          return AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  width: 2,
+                                  color: (isHover)
+                                      ? notifier.sugestionbutton
+                                      : Colors.transparent),
+                            ),
+                            child: InkWell(
+                              hoverColor: Colors.transparent,
+                              onTap: () {
+                                double itemWidth = ResponsiveInfo.isPhone()
+                                    ? (constraints.maxWidth -
+                                    Dimens.size36 * 2 -
+                                    Dimens.size20)
+                                    : (constraints.maxWidth < 1100)
+                                    ? ((constraints.maxWidth) * 3 / 4 -
+                                    Dimens.size36 * 4) /
+                                    2
+                                    : (constraints.maxWidth < 1600)
+                                    ? ((constraints.maxWidth) * 3 / 4 -
+                                    Dimens.size36 * 6) /
+                                    3
+                                    : Dimens.size340;
+                                if (differrentController.offset >= 0) {
+                                  differrentController.animateTo(
+                                    differrentController.offset -
+                                        itemWidth -
+                                        36 * 2,
+                                    duration: const Duration(milliseconds: 200),
+                                    curve: Curves.easeInOut,
+                                  );
+                                }
+                              },
+                              onHover: (val) {
+                                setState(() {
+                                  isHover = val;
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(13),
+                                child: Image.asset(
+                                  'assets/Icons/arrowlefticon.png',
+                                  width: 15,
+                                  color: notifier.subgreycolor,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      const SizedBox(width: 10),
+                      StatefulBuilder(
+                        builder: (context, setState) {
+                          return AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  width: 2,
+                                  color: (isHover2)
+                                      ? notifier.sugestionbutton
+                                      : Colors.transparent),
+                            ),
+                            child: InkWell(
+                              hoverColor: Colors.transparent,
+                              onTap: () {
+                                double itemWidth = ResponsiveInfo.isPhone()
+                                    ? (constraints.maxWidth -
+                                    Dimens.size36 * 2 -
+                                    Dimens.size20)
+                                    : (constraints.maxWidth < 1100)
+                                    ? ((constraints.maxWidth) * 3 / 4 -
+                                    Dimens.size36 * 4) /
+                                    2
+                                    : (constraints.maxWidth < 1600)
+                                    ? ((constraints.maxWidth) * 3 / 4 -
+                                    Dimens.size36 * 6) /
+                                    3
+                                    : Dimens.size340;
+                                if (differrentController.offset >= 0) {
+                                  differrentController.animateTo(
+                                    differrentController.offset +
+                                        itemWidth +
+                                        36 * 2,
+                                    duration: const Duration(milliseconds: 200),
+                                    curve: Curves.easeInOut,
+                                  );
+                                }
+                              },
+                              onHover: (val) {
+                                setState(() {
+                                  isHover2 = val;
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(13),
+                                child: Image.asset(
+                                    'assets/Icons/arrowrighticon.png',
+                                    width: 15,
+                                    color: notifier.subgreycolor),
+                              ),
+                            ),
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
         );
       },
     );
@@ -1442,8 +1477,8 @@ class CustomDrawer extends StatelessWidget {
                                   child: Text(
                                     landingPageTitles[index],
                                     textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      fontSize: 18,
+                                    style:
+                                        TextStyleConstant.bodyMedium.copyWith(
                                       color: Colors.black,
                                     ),
                                   ),

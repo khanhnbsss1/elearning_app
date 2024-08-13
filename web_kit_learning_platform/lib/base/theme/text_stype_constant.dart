@@ -27,6 +27,9 @@ const double height_1_2= 1.2;
 const double height_1_3= 1.3;
 const double height_1_4= 1.4;
 
+double fontSize45 = Dimens.size45;
+
+double fontSize40 = Dimens.size40;
 double fontSize36 = Dimens.size36;
 double fontSize35 = Dimens.size35;
 double fontSize30 = Dimens.size32;
@@ -133,6 +136,14 @@ class TextStyleConstant{
   static 	TextStyle  textStyleBlack30w700 = baseStyle.copyWithCustom(fontSize: fontSize30, color: ColorConst.blackColor, fontWeight: fontWeight700);
   static 	TextStyle  textStyleBlack10w500 = baseStyle.copyWithCustom(fontSize: fontSize10, color: ColorConst.blackColor, fontWeight: fontWeight500);
   static 	TextStyle  textStyleBlack30w500 = baseStyle.copyWithCustom(fontSize: fontSize30, color: ColorConst.blackColor, fontWeight: fontWeight500);
+
+  static TextStyle titleLarge = baseStyle.copyWithCustom(fontSize: fontSize45, color: ColorConst.blackColor, fontWeight: fontWeight600);
+  static TextStyle titleMedium = baseStyle.copyWithCustom(fontSize: fontSize30, color: ColorConst.blackColor, fontWeight: fontWeight600);
+  static TextStyle titleSmall = baseStyle.copyWithCustom(fontSize: fontSize20, color: ColorConst.blackColor, fontWeight: fontWeight600);
+
+  static TextStyle bodyLarge = baseStyle.copyWithCustom(fontSize: fontSize20);
+  static TextStyle bodyMedium = baseStyle.copyWithCustom(fontSize: fontSize16);
+  static TextStyle bodySmall = baseStyle.copyWithCustom(fontSize: fontSize12);
 
   static void resetStyle(){
      fontSize36 = Dimens.size36;

@@ -279,7 +279,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "left": MessageLookupByLibrary.simpleMessage("Left"),
         "left_dialog": MessageLookupByLibrary.simpleMessage("Left dialog"),
         "lesson_list": MessageLookupByLibrary.simpleMessage("Lesson list"),
-        "lets_study": MessageLookupByLibrary.simpleMessage("Let\'s study!"),
+        "lets_study": MessageLookupByLibrary.simpleMessage("Let\'s study"),
         "level_str": MessageLookupByLibrary.simpleMessage("Level"),
         "license_copyright":
             MessageLookupByLibrary.simpleMessage("License & copyright"),

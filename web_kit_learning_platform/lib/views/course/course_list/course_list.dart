@@ -69,7 +69,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                   Expanded(
                     child: Layout(
                         isScroll: false,
-                        padding: EdgeInsets.only(top: 35 + 16, bottom: 16),
+                        padding: EdgeInsets.only(top: 45 + 16, bottom: 16),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,84 +78,47 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                               elevation: 1,
                               child: Container(
                                 color: ColorConst.whiteColor,
-                                child: Padding(
-                                  padding: EdgeInsets.all(16.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      state.courseType == CourseType.courseList
-                                          ? MyButton(
-                                              onTap: () {
-                                                CreateEditCourse(
-                                                  coursePageType: CoursePageType.create,
-                                                ).show(context);
-                                              },
-                                              elevation: 0,
-                                              padding: MySpacing.xy(12, 16),
-                                              backgroundColor: contentTheme.primary,
-                                              borderRadiusAll: AppStyle.buttonRadius.medium,
-                                              child: Row(
-                                                children: [
-                                                  Icon(
-                                                    LucideIcons.plusCircle,
-                                                    color: contentTheme.light,
-                                                    size: 16,
-                                                  ),
-                                                  MySpacing.width(16),
-                                                  MyText.bodySmall(
-                                                    "Add New",
-                                                    color: contentTheme.onPrimary,
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          : SizedBox(),
-                                      Gap(Dimens.size10),
-                                      Expanded(
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                          children: [
-                                            ResponsiveInfo.isPhone()
-                                                ? Expanded(
-                                                    child: SizedBox(
-                                                      height: Dimens.size40,
-                                                      child: Form(
-                                                        key: formKey,
-                                                        child: TextFormField(
-                                                          maxLines: 1,
-                                                          onChanged: (value) {},
-                                                          controller: editingController,
-                                                          onFieldSubmitted: (value) {
-                                                            BlocProvider.of<CourseListBloc>(context)
-                                                                .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
-                                                          },
-                                                          onTapOutside: (event) {},
-                                                          style: MyTextStyle.bodyMedium(),
-                                                          decoration: InputDecoration(
-                                                              hintText: L10nX.getStr.search,
-                                                              fillColor: ColorConst.whiteColor,
-                                                              filled: true,
-                                                              hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                                                              border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                                              enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                                              focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                                              prefixIcon: const Align(
-                                                                  alignment: Alignment.center,
-                                                                  child: Icon(
-                                                                    LucideIcons.search,
-                                                                    size: 14,
-                                                                  )),
-                                                              prefixIconConstraints: const BoxConstraints(minWidth: 36, maxWidth: 36, minHeight: 32, maxHeight: 32),
-                                                              contentPadding: MySpacing.xy(16, 12),
-                                                              //isCollapsed: true,
-                                                              floatingLabelBehavior: FloatingLabelBehavior.auto),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  )
-                                                : SizedBox(
-                                                    height: Dimens.size50,
-                                                    width: Dimens.size200,
+                                padding: EdgeInsets.all(16),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    state.courseType == CourseType.courseList
+                                        ? MyButton(
+                                            onTap: () {
+                                              CreateEditCourse(
+                                                coursePageType: CoursePageType.create,
+                                              ).show(context);
+                                            },
+                                            elevation: 0,
+                                            padding: MySpacing.xy(12, 16),
+                                            backgroundColor: contentTheme.primary,
+                                            borderRadiusAll: AppStyle.buttonRadius.medium,
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  LucideIcons.plusCircle,
+                                                  color: contentTheme.light,
+                                                  size: 16,
+                                                ),
+                                                MySpacing.width(8),
+                                                MyText.bodySmall(
+                                                  "Add New",
+                                                  color: contentTheme.onPrimary,
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        : SizedBox(),
+                                    Gap(Dimens.size10),
+                                    Expanded(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          ResponsiveInfo.isPhone()
+                                              ? Expanded(
+                                                  child: SizedBox(
+                                                    height: Dimens.size40,
                                                     child: Form(
                                                       key: formKey,
                                                       child: TextFormField(
@@ -167,7 +130,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                               .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
                                                         },
                                                         onTapOutside: (event) {},
-                                                        style: MyTextStyle.bodyMedium(),
+                                                        style: MyTextStyle.bodySmall(),
                                                         decoration: InputDecoration(
                                                             hintText: L10nX.getStr.search,
                                                             fillColor: ColorConst.whiteColor,
@@ -176,53 +139,89 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                             border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
                                                             enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
                                                             focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                                            prefixIcon: Icon(
-                                                              LucideIcons.search,
-                                                              size: 16,
-                                                            ),
-                                                            // prefixIconConstraints: const BoxConstraints(minWidth: 36, maxWidth: 36, minHeight: 32, maxHeight: 32),
-                                                            contentPadding: MySpacing.xy(16, 4),
+                                                            prefixIcon: const Align(
+                                                                alignment: Alignment.center,
+                                                                child: Icon(
+                                                                  LucideIcons.search,
+                                                                  size: 14,
+                                                                )),
+                                                            prefixIconConstraints: const BoxConstraints(minWidth: 36, maxWidth: 36, minHeight: 32, maxHeight: 32),
+                                                            contentPadding: MySpacing.xy(16, 12),
                                                             //isCollapsed: true,
-                                                            floatingLabelBehavior: FloatingLabelBehavior.never),
+                                                            floatingLabelBehavior: FloatingLabelBehavior.auto),
                                                       ),
                                                     ),
                                                   ),
-                                            Gap(Dimens.size10),
-                                            ResponsiveInfo.isTablet()
-                                                ? ActionButton1(
-                                                    text: S.of(context).search,
-                                                    height: Dimens.size40,
-                                                    radius: Dimens.size16,
-                                                    onTap: () {
-                                                      BlocProvider.of<CourseListBloc>(context)
-                                                          .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: editingController.text)));
-                                                    },
-                                                  )
-                                                : InkWell(
-                                                    onTap: () {
-                                                      BlocProvider.of<CourseListBloc>(context)
-                                                          .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: editingController.text)));
-                                                    },
-                                                    child: Icon(
-                                                      Icons.search,
-                                                      color: ColorConst.mainColor,
+                                                )
+                                              : SizedBox(
+                                                  height: Dimens.size50,
+                                                  width: Dimens.size200,
+                                                  child: Form(
+                                                    key: formKey,
+                                                    child: TextFormField(
+                                                      maxLines: 1,
+                                                      onChanged: (value) {},
+                                                      controller: editingController,
+                                                      onFieldSubmitted: (value) {
+                                                        BlocProvider.of<CourseListBloc>(context)
+                                                            .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                                      },
+                                                      onTapOutside: (event) {},
+                                                      style: MyTextStyle.bodyMedium(),
+                                                      decoration: InputDecoration(
+                                                          hintText: L10nX.getStr.search,
+                                                          fillColor: ColorConst.whiteColor,
+                                                          filled: true,
+                                                          hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                                                          border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                                          enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                                          focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                                          prefixIcon: Icon(
+                                                            LucideIcons.search,
+                                                            size: 16,
+                                                          ),
+                                                          // prefixIconConstraints: const BoxConstraints(minWidth: 36, maxWidth: 36, minHeight: 32, maxHeight: 32),
+                                                          contentPadding: MySpacing.xy(16, 4),
+                                                          //isCollapsed: true,
+                                                          floatingLabelBehavior: FloatingLabelBehavior.never),
                                                     ),
                                                   ),
-                                            Gap(Dimens.size10),
-                                            FilterCoursePopupMenu(
-                                              onSelect: (p0) {
-                                                BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(
-                                                    searchCommonRequest: state.searchCommonRequest!.copyWith(
-                                                  filterType: p0.filterType,
-                                                  gradeId: p0.selectSubFilter?.id,
-                                                )));
-                                              },
-                                            ),
-                                          ],
-                                        ),
+                                                ),
+                                          Gap(Dimens.size10),
+                                          ResponsiveInfo.isTablet()
+                                              ? ActionButton1(
+                                                  text: S.of(context).search,
+                                                  height: Dimens.size40,
+                                                  radius: Dimens.size16,
+                                                  onTap: () {
+                                                    BlocProvider.of<CourseListBloc>(context)
+                                                        .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: editingController.text)));
+                                                  },
+                                                )
+                                              : InkWell(
+                                                  onTap: () {
+                                                    BlocProvider.of<CourseListBloc>(context)
+                                                        .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: editingController.text)));
+                                                  },
+                                                  child: Icon(
+                                                    Icons.search,
+                                                    color: ColorConst.mainColor,
+                                                  ),
+                                                ),
+                                          Gap(Dimens.size10),
+                                          FilterCoursePopupMenu(
+                                            onSelect: (p0) {
+                                              BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(
+                                                  searchCommonRequest: state.searchCommonRequest!.copyWith(
+                                                filterType: p0.filterType,
+                                                gradeId: p0.selectSubFilter?.id,
+                                              )));
+                                            },
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

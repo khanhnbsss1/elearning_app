@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../base/constant/dimens_constant.dart';
+import '../../../base/theme/colors_app.dart';
 import '../../../base/theme/text_stype_constant.dart';
 import '../../../l10n/l10n_extention.dart';
 import '../../mediaquery/mq.dart';
@@ -75,23 +76,17 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                     (width > splitScreenWidth)
                         ? Center(
                             child: Text(L10nX.getStr.who_this_course_is_for,
-                                style: TextStyleConstant
-                                    .titleTextColorOnBackgroundColorStyle14w400
-                                    .copyWith(
-                                        fontSize: width < 550 ? 28 : 45,
-                                        fontWeight: FontWeight.bold,
-                                        color: notifier.blackcolor)),
+                                style: TextStyleConstant.titleLarge
+                                    .copyWith(color: ColorConst.blackColor)),
                           )
                         : SizedBox(),
                     (width > splitScreenWidth)
                         ? Center(
                             child: Text(
                                 L10nX.getStr.who_this_course_is_for_subtitle,
-                                style: TextStyleConstant
-                                    .titleTextColorOnBackgroundColorStyle14w400
-                                    .copyWith(
-                                        fontSize: width < 550 ? 18 : 20,
-                                        color: notifier.greycolor)),
+                                style: TextStyleConstant.titleSmall.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: ColorConst.blackColor45)),
                           )
                         : SizedBox(),
                     (width > splitScreenWidth)
@@ -99,552 +94,431 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                             height: 16,
                           )
                         : SizedBox(),
-                    Stack(
+                    Row(
                       children: [
-                        Row(
-                          children: [
-                            (width > splitScreenWidth)
-                                ? Flexible(
-                                    flex: 4,
+                        (width > splitScreenWidth)
+                            ? Stack(children: [
+                                Flexible(
+                                  child: Container(
+                                    width: width * 0.35,
+                                    height: width * 0.35,
+                                    constraints: BoxConstraints(
+                                      minWidth: 450,
+                                      minHeight: 450,
+                                    ),
                                     child: Image.asset(
                                       'assets/deshboard/prof/prof4.png',
-                                      fit: BoxFit.fill,
-                                      width: width * 0.45,
-                                      height: width * 0.35,
+                                      fit: BoxFit.contain,
                                     ),
-                                  )
-                                : SizedBox(),
-                            (width > 900)
-                                ? SizedBox(
-                                    width: 30,
-                                  )
-                                : SizedBox(),
-                            Flexible(
-                              flex: 6,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 16.0),
-                                child: Table(
+                                  ),
+                                ),
+                                (constraints.maxWidth > splitScreenWidth)
+                                    ? Positioned(
+                                        bottom: 0,
+                                        left: width < 1100
+                                            ? (width * 0.35 - width / 4.5) / 2
+                                            : width < 1600
+                                                ? (width * 0.35 - width / 3.5) /
+                                                    2
+                                                : (width * 0.35 -
+                                                        width / 3.75) /
+                                                    2,
+                                        child: avatarAndComment())
+                                    : SizedBox(),
+                              ])
+                            : SizedBox(),
+                        (width > 900)
+                            ? SizedBox(
+                                width: 30,
+                              )
+                            : SizedBox(),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 16.0),
+                            child: Table(
+                              children: [
+                                TableRow(children: [
+                                  TableCell(
+                                      child: Padding(
+                                    padding: const EdgeInsets.only(right: 16),
+                                    child: Container(
+                                      width: (width < 900)
+                                          ? Dimens.size40
+                                          : (width < 1300)
+                                              ? Dimens.size50
+                                              : Dimens.size60,
+                                      height: (width < 900)
+                                          ? Dimens.size40
+                                          : (width < 1300)
+                                              ? Dimens.size50
+                                              : Dimens.size60,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.red,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          '01',
+                                          style: TextStyleConstant.bodyLarge
+                                              .copyWith(
+                                                  color: ColorConst.whiteColor),
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                                  TableCell(
+                                      child: Padding(
+                                    padding: const EdgeInsets.only(right: 16),
+                                    child: Container(
+                                      width: (width < 900)
+                                          ? Dimens.size40
+                                          : (width < 1300)
+                                              ? Dimens.size50
+                                              : Dimens.size60,
+                                      height: (width < 900)
+                                          ? Dimens.size40
+                                          : (width < 1300)
+                                              ? Dimens.size50
+                                              : Dimens.size60,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.red,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          '02',
+                                          style: TextStyleConstant.bodyLarge
+                                              .copyWith(
+                                                  color: ColorConst.whiteColor),
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                                ]),
+                                TableRow(
                                   children: [
-                                    TableRow(children: [
-                                      TableCell(
-                                          child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 16),
-                                        child: Container(
-                                          width: (width < 900)
-                                              ? Dimens.size40
-                                              : (width < 1300)
-                                                  ? Dimens.size50
-                                                  : Dimens.size60,
-                                          height: (width < 900)
-                                              ? Dimens.size40
-                                              : (width < 1300)
-                                                  ? Dimens.size50
-                                                  : Dimens.size60,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.red,
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              '01',
-                                              style: TextStyleConstant
-                                                  .titleTextColorOnBackgroundColorStyle14w700
-                                                  .copyWith(
-                                                      fontSize: (width < 900)
-                                                          ? Dimens.size18
-                                                          : (width < 1300)
-                                                              ? Dimens.size20
-                                                              : Dimens.size24,
-                                                      color:
-                                                          notifier.whitecolor),
-                                            ),
-                                          ),
-                                        ),
-                                      )),
-                                      TableCell(
-                                          child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 16),
-                                        child: Container(
-                                          width: (width < 900)
-                                              ? Dimens.size40
-                                              : (width < 1300)
-                                                  ? Dimens.size50
-                                                  : Dimens.size60,
-                                          height: (width < 900)
-                                              ? Dimens.size40
-                                              : (width < 1300)
-                                                  ? Dimens.size50
-                                                  : Dimens.size60,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.red,
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              '02',
-                                              style: TextStyleConstant
-                                                  .titleTextColorOnBackgroundColorStyle14w700
-                                                  .copyWith(
-                                                      fontSize: (width < 900)
-                                                          ? Dimens.size18
-                                                          : (width < 1300)
-                                                              ? Dimens.size20
-                                                              : Dimens.size24,
-                                                      color:
-                                                          notifier.whitecolor),
-                                            ),
-                                          ),
-                                        ),
-                                      )),
-                                    ]),
-                                    TableRow(
-                                      children: [
-                                        TableCell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 12, top: 12, bottom: 12),
-                                            child: Text(
-                                              L10nX.getStr
-                                                  .who_this_course_is_for_table_title_1,
-                                              maxLines: 2,
-                                              style: TextStyleConstant
-                                                  .textStyleBlack16w400
-                                                  .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: (width < 900)
-                                                    ? Dimens.size14
-                                                    : (width < 1300)
-                                                        ? Dimens.size16
-                                                        : Dimens.size20,
-                                                color: notifier.blackcolor,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 16, top: 12, bottom: 12),
-                                            child: Text(
-                                              L10nX.getStr
-                                                  .who_this_course_is_for_table_title_2,
-                                              maxLines: 2,
-                                              style: TextStyleConstant
-                                                  .textStyleBlack16w400
-                                                  .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: (width < 900)
-                                                    ? Dimens.size14
-                                                    : (width < 1300)
-                                                        ? Dimens.size16
-                                                        : Dimens.size20,
-                                                color: notifier.blackcolor,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    TableRow(
-                                      children: [
-                                        TableCell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 16),
-                                            child: Text(
-                                              L10nX.getStr
-                                                  .who_this_course_is_for_table_content_1,
-                                              style: TextStyleConstant
-                                                  .textStyleBlack16w400
-                                                  .copyWith(
-                                                fontSize: (width < 900)
-                                                    ? Dimens.size14
-                                                    : (width < 1300)
-                                                        ? Dimens.size16
-                                                        : Dimens.size20,
-                                                color: notifier.blackcolor,
-                                              ),
-                                              textAlign: TextAlign.justify,
-                                            ),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 16),
-                                            child: Text(
-                                              L10nX.getStr
-                                                  .who_this_course_is_for_table_content_2,
-                                              style: TextStyleConstant
-                                                  .textStyleBlack16w400
-                                                  .copyWith(
-                                                fontSize: (width < 900)
-                                                    ? Dimens.size14
-                                                    : (width < 1300)
-                                                        ? Dimens.size16
-                                                        : Dimens.size20,
-                                                color: notifier.blackcolor,
-                                              ),
-                                              textAlign: TextAlign.justify,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    TableRow(children: [
-                                      TableCell(
-                                          child: Padding(
+                                    TableCell(
+                                      child: Padding(
                                         padding: const EdgeInsets.only(
-                                            right: 16, top: 8),
-                                        child: Container(
-                                          width: (width < 900)
-                                              ? Dimens.size40
-                                              : (width < 1300)
-                                                  ? Dimens.size50
-                                                  : Dimens.size60,
-                                          height: (width < 900)
-                                              ? Dimens.size40
-                                              : (width < 1300)
-                                                  ? Dimens.size50
-                                                  : Dimens.size60,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.red,
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              '03',
-                                              style: TextStyleConstant
-                                                  .titleTextColorOnBackgroundColorStyle14w700
-                                                  .copyWith(
-                                                      fontSize: (width < 900)
-                                                          ? Dimens.size18
-                                                          : (width < 1300)
-                                                              ? Dimens.size20
-                                                              : Dimens.size24,
-                                                      color:
-                                                          notifier.whitecolor),
-                                            ),
+                                            right: 12, top: 12, bottom: 12),
+                                        child: Text(
+                                          L10nX.getStr
+                                              .who_this_course_is_for_table_title_1,
+                                          maxLines: 2,
+                                          style: TextStyleConstant.titleSmall
+                                              .copyWith(
+                                            color: notifier.blackcolor,
                                           ),
                                         ),
-                                      )),
-                                      TableCell(
-                                          child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            right: 16, top: 8),
-                                        child: Container(
-                                          width: (width < 900)
-                                              ? Dimens.size40
-                                              : (width < 1300)
-                                                  ? Dimens.size50
-                                                  : Dimens.size60,
-                                          height: (width < 900)
-                                              ? Dimens.size40
-                                              : (width < 1300)
-                                                  ? Dimens.size50
-                                                  : Dimens.size60,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.red,
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              '04',
-                                              style: TextStyleConstant
-                                                  .titleTextColorOnBackgroundColorStyle14w700
-                                                  .copyWith(
-                                                      fontSize: (width < 900)
-                                                          ? Dimens.size18
-                                                          : (width < 1300)
-                                                              ? Dimens.size20
-                                                              : Dimens.size24,
-                                                      color:
-                                                          notifier.whitecolor),
-                                            ),
-                                          ),
-                                        ),
-                                      )),
-                                    ]),
-                                    TableRow(
-                                      children: [
-                                        TableCell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 12, top: 12, bottom: 12),
-                                            child: Text(
-                                              L10nX.getStr
-                                                  .who_this_course_is_for_table_title_3,
-                                              style: TextStyleConstant
-                                                  .textStyleBlack16w400
-                                                  .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: (width < 900)
-                                                    ? Dimens.size14
-                                                    : (width < 1300)
-                                                        ? Dimens.size16
-                                                        : Dimens.size20,
-                                                color: notifier.blackcolor,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 12, top: 12, bottom: 12),
-                                            child: Text(
-                                              L10nX.getStr
-                                                  .who_this_course_is_for_table_title_4,
-                                              style: TextStyleConstant
-                                                  .textStyleBlack16w400
-                                                  .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: (width < 900)
-                                                    ? Dimens.size14
-                                                    : (width < 1300)
-                                                        ? Dimens.size16
-                                                        : Dimens.size20,
-                                                color: notifier.blackcolor,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                      ),
                                     ),
-                                    TableRow(
-                                      children: [
-                                        TableCell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 16),
-                                            child: Text(
-                                              L10nX.getStr
-                                                  .who_this_course_is_for_table_content_3,
-                                              style: TextStyleConstant
-                                                  .textStyleBlack16w400
-                                                  .copyWith(
-                                                fontSize: (width < 900)
-                                                    ? Dimens.size14
-                                                    : (width < 1300)
-                                                        ? Dimens.size16
-                                                        : Dimens.size20,
-                                                color: notifier.blackcolor,
-                                              ),
-                                              textAlign: TextAlign.justify,
-                                            ),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 16),
-                                            child: Text(
-                                              L10nX.getStr
-                                                  .who_this_course_is_for_table_content_4,
-                                              style: TextStyleConstant
-                                                  .textStyleBlack16w400
-                                                  .copyWith(
-                                                fontSize: (width < 900)
-                                                    ? Dimens.size14
-                                                    : (width < 1300)
-                                                        ? Dimens.size16
-                                                        : Dimens.size20,
-                                                color: notifier.blackcolor,
-                                              ),
-                                              textAlign: TextAlign.justify,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    TableRow(children: [
-                                      TableCell(
-                                          child: Padding(
+                                    TableCell(
+                                      child: Padding(
                                         padding: const EdgeInsets.only(
-                                            right: 16, top: 8),
-                                        child: Container(
-                                          width: (width < 900)
-                                              ? Dimens.size40
-                                              : (width < 1300)
-                                                  ? Dimens.size50
-                                                  : Dimens.size60,
-                                          height: (width < 900)
-                                              ? Dimens.size40
-                                              : (width < 1300)
-                                                  ? Dimens.size50
-                                                  : Dimens.size60,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.red,
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              '05',
-                                              style: TextStyleConstant
-                                                  .titleTextColorOnBackgroundColorStyle14w700
-                                                  .copyWith(
-                                                      fontSize: (width < 900)
-                                                          ? Dimens.size18
-                                                          : (width < 1300)
-                                                              ? Dimens.size20
-                                                              : Dimens.size24,
-                                                      color:
-                                                          notifier.whitecolor),
-                                            ),
+                                            right: 16, top: 12, bottom: 12),
+                                        child: Text(
+                                          L10nX.getStr
+                                              .who_this_course_is_for_table_title_2,
+                                          maxLines: 2,
+                                          style: TextStyleConstant.titleSmall
+                                              .copyWith(
+                                            color: notifier.blackcolor,
                                           ),
                                         ),
-                                      )),
-                                      TableCell(
-                                          child: Padding(
-                                        padding: const EdgeInsets.only(
-                                            right: 16, top: 8),
-                                        child: Container(
-                                          width: (width < 900)
-                                              ? Dimens.size40
-                                              : (width < 1300)
-                                                  ? Dimens.size50
-                                                  : Dimens.size60,
-                                          height: (width < 900)
-                                              ? Dimens.size40
-                                              : (width < 1300)
-                                                  ? Dimens.size50
-                                                  : Dimens.size60,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Colors.red,
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              '06',
-                                              style: TextStyleConstant
-                                                  .titleTextColorOnBackgroundColorStyle14w700
-                                                  .copyWith(
-                                                      fontSize: (width < 900)
-                                                          ? Dimens.size18
-                                                          : (width < 1300)
-                                                              ? Dimens.size20
-                                                              : Dimens.size24,
-                                                      color:
-                                                          notifier.whitecolor),
-                                            ),
-                                          ),
-                                        ),
-                                      )),
-                                    ]),
-                                    TableRow(
-                                      children: [
-                                        TableCell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 16, top: 12, bottom: 12),
-                                            child: Text(
-                                              L10nX.getStr
-                                                  .who_this_course_is_for_table_title_5,
-                                              style: TextStyleConstant
-                                                  .textStyleBlack16w400
-                                                  .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: (width < 900)
-                                                    ? Dimens.size14
-                                                    : (width < 1300)
-                                                        ? Dimens.size16
-                                                        : Dimens.size20,
-                                                color: notifier.blackcolor,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 16, top: 12, bottom: 12),
-                                            child: Text(
-                                              L10nX.getStr
-                                                  .who_this_course_is_for_table_title_6,
-                                              style: TextStyleConstant
-                                                  .textStyleBlack16w400
-                                                  .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: (width < 900)
-                                                    ? Dimens.size14
-                                                    : (width < 1300)
-                                                        ? Dimens.size16
-                                                        : Dimens.size20,
-                                                color: notifier.blackcolor,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    TableRow(
-                                      children: [
-                                        TableCell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 16),
-                                            child: Text(
-                                              L10nX.getStr
-                                                  .who_this_course_is_for_table_content_5,
-                                              style: TextStyleConstant
-                                                  .textStyleBlack16w400
-                                                  .copyWith(
-                                                fontSize: (width < 900)
-                                                    ? Dimens.size14
-                                                    : (width < 1300)
-                                                        ? Dimens.size16
-                                                        : Dimens.size20,
-                                                color: notifier.blackcolor,
-                                              ),
-                                              textAlign: TextAlign.justify,
-                                            ),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                right: 16),
-                                            child: Text(
-                                              L10nX.getStr
-                                                  .who_this_course_is_for_table_content_6,
-                                              style: TextStyleConstant
-                                                  .textStyleBlack16w400
-                                                  .copyWith(
-                                                fontSize: (width < 900)
-                                                    ? Dimens.size14
-                                                    : (width < 1300)
-                                                        ? Dimens.size16
-                                                        : Dimens.size20,
-                                                color: notifier.blackcolor,
-                                              ),
-                                              textAlign: TextAlign.justify,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ],
                                 ),
-                              ),
+                                TableRow(
+                                  children: [
+                                    TableCell(
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 16),
+                                        child: Text(
+                                          L10nX.getStr
+                                              .who_this_course_is_for_table_content_1,
+                                          style: TextStyleConstant.bodyLarge
+                                              .copyWith(
+                                            color: ColorConst.blackColor,
+                                          ),
+                                          textAlign: TextAlign.justify,
+                                        ),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 16),
+                                        child: Text(
+                                          L10nX.getStr
+                                              .who_this_course_is_for_table_content_2,
+                                          style: TextStyleConstant.bodyLarge
+                                              .copyWith(
+                                            color: ColorConst.blackColor,
+                                          ),
+                                          textAlign: TextAlign.justify,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                TableRow(children: [
+                                  TableCell(
+                                      child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 16, top: 8),
+                                    child: Container(
+                                      width: (width < 900)
+                                          ? Dimens.size40
+                                          : (width < 1300)
+                                              ? Dimens.size50
+                                              : Dimens.size60,
+                                      height: (width < 900)
+                                          ? Dimens.size40
+                                          : (width < 1300)
+                                              ? Dimens.size50
+                                              : Dimens.size60,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.red,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          '03',
+                                          style: TextStyleConstant.bodyLarge
+                                              .copyWith(
+                                                  color: ColorConst.whiteColor),
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                                  TableCell(
+                                      child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 16, top: 8),
+                                    child: Container(
+                                      width: (width < 900)
+                                          ? Dimens.size40
+                                          : (width < 1300)
+                                              ? Dimens.size50
+                                              : Dimens.size60,
+                                      height: (width < 900)
+                                          ? Dimens.size40
+                                          : (width < 1300)
+                                              ? Dimens.size50
+                                              : Dimens.size60,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.red,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          '04',
+                                          style: TextStyleConstant.bodyLarge
+                                              .copyWith(
+                                                  color: ColorConst.whiteColor),
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                                ]),
+                                TableRow(
+                                  children: [
+                                    TableCell(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            right: 12, top: 12, bottom: 12),
+                                        child: Text(
+                                          L10nX.getStr
+                                              .who_this_course_is_for_table_title_3,
+                                          style: TextStyleConstant.titleSmall
+                                              .copyWith(
+                                            color: ColorConst.blackColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            right: 12, top: 12, bottom: 12),
+                                        child: Text(
+                                          L10nX.getStr
+                                              .who_this_course_is_for_table_title_4,
+                                          style: TextStyleConstant.titleSmall
+                                              .copyWith(
+                                            color: ColorConst.blackColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                TableRow(
+                                  children: [
+                                    TableCell(
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 16),
+                                        child: Text(
+                                          L10nX.getStr
+                                              .who_this_course_is_for_table_content_3,
+                                          style: TextStyleConstant.bodyLarge
+                                              .copyWith(
+                                            color: ColorConst.blackColor,
+                                          ),
+                                          textAlign: TextAlign.justify,
+                                        ),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 16),
+                                        child: Text(
+                                          L10nX.getStr
+                                              .who_this_course_is_for_table_content_4,
+                                          style: TextStyleConstant.bodyLarge
+                                              .copyWith(
+                                            color: ColorConst.blackColor,
+                                          ),
+                                          textAlign: TextAlign.justify,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                TableRow(children: [
+                                  TableCell(
+                                      child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 16, top: 8),
+                                    child: Container(
+                                      width: (width < 900)
+                                          ? Dimens.size40
+                                          : (width < 1300)
+                                              ? Dimens.size50
+                                              : Dimens.size60,
+                                      height: (width < 900)
+                                          ? Dimens.size40
+                                          : (width < 1300)
+                                              ? Dimens.size50
+                                              : Dimens.size60,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.red,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          '05',
+                                          style: TextStyleConstant.bodyLarge
+                                              .copyWith(
+                                                  color: ColorConst.whiteColor),
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                                  TableCell(
+                                      child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 16, top: 8),
+                                    child: Container(
+                                      width: (width < 900)
+                                          ? Dimens.size40
+                                          : (width < 1300)
+                                              ? Dimens.size50
+                                              : Dimens.size60,
+                                      height: (width < 900)
+                                          ? Dimens.size40
+                                          : (width < 1300)
+                                              ? Dimens.size50
+                                              : Dimens.size60,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.red,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          '06',
+                                          style: TextStyleConstant.bodyLarge
+                                              .copyWith(
+                                                  color: ColorConst.whiteColor),
+                                        ),
+                                      ),
+                                    ),
+                                  )),
+                                ]),
+                                TableRow(
+                                  children: [
+                                    TableCell(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            right: 16, top: 12, bottom: 12),
+                                        child: Text(
+                                          L10nX.getStr
+                                              .who_this_course_is_for_table_title_5,
+                                          style: TextStyleConstant.titleSmall
+                                              .copyWith(
+                                            color: ColorConst.blackColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            right: 16, top: 12, bottom: 12),
+                                        child: Text(
+                                          L10nX.getStr
+                                              .who_this_course_is_for_table_title_6,
+                                          style: TextStyleConstant.titleSmall
+                                              .copyWith(
+                                            color: ColorConst.blackColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                TableRow(
+                                  children: [
+                                    TableCell(
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 16),
+                                        child: Text(
+                                          L10nX.getStr
+                                              .who_this_course_is_for_table_content_5,
+                                          style: TextStyleConstant.bodyLarge
+                                              .copyWith(
+                                            color: ColorConst.blackColor,
+                                          ),
+                                          textAlign: TextAlign.justify,
+                                        ),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      child: Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 16),
+                                        child: Text(
+                                          L10nX.getStr
+                                              .who_this_course_is_for_table_content_6,
+                                          style: TextStyleConstant.bodyLarge
+                                              .copyWith(
+                                            color: ColorConst.blackColor,
+                                          ),
+                                          textAlign: TextAlign.justify,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                        (constraints.maxWidth > splitScreenWidth)
-                            ? Positioned(
-                                bottom: width < 1100
-                                    ? height / 12.1
-                                    : height / 18.6,
-                                left: width < 900
-                                    ? width / 7
-                                    : width < 1100
-                                        ? width / 8.5
-                                        : width < 1300
-                                            ? width / 20
-                                            : width / 20,
-                                child: avatarAndComment())
-                            : SizedBox(),
                       ],
                     ),
                   ],
@@ -674,19 +548,13 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                 child: Column(children: [
                   Center(
                     child: Text(L10nX.getStr.who_this_course_is_for,
-                        style: TextStyleConstant
-                            .titleTextColorOnBackgroundColorStyle14w400
-                            .copyWith(
-                                fontSize: width < 550 ? 28 : 45,
-                                color: notifier.blackcolor)),
+                        style: TextStyleConstant.titleLarge
+                            .copyWith(color: ColorConst.blackColor)),
                   ),
                   Center(
                     child: Text(L10nX.getStr.who_this_course_is_for_subtitle,
-                        style: TextStyleConstant
-                            .titleTextColorOnBackgroundColorStyle14w400
-                            .copyWith(
-                                fontSize: width < 550 ? 18 : 20,
-                                color: notifier.greycolor)),
+                        style: TextStyleConstant.titleSmall
+                            .copyWith(color: ColorConst.blackColor)),
                   ),
                   SizedBox(
                     height: 16,
@@ -726,10 +594,8 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                               L10nX.getStr.who_this_course_is_for_comment,
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
-                              style: baseStyle.copyWith(
-                                fontSize: Dimens.size14,
-                                fontWeight: FontWeight.bold,
-                                color: notifier.textcolor,
+                              style: TextStyleConstant.titleSmall.copyWith(
+                                color: ColorConst.blackColor,
                               ),
                             ),
                           ),
@@ -745,7 +611,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
               )
             : Container(
                 height: width < 1100
-                    ? height / 3
+                    ? height / 4
                     : width < 1600
                         ? height / 4
                         : height / 5,
@@ -754,6 +620,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                     : width < 1600
                         ? width / 3.5
                         : width / 3.75,
+                constraints: BoxConstraints(minWidth: 300),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24),
@@ -772,12 +639,10 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                       Expanded(
                         child: Text(
                           L10nX.getStr.who_this_course_is_for_comment,
-                          maxLines: 3,
+                          maxLines: 5,
                           overflow: TextOverflow.ellipsis,
-                          style: baseStyle.copyWith(
-                            fontSize: width / 75,
-                            fontWeight: FontWeight.bold,
-                            color: notifier.textcolor,
+                          style: TextStyleConstant.titleSmall.copyWith(
+                            color: ColorConst.blackColor,
                           ),
                         ),
                       ),

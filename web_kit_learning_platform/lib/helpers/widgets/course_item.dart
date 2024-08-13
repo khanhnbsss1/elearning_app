@@ -78,25 +78,25 @@ class CourseItem extends StatelessWidget {
                         children: [
                           (courseInfo.image!.isNotEmpty)
                               ? SizedBox(
-                                  height: 300,
+                                  height: 200,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(16),
                                     child: Image.network(
                                       courseInfo.image!,
                                       //"https://docs.flutter.dev/assets/images/dash/dash-fainting.gif",
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.contain,
                                       //width: constraints.maxWidth * 2,
                                       //  height: constraints.maxWidth
                                     ),
                                   ),
                                 )
                               : SizedBox(
-                                  height: 300,
+                                  height: 200,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(16),
                                     child: Image.asset(
                                       'assets/deshboard/adventure/adventure5.png',
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.contain,
                                       width: constraints.maxWidth,
                                       //height: constraints.maxHeight
                                     ),
@@ -116,18 +116,8 @@ class CourseItem extends StatelessWidget {
                                     child: Text(
                                       '${courseInfo.name}',
                                       overflow: TextOverflow.ellipsis,
-                                      style: TextStyleConstant
-                                          .textStyleBlack16w600
-                                          .copyWith(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize:
-                                                  (constraints.maxWidth < 900)
-                                                      ? Dimens.size20
-                                                      : (constraints.maxWidth <
-                                                              1100)
-                                                          ? Dimens.size22
-                                                          : Dimens.size24,
-                                              color: Colors.red),
+                                      style: TextStyleConstant.titleMedium
+                                          .copyWith(color: Colors.red),
                                       textAlign: TextAlign.center,
                                       maxLines: 2,
                                     ),
@@ -145,22 +135,11 @@ class CourseItem extends StatelessWidget {
                                   child: ReadMoreText(
                                     ("${(courseInfo.introduction)} ") ?? "",
                                     trimMode: TrimMode.Line,
-                                    trimLines: (constraints.maxWidth < 550)
-                                        ? 2
-                                        : (constraints.maxWidth < 1100)
-                                            ? 3
-                                            : 4,
+                                    trimLines: 2,
                                     colorClickableText: Colors.pink,
                                     trimCollapsedText: L10nX.getStr.show_more,
                                     trimExpandedText: L10nX.getStr.show_less,
-                                    style: TextStyleConstant
-                                        .textStyleBlack16w400
-                                        .copyWith(
-                                      fontSize: (constraints.maxWidth < 900)
-                                          ? Dimens.size16
-                                          : (constraints.maxWidth < 1100)
-                                              ? Dimens.size18
-                                              : Dimens.size20,
+                                    style: TextStyleConstant.bodyLarge.copyWith(
                                       color: notifier.isDark && isHovered
                                           ? notifier.whitecolor
                                           : notifier.isDark && !isHovered
@@ -211,19 +190,15 @@ class CourseItem extends StatelessWidget {
                                             Icon(Icons.check,
                                                 size: (constraints.maxWidth <
                                                         1100)
-                                                    ? Dimens.size16
-                                                    : Dimens.size16,
+                                                    ? Dimens.size20
+                                                    : Dimens.size20,
                                                 color: Colors.red),
-                                            Gap(Dimens.size4),
+                                            Gap(Dimens.size8),
                                             Text('Số buổi học:',
                                                 style: TextStyleConstant
-                                                    .textStyleBlack16w400
+                                                    .bodyMedium
                                                     .copyWith(
-                                                  fontSize:
-                                                      (constraints.maxWidth <
-                                                              1100)
-                                                          ? Dimens.size14
-                                                          : Dimens.size18,
+                                                  fontWeight: FontWeight.bold,
                                                   color: notifier.isDark &&
                                                           isHovered
                                                       ? notifier.whitecolor
@@ -231,7 +206,6 @@ class CourseItem extends StatelessWidget {
                                                               !isHovered
                                                           ? notifier.blackcolor
                                                           : notifier.blackcolor,
-                                                  fontWeight: FontWeight.bold,
                                                 )),
                                             Gap(Dimens.size4),
                                           ]),
@@ -245,19 +219,15 @@ class CourseItem extends StatelessWidget {
                                             Icon(Icons.check,
                                                 size: (constraints.maxWidth <
                                                         1100)
-                                                    ? Dimens.size16
-                                                    : Dimens.size16,
+                                                    ? Dimens.size20
+                                                    : Dimens.size20,
                                                 color: Colors.red),
-                                            Gap(Dimens.size4),
+                                            Gap(Dimens.size8),
                                             Text('Giáo trình:',
                                                 style: TextStyleConstant
-                                                    .textStyleBlack16w400
+                                                    .bodyMedium
                                                     .copyWith(
-                                                  fontSize:
-                                                      (constraints.maxWidth <
-                                                              1100)
-                                                          ? Dimens.size14
-                                                          : Dimens.size18,
+                                                  fontWeight: FontWeight.bold,
                                                   color: notifier.isDark &&
                                                           isHovered
                                                       ? notifier.whitecolor
@@ -265,7 +235,6 @@ class CourseItem extends StatelessWidget {
                                                               !isHovered
                                                           ? notifier.blackcolor
                                                           : notifier.blackcolor,
-                                                  fontWeight: FontWeight.bold,
                                                 )),
                                             Gap(Dimens.size4),
                                           ]),
@@ -280,13 +249,8 @@ class CourseItem extends StatelessWidget {
                                       children: [
                                         Text(
                                           '${courseInfo.totalLectures}',
-                                          style: TextStyleConstant
-                                              .textStyleBlack12w400
+                                          style: TextStyleConstant.bodyMedium
                                               .copyWith(
-                                            fontSize:
-                                                (constraints.maxWidth < 1100)
-                                                    ? Dimens.size14
-                                                    : Dimens.size18,
                                             color: notifier.isDark && isHovered
                                                 ? notifier.whitecolor
                                                 : notifier.isDark && !isHovered
@@ -297,13 +261,8 @@ class CourseItem extends StatelessWidget {
                                         Gap(Dimens.size16),
                                         Text(
                                           'Emotional Chinese',
-                                          style: TextStyleConstant
-                                              .textStyleBlack12w400
+                                          style: TextStyleConstant.bodyMedium
                                               .copyWith(
-                                            fontSize:
-                                                (constraints.maxWidth < 1100)
-                                                    ? Dimens.size14
-                                                    : Dimens.size18,
                                             color: notifier.isDark && isHovered
                                                 ? notifier.whitecolor
                                                 : notifier.isDark && !isHovered
@@ -331,58 +290,23 @@ class CourseItem extends StatelessWidget {
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      Icon(
-                                        Icons.attach_money,
-                                        color: notifier.isDark && isHovered
-                                            ? notifier.whitecolor
-                                            : notifier.isDark && !isHovered
-                                                ? notifier.blackcolor
-                                                : notifier.blackcolor,
-                                      ),
                                       Text(
                                           "${NumberHelper().numberToString(courseInfo.payment, decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
-                                          style: baseStyle.copyWith(
-                                              overflow: TextOverflow.ellipsis,
-                                              color: notifier.isDark &&
-                                                      isHovered
-                                                  ? notifier.whitecolor
-                                                  : notifier.isDark &&
-                                                          !isHovered
-                                                      ? notifier.blackcolor
-                                                      : notifier.blackcolor,
-                                              fontSize: constraints.maxWidth <
-                                                      550
-                                                  ? constraints.maxWidth / 20
-                                                  : constraints.maxWidth < 700
-                                                      ? constraints.maxWidth /
-                                                          35
-                                                      : constraints.maxWidth <
-                                                              900
-                                                          ? constraints
-                                                                  .maxWidth /
-                                                              40
-                                                          : constraints
-                                                                      .maxWidth <
-                                                                  1100
-                                                              ? constraints
-                                                                      .maxWidth /
-                                                                  50
-                                                              : constraints
-                                                                          .maxWidth <
-                                                                      1300
-                                                                  ? constraints
-                                                                          .maxWidth /
-                                                                      65
-                                                                  : constraints
-                                                                          .maxWidth /
-                                                                      100)),
+                                          style: TextStyleConstant.titleSmall
+                                              .copyWith(
+                                            color: notifier.isDark && isHovered
+                                                ? notifier.whitecolor
+                                                : notifier.isDark && !isHovered
+                                                    ? notifier.blackcolor
+                                                    : notifier.blackcolor,
+                                          ))
                                     ],
                                   )
                                 ],
                               ),
                             ],
                           ),
-                          Gap(Dimens.size16),
+                          Spacer(),
                           Padding(
                             padding: EdgeInsets.all(
                                 (constraints.maxWidth < 1100)

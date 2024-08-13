@@ -82,7 +82,7 @@ class QuizItemView extends StatelessWidget {
                         ),
                         Gap(Dimens.size8),
                         Text(
-                          '${info.name}' ?? "",
+                          '${info.questionName}' ?? "",
                           overflow: TextOverflow.ellipsis,
                           style: TextStyleConstant
                               .normalTextOnBackGroundColorStyle16w400.copyWith(
