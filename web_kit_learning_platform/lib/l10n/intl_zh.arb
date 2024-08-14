@@ -547,8 +547,7 @@
   "quiz_add": "创建问题",
   "quiz_remove": "删除问题",
   "quiz_update": "更新问题",
-  "quiz_str": "问题"
-
-
-
+  "quiz_str": "问题",
+  "image_str": "图像",
+  "tags_select": "选择标签"
 }

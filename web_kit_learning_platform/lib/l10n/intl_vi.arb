@@ -551,5 +551,7 @@
   "quiz_add": "Tạo các câu hỏi",
   "quiz_remove": "Xóa các câu hỏi",
   "quiz_update": "Cập nhật các câu hỏi",
-  "quiz_str": "Các câu hỏi"
+  "quiz_str": "Các câu hỏi",
+  "image_str": "Hình ảnh",
+  "tags_select": "Chọn thẻ"
 }

@@ -552,9 +552,7 @@
   "quiz_add": "Create quiz",
   "quiz_remove": "Delete quiz",
   "quiz_update": "Update quiz",
-  "quiz_str": "Quizzes"
-
-
-
-
+  "quiz_str": "Quizzes",
+  "image_str": "Image",
+  "tags_select": "Select tag"
 }

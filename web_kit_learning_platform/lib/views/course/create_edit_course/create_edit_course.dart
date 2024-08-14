@@ -101,7 +101,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
                 bottom: BorderSide(color: ColorConst.dividerColor)
               )
             ),
-            padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size24),
+            padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: Dimens.size16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -114,7 +114,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(isExitCourse?L10nX.getStr.course_edit:L10nX.getStr.course_create, style: TextStyleConstant.textStyleBlack30w700,),
+                        Text(isExitCourse?L10nX.getStr.course_edit:L10nX.getStr.course_create, style: TextStyleConstant.textStyleBlack24w700,),
                         Visibility(
                           visible: ResponsiveInfo.isTablet(),
                           child: Text("Course / Course list / ${!isExitCourse?"Create course":"Edit course"}", style: TextStyleConstant.textStyleBlack16w400.copyWith(color: ColorConst.colorHintTextSearch),),
@@ -184,7 +184,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: Dimens.size16),
+            padding: EdgeInsets.symmetric(vertical: Dimens.size8),
             child: tabBar(state: state),
           ),
           Expanded(child: buildPageView(context: context, state: state)),
@@ -240,7 +240,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
     TextStyle textStyle = TextStyleConstant.textStyleBlack15w700.copyWith(
         color: isExitCourse?(position == 0?ColorConst.textColorSelectTabBar : ColorConst.subtext):ColorConst.greyColor.withOpacity(0.3));
     return Material(
-      elevation: 4,
+      elevation: 2,
       child: Container(
           decoration: BoxDecoration(
               color: ColorConst.whiteColor,
@@ -289,7 +289,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
     }
     return Tab(
       child: Container(
-        height:(Dimens.size40),
+        height:(Dimens.size30),
         alignment: Alignment.center,
         child: Center(
           child: Text(
@@ -314,7 +314,6 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
           CourseLinkLessonListPage(),
           CourseLinkTestListPage()
         ],
-        
         onPageChanged: (value) {
           if(!isExitCourse) {
             _pageController.jumpToPage(0);

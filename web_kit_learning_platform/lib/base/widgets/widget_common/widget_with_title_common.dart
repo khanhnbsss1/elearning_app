@@ -167,7 +167,7 @@ class _WidgetWithColumnTitleCommonState extends State<WidgetWithColumnTitleCommo
         Align(
             alignment: widget.alignmentGeometry!,
             child: Padding(
-              padding: widget.childPadding??EdgeInsets.symmetric(horizontal: Dimens.size4, vertical: Dimens.size8),
+              padding: widget.childPadding??EdgeInsets.symmetric(horizontal: Dimens.size4, vertical: Dimens.size4),
               child: widget.child??const SizedBox.shrink(),
             )),
       ],

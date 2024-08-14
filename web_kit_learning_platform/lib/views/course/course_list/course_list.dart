@@ -273,8 +273,8 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
     List<Widget> listOfCourse = List.empty(growable: true);
 
     bool? enableEdit = state.userProfile?.getPermission().contains("");
-    double maxWidthItem = 400;
-    double heightOfItem = 460;
+    double maxWidthItem = 300;
+    double heightOfItem = 270;
     int numberRow = (boxConstraints.maxWidth / maxWidthItem).toInt();
     double widthItem = (boxConstraints.maxWidth - (50 * numberRow)) / numberRow;
     for (CourseInfo courseInfo in state.courseResponseModel?.content ?? []) {

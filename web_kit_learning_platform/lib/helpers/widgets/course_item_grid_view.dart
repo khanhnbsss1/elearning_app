@@ -36,8 +36,8 @@ class CourseItemGridView extends StatelessWidget {
           onViewDetail!(courseInfo);
         }
       },
-      child: Container(
-        constraints: BoxConstraints(maxWidth: 400, minWidth: 320),
+      child: SizedBox(
+        height: 270,
         child: StatefulBuilder(
           builder: (BuildContext context, void Function(void Function()) setState) {
             return LayoutBuilder(
@@ -51,7 +51,7 @@ class CourseItemGridView extends StatelessWidget {
                           : isHovered && notifier.isDark
                               ? ColorConst.backGroundColor
                               : notifier.whitecolor,
-                      elevation: 5,
+                      elevation: 2,
                       child: Container(
                         decoration: BoxDecoration(
                           color: isHovered && !notifier.isDark
@@ -65,200 +65,164 @@ class CourseItemGridView extends StatelessWidget {
                         clipBehavior: Clip.hardEdge,
                         child: Stack(
                             children: [
-                          Padding(
-                            padding:  const EdgeInsets.all(12.0),
-                            child: Container(
-                              padding: EdgeInsets.all(12.0),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Container(
-                                    constraints: BoxConstraints(
-                                      maxHeight: 175
-                                    ),
-                                    child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(16),
-                                        child: Image.network(
-                                          courseInfo.image!.isNotEmpty
-                                              ? courseInfo.image!
-                                              : 'assets/deshboard/adventure/adventure5.png',
+                          Container(
+                            padding: EdgeInsets.all(12.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ClipRRect(
+                                    borderRadius: BorderRadius.circular(16),
+                                    child: Image.network(
+                                      courseInfo.image!.isNotEmpty
+                                          ? courseInfo.image!
+                                          : 'assets/deshboard/adventure/adventure5.png',
+                                      fit: BoxFit.cover,
+                                      width: constraints.maxWidth * 0.9,
+                                      height: constraints.maxWidth * 0.5,
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return Image.network(
+                                          'assets/deshboard/adventure/adventure5.png',
                                           fit: BoxFit.cover,
                                           width: constraints.maxWidth * 0.9,
                                           height: constraints.maxWidth * 0.5,
-                                          errorBuilder:
-                                              (context, error, stackTrace) {
-                                            return Image.network(
-                                              'assets/deshboard/adventure/adventure5.png',
-                                              fit: BoxFit.cover,
-                                              width: constraints.maxWidth * 0.9,
-                                              height: constraints.maxWidth * 0.5,
-                                            );
-                                          },
-                                        )),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Text(
-                                    '${courseInfo.name} \n' ?? "",
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyleConstant
-                                        .textStyleBlack16w600
-                                        .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            // fontSize: Dimens.size24,
-                                            // fontSize: ResponsiveInfo.isPhone()?Dimens.size20:Dimens.size18,
-                                            fontSize: Dimens.size18,
-                                            color: Color.fromRGBO(
-                                                163, 20, 19, 1.0)),
-                                    maxLines: 2,
-                                  ),
-                                  Gap(Dimens.size4),
-                                  Text(
-                                    courseInfo.producerName ?? "",
-                                    maxLines: 1,
-                                    style: TextStyleConstant
-                                        .textStyleBlack12w400
-                                        .copyWith(
-                                      fontWeight: FontWeight.w100,
-                                  
-                                      // fontSize: Dimens.size18,
-                                      // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300 ? Dimens.size10 :Dimens.size15,
-                                      fontSize: Dimens.size15,
-                                      color: notifier.subgreycolor,
+                                        );
+                                      },
+                                    )),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    SizedBox(
+                                      height: 12,
                                     ),
-                                  ),
-                                  Text(
-                                    '${courseInfo.totalLectures} bài giảng - ${courseInfo.gradeName ?? ""} - ${(courseInfo.isStandard == 1) ? 'Chính quy' : 'Không chính quy'} ',
-                                    style: baseStyle.copyWith(
-                                      // fontSize: Dimens.size16,
-                                      // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
-                                      fontSize: Dimens.size15,
-                                      color: notifier.subgreycolor,
+                                    Text(
+                                      '${courseInfo.name} \n' ?? "",
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyleConstant.textStyleBlack16w600.copyWith(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: Dimens.size16,
+                                              color: Color.fromRGBO(
+                                                  163, 20, 19, 1.0)),
+                                      maxLines: 1,
                                     ),
-                                    overflow: TextOverflow.clip,
-                                    maxLines: 2,
-                                  ),
-                                  Gap(Dimens.size4),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                                    children: [
-                                      Wrap(
-                                        runAlignment: WrapAlignment.spaceBetween,
-                                        alignment: WrapAlignment.spaceBetween,
-                                        spacing: Dimens.size10,
-                                        runSpacing: Dimens.size5,
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              StarRating(
-                                                rating: (courseInfo.ratePoint ?? 0)
-                                                    .toDouble(),
-                                                // size: Dimens.size24,
-                                                // size: ResponsiveInfo.isPhone()?Dimens.size18: width < 1300  ? Dimens.size12 :Dimens.size22,
-                                                size: Dimens.size22,
-                                                allowHalfRating: true,
-                                                onRatingChanged: (rating) {},
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Text(NumberHelper().numberToString(courseInfo.payment, decimalDigits: 0).trim(),
-                                                  maxLines: 1,
-                                                  overflow: TextOverflow.visible,
-                                                  style: baseStyle.copyWith(color: notifier.isDark && isHovered ? notifier.whitecolor : notifier.isDark && !isHovered ? notifier.blackcolor : notifier.blackcolor,
-                                                      fontSize: Dimens.size15,
-                                                      fontWeight: FontWeight.bold)),
-                                              Text(" ${L10nX.getStr.vnd_str}",
-                                                  style: TextStyleConstant
-                                                      .textStyleBlack16w400
-                                                      .copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: notifier.isDark &&
-                                                            isHovered
-                                                        ? notifier.whitecolor
-                                                        : notifier.isDark &&
-                                                                !isHovered
-                                                            ? notifier.blackcolor
-                                                            : notifier.blackcolor,
-                                                    fontSize: Dimens.size15,
-                                                    // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
-                                                  )),
-                                            ],
-                                          ),
-                                        ],
+                                    Gap(Dimens.size4),
+                                    if((courseInfo.producerName??"").isNotEmpty)Text(
+                                      courseInfo.producerName ?? "",
+                                      maxLines: 1,
+                                      style: TextStyleConstant
+                                          .textStyleBlack12w400.copyWith(
+                                        color: notifier.subgreycolor,
                                       ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      '${courseInfo.totalLectures} bài giảng - ${courseInfo.gradeName ?? ""}',
+                                      style: TextStyleConstant
+                                          .textStyleBlack12w400.copyWith(
+                                        color: notifier.subgreycolor,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 2,
+                                    ),
+                                    Gap(Dimens.size4),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      children: [
+                                        Wrap(
+                                          runAlignment: WrapAlignment.spaceBetween,
+                                          alignment: WrapAlignment.spaceBetween,
+                                          spacing: Dimens.size5,
+                                          runSpacing: Dimens.size5,
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                StarRating(
+                                                  rating: (courseInfo.ratePoint ?? 0).toDouble(),
+                                                  size: Dimens.size15,
+                                                  allowHalfRating: true,
+                                                  onRatingChanged: (rating) {},
+                                                ),
+                                              ],
+                                            ),
+                                            Text(" ${NumberHelper().numberToString(
+                                                courseInfo.payment,
+                                                decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
+                                                style: TextStyleConstant.textStyleBlack12w200.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                  // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
+                                                )),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                          Visibility(
-                            visible: enableEdit ?? false,
-                            child: Align(
-                              alignment: Alignment.topRight,
-                              child: PopupMenuButton<CourseItemAction>(
-                                color: ColorConst.whiteColor,
-                                tooltip: "",
-                                //icon: Icon(Icons.filter_alt_outlined, size: Dimens.size30, color: ColorConst.mainColor,),
-                                onSelected: (CourseItemAction item) {
-                                  switch (item) {
-                                    case CourseItemAction.viewDetail:
-                                      // TODO: Handle this case.
-                                      if (onViewDetail != null) {
-                                        onViewDetail!(courseInfo);
-                                      }
-                                      break;
-                                    case CourseItemAction.edit:
-                                      // TODO: Handle this case.
-                                      if (onEdit != null) {
-                                        onEdit!(courseInfo);
-                                      }
-                                      break;
-                                    case CourseItemAction.delete:
-                                      // TODO: Handle this case.
-                                      if (onDelete != null) {
-                                        onDelete!(courseInfo);
-                                      }
-                                      break;
-                                    case CourseItemAction.study:
-                                      // TODO: Handle this case.
-                                      if (onStudy != null) {
-                                        onStudy!(courseInfo);
-                                      }
-                                  }
-                                },
-                                itemBuilder: (BuildContext context) =>
-                                    <PopupMenuEntry<CourseItemAction>>[
-                                  PopupMenuItem<CourseItemAction>(
-                                    value: CourseItemAction.viewDetail,
-                                    child: Text(L10nX.getStr.detail_str),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: PopupMenuButton<CourseItemAction>(
+                              color: ColorConst.whiteColor,
+                              iconSize: Dimens.size15,
+                              icon: Icon(Icons.adaptive.more),
+                              tooltip: "",
+                              //icon: Icon(Icons.filter_alt_outlined, size: Dimens.size30, color: ColorConst.mainColor,),
+                              onSelected: (CourseItemAction item) {
+                                switch (item) {
+                                  case CourseItemAction.viewDetail:
+                                    // TODO: Handle this case.
+                                    if (onViewDetail != null) {
+                                      onViewDetail!(courseInfo);
+                                    }
+                                    break;
+                                  case CourseItemAction.edit:
+                                    // TODO: Handle this case.
+                                    if (onEdit != null) {
+                                      onEdit!(courseInfo);
+                                    }
+                                    break;
+                                  case CourseItemAction.delete:
+                                    // TODO: Handle this case.
+                                    if (onDelete != null) {
+                                      onDelete!(courseInfo);
+                                    }
+                                    break;
+                                  case CourseItemAction.study:
+                                    // TODO: Handle this case.
+                                    if (onStudy != null) {
+                                      onStudy!(courseInfo);
+                                    }
+                                }
+                              },
+                              itemBuilder: (BuildContext context) =>
+                                  <PopupMenuEntry<CourseItemAction>>[
+                                PopupMenuItem<CourseItemAction>(
+                                  value: CourseItemAction.viewDetail,
+                                  child: Text(L10nX.getStr.detail_str),
+                                ), 
+                              if(enableEdit ?? false)
+                                PopupMenuItem<CourseItemAction>(
+                                  value: CourseItemAction.edit,
+                                  child: Text(L10nX.getStr.edit_str),
                                   ),
-                                  PopupMenuItem<CourseItemAction>(
-                                    value: CourseItemAction.edit,
-                                    child: Text(L10nX.getStr.edit_str),
-                                  ),
-                                  PopupMenuItem<CourseItemAction>(
-                                    value: CourseItemAction.delete,
-                                    child: Text(L10nX.getStr.delete_str),
-                                  ),
-                                  PopupMenuItem<CourseItemAction>(
-                                    value: CourseItemAction.study,
-                                    child: Text(L10nX.getStr.lets_study),
-                                  ),
-                                ],
-                              ),
+                              if(enableEdit ?? false)
+                                PopupMenuItem<CourseItemAction>(
+                                  value: CourseItemAction.delete,
+                                  child: Text(L10nX.getStr.delete_str),
+                                ),
+                                PopupMenuItem<CourseItemAction>(
+                                  value: CourseItemAction.study,
+                                  child: Text(L10nX.getStr.lets_study),
+                                ),
+                              ],
                             ),
                           )
                         ]),

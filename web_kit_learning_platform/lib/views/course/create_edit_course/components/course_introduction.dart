@@ -99,30 +99,27 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
             border: Border.all(
               color: ColorConst.colorHintTextSearch,
             ),
-              borderRadius: BorderRadius.circular(Dimens.size20)
+              borderRadius: BorderRadius.circular(Dimens.size16)
 
           ),
           padding: EdgeInsets.all(Dimens.size16),
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
-            child: Padding(
-              padding: EdgeInsets.all(Dimens.size16),
-              child: Form(
-                key: controller.basicValidator.formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    MyResponsive(
-                      builder: (context, boxConstraints, myScreenMediaType) {
-                        if (myScreenMediaType.isMobile) {
-                          return buildCourseSummaryInfoMobile(context: context, state: state);
-                        } else {
-                          return buildCourseSummaryInfoWeb(context: context, state: state);
-                        }
-                      },
-                    ),
-                  ],
-                ),
+            child: Form(
+              key: controller.basicValidator.formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MyResponsive(
+                    builder: (context, boxConstraints, myScreenMediaType) {
+                      if (myScreenMediaType.isMobile) {
+                        return buildCourseSummaryInfoMobile(context: context, state: state);
+                      } else {
+                        return buildCourseSummaryInfoWeb(context: context, state: state);
+                      }
+                    },
+                  ),
+                ],
               ),
             ),
           ),
@@ -138,155 +135,124 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
     return LayoutBuilder(
       builder: (context, constraints) {
         double maxWidthItem = maxWidthRow;
-        double heightOfItem = 85;
+        double heightOfItem = 92;
         int numberRow = ((constraints.maxWidth / maxWidthItem)/2).toInt()*2;
         if(numberRow<1) {
           numberRow=1;
         }
         double widthItem = (constraints.maxWidth -(50* numberRow))/numberRow;
-        return Padding(
-          padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              GridView.count(
-                crossAxisSpacing: 24,
-                childAspectRatio: (widthItem)/(heightOfItem),
-                mainAxisSpacing: 0,
-                crossAxisCount: numberRow,
-                shrinkWrap: true,
-                children: [
-                  SizedBox(
-                      width: widthUnit*2,
-                      child: Row(
-                        children: [
-                          Expanded(child: buildCourseName(state: state, context: context)),
-                        ],
-                      )),
-                  SizedBox(
-                    width: widthUnit,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: buildAuthor(state: state, context: context),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: widthUnit,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: buildGrade(state: state, context: context),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: widthUnit,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: buildCategory(state: state, context: context),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: widthUnit,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: buildDuration(state: state, context: context),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GridView.count(
+              crossAxisSpacing: Dimens.size24,
+              childAspectRatio: (widthItem)/(heightOfItem),
+              mainAxisSpacing: 0,
+              crossAxisCount: numberRow,
+              shrinkWrap: true,
+              children: [
+                SizedBox(
                     width: widthUnit*2,
                     child: Row(
                       children: [
-                        Expanded(
-                          child: buildBackgroundImage(state: state, context: context),
-                        ),
+                        Expanded(child: buildCourseName(state: state, context: context)),
                       ],
-                    ),
+                    )),
+                SizedBox(
+                  width: widthUnit,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: buildAuthor(state: state, context: context),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: widthUnit*2,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: buildVideoPreview(state: state, context: context),
-                        ),
-                      ],
-                    ),
+                ),
+                SizedBox(
+                  width: widthUnit,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: buildGrade(state: state, context: context),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              Gap(Dimens.size12),
-              Row(
-                children: [
-                  Expanded(
-                    child: buildIntroduction(state: state, context: context),
+                ),
+                SizedBox(
+                  width: widthUnit,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: buildCategory(state: state, context: context),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              Gap(Dimens.size12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(child: buildWhatWillYouAchieve(state: state, context: context)),
-                  Gap(Dimens.size50),
-                  Expanded(child: buildWhoThisCourse(state: state, context: context)),
-                ],
-              ),
-              Gap(Dimens.size12),
-              buildPaymentWidget(state: state, context: context),
-              Gap(Dimens.size12),
-              // Wrap(
-              //   alignment: WrapAlignment.spaceBetween,
-              //   runAlignment: WrapAlignment.spaceBetween,
-              //   runSpacing: Dimens.size20,
-              //   spacing: Dimens.size20,
-              //   children: [
-              //     SizedBox(
-              //       width: maxWidthRow,
-              //         child: buildTags(state: state, context: context)),
-              //     SizedBox(
-              //         width: maxWidthRow*1.5,
-              //         child: WidgetWithColumnTitleCommon(
-              //           title: L10nX.getStr.primary_course,
-              //           child: Row(
-              //             mainAxisAlignment: MainAxisAlignment.end,
-              //             children: [
-              //               buildStandard(state: state, context: context),
-              //               Gap(Dimens.size20),
-              //               Expanded(child: buildAccompanyCourse(state: state, context: context)),
-              //             ],
-              //           ),
-              //         )),
-              //   ],
-              // ),
-              SizedBox(
-                  width: maxWidthRow*2.6,
-                  child: WidgetWithColumnTitleCommon(
-                    title: L10nX.getStr.primary_course,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        buildStandard(state: state, context: context),
-                        Gap(Dimens.size20),
-                        Expanded(child: buildAccompanyCourse(state: state, context: context)),
-                      ],
-                    ),
-                  )),
-              buildTags(state: state, context: context),
-            ],
-          ),
+                ),
+                SizedBox(
+                  width: widthUnit,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: buildDuration(state: state, context: context),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: widthUnit*2,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: buildBackgroundImage(state: state, context: context),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: widthUnit*2,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: buildVideoPreview(state: state, context: context),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: buildIntroduction(state: state, context: context),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(child: buildWhatWillYouAchieve(state: state, context: context)),
+                Gap(Dimens.size50),
+                Expanded(child: buildWhoThisCourse(state: state, context: context)),
+              ],
+            ),
+            buildPaymentWidget(state: state, context: context),
+            SizedBox(
+                width: maxWidthRow*2.6,
+                child: WidgetWithColumnTitleCommon(
+                  title: L10nX.getStr.primary_course,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      buildStandard(state: state, context: context),
+                      Gap(Dimens.size20),
+                      Expanded(child: buildAccompanyCourse(state: state, context: context)),
+                    ],
+                  ),
+                )),
+            buildTags(state: state, context: context),
+          ],
         );
       }, 
     );
@@ -336,7 +302,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
   
   Widget buildCourseName({required AddCourseState state, required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
-      title: '${L10nX.getStr.name}: ',
+      title: L10nX.getStr.name,
       isRequirement: true,
       // titleStyle: ,
       child: TextFormField(
@@ -344,7 +310,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         controller: state.controller?.basicValidator.getController('name'),
         keyboardType: TextInputType.text,
         decoration: InputDecoration(
-          labelText: 'Name',
+          labelText: L10nX.getStr.name,
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
           border: outlineInputBorder,
           prefixIcon: Icon(
@@ -360,52 +326,9 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
     );
   }
 
-  // Widget buildCategory({required AddCourseState state, required BuildContext context}) {
-  //   dynamic selectItem = (state.controller!.listOfCategoryName.entries.where((element) => element.key == state.courseInfo?.categoryId,));
-  //   int? selectKey ;
-  //   if(selectItem.isNotEmpty)
-  //     {
-  //       selectKey= selectItem.first.key;
-  //     }
-  //   return WidgetWithColumnTitleCommon(
-  //     title: '${L10nX.getStr.category_str}: ',
-  //     isRequirement: true,
-  //     // titleStyle: ,
-  //     child: DropdownButtonFormField<int>(
-  //       dropdownColor: theme.cardTheme.color,
-  //       decoration: InputDecoration(
-  //         labelText: value2 ?? 'Category',
-  //
-  //         labelStyle: MyTextStyle.bodySmall(xMuted: true),
-  //         border: outlineInputBorder,
-  //         prefixIcon: Icon(
-  //           LucideIcons.phone,
-  //           size: 20,
-  //           color: ColorConst.colorIconRed,
-  //         ),
-  //         contentPadding: MySpacing.all(16),
-  //         isCollapsed: true,
-  //         floatingLabelBehavior: FloatingLabelBehavior.never,
-  //       ),
-  //
-  //       value: selectKey,
-  //       items: state.controller!.listOfCategoryName.entries.map((entry) {
-  //         return DropdownMenuItem<int>(
-  //           value: entry.key,
-  //           child: Text(entry.value),
-  //         );
-  //       }).toList(),
-  //       onChanged: (value) {
-  //         state.controller?.basicValidator.getController('category_id')?.text = value!.toString();
-  //         BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(addCourseController: state.controller!));
-  //       },
-  //     ),
-  //   );
-  // }
-
   Widget buildCategory({required AddCourseState state, required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
-      title: '${L10nX.getStr.category_str}: ',
+      title: '${L10nX.getStr.category_str}',
       isRequirement: true,
       child: customDropDownSearch(
           list: state.controller!.listOfCategoryName,
@@ -417,7 +340,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
 
   Widget buildBackgroundImage({required AddCourseState state, required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
-      title: '${L10nX.getStr.background_image_str}: ',
+      title: '${L10nX.getStr.background_image_str}',
       // titleStyle: ,
       isRequirement: true,
       child: TextFormField(
@@ -425,7 +348,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         controller: state.controller?.basicValidator.getController('image'),
         keyboardType: TextInputType.url,
         decoration: InputDecoration(
-          labelText: 'Image',
+          labelText: L10nX.getStr.image_str,
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
           border: outlineInputBorder,
           prefixIcon: Icon(
@@ -502,7 +425,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
 
   Widget buildAuthor({required AddCourseState state, required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
-      title: '${L10nX.getStr.author_str}: ',
+      title: '${L10nX.getStr.author_str}',
       isRequirement: true,
       child: customDropDownSearch(
           list: state.controller!.listOfProduceNames,
@@ -514,7 +437,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
 
   Widget buildDuration({required AddCourseState state, required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
-      title: '${L10nX.getStr.duration_str}: ',
+      title: L10nX.getStr.duration_str,
       isRequirement: true,
       child: TextFormField(
         validator: state.controller?.basicValidator.getValidation('durian'),
@@ -768,7 +691,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         ),
         crossAxisAlignment: CrossAxisAlignment.end,
         child: Text(
-          ' ${L10nX.getStr.primary_course}:',
+          ' ${L10nX.getStr.primary_course}',
           style: TextStyleConstant.textStyleBlack14w400,
         ));
   }
@@ -783,7 +706,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
 
   Widget buildTags({required AddCourseState state, required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
-      title: "${L10nX.getStr.tags}: ",
+      title: "${L10nX.getStr.tags}",
       isRequirement: true,
       child: TagDropDown(
         allTags: state.controller!.listOfTags,
@@ -925,7 +848,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
               maxWidth: Dimens.size300,
             ),
             child: WidgetWithRowTitleCommon(
-              title: "${L10nX.getStr.discount_str}: ",
+              title: "${L10nX.getStr.discount_str}",
               child: Container(
                 constraints: BoxConstraints(
                   maxWidth: Dimens.size200,
