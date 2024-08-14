@@ -137,7 +137,7 @@ class CourseItem extends StatelessWidget {
                                     trimMode: TrimMode.Line,
                                     trimLines: 2,
                                     colorClickableText: Colors.pink,
-                                    trimCollapsedText: L10nX.getStr.show_more,
+                                    trimCollapsedText: "  ${L10nX.getStr.show_more}",
                                     trimExpandedText: L10nX.getStr.show_less,
                                     style: TextStyleConstant.bodyLarge.copyWith(
                                       color: notifier.isDark && isHovered
@@ -174,18 +174,10 @@ class CourseItem extends StatelessWidget {
                               ),
                               Gap(Dimens.size16),
                               Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
                                           children: [
                                             Icon(Icons.check,
                                                 size: (constraints.maxWidth <
@@ -196,36 +188,7 @@ class CourseItem extends StatelessWidget {
                                             Gap(Dimens.size8),
                                             Text('Số buổi học:',
                                                 style: TextStyleConstant
-                                                    .bodyMedium
-                                                    .copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: notifier.isDark &&
-                                                          isHovered
-                                                      ? notifier.whitecolor
-                                                      : notifier.isDark &&
-                                                              !isHovered
-                                                          ? notifier.blackcolor
-                                                          : notifier.blackcolor,
-                                                )),
-                                            Gap(Dimens.size4),
-                                          ]),
-                                      Gap(Dimens.size16),
-                                      Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Icon(Icons.check,
-                                                size: (constraints.maxWidth <
-                                                        1100)
-                                                    ? Dimens.size20
-                                                    : Dimens.size20,
-                                                color: Colors.red),
-                                            Gap(Dimens.size8),
-                                            Text('Giáo trình:',
-                                                style: TextStyleConstant
-                                                    .bodyMedium
+                                                    .bodyLarge
                                                     .copyWith(
                                                   fontWeight: FontWeight.bold,
                                                   color: notifier.isDark &&
@@ -241,72 +204,58 @@ class CourseItem extends StatelessWidget {
                                     ],
                                   ),
                                   Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '${courseInfo.totalLectures}',
-                                          style: TextStyleConstant.bodyMedium
-                                              .copyWith(
-                                            color: notifier.isDark && isHovered
-                                                ? notifier.whitecolor
-                                                : notifier.isDark && !isHovered
-                                                    ? notifier.blackcolor
-                                                    : notifier.blackcolor,
+                                    child: Center(
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            '${courseInfo.totalLectures}',
+                                            style: TextStyleConstant.bodyLarge
+                                                .copyWith(
+                                              color: notifier.isDark && isHovered
+                                                  ? notifier.whitecolor
+                                                  : notifier.isDark && !isHovered
+                                                      ? notifier.blackcolor
+                                                      : notifier.blackcolor,
+                                            ),
                                           ),
-                                        ),
-                                        Gap(Dimens.size16),
-                                        Text(
-                                          'Emotional Chinese',
-                                          style: TextStyleConstant.bodyMedium
-                                              .copyWith(
-                                            color: notifier.isDark && isHovered
-                                                ? notifier.whitecolor
-                                                : notifier.isDark && !isHovered
-                                                    ? notifier.blackcolor
-                                                    : notifier.blackcolor,
-                                          ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  )
-                                ],
-                              ),
-                              Gap(Dimens.size16),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  StarRating(
-                                    rating:
-                                        (courseInfo.ratePoint ?? 0).toDouble(),
-                                    allowHalfRating: false,
-                                    onRatingChanged: (rating) {},
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text(
-                                          "${NumberHelper().numberToString(courseInfo.payment, decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
-                                          style: TextStyleConstant.titleSmall
-                                              .copyWith(
-                                            color: notifier.isDark && isHovered
-                                                ? notifier.whitecolor
-                                                : notifier.isDark && !isHovered
-                                                    ? notifier.blackcolor
-                                                    : notifier.blackcolor,
-                                          ))
-                                    ],
                                   )
                                 ],
                               ),
                             ],
                           ),
                           Spacer(),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
+                            children: [
+                              StarRating(
+                                rating:
+                                (courseInfo.ratePoint ?? 0).toDouble(),
+                                allowHalfRating: false,
+                                onRatingChanged: (rating) {},
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                      "${NumberHelper().numberToString(courseInfo.payment, decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
+                                      style: TextStyleConstant.titleSmall
+                                          .copyWith(
+                                        color: notifier.isDark && isHovered
+                                            ? notifier.whitecolor
+                                            : notifier.isDark && !isHovered
+                                            ? notifier.blackcolor
+                                            : notifier.blackcolor,
+                                      ))
+                                ],
+                              )
+                            ],
+                          ),
+                          Gap(Dimens.size16),
                           Padding(
                             padding: EdgeInsets.all(
                                 (constraints.maxWidth < 1100)

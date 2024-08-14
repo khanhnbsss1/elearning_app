@@ -255,6 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "i_haven_t_account":
             MessageLookupByLibrary.simpleMessage("Tôi chưa có tài khoản"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
+        "image_str": MessageLookupByLibrary.simpleMessage("Hình ảnh"),
         "infinite": MessageLookupByLibrary.simpleMessage("Vô hạn"),
         "info": MessageLookupByLibrary.simpleMessage("Thông tin"),
         "introduction_str": MessageLookupByLibrary.simpleMessage("Giới thiệu"),
@@ -587,6 +588,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Biểu đồ đồng bộ hóa"),
         "system": MessageLookupByLibrary.simpleMessage("Hệ thống"),
         "tags": MessageLookupByLibrary.simpleMessage("Thẻ"),
+        "tags_select": MessageLookupByLibrary.simpleMessage("Chọn thẻ"),
         "target": MessageLookupByLibrary.simpleMessage("Mục tiêu"),
         "teacher_list":
             MessageLookupByLibrary.simpleMessage(" Danh sách giáo viên"),

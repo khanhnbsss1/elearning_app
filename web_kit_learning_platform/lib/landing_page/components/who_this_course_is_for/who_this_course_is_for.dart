@@ -120,9 +120,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                                             : width < 1600
                                                 ? (width * 0.35 - width / 3.5) /
                                                     2
-                                                : (width * 0.35 -
-                                                        width / 3.75) /
-                                                    2,
+                                                : (width * 0.35 - width / 3.75) / 2,
                                         child: avatarAndComment())
                                     : SizedBox(),
                               ])
@@ -613,8 +611,8 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                 height: width < 1100
                     ? height / 4
                     : width < 1600
-                        ? height / 4
-                        : height / 5,
+                        ? height / 5
+                        : height / 6,
                 width: width < 1100
                     ? width / 4.5
                     : width < 1600

@@ -112,260 +112,121 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
     return buildTabletUi(context);
   }
 
-  Widget buildTabletUi(constraints) {
-    return StatefulBuilder(
-      builder: (BuildContext context, 
-          void Function(void Function()) setState) {
-        return LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) { 
-            return Column(
-              children: [
-               /* Padding(
-                  padding: EdgeInsets.only(
-                      left: constraints.maxWidth < 500
-                          ? 10
-                          : constraints.maxWidth < 900
-                          ? constraints.maxWidth / 20
-                          : constraints.maxWidth < 1300
-                          ? constraints.maxWidth / 15
-                          : constraints.maxWidth / 8,
-                      right: constraints.maxWidth < 500
-                          ? 10
-                          : constraints.maxWidth < 900
-                          ? constraints.maxWidth / 20
-                          : constraints.maxWidth < 1300
-                          ? constraints.maxWidth / 15
-                          : constraints.maxWidth / 8),
-                  child: Column(
+  Widget buildTabletUi(context) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: Container(
+            color: notifier.redcolor,
+            child: Padding(
+              padding: EdgeInsets.only(left: 30, right: 30, bottom: 20, top: 20),
+              child: Row(
+                children: [
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        StaticView.buildLogo(),
-                                        //ImageManager().getPngImage(ImageManager.logo, height: Dimens.size35),
-                                        const SizedBox(width: 5),
-                                        Text(
-                                          L10nX.getStr.app_name,
-                                          style: baseStyle.copyWith(
-                                            color: notifier.blackcolor,
-                                            fontSize: 24,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(L10nX.getStr.subcribe_to_our_news_letter,
-                                      style: baseStyle.copyWith(
-
-                                          color: notifier.blackcolor)),
-                                  const SizedBox(height: 20),
-                                  SizedBox(
-                                    height: 60,
-                                    width: 300,
-                                    child: TextField(
-                                      style: baseStyle.copyWith(color: notifier.blackcolor),
-                                      decoration: InputDecoration(
-                                        disabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(25),
-                                          borderSide: BorderSide(
-                                              width: 1,
-                                              color: notifier.isDark
-                                                  ? const Color(0xFF353945)
-                                                  : const Color(0xFFE6E8EC)),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(25),
-                                          borderSide: BorderSide(
-                                              width: 2,
-                                              color: notifier.isDark
-                                                  ? const Color(0xFF353945)
-                                                  : const Color(0xFFE6E8EC)),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(25),
-                                          borderSide: BorderSide(
-                                              width: 1, color: notifier.subgreycolor),
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(25),
-                                          borderSide: BorderSide(
-                                              width: 1,
-                                              color: notifier.isDark
-                                                  ? const Color(0xFF23262F)
-                                                  : const Color(0xFFE6E8EC)),
-                                        ),
-                                        suffixIcon: InkWell(
-                                          onTap: () {},
-                                          onHover: (value) {
-                                            setState(() {
-                                              tfHover = value;
-                                            });
-                                          },
-                                          child: AnimatedContainer(
-                                            width: 70,
-                                            height: 40,
-                                            duration: const Duration(milliseconds: 200),
-                                            margin: const EdgeInsets.only(right: 5),
-                                            decoration: BoxDecoration(
-                                              color: tfHover
-                                                  ? Color.fromRGBO(134, 16, 14, 1.0)
-                                                  : notifier.redcolor,
-                                              borderRadius: BorderRadius.circular(20),
-                                            ),
-                                            alignment: Alignment.center,
-                                            child: Text(L10nX.getStr.send,
-                                                style: baseStyle.copyWith(
-
-                                                    color: Colors.white,
-                                                    fontSize: 16)),
-                                          ),
-                                        ),
-                                        hintText: L10nX.getStr.enter_your_email,
-                                        hintStyle: baseStyle.copyWith(
-
-                                            color: notifier.subgreycolor),
-                                      ),
+                      SizedBox(
+                        height: 40,
+                        // width: 300,
+                        child: ListView.builder(
+                          itemCount: logos.length,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Row(
+                              children: [
+                                Container(
+                                  height: 40,
+                                  padding: const EdgeInsets.all(6),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: notifier.whitecolor,
                                     ),
                                   ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          const SizedBox(),
-                        ],
+                                  child: SvgPicture.asset(notifier.isDark ? logos[index] : logos[index],color: Colors.white,
+                                      height: 20),
+                                ),
+                                const SizedBox(width: 10),
+                              ],
+                            );
+                          },
+                        ),
                       ),
-                      Divider(
-                        color: notifier.isDark
-                            ? notifier.subgreycolor
-                            : notifier.sugestionbutton,
+                      Text('Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services Powered by ${L10nX.getStr.app_name}',
+                        style: TextStyleConstant.bodyMedium.copyWith(
+                            color: notifier.whitecolor),
                       ),
                     ],
-                  )),*/
-                Container(
-                  color: notifier.redcolor,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 30, right: 30, top: 30, bottom: 0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 40,
-                                // width: 300,
-                                child: ListView.builder(
-                                  itemCount: logos.length,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    return StatefulBuilder(
-                                      builder: (BuildContext context, void Function(void Function()) setState) {
-                                        return Row(
-                                          children: [
-                                            Container(
-                                              height: 40,
-                                              padding: const EdgeInsets.all(6),
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                  color: notifier.whitecolor,
-                                                ),
-                                              ),
-                                              child: SvgPicture.asset(notifier.isDark ? logos[index] : logos[index],color: Colors.white,
-                                                  height: 20),
-                                            ),
-                                            const SizedBox(width: 10),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  },
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                              Text( (constraints.maxWidth < 950 && constraints.maxWidth > 550)
-                                  ? 'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services  \n Powered by ${L10nX.getStr.app_name}'
-                                  : 'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services Powered by ${L10nX.getStr.app_name}',
-                                style: TextStyleConstant.bodySmall.copyWith(
-                                    color: notifier.whitecolor),
-                              ),
-                              const SizedBox(height: 20),
-
-                            ],
-                          ),
-                        ),
-
-                        Expanded(
-                          child: Container(
-                              padding: const EdgeInsets.all(12.0),
-                              margin: const EdgeInsets.only(left: 12.0),
-                              decoration:BoxDecoration(
-                                  border: Border(
-                                      left: BorderSide(
-                                        color: notifier.subgreycolor,
-                                      )
-                                  )
-                              ),
-                              height: 200,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  buildContactInfoItem(
-                                      textColor: Colors.white,
-                                      contacts: contacts[0],
-                                      icon: contactsImage[0]
-                                  ),
-                                  SizedBox(height: 20,),
-                                  buildContactInfoItem(
-                                      textColor: Colors.white,
-                                      contacts: contacts[1],
-                                      icon: contactsImage[1]
-                                  ),
-                                  SizedBox(height: 20,),
-                                  buildContactInfoItem(
-                                      textColor: Colors.white,
-                                      contacts: contacts[2],
-                                      icon: contactsImage[2]
-                                  ),
-                                  SizedBox(height: 20,),
-                                ],
-                              )),
-                        ),
-                      ],
-                    ),
                   ),
-                ),
-              ],
-            );
-          },
-        );
-    },
+                  Spacer(),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      buildContactInfoItem(
+                          textColor: Colors.white,
+                          contacts: contacts[0],
+                          icon: contactsImage[0]
+                      ),
+                      SizedBox(width: 20,),
+                      buildContactInfoItem(
+                          textColor: Colors.white,
+                          contacts: contacts[1],
+                          icon: contactsImage[1]
+                      ),
+                      SizedBox(width: 20,),
+                      buildContactInfoItem(
+                          textColor: Colors.white,
+                          contacts: contacts[2],
+                          icon: contactsImage[2]
+                      ),
+                      SizedBox(width: 20,),
+                    ],
+                  ),
+                  // SizedBox(
+                  //   height: 40,
+                  //   // width: 300,
+                  //   child: ListView.builder(
+                  //     itemCount: logos.length,
+                  //     shrinkWrap: true,
+                  //     scrollDirection: Axis.horizontal,
+                  //     itemBuilder: (context, index) {
+                  //       return Row(
+                  //         children: [
+                  //           Container(
+                  //             height: 40,
+                  //             padding: const EdgeInsets.all(6),
+                  //             decoration: BoxDecoration(
+                  //               shape: BoxShape.circle,
+                  //               border: Border.all(
+                  //                 color: notifier.whitecolor,
+                  //               ),
+                  //             ),
+                  //             child: SvgPicture.asset(notifier.isDark ? logos[index] : logos[index],color: Colors.white,
+                  //                 height: 20),
+                  //           ),
+                  //           const SizedBox(width: 10),
+                  //         ],
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
+                  SizedBox(width: 50),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
   Widget buildMobileUi(constraints) {
     return StatefulBuilder(
       builder: (BuildContext context, void Function(void Function()) setState) {
       return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) { 
+        builder: (BuildContext context, BoxConstraints constraints) {
           return Column(
             children: [
               Padding(
@@ -449,7 +310,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             return StatefulBuilder(
-                              builder: (BuildContext context, void Function(void Function()) setState) { 
+                              builder: (BuildContext context, void Function(void Function()) setState) {
                                 return Row(
                                   children: [
                                     Container(
@@ -491,26 +352,20 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
     );
   }
   static Widget buildContactInfoItem({required String contacts, required String icon, required Color textColor}){
-    return StatefulBuilder(
-      builder: (BuildContext context, void Function(void Function()) setState) {  
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4),
-          child: Row(
-            children: [
-              SvgPicture.asset(icon, height: 20, color: textColor,),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(contacts,
-                  style: TextStyleConstant.bodyMedium.copyWith(
-                      color: textColor,
-                  ),
-                  maxLines: 10,
-                ),
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          SvgPicture.asset(icon, height: 20, color: textColor,),
+          const SizedBox(width: 10),
+          Text(contacts,
+            style: TextStyleConstant.bodyMedium.copyWith(
+                color: textColor,
+            ),
+            maxLines: 10,
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 

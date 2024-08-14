@@ -261,6 +261,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "i_haven_t_account":
             MessageLookupByLibrary.simpleMessage("I haven\'t account"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
+        "image_str": MessageLookupByLibrary.simpleMessage("Image"),
         "infinite": MessageLookupByLibrary.simpleMessage("Infinite"),
         "info": MessageLookupByLibrary.simpleMessage("Info"),
         "introduction_str":
@@ -599,6 +600,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "tabs": MessageLookupByLibrary.simpleMessage("Tabs"),
         "tags": MessageLookupByLibrary.simpleMessage("Tags"),
+        "tags_select": MessageLookupByLibrary.simpleMessage("Select tag"),
         "target": MessageLookupByLibrary.simpleMessage("Target"),
         "teacher_list": MessageLookupByLibrary.simpleMessage(" Teacher list"),
         "teacher_review_list_str":

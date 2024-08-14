@@ -194,10 +194,10 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           key: navigationKey[0],
         ),
         (width > 550) ? buildTabBar(constraints: constraints) : SizedBox(),
-        Visibility(
-          visible: width > 550,
-          child: buildNavigatorBar(),
-        ),
+        // Visibility(
+        //   visible: width > 550,
+        //   child: buildNavigatorBar(),
+        // ),
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: constraints.maxWidth < 760
@@ -293,6 +293,15 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                         //         ),
                         //       )),
                         // )
+                        Positioned(
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            child: Visibility(
+                              visible: width > 550,
+                              child: buildNavigatorBar(),
+                            ),
+                          ),
+                        )
                       ],
                     );
                   });

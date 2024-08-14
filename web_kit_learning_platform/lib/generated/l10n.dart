@@ -5499,6 +5499,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Image`
+  String get image_str {
+    return Intl.message(
+      'Image',
+      name: 'image_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select tag`
+  String get tags_select {
+    return Intl.message(
+      'Select tag',
+      name: 'tags_select',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
