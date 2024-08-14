@@ -226,7 +226,8 @@ class CourseItem extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Spacer(),
+                          // Spacer(),
+                          Gap(Dimens.size16),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment:

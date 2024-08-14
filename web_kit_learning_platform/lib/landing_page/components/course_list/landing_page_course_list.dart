@@ -128,7 +128,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                       listOfCourse.add(CourseItem(constraints: constraints, courseInfo: courseLandingPageInfo));
                     }
                     return SizedBox(
-                      height: 650,
+                      height: 620,
                       child: Center(
                         child: ListView(
                           shrinkWrap: true,
