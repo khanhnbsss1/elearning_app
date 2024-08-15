@@ -470,9 +470,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: Colors.black.withOpacity(0.1),
-                )),
+            ),
             width: 400,
             child: Padding(
               padding: const EdgeInsets.all(8.0),

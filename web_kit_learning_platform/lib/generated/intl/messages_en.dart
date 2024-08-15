@@ -719,7 +719,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "who_this_course_is_for":
             MessageLookupByLibrary.simpleMessage("Who is this course for ?"),
         "who_this_course_is_for_comment": MessageLookupByLibrary.simpleMessage(
-            "Study at YAX Chinese learning platform, you will find \"Speaking Chinese is as easy as eating candy\""),
+            "Study at YAX Chinese, you will find \"Speaking Chinese is as easy as eating candy\""),
         "who_this_course_is_for_subtitle":
             MessageLookupByLibrary.simpleMessage("Find the place for you!"),
         "who_this_course_is_for_table_content_1":
