@@ -38,6 +38,7 @@ class CourseItemGridView extends StatelessWidget {
       },
       child: SizedBox(
         height: 270,
+        width: 300,
         child: StatefulBuilder(
           builder: (BuildContext context, void Function(void Function()) setState) {
             return LayoutBuilder(
@@ -73,25 +74,32 @@ class CourseItemGridView extends StatelessWidget {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                ClipRRect(
-                                    borderRadius: BorderRadius.circular(16),
-                                    child: Image.network(
-                                      courseInfo.image!.isNotEmpty
-                                          ? courseInfo.image!
-                                          : 'assets/deshboard/adventure/adventure5.png',
-                                      fit: BoxFit.cover,
-                                      width: constraints.maxWidth * 0.9,
-                                      height: constraints.maxWidth * 0.5,
-                                      errorBuilder:
-                                          (context, error, stackTrace) {
-                                        return Image.network(
-                                          'assets/deshboard/adventure/adventure5.png',
-                                          fit: BoxFit.cover,
-                                          width: constraints.maxWidth * 0.9,
-                                          height: constraints.maxWidth * 0.5,
-                                        );
-                                      },
-                                    )),
+                                SizedBox(
+                                  height: 120,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(16),
+                                            child: Image.network(
+                                              courseInfo.image!.isNotEmpty
+                                                  ? courseInfo.image!
+                                                  : 'assets/deshboard/adventure/adventure5.png',
+                                              fit: BoxFit.cover,
+                                              //height: 120,
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Image.network(
+                                                  'assets/deshboard/adventure/adventure5.png',
+                                                  fit: BoxFit.cover,
+                                                  //height: 150,
+                                                );
+                                              },
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

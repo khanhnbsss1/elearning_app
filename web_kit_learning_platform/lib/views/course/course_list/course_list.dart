@@ -270,87 +270,90 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
   }
 
   Widget buildCourseList({required CourseListState state, required BoxConstraints boxConstraints}) {
-    List<Widget> listOfCourse = List.empty(growable: true);
+    return LayoutBuilder(builder: (context, constraints) {
+      List<Widget> listOfCourse = List.empty(growable: true);
 
-    bool? enableEdit = state.userProfile?.getPermission().contains("");
-    double maxWidthItem = 300;
-    double heightOfItem = 270;
-    int numberRow = (boxConstraints.maxWidth / maxWidthItem).toInt();
-    double widthItem = (boxConstraints.maxWidth - (50 * numberRow)) / numberRow;
-    for (CourseInfo courseInfo in state.courseResponseModel?.content ?? []) {
-      listOfCourse.add(CourseItemGridView(
-        courseInfo: courseInfo,
-        enableEdit: enableEdit,
-        onDelete: (p0) {},
-        onEdit: (p0) {
-          CreateEditCourse(
-            coursePageType: CoursePageType.edit,
-            courseInfo: p0,
-          ).show(context);
-        },
-        onViewDetail: (p0) {
-          CoursePreview(
-            courseInfo: courseInfo,
-          ).show(context);
-        },
-        onStudy: (p0) {
-          CourseStudy1(
-            courseInfo: courseInfo,
-          ).show(context);
-        },
-      ));
-    }
+      bool? enableEdit = state.userProfile?.getPermission().contains("");
+      double maxWidthItem = 300;
+      double heightOfItem = 280;
+      int numberRow = (constraints.maxWidth ~/ (maxWidthItem+40));
+      double widthItem = maxWidthItem;
+      for (CourseInfo courseInfo in state.courseResponseModel?.content ?? []) {
+        listOfCourse.add(CourseItemGridView(
+          courseInfo: courseInfo,
+          enableEdit: enableEdit,
+          onDelete: (p0) {},
+          onEdit: (p0) {
+            CreateEditCourse(
+              coursePageType: CoursePageType.edit,
+              courseInfo: p0,
+            ).show(context);
+          },
+          onViewDetail: (p0) {
+            CoursePreview(
+              courseInfo: courseInfo,
+            ).show(context);
+          },
+          onStudy: (p0) {
+            CourseStudy1(
+              courseInfo: courseInfo,
+            ).show(context);
+          },
+        ));
+      }
 
-    switch (state.blocStatus) {
-      case null:
-      // TODO: Handle this case.
-      case CourseStatus.initial:
-      // TODO: Handle this case.
-      case CourseStatus.onLoading:
-      // TODO: Handle this case.
-      case CourseStatus.onSearchByParams:
+      switch (state.blocStatus) {
+        case null:
         // TODO: Handle this case.
-        return Center(child: CircularProgressIndicator());
-      case CourseStatus.onLoadEnd:
+        case CourseStatus.initial:
         // TODO: Handle this case.
-        double width = MediaQuery.of(context).size.width;
-        return (listOfCourse.isEmpty)
-            ? Center(child: NoData())
-            : Align(
-                alignment: Alignment.topLeft,
-                child: Scrollbar(
-                  controller: scrollController,
-                  thickness: ResponsiveInfo.isPhone()?5: 15,
-                  radius: Radius.circular(0),
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 16.0, left: 16, right: 16),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child: numberRow>1?GridView.count(
-                              //padding: const EdgeInsets.all(20),
-                              controller: scrollController,
-                              crossAxisSpacing: 24,
-                              childAspectRatio: (widthItem) / (heightOfItem) - 0.1,
-                              mainAxisSpacing: 24,
-                              crossAxisCount: numberRow,
-                              shrinkWrap: true,
-                              children: listOfCourse,
-                            ): ListView(
-                              shrinkWrap: true,
-                              controller: scrollController,
-                              scrollDirection: Axis.vertical,
-                              children: listOfCourse,
-                            ),
-                          ),
+        case CourseStatus.onLoading:
+        // TODO: Handle this case.
+        case CourseStatus.onSearchByParams:
+        // TODO: Handle this case.
+          return Center(child: CircularProgressIndicator());
+        case CourseStatus.onLoadEnd:
+        // TODO: Handle this case.
+          double width = MediaQuery.of(context).size.width;
+          return (listOfCourse.isEmpty)
+              ? Center(child: NoData())
+              : Align(
+            alignment: Alignment.topLeft,
+            child: Scrollbar(
+              controller: scrollController,
+              thickness: ResponsiveInfo.isPhone()?5: 15,
+              radius: Radius.circular(0),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 16.0, left: 16, right: 16),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: numberRow>1?GridView.count(
+                          //padding: const EdgeInsets.all(20),
+                          controller: scrollController,
+                          crossAxisSpacing: 16,
+                          childAspectRatio: (widthItem) / (heightOfItem) ,
+                          mainAxisSpacing: 16,
+                          crossAxisCount: numberRow,
+                          shrinkWrap: true,
+                          children: listOfCourse,
+                        ): ListView(
+                          shrinkWrap: true,
+                          controller: scrollController,
+                          scrollDirection: Axis.vertical,
+                          children: listOfCourse,
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              );
-    }
+              ),
+            ),
+          );
+      }
+    },);
+
   }
 }
