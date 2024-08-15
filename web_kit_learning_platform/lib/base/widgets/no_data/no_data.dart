@@ -5,9 +5,10 @@ class NoData extends StatelessWidget {
 
   String? title;
   double? height;
-  double? width;
+  double? size;
   TextAlign? textAlign;
-   NoData({super.key, this.title, this.height,this.width, this.textAlign});
+  Widget? icon;
+   NoData({super.key, this.title, this.height,this.size, this.textAlign, this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +20,12 @@ class NoData extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            width: width,
+            width: size,
               height: height,
-              child: Icon(Icons.note_alt_outlined, size: width?? Dimens.size80,)),
+              child: SizedBox(
+                width: size?? Dimens.size80,
+                  height: size?? Dimens.size80,
+                  child: icon??Icon(Icons.note_alt_outlined, size: size?? Dimens.size80,))),
            Gap(Dimens.size16),
           Text(
               title!,

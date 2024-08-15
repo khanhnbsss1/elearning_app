@@ -20,7 +20,7 @@ class GetLessonListApi extends BaseApiRequest {
     }
     else
     {
-      LessonListResponseModel paymentHistoryResponseModel = LessonListResponseModel.fromList(result);
+      LessonListResponseModel paymentHistoryResponseModel = LessonListResponseModel.fromJson(result);
       return paymentHistoryResponseModel;
     }
   }

@@ -132,9 +132,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
                             MySpacing.height(16),
                             buildLectureMode(context: context),
                             MySpacing.height(16),
-                            Visibility(
-                              visible: state.lessonInfo?.id!=null,
-                                child: buildLectureWords(context: context, state: state)),
+                            buildLectureWords(context: context, state: state),
                             MySpacing.height(16),
                           ],
                         ),

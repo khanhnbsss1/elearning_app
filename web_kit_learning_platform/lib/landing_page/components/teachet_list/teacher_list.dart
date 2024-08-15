@@ -155,8 +155,10 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
                     children: [
                       Center(
                         child: Text(L10nX.getStr.teacher_list,
-                            style: TextStyleConstant.titleLarge
+                            style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
                                 .copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontSize: constraints.maxWidth < 550 ? 28 : 45,
                                 color: notifier.blackcolor)),
                       ),
                       SizedBox(

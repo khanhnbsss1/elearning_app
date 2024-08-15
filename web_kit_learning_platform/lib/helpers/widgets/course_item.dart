@@ -27,18 +27,15 @@ class CourseItem extends StatelessWidget {
         return OnHoverWidget(
           builder: (isHovered) {
             return Padding(
-              padding: (constraints.maxWidth < 550)
-                  ? EdgeInsets.only(right: 4.0)
-                  : (constraints.maxWidth < 800)
-                      ? EdgeInsets.only(right: 8)
-                      : EdgeInsets.only(right: 16),
+              padding:  EdgeInsets.only(right: 16),
               child: Card(
                 color: isHovered && !notifier.isDark
                     ? ColorConst.onHoverColor
                     : isHovered && notifier.isDark
                         ? ColorConst.backGroundColor
                         : notifier.whitecolor,
-                elevation: 5,
+                elevation: 2,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16),),
                 child: Container(
                   decoration: BoxDecoration(
                     color: isHovered && !notifier.isDark
@@ -48,88 +45,63 @@ class CourseItem extends StatelessWidget {
                             : notifier.whitecolor,
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  width: constraints.maxWidth / (3 + 0.3),
-                  constraints: BoxConstraints(
-                    maxHeight: (constraints.maxWidth < 550)
-                        ? 650
-                        : (constraints.maxWidth < 1100)
-                            ? 850
-                            : (constraints.maxWidth < 1300)
-                                ? 900
-                                : 1300,
-                    minWidth: constraints.maxWidth < 576
-                        ? constraints.maxWidth - 8
-                        : 350,
-                  ),
+                  width: 320,
                   clipBehavior: Clip.hardEdge,
                   child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      padding: EdgeInsets.all(12.0),
+                      padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
                             width: 2,
-                            color:
-                                (isHovered) ? Colors.red : notifier.whitecolor,
+                            color: (isHovered) ? Colors.red : notifier.whitecolor,
                           )),
                       child: Column(
-                        mainAxisSize: MainAxisSize.min,
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          (courseInfo.image!.isNotEmpty)
-                              ? SizedBox(
-                                  height: 200,
+                         SizedBox(
+                                  height: 120,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(16),
-                                    child: Image.network(
-                                      courseInfo.image!,
-                                      //"https://docs.flutter.dev/assets/images/dash/dash-fainting.gif",
-                                      fit: BoxFit.contain,
-                                      //width: constraints.maxWidth * 2,
-                                      //  height: constraints.maxWidth
-                                    ),
-                                  ),
-                                )
-                              : SizedBox(
-                                  height: 200,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(16),
-                                    child: Image.asset(
+                                    child: Row(
+                                      children: [Expanded(
+                                          child:
+                                    (courseInfo.image!.isNotEmpty)?
+                                          Image.network(
+                                            courseInfo.image!,
+                                            fit: BoxFit.cover,
+                                            //width: constraints.maxWidth * 2,
+                                            //  height: constraints.maxWidth
+                                          ):
+                                    Image.asset(
                                       'assets/deshboard/adventure/adventure5.png',
-                                      fit: BoxFit.contain,
+                                      fit: BoxFit.cover,
                                       width: constraints.maxWidth,
                                       //height: constraints.maxHeight
+                                    ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
                           Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const SizedBox(height: 8),
-                                  Container(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      '${courseInfo.name}',
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyleConstant.titleMedium
-                                          .copyWith(color: Colors.red),
-                                      textAlign: TextAlign.center,
-                                      maxLines: 2,
-                                    ),
-                                  ),
-                                ],
+                              Gap(Dimens.size8),
+                              Text(
+                                '${courseInfo.name}',
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyleConstant.textStyleBlack18w600
+                                    .copyWith(color: Colors.red),
+                                textAlign: TextAlign.center,
+                                maxLines: 2,
                               ),
-                              (constraints.maxWidth < 1100)
-                                  ? Gap(Dimens.size4)
-                                  : Gap(Dimens.size16),
+                              Gap(Dimens.size16),
                               Container(
-                                height:
-                                    (constraints.maxWidth < 1300) ? 96 : 120,
+                                height: 60,
                                 alignment: Alignment.center,
                                 child: SingleChildScrollView(
                                   child: ReadMoreText(
@@ -148,29 +120,6 @@ class CourseItem extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                // Text(
-                                //   '${courseInfo.introduction} \n  \n \n \n!' ??
-                                //       "",
-                                //   maxLines: (constraints.maxWidth < 550) ? 2 : (constraints.maxWidth < 1100) ? 3 : 4,
-                                //   overflow:
-                                //   TextOverflow.ellipsis,
-                                //   style: TextStyleConstant
-                                //       .textStyleBlack16w400
-                                //       .copyWith(
-                                //     fontSize: (constraints.maxWidth < 900) ? Dimens.size16
-                                //         : (constraints.maxWidth < 1100) ? Dimens.size18
-                                //         : Dimens.size20,
-                                //     color: notifier.isDark &&
-                                //         isHovered
-                                //         ? notifier.whitecolor
-                                //         : notifier.isDark &&
-                                //         !isHovered
-                                //         ? notifier
-                                //         .blackcolor
-                                //         : notifier
-                                //         .blackcolor,
-                                //   ),
-                                // ),
                               ),
                               Gap(Dimens.size16),
                               Row(
@@ -258,10 +207,7 @@ class CourseItem extends StatelessWidget {
                           ),
                           Gap(Dimens.size16),
                           Padding(
-                            padding: EdgeInsets.all(
-                                (constraints.maxWidth < 1100)
-                                    ? Dimens.size4
-                                    : Dimens.size16),
+                            padding: EdgeInsets.all(Dimens.size16),
                             child: Center(
                               child: ActionButton1(
                                 onTap: () {

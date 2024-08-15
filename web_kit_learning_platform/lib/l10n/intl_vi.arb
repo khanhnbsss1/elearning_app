@@ -553,5 +553,6 @@
   "quiz_update": "Cập nhật các câu hỏi",
   "quiz_str": "Các câu hỏi",
   "image_str": "Hình ảnh",
-  "tags_select": "Chọn thẻ"
+  "tags_select": "Chọn thẻ",
+  "not_access_permission": "Không có quyền truy cập !"
 }

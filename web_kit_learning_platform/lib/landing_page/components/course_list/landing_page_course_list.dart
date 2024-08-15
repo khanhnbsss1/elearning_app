@@ -68,10 +68,8 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
   Widget buildCourseList(
       {required BoxConstraints constraints, required LandingPageCourseListState state}) {
     int lengthOfView = (state.isExpand ?? false)
-        ? constraints.maxWidth < 1300
-            ? 6
-            : 8
-        : (state.courseListLandingPageResponseModel?.data ?? []).length;
+        ? constraints.maxWidth < 1300 ? 6
+            : 8 : (state.courseListLandingPageResponseModel?.data ?? []).length;
     if (lengthOfView >
         (state.courseListLandingPageResponseModel?.data ?? []).length) {
       lengthOfView =
@@ -99,9 +97,11 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
               Center(
                 child: Text(L10nX.getStr.courses_list,
                     style: TextStyleConstant
-                        .titleLarge
-                        .copyWith(
-                        color: ColorConst.blackColor)),
+                        .titleTextColorOnBackgroundColorStyle14w400
+                            .copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                            color: notifier.blackcolor)),
               ),
               Center(
                 child: Text(L10nX.getStr.register_to_enjoy_the_best_deals_for_you,
@@ -136,9 +136,9 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                           children: listOfCourse,
                         ),
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
               (constraints.maxWidth < 550) ? const SizedBox(height: 4) :const SizedBox(height: 16),
               Row(

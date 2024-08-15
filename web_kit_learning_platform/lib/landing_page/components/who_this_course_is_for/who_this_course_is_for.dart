@@ -76,8 +76,12 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                     (width > splitScreenWidth)
                         ? Center(
                             child: Text(L10nX.getStr.who_this_course_is_for,
-                                style: TextStyleConstant.titleLarge
-                                    .copyWith(color: ColorConst.blackColor)),
+                                textAlign: TextAlign.center,
+                                style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                                    .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                                    color: notifier.blackcolor)),
                           )
                         : SizedBox(),
                     (width > splitScreenWidth)
@@ -622,7 +626,10 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24),
-                  color: Colors.white,
+                  color: Colors.black12,
+                  // color: notifier.isDark
+                  //     ? Colors.transparent
+                  //     : const Color(0xFFF4F5F6),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(12),
@@ -634,21 +641,71 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                       // ),
                       Image.asset('assets/Icons/lightbulbicon.png',
                           height: width / 25, color: notifier.yellowcolor),
+                      const SizedBox(width: 15),
                       Expanded(
                         child: Text(
                           L10nX.getStr.who_this_course_is_for_comment,
-                          maxLines: 5,
+                          maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyleConstant.titleSmall.copyWith(
                             color: ColorConst.blackColor,
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 12,
+                      )
                     ],
                   ),
                 ),
-              );
-      },
+              ),
+              const SizedBox(height: 16),
+            ]),
+          )
+              : Container(
+            height: width < 1100
+                ? height / 4
+                : width < 1600
+                ? height / 4
+                : height / 5,
+            width: width < 1100
+                ? width / 4.5
+                : width < 1600
+                ? width / 3.5
+                : width / 3.75,
+            constraints: BoxConstraints(minWidth: 300),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(24),
+              color: Colors.white,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Row(
+                children: [
+                  // Image.asset(
+                  //   'assets/deshboard/avatar.png',
+                  //   height: width < 1100 ? width / 25 : width / 28,
+                  // ),
+                  Image.asset('assets/Icons/lightbulbicon.png',
+                      height: width / 25, color: notifier.yellowcolor),
+                  Expanded(
+                    child: Text(
+                      L10nX.getStr.who_this_course_is_for_comment,
+                      maxLines: 5,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyleConstant.titleSmall.copyWith(
+                        color: ColorConst.blackColor,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    },
     );
   }
 

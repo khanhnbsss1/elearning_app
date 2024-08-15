@@ -549,5 +549,6 @@
   "quiz_update": "更新问题",
   "quiz_str": "问题",
   "image_str": "图像",
-  "tags_select": "选择标签"
+  "tags_select": "选择标签",
+  "not_access_permission": "没有访问权限！"
 }

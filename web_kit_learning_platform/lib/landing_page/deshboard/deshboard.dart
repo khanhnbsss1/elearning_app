@@ -101,7 +101,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
   late double oldWidth = 0;
 
   List<GlobalObjectKey> navigationKey =
-      List.generate(8, (index) => GlobalObjectKey(index));
+      List.generate(9, (index) => GlobalObjectKey(index));
 
   @override
   Widget build(BuildContext context) {
@@ -319,7 +319,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
         ),
         SizedBox(
           key: navigationKey[1],
-          height: width < 550 ? 10 : 100,
+          height: width < 550 ? 24 : 100,
         ),
         buildDifferentListWidget(constraints: constraints),
         Padding(
@@ -330,12 +330,12 @@ class _LandingPageScreenState extends State<LandingPageScreen>
         ),
         SizedBox(
           key: navigationKey[2],
-          height: width < 550 ? 10 : 100,
+          height: width < 550 ? 50 : 100,
         ),
         WhoThisCourseIsFor(),
         SizedBox(
           key: navigationKey[3],
-          height: width < 550 ? 10 : 100,
+          height: width < 550 ? 50 : 100,
         ),
         const TeacherList(),
         Padding(
@@ -346,12 +346,12 @@ class _LandingPageScreenState extends State<LandingPageScreen>
         ),
         SizedBox(
           key: navigationKey[4],
-          height: width < 550 ? 10 : 100,
+          height: width < 550 ? 50 : 100,
         ),
         const LandingPageCourseList(),
         SizedBox(
           key: navigationKey[5],
-          height: width < 550 ? 10 : 100,
+          height: width < 550 ? 50 : 100,
         ),
         ReviewList(
           //key: UniqueKey(),
@@ -376,16 +376,18 @@ class _LandingPageScreenState extends State<LandingPageScreen>
         ),
         SizedBox(
           key: navigationKey[7],
-          height: width < 550 ? 10 : 100,
+          height: width < 550 ? 50 : 100,
         ),
         ReviewList(
           // key: UniqueKey(),
           typeName: UserTypeName.user,
         ),
         SizedBox(
-          height: 30,
+          key: navigationKey[8],
+          height: width < 550 ? 50 : 100,
         ),
         EndOfPage(),
+        
       });
     }
     return Stack(children: [
@@ -998,21 +1000,27 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                       children: [
                         TextSpan(
                           text: L10nX.getStr.differences_in_teaching_methods_1,
-                          style: TextStyleConstant.titleLarge.copyWith(
-                            color: ColorConst.blackColor,
-                          ),
+                          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                              .copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                              color: notifier.blackcolor),
                         ),
                         TextSpan(
                           text: L10nX.getStr.differences_in_teaching_methods_2,
-                          style: TextStyleConstant.titleLarge.copyWith(
-                            color: notifier.redcolor,
-                          ),
+                          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                              .copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                              color: notifier.redcolor)
                         ),
                         TextSpan(
                           text: L10nX.getStr.differences_in_teaching_methods_3,
-                          style: TextStyleConstant.titleLarge.copyWith(
-                            color: ColorConst.blackColor,
-                          ),
+                          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                              .copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                              color: notifier.blackcolor),
                         ),
                       ],
                     ),
@@ -1037,7 +1045,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                   maxWidth: ResponsiveInfo.isPhone()
                       ? constraints.maxWidth - Dimens.size20
                       : constraints.maxWidth * 3 / 4,
-                  maxHeight: constraints.maxWidth < 550 ? 250 : 300),
+                  maxHeight:  350),
               child: Column(
                 children: [
                   SingleChildScrollView(
@@ -1202,19 +1210,27 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                       children: [
                         TextSpan(
                           text: L10nX.getStr.why_choose_us_1,
-                          style: TextStyleConstant.titleLarge.copyWith(
-                            color: ColorConst.blackColor,
-                          ),
+                          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                              .copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                              color: notifier.blackcolor),
                         ),
                         TextSpan(
                           text: L10nX.getStr.why_choose_us_2,
-                          style: TextStyleConstant.titleLarge.copyWith(
+                          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                              .copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: constraints.maxWidth < 550 ? 28 : 45,
                             color: notifier.redcolor,
                           ),
                         ),
                         TextSpan(
                           text: L10nX.getStr.why_choose_us_3,
-                          style: TextStyleConstant.titleLarge.copyWith(
+                          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                              .copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: constraints.maxWidth < 550 ? 28 : 45,
                             color: ColorConst.blackColor,
                           ),
                         ),
@@ -1240,7 +1256,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                   maxWidth: ResponsiveInfo.isPhone()
                       ? constraints.maxWidth - Dimens.size20
                       : constraints.maxWidth * 3 / 4,
-                  maxHeight: constraints.maxWidth < 550 ? 250 : 300),
+                  maxHeight: 325),
               child: Column(
                 children: [
                   SingleChildScrollView(

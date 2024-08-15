@@ -247,26 +247,8 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                         : constraints.maxWidth / 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Row(
-                    //   children: [
-                    //     StaticView.buildLogo(),
-                    //     const SizedBox(width: 5),
-                    //     Text(
-                    //       L10nX.getStr.app_name,
-                    //       style: baseStyle.copyWith(
-                    //           color: notifier.blackcolor,
-                    //           fontSize: constraints.maxWidth < 300 ? 16 : 24),
-                    //     ),
-                    //   ],
-                    // ),
-                    const SizedBox(height: 30),
-                    Divider(
-                      color: notifier.isDark
-                          ? notifier.subgreycolor
-                          : notifier.sugestionbutton,
-                    ),
-                    const SizedBox(height: 30),
+                  children: const [
+                    SizedBox(height: 30),
                   ],
                 )),
               Container(
@@ -285,19 +267,19 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                               contacts: contacts[0],
                               icon: contactsImage[0]
                           ),
-                          SizedBox(height: 20,),
+                          SizedBox(height: 12,),
                           buildContactInfoItem(
                               textColor: Colors.white,
                               contacts: contacts[1],
                               icon: contactsImage[1]
                           ),
-                          SizedBox(height: 20,),
+                          SizedBox(height: 12,),
                           buildContactInfoItem(
                               textColor: Colors.white,
                               contacts: contacts[2],
                               icon: contactsImage[2]
                           ),
-                          SizedBox(height: 20,),
+                          SizedBox(height: 12,),
                         ],
                       ),
                       SizedBox(height: 8,),
