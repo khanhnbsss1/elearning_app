@@ -102,18 +102,16 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                       children: [
                         (width > splitScreenWidth)
                             ? Stack(children: [
-                                Flexible(
-                                  child: Container(
-                                    width: width * 0.35,
-                                    height: width * 0.35,
-                                    constraints: BoxConstraints(
-                                      minWidth: 450,
-                                      minHeight: 450,
-                                    ),
-                                    child: Image.asset(
-                                      'assets/deshboard/prof/prof4.png',
-                                      fit: BoxFit.contain,
-                                    ),
+                                Container(
+                                  width: width * 0.35,
+                                  height: width * 0.35,
+                                  constraints: BoxConstraints(
+                                    minWidth: 450,
+                                    minHeight: 450,
+                                  ),
+                                  child: Image.asset(
+                                    'assets/deshboard/prof/prof4.png',
+                                    fit: BoxFit.contain,
                                   ),
                                 ),
                                 (constraints.maxWidth > splitScreenWidth)
