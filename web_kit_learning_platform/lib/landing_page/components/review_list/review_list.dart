@@ -106,6 +106,7 @@ class _ReviewListState extends State<ReviewList>
                         state.typeName == UserTypeName.teacher
                             ? L10nX.getStr.teacher_review_list_str
                             : L10nX.getStr.student_review_list_str,
+                        textAlign: TextAlign.center,
                         style: TextStyleConstant
                             .titleTextColorOnBackgroundColorStyle14w400
                             .copyWith(

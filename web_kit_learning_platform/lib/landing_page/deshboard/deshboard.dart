@@ -244,55 +244,6 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                             );
                           },
                         ),
-                        // Positioned(
-                        //   top: 0,
-                        //   left: 0,
-                        //   right: 0,
-                        //   bottom: 100,
-                        //   child: Align(
-                        //       alignment: Alignment.bottomCenter,
-                        //       child: MouseRegion(
-                        //         onEnter: (_) =>
-                        //             setState(() => isHovered = true),
-                        //         onExit: (_) =>
-                        //             setState(() => isHovered = false),
-                        //         child: GestureDetector(
-                        //           child: AnimatedContainer(
-                        //             duration: Duration(milliseconds: 100),
-                        //             transform: Matrix4.identity()
-                        //               ..scale(isHovered ? 1.2 : 1.0),
-                        //             child: TextButton(
-                        //               onPressed: () {
-                        //                 userProfile == null
-                        //                     ? LoginPage().show(context)
-                        //                     : AppPages.routeName(
-                        //                         Routes.dashboardRoute);
-                        //               },
-                        //               style: TextButton.styleFrom(
-                        //                 backgroundColor:
-                        //                     ColorConst.mainColor,
-                        //                 foregroundColor:
-                        //                     ColorConst.whiteColor,
-                        //               ),
-                        //               child: Text(
-                        //                 L10nX.getStr.lets_study,
-                        //                 style: TextStyle(
-                        //                   fontSize: 24,
-                        //                   color: Colors.white,
-                        //                 ),
-                        //                 // Text(
-                        //                 //   L10nX.getStr.slogan,
-                        //                 //   style: TextStyle(
-                        //                 //     fontSize: 24,
-                        //                 //     color: Colors.black,
-                        //                 //   ),
-                        //                 // ),
-                        //               ),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       )),
-                        // )
                         Positioned(
                           child: Align(
                             alignment: Alignment.topCenter,

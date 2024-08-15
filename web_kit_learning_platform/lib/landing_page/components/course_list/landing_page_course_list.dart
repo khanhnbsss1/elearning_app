@@ -101,8 +101,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                             .copyWith(
                             fontWeight: FontWeight.bold,
                             fontSize: constraints.maxWidth < 550 ? 28 : 45,
-                            color: notifier.blackcolor)),
-              ),
+                            color: notifier.blackcolor))),
               Center(
                 child: Text(L10nX.getStr.register_to_enjoy_the_best_deals_for_you,
                     textAlign: TextAlign.center,
@@ -128,7 +127,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                       listOfCourse.add(CourseItem(constraints: constraints, courseInfo: courseLandingPageInfo));
                     }
                     return SizedBox(
-                      height: 620,
+                      height: 500,
                       child: Center(
                         child: ListView(
                           shrinkWrap: true,
@@ -136,10 +135,9 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                           children: listOfCourse,
                         ),
                       ),
-                    ),
-                  );
+                    );
                 },
-              ),
+              )),
               (constraints.maxWidth < 550) ? const SizedBox(height: 4) :const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

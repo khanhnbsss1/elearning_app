@@ -534,95 +534,48 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
   }
 
   Widget avatarAndComment() {
-    return StatefulBuilder(
-      builder: (BuildContext context, void Function(void Function()) setState) {
-        return (width < splitScreenWidth)
-            ? Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    // color: notifier.isDark
-                    //     ? Colors.transparent
-                    //     : const Color(0xFFF4F5F6),
-                    border: Border.all(
-                        color: notifier.isDark
-                            ? notifier.sugestionbutton
-                            : Colors.transparent)),
-                child: Column(children: [
-                  Center(
-                    child: Text(L10nX.getStr.who_this_course_is_for,
-                        style: TextStyleConstant.titleLarge
-                            .copyWith(color: ColorConst.blackColor)),
-                  ),
-                  Center(
-                    child: Text(L10nX.getStr.who_this_course_is_for_subtitle,
-                        style: TextStyleConstant.titleSmall
-                            .copyWith(color: ColorConst.blackColor)),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Image.asset(
-                    'assets/deshboard/prof/prof4.png',
-                    fit: BoxFit.fill,
-                    width: width * 0.6,
-                    height: width * 0.6,
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Container(
-                    width: width / 1.5,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(24),
-                      color: Colors.black12,
-                      // color: notifier.isDark
-                      //     ? Colors.transparent
-                      //     : const Color(0xFFF4F5F6),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Row(
-                        children: [
-                          // Image.asset(
-                          //   'assets/deshboard/avatar.png',
-                          //   height: width < 1100 ? width / 25 : width / 28,
-                          // ),
-                          Image.asset('assets/Icons/lightbulbicon.png',
-                              height: width / 25, color: notifier.yellowcolor),
-                          const SizedBox(width: 15),
-                          Expanded(
-                            child: Text(
-                              L10nX.getStr.who_this_course_is_for_comment,
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyleConstant.titleSmall.copyWith(
-                                color: ColorConst.blackColor,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 12,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                ]),
-              )
-            : Container(
-                height: width < 1100
-                    ? height / 4
-                    : width < 1600
-                        ? height / 5
-                        : height / 6,
-                width: width < 1100
-                    ? width / 4.5
-                    : width < 1600
-                        ? width / 3.5
-                        : width / 3.75,
-                constraints: BoxConstraints(minWidth: 300),
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) { 
+      return  StatefulBuilder(
+        builder: (BuildContext context, void Function(void Function()) setState) {
+          return (width < splitScreenWidth)
+              ? Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                // color: notifier.isDark
+                //     ? Colors.transparent
+                //     : const Color(0xFFF4F5F6),
+                border: Border.all(
+                    color: notifier.isDark
+                        ? notifier.sugestionbutton
+                        : Colors.transparent)),
+            child: Column(children: [
+              Center(
+                child: Text(L10nX.getStr.who_this_course_is_for,
+                    style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                        .copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                        color: ColorConst.blackColor)),
+              ),
+              Center(
+                child: Text(L10nX.getStr.who_this_course_is_for_subtitle,
+                    style: TextStyleConstant.titleSmall
+                        .copyWith(color: ColorConst.blackColor45)),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Image.asset(
+                'assets/deshboard/prof/prof4.png',
+                fit: BoxFit.fill,
+                width: width * 0.6,
+                height: width * 0.6,
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              Container(
+                width: width / 1.5,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24),
@@ -666,8 +619,8 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
             height: width < 1100
                 ? height / 4
                 : width < 1600
-                ? height / 4
-                : height / 5,
+                ? height / 5
+                : height / 6,
             width: width < 1100
                 ? width / 4.5
                 : width < 1600
@@ -677,7 +630,10 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
-              color: Colors.white,
+              color: Colors.black12,
+              // color: notifier.isDark
+              //     ? Colors.transparent
+              //     : const Color(0xFFF4F5F6),
             ),
             child: Padding(
               padding: const EdgeInsets.all(12),
@@ -689,16 +645,20 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                   // ),
                   Image.asset('assets/Icons/lightbulbicon.png',
                       height: width / 25, color: notifier.yellowcolor),
+                  const SizedBox(width: 15),
                   Expanded(
                     child: Text(
                       L10nX.getStr.who_this_course_is_for_comment,
-                      maxLines: 5,
+                      maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyleConstant.titleSmall.copyWith(
                         color: ColorConst.blackColor,
                       ),
                     ),
                   ),
+                  SizedBox(
+                    height: 12,
+                  )
                 ],
               ),
             ),

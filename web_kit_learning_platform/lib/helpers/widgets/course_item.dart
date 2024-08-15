@@ -45,7 +45,7 @@ class CourseItem extends StatelessWidget {
                             : notifier.whitecolor,
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  width: 320,
+                  width: 350,
                   clipBehavior: Clip.hardEdge,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -111,7 +111,7 @@ class CourseItem extends StatelessWidget {
                                     colorClickableText: Colors.pink,
                                     trimCollapsedText: "  ${L10nX.getStr.show_more}",
                                     trimExpandedText: L10nX.getStr.show_less,
-                                    style: TextStyleConstant.bodyLarge.copyWith(
+                                    style: TextStyleConstant.textStyleBlack14w400.copyWith(
                                       color: notifier.isDark && isHovered
                                           ? notifier.whitecolor
                                           : notifier.isDark && !isHovered
@@ -137,7 +137,7 @@ class CourseItem extends StatelessWidget {
                                             Gap(Dimens.size8),
                                             Text('Số buổi học:',
                                                 style: TextStyleConstant
-                                                    .bodyLarge
+                                                    .textStyleBlack16w500
                                                     .copyWith(
                                                   fontWeight: FontWeight.bold,
                                                   color: notifier.isDark &&
@@ -158,7 +158,7 @@ class CourseItem extends StatelessWidget {
                                         children: [
                                           Text(
                                             '${courseInfo.totalLectures}',
-                                            style: TextStyleConstant.bodyLarge
+                                            style: TextStyleConstant.textStyleBlack16w500
                                                 .copyWith(
                                               color: notifier.isDark && isHovered
                                                   ? notifier.whitecolor
@@ -193,7 +193,7 @@ class CourseItem extends StatelessWidget {
                                 children: [
                                   Text(
                                       "${NumberHelper().numberToString(courseInfo.payment, decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
-                                      style: TextStyleConstant.titleSmall
+                                      style: TextStyleConstant.textStyleBlack16w500
                                           .copyWith(
                                         color: notifier.isDark && isHovered
                                             ? notifier.whitecolor
