@@ -328,6 +328,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_shadow": MessageLookupByLibrary.simpleMessage("Không có bóng"),
         "normal_sale_str":
             MessageLookupByLibrary.simpleMessage("Bán bình thường"),
+        "not_access_permission":
+            MessageLookupByLibrary.simpleMessage("Không có quyền truy cập !"),
         "not_connect_to_server": MessageLookupByLibrary.simpleMessage(
             "Không thể kết nối đến máy chủ"),
         "notifications": MessageLookupByLibrary.simpleMessage("Thông báo"),

@@ -331,6 +331,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_search_result": MessageLookupByLibrary.simpleMessage("No data"),
         "no_shadow": MessageLookupByLibrary.simpleMessage("No shadow"),
         "normal_sale_str": MessageLookupByLibrary.simpleMessage("Normal sale"),
+        "not_access_permission":
+            MessageLookupByLibrary.simpleMessage("No access permission!"),
         "not_connect_to_server":
             MessageLookupByLibrary.simpleMessage("Cannot connect to server"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),

@@ -277,6 +277,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_search_result": MessageLookupByLibrary.simpleMessage("没有数据"),
         "no_shadow": MessageLookupByLibrary.simpleMessage("无阴影"),
         "normal_sale_str": MessageLookupByLibrary.simpleMessage("正常销售"),
+        "not_access_permission":
+            MessageLookupByLibrary.simpleMessage("没有访问权限！"),
         "not_connect_to_server":
             MessageLookupByLibrary.simpleMessage("无法连接到服务器"),
         "notifications": MessageLookupByLibrary.simpleMessage("通知"),
