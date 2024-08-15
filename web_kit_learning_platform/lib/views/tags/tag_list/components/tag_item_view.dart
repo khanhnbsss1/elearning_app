@@ -5,6 +5,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
+import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 
 class TagItemView extends StatelessWidget {
   TagItemView({
@@ -95,49 +96,22 @@ class TagItemView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Gap(Dimens.size6),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: ColorConst.mainColor.withOpacity(0.02),
-                              borderRadius: BorderRadius.circular(Dimens.size40)
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(
-                              child: InkWell(
-                                onTap: () {
-                                  if(onEdit!=null) {
-                                    onEdit!(tagInfo);
-                                  }
-                                },
-                                child: Icon(Icons.edit, color: ColorConst.mainColor.withOpacity(0.5),size: Dimens.size20,),
-                              ),
-                            ),
-                          ),
+                        ItemViewEditDelete(
+                          itemInfo: tagInfo,
+                          enableView: false,
+                          onEdit: (p0) {
+                            if(onEdit!=null)
+                            {
+                              onEdit!(p0);
+                            }
+                          },
+                          onDelete: (p0) {
+                            if(onDelete!=null)
+                            {
+                              onDelete!(p0);
+                            }
+                          },
                         ),
-                        
-                        Gap(Dimens.size6),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: ColorConst.mainColor.withOpacity(0.02),
-                              borderRadius: BorderRadius.circular(Dimens.size40)
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(
-                              child: InkWell(
-                                onTap: () {
-                                  if(onDelete!=null) {
-                                    onDelete!(tagInfo);
-                                  }
-                                },
-                                child: Icon(Icons.delete, color: ColorConst.mainColor.withOpacity(0.5),size: Dimens.size20,),
-                              ),
-                            ),
-                          ),
-                        ),
-                        
-                        Gap(Dimens.size6),
                       ],
                     )
                   ],

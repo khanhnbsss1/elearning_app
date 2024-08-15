@@ -18,9 +18,9 @@ class TestListOnSearchByFilterEvent extends TestListEvent {
   @override
   List<Object?> get props => [searchCommonRequest];
 }
-class TestListOnSelectTagEvent extends TestListEvent {
+class TestListOnSelectTestEvent extends TestListEvent {
   TestInfo selectInfo;
-  TestListOnSelectTagEvent({required this.selectInfo} );
+  TestListOnSelectTestEvent({required this.selectInfo} );
   @override
   List<Object?> get props => [selectInfo];
 }

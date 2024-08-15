@@ -124,12 +124,12 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    NavigationItem(
+/*                    NavigationItem(
                       iconData: LucideIcons.layoutDashboard,
                       title: L10nX.getStr.dashboard,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
                       route: Routes.dashboardRoute,
-                    ),
+                    ),*/
                    // labelWidget(L10nX.getStr.apps),
                     //-----------------Course-----------------//
                     MenuWidget(
@@ -149,7 +149,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                         ),
                       ],
                     ),
-                    //-----------------VideoPlayer-----------------//
+/*                    //-----------------VideoPlayer-----------------//
                     MenuWidget(
                       iconData: Icons.video_collection_outlined,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
@@ -166,7 +166,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                           isCondensed: ThemeCustomizer().leftBarCondensed,
                         ),
                       ],
-                    ),
+                    ),*/
                     //-----------------Danh sach giao vien-----------------//
                     MenuWidget(
                       iconData: Icons.people,
@@ -221,17 +221,23 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                         ),
                       ],
                     ),
-                    //----------------Tu vung------------------//
-                    NavigationItem(
+                    //----------------Tu vung Khoa hoc------------------//
+                    MenuWidget(
                       iconData: CupertinoIcons.book_solid,
-                      title: L10nX.getStr.vocabulary_str,
-                      route: Routes.vocabularyList,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
-                      onPress: () {
-                        setState(() {
-                          ThemeCustomizer().leftBarCondensed= true;
-                        });
-                      },
+                      title: L10nX.getStr.vocabulary_str,
+                      children: [
+                        MenuItem(
+                          title: L10nX.getStr.lesson_str,
+                          route:  Routes.vocabularyListNoImage,
+                          isCondensed: ThemeCustomizer().leftBarCondensed,
+                        ),
+                        MenuItem(
+                          title: L10nX.getStr.simplified_str,
+                          route:  Routes.vocabularyListImage,
+                          isCondensed: ThemeCustomizer().leftBarCondensed,
+                        ),
+                      ],
                     ),
                     //----------------Bai hoc------------------//
                     NavigationItem(

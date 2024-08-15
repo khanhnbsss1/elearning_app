@@ -8,9 +8,10 @@ enum VocabularyStatus {
   onSelectWord
 }
 enum VocabularyType{
-  vocabularyList,
-  myVocabularyList
+  vocabularyNonImage,
+  vocabularyImage
 }
+
 
 @immutable
 class VocabularyListState extends Equatable {
@@ -28,7 +29,7 @@ class VocabularyListState extends Equatable {
   }){
     vocabularyResponseModel??= VocabularyResponseModel(content: []);
     searchCommonRequest??= SearchCommonRequest( pageNumber: 0, pageSize: 10, keyword: "");
-    vocabularyType??= VocabularyType.vocabularyList;
+    vocabularyType??= VocabularyType.vocabularyNonImage;
   }
 
 

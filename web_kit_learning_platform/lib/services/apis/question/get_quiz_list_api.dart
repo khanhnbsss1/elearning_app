@@ -2,7 +2,7 @@
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 
-import 'models/quiz_info.dart';
+import 'models/question_info.dart';
 
 
 class GetQuizListApi extends BaseApiRequest {
@@ -12,17 +12,17 @@ class GetQuizListApi extends BaseApiRequest {
     apiName: ApiName.getInstance().getQuizList,
   );
 
-  Future<QuizListResponseModel> call() async {
+  Future<QuestionListResponseModel> call() async {
     await getAuthorization();
     dynamic result = await getRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {
-      return QuizListResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
+      return QuestionListResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
     }
     else
     {
-      QuizListResponseModel model = QuizListResponseModel.fromList(result);
+      QuestionListResponseModel model = QuestionListResponseModel.fromList(result);
       return model;
     }
   }

@@ -1,11 +1,11 @@
 
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
+import 'package:webkit/services/apis/question/models/question_info.dart';
 
-import 'models/quiz_info.dart';
 
 
 class DeleteQuizApi extends BaseApiRequest {
-  QuizInfo info;
+  QuestionInfo info;
   DeleteQuizApi({required this.info}):super(
     serviceType: SERVICE_TYPE.QUIZ,
     apiName: ApiName.getInstance().deleteQuiz,

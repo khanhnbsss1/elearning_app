@@ -63,13 +63,17 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
       Emitter<CreateEditWordState> emit,
       ) async {
     
-    if((state.vocabularyInfo?.sentenceInfos??[]).isEmpty)
+    if((state.vocabularyInfo?.sentenceInfos??[]).isEmpty  )
       {
-        state.vocabularyInfo?.sentenceInfos = [];
-        state.vocabularyInfo?.sentenceInfos?.add(SentenceInfo(id: 0));
+        if(state.wordsPageActionType != WordsPageActionType.view)
+          {
+            state.vocabularyInfo?.sentenceInfos = [];
+            state.vocabularyInfo?.sentenceInfos?.add(SentenceInfo(id: 0));
+          }
       }
     emit(state.copyWith(
       blocStatus: CreateEditWordStatus.initial,
+      vocabularyInfo: state.vocabularyInfo
     ));
   }
 

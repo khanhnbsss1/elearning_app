@@ -1,6 +1,17 @@
 import 'package:webkit/base/services/base_request/models/page_model.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
 
+
+enum TestLevel{
+  easy,
+  normal,
+  hard
+}
+Map<TestLevel, String>mapTestLevelToStrKey={
+  TestLevel.easy:"easy",
+  TestLevel.normal:"normal",
+  TestLevel.hard:"difficulty",
+};
 class TestInfo {
   int? id;
   int? courseId;
@@ -16,7 +27,7 @@ class TestInfo {
   String? updatedAt;
   String? updatedBy;
   List<QuestionInfo>? quizDTOs;
-
+  
   TestInfo(
       {this.id,
         this.courseId,
@@ -71,8 +82,9 @@ class TestInfo {
     data['updated_at'] =updatedAt;
     data['updated_by'] =updatedBy;
     if (quizDTOs != null) {
-      data['quizDTOs'] =quizDTOs!.map((v) => v.toJson()).toList();
+      data['question_ids'] =quizDTOs!.map((e) => e.id,).toList().join(',');
     }
+    
     return data;
   }
 }

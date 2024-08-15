@@ -376,7 +376,8 @@
   "landing_page": "Landing page",
   "teacher_list": " Teacher list", 
   "courses_list": "Course list", 
-  "lesson_list": "Lesson list", 
+  "lesson_list": "Lesson list",
+  "lesson_str": "Lesson",
   "level_str": "Level",
   "teachers_teach_the_most":"Teachers who teach the most",
   "register_to_enjoy_the_best_deals_for_you":"Register to enjoy the best deals for you",
@@ -555,5 +556,16 @@
   "quiz_str": "Quizzes",
   "image_str": "Image",
   "tags_select": "Select tag",
-  "not_access_permission": "No access permission!"
+  "not_access_permission": "No access permission!",
+  "has_not_example": "There is no example",
+  "tags_list": "Tag list",
+  "test_name": "Test name",
+  "difficulty_str": "Difficult",
+  "normal_str": "Normal",
+  "easy_str": "Easy",
+  "common_info": "General information",
+  "time_str": "Time",
+  "choose_quest": "Search for questions",
+  "question_str": "Question",
+  "maximum_point": "Maximum score"
 }

@@ -1,12 +1,15 @@
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
+import 'package:webkit/services/apis/sentence/models/sentence_info.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/views/vocabulary/components/example_form.dart';
@@ -61,7 +64,10 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
     notifier = Provider.of<ColorNotifier>(context, listen: true);
     return BlocProvider(
         create: (context) {
-          return CreateEditWordBloc(CreateEditWordState(vocabularyInfo: widget.vocabularyInfo, ))..add(CreateEditWordInitEvent());
+          return CreateEditWordBloc(CreateEditWordState(
+            vocabularyInfo: widget.vocabularyInfo,
+            wordsPageActionType: widget.wordsPageActionType
+          ))..add(CreateEditWordInitEvent());
         },
         child: BlocConsumer<CreateEditWordBloc, CreateEditWordState>(listener: (context, state) {
           switch (state.blocStatus) {
@@ -149,7 +155,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                       constraints: constraints,
                                       myScreenMediaType: myScreenMediaType,
                                       enable: enable,
-                                      label: L10nX.getStr.upload_sound_file_str,
+                                      label: L10nX.getStr.sound_str,
                                       isLink: true,
                                       onUpload: () async {
                                         FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -175,7 +181,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                       constraints: constraints,
                                       enable: enable,
                                       myScreenMediaType: myScreenMediaType,
-                                      label: L10nX.getStr.upload_image_str,
+                                      label: L10nX.getStr.image_str,
                                       isLink: true,
                                       onUpload: () async {
                                         FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -194,7 +200,8 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                 height: 16,
                               ),
                               // box thêm ví dụ mới
-                              buildExamplesList(myScreenMediaType: myScreenMediaType, context: context),
+                              buildExamplesListForEdit(myScreenMediaType: myScreenMediaType, context: context, state: state),
+                              buildExamplesListForView(myScreenMediaType: myScreenMediaType, context: context, state: state),
                             ],
                           ),
                         ),
@@ -207,7 +214,9 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                 Visibility(
                                   visible: widget.wordsPageActionType != WordsPageActionType.view,
                                   child: ActionButton1(
-                                    text:widget.wordsPageActionType == WordsPageActionType.edit?L10nX.getStr.str_update: L10nX.getStr.create_str,
+                                    text:widget.wordsPageActionType ==
+                                        WordsPageActionType.edit?L10nX.getStr.str_update: 
+                                    L10nX.getStr.create_str,
                                     width: Dimens.size120,
                                     onTap: () {
                                       switch(widget.wordsPageActionType){
@@ -252,65 +261,108 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
         }));
   }
 
-  Widget buildExamplesList({required MyScreenMediaType myScreenMediaType, required BuildContext context}) {
-    return SizedBox(
-      width: double.infinity,
-      child: Container(
-        padding: EdgeInsets.all(16),
-        margin: EdgeInsets.all(8),
-        decoration: BoxDecoration(border: Border.all(color: ColorConst.blackColor, width: 0.5), borderRadius: BorderRadius.circular(20)),
+  Widget buildExamplesListForEdit({required MyScreenMediaType myScreenMediaType, required BuildContext context, required CreateEditWordState state}) {
+    return Visibility(
+      visible: widget.wordsPageActionType == WordsPageActionType.create || widget.wordsPageActionType== WordsPageActionType.edit,
+      child: SizedBox(
+        width: double.infinity,
+        child: Container(
+          padding: EdgeInsets.all(16),
+          margin: EdgeInsets.all(8),
+          decoration: BoxDecoration(border: Border.all(color: ColorConst.blackColor, width: 0.5), borderRadius: BorderRadius.circular(20)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  children: [
+                    Center(
+                      child: Text(L10nX.getStr.add_examples_str),
+                    ),
+                    ListView.builder(
+                      itemCount:(_state.vocabularyInfo?.sentenceInfos??[]).length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, exampleIndex) {
+                        return ExampleFrom(
+                          sentenceInfo:_state.vocabularyInfo?.sentenceInfos?.elementAt(exampleIndex),
+                          onRemoveSentenceInfo: (p0) {
+                            BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordOnRemoveSentenceEvent(sentenceInfo: p0));
+                          },
+                          onSaveSentenceInfo: (p0) {
+                            BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordOnSaveSentenceEvent(sentenceInfo: p0));
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              // nút thêm ví dụ mới
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordOnAddNewSentenceEvent());
+                    },
+                    child: Icon(
+                      Icons.add_circle_outline,
+                      color: ColorConst.mainColor,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+  Widget buildExamplesListForView({required MyScreenMediaType myScreenMediaType, required BuildContext context, required CreateEditWordState state}) {
+    return Visibility(
+      visible: widget.wordsPageActionType == WordsPageActionType.view,
+      child: SizedBox(
+        width: double.infinity,
         child: Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
-                    child: Text(L10nX.getStr.add_examples_str),
-                  ),
-                  ListView.builder(
-                    itemCount:(_state.vocabularyInfo?.sentenceInfos??[]).length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, exampleIndex) {
-                      return ExampleFrom(
-                        sentenceInfo:_state.vocabularyInfo?.sentenceInfos?.elementAt(exampleIndex),
-                        onRemoveSentenceInfo: (p0) {
-                          BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordOnRemoveSentenceEvent(sentenceInfo: p0));
-                        },
-                        onSaveSentenceInfo: (p0) {
-                          BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordOnSaveSentenceEvent(sentenceInfo: p0));
-                        },
-                      );
-                    },
+                  WidgetWithColumnTitleCommon(
+                    title: L10nX.getStr.examples_str,
+                    child: (_state.vocabularyInfo?.sentenceInfos??[]).isNotEmpty?ListView.builder(
+                      itemCount:(_state.vocabularyInfo?.sentenceInfos??[]).length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, exampleIndex) {
+                        SentenceInfo sentenceInfo = (_state.vocabularyInfo?.sentenceInfos??[]).elementAt(exampleIndex);
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                           // Text('${sentenceInfo.chineseSentence??''}(${sentenceInfo.pinyionSentence??''})'),
+                            Text('没有例子 (${'"没有例子"'})'),
+                            AudioSpeaker(url: sentenceInfo.audioLink??'')
+                          ],);
+                      },
+                    ):Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(L10nX.getStr.has_not_example, style: TextStyleConstant.textStyleBlack13w300,)),
                   ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            // nút thêm ví dụ mới
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                InkWell(
-                  onTap: () {
-                    BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordOnAddNewSentenceEvent());
-                  },
-                  child: Icon(
-                    Icons.add_circle_outline,
-                    color: ColorConst.mainColor,
-                  ),
-                ),
-              ],
             ),
           ],
         ),
       ),
     );
   }
-
   Widget customTextFormField1(
       {required String controller,
       required String label,
@@ -321,57 +373,61 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
       required BoxConstraints constraints,
       required MyScreenMediaType myScreenMediaType}) {
     return myScreenMediaType.isMobile
-        ? Expanded(
-            child: TextFormField(
-            validator: _state.addWordController?.basicValidator.getValidation(controller),
-            controller: _state.addWordController?.basicValidator.getController(controller),
-            readOnly: !(enable??true),
-            decoration: InputDecoration(
-              enabledBorder: isLink ? InputBorder.none : null,
-              focusedBorder: isLink ? InputBorder.none : null,
-              labelText: label,
-              labelStyle: MyTextStyle.bodySmall(xMuted: true),
-              border: outlineInputBorder.copyWith(
-                borderRadius: BorderRadius.circular(25),
-              ),
-              contentPadding: MySpacing.all(16),
-              isCollapsed: true,
-              floatingLabelBehavior: FloatingLabelBehavior.never,
-                prefixIcon:  Visibility(
-                  visible: (enable??true) && isLink,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IconButton(
-                      style: TextButton.styleFrom(backgroundColor: notifier.whitecolor, foregroundColor: Colors.white),
-                      onPressed: () async {
-                        if (onUpload != null) {
-                          onUpload();
-                        }
-                      },
-                      icon: Icon(
-                        Icons.cloud_upload_rounded,
-                        size: 14,
-                        color: ColorConst.mainColor,
-                      ),
-                    ),
+        ? Row(
+          children: [
+            Expanded(
+                child: TextFormField(
+                validator: _state.addWordController?.basicValidator.getValidation(controller),
+                controller: _state.addWordController?.basicValidator.getController(controller),
+                readOnly: !(enable??true),
+                decoration: InputDecoration(
+                  enabledBorder: isLink ? InputBorder.none : null,
+                  focusedBorder: isLink ? InputBorder.none : null,
+                  labelText: label,
+                  labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                  border: outlineInputBorder.copyWith(
+                    borderRadius: BorderRadius.circular(25),
                   ),
-                ),
-              suffixIcon: Visibility(
-                visible: (enable??true) &&  (_state.addWordController?.basicValidator.getController(controller)?.text != ""),
-                child: IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _state.addWordController?.basicValidator.getController(controller)?.text = "";
-                          });
-                        },
-                        icon: Icon(
-                          Icons.close_sharp,
-                          color: Colors.red,
+                  contentPadding: MySpacing.all(16),
+                  isCollapsed: true,
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                    prefixIcon:  Visibility(
+                      visible: (enable??true) && isLink,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: IconButton(
+                          style: TextButton.styleFrom(backgroundColor: notifier.whitecolor, foregroundColor: Colors.white),
+                          onPressed: () async {
+                            if (onUpload != null) {
+                              onUpload();
+                            }
+                          },
+                          icon: Icon(
+                            Icons.cloud_upload_rounded,
+                            size: 14,
+                            color: ColorConst.mainColor,
+                          ),
                         ),
                       ),
-                  )
-            ),
-          ))
+                    ),
+                  suffixIcon: Visibility(
+                    visible: (enable??true) &&  (_state.addWordController?.basicValidator.getController(controller)?.text != ""),
+                    child: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _state.addWordController?.basicValidator.getController(controller)?.text = "";
+                              });
+                            },
+                            icon: Icon(
+                              Icons.close_sharp,
+                              color: Colors.red,
+                            ),
+                          ),
+                      )
+                ),
+              )),
+          ],
+        )
         : Container(
             constraints: BoxConstraints(minWidth: Dimens.size150),
             width: (width ?? constraints.maxWidth - (16 * 2 - 20 * 3)) / 5,

@@ -377,7 +377,8 @@
   "landing_page": "Landing page",
   "teacher_list": "教师列表", 
   "courses_list": "课程列表", 
-  "lesson_list": "课程列表", 
+  "lesson_list": "课程列表",
+  "lesson_str": "课程",
   "level_str": "级别",
   "teachers_teach_the_most":"教得最多的老师",
   "register_to_enjoy_the_best_deals_for_you":"注册即可享受最优惠的价格",
@@ -550,5 +551,16 @@
   "quiz_str": "问题",
   "image_str": "图像",
   "tags_select": "选择标签",
-  "not_access_permission": "没有访问权限！"
+  "not_access_permission": "没有访问权限！",
+  "has_not_example": "没有例子",
+  "tags_list": "标签列表",
+  "test_name": "测试名称",
+  "difficulty_str": "困难",
+  "normal_str": "正常",
+  "easy_str": "简单",
+  "common_info": "常用信息",
+  "time_str": "时间",
+  "choose_quest": "搜索问题",
+  "question_str": "问题",
+  "maximum_point": "最高分"
 }

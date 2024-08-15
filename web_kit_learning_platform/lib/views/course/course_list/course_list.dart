@@ -69,6 +69,10 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                   Expanded(
                     child: Layout(
                         isScroll: false,
+                        title: Center(child: Text(
+                            state.courseType == CourseType.courseList? L10nX.getStr.courses_list: L10nX.getStr.your_course,
+                          style: TextStyleConstant.textStyleBlack18w600,
+                        ),),
                         padding: EdgeInsets.only(top: 45 + 16, bottom: 16),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -330,7 +334,8 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                     Expanded(
                       child: Align(
                         alignment: Alignment.topCenter,
-                        child: numberRow>1?GridView.count(
+                        child: numberRow>1?
+                        GridView.count(
                           //padding: const EdgeInsets.all(20),
                           controller: scrollController,
                           crossAxisSpacing: 16,

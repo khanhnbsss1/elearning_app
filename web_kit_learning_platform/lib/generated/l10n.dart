@@ -3800,6 +3800,16 @@ class S {
     );
   }
 
+  /// `Lesson`
+  String get lesson_str {
+    return Intl.message(
+      'Lesson',
+      name: 'lesson_str',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Level`
   String get level_str {
     return Intl.message(
@@ -5515,6 +5525,126 @@ class S {
     return Intl.message(
       'Select tag',
       name: 'tags_select',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No access permission!`
+  String get not_access_permission {
+    return Intl.message(
+      'No access permission!',
+      name: 'not_access_permission',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is no example`
+  String get has_not_example {
+    return Intl.message(
+      'There is no example',
+      name: 'has_not_example',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tag list`
+  String get tags_list {
+    return Intl.message(
+      'Tag list',
+      name: 'tags_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Test name`
+  String get test_name {
+    return Intl.message(
+      'Test name',
+      name: 'test_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Difficult`
+  String get difficulty_str {
+    return Intl.message(
+      'Difficult',
+      name: 'difficulty_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Normal`
+  String get normal_str {
+    return Intl.message(
+      'Normal',
+      name: 'normal_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Easy`
+  String get easy_str {
+    return Intl.message(
+      'Easy',
+      name: 'easy_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `General information`
+  String get common_info {
+    return Intl.message(
+      'General information',
+      name: 'common_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time`
+  String get time_str {
+    return Intl.message(
+      'Time',
+      name: 'time_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for questions`
+  String get choose_quest {
+    return Intl.message(
+      'Search for questions',
+      name: 'choose_quest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Question`
+  String get question_str {
+    return Intl.message(
+      'Question',
+      name: 'question_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maximum score`
+  String get maximum_point {
+    return Intl.message(
+      'Maximum score',
+      name: 'maximum_point',
       desc: '',
       args: [],
     );

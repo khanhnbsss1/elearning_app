@@ -6,10 +6,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
-import 'package:webkit/services/apis/quiz/delete_quiz_api.dart';
-import 'package:webkit/services/apis/quiz/get_quiz_list_api.dart';
-import 'package:webkit/services/apis/quiz/models/quiz_info.dart';
+import 'package:webkit/services/apis/question/get_quiz_list_api.dart';
+import 'package:webkit/services/apis/question/models/question_info.dart';
 
+import '../../../../services/apis/question/delete_quiz_api.dart';
 part 'quiz_list_event.dart';
 part 'quiz_list_state.dart';
 
@@ -43,7 +43,7 @@ class QuizListBloc extends Bloc<QuizListEvent, QuizListState> {
   Future<void> callQuizListApi({required SearchCommonRequest searchCommonRequest}) async {
 
     GetQuizListApi courseApi = GetQuizListApi(searchCommonRequest: state.searchCommonRequest!);
-    QuizListResponseModel lessonListResponseModel = await courseApi.call();
+    QuestionListResponseModel lessonListResponseModel = await courseApi.call();
     emit(state.copyWith(
         listResponseModel: lessonListResponseModel,
         blocStatus: QuizListStatus.onLoadEnd,

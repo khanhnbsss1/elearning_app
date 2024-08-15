@@ -75,10 +75,6 @@ class VocabularyInfo {
         this.imageFileInfo,
       }){
     sentenceInfos??=[];
-    if((sentenceInfos??[]).isEmpty)
-      {
-        sentenceInfos?.add(SentenceInfo(id: 0));
-      }
   }
 
   VocabularyInfo.fromJson(Map<String, dynamic> json) {
@@ -98,9 +94,9 @@ class VocabularyInfo {
     updatedAt = json['updated_at'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
-    if (json['example'] != null) {
+    if (json['examples'] != null) {
       sentenceInfos = <SentenceInfo>[];
-      json['example'].forEach((v) {
+      json['examples'].forEach((v) {
         sentenceInfos?.add(new SentenceInfo.fromJson(v));
       });
     }

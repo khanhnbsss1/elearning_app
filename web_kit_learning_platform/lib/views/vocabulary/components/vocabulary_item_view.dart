@@ -5,6 +5,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
+import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 
 class VocabularyItemView extends StatelessWidget {
   
@@ -64,79 +65,28 @@ class VocabularyItemView extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Gap(Dimens.size6),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: ColorConst.mainColor.withOpacity(0.02),
-                                  borderRadius: BorderRadius.circular(Dimens.size40)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(
-                                  child: InkWell(
-                                    onTap: () {
-                                      if(onViewDetail!=null)
-                                      {
-                                        onViewDetail!(vocabularyInfo);
-                                      }
-                                    },
-                                    child: Icon(Icons.remove_red_eye, color: ColorConst.mainColor.withOpacity(0.5),size: Dimens.size15,),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            
-                            Gap(Dimens.size6),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: ColorConst.mainColor.withOpacity(0.02),
-                                  borderRadius: BorderRadius.circular(Dimens.size40)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(
-                                    child:  InkWell(
-                                      onTap: () {
-                                        if(onEdit!=null)
-                                        {
-                                          onEdit!(vocabularyInfo);
-                                        }
-                                      },
-                                      child: Icon(Icons.edit, color: ColorConst.mainColor.withOpacity(0.5),size: Dimens.size15,),
-                                    ),
-                                ),
-                              ),
-                            ),
-                           
-                            Gap(Dimens.size6),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: ColorConst.mainColor.withOpacity(0.02),
-                                  borderRadius: BorderRadius.circular(Dimens.size40)
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Center(
-                                  child: InkWell(
-                                    onTap: () {
-                                      if(onDelete!=null)
-                                      {
-                                        onDelete!(vocabularyInfo);
-                                      }
-                                    },
-                                    child: Icon(Icons.delete, color: ColorConst.mainColor.withOpacity(0.5),size: Dimens.size15,),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            
-                            Gap(Dimens.size6),
-                          ],
-                        )
+                        ItemViewEditDelete(
+                          itemInfo: vocabularyInfo,
+                          enableView: false,
+                          onViewDetail: (p0) {
+                            if(onViewDetail!=null)
+                            {
+                              onViewDetail!(p0);
+                            }
+                          },
+                          onEdit: (p0) {
+                            if(onEdit!=null)
+                            {
+                              onEdit!(p0);
+                            }
+                          },
+                          onDelete: (p0) {
+                            if(onDelete!=null)
+                            {
+                              onDelete!(p0);
+                            }
+                          },
+                        ),
                       ],
                     )
                   ],

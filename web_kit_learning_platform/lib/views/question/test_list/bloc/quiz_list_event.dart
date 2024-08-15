@@ -19,13 +19,13 @@ class QuizListOnSearchByFilterEvent extends QuizListEvent {
   List<Object?> get props => [searchCommonRequest];
 }
 class QuizListOnSelectTagEvent extends QuizListEvent {
-  QuizInfo selectInfo;
+  QuestionInfo selectInfo;
   QuizListOnSelectTagEvent({required this.selectInfo} );
   @override
   List<Object?> get props => [selectInfo];
 }
 class QuizListOnDeleteTagEvent extends QuizListEvent {
-  QuizInfo selectInfo;
+  QuestionInfo selectInfo;
   QuizListOnDeleteTagEvent({required this.selectInfo} );
   @override
   List<Object?> get props => [selectInfo];

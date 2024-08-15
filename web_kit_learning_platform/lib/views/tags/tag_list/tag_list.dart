@@ -69,6 +69,9 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                 {
                   return Layout(
                       isScroll: false,
+                      title: Center(
+                        child: Text(L10nX.getStr.tags_list,
+                          style: TextStyleConstant.textStyleBlack18w600,),),
                       padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
                 }
@@ -76,6 +79,9 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                 {
                   return Layout(
                     isScroll: false,
+                      title: Center(
+                        child: Text(L10nX.getStr.tags_list,
+                          style: TextStyleConstant.textStyleBlack18w600,),),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
                   );
                 }

@@ -2,11 +2,11 @@
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 
-import 'models/quiz_info.dart';
+import 'models/question_info.dart';
 
 
 class UpdateQuizApi extends BaseApiRequest {
-  QuizInfo info;
+  QuestionInfo info;
   UpdateQuizApi({required this.info}):super(
     serviceType: SERVICE_TYPE.QUIZ,
     apiName: ApiName.getInstance().updateQuiz,

@@ -98,12 +98,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_log": MessageLookupByLibrary.simpleMessage("变更日志"),
         "change_password_text": MessageLookupByLibrary.simpleMessage("更改密码"),
         "charts": MessageLookupByLibrary.simpleMessage("图表"),
+        "choose_quest": MessageLookupByLibrary.simpleMessage("搜索问题"),
         "clear": MessageLookupByLibrary.simpleMessage("清除"),
         "click_me": MessageLookupByLibrary.simpleMessage("点击我"),
         "close": MessageLookupByLibrary.simpleMessage("关闭"),
         "code": MessageLookupByLibrary.simpleMessage("代码"),
         "color_variant": MessageLookupByLibrary.simpleMessage("颜色变体"),
         "column_chart": MessageLookupByLibrary.simpleMessage("柱形图"),
+        "common_info": MessageLookupByLibrary.simpleMessage("常用信息"),
         "company": MessageLookupByLibrary.simpleMessage("公司"),
         "comparison_of_calories": MessageLookupByLibrary.simpleMessage("卡路里对比"),
         "complete": MessageLookupByLibrary.simpleMessage("完成"),
@@ -162,6 +164,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("差异"),
         "differences_in_teaching_methods_3":
             MessageLookupByLibrary.simpleMessage(""),
+        "difficulty_str": MessageLookupByLibrary.simpleMessage("困难"),
         "discount_str": MessageLookupByLibrary.simpleMessage("折扣"),
         "document_list": MessageLookupByLibrary.simpleMessage("文档列表"),
         "document_str": MessageLookupByLibrary.simpleMessage("文档"),
@@ -169,6 +172,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "doughnut_chart": MessageLookupByLibrary.simpleMessage("环形图"),
         "download": MessageLookupByLibrary.simpleMessage("下载"),
         "duration_str": MessageLookupByLibrary.simpleMessage("持续时间"),
+        "easy_str": MessageLookupByLibrary.simpleMessage("简单"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("电子商务"),
         "edit_lesson_str": MessageLookupByLibrary.simpleMessage("编辑课程"),
         "edit_str": MessageLookupByLibrary.simpleMessage("编辑"),
@@ -210,6 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "google_map": MessageLookupByLibrary.simpleMessage("谷歌地图"),
         "grade_name_str": MessageLookupByLibrary.simpleMessage("成绩名称"),
         "grade_str": MessageLookupByLibrary.simpleMessage("成绩"),
+        "has_not_example": MessageLookupByLibrary.simpleMessage("没有例子"),
         "header_popup_biometric":
             MessageLookupByLibrary.simpleMessage("验证您的生物识别信息以登录"),
         "header_popup_fingerprint":
@@ -237,6 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "left": MessageLookupByLibrary.simpleMessage("左侧"),
         "left_dialog": MessageLookupByLibrary.simpleMessage("左侧对话框"),
         "lesson_list": MessageLookupByLibrary.simpleMessage("课程列表"),
+        "lesson_str": MessageLookupByLibrary.simpleMessage("课程"),
         "lets_study": MessageLookupByLibrary.simpleMessage("来学习吧"),
         "level_str": MessageLookupByLibrary.simpleMessage("级别"),
         "license_copyright": MessageLookupByLibrary.simpleMessage("许可和版权"),
@@ -248,6 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("登录"),
         "login_your_account": MessageLookupByLibrary.simpleMessage("登录您的帐户"),
         "map": MessageLookupByLibrary.simpleMessage("地图"),
+        "maximum_point": MessageLookupByLibrary.simpleMessage("最高分"),
         "meaning_str": MessageLookupByLibrary.simpleMessage("含义"),
         "medium": MessageLookupByLibrary.simpleMessage("中"),
         "medthod_content1": MessageLookupByLibrary.simpleMessage(
@@ -277,6 +284,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_search_result": MessageLookupByLibrary.simpleMessage("没有数据"),
         "no_shadow": MessageLookupByLibrary.simpleMessage("无阴影"),
         "normal_sale_str": MessageLookupByLibrary.simpleMessage("正常销售"),
+        "normal_str": MessageLookupByLibrary.simpleMessage("正常"),
         "not_access_permission":
             MessageLookupByLibrary.simpleMessage("没有访问权限！"),
         "not_connect_to_server":
@@ -342,6 +350,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "purchase_now": MessageLookupByLibrary.simpleMessage("立即购买"),
         "pyramid_chart": MessageLookupByLibrary.simpleMessage("金字塔图表"),
         "qty": MessageLookupByLibrary.simpleMessage("数量"),
+        "question_str": MessageLookupByLibrary.simpleMessage("问题"),
         "quick_links": MessageLookupByLibrary.simpleMessage("快速链接"),
         "quiz_add": MessageLookupByLibrary.simpleMessage("创建问题"),
         "quiz_list": MessageLookupByLibrary.simpleMessage("问题列表"),
@@ -504,6 +513,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "system": MessageLookupByLibrary.simpleMessage("系统"),
         "tabs": MessageLookupByLibrary.simpleMessage("标签"),
         "tags": MessageLookupByLibrary.simpleMessage("标签"),
+        "tags_list": MessageLookupByLibrary.simpleMessage("标签列表"),
         "tags_select": MessageLookupByLibrary.simpleMessage("选择标签"),
         "target": MessageLookupByLibrary.simpleMessage("目标"),
         "teacher_list": MessageLookupByLibrary.simpleMessage("教师列表"),
@@ -515,6 +525,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "terms_of_service_text": MessageLookupByLibrary.simpleMessage("服务条款"),
         "test_add": MessageLookupByLibrary.simpleMessage("创建测试"),
         "test_list": MessageLookupByLibrary.simpleMessage("测试列表"),
+        "test_name": MessageLookupByLibrary.simpleMessage("测试名称"),
         "test_remove": MessageLookupByLibrary.simpleMessage("删除测试"),
         "test_str": MessageLookupByLibrary.simpleMessage("测试"),
         "test_update": MessageLookupByLibrary.simpleMessage("更新测试"),
@@ -529,6 +540,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "time_in_year_str": MessageLookupByLibrary.simpleMessage("年份"),
         "time_out_connection":
             MessageLookupByLibrary.simpleMessage("超时,请检查您的网络连接"),
+        "time_str": MessageLookupByLibrary.simpleMessage("时间"),
         "timeout": MessageLookupByLibrary.simpleMessage("超时"),
         "title_popup_biometric":
             MessageLookupByLibrary.simpleMessage("使用生物识别登录"),

@@ -20,7 +20,7 @@ class TestListBloc extends Bloc<TestListEvent, TestListState> {
     on<TestListOnSearchByFilterEvent>(_onSearchByParams);
     on<TestListOnDeleteTagEvent>(_onDeleteTest);
 
-    on<TestListOnSelectTagEvent>((event, emit) async {
+    on<TestListOnSelectTestEvent>((event, emit) async {
     });
   }
 

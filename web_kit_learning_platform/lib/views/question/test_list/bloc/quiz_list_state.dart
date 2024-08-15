@@ -10,26 +10,26 @@ enum QuizListStatus {
 
 @immutable
 class QuizListState extends Equatable {
-  QuizListResponseModel? listResponseModel;
+  QuestionListResponseModel? listResponseModel;
   QuizListStatus? blocStatus;
   SearchCommonRequest? searchCommonRequest;
-  QuizInfo? selectInfo;
+  QuestionInfo? selectInfo;
   QuizListState({
     this.blocStatus,
     this.listResponseModel,
     this.searchCommonRequest,
     this.selectInfo
   }){
-    listResponseModel??= QuizListResponseModel(content: []);
+    listResponseModel??= QuestionListResponseModel(content: []);
     searchCommonRequest??= SearchCommonRequest(pageNumber: 0, pageSize: 10, keyword: "B");
   }
 
 
   QuizListState copyWith({
-    QuizListResponseModel? listResponseModel,
+    QuestionListResponseModel? listResponseModel,
     QuizListStatus? blocStatus,
     SearchCommonRequest? searchCommonRequest,
-    QuizInfo? selectInfo
+    QuestionInfo? selectInfo
   })
   {
     return QuizListState(

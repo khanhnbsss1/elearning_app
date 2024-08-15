@@ -47,7 +47,7 @@ import 'package:webkit/views/other/fl_chart_screen.dart';
 import 'package:webkit/views/other/google_map.dart';
 import 'package:webkit/views/other/sfmap_page.dart';
 import 'package:webkit/views/other/synsfusion_chart.dart';
-import 'package:webkit/views/quiz/test_list/quiz_list.dart';
+import 'package:webkit/views/question/test_list/quiz_list.dart';
 import 'package:webkit/views/starter.dart';
 import 'package:webkit/views/tags/tag_list/tag_list.dart';
 import 'package:webkit/views/test/test_list/test_list.dart';
@@ -61,6 +61,7 @@ import 'package:webkit/views/ui/reviews_page.dart';
 import 'package:webkit/views/ui/tabs_page.dart';
 import 'package:webkit/views/video_player/model/video_model.dart';
 import 'package:webkit/views/video_player/video_player.dart';
+import 'package:webkit/views/vocabulary/vocabulary_list/bloc/vocabulary_list_bloc.dart';
 import 'package:webkit/views/vocabulary/vocabulary_list/vocabulary_list.dart';
 
 import '../views/auth/locked_2.dart';
@@ -109,10 +110,15 @@ getPageRoute() {
           return CourseStudy1(key: UniqueKey(),courseInfo: arguments['courseInfo'] ,);
         },
         middlewares: [AuthMiddleware()]),
-    ///--------------- Course ---------------///
+    ///--------------- VocabularyListNonImage ---------------///
     GetPage(
-        name: Routes.vocabularyList,
-        page: () =>  VocabularyList(key: UniqueKey(),),
+        name: Routes.vocabularyListNoImage,
+        page: () =>  VocabularyList(key: UniqueKey(),courseType: VocabularyType.vocabularyNonImage,),
+        middlewares: [AuthMiddleware()]),
+    ///--------------- VocabularyListNImage ---------------///
+    GetPage(
+        name: Routes.vocabularyListImage,
+        page: () =>  VocabularyList(key: UniqueKey(),courseType: VocabularyType.vocabularyImage,),
         middlewares: [AuthMiddleware()]),
     ///--------------- Course ---------------///
     GetPage(

@@ -53,7 +53,7 @@ class AddTagPageState extends State<AddTagPage>with UIMixin {
   Widget build(BuildContext context) {
     // TODO: implement build
     return AlertDialog(
-      title: Text(L10nX.getStr.add_tags),
+      title: Text(widget.tagPageAction ==TagPageAction.create? L10nX.getStr.add_tags: L10nX.getStr.edit_str),
       content: TextFormField(
         controller: tagController,
         keyboardType: TextInputType.text,

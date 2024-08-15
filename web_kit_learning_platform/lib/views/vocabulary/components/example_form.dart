@@ -81,7 +81,7 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
                         TextFormField(
                           controller: chineseSentenceController,
                           decoration: InputDecoration(
-                            labelText: L10nX.getStr.sound_str,
+                            labelText: L10nX.getStr.simplified_str,
                             labelStyle: MyTextStyle.bodySmall(xMuted: true),
                             border: outlineInputBorder.copyWith(
                               borderRadius: BorderRadius.circular(25),
@@ -179,7 +179,7 @@ class ExampleFromState extends State<ExampleFrom>  with UIMixin{
                         TextFormField(
                           controller: pinyionSentenceController,
                           decoration: InputDecoration(
-                            labelText: L10nX.getStr.simplified_str,
+                            labelText: L10nX.getStr.pinyin_tone_str,
                             labelStyle: MyTextStyle.bodySmall(xMuted: true),
                             border: outlineInputBorder.copyWith(
                               borderRadius: BorderRadius.circular(25),

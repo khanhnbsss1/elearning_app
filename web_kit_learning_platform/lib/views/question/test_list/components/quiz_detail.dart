@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
-import 'package:webkit/services/apis/quiz/add_quiz_api.dart';
-import 'package:webkit/services/apis/quiz/models/quiz_info.dart';
-import 'package:webkit/services/apis/quiz/update_quiz_api.dart';
+import 'package:webkit/services/apis/question/add_quiz_api.dart';
+import 'package:webkit/services/apis/question/models/question_info.dart';
+import 'package:webkit/services/apis/question/update_quiz_api.dart';
 enum QuizPageAction{
   view,
   edit,
@@ -16,10 +15,10 @@ enum QuizPageAction{
 class QuizDetailPage extends StatefulWidget{
   QuizPageAction? tagPageAction;
   QuizDetailPage({this.tagsInfo, this.tagPageAction}){
-    tagsInfo??=QuizInfo();
+    tagsInfo??=QuestionInfo();
     tagPageAction??=QuizPageAction.create;
   }
-  QuizInfo?tagsInfo;
+  QuestionInfo?tagsInfo;
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState

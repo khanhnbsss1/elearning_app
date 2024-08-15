@@ -103,12 +103,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_log": MessageLookupByLibrary.simpleMessage("Nhật ký thay đổi"),
         "change_password_text":
             MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
+        "choose_quest":
+            MessageLookupByLibrary.simpleMessage("Tìm kiếm câu hỏi"),
         "clear": MessageLookupByLibrary.simpleMessage("Clear"),
         "click_me": MessageLookupByLibrary.simpleMessage("Nhấp vào tôi"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),
         "code": MessageLookupByLibrary.simpleMessage("Mã"),
         "color_variant": MessageLookupByLibrary.simpleMessage("Biến thể màu"),
         "column_chart": MessageLookupByLibrary.simpleMessage("Biểu đồ cột"),
+        "common_info": MessageLookupByLibrary.simpleMessage("Thông tin chung"),
         "company": MessageLookupByLibrary.simpleMessage("Công ty"),
         "comparison_of_calories":
             MessageLookupByLibrary.simpleMessage("So sánh lượng calo"),
@@ -183,6 +186,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("khác biệt "),
         "differences_in_teaching_methods_3":
             MessageLookupByLibrary.simpleMessage("trong giảng dạy"),
+        "difficulty_str": MessageLookupByLibrary.simpleMessage("Khó"),
         "discount_str": MessageLookupByLibrary.simpleMessage("Giảm giá"),
         "document_list":
             MessageLookupByLibrary.simpleMessage("Danh sách tài Liệu"),
@@ -192,6 +196,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Biểu đồ bánh rán"),
         "download": MessageLookupByLibrary.simpleMessage("Tải xuống"),
         "duration_str": MessageLookupByLibrary.simpleMessage("Thời lượng"),
+        "easy_str": MessageLookupByLibrary.simpleMessage("Dễ"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("Thương mại điện tử"),
         "edit_lesson_str":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa bài học"),
@@ -242,6 +247,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "google_map": MessageLookupByLibrary.simpleMessage("Bản đồ Google"),
         "grade_name_str": MessageLookupByLibrary.simpleMessage("Tên lớp"),
         "grade_str": MessageLookupByLibrary.simpleMessage("Cấp độ"),
+        "has_not_example":
+            MessageLookupByLibrary.simpleMessage("Không có ví dụ nào"),
         "header_popup_biometric": MessageLookupByLibrary.simpleMessage(
             "Xác thực sinh trắc của bạn để đăng nhập"),
         "header_popup_fingerprint": MessageLookupByLibrary.simpleMessage(
@@ -276,6 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hộp thoại bên trái"),
         "lesson_list":
             MessageLookupByLibrary.simpleMessage("Danh sách bài học"),
+        "lesson_str": MessageLookupByLibrary.simpleMessage("Bài học"),
         "lets_study": MessageLookupByLibrary.simpleMessage("Vào học"),
         "level_str": MessageLookupByLibrary.simpleMessage("Cấp độ"),
         "license_copyright":
@@ -290,6 +298,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login_your_account":
             MessageLookupByLibrary.simpleMessage("Đăng nhập tài khoản của bạn"),
         "map": MessageLookupByLibrary.simpleMessage("Biểu đồ"),
+        "maximum_point": MessageLookupByLibrary.simpleMessage("Điểm số tối đa"),
         "meaning_str": MessageLookupByLibrary.simpleMessage("Ý nghĩa"),
         "medium": MessageLookupByLibrary.simpleMessage("Trung bình"),
         "medthod_content1": MessageLookupByLibrary.simpleMessage(
@@ -328,6 +337,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_shadow": MessageLookupByLibrary.simpleMessage("Không có bóng"),
         "normal_sale_str":
             MessageLookupByLibrary.simpleMessage("Bán bình thường"),
+        "normal_str": MessageLookupByLibrary.simpleMessage("Bình thường"),
         "not_access_permission":
             MessageLookupByLibrary.simpleMessage("Không có quyền truy cập !"),
         "not_connect_to_server": MessageLookupByLibrary.simpleMessage(
@@ -401,14 +411,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "pyramid_chart":
             MessageLookupByLibrary.simpleMessage("Biểu đồ kim tự tháp"),
         "qty": MessageLookupByLibrary.simpleMessage("Số lượng"),
+        "question_str": MessageLookupByLibrary.simpleMessage("Câu hỏi"),
         "quick_links": MessageLookupByLibrary.simpleMessage("Liên kết nhanh"),
-        "quiz_add": MessageLookupByLibrary.simpleMessage("Tạo các câu hỏi"),
+        "quiz_add": MessageLookupByLibrary.simpleMessage("Tạo câu hỏi"),
         "quiz_list":
             MessageLookupByLibrary.simpleMessage("Danh sách các câu hỏi"),
-        "quiz_remove": MessageLookupByLibrary.simpleMessage("Xóa các câu hỏi"),
+        "quiz_remove": MessageLookupByLibrary.simpleMessage("Xóa câu hỏi"),
         "quiz_str": MessageLookupByLibrary.simpleMessage("Các câu hỏi"),
-        "quiz_update":
-            MessageLookupByLibrary.simpleMessage("Cập nhật các câu hỏi"),
+        "quiz_update": MessageLookupByLibrary.simpleMessage("Cập nhật câu hỏi"),
         "radial_chart":
             MessageLookupByLibrary.simpleMessage("Biểu đồ xuyên tâm"),
         "rating": MessageLookupByLibrary.simpleMessage("Xếp hạng"),
@@ -590,6 +600,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Biểu đồ đồng bộ hóa"),
         "system": MessageLookupByLibrary.simpleMessage("Hệ thống"),
         "tags": MessageLookupByLibrary.simpleMessage("Thẻ"),
+        "tags_list": MessageLookupByLibrary.simpleMessage("Danh sách thẻ"),
         "tags_select": MessageLookupByLibrary.simpleMessage("Chọn thẻ"),
         "target": MessageLookupByLibrary.simpleMessage("Mục tiêu"),
         "teacher_list":
@@ -605,6 +616,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Điều khoản Dịch vụ"),
         "test_add": MessageLookupByLibrary.simpleMessage("Tạo bài test"),
         "test_list": MessageLookupByLibrary.simpleMessage("Danh sách bài test"),
+        "test_name": MessageLookupByLibrary.simpleMessage("Tên bài kiểm tra"),
         "test_remove": MessageLookupByLibrary.simpleMessage("Xóa bài test"),
         "test_str": MessageLookupByLibrary.simpleMessage("Bài test"),
         "test_update":
@@ -622,6 +634,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "time_in_year_str": MessageLookupByLibrary.simpleMessage("Năm"),
         "time_out_connection": MessageLookupByLibrary.simpleMessage(
             "Quá thời gian chờ, vui lòng kiểm tra kết nối mạng của bạn"),
+        "time_str": MessageLookupByLibrary.simpleMessage("Thời gian"),
         "timeout": MessageLookupByLibrary.simpleMessage("Hết thời gian chờ"),
         "title_popup_biometric":
             MessageLookupByLibrary.simpleMessage("Đăng nhập bằng sinh trắc"),

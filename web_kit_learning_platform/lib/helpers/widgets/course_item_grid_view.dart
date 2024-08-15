@@ -72,7 +72,8 @@ class CourseItemGridView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(16),
                             ),
                             child: Column(
-                              mainAxisSize: MainAxisSize.min,
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SizedBox(
                                   height: 120,

@@ -31,7 +31,15 @@ class CreateEditWordState extends Equatable {
     this.addWordController,
     this.wordsPageActionType,
   }){
-    vocabularyInfo??=VocabularyInfo();
+    if(wordsPageActionType == WordsPageActionType.view)
+      {
+        vocabularyInfo??=VocabularyInfo(sentenceInfos: []);
+        vocabularyInfo?.sentenceInfos =[];
+      }
+    else
+      {
+        vocabularyInfo??=VocabularyInfo();
+      }
     addWordController ??= AddWordController(vocabularyInfo: vocabularyInfo);
   }
 

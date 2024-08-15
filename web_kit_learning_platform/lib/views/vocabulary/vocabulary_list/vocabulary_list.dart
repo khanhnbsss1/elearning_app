@@ -14,6 +14,7 @@ import 'package:webkit/helpers/theme/theme_customizer.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
+import 'package:webkit/services/apis/sentence/models/sentence_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/views/vocabulary/vocabulary_detail/create_edit_words.dart';
 import '../../../helpers/widgets/my_spacing.dart';
@@ -24,7 +25,7 @@ import 'bloc/vocabulary_list_bloc.dart';
 
 class VocabularyList extends StatefulWidget {
   VocabularyList({super.key, this.courseType}){
-    courseType??=VocabularyType.vocabularyList;
+    courseType??=VocabularyType.vocabularyNonImage;
   }
   VocabularyType? courseType;
   @override
@@ -94,11 +95,15 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                 {
                   return Layout(
                       isScroll: false,
+                      title: Center(child: Text(
+                        state.vocabularyType == VocabularyType.vocabularyImage? L10nX.getStr.vocabulary_str: L10nX.getStr.vocabulary_str,
+                        style: TextStyleConstant.textStyleBlack18w600,
+                      ),),
                       padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
                       child: ListBodyCommon(
-                        minOfWidthOfListRatio: 0.1,
-                        maxOfWidthOfListRatio: 0.2,
-                        widthOfListRatio: 0.2,
+                        minOfWidthOfListRatio: 0.2,
+                        maxOfWidthOfListRatio: 0.3,
+                        widthOfListRatio: 0.3,
                         enableDragIcon: false,
                         list: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType),
                         body: Container(
@@ -243,7 +248,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
               },
               child: Icon(Icons.search_rounded, color: ColorConst.mainColor,size: Dimens.size40,)),
           Visibility(
-            visible:  state.vocabularyType== VocabularyType.vocabularyList,
+            visible:  state.vocabularyType== VocabularyType.vocabularyNonImage,
             child: Row(
               children: [
                 Gap(Dimens.size10),
@@ -424,6 +429,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                           child: Text(state.selectVocabularyInfo?.traditional??""),
                         ),
                       ),
+                      buildExamplesListForView( state: state),
                     ],
                   ),
                 ),
@@ -450,4 +456,46 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
       ),
     );
   }
+  Widget buildExamplesListForView({required VocabularyListState state}) {
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                WidgetWithColumnTitleCommon(
+                  title: L10nX.getStr.examples_str,
+                  child: (state.selectVocabularyInfo?.sentenceInfos??[]).isNotEmpty?ListView.builder(
+                    itemCount:(state.selectVocabularyInfo?.sentenceInfos??[]).length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, exampleIndex) {
+                      SentenceInfo sentenceInfo = (state.selectVocabularyInfo?.sentenceInfos??[]).elementAt(exampleIndex);
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text('$exampleIndex. '),
+                            Text('${sentenceInfo.chineseSentence??''}(${L10nX.getStr.pinyin_tone_str}:${sentenceInfo.pinyionSentence??''})'),
+                            AudioSpeaker(url: sentenceInfo.audioLink??'')
+                          ],),
+                      );
+                    },
+                  ):Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Text(L10nX.getStr.has_not_example, style: TextStyleConstant.textStyleBlack13w300,)),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 }

@@ -110,12 +110,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_password_text":
             MessageLookupByLibrary.simpleMessage("Change password"),
         "charts": MessageLookupByLibrary.simpleMessage("Charts"),
+        "choose_quest":
+            MessageLookupByLibrary.simpleMessage("Search for questions"),
         "clear": MessageLookupByLibrary.simpleMessage("Clear"),
         "click_me": MessageLookupByLibrary.simpleMessage("Click me"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),
         "code": MessageLookupByLibrary.simpleMessage("Code"),
         "color_variant": MessageLookupByLibrary.simpleMessage("Color variant"),
         "column_chart": MessageLookupByLibrary.simpleMessage("Column chart"),
+        "common_info":
+            MessageLookupByLibrary.simpleMessage("General information"),
         "company": MessageLookupByLibrary.simpleMessage("Company"),
         "comparison_of_calories":
             MessageLookupByLibrary.simpleMessage("Comparison of calories"),
@@ -189,6 +193,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Differences"),
         "differences_in_teaching_methods_3":
             MessageLookupByLibrary.simpleMessage(" in teaching methods"),
+        "difficulty_str": MessageLookupByLibrary.simpleMessage("Difficult"),
         "discount_str": MessageLookupByLibrary.simpleMessage("Discount"),
         "document_list":
             MessageLookupByLibrary.simpleMessage("List of documents"),
@@ -198,6 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Doughnut chart"),
         "download": MessageLookupByLibrary.simpleMessage("Download"),
         "duration_str": MessageLookupByLibrary.simpleMessage("Duration"),
+        "easy_str": MessageLookupByLibrary.simpleMessage("Easy"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("Ecommerce"),
         "edit_lesson_str":
             MessageLookupByLibrary.simpleMessage("Edit a lesson"),
@@ -248,6 +254,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "google_map": MessageLookupByLibrary.simpleMessage("Google map"),
         "grade_name_str": MessageLookupByLibrary.simpleMessage("Grade name"),
         "grade_str": MessageLookupByLibrary.simpleMessage("Grade"),
+        "has_not_example":
+            MessageLookupByLibrary.simpleMessage("There is no example"),
         "header_popup_biometric": MessageLookupByLibrary.simpleMessage(
             "Authenticate your biometrics to log in"),
         "header_popup_fingerprint": MessageLookupByLibrary.simpleMessage(
@@ -280,6 +288,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "left": MessageLookupByLibrary.simpleMessage("Left"),
         "left_dialog": MessageLookupByLibrary.simpleMessage("Left dialog"),
         "lesson_list": MessageLookupByLibrary.simpleMessage("Lesson list"),
+        "lesson_str": MessageLookupByLibrary.simpleMessage("Lesson"),
         "lets_study": MessageLookupByLibrary.simpleMessage("Let\'s study"),
         "level_str": MessageLookupByLibrary.simpleMessage("Level"),
         "license_copyright":
@@ -294,6 +303,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login_your_account":
             MessageLookupByLibrary.simpleMessage("Login your account"),
         "map": MessageLookupByLibrary.simpleMessage("Map"),
+        "maximum_point": MessageLookupByLibrary.simpleMessage("Maximum score"),
         "meaning_str": MessageLookupByLibrary.simpleMessage("Meaning"),
         "medium": MessageLookupByLibrary.simpleMessage("Medium"),
         "medthod_content1": MessageLookupByLibrary.simpleMessage(
@@ -331,6 +341,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "no_search_result": MessageLookupByLibrary.simpleMessage("No data"),
         "no_shadow": MessageLookupByLibrary.simpleMessage("No shadow"),
         "normal_sale_str": MessageLookupByLibrary.simpleMessage("Normal sale"),
+        "normal_str": MessageLookupByLibrary.simpleMessage("Normal"),
         "not_access_permission":
             MessageLookupByLibrary.simpleMessage("No access permission!"),
         "not_connect_to_server":
@@ -407,6 +418,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "purchase_now": MessageLookupByLibrary.simpleMessage("Purchase now"),
         "pyramid_chart": MessageLookupByLibrary.simpleMessage("Pyramid chart"),
         "qty": MessageLookupByLibrary.simpleMessage("Qty"),
+        "question_str": MessageLookupByLibrary.simpleMessage("Question"),
         "quick_links": MessageLookupByLibrary.simpleMessage("Quick links"),
         "quiz_add": MessageLookupByLibrary.simpleMessage("Create quiz"),
         "quiz_list": MessageLookupByLibrary.simpleMessage("List of quizzes"),
@@ -602,6 +614,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "system": MessageLookupByLibrary.simpleMessage("System"),
         "tabs": MessageLookupByLibrary.simpleMessage("Tabs"),
         "tags": MessageLookupByLibrary.simpleMessage("Tags"),
+        "tags_list": MessageLookupByLibrary.simpleMessage("Tag list"),
         "tags_select": MessageLookupByLibrary.simpleMessage("Select tag"),
         "target": MessageLookupByLibrary.simpleMessage("Target"),
         "teacher_list": MessageLookupByLibrary.simpleMessage(" Teacher list"),
@@ -616,6 +629,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Terms of Service"),
         "test_add": MessageLookupByLibrary.simpleMessage("Create test"),
         "test_list": MessageLookupByLibrary.simpleMessage("List of tests"),
+        "test_name": MessageLookupByLibrary.simpleMessage("Test name"),
         "test_remove": MessageLookupByLibrary.simpleMessage("Delete test"),
         "test_str": MessageLookupByLibrary.simpleMessage("Test"),
         "test_update": MessageLookupByLibrary.simpleMessage("Update test"),
@@ -631,6 +645,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "time_in_year_str": MessageLookupByLibrary.simpleMessage("Year"),
         "time_out_connection": MessageLookupByLibrary.simpleMessage(
             "Timeout exceeded, please check your network connection"),
+        "time_str": MessageLookupByLibrary.simpleMessage("Time"),
         "timeout": MessageLookupByLibrary.simpleMessage("Timeout"),
         "title_popup_biometric":
             MessageLookupByLibrary.simpleMessage("Log in with biometrics"),

@@ -29,7 +29,7 @@ class VocabularyListBloc extends Bloc<VocabularyListEvent, VocabularyListState> 
     emit(state.copyWith(
         blocStatus: VocabularyStatus.onLoading,
     ));
-    await callCourseApi(searchCommonRequest: state.searchCommonRequest!);
+    await callVocabularyApi(searchCommonRequest: state.searchCommonRequest!);
   }
 
   Future<void> _onSearchByParams(VocabularyListOnSearchByFilterEvent event,
@@ -38,11 +38,11 @@ class VocabularyListBloc extends Bloc<VocabularyListEvent, VocabularyListState> 
         blocStatus: VocabularyStatus.onLoading,
         searchCommonRequest: event.searchCommonRequest
     ));
-    await callCourseApi(searchCommonRequest: event.searchCommonRequest);
+    await callVocabularyApi(searchCommonRequest: event.searchCommonRequest);
   }
   
-  Future<void> callCourseApi({required SearchCommonRequest searchCommonRequest}) async {
-    if(state.vocabularyType ==VocabularyType.vocabularyList)
+  Future<void> callVocabularyApi({required SearchCommonRequest searchCommonRequest}) async {
+    if(state.vocabularyType ==VocabularyType.vocabularyNonImage)
       {
         GetListVocabularyApi courseApi = GetListVocabularyApi(searchCommonRequest: state.searchCommonRequest!);
         VocabularyResponseModel vocabularyResponseModel = await courseApi.call();
@@ -55,7 +55,7 @@ class VocabularyListBloc extends Bloc<VocabularyListEvent, VocabularyListState> 
           add(VocabularyListOnSelectVocabularyEvent(selectVocabularyInfo: (vocabularyResponseModel.content??[]).first));
         }
       }
-    else if(state.vocabularyType ==VocabularyType.myVocabularyList)
+    else if(state.vocabularyType ==VocabularyType.vocabularyImage)
       {
         GetListVocabularyApi myCourseApi = GetListVocabularyApi(searchCommonRequest: searchCommonRequest);
         VocabularyResponseModel vocabularyResponseModel = await myCourseApi.call();

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
-import 'package:webkit/services/apis/quiz/models/quiz_info.dart';
+import 'package:webkit/services/apis/question/models/question_info.dart';
 
 class QuizItemView extends StatelessWidget {
   QuizItemView({
@@ -14,11 +14,11 @@ class QuizItemView extends StatelessWidget {
     this.onDelete,
   });
 
-  Function(QuizInfo)?onViewDetail;
-  Function(QuizInfo)?onEdit;
-  Function(QuizInfo)?onDelete;
+  Function(QuestionInfo)?onViewDetail;
+  Function(QuestionInfo)?onEdit;
+  Function(QuestionInfo)?onDelete;
 
-  QuizInfo info;
+  QuestionInfo info;
   late ColorNotifier notifier;
   @override
   Widget build(BuildContext context) {
