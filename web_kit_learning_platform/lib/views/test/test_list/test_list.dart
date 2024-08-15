@@ -304,12 +304,22 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
     TestDataSource employeeDataSource = TestDataSource(
       lessonData: state.listResponseModel?.content??[],
       onDelete: (p0) {
+        
       },
       onEdit: (p0) {
-
+        CreateEditTest(
+          testActionType: ActionType.edit, 
+          testInfo: p0,
+          callBack: () {
+          BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
+        },).show(context);
       },
       onViewDetail: (p0) {
-
+        CreateEditTest(testActionType: ActionType.view,
+          testInfo: p0,
+          callBack: () {
+          BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
+        },).show(context);
       },
     );
     return SfDataGridTheme(

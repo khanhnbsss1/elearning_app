@@ -59,7 +59,9 @@ class TestDetailBloc extends Bloc<TestDetailEvent, TestDetailState> {
     if(state.testInfo?.id!=null)
     {
       MonitorLoading().showLoading("");
-      UpdateTestApi getLessonDetailApi = UpdateTestApi(info: event.testInfo);
+      state.testInfo = event.testInfo;
+      state.testInfo?.quizDTOs = state.listOfWord;
+      UpdateTestApi getLessonDetailApi = UpdateTestApi(info: state.testInfo!);
       dynamic data = await getLessonDetailApi.call();
       if(data.runtimeType==String && (data as String).isEmpty)
       {
@@ -78,11 +80,13 @@ class TestDetailBloc extends Bloc<TestDetailEvent, TestDetailState> {
       ) async {
     state.blocStatus = TestDetailStatus.initial;
       MonitorLoading().showLoading("");
-      AddTestApi getLessonDetailApi = AddTestApi(info: event.testInfo);
+      state.testInfo = event.testInfo;
+      state.testInfo?.quizDTOs = state.listOfWord;
+      AddTestApi getLessonDetailApi = AddTestApi(info: state.testInfo!);
       dynamic data = (await getLessonDetailApi.call());
-      if(data.runtimeType == int )
+      if(data.runtimeType == String )
         {
-          state.testInfo?.id =data;
+         // state.testInfo?.id =data;
           emit(state.copyWith(
               blocStatus: TestDetailStatus.onCreateLesson,
               testInfo: state.testInfo

@@ -90,7 +90,7 @@ class _CreateEditLesson extends State<CreateEditTest>
           iconTheme: IconThemeData(
             color: ColorConst.whiteColor, //change your color here
           ),
-          title: Text( widget.testInfo?.id!=null?L10nX.getStr.edit_lesson_str:L10nX.getStr.create_lesson_str, style: TextStyleConstant.textStyleBlack20w700.copyWith(color: ColorConst.whiteColor),),
+          title: Text( widget.testInfo?.id!=null?L10nX.getStr.quiz_update:L10nX.getStr.create_quiz_str, style: TextStyleConstant.textStyleBlack20w700.copyWith(color: ColorConst.whiteColor),),
           centerTitle: true,
         ),
         body: Container(
@@ -117,6 +117,17 @@ class _CreateEditLesson extends State<CreateEditTest>
           switch (state.blocStatus) {
             case TestDetailStatus.initial:
               break;
+            case TestDetailStatus.onCreateLesson:
+              {
+                Navigator.of(context).pop();
+              }
+              break;
+            case TestDetailStatus.onUpdateLesson:
+              {
+                Navigator.of(context).pop();
+
+              }
+              break;
             default:
               break;
           }
@@ -130,56 +141,81 @@ class _CreateEditLesson extends State<CreateEditTest>
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 child: Column(
                   children: [
-                    TabBar(
-                      indicatorColor: ColorConst.mainColor,
-                      dividerColor: Colors.transparent,
-                      labelColor: ColorConst.mainColor,
-                      overlayColor: WidgetStateProperty.all(Colors.red),
-                      indicator: BoxDecoration(border: Border(bottom: BorderSide(color: ColorConst.mainColor))),
-                      onTap: (index) {
-                        _pageController.jumpToPage(index);
-                        setState(() {
-                          position = index;
-                        });
-                      },
-                      tabs: [
-                        buildTabItem(title: S.of(context).introduction_str, index:0),
-                        buildTabItem(title: S.of(context).quiz_list, index: 1),
-                      ],
-                      controller: _tabController,
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: ColorConst.whiteColor, width: 0.1)
+                      ),
+                      width: 450,
+                      child: TabBar(
+                        indicatorColor: ColorConst.mainColor,
+                        dividerColor: Colors.transparent,
+                        labelColor: ColorConst.mainColor,
+                        overlayColor: WidgetStateProperty.all(Colors.red),
+                        indicator: BoxDecoration(border: Border(bottom: BorderSide(color: ColorConst.mainColor))),
+                        onTap: (index) {
+                          _pageController.jumpToPage(index);
+                          setState(() {
+                            position = index;
+                          });
+                        },
+                        tabs: [
+                          buildTabItem(title: S.of(context).introduction_str, index:0),
+                          buildTabItem(title: S.of(context).quiz_str, index: 1),
+                        ],
+                        controller: _tabController,
+                      ),
                     ),
+                    Divider(color: ColorConst.blackColor,thickness: 0.1,),
                     Expanded(
                         child: buildPageView(context: context, state: state)
                     ),
                     Divider(color: ColorConst.dividerColor.withOpacity(0.3),),
-                    ActionButton1(
-                      text: widget.testActionType == ActionType.create?L10nX.getStr.create_lesson_str:L10nX.getStr.str_update,
-                      width: Dimens.size150,
-                      onTap: () {
-                        state.testInfo??= TestInfo();
-                        state.testInfo?.name = state.editingControllerTestName?.text;
-                        state.testInfo?.typeTest = state.editingControllerTestDescription?.text;
-                        switch(widget.testActionType){
-                          
-                          case ActionType.view:
-                            // TODO: Handle this case.
-                            break;
-                          case ActionType.edit:
-                            // TODO: Handle this case.
-                              {
-                                BlocProvider.of<TestDetailBloc>(context).add(TestDetailUpdateTestEvent(testInfo: state.testInfo!));
-                              }
-                            break;
-                          case ActionType.create:
-                            // TODO: Handle this case.
-                          {
-                            BlocProvider.of<TestDetailBloc>(context).add(TestDetailCreateTestEvent(testInfo: state.testInfo!));
-                          }
-                            break;
-                          default: 
-                            break;
-                        }
-                        },
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ActionButton1(
+                          text: widget.testActionType == ActionType.create?L10nX.getStr.create_lesson_str:L10nX.getStr.str_update,
+                          width: Dimens.size150,
+                          onTap: () {
+                            state.testInfo??= TestInfo();
+                            state.testInfo?.name = state.editingControllerTestName?.text;
+                            state.testInfo?.typeTest = L10nX().getStringByKey("${mapTestLevelToStrKey[valueListenable.value]??""}_str");
+                            state.testInfo?.name = state.editingControllerTestTime?.text;
+                            switch(widget.testActionType){
+
+                              case ActionType.view:
+                              // TODO: Handle this case.
+                                break;
+                              case ActionType.edit:
+                              // TODO: Handle this case.
+                                {
+                                  BlocProvider.of<TestDetailBloc>(context).add(TestDetailUpdateTestEvent(testInfo: state.testInfo!));
+                                }
+                                break;
+                              case ActionType.create:
+                              // TODO: Handle this case.
+                                {
+                                  BlocProvider.of<TestDetailBloc>(context).add(TestDetailCreateTestEvent(testInfo: state.testInfo!));
+                                }
+                                break;
+                              default:
+                                break;
+                            }
+                          },
+                        ),
+                        Gap(Dimens.size20),
+                        ActionButton1(
+                          text: L10nX.getStr.close,
+                          width: Dimens.size80,
+                          enableBgColor: ColorConst.whiteColor,
+                          textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.blackColor),
+                          onTap: () {
+                            Navigator.of(context).pop();
+
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -272,7 +308,7 @@ class _CreateEditLesson extends State<CreateEditTest>
   Widget buildTestTime({required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
       // title: '${L10nX.getStr.name}: ',
-      title: L10nX.getStr.time_str,
+      title: "${L10nX.getStr.time_str} (${L10nX.getStr.time_in_minute_str.toLowerCase()})",
       isRequirement: true,
       // titleStyle: ,
       child: TextFormField(
@@ -320,13 +356,12 @@ class _CreateEditLesson extends State<CreateEditTest>
               value: item,
              // height: 40,
               child: Text(
-                mapTestLevelToStrKey[item]??"",
+              L10nX().getStringByKey("${mapTestLevelToStrKey[item]??""}_str"),
                 style: const TextStyle(
                   fontSize: 14,
                 ),
               ),
-            ))
-                .toList(),
+            )).toList(),
             valueListenable: valueListenable,
             onChanged: (TestLevel? value) {
               valueListenable.value = value;
@@ -367,6 +402,7 @@ class _CreateEditLesson extends State<CreateEditTest>
       children: [
         Gap(Dimens.size16),
         Text(L10nX.getStr.choose_quest, style: TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight:  FontWeight.w600),),
+        Gap(Dimens.size4),
         Expanded(
           child: SearchQuizDropDown(
             exitsQuestion: state.listOfWord??[],

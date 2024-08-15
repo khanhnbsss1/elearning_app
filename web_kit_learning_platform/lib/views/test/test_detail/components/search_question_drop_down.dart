@@ -81,7 +81,9 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
                             Gap(Dimens.size8),
                             InkWell(
                               onTap: () {
-                                
+                                setState(() {
+                                  widget.onRemoveWords(questionInfo);
+                                });
                               },
                               child: Icon(Icons.delete, color: ColorConst.colorIconRed,size: Dimens.size20,),
                             )
@@ -192,7 +194,7 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
           Gap(Dimens.size16),
           InkWell(
             onTap: () {
-              CreateEditWordsPage().show(context);
+              //CreateEditWordsPage().show(context);
             },
             child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size40,),
           )

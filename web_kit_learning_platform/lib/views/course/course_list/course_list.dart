@@ -69,10 +69,15 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                   Expanded(
                     child: Layout(
                         isScroll: false,
-                        title: Center(child: Text(
-                            state.courseType == CourseType.courseList? L10nX.getStr.courses_list: L10nX.getStr.your_course,
-                          style: TextStyleConstant.textStyleBlack18w600,
-                        ),),
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              state.courseType == CourseType.courseList ? L10nX.getStr.courses_list : L10nX.getStr.your_course,
+                              style: TextStyleConstant.textStyleBlack18w600,
+                            ),
+                          ],
+                        ),
                         padding: EdgeInsets.only(top: 45 + 16, bottom: 16),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
@@ -229,9 +234,9 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                 ),
                               ),
                             ),
-                            myScreenMediaType.isMobile ?
-                            Expanded(child: buildCourseList(state: state, boxConstraints: boxConstraints)) :
-                            Expanded(child: buildCourseList(state: state, boxConstraints: boxConstraints)),
+                            myScreenMediaType.isMobile
+                                ? Expanded(child: buildCourseList(state: state, boxConstraints: boxConstraints))
+                                : Expanded(child: buildCourseList(state: state, boxConstraints: boxConstraints)),
                             SizedBox(
                               height: 8,
                             ),
@@ -242,7 +247,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                     child: FlutterCustomPagination(
                       key: UniqueKey(),
                       currentPage: state.courseResponseModel!.getCurrentPage(),
-                      limitPerPage: state.courseResponseModel!.pageSize??10,
+                      limitPerPage: state.courseResponseModel!.pageSize ?? 10,
                       totalDataCount: state.courseResponseModel!.getTotalElement(),
                       onPreviousPage: (p0) {
                         BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
@@ -274,91 +279,107 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
   }
 
   Widget buildCourseList({required CourseListState state, required BoxConstraints boxConstraints}) {
-    return LayoutBuilder(builder: (context, constraints) {
-      List<Widget> listOfCourse = List.empty(growable: true);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        switch (state.blocStatus) {
+          case null:
+          // TODO: Handle this case.
+          case CourseStatus.initial:
+          // TODO: Handle this case.
+          case CourseStatus.onLoading:
+          // TODO: Handle this case.
+          case CourseStatus.onSearchByParams:
+            // TODO: Handle this case.
+            return Center(child: CircularProgressIndicator());
+          case CourseStatus.onLoadEnd:
+            // TODO: Handle this case.
+            double width = MediaQuery.of(context).size.width;
+            return ((state.courseResponseModel?.content ?? []).isEmpty)
+                ? Center(child: NoData())
+                : LayoutBuilder(
+                    builder: (BuildContext context, BoxConstraints constraints) {
+                      List<Widget> listOfCourse = List.empty(growable: true);
+                      bool? enableEdit = state.userProfile?.getPermission().contains("");
+                      double maxWidthItem = 260;
+                      double heightOfItem = 240;
+                      int numberRow = (constraints.maxWidth ~/ (maxWidthItem + 10));
+                      double widthItem = maxWidthItem;
+                      double crossAxisSpacing = (constraints.maxWidth - numberRow * (maxWidthItem + 10)) / numberRow;
+                      if (crossAxisSpacing > 40) {
+                        crossAxisSpacing = 40;
+                      } else if (crossAxisSpacing <= 20) {
+                        crossAxisSpacing = 20;
+                      }
+                      for (CourseInfo courseInfo in state.courseResponseModel?.content ?? []) {
+                        listOfCourse.add(CourseItemGridView(
+                          courseInfo: courseInfo,
+                          enableEdit: enableEdit,
+                          row: numberRow,
+                          onDelete: (p0) {},
+                          onEdit: (p0) {
+                            CreateEditCourse(
+                              coursePageType: CoursePageType.edit,
+                              courseInfo: p0,
+                            ).show(context);
+                          },
+                          onViewDetail: (p0) {
+                            CoursePreview(
+                              courseInfo: courseInfo,
+                            ).show(context);
+                          },
+                          onStudy: (p0) {
+                            CourseStudy1(
+                              courseInfo: courseInfo,
+                            ).show(context);
+                          },
+                        ));
+                      }
 
-      bool? enableEdit = state.userProfile?.getPermission().contains("");
-      double maxWidthItem = 300;
-      double heightOfItem = 280;
-      int numberRow = (constraints.maxWidth ~/ (maxWidthItem+40));
-      double widthItem = maxWidthItem;
-      for (CourseInfo courseInfo in state.courseResponseModel?.content ?? []) {
-        listOfCourse.add(CourseItemGridView(
-          courseInfo: courseInfo,
-          enableEdit: enableEdit,
-          onDelete: (p0) {},
-          onEdit: (p0) {
-            CreateEditCourse(
-              coursePageType: CoursePageType.edit,
-              courseInfo: p0,
-            ).show(context);
-          },
-          onViewDetail: (p0) {
-            CoursePreview(
-              courseInfo: courseInfo,
-            ).show(context);
-          },
-          onStudy: (p0) {
-            CourseStudy1(
-              courseInfo: courseInfo,
-            ).show(context);
-          },
-        ));
-      }
-
-      switch (state.blocStatus) {
-        case null:
-        // TODO: Handle this case.
-        case CourseStatus.initial:
-        // TODO: Handle this case.
-        case CourseStatus.onLoading:
-        // TODO: Handle this case.
-        case CourseStatus.onSearchByParams:
-        // TODO: Handle this case.
-          return Center(child: CircularProgressIndicator());
-        case CourseStatus.onLoadEnd:
-        // TODO: Handle this case.
-          double width = MediaQuery.of(context).size.width;
-          return (listOfCourse.isEmpty)
-              ? Center(child: NoData())
-              : Align(
-            alignment: Alignment.topLeft,
-            child: Scrollbar(
-              controller: scrollController,
-              thickness: ResponsiveInfo.isPhone()?5: 15,
-              radius: Radius.circular(0),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 16.0, left: 16, right: 16),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: numberRow>1?
-                        GridView.count(
-                          //padding: const EdgeInsets.all(20),
+                      return Align(
+                        alignment: Alignment.topLeft,
+                        child: Scrollbar(
                           controller: scrollController,
-                          crossAxisSpacing: 16,
-                          childAspectRatio: (widthItem) / (heightOfItem) ,
-                          mainAxisSpacing: 16,
-                          crossAxisCount: numberRow,
-                          shrinkWrap: true,
-                          children: listOfCourse,
-                        ): ListView(
-                          shrinkWrap: true,
-                          controller: scrollController,
-                          scrollDirection: Axis.vertical,
-                          children: listOfCourse,
+                          thickness: ResponsiveInfo.isPhone() ? 5 : 15,
+                          radius: Radius.circular(0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Align(
+                                    alignment: Alignment.topCenter,
+                                    child: numberRow > 1
+                                        ? Padding(
+                                            padding: EdgeInsets.only(top: 16.0, left: crossAxisSpacing / 2, right: crossAxisSpacing / 2),
+                                            child: GridView.count(
+                                              //padding: const EdgeInsets.all(20),
+                                              controller: scrollController,
+                                              crossAxisSpacing: crossAxisSpacing,
+                                              childAspectRatio: (widthItem) / (heightOfItem),
+                                              mainAxisSpacing: 16,
+                                              crossAxisCount: numberRow,
+                                              shrinkWrap: true,
+                                              children: listOfCourse,
+                                            ),
+                                          )
+                                        : ListView.builder(
+                                            shrinkWrap: true,
+                                            controller: scrollController,
+                                            itemCount: listOfCourse.length,
+                                            itemBuilder: (context, index) {
+                                              return Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: listOfCourse.elementAt(index),
+                                              );
+                                            },
+                                          )),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-      }
-    },);
-
+                      );
+                    },
+                  );
+        }
+      },
+    );
   }
 }

@@ -63,24 +63,31 @@ class TestInfo {
       json['quizDTOs'].forEach((v) {
         quizDTOs!.add(new QuestionInfo.fromJson(v));
       });
+    } else if (json['quizs'] != null) {
+      quizDTOs = <QuestionInfo>[];
+      json['quizs'].forEach((v) {
+        quizDTOs!.add(new QuestionInfo.fromJson(v));
+      });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] =id;
-    data['course_id'] =courseId;
-    data['lecture_id'] =lectureId;
-    data['language'] =language;
+    if(id!=null) {
+      data['id'] =id;
+    }
+    //data['course_id'] =courseId;
+    //data['lecture_id'] =lectureId;
+   // data['language'] =language;
     data['type_test'] =typeTest;
     data['name'] =name;
-    data['course_name'] =courseName;
-    data['sub_name'] =subName;
-    data['lecture_name'] =lectureName;
-    data['created_at'] =createdAt;
-    data['created_by'] =createdBy;
-    data['updated_at'] =updatedAt;
-    data['updated_by'] =updatedBy;
+   // data['course_name'] =courseName;
+   // data['sub_name'] =subName;
+    //data['lecture_name'] =lectureName;
+   // data['created_at'] =createdAt;
+    //data['created_by'] =createdBy;
+    //data['updated_at'] =updatedAt;
+    //data['updated_by'] =updatedBy;
     if (quizDTOs != null) {
       data['question_ids'] =quizDTOs!.map((e) => e.id,).toList().join(',');
     }

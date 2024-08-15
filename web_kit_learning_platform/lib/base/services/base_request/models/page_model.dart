@@ -5,10 +5,10 @@ class PageModel{
   int? pageNumber;
   int getCurrentPage(){
     int pageIndex = pageNumber??1;
-    if(getTotalPage()<=pageIndex)
+/*    if(getTotalPage()<=pageIndex)
       {
         pageIndex = getTotalPage();
-      }
+      }*/
     return pageIndex<1?1:pageIndex;
   }
   int getTotalPage(){

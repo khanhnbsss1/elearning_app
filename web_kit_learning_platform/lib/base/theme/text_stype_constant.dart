@@ -43,7 +43,7 @@ double fontSize16 = Dimens.size16;
 double fontSize15 = Dimens.size15;
 double fontSize14 = Dimens.size14;
 double fontSize13 = Dimens.size13;
-double fontSize12 = Dimens.size22;
+double fontSize12 = Dimens.size12;
 double fontSize10 = Dimens.size10;
 
  FontWeight fontWeight200 = FontWeight.w200;
@@ -157,8 +157,8 @@ class TextStyleConstant{
      fontSize15 = Dimens.size16;
      fontSize14 = Dimens.size15;
      fontSize13 = Dimens.size14;
-     fontSize12 = Dimens.size13;
-     fontSize10 = Dimens.size11;
+     fontSize12 = Dimens.size12;
+     fontSize10 = Dimens.size10;
      fontSize28 = Dimens.size28;
      FontWeight fontWeight200 = FontWeight.w200;
      fontWeight300 = FontWeight.w300;
