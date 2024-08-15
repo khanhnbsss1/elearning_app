@@ -260,187 +260,184 @@ class _ReviewListState extends State<ReviewList>
       {required BoxConstraints constraints,
       required ReviewLandingPageInfo reviewLandingPageInfo,
       required ReviewListState state}) {
-    return Padding(
-      padding: EdgeInsets.only(right: 16),
-      child: StatefulBuilder(
-        builder: (BuildContext context, void Function(void Function()) setState) {
-          return Card(
-            elevation: 10,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12)),
-            child: Container(
-              width: ResponsiveInfo.isPhone() ? constraints.maxWidth / 1.2 : 600,
-              // constraints: BoxConstraints(minWidth: 500),
-              padding: const EdgeInsets.all(12.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: notifier.isDark
-                    ? Colors.transparent
-                    : ColorConst.whiteColor,
-              ),
-              child: !ResponsiveInfo.isPhone() ? Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: reviewLandingPageInfo.avatar!.isNotEmpty
-                          ? ImageManager().getImageByUrl(
-                              reviewLandingPageInfo.avatar ?? "",
-                              boxFit: BoxFit.fill)
-                          : Image.asset('assets/deshboard/latestdeals.png',
-                              fit: BoxFit.fill),
-                    ),
+    return StatefulBuilder(
+      builder: (BuildContext context, void Function(void Function()) setState) {
+        return Card(
+          elevation: 10,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12)),
+          child: Container(
+            width: ResponsiveInfo.isPhone() ? constraints.maxWidth / 1.2 : 600,
+            // constraints: BoxConstraints(minWidth: 500),
+            padding: const EdgeInsets.all(12.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: notifier.isDark
+                  ? Colors.transparent
+                  : ColorConst.whiteColor,
+            ),
+            child: !ResponsiveInfo.isPhone() ? Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: reviewLandingPageInfo.avatar!.isNotEmpty
+                        ? ImageManager().getImageByUrl(
+                            reviewLandingPageInfo.avatar ?? "",
+                            boxFit: BoxFit.fill)
+                        : Image.asset('assets/deshboard/latestdeals.png',
+                            fit: BoxFit.fill),
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 16),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: constraints.maxWidth < 550
-                            ? CrossAxisAlignment.center
-                            : CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                reviewLandingPageInfo.name ?? "",
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyleConstant.titleSmall.copyWith(
-                                  color: notifier.redcolor,
-                                ),
-                                textAlign: TextAlign.center,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: constraints.maxWidth < 550
+                          ? CrossAxisAlignment.center
+                          : CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              reviewLandingPageInfo.name ?? "",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyleConstant.titleSmall.copyWith(
+                                color: notifier.redcolor,
                               ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Flexible(
-                                child: Text(
-                                    reviewLandingPageInfo.position ?? "",
-                                    style:
-                                        TextStyleConstant.titleSmall.copyWith(
-                                      color: notifier.blackcolor,
-                                    ),
-                                    textAlign: TextAlign.center),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: constraints.maxWidth < 550 ? 0 : 8,
-                          ),
-                          LayoutBuilder(
-                            builder: (context, constraints) {
-                              return ConstrainedBox(
-                                constraints: BoxConstraints(
-                                    maxHeight: constraints.maxWidth / 1.5),
-                                child: SingleChildScrollView(
-                                  child: ReadMoreText(
-                                    ("\"${(reviewLandingPageInfo.review! ) * 10}\" ") ??
-                                        "",
-                                    trimMode: TrimMode.Line,
-                                    trimLines: 3,
-                                    colorClickableText: Colors.pink,
-                                    trimCollapsedText: L10nX.getStr.show_more,
-                                    trimExpandedText: L10nX.getStr.show_less,
-                                    style:
-                                        TextStyleConstant.bodyLarge.copyWith(
-                                      fontStyle: FontStyle.italic,
-                                      color: notifier.blackcolor,
-                                    ),
-                                    textAlign: TextAlign.justify,
-                                  ),
-                                ),
-                              );
-                            },
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              )
-              : Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 250,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: reviewLandingPageInfo.avatar!.isNotEmpty
-                          ? ImageManager().getImageByUrl(
-                          reviewLandingPageInfo.avatar ?? "",
-                          boxFit: BoxFit.fill)
-                          : Image.asset('assets/deshboard/latestdeals.png',
-                          fit: BoxFit.fill),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        reviewLandingPageInfo.name ?? "",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyleConstant.titleSmall.copyWith(
-                          color: notifier.redcolor,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: Text(
-                            reviewLandingPageInfo.position ?? "",
-                            style:
-                            TextStyleConstant.titleSmall.copyWith(
-                              color: notifier.blackcolor,
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Flexible(
+                              child: Text(
+                                  reviewLandingPageInfo.position ?? "",
+                                  style:
+                                      TextStyleConstant.titleSmall.copyWith(
+                                    color: notifier.blackcolor,
+                                  ),
+                                  textAlign: TextAlign.center),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: constraints.maxWidth < 550 ? 0 : 8,
+                        ),
+                        LayoutBuilder(
+                          builder: (context, constraints) {
+                            return ConstrainedBox(
+                              constraints: BoxConstraints(
+                                  maxHeight: constraints.maxWidth / 1.5),
+                              child: SingleChildScrollView(
+                                child: ReadMoreText(
+                                  ("\"${(reviewLandingPageInfo.review! ) * 10}\" ") ??
+                                      "",
+                                  trimMode: TrimMode.Line,
+                                  trimLines: 3,
+                                  colorClickableText: Colors.pink,
+                                  trimCollapsedText: L10nX.getStr.show_more,
+                                  trimExpandedText: L10nX.getStr.show_less,
+                                  style:
+                                      TextStyleConstant.bodyLarge.copyWith(
+                                    fontStyle: FontStyle.italic,
+                                    color: notifier.blackcolor,
+                                  ),
+                                  textAlign: TextAlign.justify,
+                                ),
+                              ),
+                            );
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            )
+            : Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 250,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: reviewLandingPageInfo.avatar!.isNotEmpty
+                        ? ImageManager().getImageByUrl(
+                        reviewLandingPageInfo.avatar ?? "",
+                        boxFit: BoxFit.fill)
+                        : Image.asset('assets/deshboard/latestdeals.png',
+                        fit: BoxFit.fill),
+                  ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      reviewLandingPageInfo.name ?? "",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyleConstant.titleSmall.copyWith(
+                        color: notifier.redcolor,
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 8
-                  ),
-                  SizedBox(
-                    height: 150,
-                    child: Center(
-                      child: SingleChildScrollView(
-                        child: ReadMoreText(
-                          ("\"${(reviewLandingPageInfo.review! ) * 10}\" ") ??
-                              "",
-                          trimMode: TrimMode.Line,
-                          trimLines: 3,
-                          colorClickableText: Colors.pink,
-                          trimCollapsedText: L10nX.getStr.show_more,
-                          trimExpandedText: L10nX.getStr.show_less,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Text(
+                          reviewLandingPageInfo.position ?? "",
                           style:
-                          TextStyleConstant.bodyLarge.copyWith(
-                            fontStyle: FontStyle.italic,
+                          TextStyleConstant.titleSmall.copyWith(
                             color: notifier.blackcolor,
                           ),
-                          textAlign: TextAlign.justify,
+                          textAlign: TextAlign.center),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 8
+                ),
+                SizedBox(
+                  height: 150,
+                  child: Center(
+                    child: SingleChildScrollView(
+                      child: ReadMoreText(
+                        ("\"${(reviewLandingPageInfo.review! ) * 10}\" ") ??
+                            "",
+                        trimMode: TrimMode.Line,
+                        trimLines: 3,
+                        colorClickableText: Colors.pink,
+                        trimCollapsedText: L10nX.getStr.show_more,
+                        trimExpandedText: L10nX.getStr.show_less,
+                        style:
+                        TextStyleConstant.bodyLarge.copyWith(
+                          fontStyle: FontStyle.italic,
+                          color: notifier.blackcolor,
                         ),
+                        textAlign: TextAlign.justify,
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -448,102 +445,99 @@ class _ReviewListState extends State<ReviewList>
       {required BoxConstraints constraints,
       required ReviewLandingPageInfo reviewLandingPageInfo,
       required ReviewListState state}) {
-    return Padding(
-      padding: EdgeInsets.only(right: 16),
-      child: StatefulBuilder(
-        builder: (BuildContext context, void Function(void Function()) setState) {
-          return Card(
-            elevation: 10,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12)),
-            child: Container(
-              height: 300,
-              width: ResponsiveInfo.isPhone()
-                  ? constraints.maxWidth / 2
-                  : constraints.maxWidth / 4,
-              constraints: BoxConstraints(minWidth: 250, maxWidth: 500),
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: notifier.isDark
-                    ? Colors.transparent
-                    : ColorConst.whiteColor,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.red),
-                      width: Dimens.size100,
-                      height: Dimens.size100,
-                      child: ClipRRect(
-                        borderRadius:
-                            BorderRadius.circular(Dimens.size100 / 2),
-                        child: reviewLandingPageInfo.avatar!.isNotEmpty
-                            ? ImageManager().getImageByUrl(
-                                reviewLandingPageInfo.avatar ?? "",
-                                boxFit: BoxFit.contain)
-                            : Image.asset('assets/deshboard/latestdeals.png',
-                                fit: BoxFit.contain),
-                      ),
+    return StatefulBuilder(
+      builder: (BuildContext context, void Function(void Function()) setState) {
+        return Card(
+          elevation: 10,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12)),
+          child: Container(
+            height: 300,
+            width: ResponsiveInfo.isPhone()
+                ? constraints.maxWidth / 2
+                : constraints.maxWidth / 4,
+            constraints: BoxConstraints(minWidth: 250, maxWidth: 500),
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: notifier.isDark
+                  ? Colors.transparent
+                  : ColorConst.whiteColor,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle, color: Colors.red),
+                    width: Dimens.size100,
+                    height: Dimens.size100,
+                    child: ClipRRect(
+                      borderRadius:
+                          BorderRadius.circular(Dimens.size100 / 2),
+                      child: reviewLandingPageInfo.avatar!.isNotEmpty
+                          ? ImageManager().getImageByUrl(
+                              reviewLandingPageInfo.avatar ?? "",
+                              boxFit: BoxFit.contain)
+                          : Image.asset('assets/deshboard/latestdeals.png',
+                              fit: BoxFit.contain),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        reviewLandingPageInfo.name ?? "",
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyleConstant.bodyLarge.copyWith(
-                          color: notifier.redcolor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        textAlign: TextAlign.center,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      reviewLandingPageInfo.name ?? "",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyleConstant.bodyLarge.copyWith(
+                        color: notifier.redcolor,
+                        fontWeight: FontWeight.w600,
                       ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: Text(reviewLandingPageInfo.position ?? "",
-                            style: TextStyleConstant.bodySmall.copyWith(
-                              fontWeight: fontWeight400,
-                              color: notifier.greycolor,
-                            ),
-                            textAlign: TextAlign.center),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
+                      child: Text(reviewLandingPageInfo.position ?? "",
+                          style: TextStyleConstant.bodySmall.copyWith(
+                            fontWeight: fontWeight400,
+                            color: notifier.greycolor,
+                          ),
+                          textAlign: TextAlign.center),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: constraints.maxWidth < 550 ? 0 : 8,
+                ),
+                Expanded(
+                    child: Center(
+                      child: SingleChildScrollView(
+                                          child: ReadMoreText(
+                      ("\"${("${reviewLandingPageInfo.review!} ") * 20}\"") ?? "",
+                      trimMode: TrimMode.Line,
+                      trimLines: 3,
+                      colorClickableText: Colors.pink,
+                      trimCollapsedText: L10nX.getStr.show_more,
+                      trimExpandedText: L10nX.getStr.show_less,
+                      style: TextStyleConstant.bodyLarge.copyWith(
+                        fontStyle: FontStyle.italic,
+                        color: notifier.blackcolor,
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: constraints.maxWidth < 550 ? 0 : 8,
-                  ),
-                  Expanded(
-                      child: Center(
-                        child: SingleChildScrollView(
-                                            child: ReadMoreText(
-                        ("\"${("${reviewLandingPageInfo.review!} ") * 20}\"") ?? "",
-                        trimMode: TrimMode.Line,
-                        trimLines: 3,
-                        colorClickableText: Colors.pink,
-                        trimCollapsedText: L10nX.getStr.show_more,
-                        trimExpandedText: L10nX.getStr.show_less,
-                        style: TextStyleConstant.bodyLarge.copyWith(
-                          fontStyle: FontStyle.italic,
-                          color: notifier.blackcolor,
-                        ),
-                        textAlign: TextAlign.justify,
-                                            ),
+                      textAlign: TextAlign.justify,
                                           ),
-                      )),
-                ],
-              ),
+                                        ),
+                    )),
+              ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

@@ -4210,10 +4210,10 @@ class S {
     );
   }
 
-  /// `Study at YAX Chinese learning platform, you will find "Speaking Chinese is as easy as eating candy"`
+  /// `Study at YAX Chinese, you will find "Speaking Chinese is as easy as eating candy"`
   String get who_this_course_is_for_comment {
     return Intl.message(
-      'Study at YAX Chinese learning platform, you will find "Speaking Chinese is as easy as eating candy"',
+      'Study at YAX Chinese, you will find "Speaking Chinese is as easy as eating candy"',
       name: 'who_this_course_is_for_comment',
       desc: '',
       args: [],
@@ -5515,6 +5515,16 @@ class S {
     return Intl.message(
       'Select tag',
       name: 'tags_select',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No access permission!`
+  String get not_access_permission {
+    return Intl.message(
+      'No access permission!',
+      name: 'not_access_permission',
       desc: '',
       args: [],
     );

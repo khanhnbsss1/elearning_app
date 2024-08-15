@@ -338,7 +338,6 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           height: width < 550 ? 50 : 100,
         ),
         EndOfPage(),
-        
       });
     }
     return Stack(children: [
@@ -378,9 +377,8 @@ class _LandingPageScreenState extends State<LandingPageScreen>
               child: Align(
                 alignment: Alignment.topCenter,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 20),
-                  child: buildNavigatorBar()
-                ),
+                    padding: EdgeInsets.only(top: 20),
+                    child: buildNavigatorBar()),
               ),
             );
           }),
@@ -406,7 +404,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           Wrap(
             children: List<Widget>.generate(
               7,
-                  (int index) {
+              (int index) {
                 return StatefulBuilder(
                   builder: (BuildContext context,
                       void Function(void Function()) setState) {
@@ -417,8 +415,7 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                         builder: (isHovered) {
                           return StatefulBuilder(
                             builder: (BuildContext context,
-                                void Function(void Function())
-                                setState) {
+                                void Function(void Function()) setState) {
                               return Center(
                                 child: TextButton(
                                   style: TextButton.styleFrom(
@@ -426,32 +423,24 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                   ),
                                   onPressed: () {
                                     Scrollable.ensureVisible(
-                                        GlobalObjectKey(index)
-                                            .currentContext!,
-                                        duration:
-                                        Duration(seconds: 1),
+                                        GlobalObjectKey(index).currentContext!,
+                                        duration: Duration(seconds: 1),
                                         curve: Curves.easeInOutCubic);
                                   },
                                   child: Text(
                                     landingPageTitles[index],
-                                    style: TextStyleConstant
-                                        .bodyMedium
+                                    style: TextStyleConstant.bodyMedium
                                         .copyWith(
-                                        fontWeight:
-                                        FontWeight.bold,
-                                        fontSize: (width < 1100)
-                                            ? 10
-                                            : 18,
-                                        color: (isHovered)
-                                            ? notifier.redcolor
-                                            : Colors.black,
-                                        decoration: (isHovered)
-                                            ? TextDecoration
-                                            .underline
-                                            : TextDecoration.none,
-                                        decorationColor:
-                                        notifier.redcolor,
-                                        decorationThickness: 2),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: (width < 1100) ? 10 : 18,
+                                            color: (isHovered)
+                                                ? notifier.redcolor
+                                                : Colors.black,
+                                            decoration: (isHovered)
+                                                ? TextDecoration.underline
+                                                : TextDecoration.none,
+                                            decorationColor: notifier.redcolor,
+                                            decorationThickness: 2),
                                   ),
                                 ),
                               );
@@ -526,27 +515,6 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                     ),
                     Row(
                       children: [
-                        TextButton(
-                          onPressed: () {
-                            userProfile == null
-                                ? LoginPage().show(context)
-                                : AppPages.routeName(Routes.dashboardRoute);
-                          },
-                          child: Text(
-                            L10nX.getStr.lets_study,
-                            style: TextStyleConstant.titleMedium.copyWith(
-                              fontSize: 20,
-                              color: Colors.black,
-                            ),
-                            // Text(
-                            //   L10nX.getStr.slogan,
-                            //   style: TextStyle(
-                            //     fontSize: 24,
-                            //     color: Colors.black,
-                            //   ),
-                            // ),
-                          ),
-                        ),
                         SizedBox(
                           width: 16,
                         ),
@@ -655,6 +623,10 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                       width: constraints.maxWidth < 500 ? 10 : 25,
                     ),
                     PopupMenuButton(
+                      constraints: const BoxConstraints(
+                        maxWidth: 140,
+                        maxHeight: 100,
+                      ),
                       tooltip: '',
                       padding: const EdgeInsets.all(0),
                       offset: const Offset(0, 50),
@@ -679,8 +651,8 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                 color: Colors.red,
                                 userProfile.avatar ?? "")
                             : Image.asset(
-                                'assets/Icons/profileicon.png',
-                                scale: 2.5,
+                                'assets/deshboard/profile.png',
+                                fit: BoxFit.fill,
                               ),
                       ),
                       onSelected: (SampleItem2 item) {
@@ -696,156 +668,80 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                           onTap: () {},
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Visibility(
-                                visible: userProfile != null &&
-                                    ResponsiveInfo.isPhone(),
-                                child: InkWell(
-                                  hoverColor: Colors.transparent,
-                                  onTap: () {
-                                    AppPages.routeName(Routes.dashboardRoute);
-                                  },
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
+                                visible: userProfile == null,
+                                child: Center(
+                                  child: Column(
                                     children: [
-                                      Icon(
-                                        Icons.home_outlined,
-                                        size: Dimens.size25,
-                                        color: ColorConst.blackColor,
+                                      TextButton(
+                                        onPressed: () {
+                                          LoginPage().show(context);
+                                          //AppPages.route(Paths.dashboardPath);
+                                        },
+                                        child: Text(L10nX.getStr.login,
+                                            style: baseStyle.copyWith(
+                                                fontSize: 12,
+                                                color: notifier.buttoncolor)),
                                       ),
-                                      const SizedBox(width: 8),
-                                      Text(L10nX.getStr.lets_study,
-                                          style: baseStyle.copyWith(
-                                            fontSize: 16,
-                                            color: notifier.blackcolor,
-                                          )),
-                                      const SizedBox(height: 30),
+                                      const SizedBox(height: 16),
+                                      TextButton(
+                                        onPressed: () {
+                                          Register().show(context);
+                                        },
+                                        child: Text(L10nX.getStr.sign_up,
+                                            style: baseStyle.copyWith(
+                                                fontSize: 12,
+                                                color: notifier.buttoncolor)),
+                                      ),
                                     ],
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(
-                                    vertical: Dimens.size10),
-                                child: Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      Visibility(
-                                        visible: userProfile == null,
-                                        child: Center(
-                                          child: Column(
-                                            children: [
-                                              SizedBox(
-                                                height: 40,
-                                                width: 120,
-                                                child: ElevatedButton(
-                                                  style: ButtonStyle(
-                                                    elevation:
-                                                        const WidgetStatePropertyAll(
-                                                            0),
-                                                    backgroundColor:
-                                                        WidgetStatePropertyAll(
-                                                            notifier
-                                                                .buttoncolor),
-                                                    shape:
-                                                        const WidgetStatePropertyAll(
-                                                      RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    20)),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  onPressed: () {
-                                                    LoginPage().show(context);
-                                                    //AppPages.route(Paths.dashboardPath);
-                                                  },
-                                                  child: Text(
-                                                      L10nX.getStr.login,
-                                                      style: baseStyle.copyWith(
-                                                          fontSize: 12,
-                                                          color: Colors.white)),
-                                                ),
-                                              ),
-                                              const SizedBox(height: 16),
-                                              SizedBox(
-                                                height: 40,
-                                                width: 120,
-                                                child: ElevatedButton(
-                                                  style: ButtonStyle(
-                                                    elevation:
-                                                        const WidgetStatePropertyAll(
-                                                            0),
-                                                    backgroundColor:
-                                                        WidgetStatePropertyAll(
-                                                            notifier
-                                                                .whitecolor),
-                                                    shape:
-                                                        WidgetStatePropertyAll(
-                                                      RoundedRectangleBorder(
-                                                        side: BorderSide(
-                                                            color: notifier
-                                                                .buttoncolor,
-                                                            width: 2),
-                                                        borderRadius:
-                                                            const BorderRadius
-                                                                .all(
-                                                                Radius.circular(
-                                                                    20)),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  onPressed: () {
-                                                    Register().show(context);
-                                                  },
-                                                  child: Text(
-                                                      L10nX.getStr.sign_up,
-                                                      style: baseStyle.copyWith(
-                                                          fontSize: 12,
-                                                          color: notifier
-                                                              .buttoncolor)),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                              Visibility(
+                                visible: userProfile != null,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Center(
+                                      child: TextButton(
+                                        onPressed: () {
+                                          userProfile == null
+                                              ? LoginPage().show(context)
+                                              : AppPages.routeName(
+                                                  Routes.dashboardRoute);
+                                        },
+                                        child: Text(
+                                          L10nX.getStr.lets_study,
+                                          style: baseStyle,
                                         ),
                                       ),
-                                      Visibility(
-                                        visible: userProfile != null,
-                                        child: InkWell(
-                                          hoverColor: Colors.transparent,
-                                          onTap: () {
-                                            AuthorManager().handleLogout();
-                                            AppPages.routeName(
-                                                Routes.landingPageRoute,
-                                                isReplace: true);
-                                          },
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Icon(
-                                                Icons.logout,
-                                                size: Dimens.size25,
-                                                color: ColorConst.blackColor,
-                                              ),
-                                              const SizedBox(width: 8),
-                                              Text(L10nX.getStr.sign_out_text,
-                                                  style: baseStyle.copyWith(
-                                                      fontSize: 12,
-                                                      color: Colors.red)),
-                                            ],
+                                    ),
+                                    const SizedBox(height: 16),
+                                    TextButton(
+                                      onPressed: () {
+                                        AuthorManager().handleLogout();
+                                        AppPages.routeName(
+                                            Routes.landingPageRoute,
+                                            isReplace: true);
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.logout,
+                                            size: Dimens.size25,
+                                            color: ColorConst.blackColor,
                                           ),
-                                        ),
+                                          const SizedBox(width: 8),
+                                          Text(L10nX.getStr.sign_out_text,
+                                              style: baseStyle.copyWith(
+                                                  fontSize: 12,
+                                                  color: Colors.red)),
+                                        ],
                                       ),
-                                    ]),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -951,27 +847,33 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                       children: [
                         TextSpan(
                           text: L10nX.getStr.differences_in_teaching_methods_1,
-                          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                          style: TextStyleConstant
+                              .titleTextColorOnBackgroundColorStyle14w400
                               .copyWith(
-                              fontWeight: FontWeight.bold,
-                              fontSize: constraints.maxWidth < 550 ? 28 : 45,
-                              color: notifier.blackcolor),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize:
+                                      constraints.maxWidth < 550 ? 28 : 45,
+                                  color: notifier.blackcolor),
                         ),
                         TextSpan(
-                          text: L10nX.getStr.differences_in_teaching_methods_2,
-                          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
-                              .copyWith(
-                              fontWeight: FontWeight.bold,
-                              fontSize: constraints.maxWidth < 550 ? 28 : 45,
-                              color: notifier.redcolor)
-                        ),
+                            text:
+                                L10nX.getStr.differences_in_teaching_methods_2,
+                            style: TextStyleConstant
+                                .titleTextColorOnBackgroundColorStyle14w400
+                                .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize:
+                                        constraints.maxWidth < 550 ? 28 : 45,
+                                    color: notifier.redcolor)),
                         TextSpan(
                           text: L10nX.getStr.differences_in_teaching_methods_3,
-                          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                          style: TextStyleConstant
+                              .titleTextColorOnBackgroundColorStyle14w400
                               .copyWith(
-                              fontWeight: FontWeight.bold,
-                              fontSize: constraints.maxWidth < 550 ? 28 : 45,
-                              color: notifier.blackcolor),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize:
+                                      constraints.maxWidth < 550 ? 28 : 45,
+                                  color: notifier.blackcolor),
                         ),
                       ],
                     ),
@@ -993,10 +895,11 @@ class _LandingPageScreenState extends State<LandingPageScreen>
             Container(
               // height: Dimens.size240,
               constraints: BoxConstraints(
-                  maxWidth: ResponsiveInfo.isPhone()
-                      ? constraints.maxWidth - Dimens.size20
-                      : constraints.maxWidth * 3 / 4,
-                  maxHeight:  350),
+                maxWidth: ResponsiveInfo.isPhone()
+                    ? constraints.maxWidth - Dimens.size20
+                    : constraints.maxWidth * 3 / 4,
+                // maxHeight:  350
+              ),
               child: Column(
                 children: [
                   SingleChildScrollView(
@@ -1161,15 +1064,18 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                       children: [
                         TextSpan(
                           text: L10nX.getStr.why_choose_us_1,
-                          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                          style: TextStyleConstant
+                              .titleTextColorOnBackgroundColorStyle14w400
                               .copyWith(
-                              fontWeight: FontWeight.bold,
-                              fontSize: constraints.maxWidth < 550 ? 28 : 45,
-                              color: notifier.blackcolor),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize:
+                                      constraints.maxWidth < 550 ? 28 : 45,
+                                  color: notifier.blackcolor),
                         ),
                         TextSpan(
                           text: L10nX.getStr.why_choose_us_2,
-                          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                          style: TextStyleConstant
+                              .titleTextColorOnBackgroundColorStyle14w400
                               .copyWith(
                             fontWeight: FontWeight.bold,
                             fontSize: constraints.maxWidth < 550 ? 28 : 45,
@@ -1178,7 +1084,8 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                         ),
                         TextSpan(
                           text: L10nX.getStr.why_choose_us_3,
-                          style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                          style: TextStyleConstant
+                              .titleTextColorOnBackgroundColorStyle14w400
                               .copyWith(
                             fontWeight: FontWeight.bold,
                             fontSize: constraints.maxWidth < 550 ? 28 : 45,

@@ -696,7 +696,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "who_this_course_is_for":
             MessageLookupByLibrary.simpleMessage("Khóa học này dành cho ai ?"),
         "who_this_course_is_for_comment": MessageLookupByLibrary.simpleMessage(
-            "Học ở YAX Chinese learning platform, bạn sẽ thấy \"Nói Tiếng Trung dễ như ăn kẹo\""),
+            "Học ở YAX Chinese, bạn sẽ thấy \"Nói Tiếng Trung dễ như ăn kẹo\""),
         "who_this_course_is_for_subtitle":
             MessageLookupByLibrary.simpleMessage("Hãy tìm nơi dành cho bạn!"),
         "who_this_course_is_for_table_content_1":

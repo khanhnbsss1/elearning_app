@@ -27,7 +27,7 @@ class CourseItem extends StatelessWidget {
         return OnHoverWidget(
           builder: (isHovered) {
             return Padding(
-              padding:  EdgeInsets.only(right: 16),
+              padding: EdgeInsets.only(right: 16),
               child: Card(
                 color: isHovered && !notifier.isDark
                     ? ColorConst.onHoverColor
@@ -35,7 +35,9 @@ class CourseItem extends StatelessWidget {
                         ? ColorConst.backGroundColor
                         : notifier.whitecolor,
                 elevation: 2,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16),),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
                 child: Container(
                   decoration: BoxDecoration(
                     color: isHovered && !notifier.isDark
@@ -45,7 +47,7 @@ class CourseItem extends StatelessWidget {
                             : notifier.whitecolor,
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  width: 350,
+                  width: 300,
                   clipBehavior: Clip.hardEdge,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -55,168 +57,139 @@ class CourseItem extends StatelessWidget {
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
                             width: 2,
-                            color: (isHovered) ? Colors.red : notifier.whitecolor,
+                            color:
+                                (isHovered) ? Colors.red : notifier.whitecolor,
                           )),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                         SizedBox(
-                                  height: 120,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(16),
-                                    child: Row(
-                                      children: [Expanded(
-                                          child:
-                                    (courseInfo.image!.isNotEmpty)?
-                                          Image.network(
-                                            courseInfo.image!,
-                                            fit: BoxFit.cover,
-                                            //width: constraints.maxWidth * 2,
-                                            //  height: constraints.maxWidth
-                                          ):
-                                    Image.asset(
-                                      'assets/deshboard/adventure/adventure5.png',
-                                      fit: BoxFit.cover,
-                                      width: constraints.maxWidth,
-                                      //height: constraints.maxHeight
-                                    ),
-                                        ),
-                                      ],
-                                    ),
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: 120,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(16),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: (courseInfo.image!.isNotEmpty)
+                                            ? Image.network(
+                                                courseInfo.image!,
+                                                fit: BoxFit.cover,
+                                                //width: constraints.maxWidth * 2,
+                                                //  height: constraints.maxWidth
+                                              )
+                                            : Image.asset(
+                                                'assets/deshboard/adventure/adventure5.png',
+                                                fit: BoxFit.cover,
+                                                // width: constraints.maxWidth,
+                                                //height: constraints.maxHeight
+                                              ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Gap(Dimens.size8),
-                              Text(
-                                '${courseInfo.name}',
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyleConstant.textStyleBlack18w600
-                                    .copyWith(color: Colors.red),
-                                textAlign: TextAlign.center,
-                                maxLines: 2,
                               ),
-                              Gap(Dimens.size16),
-                              Container(
-                                height: 60,
+                              Gap(Dimens.size8),
+                              Align(
                                 alignment: Alignment.center,
-                                child: SingleChildScrollView(
-                                  child: ReadMoreText(
-                                    ("${(courseInfo.introduction)} ") ?? "",
-                                    trimMode: TrimMode.Line,
-                                    trimLines: 2,
-                                    colorClickableText: Colors.pink,
-                                    trimCollapsedText: "  ${L10nX.getStr.show_more}",
-                                    trimExpandedText: L10nX.getStr.show_less,
-                                    style: TextStyleConstant.textStyleBlack14w400.copyWith(
+                                child: Text(
+                                  '${courseInfo.name}',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyleConstant.textStyleBlack18w600
+                                      .copyWith(color: Colors.red),
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Gap(Dimens.size16),
+                          Expanded(
+                            child: Center(
+                              child: (courseInfo.introduction != "") ? ReadMoreText(
+                                ("${(courseInfo.introduction)} ") ?? "",
+                                trimMode: TrimMode.Line,
+                                trimLines: 4,
+                                colorClickableText: Colors.pink,
+                                trimCollapsedText:
+                                    "  ${L10nX.getStr.show_more}",
+                                trimExpandedText: L10nX.getStr.show_less,
+                                style: TextStyleConstant
+                                    .textStyleBlack14w400
+                                    .copyWith(
+                                  color: notifier.isDark && isHovered
+                                      ? notifier.whitecolor
+                                      : notifier.isDark && !isHovered
+                                          ? notifier.blackcolor
+                                          : notifier.blackcolor,
+                                ),
+                              ) : Placeholder(),
+                            ),
+                          ),
+                          Column(
+                            children: [
+                              Gap(Dimens.size16),
+                              Row(
+                                  children: [
+                                Icon(Icons.check,
+                                    size: (constraints.maxWidth < 1100)
+                                        ? Dimens.size20
+                                        : Dimens.size20,
+                                    color: Colors.red),
+                                Gap(Dimens.size8),
+                                Text('Số buổi học: ${courseInfo.totalLectures}',
+                                    style: TextStyleConstant
+                                        .textStyleBlack16w500
+                                        .copyWith(
+                                      fontWeight: FontWeight.bold,
                                       color: notifier.isDark && isHovered
                                           ? notifier.whitecolor
                                           : notifier.isDark && !isHovered
-                                              ? notifier.blackcolor
-                                              : notifier.blackcolor,
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                          ? notifier.blackcolor
+                                          : notifier.blackcolor,
+                                    )),
+                              ]),
                               Gap(Dimens.size16),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Column(
-                                    children: [
-                                      Row(
-                                          children: [
-                                            Icon(Icons.check,
-                                                size: (constraints.maxWidth <
-                                                        1100)
-                                                    ? Dimens.size20
-                                                    : Dimens.size20,
-                                                color: Colors.red),
-                                            Gap(Dimens.size8),
-                                            Text('Số buổi học:',
-                                                style: TextStyleConstant
-                                                    .textStyleBlack16w500
-                                                    .copyWith(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: notifier.isDark &&
-                                                          isHovered
-                                                      ? notifier.whitecolor
-                                                      : notifier.isDark &&
-                                                              !isHovered
-                                                          ? notifier.blackcolor
-                                                          : notifier.blackcolor,
-                                                )),
-                                            Gap(Dimens.size4),
-                                          ]),
-                                    ],
+                                  StarRating(
+                                    rating: (courseInfo.ratePoint ?? 0).toDouble(),
+                                    allowHalfRating: false,
+                                    onRatingChanged: (rating) {},
                                   ),
-                                  Expanded(
-                                    child: Center(
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            '${courseInfo.totalLectures}',
-                                            style: TextStyleConstant.textStyleBlack16w500
-                                                .copyWith(
-                                              color: notifier.isDark && isHovered
-                                                  ? notifier.whitecolor
-                                                  : notifier.isDark && !isHovered
-                                                      ? notifier.blackcolor
-                                                      : notifier.blackcolor,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                          "${NumberHelper().numberToString(courseInfo.payment, decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
+                                          style: TextStyleConstant
+                                              .textStyleBlack16w500
+                                              .copyWith(
+                                            color: notifier.isDark && isHovered
+                                                ? notifier.whitecolor
+                                                : notifier.isDark && !isHovered
+                                                    ? notifier.blackcolor
+                                                    : notifier.blackcolor,
+                                          ))
+                                    ],
                                   )
                                 ],
                               ),
-                            ],
-                          ),
-                          // Spacer(),
-                          Gap(Dimens.size16),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment:
-                            MainAxisAlignment.spaceBetween,
-                            children: [
-                              StarRating(
-                                rating:
-                                (courseInfo.ratePoint ?? 0).toDouble(),
-                                allowHalfRating: false,
-                                onRatingChanged: (rating) {},
+                              Gap(Dimens.size16),
+                              Center(
+                                child: ActionButton1(
+                                  onTap: () {
+                                    AppPages.routeName(Routes.courseList);
+                                  },
+                                  text: L10nX.getStr.register_now,
+                                  width: Dimens.size200,
+                                ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Text(
-                                      "${NumberHelper().numberToString(courseInfo.payment, decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
-                                      style: TextStyleConstant.textStyleBlack16w500
-                                          .copyWith(
-                                        color: notifier.isDark && isHovered
-                                            ? notifier.whitecolor
-                                            : notifier.isDark && !isHovered
-                                            ? notifier.blackcolor
-                                            : notifier.blackcolor,
-                                      ))
-                                ],
-                              )
                             ],
-                          ),
-                          Gap(Dimens.size16),
-                          Padding(
-                            padding: EdgeInsets.all(Dimens.size16),
-                            child: Center(
-                              child: ActionButton1(
-                                onTap: () {
-                                  AppPages.routeName(Routes.courseList);
-                                },
-                                text: L10nX.getStr.register_now,
-                                width: Dimens.size200,
-                              ),
-                            ),
                           )
                         ],
                       ),
