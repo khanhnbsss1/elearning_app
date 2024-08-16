@@ -265,7 +265,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     ),
                     //----------------Test------------------//
                     NavigationItem(
-                      iconData: Icons.quiz,
+                      iconData: LucideIcons.testTubes,
                       title: L10nX.getStr.test_str,
                       route: Routes.testList,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
@@ -277,7 +277,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     ),
                     //----------------Quiz Page------------------//
                     NavigationItem(
-                      iconData: LucideIcons.alarmCheck,
+                      iconData: Icons.quiz_outlined,
                       title: L10nX.getStr.quiz_str,
                       route: Routes.quizList,
                       isCondensed: ThemeCustomizer().leftBarCondensed,

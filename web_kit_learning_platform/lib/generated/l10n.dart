@@ -5649,6 +5649,196 @@ class S {
       args: [],
     );
   }
+
+  /// `Question number`
+  String get question_number {
+    return Intl.message(
+      'Question number',
+      name: 'question_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Test time`
+  String get doing_time_str {
+    return Intl.message(
+      'Test time',
+      name: 'doing_time_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Course name`
+  String get course_name {
+    return Intl.message(
+      'Course name',
+      name: 'course_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter question`
+  String get quiz_type_str {
+    return Intl.message(
+      'Enter question',
+      name: 'quiz_type_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Score`
+  String get score_str {
+    return Intl.message(
+      'Score',
+      name: 'score_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Answer`
+  String get answer_str_1 {
+    return Intl.message(
+      'Answer',
+      name: 'answer_str_1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fill in word`
+  String get type_word_str {
+    return Intl.message(
+      'Fill in word',
+      name: 'type_word_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Text`
+  String get sentence_str {
+    return Intl.message(
+      'Text',
+      name: 'sentence_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Answer`
+  String get answer_str_2 {
+    return Intl.message(
+      'Answer',
+      name: 'answer_str_2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add choice`
+  String get add_selection {
+    return Intl.message(
+      'Add choice',
+      name: 'add_selection',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add new`
+  String get add_new_str {
+    return Intl.message(
+      'Add new',
+      name: 'add_new_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Question type`
+  String get question_type {
+    return Intl.message(
+      'Question type',
+      name: 'question_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Audio`
+  String get audio_type_str {
+    return Intl.message(
+      'Audio',
+      name: 'audio_type_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Text`
+  String get text_type_str {
+    return Intl.message(
+      'Text',
+      name: 'text_type_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Image`
+  String get image_type_str {
+    return Intl.message(
+      'Image',
+      name: 'image_type_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Essay`
+  String get self_essay_type_str {
+    return Intl.message(
+      'Essay',
+      name: 'self_essay_type_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create question`
+  String get question_create {
+    return Intl.message(
+      'Create question',
+      name: 'question_create',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit question`
+  String get question_edit {
+    return Intl.message(
+      'Edit question',
+      name: 'question_edit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Attachment`
+  String get attack_file {
+    return Intl.message(
+      'Attachment',
+      name: 'attack_file',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

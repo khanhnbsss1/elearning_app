@@ -96,9 +96,9 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
   }
   
   Widget buildSearchBar({ required AddCourseState state, required BuildContext context}){
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      mainAxisSize: MainAxisSize.max,
+    return Wrap(
+      runAlignment: WrapAlignment.spaceBetween,
+      alignment: WrapAlignment.spaceBetween,
       children: [
         subjectDropDownSearch(
           state: state,
@@ -106,6 +106,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
           onSelectSubject: (p0) {
             BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateCurrentSubjectEvent(subject: p0));
         },),
+        Gap(Dimens.size50),
         lessonDropDownSearch(
           state: state,
           context: context,
@@ -149,7 +150,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
         columns: <GridColumn>[
           GridColumn(
               columnName: 'id',
-              maximumWidth: Dimens.size100,
+              maximumWidth: Dimens.size80,
               label: Container(
                   padding: EdgeInsets.all(16.0),
                   alignment: Alignment.center,
@@ -158,12 +159,14 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   ))),
           GridColumn(
               columnName: L10nX.getStr.lecture_name_str,
+              minimumWidth: Dimens.size150,
               label: Container(
                   padding: EdgeInsets.all(8.0),
                   alignment: Alignment.center,
                   child: Text(L10nX.getStr.lecture_name_str))),
           GridColumn(
               columnName: L10nX.getStr.subject_name_str,
+              minimumWidth: Dimens.size150,
               label: Container(
                   padding: EdgeInsets.all(8.0),
                   alignment: Alignment.center,
@@ -173,32 +176,35 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   ))),
           GridColumn(
               columnName: L10nX.getStr.lecture_link_str,
+              minimumWidth: Dimens.size300,
               label: Container(
                   padding: EdgeInsets.all(8.0),
                   alignment: Alignment.center,
                   child: Text(L10nX.getStr.lecture_link_str))),
           GridColumn(
               columnName: L10nX.getStr.document_str,
+              minimumWidth: Dimens.size200,
               label: Container(
                   padding: EdgeInsets.all(8.0),
                   alignment: Alignment.center,
                   child: Text(L10nX.getStr.document_str))),
           GridColumn(
               columnName: L10nX.getStr.word_str,
+              minimumWidth: Dimens.size250,
               label: Container(
                   padding: EdgeInsets.all(8.0),
                   alignment: Alignment.center,
                   child: Text(L10nX.getStr.word_str))),
           GridColumn(
               columnName: L10nX.getStr.payment_str,
-              maximumWidth: Dimens.size100,
+              minimumWidth: Dimens.size80,
               label: Container(
                   padding: EdgeInsets.all(8.0),
                   alignment: Alignment.center,
                   child: Text(L10nX.getStr.payment_str))),
           GridColumn(
               columnName: L10nX.getStr.action_str,
-              maximumWidth: Dimens.size120,
+              minimumWidth: Dimens.size120,
               label: Container(
                   padding: EdgeInsets.all(8.0),
                   alignment: Alignment.center,
@@ -213,11 +219,11 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-          width: Dimens.size300,
-          child: StatefulBuilder(
-            builder: (BuildContext context, void Function(void Function()) setState) {
-              return DropDownSearchField(
+        StatefulBuilder(
+          builder: (BuildContext context, void Function(void Function()) setState) {
+            return SizedBox(
+              width:Dimens.size300,
+              child: DropDownSearchField(
                 textFieldConfiguration: TextFieldConfiguration(
                   autofocus: false,
                    controller: _subjectDropdownSearchFieldController,
@@ -296,9 +302,9 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   );
                 },
                 displayAllSuggestionWhenTap: false,
-              );
-              },
-          ),
+              ),
+            );
+            },
         ),
         Gap(Dimens.size16),
         InkWell(
@@ -315,96 +321,92 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
-            width: Dimens.size300,
-            child: StatefulBuilder(
-              builder: (BuildContext context, void Function(void Function()) setState) { 
-                return DropDownSearchFormField(
-                    textFieldConfiguration: TextFieldConfiguration(
-                        autofocus: true,
-                        controller: _lessonDropdownSearchFieldController,
-                        style: DefaultTextStyle.of(context).style.copyWith(
-                            fontStyle: FontStyle.italic
-                        ),
-                        
-                        decoration: InputDecoration(
-                          labelText: L10nX.getStr.search_lesson_str,
-                          hintTextDirection: AppTheme.textDirection,
-                          labelStyle: TextStyleConstant.textStyleBlack14w400,
-                          hintStyle: TextStyleConstant.textStyleBlack14w400,
-                          border: outlineInputBorder,
-                          prefixIcon: Icon(
-                            Icons.edit_document,
-                            size: 20,
-                            color: ColorConst.colorIconRed,
-                          ),
-                          suffixIcon: Icon(
-                            LucideIcons.search,
-                            size: 20,
-                            color: ColorConst.colorIconRed,
-                          ),
-                          contentPadding: MySpacing.all(16),
-                          isCollapsed: true,
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
-                        ),
-                    ),
-                    
-                    suggestionsCallback: (pattern) async {
-                      return await getLessonFilterList(pattern);
-                    },
-                  
-                    itemBuilder: (context, suggestion) {
-                      return OnHoverWidget(
-                        builder: (bool isHovered) { 
-                          return  Container(
-                            decoration: BoxDecoration(
-                              color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
-                              border: Border(
-                                bottom: BorderSide(color: ColorConst.dividerColor)
-                              )
-                            ),
-                            child: ListTile(
-                              leading: Icon(Icons.edit_document),
-                              title: Text(suggestion.lectureName??""),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    onSuggestionSelected: (suggestion) {
-                      if((BlocProvider.of<AddCourseBloc>(context).state.currentSubject??'').isEmpty)
-                      {
-                        ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
-                        return;
-                      }
-                      if(onSelectLesson!=null)
-                      {
-                        _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
-                        onSelectLesson(suggestion);
-                      }
-                      else
-                      {
-                        ToastUtils.showToastError(L10nX.getStr.unknown_str);
-                      }
-                      print("object");
-                    },
-                  transitionBuilder: (context, child, controller) {
-                    return Container(
-                      constraints: BoxConstraints(
-                          maxHeight: Dimens.size300
-                      ),
-                      clipBehavior: Clip.hardEdge,
+            width:Dimens.size300,
+            child: DropDownSearchFormField(
+              textFieldConfiguration: TextFieldConfiguration(
+                autofocus: true,
+                controller: _lessonDropdownSearchFieldController,
+                style: DefaultTextStyle.of(context).style.copyWith(
+                    fontStyle: FontStyle.italic
+                ),
+                          
+                decoration: InputDecoration(
+                  labelText: L10nX.getStr.search_lesson_str,
+                  hintTextDirection: AppTheme.textDirection,
+                  labelStyle: TextStyleConstant.textStyleBlack14w400,
+                  hintStyle: TextStyleConstant.textStyleBlack14w400,
+                  border: outlineInputBorder,
+                  prefixIcon: Icon(
+                    Icons.edit_document,
+                    size: 20,
+                    color: ColorConst.colorIconRed,
+                  ),
+                  suffixIcon: Icon(
+                    LucideIcons.search,
+                    size: 20,
+                    color: ColorConst.colorIconRed,
+                  ),
+                  contentPadding: MySpacing.all(16),
+                  isCollapsed: true,
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                ),
+              ),
+                          
+              suggestionsCallback: (pattern) async {
+                return await getLessonFilterList(pattern);
+              },
+                          
+              itemBuilder: (context, suggestion) {
+                return OnHoverWidget(
+                  builder: (bool isHovered) {
+                    return  Container(
                       decoration: BoxDecoration(
-                          color: ColorConst.whiteColor,
-                          borderRadius: BorderRadius.circular(Dimens.size10)
+                          color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
+                          border: Border(
+                              bottom: BorderSide(color: ColorConst.dividerColor)
+                          )
                       ),
-                      padding: EdgeInsets.all(Dimens.size8),
-                      child: child,
+                      child: ListTile(
+                        leading: Icon(Icons.edit_document),
+                        title: Text(suggestion.lectureName??""),
+                      ),
                     );
                   },
-                  displayAllSuggestionWhenTap: false,
-                  hideSuggestionsOnKeyboardHide: true,
                 );
               },
+              onSuggestionSelected: (suggestion) {
+                if((BlocProvider.of<AddCourseBloc>(context).state.currentSubject??'').isEmpty)
+                {
+                  ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
+                  return;
+                }
+                if(onSelectLesson!=null)
+                {
+                  _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
+                  onSelectLesson(suggestion);
+                }
+                else
+                {
+                  ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                }
+                print("object");
+              },
+              transitionBuilder: (context, child, controller) {
+                return Container(
+                  constraints: BoxConstraints(
+                      maxHeight: Dimens.size300
+                  ),
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                      color: ColorConst.whiteColor,
+                      borderRadius: BorderRadius.circular(Dimens.size10)
+                  ),
+                  padding: EdgeInsets.all(Dimens.size8),
+                  child: child,
+                );
+              },
+              displayAllSuggestionWhenTap: false,
+              hideSuggestionsOnKeyboardHide: true,
             ),
           ),
           Gap(Dimens.size16),

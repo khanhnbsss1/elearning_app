@@ -1,19 +1,14 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/src/multipart_file.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
-import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
-import 'package:webkit/views/course/create_edit_course/components/course_mode.dart';
-import 'package:webkit/views/lessson/components/search_word_drop_down.dart';
 import '../../../base/widgets/widget_common/widget_with_title_common.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
@@ -21,11 +16,7 @@ import '../../../helpers/widgets/my_text_style.dart';
 import 'components/search_question_drop_down.dart';
 import 'test_detail_bloc/test_detail_bloc.dart';
 
-enum ActionType{
-  view, 
-  edit,
-  create
-}
+
 class CreateEditTest extends StatefulWidget {
   TestInfo? testInfo;
    ActionType? testActionType;
@@ -75,6 +66,10 @@ class _CreateEditLesson extends State<CreateEditTest>
     super.initState();
     enableEdit = widget.testActionType!=ActionType.view;
     _tabController = TabController(length: 2, vsync: this);
+    if(widget.testInfo!=null)
+      {
+        valueListenable.value = widget.testInfo?.getTestLevel();
+      }
 
   }
   @override
@@ -174,35 +169,38 @@ class _CreateEditLesson extends State<CreateEditTest>
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ActionButton1(
-                          text: widget.testActionType == ActionType.create?L10nX.getStr.create_lesson_str:L10nX.getStr.str_update,
-                          width: Dimens.size150,
-                          onTap: () {
-                            state.testInfo??= TestInfo();
-                            state.testInfo?.name = state.editingControllerTestName?.text;
-                            state.testInfo?.typeTest = L10nX().getStringByKey("${mapTestLevelToStrKey[valueListenable.value]??""}_str");
-                            state.testInfo?.name = state.editingControllerTestTime?.text;
-                            switch(widget.testActionType){
-
-                              case ActionType.view:
-                              // TODO: Handle this case.
-                                break;
-                              case ActionType.edit:
-                              // TODO: Handle this case.
-                                {
-                                  BlocProvider.of<TestDetailBloc>(context).add(TestDetailUpdateTestEvent(testInfo: state.testInfo!));
-                                }
-                                break;
-                              case ActionType.create:
-                              // TODO: Handle this case.
-                                {
-                                  BlocProvider.of<TestDetailBloc>(context).add(TestDetailCreateTestEvent(testInfo: state.testInfo!));
-                                }
-                                break;
-                              default:
-                                break;
-                            }
-                          },
+                        Visibility(
+                          visible: widget.testActionType != ActionType.view,
+                          child: ActionButton1(
+                            text: widget.testActionType == ActionType.create?L10nX.getStr.create_lesson_str:L10nX.getStr.str_update,
+                            width: Dimens.size150,
+                            onTap: () {
+                              state.testInfo??= TestInfo();
+                              state.testInfo?.name = state.editingControllerTestName?.text;
+                              state.testInfo?.typeTest = L10nX().getStringByKey("${mapTestLevelToStrKey[valueListenable.value]??""}_str");
+                              state.testInfo?.name = state.editingControllerTestTime?.text;
+                              switch(widget.testActionType){
+                          
+                                case ActionType.view:
+                                // TODO: Handle this case.
+                                  break;
+                                case ActionType.edit:
+                                // TODO: Handle this case.
+                                  {
+                                    BlocProvider.of<TestDetailBloc>(context).add(TestDetailUpdateTestEvent(testInfo: state.testInfo!));
+                                  }
+                                  break;
+                                case ActionType.create:
+                                // TODO: Handle this case.
+                                  {
+                                    BlocProvider.of<TestDetailBloc>(context).add(TestDetailCreateTestEvent(testInfo: state.testInfo!));
+                                  }
+                                  break;
+                                default:
+                                  break;
+                              }
+                            },
+                          ),
                         ),
                         Gap(Dimens.size20),
                         ActionButton1(
@@ -315,6 +313,10 @@ class _CreateEditLesson extends State<CreateEditTest>
         keyboardType: TextInputType.text,
         controller: _state.editingControllerTestTime,
         enabled: enableEdit,
+        inputFormatters: 
+        [
+          FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+        ],
         decoration: InputDecoration(
           labelText: L10nX.getStr.time_str,
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
@@ -332,12 +334,10 @@ class _CreateEditLesson extends State<CreateEditTest>
     );
   }
   Widget buildTestLevel({required BuildContext context}) {
-    List<TestLevel> items = TestLevel.values;
+    List<TestLevel> items = enableEdit?TestLevel.values:[];
     return WidgetWithColumnTitleCommon(
-      // title: '${L10nX.getStr.name}: ',
       title: L10nX.getStr.level_str,
       isRequirement: true,
-      // titleStyle: ,
       child: Container(
         decoration: BoxDecoration(
           color: ColorConst.whiteColor
@@ -373,7 +373,7 @@ class _CreateEditLesson extends State<CreateEditTest>
                 borderRadius: BorderRadius.circular(24),
                 border: Border.all(color: ColorConst.greyColor)
               ),
-              //height: 40,
+              height: 56,
               //width: 140,
             ),
             dropdownStyleData: DropdownStyleData(
@@ -405,6 +405,7 @@ class _CreateEditLesson extends State<CreateEditTest>
         Gap(Dimens.size4),
         Expanded(
           child: SearchQuizDropDown(
+            actionType: widget.testActionType,
             exitsQuestion: state.listOfWord??[],
             allWords: const [],
             onAddWords: (tags) {

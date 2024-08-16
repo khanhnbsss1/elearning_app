@@ -39,14 +39,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_lectures_from_another_course_str":
             MessageLookupByLibrary.simpleMessage(
                 "Add lectures from another course"),
+        "add_new_str": MessageLookupByLibrary.simpleMessage("Add new"),
         "add_product": MessageLookupByLibrary.simpleMessage("Add product"),
         "add_products": MessageLookupByLibrary.simpleMessage("Add products"),
+        "add_selection": MessageLookupByLibrary.simpleMessage("Add choice"),
         "add_tags": MessageLookupByLibrary.simpleMessage("Add tags"),
         "adjust_your_course_availability_date_str":
             MessageLookupByLibrary.simpleMessage(
                 "Adjust your course availability date"),
         "alert": MessageLookupByLibrary.simpleMessage("Alert"),
         "animated": MessageLookupByLibrary.simpleMessage("Animated"),
+        "answer_str_1": MessageLookupByLibrary.simpleMessage("Answer"),
+        "answer_str_2": MessageLookupByLibrary.simpleMessage("Answer"),
         "app_address":
             MessageLookupByLibrary.simpleMessage("Innovation St. 767,CA - USA"),
         "app_email": MessageLookupByLibrary.simpleMessage("hello@pulse.com"),
@@ -61,7 +65,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Are you sure, you want to delete history?"),
         "area_chart": MessageLookupByLibrary.simpleMessage("Area chart"),
+        "attack_file": MessageLookupByLibrary.simpleMessage("Attachment"),
         "attack_link_str": MessageLookupByLibrary.simpleMessage("Attack link"),
+        "audio_type_str": MessageLookupByLibrary.simpleMessage("Audio"),
         "auth": MessageLookupByLibrary.simpleMessage("Auth"),
         "authen_invalid": MessageLookupByLibrary.simpleMessage(
             "Username or password is incorrect"),
@@ -140,6 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "course_create": MessageLookupByLibrary.simpleMessage("Create course"),
         "course_delete": MessageLookupByLibrary.simpleMessage("Delete course"),
         "course_edit": MessageLookupByLibrary.simpleMessage("Edit course"),
+        "course_name": MessageLookupByLibrary.simpleMessage("Course name"),
         "course_object_str":
             MessageLookupByLibrary.simpleMessage("Course object"),
         "course_str": MessageLookupByLibrary.simpleMessage("Course"),
@@ -199,6 +206,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("List of documents"),
         "document_str": MessageLookupByLibrary.simpleMessage("Document"),
         "documents_str": MessageLookupByLibrary.simpleMessage("Documents"),
+        "doing_time_str": MessageLookupByLibrary.simpleMessage("Test time"),
         "doughnut_chart":
             MessageLookupByLibrary.simpleMessage("Doughnut chart"),
         "download": MessageLookupByLibrary.simpleMessage("Download"),
@@ -270,6 +278,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("I haven\'t account"),
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "image_str": MessageLookupByLibrary.simpleMessage("Image"),
+        "image_type_str": MessageLookupByLibrary.simpleMessage("Image"),
         "infinite": MessageLookupByLibrary.simpleMessage("Infinite"),
         "info": MessageLookupByLibrary.simpleMessage("Info"),
         "introduction_str":
@@ -418,12 +427,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "purchase_now": MessageLookupByLibrary.simpleMessage("Purchase now"),
         "pyramid_chart": MessageLookupByLibrary.simpleMessage("Pyramid chart"),
         "qty": MessageLookupByLibrary.simpleMessage("Qty"),
+        "question_create":
+            MessageLookupByLibrary.simpleMessage("Create question"),
+        "question_edit": MessageLookupByLibrary.simpleMessage("Edit question"),
+        "question_number":
+            MessageLookupByLibrary.simpleMessage("Question number"),
         "question_str": MessageLookupByLibrary.simpleMessage("Question"),
+        "question_type": MessageLookupByLibrary.simpleMessage("Question type"),
         "quick_links": MessageLookupByLibrary.simpleMessage("Quick links"),
         "quiz_add": MessageLookupByLibrary.simpleMessage("Create quiz"),
         "quiz_list": MessageLookupByLibrary.simpleMessage("List of quizzes"),
         "quiz_remove": MessageLookupByLibrary.simpleMessage("Delete quiz"),
         "quiz_str": MessageLookupByLibrary.simpleMessage("Quizzes"),
+        "quiz_type_str": MessageLookupByLibrary.simpleMessage("Enter question"),
         "quiz_update": MessageLookupByLibrary.simpleMessage("Update quiz"),
         "radial_chart": MessageLookupByLibrary.simpleMessage("Radial chart"),
         "rating": MessageLookupByLibrary.simpleMessage("Rating"),
@@ -454,6 +470,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "save_account": MessageLookupByLibrary.simpleMessage("Save account"),
         "save_update_str": MessageLookupByLibrary.simpleMessage("Save update"),
         "scan_code": MessageLookupByLibrary.simpleMessage("Scan code"),
+        "score_str": MessageLookupByLibrary.simpleMessage("Score"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "search_lesson_str":
             MessageLookupByLibrary.simpleMessage("Search for a lesson"),
@@ -467,7 +484,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select date & time"),
         "select_range": MessageLookupByLibrary.simpleMessage("Select range"),
         "select_time": MessageLookupByLibrary.simpleMessage("Select time"),
+        "self_essay_type_str": MessageLookupByLibrary.simpleMessage("Essay"),
         "send": MessageLookupByLibrary.simpleMessage("send"),
+        "sentence_str": MessageLookupByLibrary.simpleMessage("Text"),
         "set_profile_to_private":
             MessageLookupByLibrary.simpleMessage("Set profile to private"),
         "shadow": MessageLookupByLibrary.simpleMessage("Shadow"),
@@ -637,6 +656,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_button": MessageLookupByLibrary.simpleMessage("Text button"),
         "text_rounded_button":
             MessageLookupByLibrary.simpleMessage("Text rounded button"),
+        "text_type_str": MessageLookupByLibrary.simpleMessage("Text"),
         "time_in_day_str": MessageLookupByLibrary.simpleMessage("Day"),
         "time_in_hour_str": MessageLookupByLibrary.simpleMessage("Hour"),
         "time_in_minute_str": MessageLookupByLibrary.simpleMessage("Minute"),
@@ -672,6 +692,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "type_email_or_phone_number":
             MessageLookupByLibrary.simpleMessage("Enter email or phone number"),
         "type_size": MessageLookupByLibrary.simpleMessage("Type / size"),
+        "type_word_str": MessageLookupByLibrary.simpleMessage("Fill in word"),
         "ui": MessageLookupByLibrary.simpleMessage("UI"),
         "unknown_str": MessageLookupByLibrary.simpleMessage("Unknown"),
         "unlock": MessageLookupByLibrary.simpleMessage("Unlock"),

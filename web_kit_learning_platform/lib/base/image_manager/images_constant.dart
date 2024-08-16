@@ -65,6 +65,7 @@ class ImageManager {
         double? width,
         double? height,
         Color? color,
+        Widget?errorBuilder,
         BoxFit boxFit = BoxFit.contain,
         Function()? onTap
       }) {
@@ -78,7 +79,7 @@ class ImageManager {
         fit: boxFit,
         scale: FetchPixels.getScale(),
         errorBuilder: (context, error, stackTrace) {
-          return NoData();
+          return errorBuilder??NoData();
         },
       ),
     );

@@ -86,6 +86,6 @@ class ApiName {
   final String deleteQuiz = "/delete-question";
   final String getQuizList = "/get-questions";
   final String updateQuiz = "/update-question";
-
+  final String linkTestToLesson = "/link-lecture-test'";
 }
 

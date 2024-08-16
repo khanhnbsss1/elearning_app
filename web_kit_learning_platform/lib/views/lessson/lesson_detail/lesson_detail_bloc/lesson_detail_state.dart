@@ -7,6 +7,7 @@ enum LessonDetailStatus {
   onUploadDoc,
   onCreateLesson,
   onUpdateLesson,
+  onUpdateTestInfo,
   unKnown
 }
 
@@ -28,6 +29,7 @@ class LessonDetailState extends Equatable {
   TextEditingController? editingControllerLectureDescription ;
   TextEditingController? editingControllerLectureVideoLink ;
   TextEditingController? editingControllerLectureDocuments ;
+  TestInfo? testInfo;
   LessonDetailState({
     this.blocStatus,
     this.lessonActionType,
@@ -38,7 +40,8 @@ class LessonDetailState extends Equatable {
     this.editingControllerLectureDescription,
     this.editingControllerLectureDocuments,
     this.editingControllerLectureName,
-    this.editingControllerLectureVideoLink
+    this.editingControllerLectureVideoLink,
+    this.testInfo
   }){
     listOfWord??=[];
     listOfWordAdd??=[];
@@ -62,6 +65,7 @@ class LessonDetailState extends Equatable {
     TextEditingController? editingControllerLectureDescription,
     TextEditingController? editingControllerLectureVideoLink,
     TextEditingController? editingControllerLectureDocuments,
+    TestInfo? testInfo
   })
   {
     return LessonDetailState(
@@ -75,6 +79,8 @@ class LessonDetailState extends Equatable {
       editingControllerLectureDescription: editingControllerLectureDescription??this.editingControllerLectureDescription,
       editingControllerLectureVideoLink: editingControllerLectureVideoLink??this.editingControllerLectureVideoLink,
       editingControllerLectureDocuments: editingControllerLectureDocuments??this.editingControllerLectureDocuments,
+      testInfo: testInfo??this.testInfo,
+
 
     );
   }
@@ -88,7 +94,8 @@ class LessonDetailState extends Equatable {
     editingControllerLectureName,
     editingControllerLectureDescription,
     editingControllerLectureVideoLink,
-    editingControllerLectureDocuments
+    editingControllerLectureDocuments,
+    testInfo
   ];
 
 }

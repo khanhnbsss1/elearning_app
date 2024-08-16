@@ -9,6 +9,7 @@ import 'package:webkit/services/apis/lessson/lesson_detail/add_lesson_api.dart';
 import 'package:webkit/services/apis/lessson/lesson_detail/get_lesson_detail.dart';
 import 'package:webkit/services/apis/lessson/lesson_detail/update_lesson_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/test/models/test_info.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/services/apis/upload_file/upload_file_api.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
@@ -32,7 +33,13 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
     on<LessonDetailUpdateLessonEvent>(_onUpdateLesson);
     on<LessonDetailCreateLessonEvent>(_onCreatedLesson);
     on<LessonDetailUploadDocumentEvent>(_onUploadDocument);
-
+    on<LessonDetailUpdateTestInfoEvent>((event, emit) {
+      // TODO: implement event handler
+      emit(state.copyWith(
+          blocStatus: LessonDetailStatus.initial,
+        testInfo: event.testInfo
+      ));
+    });
   }
   Future<void> _onInit(
       LessonDetailInitEvent event,
@@ -132,6 +139,20 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
         LinkWordApi linkWordApi = LinkWordApi(lessonId: state.lessonInfo?.id??0, vocabularyInfos: state.listOfWordAdd??[]);
         dynamic data = await linkWordApi.call();
       }
+
+    if((state.listOfWordRemove??[]).isNotEmpty)
+    {
+      UnLinkWordApi unlinkWordApi = UnLinkWordApi(lessonId: state.lessonInfo?.id??0, vocabularyInfos: state.listOfWordRemove??[]);
+      dynamic data = await unlinkWordApi.call();
+    }
+  }
+
+  Future<void> _onLinkTestToLesson()async {
+    if((state.listOfWordAdd??[]).isNotEmpty)
+    {
+      LinkWordApi linkWordApi = LinkWordApi(lessonId: state.lessonInfo?.id??0, vocabularyInfos: state.listOfWordAdd??[]);
+      dynamic data = await linkWordApi.call();
+    }
 
     if((state.listOfWordRemove??[]).isNotEmpty)
     {

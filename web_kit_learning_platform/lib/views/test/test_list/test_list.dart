@@ -6,7 +6,6 @@ import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
@@ -18,9 +17,6 @@ import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../layouts/layout.dart';
 import 'bloc/test_list_bloc.dart';
-import 'components/test_detail.dart';
-import 'components/test_item_view.dart';
-import 'package:syncfusion_flutter_core/theme.dart';
 
 class TestListPage extends StatefulWidget {
   TestListPage({super.key});
@@ -157,148 +153,123 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
     required BuildContext context,
     required TestListState state
   }){
-    return Container(
-      decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(color: ColorConst.dividerColor, width: 0.2)
-          )
-      ),
-      padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: Dimens.size40,
-                width: Dimens.size250,
-                child: Form(
-                  key: formKey,
-                  child: TextFormField(
-                    maxLines: 1,
-                    controller: textEditingController,
-                    onChanged: (value) {
-                      
-                    },
-                    onFieldSubmitted: (value) {
-                      BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
-                    },
-                    onTapOutside: (event) {
-                    },
-                    style: MyTextStyle.bodyMedium(),
-                    decoration: InputDecoration(
-                        hintText: L10nX.getStr.search,
-                        fillColor: ColorConst.whiteColor,
-                        filled: true,
-                        hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                        border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                        enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                        focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                        prefixIcon: const Align(
-                            alignment: Alignment.center,
-                            child: Icon(
-                              LucideIcons.search,
-                              size: 14,
-                            )),
-                        prefixIconConstraints: const BoxConstraints(
-                            minWidth: 36,
-                            maxWidth: 36,
-                            minHeight: 32,
-                            maxHeight: 32),
-                        contentPadding: MySpacing.xy(16, 12),
-                        //isCollapsed: true,
-                        floatingLabelBehavior: FloatingLabelBehavior.auto),
-                  ),
-                ),
-              ),
-              Gap(Dimens.size10),
-              InkWell(
-                  onTap: () {
-                    BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
-                  },
-                  child: Icon(Icons.search_rounded, color: ColorConst.mainColor,size: Dimens.size40,)),
-            ],
-          ),
-         
-          Row(
-            children: [
-              Gap(Dimens.size10),
-              InkWell(
-                  onTap: () {
-                    CreateEditTest(testActionType: ActionType.create, callBack: () {
-                      BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
-                    },).show(context);
-                  },
-                  child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-  Widget buildTestList({required TestListState state, required BuildContext context}){
-    List<Widget> listOfLesson = List.empty(growable: true);
-
-    for (TestInfo lessonInfo in state.listResponseModel?.content ?? []) {
-      listOfLesson.add(
-        InkWell(
-          onTap: () {
-            BlocProvider.of<TestListBloc>(context).add(TestListOnSelectTestEvent(selectInfo: lessonInfo));
-          },
-          child: TestItemView(
-            info: lessonInfo,
-            onViewDetail: (p0) {
-              TestDetailPage(tagPageAction: TestPageAction.view,).show(context);
-            },
-            onEdit: (p0) {
-              TestDetailPage(tagsInfo: p0,tagPageAction: TestPageAction.edit,).show(context, callBack: (p0) {
-                BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
-              },);
-            },
-            onDelete: (p0) {
-              ConfirmPopupPage(
-                title: L10nX.getStr.remove_tags,
-                content: L10nX.getStr.you_want_remove,
-                onAccept: () {
-                  BlocProvider.of<TestListBloc>(context).add(TestListOnDeleteTagEvent(selectInfo: p0));
-                },
-              ).show(context);
-            },
-          ),
-        )
-      );
-    }
-    switch (state.blocStatus){
-      case null:
-        // TODO: Handle this case.
-      case TestListStatus.initial:
-        // TODO: Handle this case.
-      case TestListStatus.onLoading:
-        // TODO: Handle this case.
-      case TestListStatus.onSearchByParams:
-        // TODO: Handle this case.
-        return Center(child: CircularProgressIndicator());
-      case TestListStatus.onSelectTag:
-      case TestListStatus.onLoadEnd:
-        // TODO: Handle this case.
-        return  (listOfLesson.isEmpty) ?
-        Center(child:NoData()) :
-        Scrollbar(
-          controller: scrollController,
-          thickness: Dimens.size10,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            controller: scrollController,
-            child: Column(
-              mainAxisAlignment:MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: listOfLesson,
-            ),
-          ),
-        );
-    }
+   return LayoutBuilder(builder: (context, constraints) {
+     return Container(
+       decoration: BoxDecoration(
+           border: Border(
+               bottom: BorderSide(color: ColorConst.dividerColor, width: 0.2)
+           )
+       ),
+       padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
+       child: Row(
+         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+         children: [
+           Row(
+             mainAxisSize: MainAxisSize.min,
+             mainAxisAlignment: MainAxisAlignment.start,
+             children: [
+               Container(
+                 //height: Dimens.size40,
+                 constraints: BoxConstraints(
+                     maxWidth:  constraints.maxWidth> 600?400:250
+                 ),
+                 child: Form(
+                   key: formKey,
+                   child: Row(
+                     children: [
+                       Expanded(
+                         child: TextFormField(
+                           maxLines: 1,
+                           controller: textEditingController,
+                           onChanged: (value) {
+                         
+                           },
+                           onFieldSubmitted: (value) {
+                             BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                           },
+                           onTapOutside: (event) {
+                           },
+                           style: MyTextStyle.bodyMedium(),
+                           decoration: InputDecoration(
+                               hintText: L10nX.getStr.search,
+                               fillColor: ColorConst.whiteColor,
+                               filled: true,
+                               hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                               border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                               enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                               focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                               prefixIcon: const Align(
+                                   alignment: Alignment.center,
+                                   child: Icon(
+                                     LucideIcons.search,
+                                     size: 14,
+                                   )),
+                               prefixIconConstraints: const BoxConstraints(
+                                   minWidth: 36,
+                                   maxWidth: 36,
+                                   minHeight: 32,
+                                   maxHeight: 32),
+                               contentPadding: MySpacing.xy(16, 12),
+                               //isCollapsed: true,
+                               floatingLabelBehavior: FloatingLabelBehavior.auto),
+                         ),
+                       ),
+                     ],
+                   ),
+                 ),
+               ),
+               Gap(Dimens.size16),
+               Visibility(
+                 visible: constraints.maxWidth> 600,
+                 child: ActionButton1(
+                   text: L10nX.getStr.search,
+                   radius: 16,
+                   onTap: () {
+                     BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                   },
+                 ),
+               ),
+               Visibility(
+                 visible: constraints.maxWidth< 600,
+                 child: InkWell(
+                     onTap: () {
+                       BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                     },
+                     child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
+               ),
+             ],
+           ),
+           Row(
+             children: [
+               Gap(Dimens.size10),
+               Visibility(
+                 visible: constraints.maxWidth< 600,
+                 child: InkWell(
+                     onTap: () {
+                       CreateEditTest(testActionType: ActionType.create, callBack: () {
+                         BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
+                       },).show(context);
+                     },
+                     child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
+               ),
+               Visibility(
+                 visible: constraints.maxWidth >600,
+                 child: ActionButton1(
+                   preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
+                   text: L10nX.getStr.add_new_str,
+                   onTap: () {
+                     CreateEditTest(testActionType: ActionType.create, callBack: () {
+                       BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
+                     },).show(context);
+                   },
+                 ),
+               ),
+             ],
+           ),
+         ],
+       ),
+     );
+   },);
   }
   Widget buildTestTableList({required TestListState state, required BuildContext context}){
     TestDataSource employeeDataSource = TestDataSource(
@@ -322,58 +293,88 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
         },).show(context);
       },
     );
-    return SfDataGridTheme(
-      data: SfDataGridThemeData(
-        headerColor: ColorConst.mainColor.withOpacity(0.1),
-      ),
-      child: SfDataGrid(
-        source: employeeDataSource,
-        columnWidthMode: ColumnWidthMode.fill,
-        isScrollbarAlwaysShown: false,
-        gridLinesVisibility: GridLinesVisibility.both,
-        rowHeight: Dimens.size80,
-        showHorizontalScrollbar: true,
-        columns: <GridColumn>[
-          GridColumn(
-              columnName: 'id',
-              maximumWidth: Dimens.size100,
-              label: Container(
-                  padding: EdgeInsets.all(16.0),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'ID',
-                  ))),
-          GridColumn(
-              columnName: L10nX.getStr.test_str,
-              label: Container(
-                  padding: EdgeInsets.all(8.0),
-                  alignment: Alignment.center,
-                  child: Text(
-                    L10nX.getStr.test_str,
-                    overflow: TextOverflow.ellipsis,
-                  ))),
-          GridColumn(
-              columnName: L10nX.getStr.course_str,
-              label: Container(
-                  padding: EdgeInsets.all(8.0),
-                  alignment: Alignment.center,
-                  child: Text(L10nX.getStr.course_str))),
-          GridColumn(
-              columnName: L10nX.getStr.subject_str,
-              label: Container(
-                  padding: EdgeInsets.all(8.0),
-                  alignment: Alignment.center,
-                  child: Text(L10nX.getStr.subject_str))),
-          GridColumn(
-              columnName: L10nX.getStr.action_str,
-              maximumWidth: Dimens.size150,
-              label: Container(
-                  padding: EdgeInsets.all(8.0),
-                  alignment: Alignment.center,
-                  child: Text(L10nX.getStr.action_str))),
-
-        ],
-      ),
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) { 
+        return SfDataGridTheme(
+          data: SfDataGridThemeData(
+            headerColor: ColorConst.mainColor.withOpacity(0.1),
+          ),
+          child: SfDataGrid(
+            source: employeeDataSource,
+            columnWidthMode: ColumnWidthMode.fill,
+            isScrollbarAlwaysShown: false,
+            gridLinesVisibility: GridLinesVisibility.both,
+            rowHeight: Dimens.size80,
+            //defaultColumnWidth: 200,
+            showHorizontalScrollbar: true,
+            columns: <GridColumn>[
+              GridColumn(
+                  columnName: 'id',
+                  maximumWidth: Dimens.size100,
+                  label: Container(
+                      padding: EdgeInsets.all(16.0),
+                      alignment: Alignment.center,
+                      child: Text(
+                        'ID',
+                      ))),
+              GridColumn(
+                  columnName: L10nX.getStr.test_name,
+                  minimumWidth: Dimens.size200,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(
+                        L10nX.getStr.test_name,
+                        overflow: TextOverflow.ellipsis,
+                      ))),
+              GridColumn(
+                  columnName: L10nX.getStr.course_str,
+                  minimumWidth: Dimens.size200,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(L10nX.getStr.course_str))),
+              GridColumn(
+                  columnName: L10nX.getStr.subject_str,
+                  minimumWidth: Dimens.size120,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(L10nX.getStr.subject_str))),
+              GridColumn(
+                  columnName: L10nX.getStr.difficulty_str,
+                  minimumWidth: Dimens.size120,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(L10nX.getStr.difficulty_str))),
+              GridColumn(
+                  columnName: L10nX.getStr.question_number,
+                  minimumWidth: Dimens.size120,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(L10nX.getStr.question_number))),
+        
+        /*              GridColumn(
+                  columnName: L10nX.getStr.doing_time_str,
+                  minimumWidth: Dimens.size120,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(L10nX.getStr.doing_time_str))),*/
+              GridColumn(
+                  columnName: L10nX.getStr.action_str,
+                  minimumWidth: Dimens.size180,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(L10nX.getStr.action_str))),
+        
+            ],
+          ),
+        );
+      },
     );
   }
   
@@ -381,30 +382,27 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
 class TestDataSource extends DataGridSource {
   /// Creates the employee data source class with required details.
   Function(TestInfo) onViewDetail, onEdit, onDelete;
-  TestDataSource({required List<TestInfo> lessonData, required this.onDelete, required this.onEdit, required this.onViewDetail}) {
+  int? starIndex;
+  TestDataSource({
+    required List<TestInfo> lessonData, 
+    this.starIndex,
+    required this.onDelete, 
+    required this.onEdit, 
+    required this.onViewDetail}) {
+    
     _lessonData = lessonData.map<DataGridRow>((e) {
-      List<Widget> wordList = [];
-      for(int index =0; index <10; index++){
-        wordList.add(
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Container(
-                  decoration: BoxDecoration(
-                      color: ColorConst.whiteColor,
-                      borderRadius: BorderRadius.circular(Dimens.size20),
-                      border: Border.all(color: ColorConst.blackColor, width: 1)
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: Dimens.size16),
-                  child: Text("data", style: TextStyleConstant.textStyleBlack14w400,)),
-            ));
-      }
-
+      starIndex = (starIndex ??0)+1;
       return  DataGridRow(
           cells: [
-            DataGridCell<Widget>(columnName: 'id', value: Text(e.id.toString(), style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.test_str, value:Text(e.name??"", style: TextStyleConstant.textStyleBlack14w400,) ),
+            DataGridCell<Widget>(columnName: 'id', value: Text("$starIndex", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.test_name, value:Text(e.name??"", style: TextStyleConstant.textStyleBlack14w400,) ),
             DataGridCell<Widget>(columnName: L10nX.getStr.course_str, value: Text(e.courseName??"", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.subject_str, value: Text(e.subName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+
+            DataGridCell<Widget>(columnName: L10nX.getStr.difficulty_str, value: Text(e.typeTest??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.question_number, value: Text("${(e.quizDTOs??[]).length}", style: TextStyleConstant.textStyleBlack14w400,)),
+            //DataGridCell<Widget>(columnName: L10nX.getStr.doing_time_str, value: Text("${(e.}", style: TextStyleConstant.textStyleBlack14w400,)),
+
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str, 
                 value: Column(
                   mainAxisSize: MainAxisSize.min,

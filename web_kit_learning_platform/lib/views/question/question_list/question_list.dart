@@ -5,30 +5,31 @@ import 'package:gap/gap.dart';
 import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
-import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
-import 'package:webkit/views/lessson/components/lesson_item_view.dart';
-import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
+import 'package:webkit/services/apis/question/models/question_info.dart';
 import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../layouts/layout.dart';
-import 'bloc/lesson_list_bloc.dart';
+import 'bloc/quiz_list_bloc.dart';
+import '../question_detail/question_detail.dart';
+import 'components/quiz_item_view.dart';
 
-class LessonListPage extends StatefulWidget {
-  LessonListPage({super.key});
+class QuestionListPage extends StatefulWidget {
+  QuestionListPage({super.key});
   @override
-  State<LessonListPage> createState() => _LessonListPageState();
+  State<QuestionListPage> createState() => _QuestionListPageState();
 }
 
-class _LessonListPageState extends State<LessonListPage> with SingleTickerProviderStateMixin, UIMixin {
+class _QuestionListPageState extends State<QuestionListPage> with SingleTickerProviderStateMixin, UIMixin {
   late MemberListController controller;
- TextEditingController textEditingController = TextEditingController();
+  TextEditingController textEditingController = TextEditingController();
   GlobalKey<FormState>? formKey = GlobalKey();
   ScrollController scrollController=ScrollController();
   @override
@@ -46,60 +47,61 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        return LessonListBloc(LessonListState())..add(LessonListInitEvent());
+        return QuizListBloc(QuizListState())..add(QuizListInitEvent());
       },
-      child: BlocConsumer<LessonListBloc, LessonListState>(
+      child: BlocConsumer<QuizListBloc, QuizListState>(
         listener: (context, state) {
           switch (state.blocStatus) {
-            case LessonListStatus.initial:
+            case QuizListStatus.initial:
               break;
-              // TODO: Handle this case.
-            case LessonListStatus.onSelectLesson:
+          // TODO: Handle this case.
+            case QuizListStatus.onSelectTag:
               {
               }
               break;
             default:
               break;
-              // TODO: Handle this case.
+          // TODO: Handle this case.
           }
         },
         builder: (BuildContext context, state) {
           return MyResponsive(
             builder: (context , boxConstraints , myScreenMediaType ) {
               if(!myScreenMediaType.isMobile)
-                {
-                  return Layout(
-                      isScroll: false,
-                      title: Center(
-                        child: Text(L10nX.getStr.lesson_list, 
-                          style: TextStyleConstant.textStyleBlack18w600,),),
-                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
-                      child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
-                }
-              else
-                {
-                  return Layout(
+              {
+                return Layout(
                     isScroll: false,
-                      title: Center(child: Text(
-                         L10nX.getStr.lesson_list,
-                        style: TextStyleConstant.textStyleBlack18w600,
-                      ),),
-                      child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
-                  );
-                }
+                    title: Text(
+                       L10nX.getStr.quiz_list,
+                      style: TextStyleConstant.textStyleBlack18w600,
+                    ),
+                    padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
+                    child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
+              }
+              else
+              {
+                return Layout(
+                    isScroll: false,
+                    title: Text(
+                      L10nX.getStr.quiz_str,
+                      style: TextStyleConstant.textStyleBlack18w600,
+                    ),
+                    child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
+                );
+              }
             },);
-          
+
         },
       ),
     );
   }
   Widget buildLeftPage(
-  {
-    required MyScreenMediaType myScreenMediaType,
-    required BoxConstraints boxConstraints,
-    required BuildContext context,
-    required LessonListState state
-  }
+      {
+        required MyScreenMediaType myScreenMediaType,
+        required BoxConstraints boxConstraints,
+        required BuildContext context,
+        required QuizListState state
+      }
       ){
     return Container(
       color: ColorConst.whiteColor,
@@ -112,28 +114,28 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
             buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
             Expanded(child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: buildLessonList(state: state, context: context),
+              child: buildTestTableList(state: state, context: context),
             )),
             SizedBox(height: 8,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FlutterCustomPagination(
-                  key: GlobalKey(debugLabel: (state.lessonListResponseModel?.total??0).toString()),
-                  currentPage: state.lessonListResponseModel!.getCurrentPage(),
-                  limitPerPage: state.lessonListResponseModel!.pageSize??10,
-                  totalDataCount: state.lessonListResponseModel!.getTotalElement(),
+                  key: GlobalKey(debugLabel: (state.listResponseModel?.total??0).toString()),
+                  currentPage: state.listResponseModel!.getCurrentPage(),
+                  limitPerPage: state.listResponseModel!.pageSize??10,
+                  totalDataCount: state.listResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
                   },
                   onBackToFirstPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
                   },
                   onNextPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
                   },
                   onGoToLastPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
                   },
                   backgroundColor: ColorConst.whiteColor,
                   textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
@@ -148,12 +150,12 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
         ),
       ),
     );
-  }
+  } 
   Widget buildListFilter(  {
     required MyScreenMediaType myScreenMediaType,
     required BoxConstraints boxConstraints,
     required BuildContext context,
-    required LessonListState state
+    required QuizListState state
   }){
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
@@ -187,7 +189,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
 
                             },
                             onFieldSubmitted: (value) {
-                              BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                              BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
                             },
                             onTapOutside: (event) {
                             },
@@ -227,7 +229,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                     text: L10nX.getStr.search,
                     radius: 16,
                     onTap: () {
-                      BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                      BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                     },
                   ),
                 ),
@@ -235,7 +237,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                   visible: constraints.maxWidth< 800,
                   child: InkWell(
                       onTap: () {
-                        BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                        BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                       },
                       child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                 ),
@@ -248,8 +250,13 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                   visible: constraints.maxWidth< 800,
                   child: InkWell(
                       onTap: () {
-                        CreateEditLesson(lessonActionType: LessonActionType.create,).show(context);
+                        QuestionCreateEditDetailPage(
+                          actionType: ActionType.create,
+                            callBack: () {
+                              BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
 
+                            },
+                        ).show(context,);
                       },
                       child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
                 ),
@@ -259,8 +266,12 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                     preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
                     text: L10nX.getStr.add_new_str,
                     onTap: () {
-                      CreateEditLesson(lessonActionType: LessonActionType.create,).show(context);
-
+                      QuestionCreateEditDetailPage(
+                        actionType: ActionType.create,
+                          callBack: () {
+                            BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
+                          }
+                      ).show(context,);
                     },
                   ),
                 ),
@@ -271,17 +282,28 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
       );
     },);
   }
-  Widget buildLessonList({required LessonListState state, required BuildContext context}){
-    LessonDataSource employeeDataSource = LessonDataSource(
-      lessonData: state.lessonListResponseModel?.content??[],
+
+  
+  Widget buildTestTableList({required QuizListState state, required BuildContext context}){
+    QuestionDataSource employeeDataSource = QuestionDataSource(
+      lessonData: state.listResponseModel?.content??[],
       onDelete: (p0) {
 
       },
       onEdit: (p0) {
-        CreateEditLesson(lessonActionType: LessonActionType.edit,lessonInfo: p0,).show(context);
+        QuestionCreateEditDetailPage(
+          actionType: ActionType.edit,
+          info: p0,
+          callBack: () {
+            BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
+          },).show(context);
       },
       onViewDetail: (p0) {
-        CreateEditLesson(lessonActionType: LessonActionType.view, lessonInfo: p0,).show(context);
+        QuestionCreateEditDetailPage(actionType: ActionType.view,
+          info: p0,
+          callBack: () {
+            BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
+          },).show(context);
       },
     );
     return LayoutBuilder(
@@ -309,46 +331,35 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                         'ID',
                       ))),
               GridColumn(
-                  columnName: L10nX.getStr.lecture_name_str,
+                  columnName: L10nX.getStr.question_str,
                   minimumWidth: Dimens.size200,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
                       child: Text(
-                        L10nX.getStr.lecture_name_str,
+                        L10nX.getStr.question_str,
                         overflow: TextOverflow.ellipsis,
                       ))),
               GridColumn(
-                  columnName: L10nX.getStr.subject_name_str,
-                  minimumWidth: Dimens.size200,
+                  columnName: L10nX.getStr.question_type,
+                  minimumWidth: Dimens.size80,
+                  maximumWidth: Dimens.size120,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: Text(L10nX.getStr.subject_name_str))),
+                      child: Text(L10nX.getStr.question_type))),
               GridColumn(
-                  columnName: L10nX.getStr.document_str,
-                  minimumWidth: Dimens.size120,
+                  columnName: L10nX.getStr.score_str,
+                  minimumWidth: Dimens.size80,
+                  maximumWidth: Dimens.size120,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: Text(L10nX.getStr.document_str))),
-              GridColumn(
-                  columnName: L10nX.getStr.test_name,
-                  minimumWidth: Dimens.size120,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.test_name))),
-              GridColumn(
-                  columnName: L10nX.getStr.word_str,
-                  minimumWidth: Dimens.size120,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.word_str))),
+                      child: Text(L10nX.getStr.score_str))),
               GridColumn(
                   columnName: L10nX.getStr.action_str,
                   minimumWidth: Dimens.size180,
+                  maximumWidth: Dimens.size180,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
@@ -360,15 +371,15 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
       },
     );
   }
-  
+
 }
 
-class LessonDataSource extends DataGridSource {
+class QuestionDataSource extends DataGridSource {
   /// Creates the employee data source class with required details.
-  Function(LessonInfo) onViewDetail, onEdit, onDelete;
+  Function(QuestionInfo) onViewDetail, onEdit, onDelete;
   int? starIndex;
-  LessonDataSource({
-    required List<LessonInfo> lessonData,
+  QuestionDataSource({
+    required List<QuestionInfo> lessonData,
     this.starIndex,
     required this.onDelete,
     required this.onEdit,
@@ -376,34 +387,12 @@ class LessonDataSource extends DataGridSource {
 
     _lessonData = lessonData.map<DataGridRow>((e) {
       starIndex = (starIndex ??0)+1;
-      List<Widget> listWord = [];
-      for(VocabularyInfo vocabularyInfo in e.vocabularies??[])
-        {
-          listWord.add(Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimens.size16),
-              border: Border.all(color: ColorConst.blackColor, width: 0.2),
-              color: ColorConst.whiteColor
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Text(vocabularyInfo.simplified??"", style: TextStyleConstant.textStyleBlack13w400,),
-          ),
-            
-          );
-        }
       return  DataGridRow(
           cells: [
             DataGridCell<Widget>(columnName: 'id', value: Text("$starIndex", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.lecture_name_str, value:Text(e.lectureName??"", style: TextStyleConstant.textStyleBlack14w400,) ),
-            DataGridCell<Widget>(columnName: L10nX.getStr.subject_name_str, value: Text(e.subName??"", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.document_str, value: Text(e.docName??"", style: TextStyleConstant.textStyleBlack14w400,)),
-
-            DataGridCell<Widget>(columnName: L10nX.getStr.test_name, value: Text(e.testName??"", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.word_str, value: SingleChildScrollView(
-              child: Row(children: listWord,),
-            )),
-            //DataGridCell<Widget>(columnName: L10nX.getStr.doing_time_str, value: Text("${(e.}", style: TextStyleConstant.textStyleBlack14w400,)),
-
+            DataGridCell<Widget>(columnName: L10nX.getStr.question_str, value:Text(e.questionName??"", style: TextStyleConstant.textStyleBlack14w400,) ),
+            DataGridCell<Widget>(columnName: L10nX.getStr.question_type, value: Text(L10nX().getStringByKey("${mapQuestionTypeToStrKey[e.questionType]??""}_type_str"), style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.score_str, value: Text((e.weightage??0).toString(), style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str,
                 value: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -443,4 +432,3 @@ class LessonDataSource extends DataGridSource {
         }).toList());
   }
 }
-

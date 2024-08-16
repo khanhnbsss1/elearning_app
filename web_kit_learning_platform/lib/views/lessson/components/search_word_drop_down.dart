@@ -82,7 +82,7 @@ class _MyDropdownButtonState extends State<SearchWordDropDown> with SingleTicker
                           fontStyle: FontStyle.italic
                       ),
                       decoration: InputDecoration(
-                        labelText: L10nX.getStr.search_lesson_str,
+                        labelText: L10nX.getStr.vocabulary_str,
                         hintTextDirection: AppTheme.textDirection,
                         labelStyle: TextStyleConstant.textStyleBlack14w400,
                         hintStyle: TextStyleConstant.textStyleBlack14w400,

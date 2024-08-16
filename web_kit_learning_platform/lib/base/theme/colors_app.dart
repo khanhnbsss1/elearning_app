@@ -39,7 +39,7 @@ class ColorConst{
   static Color normalTextColorOnMainColor =  getLightMode()?ColorLightConst.normalTextColorOnMainColor:ColorNightConst.normalTextColorOnMainColor;
   static Color colorHintTextSearch =  getLightMode()?ColorLightConst.colorHintTextSearch:ColorNightConst.colorHintTextSearch;
   static Color colorIconGrays = getLightMode()?ColorLightConst.colorIconGrays:ColorNightConst.colorIconGrays;
-  static Color colorIconRed = getLightMode()?ColorLightConst.colorIconRed:ColorNightConst.colorIconRed;
+  static Color colorIconRed = getLightMode()?ColorLightConst.mainColor:ColorNightConst.mainColor;
 
   static Color bgToastSuccess = getLightMode()?ColorLightConst.bgToastSuccess:ColorNightConst.bgToastSuccess;
   static Color bgToastError = getLightMode()?ColorLightConst.bgToastError:ColorNightConst.bgToastError;
@@ -113,7 +113,7 @@ class ColorConst{
     normalTextColorOnMainColor =  getLightMode()?ColorLightConst.normalTextColorOnMainColor:ColorNightConst.normalTextColorOnMainColor;
     colorHintTextSearch =  getLightMode()?ColorLightConst.colorHintTextSearch:ColorNightConst.colorHintTextSearch;
     colorIconGrays = getLightMode()?ColorLightConst.colorIconGrays:ColorNightConst.colorIconGrays;
-    colorIconRed = getLightMode()?ColorLightConst.colorIconRed:ColorNightConst.colorIconRed;
+    colorIconRed = getLightMode()?ColorLightConst.mainColor:ColorNightConst.mainColor;
     bgToastSuccess = getLightMode()?ColorLightConst.bgToastSuccess:ColorNightConst.bgToastSuccess;
     bgToastError = getLightMode()?ColorLightConst.bgToastError:ColorNightConst.bgToastError;
     bgToastDangerous = getLightMode()?ColorLightConst.bgToastDangerous:ColorNightConst.bgToastDangerous;

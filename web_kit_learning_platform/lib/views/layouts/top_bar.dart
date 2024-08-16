@@ -1,6 +1,7 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/localizations/bloc/main.exports.dart';
 import 'package:webkit/helpers/localizations/language_helper.dart';
@@ -44,6 +45,11 @@ class _TopBarState extends State<TopBar>
     return FutureBuilder(
       future: UserManager().getUserProfile(), 
       builder: (context, snapshot) {
+        UserProfile? userProfile;
+        if(snapshot.hasData)
+          {
+            userProfile = snapshot.data;
+          }
         return MyCard(
           shadow: MyShadow(position: MyShadowPosition.bottomRight, elevation: 0.5),
           height: 60,
@@ -56,28 +62,20 @@ class _TopBarState extends State<TopBar>
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  ( widget.showBackButton??false)? BackButtonCustom(buildContext: context): SizedBox(),
+                  ( widget.showBackButton??false)? Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      BackButtonCustom(buildContext: context),
+                      Gap(Dimens.size16,),
+                    ],
+                  ): SizedBox(),
+                 
                   widget.title??SizedBox(),
                 ],
               ), 
               Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                InkWell(
-                  onTap: () {
-                    ThemeCustomizer.setTheme(
-                        ThemeCustomizer.instance.theme == ThemeMode.dark
-                            ? ThemeMode.light
-                            : ThemeMode.dark);
-                  },
-                  child: Icon(
-                    ThemeCustomizer.instance.theme == ThemeMode.dark
-                        ? FeatherIcons.sun
-                        : FeatherIcons.moon,
-                    size: 18,
-                    color: topBarTheme.onBackground,
-                  ),
-                ),
                 MySpacing.width(12),
                 CustomPopupMenu(
                   backdrop: true,
@@ -104,21 +102,6 @@ class _TopBarState extends State<TopBar>
                   menuBuilder: (_) => buildLanguageSelector( context),
                 ),
                 MySpacing.width(6),
-                CustomPopupMenu(
-                  backdrop: true,
-                  onChange: (_) {},
-                  offsetX: -120,
-                  menu: Padding(
-                    padding: MySpacing.xy(8, 8),
-                    child: const Center(
-                      child: Icon(
-                        FeatherIcons.bell,
-                        size: 18,
-                      ),
-                    ),
-                  ),
-                  menuBuilder: (_) => buildNotifications(),
-                ),
                 MySpacing.width(4),
                 CustomPopupMenu(
                   backdrop: false,
@@ -132,15 +115,29 @@ class _TopBarState extends State<TopBar>
                       children: [
                         MyContainer.rounded(
                             paddingAll: 0,
-                            child: Image.asset(
-                              Images.avatars[0],
+                            child:
+                            (userProfile!=null && (userProfile.avatar??'').isNotEmpty)?
+                            ImageManager().getImageByUrl(
+                              userProfile.avatar??'',
+                              height: 28,
+                              width: 28,
+                              boxFit: BoxFit.cover,
+                              errorBuilder: Image.asset(
+                                'assets/deshboard/profile.png',
+                                height: 28,
+                                width: 28,
+                                fit: BoxFit.cover,
+                              ),
+                            ):
+                            Image.asset(
+                              'assets/deshboard/profile.png',
                               height: 28,
                               width: 28,
                               fit: BoxFit.cover,
                             )),
                         MySpacing.width(8),
                         // MyText.labelLarge('${snapshot.data?.fullName}')
-                        MyText.labelLarge('Den')
+                        MyText.labelLarge(userProfile?.fullName??'')
                       ],
                     ),
                   ),

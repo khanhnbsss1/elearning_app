@@ -563,53 +563,50 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                               onTap: () {},
                               child: StatefulBuilder(
                                 builder: (context, setState) {
-                                  return Row(
+                                  return Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          for (LanguageInfo language
-                                              in LanguageHelper()
-                                                  .supportedLanguages)
-                                            InkWell(
-                                              hoverColor: Colors.transparent,
-                                              onTap: () {
-                                                LanguageHelper().changeLanguage(
-                                                    language, context);
-                                              },
-                                              child: Padding(
-                                                padding: EdgeInsets.symmetric(
-                                                    vertical: Dimens.size10,
-                                                    horizontal: Dimens.size8),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    ClipRRect(
-                                                        clipBehavior: Clip
-                                                            .antiAliasWithSaveLayer,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(2),
-                                                        child: Image.asset(
-                                                          "assets/lang/${language.languageCode}.png",
-                                                          width: 18,
-                                                          height: 14,
-                                                          fit: BoxFit.cover,
-                                                        )),
-                                                    MySpacing.width(8),
-                                                    MyText.labelMedium(
-                                                        language.language ?? "")
-                                                  ],
-                                                ),
+                                      for (LanguageInfo language
+                                          in LanguageHelper()
+                                              .supportedLanguages)
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                          child: InkWell(
+                                            hoverColor: Colors.transparent,
+                                            onTap: () {
+                                              LanguageHelper().changeLanguage(
+                                                  language, context);
+                                            },
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: Dimens.size10,
+                                                  horizontal: Dimens.size8),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  ClipRRect(
+                                                      clipBehavior: Clip
+                                                          .antiAliasWithSaveLayer,
+                                                      borderRadius:
+                                                          BorderRadius
+                                                              .circular(2),
+                                                      child: Image.asset(
+                                                        "assets/lang/${language.languageCode}.png",
+                                                        width: 18,
+                                                        height: 14,
+                                                        fit: BoxFit.cover,
+                                                      )),
+                                                  MySpacing.width(8),
+                                                  MyText.labelMedium(
+                                                      language.language ?? "")
+                                                ],
                                               ),
                                             ),
-                                        ],
-                                      ),
+                                          ),
+                                        ),
                                     ],
                                   );
                                 },
@@ -648,7 +645,6 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                             ? ImageManager().getImageByUrl(
                                 width: 20,
                                 height: 20,
-                                color: Colors.red,
                                 userProfile.avatar ?? "")
                             : Image.asset(
                                 'assets/deshboard/profile.png',
@@ -674,25 +670,30 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                 child: Center(
                                   child: Column(
                                     children: [
-                                      TextButton(
-                                        onPressed: () {
+                                      InkWell(
+                                        onTap: () {
                                           LoginPage().show(context);
                                           //AppPages.route(Paths.dashboardPath);
                                         },
-                                        child: Text(L10nX.getStr.login,
-                                            style: baseStyle.copyWith(
-                                                fontSize: 12,
-                                                color: notifier.buttoncolor)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                          child: Text(L10nX.getStr.login,
+                                              style: baseStyle.copyWith(
+                                                  fontSize: 12,
+                                                  color: notifier.buttoncolor)),
+                                        ),
                                       ),
-                                      const SizedBox(height: 16),
-                                      TextButton(
-                                        onPressed: () {
+                                      InkWell(
+                                        onTap: () {
                                           Register().show(context);
                                         },
-                                        child: Text(L10nX.getStr.sign_up,
-                                            style: baseStyle.copyWith(
-                                                fontSize: 12,
-                                                color: notifier.buttoncolor)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                          child: Text(L10nX.getStr.sign_up,
+                                              style: baseStyle.copyWith(
+                                                  fontSize: 12,
+                                                  color: notifier.buttoncolor)),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -703,23 +704,31 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Center(
-                                      child: TextButton(
-                                        onPressed: () {
-                                          userProfile == null
-                                              ? LoginPage().show(context)
-                                              : AppPages.routeName(
-                                                  Routes.dashboardRoute);
-                                        },
-                                        child: Text(
-                                          L10nX.getStr.lets_study,
-                                          style: baseStyle,
-                                        ),
+                                    InkWell(
+                                      onTap: () {
+                                        userProfile == null
+                                            ? LoginPage().show(context)
+                                            : AppPages.routeName(
+                                                Routes.dashboardRoute);
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.menu_book_outlined,
+                                            size: Dimens.size20,
+                                            color: ColorConst.mainColor,
+                                          ),
+                                          const SizedBox(width: 8),
+                                          Text(
+                                            L10nX.getStr.lets_study,
+                                            style: baseStyle,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     const SizedBox(height: 16),
-                                    TextButton(
-                                      onPressed: () {
+                                    InkWell(
+                                      onTap: () {
                                         AuthorManager().handleLogout();
                                         AppPages.routeName(
                                             Routes.landingPageRoute,
@@ -730,13 +739,11 @@ class _LandingPageScreenState extends State<LandingPageScreen>
                                           Icon(
                                             Icons.logout,
                                             size: Dimens.size25,
-                                            color: ColorConst.blackColor,
+                                            color: ColorConst.mainColor,
                                           ),
                                           const SizedBox(width: 8),
                                           Text(L10nX.getStr.sign_out_text,
-                                              style: baseStyle.copyWith(
-                                                  fontSize: 12,
-                                                  color: Colors.red)),
+                                              style: baseStyle),
                                         ],
                                       ),
                                     ),

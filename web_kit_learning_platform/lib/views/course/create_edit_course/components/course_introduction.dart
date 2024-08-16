@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:pinput/pinput.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/widgets/drop_down/drop_down_search.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/controller/ui/add_course_controller.dart';
 import 'package:webkit/helpers/extensions/string.dart';
@@ -330,7 +331,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
     return WidgetWithColumnTitleCommon(
       title: '${L10nX.getStr.category_str}',
       isRequirement: true,
-      child: customDropDownSearch(
+      child: DropDownSearch(
           list: state.controller!.listOfCategoryName,
           hintText: '${L10nX.getStr.category_str}...',
           selectItem: state.courseInfo?.categoryName,
@@ -427,7 +428,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
     return WidgetWithColumnTitleCommon(
       title: '${L10nX.getStr.author_str}',
       isRequirement: true,
-      child: customDropDownSearch(
+      child: DropDownSearch(
           list: state.controller!.listOfProduceNames,
           hintText: '${L10nX.getStr.author_str}...',
           selectItem: state.courseInfo?.producerName,
@@ -540,9 +541,9 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
 
   Widget buildGrade({required AddCourseState state, required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
-        title: '${L10nX.getStr.grade_str}',
+        title: L10nX.getStr.grade_str,
         isRequirement: true,
-        child: customDropDownSearch(
+        child: DropDownSearch(
             list: state.controller!.listOfGradeNames,
             hintText: '${L10nX.getStr.grade_name_str}...',
             selectItem: (state.courseInfo?.gradeName),
@@ -697,7 +698,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
   }
 
   Widget buildAccompanyCourse({required AddCourseState state, required BuildContext context}) {
-    return customDropDownSearch(
+    return DropDownSearch(
         list: state.controller!.listOfAccompanyCourses,
         hintText: "${L10nX.getStr.accompany_course_str}...",
         selectItem: (state.courseInfo?.accompanyCourse ?? '0').toInt(),
@@ -857,7 +858,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                   opacity: ((state.courseInfo?.mode)=="PREMIUM") ? 1 : 0.2,
                   child: IgnorePointer(
                     ignoring: (state.courseInfo?.mode)!="PREMIUM",
-                    child: customDropDownSearch(
+                    child: DropDownSearch(
                       list: {},//state.controller!.listOfAccompanyCourses,
                       hintText: "${L10nX.getStr.discount_str}...",
                       selectItem: "80.0",
@@ -975,7 +976,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                 opacity: valuePaymentMode==false ? 0.2 : 1,
                 child: IgnorePointer(
                   ignoring: valuePaymentMode==false,
-                  child: customDropDownSearch(
+                  child: DropDownSearch(
                       list: state.controller!.listOfAccompanyCourses,
                       hintText: "${L10nX.getStr.discount_str}...",
                       selectItem: "80.0",
@@ -987,49 +988,4 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
     }
   }
 
-  Widget customDropDownSearch({required Map<int, String> list, required String hintText, required TextEditingController? controller, dynamic selectItem}) {
-    String selectString = (selectItem??"").toString();
-    if (selectItem.runtimeType == int) {
-      selectString = list[selectItem as int] ?? "";
-    }
-    return DropdownSearch<String>(
-      // enabled: (state.courseInfo?.mode??"PREMIUM")=="PREMIUM",
-      popupProps: PopupProps.menu(
-        constraints: BoxConstraints(
-          maxHeight: (65 + list.length * 50 < 210) ? 65 + list.length * 50 : 210,
-        ),
-        showSearchBox: true,
-        searchDelay: Duration(seconds: 0),
-        showSelectedItems: true,
-      ),
-      items: list.values.toList(),
-      selectedItem: selectString.isNotEmpty ? selectString : null,
-      dropdownDecoratorProps: DropDownDecoratorProps(
-        dropdownSearchDecoration: InputDecoration(
-          hintText: hintText,
-          labelText: hintText,
-          hintTextDirection: AppTheme.textDirection,
-          labelStyle: TextStyleConstant.textStyleBlack14w400,
-          hintStyle: TextStyleConstant.textStyleBlack14w400,
-          border: outlineInputBorder,
-          prefixIcon: Icon(
-            LucideIcons.book,
-            size: 20,
-            color: ColorConst.colorIconRed,
-          ),
-          suffixIcon: Icon(
-            LucideIcons.search,
-            size: 20,
-            color: ColorConst.colorIconRed,
-          ),
-          contentPadding: MySpacing.all(16),
-          // isCollapsed: true,
-          floatingLabelBehavior: FloatingLabelBehavior.never,
-        ),
-      ),
-      onChanged: (value) {
-        controller?.text = value ?? "";
-      },
-    );
-  }
 }

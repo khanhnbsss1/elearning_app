@@ -1,3 +1,4 @@
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/models/page_model.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
 
@@ -11,6 +12,11 @@ Map<TestLevel, String>mapTestLevelToStrKey={
   TestLevel.easy:"easy",
   TestLevel.normal:"normal",
   TestLevel.hard:"difficulty",
+};
+Map< String,TestLevel>mapStrKeyTestLevel={
+  L10nX().getStringByKey("easy_str"):TestLevel.easy,
+  L10nX().getStringByKey("normal_str"):TestLevel.normal,
+  L10nX().getStringByKey("difficulty_str"):TestLevel.hard,
 };
 class TestInfo {
   int? id;
@@ -92,7 +98,11 @@ class TestInfo {
       data['question_ids'] =quizDTOs!.map((e) => e.id,).toList().join(',');
     }
     
+    
     return data;
+  }
+  TestLevel getTestLevel(){
+    return mapStrKeyTestLevel[typeTest??""]??TestLevel.normal;
   }
 }
 class TestListResponseModel extends PageModel{

@@ -207,12 +207,6 @@ class _CourseIntroductionPageState extends State<CourseLinkTestListPage> with Si
             ),
           ),
           Gap(Dimens.size16),
-/*          InkWell(
-            onTap: () {
-              CreateEditLesson().show(context);
-            },
-            child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size50,),
-          )*/
         ]
     );
   }

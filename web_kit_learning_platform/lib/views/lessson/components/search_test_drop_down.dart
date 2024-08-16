@@ -8,106 +8,56 @@ import 'package:webkit/base/widgets/table_common/animation/animation.exports.dar
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/services/apis/question/get_quiz_list_api.dart';
-import 'package:webkit/services/apis/question/models/question_info.dart';
+import 'package:webkit/services/apis/test/get_test_list_api.dart';
+import 'package:webkit/services/apis/test/models/test_info.dart';
+import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
+import 'package:webkit/services/apis/vocabulary/vocabulary_list/vocabulary_list_api.dart';
 import 'package:webkit/views/test/test_detail/create_edit_test.dart';
 import 'package:webkit/views/vocabulary/vocabulary_detail/create_edit_words.dart';
 
-class SearchQuizDropDown extends StatefulWidget {
-  final List<QuestionInfo> allWords;
-  final List<QuestionInfo>? exitsQuestion;
-  final Function(QuestionInfo) onAddWords;
-  final Function(QuestionInfo) onRemoveWords;
-  ActionType? actionType;
-  SearchQuizDropDown({required this.allWords, required this.onAddWords, required this.onRemoveWords, this.exitsQuestion, this.actionType}){
-    actionType??=ActionType.view;
-  }
+class SearchTestDropDown extends StatefulWidget {
+  final Function(TestInfo) onSelectTest;
+  TestInfo  ?testInfo;
+  SearchTestDropDown({required this.onSelectTest, this.testInfo});
 
   @override
   _MyDropdownButtonState createState() => _MyDropdownButtonState();
 }
 
-class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTickerProviderStateMixin, UIMixin {
+class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTickerProviderStateMixin, UIMixin {
   Color color = Color.fromRGBO(163, 20, 19, 1.0);
   final TextEditingController _wordDropdownSearchFieldController = TextEditingController();
-
+  
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if(widget.testInfo!=null)
+      {
+        _wordDropdownSearchFieldController.text = widget.testInfo?.name??"";
+      }
+  }
   @override
   Widget build(BuildContext context) {
-    int count =0;
-
-    for(QuestionInfo quest in (widget.exitsQuestion??[]))
-    {
-      count +=quest.weightage??0;
-    }
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Visibility(
-            visible: widget.actionType != ActionType.view,
-            child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                      child: questDropDownSearch(
-                        context: context, onSelectWord: (p0) {
-                          if([...(widget.exitsQuestion??[]).where((element) {return element.id == p0.id;},)].isEmpty) 
-                          {
-                            setState(() {
-                               widget.onAddWords(p0);
-                            });
-                    }
-                  },)),
-                ]),
-          ),
-          SizedBox(height: 20,),
-          Text("${(widget.exitsQuestion??[]).length} ${L10nX.getStr.question_str} - ${L10nX.getStr.maximum_point}: $count", 
-            style: TextStyleConstant.textStyleBlack15w400,),
-          Gap(Dimens.size16),
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: (widget.exitsQuestion??[]).length,
-              itemBuilder: (context, index) {
-                QuestionInfo questionInfo = (widget.exitsQuestion??[]).elementAt(index);
-                return Container(
-                  decoration: BoxDecoration(
-                    color: ColorConst.whiteColor,
-                    border: Border.all(color: ColorConst.dividerColor, width: 0.2)
-                  ),
-                  child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("${index+1}. ${questionInfo.questionName} "),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text("${questionInfo.weightage}đ    ${L10nX().getStringByKey('${mapQuestionTypeToStrKey[questionInfo.questionType]}_type_str')}"),
-                            Gap(Dimens.size8),
-                            Visibility(
-                              visible: widget.actionType != ActionType.view,
-                              child: InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    widget.onRemoveWords(questionInfo);
-                                  });
-                                },
-                                child: Icon(Icons.delete, color: ColorConst.colorIconRed,size: Dimens.size20,),
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                );
-                },),
-          ),
+          Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                    child: testDropDownSearch(
+                      context: context, 
+                      onSelectWord: (p0) {
+                          setState(() {
+                             widget.onSelectTest(p0);
+                          });
+                },)),
+              ]),
         ]
     );
   }
-  Widget questDropDownSearch({Function(QuestionInfo)? onSelectWord,required BuildContext context}) {
+  Widget testDropDownSearch({Function(TestInfo)? onSelectWord,required BuildContext context}) {
     return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -124,7 +74,7 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
                           fontStyle: FontStyle.italic
                       ),
                       decoration: InputDecoration(
-                        labelText: L10nX.getStr.search_lesson_str,
+                        labelText: L10nX.getStr.vocabulary_str,
                         hintTextDirection: AppTheme.textDirection,
                         labelStyle: TextStyleConstant.textStyleBlack14w400,
                         hintStyle: TextStyleConstant.textStyleBlack14w400,
@@ -146,7 +96,7 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
                     ),
             
                     suggestionsCallback: (pattern) async {
-                      return await getQuestionFilterList(pattern);
+                      return await getTestFilterList(pattern);
                     },
             
                     itemBuilder: (context, suggestion) {
@@ -161,7 +111,7 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
                             ),
                             child: ListTile(
                               leading: Icon(Icons.book),
-                              title: Text(suggestion.questionName??""),
+                              title: Text(suggestion.name??""),
                             ),
                           );
                         },
@@ -203,19 +153,19 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
           Gap(Dimens.size16),
           InkWell(
             onTap: () {
-              //CreateEditWordsPage().show(context);
+              CreateEditTest().show(context);
             },
             child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size40,),
           )
         ]
     );
   }
-  Future<List<QuestionInfo>>getQuestionFilterList(String keyWord) async{
+  Future<List<TestInfo>>getTestFilterList(String keyWord) async{
     if(keyWord.isEmpty) {
       return [];
     }
-    GetQuizListApi getLessonListApi= GetQuizListApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord, pageSize: 100, pageNumber: 0));
-    QuestionListResponseModel data = await getLessonListApi.call();
+    GetTestListApi getLessonListApi= GetTestListApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord, pageSize: 100, pageNumber: 0));
+    TestListResponseModel data = await getLessonListApi.call();
     return data.content??[];
   }
   

@@ -9,6 +9,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/views/course/create_edit_course/components/course_mode.dart';
+import 'package:webkit/views/lessson/components/search_test_drop_down.dart';
 import 'package:webkit/views/lessson/components/search_word_drop_down.dart';
 import '../../../base/widgets/widget_common/widget_with_title_common.dart';
 import '../../../helpers/widgets/my_spacing.dart';
@@ -33,9 +34,13 @@ class CreateEditLesson extends StatefulWidget {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
+          double width = MediaQuery.of(context).size.width * (ResponsiveInfo.isTablet() ? 0.4 : 0.9);
+          if(width<500) {
+            width = 500;
+          }
           return Dialog(
             child: SizedBox(
-                width: MediaQuery.of(context).size.width * (ResponsiveInfo.isTablet() ? 0.4 : 0.9),
+                width: width,
                 height: MediaQuery.of(context).size.height * (ResponsiveInfo.isTablet() ? 0.8 : 0.9),
                 key: UniqueKey(),
                 child: this
@@ -393,5 +398,16 @@ class _CreateEditLesson extends State<CreateEditLesson>
       ),
     );
   }
+  Widget buildLectureTest({required BuildContext context, required LessonDetailState state}) {
+    return WidgetWithColumnTitleCommon(
+      title: L10nX.getStr.vocabulary_str,
+      isRequirement: true,
+      child: SearchTestDropDown(
+        onSelectTest: (testInfo) {
 
+          BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateTestInfoEvent(testInfo: testInfo));
+        },
+      ),
+    );
+  }
 }

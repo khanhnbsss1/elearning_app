@@ -147,95 +147,131 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
       ),
     );
   }
-  
   Widget buildListFilter(  {
     required MyScreenMediaType myScreenMediaType,
     required BoxConstraints boxConstraints,
     required BuildContext context,
     required TagListState state
   }){
-    return Container(
-      decoration: BoxDecoration(
-          border: Border(
-              bottom: BorderSide(color: ColorConst.dividerColor, width: 0.1)
-          )
-      ),
-      padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: Dimens.size40,
-                width: Dimens.size250,
-                child: Form(
-                  key: formKey,
-                  child: TextFormField(
-                    maxLines: 1,
-                    controller: textEditingController,
-                    onChanged: (value) {
-                      
-                    },
-                    onFieldSubmitted: (value) {
-                      BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
-                    },
-                    onTapOutside: (event) {
-                    },
-                    style: MyTextStyle.bodyMedium(),
-                    decoration: InputDecoration(
-                        hintText: L10nX.getStr.search,
-                        fillColor: ColorConst.whiteColor,
-                        filled: true,
-                        hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                        border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                        enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                        focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                        prefixIcon: const Align(
-                            alignment: Alignment.center,
-                            child: Icon(
-                              LucideIcons.search,
-                              size: 14,
-                            )),
-                        prefixIconConstraints: const BoxConstraints(
-                            minWidth: 36,
-                            maxWidth: 36,
-                            minHeight: 32,
-                            maxHeight: 32),
-                        contentPadding: MySpacing.xy(16, 12),
-                        //isCollapsed: true,
-                        floatingLabelBehavior: FloatingLabelBehavior.auto),
+    return LayoutBuilder(builder: (context, constraints) {
+      return Container(
+        decoration: BoxDecoration(
+            border: Border(
+                bottom: BorderSide(color: ColorConst.dividerColor, width: 0.2)
+            )
+        ),
+        padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  //height: Dimens.size40,
+                  constraints: BoxConstraints(
+                      maxWidth:  constraints.maxWidth> 800?400:250
+                  ),
+                  child: Form(
+                    key: formKey,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            maxLines: 1,
+                            controller: textEditingController,
+                            onChanged: (value) {
+
+                            },
+                            onFieldSubmitted: (value) {
+                              BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                            },
+                            onTapOutside: (event) {
+                            },
+                            style: MyTextStyle.bodyMedium(),
+                            decoration: InputDecoration(
+                                hintText: L10nX.getStr.search,
+                                fillColor: ColorConst.whiteColor,
+                                filled: true,
+                                hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                                border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                prefixIcon: const Align(
+                                    alignment: Alignment.center,
+                                    child: Icon(
+                                      LucideIcons.search,
+                                      size: 14,
+                                    )),
+                                prefixIconConstraints: const BoxConstraints(
+                                    minWidth: 36,
+                                    maxWidth: 36,
+                                    minHeight: 32,
+                                    maxHeight: 32),
+                                contentPadding: MySpacing.xy(16, 12),
+                                //isCollapsed: true,
+                                floatingLabelBehavior: FloatingLabelBehavior.auto),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Gap(Dimens.size10),
-              InkWell(
-                  onTap: () {
-                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
-                  },
-                  child: Icon(Icons.search_rounded, color: ColorConst.mainColor,size: Dimens.size40,)),
-            ],
-          ),
-         
-          Row(
-            children: [
-              Gap(Dimens.size10),
-              InkWell(
-                  onTap: () {
-                    // CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
-                    AddTagPage(tagPageAction: TagPageAction.create,).show(context, callBack: (p0) {
-                      BlocProvider.of<TagListBloc>(context).add(TagListInitEvent());
-                    },);
-                  },
-                  child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
-            ],
-          ),
-        ],
-      ),
-    );
+                Gap(Dimens.size16),
+                Visibility(
+                  visible: constraints.maxWidth> 800,
+                  child: ActionButton1(
+                    text: L10nX.getStr.search,
+                    radius: 16,
+                    onTap: () {
+                      BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                    },
+                  ),
+                ),
+                Visibility(
+                  visible: constraints.maxWidth< 800,
+                  child: InkWell(
+                      onTap: () {
+                        BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                      },
+                      child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Gap(Dimens.size10),
+                Visibility(
+                  visible: constraints.maxWidth< 800,
+                  child: InkWell(
+                      onTap: () {
+                        AddTagPage(tagPageAction: TagPageAction.create,).show(context, callBack: (p0) {
+                          BlocProvider.of<TagListBloc>(context).add(TagListInitEvent());
+                        },);
+                      },
+                      child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
+                ),
+                Visibility(
+                  visible: constraints.maxWidth >800,
+                  child: ActionButton1(
+                    preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
+                    text: L10nX.getStr.add_new_str,
+                    onTap: () {
+                      AddTagPage(tagPageAction: TagPageAction.create,).show(context, callBack: (p0) {
+                        BlocProvider.of<TagListBloc>(context).add(TagListInitEvent());
+                      },);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    },);
   }
+ 
   Widget buildTagList({required TagListState state, required BuildContext context}){
     List<Widget> listOfLesson = List.empty(growable: true);
 

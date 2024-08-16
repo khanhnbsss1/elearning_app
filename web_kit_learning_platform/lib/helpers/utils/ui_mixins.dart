@@ -20,7 +20,7 @@ mixin UIMixin {
   // theme.colorScheme. get theme.colorScheme. => theme.theme.colorScheme.;
 
   OutlineInputBorder get outlineInputBorder => OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(Dimens.size20)),
+        borderRadius: BorderRadius.all(Radius.circular(Dimens.size12)),
         borderSide: BorderSide(
             width: 1,
             strokeAlign: 0,
