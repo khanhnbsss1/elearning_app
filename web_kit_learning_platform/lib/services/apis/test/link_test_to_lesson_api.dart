@@ -7,7 +7,7 @@ class LinkTestToLessonApi extends BaseApiRequest {
   String subject;
   LinkTestToLessonApi({required this.courseId, required this.lessonId, required this.subject}):super(
     serviceType: SERVICE_TYPE.LESSON,
-    apiName: ApiName.getInstance().linkLesson,
+    apiName: ApiName.getInstance().linkTestToLesson,
   );
 
   Future<dynamic> call() async {
