@@ -9,7 +9,9 @@ import 'package:webkit/services/apis/lessson/lesson_detail/add_lesson_api.dart';
 import 'package:webkit/services/apis/lessson/lesson_detail/get_lesson_detail.dart';
 import 'package:webkit/services/apis/lessson/lesson_detail/update_lesson_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/test/link_test_to_lesson_api.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
+import 'package:webkit/services/apis/test/unklink_test_from_lesson_api.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/services/apis/upload_file/upload_file_api.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
@@ -79,7 +81,7 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
       if(data.runtimeType==String && (data as String).isEmpty)
       {
         await _onLinkAndUnlinkWordToLesson();
-
+        await _onLinkTestToLesson();
         MonitorLoading().dismiss();
 
         emit(state.copyWith(
@@ -102,6 +104,7 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
         {
           state.lessonInfo?.id =data;
           await _onLinkAndUnlinkWordToLesson();
+          await _onLinkTestToLesson();
           emit(state.copyWith(
               blocStatus: LessonDetailStatus.onCreateLesson,
               lessonInfo: state.lessonInfo
@@ -148,16 +151,15 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
   }
 
   Future<void> _onLinkTestToLesson()async {
-    if((state.listOfWordAdd??[]).isNotEmpty)
+    if(state.testInfo!=null)
     {
-      LinkWordApi linkWordApi = LinkWordApi(lessonId: state.lessonInfo?.id??0, vocabularyInfos: state.listOfWordAdd??[]);
-      dynamic data = await linkWordApi.call();
-    }
-
-    if((state.listOfWordRemove??[]).isNotEmpty)
-    {
-      UnLinkWordApi unlinkWordApi = UnLinkWordApi(lessonId: state.lessonInfo?.id??0, vocabularyInfos: state.listOfWordRemove??[]);
-      dynamic data = await unlinkWordApi.call();
+      
+      /// Cần phải unlink trước khi link tới 1 test khác
+      UnLinkTestToLessonApi unlinkWordApi = UnLinkTestToLessonApi(lessonId: state.lessonInfo?.id??0, testId: state.lessonInfo?.testId??0);
+      dynamic unlinkData = await unlinkWordApi.call();
+      
+      LinkTestToLessonApi linkWordApi = LinkTestToLessonApi(lessonId: state.lessonInfo?.id??0, testId: state.testInfo?.id??0);
+      dynamic linkData = await linkWordApi.call();
     }
   }
 }

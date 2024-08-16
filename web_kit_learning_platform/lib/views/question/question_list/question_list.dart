@@ -126,16 +126,16 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
                   limitPerPage: state.listResponseModel!.pageSize??10,
                   totalDataCount: state.listResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
-                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onBackToFirstPage: (p0) {
-                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onNextPage: (p0) {
-                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onGoToLastPage: (p0) {
-                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   backgroundColor: ColorConst.whiteColor,
                   textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),

@@ -122,16 +122,16 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                   limitPerPage: state.tagListResponseModel!.pageSize??10,
                   totalDataCount: state.tagListResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
-                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onBackToFirstPage: (p0) {
-                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onNextPage: (p0) {
-                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onGoToLastPage: (p0) {
-                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   backgroundColor: ColorConst.whiteColor,
                   textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),

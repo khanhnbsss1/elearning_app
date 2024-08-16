@@ -1,12 +1,12 @@
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 
-class LinkTestToLessonApi extends BaseApiRequest {
+class UnLinkTestToLessonApi extends BaseApiRequest {
   int testId;
   int lessonId;
-  LinkTestToLessonApi({required this.testId, required this.lessonId}):super(
+  UnLinkTestToLessonApi({required this.testId, required this.lessonId}):super(
     serviceType: SERVICE_TYPE.LESSON,
-    apiName: ApiName.getInstance().linkTestToLesson,
+    apiName: ApiName.getInstance().unLinkTestFromLesson,
   );
 
   Future<dynamic> call() async {
@@ -27,7 +27,7 @@ class LinkTestToLessonApi extends BaseApiRequest {
   Future<void> getAuthorization() async {
     await setApiBody({
       "lectureId":lessonId,
-      "test_Id":testId,
+      "id":testId,
     });
   }
 

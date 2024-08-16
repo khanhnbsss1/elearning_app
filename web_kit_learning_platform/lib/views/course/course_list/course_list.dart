@@ -234,16 +234,16 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                   limitPerPage: state.courseResponseModel!.pageSize ?? 10,
                                   totalDataCount: state.courseResponseModel!.getTotalElement(),
                                   onPreviousPage: (p0) {
-                                    BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                                    BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                                   },
                                   onBackToFirstPage: (p0) {
-                                    BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                                    BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                                   },
                                   onNextPage: (p0) {
-                                    BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                                    BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                                   },
                                   onGoToLastPage: (p0) {
-                                    BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                                    BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                                   },
                                   backgroundColor: ColorConst.whiteColor,
                                   textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),

@@ -87,7 +87,7 @@ class ApiName {
   final String getQuizList = "/get-questions";
   final String updateQuiz = "/update-question";
   final String linkTestToLesson = "/link-lecture-test'";
-  final String unLinkTestToLesson = "/unlink-lecture-test'";
+  final String unLinkTestFromLesson = "/unlink-lecture-test'";
 
 }
 

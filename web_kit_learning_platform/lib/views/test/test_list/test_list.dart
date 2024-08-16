@@ -121,16 +121,16 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                   limitPerPage: state.listResponseModel!.pageSize??10,
                   totalDataCount: state.listResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
-                    BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onBackToFirstPage: (p0) {
-                    BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onNextPage: (p0) {
-                    BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onGoToLastPage: (p0) {
-                    BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   backgroundColor: ColorConst.whiteColor,
                   textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),

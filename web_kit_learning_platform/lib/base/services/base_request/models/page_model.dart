@@ -4,15 +4,21 @@ class PageModel{
   int? pageSize;
   int? pageNumber;
   int getCurrentPage(){
-    int pageIndex = pageNumber??1;
-/*    if(getTotalPage()<=pageIndex)
+    int pageIndex = ((pageNumber)??1)+1;
+    if(getTotalPage()<=pageIndex)
       {
         pageIndex = getTotalPage();
-      }*/
+      }
     return pageIndex<1?1:pageIndex;
   }
   int getTotalPage(){
-    int totalPage = ((total??1)~/ ((pageSize??0)>0?pageSize!:1));
+    int totalTemp = (total??1);
+    int pageSizeTemp = (pageSize??0)>0?pageSize!:1;
+    int totalPage = totalTemp~/pageSizeTemp;
+    if(totalTemp%pageSizeTemp >0)
+      {
+        totalPage +=1;
+      }
     return totalPage<1?1:totalPage;
   }
   int getTotalElement(){

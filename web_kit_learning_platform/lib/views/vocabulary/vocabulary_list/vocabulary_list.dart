@@ -156,16 +156,16 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                   limitPerPage: state.vocabularyResponseModel!.pageSize??10,
                   totalDataCount: state.vocabularyResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
-                    BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onBackToFirstPage: (p0) {
-                    BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onNextPage: (p0) {
-                    BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onGoToLastPage: (p0) {
-                    BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   backgroundColor: ColorConst.whiteColor,
                   textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),

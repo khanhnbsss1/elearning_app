@@ -124,16 +124,16 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                   limitPerPage: state.lessonListResponseModel!.pageSize??10,
                   totalDataCount: state.lessonListResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onBackToFirstPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onNextPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onGoToLastPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0)));
+                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   backgroundColor: ColorConst.whiteColor,
                   textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
@@ -274,6 +274,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
   Widget buildLessonList({required LessonListState state, required BuildContext context}){
     LessonDataSource employeeDataSource = LessonDataSource(
       lessonData: state.lessonListResponseModel?.content??[],
+      starIndex: (state.searchCommonRequest?.pageNumber??0)* (state.searchCommonRequest?.pageSize??0),
       onDelete: (p0) {
 
       },
@@ -340,7 +341,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                       alignment: Alignment.center,
                       child: Text(L10nX.getStr.test_name))),
               GridColumn(
-                  columnName: L10nX.getStr.word_str,
+                  columnName: L10nX.getStr.vocabulary_str,
                   minimumWidth: Dimens.size120,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
@@ -399,7 +400,7 @@ class LessonDataSource extends DataGridSource {
             DataGridCell<Widget>(columnName: L10nX.getStr.document_str, value: Text(e.docName??"", style: TextStyleConstant.textStyleBlack14w400,)),
 
             DataGridCell<Widget>(columnName: L10nX.getStr.test_name, value: Text(e.testName??"", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.word_str, value: SingleChildScrollView(
+            DataGridCell<Widget>(columnName: L10nX.getStr.vocabulary_str, value: SingleChildScrollView(
               child: Row(children: listWord,),
             )),
             //DataGridCell<Widget>(columnName: L10nX.getStr.doing_time_str, value: Text("${(e.}", style: TextStyleConstant.textStyleBlack14w400,)),
