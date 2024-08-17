@@ -1,23 +1,19 @@
 // import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:pinput/pinput.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/drop_down/drop_down_search.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/controller/ui/add_course_controller.dart';
 import 'package:webkit/helpers/extensions/string.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
@@ -25,6 +21,7 @@ import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
 import 'package:webkit/views/course/create_edit_course/components/tag_drop_down.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:webkit/views/lessson/components/search_test_drop_down.dart';
 
 class CourseIntroductionPage extends StatefulWidget {
   CourseIntroductionPage({super.key});
@@ -252,7 +249,14 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                     ],
                   ),
                 )),
-            buildTags(state: state, context: context),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(child: buildTags(state: state, context: context)),
+                Expanded(child: buildLectureTest(state: state, context: context)),
+              ],
+            ),
           ],
         );
       }, 
@@ -292,6 +296,8 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           buildAccompanyCourse(state: state, context: context),
           MySpacing.height(16),
           buildPaymentWidget(state: state, context: context),
+          MySpacing.height(16),
+          buildLectureTest(state: state, context: context),
           MySpacing.height(16),
           buildTags(state: state, context: context),
           MySpacing.height(20),
@@ -468,51 +474,54 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         for(TextEditingController infoObjectController in state.controller?.getListInfoObjectController()??[])
         {
           listWhoThisCourseWidget.add(
-              Column(
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: infoObjectController,
-                          onFieldSubmitted: (value) {
-
-                          },
-                          onEditingComplete: () {
-
-                          },
-                          onTapOutside: (event) {
-
-                          },
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            labelText: L10nX.getStr.who_this_course_is_for,
-                            labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                            border: outlineInputBorder,
-                            prefixIcon: Icon(
-                              LucideIcons.user,
-                              size: 20,
-                              color: ColorConst.colorIconRed,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            controller: infoObjectController,
+                            onFieldSubmitted: (value) {
+                
+                            },
+                            onEditingComplete: () {
+                
+                            },
+                            onTapOutside: (event) {
+                
+                            },
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              labelText: L10nX.getStr.who_this_course_is_for,
+                              labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              prefixIcon: Icon(
+                                LucideIcons.user,
+                                size: 20,
+                                color: ColorConst.colorIconRed,
+                              ),
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior: FloatingLabelBehavior.never,
                             ),
-                            contentPadding: MySpacing.all(16),
-                            isCollapsed: true,
-                            floatingLabelBehavior: FloatingLabelBehavior.never,
                           ),
                         ),
-                      ),
-                      Gap(Dimens.size10),
-                      IconButton(
-                        onPressed: () {
-                          state.controller?.removeInfoObjectController(textEditingController: infoObjectController);
-                          BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(addCourseController: state.controller!));
-                        },
-                        icon: Icon(Icons.remove_circle_outline, color: ColorConst.mainColor, size: Dimens.size20,),
-                      )
-                    ],
-                  ),
-                  Gap(Dimens.size10)
-                ],
+                        Gap(Dimens.size10),
+                        IconButton(
+                          onPressed: () {
+                            state.controller?.removeInfoObjectController(textEditingController: infoObjectController);
+                            BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(addCourseController: state.controller!));
+                          },
+                          icon: Icon(Icons.remove_circle_outline, color: ColorConst.mainColor, size: Dimens.size20,),
+                        )
+                      ],
+                    ),
+                    Gap(Dimens.size10)
+                  ],
+                ),
               )
           );
         }
@@ -578,53 +587,56 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
       for(TextEditingController infoObjectController in state.controller?.getListResultObjectController()??[])
       {
         listWhoThisCourseWidget.add(
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        key: UniqueKey(),
-                        controller: infoObjectController,
-                        onFieldSubmitted: (value) {
-
-                        },
-                        onEditingComplete: () {
-
-                        },
-                        onTapOutside: (event) {
-
-                        },
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelText: L10nX.getStr.what_will_you_achieve_after_the_course_str,
-                          labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                          border: outlineInputBorder,
-                          prefixIcon: Icon(
-                            LucideIcons.user,
-                            size: 20,
-                            color: ColorConst.colorIconRed,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          key: UniqueKey(),
+                          controller: infoObjectController,
+                          onFieldSubmitted: (value) {
+              
+                          },
+                          onEditingComplete: () {
+              
+                          },
+                          onTapOutside: (event) {
+              
+                          },
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: L10nX.getStr.what_will_you_achieve_after_the_course_str,
+                            labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                            border: outlineInputBorder,
+                            prefixIcon: Icon(
+                              LucideIcons.user,
+                              size: 20,
+                              color: ColorConst.colorIconRed,
+                            ),
+                            contentPadding: MySpacing.all(16),
+                            isCollapsed: true,
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
                           ),
-                          contentPadding: MySpacing.all(16),
-                          isCollapsed: true,
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
                         ),
                       ),
-                    ),
-                    Gap(Dimens.size10),
-                    IconButton(
-                      onPressed: () {
-                        state.controller?.removeResultObjectController(textEditingController: infoObjectController);
-                        BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(addCourseController: state.controller!));
-                      },
-                      icon: Icon(Icons.remove_circle_outline, color: ColorConst.mainColor, size: Dimens.size20,),
-                    )
-                  ],
-                ),
-                Gap(Dimens.size10),
-              ],
+                      Gap(Dimens.size10),
+                      IconButton(
+                        onPressed: () {
+                          state.controller?.removeResultObjectController(textEditingController: infoObjectController);
+                          BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(addCourseController: state.controller!));
+                        },
+                        icon: Icon(Icons.remove_circle_outline, color: ColorConst.mainColor, size: Dimens.size20,),
+                      )
+                    ],
+                  ),
+                  Gap(Dimens.size10),
+                ],
+              ),
             )
         );
       }
@@ -987,5 +999,15 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           ));
     }
   }
-
+  Widget buildLectureTest({required BuildContext context, required AddCourseState state}) {
+    return WidgetWithColumnTitleCommon(
+      title: L10nX.getStr.output_test_str,
+      isRequirement: true,
+      child: SearchTestDropDown(
+        onSelectTest: (testInfo) {
+          BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateTestInfoEvent(testInfo: testInfo));
+        },
+      ),
+    );
+  }
 }

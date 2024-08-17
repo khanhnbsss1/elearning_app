@@ -139,6 +139,8 @@ class _CreateEditLesson extends State<CreateEditLesson>
                             MySpacing.height(16),
                             buildLectureWords(context: context, state: state),
                             MySpacing.height(16),
+                            buildLectureTest(context: context, state: state),
+                            MySpacing.height(50),
                           ],
                         ),
                       ),
@@ -400,11 +402,10 @@ class _CreateEditLesson extends State<CreateEditLesson>
   }
   Widget buildLectureTest({required BuildContext context, required LessonDetailState state}) {
     return WidgetWithColumnTitleCommon(
-      title: L10nX.getStr.vocabulary_str,
+      title: L10nX.getStr.test_str,
       isRequirement: true,
       child: SearchTestDropDown(
         onSelectTest: (testInfo) {
-
           BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateTestInfoEvent(testInfo: testInfo));
         },
       ),

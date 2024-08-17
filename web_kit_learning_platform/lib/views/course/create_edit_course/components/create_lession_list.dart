@@ -146,7 +146,8 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
         columnWidthMode: ColumnWidthMode.fill,
         isScrollbarAlwaysShown: false,
         gridLinesVisibility: GridLinesVisibility.both,
-        rowHeight: Dimens.size80,
+        rowHeight: Dimens.size60,
+        headerRowHeight: Dimens.size60,
         showHorizontalScrollbar: true,
         columns: <GridColumn>[
           GridColumn(
@@ -357,20 +358,27 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                 suggestionsCallback: (pattern) async {
                   return await getLessonFilterList(pattern);
                 },
-
                 itemBuilder: (context, suggestion) {
                   return OnHoverWidget(
                     builder: (bool isHovered) {
-                      return  Container(
-                        decoration: BoxDecoration(
-                            color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
-                            border: Border(
-                                bottom: BorderSide(color: ColorConst.dividerColor)
-                            )
-                        ),
-                        child: ListTile(
-                          leading: Icon(Icons.edit_document),
-                          title: Text(suggestion.lectureName??""),
+                      return  IgnorePointer(
+                        //ignoring: true,
+                        child: InkWell(
+                          onTap: () {
+                            print("object");
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
+                                border: Border(
+                                    bottom: BorderSide(color: ColorConst.dividerColor)
+                                )
+                            ),
+                            child: ListTile(
+                              leading: Icon(Icons.edit_document),
+                              title: Text(suggestion.lectureName??""),
+                            ),
+                          ),
                         ),
                       );
                     },

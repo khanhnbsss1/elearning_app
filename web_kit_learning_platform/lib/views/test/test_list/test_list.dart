@@ -315,7 +315,8 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
             columnWidthMode: ColumnWidthMode.fill,
             isScrollbarAlwaysShown: false,
             gridLinesVisibility: GridLinesVisibility.both,
-            rowHeight: Dimens.size80,
+            rowHeight: Dimens.size60,
+            headerRowHeight: Dimens.size60,
             //defaultColumnWidth: 200,
             showHorizontalScrollbar: true,
             columns: <GridColumn>[
@@ -410,10 +411,9 @@ class TestDataSource extends DataGridSource {
             DataGridCell<Widget>(columnName: L10nX.getStr.course_str, value: Text(e.courseName??"", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.subject_str, value: Text(e.subName??"", style: TextStyleConstant.textStyleBlack14w400,)),
 
-            DataGridCell<Widget>(columnName: L10nX.getStr.difficulty_str, value: Text(e.typeTest??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.difficulty_str, value: Text(L10nX().getStringByKey("${mapTestLevelToStrKey[e.testType?? TestType.OUTPUT]}_test_str".toLowerCase()), style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.question_number, value: Text("${(e.quizDTOs??[]).length}", style: TextStyleConstant.textStyleBlack14w400,)),
             //DataGridCell<Widget>(columnName: L10nX.getStr.doing_time_str, value: Text("${(e.}", style: TextStyleConstant.textStyleBlack14w400,)),
-
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str, 
                 value: Column(
                   mainAxisSize: MainAxisSize.min,

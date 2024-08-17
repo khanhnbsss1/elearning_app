@@ -45,7 +45,8 @@ class TestDetailBloc extends Bloc<TestDetailEvent, TestDetailState> {
         GetTestDetailApi getTestDetailApi = GetTestDetailApi(testId: state.testInfo?.id??0);
         state.testInfo = (await getTestDetailApi.call())?? state.testInfo;
         state.listOfWord = [...state.testInfo?.quizDTOs??[]];
-        state.editingControllerTestName?.text = state.testInfo?.lectureName??"";
+        state.editingControllerTestName?.text = state.testInfo?.name??"";
+        state.editingControllerTestTime?.text = (state.testInfo?.durian??0).toString();
       }
     emit(state.copyWith(
       blocStatus: TestDetailStatus.initial,

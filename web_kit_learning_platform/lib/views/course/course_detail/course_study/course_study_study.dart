@@ -229,11 +229,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
             Gap(Dimens.size16),
             Text(
               'Bài giảng: ${_state.selectLessonInfo?.lectureName!}',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: ColorConst.textColor,
-              ),
+              style: TextStyleConstant.textStyleBlack16w600
             ),
           ],
         ),
@@ -259,28 +255,27 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
         color: ColorConst.whiteColor
       ),
       padding: EdgeInsets.zero,
-      child: RawScrollbar(
-        controller: subjectScrollControllerBar ,
-        trackVisibility: true,
-        thumbVisibility: true,
-        //thumbColor: ColorConst.colorIconGrays,
-        thickness: 10,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 16.0, bottom: 16, right: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-               Padding(
-                 padding: EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size16),
-                 child: Text(L10nX.getStr.lesson_list,
-                        style: TextStyleConstant.textStyleBlack14w600),
-               ),
-              Divider(color: ColorConst.blackColor,thickness: 0.1,),
-              ListView.builder(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 16.0, bottom: 16, right: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+               padding: EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size16),
+               child: Text(L10nX.getStr.lesson_list,
+                      style: TextStyleConstant.textStyleBlack14w600),
+             ),
+            Divider(color: ColorConst.blackColor,thickness: 0.1,),
+            Scrollbar(
+              controller: subjectScrollControllerBar ,
+              thickness: 10,
+              trackVisibility: true,
+              thumbVisibility: true,
+              child: ListView.builder(
+                controller: subjectScrollController,
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                // controller: subjectScrollController,
                 padding: EdgeInsets.zero,
                 itemCount: (_state.courseInfo?.getListSubjectAndLesson() ?? []).length,
                 itemBuilder: (context, subjectIndex) {
@@ -311,7 +306,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                                         ),
                                       ),
                                       Gap(Dimens.size16),
-
+              
                                       Icon((!_state.showSubject![subjectIndex])?Icons.arrow_drop_down:Icons.arrow_drop_up, size: 32,),
                                     ],
                                   ),
@@ -372,8 +367,8 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                   );
                 },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -553,6 +548,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
               Spacer(),
               AudioSpeaker(
                 url: word.audioLink ?? "",
+                enableProccessBar: true,
               ),
               SizedBox(
                 width: 16,

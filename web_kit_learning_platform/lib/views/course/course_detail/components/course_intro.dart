@@ -75,7 +75,8 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                     Expanded(child: buildInfoBox(context, constraints, state)),
                     SizedBox(
                       width: Dimens.size400,
-                      child: buildInfoCard(state: state)),
+                      child: buildInfoCard(state: state)
+                    ),
                   ],
                 ):
                 Column(
@@ -97,168 +98,158 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+          constraints.maxWidth> 450?
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
             children: [
-              constraints.maxWidth> 450?
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
                         children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Expanded(
-                                child: MyText.titleLarge(
-                                  state.courseInfo?.name ?? "",
-                                  style: TextStyleConstant.titleTextColorOnBackgroundColorStyle16w600.copyWith(
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.visible,
-                                  color: ColorConst.textColor,
-                                ),
+                          Expanded(
+                            child: MyText.titleLarge(
+                              state.courseInfo?.name ?? "",
+                              style: TextStyleConstant.titleTextColorOnBackgroundColorStyle16w600.copyWith(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
                               ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              StarRating(
-                                color: Colors.yellow,
-                                allowHalfRating: true,
-                                rating: (state.courseInfo?.rating ?? 0).toDouble(),
-                              ),
-                            ],
+                              maxLines: 2,
+                              overflow: TextOverflow.visible,
+                              color: ColorConst.textColor,
+                            ),
                           ),
                         ],
                       ),
-                    ),
-                  ),
-                  ActionButton1(
-                    text: L10nX.getStr.lets_study,
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      CourseStudy1(
-                        courseInfo: state.courseInfo!,
-                      ).show(context);
-                    },
-                  ),
-                ],
-              ):
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Expanded(
-                              child: MyText.titleLarge(
-                                state.courseInfo?.name ?? "",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                                color: ColorConst.textColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            StarRating(
-                              color: Colors.yellow,
-                              allowHalfRating: true,
-                              rating: (state.courseInfo?.rating ?? 0).toDouble(),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  /*ActionButton1(
-                          text: L10nX.getStr.register_now,
-                        ),*/
-                  ActionButton1(
-                    text: L10nX.getStr.lets_study,
-                    onTap: () {
-              /*                              AppPages.routeName(Routes.courseStudy,arguments: {
-                              "courseInfo":state.courseInfo
-                            });*/
-                      CourseStudy1(
-                        courseInfo: state.courseInfo!,
-                      ).show(context);
-                    },
-                  ),
-
-                  SizedBox(
-                    width: 16,
-                  ),
-                ],
-              ),
-              buildTabBar(),
-              ListenableBuilder(
-                listenable: showTabBarModel,
-                builder: (BuildContext context, Widget? child) {
-                  return Stack(
-                    children: [
-                      Visibility(
-                        visible: showTabBarModel.position == 0,
-                        child: Column(
-                          children: [
-                            buildInfoBoxIntroduction(),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Divider(color: ColorConst.dividerColor,),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            buildInfoBoxInfoObj(),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            buildInfoBoxInfoResult(),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            buildInfoBoxTag(),
-                          ],
-                        )
-                      ),
-                      Visibility(
-                        visible: showTabBarModel.position == 1,
-                        child: LectureList(),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          StarRating(
+                            color: Colors.yellow,
+                            allowHalfRating: true,
+                            rating: (state.courseInfo?.rating ?? 0).toDouble(),
+                          ),
+                        ],
                       ),
                     ],
-                  );
+                  ),
+                ),
+              ),
+              ActionButton1(
+                text: L10nX.getStr.lets_study,
+                onTap: () {
+                  Navigator.of(context).pop();
+                  CourseStudy1(
+                    courseInfo: state.courseInfo!,
+                  ).show(context);
                 },
               ),
             ],
+          ):
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                          child: MyText.titleLarge(
+                            state.courseInfo?.name ?? "",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                            color: ColorConst.textColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        StarRating(
+                          color: Colors.yellow,
+                          allowHalfRating: true,
+                          rating: (state.courseInfo?.rating ?? 0).toDouble(),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              /*ActionButton1(
+                      text: L10nX.getStr.register_now,
+                    ),*/
+              ActionButton1(
+                text: L10nX.getStr.lets_study,
+                onTap: () {
+          /*                              AppPages.routeName(Routes.courseStudy,arguments: {
+                          "courseInfo":state.courseInfo
+                        });*/
+                  CourseStudy1(
+                    courseInfo: state.courseInfo!,
+                  ).show(context);
+                },
+              ),
+      
+              SizedBox(
+                width: 16,
+              ),
+            ],
           ),
-
-      // SizedBox(
-      //   height: 16,
-      // ),
-      // buildInfoRelatedCourse(),
+          buildTabBar(),
+          ListenableBuilder(
+            listenable: showTabBarModel,
+            builder: (BuildContext context, Widget? child) {
+              return Stack(
+                children: [
+                  Visibility(
+                    visible: showTabBarModel.position == 0,
+                    child: Column(
+                      children: [
+                        buildInfoBoxIntroduction(),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Divider(color: ColorConst.dividerColor,),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        buildInfoBoxInfoObj(),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        buildInfoBoxInfoResult(),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        buildInfoBoxTag(),
+                      ],
+                    )
+                  ),
+                  Visibility(
+                    visible: showTabBarModel.position == 1,
+                    child: LectureList(),
+                  ),
+                ],
+              );
+            },
+          ),
         ],
       ),
     );
@@ -350,7 +341,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
         ),
         Padding(
           padding: const EdgeInsets.only(left: 32.0),
-          child: (_state.courseInfo?.infoResult != null)
+          child: (_state.courseObject??[]).isNotEmpty
               ? ListView.builder(
               shrinkWrap: true,
               controller: controller,
@@ -368,7 +359,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                   Expanded(child: Text((_state.courseObject??[])[index], maxLines: 5,))
                 ],
               ))
-              : Text('${_state.courseInfo?.infoResult}'),
+              : Text('${_state.courseInfo?.getListInfoObj()}'),
         ),
       ],
     );
@@ -390,7 +381,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
         ),
         Padding(
           padding: const EdgeInsets.only(left: 32.0),
-          child: (_state.courseInfo?.infoResult != null)
+          child: (_state.courseResult??[]).isNotEmpty
               ? ListView.builder(
               shrinkWrap: true,
               controller: controller,
@@ -408,7 +399,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                   Expanded(child: Text((_state.courseResult??[])[index], maxLines: 5,))
                 ],
               ))
-              : Text('${_state.courseInfo?.infoResult}'),
+              : Text('${_state.courseInfo?.getListInfoResult()}'),
         ),
       ],
     );

@@ -5,6 +5,7 @@ enum QuestionType{
   text,
   audio,
   image,
+  fill
   
 }
 enum AnswerType{
@@ -51,6 +52,7 @@ class QuestionInfo {
   int? fileId;
   int? gradeId;
   List<AnswerInfo>? answerGetDetail;
+  int? answerIdChoose;
   QuestionInfo(
       {this.id,
         this.questionName,
@@ -62,7 +64,8 @@ class QuestionInfo {
         this.answerGetDetail,
         this.questionType,
         this.fileId,
-        this.gradeId
+        this.gradeId,
+        this.answerIdChoose
       }){
     questionType??=QuestionType.image;
     answerGetDetail??=[];

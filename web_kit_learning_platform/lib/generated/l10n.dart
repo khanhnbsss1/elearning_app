@@ -5849,6 +5849,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Input test`
+  String get entrance_test_str {
+    return Intl.message(
+      'Input test',
+      name: 'entrance_test_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Output test`
+  String get output_test_str {
+    return Intl.message(
+      'Output test',
+      name: 'output_test_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

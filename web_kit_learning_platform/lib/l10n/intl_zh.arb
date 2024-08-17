@@ -582,5 +582,7 @@
   "question_create": "创建问题",
   "question_edit": "编辑问题",
   "attack_file": "附件文件",
-  "user_str": "用户"
+  "user_str": "用户",
+  "entrance_test_str": "入学测试",
+  "output_test_str": "输出测试"
 }

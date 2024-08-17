@@ -307,7 +307,8 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
             columnWidthMode: ColumnWidthMode.fill,
             isScrollbarAlwaysShown: false,
             gridLinesVisibility: GridLinesVisibility.both,
-            rowHeight: Dimens.size80,
+            rowHeight: Dimens.size60,
+            headerRowHeight: Dimens.size60,
             //defaultColumnWidth: 200,
             showHorizontalScrollbar: true,
             columns: <GridColumn>[
@@ -322,7 +323,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                       ))),
               GridColumn(
                   columnName: L10nX.getStr.lecture_name_str,
-                  minimumWidth: Dimens.size200,
+                  minimumWidth: Dimens.size250,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
@@ -346,18 +347,25 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                       child: Text(L10nX.getStr.document_str))),
               GridColumn(
                   columnName: L10nX.getStr.test_name,
-                  minimumWidth: Dimens.size120,
+                  minimumWidth: Dimens.size200,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
                       child: Text(L10nX.getStr.test_name))),
               GridColumn(
-                  columnName: L10nX.getStr.vocabulary_str,
-                  minimumWidth: Dimens.size120,
+                  columnName: L10nX.getStr.payment_str,
+                  maximumWidth: Dimens.size100,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: Text(L10nX.getStr.word_str))),
+                      child: Text(L10nX.getStr.payment_str))),
+              GridColumn(
+                  columnName: L10nX.getStr.vocabulary_str,
+                  minimumWidth: Dimens.size200,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(L10nX.getStr.vocabulary_str))),
               GridColumn(
                   columnName: L10nX.getStr.action_str,
                   minimumWidth: Dimens.size180,
@@ -411,6 +419,8 @@ class LessonDataSource extends DataGridSource {
             DataGridCell<Widget>(columnName: L10nX.getStr.document_str, value: Text(e.docName??"", style: TextStyleConstant.textStyleBlack14w400,)),
 
             DataGridCell<Widget>(columnName: L10nX.getStr.test_name, value: Text(e.testName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.payment_str, value: Text(e.mode??"", style: TextStyleConstant.textStyleBlack14w400,)),
+
             DataGridCell<Widget>(columnName: L10nX.getStr.vocabulary_str, value: SingleChildScrollView(
               child: Row(children: listWord,),
             )),

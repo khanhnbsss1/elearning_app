@@ -3,27 +3,22 @@ import 'package:webkit/base/services/base_request/models/page_model.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
 
 
-enum TestLevel{
-  easy,
-  normal,
-  hard
+enum TestType{
+  ENTRANCE,OUTPUT,
 }
-Map<TestLevel, String>mapTestLevelToStrKey={
-  TestLevel.easy:"easy",
-  TestLevel.normal:"normal",
-  TestLevel.hard:"difficulty",
+Map<TestType, String>mapTestLevelToStrKey={
+  TestType.ENTRANCE:"ENTRANCE",
+  TestType.OUTPUT:"OUTPUT",
 };
-Map< String,TestLevel>mapStrKeyTestLevel={
-  L10nX().getStringByKey("easy_str"):TestLevel.easy,
-  L10nX().getStringByKey("normal_str"):TestLevel.normal,
-  L10nX().getStringByKey("difficulty_str"):TestLevel.hard,
+Map< String,TestType>mapStrKeyTestLevel={
+  "ENTRANCE":TestType.ENTRANCE,
+  "OUTPUT":TestType.OUTPUT,
 };
 class TestInfo {
   int? id;
   int? courseId;
   int? lectureId;
   String? language;
-  String? typeTest;
   String? name;
   String? courseName;
   String? subName;
@@ -32,6 +27,8 @@ class TestInfo {
   String? createdBy;
   String? updatedAt;
   String? updatedBy;
+  TestType? testType;
+  int? durian;
   List<QuestionInfo>? quizDTOs;
   
   TestInfo(
@@ -39,7 +36,6 @@ class TestInfo {
         this.courseId,
         this.lectureId,
         this.language,
-        this.typeTest,
         this.name,
         this.courseName,
         this.subName,
@@ -48,17 +44,21 @@ class TestInfo {
         this.createdBy,
         this.updatedAt,
         this.updatedBy,
-        this.quizDTOs});
+        this.quizDTOs,
+        this.testType,
+        this.durian
+      });
 
   TestInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     courseId = json['course_id'];
     lectureId = json['lecture_id'];
     language = json['language'];
-    typeTest = json['type_test'];
+    testType = mapStrKeyTestLevel[json['type_test']]??TestType.OUTPUT;
     name = json['name'];
     courseName = json['course_name'];
     subName = json['sub_name'];
+    durian = int.tryParse(json['durian'], radix: 10);
     lectureName = json['lecture_name'];
     createdAt = json['created_at'];
     createdBy = json['created_by'];
@@ -85,8 +85,9 @@ class TestInfo {
     //data['course_id'] =courseId;
     //data['lecture_id'] =lectureId;
    // data['language'] =language;
-    data['type_test'] =typeTest;
+    data['type_test'] =mapTestLevelToStrKey[testType];
     data['name'] =name;
+    data['durian'] =durian;
    // data['course_name'] =courseName;
    // data['sub_name'] =subName;
     //data['lecture_name'] =lectureName;
@@ -101,8 +102,8 @@ class TestInfo {
     
     return data;
   }
-  TestLevel getTestLevel(){
-    return mapStrKeyTestLevel[typeTest??""]??TestLevel.normal;
+  TestType getTestLevel(){
+    return testType??TestType.ENTRANCE;
   }
 }
 class TestListResponseModel extends PageModel{

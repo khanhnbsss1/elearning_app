@@ -233,6 +233,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "english_text": MessageLookupByLibrary.simpleMessage("English"),
         "enter_your_email":
             MessageLookupByLibrary.simpleMessage("Enter your email"),
+        "entrance_test_str": MessageLookupByLibrary.simpleMessage("Input test"),
         "example_form": MessageLookupByLibrary.simpleMessage("Example form"),
         "examples_str": MessageLookupByLibrary.simpleMessage("Examples"),
         "extra_pages": MessageLookupByLibrary.simpleMessage("Extra pages"),
@@ -382,6 +383,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Outline rounded button"),
         "outline_style": MessageLookupByLibrary.simpleMessage("Outline style"),
         "output": MessageLookupByLibrary.simpleMessage("Output"),
+        "output_test_str": MessageLookupByLibrary.simpleMessage("Output test"),
         "overview": MessageLookupByLibrary.simpleMessage("Overview"),
         "pages": MessageLookupByLibrary.simpleMessage("Pages"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),

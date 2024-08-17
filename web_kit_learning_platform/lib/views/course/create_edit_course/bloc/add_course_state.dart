@@ -15,6 +15,7 @@ enum AddCourseStatus {
   onUpdateCourseFromApi,
   onUpdateSubjectList,
   onUpdateCurrentSubject,
+  onUpdateTestInfo,
   unKnown
 }
 
@@ -30,6 +31,7 @@ class AddCourseState extends Equatable {
   List<String>?subjectList;
   List<String>?whoThisCourseIsFor;
   List<String>?whatWillYouAchieveAfterTheCourseStr;
+  TestInfo? testInfo;
   AddCourseState({
     this.blocStatus,
     this.addCourseFilterModel,
@@ -40,7 +42,8 @@ class AddCourseState extends Equatable {
     this.currentSubject,
     this.subjectList,
     this.whoThisCourseIsFor,
-    this.whatWillYouAchieveAfterTheCourseStr
+    this.whatWillYouAchieveAfterTheCourseStr,
+    this.testInfo
   }){
     courseInfo??=CourseInfo.initial();
     coursePageType??=CoursePageType.create;
@@ -61,7 +64,8 @@ class AddCourseState extends Equatable {
     String? currentSubject,
     List<String>?subjectList,
     List<String>?whoThisCourseIsFor,
-    List<String>?whatWillYouAchieveAfterTheCourseStr
+    List<String>?whatWillYouAchieveAfterTheCourseStr,
+    TestInfo? testInfo
   })
   {
     return AddCourseState(
@@ -75,6 +79,7 @@ class AddCourseState extends Equatable {
       subjectList: subjectList??this.subjectList,
       whoThisCourseIsFor: whoThisCourseIsFor??this.whoThisCourseIsFor,
       whatWillYouAchieveAfterTheCourseStr: whatWillYouAchieveAfterTheCourseStr??this.whatWillYouAchieveAfterTheCourseStr,
+      testInfo: testInfo??this.testInfo,
 
     );
   }
@@ -86,7 +91,8 @@ class AddCourseState extends Equatable {
     controller, coursePageType, 
     currentSubject, subjectList, 
     whoThisCourseIsFor,
-    whatWillYouAchieveAfterTheCourseStr
+    whatWillYouAchieveAfterTheCourseStr,
+    testInfo
   ];
 
 }

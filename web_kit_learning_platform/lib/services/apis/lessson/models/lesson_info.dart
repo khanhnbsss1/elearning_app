@@ -84,7 +84,7 @@ class LessonInfo {
     link = json['lecture_link']??json['link'];
     docId = json['doc_id'];
     docName = json['doc_name'];
-    mode = json['mode'];
+    mode = json['mode']??json['lecture_mode'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     createdBy = json['created_by'];
@@ -126,6 +126,8 @@ class LessonInfo {
     }*/
     if(mode!=null) {
       data['mode'] = mode;
+      data['lecture_mode'] = mode;
+
     }
     
     if(testId!=null) {

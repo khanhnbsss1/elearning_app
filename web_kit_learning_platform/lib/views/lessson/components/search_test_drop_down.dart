@@ -50,6 +50,7 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
                       context: context, 
                       onSelectWord: (p0) {
                           setState(() {
+                            _wordDropdownSearchFieldController.text = p0.name??"";
                              widget.onSelectTest(p0);
                           });
                 },)),
@@ -74,13 +75,13 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
                           fontStyle: FontStyle.italic
                       ),
                       decoration: InputDecoration(
-                        labelText: L10nX.getStr.vocabulary_str,
+                        labelText: L10nX.getStr.test_name,
                         hintTextDirection: AppTheme.textDirection,
                         labelStyle: TextStyleConstant.textStyleBlack14w400,
                         hintStyle: TextStyleConstant.textStyleBlack14w400,
                         border: outlineInputBorder,
                         prefixIcon: Icon(
-                          Icons.edit_document,
+                          Icons.quiz,
                           size: 20,
                           color: ColorConst.colorIconRed,
                         ),
@@ -120,7 +121,7 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
                     onSuggestionSelected: (suggestion) {
                       if(onSelectWord!=null)
                       {
-                        //_wordDropdownSearchFieldController.text = suggestion.simplified??"";
+                        _wordDropdownSearchFieldController.text = suggestion.name??"";
                         onSelectWord(suggestion);
                       }
                       else

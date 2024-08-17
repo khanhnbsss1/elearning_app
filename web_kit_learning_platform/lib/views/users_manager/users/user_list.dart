@@ -75,7 +75,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                   return Layout(
                       isScroll: false,
                       title: Center(
-                        child: Text(L10nX.getStr.lesson_list,
+                        child: Text(state.userType == UserType.Teacher? L10nX.getStr.teacher_list:L10nX.getStr.student_list,
                           style: TextStyleConstant.textStyleBlack18w600,),),
                       padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
@@ -85,7 +85,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                   return Layout(
                       isScroll: false,
                       title: Center(child: Text(
-                        L10nX.getStr.lesson_list,
+                        state.userType ==UserType.Teacher? L10nX.getStr.teacher_list:L10nX.getStr.student_list,
                         style: TextStyleConstant.textStyleBlack18w600,
                       ),),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
@@ -306,7 +306,8 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
             columnWidthMode: ColumnWidthMode.fill,
             isScrollbarAlwaysShown: false,
             gridLinesVisibility: GridLinesVisibility.both,
-            rowHeight: Dimens.size80,
+            rowHeight: Dimens.size60,
+            headerRowHeight: Dimens.size60,
             //defaultColumnWidth: 200,
             showHorizontalScrollbar: true,
             columns: <GridColumn>[
@@ -404,7 +405,25 @@ class UserDataSource extends DataGridSource {
       return  DataGridRow(
           cells: [
             DataGridCell<Widget>(columnName: 'id', value: Text("$starIndex", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.username, value:Text(e.userName??"", style: TextStyleConstant.textStyleBlack14w400,) ),
+            DataGridCell<Widget>(columnName: L10nX.getStr.username, value:Row(
+              mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: Dimens.size40,
+                    height: Dimens.size40,
+                    decoration: BoxDecoration(
+                      color: ColorConst.whiteColor,
+                      borderRadius: BorderRadius.circular(20)
+                    ),
+                    clipBehavior: Clip.hardEdge,
+                    child: ImageManager().getImageByUrl(
+                        e.avatar??"", 
+                        errorBuilder: ImageManager().getPngImage(ImageManager.user_png, boxFit: BoxFit.contain)
+                    ),
+                  ),
+                  Gap(Dimens.size8),
+                  Expanded(child: Text(e.userName??"", style: TextStyleConstant.textStyleBlack14w400,))
+                ]) ),
             DataGridCell<Widget>(columnName: L10nX.getStr.full_name, value: Text(e.fullName??"", style: TextStyleConstant.textStyleBlack14w400,)),
 
             DataGridCell<Widget>(columnName: L10nX.getStr.email, value: Text(e.email??"", style: TextStyleConstant.textStyleBlack14w400,)),

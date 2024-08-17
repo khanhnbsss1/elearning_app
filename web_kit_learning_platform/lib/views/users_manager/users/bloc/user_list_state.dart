@@ -32,7 +32,8 @@ class UserListState extends Equatable {
     UserListResponseModel? userListResponseModel,
     UserListStatus? blocStatus,
     SearchCommonRequest? searchCommonRequest,
-    UserProfile? selectUserInfo
+    UserProfile? selectUserInfo,
+    UserType? userType
   })
   {
     return UserListState(
@@ -40,10 +41,11 @@ class UserListState extends Equatable {
       userListResponseModel: userListResponseModel??this.userListResponseModel,
       searchCommonRequest: searchCommonRequest??this.searchCommonRequest,
       selectUserInfo: selectUserInfo??this.selectUserInfo,
+      userType: userType??this.userType,
 
     );
   }
   @override
-  List<Object?> get props => [blocStatus, userListResponseModel, searchCommonRequest, selectUserInfo];
+  List<Object?> get props => [blocStatus, userListResponseModel, searchCommonRequest, selectUserInfo, userType];
 
 }

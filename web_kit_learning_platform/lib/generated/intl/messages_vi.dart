@@ -227,6 +227,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "english_text": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "enter_your_email":
             MessageLookupByLibrary.simpleMessage("Điền email của bạn"),
+        "entrance_test_str":
+            MessageLookupByLibrary.simpleMessage("Bài test đầu vào"),
         "example_form": MessageLookupByLibrary.simpleMessage("Mẫu ví dụ"),
         "examples_str": MessageLookupByLibrary.simpleMessage("Ví dụ"),
         "extra_pages": MessageLookupByLibrary.simpleMessage("Trang bổ sung"),
@@ -380,6 +382,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "outline_style":
             MessageLookupByLibrary.simpleMessage("Phong cách phác thảo"),
         "output": MessageLookupByLibrary.simpleMessage("Đầu ra"),
+        "output_test_str":
+            MessageLookupByLibrary.simpleMessage("Bài test đầu ra"),
         "overview": MessageLookupByLibrary.simpleMessage("Tổng quan"),
         "pages": MessageLookupByLibrary.simpleMessage("Trang"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),

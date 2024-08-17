@@ -1,10 +1,16 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:webkit/base/base.export.dart';
 
 class AudioSpeaker extends StatefulWidget {
   String url;
-  AudioSpeaker({required this.url});
+  bool? enableProccessBar;
+  AudioSpeaker({required this.url, this.enableProccessBar}){
+    enableProccessBar??=false;
+  }
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -14,6 +20,7 @@ class AudioSpeaker extends StatefulWidget {
 
 class AudioSpeakerState extends State<AudioSpeaker> {
   ProcessingState processingState = ProcessingState.completed;
+  Duration? length, event; 
   final player = AudioPlayer();
   @override
   Widget build(BuildContext context) {
@@ -26,9 +33,18 @@ class AudioSpeakerState extends State<AudioSpeaker> {
             processingState = p0;
           });
         },
+        onChangeDuration: (event) {
+          setState(() {
+            event = event;
+          });
+        },
+        onGetLength: (length) {
+          length = length;
+        },
       );
     }, child: LayoutBuilder(
       builder: (context, constraints) {
+        Widget icon = SizedBox();
         switch (processingState) {
           case ProcessingState.idle:
           // TODO: Handle this case.
@@ -42,17 +58,39 @@ class AudioSpeakerState extends State<AudioSpeaker> {
             );
           case ProcessingState.ready:
             // TODO: Handle this case.
-            return Icon(
+            icon=  Icon(
               Icons.volume_up,
               color: ColorConst.mainColor,
             );
           case ProcessingState.completed:
             // TODO: Handle this case.
-            return Icon(
+            icon=  Icon(
               Icons.volume_down,
               color: ColorConst.mainColor,
             );
         }
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Visibility(
+              visible: false,
+                child: SizedBox(
+                  width: Dimens.size200,
+                  child: SfSlider(
+                    min: Duration(seconds: 0).inSeconds,
+                    max: length??Duration(seconds: 1).inSeconds,
+                    stepDuration: SliderStepDuration(seconds: 1),
+                    dateFormat: DateFormat.ms(),
+                    dateIntervalType: DateIntervalType.seconds,
+                    showTicks: true,
+                    showLabels: true,
+                    value: (event??Duration(seconds: 0)).inSeconds, onChanged: (value) {  },
+                  ),
+                )),
+            Gap(Dimens.size8),
+            icon
+          ],
+        );
       },
     ));
   }
@@ -73,7 +111,13 @@ class AudioManager {
   }
   AudioManager._internal();
   AudioPlayer? player;
-  Future<void> playAudio({Function(ProcessingState)? onChangeProcessingState, required String url}) async {
+  Future<void> playAudio(
+      {
+        Function(ProcessingState)? onChangeProcessingState,
+        required String url,
+        Function(Duration event)? onChangeDuration,
+        Function(Duration? length)? onGetLength
+      }) async {
     if (player == null) {
       player = AudioPlayer();
     } else {
@@ -81,6 +125,11 @@ class AudioManager {
       await AudioPlayer.clearAssetCache();
       player = AudioPlayer();
     }
+    player?.positionStream.listen((event) {
+      if (onChangeDuration != null) {
+        onChangeDuration(event);
+      }
+    },);
     player?.playerStateStream.listen(
       (event) async {
         if (onChangeProcessingState != null) {
@@ -91,7 +140,11 @@ class AudioManager {
         }
       },
     );
-    await player?.setUrl(url.isNotEmpty ? url : 'https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav');
+   Duration? length =  await player?.setUrl(url.isNotEmpty ? url : 'https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav');
+   
+   if(onGetLength!=null) {
+     onGetLength(length);
+   }
     try {
       await player?.play();
     } catch (e) {

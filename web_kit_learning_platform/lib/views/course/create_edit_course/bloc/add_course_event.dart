@@ -89,3 +89,10 @@ class AddCourseUpdateCourseInfoEvent extends AddCourseEvent {
   @override
   List<Object?> get props => [courseInfo];
 }
+
+class AddCourseUpdateTestInfoEvent extends AddCourseEvent {
+  TestInfo testInfo;
+  AddCourseUpdateTestInfoEvent({required this.testInfo});
+  @override
+  List<Object?> get props => [testInfo];
+}

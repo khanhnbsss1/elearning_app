@@ -587,5 +587,7 @@
   "question_create": "Create question",
   "question_edit": "Edit question",
   "attack_file": "Attachment",
-  "user_str": "User"
+  "user_str": "User",
+  "entrance_test_str": "Input test",
+  "output_test_str": "Output test"
 }

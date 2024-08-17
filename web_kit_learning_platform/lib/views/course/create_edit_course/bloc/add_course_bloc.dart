@@ -15,6 +15,10 @@ import 'package:webkit/services/apis/course/get_course_dictionary/get_course_dir
 import 'package:webkit/services/apis/course/update_course/update_course_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
+import 'package:webkit/services/apis/test/link_test_to_course_api.dart';
+import 'package:webkit/services/apis/test/models/test_info.dart';
+import 'package:webkit/services/apis/test/unklink_test_from_course_api.dart';
+import 'package:webkit/services/apis/test/unklink_test_from_lesson_api.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/services/apis/upload_file/upload_file_api.dart';
 import 'package:webkit/views/course/create_edit_course/create_edit_course.dart';
@@ -39,6 +43,14 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
         blocStatus: AddCourseStatus.onUpdateController,
         controller: event.addCourseController,
         courseInfo: event.courseInfo
+      ));
+    });
+    on<AddCourseUpdateTestInfoEvent>((event, emit) {
+      // TODO: implement event handler
+      emit(state.copyWith(
+          blocStatus: AddCourseStatus.onUpdateTestInfo,
+          
+          testInfo: event.testInfo
       ));
     });
     on<AddCourseUpdateSubjectListEvent>((event, emit) {
@@ -193,6 +205,7 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     );
     UpdateCourseApi updateCourseApi = UpdateCourseApi(addCourseRequest: courseInfo!);
     dynamic data = await updateCourseApi.call();
+    await _onLinkTestToCourse();
     MonitorLoading().dismiss();
     if(data.runtimeType==String && (data as String).isEmpty)
     {
@@ -224,6 +237,7 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     );
     AddCourseApi addCourseApi = AddCourseApi(addCourseRequest: courseInfo!);
     dynamic data = await addCourseApi.call();
+    await _onLinkTestToCourse();
     MonitorLoading().dismiss();
     if(data.runtimeType==int)
     {
@@ -345,6 +359,17 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
       blocStatus: AddCourseStatus.onUpdateCourseFromApi,
       courseInfo: state.courseInfo
     ));
+  }
+  Future<void> _onLinkTestToCourse()async {
+    if(state.testInfo!=null)
+    {
+      /// Cần phải unlink trước khi link tới 1 test khác
+      UnLinkTestToCourseApi unlinkWordApi = UnLinkTestToCourseApi(courseId: state.courseInfo?.id??0, testId: state.testInfo?.id??0);
+      dynamic unlinkData = await unlinkWordApi.call();
+
+      LinkTestToCourseApi linkWordApi = LinkTestToCourseApi(courseId: state.courseInfo?.id??0, testId: state.testInfo?.id??0);
+      dynamic linkData = await linkWordApi.call();
+    }
   }
 }
 

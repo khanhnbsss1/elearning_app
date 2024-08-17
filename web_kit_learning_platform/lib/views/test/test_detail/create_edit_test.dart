@@ -53,7 +53,7 @@ class _CreateEditLesson extends State<CreateEditTest>
     initialPage: 0,
   );
   late TabController _tabController ;
-  final valueListenable = ValueNotifier<TestLevel?>(null);
+  final valueListenable = ValueNotifier<TestType?>(null);
 
   String mode = 'FREE';
   int price = 0;
@@ -177,8 +177,8 @@ class _CreateEditLesson extends State<CreateEditTest>
                             onTap: () {
                               state.testInfo??= TestInfo();
                               state.testInfo?.name = state.editingControllerTestName?.text;
-                              state.testInfo?.typeTest = L10nX().getStringByKey("${mapTestLevelToStrKey[valueListenable.value]??""}_str");
-                              state.testInfo?.name = state.editingControllerTestTime?.text;
+                              state.testInfo?.durian = int.tryParse(state.editingControllerTestTime?.text??'0');
+                              state.testInfo?.testType = valueListenable.value;
                               switch(widget.testActionType){
                           
                                 case ActionType.view:
@@ -272,7 +272,7 @@ class _CreateEditLesson extends State<CreateEditTest>
           children: [
             Expanded(child: buildTestTime(context: context)),
             Gap(Dimens.size20),
-            Expanded(child: buildTestLevel(context: context))
+            Expanded(child: buildTestType(context: context))
         ],)
       ],
     );
@@ -333,37 +333,37 @@ class _CreateEditLesson extends State<CreateEditTest>
       ),
     );
   }
-  Widget buildTestLevel({required BuildContext context}) {
-    List<TestLevel> items = enableEdit?TestLevel.values:[];
+  Widget buildTestType({required BuildContext context}) {
+    List<TestType> items = enableEdit?TestType.values:[];
     return WidgetWithColumnTitleCommon(
-      title: L10nX.getStr.level_str,
+      title: L10nX.getStr.type,
       isRequirement: true,
       child: Container(
         decoration: BoxDecoration(
           color: ColorConst.whiteColor
         ),
         child: DropdownButtonHideUnderline(
-          child: DropdownButton2<TestLevel>(
+          child: DropdownButton2<TestType>(
             isExpanded: true,
             hint: Text(
-              L10nX.getStr.level_str,
+              L10nX.getStr.type,
               style: TextStyle(
                 fontSize: 14,
                 color: Theme.of(context).hintColor,
               ),
             ),
-            items: items.map((TestLevel item) => DropdownItem<TestLevel>(
+            items: items.map((TestType item) => DropdownItem<TestType>(
               value: item,
              // height: 40,
               child: Text(
-              L10nX().getStringByKey("${mapTestLevelToStrKey[item]??""}_str"),
+              L10nX().getStringByKey("${mapTestLevelToStrKey[item]??""}_test_str".toLowerCase()),
                 style: const TextStyle(
                   fontSize: 14,
                 ),
               ),
             )).toList(),
             valueListenable: valueListenable,
-            onChanged: (TestLevel? value) {
+            onChanged: (TestType? value) {
               valueListenable.value = value;
             },
             buttonStyleData:  ButtonStyleData(

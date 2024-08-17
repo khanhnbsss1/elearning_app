@@ -328,7 +328,8 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
             columnWidthMode: ColumnWidthMode.fill,
             isScrollbarAlwaysShown: false,
             gridLinesVisibility: GridLinesVisibility.both,
-            rowHeight: Dimens.size80,
+            rowHeight: Dimens.size60,
+            headerRowHeight: Dimens.size60,
             //defaultColumnWidth: 200,
             showHorizontalScrollbar: true,
             columns: <GridColumn>[

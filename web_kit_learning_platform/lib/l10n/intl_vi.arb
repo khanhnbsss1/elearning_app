@@ -587,6 +587,7 @@
   "question_create": "Tạo câu hỏi",
   "question_edit": "Chỉnh sửa câu hỏi",
   "attack_file": "Tài liệu đính kèm",
-  "user_str": "Người dùng"
-
+  "user_str": "Người dùng",
+  "entrance_test_str": "Bài test đầu vào",
+  "output_test_str": "Bài test đầu ra"
 }
