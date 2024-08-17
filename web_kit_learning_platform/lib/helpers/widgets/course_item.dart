@@ -47,7 +47,7 @@ class CourseItem extends StatelessWidget {
                             : notifier.whitecolor,
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  width: 300,
+                  width: Dimens.size300,
                   clipBehavior: Clip.hardEdge,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -67,7 +67,7 @@ class CourseItem extends StatelessWidget {
                           Column(
                             children: [
                               SizedBox(
-                                height: 120,
+                                height: Dimens.size120,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(16),
                                   child: Row(

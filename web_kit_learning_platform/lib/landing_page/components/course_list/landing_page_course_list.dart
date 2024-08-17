@@ -68,7 +68,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
   Widget buildCourseList(
       {required BoxConstraints constraints, required LandingPageCourseListState state}) {
     int lengthOfView = (state.isExpand ?? false)
-        ? constraints.maxWidth < 1300 ? 6
+        ? constraints.maxWidth < FetchPixels.getPixelHeight(1300) ? 6
             : 8 : (state.courseListLandingPageResponseModel?.data ?? []).length;
     if (lengthOfView >
         (state.courseListLandingPageResponseModel?.data ?? []).length) {
@@ -78,7 +78,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
     return Column(
       children: [
         Container(
-          width: constraints.maxWidth < 1300 ? constraints.maxWidth / 0.5 : constraints.maxWidth / 1.1,
+          width: constraints.maxWidth < FetchPixels.getPixelHeight(1300) ? constraints.maxWidth / 0.5 : constraints.maxWidth / 1.1,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               // color: notifier.isDark
@@ -89,7 +89,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                       ? notifier.sugestionbutton
                       : Colors.transparent)),
           padding: EdgeInsets.all(
-            constraints.maxWidth < 900 ? 20 : 40,
+            constraints.maxWidth < FetchPixels.getPixelHeight(900) ? 20 : 40,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -100,7 +100,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                         .titleTextColorOnBackgroundColorStyle14w400
                             .copyWith(
                             fontWeight: FontWeight.bold,
-                            fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                            fontSize: constraints.maxWidth < FetchPixels.getPixelHeight(550) ? 28 : 45,
                             color: notifier.blackcolor))),
               Center(
                 child: Text(L10nX.getStr.register_to_enjoy_the_best_deals_for_you,
@@ -110,13 +110,13 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                         color: Colors.black45)),
               ),
               SizedBox(
-                height: constraints.maxWidth < 550 ? 10 : 20,
+                height: constraints.maxWidth < FetchPixels.getPixelHeight(550) ? 10 : 20,
               ),
               SizedBox(
                 // height: constraints.maxWidth < 900 ? constraints.maxWidth / 0.152 : constraints.maxWidth < 1100 ? constraints.maxWidth / 0.66 : constraints.maxWidth < 1300 ? constraints.maxWidth / 1.35 : constraints.maxWidth / 1.8,
-                width: constraints.maxWidth < 900
+                width: constraints.maxWidth < FetchPixels.getPixelHeight(900)
                     ? constraints.maxWidth / 0.2
-                    : constraints.maxWidth < 1300
+                    : constraints.maxWidth < FetchPixels.getPixelHeight(1300)
                         ? constraints.maxWidth / 0.5
                         : constraints.maxWidth / 1.2,
                 child: LayoutBuilder(
@@ -127,7 +127,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                       listOfCourse.add(CourseItem(constraints: constraints, courseInfo: courseLandingPageInfo));
                     }
                     return SizedBox(
-                      height: 520,
+                      height: Dimens.size520,
                       child: Center(
                         child: ListView(
                           shrinkWrap: true,
@@ -138,7 +138,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                     );
                 },
               )),
-              (constraints.maxWidth < 550) ? const SizedBox(height: 4) :const SizedBox(height: 16),
+              (constraints.maxWidth < Dimens.size520) ? const SizedBox(height: 4) :const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
