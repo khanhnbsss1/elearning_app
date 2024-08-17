@@ -614,17 +614,12 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
             ]),
           )
               : Container(
-            height: width < 1100
-                ? height / 4
-                : width < 1600
-                ? height / 5
-                : height / 6,
             width: width < 1100
                 ? width / 4.5
                 : width < 1600
                 ? width / 3.5
                 : width / 3.75,
-            constraints: BoxConstraints(minWidth: 300),
+            constraints: BoxConstraints(minWidth: 300, minHeight: 150),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
