@@ -6,6 +6,7 @@ import 'package:get/instance_manager.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/page_common/permission_page.dart';
 import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/base/widgets/pages_common/list_body_page_common.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
@@ -50,48 +51,52 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
   final int pageItemCount = 16;
   late int pageCount;
   bool isOnVolume=  false;
-
+  List<String>permission =[
+    "vocabulary.get.getlist",
+  ];
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        return VocabularyListBloc(VocabularyListState(vocabularyType: widget.courseType))..add(VocabularyListInitEvent());
-      },
-      child: BlocConsumer<VocabularyListBloc, VocabularyListState>(
-        listener: (context, state) {
-          switch (state.blocStatus) {
-            case VocabularyStatus.initial:
-              break;
-              // TODO: Handle this case.
-            case VocabularyStatus.onSelectWord:
-              {
-                if(ResponsiveInfo.isPhone())
-                {
-                  showGeneralDialog(
-                    context: context, 
-                    pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
-                      return Material(
-                          child: Dialog(
-                            insetPadding: EdgeInsets.zero,
-                            child: SizedBox(
-                                height: MediaQuery.of(context).size.height/2,
-                                width: MediaQuery.of(context).size.width*0.95,
-                                child: buildVocabularyDetail(state: state)),
-                          ));
-                    },
-                  );
-                }
-              }
-              break;
-            default:
-              break;
-              // TODO: Handle this case.
-          }
+    return PermissionPage(
+      permissionList: permission,
+      child: BlocProvider(
+        create: (context) {
+          return VocabularyListBloc(VocabularyListState(vocabularyType: widget.courseType))..add(VocabularyListInitEvent());
         },
-        builder: (BuildContext context, state) {
-          return MyResponsive(
-            builder: (context , boxConstraints , myScreenMediaType ) {
-              if(!myScreenMediaType.isMobile)
+        child: BlocConsumer<VocabularyListBloc, VocabularyListState>(
+          listener: (context, state) {
+            switch (state.blocStatus) {
+              case VocabularyStatus.initial:
+                break;
+            // TODO: Handle this case.
+              case VocabularyStatus.onSelectWord:
+                {
+                  if(ResponsiveInfo.isPhone())
+                  {
+                    showGeneralDialog(
+                      context: context,
+                      pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+                        return Material(
+                            child: Dialog(
+                              insetPadding: EdgeInsets.zero,
+                              child: SizedBox(
+                                  height: MediaQuery.of(context).size.height/2,
+                                  width: MediaQuery.of(context).size.width*0.95,
+                                  child: buildVocabularyDetail(state: state)),
+                            ));
+                      },
+                    );
+                  }
+                }
+                break;
+              default:
+                break;
+            // TODO: Handle this case.
+            }
+          },
+          builder: (BuildContext context, state) {
+            return MyResponsive(
+              builder: (context , boxConstraints , myScreenMediaType ) {
+                if(!myScreenMediaType.isMobile)
                 {
                   return Layout(
                       isScroll: false,
@@ -107,24 +112,25 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                         enableDragIcon: false,
                         list: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType),
                         body: Container(
-                          decoration: BoxDecoration(
-                            border: Border(left: BorderSide(color: ColorConst.mainColor, width: 0.1))
-                          ),
+                            decoration: BoxDecoration(
+                                border: Border(left: BorderSide(color: ColorConst.mainColor, width: 0.1))
+                            ),
                             child: buildVocabularyDetail(state: state)),
                       ));
                 }
-              else
+                else
                 {
                   return Layout(
-                    isScroll: false,
-                    child: buildLeftPage(
-                          state: state, 
-                          boxConstraints: boxConstraints, 
+                      isScroll: false,
+                      child: buildLeftPage(
+                          state: state,
+                          boxConstraints: boxConstraints,
                           context: context, myScreenMediaType: myScreenMediaType));
                 }
-            },);
-          
-        },
+              },);
+
+          },
+        ),
       ),
     );
   }
@@ -248,7 +254,9 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
               },
               child: Icon(Icons.search_rounded, color: ColorConst.mainColor,size: Dimens.size40,)),
           Visibility(
-            visible:  state.vocabularyType== VocabularyType.vocabularyNonImage,
+            visible:  UserManager().userContainPermission(permissionList: [
+              "vocabulary.post.create_vocabulary",
+            ]),
             child: Row(
               children: [
                 Gap(Dimens.size10),

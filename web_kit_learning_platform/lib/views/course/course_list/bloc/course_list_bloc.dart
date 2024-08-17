@@ -22,7 +22,7 @@ class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
 
   Future<void> _onInit(CourseListInitEvent event,
       Emitter<CourseListState> emit,) async {
-    UserProfile? userProfile = await UserManager().getUserProfile();
+    UserProfile? userProfile = UserManager().getUserProfile();
 
     emit(state.copyWith(
         blocStatus: CourseStatus.onLoading,

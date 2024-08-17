@@ -349,8 +349,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "normal_sale_str":
             MessageLookupByLibrary.simpleMessage("Bán bình thường"),
         "normal_str": MessageLookupByLibrary.simpleMessage("Bình thường"),
-        "not_access_permission":
-            MessageLookupByLibrary.simpleMessage("Không có quyền truy cập !"),
+        "not_access_permission": MessageLookupByLibrary.simpleMessage(
+            "Bạn không có quyền truy cập nội dung này"),
         "not_connect_to_server": MessageLookupByLibrary.simpleMessage(
             "Không thể kết nối đến máy chủ"),
         "notifications": MessageLookupByLibrary.simpleMessage("Thông báo"),
@@ -701,6 +701,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "user_detail":
             MessageLookupByLibrary.simpleMessage("Thông tin người dùng"),
         "user_name": MessageLookupByLibrary.simpleMessage("Tên đăng nhập"),
+        "user_str": MessageLookupByLibrary.simpleMessage("Người dùng"),
         "utilities": MessageLookupByLibrary.simpleMessage("Tiện ích"),
         "validation": MessageLookupByLibrary.simpleMessage("Xác thực"),
         "validation_forms":

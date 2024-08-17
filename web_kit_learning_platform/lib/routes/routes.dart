@@ -59,6 +59,8 @@ import 'package:webkit/views/ui/drag_drop.dart';
 import 'package:webkit/views/ui/notifications.dart';
 import 'package:webkit/views/ui/reviews_page.dart';
 import 'package:webkit/views/ui/tabs_page.dart';
+import 'package:webkit/views/users_manager/student/student_list.dart';
+import 'package:webkit/views/users_manager/teacher/teacher_list.dart';
 import 'package:webkit/views/video_player/model/video_model.dart';
 import 'package:webkit/views/video_player/video_player.dart';
 import 'package:webkit/views/vocabulary/vocabulary_list/bloc/vocabulary_list_bloc.dart';
@@ -140,6 +142,17 @@ getPageRoute() {
         name: Routes.quizList,
         page: () =>  QuestionListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
+
+    ///---------------User-------------///
+    GetPage(
+        name: Routes.studentList,
+        page: () =>  StudentList(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: Routes.teacherList,
+        page: () =>  TeacherList(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]),
+    
     GetPage(
         name: Routes.videoPlayer,
         page: () {

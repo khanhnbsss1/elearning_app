@@ -19,23 +19,22 @@ import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart'
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../layouts/layout.dart';
-import 'bloc/lesson_list_bloc.dart';
+import 'bloc/user_list_bloc.dart';
 
-class LessonListPage extends StatefulWidget {
-  LessonListPage({super.key});
+class UserListPage extends StatefulWidget {
+  UserType? userType;
+  UserListPage({super.key, this.userType});
   @override
-  State<LessonListPage> createState() => _LessonListPageState();
+  State<UserListPage> createState() => _UserListPageState();
 }
 
-class _LessonListPageState extends State<LessonListPage> with SingleTickerProviderStateMixin, UIMixin {
-  late MemberListController controller;
+class _UserListPageState extends State<UserListPage> with SingleTickerProviderStateMixin, UIMixin {
  TextEditingController textEditingController = TextEditingController();
   GlobalKey<FormState>? formKey = GlobalKey();
   ScrollController scrollController=ScrollController();
   @override
   void initState() {
     super.initState();
-    controller = Get.put(MemberListController());
   }
 
   int? page = 1;
@@ -43,7 +42,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
   late int pageCount;
   bool isOnVolume=  false;
   List<String>permission =[
-    "lectures.post.get_list",
+    "users.get.get_user_list"
   ];
   @override
   Widget build(BuildContext context) {
@@ -51,15 +50,15 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
       permissionList: permission,
       child: BlocProvider(
         create: (context) {
-          return LessonListBloc(LessonListState())..add(LessonListInitEvent());
+          return UserListBloc(UserListState(userType: widget.userType))..add(UserListInitEvent());
         },
-        child: BlocConsumer<LessonListBloc, LessonListState>(
+        child: BlocConsumer<UserListBloc, UserListState>(
           listener: (context, state) {
             switch (state.blocStatus) {
-              case LessonListStatus.initial:
+              case UserListStatus.initial:
                 break;
             // TODO: Handle this case.
-              case LessonListStatus.onSelectLesson:
+              case UserListStatus.onSelectLesson:
                 {
                 }
                 break;
@@ -104,7 +103,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
     required MyScreenMediaType myScreenMediaType,
     required BoxConstraints boxConstraints,
     required BuildContext context,
-    required LessonListState state
+    required UserListState state
   }
       ){
     return Container(
@@ -125,21 +124,21 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FlutterCustomPagination(
-                  key: GlobalKey(debugLabel: (state.lessonListResponseModel?.total??0).toString()),
-                  currentPage: state.lessonListResponseModel!.getCurrentPage(),
-                  limitPerPage: state.lessonListResponseModel!.pageSize??10,
-                  totalDataCount: state.lessonListResponseModel!.getTotalElement(),
+                  key: GlobalKey(debugLabel: (state.userListResponseModel?.total??0).toString()),
+                  currentPage: state.userListResponseModel!.getCurrentPage(),
+                  limitPerPage: state.userListResponseModel!.pageSize??10,
+                  totalDataCount: state.userListResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onBackToFirstPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onNextPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onGoToLastPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   backgroundColor: ColorConst.whiteColor,
                   textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
@@ -159,7 +158,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
     required MyScreenMediaType myScreenMediaType,
     required BoxConstraints boxConstraints,
     required BuildContext context,
-    required LessonListState state
+    required UserListState state
   }){
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
@@ -193,7 +192,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
 
                             },
                             onFieldSubmitted: (value) {
-                              BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                              BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
                             },
                             onTapOutside: (event) {
                             },
@@ -233,7 +232,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                     text: L10nX.getStr.search,
                     radius: 16,
                     onTap: () {
-                      BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                      BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                     },
                   ),
                 ),
@@ -241,7 +240,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                   visible: constraints.maxWidth< 800,
                   child: InkWell(
                       onTap: () {
-                        BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                        BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                       },
                       child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                 ),
@@ -249,7 +248,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
             ),
             Visibility(
               visible: UserManager().userContainPermission(permissionList: [
-                "lectures.post.create_lecture",
+                "users.post.create_user"
               ]),
               child: Row(
                 children: [
@@ -282,18 +281,18 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
       );
     },);
   }
-  Widget buildLessonList({required LessonListState state, required BuildContext context}){
-    LessonDataSource employeeDataSource = LessonDataSource(
-      lessonData: state.lessonListResponseModel?.content??[],
+  Widget buildLessonList({required UserListState state, required BuildContext context}){
+    UserDataSource employeeDataSource = UserDataSource(
+      lessonData: state.userListResponseModel?.content??[],
       starIndex: (state.searchCommonRequest?.pageNumber??0)* (state.searchCommonRequest?.pageSize??0),
       onDelete: (p0) {
 
       },
       onEdit: (p0) {
-        CreateEditLesson(lessonActionType: LessonActionType.edit,lessonInfo: p0,).show(context);
+        //CreateEditLesson(lessonActionType: LessonActionType.edit,lessonInfo: p0,).show(context);
       },
       onViewDetail: (p0) {
-        CreateEditLesson(lessonActionType: LessonActionType.view, lessonInfo: p0,).show(context);
+       // CreateEditLesson(lessonActionType: LessonActionType.view, lessonInfo: p0,).show(context);
       },
     );
     return LayoutBuilder(
@@ -321,43 +320,57 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                         'ID',
                       ))),
               GridColumn(
-                  columnName: L10nX.getStr.lecture_name_str,
+                  columnName: L10nX.getStr.username,
                   minimumWidth: Dimens.size200,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
                       child: Text(
-                        L10nX.getStr.lecture_name_str,
+                        L10nX.getStr.username,
                         overflow: TextOverflow.ellipsis,
                       ))),
               GridColumn(
-                  columnName: L10nX.getStr.subject_name_str,
+                  columnName: L10nX.getStr.full_name,
                   minimumWidth: Dimens.size200,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: Text(L10nX.getStr.subject_name_str))),
+                      child: Text(L10nX.getStr.full_name))),
               GridColumn(
-                  columnName: L10nX.getStr.document_str,
+                  columnName: L10nX.getStr.email,
                   minimumWidth: Dimens.size120,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: Text(L10nX.getStr.document_str))),
+                      child: Text(L10nX.getStr.email))),
               GridColumn(
-                  columnName: L10nX.getStr.test_name,
+                  columnName: L10nX.getStr.phone_number,
                   minimumWidth: Dimens.size120,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: Text(L10nX.getStr.test_name))),
+                      child: Text(L10nX.getStr.phone_number))),
               GridColumn(
-                  columnName: L10nX.getStr.vocabulary_str,
+                  columnName: L10nX.getStr.gender,
                   minimumWidth: Dimens.size120,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: Text(L10nX.getStr.word_str))),
+                      child: Text(L10nX.getStr.gender))),
+              GridColumn(
+                  columnName: L10nX.getStr.positions,
+                  minimumWidth: Dimens.size180,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(L10nX.getStr.positions))),
+              GridColumn(
+                  columnName: L10nX.getStr.type,
+                  minimumWidth: Dimens.size180,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(L10nX.getStr.type))),
               GridColumn(
                   columnName: L10nX.getStr.action_str,
                   minimumWidth: Dimens.size180,
@@ -375,46 +388,30 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
   
 }
 
-class LessonDataSource extends DataGridSource {
+class UserDataSource extends DataGridSource {
   /// Creates the employee data source class with required details.
-  Function(LessonInfo) onViewDetail, onEdit, onDelete;
+  Function(UserProfile) onViewDetail, onEdit, onDelete;
   int? starIndex;
-  LessonDataSource({
-    required List<LessonInfo> lessonData,
+  UserDataSource({
+    required List<UserProfile> lessonData,
     this.starIndex,
     required this.onDelete,
     required this.onEdit,
     required this.onViewDetail}) {
-
     _lessonData = lessonData.map<DataGridRow>((e) {
       starIndex = (starIndex ??0)+1;
       List<Widget> listWord = [];
-      for(VocabularyInfo vocabularyInfo in e.vocabularies??[])
-        {
-          listWord.add(Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimens.size16),
-              border: Border.all(color: ColorConst.blackColor, width: 0.2),
-              color: ColorConst.whiteColor
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Text(vocabularyInfo.simplified??"", style: TextStyleConstant.textStyleBlack13w400,),
-          ),
-            
-          );
-        }
       return  DataGridRow(
           cells: [
             DataGridCell<Widget>(columnName: 'id', value: Text("$starIndex", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.lecture_name_str, value:Text(e.lectureName??"", style: TextStyleConstant.textStyleBlack14w400,) ),
-            DataGridCell<Widget>(columnName: L10nX.getStr.subject_name_str, value: Text(e.subName??"", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.document_str, value: Text(e.docName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.username, value:Text(e.userName??"", style: TextStyleConstant.textStyleBlack14w400,) ),
+            DataGridCell<Widget>(columnName: L10nX.getStr.full_name, value: Text(e.fullName??"", style: TextStyleConstant.textStyleBlack14w400,)),
 
-            DataGridCell<Widget>(columnName: L10nX.getStr.test_name, value: Text(e.testName??"", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.vocabulary_str, value: SingleChildScrollView(
-              child: Row(children: listWord,),
-            )),
-            //DataGridCell<Widget>(columnName: L10nX.getStr.doing_time_str, value: Text("${(e.}", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.email, value: Text(e.email??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.phone_number, value: Text(e.phoneNumber??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.gender, value: Text(e.gender??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.positions, value: Text(e.position??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.type, value: Text(e.typeName??"", style: TextStyleConstant.textStyleBlack14w400,)),
 
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str,
                 value: Column(
@@ -422,9 +419,9 @@ class LessonDataSource extends DataGridSource {
                   children: [
                     ItemViewEditDelete(
                       itemInfo: e,
-                      enableEditDelete: UserManager().userContainPermission(permissionList: ["lectures.delete.delete_lecture"]),
-                      enableEdit: UserManager().userContainPermission(permissionList: ["lectures.put.edit_lecture"]),
-                      enableView: UserManager().userContainPermission(permissionList: ["lectures.delete.delete_lecture"]),
+                      enableEditDelete: UserManager().userContainPermission(permissionList: ["users.put.edit_user"]),
+                      enableEdit: UserManager().userContainPermission(permissionList: ["users.put.edit_user"]),
+                      enableView: UserManager().userContainPermission(permissionList: ["users.get.get_user"]),
                       onViewDetail: (p0) {
                         onViewDetail(p0);
                       },

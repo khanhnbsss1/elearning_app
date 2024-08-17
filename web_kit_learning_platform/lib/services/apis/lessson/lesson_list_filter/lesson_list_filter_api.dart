@@ -16,7 +16,7 @@ class GetLessonListFilterApi extends BaseApiRequest {
 
     if(result.runtimeType == ResponseCommon)
     {
-      return LessonListResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
+      return LessonListResponseModel(content: [], total: 0, pageSize: 10, pageNumber: 0);
     }
     else
     {

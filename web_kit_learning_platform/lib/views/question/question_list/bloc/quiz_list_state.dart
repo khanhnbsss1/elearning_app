@@ -20,8 +20,8 @@ class QuizListState extends Equatable {
     this.searchCommonRequest,
     this.selectInfo
   }){
-    listResponseModel??= QuestionListResponseModel(content: []);
-    searchCommonRequest??= SearchCommonRequest(pageNumber: 0, pageSize: 10, keyword: "B");
+    listResponseModel??= QuestionListResponseModel(content: [],);
+    searchCommonRequest??= SearchCommonRequest(pageNumber: 0, pageSize: 10, keyword: "");
   }
 
 

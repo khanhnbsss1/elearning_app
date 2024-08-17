@@ -6,6 +6,7 @@ import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/page_common/permission_page.dart';
 import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
@@ -30,6 +31,9 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
  TextEditingController textEditingController = TextEditingController();
   GlobalKey<FormState>? formKey = GlobalKey();
   ScrollController scrollController=ScrollController();
+  List<String>permission =[
+    "tags.get.get_tags"
+  ];
   @override
   void initState() {
     super.initState();
@@ -43,51 +47,54 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        return TagListBloc(TagListState())..add(TagListInitEvent());
-      },
-      child: BlocConsumer<TagListBloc, TagListState>(
-        listener: (context, state) {
-          switch (state.blocStatus) {
-            case TagListStatus.initial:
-              break;
-              // TODO: Handle this case.
-            case TagListStatus.onSelectTag:
-              {
-              }
-              break;
-            default:
-              break;
-              // TODO: Handle this case.
-          }
+    return PermissionPage(
+      permissionList: permission,
+      child: BlocProvider(
+        create: (context) {
+          return TagListBloc(TagListState())..add(TagListInitEvent());
         },
-        builder: (BuildContext context, state) {
-          return MyResponsive(
-            builder: (context , boxConstraints , myScreenMediaType ) {
-              if(!myScreenMediaType.isMobile)
+        child: BlocConsumer<TagListBloc, TagListState>(
+          listener: (context, state) {
+            switch (state.blocStatus) {
+              case TagListStatus.initial:
+                break;
+                // TODO: Handle this case.
+              case TagListStatus.onSelectTag:
                 {
-                  return Layout(
+                }
+                break;
+              default:
+                break;
+                // TODO: Handle this case.
+            }
+          },
+          builder: (BuildContext context, state) {
+            return MyResponsive(
+              builder: (context , boxConstraints , myScreenMediaType ) {
+                if(!myScreenMediaType.isMobile)
+                  {
+                    return Layout(
+                        isScroll: false,
+                        title: Center(
+                          child: Text(L10nX.getStr.tags_list,
+                            style: TextStyleConstant.textStyleBlack18w600,),),
+                        padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
+                        child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
+                  }
+                else
+                  {
+                    return Layout(
                       isScroll: false,
-                      title: Center(
-                        child: Text(L10nX.getStr.tags_list,
-                          style: TextStyleConstant.textStyleBlack18w600,),),
-                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
-                      child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
-                }
-              else
-                {
-                  return Layout(
-                    isScroll: false,
-                      title: Center(
-                        child: Text(L10nX.getStr.tags_list,
-                          style: TextStyleConstant.textStyleBlack18w600,),),
-                      child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
-                  );
-                }
-            },);
-          
-        },
+                        title: Center(
+                          child: Text(L10nX.getStr.tags_list,
+                            style: TextStyleConstant.textStyleBlack18w600,),),
+                        child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
+                    );
+                  }
+              },);
+            
+          },
+        ),
       ),
     );
   }
@@ -239,32 +246,35 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                 ),
               ],
             ),
-            Row(
-              children: [
-                Gap(Dimens.size10),
-                Visibility(
-                  visible: constraints.maxWidth< 800,
-                  child: InkWell(
+            Visibility(
+              visible: UserManager().userContainPermission(permissionList: ["tags.post.create_tag"]),
+              child: Row(
+                children: [
+                  Gap(Dimens.size10),
+                  Visibility(
+                    visible: constraints.maxWidth< 800,
+                    child: InkWell(
+                        onTap: () {
+                          AddTagPage(tagPageAction: TagPageAction.create,).show(context, callBack: (p0) {
+                            BlocProvider.of<TagListBloc>(context).add(TagListInitEvent());
+                          },);
+                        },
+                        child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
+                  ),
+                  Visibility(
+                    visible: constraints.maxWidth >800,
+                    child: ActionButton1(
+                      preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
+                      text: L10nX.getStr.add_new_str,
                       onTap: () {
                         AddTagPage(tagPageAction: TagPageAction.create,).show(context, callBack: (p0) {
                           BlocProvider.of<TagListBloc>(context).add(TagListInitEvent());
                         },);
                       },
-                      child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
-                ),
-                Visibility(
-                  visible: constraints.maxWidth >800,
-                  child: ActionButton1(
-                    preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
-                    text: L10nX.getStr.add_new_str,
-                    onTap: () {
-                      AddTagPage(tagPageAction: TagPageAction.create,).show(context, callBack: (p0) {
-                        BlocProvider.of<TagListBloc>(context).add(TagListInitEvent());
-                      },);
-                    },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
@@ -283,6 +293,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
           },
           child: TagItemView(
             tagInfo: lessonInfo,
+            
             onViewDetail: (p0) {
               AddTagPage(tagPageAction: TagPageAction.view,).show(context);
             },

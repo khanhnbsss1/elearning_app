@@ -42,24 +42,24 @@ class CourseLandingPageInfo extends CourseInfo{
         super.totalLectures,
         super.totalSubjects,
         super.language,
-        super.payment,
+        super.price,
         super.createdAt,
         super.updatedAt,
         super.introduction,
-        super.ratePoint,});
+        super.rating,});
 
   CourseLandingPageInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     image = json['image']??"";
     producerName = json['producer_name'];
-    totalLectures = json['total_lectures'];
-    totalSubjects = json['total_subjects'];
+    totalLectures = json['total_lecture'];
+    totalSubjects = json['total_subject'];
     language = json['language'];
-    payment = json['payment'];
+    price = json['price'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    ratePoint = json['rate_point'];
+    rating = json["rating"];
     introduction = json['introduction'];
   }
 
@@ -73,10 +73,10 @@ class CourseLandingPageInfo extends CourseInfo{
     data['total_lectures'] = totalLectures;
     data['total_subjects'] = totalSubjects;
     data['language'] = language;
-    data['payment'] = payment;
+    data['payment'] = price;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
-    data['rate_point'] = ratePoint;
+    data['rate_point'] = rating;
     data['introduction'] = introduction;
 
     return data;

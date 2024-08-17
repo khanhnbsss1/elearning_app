@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/page_common/permission_page.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
@@ -45,6 +46,11 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
   );
   var position = 0;
 
+
+  List<String>permission =[
+    "courses.post.create_course",
+    "courses.put.update_course",
+  ];
   @override
   void initState() {
     super.initState();
@@ -61,27 +67,30 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
   
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        return AddCourseBloc(AddCourseState(courseInfo: widget.courseInfo,))..add(AddCourseInitEvent());
-      },
-      child: BlocConsumer<AddCourseBloc, AddCourseState>(
-        listener: (context, state) {
-          switch (state.blocStatus) {
-            case AddCourseStatus.initial:
-              break;
-            default:
-              break;
-          }
-        }, builder: (BuildContext context, state) {
-          return Material(
-            child: LayoutBuilder(
+    return PermissionPage(
+      permissionList: permission,
+      child: BlocProvider(
+          create: (context) {
+            return AddCourseBloc(AddCourseState(courseInfo: widget.courseInfo,))..add(AddCourseInitEvent());
+          },
+          child: BlocConsumer<AddCourseBloc, AddCourseState>(
+            listener: (context, state) {
+              switch (state.blocStatus) {
+                case AddCourseStatus.initial:
+                  break;
+                default:
+                  break;
+              }
+            }, builder: (BuildContext context, state) {
+            return Material(
+              child: LayoutBuilder(
                 builder: (context, constraints) {
                   return buildCourseCommonPage(state: state, context: context);
                 },
-            ),
-          );
-      },
+              ),
+            );
+          },
+          )
       )
     );
   }

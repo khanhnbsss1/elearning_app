@@ -586,5 +586,6 @@
   "self_essay_type_str": "Essay",
   "question_create": "Create question",
   "question_edit": "Edit question",
-  "attack_file": "Attachment"
+  "attack_file": "Attachment",
+  "user_str": "User"
 }

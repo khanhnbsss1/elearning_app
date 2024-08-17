@@ -852,7 +852,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   }
 
   Future<UserProfile?> getProfile() async {
-    UserProfile? userInfo = await UserManager().getUserProfile();
+    UserProfile? userInfo = UserManager().getUserProfile();
     return userInfo;
   }
 

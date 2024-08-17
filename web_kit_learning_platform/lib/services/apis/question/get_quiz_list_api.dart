@@ -14,11 +14,11 @@ class GetQuizListApi extends BaseApiRequest {
 
   Future<QuestionListResponseModel> call() async {
     await getAuthorization();
-    dynamic result = await getRequestAPI();
+    dynamic result = await postRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {
-      return QuestionListResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
+      return QuestionListResponseModel(content: [], total: 0, pageSize: 10, pageNumber: 0);
     }
     else
     {

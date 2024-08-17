@@ -21,7 +21,7 @@ class TestListState extends Equatable {
     this.selectInfo
   }){
     listResponseModel??= TestListResponseModel(content: []);
-    searchCommonRequest??= SearchCommonRequest(pageNumber: 0, pageSize: 10, keyword: "B");
+    searchCommonRequest??= SearchCommonRequest(pageNumber: 0, pageSize: 10, keyword: "");
   }
 
 

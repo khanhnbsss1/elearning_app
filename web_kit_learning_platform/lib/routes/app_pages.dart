@@ -80,6 +80,8 @@ abstract class Routes {
   static const tagList = Paths.tagList;
   static const testList = Paths.testList;
   static const quizList = Paths.quizList;
+  static const studentList = Paths.studentList;
+  static const teacherList = Paths.teacherList;
 
   static const uiButtonsRoute = Paths.uiButtonsPath;
   static const uiCardsRoute = Paths.uiCardsPath;
@@ -153,7 +155,10 @@ abstract class Paths {
   static const tagList = '/tagList/list';
   static const testList = '/testList/list';
   static const quizList = '/quizList/list';
+  static const studentList = '/user/studentList';
+  static const teacherList = '/user/teacherList';
 
+  
   static const forgotPasswordPath = '/auth/forgot_password';
   static const forgotPasswordPath1 = '/auth/forgot_password1';
   static const resetPasswordPath = '/auth/reset_password';

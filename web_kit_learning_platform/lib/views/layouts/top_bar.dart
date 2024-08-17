@@ -42,38 +42,31 @@ class _TopBarState extends State<TopBar>
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: UserManager().getUserProfile(), 
-      builder: (context, snapshot) {
-        UserProfile? userProfile;
-        if(snapshot.hasData)
-          {
-            userProfile = snapshot.data;
-          }
-        return MyCard(
-          shadow: MyShadow(position: MyShadowPosition.bottomRight, elevation: 0.5),
-          height: 60,
-          borderRadiusAll: 0,
-          padding: MySpacing.x(24),
-          color: topBarTheme.background.withAlpha(246),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  ( widget.showBackButton??false)? Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      BackButtonCustom(buildContext: context),
-                      Gap(Dimens.size16,),
-                    ],
-                  ): SizedBox(),
-                 
-                  widget.title??SizedBox(),
-                ],
-              ), 
-              Row(
+    UserProfile? userProfile =  UserManager().getUserProfile();
+    return MyCard(
+      shadow: MyShadow(position: MyShadowPosition.bottomRight, elevation: 0.5),
+      height: 60,
+      borderRadiusAll: 0,
+      padding: MySpacing.x(24),
+      color: topBarTheme.background.withAlpha(246),
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ( widget.showBackButton??false)? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    BackButtonCustom(buildContext: context),
+                    Gap(Dimens.size16,),
+                  ],
+                ): SizedBox(),
+
+                widget.title??SizedBox(),
+              ],
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 MySpacing.width(12),
@@ -89,7 +82,7 @@ class _TopBarState extends State<TopBar>
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         borderRadius: BorderRadius.circular(2),
                         child:
-                      
+
                         Image.asset(
                           "assets/lang/${LanguageHelper().getCurrentLocale().languageCode??'vi'}.png",
                           width: 24,
@@ -147,10 +140,9 @@ class _TopBarState extends State<TopBar>
                 ),
               ],
             ),
-            ]
-          ),
-        );
-    },);
+          ]
+      ),
+    );
     
   }
   Widget buildLanguageSelector( BuildContext context) {

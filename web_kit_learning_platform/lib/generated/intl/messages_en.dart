@@ -710,6 +710,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "user_create": MessageLookupByLibrary.simpleMessage("Create user"),
         "user_detail": MessageLookupByLibrary.simpleMessage("User information"),
         "user_name": MessageLookupByLibrary.simpleMessage("Login name"),
+        "user_str": MessageLookupByLibrary.simpleMessage("User"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "utilities": MessageLookupByLibrary.simpleMessage("Utilities"),
         "validation": MessageLookupByLibrary.simpleMessage("Validation"),

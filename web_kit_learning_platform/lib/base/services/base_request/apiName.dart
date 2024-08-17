@@ -49,14 +49,15 @@ class ApiName {
   
   /// landing page
 
-  final String getCourseListLandingPage = "/get-course-landingpage";
+  final String getCourseListLandingPage = "/get-landingpage-course";
   final String getTeacherListLandingPage = "/get-landingpage-teacher";
   final String getReviewListLandingPage = "/get-landingpage-review";
   
   /// thong tin nguoi dung
-  final String createUser = "/create-course";
+  final String createUser = "/create-user";
   final String editUser = "/edit-user";
   final String getUserDetail = "/get-user";
+  final String getUserList = "/get-user-list";
 
  /// them tu dien
   final String addVocabulary = "/create-vocabulary";

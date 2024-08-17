@@ -171,34 +171,16 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     MenuWidget(
                       iconData: Icons.people,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
-                      title: L10nX.getStr.teacher_str,
-                      children: [
-                        MenuItem(
-                          title: L10nX.getStr.teacher_list,
-                          route:  Routes.calenderRoute,
-                          isCondensed: ThemeCustomizer().leftBarCondensed,
-                        ),
-                        MenuItem(
-                          title: L10nX.getStr.create_teacher,
-                          route:  Routes.calenderRoute,
-                          isCondensed: ThemeCustomizer().leftBarCondensed,
-                        ),
-                      ],
-                    ),
-                    //-----------------Danh sach hoc viên-----------------//
-                    MenuWidget(
-                      iconData: Icons.people,
-                      isCondensed: ThemeCustomizer().leftBarCondensed,
-                      title: L10nX.getStr.student_str,
+                      title: L10nX.getStr.user_str,
                       children: [
                         MenuItem(
                           title: L10nX.getStr.student_list,
-                          route:  Routes.calenderRoute,
+                          route:  Routes.studentList,
                           isCondensed: ThemeCustomizer().leftBarCondensed,
                         ),
                         MenuItem(
-                          title: L10nX.getStr.create_student,
-                          route:  Routes.calenderRoute,
+                          title: L10nX.getStr.teacher_str,
+                          route:  Routes.teacherList,
                           isCondensed: ThemeCustomizer().leftBarCondensed,
                         ),
                       ],

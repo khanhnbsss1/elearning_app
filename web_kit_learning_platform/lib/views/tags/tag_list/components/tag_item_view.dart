@@ -99,6 +99,8 @@ class TagItemView extends StatelessWidget {
                         ItemViewEditDelete(
                           itemInfo: tagInfo,
                           enableView: false,
+                          enableEditDelete: UserManager().userContainPermission(permissionList: ["tags.delete.delete_tag"]),
+                          enableEdit: UserManager().userContainPermission(permissionList: ["tags.put.update_tag"]),
                           onEdit: (p0) {
                             if(onEdit!=null)
                             {

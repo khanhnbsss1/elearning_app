@@ -581,5 +581,6 @@
   "self_essay_type_str": "论文",
   "question_create": "创建问题",
   "question_edit": "编辑问题",
-  "attack_file": "附件文件"
+  "attack_file": "附件文件",
+  "user_str": "用户"
 }

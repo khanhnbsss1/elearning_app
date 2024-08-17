@@ -556,7 +556,7 @@
   "quiz_str": "Các câu hỏi",
   "image_str": "Hình ảnh",
   "tags_select": "Chọn thẻ",
-  "not_access_permission": "Không có quyền truy cập !",
+  "not_access_permission": "Bạn không có quyền truy cập nội dung này",
   "has_not_example": "Không có ví dụ nào",
   "tags_list": "Danh sách thẻ",
   "test_name": "Tên bài kiểm tra",
@@ -586,6 +586,7 @@
   "self_essay_type_str": "Tự luận",
   "question_create": "Tạo câu hỏi",
   "question_edit": "Chỉnh sửa câu hỏi",
-  "attack_file": "Tài liệu đính kèm"
+  "attack_file": "Tài liệu đính kèm",
+  "user_str": "Người dùng"
 
 }

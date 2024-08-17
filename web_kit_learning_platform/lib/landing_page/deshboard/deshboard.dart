@@ -210,52 +210,45 @@ class _LandingPageScreenState extends State<LandingPageScreen>
           child: StatefulBuilder(
             builder: (BuildContext context,
                 void Function(void Function()) setState) {
-              return FutureBuilder(
-                  future: UserManager().getUserProfile(),
-                  builder: (context, snapshot) {
-                    UserProfile? userProfile;
-                    if (snapshot.hasData) {
-                      userProfile = snapshot.data as UserProfile;
-                    }
-                    return Stack(
-                      children: [
-                        LayoutBuilder(
-                          builder: (context, constraints) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: ResponsiveInfo.isPhone()
-                                    ? Image.asset(
-                                        'assets/deshboard/background.jpg',
-                                        height: constraints.maxWidth < 500
-                                            ? 250
-                                            : 400,
-                                        width: constraints.maxWidth,
-                                        fit: BoxFit.fill)
-                                    : Image.asset(
-                                        'assets/deshboard/background.jpg',
-                                        height: 600,
-                                        width: constraints.maxWidth,
-                                        fit: BoxFit.fitWidth),
-                              ),
-                            );
-                          },
+              UserProfile? userProfile = UserManager().getUserProfile();
+              return Stack(
+                children: [
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                        Positioned(
-                          child: Align(
-                            alignment: Alignment.topCenter,
-                            child: Visibility(
-                              visible: width > 550,
-                              child: buildNavigatorBar(),
-                            ),
-                          ),
-                        )
-                      ],
-                    );
-                  });
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: ResponsiveInfo.isPhone()
+                              ? Image.asset(
+                              'assets/deshboard/background.jpg',
+                              height: constraints.maxWidth < 500
+                                  ? 250
+                                  : 400,
+                              width: constraints.maxWidth,
+                              fit: BoxFit.fill)
+                              : Image.asset(
+                              'assets/deshboard/background.jpg',
+                              height: 600,
+                              width: constraints.maxWidth,
+                              fit: BoxFit.fitWidth),
+                        ),
+                      );
+                    },
+                  ),
+                  Positioned(
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Visibility(
+                        visible: width > 550,
+                        child: buildNavigatorBar(),
+                      ),
+                    ),
+                  )
+                ],
+              );
             },
           ),
         ),
@@ -463,305 +456,297 @@ class _LandingPageScreenState extends State<LandingPageScreen>
     Locale currentLocale = LanguageHelper.getInstance.getCurrentLocale();
     return StatefulBuilder(
       builder: (BuildContext context, void Function(void Function()) setState) {
-        return FutureBuilder(
-            future: UserManager().getUserProfile(),
-            builder: (context, snapshot) {
-              UserProfile? userProfile;
-              if (snapshot.hasData) {
-                userProfile = snapshot.data as UserProfile;
-              }
-              print('${userProfile == null} tab bar');
-              return Padding(
-                padding: EdgeInsets.only(
-                    top: constraints.maxWidth < 550 ? 0 : 12,
-                    left: constraints.maxWidth < 550
-                        ? 0
-                        : constraints.maxWidth < 1050
-                            ? 20
-                            : 40,
-                    right: constraints.maxWidth < 550
-                        ? 0
-                        : constraints.maxWidth < 1050
-                            ? 20
-                            : 40),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          InkWell(
-                              hoverColor: Colors.transparent,
-                              onTap: () {
-                                Scaffold.of(context).openDrawer();
-                              },
-                              child: StaticView.buildLogo()),
-                          const SizedBox(width: 5),
-                          (constraints.maxWidth < 550)
-                              ? SizedBox()
-                              : Expanded(
-                                  child: Text(
-                                    L10nX.getStr.app_name,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                    style:
-                                        TextStyleConstant.titleMedium.copyWith(
-                                      color: notifier.blackcolor,
-                                    ),
-                                  ),
-                                ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 16,
-                        ),
-                        PopupMenuButton(
-                          tooltip: '',
-                          padding: const EdgeInsets.all(0),
-                          offset: const Offset(10, 30),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          // initialValue: selectedMenu,
-                          constraints: const BoxConstraints(
-                            maxWidth: 130,
-                            maxHeight: 150,
-                          ),
-                          color: notifier.whitecolor,
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            child: Center(
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  ClipRRect(
-                                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      borderRadius: BorderRadius.circular(2),
-                                      child: Image.asset(
-                                        "assets/lang/${currentLocale.languageCode}.png",
-                                        width: 18,
-                                        height: 14,
-                                        fit: BoxFit.cover,
-                                      )),
-                                  MySpacing.width(8),
-                                  MyText.labelMedium(
-                                      currentLocale.countryCode ?? "")
-                                ],
-                              ),
-                            ),
-                          ),
-                          itemBuilder: (BuildContext context) =>
-                              <PopupMenuEntry<SampleItem2>>[
-                            PopupMenuItem<SampleItem2>(
-                              enabled: true,
-                              value: SampleItem2.itemOne,
-                              onTap: () {},
-                              child: StatefulBuilder(
-                                builder: (context, setState) {
-                                  return Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      for (LanguageInfo language
-                                          in LanguageHelper()
-                                              .supportedLanguages)
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                          child: InkWell(
-                                            hoverColor: Colors.transparent,
-                                            onTap: () {
-                                              LanguageHelper().changeLanguage(
-                                                  language, context);
-                                            },
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: Dimens.size10,
-                                                  horizontal: Dimens.size8),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  ClipRRect(
-                                                      clipBehavior: Clip
-                                                          .antiAliasWithSaveLayer,
-                                                      borderRadius:
-                                                          BorderRadius
-                                                              .circular(2),
-                                                      child: Image.asset(
-                                                        "assets/lang/${language.languageCode}.png",
-                                                        width: 18,
-                                                        height: 14,
-                                                        fit: BoxFit.cover,
-                                                      )),
-                                                  MySpacing.width(8),
-                                                  MyText.labelMedium(
-                                                      language.language ?? "")
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                    ],
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: constraints.maxWidth < 500 ? 10 : 25,
-                    ),
-                    PopupMenuButton(
-                      constraints: const BoxConstraints(
-                        maxWidth: 140,
-                        maxHeight: 100,
-                      ),
-                      tooltip: '',
-                      padding: const EdgeInsets.all(0),
-                      offset: const Offset(0, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      // initialValue: selectedMenu,
-                      color: notifier.whitecolor,
-                      child: Container(
-                        height: constraints.maxWidth < 550 ? 30 : 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          color: notifier.lightgreencolor,
-                          shape: BoxShape.circle,
-                        ),
-                        clipBehavior: Clip.hardEdge,
-                        child: userProfile != null &&
-                                (userProfile.avatar ?? "").isNotEmpty
-                            ? ImageManager().getImageByUrl(
-                                width: 20,
-                                height: 20,
-                                userProfile.avatar ?? "")
-                            : Image.asset(
-                                'assets/deshboard/profile.png',
-                                fit: BoxFit.fill,
-                              ),
-                      ),
-                      onSelected: (SampleItem2 item) {
-                        setState(() {
-                          // selectedMenu = item;
-                        });
-                      },
-                      itemBuilder: (BuildContext context) =>
-                          <PopupMenuEntry<SampleItem2>>[
-                        PopupMenuItem<SampleItem2>(
-                          enabled: true,
-                          value: SampleItem2.itemOne,
-                          onTap: () {},
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Visibility(
-                                visible: userProfile == null,
-                                child: Center(
-                                  child: Column(
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          LoginPage().show(context);
-                                          //AppPages.route(Paths.dashboardPath);
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                          child: Text(L10nX.getStr.login,
-                                              style: baseStyle.copyWith(
-                                                  fontSize: 12,
-                                                  color: notifier.buttoncolor)),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          Register().show(context);
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                                          child: Text(L10nX.getStr.sign_up,
-                                              style: baseStyle.copyWith(
-                                                  fontSize: 12,
-                                                  color: notifier.buttoncolor)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Visibility(
-                                visible: userProfile != null,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    InkWell(
-                                      onTap: () {
-                                        userProfile == null
-                                            ? LoginPage().show(context)
-                                            : AppPages.routeName(
-                                                Routes.dashboardRoute);
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.menu_book_outlined,
-                                            size: Dimens.size20,
-                                            color: ColorConst.mainColor,
-                                          ),
-                                          const SizedBox(width: 8),
-                                          Text(
-                                            L10nX.getStr.lets_study,
-                                            style: baseStyle,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(height: 16),
-                                    InkWell(
-                                      onTap: () {
-                                        AuthorManager().handleLogout();
-                                        AppPages.routeName(
-                                            Routes.landingPageRoute,
-                                            isReplace: true);
-                                      },
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.logout,
-                                            size: Dimens.size25,
-                                            color: ColorConst.mainColor,
-                                          ),
-                                          const SizedBox(width: 8),
-                                          Text(L10nX.getStr.sign_out_text,
-                                              style: baseStyle),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: constraints.maxWidth < 500 ? 10 : 25,
-                    ),
-                  ],
-                ),
-              );
-            });
+        UserProfile? userProfile = UserManager().getUserProfile();
+        return Padding(
+        padding: EdgeInsets.only(
+        top: constraints.maxWidth < 550 ? 0 : 12,
+        left: constraints.maxWidth < 550
+        ? 0
+            : constraints.maxWidth < 1050
+        ? 20
+            : 40,
+        right: constraints.maxWidth < 550
+        ? 0
+            : constraints.maxWidth < 1050
+        ? 20
+            : 40),
+        child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+        Expanded(
+        child: Row(
+        children: [
+        InkWell(
+        hoverColor: Colors.transparent,
+        onTap: () {
+        Scaffold.of(context).openDrawer();
+        },
+        child: StaticView.buildLogo()),
+        const SizedBox(width: 5),
+        (constraints.maxWidth < 550)
+        ? SizedBox()
+            : Expanded(
+        child: Text(
+        L10nX.getStr.app_name,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style:
+        TextStyleConstant.titleMedium.copyWith(
+        color: notifier.blackcolor,
+        ),
+        ),
+        ),
+        ],
+        ),
+        ),
+        Row(
+        children: [
+        SizedBox(
+        width: 16,
+        ),
+        PopupMenuButton(
+        tooltip: '',
+        padding: const EdgeInsets.all(0),
+        offset: const Offset(10, 30),
+        shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        ),
+        // initialValue: selectedMenu,
+        constraints: const BoxConstraints(
+        maxWidth: 130,
+        maxHeight: 150,
+        ),
+        color: notifier.whitecolor,
+        child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        child: Center(
+        child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment:
+        MainAxisAlignment.spaceBetween,
+        children: [
+        ClipRRect(
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        borderRadius: BorderRadius.circular(2),
+        child: Image.asset(
+        "assets/lang/${currentLocale.languageCode}.png",
+        width: 18,
+        height: 14,
+        fit: BoxFit.cover,
+        )),
+        MySpacing.width(8),
+        MyText.labelMedium(
+        currentLocale.countryCode ?? "")
+        ],
+        ),
+        ),
+        ),
+        itemBuilder: (BuildContext context) =>
+        <PopupMenuEntry<SampleItem2>>[
+        PopupMenuItem<SampleItem2>(
+        enabled: true,
+        value: SampleItem2.itemOne,
+        onTap: () {},
+        child: StatefulBuilder(
+        builder: (context, setState) {
+        return Column(
+        crossAxisAlignment:
+        CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+        for (LanguageInfo language
+        in LanguageHelper()
+            .supportedLanguages)
+        Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: InkWell(
+        hoverColor: Colors.transparent,
+        onTap: () {
+        LanguageHelper().changeLanguage(
+        language, context);
+        },
+        child: Padding(
+        padding: EdgeInsets.symmetric(
+        vertical: Dimens.size10,
+        horizontal: Dimens.size8),
+        child: Row(
+        mainAxisAlignment:
+        MainAxisAlignment.start,
+        children: [
+        ClipRRect(
+        clipBehavior: Clip
+            .antiAliasWithSaveLayer,
+        borderRadius:
+        BorderRadius
+            .circular(2),
+        child: Image.asset(
+        "assets/lang/${language.languageCode}.png",
+        width: 18,
+        height: 14,
+        fit: BoxFit.cover,
+        )),
+        MySpacing.width(8),
+        MyText.labelMedium(
+        language.language ?? "")
+        ],
+        ),
+        ),
+        ),
+        ),
+        ],
+        );
+        },
+        ),
+        ),
+        ],
+        ),
+        ],
+        ),
+        SizedBox(
+        width: constraints.maxWidth < 500 ? 10 : 25,
+        ),
+        PopupMenuButton(
+        constraints: const BoxConstraints(
+        maxWidth: 140,
+        maxHeight: 100,
+        ),
+        tooltip: '',
+        padding: const EdgeInsets.all(0),
+        offset: const Offset(0, 50),
+        shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        ),
+        // initialValue: selectedMenu,
+        color: notifier.whitecolor,
+        child: Container(
+        height: constraints.maxWidth < 550 ? 30 : 50,
+        width: 50,
+        decoration: BoxDecoration(
+        color: notifier.lightgreencolor,
+        shape: BoxShape.circle,
+        ),
+        clipBehavior: Clip.hardEdge,
+        child: userProfile != null &&
+        (userProfile.avatar ?? "").isNotEmpty
+        ? ImageManager().getImageByUrl(
+        width: 20,
+        height: 20,
+        userProfile.avatar ?? "")
+            : Image.asset(
+        'assets/deshboard/profile.png',
+        fit: BoxFit.fill,
+        ),
+        ),
+        onSelected: (SampleItem2 item) {
+        setState(() {
+        // selectedMenu = item;
+        });
+        },
+        itemBuilder: (BuildContext context) =>
+        <PopupMenuEntry<SampleItem2>>[
+        PopupMenuItem<SampleItem2>(
+        enabled: true,
+        value: SampleItem2.itemOne,
+        onTap: () {},
+        child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+        Visibility(
+        visible: userProfile == null,
+        child: Center(
+        child: Column(
+        children: [
+        InkWell(
+        onTap: () {
+        LoginPage().show(context);
+        //AppPages.route(Paths.dashboardPath);
+        },
+        child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Text(L10nX.getStr.login,
+        style: baseStyle.copyWith(
+        fontSize: 12,
+        color: notifier.buttoncolor)),
+        ),
+        ),
+        InkWell(
+        onTap: () {
+        Register().show(context);
+        },
+        child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Text(L10nX.getStr.sign_up,
+        style: baseStyle.copyWith(
+        fontSize: 12,
+        color: notifier.buttoncolor)),
+        ),
+        ),
+        ],
+        ),
+        ),
+        ),
+        Visibility(
+        visible: userProfile != null,
+        child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+        InkWell(
+        onTap: () {
+        userProfile == null
+        ? LoginPage().show(context)
+            : AppPages.routeName(
+        Routes.dashboardRoute);
+        },
+        child: Row(
+        children: [
+        Icon(
+        Icons.menu_book_outlined,
+        size: Dimens.size20,
+        color: ColorConst.mainColor,
+        ),
+        const SizedBox(width: 8),
+        Text(
+        L10nX.getStr.lets_study,
+        style: baseStyle,
+        ),
+        ],
+        ),
+        ),
+        const SizedBox(height: 16),
+        InkWell(
+        onTap: () {
+        AuthorManager().handleLogout();
+        AppPages.routeName(
+        Routes.landingPageRoute,
+        isReplace: true);
+        },
+        child: Row(
+        children: [
+        Icon(
+        Icons.logout,
+        size: Dimens.size25,
+        color: ColorConst.mainColor,
+        ),
+        const SizedBox(width: 8),
+        Text(L10nX.getStr.sign_out_text,
+        style: baseStyle),
+        ],
+        ),
+        ),
+        ],
+        ),
+        ),
+        ],
+        ),
+        ),
+        ],
+        ),
+        SizedBox(
+        width: constraints.maxWidth < 500 ? 10 : 25,
+        ),
+        ],
+        ),
+        );
       },
     );
   }

@@ -1,5 +1,9 @@
 class PageModel{
-  PageModel({this.total, this.pageSize, this.pageNumber});
+  PageModel({this.total, this.pageSize, this.pageNumber}){
+    pageSize??=10;
+    total??=0;
+    pageNumber ??=10;
+  }
   int? total;
   int? pageSize;
   int? pageNumber;

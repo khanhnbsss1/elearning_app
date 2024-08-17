@@ -66,7 +66,7 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
         },
         child: Layout(
             title: Text(
-              L10nX.getStr.preview_str,
+              L10nX.getStr.string_back,
               style: TextStyleConstant.textStyleBlack20w700,
             ),
             padding: EdgeInsets.zero,
@@ -128,7 +128,8 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
                       maxHeight: ResponsiveInfo.isPhone()?constraints.maxWidth:MediaQuery.sizeOf(context).height*3/4,
                       maxWidth: constraints.maxWidth
                   ),
-                  child: VideoPlayer(videoPlayerModel: VideoPlayerModel(
+                  child: VideoPlayer(
+                    videoPlayerModel: VideoPlayerModel(
                       title: "", 
                       // link:"https://www.youtube.com/watch?v=NGl9izvlVKA&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ",
                     link: state.courseInfo?.videoPreview ?? "",

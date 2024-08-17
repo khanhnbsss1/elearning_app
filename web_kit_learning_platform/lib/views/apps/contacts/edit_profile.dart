@@ -56,447 +56,441 @@ class _EditProfileState extends State<EditProfile>
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: UserManager().getUserProfile(),
-        builder: (context, snapshot) {
-          UserProfile? userProfile = snapshot.data;
-          String fullName = userProfile?.fullName ?? "";
-          String firstName = fullName
-              .split(" ")
-              .sublist(0, fullName.split(" ").length - 1)
-              .join(" ");
-          String lastName = fullName.split(" ").last;
-          return Layout(
-            child: Column(
+    UserProfile? userProfile = UserManager().getUserProfile();
+    String fullName = userProfile?.fullName ?? "";
+    String firstName = fullName
+        .split(" ")
+        .sublist(0, fullName.split(" ").length - 1)
+        .join(" ");
+    String lastName = fullName.split(" ").last;
+    return Layout(
+      child: Column(
+        children: [
+          Padding(
+            padding: MySpacing.x(flexSpacing),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: MySpacing.x(flexSpacing),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      MyText.titleMedium(
-                        "Edit Profile",
-                        fontWeight: 600,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Visibility(
-                            visible: enableEdit == true,
-                            child: MyButton(
-                              elevation: 5,
-                              onTap: () {
-                                setState(() {
-                                  enableEdit = false;
-                                });
-                              },
-                              padding: MySpacing.xy(20, 16),
-                              backgroundColor: ColorConst.whiteColor,
-                              borderRadiusAll: AppStyle.buttonRadius.medium,
-                              child: MyText.bodySmall(
-                                'Cancel',
-                                color: ColorConst.mainColor,
-                              ),
-                            ),
-                          ),
-                          MySpacing.width(10),
-                          Visibility(
-                            visible: enableEdit == false,
-                            child: MyButton(
-                              onTap: () {
-                                setState(() {
-                                  enableEdit = true;
-                                });
-                              },
-                              elevation: 0,
-                              padding: MySpacing.xy(20, 16),
-                              backgroundColor: ColorConst.mainColor,
-                              borderRadiusAll: AppStyle.buttonRadius.medium,
-                              child: MyText.bodySmall(
-                                'Edit',
-                                color: ColorConst.whiteColor,
-                              ),
-                            ),
-                          ),
-                          MySpacing.width(10),
-                          Visibility(
-                            visible: enableEdit == true,
-                            child: MyButton(
-                              onTap: () {
-                                setState(() {
-                                  enableEdit = false;
-                                });
-                              },
-                              elevation: 0,
-                              padding: MySpacing.xy(20, 16),
-                              backgroundColor: ColorConst.mainColor,
-                              borderRadiusAll: AppStyle.buttonRadius.medium,
-                              child: MyText.bodySmall(
-                                'Save Change',
-                                color: ColorConst.whiteColor,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                MyText.titleMedium(
+                  "Edit Profile",
+                  fontWeight: 600,
                 ),
-                MySpacing.height(flexSpacing),
-                Padding(
-                  padding: MySpacing.x(flexSpacing / 2),
-                  child: MyFlex(
-                    children: [
-                      MyFlexItem(
-                        sizes: "lg-6",
-                        child: MyCard(
-                          shadow: MyShadow(elevation: 0.5),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              MyText.titleMedium(
-                                "User Infomation",
-                                fontWeight: 600,
-                              ),
-                              Center(
-                                child: InkWell(
-                                  onTap: () async {
-                                    imageFile = await picker.pickImage(
-                                        source: ImageSource.gallery);
-                                    debugPrint(
-                                        "imageFile!.path --------------------->>> ${imageFile!.path}");
-                                    setState(() {});
-                                  },
-                                  child: Stack(
-                                    alignment: Alignment.bottomRight,
-                                    children: [
-                                      imageFile == null
-                                          ? MyContainer.rounded(
-                                              height: 150,
-                                              width: 150,
-                                              paddingAll: 0,
-                                              clipBehavior: Clip
-                                                  .antiAliasWithSaveLayer,
-                                              child: Image.asset(
-                                                Images.avatars[0],
-                                                fit: BoxFit.cover,
-                                              ))
-                                          : MyContainer.rounded(
-                                              paddingAll: 0,
-                                              clipBehavior: Clip
-                                                  .antiAliasWithSaveLayer,
-                                              child: Image.file(
-                                                  File(imageFile!.path),
-                                                  fit: BoxFit.cover),
-                                            ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              MySpacing.height(20),
-                              Column(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: BuildTextField(
-                                            enableEdit: enableEdit,
-                                            fieldTitle: "First Name",
-                                            hintText:
-                                                "Enter your First Name",
-                                            value: firstName),
-                                      ),
-                                      MySpacing.width(10),
-                                      Expanded(
-                                        child: BuildTextField(
-                                            enableEdit: enableEdit,
-                                            fieldTitle: "Last Name",
-                                            hintText:
-                                                "Enter your Last Name",
-                                            value: lastName),
-                                      ),
-                                    ],
-                                  ),
-                                  MySpacing.height(20),
-                                  BuildTextField(
-                                      enableEdit: enableEdit,
-                                      fieldTitle: "Identity Id",
-                                      hintText: "Enter your Identity",
-                                      value: userProfile?.identityId ?? ""),
-                                  MySpacing.height(20),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: BuildTextField(
-                                            enableEdit: enableEdit,
-                                            fieldTitle: "Role",
-                                            hintText: "Enter your role",
-                                            value: userProfile?.typeName ??
-                                                "User"),
-                                      ),
-                                      MySpacing.width(10),
-                                      Expanded(
-                                        child: BuildTextField(
-                                            enableEdit: enableEdit,
-                                            fieldTitle: "Gender",
-                                            hintText: "Enter your gender",
-                                            value: userProfile?.gender ??
-                                                "Male"),
-                                      ),
-                                    ],
-                                  ),
-                                  MySpacing.height(20),
-                                  MyText.labelMedium("Birthday"),
-                                  MySpacing.height(4),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        child: customDropDownSearch(
-                                          list: List<int>.generate(
-                                            DateTime.now().year - 1970 + 1,
-                                            (int index) =>
-                                                DateTime.now().year - index,
-                                          ),
-                                          hintText: 'Year',
-                                          controller: yearController,
-                                          enableEdit: enableEdit,
-                                        ),
-                                      ),
-                                      MySpacing.width(16),
-                                      ValueListenableBuilder(
-                                        valueListenable: yearController,
-                                        builder: (context, value, child) {
-                                          return Expanded(
-                                            child: customDropDownSearch(
-                                              list: List<int>.generate(12,
-                                                  (int index) => 1 + index),
-                                              hintText: 'Month',
-                                              controller: monthController,
-                                              enableEdit: enableEdit,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      MySpacing.width(16),
-                                      ValueListenableBuilder(
-                                          valueListenable: monthController,
-                                          builder: (context, value, child) {
-                                            return Expanded(
-                                              child: customDropDownSearch(
-                                                list: (yearController.text
-                                                            .isNotEmpty &&
-                                                        monthController.text
-                                                            .isNotEmpty)
-                                                    ? List<int>.generate(
-                                                        getDaysInMonth(
-                                                            int.parse(
-                                                                yearController
-                                                                    .text),
-                                                            int.parse(
-                                                                monthController
-                                                                    .text)),
-                                                        (int index) =>
-                                                            1 + index)
-                                                    : [],
-                                                hintText: 'Day',
-                                                controller: dayController,
-                                                enableEdit: enableEdit,
-                                              ),
-                                            );
-                                          }),
-                                    ],
-                                  ),
-                                  MySpacing.height(20),
-                                  BuildTextField(
-                                      enableEdit: enableEdit,
-                                      fieldTitle: "Phone Number",
-                                      hintText: "Enter your phone number",
-                                      value:
-                                          userProfile?.phoneNumber ?? ""),
-                                  MySpacing.height(20),
-                                  BuildTextField(
-                                      enableEdit: enableEdit,
-                                      fieldTitle: "Country",
-                                      hintText: "Enter country",
-                                      value:
-                                          userProfile?.countryName ?? ""),
-                                ],
-                              ),
-                            ],
-                          ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Visibility(
+                      visible: enableEdit == true,
+                      child: MyButton(
+                        elevation: 5,
+                        onTap: () {
+                          setState(() {
+                            enableEdit = false;
+                          });
+                        },
+                        padding: MySpacing.xy(20, 16),
+                        backgroundColor: ColorConst.whiteColor,
+                        borderRadiusAll: AppStyle.buttonRadius.medium,
+                        child: MyText.bodySmall(
+                          'Cancel',
+                          color: ColorConst.mainColor,
                         ),
                       ),
-                      MyFlexItem(
-                        sizes: "lg-6",
-                        child: Column(
-                          children: [
-                            MyCard(
-                              shadow: MyShadow(elevation: 0.5),
-                              child: Column(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                children: [
-                                  MyText.titleMedium(
-                                    "Account Infomation",
-                                    fontWeight: 600,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      BuildTextField(
-                                          enableEdit: enableEdit,
-                                          fieldTitle: "Username",
-                                          hintText: "",
-                                          value:
-                                              userProfile?.userName ?? "",
-                                          ),
-                                      MySpacing.height(20),
-                                      Visibility(
-                                        visible: !changePassword && enableEdit,
-                                        child: MyButton(
-                                          onTap: () {
-                                            setState(() {
-                                              changePassword =
-                                                  !changePassword;
-                                              print(changePassword);
-                                            });
-                                          },
-                                          elevation: 0,
-                                          padding: MySpacing.xy(20, 16),
-                                          backgroundColor:
-                                              ColorConst.mainColor,
-                                          borderRadiusAll:
-                                              AppStyle.buttonRadius.medium,
-                                          child: MyText.bodySmall(
-                                            'Change password',
-                                            color: ColorConst.whiteColor,
-                                          ),
-                                        ),
-                                      ),
-                                      Visibility(
-                                        visible: changePassword && enableEdit,
-                                        child: Column(
-                                          children: [
-                                            buildTextField(
-                                                fieldTitle: "Old Password",
-                                                hintText:
-                                                    "Enter your old password",
-                                                value: "",
-                                                obscure: true),
-                                            MySpacing.height(20),
-                                            buildTextField(
-                                                fieldTitle:
-                                                    "Change Password",
-                                                hintText:
-                                                    "Enter your password",
-                                                value: "",
-                                                obscure: true),
-                                            MySpacing.height(20),
-                                            buildTextField(
-                                                fieldTitle:
-                                                    "Confirm Password",
-                                                hintText:
-                                                    "Comfirm your password",
-                                                value: "",
-                                                obscure: true),
-                                            MySpacing.height(20),
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.center,
-                                              children: [
-                                                MyButton(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      changePassword = !changePassword;
-                                                    });
-                                                  },
-                                                  elevation: 5,
-                                                  padding: MySpacing.xy(20, 16),
-                                                  backgroundColor: ColorConst.whiteColor,
-                                                  borderRadiusAll: AppStyle.buttonRadius.medium,
-                                                  child: MyText.bodySmall(
-                                                    'Cancel',
-                                                    color: ColorConst.mainColor,
-                                                  ),
-                                                ),
-                                                MySpacing.width(20),
-                                                MyButton(
-                                                  onTap: () {
-                                                    setState(() {
-
-                                                    });
-                                                  },
-                                                  elevation: 0,
-                                                  padding: MySpacing.xy(20, 16),
-                                                  backgroundColor: ColorConst.mainColor,
-                                                  borderRadiusAll: AppStyle.buttonRadius.medium,
-                                                  child: MyText.bodySmall(
-                                                    'Update password',
-                                                    color: ColorConst.whiteColor,
-                                                  ),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                    ),
+                    MySpacing.width(10),
+                    Visibility(
+                      visible: enableEdit == false,
+                      child: MyButton(
+                        onTap: () {
+                          setState(() {
+                            enableEdit = true;
+                          });
+                        },
+                        elevation: 0,
+                        padding: MySpacing.xy(20, 16),
+                        backgroundColor: ColorConst.mainColor,
+                        borderRadiusAll: AppStyle.buttonRadius.medium,
+                        child: MyText.bodySmall(
+                          'Edit',
+                          color: ColorConst.whiteColor,
+                        ),
+                      ),
+                    ),
+                    MySpacing.width(10),
+                    Visibility(
+                      visible: enableEdit == true,
+                      child: MyButton(
+                        onTap: () {
+                          setState(() {
+                            enableEdit = false;
+                          });
+                        },
+                        elevation: 0,
+                        padding: MySpacing.xy(20, 16),
+                        backgroundColor: ColorConst.mainColor,
+                        borderRadiusAll: AppStyle.buttonRadius.medium,
+                        child: MyText.bodySmall(
+                          'Save Change',
+                          color: ColorConst.whiteColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          MySpacing.height(flexSpacing),
+          Padding(
+            padding: MySpacing.x(flexSpacing / 2),
+            child: MyFlex(
+              children: [
+                MyFlexItem(
+                  sizes: "lg-6",
+                  child: MyCard(
+                    shadow: MyShadow(elevation: 0.5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MyText.titleMedium(
+                          "User Infomation",
+                          fontWeight: 600,
+                        ),
+                        Center(
+                          child: InkWell(
+                            onTap: () async {
+                              imageFile = await picker.pickImage(
+                                  source: ImageSource.gallery);
+                              debugPrint(
+                                  "imageFile!.path --------------------->>> ${imageFile!.path}");
+                              setState(() {});
+                            },
+                            child: Stack(
+                              alignment: Alignment.bottomRight,
+                              children: [
+                                imageFile == null
+                                    ? MyContainer.rounded(
+                                    height: 150,
+                                    width: 150,
+                                    paddingAll: 0,
+                                    clipBehavior: Clip
+                                        .antiAliasWithSaveLayer,
+                                    child: Image.asset(
+                                      Images.avatars[0],
+                                      fit: BoxFit.cover,
+                                    ))
+                                    : MyContainer.rounded(
+                                  paddingAll: 0,
+                                  clipBehavior: Clip
+                                      .antiAliasWithSaveLayer,
+                                  child: Image.file(
+                                      File(imageFile!.path),
+                                      fit: BoxFit.cover),
+                                ),
+                              ],
                             ),
-                            MySpacing.height(16),
-                            MyCard(
-                              shadow: MyShadow(elevation: 0.5),
-                              child: Column(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                children: [
-                                  MyText.titleMedium(
-                                    "Billing Infomation",
-                                    fontWeight: 600,
+                          ),
+                        ),
+                        MySpacing.height(20),
+                        Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: BuildTextField(
+                                      enableEdit: enableEdit,
+                                      fieldTitle: "First Name",
+                                      hintText:
+                                      "Enter your First Name",
+                                      value: firstName),
+                                ),
+                                MySpacing.width(10),
+                                Expanded(
+                                  child: BuildTextField(
+                                      enableEdit: enableEdit,
+                                      fieldTitle: "Last Name",
+                                      hintText:
+                                      "Enter your Last Name",
+                                      value: lastName),
+                                ),
+                              ],
+                            ),
+                            MySpacing.height(20),
+                            BuildTextField(
+                                enableEdit: enableEdit,
+                                fieldTitle: "Identity Id",
+                                hintText: "Enter your Identity",
+                                value: userProfile?.identityId ?? ""),
+                            MySpacing.height(20),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: BuildTextField(
+                                      enableEdit: enableEdit,
+                                      fieldTitle: "Role",
+                                      hintText: "Enter your role",
+                                      value: userProfile?.typeName ??
+                                          "User"),
+                                ),
+                                MySpacing.width(10),
+                                Expanded(
+                                  child: BuildTextField(
+                                      enableEdit: enableEdit,
+                                      fieldTitle: "Gender",
+                                      hintText: "Enter your gender",
+                                      value: userProfile?.gender ??
+                                          "Male"),
+                                ),
+                              ],
+                            ),
+                            MySpacing.height(20),
+                            MyText.labelMedium("Birthday"),
+                            MySpacing.height(4),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: customDropDownSearch(
+                                    list: List<int>.generate(
+                                      DateTime.now().year - 1970 + 1,
+                                          (int index) =>
+                                      DateTime.now().year - index,
+                                    ),
+                                    hintText: 'Year',
+                                    controller: yearController,
+                                    enableEdit: enableEdit,
                                   ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      BuildTextField(
+                                ),
+                                MySpacing.width(16),
+                                ValueListenableBuilder(
+                                  valueListenable: yearController,
+                                  builder: (context, value, child) {
+                                    return Expanded(
+                                      child: customDropDownSearch(
+                                        list: List<int>.generate(12,
+                                                (int index) => 1 + index),
+                                        hintText: 'Month',
+                                        controller: monthController,
+                                        enableEdit: enableEdit,
+                                      ),
+                                    );
+                                  },
+                                ),
+                                MySpacing.width(16),
+                                ValueListenableBuilder(
+                                    valueListenable: monthController,
+                                    builder: (context, value, child) {
+                                      return Expanded(
+                                        child: customDropDownSearch(
+                                          list: (yearController.text
+                                              .isNotEmpty &&
+                                              monthController.text
+                                                  .isNotEmpty)
+                                              ? List<int>.generate(
+                                              getDaysInMonth(
+                                                  int.parse(
+                                                      yearController
+                                                          .text),
+                                                  int.parse(
+                                                      monthController
+                                                          .text)),
+                                                  (int index) =>
+                                              1 + index)
+                                              : [],
+                                          hintText: 'Day',
+                                          controller: dayController,
                                           enableEdit: enableEdit,
-                                          fieldTitle: "Bank Account",
-                                          hintText:
-                                              "Enter your Bank account",
-                                          value: userProfile?.bankAccount ??
-                                              ""),
-                                      MySpacing.height(20),
-                                      BuildTextField(
-                                          enableEdit: enableEdit,
-                                          fieldTitle: "Bank Name",
-                                          hintText: "Enter your Bank Name",
-                                          value:
-                                              userProfile?.bankName ?? ""),
-                                      MySpacing.height(20),
-                                      Visibility(
-                                        visible:  enableEdit,
-                                        child: MyButton(
-                                          onTap: () {},
-                                          elevation: 0,
-                                          padding: MySpacing.xy(20, 16),
-                                          backgroundColor:
-                                              ColorConst.mainColor,
-                                          borderRadiusAll:
-                                              AppStyle.buttonRadius.medium,
-                                          child: MyText.bodySmall(
-                                            'Change payment method',
-                                            color: ColorConst.whiteColor,
-                                          ),
                                         ),
+                                      );
+                                    }),
+                              ],
+                            ),
+                            MySpacing.height(20),
+                            BuildTextField(
+                                enableEdit: enableEdit,
+                                fieldTitle: "Phone Number",
+                                hintText: "Enter your phone number",
+                                value:
+                                userProfile?.phoneNumber ?? ""),
+                            MySpacing.height(20),
+                            BuildTextField(
+                                enableEdit: enableEdit,
+                                fieldTitle: "Country",
+                                hintText: "Enter country",
+                                value:
+                                userProfile?.countryName ?? ""),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                MyFlexItem(
+                  sizes: "lg-6",
+                  child: Column(
+                    children: [
+                      MyCard(
+                        shadow: MyShadow(elevation: 0.5),
+                        child: Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: [
+                            MyText.titleMedium(
+                              "Account Infomation",
+                              fontWeight: 600,
+                            ),
+                            Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                BuildTextField(
+                                  enableEdit: enableEdit,
+                                  fieldTitle: "Username",
+                                  hintText: "",
+                                  value:
+                                  userProfile?.userName ?? "",
+                                ),
+                                MySpacing.height(20),
+                                Visibility(
+                                  visible: !changePassword && enableEdit,
+                                  child: MyButton(
+                                    onTap: () {
+                                      setState(() {
+                                        changePassword =
+                                        !changePassword;
+                                        print(changePassword);
+                                      });
+                                    },
+                                    elevation: 0,
+                                    padding: MySpacing.xy(20, 16),
+                                    backgroundColor:
+                                    ColorConst.mainColor,
+                                    borderRadiusAll:
+                                    AppStyle.buttonRadius.medium,
+                                    child: MyText.bodySmall(
+                                      'Change password',
+                                      color: ColorConst.whiteColor,
+                                    ),
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: changePassword && enableEdit,
+                                  child: Column(
+                                    children: [
+                                      buildTextField(
+                                          fieldTitle: "Old Password",
+                                          hintText:
+                                          "Enter your old password",
+                                          value: "",
+                                          obscure: true),
+                                      MySpacing.height(20),
+                                      buildTextField(
+                                          fieldTitle:
+                                          "Change Password",
+                                          hintText:
+                                          "Enter your password",
+                                          value: "",
+                                          obscure: true),
+                                      MySpacing.height(20),
+                                      buildTextField(
+                                          fieldTitle:
+                                          "Confirm Password",
+                                          hintText:
+                                          "Comfirm your password",
+                                          value: "",
+                                          obscure: true),
+                                      MySpacing.height(20),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          MyButton(
+                                            onTap: () {
+                                              setState(() {
+                                                changePassword = !changePassword;
+                                              });
+                                            },
+                                            elevation: 5,
+                                            padding: MySpacing.xy(20, 16),
+                                            backgroundColor: ColorConst.whiteColor,
+                                            borderRadiusAll: AppStyle.buttonRadius.medium,
+                                            child: MyText.bodySmall(
+                                              'Cancel',
+                                              color: ColorConst.mainColor,
+                                            ),
+                                          ),
+                                          MySpacing.width(20),
+                                          MyButton(
+                                            onTap: () {
+                                              setState(() {
+
+                                              });
+                                            },
+                                            elevation: 0,
+                                            padding: MySpacing.xy(20, 16),
+                                            backgroundColor: ColorConst.mainColor,
+                                            borderRadiusAll: AppStyle.buttonRadius.medium,
+                                            child: MyText.bodySmall(
+                                              'Update password',
+                                              color: ColorConst.whiteColor,
+                                            ),
+                                          ),
+                                        ],
                                       )
                                     ],
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      MySpacing.height(16),
+                      MyCard(
+                        shadow: MyShadow(elevation: 0.5),
+                        child: Column(
+                          crossAxisAlignment:
+                          CrossAxisAlignment.start,
+                          children: [
+                            MyText.titleMedium(
+                              "Billing Infomation",
+                              fontWeight: 600,
+                            ),
+                            Column(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              children: [
+                                BuildTextField(
+                                    enableEdit: enableEdit,
+                                    fieldTitle: "Bank Account",
+                                    hintText:
+                                    "Enter your Bank account",
+                                    value: userProfile?.bankAccount ??
+                                        ""),
+                                MySpacing.height(20),
+                                BuildTextField(
+                                    enableEdit: enableEdit,
+                                    fieldTitle: "Bank Name",
+                                    hintText: "Enter your Bank Name",
+                                    value:
+                                    userProfile?.bankName ?? ""),
+                                MySpacing.height(20),
+                                Visibility(
+                                  visible:  enableEdit,
+                                  child: MyButton(
+                                    onTap: () {},
+                                    elevation: 0,
+                                    padding: MySpacing.xy(20, 16),
+                                    backgroundColor:
+                                    ColorConst.mainColor,
+                                    borderRadiusAll:
+                                    AppStyle.buttonRadius.medium,
+                                    child: MyText.bodySmall(
+                                      'Change payment method',
+                                      color: ColorConst.whiteColor,
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                           ],
                         ),
@@ -506,8 +500,10 @@ class _EditProfileState extends State<EditProfile>
                 ),
               ],
             ),
-          );
-        });
+          ),
+        ],
+      ),
+    );
   }
   Widget buildTextField(
       {

@@ -6,6 +6,7 @@ import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/page_common/permission_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
@@ -39,54 +40,59 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
   final int pageItemCount = 16;
   late int pageCount;
   bool isOnVolume=  false;
-
+  List<String>permission =[
+    "tests.get.get_tests"
+  ];
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        return TestListBloc(TestListState())..add(TestListInitEvent());
-      },
-      child: BlocConsumer<TestListBloc, TestListState>(
-        listener: (context, state) {
-          switch (state.blocStatus) {
-            case TestListStatus.initial:
-              break;
-              // TODO: Handle this case.
-            case TestListStatus.onSelectTag:
-              {
-              }
-              break;
-            default:
-              break;
-              // TODO: Handle this case.
-          }
+    return PermissionPage(
+      permissionList: permission,
+      child: BlocProvider(
+        create: (context) {
+          return TestListBloc(TestListState())..add(TestListInitEvent());
         },
-        builder: (BuildContext context, state) {
-          return MyResponsive(
-            builder: (context , boxConstraints , myScreenMediaType ) {
-              if(!myScreenMediaType.isMobile)
+        child: BlocConsumer<TestListBloc, TestListState>(
+          listener: (context, state) {
+            switch (state.blocStatus) {
+              case TestListStatus.initial:
+                break;
+                // TODO: Handle this case.
+              case TestListStatus.onSelectTag:
                 {
-                  return Layout(
+                }
+                break;
+              default:
+                break;
+                // TODO: Handle this case.
+            }
+          },
+          builder: (BuildContext context, state) {
+            return MyResponsive(
+              builder: (context , boxConstraints , myScreenMediaType ) {
+                if(!myScreenMediaType.isMobile)
+                  {
+                    return Layout(
+                        isScroll: false,
+                        title: Center(
+                          child: Text(L10nX.getStr.test_list,
+                            style: TextStyleConstant.textStyleBlack18w600,),),
+                        padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
+                        child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
+                  }
+                else
+                  {
+                    return Layout(
                       isScroll: false,
-                      title: Center(
-                        child: Text(L10nX.getStr.test_list,
-                          style: TextStyleConstant.textStyleBlack18w600,),),
-                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
-                      child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
-                }
-              else
-                {
-                  return Layout(
-                    isScroll: false,
-                      title: Center(
-                        child: Text(L10nX.getStr.test_list,
-                          style: TextStyleConstant.textStyleBlack18w600,),),
-                      child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
-                  );
-                }
-            },);
-          
-        },
+                        title: Center(
+                          child: Text(L10nX.getStr.test_list,
+                            style: TextStyleConstant.textStyleBlack18w600,),),
+                        child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
+                    );
+                  }
+              },);
+            
+          },
+        ),
       ),
     );
   }
@@ -239,32 +245,37 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                ),
              ],
            ),
-           Row(
-             children: [
-               Gap(Dimens.size10),
-               Visibility(
-                 visible: constraints.maxWidth< 600,
-                 child: InkWell(
+           Visibility(
+             visible: UserManager().userContainPermission(permissionList: [
+               "tests.post.create_create_test"
+             ]),
+             child: Row(
+               children: [
+                 Gap(Dimens.size10),
+                 Visibility(
+                   visible: constraints.maxWidth< 600,
+                   child: InkWell(
+                       onTap: () {
+                         CreateEditTest(testActionType: ActionType.create, callBack: () {
+                           BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
+                         },).show(context);
+                       },
+                       child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
+                 ),
+                 Visibility(
+                   visible: constraints.maxWidth >600,
+                   child: ActionButton1(
+                     preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
+                     text: L10nX.getStr.add_new_str,
                      onTap: () {
                        CreateEditTest(testActionType: ActionType.create, callBack: () {
                          BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
                        },).show(context);
                      },
-                     child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
-               ),
-               Visibility(
-                 visible: constraints.maxWidth >600,
-                 child: ActionButton1(
-                   preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
-                   text: L10nX.getStr.add_new_str,
-                   onTap: () {
-                     CreateEditTest(testActionType: ActionType.create, callBack: () {
-                       BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
-                     },).show(context);
-                   },
+                   ),
                  ),
-               ),
-             ],
+               ],
+             ),
            ),
          ],
        ),
@@ -409,6 +420,10 @@ class TestDataSource extends DataGridSource {
                   children: [
                     ItemViewEditDelete(
                       itemInfo: e,
+                      enableEditDelete: UserManager().userContainPermission(permissionList: ["tests.delete.delete_test"]),
+                      enableEdit: UserManager().userContainPermission(permissionList: ["tests.delete.delete_test"]),
+                      enableView: UserManager().userContainPermission(permissionList: ["tests.delete.delete_test"]),
+
                       onViewDetail: (p0) {
                         onViewDetail(p0);
                       },

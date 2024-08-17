@@ -5,9 +5,11 @@ import 'package:gap/gap.dart';
 import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/page_common/permission_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
+import 'package:webkit/models/user.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/views/course/course_detail/course_study/course_study.dart';
 import 'package:webkit/views/course/course_list/bloc/course_list_bloc.dart';
@@ -36,6 +38,14 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
   GlobalKey<FormState>? formKey = GlobalKey();
   ScrollController scrollController = ScrollController();
   TextEditingController editingController = TextEditingController();
+  
+  List<String>permission =[ 
+    "courses.get.get_course_detail",
+    "courses.get.get_filter_directory",
+    "courses.post.get_courses_home",
+    "courses.post.get_my_course",
+    "courses.post.search_course"
+  ];
   @override
   void initState() {
     super.initState();
@@ -48,221 +58,227 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        return CourseListBloc(CourseListState(courseType: widget.courseType))..add(CourseListInitEvent());
-      },
-      child: BlocConsumer<CourseListBloc, CourseListState>(
-        listener: (context, state) {
-          switch (state.blocStatus) {
-            case CourseStatus.initial:
-              break;
-            default:
-              break;
-          }
+    return PermissionPage(
+      permissionList: permission,
+      child: BlocProvider(
+        create: (context) {
+          return CourseListBloc(CourseListState(courseType: widget.courseType))..add(CourseListInitEvent());
         },
-        builder: (BuildContext context, state) {
-          return MyResponsive(
-            builder: (context, boxConstraints, myScreenMediaType) {
-              return Column(
-                children: [
-                  Expanded(
-                    child: Layout(
-                        isScroll: false,
-                        title: Text(
-                          state.courseType == CourseType.courseList ? L10nX.getStr.courses_list : L10nX.getStr.your_course,
-                          style: TextStyleConstant.textStyleBlack18w600,
-                        ),
-                        padding: EdgeInsets.only(top: 45 +16),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: ColorConst.whiteColor,
+        child: BlocConsumer<CourseListBloc, CourseListState>(
+          listener: (context, state) {
+            switch (state.blocStatus) {
+              case CourseStatus.initial:
+                break;
+              default:
+                break;
+            }
+          },
+          builder: (BuildContext context, state) {
+            return MyResponsive(
+              builder: (context, boxConstraints, myScreenMediaType) {
+                return Column(
+                  children: [
+                    Expanded(
+                      child: Layout(
+                          isScroll: false,
+                          title: Text(
+                            state.courseType == CourseType.courseList ? L10nX.getStr.courses_list : L10nX.getStr.your_course,
+                            style: TextStyleConstant.textStyleBlack18w600,
                           ),
-                          //padding: EdgeInsets.symmetric(vertical: Dimens.size8,),
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                   Container(
-                                     decoration: BoxDecoration(
-                                         border: Border(
-                                             bottom: BorderSide(color: ColorConst.dividerColor, width: 0.2)
-                                         )
-                                     ),
-                                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                                     child: LayoutBuilder(builder: (context, constraints) {
-                                       return  Row(
-                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                         children: [
-                                           Row(
-                                             mainAxisSize: MainAxisSize.min,
-                                             mainAxisAlignment: MainAxisAlignment.start,
-                                             children: [
-                                               Container(
-                                                 //height: Dimens.size40,
-                                                 constraints: BoxConstraints(
-                                                     maxWidth:  constraints.maxWidth> 800?400:250
-                                                 ),
-                                                 child: Form(
-                                                   key: formKey,
-                                                   child: Row(
-                                                     children: [
-                                                       Expanded(
-                                                         child: TextFormField(
-                                                           maxLines: 1,
-                                                           controller: editingController,
-                                                           onChanged: (value) {
-                                                                     
-                                                           },
-                                                           onFieldSubmitted: (value) {
-                                                             BlocProvider.of<CourseListBloc>(context)
-                                                                 .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
-                                                           },
-                                                           onTapOutside: (event) {
-                                                           },
-                                                           style: MyTextStyle.bodyMedium(),
-                                                           decoration: InputDecoration(
-                                                               hintText: L10nX.getStr.search,
-                                                               fillColor: ColorConst.whiteColor,
-                                                               filled: true,
-                                                               hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                                                               border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                                               enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                                               focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                                               prefixIcon: const Align(
-                                                                   alignment: Alignment.center,
-                                                                   child: Icon(
-                                                                     LucideIcons.search,
-                                                                     size: 14,
-                                                                   )),
-                                                               prefixIconConstraints: const BoxConstraints(
-                                                                   minWidth: 36,
-                                                                   maxWidth: 36,
-                                                                   minHeight: 32,
-                                                                   maxHeight: 32),
-                                                               contentPadding: MySpacing.xy(16, 12),
-                                                               //isCollapsed: true,
-                                                               floatingLabelBehavior: FloatingLabelBehavior.auto),
-                                                         ),
-                                                       ),
-                                                       FilterCoursePopupMenu(
-                                                         onSelect: (p0) {
-                                                           BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(
-                                                               searchCommonRequest: state.searchCommonRequest!.copyWith(
-                                                                 filterType: p0.filterType,
-                                                                 gradeId: p0.selectSubFilter?.id,
-                                                               )));
-                                                         },
-                                                       ),
-                                     
-                                                     ],
-                                                   ),
-                                                 ),
-                                               ),
-                                               Gap(Dimens.size16),
-                                               Visibility(
-                                                 visible: constraints.maxWidth> 800,
-                                                 child: ActionButton1(
-                                                   text: L10nX.getStr.search,
-                                                   radius: 16,
-                                                   
-                                                   onTap: () {
-                                                     BlocProvider.of<CourseListBloc>(context)
-                                                         .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: editingController.text)));                                         },
-                                                 ),
-                                               ),
-                                               Visibility(
-                                                 visible: constraints.maxWidth< 800,
-                                                 child: InkWell(
-                                                     onTap: () {
-                                                       BlocProvider.of<CourseListBloc>(context)
-                                                           .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: editingController.text)));                                           },
-                                                     child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
-                                               ),
-                                             ],
-                                           ),
-                                           Visibility(
-                                             visible: state.courseType == CourseType.courseList,
-                                             child: Row(
-                                               children: [
-                                                 Gap(Dimens.size10),
-                                                 Visibility(
-                                                   visible: constraints.maxWidth< 800,
-                                                   child: InkWell(
-                                                       onTap: () {
-                                                         CreateEditCourse(
-                                                           coursePageType: CoursePageType.create,
-                                                         ).show(context);
-                                                       },
-                                                       child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
-                                                 ),
-                                                 Visibility(
-                                                   visible: constraints.maxWidth >800,
-                                                   child: ActionButton1(
-                                                     preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
-                                                     text: L10nX.getStr.add_new_str,
-                                                     onTap: () {
-                                                       CreateEditCourse(
-                                                         coursePageType: CoursePageType.create,
-                                                       ).show(context);
-                                                     },
-                                                   ),
-                                                 ),
-                                               ],
-                                             ),
-                                           ),
-                                         ],
-                                       );
-                                     },),
-                                   ),
-                                    myScreenMediaType.isMobile
-                                        ? Expanded(child: buildCourseList(state: state, boxConstraints: boxConstraints))
-                                        : Expanded(child: buildCourseList(state: state, boxConstraints: boxConstraints)),
-                                    SizedBox(
-                                      height: 8,
-                                    ),
-                                  ],
+                          padding: EdgeInsets.only(top: 45 +16),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: ColorConst.whiteColor,
+                            ),
+                            //padding: EdgeInsets.symmetric(vertical: Dimens.size8,),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(color: ColorConst.dividerColor, width: 0.2)
+                                            )
+                                        ),
+                                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                        child: LayoutBuilder(builder: (context, constraints) {
+                                          return  Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                    //height: Dimens.size40,
+                                                    constraints: BoxConstraints(
+                                                        maxWidth:  constraints.maxWidth> 800?400:250
+                                                    ),
+                                                    child: Form(
+                                                      key: formKey,
+                                                      child: Row(
+                                                        children: [
+                                                          Expanded(
+                                                            child: TextFormField(
+                                                              maxLines: 1,
+                                                              controller: editingController,
+                                                              onChanged: (value) {
+
+                                                              },
+                                                              onFieldSubmitted: (value) {
+                                                                BlocProvider.of<CourseListBloc>(context)
+                                                                    .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                                              },
+                                                              onTapOutside: (event) {
+                                                              },
+                                                              style: MyTextStyle.bodyMedium(),
+                                                              decoration: InputDecoration(
+                                                                  hintText: L10nX.getStr.search,
+                                                                  fillColor: ColorConst.whiteColor,
+                                                                  filled: true,
+                                                                  hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                                                                  border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                                                  enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                                                  focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                                                  prefixIcon: const Align(
+                                                                      alignment: Alignment.center,
+                                                                      child: Icon(
+                                                                        LucideIcons.search,
+                                                                        size: 14,
+                                                                      )),
+                                                                  prefixIconConstraints: const BoxConstraints(
+                                                                      minWidth: 36,
+                                                                      maxWidth: 36,
+                                                                      minHeight: 32,
+                                                                      maxHeight: 32),
+                                                                  contentPadding: MySpacing.xy(16, 12),
+                                                                  //isCollapsed: true,
+                                                                  floatingLabelBehavior: FloatingLabelBehavior.auto),
+                                                            ),
+                                                          ),
+                                                          FilterCoursePopupMenu(
+                                                            onSelect: (p0) {
+                                                              BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(
+                                                                  searchCommonRequest: state.searchCommonRequest!.copyWith(
+                                                                    filterType: p0.filterType,
+                                                                    gradeId: p0.selectSubFilter?.id,
+                                                                  )));
+                                                            },
+                                                          ),
+
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Gap(Dimens.size16),
+                                                  Visibility(
+                                                    visible: constraints.maxWidth> 800,
+                                                    child: ActionButton1(
+                                                      text: L10nX.getStr.search,
+                                                      radius: 16,
+
+                                                      onTap: () {
+                                                        BlocProvider.of<CourseListBloc>(context)
+                                                            .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: editingController.text)));                                         },
+                                                    ),
+                                                  ),
+                                                  Visibility(
+                                                    visible: constraints.maxWidth< 800,
+                                                    child: InkWell(
+                                                        onTap: () {
+                                                          BlocProvider.of<CourseListBloc>(context)
+                                                              .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: editingController.text)));                                           },
+                                                        child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
+                                                  ),
+                                                ],
+                                              ),
+                                              Visibility(
+                                                visible: state.courseType == CourseType.courseList && 
+                                                    UserManager().userContainPermission(permissionList: [
+                                                      "courses.post.create_course",
+                                                    ]),
+                                                child: Row(
+                                                  children: [
+                                                    Gap(Dimens.size10),
+                                                    Visibility(
+                                                      visible: constraints.maxWidth< 800,
+                                                      child: InkWell(
+                                                          onTap: () {
+                                                            CreateEditCourse(
+                                                              coursePageType: CoursePageType.create,
+                                                            ).show(context);
+                                                          },
+                                                          child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
+                                                    ),
+                                                    Visibility(
+                                                      visible: constraints.maxWidth >800,
+                                                      child: ActionButton1(
+                                                        preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
+                                                        text: L10nX.getStr.add_new_str,
+                                                        onTap: () {
+                                                          CreateEditCourse(
+                                                            coursePageType: CoursePageType.create,
+                                                          ).show(context);
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        },),
+                                      ),
+                                      myScreenMediaType.isMobile
+                                          ? Expanded(child: buildCourseList(state: state, boxConstraints: boxConstraints))
+                                          : Expanded(child: buildCourseList(state: state, boxConstraints: boxConstraints)),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Center(
-                                child: FlutterCustomPagination(
-                                  key: UniqueKey(),
-                                  currentPage: state.courseResponseModel!.getCurrentPage(),
-                                  limitPerPage: state.courseResponseModel!.pageSize ?? 10,
-                                  totalDataCount: state.courseResponseModel!.getTotalElement(),
-                                  onPreviousPage: (p0) {
-                                    BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                                  },
-                                  onBackToFirstPage: (p0) {
-                                    BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                                  },
-                                  onNextPage: (p0) {
-                                    BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                                  },
-                                  onGoToLastPage: (p0) {
-                                    BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                                  },
-                                  backgroundColor: ColorConst.whiteColor,
-                                  textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
-                                  previousPageIcon: Icons.keyboard_arrow_left,
-                                  backToFirstPageIcon: Icons.first_page,
-                                  nextPageIcon: Icons.keyboard_arrow_right,
-                                  goToLastPageIcon: Icons.last_page,
+                                Center(
+                                  child: FlutterCustomPagination(
+                                    key: UniqueKey(),
+                                    currentPage: state.courseResponseModel!.getCurrentPage(),
+                                    limitPerPage: state.courseResponseModel!.pageSize ?? 10,
+                                    totalDataCount: state.courseResponseModel!.getTotalElement(),
+                                    onPreviousPage: (p0) {
+                                      BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                                    },
+                                    onBackToFirstPage: (p0) {
+                                      BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                                    },
+                                    onNextPage: (p0) {
+                                      BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                                    },
+                                    onGoToLastPage: (p0) {
+                                      BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                                    },
+                                    backgroundColor: ColorConst.whiteColor,
+                                    textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                                    previousPageIcon: Icons.keyboard_arrow_left,
+                                    backToFirstPageIcon: Icons.first_page,
+                                    nextPageIcon: Icons.keyboard_arrow_right,
+                                    goToLastPageIcon: Icons.last_page,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        )),
-                  ),
-                  
-                ],
-              );
-            },
-          );
-        },
+                              ],
+                            ),
+                          )),
+                    ),
+
+                  ],
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }
@@ -290,7 +306,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                   : LayoutBuilder(
                       builder: (BuildContext context, BoxConstraints constraints) {
                         List<Widget> listOfCourse = List.empty(growable: true);
-                        bool? enableEdit = state.userProfile?.getPermission().contains("");
+                        bool? enableEdit = state.courseType == CourseType.courseList;
                         double maxWidthItem = 260;
                         double heightOfItem = 240;
                         int numberRow = (constraints.maxWidth ~/ (maxWidthItem + 10));
@@ -341,7 +357,6 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                           ? Padding(
                                               padding: EdgeInsets.only(top: 16.0, left: crossAxisSpacing / 2, right: crossAxisSpacing / 2),
                                               child: GridView.count(
-                                                //padding: const EdgeInsets.all(20),
                                                 controller: scrollController,
                                                 crossAxisSpacing: crossAxisSpacing,
                                                 childAspectRatio: (widthItem) / (heightOfItem),

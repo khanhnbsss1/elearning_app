@@ -14,7 +14,7 @@ class UserManager{
   UserManager._internal();
 
   Future<void> handleLogoutData() async {
-    UserProfile? userInfos = await getUserProfile();
+    UserProfile? userInfos =  getUserProfile();
     if(userInfos!=null){
       //FirebaseManager().removeSubscribeTopic(userInfos.id.toString());
     }
@@ -26,7 +26,7 @@ class UserManager{
    await SharedPreferencesStorage().saveString(Storage.currentUserInfoKey, json.encode(userInfo.toJson()));
   }
 
-  Future<UserProfile?> getUserProfile() async {
+  UserProfile? getUserProfile() {
     if(AuthorManager().getAuthInfo()==null) {
       return null;
     }
@@ -40,6 +40,17 @@ class UserManager{
     return userInfo;
   }
 
+  bool userContainPermission({required List<String>permissionList}){
+    UserProfile? userProfile = getUserProfile();
+    bool contain = true;
+    for(String permission in permissionList)
+      {
+        if(!(userProfile?.getPermission()??[]).contains(permission)){
+          contain = false;
+        }
+      }
+    return contain;
+  }
   Future<void> deleteUserProfile() async {
     SharedPreferencesStorage().removeByKey(Storage.currentUserInfoKey);
   }

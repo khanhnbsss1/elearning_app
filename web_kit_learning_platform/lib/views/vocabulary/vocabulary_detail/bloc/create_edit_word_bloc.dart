@@ -138,7 +138,7 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
       blocStatus: CreateEditWordStatus.onLoading,
     ));
     
-    UserProfile? userProfile = await UserManager().getUserProfile();
+    UserProfile? userProfile = UserManager().getUserProfile();
     MonitorLoading().showLoading("");
     VocabularyInfo word = VocabularyInfo(
       simplified: event.state.addWordController?.basicValidator.getController('simplified')?.text,
@@ -164,7 +164,7 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
       blocStatus: CreateEditWordStatus.onLoading,
     ));
 
-    UserProfile? userProfile = await UserManager().getUserProfile();
+    UserProfile? userProfile = UserManager().getUserProfile();
     MonitorLoading().showLoading("");
     state.vocabularyInfo?.simplified =  event.state.addWordController?.basicValidator.getController('simplified')?.text;
     state.vocabularyInfo?.traditional =  event.state.addWordController?.basicValidator.getController('traditional')?.text;

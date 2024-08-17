@@ -18,7 +18,7 @@ class GetTestListApi extends BaseApiRequest {
 
     if(result.runtimeType == ResponseCommon)
     {
-      return TestListResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
+      return TestListResponseModel(content: [], total: 0, pageSize: 10, pageNumber: 0);
     }
     else
     {

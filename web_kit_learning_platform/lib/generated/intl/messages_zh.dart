@@ -595,6 +595,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "user_create": MessageLookupByLibrary.simpleMessage("创建用户"),
         "user_detail": MessageLookupByLibrary.simpleMessage("用户信息"),
         "user_name": MessageLookupByLibrary.simpleMessage("登录名"),
+        "user_str": MessageLookupByLibrary.simpleMessage("用户"),
         "username": MessageLookupByLibrary.simpleMessage("用户名"),
         "utilities": MessageLookupByLibrary.simpleMessage("工具"),
         "validation": MessageLookupByLibrary.simpleMessage("验证"),

@@ -185,7 +185,7 @@ class FirebaseManager {
   }
   Future<void> addNewSubscribeUserTopic() async {
     removeAllSubscribeTopicButKeepSystemTopic();
-    UserProfile? userInfo = await UserManager().getUserProfile();
+    UserProfile? userInfo = UserManager().getUserProfile();
     if(userInfo!=null)
       {
         FirebaseManager.getInstance.addNewSubscribeTopic(userInfo.id.toString());

@@ -30,6 +30,11 @@ class CourseItemGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    enableEdit = (enableEdit??false)&& UserManager().userContainPermission(
+        permissionList: [
+          "courses.post.create_course",
+          "courses.put.update_course",
+        ]);
     notifier = Provider.of<ColorNotifier>(context, listen: true);
     return InkWell(
       onTap: () {
@@ -134,7 +139,7 @@ class CourseItemGridView extends StatelessWidget {
                                                   mainAxisSize: MainAxisSize.min,
                                                   children: [
                                                     StarRating(
-                                                      rating: (courseInfo.ratePoint ?? 0).toDouble(),
+                                                      rating: (courseInfo.rating ?? 0).toDouble(),
                                                       size: Dimens.size15,
                                                       allowHalfRating: true,
                                                       onRatingChanged: (rating) {},
@@ -142,7 +147,7 @@ class CourseItemGridView extends StatelessWidget {
                                                   ],
                                                 ),
                                                 Text(" ${NumberHelper().numberToString(
-                                                    courseInfo.payment,
+                                                    courseInfo.price,
                                                     decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
                                                     style: TextStyleConstant.textStyleBlack12w200.copyWith(
                                                       fontWeight: FontWeight.bold,
@@ -220,7 +225,7 @@ class CourseItemGridView extends StatelessWidget {
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 StarRating(
-                                                  rating: (courseInfo.ratePoint ?? 0).toDouble(),
+                                                  rating: (courseInfo.rating ?? 0).toDouble(),
                                                   size: Dimens.size15,
                                                   allowHalfRating: true,
                                                   onRatingChanged: (rating) {},
@@ -228,7 +233,7 @@ class CourseItemGridView extends StatelessWidget {
                                               ],
                                             ),
                                             Text(" ${NumberHelper().numberToString(
-                                                courseInfo.payment,
+                                                courseInfo.price,
                                                 decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
                                                 style: TextStyleConstant.textStyleBlack12w200.copyWith(
                                                   fontWeight: FontWeight.bold,
@@ -243,7 +248,6 @@ class CourseItemGridView extends StatelessWidget {
                                 ],
                               ),
                             ),),
-                         
                           Align(
                             alignment: Alignment.topRight,
                             child: PopupMenuButton<CourseItemAction>(
@@ -458,7 +462,7 @@ class CourseItemGridView1 extends StatelessWidget {
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
                                                 StarRating(
-                                                  rating: (courseInfo.ratePoint ?? 0).toDouble(),
+                                                  rating: (courseInfo.rating ?? 0).toDouble(),
                                                   size: Dimens.size15,
                                                   allowHalfRating: true,
                                                   onRatingChanged: (rating) {},
@@ -466,7 +470,7 @@ class CourseItemGridView1 extends StatelessWidget {
                                               ],
                                             ),
                                             Text(" ${NumberHelper().numberToString(
-                                                courseInfo.payment,
+                                                courseInfo.price,
                                                 decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
                                                 style: TextStyleConstant.textStyleBlack12w200.copyWith(
                                                   fontWeight: FontWeight.bold,

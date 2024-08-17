@@ -35,7 +35,7 @@ class TestDetailBloc extends Bloc<TestDetailEvent, TestDetailState> {
       Emitter<TestDetailState> emit,
       ) async {
     state.blocStatus = TestDetailStatus.initial;
-    UserProfile? userProfile = await UserManager().getUserProfile();
+    UserProfile? userProfile = UserManager().getUserProfile();
     state.testInfo??=TestInfo(createdBy: userProfile?.userName??'');
     if(state.testInfo?.id!=null)
       {

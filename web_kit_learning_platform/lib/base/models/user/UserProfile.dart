@@ -1,4 +1,6 @@
 
+import 'package:webkit/base/services/base_request/models/page_model.dart';
+
 enum UserType{
   none,
   Teacher,///giao vien
@@ -31,6 +33,9 @@ class UserProfile {
   String? position;
   String? email;
 
+  List<String>? permissionList;
+  String? permission;
+  int?roleId;
   UserProfile(
       {this.id,
         this.fullName,
@@ -49,7 +54,11 @@ class UserProfile {
         this.updatedBy,
         this.countryName,
         this.position,
-        this.email});
+        this.email,
+        this.permissionList,
+        this.roleId,
+        this.permission
+      });
 
   UserProfile.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -70,32 +79,42 @@ class UserProfile {
     countryName = json['country_name'];
     position = json['position'];
     email = json['email'];
+    permission=json['permissions']??'';
+    permissionList = [];
+    if(permission!=null && (permission??'').isNotEmpty)
+      {
+        permissionList = (json['permissions'] as String).split(',');
+      }
+    roleId = json['role_id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['fullName'] = fullName;
-    data['user_name'] = userName;
-    data['bank_account'] = bankAccount;
-    data['bank_name'] = bankName;
+    data['fullName'] = fullName??"";
+    data['user_name'] = userName??"";
+    data['bank_account'] = bankAccount??"";
+    data['bank_name'] = bankName??"";
     data['identity_id'] = identityId;
-    data['gender'] = gender;
-    data['birthday'] = birthday;
-    data['phone_number'] = phoneNumber;
-    data['avatar'] = avatar;
-    data['type_name'] = typeName;
-    data['created_at'] = createdAt;
-    data['created_by'] = createdBy;
-    data['updated_at'] = updatedAt;
-    data['updated_by'] = updatedBy;
-    data['country_name'] = countryName;
-    data['position'] = position;
-    data['email'] = email;
+    data['gender'] = gender??"";
+    data['birthday'] = birthday??"";
+    data['phone_number'] = phoneNumber??"";
+    data['avatar'] = avatar??"";
+    data['type_name'] = typeName??"web";
+    data['created_at'] = createdAt??"";
+    data['created_by'] = createdBy??"";
+    data['updated_at'] = updatedAt??"";
+    data['updated_by'] = updatedBy??"";
+    data['country_name'] = countryName??"";
+    data['position'] = position??"";
+    data['email'] = email??"";
+    
+    data['permissions'] = permission;
+    data['role_id'] = roleId;
     return data;
   }
-  String getPermission(){
-    return "";
+  List<String> getPermission(){
+    return permissionList??[];
   }
 
   UserProfile copyWith({
@@ -139,6 +158,42 @@ class UserProfile {
       email: email ?? this.email,
     );
   }
+}
+
+class UserListResponseModel extends PageModel{
+  List<UserProfile>? content;
+
+  UserListResponseModel({super.total, super.pageSize, super.pageNumber, this.content});
+  UserListResponseModel.fromJson(Map<String, dynamic> json) {
+    total = json['total'];
+    pageSize = json['pageSize'];
+    pageNumber = json['pageNumber'];
+    if (json['content'] != null) {
+      content = <UserProfile>[];
+      json['content'].forEach((v) {
+        content!.add(new UserProfile.fromJson(v));
+      });
+    }
+  }
+  UserListResponseModel.fromList( dynamic json) {
+    if (json!= null) {
+      content = <UserProfile>[];
+      json.forEach((v) {
+        content!.add(new UserProfile.fromJson(v));
+      });
+    }
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['total'] = total;
+    data['pageSize'] = pageSize;
+    data['pageNumber'] = pageNumber;
+    if (content != null) {
+      data['content'] = content!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+
 }
 
 class ServicePriceInfo {

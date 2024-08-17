@@ -157,7 +157,7 @@ class CourseItem extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   StarRating(
-                                    rating: (courseInfo.ratePoint ?? 0).toDouble(),
+                                    rating: (courseInfo.rating ?? 0).toDouble(),
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {},
                                   ),
@@ -165,7 +165,7 @@ class CourseItem extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Text(
-                                          "${NumberHelper().numberToString(courseInfo.payment, decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
+                                          "${NumberHelper().numberToString(courseInfo.price, decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
                                           style: TextStyleConstant
                                               .textStyleBlack16w500
                                               .copyWith(

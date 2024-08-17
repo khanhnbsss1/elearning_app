@@ -48,7 +48,7 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
       Emitter<LessonDetailState> emit,
       ) async {
     state.blocStatus = LessonDetailStatus.initial;
-    UserProfile? userProfile = await UserManager().getUserProfile();
+    UserProfile? userProfile = UserManager().getUserProfile();
     state.lessonInfo??=LessonInfo(createdBy: userProfile?.userName??'');
     if(state.lessonInfo?.id!=null)
       {

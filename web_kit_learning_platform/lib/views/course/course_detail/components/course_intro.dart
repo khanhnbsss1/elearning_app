@@ -117,7 +117,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
-                            mainAxisSize: MainAxisSize.min,
+                            mainAxisSize: MainAxisSize.max,
                             children: [
                               Expanded(
                                 child: MyText.titleLarge(
@@ -126,6 +126,8 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                                     fontSize: 30,
                                     fontWeight: FontWeight.bold,
                                   ),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.visible,
                                   color: ColorConst.textColor,
                                 ),
                               ),
@@ -137,7 +139,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                               StarRating(
                                 color: Colors.yellow,
                                 allowHalfRating: true,
-                                rating: (state.courseInfo?.ratePoint ?? 0).toDouble(),
+                                rating: (state.courseInfo?.rating ?? 0).toDouble(),
                               ),
                             ],
                           ),
@@ -145,9 +147,6 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                       ),
                     ),
                   ),
-                  /*                              ActionButton1(
-                          text: L10nX.getStr.register_now,
-                        ),*/
                   ActionButton1(
                     text: L10nX.getStr.lets_study,
                     onTap: () {
@@ -173,10 +172,12 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            MyText.titleLarge(
-                              state.courseInfo?.name ?? "",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                              color: ColorConst.textColor,
+                            Expanded(
+                              child: MyText.titleLarge(
+                                state.courseInfo?.name ?? "",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                                color: ColorConst.textColor,
+                              ),
                             ),
                           ],
                         ),
@@ -186,7 +187,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                             StarRating(
                               color: Colors.yellow,
                               allowHalfRating: true,
-                              rating: (state.courseInfo?.ratePoint ?? 0).toDouble(),
+                              rating: (state.courseInfo?.rating ?? 0).toDouble(),
                             ),
                           ],
                         ),
@@ -556,14 +557,14 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                       child: Column(
                         children: [
                           Text(
-                            '${_state.courseInfo?.payment??0 / 0.8} VND',
+                            '${_state.courseInfo?.price??0 / 0.8} VND',
                             style: TextStyle(decoration: TextDecoration.lineThrough, color: Colors.black45, fontSize: 14, fontWeight: FontWeight.w400),
                           ),
                           SizedBox(
                             height: 8,
                           ),
                           Text(
-                            '${_state.courseInfo?.payment!} VND',
+                            '${_state.courseInfo?.price!} VND',
                             style: TextStyle(
                                 decoration: TextDecoration.underline,
                                 decorationColor: Color(0xFFFFC711),

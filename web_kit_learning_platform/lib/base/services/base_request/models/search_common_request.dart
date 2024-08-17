@@ -7,6 +7,7 @@ class SearchCommonRequest {
   int?gradeId;
   int?producerId;
   int?categoryId;
+  String? userType;
   SearchCommonRequest(
       {
         this.userId,
@@ -16,7 +17,8 @@ class SearchCommonRequest {
         this.keyword,
         this.gradeId,
         this.categoryId,
-        this.producerId
+        this.producerId,
+        this.userType
       });
 
   SearchCommonRequest.fromJson(Map<String, dynamic> json) {
@@ -41,6 +43,7 @@ class SearchCommonRequest {
     data['gradeId'] = gradeId;
     data['gradeId'] = categoryId;
     data['gradeId'] = producerId;
+    data['typeName'] = userType;
     return data;
   }
   SearchCommonRequest copyWith({
@@ -52,6 +55,7 @@ class SearchCommonRequest {
     int?gradeId,
     int?producerId,
     int?categoryId,
+    String? userType
   }){
     return SearchCommonRequest(
       userId: userId??this.userId,
@@ -62,6 +66,7 @@ class SearchCommonRequest {
       gradeId: gradeId??this.gradeId,
       producerId: producerId??this.producerId,
       categoryId: categoryId??this.categoryId,
+      userType: userType??this.userType,
 
     );
 }

@@ -239,7 +239,7 @@ class AddCourseController extends MyController {
   Future<CourseInfo?> getCourseInfoFromUI({required CourseInfo courseInfo}) async {
     int? gradleId = getIdFromName(listOfGradeNames, basicValidator.getController('grade_name')!.text);
     basicValidator.getController('grade_name')!.text = listOfGradeNames[getIdFromName(listOfGradeNames, basicValidator.getController('grade_name')!.text??"")]??"";
-    UserProfile? userProfile = await UserManager().getUserProfile();
+    UserProfile? userProfile = UserManager().getUserProfile();
     List<String> infoObject = [];
     List<String> resultObject = [];
     int? categoryId = getIdFromName(listOfCategoryName, basicValidator.getController('category_name')!.text??"");

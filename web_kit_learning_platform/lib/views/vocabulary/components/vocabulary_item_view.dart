@@ -68,6 +68,8 @@ class VocabularyItemView extends StatelessWidget {
                         ItemViewEditDelete(
                           itemInfo: vocabularyInfo,
                           enableView: false,
+                          enableEdit: UserManager().userContainPermission(permissionList: ["vocabulary.put.update_vocabulary"]),
+                          enableEditDelete: UserManager().userContainPermission(permissionList: ["vocabulary.delete.delete_vocabulary"]),
                           onViewDetail: (p0) {
                             if(onViewDetail!=null)
                             {

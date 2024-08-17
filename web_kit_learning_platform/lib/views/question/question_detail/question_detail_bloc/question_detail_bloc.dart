@@ -81,7 +81,7 @@ class QuestionDetailBloc extends Bloc<QuestionDetailEvent, QuestionDetailState> 
       Emitter<QuestionDetailState> emit,
       ) async {
     state.blocStatus = QuestionDetailStatus.initial;
-    UserProfile? userProfile = await UserManager().getUserProfile();
+    UserProfile? userProfile = UserManager().getUserProfile();
     state.questionInfo??=QuestionInfo(createdBy: userProfile?.userName??'');
     if((state.questionInfo?.answerGetDetail??[]).isNotEmpty)
       {

@@ -17,7 +17,7 @@ class GetListVocabularyApi extends BaseApiRequest {
 
     if(result.runtimeType == ResponseCommon)
     {
-      return VocabularyResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
+      return VocabularyResponseModel(content: [], total: 0, pageSize: 10, pageNumber: 0);
     }
     else
     {
@@ -27,7 +27,7 @@ class GetListVocabularyApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    UserProfile? userProfile = await UserManager().getUserProfile();
+    UserProfile? userProfile = UserManager().getUserProfile();
     if(userProfile!=null) {
       searchCommonRequest = searchCommonRequest.copyWith(userId: userProfile.id);
     }

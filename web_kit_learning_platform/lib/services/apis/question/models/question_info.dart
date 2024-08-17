@@ -75,7 +75,7 @@ class QuestionInfo {
     id = json['id'];
     questionName = json['question_name'];
     weightage = json['weightage'];
-    questionType = json['type_question'];
+    //questionType = json['type_question'];
     questionType = mapStrKeyQuestionType[json['type_question']??'']??QuestionType.text;
     questionLink = json['question_link'];
     createdAt = json['created_at'];
@@ -177,9 +177,9 @@ class QuestionListResponseModel extends PageModel{
 
   QuestionListResponseModel({super.total, super.pageSize, super.pageNumber, this.content});
   QuestionListResponseModel.fromJson(Map<String, dynamic> json) {
-    total = json['total'];
-    pageSize = json['pageSize'];
-    pageNumber = json['pageNumber'];
+    total = json['total']??0;
+    pageSize = json['pageSize']??=10;
+    pageNumber = json['pageNumber']??=0;
     if (json['content'] != null) {
       content = <QuestionInfo>[];
       json['content'].forEach((v) {

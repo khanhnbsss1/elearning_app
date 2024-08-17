@@ -7,6 +7,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/page_common/permission_page.dart';
 import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
@@ -42,56 +43,61 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
   final int pageItemCount = 16;
   late int pageCount;
   bool isOnVolume=  false;
-
+  List<String>permission =[
+    "quizs.get.get_courses",
+  ];
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        return QuizListBloc(QuizListState())..add(QuizListInitEvent());
-      },
-      child: BlocConsumer<QuizListBloc, QuizListState>(
-        listener: (context, state) {
-          switch (state.blocStatus) {
-            case QuizListStatus.initial:
-              break;
-          // TODO: Handle this case.
-            case QuizListStatus.onSelectTag:
-              {
-              }
-              break;
-            default:
-              break;
-          // TODO: Handle this case.
-          }
+    return PermissionPage(
+      permissionList: permission,
+      child: BlocProvider(
+        create: (context) {
+          return QuizListBloc(QuizListState())..add(QuizListInitEvent());
         },
-        builder: (BuildContext context, state) {
-          return MyResponsive(
-            builder: (context , boxConstraints , myScreenMediaType ) {
-              if(!myScreenMediaType.isMobile)
-              {
-                return Layout(
-                    isScroll: false,
-                    title: Text(
-                       L10nX.getStr.quiz_list,
-                      style: TextStyleConstant.textStyleBlack18w600,
-                    ),
-                    padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
-                    child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
-              }
-              else
-              {
-                return Layout(
-                    isScroll: false,
-                    title: Text(
-                      L10nX.getStr.quiz_str,
-                      style: TextStyleConstant.textStyleBlack18w600,
-                    ),
-                    child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
-                );
-              }
-            },);
-
-        },
+        child: BlocConsumer<QuizListBloc, QuizListState>(
+          listener: (context, state) {
+            switch (state.blocStatus) {
+              case QuizListStatus.initial:
+                break;
+            // TODO: Handle this case.
+              case QuizListStatus.onSelectTag:
+                {
+                }
+                break;
+              default:
+                break;
+            // TODO: Handle this case.
+            }
+          },
+          builder: (BuildContext context, state) {
+            return MyResponsive(
+              builder: (context , boxConstraints , myScreenMediaType ) {
+                if(!myScreenMediaType.isMobile)
+                {
+                  return Layout(
+                      isScroll: false,
+                      title: Text(
+                         L10nX.getStr.quiz_list,
+                        style: TextStyleConstant.textStyleBlack18w600,
+                      ),
+                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
+                      child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
+                }
+                else
+                {
+                  return Layout(
+                      isScroll: false,
+                      title: Text(
+                        L10nX.getStr.quiz_str,
+                        style: TextStyleConstant.textStyleBlack18w600,
+                      ),
+                      child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
+                  );
+                }
+              },);
+      
+          },
+        ),
       ),
     );
   }
@@ -243,39 +249,44 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
                 ),
               ],
             ),
-            Row(
-              children: [
-                Gap(Dimens.size10),
-                Visibility(
-                  visible: constraints.maxWidth< 800,
-                  child: InkWell(
+            Visibility(
+              visible: UserManager().userContainPermission(permissionList: [
+                "quizs.post.create_question"
+              ]),
+              child: Row(
+                children: [
+                  Gap(Dimens.size10),
+                  Visibility(
+                    visible: constraints.maxWidth< 800,
+                    child: InkWell(
+                        onTap: () {
+                          QuestionCreateEditDetailPage(
+                            actionType: ActionType.create,
+                              callBack: () {
+                                BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
+              
+                              },
+                          ).show(context,);
+                        },
+                        child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
+                  ),
+                  Visibility(
+                    visible: constraints.maxWidth >800,
+                    child: ActionButton1(
+                      preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
+                      text: L10nX.getStr.add_new_str,
                       onTap: () {
                         QuestionCreateEditDetailPage(
                           actionType: ActionType.create,
                             callBack: () {
                               BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
-
-                            },
+                            }
                         ).show(context,);
                       },
-                      child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
-                ),
-                Visibility(
-                  visible: constraints.maxWidth >800,
-                  child: ActionButton1(
-                    preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
-                    text: L10nX.getStr.add_new_str,
-                    onTap: () {
-                      QuestionCreateEditDetailPage(
-                        actionType: ActionType.create,
-                          callBack: () {
-                            BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
-                          }
-                      ).show(context,);
-                    },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
@@ -332,7 +343,7 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
                       ))),
               GridColumn(
                   columnName: L10nX.getStr.question_str,
-                  minimumWidth: Dimens.size200,
+                  minimumWidth: Dimens.size150,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
@@ -390,7 +401,10 @@ class QuestionDataSource extends DataGridSource {
       return  DataGridRow(
           cells: [
             DataGridCell<Widget>(columnName: 'id', value: Text("$starIndex", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.question_str, value:Text(e.questionName??"", style: TextStyleConstant.textStyleBlack14w400,) ),
+            DataGridCell<Widget>(columnName: L10nX.getStr.question_str, value:Text(
+              e.questionName??"",
+              textAlign: TextAlign.start,
+              style: TextStyleConstant.textStyleBlack14w400,) ),
             DataGridCell<Widget>(columnName: L10nX.getStr.question_type, value: Text(L10nX().getStringByKey("${mapQuestionTypeToStrKey[e.questionType]??""}_type_str"), style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.score_str, value: Text((e.weightage??0).toString(), style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str,
@@ -399,6 +413,8 @@ class QuestionDataSource extends DataGridSource {
                   children: [
                     ItemViewEditDelete(
                       itemInfo: e,
+                      enableEditDelete: UserManager().userContainPermission(permissionList: ["quizs.delete.delete_question"]),
+                      enableEdit: UserManager().userContainPermission(permissionList: ["quizs.put.update_question"]),
                       onViewDetail: (p0) {
                         onViewDetail(p0);
                       },

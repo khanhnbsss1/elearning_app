@@ -16,12 +16,12 @@ class CourseInfo {
   String? infoResult;
   String? dayFrom;
   String? dayTo;
-  int? payment;
+  int? price;
   String? createdAt;
   String? updatedAt;
   String? createdBy;
   String? updatedBy;
-  int? ratePoint;
+  int? rating;
   String? durian;
   String? videoPreview;
   String? courseMode;
@@ -52,12 +52,12 @@ class CourseInfo {
         this.infoResult,
         this.dayFrom,
         this.dayTo,
-        this.payment,
+        this.price,
         this.createdAt,
         this.updatedAt,
         this.createdBy,
         this.updatedBy,
-        this.ratePoint,
+        this.rating,
         this.durian,
         this.videoPreview,
         this.courseMode,
@@ -89,12 +89,12 @@ class CourseInfo {
     infoResult = "";
     dayFrom = "";
     dayTo = "";
-    payment = 0;
+    price = 0;
     createdAt = "";
     updatedAt = "";
     createdBy = "";
     updatedBy = "";
-    ratePoint = 0;
+    rating = 0;
     durian = "";
     videoPreview = "";
     courseMode = "";
@@ -160,12 +160,12 @@ class CourseInfo {
       infoResult : infoResult ??this.infoResult,
       dayFrom : dayFrom ??this.dayFrom,
       dayTo : dayTo ??this.dayTo,
-      payment : payment ??this.payment,
+      price : payment ??this.price,
       createdAt : createdAt ??this.createdAt,
       updatedAt : updatedAt ??this.updatedAt,
       createdBy : createdBy ??this.createdBy,
       updatedBy : updatedBy ??this.updatedBy,
-      ratePoint : ratePoint ??this.ratePoint,
+      rating : ratePoint ??this.rating,
       durian : durian ??this.durian,
       videoPreview : ((videoPreview??'').isNotEmpty)? videoPreview: this.videoPreview,
       courseMode : courseMode ??this.courseMode,
@@ -200,12 +200,12 @@ class CourseInfo {
     infoResult = json.infoResult??infoResult;
     dayFrom = json.dayFrom??dayFrom;
     dayTo = json.dayTo??dayTo;
-    payment = json.payment??payment;
+    price = json.price??price;
     createdAt = json.createdAt??createdAt;
     updatedAt = json.updatedAt??updatedAt;
     createdBy = json.createdBy??createdBy;
     updatedBy = json.updatedBy??updatedBy;
-    ratePoint = json.ratePoint??ratePoint;
+    rating = json.rating??rating;
     durian = json.durian??durian;
     videoPreview = json.videoPreview??videoPreview;
     courseMode = json.courseMode??courseMode;
@@ -237,12 +237,12 @@ class CourseInfo {
     infoResult = json['info_result'];
     dayFrom = json['day_from'];
     dayTo = json['day_to'];
-    payment = json['payment'];
+    price = json['payment'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
-    ratePoint = json['rate_point'];
+    rating = json['rate_point'];
     durian = json['durian'];
     videoPreview = json['video_preview'];
     courseMode = json['course_mode'];
@@ -308,9 +308,9 @@ class CourseInfo {
     {
       data['day_to'] = dayTo??"";
     }*/
-    if((payment!=null))
+    if((price!=null))
     {
-      data['payment'] = payment??0;
+      data['payment'] = price??0;
     }
 /*    if((createdAt??"").isNotEmpty)
     {
@@ -328,9 +328,9 @@ class CourseInfo {
     {
       data['updated_by'] = updatedBy??"";
     }
-    if((ratePoint!=null))
+    if((rating!=null))
     {
-      data['rate_point'] = ratePoint??0;
+      data['rate_point'] = rating??0;
     }
     data['durian'] = (durian??"").isNotEmpty?(durian??""):'0';
 

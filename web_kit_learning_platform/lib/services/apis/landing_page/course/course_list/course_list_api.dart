@@ -3,7 +3,7 @@ import 'package:webkit/services/apis/landing_page/course/models/course_list_land
 
 class LandingPageCourseListApi extends BaseApiRequest {
   LandingPageCourseListApi():super(
-    serviceType: SERVICE_TYPE.COURSE,
+    serviceType: SERVICE_TYPE.LandingPages,
     apiName: ApiName.getInstance().getCourseListLandingPage,
   );
 

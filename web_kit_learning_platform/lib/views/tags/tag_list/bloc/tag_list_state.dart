@@ -21,7 +21,7 @@ class TagListState extends Equatable {
     this.selectTagInfo
   }){
     tagListResponseModel??= TagListResponseModel(content: []);
-    searchCommonRequest??= SearchCommonRequest(pageNumber: 0, pageSize: 10, keyword: "B");
+    searchCommonRequest??= SearchCommonRequest(pageNumber: 0, pageSize: 10, keyword: "");
   }
 
 
