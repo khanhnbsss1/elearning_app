@@ -43,7 +43,7 @@ class ApiName {
   final String deleteLesson = "/delete-lecture";
   final String updateLesson = "/update-lecture";
   final String getDetailLesson = "/get-detail";
-  final String linkLesson = "/update-lecture-course";
+  final String linkLesson = "/Link-lecture-course";
   final String unlinkLesson = "/unlink-lecture-course";
   final String getLessonList = "/get-list";
   

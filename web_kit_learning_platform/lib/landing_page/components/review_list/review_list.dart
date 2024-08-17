@@ -521,7 +521,7 @@ class _ReviewListState extends State<ReviewList>
                                           child: ReadMoreText(
                       ("\"${("${reviewLandingPageInfo.review!} ") * 20}\"") ?? "",
                       trimMode: TrimMode.Line,
-                      trimLines: 3,
+                      trimLines: 2,
                       colorClickableText: Colors.pink,
                       trimCollapsedText: L10nX.getStr.show_more,
                       trimExpandedText: L10nX.getStr.show_less,

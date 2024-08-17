@@ -32,50 +32,54 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
               children: [
                 SizedBox(
                   width: 200,
-                  child: Expanded(
-                    child: DropdownSearch<TagsInfo>(
-                      popupProps: PopupProps.menu(
-                        constraints: BoxConstraints(
-                          maxHeight: (65 + widget.allTags.length * 50 < 210) ? 65 + widget.allTags.length * 50 : 210,
-                        ),
-                        showSearchBox: true,
-                        searchDelay: Duration(seconds: 0),
-                        itemBuilder: (context, item, isSelected) {
-                          return ListTile(
-                            title: Text(item.name??'',style: TextStyleConstant.textStyleBlack14w400,),
-                          );
-                        },
-                        //showSelectedItems: true,
-                      ),
-                      items: widget.allTags,
-                      itemAsString: (item) => item.name??"",
-                      dropdownDecoratorProps: DropDownDecoratorProps(
-                        dropdownSearchDecoration: InputDecoration(
-                          hintText: 'Select tags',
-                          hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                          border: outlineInputBorder,
-                          prefixIcon: Icon(
-                            LucideIcons.book,
-                            size: 20,
-                            color: ColorConst.colorIconRed,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: DropdownSearch<TagsInfo>(
+                          popupProps: PopupProps.menu(
+                            constraints: BoxConstraints(
+                              maxHeight: (65 + widget.allTags.length * 50 < 210) ? 65 + widget.allTags.length * 50 : 210,
+                            ),
+                            showSearchBox: true,
+                            searchDelay: Duration(seconds: 0),
+                            itemBuilder: (context, item, isSelected) {
+                              return ListTile(
+                                title: Text(item.name??'',style: TextStyleConstant.textStyleBlack14w400,),
+                              );
+                            },
+                            //showSelectedItems: true,
                           ),
-                          contentPadding: MySpacing.all(16),
-                          isCollapsed: true,
-                          floatingLabelBehavior:
-                          FloatingLabelBehavior.never,
+                          items: widget.allTags,
+                          itemAsString: (item) => item.name??"",
+                          dropdownDecoratorProps: DropDownDecoratorProps(
+                            dropdownSearchDecoration: InputDecoration(
+                              hintText: 'Select tags',
+                              hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              prefixIcon: Icon(
+                                LucideIcons.book,
+                                size: 20,
+                                color: ColorConst.colorIconRed,
+                              ),
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                              floatingLabelBehavior:
+                              FloatingLabelBehavior.never,
+                            ),
+                          ),
+                          onChanged: (value) {
+                            if(value!=null && [...(widget.exitsTags??[]).where((element) {return element.id == value.id;},)].isEmpty)
+                              {
+                                setState(() {
+                                 // widget.exitsTags?.add(value);
+                                  widget.onAddTags(value);
+                              });
+                              }
+                      
+                            },
                         ),
                       ),
-                      onChanged: (value) {
-                        if(value!=null && [...(widget.exitsTags??[]).where((element) {return element.id == value.id;},)].isEmpty)
-                          {
-                            setState(() {
-                             // widget.exitsTags?.add(value);
-                              widget.onAddTags(value);
-                          });
-                          }
-
-                        },
-                    ),
+                    ],
                   ),
                 ),
                 SizedBox(width: 10,),

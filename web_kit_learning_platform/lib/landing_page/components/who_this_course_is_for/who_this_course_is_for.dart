@@ -238,7 +238,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                                         child: Text(
                                           L10nX.getStr
                                               .who_this_course_is_for_table_content_1,
-                                          style: TextStyleConstant.bodyLarge
+                                          style: TextStyleConstant.bodyMedium
                                               .copyWith(
                                             color: ColorConst.blackColor,
                                           ),
@@ -253,7 +253,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                                         child: Text(
                                           L10nX.getStr
                                               .who_this_course_is_for_table_content_2,
-                                          style: TextStyleConstant.bodyLarge
+                                          style: TextStyleConstant.bodyMedium
                                               .copyWith(
                                             color: ColorConst.blackColor,
                                           ),
@@ -364,7 +364,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                                         child: Text(
                                           L10nX.getStr
                                               .who_this_course_is_for_table_content_3,
-                                          style: TextStyleConstant.bodyLarge
+                                          style: TextStyleConstant.bodyMedium
                                               .copyWith(
                                             color: ColorConst.blackColor,
                                           ),
@@ -379,7 +379,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                                         child: Text(
                                           L10nX.getStr
                                               .who_this_course_is_for_table_content_4,
-                                          style: TextStyleConstant.bodyLarge
+                                          style: TextStyleConstant.bodyMedium
                                               .copyWith(
                                             color: ColorConst.blackColor,
                                           ),
@@ -490,7 +490,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                                         child: Text(
                                           L10nX.getStr
                                               .who_this_course_is_for_table_content_5,
-                                          style: TextStyleConstant.bodyLarge
+                                          style: TextStyleConstant.bodyMedium
                                               .copyWith(
                                             color: ColorConst.blackColor,
                                           ),
@@ -505,7 +505,7 @@ class _WhoThisCourseIsForState extends State<WhoThisCourseIsFor>
                                         child: Text(
                                           L10nX.getStr
                                               .who_this_course_is_for_table_content_6,
-                                          style: TextStyleConstant.bodyLarge
+                                          style: TextStyleConstant.bodyMedium
                                               .copyWith(
                                             color: ColorConst.blackColor,
                                           ),

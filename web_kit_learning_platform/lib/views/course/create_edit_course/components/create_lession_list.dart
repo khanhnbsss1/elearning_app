@@ -83,7 +83,6 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               buildSearchBar(state: state, context: context),
-              Gap(Dimens.size120),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical:  Dimens.size16),
@@ -414,6 +413,8 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                     ),                  );
                 },
                 displayAllSuggestionWhenTap: false,
+                keepSuggestionsOnSuggestionSelected: true,
+
               ),
             ),
             Gap(Dimens.size16),
