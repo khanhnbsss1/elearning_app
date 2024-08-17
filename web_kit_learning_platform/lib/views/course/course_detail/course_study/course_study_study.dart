@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/base/widgets/common/alert_dialog/loading.export.dart';
+import 'package:webkit/base/widgets/widgets.export.dart';
+import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/topic/model/topic_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
@@ -72,70 +74,88 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
               builder: (buildContext, boxConstraints, myScreenMediaType) {
                 return Scaffold(
                   key: _scaffoldKey,
+                  appBar: null,
                   backgroundColor: ColorConst.whiteColor,
-                  body: (_state.blocStatus != AddCourseStatus.onLoadingSelectLesson) ? Padding(
-                    padding: const EdgeInsets.only(top: 50),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  endDrawer: Container(
+                    decoration: BoxDecoration(
+                      color: ColorConst.whiteColor,
+                    ),
+                      constraints: BoxConstraints(
+                        minHeight: MediaQuery.of(context).size.height
+                      ),
+                      child: buildSubjectList()),
+                  body: (_state.blocStatus != AddCourseStatus.onLoadingSelectLesson) ?
+                  Padding(
+                    padding:  EdgeInsets.only(top: myScreenMediaType.isMobile?0:50),
+                    child: Stack(
                       children: [
-                        Expanded(
-                            child: Scrollbar(
-                              controller: studySectionScrollController,
-                              thickness: 10,
-                              trackVisibility: true,
-                              thumbVisibility: true,
-                              child: SingleChildScrollView(
-                                controller: studySectionScrollController,
-                                scrollDirection: Axis.vertical,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 14.0),
-                                  child: Column(
-                                    children: [
-                                      (_state.blocStatus != AddCourseStatus.onLoadingSelectLesson) ? buildStudySection() :
-                                      LoadingLogo(loadingType: LoadingType.loadOnPage,),
-                                      Visibility(
-                                        visible: boxConstraints.maxWidth <= 800,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(16),
-                                          child: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Text(L10nX.getStr.lesson_list, style: TextStyleConstant.textStyleBlack18w600,),
-                                                ],
-                                              ),
-                                              buildSubjectList(),
-                                            ],
-                                          ),
-                                        ),)
-                                    ],
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                                child: Scrollbar(
+                                  controller: studySectionScrollController,
+                                  thickness: 10,
+                                  trackVisibility: true,
+                                  thumbVisibility: true,
+                                  child: SingleChildScrollView(
+                                    controller: studySectionScrollController,
+                                    scrollDirection: Axis.vertical,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(right: 14.0),
+                                      child: Column(
+                                        children: [
+                                          (_state.blocStatus != AddCourseStatus.onLoadingSelectLesson) ? 
+                                          buildStudySection() :
+                                          LoadingLogo(loadingType: LoadingType.loadOnPage,),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            )),
+                                )),
+                            Visibility(
+                                visible: boxConstraints.maxWidth > 800,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          left: BorderSide(
+                                              color: ColorConst.blackColor,
+                                              width: 0.2
+                                          ))
+                                  ),
+                                  padding: EdgeInsets.only(left: 0, top: 0),
+                                  constraints: BoxConstraints(
+                                      minHeight: MediaQuery.of(context).size.height
+                                  ),
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        buildSubjectList(),
+                                      ],
+                                    ),
+                                  ),
+                                )),
+                          ],
+                        ),
                         Visibility(
-                            visible: boxConstraints.maxWidth > 800,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border(
-                                    left: BorderSide(
-                                  color: ColorConst.blackColor,
-                                  width: 0.2
-                                ))
-                              ),
-                              padding: EdgeInsets.only(left: 0, top: 0),
-                              constraints: BoxConstraints(
-                                minHeight: MediaQuery.of(context).size.height
-                              ),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    buildSubjectList(),
-                                  ],
+                          visible: boxConstraints.maxWidth < 800,
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: InkWell(
+                              onTap: () {
+                                _scaffoldKey.currentState!.openEndDrawer();
+                                },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: ColorConst.colorIconRed,
+                                  borderRadius: BorderRadius.circular(Dimens.size16)
                                 ),
+                                padding: EdgeInsets.all(Dimens.size16),
+                                child: Icon(Icons.list, color: ColorConst.whiteColor,),
                               ),
-                            )),
+                            ),
+                          ),
+                        )
                       ],
                     ),
                   ) : LoadingLogo(loadingType: LoadingType.loadOnPage,),
@@ -153,7 +173,6 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Gap(Dimens.size10),
           Column(
             children: [
               buildVideo(),
@@ -237,6 +256,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
       width: Dimens.size400,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(0),
+        color: ColorConst.whiteColor
       ),
       padding: EdgeInsets.zero,
       child: RawScrollbar(
@@ -254,9 +274,9 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                Padding(
                  padding: EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size16),
                  child: Text(L10nX.getStr.lesson_list,
-                        style: TextStyleConstant.textStyleBlack14w500),
+                        style: TextStyleConstant.textStyleBlack14w600),
                ),
-              Divider(color: ColorConst.blackColor,thickness: 0.2,),
+              Divider(color: ColorConst.blackColor,thickness: 0.1,),
               ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
@@ -859,7 +879,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   Widget buildQuiz() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children:  [
         SizedBox(
           height: 30,
         ),
@@ -867,7 +887,8 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           height: 30,
         ),
         Text(
-          'Quiz: ', style: TextStyle(
+          L10nX.getStr.test_str,
+          style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.red,
           ),

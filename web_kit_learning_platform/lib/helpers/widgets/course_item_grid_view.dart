@@ -80,8 +80,8 @@ class CourseItemGridView extends StatelessWidget {
                                             child: ClipRRect(
                                                 borderRadius: BorderRadius.circular(16),
                                                 child: Image.network(
-                                                  courseInfo.image!.isNotEmpty
-                                                      ? courseInfo.image!
+                                                  (courseInfo.image??'').isNotEmpty
+                                                      ? (courseInfo.image??"")
                                                       : 'assets/deshboard/adventure/adventure5.png',
                                                   fit: BoxFit.cover,
                                                   //height: 120,

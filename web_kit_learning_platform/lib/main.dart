@@ -109,6 +109,7 @@ class MyApp extends StatelessWidget {
       },
       builder: (BuildContext context, state)  {
         return GetMaterialApp(
+          title: "YAX Chinese",
           key: Key(LanguageHelper().getCurrentLocale().languageCode),
           useInheritedMediaQuery: true,
           scrollBehavior: ScrollConfiguration.of(context).copyWith(
