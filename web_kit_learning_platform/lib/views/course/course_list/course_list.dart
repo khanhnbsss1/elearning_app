@@ -39,9 +39,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
   ScrollController scrollController = ScrollController();
   TextEditingController editingController = TextEditingController();
   
-  List<String>permission =[ 
-    "courses.get.get_course_detail",
-    "courses.get.get_filter_directory",
+  List<String>permission =[
     "courses.post.get_courses_home",
     "courses.post.get_my_course",
     "courses.post.search_course"
@@ -85,7 +83,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                             state.courseType == CourseType.courseList ? L10nX.getStr.courses_list : L10nX.getStr.your_course,
                             style: TextStyleConstant.textStyleBlack18w600,
                           ),
-                          padding: EdgeInsets.only(top: 45 +16),
+                          padding: EdgeInsets.only(top: Dimens.size45 +Dimens.size16),
                           child: Container(
                             decoration: BoxDecoration(
                               color: ColorConst.whiteColor,
@@ -104,7 +102,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                 bottom: BorderSide(color: ColorConst.dividerColor, width: 0.2)
                                             )
                                         ),
-                                        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                                        padding: EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
                                         child: LayoutBuilder(builder: (context, constraints) {
                                           return  Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,7 +114,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                   Container(
                                                     //height: Dimens.size40,
                                                     constraints: BoxConstraints(
-                                                        maxWidth:  constraints.maxWidth> 800?400:250
+                                                        maxWidth:  constraints.maxWidth> Dimens.size800?Dimens.size400:Dimens.size250
                                                     ),
                                                     child: Form(
                                                       key: formKey,
@@ -141,21 +139,21 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                                   fillColor: ColorConst.whiteColor,
                                                                   filled: true,
                                                                   hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                                                                  border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                                                  enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                                                  focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                                                  border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                                                  enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                                                  focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
                                                                   prefixIcon: const Align(
                                                                       alignment: Alignment.center,
                                                                       child: Icon(
                                                                         LucideIcons.search,
                                                                         size: 14,
                                                                       )),
-                                                                  prefixIconConstraints: const BoxConstraints(
-                                                                      minWidth: 36,
-                                                                      maxWidth: 36,
-                                                                      minHeight: 32,
-                                                                      maxHeight: 32),
-                                                                  contentPadding: MySpacing.xy(16, 12),
+                                                                  prefixIconConstraints:  BoxConstraints(
+                                                                      minWidth: Dimens.size36,
+                                                                      maxWidth: Dimens.size36,
+                                                                      minHeight: Dimens.size32,
+                                                                      maxHeight: Dimens.size32),
+                                                                  contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
                                                                   //isCollapsed: true,
                                                                   floatingLabelBehavior: FloatingLabelBehavior.auto),
                                                             ),
@@ -176,10 +174,10 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                   ),
                                                   Gap(Dimens.size16),
                                                   Visibility(
-                                                    visible: constraints.maxWidth> 800,
+                                                    visible: constraints.maxWidth> Dimens.size800,
                                                     child: ActionButton1(
                                                       text: L10nX.getStr.search,
-                                                      radius: 16,
+                                                      radius: Dimens.size16,
 
                                                       onTap: () {
                                                         BlocProvider.of<CourseListBloc>(context)
@@ -187,7 +185,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                     ),
                                                   ),
                                                   Visibility(
-                                                    visible: constraints.maxWidth< 800,
+                                                    visible: constraints.maxWidth< Dimens.size800,
                                                     child: InkWell(
                                                         onTap: () {
                                                           BlocProvider.of<CourseListBloc>(context)
@@ -205,7 +203,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                   children: [
                                                     Gap(Dimens.size10),
                                                     Visibility(
-                                                      visible: constraints.maxWidth< 800,
+                                                      visible: constraints.maxWidth< Dimens.size800,
                                                       child: InkWell(
                                                           onTap: () {
                                                             CreateEditCourse(
@@ -215,7 +213,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                           child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
                                                     ),
                                                     Visibility(
-                                                      visible: constraints.maxWidth >800,
+                                                      visible: constraints.maxWidth >Dimens.size800,
                                                       child: ActionButton1(
                                                         preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
                                                         text: L10nX.getStr.add_new_str,
@@ -237,7 +235,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                           ? Expanded(child: buildCourseList(state: state, boxConstraints: boxConstraints))
                                           : Expanded(child: buildCourseList(state: state, boxConstraints: boxConstraints)),
                                       SizedBox(
-                                        height: 8,
+                                        height:Dimens.size8,
                                       ),
                                     ],
                                   ),
@@ -285,7 +283,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
 
   Widget buildCourseList({required CourseListState state, required BoxConstraints boxConstraints}) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding:  EdgeInsets.all(Dimens.size8),
       child: LayoutBuilder(
         builder: (context, constraints) {
           switch (state.blocStatus) {
@@ -307,15 +305,15 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                       builder: (BuildContext context, BoxConstraints constraints) {
                         List<Widget> listOfCourse = List.empty(growable: true);
                         bool? enableEdit = state.courseType == CourseType.courseList;
-                        double maxWidthItem = 260;
-                        double heightOfItem = 240;
-                        int numberRow = (constraints.maxWidth ~/ (maxWidthItem + 10));
+                        double maxWidthItem = Dimens.size260;
+                        double heightOfItem = Dimens.size240;
+                        int numberRow = (constraints.maxWidth ~/ (maxWidthItem + Dimens.size10));
                         double widthItem = maxWidthItem;
-                        double crossAxisSpacing = (constraints.maxWidth - numberRow * (maxWidthItem + 10)) / numberRow;
-                        if (crossAxisSpacing > 40) {
-                          crossAxisSpacing = 40;
-                        } else if (crossAxisSpacing <= 20) {
-                          crossAxisSpacing = 20;
+                        double crossAxisSpacing = (constraints.maxWidth - numberRow * (maxWidthItem + Dimens.size10)) / numberRow;
+                        if (crossAxisSpacing > Dimens.size30) {
+                          crossAxisSpacing = Dimens.size30;
+                        } else if (crossAxisSpacing <= Dimens.size20) {
+                          crossAxisSpacing = Dimens.size20;
                         }
                         for (CourseInfo courseInfo in state.courseResponseModel?.content ?? []) {
                           listOfCourse.add(CourseItemGridView(
@@ -346,7 +344,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                           alignment: Alignment.topLeft,
                           child: Scrollbar(
                             controller: scrollController,
-                            thickness: ResponsiveInfo.isPhone() ? 5 : 15,
+                            thickness: ResponsiveInfo.isPhone() ? Dimens.size5 : Dimens.size15,
                             radius: Radius.circular(0),
                             child: Row(
                               children: [
@@ -355,12 +353,12 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                       alignment: Alignment.topCenter,
                                       child: numberRow > 1
                                           ? Padding(
-                                              padding: EdgeInsets.only(top: 16.0, left: crossAxisSpacing / 2, right: crossAxisSpacing / 2),
+                                              padding: EdgeInsets.only(top: Dimens.size16, left: crossAxisSpacing / 2, right: crossAxisSpacing / 2),
                                               child: GridView.count(
                                                 controller: scrollController,
                                                 crossAxisSpacing: crossAxisSpacing,
                                                 childAspectRatio: (widthItem) / (heightOfItem),
-                                                mainAxisSpacing: 16,
+                                                mainAxisSpacing: Dimens.size16,
                                                 crossAxisCount: numberRow,
                                                 shrinkWrap: true,
                                                 children: listOfCourse,
@@ -372,7 +370,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                               itemCount: listOfCourse.length,
                                               itemBuilder: (context, index) {
                                                 return Padding(
-                                                  padding: const EdgeInsets.all(8.0),
+                                                  padding:  EdgeInsets.all(Dimens.size0),
                                                   child: listOfCourse.elementAt(index),
                                                 );
                                               },

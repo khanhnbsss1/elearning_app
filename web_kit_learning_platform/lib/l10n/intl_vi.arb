@@ -590,5 +590,11 @@
   "user_str": "Người dùng",
   "entrance_test_str": "Bài test đầu vào",
   "output_test_str": "Bài test đầu ra",
-  "right_answer": "Đáp án chính xác"
+  "right_answer": "Đáp án chính xác",
+  "edit_landing_page": "Chỉnh sửa landingpage",
+  "home_str":"Trang chủ",
+  "method_str":"Phương pháp",
+  "instructor_str":"Giảng viên",
+  "feelings_str":"Cảm xúc",
+  "achievements_str":"Thành tích"
 }

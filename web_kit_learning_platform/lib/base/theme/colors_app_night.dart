@@ -8,7 +8,7 @@ class ColorNightConst{
   static Color primaryColor = const Color(0xF4930202);
   static Color mainColor = primaryColor;
   static Color mainColorWithOpacity50 = mainColor.withOpacity(0.5);
-  static Color iconColor = const Color(0xF4930202);
+  static Color iconColor = primaryColor;
 
   static Color buttonbgColor = primaryColor;
   static Color homeBg =  const Color(0xffBDE3BF);
@@ -19,6 +19,8 @@ class ColorNightConst{
 
   static Color buttonColor =  const Color(0xff17721A);
   static Color textColor =   Colors.white;
+  static Color textColorOnMainColor =  const Color(0xFFFFFF00);
+
   static Color subtext = Colors.white;
   static Color shadowColor =  const Color(0xffE4EBE4);
   static Color borderColor =  const Color(0xffCFCFCF);
@@ -81,7 +83,7 @@ class ColorNightConst{
           primaryColor = const Color(0xF4930202);
           mainColor = primaryColor;
           mainColorWithOpacity50 = mainColor.withOpacity(0.5);
-          iconColor = const Color(0xF4930202);
+          iconColor =primaryColor;
           
 
           buttonbgColor = primaryColor;
@@ -90,7 +92,7 @@ class ColorNightConst{
           bgColor2 =  Colors.white24;
 
           textColorOnMainButton = Colors.black87;
-
+          textColorOnMainColor =  const Color(0xFFFFFF00);
           buttonColor =  const Color(0xff17721A);
           textColor =   Colors.white;
           subtext = Colors.white;

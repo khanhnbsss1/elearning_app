@@ -4,6 +4,7 @@
 * */
 
 import 'package:flutter/material.dart';
+import 'package:webkit/base/base.export.dart';
 
 import 'theme_customizer.dart';
 
@@ -41,20 +42,30 @@ enum ContentThemeColor {
 }
 
 class LeftBarTheme {
-  final Color background, onBackground;
-  final Color labelColor;
-  final Color activeItemColor, activeItemBackground;
+   Color? background;
+   Color?onBackground;
+   Color ?labelColor;
+   Color ?activeItemColor;
+   Color?activeItemBackground;
 
   LeftBarTheme({
-    this.background = const Color(0xffffffff),
-    this.onBackground = const Color(0xff313a46),
-    this.labelColor = const Color(0xff6c757d),
-    this.activeItemColor = const Color(0xff3874ff),
+    this.background,
+    this.onBackground ,
+    this.labelColor,
+    this.activeItemColor,
     // this.activeItemColor = const Color(0xff006784),
-    this.activeItemBackground = const Color(0x153874ff),
+    this.activeItemBackground ,
 
     // this.activeItemBackground = const Color(0x14006784),
-  });
+  }){
+    background = ColorConst.whiteColor;
+    onBackground =ColorConst.whiteColor;
+    labelColor = const Color(0xff6c757d);
+    activeItemColor = ColorConst.textColorOnMainColor;
+    activeItemBackground = const Color(0x153874ff);
+
+    // this.activeItemBackground = const Color(0x14006784),
+  }
 
   //--------------------------------------  Left Bar Theme ----------------------------------------//
 

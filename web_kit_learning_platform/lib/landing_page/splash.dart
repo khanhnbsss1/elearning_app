@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 
 import 'components/colornotifier.dart';
-import 'deshboard/deshboard.dart';
+import 'deshboard/landing_page.dart';
 
 class LandingPageSplash extends StatefulWidget {
   const LandingPageSplash({super.key});

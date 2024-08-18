@@ -5879,6 +5879,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Edit landing page`
+  String get edit_landing_page {
+    return Intl.message(
+      'Edit landing page',
+      name: 'edit_landing_page',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Home`
+  String get home_str {
+    return Intl.message(
+      'Home',
+      name: 'home_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Method`
+  String get method_str {
+    return Intl.message(
+      'Method',
+      name: 'method_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Instructor`
+  String get instructor_str {
+    return Intl.message(
+      'Instructor',
+      name: 'instructor_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Feelings`
+  String get feelings_str {
+    return Intl.message(
+      'Feelings',
+      name: 'feelings_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Achievements`
+  String get achievements_str {
+    return Intl.message(
+      'Achievements',
+      name: 'achievements_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

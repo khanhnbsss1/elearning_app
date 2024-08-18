@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/landing_page/deshboard/deshboard.dart';
+import 'package:webkit/landing_page/deshboard/landing_page.dart';
 
 import '../mediaquery/mq.dart';
 import 'colornotifier.dart';

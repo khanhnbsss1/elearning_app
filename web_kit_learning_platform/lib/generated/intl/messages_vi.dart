@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Khóa học đi kèm"),
         "account": MessageLookupByLibrary.simpleMessage("Ta khoản"),
         "account_text": MessageLookupByLibrary.simpleMessage("Tài khoản"),
+        "achievements_str": MessageLookupByLibrary.simpleMessage("Thành tích"),
         "action": MessageLookupByLibrary.simpleMessage("Hành động"),
         "action_str": MessageLookupByLibrary.simpleMessage("Hành động"),
         "actions": MessageLookupByLibrary.simpleMessage("Hành động"),
@@ -208,6 +209,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "duration_str": MessageLookupByLibrary.simpleMessage("Thời lượng"),
         "easy_str": MessageLookupByLibrary.simpleMessage("Dễ"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("Thương mại điện tử"),
+        "edit_landing_page":
+            MessageLookupByLibrary.simpleMessage("Chỉnh sửa landingpage"),
         "edit_lesson_str":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa bài học"),
         "edit_str": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
@@ -233,6 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "examples_str": MessageLookupByLibrary.simpleMessage("Ví dụ"),
         "extra_pages": MessageLookupByLibrary.simpleMessage("Trang bổ sung"),
         "faqs": MessageLookupByLibrary.simpleMessage("Câu hỏi thường gặp"),
+        "feelings_str": MessageLookupByLibrary.simpleMessage("Cảm xúc"),
         "filled": MessageLookupByLibrary.simpleMessage("Lấp đầy"),
         "finish": MessageLookupByLibrary.simpleMessage("Kết thúc"),
         "first_name": MessageLookupByLibrary.simpleMessage("Tên"),
@@ -266,6 +270,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "header_popup_fingerprint": MessageLookupByLibrary.simpleMessage(
             "Xác thực vân tay của bạn để đăng nhập"),
         "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
+        "home_str": MessageLookupByLibrary.simpleMessage("Trang chủ"),
         "how_long_does_the_course_last_str":
             MessageLookupByLibrary.simpleMessage("Khóa học kéo dài bao lâu?"),
         "i_agree_with": MessageLookupByLibrary.simpleMessage("Tôi đồng ý với "),
@@ -278,6 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "image_type_str": MessageLookupByLibrary.simpleMessage("Hình ảnh"),
         "infinite": MessageLookupByLibrary.simpleMessage("Vô hạn"),
         "info": MessageLookupByLibrary.simpleMessage("Thông tin"),
+        "instructor_str": MessageLookupByLibrary.simpleMessage("Giảng viên"),
         "introduction_str": MessageLookupByLibrary.simpleMessage("Giới thiệu"),
         "landing_page": MessageLookupByLibrary.simpleMessage("Landing page"),
         "language_text": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
@@ -338,6 +344,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Phương pháp Emotional Chinese"),
         "medthod_title6": MessageLookupByLibrary.simpleMessage(
             "Phương pháp Emotional Chinese"),
+        "method_str": MessageLookupByLibrary.simpleMessage("Phương pháp"),
         "more": MessageLookupByLibrary.simpleMessage("Thêm"),
         "more_inputs": MessageLookupByLibrary.simpleMessage("Thêm đầu vào"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),

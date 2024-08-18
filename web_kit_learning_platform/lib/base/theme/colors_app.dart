@@ -11,6 +11,8 @@ class ColorConst{
   static bool? isDarkMode;
   static Color backGroundColor = getLightMode()?ColorLightConst.backGroundColor:ColorNightConst.backGroundColor;
   static Color primaryColor = getLightMode()?ColorLightConst.primaryColor:ColorNightConst.primaryColor;
+  static Color textColorOnMainColor = getLightMode()?ColorLightConst.textColorOnMainColor:ColorNightConst.textColorOnMainColor;
+
   static Color mainColor = primaryColor;
   static Color mainColorWithOpacity50 = mainColor.withOpacity(0.5);
   static Color iconColor = getLightMode()?ColorLightConst.iconColor:ColorNightConst.iconColor;
@@ -95,6 +97,7 @@ class ColorConst{
     textColorOnMainButton =   getLightMode()?ColorLightConst.textColorOnMainButton:ColorNightConst.textColorOnMainButton;
     buttonColor =  getLightMode()?ColorLightConst.buttonColor:ColorNightConst.buttonColor;
     textColor =   getLightMode()?ColorLightConst.textColor:ColorNightConst.textColor;
+    textColorOnMainColor = getLightMode()?ColorLightConst.textColorOnMainColor:ColorNightConst.textColorOnMainColor;
     subtext = getLightMode()?ColorLightConst.subtext:ColorNightConst.subtext;
     shadowColor =  getLightMode()?ColorLightConst.shadowColor:ColorNightConst.shadowColor;
     borderColor =  getLightMode()?ColorLightConst.borderColor:ColorNightConst.borderColor;

@@ -29,6 +29,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Accompany course"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
         "account_text": MessageLookupByLibrary.simpleMessage("Account"),
+        "achievements_str":
+            MessageLookupByLibrary.simpleMessage("Achievements"),
         "action": MessageLookupByLibrary.simpleMessage("Action"),
         "action_str": MessageLookupByLibrary.simpleMessage("Action"),
         "actions": MessageLookupByLibrary.simpleMessage("Actions"),
@@ -213,6 +215,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "duration_str": MessageLookupByLibrary.simpleMessage("Duration"),
         "easy_str": MessageLookupByLibrary.simpleMessage("Easy"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("Ecommerce"),
+        "edit_landing_page":
+            MessageLookupByLibrary.simpleMessage("Edit landing page"),
         "edit_lesson_str":
             MessageLookupByLibrary.simpleMessage("Edit a lesson"),
         "edit_str": MessageLookupByLibrary.simpleMessage("Edit"),
@@ -238,6 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "examples_str": MessageLookupByLibrary.simpleMessage("Examples"),
         "extra_pages": MessageLookupByLibrary.simpleMessage("Extra pages"),
         "faqs": MessageLookupByLibrary.simpleMessage("FAQs"),
+        "feelings_str": MessageLookupByLibrary.simpleMessage("Feelings"),
         "filled": MessageLookupByLibrary.simpleMessage("Filled"),
         "finish": MessageLookupByLibrary.simpleMessage("Finish"),
         "first_name": MessageLookupByLibrary.simpleMessage("First name"),
@@ -270,6 +275,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "header_popup_fingerprint": MessageLookupByLibrary.simpleMessage(
             "Verify your fingerprint to log in"),
         "home": MessageLookupByLibrary.simpleMessage("Home"),
+        "home_str": MessageLookupByLibrary.simpleMessage("Home"),
         "how_long_does_the_course_last_str":
             MessageLookupByLibrary.simpleMessage(
                 "How long does the course last?"),
@@ -282,6 +288,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "image_type_str": MessageLookupByLibrary.simpleMessage("Image"),
         "infinite": MessageLookupByLibrary.simpleMessage("Infinite"),
         "info": MessageLookupByLibrary.simpleMessage("Info"),
+        "instructor_str": MessageLookupByLibrary.simpleMessage("Instructor"),
         "introduction_str":
             MessageLookupByLibrary.simpleMessage("Introduction"),
         "landing_page": MessageLookupByLibrary.simpleMessage("Landing page"),
@@ -341,6 +348,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "medthod_title6":
             MessageLookupByLibrary.simpleMessage("Emotional Chinese Method"),
         "messages": MessageLookupByLibrary.simpleMessage("Messages"),
+        "method_str": MessageLookupByLibrary.simpleMessage("Method"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "more_inputs": MessageLookupByLibrary.simpleMessage("More inputs"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),

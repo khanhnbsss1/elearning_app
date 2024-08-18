@@ -62,21 +62,21 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
       ),
       child: MyCard(
         paddingAll: 0,
-        color: ColorConst.whiteColor,
+        color: ColorConst.mainColor,
         shadow: MyShadow(position: MyShadowPosition.centerRight, elevation: 0.2),
         child: AnimatedContainer(
-          color: leftBarTheme.background,
-          width: ThemeCustomizer().leftBarCondensed ? 70 : 250,
+          color: ColorConst.mainColor,//leftBarTheme.background,
+          width: ThemeCustomizer().leftBarCondensed ? Dimens.size70 : Dimens.size250,
           curve: Curves.easeOut,
           duration: const Duration(milliseconds: 200),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 60,
+                height: Dimens.size60,
                 // padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 24.0),
+                  padding:  EdgeInsets.only(left: Dimens.size24),
                   child: InkWell(
                     onTap: () {
                       AppPages.routeName(Routes.dashboardRoute);
@@ -91,25 +91,21 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                           },
                           child: Visibility(
                               //visible: MediaQuery.of(context).size.width > 550,
-                              child: Icon(Icons.menu, size: 20,)
+                              child: Icon(Icons.menu, size: Dimens.size20,color: ColorConst.whiteColor,)
                           ),
                         ),
                         Visibility(
                           visible: !ThemeCustomizer().leftBarCondensed,
-                          child: SizedBox(
-                            //height: Dimens.size30,
-                            width: Dimens.size60,
-                            child:  StaticView.buildLogo(),
-                          ),
+                          child: StaticView.buildLogo(),
                         ),
-                        const SizedBox(width: 5),
+                         SizedBox(width: Dimens.size5),
                         Expanded(
                           child: Visibility(
                             visible: !ThemeCustomizer().leftBarCondensed,
                             child: Text(L10nX.getStr.app_name,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyleConstant.textStyleBlack16w600,
+                              style: TextStyleConstant.textStyleBlack16w600.copyWith(color: ColorConst.whiteColor),
                             ),
                           ),
                         ),
@@ -136,16 +132,29 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       iconData: Icons.library_books,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
                       title: L10nX.getStr.course_str,
+                      permission: const [
+                        "courses.post.get_courses_home",
+                        "courses.post.get_my_course",
+                        "courses.post.search_course"
+                      ],
                       children: [
                         MenuItem(
                           title: L10nX.getStr.your_course,
                           route:  Routes.courseMyList,
                           isCondensed: ThemeCustomizer().leftBarCondensed,
+                          permission: const [
+                            "courses.post.get_my_course",
+                            "courses.post.search_course"
+                          ],
                         ),
                         MenuItem(
                           title: L10nX.getStr.courses_list,
                           route:  Routes.courseList,
                           isCondensed: ThemeCustomizer().leftBarCondensed,
+                          permission: const [
+                            "courses.post.get_courses_home",
+                            "courses.post.search_course"
+                          ],
                         ),
                       ],
                     ),
@@ -172,52 +181,61 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       iconData: Icons.people,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
                       title: L10nX.getStr.user_str,
+                      permission: const [
+                        "users.get.get_user_list"
+                      ],
                       children: [
                         MenuItem(
                           title: L10nX.getStr.student_list,
                           route:  Routes.studentList,
                           isCondensed: ThemeCustomizer().leftBarCondensed,
+                          permission: const [
+                            "users.get.get_user_list"
+                          ],
                         ),
                         MenuItem(
                           title: L10nX.getStr.teacher_str,
                           route:  Routes.teacherList,
                           isCondensed: ThemeCustomizer().leftBarCondensed,
+                          permission: const ["users.get.get_user_list"],
                         ),
                       ],
                     ),
                     //-----------------Danh sach hoc liệu-----------------//
-                    MenuWidget(
+                    NavigationItem(
                       iconData: Icons.library_books_rounded,
-                      isCondensed: ThemeCustomizer().leftBarCondensed,
                       title: L10nX.getStr.document_str,
-                      children: [
-                        MenuItem(
-                          title: L10nX.getStr.document_list,
-                          route:  Routes.calenderRoute,
-                          isCondensed: ThemeCustomizer().leftBarCondensed,
-                        ),
-                        MenuItem(
-                          title: L10nX.getStr.create_document,
-                          route:  Routes.calenderRoute,
-                          isCondensed: ThemeCustomizer().leftBarCondensed,
-                        ),
+                      route: Routes.lessonList,
+                      isCondensed: ThemeCustomizer().leftBarCondensed,
+                      permission: const [
+                        "documents.get.getlist"
                       ],
+                      onPress: () {
+                        setState(() {
+                          ThemeCustomizer().leftBarCondensed= true;
+                        });
+                      },
                     ),
                     //----------------Tu vung Khoa hoc------------------//
                     MenuWidget(
                       iconData: CupertinoIcons.book_solid,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
                       title: L10nX.getStr.vocabulary_str,
+                      permission: const ["vocabulary.get.getlist",],
                       children: [
                         MenuItem(
                           title: L10nX.getStr.lesson_str,
                           route:  Routes.vocabularyListNoImage,
                           isCondensed: ThemeCustomizer().leftBarCondensed,
+                          permission: const ["vocabulary.get.getlist",],
+
                         ),
                         MenuItem(
                           title: L10nX.getStr.simplified_str,
                           route:  Routes.vocabularyListImage,
                           isCondensed: ThemeCustomizer().leftBarCondensed,
+                          permission: const ["vocabulary.get.getlist",],
+
                         ),
                       ],
                     ),
@@ -227,6 +245,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       title: L10nX.getStr.lesson_list,
                       route: Routes.lessonList,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
+                      permission: const ["lectures.post.get_list",],
                       onPress: () {
                         setState(() {
                           ThemeCustomizer().leftBarCondensed= true;
@@ -239,6 +258,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       title: L10nX.getStr.tags,
                       route: Routes.tagList,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
+                      permission: ["tags.get.get_tags"],
                       onPress: () {
                         setState(() {
                           ThemeCustomizer().leftBarCondensed= true;
@@ -251,6 +271,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       title: L10nX.getStr.test_str,
                       route: Routes.testList,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
+                      permission: ["tests.post.create_create_test"],
                       onPress: () {
                         setState(() {
                           ThemeCustomizer().leftBarCondensed= true;
@@ -263,6 +284,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       title: L10nX.getStr.quiz_str,
                       route: Routes.quizList,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
+                      permission: const ["quizs.get.get_courses",],
                       onPress: () {
                         setState(() {
                           ThemeCustomizer().leftBarCondensed= true;
@@ -270,16 +292,22 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       },
                     ),
                     //----------------Landing Page------------------//
-                    NavigationItem(
+                    MenuWidget(
                       iconData: LucideIcons.planeLanding,
-                      title: L10nX.getStr.landing_page,
-                      route: Routes.landingPageRoute,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
-                      onPress: () {
-                        setState(() {
-                          ThemeCustomizer().leftBarCondensed= true;
-                        });
-                      },
+                      title: L10nX.getStr.landing_page,
+                      children: [
+                        MenuItem(
+                          title: L10nX.getStr.landing_page,
+                          route:  Routes.uiLandingRoute,
+                          isCondensed: ThemeCustomizer().leftBarCondensed,
+                        ),
+                        MenuItem(
+                          title: L10nX.getStr.edit_landing_page,
+                          route:  Routes.landingPageRoute,
+                          isCondensed: ThemeCustomizer().leftBarCondensed,
+                        ),
+                      ],
                     ),
                     //-----------------CALENDAR-----------------//
                     Visibility(
@@ -775,13 +803,14 @@ class MenuWidget extends StatefulWidget {
   final bool isCondensed;
   final bool active;
   final List<MenuItem> children;
-
+  final List<String>? permission;
   const MenuWidget(
       {super.key,
       required this.iconData,
       required this.title,
       this.isCondensed = false,
-      this.active = false,
+      this.active = false, 
+        this.permission,
       this.children = const []});
 
   @override
@@ -841,7 +870,9 @@ class _MenuWidgetState extends State<MenuWidget>
   Widget build(BuildContext context) {
     // var route = Uri.base.fragment;
     // isActive = widget.children.any((element) => element.route == route);
-
+    if(!UserManager().userContainPermission(permissionList: widget.permission??[])) {
+      return SizedBox();
+    }
     if (ThemeCustomizer().leftBarCondensed) {
       return CustomPopupMenu(
         backdrop: true,
@@ -875,14 +906,14 @@ class _MenuWidgetState extends State<MenuWidget>
                 color: (isHover || isActive)
                     ? leftBarTheme.activeItemColor
                     : leftBarTheme.onBackground,
-                size: 20,
+                size: Dimens.size20,
               ),
             ),
           ),
         ),
         menuBuilder: (_) => MyContainer.bordered(
-          paddingAll: 8,
-          width: 190,
+          paddingAll: Dimens.size8,
+          width: Dimens.size190,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
@@ -923,24 +954,24 @@ class _MenuWidgetState extends State<MenuWidget>
                   turns: _iconTurns,
                   child: Icon(
                     LucideIcons.chevronDown,
-                    size: 18,
+                    size: Dimens.size18,
                     color: leftBarTheme.onBackground,
                   ),
                 ),
                 iconColor: leftBarTheme.activeItemColor,
-                childrenPadding: MySpacing.x(12),
+                childrenPadding: MySpacing.x(Dimens.size12),
                 title: Row(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(
                       widget.iconData,
-                      size: 20,
+                      size: Dimens.size20,
                       color: isHover || isActive
                           ? leftBarTheme.activeItemColor
                           : leftBarTheme.onBackground,
                     ),
-                    MySpacing.width(18),
+                    MySpacing.width(Dimens.size18),
                     Expanded(
                       child:
                       Text(
@@ -983,6 +1014,7 @@ class MenuItem extends StatefulWidget {
   final String title;
   final bool isCondensed;
   final String? route;
+  final List<String>? permission;
 
   const MenuItem({
     super.key,
@@ -990,6 +1022,7 @@ class MenuItem extends StatefulWidget {
     required this.title,
     this.isCondensed = false,
     this.route,
+    this.permission
   });
 
   @override
@@ -1002,6 +1035,9 @@ class _MenuItemState extends State<MenuItem> with UIMixin {
   @override
   Widget build(BuildContext context) {
     bool isActive = UrlService.getCurrentUrl() == widget.route;
+    if(!UserManager().userContainPermission(permissionList: widget.permission??[])) {
+      return SizedBox();
+    }
     return GestureDetector(
       onTap: () {
         if (widget.route != null) {
@@ -1055,14 +1091,15 @@ class NavigationItem extends StatefulWidget {
   final bool isCondensed;
   final String? route;
   final void Function()? onPress;
-
+  final List<String>? permission;
   const NavigationItem(
       {super.key,
       this.iconData,
       required this.title,
       this.isCondensed = false,
       this.route,
-        this.onPress
+        this.onPress,
+        this.permission
       });
 
   @override
@@ -1075,6 +1112,9 @@ class _NavigationItemState extends State<NavigationItem> with UIMixin {
   @override
   Widget build(BuildContext context) {
     bool isActive = UrlService.getCurrentUrl() == widget.route;
+    if(!UserManager().userContainPermission(permissionList: widget.permission??[])) {
+      return SizedBox();
+    }
     return GestureDetector(
       onTap: () {
         if(widget.onPress!=null)
@@ -1116,7 +1156,7 @@ class _NavigationItemState extends State<NavigationItem> with UIMixin {
                     color: (isHover || isActive)
                         ? leftBarTheme.activeItemColor
                         : leftBarTheme.onBackground,
-                    size: 20,
+                    size: Dimens.size20,
                   ),
                 ),
               if (!ThemeCustomizer().leftBarCondensed)

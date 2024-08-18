@@ -14,6 +14,8 @@ class ColorLightConst{
 
   static Color buttonColor =  primaryColor;
   static Color textColor =   Colors.black87;
+  static Color textColorOnMainColor =  const Color(0xFFFFFF00);
+
   static Color subtext = const Color(0xff545454);
   static Color shadowColor =  const Color(0xffE4EBE4);
   static Color borderColor =  const Color(0xffCFCFCF);
@@ -78,7 +80,8 @@ class ColorLightConst{
       case FlavorType.webAdmin:
       // TODO: Handle this case.
         {
-          mainColor =  const Color(0xF4930202);
+          primaryColor = Color(0xF4930202);
+          mainColor =  primaryColor;
           whiteColor = Colors.white;
           blackColor = Colors.black;
           backGroundColor = const Color(0xFFFFFFFF);
@@ -86,8 +89,9 @@ class ColorLightConst{
           buttonbgColor = const Color(0xffffeeee);
           homeBg = const Color(0xffffeeee);
           bgColor = const Color(0x00f5f5f5);
-          buttonColor =  const Color(0xF4930202);
+          buttonColor =  primaryColor;
           textColor = Colors.black87;
+          textColorOnMainColor =  const Color(0xFFFFFF00);
           subtext = const Color(0xff545454);
           shadowColor = const Color(0xffE4EBE4);
           borderColor = const Color(0xffCFCFCF);

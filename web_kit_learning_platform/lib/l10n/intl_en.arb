@@ -590,5 +590,11 @@
   "user_str": "User",
   "entrance_test_str": "Input test",
   "output_test_str": "Output test",
-  "right_answer": "Correct answer"
+  "right_answer": "Correct answer",
+  "edit_landing_page": "Edit landing page",
+  "home_str":"Home",
+  "method_str":"Method",
+  "instructor_str":"Instructor",
+  "feelings_str":"Feelings",
+  "achievements_str":"Achievements"
 }

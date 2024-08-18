@@ -31,7 +31,7 @@ class BackButtonCustom extends StatelessWidget{
               alignment: Alignment.center,
               child: Icon(
                   Icons.arrow_back,
-                  size: Dimens.size36,
+                  size: Dimens.size30,
                   color: color??ColorConst.blackColor
               ),
             ),

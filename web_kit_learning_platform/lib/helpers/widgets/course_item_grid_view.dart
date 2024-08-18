@@ -56,7 +56,7 @@ class CourseItemGridView extends StatelessWidget {
                             : isHovered && notifier.isDark
                             ? ColorConst.backGroundColor
                             : notifier.whitecolor,
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(Dimens.size16),
                         border: Border.all(
                             color: ColorConst.greyColor,
                             width: 0.1
@@ -66,9 +66,9 @@ class CourseItemGridView extends StatelessWidget {
                     child: Stack(
                         children: [
                           Visibility(
-                            visible: constraints.maxWidth< 370 && row!=1,
+                            visible: constraints.maxWidth< Dimens.size370 && row!=1,
                               child:  Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding:  EdgeInsets.all(Dimens.size8),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -78,7 +78,7 @@ class CourseItemGridView extends StatelessWidget {
                                         children: [
                                           Expanded(
                                             child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(16),
+                                                borderRadius: BorderRadius.circular(Dimens.size16),
                                                 child: Image.network(
                                                   (courseInfo.image??'').isNotEmpty
                                                       ? (courseInfo.image??"")
@@ -104,7 +104,7 @@ class CourseItemGridView extends StatelessWidget {
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         SizedBox(
-                                          height: 12,
+                                          height: Dimens.size12,
                                         ),
                                         Text(
                                           '${courseInfo.name} \n' ?? "",
@@ -163,9 +163,9 @@ class CourseItemGridView extends StatelessWidget {
                                 ),
                               ),),
                           Visibility(
-                            visible: constraints.maxWidth>= 370 || row ==1,
+                            visible: constraints.maxWidth>=Dimens.size370 || row ==1,
                             child:  Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding:  EdgeInsets.all(Dimens.size8),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -174,7 +174,7 @@ class CourseItemGridView extends StatelessWidget {
                                   SizedBox(
                                     width: Dimens.size100,
                                     child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
+                                        borderRadius: BorderRadius.circular(Dimens.size8),
                                         child: Image.network(
                                           courseInfo.image!.isNotEmpty
                                               ? courseInfo.image!
@@ -346,8 +346,8 @@ class CourseItemGridView1 extends StatelessWidget {
         }
       },
       child: SizedBox(
-        height: 270,
-        width: 300,
+        height: Dimens.size270,
+        width: Dimens.size300,
         child: StatefulBuilder(
           builder: (BuildContext context, void Function(void Function()) setState) {
             return LayoutBuilder(
@@ -370,27 +370,27 @@ class CourseItemGridView1 extends StatelessWidget {
                               : isHovered && notifier.isDark
                                   ? ColorConst.backGroundColor
                                   : notifier.whitecolor,
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(Dimens.size16),
                         ),
                         clipBehavior: Clip.hardEdge,
                         child: Stack(
                             children: [
                           Container(
-                            padding: EdgeInsets.all(12.0),
+                            padding: EdgeInsets.all(Dimens.size12),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(Dimens.size16),
                             ),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 SizedBox(
-                                  height: 120,
+                                  height: Dimens.size120,
                                   child: Row(
                                     children: [
                                       Expanded(
                                         child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(16),
+                                            borderRadius: BorderRadius.circular(Dimens.size16),
                                             child: Image.network(
                                               courseInfo.image!.isNotEmpty
                                                   ? courseInfo.image!
@@ -416,7 +416,7 @@ class CourseItemGridView1 extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     SizedBox(
-                                      height: 12,
+                                      height: Dimens.size12,
                                     ),
                                     Text(
                                       '${courseInfo.name} \n' ?? "",
