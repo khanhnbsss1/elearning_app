@@ -31,9 +31,14 @@ class QuestionDetailBloc extends Bloc<QuestionDetailEvent, QuestionDetailState> 
     });
     on<QuestionDetailUpdateQuestionInfoEvent>((event, emit) {
       // TODO: implement event handler
+      if(event.info.questionType == QuestionType.fill)
+        {
+          state.answerType = AnswerType.text;
+        }
       emit(state.copyWith(
           blocStatus: QuestionDetailStatus.onUpdateQuestionInfo,
-        questionInfo: event.info
+        questionInfo: event.info,
+        answerType: state.answerType
       ));
     });
     on<QuestionDetailChangeAnswerTypeEvent>((event, emit) {
@@ -129,6 +134,10 @@ class QuestionDetailBloc extends Bloc<QuestionDetailEvent, QuestionDetailState> 
     if(state.questionInfo?.id!=null)
     {
       MonitorLoading().showLoading("");
+      for(AnswerInfo answerInfo in state.questionInfo?.answerGetDetail??[])
+      {
+        answerInfo.answerType = state.answerType;
+      }
       UpdateQuizApi getLessonDetailApi = UpdateQuizApi(info: state.questionInfo!);
       dynamic data = await getLessonDetailApi.call();
       if(data.runtimeType==String && (data as String).isEmpty)
@@ -149,6 +158,10 @@ class QuestionDetailBloc extends Bloc<QuestionDetailEvent, QuestionDetailState> 
     state.blocStatus = QuestionDetailStatus.initial;
       MonitorLoading().showLoading("");
       state.questionInfo = event.info;
+      for(AnswerInfo answerInfo in state.questionInfo?.answerGetDetail??[])
+        {
+          answerInfo.answerType = state.answerType;
+        }
       state.questionInfo?.weightage = int.tryParse(state.editingControllerQuestionScore?.text??'0');
     AddQuizApi getLessonDetailApi = AddQuizApi(info: state.questionInfo!);
       dynamic data = (await getLessonDetailApi.call());
@@ -177,6 +190,8 @@ class QuestionDetailBloc extends Bloc<QuestionDetailEvent, QuestionDetailState> 
 
         state.editingControllerAttackFile?.text = event.uploadFileInfo.fileName??"";
         state.questionInfo?.fileId = uploadFileResponseInfo.id;
+        state.questionInfo?.uploadInfo = uploadFileResponseInfo;
+        state.questionInfo?.questionLink = uploadFileResponseInfo.link;
         emit(state.copyWith(
             blocStatus: QuestionDetailStatus.onUpdateFile,
             questionInfo: state.questionInfo,

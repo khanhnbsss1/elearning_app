@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get_connect/http/src/multipart/multipart_file.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/base/widgets/drop_down/drop_down_search.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
@@ -303,7 +304,14 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
                Gap(Dimens.size4),
                Text("${L10nX.getStr.question_type}: ", style: TextStyleConstant.textStyleBlack14w400.copyWith(fontWeight:FontWeight.w600 ),),
                Gap(Dimens.size16),
-               Expanded(child: Center(child: buildRadioButtonQuestionTypes(context: context, state: state))),
+               Expanded(child: Center(child: buildRadioButtonQuestionTypes(
+                   context: context, 
+                   state: state,
+                 onChanged: (p0) {
+                       state.questionInfo?.questionType = p0;
+                       BlocProvider.of<QuestionDetailBloc>(context).add(QuestionDetailUpdateQuestionInfoEvent(info: state.questionInfo!));
+                 },
+               ))),
              ],
            ),
            Gap(Dimens.size16),
@@ -312,7 +320,8 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
       isRequirement: true,
       // titleStyle: ,
       child: Visibility(
-        visible: state.questionInfo?.questionType != QuestionType.text,
+        visible: state.questionInfo?.questionType == QuestionType.image ||
+            state.questionInfo?.questionType == QuestionType.audio,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -321,42 +330,68 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
               style: TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight: FontWeight.w600),
             ),
             Gap(Dimens.size8),
-            TextFormField(
-              keyboardType: TextInputType.text,
-              controller: _state.editingControllerAttackFile,
-              enabled: enableEdit,
-              decoration: InputDecoration(
-                labelText: L10nX.getStr.attack_file,
-                labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                border: outlineInputBorder,
-                suffixIcon: InkWell(
-                  onTap: () async {
-                    FilePickerResult? result = await FilePicker.platform.pickFiles(
-                      type: FileType.custom,
-                      allowedExtensions:state.questionInfo?.questionType== QuestionType.audio? ['wav', 'mp3']:['png', 'jpg'],
-                    );
-                    if(result==null) {
-                      return;
-                    }
-                    dio.MultipartFile file = dio.MultipartFile.fromBytes(result.files.first.bytes!.toList(growable: true), filename: result.names[0]);
-                    
-                    UploadFileInfo uploadFileInfo = UploadFileInfo(
-                        data: SubjectType.vocabulary,
-                        fileName: result.files.first.name,
-                        file: file
-                    );
-                    BlocProvider.of<QuestionDetailBloc>(context).add(QuestionDetailUpLoadFileInfoEvent(uploadFileInfo: uploadFileInfo));
-                  },
-                  child: Icon(
-                    Icons.cloud_upload_rounded,
-                    size: 20,
-                    color: ColorConst.colorIconRed,
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Visibility(
+                  visible: state.questionInfo?.questionType == QuestionType.image && ((state.questionInfo?.questionLink??"").isNotEmpty),
+                  child: SizedBox(
+                    width: Dimens.size150,
+                    height: Dimens.size120,
+                    child: ImageManager().getImageByUrl(
+                      state.questionInfo?.questionLink??"",
+                      boxFit: BoxFit.contain,
+                    ),
                   ),
                 ),
-                contentPadding: MySpacing.all(16),
-                isCollapsed: true,
-                floatingLabelBehavior: FloatingLabelBehavior.never,
-              ),
+                Visibility(
+                  visible: state.questionInfo?.questionType == QuestionType.audio  && ((state.questionInfo?.questionLink??"").isNotEmpty),
+                  child: AudioSpeaker(
+                    url: state.questionInfo?.questionLink??"",
+                  ),
+                ),
+                Gap(Dimens.size8),
+                Expanded(
+                  child: TextFormField(
+                    keyboardType: TextInputType.text,
+                    controller: _state.editingControllerAttackFile,
+                    enabled: enableEdit,
+                    decoration: InputDecoration(
+                      labelText: L10nX.getStr.attack_file,
+                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                      border: outlineInputBorder,
+                      suffixIcon: InkWell(
+                        onTap: () async {
+                          FilePickerResult? result = await FilePicker.platform.pickFiles(
+                            type: FileType.custom,
+                            allowedExtensions:state.questionInfo?.questionType== QuestionType.audio? ['wav', 'mp3']:['png', 'jpg'],
+                          );
+                          if(result==null) {
+                            return;
+                          }
+                          dio.MultipartFile file = dio.MultipartFile.fromBytes(result.files.first.bytes!.toList(growable: true), filename: result.names[0]);
+                          
+                          UploadFileInfo uploadFileInfo = UploadFileInfo(
+                              data: SubjectType.vocabulary,
+                              fileName: result.files.first.name,
+                              file: file
+                          );
+                          BlocProvider.of<QuestionDetailBloc>(context).add(QuestionDetailUpLoadFileInfoEvent(uploadFileInfo: uploadFileInfo));
+                        },
+                        child: Icon(
+                          Icons.cloud_upload_rounded,
+                          size: 20,
+                          color: ColorConst.colorIconRed,
+                        ),
+                      ),
+                      contentPadding: MySpacing.all(16),
+                      isCollapsed: true,
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -447,19 +482,22 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
             itemCount: (state.questionInfo?.answerGetDetail??[]).length,
             itemBuilder: (context, index) {
               AnswerInfo answerUploadInfo = (state.questionInfo?.answerGetDetail??[]).elementAt(index);
-              return AnswerWidgetEditItem(
-                answerUploadInfo: answerUploadInfo,
-                answerType: state.answerType,
-                onChange: (p1) {
-                  BlocProvider.of<QuestionDetailBloc>(context).add(QuestionDetailChangeAnswerInfoEvent(answerUploadInfo: p1));
-                },
-                onCheckRightAnswer: (p0) {
-                  BlocProvider.of<QuestionDetailBloc>(context).add(QuestionDetailChangeAnswerInfoEvent(answerUploadInfo: p0));
-                },
-                onRemove: (p0) {
-                  BlocProvider.of<QuestionDetailBloc>(context).add(QuestionDetailRemoveAnswerInfoEvent(answerUploadInfo: p0));
-                },
-                
+              return Visibility(
+                visible: state.questionInfo?.questionType != QuestionType.fill || index==0,
+                child: AnswerWidgetEditItem(
+                  answerUploadInfo: answerUploadInfo,
+                  answerType: state.answerType,
+                  onChange: (p1) {
+                    BlocProvider.of<QuestionDetailBloc>(context).add(QuestionDetailChangeAnswerInfoEvent(answerUploadInfo: p1));
+                  },
+                  onCheckRightAnswer: (p0) {
+                    BlocProvider.of<QuestionDetailBloc>(context).add(QuestionDetailChangeAnswerInfoEvent(answerUploadInfo: p0));
+                  },
+                  onRemove: (p0) {
+                    BlocProvider.of<QuestionDetailBloc>(context).add(QuestionDetailRemoveAnswerInfoEvent(answerUploadInfo: p0));
+                  },
+                  
+                ),
               );
           },)
             
@@ -468,10 +506,11 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
     );
   }
   
-  Widget buildRadioButtonQuestionTypes({required BuildContext context, required QuestionDetailState state}){
+  Widget buildRadioButtonQuestionTypes({required BuildContext context, required QuestionDetailState state, Function(QuestionType?)? onChanged}){
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
+        key: UniqueKey(),
         mainAxisAlignment: MainAxisAlignment.end,
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -480,13 +519,32 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Radio<QuestionType>(
+                value: QuestionType.fill,
+                groupValue: state.questionInfo?.questionType,
+                onChanged: (QuestionType? value) {
+                  if(onChanged!=null)
+                    {
+                      onChanged(value);
+                    }
+                },
+              ),
+              Gap(Dimens.size4),
+              Text(L10nX.getStr.type_word_str, style: TextStyleConstant.textStyleBlack12w400,),
+
+            ],
+          ),
+          Gap(Dimens.size16),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Radio<QuestionType>(
                 value: QuestionType.text,
                 groupValue: state.questionInfo?.questionType,
                 onChanged: (QuestionType? value) {
-                  setState(() {
-                    state.questionInfo?.questionType = value;
-                    BlocProvider.of<QuestionDetailBloc>(context).add(QuestionDetailUpdateQuestionInfoEvent(info: state.questionInfo!));
-                  });
+                  if(onChanged!=null)
+                  {
+                    onChanged(value);
+                  }
                 },
               ),
               Gap(Dimens.size4),
@@ -504,10 +562,10 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
                 value: QuestionType.image,
                 groupValue: state.questionInfo?.questionType,
                 onChanged: (QuestionType? value) {
-                  setState(() {
-                    state.questionInfo?.questionType = value;
-                    BlocProvider.of<QuestionDetailBloc>(context).add(QuestionDetailUpdateQuestionInfoEvent(info: state.questionInfo!));
-                  });
+                  if(onChanged!=null)
+                  {
+                    onChanged(value);
+                  }
                 },
               ),
               Gap(Dimens.size4),
@@ -523,10 +581,10 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
                 value: QuestionType.audio,
                 groupValue: state.questionInfo?.questionType,
                 onChanged: (QuestionType? value) {
-                  setState(() {
-                    state.questionInfo?.questionType = value;
-                    BlocProvider.of<QuestionDetailBloc>(context).add(QuestionDetailUpdateQuestionInfoEvent(info: state.questionInfo!));
-                  });
+                  if(onChanged!=null)
+                  {
+                    onChanged(value);
+                  }
                 },
               ),
               Gap(Dimens.size4),
@@ -548,14 +606,13 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-             
               Radio<AnswerType>(
                 value: AnswerType.text,
+                toggleable:  state.questionInfo?.questionType!=QuestionType.fill,
                 groupValue: state.answerType,
                 onChanged: (AnswerType? value) {
                   setState(() {
                     onChange(value);
-                    
                   });
                 },
               ),
@@ -570,6 +627,7 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
             children: [
               Radio<AnswerType>(
                 value: AnswerType.image,
+                toggleable:  state.questionInfo?.questionType!=QuestionType.fill,
                 groupValue: state.answerType,
                 onChanged: (AnswerType? value) {
                   onChange(value);
@@ -588,6 +646,7 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
               Radio<AnswerType>(
                 value: AnswerType.audio,
                 groupValue: state.answerType,
+                toggleable: state.questionInfo?.questionType!=QuestionType.fill,
                 onChanged: (AnswerType? value) {
                   onChange(value);
                 },

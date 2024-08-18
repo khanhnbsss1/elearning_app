@@ -13,6 +13,7 @@ import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
 import 'package:webkit/views/test/test_detail/create_edit_test.dart';
+import 'package:webkit/views/test/test_detail_work/test_work_page.dart';
 import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
@@ -297,11 +298,11 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
         },).show(context);
       },
       onViewDetail: (p0) {
-        CreateEditTest(testActionType: ActionType.view,
+        TestWorkPage(
           testInfo: p0,
-          callBack: () {
-          BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
-        },).show(context);
+          enableCloseButton: true,
+          enableShowResult: true,
+        ).show(context);
       },
     );
     return LayoutBuilder(

@@ -14,6 +14,7 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
+import 'package:webkit/views/question/question_detail/question_work/question_work_item.dart';
 import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
@@ -299,7 +300,6 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
     QuestionDataSource employeeDataSource = QuestionDataSource(
       lessonData: state.listResponseModel?.content??[],
       onDelete: (p0) {
-
       },
       onEdit: (p0) {
         QuestionCreateEditDetailPage(
@@ -310,11 +310,14 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
           },).show(context);
       },
       onViewDetail: (p0) {
-        QuestionCreateEditDetailPage(actionType: ActionType.view,
-          info: p0,
-          callBack: () {
-            BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
-          },).show(context);
+        QuestionWorkItem(
+          questionInfo: p0, 
+          enableCloseButton: true,
+          enableShowRightAnswer: true,
+          onChangeAnswer: (p0) {
+            
+          },
+        ).show(context);
       },
     );
     return LayoutBuilder(
@@ -406,7 +409,7 @@ class QuestionDataSource extends DataGridSource {
               e.questionName??"",
               textAlign: TextAlign.start,
               style: TextStyleConstant.textStyleBlack14w400,) ),
-            DataGridCell<Widget>(columnName: L10nX.getStr.question_type, value: Text(L10nX().getStringByKey("${mapQuestionTypeToStrKey[e.questionType]??""}_type_str"), style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.question_type, value: Text(L10nX().getStringByKey("${mapQuestionTypeToStrKey[e.questionType]??""}_type_str".toLowerCase()), style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.score_str, value: Text((e.weightage??0).toString(), style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str,
                 value: Column(

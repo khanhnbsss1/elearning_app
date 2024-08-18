@@ -30,6 +30,7 @@ class ImageManager {
   //png
   static const String logo = 'logo.jpg';
   static const String user_png = 'user.png';
+  static const String invalid_png = 'invalid.png';
 
 
   static const String icNoData = 'icNoData.png';
@@ -82,7 +83,7 @@ class ImageManager {
         fit: boxFit,
         scale: FetchPixels.getScale(),
         errorBuilder: (context, error, stackTrace) {
-          return errorBuilder??NoData();
+          return errorBuilder??ImageManager().getPngImage(ImageManager.invalid_png);
         },
       ),
     );

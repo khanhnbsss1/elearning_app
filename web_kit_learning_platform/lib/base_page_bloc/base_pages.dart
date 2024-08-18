@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc/base_bloc.dart';
-
 class BasePage extends StatefulWidget {
   ScrollController scrollController = ScrollController();
   BuildContext? _context;

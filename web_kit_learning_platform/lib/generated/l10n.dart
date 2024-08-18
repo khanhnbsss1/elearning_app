@@ -5869,6 +5869,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Correct answer`
+  String get right_answer {
+    return Intl.message(
+      'Correct answer',
+      name: 'right_answer',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

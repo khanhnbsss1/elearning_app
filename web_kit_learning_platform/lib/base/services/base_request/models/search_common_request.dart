@@ -35,15 +35,44 @@ class SearchCommonRequest {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['userId'] = userId;
-    data['pageSize'] = pageSize;
-    data['pageNumber'] = pageNumber;
-    data['filterType'] = filterType??"ALL";
-    data['keyword'] = keyword??"";
-    data['gradeId'] = gradeId;
-    data['gradeId'] = categoryId;
-    data['gradeId'] = producerId;
-    data['typeName'] = userType;
+    if(userId!=null)
+      {
+        data['userId'] = userId;
+      }
+
+    if(pageSize!=null)
+    {
+      data['pageSize'] = pageSize;
+    }
+
+    if(pageNumber!=null)
+    {
+      data['pageNumber'] = pageNumber;
+    }
+    if(filterType!=null)
+    {
+      data['filterType'] = filterType;
+    }
+    if(keyword!=null)
+    {
+      data['keyword'] = keyword;
+    }
+    if(gradeId!=null)
+    {
+      data['gradeId'] = gradeId;
+    }
+    if(categoryId!=null)
+    {
+      data['categoryId'] = categoryId;
+    }
+    if(producerId!=null)
+    {
+      data['producerId'] = producerId;
+    }
+    if(userType!=null)
+    {
+      data['typeName'] = userType;
+    }
     return data;
   }
   SearchCommonRequest copyWith({

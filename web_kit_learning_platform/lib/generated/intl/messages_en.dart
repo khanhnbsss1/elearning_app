@@ -463,6 +463,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "result": MessageLookupByLibrary.simpleMessage("Result"),
         "revenue": MessageLookupByLibrary.simpleMessage("Revenue"),
         "right": MessageLookupByLibrary.simpleMessage("Right"),
+        "right_answer": MessageLookupByLibrary.simpleMessage("Correct answer"),
         "right_dialog": MessageLookupByLibrary.simpleMessage("Right dialog"),
         "rounded_button":
             MessageLookupByLibrary.simpleMessage("Rounded button"),

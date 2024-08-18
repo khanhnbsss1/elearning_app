@@ -584,5 +584,6 @@
   "attack_file": "附件文件",
   "user_str": "用户",
   "entrance_test_str": "入学测试",
-  "output_test_str": "输出测试"
+  "output_test_str": "输出测试",
+  "right_answer": "正确答案"
 }

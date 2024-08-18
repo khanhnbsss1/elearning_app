@@ -460,6 +460,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "result": MessageLookupByLibrary.simpleMessage("Kết quả"),
         "revenue": MessageLookupByLibrary.simpleMessage("Doanh thu"),
         "right": MessageLookupByLibrary.simpleMessage("Phải"),
+        "right_answer":
+            MessageLookupByLibrary.simpleMessage("Đáp án chính xác"),
         "right_dialog":
             MessageLookupByLibrary.simpleMessage("Hộp thoại bên phải"),
         "rounded_button": MessageLookupByLibrary.simpleMessage("Nút làm tròn"),

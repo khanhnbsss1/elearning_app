@@ -390,6 +390,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "result": MessageLookupByLibrary.simpleMessage("结果"),
         "revenue": MessageLookupByLibrary.simpleMessage("收入"),
         "right": MessageLookupByLibrary.simpleMessage("右侧"),
+        "right_answer": MessageLookupByLibrary.simpleMessage("正确答案"),
         "right_dialog": MessageLookupByLibrary.simpleMessage("右侧对话框"),
         "rounded_button": MessageLookupByLibrary.simpleMessage("圆形按钮"),
         "sales_by_sales_person":

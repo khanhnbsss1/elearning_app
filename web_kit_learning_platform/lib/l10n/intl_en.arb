@@ -589,5 +589,6 @@
   "attack_file": "Attachment",
   "user_str": "User",
   "entrance_test_str": "Input test",
-  "output_test_str": "Output test"
+  "output_test_str": "Output test",
+  "right_answer": "Correct answer"
 }

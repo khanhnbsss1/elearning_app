@@ -656,5 +656,13 @@ static double get size417 { return FetchPixels.getPixelHeight(417.0);}
  static double get size727	{ return FetchPixels.getPixelHeight(727);}
  static double get size728	{ return FetchPixels.getPixelHeight(728);}
  static double get size729	{ return FetchPixels.getPixelHeight(729);}
+ static double get size750	{ return FetchPixels.getPixelHeight(750);}
+ static double get size800	{ return FetchPixels.getPixelHeight(800);}
+ static double get size850	{ return FetchPixels.getPixelHeight(850);}
+ static double get size900	{ return FetchPixels.getPixelHeight(900);}
+ static double get size950	{ return FetchPixels.getPixelHeight(950);}
+ static double get size1000	{ return FetchPixels.getPixelHeight(1000);}
+ static double get size1100	{ return FetchPixels.getPixelHeight(1100);}
+ static double get size1200	{ return FetchPixels.getPixelHeight(1200);}
 
 }

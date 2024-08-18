@@ -589,5 +589,6 @@
   "attack_file": "Tài liệu đính kèm",
   "user_str": "Người dùng",
   "entrance_test_str": "Bài test đầu vào",
-  "output_test_str": "Bài test đầu ra"
+  "output_test_str": "Bài test đầu ra",
+  "right_answer": "Đáp án chính xác"
 }

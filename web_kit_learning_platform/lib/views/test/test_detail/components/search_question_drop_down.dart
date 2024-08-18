@@ -83,7 +83,7 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text("${questionInfo.weightage}đ    ${L10nX().getStringByKey('${mapQuestionTypeToStrKey[questionInfo.questionType]}_type_str')}"),
+                            Text("${questionInfo.weightage}đ    ${L10nX().getStringByKey('${mapQuestionTypeToStrKey[questionInfo.questionType]}_type_str'.toLowerCase())}"),
                             Gap(Dimens.size8),
                             Visibility(
                               visible: widget.actionType != ActionType.view,

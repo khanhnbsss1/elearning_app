@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
@@ -44,6 +45,24 @@ class AnswerWidgetEditItemState extends State<AnswerWidgetEditItem> with UIMixin
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         children: [
+          Visibility(
+            visible: widget.answerType == AnswerType.image && (widget.answerUploadInfo.answer??"").isNotEmpty,
+            child: SizedBox(
+              width: Dimens.size150,
+              height: Dimens.size120,
+              child: ImageManager().getImageByUrl(
+                  widget.answerUploadInfo.answer??"",
+                  boxFit: BoxFit.contain,
+              ),
+            ),
+          ),
+          Visibility(
+            visible: widget.answerType == AnswerType.audio && (widget.answerUploadInfo.answer??"").isNotEmpty,
+            child: AudioSpeaker(
+              url: widget.answerUploadInfo.answer??"",
+            ),
+          ),
+          Gap(Dimens.size8),
           Expanded(
             child: TextFormField(
               keyboardType: TextInputType.text,
@@ -91,7 +110,9 @@ class AnswerWidgetEditItemState extends State<AnswerWidgetEditItem> with UIMixin
                         {
                           setState(() {
                             controller.text = uploadFileInfo.fileName??"";
+                            widget.answerUploadInfo.uploadInfo = resultUpload;
                             widget.answerUploadInfo.fileId = resultUpload.id;
+                            widget.answerUploadInfo.answer = resultUpload.link;
                             if(widget.onChange!=null)
                               {
                                 widget.onChange!(widget.answerUploadInfo);
