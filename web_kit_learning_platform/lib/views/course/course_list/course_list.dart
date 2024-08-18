@@ -370,7 +370,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                               itemCount: listOfCourse.length,
                                               itemBuilder: (context, index) {
                                                 return Padding(
-                                                  padding:  EdgeInsets.all(Dimens.size0),
+                                                  padding:  EdgeInsets.symmetric(horizontal:  Dimens.size8, vertical: Dimens.size4),
                                                   child: listOfCourse.elementAt(index),
                                                 );
                                               },
