@@ -37,7 +37,7 @@ class AuthService {
     final LocalAuthentication localAuthentication = LocalAuthentication();
     // status of authentication.
     bool isAuthenticated = false;
-    //if device supports biometrics and user has enabled biometrics, then authenticate.
+    //if device_elearning supports biometrics and user has enabled biometrics, then authenticate.
     try {
       isAuthenticated = await localAuthentication.authenticate(
           localizedReason:  Platform.isIOS ?

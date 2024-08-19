@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lms_app/base/base.export.dart';
 
+import 'instance_mananger/instance_mananger.dart';
+
 class Constant {
   static String assetImageSvgPath = "assets/svg/";
   static String assetImagePngPath = "assets/png/";
@@ -128,7 +130,7 @@ class IdentifierConst{
   static String password = "";
 
 }
-// Loại sinh trắc được hỗ trợ trong device
+// Loại sinh trắc được hỗ trợ trong device_elearning
 enum BiometricTypeDevice {
   fingerprint, face, none
 }

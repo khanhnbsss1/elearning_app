@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lms_app/constant/dimens_constant.dart';
+import '../base/constant/dimens_constant.dart';
 import 'colors_app.dart';
 
 // Simple

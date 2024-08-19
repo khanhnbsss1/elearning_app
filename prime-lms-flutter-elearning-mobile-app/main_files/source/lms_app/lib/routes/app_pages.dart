@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lms_app/screens/home/home_view.dart';
 
 import '../screens/auth/login.dart';
 import '../screens/intro.dart';
@@ -11,7 +12,7 @@ class AppPages {
   static Map<String, WidgetBuilder> routes = {
     Routes.splashRoute: (context) => const SplashScreen(),
     Routes.introRoute: (context) => const IntroScreen(),
-    Routes.loginRoute: (context) => const LoginScreen(),
+    Routes.loginRoute: (context) => const HomeView(),
   };
 
   static route(String route,

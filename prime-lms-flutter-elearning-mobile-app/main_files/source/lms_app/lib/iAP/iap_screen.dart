@@ -285,7 +285,7 @@ class _IAPScreen2State extends ConsumerState<IAPScreen> with IAPMixin {
     }
     if (!_isAvailable) {
       return const Center(
-        child: Text('IAP is not avaibale for this device'),
+        child: Text('IAP is not avaibale for this device_elearning'),
       );
     }
     final Map<String, PurchaseDetails> purchases = Map<String, PurchaseDetails>.fromEntries(_purchases.map((PurchaseDetails purchase) {

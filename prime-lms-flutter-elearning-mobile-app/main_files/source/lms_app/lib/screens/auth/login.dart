@@ -6,10 +6,12 @@ import 'package:line_icons/line_icons.dart';
 import 'package:lms_app/components/privacy_info.dart';
 import 'package:lms_app/screens/auth/reset_password.dart';
 import 'package:lms_app/screens/auth/sign_up.dart';
+import 'package:lms_app/screens/home/home_view.dart';
 import 'package:lms_app/screens/splash.dart';
 import 'package:lms_app/services/auth_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import '../../controller_elearning/auth/login_controller.dart';
 import '../../providers/user_data_provider.dart';
 import 'social_logins.dart';
 
@@ -24,24 +26,41 @@ class LoginScreen extends ConsumerStatefulWidget {
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   var formKey = GlobalKey<FormState>();
-  var emailCtlr = TextEditingController();
-  var passwordCtrl = TextEditingController();
+  // var emailCtlr = TextEditingController();
+  // var passwordCtrl = TextEditingController();
   final _btnController = RoundedLoadingButtonController();
+  late LoginController loginController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loginController = LoginController();
+    loginController.initUser();
+  }
 
   bool offsecureText = true;
   IconData lockIcon = LineIcons.lock;
+
+  // Future _handleLoginWithUsernamePassword1() async {
+  //   if (formKey.currentState!.validate()) {
+  //     formKey.currentState!.save();
+  //     _btnController.start();
+  //     final UserCredential? user = await AuthService().loginWithEmailPassword(context, emailCtlr.text.trim(), passwordCtrl.text);
+  //     if (user != null) {
+  //       _btnController.success();
+  //       afterSignIn();
+  //     } else {
+  //       _btnController.reset();
+  //     }
+  //   }
+  // }
 
   Future _handleLoginWithUsernamePassword() async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       _btnController.start();
-      final UserCredential? user = await AuthService().loginWithEmailPassword(context, emailCtlr.text.trim(), passwordCtrl.text);
-      if (user != null) {
-        _btnController.success();
-        afterSignIn();
-      } else {
-        _btnController.reset();
-      }
+      loginController.onLogin();
     }
   }
 
@@ -127,9 +146,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                             Icons.clear,
                             size: 20,
                           ),
-                          onPressed: () => emailCtlr.clear(),
+                          onPressed: () => loginController.basicValidator.getController('email')?.clear(),
                         )),
-                    controller: emailCtlr,
+                    controller: loginController.basicValidator.getController('email'),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value!.isEmpty) return 'Email is required';
@@ -154,7 +173,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ),
                           onPressed: () => _onlockPressed(),
                         )),
-                    controller: passwordCtrl,
+                    controller: loginController.basicValidator.getController('password'),
                     obscureText: offsecureText,
                     keyboardType: TextInputType.visiblePassword,
                     validator: (value) {

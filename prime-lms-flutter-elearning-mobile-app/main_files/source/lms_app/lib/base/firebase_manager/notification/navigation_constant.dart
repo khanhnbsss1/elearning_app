@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../app/instance_mananger/instance_mananger.dart';
-import '../../../app/routes/app_pages.dart';
-import '../../../app/routes/app_routes.dart';
 import '../model/firebase_notìication_data_object.dart';
 class NaviConstant {
   /// I. ============== Thông báo ===========================================

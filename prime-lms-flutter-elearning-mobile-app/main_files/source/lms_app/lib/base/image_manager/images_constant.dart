@@ -115,7 +115,7 @@ class ImagesNameConst {
   static const String  ic_organization_fill_png         = "organization_fill.png";
   static const String  ic_organization_png         = "organization.png";
   static const String  ic_device_fill_png         = "device_fill.png";
-  static const String  ic_device_png         = "device.png";
+  static const String  ic_device_png         = "device_elearning.png";
   static const String  ic_device_group_png         ="device_group.png";
   static const String  ic_history_fill_png         = "history_fill.png";
   static const String  ic_history_png         = "history.png";

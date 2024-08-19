@@ -4,6 +4,7 @@ import 'package:lms_app/models/user/UserProfile.dart';
 
 import '../../base/base.export.dart';
 import '../firebase_manager/fire_base_manager.dart';
+import '../instance_mananger/instance_mananger.dart';
 import '../sqliteManager/sqliteManager.dart';
 class UserHelper{
   static final UserHelper _singletonUserHelper = UserHelper._internal();

@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:lms_app/generated/intl/messages_all.dart';
 import 'package:lms_app/generated/l10n.dart';
 
+import '../helper_elearning/services/navigation_service.dart';
+
 class L10nX extends S {
   // ...
   L10nX();
@@ -29,6 +31,14 @@ class L10nX extends S {
 
       return instance;
     });
+  }
+
+  static S get getStr {
+    BuildContext context = NavigationService.globalContext!;
+    final instance = L10nX.maybeOf(context);
+    assert(instance != null,
+    'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+    return instance!;
   }
 
   static L10nX of(BuildContext context) {
@@ -58,6 +68,7 @@ class AppLocalizationDelegatel10nX extends LocalizationsDelegate<L10nX> {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
       Locale.fromSubtags(languageCode: 'vi'),
+      Locale.fromSubtags(languageCode: 'zh'),
     ];
   }
 

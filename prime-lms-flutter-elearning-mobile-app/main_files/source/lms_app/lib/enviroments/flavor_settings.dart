@@ -3,7 +3,7 @@ import 'package:lms_app/enviroments/permisstion.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'dart:io' show Platform;
 
-import '../utils/file_utils.dart';
+import '../base/utils/file_utils.dart';
 
 /// Contains the hard-coded settings per flavor.
 class FlavorSettings {

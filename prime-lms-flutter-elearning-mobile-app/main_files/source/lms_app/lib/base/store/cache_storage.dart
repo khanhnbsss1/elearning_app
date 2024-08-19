@@ -14,6 +14,7 @@ class Storage {
   static const currentUserInfoKey = 'currentUserInfoKey';
   static const currentUserProfileInfoKey = 'currentUserProfileInfoKey';
   static const darkModeKey = 'darkModeKey';
+  static const currentAuthInfoKey = 'currentAuthInfoKey';
 
   // key encrypt
   static const languageCodeKey = "lang_code";

@@ -2,6 +2,7 @@
 import 'package:lms_app/base/base.export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import '../../../instance_mananger/instance_mananger.dart';
 import 'loading.common.dart';
 class NotifyDialog {
   static List<BuildContext>showContextList = List.empty(growable: true);

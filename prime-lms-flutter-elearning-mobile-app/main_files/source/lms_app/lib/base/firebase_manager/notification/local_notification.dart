@@ -6,7 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import '../../../app/routes/main_navigator.dart';
+import '../../../routes/main_navigator.dart';
 import '../../utils/file_utils.dart';
 import '../fire_base_manager.dart';
 import '../model/firebase_notìication_data_object.dart';

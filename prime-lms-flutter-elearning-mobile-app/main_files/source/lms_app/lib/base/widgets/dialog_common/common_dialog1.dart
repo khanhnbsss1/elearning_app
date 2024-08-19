@@ -66,7 +66,7 @@ class CustomDialog1 extends StatelessWidgetCommon{
   Function()?backButtonCallback;
   ///The [width] width of dialog
   ///
-  /// If [width] is null width default is device screen width DeviceUtils.isTablet() ? size.width * 0.4 : size.width * 0.95
+  /// If [width] is null width default is device_elearning screen width DeviceUtils.isTablet() ? size.width * 0.4 : size.width * 0.95
   final double? width;
   MainAxisSize? mainAxisSizeParent;
   final bool canBackdrop;

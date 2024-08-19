@@ -45,9 +45,9 @@ class ApiName {
 
   ///favourite
 
-  final String DEVICE_FAVOURITE_CREATE= "/device-favourite";
-  final String DEVICE_FAVOURITE_DELETE= "/device-favourite";
-  final String DEVICE_FAVOURITE_SEARCH= "/device-favourite/search";
+  final String DEVICE_FAVOURITE_CREATE= "/device_elearning-favourite";
+  final String DEVICE_FAVOURITE_DELETE= "/device_elearning-favourite";
+  final String DEVICE_FAVOURITE_SEARCH= "/device_elearning-favourite/search";
 
 /// payment and charring
   final String getChargingStatus ="/charging";

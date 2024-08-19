@@ -85,3 +85,5 @@ abstract class Paths {
   static const notificationsPage = "/notificationsPage";
 
 }
+
+
