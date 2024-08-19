@@ -947,11 +947,11 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
             ),
             Container(
               // height: Dimens.size240,
-              constraints: BoxConstraints(maxWidth: ResponsiveInfo.isPhone() ? constraints.maxWidth - Dimens.size20 : constraints.maxWidth * 3 / 4, maxHeight: 325),
+              constraints: BoxConstraints(maxWidth: ResponsiveInfo.isPhone() ? constraints.maxWidth - Dimens.size20 : constraints.maxWidth * 3 / 4, maxHeight: Dimens.size340),
               child: Column(
                 children: [
                   SingleChildScrollView(
-                    controller: differrentController,
+                    controller: whyChooseUsController,
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: listItem,
@@ -979,9 +979,9 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                                         : (constraints.maxWidth < Dimens.size1600)
                                             ? ((constraints.maxWidth) * 3 / 4 - Dimens.size36 * 6) / 3
                                             : Dimens.size340;
-                                if (differrentController.offset >= 0) {
-                                  differrentController.animateTo(
-                                    differrentController.offset - itemWidth - Dimens.size36 * 2,
+                                if (whyChooseUsController.offset >= 0) {
+                                  whyChooseUsController.animateTo(
+                                    whyChooseUsController.offset - itemWidth - Dimens.size36 * 2,
                                     duration: const Duration(milliseconds: 200),
                                     curve: Curves.easeInOut,
                                   );
@@ -1023,9 +1023,9 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                                         : (constraints.maxWidth < Dimens.size1600)
                                             ? ((constraints.maxWidth) * 3 / 4 - Dimens.size36 * 6) / 3
                                             : Dimens.size340;
-                                if (differrentController.offset >= 0) {
-                                  differrentController.animateTo(
-                                    differrentController.offset + itemWidth + Dimens.size36 * 2,
+                                if (whyChooseUsController.offset >= 0) {
+                                  whyChooseUsController.animateTo(
+                                    whyChooseUsController.offset + itemWidth + Dimens.size36 * 2,
                                     duration: const Duration(milliseconds: 200),
                                     curve: Curves.easeInOut,
                                   );
