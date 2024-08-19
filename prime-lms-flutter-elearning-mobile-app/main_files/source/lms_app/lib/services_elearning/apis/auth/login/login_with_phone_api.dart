@@ -33,15 +33,7 @@ class LoginWithPhoneApi extends BaseApiRequest {
            GetUserProfileInfoApi getUserProfileInfoApi = GetUserProfileInfoApi();
            try{
              await getUserProfileInfoApi.call();
-             await InstanceManager().getFilterCourse();
-             //     final UserCredential? user = await AuthService().loginWithEmailPassword(context, emailCtlr.text.trim(), passwordCtrl.text);
-             //     if (user != null) {
-             //       _btnController.success();
-             //       afterSignIn();
-             //     } else {
-             //       _btnController.reset();
-             //     }
-             //   }
+             // await InstanceManager().getFilterCourse();
            }
            catch(e)
            {

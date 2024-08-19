@@ -15,6 +15,7 @@ import 'package:lms_app/iAP/top_section.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/toasts.dart';
+import '../models_elearning/user/UserProfile.dart';
 import '../providers/user_data_provider.dart';
 import 'example_delegate_ios.dart';
 import 'iap_config.dart';
@@ -225,7 +226,7 @@ class _IAPScreen2State extends ConsumerState<IAPScreen> with IAPMixin {
 
   @override
   Widget build(BuildContext context) {
-    final UserModel? user = ref.watch(userDataProvider);
+    final UserProfile? user = ref.watch(userDataProvider);
     return Stack(
       children: [
         Scaffold(
@@ -279,7 +280,7 @@ class _IAPScreen2State extends ConsumerState<IAPScreen> with IAPMixin {
     );
   }
 
-  Widget _buildProductList(UserModel? user) {
+  Widget _buildProductList(UserProfile? user) {
     if (_loading) {
       return const Center(child: LoadingIndicatorWidget());
     }

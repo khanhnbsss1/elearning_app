@@ -1,7 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:lms_app/helper_elearning/my_form_validator.dart';
-import 'package:lms_app/services_elearning/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
+import 'package:webkit/helpers/widgets/my_form_validator.dart';
+import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'my_controller.dart';
 
 class AddWordController extends MyController {

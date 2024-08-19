@@ -22,808 +22,1089 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "Basic": MessageLookupByLibrary.simpleMessage("Cơ bản"),
-        "FAQs": MessageLookupByLibrary.simpleMessage("Faqs"),
-        "Product": MessageLookupByLibrary.simpleMessage("Sản phẩm"),
-        "accompany_course_str":
-            MessageLookupByLibrary.simpleMessage("Khóa học đi kèm"),
-        "account": MessageLookupByLibrary.simpleMessage("Ta khoản"),
+        "CVV_number": MessageLookupByLibrary.simpleMessage("Số CVV"),
+        "CVV_str": MessageLookupByLibrary.simpleMessage("CVV"),
         "account_text": MessageLookupByLibrary.simpleMessage("Tài khoản"),
-        "achievements_str": MessageLookupByLibrary.simpleMessage("Thành tích"),
-        "action": MessageLookupByLibrary.simpleMessage("Hành động"),
-        "action_str": MessageLookupByLibrary.simpleMessage("Hành động"),
-        "actions": MessageLookupByLibrary.simpleMessage("Hành động"),
-        "add_discount_str":
-            MessageLookupByLibrary.simpleMessage("Thêm giảm giá"),
-        "add_examples_str": MessageLookupByLibrary.simpleMessage("Thêm ví dụ"),
-        "add_lectures_from_another_course_str":
-            MessageLookupByLibrary.simpleMessage(
-                "Thêm bài giảng từ khóa học khác"),
-        "add_new_str": MessageLookupByLibrary.simpleMessage("Thêm mới"),
-        "add_product": MessageLookupByLibrary.simpleMessage("Thêm sản phẩm"),
-        "add_products": MessageLookupByLibrary.simpleMessage("Thêm sản phẩm"),
-        "add_selection": MessageLookupByLibrary.simpleMessage("Thêm lựa chọn"),
-        "add_tags": MessageLookupByLibrary.simpleMessage("Thêm thẻ"),
-        "animated": MessageLookupByLibrary.simpleMessage("Hoạt hình"),
-        "answer_str_1": MessageLookupByLibrary.simpleMessage("Câu trả lời"),
-        "answer_str_2": MessageLookupByLibrary.simpleMessage("Đáp án"),
-        "app_address":
-            MessageLookupByLibrary.simpleMessage("Innovation St. 767,CA - USA"),
-        "app_email": MessageLookupByLibrary.simpleMessage("hello@pulse.com"),
-        "app_name": MessageLookupByLibrary.simpleMessage("YAX Chinese"),
-        "app_phone": MessageLookupByLibrary.simpleMessage("+33 455 67 89 00"),
+        "activating_str":
+            MessageLookupByLibrary.simpleMessage("Đang hoạt động"),
+        "add_address": MessageLookupByLibrary.simpleMessage("Thêm địa chỉ"),
+        "add_new_address":
+            MessageLookupByLibrary.simpleMessage("Thêm địa chỉ mới"),
+        "add_new_vechile_all_detail": MessageLookupByLibrary.simpleMessage(
+            "Nếu bạn muốn thêm vechile mới, vui lòng điền tất cả chi tiết đó một cách cẩn thận .."),
+        "add_new_vehicle":
+            MessageLookupByLibrary.simpleMessage("Thêm phương tiện mới"),
+        "add_vehicle": MessageLookupByLibrary.simpleMessage("Thêm phương tiện"),
+        "address_end": MessageLookupByLibrary.simpleMessage("Địa chỉ kết thúc"),
+        "address_start":
+            MessageLookupByLibrary.simpleMessage("Địa chỉ bắt đầu"),
+        "all_str": MessageLookupByLibrary.simpleMessage("Tất cả"),
+        "already_have_an_account":
+            MessageLookupByLibrary.simpleMessage("Đã có tài khoản?"),
+        "app_name": MessageLookupByLibrary.simpleMessage("Prime LMS"),
         "appcept": MessageLookupByLibrary.simpleMessage("Chấp nhận"),
-        "application": MessageLookupByLibrary.simpleMessage("Ứng dụng"),
-        "apps": MessageLookupByLibrary.simpleMessage("Ứng dụng"),
-        "are_you_ready_send_command": MessageLookupByLibrary.simpleMessage(
-            "Bạn có chắc chắn muốn gửi lệnh?"),
-        "are_you_sure_you_want_to_delete_history":
-            MessageLookupByLibrary.simpleMessage(
-                "Bạn có chắc chắn muốn xóa lịch sử không?"),
-        "area_chart": MessageLookupByLibrary.simpleMessage("Biểu đồ vùng"),
-        "attack_file":
-            MessageLookupByLibrary.simpleMessage("Tài liệu đính kèm"),
-        "attack_link_str": MessageLookupByLibrary.simpleMessage("Liên kết "),
-        "audio_type_str": MessageLookupByLibrary.simpleMessage("Âm thanh"),
-        "auth": MessageLookupByLibrary.simpleMessage("Xác thực"),
+        "apply_str": MessageLookupByLibrary.simpleMessage("Áp dụng"),
         "authen_invalid": MessageLookupByLibrary.simpleMessage(
             "Tên đăng nhập hoặc mật khẩu không đúng"),
-        "author_str": MessageLookupByLibrary.simpleMessage("Tác giả"),
-        "back_to_log_in":
-            MessageLookupByLibrary.simpleMessage("Quay lại để đăng nhập"),
-        "background_image_str":
-            MessageLookupByLibrary.simpleMessage("Hình nền"),
-        "background_indicator":
-            MessageLookupByLibrary.simpleMessage("Chỉ báo nền"),
-        "balance": MessageLookupByLibrary.simpleMessage("Cân bằng"),
-        "banner": MessageLookupByLibrary.simpleMessage("Biểu ngữ"),
-        "bar_chart": MessageLookupByLibrary.simpleMessage("Biểu đồ thanh"),
-        "basic": MessageLookupByLibrary.simpleMessage("Cơ bản"),
-        "basic_forms":
-            MessageLookupByLibrary.simpleMessage("Các biểu mẫu cơ bản"),
-        "basic_input": MessageLookupByLibrary.simpleMessage("Đầu vào cơ bản"),
-        "basic_table": MessageLookupByLibrary.simpleMessage("Bảng cơ bản"),
-        "basic_tables": MessageLookupByLibrary.simpleMessage("Các bảng cơ bản"),
-        "blog": MessageLookupByLibrary.simpleMessage("Blog"),
-        "border_type": MessageLookupByLibrary.simpleMessage("Loại đường viền"),
-        "bordered_indicator":
-            MessageLookupByLibrary.simpleMessage("Chỉ báo có viền"),
-        "bottom": MessageLookupByLibrary.simpleMessage("Dưới cùng"),
-        "bottom_dialog":
-            MessageLookupByLibrary.simpleMessage("Hộp thoại dưới cùng"),
-        "boxed_style":
-            MessageLookupByLibrary.simpleMessage("Phong cách đóng hộp"),
-        "bubble_chart":
-            MessageLookupByLibrary.simpleMessage("Biểu đồ bong bóng"),
-        "builder": MessageLookupByLibrary.simpleMessage("Người xây dựng"),
+        "available_connector_is_empty":
+            MessageLookupByLibrary.simpleMessage("Cổng sạc hiện không có sẵn"),
+        "average_speed":
+            MessageLookupByLibrary.simpleMessage(" Tốc độ trung bình"),
+        "bank_account_name_str":
+            MessageLookupByLibrary.simpleMessage("Tên tài khoản"),
+        "bank_account_str":
+            MessageLookupByLibrary.simpleMessage("Số tài khoản"),
+        "bank_code": MessageLookupByLibrary.simpleMessage("Mã ngân hàng"),
+        "bank_name": MessageLookupByLibrary.simpleMessage("Ngân hàng"),
+        "basic_status_off": MessageLookupByLibrary.simpleMessage("Tắt"),
+        "basic_status_on": MessageLookupByLibrary.simpleMessage("Bật"),
+        "battery_str": MessageLookupByLibrary.simpleMessage("Nguồn"),
+        "begin_charging_str":
+            MessageLookupByLibrary.simpleMessage("Bắt đầu sạc"),
+        "book_a_slot": MessageLookupByLibrary.simpleMessage("Đặt lịch"),
+        "book_no": MessageLookupByLibrary.simpleMessage("Số đặt: "),
+        "booked_str": MessageLookupByLibrary.simpleMessage("Đã đặt"),
+        "booking_detail":
+            MessageLookupByLibrary.simpleMessage("Chi tiết lịch sạc "),
+        "booking_number": MessageLookupByLibrary.simpleMessage("Số đặt lịch"),
         "button_close": MessageLookupByLibrary.simpleMessage("Đóng"),
-        "button_group": MessageLookupByLibrary.simpleMessage("Nhóm nút"),
-        "buttons": MessageLookupByLibrary.simpleMessage("Nút"),
-        "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
-        "card_customizer":
-            MessageLookupByLibrary.simpleMessage("Công cụ tùy chỉnh thẻ"),
-        "card_title": MessageLookupByLibrary.simpleMessage("Tiêu đề thẻ"),
-        "cards": MessageLookupByLibrary.simpleMessage("Thẻ"),
-        "carousels": MessageLookupByLibrary.simpleMessage("Băng chuyền"),
-        "category": MessageLookupByLibrary.simpleMessage("Danh mục"),
-        "category_str": MessageLookupByLibrary.simpleMessage("Danh mục"),
-        "category_word": MessageLookupByLibrary.simpleMessage("Từ loại"),
-        "change_log": MessageLookupByLibrary.simpleMessage("Nhật ký thay đổi"),
+        "cancel_booking_success":
+            MessageLookupByLibrary.simpleMessage("Huỷ lịch thành công"),
+        "cancel_str": MessageLookupByLibrary.simpleMessage("Đã hủy"),
+        "canceled_str": MessageLookupByLibrary.simpleMessage("Đã hủy"),
+        "card_holder_name": MessageLookupByLibrary.simpleMessage("Tên chủ thẻ"),
+        "card_number": MessageLookupByLibrary.simpleMessage("Số thẻ"),
+        "category_account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
+        "category_category": MessageLookupByLibrary.simpleMessage("Yêu thích"),
+        "category_device": MessageLookupByLibrary.simpleMessage("Thiết bị"),
+        "category_media_data":
+            MessageLookupByLibrary.simpleMessage("Hình ảnh và video"),
+        "category_news_notify":
+            MessageLookupByLibrary.simpleMessage("Tin tức, thông báo"),
+        "category_report": MessageLookupByLibrary.simpleMessage("Báo cáo"),
+        "category_service_support":
+            MessageLookupByLibrary.simpleMessage("Dịch vụ - hỗ trợ"),
+        "change_layout_behavior":
+            MessageLookupByLibrary.simpleMessage("Thay đổi hành vi bố cục"),
+        "change_location":
+            MessageLookupByLibrary.simpleMessage("thay đổi Vị trí"),
+        "change_password":
+            MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
         "change_password_text":
             MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
-        "choose_quest":
-            MessageLookupByLibrary.simpleMessage("Tìm kiếm câu hỏi"),
-        "choosed_str": MessageLookupByLibrary.simpleMessage("Đã chọn"),
-        "clear": MessageLookupByLibrary.simpleMessage("Clear"),
-        "click_me": MessageLookupByLibrary.simpleMessage("Nhấp vào tôi"),
-        "close": MessageLookupByLibrary.simpleMessage("Đóng"),
-        "code": MessageLookupByLibrary.simpleMessage("Mã"),
-        "color_variant": MessageLookupByLibrary.simpleMessage("Biến thể màu"),
-        "column_chart": MessageLookupByLibrary.simpleMessage("Biểu đồ cột"),
-        "common_info": MessageLookupByLibrary.simpleMessage("Thông tin chung"),
-        "company": MessageLookupByLibrary.simpleMessage("Công ty"),
-        "comparison_of_calories":
-            MessageLookupByLibrary.simpleMessage("So sánh lượng calo"),
-        "complete": MessageLookupByLibrary.simpleMessage("Hoàn thành"),
-        "composition_of_ocean_water":
-            MessageLookupByLibrary.simpleMessage("Thành phần của nước biển"),
-        "confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
-        "confirm_password":
-            MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
-        "confirmation": MessageLookupByLibrary.simpleMessage("Xác nhận?"),
-        "contact": MessageLookupByLibrary.simpleMessage("Liên hệ"),
-        "contact_us":
-            MessageLookupByLibrary.simpleMessage("Liên hệ với chúng tôi"),
+        "change_pin": MessageLookupByLibrary.simpleMessage("Thay đổi mã pin"),
+        "change_pin_success":
+            MessageLookupByLibrary.simpleMessage("Đổi mã pin thành công"),
+        "change_size_of_images": MessageLookupByLibrary.simpleMessage(
+            "Thay đổi kích thước hình ảnh"),
+        "charge_by_time":
+            MessageLookupByLibrary.simpleMessage("Đặt thời gian sạc"),
+        "charge_full": MessageLookupByLibrary.simpleMessage("Sạc đầy"),
+        "charge_info":
+            MessageLookupByLibrary.simpleMessage("Thông tin trạm sạc"),
+        "charge_now": MessageLookupByLibrary.simpleMessage("Sạc ngay"),
+        "charge_point_charging_station":
+            MessageLookupByLibrary.simpleMessage("Trạm sạc ChargePoint"),
+        "charge_point_id":
+            MessageLookupByLibrary.simpleMessage("Số định danh điểm sạc"),
+        "charge_time": MessageLookupByLibrary.simpleMessage("Thời gian sạc"),
+        "charge_type": MessageLookupByLibrary.simpleMessage("Kiểu sạc"),
+        "charged_power":
+            MessageLookupByLibrary.simpleMessage("Điện năng đã sạc"),
+        "charged_str": MessageLookupByLibrary.simpleMessage("Đã sạc"),
+        "charged_time":
+            MessageLookupByLibrary.simpleMessage("Thời gian đã sạc"),
+        "charging_accepted_str":
+            MessageLookupByLibrary.simpleMessage("Thành công"),
+        "charging_blocked_str":
+            MessageLookupByLibrary.simpleMessage("Tài khoản bị khóa"),
+        "charging_capacity_str":
+            MessageLookupByLibrary.simpleMessage("Công suất sạc"),
+        "charging_connector_name":
+            MessageLookupByLibrary.simpleMessage("Tên cổng sạc"),
+        "charging_connector_number":
+            MessageLookupByLibrary.simpleMessage("Số cổng sạc"),
+        "charging_deauthorized_str": MessageLookupByLibrary.simpleMessage(
+            "Giao dịch đã bị dừng do trạng thái ủy quyền"),
+        "charging_emergencystop_str": MessageLookupByLibrary.simpleMessage(
+            "Nút dừng khẩn cấp đã được sử dụng."),
+        "charging_evdisconnected_str": MessageLookupByLibrary.simpleMessage(
+            "Ngắt kết nối cáp, xe đã di chuyển ra khỏi bộ sạc cảm ứng."),
+        "charging_expired_str":
+            MessageLookupByLibrary.simpleMessage("Tài khoản hết hạn"),
+        "charging_hardreset_str": MessageLookupByLibrary.simpleMessage(
+            "Đã nhận được lệnh thiết lập lại cứng."),
+        "charging_local_str": MessageLookupByLibrary.simpleMessage(
+            "Dừng cục bộ theo yêu cầu của người dùng tại điểm sạc"),
+        "charging_nomoney_str":
+            MessageLookupByLibrary.simpleMessage("Không đủ tiền"),
+        "charging_offline_str":
+            MessageLookupByLibrary.simpleMessage("Trạm sạc bị ngắt kết nối"),
+        "charging_other_str":
+            MessageLookupByLibrary.simpleMessage("Không rõ nguyên nhân"),
+        "charging_powerloss_str":
+            MessageLookupByLibrary.simpleMessage("Mất điện hoàn toàn."),
+        "charging_prepare":
+            MessageLookupByLibrary.simpleMessage("Đang chuẩn bị"),
+        "charging_reboot_str": MessageLookupByLibrary.simpleMessage(
+            "Đã xảy ra quá trình khởi động lại/khởi động lại cục bộ."),
+        "charging_rejected_str": MessageLookupByLibrary.simpleMessage(
+            "Từ chối, xử lý gửi xuống trạm bị lỗi"),
+        "charging_remote_str": MessageLookupByLibrary.simpleMessage(
+            "Dừng từ xa theo yêu cầu của người dùng"),
+        "charging_softreset_str": MessageLookupByLibrary.simpleMessage(
+            "Đã nhận được lệnh thiết lập lại mềm."),
+        "charging_str": MessageLookupByLibrary.simpleMessage("Đang sạc"),
+        "charging_unlockcommand_str": MessageLookupByLibrary.simpleMessage(
+            "Hệ thống trung tâm đã gửi lệnh mở khóa kết nối."),
+        "charging_userInvalid_str":
+            MessageLookupByLibrary.simpleMessage("Người dùng không tồn tại"),
+        "choose_EV_charger_near_by_you":
+            MessageLookupByLibrary.simpleMessage("Chọn bộ sạc EV ở gần bạn"),
+        "choose_connector_type":
+            MessageLookupByLibrary.simpleMessage("Chọn loại cổng sạc"),
+        "choose_org": MessageLookupByLibrary.simpleMessage("Chọn đơn vị"),
+        "choose_store": MessageLookupByLibrary.simpleMessage("Chọn cửa hàng"),
+        "click_at_here": MessageLookupByLibrary.simpleMessage("Nhấn vào đây"),
+        "color_border": MessageLookupByLibrary.simpleMessage("Màu viền"),
+        "color_border_final":
+            MessageLookupByLibrary.simpleMessage("Màu viền cuối"),
+        "color_fill": MessageLookupByLibrary.simpleMessage("Màu nền"),
+        "color_fill_final":
+            MessageLookupByLibrary.simpleMessage("Màu nền cuối"),
+        "common_text": MessageLookupByLibrary.simpleMessage("Chung"),
+        "completed_str": MessageLookupByLibrary.simpleMessage("Hoàn thành"),
+        "confirm_and_pay":
+            MessageLookupByLibrary.simpleMessage("Xác nhận và thanh toán"),
+        "confirm_book_slot_str": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn đặt lịch sạc ?"),
+        "confirm_link_store": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn liên kết với cửa hàng này ?"),
+        "confirm_slot": MessageLookupByLibrary.simpleMessage("Xác nhận vị trí"),
+        "confirm_unlink_store": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn hủy liên kết với cửa hàng này ?"),
+        "connection_str": MessageLookupByLibrary.simpleMessage("Kết nối"),
+        "connection_type": MessageLookupByLibrary.simpleMessage("Loại kết nối"),
+        "connector_info":
+            MessageLookupByLibrary.simpleMessage("Thông tin cổng sạc"),
+        "connector_info_type":
+            MessageLookupByLibrary.simpleMessage("Loại cổng sạc"),
+        "connector_number": MessageLookupByLibrary.simpleMessage("Cổng sạc sổ"),
+        "connector_type": MessageLookupByLibrary.simpleMessage("Loại cổng sạc"),
         "content_str": MessageLookupByLibrary.simpleMessage("Nội dung"),
+        "continue_str": MessageLookupByLibrary.simpleMessage("Tiếp tục"),
+        "continuous_driving":
+            MessageLookupByLibrary.simpleMessage("Lái xe liên tục: "),
         "copy_right": MessageLookupByLibrary.simpleMessage(
-            "FFTSolution - Bản quyền 2022"),
-        "course_category_str":
-            MessageLookupByLibrary.simpleMessage("Danh mục khóa học"),
-        "course_create": MessageLookupByLibrary.simpleMessage("Tạo khóa học"),
-        "course_delete": MessageLookupByLibrary.simpleMessage("Xóa khóa học"),
-        "course_edit":
-            MessageLookupByLibrary.simpleMessage("Chỉnh sửa khóa học"),
-        "course_name": MessageLookupByLibrary.simpleMessage("Tên khóa học"),
-        "course_object_str":
-            MessageLookupByLibrary.simpleMessage("Đối tượng khóa học"),
-        "course_str": MessageLookupByLibrary.simpleMessage("Khóa học"),
-        "courses_list":
-            MessageLookupByLibrary.simpleMessage("Danh sách khóa học"),
-        "create_document": MessageLookupByLibrary.simpleMessage("Tạo tài Liệu"),
-        "create_lecture_str":
-            MessageLookupByLibrary.simpleMessage("Tạo bài giảng"),
-        "create_lesson_str":
-            MessageLookupByLibrary.simpleMessage("Tạo bài học"),
-        "create_product": MessageLookupByLibrary.simpleMessage("Tạo sản phẩm"),
-        "create_quiz_str":
-            MessageLookupByLibrary.simpleMessage("Tạo bài kiểm tra"),
-        "create_str": MessageLookupByLibrary.simpleMessage("Tạo"),
-        "create_student": MessageLookupByLibrary.simpleMessage("Tạo học viên"),
-        "create_subject_str":
-            MessageLookupByLibrary.simpleMessage("Tạo chủ đề"),
-        "create_teacher": MessageLookupByLibrary.simpleMessage("Tạo giáo viên"),
-        "created_at": MessageLookupByLibrary.simpleMessage("Được tạo vào"),
-        "creating_a_detailed_pricing_plan_str":
-            MessageLookupByLibrary.simpleMessage(
-                "Việc tạo kế hoạch định giá chi tiết cho khóa học của bạn đòi hỏi phải xem xét nhiều yếu tố khác nhau. Dưới đây là bảng phân tích để giúp bạn cấu trúc mức giá của mình"),
-        "custom_indicator":
-            MessageLookupByLibrary.simpleMessage("Chỉ báo tùy chỉnh"),
-        "customers": MessageLookupByLibrary.simpleMessage("Khách hàng"),
-        "danger": MessageLookupByLibrary.simpleMessage("Nguy hiểm"),
-        "dark": MessageLookupByLibrary.simpleMessage("Tối"),
-        "dark_theme": MessageLookupByLibrary.simpleMessage("Chế độ đêm"),
-        "dashboard": MessageLookupByLibrary.simpleMessage("Bảng điều khiển"),
+            "FFTSolution - Bản quyền 2024"),
+        "create_polygon_note": MessageLookupByLibrary.simpleMessage(
+            "Vui lòng nhấn vào vị trí điểm cần tạo trên bản đồ để tạo vùng"),
+        "create_qr_code": MessageLookupByLibrary.simpleMessage("Tạo mã QR"),
+        "create_user_success":
+            MessageLookupByLibrary.simpleMessage("Tạo tài khoản thành công"),
+        "created_str": MessageLookupByLibrary.simpleMessage("Đã tạo"),
+        "dark_mode": MessageLookupByLibrary.simpleMessage("Chế độ tối"),
+        "dashboard": MessageLookupByLibrary.simpleMessage("Trang chủ"),
         "date_of_birth": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
         "date_str": MessageLookupByLibrary.simpleMessage("Ngày"),
-        "date_time_pickers":
-            MessageLookupByLibrary.simpleMessage("Bộ chọn ngày giờ"),
-        "default_tabs": MessageLookupByLibrary.simpleMessage("Tab mặc định"),
-        "delete_lesson_str":
-            MessageLookupByLibrary.simpleMessage("Xóa bài học"),
-        "delete_str": MessageLookupByLibrary.simpleMessage("Xóa"),
-        "delete_subject_str":
-            MessageLookupByLibrary.simpleMessage("Xóa chủ đề"),
-        "description": MessageLookupByLibrary.simpleMessage("Mô tả"),
-        "detail_str": MessageLookupByLibrary.simpleMessage("Chi tiết"),
-        "dialog_title":
-            MessageLookupByLibrary.simpleMessage("Tiêu đề hộp thoại"),
-        "dialogs": MessageLookupByLibrary.simpleMessage("Hộp thoại"),
-        "differences_in_teaching_methods": MessageLookupByLibrary.simpleMessage(
-            "Sự khác biệt trong giảng dạy"),
-        "differences_in_teaching_methods_1":
-            MessageLookupByLibrary.simpleMessage("Sự "),
-        "differences_in_teaching_methods_2":
-            MessageLookupByLibrary.simpleMessage("khác biệt "),
-        "differences_in_teaching_methods_3":
-            MessageLookupByLibrary.simpleMessage("trong giảng dạy"),
-        "difficulty_str": MessageLookupByLibrary.simpleMessage("Khó"),
-        "discount_str": MessageLookupByLibrary.simpleMessage("Giảm giá"),
-        "document_list":
-            MessageLookupByLibrary.simpleMessage("Danh sách tài Liệu"),
-        "document_str": MessageLookupByLibrary.simpleMessage("Tài Liệu"),
-        "documents_str": MessageLookupByLibrary.simpleMessage("Tài liệu"),
-        "doing_time_str":
-            MessageLookupByLibrary.simpleMessage("Thời gian làm bài"),
-        "doughnut_chart":
-            MessageLookupByLibrary.simpleMessage("Biểu đồ bánh rán"),
-        "download": MessageLookupByLibrary.simpleMessage("Tải xuống"),
+        "delete_account": MessageLookupByLibrary.simpleMessage("Xóa tài khoản"),
+        "delete_all": MessageLookupByLibrary.simpleMessage("Xóa tất cả"),
+        "delete_fitter": MessageLookupByLibrary.simpleMessage("Xóa bộ lọc"),
+        "delete_slot": MessageLookupByLibrary.simpleMessage("Xóa lịch đặt"),
+        "descriptionConnectorWattage":
+            MessageLookupByLibrary.simpleMessage("Công suất (kWh)"),
+        "descriptionOperatingVoltage":
+            MessageLookupByLibrary.simpleMessage("Điện thế (V)"),
+        "detail_VIN": MessageLookupByLibrary.simpleMessage("VIN"),
+        "detail_acc": MessageLookupByLibrary.simpleMessage("Khoá xe"),
+        "detail_air": MessageLookupByLibrary.simpleMessage("Điều hòa"),
+        "detail_ben": MessageLookupByLibrary.simpleMessage("Nâng thùng"),
+        "detail_brake": MessageLookupByLibrary.simpleMessage("Phanh hãm"),
+        "detail_car_address":
+            MessageLookupByLibrary.simpleMessage("Địa chỉ hiện tại"),
+        "detail_car_info":
+            MessageLookupByLibrary.simpleMessage(" Thông tin xe"),
+        "detail_car_speed": MessageLookupByLibrary.simpleMessage("Tốc độ"),
+        "detail_car_status": MessageLookupByLibrary.simpleMessage("Trạng thái"),
+        "detail_car_tracking":
+            MessageLookupByLibrary.simpleMessage("Theo dõi xe"),
+        "detail_car_tracking_day_distance":
+            MessageLookupByLibrary.simpleMessage("Km trong ngày"),
+        "detail_car_tracking_day_time":
+            MessageLookupByLibrary.simpleMessage("Thời gian"),
+        "detail_car_update_time":
+            MessageLookupByLibrary.simpleMessage("Cập nhật lúc"),
+        "detail_date_expected":
+            MessageLookupByLibrary.simpleMessage("Ngày hết hạn"),
+        "detail_door": MessageLookupByLibrary.simpleMessage("Cửa"),
+        "detail_driver_information":
+            MessageLookupByLibrary.simpleMessage("Thông tin lái xe"),
+        "detail_engine": MessageLookupByLibrary.simpleMessage("Nổ máy"),
+        "detail_fuel":
+            MessageLookupByLibrary.simpleMessage("Nhiên liệu còn lại"),
+        "detail_left_turn_signal":
+            MessageLookupByLibrary.simpleMessage("Đèn rẽ trái"),
+        "detail_license_plate":
+            MessageLookupByLibrary.simpleMessage("Biển số xe"),
+        "detail_light": MessageLookupByLibrary.simpleMessage("Đèn xe"),
+        "detail_position_lat_lng":
+            MessageLookupByLibrary.simpleMessage("Tọa độ"),
+        "detail_right_turn_signal":
+            MessageLookupByLibrary.simpleMessage("Đèn rẽ phải"),
+        "detail_temp": MessageLookupByLibrary.simpleMessage("Nhiệt độ"),
+        "develop_page": MessageLookupByLibrary.simpleMessage(
+            "Chức năng đang được phát triển. Vui lòng thử lại sau!"),
+        "device_expired": MessageLookupByLibrary.simpleMessage("Hết hạn"),
+        "device_not_setup":
+            MessageLookupByLibrary.simpleMessage("Chưa hoạt động"),
+        "device_offline": MessageLookupByLibrary.simpleMessage("Mất kết nối"),
+        "device_online": MessageLookupByLibrary.simpleMessage("Hoạt động"),
+        "did_not_receive_code":
+            MessageLookupByLibrary.simpleMessage("Không nhận được Mã?"),
+        "disclosure_of_your_personal_data":
+            MessageLookupByLibrary.simpleMessage(
+                "3.Tiết lộ dữ liệu cá nhân của bạn"),
+        "distance_driving":
+            MessageLookupByLibrary.simpleMessage("Quãng đường đi: "),
+        "distance_km": MessageLookupByLibrary.simpleMessage("Quãng đường (km)"),
+        "distances_str": MessageLookupByLibrary.simpleMessage("Khoảng cách"),
+        "districts_str": MessageLookupByLibrary.simpleMessage("Huyện"),
+        "do_you_want_to_delete_all_saved_slots":
+            MessageLookupByLibrary.simpleMessage(
+                "Bạn có muốn xóa tất cả các vị trí đã lưu không?"),
+        "do_you_want_to_delete_this_slot": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn huỷ lịch?"),
+        "door_status_close_str": MessageLookupByLibrary.simpleMessage("Đóng"),
+        "door_status_open_str": MessageLookupByLibrary.simpleMessage("Mở"),
+        "download_str": MessageLookupByLibrary.simpleMessage("Tải xuống"),
+        "duration_engine_time":
+            MessageLookupByLibrary.simpleMessage(" Tổng thời gian nổ máy"),
+        "duration_parking_engine_time":
+            MessageLookupByLibrary.simpleMessage(" Thời gian đỗ xe nổ máy"),
+        "duration_start_engine_idling":
+            MessageLookupByLibrary.simpleMessage(" Thời gian dừng xe nổ máy"),
+        "duration_start_engine_start":
+            MessageLookupByLibrary.simpleMessage(" Thời gian nổ máy"),
         "duration_str": MessageLookupByLibrary.simpleMessage("Thời lượng"),
-        "easy_str": MessageLookupByLibrary.simpleMessage("Dễ"),
-        "ecommerce": MessageLookupByLibrary.simpleMessage("Thương mại điện tử"),
-        "edit_landing_page":
-            MessageLookupByLibrary.simpleMessage("Chỉnh sửa landing page"),
-        "edit_lesson_str":
-            MessageLookupByLibrary.simpleMessage("Chỉnh sửa bài học"),
+        "edit_profile": MessageLookupByLibrary.simpleMessage("Chỉnh sửa hồ sơ"),
         "edit_str": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
-        "elevated_button": MessageLookupByLibrary.simpleMessage("Nút nâng cao"),
-        "elevated_rounded_button":
-            MessageLookupByLibrary.simpleMessage("Nút bo tròn nâng cao"),
+        "electricType": MessageLookupByLibrary.simpleMessage("Kiểu sạc điện"),
+        "electricityPrice":
+            MessageLookupByLibrary.simpleMessage("Giá điện (VNĐ/kWh)"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
-        "email_address": MessageLookupByLibrary.simpleMessage("Địa chỉ email"),
-        "email_or_pass_invalid": MessageLookupByLibrary.simpleMessage(
-            "Email hoặc số điện thoại không đúng"),
-        "email_password":
-            MessageLookupByLibrary.simpleMessage("Mật khẩu email"),
-        "email_us_your_question": MessageLookupByLibrary.simpleMessage(
-            "Gửi câu hỏi của bạn cho chúng tôi qua email"),
-        "enable_validation":
-            MessageLookupByLibrary.simpleMessage("Bật xác thực"),
+        "enable_notifications_text":
+            MessageLookupByLibrary.simpleMessage("Bật thông báo"),
+        "engine_hours_history":
+            MessageLookupByLibrary.simpleMessage("Lịch sử máy nổ"),
         "english_text": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
-        "enter_your_email":
-            MessageLookupByLibrary.simpleMessage("Điền email của bạn"),
-        "entrance_test_str":
-            MessageLookupByLibrary.simpleMessage("Bài test đầu vào"),
-        "example_form": MessageLookupByLibrary.simpleMessage("Mẫu ví dụ"),
-        "examples_str": MessageLookupByLibrary.simpleMessage("Ví dụ"),
-        "extra_pages": MessageLookupByLibrary.simpleMessage("Trang bổ sung"),
-        "faqs": MessageLookupByLibrary.simpleMessage("Câu hỏi thường gặp"),
-        "feelings_str": MessageLookupByLibrary.simpleMessage("Cảm nhận"),
-        "filled": MessageLookupByLibrary.simpleMessage("Lấp đầy"),
-        "finish": MessageLookupByLibrary.simpleMessage("Kết thúc"),
-        "first_name": MessageLookupByLibrary.simpleMessage("Tên"),
-        "flat_button": MessageLookupByLibrary.simpleMessage("Nút phẳng"),
-        "floating_label_type":
-            MessageLookupByLibrary.simpleMessage("Loại nhãn nổi"),
-        "floating_type": MessageLookupByLibrary.simpleMessage("Loại nổi"),
-        "forgot_password":
-            MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
-        "forgot_password1":
-            MessageLookupByLibrary.simpleMessage("Quên mật khẩu?"),
-        "form": MessageLookupByLibrary.simpleMessage("Biểu mẫu"),
-        "forms": MessageLookupByLibrary.simpleMessage("Biểu mẫu"),
-        "free_str": MessageLookupByLibrary.simpleMessage("MIỄN PHÍ"),
-        "frequently_asked_questions":
-            MessageLookupByLibrary.simpleMessage("Các câu hỏi thường gặp"),
+        "enter_code_sent_to_your_phone": MessageLookupByLibrary.simpleMessage(
+            "Nhập mã được gửi tới điện thoại của bạn"),
+        "enter_detail_to_sign_up_your_account":
+            MessageLookupByLibrary.simpleMessage(
+                "Nhập chi tiết để đăng ký tài khoản của bạn"),
+        "enter_your_email_address_for_forgot_password":
+            MessageLookupByLibrary.simpleMessage(
+                "Nhập địa chỉ email của bạn khi quên mật khẩu"),
+        "enviroment_develop":
+            MessageLookupByLibrary.simpleMessage("Môi trường develop"),
+        "enviroment_live":
+            MessageLookupByLibrary.simpleMessage("Môi trường live"),
+        "enviroment_permission":
+            MessageLookupByLibrary.simpleMessage("Môi trường permission"),
+        "enviroment_uat":
+            MessageLookupByLibrary.simpleMessage("Môi trường uat"),
+        "environment_text": MessageLookupByLibrary.simpleMessage("Môi trường"),
+        "expire_date": MessageLookupByLibrary.simpleMessage("Ngày hết hạn"),
+        "expired_str": MessageLookupByLibrary.simpleMessage("Hết hạn"),
+        "extend_str": MessageLookupByLibrary.simpleMessage("Gia hạn thiết bị"),
+        "find_by_device_name":
+            MessageLookupByLibrary.simpleMessage("Tìm theo tên thiết bị"),
+        "find_by_org_name":
+            MessageLookupByLibrary.simpleMessage("Tìm theo tên đơn vị"),
+        "fitter_list": MessageLookupByLibrary.simpleMessage("Danh sách Bộ lọc"),
+        "forgot_password": MessageLookupByLibrary.simpleMessage("Quên mã pin?"),
+        "from_time": MessageLookupByLibrary.simpleMessage("Từ thời gian"),
+        "fuel_add": MessageLookupByLibrary.simpleMessage("Nạp"),
+        "fuel_consume": MessageLookupByLibrary.simpleMessage("Tiêu thụ"),
+        "fuel_remove": MessageLookupByLibrary.simpleMessage("Xả"),
+        "fuel_type": MessageLookupByLibrary.simpleMessage("Loại nhiên liệu"),
         "full_name": MessageLookupByLibrary.simpleMessage("Tên đầy đủ"),
-        "full_width":
-            MessageLookupByLibrary.simpleMessage("Toàn bộ chiều rộng"),
-        "gdp_growth_rate":
-            MessageLookupByLibrary.simpleMessage("Tốc độ tăng trưởng GDP"),
-        "gender": MessageLookupByLibrary.simpleMessage("Giới tính"),
-        "general": MessageLookupByLibrary.simpleMessage("Chung"),
-        "google_map": MessageLookupByLibrary.simpleMessage("Bản đồ Google"),
-        "grade_name_str": MessageLookupByLibrary.simpleMessage("Cấp độ"),
-        "grade_str": MessageLookupByLibrary.simpleMessage("Cấp độ"),
-        "has_not_example":
-            MessageLookupByLibrary.simpleMessage("Không có ví dụ nào"),
+        "full_view": MessageLookupByLibrary.simpleMessage("Thông tin"),
+        "geofence_create":
+            MessageLookupByLibrary.simpleMessage("Tạo mới vùng địa lý"),
+        "geofence_create1": MessageLookupByLibrary.simpleMessage("Tạo vùng "),
+        "geofence_delete":
+            MessageLookupByLibrary.simpleMessage("Xóa vùng địa lý"),
+        "geofence_delete_confirm":
+            MessageLookupByLibrary.simpleMessage("Bạn có chắc chắn xóa vùng"),
+        "geofence_edit":
+            MessageLookupByLibrary.simpleMessage("Chỉnh sửa vùng  địa lý"),
+        "geofence_list":
+            MessageLookupByLibrary.simpleMessage("Quản lý danh sách vùng"),
+        "geofence_manager": MessageLookupByLibrary.simpleMessage("Vùng địa lý"),
+        "geofence_name": MessageLookupByLibrary.simpleMessage("Tên vùng "),
+        "geofence_type":
+            MessageLookupByLibrary.simpleMessage("Phân loại vùng "),
+        "guideline_and_q_and_a": MessageLookupByLibrary.simpleMessage(
+            "Hướng dẫn sử dụng và hỏi đáp"),
+        "have_not_review":
+            MessageLookupByLibrary.simpleMessage("Chưa có đánh giá"),
         "header_popup_biometric": MessageLookupByLibrary.simpleMessage(
             "Xác thực sinh trắc của bạn để đăng nhập"),
         "header_popup_fingerprint": MessageLookupByLibrary.simpleMessage(
             "Xác thực vân tay của bạn để đăng nhập"),
-        "home": MessageLookupByLibrary.simpleMessage("Trang chủ"),
-        "home_str": MessageLookupByLibrary.simpleMessage("Trang chủ"),
-        "how_long_does_the_course_last_str":
-            MessageLookupByLibrary.simpleMessage("Khóa học kéo dài bao lâu?"),
+        "history_str": MessageLookupByLibrary.simpleMessage("Lịch sử"),
         "i_agree_with": MessageLookupByLibrary.simpleMessage("Tôi đồng ý với "),
-        "i_am_teacher":
-            MessageLookupByLibrary.simpleMessage("Tôi là giáo viên"),
-        "i_haven_t_account":
-            MessageLookupByLibrary.simpleMessage("Tôi chưa có tài khoản"),
-        "id": MessageLookupByLibrary.simpleMessage("ID"),
-        "image_str": MessageLookupByLibrary.simpleMessage("Hình ảnh"),
-        "image_type_str": MessageLookupByLibrary.simpleMessage("Hình ảnh"),
-        "infinite": MessageLookupByLibrary.simpleMessage("Vô hạn"),
-        "info": MessageLookupByLibrary.simpleMessage("Thông tin"),
-        "instructor_str": MessageLookupByLibrary.simpleMessage("Giáo viên"),
-        "introduction_str": MessageLookupByLibrary.simpleMessage("Giới thiệu"),
-        "landing_page": MessageLookupByLibrary.simpleMessage("Landing page"),
+        "id_str": MessageLookupByLibrary.simpleMessage("Id"),
+        "inactivating_str":
+            MessageLookupByLibrary.simpleMessage("Không hoạt động"),
+        "input_avrage_of_vechile": MessageLookupByLibrary.simpleMessage(
+            "Trung bình đầu vào của vechile"),
+        "input_number_of_vehicle":
+            MessageLookupByLibrary.simpleMessage("Nhập số xe"),
+        "input_time_of_full_charging": MessageLookupByLibrary.simpleMessage(
+            "Thời gian đầu vào của quá trình sạc đầy"),
+        "intro1_des": MessageLookupByLibrary.simpleMessage(
+            "Bây giờ bạn có thể tìm thấy nhiều nơi để sạc xe điện của mình với PaymentManager."),
+        "intro1_title1": MessageLookupByLibrary.simpleMessage(""),
+        "intro1_title2":
+            MessageLookupByLibrary.simpleMessage("Tìm trạm sạc gần nhất"),
+        "intro2_des": MessageLookupByLibrary.simpleMessage(
+            "Kiểm tra trạng thái lịch sạc trong thời gian thực. Đặt lịch sạc của bạn một cách dễ dàng theo nhu cầu của bạn."),
+        "intro2_title1": MessageLookupByLibrary.simpleMessage("Đặt lịch sạc "),
+        "intro2_title2": MessageLookupByLibrary.simpleMessage(""),
+        "intro3_des": MessageLookupByLibrary.simpleMessage(
+            "Nhận các dịch vụ của chúng tôi cũng như các ưu đãi tuyệt vời và dịch vụ khẩn cấp cũng như hỗ trợ 24*7."),
+        "intro3_title1": MessageLookupByLibrary.simpleMessage(
+            "Chúng tôi đã hỗ trợ bạn bằng "),
+        "intro3_title2":
+            MessageLookupByLibrary.simpleMessage("dịch vụ nhanh nhất"),
+        "invalid_str": MessageLookupByLibrary.simpleMessage("Không xác định"),
         "language_text": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
-        "large": MessageLookupByLibrary.simpleMessage("Lớn"),
-        "last_month": MessageLookupByLibrary.simpleMessage("Tháng trước"),
-        "last_name": MessageLookupByLibrary.simpleMessage("Họ"),
-        "last_order_at":
-            MessageLookupByLibrary.simpleMessage("Đơn hàng cuối cùng lúc"),
-        "last_week": MessageLookupByLibrary.simpleMessage("Tuần trước"),
-        "lecture_link_str":
-            MessageLookupByLibrary.simpleMessage("Liên kết bài giảng"),
-        "lecture_name_str":
-            MessageLookupByLibrary.simpleMessage("Tên bài giảng"),
-        "left": MessageLookupByLibrary.simpleMessage("Trái"),
-        "left_dialog":
-            MessageLookupByLibrary.simpleMessage("Hộp thoại bên trái"),
-        "lesson_list":
-            MessageLookupByLibrary.simpleMessage("Danh sách bài học"),
-        "lesson_str": MessageLookupByLibrary.simpleMessage("Bài học"),
-        "lets_study": MessageLookupByLibrary.simpleMessage("Vào học"),
-        "level_str": MessageLookupByLibrary.simpleMessage("Cấp độ"),
-        "license_copyright":
-            MessageLookupByLibrary.simpleMessage("Giấy phép & bản quyền"),
-        "licensing": MessageLookupByLibrary.simpleMessage("Cấp phép"),
-        "light": MessageLookupByLibrary.simpleMessage("Ánh sáng"),
-        "literacy_rate": MessageLookupByLibrary.simpleMessage("Tỷ lệ biết chữ"),
+        "link_partner":
+            MessageLookupByLibrary.simpleMessage("Liên kết cửa hàng"),
+        "link_user":
+            MessageLookupByLibrary.simpleMessage("Liên kết người dùng"),
         "loading_message":
             MessageLookupByLibrary.simpleMessage("Đang xử lý, vui lòng chờ..."),
-        "locked": MessageLookupByLibrary.simpleMessage("Đã khóa"),
-        "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
-        "login_your_account":
-            MessageLookupByLibrary.simpleMessage("Đăng nhập tài khoản của bạn"),
-        "map": MessageLookupByLibrary.simpleMessage("Biểu đồ"),
-        "maximum_point": MessageLookupByLibrary.simpleMessage("Điểm số tối đa"),
-        "meaning_str": MessageLookupByLibrary.simpleMessage("Ý nghĩa"),
-        "medium": MessageLookupByLibrary.simpleMessage("Trung bình"),
-        "medthod_content1": MessageLookupByLibrary.simpleMessage(
-            "Chỉ sau 9 tiếng học, bạn đã có thể tự giới thiệu bản thân và có phát âm chuẩn"),
-        "medthod_content2": MessageLookupByLibrary.simpleMessage(
-            "Thông qua hệ thống bài tập giao tiếp giả lập, app hỗ trợ luyện nói chuyên sâu"),
-        "medthod_content3": MessageLookupByLibrary.simpleMessage(
-            "Học viên đa phần là dân công sở, quản lý... vừa đi học vừa có thêm mối quan hệ"),
-        "medthod_content4": MessageLookupByLibrary.simpleMessage(
-            "Phương pháp học giúp bạn chỉ mất 20% nỗ lực nhưng đạt 80% hiệu quả"),
-        "medthod_content5": MessageLookupByLibrary.simpleMessage(
-            "Phương pháp học giúp bạn chỉ mất 20% nỗ lực nhưng đạt 80% hiệu quả"),
-        "medthod_content6": MessageLookupByLibrary.simpleMessage(
-            "Phương pháp học giúp bạn chỉ mất 20% nỗ lực nhưng đạt 80% hiệu quả"),
-        "medthod_title1": MessageLookupByLibrary.simpleMessage(
-            "Dạy phát âm chuẩn ngay từ đầu"),
-        "medthod_title2": MessageLookupByLibrary.simpleMessage(
-            "Tập trung vào nghe nói, giao tiếp"),
-        "medthod_title3":
-            MessageLookupByLibrary.simpleMessage("Cộng đồng học viên cực chất"),
-        "medthod_title4": MessageLookupByLibrary.simpleMessage(
-            "Phương pháp Emotional Chinese"),
-        "medthod_title5": MessageLookupByLibrary.simpleMessage(
-            "Phương pháp Emotional Chinese"),
-        "medthod_title6": MessageLookupByLibrary.simpleMessage(
-            "Phương pháp Emotional Chinese"),
-        "method_str": MessageLookupByLibrary.simpleMessage("Phương pháp"),
+        "location_end":
+            MessageLookupByLibrary.simpleMessage("Tọa độ điểm kết thúc"),
+        "location_permission": MessageLookupByLibrary.simpleMessage(
+            "Ứng dụng cần truy cập dữ liệu vị trí để xem bản đồ, vui lòng cho phép ứng dụng truy cập!"),
+        "location_start":
+            MessageLookupByLibrary.simpleMessage("Tọa độ điểm bắt đầu"),
+        "lock_app_in_background_text":
+            MessageLookupByLibrary.simpleMessage("Khóa ứng dụng trong nền"),
+        "log_out": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
+        "login_by_otp_code":
+            MessageLookupByLibrary.simpleMessage("Đăng nhập bằng mã otp"),
+        "login_by_pin_code":
+            MessageLookupByLibrary.simpleMessage("Đăng nhập bằng mã pin"),
+        "map": MessageLookupByLibrary.simpleMessage("Bản đồ"),
+        "map_all_device":
+            MessageLookupByLibrary.simpleMessage("Tất cả thiết bị"),
+        "map_info": MessageLookupByLibrary.simpleMessage("Thông tin"),
+        "map_replay": MessageLookupByLibrary.simpleMessage("Xem lại"),
+        "map_setting_title":
+            MessageLookupByLibrary.simpleMessage(" Cài đặt bản đồ "),
+        "map_tracking": MessageLookupByLibrary.simpleMessage("Theo dõi"),
+        "map_trip": MessageLookupByLibrary.simpleMessage("Hành trình"),
+        "max_speed": MessageLookupByLibrary.simpleMessage(" Tốc độ lớn nhất"),
+        "maximum_power":
+            MessageLookupByLibrary.simpleMessage("Công suất tối đa"),
+        "message_notify_not_have_car_in_this_state":
+            MessageLookupByLibrary.simpleMessage(
+                "Không có xe nào trong trạng thái này!"),
+        "message_notify_not_have_start_stop_points_in_this_time":
+            MessageLookupByLibrary.simpleMessage(
+                "Không tìm thấy điểm dừng đỗ nào trong thời gian này. Vui lòng chọn thời gian khác!"),
+        "ministry_of_transport":
+            MessageLookupByLibrary.simpleMessage("Tổng cục đường bộ"),
+        "miss_text": MessageLookupByLibrary.simpleMessage("\'Misc\'"),
+        "mobile_number": MessageLookupByLibrary.simpleMessage("Số di động"),
+        "money_in_wallet": MessageLookupByLibrary.simpleMessage("Số dư"),
+        "money_in_wallet_is_enough":
+            MessageLookupByLibrary.simpleMessage("Số dư ví không đủ"),
+        "money_str": MessageLookupByLibrary.simpleMessage("Số tiền (VNĐ)"),
+        "money_value": MessageLookupByLibrary.simpleMessage("Số tiền nạp"),
         "more": MessageLookupByLibrary.simpleMessage("Thêm"),
-        "more_inputs": MessageLookupByLibrary.simpleMessage("Thêm đầu vào"),
-        "name": MessageLookupByLibrary.simpleMessage("Tên"),
-        "new_word_str": MessageLookupByLibrary.simpleMessage("Từ mới"),
-        "next": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
+        "my_booking": MessageLookupByLibrary.simpleMessage("Đặt chỗ của tôi"),
+        "my_car": MessageLookupByLibrary.simpleMessage("Xe của tôi"),
+        "my_profile": MessageLookupByLibrary.simpleMessage("Hồ sơ của tôi"),
+        "my_qr": MessageLookupByLibrary.simpleMessage("QR của tôi"),
+        "near_by_me": MessageLookupByLibrary.simpleMessage("Gần tôi"),
+        "new_password": MessageLookupByLibrary.simpleMessage("Mật khẩu mới"),
+        "new_password_and_confirm_not_simple":
+            MessageLookupByLibrary.simpleMessage(
+                "Mật khẩu mới và xác nhận mật khẩu mới không trùng nhau"),
+        "new_password_confirm":
+            MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu mới"),
+        "new_password_confirm_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Xác nhận mật khẩu mới không được để trống"),
+        "new_password_different_previous_passwords":
+            MessageLookupByLibrary.simpleMessage(
+                "Mật khẩu mới của bạn phải khác với mật khẩu đã sử dụng trước đó."),
+        "new_password_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Mật khẩu mới không được để trống"),
+        "new_pin": MessageLookupByLibrary.simpleMessage("Mã pin mới"),
+        "new_pin_again":
+            MessageLookupByLibrary.simpleMessage("Nhập lại mã pin"),
+        "new_pin_code_and_confirm_not_simple":
+            MessageLookupByLibrary.simpleMessage(
+                "Mã pin  mới và xác nhận mã pin  mới không trùng nhau"),
+        "new_pin_code_confirm_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Xác nhận mã pin mới không được để trống"),
+        "new_pin_code_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Mã pin mới không được để trống"),
+        "next_str": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
+        "no_data_str": MessageLookupByLibrary.simpleMessage("Không có dữ liệu"),
         "no_internet":
             MessageLookupByLibrary.simpleMessage("Không có kết nối mạng"),
         "no_search_result":
             MessageLookupByLibrary.simpleMessage("Không có dữ liệu"),
-        "no_shadow": MessageLookupByLibrary.simpleMessage("Không có bóng"),
-        "normal_sale_str":
-            MessageLookupByLibrary.simpleMessage("Bán bình thường"),
-        "normal_str": MessageLookupByLibrary.simpleMessage("Bình thường"),
-        "not_access_permission": MessageLookupByLibrary.simpleMessage(
-            "Bạn không có quyền truy cập nội dung này"),
+        "no_str": MessageLookupByLibrary.simpleMessage("Không có"),
         "not_connect_to_server": MessageLookupByLibrary.simpleMessage(
             "Không thể kết nối đến máy chủ"),
-        "notifications": MessageLookupByLibrary.simpleMessage("Thông báo"),
+        "not_nearest_ev_charge": MessageLookupByLibrary.simpleMessage(
+            "Không có trạm sạc nào gần bạn"),
+        "not_need_account": MessageLookupByLibrary.simpleMessage(
+            "Không cần tài khoản,nhấn để quét mã"),
+        "not_now": MessageLookupByLibrary.simpleMessage("Không phải bây giờ"),
+        "not_user": MessageLookupByLibrary.simpleMessage("Không sử dụng"),
+        "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
+        "notify_detail":
+            MessageLookupByLibrary.simpleMessage("Chi tiết thông báo"),
         "notify_error":
             MessageLookupByLibrary.simpleMessage("Đã có lỗi xảy ra!"),
         "notify_lable": MessageLookupByLibrary.simpleMessage("Thông báo"),
+        "notify_setup_biometric": MessageLookupByLibrary.simpleMessage(
+            "Bạn chưa cài đặt đăng nhập bằng sinh trắc học. Vui lòng đăng nhập vào tài khoản bằng mật khẩu và cài đặt xác thực sinh trắc học"),
         "notify_setup_faceid": MessageLookupByLibrary.simpleMessage(
             "Bạn chưa cài đặt đăng nhập bằng khuôn mặt. Vui lòng đăng nhập vào tài khoản bằng mật khẩu và cài đặt xác thực khuôn mặt"),
         "notify_setup_fingerprint": MessageLookupByLibrary.simpleMessage(
             "Bạn chưa cài đặt đăng nhập bằng vân tay. Vui lòng đăng nhập vào tài khoản bằng mật khẩu và cài đặt xác thực vân tay"),
-        "oK": MessageLookupByLibrary.simpleMessage("Đồng ý"),
-        "of_arrivals": MessageLookupByLibrary.simpleMessage("số lượt đến"),
-        "ok": MessageLookupByLibrary.simpleMessage("Đồng ý"),
-        "on_delivery": MessageLookupByLibrary.simpleMessage("Khi giao hàng"),
+        "notify_type": MessageLookupByLibrary.simpleMessage("Loại thông báo"),
+        "number_of_payment":
+            MessageLookupByLibrary.simpleMessage("Lượt thanh toán"),
+        "occupiedChargePrice":
+            MessageLookupByLibrary.simpleMessage("Phí chiếm dụng (VNĐ/h)"),
+        "ok_str": MessageLookupByLibrary.simpleMessage("Được"),
+        "old_password": MessageLookupByLibrary.simpleMessage("Mật khẩu cũ"),
+        "old_password_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Mật khẩu cũ không được để trống"),
+        "old_pin": MessageLookupByLibrary.simpleMessage("Mã pin hiện tại"),
+        "old_pin_code_not_empty": MessageLookupByLibrary.simpleMessage(
+            "Mã pin cũ không được để trống"),
+        "ongoing_str": MessageLookupByLibrary.simpleMessage("Đang sạc"),
+        "opacity_value": MessageLookupByLibrary.simpleMessage("Độ mờ"),
+        "open_24_in_7": MessageLookupByLibrary.simpleMessage("Mở cửa 24/7 "),
         "open_source_licenses_text":
             MessageLookupByLibrary.simpleMessage("Giấy phép nguồn mở"),
-        "opt_in_daily_newsletter_at_the_email":
-            MessageLookupByLibrary.simpleMessage(
-                "Chọn nhận bản tin hàng ngày qua email"),
-        "orders": MessageLookupByLibrary.simpleMessage("Đơn đặt hàng"),
-        "other": MessageLookupByLibrary.simpleMessage("Khác"),
-        "other_settings":
-            MessageLookupByLibrary.simpleMessage("Các cài đặt khác"),
-        "outline_button": MessageLookupByLibrary.simpleMessage("Nút phác thảo"),
-        "outline_rounded_button":
-            MessageLookupByLibrary.simpleMessage("Nút bo tròn viền"),
-        "outline_style":
-            MessageLookupByLibrary.simpleMessage("Phong cách phác thảo"),
-        "output": MessageLookupByLibrary.simpleMessage("Đầu ra"),
-        "output_test_str":
-            MessageLookupByLibrary.simpleMessage("Bài test đầu ra"),
-        "overview": MessageLookupByLibrary.simpleMessage("Tổng quan"),
-        "pages": MessageLookupByLibrary.simpleMessage("Trang"),
+        "open_str": MessageLookupByLibrary.simpleMessage("Mở"),
+        "or_str": MessageLookupByLibrary.simpleMessage("hoặc"),
+        "org_list": MessageLookupByLibrary.simpleMessage("Danh sách đơn vị"),
+        "org_str": MessageLookupByLibrary.simpleMessage("Đơn vị"),
+        "otp_code": MessageLookupByLibrary.simpleMessage("Mã OTP"),
+        "otp_str": MessageLookupByLibrary.simpleMessage("OTP"),
+        "page_not_found":
+            MessageLookupByLibrary.simpleMessage("Trang không tồn tại"),
+        "parent_account": MessageLookupByLibrary.simpleMessage("Tài khoản cha"),
+        "parkingPrice":
+            MessageLookupByLibrary.simpleMessage("Giá đỗ xe (VNĐ/h)"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
-        "payment_str": MessageLookupByLibrary.simpleMessage("Thanh toán"),
+        "password_changed_sucessfully": MessageLookupByLibrary.simpleMessage(
+            "Mật khẩu của bạn đã được thay đổi thành công!"),
+        "pay_by_voucher_str":
+            MessageLookupByLibrary.simpleMessage("Thanh toán bằng voucher"),
+        "payment_code": MessageLookupByLibrary.simpleMessage("Mã thanh toán"),
+        "payment_detail":
+            MessageLookupByLibrary.simpleMessage("Chi tiết thanh toán"),
+        "payment_history":
+            MessageLookupByLibrary.simpleMessage("Lịch sử thanh toán"),
+        "payment_receipt":
+            MessageLookupByLibrary.simpleMessage("Biên lai thanh toán"),
+        "payment_type": MessageLookupByLibrary.simpleMessage("Loại thanh toán"),
         "phone": MessageLookupByLibrary.simpleMessage("Điện thoại"),
-        "phone_number": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
         "phone_number_text":
             MessageLookupByLibrary.simpleMessage("Số điện thoại"),
-        "pie_chart": MessageLookupByLibrary.simpleMessage("Biểu đồ hình tròn"),
-        "pinyin_str": MessageLookupByLibrary.simpleMessage("Phiên âm"),
-        "pinyin_tone_str": MessageLookupByLibrary.simpleMessage("Phiên âm"),
-        "please_choose_a_subject":
-            MessageLookupByLibrary.simpleMessage("Vui lòng chọn một chủ đề"),
-        "please_fill_in_all_missing_fields_str":
-            MessageLookupByLibrary.simpleMessage(
-                "Vui lòng điền vào tất cả các trường còn thiếu"),
-        "population_growth_of_various_countries":
-            MessageLookupByLibrary.simpleMessage(
-                "Tăng trưởng dân số ở nhiều quốc gia"),
-        "positions": MessageLookupByLibrary.simpleMessage("Vị trí"),
-        "premium_str": MessageLookupByLibrary.simpleMessage("TRẢ PHÍ"),
-        "presale_str": MessageLookupByLibrary.simpleMessage("Bán trước"),
-        "prev": MessageLookupByLibrary.simpleMessage("Trước"),
-        "preview_str": MessageLookupByLibrary.simpleMessage("Xem trước"),
-        "price": MessageLookupByLibrary.simpleMessage("Giá"),
-        "pricing": MessageLookupByLibrary.simpleMessage("Giá"),
-        "pricing_plan_str":
-            MessageLookupByLibrary.simpleMessage("Kế hoạch định giá"),
-        "primary": MessageLookupByLibrary.simpleMessage("Chính"),
-        "primary_course":
-            MessageLookupByLibrary.simpleMessage("Khóa học chính quy"),
-        "product": MessageLookupByLibrary.simpleMessage("Sản phẩm"),
-        "product_a": MessageLookupByLibrary.simpleMessage("Sản phẩm a"),
-        "product_b": MessageLookupByLibrary.simpleMessage("Sản phẩm b"),
-        "product_comparison":
-            MessageLookupByLibrary.simpleMessage("So sánh sản phẩm"),
-        "product_name": MessageLookupByLibrary.simpleMessage("Tên sản phẩm"),
-        "products": MessageLookupByLibrary.simpleMessage("Sản phẩm"),
-        "purchase_now": MessageLookupByLibrary.simpleMessage("Mua ngay"),
-        "pyramid_chart":
-            MessageLookupByLibrary.simpleMessage("Biểu đồ kim tự tháp"),
-        "qty": MessageLookupByLibrary.simpleMessage("Số lượng"),
-        "question_create": MessageLookupByLibrary.simpleMessage("Tạo câu hỏi"),
-        "question_edit":
-            MessageLookupByLibrary.simpleMessage("Chỉnh sửa câu hỏi"),
-        "question_number": MessageLookupByLibrary.simpleMessage("Số câu hỏi"),
-        "question_str": MessageLookupByLibrary.simpleMessage("Câu hỏi"),
-        "question_type": MessageLookupByLibrary.simpleMessage("Loại câu hỏi"),
-        "quick_links": MessageLookupByLibrary.simpleMessage("Liên kết nhanh"),
-        "quiz_add": MessageLookupByLibrary.simpleMessage("Tạo câu hỏi"),
-        "quiz_list":
-            MessageLookupByLibrary.simpleMessage("Danh sách các câu hỏi"),
-        "quiz_remove": MessageLookupByLibrary.simpleMessage("Xóa câu hỏi"),
-        "quiz_str": MessageLookupByLibrary.simpleMessage("Các câu hỏi"),
-        "quiz_type_str": MessageLookupByLibrary.simpleMessage("Nhập câu hỏi"),
-        "quiz_update": MessageLookupByLibrary.simpleMessage("Cập nhật câu hỏi"),
-        "radial_chart":
-            MessageLookupByLibrary.simpleMessage("Biểu đồ xuyên tâm"),
-        "rating": MessageLookupByLibrary.simpleMessage("Xếp hạng"),
+        "photos_str": MessageLookupByLibrary.simpleMessage("Ảnh"),
+        "pick_avaiable_slot":
+            MessageLookupByLibrary.simpleMessage("CHỌN LỊCH CÓ SẴN "),
+        "pin_code": MessageLookupByLibrary.simpleMessage("Mã pin"),
+        "pin_code_length_must_is_6":
+            MessageLookupByLibrary.simpleMessage("Vui lòng nhập đủ 6 số"),
+        "pin_str": MessageLookupByLibrary.simpleMessage("Pin"),
+        "please_choose_connector_type":
+            MessageLookupByLibrary.simpleMessage("Vui lòng chọn cổng sạc"),
+        "please_choose_date":
+            MessageLookupByLibrary.simpleMessage("Vui lòng chọn ngày sạc"),
+        "please_choose_time":
+            MessageLookupByLibrary.simpleMessage("Vui lòng chọn thời gian sạc"),
+        "please_fill_all_detail_info": MessageLookupByLibrary.simpleMessage(
+            "Vui lòng điền tất cả chi tiết để bắt đầu thời gian đặt chỗ của bạn"),
+        "please_show_this_qr_for_partner": MessageLookupByLibrary.simpleMessage(
+            "Vui lòng đưa mã này cho chủ cửa hàng để thanh toán!"),
+        "please_type_key_word": MessageLookupByLibrary.simpleMessage(
+            "Nhập địa chỉ để tìm trạm sạc"),
+        "please_type_money": MessageLookupByLibrary.simpleMessage(
+            "Vui lòng nhập số tiền lớn hơn 2000 VNĐ"),
+        "please_type_phone_number":
+            MessageLookupByLibrary.simpleMessage("Vui lòng nhập số điện thoại"),
+        "please_type_pin_code_of_phone": MessageLookupByLibrary.simpleMessage(
+            "Vui lòng nhập mã pin đã đăng ký với số điện thoại "),
+        "previous_charged":
+            MessageLookupByLibrary.simpleMessage("Đã tính phí trước đó"),
+        "previous_slot_station":
+            MessageLookupByLibrary.simpleMessage("Trạm đã đặt trước đó"),
+        "price_need_paid": MessageLookupByLibrary.simpleMessage(
+            "Chi phí cần thanh toán (VNĐ)"),
+        "price_parking_total":
+            MessageLookupByLibrary.simpleMessage("Chi phí đỗ xe (VNĐ)"),
+        "price_str": MessageLookupByLibrary.simpleMessage("Giá"),
+        "privacy_policy":
+            MessageLookupByLibrary.simpleMessage("Chính sách quyền riêng tư"),
+        "production_text": MessageLookupByLibrary.simpleMessage("Sản xuất"),
+        "profile_str": MessageLookupByLibrary.simpleMessage("Hồ sơ"),
+        "provide_voucher_str":
+            MessageLookupByLibrary.simpleMessage("Tạo voucher"),
+        "provinces_str":
+            MessageLookupByLibrary.simpleMessage("Tỉnh, thành phố"),
+        "qr_code_invalid":
+            MessageLookupByLibrary.simpleMessage("Mã QR không hợp lệ !"),
+        "quick_choose": MessageLookupByLibrary.simpleMessage("Chọn nhanh"),
+        "radius_str": MessageLookupByLibrary.simpleMessage("Bán kính"),
+        "rating_review":
+            MessageLookupByLibrary.simpleMessage("Xếp hạng & Đánh giá"),
         "re_create": MessageLookupByLibrary.simpleMessage("Tạo mới"),
-        "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
-        "register_now": MessageLookupByLibrary.simpleMessage("Đăng ký ngay"),
-        "register_to_enjoy_the_best_deals_for_you":
-            MessageLookupByLibrary.simpleMessage(
-                "Đăng ký để được hưởng những ưu đãi tốt nhất cho bạn"),
+        "rebook_slot": MessageLookupByLibrary.simpleMessage("Đặt lại"),
+        "receive_voucher_str":
+            MessageLookupByLibrary.simpleMessage("Nhận voucher"),
+        "referent_code": MessageLookupByLibrary.simpleMessage("Mã tham chiếu"),
+        "refund_voucher_str":
+            MessageLookupByLibrary.simpleMessage("Hoàn voucher"),
         "remember_me": MessageLookupByLibrary.simpleMessage("Nhớ tôi"),
-        "remove_course": MessageLookupByLibrary.simpleMessage("Xóa khóa học"),
-        "remove_example": MessageLookupByLibrary.simpleMessage("Xóa ví dụ"),
-        "remove_lesson": MessageLookupByLibrary.simpleMessage("Xóa bài học"),
-        "remove_tags": MessageLookupByLibrary.simpleMessage("Xóa thẻ"),
-        "remove_test": MessageLookupByLibrary.simpleMessage("Xóa bài test"),
+        "remove_all": MessageLookupByLibrary.simpleMessage("Xóa tất cả"),
+        "repeat_password":
+            MessageLookupByLibrary.simpleMessage("Lặp lại mật khẩu"),
+        "report_continuous_driving_time":
+            MessageLookupByLibrary.simpleMessage("Thời gian lái xe liên tục"),
+        "report_device_by_engine_on":
+            MessageLookupByLibrary.simpleMessage("Thời gian nổ máy"),
+        "report_device_status":
+            MessageLookupByLibrary.simpleMessage("Trạng thái thiết bị"),
+        "report_device_status_history":
+            MessageLookupByLibrary.simpleMessage("Lịch sử trạng thái"),
+        "report_device_summary":
+            MessageLookupByLibrary.simpleMessage("Tổng hợp thiết bị"),
+        "report_engine_time":
+            MessageLookupByLibrary.simpleMessage("Thời gian máy nổ"),
+        "report_fuel_change": MessageLookupByLibrary.simpleMessage("Nạp xả"),
+        "report_fuel_chart":
+            MessageLookupByLibrary.simpleMessage("Biểu đồ nhiên liệu"),
+        "report_fuel_summary":
+            MessageLookupByLibrary.simpleMessage("Tổng hợp nhiên liệu"),
+        "report_geofence_detail_in_out":
+            MessageLookupByLibrary.simpleMessage("Chi tiết ra vào vùng"),
+        "report_geofence_summary_in_out":
+            MessageLookupByLibrary.simpleMessage("Tổng hợp ra vào vùng"),
+        "report_group_device": MessageLookupByLibrary.simpleMessage("Thiết bị"),
+        "report_group_fuel": MessageLookupByLibrary.simpleMessage("Nhiên liệu"),
+        "report_group_geofence": MessageLookupByLibrary.simpleMessage("Địa lý"),
+        "report_group_sensor": MessageLookupByLibrary.simpleMessage("Cảm biến"),
+        "report_group_speed": MessageLookupByLibrary.simpleMessage("Tốc độ"),
+        "report_group_summary":
+            MessageLookupByLibrary.simpleMessage("Tổng hợp"),
+        "report_group_trip": MessageLookupByLibrary.simpleMessage("Hành trình"),
+        "report_history_data":
+            MessageLookupByLibrary.simpleMessage("Dữ liệu lịch sử"),
+        "report_on_day_driving_time":
+            MessageLookupByLibrary.simpleMessage("Thời gian lái xe trong ngày"),
+        "report_photo_of_vehicle_trip":
+            MessageLookupByLibrary.simpleMessage("Ảnh h/trình"),
+        "report_route": MessageLookupByLibrary.simpleMessage("Lộ trình"),
+        "report_route_mini":
+            MessageLookupByLibrary.simpleMessage("Lộ trình rút gọn"),
+        "report_speed": MessageLookupByLibrary.simpleMessage("Tốc độ"),
+        "report_speed_over":
+            MessageLookupByLibrary.simpleMessage("Quá tốc độ giới hạn"),
+        "report_stop_parking": MessageLookupByLibrary.simpleMessage("Dừng đỗ"),
+        "report_summary_by_day":
+            MessageLookupByLibrary.simpleMessage("Tổng hợp theo ngày"),
+        "report_summary_by_driver":
+            MessageLookupByLibrary.simpleMessage("Tổng hợp theo lái xe"),
+        "report_summary_by_vehicle":
+            MessageLookupByLibrary.simpleMessage("Tổng hợp theo xe"),
+        "report_summary_tranfer_data":
+            MessageLookupByLibrary.simpleMessage("Truyền dữ liệu"),
+        "report_temperature": MessageLookupByLibrary.simpleMessage("Nhiệt độ"),
+        "report_toll_station":
+            MessageLookupByLibrary.simpleMessage("Trạm thu phí"),
+        "report_vehicle_trip":
+            MessageLookupByLibrary.simpleMessage("Hành trình xe chạy"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
-        "result": MessageLookupByLibrary.simpleMessage("Kết quả"),
-        "revenue": MessageLookupByLibrary.simpleMessage("Doanh thu"),
-        "right": MessageLookupByLibrary.simpleMessage("Phải"),
-        "right_answer":
-            MessageLookupByLibrary.simpleMessage("Đáp án chính xác"),
-        "right_dialog":
-            MessageLookupByLibrary.simpleMessage("Hộp thoại bên phải"),
-        "rounded_button": MessageLookupByLibrary.simpleMessage("Nút làm tròn"),
-        "save": MessageLookupByLibrary.simpleMessage("Lưu"),
+        "revenue_by_day":
+            MessageLookupByLibrary.simpleMessage("Doanh thu theo ngày"),
+        "revenue_by_month":
+            MessageLookupByLibrary.simpleMessage("Doanh thu theo tháng"),
+        "revenue_by_org":
+            MessageLookupByLibrary.simpleMessage("Doanh thu theo đơn vị"),
+        "revenue_by_payment_type": MessageLookupByLibrary.simpleMessage(
+            "Doanh thu theo hình thức thanh toán"),
+        "revenue_by_top_device": MessageLookupByLibrary.simpleMessage(
+            "Thiết bị có doanh thu cao nhất"),
+        "revenue_by_top_terminal": MessageLookupByLibrary.simpleMessage(
+            "Đơn vị có doanh thu cao nhất"),
+        "reviews_str": MessageLookupByLibrary.simpleMessage("Đánh giá"),
         "save_account": MessageLookupByLibrary.simpleMessage("Lưu tài khoản"),
-        "save_update_str": MessageLookupByLibrary.simpleMessage("Lưu cập nhật"),
-        "scan_code": MessageLookupByLibrary.simpleMessage("Quét code"),
-        "score_str": MessageLookupByLibrary.simpleMessage("Điểm số"),
-        "search": MessageLookupByLibrary.simpleMessage("Tìm kiếm"),
-        "search_lesson_str":
-            MessageLookupByLibrary.simpleMessage("Tìm kiếm bài học"),
-        "search_subject_str":
-            MessageLookupByLibrary.simpleMessage("Tìm kiếm chủ đề"),
-        "search_tags_str": MessageLookupByLibrary.simpleMessage("Tìm kiếm thẻ"),
-        "secondary": MessageLookupByLibrary.simpleMessage("Phụ"),
+        "save_address": MessageLookupByLibrary.simpleMessage("Lưu địa chỉ"),
+        "save_fail": MessageLookupByLibrary.simpleMessage("Lưu thất bại"),
+        "save_profile": MessageLookupByLibrary.simpleMessage("Lưu hồ sơ"),
+        "save_slot": MessageLookupByLibrary.simpleMessage("Lưu vị trí"),
+        "save_success": MessageLookupByLibrary.simpleMessage("Lưu thành công"),
+        "save_this_informattion_for_future_payment":
+            MessageLookupByLibrary.simpleMessage(
+                "Lưu thông tin này để thanh toán trong tương lai"),
+        "saved_device": MessageLookupByLibrary.simpleMessage("Thiết bị đã lưu"),
+        "saved_slots":
+            MessageLookupByLibrary.simpleMessage("Các lịch đặt đã lưu"),
+        "scan_qr_code": MessageLookupByLibrary.simpleMessage("Quét mã"),
+        "scan_qr_code_of_booking_device_or_connector":
+            MessageLookupByLibrary.simpleMessage(
+                "Quét mã trạm, đầu sạc hoặc lịch đặt"),
+        "scan_qr_code_of_device_or_connector":
+            MessageLookupByLibrary.simpleMessage("Quét mã trạm hoặc đầu sạc"),
+        "scan_qrcode_of_store_for_link": MessageLookupByLibrary.simpleMessage(
+            "Quét mã của cửa hàng để liên kết"),
+        "scan_qrcode_of_user_for_link": MessageLookupByLibrary.simpleMessage(
+            "Quét mã của người dùng để liên kết"),
+        "scan_qrcode_of_user_for_payment": MessageLookupByLibrary.simpleMessage(
+            "Quét mã của người dùng để thanh toán"),
+        "scan_this_code_for_more_detail": MessageLookupByLibrary.simpleMessage(
+            "Quét mã này để liên kết tài khoản hoặc thanh toán!"),
+        "scanner_connector":
+            MessageLookupByLibrary.simpleMessage("Quét mã QR gắn tại đầu sạc"),
+        "search_booking": MessageLookupByLibrary.simpleMessage("Tìm lịch đặt"),
         "security_text": MessageLookupByLibrary.simpleMessage("Bảo mật"),
+        "see_all": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
+        "select_address": MessageLookupByLibrary.simpleMessage("Chọn địa chỉ"),
+        "select_charge_connector":
+            MessageLookupByLibrary.simpleMessage("Chọn cổng sạc"),
+        "select_connection_type":
+            MessageLookupByLibrary.simpleMessage("Chọn loại kết nối"),
         "select_date": MessageLookupByLibrary.simpleMessage("Chọn ngày"),
-        "select_date_time":
-            MessageLookupByLibrary.simpleMessage("Chọn ngày và giờ"),
-        "select_range": MessageLookupByLibrary.simpleMessage("Chọn phạm vi"),
-        "select_time": MessageLookupByLibrary.simpleMessage("Chọn thời gian"),
-        "self_essay_type_str": MessageLookupByLibrary.simpleMessage("Tự luận"),
-        "send": MessageLookupByLibrary.simpleMessage("Gửi"),
-        "sentence_str": MessageLookupByLibrary.simpleMessage("Văn bản"),
-        "set_profile_to_private":
-            MessageLookupByLibrary.simpleMessage("Đặt hồ sơ ở chế độ riêng tư"),
-        "shadow": MessageLookupByLibrary.simpleMessage("Bóng tối"),
-        "shadow_color": MessageLookupByLibrary.simpleMessage("Màu bóng"),
-        "shadow_position": MessageLookupByLibrary.simpleMessage("Vị trí bóng"),
-        "shadow_size": MessageLookupByLibrary.simpleMessage("Kích thước bóng"),
-        "shop_name": MessageLookupByLibrary.simpleMessage("Tên cửa hàng"),
-        "shot_put_distance":
-            MessageLookupByLibrary.simpleMessage("Khoảng cách ném bóng"),
-        "show": MessageLookupByLibrary.simpleMessage("Hiển thị"),
-        "show_close_icon":
-            MessageLookupByLibrary.simpleMessage("Hiển thị biểu tượng đóng"),
-        "show_course_in_landing_page_str": MessageLookupByLibrary.simpleMessage(
-            "Hiển thị khóa học trong trang đích"),
+        "select_date_for_your_slot": MessageLookupByLibrary.simpleMessage(
+            "Chọn ngày cho lịch đặt của bạn"),
+        "select_geo_type":
+            MessageLookupByLibrary.simpleMessage("Chọn kiểu vùng"),
+        "select_location": MessageLookupByLibrary.simpleMessage("Chọn vị trí"),
+        "select_my_current_location": MessageLookupByLibrary.simpleMessage(
+            "Chọn vị trí hiện tại của tôi"),
+        "select_time_frame": MessageLookupByLibrary.simpleMessage("Khung giờ"),
+        "select_vehicle_fuel":
+            MessageLookupByLibrary.simpleMessage("Chọn kiểu sạc cho xe"),
+        "select_vehicle_model":
+            MessageLookupByLibrary.simpleMessage("Chọn mẫu xe"),
+        "select_vehicle_type":
+            MessageLookupByLibrary.simpleMessage("Chọn loại xe"),
+        "select_your_vehicle_charge_type":
+            MessageLookupByLibrary.simpleMessage("Chọn loại phí xe của bạn"),
+        "self_pay": MessageLookupByLibrary.simpleMessage("Tự thanh toán"),
+        "send_through_call":
+            MessageLookupByLibrary.simpleMessage("Gửi qua cuộc gọi"),
+        "sent_to_account":
+            MessageLookupByLibrary.simpleMessage("Tới tài khoản"),
+        "set_fix_amount_of_charging":
+            MessageLookupByLibrary.simpleMessage("Đặt mức sạc cố định"),
+        "setting_str": MessageLookupByLibrary.simpleMessage("Cài đặt"),
+        "setting_text": MessageLookupByLibrary.simpleMessage("Cài đặt"),
+        "share_str": MessageLookupByLibrary.simpleMessage("Chia sẻ"),
+        "showCarGroup":
+            MessageLookupByLibrary.simpleMessage("Hiển thị nhóm xe"),
+        "showCarIcon":
+            MessageLookupByLibrary.simpleMessage("Hiển thị biểu tượng xe"),
+        "showFocusToVehicle":
+            MessageLookupByLibrary.simpleMessage("Cho phép bám xe "),
+        "showGeofence":
+            MessageLookupByLibrary.simpleMessage("Hiển thị hàng rào địa lý"),
+        "showMyLocation":
+            MessageLookupByLibrary.simpleMessage("Hiển thị vị trí của tôi"),
+        "showTraffic":
+            MessageLookupByLibrary.simpleMessage("Hiển thị giao thông"),
         "show_hide_items":
             MessageLookupByLibrary.simpleMessage("Ẩn và hiển thị các mục"),
-        "show_less": MessageLookupByLibrary.simpleMessage("Thu gọn"),
-        "show_more": MessageLookupByLibrary.simpleMessage("Xem thêm"),
-        "show_ok_action":
-            MessageLookupByLibrary.simpleMessage("Hiển thị hành động đồng ý"),
         "sign_in": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "sign_in_with":
             MessageLookupByLibrary.simpleMessage("Hoặc đăng nhập bằng"),
         "sign_out_text": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "sign_up": MessageLookupByLibrary.simpleMessage("Đăng ký"),
-        "simple": MessageLookupByLibrary.simpleMessage("Đơn giản"),
-        "simplified_str": MessageLookupByLibrary.simpleMessage("Giản thể"),
         "size_settings":
             MessageLookupByLibrary.simpleMessage("Cài đặt kích thước"),
-        "sku": MessageLookupByLibrary.simpleMessage("MÃ HÀNG"),
-        "sliders": MessageLookupByLibrary.simpleMessage("Thanh trượt"),
-        "slogan": MessageLookupByLibrary.simpleMessage("Học tập cá nhân"),
-        "small": MessageLookupByLibrary.simpleMessage("Nhỏ"),
-        "soft_button": MessageLookupByLibrary.simpleMessage("Nút mềm"),
-        "soft_indicator": MessageLookupByLibrary.simpleMessage("Chỉ báo mềm"),
-        "soft_rounded_button":
-            MessageLookupByLibrary.simpleMessage("Nút tròn mềm"),
+        "skip_str": MessageLookupByLibrary.simpleMessage("Bỏ qua"),
+        "slot_date": MessageLookupByLibrary.simpleMessage("Ngày đặt"),
+        "slot_time": MessageLookupByLibrary.simpleMessage("Thời gian đặt"),
+        "slot_time_empty":
+            MessageLookupByLibrary.simpleMessage("Lịch không có sẵn"),
+        "slot_time_is_empty":
+            MessageLookupByLibrary.simpleMessage("Thời gian không có sẵn"),
         "sort_list": MessageLookupByLibrary.simpleMessage("Danh sách Sắp xếp"),
-        "sound_str": MessageLookupByLibrary.simpleMessage("Âm thanh"),
-        "standard": MessageLookupByLibrary.simpleMessage("Tiêu chuẩn"),
-        "standard_str": MessageLookupByLibrary.simpleMessage("Tiêu chuẩn"),
-        "starter": MessageLookupByLibrary.simpleMessage("Câu hỏi thường gặp"),
-        "static": MessageLookupByLibrary.simpleMessage("Tĩnh"),
-        "static_dialog": MessageLookupByLibrary.simpleMessage("Hộp thoại tĩnh"),
-        "status": MessageLookupByLibrary.simpleMessage("Trạng thái"),
-        "stock": MessageLookupByLibrary.simpleMessage("Cổ phiếu"),
-        "str_CRM": MessageLookupByLibrary.simpleMessage("CRM"),
-        "str_Landing": MessageLookupByLibrary.simpleMessage("Hạ cánh"),
-        "str_NFT_dashboard":
-            MessageLookupByLibrary.simpleMessage("Trang tổng quan NFT"),
+        "speed_chart": MessageLookupByLibrary.simpleMessage("Biểu đồ tốc độ"),
+        "speed_history": MessageLookupByLibrary.simpleMessage("Lịch sử tốc độ"),
+        "spent_str": MessageLookupByLibrary.simpleMessage("Đã trả"),
+        "start_charging": MessageLookupByLibrary.simpleMessage("Bắt đầu sạc"),
+        "start_time": MessageLookupByLibrary.simpleMessage("Thời gian bắt đầu"),
+        "state_all": MessageLookupByLibrary.simpleMessage("Tất cả"),
+        "state_expired": MessageLookupByLibrary.simpleMessage("Hết hạn"),
+        "state_inactive":
+            MessageLookupByLibrary.simpleMessage("Chưa kích hoạt"),
+        "state_invalid_status":
+            MessageLookupByLibrary.simpleMessage("Chưa xác định"),
+        "state_not_GPRS": MessageLookupByLibrary.simpleMessage("Mất GPRS"),
+        "state_not_GPS": MessageLookupByLibrary.simpleMessage("Mất GPS"),
+        "state_parking": MessageLookupByLibrary.simpleMessage("Đang đỗ"),
+        "state_poor_GPRS": MessageLookupByLibrary.simpleMessage("GPRS yếu"),
+        "state_poor_GPS": MessageLookupByLibrary.simpleMessage("GPS yếu"),
+        "state_running": MessageLookupByLibrary.simpleMessage("Đang chạy"),
+        "state_stop": MessageLookupByLibrary.simpleMessage("Đang dừng"),
+        "state_tranfer_history":
+            MessageLookupByLibrary.simpleMessage("Truyền log"),
+        "state_type": MessageLookupByLibrary.simpleMessage("Loại trạng thái"),
+        "state_type_air": MessageLookupByLibrary.simpleMessage("Điều hòa"),
+        "state_type_engine": MessageLookupByLibrary.simpleMessage("Động cơ"),
+        "state_type_route": MessageLookupByLibrary.simpleMessage("Lộ trình"),
+        "status_off": MessageLookupByLibrary.simpleMessage("Tắt"),
+        "status_open": MessageLookupByLibrary.simpleMessage("Mở"),
+        "stop_charging": MessageLookupByLibrary.simpleMessage("Dừng sạc"),
+        "store_code":
+            MessageLookupByLibrary.simpleMessage("Mã nhận diện cửa hàng"),
+        "store_info":
+            MessageLookupByLibrary.simpleMessage("Thông tin cửa hàng"),
         "str_about": MessageLookupByLibrary.simpleMessage("Về chúng tôi"),
         "str_accept": MessageLookupByLibrary.simpleMessage("Đồng ý"),
-        "str_calendar": MessageLookupByLibrary.simpleMessage("Lịch"),
+        "str_activated": MessageLookupByLibrary.simpleMessage("Đã kích hoạt "),
+        "str_active":
+            MessageLookupByLibrary.simpleMessage("Kích hoạt bảo hành"),
+        "str_address": MessageLookupByLibrary.simpleMessage("Địa chỉ "),
         "str_cancel": MessageLookupByLibrary.simpleMessage("Huỷ bỏ"),
-        "str_chat": MessageLookupByLibrary.simpleMessage("Trò chuyện"),
-        "str_coming_soon": MessageLookupByLibrary.simpleMessage("Sắp ra mắt"),
+        "str_capacity": MessageLookupByLibrary.simpleMessage("Dung tích"),
+        "str_capacity_change":
+            MessageLookupByLibrary.simpleMessage("Dung tích thay đổi"),
+        "str_capacity_end":
+            MessageLookupByLibrary.simpleMessage("Dung tích sau"),
+        "str_capacity_start":
+            MessageLookupByLibrary.simpleMessage("Dung tích trước"),
+        "str_channel": MessageLookupByLibrary.simpleMessage("Kênh"),
+        "str_clear": MessageLookupByLibrary.simpleMessage("Xóa"),
+        "str_command_control":
+            MessageLookupByLibrary.simpleMessage("Danh sách lệnh điều khiển"),
         "str_confirm": MessageLookupByLibrary.simpleMessage("Xác nhận"),
-        "str_contacts": MessageLookupByLibrary.simpleMessage("Danh bạ"),
-        "str_create_project": MessageLookupByLibrary.simpleMessage("Tạo dự án"),
-        "str_customer": MessageLookupByLibrary.simpleMessage("Khách hàng"),
-        "str_drag_drop": MessageLookupByLibrary.simpleMessage("Kéo thả"),
-        "str_edit_profile":
-            MessageLookupByLibrary.simpleMessage("Chỉnh sửa hồ sơ"),
-        "str_extra_pages":
-            MessageLookupByLibrary.simpleMessage("Trang bổ sung"),
-        "str_faqs": MessageLookupByLibrary.simpleMessage("Câu hỏi thường gặp"),
-        "str_fitness": MessageLookupByLibrary.simpleMessage("Thể hình"),
-        "str_form_mask":
-            MessageLookupByLibrary.simpleMessage("Mặt nạ biểu mẫu"),
-        "str_invoice": MessageLookupByLibrary.simpleMessage("Hóa đơn"),
-        "str_mailbox": MessageLookupByLibrary.simpleMessage("Hộp Thư"),
-        "str_maintenance": MessageLookupByLibrary.simpleMessage("Bảo trì"),
-        "str_manager": MessageLookupByLibrary.simpleMessage("Người quản lý"),
-        "str_members": MessageLookupByLibrary.simpleMessage("Thành viên"),
-        "str_opportunities": MessageLookupByLibrary.simpleMessage("Cơ hội"),
-        "str_pricing": MessageLookupByLibrary.simpleMessage("Định giá"),
-        "str_product_detail":
-            MessageLookupByLibrary.simpleMessage("Chi tiết sản phẩm"),
-        "str_project_detail":
-            MessageLookupByLibrary.simpleMessage("Chi tiết dự án"),
-        "str_project_list":
-            MessageLookupByLibrary.simpleMessage("Danh sách dự án"),
-        "str_projects": MessageLookupByLibrary.simpleMessage("Dự án"),
-        "str_quill_editor":
-            MessageLookupByLibrary.simpleMessage("Trình soạn thảo Quill"),
+        "str_connected": MessageLookupByLibrary.simpleMessage("Đã kết nối"),
+        "str_createdAt": MessageLookupByLibrary.simpleMessage("Thời gian tạo"),
+        "str_createdBy":
+            MessageLookupByLibrary.simpleMessage("Tạo bởi người dùng"),
+        "str_description": MessageLookupByLibrary.simpleMessage("Mô tả"),
+        "str_deviceName": MessageLookupByLibrary.simpleMessage("Tên thiết bị"),
+        "str_deviceType": MessageLookupByLibrary.simpleMessage("Loại thiết bị"),
+        "str_device_command":
+            MessageLookupByLibrary.simpleMessage("Gửi lệnh thiết bị"),
+        "str_device_expire_service": MessageLookupByLibrary.simpleMessage(
+            "Thiết bị hết hạn dịch vụ, vui lòng gia hạn để sử dụng các chức năng này!"),
+        "str_device_info": MessageLookupByLibrary.simpleMessage("Thông tin"),
+        "str_device_list_info":
+            MessageLookupByLibrary.simpleMessage("Danh sách thiết bị"),
+        "str_device_log": MessageLookupByLibrary.simpleMessage("Lịch sử log"),
+        "str_device_service":
+            MessageLookupByLibrary.simpleMessage("Dịch vụ thiết bị"),
+        "str_disconnected":
+            MessageLookupByLibrary.simpleMessage("Đã ngắt kết nối"),
+        "str_driverId":
+            MessageLookupByLibrary.simpleMessage("Định danh lái xe"),
+        "str_engine": MessageLookupByLibrary.simpleMessage("Máy nổ"),
+        "str_enter_ASCII":
+            MessageLookupByLibrary.simpleMessage("Nhập lệnh ASCII"),
+        "str_enter_number":
+            MessageLookupByLibrary.simpleMessage("Số lần vào vùng"),
+        "str_exit_number":
+            MessageLookupByLibrary.simpleMessage("Số lần ra vùng"),
+        "str_frameNumber": MessageLookupByLibrary.simpleMessage(""),
+        "str_hasBattery": MessageLookupByLibrary.simpleMessage("Pin"),
+        "str_imei": MessageLookupByLibrary.simpleMessage("Mã thiết bị"),
+        "str_io_and_engine":
+            MessageLookupByLibrary.simpleMessage("I/O và nhiên liệu"),
+        "str_lat": MessageLookupByLibrary.simpleMessage("Vĩ độ"),
+        "str_location_and_time":
+            MessageLookupByLibrary.simpleMessage("Vị trí và thời gian"),
+        "str_long": MessageLookupByLibrary.simpleMessage("Kinh độ"),
+        "str_no_activated":
+            MessageLookupByLibrary.simpleMessage("Chưa kích hoạt "),
+        "str_no_image": MessageLookupByLibrary.simpleMessage("Không có ảnh"),
+        "str_no_sensor_in_device": MessageLookupByLibrary.simpleMessage(
+            "Thiết bị này không còn cảm biến nào khác"),
+        "str_not_camera_in_device": MessageLookupByLibrary.simpleMessage(
+            "Thiết bị này không có camera, vui lòng chọn thiết bị khác"),
+        "str_not_device_in_acocunt": MessageLookupByLibrary.simpleMessage(
+            "Tài khoản này không có thiết bị, vui lòng chọn tài khoản khác"),
+        "str_not_photo_in_camera": MessageLookupByLibrary.simpleMessage(
+            "Camera này không có ảnh, vui lòng chọn camera khác"),
+        "str_not_sensor_in_device": MessageLookupByLibrary.simpleMessage(
+            "Thiết bị này không có cảm biến, vui lòng chọn thiết bị khác"),
+        "str_note": MessageLookupByLibrary.simpleMessage("Ghi chú"),
         "str_reset_password":
-            MessageLookupByLibrary.simpleMessage("Lấy lại mật khẩu"),
+            MessageLookupByLibrary.simpleMessage("Lấy lại mã pin"),
         "str_reset_password_note": MessageLookupByLibrary.simpleMessage(
-            "Vui lòng nhập email bạn đã đăng ký!"),
-        "str_timeLine": MessageLookupByLibrary.simpleMessage("Dòng thời gian"),
+            "Vui lòng nhập số điện thoại bạn đã đăng ký!"),
+        "str_reset_password_notify": MessageLookupByLibrary.simpleMessage(
+            "Thông tin làm mới mật khẩu đã được gửi đến hòm thư của bạn, vui lòng kiểm tra là làm theo hướng dẫn!"),
+        "str_select_a_camera":
+            MessageLookupByLibrary.simpleMessage("Chọn camera"),
+        "str_select_a_device":
+            MessageLookupByLibrary.simpleMessage("Chọn thiết bị"),
+        "str_select_a_sensor":
+            MessageLookupByLibrary.simpleMessage("Chọn cảm biến"),
+        "str_select_camera":
+            MessageLookupByLibrary.simpleMessage("Chọn camera"),
+        "str_select_device":
+            MessageLookupByLibrary.simpleMessage("Chọn thiết bị"),
+        "str_select_sensor":
+            MessageLookupByLibrary.simpleMessage("Chọn cảm biến"),
+        "str_send_ASCII": MessageLookupByLibrary.simpleMessage("Gửi ASCII"),
+        "str_serviceExpire":
+            MessageLookupByLibrary.simpleMessage("Ngày hết hạn"),
+        "str_simNo": MessageLookupByLibrary.simpleMessage("Số sim"),
+        "str_simType": MessageLookupByLibrary.simpleMessage("Loại sim"),
+        "str_speed": MessageLookupByLibrary.simpleMessage("Tốc độ"),
+        "str_speeds": MessageLookupByLibrary.simpleMessage("Các tốc độ"),
+        "str_status": MessageLookupByLibrary.simpleMessage("Trạng thái"),
+        "str_status_car": MessageLookupByLibrary.simpleMessage("Trạng thái xe"),
+        "str_temperature": MessageLookupByLibrary.simpleMessage("Nhiệt độ"),
+        "str_time": MessageLookupByLibrary.simpleMessage("Thời gian "),
+        "str_time_in_geo":
+            MessageLookupByLibrary.simpleMessage("Thời gian trong vùng"),
+        "str_totalCamera":
+            MessageLookupByLibrary.simpleMessage("Số lượng camera"),
         "str_type_email": MessageLookupByLibrary.simpleMessage("Nhập email"),
         "str_update": MessageLookupByLibrary.simpleMessage("Cập nhật"),
-        "str_upload": MessageLookupByLibrary.simpleMessage("Tải lên"),
+        "str_userId": MessageLookupByLibrary.simpleMessage("Id người dùng"),
+        "str_username": MessageLookupByLibrary.simpleMessage("Tên người dùng"),
+        "str_usingTollFee":
+            MessageLookupByLibrary.simpleMessage("Phí cầu đường"),
+        "str_vehiclePlate": MessageLookupByLibrary.simpleMessage("Biển số xe"),
+        "str_vinNumber": MessageLookupByLibrary.simpleMessage("Vin"),
         "str_warning": MessageLookupByLibrary.simpleMessage("Cảnh báo"),
         "str_warning_detail": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn mở trang web của chúng tôi?"),
+        "str_warrantyActivation":
+            MessageLookupByLibrary.simpleMessage("Kích hoạt bảo hành"),
+        "str_warrantyActivationDate":
+            MessageLookupByLibrary.simpleMessage("Ngày kích hoạt bảo hành"),
+        "str_warrantyExpired":
+            MessageLookupByLibrary.simpleMessage("Ngày hết hạn bảo hành"),
+        "string_Chinese": MessageLookupByLibrary.simpleMessage("Tiếng Trung"),
+        "string_German": MessageLookupByLibrary.simpleMessage("Tiếng Đức"),
+        "string_all_photo": MessageLookupByLibrary.simpleMessage("Tất cả ảnh"),
         "string_back": MessageLookupByLibrary.simpleMessage("Quay lại"),
         "string_begin_time": MessageLookupByLibrary.simpleMessage("Bắt đầu"),
         "string_cancel": MessageLookupByLibrary.simpleMessage("Huỷ"),
+        "string_device_command":
+            MessageLookupByLibrary.simpleMessage("Gửi lệnh"),
+        "string_device_info":
+            MessageLookupByLibrary.simpleMessage("Thông tin thiết bị"),
+        "string_device_list":
+            MessageLookupByLibrary.simpleMessage("Danh sách thiết bị"),
+        "string_device_log": MessageLookupByLibrary.simpleMessage("Xem log"),
         "string_done": MessageLookupByLibrary.simpleMessage("Hoàn tất"),
         "string_end_time": MessageLookupByLibrary.simpleMessage("Kết thúc"),
+        "string_english": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "string_have_not_notify":
             MessageLookupByLibrary.simpleMessage("Không có thông báo"),
         "string_hotline": MessageLookupByLibrary.simpleMessage("Hotline"),
-        "string_info": MessageLookupByLibrary.simpleMessage("Thông tin"),
+        "string_language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
+        "string_last_photo":
+            MessageLookupByLibrary.simpleMessage("Ảnh mới nhất"),
+        "string_live_stream":
+            MessageLookupByLibrary.simpleMessage("Trực tuyến"),
         "string_newest": MessageLookupByLibrary.simpleMessage("Tin tức"),
         "string_next": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
         "string_no_more_old_data":
             MessageLookupByLibrary.simpleMessage("Không có thông báo cũ hơn"),
         "string_notify": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "string_payment": MessageLookupByLibrary.simpleMessage("Thanh toán"),
+        "string_photo_report": MessageLookupByLibrary.simpleMessage("Hình ảnh"),
+        "string_play_back": MessageLookupByLibrary.simpleMessage("Xem lại"),
+        "string_spanish": MessageLookupByLibrary.simpleMessage("Tiếng pháp"),
+        "string_stop_parking_report":
+            MessageLookupByLibrary.simpleMessage("Dừng đỗ"),
+        "string_stop_point_report":
+            MessageLookupByLibrary.simpleMessage("Điểm dừng"),
+        "string_summary_fuel_report":
+            MessageLookupByLibrary.simpleMessage("Nhiên liệu"),
+        "string_summary_report":
+            MessageLookupByLibrary.simpleMessage("Tổng hợp"),
+        "string_summary_route_report":
+            MessageLookupByLibrary.simpleMessage("Lộ trình"),
+        "string_temp_report": MessageLookupByLibrary.simpleMessage("Nhiệt độ"),
         "string_time_setting":
             MessageLookupByLibrary.simpleMessage("Cài đặt thời gian"),
-        "student_list":
-            MessageLookupByLibrary.simpleMessage("Danh sách học viên"),
-        "student_review_list_str":
-            MessageLookupByLibrary.simpleMessage("Cảm nhận của học viên"),
-        "student_str": MessageLookupByLibrary.simpleMessage("Học viên"),
-        "style_guide": MessageLookupByLibrary.simpleMessage("Phong cách"),
-        "subcribe_to_our_news_letter": MessageLookupByLibrary.simpleMessage(
-            "Đăng ký nhận bản tin của chúng tôi"),
-        "subject_is_exit_str":
-            MessageLookupByLibrary.simpleMessage("Chủ đề đã tồn tại"),
-        "subject_name_str": MessageLookupByLibrary.simpleMessage("Tên chủ đề"),
-        "subject_str": MessageLookupByLibrary.simpleMessage("Chủ đề"),
-        "submit": MessageLookupByLibrary.simpleMessage("Gửi"),
-        "subtitle_is_more_useful":
-            MessageLookupByLibrary.simpleMessage("Phụ đề hữu ích hơn"),
-        "success": MessageLookupByLibrary.simpleMessage("Thành công"),
+        "string_viet_names": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
+        "stt": MessageLookupByLibrary.simpleMessage("STT"),
+        "submit_str": MessageLookupByLibrary.simpleMessage("Gửi"),
+        "sucessfully_completed_for_sign_in":
+            MessageLookupByLibrary.simpleMessage(
+                "Bạn đã hoàn tất đăng nhập thành công"),
+        "sucessfully_str": MessageLookupByLibrary.simpleMessage("Thành công!"),
         "support_feedback":
             MessageLookupByLibrary.simpleMessage("Phản hồi tới chúng tôi"),
         "support_help": MessageLookupByLibrary.simpleMessage("Góp ý"),
         "support_pay": MessageLookupByLibrary.simpleMessage("Hỗ trợ dịch vụ"),
         "support_tech": MessageLookupByLibrary.simpleMessage("Hỗ trợ kỹ thuật"),
-        "syncfusion_chart":
-            MessageLookupByLibrary.simpleMessage("Biểu đồ đồng bộ hóa"),
-        "syncfusion_charts":
-            MessageLookupByLibrary.simpleMessage("Biểu đồ đồng bộ hóa"),
-        "system": MessageLookupByLibrary.simpleMessage("Hệ thống"),
-        "tags": MessageLookupByLibrary.simpleMessage("Thẻ"),
-        "tags_list": MessageLookupByLibrary.simpleMessage("Danh sách thẻ"),
-        "tags_select": MessageLookupByLibrary.simpleMessage("Chọn thẻ"),
-        "target": MessageLookupByLibrary.simpleMessage("Mục tiêu"),
-        "teacher_list":
-            MessageLookupByLibrary.simpleMessage(" Danh sách giáo viên"),
-        "teacher_review_list_str":
-            MessageLookupByLibrary.simpleMessage("Lời nhận xét của chuyên gia"),
-        "teacher_str": MessageLookupByLibrary.simpleMessage("Giáo viên"),
-        "teachers_teach_the_most":
-            MessageLookupByLibrary.simpleMessage("Giáo viên dạy nhiều nhất"),
+        "system_str": MessageLookupByLibrary.simpleMessage("Hệ thống"),
+        "tag_this_location":
+            MessageLookupByLibrary.simpleMessage("Gắn thẻ vị trí này"),
+        "tech_info": MessageLookupByLibrary.simpleMessage("Thông số kỹ thuật"),
+        "temperature_chart":
+            MessageLookupByLibrary.simpleMessage("Biểu đồ nhiệt độ"),
+        "temporary_price":
+            MessageLookupByLibrary.simpleMessage("Giá tạm tính (VNĐ)"),
+        "terms_and_privacy": MessageLookupByLibrary.simpleMessage(
+            "Điều khoản và quyền riêng tư"),
         "terms_conditions":
-            MessageLookupByLibrary.simpleMessage("điều khoản và điều kiện"),
+            MessageLookupByLibrary.simpleMessage("Điều khoản & Điều kiện"),
         "terms_of_service_text":
             MessageLookupByLibrary.simpleMessage("Điều khoản Dịch vụ"),
-        "test_add": MessageLookupByLibrary.simpleMessage("Tạo bài test"),
-        "test_list": MessageLookupByLibrary.simpleMessage("Danh sách bài test"),
-        "test_name": MessageLookupByLibrary.simpleMessage("Tên bài kiểm tra"),
-        "test_remove": MessageLookupByLibrary.simpleMessage("Xóa bài test"),
-        "test_str": MessageLookupByLibrary.simpleMessage("Bài test"),
-        "test_update":
-            MessageLookupByLibrary.simpleMessage("Cập nhật bài test"),
-        "text_actions":
-            MessageLookupByLibrary.simpleMessage("Hành động văn bản"),
-        "text_button": MessageLookupByLibrary.simpleMessage("Nút văn bản"),
-        "text_rounded_button":
-            MessageLookupByLibrary.simpleMessage("Nút làm tròn văn bản"),
-        "text_type_str": MessageLookupByLibrary.simpleMessage("Văn bản"),
+        "the_last_three_number_on_the_back_of_your_card":
+            MessageLookupByLibrary.simpleMessage(
+                "Ba số cuối ở mặt sau thẻ của bạn"),
         "time_in_day_str": MessageLookupByLibrary.simpleMessage(" Ngày"),
         "time_in_hour_str": MessageLookupByLibrary.simpleMessage("Giờ"),
         "time_in_minute_str": MessageLookupByLibrary.simpleMessage("Phút"),
         "time_in_month_str": MessageLookupByLibrary.simpleMessage("Tháng"),
         "time_in_second_str": MessageLookupByLibrary.simpleMessage("Giây"),
         "time_in_year_str": MessageLookupByLibrary.simpleMessage("Năm"),
+        "time_keep_status":
+            MessageLookupByLibrary.simpleMessage("Thời gian giữ trạng thái"),
+        "time_move":
+            MessageLookupByLibrary.simpleMessage("Thời gian di chuyển"),
         "time_out_connection": MessageLookupByLibrary.simpleMessage(
             "Quá thời gian chờ, vui lòng kiểm tra kết nối mạng của bạn"),
-        "time_str": MessageLookupByLibrary.simpleMessage("Thời gian"),
-        "timeout": MessageLookupByLibrary.simpleMessage("Hết thời gian chờ"),
+        "time_paid":
+            MessageLookupByLibrary.simpleMessage("Thời gian thực hiện"),
+        "time_to_charge":
+            MessageLookupByLibrary.simpleMessage("Đã đến lúc sạc"),
+        "time_zone": MessageLookupByLibrary.simpleMessage("Múi giờ"),
         "title_popup_biometric":
             MessageLookupByLibrary.simpleMessage("Đăng nhập bằng sinh trắc"),
         "title_popup_faceid":
             MessageLookupByLibrary.simpleMessage("Đăng nhập bằng khuôn mặt"),
         "title_popup_fingerprint":
             MessageLookupByLibrary.simpleMessage("Đăng nhập bằng vân tay"),
-        "title_text": MessageLookupByLibrary.simpleMessage("Văn bản tiêu đề"),
-        "toast": MessageLookupByLibrary.simpleMessage("Thông báo"),
-        "toast_text": MessageLookupByLibrary.simpleMessage("toast_text"),
-        "top": MessageLookupByLibrary.simpleMessage("Trên cùng"),
-        "top_dialog":
-            MessageLookupByLibrary.simpleMessage("Hộp thoại trên cùng"),
-        "total_revenue": MessageLookupByLibrary.simpleMessage("Tổng doanh thu"),
-        "tourism_number":
-            MessageLookupByLibrary.simpleMessage("Du lịch - con số"),
-        "traditional_str": MessageLookupByLibrary.simpleMessage("Phồn thể"),
-        "translation_en_str": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
-        "translation_vn_str":
-            MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
-        "trending_products":
-            MessageLookupByLibrary.simpleMessage("Sản phẩm đang thịnh hành"),
-        "type": MessageLookupByLibrary.simpleMessage("Loại"),
-        "type_email_or_phone_number": MessageLookupByLibrary.simpleMessage(
-            "Nhập email hoặc số điện thoại"),
-        "type_size": MessageLookupByLibrary.simpleMessage("Loại/kích thước"),
-        "type_word_str": MessageLookupByLibrary.simpleMessage("Điền từ"),
-        "ui": MessageLookupByLibrary.simpleMessage("Giao diện người dùng"),
-        "unknown_str": MessageLookupByLibrary.simpleMessage("Không xác định"),
-        "unlock": MessageLookupByLibrary.simpleMessage("Mở khóa"),
-        "upload_file": MessageLookupByLibrary.simpleMessage("Tải file lên"),
-        "upload_image_str":
-            MessageLookupByLibrary.simpleMessage("Tải hình ảnh lên"),
-        "upload_sound_file_str":
-            MessageLookupByLibrary.simpleMessage("Tải tập tin âm thanh lên"),
-        "upload_youtube_url_str":
-            MessageLookupByLibrary.simpleMessage("Tải url youtube lên"),
-        "uploading_file":
-            MessageLookupByLibrary.simpleMessage("Đang tải file lên...."),
+        "title_str": MessageLookupByLibrary.simpleMessage("Tiêu đề"),
+        "to_time": MessageLookupByLibrary.simpleMessage("Đến thời gian"),
+        "today_str": MessageLookupByLibrary.simpleMessage("Hôm nay"),
+        "top_up": MessageLookupByLibrary.simpleMessage("Nạp tiền"),
+        "top_up_str": MessageLookupByLibrary.simpleMessage("Nạp tiền vào ví"),
+        "top_up_to_account":
+            MessageLookupByLibrary.simpleMessage("Nạp tiền vào tài khoản"),
+        "top_up_to_account_info":
+            MessageLookupByLibrary.simpleMessage("Thông tin nạp tiền"),
+        "top_up_voucher_str":
+            MessageLookupByLibrary.simpleMessage("Nạp voucher"),
+        "total_device": MessageLookupByLibrary.simpleMessage("Số thiết bị"),
+        "total_pay":
+            MessageLookupByLibrary.simpleMessage("Tổng số tiền phải trả"),
+        "total_payment": MessageLookupByLibrary.simpleMessage("Tổng số tiền"),
+        "transaction_detail_str":
+            MessageLookupByLibrary.simpleMessage("Chi tiết giao dịch"),
+        "transaction_id_str":
+            MessageLookupByLibrary.simpleMessage("Mã giao dịch"),
+        "type_money": MessageLookupByLibrary.simpleMessage("Nhập số tiền"),
+        "type_new_password":
+            MessageLookupByLibrary.simpleMessage("Nhập mật khẩu mới"),
+        "type_new_password_again":
+            MessageLookupByLibrary.simpleMessage("Nhập lại mật khẩu mới"),
+        "type_old_password":
+            MessageLookupByLibrary.simpleMessage("Nhập mật khẩu cũ"),
+        "type_paid": MessageLookupByLibrary.simpleMessage("Loại thanh toán"),
+        "type_pin_code": MessageLookupByLibrary.simpleMessage("Nhập mã pin"),
+        "type_pin_code_send_to_your_phone":
+            MessageLookupByLibrary.simpleMessage(
+                "Nhập mã xác thực được gửi tới số điện thoại"),
+        "type_verify_code":
+            MessageLookupByLibrary.simpleMessage("Nhập mã xác thực"),
+        "types_of_data_we_collect": MessageLookupByLibrary.simpleMessage(
+            "1. Loại dữ liệu chúng tôi thu thập"),
+        "un_save": MessageLookupByLibrary.simpleMessage("Bỏ lưu"),
+        "un_save_success":
+            MessageLookupByLibrary.simpleMessage("Bỏ lưu thành công"),
+        "unit_distance":
+            MessageLookupByLibrary.simpleMessage("Đơn vị khoảng cách"),
+        "unit_temp": MessageLookupByLibrary.simpleMessage("Đơn vị nhiệt độ"),
+        "unit_time":
+            MessageLookupByLibrary.simpleMessage("Định dạng ngày tháng"),
+        "unit_volume": MessageLookupByLibrary.simpleMessage("Đơn vị thể tích"),
+        "unit_weight": MessageLookupByLibrary.simpleMessage("Đơn vị cân nặng"),
+        "use_as_guest": MessageLookupByLibrary.simpleMessage("Dùng thử"),
+        "use_bank_app_for_scan_this_qr_code":
+            MessageLookupByLibrary.simpleMessage(
+                "Vui lòng quẹt chuyển tiền theo QR code này"),
         "use_fingerprint_text":
             MessageLookupByLibrary.simpleMessage("Sử dụng dấu vân tay"),
+        "use_of_your_personal_data": MessageLookupByLibrary.simpleMessage(
+            "2. Sử dụng dữ liệu cá nhân của bạn"),
+        "use_phone_to_signup": MessageLookupByLibrary.simpleMessage(
+            "Sử dụng số điện thoại của bạn để đăng kí"),
         "user_create": MessageLookupByLibrary.simpleMessage("Tạo người dùng"),
         "user_detail":
             MessageLookupByLibrary.simpleMessage("Thông tin người dùng"),
+        "user_info":
+            MessageLookupByLibrary.simpleMessage("Thông tin người dùng"),
         "user_name": MessageLookupByLibrary.simpleMessage("Tên đăng nhập"),
-        "user_str": MessageLookupByLibrary.simpleMessage("Người dùng"),
-        "utilities": MessageLookupByLibrary.simpleMessage("Tiện ích"),
-        "validation": MessageLookupByLibrary.simpleMessage("Xác thực"),
-        "validation_forms":
-            MessageLookupByLibrary.simpleMessage("Biểu mẫu xác thực"),
-        "validations": MessageLookupByLibrary.simpleMessage("Người bắt đầu"),
+        "vehicle": MessageLookupByLibrary.simpleMessage("Phương tiện"),
+        "vehicleType":
+            MessageLookupByLibrary.simpleMessage("Loại xe hỗ trợ sạc"),
         "vehicle_tracking": MessageLookupByLibrary.simpleMessage("Theo dõi Xe"),
-        "very_high": MessageLookupByLibrary.simpleMessage("Rất cao"),
-        "video_link": MessageLookupByLibrary.simpleMessage("Video"),
-        "video_player":
-            MessageLookupByLibrary.simpleMessage("Trình phát video"),
-        "video_preview_str":
-            MessageLookupByLibrary.simpleMessage("Xem trước video"),
+        "vehicle_type_honda_e": MessageLookupByLibrary.simpleMessage("Honda e"),
+        "verify_otp": MessageLookupByLibrary.simpleMessage("Xác thực"),
+        "verify_str": MessageLookupByLibrary.simpleMessage("xác minh"),
+        "version_text": MessageLookupByLibrary.simpleMessage("Phiên bản"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "view_all": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
-        "vnd_str": MessageLookupByLibrary.simpleMessage("VNĐ"),
-        "vocabulary_str": MessageLookupByLibrary.simpleMessage("Từ vựng"),
-        "warning": MessageLookupByLibrary.simpleMessage("Cảnh báo"),
-        "we_are_different_because_we_understand_what_you_need":
+        "view_detail": MessageLookupByLibrary.simpleMessage("Xem chi tiết"),
+        "view_qr_code": MessageLookupByLibrary.simpleMessage("Mã QR"),
+        "view_slot": MessageLookupByLibrary.simpleMessage("Chi tiết lịch sạc"),
+        "view_str": MessageLookupByLibrary.simpleMessage("Xem"),
+        "vnd_unit": MessageLookupByLibrary.simpleMessage("VNĐ"),
+        "voucher_list": MessageLookupByLibrary.simpleMessage("Danh sách mã"),
+        "we_sent_it_to_the_number":
+            MessageLookupByLibrary.simpleMessage("Chúng tôi đã gửi nó tới số"),
+        "welcome": MessageLookupByLibrary.simpleMessage("Xin chào "),
+        "welcome_str": MessageLookupByLibrary.simpleMessage("Xin chào"),
+        "welcome_to_PaymentManager": MessageLookupByLibrary.simpleMessage(
+            "Chào mừng bạn đến với Financial Admin"),
+        "would_you_like_to_use_your_current_location":
             MessageLookupByLibrary.simpleMessage(
-                "Chúng tôi khác biệt vì hiểu thứ bạn cần"),
-        "website_visits":
-            MessageLookupByLibrary.simpleMessage("Lượt truy cập trang web"),
-        "welcome_str":
-            MessageLookupByLibrary.simpleMessage("Chào mừng đến với"),
-        "what_will_you_achieve_after_the_course_str":
-            MessageLookupByLibrary.simpleMessage(
-                "Bạn sẽ đạt được gì sau khóa học ?"),
-        "who_this_course_is_for":
-            MessageLookupByLibrary.simpleMessage("Khóa học này dành cho ai ?"),
-        "who_this_course_is_for_comment": MessageLookupByLibrary.simpleMessage(
-            "Học ở YAX Chinese, bạn sẽ thấy \"Nói Tiếng Trung dễ như ăn kẹo\""),
-        "who_this_course_is_for_subtitle":
-            MessageLookupByLibrary.simpleMessage("Hãy tìm nơi dành cho bạn!"),
-        "who_this_course_is_for_table_content_1":
-            MessageLookupByLibrary.simpleMessage(
-                "YAX Chinese learning platform có đầy đủ các khóa cho người mới học, đã từng học nhưng chưa tìm được cách học phù hợp, muốn học lên trình độ cao hơn."),
-        "who_this_course_is_for_table_content_2":
-            MessageLookupByLibrary.simpleMessage(
-                "Phù hợp với những anh chị muốn học giao tiếp, học nhanh để ứng dụng vào đời sống, công việc nhưng không mất đi yếu tố ngôn ngữ bản chất."),
-        "who_this_course_is_for_table_content_3":
-            MessageLookupByLibrary.simpleMessage(
-                "Phù hợp với những anh chị bận rộn công việc, ít thời gian, muốn có cách học phù hợp với người đi làm thay vì cày cuốc như thời sinh viên. "),
-        "who_this_course_is_for_table_content_4":
-            MessageLookupByLibrary.simpleMessage(
-                "YAX Chinese learning platform là nơi học tập không có phát xét, kích thích hứng thú học qua việc khám phá, tạo cảm giác thành tựu, tăng động lực học"),
-        "who_this_course_is_for_table_content_5":
-            MessageLookupByLibrary.simpleMessage(
-                "Phù hợp với những anh chị đã quen với sự chuyên nghiệp, chăm sóc khách hàng tận tâm; không thích sự thiếu quy củ, không được đảm bảo. "),
-        "who_this_course_is_for_table_content_6":
-            MessageLookupByLibrary.simpleMessage(
-                "Phù hợp với những người coi trọng thời gian, muốn học một lần được luôn, không kéo dài lan man."),
-        "who_this_course_is_for_table_title_1":
-            MessageLookupByLibrary.simpleMessage(
-                "Người mới bắt đầu học Tiếng Trung"),
-        "who_this_course_is_for_table_title_2":
-            MessageLookupByLibrary.simpleMessage(
-                "Người muốn học giao tiếp, ứng dụng"),
-        "who_this_course_is_for_table_title_3":
-            MessageLookupByLibrary.simpleMessage(
-                "Người muốn học hiệu quả nhưng không vất vả"),
-        "who_this_course_is_for_table_title_4":
-            MessageLookupByLibrary.simpleMessage(
-                "Người thích môi trường học tích cực, tăng động lực học"),
-        "who_this_course_is_for_table_title_5":
-            MessageLookupByLibrary.simpleMessage(
-                "Người quen trải nghiệm dịch vụ giảng dạy chuyên nghiệp"),
-        "who_this_course_is_for_table_title_6":
-            MessageLookupByLibrary.simpleMessage(
-                "Dành cho người muốn chắc chắn học được Tiếng Trung"),
-        "why_choose_content1": MessageLookupByLibrary.simpleMessage(
-            "Được lựa chọn trình bày trực tiếp tại Hội thảo Quốc tế của Viện Khổng Tử, cơ quan của Bộ giáo dục Trung Quốc về giảng dạy Tiếng Trung."),
-        "why_choose_content2": MessageLookupByLibrary.simpleMessage(
-            "Chúng tôi đã đào tạo hơn 20.000 học viên trực tiếp và 250.000 học viên online trong nước và quốc tế"),
-        "why_choose_content3": MessageLookupByLibrary.simpleMessage(
-            "2000 feedback, 500.000 lượt follow trên facebook, 300.000 lượt follow cùng 18 triệu lượt xem trên youtube"),
-        "why_choose_content4": MessageLookupByLibrary.simpleMessage(
-            "Là nhà tài trợ vàng nhiều năm liền cho Cuộc thi Tranh biện Tiếng Hoa lớn nhất cả nước."),
-        "why_choose_title1": MessageLookupByLibrary.simpleMessage("Uy tín"),
-        "why_choose_title2": MessageLookupByLibrary.simpleMessage("Vững chắc"),
-        "why_choose_title3":
-            MessageLookupByLibrary.simpleMessage("Được yêu mến"),
-        "why_choose_title4":
-            MessageLookupByLibrary.simpleMessage("Phát triển cộng đồng"),
-        "why_choose_us":
-            MessageLookupByLibrary.simpleMessage("Tại sao chọn chúng tôi"),
-        "why_choose_us_1": MessageLookupByLibrary.simpleMessage("Chúng tôi "),
-        "why_choose_us_2": MessageLookupByLibrary.simpleMessage("đã đạt được "),
-        "why_choose_us_3": MessageLookupByLibrary.simpleMessage("những gì"),
-        "why_choose_us_sub_title": MessageLookupByLibrary.simpleMessage(
-            "Cùng điểm qua một số thành tựu của YAX Chinese learning nhé"),
-        "wizard": MessageLookupByLibrary.simpleMessage("Wizard"),
-        "word_str": MessageLookupByLibrary.simpleMessage("Từ"),
-        "world_countries_details": MessageLookupByLibrary.simpleMessage(
-            "Chi tiết các quốc gia trên thế giới"),
+                "Bạn có muốn sử dụng vị trí hiện tại của mình không?"),
+        "write_a_review":
+            MessageLookupByLibrary.simpleMessage("Viết bài đánh giá"),
+        "yes_str": MessageLookupByLibrary.simpleMessage("Có"),
+        "you_are_sure_delete_account_title": MessageLookupByLibrary.simpleMessage(
+            "Bạn sẽ không thể truy cập vào tài khoản này nữa. Bạn có chắc chắn bạn muốn xóa tài khoản?"),
         "you_do_have_an_account":
             MessageLookupByLibrary.simpleMessage("Bạn có tài khoản?"),
         "you_do_not_have_an_account":
             MessageLookupByLibrary.simpleMessage("Bạn chưa có tài khoản?"),
-        "you_want_remove":
-            MessageLookupByLibrary.simpleMessage("Bạn có muốn xóa"),
+        "you_do_not_have_any_ongoing_charging":
+            MessageLookupByLibrary.simpleMessage(
+                "Hiện tại, bạn không có bất kỳ khoản sạc nào đang diễn ra!"),
+        "you_have_not_link_account": MessageLookupByLibrary.simpleMessage(
+            "Bạn không có quyền liên kết tài khoản !"),
+        "you_have_not_to_login": MessageLookupByLibrary.simpleMessage(
+            "Bạn không có quyền đăng nhập vào ứng dụng này !"),
         "your_address": MessageLookupByLibrary.simpleMessage("Địa chỉ của bạn"),
-        "your_course": MessageLookupByLibrary.simpleMessage("Khóa học của bạn"),
-        "your_email": MessageLookupByLibrary.simpleMessage("Email của bạn"),
-        "your_password_will_be_reset": MessageLookupByLibrary.simpleMessage(
-            "Mật khẩu của bạn sẽ được đặt lại"),
-        "youtube_link":
-            MessageLookupByLibrary.simpleMessage("Youtube video link"),
-        "youtube_player":
-            MessageLookupByLibrary.simpleMessage("Trình phát Youtube")
+        "your_location": MessageLookupByLibrary.simpleMessage("Vị trí của bạn"),
+        "your_reservation":
+            MessageLookupByLibrary.simpleMessage("Đặt chỗ của bạn"),
+        "your_vehicle_added_sucessfully_in_your_list":
+            MessageLookupByLibrary.simpleMessage(
+                "Xe của bạn đã được thêm thành công vào danh sách")
       };
 }

@@ -2,23 +2,25 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../models/course.dart';
 import '../../models/review.dart';
 import '../../models/review_user.dart';
 import '../../models/user_model.dart';
+import '../../models_elearning/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 import '../course_details.dart/course_reviews.dart';
 import 'reviews_provider.dart';
 import '../../services/firebase_service.dart';
 import '../../utils/snackbars.dart';
 
-final courseRatingProvider = StateProvider.family.autoDispose<double, Course>((ref, course) => course.rating);
+final courseRatingProvider = StateProvider.family.autoDispose<double, CourseInfo>((ref, course) => (course.ratePoint??0).toDouble());
 
 class RatingForm extends ConsumerStatefulWidget {
   const RatingForm({super.key, required this.review, required this.course});
 
-  final Course course;
+  final CourseInfo course;
   final Review? review;
 
   @override
@@ -46,11 +48,11 @@ class _RatingFormState extends ConsumerState<RatingForm> {
       _btnController.start();
 
       // Save Review
-      await FirebaseService().saveReview(widget.course.id, _reviewData(user));
+      await FirebaseService().saveReview(widget.course.id.toString(), _reviewData(user));
 
       // Uopdate Course Avarage Rating
-      final double avarageRating = await FirebaseService().getCourseAverageRating(widget.course.id);
-      await FirebaseService().saveCourseRating(widget.course.id, avarageRating);
+      final double avarageRating = await FirebaseService().getCourseAverageRating(widget.course.id.toString());
+      await FirebaseService().saveCourseRating(widget.course.id.toString(), avarageRating);
       ref.read(courseRatingProvider(widget.course).notifier).update((state) => avarageRating);
 
       // Update user reviews list
@@ -62,7 +64,7 @@ class _RatingFormState extends ConsumerState<RatingForm> {
       // updating all reviews
       if (mounted) {
         ref.invalidate(allReviewsProvider);
-        await ref.read(allReviewsProvider.notifier).getData(widget.course.id, ref);
+        await ref.read(allReviewsProvider.notifier).getData(widget.course.id.toString(), ref);
       }
 
       await Future.delayed(const Duration(seconds: 1));
@@ -72,27 +74,27 @@ class _RatingFormState extends ConsumerState<RatingForm> {
     }
   }
 
-  _updateUserReviewList (UserModel user) async {
+  _updateUserReviewList (UserProfile user) async {
     if(!user.reviews!.contains(widget.course.id)){
       await FirebaseService().updateUserReviewList(user, widget.course);
       await ref.read(userDataProvider.notifier).getData();
     }
   }
 
-  Review _reviewData(UserModel user) {
+  Review _reviewData(UserProfile user) {
     final String id = widget.review?.id ?? FirebaseService.getUID('reviews');
     final createdAt = widget.review?.createdAt ?? DateTime.now().toUtc();
-    final reviewUser = ReviewUser(id: user.id, name: user.name, imageUrl: user.imageUrl);
+    final reviewUser = ReviewUser(id: user.id.toString(), name: user.fullName!, imageUrl: user.imageUrl);
 
     final Review review = Review(
       id: id,
-      courseId: widget.course.id,
+      courseId: widget.course.id.toString(),
       rating: _rating,
       review: reviewCtlr.text.isEmpty ? null : reviewCtlr.text,
       createdAt: createdAt,
       reviewUser: reviewUser,
-      courseTitle: widget.course.name,
-      courseAuthorId: widget.course.author.id,
+      courseTitle: widget.course.name!,
+      courseAuthorId: widget.course.producerName!,
     );
 
     return review;

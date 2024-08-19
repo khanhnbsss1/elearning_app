@@ -23,7 +23,7 @@ class FlavorSettings {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     if (Platform.isAndroid) {
       switch (packageInfo.packageName) {
-        case "com.FFTCompany.YAXChinese":
+        case "com.FFTCompany.elearninglms":
           flavorType = FlavorType.elearningLms;
           break;
         default:
@@ -34,7 +34,7 @@ class FlavorSettings {
       {
         FileUtils.PrintLog("packageNameIOS:${packageInfo.packageName}");
         switch (packageInfo.packageName) {
-          case "FFTCompany.YAXChinese":
+          case "FFTCompany.elearninglms":
             flavorType = FlavorType.elearningLms;
             break;
           default:

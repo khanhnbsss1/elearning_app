@@ -18,7 +18,7 @@ class AddLessonApi extends BaseApiRequest {
     dynamic result = await postRequestAPI();
     if(result.runtimeType == int)
     {
-      ToastUtils.showToastSuccess(L10nX.getStr.success);
+      ToastUtils.showToastSuccess(L10nX.getStr.sucessfully_str);
     }
     return result;
   }

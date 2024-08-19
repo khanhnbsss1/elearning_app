@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../components/user_avatar.dart';
 import '../../models/user_model.dart';
+import '../../models_elearning/user/UserProfile.dart';
 import '../../services/app_service.dart';
 
 class AuthorProfileInfo extends StatelessWidget {
@@ -12,7 +13,7 @@ class AuthorProfileInfo extends StatelessWidget {
     required this.jobTitle,
   });
 
-  final UserModel user;
+  final UserProfile user;
   final String jobTitle;
 
   @override
@@ -30,7 +31,7 @@ class AuthorProfileInfo extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Text(
-            user.name,
+            user.fullName!,
             style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600, color: Colors.white),
           ),
           const SizedBox(height: 8),

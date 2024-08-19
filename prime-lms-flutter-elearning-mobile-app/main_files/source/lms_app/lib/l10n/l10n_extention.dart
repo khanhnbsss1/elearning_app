@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
-import 'package:lms_app/base/base.export.dart';
 import 'package:lms_app/generated/intl/messages_all.dart';
-import 'package:lms_app/helper_elearning/services/navigation_service.dart';
+import 'package:lms_app/generated/l10n.dart';
+
+import '../helper_elearning/services/navigation_service.dart';
 
 class L10nX extends S {
   // ...
@@ -27,9 +28,11 @@ class L10nX extends S {
       Intl.defaultLocale = localeName;
       final instance = L10nX();
       L10nX._current = instance;
+
       return instance;
     });
   }
+
   static S get getStr {
     BuildContext context = NavigationService.globalContext!;
     final instance = L10nX.maybeOf(context);
@@ -37,13 +40,14 @@ class L10nX extends S {
     'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
     return instance!;
   }
-  static L10nX of() {
-    BuildContext context = NavigationService.globalContext!;
+
+  static L10nX of(BuildContext context) {
     final instance = L10nX.maybeOf(context);
     assert(instance != null,
     'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
     return instance!;
   }
+
   static L10nX? maybeOf(BuildContext context) {
     return Localizations.of<L10nX>(context, L10nX);
   }
@@ -65,7 +69,6 @@ class AppLocalizationDelegatel10nX extends LocalizationsDelegate<L10nX> {
       Locale.fromSubtags(languageCode: 'en'),
       Locale.fromSubtags(languageCode: 'vi'),
       Locale.fromSubtags(languageCode: 'zh'),
-
     ];
   }
 

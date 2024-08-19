@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/constants/custom_colors.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/services/firebase_service.dart';
+import '../../models_elearning/user/UserProfile.dart';
 import '../../theme/theme_provider.dart';
 import 'author_courses.dart';
 import 'count_info.dart';
@@ -22,7 +23,7 @@ final authorCoursesCountProvider = FutureProvider.family.autoDispose<int, String
 class AuthorProfile extends ConsumerWidget {
   const AuthorProfile({super.key, required this.user});
 
-  final UserModel user;
+  final UserProfile user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,8 +32,8 @@ class AuthorProfile extends ConsumerWidget {
     final String jobTitle = user.authorInfo?.jobTitle ?? '';
     final String bio = user.authorInfo?.bio ?? '';
     final int students = user.authorInfo?.students ?? 0;
-    final int reviewsCount = ref.watch(authorReviewsCountProvider(user.id)).value ?? 0;
-    final int courseCount = ref.watch(authorCoursesCountProvider(user.id)).value ?? 0;
+    final int reviewsCount = ref.watch(authorReviewsCountProvider(user.id.toString())).value ?? 0;
+    final int courseCount = ref.watch(authorCoursesCountProvider(user.id.toString())).value ?? 0;
 
     return Scaffold(
       body: CustomScrollView(

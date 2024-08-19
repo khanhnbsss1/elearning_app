@@ -54,8 +54,10 @@ class MyCoursesTab extends ConsumerWidget with CourseMixin {
                     itemCount: data.length,
                     separatorBuilder: (context, index) => const Divider(height: 50),
                     itemBuilder: (context, index) {
-                      final Course course = data[index];
-                      return MyCourseTile(course: course, user: user);
+                      return null;
+
+                      // final Course course = data[index];
+                      // return MyCourseTile(course: course, user: user);
                     },
                   );
                 },

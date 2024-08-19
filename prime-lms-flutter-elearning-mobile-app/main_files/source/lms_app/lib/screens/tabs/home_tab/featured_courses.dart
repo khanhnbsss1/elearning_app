@@ -5,9 +5,10 @@ import 'package:lms_app/components/loading_tile.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/services/firebase_service.dart';
 import '../../../components/featured_course_tile.dart';
+import '../../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 
-final featuredCoursesProvider = FutureProvider<List<Course>>((ref) async {
-  final List<Course> courses = await FirebaseService().getFeaturedCourses();
+final featuredCoursesProvider = FutureProvider<List<CourseInfo>?>((ref) async {
+  final List<CourseInfo>? courses = await FirebaseService().getFeaturedCourses();
   return courses;
 });
 
@@ -21,7 +22,7 @@ class FeaturedCourses extends ConsumerWidget {
       skipLoadingOnRefresh: false,
       data: (courses) {
         return Visibility(
-          visible: courses.isNotEmpty,
+          visible: courses!.isNotEmpty,
           child: CarouselSlider(
             items: courses.map((course) {
               return FeaturedCourseTile(course: course);

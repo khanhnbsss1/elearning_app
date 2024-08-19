@@ -10,18 +10,18 @@ class GetCourseFilterApi extends BaseApiRequest {
     apiName: ApiName.getInstance().getFilterCourse,
   );
 
-  Future<dynamic> call() async {
+  Future<dynamic> call(String filter) async {
     await getAuthorization();
     dynamic result = await getRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {
-      return CourseFilterListInfo(data: [CourseFilterInfo(filterType: "ALL", id: -1,name: "All",selectSubFilter: null, subFilter: [])]);
+      return CourseFilterListInfo(data: [CourseFilterInfo(filterType: filter, id: -1,name: "All",selectSubFilter: null, subFilter: [])]);
     }
     else
     {
       (InstanceManager().courseFilterListInfo.data??[]).clear();
-      (InstanceManager().courseFilterListInfo.data??[]).add(CourseFilterInfo(filterType: "ALL", id: -1,name: "All",selectSubFilter: null, subFilter: []));
+      (InstanceManager().courseFilterListInfo.data??[]).add(CourseFilterInfo(filterType: filter, id: -1,name: "All",selectSubFilter: null, subFilter: []));
       (InstanceManager().courseFilterListInfo.data??[]).addAll(CourseFilterListInfo.fromJson(result).data??[]);
       return InstanceManager().courseFilterListInfo;
     }

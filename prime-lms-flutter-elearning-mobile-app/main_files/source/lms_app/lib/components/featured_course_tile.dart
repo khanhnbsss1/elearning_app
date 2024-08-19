@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lms_app/constants/custom_colors.dart';
 import 'package:lms_app/services/app_service.dart';
+import '../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'rating_bar.dart';
 import '../models/course.dart';
 import '../screens/course_details.dart/details_view.dart';
@@ -14,7 +15,7 @@ class FeaturedCourseTile extends StatelessWidget {
     required this.course,
   });
 
-  final Course course;
+  final CourseInfo course;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class FeaturedCourseTile extends StatelessWidget {
                     height: 150,
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(topLeft: Radius.circular(3), topRight: Radius.circular(3)),
-                        image: DecorationImage(image: CachedNetworkImageProvider(course.thumbnailUrl), fit: BoxFit.cover)),
+                        image: DecorationImage(image: CachedNetworkImageProvider(course.image??""), fit: BoxFit.cover)),
                     width: MediaQuery.of(context).size.width,
                   ),
                   Align(
@@ -64,7 +65,7 @@ class FeaturedCourseTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    course.name,
+                    course.name??"-",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -73,9 +74,9 @@ class FeaturedCourseTile extends StatelessWidget {
                   Text(
                     'count-students',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blueGrey),
-                  ).tr(args: [course.studentsCount.toString()]),
+                  ).tr(args: [course.totalLectures.toString()]),
                   const SizedBox(height: 3),
-                  RatingViewer(rating: course.rating),
+                  RatingViewer(rating: (course.ratePoint??0).toDouble()),
                 ],
               ),
             )

@@ -7,6 +7,7 @@ import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/utils/snackbars.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../models/user_model.dart';
+import '../../models_elearning/user/UserProfile.dart';
 import '../../services/auth_service.dart';
 
 class SocialLogins extends StatefulWidget {
@@ -22,12 +23,11 @@ class _SocialLoginsState extends State<SocialLogins> {
   final fbController = RoundedLoadingButtonController();
   final appleController = RoundedLoadingButtonController();
 
-  UserModel _userModel(UserCredential userCredential) {
-    final UserModel user = UserModel(
-      id: userCredential.user!.uid,
+  UserProfile _userModel(UserCredential userCredential) {
+    final UserProfile user = UserProfile(
+      id: int.parse(userCredential.user!.uid,),
       email: userCredential.user?.email ?? 'No Email',
-      name: userCredential.user!.displayName ?? 'No Name',
-      createdAt: DateTime.now().toUtc(),
+      fullName: userCredential.user!.displayName ?? 'No Name',
       imageUrl: userCredential.user?.photoURL,
       platform: Platform.isAndroid ? 'Android' : 'iOS',
     );

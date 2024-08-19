@@ -10,7 +10,7 @@ class NoData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    title??= L10nX().getStringByKey("no_search_result");
+    title??= L10nX.of(context).getStringByKey("no_search_result");
     return SizedBox(
       width: double.infinity,
       child: Column(

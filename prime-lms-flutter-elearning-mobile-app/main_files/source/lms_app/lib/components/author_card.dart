@@ -6,10 +6,11 @@ import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
+import '../models_elearning/user/UserProfile.dart';
 import '../screens/author_profie/author_profile.dart';
 
 class AuthorCard extends StatelessWidget{
-  final UserModel user;
+  final UserProfile user;
   const AuthorCard({super.key, required this.user});
 
   @override
@@ -40,7 +41,7 @@ class AuthorCard extends StatelessWidget{
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(user.name,
+                    Text(user.fullName!,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600, fontSize: 18)),

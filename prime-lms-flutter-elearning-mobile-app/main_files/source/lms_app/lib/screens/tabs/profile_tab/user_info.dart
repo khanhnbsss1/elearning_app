@@ -10,13 +10,14 @@ import 'package:lms_app/providers/app_settings_provider.dart';
 import '../../../components/user_avatar.dart';
 import '../../../mixins/user_mixin.dart';
 import '../../../models/user_model.dart';
+import '../../../models_elearning/user/UserProfile.dart';
 import '../../edit_profile.dart';
 import '../../../utils/next_screen.dart';
 
 class UserInfo extends StatelessWidget with UserMixin {
   const UserInfo({super.key, required this.user, required this.ref});
 
-  final UserModel user;
+  final UserProfile user;
   final WidgetRef ref;
 
   @override
@@ -27,13 +28,13 @@ class UserInfo extends StatelessWidget with UserMixin {
           contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           onTap: () => NextScreen.openBottomSheet(context, EditProfile(user: user), maxHeight: 0.80),
           title: Text(
-            user.name,
+            user.fullName??"-",
             style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(user.email),
+              Text(user.email??"-"),
             ],
           ),
           leading: UserAvatar(imageUrl: user.imageUrl, radius: 50, iconSize: 25),

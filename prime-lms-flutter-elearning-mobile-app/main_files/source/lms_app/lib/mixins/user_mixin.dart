@@ -16,7 +16,9 @@ import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
 import '../iAP/iap_screen.dart';
+import '../models_elearning/user/UserProfile.dart';
 import '../providers/user_data_provider.dart';
+import '../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 
 mixin UserMixin {
   void handleLogout(context, {required WidgetRef ref}) async {
@@ -28,7 +30,7 @@ mixin UserMixin {
     NextScreen.closeOthersAnimation(context, const IntroScreen());
   }
 
-  bool hasEnrolled(UserModel? user, Course course) {
+  bool hasEnrolled(UserProfile? user, CourseInfo course) {
     if (user != null && user.enrolledCourses != null && user.enrolledCourses!.contains(course.id)) {
       return true;
     } else {
@@ -36,7 +38,7 @@ mixin UserMixin {
     }
   }
 
-  static bool isExpired(UserModel user) {
+  static bool isExpired(UserProfile user) {
     final DateTime expireDate = user.subscription!.expireAt;
     final DateTime now = DateTime.now().toUtc();
     final difference = expireDate.difference(now).inDays;
@@ -47,11 +49,11 @@ mixin UserMixin {
     }
   }
 
-  static bool isUserPremium(UserModel? user) {
+  static bool isUserPremium(UserProfile? user) {
     return user != null && user.subscription != null && isExpired(user) == false ? true : false;
   }
 
-  int remainingDays(UserModel user) {
+  int remainingDays(UserProfile user) {
     final DateTime expireDate = user.subscription!.expireAt;
     final DateTime now = DateTime.now().toUtc();
     final difference = expireDate.difference(now).inDays;
@@ -60,12 +62,12 @@ mixin UserMixin {
 
   Future handleEnrollment(
     BuildContext context, {
-    required UserModel? user,
-    required Course course,
+    required UserProfile? user,
+    required CourseInfo course,
     required WidgetRef ref,
   }) async {
     if (user != null) {
-      if (course.priceStatus == 'free') {
+      if (course.mode == 'FREE') {
         // Free Course
         if (hasEnrolled(user, course)) {
           NextScreen.popup(context, CurriculamScreen(course: course));
@@ -96,10 +98,10 @@ mixin UserMixin {
     }
   }
 
-  Future _comfirmEnrollment(BuildContext context, UserModel user, Course course, WidgetRef ref) async {
-    await FirebaseService().updateEnrollment(user, course);
-    await FirebaseService().updateStudentCountsOnCourse(true, course.id);
-    await FirebaseService().updateStudentCountsOnAuthor(true, course.author.id);
+  Future _comfirmEnrollment(BuildContext context, UserProfile user, CourseInfo course, WidgetRef ref) async {
+    // await FirebaseService().updateEnrollment(user, course);
+    // await FirebaseService().updateStudentCountsOnCourse(true, course.id);
+    // await FirebaseService().updateStudentCountsOnAuthor(true, course.author.id);
     await ref.read(userDataProvider.notifier).getData();
     if (!context.mounted) return;
     openSnackbar(context, 'Enrolled Succesfully');
@@ -107,10 +109,10 @@ mixin UserMixin {
 
   Future handleOpenCourse(
     BuildContext context, {
-    required UserModel user,
-    required Course course,
+    required UserProfile user,
+    required CourseInfo course,
   }) async {
-    if (course.priceStatus == 'free') {
+    if (course.mode == 'FREE') {
       NextScreen.popup(context, CurriculamScreen(course: course));
     } else {
       if (!isExpired(user)) {

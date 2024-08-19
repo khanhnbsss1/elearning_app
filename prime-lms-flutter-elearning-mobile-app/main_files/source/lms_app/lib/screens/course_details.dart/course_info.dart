@@ -7,12 +7,15 @@ import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/screens/author_profie/author_profile.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
 
-class CourseInfo extends StatelessWidget {
-  const CourseInfo({super.key, required this.course});
-  final Course course;
+import '../../models_elearning/user/UserProfile.dart';
+
+class CourseInfoScreen extends StatelessWidget {
+  const CourseInfoScreen({super.key, required this.course});
+  final CourseInfo course;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +31,9 @@ class CourseInfo extends StatelessWidget {
               children: [
                 const TextSpan(text: ' '),
                 TextSpan(
-                  text: course.author.name,
-                  recognizer: TapGestureRecognizer()..onTap = () => _onTapAuthor(context),
+                  text: course.producerName,
+                  // recognizer: TapGestureRecognizer()..onTap = () => _onTapAuthor(context),
+                  recognizer: TapGestureRecognizer()..onTap = () {},
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.blue),
                 )
               ],
@@ -41,7 +45,7 @@ class CourseInfo extends StatelessWidget {
               const Icon(FeatherIcons.calendar, size: 20, color: Colors.blueGrey),
               const SizedBox(width: 5),
               Text('last-updated-', style: Theme.of(context).textTheme.bodyLarge).tr(
-                args: [AppService.getDate(course.updatedAt ?? course.createdAt)],
+                args: [AppService.getDate((course.updatedAt ?? course.createdAt) as DateTime)],
               ),
             ],
           ),
@@ -50,7 +54,8 @@ class CourseInfo extends StatelessWidget {
             children: [
               const Icon(FeatherIcons.globe, size: 20, color: Colors.blueGrey),
               const SizedBox(width: 5),
-              Text('language-', style: Theme.of(context).textTheme.bodyLarge).tr(args: [course.courseMeta.language.toString()]),
+              // Text('language-', style: Theme.of(context).textTheme.bodyLarge).tr(args: [course.courseMeta.language.toString()]),
+              Text('language-CN', style: Theme.of(context).textTheme.bodyLarge),
             ],
           ),
           const SizedBox(height: 8),
@@ -58,7 +63,8 @@ class CourseInfo extends StatelessWidget {
             children: [
               const Icon(FeatherIcons.clock, size: 20, color: Colors.blueGrey),
               const SizedBox(width: 5),
-              Text('duration-', style: Theme.of(context).textTheme.bodyLarge).tr(args: [course.courseMeta.duration.toString()]),
+              // Text('duration-', style: Theme.of(context).textTheme.bodyLarge).tr(args: [course.courseMeta.duration.toString()]),
+              Text('duration-${course.durian}', style: Theme.of(context).textTheme.bodyLarge),
             ],
           ),
           const SizedBox(height: 8),
@@ -66,7 +72,8 @@ class CourseInfo extends StatelessWidget {
             children: [
               const Icon(FeatherIcons.book, size: 20, color: Colors.blueGrey),
               const SizedBox(width: 5),
-              Text('count-lesson', style: Theme.of(context).textTheme.bodyLarge).tr(args: [course.lessonsCount.toString()]),
+              // Text('count-lesson', style: Theme.of(context).textTheme.bodyLarge).tr(args: [course.lessonsCount.toString()]),
+              Text('count-lesson-${course.totalLectures}', style: Theme.of(context).textTheme.bodyLarge),
             ],
           ),
         ],
@@ -74,13 +81,13 @@ class CourseInfo extends StatelessWidget {
     );
   }
 
-  void _onTapAuthor(BuildContext context) async {
-    final UserModel? author = await FirebaseService().getAuthorData(course.author.id);
-    if (!context.mounted) return;
-    if (author != null) {
-      NextScreen.popup(context, AuthorProfile(user: author));
-    } else {
-      openSnackbar(context, 'Error on getting author profile');
-    }
-  }
+  // void _onTapAuthor(BuildContext context) async {
+  //   final UserProfile? author = await FirebaseService().getAuthorData(course.author.id);
+  //   if (!context.mounted) return;
+  //   if (author != null) {
+  //     NextScreen.popup(context, AuthorProfile(user: author));
+  //   } else {
+  //     openSnackbar(context, 'Error on getting author profile');
+  //   }
+  // }
 }

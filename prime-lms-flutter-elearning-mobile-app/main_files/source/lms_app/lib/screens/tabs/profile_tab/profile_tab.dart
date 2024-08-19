@@ -25,7 +25,7 @@ class ProfileTab extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                user == null ? const GuestUser() : UserInfo(user: user, ref: ref),
+               user == null ? const GuestUser() : UserInfo(user: user, ref: ref),
                 const AppSettings(),
               ],
             ),

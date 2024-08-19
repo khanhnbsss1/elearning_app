@@ -2,7 +2,7 @@ import 'package:lms_app/base/base.export.dart';
 import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
 
 import '../../../base/author/user_helper.dart';
-import '../../../models/user/UserProfile.dart';
+import '../../../models_elearning/user/UserProfile.dart';
 
 class GetUserProfileInfoApi extends BaseApiRequest {
   GetUserProfileInfoApi():super(

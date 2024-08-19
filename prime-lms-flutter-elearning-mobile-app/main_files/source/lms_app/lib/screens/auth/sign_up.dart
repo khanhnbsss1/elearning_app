@@ -56,7 +56,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         return null;
       });
       if (userCredential != null && userCredential.user != null) {
-        await FirebaseService().saveUserData(_userModel(userCredential));
+        // await FirebaseService().saveUserData(_userModel(userCredential));
         await FirebaseService().updateUserStats();
         _btnController.success();
         await AuthService().sendEmailVerification();

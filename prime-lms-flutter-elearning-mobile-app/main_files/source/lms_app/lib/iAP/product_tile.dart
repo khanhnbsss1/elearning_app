@@ -5,6 +5,7 @@ import 'package:lms_app/iAP/iap_mixin.dart';
 
 import '../mixins/user_mixin.dart';
 import '../models/user_model.dart';
+import '../models_elearning/user/UserProfile.dart';
 
 class ProductTile extends StatelessWidget with IAPMixin {
   const ProductTile({
@@ -17,7 +18,7 @@ class ProductTile extends StatelessWidget with IAPMixin {
 
   final ProductDetails productDetails;
   final Map<String, PurchaseDetails> purchases;
-  final UserModel? user;
+  final UserProfile? user;
   final Function makePurchase;
 
   @override

@@ -8,8 +8,10 @@ import 'package:lms_app/screens/all_authors.dart';
 import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
-final topAuthorsProvider = FutureProvider<List<UserModel>>((ref) async {
-  final List<UserModel> authors = await FirebaseService().getTopAuthors(limit: 5);
+import '../../../models_elearning/user/UserProfile.dart';
+
+final topAuthorsProvider = FutureProvider<List<UserProfile>>((ref) async {
+  final List<UserProfile> authors = await FirebaseService().getTopAuthors(limit: 5);
   return authors;
 });
 

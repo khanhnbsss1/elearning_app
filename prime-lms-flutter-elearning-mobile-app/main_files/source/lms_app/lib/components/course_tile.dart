@@ -16,7 +16,8 @@ class CourseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final heroTag = UniqueKey();
     return InkWell(
-      onTap: () => NextScreen.iOS(context, CourseDetailsView(course: course, heroTag: heroTag)),
+      // onTap: () => NextScreen.iOS(context, CourseDetailsView(course: course, heroTag: heroTag)),
+      onTap: () {},
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -29,7 +30,7 @@ class CourseTile extends StatelessWidget {
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(3)),
                 child: Hero(tag: heroTag, child: CustomCacheImage(imageUrl: course.thumbnailUrl, radius: 3)),
               ),
-              PremiumTag(course: course),
+              // PremiumTag(course: course),
             ],
           ),
           Expanded(

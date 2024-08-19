@@ -5,6 +5,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import '../models/purchase_history.dart';
 import '../models/subscription.dart';
 import '../models/user_model.dart';
+import '../models_elearning/user/UserProfile.dart';
 import '../providers/user_data_provider.dart';
 import '../services/firebase_service.dart';
 
@@ -28,7 +29,7 @@ mixin IAPMixin {
     }
   }
 
-  bool hasSubscribed(ProductDetails product, UserModel? user) {
+  bool hasSubscribed(ProductDetails product, UserProfile? user) {
     if (user == null || user.subscription == null) {
       return false;
     } else {
@@ -40,7 +41,7 @@ mixin IAPMixin {
     }
   }
 
-  static bool _isExpired(UserModel user) {
+  static bool _isExpired(UserProfile user) {
     final DateTime expireDate = user.subscription!.expireAt;
     final DateTime now = DateTime.now().toUtc();
     final difference = expireDate.difference(now).inDays;
@@ -51,7 +52,7 @@ mixin IAPMixin {
     }
   }
 
-  static bool _hasAlreadyPurchased(PurchaseDetails purchase, UserModel user) {
+  static bool _hasAlreadyPurchased(PurchaseDetails purchase, UserProfile user) {
     if (user.subscription!.productId == purchase.productID) {
       return true;
     } else {
@@ -68,7 +69,7 @@ mixin IAPMixin {
     return subscription;
   }
 
-  PurchaseHistory _historyData(UserModel user, PurchaseDetails purchaseDetails, ProductDetails product) {
+  PurchaseHistory _historyData(UserProfile user, PurchaseDetails purchaseDetails, ProductDetails product) {
     final purchaseAt = DateTime.fromMillisecondsSinceEpoch(int.parse(purchaseDetails.transactionDate.toString()));
     final expireAt = purchaseAt.add(Duration(days: getExpirePeriodAsDays(purchaseDetails.productID)));
     final String id = DateTime.now().microsecondsSinceEpoch.toString();
@@ -79,9 +80,9 @@ mixin IAPMixin {
       plan: product.title,
       purchaseAt: purchaseAt,
       expireAt: expireAt,
-      userId: user.id,
-      userName: user.name,
-      userEmail: user.email,
+      userId: user.id.toString(),
+      userName: user.userName!,
+      userEmail: user.email!,
       price: product.price,
       purchaseId: purchaseDetails.purchaseID,
       platform: platform,

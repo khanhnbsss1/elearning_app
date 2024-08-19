@@ -14,24 +14,26 @@ import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/screens/quiz_lesson/quiz_screen.dart';
 import 'package:lms_app/screens/video_lesson.dart';
 import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
 
 import '../../models/lesson.dart';
+import '../../models_elearning/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 
 class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
   const Lessons({super.key, required this.course, required this.sectionId});
 
-  final Course course;
+  final CourseInfo course;
   final String sectionId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userDataProvider);
     return FutureBuilder(
-      future: FirebaseService().getLessons(course.id, sectionId),
+      future: FirebaseService().getLessons(course.id.toString(), sectionId),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingIndicatorWidget();
@@ -65,9 +67,9 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
     );
   }
 
-  void _onTap(BuildContext context, Lesson lesson, Course course, UserModel? user, WidgetRef ref) {
+  void _onTap(BuildContext context, Lesson lesson, CourseInfo course, UserProfile? user, WidgetRef ref) {
     if (user != null) {
-      if (course.priceStatus == priceStatus.keys.first) {
+      if (course.mode == "FREE") {
         // Free
         if (hasEnrolled(user, course)) {
           _openLesson(context, lesson, ref);
@@ -100,7 +102,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
     AdManager.initInterstitailAds(ref);
   }
 
-  Icon _trailingIcon(Lesson lesson, UserModel? user) {
+  Icon _trailingIcon(Lesson lesson, UserProfile? user) {
     if (isLessonCompleted(lesson, user)) {
       return const Icon(Icons.check_box, color: Colors.orange);
     } else {

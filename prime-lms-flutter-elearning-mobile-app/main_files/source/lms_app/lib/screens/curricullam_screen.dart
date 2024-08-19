@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/screens/course_details.dart/sections.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 
 class CurriculamScreen extends StatelessWidget {
   const CurriculamScreen({super.key, required this.course});
 
-  final Course course;
+  final CourseInfo course;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class CurriculamScreen extends StatelessWidget {
           backgroundColor: Theme.of(context).primaryColor,
           foregroundColor: Colors.white,
           title: Text(
-            course.name,
+            course.name??"-",
             maxLines: 2,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, color: Colors.white),
           ),

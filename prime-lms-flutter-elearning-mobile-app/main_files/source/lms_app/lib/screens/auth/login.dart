@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:lms_app/base/author/user_helper.dart';
 import 'package:lms_app/components/privacy_info.dart';
+// import 'package:lms_app/models/user/UserProfile.dart';
 import 'package:lms_app/screens/auth/reset_password.dart';
 import 'package:lms_app/screens/auth/sign_up.dart';
 import 'package:lms_app/screens/home/home_view.dart';
@@ -12,6 +14,7 @@ import 'package:lms_app/services/auth_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../controller_elearning/auth/login_controller.dart';
+import '../../models_elearning/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 import 'social_logins.dart';
 
@@ -61,6 +64,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       formKey.currentState!.save();
       _btnController.start();
       loginController.onLogin();
+      final UserProfile? user = await UserManager().getUserProfile();
+     if (user != null) {
+        _btnController.success();
+        afterSignIn();
+      } else {
+        _btnController.reset();
+      }
     }
   }
 
@@ -79,13 +89,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   void afterSignIn() async {
-    if (widget.popUpScreen == null || widget.popUpScreen == false) {
-      NextScreen.closeOthersAnimation(context, const SplashScreen());
-    } else {
-      final navigator = Navigator.of(context);
+      NextScreen.closeOthersAnimation(context, const HomeView());
       await ref.read(userDataProvider.notifier).getData();
-      navigator.pop();
-    }
   }
 
 

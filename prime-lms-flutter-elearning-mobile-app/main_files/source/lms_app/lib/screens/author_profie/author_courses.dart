@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/course.dart';
 import '../../models/user_model.dart';
+import '../../models_elearning/user/UserProfile.dart';
 import '../../services/firebase_service.dart';
 import '../../utils/loading_widget.dart';
 import '../../utils/next_screen.dart';
@@ -17,11 +18,11 @@ final authorCoursesProvider = FutureProvider.autoDispose.family<List<Course>, St
 class AuthorCourses extends ConsumerWidget {
   const AuthorCourses({super.key, required this.user});
 
-  final UserModel user;
+  final UserProfile user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final coursesRef = ref.watch(authorCoursesProvider(user.id));
+    final coursesRef = ref.watch(authorCoursesProvider(user.id.toString()));
     return coursesRef.when(
       data: (courses) {
         return Column(
@@ -45,8 +46,8 @@ class AuthorCourses extends ConsumerWidget {
                       context,
                       AllCoursesView(
                         courseBy: CourseBy.author,
-                        title: user.name,
-                        authorId: user.id,
+                        title: user.fullName!,
+                        authorId: user.id.toString(),
                       )),
                 ),
               ),

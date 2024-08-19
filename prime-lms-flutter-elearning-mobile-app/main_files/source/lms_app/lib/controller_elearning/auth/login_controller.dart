@@ -59,13 +59,13 @@ class LoginController extends MyController {
       update();
       LoginWithPhoneApi loginWithPhoneApi = LoginWithPhoneApi(loginRequest: loginRequest);
       bool result = await loginWithPhoneApi.call();
-      if(result == true)
+     if(result == true)
       {
         if(isChecked)
         {
           await UserManager().saveAccountLoginNearest(IdentifierConst.username);
         }
-        AppPages.route(Paths.homeScreenPath);
+        // AppPages.route(Paths.homeScreenPath);
       }
       else
       {

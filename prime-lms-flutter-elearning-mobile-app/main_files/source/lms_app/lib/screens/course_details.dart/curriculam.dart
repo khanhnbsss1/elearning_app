@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/screens/course_details.dart/sections.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import '../../models/course.dart';
 
 class Curriculam extends ConsumerWidget {
@@ -10,7 +11,7 @@ class Curriculam extends ConsumerWidget {
     required this.course,
   });
 
-  final Course course;
+  final CourseInfo course;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

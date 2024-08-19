@@ -11,6 +11,7 @@ import 'package:lms_app/configs/app_config.dart';
 import 'package:lms_app/models/review.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../models_elearning/user/UserProfile.dart';
 import '../utils/toasts.dart';
 
 class AppService {
@@ -37,8 +38,8 @@ class AppService {
     }
   }
 
-  Future openReviewReportEmail(context, Review review, UserModel? user, String supportEmail) async {
-    final String userName = user != null ? user.name : 'An user';
+  Future openReviewReportEmail(context, Review review, UserProfile? user, String supportEmail) async {
+    final String userName = user != null ? user.userName! : 'An user';
     final Uri uri = Uri(
       scheme: 'mailto',
       path: supportEmail,

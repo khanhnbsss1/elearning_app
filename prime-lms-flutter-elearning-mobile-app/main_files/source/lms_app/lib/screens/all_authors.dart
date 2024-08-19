@@ -8,9 +8,10 @@ import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
 import '../components/user_avatar.dart';
+import '../models_elearning/user/UserProfile.dart';
 
 final authorsProvider = FutureProvider.autoDispose((ref) async {
-  final List<UserModel> authors = await FirebaseService().getAllAuthors();
+  final List<UserProfile> authors = await FirebaseService().getAllAuthors();
   return authors;
 });
 
@@ -31,7 +32,7 @@ class AllAuthors extends ConsumerWidget {
             itemCount: authors.length,
             separatorBuilder: (BuildContext context, int index) => const Divider(height: 50),
             itemBuilder: (BuildContext context, int index) {
-              final UserModel author = authors[index];
+              final UserProfile author = authors[index];
               return InkWell(
                 onTap: () => NextScreen.iOS(context, AuthorProfile(user: author)),
                 child: Row(
@@ -43,7 +44,7 @@ class AllAuthors extends ConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(author.name, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                            Text(author.id.toString(), style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
                             Visibility(
                               visible: author.authorInfo?.jobTitle != null,
                               child: Padding(

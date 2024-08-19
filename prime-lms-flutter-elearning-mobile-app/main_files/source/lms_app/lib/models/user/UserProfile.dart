@@ -7,16 +7,10 @@ import 'package:lms_app/theme/colors_app.dart';
 
 enum UserType{
   none,
-  Teacher,///giao vien
-  User, /// hoc vien
-  Admin, ///   admin
+  DISTRIBUTOR, /// 1  admin
+  PARTNER,///2  doi tac
+  CUSTOMER ///3  nguoi dung end user 
 }
-Map<UserType, String>userTypeToStr={
-  UserType.none:"None",
-  UserType.Teacher:"Teacher",
-  UserType.User:"User",
-  UserType.Admin:"Admin",
-};
 class UserProfile {
   int? id;
   int? parentId;

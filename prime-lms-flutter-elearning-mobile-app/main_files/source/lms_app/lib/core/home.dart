@@ -24,7 +24,7 @@ class _HomeState extends ConsumerState<Home> {
   }
 
   _checkUserAccess() async {
-    final bool isDisabled = ref.read(userDataProvider)?.isDisbaled ?? false;
+    final bool isDisabled = ref.read(userDataProvider)?.isDisabled ?? false;
     if (isDisabled) {
       await Future.delayed(const Duration(seconds: 3)).then((value) => openDisableUserDialog(context));
     }

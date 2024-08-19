@@ -14,9 +14,9 @@ class NotifyDialog {
         String? buttonTextKey})
   {
     BuildContext dialogContext = InstanceManager.getInstance.navigatorKey.currentState!.context;
-    String titleStr = (keyTitle!=null&& keyTitle.isNotEmpty)?L10nX().getStringByKey(keyTitle):"";
-    String description = (descriptionKey!=null&& descriptionKey.isNotEmpty)?L10nX().getStringByKey(descriptionKey):"";
-    String buttonText = (buttonTextKey!=null&& buttonTextKey.isNotEmpty)?L10nX().getStringByKey(buttonTextKey):"";
+    String titleStr = (keyTitle!=null&& keyTitle.isNotEmpty)?L10nX.of(dialogContext).getStringByKey(keyTitle):"";
+    String description = (descriptionKey!=null&& descriptionKey.isNotEmpty)?L10nX.of(dialogContext).getStringByKey(descriptionKey):"";
+    String buttonText = (buttonTextKey!=null&& buttonTextKey.isNotEmpty)?L10nX.of(dialogContext).getStringByKey(buttonTextKey):"";
     showDialogOneButton(title: titleStr, description: description, buttonText: buttonText);
   }
   static void showDialogOneButton(

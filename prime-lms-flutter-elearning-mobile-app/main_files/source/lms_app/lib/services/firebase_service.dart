@@ -17,7 +17,13 @@ import 'package:lms_app/models/tag.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:lms_app/utils/toasts.dart';
 
-import '../models/user_model.dart';
+import '../base/base_request_elearning/models/search_common_request.dart';
+import '../models_elearning/user/UserProfile.dart';
+import '../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import '../services_elearning/apis/course/course_fillter/get_course_fillter_api.dart';
+import '../services_elearning/apis/course/course_list/course_api.dart';
+import '../services_elearning/apis/course/course_list/models/course_models.dart';
+
 
 class FirebaseService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -40,7 +46,7 @@ class FirebaseService {
     final DocumentReference docRef = firestore.collection('users').doc(authorId);
     await firestore.runTransaction((transaction) {
       return transaction.get(docRef).then((DocumentSnapshot snapshot) {
-        final UserModel author = UserModel.fromFirebase(snapshot);
+        final UserProfile author = UserProfile.fromFirebase(snapshot);
         final int count = author.authorInfo?.students ?? 0;
         final int newCount = isIncrement ? (count + 1) : (count - 1);
         final newData = {
@@ -96,12 +102,15 @@ class FirebaseService {
     return data;
   }
 
-  Future<List<Course>> getFeaturedCourses() async {
-    List<Course> data = [];
-    await firestore.collection('courses').where('featured', isEqualTo: true).get().then((QuerySnapshot? snapshot) {
-      data = snapshot!.docs.map((e) => Course.fromFirestore(e)).toList();
-    });
-    return data;
+  Future<List<CourseInfo>?> getFeaturedCourses() async {
+    List<CourseInfo> data = [];
+    // await firestore.collection('courses').where('featured', isEqualTo: true).get().then((QuerySnapshot? snapshot) {
+    //   data = snapshot!.docs.map((e) => Course.fromFirestore(e)).toList();
+    // });
+    // return data;
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageNumber: 0, pageSize: 10, keyword: "",));
+    CourseResponseModel courseResponseModel = await getCourseListApi.call();
+    return courseResponseModel.content;
   }
 
   Future<List<Course>> getFreeCourses() async {
@@ -239,12 +248,12 @@ class FirebaseService {
     return data;
   }
 
-  Future<UserModel?> getUserData() async {
-    UserModel? user;
+  Future<UserProfile?> getUserData() async {
+    UserProfile? user;
     try {
       final String userId = FirebaseAuth.instance.currentUser!.uid;
       final DocumentSnapshot snap = await firestore.collection('users').doc(userId).get();
-      user = UserModel.fromFirebase(snap);
+      // user = UserProfile.fromFirebase(snap);
     } catch (e) {
       debugPrint('error on getting user data: $e');
     }
@@ -252,9 +261,9 @@ class FirebaseService {
     return user;
   }
 
-  Future<UserModel?> getAuthorData(String authorId) async {
+  Future<UserProfile?> getAuthorData(String authorId) async {
     final DocumentSnapshot snap = await firestore.collection('users').doc(authorId).get();
-    UserModel? user = UserModel.fromFirebase(snap);
+    UserProfile? user = UserProfile.fromFirebase(snap);
     return user;
   }
 
@@ -269,8 +278,8 @@ class FirebaseService {
     return settings;
   }
 
-  Future updateWishList(UserModel user, Course course) async {
-    final DocumentReference ref = firestore.collection('users').doc(user.id);
+  Future updateWishList(UserProfile user, CourseInfo course) async {
+    final DocumentReference ref = firestore.collection('users').doc(user.id.toString());
     final newCourseId = course.id;
     final List courses = user.wishList ?? [];
 
@@ -284,8 +293,8 @@ class FirebaseService {
     }
   }
 
-  Future updateEnrollment(UserModel user, Course course) async {
-    final DocumentReference ref = firestore.collection('users').doc(user.id);
+  Future updateEnrollment(UserProfile user, Course course) async {
+    final DocumentReference ref = firestore.collection('users').doc(user.id.toString());
     final newCourseId = course.id;
     final List courses = user.enrolledCourses ?? [];
 
@@ -299,8 +308,8 @@ class FirebaseService {
     }
   }
 
-  Future updateLessonMarkComplete(UserModel user, Course course, Lesson lesson) async {
-    final DocumentReference ref = firestore.collection('users').doc(user.id);
+  Future updateLessonMarkComplete(UserProfile user, CourseInfo course, Lesson lesson) async {
+    final DocumentReference ref = firestore.collection('users').doc(user.id.toString());
 
     //course_id + lesson_id
     final newlessonId = '${course.id}_${lesson.id}';
@@ -315,46 +324,46 @@ class FirebaseService {
     }
   }
 
-  Future updateSubscription(UserModel user, Subscription subscription) async {
-    final DocumentReference ref = firestore.collection('users').doc(user.id);
+  Future updateSubscription(UserProfile user, Subscription subscription) async {
+    final DocumentReference ref = firestore.collection('users').doc(user.id.toString());
     final data = Subscription.getMap(subscription);
     await ref.update({'subscription': data});
   }
 
-  Future savePurchaseHistory(UserModel user, PurchaseHistory history) async {
+  Future savePurchaseHistory(UserProfile user, PurchaseHistory history) async {
     final Map<String, dynamic> data = PurchaseHistory.getMap(history);
     final DocumentReference ref = firestore.collection('purchases').doc();
     await ref.set(data);
   }
 
-  Future<List<UserModel>> getTopAuthors({int limit = 5}) async {
-    List<UserModel> data = [];
+  Future<List<UserProfile>> getTopAuthors({int limit = 5}) async {
+    List<UserProfile> data = [];
     await firestore.collection('users').where('role', arrayContainsAny: ['author', 'admin']).limit(limit).get().then((QuerySnapshot? snapshot) {
-          data = snapshot!.docs.map((e) => UserModel.fromFirebase(e)).toList();
+          data = snapshot!.docs.map((e) => UserProfile.fromFirebase(e)).toList();
         });
     return data;
   }
 
-  Future<List<UserModel>> getAllAuthors() async {
-    List<UserModel> data = [];
+  Future<List<UserProfile>> getAllAuthors() async {
+    List<UserProfile> data = [];
     await firestore.collection('users').where('role', arrayContainsAny: ['author', 'admin']).get().then((QuerySnapshot? snapshot) {
-          data = snapshot!.docs.map((e) => UserModel.fromFirebase(e)).toList();
+          data = snapshot!.docs.map((e) => UserProfile.fromFirebase(e)).toList();
         });
     return data;
   }
 
-  Future saveUserData(UserModel user) async {
+  Future saveUserData(UserProfile user) async {
     try {
-      final data = UserModel.getMap(user);
-      await firestore.collection('users').doc(user.id).set(data);
+      // final data = UserProfile.getMap(user);
+      // await firestore.collection('users').doc(user.id.toString()).set(data);
     } catch (e) {
       debugPrint('error on saving user data: $e');
     }
   }
 
-  Future updateUserProfile(UserModel user) async {
+  Future updateUserProfile(UserProfile user) async {
     try {
-      await firestore.collection('users').doc(user.id).update({'name': user.name, 'image_url': user.imageUrl});
+      await firestore.collection('users').doc(user.id.toString()).update({'name': user.fullName, 'image_url': user.imageUrl});
     } catch (e) {
       debugPrint('Error on updating user profile: $e');
       openToast('Failed to update data');
@@ -585,8 +594,8 @@ class FirebaseService {
     });
   }
 
-  Future updateUserReviewList(UserModel user, Course course) async {
-    final DocumentReference ref = firestore.collection('users').doc(user.id);
+  Future updateUserReviewList(UserProfile user, CourseInfo course) async {
+    final DocumentReference ref = firestore.collection('users').doc(user.id.toString());
     final newCourseId = course.id;
     final List reviews = user.reviews ?? [];
     reviews.add(newCourseId);

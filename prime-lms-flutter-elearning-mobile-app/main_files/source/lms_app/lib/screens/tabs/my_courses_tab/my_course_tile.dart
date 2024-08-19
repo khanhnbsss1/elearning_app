@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:lms_app/components/price_tag.dart';
 import 'package:lms_app/mixins/course_mixin.dart';
 import 'package:lms_app/mixins/user_mixin.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import '../../../models/course.dart';
 import '../../../models/user_model.dart';
+import '../../../models_elearning/user/UserProfile.dart';
 import '../../course_details.dart/details_view.dart';
 import '../../../utils/custom_cached_image.dart';
 import '../../../utils/next_screen.dart';
@@ -12,18 +14,19 @@ import '../../../utils/next_screen.dart';
 class MyCourseTile extends StatelessWidget with UserMixin {
   const MyCourseTile({super.key, required this.course, required this.user});
 
-  final Course course;
-  final UserModel user;
+  final CourseInfo course;
+  final UserProfile user;
 
   @override
   Widget build(BuildContext context) {
     final heroTag = UniqueKey();
-    List validIds = user.completedLessons!.where((element) => element.toString().contains(course.id)).toList();
-    final double courseProgress = validIds.isEmpty ? 0 : (validIds.length / (course.lessonsCount != 0 ? course.lessonsCount : 1));
+    List validIds = user.completedLessons!.where((element) => element.toString().contains(course.id.toString())).toList();
+    final double courseProgress = validIds.isEmpty ? 0 : (validIds.length / (course.totalLectures != 0 ? (course.totalLectures??0).toDouble() : 1));
     final String courseProgesString = (courseProgress * 100).toStringAsFixed(0);
 
     return InkWell(
-      onTap: () => NextScreen.iOS(context, CourseDetailsView(course: course, heroTag: heroTag)),
+      // onTap: () => NextScreen.iOS(context, CourseDetailsView(course: course, heroTag: heroTag)),
+      onTap: () {},
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -34,7 +37,7 @@ class MyCourseTile extends StatelessWidget with UserMixin {
                 height: 90,
                 width: 100,
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(3)),
-                child: Hero(tag: heroTag, child: CustomCacheImage(imageUrl: course.thumbnailUrl, radius: 3)),
+                child: Hero(tag: heroTag, child: CustomCacheImage(imageUrl: course.image, radius: 3)),
               ),
               PremiumTag(course: course),
             ],
@@ -46,14 +49,14 @@ class MyCourseTile extends StatelessWidget with UserMixin {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    course.name,
+                    course.name!,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    'By ${course.author.name}',
+                    'By ${course.producerName}',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blueAccent),
                   ),
                   Padding(

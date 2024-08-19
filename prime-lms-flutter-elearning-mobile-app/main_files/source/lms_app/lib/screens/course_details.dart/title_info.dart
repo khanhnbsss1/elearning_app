@@ -4,13 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/screens/reviews/rating_form.dart';
 import 'package:lms_app/constants/custom_colors.dart';
 import 'package:lms_app/models/course.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/theme/theme_provider.dart';
 import '../../components/rating_bar.dart';
 
 class TitleInfo extends ConsumerWidget {
   const TitleInfo({super.key, required this.course});
 
-  final Course course;
+  final CourseInfo course;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,7 +20,7 @@ class TitleInfo extends ConsumerWidget {
 
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
-        course.name,
+        course.name??"-",
         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               fontSize: 24,
               height: 1.5,
@@ -40,12 +41,12 @@ class TitleInfo extends ConsumerWidget {
           Text(
             'count-students',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
-          ).tr(args: [course.studentsCount.toString()]),
+          ).tr(args: [course.totalLectures.toString()]),
         ],
       ),
       const SizedBox(height: 20),
       Text(
-        course.courseMeta.summary.toString(),
+        course.introduction.toString(),
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontSize: 17,
               color: isDarkMode ? CustomColor.paragraphColorDark : CustomColor.paragraphColor,

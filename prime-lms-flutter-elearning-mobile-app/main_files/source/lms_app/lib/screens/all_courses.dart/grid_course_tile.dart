@@ -19,12 +19,13 @@ class GridCourseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final heroTag = UniqueKey();
     return InkWell(
-      onTap: () => NextScreen.iOS(
-          context,
-          CourseDetailsView(
-            course: course,
-            heroTag: heroTag,
-          )),
+      // onTap: () => NextScreen.iOS(
+      //     context,
+      //     CourseDetailsView(
+      //       course: course,
+      //       heroTag: heroTag,
+      //     )),
+      onTap: (){},
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -37,7 +38,7 @@ class GridCourseTile extends StatelessWidget {
                     color: Colors.grey.shade100,
                     child: Hero(tag: heroTag, child: CustomCacheImage(imageUrl: course.thumbnailUrl, radius: 0)),
                   ),
-                  PremiumTag(course: course)
+                  // PremiumTag(course: course)
                 ],
               ),
             ],

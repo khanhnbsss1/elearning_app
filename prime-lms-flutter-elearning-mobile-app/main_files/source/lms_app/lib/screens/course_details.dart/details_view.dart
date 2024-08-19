@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/ads/ad_manager.dart';
 import 'package:lms_app/ads/banner_ad.dart';
+import 'package:lms_app/screens/course_details.dart/course_info.dart';
 import 'package:lms_app/screens/course_details.dart/course_share_button.dart';
+import '../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'bookmark_button.dart';
-import '../../models/course.dart';
 import 'course_description.dart';
-import 'course_info.dart';
 import 'course_reviews.dart';
 import 'course_tags.dart';
 import 'curriculam.dart';
-import 'enroll_button.dart';
 import 'learnings.dart';
 import 'preview_box.dart';
 import 'related_courses.dart';
@@ -22,7 +21,7 @@ import 'title_info.dart';
 class CourseDetailsView extends ConsumerWidget {
   const CourseDetailsView({super.key, required this.course, this.heroTag});
 
-  final Course course;
+  final CourseInfo course;
   final Object? heroTag;
 
   @override
@@ -32,7 +31,7 @@ class CourseDetailsView extends ConsumerWidget {
         alignment: WrapAlignment.center,
         children: [
           AdManager.isBannerEnbaled(ref) ? const BannerAdWidget() : Container(),
-          EnrollButton(course: course),
+          // EnrollButton(course: course),
         ],
       ),
       body: CustomScrollView(
@@ -60,15 +59,15 @@ class CourseDetailsView extends ConsumerWidget {
                     PreviewBox(course: course, heroTag: heroTag),
                     const SizedBox(height: 20),
                     TitleInfo(course: course),
-                    CourseInfo(course: course),
+                    CourseInfoScreen(course: course),
                     Learnings(course: course),
                     const SizedBox(height: 40),
-                    Curriculam(course: course),
-                    Requirements(course: course),
-                    CourseDescription(course: course),
-                    CourseTags(course: course),
-                    RelatedCourses(course: course),
-                    CourseReviews(course: course),
+                    // Curriculam(course: course),
+                    // Requirements(course: course),
+                    // CourseDescription(course: course),
+                    // CourseTags(course: course),
+                    // RelatedCourses(course: course),
+                    // CourseReviews(course: course),
                   ],
                 )),
           ),

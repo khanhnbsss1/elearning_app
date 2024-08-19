@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:lms_app/base/author/author_manager.dart';
-import '../../models/user/UserProfile.dart';
+import '../../models_elearning/user/UserProfile.dart';
 import '../base.export.dart';
 import '../instance_mananger_elearning/instance_mananger.dart';
 import '../store/shared_preferences.dart';
@@ -32,9 +32,8 @@ class UserManager{
     }
     String rootUserStr = SharedPreferencesStorage().getString(Storage.currentUserInfoKey);
     UserProfile? userInfo;
-    if(rootUserStr.isNotEmpty)
+   if(rootUserStr.isNotEmpty)
     {
-
       userInfo = UserProfile.fromJson(jsonDecode(rootUserStr));
     }
     return userInfo;

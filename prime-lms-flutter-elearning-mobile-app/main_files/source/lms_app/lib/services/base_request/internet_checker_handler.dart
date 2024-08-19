@@ -25,7 +25,7 @@ class InternetCheckerHandler{
       // I am connected to a vpn network.
       // Note for iOS and macOS:
       // There is no separate network interface type for [vpn].
-      // It returns [other] on any device (also simulator)
+      // It returns [other] on any device_elearning (also simulator)
     } else if (connectivityResult.first == ConnectivityResult.bluetooth) {
       // I am connected to a bluetooth.
     } else if (connectivityResult.first == ConnectivityResult.other) {

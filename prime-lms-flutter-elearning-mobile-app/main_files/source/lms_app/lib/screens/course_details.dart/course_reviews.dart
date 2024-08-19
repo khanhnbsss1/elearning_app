@@ -56,7 +56,7 @@ class CourseReviews extends ConsumerWidget {
             Center(
               child: TextButton(
                 onPressed: () {
-                  NextScreen.popup(context, AllReviews(course));
+                  // NextScreen.popup(context, AllReviews(course));
                 },
                 child: const Text('view-all-reviews').tr(),
               ),

@@ -10,12 +10,13 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 import '../components/user_avatar.dart';
 import '../constants/custom_colors.dart';
+import '../models_elearning/user/UserProfile.dart';
 import '../providers/user_data_provider.dart';
 
 class EditProfile extends ConsumerStatefulWidget {
   const EditProfile({super.key, required this.user});
 
-  final UserModel user;
+  final UserProfile user;
 
   @override
   ConsumerState<EditProfile> createState() => _EditProfileState();
@@ -30,7 +31,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
 
   @override
   void initState() {
-    nameCtlr.text = widget.user.name;
+    nameCtlr.text = widget.user.fullName!;
     _imageUrl = widget.user.imageUrl;
     super.initState();
   }
@@ -55,8 +56,8 @@ class _EditProfileState extends ConsumerState<EditProfile> {
 
   UserModel _userData(String? imageUrl) {
     UserModel userModel = UserModel(
-      id: widget.user.id,
-      email: widget.user.email,
+      id: widget.user.id.toString(),
+      email: widget.user.email!,
       name: nameCtlr.text,
       imageUrl: imageUrl,
       updatedAt: DateTime.now().toUtc(),
@@ -69,7 +70,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
       formKey.currentState!.save();
       _btnController.start();
       final String? imageUrl = await _getUserImage();
-      await FirebaseService().updateUserProfile(_userData(imageUrl));
+      // await FirebaseService().updateUserProfile(_userData(imageUrl));
       await ref.read(userDataProvider.notifier).getData();
       _btnController.reset();
       setState(() => _selectedImageFile = null);

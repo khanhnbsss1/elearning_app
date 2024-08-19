@@ -35,7 +35,7 @@ class InstanceManager{
       return courseFilterListInfo;
     }
     GetCourseFilterApi getCourseFilterApi = GetCourseFilterApi();
-    return await getCourseFilterApi.call();
+    return await getCourseFilterApi.call("All");
     
   }
 }

@@ -4,13 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/mixins/course_mixin.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/models/lesson.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import '../providers/user_data_provider.dart';
 import '../services/firebase_service.dart';
 
 class MarkCompleteButton extends ConsumerWidget with CourseMixin {
   const MarkCompleteButton({super.key, required this.course, required this.lesson});
 
-  final Course course;
+  final CourseInfo course;
   final Lesson lesson;
 
   @override

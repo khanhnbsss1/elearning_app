@@ -7,21 +7,23 @@ import 'package:lms_app/models/course.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
 
+import '../../models_elearning/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 
 class BookmarkButton extends ConsumerWidget {
   const BookmarkButton({super.key, required this.course});
 
-  final Course course;
+  final CourseInfo course;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
         onPressed: () async {
-          final UserModel? user = ref.read(userDataProvider);
+          final UserProfile? user = ref.read(userDataProvider);
           if (user == null) {
             NextScreen.openBottomSheet(context, const LoginScreen(popUpScreen: true));
           } else {
@@ -43,7 +45,7 @@ class BookmarkButton extends ConsumerWidget {
 class _BookmarkIcon extends ConsumerWidget {
   const _BookmarkIcon({required this.course});
 
-  final Course course;
+  final CourseInfo course;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

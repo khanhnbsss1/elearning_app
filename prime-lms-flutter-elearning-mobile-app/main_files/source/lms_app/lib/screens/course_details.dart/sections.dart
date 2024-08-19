@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/constants/custom_colors.dart';
 import 'package:lms_app/models/course.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/theme/theme_provider.dart';
 import 'package:lms_app/utils/loading_widget.dart';
 import '../../models/section.dart';
@@ -18,12 +19,12 @@ final isSectionExpnadedProvider = StateProvider.autoDispose.family<bool, String>
 class Sections extends ConsumerWidget {
   const Sections({super.key, required this.course, required this.isInitialSectionOpen});
 
-  final Course course;
+  final CourseInfo course;
   final bool isInitialSectionOpen;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final sections = ref.watch(sectionsProvider(course.id));
+    final sections = ref.watch(sectionsProvider(course.id.toString()));
     final isDarkMode = ref.watch(themeProvider).isDarkMode;
     return sections.when(
       error: (e, x) => Container(),
@@ -58,7 +59,8 @@ class Sections extends ConsumerWidget {
                     ),
               ),
               initiallyExpanded: index == 0 && isInitialSectionOpen ? true : false,
-              children: [Lessons(course: course, sectionId: section.id)],
+              // children: [Lessons(course: course, sectionId: section.id)],
+              children: const [Placeholder()],
               onExpansionChanged: (bool value) => ref.read(isSectionExpnadedProvider(section.id).notifier).update((state) => value),
             );
           },
