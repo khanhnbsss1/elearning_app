@@ -364,10 +364,23 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                 itemBuilder: (context, suggestion) {
                   return OnHoverWidget(
                     builder: (bool isHovered) {
-                      return  IgnorePointer(
-                        //ignoring: true,
+                      return  PointerInterceptor(
                         child: InkWell(
                           onTap: () {
+                            if((BlocProvider.of<AddCourseBloc>(context).state.currentSubject??'').isEmpty)
+                            {
+                              ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
+                              return;
+                            }
+                            if(onSelectLesson!=null)
+                            {
+                              _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
+                              onSelectLesson(suggestion);
+                            }
+                            else
+                            {
+                              ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                            }
                             print("object");
                           },
                           child: Container(
@@ -388,21 +401,6 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   );
                 },
                 onSuggestionSelected: (suggestion) {
-                  if((BlocProvider.of<AddCourseBloc>(context).state.currentSubject??'').isEmpty)
-                  {
-                    ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
-                    return;
-                  }
-                  if(onSelectLesson!=null)
-                  {
-                    _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
-                    onSelectLesson(suggestion);
-                  }
-                  else
-                  {
-                    ToastUtils.showToastError(L10nX.getStr.unknown_str);
-                  }
-                  print("object");
                 },
                 transitionBuilder: (context, child, controller) {
                   return PointerInterceptor(

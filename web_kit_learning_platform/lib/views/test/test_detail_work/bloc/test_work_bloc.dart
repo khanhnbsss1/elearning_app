@@ -15,7 +15,12 @@ class TestWorkBloc extends Bloc<TestWorkEvent, TestWorkState> {
   TestWorkBloc(super.initialState) {
     on<TestWorkInitEvent>(_onInit);
     on<TestWorkOnSubmitResultTestEvent>(_onSubmitTest);
-
+    on<TestWorkOnChangePageTestEvent>((event, emit) {
+      emit(state.copyWith(
+        blocStatus: TestWorkStatus.onChangePage,
+        page: event.page
+      ));
+    });
   }
   Future<void> _onInit(
       TestWorkInitEvent event,
@@ -27,8 +32,25 @@ class TestWorkBloc extends Bloc<TestWorkEvent, TestWorkState> {
     ));
     GetTestDetailApi getTestDetailApi = GetTestDetailApi(testId: state.testInfo?.id??0);
     state.testInfo = (await getTestDetailApi.call())?? state.testInfo;
+    state.quizDTOsForView = [];
+    int indexList =0;
+    (state.quizDTOsForView??[]).add([]);
+    for(int index = 0; index< (state.testInfo?.quizDTOs??[]).length; index++)
+      {
+        if((index!=0 && (index % (state.pageSize!))==0))
+          { indexList++;
+            (state.quizDTOsForView??[]).add([]);
+            (state.quizDTOsForView??[])[indexList].add((state.testInfo?.quizDTOs??[]).elementAt(index));
+          }
+        else
+          {
+            (state.quizDTOsForView??[])[indexList].add((state.testInfo?.quizDTOs??[]).elementAt(index));
+          }
+      }
     emit(state.copyWith(
-        blocStatus: TestWorkStatus.initial,testInfo: state.testInfo));
+        blocStatus: TestWorkStatus.initial,
+        quizDTOsForView: (state.quizDTOsForView??[]),
+        testInfo: state.testInfo));
   }
 
   Future<void> _onSubmitTest(

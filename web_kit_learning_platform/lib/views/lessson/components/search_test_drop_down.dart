@@ -2,6 +2,7 @@ import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
@@ -112,32 +113,39 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
                     itemBuilder: (context, suggestion) {
                       return OnHoverWidget(
                         builder: (bool isHovered) {
-                          return  Container(
-                            decoration: BoxDecoration(
-                                color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
-                                border: Border(
-                                    bottom: BorderSide(color: ColorConst.dividerColor)
-                                )
-                            ),
-                            child: ListTile(
-                              leading: Icon(Icons.book),
-                              title: Text(suggestion.name??""),
+                          return  PointerInterceptor(
+                            child: InkWell(
+                              onTap: () {
+                                if(onSelectWord!=null)
+                                {
+                                  _wordDropdownSearchFieldController.text = suggestion.name??"";
+                                  onSelectWord(suggestion);
+                                }
+                                else
+                                {
+                                  ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                                }
+                                print("object");
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
+                                    border: Border(
+                                        bottom: BorderSide(color: ColorConst.dividerColor)
+                                    )
+                                ),
+                                child: ListTile(
+                                  leading: Icon(Icons.book),
+                                  title: Text(suggestion.name??""),
+                                ),
+                              ),
                             ),
                           );
                         },
                       );
                     },
                     onSuggestionSelected: (suggestion) {
-                      if(onSelectWord!=null)
-                      {
-                        _wordDropdownSearchFieldController.text = suggestion.name??"";
-                        onSelectWord(suggestion);
-                      }
-                      else
-                      {
-                        ToastUtils.showToastError(L10nX.getStr.unknown_str);
-                      }
-                      print("object");
+                     
                     },
                     transitionBuilder: (context, child, controller) {
                       return Container(

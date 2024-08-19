@@ -23,3 +23,9 @@ class TestWorkOnSubmitResultTestEvent extends TestWorkEvent {
   @override
   List<Object?> get props => [];
 }
+class TestWorkOnChangePageTestEvent extends TestWorkEvent {
+  int page;
+  TestWorkOnChangePageTestEvent({required this.page});
+  @override
+  List<Object?> get props => [page];
+}

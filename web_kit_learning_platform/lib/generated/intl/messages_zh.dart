@@ -461,6 +461,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "standard": MessageLookupByLibrary.simpleMessage("标准"),
         "standard_str": MessageLookupByLibrary.simpleMessage("标准"),
         "start_test": MessageLookupByLibrary.simpleMessage("测试"),
+        "start_test_confirm":
+            MessageLookupByLibrary.simpleMessage("您确定要执行本次测试吗，执行时间为："),
         "starter": MessageLookupByLibrary.simpleMessage("入门"),
         "static": MessageLookupByLibrary.simpleMessage("静态"),
         "static_dialog": MessageLookupByLibrary.simpleMessage("静态对话框"),
@@ -692,6 +694,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "word_str": MessageLookupByLibrary.simpleMessage("单词"),
         "world_countries_details":
             MessageLookupByLibrary.simpleMessage("世界各国详情"),
+        "you_are_ready_finish_test":
+            MessageLookupByLibrary.simpleMessage("您确定要提交测试吗？"),
         "you_do_have_an_account":
             MessageLookupByLibrary.simpleMessage("您有帐户吗？"),
         "you_do_not_have_an_account":

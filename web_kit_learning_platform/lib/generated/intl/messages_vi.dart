@@ -541,6 +541,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "standard": MessageLookupByLibrary.simpleMessage("Tiêu chuẩn"),
         "standard_str": MessageLookupByLibrary.simpleMessage("Tiêu chuẩn"),
         "start_test": MessageLookupByLibrary.simpleMessage("Làm bài"),
+        "start_test_confirm": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn thực hiện bài kiểm tra này, thời gian thực hiện là: "),
         "starter": MessageLookupByLibrary.simpleMessage("Câu hỏi thường gặp"),
         "static": MessageLookupByLibrary.simpleMessage("Tĩnh"),
         "static_dialog": MessageLookupByLibrary.simpleMessage("Hộp thoại tĩnh"),
@@ -817,6 +819,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "word_str": MessageLookupByLibrary.simpleMessage("Từ"),
         "world_countries_details": MessageLookupByLibrary.simpleMessage(
             "Chi tiết các quốc gia trên thế giới"),
+        "you_are_ready_finish_test": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn nộp bài !"),
         "you_do_have_an_account":
             MessageLookupByLibrary.simpleMessage("Bạn có tài khoản?"),
         "you_do_not_have_an_account":

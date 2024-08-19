@@ -6009,6 +6009,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Are you sure you want to run this test, the time taken is: `
+  String get start_test_confirm {
+    return Intl.message(
+      'Are you sure you want to run this test, the time taken is: ',
+      name: 'start_test_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn có chắc chắn muốn nộp bài !`
+  String get you_are_ready_finish_test {
+    return Intl.message(
+      'Bạn có chắc chắn muốn nộp bài !',
+      name: 'you_are_ready_finish_test',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
