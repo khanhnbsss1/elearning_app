@@ -57,6 +57,8 @@ class LessonInfo {
   String? testName;
   UploadFileResponseInfo? documentUploadInfo;
   List<VocabularyInfo>? vocabularies;
+  int? videoDuration;// bien nay chi set khi play video tren web
+  bool? isFinnish;
   LessonInfo(
       {this.id,
         this.subName,
@@ -74,7 +76,9 @@ class LessonInfo {
         this.vocabularies,
         this.docLink,
         this.testId,
-        this.testName
+        this.testName,
+        this.videoDuration,
+        this.isFinnish
       });
 
   LessonInfo.fromJson(Map<String, dynamic> json) {

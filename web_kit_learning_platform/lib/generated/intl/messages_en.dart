@@ -244,6 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "extra_pages": MessageLookupByLibrary.simpleMessage("Extra pages"),
         "faqs": MessageLookupByLibrary.simpleMessage("FAQs"),
         "feelings_str": MessageLookupByLibrary.simpleMessage("Feelings"),
+        "fill_type_str": MessageLookupByLibrary.simpleMessage("Fill in word"),
         "filled": MessageLookupByLibrary.simpleMessage("Filled"),
         "finish": MessageLookupByLibrary.simpleMessage("Finish"),
         "first_name": MessageLookupByLibrary.simpleMessage("First name"),

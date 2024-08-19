@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gap/gap.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/store/save_file.dart';
 import 'package:webkit/base/widgets/common/alert_dialog/loading.export.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/topic/model/topic_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
+import 'package:webkit/views/apps/file/file_manager.dart';
 import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
 import 'package:webkit/views/course/course_detail/course_study/subject_item_widget.dart';
 
@@ -204,11 +206,30 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
             maxWidth: constraints.maxWidth
           ),
           child: VideoPlayer(
-            videoPlayerModel: VideoPlayerModel(title: "",
-                link:
-                (_state.selectLessonInfo?.link??"").isNotEmpty?(_state.selectLessonInfo?.link??""):
-                "https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4" //_state.courseInfo?.videoPreview ?? ""
+            videoPlayerModel: VideoPlayerModel(
+                title: "",
+                link: (_state.selectLessonInfo?.link??"").isNotEmpty?(_state.selectLessonInfo?.link??""):
+                "https://www.youtube.com/watch?v=RFu43pM2Nbw" 
             ),
+            onGetVideoDuration: (duration) {
+              if((_state.selectLessonInfo?.videoDuration==null) && duration.inMilliseconds>10)
+                {
+                  _state.selectLessonInfo?.videoDuration = duration.inMilliseconds~/1000;
+                  BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailUpdateInfoSelectLessonEvent(
+                      selectLessonInfo: _state.selectLessonInfo!));
+                }
+            },
+            onGetVideoPosition: (duration) {
+              print("object");
+              if((!(_state.selectLessonInfo?.isFinnish??false)) &&
+                  (_state.selectLessonInfo?.videoDuration??0) > 10 &&
+                  duration.inMilliseconds/1000 > (_state.selectLessonInfo?.videoDuration??0) - (60*0.5))
+                {
+                  _state.selectLessonInfo?.isFinnish = true;
+                  BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailUpdateFinishLessonEvent(
+                      selectLessonInfo: _state.selectLessonInfo!));
+                }
+            },
           ),
         );
 
@@ -375,7 +396,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
             height: 30,
           ),
           Text(
-            'Introduction: ',
+            "${L10nX.getStr.introduction_str}: ",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.red,
@@ -400,7 +421,9 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           ),
           InkWell(
             onTap: () {
-
+              if((_state.selectLessonInfo?.docLink??"").isNotEmpty) {
+                FileStoreManager().downloadFileFromStream(url: _state.selectLessonInfo?.docLink??"", fileName:  _state.selectLessonInfo?.docName??"");
+              }
             },
               child: Text(
                 _state.selectLessonInfo?.docName??'',
@@ -409,7 +432,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
             height: 16,
           ),
           Text(
-            'Danh sách từ vựng',
+            "${L10nX.getStr.vocabulary_str}: ",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.red,

@@ -11,7 +11,9 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 ///
 class YoutubePlayerPage extends StatefulWidget {
   VideoPlayerModel videoPlayerModel;
-  YoutubePlayerPage({required this.videoPlayerModel});
+  Function(Duration duration)? onGetVideoDuration;
+  Function(Duration duration)? onGetVideoPosition;
+  YoutubePlayerPage({required this.videoPlayerModel, this.onGetVideoDuration, this.onGetVideoPosition});
   @override
   State<YoutubePlayerPage> createState() => _YoutubePlayerPageState();
 }
@@ -77,7 +79,20 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Expanded(child: player),
-                      VideoPositionIndicator(),
+                      VideoPositionIndicator(
+                        onGetVideoDuration: (duration) {
+                          if(widget.onGetVideoDuration!=null)
+                            {
+                              widget.onGetVideoDuration!(duration);
+                            }
+                        },
+                        onGetVideoPosition: (duration) {
+                          if(widget.onGetVideoPosition!=null)
+                          {
+                            widget.onGetVideoPosition!(duration);
+                          }
+                        },
+                      ),
                       //const VideoPositionSeeker(),
                     ],
                   ),
@@ -105,7 +120,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
 ///
 class VideoPositionIndicator extends StatelessWidget {
   ///
-  VideoPositionIndicator({super.key, this.onGetVideoDuration});
+  VideoPositionIndicator({super.key, this.onGetVideoDuration, this.onGetVideoPosition});
   Function(Duration duration)? onGetVideoDuration;
   Function(Duration duration)? onGetVideoPosition;
   @override

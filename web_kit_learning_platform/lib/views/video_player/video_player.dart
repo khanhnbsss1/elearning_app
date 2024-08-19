@@ -7,8 +7,10 @@ import 'model/video_model.dart';
 
 
 class VideoPlayer extends  StatefulWidget{
-  VideoPlayer({super.key, required this.videoPlayerModel});
+  VideoPlayer({super.key, required this.videoPlayerModel, this.onGetVideoPosition, this.onGetVideoDuration});
   VideoPlayerModel videoPlayerModel;
+  Function(Duration duration)? onGetVideoDuration;
+  Function(Duration duration)? onGetVideoPosition;
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -21,7 +23,21 @@ class VideoPlayerState extends  State<VideoPlayer>{
   Widget build(BuildContext context) {
     // TODO: implement build
     if(checkVideoFromYoutube()){
-     return YoutubePlayerPage(videoPlayerModel: widget.videoPlayerModel,);
+     return YoutubePlayerPage(
+       videoPlayerModel: widget.videoPlayerModel,
+       onGetVideoPosition: (duration) {
+         if(widget.onGetVideoPosition!=null)
+           {
+             widget.onGetVideoPosition!(duration);
+           }
+       },
+       onGetVideoDuration: (duration) {
+         if(widget.onGetVideoDuration!=null)
+         {
+           widget.onGetVideoDuration!(duration);
+         }
+       },
+     );
    }
    else
    {

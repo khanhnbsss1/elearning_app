@@ -583,6 +583,7 @@
   "audio_type_str": "Âm thanh",
   "text_type_str": "Văn bản",
   "image_type_str": "Hình ảnh",
+  "fill_type_str": "Điền từ",
   "self_essay_type_str": "Tự luận",
   "question_create": "Tạo câu hỏi",
   "question_edit": "Chỉnh sửa câu hỏi",

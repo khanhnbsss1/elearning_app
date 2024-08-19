@@ -578,6 +578,7 @@
   "audio_type_str": "音频",
   "text_type_str": "文本",
   "image_type_str": "图片",
+  "fill_type_str": "填写单词",
   "self_essay_type_str": "论文",
   "question_create": "创建问题",
   "question_edit": "编辑问题",

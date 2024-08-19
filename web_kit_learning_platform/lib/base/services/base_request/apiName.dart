@@ -46,7 +46,8 @@ class ApiName {
   final String linkLesson = "/Link-lecture-course";
   final String unlinkLesson = "/unlink-lecture-course";
   final String getLessonList = "/get-list";
-  
+  final String updateLessonStatus = "/update-status";
+
   /// landing page
 
   final String getCourseListLandingPage = "/get-landingpage-course";

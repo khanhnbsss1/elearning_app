@@ -5,7 +5,8 @@ enum AddCourseStatus {
   initial,
   onLoadingSelectLesson,
   onSelectLesson,
-  
+  onUpdateSelectionLesson,
+  onUpdateFinishLessonStatus,
   unKnown
 }
 

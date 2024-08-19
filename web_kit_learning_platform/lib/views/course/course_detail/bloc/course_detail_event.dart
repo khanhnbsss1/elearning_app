@@ -17,3 +17,16 @@ class CourseDetailSelectLessonEvent extends CourseDetailEvent {
   @override
   List<Object?> get props => [selectLessonInfo];
 }
+
+class CourseDetailUpdateInfoSelectLessonEvent extends CourseDetailEvent {
+  LessonInfo selectLessonInfo;
+  CourseDetailUpdateInfoSelectLessonEvent({required this.selectLessonInfo});
+  @override
+  List<Object?> get props => [selectLessonInfo];
+}
+class CourseDetailUpdateFinishLessonEvent extends CourseDetailEvent {
+  LessonInfo selectLessonInfo;
+  CourseDetailUpdateFinishLessonEvent({required this.selectLessonInfo});
+  @override
+  List<Object?> get props => [selectLessonInfo];
+}

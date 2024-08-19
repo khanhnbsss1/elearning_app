@@ -238,6 +238,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "extra_pages": MessageLookupByLibrary.simpleMessage("Trang bổ sung"),
         "faqs": MessageLookupByLibrary.simpleMessage("Câu hỏi thường gặp"),
         "feelings_str": MessageLookupByLibrary.simpleMessage("Cảm nhận"),
+        "fill_type_str": MessageLookupByLibrary.simpleMessage("Điền từ"),
         "filled": MessageLookupByLibrary.simpleMessage("Lấp đầy"),
         "finish": MessageLookupByLibrary.simpleMessage("Kết thúc"),
         "first_name": MessageLookupByLibrary.simpleMessage("Tên"),

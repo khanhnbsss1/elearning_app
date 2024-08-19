@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:webkit/services/apis/course/course_detail/get_course_detail_api.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/lessson/lesson_detail/get_lesson_detail.dart';
+import 'package:webkit/services/apis/lessson/lesson_detail/update_study_lesson_proccess.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/topic/model/topic_info.dart';
 part 'course_detail_event.dart';
@@ -21,6 +22,15 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
       state.selectLessonInfo = await getLessonDetailApi.call();
       emit(state.copyWith(blocStatus: AddCourseStatus.onSelectLesson, selectLessonInfo: state.selectLessonInfo));
     });
+    on<CourseDetailUpdateInfoSelectLessonEvent>((event, emit) async {
+      
+      emit(state.copyWith(
+          blocStatus: AddCourseStatus.onUpdateSelectionLesson, 
+          selectLessonInfo: event.selectLessonInfo));
+      
+    });
+    on<CourseDetailUpdateFinishLessonEvent>(_onFinishLesson);
+
   }
 
   Future<void> _onInit(
@@ -54,5 +64,25 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
       {
         add(CourseDetailSelectLessonEvent(selectLessonInfo: state.selectLessonInfo!));
       }
+  }
+
+  Future<void> _onFinishLesson(
+      CourseDetailUpdateFinishLessonEvent event,
+      Emitter<CourseDetailState> emit,
+      ) async {
+    UpdateLessonStatusApi updateLessonStatusApi= UpdateLessonStatusApi(courseId: state.courseInfo?.id??0, lectureId: state.selectLessonInfo?.id??0,);
+    dynamic data = await updateLessonStatusApi.call();
+    
+    int indexOfSelectLesson = (state.courseInfo?.lectures??[]).indexWhere((element) => element.id == state.selectLessonInfo?.id,);
+    (state.courseInfo?.lectures??[])[indexOfSelectLesson].isFinnish = true;
+    emit(state.copyWith(
+      blocStatus: AddCourseStatus.onUpdateFinishLessonStatus,
+      courseInfo: state.courseInfo,
+    ));
+    if(indexOfSelectLesson<(state.courseInfo?.lectures??[]).length)
+    {
+/*      LessonInfo newSelectionLessonInfo  = (state.courseInfo?.lectures??[]).elementAt(indexOfSelectLesson+1);
+      add(CourseDetailSelectLessonEvent(selectLessonInfo: newSelectionLessonInfo));*/
+    }
   }
 }

@@ -105,7 +105,7 @@ class SubjectItemWidgetState extends State<SubjectItemWidget>{
             itemBuilder: (context, lectureIndex) {
               LessonInfo lessonInfo = (subject.lectures ?? []).elementAt(lectureIndex);
               bool isSelectLesson = lessonInfo.id == widget.selectLessonInfo?.id;
-              bool isFinishLesson = false;
+              bool isFinishLesson = lessonInfo.isFinnish??false;
               return InkWell(
                 onTap: () {
                   widget.onSelectLesson(lessonInfo);
@@ -149,7 +149,7 @@ class SubjectItemWidgetState extends State<SubjectItemWidget>{
     );
   }
   Widget buildSubjectProccess(){
-    List<LessonInfo> listQuestionChooesed = [];
+    List<LessonInfo> listQuestionChooesed = [...((widget.subject.lectures??[])).where((element) => element.isFinnish==true,)];
     double percent = listQuestionChooesed.length /  (widget.subject.lectures??[]).length;
     return Center(
       child:  Padding(

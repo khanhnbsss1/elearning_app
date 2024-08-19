@@ -5800,6 +5800,16 @@ class S {
     );
   }
 
+  /// `Fill in word`
+  String get fill_type_str {
+    return Intl.message(
+      'Fill in word',
+      name: 'fill_type_str',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Essay`
   String get self_essay_type_str {
     return Intl.message(

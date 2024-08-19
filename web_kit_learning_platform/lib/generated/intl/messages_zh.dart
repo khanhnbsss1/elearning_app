@@ -206,6 +206,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "extra_pages": MessageLookupByLibrary.simpleMessage("额外页面"),
         "faqs": MessageLookupByLibrary.simpleMessage("常见问题"),
         "feelings_str": MessageLookupByLibrary.simpleMessage("感受"),
+        "fill_type_str": MessageLookupByLibrary.simpleMessage("填写单词"),
         "filled": MessageLookupByLibrary.simpleMessage("已填写"),
         "finish": MessageLookupByLibrary.simpleMessage("完成"),
         "first_name": MessageLookupByLibrary.simpleMessage("名字"),

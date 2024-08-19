@@ -583,6 +583,7 @@
   "audio_type_str": "Audio",
   "text_type_str": "Text",
   "image_type_str": "Image",
+  "fill_type_str": "Fill in word",
   "self_essay_type_str": "Essay",
   "question_create": "Create question",
   "question_edit": "Edit question",
@@ -599,4 +600,5 @@
   "achievements_str":"Achievements",
   "choosed_str": "Choosed",
   "learned_str": "Learned"
+  
 }
