@@ -597,5 +597,6 @@
   "instructor_str":"Giáo viên",
   "feelings_str":"Cảm nhận",
   "achievements_str":"Thành tích",
-  "choosed_str": "Đã chọn"
+  "choosed_str": "Đã chọn",
+  "learned_str": "Đã học"
 }

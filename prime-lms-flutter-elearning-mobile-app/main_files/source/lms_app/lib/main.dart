@@ -29,7 +29,12 @@ import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  try{
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  }
+  catch(e){
+    
+  }
   await EasyLocalization.ensureInitialized();
   initialService();
   HiveService.initHive();

@@ -10,7 +10,7 @@ class AppConfig {
   static const Color appThemeColor = Color(0xFF3F51B5);
 
   // Android Package Name
-  static const String androidPackageName = 'com.mrblab.prime_lms';//"com.FFTCompany.elearninglms";//;
+  static const String androidPackageName = "com.FFTCompany.YAXChinese";
 
   // iOS App ID
   static const String iosAppID = '000000';

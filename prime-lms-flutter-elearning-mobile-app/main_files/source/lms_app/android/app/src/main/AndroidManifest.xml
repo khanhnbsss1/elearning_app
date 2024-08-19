@@ -29,7 +29,7 @@
    </queries>
     
     <application
-        android:label="Prime LMS"
+        android:label="YAX Chinese"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">

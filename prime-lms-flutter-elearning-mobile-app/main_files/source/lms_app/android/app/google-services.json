@@ -1,56 +1,364 @@
 {
   "project_info": {
-    "project_number": "577388184102",
-    "project_id": "elearning-ca768",
-    "storage_bucket": "elearning-ca768.appspot.com"
+    "project_number": "289426064469",
+    "project_id": "mymapkeyproject-362707",
+    "storage_bucket": "mymapkeyproject-362707.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:577388184102:android:68ccfa0dda807ee7abdce7",
+        "mobilesdk_app_id": "1:289426064469:android:ff636165ae84f8467b00dc",
         "android_client_info": {
-          "package_name": "com.FFTCompany.elearninglms"
+          "package_name": "com.FFTCompany.FinancialAdmin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "577388184102-400mjsugm1v10bgcq9ubkdfoe4b24lod.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.FFTCompany.elearninglms",
-            "certificate_hash": "03072795292adf92c296ce0ed6203c907a2b22ad"
-          }
-        },
-        {
-          "client_id": "577388184102-em447obgr06mt1qphb8fe8qtg5sn7rpo.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.FFTCompany.elearninglms",
-            "certificate_hash": "6abdf594d8c7468f2a5a67a3f1b61517977a1860"
-          }
-        },
-        {
-          "client_id": "577388184102-jpokmaptu3of4rl83s172jf6c7t4gffs.apps.googleusercontent.com",
+          "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCIAMuapIP85deFBkBA8YLGchewjMOCEes"
+          "current_key": "AIzaSyAWkNb_YF4jcghKDNVN5EV3pK-gPNe7pm8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "577388184102-jpokmaptu3of4rl83s172jf6c7t4gffs.apps.googleusercontent.com",
+              "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "577388184102-iumlma6tp7nogajc0lc4pbirrge6t6f8.apps.googleusercontent.com",
+              "client_id": "289426064469-0ohmguohsmopq59okcit5tuia1adfpb7.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "FFTCompany.elearninglms"
+                "bundle_id": "com.FFTCompany.NaviTracking"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289426064469:android:221a0ae3ab81c4fa7b00dc",
+        "android_client_info": {
+          "package_name": "com.FFTCompany.FinancialUser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWkNb_YF4jcghKDNVN5EV3pK-gPNe7pm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "289426064469-0ohmguohsmopq59okcit5tuia1adfpb7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.FFTCompany.NaviTracking"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289426064469:android:8c4d025d520c4d717b00dc",
+        "android_client_info": {
+          "package_name": "com.FFTCompany.HAOKIETGPS"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWkNb_YF4jcghKDNVN5EV3pK-gPNe7pm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "289426064469-0ohmguohsmopq59okcit5tuia1adfpb7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.FFTCompany.NaviTracking"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289426064469:android:892ffe25c48c9a157b00dc",
+        "android_client_info": {
+          "package_name": "com.FFTCompany.NaviTrackLiteMoto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWkNb_YF4jcghKDNVN5EV3pK-gPNe7pm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "289426064469-0ohmguohsmopq59okcit5tuia1adfpb7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.FFTCompany.NaviTracking"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289426064469:android:7498604a928bf6177b00dc",
+        "android_client_info": {
+          "package_name": "com.FFTCompany.NaviTracking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWkNb_YF4jcghKDNVN5EV3pK-gPNe7pm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "289426064469-0ohmguohsmopq59okcit5tuia1adfpb7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.FFTCompany.NaviTracking"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289426064469:android:fe4a308ec4697c717b00dc",
+        "android_client_info": {
+          "package_name": "com.FFTCompany.NaviTrackingLite"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWkNb_YF4jcghKDNVN5EV3pK-gPNe7pm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "289426064469-0ohmguohsmopq59okcit5tuia1adfpb7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.FFTCompany.NaviTracking"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289426064469:android:bbe52c24b673b6c47b00dc",
+        "android_client_info": {
+          "package_name": "com.FFTCompany.YAXChinese"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWkNb_YF4jcghKDNVN5EV3pK-gPNe7pm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "289426064469-0ohmguohsmopq59okcit5tuia1adfpb7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.FFTCompany.NaviTracking"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289426064469:android:fd52e31723c378f07b00dc",
+        "android_client_info": {
+          "package_name": "com.ThanhLongCompany.STouch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWkNb_YF4jcghKDNVN5EV3pK-gPNe7pm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "289426064469-0ohmguohsmopq59okcit5tuia1adfpb7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.FFTCompany.NaviTracking"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289426064469:android:05bd7fd2f4ffd9ec7b00dc",
+        "android_client_info": {
+          "package_name": "com.ThanhLongJSC.ErpMobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWkNb_YF4jcghKDNVN5EV3pK-gPNe7pm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "289426064469-0ohmguohsmopq59okcit5tuia1adfpb7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.FFTCompany.NaviTracking"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289426064469:android:ea76b684aeb61ff37b00dc",
+        "android_client_info": {
+          "package_name": "com.ThanhLongJSC.SOffice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWkNb_YF4jcghKDNVN5EV3pK-gPNe7pm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289426064469-ekukt7e3nbdiboo6fkdaop142hnh411i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "289426064469-0ohmguohsmopq59okcit5tuia1adfpb7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.FFTCompany.NaviTracking"
               }
             }
           ]

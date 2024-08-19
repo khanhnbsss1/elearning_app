@@ -1,0 +1,172 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:webkit/base/base.export.dart';
+import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/topic/model/topic_info.dart';
+
+class SubjectItemWidget extends StatefulWidget{
+  SubjectItemWidget({
+    required this.subjectIndex, 
+    required this.subject,
+    required this.onFinishLecture,
+    this.selectLessonInfo,
+    required this.onSelectLesson
+  });
+  Subjects subject;
+  int subjectIndex =0;
+  Function(int)onFinishLecture;
+  Function(LessonInfo)onSelectLesson;
+  LessonInfo? selectLessonInfo;
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return SubjectItemWidgetState();
+  }
+  
+}
+class SubjectItemWidgetState extends State<SubjectItemWidget>{
+  bool showSubject = true;
+  List<bool>?checkLecture = [];
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        InkWell(
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size16),
+            decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(color: ColorConst.blackColor, width: 0.2))
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '${L10nX.getStr.subject_str} ${widget.subjectIndex+1}: ${widget.subject.subName}',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Gap(Dimens.size16),
+
+                    Icon((!showSubject)?Icons.arrow_drop_down:Icons.arrow_drop_up, size: 32,),
+                  ],
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  children: [
+                    (MediaQuery.of(context).size.width > 1050) ? Text('Tiến độ: ') : SizedBox(),
+                    Expanded(
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                         return buildSubjectProccess();
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+          onTap: () {
+            setState(() {
+              showSubject = !showSubject;
+            });
+          },
+        ),
+        buildLessonItemList(subjectIndex: widget.subjectIndex, subject: widget.subject,)
+      ],
+    );
+  }
+  Widget buildLessonItemList({required Subjects subject, required int subjectIndex, }) {
+    return AnimatedSize(
+      curve: Curves.fastOutSlowIn,
+      duration: Duration(milliseconds: 200),
+      child: showSubject
+          ? Container(
+        margin: EdgeInsets.all(0),
+        constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+        child: SingleChildScrollView(
+          // controller: subjectScrollController,
+          child: ListView.builder(
+            shrinkWrap: true,
+            // controller: subjectScrollController,
+            itemCount: (subject.lectures ?? []).length,
+            itemBuilder: (context, lectureIndex) {
+              LessonInfo lessonInfo = (subject.lectures ?? []).elementAt(lectureIndex);
+              bool isSelectLesson = lessonInfo.id == widget.selectLessonInfo?.id;
+              bool isFinishLesson = false;
+              return InkWell(
+                onTap: () {
+                  widget.onSelectLesson(lessonInfo);
+                },
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 4),
+                      decoration: BoxDecoration(
+                          color: isSelectLesson?ColorConst.greyColor1.withOpacity(0.05): ColorConst.whiteColor,
+                          border: Border(bottom: BorderSide(color: ColorConst.blackColor,width: 0.2))
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size32),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              '${subjectIndex+1}.${lectureIndex+1}. ${lessonInfo.lectureName}',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Gap(Dimens.size10),
+                          Center(
+                            child: Icon(
+                              isFinishLesson?Icons.check_box_outlined:Icons.check_box_outline_blank,
+                              color:isFinishLesson? ColorConst.mainColor:ColorConst.colorIconGrays ,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+      )
+          : SizedBox(),
+    );
+  }
+  Widget buildSubjectProccess(){
+    List<LessonInfo> listQuestionChooesed = [];
+    double percent = listQuestionChooesed.length /  (widget.subject.lectures??[]).length;
+    return Center(
+      child:  Padding(
+        padding: EdgeInsets.all(15.0),
+        child: new LinearPercentIndicator(
+          width: Dimens.size250,
+          animation: true,
+          lineHeight: Dimens.size20,
+          animationDuration: 1000,
+          percent: percent,
+          center: Text("${L10nX.getStr.learned_str} ${listQuestionChooesed.length} / ${(widget.subject.lectures??[]).length} ${L10nX.getStr.lesson_str}"),
+          barRadius: Radius.circular(Dimens.size8),
+          progressColor: Colors.green,
+        ),
+      ),
+    );
+
+  }
+
+}

@@ -299,6 +299,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "last_name": MessageLookupByLibrary.simpleMessage("Last name"),
         "last_order_at": MessageLookupByLibrary.simpleMessage("Last order at"),
         "last_week": MessageLookupByLibrary.simpleMessage("Last week"),
+        "learned_str": MessageLookupByLibrary.simpleMessage("Learned"),
         "lecture_link_str":
             MessageLookupByLibrary.simpleMessage("Lecture link"),
         "lecture_name_str":

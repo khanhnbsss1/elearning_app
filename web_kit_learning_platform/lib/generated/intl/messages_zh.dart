@@ -253,6 +253,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "last_name": MessageLookupByLibrary.simpleMessage("姓氏"),
         "last_order_at": MessageLookupByLibrary.simpleMessage("最后订单时间"),
         "last_week": MessageLookupByLibrary.simpleMessage("上周"),
+        "learned_str": MessageLookupByLibrary.simpleMessage("已学习"),
         "lecture_link_str": MessageLookupByLibrary.simpleMessage("讲座链接"),
         "lecture_name_str": MessageLookupByLibrary.simpleMessage("讲座名称"),
         "left": MessageLookupByLibrary.simpleMessage("左侧"),

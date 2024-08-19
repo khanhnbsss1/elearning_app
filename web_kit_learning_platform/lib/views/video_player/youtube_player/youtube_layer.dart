@@ -77,7 +77,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Expanded(child: player),
-                      const VideoPositionIndicator(),
+                      VideoPositionIndicator(),
                       //const VideoPositionSeeker(),
                     ],
                   ),
@@ -101,76 +101,30 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
   }
 }
 
-/*///
-class Controls extends StatelessWidget {
-  ///
-  const Controls({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const MetaDataSection(),
-          _space,
-          const SourceInputSection(),
-          _space,
-          PlayPauseButtonBar(),
-          _space,
-          const VideoPositionSeeker(),
-          _space,
-          const PlayerStateSection(),
-        ],
-      ),
-    );
-  }
-
-  Widget get _space => const SizedBox(height: 10);
-}
-
-///
-class VideoPlaylistIconButton extends StatelessWidget {
-  ///
-  const VideoPlaylistIconButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = context.ytController;
-
-    return IconButton(
-      onPressed: () async {
-        controller.pauseVideo();
-        await Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const VideoListPage(),
-          ),
-        );
-        controller.playVideo();
-      },
-      icon: const Icon(Icons.playlist_play_sharp),
-    );
-  }
-}*/
 
 ///
 class VideoPositionIndicator extends StatelessWidget {
   ///
-  const VideoPositionIndicator({super.key});
-
+  VideoPositionIndicator({super.key, this.onGetVideoDuration});
+  Function(Duration duration)? onGetVideoDuration;
+  Function(Duration duration)? onGetVideoPosition;
   @override
   Widget build(BuildContext context) {
     final controller = context.ytController;
-
     return StreamBuilder<YoutubeVideoState>(
       stream: controller.videoStateStream,
       initialData: const YoutubeVideoState(),
       builder: (context, snapshot) {
         final position = snapshot.data?.position.inMilliseconds ?? 0;
         final duration = controller.metadata.duration.inMilliseconds;
-
+        if(onGetVideoDuration!=null)
+          {
+            onGetVideoDuration!(controller.metadata.duration);
+          }
+        if(onGetVideoPosition!=null && snapshot.hasData)
+        {
+          onGetVideoPosition!(snapshot.data!.position);
+        }
         return LinearProgressIndicator(
           value: duration == 0 ? 0 : position / duration,
           minHeight: 1,
@@ -188,7 +142,6 @@ class VideoPositionSeeker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var value = 0.0;
-
     return Row(
       children: [
         const SizedBox(width: 14),

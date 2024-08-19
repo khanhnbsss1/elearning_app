@@ -5949,6 +5949,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Learned`
+  String get learned_str {
+    return Intl.message(
+      'Learned',
+      name: 'learned_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

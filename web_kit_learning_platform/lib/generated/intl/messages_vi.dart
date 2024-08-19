@@ -294,6 +294,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "last_order_at":
             MessageLookupByLibrary.simpleMessage("Đơn hàng cuối cùng lúc"),
         "last_week": MessageLookupByLibrary.simpleMessage("Tuần trước"),
+        "learned_str": MessageLookupByLibrary.simpleMessage("Đã học"),
         "lecture_link_str":
             MessageLookupByLibrary.simpleMessage("Liên kết bài giảng"),
         "lecture_name_str":

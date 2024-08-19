@@ -597,5 +597,6 @@
   "instructor_str":"Instructor",
   "feelings_str":"Feelings",
   "achievements_str":"Achievements",
-  "choosed_str": "Choosed"
+  "choosed_str": "Choosed",
+  "learned_str": "Learned"
 }

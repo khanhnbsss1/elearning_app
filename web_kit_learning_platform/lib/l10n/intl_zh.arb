@@ -592,5 +592,6 @@
   "instructor_str":"讲师",
   "feelings_str":"感受",
   "achievements_str":"成就",
-  "choosed_str": "已选择"
+  "choosed_str": "已选择",
+  "learned_str": "已学习"
 }

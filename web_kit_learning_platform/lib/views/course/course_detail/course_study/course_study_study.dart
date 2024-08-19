@@ -1,19 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/base/widgets/common/alert_dialog/loading.export.dart';
-import 'package:webkit/base/widgets/widgets.export.dart';
-import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/topic/model/topic_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
+import 'package:webkit/views/course/course_detail/course_study/subject_item_widget.dart';
 
 import '../../../../base/widgets/audio/audio_speaker.dart';
 import '../../../../helpers/utils/ui_mixins.dart';
@@ -84,8 +79,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                         minHeight: MediaQuery.of(context).size.height
                       ),
                       child: buildSubjectList()),
-                  body: (_state.blocStatus != AddCourseStatus.onLoadingSelectLesson) ?
-                  Padding(
+                  body: Padding(
                     padding:  EdgeInsets.only(top: myScreenMediaType.isMobile?0:50),
                     child: Stack(
                       children: [
@@ -93,7 +87,9 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
-                                child: Scrollbar(
+                                child: 
+                                (_state.blocStatus != AddCourseStatus.onLoadingSelectLesson) ?
+                                Scrollbar(
                                   controller: studySectionScrollController,
                                   thickness: 10,
                                   trackVisibility: true,
@@ -105,14 +101,14 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                                       padding: const EdgeInsets.only(right: 14.0),
                                       child: Column(
                                         children: [
-                                          (_state.blocStatus != AddCourseStatus.onLoadingSelectLesson) ? 
-                                          buildStudySection() :
-                                          LoadingLogo(loadingType: LoadingType.loadOnPage,),
+                                          buildStudySection()
                                         ],
                                       ),
                                     ),
                                   ),
-                                )),
+                                )
+                                    :Center(child: LoadingLogo(loadingType: LoadingType.loadOnPage,)),
+                            ),
                             Visibility(
                                 visible: boxConstraints.maxWidth > 800,
                                 child: Container(
@@ -158,7 +154,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                         )
                       ],
                     ),
-                  ) : LoadingLogo(loadingType: LoadingType.loadOnPage,),
+                  ) 
                 );
               },
             ):Center(child: NoData());
@@ -236,16 +232,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
       ],
     );
   }
-
-
-
-  double _checkProgression({required int subjectIndex}) {
-    int finished = 0;
-    for (bool check in _state.checkLecture![subjectIndex].toList()) {
-      if (check) finished++;
-    }
-    return finished / ((_state.checkLecture![subjectIndex].isNotEmpty) ? _state.checkLecture![subjectIndex].length : 1);
-  }
+  
 
   Widget buildSubjectList() {
     return Container(
@@ -279,91 +266,17 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                 padding: EdgeInsets.zero,
                 itemCount: (_state.courseInfo?.getListSubjectAndLesson() ?? []).length,
                 itemBuilder: (context, subjectIndex) {
-                  return StatefulBuilder(
-                    builder: (BuildContext context, void Function(void Function()) setState) {
-                      Subjects subject = (_state.courseInfo?.getListSubjectAndLesson() ?? []).elementAt(subjectIndex);
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          InkWell(
-                            child: Container(
-                              padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size16),
-                              decoration: BoxDecoration(
-                                border: Border(bottom: BorderSide(color: ColorConst.blackColor, width: 0.2))
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        '${L10nX.getStr.subject_str} ${subjectIndex+1}: ${subject.subName}',
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Gap(Dimens.size16),
-              
-                                      Icon((!_state.showSubject![subjectIndex])?Icons.arrow_drop_down:Icons.arrow_drop_up, size: 32,),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 8,
-                                  ),
-                                  Row(
-                                    children: [
-                                      (MediaQuery.of(context).size.width > 1050) ? Text('Tiến độ: ') : SizedBox(),
-                                      Expanded(
-                                        child: LayoutBuilder(
-                                          builder: (context, constraints) {
-                                            return Container(
-                                              width: constraints.maxWidth,
-                                              height: 20,
-                                              constraints: BoxConstraints(
-                                                minWidth: 100,
-                                              ),
-                                              margin: EdgeInsets.symmetric(horizontal: Dimens.size16),
-                                              decoration: BoxDecoration(
-                                                color: Color(0xFFcccccc),
-                                                borderRadius: BorderRadius.circular(20),
-                                              ),
-                                              child: Stack(children: [
-                                                Container(
-                                                  width: constraints.maxWidth * _checkProgression(subjectIndex: subjectIndex),
-                                                  height: 20,
-                                                  decoration: BoxDecoration(
-                                                    color: Color(0xFF666666),
-                                                    borderRadius: BorderRadius.circular(20),
-                                                  ),
-                                                ),
-                                                Center(
-                                                    child: Text(
-                                                      '${(_checkProgression(subjectIndex: subjectIndex) * 100).floor()} %',
-                                                      style: TextStyle(color: Colors.white),
-                                                    )),
-                                              ]),
-                                            );
-                                          },
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            onTap: () {
-                              setState(() {
-                                _state.showSubject![subjectIndex] = !_state.showSubject![subjectIndex];
-                              });
-                            },
-                          ),
-                          buildLessonItemList(subjectIndex: subjectIndex, subject: subject,)
-                        ],
-                      );
+                  Subjects subject = (_state.courseInfo?.getListSubjectAndLesson()??[]).elementAt(subjectIndex);
+                  return SubjectItemWidget(
+                    onFinishLecture: (p0) {
+                      
                     },
+                    onSelectLesson: (p0) {
+                      BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailSelectLessonEvent(selectLessonInfo: p0));
+                    },
+                    selectLessonInfo: _state.selectLessonInfo,
+                    subject: subject,
+                    subjectIndex: subjectIndex,
                   );
                 },
               ),
@@ -476,7 +389,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
             height: 16,
           ),
           Text(
-            'Tài liệu: ',
+            "${L10nX.getStr.document_str}: ",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.red,
