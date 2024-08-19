@@ -106,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_password_text": MessageLookupByLibrary.simpleMessage("更改密码"),
         "charts": MessageLookupByLibrary.simpleMessage("图表"),
         "choose_quest": MessageLookupByLibrary.simpleMessage("搜索问题"),
+        "choosed_str": MessageLookupByLibrary.simpleMessage("已选择"),
         "clear": MessageLookupByLibrary.simpleMessage("清除"),
         "click_me": MessageLookupByLibrary.simpleMessage("点击我"),
         "close": MessageLookupByLibrary.simpleMessage("关闭"),

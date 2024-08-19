@@ -120,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "charts": MessageLookupByLibrary.simpleMessage("Charts"),
         "choose_quest":
             MessageLookupByLibrary.simpleMessage("Search for questions"),
+        "choosed_str": MessageLookupByLibrary.simpleMessage("Choosed"),
         "clear": MessageLookupByLibrary.simpleMessage("Clear"),
         "click_me": MessageLookupByLibrary.simpleMessage("Click me"),
         "close": MessageLookupByLibrary.simpleMessage("Close"),

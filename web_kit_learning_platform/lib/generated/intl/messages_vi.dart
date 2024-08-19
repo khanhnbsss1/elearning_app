@@ -113,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
         "choose_quest":
             MessageLookupByLibrary.simpleMessage("Tìm kiếm câu hỏi"),
+        "choosed_str": MessageLookupByLibrary.simpleMessage("Đã chọn"),
         "clear": MessageLookupByLibrary.simpleMessage("Clear"),
         "click_me": MessageLookupByLibrary.simpleMessage("Nhấp vào tôi"),
         "close": MessageLookupByLibrary.simpleMessage("Đóng"),

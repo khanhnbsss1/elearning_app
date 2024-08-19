@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
@@ -102,64 +103,105 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
             )
           ],
         ),
-        body: Container(
-            decoration: BoxDecoration(
-                border: Border(top: BorderSide(color: ColorConst.dividerColor, width: 1)),
-                color: ColorConst.gray01ColorOnBackgroundColor
-            ),
-            padding: EdgeInsets.symmetric(vertical: Dimens.size16),
-            child: buildQuestionList()),
+        body: BlocProvider(
+          create: (context) {
+            return TestWorkBloc(TestWorkState(testInfo: widget.testInfo))..add(TestWorkInitEvent());
+            },
+          child: Container(
+              decoration: BoxDecoration(
+                  border: Border(top: BorderSide(color: ColorConst.dividerColor, width: 1)),
+                  color: ColorConst.gray01ColorOnBackgroundColor
+              ),
+              padding: EdgeInsets.symmetric(vertical: Dimens.size16),
+              child: Column(
+                children: [
+                  buildTestProccess(),
+                  Expanded(child: buildQuestionList()),
+                ],
+              )),
+        )
+        
+
       ),
     );
 
   }
   Widget buildQuestionList(){
-    return BlocProvider(
-        create: (context) {
-          return TestWorkBloc(TestWorkState(testInfo: widget.testInfo))
-            ..add(TestWorkInitEvent());
+    return BlocConsumer<TestWorkBloc, TestWorkState>(
+        listener: (context, state) {
+          switch (state.blocStatus) {
+            case TestWorkStatus.initial:
+              break;
+            default:
+              break;
+          }
         },
-        child: BlocConsumer<TestWorkBloc, TestWorkState>(
-            listener: (context, state) {
-              switch (state.blocStatus) {
-                case TestWorkStatus.initial:
-                  break;
-                default:
-                  break;
-              }
-            },
-            builder: (BuildContext context, state) {
-              return RawScrollbar(
-                controller: controller,
-                thickness: Dimens.size15,
-                trackVisibility: true,
-                thumbVisibility: true,
-                thumbColor: ColorConst.colorIconGrays.withOpacity(0.2),
-                trackColor: ColorConst.whiteColor,
-                radius: Radius.circular(Dimens.size8),
-                child: ListView.builder(
-                  controller: controller,
-                  shrinkWrap: true,
-                  itemCount: (state.testInfo?.quizDTOs??[]).length,
-                  itemBuilder: (context, index) {
-                    QuestionInfo questionInfo = (state.testInfo?.quizDTOs??[]).elementAt(index);
-                    return Padding(
-                      padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: Dimens.size40),
-                      child: SizedBox(
-                        width: Dimens.size800,
-                        child: QuestionWorkItem(
-                          questionInfo: questionInfo,
-                          enableShowResultAnswer: widget.enableShowResult,
-                          questionIndex: index+1,
-                          onChangeAnswer: (p0) {
-                                        
-                          },
-                        ),
-                      ),
-                    );
-                  },),
-              );
-            }));
+        builder: (BuildContext context, state) {
+          return RawScrollbar(
+            controller: controller,
+            thickness: Dimens.size15,
+            trackVisibility: true,
+            thumbVisibility: true,
+            thumbColor: ColorConst.colorIconGrays.withOpacity(0.2),
+            trackColor: ColorConst.whiteColor,
+            radius: Radius.circular(Dimens.size8),
+            child: ListView.builder(
+              controller: controller,
+              shrinkWrap: true,
+              itemCount: (state.testInfo?.quizDTOs??[]).length,
+              itemBuilder: (context, index) {
+                QuestionInfo questionInfo = (state.testInfo?.quizDTOs??[]).elementAt(index);
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: Dimens.size40),
+                  child: SizedBox(
+                    width: Dimens.size800,
+                    child: QuestionWorkItem(
+                      questionInfo: questionInfo,
+                      enableShowResultAnswer: widget.enableShowResult,
+                      questionIndex: index+1,
+                      onChangeAnswer: (p0) {
+                                    
+                      },
+                    ),
+                  ),
+                );
+              },),
+          );
+        });
    
+  }
+  Widget buildTestProccess(){
+    return BlocConsumer<TestWorkBloc, TestWorkState>(
+        buildWhen: (previous, current) {
+          return true;
+        },
+        listener: (context, state) {
+          switch (state.blocStatus) {
+            case TestWorkStatus.initial:
+              break;
+            default:
+              break;
+          }
+        },
+        builder: (BuildContext context, state) {
+          List<QuestionInfo> listQuestionChooesed = [...(state.testInfo?.quizDTOs??[]).where((element) => element.answerIdChoose!=null,)];
+          double percent = listQuestionChooesed.length /  (state.testInfo?.quizDTOs??[]).length;
+          return Center(
+            child:  Padding(
+              padding: EdgeInsets.all(15.0),
+              child: new LinearPercentIndicator(
+                width: Dimens.size350,
+                animation: true,
+                lineHeight: Dimens.size20,
+                animationDuration: 1000,
+                percent: percent,
+                center: Text("${L10nX.getStr.choosed_str} ${listQuestionChooesed.length} / ${(state.testInfo?.quizDTOs??[]).length} ${L10nX.getStr.question_str}"),
+                barRadius: Radius.circular(Dimens.size8),
+                progressColor: Colors.green,
+              ),
+            ),
+          );
+        });
+
   }
 }

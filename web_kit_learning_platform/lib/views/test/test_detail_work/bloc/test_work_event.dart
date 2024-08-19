@@ -7,8 +7,19 @@ abstract class TestWorkEvent extends Equatable {
 }
 
 class TestWorkInitEvent extends TestWorkEvent {
-  TestWorkInitEvent()
-  {
-  }
+  TestWorkInitEvent();
+  @override
+  List<Object?> get props => [];
+}
+class TestWorkOnUpdateChooseQuestionEvent extends TestWorkEvent {
+  QuestionInfo questionInfo;
+  TestWorkOnUpdateChooseQuestionEvent({required this.questionInfo});
+  @override
+  List<Object?> get props => [questionInfo];
+}
+
+class TestWorkOnSubmitResultTestEvent extends TestWorkEvent {
+  TestWorkOnSubmitResultTestEvent();
+  @override
   List<Object?> get props => [];
 }

@@ -1087,9 +1087,11 @@ class _MenuItemState extends State<MenuItem> with UIMixin {
             maxLines: 1,
             textAlign: TextAlign.left,
             style: TextStyleConstant.textStyleBlack12w400.copyWith(
-              color: isActive || isHover
-                  ? ColorConst.blackColor
-                  : ColorConst.blackColor,
+              color: (!ThemeCustomizer().leftBarCondensed ?
+              (isActive || isHover
+                  ? leftBarTheme.activeItemColor
+                  : leftBarTheme.onBackground):
+                  ColorConst.blackColor),
               fontWeight: (isActive || isHover) ? FontWeight.w500: FontWeight.w400,
             ),
           ),

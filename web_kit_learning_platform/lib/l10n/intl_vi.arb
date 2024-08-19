@@ -596,5 +596,6 @@
   "method_str":"Phương pháp",
   "instructor_str":"Giáo viên",
   "feelings_str":"Cảm nhận",
-  "achievements_str":"Thành tích"
+  "achievements_str":"Thành tích",
+  "choosed_str": "Đã chọn"
 }

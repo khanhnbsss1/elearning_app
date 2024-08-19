@@ -16,7 +16,11 @@ class TestWorkState extends Equatable {
   int? page;
   int pageSize;
   TestWorkState({
-      this.blocStatus,this.testInfo, this.enableShowResult, this.pageSize =6, this.page}){
+      this.blocStatus,
+    this.testInfo, 
+    this.enableShowResult,
+    this.pageSize =6, 
+    this.page}){
     page??=0;
   }
 
@@ -26,7 +30,7 @@ class TestWorkState extends Equatable {
     TestInfo? testInfo,
     bool? enableShowResult,
     int? page,
-    int? pageSize
+    int? pageSize,
   })
   {
     return TestWorkState(
@@ -35,7 +39,6 @@ class TestWorkState extends Equatable {
       enableShowResult: enableShowResult??this.enableShowResult,
       page: page??this.page,
       pageSize: pageSize??this.pageSize,
-
     );
   }
   @override
@@ -44,7 +47,7 @@ class TestWorkState extends Equatable {
     testInfo, 
     enableShowResult,
     page, 
-    pageSize
+    pageSize,
   ];
 
 }
