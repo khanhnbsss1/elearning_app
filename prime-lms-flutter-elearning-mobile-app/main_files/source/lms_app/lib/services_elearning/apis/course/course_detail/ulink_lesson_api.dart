@@ -23,7 +23,7 @@ class UnLinkLessonApi extends BaseApiRequest {
     }
     else
     {     
-      ToastUtils.showToastSuccess(L10nX.getStr.sucessfully_str);
+      ToastUtils.showToastSuccess(L10nX.getStr.success);
       return result;
     }
   }

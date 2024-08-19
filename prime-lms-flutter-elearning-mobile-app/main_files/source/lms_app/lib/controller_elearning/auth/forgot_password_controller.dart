@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/controller/my_controller.dart';
+import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/controller_elearning/my_controller.dart';
+import 'package:lms_app/helper_elearning/my_form_validator.dart';
+import 'package:lms_app/helper_elearning/widget/my_validators.dart';
 
-import 'package:webkit/helpers/widgets/my_form_validator.dart';
-import 'package:webkit/helpers/widgets/my_validators.dart';
 
 class ForgotPasswordController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
@@ -26,13 +26,13 @@ class ForgotPasswordController extends MyController {
       loading = true;
       update();
       var errors;
-      AppPages.routeName('/auth/reset_password');
+      AppPages.route('/auth/reset_password');
       loading = false;
       update();
     }
   }
 
   void gotoLogIn() {
-    AppPages.routeName(Routes.loginRoute);
+    AppPages.route(Routes.loginRoute);
   }
 }

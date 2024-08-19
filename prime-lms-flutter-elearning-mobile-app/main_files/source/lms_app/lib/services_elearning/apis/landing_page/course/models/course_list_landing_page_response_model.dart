@@ -1,5 +1,5 @@
 
-import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 
 class CourseListResponseModel {
   List<CourseLandingPageInfo>? data;

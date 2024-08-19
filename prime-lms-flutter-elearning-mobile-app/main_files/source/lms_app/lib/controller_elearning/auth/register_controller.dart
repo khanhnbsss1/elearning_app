@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/controller/my_controller.dart';
+import 'package:lms_app/controller_elearning/my_controller.dart';
+import 'package:lms_app/helper_elearning/my_form_validator.dart';
+import 'package:lms_app/helper_elearning/widget/my_validators.dart';
+import 'package:lms_app/models/user/UserProfile.dart';
+import 'package:lms_app/services_elearning/apis/auth/register/models/register_request.dart';
+import 'package:lms_app/services_elearning/apis/auth/register/register_with_phone_api.dart';
 
-import 'package:webkit/helpers/widgets/my_form_validator.dart';
-import 'package:webkit/helpers/widgets/my_validators.dart';
-import 'package:webkit/services/apis/auth/register/models/register_request.dart';
-import 'package:webkit/services/apis/auth/register/register_with_phone_api.dart';
+import '../../base/base.export.dart';
 
 class RegisterController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
@@ -69,7 +70,7 @@ class RegisterController extends MyController {
       }
       else
         {
-          AppPages.routeName(Routes.landingPageRoute);
+          AppPages.route(Routes.landingPageRoute);
         }
       loading = false;
       update();
@@ -81,6 +82,6 @@ class RegisterController extends MyController {
   }
 
   void gotoLogin() {
-    AppPages.routeName(Routes.landingPageRoute);
+    AppPages.route(Routes.landingPageRoute);
   }
 }

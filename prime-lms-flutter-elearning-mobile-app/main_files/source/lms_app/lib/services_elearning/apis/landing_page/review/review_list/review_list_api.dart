@@ -1,5 +1,6 @@
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/landing_page/review/models/landing_page_review_list_response_model.dart';
+import 'package:lms_app/services/base_request/BaseApiRequest.dart';
+
+import 'package:lms_app/services_elearning/apis/landing_page/review/models/landing_page_review_list_response_model.dart';
 
 class LandingPageReviewListApi extends BaseApiRequest {
   UserTypeName? typeName;

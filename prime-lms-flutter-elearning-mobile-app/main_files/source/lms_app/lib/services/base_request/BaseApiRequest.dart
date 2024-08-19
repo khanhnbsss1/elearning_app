@@ -1,20 +1,35 @@
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
-import 'package:lms_app/base/helper/user_helper.dart';
-import 'package:lms_app/base/sqliteManager/sqliteManager.dart';
+import 'package:lms_app/base/author/author_manager.dart';
+import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/device_elearning/device_manager.dart';
+import 'package:lms_app/base/instance_mananger_elearning/instance_mananger.dart';
 import 'package:lms_app/base/widgets/common/alert_dialog/NotifyDialog.dart';
-import '../../base/base.export.dart';
-import '../../base/widgets/widgets.export.dart';
+import 'package:lms_app/base/widgets/common/alert_dialog/loading.export.dart';
+import 'package:lms_app/base/widgets/toast_common/toast_utils.exports.dart';
+import 'package:lms_app/services_elearning/apis/auth/login/models/login_response.dart';
+
 import 'BaseResponseAPI.dart';
+import 'EnumCommon.dart';
 import 'dio_client.dart';
 import 'internet_checker_handler.dart';
 import 'models/response_error_objects.dart';
 
+export  'package:lms_app/services/base_request/EnumCommon.dart';
+export 'package:lms_app/services/base_request/apiName.dart';
+export 'package:lms_app/services/base_request/models/response_error_objects.dart';
+enum BodyMethod{
+  none,
+  formData,
+  xWwwFromUrlEncode,
+  raw,
+  binary,
+  graphQL
+}
 class BaseApiRequest {
   Map<String, dynamic>? paramsAdd = HashMap(); // Is a HashMap
   Map<String, dynamic>? requestHeader = HashMap(); // Is a HashMap
@@ -27,7 +42,10 @@ class BaseApiRequest {
   DOMAIN_TYPE? domainType = DOMAIN_TYPE.MAIN;
   SERVICE_TYPE serviceType = SERVICE_TYPE.AUTHEN;
   bool? isShowErrorPopup;
+  bool?isShowToastError;
   bool? isCheckToken;
+  BodyMethod? bodyMethod;
+  
   static const int timeout = 60;
   BaseApiRequest({
     this.enviromentDomain,
@@ -37,8 +55,10 @@ class BaseApiRequest {
     this.paramsAdd,
     this.requestHeader,
     this.requestBody,
+    this.bodyMethod,
     this.isShowErrorPopup,
-    this.isCheckToken
+    this.isCheckToken,
+    this.isShowToastError
   }
       ) {
     enviromentDomain??= EVIROMENT_DOMAIN.LIVE_DOMAIN;
@@ -47,7 +67,10 @@ class BaseApiRequest {
     requestBody ??=HashMap();
     requestHeader ??=HashMap();
     requestHeader!["Content-Type"] = "application/json";
-    isShowErrorPopup??=true;
+    isShowErrorPopup=false;
+    isShowToastError??=true;
+    bodyMethod??=BodyMethod.raw;
+
   }
 
   void setDomainType(DOMAIN_TYPE inputDomainType) {
@@ -114,16 +137,28 @@ class BaseApiRequest {
   }
 
   Future<Map<String, dynamic>> getHeaderAdd() async {
-    UserInfo? userInfo = await SqliteManager.getInstance.getCurrentSelectUserInfo();
+    AuthInfo? authInfo = AuthorManager().getAuthInfo();
     bool containAuthenParams = requestHeader!.keys.contains("Authorization");
-    if(!containAuthenParams)
+    requestHeader?.addAll({
+      "ngrok-skip-browser-warning": true
+    });
+    if(!containAuthenParams && authInfo!=null)
     {
-      requestHeader!.addAll({"Authorization":userInfo?.token});
+      requestHeader?.addAll({
+      "ngrok-skip-browser-warning": true,
+        "Authorization": "Bearer ${authInfo.accessToken}",
+        
+      });
     }
+    DeviceInfoModel? deviceInfoModel = await DeviceManager().getDeviceInfo();
+    requestHeader?.addAll({
+      "Device-Type":deviceInfoModel?.type
+    });
     if(!(isCheckToken??true))
     {
-      requestHeader!.remove("Authorization");
+      requestHeader?.remove("Authorization");
     }
+    //requestHeader?.addAll({'content-type': 'application/json', 'Access-Control-Allow-Origin': "*", "Accept": "*/*"});
     return requestHeader!;
   }
 
@@ -131,8 +166,35 @@ class BaseApiRequest {
     return paramsAdd!;
   }
 
-  Future<Map<String, dynamic>> getBodyAdd() async {
-    return requestBody!;
+  Future< dynamic> getBodyAdd() async {
+    dynamic bodyFinal;
+    switch(bodyMethod){
+      case BodyMethod.formData:
+      // TODO: Handle this case.
+        {
+          bodyFinal = FormData.fromMap(requestBody??{},ListFormat.multi,false);
+          break;
+        }
+      case BodyMethod.xWwwFromUrlEncode:
+      // TODO: Handle this case.
+        bodyFinal = requestBody;
+        break;
+      case BodyMethod.raw:
+      // TODO: Handle this case.
+        bodyFinal = requestBody;
+        break;
+      case BodyMethod.binary:
+      // TODO: Handle this case.
+        bodyFinal = requestBody;
+        break;
+      case BodyMethod.graphQL:
+      // TODO: Handle this case.
+        bodyFinal = requestBody;
+        break;
+      default:
+        break;
+    }
+    return bodyFinal;
   }
 
   Future<void> setParamsBase() async {}
@@ -183,7 +245,7 @@ class BaseApiRequest {
     return url;
   }
 
-  Future<void> setApiBody(Map<String, dynamic> bodyAdd) async {
+  Future<void> setApiBody(dynamic bodyAdd) async {
     requestBody!.addAll(bodyAdd);
   }
   Future<dynamic> postRequestAPI() async {
@@ -278,9 +340,10 @@ class BaseApiRequest {
   }
 
   Future<dynamic> requestPostWithDio() async {
+    var option = Options(headers: await getHeaderAdd());
     String url = await getFullUrl();
     Map<String, dynamic> params = await getParamsFinal();
-    Map<String, dynamic> body = await getBodyAdd();
+    dynamic body = await getBodyAdd();
     try{
       var option = Options(
         headers: await getHeaderAdd(),
@@ -311,7 +374,6 @@ class BaseApiRequest {
         sendTimeout: const Duration(seconds: timeout), // 30 seconds
         receiveTimeout: const Duration(seconds: timeout), // 3);
       );
-
       Response response = await DioClient().getDioClient().get(url, queryParameters: params, options: option);
       return await handleResponse(response: response, url: url, params: params);
     }
@@ -350,7 +412,7 @@ class BaseApiRequest {
   Future<dynamic> requestPutWithDio() async {
     String url = await getFullUrl();
     Map<String, dynamic> params =  await getParamsFinal();
-    Map<String, dynamic> body = await getBodyAdd();
+    dynamic body = await getBodyAdd();
     DioClient().getDioClient().options = DioClient().getDioClient().options.copyWith(headers: await getHeaderAdd(), validateStatus: (_) => true,);
     try{
       var option = Options(
@@ -361,7 +423,7 @@ class BaseApiRequest {
         receiveTimeout: const Duration(seconds: timeout), // 3);
       );
       Response response =  await DioClient().getDioClient().put(url, queryParameters: params, data: body,options: option);
-      return await handleResponse(response: response, url: url, params: params);
+      return await handleResponse(response: response, url: url, params: params, body: body);
     }
     catch(e){
       handleResponse(response: e, url: url,params: params, body: body);
@@ -376,7 +438,7 @@ class BaseApiRequest {
         required String url,
         Options? option,
         Map<String, dynamic> params =const {},
-        Map<String, dynamic> body=const{}
+        dynamic body=const{}
       }) async {
     if(response.runtimeType == DioException)
     {
@@ -426,9 +488,7 @@ class BaseApiRequest {
       }
       else if (response.statusCode == 401 || response.statusCode == 403)// qua han token
           {
-        MonitorLoading().dismiss();
-        SqliteManager.getInstance.deleteCurrentLoginUserInfo();
-        AppPages.route(Routes.loginRoute, isReplace: true);
+        await AuthorManager().refreshToken();
         return ResponseCommon(
             errorCode: response.statusCode,
             message: response.statusMessage,
@@ -446,12 +506,12 @@ class BaseApiRequest {
                 '\n params:$params,'
                 '\n requestBody:$body,'
                 ' \n ressponse: $response \n\n');
-        if(response.data!=null && response.data["message"]!=null) {
+        if(response.data!=null && response.data!='' && response.data["message"]!=null) {
           response.statusMessage= response.data["message"];
         }
         await onRequestError(response.statusCode, response.statusMessage);
         return ResponseCommon(
-            errorCode: response.statusCode,
+            errorCode: response.statusCode.toString(),
             message: response.statusMessage,
             success: false,
             data:  null
@@ -486,7 +546,10 @@ class BaseApiRequest {
     if(statusMessage==null) {
       return;
     }
-    ToastUtils.showToastError(statusMessage, position: ToastGravity.BOTTOM );
+    
+    if(isShowToastError??true) {
+      ToastUtils.showToastError(statusMessage, position: ToastGravity.TOP );
+    }
   }
 
   Future<void> handleDioExceptionError({Response? response,DioException? error}) async {
@@ -498,14 +561,7 @@ class BaseApiRequest {
         responseErrorCommon = ResponseCommon.fromJson(error.response!.data!);
         if(error.response!.statusCode !=null && (error.response!.statusCode ==401 ||error.response!.statusCode ==403 )  )
         {
-          UserInfo? currentUserInfo = await SqliteManager.getInstance.getCurrentSelectUserInfo();
-          if(currentUserInfo!=null)
-          {
-            currentUserInfo.token = "";
-            currentUserInfo.expiredAt = "";
-            await UserHelper.getInstance.saveCurrentUserInfo(currentUserInfo);
-          }
-          AppPages.route(Routes.loginRoute, isReplace: true);
+          await AuthorManager().refreshToken();
         }
       }
       else
@@ -529,6 +585,11 @@ class BaseApiRequest {
       if(isShowErrorPopup!){
         NotifyDialog.showDialogOneButton(description: responseErrorCommon.message);
       }
+      else
+        {
+          ToastUtils.showToastError(responseErrorCommon.message??'');
+
+        }
       await onRequestError(int.tryParse(responseErrorCommon.errorCode??"",), responseErrorCommon.message??"");
     }
   }
@@ -565,7 +626,13 @@ class BaseApiRequest {
         }
         break;
     }
-    NotifyDialog.showDialogOneButton(description: message);
+    if(isShowErrorPopup!) {
+      NotifyDialog.showDialogOneButton(description: message);
+    }
+    else
+      {
+        ToastUtils.showToastError(message);
+      }
 
   }
   Future<void> handleDataError(dynamic data) async {
@@ -573,6 +640,10 @@ class BaseApiRequest {
     if(isShowErrorPopup!){
       NotifyDialog.showDialogOneButton(description: requesstResponseErrorModel.message);
     }
+    else
+      {
+        ToastUtils.showToastError(requesstResponseErrorModel.message??'');
+      }
 
     await onRequestError(int.tryParse(requesstResponseErrorModel.errorCode!,), requesstResponseErrorModel.message);
   }

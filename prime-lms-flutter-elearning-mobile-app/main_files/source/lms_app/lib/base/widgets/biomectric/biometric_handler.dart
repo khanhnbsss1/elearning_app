@@ -160,7 +160,7 @@ class BiometricHandler{
                       Expanded(
                         flex:1,
                         child: RoundedButton(
-                          text:  S.of(context).setting_text,
+                          text:  "Setting",//S.of(context).setting_text,
                           bgColor: ColorConst.mainColor,
                           fontSize: Dimens.size14,
                           height: Dimens.size45,
@@ -204,7 +204,7 @@ class BiometricHandler{
     } else if (IdentifierConst.biometricType == BiometricTypeDevice.face){
       return S.of(context).notify_setup_faceid;
     }
-    return S.of(context).notify_setup_biometric;
+    return "";//S.of(context).notify_setup_biometric;
   }
   Future<bool> checkHasSettingBiometric() async {
     //SecureStorage.saveValue(IdentifierConst.username, IdentifierConst.password);

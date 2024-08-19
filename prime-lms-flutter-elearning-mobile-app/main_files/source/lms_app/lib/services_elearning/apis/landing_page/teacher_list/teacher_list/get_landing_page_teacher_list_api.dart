@@ -1,6 +1,7 @@
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
-import 'package:webkit/services/apis/landing_page/teacher_list/models/landing_page_teacher_list_model.dart';
+
+import 'package:lms_app/services/base_request/BaseApiRequest.dart';
+import 'package:lms_app/services_elearning/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
+import 'package:lms_app/services_elearning/apis/landing_page/teacher_list/models/landing_page_teacher_list_model.dart';
 
 class LandingPageTeacherListApi extends BaseApiRequest {
   LandingPageTeacherListApi():super(

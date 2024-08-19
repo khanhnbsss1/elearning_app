@@ -195,7 +195,7 @@ class DateTimeSettingState extends State<DateTimeSetting> {
               children: [
                 buildTimeItem(
                   context,
-                  title: S.of(context).from_time,
+                  //title: L10nX.getStr.from_time,
                   timeText: DateTimeHelper.dateFormat(date: widget.startTime, dateType: DateTimeHelper.ddMMyy),
                   onTapCenter: () {
                     DateTimePicker.ShowDialogDatePicker(
@@ -235,7 +235,7 @@ class DateTimeSettingState extends State<DateTimeSetting> {
                 ),
                 buildTimeItem(
                   context,
-                  title: S.of(context).to_time,
+                  //title: S.of(context).to_time,
                   timeText: DateTimeHelper.dateFormat(date: widget.endTime, dateType: DateTimeHelper.ddMMyy),
                   onTapCenter: () {
                     DateTimePicker.ShowDialogDatePicker(

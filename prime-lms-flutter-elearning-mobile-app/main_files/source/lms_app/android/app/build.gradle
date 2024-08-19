@@ -149,7 +149,7 @@ android {
 
         ElearningLms {
             dimension "app"
-            applicationId "com.FFTCompany.elearninglms"
+            applicationId "com.FFTCompany.YAXChinese"
             resValue "string", "app_name", ElearningLmsAppName
             signingConfig flavorElearningLmsSigningVariable
         }
