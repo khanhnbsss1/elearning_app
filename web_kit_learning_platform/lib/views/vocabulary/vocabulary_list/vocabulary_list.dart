@@ -363,7 +363,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
           Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?1/8:1/5),
+              height: MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?1/8:1/6),
               decoration: BoxDecoration(
                 color: ColorConst.mainColor
               ),
@@ -393,10 +393,13 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                               Gap(Dimens.size4),
                               Visibility(
                                 //visible: (state.selectVocabularyInfo?.audio??"").isNotEmpty,
-                                  child: StatefulBuilder(
-                                    builder: (BuildContext context, void Function(void Function()) setState) { 
-                                      return AudioSpeaker(url: state.selectVocabularyInfo?.audio??"",);
-                                    },
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                    child: StatefulBuilder(
+                                      builder: (BuildContext context, void Function(void Function()) setState) { 
+                                        return AudioSpeaker(url: state.selectVocabularyInfo?.audio??"",);
+                                      },
+                                    ),
                                   )
                               )
                             ],
@@ -407,7 +410,10 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                       WidgetWithColumnTitleCommon(
                         title: "${L10nX.getStr.category_word}: ",
                         titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                        child: Text((state.selectVocabularyInfo?.categoryWord??"").isNotEmpty?state.selectVocabularyInfo?.categoryWord??"":L10nX.getStr.unknown_str),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text((state.selectVocabularyInfo?.categoryWord??"").isNotEmpty?state.selectVocabularyInfo?.categoryWord??"":L10nX.getStr.unknown_str),
+                        ),
                       ),
                       Gap(Dimens.size10),
                       Visibility(
@@ -415,17 +421,22 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                         child: WidgetWithColumnTitleCommon(
                           title: "${L10nX.getStr.viet_nam_text}: ",
                           titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                          child: Text(state.selectVocabularyInfo?.translationVn??""),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(state.selectVocabularyInfo?.translationVn??""),
+                          ),
                         ),
                       ),
-                      Gap(Dimens.size10),
                       Gap(Dimens.size10),
                       Visibility(
                         visible: (state.selectVocabularyInfo?.traditional??"").isNotEmpty,
                         child: WidgetWithColumnTitleCommon(
                           title: "${L10nX.getStr.traditional_str}: ",
                           titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                          child: Text(state.selectVocabularyInfo?.traditional??""),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(state.selectVocabularyInfo?.traditional??""),
+                          ),
                         ),
                       ),
                       buildExamplesListForView( state: state),
