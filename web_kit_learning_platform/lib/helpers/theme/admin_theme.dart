@@ -46,7 +46,7 @@ class LeftBarTheme {
    Color?onBackground;
    Color ?labelColor;
    Color ?activeItemColor;
-   Color?activeItemBackground;
+   Color? activeItemBackground;
 
   LeftBarTheme({
     this.background,
@@ -62,7 +62,7 @@ class LeftBarTheme {
     onBackground =ColorConst.whiteColor;
     labelColor = const Color(0xff6c757d);
     activeItemColor = ColorConst.textColorOnMainColor;
-    activeItemBackground = const Color(0x153874ff);
+    activeItemBackground = const Color(0xffffffff).withOpacity(0.1);
 
     // this.activeItemBackground = const Color(0x14006784),
   }

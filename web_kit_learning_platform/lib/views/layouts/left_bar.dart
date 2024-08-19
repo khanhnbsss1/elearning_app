@@ -952,6 +952,9 @@ class _MenuWidgetState extends State<MenuWidget>
         child: MyContainer.transparent(
           margin: MySpacing.fromLTRB(24, 0, 16, 0),
           paddingAll: 0,
+          color:  isHover && !isActive
+              ? leftBarTheme.activeItemBackground
+              : Colors.transparent,
           child: ListTileTheme(
             contentPadding: const EdgeInsets.all(0),
             dense: true,
