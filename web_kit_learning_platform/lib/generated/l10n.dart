@@ -5969,6 +5969,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Start test`
+  String get begin_start_test {
+    return Intl.message(
+      'Start test',
+      name: 'begin_start_test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Finished`
+  String get finished_str {
+    return Intl.message(
+      'Finished',
+      name: 'finished_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View`
+  String get view_str {
+    return Intl.message(
+      'View',
+      name: 'view_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do the test`
+  String get start_test {
+    return Intl.message(
+      'Do the test',
+      name: 'start_test',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

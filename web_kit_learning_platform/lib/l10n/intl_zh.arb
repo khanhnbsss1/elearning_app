@@ -594,5 +594,9 @@
   "feelings_str":"感受",
   "achievements_str":"成就",
   "choosed_str": "已选择",
-  "learned_str": "已学习"
+  "learned_str": "已学习",
+  "begin_start_test": "开始测试",
+  "finished_str": "完成",
+  "view_str": "查看",
+  "start_test": "测试"
 }

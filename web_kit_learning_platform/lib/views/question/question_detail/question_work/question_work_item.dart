@@ -67,7 +67,7 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
         decoration: BoxDecoration(
             color: ColorConst.whiteColor,
             borderRadius: BorderRadius.circular(Dimens.size16),
-          border: Border.all(color: ColorConst.greyColor, width: 0.1)
+          border: Border.all(color: ColorConst.greyColor, width: 0.5)
         ),
         padding: EdgeInsets.all(Dimens.size16),
         constraints: BoxConstraints(

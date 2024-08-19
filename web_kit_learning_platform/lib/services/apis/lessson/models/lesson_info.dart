@@ -95,7 +95,7 @@ class LessonInfo {
     updatedBy = json['updated_by'];
     note = json['note'];
     docLink = json['doc_link'];
-    isFinnish = json['learning_status'];
+    isFinnish = json['learning_status']== 'Completed'?true:false;
     testId = json['test_id'];
     testName = json['test_name'];
     if (json['vocabularies'] != null) {

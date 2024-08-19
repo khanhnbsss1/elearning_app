@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
@@ -49,79 +50,86 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(Dimens.size20))
-      ),
-      width: MediaQuery.of(context).size.width * (ResponsiveInfo.isTablet() ? 0.8 : 1),
-      height: MediaQuery.of(context).size.height * (ResponsiveInfo.isTablet() ? 1 : 1),
-      constraints: BoxConstraints(
-        maxWidth: Dimens.size1200
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: ColorConst.mainColor,
-          iconTheme: IconThemeData(
-            color: ColorConst.whiteColor, //change your color here
-          ),
-          title: Text(widget.testInfo.name??"", style: TextStyleConstant.textStyleBlack20w700.copyWith(color: ColorConst.whiteColor),),
-          centerTitle: true,
-          actions: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ActionButton1(
-                  text: L10nX.getStr.prev,
-                  height: Dimens.size40,
-                  enableBgColor: ColorConst.whiteColor,
-                  textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.mainColor),
-                ),
-                Gap(Dimens.size20),
-                Stack(
-                  children: [
-                    ActionButton1(
-                      text: L10nX.getStr.next,
-                      height: Dimens.size40,
-                      enableBgColor: ColorConst.whiteColor,
-                      textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.mainColor),
-                    ),
-                    Visibility(
-                      visible: false,
-                      child: ActionButton1(
-                        text: L10nX.getStr.submit,
+    return PointerInterceptor(
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(Dimens.size20))
+        ),
+        width: MediaQuery.of(context).size.width * (ResponsiveInfo.isTablet() ? 0.8 : 1),
+        height: MediaQuery.of(context).size.height * (ResponsiveInfo.isTablet() ? 1 : 1),
+        constraints: BoxConstraints(
+          maxWidth: Dimens.size1200
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: ColorConst.mainColor,
+            iconTheme: IconThemeData(
+              color: ColorConst.whiteColor, //change your color here
+            ),
+            title: Text(widget.testInfo.name??"", style: TextStyleConstant.textStyleBlack20w700.copyWith(color: ColorConst.whiteColor),),
+            centerTitle: true,
+            actions: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ActionButton1(
+                    text: L10nX.getStr.prev,
+                    height: Dimens.size40,
+                    enableBgColor: ColorConst.whiteColor,
+                    textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.mainColor),
+                  ),
+                  Gap(Dimens.size20),
+                  Stack(
+                    children: [
+                      ActionButton1(
+                        text: L10nX.getStr.next,
                         height: Dimens.size40,
                         enableBgColor: ColorConst.whiteColor,
                         textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.mainColor),
                       ),
-                    )
-                  ],
-                ),
-                Gap(Dimens.size20),
-              ],
-            )
-          ],
-        ),
-        body: BlocProvider(
-          create: (context) {
-            return TestWorkBloc(TestWorkState(testInfo: widget.testInfo))..add(TestWorkInitEvent());
-            },
-          child: Container(
-              decoration: BoxDecoration(
-                  border: Border(top: BorderSide(color: ColorConst.dividerColor, width: 1)),
-                  color: ColorConst.gray01ColorOnBackgroundColor
-              ),
-              padding: EdgeInsets.symmetric(vertical: Dimens.size16),
-              child: Column(
-                children: [
-                  buildTestProccess(),
-                  Expanded(child: buildQuestionList()),
+                      Visibility(
+                        visible: false,
+                        child: ActionButton1(
+                          text: L10nX.getStr.submit,
+                          height: Dimens.size40,
+                          enableBgColor: ColorConst.whiteColor,
+                          textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.mainColor),
+                        ),
+                      )
+                    ],
+                  ),
+                  Gap(Dimens.size20),
                 ],
-              )),
-        )
-        
-
+              )
+            ],
+          ),
+          body: BlocProvider(
+            create: (context) {
+              return TestWorkBloc(TestWorkState(testInfo: widget.testInfo))..add(TestWorkInitEvent());
+              },
+            child: Container(
+                decoration: BoxDecoration(
+                    border: Border(top: BorderSide(color: ColorConst.dividerColor, width: 1)),
+                    color: ColorConst.gray01ColorOnBackgroundColor
+                ),
+                padding: EdgeInsets.symmetric(vertical: Dimens.size16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(child: buildTestProccess()),
+                      ],
+                    ),
+                    Expanded(child: buildQuestionList()),
+                  ],
+                )),
+          )
+          
+      
+        ),
       ),
     );
 
@@ -188,9 +196,9 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
           double percent = listQuestionChooesed.length /  (state.testInfo?.quizDTOs??[]).length;
           return Center(
             child:  Padding(
-              padding: EdgeInsets.all(15.0),
+              padding: EdgeInsets.symmetric(horizontal: Dimens.size34, vertical: Dimens.size16),
               child: new LinearPercentIndicator(
-                width: Dimens.size350,
+               // width: Dimens.size350,
                 animation: true,
                 lineHeight: Dimens.size20,
                 animationDuration: 1000,

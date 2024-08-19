@@ -599,5 +599,9 @@
   "feelings_str":"Cảm nhận",
   "achievements_str":"Thành tích",
   "choosed_str": "Đã chọn",
-  "learned_str": "Đã học"
+  "learned_str": "Đã học",
+  "begin_start_test": "Bắt đầu làm bài",
+  "finished_str": "Đã hoàn thành",
+  "view_str": "Xem",
+  "start_test": "Làm bài"
 }

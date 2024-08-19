@@ -29,6 +29,7 @@ class TestInfo {
   String? updatedBy;
   TestType? testType;
   int? durian;
+  bool?isFinish;
   List<QuestionInfo>? quizDTOs;
   
   TestInfo(
@@ -46,7 +47,8 @@ class TestInfo {
         this.updatedBy,
         this.quizDTOs,
         this.testType,
-        this.durian
+        this.durian,
+        this.isFinish
       });
 
   TestInfo.fromJson(Map<String, dynamic> json) {
@@ -56,6 +58,7 @@ class TestInfo {
     language = json['language'];
     testType = mapStrKeyTestLevel[json['type_test']]??TestType.OUTPUT;
     name = json['name'];
+    isFinish = json['is_finish'];
     courseName = json['course_name'];
     subName = json['sub_name'];
     durian = int.tryParse(json['durian'], radix: 10);

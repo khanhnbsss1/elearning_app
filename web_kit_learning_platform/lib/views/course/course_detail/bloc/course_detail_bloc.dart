@@ -70,6 +70,10 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
       CourseDetailUpdateFinishLessonEvent event,
       Emitter<CourseDetailState> emit,
       ) async {
+    if(state.awaitCallApi ==true) {
+      return;
+    }
+    state.awaitCallApi =true;
     UpdateLessonStatusApi updateLessonStatusApi= UpdateLessonStatusApi(courseId: state.courseInfo?.id??0, lectureId: state.selectLessonInfo?.id??0,);
     dynamic data = await updateLessonStatusApi.call();
     
@@ -79,6 +83,7 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
       blocStatus: AddCourseStatus.onUpdateFinishLessonStatus,
       courseInfo: state.courseInfo,
     ));
+    state.awaitCallApi =false;
     if(indexOfSelectLesson<(state.courseInfo?.lectures??[]).length)
     {
 /*      LessonInfo newSelectionLessonInfo  = (state.courseInfo?.lectures??[]).elementAt(indexOfSelectLesson+1);

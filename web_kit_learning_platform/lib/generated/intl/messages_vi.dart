@@ -84,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "basic_input": MessageLookupByLibrary.simpleMessage("Đầu vào cơ bản"),
         "basic_table": MessageLookupByLibrary.simpleMessage("Bảng cơ bản"),
         "basic_tables": MessageLookupByLibrary.simpleMessage("Các bảng cơ bản"),
+        "begin_start_test":
+            MessageLookupByLibrary.simpleMessage("Bắt đầu làm bài"),
         "blog": MessageLookupByLibrary.simpleMessage("Blog"),
         "border_type": MessageLookupByLibrary.simpleMessage("Loại đường viền"),
         "bordered_indicator":
@@ -241,6 +243,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fill_type_str": MessageLookupByLibrary.simpleMessage("Điền từ"),
         "filled": MessageLookupByLibrary.simpleMessage("Lấp đầy"),
         "finish": MessageLookupByLibrary.simpleMessage("Kết thúc"),
+        "finished_str": MessageLookupByLibrary.simpleMessage("Đã hoàn thành"),
         "first_name": MessageLookupByLibrary.simpleMessage("Tên"),
         "flat_button": MessageLookupByLibrary.simpleMessage("Nút phẳng"),
         "floating_label_type":
@@ -537,6 +540,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sound_str": MessageLookupByLibrary.simpleMessage("Âm thanh"),
         "standard": MessageLookupByLibrary.simpleMessage("Tiêu chuẩn"),
         "standard_str": MessageLookupByLibrary.simpleMessage("Tiêu chuẩn"),
+        "start_test": MessageLookupByLibrary.simpleMessage("Làm bài"),
         "starter": MessageLookupByLibrary.simpleMessage("Câu hỏi thường gặp"),
         "static": MessageLookupByLibrary.simpleMessage("Tĩnh"),
         "static_dialog": MessageLookupByLibrary.simpleMessage("Hộp thoại tĩnh"),
@@ -732,6 +736,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xem trước video"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "view_all": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
+        "view_str": MessageLookupByLibrary.simpleMessage("Xem"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VNĐ"),
         "vocabulary_str": MessageLookupByLibrary.simpleMessage("Từ vựng"),
         "warning": MessageLookupByLibrary.simpleMessage("Cảnh báo"),

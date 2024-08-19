@@ -599,6 +599,10 @@
   "feelings_str":"Feelings",
   "achievements_str":"Achievements",
   "choosed_str": "Choosed",
-  "learned_str": "Learned"
+  "learned_str": "Learned",
+  "begin_start_test": "Start test",
+  "finished_str": "Finished",
+  "view_str": "View",
+  "start_test": "Do the test"
   
 }

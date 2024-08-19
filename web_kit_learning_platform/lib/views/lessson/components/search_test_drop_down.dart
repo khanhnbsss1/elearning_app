@@ -18,7 +18,7 @@ import 'package:webkit/views/vocabulary/vocabulary_detail/create_edit_words.dart
 class SearchTestDropDown extends StatefulWidget {
   final Function(TestInfo) onSelectTest;
   TestInfo  ?testInfo;
-  SearchTestDropDown({required this.onSelectTest, this.testInfo});
+  SearchTestDropDown({super.key, required this.onSelectTest, this.testInfo});
 
   @override
   _MyDropdownButtonState createState() => _MyDropdownButtonState();
@@ -36,6 +36,15 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
       {
         _wordDropdownSearchFieldController.text = widget.testInfo?.name??"";
       }
+  }
+  @override
+  void didUpdateWidget(covariant SearchTestDropDown oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    if(widget.testInfo!=null)
+    {
+      _wordDropdownSearchFieldController.text = widget.testInfo?.name??"";
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -69,7 +78,7 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
                 builder: (BuildContext context, void Function(void Function()) setState) {
                   return DropDownSearchFormField(
                     textFieldConfiguration: TextFieldConfiguration(
-                      autofocus: true,
+                      autofocus: false,
                       controller: _wordDropdownSearchFieldController,
                       style: DefaultTextStyle.of(context).style.copyWith(
                           fontStyle: FontStyle.italic
