@@ -28,7 +28,7 @@ class GetTestListApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    await setApiBody(searchCommonRequest.toJson());
+    await setParamsAdd(searchCommonRequest.toJson());
   }
 
   @override

@@ -11,6 +11,7 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/models/user.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:webkit/services/apis/course/delete_course/delete_course_api.dart';
 import 'package:webkit/views/course/course_detail/course_study/course_study.dart';
 import 'package:webkit/views/course/course_list/bloc/course_list_bloc.dart';
 import 'package:webkit/views/course/course_detail/course_preview.dart';
@@ -320,7 +321,14 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                             courseInfo: courseInfo,
                             enableEdit: enableEdit,
                             row: numberRow,
-                            onDelete: (p0) {},
+                            onDelete: (p0) async {
+                              MonitorLoading().showLoading("");
+                              DeleteCourseApi api = DeleteCourseApi(info: p0);
+                              dynamic data = await api.call();
+                              MonitorLoading().dismiss();
+
+                              BlocProvider.of<CourseListBloc>(context).add(CourseListInitEvent());
+                            },
                             onEdit: (p0) {
                               CreateEditCourse(
                                 coursePageType: CoursePageType.edit,

@@ -84,14 +84,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-
-                        InkWell(
-                          onTap: () {
-                            setState(() {
-                              ThemeCustomizer().leftBarCondensed=!ThemeCustomizer().leftBarCondensed;
-                            });
-                          },
-                            child: StaticView.buildLogo(size: Dimens.size55)),
+                        StaticView.buildLogo(size: Dimens.size55),
                          SizedBox(width: Dimens.size5),
                         Expanded(
                           child: Visibility(
@@ -774,7 +767,27 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
       
                   ],
                 ),
-              ))
+              )),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: ThemeCustomizer().leftBarCondensed?MainAxisAlignment.center: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      child: Icon(
+                        ThemeCustomizer().leftBarCondensed?Icons.navigate_next: Icons.navigate_before, 
+                        color: ColorConst.whiteColor, 
+                        size: Dimens.size20,),
+                      onTap: () {
+                        setState(() {
+                          ThemeCustomizer().leftBarCondensed=!ThemeCustomizer().leftBarCondensed;
+                        });
+                      },
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -1075,8 +1088,8 @@ class _MenuItemState extends State<MenuItem> with UIMixin {
             textAlign: TextAlign.left,
             style: TextStyleConstant.textStyleBlack12w400.copyWith(
               color: isActive || isHover
-                  ? leftBarTheme.activeItemColor
-                  : leftBarTheme.onBackground,
+                  ? ColorConst.blackColor
+                  : ColorConst.blackColor,
               fontWeight: (isActive || isHover) ? FontWeight.w500: FontWeight.w400,
             ),
           ),

@@ -87,7 +87,7 @@ class TestInfo {
    // data['language'] =language;
     data['type_test'] =mapTestLevelToStrKey[testType];
     data['name'] =name;
-    data['durian'] =durian;
+    data['durian'] =durian.toString();
    // data['course_name'] =courseName;
    // data['sub_name'] =subName;
     //data['lecture_name'] =lectureName;

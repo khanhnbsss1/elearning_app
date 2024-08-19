@@ -172,7 +172,7 @@ class _CreateEditLesson extends State<CreateEditTest>
                         Visibility(
                           visible: widget.testActionType != ActionType.view,
                           child: ActionButton1(
-                            text: widget.testActionType == ActionType.create?L10nX.getStr.create_lesson_str:L10nX.getStr.str_update,
+                            text: widget.testActionType == ActionType.create?L10nX.getStr.create_str:L10nX.getStr.str_update,
                             width: Dimens.size150,
                             onTap: () {
                               state.testInfo??= TestInfo();

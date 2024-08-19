@@ -301,11 +301,18 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
     QuestionDataSource employeeDataSource = QuestionDataSource(
       lessonData: state.listResponseModel?.content??[],
       onDelete: (p0) async {
-        MonitorLoading().showLoading("");
-        DeleteQuizApi api = DeleteQuizApi(info: p0);
-        dynamic data = await api.call();
-        MonitorLoading().dismiss();
-        BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
+        ConfirmPopupPage(
+          content: L10nX.getStr.you_want_remove,
+          onAccept: () async {
+            MonitorLoading().showLoading("");
+            DeleteQuizApi api = DeleteQuizApi(info: p0);
+            dynamic data = await api.call();
+            MonitorLoading().dismiss();
+            BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
+          },
+
+        ).show(context);
+
       },
       onEdit: (p0) {
         QuestionCreateEditDetailPage(

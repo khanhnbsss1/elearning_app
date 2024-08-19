@@ -9,6 +9,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
 import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/base/widgets/pages_common/list_body_page_common.dart';
+import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/theme/theme_customizer.dart';
@@ -286,12 +287,19 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
           child: VocabularyItemView(
             vocabularyInfo: vocabularyInfo,
             onDelete: (p0) async {
-              MonitorLoading().showLoading("");
-              DeleteWordApi api = DeleteWordApi(info: p0);
-              dynamic data = await api.call();
-              MonitorLoading().dismiss();
+              ConfirmPopupPage(
+                content: L10nX.getStr.you_want_remove,
+                onAccept: () async {
+                  MonitorLoading().showLoading("");
+                  DeleteWordApi api = DeleteWordApi(info: p0);
+                  dynamic data = await api.call();
+                  MonitorLoading().dismiss();
 
-              BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListInitEvent());
+                  BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListInitEvent());
+                },
+
+              ).show(context);
+
             },
             onEdit: (p0) {
               CreateEditWordsPage(
