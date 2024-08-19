@@ -13,6 +13,7 @@ import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
+import 'package:webkit/services/apis/question/delete_quiz_api.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
 import 'package:webkit/views/question/question_detail/question_work/question_work_item.dart';
 import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
@@ -299,7 +300,12 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
   Widget buildTestTableList({required QuizListState state, required BuildContext context}){
     QuestionDataSource employeeDataSource = QuestionDataSource(
       lessonData: state.listResponseModel?.content??[],
-      onDelete: (p0) {
+      onDelete: (p0) async {
+        MonitorLoading().showLoading("");
+        DeleteQuizApi api = DeleteQuizApi(info: p0);
+        dynamic data = await api.call();
+        MonitorLoading().dismiss();
+        BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
       },
       onEdit: (p0) {
         QuestionCreateEditDetailPage(
@@ -313,7 +319,7 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
         QuestionWorkItem(
           questionInfo: p0, 
           enableCloseButton: true,
-          enableShowRightAnswer: true,
+          enableShowResultAnswer: true,
           onChangeAnswer: (p0) {
             
           },

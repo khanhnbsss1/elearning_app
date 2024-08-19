@@ -66,7 +66,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
         shadow: MyShadow(position: MyShadowPosition.centerRight, elevation: 0.2),
         child: AnimatedContainer(
           color: ColorConst.mainColor,//leftBarTheme.background,
-          width: ThemeCustomizer().leftBarCondensed ? Dimens.size70 : Dimens.size250,
+          width: ThemeCustomizer().leftBarCondensed ? Dimens.size70 : Dimens.size280,
           curve: Curves.easeOut,
           duration: const Duration(milliseconds: 200),
           child: Column(
@@ -76,28 +76,22 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                 height: Dimens.size60,
                 // padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
                 child: Padding(
-                  padding:  EdgeInsets.only(left: Dimens.size24),
+                  padding:  EdgeInsets.only(left: Dimens.size8),
                   child: InkWell(
                     onTap: () {
                       AppPages.routeName(Routes.dashboardRoute);
                     },
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+
                         InkWell(
                           onTap: () {
                             setState(() {
                               ThemeCustomizer().leftBarCondensed=!ThemeCustomizer().leftBarCondensed;
                             });
                           },
-                          child: Visibility(
-                              //visible: MediaQuery.of(context).size.width > 550,
-                              child: Icon(Icons.menu, size: Dimens.size20,color: ColorConst.whiteColor,)
-                          ),
-                        ),
-                        Visibility(
-                          visible: !ThemeCustomizer().leftBarCondensed,
-                          child: StaticView.buildLogo(),
-                        ),
+                            child: StaticView.buildLogo(size: Dimens.size55)),
                          SizedBox(width: Dimens.size5),
                         Expanded(
                           child: Visibility(
@@ -133,8 +127,6 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       isCondensed: ThemeCustomizer().leftBarCondensed,
                       title: L10nX.getStr.course_str,
                       permission: const [
-                        "courses.post.get_courses_home",
-                        "courses.post.get_my_course",
                         "courses.post.search_course"
                       ],
                       children: [
@@ -152,7 +144,6 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                           route:  Routes.courseList,
                           isCondensed: ThemeCustomizer().leftBarCondensed,
                           permission: const [
-                            "courses.post.get_courses_home",
                             "courses.post.search_course"
                           ],
                         ),
@@ -186,7 +177,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       ],
                       children: [
                         MenuItem(
-                          title: L10nX.getStr.student_list,
+                          title: L10nX.getStr.student_str,
                           route:  Routes.studentList,
                           isCondensed: ThemeCustomizer().leftBarCondensed,
                           permission: const [
@@ -201,7 +192,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                         ),
                       ],
                     ),
-                    //-----------------Danh sach hoc liệu-----------------//
+/*                    //-----------------Danh sach hoc liệu-----------------//
                     NavigationItem(
                       iconData: Icons.library_books_rounded,
                       title: L10nX.getStr.document_str,
@@ -215,7 +206,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                           ThemeCustomizer().leftBarCondensed= true;
                         });
                       },
-                    ),
+                    ),*/
                     //----------------Tu vung Khoa hoc------------------//
                     MenuWidget(
                       iconData: CupertinoIcons.book_solid,
@@ -224,7 +215,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       permission: const ["vocabulary.get.getlist",],
                       children: [
                         MenuItem(
-                          title: L10nX.getStr.lesson_str,
+                          title: L10nX.getStr.course_str,
                           route:  Routes.vocabularyListNoImage,
                           isCondensed: ThemeCustomizer().leftBarCondensed,
                           permission: const ["vocabulary.get.getlist",],
@@ -242,14 +233,14 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     //----------------Bai hoc------------------//
                     NavigationItem(
                       iconData: Icons.edit_document,
-                      title: L10nX.getStr.lesson_list,
+                      title: L10nX.getStr.lesson_str,
                       route: Routes.lessonList,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
                       permission: const ["lectures.post.get_list",],
                       onPress: () {
-                        setState(() {
+/*                        setState(() {
                           ThemeCustomizer().leftBarCondensed= true;
-                        });
+                        });*/
                       },
                     ),
                     //----------------Tag------------------//
@@ -258,11 +249,11 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       title: L10nX.getStr.tags,
                       route: Routes.tagList,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
-                      permission: ["tags.get.get_tags"],
+                      permission: const ["tags.get.get_tags"],
                       onPress: () {
-                        setState(() {
+/*                        setState(() {
                           ThemeCustomizer().leftBarCondensed= true;
-                        });
+                        });*/
                       },
                     ),
                     //----------------Test------------------//
@@ -271,7 +262,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       title: L10nX.getStr.test_str,
                       route: Routes.testList,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
-                      permission: ["tests.post.create_create_test"],
+                      permission: const ["tests.post.create_create_test"],
                       onPress: () {
                         setState(() {
                           ThemeCustomizer().leftBarCondensed= true;
@@ -281,14 +272,14 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     //----------------Quiz Page------------------//
                     NavigationItem(
                       iconData: Icons.quiz_outlined,
-                      title: L10nX.getStr.quiz_str,
+                      title: L10nX.getStr.question_str,
                       route: Routes.quizList,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
                       permission: const ["quizs.get.get_courses",],
                       onPress: () {
-                        setState(() {
+/*                        setState(() {
                           ThemeCustomizer().leftBarCondensed= true;
-                        });
+                        });*/
                       },
                     ),
                     //----------------Landing Page------------------//
@@ -296,6 +287,17 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       iconData: LucideIcons.planeLanding,
                       isCondensed: ThemeCustomizer().leftBarCondensed,
                       title: L10nX.getStr.landing_page,
+                      permission: const [
+                        "landingpages.delete.delete_ladingpage_course",
+                        "landingpages.delete.delete_review",
+                        "landingpages.delete.delete_teacher",
+                        "landingpages.post.create_ladingpage_course",
+                        "landingpages.post.create_landingpage_review",
+                        "landingpages.post.create_landingpage_teacher",
+                        "landingpages.put.update_ladingpage_course",
+                        "landingpages.put.update_landingpage_review",
+                        "landingpages.put.update_landingpage_teacher",
+                      ],
                       children: [
                         MenuItem(
                           title: L10nX.getStr.landing_page,

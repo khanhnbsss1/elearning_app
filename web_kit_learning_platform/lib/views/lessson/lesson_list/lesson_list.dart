@@ -7,11 +7,13 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
+import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/user/user_manager/delete_user_api.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/views/lessson/components/lesson_item_view.dart';
 import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
@@ -287,7 +289,18 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
       lessonData: state.lessonListResponseModel?.content??[],
       starIndex: (state.searchCommonRequest?.pageNumber??0)* (state.searchCommonRequest?.pageSize??0),
       onDelete: (p0) {
+        ConfirmPopupPage(
+          content: L10nX.getStr.you_want_remove,
+          onAccept: () async {
+            MonitorLoading().showLoading("");
+            DeleteLessonApi api = DeleteLessonApi(lessonInfo: p0);
+            dynamic data = await api.call();
+            MonitorLoading().dismiss();
 
+            BlocProvider.of<LessonListBloc>(context).add(LessonListInitEvent());
+          },
+          
+        ).show(context);
       },
       onEdit: (p0) {
         CreateEditLesson(lessonActionType: LessonActionType.edit,lessonInfo: p0,).show(context);

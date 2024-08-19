@@ -26,7 +26,7 @@ class QuestionWorkItem extends StatefulWidget {
 
   QuestionInfo questionInfo;
   bool? enableCloseButton;
-  bool? enableShowRightAnswer;
+  bool? enableShowResultAnswer;
   AnswerInfo? rightAnswerInfo;
   Function(QuestionInfo)? onChangeAnswer;
   int? questionIndex;
@@ -36,12 +36,12 @@ class QuestionWorkItem extends StatefulWidget {
     this.enableCloseButton, 
     this.onChangeAnswer, 
     this.isSelect,
-    this.enableShowRightAnswer,
+    this.enableShowResultAnswer,
     this.rightAnswerInfo,
     this.questionIndex
   }) {
     enableCloseButton ??= false;
-    enableShowRightAnswer??false;
+    enableShowResultAnswer??false;
     questionIndex??=0;
     if((questionInfo.answerGetDetail??[]).isNotEmpty && ((questionInfo.answerGetDetail??[]).where((element) => element.rightAnswer ==1).isNotEmpty))
       {
@@ -113,7 +113,6 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
             ),
             Gap(Dimens.size16),
             buildAnswerList(),
-            buildCorrectAnswer()
           ],
         ),
       ),
@@ -129,38 +128,44 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
       builder: (BuildContext context, BoxConstraints constraints) {
         if(widget.questionInfo.questionType ==QuestionType.fill )
           {
-            return Row(
+            return Column(
               children: [
-                Text("${L10nX.getStr.answer_str_1}: ", style: TextStyleConstant.textStyleBlack14w400,),
-                Gap(Dimens.size12),
-                Expanded(
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    controller: controller,
-                    onTapOutside: (event) {
-                      if(widget.onChangeAnswer!=null && widget.questionInfo.questionType == QuestionType.fill)
-                      {
-                        widget.questionInfo.answerChoose = controller.text;
-                        widget.onChangeAnswer!(widget.questionInfo);
-                      }
-                    },
-                    onChanged: (value) {
-                      if(widget.onChangeAnswer!=null && widget.questionInfo.questionType == QuestionType.fill)
-                      {
-                        widget.questionInfo.answerChoose = controller.text;
-                        widget.onChangeAnswer!(widget.questionInfo);
-                      }
-                    },
-                    decoration: InputDecoration(
-                      labelText: "${L10nX.getStr.answer_str_1}...",
-                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                      border: outlineInputBorder,
-                      contentPadding: MySpacing.all(16),
-                      isCollapsed: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                Row(
+                  children: [
+                    Text("${L10nX.getStr.answer_str_1}: ", style: TextStyleConstant.textStyleBlack14w400,),
+                    Gap(Dimens.size12),
+                    Expanded(
+                      child: TextFormField(
+                        keyboardType: TextInputType.text,
+                        controller: controller,
+                        onTapOutside: (event) {
+                          if(widget.onChangeAnswer!=null && widget.questionInfo.questionType == QuestionType.fill)
+                          {
+                            widget.questionInfo.answerChoose = controller.text;
+                            widget.onChangeAnswer!(widget.questionInfo);
+                          }
+                        },
+                        onChanged: (value) {
+                          if(widget.onChangeAnswer!=null && widget.questionInfo.questionType == QuestionType.fill)
+                          {
+                            widget.questionInfo.answerChoose = controller.text;
+                            widget.onChangeAnswer!(widget.questionInfo);
+                          }
+                        },
+                        decoration: InputDecoration(
+                          labelText: "${L10nX.getStr.answer_str_1}...",
+                          labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                          border: outlineInputBorder,
+                          contentPadding: MySpacing.all(16),
+                          isCollapsed: true,
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
+                buildCorrectAnswer()
+
               ],
             );
           }
@@ -184,21 +189,54 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      if (widget.onChangeAnswer != null) {
-                        setState(() {
-                          widget.questionInfo.answerIdChoose = answerInfo.answerId;
-                          widget.onChangeAnswer!(widget.questionInfo);
-                        });
-                      }
-                    },
+                  Visibility(
+                    visible: widget.enableShowResultAnswer==true,
                     child: SizedBox(
                       width: Dimens.size20,
                       height: Dimens.size20,
-                      child: Icon(
-                        isChoose ? Icons.radio_button_checked : Icons.radio_button_off,
-                        color: isChoose ? ColorConst.colorIconRed : ColorConst.colorIconGrays,
+                      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) { 
+                        bool isRightAnswer=  answerInfo.rightAnswer == 1;
+                        int radioState =0; ///0: chọn đúng, 1: Chọn sai, 2, không chọn
+                        if(isRightAnswer)
+                          {
+                            radioState = 0;
+                          }
+                        else if(!isRightAnswer && isChoose){
+                          radioState = 1;
+                        }
+                        else
+                          {
+                            radioState = 2;
+                          }
+                        return Icon(
+                            (radioState==0|| radioState==1) ? 
+                          Icons.radio_button_checked : Icons.radio_button_off,
+                          color: (radioState ==0 ? Colors.green:
+                          (radioState==1?ColorConst.colorIconRed:
+                          ColorConst.colorIconGrays))
+                        );
+                      },
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: widget.enableShowResultAnswer!=true,
+                    child: InkWell(
+                      onTap: () {
+                        if (widget.onChangeAnswer != null) {
+                          setState(() {
+                            widget.questionInfo.answerIdChoose = answerInfo.answerId;
+                            widget.onChangeAnswer!(widget.questionInfo);
+                          });
+                        }
+                      },
+                      child: SizedBox(
+                        width: Dimens.size20,
+                        height: Dimens.size20,
+                        child: Icon(
+                          isChoose ? Icons.radio_button_checked : Icons.radio_button_off,
+                          color: ColorConst.colorIconGrays,
+                        ),
                       ),
                     ),
                   ),
@@ -234,7 +272,9 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
   }
   Widget buildCorrectAnswer(){
     return Visibility(
-      visible: (widget.enableShowRightAnswer??false) && widget.rightAnswerInfo!=null,
+      visible: (widget.questionInfo.questionType == QuestionType.fill)&&
+          (widget.enableShowResultAnswer??false) && 
+          widget.rightAnswerInfo!=null,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

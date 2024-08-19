@@ -210,7 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "easy_str": MessageLookupByLibrary.simpleMessage("Dễ"),
         "ecommerce": MessageLookupByLibrary.simpleMessage("Thương mại điện tử"),
         "edit_landing_page":
-            MessageLookupByLibrary.simpleMessage("Chỉnh sửa landingpage"),
+            MessageLookupByLibrary.simpleMessage("Chỉnh sửa landing page"),
         "edit_lesson_str":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa bài học"),
         "edit_str": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),

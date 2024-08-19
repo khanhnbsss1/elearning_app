@@ -1,25 +1,22 @@
 
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 
-
-class DeleteLessonApi extends BaseApiRequest {
-  LessonInfo lessonInfo;
-  DeleteLessonApi({required this.lessonInfo}):super(
-    serviceType: SERVICE_TYPE.LESSON,
-    apiName: ApiName.getInstance().deleteLesson,
+class DeleteWordApi extends BaseApiRequest {
+  VocabularyInfo info;
+  DeleteWordApi({required this.info}):super(
+    serviceType: SERVICE_TYPE.VOCABULARY,
+    apiName: ApiName.getInstance().deleteVocabulary,
   );
 
   Future<dynamic> call() async {
     await getAuthorization();
-    dynamic result = await postRequestAPI();
+    dynamic result = await deleteRequestAPI();
     return result;
   }
 
   Future<void> getAuthorization() async {
-    await setParamsAdd({
-      "lectureId": lessonInfo.id
-    });
+    await setParamsAdd({"id":info.id});
   }
 
   @override

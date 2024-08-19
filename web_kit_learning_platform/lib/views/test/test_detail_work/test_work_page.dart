@@ -149,7 +149,7 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
                         width: Dimens.size800,
                         child: QuestionWorkItem(
                           questionInfo: questionInfo,
-                          enableShowRightAnswer: widget.enableShowResult,
+                          enableShowResultAnswer: widget.enableShowResult,
                           questionIndex: index+1,
                           onChangeAnswer: (p0) {
                                         

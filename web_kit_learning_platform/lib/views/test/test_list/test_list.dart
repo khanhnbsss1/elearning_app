@@ -11,6 +11,7 @@ import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
+import 'package:webkit/services/apis/test/delete_test_api.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
 import 'package:webkit/views/test/test_detail/create_edit_test.dart';
 import 'package:webkit/views/test/test_detail_work/test_work_page.dart';
@@ -286,8 +287,13 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
   Widget buildTestTableList({required TestListState state, required BuildContext context}){
     TestDataSource employeeDataSource = TestDataSource(
       lessonData: state.listResponseModel?.content??[],
-      onDelete: (p0) {
-        
+      onDelete: (p0) async {
+        MonitorLoading().showLoading("");
+        DeleteTestApi api = DeleteTestApi(info: p0);
+        dynamic data = await api.call();
+        MonitorLoading().dismiss();
+
+        BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
       },
       onEdit: (p0) {
         CreateEditTest(

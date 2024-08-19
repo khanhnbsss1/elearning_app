@@ -17,6 +17,7 @@ import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/sentence/models/sentence_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
+import 'package:webkit/services/apis/vocabulary/words/delete_word_api.dart';
 import 'package:webkit/views/vocabulary/vocabulary_detail/create_edit_words.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
@@ -284,8 +285,13 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
           },
           child: VocabularyItemView(
             vocabularyInfo: vocabularyInfo,
-            onDelete: (p0) {
+            onDelete: (p0) async {
+              MonitorLoading().showLoading("");
+              DeleteWordApi api = DeleteWordApi(info: p0);
+              dynamic data = await api.call();
+              MonitorLoading().dismiss();
 
+              BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListInitEvent());
             },
             onEdit: (p0) {
               CreateEditWordsPage(
