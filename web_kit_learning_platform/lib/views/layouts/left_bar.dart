@@ -109,9 +109,12 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     isCondensed: ThemeCustomizer().leftBarCondensed,
                     route: Routes.dashboardRoute,
                   ),
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: Dimens.size12, vertical: Dimens.size8),
-                    child: Text(L10nX.getStr.apps, style: TextStyleConstant.textStyleBlack12w400.copyWith(color: ColorConst.whiteColor),),
+                  Visibility(
+                    visible: !ThemeCustomizer().leftBarCondensed,
+                    child: Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size12, vertical: Dimens.size8),
+                      child: Text(L10nX.getStr.apps, style: TextStyleConstant.textStyleBlack12w400.copyWith(color: ColorConst.whiteColor),),
+                    ),
                   ),
                   //-----------------Course-----------------//
                   MenuWidget(
@@ -217,9 +220,12 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
 
   
                   //-----------------Danh sach giao vien-----------------//
-                  Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: Dimens.size12, vertical: Dimens.size8),
-                    child: Text(L10nX.getStr.user_str, style: TextStyleConstant.textStyleBlack12w400.copyWith(color: ColorConst.whiteColor),),
+                  Visibility(
+                    visible: !ThemeCustomizer().leftBarCondensed,
+                    child: Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size12, vertical: Dimens.size8),
+                      child: Text(L10nX.getStr.user_str, style: TextStyleConstant.textStyleBlack12w400.copyWith(color: ColorConst.whiteColor),),
+                    ),
                   ),
                   MenuWidget(
                     iconData: Icons.people,
