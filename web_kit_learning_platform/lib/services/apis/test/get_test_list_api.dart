@@ -14,7 +14,7 @@ class GetTestListApi extends BaseApiRequest {
 
   Future<TestListResponseModel> call() async {
     await getAuthorization();
-    dynamic result = await getRequestAPI();
+    dynamic result = await postRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {
@@ -22,13 +22,13 @@ class GetTestListApi extends BaseApiRequest {
     }
     else
     {
-      TestListResponseModel model = TestListResponseModel.fromList(result);
+      TestListResponseModel model = TestListResponseModel.fromJson(result);
       return model;
     }
   }
 
   Future<void> getAuthorization() async {
-    await setParamsAdd(searchCommonRequest.toJson());
+    await setApiBody(searchCommonRequest.toJson());
   }
 
   @override

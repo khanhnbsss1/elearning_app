@@ -85,7 +85,7 @@ class _CreateEditLesson extends State<CreateEditTest>
           iconTheme: IconThemeData(
             color: ColorConst.whiteColor, //change your color here
           ),
-          title: Text( widget.testInfo?.id!=null?L10nX.getStr.quiz_update:L10nX.getStr.create_quiz_str, style: TextStyleConstant.textStyleBlack20w700.copyWith(color: ColorConst.whiteColor),),
+          title: Text( widget.testInfo?.id!=null?L10nX.getStr.test_update:L10nX.getStr.test_add, style: TextStyleConstant.textStyleBlack20w700.copyWith(color: ColorConst.whiteColor),),
           centerTitle: true,
         ),
         body: Container(

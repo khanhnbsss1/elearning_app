@@ -1,8 +1,6 @@
-import 'dart:js_interop_unsafe';
 import 'dart:typed_data';
-
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:web/web.dart' as html_cache;
+import 'package:universal_html/html.dart'if (kIsWeb) "dart:html" as html_cache;
 
 import '../utils/file_utils.dart';
 
@@ -311,15 +309,15 @@ class LocalStorage {
   }
 
   bool keyIsExit(String key) {
-    if (html_cache.window.localStorage.has(key)) {
+    if (html_cache.window.localStorage.containsKey(key)) {
       return true;
     }
     return false;
   }
 
   void removeByKey(String key) {
-    if (html_cache.window.localStorage.has(key)) {
-      html_cache.window.localStorage.removeItem(key);
+    if (html_cache.window.localStorage.containsKey(key)) {
+      html_cache.window.localStorage.remove(key);
     }
     if (Storage.dynamicKeys.contains(key)) {
       Storage.dynamicKeys.remove(key);
@@ -444,8 +442,8 @@ class SessionStorage {
   }
 
   void removeByKey(String key) {
-    if (html_cache.window.sessionStorage.has(key)) {
-      html_cache.window.sessionStorage.removeItem(key);
+    if (html_cache.window.sessionStorage.containsKey(key)) {
+      html_cache.window.sessionStorage.remove(key);
     }
   }
 
@@ -494,8 +492,9 @@ class CookieStorage {
     html_cache.window.document.cookie = "";
   }
 
+
   Map convertToMap() {
-    final cookie = html_cache.window.document.cookie;
+    final cookie = html_cache.window.document.cookie!;
     final entity = cookie.split("; ").map((item) {
       final split = item.split("=");
       return MapEntry(split[0], split[1]);

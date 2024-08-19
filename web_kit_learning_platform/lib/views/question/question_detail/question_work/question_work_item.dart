@@ -209,8 +209,7 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
                             radioState = 2;
                           }
                         return Icon(
-                            (radioState==0|| radioState==1) ? 
-                          Icons.radio_button_checked : Icons.radio_button_off,
+                            (radioState==0 || radioState==1?Icons.check_circle : Icons.radio_button_off),
                           color: (radioState ==0 ? Colors.green:
                           (radioState==1?ColorConst.colorIconRed:
                           ColorConst.colorIconGrays))

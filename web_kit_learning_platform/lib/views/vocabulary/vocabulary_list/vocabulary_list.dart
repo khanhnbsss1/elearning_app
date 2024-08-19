@@ -24,6 +24,7 @@ import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../layouts/layout.dart';
 import '../components/vocabulary_item_view.dart';
+import '../vocabulary_detail/vocabulary_view_detail.dart';
 import 'bloc/vocabulary_list_bloc.dart';
 
 class VocabularyList extends StatefulWidget {
@@ -74,6 +75,8 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                 {
                   if(ResponsiveInfo.isPhone())
                   {
+                    VocabularyViewDetail(selectVocabularyInfo: state.selectVocabularyInfo!,).show(context);
+
                     showGeneralDialog(
                       context: context,
                       pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
@@ -392,33 +395,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                                 //visible: (state.selectVocabularyInfo?.audio??"").isNotEmpty,
                                   child: StatefulBuilder(
                                     builder: (BuildContext context, void Function(void Function()) setState) { 
-                                      return InkWell(
-                                          onTap: () async {
-                                            final player = AudioPlayer();
-                                            player.playerStateStream.listen((event) {
-                                              switch(event.processingState){
-                                                case ProcessingState.idle:
-                                                // TODO: Handle this case.
-                                                case ProcessingState.loading:
-                                                // TODO: Handle this case.
-                                                case ProcessingState.buffering:
-                                                // TODO: Handle this case.
-                                                case ProcessingState.ready:
-                                                // TODO: Handle this case.
-                                                setState(() {
-                                                  isOnVolume = true;
-                                                },);
-                                                case ProcessingState.completed:
-                                                // TODO: Handle this case.
-                                                  setState(() {
-                                                    isOnVolume = false;
-                                                  },);
-                                              }
-                                            },);// Create a player
-                                            await player.setUrl('https://foo.com/bar.mp3');
-                                            player.play();
-                                          },
-                                          child: AudioSpeaker(url: state.selectVocabularyInfo?.audio??"",));
+                                      return AudioSpeaker(url: state.selectVocabularyInfo?.audio??"",);
                                     },
                                   )
                               )

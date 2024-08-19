@@ -103,13 +103,16 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-    /*                    NavigationItem(
+                  NavigationItem(
                     iconData: LucideIcons.layoutDashboard,
                     title: L10nX.getStr.dashboard,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
                     route: Routes.dashboardRoute,
-                  ),*/
-                 // labelWidget(L10nX.getStr.apps),
+                  ),
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: Dimens.size12, vertical: Dimens.size8),
+                    child: Text(L10nX.getStr.apps, style: TextStyleConstant.textStyleBlack12w400.copyWith(color: ColorConst.whiteColor),),
+                  ),
                   //-----------------Course-----------------//
                   MenuWidget(
                     iconData: Icons.library_books,
@@ -138,25 +141,86 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       ),
                     ],
                   ),
-    /*                    //-----------------VideoPlayer-----------------//
-                  MenuWidget(
-                    iconData: Icons.video_collection_outlined,
+                  //----------------Bai hoc------------------//
+                  NavigationItem(
+                    iconData: Icons.edit_document,
+                    title: L10nX.getStr.lesson_str,
+                    route: Routes.lessonList,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.video_player,
+                    permission: const ["lectures.post.get_list",],
+                    onPress: () {
+                      /*                        setState(() {
+                        ThemeCustomizer().leftBarCondensed= true;
+                      });*/
+                    },
+                  ),
+                  //----------------Test------------------//
+                  NavigationItem(
+                    iconData: LucideIcons.testTubes,
+                    title: L10nX.getStr.test_str,
+                    route: Routes.testList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["tests.post.create_create_test"],
+                    onPress: () {
+                    },
+                  ),
+                  //----------------Quiz Page------------------//
+                  NavigationItem(
+                    iconData: Icons.quiz_outlined,
+                    title: L10nX.getStr.question_str,
+                    route: Routes.quizList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["quizs.get.get_courses",],
+                    onPress: () {
+                      /*                        setState(() {
+                        ThemeCustomizer().leftBarCondensed= true;
+                      });*/
+                    },
+                  ),
+                  //----------------Tu vung Khoa hoc------------------//
+                  MenuWidget(
+                    iconData: CupertinoIcons.book_solid,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    title: L10nX.getStr.vocabulary_str,
+                    permission: const ["vocabulary.get.getlist",],
                     children: [
                       MenuItem(
-                        title: L10nX.getStr.video_player,
-                        route:  Routes.videoPlayer,
+                        title: L10nX.getStr.course_str,
+                        route:  Routes.vocabularyListNoImage,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
+                        permission: const ["vocabulary.get.getlist",],
+    
                       ),
                       MenuItem(
-                        title: L10nX.getStr.youtube_player,
-                        route:  Routes.videoPlayer,
+                        title: L10nX.getStr.simplified_str,
+                        route:  Routes.vocabularyListImage,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
+                        permission: const ["vocabulary.get.getlist",],
+    
                       ),
                     ],
-                  ),*/
+                  ),
+
+                  //----------------Tag------------------//
+                  NavigationItem(
+                    iconData: Icons.tag,
+                    title: L10nX.getStr.tags,
+                    route: Routes.tagList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["tags.get.get_tags"],
+                    onPress: () {
+    /*                        setState(() {
+                        ThemeCustomizer().leftBarCondensed= true;
+                      });*/
+                    },
+                  ),
+
+  
                   //-----------------Danh sach giao vien-----------------//
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: Dimens.size12, vertical: Dimens.size8),
+                    child: Text(L10nX.getStr.user_str, style: TextStyleConstant.textStyleBlack12w400.copyWith(color: ColorConst.whiteColor),),
+                  ),
                   MenuWidget(
                     iconData: Icons.people,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
@@ -181,97 +245,8 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       ),
                     ],
                   ),
-    /*                    //-----------------Danh sach hoc liệu-----------------//
-                  NavigationItem(
-                    iconData: Icons.library_books_rounded,
-                    title: L10nX.getStr.document_str,
-                    route: Routes.lessonList,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    permission: const [
-                      "documents.get.getlist"
-                    ],
-                    onPress: () {
-                      setState(() {
-                        ThemeCustomizer().leftBarCondensed= true;
-                      });
-                    },
-                  ),*/
-                  //----------------Tu vung Khoa hoc------------------//
-                  MenuWidget(
-                    iconData: CupertinoIcons.book_solid,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.vocabulary_str,
-                    permission: const ["vocabulary.get.getlist",],
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.course_str,
-                        route:  Routes.vocabularyListNoImage,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const ["vocabulary.get.getlist",],
-    
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.simplified_str,
-                        route:  Routes.vocabularyListImage,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const ["vocabulary.get.getlist",],
-    
-                      ),
-                    ],
-                  ),
-                  //----------------Bai hoc------------------//
-                  NavigationItem(
-                    iconData: Icons.edit_document,
-                    title: L10nX.getStr.lesson_str,
-                    route: Routes.lessonList,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    permission: const ["lectures.post.get_list",],
-                    onPress: () {
-    /*                        setState(() {
-                        ThemeCustomizer().leftBarCondensed= true;
-                      });*/
-                    },
-                  ),
-                  //----------------Tag------------------//
-                  NavigationItem(
-                    iconData: Icons.tag,
-                    title: L10nX.getStr.tags,
-                    route: Routes.tagList,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    permission: const ["tags.get.get_tags"],
-                    onPress: () {
-    /*                        setState(() {
-                        ThemeCustomizer().leftBarCondensed= true;
-                      });*/
-                    },
-                  ),
-                  //----------------Test------------------//
-                  NavigationItem(
-                    iconData: LucideIcons.testTubes,
-                    title: L10nX.getStr.test_str,
-                    route: Routes.testList,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    permission: const ["tests.post.create_create_test"],
-                    onPress: () {
-                      setState(() {
-                        ThemeCustomizer().leftBarCondensed= true;
-                      });
-                    },
-                  ),
-                  //----------------Quiz Page------------------//
-                  NavigationItem(
-                    iconData: Icons.quiz_outlined,
-                    title: L10nX.getStr.question_str,
-                    route: Routes.quizList,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    permission: const ["quizs.get.get_courses",],
-                    onPress: () {
-    /*                        setState(() {
-                        ThemeCustomizer().leftBarCondensed= true;
-                      });*/
-                    },
-                  ),
                   //----------------Landing Page------------------//
+                  
                   MenuWidget(
                     iconData: LucideIcons.planeLanding,
                     isCondensed: ThemeCustomizer().leftBarCondensed,

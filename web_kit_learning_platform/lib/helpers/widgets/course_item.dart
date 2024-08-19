@@ -165,7 +165,7 @@ class CourseItem extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Text(
-                                          "${NumberHelper().numberToString(courseInfo.price, decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
+                                          "${NumberHelper().numberToString(courseInfo.price, decimalDigits: 0).trim()} (${L10nX.getStr.vnd_str})",
                                           style: TextStyleConstant
                                               .textStyleBlack16w500
                                               .copyWith(

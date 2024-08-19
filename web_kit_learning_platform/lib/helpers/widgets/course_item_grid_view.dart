@@ -148,7 +148,7 @@ class CourseItemGridView extends StatelessWidget {
                                                 ),
                                                 Text(" ${NumberHelper().numberToString(
                                                     courseInfo.price,
-                                                    decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
+                                                    decimalDigits: 0).trim()} (${L10nX.getStr.vnd_str})",
                                                     style: TextStyleConstant.textStyleBlack12w200.copyWith(
                                                       fontWeight: FontWeight.bold,
                                                       // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
@@ -234,7 +234,7 @@ class CourseItemGridView extends StatelessWidget {
                                             ),
                                             Text(" ${NumberHelper().numberToString(
                                                 courseInfo.price,
-                                                decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
+                                                decimalDigits: 0).trim()} (${L10nX.getStr.vnd_str})",
                                                 style: TextStyleConstant.textStyleBlack12w200.copyWith(
                                                   fontWeight: FontWeight.bold,
                                                   // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
@@ -471,7 +471,7 @@ class CourseItemGridView1 extends StatelessWidget {
                                             ),
                                             Text(" ${NumberHelper().numberToString(
                                                 courseInfo.price,
-                                                decimalDigits: 0).trim()}(${L10nX.getStr.vnd_str})",
+                                                decimalDigits: 0).trim()} (${L10nX.getStr.vnd_str})",
                                                 style: TextStyleConstant.textStyleBlack12w200.copyWith(
                                                   fontWeight: FontWeight.bold,
                                                   // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,

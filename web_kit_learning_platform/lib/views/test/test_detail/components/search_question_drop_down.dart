@@ -83,7 +83,7 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
                         Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text("${questionInfo.weightage}đ    ${L10nX().getStringByKey('${mapQuestionTypeToStrKey[questionInfo.questionType]}_type_str'.toLowerCase())}"),
+                            Text("${questionInfo.weightage??0} đ    ${L10nX().getStringByKey('${mapQuestionTypeToStrKey[questionInfo.questionType]}_type_str'.toLowerCase())}"),
                             Gap(Dimens.size8),
                             Visibility(
                               visible: widget.actionType != ActionType.view,
@@ -93,7 +93,7 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
                                     widget.onRemoveWords(questionInfo);
                                   });
                                 },
-                                child: Icon(Icons.delete, color: ColorConst.colorIconRed,size: Dimens.size20,),
+                                child: Icon(Icons.delete_forever_outlined, color: ColorConst.colorIconRed,size: Dimens.size20,),
                               ),
                             )
                           ],

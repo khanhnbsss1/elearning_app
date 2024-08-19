@@ -11,6 +11,7 @@ import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabular
 import 'package:webkit/views/apps/file/file_manager.dart';
 import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
 import 'package:webkit/views/course/course_detail/course_study/subject_item_widget.dart';
+import 'package:webkit/views/vocabulary/vocabulary_detail/vocabulary_view_detail.dart';
 
 import '../../../../base/widgets/audio/audio_speaker.dart';
 import '../../../../helpers/utils/ui_mixins.dart';
@@ -489,7 +490,9 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
               SizedBox(
                 width: 16,
               ),
-              InkWell(onTap: () {}, child: Icon(Icons.remove_red_eye_outlined)),
+              InkWell(onTap: () {
+                VocabularyViewDetail(selectVocabularyInfo: word,).show(context);
+              }, child: Icon(Icons.remove_red_eye_outlined)),
               SizedBox(
                 width: 16,
               ),

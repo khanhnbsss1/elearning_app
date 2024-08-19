@@ -95,6 +95,7 @@ class LessonInfo {
     updatedBy = json['updated_by'];
     note = json['note'];
     docLink = json['doc_link'];
+    isFinnish = json['learning_status'];
     testId = json['test_id'];
     testName = json['test_name'];
     if (json['vocabularies'] != null) {
@@ -137,12 +138,8 @@ class LessonInfo {
     if(testId!=null) {
       data['test_id'] = testId;
     }
-    
-/*    if(testName!=null && testName!.isNotEmpty) {
-      data['test_name'] = testName;
-    }*/
 
-    if(createdAt!=null&&createdAt!.isNotEmpty) {
+    /*if(createdAt!=null&&createdAt!.isNotEmpty) {
       data['created_at'] = createdAt;
     }
     if(updatedAt!=null&&updatedAt!.isNotEmpty) {
@@ -153,7 +150,7 @@ class LessonInfo {
     }
     if(updatedBy!=null&&updatedBy!.isNotEmpty) {
       data['updated_by'] = updatedBy;
-    }
+    }*/
     if(note!=null&&note!.isNotEmpty) {
       data['note'] = note;
     }

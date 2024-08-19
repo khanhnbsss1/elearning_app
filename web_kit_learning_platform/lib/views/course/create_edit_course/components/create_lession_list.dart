@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
@@ -284,22 +285,24 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                     }
                 },
                 transitionBuilder: (context, child, controller) {
-                  return Container(
-                    constraints: BoxConstraints(
-                        maxHeight: Dimens.size300
-                    ),
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                        color: ColorConst.whiteColor,
-                        borderRadius: BorderRadius.circular(Dimens.size10)
-                    ),
-                    padding: EdgeInsets.all(Dimens.size8),
-                    child: FadeTransition(
-                      opacity: CurvedAnimation(
-                          parent: controller!,
-                          curve: Curves.fastOutSlowIn
+                  return PointerInterceptor(
+                    child: Container(
+                      constraints: BoxConstraints(
+                          maxHeight: Dimens.size300
                       ),
-                      child: child,
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                          color: ColorConst.whiteColor,
+                          borderRadius: BorderRadius.circular(Dimens.size10)
+                      ),
+                      padding: EdgeInsets.all(Dimens.size8),
+                      child: FadeTransition(
+                        opacity: CurvedAnimation(
+                            parent: controller!,
+                            curve: Curves.fastOutSlowIn
+                        ),
+                        child: child,
+                      ),
                     ),
                   );
                 },
@@ -402,23 +405,25 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   print("object");
                 },
                 transitionBuilder: (context, child, controller) {
-                  return Container(
-                    constraints: BoxConstraints(
-                        maxHeight: Dimens.size300
-                    ),
-                    clipBehavior: Clip.hardEdge,
-                    decoration: BoxDecoration(
-                        color: ColorConst.whiteColor,
-                        borderRadius: BorderRadius.circular(Dimens.size10)
-                    ),
-                    padding: EdgeInsets.all(Dimens.size8),
-                    child: FadeTransition(
-                      opacity: CurvedAnimation(
-                          parent: controller!,
-                          curve: Curves.fastOutSlowIn
+                  return PointerInterceptor(
+                    child: Container(
+                      constraints: BoxConstraints(
+                          maxHeight: Dimens.size300
                       ),
-                      child: child,
-                    ),                  );
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                          color: ColorConst.whiteColor,
+                          borderRadius: BorderRadius.circular(Dimens.size10)
+                      ),
+                      padding: EdgeInsets.all(Dimens.size8),
+                      child: FadeTransition(
+                        opacity: CurvedAnimation(
+                            parent: controller!,
+                            curve: Curves.fastOutSlowIn
+                        ),
+                        child: child,
+                      ),                  ),
+                  );
                 },
                 displayAllSuggestionWhenTap: false,
                 keepSuggestionsOnSuggestionSelected: true,

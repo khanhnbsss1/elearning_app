@@ -38,7 +38,8 @@ class CourseInfo {
   String? mode;
   int? gradeId;
   int? imageId;
-
+  int? testId;
+  String? testName;
   CourseInfo(
       {this.id,
         this.name,
@@ -73,7 +74,9 @@ class CourseInfo {
         this.mode,
         this.gradeId,
         this.subjects,
-        this.imageId
+        this.imageId,
+        this.testId,
+        this.testName
       });
 
   CourseInfo.initial(){
@@ -145,7 +148,9 @@ class CourseInfo {
     String? mode,
     int? gradeId,
     List<Subjects>? subjects,
-    int? imageId
+    int? imageId,
+    int? testId,
+    String? testName
   }){
     return CourseInfo(
       id : id??this.id,
@@ -182,6 +187,8 @@ class CourseInfo {
       gradeId:gradeId??this.gradeId,
       subjects:subjects??this.subjects,
       imageId:imageId??this.imageId,
+      testId:testId??this.testId,
+      testName:typeName??this.testName,
 
 
     );
@@ -221,6 +228,8 @@ class CourseInfo {
     mode=json.mode??mode;
     subjects=json.subjects??subjects;
     imageId=json.imageId??imageId;
+    testName=json.testName??testName;
+    testId=json.testId??testId;
 
   }
 
@@ -255,6 +264,8 @@ class CourseInfo {
     accompanyCourse = (json['accompany_course']??'0').toString();
     mode = json['mode'];
     gradeId = json['grade_id'];
+    testId = json['test_id'];
+    testName = json['test_name'];
     tags = [];
     lectures=[];
     if (json['lectures'] != null) {
