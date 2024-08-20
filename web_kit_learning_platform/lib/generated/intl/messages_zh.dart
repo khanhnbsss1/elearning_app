@@ -577,6 +577,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "time_out_connection":
             MessageLookupByLibrary.simpleMessage("超时,请检查您的网络连接"),
         "time_str": MessageLookupByLibrary.simpleMessage("时间"),
+        "time_test_end":
+            MessageLookupByLibrary.simpleMessage("测试时间已结束，无法继续测试，请提交测试"),
         "timeout": MessageLookupByLibrary.simpleMessage("超时"),
         "title_popup_biometric":
             MessageLookupByLibrary.simpleMessage("使用生物识别登录"),

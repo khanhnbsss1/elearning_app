@@ -679,6 +679,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "time_out_connection": MessageLookupByLibrary.simpleMessage(
             "Quá thời gian chờ, vui lòng kiểm tra kết nối mạng của bạn"),
         "time_str": MessageLookupByLibrary.simpleMessage("Thời gian"),
+        "time_test_end": MessageLookupByLibrary.simpleMessage(
+            "Thời gian làm bài đã hết, bạn không thể tiếp tục làm bài nữa, vui lòng nộp bài"),
         "timeout": MessageLookupByLibrary.simpleMessage("Hết thời gian chờ"),
         "title_popup_biometric":
             MessageLookupByLibrary.simpleMessage("Đăng nhập bằng sinh trắc"),

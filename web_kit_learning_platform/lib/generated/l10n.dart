@@ -6039,6 +6039,16 @@ class S {
       args: [],
     );
   }
+
+  /// `The test time has expired, you cannot continue the test, please submit your test`
+  String get time_test_end {
+    return Intl.message(
+      'The test time has expired, you cannot continue the test, please submit your test',
+      name: 'time_test_end',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

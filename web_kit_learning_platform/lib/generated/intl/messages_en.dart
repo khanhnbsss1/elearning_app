@@ -686,6 +686,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "time_out_connection": MessageLookupByLibrary.simpleMessage(
             "Timeout exceeded, please check your network connection"),
         "time_str": MessageLookupByLibrary.simpleMessage("Time"),
+        "time_test_end": MessageLookupByLibrary.simpleMessage(
+            "The test time has expired, you cannot continue the test, please submit your test"),
         "timeout": MessageLookupByLibrary.simpleMessage("Timeout"),
         "title_popup_biometric":
             MessageLookupByLibrary.simpleMessage("Log in with biometrics"),

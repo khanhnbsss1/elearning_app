@@ -6,6 +6,7 @@ enum TestWorkStatus {
   onScoring,
   onShowResult,
   onChangePage,
+  onUpdateChooseQuestion,
   unKnown
 }
 

@@ -21,6 +21,7 @@ class TestWorkBloc extends Bloc<TestWorkEvent, TestWorkState> {
         page: event.page
       ));
     });
+    on<TestWorkOnUpdateChooseQuestionEvent>(_onUpdateChoosesQuestion);
   }
   Future<void> _onInit(
       TestWorkInitEvent event,
@@ -65,5 +66,19 @@ class TestWorkBloc extends Bloc<TestWorkEvent, TestWorkState> {
     state.testInfo = (await getTestDetailApi.call())?? state.testInfo;
     emit(state.copyWith(
         blocStatus: TestWorkStatus.initial,testInfo: state.testInfo));
+  }
+
+  Future<void> _onUpdateChoosesQuestion(
+      TestWorkOnUpdateChooseQuestionEvent event,
+      Emitter<TestWorkState> emit,
+      ) async {
+    
+    int questionIndex = (state.testInfo?.quizDTOs??[]).indexWhere((element) => element.id == event.questionInfo.id,);
+    (state.testInfo?.quizDTOs??[])[questionIndex] = event.questionInfo;
+    emit(state.copyWith(
+        blocStatus: TestWorkStatus.onUpdateChooseQuestion,
+        testInfo: state.testInfo,
+      
+    ));
   }
 }

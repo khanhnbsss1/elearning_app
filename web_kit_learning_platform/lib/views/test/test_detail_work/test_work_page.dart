@@ -18,7 +18,7 @@ class TestWorkPage extends StatefulWidget {
     if(enableShowResult!=true) /// truong hop chua lam bai test
       {
         ConfirmPopupPage(
-          content: "${L10nX.getStr.start_test_confirm} ${testInfo.durian} (${L10nX.getStr.time_in_minute_str})",
+          content: "${L10nX.getStr.start_test_confirm} ${testInfo.durian??0} (${L10nX.getStr.time_in_minute_str})",
           onAccept: () {
             showDialog(
                 context: context,
@@ -108,6 +108,10 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
                     // TODO: Handle this case.
                     state.blocStatus = TestWorkStatus.unKnown;
                     break;
+                    
+                  case TestWorkStatus.onUpdateChooseQuestion:
+                    state.blocStatus = TestWorkStatus.unKnown;
+                    break;
                   default:
                       break;
                 }
@@ -169,6 +173,9 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
                                     onTap: () {
                                       ConfirmPopupPage(
                                         content: L10nX.getStr.you_are_ready_finish_test,
+                                        onAccept: () {
+                                          BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnSubmitResultTestEvent());
+                                        },
                                       ).show(context);
                                     },
                                   ),
@@ -231,6 +238,7 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
                 enableShowResultAnswer: widget.enableShowResult,
                 questionIndex: questionIndex+1,
                 onChangeAnswer: (p0) {
+                  BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnUpdateChooseQuestionEvent(questionInfo: p0));
                 },
               ),
             ),
@@ -253,7 +261,7 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
                 // width: Dimens.size350,
                 animation: true,
                 lineHeight: Dimens.size20,
-                animationDuration: 1000,
+                animationDuration: 100,
                 percent: percent,
                 center: Text("${L10nX.getStr.choosed_str} ${listQuestionChooesed.length} / ${(state.testInfo?.quizDTOs??[]).length} ${L10nX.getStr.question_str}"),
                 barRadius: Radius.circular(Dimens.size8),
@@ -284,7 +292,15 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
           ),
         ),
         onEnd: () {
-
+          ConfirmPopupPage(
+            content: L10nX.getStr.time_test_end,
+            onAccept: () {
+              BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnSubmitResultTestEvent());
+            },
+            onCancel: () {
+              
+            },
+          ).show(context);
         },
       ),
     );
