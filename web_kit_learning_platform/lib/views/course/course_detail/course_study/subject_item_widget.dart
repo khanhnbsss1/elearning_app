@@ -16,13 +16,15 @@ class SubjectItemWidget extends StatefulWidget{
     required this.subject,
     required this.onFinishLecture,
     this.selectLessonInfo,
-    required this.onSelectLesson
+    required this.onSelectLesson,
+    this.subjectScrollController
   });
   Subjects subject;
   int subjectIndex =0;
   Function(int)onFinishLecture;
   Function(LessonInfo)onSelectLesson;
   LessonInfo? selectLessonInfo;
+  ScrollController? subjectScrollController;
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -101,10 +103,10 @@ class SubjectItemWidgetState extends State<SubjectItemWidget>{
         margin: EdgeInsets.all(0),
         constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
         child: SingleChildScrollView(
-          // controller: subjectScrollController,
+           controller:widget.subjectScrollController,
           child: ListView.builder(
             shrinkWrap: true,
-            // controller: subjectScrollController,
+             controller: widget.subjectScrollController,
             itemCount: (subject.lectures ?? []).length,
             itemBuilder: (context, lectureIndex) {
               LessonInfo lessonInfo = (subject.lectures ?? []).elementAt(lectureIndex);
