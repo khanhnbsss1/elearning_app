@@ -81,6 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "basic_input": MessageLookupByLibrary.simpleMessage("基本输入"),
         "basic_table": MessageLookupByLibrary.simpleMessage("基本表格"),
         "basic_tables": MessageLookupByLibrary.simpleMessage("基本表格"),
+        "begin_start_test": MessageLookupByLibrary.simpleMessage("开始测试"),
         "blog": MessageLookupByLibrary.simpleMessage("博客"),
         "border_type": MessageLookupByLibrary.simpleMessage("边框类型"),
         "bordered": MessageLookupByLibrary.simpleMessage("有边框"),
@@ -209,6 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fill_type_str": MessageLookupByLibrary.simpleMessage("填写单词"),
         "filled": MessageLookupByLibrary.simpleMessage("已填写"),
         "finish": MessageLookupByLibrary.simpleMessage("完成"),
+        "finished_str": MessageLookupByLibrary.simpleMessage("完成"),
         "first_name": MessageLookupByLibrary.simpleMessage("名字"),
         "flat_button": MessageLookupByLibrary.simpleMessage("扁平按钮"),
         "floating_label_type": MessageLookupByLibrary.simpleMessage("浮动标签类型"),
@@ -271,6 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "locked": MessageLookupByLibrary.simpleMessage("已锁定"),
         "login": MessageLookupByLibrary.simpleMessage("登录"),
         "login_your_account": MessageLookupByLibrary.simpleMessage("登录您的帐户"),
+        "manage_str": MessageLookupByLibrary.simpleMessage("管理"),
         "map": MessageLookupByLibrary.simpleMessage("地图"),
         "maximum_point": MessageLookupByLibrary.simpleMessage("最高分"),
         "meaning_str": MessageLookupByLibrary.simpleMessage("含义"),
@@ -458,6 +461,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "sound_str": MessageLookupByLibrary.simpleMessage("声音"),
         "standard": MessageLookupByLibrary.simpleMessage("标准"),
         "standard_str": MessageLookupByLibrary.simpleMessage("标准"),
+        "start_test": MessageLookupByLibrary.simpleMessage("测试"),
+        "start_test_confirm":
+            MessageLookupByLibrary.simpleMessage("您确定要执行本次测试吗，执行时间为："),
         "starter": MessageLookupByLibrary.simpleMessage("入门"),
         "static": MessageLookupByLibrary.simpleMessage("静态"),
         "static_dialog": MessageLookupByLibrary.simpleMessage("静态对话框"),
@@ -571,6 +577,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "time_out_connection":
             MessageLookupByLibrary.simpleMessage("超时,请检查您的网络连接"),
         "time_str": MessageLookupByLibrary.simpleMessage("时间"),
+        "time_test_end":
+            MessageLookupByLibrary.simpleMessage("测试时间已结束，无法继续测试，请提交测试"),
         "timeout": MessageLookupByLibrary.simpleMessage("超时"),
         "title_popup_biometric":
             MessageLookupByLibrary.simpleMessage("使用生物识别登录"),
@@ -620,6 +628,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "video_preview_str": MessageLookupByLibrary.simpleMessage("视频预览"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("越南语"),
         "view_all": MessageLookupByLibrary.simpleMessage("查看全部"),
+        "view_str": MessageLookupByLibrary.simpleMessage("查看"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
         "vocabulary_str": MessageLookupByLibrary.simpleMessage("閱讀"),
         "warning": MessageLookupByLibrary.simpleMessage("警告"),
@@ -688,6 +697,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "word_str": MessageLookupByLibrary.simpleMessage("单词"),
         "world_countries_details":
             MessageLookupByLibrary.simpleMessage("世界各国详情"),
+        "you_are_ready_finish_test":
+            MessageLookupByLibrary.simpleMessage("您确定要提交测试吗？"),
         "you_do_have_an_account":
             MessageLookupByLibrary.simpleMessage("您有帐户吗？"),
         "you_do_not_have_an_account":

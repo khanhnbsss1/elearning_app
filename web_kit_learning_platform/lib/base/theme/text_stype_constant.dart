@@ -81,6 +81,8 @@ class TextStyleConstant{
   static 	TextStyle  textStyleBlack12w600 = baseStyle.copyWithCustom(fontSize: fontSize12, color: ColorConst.blackColor, fontWeight: fontWeight600);
   static 	TextStyle  textStyleBlack12w800 = baseStyle.copyWithCustom(fontSize: fontSize12, color: ColorConst.blackColor, fontWeight: fontWeight800);
 
+  static 	TextStyle  textStyleBlack13w600 = baseStyle.copyWithCustom(fontSize: fontSize13, color: ColorConst.blackColor, fontWeight: fontWeight600);
+
   static 	TextStyle  textStyleBlack13w500 = baseStyle.copyWithCustom(fontSize: fontSize13, color: ColorConst.blackColor, fontWeight: fontWeight500);
   static 	TextStyle  textStyleBlack13w400 = baseStyle.copyWithCustom(fontSize: fontSize13, color: ColorConst.blackColor, fontWeight: fontWeight400);
   static 	TextStyle  textStyleBlack14w300 = baseStyle.copyWithCustom(fontSize: fontSize14, color: ColorConst.blackColor, fontWeight: fontWeight300);
@@ -156,7 +158,7 @@ class TextStyleConstant{
      fontSize16 = Dimens.size17;
      fontSize15 = Dimens.size16;
      fontSize14 = Dimens.size15;
-     fontSize13 = Dimens.size14;
+     fontSize13 = Dimens.size13;
      fontSize12 = Dimens.size12;
      fontSize10 = Dimens.size10;
      fontSize28 = Dimens.size28;
@@ -192,7 +194,7 @@ class TextStyleConstant{
      textStyleBlack12w500 = baseStyle.copyWithCustom(fontSize: fontSize12, color: ColorConst.blackColor, fontWeight: fontWeight500);
      textStyleBlack12w600 = baseStyle.copyWithCustom(fontSize: fontSize12, color: ColorConst.blackColor, fontWeight: fontWeight600);
      textStyleBlack12w800 = baseStyle.copyWithCustom(fontSize: fontSize12, color: ColorConst.blackColor, fontWeight: fontWeight800);
-
+     textStyleBlack13w600 = baseStyle.copyWithCustom(fontSize: fontSize13, color: ColorConst.blackColor, fontWeight: fontWeight600);
      textStyleBlack13w500 = baseStyle.copyWithCustom(fontSize: fontSize13, color: ColorConst.blackColor, fontWeight: fontWeight500);
      textStyleBlack13w400 = baseStyle.copyWithCustom(fontSize: fontSize13, color: ColorConst.blackColor, fontWeight: fontWeight400);
      textStyleBlack14w300 = baseStyle.copyWithCustom(fontSize: fontSize14, color: ColorConst.blackColor, fontWeight: fontWeight300);

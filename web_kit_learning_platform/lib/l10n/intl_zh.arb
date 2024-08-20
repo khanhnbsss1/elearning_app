@@ -594,5 +594,13 @@
   "feelings_str":"感受",
   "achievements_str":"成就",
   "choosed_str": "已选择",
-  "learned_str": "已学习"
+  "learned_str": "已学习",
+  "begin_start_test": "开始测试",
+  "finished_str": "完成",
+  "view_str": "查看",
+  "start_test": "测试",
+  "start_test_confirm": "您确定要执行本次测试吗，执行时间为：",
+  "you_are_ready_finish_test": "您确定要提交测试吗？",
+  "manage_str": "管理",
+  "time_test_end": "测试时间已结束，无法继续测试，请提交测试"
 }

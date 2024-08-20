@@ -599,6 +599,13 @@
   "feelings_str":"Feelings",
   "achievements_str":"Achievements",
   "choosed_str": "Choosed",
-  "learned_str": "Learned"
-  
+  "learned_str": "Learned",
+  "begin_start_test": "Start test",
+  "finished_str": "Finished",
+  "view_str": "View",
+  "start_test": "Do the test",
+  "start_test_confirm": "Are you sure you want to run this test, the time taken is: ",
+  "you_are_ready_finish_test": "Bạn có chắc chắn muốn nộp bài !",
+  "manage_str": "Manage",
+  "time_test_end": "The test time has expired, you cannot continue the test, please submit your test"
 }

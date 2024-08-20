@@ -141,6 +141,7 @@ dependencies:
   syncfusion_flutter_datagrid: ^26.2.9
   drop_down_search_field: ^1.0.4
   flutter_rating_bar: ^4.0.1
+  flutter_timer_countdown: ^1.0.7
 dependency_overrides:
  # file_picker: ^8.1.2
  # google_maps_flutter: ^2.7.0

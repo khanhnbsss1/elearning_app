@@ -19,6 +19,7 @@ class CourseDetailState extends Equatable {
   LessonInfo? selectLessonInfo;
   List<bool>? showSubject = [];
   List<List<bool>>?checkLecture = [];
+  bool? awaitCallApi;
   CourseDetailState({
     this.blocStatus,
     this.courseInfo,
@@ -26,12 +27,14 @@ class CourseDetailState extends Equatable {
     this.courseResult,
     this.selectLessonInfo,
     this.checkLecture,
-    this.showSubject
+    this.showSubject,
+    this.awaitCallApi
 
   }){
     courseInfo??=CourseInfo.initial();
     checkLecture??=[];
     showSubject??=[];
+    awaitCallApi??=false;
   }
 
 

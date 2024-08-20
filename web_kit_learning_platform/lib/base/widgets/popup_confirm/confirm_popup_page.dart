@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 
 import '../../base.export.dart';
 class ConfirmPopupPage extends StatefulWidget{
@@ -10,9 +11,10 @@ class ConfirmPopupPage extends StatefulWidget{
         builder: (context) => this);
   }
   void Function()? onAccept;
+  void Function()? onCancel;
   String? title;
   String? content;
-  ConfirmPopupPage({super.key, this.onAccept, this.content, this.title});
+  ConfirmPopupPage({super.key, this.onAccept, this.content, this.title, this.onCancel});
 
   @override
   State<StatefulWidget> createState() {
@@ -51,58 +53,68 @@ class ConfirmPopupPageState extends State<ConfirmPopupPage> with SingleTickerPro
     
     return ScaleTransition(
       scale: scaleAnimation,
-      child: CustomDialog1(
-          title: widget.title,
-          titleAlignment: MainAxisAlignment.center,
-          insetPadding: EdgeInsets.zero,
-          width: MediaQuery.of(context).size.width*(!isTablet? 0.9: 0.3),
-          enableBackButton: false,
-          enableCloseButton: true,
-          mainAxisSizeParent: MainAxisSize.min,
-          bodyBackGroundColor: ColorConst.whiteColor,
-          enableHeaderDivider: true,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30),
-                child: Center(
-                  child: Text(
-                      widget.content??"",
-                      textAlign: TextAlign.center,
-                      style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
-                  ),),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ActionButton1(
-                        width: Dimens.size120,
-                        onTap: () async {
-                          Navigator.of(context).pop();
-                        },
-                        text: S.of(context).str_cancel,
-                        enableBgColor: ColorConst.whiteColor,
-                        textStype: TextStyleConstant.textStyleBlack16w600,
-                        height: Dimens.size40),
-                    Gap(Dimens.size20),
-                    ActionButton1(
-                        width: Dimens.size120,
-                        onTap: () async {
-                          Navigator.of(context).pop();
-                          if(widget.onAccept!=null)
-                            {
-                              widget.onAccept!();
-                            }
-                        },
-                        text: S.of(context).str_accept,
-                        height: Dimens.size40),
-                  ],
+      child: PointerInterceptor(
+        child: CustomDialog1(
+            title: widget.title,
+            titleAlignment: MainAxisAlignment.center,
+            insetPadding: EdgeInsets.zero,
+            width: MediaQuery.of(context).size.width*(!isTablet? 0.9: 0.3),
+            enableBackButton: false,
+            enableCloseButton: true,
+            mainAxisSizeParent: MainAxisSize.min,
+            bodyBackGroundColor: ColorConst.whiteColor,
+            enableHeaderDivider: true,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30),
+                  child: Center(
+                    child: Text(
+                        widget.content??"",
+                        textAlign: TextAlign.center,
+                        style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                    ),),
                 ),
-              )
-            ],
-          )
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ActionButton1(
+                          width: Dimens.size120,
+                          onTap: () async {
+                            if(widget.onCancel!=null)
+                              {
+                                widget.onCancel!();
+                              }
+                            else
+                              {
+                                Navigator.of(context).pop();
+
+                              }
+                          },
+                          text: S.of(context).str_cancel,
+                          enableBgColor: ColorConst.whiteColor,
+                          textStype: TextStyleConstant.textStyleBlack16w600,
+                          height: Dimens.size40),
+                      Gap(Dimens.size20),
+                      ActionButton1(
+                          width: Dimens.size120,
+                          onTap: () async {
+                            Navigator.of(context).pop();
+                            if(widget.onAccept!=null)
+                              {
+                                widget.onAccept!();
+                              }
+                          },
+                          text: S.of(context).str_accept,
+                          height: Dimens.size40),
+                    ],
+                  ),
+                )
+              ],
+            )
+        ),
       ),
     );
   }

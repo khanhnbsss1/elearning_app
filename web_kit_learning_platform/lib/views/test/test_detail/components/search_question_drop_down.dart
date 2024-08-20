@@ -2,6 +2,7 @@ import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
@@ -152,45 +153,53 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
                     itemBuilder: (context, suggestion) {
                       return OnHoverWidget(
                         builder: (bool isHovered) {
-                          return  Container(
-                            decoration: BoxDecoration(
-                                color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
-                                border: Border(
-                                    bottom: BorderSide(color: ColorConst.dividerColor)
-                                )
-                            ),
-                            child: ListTile(
-                              leading: Icon(Icons.book),
-                              title: Text(suggestion.questionName??""),
+                          return  PointerInterceptor(
+                            child: InkWell(
+                              onTap: () {
+                                if(onSelectWord!=null)
+                                {
+                                  //_wordDropdownSearchFieldController.text = suggestion.simplified??"";
+                                  onSelectWord(suggestion);
+                                }
+                                else
+                                {
+                                  ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                                }
+                                print("object");
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
+                                    border: Border(
+                                        bottom: BorderSide(color: ColorConst.dividerColor)
+                                    )
+                                ),
+                                child: ListTile(
+                                  leading: Icon(Icons.book),
+                                  title: Text(suggestion.questionName??""),
+                                ),
+                              ),
                             ),
                           );
                         },
                       );
                     },
                     onSuggestionSelected: (suggestion) {
-                      if(onSelectWord!=null)
-                      {
-                        //_wordDropdownSearchFieldController.text = suggestion.simplified??"";
-                        onSelectWord(suggestion);
-                      }
-                      else
-                      {
-                        ToastUtils.showToastError(L10nX.getStr.unknown_str);
-                      }
-                      print("object");
                     },
                     transitionBuilder: (context, child, controller) {
-                      return Container(
-                        constraints: BoxConstraints(
-                            maxHeight: Dimens.size300
+                      return PointerInterceptor(
+                        child: Container(
+                          constraints: BoxConstraints(
+                              maxHeight: Dimens.size300
+                          ),
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                              color: ColorConst.whiteColor,
+                              borderRadius: BorderRadius.circular(Dimens.size10)
+                          ),
+                          padding: EdgeInsets.all(Dimens.size8),
+                          child: child,
                         ),
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                            color: ColorConst.whiteColor,
-                            borderRadius: BorderRadius.circular(Dimens.size10)
-                        ),
-                        padding: EdgeInsets.all(Dimens.size8),
-                        child: child,
                       );
                     },
                     displayAllSuggestionWhenTap: false,

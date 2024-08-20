@@ -188,40 +188,43 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                     child: Row(
                       children: [
                         Expanded(
-                          child: TextFormField(
-                            maxLines: 1,
-                            controller: textEditingController,
-                            onChanged: (value) {
-
-                            },
-                            onFieldSubmitted: (value) {
-                              BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
-                            },
-                            onTapOutside: (event) {
-                            },
-                            style: MyTextStyle.bodyMedium(),
-                            decoration: InputDecoration(
-                                hintText: L10nX.getStr.search,
-                                fillColor: ColorConst.whiteColor,
-                                filled: true,
-                                hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                                border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                prefixIcon: const Align(
-                                    alignment: Alignment.center,
-                                    child: Icon(
-                                      LucideIcons.search,
-                                      size: 14,
-                                    )),
-                                prefixIconConstraints: const BoxConstraints(
-                                    minWidth: 36,
-                                    maxWidth: 36,
-                                    minHeight: 32,
-                                    maxHeight: 32),
-                                contentPadding: MySpacing.xy(16, 12),
-                                //isCollapsed: true,
-                                floatingLabelBehavior: FloatingLabelBehavior.auto),
+                          child: SizedBox(
+                            height:Dimens.size45,
+                            child: TextFormField(
+                              maxLines: 1,
+                              controller: textEditingController,
+                              onChanged: (value) {
+                            
+                              },
+                              onFieldSubmitted: (value) {
+                                BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                              },
+                              onTapOutside: (event) {
+                              },
+                              style: MyTextStyle.bodyMedium(),
+                              decoration: InputDecoration(
+                                  hintText: L10nX.getStr.search,
+                                  fillColor: ColorConst.whiteColor,
+                                  filled: true,
+                                  hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                                  border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                  enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                  focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
+                                  prefixIcon: const Align(
+                                      alignment: Alignment.center,
+                                      child: Icon(
+                                        LucideIcons.search,
+                                        size: 14,
+                                      )),
+                                  prefixIconConstraints: const BoxConstraints(
+                                      minWidth: 36,
+                                      maxWidth: 36,
+                                      minHeight: 32,
+                                      maxHeight: 32),
+                                  contentPadding: MySpacing.xy(16, 12),
+                                  //isCollapsed: true,
+                                  floatingLabelBehavior: FloatingLabelBehavior.auto),
+                            ),
                           ),
                         ),
                       ],

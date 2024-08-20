@@ -254,7 +254,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(child: buildTags(state: state, context: context)),
-                Expanded(child: buildLectureTest(state: state, context: context)),
+                Expanded(child: buildCourseTest(state: state, context: context)),
               ],
             ),
           ],
@@ -297,7 +297,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           MySpacing.height(16),
           buildPaymentWidget(state: state, context: context),
           MySpacing.height(16),
-          buildLectureTest(state: state, context: context),
+          buildCourseTest(state: state, context: context),
           MySpacing.height(16),
           buildTags(state: state, context: context),
           MySpacing.height(20),
@@ -999,11 +999,13 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           ));
     }
   }
-  Widget buildLectureTest({required BuildContext context, required AddCourseState state}) {
+  Widget buildCourseTest({required BuildContext context, required AddCourseState state}) {
     return WidgetWithColumnTitleCommon(
       title: L10nX.getStr.output_test_str,
       isRequirement: true,
       child: SearchTestDropDown(
+       // key: UniqueKey(),
+        testInfo: state.testInfo,
         onSelectTest: (testInfo) {
           BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateTestInfoEvent(testInfo: testInfo));
         },

@@ -88,6 +88,10 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
         CourseDetailApi courseDetailApi = CourseDetailApi(courseId: state.courseInfo!.id!);
         CourseInfo courseInfo = await courseDetailApi.call();
         state.courseInfo = courseInfo;
+        if(state.courseInfo?.testId!=null)
+          {
+            state.testInfo = TestInfo(id: state.courseInfo?.testId??0, name:  state.courseInfo?.testName??"");
+          }
         for(LessonInfo lessonInfo in state.courseInfo?.lectures??[]){
           if(lessonInfo.subName!=null && !state.subjectList!.contains(lessonInfo.subName) && lessonInfo.subName!.isNotEmpty)
             {
@@ -183,7 +187,8 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
         blocStatus:  AddCourseStatus.initial,
       courseInfo: state.courseInfo,
       subjectList: state.subjectList,
-      controller: state.controller
+      controller: state.controller,
+      testInfo: state.testInfo
     ));
   }
   

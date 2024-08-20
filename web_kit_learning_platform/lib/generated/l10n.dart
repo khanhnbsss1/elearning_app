@@ -5969,6 +5969,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Start test`
+  String get begin_start_test {
+    return Intl.message(
+      'Start test',
+      name: 'begin_start_test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Finished`
+  String get finished_str {
+    return Intl.message(
+      'Finished',
+      name: 'finished_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View`
+  String get view_str {
+    return Intl.message(
+      'View',
+      name: 'view_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do the test`
+  String get start_test {
+    return Intl.message(
+      'Do the test',
+      name: 'start_test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to run this test, the time taken is: `
+  String get start_test_confirm {
+    return Intl.message(
+      'Are you sure you want to run this test, the time taken is: ',
+      name: 'start_test_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bạn có chắc chắn muốn nộp bài !`
+  String get you_are_ready_finish_test {
+    return Intl.message(
+      'Bạn có chắc chắn muốn nộp bài !',
+      name: 'you_are_ready_finish_test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manage`
+  String get manage_str {
+    return Intl.message(
+      'Manage',
+      name: 'manage_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The test time has expired, you cannot continue the test, please submit your test`
+  String get time_test_end {
+    return Intl.message(
+      'The test time has expired, you cannot continue the test, please submit your test',
+      name: 'time_test_end',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -2,6 +2,7 @@ import 'package:drop_down_search_field/drop_down_search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
@@ -18,7 +19,7 @@ import 'package:webkit/views/vocabulary/vocabulary_detail/create_edit_words.dart
 class SearchTestDropDown extends StatefulWidget {
   final Function(TestInfo) onSelectTest;
   TestInfo  ?testInfo;
-  SearchTestDropDown({required this.onSelectTest, this.testInfo});
+  SearchTestDropDown({super.key, required this.onSelectTest, this.testInfo});
 
   @override
   _MyDropdownButtonState createState() => _MyDropdownButtonState();
@@ -36,6 +37,15 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
       {
         _wordDropdownSearchFieldController.text = widget.testInfo?.name??"";
       }
+  }
+  @override
+  void didUpdateWidget(covariant SearchTestDropDown oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    if(widget.testInfo!=null)
+    {
+      _wordDropdownSearchFieldController.text = widget.testInfo?.name??"";
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -69,7 +79,7 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
                 builder: (BuildContext context, void Function(void Function()) setState) {
                   return DropDownSearchFormField(
                     textFieldConfiguration: TextFieldConfiguration(
-                      autofocus: true,
+                      autofocus: false,
                       controller: _wordDropdownSearchFieldController,
                       style: DefaultTextStyle.of(context).style.copyWith(
                           fontStyle: FontStyle.italic
@@ -103,32 +113,39 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
                     itemBuilder: (context, suggestion) {
                       return OnHoverWidget(
                         builder: (bool isHovered) {
-                          return  Container(
-                            decoration: BoxDecoration(
-                                color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
-                                border: Border(
-                                    bottom: BorderSide(color: ColorConst.dividerColor)
-                                )
-                            ),
-                            child: ListTile(
-                              leading: Icon(Icons.book),
-                              title: Text(suggestion.name??""),
+                          return  PointerInterceptor(
+                            child: InkWell(
+                              onTap: () {
+                                if(onSelectWord!=null)
+                                {
+                                  _wordDropdownSearchFieldController.text = suggestion.name??"";
+                                  onSelectWord(suggestion);
+                                }
+                                else
+                                {
+                                  ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                                }
+                                print("object");
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
+                                    border: Border(
+                                        bottom: BorderSide(color: ColorConst.dividerColor)
+                                    )
+                                ),
+                                child: ListTile(
+                                  leading: Icon(Icons.book),
+                                  title: Text(suggestion.name??""),
+                                ),
+                              ),
                             ),
                           );
                         },
                       );
                     },
                     onSuggestionSelected: (suggestion) {
-                      if(onSelectWord!=null)
-                      {
-                        _wordDropdownSearchFieldController.text = suggestion.name??"";
-                        onSelectWord(suggestion);
-                      }
-                      else
-                      {
-                        ToastUtils.showToastError(L10nX.getStr.unknown_str);
-                      }
-                      print("object");
+                     
                     },
                     transitionBuilder: (context, child, controller) {
                       return Container(

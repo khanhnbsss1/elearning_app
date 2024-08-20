@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:webkit/base/base.export.dart';
@@ -27,7 +26,6 @@ class QuestionWorkItem extends StatefulWidget {
   QuestionInfo questionInfo;
   bool? enableCloseButton;
   bool? enableShowResultAnswer;
-  AnswerInfo? rightAnswerInfo;
   Function(QuestionInfo)? onChangeAnswer;
   int? questionIndex;
   bool? isSelect;
@@ -37,16 +35,12 @@ class QuestionWorkItem extends StatefulWidget {
     this.onChangeAnswer, 
     this.isSelect,
     this.enableShowResultAnswer,
-    this.rightAnswerInfo,
     this.questionIndex
   }) {
     enableCloseButton ??= false;
     enableShowResultAnswer??false;
     questionIndex??=0;
-    if((questionInfo.answerGetDetail??[]).isNotEmpty && ((questionInfo.answerGetDetail??[]).where((element) => element.rightAnswer ==1).isNotEmpty))
-      {
-        rightAnswerInfo=(questionInfo.answerGetDetail??[]).where((element) => element.rightAnswer ==1).first;
-      }
+
   }
   @override
   State<StatefulWidget> createState() {
@@ -57,7 +51,17 @@ class QuestionWorkItem extends StatefulWidget {
 
 class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
   TextEditingController controller = TextEditingController();
+  AnswerInfo? rightAnswerInfo;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if((widget.questionInfo.answerGetDetail??[]).isNotEmpty && ((widget.questionInfo.answerGetDetail??[]).where((element) => element.rightAnswer ==1).isNotEmpty))
+    {
+      rightAnswerInfo=(widget.questionInfo.answerGetDetail??[]).where((element) => element.rightAnswer ==1).first;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -67,7 +71,7 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
         decoration: BoxDecoration(
             color: ColorConst.whiteColor,
             borderRadius: BorderRadius.circular(Dimens.size16),
-          border: Border.all(color: ColorConst.greyColor, width: 0.1)
+          border: Border.all(color: ColorConst.greyColor, width: 0.5)
         ),
         padding: EdgeInsets.all(Dimens.size16),
         constraints: BoxConstraints(
@@ -124,156 +128,159 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
       return Center(child: NoData());
     }
     int itemHeight = (widget.questionInfo.answerGetDetail ?? []).first.answerType == AnswerType.image ? 120 : 90;
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        if(widget.questionInfo.questionType ==QuestionType.fill )
-          {
-            return Column(
-              children: [
-                Row(
-                  children: [
-                    Text("${L10nX.getStr.answer_str_1}: ", style: TextStyleConstant.textStyleBlack14w400,),
-                    Gap(Dimens.size12),
-                    Expanded(
-                      child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        controller: controller,
-                        onTapOutside: (event) {
-                          if(widget.onChangeAnswer!=null && widget.questionInfo.questionType == QuestionType.fill)
-                          {
-                            widget.questionInfo.answerChoose = controller.text;
-                            widget.onChangeAnswer!(widget.questionInfo);
-                          }
-                        },
-                        onChanged: (value) {
-                          if(widget.onChangeAnswer!=null && widget.questionInfo.questionType == QuestionType.fill)
-                          {
-                            widget.questionInfo.answerChoose = controller.text;
-                            widget.onChangeAnswer!(widget.questionInfo);
-                          }
-                        },
-                        decoration: InputDecoration(
-                          labelText: "${L10nX.getStr.answer_str_1}...",
-                          labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                          border: outlineInputBorder,
-                          contentPadding: MySpacing.all(16),
-                          isCollapsed: true,
-                          floatingLabelBehavior: FloatingLabelBehavior.never,
+    return Padding(
+      padding:  EdgeInsets.symmetric(horizontal: Dimens.size16),
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          if(widget.questionInfo.questionType ==QuestionType.fill )
+            {
+              return Column(
+                children: [
+                  Row(
+                    children: [
+                      Text("${L10nX.getStr.answer_str_1}: ", style: TextStyleConstant.textStyleBlack14w400,),
+                      Gap(Dimens.size12),
+                      Expanded(
+                        child: TextFormField(
+                          keyboardType: TextInputType.text,
+                          controller: controller,
+                          onTapOutside: (event) {
+                            if(widget.onChangeAnswer!=null && widget.questionInfo.questionType == QuestionType.fill)
+                            {
+                              widget.questionInfo.answerChoose = controller.text;
+                              widget.onChangeAnswer!(widget.questionInfo);
+                            }
+                          },
+                          onChanged: (value) {
+                            if(widget.onChangeAnswer!=null && widget.questionInfo.questionType == QuestionType.fill)
+                            {
+                              widget.questionInfo.answerChoose = controller.text;
+                              widget.onChangeAnswer!(widget.questionInfo);
+                            }
+                          },
+                          decoration: InputDecoration(
+                            labelText: "${L10nX.getStr.answer_str_1}...",
+                            labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                            border: outlineInputBorder,
+                            contentPadding: MySpacing.all(16),
+                            isCollapsed: true,
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                buildCorrectAnswer()
-
-              ],
-            );
-          }
-        
-        return GridView.builder(
-          shrinkWrap: true,
-          itemCount: (widget.questionInfo.answerGetDetail ?? []).length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-            childAspectRatio: constraints.maxWidth / 2 / itemHeight,
-          ),
-          itemBuilder: (context, index) {
-            AnswerInfo answerInfo = (widget.questionInfo.answerGetDetail ?? []).elementAt(index);
-            bool isChoose = widget.questionInfo.answerIdChoose == answerInfo.answerId;
-            return Visibility(
-              visible: widget.questionInfo.questionType != QuestionType.fill,
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Visibility(
-                    visible: widget.enableShowResultAnswer==true,
-                    child: SizedBox(
-                      width: Dimens.size20,
-                      height: Dimens.size20,
-                      child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) { 
-                        bool isRightAnswer=  answerInfo.rightAnswer == 1;
-                        int radioState =0; ///0: chọn đúng, 1: Chọn sai, 2, không chọn
-                        if(isRightAnswer)
-                          {
-                            radioState = 0;
-                          }
-                        else if(!isRightAnswer && isChoose){
-                          radioState = 1;
-                        }
-                        else
-                          {
-                            radioState = 2;
-                          }
-                        return Icon(
-                            (radioState==0 || radioState==1?Icons.check_circle : Icons.radio_button_off),
-                          color: (radioState ==0 ? Colors.green:
-                          (radioState==1?ColorConst.colorIconRed:
-                          ColorConst.colorIconGrays))
-                        );
-                      },
-                      ),
-                    ),
+                    ],
                   ),
-                  Visibility(
-                    visible: widget.enableShowResultAnswer!=true,
-                    child: InkWell(
-                      onTap: () {
-                        if (widget.onChangeAnswer != null) {
-                          setState(() {
-                            widget.questionInfo.answerIdChoose = answerInfo.answerId;
-                            widget.onChangeAnswer!(widget.questionInfo);
-                          });
-                        }
-                      },
+                  buildCorrectAnswer()
+      
+                ],
+              );
+            }
+          
+          return GridView.builder(
+            shrinkWrap: true,
+            itemCount: (widget.questionInfo.answerGetDetail ?? []).length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+              childAspectRatio: constraints.maxWidth / 2 / itemHeight,
+            ),
+            itemBuilder: (context, index) {
+              AnswerInfo answerInfo = (widget.questionInfo.answerGetDetail ?? []).elementAt(index);
+              bool isChoose = widget.questionInfo.answerIdChoose == answerInfo.answerId;
+              return Visibility(
+                visible: widget.questionInfo.questionType != QuestionType.fill,
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Visibility(
+                      visible: widget.enableShowResultAnswer==true,
                       child: SizedBox(
                         width: Dimens.size20,
                         height: Dimens.size20,
-                        child: Icon(
-                          isChoose ? Icons.radio_button_checked : Icons.radio_button_off,
-                          color: ColorConst.colorIconGrays,
+                        child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) { 
+                          bool isRightAnswer=  answerInfo.rightAnswer == 1;
+                          int radioState =0; ///0: chọn đúng, 1: Chọn sai, 2, không chọn
+                          if(isRightAnswer)
+                            {
+                              radioState = 0;
+                            }
+                          else if(!isRightAnswer && isChoose){
+                            radioState = 1;
+                          }
+                          else
+                            {
+                              radioState = 2;
+                            }
+                          return Icon(
+                              (radioState==0 || radioState==1?Icons.check_circle : Icons.radio_button_off),
+                            color: (radioState ==0 ? Colors.green:
+                            (radioState==1?ColorConst.colorIconRed:
+                            ColorConst.colorIconGrays))
+                          );
+                        },
                         ),
                       ),
                     ),
-                  ),
-                  Gap(
-                    Dimens.size16,
-                  ),
-                  Expanded(
-                      child: Stack(
-                        children: [
-                          Visibility(
-                              visible: answerInfo.answerType == AnswerType.text,
-                              child: Text(
-                                answerInfo.name ?? "",
-                                style: TextStyleConstant.textStyleBlack14w400,
-                              )),
-                          Visibility(
-                              visible: answerInfo.answerType == AnswerType.audio,
-                              child: AudioSpeaker(
-                                url: answerInfo.name ?? "",
-                              )),
-                          Visibility(
-                              visible: answerInfo.answerType == AnswerType.image, 
-                              child: SizedBox(width: Dimens.size120, height: Dimens.size100, child: ImageManager().getImageByUrl(answerInfo.name ?? ""))),
-                        ],
-                      ))
-                ],
-              ),
-            );
-          },
-        );
-      },
+                    Visibility(
+                      visible: widget.enableShowResultAnswer!=true,
+                      child: InkWell(
+                        onTap: () {
+                          if (widget.onChangeAnswer != null) {
+                            setState(() {
+                              widget.questionInfo.answerIdChoose = answerInfo.answerId;
+                              widget.onChangeAnswer!(widget.questionInfo);
+                            });
+                          }
+                        },
+                        child: SizedBox(
+                          width: Dimens.size20,
+                          height: Dimens.size20,
+                          child: Icon(
+                            isChoose ? Icons.radio_button_checked : Icons.radio_button_off,
+                            color: ColorConst.colorIconGrays,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Gap(
+                      Dimens.size16,
+                    ),
+                    Expanded(
+                        child: Stack(
+                          children: [
+                            Visibility(
+                                visible: answerInfo.answerType == AnswerType.text,
+                                child: Text(
+                                  answerInfo.name ?? "",
+                                  style: TextStyleConstant.textStyleBlack14w400,
+                                )),
+                            Visibility(
+                                visible: answerInfo.answerType == AnswerType.audio,
+                                child: AudioSpeaker(
+                                  url: answerInfo.name ?? "",
+                                )),
+                            Visibility(
+                                visible: answerInfo.answerType == AnswerType.image, 
+                                child: SizedBox(width: Dimens.size120, height: Dimens.size100, child: ImageManager().getImageByUrl(answerInfo.name ?? ""))),
+                          ],
+                        ))
+                  ],
+                ),
+              );
+            },
+          );
+        },
+      ),
     );
   }
   Widget buildCorrectAnswer(){
     return Visibility(
       visible: (widget.questionInfo.questionType == QuestionType.fill)&&
           (widget.enableShowResultAnswer??false) && 
-          widget.rightAnswerInfo!=null,
+          rightAnswerInfo!=null,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -286,7 +293,7 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
             children: [
               Text(L10nX.getStr.right_answer, style: TextStyleConstant.textStyleBlack14w400,),
               Gap(Dimens.size8),
-              Text(widget.rightAnswerInfo?.name??"", style: TextStyleConstant.textStyleBlack14w400,)
+              Text(rightAnswerInfo?.name??"", style: TextStyleConstant.textStyleBlack14w400,)
             ],
           ),
         ],

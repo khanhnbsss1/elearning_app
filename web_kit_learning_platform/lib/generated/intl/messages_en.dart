@@ -92,6 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "basic_input": MessageLookupByLibrary.simpleMessage("Basic input"),
         "basic_table": MessageLookupByLibrary.simpleMessage("Basic table"),
         "basic_tables": MessageLookupByLibrary.simpleMessage("Basic tables"),
+        "begin_start_test": MessageLookupByLibrary.simpleMessage("Start test"),
         "blog": MessageLookupByLibrary.simpleMessage("Blog"),
         "border_type": MessageLookupByLibrary.simpleMessage("Border type"),
         "bordered": MessageLookupByLibrary.simpleMessage("Bordered"),
@@ -247,6 +248,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fill_type_str": MessageLookupByLibrary.simpleMessage("Fill in word"),
         "filled": MessageLookupByLibrary.simpleMessage("Filled"),
         "finish": MessageLookupByLibrary.simpleMessage("Finish"),
+        "finished_str": MessageLookupByLibrary.simpleMessage("Finished"),
         "first_name": MessageLookupByLibrary.simpleMessage("First name"),
         "flat_button": MessageLookupByLibrary.simpleMessage("Flat button"),
         "floating_label_type":
@@ -322,6 +324,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "login_your_account":
             MessageLookupByLibrary.simpleMessage("Login your account"),
+        "manage_str": MessageLookupByLibrary.simpleMessage("Manage"),
         "map": MessageLookupByLibrary.simpleMessage("Map"),
         "maximum_point": MessageLookupByLibrary.simpleMessage("Maximum score"),
         "meaning_str": MessageLookupByLibrary.simpleMessage("Meaning"),
@@ -545,6 +548,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "sound_str": MessageLookupByLibrary.simpleMessage("Sound"),
         "standard": MessageLookupByLibrary.simpleMessage("Standard"),
         "standard_str": MessageLookupByLibrary.simpleMessage("Standard"),
+        "start_test": MessageLookupByLibrary.simpleMessage("Do the test"),
+        "start_test_confirm": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to run this test, the time taken is: "),
         "starter": MessageLookupByLibrary.simpleMessage("Starter"),
         "static": MessageLookupByLibrary.simpleMessage("Static"),
         "static_dialog": MessageLookupByLibrary.simpleMessage("Static dialog"),
@@ -680,6 +686,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "time_out_connection": MessageLookupByLibrary.simpleMessage(
             "Timeout exceeded, please check your network connection"),
         "time_str": MessageLookupByLibrary.simpleMessage("Time"),
+        "time_test_end": MessageLookupByLibrary.simpleMessage(
+            "The test time has expired, you cannot continue the test, please submit your test"),
         "timeout": MessageLookupByLibrary.simpleMessage("Timeout"),
         "title_popup_biometric":
             MessageLookupByLibrary.simpleMessage("Log in with biometrics"),
@@ -740,6 +748,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Video preview"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "view_all": MessageLookupByLibrary.simpleMessage("View all"),
+        "view_str": MessageLookupByLibrary.simpleMessage("View"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
         "vocabulary_str": MessageLookupByLibrary.simpleMessage("Vocabulary"),
         "warning": MessageLookupByLibrary.simpleMessage("Warning"),
@@ -817,6 +826,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "word_str": MessageLookupByLibrary.simpleMessage("Word"),
         "world_countries_details":
             MessageLookupByLibrary.simpleMessage("World countries details"),
+        "you_are_ready_finish_test": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn nộp bài !"),
         "you_do_have_an_account":
             MessageLookupByLibrary.simpleMessage("Do you have an account?"),
         "you_do_not_have_an_account": MessageLookupByLibrary.simpleMessage(

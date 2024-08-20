@@ -599,5 +599,13 @@
   "feelings_str":"Cảm nhận",
   "achievements_str":"Thành tích",
   "choosed_str": "Đã chọn",
-  "learned_str": "Đã học"
+  "learned_str": "Đã học",
+  "begin_start_test": "Bắt đầu làm bài",
+  "finished_str": "Đã hoàn thành",
+  "view_str": "Xem",
+  "start_test": "Làm bài",
+  "start_test_confirm": "Bạn có chắc chắn muốn thực hiện bài kiểm tra này, thời gian thực hiện là: ",
+  "you_are_ready_finish_test": "Bạn có chắc chắn muốn nộp bài !",
+  "manage_str": "Quản lý",
+  "time_test_end": "Thời gian làm bài đã hết, bạn không thể tiếp tục làm bài nữa, vui lòng nộp bài"
 }

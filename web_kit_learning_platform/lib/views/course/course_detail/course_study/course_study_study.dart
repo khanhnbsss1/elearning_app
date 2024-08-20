@@ -3,14 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gap/gap.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/base/store/save_file.dart';
 import 'package:webkit/base/widgets/common/alert_dialog/loading.export.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/test/models/test_info.dart';
 import 'package:webkit/services/apis/topic/model/topic_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/views/apps/file/file_manager.dart';
 import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
 import 'package:webkit/views/course/course_detail/course_study/subject_item_widget.dart';
+import 'package:webkit/views/test/test_detail_work/test_work_page.dart';
 import 'package:webkit/views/vocabulary/vocabulary_detail/vocabulary_view_detail.dart';
 
 import '../../../../base/widgets/audio/audio_speaker.dart';
@@ -81,7 +84,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                       constraints: BoxConstraints(
                         minHeight: MediaQuery.of(context).size.height
                       ),
-                      child: buildSubjectList()),
+                      child: buildSubjectAndTestList()),
                   body: Padding(
                     padding:  EdgeInsets.only(top: myScreenMediaType.isMobile?0:50),
                     child: Stack(
@@ -104,7 +107,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                                       padding: const EdgeInsets.only(right: 14.0),
                                       child: Column(
                                         children: [
-                                          buildStudySection()
+                                          buildStudySection(context)
                                         ],
                                       ),
                                     ),
@@ -129,7 +132,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                                   child: SingleChildScrollView(
                                     child: Column(
                                       children: [
-                                        buildSubjectList(),
+                                        buildSubjectAndTestList(),
                                       ],
                                     ),
                                   ),
@@ -167,12 +170,13 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
     );
   }
 
-  Widget buildStudySection() {
+  Widget buildStudySection(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               buildVideo(),
               Padding(
@@ -182,7 +186,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                   children: [
                     buildStudyTitle(),
                     buildStudyUI(),
-                    buildQuiz(),
+                    buildTest(context),
                   ],
                 ),
               ),
@@ -256,7 +260,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   }
   
 
-  Widget buildSubjectList() {
+  Widget buildSubjectAndTestList() {
     return Container(
       width: Dimens.size400,
       decoration: BoxDecoration(
@@ -281,26 +285,40 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
               thickness: 10,
               trackVisibility: true,
               thumbVisibility: true,
-              child: ListView.builder(
-                controller: subjectScrollController,
-                shrinkWrap: true,
-                scrollDirection: Axis.vertical,
-                padding: EdgeInsets.zero,
-                itemCount: (_state.courseInfo?.getListSubjectAndLesson() ?? []).length,
-                itemBuilder: (context, subjectIndex) {
-                  Subjects subject = (_state.courseInfo?.getListSubjectAndLesson()??[]).elementAt(subjectIndex);
-                  return SubjectItemWidget(
-                    onFinishLecture: (p0) {
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ListView.builder(
+                    controller: subjectScrollController,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    padding: EdgeInsets.zero,
+                    itemCount: (_state.courseInfo?.getListSubjectAndLesson() ?? []).length,
+                    itemBuilder: (context, subjectIndex) {
+                      Subjects subject = (_state.courseInfo?.getListSubjectAndLesson()??[]).elementAt(subjectIndex);
+                      return SubjectItemWidget(
+                        onFinishLecture: (p0) {
+                          
+                        },
+                        onSelectLesson: (p0) {
+                          BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailSelectLessonEvent(selectLessonInfo: p0));
+                        },
+                        selectLessonInfo: _state.selectLessonInfo,
+                        subject: subject,
+                        subjectIndex: subjectIndex,
+                      );
+                    },
+                  ),
+                  TestItemWidget(
+                    testInfos: [
+                      TestInfo(id: _state.courseInfo?.testId, name:  _state.courseInfo?.testName??""),
+                    ],
+                    subjectIndex: 1, 
+                    onSelectTest: (testInfo ) {  
                       
                     },
-                    onSelectLesson: (p0) {
-                      BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailSelectLessonEvent(selectLessonInfo: p0));
-                    },
-                    selectLessonInfo: _state.selectLessonInfo,
-                    subject: subject,
-                    subjectIndex: subjectIndex,
-                  );
-                },
+                  )
+                ],
               ),
             ),
           ],
@@ -308,85 +326,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
       ),
     );
   }
-
-  Widget buildLessonItemList({required Subjects subject, required int subjectIndex, }) {
-    return AnimatedSize(
-      curve: Curves.fastOutSlowIn,
-      duration: Duration(milliseconds: 200),
-      child: _state.showSubject![subjectIndex]
-          ? Container(
-              margin: EdgeInsets.all(0),
-              constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
-              child: SingleChildScrollView(
-                // controller: subjectScrollController,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  // controller: subjectScrollController,
-                  itemCount: (subject.lectures ?? []).length,
-                  itemBuilder: (context, lectureIndex) {
-                    LessonInfo lessonInfo = (subject.lectures ?? []).elementAt(lectureIndex);
-                    bool isSelectLesson = lessonInfo.id == _state.selectLessonInfo?.id;
-                    return InkWell(
-                      onTap: () {
-                        BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailSelectLessonEvent(selectLessonInfo: lessonInfo));
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.symmetric(horizontal: 4),
-                            decoration: BoxDecoration(
-                              color: isSelectLesson?ColorConst.greyColor1.withOpacity(0.05): ColorConst.whiteColor,
-                              border: Border(bottom: BorderSide(color: ColorConst.blackColor,width: 0.2))
-                            ),
-                            padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size32),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    '${subjectIndex+1}.${lectureIndex+1}. ${lessonInfo.lectureName}',
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                Gap(Dimens.size10),
-                                InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      _state.checkLecture![subjectIndex][lectureIndex] = !_state.checkLecture![subjectIndex][lectureIndex];
-                                    });
-                                  },
-                                  child: Container(
-                                    width: 24,
-                                    height: 24,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                      color: ColorConst.colorIconGrays,
-                                    )),
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: _state.checkLecture![subjectIndex][lectureIndex]
-                                          ? Icon(
-                                              Icons.check,
-                                              color: Colors.red,
-                                            )
-                                          : SizedBox(),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ),
-            )
-          : SizedBox(),
-    );
-  }
-
+  
   Widget buildStudyUI() {
     return SingleChildScrollView(
       // controller: lessonDetailScrollController,
@@ -398,58 +338,77 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           ),
           Text(
             "${L10nX.getStr.introduction_str}: ",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.red,
-            ),
+            style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.red),
           ),
           SizedBox(
             height: 4,
           ),
-          Text(_state.selectLessonInfo?.note??""),
+          Padding(
+            padding:  EdgeInsets.symmetric(horizontal: Dimens.size16),
+            child: Text(_state.selectLessonInfo?.note??"",style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.red),),
+          ),
           SizedBox(
             height: 16,
           ),
-          Text(
-            "${L10nX.getStr.document_str}: ",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.red,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${L10nX.getStr.document_str}: ",
+                style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.red),
+              ),
+              SizedBox(
+                height: 4,
+              ),
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: Dimens.size16),
+                child: InkWell(
+                    onTap: () {
+                      if((_state.selectLessonInfo?.docLink??"").isNotEmpty) {
+                        FileStoreManager().downloadFileFromStream(url: _state.selectLessonInfo?.docLink??"", fileName:  _state.selectLessonInfo?.docName??"");
+                      }
+                    },
+                    child: Text(
+                      _state.selectLessonInfo?.docName??'',
+                      style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.blue),)),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+            ],
+          ),
+          
+
+          Visibility(
+            visible: (_state.selectLessonInfo?.vocabularies??[]).isNotEmpty,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${L10nX.getStr.vocabulary_str}: ",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red,
+                  ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Padding(
+                  padding:  EdgeInsets.symmetric(horizontal: Dimens.size16),
+                  child: ListView.builder(
+                      itemCount: (_state.selectLessonInfo?.vocabularies??[]).length,
+                      // controller: lessonDetailScrollController,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        VocabularyInfo vocabularyInfo = (_state.selectLessonInfo?.vocabularies??[]).elementAt(index);
+                        return buildWordItem(word: vocabularyInfo);
+                      }),
+                )
+              ],
             ),
           ),
-          SizedBox(
-            height: 4,
-          ),
-          InkWell(
-            onTap: () {
-              if((_state.selectLessonInfo?.docLink??"").isNotEmpty) {
-                FileStoreManager().downloadFileFromStream(url: _state.selectLessonInfo?.docLink??"", fileName:  _state.selectLessonInfo?.docName??"");
-              }
-            },
-              child: Text(
-                _state.selectLessonInfo?.docName??'',
-                style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.blue),)),
-          SizedBox(
-            height: 16,
-          ),
-          Text(
-            "${L10nX.getStr.vocabulary_str}: ",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.red,
-            ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          ListView.builder(
-              itemCount: (_state.selectLessonInfo?.vocabularies??[]).length,
-              // controller: lessonDetailScrollController,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                VocabularyInfo vocabularyInfo = (_state.selectLessonInfo?.vocabularies??[]).elementAt(index);
-                return buildWordItem(word: vocabularyInfo);
-              })
+
         ],
       ),
     );
@@ -811,24 +770,55 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
     return userInfo;
   }
 
-  Widget buildQuiz() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:  [
-        SizedBox(
-          height: 30,
-        ),
-        SizedBox(
-          height: 30,
-        ),
-        Text(
-          L10nX.getStr.test_str,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.red,
+  Widget buildTest(BuildContext context) {
+    return Visibility(
+      visible: _state.selectLessonInfo?.testId!=null,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:  [
+          SizedBox(
+            height: 30,
           ),
-        ),
-      ],
+          SizedBox(
+            height: 30,
+          ),
+          Text(
+            "${L10nX.getStr.test_str}:",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.red,
+            ),
+          ),
+          SizedBox(
+            height: 4,
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding:  EdgeInsets.symmetric(horizontal: Dimens.size16),
+                child: InkWell(
+                    onTap: () {
+                      if(_state.selectLessonInfo?.testId!=null) {
+                        TestWorkPage(testInfo: TestInfo(id: _state.selectLessonInfo?.testId, name: _state.selectLessonInfo?.testName??''),).show(context);
+                      }
+                    },
+                    child: Text(
+                      _state.selectLessonInfo?.testName??'',
+                      style: TextStyleConstant.textStyleBlack13w400,)),
+              ),
+              ActionButton1(
+                onTap: () {
+                  TestWorkPage(testInfo: TestInfo(id: _state.selectLessonInfo?.testId, name: _state.selectLessonInfo?.testName??''),).show(context);
+      
+                },
+                text: L10nX.getStr.begin_start_test,
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
