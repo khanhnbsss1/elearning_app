@@ -56,8 +56,9 @@ class Wishlist extends ConsumerWidget with CourseMixin {
                     itemCount: data.length,
                     separatorBuilder: (context, index) => const Divider(height: 50),
                     itemBuilder: (context, index) {
-                      final Course course = data[index];
-                      return CourseTile(course: course);
+                      return null;
+                      // final Course course = data[index];
+                      // return CourseTile(course: course);
                     },
                   );
                 },

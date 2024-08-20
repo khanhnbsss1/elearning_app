@@ -3,6 +3,7 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/course.dart';
+import '../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 
 class Requirements extends StatelessWidget {
   const Requirements({
@@ -10,12 +11,13 @@ class Requirements extends StatelessWidget {
     required this.course,
   });
 
-  final Course course;
+  final CourseInfo course;
 
   @override
   Widget build(BuildContext context) {
+    List<String> courseObj = (course.infoObj??"").split("&&&");
     return Visibility(
-      visible: course.courseMeta.requirements!.isNotEmpty,
+      visible: course.infoObj != null,
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.only(top: 40, bottom: 20),
@@ -30,7 +32,7 @@ class Requirements extends StatelessWidget {
               height: 5,
             ),
             Column(
-              children: course.courseMeta.requirements!
+              children: courseObj
                   .map((e) => ListTile(
                         contentPadding: const EdgeInsets.all(0),
                         horizontalTitleGap: 10,

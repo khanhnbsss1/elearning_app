@@ -8,19 +8,25 @@ import 'package:lms_app/models/course.dart';
 import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/utils/empty_animation.dart';
 import 'package:quiver/iterables.dart';
+import '../../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'my_course_tile.dart';
 import '../../../providers/user_data_provider.dart';
 
-final myCoursesProvider = FutureProvider<List<Course>>((ref) async {
-  final List<Course> courses = [];
-  final user = ref.watch(userDataProvider);
-  final courseIds = user?.enrolledCourses ?? [];
-  final chunks = partition(courseIds, 10);
-
-  final querySnapshots = await Future.wait(chunks.map((chunk) => FirebaseService().getCoursesQuery(chunk)).toList());
-  for (var element in querySnapshots) {
-    courses.addAll(element.docs.map((e) => Course.fromFirestore(e)).toList());
-  }
+// final myCoursesProvider = FutureProvider<List<Course>>((ref) async {
+//   final List<Course> courses = [];
+//   final user = ref.watch(userDataProvider);
+//   final courseIds = user?.enrolledCourses ?? [];
+//   final chunks = partition(courseIds, 10);
+//
+//   final querySnapshots = await Future.wait(chunks.map((chunk) => FirebaseService().getCoursesQuery(chunk)).toList());
+//   for (var element in querySnapshots) {
+//     courses.addAll(element.docs.map((e) => Course.fromFirestore(e)).toList());
+//   }
+//   return courses;
+// }
+// );
+final myCoursesProvider = FutureProvider<List<CourseInfo>?>((ref) async {
+  final List<CourseInfo>? courses = await FirebaseService().getMyCourses();
   return courses;
 });
 
@@ -40,7 +46,7 @@ class MyCoursesTab extends ConsumerWidget with CourseMixin {
       ),
       body: RefreshIndicator.adaptive(
         onRefresh: () async => await ref.refresh(myCoursesProvider),
-        child: user == null || user.enrolledCourses == null || user.enrolledCourses!.isEmpty
+        child: user == null // || user.enrolledCourses == null || user.enrolledCourses!.isEmpty
             ? const EmptyAnimation(animationString: emptyAnimation, title: 'No courses found')
             : courses.when(
                 skipLoadingOnRefresh: false,
@@ -51,13 +57,11 @@ class MyCoursesTab extends ConsumerWidget with CourseMixin {
                 data: (data) {
                   return ListView.separated(
                     padding: const EdgeInsets.only(left: 20, right: 20, bottom: 50, top: 25),
-                    itemCount: data.length,
+                    itemCount: data!.length,
                     separatorBuilder: (context, index) => const Divider(height: 50),
                     itemBuilder: (context, index) {
-                      return null;
-
-                      // final Course course = data[index];
-                      // return MyCourseTile(course: course, user: user);
+                      final CourseInfo course = data[index];
+                      return MyCourseTile(course: course, user: user);
                     },
                   );
                 },

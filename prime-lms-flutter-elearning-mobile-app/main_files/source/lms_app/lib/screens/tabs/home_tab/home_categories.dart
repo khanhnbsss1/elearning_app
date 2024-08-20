@@ -10,8 +10,8 @@ import '../../../services_elearning/apis/course/course_detail/models/course_deta
 import '../../home/home_bottom_bar.dart';
 import '../../home/home_view.dart';
 
-final homeCategoriesProvider = FutureProvider<List<CourseInfo>>((ref) async {
-  final List<CourseInfo>? categories = await FirebaseService().getHomeCategories("CATEGORY");
+final homeCategoriesProvider = FutureProvider<List<CourseInfo>?>((ref) async {
+  final List<CourseInfo>? categories = await FirebaseService().getHomeCategories();
   return categories??[];
 });
 
@@ -56,7 +56,7 @@ class HomeCategories extends ConsumerWidget {
                   return Wrap(
                     spacing: 10,
                     runSpacing: 10,
-                    children: categories
+                    children: categories!
                         .map((e) => ActionChip(
                               // onPressed: () => NextScreen.iOS(
                               //   context,

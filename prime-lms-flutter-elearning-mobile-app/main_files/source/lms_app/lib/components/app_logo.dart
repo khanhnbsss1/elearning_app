@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:lms_app/configs/app_assets.dart';
 
 class AppLogo extends StatelessWidget {
-  const AppLogo({super.key});
+  final double size;
+  const AppLogo({super.key, required this.size});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 55,
-      width: 55,
+    return SizedBox(
+      height: size,
+      width: size,
       child: ClipOval(
         child: Image.asset(
           logo,
-          height: 45,
-          width: 45,
           fit: BoxFit.cover,
         ),
       )

@@ -131,7 +131,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: const AppLogo(),
+                child: const AppLogo(size: 100,),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

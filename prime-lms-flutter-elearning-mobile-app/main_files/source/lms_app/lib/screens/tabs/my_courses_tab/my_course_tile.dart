@@ -20,13 +20,13 @@ class MyCourseTile extends StatelessWidget with UserMixin {
   @override
   Widget build(BuildContext context) {
     final heroTag = UniqueKey();
-    List validIds = user.completedLessons!.where((element) => element.toString().contains(course.id.toString())).toList();
-    final double courseProgress = validIds.isEmpty ? 0 : (validIds.length / (course.totalLectures != 0 ? (course.totalLectures??0).toDouble() : 1));
-    final String courseProgesString = (courseProgress * 100).toStringAsFixed(0);
+    // List validIds = user.completedLessons!.where((element) => element.toString().contains(course.id.toString())).toList();
+    // final double courseProgress = validIds.isEmpty ? 0 : (validIds.length / (course.totalLectures != 0 ? (course.totalLectures??0).toDouble() : 1));
+    final String courseProgressString =  "50"; //(courseProgress * 100).toStringAsFixed(0);
 
     return InkWell(
-      // onTap: () => NextScreen.iOS(context, CourseDetailsView(course: course, heroTag: heroTag)),
-      onTap: () {},
+      onTap: () => NextScreen.iOS(context, CourseDetailsView(courses: course, heroTag: heroTag)),
+      // onTap: () {},
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -62,13 +62,13 @@ class MyCourseTile extends StatelessWidget with UserMixin {
                   Padding(
                     padding: const EdgeInsets.only(top: 15, bottom: 5),
                     child: LinearProgressIndicator(
-                      value: courseProgress,
+                      value: 50,
                       borderRadius: BorderRadius.circular(20),
                       minHeight: 8,
                       color: Colors.orange.shade300,
                     ),
                   ),
-                  const Text('percent-completed').tr(args: [courseProgesString]),
+                  const Text('percent-completed').tr(args: [courseProgressString]),
                   const SizedBox(
                     height: 10,
                   ),

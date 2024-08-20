@@ -5,6 +5,7 @@ import 'package:lms_app/components/course_tile.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/screens/all_courses.dart/courses_view.dart';
 import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
@@ -66,8 +67,9 @@ class HomeLatestCourses extends ConsumerWidget {
                   padding: const EdgeInsets.all(20),
                   separatorBuilder: (context, index) => const Divider(height: 50),
                   itemBuilder: (context, index) {
-                    final Course course = courses[index];
-                    return CourseTile(course: course);
+                    return null;
+                    // final CourseInfo course = courses[index];
+                    // return CourseTile(course: course);
                   },
                 )
               ],

@@ -24,8 +24,7 @@ class HorizontalCourseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final heroTag = UniqueKey();
     return InkWell(
-      // onTap: () => NextScreen.iOS(context, CourseDetailsView(course: course, heroTag: heroTag)),
-      onTap: () {},
+      onTap: () => NextScreen.iOS(context, CourseDetailsView(courses: course, heroTag: heroTag)),
       child: Container(
         width: MediaQuery.of(context).size.width * widthPercentage,
         margin: const EdgeInsets.symmetric(horizontal: 8),
