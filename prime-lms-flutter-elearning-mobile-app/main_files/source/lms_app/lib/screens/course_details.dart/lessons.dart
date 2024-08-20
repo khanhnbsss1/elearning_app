@@ -15,6 +15,7 @@ import 'package:lms_app/screens/quiz_lesson/quiz_screen.dart';
 import 'package:lms_app/screens/video_lesson.dart';
 import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services_elearning/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
@@ -24,46 +25,41 @@ import '../../models_elearning/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 
 class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
-  const Lessons({super.key, required this.course, required this.sectionId});
+  const Lessons({super.key, required this.course, required this.lessonId});
 
   final CourseInfo course;
-  final String sectionId;
+  final String lessonId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userDataProvider);
-    return FutureBuilder(
-      future: FirebaseService().getLessons(course.id.toString(), sectionId),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LoadingIndicatorWidget();
-        }
-        List<Lesson> lessons = snapshot.data;
-
-        return ListView.builder(
+    return Column(
+      children: [
+        ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           padding: const EdgeInsets.only(top: 0, bottom: 20),
-          itemCount: lessons.length,
+          itemCount: course.lectures!.length,
           itemBuilder: (context, index) {
-            final Lesson lesson = lessons[index];
+            final LessonInfo lesson = course.lectures![index];
             return ListTile(
-                onTap: () => _onTap(context, lesson, course, user, ref),
+                // onTap: () => _onTap(context, lesson, course, user, ref),
+              onTap: (){},
                 contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 horizontalTitleGap: 10,
                 title: Text(
-                  lesson.name,
+                  lesson.lectureName!,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w500, fontSize: 18),
                 ),
-                subtitle: Text(lesson.contentType).tr(),
+                subtitle: Text(lesson.subName!).tr(),
                 leading: Text(
                   '${index + 1}.',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.blue),
-                ),
-                trailing: _trailingIcon(lesson, user));
+                ));
+                // trailing: _trailingIcon(lesson, user));
           },
-        );
-      },
+        ),
+      ]
     );
   }
 

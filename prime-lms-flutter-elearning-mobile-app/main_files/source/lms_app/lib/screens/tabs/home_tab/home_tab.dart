@@ -38,7 +38,7 @@ class HomeTab extends ConsumerWidget {
       child: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: const AppLogo(),
+            title: const AppLogo(size: 55,),
             pinned: false,
             floating: true,
             backgroundColor: Theme.of(context).primaryColor,

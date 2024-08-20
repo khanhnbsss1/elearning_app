@@ -10,7 +10,7 @@ import '../../../components/horizontal_course_tile.dart';
 import '../../all_courses.dart/courses_view.dart';
 
 final freeCoursesProvider = FutureProvider<List<CourseInfo>>((ref) async {
-  final List<CourseInfo>? courses = await FirebaseService().getFreeCourses("PREMIUM_COURSE");
+  final List<CourseInfo>? courses = await FirebaseService().getFreeCourses();
   return courses??[];
 });
 
@@ -24,8 +24,8 @@ class FreeCourses extends ConsumerWidget {
         skipLoadingOnRefresh: false,
         data: (courses) {
           return Visibility(
-            // visible: courses.isNotEmpty,
-            visible: true,
+            visible: courses.isNotEmpty,
+            // visible: true,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(

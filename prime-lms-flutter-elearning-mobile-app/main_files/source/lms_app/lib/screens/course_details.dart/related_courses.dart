@@ -4,16 +4,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/models/course.dart';
 import '../../components/course_tile.dart';
 import '../../services/firebase_service.dart';
+import '../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 
-final relatedCoursesProvider = FutureProvider.family.autoDispose<List<Course>, Course>((ref, course) async {
-  final courses = await FirebaseService().getRelatedCoursesByCategory(course, 5);
+final relatedCoursesProvider = FutureProvider.family.autoDispose<List<CourseInfo>?, CourseInfo>((ref, course) async {
+  List<CourseInfo>? courses = await FirebaseService().getRelatedCoursesByCategory(course);
   return courses;
 });
 
 class RelatedCourses extends ConsumerWidget {
   const RelatedCourses({super.key, required this.course});
 
-  final Course course;
+  final CourseInfo course;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -23,7 +24,7 @@ class RelatedCourses extends ConsumerWidget {
       error: (error, stackTrace) => Container(),
       loading: () => Container(),
       data: (data) {
-        if (data.isNotEmpty) {
+        if (data!.isNotEmpty) {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Column(
@@ -40,7 +41,7 @@ class RelatedCourses extends ConsumerWidget {
                   itemCount: data.length,
                   separatorBuilder: (context, index) => const Divider(height: 50),
                   itemBuilder: (context, index) {
-                    final Course course = data[index];
+                    final CourseInfo course = data[index];
                     return CourseTile(course: course);
                   },
                 ),

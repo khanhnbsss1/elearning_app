@@ -1,11 +1,9 @@
 
-import 'package:lms_app/base/base.export.dart';
 import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
-// import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 
 import '../../../../base/author/user_helper.dart';
 import '../../../../base/base_request_elearning/models/search_common_request.dart';
-import '../../../../models/user/UserProfile.dart';
+import '../../../../models_elearning/user/UserProfile.dart';
 import '../course_list/models/course_models.dart';
 
 class MyCourseApi extends BaseApiRequest {

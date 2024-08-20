@@ -9,23 +9,16 @@ import 'package:lms_app/screens/search/searched_courses.dart';
 import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/utils/empty_icon.dart';
 
+import '../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+
 final searchTextCtlrProvider = Provider.autoDispose((ref) => TextEditingController());
 final searchStartedProvider = StateProvider.autoDispose<bool>((ref) => false);
 final recentSearchDataProvider = StateProvider<List<String>>((ref) => []);
 
-final searchedCoursesProvider = FutureProvider.autoDispose<List<Course>>((ref) async {
+final searchedCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>?>((ref) async {
   final value = ref.watch(searchTextCtlrProvider).text;
-  final allCourses = await FirebaseService().getAllCourses();
-  final List<Course> filteredCourses = allCourses
-      .where((course) =>
-          course.name.toLowerCase().contains(value.toLowerCase()) ||
-          course.courseMeta.description.toString().toLowerCase().contains(value.toLowerCase()) ||
-          course.courseMeta.learnings.toString().toLowerCase().contains(value.toLowerCase()) ||
-          course.courseMeta.summary.toString().toLowerCase().contains(value.toLowerCase()) ||
-          course.courseMeta.requirements.toString().toLowerCase().contains(value.toLowerCase()))
-      .toList();
-
-  return filteredCourses;
+  final allCourses = await FirebaseService().getAllCourses(keyword: value??"");
+  return allCourses;
 });
 
 class SearchScreen extends ConsumerWidget {
