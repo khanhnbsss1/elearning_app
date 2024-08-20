@@ -14,7 +14,7 @@ class LoginWithPhoneApi extends BaseApiRequest {
   LoginWithPhoneApi({required this.loginRequest})
       : super(
       serviceType: SERVICE_TYPE.AUTHEN,
-      apiName: ApiName.getInstance().login,
+      apiName: ApiName.getInstance().loginByPhone,
       isCheckToken: false,
       isShowErrorPopup: false,
     isShowToastError: false

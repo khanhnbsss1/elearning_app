@@ -3,6 +3,7 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/screens/all_courses.dart/courses_view.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/custom_cached_image.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import '../../../models/category.dart';
@@ -12,7 +13,7 @@ class CategoriesLayout2 extends StatelessWidget {
     required this.categories,
   });
 
-  final AsyncValue<List<Category>> categories;
+  final AsyncValue<List<CourseInfo>> categories;
 
   @override
   Widget build(BuildContext context) {
@@ -39,21 +40,22 @@ class CategoriesLayout2 extends StatelessWidget {
                 shrinkWrap: true,
                 separatorBuilder: (context, index) => const Divider(),
                 itemBuilder: (context, index) {
-                  final Category category = data[index];
+                  final CourseInfo category = data[index];
                   return ListTile(
                     contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                    title: Text(category.name),
+                    title: Text((category.lectures == null) ? category.lectures![index].lectureName! : 'data'),
                     titleTextStyle: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
                     trailing: const Icon(FeatherIcons.chevronRight),
-                    leading: SizedBox(
-                      height: 40,
-                      width: 50,
-                      child: CustomCacheImage(
-                        imageUrl: category.thumbnailUrl,
-                        radius: 3,
-                      ),
-                    ),
-                    onTap: ()=> NextScreen.iOS(context, AllCoursesView(courseBy: CourseBy.category, title: category.name, categoryId: category.id,)),
+                    // leading: SizedBox(
+                    //   height: 40,
+                    //   width: 50,
+                    //   child: CustomCacheImage(
+                    //     imageUrl: category.thumbnailUrl,
+                    //     radius: 3,
+                    //   ),
+                    // ),
+                    // onTap: ()=> NextScreen.iOS(context, AllCoursesView(courseBy: CourseBy.category, title: category.name, categoryId: category.id,)),
+                    onTap: (){},
                   );
                 },
               );

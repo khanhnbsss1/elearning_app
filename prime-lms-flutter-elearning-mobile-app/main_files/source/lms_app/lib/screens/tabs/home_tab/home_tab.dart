@@ -29,9 +29,9 @@ class HomeTab extends ConsumerWidget {
         ref.invalidate(featuredCoursesProvider);
         ref.invalidate(homeCategoriesProvider);
         ref.invalidate(freeCoursesProvider);
-        ref.invalidate(category1CoursessProvider);
-        ref.invalidate(category2CoursessProvider);
-        ref.invalidate(category3CoursessProvider);
+        // ref.invalidate(category1CoursessProvider);
+        // ref.invalidate(category2CoursessProvider);
+        // ref.invalidate(category3CoursessProvider);
         ref.invalidate(topAuthorsProvider);
         ref.invalidate(homeLatestCoursesProvider);
       },
@@ -74,9 +74,9 @@ class HomeTab extends ConsumerWidget {
                 Visibility(visible: settings?.featured ?? true, child: const FeaturedCourses()),
                 Visibility(visible: settings?.categories ?? true, child: const HomeCategories()),
                 Visibility(visible: settings?.freeCourses ?? true, child: const FreeCourses()),
-                if (settings != null && settings.homeCategory1 != null) Category1Courses(category: settings.homeCategory1!),
-                if (settings != null && settings.homeCategory2 != null) Category2Courses(category: settings.homeCategory2!),
-                if (settings != null && settings.homeCategory3 != null) Category3Courses(category: settings.homeCategory3!),
+                // if (settings != null && settings.homeCategory1 != null) Category1Courses(category: settings.homeCategory1!),
+                // if (settings != null && settings.homeCategory2 != null) Category2Courses(category: settings.homeCategory2!),
+                // if (settings != null && settings.homeCategory3 != null) Category3Courses(category: settings.homeCategory3!),
                 Visibility(visible: settings?.topAuthors ?? true, child: const TopAuthors()),
                 Visibility(visible: settings?.latestCourses ?? true, child: const HomeLatestCourses()),
               ],

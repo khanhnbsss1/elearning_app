@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:lms_app/base/author/user_helper.dart';
+import 'package:lms_app/components/app_logo.dart';
 import 'package:lms_app/components/privacy_info.dart';
 // import 'package:lms_app/models/user/UserProfile.dart';
 import 'package:lms_app/screens/auth/reset_password.dart';
@@ -63,7 +64,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       _btnController.start();
-      loginController.onLogin();
+      await loginController.onLogin();
       final UserProfile? user = await UserManager().getUserProfile();
      if (user != null) {
         _btnController.success();
@@ -130,11 +131,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: const Text(
-                  // '------ OR ------',
-                  '',
-                  style: TextStyle(color: Colors.blueGrey),
-                ),
+                child: const AppLogo(),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

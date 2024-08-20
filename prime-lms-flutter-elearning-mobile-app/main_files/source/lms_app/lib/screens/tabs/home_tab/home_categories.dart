@@ -6,12 +6,13 @@ import 'package:lms_app/screens/all_courses.dart/courses_view.dart';
 import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import '../../../models/category.dart';
+import '../../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import '../../home/home_bottom_bar.dart';
 import '../../home/home_view.dart';
 
-final homeCategoriesProvider = FutureProvider<List<Category>>((ref) async {
-  final List<Category> categories = await FirebaseService().getHomeCategories(5);
-  return categories;
+final homeCategoriesProvider = FutureProvider<List<CourseInfo>>((ref) async {
+  final List<CourseInfo>? categories = await FirebaseService().getHomeCategories("CATEGORY");
+  return categories??[];
 });
 
 class HomeCategories extends ConsumerWidget {
@@ -21,7 +22,8 @@ class HomeCategories extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final categories = ref.watch(homeCategoriesProvider);
     return Visibility(
-      visible: categories.value != null && categories.value!.isNotEmpty,
+      // visible: categories.value != null && categories.value!.isNotEmpty,
+      visible: true,
       child: Container(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         child: Column(
@@ -55,17 +57,17 @@ class HomeCategories extends ConsumerWidget {
                     spacing: 10,
                     runSpacing: 10,
                     children: categories
-                        .take(4)
                         .map((e) => ActionChip(
-                              onPressed: () => NextScreen.iOS(
-                                context,
-                                AllCoursesView(courseBy: CourseBy.category, title: e.name, categoryId: e.id),
-                              ),
+                              // onPressed: () => NextScreen.iOS(
+                              //   context,
+                              //   AllCoursesView(courseBy: CourseBy.category, title: e.name!, categoryId: e.id.toString()),
+                              // ),
+                              onPressed: (){},
                               elevation: 0,
                               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                               label: Text(
-                                e.name,
+                                e.name!,
                                 style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                               ),
                             ))

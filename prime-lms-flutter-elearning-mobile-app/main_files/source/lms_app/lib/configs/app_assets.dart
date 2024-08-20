@@ -2,7 +2,7 @@
 const String logo = 'assets/images/logo.jpg';
 
 // Splash Icon
-const String splash = 'assets/images/splash.png';
+const String splash = 'assets/images/logo.jpg';
 
 //INTRO
 const String introImage1 = 'assets/images/intro_1.svg';

@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lms_app/components/price_tag.dart';
 import 'package:lms_app/models/course.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'rating_bar.dart';
 import '../screens/course_details.dart/details_view.dart';
 import '../utils/custom_cached_image.dart';
@@ -15,7 +16,7 @@ class HorizontalCourseTile extends StatelessWidget {
     required this.imageHeight,
   });
 
-  final Course course;
+  final CourseInfo course;
   final double widthPercentage;
   final double imageHeight;
 
@@ -39,7 +40,7 @@ class HorizontalCourseTile extends StatelessWidget {
                     child: Hero(
                       tag: heroTag,
                       child: CustomCacheImage(
-                        imageUrl: course.thumbnailUrl,
+                        imageUrl: course.image,
                         radius: 0,
                       ),
                     )),
@@ -53,18 +54,18 @@ class HorizontalCourseTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  course.name,
+                  course.name!,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 3),
-                RatingViewer(rating: course.rating),
+                RatingViewer(rating: (course.ratePoint??0).toDouble()),
                 const SizedBox(height: 3),
                 Text(
                   'count-students',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blueGrey),
-                ).tr(args: [course.studentsCount.toString()])
+                ).tr(args: [course.totalLectures.toString()])
               ],
             )
           ],

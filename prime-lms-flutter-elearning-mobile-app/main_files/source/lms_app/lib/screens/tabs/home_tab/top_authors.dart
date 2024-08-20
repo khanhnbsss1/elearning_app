@@ -24,7 +24,8 @@ class TopAuthors extends ConsumerWidget {
     return authors.when(
         data: (data) {
           return Visibility(
-            visible: data.isNotEmpty,
+            // visible: data.isNotEmpty,
+            visible: true,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
