@@ -72,26 +72,6 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                 break;
             // TODO: Handle this case.
               case VocabularyStatus.onSelectWord:
-                {
-                  if(ResponsiveInfo.isPhone())
-                  {
-                    VocabularyViewDetail(selectVocabularyInfo: state.selectVocabularyInfo!,).show(context);
-
-                    showGeneralDialog(
-                      context: context,
-                      pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
-                        return Material(
-                            child: Dialog(
-                              insetPadding: EdgeInsets.zero,
-                              child: SizedBox(
-                                  height: MediaQuery.of(context).size.height/2,
-                                  width: MediaQuery.of(context).size.width*0.95,
-                                  child: buildVocabularyDetail(state: state)),
-                            ));
-                      },
-                    );
-                  }
-                }
                 break;
               default:
                 break;
@@ -285,7 +265,14 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
       listOfVocabulary.add(
         InkWell(
           onTap: () {
-            BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSelectVocabularyEvent(selectVocabularyInfo: vocabularyInfo));
+            if(ResponsiveInfo.isPhone())
+            {
+              VocabularyViewDetail(selectVocabularyInfo: state.selectVocabularyInfo!,).show(context);
+            }
+            else
+              {
+                BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSelectVocabularyEvent(selectVocabularyInfo: vocabularyInfo));
+              }
           },
           child: VocabularyItemView(
             vocabularyInfo: vocabularyInfo,
@@ -302,7 +289,6 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                 },
 
               ).show(context);
-
             },
             onEdit: (p0) {
               CreateEditWordsPage(

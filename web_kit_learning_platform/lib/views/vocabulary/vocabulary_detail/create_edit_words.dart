@@ -58,7 +58,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
   
   late CreateEditWordState _state;
   late ColorNotifier notifier;
-
+  ScrollController controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     notifier = Provider.of<ColorNotifier>(context, listen: true);
@@ -96,7 +96,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
               ),
               body: MyResponsive(builder: (context, constraints, myScreenMediaType) {
                 double maxWidthItem = 250;
-                double heightOfItem = 100;
+                double heightOfItem = myScreenMediaType.isMobile? 60:100;
                 int numberRow = (constraints.maxWidth / maxWidthItem).toInt();
                 double widthItem = (constraints.maxWidth - (50 * numberRow)) / numberRow;
                 return Padding(
@@ -106,6 +106,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                       Expanded(
                         child: SingleChildScrollView(
                           scrollDirection: Axis.vertical,
+                          controller: controller,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisSize: MainAxisSize.min,
@@ -275,6 +276,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
             children: [
               SingleChildScrollView(
                 scrollDirection: Axis.vertical,
+                controller: controller,
                 child: Column(
                   children: [
                     Center(
@@ -283,8 +285,10 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                     ListView.builder(
                       itemCount:(_state.vocabularyInfo?.sentenceInfos??[]).length,
                       shrinkWrap: true,
+                      controller: controller,
                       itemBuilder: (context, exampleIndex) {
                         return ExampleFrom(
+                          controller: controller,
                           sentenceInfo:_state.vocabularyInfo?.sentenceInfos?.elementAt(exampleIndex),
                           onRemoveSentenceInfo: (p0) {
                             BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordOnRemoveSentenceEvent(sentenceInfo: p0));
