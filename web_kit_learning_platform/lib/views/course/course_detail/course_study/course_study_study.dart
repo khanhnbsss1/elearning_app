@@ -84,7 +84,9 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                       constraints: BoxConstraints(
                         minHeight: MediaQuery.of(context).size.height
                       ),
-                      child: buildSubjectAndTestList()),
+                      child: SingleChildScrollView(
+                        controller: subjectScrollControllerBar,
+                          child: buildSubjectAndTestList())),
                   body: Padding(
                     padding:  EdgeInsets.only(top: myScreenMediaType.isMobile?0:50),
                     child: Stack(
@@ -131,6 +133,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                                   ),
                                   child: SingleChildScrollView(
                                     child: Column(
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
                                         buildSubjectAndTestList(),
                                       ],

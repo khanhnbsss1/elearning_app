@@ -58,11 +58,13 @@ class _CourseStudyState extends State<CourseStudy1>
         child: Container(
           decoration: BoxDecoration(color: ColorConst.whiteColor),
           padding: EdgeInsets.symmetric(vertical: Dimens.size16),
-          child: StatefulBuilder(
-            builder:
-                (BuildContext context, void Function(void Function()) setState) {
-              return CourseStudyStudy();
-            },
+          child: SafeArea(
+            child: StatefulBuilder(
+              builder:
+                  (BuildContext context, void Function(void Function()) setState) {
+                return CourseStudyStudy();
+              },
+            ),
           ),
         ),
       ),

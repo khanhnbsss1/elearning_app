@@ -262,16 +262,27 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                 itemBuilder: (context, suggestion) {
                   return OnHoverWidget(
                     builder: (bool isHovered) {
-                      return  Container(
-                        decoration: BoxDecoration(
-                            color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
-                            border: Border(
-                                bottom: BorderSide(color: ColorConst.dividerColor)
-                            )
-                        ),
-                        child: ListTile(
-                          leading: Icon(Icons.topic),
-                          title: Text(suggestion??""),
+                      return  PointerInterceptor(
+                        child: InkWell(
+                          onTap: () {
+                            if(onSelectSubject!=null)
+                            {
+                              _subjectDropdownSearchFieldController.text = suggestion;
+                              onSelectSubject(suggestion);
+                            }
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
+                                border: Border(
+                                    bottom: BorderSide(color: ColorConst.dividerColor)
+                                )
+                            ),
+                            child: ListTile(
+                              leading: Icon(Icons.topic),
+                              title: Text(suggestion??""),
+                            ),
+                          ),
                         ),
                       );
                     },
@@ -322,20 +333,23 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
     );
   }
   Widget lessonDropDownSearch({Function(LessonInfo)? onSelectLesson, required AddCourseState state, required BuildContext context}) {
-    return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+    return StatefulBuilder(builder: (BuildContext blocContext, void Function(void Function()) setState) { 
       return  Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
               width:Dimens.size300,
               child: DropDownSearchFormField(
+                onSuggestionsBoxToggle: (p0) {
+                  print("object");
+                },
                 textFieldConfiguration: TextFieldConfiguration(
                   autofocus: true,
                   controller: _lessonDropdownSearchFieldController,
-                  style: DefaultTextStyle.of(context).style.copyWith(
+                  style: DefaultTextStyle.of(blocContext).style.copyWith(
                       fontStyle: FontStyle.italic
                   ),
-
+              
                   decoration: InputDecoration(
                     labelText: L10nX.getStr.search_lesson_str,
                     hintTextDirection: AppTheme.textDirection,
@@ -357,7 +371,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                     floatingLabelBehavior: FloatingLabelBehavior.never,
                   ),
                 ),
-
+              
                 suggestionsCallback: (pattern) async {
                   return await getLessonFilterList(pattern);
                 },
@@ -365,9 +379,10 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   return OnHoverWidget(
                     builder: (bool isHovered) {
                       return  PointerInterceptor(
+                        intercepting: false,
                         child: InkWell(
                           onTap: () {
-                            if((BlocProvider.of<AddCourseBloc>(context).state.currentSubject??'').isEmpty)
+                            if((BlocProvider.of<AddCourseBloc>(blocContext).state.currentSubject??'').isEmpty)
                             {
                               ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
                               return;
@@ -401,6 +416,21 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   );
                 },
                 onSuggestionSelected: (suggestion) {
+                  if((BlocProvider.of<AddCourseBloc>(blocContext).state.currentSubject??'').isEmpty)
+                  {
+                    ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
+                    return;
+                  }
+                  if(onSelectLesson!=null)
+                  {
+                    _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
+                    onSelectLesson(suggestion);
+                  }
+                  else
+                  {
+                    ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                  }
+                  print("object");
                 },
                 transitionBuilder: (context, child, controller) {
                   return PointerInterceptor(
@@ -420,18 +450,18 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                             curve: Curves.fastOutSlowIn
                         ),
                         child: child,
-                      ),                  ),
+                      ), ),
                   );
                 },
                 displayAllSuggestionWhenTap: false,
                 keepSuggestionsOnSuggestionSelected: true,
-
+              
               ),
             ),
             Gap(Dimens.size16),
             InkWell(
               onTap: () {
-                CreateEditLesson().show(context);
+                CreateEditLesson().show(blocContext);
               },
               child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size50,),
             )
