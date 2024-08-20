@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/static_view/static_view.dart';
@@ -68,8 +69,9 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: Dimens.size60,
+            Gap(Dimens.size30),
+            Center(
+             // height: Dimens.size60,
               // padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
               child: Padding(
                 padding:  EdgeInsets.only(left: Dimens.size8),
@@ -77,19 +79,19 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                   onTap: () {
                     AppPages.routeName(Routes.dashboardRoute);
                   },
-                  child: Row(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      StaticView.buildLogo(size: Dimens.size55),
-                       SizedBox(width: Dimens.size5),
-                      Expanded(
-                        child: Visibility(
-                          visible: !ThemeCustomizer().leftBarCondensed,
-                          child: Text(L10nX.getStr.app_name,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyleConstant.textStyleBlack16w600.copyWith(color: ColorConst.whiteColor),
-                          ),
+                      StaticView.buildLogo(size: Dimens.size100),
+                      SizedBox(width: Dimens.size5),
+                      Visibility(
+                        visible: !ThemeCustomizer().leftBarCondensed,
+                        child: Text(L10nX.getStr.app_name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyleConstant.textStyleBlack18w600.copyWith(color: ColorConst.whiteColor),
                         ),
                       ),
                     ],
@@ -103,17 +105,19 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Gap(Dimens.size24),
                   NavigationItem(
                     iconData: LucideIcons.layoutDashboard,
                     title: L10nX.getStr.dashboard,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
                     route: Routes.dashboardRoute,
                   ),
+                  Gap(Dimens.size12),
                   Visibility(
                     visible: !ThemeCustomizer().leftBarCondensed,
                     child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size12, vertical: Dimens.size8),
-                      child: Text(L10nX.getStr.apps, style: TextStyleConstant.textStyleBlack12w400.copyWith(color: ColorConst.whiteColor),),
+                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size20, vertical: Dimens.size8),
+                      child: Text(L10nX.getStr.apps, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
                     ),
                   ),
                   //-----------------Course-----------------//
@@ -145,6 +149,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     ],
                   ),
                   //----------------Bai hoc------------------//
+
                   NavigationItem(
                     iconData: Icons.edit_document,
                     title: L10nX.getStr.lesson_str,
@@ -220,11 +225,12 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
 
   
                   //-----------------Danh sach giao vien-----------------//
+                  Gap(Dimens.size12),
                   Visibility(
                     visible: !ThemeCustomizer().leftBarCondensed,
                     child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size12, vertical: Dimens.size8),
-                      child: Text(L10nX.getStr.user_str, style: TextStyleConstant.textStyleBlack12w400.copyWith(color: ColorConst.whiteColor),),
+                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size20, vertical: Dimens.size8),
+                      child: Text(L10nX.getStr.manage_str, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
                     ),
                   ),
                   MenuWidget(
@@ -965,7 +971,7 @@ class _MenuWidgetState extends State<MenuWidget>
                           ? leftBarTheme.activeItemColor
                           : leftBarTheme.onBackground,
                     ),
-                    MySpacing.width(Dimens.size18),
+                    MySpacing.width(Dimens.size12),
                     Expanded(
                       child:
                       Text(

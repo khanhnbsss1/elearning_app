@@ -324,6 +324,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "login_your_account":
             MessageLookupByLibrary.simpleMessage("Login your account"),
+        "manage_str": MessageLookupByLibrary.simpleMessage("Manage"),
         "map": MessageLookupByLibrary.simpleMessage("Map"),
         "maximum_point": MessageLookupByLibrary.simpleMessage("Maximum score"),
         "meaning_str": MessageLookupByLibrary.simpleMessage("Meaning"),

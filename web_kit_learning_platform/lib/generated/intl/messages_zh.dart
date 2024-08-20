@@ -273,6 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "locked": MessageLookupByLibrary.simpleMessage("已锁定"),
         "login": MessageLookupByLibrary.simpleMessage("登录"),
         "login_your_account": MessageLookupByLibrary.simpleMessage("登录您的帐户"),
+        "manage_str": MessageLookupByLibrary.simpleMessage("管理"),
         "map": MessageLookupByLibrary.simpleMessage("地图"),
         "maximum_point": MessageLookupByLibrary.simpleMessage("最高分"),
         "meaning_str": MessageLookupByLibrary.simpleMessage("含义"),

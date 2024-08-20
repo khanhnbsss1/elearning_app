@@ -231,7 +231,6 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
                 enableShowResultAnswer: widget.enableShowResult,
                 questionIndex: questionIndex+1,
                 onChangeAnswer: (p0) {
-
                 },
               ),
             ),

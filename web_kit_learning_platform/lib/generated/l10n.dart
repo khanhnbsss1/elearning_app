@@ -6029,6 +6029,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Manage`
+  String get manage_str {
+    return Intl.message(
+      'Manage',
+      name: 'manage_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

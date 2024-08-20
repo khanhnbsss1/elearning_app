@@ -605,6 +605,6 @@
   "view_str": "View",
   "start_test": "Do the test",
   "start_test_confirm": "Are you sure you want to run this test, the time taken is: ",
-  "you_are_ready_finish_test": "Bạn có chắc chắn muốn nộp bài !"
-  
+  "you_are_ready_finish_test": "Bạn có chắc chắn muốn nộp bài !",
+  "manage_str": "Manage"
 }

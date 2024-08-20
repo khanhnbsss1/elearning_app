@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:webkit/base/base.export.dart';
@@ -27,7 +26,6 @@ class QuestionWorkItem extends StatefulWidget {
   QuestionInfo questionInfo;
   bool? enableCloseButton;
   bool? enableShowResultAnswer;
-  AnswerInfo? rightAnswerInfo;
   Function(QuestionInfo)? onChangeAnswer;
   int? questionIndex;
   bool? isSelect;
@@ -37,16 +35,12 @@ class QuestionWorkItem extends StatefulWidget {
     this.onChangeAnswer, 
     this.isSelect,
     this.enableShowResultAnswer,
-    this.rightAnswerInfo,
     this.questionIndex
   }) {
     enableCloseButton ??= false;
     enableShowResultAnswer??false;
     questionIndex??=0;
-    if((questionInfo.answerGetDetail??[]).isNotEmpty && ((questionInfo.answerGetDetail??[]).where((element) => element.rightAnswer ==1).isNotEmpty))
-      {
-        rightAnswerInfo=(questionInfo.answerGetDetail??[]).where((element) => element.rightAnswer ==1).first;
-      }
+
   }
   @override
   State<StatefulWidget> createState() {
@@ -57,7 +51,17 @@ class QuestionWorkItem extends StatefulWidget {
 
 class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
   TextEditingController controller = TextEditingController();
+  AnswerInfo? rightAnswerInfo;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if((widget.questionInfo.answerGetDetail??[]).isNotEmpty && ((widget.questionInfo.answerGetDetail??[]).where((element) => element.rightAnswer ==1).isNotEmpty))
+    {
+      rightAnswerInfo=(widget.questionInfo.answerGetDetail??[]).where((element) => element.rightAnswer ==1).first;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -276,7 +280,7 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
     return Visibility(
       visible: (widget.questionInfo.questionType == QuestionType.fill)&&
           (widget.enableShowResultAnswer??false) && 
-          widget.rightAnswerInfo!=null,
+          rightAnswerInfo!=null,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -289,7 +293,7 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
             children: [
               Text(L10nX.getStr.right_answer, style: TextStyleConstant.textStyleBlack14w400,),
               Gap(Dimens.size8),
-              Text(widget.rightAnswerInfo?.name??"", style: TextStyleConstant.textStyleBlack14w400,)
+              Text(rightAnswerInfo?.name??"", style: TextStyleConstant.textStyleBlack14w400,)
             ],
           ),
         ],

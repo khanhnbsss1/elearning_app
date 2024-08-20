@@ -322,6 +322,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "login_your_account":
             MessageLookupByLibrary.simpleMessage("Đăng nhập tài khoản của bạn"),
+        "manage_str": MessageLookupByLibrary.simpleMessage("Quản lý"),
         "map": MessageLookupByLibrary.simpleMessage("Biểu đồ"),
         "maximum_point": MessageLookupByLibrary.simpleMessage("Điểm số tối đa"),
         "meaning_str": MessageLookupByLibrary.simpleMessage("Ý nghĩa"),
