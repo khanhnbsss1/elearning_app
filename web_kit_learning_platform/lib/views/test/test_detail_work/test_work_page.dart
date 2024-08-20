@@ -292,6 +292,9 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
           ),
         ),
         onEnd: () {
+          if((state.testInfo?.durian??0)<=0) {
+            return;
+          }
           ConfirmPopupPage(
             content: L10nX.getStr.time_test_end,
             onAccept: () {

@@ -5,6 +5,7 @@ import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
+import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
 
 class QuestionWorkItem extends StatefulWidget {
@@ -115,6 +116,20 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
                     )),
               ],
             ),
+            Gap(Dimens.size12),
+            Visibility(
+              visible:widget.questionInfo.questionType == QuestionType.image || widget.questionInfo.questionType == QuestionType.audio, 
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: widget.questionInfo.questionType == QuestionType.image? Dimens.size90:Dimens.size60, 
+                      width: Dimens.size120, 
+                      child: ImageManager().getImageByUrl(widget.questionInfo.questionLink??""),
+                                ),
+                  ],
+                )),
             Gap(Dimens.size16),
             buildAnswerList(),
           ],
@@ -264,7 +279,10 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
                                 )),
                             Visibility(
                                 visible: answerInfo.answerType == AnswerType.image, 
-                                child: SizedBox(width: Dimens.size120, height: Dimens.size100, child: ImageManager().getImageByUrl(answerInfo.name ?? ""))),
+                                child: SizedBox(
+                                    width: Dimens.size120, 
+                                    height: Dimens.size100, 
+                                    child: ImageManager().getImageByUrl(answerInfo.name ?? ""))),
                           ],
                         ))
                   ],

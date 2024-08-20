@@ -141,6 +141,7 @@ dependencies:
   syncfusion_flutter_datagrid: ^26.2.9
   drop_down_search_field: 
     path: lib/plugins/drop_down_search_field
+  async_searchable_dropdown: ^0.0.7+4
   flutter_rating_bar: ^4.0.1
   flutter_timer_countdown: ^1.0.7
   flutter_downloader: ^1.11.8

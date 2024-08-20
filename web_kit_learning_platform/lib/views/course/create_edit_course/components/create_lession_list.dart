@@ -1,4 +1,6 @@
+import 'package:async_searchable_dropdown/async_searchable_dropdown.dart';
 import 'package:drop_down_search_field/drop_down_search_field.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -9,11 +11,13 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
+import 'package:webkit/base/widgets/widgets.export.dart';
 import 'package:webkit/controller/ui/add_course_controller.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
+import 'package:webkit/l10n/l10n_extention.dart';
 import 'package:webkit/services/apis/lessson/lesson_list_filter/lesson_list_filter_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
@@ -226,127 +230,30 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
           builder: (BuildContext context, void Function(void Function()) setState) {
             return SizedBox(
               width:Dimens.size300,
-              child: DropDownSearchField(
-                layoutArchitecture: (items, controller) {
-                  return PointerInterceptor(
-                    child: Container(
-                      constraints: BoxConstraints(
-                          maxHeight: Dimens.size300
-                      ),
-                      clipBehavior: Clip.hardEdge,
-                      decoration: BoxDecoration(
-                          color: ColorConst.whiteColor,
-                          borderRadius: BorderRadius.circular(Dimens.size10)
-                      ),
-                      padding: EdgeInsets.all(Dimens.size8),
-                      child: ListView.builder(
-                        itemCount: items.length,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              print("object");
-                            },
-                              child: items.elementAt(index));
-                        },
-                      ),
-                    ),
-                  );
-                },
-                textFieldConfiguration: TextFieldConfiguration(
-                  autofocus: false,
-                   controller: _subjectDropdownSearchFieldController,
-                  style: DefaultTextStyle.of(context).style.copyWith(
-                      fontStyle: FontStyle.italic
-                  ),
-                  decoration: InputDecoration(
-                    //hintText: L10nX.getStr.search_lesson_str,
-                    labelText: L10nX.getStr.search_subject_str,
-                    hintTextDirection: AppTheme.textDirection,
-                    labelStyle: TextStyleConstant.textStyleBlack14w400,
-                    hintStyle: TextStyleConstant.textStyleBlack14w400,
-                    border: outlineInputBorder,
-                    prefixIcon: Icon(
-                      Icons.topic,
-                      size: 20,
-                      color: ColorConst.colorIconRed,
-                    ),
-                    suffixIcon: Icon(
-                      LucideIcons.search,
-                      size: 20,
-                      color: ColorConst.colorIconRed,
-                    ),
-                    contentPadding: MySpacing.all(16),
-                    isCollapsed: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                  ),
+              child:SearchableDropdown<String>(
+                inputDecoration:  InputDecoration(
+                  hintTextDirection: AppTheme.textDirection,
+                  labelStyle: TextStyleConstant.textStyleBlack14w400,
+                  hintStyle: TextStyleConstant.textStyleBlack14w400,
+                  border: outlineInputBorder,
+                  labelText: L10nX.getStr.search_lesson_str,
+                  prefixIcon: Icon(Icons.play_lesson, color: ColorConst.colorIconRed,),
                 ),
-                suggestionsCallback: (pattern) async {
-                  return await getSubjectList(keyWord: pattern, state: state);
+                remoteItems: (search) async {
+                  return await getSubjectList(keyWord: search??"", state: state);
                 },
-                keepSuggestionsOnSuggestionSelected: false,
-                itemBuilder: (context, suggestion) {
-                  return OnHoverWidget(
-                    builder: (bool isHovered) {
-                      return  PointerInterceptor(
-                        child: InkWell(
-                          onTap: () {
-                            if(onSelectSubject!=null)
-                            {
-                              _subjectDropdownSearchFieldController.text = suggestion;
-                              onSelectSubject(suggestion);
-                            }
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
-                                border: Border(
-                                    bottom: BorderSide(color: ColorConst.dividerColor)
-                                )
-                            ),
-                            child: ListTile(
-                              leading: Icon(Icons.topic),
-                              title: Text(suggestion??""),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  );
+                itemLabelFormatter: (value) {
+                  return value??"";
                 },
-                onSuggestionSelected: (suggestion) {
-                    if(onSelectSubject!=null)
-                    {
-                      _subjectDropdownSearchFieldController.text = suggestion;
-                      onSelectSubject(suggestion);
-                    }
- 
+                onChanged: (String? value) {
+                  if(onSelectSubject!=null)
+                  {
+                    _subjectDropdownSearchFieldController.text = value??"";
+                    onSelectSubject(value??"");
+                  }
                 },
-                transitionBuilder: (context, child, controller) {
-                  return PointerInterceptor(
-                    child: Container(
-                      constraints: BoxConstraints(
-                          maxHeight: Dimens.size300
-                      ),
-                      clipBehavior: Clip.hardEdge,
-                      decoration: BoxDecoration(
-                          color: ColorConst.whiteColor,
-                          borderRadius: BorderRadius.circular(Dimens.size10)
-                      ),
-                      padding: EdgeInsets.all(Dimens.size8),
-                      child: FadeTransition(
-                        opacity: CurvedAnimation(
-                            parent: controller!,
-                            curve: Curves.fastOutSlowIn
-                        ),
-                        child: child,
-                      ),
-                    ),
-                  );
-                },
-                displayAllSuggestionWhenTap: false,
-                hideSuggestionsOnKeyboardHide: true,
-              ),
-            );
+                value: null,
+              ),);
             },
         ),
         Gap(Dimens.size16),
@@ -360,69 +267,28 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
     );
   }
   Widget lessonDropDownSearch({Function(LessonInfo)? onSelectLesson, required AddCourseState state, required BuildContext context}) {
-    return StatefulBuilder(builder: (BuildContext blocContext, void Function(void Function()) setState) { 
+    return StatefulBuilder(builder: (BuildContext blocContext, void Function(void Function()) setState) {
       return  Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
               width:Dimens.size300,
-              child: DropDownSearchFormField(
-                onSuggestionsBoxToggle: (p0) {
-                  print("object");
-                },
-                
-                textFieldConfiguration: TextFieldConfiguration(
-                  autofocus: true,
-                  controller: _lessonDropdownSearchFieldController,
-                  style: DefaultTextStyle.of(blocContext).style.copyWith(
-                      fontStyle: FontStyle.italic
-                  ),
-              
-                  decoration: InputDecoration(
-                    labelText: L10nX.getStr.search_lesson_str,
-                    hintTextDirection: AppTheme.textDirection,
-                    labelStyle: TextStyleConstant.textStyleBlack14w400,
-                    hintStyle: TextStyleConstant.textStyleBlack14w400,
-                    border: outlineInputBorder,
-                    prefixIcon: Icon(
-                      Icons.edit_document,
-                      size: 20,
-                      color: ColorConst.colorIconRed,
-                    ),
-                    suffixIcon: Icon(
-                      LucideIcons.search,
-                      size: 20,
-                      color: ColorConst.colorIconRed,
-                    ),
-                    contentPadding: MySpacing.all(16),
-                    isCollapsed: true,
-                    floatingLabelBehavior: FloatingLabelBehavior.never,
-                  ),
+              child:SearchableDropdown<LessonInfo>(
+                inputDecoration:  InputDecoration(
+                  hintTextDirection: AppTheme.textDirection,
+                  labelStyle: TextStyleConstant.textStyleBlack14w400,
+                  hintStyle: TextStyleConstant.textStyleBlack14w400,
+                  border: outlineInputBorder,
+                  labelText: L10nX.getStr.search_lesson_str,
+                  prefixIcon: Icon(Icons.play_lesson, color: ColorConst.colorIconRed,),
                 ),
-              
-                suggestionsCallback: (pattern) async {
-                  return await getLessonFilterList(pattern);
+                remoteItems: (search) async {
+                  return await getLessonFilterList(search??"");
                 },
-                itemBuilder: (context, suggestion) {
-                  return OnHoverWidget(
-                    builder: (bool isHovered) {
-                      return  Container(
-                        decoration: BoxDecoration(
-                            color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
-                            border: Border(
-                                bottom: BorderSide(color: ColorConst.dividerColor)
-                            )
-                        ),
-                        padding: EdgeInsets.symmetric(vertical: Dimens.size6),
-                        child: ListTile(
-                          leading: Icon(Icons.edit_document),
-                          title: Text(suggestion.lectureName??""),
-                        ),
-                      );
-                    },
-                  );
+                itemLabelFormatter: (value) {
+                  return value.lectureName??"";
                 },
-                onSuggestionSelected: (suggestion) {
+                onChanged: (LessonInfo? value) {
                   if((BlocProvider.of<AddCourseBloc>(blocContext).state.currentSubject??'').isEmpty)
                   {
                     ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
@@ -430,8 +296,8 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   }
                   if(onSelectLesson!=null)
                   {
-                   //_lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
-                    onSelectLesson(suggestion);
+                    //_lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
+                    onSelectLesson(value!);
                   }
                   else
                   {
@@ -439,32 +305,10 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   }
                   print("object");
                 },
-                transitionBuilder: (context, child, controller) {
-                  return PointerInterceptor(
-                    child: Container(
-                      constraints: BoxConstraints(
-                          maxHeight: Dimens.size300
-                      ),
-                      clipBehavior: Clip.hardEdge,
-                      decoration: BoxDecoration(
-                          color: ColorConst.whiteColor,
-                          borderRadius: BorderRadius.circular(Dimens.size10)
-                      ),
-                      padding: EdgeInsets.all(Dimens.size8),
-                      child: FadeTransition(
-                        opacity: CurvedAnimation(
-                            parent: controller!,
-                            curve: Curves.fastOutSlowIn
-                        ),
-                        child: child,
-                      ), ),
-                  );
-                },
-                displayAllSuggestionWhenTap: false,
-                keepSuggestionsOnSuggestionSelected: false,
-              
-              ),
-            ),
+                value: null,
+                dropDownListHeight: Dimens.size400,
+                dropDownListWidth: Dimens.size300,
+              ),),
             Gap(Dimens.size16),
             InkWell(
               onTap: () {
