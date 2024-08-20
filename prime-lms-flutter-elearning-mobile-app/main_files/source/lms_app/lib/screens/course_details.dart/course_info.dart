@@ -44,8 +44,8 @@ class CourseInfoScreen extends StatelessWidget {
             children: [
               const Icon(FeatherIcons.calendar, size: 20, color: Colors.blueGrey),
               const SizedBox(width: 5),
-              Text('last-updated-', style: Theme.of(context).textTheme.bodyLarge).tr(
-                args: [AppService.getDate((course.updatedAt ?? course.createdAt) as DateTime)],
+              Text('last-updated- ${course.updatedAt}', style: Theme.of(context).textTheme.bodyLarge).tr(
+                args: [],
               ),
             ],
           ),

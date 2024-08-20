@@ -114,7 +114,7 @@ class UserProfile {
     imageUrl = json['imageUrl'];
     role = json['role'];
     enrolledCourses = json['enrolledCourses'];
-    wishList = json['wishList'];
+    wishList = json['wishList'] ?? [];
     isDisabled = json['isDisabled'];
     authorInfo = json['authorInfo'] = null;
         // ? AuthorInfo.fromJson(json['authorInfo']) : null;

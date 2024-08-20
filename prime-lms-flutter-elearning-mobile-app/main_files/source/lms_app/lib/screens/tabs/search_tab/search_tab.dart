@@ -6,6 +6,7 @@ import 'package:lms_app/models/tag.dart';
 import 'package:lms_app/screens/search/search_view.dart';
 import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/screens/tabs/search_tab/popular_tags.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import '../../../models/category.dart';
 import '../../../providers/app_settings_provider.dart';
@@ -16,8 +17,8 @@ final searchTagsProvider = FutureProvider<List<Tag>>((ref) async {
   return tags;
 });
 
-final categoriesProvider = FutureProvider<List<Category>>((ref) async {
-  final List<Category> categories = await FirebaseService().getAllCategories();
+final categoriesProvider = FutureProvider<List<CourseInfo>>((ref) async {
+  final List<CourseInfo> categories = await FirebaseService().getAllCategories();
   return categories;
 });
 

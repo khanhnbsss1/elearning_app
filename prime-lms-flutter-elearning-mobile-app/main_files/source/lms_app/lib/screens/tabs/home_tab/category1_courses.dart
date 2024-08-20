@@ -25,7 +25,8 @@ class Category1Courses extends ConsumerWidget {
     return courses.when(
         data: (courses) {
           return Visibility(
-            visible: courses.isNotEmpty,
+            visible: true,
+            // visible: courses.isNotEmpty,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
@@ -71,7 +72,8 @@ class Category1Courses extends ConsumerWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: courses.map((course) {
-                        return HorizontalCourseTile(course: course, widthPercentage: 0.40, imageHeight: 100);
+                        // return HorizontalCourseTile(course: course, widthPercentage: 0.40, imageHeight: 100);
+                        return Placeholder();
                       }).toList(),
                     ),
                   )

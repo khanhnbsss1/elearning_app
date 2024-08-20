@@ -6,10 +6,17 @@ class AppLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      logo,
-      height: 60,
-      width: 130,
+    return Container(
+      height: 55,
+      width: 55,
+      child: ClipOval(
+        child: Image.asset(
+          logo,
+          height: 45,
+          width: 45,
+          fit: BoxFit.cover,
+        ),
+      )
     );
   }
 }

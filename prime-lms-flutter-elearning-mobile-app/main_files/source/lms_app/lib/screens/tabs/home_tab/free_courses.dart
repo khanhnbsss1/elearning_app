@@ -4,13 +4,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/loading_tile.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import '../../../components/horizontal_course_tile.dart';
 import '../../all_courses.dart/courses_view.dart';
 
-final freeCoursesProvider = FutureProvider<List<Course>>((ref) async {
-  final List<Course> courses = await FirebaseService().getFreeCourses();
-  return courses;
+final freeCoursesProvider = FutureProvider<List<CourseInfo>>((ref) async {
+  final List<CourseInfo>? courses = await FirebaseService().getFreeCourses("PREMIUM_COURSE");
+  return courses??[];
 });
 
 class FreeCourses extends ConsumerWidget {
@@ -23,7 +24,8 @@ class FreeCourses extends ConsumerWidget {
         skipLoadingOnRefresh: false,
         data: (courses) {
           return Visibility(
-            visible: courses.isNotEmpty,
+            // visible: courses.isNotEmpty,
+            visible: true,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(

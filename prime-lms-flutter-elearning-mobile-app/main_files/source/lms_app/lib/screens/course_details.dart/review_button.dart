@@ -36,7 +36,7 @@ class ReviewButton extends ConsumerWidget with UserMixin {
           NextScreen.openBottomSheet(context, RatingForm(review: review, course: course));
         }
       },
-      icon: user != null && user.reviews!.contains(course.id)
+      icon: user != null && (user.reviews ?? []).contains(course.id)
           ? const Icon(LineIcons.starAlt, size: 22, color: Colors.orange)
           : const Icon(LineIcons.star, size: 22),
     );

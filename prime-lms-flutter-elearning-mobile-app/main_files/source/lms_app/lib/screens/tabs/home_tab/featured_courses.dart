@@ -8,7 +8,7 @@ import '../../../components/featured_course_tile.dart';
 import '../../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 
 final featuredCoursesProvider = FutureProvider<List<CourseInfo>?>((ref) async {
-  final List<CourseInfo>? courses = await FirebaseService().getFeaturedCourses();
+  final List<CourseInfo>? courses = await FirebaseService().getFeaturedCourses(filter: "ALL");
   return courses;
 });
 
