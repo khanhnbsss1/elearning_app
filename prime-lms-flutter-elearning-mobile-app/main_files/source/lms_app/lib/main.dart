@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lms_app/helper_elearning/services/navigation_service.dart';
 import 'package:lms_app/routes/app_routes.dart';
 import 'package:lms_app/screens/home/home_view.dart';
 import 'package:lms_app/screens/intro.dart';
@@ -29,12 +30,14 @@ import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+      name: "YAX Chinese",
+      options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
   initialService();
-  HiveService.initHive();
+  // HiveService.initHive();
   AppService.svgPrecacheImage();
-  DeviceInfoModel? deviceInfoModel = await DeviceManager().getDeviceInfo();
+  // DeviceInfoModel? deviceInfoModel = await DeviceManager().getDeviceInfo();
   runApp(ProviderScope(
       child:
       EasyLocalization(
@@ -47,14 +50,14 @@ Future<void> main() async {
   ));
 }
 
-Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // If you're going to use other Firebase services in the background, such as Firestore,
-  // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  FileUtils.PrintLog("Handling a background message: ${message.messageId}");
-}
+// Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+//   // If you're going to use other Firebase services in the background, such as Firestore,
+//   // make sure you call `initializeApp` before using other Firebase services.
+//   await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform,
+//   );
+//   FileUtils.PrintLog("Handling a background message: ${message.messageId}");
+// }
 
 Future<void> initialService() async {
   await SharedPreferencesStorage().initSharedPreferences();
@@ -71,6 +74,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     FetchPixels(context);
     ColorConst.setColorByFlavorType();
+    NavigationService.registerContext(context, update: true);
     return GetMaterialApp(
       title: AppConfig.appName,
       debugShowCheckedModeBanner: false,

@@ -45,11 +45,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   bool offsecureText = true;
   IconData lockIcon = LineIcons.lock;
 
-  // Future _handleLoginWithUsernamePassword1() async {
+  // Future _handleLoginWithUsernamePassword() async {
   //   if (formKey.currentState!.validate()) {
   //     formKey.currentState!.save();
   //     _btnController.start();
-  //     final UserCredential? user = await AuthService().loginWithEmailPassword(context, emailCtlr.text.trim(), passwordCtrl.text);
+  //     final UserCredential? user = await AuthService().loginWithEmailPassword(context, "0348074377", "Ll@123456");
   //     if (user != null) {
   //       _btnController.success();
   //       afterSignIn();
@@ -124,14 +124,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 'login-to-access-features',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.secondary),
               ).tr(),
-              SocialLogins(
-                afterSignIn: afterSignIn,
-              ),
+              // SocialLogins(
+              //   afterSignIn: afterSignIn,
+              // ),
               Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: const Text(
-                  '------ OR ------',
+                  // '------ OR ------',
+                  '',
                   style: TextStyle(color: Colors.blueGrey),
                 ),
               ),

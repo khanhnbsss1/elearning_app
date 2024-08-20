@@ -14,9 +14,9 @@ class UserManager{
   UserManager._internal();
 
   Future<void> handleLogoutData() async {
-    UserProfile? userInfos = await getUserProfile();
-    if(userInfos!=null){
-      //FirebaseManager().removeSubscribeTopic(userInfos.id.toString());
+    UserProfile? userInfo = await getUserProfile();
+    if(userInfo!=null){
+      //FirebaseManager().removeSubscribeTopic(userInfo.id.toString());
     }
     InstanceManager().clearAllInstanceData();
 
@@ -30,7 +30,7 @@ class UserManager{
     if(AuthorManager().getAuthInfo()==null) {
       return null;
     }
-    String rootUserStr = SharedPreferencesStorage().getString(Storage.currentUserInfoKey);
+   String rootUserStr = SharedPreferencesStorage().getString(Storage.currentUserInfoKey);
     UserProfile? userInfo;
    if(rootUserStr.isNotEmpty)
     {

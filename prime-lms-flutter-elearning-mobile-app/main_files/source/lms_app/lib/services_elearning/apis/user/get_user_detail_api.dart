@@ -14,7 +14,7 @@ class GetUserProfileInfoApi extends BaseApiRequest {
     dynamic result = await getRequestAPI();
     if(result.runtimeType == ResponseCommon)
     {
-      return null;
+     return null;
     }
     else
     {

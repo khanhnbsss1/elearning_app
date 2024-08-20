@@ -69,7 +69,7 @@ class LoginController extends MyController {
       }
       else
       {
-        // basicValidator.clearErrors();
+        basicValidator.clearErrors();
       }
     loading = false;
     update();
