@@ -1,4 +1,4 @@
-import 'package:drop_down_search_field/drop_down_search_field.dart';
+import 'package:async_searchable_dropdown/async_searchable_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -11,10 +11,7 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/services/apis/test/get_test_list_api.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
-import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
-import 'package:webkit/services/apis/vocabulary/vocabulary_list/vocabulary_list_api.dart';
 import 'package:webkit/views/test/test_detail/create_edit_test.dart';
-import 'package:webkit/views/vocabulary/vocabulary_detail/create_edit_words.dart';
 
 class SearchTestDropDown extends StatefulWidget {
   final Function(TestInfo) onSelectTest;
@@ -77,92 +74,38 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
               width: Dimens.size300,
               child: StatefulBuilder(
                 builder: (BuildContext context, void Function(void Function()) setState) {
-                  return DropDownSearchFormField(
-                    textFieldConfiguration: TextFieldConfiguration(
-                      autofocus: false,
-                      controller: _wordDropdownSearchFieldController,
-                      style: DefaultTextStyle.of(context).style.copyWith(
-                          fontStyle: FontStyle.italic
-                      ),
-                      decoration: InputDecoration(
-                        labelText: L10nX.getStr.test_name,
-                        hintTextDirection: AppTheme.textDirection,
-                        labelStyle: TextStyleConstant.textStyleBlack14w400,
-                        hintStyle: TextStyleConstant.textStyleBlack14w400,
-                        border: outlineInputBorder,
-                        prefixIcon: Icon(
-                          Icons.quiz,
-                          size: 20,
-                          color: ColorConst.colorIconRed,
-                        ),
-                        suffixIcon: Icon(
-                          LucideIcons.search,
-                          size: 20,
-                          color: ColorConst.colorIconRed,
-                        ),
-                        contentPadding: MySpacing.all(16),
-                        isCollapsed: true,
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                  return SearchableDropdown<TestInfo>(
+                    inputDecoration: InputDecoration(
+                      constraints: BoxConstraints(maxHeight: Dimens.size45),
+                      hintTextDirection: AppTheme.textDirection,
+                      labelStyle: TextStyleConstant.textStyleBlack14w400,
+                      hintStyle: TextStyleConstant.textStyleBlack14w400,
+                      border: outlineInputBorder,
+                      labelText: L10nX.getStr.search_lesson_str,
+                      prefixIcon: Icon(
+                        Icons.quiz,
+                        color: ColorConst.colorIconRed,
                       ),
                     ),
-            
-                    suggestionsCallback: (pattern) async {
-                      return await getTestFilterList(pattern);
+                    remoteItems: (search) async {
+                      return await getTestFilterList(search??"");
                     },
-            
-                    itemBuilder: (context, suggestion) {
-                      return OnHoverWidget(
-                        builder: (bool isHovered) {
-                          return  PointerInterceptor(
-                            child: InkWell(
-                              onTap: () {
-                                if(onSelectWord!=null)
-                                {
-                                  _wordDropdownSearchFieldController.text = suggestion.name??"";
-                                  onSelectWord(suggestion);
-                                }
-                                else
-                                {
-                                  ToastUtils.showToastError(L10nX.getStr.unknown_str);
-                                }
-                                print("object");
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
-                                    border: Border(
-                                        bottom: BorderSide(color: ColorConst.dividerColor)
-                                    )
-                                ),
-                                child: ListTile(
-                                  leading: Icon(Icons.book),
-                                  title: Text(suggestion.name??""),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
+                    itemLabelFormatter: (value) {
+                      return value.name??"";
                     },
-                    onSuggestionSelected: (suggestion) {
-                     
+                    onChanged: (TestInfo? value) {
+                      if(onSelectWord!=null)
+                      {
+                        _wordDropdownSearchFieldController.text = value?.name??"";
+                        onSelectWord(value!);
+                      }
+                      else
+                      {
+                        ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                      }
+                      print("object");
                     },
-                    transitionBuilder: (context, child, controller) {
-                      return Container(
-                        constraints: BoxConstraints(
-                            maxHeight: Dimens.size300
-                        ),
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                            color: ColorConst.whiteColor,
-                            borderRadius: BorderRadius.circular(Dimens.size10)
-                        ),
-                        padding: EdgeInsets.all(Dimens.size8),
-                        child: child,
-                      );
-                    },
-                    displayAllSuggestionWhenTap: false,
-                    hideSuggestionsOnKeyboardHide: true,
+                    value: null,
                   );
                 },
               ),

@@ -146,37 +146,49 @@ class _CreateEditLesson extends State<CreateEditLesson>
                       ),
                     ),
                     Divider(color: ColorConst.dividerColor.withOpacity(0.3),),
-                    ActionButton1(
-                      text: widget.lessonActionType == LessonActionType.create?L10nX.getStr.create_lesson_str:L10nX.getStr.str_update,
-                      width: Dimens.size150,
-                      onTap: () {
-                        state.lessonInfo??= LessonInfo();
-                        state.lessonInfo?.lectureName = state.editingControllerLectureName?.text;
-                        state.lessonInfo?.note = state.editingControllerLectureDescription?.text;
-                        state.lessonInfo?.link = state.editingControllerLectureVideoLink?.text;
-                        state.lessonInfo?.docName = state.editingControllerLectureName?.text;
-                        state.lessonInfo?.mode = mode;
-                        switch(widget.lessonActionType){
-                          
-                          case LessonActionType.view:
-                            // TODO: Handle this case.
-                            break;
-                          case LessonActionType.edit:
-                            // TODO: Handle this case.
-                              {
-                                BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateLessonEvent(lessonInfo: state.lessonInfo!));
-                              }
-                            break;
-                          case LessonActionType.create:
-                            // TODO: Handle this case.
-                          {
-                            BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailCreateLessonEvent(lessonInfo: state.lessonInfo!));
+                    Visibility(
+                      visible: widget.lessonActionType == LessonActionType.create || widget.lessonActionType == LessonActionType.edit,
+                      child: ActionButton1(
+                        text: widget.lessonActionType == LessonActionType.create?L10nX.getStr.create_lesson_str:L10nX.getStr.str_update,
+                        width: Dimens.size150,
+                        onTap: () {
+                          state.lessonInfo??= LessonInfo();
+                          state.lessonInfo?.lectureName = state.editingControllerLectureName?.text;
+                          state.lessonInfo?.note = state.editingControllerLectureDescription?.text;
+                          state.lessonInfo?.link = state.editingControllerLectureVideoLink?.text;
+                          state.lessonInfo?.docName = state.editingControllerLectureName?.text;
+                          state.lessonInfo?.mode = mode;
+                          switch(widget.lessonActionType){
+                            case LessonActionType.view:
+                              // TODO: Handle this case.
+                              break;
+                            case LessonActionType.edit:
+                              // TODO: Handle this case.
+                                {
+                                  BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateLessonEvent(lessonInfo: state.lessonInfo!));
+                                }
+                              break;
+                            case LessonActionType.create:
+                              // TODO: Handle this case.
+                            {
+                              BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailCreateLessonEvent(lessonInfo: state.lessonInfo!));
+                            }
+                              break;
+                            default: 
+                              break;
                           }
-                            break;
-                          default: 
-                            break;
-                        }
+                          },
+                      ),
+                    ),
+                    Visibility(
+                      visible: widget.lessonActionType == LessonActionType.view ,
+                      child: ActionButton1(
+                        text: L10nX.getStr.close,
+                        width: Dimens.size150,
+                        onTap: () {
+                          Navigator.of(context).pop();
                         },
+                      ),
                     ),
                   ],
                 ),

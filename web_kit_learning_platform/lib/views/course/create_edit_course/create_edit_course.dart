@@ -54,7 +54,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
   }
 
   List<LessonInfo> lectures = [];
@@ -280,8 +280,6 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
             tabs: [
               buildTabItem(state: state, title: S.of(context).introduction_str, index:0),
               buildTabItem(state: state, title: S.of(context).content_str, index: 1),
-              //buildTabItem(state: state, title: S.of(context).pricing_plan_str, index: 2),
-              buildTabItem(state: state, title: S.of(context).create_quiz_str, index: 3),
 
             ],
             controller: _tabController,
@@ -321,7 +319,6 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
         children: [
           CourseIntroductionPage(),
           CourseLinkLessonListPage(),
-          CourseLinkTestListPage()
         ],
         onPageChanged: (value) {
           if(!isExitCourse) {

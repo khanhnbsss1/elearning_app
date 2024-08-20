@@ -1,28 +1,20 @@
 import 'package:async_searchable_dropdown/async_searchable_dropdown.dart';
-import 'package:drop_down_search_field/drop_down_search_field.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:lucide_icons/lucide_icons.dart';
-import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
-import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
-import 'package:webkit/base/widgets/widgets.export.dart';
 import 'package:webkit/controller/ui/add_course_controller.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
-import 'package:webkit/l10n/l10n_extention.dart';
 import 'package:webkit/services/apis/lessson/lesson_list_filter/lesson_list_filter_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
-import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
+import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 
 class CourseLinkLessonListPage extends StatefulWidget {
   CourseLinkLessonListPage({super.key});
@@ -136,10 +128,11 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
         ));
       },
       onEdit: (p0) {
-        
+        CreateEditLesson(lessonInfo: p0, lessonActionType: LessonActionType.edit,).show(context);
       },
       onViewDetail: (p0) {
-        
+        CreateEditLesson(lessonInfo: p0, lessonActionType: LessonActionType.view,).show(context);
+
       },
     );
     return SfDataGridTheme(
@@ -151,9 +144,16 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
         columnWidthMode: ColumnWidthMode.fill,
         isScrollbarAlwaysShown: false,
         gridLinesVisibility: GridLinesVisibility.both,
-        rowHeight: Dimens.size60,
-        headerRowHeight: Dimens.size60,
+        headerGridLinesVisibility: GridLinesVisibility.both,
+        headerRowHeight: Dimens.size50,
+        rowHeight: Dimens.size80,
         showHorizontalScrollbar: true,
+        allowColumnsDragging: true,
+        allowColumnsResizing: true,
+        shrinkWrapRows: true,
+        onQueryRowHeight: (details) {
+          return details.rowHeight;
+        },
         columns: <GridColumn>[
           GridColumn(
               columnName: 'id',
@@ -166,7 +166,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   ))),
           GridColumn(
               columnName: L10nX.getStr.lecture_name_str,
-              minimumWidth: Dimens.size150,
+              minimumWidth: Dimens.size250,
               label: Container(
                   padding: EdgeInsets.all(8.0),
                   alignment: Alignment.center,
@@ -197,21 +197,22 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   child: Text(L10nX.getStr.document_str))),
           GridColumn(
               columnName: L10nX.getStr.word_str,
-              minimumWidth: Dimens.size250,
+              minimumWidth: Dimens.size300,
+              columnWidthMode: ColumnWidthMode.fitByCellValue,
               label: Container(
                   padding: EdgeInsets.all(8.0),
                   alignment: Alignment.center,
                   child: Text(L10nX.getStr.word_str))),
           GridColumn(
               columnName: L10nX.getStr.payment_str,
-              minimumWidth: Dimens.size80,
+              maximumWidth: Dimens.size120,
               label: Container(
                   padding: EdgeInsets.all(8.0),
                   alignment: Alignment.center,
                   child: Text(L10nX.getStr.payment_str))),
           GridColumn(
               columnName: L10nX.getStr.action_str,
-              minimumWidth: Dimens.size120,
+              maximumWidth: Dimens.size180,
               label: Container(
                   padding: EdgeInsets.all(8.0),
                   alignment: Alignment.center,
@@ -231,13 +232,17 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
             return SizedBox(
               width:Dimens.size300,
               child:SearchableDropdown<String>(
+                isEnabled: true,
                 inputDecoration:  InputDecoration(
+                  constraints: BoxConstraints(
+                      maxHeight: Dimens.size45
+                  ),
                   hintTextDirection: AppTheme.textDirection,
                   labelStyle: TextStyleConstant.textStyleBlack14w400,
                   hintStyle: TextStyleConstant.textStyleBlack14w400,
                   border: outlineInputBorder,
-                  labelText: L10nX.getStr.search_lesson_str,
-                  prefixIcon: Icon(Icons.play_lesson, color: ColorConst.colorIconRed,),
+                  labelText: L10nX.getStr.search_subject_str,
+                  prefixIcon: Icon(Icons.subject, color: ColorConst.colorIconRed,),
                 ),
                 remoteItems: (search) async {
                   return await getSubjectList(keyWord: search??"", state: state);
@@ -275,6 +280,9 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
               width:Dimens.size300,
               child:SearchableDropdown<LessonInfo>(
                 inputDecoration:  InputDecoration(
+                  constraints: BoxConstraints(
+                    maxHeight: Dimens.size45
+                  ),
                   hintTextDirection: AppTheme.textDirection,
                   labelStyle: TextStyleConstant.textStyleBlack14w400,
                   hintStyle: TextStyleConstant.textStyleBlack14w400,
@@ -412,7 +420,7 @@ class LessonDataSource extends DataGridSource {
                   borderRadius: BorderRadius.circular(Dimens.size20),
                   border: Border.all(color: ColorConst.blackColor, width: 1)
                 ), 
-                  padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: Dimens.size16),
+                  padding: EdgeInsets.symmetric(vertical: Dimens.size4, horizontal: Dimens.size16),
                   child: Text("data", style: TextStyleConstant.textStyleBlack14w400,)),
             ));
       }
@@ -420,45 +428,38 @@ class LessonDataSource extends DataGridSource {
       return  DataGridRow(
           cells: [
             DataGridCell<Widget>(columnName: 'id', value: Text(e.id.toString(), style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.lecture_name_str, value:Text(e.lectureName??"", style: TextStyleConstant.textStyleBlack14w400,) ),
-            DataGridCell<Widget>(columnName: L10nX.getStr.subject_name_str, value: Text(e.subName??"", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.lecture_link_str, value: Text(e.link??"", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.document_str, value: Text("abcsssij", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.word_str, value: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: wordList,
+            DataGridCell<Widget>(columnName: L10nX.getStr.lecture_name_str, value:Text(e.lectureName??"", softWrap: true,textAlign: TextAlign.start,style: TextStyleConstant.textStyleBlack14w400,) ),
+            DataGridCell<Widget>(columnName: L10nX.getStr.subject_name_str, value: Text(e.subName??"", softWrap: true,style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.lecture_link_str, value: Text(e.link??"",softWrap: true, style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.document_str, value: Text(e.docName??"", softWrap: true,style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.word_str, value: Container(
+              constraints: BoxConstraints(
+                maxHeight: Dimens.size150,
+                minHeight: Dimens.size100
+              ),
+              child: SingleChildScrollView(
+                child: Wrap(
+                  runAlignment: WrapAlignment.start,
+                  crossAxisAlignment: WrapCrossAlignment.start,
+                  spacing: Dimens.size4,
+                  runSpacing: Dimens.size4,
+                  children: wordList,
+                ),
               ),
             )),
-            DataGridCell<Widget>(columnName: L10nX.getStr.payment_str, value: Text(e.mode??"", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.payment_str, value: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () {
-                    onViewDetail(e);
-                  },
-                  child: Icon(Icons.remove_red_eye, size: Dimens.size20,color: ColorConst.colorIconGrays,),
-                ),
-                Gap(Dimens.size10),
-                InkWell(
-                  onTap: () {
-                    onEdit(e);
-                  },
-                  child: Icon(Icons.note_alt_outlined, size: Dimens.size20,color: ColorConst.colorIconGrays,),
-                ),
-                Gap(Dimens.size10),
-                InkWell(
-                  onTap: () {
-                    onDelete(e);
-                    },
-                  child: Icon(Icons.delete_forever, size: Dimens.size20,color: Colors.red,),
-                ),
-                Gap(Dimens.size10),
-              ],
-            )),
+            DataGridCell<Widget>(columnName: L10nX.getStr.payment_str, value: Text(e.mode??"", softWrap: true,style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.action_str, value: ItemViewEditDelete(
+              itemInfo: e,
+              onViewDetail: (p0) {
+                onViewDetail(e);
+              },
+              onDelete: (p0) {
+                onDelete(e);
+              },
+              onEdit: (p0) {
+                onEdit(e);
+              },
+            ),),
 
           ]);
     },).toList();

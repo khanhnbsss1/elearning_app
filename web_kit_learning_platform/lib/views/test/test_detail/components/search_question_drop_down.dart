@@ -1,4 +1,4 @@
-import 'package:drop_down_search_field/drop_down_search_field.dart';
+import 'package:async_searchable_dropdown/async_searchable_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
@@ -11,8 +11,6 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/services/apis/question/get_quiz_list_api.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
-import 'package:webkit/views/test/test_detail/create_edit_test.dart';
-import 'package:webkit/views/vocabulary/vocabulary_detail/create_edit_words.dart';
 
 class SearchQuizDropDown extends StatefulWidget {
   final List<QuestionInfo> allWords;
@@ -117,93 +115,38 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
               width: Dimens.size300,
               child: StatefulBuilder(
                 builder: (BuildContext context, void Function(void Function()) setState) {
-                  return DropDownSearchFormField(
-                    textFieldConfiguration: TextFieldConfiguration(
-                      autofocus: true,
-                      controller: _wordDropdownSearchFieldController,
-                      style: DefaultTextStyle.of(context).style.copyWith(
-                          fontStyle: FontStyle.italic
-                      ),
-                      decoration: InputDecoration(
-                        labelText: L10nX.getStr.search_lesson_str,
-                        hintTextDirection: AppTheme.textDirection,
-                        labelStyle: TextStyleConstant.textStyleBlack14w400,
-                        hintStyle: TextStyleConstant.textStyleBlack14w400,
-                        border: outlineInputBorder,
-                        prefixIcon: Icon(
-                          Icons.edit_document,
-                          size: 20,
-                          color: ColorConst.colorIconRed,
-                        ),
-                        suffixIcon: Icon(
-                          LucideIcons.search,
-                          size: 20,
-                          color: ColorConst.colorIconRed,
-                        ),
-                        contentPadding: MySpacing.all(16),
-                        isCollapsed: true,
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                  return SearchableDropdown<QuestionInfo>(
+                    inputDecoration: InputDecoration(
+                      constraints: BoxConstraints(maxHeight: Dimens.size45),
+                      hintTextDirection: AppTheme.textDirection,
+                      labelStyle: TextStyleConstant.textStyleBlack14w400,
+                      hintStyle: TextStyleConstant.textStyleBlack14w400,
+                      border: outlineInputBorder,
+                      labelText: L10nX.getStr.search_lesson_str,
+                      prefixIcon: Icon(
+                        Icons.edit_document,
+                        color: ColorConst.colorIconRed,
                       ),
                     ),
-            
-                    suggestionsCallback: (pattern) async {
-                      return await getQuestionFilterList(pattern);
+                    remoteItems: (search) async {
+                      return await getQuestionFilterList(search??"");
                     },
-            
-                    itemBuilder: (context, suggestion) {
-                      return OnHoverWidget(
-                        builder: (bool isHovered) {
-                          return  PointerInterceptor(
-                            child: InkWell(
-                              onTap: () {
-                                if(onSelectWord!=null)
-                                {
-                                  //_wordDropdownSearchFieldController.text = suggestion.simplified??"";
-                                  onSelectWord(suggestion);
-                                }
-                                else
-                                {
-                                  ToastUtils.showToastError(L10nX.getStr.unknown_str);
-                                }
-                                print("object");
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
-                                    border: Border(
-                                        bottom: BorderSide(color: ColorConst.dividerColor)
-                                    )
-                                ),
-                                child: ListTile(
-                                  leading: Icon(Icons.book),
-                                  title: Text(suggestion.questionName??""),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
+                    itemLabelFormatter: (value) {
+                      return value.questionName??"";
                     },
-                    onSuggestionSelected: (suggestion) {
+                    onChanged: (QuestionInfo? value) {
+                      if(onSelectWord!=null)
+                      {
+                        //_wordDropdownSearchFieldController.text = suggestion.simplified??"";
+                        onSelectWord(value!);
+                      }
+                      else
+                      {
+                        ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                      }
+                      print("object");
                     },
-                    transitionBuilder: (context, child, controller) {
-                      return PointerInterceptor(
-                        child: Container(
-                          constraints: BoxConstraints(
-                              maxHeight: Dimens.size300
-                          ),
-                          clipBehavior: Clip.hardEdge,
-                          decoration: BoxDecoration(
-                              color: ColorConst.whiteColor,
-                              borderRadius: BorderRadius.circular(Dimens.size10)
-                          ),
-                          padding: EdgeInsets.all(Dimens.size8),
-                          child: child,
-                        ),
-                      );
-                    },
-                    displayAllSuggestionWhenTap: false,
-                    hideSuggestionsOnKeyboardHide: true,
+                    value: null,
                   );
                 },
               ),

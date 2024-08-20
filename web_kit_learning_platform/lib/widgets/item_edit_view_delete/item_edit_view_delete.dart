@@ -34,8 +34,12 @@ class ItemViewEditDelete extends StatelessWidget{
                 color: ColorConst.greyColor.withOpacity(0.02),
                 borderRadius: BorderRadius.circular(Dimens.size40)
             ),
+            constraints: BoxConstraints(
+              maxHeight: Dimens.size35,
+              maxWidth: Dimens.size35,
+            ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:  EdgeInsets.all(Dimens.size6),
               child: Center(
                 child: InkWell(
                   onTap: () {
@@ -58,8 +62,12 @@ class ItemViewEditDelete extends StatelessWidget{
                 color: ColorConst.greyColor.withOpacity(0.02),
                 borderRadius: BorderRadius.circular(Dimens.size40)
             ),
+            constraints: BoxConstraints(
+              maxHeight: Dimens.size35,
+              maxWidth: Dimens.size35,
+            ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:  EdgeInsets.all(Dimens.size6),
               child: Center(
                 child:  InkWell(
                   onTap: () {
@@ -82,8 +90,12 @@ class ItemViewEditDelete extends StatelessWidget{
                 color: ColorConst.mainColor.withOpacity(0.02),
                 borderRadius: BorderRadius.circular(Dimens.size40)
             ),
+            constraints: BoxConstraints(
+              maxHeight: Dimens.size35,
+              maxWidth: Dimens.size35,
+            ),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:  EdgeInsets.all(Dimens.size6),
               child: Center(
                 child: InkWell(
                   onTap: () {

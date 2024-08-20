@@ -1,4 +1,4 @@
-import 'package:drop_down_search_field/drop_down_search_field.dart';
+import 'package:async_searchable_dropdown/async_searchable_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -29,10 +29,9 @@ class CourseLinkTestListPage extends StatefulWidget {
 }
 
 class _CourseIntroductionPageState extends State<CourseLinkTestListPage> with SingleTickerProviderStateMixin, UIMixin {
-  ScrollController scrollController=ScrollController();
+  ScrollController scrollController = ScrollController();
   final TextEditingController _subjectDropdownSearchFieldController = TextEditingController();
   final TextEditingController _lessonDropdownSearchFieldController = TextEditingController();
-
 
   @override
   void initState() {
@@ -68,13 +67,11 @@ class _CourseIntroductionPageState extends State<CourseLinkTestListPage> with Si
       builder: (controller) {
         return Container(
           decoration: BoxDecoration(
-            // color: Color.fromRGBO(255, 233, 233, 1.0),
-            border: Border.all(
-              color: ColorConst.colorHintTextSearch,
-            ),
-              borderRadius: BorderRadius.circular(Dimens.size20)
-
-          ),
+              // color: Color.fromRGBO(255, 233, 233, 1.0),
+              border: Border.all(
+                color: ColorConst.colorHintTextSearch,
+              ),
+              borderRadius: BorderRadius.circular(Dimens.size20)),
           padding: EdgeInsets.all(Dimens.size16),
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
@@ -83,15 +80,23 @@ class _CourseIntroductionPageState extends State<CourseLinkTestListPage> with Si
                 children: [
                   Row(
                     children: [
-                      firstTestDropDownSearch(context: context, state: state, title: L10nX.getStr.search_lesson_str, onSelectTest: (p0) {
-                      },),
+                      firstTestDropDownSearch(
+                        context: context,
+                        state: state,
+                        title: L10nX.getStr.search_lesson_str,
+                        onSelectTest: (p0) {},
+                      ),
                     ],
                   ),
                   Gap(Dimens.size16),
                   Row(
                     children: [
-                      firstTestDropDownSearch(context: context, state: state, title: L10nX.getStr.search_lesson_str, onSelectTest: (p0) {
-                      },),
+                      firstTestDropDownSearch(
+                        context: context,
+                        state: state,
+                        title: L10nX.getStr.search_lesson_str,
+                        onSelectTest: (p0) {},
+                      ),
                     ],
                   ),
                 ],
@@ -102,121 +107,60 @@ class _CourseIntroductionPageState extends State<CourseLinkTestListPage> with Si
       },
     );
   }
-  
-  Widget firstTestDropDownSearch(
-      {
-        Function(TestInfo)? onSelectTest, 
-        required AddCourseState state, 
-        required BuildContext context,
-        required String title
-      }) {
-    return Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            width: Dimens.size300,
-            child: StatefulBuilder(
-              builder: (BuildContext context, void Function(void Function()) setState) {
-                return DropDownSearchFormField(
-                  textFieldConfiguration: TextFieldConfiguration(
-                    autofocus: true,
-                    controller: _lessonDropdownSearchFieldController,
-                    style: DefaultTextStyle.of(context).style.copyWith(
-                        fontStyle: FontStyle.italic
-                    ),
 
-                    decoration: InputDecoration(
-                      labelText: title, 
-                      hintTextDirection: AppTheme.textDirection,
-                      labelStyle: TextStyleConstant.textStyleBlack14w400,
-                      hintStyle: TextStyleConstant.textStyleBlack14w400,
-                      border: outlineInputBorder,
-                      prefixIcon: Icon(
-                        Icons.edit_document,
-                        size: 20,
-                        color: ColorConst.colorIconRed,
-                      ),
-                      suffixIcon: Icon(
-                        LucideIcons.search,
-                        size: 20,
-                        color: ColorConst.colorIconRed,
-                      ),
-                      contentPadding: MySpacing.all(16),
-                      isCollapsed: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                    ),
-                  ),
-
-                  suggestionsCallback: (pattern) async {
-                    return await getTestFilterList(pattern);
-                  },
-
-                  itemBuilder: (context, suggestion) {
-                    return OnHoverWidget(
-                      builder: (bool isHovered) {
-                        return  Container(
-                          decoration: BoxDecoration(
-                              color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
-                              border: Border(
-                                  bottom: BorderSide(color: ColorConst.dividerColor)
-                              )
-                          ),
-                          child: ListTile(
-                            leading: Icon(Icons.edit_document),
-                            title: Text(suggestion.lectureName??""),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  onSuggestionSelected: (suggestion) {
-                    if((BlocProvider.of<AddCourseBloc>(context).state.currentSubject??'').isEmpty)
-                    {
-                      ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
-                      return;
-                    }
-                    if(onSelectTest!=null)
-                    {
-                      _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
-                      onSelectTest(suggestion);
-                    }
-                    else
-                    {
-                      ToastUtils.showToastError(L10nX.getStr.unknown_str);
-                    }
-                    print("object");
-                  },
-                  transitionBuilder: (context, child, controller) {
-                    return Container(
-                      constraints: BoxConstraints(
-                          maxHeight: Dimens.size300
-                      ),
-                      clipBehavior: Clip.hardEdge,
-                      decoration: BoxDecoration(
-                          color: ColorConst.whiteColor,
-                          borderRadius: BorderRadius.circular(Dimens.size10)
-                      ),
-                      padding: EdgeInsets.all(Dimens.size8),
-                      child: child,
-                    );
-                  },
-                  displayAllSuggestionWhenTap: false,
-                  hideSuggestionsOnKeyboardHide: true,
-                );
+  Widget firstTestDropDownSearch({Function(TestInfo)? onSelectTest, required AddCourseState state, required BuildContext context, required String title}) {
+    return Row(mainAxisSize: MainAxisSize.min, children: [
+      SizedBox(
+        width: Dimens.size300,
+        child: StatefulBuilder(
+          builder: (BuildContext context, void Function(void Function()) setState) {
+            return SearchableDropdown<TestInfo>(
+              inputDecoration: InputDecoration(
+                constraints: BoxConstraints(maxHeight: Dimens.size45),
+                hintTextDirection: AppTheme.textDirection,
+                labelStyle: TextStyleConstant.textStyleBlack14w400,
+                hintStyle: TextStyleConstant.textStyleBlack14w400,
+                border: outlineInputBorder,
+                labelText: L10nX.getStr.search_lesson_str,
+                prefixIcon: Icon(
+                  Icons.quiz,
+                  color: ColorConst.colorIconRed,
+                ),
+              ),
+              remoteItems: (search) async {
+                return await getTestFilterList(search ?? "",);
               },
-            ),
-          ),
-          Gap(Dimens.size16),
-        ]
-    );
+              itemLabelFormatter: (value) {
+                return value.name??"";
+              },
+              onChanged: (TestInfo? value) {
+                if ((BlocProvider.of<AddCourseBloc>(context).state.currentSubject ?? '').isEmpty) {
+                  ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
+                  return;
+                }
+                if (onSelectTest != null) {
+                  _lessonDropdownSearchFieldController.text = value?.lectureName ?? "";
+                  onSelectTest(value!);
+                } else {
+                  ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                }
+                print("object");
+              },
+              value: null,
+            );
+          },
+        ),
+      ),
+      Gap(Dimens.size16),
+    ]);
   }
-  Future<List<TestInfo>>getTestFilterList(String keyWord) async{
-    if(keyWord.isEmpty) {
+
+  Future<List<TestInfo>> getTestFilterList(String keyWord) async {
+    if (keyWord.isEmpty) {
       return [];
     }
-    GetTestListApi getLessonListApi= GetTestListApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord));
+    GetTestListApi getLessonListApi = GetTestListApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord));
     TestListResponseModel data = await getLessonListApi.call();
-    return data.content??[];
+    return data.content ?? [];
   }
-
 }

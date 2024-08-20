@@ -323,7 +323,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
             columnWidthMode: ColumnWidthMode.fill,
             isScrollbarAlwaysShown: false,
             gridLinesVisibility: GridLinesVisibility.both,
-            rowHeight: Dimens.size60,
+            headerGridLinesVisibility: GridLinesVisibility.both,
             headerRowHeight: Dimens.size60,
             //defaultColumnWidth: 200,
             showHorizontalScrollbar: true,
