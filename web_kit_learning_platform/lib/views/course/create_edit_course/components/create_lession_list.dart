@@ -227,6 +227,8 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
             return SizedBox(
               width:Dimens.size300,
               child: DropDownSearchField(
+                debounceDuration: Duration(microseconds: 10),
+
                 textFieldConfiguration: TextFieldConfiguration(
                   autofocus: false,
                    controller: _subjectDropdownSearchFieldController,
@@ -343,6 +345,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                 onSuggestionsBoxToggle: (p0) {
                   print("object");
                 },
+                debounceDuration: Duration(microseconds: 10),
                 textFieldConfiguration: TextFieldConfiguration(
                   autofocus: true,
                   controller: _lessonDropdownSearchFieldController,
