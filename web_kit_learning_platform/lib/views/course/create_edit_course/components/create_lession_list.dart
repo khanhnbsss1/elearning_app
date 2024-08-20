@@ -227,8 +227,31 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
             return SizedBox(
               width:Dimens.size300,
               child: DropDownSearchField(
-                debounceDuration: Duration(microseconds: 10),
-
+                layoutArchitecture: (items, controller) {
+                  return PointerInterceptor(
+                    child: Container(
+                      constraints: BoxConstraints(
+                          maxHeight: Dimens.size300
+                      ),
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                          color: ColorConst.whiteColor,
+                          borderRadius: BorderRadius.circular(Dimens.size10)
+                      ),
+                      padding: EdgeInsets.all(Dimens.size8),
+                      child: ListView.builder(
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              print("object");
+                            },
+                              child: items.elementAt(index));
+                        },
+                      ),
+                    ),
+                  );
+                },
                 textFieldConfiguration: TextFieldConfiguration(
                   autofocus: false,
                    controller: _subjectDropdownSearchFieldController,
@@ -260,7 +283,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                 suggestionsCallback: (pattern) async {
                   return await getSubjectList(keyWord: pattern, state: state);
                 },
-                keepSuggestionsOnSuggestionSelected: true,
+                keepSuggestionsOnSuggestionSelected: false,
                 itemBuilder: (context, suggestion) {
                   return OnHoverWidget(
                     builder: (bool isHovered) {
@@ -291,11 +314,12 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   );
                 },
                 onSuggestionSelected: (suggestion) {
-                  if(onSelectSubject!=null)
+                    if(onSelectSubject!=null)
                     {
                       _subjectDropdownSearchFieldController.text = suggestion;
                       onSelectSubject(suggestion);
                     }
+ 
                 },
                 transitionBuilder: (context, child, controller) {
                   return PointerInterceptor(
@@ -320,6 +344,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   );
                 },
                 displayAllSuggestionWhenTap: false,
+                hideSuggestionsOnKeyboardHide: true,
               ),
             );
             },
@@ -345,7 +370,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                 onSuggestionsBoxToggle: (p0) {
                   print("object");
                 },
-                debounceDuration: Duration(microseconds: 10),
+                
                 textFieldConfiguration: TextFieldConfiguration(
                   autofocus: true,
                   controller: _lessonDropdownSearchFieldController,
@@ -381,38 +406,17 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                 itemBuilder: (context, suggestion) {
                   return OnHoverWidget(
                     builder: (bool isHovered) {
-                      return  PointerInterceptor(
-                        intercepting: false,
-                        child: InkWell(
-                          onTap: () {
-                            if((BlocProvider.of<AddCourseBloc>(blocContext).state.currentSubject??'').isEmpty)
-                            {
-                              ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
-                              return;
-                            }
-                            if(onSelectLesson!=null)
-                            {
-                              _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
-                              onSelectLesson(suggestion);
-                            }
-                            else
-                            {
-                              ToastUtils.showToastError(L10nX.getStr.unknown_str);
-                            }
-                            print("object");
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
-                                border: Border(
-                                    bottom: BorderSide(color: ColorConst.dividerColor)
-                                )
-                            ),
-                            child: ListTile(
-                              leading: Icon(Icons.edit_document),
-                              title: Text(suggestion.lectureName??""),
-                            ),
-                          ),
+                      return  Container(
+                        decoration: BoxDecoration(
+                            color: isHovered?ColorConst.mainColor.withOpacity(0.05):ColorConst.whiteColor,
+                            border: Border(
+                                bottom: BorderSide(color: ColorConst.dividerColor)
+                            )
+                        ),
+                        padding: EdgeInsets.symmetric(vertical: Dimens.size6),
+                        child: ListTile(
+                          leading: Icon(Icons.edit_document),
+                          title: Text(suggestion.lectureName??""),
                         ),
                       );
                     },
@@ -426,7 +430,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   }
                   if(onSelectLesson!=null)
                   {
-                    _lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
+                   //_lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
                     onSelectLesson(suggestion);
                   }
                   else
@@ -457,7 +461,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                   );
                 },
                 displayAllSuggestionWhenTap: false,
-                keepSuggestionsOnSuggestionSelected: true,
+                keepSuggestionsOnSuggestionSelected: false,
               
               ),
             ),
