@@ -6099,6 +6099,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Your score`
+  String get you_score {
+    return Intl.message(
+      'Your score',
+      name: 'you_score',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of correct answers`
+  String get you_correct_number {
+    return Intl.message(
+      'Number of correct answers',
+      name: 'you_correct_number',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

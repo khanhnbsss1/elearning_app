@@ -868,50 +868,51 @@ class _MenuWidgetState extends State<MenuWidget>
       return SizedBox();
     }
     if (ThemeCustomizer().leftBarCondensed) {
-      return CustomPopupMenu(
-        backdrop: true,
-        show: popupShowing,
-        hideFn: (_) => hideFn = _,
-        onChange: (_) {
-          // popupShowing = _;
-        },
-        placement: CustomPopupMenuPlacement.right,
-        menu: MouseRegion(
-          cursor: SystemMouseCursors.click,
-          onHover: (event) {
-            setState(() {
-              isHover = true;
-            });
+      return Center(
+        child: CustomPopupMenu(
+          backdrop: true,
+          show: popupShowing,
+          hideFn: (_) => hideFn = _,
+          onChange: (_) {
           },
-          onExit: (event) {
-            setState(() {
-              isHover = false;
-            });
-          },
-          child: MyContainer.transparent(
-            margin: MySpacing.fromLTRB(Dimens.size16, 0, Dimens.size16, Dimens.size8),
-            color: isActive || isHover
-                ? leftBarTheme.activeItemBackground
-                : Colors.transparent,
-            padding: EdgeInsets.only(left: Dimens.size0),
-            child: Center(
-              child: Icon(
-                widget.iconData,
-                color: (isHover || isActive)
-                    ? leftBarTheme.activeItemColor
-                    : leftBarTheme.onBackground,
-                size: Dimens.size20,
+          placement: CustomPopupMenuPlacement.right,
+          menu: MouseRegion(
+            cursor: SystemMouseCursors.click,
+            onHover: (event) {
+              setState(() {
+                isHover = true;
+              });
+            },
+            onExit: (event) {
+              setState(() {
+                isHover = false;
+              });
+            },
+            child: MyContainer.transparent(
+              margin: MySpacing.fromLTRB(Dimens.size12, 0, Dimens.size16, Dimens.size8),
+              color: isActive || isHover
+                  ? leftBarTheme.activeItemBackground
+                  : Colors.transparent,
+              padding: EdgeInsets.only(left: Dimens.size0),
+              child: Center(
+                child: Icon(
+                  widget.iconData,
+                  color: (isHover || isActive)
+                      ? leftBarTheme.activeItemColor
+                      : leftBarTheme.onBackground,
+                  size: Dimens.size20,
+                ),
               ),
             ),
           ),
-        ),
-        menuBuilder: (_) => MyContainer.bordered(
-          paddingAll: Dimens.size8,
-          width: Dimens.size190,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisSize: MainAxisSize.min,
-            children: widget.children,
+          menuBuilder: (_) => MyContainer.bordered(
+            paddingAll: Dimens.size8,
+            width: Dimens.size190,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: widget.children,
+            ),
           ),
         ),
       );

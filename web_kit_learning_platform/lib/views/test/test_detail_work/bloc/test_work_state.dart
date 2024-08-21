@@ -30,7 +30,7 @@ class TestWorkState extends Equatable {
     this.result
   }){
     page??=0;
-    pageSize??=2;
+    pageSize??=8;
   }
   
   TestWorkState copyWith({

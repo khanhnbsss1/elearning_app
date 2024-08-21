@@ -612,6 +612,8 @@
   "you_are_ready_title_close_test": "Hủy bỏ bài kiểm tra",
   "you_are_finish_test_title": "Bạn đã hoàn thành bài kiểm tra",
   "test_result": "Kết quả bài test",
-  "view_result_str": "Xem kết quả"
+  "view_result_str": "Xem kết quả",
+  "you_score": "Điểm của bạn",
+  "you_correct_number": "Số câu đúng"
 
 }

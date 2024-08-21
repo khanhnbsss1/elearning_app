@@ -612,5 +612,7 @@
   "you_are_ready_title_close_test": "Cancel the test",
   "you_are_finished_test_title": "You have finished the test",
   "view_result_str": "View results",
-  "test_result": "Test result"
+  "test_result": "Test result",
+  "you_score": "Your score",
+  "you_correct_number": "Number of correct answers"
 }

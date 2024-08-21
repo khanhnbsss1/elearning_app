@@ -607,5 +607,7 @@
   "you_are_ready_title_close_test": "取消测试",
   "you_are_finish_test_title": "您已完成测试",
   "view_result_str": "查看结果",
-  "test_result": "测试结果"
+  "test_result": "测试结果",
+  "you_score": "你的分数",
+  "you_ Correct_number": "正确句子的数量"
 }

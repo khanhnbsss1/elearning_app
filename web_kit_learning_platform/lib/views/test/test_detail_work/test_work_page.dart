@@ -10,39 +10,37 @@ import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
+import 'package:webkit/services/apis/scores/models/score_result.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
 import 'package:webkit/views/question/question_detail/question_work/question_work_item.dart';
 import 'bloc/test_work_bloc.dart';
 
 class TestWorkPage extends StatefulWidget {
   void show(BuildContext context) {
+    
     if(enableShowResult!=true) /// truong hop chua lam bai test
       {
         ConfirmPopupPage(
           content: "${L10nX.getStr.start_test_confirm} ${testInfo.durian??0} (${L10nX.getStr.time_in_minute_str})",
           onAccept: () {
-            showDialog(
+            showGeneralDialog(
                 context: context,
                 barrierDismissible: false,
-                builder: (BuildContext context) {
-                  return Dialog(
-                    child: this,
-                  );
-                });
+                pageBuilder: (context, animation, secondaryAnimation) {
+                  return this;
+                },);
           },
           
         ).show(context);
       }
     else
       {
-        showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (BuildContext context) {
-              return Dialog(
-                child: this,
-              );
-            });
+        showGeneralDialog(
+          context: context,
+          barrierDismissible: false,
+          pageBuilder: (context, animation, secondaryAnimation) {
+            return this;
+          },);
       }
 
   }
@@ -116,20 +114,8 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
 
                   case TestWorkStatus.onScoreResult:
                     // TODO: Handle this case.
-                    CustomDialog1(
-                      title: L10nX.getStr.test_result,
-                      child: SizedBox(),
-                    ).show(context);
-                    ConfirmPopupPage(
-                      content: L10nX.getStr.you_are_finished_test_title,
-                      accept: L10nX.getStr.view_result_str,
-                      onAccept: () {
-                        
-                      },
-                      onCancel: () {
-                        
-                      },
-                    ).show(context);
+                    showResultTest(state: state, context: context);
+                    break;
                   case TestWorkStatus.unKnown:
                     // TODO: Handle this case.
                   default:
@@ -273,7 +259,7 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
           QuestionInfo questionInfo = quiz.elementAt(index);
           int questionIndex = (state.page??0)* (state.pageSize??0) +index;
           return Padding(
-            padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: Dimens.size40),
+            padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: ResponsiveInfo.isPhone()?Dimens.size8:Dimens.size40),
             child: SizedBox(
               width: Dimens.size800,
               child: QuestionWorkItem(
@@ -355,5 +341,94 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
         },
       ),
     );
+  }
+  void showResultTest({required TestWorkState state, required BuildContext context}){
+    if(state.result==null) {
+      return;
+    }
+    double width = MediaQuery.of(context).size.width> (Dimens.size500 -40)? Dimens.size500:MediaQuery.of(context).size.width - 40;
+    CustomDialog1(
+      title: L10nX.getStr.test_result,
+      height: Dimens.size300,
+      width: width,
+      bodyBackGroundColor: ColorConst.whiteColor,
+      mainAxisSizeParent: MainAxisSize.max,
+      headerColor: ColorConst.mainColor,
+      titleAlignment: MainAxisAlignment.center,
+      titleStyle: TextStyleConstant.textStyleBlack18w600.copyWith(color: ColorConst.whiteColor),
+      child: Expanded(
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text("${L10nX.getStr.you_score}:",style:  TextStyleConstant.textStyleBlack14w400,),
+                            ],
+                          )),
+                          Gap(Dimens.size16),
+                          Expanded(child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text("${state.result?.point??0}",style:  TextStyleConstant.textStyleBlack24w700.copyWith(color: ColorConst.mainColor),),
+                            ],
+                          )),
+                      
+                        ],
+                      ),
+                      Gap(Dimens.size16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text("${L10nX.getStr.you_correct_number}: ",style:  TextStyleConstant.textStyleBlack14w400,),
+                            ],
+                          )),
+                          Gap(Dimens.size16),
+                          Expanded(child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text("${state.result?.totalRight??0}/${state.result?.total}",style:  TextStyleConstant.textStyleBlack24w700.copyWith(color: ColorConst.mainColor),),
+                            ],
+                          )),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Gap(ResponsiveInfo.isPhone()?Dimens.size8:Dimens.size16 ),
+              ActionButton1(
+                text: L10nX.getStr.detail_str,
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              Gap(ResponsiveInfo.isPhone()?Dimens.size8:Dimens.size16 ),
+            ],
+          ),
+        ),
+      ),
+    ).show(context);
   }
 }

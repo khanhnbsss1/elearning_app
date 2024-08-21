@@ -709,6 +709,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("您有帐户吗？"),
         "you_do_not_have_an_account":
             MessageLookupByLibrary.simpleMessage("您还没有帐户？"),
+        "you_score": MessageLookupByLibrary.simpleMessage("你的分数"),
         "you_want_remove": MessageLookupByLibrary.simpleMessage("您要删除吗"),
         "your_address": MessageLookupByLibrary.simpleMessage("您的地址"),
         "your_course": MessageLookupByLibrary.simpleMessage("你的课程"),

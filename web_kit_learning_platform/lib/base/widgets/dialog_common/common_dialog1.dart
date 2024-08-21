@@ -170,7 +170,7 @@ class CustomDialog1 extends StatelessWidgetCommon{
                                                 child: Icon(
                                                   Icons.arrow_back_ios_rounded,
                                                   size: Dimens.size20,
-                                                  color: enableBackButton!?ColorConst.colorIconGrays:Colors.transparent,
+                                                  color: enableBackButton!?ColorConst.whiteColor:Colors.transparent,
                                                 ),
                                               )),
                                         ),
@@ -197,7 +197,7 @@ class CustomDialog1 extends StatelessWidgetCommon{
                                               child: Icon(
                                                 Icons.close,
                                                 size: Dimens.size20,
-                                                color: ColorConst.colorIconGrays,
+                                                color: ColorConst.whiteColor,
                                               ),
                                             )):
                                         SizedBox(width: Dimens.size20,),

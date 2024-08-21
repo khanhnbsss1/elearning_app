@@ -836,10 +836,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn có chắc chắn muốn nộp bài !"),
         "you_are_ready_title_close_test":
             MessageLookupByLibrary.simpleMessage("Cancel the test"),
+        "you_correct_number":
+            MessageLookupByLibrary.simpleMessage("Number of correct answers"),
         "you_do_have_an_account":
             MessageLookupByLibrary.simpleMessage("Do you have an account?"),
         "you_do_not_have_an_account": MessageLookupByLibrary.simpleMessage(
             "You don\'t have an account yet?"),
+        "you_score": MessageLookupByLibrary.simpleMessage("Your score"),
         "you_want_remove":
             MessageLookupByLibrary.simpleMessage("Do you want to remove"),
         "your_address": MessageLookupByLibrary.simpleMessage("Your address"),
