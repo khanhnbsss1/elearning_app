@@ -74,20 +74,24 @@ class AudioSpeakerState extends State<AudioSpeaker> {
           children: [
             Visibility(
               visible: false,
-                child: SizedBox(
-                  width: Dimens.size200,
-                  child: SfSlider(
-                    min: Duration(seconds: 0).inSeconds,
-                    max: length??Duration(seconds: 1).inSeconds,
-                    stepDuration: SliderStepDuration(seconds: 1),
-                    dateFormat: DateFormat.ms(),
-                    dateIntervalType: DateIntervalType.seconds,
-                    showTicks: true,
-                    showLabels: true,
-                    value: (event??Duration(seconds: 0)).inSeconds, onChanged: (value) {  },
-                  ),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: Dimens.size200,
+                      child: SfSlider(
+                        min: Duration(seconds: 0).inSeconds,
+                        max: length??Duration(seconds: 1).inSeconds,
+                        stepDuration: SliderStepDuration(seconds: 1),
+                        dateFormat: DateFormat.ms(),
+                        dateIntervalType: DateIntervalType.seconds,
+                        showTicks: true,
+                        showLabels: true,
+                        value: (event??Duration(seconds: 0)).inSeconds, onChanged: (value) {  },
+                      ),
+                    ),
+                    Gap(Dimens.size8),
+                  ],
                 )),
-            Gap(Dimens.size8),
             icon
           ],
         );

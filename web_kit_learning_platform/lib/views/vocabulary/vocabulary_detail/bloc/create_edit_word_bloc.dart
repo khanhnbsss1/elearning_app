@@ -140,20 +140,19 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     
     UserProfile? userProfile = UserManager().getUserProfile();
     MonitorLoading().showLoading("");
-    VocabularyInfo word = VocabularyInfo(
-      simplified: event.state.addWordController?.basicValidator.getController('simplified')?.text,
-      traditional:  event.state.addWordController?.basicValidator.getController('traditional')?.text,
-      pinyinTones:  event.state.addWordController?.basicValidator.getController('pinyin_tones')?.text,
-      audio:  event.state.addWordController?.basicValidator.getController('audio')?.text,
-      translationVn:  event.state.addWordController?.basicValidator.getController('translation_vn')?.text,
-      createdBy: userProfile?.userName??"",
-    );
-    AddWordsApi addWordsApi = AddWordsApi(word: word);
+    state.vocabularyInfo?.simplified = event.state.addWordController?.basicValidator.getController('simplified')?.text;
+    state.vocabularyInfo?.traditional = event.state.addWordController?.basicValidator.getController('traditional')?.text;
+    state.vocabularyInfo?.pinyinTones = event.state.addWordController?.basicValidator.getController('pinyin_tones')?.text;
+    state.vocabularyInfo?.audio = event.state.addWordController?.basicValidator.getController('audio')?.text;
+    state.vocabularyInfo?.translationVn = event.state.addWordController?.basicValidator.getController('translation_vn')?.text;
+    state.vocabularyInfo?.createdBy = userProfile?.userName??"";
+
+    AddWordsApi addWordsApi = AddWordsApi(word:  state.vocabularyInfo!);
     dynamic data = await addWordsApi.call();
     MonitorLoading().dismiss();
     emit(event.state.copyWith(
       blocStatus: CreateEditWordStatus.onSubmit,
-      vocabularyInfo: word,
+      vocabularyInfo:  state.vocabularyInfo,
     ));
   }  
   Future<void> _onUpdateWord(

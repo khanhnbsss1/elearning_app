@@ -41,11 +41,12 @@ class CreateEditWordsPage extends StatefulWidget {
         });
   }
 
-  CreateEditWordsPage({super.key,this.vocabularyInfo, this.wordsPageActionType}) {
+  CreateEditWordsPage({super.key,this.vocabularyInfo, this.wordsPageActionType, this.onCreated}) {
     wordsPageActionType ??= WordsPageActionType.create;
   }
   VocabularyInfo? vocabularyInfo;
   WordsPageActionType? wordsPageActionType;
+  Function()?onCreated;
   @override
   State<CreateEditWordsPage> createState() => _CreateEditWordsPageState();
 }
@@ -72,6 +73,29 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
         child: BlocConsumer<CreateEditWordBloc, CreateEditWordState>(listener: (context, state) {
           switch (state.blocStatus) {
             case CreateEditWordStatus.initial:
+              break;
+            case CreateEditWordStatus.onUploadAudio:
+              // TODO: Handle this case.
+              break;
+            case CreateEditWordStatus.onUploadImage:
+              // TODO: Handle this case.
+            break;
+            case CreateEditWordStatus.onSubmit:
+              // TODO: Handle this case.
+            if(widget.onCreated!=null)
+              {
+                widget.onCreated!();
+              }
+              Navigator.of(context).pop(true);
+              break;
+            case CreateEditWordStatus.onLoading:
+              // TODO: Handle this case.
+              break;
+            case CreateEditWordStatus.onError:
+              // TODO: Handle this case.
+              break;
+            case CreateEditWordStatus.onSaveSentence:
+              // TODO: Handle this case.
               break;
             default:
               break;
@@ -215,8 +239,8 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                 Visibility(
                                   visible: widget.wordsPageActionType != WordsPageActionType.view,
                                   child: ActionButton1(
-                                    text:widget.wordsPageActionType ==
-                                        WordsPageActionType.edit?L10nX.getStr.str_update: 
+                                    text:(widget.wordsPageActionType ==
+                                        WordsPageActionType.edit && state.vocabularyInfo?.id!=null)?L10nX.getStr.str_update: 
                                     L10nX.getStr.create_str,
                                     width: Dimens.size120,
                                     onTap: () {

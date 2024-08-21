@@ -100,7 +100,9 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                             decoration: BoxDecoration(
                                 border: Border(left: BorderSide(color: ColorConst.mainColor, width: 0.1))
                             ),
-                            child: buildVocabularyDetail(state: state)),
+                            child: state.selectVocabularyInfo!=null?
+                            VocabularyViewDetail(selectVocabularyInfo: state.selectVocabularyInfo!,enableCloseButton: false,):SizedBox()
+                        ),
                       ));
                 }
                 else
@@ -248,7 +250,13 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                 InkWell(
                     onTap: () {
                       // CourseDetail(courseInfo: state.courseResponseModel!.content,).show(context);
-                      CreateEditWordsPage(wordsPageActionType: WordsPageActionType.create, key: UniqueKey(),).show(context);
+                      CreateEditWordsPage(
+                        wordsPageActionType: WordsPageActionType.create,
+                        key: UniqueKey(),
+                        onCreated: () {
+                          BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListInitEvent());
+                        },
+                      ).show(context);
                     },
                     child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
               ],

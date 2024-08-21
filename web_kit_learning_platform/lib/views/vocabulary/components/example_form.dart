@@ -311,7 +311,7 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
                       child: Row(
                     children: [
                       SizedBox(
-                        height: 8,
+                        height: Dimens.size16,
                       ),
                       buildSaveDeleteWidget(),
                     ],

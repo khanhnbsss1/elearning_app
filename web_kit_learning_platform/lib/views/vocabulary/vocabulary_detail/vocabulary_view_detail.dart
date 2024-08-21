@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/services/apis/sentence/models/sentence_info.dart';
@@ -17,7 +18,7 @@ class VocabularyViewDetail extends StatefulWidget{
             child: Dialog(
               insetPadding: EdgeInsets.zero,
               child: SizedBox(
-                  height: MediaQuery.of(context).size.height/2,
+                  height: MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?0.95: 0.5),
                   width: MediaQuery.of(context).size.width*(ResponsiveInfo.isPhone()?0.95: 0.5),
                   child: this),
             ));
@@ -26,7 +27,10 @@ class VocabularyViewDetail extends StatefulWidget{
   }
   VocabularyInfo selectVocabularyInfo;
 
-  VocabularyViewDetail({required this.selectVocabularyInfo});
+  bool? enableCloseButton;
+  VocabularyViewDetail({required this.selectVocabularyInfo, this.enableCloseButton}){
+    enableCloseButton??=true;
+  }
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -56,30 +60,53 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
               Column(
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?1/8:1/7),
+                    height: MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?1/5:1/4),
                     decoration: BoxDecoration(
                         color: ColorConst.mainColor
                     ),
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(widget.selectVocabularyInfo.simplified??"", style: TextStyleConstant.textStyleBlack28w700.copyWith(color: ColorConst.whiteColor, fontSize: Dimens.size60),),
+                          Visibility(
+                            visible: (widget.selectVocabularyInfo.imageLink??"").isNotEmpty,
+                              child: Expanded(
+                                child: Column(
+                                  children: [
+                                    Gap(Dimens.size16),
+                                    Expanded(
+                                      child: SizedBox(
+                                        //height:  MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?1/8:1/5) -Dimens.size20,
+                                       // width: MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?1/8:1/5),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: ImageManager().getImageByUrl(
+                                              (widget.selectVocabularyInfo.imageLink??""),
+                                             
+                                              errorBuilder: SizedBox()),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                          ),
                         ],
                       ),
                     ),
                   ),
                   Expanded(
                     child: LayoutBuilder(builder: (context, constraints) {
-                      double maxWidth = constraints.maxWidth/2;
-                      double height = Dimens.size90;
+                      double maxWidth = constraints.maxWidth/(ResponsiveInfo.isPhone() ? 2 : 2);
+                      double height = Dimens.size100;
                       return SingleChildScrollView(
                         child: Padding(
                           padding: const EdgeInsets.all(16),
                           child: Column(
                             children: [
                               GridView.count(
-                                crossAxisCount: ResponsiveInfo.isPhone() ? 1 : 2,
+                                crossAxisCount: ResponsiveInfo.isPhone() ? 2 : 2,
                                 shrinkWrap: true,
                                 crossAxisSpacing: 16,
                                 mainAxisSpacing: 16,
@@ -87,14 +114,13 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                                 childAspectRatio: (maxWidth) / (height),
                                 children: [
                                   Visibility(
-                                    visible: (widget.selectVocabularyInfo.pinyinTones??"").isNotEmpty,
+                                    visible: (widget.selectVocabularyInfo.simplified??"").isNotEmpty,
                                     child: WidgetWithColumnTitleCommon(
-                                      title: "${L10nX.getStr.pinyin_tone_str}: ",
+                                      title: "${L10nX.getStr.simplified_str}: ",
                                       titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
                                       child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text((widget.selectVocabularyInfo.pinyinTones??"").trim(),),
-                                          Gap(Dimens.size4),
                                           Visibility(
                                             //visible: (widget.selectVocabularyInfo.audio??"").isNotEmpty,
                                               child: StatefulBuilder(
@@ -102,22 +128,49 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                                                   return AudioSpeaker(url: widget.selectVocabularyInfo.audio??"",);
                                                 },
                                               )
-                                          )
+                                          ),
+                                          Gap(Dimens.size4),
+                                          Expanded(child: Text((widget.selectVocabularyInfo.simplified??"").trim(),)),
+
                                         ],
                                       ),
                                     ),
                                   ),
-                                  WidgetWithColumnTitleCommon(
-                                    title: "${L10nX.getStr.category_word}: ",
-                                    titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                                    child: Text((widget.selectVocabularyInfo.categoryWord??"").isNotEmpty?widget.selectVocabularyInfo.categoryWord??"":L10nX.getStr.unknown_str),
+                                  Visibility(
+                                    visible: (widget.selectVocabularyInfo.pinyinTones??"").isNotEmpty,
+                                    child: WidgetWithColumnTitleCommon(
+                                      title: "${L10nX.getStr.pinyin_tone_str}: ",
+                                      titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Visibility(
+                                            //visible: (widget.selectVocabularyInfo.audio??"").isNotEmpty,
+                                              child: StatefulBuilder(
+                                                builder: (BuildContext context, void Function(void Function()) setState) {
+                                                  return AudioSpeaker(url: widget.selectVocabularyInfo.audio??"",);
+                                                },
+                                              )
+                                          ),
+                                          Gap(Dimens.size4),
+
+                                          Expanded(child: Text((widget.selectVocabularyInfo.pinyinTones??"").trim(),)),
+
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                   Visibility(
                                     visible: (widget.selectVocabularyInfo.translationVn??"").isNotEmpty,
                                     child: WidgetWithColumnTitleCommon(
                                       title: "${L10nX.getStr.viet_nam_text}: ",
                                       titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                                      child: Text(widget.selectVocabularyInfo.translationVn??""),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(child: Text(widget.selectVocabularyInfo.translationVn??"")),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   Visibility(
@@ -125,9 +178,26 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                                     child: WidgetWithColumnTitleCommon(
                                       title: "${L10nX.getStr.traditional_str}: ",
                                       titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                                      child: Text(widget.selectVocabularyInfo.traditional??""),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                              child: Text(widget.selectVocabularyInfo.traditional??"")),
+                                        ],
+                                      ),
                                     ),
                                   ),
+                                  WidgetWithColumnTitleCommon(
+                                    title: "${L10nX.getStr.category_word}: ",
+                                    titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(child: Text((widget.selectVocabularyInfo.categoryWord??"").isNotEmpty?widget.selectVocabularyInfo.categoryWord??"":L10nX.getStr.unknown_str)),
+                                      ],
+                                    ),
+                                  ),
+
                                 ],
                               ),
                               buildExamplesListForView(),
@@ -139,16 +209,19 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                   )
                 ],
               ),
-              Align(
-                alignment:Alignment.topRight ,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Icon(Icons.close, color: ColorConst.whiteColor,size: Dimens.size20,),
+              Visibility(
+                visible: widget.enableCloseButton??false,
+                child: Align(
+                  alignment:Alignment.topRight ,
+                  child: Padding(
+                    padding: EdgeInsets.all(Dimens.size16),
+                    child: InkWell(
+                      
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Icon(Icons.close, color: ColorConst.whiteColor,size: Dimens.size20,),
+                    ),
                   ),
                 ),
               )
@@ -160,41 +233,44 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
   Widget buildExamplesListForView() {
     return SizedBox(
       width: double.infinity,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                WidgetWithColumnTitleCommon(
-                  title: L10nX.getStr.examples_str,
-                  child: (widget.selectVocabularyInfo.sentenceInfos??[]).isNotEmpty?ListView.builder(
-                    itemCount:(widget.selectVocabularyInfo.sentenceInfos??[]).length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, exampleIndex) {
-                      SentenceInfo sentenceInfo = (widget.selectVocabularyInfo.sentenceInfos??[]).elementAt(exampleIndex);
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text('$exampleIndex. '),
-                            Text('${sentenceInfo.chineseSentence??''}(${L10nX.getStr.pinyin_tone_str}:${sentenceInfo.pinyionSentence??''})'),
-                            AudioSpeaker(url: sentenceInfo.audioLink??'')
-                          ],),
-                      );
-                    },
-                  ):Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text(L10nX.getStr.has_not_example, style: TextStyleConstant.textStyleBlack13w300,)),
-                ),
-              ],
+      child: Padding(
+        padding:  EdgeInsets.symmetric(horizontal: Dimens.size16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  WidgetWithColumnTitleCommon(
+                    title: L10nX.getStr.examples_str,
+                    child: (widget.selectVocabularyInfo.sentenceInfos??[]).isNotEmpty?ListView.builder(
+                      itemCount:(widget.selectVocabularyInfo.sentenceInfos??[]).length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, exampleIndex) {
+                        SentenceInfo sentenceInfo = (widget.selectVocabularyInfo.sentenceInfos??[]).elementAt(exampleIndex);
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('$exampleIndex. '),
+                              Text('${sentenceInfo.chineseSentence??''}(${L10nX.getStr.pinyin_tone_str}:${sentenceInfo.pinyionSentence??''})'),
+                              AudioSpeaker(url: sentenceInfo.audioLink??'')
+                            ],),
+                        );
+                      },
+                    ):Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(L10nX.getStr.has_not_example, style: TextStyleConstant.textStyleBlack13w300,)),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
