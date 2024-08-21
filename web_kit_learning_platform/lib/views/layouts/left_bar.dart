@@ -131,7 +131,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                         route:  Routes.courseMyList,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
                         permission: const [
-                          "courses.post.get_my_course",
+                         // "courses.post.get_my_course",
                           "courses.post.search_course"
                         ],
                       ),
@@ -187,20 +187,20 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     iconData: CupertinoIcons.book_solid,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.vocabulary_str,
-                  //  permission: const ["vocabulary.get.getlist",],
+                    permission: const ["vocabulary.get.getlist",],
                     children: [
                       MenuItem(
                         title: L10nX.getStr.course_str,
                         route:  Routes.vocabularyListNoImage,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
-                       // permission: const ["vocabulary.get.getlist",],
+                        permission: const ["vocabulary.get.getlist",],
     
                       ),
                       MenuItem(
                         title: L10nX.getStr.simplified_str,
                         route:  Routes.vocabularyListImage,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
-                       // permission: const ["vocabulary.get.getlist",],
+                        permission: const ["vocabulary.get.getlist",],
     
                       ),
                     ],
