@@ -430,15 +430,34 @@ class LessonDataSource extends DataGridSource {
       return  DataGridRow(
           cells: [
             DataGridCell<Widget>(columnName: 'id', value: Text("$starIndex", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.lecture_name_str, value:Text(e.lectureName??"", style: TextStyleConstant.textStyleBlack14w400,) ),
-            DataGridCell<Widget>(columnName: L10nX.getStr.subject_name_str, value: Text(e.subName??"", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.document_str, value: Text(e.docName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.lecture_name_str, value:Row(
+              children: [
+                Expanded(child: Text(e.lectureName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+              ],
+            ) ),
+            DataGridCell<Widget>(columnName: L10nX.getStr.subject_name_str, value: Row(
+              children: [
+                Expanded(child: Text(e.subName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+              ],
+            )),
+            DataGridCell<Widget>(columnName: L10nX.getStr.document_str, value: Row(
+              children: [
+                Expanded(child: Text(e.docName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+              ],
+            )),
 
-            DataGridCell<Widget>(columnName: L10nX.getStr.test_name, value: Text(e.testName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.test_name, value: Row(
+              children: [
+                Expanded(child: Text(e.testName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+              ],
+            )),
             DataGridCell<Widget>(columnName: L10nX.getStr.payment_str, value: Text(e.mode??"", style: TextStyleConstant.textStyleBlack14w400,)),
 
-            DataGridCell<Widget>(columnName: L10nX.getStr.vocabulary_str, value: SingleChildScrollView(
-              child: Row(children: listWord,),
+            DataGridCell<Widget>(columnName: L10nX.getStr.vocabulary_str, 
+                value: SingleChildScrollView(
+                  child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: listWord,),
             )),
             //DataGridCell<Widget>(columnName: L10nX.getStr.doing_time_str, value: Text("${(e.}", style: TextStyleConstant.textStyleBlack14w400,)),
 
@@ -478,7 +497,7 @@ class LessonDataSource extends DataGridSource {
         cells: row.getCells().map<Widget>((e) {
           return Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(Dimens.size8),
             child: e.value,
           );
         }).toList());

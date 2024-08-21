@@ -304,7 +304,8 @@ class TestItemWidgetState extends State<TestItemWidget>{
                                   enableBgColor: ColorConst.greyColor,
                                   textStype: TextStyleConstant.textStyleBlack16w600,
                                   onTap: () {
-                                    TestWorkPage(testInfo: testInfo,enableShowResult: true,).show(context);
+                                    TestWorkPage(
+                                      testInfo: testInfo,enableShowResult: true,).show(context);
                                     },
                                 )),
                             Visibility(

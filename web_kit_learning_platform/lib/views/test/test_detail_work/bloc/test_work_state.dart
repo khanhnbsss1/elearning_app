@@ -7,6 +7,7 @@ enum TestWorkStatus {
   onShowResult,
   onChangePage,
   onUpdateChooseQuestion,
+  onScoreResult,
   unKnown
 }
 
@@ -17,6 +18,7 @@ class TestWorkState extends Equatable {
   bool? enableShowResult;
   int? page;
   int? pageSize;
+  ScoreResultInfo? result;
   List<List<QuestionInfo>>? quizDTOsForView;
   TestWorkState({
       this.blocStatus,
@@ -24,7 +26,9 @@ class TestWorkState extends Equatable {
     this.enableShowResult,
     this.pageSize, 
     this.quizDTOsForView,
-    this.page}){
+    this.page,
+    this.result
+  }){
     page??=0;
     pageSize??=2;
   }
@@ -35,7 +39,8 @@ class TestWorkState extends Equatable {
     bool? enableShowResult,
     int? page,
     int? pageSize,
-    List<List<QuestionInfo>>? quizDTOsForView
+    List<List<QuestionInfo>>? quizDTOsForView,
+    ScoreResultInfo? result
   })
   {
     return TestWorkState(
@@ -45,6 +50,7 @@ class TestWorkState extends Equatable {
       page: page??this.page,
       pageSize: pageSize??this.pageSize,
       quizDTOsForView: quizDTOsForView??this.quizDTOsForView,
+      result: result??this.result,
 
     );
   }
@@ -55,7 +61,8 @@ class TestWorkState extends Equatable {
     enableShowResult,
     page, 
     pageSize,
-    quizDTOsForView
+    quizDTOsForView,
+    result
   ];
 
 }

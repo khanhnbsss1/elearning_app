@@ -27,7 +27,7 @@ class UnLinkTestToLessonApi extends BaseApiRequest {
   Future<void> getAuthorization() async {
     await setApiBody({
       "lectureId":lessonId,
-      "id":testId,
+      "testId":testId,
     });
   }
 

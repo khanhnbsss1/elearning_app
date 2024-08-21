@@ -364,15 +364,15 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                       alignment: Alignment.center,
                       child: Text(L10nX.getStr.subject_str))),
               GridColumn(
-                  columnName: L10nX.getStr.difficulty_str,
+                  columnName: L10nX.getStr.type,
                   minimumWidth: Dimens.size120,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: Text(L10nX.getStr.difficulty_str))),
+                      child: Text(L10nX.getStr.type))),
               GridColumn(
                   columnName: L10nX.getStr.question_number,
-                  minimumWidth: Dimens.size120,
+                  maximumWidth: Dimens.size120,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
@@ -417,34 +417,37 @@ class TestDataSource extends DataGridSource {
       return  DataGridRow(
           cells: [
             DataGridCell<Widget>(columnName: 'id', value: Text("$starIndex", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.test_name, value:Text(e.name??"", style: TextStyleConstant.textStyleBlack14w400,) ),
-            DataGridCell<Widget>(columnName: L10nX.getStr.course_str, value: Text(e.courseName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.test_name, value:Row(
+              children: [
+                Expanded(child: Text(e.name??"", style: TextStyleConstant.textStyleBlack14w400,)),
+              ],
+            ) ),
+            DataGridCell<Widget>(columnName: L10nX.getStr.course_str, value: Row(
+              children: [
+                Expanded(child: Text(e.courseName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+              ],
+            )),
             DataGridCell<Widget>(columnName: L10nX.getStr.subject_str, value: Text(e.subName??"", style: TextStyleConstant.textStyleBlack14w400,)),
 
-            DataGridCell<Widget>(columnName: L10nX.getStr.difficulty_str, value: Text(L10nX().getStringByKey("${mapTestLevelToStrKey[e.testType?? TestType.OUTPUT]}_test_str".toLowerCase()), style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.type, value: Text(L10nX().getStringByKey("${mapTestLevelToStrKey[e.testType?? TestType.OUTPUT]}_test_str".toLowerCase()), style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.question_number, value: Text("${(e.quizDTOs??[]).length}", style: TextStyleConstant.textStyleBlack14w400,)),
             //DataGridCell<Widget>(columnName: L10nX.getStr.doing_time_str, value: Text("${(e.}", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str, 
-                value: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ItemViewEditDelete(
-                      itemInfo: e,
-                      enableEditDelete: UserManager().userContainPermission(permissionList: ["tests.delete.delete_test"]),
-                      enableEdit: UserManager().userContainPermission(permissionList: ["tests.delete.delete_test"]),
-                      enableView: UserManager().userContainPermission(permissionList: ["tests.delete.delete_test"]),
-
-                      onViewDetail: (p0) {
-                        onViewDetail(p0);
-                      },
-                      onEdit: (p0) {
-                        onEdit(p0);
-                      },
-                      onDelete: (p0) {
-                        onDelete(p0);
-                      },
-                    ),
-                  ],
+                value: ItemViewEditDelete(
+                  itemInfo: e,
+                  enableEditDelete: UserManager().userContainPermission(permissionList: ["tests.delete.delete_test"]),
+                  enableEdit: UserManager().userContainPermission(permissionList: ["tests.delete.delete_test"]),
+                  enableView: UserManager().userContainPermission(permissionList: ["tests.delete.delete_test"]),
+                
+                  onViewDetail: (p0) {
+                    onViewDetail(p0);
+                  },
+                  onEdit: (p0) {
+                    onEdit(p0);
+                  },
+                  onDelete: (p0) {
+                    onDelete(p0);
+                  },
                 )),
           ]);
     },).toList();
@@ -461,7 +464,7 @@ class TestDataSource extends DataGridSource {
         cells: row.getCells().map<Widget>((e) {
           return Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(Dimens.size8),
             child: e.value,
           );
         }).toList());

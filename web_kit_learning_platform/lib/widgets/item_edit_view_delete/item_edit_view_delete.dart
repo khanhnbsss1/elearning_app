@@ -32,24 +32,21 @@ class ItemViewEditDelete extends StatelessWidget{
           child: Container(
             decoration: BoxDecoration(
                 color: ColorConst.greyColor.withOpacity(0.02),
-                borderRadius: BorderRadius.circular(Dimens.size40)
+                borderRadius: BorderRadius.circular(Dimens.size20)
             ),
             constraints: BoxConstraints(
-              maxHeight: Dimens.size35,
-              maxWidth: Dimens.size35,
+              maxHeight: Dimens.size30,
+              maxWidth: Dimens.size30,
             ),
-            child: Padding(
-              padding:  EdgeInsets.all(Dimens.size6),
-              child: Center(
-                child: InkWell(
-                  onTap: () {
-                    if(onViewDetail!=null)
-                    {
-                      onViewDetail!(itemInfo);
-                    }
-                  },
-                  child: Icon(Icons.remove_red_eye, color: ColorConst.greyColor,size: Dimens.size15,),
-                ),
+            child: Center(
+              child: InkWell(
+                onTap: () {
+                  if(onViewDetail!=null)
+                  {
+                    onViewDetail!(itemInfo);
+                  }
+                },
+                child: Icon(Icons.remove_red_eye, color: ColorConst.greyColor,size: Dimens.size15,),
               ),
             ),
           ),

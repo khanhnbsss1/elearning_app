@@ -607,5 +607,11 @@
   "start_test_confirm": "Bạn có chắc chắn muốn thực hiện bài kiểm tra này, thời gian thực hiện là: ",
   "you_are_ready_finish_test": "Bạn có chắc chắn muốn nộp bài !",
   "manage_str": "Quản lý",
-  "time_test_end": "Thời gian làm bài đã hết, bạn không thể tiếp tục làm bài nữa, vui lòng nộp bài"
+  "time_test_end": "Thời gian làm bài đã hết, bạn không thể tiếp tục làm bài nữa, vui lòng nộp bài",
+  "you_are_ready_content_close_test": "Bạn có chắc chắn muốn đóng bài kiểm tra, kết quả làm bài sẽ không được lưu lại !",
+  "you_are_ready_title_close_test": "Hủy bỏ bài kiểm tra",
+  "you_are_finish_test_title": "Bạn đã hoàn thành bài kiểm tra",
+  "test_result": "Kết quả bài test",
+  "view_result_str": "Xem kết quả"
+
 }

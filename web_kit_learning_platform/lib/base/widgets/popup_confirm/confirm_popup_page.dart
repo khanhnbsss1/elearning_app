@@ -14,7 +14,9 @@ class ConfirmPopupPage extends StatefulWidget{
   void Function()? onCancel;
   String? title;
   String? content;
-  ConfirmPopupPage({super.key, this.onAccept, this.content, this.title, this.onCancel});
+  String? accept;
+  String? cancel;
+  ConfirmPopupPage({super.key, this.onAccept, this.content, this.title, this.onCancel, this.accept, this.cancel});
 
   @override
   State<StatefulWidget> createState() {
@@ -93,7 +95,7 @@ class ConfirmPopupPageState extends State<ConfirmPopupPage> with SingleTickerPro
 
                               }
                           },
-                          text: S.of(context).str_cancel,
+                          text: widget.cancel??S.of(context).str_cancel,
                           enableBgColor: ColorConst.whiteColor,
                           textStype: TextStyleConstant.textStyleBlack16w600,
                           height: Dimens.size40),
@@ -107,7 +109,7 @@ class ConfirmPopupPageState extends State<ConfirmPopupPage> with SingleTickerPro
                                 widget.onAccept!();
                               }
                           },
-                          text: S.of(context).str_accept,
+                          text: widget.accept??S.of(context).str_accept,
                           height: Dimens.size40),
                     ],
                   ),

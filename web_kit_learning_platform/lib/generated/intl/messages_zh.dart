@@ -562,6 +562,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "test_list": MessageLookupByLibrary.simpleMessage("测试列表"),
         "test_name": MessageLookupByLibrary.simpleMessage("测试名称"),
         "test_remove": MessageLookupByLibrary.simpleMessage("删除测试"),
+        "test_result": MessageLookupByLibrary.simpleMessage("测试结果"),
         "test_str": MessageLookupByLibrary.simpleMessage("测试"),
         "test_update": MessageLookupByLibrary.simpleMessage("更新测试"),
         "text_actions": MessageLookupByLibrary.simpleMessage("文本操作"),
@@ -628,6 +629,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "video_preview_str": MessageLookupByLibrary.simpleMessage("视频预览"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("越南语"),
         "view_all": MessageLookupByLibrary.simpleMessage("查看全部"),
+        "view_result_str": MessageLookupByLibrary.simpleMessage("查看结果"),
         "view_str": MessageLookupByLibrary.simpleMessage("查看"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
         "vocabulary_str": MessageLookupByLibrary.simpleMessage("閱讀"),
@@ -697,8 +699,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "word_str": MessageLookupByLibrary.simpleMessage("单词"),
         "world_countries_details":
             MessageLookupByLibrary.simpleMessage("世界各国详情"),
+        "you_are_ready_content_close_test":
+            MessageLookupByLibrary.simpleMessage("您确定要关闭测试，测试结果将不会被保存！"),
         "you_are_ready_finish_test":
             MessageLookupByLibrary.simpleMessage("您确定要提交测试吗？"),
+        "you_are_ready_title_close_test":
+            MessageLookupByLibrary.simpleMessage("取消测试"),
         "you_do_have_an_account":
             MessageLookupByLibrary.simpleMessage("您有帐户吗？"),
         "you_do_not_have_an_account":

@@ -81,7 +81,7 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
                       labelStyle: TextStyleConstant.textStyleBlack14w400,
                       hintStyle: TextStyleConstant.textStyleBlack14w400,
                       border: outlineInputBorder,
-                      labelText: L10nX.getStr.search_lesson_str,
+                      labelText: L10nX.getStr.test_str,
                       prefixIcon: Icon(
                         Icons.quiz,
                         color: ColorConst.colorIconRed,

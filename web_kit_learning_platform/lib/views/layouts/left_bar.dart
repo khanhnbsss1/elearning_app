@@ -63,7 +63,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
       shadow: MyShadow(position: MyShadowPosition.centerRight, elevation: 0.2),
       child: AnimatedContainer(
         color: ColorConst.mainColor,//leftBarTheme.background,
-        width: ThemeCustomizer().leftBarCondensed ? Dimens.size70 : Dimens.size280,
+        width: ThemeCustomizer().leftBarCondensed ? Dimens.size80 : Dimens.size280,
         curve: Curves.easeOut,
         duration: const Duration(milliseconds: 200),
         child: Column(
@@ -73,29 +73,26 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
             Center(
              // height: Dimens.size60,
               // padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
-              child: Padding(
-                padding:  EdgeInsets.only(left: Dimens.size8),
-                child: InkWell(
-                  onTap: () {
-                    AppPages.routeName(Routes.dashboardRoute);
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      StaticView.buildLogo(size: Dimens.size100),
-                      SizedBox(width: Dimens.size5),
-                      Visibility(
-                        visible: !ThemeCustomizer().leftBarCondensed,
-                        child: Text(L10nX.getStr.app_name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyleConstant.textStyleBlack18w600.copyWith(color: ColorConst.whiteColor),
-                        ),
+              child: InkWell(
+                onTap: () {
+                  AppPages.routeName(Routes.dashboardRoute);
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    StaticView.buildLogo(size: ThemeCustomizer().leftBarCondensed?Dimens.size40:Dimens.size100),
+                    SizedBox(width: Dimens.size5),
+                    Visibility(
+                      visible: !ThemeCustomizer().leftBarCondensed,
+                      child: Text(L10nX.getStr.app_name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyleConstant.textStyleBlack18w600.copyWith(color: ColorConst.whiteColor),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -892,11 +889,11 @@ class _MenuWidgetState extends State<MenuWidget>
             });
           },
           child: MyContainer.transparent(
-            margin: MySpacing.fromLTRB(16, 0, 16, 8),
+            margin: MySpacing.fromLTRB(Dimens.size16, 0, Dimens.size16, Dimens.size8),
             color: isActive || isHover
                 ? leftBarTheme.activeItemBackground
                 : Colors.transparent,
-            padding: MySpacing.xy(8, 8),
+            padding: EdgeInsets.only(left: Dimens.size0),
             child: Center(
               child: Icon(
                 widget.iconData,
@@ -932,7 +929,7 @@ class _MenuWidgetState extends State<MenuWidget>
           });
         },
         child: MyContainer.transparent(
-          margin: MySpacing.fromLTRB(24, 0, 16, 0),
+          margin: MySpacing.fromLTRB(Dimens.size24, 0, Dimens.size16, 0),
           paddingAll: 0,
           color:  isHover && !isActive
               ? leftBarTheme.activeItemBackground
@@ -1059,15 +1056,15 @@ class _MenuItemState extends State<MenuItem> with UIMixin {
           });
         },
         child: MyContainer.transparent(
-          margin: MySpacing.fromLTRB(4, 0, 8, 4),
+          margin: MySpacing.fromLTRB(Dimens.size4, 0, Dimens.size8, Dimens.size4),
           color: isActive || isHover
               ? leftBarTheme.activeItemBackground
               : Colors.transparent,
           width: MediaQuery.of(context).size.width,
-          padding: MySpacing.xy(18, 7),
+          padding: MySpacing.xy(Dimens.size18, Dimens.size7),
           child:
           Text(
-            "${ThemeCustomizer().leftBarCondensed ? "" : "- "}  ${widget.title}",
+            "${ThemeCustomizer().leftBarCondensed ? "" : ""}  ${widget.title}",
             overflow: TextOverflow.clip,
             maxLines: 1,
             textAlign: TextAlign.left,
@@ -1143,11 +1140,11 @@ class _NavigationItemState extends State<NavigationItem> with UIMixin {
           });
         },
         child: MyContainer.transparent(
-          margin: MySpacing.fromLTRB(16, 0, 16, 8),
+          margin: MySpacing.fromLTRB(Dimens.size16, Dimens.size0, Dimens.size16, Dimens.size8),
           color: isActive || isHover
               ? leftBarTheme.activeItemBackground
               : Colors.transparent,
-          padding: MySpacing.xy(8, 8),
+          padding: MySpacing.xy(Dimens.size8, Dimens.size8),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -1164,7 +1161,7 @@ class _NavigationItemState extends State<NavigationItem> with UIMixin {
               if (!ThemeCustomizer().leftBarCondensed)
                 Flexible(
                   fit: FlexFit.loose,
-                  child: MySpacing.width(16),
+                  child: MySpacing.width(Dimens.size16),
                 ),
               if (!ThemeCustomizer().leftBarCondensed)
                 Expanded(

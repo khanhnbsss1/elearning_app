@@ -6049,6 +6049,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Are you sure you want to close the test, the test results will not be saved!`
+  String get you_are_ready_content_close_test {
+    return Intl.message(
+      'Are you sure you want to close the test, the test results will not be saved!',
+      name: 'you_are_ready_content_close_test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel the test`
+  String get you_are_ready_title_close_test {
+    return Intl.message(
+      'Cancel the test',
+      name: 'you_are_ready_title_close_test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have finished the test`
+  String get you_are_finished_test_title {
+    return Intl.message(
+      'You have finished the test',
+      name: 'you_are_finished_test_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View results`
+  String get view_result_str {
+    return Intl.message(
+      'View results',
+      name: 'view_result_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Test result`
+  String get test_result {
+    return Intl.message(
+      'Test result',
+      name: 'test_result',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

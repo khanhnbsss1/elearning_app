@@ -5,7 +5,6 @@ import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
-import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
 
 class QuestionWorkItem extends StatefulWidget {
@@ -130,6 +129,8 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
                                 ),
                   ],
                 )),
+            Gap(Dimens.size16),
+            Divider(color: ColorConst.greyColor,thickness: 0.5,),
             Gap(Dimens.size16),
             buildAnswerList(),
           ],

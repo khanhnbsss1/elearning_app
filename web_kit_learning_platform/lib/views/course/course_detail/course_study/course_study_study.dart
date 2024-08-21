@@ -314,7 +314,10 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                   ),
                   TestItemWidget(
                     testInfos: [
-                      TestInfo(id: _state.courseInfo?.testId, name:  _state.courseInfo?.testName??""),
+                      TestInfo(
+                          id: _state.courseInfo?.testId, 
+                          courseId: _state.courseInfo?.id,
+                          name:  _state.courseInfo?.testName??""),
                     ],
                     subjectIndex: 1, 
                     onSelectTest: (testInfo ) {  
@@ -804,7 +807,11 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                 child: InkWell(
                     onTap: () {
                       if(_state.selectLessonInfo?.testId!=null) {
-                        TestWorkPage(testInfo: TestInfo(id: _state.selectLessonInfo?.testId, name: _state.selectLessonInfo?.testName??''),).show(context);
+                        TestWorkPage(
+                          testInfo: TestInfo(
+                              id: _state.selectLessonInfo?.testId,
+                              lectureId: _state.selectLessonInfo?.id,
+                              name: _state.selectLessonInfo?.testName??''),).show(context);
                       }
                     },
                     child: Text(
@@ -813,8 +820,10 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
               ),
               ActionButton1(
                 onTap: () {
-                  TestWorkPage(testInfo: TestInfo(id: _state.selectLessonInfo?.testId, name: _state.selectLessonInfo?.testName??''),).show(context);
-      
+                  TestWorkPage(
+                    testInfo: TestInfo(id: _state.selectLessonInfo?.testId,
+                    lectureId: _state.selectLessonInfo?.id,
+                    name: _state.selectLessonInfo?.testName??''),).show(context);
                 },
                 text: L10nX.getStr.begin_start_test,
               )

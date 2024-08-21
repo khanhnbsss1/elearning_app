@@ -661,6 +661,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "test_list": MessageLookupByLibrary.simpleMessage("Danh sách bài test"),
         "test_name": MessageLookupByLibrary.simpleMessage("Tên bài kiểm tra"),
         "test_remove": MessageLookupByLibrary.simpleMessage("Xóa bài test"),
+        "test_result": MessageLookupByLibrary.simpleMessage("Kết quả bài test"),
         "test_str": MessageLookupByLibrary.simpleMessage("Bài test"),
         "test_update":
             MessageLookupByLibrary.simpleMessage("Cập nhật bài test"),
@@ -741,6 +742,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xem trước video"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "view_all": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
+        "view_result_str": MessageLookupByLibrary.simpleMessage("Xem kết quả"),
         "view_str": MessageLookupByLibrary.simpleMessage("Xem"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VNĐ"),
         "vocabulary_str": MessageLookupByLibrary.simpleMessage("Từ vựng"),
@@ -822,8 +824,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "word_str": MessageLookupByLibrary.simpleMessage("Từ"),
         "world_countries_details": MessageLookupByLibrary.simpleMessage(
             "Chi tiết các quốc gia trên thế giới"),
+        "you_are_ready_content_close_test": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn đóng bài kiểm tra, kết quả làm bài sẽ không được lưu lại !"),
         "you_are_ready_finish_test": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn nộp bài !"),
+        "you_are_ready_title_close_test":
+            MessageLookupByLibrary.simpleMessage("Hủy bỏ bài kiểm tra"),
         "you_do_have_an_account":
             MessageLookupByLibrary.simpleMessage("Bạn có tài khoản?"),
         "you_do_not_have_an_account":
