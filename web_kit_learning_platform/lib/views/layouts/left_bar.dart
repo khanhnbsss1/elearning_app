@@ -187,20 +187,20 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     iconData: CupertinoIcons.book_solid,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.vocabulary_str,
-                    permission: const ["vocabulary.get.getlist",],
+                  //  permission: const ["vocabulary.get.getlist",],
                     children: [
                       MenuItem(
                         title: L10nX.getStr.course_str,
                         route:  Routes.vocabularyListNoImage,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const ["vocabulary.get.getlist",],
+                       // permission: const ["vocabulary.get.getlist",],
     
                       ),
                       MenuItem(
                         title: L10nX.getStr.simplified_str,
                         route:  Routes.vocabularyListImage,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const ["vocabulary.get.getlist",],
+                       // permission: const ["vocabulary.get.getlist",],
     
                       ),
                     ],
@@ -223,8 +223,15 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
   
                   //-----------------Danh sach giao vien-----------------//
                   Gap(Dimens.size12),
+
                   Visibility(
-                    visible: !ThemeCustomizer().leftBarCondensed,
+                    visible: !ThemeCustomizer().leftBarCondensed &&
+                        (
+                            UserManager().userContainPermission(permissionList: ["users.get.get_user_list"]) || 
+                            UserManager().userContainPermission(permissionList: ["landingpages.put.update_ladingpage_course"])|| 
+                            UserManager().userContainPermission(permissionList: ["landingpages.put.update_landingpage_review"])||
+                            UserManager().userContainPermission(permissionList: ["landingpages.put.update_landingpage_teacher"]) 
+                        ),
                     child: Padding(
                       padding:  EdgeInsets.symmetric(horizontal: Dimens.size20, vertical: Dimens.size8),
                       child: Text(L10nX.getStr.manage_str, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
@@ -255,18 +262,11 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     ],
                   ),
                   //----------------Landing Page------------------//
-                  
                   MenuWidget(
                     iconData: LucideIcons.planeLanding,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.landing_page,
                     permission: const [
-                      "landingpages.delete.delete_ladingpage_course",
-                      "landingpages.delete.delete_review",
-                      "landingpages.delete.delete_teacher",
-                      "landingpages.post.create_ladingpage_course",
-                      "landingpages.post.create_landingpage_review",
-                      "landingpages.post.create_landingpage_teacher",
                       "landingpages.put.update_ladingpage_course",
                       "landingpages.put.update_landingpage_review",
                       "landingpages.put.update_landingpage_teacher",
