@@ -51,28 +51,22 @@ class LoginController extends MyController {
     update();
   }
 
-  Future<void> onLogin() async {
+  Future<bool> onLogin() async {
     LoginRequest loginRequest = LoginRequest(
       username: basicValidator.getController('email')?.text,
       password: basicValidator.getController('password')?.text,);
-      loading = true;
       update();
       LoginWithPhoneApi loginWithPhoneApi = LoginWithPhoneApi(loginRequest: loginRequest);
       bool result = await loginWithPhoneApi.call();
-     if(result == true)
-      {
-        if(isChecked)
-        {
-          await UserManager().saveAccountLoginNearest(IdentifierConst.username);
-        }
-        // AppPages.route(Paths.homeScreenPath);
-      }
-      else
-      {
-        basicValidator.clearErrors();
-      }
-    loading = false;
-    update();
+     if(result != true) {
+       await UserManager().saveAccountLoginNearest(IdentifierConst.username);
+       update();
+       return true;
+       // AppPages.route(Paths.homeScreenPath);
+     } else {
+       update();
+       return false;
+     }
   }
 
   void goToForgotPassword() {

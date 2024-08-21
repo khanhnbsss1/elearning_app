@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +12,7 @@ import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/screens/splash.dart';
 import 'package:lms_app/services/sp_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../providers/app_settings_provider.dart';
 

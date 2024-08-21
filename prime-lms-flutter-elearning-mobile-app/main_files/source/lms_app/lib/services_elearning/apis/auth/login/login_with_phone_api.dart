@@ -44,14 +44,14 @@ class LoginWithPhoneApi extends BaseApiRequest {
          }
        else
          {
-           ToastUtils.showToastError(data.message??"");
+           // ToastUtils.showToastError(data.message??"");
            return false;
          }
 
      }
    else
      {
-       ToastUtils.showToastError(L10nX.getStr.email);
+       // ToastUtils.showToastError(L10nX.getStr.notify_error);
        return false;
      }
   }

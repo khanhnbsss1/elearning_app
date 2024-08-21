@@ -23,6 +23,7 @@ import '../base/base_request_elearning/models/search_common_request.dart';
 import '../models_elearning/user/UserProfile.dart';
 import '../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import '../services_elearning/apis/course/course_fillter/get_course_fillter_api.dart';
+import '../services_elearning/apis/course/course_fillter/models/course_filtter_info.dart';
 import '../services_elearning/apis/course/course_list/course_api.dart';
 import '../services_elearning/apis/course/course_list/models/course_models.dart';
 
@@ -108,28 +109,12 @@ class FirebaseService {
   }
 
   Future<List<CourseInfo>?> getFeaturedCourses() async {
-    List<CourseInfo> data = [];
-    // await firestore.collection('courses').where('featured', isEqualTo: true).get().then((QuerySnapshot? snapshot) {
-    //   data = snapshot!.docs.map((e) => Course.fromFirestore(e)).toList();
-    // });
-    // return data;
     GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, categoryId: 2, pageNumber: 5, keyword: ""));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content;
   }
 
   Future<List<CourseInfo>?> getFreeCourses() async {
-    // List<Course> data = [];
-    // await firestore
-    //     .collection('courses')
-    //     .where('price_status', isEqualTo: 'free')
-    //     .where('status', isEqualTo: 'live')
-    //     .limit(5)
-    //     .get()
-    //     .then((QuerySnapshot? snapshot) {
-    //   data = snapshot!.docs.map((e) => Course.fromFirestore(e)).toList();
-    // });
-    // return data;
     GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "PREMIUM_COURSE",gradeId: 2, categoryId: 2, pageSize: 10, pageNumber: 0, keyword: "",));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content;
@@ -163,13 +148,15 @@ class FirebaseService {
     return data;
   }
 
-  Future<List<CourseInfo>?> getHomeCategories() async {
-    // List<CourseInfo> data = [];
-    // await firestore.collection('categories').orderBy('index', descending: false).limit(limit).get().then((QuerySnapshot? snapshot) {
-    //   data = snapshot!.docs.map((e) => Category.fromFirestore(e)).toList();
-    // });
-    // return data;
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "CATEGORY", pageNumber: 0, categoryId: 1,keyword: "",));
+  Future<List<CourseFilterInfo>?> getHomeCategories() async {
+    GetCourseFilterApi getCourseFilterApi = GetCourseFilterApi();
+    CourseFilterListInfo categories = await getCourseFilterApi.call("");
+    return categories.data;
+  }
+
+  Future<List<CourseInfo>?> getCourseByCategories(
+      {required CourseFilterInfo courseFilterInfo, required int pageNumber}) async {
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: (courseFilterInfo.filterType == "") ? courseFilterInfo.name!.toUpperCase() : courseFilterInfo.filterType, pageSize: 10, pageNumber: pageNumber, keyword: "",));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content;
   }
@@ -453,6 +440,7 @@ class FirebaseService {
     } else {
       snapshot = await firestore
           .collection('courses')
+
           .where('price_status', isEqualTo: 'free')
           .where('status', isEqualTo: 'live')
           .startAfterDocument(lastDocument)

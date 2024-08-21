@@ -35,14 +35,14 @@ class CourseTags extends ConsumerWidget {
               runSpacing: 8,
               children: course.tags!.map((tag) {
                 return InkWell(
-                  onTap: () => NextScreen.iOS(
-                    context,
-                    AllCoursesView(
-                      courseBy: CourseBy.tag,
-                      title: '${tag.name}',
-                      tagId: tag.id.toString(),
-                    ),
-                  ),
+                  // onTap: () => NextScreen.iOS(
+                  //   context,
+                  //   AllCoursesView(
+                  //     title: '${tag.name}',
+                  //     tagId: tag.id.toString(),
+                  //   ),
+                  // ),
+                  onTap: () {},
                   child: Chip(
                     labelStyle: Theme.of(context).textTheme.titleMedium,
                     labelPadding: const EdgeInsets.symmetric(horizontal: 15),

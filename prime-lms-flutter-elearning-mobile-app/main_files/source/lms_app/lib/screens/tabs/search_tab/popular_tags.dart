@@ -21,10 +21,11 @@ class PopularTags extends StatelessWidget {
           runSpacing: 3,
           children: data.map((tag) {
             return ActionChip(
-              onPressed: () => NextScreen.iOS(
-                context,
-                AllCoursesView(courseBy: CourseBy.tag, title: '#${tag.name}', tagId: tag.id),
-              ),
+              // onPressed: () => NextScreen.iOS(
+              //   context,
+              //   AllCoursesView(title: '#${tag.name}', tagId: tag.id),
+              // ),
+              onPressed: (){},
               label: Text(
                 tag.name,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
