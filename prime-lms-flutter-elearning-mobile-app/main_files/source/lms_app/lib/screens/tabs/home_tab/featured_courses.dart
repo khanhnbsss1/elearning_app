@@ -22,9 +22,9 @@ class FeaturedCourses extends ConsumerWidget {
       skipLoadingOnRefresh: false,
       data: (courses) {
         return Visibility(
-          visible: courses!.isNotEmpty,
+          visible: courses != null || courses != [],
           child: CarouselSlider(
-            items: courses.map((course) {
+            items: courses!.map((course) {
               return FeaturedCourseTile(course: course);
             }).toList(),
             options: CarouselOptions(

@@ -29,7 +29,6 @@ class SearchTab extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tags = ref.watch(searchTagsProvider);
     final categories = ref.watch(categoriesProvider);
-    final settings = ref.watch(appSettingsProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -71,7 +70,7 @@ class SearchTab extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Visibility(
-                visible: settings?.tags != false && tags.value != null && tags.value!.isNotEmpty,
+                visible: true,
                 child: PopularTags(tags: tags),
               ),
               CategoriesLayout2(categories: categories)

@@ -6,11 +6,12 @@ import 'package:lms_app/screens/course_details.dart/details_view.dart';
 import 'package:lms_app/utils/custom_cached_image.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import '../../models/course.dart';
+import '../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 
 class GridListCourseTile extends StatelessWidget {
   const GridListCourseTile({super.key, required this.course});
 
-  final Course course;
+  final CourseInfo course;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class GridListCourseTile extends StatelessWidget {
                     height: 90,
                     width: 100,
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(3)),
-                    child: Hero(tag: heroTag, child: CustomCacheImage(imageUrl: course.thumbnailUrl, radius: 3)),
+                    child: Hero(tag: heroTag, child: CustomCacheImage(imageUrl: course.image, radius: 3)),
                   ),
                   // PremiumTag(course: course),
                 ],
@@ -42,22 +43,22 @@ class GridListCourseTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        course.name,
+                        course.name!,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        'By ${course.author.name}',
+                        'By ${course.producerName}',
                         style: const TextStyle(color: Colors.purpleAccent),
                       ),
                       const SizedBox(height: 5),
                       Text('count-students', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blueGrey)).tr(args: [
-                        course.studentsCount.toString(),
+                        course.totalLectures.toString(),
                       ]),
                       const SizedBox(height: 5),
-                      RatingViewer(rating: course.rating),
+                      RatingViewer(rating: (course.ratePoint??0).toDouble()),
                     ],
                   ),
                 ),

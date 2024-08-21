@@ -10,7 +10,7 @@ class GetCourseFilterApi extends BaseApiRequest {
     apiName: ApiName.getInstance().getFilterCourse,
   );
 
-  Future<dynamic> call(String filter) async {
+  Future<dynamic> call(String? filter) async {
     await getAuthorization();
     dynamic result = await getRequestAPI();
 

@@ -2,7 +2,7 @@ name: lms_app
 description: A new Flutter project.
 publish_to: 'none'
 
-version: 1.0.5+10
+version: 1.0.5+12
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
@@ -86,6 +86,7 @@ dependencies:
       url: https://github.com/scopendo/flutter_rounded_loading_button.git
       ref: master
   flutter_local_notifications: ^17.2.2
+  is_first_run: ^1.0.0
 
 
 dev_dependencies:

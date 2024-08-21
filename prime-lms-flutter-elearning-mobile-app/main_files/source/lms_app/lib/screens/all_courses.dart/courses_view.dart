@@ -12,132 +12,114 @@ import 'package:lms_app/models/course.dart';
 import 'package:lms_app/screens/all_courses.dart/grid_list_course_tile.dart';
 import 'package:lms_app/screens/search/search_view.dart';
 import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/theme/theme_provider.dart';
 import 'package:lms_app/utils/empty_animation.dart';
 import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/next_screen.dart';
+import '../../services_elearning/apis/course/course_fillter/models/course_filtter_info.dart';
 import 'grid_course_tile.dart';
 
 enum GridStyle { grid, box, list }
 
-enum CourseBy {
-  latest,
-  category,
-  free,
-  tag,
-  author,
-}
-
 final gridStyleProvider = StateProvider<GridStyle>((ref) => GridStyle.grid);
 
 class AllCoursesView extends ConsumerStatefulWidget {
-  const AllCoursesView({super.key, required this.courseBy, this.categoryId, this.tagId, this.authorId, required this.title});
+  const AllCoursesView({super.key, required this.courseFilterInfo});
 
-  final String title;
-  final CourseBy courseBy;
-  final String? categoryId, tagId, authorId;
+  final CourseFilterInfo courseFilterInfo;
 
   @override
   ConsumerState<AllCoursesView> createState() => _AllCoursesViewState();
 }
 
 class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
-  List<Course> _courses = [];
+  List<CourseInfo> _courses = [];
   bool _hasData = false;
   bool _isLoading = true;
-  DocumentSnapshot? _lastDocument;
+  int _pageNumber = 0;
+  bool lastPage = false;
   late ScrollController _controller;
 
   @override
   void initState() {
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    super.initState();
     _controller = ScrollController(initialScrollOffset: 0.0);
     _controller.addListener(_scrollListener);
-    super.initState();
-    _getData();
+    _getCourse(widget.courseFilterInfo, _pageNumber);
   }
 
   _scrollListener() async {
-    var isEnd = _controller.offset >= _controller.position.maxScrollExtent && !_controller.position.outOfRange;
+    var isEnd = _controller.offset >= _controller.position.maxScrollExtent &&
+        !_controller.position.outOfRange;
     if (isEnd) {
-      _getData();
+      if (!lastPage) _loadMore();
     }
   }
 
-  Future<QuerySnapshot> _getCourseQuery() async {
-    QuerySnapshot snapshot;
-    if (widget.courseBy == CourseBy.latest) {
-      snapshot = await FirebaseService().getCoursesSnapshotByLatest(lastDocument: _lastDocument);
-    } else if (widget.courseBy == CourseBy.category) {
-      snapshot = await FirebaseService().getCoursesSnapshotByCategory(categoryId: widget.categoryId!, lastDocument: _lastDocument);
-    } else if (widget.courseBy == CourseBy.free) {
-      snapshot = await FirebaseService().getCoursesSnapshotByFreeCourses(lastDocument: _lastDocument);
-    } else if (widget.courseBy == CourseBy.tag) {
-      snapshot = await FirebaseService().getCoursesSnapshotByTag(tagId: widget.tagId!, lastDocument: _lastDocument);
-    } else if (widget.courseBy == CourseBy.author) {
-      snapshot = await FirebaseService().getCoursesSnapshotByAuhtor(authorId: widget.authorId!, lastDocument: _lastDocument);
-    } else {
-      snapshot = await FirebaseService().getCoursesSnapshotByLatest(lastDocument: _lastDocument);
-    }
-    return snapshot;
-  }
-
-  _getData() async {
-    if (_lastDocument == null) {
-      await _getCourseQuery().then((QuerySnapshot snapshot) {
-        _courses = snapshot.docs.map((e) => Course.fromFirestore(e)).toList();
-        _lastDocument = snapshot.docs.last;
-        _isLoading = false;
-        setState(() {});
-      }).catchError((e) => _handleError(e.toString()));
-    } else {
-      _hasData = true;
-      setState(() {});
-      await _getCourseQuery().then((QuerySnapshot? snapshot) {
-        _courses.addAll(snapshot!.docs.map((e) => Course.fromFirestore(e)).toList());
-        _lastDocument = snapshot.docs.last;
-        _hasData = false;
-        setState(() {});
-      }).catchError((e) => _handleError(e.toString()));
-    }
-  }
-
-  _handleError(String error) {
+  Future<void> _loadMore() async {
     setState(() {
-      _isLoading = false;
-      _hasData = false;
+      _pageNumber++;
+      _getCourse(widget.courseFilterInfo, _pageNumber);
     });
-    debugPrint(error);
+  }
+
+  Future<void> _getCourse(
+      CourseFilterInfo courseFilterInfo, int pageNumber) async {
+    final List<CourseInfo>? courses = await FirebaseService()
+        .getCourseByCategories(
+            pageNumber: pageNumber, courseFilterInfo: courseFilterInfo);
+    if (_courses != [] && courses != [] && courses != null) {
+      setState(() {
+        _isLoading = false;
+        _courses = _courses + courses;
+      });
+    } else {
+      lastPage = true;
+      setState(() {
+        _isLoading = false;
+        courses ?? [];
+      });
+    }
   }
 
   _onRefresh() async {
     _isLoading = true;
     _courses.clear();
     _hasData = false;
-    _lastDocument = null;
     setState(() {});
-    await _getData();
+    await _getCourse(widget.courseFilterInfo, 0);
   }
 
   @override
   Widget build(BuildContext context) {
+    print("rebuilt");
     final gridStyle = ref.watch(gridStyleProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-        titleTextStyle: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+        title: Text(widget.courseFilterInfo.name!),
+        titleTextStyle: Theme.of(context)
+            .textTheme
+            .titleMedium
+            ?.copyWith(fontWeight: FontWeight.bold),
         centerTitle: true,
         titleSpacing: 0,
         elevation: 0,
-        leading: IconButton(onPressed: () => Navigator.pop(context), icon: const Icon(FeatherIcons.chevronLeft)),
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(FeatherIcons.chevronLeft)),
         actions: [
           IconButton(
-            style: IconButton.styleFrom(padding: const EdgeInsets.only(right: 10)),
+            style:
+                IconButton.styleFrom(padding: const EdgeInsets.only(right: 10)),
             icon: const Icon(FeatherIcons.search),
             onPressed: () => NextScreen.normal(context, const SearchScreen()),
           ),
         ],
       ),
-      bottomNavigationBar: AdManager.isBannerEnbaled(ref) ? const BannerAdWidget() : null,
+      bottomNavigationBar:
+          AdManager.isBannerEnbaled(ref) ? const BannerAdWidget() : null,
       body: RefreshIndicator(
         onRefresh: () async => await _onRefresh(),
         child: SingleChildScrollView(
@@ -149,12 +131,15 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
               _isLoading
                   ? LoadingGridTile(gridStyle: gridStyle)
                   : _courses.isEmpty
-                      ? EmptyAnimation(animationString: emptyAnimation, title: 'no-course'.tr())
+                      ? EmptyAnimation(
+                          animationString: emptyAnimation,
+                          title: 'no-course'.tr())
                       : GridView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           padding: const EdgeInsets.all(20),
                           shrinkWrap: true,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: gridStyle == GridStyle.grid ? 2 : 1,
                             mainAxisExtent: gridStyle == GridStyle.grid
                                 ? 250
@@ -171,9 +156,12 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
                           ),
                           itemCount: _courses.length,
                           itemBuilder: (BuildContext context, int index) {
-                            final Course course = _courses[index];
-                            if (gridStyle == GridStyle.list) return GridListCourseTile(course: course);
-                            return GridCourseTile(course: course, gridStyle: gridStyle);
+                            final CourseInfo course = _courses[index];
+                            if (gridStyle == GridStyle.list) {
+                              return GridListCourseTile(course: course);
+                            }
+                            return GridCourseTile(
+                                course: course, gridStyle: gridStyle);
                           },
                         ),
               Opacity(
@@ -214,25 +202,37 @@ class FilterContainer extends StatelessWidget {
             icon: Icon(
               FeatherIcons.grid,
               size: 22,
-              color: gridStyle == GridStyle.grid ? Colors.blueAccent : Colors.blueGrey,
+              color: gridStyle == GridStyle.grid
+                  ? Colors.blueAccent
+                  : Colors.blueGrey,
             ),
-            onPressed: () => ref.read(gridStyleProvider.notifier).update((state) => GridStyle.grid),
+            onPressed: () => ref
+                .read(gridStyleProvider.notifier)
+                .update((state) => GridStyle.grid),
           ),
           IconButton(
             icon: Icon(
               FeatherIcons.square,
               size: 22,
-              color: gridStyle == GridStyle.box ? Colors.blueAccent : Colors.blueGrey,
+              color: gridStyle == GridStyle.box
+                  ? Colors.blueAccent
+                  : Colors.blueGrey,
             ),
-            onPressed: () => ref.read(gridStyleProvider.notifier).update((state) => GridStyle.box),
+            onPressed: () => ref
+                .read(gridStyleProvider.notifier)
+                .update((state) => GridStyle.box),
           ),
           IconButton(
             icon: Icon(
               FeatherIcons.list,
               size: 22,
-              color: gridStyle == GridStyle.list ? Colors.blueAccent : Colors.blueGrey,
+              color: gridStyle == GridStyle.list
+                  ? Colors.blueAccent
+                  : Colors.blueGrey,
             ),
-            onPressed: () => ref.read(gridStyleProvider.notifier).update((state) => GridStyle.list),
+            onPressed: () => ref
+                .read(gridStyleProvider.notifier)
+                .update((state) => GridStyle.list),
           ),
         ],
       ),

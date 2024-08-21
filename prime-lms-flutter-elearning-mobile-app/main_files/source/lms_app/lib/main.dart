@@ -7,11 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lms_app/helper_elearning/services/navigation_service.dart';
 import 'package:lms_app/routes/app_routes.dart';
+import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/screens/home/home_view.dart';
 import 'package:lms_app/screens/intro.dart';
 import 'package:lms_app/screens/splash.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:lms_app/services/hive_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'base/author/author_manager.dart';
 import 'base/device_elearning/device_manager.dart';
 import 'base/firebase_manager/firebase_options.dart';
@@ -37,6 +39,7 @@ Future<void> main() async {
   initialService();
   // HiveService.initHive();
   AppService.svgPrecacheImage();
+  bool firstTimeCheck = await getFirstTime();
   // DeviceInfoModel? deviceInfoModel = await DeviceManager().getDeviceInfo();
   runApp(ProviderScope(
       child:
@@ -45,7 +48,7 @@ Future<void> main() async {
         path: 'assets/translations',
         fallbackLocale: LanguageConfig.fallbackLocale,
         startLocale: LanguageConfig.startLocale,
-        child: const MyApp(),
+        child: MyApp(firstTimeCheck: firstTimeCheck,),
       ),
   ));
 }
@@ -67,8 +70,20 @@ Future<void> initialService() async {
   await ScreenUtil.ensureScreenSize();
 }
 
+Future<bool> getFirstTime() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool? firstTime = prefs.getBool('first_time');
+
+  if (firstTime != null && !firstTime) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool firstTimeCheck;
+  const MyApp({super.key,required this.firstTimeCheck});
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +103,7 @@ class MyApp extends StatelessWidget {
         /// call back moi lan chuyen page url
         print(value);
       },
-      home: const SplashScreen(),
+      home: firstTimeCheck ? const LoginScreen(popUpScreen: false,) : const IntroScreen(),
     );
   }
 }

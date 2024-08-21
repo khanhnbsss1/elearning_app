@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:lms_app/base/author/user_helper.dart';
+import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
 import 'package:lms_app/components/app_logo.dart';
 import 'package:lms_app/components/privacy_info.dart';
 // import 'package:lms_app/models/user/UserProfile.dart';
@@ -15,6 +16,7 @@ import 'package:lms_app/services/auth_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../controller_elearning/auth/login_controller.dart';
+import '../../l10n/l10n_extention.dart';
 import '../../models_elearning/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 import 'social_logins.dart';
@@ -64,13 +66,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       _btnController.start();
-      await loginController.onLogin();
-      final UserProfile? user = await UserManager().getUserProfile();
-     if (user != null) {
+      bool login = await loginController.onLogin();
+      if (!login) {
         _btnController.success();
         afterSignIn();
       } else {
-        _btnController.reset();
+        ToastUtils.showToastError("Your username or password is wrong");
+        _btnController.stop();
       }
     }
   }
@@ -98,12 +100,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: widget.popUpScreen??true,
       appBar: AppBar(
-        leading: IconButton(
+        leading: (widget.popUpScreen == true) ? IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
-        ),
+        ) : const SizedBox(),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 50),

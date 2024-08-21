@@ -24,7 +24,7 @@ class FreeCourses extends ConsumerWidget {
         skipLoadingOnRefresh: false,
         data: (courses) {
           return Visibility(
-            visible: courses.isNotEmpty,
+            visible: courses.isNotEmpty || courses != [],
             // visible: true,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
@@ -49,7 +49,8 @@ class FreeCourses extends ConsumerWidget {
                               ])),
                         ),
                         TextButton(
-                          onPressed: () => NextScreen.iOS(context, const AllCoursesView(courseBy: CourseBy.free, title: 'Free Courses')),
+                          // onPressed: () => NextScreen.iOS(context, const AllCoursesView(title: 'Free Courses')),
+                          onPressed: () {},
                           style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
                           child: Text(
                             'view-all',

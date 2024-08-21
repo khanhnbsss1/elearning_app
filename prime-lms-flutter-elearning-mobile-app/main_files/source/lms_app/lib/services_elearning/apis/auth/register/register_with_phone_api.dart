@@ -18,7 +18,7 @@ class RegisterWithPhoneApi extends BaseApiRequest {
     await getAuthorization();
     dynamic data = await postRequestAPI();
     if(data.runtimeType == String && (data as String).isEmpty){
-      ToastUtils.showToastSuccess(L10nX.getStr.sucessfully_str);
+      ToastUtils.showToastSuccess("Register success");
       return true;
     }
     else if(data!=null && data.runtimeType ==ResponseCommon )

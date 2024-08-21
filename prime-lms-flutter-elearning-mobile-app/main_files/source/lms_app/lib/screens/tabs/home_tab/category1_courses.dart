@@ -50,13 +50,14 @@ class Category1Courses extends ConsumerWidget {
                               ])),
                         ),
                         TextButton(
-                          onPressed: () => NextScreen.iOS(
-                              context,
-                              AllCoursesView(
-                                courseBy: CourseBy.category,
-                                title: category.name,
-                                categoryId: category.id,
-                              )),
+                          // onPressed: () => NextScreen.iOS(
+                          //     context,
+                          //     AllCoursesView(
+                          //       title: category.name,
+                          //       categoryId: category.id,
+                          //     )),
+                          onPressed: (){},
+
                           style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
                           child: Text(
                             'view-all',

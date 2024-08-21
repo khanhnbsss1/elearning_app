@@ -2,17 +2,16 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/loading_tile.dart';
-import 'package:lms_app/screens/all_courses.dart/courses_view.dart';
 import 'package:lms_app/services/firebase_service.dart';
-import 'package:lms_app/utils/next_screen.dart';
-import '../../../models/category.dart';
-import '../../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import '../../../services_elearning/apis/course/course_fillter/models/course_filtter_info.dart';
+import '../../../utils/next_screen.dart';
+import '../../all_courses.dart/courses_view.dart';
 import '../../home/home_bottom_bar.dart';
 import '../../home/home_view.dart';
 
-final homeCategoriesProvider = FutureProvider<List<CourseInfo>?>((ref) async {
-  final List<CourseInfo>? categories = await FirebaseService().getHomeCategories();
-  return categories??[];
+final homeCategoriesProvider = FutureProvider<List<CourseFilterInfo>?>((ref) async {
+  final List<CourseFilterInfo>? categories = await FirebaseService().getHomeCategories();
+  return categories;
 });
 
 class HomeCategories extends ConsumerWidget {
@@ -22,8 +21,8 @@ class HomeCategories extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final categories = ref.watch(homeCategoriesProvider);
     return Visibility(
-      // visible: categories.value != null && categories.value!.isNotEmpty,
-      visible: true,
+      visible: categories.value != null && categories.value!.isNotEmpty,
+      // visible: true,
       child: Container(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
         child: Column(
@@ -50,6 +49,7 @@ class HomeCategories extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: 10),
+
             categories.when(
                 skipLoadingOnRefresh: false,
                 data: (categories) {
@@ -58,11 +58,10 @@ class HomeCategories extends ConsumerWidget {
                     runSpacing: 10,
                     children: categories!
                         .map((e) => ActionChip(
-                              // onPressed: () => NextScreen.iOS(
-                              //   context,
-                              //   AllCoursesView(courseBy: CourseBy.category, title: e.name!, categoryId: e.id.toString()),
-                              // ),
-                              onPressed: (){},
+                              onPressed: () => NextScreen.iOS(
+                                context,
+                                AllCoursesView(courseFilterInfo: e,),
+                              ),
                               elevation: 0,
                               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),

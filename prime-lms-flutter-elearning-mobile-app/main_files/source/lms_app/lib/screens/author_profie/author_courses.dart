@@ -27,28 +27,28 @@ class AuthorCourses extends ConsumerWidget {
       data: (courses) {
         return Column(
           children: [
-            Column(
-              children: courses
-                  .map(
-                    (e) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: GridListCourseTile(course: e),
-                    ),
-                  )
-                  .toList(),
-            ),
+            // Column(
+            //   children: courses
+            //       .map(
+            //         (e) => Padding(
+            //           padding: const EdgeInsets.symmetric(vertical: 10),
+            //           child: GridListCourseTile(course: c),
+            //         ),
+            //       )
+            //       .toList(),
+            // ),
             Visibility(
               visible: coursesRef.value != null && coursesRef.value!.length >= 3,
               child: Center(
                 child: TextButton(
                   child: const Text('view-all').tr(),
-                  onPressed: () => NextScreen.iOS(
-                      context,
-                      AllCoursesView(
-                        courseBy: CourseBy.author,
-                        title: user.fullName!,
-                        authorId: user.id.toString(),
-                      )),
+                  // onPressed: () => NextScreen.iOS(
+                  //     context,
+                  //     AllCoursesView(
+                  //       title: user.fullName!,
+                  //       authorId: user.id.toString(),
+                  //     )),
+                  onPressed: (){},
                 ),
               ),
             )

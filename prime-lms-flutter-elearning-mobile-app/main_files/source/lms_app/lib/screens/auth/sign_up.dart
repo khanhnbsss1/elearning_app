@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:lms_app/components/privacy_info.dart';
+import 'package:lms_app/controller_elearning/auth/register_controller.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/screens/splash.dart';
@@ -12,7 +13,10 @@ import 'package:lms_app/services/auth_service.dart';
 import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import '../../base/widgets/toast_common/toast_utils.dart';
+import '../../components/app_logo.dart';
 import '../../providers/user_data_provider.dart';
+import '../home/home_view.dart';
 import 'social_logins.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
@@ -26,43 +30,62 @@ class SignUpScreen extends ConsumerStatefulWidget {
 
 class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   var formKey = GlobalKey<FormState>();
-  var nameCtlr = TextEditingController();
-  var emailCtlr = TextEditingController();
-  var passwordCtrl = TextEditingController();
+  late RegisterController registerController;
   final _btnController = RoundedLoadingButtonController();
 
   bool offsecureText = true;
   IconData lockIcon = LineIcons.lock;
 
-  UserModel _userModel(UserCredential userCredential) {
-    final UserModel user = UserModel(
-      id: userCredential.user!.uid,
-      email: userCredential.user!.email ?? emailCtlr.text,
-      name: userCredential.user!.displayName ?? nameCtlr.text,
-      createdAt: DateTime.now().toUtc(),
-      imageUrl: userCredential.user?.photoURL,
-      platform: Platform.isAndroid ? 'Android' : 'iOS',
-    );
-    return user;
+  @override
+  void initState() {
+    super.initState();
+    registerController = RegisterController();
+    registerController.onInit();
   }
+
+  // UserModel _userModel(UserCredential userCredential) {
+  //   final UserModel user = UserModel(
+  //     id: userCredential.user!.uid,
+  //     email: userCredential.user!.email ?? emailCtlr.text,
+  //     name: userCredential.user!.displayName ?? nameCtlr.text,
+  //     createdAt: DateTime.now().toUtc(),
+  //     imageUrl: userCredential.user?.photoURL,
+  //     platform: Platform.isAndroid ? 'Android' : 'iOS',
+  //   );
+  //   return user;
+  // }
+
+  // Future _handleSignUpWithUsernamePassword() async {
+  //   if (formKey.currentState!.validate()) {
+  //     formKey.currentState!.save();
+  //     _btnController.start();
+  //     final UserCredential? userCredential =
+  //         await AuthService().signUpWithEmailPassword(context, emailCtlr.text.trim(), passwordCtrl.text.trim()).onError((error, stackTrace) {
+  //       _btnController.reset();
+  //       return null;
+  //     });
+  //     if (userCredential != null && userCredential.user != null) {
+  //       // await FirebaseService().saveUserData(_userModel(userCredential));
+  //       await FirebaseService().updateUserStats();
+  //       _btnController.success();
+  //       await AuthService().sendEmailVerification();
+  //       afterSignIn();
+  //     } else {
+  //       _btnController.reset();
+  //     }
+  //   }
+  // }
 
   Future _handleSignUpWithUsernamePassword() async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       _btnController.start();
-      final UserCredential? userCredential =
-          await AuthService().signUpWithEmailPassword(context, emailCtlr.text.trim(), passwordCtrl.text.trim()).onError((error, stackTrace) {
-        _btnController.reset();
-        return null;
-      });
-      if (userCredential != null && userCredential.user != null) {
-        // await FirebaseService().saveUserData(_userModel(userCredential));
-        await FirebaseService().updateUserStats();
-        _btnController.success();
-        await AuthService().sendEmailVerification();
-        afterSignIn();
+      bool register = await registerController.onRegister();
+      if (!register) {
+        afterSignUp();
       } else {
-        _btnController.reset();
+        ToastUtils.showToastError("Register failed");
+        _btnController.stop();
       }
     }
   }
@@ -81,14 +104,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     }
   }
 
-  void afterSignIn() async {
-    if (widget.popUpScreen == null || widget.popUpScreen == false) {
-      NextScreen.closeOthersAnimation(context, const SplashScreen());
-    } else {
-      final navigator = Navigator.of(context);
-      await ref.read(userDataProvider.notifier).getData();
-      navigator.pop();
-    }
+  void afterSignUp() async {
+    NextScreen.closeOthersAnimation(context, const LoginScreen());
+    await ref.read(userDataProvider.notifier).getData();
   }
 
   @override
@@ -121,17 +139,22 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 'follow-simple-steps',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.secondary),
               ).tr(),
-              SocialLogins(
-                afterSignIn: afterSignIn,
-              ),
               Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.symmetric(vertical: 20),
-                child: const Text(
-                  '------ OR ------',
-                  style: TextStyle(color: Colors.blueGrey),
-                ),
+                child: const AppLogo(size: 100,),
               ),
+              // SocialLogins(
+              //   afterSignIn: afterSignIn,
+              // ),
+              // Container(
+              //   alignment: Alignment.center,
+              //   padding: const EdgeInsets.symmetric(vertical: 20),
+              //   child: const Text(
+              //     '------ OR ------',
+              //     style: TextStyle(color: Colors.blueGrey),
+              //   ),
+              // ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -146,9 +169,30 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             Icons.clear,
                             size: 20,
                           ),
-                          onPressed: () => nameCtlr.clear(),
+                          onPressed: () => registerController.basicValidator.getController('first_name')?.clear(),
                         )),
-                    controller: nameCtlr,
+                    controller: registerController.basicValidator.getController('first_name'),
+                    keyboardType: TextInputType.name,
+                    validator: (value) {
+                      if (value!.isEmpty) return 'Name is required';
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 30),
+                  TextFormField(
+                    decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        hintText: 'Phone',
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(3)),
+                        label: const Text('Phone'),
+                        suffixIcon: IconButton(
+                          icon: const Icon(
+                            Icons.clear,
+                            size: 20,
+                          ),
+                          onPressed: () => registerController.basicValidator.getController('user_name')?.clear(),
+                        )),
+                    controller: registerController.basicValidator.getController('phone'),
                     keyboardType: TextInputType.name,
                     validator: (value) {
                       if (value!.isEmpty) return 'Name is required';
@@ -167,9 +211,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             Icons.clear,
                             size: 20,
                           ),
-                          onPressed: () => emailCtlr.clear(),
+                          onPressed: () => registerController.basicValidator.getController('email')?.clear(),
                         )),
-                    controller: emailCtlr,
+                    controller: registerController.basicValidator.getController('email'),
                     keyboardType: TextInputType.emailAddress,
                     validator: (value) {
                       if (value!.isEmpty) return 'Email is required';
@@ -192,7 +236,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           ),
                           onPressed: () => _onlockPressed(),
                         )),
-                    controller: passwordCtrl,
+                    controller: registerController.basicValidator.getController('password'),
                     obscureText: offsecureText,
                     keyboardType: TextInputType.visiblePassword,
                     validator: (value) {

@@ -7,12 +7,14 @@ import 'package:lms_app/models/app_settings_model.dart';
 import 'package:lms_app/screens/auth/no_user.dart';
 import 'package:lms_app/services/auth_service.dart';
 import 'package:lms_app/services/sp_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_animations/simple_animations.dart';
 import '../core/home.dart';
 import '../providers/app_settings_provider.dart';
 import '../providers/user_data_provider.dart';
 import '../utils/next_screen.dart';
 import '../utils/no_license.dart';
+import 'auth/login.dart';
 import 'intro.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {

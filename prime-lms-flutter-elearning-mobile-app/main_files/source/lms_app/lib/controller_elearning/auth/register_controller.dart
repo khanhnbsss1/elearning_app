@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/controller/my_controller.dart';
+import 'package:lms_app/controller_elearning/my_controller.dart';
 
-import 'package:webkit/helpers/widgets/my_form_validator.dart';
-import 'package:webkit/helpers/widgets/my_validators.dart';
-import 'package:webkit/services/apis/auth/register/models/register_request.dart';
-import 'package:webkit/services/apis/auth/register/register_with_phone_api.dart';
+import '../../helper_elearning/my_form_validator.dart';
+import '../../helper_elearning/widget/my_validators.dart';
+import '../../models_elearning/user/UserProfile.dart';
+import '../../services_elearning/apis/auth/register/models/register_request.dart';
+import '../../services_elearning/apis/auth/register/register_with_phone_api.dart';
+
 
 class RegisterController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
@@ -52,7 +53,7 @@ class RegisterController extends MyController {
     isChecked = value ?? isChecked;
     update();
   }
-  Future<void> onRegister() async {
+  Future<bool> onRegister() async {
     RegisterRequest registerRequest = RegisterRequest(
       username: basicValidator.getController('phone')?.text,
       password: basicValidator.getController('password')?.text,
@@ -62,16 +63,16 @@ class RegisterController extends MyController {
     );
     RegisterWithPhoneApi registerWithPhoneApi = RegisterWithPhoneApi(registerRequest: registerRequest);
     dynamic data= await registerWithPhoneApi.call();
-      loading = true;
       update();
       if (data != true) {
         basicValidator.clearErrors();
+        return true;
       }
       else
         {
-          AppPages.routeName(Routes.landingPageRoute);
+          return false;
+          // AppPages.routeName(Routes.landingPageRoute);
         }
-      loading = false;
       update();
   }
 
@@ -81,6 +82,6 @@ class RegisterController extends MyController {
   }
 
   void gotoLogin() {
-    AppPages.routeName(Routes.landingPageRoute);
+    // AppPages.routeName(Routes.landingPageRoute);
   }
 }

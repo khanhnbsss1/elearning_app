@@ -46,16 +46,16 @@ class CategoriesLayout2 extends StatelessWidget {
                     title: Text((category.lectures == null) ? category.lectures![index].lectureName! : 'data'),
                     titleTextStyle: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
                     trailing: const Icon(FeatherIcons.chevronRight),
-                    // leading: SizedBox(
-                    //   height: 40,
-                    //   width: 50,
-                    //   child: CustomCacheImage(
-                    //     imageUrl: category.thumbnailUrl,
-                    //     radius: 3,
-                    //   ),
-                    // ),
-                    // onTap: ()=> NextScreen.iOS(context, AllCoursesView(courseBy: CourseBy.category, title: category.name, categoryId: category.id,)),
-                    onTap: (){},
+                    leading: SizedBox(
+                      height: 40,
+                      width: 50,
+                      child: CustomCacheImage(
+                        imageUrl: category.image,
+                        radius: 3,
+                      ),
+                    ),
+                    // onTap: ()=> NextScreen.iOS(context, AllCoursesView(title: category.name!, categoryId: category.id.toString(),)),
+                    onTap: () {},
                   );
                 },
               );
