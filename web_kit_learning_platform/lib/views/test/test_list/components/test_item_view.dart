@@ -97,32 +97,26 @@ class TestItemView extends StatelessWidget {
                       ],
                     ),
                     
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ItemViewEditDelete(
-                          itemInfo: info,
-                          onViewDetail: (p0) {
-                            if(onViewDetail!=null)
-                            {
-                              onViewDetail!(p0);
-                            }
-                          },
-                          onEdit: (p0) {
-                            if(onEdit!=null)
-                            {
-                              onEdit!(p0);
-                            }
-                          },
-                          onDelete: (p0) {
-                            if(onDelete!=null)
-                            {
-                              onDelete!(p0);
-                            }
-                          },
-                        ),
-                      ],
+                    ItemViewEditDelete(
+                      itemInfo: info,
+                      onViewDetail: (p0) {
+                        if(onViewDetail!=null)
+                        {
+                          onViewDetail!(p0);
+                        }
+                      },
+                      onEdit: (p0) {
+                        if(onEdit!=null)
+                        {
+                          onEdit!(p0);
+                        }
+                      },
+                      onDelete: (p0) {
+                        if(onDelete!=null)
+                        {
+                          onDelete!(p0);
+                        }
+                      },
                     )
                   ],
                 ),

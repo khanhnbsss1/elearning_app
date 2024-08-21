@@ -19,4 +19,25 @@ class FilterManager{
       }
     return addCourseFilterModel;
   }
+  Future<Map<int, String>> getGradesInfo() async {
+    Map<int, String> listOfGradeNames={};
+    GetAddCourseFilterModel? addCourseFilterModel = await FilterManager().getCourseFilter();
+    if(addCourseFilterModel!=null)
+    {
+      addCourseFilterModel.data?.forEach((data) {
+        switch (data.filterType) {
+          case 'GRADE':
+            data.subFilter!.where((e) => e.name != null).forEach((e) {
+              if (!listOfGradeNames.containsValue(e.name!)) {
+                listOfGradeNames[e.id!] = e.name!;
+              }
+            });
+            break;
+          default:
+            break;
+        }
+      });
+    }
+    return listOfGradeNames;
+  }
 }

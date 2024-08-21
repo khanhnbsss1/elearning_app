@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
+import 'package:webkit/services/apis/scores/create_score_api.dart';
+import 'package:webkit/services/apis/scores/models/score_info.dart';
 import 'package:webkit/services/apis/test/get_test_detail.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
 part 'test_work_event.dart';
@@ -31,6 +33,7 @@ class TestWorkBloc extends Bloc<TestWorkEvent, TestWorkState> {
     emit(state.copyWith(
       blocStatus: TestWorkStatus.onLoading,
     ));
+    MonitorLoading().showLoading("");
     GetTestDetailApi getTestDetailApi = GetTestDetailApi(testId: state.testInfo?.id??0);
     state.testInfo = (await getTestDetailApi.call())?? state.testInfo;
     state.quizDTOsForView = [];
@@ -48,6 +51,7 @@ class TestWorkBloc extends Bloc<TestWorkEvent, TestWorkState> {
             (state.quizDTOsForView??[])[indexList].add((state.testInfo?.quizDTOs??[]).elementAt(index));
           }
       }
+    MonitorLoading().dismiss();
     emit(state.copyWith(
         blocStatus: TestWorkStatus.initial,
         quizDTOsForView: (state.quizDTOsForView??[]),
@@ -58,12 +62,23 @@ class TestWorkBloc extends Bloc<TestWorkEvent, TestWorkState> {
       TestWorkOnSubmitResultTestEvent event,
       Emitter<TestWorkState> emit,
       ) async {
-    UserProfile? userProfile = UserManager().getUserProfile();
     emit(state.copyWith(
       blocStatus: TestWorkStatus.onLoading,
     ));
-    GetTestDetailApi getTestDetailApi = GetTestDetailApi(testId: state.testInfo?.id??0);
-    state.testInfo = (await getTestDetailApi.call())?? state.testInfo;
+    MonitorLoading().showLoading("");
+    ScoresInfo info = ScoresInfo(testId: state.testInfo?.id??0);
+    for(QuestionInfo questionInfo in state.testInfo?.quizDTOs??[])
+      {
+        ScoreItem scoreItem = ScoreItem(
+            questionId: questionInfo.id,
+            answerId: questionInfo.answerIdChoose, 
+            answerText: questionInfo.answerChoose);
+        info.scores?.add(scoreItem);
+      }
+    CreateScoreApi createScoreApi = CreateScoreApi(info: info);
+    dynamic result = await createScoreApi.call();
+    
+    MonitorLoading().dismiss();
     emit(state.copyWith(
         blocStatus: TestWorkStatus.initial,testInfo: state.testInfo));
   }

@@ -60,7 +60,7 @@ class QuestionInfo {
   List<AnswerInfo>? answerGetDetail;
   int? answerIdChoose;
   String? answerChoose;
-
+  String? subName;
   UploadFileResponseInfo? uploadInfo;
   QuestionInfo(
       {this.id,
@@ -76,7 +76,8 @@ class QuestionInfo {
         this.gradeId,
         this.answerIdChoose,
         this.answerChoose,
-        this.uploadInfo
+        this.uploadInfo,
+        this.subName
       }){
     questionType??=QuestionType.image;
     answerGetDetail??=[];
@@ -95,6 +96,9 @@ class QuestionInfo {
     createdAt = json['created_at'];
     createdBy = json['created_by'];
     updatedAt = json['updated_at'];
+    gradeId = json['grade_id'];
+    fileId = json['file_id'];
+    subName = json['sub_name'];
     answerGetDetail = [];
     if (json['answer'] != null) {
       answerGetDetail = <AnswerInfo>[];
@@ -122,6 +126,10 @@ class QuestionInfo {
     {
       data['grade_id']= gradeId;
     }
+/*    if(subName!=null)
+    {
+      data['sub_name']= subName;
+    }*/
     if(weightage!=null)
       {
         data['weightage']= weightage;

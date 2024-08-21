@@ -7,6 +7,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
 import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
@@ -380,6 +381,13 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
                       alignment: Alignment.center,
                       child: Text(L10nX.getStr.question_type))),
               GridColumn(
+                  columnName: L10nX.getStr.grade_str,
+                  maximumWidth: Dimens.size120,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(L10nX.getStr.grade_str))),
+              GridColumn(
                   columnName: L10nX.getStr.score_str,
                   minimumWidth: Dimens.size80,
                   maximumWidth: Dimens.size120,
@@ -418,34 +426,46 @@ class QuestionDataSource extends DataGridSource {
 
     _lessonData = lessonData.map<DataGridRow>((e) {
       starIndex = (starIndex ??0)+1;
+      Widget gradeWidget = FutureBuilder(future: FilterManager().getGradesInfo(), builder: (context, snapshot) {
+        if(!snapshot.hasData) {
+          return SizedBox();
+        }
+        String? grade = snapshot.data![e.gradeId??1];
+        return Text(grade??"", style: TextStyleConstant.textStyleBlack14w400,);
+      },);
+
       return  DataGridRow(
           cells: [
             DataGridCell<Widget>(columnName: 'id', value: Text("$starIndex", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.question_str, value:Text(
-              e.questionName??"",
-              textAlign: TextAlign.start,
-              style: TextStyleConstant.textStyleBlack14w400,) ),
+            DataGridCell<Widget>(columnName: L10nX.getStr.question_str, value:Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    e.questionName??"",
+                    textAlign: TextAlign.start,
+                    style: TextStyleConstant.textStyleBlack14w400,),
+                ),
+              ],
+            ) ),
             DataGridCell<Widget>(columnName: L10nX.getStr.question_type, value: Text(L10nX().getStringByKey("${mapQuestionTypeToStrKey[e.questionType]??""}_type_str".toLowerCase()), style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.grade_str, value: gradeWidget),
+
             DataGridCell<Widget>(columnName: L10nX.getStr.score_str, value: Text((e.weightage??0).toString(), style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str,
-                value: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ItemViewEditDelete(
-                      itemInfo: e,
-                      enableEditDelete: UserManager().userContainPermission(permissionList: ["quizs.delete.delete_question"]),
-                      enableEdit: UserManager().userContainPermission(permissionList: ["quizs.put.update_question"]),
-                      onViewDetail: (p0) {
-                        onViewDetail(p0);
-                      },
-                      onEdit: (p0) {
-                        onEdit(p0);
-                      },
-                      onDelete: (p0) {
-                        onDelete(p0);
-                      },
-                    ),
-                  ],
+                value: ItemViewEditDelete(
+                  itemInfo: e,
+                  enableEditDelete: UserManager().userContainPermission(permissionList: ["quizs.delete.delete_question"]),
+                  enableEdit: UserManager().userContainPermission(permissionList: ["quizs.put.update_question"]),
+                  onViewDetail: (p0) {
+                    onViewDetail(p0);
+                  },
+                  onEdit: (p0) {
+                    onEdit(p0);
+                  },
+                  onDelete: (p0) {
+                    onDelete(p0);
+                    
+                  },
                 )),
           ]);
     },).toList();
@@ -462,7 +482,7 @@ class QuestionDataSource extends DataGridSource {
         cells: row.getCells().map<Widget>((e) {
           return Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(Dimens.size8),
             child: e.value,
           );
         }).toList());

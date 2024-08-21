@@ -99,9 +99,8 @@ class QuestionDetailBloc extends Bloc<QuestionDetailEvent, QuestionDetailState> 
     if(state.questionInfo?.id!=null)
       {
         state.editingControllerQuestionName?.text = state.questionInfo?.questionName??"";
-        state.editingControllerQuestionName?.text = state.questionInfo?.questionName??"";
-        state.editingControllerQuestionName?.text = state.questionInfo?.questionName??"";
-
+        state.editingControllerAttackFile?.text = state.questionInfo?.questionLink??"";
+        state.editingControllerQuestionScore?.text= (state.questionInfo?.weightage??0).toString();
       }
     GetAddCourseFilterModel? addCourseFilterModel = await FilterManager().getCourseFilter();
     if(addCourseFilterModel!=null)
@@ -162,7 +161,7 @@ class QuestionDetailBloc extends Bloc<QuestionDetailEvent, QuestionDetailState> 
         {
           answerInfo.answerType = state.answerType;
         }
-      state.questionInfo?.weightage = int.tryParse(state.editingControllerQuestionScore?.text??'0');
+    state.questionInfo?.weightage = int.tryParse(state.editingControllerQuestionScore?.text??'0');
     AddQuizApi getLessonDetailApi = AddQuizApi(info: state.questionInfo!);
       dynamic data = (await getLessonDetailApi.call());
       if(data.runtimeType == String )

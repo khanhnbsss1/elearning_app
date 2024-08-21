@@ -822,8 +822,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "word_str": MessageLookupByLibrary.simpleMessage("Từ"),
         "world_countries_details": MessageLookupByLibrary.simpleMessage(
             "Chi tiết các quốc gia trên thế giới"),
+        "you_are_ready_content_close_test": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn đóng bài kiểm tra, kết quả làm bài sẽ không được lưu lại !"),
         "you_are_ready_finish_test": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn nộp bài !"),
+        "you_are_ready_title_close_test":
+            MessageLookupByLibrary.simpleMessage("Hủy bỏ bài kiểm tra"),
         "you_do_have_an_account":
             MessageLookupByLibrary.simpleMessage("Bạn có tài khoản?"),
         "you_do_not_have_an_account":

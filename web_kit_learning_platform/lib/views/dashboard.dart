@@ -60,12 +60,12 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                       fontSize: 18,
                       fontWeight: 600,
                     ),
-                    MyBreadcrumb(
+/*                    MyBreadcrumb(
                       children: [
                         MyBreadcrumbItem(name: L10nX.getStr.ecommerce),
                         MyBreadcrumbItem(name: L10nX.getStr.dashboard, active: true),
                       ],
-                    ),
+                    ),*/
                   ],
                 ),
               ),

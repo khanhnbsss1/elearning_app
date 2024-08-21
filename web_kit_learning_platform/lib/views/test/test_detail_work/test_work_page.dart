@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
@@ -126,64 +127,87 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
                       ),
                       title: Text(widget.testInfo.name??"", style: TextStyleConstant.textStyleBlack20w700.copyWith(color: ColorConst.whiteColor),),
                       centerTitle: true,
+                      automaticallyImplyLeading: false,
                       actions: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            ActionButton1(
-                              text: L10nX.getStr.prev,
-                              height: Dimens.size40,
-                              enableBgColor: ColorConst.whiteColor,
-                              textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.mainColor),
-                              enable: (state.page??0)>=1,
-                              onTap: () {
-                                if((state.page??0)<=0) {
-                                  return;
-                                }
-                                BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnChangePageTestEvent(page: (state.page??0)-1));
-                              },
-                            ),
-                            Gap(Dimens.size20),
-                            Stack(
-                              children: [
-                                Visibility(
-                                  visible: (state.page??0)<(state.quizDTOsForView??[]).length-1,
-                                  child: ActionButton1(
-                                    text: L10nX.getStr.next,
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  ActionButton1(
+                                    text: L10nX.getStr.prev,
                                     height: Dimens.size40,
                                     enableBgColor: ColorConst.whiteColor,
                                     textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.mainColor),
-                                    
+                                    enable: (state.page??0)>=1,
                                     onTap: () {
-                                      if((state.page??0)>=(state.quizDTOsForView??[]).length-1) {
+                                      if((state.page??0)<=0) {
                                         return;
                                       }
-                                      BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnChangePageTestEvent(page: (state.page??0)+1));
+                                      BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnChangePageTestEvent(page: (state.page??0)-1));
                                     },
                                   ),
-                                ),
-                                Visibility(
-                                  visible: (state.page??0)>=(state.quizDTOsForView??[]).length-1,
-                                  child: ActionButton1(
-                                    text: L10nX.getStr.submit,
-                                    height: Dimens.size40,
-                                    enableBgColor: ColorConst.whiteColor,
-                                    textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.mainColor),
-                                    onTap: () {
-                                      ConfirmPopupPage(
-                                        content: L10nX.getStr.you_are_ready_finish_test,
-                                        onAccept: () {
-                                          BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnSubmitResultTestEvent());
-                                        },
-                                      ).show(context);
-                                    },
+                                  Gap(Dimens.size20),
+                                  Stack(
+                                    children: [
+                                      Visibility(
+                                        visible: (state.page??0)<(state.quizDTOsForView??[]).length-1,
+                                        child: ActionButton1(
+                                          text: L10nX.getStr.next,
+                                          height: Dimens.size40,
+                                          enableBgColor: ColorConst.whiteColor,
+                                          textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.mainColor),
+                                          
+                                          onTap: () {
+                                            if((state.page??0)>=(state.quizDTOsForView??[]).length-1) {
+                                              return;
+                                            }
+                                            BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnChangePageTestEvent(page: (state.page??0)+1));
+                                          },
+                                        ),
+                                      ),
+                                      Visibility(
+                                        visible: (state.page??0)>=(state.quizDTOsForView??[]).length-1,
+                                        child: ActionButton1(
+                                          text: L10nX.getStr.submit,
+                                          height: Dimens.size40,
+                                          enableBgColor: ColorConst.whiteColor,
+                                          textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.mainColor),
+                                          onTap: () {
+                                            ConfirmPopupPage(
+                                              content: L10nX.getStr.you_are_ready_finish_test,
+                                              onAccept: () {
+                                                BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnSubmitResultTestEvent());
+                                              },
+                                            ).show(context);
+                                          },
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
-                            Gap(Dimens.size20),
-                          ],
+                                  Gap(Dimens.size20),
+                                ],
+                              ),
+                              Gap(Dimens.size16),
+                              InkWell(
+                                onTap:  () {
+                                  ConfirmPopupPage(
+                                    content: L10nX.getStr.you_are_ready_content_close_test,
+                                    title: L10nX.getStr.you_are_ready_title_close_test,
+                                    onAccept: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ).show(context);
+                                },
+                                child: Icon(Icons.close, color: ColorConst.whiteColor,),
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),

@@ -1,16 +1,24 @@
 import 'package:async_searchable_dropdown/async_searchable_dropdown.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
+import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
+import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
+import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 import 'package:webkit/services/apis/question/get_quiz_list_api.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
+import 'package:webkit/views/question/question_detail/question_detail.dart';
+import 'package:webkit/views/question/question_detail/question_work/question_work_item.dart';
+import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 
 class SearchQuizDropDown extends StatefulWidget {
   final List<QuestionInfo> allWords;
@@ -63,47 +71,99 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
             style: TextStyleConstant.textStyleBlack15w400,),
           Gap(Dimens.size16),
           Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: (widget.exitsQuestion??[]).length,
-              itemBuilder: (context, index) {
-                QuestionInfo questionInfo = (widget.exitsQuestion??[]).elementAt(index);
-                return Container(
-                  decoration: BoxDecoration(
-                    color: ColorConst.whiteColor,
-                    border: Border.all(color: ColorConst.dividerColor, width: 0.2)
-                  ),
-                  child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("${index+1}. ${questionInfo.questionName} "),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text("${questionInfo.weightage??0} đ    ${L10nX().getStringByKey('${mapQuestionTypeToStrKey[questionInfo.questionType]}_type_str'.toLowerCase())}"),
-                            Gap(Dimens.size8),
-                            Visibility(
-                              visible: widget.actionType != ActionType.view,
-                              child: InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    widget.onRemoveWords(questionInfo);
-                                  });
-                                },
-                                child: Icon(Icons.delete_forever_outlined, color: ColorConst.colorIconRed,size: Dimens.size20,),
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                );
-                },),
+            child: buildQuestionList()
           ),
         ]
+    );
+  }
+  Widget buildQuestionList(){
+    QuestionDataSource employeeDataSource = QuestionDataSource(
+      data: widget.exitsQuestion??[],
+      starIndex: 0,
+      enableDelete: widget.actionType != ActionType.view,
+      onDelete: (p0) {
+        setState(() {
+          widget.onRemoveWords(p0);
+        });
+      },
+      onEdit: (p0) {
+        QuestionCreateEditDetailPage(actionType: ActionType.edit,info: p0,).show(context);
+      },
+      onViewDetail: (p0) {
+        QuestionWorkItem(
+          questionInfo: p0,
+          enableCloseButton: true,
+        ).show(context);
+      },
+    );
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return SfDataGridTheme(
+          data: SfDataGridThemeData(
+            headerColor: ColorConst.mainColor.withOpacity(0.1),
+          ),
+          child: SfDataGrid(
+            source: employeeDataSource,
+            columnWidthMode: ColumnWidthMode.fill,
+            isScrollbarAlwaysShown: false,
+            gridLinesVisibility: GridLinesVisibility.both,
+            headerGridLinesVisibility: GridLinesVisibility.both,
+            headerRowHeight: Dimens.size60,
+            showHorizontalScrollbar: true,
+            columns: <GridColumn>[
+              GridColumn(
+                  columnName: 'id',
+                  maximumWidth: Dimens.size50,
+                  label: Container(
+                      padding: EdgeInsets.all(16.0),
+                      alignment: Alignment.center,
+                      child: Text(
+                        'ID',
+                      ))),
+              GridColumn(
+                  columnName: L10nX.getStr.question_str,
+                  //minimumWidth: Dimens.size250,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(
+                        L10nX.getStr.question_str,
+                        overflow: TextOverflow.ellipsis,
+                      ))),
+              GridColumn(
+                  columnName: L10nX.getStr.type,
+                  maximumWidth: Dimens.size120,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(L10nX.getStr.type))),
+              GridColumn(
+                  columnName: L10nX.getStr.grade_str,
+                  maximumWidth: Dimens.size120,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(L10nX.getStr.grade_str))),
+              GridColumn(
+                  columnName: L10nX.getStr.score_str,
+                  maximumWidth: Dimens.size80,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(L10nX.getStr.score_str))),
+              
+              GridColumn(
+                  columnName: L10nX.getStr.action_str,
+                  maximumWidth: Dimens.size180,
+                  label: Container(
+                      padding: EdgeInsets.all(8.0),
+                      alignment: Alignment.center,
+                      child: Text(L10nX.getStr.action_str))),
+        
+            ],
+          ),
+        );
+      },
     );
   }
   Widget questDropDownSearch({Function(QuestionInfo)? onSelectWord,required BuildContext context}) {
@@ -116,6 +176,7 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
               child: StatefulBuilder(
                 builder: (BuildContext context, void Function(void Function()) setState) {
                   return SearchableDropdown<QuestionInfo>(
+                    key: UniqueKey(),
                     inputDecoration: InputDecoration(
                       constraints: BoxConstraints(maxHeight: Dimens.size45),
                       hintTextDirection: AppTheme.textDirection,
@@ -172,4 +233,83 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
   }
   
 }
+
+class QuestionDataSource extends DataGridSource {
+  /// Creates the employee data source class with required details.
+  Function(QuestionInfo) onViewDetail, onEdit, onDelete;
+  int? starIndex;
+  List<QuestionInfo> data;
+  bool enableDelete;
+  QuestionDataSource({
+    required this.data,
+    this.starIndex,
+    required this.enableDelete,
+    required this.onDelete,
+    required this.onEdit,
+    required this.onViewDetail
+  }) {
+
+    _lessonData = data.map<DataGridRow>((e) {
+      starIndex = (starIndex ??0)+1;
+      
+      Widget gradeWidget = FutureBuilder(future: FilterManager().getGradesInfo(), builder: (context, snapshot) {
+        if(!snapshot.hasData) {
+          return SizedBox();
+        }
+        String? grade = snapshot.data![e.gradeId??1];
+        return Text(grade??"", style: TextStyleConstant.textStyleBlack14w400,);
+      },);
+      return  DataGridRow(
+          cells: [
+            DataGridCell<Widget>(columnName: 'id', value: Text("$starIndex", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.question_str, value:
+            Row(
+              children: [
+                Expanded(
+                    child: Text(
+                      e.questionName??"", 
+                      textAlign: TextAlign.start,
+                      style: TextStyleConstant.textStyleBlack14w400,)),
+              ],
+            ) ),
+            DataGridCell<Widget>(columnName: L10nX.getStr.type, value: Text(L10nX().getStringByKey("${mapQuestionTypeToStrKey[e.questionType]??""}_type_str".toLowerCase()), style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.grade_str, value: gradeWidget),
+            DataGridCell<Widget>(columnName: L10nX.getStr.score_str, value: Text(e.weightage.toString(), style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.action_str,
+                value: ItemViewEditDelete(
+                  itemInfo: e,
+                  enableEdit: UserManager().userContainPermission(permissionList: ["quizs.put.update_question"]),
+                  enableEditDelete: enableDelete,
+                  onViewDetail: (p0) {
+                    onViewDetail(p0);
+                  },
+                  onEdit: (p0) {
+                    onEdit(p0);
+                  },
+                  onDelete: (p0) {
+                    onDelete(p0);
+                  },
+                )),
+          ]);
+    },).toList();
+  }
+
+  List<DataGridRow> _lessonData = [];
+
+  @override
+  List<DataGridRow> get rows => _lessonData;
+
+  @override
+  DataGridRowAdapter buildRow(DataGridRow row) {
+    return DataGridRowAdapter(
+        cells: row.getCells().map<Widget>((e) {
+          return Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.all(Dimens.size8),
+          child: e.value,
+                        );
+        }).toList());
+  }
+}
+
 

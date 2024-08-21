@@ -433,25 +433,20 @@ class UserDataSource extends DataGridSource {
             DataGridCell<Widget>(columnName: L10nX.getStr.type, value: Text(e.typeName??"", style: TextStyleConstant.textStyleBlack14w400,)),
 
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str,
-                value: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ItemViewEditDelete(
-                      itemInfo: e,
-                      enableEditDelete: UserManager().userContainPermission(permissionList: ["users.put.edit_user"]),
-                      enableEdit: UserManager().userContainPermission(permissionList: ["users.put.edit_user"]),
-                      enableView: UserManager().userContainPermission(permissionList: ["users.get.get_user"]),
-                      onViewDetail: (p0) {
-                        onViewDetail(p0);
-                      },
-                      onEdit: (p0) {
-                        onEdit(p0);
-                      },
-                      onDelete: (p0) {
-                        onDelete(p0);
-                      },
-                    ),
-                  ],
+                value: ItemViewEditDelete(
+                  itemInfo: e,
+                  enableEditDelete: UserManager().userContainPermission(permissionList: ["users.put.edit_user"]),
+                  enableEdit: UserManager().userContainPermission(permissionList: ["users.put.edit_user"]),
+                  enableView: UserManager().userContainPermission(permissionList: ["users.get.get_user"]),
+                  onViewDetail: (p0) {
+                    onViewDetail(p0);
+                  },
+                  onEdit: (p0) {
+                    onEdit(p0);
+                  },
+                  onDelete: (p0) {
+                    onDelete(p0);
+                  },
                 )),
           ]);
     },).toList();
@@ -468,7 +463,7 @@ class UserDataSource extends DataGridSource {
         cells: row.getCells().map<Widget>((e) {
           return Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(Dimens.size8),
             child: e.value,
           );
         }).toList());

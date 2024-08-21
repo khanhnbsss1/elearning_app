@@ -607,5 +607,7 @@
   "start_test_confirm": "Are you sure you want to run this test, the time taken is: ",
   "you_are_ready_finish_test": "Bạn có chắc chắn muốn nộp bài !",
   "manage_str": "Manage",
-  "time_test_end": "The test time has expired, you cannot continue the test, please submit your test"
+  "time_test_end": "The test time has expired, you cannot continue the test, please submit your test",
+  "you_are_ready_content_close_test": "Are you sure you want to close the test, the test results will not be saved!",
+  "you_are_ready_title_close_test": "Cancel the test"
 }

@@ -826,8 +826,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "word_str": MessageLookupByLibrary.simpleMessage("Word"),
         "world_countries_details":
             MessageLookupByLibrary.simpleMessage("World countries details"),
+        "you_are_ready_content_close_test": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to close the test, the test results will not be saved!"),
         "you_are_ready_finish_test": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn nộp bài !"),
+        "you_are_ready_title_close_test":
+            MessageLookupByLibrary.simpleMessage("Cancel the test"),
         "you_do_have_an_account":
             MessageLookupByLibrary.simpleMessage("Do you have an account?"),
         "you_do_not_have_an_account": MessageLookupByLibrary.simpleMessage(

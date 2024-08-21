@@ -62,34 +62,29 @@ class VocabularyItemView extends StatelessWidget {
                           fontSize: ResponsiveInfo.isPhone()?Dimens.size20:Dimens.size18,),
                       maxLines: 1,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ItemViewEditDelete(
-                          itemInfo: vocabularyInfo,
-                          enableView: false,
-                          enableEdit: UserManager().userContainPermission(permissionList: ["vocabulary.put.update_vocabulary"]),
-                          enableEditDelete: UserManager().userContainPermission(permissionList: ["vocabulary.delete.delete_vocabulary"]),
-                          onViewDetail: (p0) {
-                            if(onViewDetail!=null)
-                            {
-                              onViewDetail!(p0);
-                            }
-                          },
-                          onEdit: (p0) {
-                            if(onEdit!=null)
-                            {
-                              onEdit!(p0);
-                            }
-                          },
-                          onDelete: (p0) {
-                            if(onDelete!=null)
-                            {
-                              onDelete!(p0);
-                            }
-                          },
-                        ),
-                      ],
+                    ItemViewEditDelete(
+                      itemInfo: vocabularyInfo,
+                      enableView: false,
+                      enableEdit: UserManager().userContainPermission(permissionList: ["vocabulary.put.update_vocabulary"]),
+                      enableEditDelete: UserManager().userContainPermission(permissionList: ["vocabulary.delete.delete_vocabulary"]),
+                      onViewDetail: (p0) {
+                        if(onViewDetail!=null)
+                        {
+                          onViewDetail!(p0);
+                        }
+                      },
+                      onEdit: (p0) {
+                        if(onEdit!=null)
+                        {
+                          onEdit!(p0);
+                        }
+                      },
+                      onDelete: (p0) {
+                        if(onDelete!=null)
+                        {
+                          onDelete!(p0);
+                        }
+                      },
                     )
                   ],
                 ),

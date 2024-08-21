@@ -697,8 +697,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "word_str": MessageLookupByLibrary.simpleMessage("单词"),
         "world_countries_details":
             MessageLookupByLibrary.simpleMessage("世界各国详情"),
+        "you_are_ready_content_close_test":
+            MessageLookupByLibrary.simpleMessage("您确定要关闭测试，测试结果将不会被保存！"),
         "you_are_ready_finish_test":
             MessageLookupByLibrary.simpleMessage("您确定要提交测试吗？"),
+        "you_are_ready_title_close_test":
+            MessageLookupByLibrary.simpleMessage("取消测试"),
         "you_do_have_an_account":
             MessageLookupByLibrary.simpleMessage("您有帐户吗？"),
         "you_do_not_have_an_account":

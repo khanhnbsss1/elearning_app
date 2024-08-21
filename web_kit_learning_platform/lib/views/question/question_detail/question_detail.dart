@@ -357,6 +357,7 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
                     keyboardType: TextInputType.text,
                     controller: _state.editingControllerAttackFile,
                     enabled: enableEdit,
+                    readOnly: true,
                     decoration: InputDecoration(
                       labelText: L10nX.getStr.attack_file,
                       labelStyle: MyTextStyle.bodySmall(xMuted: true),
@@ -623,7 +624,6 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
           Gap(Dimens.size16),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
-
             children: [
               Radio<AnswerType>(
                 value: AnswerType.image,

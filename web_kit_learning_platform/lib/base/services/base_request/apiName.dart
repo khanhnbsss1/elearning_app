@@ -89,9 +89,13 @@ class ApiName {
   final String deleteQuiz = "/delete-question";
   final String getQuizList = "/get-questions";
   final String updateQuiz = "/update-question";
-  final String linkTestToLesson = "/link-lecture-test'";
-  final String unLinkTestFromLesson = "/unlink-lecture-test'";
+  final String linkTestToLesson = "/link-lecture-test";
+  final String unLinkTestFromLesson = "/unlink-lecture-test";
   final String linkTestToCourse = "/link-course-test";
   final String unLinkTestFromCourse = "/unlink-course-test";
+  
+  /// score
+  final String createScore = "/create_score";
+
 }
 

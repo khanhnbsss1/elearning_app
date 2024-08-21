@@ -26,8 +26,8 @@ class LinkTestToLessonApi extends BaseApiRequest {
 
   Future<void> getAuthorization() async {
     await setApiBody({
+      "testId":testId,
       "lectureId":lessonId,
-      "test_Id":testId,
     });
   }
 

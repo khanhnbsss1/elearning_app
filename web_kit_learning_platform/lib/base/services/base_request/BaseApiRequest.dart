@@ -346,6 +346,7 @@ class BaseApiRequest {
         validateStatus: (_) => true,);
 
       Response response = await DioClient().getDioClient().post(url, queryParameters: params, data: body, options: option);
+      
       return await handleResponse(response: response, url: url, option: option, params: params, body: body);
     }
     catch(e){
@@ -445,7 +446,7 @@ class BaseApiRequest {
               '\n headers:${option!=null?option.headers:""},'
               '\n params:$params,'
               '\n requestBody:$body,'
-              ' \n ressponse: $response \n\n');
+              ' \n ressponse: ${response.toString()} \n\n');
       if (response.statusCode == 200) {
         // If the server did return a 200 OK response,
         // then parse the JSON.

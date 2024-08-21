@@ -6049,6 +6049,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Are you sure you want to close the test, the test results will not be saved!`
+  String get you_are_ready_content_close_test {
+    return Intl.message(
+      'Are you sure you want to close the test, the test results will not be saved!',
+      name: 'you_are_ready_content_close_test',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel the test`
+  String get you_are_ready_title_close_test {
+    return Intl.message(
+      'Cancel the test',
+      name: 'you_are_ready_title_close_test',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
