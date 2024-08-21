@@ -113,8 +113,27 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
                   case TestWorkStatus.onUpdateChooseQuestion:
                     state.blocStatus = TestWorkStatus.unKnown;
                     break;
+
+                  case TestWorkStatus.onScoreResult:
+                    // TODO: Handle this case.
+                    CustomDialog1(
+                      title: L10nX.getStr.test_result,
+                      child: SizedBox(),
+                    ).show(context);
+                    ConfirmPopupPage(
+                      content: L10nX.getStr.you_are_finished_test_title,
+                      accept: L10nX.getStr.view_result_str,
+                      onAccept: () {
+                        
+                      },
+                      onCancel: () {
+                        
+                      },
+                    ).show(context);
+                  case TestWorkStatus.unKnown:
+                    // TODO: Handle this case.
                   default:
-                      break;
+                    break;
                 }
                 
               },
@@ -271,31 +290,36 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
     );
   }
   Widget buildTestProccess({required TestWorkState state, required BuildContext context}){
-    List<QuestionInfo> listQuestionChooesed = [...(state.testInfo?.quizDTOs??[]).where((element) => element.answerIdChoose!=null,)];
+    List<QuestionInfo> listQuestionChooesed = [...(state.testInfo?.quizDTOs??[]).where((element) {
+      return element.answerIdChoose!=null || (element.answerChoose??'').isNotEmpty;
+    },)];
     double percent = listQuestionChooesed.length /  (state.testInfo?.quizDTOs??[]).length;
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: Dimens.size34, vertical: Dimens.size16),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Center(
-              child:  new LinearPercentIndicator(
-                // width: Dimens.size350,
-                animation: true,
-                lineHeight: Dimens.size20,
-                animationDuration: 100,
-                percent: percent,
-                center: Text("${L10nX.getStr.choosed_str} ${listQuestionChooesed.length} / ${(state.testInfo?.quizDTOs??[]).length} ${L10nX.getStr.question_str}"),
-                barRadius: Radius.circular(Dimens.size8),
-                progressColor: Colors.green,
+    return Visibility(
+      visible: state.result==null,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: Dimens.size34, vertical: Dimens.size16),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Center(
+                child:  new LinearPercentIndicator(
+                  // width: Dimens.size350,
+                  animation: true,
+                  lineHeight: Dimens.size20,
+                  animationDuration: 100,
+                  percent: percent,
+                  center: Text("${L10nX.getStr.choosed_str} ${listQuestionChooesed.length} / ${(state.testInfo?.quizDTOs??[]).length} ${L10nX.getStr.question_str}"),
+                  barRadius: Radius.circular(Dimens.size8),
+                  progressColor: Colors.green,
+                ),
               ),
             ),
-          ),
-          Gap(Dimens.size16),
-          buildTimerTest(state: state, context: context)
-        ],
+            Gap(Dimens.size16),
+            buildTimerTest(state: state, context: context)
+          ],
+        ),
       ),
     );
 

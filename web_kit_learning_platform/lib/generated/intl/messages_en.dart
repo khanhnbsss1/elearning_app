@@ -670,6 +670,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "test_list": MessageLookupByLibrary.simpleMessage("List of tests"),
         "test_name": MessageLookupByLibrary.simpleMessage("Test name"),
         "test_remove": MessageLookupByLibrary.simpleMessage("Delete test"),
+        "test_result": MessageLookupByLibrary.simpleMessage("Test result"),
         "test_str": MessageLookupByLibrary.simpleMessage("Test"),
         "test_update": MessageLookupByLibrary.simpleMessage("Update test"),
         "text_actions": MessageLookupByLibrary.simpleMessage("Text actions"),
@@ -748,6 +749,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Video preview"),
         "viet_nam_text": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "view_all": MessageLookupByLibrary.simpleMessage("View all"),
+        "view_result_str": MessageLookupByLibrary.simpleMessage("View results"),
         "view_str": MessageLookupByLibrary.simpleMessage("View"),
         "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
         "vocabulary_str": MessageLookupByLibrary.simpleMessage("Vocabulary"),
@@ -826,6 +828,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "word_str": MessageLookupByLibrary.simpleMessage("Word"),
         "world_countries_details":
             MessageLookupByLibrary.simpleMessage("World countries details"),
+        "you_are_finished_test_title":
+            MessageLookupByLibrary.simpleMessage("You have finished the test"),
         "you_are_ready_content_close_test": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to close the test, the test results will not be saved!"),
         "you_are_ready_finish_test": MessageLookupByLibrary.simpleMessage(

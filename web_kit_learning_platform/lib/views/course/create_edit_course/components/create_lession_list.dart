@@ -11,7 +11,6 @@ import 'package:webkit/controller/ui/add_course_controller.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
-import 'package:webkit/plugins/dropdown_flutter-1.0.1/lib/custom_dropdown.dart';
 import 'package:webkit/services/apis/lessson/lesson_list_filter/lesson_list_filter_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';

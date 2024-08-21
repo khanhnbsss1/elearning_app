@@ -3,6 +3,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 
 import 'models/score_info.dart';
+import 'models/score_result.dart';
 
 
 class CreateScoreApi extends BaseApiRequest {
@@ -12,14 +13,19 @@ class CreateScoreApi extends BaseApiRequest {
     apiName: ApiName.getInstance().createScore,
   );
 
-  Future<dynamic> call() async {
+  Future<ScoreResultInfo?> call() async {
     await getAuthorization();
     dynamic result = await postRequestAPI();
-    if(result.runtimeType == String && (result as String).isEmpty)
+    if(result.runtimeType == ResponseCommon)
     {
-      ToastUtils.showToastSuccess(L10nX.getStr.success);
+      return null;
     }
-    return result;
+    else
+      {
+        ToastUtils.showToastSuccess(L10nX.getStr.success);
+        ScoreResultInfo scoreResultInfo = ScoreResultInfo.fromJson(result);
+        return scoreResultInfo;
+      }
   }
 
   Future<void> getAuthorization() async {

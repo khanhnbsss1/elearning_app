@@ -609,5 +609,8 @@
   "manage_str": "Manage",
   "time_test_end": "The test time has expired, you cannot continue the test, please submit your test",
   "you_are_ready_content_close_test": "Are you sure you want to close the test, the test results will not be saved!",
-  "you_are_ready_title_close_test": "Cancel the test"
+  "you_are_ready_title_close_test": "Cancel the test",
+  "you_are_finished_test_title": "You have finished the test",
+  "view_result_str": "View results",
+  "test_result": "Test result"
 }

@@ -8,6 +8,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
 import 'package:webkit/services/apis/scores/create_score_api.dart';
 import 'package:webkit/services/apis/scores/models/score_info.dart';
+import 'package:webkit/services/apis/scores/models/score_result.dart';
 import 'package:webkit/services/apis/test/get_test_detail.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
 part 'test_work_event.dart';
@@ -35,7 +36,10 @@ class TestWorkBloc extends Bloc<TestWorkEvent, TestWorkState> {
     ));
     MonitorLoading().showLoading("");
     GetTestDetailApi getTestDetailApi = GetTestDetailApi(testId: state.testInfo?.id??0);
-    state.testInfo = (await getTestDetailApi.call())?? state.testInfo;
+    TestInfo? testInfo = (await getTestDetailApi.call())?? state.testInfo;
+    testInfo?.courseId = state.testInfo?.courseId;
+    testInfo?.lectureId = state.testInfo?.lectureId;
+    state.testInfo = testInfo;
     state.quizDTOsForView = [];
     int indexList =0;
     (state.quizDTOsForView??[]).add([]);
@@ -66,21 +70,27 @@ class TestWorkBloc extends Bloc<TestWorkEvent, TestWorkState> {
       blocStatus: TestWorkStatus.onLoading,
     ));
     MonitorLoading().showLoading("");
-    ScoresInfo info = ScoresInfo(testId: state.testInfo?.id??0);
+    ScoresInfo info = ScoresInfo(testId: state.testInfo?.id??0, lectureId: state.testInfo?.lectureId, courseId: state.testInfo?.courseId);
     for(QuestionInfo questionInfo in state.testInfo?.quizDTOs??[])
       {
         ScoreItem scoreItem = ScoreItem(
             questionId: questionInfo.id,
             answerId: questionInfo.answerIdChoose, 
-            answerText: questionInfo.answerChoose);
+            questionType: questionInfo.questionType,
+            answerName: questionInfo.answerChoose);
         info.scores?.add(scoreItem);
       }
     CreateScoreApi createScoreApi = CreateScoreApi(info: info);
-    dynamic result = await createScoreApi.call();
-    
+    ScoreResultInfo? result = await createScoreApi.call();
     MonitorLoading().dismiss();
-    emit(state.copyWith(
-        blocStatus: TestWorkStatus.initial,testInfo: state.testInfo));
+    if(result!=null)
+      {
+        emit(state.copyWith(
+            blocStatus: TestWorkStatus.onScoreResult,
+            result: result,
+            testInfo: state.testInfo));
+      }
+
   }
 
   Future<void> _onUpdateChoosesQuestion(
