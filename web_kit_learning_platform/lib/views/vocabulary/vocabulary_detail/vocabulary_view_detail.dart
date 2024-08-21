@@ -56,7 +56,7 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
               Column(
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?1/8:1/5),
+                    height: MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?1/8:1/7),
                     decoration: BoxDecoration(
                         color: ColorConst.mainColor
                     ),
@@ -70,62 +70,72 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                     ),
                   ),
                   Expanded(
-                    child: SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          children: [
-                            Visibility(
-                              visible: (widget.selectVocabularyInfo.pinyinTones??"").isNotEmpty,
-                              child: WidgetWithColumnTitleCommon(
-                                title: "${L10nX.getStr.pinyin_tone_str}: ",
-                                titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                                child: Row(
-                                  children: [
-                                    Text(widget.selectVocabularyInfo.pinyinTones??""),
-                                    Gap(Dimens.size4),
-                                    Visibility(
-                                      //visible: (widget.selectVocabularyInfo.audio??"").isNotEmpty,
-                                        child: StatefulBuilder(
-                                          builder: (BuildContext context, void Function(void Function()) setState) {
-                                            return AudioSpeaker(url: widget.selectVocabularyInfo.audio??"",);
-                                          },
-                                        )
-                                    )
-                                  ],
-                                ),
+                    child: LayoutBuilder(builder: (context, constraints) {
+                      double maxWidth = constraints.maxWidth/2;
+                      double height = Dimens.size90;
+                      return SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            children: [
+                              GridView.count(
+                                crossAxisCount: ResponsiveInfo.isPhone() ? 1 : 2,
+                                shrinkWrap: true,
+                                crossAxisSpacing: 16,
+                                mainAxisSpacing: 16,
+                                padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
+                                childAspectRatio: (maxWidth) / (height),
+                                children: [
+                                  Visibility(
+                                    visible: (widget.selectVocabularyInfo.pinyinTones??"").isNotEmpty,
+                                    child: WidgetWithColumnTitleCommon(
+                                      title: "${L10nX.getStr.pinyin_tone_str}: ",
+                                      titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                                      child: Row(
+                                        children: [
+                                          Text((widget.selectVocabularyInfo.pinyinTones??"").trim(),),
+                                          Gap(Dimens.size4),
+                                          Visibility(
+                                            //visible: (widget.selectVocabularyInfo.audio??"").isNotEmpty,
+                                              child: StatefulBuilder(
+                                                builder: (BuildContext context, void Function(void Function()) setState) {
+                                                  return AudioSpeaker(url: widget.selectVocabularyInfo.audio??"",);
+                                                },
+                                              )
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  WidgetWithColumnTitleCommon(
+                                    title: "${L10nX.getStr.category_word}: ",
+                                    titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                                    child: Text((widget.selectVocabularyInfo.categoryWord??"").isNotEmpty?widget.selectVocabularyInfo.categoryWord??"":L10nX.getStr.unknown_str),
+                                  ),
+                                  Visibility(
+                                    visible: (widget.selectVocabularyInfo.translationVn??"").isNotEmpty,
+                                    child: WidgetWithColumnTitleCommon(
+                                      title: "${L10nX.getStr.viet_nam_text}: ",
+                                      titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                                      child: Text(widget.selectVocabularyInfo.translationVn??""),
+                                    ),
+                                  ),
+                                  Visibility(
+                                    visible: (widget.selectVocabularyInfo.traditional??"").isNotEmpty,
+                                    child: WidgetWithColumnTitleCommon(
+                                      title: "${L10nX.getStr.traditional_str}: ",
+                                      titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                                      child: Text(widget.selectVocabularyInfo.traditional??""),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            Gap(Dimens.size10),
-                            WidgetWithColumnTitleCommon(
-                              title: "${L10nX.getStr.category_word}: ",
-                              titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                              child: Text((widget.selectVocabularyInfo.categoryWord??"").isNotEmpty?widget.selectVocabularyInfo.categoryWord??"":L10nX.getStr.unknown_str),
-                            ),
-                            Gap(Dimens.size10),
-                            Visibility(
-                              visible: (widget.selectVocabularyInfo.translationVn??"").isNotEmpty,
-                              child: WidgetWithColumnTitleCommon(
-                                title: "${L10nX.getStr.viet_nam_text}: ",
-                                titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                                child: Text(widget.selectVocabularyInfo.translationVn??""),
-                              ),
-                            ),
-                            Gap(Dimens.size10),
-                            Gap(Dimens.size10),
-                            Visibility(
-                              visible: (widget.selectVocabularyInfo.traditional??"").isNotEmpty,
-                              child: WidgetWithColumnTitleCommon(
-                                title: "${L10nX.getStr.traditional_str}: ",
-                                titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                                child: Text(widget.selectVocabularyInfo.traditional??""),
-                              ),
-                            ),
-                            buildExamplesListForView(),
-                          ],
+                              buildExamplesListForView(),
+                            ],
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    },)
                   )
                 ],
               ),

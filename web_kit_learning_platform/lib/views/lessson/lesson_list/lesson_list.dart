@@ -15,7 +15,6 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/user/user_manager/delete_user_api.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
-import 'package:webkit/views/lessson/components/lesson_item_view.dart';
 import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
 import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 import '../../../helpers/widgets/my_spacing.dart';

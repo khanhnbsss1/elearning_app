@@ -248,68 +248,70 @@ class CourseItemGridView extends StatelessWidget {
                                 ],
                               ),
                             ),),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: ColorConst.whiteColor,
-                                borderRadius: BorderRadius.circular(Dimens.size20)
-                              ),
-                              
-                              child: PopupMenuButton<CourseItemAction>(
-                                color: ColorConst.whiteColor,
-                                iconSize: Dimens.size15,
-                                icon: Icon(Icons.adaptive.more),
-                                tooltip: "",
-                                //icon: Icon(Icons.filter_alt_outlined, size: Dimens.size30, color: ColorConst.mainColor,),
-                                onSelected: (CourseItemAction item) {
-                                  switch (item) {
-                                    case CourseItemAction.viewDetail:
-                                    // TODO: Handle this case.
-                                      if (onViewDetail != null) {
-                                        onViewDetail!(courseInfo);
-                                      }
-                                      break;
-                                    case CourseItemAction.edit:
-                                    // TODO: Handle this case.
-                                      if (onEdit != null) {
-                                        onEdit!(courseInfo);
-                                      }
-                                      break;
-                                    case CourseItemAction.delete:
-                                    // TODO: Handle this case.
-                                      if (onDelete != null) {
-                                        onDelete!(courseInfo);
-                                      }
-                                      break;
-                                    case CourseItemAction.study:
-                                    // TODO: Handle this case.
-                                      if (onStudy != null) {
-                                        onStudy!(courseInfo);
-                                      }
-                                  }
-                                },
-                                itemBuilder: (BuildContext context) =>
-                                <PopupMenuEntry<CourseItemAction>>[
-                                  PopupMenuItem<CourseItemAction>(
-                                    value: CourseItemAction.viewDetail,
-                                    child: Text(L10nX.getStr.detail_str),
-                                  ),
-                                  if(enableEdit ?? false)
+                          Visibility(
+                            visible: enableEdit??false,
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: ColorConst.whiteColor.withOpacity(0.8),
+                                  borderRadius: BorderRadius.circular(Dimens.size20)
+                                ),
+                                
+                                child: PopupMenuButton<CourseItemAction>(
+                                  color: ColorConst.whiteColor,
+                                  iconSize: Dimens.size15,
+                                  icon: Icon(Icons.adaptive.more),
+                                  tooltip: "",
+                                  onSelected: (CourseItemAction item) {
+                                    switch (item) {
+                                      case CourseItemAction.viewDetail:
+                                      // TODO: Handle this case.
+                                        if (onViewDetail != null) {
+                                          onViewDetail!(courseInfo);
+                                        }
+                                        break;
+                                      case CourseItemAction.edit:
+                                      // TODO: Handle this case.
+                                        if (onEdit != null) {
+                                          onEdit!(courseInfo);
+                                        }
+                                        break;
+                                      case CourseItemAction.delete:
+                                      // TODO: Handle this case.
+                                        if (onDelete != null) {
+                                          onDelete!(courseInfo);
+                                        }
+                                        break;
+                                      case CourseItemAction.study:
+                                      // TODO: Handle this case.
+                                        if (onStudy != null) {
+                                          onStudy!(courseInfo);
+                                        }
+                                    }
+                                  },
+                                  itemBuilder: (BuildContext context) =>
+                                  <PopupMenuEntry<CourseItemAction>>[
                                     PopupMenuItem<CourseItemAction>(
-                                      value: CourseItemAction.edit,
-                                      child: Text(L10nX.getStr.edit_str),
+                                      value: CourseItemAction.viewDetail,
+                                      child: Text(L10nX.getStr.detail_str),
                                     ),
-                                  if(enableEdit ?? false)
+                                    if(enableEdit ?? false)
+                                      PopupMenuItem<CourseItemAction>(
+                                        value: CourseItemAction.edit,
+                                        child: Text(L10nX.getStr.edit_str),
+                                      ),
+                                    if(enableEdit ?? false)
+                                      PopupMenuItem<CourseItemAction>(
+                                        value: CourseItemAction.delete,
+                                        child: Text(L10nX.getStr.delete_str),
+                                      ),
                                     PopupMenuItem<CourseItemAction>(
-                                      value: CourseItemAction.delete,
-                                      child: Text(L10nX.getStr.delete_str),
+                                      value: CourseItemAction.study,
+                                      child: Text(L10nX.getStr.lets_study),
                                     ),
-                                  PopupMenuItem<CourseItemAction>(
-                                    value: CourseItemAction.study,
-                                    child: Text(L10nX.getStr.lets_study),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           )
@@ -492,62 +494,65 @@ class CourseItemGridView1 extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Align(
-                            alignment: Alignment.topRight,
-                            child: PopupMenuButton<CourseItemAction>(
-                              color: ColorConst.whiteColor,
-                              iconSize: Dimens.size15,
-                              icon: Icon(Icons.adaptive.more),
-                              tooltip: "",
-                              //icon: Icon(Icons.filter_alt_outlined, size: Dimens.size30, color: ColorConst.mainColor,),
-                              onSelected: (CourseItemAction item) {
-                                switch (item) {
-                                  case CourseItemAction.viewDetail:
-                                    // TODO: Handle this case.
-                                    if (onViewDetail != null) {
-                                      onViewDetail!(courseInfo);
-                                    }
-                                    break;
-                                  case CourseItemAction.edit:
-                                    // TODO: Handle this case.
-                                    if (onEdit != null) {
-                                      onEdit!(courseInfo);
-                                    }
-                                    break;
-                                  case CourseItemAction.delete:
-                                    // TODO: Handle this case.
-                                    if (onDelete != null) {
-                                      onDelete!(courseInfo);
-                                    }
-                                    break;
-                                  case CourseItemAction.study:
-                                    // TODO: Handle this case.
-                                    if (onStudy != null) {
-                                      onStudy!(courseInfo);
-                                    }
-                                }
-                              },
-                              itemBuilder: (BuildContext context) =>
-                                  <PopupMenuEntry<CourseItemAction>>[
-                                PopupMenuItem<CourseItemAction>(
-                                  value: CourseItemAction.viewDetail,
-                                  child: Text(L10nX.getStr.detail_str),
-                                ), 
-                              if(enableEdit ?? false)
-                                PopupMenuItem<CourseItemAction>(
-                                  value: CourseItemAction.edit,
-                                  child: Text(L10nX.getStr.edit_str),
+                          Visibility(
+                            visible: enableEdit??false,
+                            child: Align(
+                              alignment: Alignment.topRight,
+                              child: PopupMenuButton<CourseItemAction>(
+                                color: ColorConst.whiteColor,
+                                iconSize: Dimens.size15,
+                                icon: Icon(Icons.adaptive.more),
+                                tooltip: "",
+                                //icon: Icon(Icons.filter_alt_outlined, size: Dimens.size30, color: ColorConst.mainColor,),
+                                onSelected: (CourseItemAction item) {
+                                  switch (item) {
+                                    case CourseItemAction.viewDetail:
+                                      // TODO: Handle this case.
+                                      if (onViewDetail != null) {
+                                        onViewDetail!(courseInfo);
+                                      }
+                                      break;
+                                    case CourseItemAction.edit:
+                                      // TODO: Handle this case.
+                                      if (onEdit != null) {
+                                        onEdit!(courseInfo);
+                                      }
+                                      break;
+                                    case CourseItemAction.delete:
+                                      // TODO: Handle this case.
+                                      if (onDelete != null) {
+                                        onDelete!(courseInfo);
+                                      }
+                                      break;
+                                    case CourseItemAction.study:
+                                      // TODO: Handle this case.
+                                      if (onStudy != null) {
+                                        onStudy!(courseInfo);
+                                      }
+                                  }
+                                },
+                                itemBuilder: (BuildContext context) =>
+                                    <PopupMenuEntry<CourseItemAction>>[
+                                  PopupMenuItem<CourseItemAction>(
+                                    value: CourseItemAction.viewDetail,
+                                    child: Text(L10nX.getStr.detail_str),
+                                  ), 
+                                if(enableEdit ?? false)
+                                  PopupMenuItem<CourseItemAction>(
+                                    value: CourseItemAction.edit,
+                                    child: Text(L10nX.getStr.edit_str),
+                                    ),
+                                if(enableEdit ?? false)
+                                  PopupMenuItem<CourseItemAction>(
+                                    value: CourseItemAction.delete,
+                                    child: Text(L10nX.getStr.delete_str),
                                   ),
-                              if(enableEdit ?? false)
-                                PopupMenuItem<CourseItemAction>(
-                                  value: CourseItemAction.delete,
-                                  child: Text(L10nX.getStr.delete_str),
-                                ),
-                                PopupMenuItem<CourseItemAction>(
-                                  value: CourseItemAction.study,
-                                  child: Text(L10nX.getStr.lets_study),
-                                ),
-                              ],
+                                  PopupMenuItem<CourseItemAction>(
+                                    value: CourseItemAction.study,
+                                    child: Text(L10nX.getStr.lets_study),
+                                  ),
+                                ],
+                              ),
                             ),
                           )
                         ]),

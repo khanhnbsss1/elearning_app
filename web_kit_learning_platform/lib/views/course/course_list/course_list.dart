@@ -38,8 +38,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
   TextEditingController editingController = TextEditingController();
   
   List<String>permission =[
-    "courses.post.get_courses_home",
-    "courses.post.get_my_course",
+    //"courses.post.get_my_course",
     "courses.post.search_course"
   ];
   @override
@@ -298,7 +297,10 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                   : LayoutBuilder(
                       builder: (BuildContext context, BoxConstraints constraints) {
                         List<Widget> listOfCourse = List.empty(growable: true);
-                        bool? enableEdit = state.courseType == CourseType.courseList;
+                        bool? enableEdit = state.courseType == CourseType.courseList && UserManager().userContainPermission(
+                            permissionList: [
+                              "courses.put.update_course"
+                            ]);
                         double maxWidthItem = Dimens.size260;
                         double heightOfItem = Dimens.size240;
                         int numberRow = (constraints.maxWidth ~/ (maxWidthItem + Dimens.size10));
@@ -347,37 +349,43 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                             controller: scrollController,
                             thickness: ResponsiveInfo.isPhone() ? Dimens.size5 : Dimens.size15,
                             radius: Radius.circular(0),
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Align(
-                                      alignment: Alignment.topCenter,
-                                      child: numberRow > 1
-                                          ? Padding(
-                                              padding: EdgeInsets.only(top: Dimens.size16, left: crossAxisSpacing / 2, right: crossAxisSpacing / 2),
-                                              child: GridView.count(
-                                                controller: scrollController,
-                                                crossAxisSpacing: crossAxisSpacing,
-                                                childAspectRatio: (widthItem) / (heightOfItem),
-                                                mainAxisSpacing: Dimens.size16,
-                                                crossAxisCount: numberRow,
-                                                shrinkWrap: true,
-                                                children: listOfCourse,
-                                              ),
-                                            )
-                                          : ListView.builder(
-                                              shrinkWrap: true,
+                            child: Padding(
+                              padding:  EdgeInsets.only(right: Dimens.size16),
+                              child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) { 
+                                return Row(
+                                  children: [
+                                    Expanded(
+                                      child: Align(
+                                          alignment: Alignment.topCenter,
+                                          child: numberRow > 1
+                                              ? Padding(
+                                            padding: EdgeInsets.only(top: Dimens.size16, left: crossAxisSpacing / 2, right: crossAxisSpacing / 2),
+                                            child: GridView.count(
                                               controller: scrollController,
-                                              itemCount: listOfCourse.length,
-                                              itemBuilder: (context, index) {
-                                                return Padding(
-                                                  padding:  EdgeInsets.symmetric(horizontal:  Dimens.size8, vertical: Dimens.size4),
-                                                  child: listOfCourse.elementAt(index),
-                                                );
-                                              },
-                                            )),
-                                ),
-                              ],
+                                              crossAxisSpacing: crossAxisSpacing,
+                                              childAspectRatio: (widthItem) / (heightOfItem),
+                                              mainAxisSpacing: Dimens.size16,
+                                              crossAxisCount: numberRow,
+                                              shrinkWrap: true,
+                                              children: listOfCourse,
+                                            ),
+                                          )
+                                              : ListView.builder(
+                                            shrinkWrap: true,
+                                            controller: scrollController,
+                                            itemCount: listOfCourse.length,
+                                            itemBuilder: (context, index) {
+                                              return Padding(
+                                                padding:  EdgeInsets.symmetric(horizontal:  Dimens.size8, vertical: Dimens.size4),
+                                                child: listOfCourse.elementAt(index),
+                                              );
+                                            },
+                                          )),
+                                    ),
+                                  ],
+                                );
+                              },
+                              ),
                             ),
                           ),
                         );
