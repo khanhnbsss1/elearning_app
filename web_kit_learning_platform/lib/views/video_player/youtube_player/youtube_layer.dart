@@ -63,7 +63,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
     },);
   }
   String getVideoLinkFromPrivateVideo(){
-    String videoLink = "https://youtu.be/S2kwI_dIQWc";//widget.videoPlayerModel.link;
+    String videoLink = widget.videoPlayerModel.link;
     if(videoLink.contains("youtu.be"))
       {
         videoLink = videoLink.replaceAll("youtu.be/", "www.youtube.com/watch?v=");
