@@ -1,3 +1,5 @@
+import 'package:webkit/services/apis/category/get_category_list.dart';
+import 'package:webkit/services/apis/category/models/category_info.dart';
 import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_api.dart';
 import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_model.dart';
 
@@ -11,6 +13,7 @@ class FilterManager{
   FilterManager._internal();
 
   GetAddCourseFilterModel? addCourseFilterModel;
+  CategoryListResponseModel? categoryListResponseModel;
   Future<GetAddCourseFilterModel?> getCourseFilter() async {
     if(addCourseFilterModel==null)
       {
@@ -39,5 +42,14 @@ class FilterManager{
       });
     }
     return listOfGradeNames;
+  }
+
+  Future<CategoryListResponseModel?> getCategoryFilter() async {
+    if(categoryListResponseModel==null)
+    {
+      GetCategoryListApi api = GetCategoryListApi();
+      categoryListResponseModel = await api.call();
+    }
+    return categoryListResponseModel;
   }
 }

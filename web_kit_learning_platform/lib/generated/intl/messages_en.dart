@@ -119,6 +119,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_password_text":
             MessageLookupByLibrary.simpleMessage("Change password"),
         "charts": MessageLookupByLibrary.simpleMessage("Charts"),
+        "choose_category_str":
+            MessageLookupByLibrary.simpleMessage("Choose category"),
         "choose_quest":
             MessageLookupByLibrary.simpleMessage("Search for questions"),
         "choosed_str": MessageLookupByLibrary.simpleMessage("Choosed"),

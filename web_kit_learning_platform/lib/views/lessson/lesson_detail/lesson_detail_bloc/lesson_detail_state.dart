@@ -8,6 +8,7 @@ enum LessonDetailStatus {
   onCreateLesson,
   onUpdateLesson,
   onUpdateTestInfo,
+  onChangeLesson,
   unKnown
 }
 
@@ -30,6 +31,8 @@ class LessonDetailState extends Equatable {
   TextEditingController? editingControllerLectureVideoLink ;
   TextEditingController? editingControllerLectureDocuments ;
   TestInfo? testInfo;
+  ValueNotifier<CategoryInfo?>? valueListenable = ValueNotifier<CategoryInfo?>(null);
+
   LessonDetailState({
     this.blocStatus,
     this.lessonActionType,
@@ -41,7 +44,8 @@ class LessonDetailState extends Equatable {
     this.editingControllerLectureDocuments,
     this.editingControllerLectureName,
     this.editingControllerLectureVideoLink,
-    this.testInfo
+    this.testInfo,
+    this.valueListenable
   }){
     listOfWord??=[];
     listOfWordAdd??=[];
@@ -50,7 +54,7 @@ class LessonDetailState extends Equatable {
     editingControllerLectureDescription??=TextEditingController();
     editingControllerLectureVideoLink??=TextEditingController();
     editingControllerLectureDocuments??=TextEditingController();
-
+    valueListenable ??= ValueNotifier<CategoryInfo?>(null);
   }
 
 
@@ -65,7 +69,8 @@ class LessonDetailState extends Equatable {
     TextEditingController? editingControllerLectureDescription,
     TextEditingController? editingControllerLectureVideoLink,
     TextEditingController? editingControllerLectureDocuments,
-    TestInfo? testInfo
+    TestInfo? testInfo,
+    ValueNotifier<CategoryInfo?>? valueListenable
   })
   {
     return LessonDetailState(
@@ -80,6 +85,7 @@ class LessonDetailState extends Equatable {
       editingControllerLectureVideoLink: editingControllerLectureVideoLink??this.editingControllerLectureVideoLink,
       editingControllerLectureDocuments: editingControllerLectureDocuments??this.editingControllerLectureDocuments,
       testInfo: testInfo??this.testInfo,
+      valueListenable: valueListenable??this.valueListenable,
 
 
     );
@@ -95,7 +101,8 @@ class LessonDetailState extends Equatable {
     editingControllerLectureDescription,
     editingControllerLectureVideoLink,
     editingControllerLectureDocuments,
-    testInfo
+    testInfo,
+    valueListenable
   ];
 
 }

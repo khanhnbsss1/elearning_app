@@ -106,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_log": MessageLookupByLibrary.simpleMessage("变更日志"),
         "change_password_text": MessageLookupByLibrary.simpleMessage("更改密码"),
         "charts": MessageLookupByLibrary.simpleMessage("图表"),
+        "choose_category_str": MessageLookupByLibrary.simpleMessage("选择类别"),
         "choose_quest": MessageLookupByLibrary.simpleMessage("搜索问题"),
         "choosed_str": MessageLookupByLibrary.simpleMessage("已选择"),
         "clear": MessageLookupByLibrary.simpleMessage("清除"),
@@ -705,6 +706,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("您确定要提交测试吗？"),
         "you_are_ready_title_close_test":
             MessageLookupByLibrary.simpleMessage("取消测试"),
+        "you_correct_number": MessageLookupByLibrary.simpleMessage("正确句子的数量"),
         "you_do_have_an_account":
             MessageLookupByLibrary.simpleMessage("您有帐户吗？"),
         "you_do_not_have_an_account":

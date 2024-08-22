@@ -78,6 +78,11 @@ class ApiName {
   final String updateTag = "/update-tag";
   final String deleteTag = "/delete-tag";
 
+  ///category
+  final String getCategories = "/get-categories";
+  final String createCategory = "/create-category";
+  final String updateCategory = "/updateCategory";
+  final String deleteCategory = "/delete-category";
   ///test
   final String getTestList = "/get-tests";
   final String createTest = "/create-test";

@@ -205,7 +205,6 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       ),
                     ],
                   ),
-
                   //----------------Tag------------------//
                   NavigationItem(
                     iconData: Icons.tag,
@@ -219,8 +218,6 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       });*/
                     },
                   ),
-
-  
                   //-----------------Danh sach giao vien-----------------//
                   Gap(Dimens.size12),
 

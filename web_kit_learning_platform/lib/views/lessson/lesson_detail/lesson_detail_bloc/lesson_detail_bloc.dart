@@ -5,6 +5,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
+import 'package:webkit/services/apis/category/models/category_info.dart';
 import 'package:webkit/services/apis/lessson/lesson_detail/add_lesson_api.dart';
 import 'package:webkit/services/apis/lessson/lesson_detail/get_lesson_detail.dart';
 import 'package:webkit/services/apis/lessson/lesson_detail/update_lesson_api.dart';
@@ -30,6 +32,13 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
         listOfWord: event.listOfWord,
         listOfWordRemove: event.listOfWordRemove,
         listOfWordAdd: event.listOfWordAdd
+      ));
+    });
+    on<LessonDetailChangeLessonEvent>((event, emit) {
+      // TODO: implement event handler
+      emit(state.copyWith(
+          blocStatus: LessonDetailStatus.onChangeLesson,
+        lessonInfo: event.lessonInfo
       ));
     });
     on<LessonDetailUpdateLessonEvent>(_onUpdateLesson);
@@ -63,6 +72,9 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
         state.editingControllerLectureDescription?.text = state.lessonInfo?.note??"";
         state.editingControllerLectureVideoLink?.text = state.lessonInfo?.link??"";
         state.editingControllerLectureDocuments?.text = state.lessonInfo?.docName??"";
+        CategoryListResponseModel? categoryListResponseModel = await FilterManager().getCategoryFilter();
+        state.valueListenable?.value = (categoryListResponseModel?.content??[]).firstWhere((element) => element.id == state.lessonInfo?.categoryId);
+        
       }
     emit(state.copyWith(
       blocStatus: LessonDetailStatus.initial,

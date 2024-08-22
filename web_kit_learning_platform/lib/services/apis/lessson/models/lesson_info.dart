@@ -54,6 +54,8 @@ class LessonInfo {
   String? updatedBy;
   String? note;
   int? testId;
+  int? gradeId;
+  int? categoryId;
   String? testName;
   UploadFileResponseInfo? documentUploadInfo;
   List<VocabularyInfo>? vocabularies;
@@ -97,6 +99,9 @@ class LessonInfo {
     docLink = json['doc_link'];
     isFinnish = json['learning_status']== 'Completed'?true:false;
     testId = json['test_id'];
+    categoryId = json['category_id'];
+    gradeId = json['grade_id'];
+    
     testName = json['test_name'];
     if (json['vocabularies'] != null) {
       vocabularies = <VocabularyInfo>[];
@@ -138,19 +143,9 @@ class LessonInfo {
     if(testId!=null) {
       data['test_id'] = testId;
     }
-
-    /*if(createdAt!=null&&createdAt!.isNotEmpty) {
-      data['created_at'] = createdAt;
-    }
-    if(updatedAt!=null&&updatedAt!.isNotEmpty) {
-      data['updated_at'] = updatedAt;
-    }
-    if(createdBy!=null&&createdBy!.isNotEmpty) {
-      data['created_by'] = createdBy;
-    }
-    if(updatedBy!=null&&updatedBy!.isNotEmpty) {
-      data['updated_by'] = updatedBy;
-    }*/
+    data['grade_id'] = gradeId??1;
+    data['category_id'] = categoryId??1;
+    
     if(note!=null&&note!.isNotEmpty) {
       data['note'] = note;
     }

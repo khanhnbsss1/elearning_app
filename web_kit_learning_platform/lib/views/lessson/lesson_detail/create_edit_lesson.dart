@@ -1,11 +1,16 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/src/multipart_file.dart';
+import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/constant/dimens_constant.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:webkit/services/apis/category/models/category_info.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/views/course/create_edit_course/components/course_mode.dart';
@@ -67,6 +72,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
     // TODO: implement initState
     super.initState();
     enableEdit = widget.lessonActionType!=LessonActionType.view;
+
   }
   @override
   Widget build(BuildContext context) {
@@ -108,6 +114,9 @@ class _CreateEditLesson extends State<CreateEditLesson>
           switch (state.blocStatus) {
             case LessonDetailStatus.initial:
               break;
+            case LessonDetailStatus.onCreateLesson:
+              Navigator.of(context).pop();
+              break;
             default:
               break;
           }
@@ -135,7 +144,14 @@ class _CreateEditLesson extends State<CreateEditLesson>
                             MySpacing.height(16),
                             buildLectureDocuments(context: context),
                             MySpacing.height(16),
-                            buildLectureMode(context: context),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(child: buildLectureMode(context: context, state: state)),
+                                Gap(Dimens.size20),
+                                buildCategory(context: context, state: state),
+                              ],
+                            ),
                             MySpacing.height(16),
                             buildLectureWords(context: context, state: state),
                             MySpacing.height(16),
@@ -364,11 +380,12 @@ class _CreateEditLesson extends State<CreateEditLesson>
     );
   }
 
-  Widget buildLectureMode({required BuildContext context}) {
+  Widget buildLectureMode({required BuildContext context, required LessonDetailState state}) {
     return ModeOptionWidget(mode: '',
       onModeChanged: (String? value)
       {
-        mode = value??"FREE";
+        state.lessonInfo?.mode = value??"FREE";
+        BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailChangeLessonEvent(lessonInfo: state.lessonInfo!));
       },
       onPaymentChanged: (int? price)
       {
@@ -422,5 +439,88 @@ class _CreateEditLesson extends State<CreateEditLesson>
         },
       ),
     );
+  }
+  Widget buildCategory({required BuildContext context, required LessonDetailState state}){
+    return FutureBuilder(
+        future: FilterManager().getCategoryFilter(),
+        builder: (context, snapshot) {
+          if(!snapshot.hasData) {
+            return SizedBox();
+          }
+          List<CategoryInfo> data = snapshot.data?.content??[];
+          return SizedBox(
+            width: Dimens.size200,
+            child: WidgetWithColumnTitleCommon(
+              title: "${L10nX.getStr.category_str}: ",
+              isRequirement: true,
+              child: SizedBox(
+                height: Dimens.size40,
+                width: Dimens.size200,
+                child: DropdownButtonFormField2<CategoryInfo>(
+                  isExpanded: true,
+                  valueListenable: state.valueListenable,
+                  decoration: InputDecoration(
+                    // Add Horizontal padding using menuItemStyleData.padding so it matches
+                    // the menu padding when button's width is not specified.
+                    contentPadding:  EdgeInsets.symmetric(vertical: Dimens.size16),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(Dimens.size16),
+                    ),
+                    
+                    // Add more decoration..
+                  ),
+                  hint:  Text(
+                    L10nX.getStr.choose_category_str,
+                    style: TextStyleConstant.textStyleBlack13w400,
+                  ),
+                  items: data.map((item) => DropdownItem<CategoryInfo>(
+                    value: item,
+                    child: Text(
+                      item.name??"",
+                      style: TextStyleConstant.textStyleBlack13w400,
+                    ),
+                  )).toList(),
+                  validator: (value) {
+                    if (value == null) {
+                      return L10nX.getStr.choose_category_str;
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    //Do something when selected item is changed.
+                    state.lessonInfo?.categoryId = value?.id;
+                    state.valueListenable?.value = value;
+                    BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailChangeLessonEvent(lessonInfo: state.lessonInfo!));
+                  },
+                  onSaved: (value) {
+                  },
+                  buttonStyleData:  ButtonStyleData(
+                    height: Dimens.size40,
+                    padding: EdgeInsets.only(right: Dimens.size8),
+                  ),
+                  iconStyleData:  IconStyleData(
+                    icon: Icon(
+                      Icons.arrow_drop_down,
+                      color: Colors.black45,
+                    ),
+                    iconSize: Dimens.size24,
+                  ),
+                  dropdownStyleData: DropdownStyleData(
+                    maxHeight:Dimens.size150,
+                    //width: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimens.size16),
+                      color: ColorConst.whiteColor,
+                    ),
+                  ),
+                  menuItemStyleData: MenuItemStyleData(
+                    padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
+                  ),
+                ),
+              ),
+            ),
+          );
+          
+        },);
   }
 }

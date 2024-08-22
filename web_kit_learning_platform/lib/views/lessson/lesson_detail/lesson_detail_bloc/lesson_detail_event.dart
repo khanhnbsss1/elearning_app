@@ -20,12 +20,20 @@ class LessonDetailUpdateWordsEvent extends LessonDetailEvent {
   @override
   List<Object?> get props => [listOfWord, listOfWordAdd, listOfWordRemove];
 }
+class LessonDetailChangeLessonEvent extends LessonDetailEvent {
+  LessonInfo lessonInfo;
+  LessonDetailChangeLessonEvent({required this.lessonInfo});
+  @override
+  List<Object?> get props => [lessonInfo];
+}
 class LessonDetailUpdateLessonEvent extends LessonDetailEvent {
   LessonInfo lessonInfo;
   LessonDetailUpdateLessonEvent({required this.lessonInfo});
   @override
   List<Object?> get props => [lessonInfo];
 }
+
+
 class LessonDetailCreateLessonEvent extends LessonDetailEvent {
   LessonInfo lessonInfo;
   LessonDetailCreateLessonEvent({required this.lessonInfo});

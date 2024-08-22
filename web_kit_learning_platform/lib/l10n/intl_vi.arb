@@ -614,6 +614,7 @@
   "test_result": "Kết quả bài test",
   "view_result_str": "Xem kết quả",
   "you_score": "Điểm của bạn",
-  "you_correct_number": "Số câu đúng"
+  "you_correct_number": "Số câu đúng",
+  "choose_category_str": "Chọn danh mục"
 
 }

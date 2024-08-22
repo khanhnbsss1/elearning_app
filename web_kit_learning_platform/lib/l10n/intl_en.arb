@@ -614,5 +614,6 @@
   "view_result_str": "View results",
   "test_result": "Test result",
   "you_score": "Your score",
-  "you_correct_number": "Number of correct answers"
+  "you_correct_number": "Number of correct answers",
+  "choose_category_str": "Choose category"
 }
