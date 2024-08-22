@@ -1,5 +1,7 @@
 import 'package:async_searchable_dropdown/async_searchable_dropdown.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -7,10 +9,12 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
+import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/controller/ui/add_course_controller.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
+import 'package:webkit/services/apis/category/models/category_info.dart';
 import 'package:webkit/services/apis/lessson/lesson_list_filter/lesson_list_filter_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
@@ -34,7 +38,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
   ScrollController scrollController = ScrollController();
   final TextEditingController _subjectDropdownSearchFieldController = TextEditingController();
   final TextEditingController _lessonDropdownSearchFieldController = TextEditingController();
-
+  ValueNotifier<String?>? valueListenable = ValueNotifier<String?>(null);
   @override
   void initState() {
     super.initState();
@@ -199,9 +203,79 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
   }
 
   Widget subjectDropDownSearch({Function(String)? onSelectSubject, required AddCourseState state, required BuildContext context}) {
-    return Row(mainAxisSize: MainAxisSize.min, children: [
+    return Row(
+        mainAxisSize: MainAxisSize.min, 
+        children: [
       StatefulBuilder(
         builder: (BuildContext context, void Function(void Function()) setState) {
+          return SizedBox(
+            height: Dimens.size40,
+            width: Dimens.size200,
+            child: DropdownButtonFormField2<String>(
+              isExpanded: true,
+              valueListenable: valueListenable,
+              decoration: InputDecoration(
+                // Add Horizontal padding using menuItemStyleData.padding so it matches
+                // the menu padding when button's width is not specified.
+                contentPadding:  EdgeInsets.symmetric(vertical: Dimens.size16),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(Dimens.size16),
+                ),
+          
+                // Add more decoration..
+              ),
+              hint:  Text(
+                L10nX.getStr.choose_category_str,
+                style: TextStyleConstant.textStyleBlack13w400,
+              ),
+              items: (state.subjectList??[]).map((item) => DropdownItem<String>(
+                value: item,
+                child: Text(
+                  item??"",
+                  style: TextStyleConstant.textStyleBlack13w400,
+                ),
+              )).toList(),
+              validator: (value) {
+                if (value == null) {
+                  return L10nX.getStr.choose_category_str;
+                }
+                return null;
+              },
+              onChanged: (value) {
+                //Do something when selected item is changed.
+                valueListenable?.value = value;
+                if (onSelectSubject != null) {
+                  _subjectDropdownSearchFieldController.text = value ?? "";
+                  onSelectSubject(value ?? "");
+                }
+              },
+              onSaved: (value) {
+              },
+              buttonStyleData:  ButtonStyleData(
+                height: Dimens.size40,
+                padding: EdgeInsets.only(right: Dimens.size8),
+              ),
+              iconStyleData:  IconStyleData(
+                icon: Icon(
+                  Icons.arrow_drop_down,
+                  color: Colors.black45,
+                ),
+                iconSize: Dimens.size24,
+              ),
+              dropdownStyleData: DropdownStyleData(
+                maxHeight:Dimens.size150,
+                //width: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(Dimens.size16),
+                  color: ColorConst.whiteColor,
+                ),
+              ),
+              menuItemStyleData: MenuItemStyleData(
+                padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
+              ),
+            ),
+          );
+
           return SizedBox(
             width: Dimens.size300,
             child: SearchableDropdown<String>(
@@ -248,7 +322,6 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
       )
     ]);
   }
-
   Widget lessonDropDownSearch({Function(LessonInfo)? onSelectLesson, required AddCourseState state, required BuildContext context}) {
     
     return StatefulBuilder(
