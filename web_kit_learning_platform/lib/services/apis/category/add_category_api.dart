@@ -1,23 +1,29 @@
 
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
+import 'package:webkit/services/apis/category/models/category_info.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 
 
-class DeleteTagApi extends BaseApiRequest {
-  TagsInfo tagInfo;
-  DeleteTagApi({required this.tagInfo}):super(
-    serviceType: SERVICE_TYPE.TAGS,
-    apiName: ApiName.getInstance().deleteTag,
+class AddCategoryApi extends BaseApiRequest {
+  CategoryInfo info;
+  AddCategoryApi({required this.info}):super(
+    serviceType: SERVICE_TYPE.CATEGORY,
+    apiName: ApiName.getInstance().createCategory,
   );
 
   Future<dynamic> call() async {
     await getAuthorization();
-    dynamic result = await deleteRequestAPI();
+    dynamic result = await postRequestAPI();
+    if(result.runtimeType == String && (result as String).isEmpty)
+    {
+      ToastUtils.showToastSuccess(L10nX.getStr.success);
+    }
     return result;
   }
 
   Future<void> getAuthorization() async {
-    await setParamsAdd({"tagId":tagInfo.id});
+    await setApiBody(info.toJson());
   }
 
   @override

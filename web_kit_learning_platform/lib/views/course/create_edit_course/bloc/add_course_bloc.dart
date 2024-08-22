@@ -242,11 +242,11 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     );
     AddCourseApi addCourseApi = AddCourseApi(addCourseRequest: courseInfo!);
     dynamic data = await addCourseApi.call();
-    await _onLinkTestToCourse();
     MonitorLoading().dismiss();
     if(data.runtimeType==int)
     {
       courseInfo.id = data as int;
+      await _onLinkTestToCourse();
       ToastUtils.showToastSuccess(L10nX.getStr.success);
     }
     else
