@@ -125,10 +125,19 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
                     SizedBox(
                       height: widget.questionInfo.questionType == QuestionType.image? Dimens.size90:Dimens.size60, 
                       width: Dimens.size120, 
-                      child: ImageManager().getImageByUrl(widget.questionInfo.questionLink??""),
-                                ),
+                      child: Stack(children:[
+                        Visibility(
+                            visible: widget.questionInfo.questionType == QuestionType.image,
+                            child: ImageManager().getImageByUrl(widget.questionInfo.questionLink??""),
+                        ),
+                        Visibility(
+                          visible: widget.questionInfo.questionType == QuestionType.audio,
+                          child: AudioSpeaker(url:  widget.questionInfo.questionLink??""),
+                        ),
+                      ] ),),
                   ],
                 )),
+            
             Divider(color: ColorConst.greyColor,thickness: 0.1,),
             Gap(Dimens.size16),
             buildAnswerList(),
