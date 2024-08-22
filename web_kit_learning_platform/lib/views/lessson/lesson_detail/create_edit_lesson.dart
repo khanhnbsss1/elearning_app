@@ -13,6 +13,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:webkit/services/apis/category/models/category_info.dart';
 import 'package:webkit/services/apis/grade/models/grade_info.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/test/models/test_info.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/views/course/create_edit_course/components/course_mode.dart';
 import 'package:webkit/views/lessson/components/search_test_drop_down.dart';
@@ -439,6 +440,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
       isRequirement: true,
       child: SearchTestDropDown(
         enableEdit: state.lessonActionType != ActionType.view,
+        testInfo: TestInfo(lectureId: state.lessonInfo?.testId, name: state.lessonInfo?.testName),
         onSelectTest: (testInfo) {
           BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateTestInfoEvent(testInfo: testInfo));
         },
