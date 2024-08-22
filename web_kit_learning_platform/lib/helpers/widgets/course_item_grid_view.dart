@@ -73,7 +73,7 @@ class CourseItemGridView extends StatelessWidget {
                                             fit: BoxFit.cover,
                                             //height: 120,
                                             errorBuilder: (context, error, stackTrace) {
-                                              return Image.network(
+                                              return Image.asset(
                                                 'assets/deshboard/adventure/adventure5.png',
                                                 fit: BoxFit.cover,
                                                 //height: 150,

@@ -8,6 +8,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/widgets/drop_down/drop_down_search.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/controller/ui/add_course_controller.dart';
@@ -173,7 +174,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                   child: Row(
                     children: [
                       Expanded(
-                        child: buildGrade(state: state, context: context),
+                        child: buildGrade(state: state, context: context, width: widthItem),
                       ),
                     ],
                   ),
@@ -183,7 +184,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                   child: Row(
                     children: [
                       Expanded(
-                        child: buildCategory(state: state, context: context),
+                        child: buildCategory(state: state, context: context, width: widthItem),
                       ),
                     ],
                   ),
@@ -267,42 +268,49 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
   Widget buildCourseSummaryInfoMobile({required AddCourseState state, required BuildContext context}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: Dimens.size8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          buildCourseName(state: state, context: context),
-          MySpacing.height(16),
-          buildCategory(state: state, context: context),
-          MySpacing.height(16),
-          buildBackgroundImage(state: state, context: context),
-          MySpacing.height(16),
-          buildVideoPreview(state: state, context: context),
-          MySpacing.height(16),
-          buildAuthor(state: state, context: context),
-          buildDuration(state: state, context: context),
-          MySpacing.height(16),
-          buildIntroduction(state: state, context: context),
-          MySpacing.height(16),
-          buildWhoThisCourse(state: state, context: context),
-          MySpacing.height(16),
-          buildWhatWillYouAchieve(state: state, context: context),
-        /*  MySpacing.height(16),
-          buildShowCourseInLandingPage(state: state, context: context),*/
-          MySpacing.height(16),
-          WidgetWithColumnTitleCommon(
-              title: "${L10nX.getStr.standard_str} ",
-              child: buildStandard(state: state, context: context)),
-          MySpacing.height(8),
-          buildAccompanyCourse(state: state, context: context),
-          MySpacing.height(16),
-          buildPaymentWidget(state: state, context: context),
-          MySpacing.height(16),
-          buildCourseTest(state: state, context: context),
-          MySpacing.height(16),
-          buildTags(state: state, context: context),
-          MySpacing.height(20),
-        ],
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              buildCourseName(state: state, context: context),
+              MySpacing.height(16),
+              buildCategory(state: state, context: context, width: constraints.maxWidth),
+              MySpacing.height(16),
+              buildGrade(state: state, context: context, width: constraints.maxWidth),
+              MySpacing.height(16),
+
+              buildBackgroundImage(state: state, context: context),
+              MySpacing.height(16),
+              buildVideoPreview(state: state, context: context),
+              MySpacing.height(16),
+              buildAuthor(state: state, context: context),
+              buildDuration(state: state, context: context),
+              MySpacing.height(16),
+              buildIntroduction(state: state, context: context),
+              MySpacing.height(16),
+              buildWhoThisCourse(state: state, context: context),
+              MySpacing.height(16),
+              buildWhatWillYouAchieve(state: state, context: context),
+              /*  MySpacing.height(16),
+            buildShowCourseInLandingPage(state: state, context: context),*/
+              MySpacing.height(16),
+              WidgetWithColumnTitleCommon(
+                  title: "${L10nX.getStr.standard_str} ",
+                  child: buildStandard(state: state, context: context)),
+              MySpacing.height(8),
+              buildAccompanyCourse(state: state, context: context),
+              MySpacing.height(16),
+              buildPaymentWidget(state: state, context: context),
+              MySpacing.height(16),
+              buildCourseTest(state: state, context: context),
+              MySpacing.height(16),
+              buildTags(state: state, context: context),
+              MySpacing.height(20),
+            ],
+          );
+        },
       ),
     );
   }
@@ -334,16 +342,18 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
     );
   }
 
-  Widget buildCategory({required AddCourseState state, required BuildContext context}) {
-    return WidgetWithColumnTitleCommon(
-      title: '${L10nX.getStr.category_str}',
-      isRequirement: true,
-      child: DropDownSearch(
-          list: state.controller!.listOfCategoryName,
-          hintText: '${L10nX.getStr.category_str}...',
-          selectItem: state.courseInfo?.categoryName,
-          controller: state.controller?.basicValidator.getController('category_name')),
+  Widget buildCategory({required AddCourseState state, required BuildContext context,  double? width}) {
+    return FilterManager().buildCategory(
+        context: context,
+      enable: true,
+      width: width,
+      onChanged: (p0) {
+        state.courseInfo?.categoryId = p0?.id;
+        BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateCourseInfoEvent(courseInfo: state.courseInfo!));
+      },
+      inputCategoryId: state.courseInfo?.id
     );
+   
   }
 
   Widget buildBackgroundImage({required AddCourseState state, required BuildContext context}) {
@@ -549,7 +559,16 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
     );
   }
 
-  Widget buildGrade({required AddCourseState state, required BuildContext context}) {
+  Widget buildGrade({required AddCourseState state, required BuildContext context, required double width}) {
+    return FilterManager().buildGrade(
+        context: context,
+      width: width,
+      onChanged: (p0) {
+          state.courseInfo?.gradeId = p0?.id;
+        BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateCourseInfoEvent(courseInfo: state.courseInfo!));
+      },
+      enable: true
+    );
     return WidgetWithColumnTitleCommon(
         title: L10nX.getStr.grade_str,
         isRequirement: true,

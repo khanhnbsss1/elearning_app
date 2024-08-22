@@ -53,6 +53,11 @@ class QuestionDetailBloc extends Bloc<QuestionDetailEvent, QuestionDetailState> 
     on<QuestionDetailUpLoadFileInfoEvent>(_onUploadFile);
     on<QuestionDetailAddAnswerInfoEvent>((event, emit) {
       // TODO: implement event handler
+      if((state.questionInfo?.answerGetDetail??[]).length>=6)
+        {
+          ToastUtils.showToastError("Chỉ được tạo tối đa 6 đáp án");
+          return;
+        }
       state.questionInfo?.answerGetDetail?.add(AnswerInfo(answerId: state.answerTempIndex!-1, answerType: state.answerType));
       emit(state.copyWith(
           blocStatus: QuestionDetailStatus.onAddAnswer,

@@ -59,6 +59,7 @@ class SentenceInfo {
     //data['id']=id;
     data['chinese_sentence']=chineseSentence;
     data['pinyin_sentence']=pinyionSentence;
+    data['pinyion_sentence']=pinyionSentence;
     data['translationvn_sentence']=translationVn;
     data['audio_link']=audioLink;
     data['audio_sentence']=audioLink;

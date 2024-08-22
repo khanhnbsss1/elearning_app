@@ -448,193 +448,28 @@ class _CreateEditLesson extends State<CreateEditLesson>
     );
   }
   Widget buildCategory({required BuildContext context, required LessonDetailState state}){
-    return FutureBuilder(
-        future: FilterManager().getCategoryFilter(),
-        builder: (context, snapshot) {
-          if(!snapshot.hasData) {
-            return SizedBox();
-          }
-          List<CategoryInfo> data = snapshot.data?.content??[];
-          CategoryInfo? selectCategory;
-          if(data.where((element) => element.id == state.lessonInfo?.categoryId,).isNotEmpty)
-            {
-              selectCategory= data.firstWhere((element) => element.id == state.lessonInfo?.categoryId,);
-            }
-          else
-            {
-              selectCategory = data.first;
-            }
-          state.valueListenable?.value = selectCategory;
-          return SizedBox(
-            width: Dimens.size200,
-            child: WidgetWithColumnTitleCommon(
-              title: "${L10nX.getStr.category_str}: ",
-              isRequirement: true,
-              child: SizedBox(
-                height: Dimens.size40,
-                width: Dimens.size200,
-                child: IgnorePointer(
-                  ignoring: state.lessonActionType == ActionType.view,
-                  child: DropdownButtonFormField2<CategoryInfo>(
-                    isExpanded: true,
-                    valueListenable: ValueNotifier<CategoryInfo?>(selectCategory),
-                    decoration: InputDecoration(
-                      // Add Horizontal padding using menuItemStyleData.padding so it matches
-                      // the menu padding when button's width is not specified.
-                      contentPadding:  EdgeInsets.symmetric(vertical: Dimens.size16),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(Dimens.size16),
-                      ),
-                      
-                      // Add more decoration..
-                    ),
-                    hint:  Text(
-                      L10nX.getStr.choose_category_str,
-                      style: TextStyleConstant.textStyleBlack13w400,
-                    ),
-                    items: data.map((item) => DropdownItem<CategoryInfo>(
-                      value: item,
-                      child: Text(
-                        item.name??"",
-                        style: TextStyleConstant.textStyleBlack13w400,
-                      ),
-                    )).toList(),
-                    validator: (value) {
-                      if (value == null) {
-                        return L10nX.getStr.choose_category_str;
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {
-                      //Do something when selected item is changed.
-                      state.lessonInfo?.categoryId = value?.id;
-                      //state.valueListenable?.value = value;
-                      BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailChangeLessonEvent(lessonInfo: state.lessonInfo!));
-                    },
-                    onSaved: (value) {
-                    },
-                    buttonStyleData:  ButtonStyleData(
-                      height: Dimens.size40,
-                      padding: EdgeInsets.only(right: Dimens.size8),
-                    ),
-                    iconStyleData:  IconStyleData(
-                      icon: Icon(
-                        Icons.arrow_drop_down,
-                        color: Colors.black45,
-                      ),
-                      iconSize: Dimens.size24,
-                    ),
-                    dropdownStyleData: DropdownStyleData(
-                      maxHeight:Dimens.size150,
-                      //width: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Dimens.size16),
-                        color: ColorConst.whiteColor,
-                      ),
-                    ),
-                    menuItemStyleData: MenuItemStyleData(
-                      padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          );
-          
-        },);
+    return FilterManager().buildCategory(
+        context: context,
+      enable: state.lessonActionType != ActionType.view,
+      onChanged: (p0) {
+        state.lessonInfo?.categoryId = p0?.id;
+        //state.valueListenable?.value = value;
+        BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailChangeLessonEvent(lessonInfo: state.lessonInfo!));
+
+      },
+      inputCategoryId: state.lessonInfo?.categoryId,
+    );
   }
   Widget buildGrade({required BuildContext context, required LessonDetailState state}){
-    return FutureBuilder(
-      future: FilterManager().getGradesInfo(),
-      builder: (context, snapshot) {
-        if(!snapshot.hasData) {
-          return SizedBox();
-        }
-        List<GradeInfo> data = snapshot.data?.content??[];
-        GradeInfo? selectGrade ;
-        if(data.where((element) => element.id == state.lessonInfo?.gradeId,).isNotEmpty)
-          {
-            selectGrade = data.firstWhere((element) => element.id == state.lessonInfo?.gradeId,);
-          }
-        else
-          {
-            selectGrade = data.first;
-          }
-        return SizedBox(
-          width: Dimens.size200,
-          child: WidgetWithColumnTitleCommon(
-            title: "${L10nX.getStr.grade_str}: ",
-            isRequirement: true,
-            child: SizedBox(
-              height: Dimens.size40,
-              width: Dimens.size200,
-              child: IgnorePointer(
-                ignoring: state.lessonActionType == ActionType.view,
-                child: DropdownButtonFormField2<GradeInfo>(
-                  isExpanded: true,
-                  valueListenable: ValueNotifier<GradeInfo?>(selectGrade),
-                  decoration: InputDecoration(
-                    // Add Horizontal padding using menuItemStyleData.padding so it matches
-                    // the menu padding when button's width is not specified.
-                    contentPadding:  EdgeInsets.symmetric(vertical: Dimens.size16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(Dimens.size16),
-                    ),
-                
-                    // Add more decoration..
-                  ),
-                  hint:  Text(
-                    L10nX.getStr.choose_category_str,
-                    style: TextStyleConstant.textStyleBlack13w400,
-                  ),
-                  items: data.map((item) => DropdownItem<GradeInfo>(
-                    value: item,
-                    child: Text(
-                      item.name??"",
-                      style: TextStyleConstant.textStyleBlack13w400,
-                    ),
-                  )).toList(),
-                  validator: (value) {
-                    if (value == null) {
-                      return L10nX.getStr.choose_category_str;
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {
-                    //Do something when selected item is changed.
-                    state.lessonInfo?.gradeId = value?.id;
-                    BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailChangeLessonEvent(lessonInfo: state.lessonInfo!));
-                  },
-                  onSaved: (value) {
-                  },
-                  buttonStyleData:  ButtonStyleData(
-                    height: Dimens.size40,
-                    padding: EdgeInsets.only(right: Dimens.size8),
-                  ),
-                  iconStyleData:  IconStyleData(
-                    icon: Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.black45,
-                    ),
-                    iconSize: Dimens.size24,
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    maxHeight:Dimens.size150,
-                    //width: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimens.size16),
-                      color: ColorConst.whiteColor,
-                    ),
-                  ),
-                  menuItemStyleData: MenuItemStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
+    return FilterManager().buildGrade(
+        context: context,
+      onChanged: (p0) {
+        state.lessonInfo?.gradeId = p0?.id;
+        BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailChangeLessonEvent(lessonInfo: state.lessonInfo!));
 
-      },);
+      },
+      enable: state.lessonActionType != ActionType.view,
+      inputGradeId: state.lessonInfo?.gradeId
+    );
   }
 }

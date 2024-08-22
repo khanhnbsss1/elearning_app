@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get_connect/http/src/multipart/multipart_file.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/base/widgets/drop_down/drop_down_search.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
@@ -57,7 +58,7 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
   int price = 0;
   late QuestionDetailState _state;
   late bool enableEdit;
-
+  ScrollController controller = ScrollController();
   @override
   void initState() {
     // TODO: implement initState
@@ -114,6 +115,12 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
             case QuestionDetailStatus.onUpdateQuestion:
               {
                 Navigator.of(context).pop();
+
+              }
+              break;
+            case QuestionDetailStatus.onAddAnswer:
+              {
+               controller.animateTo(controller.position.pixels + Dimens.size400, duration: Duration(milliseconds: 500), curve: Curves.linear);
 
               }
               break;
@@ -216,6 +223,7 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
         children: [
           Expanded(
             child: SingleChildScrollView(
+              controller: controller,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -236,7 +244,6 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
                 children: [
                   Icon(Icons.add_circle_outline, color: ColorConst.mainColor,),
                   Text(L10nX.getStr.add_selection, style: TextStyleConstant.textStyleBlack13w400.copyWith(color: ColorConst.mainColor,),)
-            
                 ],
               ),
               onTap: () {
@@ -400,26 +407,16 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
     );
   }
   Widget buildGrade({required QuestionDetailState state, required BuildContext context}) {
-    return Container(
-      constraints: BoxConstraints(
-        maxWidth: Dimens.size250
-      ),
-      child: WidgetWithColumnTitleCommon(
-          title: L10nX.getStr.grade_str,
-          isRequirement: true,
-          child: DropDownSearch(
-              list: state.listOfGradeNames??{},
-              hintText: '${L10nX.getStr.grade_name_str}...',
-              selectItem: (state.questionInfo?.gradeId),
-            onChange: (p0) {
-                print("object");
-                //state.questionInfo?.questionType = value;
-                var usdKey = (state.listOfGradeNames??{}).keys.firstWhere(
-                        (k) => (state.listOfGradeNames??{})[k] == p0);
-                state.questionInfo?.gradeId = usdKey;
-                BlocProvider.of<QuestionDetailBloc>(context).add(QuestionDetailUpdateQuestionInfoEvent(info: state.questionInfo!));
-            },
-          )),
+    return FilterManager().buildGrade(
+      context: context,
+      enable: enableEdit,
+      width: Dimens.size250,
+      onChanged: (p0) {
+        state.questionInfo?.gradeId = p0?.id;
+        BlocProvider.of<QuestionDetailBloc>(context).add(QuestionDetailUpdateQuestionInfoEvent(info: state.questionInfo!));
+
+      },
+      inputGradeId: (state.questionInfo?.gradeId),
     );
   }
   Widget buildQuestionScore({required BuildContext context}) {
