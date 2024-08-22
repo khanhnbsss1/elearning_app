@@ -289,7 +289,7 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
   Widget buildTagList({required GradeListState state, required BuildContext context}){
     List<Widget> listOfLesson = List.empty(growable: true);
 
-    for (GradeInfo lessonInfo in state.tagListResponseModel?.content ?? []) {
+    for (GradeInfo lessonInfo in state.contentView ?? []) {
       listOfLesson.add(
         InkWell(
           onTap: () {

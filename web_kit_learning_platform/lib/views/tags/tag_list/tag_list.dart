@@ -288,7 +288,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
   Widget buildTagList({required TagListState state, required BuildContext context}){
     List<Widget> listOfLesson = List.empty(growable: true);
 
-    for (TagsInfo lessonInfo in state.tagListResponseModel?.content ?? []) {
+    for (TagsInfo lessonInfo in state.contentView ?? []) {
       listOfLesson.add(
         InkWell(
           onTap: () {

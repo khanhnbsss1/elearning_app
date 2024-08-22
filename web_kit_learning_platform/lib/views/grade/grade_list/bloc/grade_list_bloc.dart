@@ -41,8 +41,14 @@ class GradeListBloc extends Bloc<GradeListEvent, GradeListState> {
         blocStatus: GradeListStatus.onLoading,
         searchCommonRequest: event.searchCommonRequest
     ));
-    await callTagListApi(searchCommonRequest: event.searchCommonRequest);
-  }
+    state.contentView= [...(state.tagListResponseModel?.content??[]).where((element) {
+      String keyWord = (state.searchCommonRequest?.keyword??"").toLowerCase();
+      return (element.name??"").toLowerCase().contains(keyWord);
+    },)];
+    emit(state.copyWith(
+        blocStatus: GradeListStatus.onLoadEnd,
+        contentView: state.contentView
+    ));  }
   
   Future<void> callTagListApi({required SearchCommonRequest searchCommonRequest}) async {
 
@@ -51,7 +57,8 @@ class GradeListBloc extends Bloc<GradeListEvent, GradeListState> {
         emit(state.copyWith(
             tagListResponseModel: responseModel,
             blocStatus: GradeListStatus.onLoadEnd,
-          searchCommonRequest: searchCommonRequest
+          searchCommonRequest: searchCommonRequest,
+          contentView: responseModel.content
         ));
         if((responseModel.content??[]).isNotEmpty) {
           add(TagListOnSelectTagEvent(selectTagInfo:(responseModel.content??[]).first));       

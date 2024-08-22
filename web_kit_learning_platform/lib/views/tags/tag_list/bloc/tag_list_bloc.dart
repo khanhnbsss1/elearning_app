@@ -34,21 +34,31 @@ class TagListBloc extends Bloc<TagListEvent, TagListState> {
 
   Future<void> _onSearchByParams(TagListOnSearchByFilterEvent event,
       Emitter<TagListState> emit,) async {
+
     emit(state.copyWith(
         blocStatus: TagListStatus.onLoading,
         searchCommonRequest: event.searchCommonRequest
     ));
-    await callTagListApi(searchCommonRequest: event.searchCommonRequest);
+    state.contentView= [...(state.tagListResponseModel?.content??[]).where((element) {
+      String keyWord = (state.searchCommonRequest?.keyword??"").toLowerCase();
+      return (element.name??"").toLowerCase().contains(keyWord);
+    },)];
+    emit(state.copyWith(
+        blocStatus: TagListStatus.onLoadEnd,
+        contentView: state.contentView
+    ));
   }
   
   Future<void> callTagListApi({required SearchCommonRequest searchCommonRequest}) async {
 
     GetTagListApi courseApi = GetTagListApi(searchCommonRequest: state.searchCommonRequest!);
     TagListResponseModel lessonListResponseModel = await courseApi.call();
+    
         emit(state.copyWith(
             tagListResponseModel: lessonListResponseModel,
             blocStatus: TagListStatus.onLoadEnd,
-          searchCommonRequest: searchCommonRequest
+          searchCommonRequest: searchCommonRequest,
+          contentView: lessonListResponseModel.content
         ));
         if((lessonListResponseModel.content??[]).isNotEmpty) {
           add(TagListOnSelectTagEvent(selectTagInfo:(lessonListResponseModel.content??[]).first));       

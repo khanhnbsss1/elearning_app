@@ -14,11 +14,13 @@ class GradeListState extends Equatable {
   GradeListStatus? blocStatus;
   SearchCommonRequest? searchCommonRequest;
   GradeInfo? selectInfo;
+  List<GradeInfo>? contentView;
   GradeListState({
       this.blocStatus, 
     this.tagListResponseModel,
     this.searchCommonRequest,
-    this.selectInfo
+    this.selectInfo,
+    this.contentView
   }){
     tagListResponseModel??= GradeListResponseModel(content: []);
     searchCommonRequest??= SearchCommonRequest(pageNumber: 0, pageSize: 10, keyword: "");
@@ -29,7 +31,8 @@ class GradeListState extends Equatable {
     GradeListResponseModel? tagListResponseModel,
     GradeListStatus? blocStatus,
     SearchCommonRequest? searchCommonRequest,
-    GradeInfo? selectInfo
+    GradeInfo? selectInfo,
+    List<GradeInfo>? contentView
   })
   {
     return GradeListState(
@@ -37,10 +40,11 @@ class GradeListState extends Equatable {
       tagListResponseModel: tagListResponseModel??this.tagListResponseModel,
       searchCommonRequest: searchCommonRequest??this.searchCommonRequest,
       selectInfo: selectInfo??this.selectInfo,
+      contentView: contentView??this.contentView,
 
     );
   }
   @override
-  List<Object?> get props => [blocStatus, tagListResponseModel, searchCommonRequest, selectInfo];
+  List<Object?> get props => [blocStatus, tagListResponseModel, searchCommonRequest, selectInfo,contentView];
 
 }
