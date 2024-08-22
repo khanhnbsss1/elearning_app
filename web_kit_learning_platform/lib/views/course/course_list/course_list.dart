@@ -6,6 +6,7 @@ import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
+import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
@@ -161,6 +162,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                             searchCommonRequest: state.searchCommonRequest!.copyWith(
                                                               filterType: p0.filterType,
                                                               gradeId: p0.selectSubFilter?.id,
+                                                              pageNumber: 0
                                                             )));
                                                       },
                                                     ),
@@ -317,12 +319,17 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                             enableEdit: enableEdit,
                             row: numberRow,
                             onDelete: (p0) async {
-                              MonitorLoading().showLoading("");
-                              DeleteCourseApi api = DeleteCourseApi(info: p0);
-                              dynamic data = await api.call();
-                              MonitorLoading().dismiss();
-
-                              BlocProvider.of<CourseListBloc>(context).add(CourseListInitEvent());
+                              ConfirmPopupPage(
+                                title: L10nX.getStr.course_delete,
+                                onAccept: () async {
+                                  MonitorLoading().showLoading("");
+                                  DeleteCourseApi api = DeleteCourseApi(info: p0);
+                                  dynamic data = await api.call();
+                                  MonitorLoading().dismiss();
+                                  BlocProvider.of<CourseListBloc>(context).add(CourseListInitEvent());
+                                },
+                              ).show(context);
+                            
                             },
                             onEdit: (p0) {
                               CreateEditCourse(

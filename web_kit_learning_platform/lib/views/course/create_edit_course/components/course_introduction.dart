@@ -1,6 +1,7 @@
 // import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
@@ -757,6 +758,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                             ? state.courseInfo?.mode =  'FREE'
                             : state.courseInfo?.mode =  'FREE';
                         state.controller?.basicValidator.getController('payment_mode')?.text = state.courseInfo?.mode??"FREE";
+                        state.controller?.basicValidator.getController('payment_value')?.text = "0";
                         BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(courseInfo:  state.courseInfo, addCourseController: state.controller!));
                       });
                   },
@@ -839,6 +841,14 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                   keyboardType: TextInputType.number,
                   enabled: (state.courseInfo?.mode??"FREE")=="PREMIUM",
                   textInputAction: TextInputAction.go,
+                  onChanged: (value) {
+                  },
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+                    FilteringTextInputFormatter.deny(
+                      RegExp(r'^0+'),
+                    ),
+                  ],
                   decoration: InputDecoration(
                     suffix: Text("VND"),
                     //labelText: 'Result after the course',
@@ -858,7 +868,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           ),
           Container(
             constraints: BoxConstraints(
-              maxWidth: Dimens.size300,
+              maxWidth: Dimens.size310,
             ),
             child: WidgetWithRowTitleCommon(
               title: "${L10nX.getStr.discount_str}",
@@ -866,16 +876,40 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                 constraints: BoxConstraints(
                   maxWidth: Dimens.size200,
                 ),
-                child: Opacity(
-                  opacity: ((state.courseInfo?.mode)=="PREMIUM") ? 1 : 0.2,
-                  child: IgnorePointer(
-                    ignoring: (state.courseInfo?.mode)!="PREMIUM",
-                    child: DropDownSearch(
-                      list: {},//state.controller!.listOfAccompanyCourses,
-                      hintText: "${L10nX.getStr.discount_str}...",
-                      selectItem: "80.0",
-                      controller: state.controller?.basicValidator.getController('payment_discount')),
-                  ),
+                child: TextFormField(
+                  validator: state.controller?.basicValidator.getValidation('payment_discount'),
+                  controller: state.controller?.basicValidator.getController('payment_discount'),
+                  keyboardType: TextInputType.number,
+                  enabled: (state.courseInfo?.mode??"FREE")=="PREMIUM",
+                  textInputAction: TextInputAction.go,
+                  onChanged: (value) {
+                  },
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+                    FilteringTextInputFormatter.deny(
+                      RegExp(r'^0+'),
+                    ),
+                    TextInputFormatter.withFunction((oldValue, newValue) {
+                      if (newValue.text == '') return newValue;
+                      final i = int.tryParse(newValue.text);
+                      if (i == null) return oldValue;
+                      if (i >= 100) return newValue.copyWith(text: '100', selection: const TextSelection.collapsed(offset: 3));
+                      return newValue;
+                    })
+                  ],
+                  decoration: InputDecoration(
+                      suffix: Text("%"),
+                      //labelText: 'Result after the course',
+                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                      labelText: L10nX.getStr.discount_str,
+                      alignLabelWithHint: true,
+                      floatingLabelAlignment: FloatingLabelAlignment.start,
+                      border: outlineInputBorder,
+                      contentPadding: MySpacing.all(16),
+                      isCollapsed: true,
+                      floatingLabelBehavior: FloatingLabelBehavior.never),
+                  minLines: 1,
+                  maxLines: 1,
                 ),
               ),
             ),
@@ -961,39 +995,99 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
               Gap(Dimens.size20),
               Opacity(
                 opacity: valuePaymentMode==false ? 0.2 : 1,
-                child: IgnorePointer(
-                  ignoring: valuePaymentMode==false,
-                  child: TextFormField(
-                    validator: state.controller?.basicValidator.getValidation('payment_value'),
-                    controller: state.controller?.basicValidator.getController('payment_value'),
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.go,
-                    decoration: InputDecoration(
-                      //labelText: 'Result after the course',
-                        labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                        labelText: L10nX.getStr.price,
-                        alignLabelWithHint: true,
-                        floatingLabelAlignment: FloatingLabelAlignment.start,
-                        border: outlineInputBorder,
-                        contentPadding: MySpacing.all(16),
-                        isCollapsed: true,
-                        floatingLabelBehavior: FloatingLabelBehavior.never),
-                    minLines: 1,
-                    maxLines: 1,
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxWidth: Dimens.size250,
+                  ),
+                  child: WidgetWithRowTitleCommon(
+                    title: "${L10nX.getStr.price} ",
+                    child: Container(
+                      constraints: BoxConstraints(
+                        maxWidth: Dimens.size200,
+                      ),
+                      child: TextFormField(
+                        validator: state.controller?.basicValidator.getValidation('payment_value'),
+                        controller: state.controller?.basicValidator.getController('payment_value'),
+                        keyboardType: TextInputType.number,
+                        enabled: (state.courseInfo?.mode??"FREE")=="PREMIUM",
+                        textInputAction: TextInputAction.go,
+                        onChanged: (value) {
+                        },
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+                          FilteringTextInputFormatter.deny(
+                            RegExp(r'^0+'),
+                          ),
+                        ],
+                        decoration: InputDecoration(
+                            suffix: Text("VND"),
+                            //labelText: 'Result after the course',
+                            labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                            labelText: L10nX.getStr.price,
+                            alignLabelWithHint: true,
+                            floatingLabelAlignment: FloatingLabelAlignment.start,
+                            border: outlineInputBorder,
+                            contentPadding: MySpacing.all(16),
+                            isCollapsed: true,
+                            floatingLabelBehavior: FloatingLabelBehavior.never),
+                        minLines: 1,
+                        maxLines: 1,
+                      ),
+                    ),
                   ),
                 ),
               ),
               Gap(Dimens.size20),
               Opacity(
                 opacity: valuePaymentMode==false ? 0.2 : 1,
-                child: IgnorePointer(
-                  ignoring: valuePaymentMode==false,
-                  child: DropDownSearch(
-                      list: state.controller!.listOfAccompanyCourses,
-                      hintText: "${L10nX.getStr.discount_str}...",
-                      selectItem: "80.0",
-                      controller: state.controller?.basicValidator.getController('payment_discount')),
-                ),
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxWidth: Dimens.size310,
+                  ),
+                  child: WidgetWithRowTitleCommon(
+                    title: "${L10nX.getStr.discount_str}",
+                    child: Container(
+                      constraints: BoxConstraints(
+                        maxWidth: Dimens.size200,
+                      ),
+                      child: TextFormField(
+                        validator: state.controller?.basicValidator.getValidation('payment_discount'),
+                        controller: state.controller?.basicValidator.getController('payment_discount'),
+                        keyboardType: TextInputType.number,
+                        enabled: (state.courseInfo?.mode??"FREE")=="PREMIUM",
+                        textInputAction: TextInputAction.go,
+                        onChanged: (value) {
+                        },
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+                          FilteringTextInputFormatter.deny(
+                            RegExp(r'^0+'),
+                          ),
+                          TextInputFormatter.withFunction((oldValue, newValue) {
+                            if (newValue.text == '') return newValue;
+                            final i = int.tryParse(newValue.text);
+                            if (i == null) return oldValue;
+                            if (i >= 100) return newValue.copyWith(text: '100', selection: const TextSelection.collapsed(offset: 3));
+                            return newValue;
+                          })
+                        ],
+                        decoration: InputDecoration(
+                            suffix: Text("%"),
+                            //labelText: 'Result after the course',
+                            labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                            labelText: L10nX.getStr.discount_str,
+                            alignLabelWithHint: true,
+                            floatingLabelAlignment: FloatingLabelAlignment.start,
+                            border: outlineInputBorder,
+                            contentPadding: MySpacing.all(16),
+                            isCollapsed: true,
+                            floatingLabelBehavior: FloatingLabelBehavior.never),
+                        minLines: 1,
+                        maxLines: 1,
+                      ),
+                    ),
+                  ),
+                )
               ),
             ],
           ));

@@ -62,49 +62,55 @@ class _FilterCoursePopupMenuState extends State<FilterCoursePopupMenu> {
         PopupMenuItem<CourseFilterInfo> popupMenuItem = PopupMenuItem<CourseFilterInfo>(
           key:  key,
           value: courseFilterInfo,
-          onTap: () {
-            if(onSelect!=null)
-              {
-                onSelect(courseFilterInfo);
-              }
-          },
-            child: StatefulBuilder(
+          padding: EdgeInsets.zero,
+          child: StatefulBuilder(
               builder: (BuildContext context, void Function(void Function()) setState) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(courseFilterInfo.name??"", style: TextStyleConstant.textStyleBlack14w400,),
-                    Visibility(
-                        visible: (courseFilterInfo.subFilter??[]).isNotEmpty,
-                        child: Row(
-                          children: [
-                            Gap(Dimens.size10),
-                            InkWell(
-                              onTap: () {
-                                final  renderBox = key.currentContext!.findRenderObject() as RenderBox ;
-                                final position = renderBox.localToGlobal(Offset.zero);
-                                showMenu(
-                                    context: context,
-                                    useRootNavigator: true,
-                                    color: ColorConst.whiteColor,
-                                    position: RelativeRect.fromLTRB(position.dx, position.dy, MediaQuery.of(context).size.width -position.dx, 0),
-                                    items: getListSubFilterMenuItem(
-                                      data: courseFilterInfo.subFilter??[],
-                                      onSelect: (p0) {
-                                        courseFilterInfo.selectSubFilter= p0;
-                                        if(onSelect!=null)
-                                          {
-                                            onSelect(courseFilterInfo);
-                                          }
-                                      },)
-                                );
-                              },
-                              child: Icon(Icons.arrow_forward_ios_outlined, size: Dimens.size15, color: ColorConst.colorIconGrays,),
-                            )
-                          ],
-                        )),
+                return InkWell(
+                  onTap: () {
 
-                  ],
+                    if(onSelect!=null && (courseFilterInfo.subFilter??[]).isEmpty)
+                    {
+                      onSelect(courseFilterInfo);
+                    }
+                    else
+                    {
+                      final renderBox = key.currentContext!.findRenderObject() as RenderBox ;
+                      final position = renderBox.localToGlobal(Offset(Dimens.size155,Dimens.size0));
+                      showMenu(
+                          context: context,
+                          useRootNavigator: true,
+                          color: ColorConst.whiteColor,
+                          position: RelativeRect.fromLTRB(position.dx, position.dy, MediaQuery.of(context).size.width -position.dx, 0),
+                          items: getListSubFilterMenuItem(
+                            data: courseFilterInfo.subFilter??[],
+                            onSelect: (p0) {
+                              courseFilterInfo.selectSubFilter= p0;
+                              if(onSelect!=null)
+                              {
+                                onSelect(courseFilterInfo);
+                              }
+                            },)
+                      );
+                    }
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(courseFilterInfo.name??"", style: TextStyleConstant.textStyleBlack14w400,),
+                        Visibility(
+                            visible: (courseFilterInfo.subFilter??[]).isNotEmpty,
+                            child: Row(
+                              children: [
+                                Gap(Dimens.size10),
+                                Icon(Icons.arrow_forward_ios_outlined, size: Dimens.size15, color: ColorConst.colorIconGrays,)
+                              ],
+                            )),
+                    
+                      ],
+                    ),
+                  ),
                 );
               },
             ),

@@ -151,17 +151,12 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
   }
 
   Future<void> _onLinkAndUnlinkWordToLesson()async {
-    if((state.listOfWordAdd??[]).isNotEmpty)
+    if((state.listOfWordAdd??[]).isNotEmpty) /// link là replace luôn nên ko cần unlink nữa
       {
         LinkWordApi linkWordApi = LinkWordApi(lessonId: state.lessonInfo?.id??0, vocabularyInfos: state.listOfWord??[]);
         dynamic data = await linkWordApi.call();
       }
-
-/*    if((state.listOfWordRemove??[]).isNotEmpty)
-    {
-      UnLinkWordApi unlinkWordApi = UnLinkWordApi(lessonId: state.lessonInfo?.id??0, vocabularyInfos: state.listOfWordRemove??[]);
-      dynamic data = await unlinkWordApi.call();
-    }*/
+    
   }
 
   Future<void> _onLinkTestToLesson()async {
