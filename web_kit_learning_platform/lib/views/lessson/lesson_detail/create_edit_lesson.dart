@@ -440,7 +440,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
       isRequirement: true,
       child: SearchTestDropDown(
         enableEdit: state.lessonActionType != ActionType.view,
-        testInfo: TestInfo(lectureId: state.lessonInfo?.testId, name: state.lessonInfo?.testName),
+        testInfo: state.testInfo,
         onSelectTest: (testInfo) {
           BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateTestInfoEvent(testInfo: testInfo));
         },

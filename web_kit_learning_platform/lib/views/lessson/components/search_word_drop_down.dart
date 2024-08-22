@@ -54,9 +54,13 @@ class _MyDropdownButtonState extends State<SearchWordDropDown> with SingleTicker
                 deleteIconColor: color,
                 label: Text(tag.simplified??''),
                 onDeleted: () {
-                  setState(() {
-                    widget.onRemoveWords(tag);
-                  });
+                  if(widget.enableEdit??true)
+                    {
+                      setState(() {
+                        widget.onRemoveWords(tag);
+                      });
+                    }
+
                 },
               ),
             )).toList(),
@@ -114,7 +118,10 @@ class _MyDropdownButtonState extends State<SearchWordDropDown> with SingleTicker
           Gap(Dimens.size16),
           InkWell(
             onTap: () {
-              CreateEditWordsPage().show(context);
+              if(widget.enableEdit??true)
+                {
+                  CreateEditWordsPage().show(context);
+                }
             },
             child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size40,),
           )

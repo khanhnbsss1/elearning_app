@@ -33,19 +33,15 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
   void initState() {
     // TODO: implement initState
     super.initState();
-    if(widget.testInfo!=null)
-      {
-        _wordDropdownSearchFieldController.text = widget.testInfo?.name??"";
-      }
+    _wordDropdownSearchFieldController.text = widget.testInfo?.name??"";
   }
   @override
   void didUpdateWidget(covariant SearchTestDropDown oldWidget) {
     // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
-    if(widget.testInfo!=null)
-    {
-      _wordDropdownSearchFieldController.text = widget.testInfo?.name??"";
-    }
+    
+    _wordDropdownSearchFieldController.text = widget.testInfo?.name??"";
+
   }
   @override
   Widget build(BuildContext context) {
@@ -65,6 +61,15 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
                           });
                 },)),
               ]),
+          SizedBox(height: 20,),
+          Chip(
+            key: UniqueKey(),
+            deleteIconColor: color,
+            label: Text(_wordDropdownSearchFieldController.text),
+            deleteIcon: SizedBox(),
+            onDeleted: () {
+            },
+          ),
         ]
     );
   }
@@ -101,6 +106,7 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
                       if(onSelectWord!=null)
                       {
                         _wordDropdownSearchFieldController.text = value?.name??"";
+                        widget.testInfo = value;
                         onSelectWord(value!);
                       }
                       else
@@ -118,7 +124,9 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
           Gap(Dimens.size16),
           InkWell(
             onTap: () {
-              CreateEditTest().show(context);
+              if(widget.enableEdit??true) {
+                CreateEditTest().show(context);
+              }
             },
             child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size40,),
           )

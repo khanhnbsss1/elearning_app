@@ -72,6 +72,7 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
         state.editingControllerLectureDescription?.text = state.lessonInfo?.note??"";
         state.editingControllerLectureVideoLink?.text = state.lessonInfo?.link??"";
         state.editingControllerLectureDocuments?.text = state.lessonInfo?.docName??"";
+        state.testInfo = TestInfo(id: state.lessonInfo?.testId, name: state.lessonInfo?.testName);
         CategoryListResponseModel? categoryListResponseModel = await FilterManager().getCategoryFilter();
         if((categoryListResponseModel?.content??[]).where((element) => element.id == state.lessonInfo?.categoryId).isNotEmpty) {
           state.valueListenable?.value = (categoryListResponseModel?.content??[]).firstWhere((element) => element.id == state.lessonInfo?.categoryId);
@@ -80,6 +81,9 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
       }
     emit(state.copyWith(
       blocStatus: LessonDetailStatus.initial,
+      testInfo: state.testInfo,
+      lessonInfo: state.lessonInfo,
+      listOfWord: state.listOfWord
     ));
   }
   Future<void> _onUpdateLesson(
