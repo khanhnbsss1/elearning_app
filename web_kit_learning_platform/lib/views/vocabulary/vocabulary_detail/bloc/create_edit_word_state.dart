@@ -10,6 +10,7 @@ enum CreateEditWordStatus {
   onSaveSentence,
   onCreateNewSentence,
   onUpdateWord,
+  onUpdateWordInfo,
   unknown
 }
 

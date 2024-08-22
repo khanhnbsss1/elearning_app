@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
@@ -12,6 +13,7 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/sentence/models/sentence_info.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
+import 'package:webkit/views/course/create_edit_course/bloc/add_course_bloc.dart';
 import 'package:webkit/views/vocabulary/components/example_form.dart';
 import '../../../helpers/utils/ui_mixins.dart';
 import '../../../helpers/widgets/my_spacing.dart';
@@ -193,6 +195,16 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                       },
                                     ),
                                   ),
+                                  FilterManager().buildGrade(
+                                      context: context,
+                                    inputGradeId: state.vocabularyInfo?.gradeId,
+                                    enable: true,
+                                    onChanged: (p0) {
+                                      state.vocabularyInfo!.gradeId = p0?.id;
+                                      BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordOnUpdateVocabularyInfoEvent(vocabularyInfo: state.vocabularyInfo!));
+                                    },
+                                    
+                                  )
                                 ],
                               ),
                               SizedBox(

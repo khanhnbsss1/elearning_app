@@ -25,6 +25,13 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     on<CreateEditWordUpdateWordEvent>(_onUpdateWord);
 
     on<CreateEditWordOnSaveSentenceEvent>(_onSaveSentenceInfo);
+    on<CreateEditWordOnUpdateVocabularyInfoEvent>((event, emit) {
+      
+      emit(state.copyWith(
+          blocStatus: CreateEditWordStatus.onUpdateWordInfo,
+          vocabularyInfo: event.vocabularyInfo
+      ));
+    });
     on<CreateEditWordOnAddNewSentenceEvent>((event, emit) {
       if((state.vocabularyInfo?.sentenceInfos??[]).isNotEmpty && state.vocabularyInfo!.sentenceInfos!.last.isValidate())
         {
@@ -150,10 +157,15 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     AddWordsApi addWordsApi = AddWordsApi(word:  state.vocabularyInfo!);
     dynamic data = await addWordsApi.call();
     MonitorLoading().dismiss();
-    emit(event.state.copyWith(
-      blocStatus: CreateEditWordStatus.onSubmit,
-      vocabularyInfo:  state.vocabularyInfo,
-    ));
+
+    if(data.runtimeType == String && (data as String).isEmpty)
+      {
+        emit(event.state.copyWith(
+          blocStatus: CreateEditWordStatus.onSubmit,
+          vocabularyInfo:  state.vocabularyInfo,
+        ));
+      }
+
   }  
   Future<void> _onUpdateWord(
       CreateEditWordUpdateWordEvent event,

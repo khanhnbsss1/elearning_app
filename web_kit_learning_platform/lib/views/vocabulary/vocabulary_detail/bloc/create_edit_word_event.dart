@@ -57,3 +57,9 @@ class CreateEditWordOnRemoveSentenceEvent extends CreateEditWordEvent {
   @override
   List<Object?> get props => [sentenceInfo];
 }
+class CreateEditWordOnUpdateVocabularyInfoEvent extends CreateEditWordEvent {
+  VocabularyInfo vocabularyInfo;
+  CreateEditWordOnUpdateVocabularyInfoEvent({required this.vocabularyInfo});
+  @override
+  List<Object?> get props => [vocabularyInfo];
+}

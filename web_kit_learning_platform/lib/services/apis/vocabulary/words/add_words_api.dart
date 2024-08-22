@@ -1,4 +1,5 @@
 
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import '../vocabulary_list/models/vocabulary_models.dart';
 
@@ -12,6 +13,10 @@ class AddWordsApi extends BaseApiRequest {
   Future<dynamic> call() async {
     await getAuthorization();
     dynamic data = await postRequestAPI();
+    if(data.runtimeType == String && (data as String).isEmpty)
+    {
+      ToastUtils.showToastSuccess(L10nX.getStr.success);
+    }
     return data;
   }
 
