@@ -4,22 +4,25 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
+import 'package:webkit/services/apis/grade/add_grade_api.dart';
+import 'package:webkit/services/apis/grade/models/grade_info.dart';
+import 'package:webkit/services/apis/grade/update_grade_api.dart';
 import 'package:webkit/services/apis/tags/add_tag_api.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 import 'package:webkit/services/apis/tags/update_tag_api.dart';
-enum TagPageAction{
+enum GradePageAction{
   view,
   edit,
   create
 }
 
 class AddTagPage extends StatefulWidget{
-  TagPageAction? tagPageAction;
-  AddTagPage({this.tagsInfo, this.tagPageAction}){
-    tagsInfo??=TagsInfo();
-    tagPageAction??=TagPageAction.create;
+  GradePageAction? tagPageAction;
+  AddTagPage({this.info, this.tagPageAction}){
+    info??=GradeInfo();
+    tagPageAction??=GradePageAction.create;
   }
-  TagsInfo?tagsInfo;
+  GradeInfo?info;
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -44,23 +47,23 @@ class AddTagPageState extends State<AddTagPage>with UIMixin {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if(widget.tagsInfo?.id!=null)
+    if(widget.info?.id!=null)
       {
-        tagController.text = widget.tagsInfo?.name??"";
+        tagController.text = widget.info?.name??"";
       }
   }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return AlertDialog(
-      title: Text(widget.tagPageAction ==TagPageAction.create? L10nX.getStr.add_tags: L10nX.getStr.edit_str),
+      title: Text(widget.tagPageAction ==GradePageAction.create? L10nX.getStr.category_add_str: L10nX.getStr.category_update_str),
       content: TextFormField(
         controller: tagController,
         keyboardType: TextInputType.text,
         onChanged: (value) {
-          widget.tagsInfo?.name = value;
+          widget.info?.name = value;
         },
-        enabled: widget.tagPageAction != TagPageAction.view,
+        enabled: widget.tagPageAction != GradePageAction.view,
         decoration: InputDecoration(
             labelText: L10nX.getStr.add_tags,
             labelStyle: MyTextStyle.bodySmall(xMuted: true),
@@ -75,18 +78,18 @@ class AddTagPageState extends State<AddTagPage>with UIMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Visibility(
-              visible: widget.tagPageAction== TagPageAction.edit || widget.tagPageAction== TagPageAction.create,
+              visible: widget.tagPageAction== GradePageAction.edit || widget.tagPageAction== GradePageAction.create,
               child: ActionButton1(
-                text: widget.tagPageAction== TagPageAction.edit?L10nX.getStr.edit_str:L10nX.getStr.create_str,
+                text: widget.tagPageAction== GradePageAction.edit?L10nX.getStr.edit_str:L10nX.getStr.create_str,
                 width: Dimens.size120,
                 onTap: () async {
                   dynamic tagApi;
-                  if(widget.tagsInfo?.id!=null){ /// th edit tag
-                    tagApi = UpdateTagApi(tagInfo: widget.tagsInfo!);
+                  if(widget.info?.id!=null){ /// th edit tag
+                    tagApi = UpdateGradeApi(info: widget.info!);
                   }
                   else
                   {
-                    tagApi = AddTagApi(tagInfo: widget.tagsInfo!);
+                    tagApi = AddGradeApi(info: widget.info!);
               
                   }
                   MonitorLoading().showLoading("");

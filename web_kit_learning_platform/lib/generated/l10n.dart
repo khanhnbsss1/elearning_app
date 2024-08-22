@@ -6129,6 +6129,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Create Category`
+  String get category_add_str {
+    return Intl.message(
+      'Create Category',
+      name: 'category_add_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Category`
+  String get category_update_str {
+    return Intl.message(
+      'Edit Category',
+      name: 'category_update_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Category`
+  String get category_delete_str {
+    return Intl.message(
+      'Delete Category',
+      name: 'category_delete_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Level`
+  String get grade_add_str {
+    return Intl.message(
+      'Create Level',
+      name: 'grade_add_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Level`
+  String get grade_update_str {
+    return Intl.message(
+      'Edit Level',
+      name: 'grade_update_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Level`
+  String get grade_delete_str {
+    return Intl.message(
+      'Delete Level',
+      name: 'grade_delete_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create User`
+  String get user_add_str {
+    return Intl.message(
+      'Create User',
+      name: 'user_add_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit User`
+  String get user_update_str {
+    return Intl.message(
+      'Edit User',
+      name: 'user_update_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete User`
+  String get user_delete_str {
+    return Intl.message(
+      'Delete User',
+      name: 'user_delete_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -113,7 +113,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "cards": MessageLookupByLibrary.simpleMessage("Cards"),
         "carousels": MessageLookupByLibrary.simpleMessage("Carousels"),
         "category": MessageLookupByLibrary.simpleMessage("Category"),
+        "category_add_str":
+            MessageLookupByLibrary.simpleMessage("Create Category"),
+        "category_delete_str":
+            MessageLookupByLibrary.simpleMessage("Delete Category"),
         "category_str": MessageLookupByLibrary.simpleMessage("Category"),
+        "category_update_str":
+            MessageLookupByLibrary.simpleMessage("Edit Category"),
         "category_word": MessageLookupByLibrary.simpleMessage("Category"),
         "change_log": MessageLookupByLibrary.simpleMessage("Change log"),
         "change_password_text":
@@ -272,8 +278,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "gender": MessageLookupByLibrary.simpleMessage("Gender"),
         "general": MessageLookupByLibrary.simpleMessage("GENERAL"),
         "google_map": MessageLookupByLibrary.simpleMessage("Google map"),
+        "grade_add_str": MessageLookupByLibrary.simpleMessage("Create Level"),
+        "grade_delete_str":
+            MessageLookupByLibrary.simpleMessage("Delete Level"),
         "grade_name_str": MessageLookupByLibrary.simpleMessage("Grade name"),
         "grade_str": MessageLookupByLibrary.simpleMessage("Grade"),
+        "grade_update_str": MessageLookupByLibrary.simpleMessage("Edit Level"),
         "has_not_example":
             MessageLookupByLibrary.simpleMessage("There is no example"),
         "header_popup_biometric": MessageLookupByLibrary.simpleMessage(
@@ -732,10 +742,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Uploading file ...."),
         "use_fingerprint_text":
             MessageLookupByLibrary.simpleMessage("Use fingerprint"),
+        "user_add_str": MessageLookupByLibrary.simpleMessage("Create User"),
         "user_create": MessageLookupByLibrary.simpleMessage("Create user"),
+        "user_delete_str": MessageLookupByLibrary.simpleMessage("Delete User"),
         "user_detail": MessageLookupByLibrary.simpleMessage("User information"),
         "user_name": MessageLookupByLibrary.simpleMessage("Login name"),
         "user_str": MessageLookupByLibrary.simpleMessage("User"),
+        "user_update_str": MessageLookupByLibrary.simpleMessage("Edit User"),
         "username": MessageLookupByLibrary.simpleMessage("Username"),
         "utilities": MessageLookupByLibrary.simpleMessage("Utilities"),
         "validation": MessageLookupByLibrary.simpleMessage("Validation"),

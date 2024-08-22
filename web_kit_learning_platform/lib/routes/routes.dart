@@ -33,6 +33,7 @@ import 'package:webkit/views/auth/register.dart';
 import 'package:webkit/views/auth/register_2.dart';
 import 'package:webkit/views/auth/reset_password.dart';
 import 'package:webkit/views/auth/reset_password_2.dart';
+import 'package:webkit/views/category/category_list/category_list.dart';
 import 'package:webkit/views/course/course_detail/course_study/course_study.dart';
 import 'package:webkit/views/course/course_list/course_list.dart';
 import 'package:webkit/views/course/my_course/my_course_list.dart';
@@ -41,6 +42,7 @@ import 'package:webkit/views/forms/form_mask.dart';
 import 'package:webkit/views/forms/quill_editor.dart';
 import 'package:webkit/views/forms/validation.dart';
 import 'package:webkit/views/forms/wizard.dart';
+import 'package:webkit/views/grade/grade_list/grade_list.dart';
 import 'package:webkit/views/lessson/lesson_list/lesson_list.dart';
 import 'package:webkit/views/other/basic_table.dart';
 import 'package:webkit/views/other/fl_chart_screen.dart';
@@ -131,6 +133,18 @@ getPageRoute() {
     GetPage(
         name: Routes.tagList,
         page: () =>  TagListPage(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]),
+
+    ///--------------- Grade ---------------///
+    GetPage(
+        name: Routes.categoryList,
+        page: () =>  CategoryListPage(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]),
+
+    ///--------------- Category ---------------///
+    GetPage(
+        name: Routes.gradeList,
+        page: () =>  GradeListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
     ///--------------- Test ---------------///

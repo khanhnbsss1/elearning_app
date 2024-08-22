@@ -12,27 +12,28 @@ import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
+import 'package:webkit/services/apis/grade/models/grade_info.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../layouts/layout.dart';
-import 'bloc/tag_list_bloc.dart';
-import 'components/add_tag.dart';
-import 'components/tag_item_view.dart';
+import 'bloc/grade_list_bloc.dart';
+import 'components/add_grade.dart';
+import 'components/grade_item_view.dart';
 
-class TagListPage extends StatefulWidget {
-  TagListPage({super.key});
+class GradeListPage extends StatefulWidget {
+  GradeListPage({super.key});
   @override
-  State<TagListPage> createState() => _TagListPageState();
+  State<GradeListPage> createState() => _GradeListPageState();
 }
 
-class _TagListPageState extends State<TagListPage> with SingleTickerProviderStateMixin, UIMixin {
+class _GradeListPageState extends State<GradeListPage> with SingleTickerProviderStateMixin, UIMixin {
   late MemberListController controller;
  TextEditingController textEditingController = TextEditingController();
   GlobalKey<FormState>? formKey = GlobalKey();
   ScrollController scrollController=ScrollController();
   List<String>permission =[
-    "tags.get.get_tags"
+    "grades.get.get_grades"
   ];
   @override
   void initState() {
@@ -51,15 +52,15 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
       permissionList: permission,
       child: BlocProvider(
         create: (context) {
-          return TagListBloc(TagListState())..add(TagListInitEvent());
+          return GradeListBloc(GradeListState())..add(GradeListInitEvent());
         },
-        child: BlocConsumer<TagListBloc, TagListState>(
+        child: BlocConsumer<GradeListBloc, GradeListState>(
           listener: (context, state) {
             switch (state.blocStatus) {
-              case TagListStatus.initial:
+              case GradeListStatus.initial:
                 break;
                 // TODO: Handle this case.
-              case TagListStatus.onSelectTag:
+              case GradeListStatus.onSelectTag:
                 {
                 }
                 break;
@@ -76,7 +77,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                     return Layout(
                         isScroll: false,
                         title: Center(
-                          child: Text(L10nX.getStr.tags_list,
+                          child: Text(L10nX.getStr.grade_str,
                             style: TextStyleConstant.textStyleBlack18w600,),),
                         padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
                         child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
@@ -86,7 +87,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                     return Layout(
                       isScroll: false,
                         title: Center(
-                          child: Text(L10nX.getStr.tags_list,
+                          child: Text(L10nX.getStr.grade_str,
                             style: TextStyleConstant.textStyleBlack18w600,),),
                         child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
                     );
@@ -103,7 +104,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
     required MyScreenMediaType myScreenMediaType,
     required BoxConstraints boxConstraints,
     required BuildContext context,
-    required TagListState state
+    required GradeListState state
   }
       ){
     return Container(
@@ -129,16 +130,16 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                   limitPerPage: state.tagListResponseModel!.pageSize??10,
                   totalDataCount: state.tagListResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
-                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onBackToFirstPage: (p0) {
-                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onNextPage: (p0) {
-                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onGoToLastPage: (p0) {
-                    BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   backgroundColor: ColorConst.whiteColor,
                   textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
@@ -158,7 +159,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
     required MyScreenMediaType myScreenMediaType,
     required BoxConstraints boxConstraints,
     required BuildContext context,
-    required TagListState state
+    required GradeListState state
   }){
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
@@ -194,7 +195,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                             
                               },
                               onFieldSubmitted: (value) {
-                                BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
                               },
                               onTapOutside: (event) {
                               },
@@ -235,7 +236,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                     text: L10nX.getStr.search,
                     radius: 16,
                     onTap: () {
-                      BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                      BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                     },
                   ),
                 ),
@@ -243,7 +244,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                   visible: constraints.maxWidth< 800,
                   child: InkWell(
                       onTap: () {
-                        BlocProvider.of<TagListBloc>(context).add(TagListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                        BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                       },
                       child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                 ),
@@ -258,8 +259,8 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                     visible: constraints.maxWidth< 800,
                     child: InkWell(
                         onTap: () {
-                          AddTagPage(tagPageAction: TagPageAction.create,).show(context, callBack: (p0) {
-                            BlocProvider.of<TagListBloc>(context).add(TagListInitEvent());
+                          AddTagPage(tagPageAction: GradePageAction.create,).show(context, callBack: (p0) {
+                            BlocProvider.of<GradeListBloc>(context).add(GradeListInitEvent());
                           },);
                         },
                         child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
@@ -270,8 +271,8 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                       preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
                       text: L10nX.getStr.add_new_str,
                       onTap: () {
-                        AddTagPage(tagPageAction: TagPageAction.create,).show(context, callBack: (p0) {
-                          BlocProvider.of<TagListBloc>(context).add(TagListInitEvent());
+                        AddTagPage(tagPageAction: GradePageAction.create,).show(context, callBack: (p0) {
+                          BlocProvider.of<GradeListBloc>(context).add(GradeListInitEvent());
                         },);
                       },
                     ),
@@ -285,24 +286,24 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
     },);
   }
  
-  Widget buildTagList({required TagListState state, required BuildContext context}){
+  Widget buildTagList({required GradeListState state, required BuildContext context}){
     List<Widget> listOfLesson = List.empty(growable: true);
 
-    for (TagsInfo lessonInfo in state.tagListResponseModel?.content ?? []) {
+    for (GradeInfo lessonInfo in state.tagListResponseModel?.content ?? []) {
       listOfLesson.add(
         InkWell(
           onTap: () {
-            BlocProvider.of<TagListBloc>(context).add(TagListOnSelectTagEvent(selectTagInfo: lessonInfo));
+            BlocProvider.of<GradeListBloc>(context).add(TagListOnSelectTagEvent(selectTagInfo: lessonInfo));
           },
-          child: TagItemView(
+          child: GradeItemView(
             tagInfo: lessonInfo,
             
             onViewDetail: (p0) {
-              AddTagPage(tagPageAction: TagPageAction.view,).show(context);
+              AddTagPage(tagPageAction: GradePageAction.view,).show(context);
             },
             onEdit: (p0) {
-              AddTagPage(tagsInfo: p0,tagPageAction: TagPageAction.edit,).show(context, callBack: (p0) {
-                BlocProvider.of<TagListBloc>(context).add(TagListInitEvent());
+              AddTagPage(info: p0,tagPageAction: GradePageAction.edit,).show(context, callBack: (p0) {
+                BlocProvider.of<GradeListBloc>(context).add(GradeListInitEvent());
               },);
             },
             onDelete: (p0) {
@@ -310,7 +311,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                 title: L10nX.getStr.remove_tags,
                 content: L10nX.getStr.you_want_remove,
                 onAccept: () {
-                  BlocProvider.of<TagListBloc>(context).add(TagListOnDeleteTagEvent(selectTagInfo: p0));
+                  BlocProvider.of<GradeListBloc>(context).add(GradeListOnDeleteTagEvent(selectTagInfo: p0));
                 },
               ).show(context);
             },
@@ -321,15 +322,15 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
     switch (state.blocStatus){
       case null:
         // TODO: Handle this case.
-      case TagListStatus.initial:
+      case GradeListStatus.initial:
         // TODO: Handle this case.
-      case TagListStatus.onLoading:
+      case GradeListStatus.onLoading:
         // TODO: Handle this case.
-      case TagListStatus.onSearchByParams:
+      case GradeListStatus.onSearchByParams:
         // TODO: Handle this case.
         return Center(child: CircularProgressIndicator());
-      case TagListStatus.onSelectTag:
-      case TagListStatus.onLoadEnd:
+      case GradeListStatus.onSelectTag:
+      case GradeListStatus.onLoadEnd:
         // TODO: Handle this case.
         return  (listOfLesson.isEmpty) ?
         Center(child:NoData()) :

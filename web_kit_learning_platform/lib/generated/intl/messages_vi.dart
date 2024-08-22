@@ -108,7 +108,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "cards": MessageLookupByLibrary.simpleMessage("Thẻ"),
         "carousels": MessageLookupByLibrary.simpleMessage("Băng chuyền"),
         "category": MessageLookupByLibrary.simpleMessage("Danh mục"),
+        "category_add_str":
+            MessageLookupByLibrary.simpleMessage("Tạo danh mục"),
+        "category_delete_str":
+            MessageLookupByLibrary.simpleMessage("Xóa danh mục"),
         "category_str": MessageLookupByLibrary.simpleMessage("Danh mục"),
+        "category_update_str":
+            MessageLookupByLibrary.simpleMessage("Sửa danh mục"),
         "category_word": MessageLookupByLibrary.simpleMessage("Từ loại"),
         "change_log": MessageLookupByLibrary.simpleMessage("Nhật ký thay đổi"),
         "change_password_text":
@@ -268,8 +274,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "gender": MessageLookupByLibrary.simpleMessage("Giới tính"),
         "general": MessageLookupByLibrary.simpleMessage("Chung"),
         "google_map": MessageLookupByLibrary.simpleMessage("Bản đồ Google"),
+        "grade_add_str": MessageLookupByLibrary.simpleMessage("Tạo cấp độ"),
+        "grade_delete_str": MessageLookupByLibrary.simpleMessage("Xóa cấp độ"),
         "grade_name_str": MessageLookupByLibrary.simpleMessage("Cấp độ"),
         "grade_str": MessageLookupByLibrary.simpleMessage("Cấp độ"),
+        "grade_update_str": MessageLookupByLibrary.simpleMessage("Sửa cấp độ"),
         "has_not_example":
             MessageLookupByLibrary.simpleMessage("Không có ví dụ nào"),
         "header_popup_biometric": MessageLookupByLibrary.simpleMessage(
@@ -725,11 +734,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đang tải file lên...."),
         "use_fingerprint_text":
             MessageLookupByLibrary.simpleMessage("Sử dụng dấu vân tay"),
+        "user_add_str": MessageLookupByLibrary.simpleMessage("Tạo người dùng"),
         "user_create": MessageLookupByLibrary.simpleMessage("Tạo người dùng"),
+        "user_delete_str":
+            MessageLookupByLibrary.simpleMessage("Xóa người dùng"),
         "user_detail":
             MessageLookupByLibrary.simpleMessage("Thông tin người dùng"),
         "user_name": MessageLookupByLibrary.simpleMessage("Tên đăng nhập"),
         "user_str": MessageLookupByLibrary.simpleMessage("Người dùng"),
+        "user_update_str":
+            MessageLookupByLibrary.simpleMessage("Sửa người dùng"),
         "utilities": MessageLookupByLibrary.simpleMessage("Tiện ích"),
         "validation": MessageLookupByLibrary.simpleMessage("Xác thực"),
         "validation_forms":

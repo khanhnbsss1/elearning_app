@@ -4,9 +4,9 @@ import 'package:webkit/services/apis/category/models/category_info.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 
 
-class DeleteTagApi extends BaseApiRequest {
+class DeleteCategoryApi extends BaseApiRequest {
   CategoryInfo info;
-  DeleteTagApi({required this.info}):super(
+  DeleteCategoryApi({required this.info}):super(
     serviceType: SERVICE_TYPE.CATEGORY,
     apiName: ApiName.getInstance().deleteCategory,
   );

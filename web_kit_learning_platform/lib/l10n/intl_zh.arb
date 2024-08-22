@@ -610,5 +610,14 @@
   "test_result": "测试结果",
   "you_score": "你的分数",
   "you_correct_number": "正确句子的数量",
-  "choose_category_str": "选择类别"
+  "choose_category_str": "选择类别",
+  "category_add_str": "创建类别",
+  "category_update_str": "编辑类别",
+  "category_delete_str": "删除类别",
+  "grade_add_str": "创建关卡",
+  "grade_update_str": "编辑级别",
+  "grade_delete_str": "删除级别",
+  "user_add_str": "创建用户",
+  "user_update_str": "编辑用户",
+  "user_delete_str": "删除用户"
 }

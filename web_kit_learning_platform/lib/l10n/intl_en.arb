@@ -615,5 +615,14 @@
   "test_result": "Test result",
   "you_score": "Your score",
   "you_correct_number": "Number of correct answers",
-  "choose_category_str": "Choose category"
+  "choose_category_str": "Choose category",
+  "category_add_str": "Create Category",
+  "category_update_str": "Edit Category",
+  "category_delete_str": "Delete Category",
+  "grade_add_str": "Create Level",
+  "grade_update_str": "Edit Level",
+  "grade_delete_str": "Delete Level",
+  "user_add_str": "Create User",
+  "user_update_str": "Edit User",
+  "user_delete_str": "Delete User"
 }

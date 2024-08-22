@@ -4,22 +4,24 @@ import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
+import 'package:webkit/services/apis/category/models/category_info.dart';
+import 'package:webkit/services/apis/grade/models/grade_info.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 
-class TagItemView extends StatelessWidget {
-  TagItemView({
+class CategoryItemView extends StatelessWidget {
+  CategoryItemView({
     required this.tagInfo,
     this.onViewDetail,
     this.onEdit,
     this.onDelete,
   });
 
-  Function(TagsInfo)?onViewDetail;
-  Function(TagsInfo)?onEdit;
-  Function(TagsInfo)?onDelete;
+  Function(CategoryInfo)?onViewDetail;
+  Function(CategoryInfo)?onEdit;
+  Function(CategoryInfo)?onDelete;
 
-  TagsInfo tagInfo;
+  CategoryInfo tagInfo;
   late ColorNotifier notifier;
   @override
   Widget build(BuildContext context) {
@@ -99,8 +101,8 @@ class TagItemView extends StatelessWidget {
                         ItemViewEditDelete(
                           itemInfo: tagInfo,
                           enableView: false,
-                          enableEditDelete: UserManager().userContainPermission(permissionList: ["tags.delete.delete_tag"]),
-                          enableEdit: UserManager().userContainPermission(permissionList: ["tags.put.update_tag"]),
+                          enableEditDelete: UserManager().userContainPermission(permissionList: ["categories.delete.delete_categories"]),
+                          enableEdit: UserManager().userContainPermission(permissionList: ["categories.put.update_categories"]),
                           onEdit: (p0) {
                             if(onEdit!=null)
                             {

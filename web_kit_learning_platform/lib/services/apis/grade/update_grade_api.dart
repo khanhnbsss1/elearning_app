@@ -3,10 +3,12 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 
+import 'models/grade_info.dart';
+
 
 class UpdateGradeApi extends BaseApiRequest {
-  TagsInfo tagInfo;
-  UpdateGradeApi({required this.tagInfo}):super(
+  GradeInfo info;
+  UpdateGradeApi({required this.info}):super(
     serviceType: SERVICE_TYPE.GRADE,
     apiName: ApiName.getInstance().updateGrade,
   );
@@ -22,7 +24,7 @@ class UpdateGradeApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    await setApiBody(tagInfo.toJson());
+    await setApiBody(info.toJson());
   }
 
   @override

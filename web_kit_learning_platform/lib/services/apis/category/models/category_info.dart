@@ -13,7 +13,10 @@ class CategoryInfo {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
+    if(id!=null)
+    {
+      data['id'] = id;
+    }
     data['name'] = name;
     return data;
   }

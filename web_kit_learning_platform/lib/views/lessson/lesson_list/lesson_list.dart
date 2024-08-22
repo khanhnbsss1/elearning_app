@@ -323,13 +323,17 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
             isScrollbarAlwaysShown: false,
             gridLinesVisibility: GridLinesVisibility.both,
             headerGridLinesVisibility: GridLinesVisibility.both,
+/*            onQueryRowHeight: (details) {
+              return details.getIntrinsicRowHeight(details.rowIndex);
+            },*/
             headerRowHeight: Dimens.size60,
+            rowHeight: Dimens.size90,
             //defaultColumnWidth: 200,
             showHorizontalScrollbar: true,
             columns: <GridColumn>[
               GridColumn(
                   columnName: 'id',
-                  maximumWidth: Dimens.size100,
+                  maximumWidth: Dimens.size60,
                   label: Container(
                       padding: EdgeInsets.all(16.0),
                       alignment: Alignment.center,

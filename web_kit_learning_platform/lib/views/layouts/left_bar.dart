@@ -205,19 +205,6 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       ),
                     ],
                   ),
-                  //----------------Tag------------------//
-                  NavigationItem(
-                    iconData: Icons.tag,
-                    title: L10nX.getStr.tags,
-                    route: Routes.tagList,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    permission: const ["tags.get.get_tags"],
-                    onPress: () {
-    /*                        setState(() {
-                        ThemeCustomizer().leftBarCondensed= true;
-                      });*/
-                    },
-                  ),
                   //-----------------Danh sach giao vien-----------------//
                   Gap(Dimens.size12),
 
@@ -227,6 +214,9 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                             UserManager().userContainPermission(permissionList: ["users.get.get_user_list"]) || 
                             UserManager().userContainPermission(permissionList: ["landingpages.put.update_ladingpage_course"])|| 
                             UserManager().userContainPermission(permissionList: ["landingpages.put.update_landingpage_review"])||
+                            UserManager().userContainPermission(permissionList: ["tags.get.get_tags"])||
+                            UserManager().userContainPermission(permissionList: ["grades.get.get_grades"])||
+                            UserManager().userContainPermission(permissionList: ["categories.get.get_categories"])||
                             UserManager().userContainPermission(permissionList: ["landingpages.put.update_landingpage_teacher"]) 
                         ),
                     child: Padding(
@@ -257,6 +247,45 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                         permission: const ["users.get.get_user_list"],
                       ),
                     ],
+                  ),
+                  //----------------Tag------------------//
+                  NavigationItem(
+                    iconData: Icons.tag,
+                    title: L10nX.getStr.tags,
+                    route: Routes.tagList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["tags.get.get_tags"],
+                    onPress: () {
+                      /*                        setState(() {
+                        ThemeCustomizer().leftBarCondensed= true;
+                      });*/
+                    },
+                  ),
+                  //----------------Grade------------------//
+                  NavigationItem(
+                    iconData: Icons.grade,
+                    title: L10nX.getStr.grade_str,
+                    route: Routes.gradeList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["grades.get.get_grades"],
+                    onPress: () {
+                      /*                        setState(() {
+                        ThemeCustomizer().leftBarCondensed= true;
+                      });*/
+                    },
+                  ),
+                  //----------------Category------------------//
+                  NavigationItem(
+                    iconData: Icons.category,
+                    title: L10nX.getStr.category_str,
+                    route: Routes.categoryList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["categories.get.get_categories"],
+                    onPress: () {
+                      /*                        setState(() {
+                        ThemeCustomizer().leftBarCondensed= true;
+                      });*/
+                    },
                   ),
                   //----------------Landing Page------------------//
                   MenuWidget(

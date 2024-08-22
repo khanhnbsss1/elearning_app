@@ -615,6 +615,14 @@
   "view_result_str": "Xem kết quả",
   "you_score": "Điểm của bạn",
   "you_correct_number": "Số câu đúng",
-  "choose_category_str": "Chọn danh mục"
-
+  "choose_category_str": "Chọn danh mục",
+  "category_add_str": "Tạo danh mục",
+  "category_update_str": "Sửa danh mục",
+  "category_delete_str": "Xóa danh mục",
+  "grade_add_str": "Tạo cấp độ",
+  "grade_update_str": "Sửa cấp độ",
+  "grade_delete_str": "Xóa cấp độ",
+  "user_add_str": "Tạo người dùng",
+  "user_update_str": "Sửa người dùng",
+  "user_delete_str": "Xóa người dùng"
 }
