@@ -153,15 +153,15 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
   Future<void> _onLinkAndUnlinkWordToLesson()async {
     if((state.listOfWordAdd??[]).isNotEmpty)
       {
-        LinkWordApi linkWordApi = LinkWordApi(lessonId: state.lessonInfo?.id??0, vocabularyInfos: state.listOfWordAdd??[]);
+        LinkWordApi linkWordApi = LinkWordApi(lessonId: state.lessonInfo?.id??0, vocabularyInfos: state.listOfWord??[]);
         dynamic data = await linkWordApi.call();
       }
 
-    if((state.listOfWordRemove??[]).isNotEmpty)
+/*    if((state.listOfWordRemove??[]).isNotEmpty)
     {
       UnLinkWordApi unlinkWordApi = UnLinkWordApi(lessonId: state.lessonInfo?.id??0, vocabularyInfos: state.listOfWordRemove??[]);
       dynamic data = await unlinkWordApi.call();
-    }
+    }*/
   }
 
   Future<void> _onLinkTestToLesson()async {
