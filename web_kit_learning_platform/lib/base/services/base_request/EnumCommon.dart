@@ -78,5 +78,6 @@ const Map<SERVICE_TYPE, String> SERVICE = {
 enum ActionType{
   view,
   edit,
-  create
+  create,
+  delete
 }

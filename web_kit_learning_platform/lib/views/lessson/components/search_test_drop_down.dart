@@ -16,7 +16,10 @@ import 'package:webkit/views/test/test_detail/create_edit_test.dart';
 class SearchTestDropDown extends StatefulWidget {
   final Function(TestInfo) onSelectTest;
   TestInfo  ?testInfo;
-  SearchTestDropDown({super.key, required this.onSelectTest, this.testInfo});
+  bool? enableEdit;
+  SearchTestDropDown({super.key, required this.onSelectTest, this.testInfo, this.enableEdit}){
+    enableEdit??=true;
+  }
 
   @override
   _MyDropdownButtonState createState() => _MyDropdownButtonState();
@@ -75,6 +78,7 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
               child: StatefulBuilder(
                 builder: (BuildContext context, void Function(void Function()) setState) {
                   return SearchableDropdown<TestInfo>(
+                    isEnabled: widget.enableEdit??true,
                     inputDecoration: InputDecoration(
                       constraints: BoxConstraints(maxHeight: Dimens.size45),
                       hintTextDirection: AppTheme.textDirection,

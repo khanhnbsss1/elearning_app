@@ -129,13 +129,13 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
       onEdit: (p0) {
         CreateEditLesson(
           lessonInfo: p0,
-          lessonActionType: LessonActionType.edit,
+          lessonActionType: ActionType.edit,
         ).show(context);
       },
       onViewDetail: (p0) {
         CreateEditLesson(
           lessonInfo: p0,
-          lessonActionType: LessonActionType.view,
+          lessonActionType: ActionType.view,
         ).show(context);
       },
     );
@@ -273,38 +273,6 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
               menuItemStyleData: MenuItemStyleData(
                 padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
               ),
-            ),
-          );
-
-          return SizedBox(
-            width: Dimens.size300,
-            child: SearchableDropdown<String>(
-              isEnabled: true,
-              inputDecoration: InputDecoration(
-                constraints: BoxConstraints(maxHeight: Dimens.size45),
-                hintTextDirection: AppTheme.textDirection,
-                labelStyle: TextStyleConstant.textStyleBlack14w400,
-                hintStyle: TextStyleConstant.textStyleBlack14w400,
-                border: outlineInputBorder,
-                labelText: L10nX.getStr.search_subject_str,
-                prefixIcon: Icon(
-                  Icons.subject,
-                  color: ColorConst.colorIconRed,
-                ),
-              ),
-              remoteItems: (search) async {
-                return await getSubjectList(keyWord: search ?? "", state: state);
-              },
-              itemLabelFormatter: (value) {
-                return value ?? "";
-              },
-              onChanged: (String? value) {
-                if (onSelectSubject != null) {
-                  _subjectDropdownSearchFieldController.text = value ?? "";
-                  onSelectSubject(value ?? "");
-                }
-              },
-              value: _subjectDropdownSearchFieldController.text,
             ),
           );
         },

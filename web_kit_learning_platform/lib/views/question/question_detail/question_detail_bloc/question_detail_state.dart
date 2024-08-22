@@ -13,17 +13,10 @@ enum QuestionDetailStatus {
   onChangeAnswer,
   unKnown
 }
-
-enum LessonActionType{
-  view,
-  create,
-  edit,
-  delete
-}
 @immutable
 class QuestionDetailState extends Equatable {
   QuestionDetailStatus? blocStatus;
-  LessonActionType? lessonActionType;
+  ActionType? lessonActionType;
   QuestionInfo? questionInfo;
   Map<int, String>? listOfGradeNames;
   AnswerType? answerType;
@@ -53,7 +46,7 @@ class QuestionDetailState extends Equatable {
 
   QuestionDetailState copyWith({
     QuestionDetailStatus? blocStatus,
-    LessonActionType? lessonActionType,
+    ActionType? lessonActionType,
     QuestionInfo? questionInfo,
     
     List<QuestionInfo>?listOfWord,

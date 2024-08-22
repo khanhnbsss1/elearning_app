@@ -326,10 +326,11 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
             isScrollbarAlwaysShown: false,
             gridLinesVisibility: GridLinesVisibility.both,
             headerGridLinesVisibility: GridLinesVisibility.both,
-            headerRowHeight: Dimens.size60,
-            onQueryRowHeight: (details) {
+            headerRowHeight: Dimens.size60, 
+            rowHeight: Dimens.size80,
+/*            onQueryRowHeight: (details) {
               return details.getIntrinsicRowHeight(details.rowIndex);
-            },
+            },*/
             //defaultColumnWidth: 200,
             showHorizontalScrollbar: true,
             columns: <GridColumn>[

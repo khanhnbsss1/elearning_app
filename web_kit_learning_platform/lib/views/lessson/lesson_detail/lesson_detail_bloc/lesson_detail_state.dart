@@ -12,16 +12,11 @@ enum LessonDetailStatus {
   unKnown
 }
 
-enum LessonActionType{
-  view,
-  create,
-  edit,
-  delete
-}
+
 @immutable
 class LessonDetailState extends Equatable {
   LessonDetailStatus? blocStatus;
-  LessonActionType? lessonActionType;
+  ActionType? lessonActionType;
   LessonInfo? lessonInfo;
   List<VocabularyInfo>?listOfWord;
   List<VocabularyInfo>?listOfWordAdd;
@@ -60,7 +55,7 @@ class LessonDetailState extends Equatable {
 
   LessonDetailState copyWith({
     LessonDetailStatus? blocStatus,
-    LessonActionType? lessonActionType,
+    ActionType? lessonActionType,
     LessonInfo? lessonInfo,
     List<VocabularyInfo>?listOfWord,
     List<VocabularyInfo>?listOfWordAdd,

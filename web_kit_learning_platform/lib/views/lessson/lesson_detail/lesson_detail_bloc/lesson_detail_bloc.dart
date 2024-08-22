@@ -73,7 +73,9 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
         state.editingControllerLectureVideoLink?.text = state.lessonInfo?.link??"";
         state.editingControllerLectureDocuments?.text = state.lessonInfo?.docName??"";
         CategoryListResponseModel? categoryListResponseModel = await FilterManager().getCategoryFilter();
-        state.valueListenable?.value = (categoryListResponseModel?.content??[]).firstWhere((element) => element.id == state.lessonInfo?.categoryId);
+        if((categoryListResponseModel?.content??[]).where((element) => element.id == state.lessonInfo?.categoryId).isNotEmpty) {
+          state.valueListenable?.value = (categoryListResponseModel?.content??[]).firstWhere((element) => element.id == state.lessonInfo?.categoryId);
+        }
         
       }
     emit(state.copyWith(
@@ -163,7 +165,7 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
   }
 
   Future<void> _onLinkTestToLesson()async {
-    if(state.testInfo!=null)
+    if(state.testInfo!=null && state.testInfo?.id != state.lessonInfo?.testId)
     {
       
       /// Cần phải unlink trước khi link tới 1 test khác

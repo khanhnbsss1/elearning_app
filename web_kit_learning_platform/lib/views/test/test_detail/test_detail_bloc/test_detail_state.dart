@@ -9,17 +9,10 @@ enum TestDetailStatus {
   onUpdateLesson,
   unKnown
 }
-
-enum LessonActionType{
-  view,
-  create,
-  edit,
-  delete
-}
 @immutable
 class TestDetailState extends Equatable {
   TestDetailStatus? blocStatus;
-  LessonActionType? lessonActionType;
+  ActionType? lessonActionType;
   TestInfo? testInfo;
   List<QuestionInfo>?listOfWord;
   List<QuestionInfo>?listOfWordAdd;
@@ -53,7 +46,7 @@ class TestDetailState extends Equatable {
 
   TestDetailState copyWith({
     TestDetailStatus? blocStatus,
-    LessonActionType? lessonActionType,
+    ActionType? lessonActionType,
     TestInfo? testInfo,
     List<QuestionInfo>?listOfWord,
     List<QuestionInfo>?listOfWordAdd,

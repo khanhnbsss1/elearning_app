@@ -14,8 +14,10 @@ class SearchWordDropDown extends StatefulWidget {
   final List<VocabularyInfo>? exitsWords;
   final Function(VocabularyInfo) onAddWords;
   final Function(VocabularyInfo) onRemoveWords;
-
-  SearchWordDropDown({required this.allWords, required this.onAddWords, required this.onRemoveWords, this.exitsWords});
+  bool ? enableEdit;
+  SearchWordDropDown({required this.allWords, required this.onAddWords, required this.onRemoveWords, this.exitsWords, this.enableEdit}){
+    enableEdit??=true;
+  }
 
   @override
   _MyDropdownButtonState createState() => _MyDropdownButtonState();
@@ -72,6 +74,7 @@ class _MyDropdownButtonState extends State<SearchWordDropDown> with SingleTicker
               child: StatefulBuilder(
                 builder: (BuildContext context, void Function(void Function()) setState) {
                  return SearchableDropdown<VocabularyInfo>(
+                   isEnabled: widget.enableEdit??true,
                     inputDecoration: InputDecoration(
                       constraints: BoxConstraints(maxHeight: Dimens.size45),
                       hintTextDirection: AppTheme.textDirection,

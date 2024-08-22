@@ -257,7 +257,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                     visible: constraints.maxWidth< 800,
                     child: InkWell(
                         onTap: () {
-                          CreateEditLesson(lessonActionType: LessonActionType.create,).show(context);
+                          CreateEditLesson(lessonActionType: ActionType.create,).show(context);
               
                         },
                         child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
@@ -268,7 +268,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                       preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
                       text: L10nX.getStr.add_new_str,
                       onTap: () {
-                        CreateEditLesson(lessonActionType: LessonActionType.create,).show(context);
+                        CreateEditLesson(lessonActionType: ActionType.create,).show(context);
               
                       },
                     ),
