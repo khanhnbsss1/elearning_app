@@ -290,7 +290,7 @@ class _CategoryListPageState extends State<CategoryListPage> with SingleTickerPr
   Widget buildTagList({required CategoryListState state, required BuildContext context}){
     List<Widget> listOfLesson = List.empty(growable: true);
 
-    for (CategoryInfo lessonInfo in state.tagListResponseModel?.content ?? []) {
+    for (CategoryInfo lessonInfo in state.contentView ?? []) {
       listOfLesson.add(
         InkWell(
           onTap: () {

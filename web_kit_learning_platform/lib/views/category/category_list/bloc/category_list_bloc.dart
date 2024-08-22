@@ -39,10 +39,16 @@ class CategoryListBloc extends Bloc<CategoryListEvent, CategoryListState> {
       Emitter<CategoryListState> emit,) async {
     emit(state.copyWith(
         blocStatus: CategoryListStatus.onLoading,
-        searchCommonRequest: event.searchCommonRequest
+        searchCommonRequest: event.searchCommonRequest,
     ));
-    await callTagListApi(searchCommonRequest: event.searchCommonRequest);
-  }
+    state.contentView= [...(state.tagListResponseModel?.content??[]).where((element) {
+      String keyWord = (state.searchCommonRequest?.keyword??"").toLowerCase();
+      return (element.name??"").toLowerCase().contains(keyWord);
+    },)];
+    emit(state.copyWith(
+        blocStatus: CategoryListStatus.onLoadEnd,
+        contentView: state.contentView
+    ));  }
   
   Future<void> callTagListApi({required SearchCommonRequest searchCommonRequest}) async {
 
@@ -51,7 +57,8 @@ class CategoryListBloc extends Bloc<CategoryListEvent, CategoryListState> {
         emit(state.copyWith(
             tagListResponseModel: responseModel,
             blocStatus: CategoryListStatus.onLoadEnd,
-          searchCommonRequest: searchCommonRequest
+          searchCommonRequest: searchCommonRequest,
+          contentView: responseModel.content
         ));
         if((responseModel.content??[]).isNotEmpty) {
           add(CategoryListOnSelectTagEvent(selectInfo:(responseModel.content??[]).first));       
