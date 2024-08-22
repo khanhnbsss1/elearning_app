@@ -14,6 +14,7 @@ import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
+import 'package:webkit/services/apis/grade/models/grade_info.dart';
 import 'package:webkit/services/apis/question/get_quiz_list_api.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
 import 'package:webkit/views/question/question_detail/question_detail.dart';
@@ -256,8 +257,17 @@ class QuestionDataSource extends DataGridSource {
         if(!snapshot.hasData) {
           return SizedBox();
         }
-        String? grade = snapshot.data![e.gradeId??1];
-        return Text(grade??"", style: TextStyleConstant.textStyleBlack14w400,);
+        List<GradeInfo>? content = snapshot.data?.content??[];
+        GradeInfo? gradeInfo;
+        if(content.where((element) => element.id == e.gradeId,).isNotEmpty)
+        {
+          gradeInfo = content.firstWhere((element) => element.id == e.gradeId,);
+        }
+        else
+        {
+          gradeInfo = content.first;
+        }
+        return Text(gradeInfo.name??"", style: TextStyleConstant.textStyleBlack14w400,);
       },);
       return  DataGridRow(
           cells: [

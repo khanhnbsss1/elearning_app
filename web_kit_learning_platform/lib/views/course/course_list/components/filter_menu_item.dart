@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/services/apis/course/course_fillter/models/course_filtter_info.dart';
 
 class FilterCoursePopupMenu extends StatefulWidget {
@@ -23,7 +24,7 @@ class _FilterCoursePopupMenuState extends State<FilterCoursePopupMenu> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: InstanceManager().getFilterCourse(),
+      future: FilterManager().getFilterCourse(),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if(!snapshot.hasData) {
           return Icon(Icons.filter_alt_outlined, size: Dimens.size30,color: ColorConst.mainColor,);

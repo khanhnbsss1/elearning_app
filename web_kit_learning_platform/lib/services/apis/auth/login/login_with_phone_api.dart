@@ -1,5 +1,6 @@
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/device/device_manager.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/base/widgets/biomectric/IdentifierConst.dart';
 import 'package:webkit/services/apis/user/get_user_detail_api.dart';
@@ -30,7 +31,7 @@ class LoginWithPhoneApi extends BaseApiRequest {
            GetUserProfileInfoApi getUserProfileInfoApi = GetUserProfileInfoApi();
            try{
              await getUserProfileInfoApi.call();
-             await InstanceManager().getFilterCourse();
+             FilterManager().init();
            }
            catch(e)
            {

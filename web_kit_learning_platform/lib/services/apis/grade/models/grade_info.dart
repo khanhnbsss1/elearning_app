@@ -1,44 +1,44 @@
 import 'package:webkit/base/services/base_request/models/page_model.dart';
 
-class TagsInfo {
+class GradeInfo {
   int? id;
   String? name;
 
-  TagsInfo({this.id, this.name});
+  GradeInfo({this.id, this.name});
 
-  TagsInfo.fromJson(Map<String, dynamic> json) {
+  GradeInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['name'];
+    name = json['grade_name'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['name'] = name;
+    data['grade_name'] = name;
     return data;
   }
 }
 
-class TagListResponseModel extends PageModel{
-  List<TagsInfo>? content;
+class GradeListResponseModel extends PageModel{
+  List<GradeInfo>? content;
 
-  TagListResponseModel({super.total, super.pageSize, super.pageNumber, this.content});
-  TagListResponseModel.fromJson(Map<String, dynamic> json) {
+  GradeListResponseModel({super.total, super.pageSize, super.pageNumber, this.content});
+  GradeListResponseModel.fromJson(Map<String, dynamic> json) {
     total = json['total'];
     pageSize = json['pageSize'];
     pageNumber = json['pageNumber'];
     if (json['content'] != null) {
-      content = <TagsInfo>[];
+      content = <GradeInfo>[];
       json['content'].forEach((v) {
-        content!.add(new TagsInfo.fromJson(v));
+        content!.add(new GradeInfo.fromJson(v));
       });
     }
   }
-  TagListResponseModel.fromList( dynamic json) {
+  GradeListResponseModel.fromList( dynamic json) {
     if (json!= null) {
-      content = <TagsInfo>[];
+      content = <GradeInfo>[];
       json.forEach((v) {
-        content!.add(new TagsInfo.fromJson(v));
+        content!.add(new GradeInfo.fromJson(v));
       });
     }
   }

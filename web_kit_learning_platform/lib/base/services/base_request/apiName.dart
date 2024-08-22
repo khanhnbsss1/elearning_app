@@ -81,8 +81,13 @@ class ApiName {
   ///category
   final String getCategories = "/get-categories";
   final String createCategory = "/create-category";
-  final String updateCategory = "/updateCategory";
+  final String updateCategory = "/update-category";
   final String deleteCategory = "/delete-category";
+  ///category
+  final String getGradeList = "/get-grades";
+  final String createGrade = "/create-grade";
+  final String updateGrade = "/update-grade";
+  final String deleteGrade = "/delete-grade";
   ///test
   final String getTestList = "/get-tests";
   final String createTest = "/create-test";

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/views/video_player/video_player/video_player.dart';
 import 'package:webkit/views/video_player/youtube_player/youtube_layer.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import 'model/video_model.dart';
 
@@ -68,7 +69,12 @@ class VideoPlayerState extends  State<VideoPlayer>{
    );*/
   }
   bool checkVideoFromYoutube(){
-    return widget.videoPlayerModel.link.contains("youtube.com");
+    String? videoId = "";
+    videoId = YoutubePlayerController.convertUrlToId(widget.videoPlayerModel.link);
+    if((videoId??"").isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
   }
-  
 }

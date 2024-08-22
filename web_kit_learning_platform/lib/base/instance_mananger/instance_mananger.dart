@@ -17,7 +17,6 @@ class InstanceManager{
 
   bool firstLogin = true;
   bool? enableDarkMode;
-  CourseFilterListInfo courseFilterListInfo = CourseFilterListInfo(data: []);
   void clearAllInstanceData()
   {
     
@@ -29,14 +28,6 @@ class InstanceManager{
   }
   void handlerChangeCurrentUser(){
     onChangeCurrentUser();
-  }
-  Future<CourseFilterListInfo> getFilterCourse() async {
-    if((courseFilterListInfo.data??[]).isNotEmpty) {
-      return courseFilterListInfo;
-    }
-    GetCourseFilterApi getCourseFilterApi = GetCourseFilterApi();
-    return await getCourseFilterApi.call();
-    
   }
 }
 

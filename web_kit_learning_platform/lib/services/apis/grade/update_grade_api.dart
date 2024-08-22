@@ -4,11 +4,11 @@ import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 
 
-class UpdateTagApi extends BaseApiRequest {
+class UpdateGradeApi extends BaseApiRequest {
   TagsInfo tagInfo;
-  UpdateTagApi({required this.tagInfo}):super(
-    serviceType: SERVICE_TYPE.TAGS,
-    apiName: ApiName.getInstance().updateTag,
+  UpdateGradeApi({required this.tagInfo}):super(
+    serviceType: SERVICE_TYPE.GRADE,
+    apiName: ApiName.getInstance().updateGrade,
   );
 
   Future<dynamic> call() async {

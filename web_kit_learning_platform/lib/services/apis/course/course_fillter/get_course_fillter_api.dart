@@ -1,4 +1,5 @@
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 
 import 'models/course_filtter_info.dart';
@@ -19,10 +20,10 @@ class GetCourseFilterApi extends BaseApiRequest {
     }
     else
     {
-      (InstanceManager().courseFilterListInfo.data??[]).clear();
-      (InstanceManager().courseFilterListInfo.data??[]).add(CourseFilterInfo(filterType: "ALL", id: -1,name: "All",selectSubFilter: null, subFilter: []));
-      (InstanceManager().courseFilterListInfo.data??[]).addAll(CourseFilterListInfo.fromJson(result).data??[]);
-      return InstanceManager().courseFilterListInfo;
+      (FilterManager().courseFilterListInfo.data??[]).clear();
+      (FilterManager().courseFilterListInfo.data??[]).add(CourseFilterInfo(filterType: "ALL", id: -1,name: "All",selectSubFilter: null, subFilter: []));
+      (FilterManager().courseFilterListInfo.data??[]).addAll(CourseFilterListInfo.fromJson(result).data??[]);
+      return FilterManager().courseFilterListInfo;
     }
   }
 

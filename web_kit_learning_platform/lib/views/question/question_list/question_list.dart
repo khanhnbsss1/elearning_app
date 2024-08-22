@@ -14,6 +14,7 @@ import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
+import 'package:webkit/services/apis/grade/models/grade_info.dart';
 import 'package:webkit/services/apis/question/delete_quiz_api.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
 import 'package:webkit/views/question/question_detail/question_work/question_work_item.dart';
@@ -426,12 +427,25 @@ class QuestionDataSource extends DataGridSource {
 
     _lessonData = lessonData.map<DataGridRow>((e) {
       starIndex = (starIndex ??0)+1;
-      Widget gradeWidget = FutureBuilder(future: FilterManager().getGradesInfo(), builder: (context, snapshot) {
+      Widget gradeWidget = FutureBuilder(
+        future: FilterManager().getGradesInfo(), 
+        builder: (context, snapshot) {
         if(!snapshot.hasData) {
           return SizedBox();
         }
-        String? grade = snapshot.data![e.gradeId??1];
-        return Text(grade??"", style: TextStyleConstant.textStyleBlack14w400,);
+        
+        List<GradeInfo>? content = snapshot.data?.content??[];
+        print("gradeid ${e.gradeId}");
+        GradeInfo? gradeInfo;
+        if(content.where((element) => element.id == e.gradeId,).isNotEmpty)
+          {
+            gradeInfo = content.firstWhere((element) => element.id == e.gradeId,);
+          }
+        else
+          {
+            gradeInfo = content.first;
+          }
+        return Text(gradeInfo.name??"", style: TextStyleConstant.textStyleBlack14w400,);
       },);
 
       return  DataGridRow(

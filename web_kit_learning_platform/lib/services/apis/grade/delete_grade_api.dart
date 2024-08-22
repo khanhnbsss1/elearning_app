@@ -2,12 +2,14 @@
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 
+import 'models/grade_info.dart';
 
-class DeleteTagApi extends BaseApiRequest {
-  TagsInfo tagInfo;
-  DeleteTagApi({required this.tagInfo}):super(
-    serviceType: SERVICE_TYPE.TAGS,
-    apiName: ApiName.getInstance().deleteTag,
+
+class DeleteGradeApi extends BaseApiRequest {
+  GradeInfo tagInfo;
+  DeleteGradeApi({required this.tagInfo}):super(
+    serviceType: SERVICE_TYPE.GRADE,
+    apiName: ApiName.getInstance().deleteGrade,
   );
 
   Future<dynamic> call() async {
@@ -17,7 +19,7 @@ class DeleteTagApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    await setParamsAdd({"tagId":tagInfo.id});
+    await setParamsAdd({"gradeId":tagInfo.id});
   }
 
   @override

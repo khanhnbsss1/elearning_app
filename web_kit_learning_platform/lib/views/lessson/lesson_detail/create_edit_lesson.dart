@@ -523,4 +523,87 @@ class _CreateEditLesson extends State<CreateEditLesson>
           
         },);
   }
+  Widget buildGrade({required BuildContext context, required LessonDetailState state}){
+    return FutureBuilder(
+      future: FilterManager().getCategoryFilter(),
+      builder: (context, snapshot) {
+        if(!snapshot.hasData) {
+          return SizedBox();
+        }
+        List<CategoryInfo> data = snapshot.data?.content??[];
+        return SizedBox(
+          width: Dimens.size200,
+          child: WidgetWithColumnTitleCommon(
+            title: "${L10nX.getStr.category_str}: ",
+            isRequirement: true,
+            child: SizedBox(
+              height: Dimens.size40,
+              width: Dimens.size200,
+              child: DropdownButtonFormField2<CategoryInfo>(
+                isExpanded: true,
+                valueListenable: state.valueListenable,
+                decoration: InputDecoration(
+                  // Add Horizontal padding using menuItemStyleData.padding so it matches
+                  // the menu padding when button's width is not specified.
+                  contentPadding:  EdgeInsets.symmetric(vertical: Dimens.size16),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(Dimens.size16),
+                  ),
+
+                  // Add more decoration..
+                ),
+                hint:  Text(
+                  L10nX.getStr.choose_category_str,
+                  style: TextStyleConstant.textStyleBlack13w400,
+                ),
+                items: data.map((item) => DropdownItem<CategoryInfo>(
+                  value: item,
+                  child: Text(
+                    item.name??"",
+                    style: TextStyleConstant.textStyleBlack13w400,
+                  ),
+                )).toList(),
+                validator: (value) {
+                  if (value == null) {
+                    return L10nX.getStr.choose_category_str;
+                  }
+                  return null;
+                },
+                onChanged: (value) {
+                  //Do something when selected item is changed.
+                  state.lessonInfo?.categoryId = value?.id;
+                  state.valueListenable?.value = value;
+                  BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailChangeLessonEvent(lessonInfo: state.lessonInfo!));
+                },
+                onSaved: (value) {
+                },
+                buttonStyleData:  ButtonStyleData(
+                  height: Dimens.size40,
+                  padding: EdgeInsets.only(right: Dimens.size8),
+                ),
+                iconStyleData:  IconStyleData(
+                  icon: Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.black45,
+                  ),
+                  iconSize: Dimens.size24,
+                ),
+                dropdownStyleData: DropdownStyleData(
+                  maxHeight:Dimens.size150,
+                  //width: 150,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimens.size16),
+                    color: ColorConst.whiteColor,
+                  ),
+                ),
+                menuItemStyleData: MenuItemStyleData(
+                  padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
+                ),
+              ),
+            ),
+          ),
+        );
+
+      },);
+  }
 }

@@ -24,6 +24,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
   @override
   void initState() {
     super.initState();
+    
     _controller = YoutubePlayerController(
       params: const YoutubePlayerParams(
         showControls: true,
@@ -40,7 +41,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
         log('${isFullScreen ? 'Entered' : 'Exited'} Fullscreen.');
       },
     );
-    _controller.loadVideo(widget.videoPlayerModel.link);
+    _controller.loadVideo(getVideoLinkFromPrivateVideo());
     _controller.listen((event) {
       switch(event.playerState){
         case PlayerState.unknown:
@@ -61,7 +62,14 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
       }
     },);
   }
-
+  String getVideoLinkFromPrivateVideo(){
+    String videoLink = "https://youtu.be/S2kwI_dIQWc";//widget.videoPlayerModel.link;
+    if(videoLink.contains("youtu.be"))
+      {
+        videoLink = videoLink.replaceAll("youtu.be/", "www.youtube.com/watch?v=");
+      }
+    return videoLink;
+  }
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(

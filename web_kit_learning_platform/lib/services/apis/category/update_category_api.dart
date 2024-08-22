@@ -8,8 +8,8 @@ import 'package:webkit/services/apis/tags/models/tag_info.dart';
 class UpdateTagApi extends BaseApiRequest {
   CategoryInfo info;
   UpdateTagApi({required this.info}):super(
-    serviceType: SERVICE_TYPE.TAGS,
-    apiName: ApiName.getInstance().updateTag,
+    serviceType: SERVICE_TYPE.CATEGORY,
+    apiName: ApiName.getInstance().updateCategory,
   );
 
   Future<dynamic> call() async {

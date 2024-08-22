@@ -4,30 +4,28 @@ import 'package:webkit/base/services/base_request/models/search_common_request.d
 
 import 'models/grade_info.dart';
 
-class GetTagListApi extends BaseApiRequest {
-  SearchCommonRequest searchCommonRequest;
-  GetTagListApi({required this.searchCommonRequest}):super(
-    serviceType: SERVICE_TYPE.TAGS,
-    apiName: ApiName.getInstance().getTagsList,
+class GetGradeListApi extends BaseApiRequest {
+  GetGradeListApi():super(
+    serviceType: SERVICE_TYPE.GRADE,
+    apiName: ApiName.getInstance().getGradeList,
   );
 
-  Future<TagListResponseModel> call() async {
+  Future<GradeListResponseModel> call() async {
     await getAuthorization();
     dynamic result = await getRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {
-      return TagListResponseModel(content: [], total: 0, pageSize: 10, pageNumber: 0);
+      return GradeListResponseModel(content: [], total: 0, pageSize: 10, pageNumber: 0);
     }
     else
     {
-      TagListResponseModel paymentHistoryResponseModel = TagListResponseModel.fromList(result);
+      GradeListResponseModel paymentHistoryResponseModel = GradeListResponseModel.fromList(result);
       return paymentHistoryResponseModel;
     }
   }
 
   Future<void> getAuthorization() async {
-    await setApiBody(searchCommonRequest.toJson());
   }
 
   @override

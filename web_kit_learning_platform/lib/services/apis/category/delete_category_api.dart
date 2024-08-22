@@ -7,8 +7,8 @@ import 'package:webkit/services/apis/tags/models/tag_info.dart';
 class DeleteTagApi extends BaseApiRequest {
   CategoryInfo info;
   DeleteTagApi({required this.info}):super(
-    serviceType: SERVICE_TYPE.TAGS,
-    apiName: ApiName.getInstance().deleteTag,
+    serviceType: SERVICE_TYPE.CATEGORY,
+    apiName: ApiName.getInstance().deleteCategory,
   );
 
   Future<dynamic> call() async {
