@@ -195,6 +195,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                       },
                                     ),
                                   ),
+                                  Gap(Dimens.size12),
                                   FilterManager().buildGrade(
                                       context: context,
                                     inputGradeId: state.vocabularyInfo?.gradeId,

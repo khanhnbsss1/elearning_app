@@ -84,6 +84,7 @@ abstract class Routes {
   static const teacherList = Paths.teacherList;
   static const gradeList = Paths.gradeList;
   static const categoryList = Paths.categoryList;
+  static const userEdit = Paths.userEdit;
 
   static const uiButtonsRoute = Paths.uiButtonsPath;
   static const uiCardsRoute = Paths.uiCardsPath;
@@ -162,7 +163,8 @@ abstract class Paths {
   static const gradeList = '/grade/list';
   static const categoryList = '/category/list';
 
-  
+  static const userEdit = '/user/edit';
+
   static const forgotPasswordPath = '/auth/forgot_password';
   static const forgotPasswordPath1 = '/auth/forgot_password1';
   static const resetPasswordPath = '/auth/reset_password';

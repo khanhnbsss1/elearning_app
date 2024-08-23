@@ -79,6 +79,7 @@ import '../views/extra_pages/pricing.dart';
 import '../views/extra_pages/time_line_page.dart';
 import '../views/ui/landing_page.dart';
 import '../views/ui/nft_dashboard.dart';
+import '../views/users_manager/user_detail/edit_user_profile.dart';
 
 class AuthMiddleware extends GetMiddleware {
   @override
@@ -165,6 +166,17 @@ getPageRoute() {
     GetPage(
         name: Routes.teacherList,
         page: () =>  TeacherList(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]),
+
+    GetPage(
+        name: Routes.userEdit,
+        page: () {
+          final arguments = Get.arguments??{};
+          return EditUserProfile(
+            key: UniqueKey(),
+            userProfile: arguments['userProfile'],
+            actionType: arguments['actionType']);
+        },
         middlewares: [AuthMiddleware()]),
     
     GetPage(
@@ -301,9 +313,10 @@ getPageRoute() {
 
     GetPage(
         name: Routes.contactsEditProfileRoute,
-        page: () =>  EditProfile(key: UniqueKey(),),
+        page: () =>  EditMyProfile(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
+    
     ///---------------- CRM ----------------///
 
     GetPage(

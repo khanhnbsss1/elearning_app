@@ -117,7 +117,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
             buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
             Expanded(child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: buildLessonList(state: state, context: context),
+              child: buildUserList(state: state, context: context),
             )),
             SizedBox(height: 8,),
             Row(
@@ -268,8 +268,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                       preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
                       text: L10nX.getStr.add_new_str,
                       onTap: () {
-                        CreateEditLesson(lessonActionType: ActionType.create,).show(context);
-              
+                       AppPages.routeName(Routes.userEdit,);
                       },
                     ),
                   ),
@@ -281,7 +280,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
       );
     },);
   }
-  Widget buildLessonList({required UserListState state, required BuildContext context}){
+  Widget buildUserList({required UserListState state, required BuildContext context}){
     UserDataSource employeeDataSource = UserDataSource(
       lessonData: state.userListResponseModel?.content??[],
       starIndex: (state.searchCommonRequest?.pageNumber??0)* (state.searchCommonRequest?.pageSize??0),
@@ -290,10 +289,12 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
       },
       onEdit: (p0) {
         //CreateEditLesson(lessonActionType: LessonActionType.edit,lessonInfo: p0,).show(context);
+        AppPages.routeName(Routes.userEdit,arguments: {'userProfile': p0,'actionType': ActionType.edit});
       },
       onViewDetail: (p0) {
        // CreateEditLesson(lessonActionType: LessonActionType.view, lessonInfo: p0,).show(context);
-      },
+       AppPages.routeName(Routes.userEdit,arguments: {'userProfile': p0, 'actionType': ActionType.view});
+    },
     );
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
@@ -308,12 +309,16 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
             gridLinesVisibility: GridLinesVisibility.both,
             headerGridLinesVisibility: GridLinesVisibility.both,
             headerRowHeight: Dimens.size60,
+            rowHeight: Dimens.size80,
+/*            onQueryRowHeight: (details) {
+              return details.getIntrinsicRowHeight(details.rowIndex);
+            },*/
             //defaultColumnWidth: 200,
             showHorizontalScrollbar: true,
             columns: <GridColumn>[
               GridColumn(
                   columnName: 'id',
-                  maximumWidth: Dimens.size100,
+                  maximumWidth: Dimens.size60,
                   label: Container(
                       padding: EdgeInsets.all(16.0),
                       alignment: Alignment.center,
@@ -332,14 +337,14 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                       ))),
               GridColumn(
                   columnName: L10nX.getStr.full_name,
-                  minimumWidth: Dimens.size200,
+                  minimumWidth: Dimens.size250,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
                       child: Text(L10nX.getStr.full_name))),
               GridColumn(
                   columnName: L10nX.getStr.email,
-                  minimumWidth: Dimens.size120,
+                  minimumWidth: Dimens.size300,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
@@ -354,6 +359,8 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
               GridColumn(
                   columnName: L10nX.getStr.gender,
                   minimumWidth: Dimens.size120,
+                  maximumWidth: Dimens.size120,
+
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
@@ -367,7 +374,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                       child: Text(L10nX.getStr.positions))),
               GridColumn(
                   columnName: L10nX.getStr.type,
-                  minimumWidth: Dimens.size180,
+                  maximumWidth: Dimens.size180,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,

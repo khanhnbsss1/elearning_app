@@ -20,17 +20,21 @@ import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/images.dart';
+import 'package:webkit/views/apps/contacts/build_text_field.dart';
 import 'package:webkit/views/layouts/layout.dart';
-import 'build_text_field.dart';
 
-class EditMyProfile extends StatefulWidget {
-   EditMyProfile({super.key,});
+class EditUserProfile extends StatefulWidget {
+  EditUserProfile({super.key, this.userProfile, this.actionType}){
+    actionType??=ActionType.view;
+  }
+  UserProfile ?userProfile;
+  ActionType? actionType;
 
   @override
-  State<EditMyProfile> createState() => _EditMyProfileState();
+  State<EditUserProfile> createState() => _EditUserProfileState();
 }
 
-class _EditMyProfileState extends State<EditMyProfile>
+class _EditUserProfileState extends State<EditUserProfile>
     with SingleTickerProviderStateMixin, UIMixin {
   late EditProfileController controller;
 
@@ -64,6 +68,7 @@ class _EditMyProfileState extends State<EditMyProfile>
         .join(" ");
     String lastName = fullName.split(" ").last;
     return Layout(
+      showBackButton: true,
       child: Column(
         children: [
           Padding(
