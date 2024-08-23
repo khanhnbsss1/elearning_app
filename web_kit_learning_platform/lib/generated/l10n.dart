@@ -6219,6 +6219,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Activate course`
+  String get active_course {
+    return Intl.message(
+      'Activate course',
+      name: 'active_course',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

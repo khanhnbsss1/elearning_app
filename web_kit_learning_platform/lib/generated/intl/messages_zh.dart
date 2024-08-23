@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "action": MessageLookupByLibrary.simpleMessage("操作"),
         "action_str": MessageLookupByLibrary.simpleMessage("操作"),
         "actions": MessageLookupByLibrary.simpleMessage("操作"),
+        "active_course": MessageLookupByLibrary.simpleMessage("激活课程"),
         "add_discount_str": MessageLookupByLibrary.simpleMessage("添加折扣"),
         "add_examples_str": MessageLookupByLibrary.simpleMessage("添加示例"),
         "add_lectures_from_another_course_str":

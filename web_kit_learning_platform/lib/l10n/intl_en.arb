@@ -624,5 +624,6 @@
   "grade_delete_str": "Delete Level",
   "user_add_str": "Create User",
   "user_update_str": "Edit User",
-  "user_delete_str": "Delete User"
+  "user_delete_str": "Delete User",
+  "active_course": "Activate course"
 }

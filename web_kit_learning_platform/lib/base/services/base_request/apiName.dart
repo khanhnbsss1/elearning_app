@@ -58,6 +58,8 @@ class ApiName {
   /// thong tin nguoi dung
   final String createUser = "/create-user";
   final String editUser = "/edit-user";
+  final String deleteUser = "/delete-account";
+
   final String getUserDetail = "/get-user";
   final String getUserList = "/get-user-list";
 

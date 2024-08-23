@@ -1,23 +1,27 @@
 
+import 'package:webkit/base/models/user/UserProfile.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 
 
-class DeleteLessonApi extends BaseApiRequest {
-  LessonInfo lessonInfo;
-  DeleteLessonApi({required this.lessonInfo}):super(
-    serviceType: SERVICE_TYPE.TAGS,
-    apiName: ApiName.getInstance().deleteLesson,
+class DeleteUserApi extends BaseApiRequest {
+  UserProfile info;
+  DeleteUserApi({required this.info}):super(
+    serviceType: SERVICE_TYPE.AUTHEN,
+    apiName: ApiName.getInstance().deleteUser,
   );
 
   Future<dynamic> call() async {
     await getAuthorization();
-    dynamic result = await postRequestAPI();
+    dynamic result = await deleteRequestAPI();
     return result;
   }
 
   Future<void> getAuthorization() async {
-    await setApiBody(lessonInfo.toJson());
+    await setApiBody(info.toJson());
+    await setParamsAdd({
+      "username":info.userName,
+      "type":info.typeName
+    });
   }
 
   @override

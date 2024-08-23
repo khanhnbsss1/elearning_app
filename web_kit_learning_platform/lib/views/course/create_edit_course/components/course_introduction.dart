@@ -245,6 +245,8 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      buildActive(state: state, context: context),
+                      Gap(Dimens.size20),
                       buildStandard(state: state, context: context),
                       Gap(Dimens.size20),
                       Expanded(child: buildAccompanyCourse(state: state, context: context)),
@@ -296,11 +298,14 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
               /*  MySpacing.height(16),
             buildShowCourseInLandingPage(state: state, context: context),*/
               MySpacing.height(16),
+              buildActive(state: state, context: context),
+              MySpacing.height(16),
               WidgetWithColumnTitleCommon(
                   title: "${L10nX.getStr.standard_str} ",
                   child: buildStandard(state: state, context: context)),
               MySpacing.height(8),
               buildAccompanyCourse(state: state, context: context),
+              MySpacing.height(16),
               MySpacing.height(16),
               buildPaymentWidget(state: state, context: context),
               MySpacing.height(16),
@@ -736,7 +741,47 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         selectItem: (state.courseInfo?.accompanyCourse ?? '0').toInt(),
         controller: state.controller?.basicValidator.getController('accompany_course'));
   }
+  Widget buildActive({required AddCourseState state, required BuildContext context}) {
+    return WidgetWithRowTitleCommon(
+        titleWidget: InkWell(
+          onTap: () {
+            setState(() {
+              if(state.courseInfo?.isActive == 1)
+              {
 
+                state.courseInfo?.isActive =  0;
+              }
+              else
+              {
+                state.courseInfo?.isActive =  1;
+              }
+              BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateControllerEvent(courseInfo:  state.courseInfo, addCourseController: state.controller!));
+            });
+          },
+          child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(1),
+                color: Colors.white,
+                border: Border.all(
+                  color: Colors.black87,
+                ),
+              ),
+              width: 20,
+              height: 20,
+              child: (state.courseInfo?.isActive==1)
+                  ? Icon(
+                Icons.check,
+                size: 15,
+                color: ColorConst.colorIconGrays,
+              )
+                  : null),
+        ),
+        crossAxisAlignment: CrossAxisAlignment.end,
+        child: Text(
+          ' ${L10nX.getStr.active_course}',
+          style: TextStyleConstant.textStyleBlack14w400,
+        ));
+  }
   Widget buildTags({required AddCourseState state, required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
       title: "${L10nX.getStr.tags}",

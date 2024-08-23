@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "action": MessageLookupByLibrary.simpleMessage("Hành động"),
         "action_str": MessageLookupByLibrary.simpleMessage("Hành động"),
         "actions": MessageLookupByLibrary.simpleMessage("Hành động"),
+        "active_course": MessageLookupByLibrary.simpleMessage("Kích hoạt"),
         "add_discount_str":
             MessageLookupByLibrary.simpleMessage("Thêm giảm giá"),
         "add_examples_str": MessageLookupByLibrary.simpleMessage("Thêm ví dụ"),

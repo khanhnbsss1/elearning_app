@@ -48,7 +48,7 @@ class LessonDetailUploadDocumentEvent extends LessonDetailEvent {
 }
 
 class LessonDetailUpdateTestInfoEvent extends LessonDetailEvent {
-  TestInfo testInfo;
+  TestInfo? testInfo;
   LessonDetailUpdateTestInfoEvent({required this.testInfo});
   @override
   List<Object?> get props => [testInfo];

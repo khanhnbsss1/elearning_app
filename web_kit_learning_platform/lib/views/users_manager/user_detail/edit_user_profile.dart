@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/helper/date_time/date_time_helper.dart';
 import 'package:webkit/base/widgets/time_setting/date_time_picker.dart';
@@ -16,14 +15,16 @@ import 'package:webkit/helpers/utils/my_shadow.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_button.dart';
 import 'package:webkit/helpers/widgets/my_card.dart';
-import 'package:webkit/helpers/widgets/my_container.dart';
 import 'package:webkit/helpers/widgets/my_flex.dart';
 import 'package:webkit/helpers/widgets/my_flex_item.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/images.dart';
+import 'package:webkit/services/apis/user/get_user_detail_api.dart';
+import 'package:webkit/services/apis/user/update_password_api.dart';
+import 'package:webkit/services/apis/user/user_manager/add_user_api.dart';
+import 'package:webkit/services/apis/user/user_manager/update_user_api.dart';
 import 'package:webkit/views/apps/contacts/build_text_field.dart';
 import 'package:webkit/views/layouts/layout.dart';
 import 'package:file_picker/file_picker.dart';
@@ -35,6 +36,7 @@ class EditUserProfile extends StatefulWidget {
   EditUserProfile({super.key, this.userProfile, this.actionType, this.editSelfProfile}){
     actionType??=ActionType.view;
     editSelfProfile??= true;
+    userProfile??=UserProfile();
   }
   UserProfile ?userProfile;
   ActionType? actionType;
@@ -52,16 +54,12 @@ class _EditUserProfileState extends State<EditUserProfile>
   void initState() {
     super.initState();
     controller = Get.put(EditProfileController());
+    if(widget.actionType == ActionType.create)
+      {
+        enableEdit = true;
+      }
   }
-
-  final ImagePicker picker = ImagePicker();
-
-  XFile? imageFile;
   bool changePassword = false;
-
-  int? year;
-  int? month;
-  int? day;
   TextEditingController birdthdayController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
   TextEditingController roleController = TextEditingController();
@@ -76,9 +74,12 @@ class _EditUserProfileState extends State<EditUserProfile>
   TextEditingController billInfoController = TextEditingController();
   TextEditingController backNameController = TextEditingController();
 
+  TextEditingController emailController = TextEditingController();
+
 
   bool enableEdit = false;
 
+  
   @override
   Widget build(BuildContext context) {
     return Layout(
@@ -121,7 +122,11 @@ class _EditUserProfileState extends State<EditUserProfile>
                             visible: enableEdit == true,
                             child: MyButton(
                               elevation: 5,
-                              onTap: () {
+                              onTap: () async {
+                                if(widget.actionType== ActionType.create)
+                                  {
+                                    Navigator.of(context).pop();
+                                  }
                                 setState(() {
                                   enableEdit = false;
                                 });
@@ -140,6 +145,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                             visible: enableEdit == false,
                             child: MyButton(
                               onTap: () {
+                                
                                 setState(() {
                                   enableEdit = true;
                                 });
@@ -158,10 +164,48 @@ class _EditUserProfileState extends State<EditUserProfile>
                           Visibility(
                             visible: enableEdit == true,
                             child: MyButton(
-                              onTap: () {
-                                setState(() {
-                                  enableEdit = false;
-                                });
+                              onTap: () async {
+                                widget.userProfile?.birthday = birdthdayController.text;
+                                widget.userProfile?.fullName = fullNameController.text;
+                                // widget.userProfile?.roleId = roleController.text;
+                                widget.userProfile?.gender = genderController.text;
+                                widget.userProfile?.phoneNumber = phoneNumberController.text;
+                                widget.userProfile?.countryName = countryController.text;
+                                widget.userProfile?.bankAccount = billInfoController.text;
+                                widget.userProfile?.bankName = backNameController.text;
+                                dynamic updateUserApi;
+                                if((widget.editSelfProfile??true)||widget.actionType == ActionType.edit)
+                                  {
+                                    updateUserApi = UpdateUserApi(info: widget.userProfile!);
+                                  }
+                                else if(widget.actionType == ActionType.create)
+                                  {
+                                    updateUserApi = AddUserApi(info: widget.userProfile!);
+                                  }
+                                if(updateUserApi!=null)
+                                  {
+                                    MonitorLoading().showLoading("");
+                                    dynamic data = await updateUserApi.call();
+                                    if(data.runtimeType == String && (data as String).isEmpty)
+                                    {
+                                      if(widget.editSelfProfile==true)
+                                      {
+                                        UserManager().deleteUserProfile();
+                                        GetUserProfileInfoApi getUserProfileInfoApi= GetUserProfileInfoApi();
+                                        widget.userProfile = await getUserProfileInfoApi.call();
+                                      }
+                                      setState(() {
+                                        enableEdit = false;
+                                      });
+                                    }
+                                    MonitorLoading().dismiss();
+                                  }
+                                else
+                                  {
+                                    setState(() {
+                                      enableEdit = false;
+                                    });
+                                  }
                               },
                               elevation: 0,
                               padding: MySpacing.xy(20, 16),
@@ -199,6 +243,10 @@ class _EditUserProfileState extends State<EditUserProfile>
                                   return Center(
                                     child: InkWell(
                                         onTap: () async {
+                                          if(!enableEdit)
+                                          {
+                                            return;
+                                          }
                                           FilePickerResult? result = await FilePicker.platform.pickFiles(
                                             type: FileType.custom,
                                             allowedExtensions: ['png', 'jpg'],
@@ -222,7 +270,10 @@ class _EditUserProfileState extends State<EditUserProfile>
                                                 borderRadius: BorderRadius.circular(Dimens.size80)
                                             ),
                                             clipBehavior: Clip.hardEdge,
-                                            child: ImageManager().getImageByUrl(widget.userProfile?.avatar??"" ))
+                                            child: ImageManager().getImageByUrl(
+                                                widget.userProfile?.avatar??"",
+                                              errorBuilder: Icon(  widget.userProfile?.gender== "Male"? Icons.face:Icons.face_2, size: Dimens.size150, color: ColorConst.colorIconRed,)
+                                            ))
                                     ),
                                   );
                                 },
@@ -250,9 +301,9 @@ class _EditUserProfileState extends State<EditUserProfile>
                                     children: [
                                       Expanded(
                                         child: BuildTextField(
-                                            enableEdit: enableEdit,
+                                            enableEdit: (widget.editSelfProfile??true)?false:enableEdit,
                                             fieldTitle: "Role",
-                                            hintText: "Enter your role",
+                                            hintText: (widget.editSelfProfile??true)? "Your role":"Enter role",
                                             controller: roleController,),
                                       ),
                                       MySpacing.width(10),
@@ -264,6 +315,32 @@ class _EditUserProfileState extends State<EditUserProfile>
                                             controller: genderController,
                                         ),
                                       ),
+                                      MySpacing.width(10),
+
+                                      Expanded(
+                                        child: BuildTextField(
+                                          enableEdit: enableEdit,
+                                          suffixIcon: Icon(Icons.calendar_month,),
+                                          onTap: () {
+                                            DateTimePicker.ShowDialogDatePicker(
+                                              context: context,
+                                              widthOfDialog: Dimens.size500,
+
+                                              calendarDatePicker2Type: CalendarDatePicker2Type.single,
+                                              initSingleDate: widget.userProfile?.getBirdDay(),
+                                              onDimissCallBack: (p0, p1) {
+                                                if(p1.isNotEmpty)
+                                                {
+                                                  widget.userProfile?.birthday = DateTimeHelper.dateFormat(date: p1.first, dateType: DateTimeHelper.yyyyMMDD);
+                                                  birdthdayController.text= widget.userProfile?.birthday??"";
+                                                }
+                                              },
+                                            );
+                                          },
+                                          fieldTitle: "Birthday",
+                                          hintText: "Enter your birthday",
+                                          controller: birdthdayController,),
+                                      ),
                                     ],
                                   ),
 
@@ -273,26 +350,9 @@ class _EditUserProfileState extends State<EditUserProfile>
                                       Expanded(
                                         child: BuildTextField(
                                           enableEdit: enableEdit,
-                                          suffixIcon: Icon(Icons.calendar_month,),
-                                          onTap: () {
-                                            DateTimePicker.ShowDialogDatePicker(
-                                              context: context,
-                                              widthOfDialog: Dimens.size500,
-                                              
-                                              calendarDatePicker2Type: CalendarDatePicker2Type.single,
-                                              initSingleDate: widget.userProfile?.getBirdDay(),
-                                              onDimissCallBack: (p0, p1) {
-                                                  if(p1.isNotEmpty)
-                                                    {
-                                                      widget.userProfile?.birthday = DateTimeHelper.dateFormat(date: p1.first, dateType: DateTimeHelper.yyyyMMDD);
-                                                      birdthdayController.text= widget.userProfile?.birthday??"";
-                                                    }
-                                              },
-                                            );
-                                          },
-                                          fieldTitle: "Birthday",
-                                          hintText: "Enter your birthday",
-                                          controller: birdthdayController,),
+                                          fieldTitle: "Email",
+                                          hintText: "Enter your email",
+                                          controller: emailController,),
                                       ),
                                       MySpacing.width(10),
                                       Expanded(
@@ -336,7 +396,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                       CrossAxisAlignment.start,
                                       children: [
                                         BuildTextField(
-                                          enableEdit: false,
+                                          enableEdit: widget.actionType == ActionType.create,
                                           fieldTitle: "Username",
                                           hintText: "",
                                           controller: userNameController,
@@ -372,7 +432,6 @@ class _EditUserProfileState extends State<EditUserProfile>
                                                   fieldTitle: "Old Password",
                                                   hintText:
                                                   "Enter your old password",
-                                                  value: "",
                                                   controller: oldPasswordController,
                                                   obscure: true),
                                               MySpacing.height(20),
@@ -381,7 +440,6 @@ class _EditUserProfileState extends State<EditUserProfile>
                                                   "Change Password",
                                                   hintText:
                                                   "Enter your password",
-                                                  value: "",
                                                   controller: newPassWordController,
                                                   obscure: true),
                                               MySpacing.height(20),
@@ -390,7 +448,6 @@ class _EditUserProfileState extends State<EditUserProfile>
                                                   "Confirm Password",
                                                   hintText:
                                                   "Comfirm your password",
-                                                  value: "",
                                                   controller: newPassWordAgainController,
                                                   obscure: true),
                                               MySpacing.height(20),
@@ -414,10 +471,31 @@ class _EditUserProfileState extends State<EditUserProfile>
                                                   ),
                                                   MySpacing.width(20),
                                                   MyButton(
-                                                    onTap: () {
-                                                      setState(() {
-
-                                                      });
+                                                    onTap: () async {
+                                                      if(newPassWordAgainController.text.isEmpty || newPassWordController.text.isEmpty || oldPasswordController.text.isEmpty)
+                                                      {
+                                                        ToastUtils.showToastError("Mật khẩu không được để trống");
+                                                        return;
+                                                      }
+                                                      if(newPassWordAgainController.text != newPassWordController.text)
+                                                        {
+                                                          ToastUtils.showToastError("Mật khẩu mới và xác nhập mật khẩu mới không trùng nhau");
+                                                          return;
+                                                        }
+                                                      MonitorLoading().showLoading("");
+                                                      UpdateUpdatePasswordApi updateUpdatePasswordApi = UpdateUpdatePasswordApi(
+                                                        userName: widget.userProfile?.userName??"",
+                                                        oldpassword: oldPasswordController.text,
+                                                        newpassword: newPassWordController.text
+                                                      );
+                                                      dynamic data = await updateUpdatePasswordApi.call();
+                                                      MonitorLoading().dismiss();
+                                                      if(data.runtimeType == String && (data as String).isEmpty)
+                                                        {
+                                                          setState(() {
+                                                            changePassword = !changePassword;
+                                                          },);
+                                                        }
                                                     },
                                                     elevation: 0,
                                                     padding: MySpacing.xy(20, 16),
@@ -505,7 +583,6 @@ class _EditUserProfileState extends State<EditUserProfile>
       bool? enableEdit,
       required String fieldTitle,
       required String hintText,
-      required String value,
       TextEditingController? controller,
       }) {
     enableEdit??= true;
@@ -521,8 +598,7 @@ class _EditUserProfileState extends State<EditUserProfile>
             MySpacing.height(8),
             TextFormField(
               obscureText: obscure! && !onShowPassword!,
-              initialValue: value,
-              controller: controller,
+              controller: controller??TextEditingController(),
               decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: MyTextStyle.bodySmall(xMuted: true),
@@ -628,7 +704,6 @@ class _EditUserProfileState extends State<EditUserProfile>
       {
         widget.userProfile = UserManager().getUserProfile();
       }
-
       fullNameController.text = widget.userProfile?.fullName??"";
       birdthdayController.text = widget.userProfile?.birthday??"";
      //roleController.text = widget.userProfile?.roleId.toString()??"";
@@ -638,6 +713,8 @@ class _EditUserProfileState extends State<EditUserProfile>
      userNameController.text = widget.userProfile?.userName??"";
      billInfoController.text = widget.userProfile?.bankAccount??"";
      backNameController.text = widget.userProfile?.bankName??"";
+      emailController.text = widget.userProfile?.email??"";
+
     return widget.userProfile;
   }
 }

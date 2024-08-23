@@ -624,5 +624,6 @@
   "grade_delete_str": "Xóa cấp độ",
   "user_add_str": "Tạo người dùng",
   "user_update_str": "Sửa người dùng",
-  "user_delete_str": "Xóa người dùng"
+  "user_delete_str": "Xóa người dùng",
+  "active_course": "Kích hoạt"
 }

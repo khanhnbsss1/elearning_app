@@ -34,6 +34,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "action": MessageLookupByLibrary.simpleMessage("Action"),
         "action_str": MessageLookupByLibrary.simpleMessage("Action"),
         "actions": MessageLookupByLibrary.simpleMessage("Actions"),
+        "active_course":
+            MessageLookupByLibrary.simpleMessage("Activate course"),
         "add_discount_str":
             MessageLookupByLibrary.simpleMessage("Add discount"),
         "add_examples_str":

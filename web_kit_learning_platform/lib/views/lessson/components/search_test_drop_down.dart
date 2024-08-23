@@ -15,9 +15,11 @@ import 'package:webkit/views/test/test_detail/create_edit_test.dart';
 
 class SearchTestDropDown extends StatefulWidget {
   final Function(TestInfo) onSelectTest;
+  final Function()? onDeleteTest;
+
   TestInfo  ?testInfo;
   bool? enableEdit;
-  SearchTestDropDown({super.key, required this.onSelectTest, this.testInfo, this.enableEdit}){
+  SearchTestDropDown({super.key, required this.onSelectTest, this.testInfo, this.enableEdit, this.onDeleteTest}){
     enableEdit??=true;
   }
 
@@ -62,13 +64,17 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
                 },)),
               ]),
           SizedBox(height: 20,),
-          Chip(
-            key: UniqueKey(),
-            deleteIconColor: color,
-            label: Text(_wordDropdownSearchFieldController.text),
-            deleteIcon: SizedBox(),
-            onDeleted: () {
-            },
+          Visibility(
+            visible: _wordDropdownSearchFieldController.text.isNotEmpty,
+            child: Chip(
+              key: UniqueKey(),
+              deleteIconColor: color,
+              label: Text(_wordDropdownSearchFieldController.text),
+              //deleteIcon: SizedBox(),
+              onDeleted: () {
+                widget.onDeleteTest;
+              },
+            ),
           ),
         ]
     );

@@ -1,14 +1,13 @@
 
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 
 
-class UpdateLessonApi extends BaseApiRequest {
-  LessonInfo lessonInfo;
-  UpdateLessonApi({required this.lessonInfo}):super(
-    serviceType: SERVICE_TYPE.LESSON,
-    apiName: ApiName.getInstance().updateLesson,
+class UpdateUserApi extends BaseApiRequest {
+  UserProfile info;
+  UpdateUserApi({required this.info}):super(
+    serviceType: SERVICE_TYPE.USER,
+    apiName: ApiName.getInstance().editUser,
   );
 
   Future<dynamic> call() async {
@@ -22,7 +21,7 @@ class UpdateLessonApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    await setApiBody(lessonInfo.toJson());
+    await setApiBody(info.toJson());
   }
 
   @override

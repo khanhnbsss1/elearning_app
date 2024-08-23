@@ -63,7 +63,7 @@ class UserProfile {
 
   UserProfile.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    fullName = json['fullName'];
+    fullName = json['fullName']??json['fullname'];
     userName = json['user_name'];
     bankAccount = json['bank_account'];
     bankName = json['bank_name'];

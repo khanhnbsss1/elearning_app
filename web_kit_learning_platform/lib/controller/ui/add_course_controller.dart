@@ -276,7 +276,7 @@ class AddCourseController extends MyController {
       videoPreview: basicValidator.getController('video_preview')?.text,
       infoObj: infoObject.join("&&&"),
       infoResult: resultObject.join("&&&"),
-      isActive: int.tryParse(basicValidator.getController('is_active')?.text ?? '1'),
+     // isActive: int.tryParse(basicValidator.getController('is_active')?.text ?? '1'),
       accompanyCourse: (basicValidator.getController('accompany_course')?.text??"").isNotEmpty? basicValidator.getController('accompany_course')?.text:'',
       createdBy: userProfile?.userName,
       updatedBy: userProfile?.userName,
