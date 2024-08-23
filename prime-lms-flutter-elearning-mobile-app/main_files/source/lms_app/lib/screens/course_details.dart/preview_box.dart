@@ -36,9 +36,13 @@ class PreviewBox extends StatelessWidget {
               enabled: heroTag != null,
               child: Hero(
                 tag: heroTag ?? '',
-                child: hasVideoPreview
+                child: hasVideoPreview && course.image != ""
                     ? CustomCacheImageWithDarkFilterFull(imageUrl: course.image!, radius: 5)
-                    : CustomCacheImage(imageUrl: course.image, radius: 5),
+                    // : course.image == ""
+                    : Container(
+                  color: Colors.black,
+                )
+                    // : CustomCacheImage(imageUrl: course.image, radius: 5),
               ),
             ),
           ),

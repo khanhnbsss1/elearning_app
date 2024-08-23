@@ -34,12 +34,12 @@ class LoginController extends MyController {
         required: true,
         label: "Email",
         validators: [MyEmailValidator()],
-        controller: TextEditingController(text: (kDebugMode) ? "0348074377" : emailOrPhone));
+        controller: TextEditingController(text: (kDebugMode) ? "0912617759" : emailOrPhone));
     basicValidator.addField('password',
         required: true,
         label: "Password",
         validators: [MyLengthValidator(min: 6, max: 10)],
-        controller: TextEditingController(text: (kDebugMode) ? "Ll@123456" : password));
+        controller: TextEditingController(text: (kDebugMode) ? "123456" : password));
   }
   void onChangeShowPassword() {
     showPassword = !showPassword;
@@ -55,10 +55,9 @@ class LoginController extends MyController {
     LoginRequest loginRequest = LoginRequest(
       username: basicValidator.getController('email')?.text,
       password: basicValidator.getController('password')?.text,);
-      update();
       LoginWithPhoneApi loginWithPhoneApi = LoginWithPhoneApi(loginRequest: loginRequest);
       bool result = await loginWithPhoneApi.call();
-     if(result != true) {
+     if(result == true) {
        await UserManager().saveAccountLoginNearest(IdentifierConst.username);
        update();
        return true;

@@ -8,6 +8,7 @@ class GetUserProfileInfoApi extends BaseApiRequest {
   GetUserProfileInfoApi():super(
     serviceType: SERVICE_TYPE.USER,
     apiName: ApiName.getInstance().getUserDetail,
+    // isCheckToken: false,
   );
 
   Future<dynamic> call() async {

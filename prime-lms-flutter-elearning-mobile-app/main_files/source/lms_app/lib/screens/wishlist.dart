@@ -13,7 +13,7 @@ import '../models/course.dart';
 import '../providers/user_data_provider.dart';
 import '../services/firebase_service.dart';
 
-final wishlistProvider = FutureProvider<List<Course>>((ref) async {
+final wishlistProvider = FutureProvider.autoDispose<List<Course>>((ref) async {
   final List<Course> courses = [];
   final user = ref.watch(userDataProvider)!;
   final courseIds = user.wishList ?? [];

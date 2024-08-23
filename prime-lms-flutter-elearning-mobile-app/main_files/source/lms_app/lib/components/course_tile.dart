@@ -17,7 +17,8 @@ class CourseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final heroTag = UniqueKey();
     return InkWell(
-      onTap: () => NextScreen.iOS(context, CourseDetailsView(courses: course, heroTag: heroTag)),
+      onTap: () => NextScreen.iOS(
+          context, CourseDetailsView(courses: course, heroTag: heroTag)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -27,8 +28,13 @@ class CourseTile extends StatelessWidget {
               Container(
                 height: 90,
                 width: 100,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(3)),
-                child: Hero(tag: heroTag, child: CustomCacheImage(imageUrl: course.image, radius: 3)),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(3)),
+                child: Hero(
+                    tag: heroTag,
+                    child: (course.image != null && course.image != "")
+                        ? CustomCacheImage(imageUrl: course.image, radius: 3)
+                        : Image.asset("assets/images/noImage.png", fit: BoxFit.cover)),
               ),
               // PremiumTag(course: course),
             ],
@@ -43,7 +49,10 @@ class CourseTile extends StatelessWidget {
                     course.name!,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(fontWeight: FontWeight.w600),
                   ),
                   const SizedBox(height: 5),
                   Text(
@@ -51,9 +60,14 @@ class CourseTile extends StatelessWidget {
                     style: const TextStyle(color: Colors.blueAccent),
                   ),
                   const SizedBox(height: 5),
-                  Text('count-students', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blueGrey)).tr(args: [course.totalLectures.toString()]),
+                  Text('count-students',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(color: Colors.blueGrey))
+                      .tr(args: [course.totalLectures.toString()]),
                   const SizedBox(height: 5),
-                  RatingViewer(rating: (course.ratePoint??0).toDouble()),
+                  RatingViewer(rating: (course.ratePoint ?? 0).toDouble()),
                 ],
               ),
             ),

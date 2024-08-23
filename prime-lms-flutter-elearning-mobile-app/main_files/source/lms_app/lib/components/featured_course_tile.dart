@@ -40,10 +40,13 @@ class FeaturedCourseTile extends StatelessWidget {
                 children: [
                   Container(
                     height: 150,
-                    decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(topLeft: Radius.circular(3), topRight: Radius.circular(3)),
-                        image: DecorationImage(image: CachedNetworkImageProvider(course.image??""), fit: BoxFit.cover)),
                     width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(3), topRight: Radius.circular(3)),
+                        image: (course.image != null && course.image != "")
+                            ? DecorationImage(image: CachedNetworkImageProvider(course.image!), fit: BoxFit.cover)
+                            : const DecorationImage(image: AssetImage("assets/images/noImage.png"), fit: BoxFit.cover),
+                      ),
                   ),
                   Align(
                     alignment: Alignment.topRight,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:lms_app/mixins/user_mixin.dart';
+import 'package:lms_app/screens/intro.dart';
 import '../../../configs/features_config.dart';
 import '../../../providers/app_settings_provider.dart';
 import '../../../providers/user_data_provider.dart';
@@ -101,7 +102,9 @@ class AppSettings extends ConsumerWidget with UserMixin {
                 title: const Text('logout').tr(),
                 leading: const Icon(FeatherIcons.logOut),
                 trailing: const Icon(FeatherIcons.chevronRight),
-                onTap: () => openLogoutDialog(context, () => handleLogout(context, ref: ref)),
+                onTap: () => openLogoutDialog(context, () {
+                  handleLogout(context, ref: ref);
+                }),
               ),
             ],
           ),

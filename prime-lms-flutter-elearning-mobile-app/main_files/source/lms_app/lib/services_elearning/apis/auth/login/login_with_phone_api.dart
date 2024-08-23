@@ -1,6 +1,8 @@
 import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/base_request_elearning/models/search_common_request.dart';
 import 'package:lms_app/base/device_elearning/device_manager.dart';
 import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+import 'package:lms_app/models_elearning/user/UserProfile.dart';
 // import 'package:lms_app/base/widgets/biomectric/IdentifierConst.dart';
 import 'package:lms_app/services_elearning/apis/user/get_user_detail_api.dart';
 import '../../../../base/author/author_manager.dart';
@@ -17,7 +19,7 @@ class LoginWithPhoneApi extends BaseApiRequest {
       apiName: ApiName.getInstance().loginByPhone,
       isCheckToken: false,
       isShowErrorPopup: false,
-    isShowToastError: false
+      isShowToastError: false
   );
   Future<dynamic> call() async {
     await getAuthorization();
@@ -29,29 +31,29 @@ class LoginWithPhoneApi extends BaseApiRequest {
            AuthInfo loginResponse = AuthInfo.fromJson(data.data);
            await AuthorManager().handleLogout();
            await AuthorManager().saveAuthInfo(loginResponse);
-           IdentifierConst.username = loginRequest.username??"";
            GetUserProfileInfoApi getUserProfileInfoApi = GetUserProfileInfoApi();
            try{
-             await getUserProfileInfoApi.call();
-             // await InstanceManager().getFilterCourse();
+             UserProfile? userProfile = await getUserProfileInfoApi.call();
+             if (userProfile == null) {
+               return false;
+             } else {
+               return true;
+             }
            }
            catch(e)
            {
              await AuthorManager().handleLogout();
              return false;
            }
-           return true;
          }
        else
          {
-           // ToastUtils.showToastError(data.message??"");
            return false;
          }
 
      }
    else
      {
-       // ToastUtils.showToastError(L10nX.getStr.notify_error);
        return false;
      }
   }

@@ -36,7 +36,6 @@ class AuthorManager {
   // Future<void> setCustomizer(ThemeCustomizer themeCustomizer) {
   //   return SharedPreferencesStorage().saveString(_themeCustomizerKey, themeCustomizer.toJSON());
   // }
-
   Future<void> removeLoggedInUser() async {
     return SharedPreferencesStorage().removeByKey(_loggedInUserKey);
   }
@@ -44,7 +43,6 @@ class AuthorManager {
     await setLoggedInUser(false);
     await SharedPreferencesStorage().removeAllDynamicData();
     await SharedPreferencesStorage().removeAllDynamicKeys();
-
   }
 
 
@@ -89,6 +87,7 @@ class AuthorManager {
     bool isInvalidToken = nowInTimestamp> authInfo.expireAt!;
     return isInvalidToken;
   }
+
   Future<void> handleLogout() async {
     await removeAuthInfo();
     AuthorManager().deleteDataWhenLogout();

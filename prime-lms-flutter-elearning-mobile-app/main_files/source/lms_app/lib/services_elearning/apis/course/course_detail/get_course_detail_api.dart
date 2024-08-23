@@ -22,7 +22,7 @@ class CourseDetailApi extends BaseApiRequest {
 
     if(result.runtimeType == ResponseCommon)
     {
-      return null;
+      return CourseInfo.initial();
     }
     else
     {

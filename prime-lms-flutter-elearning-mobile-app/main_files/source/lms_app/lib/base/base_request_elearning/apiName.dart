@@ -24,7 +24,7 @@ class ApiName {
   final String editUserRole = "/edit-user-role";
   final String editRole = "/edit-role";
   final String deleteRole = "/delete-role";
-  
+
   final String LOGOUT = "/logout";
   
   ///course 
@@ -87,5 +87,7 @@ class ApiName {
   final String getQuizList = "/get-questions";
   final String updateQuiz = "/update-question";
 
+  ///categories
+  final String getCategories = "/get-categories";
 }
 

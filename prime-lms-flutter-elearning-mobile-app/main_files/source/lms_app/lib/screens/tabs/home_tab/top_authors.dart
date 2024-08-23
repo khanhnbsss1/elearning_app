@@ -10,7 +10,7 @@ import 'package:lms_app/utils/next_screen.dart';
 
 import '../../../models_elearning/user/UserProfile.dart';
 
-final topAuthorsProvider = FutureProvider<List<UserProfile>>((ref) async {
+final topAuthorsProvider = FutureProvider.autoDispose<List<UserProfile>>((ref) async {
   final List<UserProfile> authors = await FirebaseService().getTopAuthors(limit: 5);
   return authors;
 });

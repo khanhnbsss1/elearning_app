@@ -26,7 +26,7 @@ class UserInfo extends StatelessWidget with UserMixin {
       children: [
         ListTile(
           contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          onTap: () => NextScreen.openBottomSheet(context, EditProfile(user: user), maxHeight: 0.80),
+          onTap: () => NextScreen.normal(context, EditProfile(user: user)),
           title: Text(
             user.fullName??"-",
             style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, fontSize: 20),

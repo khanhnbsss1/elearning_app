@@ -12,7 +12,7 @@ import '../../../services_elearning/apis/course/course_detail/models/course_deta
 import 'my_course_tile.dart';
 import '../../../providers/user_data_provider.dart';
 
-// final myCoursesProvider = FutureProvider<List<Course>>((ref) async {
+// final myCoursesProvider = FutureProvider.autoDispose<List<Course>>((ref) async {
 //   final List<Course> courses = [];
 //   final user = ref.watch(userDataProvider);
 //   final courseIds = user?.enrolledCourses ?? [];
@@ -25,7 +25,7 @@ import '../../../providers/user_data_provider.dart';
 //   return courses;
 // }
 // );
-final myCoursesProvider = FutureProvider<List<CourseInfo>?>((ref) async {
+final myCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>?>((ref) async {
   final List<CourseInfo>? courses = await FirebaseService().getMyCourses();
   return courses;
 });
@@ -42,12 +42,15 @@ class MyCoursesTab extends ConsumerWidget with CourseMixin {
         title: const Text('my-courses').tr(),
         backgroundColor: Theme.of(context).primaryColor,
         foregroundColor: Colors.white,
-        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600, fontSize: 20, color: Colors.white),
+        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.w600, fontSize: 20, color: Colors.white),
       ),
       body: RefreshIndicator.adaptive(
         onRefresh: () async => await ref.refresh(myCoursesProvider),
-        child: user == null // || user.enrolledCourses == null || user.enrolledCourses!.isEmpty
-            ? const EmptyAnimation(animationString: emptyAnimation, title: 'No courses found')
+        child: user ==
+                null // || user.enrolledCourses == null || user.enrolledCourses!.isEmpty
+            ? const EmptyAnimation(
+                animationString: emptyAnimation, title: 'No courses found')
             : courses.when(
                 skipLoadingOnRefresh: false,
                 loading: () => const LoadingListTile(height: 200),
@@ -55,15 +58,21 @@ class MyCoursesTab extends ConsumerWidget with CourseMixin {
                   child: Text(error.toString()),
                 ),
                 data: (data) {
-                  return ListView.separated(
-                    padding: const EdgeInsets.only(left: 20, right: 20, bottom: 50, top: 25),
-                    itemCount: data!.length,
-                    separatorBuilder: (context, index) => const Divider(height: 50),
-                    itemBuilder: (context, index) {
-                      final CourseInfo course = data[index];
-                      return MyCourseTile(course: course, user: user);
-                    },
-                  );
+                  return (data!.isNotEmpty)
+                      ? ListView.separated(
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, bottom: 50, top: 25),
+                          itemCount: data.length,
+                          separatorBuilder: (context, index) =>
+                              const Divider(height: 50),
+                          itemBuilder: (context, index) {
+                            final CourseInfo course = data[index];
+                            return MyCourseTile(course: course, user: user);
+                          },
+                        )
+                      : const EmptyAnimation(
+                          animationString: emptyAnimation,
+                          title: 'No courses found');
                 },
               ),
       ),
