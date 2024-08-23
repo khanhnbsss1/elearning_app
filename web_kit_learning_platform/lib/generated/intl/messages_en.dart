@@ -155,6 +155,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "content_str": MessageLookupByLibrary.simpleMessage("Content"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "FFTSolution - Copyright 2022"),
+        "coure_top_review": MessageLookupByLibrary.simpleMessage(
+            "The course with the highest number of reviews"),
         "course_category_str":
             MessageLookupByLibrary.simpleMessage("Course category"),
         "course_create": MessageLookupByLibrary.simpleMessage("Create course"),
@@ -455,6 +457,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "products": MessageLookupByLibrary.simpleMessage("Products"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "purchase_now": MessageLookupByLibrary.simpleMessage("Purchase now"),
+        "purchased_payment_str":
+            MessageLookupByLibrary.simpleMessage("Purchased"),
         "pyramid_chart": MessageLookupByLibrary.simpleMessage("Pyramid chart"),
         "qty": MessageLookupByLibrary.simpleMessage("Qty"),
         "question_create":
@@ -493,6 +497,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Reset password"),
         "result": MessageLookupByLibrary.simpleMessage("Result"),
         "revenue": MessageLookupByLibrary.simpleMessage("Revenue"),
+        "review_str": MessageLookupByLibrary.simpleMessage("Review"),
         "right": MessageLookupByLibrary.simpleMessage("Right"),
         "right_answer": MessageLookupByLibrary.simpleMessage("Correct answer"),
         "right_dialog": MessageLookupByLibrary.simpleMessage("Right dialog"),
@@ -657,6 +662,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "subtitle_is_more_useful":
             MessageLookupByLibrary.simpleMessage("Subtitle is more useful"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
+        "sum_str": MessageLookupByLibrary.simpleMessage("Total"),
         "support_feedback":
             MessageLookupByLibrary.simpleMessage("Feedback to us"),
         "support_help": MessageLookupByLibrary.simpleMessage("Suggestions"),

@@ -627,5 +627,9 @@
   "user_delete_str": "Delete User",
   "active_course": "Activate course",
   "you_not_register_course": "You have not registered for any course",
-  "register_course_or_contact_to_you_teacher": "Contact your teacher or register now"
+  "register_course_or_contact_to_you_teacher": "Contact your teacher or register now",
+  "purchased_payment_str": "Purchased",
+  "review_str": "Review",
+  "sum_str": "Total",
+  "coure_top_review": "The course with the highest number of reviews"
 }

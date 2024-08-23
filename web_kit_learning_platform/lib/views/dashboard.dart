@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/controller/dashboard_controller.dart';
 import 'package:webkit/helpers/theme/app_style.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
@@ -24,6 +27,9 @@ import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/images.dart';
+import 'package:webkit/services/apis/darh_board/dashboard_manager.dart';
+import 'package:webkit/services/apis/darh_board/models/synthesisInfo.dart';
+import 'package:webkit/services/apis/darh_board/models/top_courses_info.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -135,7 +141,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                                                   text: TextSpan(
                                                     text: L10nX.getStr.register_course_or_contact_to_you_teacher,
                                                     style: MyTextStyle.bodyMedium(fontSize: 16),
-                 /*                                   children:  <TextSpan>[
+                                                    /*                                   children:  <TextSpan>[
                                                       TextSpan(text: 'Free trial,', style: baseStyle.copyWith(fontWeight: FontWeight.bold)),
                                                       TextSpan(text: "to 'Premium plan'"),
                                                     ],*/
@@ -175,43 +181,78 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                             ),
                           ),
                           MyFlexItem(
-                            sizes: "lg-5",
-                            child: MyFlex(
-                              runAlignment: WrapAlignment.start,
-                              wrapCrossAlignment: WrapCrossAlignment.start,
-                              contentPadding: false,
-                              children: [
-                                MyFlexItem(
-                                  sizes: "lg-6",
-                                  child: buildCard(contentTheme.pink, LucideIcons.clock4, "Reached", "\$152", LucideIcons.trendingUp,
-                                      contentTheme.success, "1.25", "Last Month"),
-                                ),
-                                MyFlexItem(
-                                  sizes: "lg-6",
-                                  child: buildCard(
-                                    contentTheme.primary,
-                                    LucideIcons.network,
-                                    "Engaged",
-                                    "\$50",
-                                    LucideIcons.trendingDown,
-                                    contentTheme.red,
-                                    "2.5",
-                                    "Last Week",
-                                  ),
-                                ),
-                                MyFlexItem(
-                                  sizes: "lg-6",
-                                  child: buildCard(contentTheme.success, LucideIcons.areaChart, "Rich", "\$304", LucideIcons.trendingDown,
-                                      contentTheme.red, "1.23", "Last Month"),
-                                ),
-                                MyFlexItem(
-                                  sizes: "lg-6",
-                                  child: buildCard(contentTheme.warning, LucideIcons.shoppingCart, "Engagement", "\$189", LucideIcons.trendingUp,
-                                      contentTheme.success, "0.2", "Last Day"),
-                                ),
-                              ],
-                            ),
-                          ),
+                              sizes: "lg-5",
+                              child: FutureBuilder(
+                                future: DashboardManager().getSynthesisInfoResponseModel(),
+                                builder: (context, snapshot) {
+                                  SynthesisSummaryInfo? synthesisSummaryInfo;
+                                  if (snapshot.hasData) {
+                                    synthesisSummaryInfo = snapshot.data;
+                                  }
+                                  return MyFlex(
+                                    runAlignment: WrapAlignment.start,
+                                    wrapCrossAlignment: WrapCrossAlignment.start,
+                                    contentPadding: false,
+                                    children: [
+                                      MyFlexItem(
+                                        sizes: "lg-4",
+                                        child: buildCard(
+                                          color: contentTheme.pink,
+                                          icons: LucideIcons.user,
+                                          accountType: "${L10nX.getStr.sum_str} ${L10nX.getStr.user_str.toLowerCase()}",
+                                          price: (synthesisSummaryInfo?.totalUser ?? 0).toString(),
+                                          // month: ""
+                                        ),
+                                      ),
+                                      MyFlexItem(
+                                        sizes: "lg-4",
+                                        child: buildCard(
+                                          color: contentTheme.primary,
+                                          icons: FontAwesomeIcons.chalkboardTeacher,
+                                          accountType: "${L10nX.getStr.sum_str} ${L10nX.getStr.author_str.toLowerCase()}",
+                                          price: (synthesisSummaryInfo?.totalAuthor ?? 0).toString(),
+                                        ),
+                                      ),
+                                      MyFlexItem(
+                                        sizes: "lg-4",
+                                        child: buildCard(
+                                          color: contentTheme.success,
+                                          icons: Icons.app_registration,
+                                          accountType: "${L10nX.getStr.sum_str} ${L10nX.getStr.register.toLowerCase()}",
+                                          price: (synthesisSummaryInfo?.totalEnroll ?? 0).toString(),
+                                        ),
+                                      ),
+                                      MyFlexItem(
+                                        sizes: "lg-4",
+                                        child: buildCard(
+                                          color: contentTheme.primary,
+                                          icons: Icons.payment,
+                                          accountType: L10nX.getStr.purchased_payment_str,
+                                          price: (synthesisSummaryInfo?.totalPurchase ?? 0).toString(),
+                                        ),
+                                      ),
+                                      MyFlexItem(
+                                        sizes: "lg-4",
+                                        child: buildCard(
+                                          color: contentTheme.pink,
+                                          icons: Icons.my_library_books,
+                                          accountType: "${L10nX.getStr.sum_str} ${L10nX.getStr.course_str.toLowerCase()}",
+                                          price: (synthesisSummaryInfo?.totalCourse ?? 0).toString(),
+                                        ),
+                                      ),
+                                      MyFlexItem(
+                                        sizes: "lg-4",
+                                        child: buildCard(
+                                          color: Colors.amber,
+                                          icons: Icons.reviews,
+                                          accountType: "${L10nX.getStr.sum_str} ${L10nX.getStr.review_str.toLowerCase()}",
+                                          price: (synthesisSummaryInfo?.totalReview ?? 0).toString(),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              )),
                           MyFlexItem(
                             sizes: "lg-4",
                             child: MyCard(
@@ -328,8 +369,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                                         majorGridLines: const MajorGridLines(width: 0),
                                         labelStyle: const TextStyle(fontSize: 0),
                                       ),
-                                      primaryYAxis: NumericAxis(
-                                          isVisible: false, labelStyle: const TextStyle(fontSize: 0), majorGridLines: const MajorGridLines(width: 0)),
+                                      primaryYAxis: NumericAxis(isVisible: false, labelStyle: const TextStyle(fontSize: 0), majorGridLines: const MajorGridLines(width: 0)),
                                       series: <CartesianSeries<ChartSampleData, int>>[
                                         ColumnSeries<ChartSampleData, int>(
                                           width: 0.5,
@@ -359,146 +399,155 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                         contentPadding: false,
                         children: [
                           MyFlexItem(
-                            sizes: "lg-8 xl-8",
-                            child: MyCard(
-                              shadow: MyShadow(elevation: 0.5),
-                              paddingAll: 0,
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: MySpacing.all(16),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              sizes: "lg-8 xl-8",
+                              child: FutureBuilder(
+                                future: DashboardManager().getTopCourseResponseModel(),
+                                builder: (context, snapshot) {
+                                  TopCoursesInfoResponseModel? topCoursesInfoResponseModel;
+
+                                  if (snapshot.hasData) {
+                                    topCoursesInfoResponseModel = snapshot.data;
+                                  }
+                                  return MyCard(
+                                    shadow: MyShadow(elevation: 0.5),
+                                    paddingAll: 0,
+                                    child: Column(
                                       children: [
-                                        Expanded(
-                                          child: MyText.titleMedium(
-                                            "Response time by location",
-                                            overflow: TextOverflow.ellipsis,
-                                            fontWeight: 600,
-                                          ),
-                                        ),
-                                        PopupMenuButton(
-                                          onSelected: controller.onSelectedTimeByLocation,
-                                          itemBuilder: (BuildContext context) {
-                                            return ["Year", "Month", "Week", "Day", "Hours"].map((behavior) {
-                                              return PopupMenuItem(
-                                                value: behavior,
-                                                height: 32,
-                                                child: MyText.bodySmall(
-                                                  behavior.toString(),
-                                                  color: theme.colorScheme.onSurface,
+                                        Padding(
+                                          padding: MySpacing.all(16),
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                child: MyText.titleMedium(
+                                                  L10nX.getStr.coure_top_review,
+                                                  overflow: TextOverflow.ellipsis,
                                                   fontWeight: 600,
                                                 ),
-                                              );
-                                            }).toList();
-                                          },
-                                          color: theme.cardTheme.color,
-                                          child: MyContainer.bordered(
-                                            padding: MySpacing.xy(12, 8),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              children: <Widget>[
-                                                MyText.labelMedium(
-                                                  controller.selectedTimeByLocation.toString(),
-                                                  color: theme.colorScheme.onSurface,
+                                              ),
+                                              PopupMenuButton(
+                                                onSelected: controller.onSelectedTimeByLocation,
+                                                itemBuilder: (BuildContext context) {
+                                                  return ["Year", "Month", "Week", "Day", "Hours"].map((behavior) {
+                                                    return PopupMenuItem(
+                                                      value: behavior,
+                                                      height: 32,
+                                                      child: MyText.bodySmall(
+                                                        behavior.toString(),
+                                                        color: theme.colorScheme.onSurface,
+                                                        fontWeight: 600,
+                                                      ),
+                                                    );
+                                                  }).toList();
+                                                },
+                                                color: theme.cardTheme.color,
+                                                child: MyContainer.bordered(
+                                                  padding: MySpacing.xy(12, 8),
+                                                  child: Row(
+                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    children: <Widget>[
+                                                      MyText.labelMedium(
+                                                        controller.selectedTimeByLocation.toString(),
+                                                        color: theme.colorScheme.onSurface,
+                                                      ),
+                                                      Icon(
+                                                        LucideIcons.chevronDown,
+                                                        size: 22,
+                                                        color: theme.colorScheme.onSurface,
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
-                                                Icon(
-                                                  LucideIcons.chevronDown,
-                                                  size: 22,
-                                                  color: theme.colorScheme.onSurface,
-                                                )
-                                              ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const Divider(),
+                                        MySpacing.height(12),
+                                        MyFlex(
+                                          children: [
+                                            MyFlexItem(
+                                              sizes: "lg-3",
+                                              child: buildResponseTimeByLocationData(
+                                                "Current Week",
+                                                "\$1859.52",
+                                                LucideIcons.cornerRightUp,
+                                                contentTheme.success,
+                                              ),
                                             ),
+                                            MyFlexItem(
+                                              sizes: "lg-3",
+                                              child: buildResponseTimeByLocationData(
+                                                "Previous Week",
+                                                "\$1568",
+                                                LucideIcons.cornerRightDown,
+                                                contentTheme.red,
+                                              ),
+                                            ),
+                                            MyFlexItem(
+                                              sizes: "lg-3",
+                                              child: buildResponseTimeByLocationData(
+                                                "Conversation",
+                                                "5.68%",
+                                                LucideIcons.cornerRightUp,
+                                                contentTheme.success,
+                                              ),
+                                            ),
+                                            MyFlexItem(
+                                              sizes: "lg-3",
+                                              child: buildResponseTimeByLocationData(
+                                                "Customers",
+                                                "80K",
+                                                LucideIcons.cornerRightDown,
+                                                contentTheme.red,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        MySpacing.height(12),
+                                        const Divider(),
+                                        Padding(
+                                          padding: MySpacing.all(16),
+                                          child: SfCartesianChart(
+                                            primaryXAxis: CategoryAxis(),
+                                            tooltipBehavior: controller.chart,
+                                            axes: <ChartAxis>[
+                                              NumericAxis(
+                                                  numberFormat: NumberFormat.compact(),
+                                                  majorGridLines: const MajorGridLines(width: 0),
+                                                  opposedPosition: true,
+                                                  name: 'yAxis1',
+                                                  interval: 1000,
+                                                  minimum: 0,
+                                                  maximum: 7000)
+                                            ],
+                                            series: <CartesianSeries<ChartSampleData, String>>[
+                                              ColumnSeries<ChartSampleData, String>(
+                                                  animationDuration: 2000,
+                                                  width: 0.5,
+                                                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(4), topRight: Radius.circular(4)),
+                                                  color: contentTheme.primary,
+                                                  dataSource: controller.chartData,
+                                                  xValueMapper: (ChartSampleData data, _) => data.x,
+                                                  yValueMapper: (ChartSampleData data, _) => data.y,
+                                                  name: 'Unit Sold'),
+                                              LineSeries<ChartSampleData, String>(
+                                                  animationDuration: 4500,
+                                                  animationDelay: 2000,
+                                                  dataSource: controller.chartData,
+                                                  xValueMapper: (ChartSampleData data, _) => data.x,
+                                                  yValueMapper: (ChartSampleData data, _) => data.yValue,
+                                                  yAxisName: 'yAxis1',
+                                                  markerSettings: const MarkerSettings(isVisible: true),
+                                                  name: 'Total Transaction')
+                                            ],
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  const Divider(),
-                                  MySpacing.height(12),
-                                  MyFlex(
-                                    children: [
-                                      MyFlexItem(
-                                        sizes: "lg-3",
-                                        child: buildResponseTimeByLocationData(
-                                          "Current Week",
-                                          "\$1859.52",
-                                          LucideIcons.cornerRightUp,
-                                          contentTheme.success,
-                                        ),
-                                      ),
-                                      MyFlexItem(
-                                        sizes: "lg-3",
-                                        child: buildResponseTimeByLocationData(
-                                          "Previous Week",
-                                          "\$1568",
-                                          LucideIcons.cornerRightDown,
-                                          contentTheme.red,
-                                        ),
-                                      ),
-                                      MyFlexItem(
-                                        sizes: "lg-3",
-                                        child: buildResponseTimeByLocationData(
-                                          "Conversation",
-                                          "5.68%",
-                                          LucideIcons.cornerRightUp,
-                                          contentTheme.success,
-                                        ),
-                                      ),
-                                      MyFlexItem(
-                                        sizes: "lg-3",
-                                        child: buildResponseTimeByLocationData(
-                                          "Customers",
-                                          "80K",
-                                          LucideIcons.cornerRightDown,
-                                          contentTheme.red,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  MySpacing.height(12),
-                                  const Divider(),
-                                  Padding(
-                                    padding: MySpacing.all(16),
-                                    child: SfCartesianChart(
-                                      primaryXAxis: CategoryAxis(),
-                                      tooltipBehavior: controller.chart,
-                                      axes: <ChartAxis>[
-                                        NumericAxis(
-                                            numberFormat: NumberFormat.compact(),
-                                            majorGridLines: const MajorGridLines(width: 0),
-                                            opposedPosition: true,
-                                            name: 'yAxis1',
-                                            interval: 1000,
-                                            minimum: 0,
-                                            maximum: 7000)
-                                      ],
-                                      series: <CartesianSeries<ChartSampleData, String>>[
-                                        ColumnSeries<ChartSampleData, String>(
-                                            animationDuration: 2000,
-                                            width: 0.5,
-                                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(4), topRight: Radius.circular(4)),
-                                            color: contentTheme.primary,
-                                            dataSource: controller.chartData,
-                                            xValueMapper: (ChartSampleData data, _) => data.x,
-                                            yValueMapper: (ChartSampleData data, _) => data.y,
-                                            name: 'Unit Sold'),
-                                        LineSeries<ChartSampleData, String>(
-                                            animationDuration: 4500,
-                                            animationDelay: 2000,
-                                            dataSource: controller.chartData,
-                                            xValueMapper: (ChartSampleData data, _) => data.x,
-                                            yValueMapper: (ChartSampleData data, _) => data.yValue,
-                                            yAxisName: 'yAxis1',
-                                            markerSettings: const MarkerSettings(isVisible: true),
-                                            name: 'Total Transaction')
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                                  );
+                                },
+                              )),
                           MyFlexItem(
                               sizes: "lg-4",
                               child: MyCard(
@@ -566,140 +615,143 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                         children: [
                           MyFlexItem(
                             sizes: "lg-6",
-                            child: MyCard(
-                              shadow: MyShadow(elevation: 0.5),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      MyText.titleMedium(
-                                        "High Value Design",
-                                        fontWeight: 600,
-                                      ),
-                                      Row(
-                                        children: [
-                                          PopupMenuButton(
-                                            onSelected: controller.onSelectedTimeDesign,
-                                            itemBuilder: (BuildContext context) {
-                                              return [
-                                                "Year",
-                                                "Month",
-                                                "Week",
-                                                "Day",
-                                                "Hours",
-                                              ].map((behavior) {
-                                                return PopupMenuItem(
-                                                  value: behavior,
-                                                  height: 32,
-                                                  child: MyText.bodySmall(
-                                                    behavior.toString(),
-                                                    color: theme.colorScheme.onSurface,
-                                                    fontWeight: 600,
+                            child: FutureBuilder(
+                                future: DashboardManager().getTopCourseResponseModel(),
+                                builder: (context, snapshot) {
+                                  TopCoursesInfoResponseModel? topCoursesInfoResponseModel;
+                                  if (snapshot.hasData) {
+                                    topCoursesInfoResponseModel = snapshot.data;
+                                  }
+                                  return MyCard(
+                                    shadow: MyShadow(elevation: 0.5),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            MyText.titleMedium(
+                                              L10nX.getStr.coure_top_review,
+                                              fontWeight: 600,
+                                            ),
+                                            Row(
+                                              children: [
+                                                PopupMenuButton(
+                                                  onSelected: controller.onSelectedTimeDesign,
+                                                  itemBuilder: (BuildContext context) {
+                                                    return [
+                                                      "Year",
+                                                      "Month",
+                                                      "Week",
+                                                      "Day",
+                                                      "Hours",
+                                                    ].map((behavior) {
+                                                      return PopupMenuItem(
+                                                        value: behavior,
+                                                        height: 32,
+                                                        child: MyText.bodySmall(
+                                                          behavior.toString(),
+                                                          color: theme.colorScheme.onSurface,
+                                                          fontWeight: 600,
+                                                        ),
+                                                      );
+                                                    }).toList();
+                                                  },
+                                                  color: theme.cardTheme.color,
+                                                  child: MyContainer.bordered(
+                                                    padding: MySpacing.xy(12, 8),
+                                                    child: Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      children: <Widget>[
+                                                        MyText.labelMedium(
+                                                          controller.selectedTimeDesign.toString(),
+                                                          color: theme.colorScheme.onSurface,
+                                                        ),
+                                                        Icon(
+                                                          LucideIcons.chevronDown,
+                                                          size: 22,
+                                                          color: theme.colorScheme.onSurface,
+                                                        )
+                                                      ],
+                                                    ),
                                                   ),
-                                                );
-                                              }).toList();
-                                            },
-                                            color: theme.cardTheme.color,
-                                            child: MyContainer.bordered(
-                                              padding: MySpacing.xy(12, 8),
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: <Widget>[
-                                                  MyText.labelMedium(
-                                                    controller.selectedTimeDesign.toString(),
-                                                    color: theme.colorScheme.onSurface,
-                                                  ),
-                                                  Icon(
-                                                    LucideIcons.chevronDown,
-                                                    size: 22,
-                                                    color: theme.colorScheme.onSurface,
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  MySpacing.height(16),
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: MyContainer.bordered(
-                                      paddingAll: 0,
-                                      child: DataTable(
-                                          sortAscending: true,
-                                          onSelectAll: (_) => {},
-                                          headingRowColor: WidgetStatePropertyAll(contentTheme.primary.withAlpha(40)),
-                                          dataRowMaxHeight: 50,
-                                          columns: [
-                                            DataColumn(
-                                              label: MyText.labelLarge(
-                                                'Value',
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: MyText.labelLarge(
-                                                'Sum',
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: MyText.labelLarge(
-                                                'Metric',
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: MyText.labelLarge(
-                                                'Tag',
-                                              ),
-                                            ),
+                                                ),
+                                              ],
+                                            )
                                           ],
-                                          rows: controller.dashboard
-                                              .mapIndexed(
-                                                (index, data) => DataRow(
-                                                  cells: [
-                                                    DataCell(
-                                                      MyText.bodyMedium("${data.value}"),
-                                                    ),
-                                                    DataCell(
-                                                      MyText.bodyMedium("${data.sum}"),
-                                                    ),
-                                                    DataCell(
-                                                      Row(
-                                                        children: [
-                                                          MyContainer(
-                                                            paddingAll: 0,
-                                                            borderRadiusAll: 22,
-                                                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                                                            child: Image.asset(
-                                                              controller.dashboard[index].image,
-                                                              height: 32,
-                                                              fit: BoxFit.cover,
+                                        ),
+                                        MySpacing.height(16),
+                                        StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+                                          return LayoutBuilder(builder: (context, constraints) {
+                                            return SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: MyContainer.bordered(
+                                                paddingAll: 0,
+                                                width: constraints.maxWidth,
+                                                child: DataTable(
+                                                    sortAscending: true,
+                                                    columnSpacing: 0,
+                                                    onSelectAll: (_) => {},
+                                                    headingRowColor: WidgetStatePropertyAll(contentTheme.primary.withAlpha(40)),
+                                                    dataRowMaxHeight: 50,
+                                                    columns: [
+                                                      DataColumn(
+                                                        label: SizedBox(
+                                                          width: Dimens.size80,
+                                                          child: MyText.labelLarge(
+                                                            L10nX.getStr.review_str,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      DataColumn(
+                                                        label: MyText.labelLarge(
+                                                          L10nX.getStr.course_str,
+                                                        ),
+                                                      ),
+                                                      DataColumn(
+                                                        label: MyText.labelLarge(
+                                                          L10nX.getStr.type,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                    rows: (topCoursesInfoResponseModel?.data??[])
+                                                        .mapIndexed(
+                                                          (index, data) => DataRow(
+                                                        cells: [
+                                                          DataCell(
+                                                            SizedBox(
+                                                              width: Dimens.size80,
+                                                              child: MyText.bodyMedium("${data.ratePoint}"),
                                                             ),
                                                           ),
-                                                          MySpacing.width(16),
-                                                          Expanded(
-                                                            child: MyText.bodyMedium(
-                                                              data.metric,
-                                                              overflow: TextOverflow.ellipsis,
+                                                          DataCell(
+                                                            SizedBox(
+                                                              width: constraints.maxWidth  - Dimens.size100 *2,
+                                                              child: Row(
+                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                children: [
+                                                                  Expanded(child: MyText.bodyMedium("${data.name}", textAlign: TextAlign.start,)),
+                                                                ],
+                                                              ),
                                                             ),
+                                                          ),
+                                                          DataCell(
+                                                            SizedBox(
+                                                                width: Dimens.size80,
+                                                                child: MyText.bodyMedium("${data.mode}")),
                                                           ),
                                                         ],
                                                       ),
-                                                    ),
-                                                    DataCell(
-                                                      MyText.bodyMedium(data.tag),
-                                                    ),
-                                                  ],
-                                                ),
-                                              )
-                                              .toList()),
+                                                    )
+                                                        .toList()),
+                                              ),
+                                            );
+                                          },);
+                                        },
+                                        )
+                                      ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                                  );
+                                }),
                           ),
                           MyFlexItem(
                             sizes: "lg-6",
@@ -838,39 +890,57 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
     );
   }
 
-  Widget buildCard(
-    Color color,
-    IconData icons,
-    String accountType,
-    String price,
-    IconData trendingIcon,
-    Color trendingIconColor,
-    String percentage,
-    String month,
-  ) {
+  Widget buildCard({
+    Color? color,
+    IconData? icons,
+    String? accountType,
+    String? price,
+    IconData? trendingIcon,
+    Color? trendingIconColor,
+    String? percentage,
+    String? month,
+  }) {
     return MyCard(
       shadow: MyShadow(elevation: 0.5),
       height: 140,
-      child: Row(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          MyText.bodyLarge(
+            accountType ?? "",
+            fontSize: 15,
+            fontWeight: 600,
+          ),
+          Gap(Dimens.size16),
           Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                MyText.bodyLarge(
-                  accountType,
-                  fontSize: 15,
-                  fontWeight: 600,
-                ),
-                MyText.bodyLarge(
-                  price,
-                  fontWeight: 600,
-                  fontSize: 20,
-                ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    MyText.bodyLarge(
+                      price ?? "",
+                      fontWeight: 600,
+                      fontSize: 20,
+                    ),
+                  ],
+                ),
+                Gap(Dimens.size30),
+                MyContainer(
+                  height: 70,
+                  width: 70,
+                  paddingAll: 0,
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  color: color?.withAlpha(30),
+                  child: Icon(
+                    icons,
+                    color: color,
+                  ),
+                ),
+                /*Row(
                   children: [
                     Icon(
                       trendingIcon,
@@ -879,30 +949,19 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                     ),
                     MySpacing.width(8),
                     MyText.bodyMedium(
-                      "$percentage%",
+                      "$percentage",
                     ),
                     MySpacing.width(8),
                     Expanded(
                       child: MyText.bodyMedium(
-                        month,
+                        month??"",
                         overflow: TextOverflow.ellipsis,
                         muted: true,
                       ),
                     ),
                   ],
-                ),
+                ),*/
               ],
-            ),
-          ),
-          MyContainer(
-            height: 70,
-            width: 70,
-            paddingAll: 0,
-            clipBehavior: Clip.antiAliasWithSaveLayer,
-            color: color.withAlpha(30),
-            child: Icon(
-              icons,
-              color: color,
             ),
           ),
         ],

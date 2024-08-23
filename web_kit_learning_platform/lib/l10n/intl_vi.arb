@@ -627,5 +627,10 @@
   "user_delete_str": "Xóa người dùng",
   "active_course": "Kích hoạt",
   "you_not_register_course": "Bạn chưa đăng ký khóa học nào",
-  "register_course_or_contact_to_you_teacher": "Liên hệ với giáo viên của bạn hoặc đăng ký ngay"
+  "register_course_or_contact_to_you_teacher": "Liên hệ với giáo viên của bạn hoặc đăng ký ngay",
+  "purchased_payment_str": "Doanh thu khóa học",
+  "review_str": "Đánh giá",
+  "sum_str": "Tổng",
+  "coure_top_review": "Khóa học có lượt review cao nhất "
+  
 }

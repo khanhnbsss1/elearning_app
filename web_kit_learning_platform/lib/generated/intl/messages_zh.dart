@@ -133,6 +133,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "content_str": MessageLookupByLibrary.simpleMessage("内容"),
         "copy_right":
             MessageLookupByLibrary.simpleMessage("FFTSolution - 版权所有 2022"),
+        "coure_top_review": MessageLookupByLibrary.simpleMessage("评论数量最多的课程"),
         "course_category_str": MessageLookupByLibrary.simpleMessage("课程类别"),
         "course_create": MessageLookupByLibrary.simpleMessage("创建课程"),
         "course_delete": MessageLookupByLibrary.simpleMessage("删除课程"),
@@ -379,6 +380,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "products": MessageLookupByLibrary.simpleMessage("产品"),
         "profile": MessageLookupByLibrary.simpleMessage("个人资料"),
         "purchase_now": MessageLookupByLibrary.simpleMessage("立即购买"),
+        "purchased_payment_str": MessageLookupByLibrary.simpleMessage("已购买"),
         "pyramid_chart": MessageLookupByLibrary.simpleMessage("金字塔图表"),
         "qty": MessageLookupByLibrary.simpleMessage("数量"),
         "question_create": MessageLookupByLibrary.simpleMessage("创建问题"),
@@ -411,6 +413,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reset_password": MessageLookupByLibrary.simpleMessage("重置密码"),
         "result": MessageLookupByLibrary.simpleMessage("结果"),
         "revenue": MessageLookupByLibrary.simpleMessage("收入"),
+        "review_str": MessageLookupByLibrary.simpleMessage("评论"),
         "right": MessageLookupByLibrary.simpleMessage("右侧"),
         "right_answer": MessageLookupByLibrary.simpleMessage("正确答案"),
         "right_dialog": MessageLookupByLibrary.simpleMessage("右侧对话框"),
@@ -547,6 +550,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "subtitle_is_more_useful":
             MessageLookupByLibrary.simpleMessage("副标题更有用"),
         "success": MessageLookupByLibrary.simpleMessage("成功"),
+        "sum_str": MessageLookupByLibrary.simpleMessage("总和"),
         "support_feedback": MessageLookupByLibrary.simpleMessage("反馈给我们"),
         "support_help": MessageLookupByLibrary.simpleMessage("建议"),
         "support_pay": MessageLookupByLibrary.simpleMessage("服务支持"),

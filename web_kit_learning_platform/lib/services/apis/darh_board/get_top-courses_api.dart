@@ -7,10 +7,13 @@ import 'models/synthesis_students_info.dart';
 import 'models/top_courses_info.dart';
 
 class GetTopCourseApi extends BaseApiRequest {
-  GetTopCourseApi():super(
+  int? limit;
+  GetTopCourseApi({this.limit}):super(
     serviceType: SERVICE_TYPE.DashBoard,
-    apiName: ApiName.getInstance().getSubscriptionPurchases,
-  );
+    apiName: ApiName.getInstance().getTopCourses,
+  ){
+    limit??=10;
+  }
 
   Future<TopCoursesInfoResponseModel> call() async {
     await getAuthorization();
@@ -22,12 +25,16 @@ class GetTopCourseApi extends BaseApiRequest {
     }
     else
     {
-      TopCoursesInfoResponseModel responseModel = TopCoursesInfoResponseModel.fromJson(result);
+      TopCoursesInfoResponseModel responseModel = TopCoursesInfoResponseModel.fromJsonList(result);
       return responseModel;
     }
   }
 
   Future<void> getAuthorization() async {
+    await setParamsAdd({
+      "limit":limit,
+      "type":"DESC"
+    });
   }
 
   @override

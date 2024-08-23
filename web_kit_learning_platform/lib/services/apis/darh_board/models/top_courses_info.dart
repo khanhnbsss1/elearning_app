@@ -11,7 +11,14 @@ class TopCoursesInfoResponseModel {
       });
     }
   }
-
+  TopCoursesInfoResponseModel.fromJsonList(dynamic json) {
+    if (json != null) {
+      data = <TopCoursesInfo>[];
+      json.forEach((v) {
+        data!.add(new TopCoursesInfo.fromJson(v));
+      });
+    }
+  }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {

@@ -16,7 +16,7 @@ class DeleteWordApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    await setParamsAdd({"id":info.id});
+    await setParamsAdd({"vocabularyId":info.id});
   }
 
   @override

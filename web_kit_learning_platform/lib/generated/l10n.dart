@@ -6249,6 +6249,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Purchased`
+  String get purchased_payment_str {
+    return Intl.message(
+      'Purchased',
+      name: 'purchased_payment_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Review`
+  String get review_str {
+    return Intl.message(
+      'Review',
+      name: 'review_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total`
+  String get sum_str {
+    return Intl.message(
+      'Total',
+      name: 'sum_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The course with the highest number of reviews`
+  String get coure_top_review {
+    return Intl.message(
+      'The course with the highest number of reviews',
+      name: 'coure_top_review',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -242,7 +242,7 @@ class AppStyle {
 
   static void initMyStyle() {
     MyTextStyle.resetFontStyles();
-    MyTextStyle.changeFontFamily(GoogleFonts.poppins);
+    MyTextStyle.changeFontFamily(GoogleFonts.inter);
     My.changeTheme(AppTheme.theme);
     My.setConstant(MyConstantData(
       containerRadius: AppStyle.containerRadius.medium,

@@ -148,6 +148,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "content_str": MessageLookupByLibrary.simpleMessage("Nội dung"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "FFTSolution - Bản quyền 2022"),
+        "coure_top_review": MessageLookupByLibrary.simpleMessage(
+            "Khóa học có lượt review cao nhất "),
         "course_category_str":
             MessageLookupByLibrary.simpleMessage("Danh mục khóa học"),
         "course_create": MessageLookupByLibrary.simpleMessage("Tạo khóa học"),
@@ -449,6 +451,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "product_name": MessageLookupByLibrary.simpleMessage("Tên sản phẩm"),
         "products": MessageLookupByLibrary.simpleMessage("Sản phẩm"),
         "purchase_now": MessageLookupByLibrary.simpleMessage("Mua ngay"),
+        "purchased_payment_str":
+            MessageLookupByLibrary.simpleMessage("Doanh thu khóa học"),
         "pyramid_chart":
             MessageLookupByLibrary.simpleMessage("Biểu đồ kim tự tháp"),
         "qty": MessageLookupByLibrary.simpleMessage("Số lượng"),
@@ -488,6 +492,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "result": MessageLookupByLibrary.simpleMessage("Kết quả"),
         "revenue": MessageLookupByLibrary.simpleMessage("Doanh thu"),
+        "review_str": MessageLookupByLibrary.simpleMessage("Đánh giá"),
         "right": MessageLookupByLibrary.simpleMessage("Phải"),
         "right_answer":
             MessageLookupByLibrary.simpleMessage("Đáp án chính xác"),
@@ -647,6 +652,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "subtitle_is_more_useful":
             MessageLookupByLibrary.simpleMessage("Phụ đề hữu ích hơn"),
         "success": MessageLookupByLibrary.simpleMessage("Thành công"),
+        "sum_str": MessageLookupByLibrary.simpleMessage("Tổng"),
         "support_feedback":
             MessageLookupByLibrary.simpleMessage("Phản hồi tới chúng tôi"),
         "support_help": MessageLookupByLibrary.simpleMessage("Góp ý"),

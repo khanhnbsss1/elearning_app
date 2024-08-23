@@ -622,5 +622,9 @@
   "user_delete_str": "删除用户",
   "active_course": "激活课程",
   "you_not_register_course": "您尚未注册任何课程",
-  "register_course_or_contact_to_you_teacher": "联系你的老师或立即注册"
+  "register_course_or_contact_to_you_teacher": "联系你的老师或立即注册",
+  "purchased_payment_str": "已购买",
+  "review_str": "评论",
+  "sum_str": "总和",
+  "coure_top_review": "评论数量最多的课程"
 }
