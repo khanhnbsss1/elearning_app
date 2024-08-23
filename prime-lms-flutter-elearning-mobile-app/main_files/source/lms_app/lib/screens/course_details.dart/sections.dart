@@ -9,7 +9,7 @@ import '../../models/section.dart';
 import '../../services/firebase_service.dart';
 import 'lessons.dart';
 //
-// final sectionsProvider = FutureProvider.family<List<Section>, String>((ref, courseId) async {
+// final sectionsProvider = FutureProvider.autoDispose.family<List<Section>, String>((ref, courseId) async {
 //   final sections = await FirebaseService().getSections(courseId);
 //   return sections;
 // });

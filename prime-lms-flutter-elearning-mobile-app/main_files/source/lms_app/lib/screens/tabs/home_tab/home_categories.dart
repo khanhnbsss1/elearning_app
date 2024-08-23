@@ -9,7 +9,7 @@ import '../../all_courses.dart/courses_view.dart';
 import '../../home/home_bottom_bar.dart';
 import '../../home/home_view.dart';
 
-final homeCategoriesProvider = FutureProvider<List<CourseFilterInfo>?>((ref) async {
+final homeCategoriesProvider = FutureProvider.autoDispose<List<CourseFilterInfo>?>((ref) async {
   final List<CourseFilterInfo>? categories = await FirebaseService().getHomeCategories();
   return categories;
 });

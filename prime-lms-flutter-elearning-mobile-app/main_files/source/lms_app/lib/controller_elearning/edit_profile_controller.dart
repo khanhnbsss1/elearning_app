@@ -1,0 +1,90 @@
+import 'package:flutter/material.dart';
+import 'package:lms_app/controller_elearning/my_controller.dart';
+import 'package:lms_app/services_elearning/apis/auth/editUser/edit_user_api.dart';
+import 'package:lms_app/services_elearning/apis/auth/editUser/edit_user_request.dart';
+
+import '../../helper_elearning/my_form_validator.dart';
+import '../../helper_elearning/widget/my_validators.dart';
+import '../../models_elearning/user/UserProfile.dart';
+import '../../services_elearning/apis/auth/register/models/register_request.dart';
+import '../../services_elearning/apis/auth/register/register_with_phone_api.dart';
+
+class EditProfileController extends MyController {
+  MyFormValidator basicValidator = MyFormValidator();
+  final UserProfile userProfile;
+  bool showPassword = false, loading = false, isChecked = false;
+
+  EditProfileController({required this.userProfile});
+
+  @override
+  void onInit() {
+    super.onInit();
+    basicValidator.addField(
+      'fullname',
+      required: true,
+      label: "Full name",
+      validators: [MyEmailValidator()],
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'bank_name',
+      required: true,
+      label: "Bank name",
+      //validators: [MyEmailValidator()],
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'bank_account',
+      required: true,
+      label: 'Bank account',
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'password',
+      required: true,
+      label: 'Password',
+      controller: TextEditingController(),
+    );
+    basicValidator.getController('fullname')!.text = userProfile.fullName!;
+    basicValidator.getController('bank_name')!.text = userProfile.bankName!;
+    basicValidator.getController('bank_account')!.text = userProfile.bankAccount!;
+  }
+
+  void onChangeCheckBox(bool? value) {
+    isChecked = value ?? isChecked;
+    update();
+  }
+
+  Future<bool> onUpdate() async {
+    EditUserRequest editUserRequest = EditUserRequest(
+      typeName: userProfile.typeName??"User",
+      userName: userProfile.userName??"User",
+      fullname: basicValidator.getController('fullname')?.text,
+      bankAccount: basicValidator.getController('bank_account')?.text,
+      bankName: basicValidator.getController('bank_name')?.text,
+      identityId: userProfile.identityId??"000000000000",
+      gender: userProfile.gender??"male",
+      birthday: userProfile.birthday??"",
+      phoneNumber: userProfile.phoneNumber??"",
+    );
+    EditUserApi editUserApi = EditUserApi(editUserRequest: editUserRequest);
+    bool data = await editUserApi.call();
+    update();
+    if (data == true) {
+      return true;
+    } else {
+      return false;
+      // AppPages.routeName(Routes.landingPageRoute);
+    }
+    update();
+  }
+
+  void onChangeShowPassword() {
+    showPassword = !showPassword;
+    update();
+  }
+
+  void gotoLogin() {
+    // AppPages.routeName(Routes.landingPageRoute);
+  }
+}

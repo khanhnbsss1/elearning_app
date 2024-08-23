@@ -19,7 +19,6 @@ class UserManager{
       //FirebaseManager().removeSubscribeTopic(userInfo.id.toString());
     }
     InstanceManager().clearAllInstanceData();
-
   }
   
   Future<void> saveUserProfileInfo(UserProfile userInfo) async {

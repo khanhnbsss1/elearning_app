@@ -43,7 +43,6 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
 
   @override
   void initState() {
-    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     super.initState();
     _controller = ScrollController(initialScrollOffset: 0.0);
     _controller.addListener(_scrollListener);

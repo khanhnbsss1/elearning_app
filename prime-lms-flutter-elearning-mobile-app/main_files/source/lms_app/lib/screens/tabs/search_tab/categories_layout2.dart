@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/screens/all_courses.dart/courses_view.dart';
 import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services_elearning/apis/tags/models/tag_info.dart';
 import 'package:lms_app/utils/custom_cached_image.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import '../../../models/category.dart';
@@ -13,7 +14,7 @@ class CategoriesLayout2 extends StatelessWidget {
     required this.categories,
   });
 
-  final AsyncValue<List<CourseInfo>> categories;
+  final AsyncValue<TagsInfo> categories;
 
   @override
   Widget build(BuildContext context) {
@@ -21,47 +22,47 @@ class CategoriesLayout2 extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'all-categories',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
-          ).tr(),
-          const SizedBox(
-            height: 10,
-          ),
-          categories.when(
-            loading: () => const CircularProgressIndicator(),
-            error: (error, stackTrace) => Text('error: $error'),
-            data: (data) {
-              return ListView.separated(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                itemCount: data.length,
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                separatorBuilder: (context, index) => const Divider(),
-                itemBuilder: (context, index) {
-                  final CourseInfo category = data[index];
-                  return ListTile(
-                    contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                    title: Text((category.lectures == null) ? category.lectures![index].lectureName! : 'data'),
-                    titleTextStyle: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
-                    trailing: const Icon(FeatherIcons.chevronRight),
-                    leading: SizedBox(
-                      height: 40,
-                      width: 50,
-                      child: CustomCacheImage(
-                        imageUrl: category.image,
-                        radius: 3,
-                      ),
-                    ),
-                    // onTap: ()=> NextScreen.iOS(context, AllCoursesView(title: category.name!, categoryId: category.id.toString(),)),
-                    onTap: () {},
-                  );
-                },
-              );
-            },
-          ),
-        ],
+        // children: [
+        //   Text(
+        //     'all-categories',
+        //     style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
+        //   ).tr(),
+        //   const SizedBox(
+        //     height: 10,
+        //   ),
+        //   categories.when(
+        //     loading: () => const CircularProgressIndicator(),
+        //     error: (error, stackTrace) => Text('error: $error'),
+        //     data: (data) {
+        //       return ListView.separated(
+        //         padding: const EdgeInsets.symmetric(vertical: 10),
+        //         itemCount: data.length,
+        //         physics: const NeverScrollableScrollPhysics(),
+        //         shrinkWrap: true,
+        //         separatorBuilder: (context, index) => const Divider(),
+        //         itemBuilder: (context, index) {
+        //           final CourseInfo category = data[index];
+        //           return ListTile(
+        //             contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        //             title: Text((category.lectures == null) ? category.lectures![index].lectureName! : 'data'),
+        //             titleTextStyle: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+        //             trailing: const Icon(FeatherIcons.chevronRight),
+        //             leading: SizedBox(
+        //               height: 40,
+        //               width: 50,
+        //               child: CustomCacheImage(
+        //                 imageUrl: category.image,
+        //                 radius: 3,
+        //               ),
+        //             ),
+        //             // onTap: ()=> NextScreen.iOS(context, AllCoursesView(title: category.name!, categoryId: category.id.toString(),)),
+        //             onTap: () {},
+        //           );
+        //         },
+        //       );
+        //     },
+        //   ),
+        // ],
       ),
     );
   }

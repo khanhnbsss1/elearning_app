@@ -9,6 +9,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:lms_app/utils/snackbars.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
+import '../base/author/author_manager.dart';
+import '../base/author/user_helper.dart';
+
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   Stream<User?> userSteam = FirebaseAuth.instance.authStateChanges();
@@ -81,6 +84,8 @@ class AuthService {
   Future userLogOut() async {
     if (user != null) {
       await _firebaseAuth.signOut();
+      AuthorManager().deleteDataWhenLogout();
+      UserManager().handleLogoutData();
     } else {
       debugPrint('Not signed in');
     }

@@ -9,7 +9,7 @@ import 'package:lms_app/utils/next_screen.dart';
 import '../../../components/horizontal_course_tile.dart';
 import '../../all_courses.dart/courses_view.dart';
 
-final freeCoursesProvider = FutureProvider<List<CourseInfo>>((ref) async {
+final freeCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>>((ref) async {
   final List<CourseInfo>? courses = await FirebaseService().getFreeCourses();
   return courses??[];
 });

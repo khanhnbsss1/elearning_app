@@ -15,8 +15,11 @@ import 'package:lms_app/models/section.dart';
 import 'package:lms_app/models/subscription.dart';
 import 'package:lms_app/models/tag.dart';
 import 'package:lms_app/services/app_service.dart';
+import 'package:lms_app/services_elearning/apis/categories/get_categories_api.dart';
 import 'package:lms_app/services_elearning/apis/course/course_detail/get_course_detail_api.dart';
 import 'package:lms_app/services_elearning/apis/course/my_course_list/my_course_api.dart';
+import 'package:lms_app/services_elearning/apis/tags/get_tag_list.dart';
+import 'package:lms_app/services_elearning/apis/tags/models/tag_info.dart';
 import 'package:lms_app/utils/toasts.dart';
 
 import '../base/base_request_elearning/models/search_common_request.dart';
@@ -88,18 +91,10 @@ class FirebaseService {
     return courseInfo;
   }
 
-  Future<List<Course>> getLatestCourses(int limit) async {
-    List<Course> data = [];
-    await firestore
-        .collection('courses')
-        .where('status', isEqualTo: 'live')
-        .orderBy('created_at', descending: true)
-        .limit(limit)
-        .get()
-        .then((QuerySnapshot? snapshot) {
-      data = snapshot!.docs.map((e) => Course.fromFirestore(e)).toList();
-    });
-    return data;
+  Future<List<CourseInfo>?> getLatestCourses() async {
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, categoryId: 2, pageNumber: 0, keyword: ""));
+    CourseResponseModel courseResponseModel = await getCourseListApi.call();
+    return courseResponseModel.content;
   }
 
   Future<List<CourseInfo>?> getRelatedCoursesByCategory(CourseInfo course) async {
@@ -109,13 +104,13 @@ class FirebaseService {
   }
 
   Future<List<CourseInfo>?> getFeaturedCourses() async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, categoryId: 2, pageNumber: 5, keyword: ""));
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, categoryId: 2, pageNumber: 0, keyword: ""));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content;
   }
 
   Future<List<CourseInfo>?> getFreeCourses() async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "PREMIUM_COURSE",gradeId: 2, categoryId: 2, pageSize: 10, pageNumber: 0, keyword: "",));
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "FREE_COURSE",gradeId: 2, categoryId: 2, pageSize: 10, pageNumber: 0, keyword: "",));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content;
   }
@@ -161,12 +156,10 @@ class FirebaseService {
     return courseResponseModel.content;
   }
 
-  Future<List<CourseInfo>> getAllCategories() async {
-    List<Category> data = [];
-    await firestore.collection('categories').orderBy('index', descending: false).get().then((QuerySnapshot? snapshot) {
-      data = snapshot!.docs.map((e) => Category.fromFirestore(e)).toList();
-    });
-    return [];
+  Future<List<TagsInfo>> getAllCategories() async {
+    GetCategoriesApi getTagListApi = GetCategoriesApi();
+    List<TagsInfo> tagsInfoList = await getTagListApi.call();
+    return tagsInfoList;
   }
 
   Future<List<Tag>> getAllTags(int limit) async {

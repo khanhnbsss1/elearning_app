@@ -146,7 +146,7 @@ class BaseApiRequest {
       requestHeader?.addAll({
       "ngrok-skip-browser-warning": true,
         "Authorization": "Bearer ${authInfo.accessToken}",
-        
+
       });
     }
     DeviceInfoModel? deviceInfoModel = await DeviceManager().getDeviceInfo();
@@ -413,19 +413,19 @@ class BaseApiRequest {
     Map<String, dynamic> params =  await getParamsFinal();
     dynamic body = await getBodyAdd();
     DioClient().getDioClient().options = DioClient().getDioClient().options.copyWith(headers: await getHeaderAdd(), validateStatus: (_) => true,);
+    var option = Options(
+      headers: await getHeaderAdd(),
+      validateStatus: (_) => true,
+      receiveDataWhenStatusError: true,
+      sendTimeout: const Duration(seconds: timeout), // 30 seconds
+      receiveTimeout: const Duration(seconds: timeout), // 3);
+    );
     try{
-      var option = Options(
-        headers: await getHeaderAdd(),
-        validateStatus: (_) => true,
-        receiveDataWhenStatusError: true,
-        sendTimeout: const Duration(seconds: timeout), // 30 seconds
-        receiveTimeout: const Duration(seconds: timeout), // 3);
-      );
       Response response =  await DioClient().getDioClient().put(url, queryParameters: params, data: body,options: option);
       return await handleResponse(response: response, url: url, params: params, body: body);
     }
     catch(e){
-      handleResponse(response: e, url: url,params: params, body: body);
+      handleResponse(response: e, url: url,params: params, body: body,option: option);
       FileUtils.PrintLog(' \n error: $e \n\n');
     }
 

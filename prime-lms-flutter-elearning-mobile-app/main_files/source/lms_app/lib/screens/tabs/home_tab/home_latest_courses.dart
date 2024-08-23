@@ -9,9 +9,9 @@ import 'package:lms_app/services_elearning/apis/course/course_detail/models/cour
 import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
-final homeLatestCoursesProvider = FutureProvider<List<Course>>((ref) async {
-  final List<Course> courses = await FirebaseService().getLatestCourses(4);
-  return courses;
+final homeLatestCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>>((ref) async {
+  final List<CourseInfo>? courses = await FirebaseService().getLatestCourses();
+  return courses??[];
 });
 
 class HomeLatestCourses extends ConsumerWidget {
@@ -63,13 +63,12 @@ class HomeLatestCourses extends ConsumerWidget {
                 ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: courses.length,
+                  itemCount: 5,
                   padding: const EdgeInsets.all(20),
                   separatorBuilder: (context, index) => const Divider(height: 50),
                   itemBuilder: (context, index) {
-                    return null;
-                    // final CourseInfo course = courses[index];
-                    // return CourseTile(course: course);
+                    final CourseInfo course = courses[index];
+                    return CourseTile(course: course);
                   },
                 )
               ],
