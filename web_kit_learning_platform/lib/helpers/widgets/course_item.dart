@@ -139,7 +139,7 @@ class CourseItem extends StatelessWidget {
                                         : Dimens.size20,
                                     color: Colors.red),
                                 Gap(Dimens.size8),
-                                Text('Số buổi học: ${courseInfo.totalLectures}',
+                                Text('Số buổi học: ${courseInfo.totalLectures??0}',
                                     style: TextStyleConstant
                                         .textStyleBlack16w500
                                         .copyWith(
@@ -165,7 +165,7 @@ class CourseItem extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Text(
-                                          "${NumberHelper().numberToString(courseInfo.price, decimalDigits: 0).trim()} (${L10nX.getStr.vnd_str})",
+                                          "${NumberHelper().numberToString(courseInfo.price??0, decimalDigits: 0).trim()} (${L10nX.getStr.vnd_str})",
                                           style: TextStyleConstant
                                               .textStyleBlack16w500
                                               .copyWith(
