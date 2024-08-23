@@ -49,7 +49,6 @@ class HomeCategories extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: 10),
-
             categories.when(
                 skipLoadingOnRefresh: false,
                 data: (categories) {
@@ -60,7 +59,7 @@ class HomeCategories extends ConsumerWidget {
                         .map((e) => ActionChip(
                               onPressed: () => NextScreen.iOS(
                                 context,
-                                AllCoursesView(courseFilterInfo: e,),
+                                AllCoursesView(filter: e.name??"",),
                               ),
                               elevation: 0,
                               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),

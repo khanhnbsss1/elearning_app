@@ -25,9 +25,10 @@ enum GridStyle { grid, box, list }
 final gridStyleProvider = StateProvider<GridStyle>((ref) => GridStyle.grid);
 
 class AllCoursesView extends ConsumerStatefulWidget {
-  const AllCoursesView({super.key, required this.courseFilterInfo});
+  const AllCoursesView({super.key, required this.filter});
 
-  final CourseFilterInfo courseFilterInfo;
+  // final CourseFilterInfo courseFilterInfo;
+  final String filter;
 
   @override
   ConsumerState<AllCoursesView> createState() => _AllCoursesViewState();
@@ -46,7 +47,7 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
     super.initState();
     _controller = ScrollController(initialScrollOffset: 0.0);
     _controller.addListener(_scrollListener);
-    _getCourse(widget.courseFilterInfo, _pageNumber);
+    _getCourse(widget.filter, _pageNumber);
   }
 
   _scrollListener() async {
@@ -60,15 +61,15 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
   Future<void> _loadMore() async {
     setState(() {
       _pageNumber++;
-      _getCourse(widget.courseFilterInfo, _pageNumber);
+      _getCourse(widget.filter, _pageNumber);
     });
   }
 
   Future<void> _getCourse(
-      CourseFilterInfo courseFilterInfo, int pageNumber) async {
+      String filter, int pageNumber) async {
     final List<CourseInfo>? courses = await FirebaseService()
         .getCourseByCategories(
-            pageNumber: pageNumber, courseFilterInfo: courseFilterInfo);
+            pageNumber: pageNumber, filter: filter.replaceAll(" ", "_"));
     if (_courses != [] && courses != [] && courses != null) {
       setState(() {
         _isLoading = false;
@@ -88,7 +89,7 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
     _courses.clear();
     _hasData = false;
     setState(() {});
-    await _getCourse(widget.courseFilterInfo, 0);
+    await _getCourse(widget.filter, 0);
   }
 
   @override
@@ -97,7 +98,7 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
     final gridStyle = ref.watch(gridStyleProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.courseFilterInfo.name!),
+        title: Text(widget.filter.replaceAll("_", " ")),
         titleTextStyle: Theme.of(context)
             .textTheme
             .titleMedium

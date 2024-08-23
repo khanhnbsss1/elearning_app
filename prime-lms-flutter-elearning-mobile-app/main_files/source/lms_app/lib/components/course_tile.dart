@@ -34,7 +34,7 @@ class CourseTile extends StatelessWidget {
                     tag: heroTag,
                     child: (course.image != null && course.image != "")
                         ? CustomCacheImage(imageUrl: course.image, radius: 3)
-                        : Image.asset("assets/images/noImage.png", fit: BoxFit.cover)),
+                        : Image.asset("assets/images/noImage.jpg", fit: BoxFit.cover)),
               ),
               // PremiumTag(course: course),
             ],

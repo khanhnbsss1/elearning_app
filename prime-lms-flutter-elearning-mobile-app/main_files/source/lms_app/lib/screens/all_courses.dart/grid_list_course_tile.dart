@@ -19,8 +19,8 @@ class GridListCourseTile extends StatelessWidget {
     return Column(
       children: [
         InkWell(
-          // onTap: () => NextScreen.iOS(context, CourseDetailsView(course: course, heroTag: heroTag)),
-          onTap: (){},
+          onTap: () => NextScreen.iOS(context, CourseDetailsView(courses: course, heroTag: heroTag)),
+          // onTap: () {},
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -30,8 +30,15 @@ class GridListCourseTile extends StatelessWidget {
                   Container(
                     height: 90,
                     width: 100,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(3)),
-                    child: Hero(tag: heroTag, child: CustomCacheImage(imageUrl: course.image, radius: 3)),
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(3)),
+                    child: Hero(
+                        tag: heroTag,
+                        child: (course.image != null && course.image != "")
+                            ? CustomCacheImage(
+                                imageUrl: course.image, radius: 3)
+                            : Image.asset("assets/images/noImage.jpg",
+                                fit: BoxFit.cover)),
                   ),
                   // PremiumTag(course: course),
                 ],
@@ -46,7 +53,10 @@ class GridListCourseTile extends StatelessWidget {
                         course.name!,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w600),
                       ),
                       const SizedBox(height: 5),
                       Text(
@@ -54,11 +64,16 @@ class GridListCourseTile extends StatelessWidget {
                         style: const TextStyle(color: Colors.purpleAccent),
                       ),
                       const SizedBox(height: 5),
-                      Text('count-students', style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blueGrey)).tr(args: [
+                      Text('count-students',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(color: Colors.blueGrey))
+                          .tr(args: [
                         course.totalLectures.toString(),
                       ]),
                       const SizedBox(height: 5),
-                      RatingViewer(rating: (course.ratePoint??0).toDouble()),
+                      RatingViewer(rating: (course.ratePoint ?? 0).toDouble()),
                     ],
                   ),
                 ),

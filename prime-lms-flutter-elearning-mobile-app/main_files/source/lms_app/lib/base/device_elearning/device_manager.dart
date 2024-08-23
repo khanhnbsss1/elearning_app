@@ -20,7 +20,7 @@ class DeviceManager {
     } else {
       if (Platform.isAndroid) {
         AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-        print("androidInfo ${androidInfo.toString()}");
+        // print("androidInfo ${androidInfo.toString()}");
         deviceInfoModel = DeviceInfoModel(
             type: "Mobile",
             serialNumber: androidInfo.serialNumber,
@@ -29,7 +29,7 @@ class DeviceManager {
 
       } else if (Platform.isIOS) {
         IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
-        print("iosInfo ${iosInfo.toString()}");
+        // print("iosInfo ${iosInfo.toString()}");
         deviceInfoModel = DeviceInfoModel(
             type: "Mobile",
             platform: "ios",
@@ -38,7 +38,7 @@ class DeviceManager {
 
       } else if (Platform.isLinux) {
         LinuxDeviceInfo linuxDeviceInfo = await deviceInfo.linuxInfo;
-        print("linuxDeviceInfo ${linuxDeviceInfo.toString()}");
+        // print("linuxDeviceInfo ${linuxDeviceInfo.toString()}");
         deviceInfoModel = DeviceInfoModel(
             type: "Desktop",
             platform: "linux",
@@ -47,7 +47,7 @@ class DeviceManager {
 
       } else if (Platform.isMacOS) {
         MacOsDeviceInfo macOsDeviceInfo = await deviceInfo.macOsInfo;
-        print("macOsDeviceInfo ${macOsDeviceInfo.toString()}");
+        // print("macOsDeviceInfo ${macOsDeviceInfo.toString()}");
         deviceInfoModel = DeviceInfoModel(
             type: "Desktop",
             platform: "macOs",
@@ -56,7 +56,7 @@ class DeviceManager {
 
       } else if (Platform.isWindows) {
         WindowsDeviceInfo windowsDeviceInfo = await deviceInfo.windowsInfo;
-        print("windowsDeviceInfo ${windowsDeviceInfo.toString()}");
+        // print("windowsDeviceInfo ${windowsDeviceInfo.toString()}");
         deviceInfoModel = DeviceInfoModel(
             type: "desktop",
             platform: "windows",
