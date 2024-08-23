@@ -10,6 +10,8 @@ import 'package:webkit/services/apis/course/get_course_dictionary/get_course_dir
 import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_model.dart';
 import 'package:webkit/services/apis/grade/get_grade_list.dart';
 import 'package:webkit/services/apis/grade/models/grade_info.dart';
+import 'package:webkit/services/apis/lessson/lesson_list_filter/lesson_list_filter_api.dart';
+import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 
 import '../widgets/widget_common/widget_with_title_common.dart';
 
@@ -25,6 +27,7 @@ class FilterManager{
   GetAddCourseFilterModel? addCourseFilterModel;
   CategoryListResponseModel? categoryListResponseModel;
   GradeListResponseModel? gradeListResponseModel;
+  LessonListResponseModel? lessonListResponseModel;
   CourseFilterListInfo courseFilterListInfo = CourseFilterListInfo(data: []);
   Future<void> init()async {
     await getFilterCourse();
@@ -67,7 +70,15 @@ class FilterManager{
     return categoryListResponseModel;
   }
 
-
+  Future<LessonListResponseModel?> getLessonFilterInfo() async {
+    if(lessonListResponseModel==null || (lessonListResponseModel?.content??[]).isEmpty)
+    {
+      GetLessonListFilterApi getLessonListApi = GetLessonListFilterApi();
+      lessonListResponseModel = await getLessonListApi.call();
+    }
+    return lessonListResponseModel;
+  }
+  
   Widget buildGrade({
     required BuildContext context,
     Function(GradeInfo?)? onChanged,

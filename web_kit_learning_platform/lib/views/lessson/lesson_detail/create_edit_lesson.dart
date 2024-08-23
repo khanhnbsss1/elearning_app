@@ -36,7 +36,7 @@ class CreateEditLesson extends StatefulWidget {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          double width = MediaQuery.of(context).size.width * (ResponsiveInfo.isTablet() ? 0.4 : 0.9);
+          double width = MediaQuery.of(context).size.width * (ResponsiveInfo.isTablet() ? 0.6 : 0.9);
           if(width<500) {
             width = 500;
           }
@@ -137,6 +137,8 @@ class _CreateEditLesson extends State<CreateEditLesson>
                             MySpacing.height(16),
                             buildLectureDescription(context: context),
                             MySpacing.height(16),
+                            buildLectureContent(context: context),
+                            MySpacing.height(16),
                             buildLectureVideoLink(context: context),
                             MySpacing.height(16),
                             buildLectureDocuments(context: context),
@@ -175,6 +177,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
                           state.lessonInfo??= LessonInfo();
                           state.lessonInfo?.lectureName = state.editingControllerLectureName?.text;
                           state.lessonInfo?.note = state.editingControllerLectureDescription?.text;
+                          state.lessonInfo?.content = state.editingControllerLectureContent?.text;
                           state.lessonInfo?.link = state.editingControllerLectureVideoLink?.text;
                           state.lessonInfo?.docName = state.editingControllerLectureName?.text;
                           state.lessonInfo?.mode = mode;
@@ -268,6 +271,32 @@ class _CreateEditLesson extends State<CreateEditLesson>
             size: 20,
             color: ColorConst.colorIconRed,
           ),
+          contentPadding: MySpacing.all(16),
+          isCollapsed: true,
+          floatingLabelBehavior: FloatingLabelBehavior.never,
+        ),
+      ),
+    );
+  }
+
+  Widget buildLectureContent({required BuildContext context}) {
+    return WidgetWithColumnTitleCommon(
+      // title: '${L10nX.getStr.name}: ',
+      title: L10nX.getStr.content_str,
+      isRequirement: true,
+      // titleStyle: ,
+      child: TextFormField(
+        keyboardType: TextInputType.multiline,
+        enabled: enableEdit,
+        controller: _state.editingControllerLectureContent,
+        minLines: 5,
+        maxLines: 10,
+        decoration: InputDecoration(
+          labelText: L10nX.getStr.content_str,
+          labelStyle: MyTextStyle.bodySmall(xMuted: true),
+          border: outlineInputBorder,
+          alignLabelWithHint: true,
+          floatingLabelAlignment: FloatingLabelAlignment.start,
           contentPadding: MySpacing.all(16),
           isCollapsed: true,
           floatingLabelBehavior: FloatingLabelBehavior.never,

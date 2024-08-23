@@ -8,6 +8,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/controller/ui/add_course_controller.dart';
@@ -367,9 +368,16 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
     if (keyWord.isEmpty) {
       return [];
     }
-    GetLessonListFilterApi getLessonListApi = GetLessonListFilterApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord));
-    LessonListResponseModel data = await getLessonListApi.call();
-    return data.content ?? [];
+    List<LessonInfo>? content=[];
+    LessonListResponseModel? lessonListResponseModel = await FilterManager().getLessonFilterInfo();
+    if((lessonListResponseModel?.content??[]).isNotEmpty)
+      {
+        content = [...(lessonListResponseModel?.content??[]).where((element) {
+          return element.lectureName?.toLowerCase().contains(keyWord.toLowerCase())??false;
+        },)];
+      }
+
+    return content;
   }
 
   void _addSubjectDialog(BuildContext context) {

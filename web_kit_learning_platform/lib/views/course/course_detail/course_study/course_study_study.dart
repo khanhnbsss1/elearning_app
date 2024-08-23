@@ -6,6 +6,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/base/store/save_file.dart';
 import 'package:webkit/base/widgets/common/alert_dialog/loading.export.dart';
+import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
 import 'package:webkit/services/apis/topic/model/topic_info.dart';
@@ -43,9 +44,6 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   @override
   void initState() {
     super.initState();
-    likeCheck = List.filled(reviewCount, false);
-    dislikeCheck = List.filled(reviewCount, false);
-    showReply = List.filled(reviewCount, false);
 
   }
 
@@ -189,7 +187,6 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                   children: [
                     buildStudyTitle(),
                     buildStudyUI(),
-                    buildTest(context),
                   ],
                 ),
               ),
@@ -339,85 +336,101 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 30,
+          Gap(Dimens.size30),
+          WidgetWithColumnTitleCommon(
+            title: "- ${L10nX.getStr.introduction_str}: ",
+            childPadding: EdgeInsets.symmetric(horizontal: Dimens.size24),
+            titleStyle: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.mainColor),
+            child: Text(_state.selectLessonInfo?.note??"",style: TextStyleConstant.textStyleBlack13w400,),
           ),
-          Text(
-            "${L10nX.getStr.introduction_str}: ",
-            style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.red),
-          ),
-          SizedBox(
-            height: 4,
-          ),
-          Padding(
-            padding:  EdgeInsets.symmetric(horizontal: Dimens.size16),
-            child: Text(_state.selectLessonInfo?.note??"",style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.red),),
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "${L10nX.getStr.document_str}: ",
-                style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.red),
-              ),
-              SizedBox(
-                height: 4,
-              ),
-              Padding(
-                padding:  EdgeInsets.symmetric(horizontal: Dimens.size16),
-                child: InkWell(
-                    onTap: () {
-                      if((_state.selectLessonInfo?.docLink??"").isNotEmpty) {
-                        FileStoreManager().downloadFileFromStream(url: _state.selectLessonInfo?.docLink??"", fileName:  _state.selectLessonInfo?.docName??"");
-                      }
-                    },
-                    child: Text(
-                      _state.selectLessonInfo?.docName??'',
-                      style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.blue),)),
-              ),
-              SizedBox(
-                height: 16,
-              ),
-            ],
-          ),
-          
+          Gap(Dimens.size16),
+          WidgetWithColumnTitleCommon(
+            title: "- ${L10nX.getStr.document_str}: ",
+            childPadding: EdgeInsets.symmetric(horizontal: Dimens.size24),
 
+            titleStyle: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.mainColor),
+
+            child: InkWell(
+                onTap: () {
+                  if((_state.selectLessonInfo?.docLink??"").isNotEmpty) {
+                    FileStoreManager().downloadFileFromStream(url: _state.selectLessonInfo?.docLink??"", fileName:  _state.selectLessonInfo?.docName??"");
+                  }
+                },
+                child: Text(
+                  _state.selectLessonInfo?.docName??'',
+                  style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.blue),)),
+          ), 
+          Gap(Dimens.size16),
+          Visibility(
+              visible: (_state.selectLessonInfo?.content??'').isNotEmpty,
+              child: WidgetWithColumnTitleCommon(
+                title: "- ${L10nX.getStr.content_str}: ",
+                titleStyle: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.mainColor),
+                childPadding: EdgeInsets.symmetric(horizontal: Dimens.size24),
+                child: Text(
+                  _state.selectLessonInfo?.content??'',
+                  style: TextStyleConstant.textStyleBlack13w400,
+                ),
+              )),
           Visibility(
             visible: (_state.selectLessonInfo?.vocabularies??[]).isNotEmpty,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${L10nX.getStr.vocabulary_str}: ",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.red,
-                  ),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: Dimens.size16),
-                  child: ListView.builder(
-                      itemCount: (_state.selectLessonInfo?.vocabularies??[]).length,
-                      // controller: lessonDetailScrollController,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        VocabularyInfo vocabularyInfo = (_state.selectLessonInfo?.vocabularies??[]).elementAt(index);
-                        return buildWordItem(word: vocabularyInfo);
-                      }),
-                )
-              ],
-            ),
+            child: WidgetWithColumnTitleCommon(
+                title: "- ${L10nX.getStr.vocabulary_str}: ",
+              childPadding: EdgeInsets.symmetric(horizontal: Dimens.size24),
+              titleStyle: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.mainColor),
+              child: ListView.builder(
+                    itemCount: (_state.selectLessonInfo?.vocabularies??[]).length,
+                    // controller: lessonDetailScrollController,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      VocabularyInfo vocabularyInfo = (_state.selectLessonInfo?.vocabularies??[]).elementAt(index);
+                      return buildWordItem(word: vocabularyInfo);
+                    }),
+              ),
           ),
+          Visibility(
+              visible: _state.selectLessonInfo?.testId!=null,
+              child: WidgetWithColumnTitleCommon(
+                title: "- ${L10nX.getStr.test_str}:",
+                titleStyle: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.mainColor),
+                childPadding: EdgeInsets.symmetric(horizontal: Dimens.size24),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size16),
+                      child: InkWell(
+                          onTap: () {
+                            if(_state.selectLessonInfo?.testId!=null) {
+                              TestWorkPage(
+                                testInfo: TestInfo(
+                                    id: _state.selectLessonInfo?.testId,
+                                    lectureId: _state.selectLessonInfo?.id,
+                                    name: _state.selectLessonInfo?.testName??''),).show(context);
+                            }
+                          },
+                          child: Text(
+                            _state.selectLessonInfo?.testName??'',
+                            style: TextStyleConstant.textStyleBlack13w400,)),
+                    ),
+                    ActionButton1(
+                      onTap: () {
+                        TestWorkPage(
+                          testInfo: TestInfo(id: _state.selectLessonInfo?.testId,
+                              lectureId: _state.selectLessonInfo?.id,
+                              name: _state.selectLessonInfo?.testName??''),).show(context);
+                      },
+                      text: L10nX.getStr.begin_start_test,
+                    )
+                  ],
+                ),
+              )
 
-        ],
-      ),
-    );
+          )
+
+        ]
+      ));
   }
 
   bool isOnVolume = false;
@@ -489,350 +502,14 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   List<Review> listOfReview = [];
 
   int reviewCount = 10;
+  
 
-  Widget buildStudyReview() {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 30,
-          ),
-          Text(
-            '4 Reviews',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          buildStudyReviewItemUser(replyCheck: false),
-          SizedBox(
-              height: 500,
-              child: StatefulBuilder(
-                builder: (BuildContext context, void Function(void Function()) setState) {
-                  return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: reviewCount,
-                      itemBuilder: (context, index) {
-                        listOfReview.add(
-                          Review(
-                            username: 'username $index',
-                            text: 'review $index',
-                            rating: 5,
-                            likeCount: 0,
-                            dislikeCount: 0,
-                            avatar: null,
-                          ),
-                        );
-                        return Column(
-                          children: [
-                            buildStudyReviewItem(review: listOfReview[index], index: index),
-                            SizedBox(
-                              height: 16,
-                            )
-                          ],
-                        );
-                      });
-                },
-              ))
-        ],
-      ),
-    );
-  }
-
-  Widget buildStudyReviewItemUser({required bool replyCheck}) {
-    double rating = 5;
-    TextEditingController controller = TextEditingController();
-    final List<String> menuItems = ['Item 1', 'Item 2', 'Item 3'];
-    bool check = false;
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Visibility(
-          visible: !replyCheck,
-          child: Expanded(
-            flex: 1,
-            child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 60, maxHeight: 60),
-              child: FittedBox(
-                fit: BoxFit.contain,
-                child: Icon(Icons.face),
-              ),
-            ),
-          ),
-        ),
-        SizedBox(width: 8),
-        Expanded(
-            flex: 9,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      'Rate and comment',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    StarRating(
-                      rating: rating,
-                      onRatingChanged: (rating) {
-                        setState(() {
-                          rating = rating;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-                Stack(children: [
-                  TextFormField(
-                    controller: controller,
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      labelText: replyCheck ? 'Trả lời...' : 'Bình luận...',
-                      alignLabelWithHint: true,
-                      floatingLabelAlignment: FloatingLabelAlignment.start,
-                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                      border: outlineInputBorder,
-                      // prefixIcon: const Icon(
-                      //   LucideIcons.lock,
-                      //   size: 20,
-                      // ),
-                      contentPadding: MySpacing.all(16),
-                      isCollapsed: true,
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                    ),
-                    minLines: 3,
-                    maxLines: 6,
-                    onChanged: (value) {
-                    },
-                  ),
-                  Positioned(
-                    left: 0,
-                    bottom: 0,
-                    child: PopupMenuButton<String>(
-                        icon: Icon(Icons.tag_faces),
-                        onSelected: (value) {
-                          controller.text += value;
-                        },
-                        itemBuilder: (context) {
-                          return menuItems.map((item) {
-                            return PopupMenuItem<String>(
-                              value: item,
-                              child: Text(item),
-                            );
-                          }).toList();
-                        }),
-                  )
-                ]),
-                Visibility(
-                  visible: !check,
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: ActionButton1(
-                      text: replyCheck ? 'Trả lời' : 'Bình luận',
-                    ),
-                  ),
-                ),
-              ],
-            )),
-      ],
-    );
-  }
-
-  List<bool> likeCheck = [];
-  List<bool> dislikeCheck = [];
-  List<bool> showReply = [];
-
-  Widget buildStudyReviewItem({required Review review, required int index}) {
-    return Column(children: [
-      Row(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 1,
-            child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 60, maxHeight: 60),
-              child: FittedBox(
-                fit: BoxFit.contain,
-                child: Icon(Icons.face),
-              ),
-            ),
-          ),
-          SizedBox(width: 8),
-          Expanded(
-              flex: 9,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Text(
-                        review.username,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      StarRating(
-                        rating: review.rating,
-                        size: 16,
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Container(
-                    child: Text(
-                      review.text,
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.thumb_up_alt_rounded,
-                          color: (likeCheck[index]) ? Colors.red : Colors.grey,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            likeCheck[index] = !likeCheck[index];
-                            (likeCheck[index]) ? review.likeCount++ : review.likeCount--;
-                          });
-                        },
-                      ),
-                      SizedBox(
-                        width: 4,
-                      ),
-                      Text('${review.likeCount}'),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.thumb_down_alt_rounded,
-                          color: (dislikeCheck[index]) ? Colors.red : Colors.grey,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            dislikeCheck[index] = !dislikeCheck[index];
-                            (dislikeCheck[index]) ? review.dislikeCount++ : review.dislikeCount--;
-                          });
-                        },
-                      ),
-                      SizedBox(
-                        width: 4,
-                      ),
-                      Text('${review.dislikeCount}'),
-                      SizedBox(
-                        width: 32,
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            setState(() {
-                              showReply = List.filled(reviewCount, false);
-                              showReply[index] = !showReply[index];
-                            });
-                          },
-                          child: Text('Reply')),
-                    ],
-                  ),
-                  Visibility(
-                      visible: showReply[index],
-                      child: Padding(
-                          padding: EdgeInsets.only(left: 60),
-                          child: Container(
-                              // width: MediaQuery.of(context).size.width,
-                              child: buildStudyReviewItemUser(replyCheck: true))))
-                ],
-              )),
-        ],
-      ),
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24),
-        child: Divider(
-          color: Colors.black.withOpacity(0.1),
-        ),
-      )
-    ]);
-  }
 
   Future<UserProfile?> getProfile() async {
     UserProfile? userInfo = UserManager().getUserProfile();
     return userInfo;
   }
-
-  Widget buildTest(BuildContext context) {
-    return Visibility(
-      visible: _state.selectLessonInfo?.testId!=null,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children:  [
-          SizedBox(
-            height: 30,
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Text(
-            "${L10nX.getStr.test_str}:",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.red,
-            ),
-          ),
-          SizedBox(
-            height: 4,
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Padding(
-                padding:  EdgeInsets.symmetric(horizontal: Dimens.size16),
-                child: InkWell(
-                    onTap: () {
-                      if(_state.selectLessonInfo?.testId!=null) {
-                        TestWorkPage(
-                          testInfo: TestInfo(
-                              id: _state.selectLessonInfo?.testId,
-                              lectureId: _state.selectLessonInfo?.id,
-                              name: _state.selectLessonInfo?.testName??''),).show(context);
-                      }
-                    },
-                    child: Text(
-                      _state.selectLessonInfo?.testName??'',
-                      style: TextStyleConstant.textStyleBlack13w400,)),
-              ),
-              ActionButton1(
-                onTap: () {
-                  TestWorkPage(
-                    testInfo: TestInfo(id: _state.selectLessonInfo?.testId,
-                    lectureId: _state.selectLessonInfo?.id,
-                    name: _state.selectLessonInfo?.testName??''),).show(context);
-                },
-                text: L10nX.getStr.begin_start_test,
-              )
-            ],
-          ),
-        ],
-      ),
-    );
-  }
+  
 }
 
 class Review {

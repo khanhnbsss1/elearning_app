@@ -6,6 +6,7 @@ import 'models/subscription_purchases_info.dart';
 import 'models/synthesisInfo.dart';
 import 'models/synthesis_students_info.dart';
 import 'models/top_courses_info.dart';
+import 'models/user_registration_info.dart';
 
 class GetUserRegistrationApi extends BaseApiRequest {
   DashboardSearchModel dashboardSearchModel;
@@ -14,17 +15,17 @@ class GetUserRegistrationApi extends BaseApiRequest {
     apiName: ApiName.getInstance().getUserRegistration,
   );
 
-  Future<TopCoursesInfo> call() async {
+  Future<UserRegistrationInfoResponseModel> call() async {
     await getAuthorization();
     dynamic result = await getRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {
-      return TopCoursesInfo();
+      return UserRegistrationInfoResponseModel();
     }
     else
     {
-      TopCoursesInfo responseModel = TopCoursesInfo.fromJson(result);
+      UserRegistrationInfoResponseModel responseModel = UserRegistrationInfoResponseModel.fromJson(result);
       return responseModel;
     }
   }

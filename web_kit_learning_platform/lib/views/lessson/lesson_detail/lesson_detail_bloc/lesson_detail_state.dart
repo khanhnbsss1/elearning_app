@@ -23,6 +23,7 @@ class LessonDetailState extends Equatable {
   List<VocabularyInfo>?listOfWordRemove;
   TextEditingController? editingControllerLectureName;
   TextEditingController? editingControllerLectureDescription ;
+  TextEditingController? editingControllerLectureContent ;
   TextEditingController? editingControllerLectureVideoLink ;
   TextEditingController? editingControllerLectureDocuments ;
   TestInfo? testInfo;
@@ -37,6 +38,7 @@ class LessonDetailState extends Equatable {
     this.listOfWordRemove,
     this.editingControllerLectureDescription,
     this.editingControllerLectureDocuments,
+    this.editingControllerLectureContent,
     this.editingControllerLectureName,
     this.editingControllerLectureVideoLink,
     this.testInfo,
@@ -49,6 +51,7 @@ class LessonDetailState extends Equatable {
     editingControllerLectureDescription??=TextEditingController();
     editingControllerLectureVideoLink??=TextEditingController();
     editingControllerLectureDocuments??=TextEditingController();
+    editingControllerLectureContent??=TextEditingController();
     valueListenable ??= ValueNotifier<CategoryInfo?>(null);
   }
 
@@ -62,6 +65,7 @@ class LessonDetailState extends Equatable {
     List<VocabularyInfo>?listOfWordRemove,
     TextEditingController? editingControllerLectureName,
     TextEditingController? editingControllerLectureDescription,
+    TextEditingController? editingControllerLectureContent,
     TextEditingController? editingControllerLectureVideoLink,
     TextEditingController? editingControllerLectureDocuments,
     TestInfo? testInfo,
@@ -77,6 +81,7 @@ class LessonDetailState extends Equatable {
       listOfWordRemove: listOfWordRemove??this.listOfWordRemove,
       editingControllerLectureName: editingControllerLectureName??this.editingControllerLectureName,
       editingControllerLectureDescription: editingControllerLectureDescription??this.editingControllerLectureDescription,
+      editingControllerLectureContent: editingControllerLectureContent??this.editingControllerLectureContent,
       editingControllerLectureVideoLink: editingControllerLectureVideoLink??this.editingControllerLectureVideoLink,
       editingControllerLectureDocuments: editingControllerLectureDocuments??this.editingControllerLectureDocuments,
       testInfo: testInfo??this.testInfo,
@@ -94,6 +99,7 @@ class LessonDetailState extends Equatable {
     listOfWordAdd,
     editingControllerLectureName,
     editingControllerLectureDescription,
+    editingControllerLectureContent,
     editingControllerLectureVideoLink,
     editingControllerLectureDocuments,
     testInfo,

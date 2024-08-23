@@ -6,23 +6,23 @@ import 'models/synthesisInfo.dart';
 import 'models/synthesis_students_info.dart';
 import 'models/top_courses_info.dart';
 
-class GetSubscriptionPurchasesApi extends BaseApiRequest {
-  GetSubscriptionPurchasesApi():super(
+class GetTopCourseApi extends BaseApiRequest {
+  GetTopCourseApi():super(
     serviceType: SERVICE_TYPE.DashBoard,
     apiName: ApiName.getInstance().getSubscriptionPurchases,
   );
 
-  Future<TopCoursesInfo> call() async {
+  Future<TopCoursesInfoResponseModel> call() async {
     await getAuthorization();
     dynamic result = await getRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {
-      return TopCoursesInfo();
+      return TopCoursesInfoResponseModel();
     }
     else
     {
-      TopCoursesInfo responseModel = TopCoursesInfo.fromJson(result);
+      TopCoursesInfoResponseModel responseModel = TopCoursesInfoResponseModel.fromJson(result);
       return responseModel;
     }
   }

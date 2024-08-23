@@ -14,7 +14,11 @@ import 'package:webkit/services/apis/grade/get_grade_list.dart';
 import 'package:webkit/services/apis/grade/models/grade_info.dart';
 
 import '../../../base/widgets/widget_common/widget_with_title_common.dart';
+import 'get_data_synthesis_api.dart';
+import 'get_data_synthesis_students_api.dart';
 import 'get_subscription_purchases_api.dart';
+import 'get_top-courses_api.dart';
+import 'get_user-registration_api.dart';
 import 'models/subscription_purchases_info.dart';
 import 'models/synthesisInfo.dart';
 import 'models/synthesis_students_info.dart';
@@ -59,5 +63,49 @@ class DashboardManager{
       }
     return subscriptionPurchasesInfoResponseModel!;
   }
-  
+  Future<SynthesisStudentInfoResponseModel> getSynthesisStudentInfoResponseModel() async {
+    if(synthesisStudentInfoResponseModel==null)
+    {
+      GetDataSynthesisStudentApi subscriptionPurchasesApi = GetDataSynthesisStudentApi();
+      synthesisStudentInfoResponseModel = await  subscriptionPurchasesApi.call();
+    }
+    return synthesisStudentInfoResponseModel!;
+  }
+
+  Future<SynthesisSummaryInfo> getSynthesisInfoResponseModel() async {
+    if(synthesisSummaryInfo==null)
+    {
+      GetDataSynthesisApi subscriptionPurchasesApi = GetDataSynthesisApi();
+      synthesisSummaryInfo = await  subscriptionPurchasesApi.call();
+    }
+    return synthesisSummaryInfo!;
+  }
+
+  Future<TopCoursesInfoResponseModel> getTopCourseResponseModel() async {
+    if(topCoursesInfoResponseModel==null)
+    {
+      GetTopCourseApi subscriptionPurchasesApi = GetTopCourseApi();
+      topCoursesInfoResponseModel = await  subscriptionPurchasesApi.call();
+    }
+    return topCoursesInfoResponseModel!;
+  }
+  Future<UserRegistrationInfoResponseModel> getUserRegistrationModel() async {
+    if(userRegistrationInfoResponseModel==null)
+    {
+      /// lay du lieu trong nam nay
+      DateTime startTime = DateTime.now().copyWith(month: 0, day: 0, hour: 1);
+      DateTime endTime = DateTime.now();
+      String startTimeStr = DateTimeHelper.dateFormat(date: startTime, dateType: DateTimeHelper.yyyyMMDD);
+      String endTimeStr = DateTimeHelper.dateFormat(date: endTime, dateType: DateTimeHelper.yyyyMMDD);
+
+      GetUserRegistrationApi subscriptionPurchasesApi = GetUserRegistrationApi(
+          dashboardSearchModel: DashboardSearchModel(
+              startTime: startTimeStr,
+              endTime: endTimeStr
+          )
+      );
+      userRegistrationInfoResponseModel = await  subscriptionPurchasesApi.call();
+    }
+    return userRegistrationInfoResponseModel!;
+  }
 }

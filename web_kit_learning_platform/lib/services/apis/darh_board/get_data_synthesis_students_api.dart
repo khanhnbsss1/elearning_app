@@ -4,8 +4,8 @@ import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'models/synthesisInfo.dart';
 import 'models/synthesis_students_info.dart';
 
-class GetDataSynthesisApi extends BaseApiRequest {
-  GetDataSynthesisApi():super(
+class GetDataSynthesisStudentApi extends BaseApiRequest {
+  GetDataSynthesisStudentApi():super(
     serviceType: SERVICE_TYPE.DashBoard,
     apiName: ApiName.getInstance().getDataSynthesisStudent,
   );

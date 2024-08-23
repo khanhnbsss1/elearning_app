@@ -70,6 +70,7 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
         state.listOfWord = [...state.lessonInfo?.vocabularies??[]];
         state.editingControllerLectureName?.text = state.lessonInfo?.lectureName??"";
         state.editingControllerLectureDescription?.text = state.lessonInfo?.note??"";
+        state.editingControllerLectureContent?.text = state.lessonInfo?.content??"";
         state.editingControllerLectureVideoLink?.text = state.lessonInfo?.link??"";
         state.editingControllerLectureDocuments?.text = state.lessonInfo?.docName??"";
         state.testInfo = TestInfo(id: state.lessonInfo?.testId, name: state.lessonInfo?.testName);
@@ -114,7 +115,7 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
       LessonDetailCreateLessonEvent event,
       Emitter<LessonDetailState> emit,
       ) async {
-    state.blocStatus = LessonDetailStatus.initial;
+      state.blocStatus = LessonDetailStatus.initial;
       MonitorLoading().showLoading("");
       AddLessonApi getLessonDetailApi = AddLessonApi(lessonInfo: event.lessonInfo);
       dynamic data = (await getLessonDetailApi.call());

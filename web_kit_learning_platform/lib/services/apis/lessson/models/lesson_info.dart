@@ -53,6 +53,7 @@ class LessonInfo {
   String? createdBy;
   String? updatedBy;
   String? note;
+  String? content;
   int? testId;
   int? gradeId;
   int? categoryId;
@@ -80,7 +81,10 @@ class LessonInfo {
         this.testId,
         this.testName,
         this.videoDuration,
-        this.isFinnish
+        this.isFinnish,
+        this.content,
+        this.gradeId,
+        this.categoryId
       });
 
   LessonInfo.fromJson(Map<String, dynamic> json) {
@@ -95,7 +99,16 @@ class LessonInfo {
     updatedAt = json['updated_at'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
-    note = json['note'];
+    if(json['note']!=null)
+      {
+        List<String> noteStr = (json['note'] as String).split("&&&&---&&&&");
+        if(noteStr.isNotEmpty)
+        {
+          note = noteStr.first;
+          content = noteStr.last;
+        }
+      }
+
     docLink = json['doc_link'];
     isFinnish = json['learning_status']== 'Completed'?true:false;
     testId = json['test_id'];
@@ -146,8 +159,8 @@ class LessonInfo {
     data['grade_id'] = gradeId??1;
     data['category_id'] = categoryId??1;
     
-    if(note!=null&&note!.isNotEmpty) {
-      data['note'] = note;
+    if(note!=null || content!=null ) {
+      data['note'] = "$note&&&&---&&&&$content";
     }
     return data;
   }
