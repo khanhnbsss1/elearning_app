@@ -127,7 +127,7 @@ class CourseInfo {
     String? infoResult,
     String? dayFrom,
     String? dayTo,
-    int? payment,
+    int? price,
     String? createdAt,
     String? updatedAt,
     String? createdBy,
@@ -165,7 +165,7 @@ class CourseInfo {
       infoResult : infoResult ??this.infoResult,
       dayFrom : dayFrom ??this.dayFrom,
       dayTo : dayTo ??this.dayTo,
-      price : payment ??this.price,
+      price : price ??this.price,
       createdAt : createdAt ??this.createdAt,
       updatedAt : updatedAt ??this.updatedAt,
       createdBy : createdBy ??this.createdBy,
@@ -246,12 +246,12 @@ class CourseInfo {
     infoResult = json['info_result'];
     dayFrom = json['day_from'];
     dayTo = json['day_to'];
-    price = json['payment'];
+    price = json['payment']??json['price'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
-    rating = json['rate_point'];
+    rating = json['rate_point']??json['rating'];
     durian = json['durian'];
     videoPreview = json['video_preview'];
     courseMode = json['course_mode'];

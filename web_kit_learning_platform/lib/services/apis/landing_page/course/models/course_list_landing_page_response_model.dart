@@ -53,13 +53,13 @@ class CourseLandingPageInfo extends CourseInfo{
     name = json['name'];
     image = json['image']??"";
     producerName = json['producer_name'];
-    totalLectures = json['total_lecture'];
-    totalSubjects = json['total_subject'];
+    totalLectures = json['total_lecture']??json['total_lectures'];
+    totalSubjects = json['total_subject']??json['total_subjects'];
     language = json['language'];
-    price = json['price'];
+    price = json['price']??json['payment'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    rating = json["rating"];
+    rating = json["rating"]??json["rate_point"];
     introduction = json['introduction'];
   }
 

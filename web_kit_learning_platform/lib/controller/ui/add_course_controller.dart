@@ -265,7 +265,7 @@ class AddCourseController extends MyController {
       producerName: basicValidator.getController('producer_name')?.text,
       language: basicValidator.getController('language')!.text,
       introduction: basicValidator.getController('introduction')?.text,
-      payment: (basicValidator.getController('payment_mode')?.text == 'FREE') ? 0 : int.tryParse(basicValidator.getController('payment_value')?.text ?? '0'),
+      price: (basicValidator.getController('payment_mode')?.text == 'FREE') ? 0 : int.tryParse(basicValidator.getController('payment_value')?.text ?? '0'),
       ratePoint: int.tryParse(basicValidator.getController('rate_point')?.text ?? '0'),
       durian: basicValidator.getController('durian')!.text,
       courseMode: basicValidator.getController('course_mode')!.text,
