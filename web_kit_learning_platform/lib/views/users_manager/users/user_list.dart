@@ -268,7 +268,11 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                       preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
                       text: L10nX.getStr.add_new_str,
                       onTap: () {
-                       AppPages.routeName(Routes.userEdit,);
+                       AppPages.routeName(Routes.userEdit,arguments: {
+                         'userProfile':null,
+                         'actionType':ActionType.create,
+                         'editSelfProfile':false
+                       });
                       },
                     ),
                   ),
@@ -289,11 +293,17 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
       },
       onEdit: (p0) {
         //CreateEditLesson(lessonActionType: LessonActionType.edit,lessonInfo: p0,).show(context);
-        AppPages.routeName(Routes.userEdit,arguments: {'userProfile': p0,'actionType': ActionType.edit});
+        AppPages.routeName(
+            Routes.userEdit,
+            arguments: {
+              'userProfile': p0,
+              'actionType': ActionType.edit,
+              'editSelfProfile':false
+            });
       },
       onViewDetail: (p0) {
        // CreateEditLesson(lessonActionType: LessonActionType.view, lessonInfo: p0,).show(context);
-       AppPages.routeName(Routes.userEdit,arguments: {'userProfile': p0, 'actionType': ActionType.view});
+       AppPages.routeName(Routes.userEdit,arguments: {'userProfile': p0, 'actionType': ActionType.view, 'editSelfProfile':false});
     },
     );
     return LayoutBuilder(

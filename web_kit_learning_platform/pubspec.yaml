@@ -104,6 +104,7 @@ dependencies:
   flutter_native_splash: ^2.4.1
   dropdown_button2: ^3.0.0-beta.16
   percent_indicator: ^4.2.3
+  date_picker_plus: ^4.1.0
   rounded_loading_button:
     git:
       url: https://github.com/scopendo/flutter_rounded_loading_button.git

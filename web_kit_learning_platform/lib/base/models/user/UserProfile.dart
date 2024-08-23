@@ -1,4 +1,5 @@
 
+import 'package:webkit/base/helper/date_time/date_time_helper.dart';
 import 'package:webkit/base/services/base_request/models/page_model.dart';
 
 enum UserType{
@@ -68,7 +69,8 @@ class UserProfile {
     bankName = json['bank_name'];
     identityId = json['identity_id'];
     gender = json['gender'];
-    birthday = json['birthday'];
+    DateTime time =  DateTimeHelper.stringToDate(birthday??"" ,currentTypeDate:  DateTimeHelper.ddMMYYYYHHMMSS)??DateTime.now();
+    birthday = DateTimeHelper.dateFormat(date: time,dateType: DateTimeHelper.yyyyMMDD );
     phoneNumber = json['phone_number'];
     avatar = json['avatar'];
     typeName = json['type_name'];
@@ -157,6 +159,9 @@ class UserProfile {
       position: position ?? this.position,
       email: email ?? this.email,
     );
+  }
+  DateTime getBirdDay(){
+   return DateTimeHelper.stringToDate(birthday??"" ,currentTypeDate:  DateTimeHelper.yyyyMMDD)??DateTime.now();
   }
 }
 

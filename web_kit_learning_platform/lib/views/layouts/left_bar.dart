@@ -384,7 +384,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                             ),
                             MenuItem(
                               title: L10nX.getStr.str_edit_profile,
-                              route:  Routes.contactsEditProfileRoute,
+                              route:  Routes.userEdit,
                               isCondensed: ThemeCustomizer().leftBarCondensed,
                             ),
                           ],

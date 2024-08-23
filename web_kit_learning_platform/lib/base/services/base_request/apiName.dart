@@ -18,6 +18,7 @@ class ApiName {
   final String registerTeacherByPhone = "/register-phone-teacher";
   final String refreshToken = "/refresh-token";
   final String deleteAccount = "/delete-account";
+  final String updatePassword = "/update-passwword";
 
   //user role
   final String createRole = "/create-role";

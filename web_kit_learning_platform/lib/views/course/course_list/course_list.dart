@@ -161,7 +161,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                         BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(
                                                             searchCommonRequest: state.searchCommonRequest!.copyWith(
                                                               filterType: p0.filterType,
-                                                              gradeId: p0.selectSubFilter?.id,
+                                                              subFilter: p0.selectSubFilter?.id,
                                                               pageNumber: 0
                                                             )));
                                                       },

@@ -296,7 +296,7 @@ class _TopBarState extends State<TopBar>
                 MyButton(
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   onTap: () {
-                    AppPages.routeName('/contacts/edit-profile');
+                    AppPages.routeName(Routes.userEdit);
                     setState(() {});
                   },
                   borderRadiusAll: AppStyle.buttonRadius.medium,

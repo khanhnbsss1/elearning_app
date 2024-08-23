@@ -142,7 +142,7 @@ class _ProfilePageState extends State<ProfilePage>
                                       ),
                                       IconButton(
                                         onPressed: () {
-                                          AppPages.routeName('/contacts/edit-profile');
+                                          AppPages.routeName(Routes.userEdit);
                                           setState(() {});
                                         },
                                         icon: const Icon(

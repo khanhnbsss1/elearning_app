@@ -447,8 +447,14 @@ class DateTimeHelper {
   }
   static DateTime? stringToDate(String? dateTime,{String? currentTypeDate}) {
     if (dateTime?.isNotEmpty??false) {
-      DateTime date = DateFormat(currentTypeDate).parse(dateTime!);
-      return date;
+      try{
+        DateTime date = DateFormat(currentTypeDate).parse(dateTime!);
+        return date;
+      }
+      catch(e)
+    {
+      return DateTime.now();
+    }
     }
     return null;
   }

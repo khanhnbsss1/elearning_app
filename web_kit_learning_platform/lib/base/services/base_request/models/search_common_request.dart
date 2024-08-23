@@ -3,6 +3,7 @@ class SearchCommonRequest {
   int? pageSize;
   int? pageNumber;
   String? filterType;
+  int? subFilter;
   String? keyword;
   int?gradeId;
   int?producerId;
@@ -14,6 +15,7 @@ class SearchCommonRequest {
         this.pageSize,
         this.pageNumber,
         this.filterType,
+        this.subFilter,
         this.keyword,
         this.gradeId,
         this.categoryId,
@@ -26,6 +28,8 @@ class SearchCommonRequest {
     pageSize = json['pageSize'];
     pageNumber = json['pageNumber'];
     filterType = json['filterType'];
+    subFilter = json['subFilter'];
+
     keyword = json['keyword'];
     gradeId = json['gradeId'];
     categoryId = json['categoryId'];
@@ -52,6 +56,10 @@ class SearchCommonRequest {
     if(filterType!=null)
     {
       data['filterType'] = filterType;
+    }
+    if(subFilter!=null)
+    {
+      data['subFilterId'] = subFilter;
     }
     if(keyword!=null)
     {
@@ -80,6 +88,7 @@ class SearchCommonRequest {
     int? pageSize,
     int? pageNumber,
     String? filterType,
+    int? subFilter,
     String? keyword,
     int?gradeId,
     int?producerId,
@@ -91,6 +100,7 @@ class SearchCommonRequest {
       pageSize: pageSize??this.pageSize,
       pageNumber: pageNumber??this.pageNumber,
       filterType: filterType??this.filterType,
+      subFilter: subFilter, /// tuy loai filterType moi có subFilter
       keyword: keyword??this.keyword,
       gradeId: gradeId??this.gradeId,
       producerId: producerId??this.producerId,

@@ -8,14 +8,17 @@ import '../../../helpers/widgets/my_text_style.dart';
 class BuildTextField extends StatefulWidget {
   final String fieldTitle;
   final String hintText;
-  final String value;
   final bool? enableEdit;
-
+  Function()? onTap;
+  Widget? suffixIcon;
+  TextEditingController? controller;
   BuildTextField({
     required this.fieldTitle,
     required this.hintText,
-    required this.value,
     this.enableEdit,
+    this.controller,
+    this.onTap,
+    this.suffixIcon
   });
 
   @override
@@ -39,7 +42,8 @@ class _BuildTextFieldState extends State<BuildTextField> with TickerProviderStat
         MyText.labelMedium(widget.fieldTitle),
         MySpacing.height(8),
         TextFormField(
-          initialValue: widget.value,
+          controller: widget.controller,
+          onTap: widget.onTap,
           decoration: InputDecoration(
             enabled: _enableEdit,
             hintText: widget.hintText,
@@ -48,6 +52,7 @@ class _BuildTextFieldState extends State<BuildTextField> with TickerProviderStat
             enabledBorder: outlineInputBorder,
             focusedBorder: focusedInputBorder,
             contentPadding: MySpacing.all(16),
+            suffixIcon: widget.suffixIcon,
             isCollapsed: true,
             floatingLabelBehavior: FloatingLabelBehavior.never,
           ),
