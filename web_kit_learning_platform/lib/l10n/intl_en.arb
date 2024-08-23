@@ -625,5 +625,7 @@
   "user_add_str": "Create User",
   "user_update_str": "Edit User",
   "user_delete_str": "Delete User",
-  "active_course": "Activate course"
+  "active_course": "Activate course",
+  "you_not_register_course": "You have not registered for any course",
+  "register_course_or_contact_to_you_teacher": "Contact your teacher or register now"
 }

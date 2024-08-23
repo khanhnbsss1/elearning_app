@@ -475,6 +475,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "rating": MessageLookupByLibrary.simpleMessage("Rating"),
         "re_create": MessageLookupByLibrary.simpleMessage("Create new"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "register_course_or_contact_to_you_teacher":
+            MessageLookupByLibrary.simpleMessage(
+                "Contact your teacher or register now"),
         "register_now": MessageLookupByLibrary.simpleMessage("Register now"),
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage(
@@ -859,6 +862,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Do you have an account?"),
         "you_do_not_have_an_account": MessageLookupByLibrary.simpleMessage(
             "You don\'t have an account yet?"),
+        "you_not_register_course": MessageLookupByLibrary.simpleMessage(
+            "You have not registered for any course"),
         "you_score": MessageLookupByLibrary.simpleMessage("Your score"),
         "you_want_remove":
             MessageLookupByLibrary.simpleMessage("Do you want to remove"),

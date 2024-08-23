@@ -109,6 +109,16 @@ class ApiName {
   
   /// score
   final String createScore = "/create_score";
+  
+  /// dashboard
+  final String getDataSynthesis = "/get-data-synthesis";
+  final String getDataSynthesisStudent = "/get-data-synthesis-students";
+  final String getLastReview = "/lastest-review";
+  final String getSubscriptionPurchases = "/subscription-purchases";
+  final String getTopCourses = "/top-courses";
+  final String getUserRegistration = "/user-registration";
+
+  
 
 }
 

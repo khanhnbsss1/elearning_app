@@ -397,6 +397,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "rating": MessageLookupByLibrary.simpleMessage("评分"),
         "re_create": MessageLookupByLibrary.simpleMessage("新建"),
         "register": MessageLookupByLibrary.simpleMessage("注册"),
+        "register_course_or_contact_to_you_teacher":
+            MessageLookupByLibrary.simpleMessage("联系你的老师或立即注册"),
         "register_now": MessageLookupByLibrary.simpleMessage("立即注册"),
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage("注册即可享受最优惠的价格"),
@@ -721,6 +723,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("您有帐户吗？"),
         "you_do_not_have_an_account":
             MessageLookupByLibrary.simpleMessage("您还没有帐户？"),
+        "you_not_register_course":
+            MessageLookupByLibrary.simpleMessage("您尚未注册任何课程"),
         "you_score": MessageLookupByLibrary.simpleMessage("你的分数"),
         "you_want_remove": MessageLookupByLibrary.simpleMessage("您要删除吗"),
         "your_address": MessageLookupByLibrary.simpleMessage("您的地址"),

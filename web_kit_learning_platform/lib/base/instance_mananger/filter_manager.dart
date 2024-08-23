@@ -90,7 +90,7 @@ class FilterManager{
         }
         else
         {
-          selectGrade = data.first;
+          //selectGrade = data.first;
         }
         return SizedBox(
           width: width??Dimens.size200,
@@ -191,7 +191,7 @@ class FilterManager{
         }
         else
         {
-          selectCategory = data.first;
+         // selectCategory = data.first;
         }
         
         return SizedBox(

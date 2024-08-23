@@ -471,6 +471,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "rating": MessageLookupByLibrary.simpleMessage("Xếp hạng"),
         "re_create": MessageLookupByLibrary.simpleMessage("Tạo mới"),
         "register": MessageLookupByLibrary.simpleMessage("Đăng ký"),
+        "register_course_or_contact_to_you_teacher":
+            MessageLookupByLibrary.simpleMessage(
+                "Liên hệ với giáo viên của bạn hoặc đăng ký ngay"),
         "register_now": MessageLookupByLibrary.simpleMessage("Đăng ký ngay"),
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage(
@@ -853,6 +856,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bạn có tài khoản?"),
         "you_do_not_have_an_account":
             MessageLookupByLibrary.simpleMessage("Bạn chưa có tài khoản?"),
+        "you_not_register_course": MessageLookupByLibrary.simpleMessage(
+            "Bạn chưa đăng ký khóa học nào"),
         "you_score": MessageLookupByLibrary.simpleMessage("Điểm của bạn"),
         "you_want_remove":
             MessageLookupByLibrary.simpleMessage("Bạn có muốn xóa"),

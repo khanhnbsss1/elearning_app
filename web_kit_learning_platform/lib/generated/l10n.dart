@@ -6229,6 +6229,26 @@ class S {
       args: [],
     );
   }
+
+  /// `You have not registered for any course`
+  String get you_not_register_course {
+    return Intl.message(
+      'You have not registered for any course',
+      name: 'you_not_register_course',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact your teacher or register now`
+  String get register_course_or_contact_to_you_teacher {
+    return Intl.message(
+      'Contact your teacher or register now',
+      name: 'register_course_or_contact_to_you_teacher',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -60,12 +60,6 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                       fontSize: 18,
                       fontWeight: 600,
                     ),
-/*                    MyBreadcrumb(
-                      children: [
-                        MyBreadcrumbItem(name: L10nX.getStr.ecommerce),
-                        MyBreadcrumbItem(name: L10nX.getStr.dashboard, active: true),
-                      ],
-                    ),*/
                   ],
                 ),
               ),
@@ -104,17 +98,22 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                                               MySpacing.width(8),
                                               Expanded(
                                                 child: MyText.bodyMedium(
-                                                  "Your free trial expired in 21 days.",
+                                                  L10nX.getStr.you_not_register_course,
                                                   overflow: TextOverflow.ellipsis,
                                                 ),
                                               )
                                             ],
                                           ),
                                         ),
-                                        MyText.bodyMedium(
-                                          "Upgrade",
-                                          fontWeight: 600,
-                                          decoration: TextDecoration.underline,
+                                        InkWell(
+                                          onTap: () {
+                                            AppPages.routeName(Routes.courseList);
+                                          },
+                                          child: MyText.bodyMedium(
+                                            L10nX.getStr.register,
+                                            fontWeight: 600,
+                                            decoration: TextDecoration.underline,
+                                          ),
                                         )
                                       ],
                                     ),
@@ -134,24 +133,26 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                                               Expanded(
                                                 child: RichText(
                                                   text: TextSpan(
-                                                    text: 'Upgrade Your Plan From a ',
+                                                    text: L10nX.getStr.register_course_or_contact_to_you_teacher,
                                                     style: MyTextStyle.bodyMedium(fontSize: 16),
-                                                    children:  <TextSpan>[
+                 /*                                   children:  <TextSpan>[
                                                       TextSpan(text: 'Free trial,', style: baseStyle.copyWith(fontWeight: FontWeight.bold)),
                                                       TextSpan(text: "to 'Premium plan'"),
-                                                    ],
+                                                    ],*/
                                                   ),
                                                 ),
                                               ),
                                               MySpacing.height(16),
                                               MyButton(
-                                                onTap: () {},
+                                                onTap: () {
+                                                  AppPages.routeName(Routes.courseList);
+                                                },
                                                 elevation: 0,
                                                 padding: MySpacing.xy(8, 12),
                                                 backgroundColor: contentTheme.primary,
                                                 borderRadiusAll: AppStyle.buttonRadius.medium,
                                                 child: MyText.bodySmall(
-                                                  "Upgrade Account!",
+                                                  L10nX.getStr.register_now,
                                                   fontSize: 12,
                                                   color: contentTheme.onPrimary,
                                                 ),
