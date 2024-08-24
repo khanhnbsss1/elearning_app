@@ -50,6 +50,7 @@ import 'package:webkit/views/other/sfmap_page.dart';
 import 'package:webkit/views/other/synsfusion_chart.dart';
 import 'package:webkit/views/permission_manager/permission_list/permission_list.dart';
 import 'package:webkit/views/question/question_list/question_list.dart';
+import 'package:webkit/views/roles/role_list/role_list.dart';
 import 'package:webkit/views/starter.dart';
 import 'package:webkit/views/tags/tag_list/tag_list.dart';
 import 'package:webkit/views/test/test_list/test_list.dart';
@@ -148,10 +149,16 @@ getPageRoute() {
         page: () =>  GradeListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
-    ///--------------- Category ---------------///
+    ///--------------- Permission ---------------///
     GetPage(
         name: Routes.permissionList,
         page: () =>  PermissionListPage(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]),
+    
+    ///--------------- Permission ---------------///
+    GetPage(
+        name: Routes.roleList,
+        page: () =>  RoleListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     
     ///--------------- Test ---------------///

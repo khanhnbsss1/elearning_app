@@ -288,9 +288,9 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       });*/
                     },
                   ),
-                  //----------------Grade------------------//
+                  //----------------Permission------------------//
                   NavigationItem(
-                    iconData: LucideIcons.baggageClaim,
+                    iconData: Icons.policy,
                     title: L10nX.getStr.permission_str,
                     route: Routes.permissionList,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
@@ -301,6 +301,21 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       });*/
                     },
                   ),
+
+                  //----------------Permission------------------//
+                  NavigationItem(
+                    iconData: Icons.local_police_outlined,
+                    title: L10nX.getStr.role_str,
+                    route: Routes.roleList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["claim.post.get_claims"],
+                    onPress: () {
+                      /*                        setState(() {
+                        ThemeCustomizer().leftBarCondensed= true;
+                      });*/
+                    },
+                  ),
+                  
                   //----------------Landing Page------------------//
                   MenuWidget(
                     iconData: LucideIcons.planeLanding,

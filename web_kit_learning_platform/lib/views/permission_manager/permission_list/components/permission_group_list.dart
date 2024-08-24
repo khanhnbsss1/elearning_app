@@ -233,7 +233,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
               ],
             ),
             Visibility(
-              visible: UserManager().userContainPermission(permissionList: ["tags.post.create_tag"]),
+              visible: UserManager().userContainPermission(permissionList: ["claim.post.add_role_claim"]),
               child: Row(
                 children: [
                   Gap(Dimens.size10),

@@ -19,12 +19,7 @@ class ApiName {
   final String refreshToken = "/refresh-token";
   final String deleteAccount = "/delete-account";
   final String updatePassword = "/update-passwword";
-
-  //user role
-  final String createRole = "/create-role";
-  final String editUserRole = "/edit-user-role";
-  final String editRole = "/edit-role";
-  final String deleteRole = "/delete-role";
+  
   
   final String LOGOUT = "/logout";
   

@@ -14,6 +14,8 @@ import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/lessson/lesson_detail/delete_lesson_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/roles/delete_role_api.dart';
+import 'package:webkit/services/apis/roles/models/roles_info.dart';
 import 'package:webkit/services/apis/user/user_manager/delete_user_api.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
@@ -22,15 +24,15 @@ import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart'
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../layouts/layout.dart';
-import 'bloc/lesson_list_bloc.dart';
+import 'bloc/role_list_bloc.dart';
 
-class LessonListPage extends StatefulWidget {
-  LessonListPage({super.key});
+class RoleListPage extends StatefulWidget {
+  RoleListPage({super.key});
   @override
-  State<LessonListPage> createState() => _LessonListPageState();
+  State<RoleListPage> createState() => _RoleListPageState();
 }
 
-class _LessonListPageState extends State<LessonListPage> with SingleTickerProviderStateMixin, UIMixin {
+class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderStateMixin, UIMixin {
   late MemberListController controller;
  TextEditingController textEditingController = TextEditingController();
   GlobalKey<FormState>? formKey = GlobalKey();
@@ -46,7 +48,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
   late int pageCount;
   bool isOnVolume=  false;
   List<String>permission =[
-    "lectures.post.get_list",
+    "claim.post.get_claims",
   ];
   @override
   Widget build(BuildContext context) {
@@ -54,9 +56,9 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
       permissionList: permission,
       child: BlocProvider(
         create: (context) {
-          return LessonListBloc(LessonListState())..add(LessonListInitEvent());
+          return RoleListBloc(RoleListState())..add(RoleListInitEvent());
         },
-        child: BlocConsumer<LessonListBloc, LessonListState>(
+        child: BlocConsumer<RoleListBloc, RoleListState>(
           listener: (context, state) {
             switch (state.blocStatus) {
               case LessonListStatus.initial:
@@ -79,7 +81,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                   return Layout(
                       isScroll: false,
                       title: Center(
-                        child: Text(L10nX.getStr.lesson_list,
+                        child: Text(L10nX.getStr.role__list_str,
                           style: TextStyleConstant.textStyleBlack18w600,),),
                       padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
@@ -89,7 +91,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                   return Layout(
                       isScroll: false,
                       title: Center(child: Text(
-                        L10nX.getStr.lesson_list,
+                        L10nX.getStr.role__list_str,
                         style: TextStyleConstant.textStyleBlack18w600,
                       ),),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
@@ -107,7 +109,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
     required MyScreenMediaType myScreenMediaType,
     required BoxConstraints boxConstraints,
     required BuildContext context,
-    required LessonListState state
+    required RoleListState state
   }
       ){
     return Container(
@@ -121,28 +123,28 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
             buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
             Expanded(child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: buildLessonList(state: state, context: context),
+              child: buildRoleList(state: state, context: context),
             )),
             SizedBox(height: 8,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FlutterCustomPagination(
-                  key: GlobalKey(debugLabel: (state.lessonListResponseModel?.total??0).toString()),
-                  currentPage: state.lessonListResponseModel!.getCurrentPage(),
-                  limitPerPage: state.lessonListResponseModel!.pageSize??10,
-                  totalDataCount: state.lessonListResponseModel!.getTotalElement(),
+                  key: GlobalKey(debugLabel: (state.roleListResponseModel?.total??0).toString()),
+                  currentPage: state.roleListResponseModel!.getCurrentPage(),
+                  limitPerPage: state.roleListResponseModel!.pageSize??10,
+                  totalDataCount: state.roleListResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onBackToFirstPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onNextPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onGoToLastPage: (p0) {
-                    BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   backgroundColor: ColorConst.whiteColor,
                   textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
@@ -162,7 +164,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
     required MyScreenMediaType myScreenMediaType,
     required BoxConstraints boxConstraints,
     required BuildContext context,
-    required LessonListState state
+    required RoleListState state
   }){
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
@@ -198,7 +200,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                             
                               },
                               onFieldSubmitted: (value) {
-                                BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
                               },
                               onTapOutside: (event) {
                               },
@@ -239,7 +241,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                     text: L10nX.getStr.search,
                     radius: 16,
                     onTap: () {
-                      BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                      BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                     },
                   ),
                 ),
@@ -247,7 +249,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                   visible: constraints.maxWidth< 800,
                   child: InkWell(
                       onTap: () {
-                        BlocProvider.of<LessonListBloc>(context).add(LessonListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                        BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                       },
                       child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                 ),
@@ -255,7 +257,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
             ),
             Visibility(
               visible: UserManager().userContainPermission(permissionList: [
-                "lectures.post.create_lecture",
+                "account.post.create_role",
               ]),
               child: Row(
                 children: [
@@ -288,29 +290,29 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
       );
     },);
   }
-  Widget buildLessonList({required LessonListState state, required BuildContext context}){
-    LessonDataSource employeeDataSource = LessonDataSource(
-      lessonData: state.lessonListResponseModel?.content??[],
+  Widget buildRoleList({required RoleListState state, required BuildContext context}){
+    RoleDataSource employeeDataSource = RoleDataSource(
+      lessonData: state.contentView??[],
       starIndex: (state.searchCommonRequest?.pageNumber??0)* (state.searchCommonRequest?.pageSize??0),
       onDelete: (p0) {
         ConfirmPopupPage(
           content: L10nX.getStr.you_want_remove,
           onAccept: () async {
             MonitorLoading().showLoading("");
-            DeleteLessonApi api = DeleteLessonApi(lessonInfo: p0);
+            DeleteRoleApi api = DeleteRoleApi(info: p0);
             dynamic data = await api.call();
             MonitorLoading().dismiss();
 
-            BlocProvider.of<LessonListBloc>(context).add(LessonListInitEvent());
+            BlocProvider.of<RoleListBloc>(context).add(RoleListInitEvent());
           },
           
         ).show(context);
       },
       onEdit: (p0) {
-        CreateEditLesson(lessonActionType: ActionType.edit,lessonInfo: p0,).show(context);
+       // CreateEditLesson(lessonActionType: ActionType.edit,lessonInfo: p0,).show(context);
       },
       onViewDetail: (p0) {
-        CreateEditLesson(lessonActionType: ActionType.view, lessonInfo: p0,).show(context);
+       // CreateEditLesson(lessonActionType: ActionType.view, lessonInfo: p0,).show(context);
       },
     );
     return LayoutBuilder(
@@ -343,50 +345,22 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                         'ID',
                       ))),
               GridColumn(
-                  columnName: L10nX.getStr.lecture_name_str,
+                  columnName: L10nX.getStr.role_str,
                   minimumWidth: Dimens.size250,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
                       child: Text(
-                        L10nX.getStr.lecture_name_str,
+                        L10nX.getStr.role_str,
                         overflow: TextOverflow.ellipsis,
                       ))),
               GridColumn(
-                  columnName: L10nX.getStr.subject_name_str,
+                  columnName: L10nX.getStr.role_str,
                   minimumWidth: Dimens.size200,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
-                      child: Text(L10nX.getStr.subject_name_str))),
-              GridColumn(
-                  columnName: L10nX.getStr.document_str,
-                  minimumWidth: Dimens.size120,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.document_str))),
-              GridColumn(
-                  columnName: L10nX.getStr.test_name,
-                  minimumWidth: Dimens.size200,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.test_name))),
-              GridColumn(
-                  columnName: L10nX.getStr.payment_str,
-                  maximumWidth: Dimens.size100,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.payment_str))),
-              GridColumn(
-                  columnName: L10nX.getStr.vocabulary_str,
-                  minimumWidth: Dimens.size200,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.vocabulary_str))),
+                      child: Text(L10nX.getStr.role_str))),
               GridColumn(
                   columnName: L10nX.getStr.action_str,
                   minimumWidth: Dimens.size180,
@@ -404,76 +378,41 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
   
 }
 
-class LessonDataSource extends DataGridSource {
+class RoleDataSource extends DataGridSource {
   /// Creates the employee data source class with required details.
-  Function(LessonInfo) onViewDetail, onEdit, onDelete;
+  Function(RoleInfo) onViewDetail, onEdit, onDelete;
   int? starIndex;
-  LessonDataSource({
-    required List<LessonInfo> lessonData,
+  RoleDataSource({
+    required List<RoleInfo> lessonData,
     this.starIndex,
     required this.onDelete,
     required this.onEdit,
     required this.onViewDetail}) {
-
+    
     _lessonData = lessonData.map<DataGridRow>((e) {
       starIndex = (starIndex ??0)+1;
       List<Widget> listWord = [];
-      for(VocabularyInfo vocabularyInfo in e.vocabularies??[])
-        {
-          listWord.add(Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimens.size16),
-              border: Border.all(color: ColorConst.blackColor, width: 0.2),
-              color: ColorConst.whiteColor
-            ),
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Text(vocabularyInfo.simplified??"", style: TextStyleConstant.textStyleBlack13w400,),
-          ),
-            
-          );
-        }
       return  DataGridRow(
           cells: [
             DataGridCell<Widget>(columnName: 'id', value: Text("$starIndex", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.lecture_name_str, value:Row(
+            DataGridCell<Widget>(columnName: L10nX.getStr.role_str, value:Row(
               children: [
-                Expanded(child: Text(e.lectureName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+                Expanded(child: Text(e.name??"", style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             ) ),
-            DataGridCell<Widget>(columnName: L10nX.getStr.subject_name_str, value: Row(
+            DataGridCell<Widget>(columnName: L10nX.getStr.role_str, value: Row(
               children: [
-                Expanded(child: Text(e.subName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+                Expanded(child: Text(e.normalizedName??"", style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
-            DataGridCell<Widget>(columnName: L10nX.getStr.document_str, value: Row(
-              children: [
-                Expanded(child: Text(e.docName??"", style: TextStyleConstant.textStyleBlack14w400,)),
-              ],
-            )),
-
-            DataGridCell<Widget>(columnName: L10nX.getStr.test_name, value: Row(
-              children: [
-                Expanded(child: Text(e.testName??"", style: TextStyleConstant.textStyleBlack14w400,)),
-              ],
-            )),
-            DataGridCell<Widget>(columnName: L10nX.getStr.payment_str, value: Text(e.mode??"", style: TextStyleConstant.textStyleBlack14w400,)),
-
-            DataGridCell<Widget>(columnName: L10nX.getStr.vocabulary_str, 
-                value: SingleChildScrollView(
-                  child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: listWord,),
-            )),
-            //DataGridCell<Widget>(columnName: L10nX.getStr.doing_time_str, value: Text("${(e.}", style: TextStyleConstant.textStyleBlack14w400,)),
-
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str,
                 value: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     ItemViewEditDelete(
                       itemInfo: e,
-                      enableEditDelete: UserManager().userContainPermission(permissionList: ["lectures.delete.delete_lecture"]),
-                      enableEdit: UserManager().userContainPermission(permissionList: ["lectures.put.edit_lecture"]),
+                      enableEditDelete: UserManager().userContainPermission(permissionList: ["account.delete.delete_role"]),
+                      enableEdit: UserManager().userContainPermission(permissionList: ["account.put.edit_role"]),
                       onViewDetail: (p0) {
                         onViewDetail(p0);
                       },

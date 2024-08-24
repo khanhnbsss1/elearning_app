@@ -1,4 +1,3 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/src/multipart_file.dart';
@@ -19,13 +18,11 @@ import '../../../base/widgets/widget_common/widget_with_title_common.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 
-import 'lesson_detail_bloc/lesson_detail_bloc.dart';
-
-class CreateEditLesson extends StatefulWidget {
+class CreateEditRole extends StatefulWidget {
    LessonInfo? lessonInfo;
-   ActionType? lessonActionType;
-   CreateEditLesson({super.key, this.lessonInfo, this.lessonActionType}){
-     lessonActionType??= ActionType.create;
+   ActionType? roleActionType;
+   CreateEditRole({super.key, this.lessonInfo, this.roleActionType}){
+     roleActionType??= ActionType.create;
    }
 
   void show(BuildContext context) {
@@ -49,23 +46,19 @@ class CreateEditLesson extends StatefulWidget {
   }
 
   @override
-  State<CreateEditLesson> createState() => _CreateEditLesson();
+  State<CreateEditRole> createState() => _CreateEditLesson();
 }
 
-class _CreateEditLesson extends State<CreateEditLesson>
+class _CreateEditLesson extends State<CreateEditRole>
     with TickerProviderStateMixin, UIMixin {
- 
-
-  String mode = 'FREE';
-  int price = 0;
-  late LessonDetailState _state;
+  
   late bool enableEdit;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    enableEdit = widget.lessonActionType!=ActionType.view;
+    enableEdit = widget.roleActionType!=ActionType.view;
 
   }
   @override
@@ -100,7 +93,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
   Widget lectureDetail() {
     return BlocProvider(
       create: (context) {
-        return LessonDetailBloc(LessonDetailState(lessonInfo: widget.lessonInfo, lessonActionType: widget.lessonActionType))
+        return LessonDetailBloc(LessonDetailState(lessonInfo: widget.lessonInfo, roleActionType: widget.roleActionType))
           ..add(LessonDetailInitEvent());
       },
       child: BlocConsumer<LessonDetailBloc, LessonDetailState>(
@@ -166,9 +159,9 @@ class _CreateEditLesson extends State<CreateEditLesson>
                     ),
                     Divider(color: ColorConst.dividerColor.withOpacity(0.3),),
                     Visibility(
-                      visible: widget.lessonActionType == ActionType.create || widget.lessonActionType == ActionType.edit,
+                      visible: widget.roleActionType == ActionType.create || widget.roleActionType == ActionType.edit,
                       child: ActionButton1(
-                        text: widget.lessonActionType == ActionType.create?L10nX.getStr.create_lesson_str:L10nX.getStr.str_update,
+                        text: widget.roleActionType == ActionType.create?L10nX.getStr.create_lesson_str:L10nX.getStr.str_update,
                         width: Dimens.size150,
                         onTap: () {
                           state.lessonInfo??= LessonInfo();
@@ -178,7 +171,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
                           state.lessonInfo?.link = state.editingControllerLectureVideoLink?.text;
                           state.lessonInfo?.docName = state.editingControllerLectureName?.text;
                           state.lessonInfo?.mode = mode;
-                          switch(widget.lessonActionType){
+                          switch(widget.roleActionType){
                             case ActionType.view:
                               // TODO: Handle this case.
                               break;
@@ -201,7 +194,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
                       ),
                     ),
                     Visibility(
-                      visible: widget.lessonActionType == ActionType.view ,
+                      visible: widget.roleActionType == ActionType.view ,
                       child: ActionButton1(
                         text: L10nX.getStr.close,
                         width: Dimens.size150,
@@ -428,7 +421,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
       title: L10nX.getStr.vocabulary_str,
       isRequirement: true,
       child: SearchWordDropDown(
-        enableEdit: state.lessonActionType != ActionType.view,
+        enableEdit: state.roleActionType != ActionType.view,
         exitsWords: state.listOfWord??[],
         allWords: const [],
         onAddWords: (tags) {
@@ -465,7 +458,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
       title: L10nX.getStr.test_str,
       isRequirement: true,
       child: SearchTestDropDown(
-        enableEdit: state.lessonActionType != ActionType.view,
+        enableEdit: state.roleActionType != ActionType.view,
         testInfo: state.testInfo,
         onSelectTest: (testInfo) {
           BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUpdateTestInfoEvent(testInfo: testInfo));
@@ -476,7 +469,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
   Widget buildCategory({required BuildContext context, required LessonDetailState state}){
     return FilterManager().buildCategory(
         context: context,
-      enable: state.lessonActionType != ActionType.view,
+      enable: state.roleActionType != ActionType.view,
       onChanged: (p0) {
         state.lessonInfo?.categoryId = p0?.id;
         //state.valueListenable?.value = value;
@@ -494,7 +487,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
         BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailChangeLessonEvent(lessonInfo: state.lessonInfo!));
 
       },
-      enable: state.lessonActionType != ActionType.view,
+      enable: state.roleActionType != ActionType.view,
       inputGradeId: state.lessonInfo?.gradeId
     );
   }
