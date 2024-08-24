@@ -118,7 +118,14 @@ class ApiName {
   final String getTopCourses = "/top-courses";
   final String getUserRegistration = "/user-registration";
 
-  
+  /// permisison
+  final String getUserPermissionList = "/get-role-claims";
+
+  /// roles
+  final String getUserRolesList = "/get-roles";
+  final String addRoles = "/create-role";
+  final String editRoles = "/edit-role";
+  final String deleteRoles = "/delete-role";
 
 }
 

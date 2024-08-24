@@ -36,7 +36,7 @@ class UserProfile {
 
   List<String>? permissionList;
   String? permission;
-  int?roleId;
+  String?roleId;
   UserProfile(
       {this.id,
         this.fullName,
@@ -87,7 +87,7 @@ class UserProfile {
       {
         permissionList = (json['permissions'] as String).split(',');
       }
-    roleId = json['role_id'];
+    roleId = json['role_id']??json['roleId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -138,6 +138,9 @@ class UserProfile {
     String? countryName,
     String? position,
     String? email,
+    List<String>? permissionList,
+    String? permission,
+    String?roleId
   }) {
     return UserProfile(
       id: id ?? this.id,
@@ -158,6 +161,10 @@ class UserProfile {
       countryName: countryName ?? this.countryName,
       position: position ?? this.position,
       email: email ?? this.email,
+      permissionList: permissionList ?? this.permissionList,
+      permission: permission ?? this.permission,
+      roleId: roleId ?? this.roleId,
+
     );
   }
   DateTime getBirdDay(){

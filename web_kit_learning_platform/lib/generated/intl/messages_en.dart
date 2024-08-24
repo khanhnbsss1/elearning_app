@@ -418,6 +418,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "pages": MessageLookupByLibrary.simpleMessage("Pages"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "payment_str": MessageLookupByLibrary.simpleMessage("Payment"),
+        "permission_list_str":
+            MessageLookupByLibrary.simpleMessage("Permission List"),
+        "permission_str": MessageLookupByLibrary.simpleMessage("Permission"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Phone number"),
         "phone_number_text":
@@ -503,6 +506,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "right": MessageLookupByLibrary.simpleMessage("Right"),
         "right_answer": MessageLookupByLibrary.simpleMessage("Correct answer"),
         "right_dialog": MessageLookupByLibrary.simpleMessage("Right dialog"),
+        "role__list_str": MessageLookupByLibrary.simpleMessage("Role List"),
+        "role_str": MessageLookupByLibrary.simpleMessage("Role"),
         "rounded_button":
             MessageLookupByLibrary.simpleMessage("Rounded button"),
         "sales_by_sales_person":

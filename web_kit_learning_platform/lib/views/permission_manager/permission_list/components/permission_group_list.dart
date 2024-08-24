@@ -2,43 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_pagination/flutter_custom_pagination.dart';
 import 'package:gap/gap.dart';
-import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
-import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
-import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
+import 'package:webkit/helpers/widgets/my_spacing.dart';
+import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/services/apis/grade/models/grade_info.dart';
-import 'package:webkit/services/apis/tags/models/tag_info.dart';
-import '../../../helpers/widgets/my_spacing.dart';
-import '../../../helpers/widgets/my_text_style.dart';
-import '../../layouts/layout.dart';
-import 'bloc/grade_list_bloc.dart';
-import 'components/add_grade.dart';
-import 'components/grade_item_view.dart';
+import 'package:webkit/services/apis/permission/models/permission_info.dart';
+import 'package:webkit/views/layouts/layout.dart';
+import 'package:webkit/views/permission_manager/permission_list/bloc/permission_list_bloc.dart';
+import 'package:webkit/views/permission_manager/permission_list/components/add_permission.dart';
+import 'package:webkit/views/permission_manager/permission_list/components/permission_item_view.dart';
 
-class GradeListPage extends StatefulWidget {
-  GradeListPage({super.key});
+class PermissionGroupListPage extends StatefulWidget {
+  PermissionGroupListPage({super.key});
   @override
-  State<GradeListPage> createState() => _GradeListPageState();
+  State<PermissionGroupListPage> createState() => _PermissionGroupListPageState();
 }
 
-class _GradeListPageState extends State<GradeListPage> with SingleTickerProviderStateMixin, UIMixin {
-  late MemberListController controller;
+class _PermissionGroupListPageState extends State<PermissionGroupListPage> with SingleTickerProviderStateMixin, UIMixin {
  TextEditingController textEditingController = TextEditingController();
   GlobalKey<FormState>? formKey = GlobalKey();
   ScrollController scrollController=ScrollController();
   List<String>permission =[
-    "grades.get.get_grades"
+    "claim.post.get_claims"
   ];
   @override
   void initState() {
     super.initState();
-    controller = Get.put(MemberListController());
   }
 
   int? page = 1;
@@ -52,15 +46,15 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
       permissionList: permission,
       child: BlocProvider(
         create: (context) {
-          return GradeListBloc(GradeListState())..add(GradeListInitEvent());
+          return PermissionListBloc(PermissionListState())..add(PermissionListInitEvent());
         },
-        child: BlocConsumer<GradeListBloc, GradeListState>(
+        child: BlocConsumer<PermissionListBloc, PermissionListState>(
           listener: (context, state) {
             switch (state.blocStatus) {
-              case GradeListStatus.initial:
+              case PermissionListStatus.initial:
                 break;
                 // TODO: Handle this case.
-              case GradeListStatus.onSelectTag:
+              case PermissionListStatus.onSelectTag:
                 {
                 }
                 break;
@@ -74,23 +68,11 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
               builder: (context , boxConstraints , myScreenMediaType ) {
                 if(!myScreenMediaType.isMobile)
                   {
-                    return Layout(
-                        isScroll: false,
-                        title: Center(
-                          child: Text(L10nX.getStr.grade_str,
-                            style: TextStyleConstant.textStyleBlack18w600,),),
-                        padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
-                        child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
+                    return buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType);
                   }
                 else
                   {
-                    return Layout(
-                      isScroll: false,
-                        title: Center(
-                          child: Text(L10nX.getStr.grade_str,
-                            style: TextStyleConstant.textStyleBlack18w600,),),
-                        child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
-                    );
+                    return buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType);
                   }
               },);
             
@@ -104,7 +86,7 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
     required MyScreenMediaType myScreenMediaType,
     required BoxConstraints boxConstraints,
     required BuildContext context,
-    required GradeListState state
+    required PermissionListState state
   }
       ){
     return Container(
@@ -118,7 +100,7 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
             buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
             Expanded(child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: buildTagList(state: state, context: context),
+              child: buildPermissionList(state: state, context: context),
             )),
             SizedBox(height: 8,),
             Row(
@@ -130,16 +112,16 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
                   limitPerPage: state.tagListResponseModel!.pageSize??10,
                   totalDataCount: state.tagListResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
-                    BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onBackToFirstPage: (p0) {
-                    BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onNextPage: (p0) {
-                    BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   onGoToLastPage: (p0) {
-                    BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
                   backgroundColor: ColorConst.whiteColor,
                   textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
@@ -159,7 +141,7 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
     required MyScreenMediaType myScreenMediaType,
     required BoxConstraints boxConstraints,
     required BuildContext context,
-    required GradeListState state
+    required PermissionListState state
   }){
     return LayoutBuilder(builder: (context, constraints) {
       return Container(
@@ -195,7 +177,7 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
                             
                               },
                               onFieldSubmitted: (value) {
-                                BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
                               },
                               onTapOutside: (event) {
                               },
@@ -236,7 +218,7 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
                     text: L10nX.getStr.search,
                     radius: 16,
                     onTap: () {
-                      BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                      BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                     },
                   ),
                 ),
@@ -244,7 +226,7 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
                   visible: constraints.maxWidth< 800,
                   child: InkWell(
                       onTap: () {
-                        BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                        BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                       },
                       child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                 ),
@@ -259,8 +241,8 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
                     visible: constraints.maxWidth< 800,
                     child: InkWell(
                         onTap: () {
-                          AddGradePage(tagPageAction: GradePageAction.create,).show(context, callBack: (p0) {
-                            BlocProvider.of<GradeListBloc>(context).add(GradeListInitEvent());
+                          AddPermissionPage(tagPageAction: GradePageAction.create,).show(context, callBack: (p0) {
+                            BlocProvider.of<PermissionListBloc>(context).add(PermissionListInitEvent());
                           },);
                         },
                         child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
@@ -269,10 +251,11 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
                     visible: constraints.maxWidth >800,
                     child: ActionButton1(
                       preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
+                      enable: false,
                       text: L10nX.getStr.add_new_str,
                       onTap: () {
-                        AddGradePage(tagPageAction: GradePageAction.create,).show(context, callBack: (p0) {
-                          BlocProvider.of<GradeListBloc>(context).add(GradeListInitEvent());
+                        AddPermissionPage(tagPageAction: GradePageAction.create,).show(context, callBack: (p0) {
+                          BlocProvider.of<PermissionListBloc>(context).add(PermissionListInitEvent());
                         },);
                       },
                     ),
@@ -286,66 +269,46 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
     },);
   }
  
-  Widget buildTagList({required GradeListState state, required BuildContext context}){
-    List<Widget> listOfLesson = List.empty(growable: true);
-
-    for (GradeInfo lessonInfo in state.contentView ?? []) {
-      listOfLesson.add(
-        InkWell(
-          onTap: () {
-            BlocProvider.of<GradeListBloc>(context).add(TagListOnSelectTagEvent(selectTagInfo: lessonInfo));
-          },
-          child: GradeItemView(
-            tagInfo: lessonInfo,
-            
-            onViewDetail: (p0) {
-              AddGradePage(tagPageAction: GradePageAction.view,).show(context);
-            },
-            onEdit: (p0) {
-              AddGradePage(info: p0,tagPageAction: GradePageAction.edit,).show(context, callBack: (p0) {
-                BlocProvider.of<GradeListBloc>(context).add(GradeListInitEvent());
-              },);
-            },
-            onDelete: (p0) {
-              ConfirmPopupPage(
-                title: L10nX.getStr.remove_tags,
-                content: L10nX.getStr.you_want_remove,
-                onAccept: () {
-                  BlocProvider.of<GradeListBloc>(context).add(GradeListOnDeleteTagEvent(selectTagInfo: p0));
-                },
-              ).show(context);
-            },
-          ),
-        )
-      );
-    }
+  Widget buildPermissionList({required PermissionListState state, required BuildContext context}){
     switch (state.blocStatus){
       case null:
         // TODO: Handle this case.
-      case GradeListStatus.initial:
+      case PermissionListStatus.initial:
         // TODO: Handle this case.
-      case GradeListStatus.onLoading:
+      case PermissionListStatus.onLoading:
         // TODO: Handle this case.
-      case GradeListStatus.onSearchByParams:
+      case PermissionListStatus.onSearchByParams:
         // TODO: Handle this case.
         return Center(child: CircularProgressIndicator());
-      case GradeListStatus.onSelectTag:
-      case GradeListStatus.onLoadEnd:
+      case PermissionListStatus.onSelectTag:
+      case PermissionListStatus.onLoadEnd:
         // TODO: Handle this case.
-        return  (listOfLesson.isEmpty) ?
+        return  ((state.contentView ?? []).isEmpty) ?
         Center(child:NoData()) :
-        Scrollbar(
-          controller: scrollController,
-          thickness: Dimens.size10,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            controller: scrollController,
-            child: Column(
-              mainAxisAlignment:MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: listOfLesson,
-            ),
-          ),
+        StatefulBuilder(
+          builder: (context, setState) {
+            List<Widget> listOfLesson = List.empty(growable: true);
+            for (PermissionGroupInfo info in state.contentView ?? []) {
+              listOfLesson.add(GroupPermissionItemView(
+                controller: scrollController,
+                info: info,
+                onChange: (p0) {
+                  
+                },
+              )
+              );
+            }
+            return RawScrollbar(
+              controller: scrollController,
+              thumbColor: ColorConst.colorIconRed,
+              thickness: Dimens.size10,
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                controller: scrollController,
+                children:  listOfLesson,
+              ),
+            );
+          },
         );
     }
   }

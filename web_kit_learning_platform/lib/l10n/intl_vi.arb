@@ -632,6 +632,10 @@
   "review_str": "Đánh giá",
   "sum_str": "Tổng",
   "coure_top_review": "Khóa học có lượt review cao nhất ",
-  "registered_user": "Người dùng đăng ký mới"
+  "registered_user": "Người dùng đăng ký mới",
+  "permission_str": "Quyền",
+  "role_str": "Vai trò",
+  "permission_list_str": "Danh sách quyền",
+  "role__list_str": "Danh sách vai trò"
   
 }

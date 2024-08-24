@@ -6299,6 +6299,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Permission`
+  String get permission_str {
+    return Intl.message(
+      'Permission',
+      name: 'permission_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Role`
+  String get role_str {
+    return Intl.message(
+      'Role',
+      name: 'role_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Permission List`
+  String get permission_list_str {
+    return Intl.message(
+      'Permission List',
+      name: 'permission_list_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Role List`
+  String get role__list_str {
+    return Intl.message(
+      'Role List',
+      name: 'role__list_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -416,6 +416,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "pages": MessageLookupByLibrary.simpleMessage("Trang"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
         "payment_str": MessageLookupByLibrary.simpleMessage("Thanh toán"),
+        "permission_list_str":
+            MessageLookupByLibrary.simpleMessage("Danh sách quyền"),
+        "permission_str": MessageLookupByLibrary.simpleMessage("Quyền"),
         "phone": MessageLookupByLibrary.simpleMessage("Điện thoại"),
         "phone_number": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
         "phone_number_text":
@@ -500,6 +503,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đáp án chính xác"),
         "right_dialog":
             MessageLookupByLibrary.simpleMessage("Hộp thoại bên phải"),
+        "role__list_str":
+            MessageLookupByLibrary.simpleMessage("Danh sách vai trò"),
+        "role_str": MessageLookupByLibrary.simpleMessage("Vai trò"),
         "rounded_button": MessageLookupByLibrary.simpleMessage("Nút làm tròn"),
         "save": MessageLookupByLibrary.simpleMessage("Lưu"),
         "save_account": MessageLookupByLibrary.simpleMessage("Lưu tài khoản"),

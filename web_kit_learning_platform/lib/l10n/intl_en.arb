@@ -632,5 +632,9 @@
   "review_str": "Review",
   "sum_str": "Total",
   "coure_top_review": "The course with the highest number of reviews",
-  "registered_user": "New registered user"
+  "registered_user": "New registered user",
+  "permission_str": "Permission",
+  "role_str": "Role",
+  "permission_list_str": "Permission List",
+  "role__list_str": "Role List"
 }

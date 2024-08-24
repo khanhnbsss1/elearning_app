@@ -348,6 +348,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "pages": MessageLookupByLibrary.simpleMessage("页面"),
         "password": MessageLookupByLibrary.simpleMessage("密码"),
         "payment_str": MessageLookupByLibrary.simpleMessage("付款"),
+        "permission_list_str": MessageLookupByLibrary.simpleMessage("权限列表"),
+        "permission_str": MessageLookupByLibrary.simpleMessage("权限"),
         "phone": MessageLookupByLibrary.simpleMessage("电话"),
         "phone_number": MessageLookupByLibrary.simpleMessage("电话号码"),
         "phone_number_text": MessageLookupByLibrary.simpleMessage("电话号码"),
@@ -418,6 +420,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "right": MessageLookupByLibrary.simpleMessage("右侧"),
         "right_answer": MessageLookupByLibrary.simpleMessage("正确答案"),
         "right_dialog": MessageLookupByLibrary.simpleMessage("右侧对话框"),
+        "role__list_str": MessageLookupByLibrary.simpleMessage("角色列表"),
+        "role_str": MessageLookupByLibrary.simpleMessage("角色"),
         "rounded_button": MessageLookupByLibrary.simpleMessage("圆形按钮"),
         "sales_by_sales_person":
             MessageLookupByLibrary.simpleMessage("销售人员销售额"),

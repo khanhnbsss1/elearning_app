@@ -16,9 +16,9 @@ enum GradePageAction{
   create
 }
 
-class AddGradePage extends StatefulWidget{
+class AddPermissionPage extends StatefulWidget{
   GradePageAction? tagPageAction;
-  AddGradePage({this.info, this.tagPageAction}){
+  AddPermissionPage({this.info, this.tagPageAction}){
     info??=GradeInfo();
     tagPageAction??=GradePageAction.create;
   }
@@ -26,7 +26,7 @@ class AddGradePage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return AddGradePageState();
+    return AddPermissionPageState();
   }
   
   void show(BuildContext context, {Function(dynamic)? callBack}) {
@@ -40,7 +40,7 @@ class AddGradePage extends StatefulWidget{
         }
     },);
   }}
-class AddGradePageState extends State<AddGradePage>with UIMixin {
+class AddPermissionPageState extends State<AddPermissionPage>with UIMixin {
   TextEditingController tagController = TextEditingController();
 
   @override

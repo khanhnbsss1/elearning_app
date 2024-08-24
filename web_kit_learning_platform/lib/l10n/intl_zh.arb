@@ -627,5 +627,9 @@
   "review_str": "评论",
   "sum_str": "总和",
   "coure_top_review": "评论数量最多的课程",
-  "registered_user": "新注册用户"
+  "registered_user": "新注册用户",
+  "permission_str": "权限",
+  "role_str": "角色",
+  "permission_list_str": "权限列表",
+  "role__list_str": "角色列表"
 }
