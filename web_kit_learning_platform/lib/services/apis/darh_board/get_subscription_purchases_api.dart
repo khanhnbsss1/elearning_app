@@ -23,7 +23,7 @@ class GetSubscriptionPurchasesApi extends BaseApiRequest {
     }
     else
     {
-      SubscriptionPurchasesInfoResponseModel responseModel = SubscriptionPurchasesInfoResponseModel.fromJson(result);
+      SubscriptionPurchasesInfoResponseModel responseModel = SubscriptionPurchasesInfoResponseModel.fromJsonList(result);
       return responseModel;
     }
   }

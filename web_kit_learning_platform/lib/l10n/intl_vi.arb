@@ -631,6 +631,7 @@
   "purchased_payment_str": "Doanh thu khóa học",
   "review_str": "Đánh giá",
   "sum_str": "Tổng",
-  "coure_top_review": "Khóa học có lượt review cao nhất "
+  "coure_top_review": "Khóa học có lượt review cao nhất ",
+  "registered_user": "Người dùng đăng ký mới"
   
 }

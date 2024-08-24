@@ -25,7 +25,7 @@ class GetUserRegistrationApi extends BaseApiRequest {
     }
     else
     {
-      UserRegistrationInfoResponseModel responseModel = UserRegistrationInfoResponseModel.fromJson(result);
+      UserRegistrationInfoResponseModel responseModel = UserRegistrationInfoResponseModel.fromJsonList(result);
       return responseModel;
     }
   }

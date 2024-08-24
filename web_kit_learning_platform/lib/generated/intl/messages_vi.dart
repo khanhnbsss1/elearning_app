@@ -482,6 +482,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage(
                 "Đăng ký để được hưởng những ưu đãi tốt nhất cho bạn"),
+        "registered_user":
+            MessageLookupByLibrary.simpleMessage("Người dùng đăng ký mới"),
         "remember_me": MessageLookupByLibrary.simpleMessage("Nhớ tôi"),
         "remove_course": MessageLookupByLibrary.simpleMessage("Xóa khóa học"),
         "remove_example": MessageLookupByLibrary.simpleMessage("Xóa ví dụ"),

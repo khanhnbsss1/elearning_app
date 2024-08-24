@@ -11,7 +11,13 @@ class UserRegistrationInfoResponseModel {
       });
     }
   }
-
+  UserRegistrationInfoResponseModel.fromJsonList(dynamic json) {
+    data = <UserRegistrationInfo>[];
+    json.forEach((v) {
+      data!.add(new UserRegistrationInfo.fromJson(v));
+    });
+    }
+  
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
@@ -28,7 +34,7 @@ class UserRegistrationInfo {
   UserRegistrationInfo({this.dateValue, this.total});
 
   UserRegistrationInfo.fromJson(Map<String, dynamic> json) {
-    dateValue = json['date_value'];
+    dateValue = (json['date_value'] as String).split(' ').first;
     total = json['total'];
   }
 

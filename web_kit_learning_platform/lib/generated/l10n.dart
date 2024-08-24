@@ -6289,6 +6289,16 @@ class S {
       args: [],
     );
   }
+
+  /// `New registered user`
+  String get registered_user {
+    return Intl.message(
+      'New registered user',
+      name: 'registered_user',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

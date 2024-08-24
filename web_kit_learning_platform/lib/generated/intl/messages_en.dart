@@ -486,6 +486,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage(
                 "Register to enjoy the best deals for you"),
+        "registered_user":
+            MessageLookupByLibrary.simpleMessage("New registered user"),
         "remember_me": MessageLookupByLibrary.simpleMessage("Remember Me"),
         "remove_course": MessageLookupByLibrary.simpleMessage("Remove course"),
         "remove_example":

@@ -404,6 +404,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_now": MessageLookupByLibrary.simpleMessage("立即注册"),
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage("注册即可享受最优惠的价格"),
+        "registered_user": MessageLookupByLibrary.simpleMessage("新注册用户"),
         "remember_me": MessageLookupByLibrary.simpleMessage("记住我"),
         "remove_course": MessageLookupByLibrary.simpleMessage("删除课程"),
         "remove_example": MessageLookupByLibrary.simpleMessage("删除示例"),

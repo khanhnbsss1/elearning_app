@@ -626,5 +626,6 @@
   "purchased_payment_str": "已购买",
   "review_str": "评论",
   "sum_str": "总和",
-  "coure_top_review": "评论数量最多的课程"
+  "coure_top_review": "评论数量最多的课程",
+  "registered_user": "新注册用户"
 }

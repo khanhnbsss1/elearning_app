@@ -631,5 +631,6 @@
   "purchased_payment_str": "Purchased",
   "review_str": "Review",
   "sum_str": "Total",
-  "coure_top_review": "The course with the highest number of reviews"
+  "coure_top_review": "The course with the highest number of reviews",
+  "registered_user": "New registered user"
 }

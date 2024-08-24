@@ -11,7 +11,14 @@ class SubscriptionPurchasesInfoResponseModel {
       });
     }
   }
-
+  SubscriptionPurchasesInfoResponseModel.fromJsonList(dynamic json) {
+    if (json != null) {
+      data = <SubscriptionPurchasesInfo>[];
+      json.forEach((v) {
+        data!.add(new SubscriptionPurchasesInfo.fromJson(v));
+      });
+    }
+  }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
@@ -28,7 +35,7 @@ class SubscriptionPurchasesInfo {
   SubscriptionPurchasesInfo({this.dateValue, this.totalAmount});
 
   SubscriptionPurchasesInfo.fromJson(Map<String, dynamic> json) {
-    dateValue = json['date_value'];
+    dateValue = (json['date_value'] as String).split(" ").first;
     totalAmount = json['total_amount'];
   }
 
