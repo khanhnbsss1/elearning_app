@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import '../main.dart';
 import 'country_flag.dart';
 import '../configs/language_config.dart';
 
@@ -52,11 +53,12 @@ class _LanguagesState extends State<Languages> {
                 visible: currentLocale == locale,
                 child: const Icon(Icons.done, color: Colors.blueAccent),
               ),
-              onTap: () async {
-                final engine = WidgetsFlutterBinding.ensureInitialized();
-                await context.setLocale(locale);
-                await engine.performReassemble();
-              },
+              onTap: () {
+                // final engine = WidgetsFlutterBinding.ensureInitialized();
+                // await context.setLocale(locale);
+                // await engine.performReassemble();
+                EasyLocalization.of(context)?.setLocale(locale);
+                },
             ),
           );
         },

@@ -7,6 +7,7 @@ import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/screens/home/home_view.dart';
 import 'package:lms_app/screens/tabs/profile_tab/profile_tab.dart';
 import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services_elearning/apis/user/get_user_detail_api.dart';
 import 'package:lms_app/theme/theme_provider.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
@@ -31,6 +32,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
   late EditProfileController editProfileController;
   final _btnController = RoundedLoadingButtonController();
   final formKey = GlobalKey<FormState>();
+  bool initController = false;
   XFile? _selectedImageFile;
   String? _imageUrl;
   bool showPassword = false;
@@ -38,8 +40,10 @@ class _EditProfileState extends ConsumerState<EditProfile> {
   @override
   void initState() {
     super.initState();
-    editProfileController = EditProfileController(userProfile: widget.user);
-    editProfileController.onInit();
+    if (!initController) {
+      editProfileController = EditProfileController(userProfile: widget.user);
+      editProfileController.onInit();
+    };
   }
 
   Future _pickImage() async {
@@ -81,10 +85,12 @@ class _EditProfileState extends ConsumerState<EditProfile> {
       // final String? imageUrl = await _getUserImage();
       // // await FirebaseService().updateUserProfile(_userData(imageUrl));
       // await ref.read(userDataProvider.notifier).getData();
+      // Navigator.pop(context, true);
       _btnController.reset();
       if (check) {
         await ref.read(userDataProvider.notifier).getData();
         setState(() => _selectedImageFile = null);
+        Navigator.pop(context);
         openSnackbar(context, 'Profile updated');
       } else {
         openSnackbar(context, 'Profile failed');
@@ -203,6 +209,45 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                 ),
               ),
               const SizedBox(height: 10),
+              const Text('Identity id'),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                color: isDarkMode
+                    ? CustomColor.containerDark
+                    : CustomColor.container,
+                child: TextFormField(
+                  controller: editProfileController.basicValidator
+                      .getController('identity_id'),
+                  decoration: const InputDecoration(
+                    hintText: 'Enter your identity id',
+                    border: InputBorder.none,
+                    contentPadding:
+                    EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text('Phone number'),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                color: isDarkMode
+                    ? CustomColor.containerDark
+                    : CustomColor.container,
+                child: TextFormField(
+                  controller: editProfileController.basicValidator
+                      .getController('phone_number'),
+                  decoration: const InputDecoration(
+                    hintText: 'Enter your phone number',
+                    border: InputBorder.none,
+                    contentPadding:
+                    EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  ),
+                ),
+              ),
             ],
           ),
         ),

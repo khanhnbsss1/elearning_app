@@ -51,7 +51,6 @@ class RefreshTokenApi extends BaseApiRequest {
           accessToken: authInfo?.accessToken,
           refreshToken: authInfo?.refreshToken
         );
-        print("object");
         await setApiBody(refreshTokenRequest.toJson());
       }
   }

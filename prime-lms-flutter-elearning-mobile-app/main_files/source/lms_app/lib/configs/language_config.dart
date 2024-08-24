@@ -11,14 +11,8 @@ class LanguageConfig {
   static const Map<String, List<String>> languages = {
     //language_name : [language_code, country_code(Capital format)]
     "English": ['en', 'US'],
-    "Spanish": ['es', 'ES'],
-    "Arabic": ['ar', 'SA'],
-    "Hindi": ['hi', 'IN'],
-    "German": ['de', 'DE'],
-    "Portuguese": ['pt', 'BR'],
-    "French": ['fr', 'FR'],
-    "Indonesian": ['id', 'ID'],
     "Chinese": ['zh', 'CN'],
+    "Vietnamese": ['vi', 'VN'],
   };
 
   // Don't edit this

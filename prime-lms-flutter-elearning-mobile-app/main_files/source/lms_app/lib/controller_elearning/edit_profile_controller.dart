@@ -8,6 +8,8 @@ import '../../helper_elearning/widget/my_validators.dart';
 import '../../models_elearning/user/UserProfile.dart';
 import '../../services_elearning/apis/auth/register/models/register_request.dart';
 import '../../services_elearning/apis/auth/register/register_with_phone_api.dart';
+import '../services_elearning/apis/upload_file/models/upload_file_info.dart';
+import '../services_elearning/apis/upload_file/upload_file_api.dart';
 
 class EditProfileController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
@@ -45,9 +47,28 @@ class EditProfileController extends MyController {
       label: 'Password',
       controller: TextEditingController(),
     );
-    basicValidator.getController('fullname')!.text = userProfile.fullName!;
-    basicValidator.getController('bank_name')!.text = userProfile.bankName!;
-    basicValidator.getController('bank_account')!.text = userProfile.bankAccount!;
+    basicValidator.addField(
+      'identity_id',
+      required: true,
+      label: 'Identity id',
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'phone_number',
+      required: true,
+      label: 'Phone number',
+      controller: TextEditingController(),
+    );
+    basicValidator.getController('fullname')!.text = userProfile.fullName??"";
+    basicValidator.getController('bank_name')!.text = userProfile.bankName??"";
+    basicValidator.getController('bank_account')!.text = userProfile.bankAccount??"";
+    basicValidator.getController('identity_id')!.text = userProfile.identityId??"";
+    basicValidator.getController('phone_number')!.text = userProfile.phoneNumber??"";
+  }
+
+  Future<void> updateImage(UploadFileInfo uploadFileinfo) async {
+    UploadFileApi uploadFileApi = UploadFileApi(fileInfo: uploadFileinfo);
+    UploadFileResponseInfo? data = await uploadFileApi.call();
   }
 
   void onChangeCheckBox(bool? value) {
@@ -62,10 +83,10 @@ class EditProfileController extends MyController {
       fullname: basicValidator.getController('fullname')?.text,
       bankAccount: basicValidator.getController('bank_account')?.text,
       bankName: basicValidator.getController('bank_name')?.text,
-      identityId: userProfile.identityId??"000000000000",
+      identityId: basicValidator.getController('identity_id')!.text,
       gender: userProfile.gender??"male",
       birthday: userProfile.birthday??"",
-      phoneNumber: userProfile.phoneNumber??"",
+      phoneNumber: basicValidator.getController('phone_number')!.text,
     );
     EditUserApi editUserApi = EditUserApi(editUserRequest: editUserRequest);
     bool data = await editUserApi.call();

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:lms_app/components/price_tag.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
@@ -24,7 +25,8 @@ class HorizontalCourseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final heroTag = UniqueKey();
     return InkWell(
-      onTap: () => NextScreen.iOS(context, CourseDetailsView(courses: course, heroTag: heroTag)),
+      onTap: () => NextScreen.iOS(
+          context, CourseDetailsView(courses: course, heroTag: heroTag)),
       child: Container(
         width: MediaQuery.of(context).size.width * widthPercentage,
         margin: const EdgeInsets.symmetric(horizontal: 8),
@@ -38,10 +40,15 @@ class HorizontalCourseTile extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: Hero(
                       tag: heroTag,
-                      child: CustomCacheImage(
-                        imageUrl: course.image,
-                        radius: 0,
-                      ),
+                      child: (course.image != null && course.image != "")
+                          ? CustomCacheImage(
+                              imageUrl: course.image,
+                              radius: 0,
+                            )
+                          : Image.asset(
+                              "assets/images/noImage.jpg",
+                              fit: BoxFit.cover,
+                            ),
                     )),
                 // PremiumTag(course: course),
               ],
@@ -56,14 +63,20 @@ class HorizontalCourseTile extends StatelessWidget {
                   course.name!,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(fontWeight: FontWeight.w600),
                 ),
                 const SizedBox(height: 3),
-                RatingViewer(rating: (course.ratePoint??0).toDouble()),
+                RatingViewer(rating: (course.ratePoint ?? 0).toDouble()),
                 const SizedBox(height: 3),
                 Text(
                   'count-students',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blueGrey),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: Colors.blueGrey),
                 ).tr(args: [course.totalLectures.toString()])
               ],
             )

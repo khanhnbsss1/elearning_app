@@ -45,7 +45,7 @@ class FeaturedCourseTile extends StatelessWidget {
                       borderRadius: const BorderRadius.only(topLeft: Radius.circular(3), topRight: Radius.circular(3)),
                         image: (course.image != null && course.image != "")
                             ? DecorationImage(image: CachedNetworkImageProvider(course.image!), fit: BoxFit.cover)
-                            : const DecorationImage(image: AssetImage("assets/images/noImage.png"), fit: BoxFit.cover),
+                            : const DecorationImage(image: AssetImage("assets/images/noImage.jpg"), fit: BoxFit.cover),
                       ),
                   ),
                   Align(
