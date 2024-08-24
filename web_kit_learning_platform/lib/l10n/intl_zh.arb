@@ -631,5 +631,10 @@
   "permission_str": "权限",
   "role_str": "角色",
   "permission_list_str": "权限列表",
-  "role__list_str": "角色列表"
+  "role__list_str": "角色列表",
+  "report_str": "报告",
+  "report_history_register_course": "课程注册历史记录",
+  "report_history_edit_course": "课程创建/编辑时间表",
+  "report_purchased": "收入",
+  "report_new_registered_account": "新注册者"
 }

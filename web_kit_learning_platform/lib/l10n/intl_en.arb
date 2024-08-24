@@ -636,5 +636,10 @@
   "permission_str": "Permission",
   "role_str": "Role",
   "permission_list_str": "Permission List",
-  "role__list_str": "Role List"
+  "role__list_str": "Role List",
+  "report_str": "Report",
+  "report_history_register_course": "Course registration history",
+  "report_history_edit_course": "Course creation/edit history",
+  "report_purchased": "Revenue",
+  "report_new_registered_account": "New registrant"
 }

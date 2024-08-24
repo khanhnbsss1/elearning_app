@@ -413,6 +413,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "remove_lesson": MessageLookupByLibrary.simpleMessage("删除课程"),
         "remove_tags": MessageLookupByLibrary.simpleMessage("删除标签"),
         "remove_test": MessageLookupByLibrary.simpleMessage("删除测试"),
+        "report_history_edit_course":
+            MessageLookupByLibrary.simpleMessage("课程创建/编辑时间表"),
+        "report_history_register_course":
+            MessageLookupByLibrary.simpleMessage("课程注册历史记录"),
+        "report_new_registered_account":
+            MessageLookupByLibrary.simpleMessage("新注册者"),
+        "report_purchased": MessageLookupByLibrary.simpleMessage("收入"),
+        "report_str": MessageLookupByLibrary.simpleMessage("报告"),
         "reset_password": MessageLookupByLibrary.simpleMessage("重置密码"),
         "result": MessageLookupByLibrary.simpleMessage("结果"),
         "revenue": MessageLookupByLibrary.simpleMessage("收入"),

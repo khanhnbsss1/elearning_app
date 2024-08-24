@@ -498,6 +498,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "remove_lesson": MessageLookupByLibrary.simpleMessage("Remove lesson"),
         "remove_tags": MessageLookupByLibrary.simpleMessage("Remove tags"),
         "remove_test": MessageLookupByLibrary.simpleMessage("Remove test"),
+        "report_history_edit_course": MessageLookupByLibrary.simpleMessage(
+            "Course creation/edit history"),
+        "report_history_register_course":
+            MessageLookupByLibrary.simpleMessage("Course registration history"),
+        "report_new_registered_account":
+            MessageLookupByLibrary.simpleMessage("New registrant"),
+        "report_purchased": MessageLookupByLibrary.simpleMessage("Revenue"),
+        "report_str": MessageLookupByLibrary.simpleMessage("Report"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Reset password"),
         "result": MessageLookupByLibrary.simpleMessage("Result"),

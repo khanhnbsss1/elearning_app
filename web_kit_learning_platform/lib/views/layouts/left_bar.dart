@@ -216,8 +216,11 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                             UserManager().userContainPermission(permissionList: ["landingpages.put.update_landingpage_review"])||
                             UserManager().userContainPermission(permissionList: ["tags.get.get_tags"])||
                             UserManager().userContainPermission(permissionList: ["grades.get.get_grades"])||
-                            UserManager().userContainPermission(permissionList: ["categories.get.get_categories"])||
-                            UserManager().userContainPermission(permissionList: ["landingpages.put.update_landingpage_teacher"]) 
+                            UserManager().userContainPermission(permissionList: ["categories.get.get_categories"])|| 
+                            UserManager().userContainPermission(permissionList: ["claim.post.get_claims"])||
+                            UserManager().userContainPermission(permissionList: ["claim.post.get_claims"])||
+                            UserManager().userContainPermission(permissionList: ["landingpages.put.update_landingpage_teacher"])
+                            
                         ),
                     child: Padding(
                       padding:  EdgeInsets.symmetric(horizontal: Dimens.size20, vertical: Dimens.size8),
@@ -245,6 +248,48 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                         route:  Routes.teacherList,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
                         permission: const ["users.get.get_user_list"],
+                      ),
+                    ],
+                  ),
+                  MenuWidget(
+                    iconData: Icons.note_alt_outlined,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    title: L10nX.getStr.report_str,
+                    permission: const [
+                      "users.get.get_user_list"
+                    ],
+                    children: [
+                      MenuItem(
+                        title: L10nX.getStr.report_history_register_course,
+                       // route:  Routes.studentList,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        permission: const [
+                         // "users.get.get_user_list"
+                        ],
+                      ),
+                      MenuItem(
+                        title: L10nX.getStr.report_history_edit_course,
+                       // route:  Routes.teacherList,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        permission: const [
+                         // "users.get.get_user_list"
+                        ],
+                      ),
+                      MenuItem(
+                        title: L10nX.getStr.report_purchased,
+                        //route:  Routes.teacherList,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        permission: const [
+                          // "users.get.get_user_list"
+                        ],
+                      ),
+                      MenuItem(
+                        title: L10nX.getStr.report_new_registered_account,
+                       // route:  Routes.teacherList,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        permission: const [
+                          // "users.get.get_user_list"
+                        ],
                       ),
                     ],
                   ),

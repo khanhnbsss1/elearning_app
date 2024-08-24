@@ -6339,6 +6339,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Report`
+  String get report_str {
+    return Intl.message(
+      'Report',
+      name: 'report_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Course registration history`
+  String get report_history_register_course {
+    return Intl.message(
+      'Course registration history',
+      name: 'report_history_register_course',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Course creation/edit history`
+  String get report_history_edit_course {
+    return Intl.message(
+      'Course creation/edit history',
+      name: 'report_history_edit_course',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Revenue`
+  String get report_purchased {
+    return Intl.message(
+      'Revenue',
+      name: 'report_purchased',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New registrant`
+  String get report_new_registered_account {
+    return Intl.message(
+      'New registrant',
+      name: 'report_new_registered_account',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

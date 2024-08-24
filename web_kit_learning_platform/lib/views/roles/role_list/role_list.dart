@@ -356,14 +356,16 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
                       ))),
               GridColumn(
                   columnName: L10nX.getStr.role_str,
-                  minimumWidth: Dimens.size200,
+                  minimumWidth: Dimens.size120,
+                  maximumWidth: Dimens.size150,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
                       child: Text(L10nX.getStr.role_str))),
               GridColumn(
                   columnName: L10nX.getStr.action_str,
-                  minimumWidth: Dimens.size180,
+                  minimumWidth: Dimens.size150,
+                  maximumWidth: Dimens.size180,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
@@ -400,11 +402,7 @@ class RoleDataSource extends DataGridSource {
                 Expanded(child: Text(e.name??"", style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             ) ),
-            DataGridCell<Widget>(columnName: L10nX.getStr.role_str, value: Row(
-              children: [
-                Expanded(child: Text(e.normalizedName??"", style: TextStyleConstant.textStyleBlack14w400,)),
-              ],
-            )),
+            DataGridCell<Widget>(columnName: L10nX.getStr.role_str, value: Text(e.normalizedName??"", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str,
                 value: Column(
                   mainAxisSize: MainAxisSize.min,

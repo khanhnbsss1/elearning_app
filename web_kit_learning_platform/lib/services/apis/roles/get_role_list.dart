@@ -12,7 +12,7 @@ class GetRoleListApi extends BaseApiRequest {
 
   Future<RolesListResponseModel> call() async {
     await getAuthorization();
-    dynamic result = await getRequestAPI();
+    dynamic result = await postRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {

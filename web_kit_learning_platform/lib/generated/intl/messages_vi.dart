@@ -493,6 +493,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "remove_lesson": MessageLookupByLibrary.simpleMessage("Xóa bài học"),
         "remove_tags": MessageLookupByLibrary.simpleMessage("Xóa thẻ"),
         "remove_test": MessageLookupByLibrary.simpleMessage("Xóa bài test"),
+        "report_history_edit_course":
+            MessageLookupByLibrary.simpleMessage("Lịch sửa tạo/sửa khóa học"),
+        "report_history_register_course":
+            MessageLookupByLibrary.simpleMessage("Lịch sử đăng ký khóa học"),
+        "report_new_registered_account":
+            MessageLookupByLibrary.simpleMessage("Người đăng ký mới"),
+        "report_purchased": MessageLookupByLibrary.simpleMessage("Doanh thu"),
+        "report_str": MessageLookupByLibrary.simpleMessage("Báo cáo"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "result": MessageLookupByLibrary.simpleMessage("Kết quả"),
