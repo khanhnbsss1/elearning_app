@@ -254,6 +254,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "image_str": MessageLookupByLibrary.simpleMessage("图像"),
         "image_type_str": MessageLookupByLibrary.simpleMessage("图片"),
+        "inactive_str": MessageLookupByLibrary.simpleMessage("不活动"),
         "infinite": MessageLookupByLibrary.simpleMessage("无限"),
         "info": MessageLookupByLibrary.simpleMessage("信息"),
         "instructor_str": MessageLookupByLibrary.simpleMessage("讲师"),

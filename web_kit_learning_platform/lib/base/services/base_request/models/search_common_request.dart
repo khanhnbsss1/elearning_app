@@ -9,6 +9,7 @@ class SearchCommonRequest {
   int?producerId;
   int?categoryId;
   String? userType;
+  bool? isActive;
   SearchCommonRequest(
       {
         this.userId,
@@ -20,7 +21,8 @@ class SearchCommonRequest {
         this.gradeId,
         this.categoryId,
         this.producerId,
-        this.userType
+        this.userType,
+        this.isActive
       });
 
   SearchCommonRequest.fromJson(Map<String, dynamic> json) {
@@ -34,7 +36,7 @@ class SearchCommonRequest {
     gradeId = json['gradeId'];
     categoryId = json['categoryId'];
     producerId = json['producerId'];
-
+    isActive = json['isActive'];
   }
 
   Map<String, dynamic> toJson() {
@@ -81,6 +83,10 @@ class SearchCommonRequest {
     {
       data['typeName'] = userType;
     }
+    if(isActive!=null)
+    {
+      data['isActive'] = (isActive??true)?1:0;
+    }
     return data;
   }
   SearchCommonRequest copyWith({
@@ -93,7 +99,8 @@ class SearchCommonRequest {
     int?gradeId,
     int?producerId,
     int?categoryId,
-    String? userType
+    String? userType,
+    bool? isActive
   }){
     return SearchCommonRequest(
       userId: userId??this.userId,
@@ -106,7 +113,7 @@ class SearchCommonRequest {
       producerId: producerId??this.producerId,
       categoryId: categoryId??this.categoryId,
       userType: userType??this.userType,
-
+      isActive: isActive??this.isActive,
     );
 }
 }

@@ -53,9 +53,6 @@ class RoleListBloc extends Bloc<RoleListEvent, RoleListState> {
           searchCommonRequest: searchCommonRequest,
             contentView: PermissionManager().rolesListResponseModel?.content
         ));
-        if((PermissionManager().rolesListResponseModel?.content??[]).isNotEmpty) {
-          add(RoleListOnSelectLessonEvent(roleInfo: (PermissionManager().rolesListResponseModel?.content??[]).first));
-        }
    
 
   }

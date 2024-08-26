@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,6 +37,7 @@ import 'package:webkit/views/auth/reset_password_2.dart';
 import 'package:webkit/views/category/category_list/category_list.dart';
 import 'package:webkit/views/course/course_detail/course_study/course_study.dart';
 import 'package:webkit/views/course/course_list/course_list.dart';
+import 'package:webkit/views/course/inactive_course/inactivate_course_list.dart';
 import 'package:webkit/views/course/my_course/my_course_list.dart';
 import 'package:webkit/views/forms/basic_page.dart';
 import 'package:webkit/views/forms/form_mask.dart';
@@ -213,8 +216,8 @@ getPageRoute() {
         middlewares: [AuthMiddleware()]),
 
     GetPage(
-        name: Routes.courseDetail,
-        page: () =>  MyCourseList(key: UniqueKey(),),
+        name: Routes.inActiveCourse,
+        page: () =>  InactiveCourseList(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: Routes.pricingRoute,

@@ -143,6 +143,15 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                           "courses.post.search_course"
                         ],
                       ),
+                      MenuItem(
+                        title: L10nX.getStr.inactive_str,
+                        route:  Routes.inActiveCourse,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        permission: const [
+                          "courses.post.search_course",
+                          "courses.put.update_course"
+                        ],
+                      ),
                     ],
                   ),
                   //----------------Bai hoc------------------//

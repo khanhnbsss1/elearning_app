@@ -24,10 +24,12 @@ import '../../layouts/layout.dart';
 import 'components/filter_menu_item.dart';
 
 class CourseList extends StatefulWidget {
-  CourseList({super.key, this.courseType}) {
+  CourseList({super.key, this.courseType, this.isActivate}) {
     courseType ??= CourseType.courseList;
+    isActivate??=true;
   }
   CourseType? courseType;
+  bool? isActivate;
   @override
   State<CourseList> createState() => _CourseListState();
 }
@@ -47,18 +49,14 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
     super.initState();
     controller = Get.put(MemberListController());
   }
-
-  int? page = 1;
-  final int pageItemCount = 16;
-  late int pageCount;
-
+  
   @override
   Widget build(BuildContext context) {
     return PermissionPage(
       permissionList: permission,
       child: BlocProvider(
         create: (context) {
-          return CourseListBloc(CourseListState(courseType: widget.courseType))..add(CourseListInitEvent());
+          return CourseListBloc(CourseListState(courseType: widget.courseType,isActivate: widget.isActivate ))..add(CourseListInitEvent());
         },
         child: BlocConsumer<CourseListBloc, CourseListState>(
           listener: (context, state) {

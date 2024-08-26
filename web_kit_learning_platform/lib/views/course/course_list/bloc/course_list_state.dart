@@ -18,15 +18,17 @@ class CourseListState extends Equatable {
   SearchCommonRequest? searchCommonRequest;
   CourseType? courseType;
   UserProfile? userProfile;
+  bool? isActivate;
   CourseListState({
       this.blocStatus, 
     this.courseResponseModel,
     this.searchCommonRequest,
     this.courseType,
-    this.userProfile
+    this.userProfile,
+    this.isActivate
   }){
     courseResponseModel??= CourseResponseModel(content: []);
-    searchCommonRequest??= SearchCommonRequest(filterType: "ALL", pageNumber: 0, pageSize: 30, keyword: "",);
+    searchCommonRequest??= SearchCommonRequest(filterType: "ALL", pageNumber: 0, pageSize: 30, keyword: "", isActive: isActivate);
     courseType??= CourseType.courseList;
   }
 

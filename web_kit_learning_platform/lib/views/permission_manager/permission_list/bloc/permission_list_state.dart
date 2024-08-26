@@ -5,25 +5,29 @@ enum PermissionListStatus {
   onLoading,
   onSearchByParams,
   onLoadEnd,
-  onSelectTag
+  onSelectTag,
+  onChangePermission,
+  unKnow
 }
 
 @immutable
 class PermissionListState extends Equatable {
-  PermissionListResponseModel? tagListResponseModel;
+  PermissionListResponseModel? permissionListResponseModel;
   PermissionListStatus? blocStatus;
   SearchCommonRequest? searchCommonRequest;
   List<PermissionGroupInfo>? contentView;
   List<PermissionInfo>? childRolePermissions;
-
+  bool? enableEdit;
   PermissionListState({
       this.blocStatus, 
-    this.tagListResponseModel,
+    this.permissionListResponseModel,
     this.searchCommonRequest,
     this.contentView,
     this.childRolePermissions,
+    this.enableEdit
   }){
-    tagListResponseModel??= PermissionListResponseModel(content: []);
+    enableEdit??=false;
+    permissionListResponseModel??= PermissionListResponseModel(content: []);
     searchCommonRequest??= SearchCommonRequest(pageNumber: 0, pageSize: 10, keyword: "");
   }
 
@@ -34,19 +38,21 @@ class PermissionListState extends Equatable {
     SearchCommonRequest? searchCommonRequest,
     GradeInfo? selectInfo,
     List<PermissionGroupInfo>? contentView,
-    List<PermissionInfo>? childRolePermissions
+    List<PermissionInfo>? childRolePermissions,
+    bool? enableEdit
   })
   {
     return PermissionListState(
       blocStatus: blocStatus??this.blocStatus,
-      tagListResponseModel: tagListResponseModel??this.tagListResponseModel,
+      permissionListResponseModel: tagListResponseModel??this.permissionListResponseModel,
       searchCommonRequest: searchCommonRequest??this.searchCommonRequest,
       contentView: contentView??this.contentView,
       childRolePermissions: childRolePermissions??this.childRolePermissions,
+      enableEdit: enableEdit??this.enableEdit,
 
     );
   }
   @override
-  List<Object?> get props => [blocStatus, tagListResponseModel, searchCommonRequest,contentView, childRolePermissions];
+  List<Object?> get props => [blocStatus, permissionListResponseModel, searchCommonRequest,contentView, childRolePermissions, enableEdit];
 
 }

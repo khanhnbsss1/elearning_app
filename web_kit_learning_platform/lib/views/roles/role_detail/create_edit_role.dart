@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/services/apis/roles/models/roles_info.dart';
@@ -37,10 +38,10 @@ class CreateEditRole extends StatefulWidget {
   }
 
   @override
-  State<CreateEditRole> createState() => _CreateEditLesson();
+  State<CreateEditRole> createState() => _CreateEditRole();
 }
 
-class _CreateEditLesson extends State<CreateEditRole>
+class _CreateEditRole extends State<CreateEditRole>
     with TickerProviderStateMixin, UIMixin {
   
   late bool enableEdit;
@@ -114,25 +115,35 @@ class _CreateEditLesson extends State<CreateEditRole>
                         mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          buildRoleName(context: context),
-                          MySpacing.height(16),
-                          buildRoleDescription(context: context),
+                          Row(
+                            children: [
+                              Expanded(child: buildRoleName(context: context)),
+                              Gap(Dimens.size50),
+                              Expanded(child: buildRoleDescription(context: context)),
+                            ],
+                          ),
                           MySpacing.height(16), 
-                          Expanded(child: PermissionGroupListPage(
-                            scrollController: scrollController,
-                            enableEdit: true,))
+                          Expanded(child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 6.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(Dimens.size16),
+                                border: Border.all(color: ColorConst.colorIconGrays.withOpacity(0.5), width: 0.5)
+                              ),
+                              clipBehavior: Clip.hardEdge,
+                              child: Padding(
+                                padding:  EdgeInsets.symmetric(horizontal: 8.0),
+                                child: PermissionGroupListPage(
+                                  scrollController: scrollController,
+                                  enableEdit: true,
+                                  onChangePermission: (p0) {
+                                    
+                                  },
+                                ),
+                              ),
+                            ),
+                          ))
                         ],
-                      ),
-                    ),
-                    Divider(color: ColorConst.dividerColor.withOpacity(0.3),),
-                    Visibility(
-                      visible: widget.roleActionType == ActionType.view ,
-                      child: ActionButton1(
-                        text: L10nX.getStr.close,
-                        width: Dimens.size150,
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
                       ),
                     ),
                   ],

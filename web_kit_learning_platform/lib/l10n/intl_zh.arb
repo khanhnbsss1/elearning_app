@@ -638,5 +638,6 @@
   "report_purchased": "收入",
   "report_new_registered_account": "新注册者",
   "role_edit_str": "编辑角色",
-  "role_create_str": "创建新角色"
+  "role_create_str": "创建新角色",
+  "inactive_str": "不活动"
 }

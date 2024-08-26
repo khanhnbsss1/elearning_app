@@ -29,6 +29,12 @@ class PermissionListBloc extends Bloc<PermissionListEvent, PermissionListState> 
 
     on<PermissionListOnSelectTagEvent>((event, emit) async {
     });
+    on<PermissionListOnUpdatePermissionModelEvent>((event, emit) async {
+      emit(state.copyWith(
+        tagListResponseModel: event.permissionListResponseModel,
+        blocStatus: PermissionListStatus.onChangePermission
+      ));
+    });
   }
 
   Future<void> _onInit(PermissionListInitEvent event,
@@ -45,7 +51,7 @@ class PermissionListBloc extends Bloc<PermissionListEvent, PermissionListState> 
         blocStatus: PermissionListStatus.onLoading,
         searchCommonRequest: event.searchCommonRequest
     ));
-    state.contentView= [...(state.tagListResponseModel?.content??[]).where((element) {
+    state.contentView= [...(state.permissionListResponseModel?.content??[]).where((element) {
       String keyWord = (state.searchCommonRequest?.keyword??"").toLowerCase();
       return (element.type??"").toLowerCase().contains(keyWord) ||
           ((element.permission??[]).where((element) => (element.value??"").toLowerCase().contains(keyWord),).isNotEmpty);
@@ -56,8 +62,7 @@ class PermissionListBloc extends Bloc<PermissionListEvent, PermissionListState> 
     ));  }
   
   Future<void> callPermissionListApi({required SearchCommonRequest searchCommonRequest}) async {
-
-    PermissionListResponseModel? responseModel = await PermissionManager().getPermissionModel();
+    PermissionListResponseModel? responseModel = await PermissionManager().getPermissionModel(isRefresh: ! (state.enableEdit??false));
         emit(state.copyWith(
             tagListResponseModel: responseModel,
             blocStatus: PermissionListStatus.onLoadEnd,

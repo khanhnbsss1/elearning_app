@@ -68,7 +68,7 @@ abstract class Routes {
 
   static const courseList = Paths.courseList;
   static const courseMyList = Paths.courseMyList;
-  static const courseDetail = Paths.courseDetail;
+  static const inActiveCourse = Paths.inActiveCourse;
   static const vocabularyListNoImage = Paths.vocabularyListNonImage;
   static const vocabularyListImage = Paths.vocabularyListImage;
 
@@ -151,7 +151,7 @@ abstract class Paths {
   static const courseStudy = '/course/courseStudy';
   
   static const courseMyList = '/course/mylist';
-  static const courseDetail = '/course/detail';
+  static const inActiveCourse = '/course/inActiveCourses';
   static const videoPlayer = '/videoPlayer';
   static const vocabularyListNonImage = '/vocabulary/list';
   static const vocabularyListImage= '/vocabularyImage/list';

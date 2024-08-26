@@ -30,3 +30,9 @@ class PermissionListOnDeleteTagEvent extends PermissionListEvent {
   @override
   List<Object?> get props => [selectTagInfo];
 }
+class PermissionListOnUpdatePermissionModelEvent extends PermissionListEvent {
+  PermissionListResponseModel? permissionListResponseModel;
+  PermissionListOnUpdatePermissionModelEvent({required this.permissionListResponseModel} );
+  @override
+  List<Object?> get props => [permissionListResponseModel];
+}

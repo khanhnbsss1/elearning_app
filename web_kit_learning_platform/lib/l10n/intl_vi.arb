@@ -643,5 +643,6 @@
   "report_purchased": "Doanh thu",
   "report_new_registered_account": "Người đăng ký mới",
   "role_edit_str": "Chỉnh sửa vai trò",
-  "role_create_str": "Tạo mới vai trò"
+  "role_create_str": "Tạo mới vai trò",
+  "inactive_str": "Chưa kicch hoạt"
 }

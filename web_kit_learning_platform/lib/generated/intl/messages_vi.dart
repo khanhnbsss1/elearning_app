@@ -300,6 +300,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "id": MessageLookupByLibrary.simpleMessage("ID"),
         "image_str": MessageLookupByLibrary.simpleMessage("Hình ảnh"),
         "image_type_str": MessageLookupByLibrary.simpleMessage("Hình ảnh"),
+        "inactive_str": MessageLookupByLibrary.simpleMessage("Chưa kicch hoạt"),
         "infinite": MessageLookupByLibrary.simpleMessage("Vô hạn"),
         "info": MessageLookupByLibrary.simpleMessage("Thông tin"),
         "instructor_str": MessageLookupByLibrary.simpleMessage("Giáo viên"),

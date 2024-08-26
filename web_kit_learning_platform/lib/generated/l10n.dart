@@ -6409,6 +6409,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Inactive`
+  String get inactive_str {
+    return Intl.message(
+      'Inactive',
+      name: 'inactive_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

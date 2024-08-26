@@ -18,8 +18,9 @@ import 'package:webkit/views/permission_manager/permission_list/components/permi
 class PermissionGroupListPage extends StatefulWidget {
   ScrollController? scrollController;
   List<PermissionInfo>? childRolePermissions;
+  Function(PermissionListResponseModel?)? onChangePermission;
   bool? enableEdit;
-  PermissionGroupListPage({super.key, this.scrollController, this.childRolePermissions, this.enableEdit}){
+  PermissionGroupListPage({super.key, this.scrollController, this.childRolePermissions, this.enableEdit, this.onChangePermission}){
     scrollController=ScrollController();
     enableEdit??=false;
   }
@@ -49,7 +50,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
       permissionList: permission,
       child: BlocProvider(
         create: (context) {
-          return PermissionListBloc(PermissionListState(childRolePermissions: widget.childRolePermissions))..add(PermissionListInitEvent());
+          return PermissionListBloc(PermissionListState(childRolePermissions: widget.childRolePermissions,enableEdit: widget.enableEdit))..add(PermissionListInitEvent());
         },
         child: BlocConsumer<PermissionListBloc, PermissionListState>(
           listener: (context, state) {
@@ -66,6 +67,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                 break;
                 // TODO: Handle this case.
             }
+            state.blocStatus= PermissionListStatus.unKnow;
           },
           builder: (BuildContext context, state) {
             return MyResponsive(
@@ -106,15 +108,15 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
               padding: const EdgeInsets.all(16.0),
               child: buildPermissionList(state: state, context: context),
             )),
-            SizedBox(height: 8,),
+/*            SizedBox(height: 8,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FlutterCustomPagination(
-                  key: GlobalKey(debugLabel: (state.tagListResponseModel?.total??0).toString()),
-                  currentPage: state.tagListResponseModel!.getCurrentPage(),
-                  limitPerPage: state.tagListResponseModel!.pageSize??10,
-                  totalDataCount: state.tagListResponseModel!.getTotalElement(),
+                  key: GlobalKey(debugLabel: (state.permissionListResponseModel?.total??0).toString()),
+                  currentPage: state.permissionListResponseModel!.getCurrentPage(),
+                  limitPerPage: state.permissionListResponseModel!.pageSize??10,
+                  totalDataCount: state.permissionListResponseModel!.getTotalElement(),
                   onPreviousPage: (p0) {
                     BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
                   },
@@ -135,7 +137,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                   goToLastPageIcon: Icons.last_page,
                 ),
               ],
-            ),
+            ),*/
           ],
         ),
       ),
@@ -158,7 +160,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            (widget.enableEdit??false)?Text("${L10nX.getStr.choosed_str} ${L10nX.getStr.permission_str.toLowerCase()}"):SizedBox(),
+            (widget.enableEdit??false)?Text(L10nX.getStr.permission_str, style: TextStyleConstant.normalTextOnBackGroundColorStyle16w400,):SizedBox(),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -255,18 +257,31 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
         // TODO: Handle this case.
         return Center(child: CircularProgressIndicator());
       case PermissionListStatus.onSelectTag:
+      case PermissionListStatus.onChangePermission:
+      // TODO: Handle this case.
+      case PermissionListStatus.unKnow:
+      // TODO: Handle this case.
       case PermissionListStatus.onLoadEnd:
         // TODO: Handle this case.
         return  ((state.contentView ?? []).isEmpty) ?
         Center(child:NoData()) :
         StatefulBuilder(
           builder: (context, setState) {
-            List<Widget> listOfLesson = List.empty(growable: true);
+            List<Widget> listOfPermissionGroup = List.empty(growable: true);
             for (PermissionGroupInfo info in state.contentView ?? []) {
-              listOfLesson.add(GroupPermissionItemView(
+              listOfPermissionGroup.add(GroupPermissionItemView(
                 controller: widget.scrollController,
                 info: info,
+                enableEdit: widget.enableEdit,
                 onChange: (p0) {
+                  int groupIndex = (state.permissionListResponseModel?.content??[]).indexWhere((element) => element.id== p0.id,);
+                  (state.permissionListResponseModel?.content??[])[groupIndex] = p0;
+                  if(widget.onChangePermission!=null)
+                    {
+                      widget.onChangePermission!(state.permissionListResponseModel);
+                    }
+                  BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnUpdatePermissionModelEvent(
+                      permissionListResponseModel: state.permissionListResponseModel));
                   
                 },
               )
@@ -279,11 +294,13 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
               child: ListView(
                 scrollDirection: Axis.vertical,
                 controller:widget.scrollController,
-                children:  listOfLesson,
+                children:  listOfPermissionGroup,
               ),
             );
           },
         );
+
+      
     }
   }
   
