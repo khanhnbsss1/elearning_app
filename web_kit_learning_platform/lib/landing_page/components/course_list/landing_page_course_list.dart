@@ -130,6 +130,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                       height: Dimens.size520,
                       child: Center(
                         child: ListView(
+                          controller: scrollCont,
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           children: listOfCourse,

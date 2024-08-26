@@ -157,7 +157,7 @@ class CourseItem extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   StarRating(
-                                    size: 14,
+                                    size: Dimens.size14,
                                     rating: (courseInfo.rating ?? 0).toDouble(),
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {},
