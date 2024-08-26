@@ -622,7 +622,6 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                     children: [
                       Expanded(
                         child: TextFormField(
-                          key: UniqueKey(),
                           controller: infoObjectController,
                           onFieldSubmitted: (value) {
               

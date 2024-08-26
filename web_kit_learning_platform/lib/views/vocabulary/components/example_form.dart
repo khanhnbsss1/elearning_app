@@ -14,7 +14,8 @@ class ExampleFrom extends StatefulWidget {
   Function(SentenceInfo)? onSaveSentenceInfo;
   Function(SentenceInfo)? onRemoveSentenceInfo;
   ScrollController? controller;
-  ExampleFrom({this.sentenceInfo, this.onRemoveSentenceInfo, this.onSaveSentenceInfo, this.controller});
+  int index;
+  ExampleFrom({this.sentenceInfo, this.onRemoveSentenceInfo, this.onSaveSentenceInfo, this.controller, required this.index});
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -48,8 +49,7 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
     // TODO: implement build
     enaAbleSaveSentenceInfo = (chineseSentenceController.text ?? "").isNotEmpty &&
         (translationVNSentenceController.text ?? "").isNotEmpty &&
-        (pinyionSentenceController.text ?? "").isNotEmpty &&
-        (audioSentenceController.text ?? "").isNotEmpty;
+        (pinyionSentenceController.text ?? "").isNotEmpty;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -62,6 +62,7 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
             children: [
               Row(
                 children: [
+                  Text("${widget.index}. "),
                   Expanded(
                     child: LayoutBuilder(
                       builder: (context, constraints) {
@@ -224,6 +225,7 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
                             ),
                             TextFormField(
                               controller: audioSentenceController,
+                              
                               decoration: InputDecoration(
                                 labelText: (widget.sentenceInfo?.audioFileInfo?.link ?? "").isNotEmpty ? (widget.sentenceInfo?.audioFileInfo?.link ?? "") : 'Upload audio file...',
                                 labelStyle: MyTextStyle.bodySmall(xMuted: true),
@@ -300,6 +302,7 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
                                   setState(() {});
                                 }
                               },
+                              readOnly: true,
                             ),
                           ],
                         );

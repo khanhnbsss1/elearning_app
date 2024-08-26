@@ -39,14 +39,15 @@ class DashboardManager{
   SynthesisSummaryInfo? synthesisSummaryInfo;
   TopCoursesInfoResponseModel? topCoursesInfoResponseModel;
   UserRegistrationInfoResponseModel? userRegistrationInfoResponseModel;
-  
+  List<bool>calApi = [false,false,false,false,false, ];
   Future<void> init()async {
     
   }
 
   Future<SubscriptionPurchasesInfoResponseModel> getSubscriptionPurchasesInfoResponseModel() async {
-    if(subscriptionPurchasesInfoResponseModel==null)
+    if(subscriptionPurchasesInfoResponseModel==null && calApi[0]==false)
       {
+        calApi[0]==true;
         /// lay du lieu trong nam nay
         DateTime startTime = DateTime.now().copyWith(month: 0, day: 0, hour: 1);
         DateTime endTime = DateTime.now();
@@ -60,39 +61,47 @@ class DashboardManager{
           )
         );
         subscriptionPurchasesInfoResponseModel = await  subscriptionPurchasesApi.call();
+        calApi[0]==false;
       }
     return subscriptionPurchasesInfoResponseModel!;
   }
   Future<SynthesisStudentInfoResponseModel> getSynthesisStudentInfoResponseModel() async {
-    if(synthesisStudentInfoResponseModel==null)
+    if(synthesisStudentInfoResponseModel==null && calApi[1]==false)
     {
+      calApi[1]==true;
       GetDataSynthesisStudentApi subscriptionPurchasesApi = GetDataSynthesisStudentApi();
       synthesisStudentInfoResponseModel = await  subscriptionPurchasesApi.call();
+      calApi[1]==false;
     }
     return synthesisStudentInfoResponseModel!;
   }
 
   Future<SynthesisSummaryInfo> getSynthesisInfoResponseModel() async {
-    if(synthesisSummaryInfo==null)
+    if(synthesisSummaryInfo==null && calApi[2]==false)
     {
+      calApi[2]==true;
       GetDataSynthesisApi subscriptionPurchasesApi = GetDataSynthesisApi();
       synthesisSummaryInfo = await  subscriptionPurchasesApi.call();
+      calApi[2]==false;
     }
     return synthesisSummaryInfo!;
   }
 
   Future<TopCoursesInfoResponseModel> getTopCourseResponseModel() async {
-    if(topCoursesInfoResponseModel==null)
+    if(topCoursesInfoResponseModel==null && calApi[3]==false)
     {
+      calApi[3]==true;
       GetTopCourseApi subscriptionPurchasesApi = GetTopCourseApi();
       topCoursesInfoResponseModel = await  subscriptionPurchasesApi.call();
+      calApi[3]==false;
     }
     return topCoursesInfoResponseModel!;
   }
   Future<UserRegistrationInfoResponseModel> getUserRegistrationModel() async {
-    if(userRegistrationInfoResponseModel==null)
+    if(userRegistrationInfoResponseModel==null && calApi[4]==false)
     {
       /// lay du lieu trong nam nay
+      calApi[4]==true;
       DateTime startTime = DateTime.now().copyWith(month: 0, day: 0, hour: 1);
       DateTime endTime = DateTime.now();
       String startTimeStr = DateTimeHelper.dateFormat(date: startTime, dateType: DateTimeHelper.yyyyMMDD);
@@ -105,6 +114,7 @@ class DashboardManager{
           )
       );
       userRegistrationInfoResponseModel = await  subscriptionPurchasesApi.call();
+      calApi[4]==false;
     }
     return userRegistrationInfoResponseModel!;
   }

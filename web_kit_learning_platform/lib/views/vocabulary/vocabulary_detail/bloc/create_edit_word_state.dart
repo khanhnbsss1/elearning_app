@@ -23,6 +23,7 @@ class CreateEditWordState extends Equatable {
   UploadFileResponseInfo? image;
   AddWordController? addWordController;
   WordsPageActionType? wordsPageActionType;
+  int? exampleIndex =0;
   CreateEditWordState({
       this.blocStatus,
     this.documentModel,
@@ -31,7 +32,9 @@ class CreateEditWordState extends Equatable {
     this.audio,
     this.addWordController,
     this.wordsPageActionType,
+    this.exampleIndex
   }){
+    exampleIndex??=-1;
     if(wordsPageActionType == WordsPageActionType.view)
       {
         vocabularyInfo??=VocabularyInfo(sentenceInfos: []);
@@ -52,7 +55,8 @@ class CreateEditWordState extends Equatable {
     UploadFileResponseInfo? audio,
     UploadFileResponseInfo? image,
     AddWordController? addWordController,
-    WordsPageActionType? wordsPageActionType
+    WordsPageActionType? wordsPageActionType,
+    int? exampleIndex
   })
   {
     return CreateEditWordState(
@@ -63,6 +67,7 @@ class CreateEditWordState extends Equatable {
       image: image??this.image,
       addWordController: addWordController??this.addWordController,
       wordsPageActionType: wordsPageActionType??this.wordsPageActionType,
+      exampleIndex: exampleIndex??this.exampleIndex,
 
     );
   }
@@ -75,6 +80,7 @@ class CreateEditWordState extends Equatable {
     audio,
     addWordController,
     wordsPageActionType,
+    exampleIndex
   ];
 
 }

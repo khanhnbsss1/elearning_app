@@ -60,7 +60,7 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
               Column(
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?1/5:1/4),
+                    height: MediaQuery.of(context).size.height *(ResponsiveInfo.isPhone()?1/5:1/4)*((widget.selectVocabularyInfo.imageLink??"").isEmpty?0.7:1),
                     decoration: BoxDecoration(
                         color: ColorConst.mainColor
                     ),
@@ -83,7 +83,6 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                                           padding: const EdgeInsets.all(8.0),
                                           child: ImageManager().getImageByUrl(
                                               (widget.selectVocabularyInfo.imageLink??""),
-                                             
                                               errorBuilder: SizedBox()),
                                         ),
                                       ),
@@ -91,6 +90,12 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                                   ],
                                 ),
                               )
+                          ),
+                          Visibility(
+                              visible: (widget.selectVocabularyInfo.imageLink??"").isEmpty,
+                              child: Text((widget.selectVocabularyInfo.simplified??"").trim(),  style: TextStyleConstant.textStyleBlack30w700.copyWith(
+                                color: ColorConst.whiteColor, fontSize: Dimens.size60
+                              ),)
                           ),
                         ],
                       ),
@@ -258,7 +263,9 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                             children: [
                               Text('$exampleIndex. '),
                               Text('${sentenceInfo.chineseSentence??''}(${L10nX.getStr.pinyin_tone_str}:${sentenceInfo.pinyionSentence??''})'),
-                              AudioSpeaker(url: sentenceInfo.audioLink??'')
+                              Visibility(
+                                visible: (sentenceInfo.audioLink??'').isNotEmpty,
+                                  child: AudioSpeaker(url: sentenceInfo.audioLink??''))
                             ],),
                         );
                       },

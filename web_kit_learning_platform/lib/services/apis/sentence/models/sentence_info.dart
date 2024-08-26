@@ -56,7 +56,10 @@ class SentenceInfo {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    //data['id']=id;
+    if((id??-1)>0)
+      {
+      //  data['id']=id;
+    }
     data['chinese_sentence']=chineseSentence;
     data['pinyin_sentence']=pinyionSentence;
     data['pinyion_sentence']=pinyionSentence;
@@ -67,6 +70,6 @@ class SentenceInfo {
     return data;
   }
   bool isValidate(){
-    return chineseSentence!.isNotEmpty && pinyionSentence!.isNotEmpty && translationVn!.isNotEmpty && audioLink!.isNotEmpty;
+    return chineseSentence!.isNotEmpty && pinyionSentence!.isNotEmpty && translationVn!.isNotEmpty;
   }
 }

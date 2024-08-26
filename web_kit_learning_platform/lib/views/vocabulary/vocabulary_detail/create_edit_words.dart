@@ -325,6 +325,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                       controller: controller,
                       itemBuilder: (context, exampleIndex) {
                         return ExampleFrom(
+                          index: exampleIndex,
                           controller: controller,
                           sentenceInfo:_state.vocabularyInfo?.sentenceInfos?.elementAt(exampleIndex),
                           onRemoveSentenceInfo: (p0) {

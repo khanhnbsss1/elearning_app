@@ -32,7 +32,7 @@ class CategoryListBloc extends Bloc<CategoryListEvent, CategoryListState> {
     emit(state.copyWith(
         blocStatus: CategoryListStatus.onLoading,
     ));
-    await callTagListApi(searchCommonRequest: state.searchCommonRequest!);
+    await callCategoryListApi(searchCommonRequest: state.searchCommonRequest!);
   }
 
   Future<void> _onSearchByParams(CategoryListOnSearchByFilterEvent event,
@@ -50,7 +50,7 @@ class CategoryListBloc extends Bloc<CategoryListEvent, CategoryListState> {
         contentView: state.contentView
     ));  }
   
-  Future<void> callTagListApi({required SearchCommonRequest searchCommonRequest}) async {
+  Future<void> callCategoryListApi({required SearchCommonRequest searchCommonRequest}) async {
 
     GetCategoryListApi courseApi = GetCategoryListApi();
     CategoryListResponseModel responseModel = await courseApi.call();

@@ -19,7 +19,7 @@ class GetDataSynthesisApi extends BaseApiRequest {
     }
     else
     {
-      SynthesisSummaryInfo responseModel = SynthesisSummaryInfo.fromJson(result);
+      SynthesisSummaryInfo responseModel = SynthesisSummaryInfo.fromJson(result.first);
       return responseModel;
     }
   }

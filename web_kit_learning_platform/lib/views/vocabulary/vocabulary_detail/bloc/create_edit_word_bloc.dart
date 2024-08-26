@@ -35,7 +35,8 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     on<CreateEditWordOnAddNewSentenceEvent>((event, emit) {
       if((state.vocabularyInfo?.sentenceInfos??[]).isNotEmpty && state.vocabularyInfo!.sentenceInfos!.last.isValidate())
         {
-          state.vocabularyInfo?.sentenceInfos?.add(SentenceInfo(id: (state.vocabularyInfo?.sentenceInfos??[]).length));
+          state.exampleIndex = state.exampleIndex!-1;
+          state.vocabularyInfo?.sentenceInfos?.add(SentenceInfo(id: state.exampleIndex??-1));
         }
       else
         {
@@ -43,7 +44,8 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
         }
       emit(state.copyWith(
         blocStatus: CreateEditWordStatus.onCreateNewSentence,
-        vocabularyInfo: state.vocabularyInfo
+        vocabularyInfo: state.vocabularyInfo,
+        exampleIndex: state.exampleIndex
       ));
     });
     on<CreateEditWordOnRemoveSentenceEvent>((event, emit) {
