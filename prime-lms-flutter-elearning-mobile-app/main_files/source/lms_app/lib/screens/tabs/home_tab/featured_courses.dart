@@ -21,24 +21,22 @@ class FeaturedCourses extends ConsumerWidget {
     return courses.when(
       skipLoadingOnRefresh: false,
       data: (courses) {
-        return Visibility(
-          visible: courses != null || courses != [],
-          child: CarouselSlider(
-            items: courses!.map((course) {
-              return FeaturedCourseTile(course: course);
-            }).toList(),
-            options: CarouselOptions(
-              height: 300,
-              enableInfiniteScroll: true,
-              pageSnapping: true,
-              viewportFraction: 0.8,
-              enlargeFactor: 0.2,
-              autoPlay: true,
-              enlargeCenterPage: true,
-              enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-            ),
+        return !(courses != null || courses != []) ?
+        CarouselSlider(
+          items: courses!.map((course) {
+            return FeaturedCourseTile(course: course);
+          }).toList(),
+          options: CarouselOptions(
+            height: 300,
+            enableInfiniteScroll: true,
+            pageSnapping: true,
+            viewportFraction: 0.8,
+            enlargeFactor: 0.2,
+            autoPlay: true,
+            enlargeCenterPage: true,
+            enlargeStrategy: CenterPageEnlargeStrategy.zoom,
           ),
-        );
+        ) : const SizedBox();
       },
       error: (e, x) => Text('error: $e, $x'),
       loading: () => const LoadingTile(height: 260),

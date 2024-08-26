@@ -20,10 +20,12 @@ class GetCourseFilterApi extends BaseApiRequest {
     }
     else
     {
-      (InstanceManager().courseFilterListInfo.data??[]).clear();
-      (InstanceManager().courseFilterListInfo.data??[]).add(CourseFilterInfo(filterType: filter, id: -1,name: "All",selectSubFilter: null, subFilter: []));
-      (InstanceManager().courseFilterListInfo.data??[]).addAll(CourseFilterListInfo.fromJson(result).data??[]);
-      return InstanceManager().courseFilterListInfo;
+        if (InstanceManager().courseFilterListInfo.data != null) {
+          (InstanceManager().courseFilterListInfo.data??[]).clear();
+        }
+        (InstanceManager().courseFilterListInfo.data??[]).add(CourseFilterInfo(filterType: filter, id: -1,name: "All",selectSubFilter: null, subFilter: []));
+        (InstanceManager().courseFilterListInfo.data??[]).addAll(CourseFilterListInfo.fromJson(result).data??[]);
+        return InstanceManager().courseFilterListInfo;
     }
   }
 

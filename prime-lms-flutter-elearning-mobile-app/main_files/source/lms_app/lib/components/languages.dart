@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:lms_app/base/locale_manager/locale_manager.dart';
 import '../main.dart';
 import 'country_flag.dart';
 import '../configs/language_config.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 class Languages extends StatefulWidget {
   const Languages({super.key});
@@ -58,7 +60,8 @@ class _LanguagesState extends State<Languages> {
                 // await context.setLocale(locale);
                 // await engine.performReassemble();
                 EasyLocalization.of(context)?.setLocale(locale);
-                },
+                LocaleManager.handleLocaleChanged();
+              },
             ),
           );
         },

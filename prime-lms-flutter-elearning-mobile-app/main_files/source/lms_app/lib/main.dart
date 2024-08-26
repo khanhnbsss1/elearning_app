@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:lms_app/base/locale_manager/locale_manager.dart';
 import 'package:lms_app/helper_elearning/services/navigation_service.dart';
 import 'package:lms_app/routes/app_routes.dart';
 import 'package:lms_app/screens/auth/login.dart';
@@ -30,6 +31,7 @@ import 'generated/l10n.dart';
 import 'helper_elearning/localizations/language_helper.dart';
 import 'l10n/l10n_extention.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,27 +43,16 @@ Future<void> main() async {
   // HiveService.initHive();
   AppService.svgPrecacheImage();
   bool firstTimeCheck = await getFirstTime();
-  // DeviceInfoModel? deviceInfoModel = await DeviceManager().getDeviceInfo();
+  print('aaaaaaaaaaaaaaaaaaaa');
   runApp(ProviderScope(
-      child:
-      EasyLocalization(
-        supportedLocales: LanguageConfig.supportedLocales,
-        path: 'assets/translations',
-        fallbackLocale: LanguageConfig.fallbackLocale,
-        startLocale: LanguageConfig.startLocale,
-        child: MyApp(firstTimeCheck: firstTimeCheck, ),
-      ),
+      child:EasyLocalization(
+          supportedLocales: LanguageConfig.supportedLocales,
+          path: 'assets/translations',
+          fallbackLocale: LanguageConfig.fallbackLocale,
+          startLocale: LanguageConfig.startLocale,
+          child: MyApp(firstTimeCheck: firstTimeCheck, )),
   ));
 }
-
-// Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-//   // If you're going to use other Firebase services in the background, such as Firestore,
-//   // make sure you call `initializeApp` before using other Firebase services.
-//   await Firebase.initializeApp(
-//     options: DefaultFirebaseOptions.currentPlatform,
-//   );
-//   FileUtils.PrintLog("Handling a background message: ${message.messageId}");
-// }
 
 Future<void> initialService() async {
   await SharedPreferencesStorage().initSharedPreferences();
@@ -84,35 +75,35 @@ Future<bool> getFirstTime() async {
 
 class MyApp extends StatefulWidget {
   final bool firstTimeCheck;
-  const MyApp({super.key,required this.firstTimeCheck});
+  final Function(bool)? onUpdate;
+  const MyApp({super.key,required this.firstTimeCheck, this.onUpdate});
 
   @override
   State<MyApp> createState() => _MyAppState();
+
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     FetchPixels(context);
     ColorConst.setColorByFlavorType();
     NavigationService.registerContext(context, update: true);
     return GetMaterialApp(
-          title: AppConfig.appName,
-          debugShowCheckedModeBanner: false,
-          navigatorObservers: [firebaseObserver],
-          supportedLocales: context.supportedLocales,
-          localizationsDelegates: context.localizationDelegates,
-          locale: context.locale,
-          initialRoute: Routes.splashRoute,
-          // getPages: getPageRoute(),
-          routingCallback: (value) {
-            /// call back moi lan chuyen page url
-            if (kDebugMode) {
-              print(value);
-            }
-          },
-          home: widget.firstTimeCheck ? const LoginScreen(popUpScreen: false,) : const IntroScreen(),
-        );
-      }
+      key: LocaleManager.refreshKey,
+      title: AppConfig.appName,
+      debugShowCheckedModeBanner: false,
+      navigatorObservers: [firebaseObserver],
+      supportedLocales: context.supportedLocales,
+      localizationsDelegates: context.localizationDelegates,
+      locale: context.locale,
+      initialRoute: Routes.splashRoute,
+      routingCallback: (value) {
+        if (kDebugMode) {
+          print(value);
+        }
+      },
+      home: widget.firstTimeCheck ? const LoginScreen(popUpScreen: false,) : const IntroScreen(),
+    );
+  }
 }

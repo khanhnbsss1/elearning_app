@@ -23,57 +23,53 @@ class FreeCourses extends ConsumerWidget {
     return courses.when(
         skipLoadingOnRefresh: false,
         data: (courses) {
-          return Visibility(
-            visible: courses.isNotEmpty || courses != [],
-            // visible: true,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: RichText(
-                              text: TextSpan(
-                                  text: 'explore'.tr(),
-                                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-                                  children: [
-                                const TextSpan(text: ' '),
-                                TextSpan(
-                                  text: 'free-courses'.tr(),
-                                  style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.blueAccent, fontWeight: FontWeight.bold),
-                                )
-                              ])),
-                        ),
-                        TextButton(
-                          onPressed: () => NextScreen.iOS(context, const AllCoursesView(filter: 'Free_course')),
-                          // onPressed: () {},
-                          style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
-                          child: Text(
-                            'view-all',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ).tr(),
-                        )
-                      ],
-                    ),
+          return (courses.isNotEmpty && courses != []) ? Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: RichText(
+                            text: TextSpan(
+                                text: 'explore'.tr(),
+                                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                                children: [
+                              const TextSpan(text: ' '),
+                              TextSpan(
+                                text: 'free-courses'.tr(),
+                                style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.blueAccent, fontWeight: FontWeight.bold),
+                              )
+                            ])),
+                      ),
+                      TextButton(
+                        onPressed: () => NextScreen.iOS(context, const AllCoursesView(filter: 'Free_course')),
+                        // onPressed: () {},
+                        style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
+                        child: Text(
+                          'view-all',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ).tr(),
+                      )
+                    ],
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: courses.map((course) {
-                        return HorizontalCourseTile(course: course, widthPercentage: 0.60, imageHeight: 130);
-                      }).toList(),
-                    ),
-                  )
-                ],
-              ),
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: courses.map((course) {
+                      return HorizontalCourseTile(course: course, widthPercentage: 0.60, imageHeight: 130);
+                    }).toList(),
+                  ),
+                )
+              ],
             ),
-          );
+          ) : const SizedBox();
         },
         error: (e, x) => Text('error: $e, $x'),
         loading: () => const LoadingTile(height: 200));

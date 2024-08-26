@@ -7,6 +7,7 @@ import 'package:lms_app/iAP/iap_config.dart';
 import 'package:lms_app/iAP/iap_screen.dart';
 import 'package:lms_app/models/app_settings_model.dart';
 import 'package:lms_app/providers/app_settings_provider.dart';
+import 'package:lms_app/screens/tabs/profile_tab/guest_user.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import '../../../components/user_avatar.dart';
 import '../../../mixins/user_mixin.dart';
@@ -16,25 +17,47 @@ import '../../../services_elearning/apis/user/get_user_detail_api.dart';
 import '../../edit_profile.dart';
 import '../../../utils/next_screen.dart';
 
-class UserInfo extends StatelessWidget with UserMixin {
-  const UserInfo({super.key,});
+class UserInfo extends StatefulWidget {
+  const UserInfo({
+    super.key,
+  });
 
   @override
+  State<UserInfo> createState() => _UserInfoState();
+}
+
+class _UserInfoState extends State<UserInfo> {
+  @override
   Widget build(BuildContext context) {
+    print('rebuilt UserInfo');
     return FutureBuilder(
         future: getProfile(),
         builder: (context, snapshot) {
-            UserProfile user = snapshot.data??UserProfile();
+          if (snapshot.hasData) {
+            UserProfile user = snapshot.data!;
             return Column(
               children: [
                 ListTile(
-                  contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 10, vertical: 5),
-                  onTap: () => NextScreen.normal(context, EditProfile(user: user)),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditProfile(
+                                  user: user,
+                                  onUpdate: (value) async {
+                                      if (value) {
+                                        setState(() {
+
+                                        });
+                                      }
+                                  },
+                                )));
+                  },
                   title: Text(
                     user.fullName ?? "",
-                    style: Theme
-                        .of(context)
+                    style: Theme.of(context)
                         .textTheme
                         .titleLarge
                         ?.copyWith(fontWeight: FontWeight.bold, fontSize: 20),
@@ -73,9 +96,10 @@ class UserInfo extends StatelessWidget with UserMixin {
                 // )
               ],
             );
-
-        }
-    );
+          } else {
+            return const GuestUser();
+          }
+        });
   }
 
   Future<UserProfile> getProfile() async {
@@ -83,83 +107,4 @@ class UserInfo extends StatelessWidget with UserMixin {
     UserProfile user = await getUserProfileInfoApi.call();
     return user;
   }
-
-  // Container _subscriptionContainer(BuildContext context) {
-  //   return Container(
-  //     margin: const EdgeInsets.symmetric(vertical: 20),
-  //     decoration: BoxDecoration(
-  //       border: Border.all(width: 0.3, color: Colors.blueGrey),
-  //       borderRadius: BorderRadius.circular(10),
-  //     ),
-  //     child: ListTile(
-  //         minVerticalPadding: 20,
-  //         leading: CircleAvatar(backgroundColor: Theme
-  //             .of(context)
-  //             .primaryColor,
-  //             child: Image.asset(premiumImage, height: 20, width: 20)),
-  //         title: Text(
-  //           user.subscription!.plan,
-  //           style: Theme
-  //               .of(context)
-  //               .textTheme
-  //               .titleMedium
-  //               ?.copyWith(fontSize: 18, fontWeight: FontWeight.w600),
-  //         ),
-  //         subtitle: UserMixin.isExpired(user)
-  //             ? const Text(
-  //           'expired',
-  //           style: TextStyle(color: Colors.redAccent),
-  //         ).tr()
-  //             : RichText(
-  //           text: TextSpan(
-  //               text: 'active'.tr().padRight(8),
-  //               style: Theme
-  //                   .of(context)
-  //                   .textTheme
-  //                   .bodyMedium
-  //                   ?.copyWith(
-  //                 color: Colors.blueAccent,
-  //               ),
-  //               children: [
-  //                 const TextSpan(text: '('),
-  //                 TextSpan(
-  //                   text: 'expire-in-days'.tr(
-  //                       args: [remainingDays(user).toString()]),
-  //                   style: Theme
-  //                       .of(context)
-  //                       .textTheme
-  //                       .bodyMedium
-  //                       ?.copyWith(color: Colors.red),
-  //                 ),
-  //                 const TextSpan(text: ')')
-  //               ]),
-  //         )),
-  //   );
-  // }
-  //
-  // Container _noSubscriptionContainer(BuildContext context) {
-  //   return Container(
-  //     margin: const EdgeInsets.symmetric(vertical: 20),
-  //     decoration: BoxDecoration(
-  //       border: Border.all(width: 0.3, color: Colors.blueGrey),
-  //       borderRadius: BorderRadius.circular(10),
-  //     ),
-  //     child: ListTile(
-  //       trailing: const Icon(FeatherIcons.chevronRight),
-  //       minVerticalPadding: 20,
-  //       leading: CircleAvatar(backgroundColor: Theme
-  //           .of(context)
-  //           .primaryColor,
-  //           child: Image.asset(premiumImage, height: 20, width: 20)),
-  //       title: Text(
-  //         'subscribe-to-access-features',
-  //         style: Theme
-  //             .of(context)
-  //             .textTheme
-  //             .titleMedium
-  //             ?.copyWith(fontSize: 18),
-  //       ).tr(),
-  //     ),
-  //   );
-  // }
 }

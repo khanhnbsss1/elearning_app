@@ -23,56 +23,52 @@ class TopAuthors extends ConsumerWidget {
     final authors = ref.watch(topAuthorsProvider);
     return authors.when(
         data: (data) {
-          return Visibility(
-            // visible: data.isNotEmpty,
-            visible: true,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: RichText(
-                              text: TextSpan(
-                                  text: 'top'.tr(),
-                                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-                                  children: [
-                                const TextSpan(text: ' '),
-                                TextSpan(
-                                  text: 'instructors'.tr(),
-                                  style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.blueAccent, fontWeight: FontWeight.bold),
-                                )
-                              ])),
-                        ),
-                        TextButton(
-                          onPressed: () => NextScreen.normal(context, const AllAuthors()),
-                          style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
-                          child: Text(
-                            'view-all',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ).tr(),
-                        )
-                      ],
-                    ),
+          return (data.isNotEmpty) ? Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: RichText(
+                            text: TextSpan(
+                                text: 'top'.tr(),
+                                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                                children: [
+                              const TextSpan(text: ' '),
+                              TextSpan(
+                                text: 'instructors'.tr(),
+                                style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.blueAccent, fontWeight: FontWeight.bold),
+                              )
+                            ])),
+                      ),
+                      TextButton(
+                        onPressed: () => NextScreen.normal(context, const AllAuthors()),
+                        style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
+                        child: Text(
+                          'view-all',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ).tr(),
+                      )
+                    ],
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: data.map((user) {
-                        return AuthorCard(user: user);
-                      }).toList(),
-                    ),
-                  )
-                ],
-              ),
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: data.map((user) {
+                      return AuthorCard(user: user);
+                    }).toList(),
+                  ),
+                )
+              ],
             ),
-          );
+          ) : const SizedBox();
         },
         error: (e, x) => Text('error: $e, $x'),
         loading: () => const LoadingTile(height: 300));

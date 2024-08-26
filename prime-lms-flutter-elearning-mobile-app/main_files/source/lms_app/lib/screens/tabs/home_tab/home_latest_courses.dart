@@ -22,7 +22,7 @@ class HomeLatestCourses extends ConsumerWidget {
     final courses = ref.watch(homeLatestCoursesProvider);
     return courses.when(
         data: (courses) {
-          return Padding(
+          return (courses.isNotEmpty) ? Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Column(
               children: [
@@ -73,7 +73,7 @@ class HomeLatestCourses extends ConsumerWidget {
                 )
               ],
             ),
-          );
+          ) : const SizedBox();
         },
         error: (e, x) => Text('error: $e, $x'),
         loading: () => const LoadingIndicatorWidget());

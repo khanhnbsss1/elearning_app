@@ -20,63 +20,60 @@ class HomeCategories extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final categories = ref.watch(homeCategoriesProvider);
-    return Visibility(
-      visible: categories.value != null && categories.value!.isNotEmpty,
-      // visible: true,
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'categories',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-                ).tr(),
-                TextButton(
-                  onPressed: () {
-                    ref.read(navBarIndexProvider.notifier).state = 1;
-                    ref.read(homeTabControllerProvider.notifier).state.animateToPage(1, duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
-                  },
-                  style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
-                  child: Text(
-                    'view-all',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ).tr(),
-                )
-              ],
-            ),
-            const SizedBox(height: 10),
-            categories.when(
-                skipLoadingOnRefresh: false,
-                data: (categories) {
-                  return Wrap(
-                    spacing: 10,
-                    runSpacing: 10,
-                    children: categories!
-                        .map((e) => ActionChip(
-                              onPressed: () => NextScreen.iOS(
-                                context,
-                                AllCoursesView(filter: e.name??"",),
-                              ),
-                              elevation: 0,
-                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                              label: Text(
-                                e.name!,
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 16, fontWeight: FontWeight.w600),
-                              ),
-                            ))
-                        .toList(),
-                  );
+    return (categories.value != null && categories.value!.isNotEmpty) ?
+    Container(
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'categories',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+              ).tr(),
+              TextButton(
+                onPressed: () {
+                  ref.read(navBarIndexProvider.notifier).state = 1;
+                  ref.read(homeTabControllerProvider.notifier).state.animateToPage(1, duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
                 },
-                error: (e, x) => Text('error: $e, $x'),
-                loading: () => const LoadingTile(height: 100, padding: 0)),
-          ],
-        ),
+                style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
+                child: Text(
+                  'view-all',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ).tr(),
+              )
+            ],
+          ),
+          const SizedBox(height: 10),
+          categories.when(
+              skipLoadingOnRefresh: false,
+              data: (categories) {
+                return Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: categories!
+                      .map((e) => ActionChip(
+                            onPressed: () => NextScreen.iOS(
+                              context,
+                              AllCoursesView(filter: e.name??"",),
+                            ),
+                            elevation: 0,
+                            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                            label: Text(
+                              e.name!,
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 16, fontWeight: FontWeight.w600),
+                            ),
+                          ))
+                      .toList(),
+                );
+              },
+              error: (e, x) => Text('error: $e, $x'),
+              loading: () => const LoadingTile(height: 100, padding: 0)),
+        ],
       ),
-    );
+    ) : const SizedBox();
   }
 }

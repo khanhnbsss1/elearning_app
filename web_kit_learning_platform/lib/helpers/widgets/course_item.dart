@@ -141,7 +141,7 @@ class CourseItem extends StatelessWidget {
                                 Gap(Dimens.size8),
                                 Text('Số buổi học: ${courseInfo.totalLectures??0}',
                                     style: TextStyleConstant
-                                        .textStyleBlack16w500
+                                        .textStyleBlack14w500
                                         .copyWith(
                                       fontWeight: FontWeight.bold,
                                       color: notifier.isDark && isHovered
@@ -157,6 +157,7 @@ class CourseItem extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   StarRating(
+                                    size: 14,
                                     rating: (courseInfo.rating ?? 0).toDouble(),
                                     allowHalfRating: false,
                                     onRatingChanged: (rating) {},
@@ -167,7 +168,7 @@ class CourseItem extends StatelessWidget {
                                       Text(
                                           "${NumberHelper().numberToString(courseInfo.price??0, decimalDigits: 0).trim()} (${L10nX.getStr.vnd_str})",
                                           style: TextStyleConstant
-                                              .textStyleBlack16w500
+                                              .textStyleBlack14w500
                                               .copyWith(
                                             color: notifier.isDark && isHovered
                                                 ? notifier.whitecolor

@@ -146,14 +146,14 @@ class FirebaseService {
   Future<List<CourseFilterInfo>?> getHomeCategories() async {
     GetCourseFilterApi getCourseFilterApi = GetCourseFilterApi();
     CourseFilterListInfo categories = await getCourseFilterApi.call("");
-    return categories.data;
+    return categories.data??[];
   }
 
   Future<List<CourseInfo>?> getCourseByCategories(
       {required String filter, required int pageNumber}) async {
     GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: (filter != "") ? filter.toUpperCase() : "ALL", pageSize: 10, pageNumber: pageNumber, keyword: "",));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
-    return courseResponseModel.content;
+    return courseResponseModel.content??[];
   }
 
   Future<List<TagsInfo>> getAllCategories() async {

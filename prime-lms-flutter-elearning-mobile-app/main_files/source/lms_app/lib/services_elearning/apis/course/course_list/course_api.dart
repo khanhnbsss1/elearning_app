@@ -17,16 +17,18 @@ class GetCourseListApi extends BaseApiRequest {
   Future<dynamic> call() async {
     await getAuthorization();
     dynamic result = await postRequestAPI();
-    if(result.runtimeType == ResponseCommon)
-    {
+
+    if(result.runtimeType == ResponseCommon) {
       return CourseResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
     }
-    else
-    {
+    try {
       CourseResponseModel paymentHistoryResponseModel = CourseResponseModel.fromJson(result);
       return paymentHistoryResponseModel;
+    } catch (e) {
+      return CourseResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
     }
   }
+
 
   Future<void> getAuthorization() async {
     UserProfile? userProfile = await UserManager().getUserProfile();

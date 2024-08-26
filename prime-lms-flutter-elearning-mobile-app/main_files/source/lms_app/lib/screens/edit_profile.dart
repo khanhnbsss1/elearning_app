@@ -20,7 +20,8 @@ import '../models_elearning/user/UserProfile.dart';
 import '../providers/user_data_provider.dart';
 
 class EditProfile extends ConsumerStatefulWidget {
-  const EditProfile({super.key, required this.user});
+  final Function(bool)? onUpdate;
+  const EditProfile({super.key, required this.user, this.onUpdate});
 
   final UserProfile user;
 
@@ -90,6 +91,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
       if (check) {
         await ref.read(userDataProvider.notifier).getData();
         setState(() => _selectedImageFile = null);
+        widget.onUpdate!(true);
         Navigator.pop(context);
         openSnackbar(context, 'Profile updated');
       } else {
