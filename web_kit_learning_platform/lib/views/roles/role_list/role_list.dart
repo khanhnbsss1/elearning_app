@@ -20,6 +20,7 @@ import 'package:webkit/services/apis/user/user_manager/delete_user_api.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
 import 'package:webkit/views/question/question_detail/question_detail_bloc/question_detail_bloc.dart';
+import 'package:webkit/views/roles/role_detail/create_edit_role.dart';
 import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
@@ -266,8 +267,9 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
                     visible: constraints.maxWidth< 800,
                     child: InkWell(
                         onTap: () {
-                          CreateEditLesson(lessonActionType: ActionType.create,).show(context);
-              
+                          CreateEditRole(
+                            roleActionType: ActionType.create,
+                          ).show(context);              
                         },
                         child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
                   ),
@@ -277,8 +279,9 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
                       preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
                       text: L10nX.getStr.add_new_str,
                       onTap: () {
-                        CreateEditLesson(lessonActionType: ActionType.create,).show(context);
-              
+                        CreateEditRole(
+                          roleActionType: ActionType.create,
+                        ).show(context);
                       },
                     ),
                   ),
@@ -309,10 +312,16 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
         ).show(context);
       },
       onEdit: (p0) {
-       // CreateEditLesson(lessonActionType: ActionType.edit,lessonInfo: p0,).show(context);
+        CreateEditRole(
+           roleActionType: ActionType.edit,
+          roleInfo: p0,
+        ).show(context);
       },
       onViewDetail: (p0) {
-       // CreateEditLesson(lessonActionType: ActionType.view, lessonInfo: p0,).show(context);
+        CreateEditRole(
+          roleActionType: ActionType.view,
+          roleInfo: p0,
+        ).show(context);
       },
     );
     return LayoutBuilder(

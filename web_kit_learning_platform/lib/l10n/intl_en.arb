@@ -641,5 +641,7 @@
   "report_history_register_course": "Course registration history",
   "report_history_edit_course": "Course creation/edit history",
   "report_purchased": "Revenue",
-  "report_new_registered_account": "New registrant"
+  "report_new_registered_account": "New registrant",
+  "role_edit_str": "Edit role",
+  "role_create_str": "Create new role"
 }

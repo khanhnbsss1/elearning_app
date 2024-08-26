@@ -1,4 +1,10 @@
 
+import 'package:webkit/base/base.export.dart';
+import 'package:webkit/services/apis/permission/models/permission_info.dart';
+import 'package:webkit/services/apis/permission/permission_list_api.dart';
+import 'package:webkit/services/apis/roles/get_role_list.dart';
+import 'package:webkit/services/apis/roles/models/roles_info.dart';
+
 class PermissionManager {
   static final PermissionManager _singletonPermissionManager = PermissionManager._internal();
   static PermissionManager get getInstance => _singletonPermissionManager;
@@ -8,7 +14,8 @@ class PermissionManager {
   PermissionManager._internal();
 
   ProductType _productType = ProductType.webUserVersion;
-  
+  PermissionListResponseModel? permissionResponseModel;
+  RolesListResponseModel? rolesListResponseModel;
   void setProductType(ProductType productType){
     _productType = productType;
   }
@@ -16,6 +23,25 @@ class PermissionManager {
     return _productType;
   }
 
+
+  Future<PermissionListResponseModel?> getPermissionModel() async{
+    if(permissionResponseModel==null)
+      {
+        UserProfile? userProfile = UserManager().getUserProfile();
+        GetPermissionListByRoleApi courseApi = GetPermissionListByRoleApi(roleId: userProfile?.roleId);
+        permissionResponseModel = await courseApi.call();
+      }
+    return permissionResponseModel;
+  }
+  
+  Future<RolesListResponseModel?>getRoleModel() async{
+    if(rolesListResponseModel==null)
+    {
+      GetRoleListApi courseApi = GetRoleListApi();
+      rolesListResponseModel = await courseApi.call();
+    }
+    return rolesListResponseModel;
+  }
 
 }
 

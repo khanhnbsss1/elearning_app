@@ -513,6 +513,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hộp thoại bên phải"),
         "role__list_str":
             MessageLookupByLibrary.simpleMessage("Danh sách vai trò"),
+        "role_create_str":
+            MessageLookupByLibrary.simpleMessage("Tạo mới vai trò"),
+        "role_edit_str":
+            MessageLookupByLibrary.simpleMessage("Chỉnh sửa vai trò"),
         "role_str": MessageLookupByLibrary.simpleMessage("Vai trò"),
         "rounded_button": MessageLookupByLibrary.simpleMessage("Nút làm tròn"),
         "save": MessageLookupByLibrary.simpleMessage("Lưu"),

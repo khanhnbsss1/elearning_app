@@ -6,8 +6,9 @@ import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 
 import 'models/permission_info.dart';
 
-class GetPermissionListApi extends BaseApiRequest {
-  GetPermissionListApi():super(
+class GetPermissionListByRoleApi extends BaseApiRequest {
+  String? roleId;
+  GetPermissionListByRoleApi({this.roleId}):super(
     serviceType: SERVICE_TYPE.Claim,
     apiName: ApiName.getInstance().getUserPermissionList,
   );
@@ -28,8 +29,7 @@ class GetPermissionListApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    UserProfile? userProfile = UserManager().getUserProfile();
-     await setApiBody({"roleId":userProfile?.roleId??""});
+     await setApiBody({"roleId":roleId});
   }
 
   @override

@@ -4,6 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/permission/permisstion.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/services/apis/grade/delete_grade_api.dart';
@@ -55,28 +57,20 @@ class PermissionListBloc extends Bloc<PermissionListEvent, PermissionListState> 
   
   Future<void> callPermissionListApi({required SearchCommonRequest searchCommonRequest}) async {
 
-    GetPermissionListApi courseApi = GetPermissionListApi();
-    PermissionListResponseModel responseModel = await courseApi.call();
+    PermissionListResponseModel? responseModel = await PermissionManager().getPermissionModel();
         emit(state.copyWith(
             tagListResponseModel: responseModel,
             blocStatus: PermissionListStatus.onLoadEnd,
           searchCommonRequest: searchCommonRequest,
-          contentView: responseModel.content
+          contentView: responseModel?.content
         ));
-        if((responseModel.content??[]).isNotEmpty) {
-          add(PermissionListOnSelectTagEvent(selectTagInfo:(responseModel.content??[]).first));       
+        if((responseModel?.content??[]).isNotEmpty) {
+          add(PermissionListOnSelectTagEvent(selectTagInfo:(responseModel?.content??[]).first));       
         }
   }
 
   Future<void> _onDeletePermission(
       PermissionListOnDeleteTagEvent event,
       Emitter<PermissionListState> emit,) async {
-/*
-    DeleteGradeApi deleteTagApi = DeleteGradeApi(tagInfo: event.selectTagInfo);
-    dynamic data = await deleteTagApi.call();
-    if(data.runtimeType!=ResponseCommon)
-      {
-        add(PermissionListInitEvent());
-      }*/
   }
 }

@@ -126,6 +126,7 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                                       child: Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
+                                          Gap(Dimens.size8),
                                           Visibility(
                                             //visible: (widget.selectVocabularyInfo.audio??"").isNotEmpty,
                                               child: StatefulBuilder(
@@ -149,6 +150,7 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                                       child: Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
+                                          Gap(Dimens.size8),
                                           Visibility(
                                             //visible: (widget.selectVocabularyInfo.audio??"").isNotEmpty,
                                               child: StatefulBuilder(
@@ -158,7 +160,6 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                                               )
                                           ),
                                           Gap(Dimens.size4),
-
                                           Expanded(child: Text((widget.selectVocabularyInfo.pinyinTones??"").trim(),)),
 
                                         ],
@@ -173,6 +174,7 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                                       child: Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
+                                          Gap(Dimens.size8),
                                           Expanded(child: Text(widget.selectVocabularyInfo.translationVn??"")),
                                         ],
                                       ),
@@ -186,6 +188,7 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                                       child: Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
+                                          Gap(Dimens.size8),
                                           Expanded(
                                               child: Text(widget.selectVocabularyInfo.traditional??"")),
                                         ],
@@ -198,6 +201,7 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                                     child: Row(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
+                                        Gap(Dimens.size8),
                                         Expanded(child: Text((widget.selectVocabularyInfo.categoryWord??"").isNotEmpty?widget.selectVocabularyInfo.categoryWord??"":L10nX.getStr.unknown_str)),
                                       ],
                                     ),
@@ -251,6 +255,7 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                 children: [
                   WidgetWithColumnTitleCommon(
                     title: L10nX.getStr.examples_str,
+                    titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
                     child: (widget.selectVocabularyInfo.sentenceInfos??[]).isNotEmpty?ListView.builder(
                       itemCount:(widget.selectVocabularyInfo.sentenceInfos??[]).length,
                       shrinkWrap: true,
@@ -258,15 +263,38 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                         SentenceInfo sentenceInfo = (widget.selectVocabularyInfo.sentenceInfos??[]).elementAt(exampleIndex);
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('$exampleIndex. '),
-                              Text('${sentenceInfo.chineseSentence??''}(${L10nX.getStr.pinyin_tone_str}:${sentenceInfo.pinyionSentence??''})'),
-                              Visibility(
-                                visible: (sentenceInfo.audioLink??'').isNotEmpty,
-                                  child: AudioSpeaker(url: sentenceInfo.audioLink??''))
-                            ],),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text('$exampleIndex. ', style: TextStyleConstant.textStyleBlack13w500,),
+                                  Gap(Dimens.size8,),
+                                  Text( sentenceInfo.chineseSentence??'', style: TextStyleConstant.textStyleBlack13w500,),
+                                  Gap(Dimens.size8,),
+                                  Visibility(
+                                    visible: (sentenceInfo.audioLink??'').isNotEmpty,
+                                      child: AudioSpeaker(url: sentenceInfo.audioLink??'')),
+                                  Gap(Dimens.size8),
+                                  
+                                ],),
+                              Padding(
+                                padding:  EdgeInsets.symmetric(horizontal: Dimens.size16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Gap(Dimens.size16),
+                                    Text('${L10nX.getStr.pinyin_tone_str}: (${sentenceInfo.pinyionSentence??''})', style: TextStyleConstant.textStyleBlack13w400,),
+                                    Gap(Dimens.size8),
+                                    Text('${L10nX.getStr.translation_vn_str.trim()}: (${sentenceInfo.translationVn??''})', style: TextStyleConstant.textStyleBlack13w400,),
+                                  ],
+                                ),
+                              ),
+                             
+
+                            ],
+                          ),
                         );
                       },
                     ):Padding(

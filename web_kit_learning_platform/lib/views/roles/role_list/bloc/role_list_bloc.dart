@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:webkit/base/permission/permisstion.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/services/apis/roles/get_role_list.dart';
 import 'package:webkit/services/apis/roles/models/roles_info.dart';
@@ -45,15 +46,15 @@ class RoleListBloc extends Bloc<RoleListEvent, RoleListState> {
   Future<void> callListApi({required SearchCommonRequest searchCommonRequest}) async {
 
     GetRoleListApi courseApi = GetRoleListApi();
-    RolesListResponseModel lessonListResponseModel = await courseApi.call();
+    PermissionManager().rolesListResponseModel = await courseApi.call();
         emit(state.copyWith(
-            roleListResponseModel: lessonListResponseModel,
+            roleListResponseModel: PermissionManager().rolesListResponseModel,
             blocStatus: LessonListStatus.onLoadEnd,
           searchCommonRequest: searchCommonRequest,
-            contentView: lessonListResponseModel.content
+            contentView: PermissionManager().rolesListResponseModel?.content
         ));
-        if((lessonListResponseModel.content??[]).isNotEmpty) {
-          add(RoleListOnSelectLessonEvent(roleInfo: (lessonListResponseModel.content??[]).first));
+        if((PermissionManager().rolesListResponseModel?.content??[]).isNotEmpty) {
+          add(RoleListOnSelectLessonEvent(roleInfo: (PermissionManager().rolesListResponseModel?.content??[]).first));
         }
    
 

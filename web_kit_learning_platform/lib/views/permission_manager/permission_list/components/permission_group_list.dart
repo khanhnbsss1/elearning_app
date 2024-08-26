@@ -12,13 +12,17 @@ import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/permission/models/permission_info.dart';
-import 'package:webkit/views/layouts/layout.dart';
 import 'package:webkit/views/permission_manager/permission_list/bloc/permission_list_bloc.dart';
-import 'package:webkit/views/permission_manager/permission_list/components/add_permission.dart';
 import 'package:webkit/views/permission_manager/permission_list/components/permission_item_view.dart';
 
 class PermissionGroupListPage extends StatefulWidget {
-  PermissionGroupListPage({super.key});
+  ScrollController? scrollController;
+  List<PermissionInfo>? childRolePermissions;
+  bool? enableEdit;
+  PermissionGroupListPage({super.key, this.scrollController, this.childRolePermissions, this.enableEdit}){
+    scrollController=ScrollController();
+    enableEdit??=false;
+  }
   @override
   State<PermissionGroupListPage> createState() => _PermissionGroupListPageState();
 }
@@ -26,7 +30,6 @@ class PermissionGroupListPage extends StatefulWidget {
 class _PermissionGroupListPageState extends State<PermissionGroupListPage> with SingleTickerProviderStateMixin, UIMixin {
  TextEditingController textEditingController = TextEditingController();
   GlobalKey<FormState>? formKey = GlobalKey();
-  ScrollController scrollController=ScrollController();
   List<String>permission =[
     "claim.post.get_claims"
   ];
@@ -46,7 +49,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
       permissionList: permission,
       child: BlocProvider(
         create: (context) {
-          return PermissionListBloc(PermissionListState())..add(PermissionListInitEvent());
+          return PermissionListBloc(PermissionListState(childRolePermissions: widget.childRolePermissions))..add(PermissionListInitEvent());
         },
         child: BlocConsumer<PermissionListBloc, PermissionListState>(
           listener: (context, state) {
@@ -56,6 +59,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                 // TODO: Handle this case.
               case PermissionListStatus.onSelectTag:
                 {
+                  
                 }
                 break;
               default:
@@ -154,9 +158,10 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            (widget.enableEdit??false)?Text("${L10nX.getStr.choosed_str} ${L10nX.getStr.permission_str.toLowerCase()}"):SizedBox(),
             Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
                   //height: Dimens.size40,
@@ -232,37 +237,6 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                 ),
               ],
             ),
-            Visibility(
-              visible: UserManager().userContainPermission(permissionList: ["claim.post.add_role_claim"]),
-              child: Row(
-                children: [
-                  Gap(Dimens.size10),
-                  Visibility(
-                    visible: constraints.maxWidth< 800,
-                    child: InkWell(
-                        onTap: () {
-                          AddPermissionPage(tagPageAction: GradePageAction.create,).show(context, callBack: (p0) {
-                            BlocProvider.of<PermissionListBloc>(context).add(PermissionListInitEvent());
-                          },);
-                        },
-                        child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
-                  ),
-                  Visibility(
-                    visible: constraints.maxWidth >800,
-                    child: ActionButton1(
-                      preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
-                      enable: false,
-                      text: L10nX.getStr.add_new_str,
-                      onTap: () {
-                        AddPermissionPage(tagPageAction: GradePageAction.create,).show(context, callBack: (p0) {
-                          BlocProvider.of<PermissionListBloc>(context).add(PermissionListInitEvent());
-                        },);
-                      },
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       );
@@ -290,7 +264,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
             List<Widget> listOfLesson = List.empty(growable: true);
             for (PermissionGroupInfo info in state.contentView ?? []) {
               listOfLesson.add(GroupPermissionItemView(
-                controller: scrollController,
+                controller: widget.scrollController,
                 info: info,
                 onChange: (p0) {
                   
@@ -299,12 +273,12 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
               );
             }
             return RawScrollbar(
-              controller: scrollController,
+              controller:widget.scrollController,
               thumbColor: ColorConst.colorIconRed,
               thickness: Dimens.size10,
               child: ListView(
                 scrollDirection: Axis.vertical,
-                controller: scrollController,
+                controller:widget.scrollController,
                 children:  listOfLesson,
               ),
             );

@@ -515,6 +515,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "right_answer": MessageLookupByLibrary.simpleMessage("Correct answer"),
         "right_dialog": MessageLookupByLibrary.simpleMessage("Right dialog"),
         "role__list_str": MessageLookupByLibrary.simpleMessage("Role List"),
+        "role_create_str":
+            MessageLookupByLibrary.simpleMessage("Create new role"),
+        "role_edit_str": MessageLookupByLibrary.simpleMessage("Edit role"),
         "role_str": MessageLookupByLibrary.simpleMessage("Role"),
         "rounded_button":
             MessageLookupByLibrary.simpleMessage("Rounded button"),

@@ -67,5 +67,4 @@ class DropDownSearch extends StatelessWidget with UIMixin{
       },
     );
   }
-  
 }

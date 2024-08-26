@@ -6389,6 +6389,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Edit role`
+  String get role_edit_str {
+    return Intl.message(
+      'Edit role',
+      name: 'role_edit_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create new role`
+  String get role_create_str {
+    return Intl.message(
+      'Create new role',
+      name: 'role_create_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

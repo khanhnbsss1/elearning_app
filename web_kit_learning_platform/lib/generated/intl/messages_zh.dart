@@ -429,6 +429,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "right_answer": MessageLookupByLibrary.simpleMessage("正确答案"),
         "right_dialog": MessageLookupByLibrary.simpleMessage("右侧对话框"),
         "role__list_str": MessageLookupByLibrary.simpleMessage("角色列表"),
+        "role_create_str": MessageLookupByLibrary.simpleMessage("创建新角色"),
+        "role_edit_str": MessageLookupByLibrary.simpleMessage("编辑角色"),
         "role_str": MessageLookupByLibrary.simpleMessage("角色"),
         "rounded_button": MessageLookupByLibrary.simpleMessage("圆形按钮"),
         "sales_by_sales_person":

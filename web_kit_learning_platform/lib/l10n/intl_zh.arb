@@ -636,5 +636,7 @@
   "report_history_register_course": "课程注册历史记录",
   "report_history_edit_course": "课程创建/编辑时间表",
   "report_purchased": "收入",
-  "report_new_registered_account": "新注册者"
+  "report_new_registered_account": "新注册者",
+  "role_edit_str": "编辑角色",
+  "role_create_str": "创建新角色"
 }

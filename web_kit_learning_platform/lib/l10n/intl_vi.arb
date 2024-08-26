@@ -641,5 +641,7 @@
   "report_history_register_course": "Lịch sử đăng ký khóa học",
   "report_history_edit_course": "Lịch sửa tạo/sửa khóa học",
   "report_purchased": "Doanh thu",
-  "report_new_registered_account": "Người đăng ký mới"
+  "report_new_registered_account": "Người đăng ký mới",
+  "role_edit_str": "Chỉnh sửa vai trò",
+  "role_create_str": "Tạo mới vai trò"
 }

@@ -8,7 +8,7 @@ import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 class AddUserApi extends BaseApiRequest {
   UserProfile info;
   AddUserApi({required this.info}):super(
-    serviceType: SERVICE_TYPE.USER,
+    serviceType: SERVICE_TYPE.AUTHEN,
     apiName: ApiName.getInstance().createUser,
   );
 

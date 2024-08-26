@@ -448,7 +448,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
 
   Widget buildAuthor({required AddCourseState state, required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
-      title: '${L10nX.getStr.author_str}',
+      title: L10nX.getStr.author_str,
       isRequirement: true,
       child: DropDownSearch(
           list: state.controller!.listOfProduceNames,

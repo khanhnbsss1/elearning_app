@@ -8,7 +8,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/helper/date_time/date_time_helper.dart';
+import 'package:webkit/base/permission/permisstion.dart';
 import 'package:webkit/base/widgets/time_setting/date_time_picker.dart';
+import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/controller/apps/contact/edit_profile_controller.dart';
 import 'package:webkit/helpers/theme/app_style.dart';
 import 'package:webkit/helpers/utils/my_shadow.dart';
@@ -21,6 +23,7 @@ import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
+import 'package:webkit/services/apis/roles/models/roles_info.dart';
 import 'package:webkit/services/apis/user/get_user_detail_api.dart';
 import 'package:webkit/services/apis/user/update_password_api.dart';
 import 'package:webkit/services/apis/user/user_manager/add_user_api.dart';
@@ -54,7 +57,7 @@ class _EditUserProfileState extends State<EditUserProfile>
   void initState() {
     super.initState();
     controller = Get.put(EditProfileController());
-    if(widget.actionType == ActionType.create)
+    if(widget.actionType != ActionType.view)
       {
         enableEdit = true;
       }
@@ -98,12 +101,6 @@ class _EditUserProfileState extends State<EditUserProfile>
               );
             }
             widget.userProfile = snapshot.data;
-            String fullName = widget.userProfile?.fullName ?? "";
-            String firstName = fullName
-                .split(" ")
-                .sublist(0, fullName.split(" ").length - 1)
-                .join(" ");
-            String lastName = fullName.split(" ").last;
             return Column(
               children: [
                 Padding(
@@ -155,7 +152,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                               backgroundColor: ColorConst.mainColor,
                               borderRadiusAll: AppStyle.buttonRadius.medium,
                               child: MyText.bodySmall(
-                                'Edit',
+                                L10nX.getStr.edit_str,
                                 color: ColorConst.whiteColor,
                               ),
                             ),
@@ -173,13 +170,22 @@ class _EditUserProfileState extends State<EditUserProfile>
                                 widget.userProfile?.countryName = countryController.text;
                                 widget.userProfile?.bankAccount = billInfoController.text;
                                 widget.userProfile?.bankName = backNameController.text;
+                                widget.userProfile?.email = emailController.text;
                                 dynamic updateUserApi;
+
                                 if((widget.editSelfProfile??true)||widget.actionType == ActionType.edit)
                                   {
                                     updateUserApi = UpdateUserApi(info: widget.userProfile!);
                                   }
                                 else if(widget.actionType == ActionType.create)
                                   {
+                                    if(newPassWordAgainController.text != newPassWordController.text && (widget.editSelfProfile??true))
+                                    {
+                                      ToastUtils.showToastError("Mật khẩu mới và xác nhập mật khẩu mới không trùng nhau");
+                                      return;
+                                    }
+                                    widget.userProfile?.password = newPassWordAgainController.text;
+                                    widget.userProfile?.userName = phoneNumberController.text;
                                     updateUserApi = AddUserApi(info: widget.userProfile!);
                                   }
                                 if(updateUserApi!=null)
@@ -212,7 +218,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                               backgroundColor: ColorConst.mainColor,
                               borderRadiusAll: AppStyle.buttonRadius.medium,
                               child: MyText.bodySmall(
-                                'Save Change',
+                                L10nX.getStr.save,
                                 color: ColorConst.whiteColor,
                               ),
                             ),
@@ -269,10 +275,34 @@ class _EditUserProfileState extends State<EditUserProfile>
                                             decoration: BoxDecoration(
                                                 borderRadius: BorderRadius.circular(Dimens.size80)
                                             ),
-                                            clipBehavior: Clip.hardEdge,
-                                            child: ImageManager().getImageByUrl(
-                                                widget.userProfile?.avatar??"",
-                                              errorBuilder: Icon(  widget.userProfile?.gender== "Male"? Icons.face:Icons.face_2, size: Dimens.size150, color: ColorConst.colorIconRed,)
+                                           // clipBehavior: Clip.hardEdge,
+                                            child: Stack(
+                                              children: [
+                                                ImageManager().getImageByUrl(
+                                                    widget.userProfile?.avatar??"",
+                                                    errorBuilder: Icon(  
+                                                      widget.userProfile?.gender== "Male"? 
+                                                      Icons.face:Icons.face_2, size: Dimens.size150, color: ColorConst.colorIconRed,)
+                                                ),
+                                                Visibility(
+                                                  visible: enableEdit,
+                                                  child: Align(
+                                                    alignment: Alignment.topRight,
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        color: ColorConst.greyColor.withOpacity(0.2),
+                                                        borderRadius: BorderRadius.circular(Dimens.size20)
+                                                      ),
+                                                        width: Dimens.size30,
+                                                        height: Dimens.size30,
+                                                        alignment: Alignment.center,
+                                                        child: Icon(
+                                                          Icons.edit, 
+                                                          size: Dimens.size20, 
+                                                          color: ColorConst.blackColor,)),
+                                                  ),
+                                                )
+                                              ]
                                             ))
                                     ),
                                   );
@@ -289,24 +319,29 @@ class _EditUserProfileState extends State<EditUserProfile>
                                         child: BuildTextField(
                                             enableEdit: enableEdit,
                                             fieldTitle: "Full Name",
-                                            hintText:
-                                            "Enter your Fulle Name",
+                                            hintText: "Enter your Fulle Name",
                                             controller: fullNameController,),
                                       ),
-                                      MySpacing.width(10),
+                                      MySpacing.width(20),
+                                      Expanded(
+                                        child: StatefulBuilder(
+                                          builder: (BuildContext context, void Function(void Function()) setState) {
+                                          return  roleDropDownSearch(
+                                              enableEdit: (widget.editSelfProfile??true)?false:enableEdit,
+                                              onChange: (p0) {
+                                                setState(() {
+                                                  widget.userProfile?.roleId = p0?.id;
+                                                });
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   MySpacing.height(20),
                                   Row(
                                     children: [
-                                      Expanded(
-                                        child: BuildTextField(
-                                            enableEdit: (widget.editSelfProfile??true)?false:enableEdit,
-                                            fieldTitle: "Role",
-                                            hintText: (widget.editSelfProfile??true)? "Your role":"Enter role",
-                                            controller: roleController,),
-                                      ),
-                                      MySpacing.width(10),
                                       Expanded(
                                         child: BuildTextField(
                                             enableEdit: enableEdit,
@@ -315,7 +350,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                             controller: genderController,
                                         ),
                                       ),
-                                      MySpacing.width(10),
+                                      MySpacing.width(20),
 
                                       Expanded(
                                         child: BuildTextField(
@@ -325,7 +360,6 @@ class _EditUserProfileState extends State<EditUserProfile>
                                             DateTimePicker.ShowDialogDatePicker(
                                               context: context,
                                               widthOfDialog: Dimens.size500,
-
                                               calendarDatePicker2Type: CalendarDatePicker2Type.single,
                                               initSingleDate: widget.userProfile?.getBirdDay(),
                                               onDimissCallBack: (p0, p1) {
@@ -354,7 +388,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                           hintText: "Enter your email",
                                           controller: emailController,),
                                       ),
-                                      MySpacing.width(10),
+                                      MySpacing.width(20),
                                       Expanded(
                                         child: BuildTextField(
                                           enableEdit: enableEdit,
@@ -390,25 +424,28 @@ class _EditUserProfileState extends State<EditUserProfile>
                                     "Account Infomation",
                                     fontWeight: 600,
                                   ),
+                                  MySpacing.height(20),
                                   StatefulBuilder(builder: (context, setState) {
                                     return Column(
                                       crossAxisAlignment:
                                       CrossAxisAlignment.start,
                                       children: [
-                                        BuildTextField(
-                                          enableEdit: widget.actionType == ActionType.create,
-                                          fieldTitle: "Username",
-                                          hintText: "",
-                                          controller: userNameController,
+                                        Visibility(
+                                          visible: widget.userProfile?.id != null,
+                                          child: BuildTextField(
+                                            enableEdit: false,
+                                            fieldTitle: "Username",
+                                            hintText: "",
+                                            controller: userNameController,
+                                          ),
                                         ),
                                         MySpacing.height(20),
                                         Visibility(
-                                          visible: !changePassword && enableEdit,
+                                          visible: !changePassword && enableEdit && (widget.userProfile?.id!=null),
                                           child: MyButton(
                                             onTap: () {
                                               setState(() {
-                                                changePassword =
-                                                !changePassword;
+                                                changePassword = !changePassword;
                                                 print(changePassword);
                                               });
                                             },
@@ -425,88 +462,100 @@ class _EditUserProfileState extends State<EditUserProfile>
                                           ),
                                         ),
                                         Visibility(
-                                          visible: changePassword && enableEdit,
+                                          visible: (changePassword && enableEdit) || (widget.userProfile?.id==null),
                                           child: Column(
                                             children: [
-                                              buildTextField(
-                                                  fieldTitle: "Old Password",
-                                                  hintText:
-                                                  "Enter your old password",
-                                                  controller: oldPasswordController,
-                                                  obscure: true),
-                                              MySpacing.height(20),
+                                              Visibility(
+                                                visible: (widget.editSelfProfile??true),
+                                                child: Column(
+                                                  children: [
+                                                    buildTextField(
+                                                        fieldTitle: "Old Password",
+                                                        hintText:
+                                                        "Enter your old password",
+                                                        controller: oldPasswordController,
+                                                        obscure: true),
+                                                    MySpacing.height(20),
+                                                  ],
+                                                ),
+                                              ),
                                               buildTextField(
                                                   fieldTitle:
-                                                  "Change Password",
+                                                  "New Password",
                                                   hintText:
-                                                  "Enter your password",
+                                                  "Enter your new password",
                                                   controller: newPassWordController,
                                                   obscure: true),
                                               MySpacing.height(20),
                                               buildTextField(
                                                   fieldTitle:
-                                                  "Confirm Password",
+                                                  "Confirm New Password",
                                                   hintText:
-                                                  "Comfirm your password",
+                                                  "Confirm your new password",
                                                   controller: newPassWordAgainController,
                                                   obscure: true),
                                               MySpacing.height(20),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  MyButton(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        changePassword = !changePassword;
-                                                      });
-                                                    },
-                                                    elevation: 5,
-                                                    padding: MySpacing.xy(20, 16),
-                                                    backgroundColor: ColorConst.whiteColor,
-                                                    borderRadiusAll: AppStyle.buttonRadius.medium,
-                                                    child: MyText.bodySmall(
-                                                      L10nX.getStr.cancel,
-                                                      color: ColorConst.mainColor,
+                                              Visibility(
+                                                visible: widget.userProfile?.id!=null,
+                                                child: Row(
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    MyButton(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          changePassword = !changePassword;
+                                                        });
+                                                      },
+                                                      elevation: 5,
+                                                      padding: MySpacing.xy(20, 16),
+                                                      backgroundColor: ColorConst.whiteColor,
+                                                      borderRadiusAll: AppStyle.buttonRadius.medium,
+                                                      child: MyText.bodySmall(
+                                                        L10nX.getStr.cancel,
+                                                        color: ColorConst.mainColor,
+                                                      ),
                                                     ),
-                                                  ),
-                                                  MySpacing.width(20),
-                                                  MyButton(
-                                                    onTap: () async {
-                                                      if(newPassWordAgainController.text.isEmpty || newPassWordController.text.isEmpty || oldPasswordController.text.isEmpty)
-                                                      {
-                                                        ToastUtils.showToastError("Mật khẩu không được để trống");
-                                                        return;
-                                                      }
-                                                      if(newPassWordAgainController.text != newPassWordController.text)
+                                                    MySpacing.width(20),
+                                                    MyButton(
+                                                      onTap: () async {
+                                                        if(newPassWordAgainController.text.isEmpty || 
+                                                            newPassWordController.text.isEmpty ||
+                                                            (oldPasswordController.text.isEmpty && (widget.editSelfProfile??true)))
                                                         {
-                                                          ToastUtils.showToastError("Mật khẩu mới và xác nhập mật khẩu mới không trùng nhau");
+                                                          ToastUtils.showToastError("Mật khẩu không được để trống");
                                                           return;
                                                         }
-                                                      MonitorLoading().showLoading("");
-                                                      UpdateUpdatePasswordApi updateUpdatePasswordApi = UpdateUpdatePasswordApi(
-                                                        userName: widget.userProfile?.userName??"",
-                                                        oldpassword: oldPasswordController.text,
-                                                        newpassword: newPassWordController.text
-                                                      );
-                                                      dynamic data = await updateUpdatePasswordApi.call();
-                                                      MonitorLoading().dismiss();
-                                                      if(data.runtimeType == String && (data as String).isEmpty)
-                                                        {
-                                                          setState(() {
-                                                            changePassword = !changePassword;
-                                                          },);
-                                                        }
-                                                    },
-                                                    elevation: 0,
-                                                    padding: MySpacing.xy(20, 16),
-                                                    backgroundColor: ColorConst.mainColor,
-                                                    borderRadiusAll: AppStyle.buttonRadius.medium,
-                                                    child: MyText.bodySmall(
-                                                      L10nX.getStr.str_update,
-                                                      color: ColorConst.whiteColor,
+                                                        if(newPassWordAgainController.text != newPassWordController.text)
+                                                          {
+                                                            ToastUtils.showToastError("Mật khẩu mới và xác nhập mật khẩu mới không trùng nhau");
+                                                            return;
+                                                          }
+                                                        MonitorLoading().showLoading("");
+                                                        UpdateUpdatePasswordApi updateUpdatePasswordApi = UpdateUpdatePasswordApi(
+                                                          userName: widget.userProfile?.userName??"",
+                                                          oldpassword: oldPasswordController.text,
+                                                          newpassword: newPassWordController.text
+                                                        );
+                                                        dynamic data = await updateUpdatePasswordApi.call();
+                                                        MonitorLoading().dismiss();
+                                                        if(data.runtimeType == String && (data as String).isEmpty)
+                                                          {
+                                                            setState(() {
+                                                              changePassword = !changePassword;
+                                                            },);
+                                                          }
+                                                      },
+                                                      elevation: 0,
+                                                      padding: MySpacing.xy(20, 16),
+                                                      backgroundColor: ColorConst.mainColor,
+                                                      borderRadiusAll: AppStyle.buttonRadius.medium,
+                                                      child: MyText.bodySmall(
+                                                        L10nX.getStr.str_update,
+                                                        color: ColorConst.whiteColor,
+                                                      ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               )
                                             ],
                                           ),
@@ -639,66 +688,67 @@ class _EditUserProfileState extends State<EditUserProfile>
     );
   }
 
-  Widget customDropDownSearch({
-    required List<int> list,
-    required String hintText,
-    required TextEditingController? controller,
+  Widget roleDropDownSearch({
     required bool enableEdit,
     String? value,
+    Function(RoleInfo?)?onChange
   }) {
-    return DropdownSearch<int>(
-      enabled: enableEdit,
-      popupProps: PopupProps.menu(
-        constraints: BoxConstraints(
-          maxHeight:
-              (65 + list.length * 50 < 210) ? 65 + list.length * 50 : 210,
-        ),
-        showSearchBox: true,
-        searchDelay: Duration(milliseconds: 300),
-        showSelectedItems: false,
+    return WidgetWithColumnTitleCommon(
+      title: L10nX.getStr.role_str,
+      child: FutureBuilder(
+        future: PermissionManager().getRoleModel(),
+        builder: (context, snapshot) {
+          RolesListResponseModel? rolesListResponseModel = RolesListResponseModel(content: []);
+          if(snapshot.hasData){
+            rolesListResponseModel = snapshot.data?? RolesListResponseModel(content: []);
+          }
+          RoleInfo? selectedItem;
+          if(widget.userProfile?.id!=null)
+            {
+              if((rolesListResponseModel.content??[]).where((element) => element.id == widget.userProfile?.roleId,).isNotEmpty)
+                {
+                  selectedItem = (rolesListResponseModel.content??[]).firstWhere((element) => element.id == widget.userProfile?.roleId ,);
+                }
+            }
+          
+          return DropdownSearch<RoleInfo>(
+            enabled: enableEdit,
+            popupProps: PopupProps.menu(
+              constraints: BoxConstraints(
+                maxHeight:
+                (65 + (rolesListResponseModel.content??[]).length * 50 < 210) ? 65 + (rolesListResponseModel.content??[]).length * 50 : 210,
+              ),
+              showSearchBox: true,
+              searchDelay: Duration(milliseconds: 300),
+              showSelectedItems: false,
+            ),
+            items: (rolesListResponseModel.content??[]).toList(),
+            selectedItem: selectedItem,
+            dropdownDecoratorProps: DropDownDecoratorProps(
+              dropdownSearchDecoration: InputDecoration(
+                enabled: enableEdit,
+                hintText: "Select ${L10nX.getStr.role_str.toLowerCase()}",
+                labelText: value,
+                hintTextDirection: AppTheme.textDirection,
+                border: outlineInputBorder,
+                contentPadding: MySpacing.all(16),
+                isCollapsed: true,
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+              ),
+            ),
+            itemAsString: (item) => item.name??"",
+            onChanged: (value) {
+              if(onChange!=null)
+                {
+                  onChange(value);
+                }
+            },
+          );
+        },
       ),
-      items: list.toList(),
-      // selectedItem: selectItem ?? 0,
-      dropdownDecoratorProps: DropDownDecoratorProps(
-        dropdownSearchDecoration: InputDecoration(
-          enabled: enableEdit,
-          hintText: "Select $hintText",
-          labelText: value,
-          hintTextDirection: AppTheme.textDirection,
-          border: outlineInputBorder,
-          contentPadding: MySpacing.all(16),
-          isCollapsed: true,
-          floatingLabelBehavior: FloatingLabelBehavior.never,
-        ),
-      ),
-      onChanged: (value) {
-        controller?.text = (value ?? 0).toString();
-      },
     );
   }
 
-  int getDaysInMonth(int year, int month) {
-    if (month == DateTime.february) {
-      final bool isLeapYear =
-          (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0);
-      return isLeapYear ? 29 : 28;
-    }
-    const List<int> daysInMonth = <int>[
-      31,
-      -1,
-      31,
-      30,
-      31,
-      30,
-      31,
-      31,
-      30,
-      31,
-      30,
-      31
-    ];
-    return daysInMonth[month - 1];
-  }
   Future<UserProfile?> getUserProfile() async{
     if(widget.editSelfProfile??true)
       {
