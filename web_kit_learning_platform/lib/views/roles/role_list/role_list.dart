@@ -268,7 +268,10 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
                     child: InkWell(
                         onTap: () {
                           CreateEditRole(
-                            roleActionType: ActionType.create,
+                            actionType: ActionType.create,
+                            callBack: () {
+                              BlocProvider.of<RoleListBloc>(context).add(RoleListInitEvent());
+                            },
                           ).show(context);              
                         },
                         child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
@@ -280,7 +283,7 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
                       text: L10nX.getStr.add_new_str,
                       onTap: () {
                         CreateEditRole(
-                          roleActionType: ActionType.create,
+                          actionType: ActionType.create,
                         ).show(context);
                       },
                     ),
@@ -313,13 +316,13 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
       },
       onEdit: (p0) {
         CreateEditRole(
-           roleActionType: ActionType.edit,
+           actionType: ActionType.edit,
           roleInfo: p0,
         ).show(context);
       },
       onViewDetail: (p0) {
         CreateEditRole(
-          roleActionType: ActionType.view,
+          actionType: ActionType.view,
           roleInfo: p0,
         ).show(context);
       },

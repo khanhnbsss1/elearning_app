@@ -19,8 +19,9 @@ class DeleteRoleApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    await setParamsAdd({"roleId":info.id});
-    await setApiBody(info.toJson());
+    await setParamsAdd({"roleId":info.id, "field":info.id});
+    await setApiBody({"roleId":info.id, "field":info.id});
+
   }
 
   @override

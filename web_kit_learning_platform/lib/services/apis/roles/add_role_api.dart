@@ -4,11 +4,12 @@ import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/services/apis/category/models/category_info.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 
+import 'models/create_role_request_info.dart';
 import 'models/roles_info.dart';
 
 
 class AddRoleApi extends BaseApiRequest {
-  RoleInfo info;
+  CreateRoleRequestInfo info;
   AddRoleApi({required this.info}):super(
     serviceType: SERVICE_TYPE.AUTHEN,
     apiName: ApiName.getInstance().addRoles,

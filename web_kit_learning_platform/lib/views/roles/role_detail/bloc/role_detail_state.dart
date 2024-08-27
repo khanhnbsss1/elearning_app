@@ -4,6 +4,7 @@ enum RoleDetailStatus {
   initial,
   onCreateRole,
   onUpdateRole,
+  onChangePermission,
   unKnown
 }
 
@@ -21,7 +22,12 @@ class RoleDetailState extends Equatable {
     this.roleInfo,
     this.roleActionType,
     this.permissionList
-  });
+  }){
+    editingControllerRoleName??=TextEditingController(text: roleInfo?.name??'');
+    editingControllerRoleDescription??=TextEditingController(text: roleInfo?.name??'');
+    editingControllerNormalizedName??=TextEditingController(text: roleInfo?.normalizedName??'');
+
+  }
 
 
   RoleDetailState copyWith({

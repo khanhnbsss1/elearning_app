@@ -110,36 +110,6 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
               padding: const EdgeInsets.all(16.0),
               child: buildPermissionList(state: state, context: context),
             )),
-/*            SizedBox(height: 8,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FlutterCustomPagination(
-                  key: GlobalKey(debugLabel: (state.permissionListResponseModel?.total??0).toString()),
-                  currentPage: state.permissionListResponseModel!.getCurrentPage(),
-                  limitPerPage: state.permissionListResponseModel!.pageSize??10,
-                  totalDataCount: state.permissionListResponseModel!.getTotalElement(),
-                  onPreviousPage: (p0) {
-                    BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onBackToFirstPage: (p0) {
-                    BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onNextPage: (p0) {
-                    BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onGoToLastPage: (p0) {
-                    BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  backgroundColor: ColorConst.whiteColor,
-                  textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
-                  previousPageIcon: Icons.keyboard_arrow_left,
-                  backToFirstPageIcon: Icons.first_page,
-                  nextPageIcon: Icons.keyboard_arrow_right,
-                  goToLastPageIcon: Icons.last_page,
-                ),
-              ],
-            ),*/
           ],
         ),
       ),
