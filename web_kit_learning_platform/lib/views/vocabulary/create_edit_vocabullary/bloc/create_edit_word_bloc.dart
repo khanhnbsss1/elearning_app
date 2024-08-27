@@ -11,8 +11,9 @@ import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/services/apis/upload_file/upload_file_api.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/services/apis/vocabulary/words/add_words_api.dart';
+import 'package:webkit/services/apis/vocabulary/words/get_vocabulary_detail.dart';
 import 'package:webkit/services/apis/vocabulary/words/update_words_api.dart';
-import 'package:webkit/views/vocabulary/vocabulary_detail/create_edit_words.dart';
+import 'package:webkit/views/vocabulary/create_edit_vocabullary/create_edit_words.dart';
 part 'create_edit_word_event.dart';
 part 'create_edit_word_state.dart';
 
@@ -71,7 +72,13 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
       CreateEditWordInitEvent event,
       Emitter<CreateEditWordState> emit,
       ) async {
-    
+
+    if(state.vocabularyInfo?.id!=null)
+      {
+        GetVocabularyDetailApi getVocabularyDetailApi = GetVocabularyDetailApi(vocabularyId: state.vocabularyInfo!.id!);
+        state.vocabularyInfo = await getVocabularyDetailApi.call();
+      }
+   
     if((state.vocabularyInfo?.sentenceInfos??[]).isEmpty  )
       {
         if(state.wordsPageActionType != WordsPageActionType.view)
@@ -153,6 +160,8 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     state.vocabularyInfo?.traditional = event.state.addWordController?.basicValidator.getController('traditional')?.text;
     state.vocabularyInfo?.pinyinTones = event.state.addWordController?.basicValidator.getController('pinyin_tones')?.text;
     state.vocabularyInfo?.audio = event.state.addWordController?.basicValidator.getController('audio')?.text;
+    state.vocabularyInfo?.categoryWord = event.state.addWordController?.basicValidator.getController('category')?.text;
+
     state.vocabularyInfo?.translationVn = event.state.addWordController?.basicValidator.getController('translation_vn')?.text;
     state.vocabularyInfo?.createdBy = userProfile?.userName??"";
 
@@ -182,7 +191,7 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     state.vocabularyInfo?.simplified =  event.state.addWordController?.basicValidator.getController('simplified')?.text;
     state.vocabularyInfo?.traditional =  event.state.addWordController?.basicValidator.getController('traditional')?.text;
     state.vocabularyInfo?.translationVn =  event.state.addWordController?.basicValidator.getController('translation_vn')?.text;
-
+    state.vocabularyInfo?.categoryWord = event.state.addWordController?.basicValidator.getController('category')?.text;
     state.vocabularyInfo?.pinyinTones =  event.state.addWordController?.basicValidator.getController('pinyin_tones')?.text;
     state.vocabularyInfo?.audio =  event.state.addWordController?.basicValidator.getController('audio')?.text;
     UpdateWordsApi addWordsApi = UpdateWordsApi(word: state.vocabularyInfo!);

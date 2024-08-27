@@ -116,7 +116,7 @@ class UserProfile {
     data['email'] = email??"";
     data['password'] = password;
     data['permissions'] = permission;
-    data['role_id'] = roleId;
+    data['roleId'] = roleId;
     return data;
   }
   List<String> getPermission(){

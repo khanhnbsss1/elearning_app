@@ -8,7 +8,7 @@ import 'package:webkit/base/base.export.dart';
 class AudioSpeaker extends StatefulWidget {
   String url;
   bool? enableProccessBar;
-  AudioSpeaker({required this.url, this.enableProccessBar}){
+  AudioSpeaker({super.key, required this.url, this.enableProccessBar}){
     enableProccessBar??=false;
   }
   @override
@@ -22,6 +22,11 @@ class AudioSpeakerState extends State<AudioSpeaker> {
   ProcessingState processingState = ProcessingState.completed;
   Duration? length, event; 
   final player = AudioPlayer();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -144,7 +149,7 @@ class AudioManager {
         }
       },
     );
-   Duration? length =  await player?.setUrl(url.isNotEmpty ? url : 'https://www2.cs.uic.edu/~i101/SoundFiles/BabyElephantWalk60.wav');
+   Duration? length =  await player?.setUrl(url);
    
    if(onGetLength!=null) {
      onGetLength(length);

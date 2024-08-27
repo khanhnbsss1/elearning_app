@@ -19,7 +19,7 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/sentence/models/sentence_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/services/apis/vocabulary/words/delete_word_api.dart';
-import 'package:webkit/views/vocabulary/vocabulary_detail/create_edit_words.dart';
+import 'package:webkit/views/vocabulary/create_edit_vocabullary/create_edit_words.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../layouts/layout.dart';
@@ -101,7 +101,9 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                                 border: Border(left: BorderSide(color: ColorConst.mainColor, width: 0.1))
                             ),
                             child: state.selectVocabularyInfo!=null?
-                            VocabularyViewDetail(selectVocabularyInfo: state.selectVocabularyInfo!,enableCloseButton: false,):SizedBox()
+                            VocabularyViewDetail(
+                              key: UniqueKey(),
+                              selectVocabularyInfo: state.selectVocabularyInfo!,enableCloseButton: false,):SizedBox()
                         ),
                       ));
                 }
@@ -391,7 +393,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                     child: StatefulBuilder(
                                       builder: (BuildContext context, void Function(void Function()) setState) { 
-                                        return AudioSpeaker(url: state.selectVocabularyInfo?.audio??"",);
+                                        return AudioSpeaker(url: state.selectVocabularyInfo?.audioLink??"",);
                                       },
                                     ),
                                   )

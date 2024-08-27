@@ -50,6 +50,12 @@ class AddWordController extends MyController {
       controller: TextEditingController(text: vocabularyInfo?.imageLink??""),
     );
     basicValidator.addField(
+      'category',
+      label: 'category',
+      required: true,
+      controller: TextEditingController(text: vocabularyInfo?.categoryWord ??""),
+    );
+    basicValidator.addField(
       'created_by',
       label: 'created_by',
       required: true,

@@ -94,6 +94,7 @@ class VocabularyInfo {
     updatedAt = json['updated_at'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
+    categoryWord = json['category_word'];
     if (json['examples'] != null) {
       sentenceInfos = <SentenceInfo>[];
       json['examples'].forEach((v) {

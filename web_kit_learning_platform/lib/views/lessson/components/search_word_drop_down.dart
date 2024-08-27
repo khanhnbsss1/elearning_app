@@ -7,7 +7,7 @@ import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/vocabulary_list_api.dart';
-import 'package:webkit/views/vocabulary/vocabulary_detail/create_edit_words.dart';
+import 'package:webkit/views/vocabulary/create_edit_vocabullary/create_edit_words.dart';
 
 class SearchWordDropDown extends StatefulWidget {
   final List<VocabularyInfo> allWords;

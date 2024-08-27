@@ -41,15 +41,15 @@ class AnswerWorkItemState extends State<AnswerWorkItem>{
                 /// hien thi cho type anser la text
                 Visibility(
                   visible: widget.answerInfo.answerType == AnswerType.text,
-                    child: Text(widget.answerInfo.name??"", style: TextStyleConstant.textStyleBlack13w400,)),
+                    child: Text(widget.answerInfo.answer??"", style: TextStyleConstant.textStyleBlack13w400,)),
                 /// hien thi cho type anser la text
                 Visibility(
                     visible: widget.answerInfo.answerType == AnswerType.image,
-                    child: ImageManager().getImageByUrl(widget.answerInfo.name??"", width: Dimens.size150, boxFit: BoxFit.contain)),
+                    child: ImageManager().getImageByUrl(widget.answerInfo.answer??"", width: Dimens.size150, boxFit: BoxFit.contain)),
                 /// hien thi cho type anser la text
                 Visibility(
                     visible: widget.answerInfo.answerType == AnswerType.audio,
-                    child: AudioSpeaker(url:widget.answerInfo.name??"",)),
+                    child: AudioSpeaker(url:widget.answerInfo.answer??"",)),
               ],
             ),
           ),

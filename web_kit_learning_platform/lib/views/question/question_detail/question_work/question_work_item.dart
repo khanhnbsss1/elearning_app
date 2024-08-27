@@ -278,20 +278,20 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
                             Visibility(
                                 visible: answerInfo.answerType == AnswerType.text,
                                 child: Text(
-                                  answerInfo.name ?? "",
+                                  answerInfo.answer ?? "",
                                   style: TextStyleConstant.textStyleBlack14w400,
                                 )),
                             Visibility(
                                 visible: answerInfo.answerType == AnswerType.audio,
                                 child: AudioSpeaker(
-                                  url: answerInfo.name ?? "",
+                                  url: answerInfo.answer ?? "",
                                 )),
                             Visibility(
                                 visible: answerInfo.answerType == AnswerType.image, 
                                 child: SizedBox(
                                     width: Dimens.size120, 
                                     height: Dimens.size100, 
-                                    child: ImageManager().getImageByUrl(answerInfo.name ?? ""))),
+                                    child: ImageManager().getImageByUrl(answerInfo.answer ?? ""))),
                           ],
                         ))
                   ],
@@ -320,7 +320,7 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
             children: [
               Text(L10nX.getStr.right_answer, style: TextStyleConstant.textStyleBlack14w400,),
               Gap(Dimens.size8),
-              Text(rightAnswerInfo?.name??"", style: TextStyleConstant.textStyleBlack14w400,)
+              Text(rightAnswerInfo?.answer??"", style: TextStyleConstant.textStyleBlack14w400,)
             ],
           ),
         ],
