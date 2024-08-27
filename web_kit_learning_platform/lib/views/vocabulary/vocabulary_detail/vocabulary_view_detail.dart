@@ -28,7 +28,9 @@ class VocabularyViewDetail extends StatefulWidget{
   VocabularyInfo selectVocabularyInfo;
 
   bool? enableCloseButton;
-  VocabularyViewDetail({required this.selectVocabularyInfo, this.enableCloseButton}){
+  VocabularyViewDetail({
+    super.key,
+    required this.selectVocabularyInfo, this.enableCloseButton}){
     enableCloseButton??=true;
   }
   @override
@@ -131,7 +133,7 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                                             //visible: (widget.selectVocabularyInfo.audio??"").isNotEmpty,
                                               child: StatefulBuilder(
                                                 builder: (BuildContext context, void Function(void Function()) setState) {
-                                                  return AudioSpeaker(url: widget.selectVocabularyInfo.audio??"",);
+                                                  return AudioSpeaker(url: widget.selectVocabularyInfo.audioLink??"",);
                                                 },
                                               )
                                           ),
@@ -155,7 +157,8 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
                                             //visible: (widget.selectVocabularyInfo.audio??"").isNotEmpty,
                                               child: StatefulBuilder(
                                                 builder: (BuildContext context, void Function(void Function()) setState) {
-                                                  return AudioSpeaker(url: widget.selectVocabularyInfo.audio??"",);
+                                                  return AudioSpeaker(
+                                                    url: widget.selectVocabularyInfo.audioLink??"",);
                                                 },
                                               )
                                           ),

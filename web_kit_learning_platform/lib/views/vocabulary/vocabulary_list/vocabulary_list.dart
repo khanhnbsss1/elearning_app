@@ -101,7 +101,9 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                                 border: Border(left: BorderSide(color: ColorConst.mainColor, width: 0.1))
                             ),
                             child: state.selectVocabularyInfo!=null?
-                            VocabularyViewDetail(selectVocabularyInfo: state.selectVocabularyInfo!,enableCloseButton: false,):SizedBox()
+                            VocabularyViewDetail(
+                              key: UniqueKey(),
+                              selectVocabularyInfo: state.selectVocabularyInfo!,enableCloseButton: false,):SizedBox()
                         ),
                       ));
                 }
@@ -391,7 +393,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                     child: StatefulBuilder(
                                       builder: (BuildContext context, void Function(void Function()) setState) { 
-                                        return AudioSpeaker(url: state.selectVocabularyInfo?.audio??"",);
+                                        return AudioSpeaker(url: state.selectVocabularyInfo?.audioLink??"",);
                                       },
                                     ),
                                   )
