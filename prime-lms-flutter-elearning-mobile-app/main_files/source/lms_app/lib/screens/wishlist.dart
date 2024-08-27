@@ -19,7 +19,7 @@ final wishlistProvider = FutureProvider.autoDispose<List<Course>>((ref) async {
   final courseIds = user.wishList ?? [];
   final chunks = partition(courseIds, 10);
 
-  final querySnapshots = await Future.wait(chunks.map((chunk) => FirebaseService().getCoursesQuery(chunk)).toList());
+  final querySnapshots = await Future.wait(chunks.map((chunk) => ApiService().getCoursesQuery(chunk)).toList());
   for (var element in querySnapshots) {
     courses.addAll(element.docs.map((e) => Course.fromFirestore(e)).toList());
   }

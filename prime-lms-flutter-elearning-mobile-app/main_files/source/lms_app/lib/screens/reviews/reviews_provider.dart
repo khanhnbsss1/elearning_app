@@ -17,14 +17,14 @@ class ReviewData extends StateNotifier<List<Review>> {
 
   getData(String courseId, WidgetRef ref) async {
     if (lastDocument == null) {
-      await FirebaseService().getReviewsSnapshot(courseId: courseId).then((QuerySnapshot snapshot) {
+      await ApiService().getReviewsSnapshot(courseId: courseId).then((QuerySnapshot snapshot) {
         state = snapshot.docs.map((e) => Review.fromFirebase(e)).toList();
         lastDocument = snapshot.docs.last;
         ref.read(isReviewsLoadingProvider.notifier).update((state) => false);
       }).catchError((e) => _handleError(ref, e.toString()));
     } else {
       ref.read(hasReviewsProvider.notifier).update((state) => true);
-      await FirebaseService().getReviewsSnapshot(courseId: courseId, lastDocument: lastDocument).then((QuerySnapshot? snapshot) {
+      await ApiService().getReviewsSnapshot(courseId: courseId, lastDocument: lastDocument).then((QuerySnapshot? snapshot) {
         state.addAll(snapshot!.docs.map((e) => Review.fromFirebase(e)).toList());
         lastDocument = snapshot.docs.last;
         ref.read(hasReviewsProvider.notifier).update((state) => false);

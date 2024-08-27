@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lms_app/components/html_body.dart';
 import 'package:lms_app/models/course.dart';
 
-import '../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import '../../services/apis/course/course_detail/models/course_detail_model.dart';
 
 class CourseDescription extends StatelessWidget {
   const CourseDescription({super.key, required this.course});

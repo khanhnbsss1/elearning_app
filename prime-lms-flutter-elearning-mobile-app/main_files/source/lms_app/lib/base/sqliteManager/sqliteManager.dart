@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
 import 'package:lms_app/models/user/UserProfile.dart';
+import 'package:lms_app/services/apis/user/get_user_detail_api.dart';
 
 import '../base.export.dart';
 
@@ -83,25 +85,26 @@ class SqliteManager {
 // #endregion
   
   // Define a function that inserts dogs into the database
-  Future<void> insertCurrentLoginUserInfo(UserInfo useInfo) async {
+  Future<void> insertCurrentLoginUserInfo(UserProfile useInfo) async {
 
     SharedPreferencesStorage().saveString(Storage.rootUserInfoKey, jsonEncode(useInfo.toJson()));
   }
   Future<void> deleteCurrentLoginUserInfo() async {
     SharedPreferencesStorage().removeByKey(Storage.rootUserInfoKey);
   }
-  Future<UserInfo?> getCurrentLoginUserInfo() async {
+  Future<UserProfile?> getCurrentLoginUserInfo() async {
     String rootUserStr = SharedPreferencesStorage().getString(Storage.rootUserInfoKey);
-    UserInfo? userInfo;
+    UserProfile? userInfo;
     if(rootUserStr.isNotEmpty)
     {
-      userInfo = UserInfo.fromJsonForDB(jsonDecode(rootUserStr));
+      GetUserProfileInfoApi getUserProfileInfoApi = GetUserProfileInfoApi();
+       userInfo = await getUserProfileInfoApi.call();
     }
     return userInfo;
   }
 
   // Define a function that inserts dogs into the database
-  Future<void> insertRecentUserInfo(UserInfo useInfo) async {
+  Future<void> insertRecentUserInfo(UserProfile useInfo) async {
     // Get a reference to the database.
     String reUserListStr =  SharedPreferencesStorage().getString(Storage.recentUserInfoKey);
     RecentUserList recentUserList = RecentUserList();
@@ -110,7 +113,7 @@ class SqliteManager {
       recentUserList = RecentUserList.fromJson(jsonDecode(reUserListStr));
     }
     recentUserList.recentUserContentList!.clear();
-    if(recentUserList.recentUserContentList!.where((element) => element.userId == useInfo.userId).isEmpty)
+    if(recentUserList.recentUserContentList!.where((element) => element.id == useInfo.id).isEmpty)
     {
       recentUserList.recentUserContentList!.add(useInfo);
       String reUserListStr = jsonEncode(recentUserList.toJson());
@@ -118,7 +121,7 @@ class SqliteManager {
     }
   }
 
-  Future<List<UserInfo>> getRecentAllUserInfo() async {
+  Future<List<UserProfile>> getRecentAllUserInfo() async {
     String reUserListStr =  SharedPreferencesStorage().getString(Storage.recentUserInfoKey);
     if(reUserListStr.isEmpty)
     {
@@ -128,7 +131,7 @@ class SqliteManager {
     return recentUserList.recentUserContentList??[];
   }
 
-  Future<void> insertCurrentSelectUserInfo(UserInfo useInfo) async {
+  Future<void> insertCurrentSelectUserInfo(UserProfile useInfo) async {
     // Get a reference to the database.
     RecentUserList recentUserList = RecentUserList();
     recentUserList.recentUserContentList!.add(useInfo);
@@ -136,7 +139,7 @@ class SqliteManager {
     SharedPreferencesStorage().saveString(Storage.currentUserInfoKey, reUserListStr);
   }
 
-  Future<UserInfo?> getCurrentSelectUserInfo() async {
+  Future<UserProfile?> getCurrentSelectUserInfo() async {
     String reUserListStr =  SharedPreferencesStorage().getString(Storage.currentUserInfoKey);
     if(reUserListStr.isEmpty)
     {
@@ -208,7 +211,7 @@ class SqliteManager {
       return [];
     }
     RecentUserProfileList recentUserList = RecentUserProfileList.fromJson(jsonDecode(reUserListStr));
-    List<UserProfile>? recentList = [...(recentUserList.recentList??[]).where((element) => element.parentId == userId)];
+    List<UserProfile>? recentList = [...(recentUserList.recentList??[]).where((element) => element.id.toString() == userId)];
     return recentList;
   }
 
@@ -219,7 +222,7 @@ class SqliteManager {
       return [];
     }
     RecentUserProfileList recentUserList = RecentUserProfileList.fromJson(jsonDecode(reUserListStr));
-    List<UserProfile>? recentList = [...(recentUserList.recentList??[]).where((element) => element.username == userName)];
+    List<UserProfile>? recentList = [...(recentUserList.recentList??[]).where((element) => element.userName == userName)];
     return recentList;
   }
   Future<void> deleteAllUserProfileInfo() async {

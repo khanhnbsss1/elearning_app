@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/screens/course_details.dart/sections.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 
 class CurriculamScreen extends StatelessWidget {
   const CurriculamScreen({super.key, required this.course});

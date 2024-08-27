@@ -1,8 +1,6 @@
 
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/question/models/question_info.dart';
-
-
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+import 'models/question_info.dart';
 
 class DeleteQuizApi extends BaseApiRequest {
   QuestionInfo info;

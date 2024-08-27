@@ -1,22 +1,21 @@
+import 'dart:typed_data';
+
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
 import 'package:lms_app/models/user_model.dart';
-import 'package:lms_app/screens/home/home_view.dart';
-import 'package:lms_app/screens/tabs/profile_tab/profile_tab.dart';
 import 'package:lms_app/services/firebase_service.dart';
-import 'package:lms_app/services_elearning/apis/user/get_user_detail_api.dart';
 import 'package:lms_app/theme/theme_provider.dart';
-import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import 'package:file_picker/file_picker.dart';
 
 import '../components/user_avatar.dart';
 import '../constants/custom_colors.dart';
 import '../controller_elearning/edit_profile_controller.dart';
-import '../models_elearning/user/UserProfile.dart';
+import '../models/user/UserProfile.dart';
 import '../providers/user_data_provider.dart';
 
 class EditProfile extends ConsumerStatefulWidget {
@@ -34,7 +33,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
   final _btnController = RoundedLoadingButtonController();
   final formKey = GlobalKey<FormState>();
   bool initController = false;
-  XFile? _selectedImageFile;
+  Uint8List? _selectedImageFile;
   String? _imageUrl;
   bool showPassword = false;
 
@@ -44,38 +43,17 @@ class _EditProfileState extends ConsumerState<EditProfile> {
     if (!initController) {
       editProfileController = EditProfileController(userProfile: widget.user);
       editProfileController.onInit();
+      _imageUrl = editProfileController.basicValidator.getController('image')!.text;
     };
   }
 
   Future _pickImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(
-        source: ImageSource.gallery, maxHeight: 200, maxWidth: 200);
-    if (image != null) {
-      _selectedImageFile = image;
-      setState(() {});
-    }
-  }
-
-  Future<String?> _getUserImage() async {
-    if (_selectedImageFile != null) {
-      final String? imageUrl =
-          await FirebaseService().uploadImageToHosting(_selectedImageFile!);
-      return imageUrl;
-    } else {
-      return widget.user.imageUrl;
-    }
-  }
-
-  UserModel _userData(String? imageUrl) {
-    UserModel userModel = UserModel(
-      id: widget.user.id.toString(),
-      email: widget.user.email!,
-      name: editProfileController.basicValidator.getController('name')!.text,
-      imageUrl: imageUrl,
-      updatedAt: DateTime.now().toUtc(),
-    );
-    return userModel;
+      FilePickerResult? result = await FilePicker.platform.pickFiles(withData: true, type: FileType.custom, allowedExtensions: ['png', 'jpg']);
+      MultipartFile file = MultipartFile.fromBytes(result!.files.first.bytes!.toList(growable: true), filename: result.names[0]);
+      setState(() {
+        _selectedImageFile = result.files.first.bytes!;
+        editProfileController.basicValidator.getController('image')?.text = result.files.first.name ?? "";
+      });
   }
 
   _handleUpdate() async {
@@ -83,10 +61,6 @@ class _EditProfileState extends ConsumerState<EditProfile> {
       formKey.currentState!.save();
       _btnController.start();
       bool check = await editProfileController.onUpdate();
-      // final String? imageUrl = await _getUserImage();
-      // // await FirebaseService().updateUserProfile(_userData(imageUrl));
-      // await ref.read(userDataProvider.notifier).getData();
-      // Navigator.pop(context, true);
       _btnController.reset();
       if (check) {
         await ref.read(userDataProvider.notifier).getData();
@@ -140,7 +114,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                   onTap: () => _pickImage(),
                   child: UserAvatar(
                     imageUrl: _imageUrl,
-                    imageFile: _selectedImageFile,
+                    imageByte: _selectedImageFile,
                     iconSize: 40,
                     radius: 120,
                   ),

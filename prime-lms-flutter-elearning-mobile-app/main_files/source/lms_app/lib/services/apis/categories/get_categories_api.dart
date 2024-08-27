@@ -1,5 +1,5 @@
 import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
-import 'package:lms_app/services_elearning/apis/tags/models/tag_info.dart';
+import 'package:lms_app/services/apis/tags/models/tag_info.dart';
 
 class GetCategoriesApi extends BaseApiRequest {
   GetCategoriesApi() :super(

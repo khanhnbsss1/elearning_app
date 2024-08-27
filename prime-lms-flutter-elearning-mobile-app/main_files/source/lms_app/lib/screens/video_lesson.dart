@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/screens/video_player_screen.dart';
 import 'package:lms_app/services/content_security_service.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import '../components/mark_complete_button.dart';
 import '../models/course.dart';
 import '../models/lesson.dart';

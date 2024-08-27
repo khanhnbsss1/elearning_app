@@ -15,23 +15,23 @@ import 'package:lms_app/models/section.dart';
 import 'package:lms_app/models/subscription.dart';
 import 'package:lms_app/models/tag.dart';
 import 'package:lms_app/services/app_service.dart';
-import 'package:lms_app/services_elearning/apis/categories/get_categories_api.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/get_course_detail_api.dart';
-import 'package:lms_app/services_elearning/apis/course/my_course_list/my_course_api.dart';
-import 'package:lms_app/services_elearning/apis/tags/get_tag_list.dart';
-import 'package:lms_app/services_elearning/apis/tags/models/tag_info.dart';
+import 'package:lms_app/services/apis/categories/get_categories_api.dart';
+import 'package:lms_app/services/apis/course/course_detail/get_course_detail_api.dart';
+import 'package:lms_app/services/apis/course/my_course_list/my_course_api.dart';
+import 'package:lms_app/services/apis/tags/get_tag_list.dart';
+import 'package:lms_app/services/apis/tags/models/tag_info.dart';
 import 'package:lms_app/utils/toasts.dart';
 
 import '../base/base_request_elearning/models/search_common_request.dart';
-import '../models_elearning/user/UserProfile.dart';
-import '../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
-import '../services_elearning/apis/course/course_fillter/get_course_fillter_api.dart';
-import '../services_elearning/apis/course/course_fillter/models/course_filtter_info.dart';
-import '../services_elearning/apis/course/course_list/course_api.dart';
-import '../services_elearning/apis/course/course_list/models/course_models.dart';
+import '../models/user/UserProfile.dart';
+import '../services/apis/course/course_detail/models/course_detail_model.dart';
+import '../services/apis/course/course_fillter/get_course_fillter_api.dart';
+import '../services/apis/course/course_fillter/models/course_filtter_info.dart';
+import '../services/apis/course/course_list/course_api.dart';
+import '../services/apis/course/course_list/models/course_models.dart';
 
 
-class FirebaseService {
+class ApiService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   static String getUID(String collectionName) => FirebaseFirestore.instance.collection(collectionName).doc().id;

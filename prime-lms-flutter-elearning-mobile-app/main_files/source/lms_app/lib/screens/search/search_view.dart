@@ -9,7 +9,7 @@ import 'package:lms_app/screens/search/searched_courses.dart';
 import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/utils/empty_icon.dart';
 
-import '../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import '../../services/apis/course/course_detail/models/course_detail_model.dart';
 
 final searchTextCtlrProvider = Provider.autoDispose((ref) => TextEditingController());
 final searchStartedProvider = StateProvider.autoDispose<bool>((ref) => false);
@@ -17,7 +17,7 @@ final recentSearchDataProvider = StateProvider<List<String>>((ref) => []);
 
 final searchedCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>?>((ref) async {
   final value = ref.watch(searchTextCtlrProvider).text;
-  final allCourses = await FirebaseService().getAllCourses(keyword: value??"");
+  final allCourses = await ApiService().getAllCourses(keyword: value??"");
   return allCourses;
 });
 

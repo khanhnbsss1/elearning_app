@@ -19,7 +19,7 @@ export 'package:lms_app/base/constant/enum_constant.dart';
 
 export 'package:lms_app/base/widgets/button/action_button1.dart';
 export 'package:lms_app/base/resizer/fetch_pixels.dart';
-export 'package:lms_app/base/helper/number_helper.dart';
+export 'package:lms_app/helper/number_helper.dart';
 export 'package:lms_app/base/widgets/tab_bar/tab_bar_common.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:pull_to_refresh/pull_to_refresh.dart';

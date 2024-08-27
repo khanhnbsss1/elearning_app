@@ -6,7 +6,7 @@ import 'package:lms_app/components/mark_complete_button.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/models/lesson.dart';
 import 'package:lms_app/screens/quiz_lesson/quiz_screen.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
 class QuizComplete extends ConsumerWidget {

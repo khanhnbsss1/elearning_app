@@ -1,7 +1,7 @@
-import 'package:webkit/helpers/extensions/extensions.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
-import 'package:webkit/services/apis/tags/models/tag_info.dart';
-import 'package:webkit/services/apis/topic/model/topic_info.dart';
+
+import '../../../lessson/models/lesson_info.dart';
+import '../../../tags/models/tag_info.dart';
+import '../../../topic/model/topic_info.dart';
 
 class CourseInfo {
   int? id;
@@ -16,12 +16,12 @@ class CourseInfo {
   String? infoResult;
   String? dayFrom;
   String? dayTo;
-  int? price;
+  int? payment;
   String? createdAt;
   String? updatedAt;
   String? createdBy;
   String? updatedBy;
-  int? rating;
+  int? ratePoint;
   String? durian;
   String? videoPreview;
   String? courseMode;
@@ -52,12 +52,12 @@ class CourseInfo {
         this.infoResult,
         this.dayFrom,
         this.dayTo,
-        this.price,
+        this.payment,
         this.createdAt,
         this.updatedAt,
         this.createdBy,
         this.updatedBy,
-        this.rating,
+        this.ratePoint,
         this.durian,
         this.videoPreview,
         this.courseMode,
@@ -89,12 +89,12 @@ class CourseInfo {
     infoResult = "";
     dayFrom = "";
     dayTo = "";
-    price = 0;
+    payment = 0;
     createdAt = "";
     updatedAt = "";
     createdBy = "";
     updatedBy = "";
-    rating = 0;
+    ratePoint = 0;
     durian = "";
     videoPreview = "";
     courseMode = "";
@@ -160,12 +160,12 @@ class CourseInfo {
       infoResult : infoResult ??this.infoResult,
       dayFrom : dayFrom ??this.dayFrom,
       dayTo : dayTo ??this.dayTo,
-      price : payment ??this.price,
+      payment : payment ??this.payment,
       createdAt : createdAt ??this.createdAt,
       updatedAt : updatedAt ??this.updatedAt,
       createdBy : createdBy ??this.createdBy,
       updatedBy : updatedBy ??this.updatedBy,
-      rating : ratePoint ??this.rating,
+      ratePoint : ratePoint ??this.ratePoint,
       durian : durian ??this.durian,
       videoPreview : ((videoPreview??'').isNotEmpty)? videoPreview: this.videoPreview,
       courseMode : courseMode ??this.courseMode,
@@ -200,12 +200,12 @@ class CourseInfo {
     infoResult = json.infoResult??infoResult;
     dayFrom = json.dayFrom??dayFrom;
     dayTo = json.dayTo??dayTo;
-    price = json.price??price;
+    payment = json.payment??payment;
     createdAt = json.createdAt??createdAt;
     updatedAt = json.updatedAt??updatedAt;
     createdBy = json.createdBy??createdBy;
     updatedBy = json.updatedBy??updatedBy;
-    rating = json.rating??rating;
+    ratePoint = json.ratePoint??ratePoint;
     durian = json.durian??durian;
     videoPreview = json.videoPreview??videoPreview;
     courseMode = json.courseMode??courseMode;
@@ -237,12 +237,12 @@ class CourseInfo {
     infoResult = json['info_result'];
     dayFrom = json['day_from'];
     dayTo = json['day_to'];
-    price = json['payment'];
+    payment = json['payment'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
-    rating = json['rate_point'];
+    ratePoint = json['rate_point'];
     durian = json['durian'];
     videoPreview = json['video_preview'];
     courseMode = json['course_mode'];
@@ -308,9 +308,9 @@ class CourseInfo {
     {
       data['day_to'] = dayTo??"";
     }*/
-    if((price!=null))
+    if((payment!=null))
     {
-      data['payment'] = price??0;
+      data['payment'] = payment??0;
     }
 /*    if((createdAt??"").isNotEmpty)
     {
@@ -328,9 +328,9 @@ class CourseInfo {
     {
       data['updated_by'] = updatedBy??"";
     }
-    if((rating!=null))
+    if((ratePoint!=null))
     {
-      data['rate_point'] = rating??0;
+      data['rate_point'] = ratePoint??0;
     }
     data['durian'] = (durian??"").isNotEmpty?(durian??""):'0';
 
@@ -368,7 +368,7 @@ class CourseInfo {
     }
     if((accompanyCourse??'').isNotEmpty)
     {
-      data['accompany_course'] = (accompanyCourse??'0').toInt();
+      data['accompany_course'] = (accompanyCourse??'0');
     }
     if((mode??'').isNotEmpty)
     {

@@ -1,4 +1,4 @@
-import 'package:webkit/base/services/base_request/models/page_model.dart';
+import '../../../../base/base_request_elearning/models/page_model.dart';
 
 class TagsInfo {
   int? id;
@@ -19,10 +19,11 @@ class TagsInfo {
   }
 }
 
-class TagListResponseModel extends PageModel{
+class TagListResponseModel extends PageModel {
   List<TagsInfo>? content;
 
-  TagListResponseModel({super.total, super.pageSize, super.pageNumber, this.content});
+  TagListResponseModel(
+      {super.total, super.pageSize, super.pageNumber, this.content});
   TagListResponseModel.fromJson(Map<String, dynamic> json) {
     total = json['total'];
     pageSize = json['pageSize'];
@@ -34,8 +35,8 @@ class TagListResponseModel extends PageModel{
       });
     }
   }
-  TagListResponseModel.fromList( dynamic json) {
-    if (json!= null) {
+  TagListResponseModel.fromList(dynamic json) {
+    if (json != null) {
       content = <TagsInfo>[];
       json.forEach((v) {
         content!.add(new TagsInfo.fromJson(v));
@@ -52,5 +53,34 @@ class TagListResponseModel extends PageModel{
     }
     return data;
   }
+}
 
+class CategoriesModel {
+  String? datetime;
+  String? errorCode;
+  String? message;
+  List<TagsInfo>? data;
+  bool? success;
+
+  CategoriesModel(
+      {this.datetime, this.errorCode, this.message, this.data, this.success});
+
+  CategoriesModel.fromJson(List<dynamic> json) {
+      data = <TagsInfo>[];
+      json.forEach((v) {
+        data!.add(TagsInfo.fromJson(v));
+      });
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['datetime'] = this.datetime;
+    data['errorCode'] = this.errorCode;
+    data['message'] = this.message;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    data['success'] = this.success;
+    return data;
+  }
 }

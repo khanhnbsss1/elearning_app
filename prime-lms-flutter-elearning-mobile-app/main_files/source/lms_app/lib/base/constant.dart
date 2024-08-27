@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lms_app/base/base.export.dart';
 
-import 'instance_mananger/instance_mananger.dart';
+import 'instance_mananger_elearning/instance_mananger.dart';
 
 class Constant {
   static String assetImageSvgPath = "assets/svg/";

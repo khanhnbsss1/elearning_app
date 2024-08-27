@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/models/tag.dart';
 import 'package:lms_app/screens/all_courses.dart/courses_view.dart';
 import 'package:lms_app/services/firebase_service.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import '../../models/course.dart';
 

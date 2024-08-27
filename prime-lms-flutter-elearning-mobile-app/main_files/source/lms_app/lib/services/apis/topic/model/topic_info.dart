@@ -1,4 +1,4 @@
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 
 class Subjects {
   String? subName;

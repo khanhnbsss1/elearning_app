@@ -17,7 +17,7 @@ import 'package:lms_app/utils/next_screen.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../controller_elearning/auth/login_controller.dart';
 import '../../l10n/l10n_extention.dart';
-import '../../models_elearning/user/UserProfile.dart';
+import '../../models/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 import 'social_logins.dart';
 

@@ -1,7 +1,7 @@
 import 'package:lms_app/base/base.export.dart';
 import 'package:lms_app/base/device_elearning/device_manager.dart';
 import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
-import 'package:lms_app/services_elearning/apis/auth/editUser/edit_user_request.dart';
+import 'package:lms_app/services/apis/auth/editUser/edit_user_request.dart';
 import '../../../../base/widgets/toast_common/toast_utils.dart';
 
 class EditUserApi extends BaseApiRequest {

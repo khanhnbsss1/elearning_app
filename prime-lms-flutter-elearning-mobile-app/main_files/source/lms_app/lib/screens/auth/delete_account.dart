@@ -85,7 +85,7 @@ class _DeleteDialog extends ConsumerWidget {
   void _handleDeleteAccount(context, WidgetRef ref, RoundedLoadingButtonController controller) async {
     controller.start();
     final user = ref.read(userDataProvider);
-    await FirebaseService().deleteUserDatafromDatabase(user!.id.toString());
+    await ApiService().deleteUserDatafromDatabase(user!.id.toString());
     await AuthService().deleteUserAuth();
     await AuthService().googleLogout();
     await AuthService().userLogOut();

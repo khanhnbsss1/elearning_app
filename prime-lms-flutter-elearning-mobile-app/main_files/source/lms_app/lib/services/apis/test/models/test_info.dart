@@ -1,24 +1,23 @@
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/services/base_request/models/page_model.dart';
-import 'package:webkit/services/apis/question/models/question_info.dart';
+import 'package:lms_app/services/apis/question/models/question_info.dart';
+import '../../../../base/base_request_elearning/models/page_model.dart';
 
 
-enum TestType{
-  ENTRANCE,OUTPUT,
+enum TestLevel{
+  easy,
+  normal,
+  hard
 }
-Map<TestType, String>mapTestLevelToStrKey={
-  TestType.ENTRANCE:"ENTRANCE",
-  TestType.OUTPUT:"OUTPUT",
-};
-Map< String,TestType>mapStrKeyTestLevel={
-  "ENTRANCE":TestType.ENTRANCE,
-  "OUTPUT":TestType.OUTPUT,
+Map<TestLevel, String>mapTestLevelToStrKey={
+  TestLevel.easy:"easy",
+  TestLevel.normal:"normal",
+  TestLevel.hard:"difficulty",
 };
 class TestInfo {
   int? id;
   int? courseId;
   int? lectureId;
   String? language;
+  String? typeTest;
   String? name;
   String? courseName;
   String? subName;
@@ -27,8 +26,6 @@ class TestInfo {
   String? createdBy;
   String? updatedAt;
   String? updatedBy;
-  TestType? testType;
-  int? durian;
   List<QuestionInfo>? quizDTOs;
   
   TestInfo(
@@ -36,6 +33,7 @@ class TestInfo {
         this.courseId,
         this.lectureId,
         this.language,
+        this.typeTest,
         this.name,
         this.courseName,
         this.subName,
@@ -44,21 +42,17 @@ class TestInfo {
         this.createdBy,
         this.updatedAt,
         this.updatedBy,
-        this.quizDTOs,
-        this.testType,
-        this.durian
-      });
+        this.quizDTOs});
 
   TestInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     courseId = json['course_id'];
     lectureId = json['lecture_id'];
     language = json['language'];
-    testType = mapStrKeyTestLevel[json['type_test']]??TestType.OUTPUT;
+    typeTest = json['type_test'];
     name = json['name'];
     courseName = json['course_name'];
     subName = json['sub_name'];
-    durian = int.tryParse(json['durian'], radix: 10);
     lectureName = json['lecture_name'];
     createdAt = json['created_at'];
     createdBy = json['created_by'];
@@ -85,9 +79,8 @@ class TestInfo {
     //data['course_id'] =courseId;
     //data['lecture_id'] =lectureId;
    // data['language'] =language;
-    data['type_test'] =mapTestLevelToStrKey[testType];
+    data['type_test'] =typeTest;
     data['name'] =name;
-    data['durian'] =durian.toString();
    // data['course_name'] =courseName;
    // data['sub_name'] =subName;
     //data['lecture_name'] =lectureName;
@@ -99,11 +92,7 @@ class TestInfo {
       data['question_ids'] =quizDTOs!.map((e) => e.id,).toList().join(',');
     }
     
-    
     return data;
-  }
-  TestType getTestLevel(){
-    return testType??TestType.ENTRANCE;
   }
 }
 class TestListResponseModel extends PageModel{

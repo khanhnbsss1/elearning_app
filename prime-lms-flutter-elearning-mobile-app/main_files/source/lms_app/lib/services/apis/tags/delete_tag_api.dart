@@ -1,6 +1,6 @@
 
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/tags/models/tag_info.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+import 'package:lms_app/services/apis/tags/models/tag_info.dart';
 
 
 class DeleteTagApi extends BaseApiRequest {

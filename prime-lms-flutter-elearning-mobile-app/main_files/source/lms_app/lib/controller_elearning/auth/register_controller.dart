@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lms_app/controller_elearning/my_controller.dart';
 
-import '../../helper_elearning/my_form_validator.dart';
-import '../../helper_elearning/widget/my_validators.dart';
-import '../../models_elearning/user/UserProfile.dart';
-import '../../services_elearning/apis/auth/register/models/register_request.dart';
-import '../../services_elearning/apis/auth/register/register_with_phone_api.dart';
+import '../../helper/my_form_validator.dart';
+import '../../helper/widget/my_validators.dart';
+import '../../models/user/UserProfile.dart';
+import '../../services/apis/auth/register/models/register_request.dart';
+import '../../services/apis/auth/register/register_with_phone_api.dart';
 
 
 class RegisterController extends MyController {

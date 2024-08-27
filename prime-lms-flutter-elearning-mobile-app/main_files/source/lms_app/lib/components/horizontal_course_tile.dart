@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:lms_app/components/price_tag.dart';
 import 'package:lms_app/models/course.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'rating_bar.dart';
 import '../screens/course_details.dart/details_view.dart';
 import '../utils/custom_cached_image.dart';

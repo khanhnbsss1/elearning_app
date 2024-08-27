@@ -1,5 +1,5 @@
 
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
 
 import 'models/course_detail_model.dart';
 
@@ -22,7 +22,7 @@ class CourseDetailApi extends BaseApiRequest {
 
     if(result.runtimeType == ResponseCommon)
     {
-      return null;
+      return CourseInfo.initial();
     }
     else
     {

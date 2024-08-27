@@ -1,7 +1,7 @@
 
-import 'package:webkit/base/services/base_request/models/page_model.dart';
-import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
-import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
+import '../../../../base/base_request_elearning/models/page_model.dart';
+import 'package:lms_app/services/apis/upload_file/models/upload_file_info.dart';
+import 'package:lms_app/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 
 class LessonListResponseModel extends PageModel{
   List<LessonInfo>? content;
@@ -57,8 +57,6 @@ class LessonInfo {
   String? testName;
   UploadFileResponseInfo? documentUploadInfo;
   List<VocabularyInfo>? vocabularies;
-  int? videoDuration;// bien nay chi set khi play video tren web
-  bool? isFinnish;
   LessonInfo(
       {this.id,
         this.subName,
@@ -76,9 +74,7 @@ class LessonInfo {
         this.vocabularies,
         this.docLink,
         this.testId,
-        this.testName,
-        this.videoDuration,
-        this.isFinnish
+        this.testName
       });
 
   LessonInfo.fromJson(Map<String, dynamic> json) {
@@ -88,7 +84,7 @@ class LessonInfo {
     link = json['lecture_link']??json['link'];
     docId = json['doc_id'];
     docName = json['doc_name'];
-    mode = json['mode']??json['lecture_mode'];
+    mode = json['mode'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     createdBy = json['created_by'];
@@ -130,8 +126,6 @@ class LessonInfo {
     }*/
     if(mode!=null) {
       data['mode'] = mode;
-      data['lecture_mode'] = mode;
-
     }
     
     if(testId!=null) {

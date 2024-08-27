@@ -5,7 +5,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import '../models/purchase_history.dart';
 import '../models/subscription.dart';
 import '../models/user_model.dart';
-import '../models_elearning/user/UserProfile.dart';
+import '../models/user/UserProfile.dart';
 import '../providers/user_data_provider.dart';
 import '../services/firebase_service.dart';
 
@@ -22,9 +22,9 @@ mixin IAPMixin {
       debugPrint('already purchased');
     } else {
       debugPrint('updating database');
-      await FirebaseService().updateSubscription(user, _subscriptionData(purchaseDetails, product));
-      await FirebaseService().savePurchaseHistory(user, _historyData(user, purchaseDetails, product));
-      await FirebaseService().updatePurchaseStats();
+      await ApiService().updateSubscription(user, _subscriptionData(purchaseDetails, product));
+      await ApiService().savePurchaseHistory(user, _historyData(user, purchaseDetails, product));
+      await ApiService().updatePurchaseStats();
       await ref.read(userDataProvider.notifier).getData();
     }
   }

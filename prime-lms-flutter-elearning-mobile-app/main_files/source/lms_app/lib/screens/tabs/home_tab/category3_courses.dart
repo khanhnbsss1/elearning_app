@@ -10,7 +10,7 @@ import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
 final category3CoursessProvider = FutureProvider.autoDispose.family<List<Course>, String>((ref, categoryId) async {
-  final List<Course> courses = await FirebaseService().getHomeCategoryCourses(categoryId, 5);
+  final List<Course> courses = await ApiService().getHomeCategoryCourses(categoryId, 5);
   return courses;
 });
 

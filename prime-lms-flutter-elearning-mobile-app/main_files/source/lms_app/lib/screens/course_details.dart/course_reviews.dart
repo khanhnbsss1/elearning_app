@@ -10,7 +10,7 @@ import 'package:lms_app/utils/next_screen.dart';
 import '../reviews/review_tile.dart';
 
 final courseReviewProvider = FutureProvider.autoDispose.family<List<Review>, String>((ref, courseId) async {
-  final List<Review> reviews = await FirebaseService().getLimitedReviews(courseId, 3);
+  final List<Review> reviews = await ApiService().getLimitedReviews(courseId, 3);
   return reviews;
 });
 

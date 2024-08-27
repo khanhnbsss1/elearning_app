@@ -1,17 +1,21 @@
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
+import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+
+import '../../../base/author/user_helper.dart';
+import '../../../models/user/UserProfile.dart';
 
 class GetUserProfileInfoApi extends BaseApiRequest {
   GetUserProfileInfoApi():super(
     serviceType: SERVICE_TYPE.USER,
     apiName: ApiName.getInstance().getUserDetail,
+    // isCheckToken: false,
   );
 
   Future<dynamic> call() async {
     dynamic result = await getRequestAPI();
     if(result.runtimeType == ResponseCommon)
     {
-      return null;
+     return null;
     }
     else
     {

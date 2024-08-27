@@ -7,11 +7,11 @@ import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/screens/author_profie/author_profile.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:lms_app/services/firebase_service.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
 
-import '../../models_elearning/user/UserProfile.dart';
+import '../../models/user/UserProfile.dart';
 
 class CourseInfoScreen extends StatelessWidget {
   const CourseInfoScreen({super.key, required this.course});

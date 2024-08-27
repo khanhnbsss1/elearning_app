@@ -15,7 +15,7 @@ import 'package:lms_app/iAP/top_section.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/toasts.dart';
-import '../models_elearning/user/UserProfile.dart';
+import '../models/user/UserProfile.dart';
 import '../providers/user_data_provider.dart';
 import 'example_delegate_ios.dart';
 import 'iap_config.dart';

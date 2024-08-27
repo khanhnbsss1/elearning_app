@@ -1,5 +1,7 @@
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
+import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+
+import '../../../../base/widgets/toast_common/toast_utils.dart';
 
 class UnLinkLessonApi extends BaseApiRequest {
   int courseId;
@@ -21,7 +23,7 @@ class UnLinkLessonApi extends BaseApiRequest {
     }
     else
     {     
-      ToastUtils.showToastSuccess(L10nX.getStr.success);
+      ToastUtils.showToastSuccess(L10nX.getStr.sucessfully_str);
       return result;
     }
   }

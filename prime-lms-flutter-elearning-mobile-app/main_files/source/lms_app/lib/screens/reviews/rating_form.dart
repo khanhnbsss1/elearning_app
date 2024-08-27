@@ -2,13 +2,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../models/course.dart';
 import '../../models/review.dart';
 import '../../models/review_user.dart';
 import '../../models/user_model.dart';
-import '../../models_elearning/user/UserProfile.dart';
+import '../../models/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 import '../course_details.dart/course_reviews.dart';
 import 'reviews_provider.dart';
@@ -48,11 +48,11 @@ class _RatingFormState extends ConsumerState<RatingForm> {
       _btnController.start();
 
       // Save Review
-      await FirebaseService().saveReview(widget.course.id.toString(), _reviewData(user));
+      await ApiService().saveReview(widget.course.id.toString(), _reviewData(user));
 
       // Uopdate Course Avarage Rating
-      final double avarageRating = await FirebaseService().getCourseAverageRating(widget.course.id.toString());
-      await FirebaseService().saveCourseRating(widget.course.id.toString(), avarageRating);
+      final double avarageRating = await ApiService().getCourseAverageRating(widget.course.id.toString());
+      await ApiService().saveCourseRating(widget.course.id.toString(), avarageRating);
       ref.read(courseRatingProvider(widget.course).notifier).update((state) => avarageRating);
 
       // Update user reviews list
@@ -76,13 +76,13 @@ class _RatingFormState extends ConsumerState<RatingForm> {
 
   _updateUserReviewList (UserProfile user) async {
     if(!user.reviews!.contains(widget.course.id)){
-      await FirebaseService().updateUserReviewList(user, widget.course);
+      await ApiService().updateUserReviewList(user, widget.course);
       await ref.read(userDataProvider.notifier).getData();
     }
   }
 
   Review _reviewData(UserProfile user) {
-    final String id = widget.review?.id ?? FirebaseService.getUID('reviews');
+    final String id = widget.review?.id ?? ApiService.getUID('reviews');
     final createdAt = widget.review?.createdAt ?? DateTime.now().toUtc();
     final reviewUser = ReviewUser(id: user.id.toString(), name: user.fullName!, imageUrl: user.imageUrl);
 

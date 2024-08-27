@@ -1,7 +1,9 @@
 
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/base/services/base_request/models/search_common_request.dart';
+import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+import '../../../../base/author/user_helper.dart';
+import '../../../../base/base_request_elearning/models/search_common_request.dart';
+import '../../../../models/user/UserProfile.dart';
 import 'models/vocabulary_models.dart';
 
 class GetListVocabularyApi extends BaseApiRequest {
@@ -17,7 +19,7 @@ class GetListVocabularyApi extends BaseApiRequest {
 
     if(result.runtimeType == ResponseCommon)
     {
-      return VocabularyResponseModel(content: [], total: 0, pageSize: 10, pageNumber: 0);
+      return VocabularyResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
     }
     else
     {
@@ -27,7 +29,7 @@ class GetListVocabularyApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    UserProfile? userProfile = UserManager().getUserProfile();
+    UserProfile? userProfile = await UserManager().getUserProfile();
     if(userProfile!=null) {
       searchCommonRequest = searchCommonRequest.copyWith(userId: userProfile.id);
     }

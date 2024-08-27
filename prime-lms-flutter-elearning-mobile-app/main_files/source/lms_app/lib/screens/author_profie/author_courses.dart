@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/course.dart';
 import '../../models/user_model.dart';
-import '../../models_elearning/user/UserProfile.dart';
+import '../../models/user/UserProfile.dart';
 import '../../services/firebase_service.dart';
 import '../../utils/loading_widget.dart';
 import '../../utils/next_screen.dart';
@@ -11,7 +11,7 @@ import '../all_courses.dart/courses_view.dart';
 import '../all_courses.dart/grid_list_course_tile.dart';
 
 final authorCoursesProvider = FutureProvider.autoDispose.family<List<Course>, String>((ref, authorId) async {
-  final courses = await FirebaseService().getCoursesByAuthorId(authorId: authorId);
+  final courses = await ApiService().getCoursesByAuthorId(authorId: authorId);
   return courses;
 });
 

@@ -1,6 +1,7 @@
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/device/device_manager.dart';
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
+import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/device_elearning/device_manager.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+import '../../../../base/widgets/toast_common/toast_utils.dart';
 import 'models/register_request.dart';
 
 class RegisterWithPhoneApi extends BaseApiRequest {
@@ -17,7 +18,7 @@ class RegisterWithPhoneApi extends BaseApiRequest {
     await getAuthorization();
     dynamic data = await postRequestAPI();
     if(data.runtimeType == String && (data as String).isEmpty){
-      ToastUtils.showToastSuccess(L10nX.getStr.success);
+      ToastUtils.showToastSuccess("Register success");
       return true;
     }
     else if(data!=null && data.runtimeType ==ResponseCommon )

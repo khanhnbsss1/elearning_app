@@ -7,11 +7,11 @@ import 'package:lms_app/models/course.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/services/firebase_service.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
 
-import '../../models_elearning/user/UserProfile.dart';
+import '../../models/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 
 class BookmarkButton extends ConsumerWidget {
@@ -32,7 +32,7 @@ class BookmarkButton extends ConsumerWidget {
             } else {
               openSnackbar(context, 'removed-wishlist'.tr());
             }
-            await FirebaseService().updateWishList(user, course);
+            await ApiService().updateWishList(user, course);
             ref.read(userDataProvider.notifier).getData();
           }
         },

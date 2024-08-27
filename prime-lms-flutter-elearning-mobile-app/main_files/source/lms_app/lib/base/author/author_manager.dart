@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:lms_app/base/author/user_helper.dart';
 import 'package:lms_app/base/base.export.dart';
 
-import '../../services_elearning/apis/auth/login/models/login_response.dart';
-import '../../services_elearning/apis/auth/refreshToken/refresh_token_api.dart';
+import '../../services/apis/auth/login/models/login_response.dart';
+import '../../services/apis/auth/refreshToken/refresh_token_api.dart';
 
 class AuthorManager {
   static final AuthorManager _singletonAuthorManager = AuthorManager._internal();

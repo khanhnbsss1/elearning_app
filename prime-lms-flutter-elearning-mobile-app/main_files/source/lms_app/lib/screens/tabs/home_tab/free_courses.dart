@@ -4,13 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/loading_tile.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/services/firebase_service.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import '../../../components/horizontal_course_tile.dart';
 import '../../all_courses.dart/courses_view.dart';
 
 final freeCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>>((ref) async {
-  final List<CourseInfo>? courses = await FirebaseService().getFreeCourses();
+  final List<CourseInfo>? courses = await ApiService().getFreeCourses();
   return courses??[];
 });
 

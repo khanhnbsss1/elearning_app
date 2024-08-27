@@ -11,7 +11,7 @@ class AppSettingsData extends StateNotifier<AppSettingsModel?> {
   AppSettingsData() : super(null);
 
   Future getData() async {
-    state = await FirebaseService().getAppSettingsData();
+    state = await ApiService().getAppSettingsData();
     debugPrint('Got settings data');
   }
 }

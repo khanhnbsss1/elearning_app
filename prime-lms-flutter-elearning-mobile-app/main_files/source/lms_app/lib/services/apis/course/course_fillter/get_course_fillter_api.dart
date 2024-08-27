@@ -1,7 +1,8 @@
+import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
 
-import '../../../../base/base_request_elearning/BaseApiRequest.dart';
 import '../../../../base/instance_mananger_elearning/instance_mananger.dart';
-import '../../../../services_elearning/apis/course/course_fillter/models/course_filtter_info.dart';
+import 'models/course_filtter_info.dart';
 
 class GetCourseFilterApi extends BaseApiRequest {
   GetCourseFilterApi():super(
@@ -9,20 +10,22 @@ class GetCourseFilterApi extends BaseApiRequest {
     apiName: ApiName.getInstance().getFilterCourse,
   );
 
-  Future<dynamic> call() async {
+  Future<dynamic> call(String? filter) async {
     await getAuthorization();
     dynamic result = await getRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {
-      return CourseFilterListInfo(data: [CourseFilterInfo(filterType: "ALL", id: -1,name: "All",selectSubFilter: null, subFilter: [])]);
+      return CourseFilterListInfo(data: [CourseFilterInfo(filterType: filter, id: -1,name: "All",selectSubFilter: null, subFilter: [])]);
     }
     else
     {
-      (InstanceManager().courseFilterListInfo.data??[]).clear();
-      (InstanceManager().courseFilterListInfo.data??[]).add(CourseFilterInfo(filterType: "ALL", id: -1,name: "All",selectSubFilter: null, subFilter: []));
-      (InstanceManager().courseFilterListInfo.data??[]).addAll(CourseFilterListInfo.fromJson(result).data??[]);
-      return InstanceManager().courseFilterListInfo;
+        if (InstanceManager().courseFilterListInfo.data != null) {
+          (InstanceManager().courseFilterListInfo.data??[]).clear();
+        }
+        (InstanceManager().courseFilterListInfo.data??[]).add(CourseFilterInfo(filterType: filter, id: -1,name: "All",selectSubFilter: null, subFilter: []));
+        (InstanceManager().courseFilterListInfo.data??[]).addAll(CourseFilterListInfo.fromJson(result).data??[]);
+        return InstanceManager().courseFilterListInfo;
     }
   }
 

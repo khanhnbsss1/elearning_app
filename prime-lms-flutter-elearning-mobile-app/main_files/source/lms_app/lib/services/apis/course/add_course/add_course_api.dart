@@ -1,5 +1,5 @@
 
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
 
 import '../course_detail/models/course_detail_model.dart';
 

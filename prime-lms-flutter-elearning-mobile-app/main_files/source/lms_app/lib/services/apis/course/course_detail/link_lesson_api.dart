@@ -1,5 +1,7 @@
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
+import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+
+import '../../../../base/widgets/toast_common/toast_utils.dart';
 
 class LinkLessonApi extends BaseApiRequest {
   int courseId;

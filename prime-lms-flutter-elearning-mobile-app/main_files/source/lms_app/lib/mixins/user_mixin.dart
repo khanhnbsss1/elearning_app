@@ -16,9 +16,9 @@ import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
 import '../iAP/iap_screen.dart';
-import '../models_elearning/user/UserProfile.dart';
+import '../models/user/UserProfile.dart';
 import '../providers/user_data_provider.dart';
-import '../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import '../services/apis/course/course_detail/models/course_detail_model.dart';
 
 mixin UserMixin {
   void handleLogout(context, {required WidgetRef ref}) async {

@@ -4,7 +4,7 @@ import 'package:lms_app/components/price_tag.dart';
 import 'package:lms_app/components/rating_bar.dart';
 import 'package:lms_app/screens/all_courses.dart/courses_view.dart';
 import 'package:lms_app/screens/course_details.dart/details_view.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/custom_cached_image.dart';
 import 'package:lms_app/utils/next_screen.dart';
 

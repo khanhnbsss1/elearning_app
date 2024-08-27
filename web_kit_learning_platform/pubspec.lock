@@ -21,34 +21,34 @@ packages:
     dependency: transitive
     description:
       name: amplify_core
-      sha256: "913dabb3efff4df2681875d8161cb57844c2bfddf49da0a60b16338d77f60c86"
+      sha256: db441806943b89c0a8c44475f0b69b8cd102ced8886cb3c79507e05f0183bac4
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.0"
+    version: "2.4.0"
   amplify_flutter:
     dependency: "direct main"
     description:
       name: amplify_flutter
-      sha256: e15a8ddea080c43e5d9964965a338cc09fc6c465d32ae898aab3cfaeaf42477f
+      sha256: "50eb45e88ddd131139baeda9766574b4fe5db45e48683c533d53d16f34c6eab6"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.0"
+    version: "2.4.0"
   amplify_secure_storage:
     dependency: transitive
     description:
       name: amplify_secure_storage
-      sha256: cc395744865e7867504272bb428d2bd6415c46337374dc045549730e5c2a2489
+      sha256: a90827798cbf0b65e7cdbcba81490d7c84cdcb77f52283b357d000eed7035527
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.4"
+    version: "0.5.5"
   amplify_secure_storage_dart:
     dependency: transitive
     description:
       name: amplify_secure_storage_dart
-      sha256: "00ed4093787d81e80bb3ca737a0791f602ab524f84fd187873e4c5e83c2554fe"
+      sha256: "02e5f66aacc38258e3ba7e1f2e732a303a3ae2467868d72fcdc0fe7488505437"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.1"
+    version: "0.5.2"
   analyzer:
     dependency: transitive
     description:
@@ -57,14 +57,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.4.1"
-  ansicolor:
-    dependency: transitive
-    description:
-      name: ansicolor
-      sha256: "8bf17a8ff6ea17499e40a2d2542c2f481cd7615760c6d34065cb22bfd22e6880"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.2"
   appflowy_board:
     dependency: "direct main"
     description:
@@ -124,18 +116,18 @@ packages:
     dependency: transitive
     description:
       name: aws_common
-      sha256: f0c86eb59753a5ddb1f535e3b82b5d3a94326e1d984f3b2b773b67d1c7d3d033
+      sha256: f328f0ba7c9480c64645ccbaaef72cbffb7492c443b8f0fdc288377c78905668
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2"
   aws_signature_v4:
     dependency: transitive
     description:
       name: aws_signature_v4
-      sha256: "345faf0b350e6c8b4538391c2711de631d72d55bbb792ca8e82befc2b00d71b5"
+      sha256: "3b5289814e0c0147974e193cdcdb01b96ae15f81cb36a5ffdc0a7043ed57ba6d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.1"
+    version: "0.6.2"
   bazel_worker:
     dependency: transitive
     description:
@@ -353,7 +345,7 @@ packages:
     source: hosted
     version: "0.7.10"
   device_info_plus:
-    dependency: "direct main"
+    dependency: "direct overridden"
     description:
       name: device_info_plus
       sha256: a7fd703482b391a87d60b6061d04dfdeab07826b96f9abd8f5ed98068acc0074
@@ -596,10 +588,10 @@ packages:
     dependency: "direct main"
     description:
       name: fl_chart
-      sha256: d0f0d49112f2f4b192481c16d05b6418bd7820e021e265a3c22db98acf7ed7fb
+      sha256: "94307bef3a324a0d329d3ab77b2f0c6e5ed739185ffc029ed28c0f9b019ea7ef"
       url: "https://pub.dev"
     source: hosted
-    version: "0.68.0"
+    version: "0.69.0"
   flash:
     dependency: "direct main"
     description:
@@ -754,14 +746,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_native_splash:
-    dependency: "direct main"
-    description:
-      name: flutter_native_splash
-      sha256: aa06fec78de2190f3db4319dd60fdc8d12b2626e93ef9828633928c2dcaea840
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.1"
   flutter_pagination:
     dependency: "direct main"
     description:
@@ -956,14 +940,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
-  image:
-    dependency: transitive
-    description:
-      name: image
-      sha256: "2237616a36c0d69aef7549ab439b833fb7f9fb9fc861af2cc9ac3eedddd69ca8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.2.0"
   image_gallery_saver:
     dependency: "direct main"
     description:
@@ -1064,18 +1040,18 @@ packages:
     dependency: transitive
     description:
       name: json_annotation
-      sha256: b10a7b2ff83d83c777edba3c6a0f97045ddadd56c944e1a23a3fdf43a1bf4467
+      sha256: "1ce844379ca14835a50d2f019a3099f419082cfdd231cd86a142af94dd5c6bb1"
       url: "https://pub.dev"
     source: hosted
-    version: "4.8.1"
+    version: "4.9.0"
   just_audio:
     dependency: "direct main"
     description:
       name: just_audio
-      sha256: ee50602364ba83fa6308f5512dd560c713ec3e1f2bc75f0db43618f0d82ef71a
+      sha256: d8e8aaf417d33e345299c17f6457f72bd4ba0c549dc34607abb5183a354edc4d
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.39"
+    version: "0.9.40"
   just_audio_platform_interface:
     dependency: transitive
     description:
@@ -1220,14 +1196,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
-  mobile_scanner:
-    dependency: "direct main"
-    description:
-      name: mobile_scanner
-      sha256: b8c0e9afcfd52534f85ec666f3d52156f560b5e6c25b1e3d4fe2087763607926
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.1.1"
   multi_dropdown:
     dependency: "direct main"
     description:
@@ -1533,14 +1501,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
-  scanning_effect:
-    dependency: "direct main"
-    description:
-      name: scanning_effect
-      sha256: bce81047f9d5d7fe6d0bee8444f60c06f3bb2c439827a94e2cfd771f15e5459e
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.4"
   scratch_space:
     dependency: transitive
     description:
@@ -1715,10 +1675,9 @@ packages:
   syncfusion_flutter_charts:
     dependency: "direct main"
     description:
-      name: syncfusion_flutter_charts
-      sha256: b5b48d8eb6a1482ebbf4d6bfc69345462377e161e076b4ec4e69496e2d234dc2
-      url: "https://pub.dev"
-    source: hosted
+      path: "lib/plugins/syncfusion_flutter_charts-26.2.10"
+      relative: true
+    source: path
     version: "26.2.10"
   syncfusion_flutter_core:
     dependency: transitive
@@ -1752,6 +1711,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "26.2.10"
+  syncfusion_flutter_pdf:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_pdf
+      sha256: "864e45c6574f39daaa12fd3df94a224a7cf40cfe1995413d78960cff87d71090"
+      url: "https://pub.dev"
+    source: hosted
+    version: "26.2.10"
+  syncfusion_flutter_pdfviewer:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_pdfviewer
+      sha256: f48f58cc1a0552aeb3aa78fd07fd3a1407f9e3809cfd65948a67b9c98af0a96d
+      url: "https://pub.dev"
+    source: hosted
+    version: "26.2.10"
+  syncfusion_flutter_signaturepad:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_signaturepad
+      sha256: "440ab8208f96a69442fdca8cc8350c90f4db85f4d35656ffebb7adecce8f09d0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "26.2.10"
   syncfusion_flutter_sliders:
     dependency: "direct main"
     description:
@@ -1760,6 +1743,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "26.2.10"
+  syncfusion_pdfviewer_macos:
+    dependency: transitive
+    description:
+      name: syncfusion_pdfviewer_macos
+      sha256: "5731a1ea92455b8322a647387f27c2e7f52b963dff3983b8207233ecc6ef7ba7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "26.2.11"
+  syncfusion_pdfviewer_platform_interface:
+    dependency: transitive
+    description:
+      name: syncfusion_pdfviewer_platform_interface
+      sha256: f266aa4657b511201666f394b74c71ecfeaafa2717e4e75e73585a55d99d350d
+      url: "https://pub.dev"
+    source: hosted
+    version: "26.2.11"
+  syncfusion_pdfviewer_web:
+    dependency: transitive
+    description:
+      name: syncfusion_pdfviewer_web
+      sha256: "7a3da6586668b851b74ab1bda09d313a54250fb0f74daaadda7133ca3591b235"
+      url: "https://pub.dev"
+    source: hosted
+    version: "26.2.11"
+  syncfusion_pdfviewer_windows:
+    dependency: transitive
+    description:
+      name: syncfusion_pdfviewer_windows
+      sha256: "670ac5e4158ba5060fbb26e2a5a04f6d7272eb9f4948d470634a0dbf33e423b2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "26.2.11"
   table_calendar:
     dependency: "direct main"
     description:
@@ -2009,13 +2024,13 @@ packages:
     source: hosted
     version: "1.1.0"
   web:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: web
-      sha256: "97da13628db363c635202ad97068d47c5b8aa555808e7a9411963c533b449b27"
+      sha256: d43c1d6b787bf0afad444700ae7f4db8827f701bc61c255ac8d328c6f4d52062
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.1"
+    version: "1.0.0"
   webview_flutter:
     dependency: transitive
     description:
@@ -2068,10 +2083,10 @@ packages:
     dependency: transitive
     description:
       name: worker_bee
-      sha256: ba4c6684fd012b6ebfe37540bff770787f1631093b96b92291ca9b3685a467df
+      sha256: d75dac8a77275c77a5ef34eee4479ad543345c45e01cafcee81f0882c3521ff2
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.1"
+    version: "0.3.2"
   xdg_directories:
     dependency: transitive
     description:
@@ -2108,18 +2123,18 @@ packages:
     dependency: "direct main"
     description:
       name: youtube_player_iframe
-      sha256: c72145e67016577e229fbf3eb120e0dcfac9507d48a50354e7f321852a360e79
+      sha256: de19f16c0ecce603e3b95530d64ec0bed2b58057f12ddd9531bc4c06b7b7ccdf
       url: "https://pub.dev"
     source: hosted
-    version: "5.1.3"
+    version: "5.1.5"
   youtube_player_iframe_web:
     dependency: transitive
     description:
       name: youtube_player_iframe_web
-      sha256: "743e8ce2ee77b8ea6e36ae986f0ef111b38c3119ae55ae813223ecddeb56b770"
+      sha256: ce8679d5fb49184ad3dcd42b57e29e385e1aa6ceb22fab2e4527d7f7e78ee126
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.2"
+    version: "3.0.3"
 sdks:
   dart: ">=3.4.1 <3.6.0"
   flutter: ">=3.22.0"

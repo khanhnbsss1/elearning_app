@@ -1,5 +1,6 @@
-import 'package:webkit/base/services/base_request/models/page_model.dart';
-import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
+
+import '../../../../../base/base_request_elearning/models/page_model.dart';
+import '../../course_detail/models/course_detail_model.dart';
 
 class CourseResponseModel extends PageModel{
   List<CourseInfo>? content;
@@ -12,7 +13,7 @@ class CourseResponseModel extends PageModel{
     if (json['content'] != null) {
       content = <CourseInfo>[];
       json['content'].forEach((v) {
-        content!.add(new CourseInfo.fromJson(v));
+        content!.add(CourseInfo.fromJson(v));
       });
     }
   }

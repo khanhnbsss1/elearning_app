@@ -5,7 +5,7 @@ import 'package:lms_app/iAP/iap_mixin.dart';
 
 import '../mixins/user_mixin.dart';
 import '../models/user_model.dart';
-import '../models_elearning/user/UserProfile.dart';
+import '../models/user/UserProfile.dart';
 
 class ProductTile extends StatelessWidget with IAPMixin {
   const ProductTile({

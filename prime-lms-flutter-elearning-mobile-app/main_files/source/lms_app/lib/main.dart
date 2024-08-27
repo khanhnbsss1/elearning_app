@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lms_app/base/locale_manager/locale_manager.dart';
-import 'package:lms_app/helper_elearning/services/navigation_service.dart';
+import 'package:lms_app/helper/services/navigation_service.dart';
 import 'package:lms_app/routes/app_routes.dart';
 import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/screens/home/home_view.dart';
@@ -28,7 +28,7 @@ import 'configs/language_config.dart';
 import 'core/app.dart';
 import 'enviroments/flavor_settings.dart';
 import 'generated/l10n.dart';
-import 'helper_elearning/localizations/language_helper.dart';
+import 'helper/localizations/language_helper.dart';
 import 'l10n/l10n_extention.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -43,7 +43,6 @@ Future<void> main() async {
   // HiveService.initHive();
   AppService.svgPrecacheImage();
   bool firstTimeCheck = await getFirstTime();
-  print('aaaaaaaaaaaaaaaaaaaa');
   runApp(ProviderScope(
       child:EasyLocalization(
           supportedLocales: LanguageConfig.supportedLocales,

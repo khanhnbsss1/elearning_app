@@ -4,19 +4,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/constants/custom_colors.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/services/firebase_service.dart';
-import '../../models_elearning/user/UserProfile.dart';
+import '../../models/user/UserProfile.dart';
 import '../../theme/theme_provider.dart';
 import 'author_courses.dart';
 import 'count_info.dart';
 import 'profile_info.dart';
 
 final authorReviewsCountProvider = FutureProvider.family.autoDispose<int, String>((ref, authorId) async {
-  final int count = await FirebaseService().getAuthorReviewsCount(authorId);
+  final int count = await ApiService().getAuthorReviewsCount(authorId);
   return count;
 });
 
 final authorCoursesCountProvider = FutureProvider.family.autoDispose<int, String>((ref, authorId) async {
-  final int count = await FirebaseService().getAuthorCourseCount(authorId);
+  final int count = await ApiService().getAuthorCourseCount(authorId);
   return count;
 });
 

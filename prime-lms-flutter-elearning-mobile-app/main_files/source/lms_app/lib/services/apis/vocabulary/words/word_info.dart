@@ -1,5 +1,7 @@
 
-import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
+import 'package:lms_app/services/apis/upload_file/models/upload_file_info.dart';
+
+import '../../upload_file/models/upload_file_info.dart';
 
 class WordInfo {
   String? simplified;

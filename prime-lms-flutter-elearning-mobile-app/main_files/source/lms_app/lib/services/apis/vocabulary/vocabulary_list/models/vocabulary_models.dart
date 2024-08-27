@@ -1,6 +1,6 @@
-import 'package:webkit/base/services/base_request/models/page_model.dart';
-import 'package:webkit/services/apis/sentence/models/sentence_info.dart';
-import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
+import '../../../../../base/base_request_elearning/models/page_model.dart';
+import '../../../sentence/models/sentence_info.dart';
+import '../../../upload_file/models/upload_file_info.dart';
 
 class VocabularyResponseModel extends PageModel{
   List<VocabularyInfo>? content;
@@ -49,7 +49,6 @@ class VocabularyInfo {
   int? imageId;
   String? categoryWord;
   List<SentenceInfo>? sentenceInfos;
-
   UploadFileResponseInfo? audioFileInfo;
   UploadFileResponseInfo? imageFileInfo;
   VocabularyInfo(

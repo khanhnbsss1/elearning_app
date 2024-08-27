@@ -1,15 +1,17 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_icons/line_icons.dart';
 
 class UserAvatar extends StatelessWidget {
-  const UserAvatar({super.key, this.imageUrl, this.imageFile, this.iconSize, this.radius});
+  const UserAvatar({super.key, this.imageUrl, this.imageByte, this.iconSize, this.radius});
 
   final String? imageUrl;
-  final XFile? imageFile;
+  final Uint8List? imageByte;
   final double? iconSize;
   final double? radius;
 
@@ -21,19 +23,15 @@ class UserAvatar extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: Colors.grey.shade300,
-        image: imageFile != null
-            ? DecorationImage(image: FileImage(File(imageFile!.path)), fit: BoxFit.cover)
-            : imageUrl != null
-                ? DecorationImage(image: CachedNetworkImageProvider(imageUrl!), fit: BoxFit.cover)
-                : null,
+        image: (imageByte != null) ? DecorationImage(
+          image: MemoryImage(imageByte!),
+          fit: BoxFit.cover,
+        ) : null
       ),
-      child: Visibility(
-        visible: imageUrl == null && imageFile == null,
-        child: Icon(
-          LineIcons.user,
-          size: iconSize ?? 18,
-        ),
-      ),
+      child: (imageUrl == null || imageUrl == "" && imageByte == null) ? Icon(
+        LineIcons.user,
+        size: iconSize ?? 18,
+      ) : SizedBox(),
     );
   }
 }

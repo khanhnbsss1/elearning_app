@@ -4,13 +4,13 @@ import 'package:lms_app/screens/home/home_view.dart';
 
 import '../../base/author/user_helper.dart';
 import '../../base/constant.dart';
-import '../../helper_elearning/my_form_validator.dart';
-import '../../helper_elearning/widget/my_validators.dart';
+import '../../helper/my_form_validator.dart';
+import '../../helper/widget/my_validators.dart';
 import '../../routes/app_pages.dart';
 import '../../routes/app_routes.dart';
 import '../../screens/auth/sign_up.dart';
-import '../../services_elearning/apis/auth/login/login_with_phone_api.dart';
-import '../../services_elearning/apis/auth/login/models/login_request.dart';
+import '../../services/apis/auth/login/login_with_phone_api.dart';
+import '../../services/apis/auth/login/models/login_request.dart';
 import '../../utils/next_screen.dart';
 import '../my_controller.dart';
 

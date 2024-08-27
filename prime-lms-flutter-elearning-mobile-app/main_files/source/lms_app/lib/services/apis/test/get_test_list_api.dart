@@ -1,7 +1,6 @@
 
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/base/services/base_request/models/search_common_request.dart';
-
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+import '../../../base/base_request_elearning/models/search_common_request.dart';
 import 'models/test_info.dart';
 
 
@@ -18,7 +17,7 @@ class GetTestListApi extends BaseApiRequest {
 
     if(result.runtimeType == ResponseCommon)
     {
-      return TestListResponseModel(content: [], total: 0, pageSize: 10, pageNumber: 0);
+      return TestListResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
     }
     else
     {
@@ -28,7 +27,7 @@ class GetTestListApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    await setParamsAdd(searchCommonRequest.toJson());
+    await setApiBody(searchCommonRequest.toJson());
   }
 
   @override

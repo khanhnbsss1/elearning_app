@@ -1,12 +1,13 @@
 
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+
+import '../models/lesson_info.dart';
 
 
 class DeleteLessonApi extends BaseApiRequest {
   LessonInfo lessonInfo;
   DeleteLessonApi({required this.lessonInfo}):super(
-    serviceType: SERVICE_TYPE.LESSON,
+    serviceType: SERVICE_TYPE.TAGS,
     apiName: ApiName.getInstance().deleteLesson,
   );
 
@@ -17,9 +18,7 @@ class DeleteLessonApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    await setParamsAdd({
-      "lectureId": lessonInfo.id
-    });
+    await setApiBody(lessonInfo.toJson());
   }
 
   @override

@@ -1,9 +1,9 @@
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/models/lesson.dart';
 import 'package:lms_app/models/user_model.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 
-import '../models_elearning/user/UserProfile.dart';
+import '../models/user/UserProfile.dart';
 
 mixin CourseMixin {
 

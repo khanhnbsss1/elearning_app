@@ -6,7 +6,7 @@ import 'package:lms_app/screens/course_details.dart/details_view.dart';
 import 'package:lms_app/utils/custom_cached_image.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import '../../models/course.dart';
-import '../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import '../../services/apis/course/course_detail/models/course_detail_model.dart';
 
 class GridListCourseTile extends StatelessWidget {
   const GridListCourseTile({super.key, required this.course});

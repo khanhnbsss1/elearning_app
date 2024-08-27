@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:lms_app/base/base.export.dart';
 import 'package:lms_app/base/base_request_elearning/EnumCommon.dart';
 import 'package:lms_app/base/device_elearning/device_manager.dart';
-import 'package:lms_app/services_elearning/apis/auth/login/models/login_response.dart';
+import 'package:lms_app/services/apis/auth/login/models/login_response.dart';
 import '../author/author_manager.dart';
 import '../instance_mananger_elearning/instance_mananger.dart';
 import '../widgets/common/alert_dialog/NotifyDialog.dart';

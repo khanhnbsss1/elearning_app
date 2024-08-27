@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/screens/reviews/rating_form.dart';
 import 'package:lms_app/constants/custom_colors.dart';
 import 'package:lms_app/models/course.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/theme/theme_provider.dart';
 import '../../components/rating_bar.dart';
 
