@@ -320,7 +320,7 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
             children: [
               Text(L10nX.getStr.right_answer, style: TextStyleConstant.textStyleBlack14w400,),
               Gap(Dimens.size8),
-              Text(rightAnswerInfo?.name??"", style: TextStyleConstant.textStyleBlack14w400,)
+              Text(rightAnswerInfo?.answer??"", style: TextStyleConstant.textStyleBlack14w400,)
             ],
           ),
         ],
