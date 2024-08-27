@@ -8,6 +8,7 @@ import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/services/apis/sentence/models/sentence_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
+import 'package:webkit/services/apis/vocabulary/words/get_vocabulary_detail.dart';
 
 class VocabularyViewDetail extends StatefulWidget{
   void show(BuildContext context){
@@ -18,7 +19,7 @@ class VocabularyViewDetail extends StatefulWidget{
             child: Dialog(
               insetPadding: EdgeInsets.zero,
               child: SizedBox(
-                  height: MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?0.95: 0.5),
+                  height: MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?0.95: 0.8),
                   width: MediaQuery.of(context).size.width*(ResponsiveInfo.isPhone()?0.95: 0.5),
                   child: this),
             ));
@@ -59,168 +60,172 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
         ),
         child: Stack(
             children: [
-              Column(
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height *(ResponsiveInfo.isPhone()?1/5:1/4)*((widget.selectVocabularyInfo.imageLink??"").isEmpty?0.7:1),
-                    decoration: BoxDecoration(
-                        color: ColorConst.mainColor
-                    ),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Visibility(
-                            visible: (widget.selectVocabularyInfo.imageLink??"").isNotEmpty,
-                              child: Expanded(
-                                child: Column(
-                                  children: [
-                                    Gap(Dimens.size16),
-                                    Expanded(
-                                      child: SizedBox(
-                                        //height:  MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?1/8:1/5) -Dimens.size20,
-                                       // width: MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?1/8:1/5),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: ImageManager().getImageByUrl(
-                                              (widget.selectVocabularyInfo.imageLink??""),
-                                              errorBuilder: SizedBox()),
+              FutureBuilder(
+                future: getDetail(),
+                builder: (context, snapshot) {
+                return Column(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height *(ResponsiveInfo.isPhone()?1/5:1/4)*((widget.selectVocabularyInfo.imageLink??"").isEmpty?0.7:1),
+                      decoration: BoxDecoration(
+                          color: ColorConst.mainColor
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Visibility(
+                                visible: (widget.selectVocabularyInfo.imageLink??"").isNotEmpty,
+                                child: Expanded(
+                                  child: Column(
+                                    children: [
+                                      Gap(Dimens.size16),
+                                      Expanded(
+                                        child: SizedBox(
+                                          //height:  MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?1/8:1/5) -Dimens.size20,
+                                          // width: MediaQuery.of(context).size.height*(ResponsiveInfo.isPhone()?1/8:1/5),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: ImageManager().getImageByUrl(
+                                                (widget.selectVocabularyInfo.imageLink??""),
+                                                errorBuilder: SizedBox()),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                          ),
-                          Visibility(
-                              visible: (widget.selectVocabularyInfo.imageLink??"").isEmpty,
-                              child: Text((widget.selectVocabularyInfo.simplified??"").trim(),  style: TextStyleConstant.textStyleBlack30w700.copyWith(
-                                color: ColorConst.whiteColor, fontSize: Dimens.size60
-                              ),)
-                          ),
-                        ],
+                                    ],
+                                  ),
+                                )
+                            ),
+                            Visibility(
+                                visible: (widget.selectVocabularyInfo.imageLink??"").isEmpty,
+                                child: Text((widget.selectVocabularyInfo.simplified??"").trim(),  style: TextStyleConstant.textStyleBlack30w700.copyWith(
+                                    color: ColorConst.whiteColor, fontSize: Dimens.size60
+                                ),)
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: LayoutBuilder(builder: (context, constraints) {
-                      double maxWidth = constraints.maxWidth/(ResponsiveInfo.isPhone() ? 2 : 2);
-                      double height = Dimens.size100;
-                      return SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            children: [
-                              GridView.count(
-                                crossAxisCount: ResponsiveInfo.isPhone() ? 2 : 2,
-                                shrinkWrap: true,
-                                crossAxisSpacing: 16,
-                                mainAxisSpacing: 16,
-                                padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
-                                childAspectRatio: (maxWidth) / (height),
+                    Expanded(
+                        child: LayoutBuilder(builder: (context, constraints) {
+                          double maxWidth = constraints.maxWidth/(ResponsiveInfo.isPhone() ? 2 : 2);
+                          double height = Dimens.size100;
+                          return SingleChildScrollView(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Column(
                                 children: [
-                                  Visibility(
-                                    visible: (widget.selectVocabularyInfo.simplified??"").isNotEmpty,
-                                    child: WidgetWithColumnTitleCommon(
-                                      title: "${L10nX.getStr.simplified_str}: ",
-                                      titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                                      child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Gap(Dimens.size8),
-                                          Visibility(
-                                            //visible: (widget.selectVocabularyInfo.audio??"").isNotEmpty,
-                                              child: StatefulBuilder(
-                                                builder: (BuildContext context, void Function(void Function()) setState) {
-                                                  return AudioSpeaker(url: widget.selectVocabularyInfo.audioLink??"",);
-                                                },
-                                              )
+                                  GridView.count(
+                                    crossAxisCount: ResponsiveInfo.isPhone() ? 2 : 2,
+                                    shrinkWrap: true,
+                                    crossAxisSpacing: 16,
+                                    mainAxisSpacing: 16,
+                                    padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
+                                    childAspectRatio: (maxWidth) / (height),
+                                    children: [
+                                      Visibility(
+                                        visible: (widget.selectVocabularyInfo.simplified??"").isNotEmpty,
+                                        child: WidgetWithColumnTitleCommon(
+                                          title: "${L10nX.getStr.simplified_str}: ",
+                                          titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Gap(Dimens.size8),
+                                              Visibility(
+                                                //visible: (widget.selectVocabularyInfo.audio??"").isNotEmpty,
+                                                  child: StatefulBuilder(
+                                                    builder: (BuildContext context, void Function(void Function()) setState) {
+                                                      return AudioSpeaker(url: widget.selectVocabularyInfo.audioLink??"",);
+                                                    },
+                                                  )
+                                              ),
+                                              Gap(Dimens.size4),
+                                              Expanded(child: Text((widget.selectVocabularyInfo.simplified??"").trim(),)),
+
+                                            ],
                                           ),
-                                          Gap(Dimens.size4),
-                                          Expanded(child: Text((widget.selectVocabularyInfo.simplified??"").trim(),)),
-
-                                        ],
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: (widget.selectVocabularyInfo.pinyinTones??"").isNotEmpty,
-                                    child: WidgetWithColumnTitleCommon(
-                                      title: "${L10nX.getStr.pinyin_tone_str}: ",
-                                      titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                                      child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Gap(Dimens.size8),
-                                          Visibility(
-                                            //visible: (widget.selectVocabularyInfo.audio??"").isNotEmpty,
-                                              child: StatefulBuilder(
-                                                builder: (BuildContext context, void Function(void Function()) setState) {
-                                                  return AudioSpeaker(
-                                                    url: widget.selectVocabularyInfo.audioLink??"",);
-                                                },
-                                              )
+                                      Visibility(
+                                        visible: (widget.selectVocabularyInfo.pinyinTones??"").isNotEmpty,
+                                        child: WidgetWithColumnTitleCommon(
+                                          title: "${L10nX.getStr.pinyin_tone_str}: ",
+                                          titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Gap(Dimens.size8),
+                                              Visibility(
+                                                //visible: (widget.selectVocabularyInfo.audio??"").isNotEmpty,
+                                                  child: StatefulBuilder(
+                                                    builder: (BuildContext context, void Function(void Function()) setState) {
+                                                      return AudioSpeaker(
+                                                        url: widget.selectVocabularyInfo.audioLink??"",);
+                                                    },
+                                                  )
+                                              ),
+                                              Gap(Dimens.size4),
+                                              Expanded(child: Text((widget.selectVocabularyInfo.pinyinTones??"").trim(),)),
+
+                                            ],
                                           ),
-                                          Gap(Dimens.size4),
-                                          Expanded(child: Text((widget.selectVocabularyInfo.pinyinTones??"").trim(),)),
+                                        ),
+                                      ),
+                                      Visibility(
+                                        visible: (widget.selectVocabularyInfo.translationVn??"").isNotEmpty,
+                                        child: WidgetWithColumnTitleCommon(
+                                          title: "${L10nX.getStr.viet_nam_text}: ",
+                                          titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Gap(Dimens.size8),
+                                              Expanded(child: Text(widget.selectVocabularyInfo.translationVn??"")),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Visibility(
+                                        visible: (widget.selectVocabularyInfo.traditional??"").isNotEmpty,
+                                        child: WidgetWithColumnTitleCommon(
+                                          title: "${L10nX.getStr.traditional_str}: ",
+                                          titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Gap(Dimens.size8),
+                                              Expanded(
+                                                  child: Text(widget.selectVocabularyInfo.traditional??"")),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      WidgetWithColumnTitleCommon(
+                                        title: "${L10nX.getStr.category_word}: ",
+                                        titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Gap(Dimens.size8),
+                                            Expanded(child: Text((widget.selectVocabularyInfo.categoryWord??"").isNotEmpty?widget.selectVocabularyInfo.categoryWord??"":L10nX.getStr.unknown_str)),
+                                          ],
+                                        ),
+                                      ),
 
-                                        ],
-                                      ),
-                                    ),
+                                    ],
                                   ),
-                                  Visibility(
-                                    visible: (widget.selectVocabularyInfo.translationVn??"").isNotEmpty,
-                                    child: WidgetWithColumnTitleCommon(
-                                      title: "${L10nX.getStr.viet_nam_text}: ",
-                                      titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                                      child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Gap(Dimens.size8),
-                                          Expanded(child: Text(widget.selectVocabularyInfo.translationVn??"")),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Visibility(
-                                    visible: (widget.selectVocabularyInfo.traditional??"").isNotEmpty,
-                                    child: WidgetWithColumnTitleCommon(
-                                      title: "${L10nX.getStr.traditional_str}: ",
-                                      titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                                      child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Gap(Dimens.size8),
-                                          Expanded(
-                                              child: Text(widget.selectVocabularyInfo.traditional??"")),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  WidgetWithColumnTitleCommon(
-                                    title: "${L10nX.getStr.category_word}: ",
-                                    titleStyle: TextStyleConstant.normalTextOnBackGroundColorStyle14w400.copyWith(color: ColorConst.mainColor),
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Gap(Dimens.size8),
-                                        Expanded(child: Text((widget.selectVocabularyInfo.categoryWord??"").isNotEmpty?widget.selectVocabularyInfo.categoryWord??"":L10nX.getStr.unknown_str)),
-                                      ],
-                                    ),
-                                  ),
-
+                                  buildExamplesListForView(),
                                 ],
                               ),
-                              buildExamplesListForView(),
-                            ],
-                          ),
-                        ),
-                      );
-                    },)
-                  )
-                ],
-              ),
+                            ),
+                          );
+                        },)
+                    )
+                  ],
+                );
+              },),
               Visibility(
                 visible: widget.enableCloseButton??false,
                 child: Align(
@@ -242,6 +247,14 @@ class VocabularyViewDetailState extends State<VocabularyViewDetail>{
       ),
     );
   }
+  Future<VocabularyInfo> getDetail() async {
+    GetVocabularyDetailApi getVocabularyDetailApi = GetVocabularyDetailApi(
+      vocabularyId: widget.selectVocabularyInfo.id!
+    );
+    widget.selectVocabularyInfo = await getVocabularyDetailApi.call()?? widget.selectVocabularyInfo;
+    return widget.selectVocabularyInfo;
+  }
+  
   Widget buildExamplesListForView() {
     return SizedBox(
       width: double.infinity,

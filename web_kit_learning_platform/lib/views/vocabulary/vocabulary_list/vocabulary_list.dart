@@ -19,7 +19,7 @@ import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/sentence/models/sentence_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/services/apis/vocabulary/words/delete_word_api.dart';
-import 'package:webkit/views/vocabulary/vocabulary_detail/create_edit_words.dart';
+import 'package:webkit/views/vocabulary/create_edit_vocabullary/create_edit_words.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../layouts/layout.dart';
