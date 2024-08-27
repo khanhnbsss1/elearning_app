@@ -11,7 +11,7 @@ import 'package:quiver/iterables.dart';
 import '../components/course_tile.dart';
 import '../models/course.dart';
 import '../providers/user_data_provider.dart';
-import '../services/firebase_service.dart';
+import '../services/api_service.dart';
 
 final wishlistProvider = FutureProvider.autoDispose<List<Course>>((ref) async {
   final List<Course> courses = [];

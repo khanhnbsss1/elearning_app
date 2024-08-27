@@ -12,7 +12,7 @@ import '../../models/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 import '../course_details.dart/course_reviews.dart';
 import 'reviews_provider.dart';
-import '../../services/firebase_service.dart';
+import '../../services/api_service.dart';
 import '../../utils/snackbars.dart';
 
 final courseRatingProvider = StateProvider.family.autoDispose<double, CourseInfo>((ref, course) => (course.ratePoint??0).toDouble());

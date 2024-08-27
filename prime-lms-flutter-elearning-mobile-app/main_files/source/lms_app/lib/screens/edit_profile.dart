@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lms_app/models/user_model.dart';
-import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/theme/theme_provider.dart';
 import 'package:lms_app/utils/snackbars.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';

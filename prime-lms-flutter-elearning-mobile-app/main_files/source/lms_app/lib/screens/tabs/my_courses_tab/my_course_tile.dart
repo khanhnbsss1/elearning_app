@@ -37,7 +37,13 @@ class MyCourseTile extends StatelessWidget with UserMixin {
                 height: 90,
                 width: 100,
                 decoration: BoxDecoration(borderRadius: BorderRadius.circular(3)),
-                child: Hero(tag: heroTag, child: CustomCacheImage(imageUrl: course.image, radius: 3)),
+                child: Hero(
+                    tag: heroTag,
+                    child: (course.image != null && course.image != "")
+                        ? CustomCacheImage(
+                        imageUrl: course.image, radius: 3)
+                        : Image.asset("assets/images/noImage.jpg",
+                        fit: BoxFit.cover)),
               ),
               PremiumTag(course: course),
             ],

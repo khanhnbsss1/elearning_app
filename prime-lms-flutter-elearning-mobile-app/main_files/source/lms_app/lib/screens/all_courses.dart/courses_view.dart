@@ -11,7 +11,7 @@ import 'package:lms_app/constants/custom_colors.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/screens/all_courses.dart/grid_list_course_tile.dart';
 import 'package:lms_app/screens/search/search_view.dart';
-import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/theme/theme_provider.dart';
 import 'package:lms_app/utils/empty_animation.dart';

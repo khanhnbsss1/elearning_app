@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/loading_tile.dart';
 import 'package:lms_app/models/course.dart';
-import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services/api_service.dart';
 import '../../../components/featured_course_tile.dart';
 import '../../../services/apis/course/course_detail/models/course_detail_model.dart';
 
@@ -21,9 +21,9 @@ class FeaturedCourses extends ConsumerWidget {
     return courses.when(
       skipLoadingOnRefresh: false,
       data: (courses) {
-        return !(courses != null || courses != []) ?
+        return (courses != null && courses != []) ?
         CarouselSlider(
-          items: courses!.map((course) {
+          items: courses.map((course) {
             return FeaturedCourseTile(course: course);
           }).toList(),
           options: CarouselOptions(

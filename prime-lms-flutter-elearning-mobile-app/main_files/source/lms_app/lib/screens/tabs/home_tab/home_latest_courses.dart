@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/course_tile.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/screens/all_courses.dart/courses_view.dart';
-import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/next_screen.dart';

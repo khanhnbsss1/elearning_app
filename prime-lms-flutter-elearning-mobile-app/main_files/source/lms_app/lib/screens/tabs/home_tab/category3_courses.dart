@@ -6,7 +6,7 @@ import 'package:lms_app/components/horizontal_course_tile.dart';
 import 'package:lms_app/models/app_settings_model.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/screens/all_courses.dart/courses_view.dart';
-import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
 final category3CoursessProvider = FutureProvider.autoDispose.family<List<Course>, String>((ref, categoryId) async {

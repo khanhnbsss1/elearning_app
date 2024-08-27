@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/constants/custom_colors.dart';
 import 'package:lms_app/models/user_model.dart';
-import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services/api_service.dart';
 import '../../models/user/UserProfile.dart';
 import '../../theme/theme_provider.dart';
 import 'author_courses.dart';

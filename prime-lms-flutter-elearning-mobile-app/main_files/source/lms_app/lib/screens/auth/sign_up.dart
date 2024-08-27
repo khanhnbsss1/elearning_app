@@ -10,7 +10,7 @@ import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/screens/splash.dart';
 import 'package:lms_app/services/auth_service.dart';
-import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../base/widgets/toast_common/toast_utils.dart';

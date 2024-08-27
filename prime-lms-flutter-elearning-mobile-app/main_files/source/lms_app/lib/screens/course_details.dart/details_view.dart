@@ -6,7 +6,7 @@ import 'package:lms_app/ads/banner_ad.dart';
 import 'package:lms_app/screens/course_details.dart/course_info.dart';
 import 'package:lms_app/screens/course_details.dart/course_share_button.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-import '../../services/firebase_service.dart';
+import '../../services/api_service.dart';
 import '../../services/apis/course/course_detail/models/course_detail_model.dart';
 import '../../utils/loading_widget.dart';
 import '../tabs/my_courses_tab/my_courses_tab.dart';

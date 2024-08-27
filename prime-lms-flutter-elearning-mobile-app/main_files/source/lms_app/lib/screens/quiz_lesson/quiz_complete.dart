@@ -7,24 +7,26 @@ import 'package:lms_app/models/course.dart';
 import 'package:lms_app/models/lesson.dart';
 import 'package:lms_app/screens/quiz_lesson/quiz_screen.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
 class QuizComplete extends ConsumerWidget {
   const QuizComplete({super.key, required this.lesson, required this.course});
 
-  final Lesson lesson;
+  final LessonInfo lesson;
   final CourseInfo course;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final correctAnswerCount = ref.watch(correctAnswerCountProvider);
-    final double percentage = (correctAnswerCount / lesson.questions!.length) * 100;
+    // final double percentage = (correctAnswerCount / lesson.questions!.length) * 100;
+    final double percentage = 50;
     final bool isPassed = percentage >= 50 ? true : false;
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(context)),
-        title: Text(lesson.name),
+        title: Text(lesson.lectureName??"-"),
       ),
       bottomNavigationBar: isPassed
           ? MarkCompleteButton(course: course, lesson: lesson)
@@ -42,7 +44,7 @@ class QuizComplete extends ConsumerWidget {
                 onPressed: () {
                   // Placed ads when user failed the test
                   AdManager.initInterstitailAds(ref);
-                  NextScreen.replaceAnimation(context, QuizLesson(course: course, lesson: lesson));
+                  // NextScreen.replaceAnimation(context, QuizLesson(course: course, lesson: lesson));
                 },
               ),
             ),

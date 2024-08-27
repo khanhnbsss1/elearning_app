@@ -5,6 +5,7 @@ import 'package:lms_app/components/mark_complete_button.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/models/lesson.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 
 import '../services/content_security_service.dart';
 
@@ -12,7 +13,7 @@ class ArticleLesson extends ConsumerStatefulWidget {
   const ArticleLesson({super.key, required this.lesson, required this.course});
 
   final CourseInfo course;
-  final Lesson lesson;
+  final LessonInfo lesson;
 
   @override
   ConsumerState<ArticleLesson> createState() => _ArticleLessonState();
@@ -35,14 +36,14 @@ class _ArticleLessonState extends ConsumerState<ArticleLesson> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.lesson.name),
+        title: Text(widget.lesson.lectureName??"-"),
         titleSpacing: 0,
         titleTextStyle: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
       ),
       bottomNavigationBar: MarkCompleteButton(course: widget.course, lesson: widget.lesson),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: HtmlBody(description: widget.lesson.description.toString()),
+        child: HtmlBody(description: widget.lesson.note.toString()),
       ),
     );
   }

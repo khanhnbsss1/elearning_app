@@ -108,6 +108,7 @@ class CourseInfo {
     tags = [];
     mode ="public";
     gradeId=0;
+    lectures = [];
     subjects = [];
     imageId=0;
   }

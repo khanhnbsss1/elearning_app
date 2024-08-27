@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/loading_list_tile.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/screens/author_profie/author_profile.dart';
-import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
 import '../components/user_avatar.dart';

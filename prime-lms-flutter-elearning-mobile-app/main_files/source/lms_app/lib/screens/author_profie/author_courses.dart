@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/course.dart';
 import '../../models/user_model.dart';
 import '../../models/user/UserProfile.dart';
-import '../../services/firebase_service.dart';
+import '../../services/api_service.dart';
 import '../../utils/loading_widget.dart';
 import '../../utils/next_screen.dart';
 import '../all_courses.dart/courses_view.dart';

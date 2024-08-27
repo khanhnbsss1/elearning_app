@@ -13,7 +13,7 @@ import '../reviews/rating_form.dart';
 import '../../models/review.dart';
 import '../../models/user_model.dart';
 import '../../providers/user_data_provider.dart';
-import '../../services/firebase_service.dart';
+import '../../services/api_service.dart';
 
 class ReviewButton extends ConsumerWidget with UserMixin {
   const ReviewButton({super.key, required this.course});

@@ -6,7 +6,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/screens/auth/login.dart';
-import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';

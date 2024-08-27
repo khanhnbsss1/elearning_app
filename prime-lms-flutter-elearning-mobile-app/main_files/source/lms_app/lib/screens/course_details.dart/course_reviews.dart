@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/models/review.dart';
 import 'package:lms_app/screens/reviews/reviews.dart';
-import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
 import '../reviews/review_tile.dart';

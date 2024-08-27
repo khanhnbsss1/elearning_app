@@ -12,7 +12,7 @@ import 'package:lms_app/screens/home/home_view.dart';
 import 'package:lms_app/screens/intro.dart';
 import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/services/auth_service.dart';
-import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
 import '../iAP/iap_screen.dart';
@@ -115,11 +115,12 @@ mixin UserMixin {
     if (course.mode == 'FREE') {
       NextScreen.popup(context, CurriculamScreen(course: course));
     } else {
-      if (!isExpired(user)) {
+      if (true) {
         NextScreen.popup(context, CurriculamScreen(course: course));
-      } else {
-        NextScreen.openBottomSheet(context, const IAPScreen());
       }
+      // else {
+      //   NextScreen.openBottomSheet(context, const IAPScreen());
+      // }
     }
   }
 }

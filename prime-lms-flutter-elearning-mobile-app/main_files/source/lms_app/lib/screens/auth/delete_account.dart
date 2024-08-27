@@ -9,7 +9,7 @@ import 'package:lms_app/utils/next_screen.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../providers/user_data_provider.dart';
 import '../../services/auth_service.dart';
-import '../../services/firebase_service.dart';
+import '../../services/api_service.dart';
 import '../../services/sp_service.dart';
 import '../intro.dart';
 

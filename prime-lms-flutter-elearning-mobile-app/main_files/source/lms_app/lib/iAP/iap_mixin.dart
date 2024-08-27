@@ -7,7 +7,7 @@ import '../models/subscription.dart';
 import '../models/user_model.dart';
 import '../models/user/UserProfile.dart';
 import '../providers/user_data_provider.dart';
-import '../services/firebase_service.dart';
+import '../services/api_service.dart';
 
 mixin IAPMixin {
   handleProvideReward({

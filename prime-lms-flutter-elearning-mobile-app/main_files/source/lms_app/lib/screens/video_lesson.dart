@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/screens/video_player_screen.dart';
+import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/services/content_security_service.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import '../components/mark_complete_button.dart';
@@ -11,7 +12,7 @@ class VideoLesson extends ConsumerStatefulWidget {
   const VideoLesson({super.key, required this.course, required this.lesson});
 
   final CourseInfo course;
-  final Lesson lesson;
+  final LessonInfo lesson;
 
   @override
   ConsumerState<VideoLesson> createState() => _VideoLessonState();
@@ -35,7 +36,7 @@ class _VideoLessonState extends ConsumerState<VideoLesson> {
     return Scaffold(
       body: Stack(
         children: [
-          VideoPlayerScreen(videoUrl: widget.lesson.videoUrl.toString()),
+          VideoPlayerScreen(videoUrl: widget.lesson.link.toString()),
           Align(
             alignment: Alignment.bottomCenter,
             // Visible after 1 sec for video loading time

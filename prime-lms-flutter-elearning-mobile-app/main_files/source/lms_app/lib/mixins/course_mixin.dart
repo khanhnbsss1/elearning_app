@@ -22,7 +22,7 @@ mixin CourseMixin {
     } else {
       // List validIds = user.completedLessons!.where((element) => element.toString().contains(course.id.toString())).toList();
       // final double courseProgress = validIds.isEmpty ? 0 : (validIds.length / (course.totalLectures!).toDouble());
-      final double courseProgress = 50;
+      final double courseProgress = 0.5;
       if (courseProgress == 0) {
         return 'start-course';
       } else if (courseProgress > 0 && courseProgress < 1) {

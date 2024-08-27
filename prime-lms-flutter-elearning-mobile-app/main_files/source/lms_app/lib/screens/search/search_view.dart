@@ -6,7 +6,7 @@ import 'package:lms_app/models/course.dart';
 import 'package:lms_app/screens/search/recent_searches.dart';
 import 'package:lms_app/screens/search/search_bar.dart';
 import 'package:lms_app/screens/search/searched_courses.dart';
-import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/utils/empty_icon.dart';
 
 import '../../services/apis/course/course_detail/models/course_detail_model.dart';

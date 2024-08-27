@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/loading_tile.dart';
-import 'package:lms_app/services/firebase_service.dart';
+import 'package:lms_app/services/api_service.dart';
 import '../../../services/apis/course/course_fillter/models/course_filtter_info.dart';
 import '../../../utils/next_screen.dart';
 import '../../all_courses.dart/courses_view.dart';

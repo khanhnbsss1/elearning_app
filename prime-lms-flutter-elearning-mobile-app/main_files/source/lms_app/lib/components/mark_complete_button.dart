@@ -5,19 +5,21 @@ import 'package:lms_app/mixins/course_mixin.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/models/lesson.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import '../providers/user_data_provider.dart';
-import '../services/firebase_service.dart';
+import '../services/api_service.dart';
 
 class MarkCompleteButton extends ConsumerWidget with CourseMixin {
   const MarkCompleteButton({super.key, required this.course, required this.lesson});
 
   final CourseInfo course;
-  final Lesson lesson;
+  final LessonInfo lesson;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userDataProvider);
-    final bool isCompleted = isLessonCompleted(lesson, user);
+    // final bool isCompleted = isLessonCompleted(lesson, user);
+    final bool isCompleted = true;
     final IconData icon = isCompleted ? Icons.clear : Icons.done;
     final String buttonText = isCompleted ? 'unmark-complete' : 'mark-complete';
 
@@ -31,7 +33,7 @@ class MarkCompleteButton extends ConsumerWidget with CourseMixin {
           label: Text(buttonText).tr(),
           onPressed: () async {
             final navigator = Navigator.of(context);
-            await ApiService().updateLessonMarkComplete(user!, course, lesson);
+            // await ApiService().updateLessonMarkComplete(user!, course, lesson);
             await ref.read(userDataProvider.notifier).getData();
             navigator.pop();
           },
