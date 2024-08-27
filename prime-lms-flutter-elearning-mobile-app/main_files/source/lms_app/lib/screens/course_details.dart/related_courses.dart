@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/models/course.dart';
 import '../../components/course_tile.dart';
 import '../../services/firebase_service.dart';
-import '../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import '../../services/apis/course/course_detail/models/course_detail_model.dart';
 
 final relatedCoursesProvider = FutureProvider.family.autoDispose<List<CourseInfo>?, CourseInfo>((ref, course) async {
-  List<CourseInfo>? courses = await FirebaseService().getRelatedCoursesByCategory(course);
+  List<CourseInfo>? courses = await ApiService().getRelatedCoursesByCategory(course);
   return courses;
 });
 

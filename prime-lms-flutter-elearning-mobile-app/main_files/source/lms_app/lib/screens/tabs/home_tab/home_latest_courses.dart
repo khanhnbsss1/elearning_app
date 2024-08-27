@@ -5,12 +5,13 @@ import 'package:lms_app/components/course_tile.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/screens/all_courses.dart/courses_view.dart';
 import 'package:lms_app/services/firebase_service.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/next_screen.dart';
+import 'package:pinput/pinput.dart';
 
 final homeLatestCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>>((ref) async {
-  final List<CourseInfo>? courses = await FirebaseService().getLatestCourses();
+  final List<CourseInfo>? courses = await ApiService().getLatestCourses();
   return courses??[];
 });
 
@@ -63,7 +64,7 @@ class HomeLatestCourses extends ConsumerWidget {
                 ListView.separated(
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 5,
+                  itemCount: courses.length > 5 ? 5 : courses.length,
                   padding: const EdgeInsets.all(20),
                   separatorBuilder: (context, index) => const Divider(height: 50),
                   itemBuilder: (context, index) {

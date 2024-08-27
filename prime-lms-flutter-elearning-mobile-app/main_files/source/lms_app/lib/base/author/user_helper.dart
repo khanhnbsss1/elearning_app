@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:lms_app/base/author/author_manager.dart';
-import '../../models_elearning/user/UserProfile.dart';
+import '../../models/user/UserProfile.dart';
 import '../base.export.dart';
 import '../instance_mananger_elearning/instance_mananger.dart';
 import '../store/shared_preferences.dart';
@@ -53,7 +53,7 @@ class UserManager{
     return account;
   }
   // Define a function that inserts dogs into the database
-  Future<void> insertRecentUserInfo(UserInfo useInfo) async {
+  Future<void> insertRecentUserInfo(UserProfile useInfo) async {
     // Get a reference to the database.
     String reUserListStr =  SharedPreferencesStorage().getString(Storage.recentUserInfoKey);
     RecentUserList recentUserList = RecentUserList();
@@ -62,7 +62,7 @@ class UserManager{
       recentUserList = RecentUserList.fromJson(jsonDecode(reUserListStr));
     }
     recentUserList.recentUserContentList!.clear();
-    if(recentUserList.recentUserContentList!.where((element) => element.userId == useInfo.userId).isEmpty)
+    if(recentUserList.recentUserContentList!.where((element) => element.id == useInfo.id).isEmpty)
     {
       recentUserList.recentUserContentList!.add(useInfo);
       String reUserListStr = jsonEncode(recentUserList.toJson());

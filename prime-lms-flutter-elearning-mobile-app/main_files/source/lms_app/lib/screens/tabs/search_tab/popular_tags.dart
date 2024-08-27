@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lms_app/services_elearning/apis/tags/models/tag_info.dart';
+import 'package:lms_app/services/apis/tags/models/tag_info.dart';
 
 import '../../../models/tag.dart';
 import '../../all_courses.dart/courses_view.dart';

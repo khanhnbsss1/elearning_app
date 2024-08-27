@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:lms_app/configs/app_config.dart';
 import 'package:lms_app/models/course.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:share_plus/share_plus.dart';
 
 class CourseShareButton extends StatelessWidget {

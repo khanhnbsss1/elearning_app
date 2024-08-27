@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:lms_app/services_elearning/apis/course/course_fillter/get_course_fillter_api.dart';
-import 'package:lms_app/services_elearning/apis/course/course_fillter/models/course_filtter_info.dart';
+import 'package:lms_app/services/apis/course/course_fillter/get_course_fillter_api.dart';
+import 'package:lms_app/services/apis/course/course_fillter/models/course_filtter_info.dart';
 
 
 class InstanceManager{

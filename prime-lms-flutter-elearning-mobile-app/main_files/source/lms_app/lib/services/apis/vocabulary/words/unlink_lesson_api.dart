@@ -1,6 +1,8 @@
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
+import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+
+import '../../../../base/widgets/toast_common/toast_utils.dart';
+import '../vocabulary_list/models/vocabulary_models.dart';
 
 class UnLinkWordApi extends BaseApiRequest {
   List<VocabularyInfo> vocabularyInfos;

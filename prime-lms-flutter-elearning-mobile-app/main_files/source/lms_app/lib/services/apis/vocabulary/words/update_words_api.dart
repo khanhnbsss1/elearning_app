@@ -1,6 +1,7 @@
 
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
+import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+import '../../../../base/widgets/toast_common/toast_utils.dart';
 import '../vocabulary_list/models/vocabulary_models.dart';
 
 class UpdateWordsApi extends BaseApiRequest {
@@ -15,7 +16,7 @@ class UpdateWordsApi extends BaseApiRequest {
     dynamic data = await putRequestAPI();
     if(data.runtimeType == String && (data as String).isEmpty)
       {
-        ToastUtils.showToastSuccess(L10nX.getStr.success);
+        ToastUtils.showToastSuccess(L10nX.getStr.sucessfully_str);
       }
     return data;
   }

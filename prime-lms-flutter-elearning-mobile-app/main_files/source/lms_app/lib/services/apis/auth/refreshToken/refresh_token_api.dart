@@ -1,8 +1,10 @@
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/device/device_manager.dart';
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/auth/login/models/login_response.dart';
+import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/device_elearning/device_manager.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+import 'package:lms_app/services/apis/auth/login/models/login_response.dart';
 
+import '../../../../base/author/author_manager.dart';
+import '../../../../base/widgets/toast_common/toast_utils.dart';
 import 'models/refresh_token_request.dart';
 class RefreshTokenApi extends BaseApiRequest {
   AuthInfo ?authInfo;
@@ -29,7 +31,7 @@ class RefreshTokenApi extends BaseApiRequest {
            /// neu refresh token het han thi out ra ngoai landing page
            ToastUtils.showToastError(data.message??"");
            AuthorManager().handleLogout();
-           AppPages.routeName(Routes.landingPageRoute, isReplace: true);
+           // AppPages.routeName(Routes.landingPageRoute, isReplace: true);
          }
 
      }
@@ -37,7 +39,7 @@ class RefreshTokenApi extends BaseApiRequest {
      {
        /// neu refresh token het han thi out ra ngoai landing page
        AuthorManager().handleLogout();
-       AppPages.routeName(Routes.landingPageRoute, isReplace: true);
+       // AppPages.routeName(Routes.landingPageRoute, isReplace: true);
      }
   }
   Future<void> getAuthorization() async {
@@ -49,7 +51,6 @@ class RefreshTokenApi extends BaseApiRequest {
           accessToken: authInfo?.accessToken,
           refreshToken: authInfo?.refreshToken
         );
-        print("object");
         await setApiBody(refreshTokenRequest.toJson());
       }
   }

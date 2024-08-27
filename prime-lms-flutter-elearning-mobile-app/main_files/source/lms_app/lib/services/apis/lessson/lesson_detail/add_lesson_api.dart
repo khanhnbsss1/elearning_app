@@ -1,7 +1,9 @@
 
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+
+import '../../../../base/widgets/toast_common/toast_utils.dart';
+import '../models/lesson_info.dart';
 
 
 class AddLessonApi extends BaseApiRequest {
@@ -16,7 +18,7 @@ class AddLessonApi extends BaseApiRequest {
     dynamic result = await postRequestAPI();
     if(result.runtimeType == int)
     {
-      ToastUtils.showToastSuccess(L10nX.getStr.success);
+      ToastUtils.showToastSuccess(L10nX.getStr.sucessfully_str);
     }
     return result;
   }

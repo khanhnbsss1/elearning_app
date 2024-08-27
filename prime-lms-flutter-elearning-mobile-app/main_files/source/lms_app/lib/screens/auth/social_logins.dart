@@ -7,7 +7,7 @@ import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/utils/snackbars.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../models/user_model.dart';
-import '../../models_elearning/user/UserProfile.dart';
+import '../../models/user/UserProfile.dart';
 import '../../services/auth_service.dart';
 
 class SocialLogins extends StatefulWidget {
@@ -35,10 +35,10 @@ class _SocialLoginsState extends State<SocialLogins> {
   }
 
   _validateData(UserCredential userCredential) async {
-    bool userExists = await FirebaseService().isUserExists(userCredential.user!.uid);
+    bool userExists = await ApiService().isUserExists(userCredential.user!.uid);
     if (!userExists) {
-      await FirebaseService().saveUserData(_userModel(userCredential)).then((value) async {
-        await FirebaseService().updateUserStats();
+      await ApiService().saveUserData(_userModel(userCredential)).then((value) async {
+        await ApiService().updateUserStats();
         widget.afterSignIn();
       });
     } else {

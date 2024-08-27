@@ -7,8 +7,8 @@ import 'package:lms_app/screens/search/search_view.dart';
 import 'package:lms_app/screens/tabs/home_tab/home_categories.dart';
 import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/screens/tabs/search_tab/popular_tags.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
-import 'package:lms_app/services_elearning/apis/tags/models/tag_info.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/tags/models/tag_info.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import '../../../components/loading_tile.dart';
 
@@ -19,7 +19,7 @@ import '../../../components/loading_tile.dart';
 
 final categoriesProvider =
     FutureProvider.autoDispose<List<TagsInfo>>((ref) async {
-  final List<TagsInfo> categories = await FirebaseService().getAllCategories();
+  final List<TagsInfo> categories = await ApiService().getAllCategories();
   return categories;
 });
 

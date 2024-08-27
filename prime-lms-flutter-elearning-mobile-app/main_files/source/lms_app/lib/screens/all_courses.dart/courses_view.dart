@@ -12,12 +12,12 @@ import 'package:lms_app/models/course.dart';
 import 'package:lms_app/screens/all_courses.dart/grid_list_course_tile.dart';
 import 'package:lms_app/screens/search/search_view.dart';
 import 'package:lms_app/services/firebase_service.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/theme/theme_provider.dart';
 import 'package:lms_app/utils/empty_animation.dart';
 import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/next_screen.dart';
-import '../../services_elearning/apis/course/course_fillter/models/course_filtter_info.dart';
+import '../../services/apis/course/course_fillter/models/course_filtter_info.dart';
 import 'grid_course_tile.dart';
 
 enum GridStyle { grid, box, list }
@@ -67,7 +67,7 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
 
   Future<void> _getCourse(
       String filter, int pageNumber) async {
-    final List<CourseInfo>? courses = await FirebaseService()
+    final List<CourseInfo>? courses = await ApiService()
         .getCourseByCategories(
             pageNumber: pageNumber, filter: filter.replaceAll(" ", "_"));
     if (_courses != [] && courses != [] && courses != null) {

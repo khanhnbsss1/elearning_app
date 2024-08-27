@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:lms_app/base/base.export.dart';
-import 'package:lms_app/services_elearning/apis/auth/login/models/login_response.dart';
+import 'package:lms_app/services/apis/auth/login/models/login_response.dart';
 
 import '../author/author_manager.dart';
 

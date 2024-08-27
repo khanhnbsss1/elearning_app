@@ -5,7 +5,7 @@ import 'package:lms_app/components/loading_list_tile.dart';
 import 'package:lms_app/configs/app_assets.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/screens/search/search_view.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/empty_animation.dart';
 
 import '../../components/course_tile.dart';

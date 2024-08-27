@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lms_app/models/course.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 
 import '../configs/app_assets.dart';
 import '../constants/app_constants.dart';

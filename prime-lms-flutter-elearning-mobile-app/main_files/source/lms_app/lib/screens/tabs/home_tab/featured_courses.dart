@@ -5,10 +5,10 @@ import 'package:lms_app/components/loading_tile.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/services/firebase_service.dart';
 import '../../../components/featured_course_tile.dart';
-import '../../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import '../../../services/apis/course/course_detail/models/course_detail_model.dart';
 
 final featuredCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>?>((ref) async {
-  final List<CourseInfo>? courses = await FirebaseService().getFeaturedCourses();
+  final List<CourseInfo>? courses = await ApiService().getFeaturedCourses();
   return courses;
 });
 

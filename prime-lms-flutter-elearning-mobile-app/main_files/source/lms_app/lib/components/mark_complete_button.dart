@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/mixins/course_mixin.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/models/lesson.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import '../providers/user_data_provider.dart';
 import '../services/firebase_service.dart';
 
@@ -31,7 +31,7 @@ class MarkCompleteButton extends ConsumerWidget with CourseMixin {
           label: Text(buttonText).tr(),
           onPressed: () async {
             final navigator = Navigator.of(context);
-            await FirebaseService().updateLessonMarkComplete(user!, course, lesson);
+            await ApiService().updateLessonMarkComplete(user!, course, lesson);
             await ref.read(userDataProvider.notifier).getData();
             navigator.pop();
           },

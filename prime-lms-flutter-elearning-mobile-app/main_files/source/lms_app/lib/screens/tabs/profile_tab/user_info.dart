@@ -12,8 +12,8 @@ import 'package:loading_indicator/loading_indicator.dart';
 import '../../../components/user_avatar.dart';
 import '../../../mixins/user_mixin.dart';
 import '../../../models/user_model.dart';
-import '../../../models_elearning/user/UserProfile.dart';
-import '../../../services_elearning/apis/user/get_user_detail_api.dart';
+import '../../../models/user/UserProfile.dart';
+import '../../../services/apis/user/get_user_detail_api.dart';
 import '../../edit_profile.dart';
 import '../../../utils/next_screen.dart';
 

@@ -8,10 +8,10 @@ import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
 import '../components/user_avatar.dart';
-import '../models_elearning/user/UserProfile.dart';
+import '../models/user/UserProfile.dart';
 
 final authorsProvider = FutureProvider.autoDispose((ref) async {
-  final List<UserProfile> authors = await FirebaseService().getAllAuthors();
+  final List<UserProfile> authors = await ApiService().getAllAuthors();
   return authors;
 });
 

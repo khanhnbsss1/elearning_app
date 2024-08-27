@@ -1,322 +1,284 @@
 
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:lms_app/enviroments/flavor_settings.dart';
-import 'package:lms_app/models/user/userInfo.dart';
-import 'package:lms_app/theme/colors_app.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lms_app/models/author_info.dart';
+import 'package:lms_app/models/subscription.dart';
+
+import '../../base/base_request_elearning/models/page_model.dart';
 
 enum UserType{
   none,
-  DISTRIBUTOR, /// 1  admin
-  PARTNER,///2  doi tac
-  CUSTOMER ///3  nguoi dung end user 
+  Teacher,///giao vien
+  User, /// hoc vien
+  Admin, ///   admin
 }
+Map<UserType, String>userTypeToStr={
+  UserType.none:"None",
+  UserType.Teacher:"Teacher",
+  UserType.User:"User",
+  UserType.Admin:"Admin",
+};
 class UserProfile {
   int? id;
-  int? parentId;
-  int? aliasId;
-  String? path;
-  String? username;
-  String? password;
-  int? type;
-  String? name;
-  String? email;
-  String? phone;
-  String? address;
-  String? description;
-  int? status;
+  String? fullName;
+  String? userName;
+  String? bankAccount;
+  String? bankName;
+  String? identityId;
+  String? gender;
+  String? birthday;
+  String? phoneNumber;
+  String? avatar;
+  String? typeName;
   String? createdAt;
   String? createdBy;
-  String? updatedBy;
   String? updatedAt;
-  int? totalDevice;
-  String? timezone;
-  String? language;
-  String? unitDistance;
-  String? unitVolume;
-  String? unitTemperature;
-  String? unitWeight;
-  String? dateFormat;
-  String? timeFormat;
+  String? updatedBy;
+  String? countryName;
+  String? position;
+  String? email;
+  List<String>? permissionList;
   String? permission;
-  String? pageMain;
   int? roleId;
-  String? currencyUnit;
-  bool? hasChild;
-  String? roleName;
-  String? roleKey;
-  int? walletBalance;
-  bool? hasPinCode;
-  String? pinCode;
-  int? rfidTagId;
-  List<DeviceFavouriteSummaryInfo>? deviceFavouriteInfos;
-  int? servicePriceId;
-  ServicePriceInfo? servicePriceInfo;
-  String? partnerCode;
-  List<int>? partnerIds;
+
+  String? imageUrl;
+  List? role;
+  List? enrolledCourses;
+  List? wishList;
+  bool? isDisabled;
+  AuthorInfo? authorInfo;
+  Subscription? subscription;
+  List? completedLessons;
+  String? platform;
+  List? reviews;
 
   UserProfile(
       {this.id,
-        this.parentId,
-        this.aliasId,
-        this.path,
-        this.username,
-        this.type,
-        this.name,
-        this.email,
-        this.phone,
-        this.address,
-        this.description,
-        this.status,
+        this.fullName,
+        this.userName,
+        this.bankAccount,
+        this.bankName,
+        this.identityId,
+        this.gender,
+        this.birthday,
+        this.phoneNumber,
+        this.avatar,
+        this.typeName,
         this.createdAt,
         this.createdBy,
-        this.updatedBy,
         this.updatedAt,
-        this.totalDevice,
-        this.timezone,
-        this.language,
-        this.unitDistance,
-        this.unitVolume,
-        this.unitTemperature,
-        this.unitWeight,
-        this.dateFormat,
-        this.timeFormat,
-        this.permission,
-        this.pageMain,
+        this.updatedBy,
+        this.countryName,
+        this.position,
+        this.email,
+        this.permissionList,
         this.roleId,
-        this.currencyUnit,
-        this.hasChild,
-        this.roleName,
-        this.roleKey,
-        this.walletBalance,
-        this.hasPinCode,
-        this.rfidTagId,
-        this.deviceFavouriteInfos,
-        this.servicePriceId,
-        this.servicePriceInfo,
-        this.partnerCode,
-        this.password,
-        this.partnerIds,
-        this.pinCode
+        this.permission,
+        this.imageUrl,
+        this.role,
+        this.enrolledCourses,
+        this.wishList,
+        this.isDisabled,
+        this.authorInfo,
+        this.subscription,
+        this.completedLessons,
+        this.platform,
+        this.reviews
       });
 
   UserProfile.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    parentId = json['parentId'];
-    aliasId = json['aliasId'];
-    path = json['path'];
-    username = json['username'];
-    type = json['type'];
-    name = json['name'];
+    id = json['id'] ?? 0;
+    fullName = json['fullName'];
+    userName = json['user_name'];
+    bankAccount = json['bank_account'];
+    bankName = json['bank_name'];
+    identityId = json['identity_id'];
+    gender = json['gender'];
+    birthday = json['birthday'];
+    phoneNumber = json['phone_number'];
+    avatar = json['avatar'];
+    typeName = json['type_name'];
+    createdAt = json['created_at'];
+    createdBy = json['created_by'];
+    updatedAt = json['updated_at'];
+    updatedBy = json['updated_by'];
+    countryName = json['country_name'];
+    position = json['position'];
     email = json['email'];
-    phone = json['phone'];
-    address = json['address'];
-    description = json['description'];
-    status = json['status'];
-    createdAt = json['createdAt'];
-    createdBy = json['createdBy'];
-    updatedBy = json['updatedBy'];
-    updatedAt = json['updatedAt'];
-    totalDevice = json['totalDevice'];
-    timezone = json['timezone'];
-    language = json['language'];
-    unitDistance = json['unitDistance'];
-    unitVolume = json['unitVolume'];
-    unitTemperature = json['unitTemperature'];
-    unitWeight = json['unitWeight'];
-    dateFormat = json['dateFormat'];
-    timeFormat = json['timeFormat'];
-    permission = json['permission'];
-    pageMain = json['pageMain'];
-    roleId = json['roleId'];
-    currencyUnit = json['currencyUnit'];
-    hasChild = json['hasChild'];
-    roleName = json['roleName'];
-    roleKey = json['roleKey'];
-    walletBalance = json['walletBalance'];
-    hasPinCode = json['pinCode'];
-    pinCode = json['pinCode_str'];
-    rfidTagId = json['rfidTagId'];
-    if (json['deviceFavouriteInfos'] != null) {
-      deviceFavouriteInfos = <DeviceFavouriteSummaryInfo>[];
-      json['deviceFavouriteInfos'].forEach((v) {
-        deviceFavouriteInfos!.add(DeviceFavouriteSummaryInfo.fromJson(v));
-      });
+    permission=json['permissions']??'';
+    permissionList = [];
+    if(permission!=null && (permission??'').isNotEmpty)
+    {
+      permissionList = (json['permissions'] as String).split(',');
     }
-    servicePriceId = json['servicePriceId'];
-    servicePriceInfo = json['servicePriceInfo'] != null
-        ? ServicePriceInfo.fromJson(json['servicePriceInfo'])
-        : null;
-    partnerCode = json['partnerCode'];
-    partnerIds = (json['partnerIds']??[]).cast<int>();
+    roleId = json['role_id'];
+    imageUrl = json['imageUrl'];
+    role = json['role'];
+    enrolledCourses = json['enrolledCourses'];
+    wishList = json['wishList'] ?? [];
+    isDisabled = json['isDisabled'];
+    authorInfo = json['authorInfo'] = null;
+        // ? AuthorInfo.fromJson(json['authorInfo']) : null;
+    subscription = json['subscription'] = null ;
+        // ? Subscription.fromJson(json['subscription']) : null;
+    completedLessons = json['completedLessons'];
+    platform = json['platform'];
+    reviews = json['reviews'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['parentId'] = parentId;
-    data['aliasId'] = aliasId;
-    data['path'] = path;
-    data['username'] = username;
-    data['type'] = type;
-    data['name'] = name;
-    data['email'] = email;
-    data['phone'] = phone;
-    data['address'] = address;
-    data['description'] = description;
-    data['status'] = status;
-    data['createdAt'] = createdAt;
-    data['createdBy'] = createdBy;
-    data['updatedBy'] = updatedBy;
-    data['updatedAt'] = updatedAt;
-    data['totalDevice'] = totalDevice;
-    data['timezone'] = timezone;
-    data['language'] = language;
-    data['unitDistance'] = unitDistance;
-    data['unitVolume'] = unitVolume;
-    data['unitTemperature'] = unitTemperature;
-    data['unitWeight'] = unitWeight;
-    data['dateFormat'] = dateFormat;
-    data['timeFormat'] = timeFormat;
-    data['permission'] = permission;
-    data['pageMain'] = pageMain;
-    data['roleId'] = roleId;
-    data['currencyUnit'] = currencyUnit;
-    data['hasChild'] = hasChild;
-    data['roleName'] = roleName;
-    data['roleKey'] = roleKey;
-    data['walletBalance'] = walletBalance;
-    data['hasPinCode'] = hasPinCode;
-    data['pinCode_str'] = pinCode;
-    data['rfidTagId'] = rfidTagId;
-    if (deviceFavouriteInfos != null) {
-      data['deviceFavouriteInfos'] =
-          deviceFavouriteInfos!.map((v) => v.toJson()).toList();
-    }
-    data['servicePriceId'] = servicePriceId;
-    if (servicePriceInfo != null) {
-      data['servicePriceInfo'] = servicePriceInfo!.toJson();
-    }
-    data['partnerCode'] = partnerCode;
-    data['partnerIds'] = partnerIds;
+    data['fullName'] = fullName??"";
+    data['user_name'] = userName??"";
+    data['bank_account'] = bankAccount??"";
+    data['bank_name'] = bankName??"";
+    data['identity_id'] = identityId;
+    data['gender'] = gender??"";
+    data['birthday'] = birthday??"";
+    data['phone_number'] = phoneNumber??"";
+    data['avatar'] = avatar??"";
+    data['type_name'] = typeName??"web";
+    data['created_at'] = createdAt??"";
+    data['created_by'] = createdBy??"";
+    data['updated_at'] = updatedAt??"";
+    data['updated_by'] = updatedBy??"";
+    data['country_name'] = countryName??"";
+    data['position'] = position??"";
+    data['email'] = email??"";
+    data['permissions'] = permission;
+    data['role_id'] = roleId;
+    data['imageUrl'] = imageUrl;
+    data['role'] = role;
+    data['enrolledCourses'] = enrolledCourses;
+    data['wishList'] = wishList;
+    data['isDisabled'] = isDisabled;
+    // data['authorInfo'] = authorInfo?.toJson();
+    data['authorInfo'] = null;
+    // data['subscription'] = subscription?.toJson();
+    data['subscription'] = null;
+    data['completedLessons'] = completedLessons;
+    data['platform'] = platform;
+    data['reviews'] = reviews;
     return data;
   }
-  Map<String, dynamic> toJsonForQrCode(){
-  final Map<String, dynamic> data = <String, dynamic>{};
-  if(FlavorSettings().getFlavorType()== FlavorType.elearningLms)
-    {
-      data['id'] = id;
-    }
-  else
-    {
-      data['partnerCode'] = partnerCode;
-    }
-  data['username'] = username;
-  data['name'] = name;
-  data['phone'] = phone;
-  data['address'] = address;
-  data['type'] = type;
-  
-  return data;
+  List<String> getPermission(){
+    return permissionList??[];
+  }
+
+  UserProfile copyWith({
+    int? id,
+    String? fullName,
+    String? userName,
+    String? bankAccount,
+    String? bankName,
+    String? identityId,
+    String? gender,
+    String? birthday,
+    String? phoneNumber,
+    String? avatar,
+    String? typeName,
+    String? createdAt,
+    String? createdBy,
+    String? updatedAt,
+    String? updatedBy,
+    String? countryName,
+    String? position,
+    String? email,
+    String? imageUrl,
+    List? role,
+    List? enrolledCourses,
+    List? wishList,
+    bool? isDisabled,
+    AuthorInfo? authorInfo,
+    Subscription? subscription,
+    List? completedLessons,
+    String? platform,
+    List? reviews,
+  }) {
+    return UserProfile(
+      id: id ?? this.id,
+      fullName: fullName ?? this.fullName,
+      userName: userName ?? this.userName,
+      bankAccount: bankAccount ?? this.bankAccount,
+      bankName: bankName ?? this.bankName,
+      identityId: identityId ?? this.identityId,
+      gender: gender ?? this.gender,
+      birthday: birthday ?? this.birthday,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      avatar: avatar ?? this.avatar,
+      typeName: typeName ?? this.typeName,
+      createdAt: createdAt ?? this.createdAt,
+      createdBy: createdBy ?? this.createdBy,
+      updatedAt: updatedAt ?? this.updatedAt,
+      updatedBy: updatedBy ?? this.updatedBy,
+      countryName: countryName ?? this.countryName,
+      position: position ?? this.position,
+      email: email ?? this.email,
+      imageUrl: imageUrl ?? this.imageUrl,
+      role: role ?? this.role,
+      enrolledCourses: enrolledCourses ?? this.enrolledCourses,
+      wishList: wishList ?? this.wishList,
+      isDisabled: isDisabled ?? this.isDisabled,
+      authorInfo: authorInfo ?? this.authorInfo,
+      subscription: subscription ?? this.subscription,
+      completedLessons: completedLessons ?? this.completedLessons,
+      platform: platform ?? this.platform,
+      reviews: reviews ?? this.reviews,
+    );
+  }
+
+  factory UserProfile.fromFirebase(DocumentSnapshot snap) {
+    Map d = snap.data() as Map<String, dynamic>;
+    return UserProfile(
+      id: d['id'],
+      email: d['email'],
+      imageUrl: d['image_url'],
+      role: d['role'] ?? [],
+      authorInfo: d['author_info'] == null ? null : AuthorInfo.fromMap(d['author_info']),
+      enrolledCourses: d['enrolled'] ?? [],
+      wishList: d['wishlist'] ?? [],
+      subscription: d['subscription'] == null ? null : Subscription.fromFirestore(d['subscription']),
+      completedLessons: d['completed_lessons'] ?? [],
+      platform: d['platform'],
+      reviews: d['reviews'] ?? [],
+    );
+  }
 }
-  UserProfile.fromJsonQRCode(Map<String, dynamic> json) {
-    id = json['id'];
-    username = json['username'];
-    type = json['type'];
-    name = json['name'];
-    phone = json['phone'];
-    address = json['address'];
-    partnerCode = json['partnerCode'];
+
+class UserListResponseModel extends PageModel{
+  List<UserProfile>? content;
+
+  UserListResponseModel({super.total, super.pageSize, super.pageNumber, this.content});
+  UserListResponseModel.fromJson(Map<String, dynamic> json) {
+    total = json['total'];
+    pageSize = json['pageSize'];
+    pageNumber = json['pageNumber'];
+    if (json['content'] != null) {
+      content = <UserProfile>[];
+      json['content'].forEach((v) {
+        content!.add(new UserProfile.fromJson(v));
+      });
+    }
+  }
+  UserListResponseModel.fromList( dynamic json) {
+    if (json!= null) {
+      content = <UserProfile>[];
+      json.forEach((v) {
+        content!.add(new UserProfile.fromJson(v));
+      });
+    }
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['total'] = total;
+    data['pageSize'] = pageSize;
+    data['pageNumber'] = pageNumber;
+    if (content != null) {
+      data['content'] = content!.map((v) => v.toJson()).toList();
+    }
+    return data;
   }
 
-  UserProfile.initial(){
-    id =null;
-    parentId= null;
-    aliasId= null;
-    path= "";
-    username= "";
-    password= "";
-    type= 0;
-    name= "";
-    email= "";
-    phone= "";
-    description= "";
-    status= 0;
-    createdAt= DateFormat("yyyy-MM-dd hh:mm:ss").format(DateTime.now());
-    totalDevice=0;
-    timezone= "";
-    language= "";
-    unitDistance= "";
-    unitVolume= "";
-    unitTemperature= "";
-    unitWeight= "";
-    dateFormat= "";
-    timeFormat= "";
-    permission= "";
-    pageMain= "";
-    roleId= 3;
-    roleName= "";
-    roleKey ="";
-    hasChild= false;
-    hasPinCode = true;
-    pinCode="";
-    partnerCode=null;
-  }
-
-  UserInfo convertToUserInfo(UserInfo oldUserInfo)
-  {
-    UserInfo userInfo = oldUserInfo;
-    userInfo.username = username;
-    userInfo.userId = id.toString();
-    userInfo.phoneNumber = phone;
-    userInfo.address = "";
-    userInfo.password = password;
-    userInfo.expiredAt = oldUserInfo.expiredAt;
-    userInfo.rules = oldUserInfo.rules;
-    userInfo.token = oldUserInfo.token;
-    userInfo.tokenFireBase = oldUserInfo.tokenFireBase;
-    return userInfo;
-  }
-  bool isParent(){
-    bool isParent = false;
-    if(type!=null)
-    {
-      if(type == 0 || type == 1) {
-        isParent = true;
-      } else
-      {
-        if(hasChild == true) {
-          isParent = true;
-        } else {
-          isParent = false;
-        }
-      }
-    }
-    return isParent;
-  }
-  UserType getUserType(){
-    return UserType.values.elementAt(type??0);
-  }
-  String getActiveStatusKey()
-  {
-    if(status ==1) {
-      return "str_activated";
-    } else {
-      return "str_no_activated";
-    }
-  }
-  Color getColorByType(){
-    Color colorType = Colors.orange;
-    if(type!=null)
-    {
-      if(type == 0 || type == 1) {
-        colorType = ColorConst.mainColor;
-      } else {
-        colorType = Colors.orange;
-      }
-    }
-    return colorType;
-  }
 }
 
 class ServicePriceInfo {

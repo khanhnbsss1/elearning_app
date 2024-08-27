@@ -6,7 +6,7 @@ import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
-import '../models_elearning/user/UserProfile.dart';
+import '../models/user/UserProfile.dart';
 import '../screens/author_profie/author_profile.dart';
 
 class AuthorCard extends StatelessWidget{

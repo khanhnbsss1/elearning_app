@@ -1,7 +1,8 @@
 
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
 
 import '../../../base/base.export.dart';
+import '../../../base/widgets/common/alert_dialog/loading.common.dart';
 import 'models/upload_file_info.dart';
 
 class UploadFileApi extends BaseApiRequest {
@@ -14,7 +15,7 @@ class UploadFileApi extends BaseApiRequest {
   Future<UploadFileResponseInfo?> call() async {
     await getAuthorization();
     try{
-      MonitorLoading().showLoading(L10nX.getStr.uploading_file);
+      MonitorLoading().showLoading(L10nX.getStr.loading_message);
       dynamic data = await postRequestAPI();
       MonitorLoading().dismiss();
       if(data!=null && data.runtimeType!= ResponseCommon)

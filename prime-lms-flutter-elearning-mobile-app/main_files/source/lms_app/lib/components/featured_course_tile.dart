@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lms_app/constants/custom_colors.dart';
 import 'package:lms_app/services/app_service.dart';
-import '../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import '../services/apis/course/course_detail/models/course_detail_model.dart';
 import 'rating_bar.dart';
 import '../models/course.dart';
 import '../screens/course_details.dart/details_view.dart';

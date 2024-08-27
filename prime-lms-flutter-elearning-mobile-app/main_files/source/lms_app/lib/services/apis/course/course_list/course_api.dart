@@ -1,7 +1,10 @@
 
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/base/services/base_request/models/search_common_request.dart';
+import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+// import 'package:lms_app/base/services/base_request/models/search_common_request.dart';
+import '../../../../base/author/user_helper.dart';
+import '../../../../base/base_request_elearning/models/search_common_request.dart';
+import '../../../../models/user/UserProfile.dart';
 import '../course_list/models/course_models.dart';
 
 class GetCourseListApi extends BaseApiRequest {
@@ -15,19 +18,20 @@ class GetCourseListApi extends BaseApiRequest {
     await getAuthorization();
     dynamic result = await postRequestAPI();
 
-    if(result.runtimeType == ResponseCommon)
-    {
-      return CourseResponseModel(content: [], total: 0, pageSize: 10, pageNumber: 0);
+    if(result.runtimeType == ResponseCommon) {
+      return CourseResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
     }
-    else
-    {
+    try {
       CourseResponseModel paymentHistoryResponseModel = CourseResponseModel.fromJson(result);
       return paymentHistoryResponseModel;
+    } catch (e) {
+      return CourseResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
     }
   }
 
+
   Future<void> getAuthorization() async {
-    UserProfile? userProfile = UserManager().getUserProfile();
+    UserProfile? userProfile = await UserManager().getUserProfile();
     if(userProfile!=null) {
       searchCommonRequest = searchCommonRequest.copyWith(userId: userProfile.id);
     }

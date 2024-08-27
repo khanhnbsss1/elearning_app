@@ -8,7 +8,7 @@ import 'package:lms_app/models/course.dart';
 import 'package:lms_app/services/firebase_service.dart';
 import 'package:lms_app/utils/empty_animation.dart';
 import 'package:quiver/iterables.dart';
-import '../../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import '../../../services/apis/course/course_detail/models/course_detail_model.dart';
 import 'my_course_tile.dart';
 import '../../../providers/user_data_provider.dart';
 
@@ -26,7 +26,7 @@ import '../../../providers/user_data_provider.dart';
 // }
 // );
 final myCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>?>((ref) async {
-  final List<CourseInfo>? courses = await FirebaseService().getMyCourses();
+  final List<CourseInfo>? courses = await ApiService().getMyCourses();
   return courses;
 });
 

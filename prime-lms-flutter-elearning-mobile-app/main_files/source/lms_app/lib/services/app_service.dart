@@ -11,7 +11,7 @@ import 'package:lms_app/configs/app_config.dart';
 import 'package:lms_app/models/review.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../models_elearning/user/UserProfile.dart';
+import '../models/user/UserProfile.dart';
 import '../utils/toasts.dart';
 
 class AppService {

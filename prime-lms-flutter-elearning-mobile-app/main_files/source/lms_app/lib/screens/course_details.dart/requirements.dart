@@ -3,7 +3,7 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/course.dart';
-import '../../services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import '../../services/apis/course/course_detail/models/course_detail_model.dart';
 
 class Requirements extends StatelessWidget {
   const Requirements({

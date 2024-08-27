@@ -3,8 +3,8 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:lms_app/constants/custom_colors.dart';
 import 'package:lms_app/services/app_service.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
-import 'package:lms_app/services_elearning/apis/lessson/models/lesson_info.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 
 import '../../models/course.dart';
 

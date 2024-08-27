@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/loading_tile.dart';
 import 'package:lms_app/services/firebase_service.dart';
-import '../../../services_elearning/apis/course/course_fillter/models/course_filtter_info.dart';
+import '../../../services/apis/course/course_fillter/models/course_filtter_info.dart';
 import '../../../utils/next_screen.dart';
 import '../../all_courses.dart/courses_view.dart';
 import '../../home/home_bottom_bar.dart';
 import '../../home/home_view.dart';
 
 final homeCategoriesProvider = FutureProvider.autoDispose<List<CourseFilterInfo>?>((ref) async {
-  final List<CourseFilterInfo>? categories = await FirebaseService().getHomeCategories();
+  final List<CourseFilterInfo>? categories = await ApiService().getHomeCategories();
   return categories;
 });
 

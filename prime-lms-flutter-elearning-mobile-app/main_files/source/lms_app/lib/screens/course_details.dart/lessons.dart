@@ -14,14 +14,14 @@ import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/screens/quiz_lesson/quiz_screen.dart';
 import 'package:lms_app/screens/video_lesson.dart';
 import 'package:lms_app/services/firebase_service.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
-import 'package:lms_app/services_elearning/apis/lessson/models/lesson_info.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
 
 import '../../models/lesson.dart';
-import '../../models_elearning/user/UserProfile.dart';
+import '../../models/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 
 class Lessons extends ConsumerWidget with CourseMixin, UserMixin {

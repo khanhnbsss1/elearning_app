@@ -5,10 +5,10 @@ import 'package:line_icons/line_icons.dart';
 import 'package:lms_app/mixins/user_mixin.dart';
 import 'package:lms_app/models/course.dart';
 import 'package:lms_app/screens/auth/login.dart';
-import 'package:lms_app/services_elearning/apis/course/course_detail/models/course_detail_model.dart';
+import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
-import '../../models_elearning/user/UserProfile.dart';
+import '../../models/user/UserProfile.dart';
 import '../reviews/rating_form.dart';
 import '../../models/review.dart';
 import '../../models/user_model.dart';
@@ -31,7 +31,7 @@ class ReviewButton extends ConsumerWidget with UserMixin {
         } else if (!hasEnrolled(user, course)) {
           openSnackbar(context, 'enroll-to-make-reviews'.tr());
         } else {
-          final Review? review = await FirebaseService().getUserReview(course.id.toString(), user.id.toString());
+          final Review? review = await ApiService().getUserReview(course.id.toString(), user.id.toString());
           if (!context.mounted) return;
           NextScreen.openBottomSheet(context, RatingForm(review: review, course: course));
         }

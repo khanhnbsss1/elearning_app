@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../components/user_avatar.dart';
 import '../../models/user_model.dart';
-import '../../models_elearning/user/UserProfile.dart';
+import '../../models/user/UserProfile.dart';
 import '../../services/app_service.dart';
 
 class AuthorProfileInfo extends StatelessWidget {

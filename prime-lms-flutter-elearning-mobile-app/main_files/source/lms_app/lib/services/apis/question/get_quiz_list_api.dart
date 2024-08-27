@@ -1,7 +1,8 @@
 
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/base/services/base_request/models/search_common_request.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+// import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 
+import '../../../base/base_request_elearning/models/search_common_request.dart';
 import 'models/question_info.dart';
 
 
@@ -14,11 +15,11 @@ class GetQuizListApi extends BaseApiRequest {
 
   Future<QuestionListResponseModel> call() async {
     await getAuthorization();
-    dynamic result = await postRequestAPI();
+    dynamic result = await getRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {
-      return QuestionListResponseModel(content: [], total: 0, pageSize: 10, pageNumber: 0);
+      return QuestionListResponseModel(content: [], total: 0, pageSize: 0, pageNumber: 0);
     }
     else
     {

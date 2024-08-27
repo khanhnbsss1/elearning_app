@@ -1,7 +1,7 @@
 
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
-import 'package:webkit/services/apis/test/models/test_info.dart';
+import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
+import 'package:lms_app/services/apis/test/models/test_info.dart';
 
 
 class GetTestDetailApi extends BaseApiRequest {

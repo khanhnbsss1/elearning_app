@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:lms_app/generated/intl/messages_all.dart';
 import 'package:lms_app/generated/l10n.dart';
 
-import '../helper_elearning/services/navigation_service.dart';
+import '../helper/services/navigation_service.dart';
 
 class L10nX extends S {
   // ...

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:lms_app/controller_elearning/my_controller.dart';
-import 'package:lms_app/services_elearning/apis/auth/editUser/edit_user_api.dart';
-import 'package:lms_app/services_elearning/apis/auth/editUser/edit_user_request.dart';
+import 'package:lms_app/services/apis/auth/editUser/edit_user_api.dart';
+import 'package:lms_app/services/apis/auth/editUser/edit_user_request.dart';
 
-import '../../helper_elearning/my_form_validator.dart';
-import '../../helper_elearning/widget/my_validators.dart';
-import '../../models_elearning/user/UserProfile.dart';
-import '../../services_elearning/apis/auth/register/models/register_request.dart';
-import '../../services_elearning/apis/auth/register/register_with_phone_api.dart';
-import '../services_elearning/apis/upload_file/models/upload_file_info.dart';
-import '../services_elearning/apis/upload_file/upload_file_api.dart';
+import '../../helper/my_form_validator.dart';
+import '../../helper/widget/my_validators.dart';
+import '../../models/user/UserProfile.dart';
+import '../../services/apis/auth/register/models/register_request.dart';
+import '../../services/apis/auth/register/register_with_phone_api.dart';
+import '../services/apis/upload_file/models/upload_file_info.dart';
+import '../services/apis/upload_file/upload_file_api.dart';
 
 class EditProfileController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
@@ -21,6 +21,13 @@ class EditProfileController extends MyController {
   @override
   void onInit() {
     super.onInit();
+    basicValidator.addField(
+      'image',
+      required: true,
+      label: "Image",
+      validators: [MyEmailValidator()],
+      controller: TextEditingController(),
+    );
     basicValidator.addField(
       'fullname',
       required: true,
@@ -59,6 +66,7 @@ class EditProfileController extends MyController {
       label: 'Phone number',
       controller: TextEditingController(),
     );
+    basicValidator.getController('image')!.text = userProfile.imageUrl??"";
     basicValidator.getController('fullname')!.text = userProfile.fullName??"";
     basicValidator.getController('bank_name')!.text = userProfile.bankName??"";
     basicValidator.getController('bank_account')!.text = userProfile.bankAccount??"";
