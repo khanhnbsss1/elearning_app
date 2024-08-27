@@ -176,7 +176,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             // buildVideo(),
+              buildVideo(),
               Padding(
                 padding:  EdgeInsets.symmetric(vertical: 16, horizontal: Dimens.size32),
                 child: Column(
@@ -510,9 +510,9 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
       height: Dimens.size600,
       decoration: BoxDecoration(
           border: Border.all(
-              color: ColorConst.colorIconGrays, width: 0.2
+              color: ColorConst.colorIconGrays, width: 0.5
           ),
-          borderRadius: BorderRadius.circular(Dimens.size16)
+         // borderRadius: BorderRadius.circular(Dimens.size16)
       ),
       clipBehavior: Clip.hardEdge,
       child: SfPdfViewer.network(
