@@ -40,6 +40,7 @@ class CourseInfo {
   int? imageId;
   int? testId;
   String? testName;
+  bool? isPayment;
   CourseInfo(
       {this.id,
         this.name,
@@ -76,7 +77,8 @@ class CourseInfo {
         this.subjects,
         this.imageId,
         this.testId,
-        this.testName
+        this.testName,
+        this.isPayment
       });
 
   CourseInfo.initial(){
@@ -113,6 +115,7 @@ class CourseInfo {
     gradeId=0;
     subjects = [];
     imageId=0;
+    isPayment=false;
   }
   CourseInfo copyWith({
     int? id,
@@ -189,7 +192,7 @@ class CourseInfo {
       imageId:imageId??this.imageId,
       testId:testId??this.testId,
       testName:typeName??this.testName,
-
+      isPayment:isPayment??this.isPayment,
 
     );
 
@@ -230,6 +233,7 @@ class CourseInfo {
     imageId=json.imageId??imageId;
     testName=json.testName??testName;
     testId=json.testId??testId;
+    isPayment=json.isPayment??isPayment;
 
   }
 
@@ -266,6 +270,7 @@ class CourseInfo {
     gradeId = json['grade_id'];
     testId = json['test_id'];
     testName = json['test_name'];
+    isPayment = ((json['is_payment']??0) == 1);
     tags = [];
     lectures=[];
     if (json['lectures'] != null) {

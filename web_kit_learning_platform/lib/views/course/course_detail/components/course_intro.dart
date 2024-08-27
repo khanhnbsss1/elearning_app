@@ -146,7 +146,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                 ),
               ),
               ActionButton1(
-                text: L10nX.getStr.lets_study,
+                text: (state.courseInfo?.isPayment??false)?L10nX.getStr.lets_study: L10nX.getStr.register_now,
                 onTap: () {
                   Navigator.of(context).pop();
                   CourseStudy1(
@@ -196,11 +196,8 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                       text: L10nX.getStr.register_now,
                     ),*/
               ActionButton1(
-                text: L10nX.getStr.lets_study,
+                text: (state.courseInfo?.isPayment??false)?L10nX.getStr.lets_study: L10nX.getStr.register_now,
                 onTap: () {
-          /*                              AppPages.routeName(Routes.courseStudy,arguments: {
-                          "courseInfo":state.courseInfo
-                        });*/
                   CourseStudy1(
                     courseInfo: state.courseInfo!,
                   ).show(context);
@@ -568,7 +565,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                             height: 8,
                           ),
                           ActionButton1(
-                            text: L10nX.getStr.lets_study,
+                            text: (state.courseInfo?.isPayment??false)?L10nX.getStr.lets_study: L10nX.getStr.register_now,
                             onTap: () {
                               Navigator.of(context).pop();
                               CourseStudy1(

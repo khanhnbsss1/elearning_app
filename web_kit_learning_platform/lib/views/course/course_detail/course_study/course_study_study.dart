@@ -517,6 +517,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
       clipBehavior: Clip.hardEdge,
       child: SfPdfViewer.network(
         (selectLessonInfo?.content??''),
+        canShowScrollStatus: true,
         //key: UniqueKey(),
         //key: _pdfViewerKey,
       ),

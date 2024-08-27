@@ -41,7 +41,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
         log('${isFullScreen ? 'Entered' : 'Exited'} Fullscreen.');
       },
     );
-    _controller.loadVideo(getVideoLinkFromPrivateVideo());
+    _controller.loadVideoById(videoId: getVideoIdFromVideoUrl());
     _controller.listen((event) {
       switch(event.playerState){
         case PlayerState.unknown:
@@ -62,13 +62,10 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
       }
     },);
   }
-  String getVideoLinkFromPrivateVideo(){
+  String getVideoIdFromVideoUrl(){
     String videoLink = widget.videoPlayerModel.link;
-    if(videoLink.contains("youtu.be"))
-      {
-        videoLink = videoLink.replaceAll("youtu.be/", "www.youtube.com/watch?v=");
-      }
-    return videoLink;
+    String? videoId = YoutubePlayerController.convertUrlToId(videoLink);
+    return videoId!;
   }
   @override
   Widget build(BuildContext context) {
