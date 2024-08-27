@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gap/gap.dart';
+import 'package:http/http.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/base/store/save_file.dart';
 import 'package:webkit/base/widgets/common/alert_dialog/loading.export.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
@@ -11,7 +12,6 @@ import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
 import 'package:webkit/services/apis/topic/model/topic_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
-import 'package:webkit/views/apps/file/file_manager.dart';
 import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
 import 'package:webkit/views/course/course_detail/course_study/subject_item_widget.dart';
 import 'package:webkit/views/test/test_detail_work/test_work_page.dart';
@@ -20,8 +20,6 @@ import 'package:webkit/views/vocabulary/vocabulary_detail/vocabulary_view_detail
 import '../../../../base/widgets/audio/audio_speaker.dart';
 import '../../../../helpers/utils/ui_mixins.dart';
 import '../../../../helpers/widgets/my_responsiv.dart';
-import '../../../../helpers/widgets/my_spacing.dart';
-import '../../../../helpers/widgets/my_text_style.dart';
 import '../../../video_player/model/video_model.dart';
 import '../../../video_player/video_player.dart';
 
@@ -40,6 +38,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   late CourseDetailState _state;
   late BuildContext _blocContext;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
 
   @override
   void initState() {
@@ -82,9 +81,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                       constraints: BoxConstraints(
                         minHeight: MediaQuery.of(context).size.height
                       ),
-                      child: SingleChildScrollView(
-                        controller: subjectScrollControllerBar,
-                          child: buildSubjectAndTestList())),
+                      child: buildSubjectAndTestList()),
                   body: Padding(
                     padding:  EdgeInsets.only(top: myScreenMediaType.isMobile?0:50),
                     child: Stack(
@@ -179,7 +176,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildVideo(),
+             // buildVideo(),
               Padding(
                 padding:  EdgeInsets.symmetric(vertical: 16, horizontal: Dimens.size32),
                 child: Column(
@@ -289,7 +286,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ListView.builder(
-                    controller: subjectScrollController,
+                    controller: subjectScrollControllerBar,
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     padding: EdgeInsets.zero,
@@ -363,15 +360,12 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           Gap(Dimens.size16),
           Visibility(
               visible: (_state.selectLessonInfo?.content??'').isNotEmpty,
-              child: WidgetWithColumnTitleCommon(
+              child:  WidgetWithColumnTitleCommon(
                 title: "- ${L10nX.getStr.content_str}: ",
                 titleStyle: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.mainColor),
-                childPadding: EdgeInsets.symmetric(horizontal: Dimens.size24),
-                child: Text(
-                  _state.selectLessonInfo?.content??'',
-                  style: TextStyleConstant.textStyleBlack13w400,
-                ),
-              )),
+                childPadding: EdgeInsets.symmetric(horizontal: Dimens.size24, vertical: Dimens.size16),
+                child: buildLessonContent(_state.selectLessonInfo),),), 
+          Gap(Dimens.size16),
           Visibility(
             visible: (_state.selectLessonInfo?.vocabularies??[]).isNotEmpty,
             child: WidgetWithColumnTitleCommon(
@@ -508,6 +502,58 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   Future<UserProfile?> getProfile() async {
     UserProfile? userInfo = UserManager().getUserProfile();
     return userInfo;
+  }
+  
+  Widget buildLessonContent(LessonInfo? selectLessonInfo){
+    return (selectLessonInfo?.content??'').isNotEmpty?
+     Container(
+      height: Dimens.size600,
+      decoration: BoxDecoration(
+          border: Border.all(
+              color: ColorConst.colorIconGrays, width: 0.2
+          ),
+          borderRadius: BorderRadius.circular(Dimens.size16)
+      ),
+      clipBehavior: Clip.hardEdge,
+      child: SfPdfViewer.network(
+        (selectLessonInfo?.content??''),
+        //key: UniqueKey(),
+        //key: _pdfViewerKey,
+      ),
+    )
+    /*FutureBuilder(builder: (context, snapshot) {
+        if(snapshot.hasData)
+          {
+            return Container(
+              height: Dimens.size600,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: ColorConst.colorIconGrays, width: 0.2
+                ),
+                borderRadius: BorderRadius.circular(Dimens.size16)
+              ),
+              clipBehavior: Clip.hardEdge,
+              child: SfPdfViewer.memory(
+                snapshot.data!,
+                //key: UniqueKey(),
+                //key: _pdfViewerKey,
+              ),
+            );
+          }
+        else {
+          return SizedBox();
+        }
+
+      }, 
+      future:getContentData((selectLessonInfo?.content??'')),
+    )*/: SizedBox();
+  }
+  Future<Uint8List?> getContentData(String url) async {
+    Response res = await get(Uri.parse(url),);
+    if (res.statusCode == 200) {
+      return res.bodyBytes;
+    }
+    return null;
   }
   
 }

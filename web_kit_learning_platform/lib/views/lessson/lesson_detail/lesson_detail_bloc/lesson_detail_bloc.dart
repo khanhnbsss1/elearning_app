@@ -44,6 +44,8 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
     on<LessonDetailUpdateLessonEvent>(_onUpdateLesson);
     on<LessonDetailCreateLessonEvent>(_onCreatedLesson);
     on<LessonDetailUploadDocumentEvent>(_onUploadDocument);
+    on<LessonDetailUploadContentDocEvent>(_onUploadContent);
+
     on<LessonDetailUpdateTestInfoEvent>((event, emit) {
       // TODO: implement event handler
       emit(state.copyWith(
@@ -155,6 +157,30 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
 
   }
 
+  Future<void> _onUploadContent(
+      LessonDetailUploadContentDocEvent event,
+      Emitter<LessonDetailState> emit,
+      ) async {
+    state.blocStatus = LessonDetailStatus.initial;
+    MonitorLoading().showLoading("");
+    UploadFileApi uploadFileApi = UploadFileApi(fileInfo: event.docInfo);
+    UploadFileResponseInfo? data = await uploadFileApi.call();
+    if(data!=null)
+    {
+/*      state.lessonInfo?.docName = event.docInfo.fileName;
+      state.lessonInfo?.docId = data.id;
+      state.lessonInfo?.documentUploadInfo = data;*/
+    state.editingControllerLectureContent?.text = data.link??"";
+      emit(state.copyWith(
+          blocStatus: LessonDetailStatus.onUploadDoc,
+          lessonInfo: state.lessonInfo,
+        editingControllerLectureContent: state.editingControllerLectureContent
+      ));
+    }
+    MonitorLoading().dismiss();
+
+  }
+  
   Future<void> _onLinkAndUnlinkWordToLesson()async {
     if((state.listOfWordAdd??[]).isNotEmpty) /// link là replace luôn nên ko cần unlink nữa
       {

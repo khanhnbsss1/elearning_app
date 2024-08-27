@@ -276,18 +276,26 @@ class _CreateEditLesson extends State<CreateEditLesson>
     );
   }
 
+  bool enableLectureContent = false;
   Widget buildLectureContent({required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
       // title: '${L10nX.getStr.name}: ',
       title: L10nX.getStr.content_str,
       isRequirement: true,
       // titleStyle: ,
+      enableAttachFile: true,
+      onCheckChanged: (bool value) {
+        setState(() {
+          enableLectureContent = value;
+        });
+      },
       child: TextFormField(
-        keyboardType: TextInputType.multiline,
+        keyboardType: TextInputType.url,
         enabled: enableEdit,
         controller: _state.editingControllerLectureContent,
-        minLines: 5,
-        maxLines: 10,
+        minLines: 1,
+        maxLines: 1,
+        readOnly: true,
         decoration: InputDecoration(
           labelText: L10nX.getStr.content_str,
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
@@ -297,6 +305,24 @@ class _CreateEditLesson extends State<CreateEditLesson>
           contentPadding: MySpacing.all(16),
           isCollapsed: true,
           floatingLabelBehavior: FloatingLabelBehavior.never,
+          suffixIcon: Visibility(
+            visible: enableLectureContent,
+            child: IconButton(
+              icon: Icon(Icons.cloud_upload_rounded, color: ColorConst.mainColor,),
+              onPressed: () async {
+                FilePickerResult? result = await FilePicker.platform.pickFiles(
+                    type: FileType.custom, allowedExtensions: ['pdf']);
+                if(result!=null)
+                {
+                  MultipartFile file = MultipartFile.fromBytes(result.files.first.bytes!.toList(growable: true), filename: result.names[0]);
+                  _state.editingControllerLectureContent?.text = file.filename??"";
+                  BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailUploadContentDocEvent(
+                      docInfo: UploadFileInfo(data: SubjectType.documents, file: file)));
+                }
+
+              },
+            ),
+          ),
         ),
       ),
     );

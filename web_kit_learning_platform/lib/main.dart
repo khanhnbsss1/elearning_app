@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:webkit/routes/app_pages.dart';
 import 'package:webkit/routes/routes.dart';
@@ -32,20 +32,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'landing_page/components/colornotifier.dart';
 
 Future<void> main() async {
-  final DateTime startTime = DateTime.now();
-  //SmoothWidgetsFlutterBinding.ensureInitialized(); // add this line
   setPathUrlStrategy();
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  FlutterNativeSplash.remove();
+  WidgetsFlutterBinding.ensureInitialized();
   await initialService();
   AppStyle.init();
   await ThemeCustomizer.init();
 
   ColorConst.setColorByFlavorType();
-  DeviceInfoModel? deviceInfoModel =await DeviceManager().getDeviceInfo();
-  // await Translator.clearTrans();
-  // Translator.getUnTrans();
+  await DeviceManager().getDeviceInfo();
   runApp( 
       MultiBlocProvider(
         providers: [
@@ -58,7 +52,7 @@ Future<void> main() async {
             ChangeNotifierProvider<AppNotifier>(create: (context) => AppNotifier()),
           ],
           builder: (context, child) {
-            return const MyApp();
+            return MyApp();
           },
         )
         
@@ -81,11 +75,11 @@ Future<void> initialService()async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   MyApp({super.key});
+  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    final DateTime startTime = DateTime.now();
     FetchPixels(context);
     ColorConst.setColorByFlavorType();
     return BlocConsumer<MainBloc, MainState>(
