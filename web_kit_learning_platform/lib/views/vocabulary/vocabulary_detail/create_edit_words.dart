@@ -170,9 +170,6 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                       constraints: constraints),
                                 ],
                               ),
-                              SizedBox(
-                                height: 16,
-                              ),
                               Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -208,9 +205,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                   )
                                 ],
                               ),
-                              SizedBox(
-                                width: 16,
-                              ),
+                              Gap(Dimens.size16),
                               Row(
                                 children: [
                                   Expanded(
@@ -232,11 +227,21 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                       },
                                     ),
                                   ),
+                                  Gap(Dimens.size12),
+                                  SizedBox(
+                                    width: Dimens.size200,
+                                    child: customTextFormField1(
+                                      controller: 'category',
+                                      constraints: constraints,
+                                      enable: enable,
+                                      myScreenMediaType: myScreenMediaType,
+                                      label: L10nX.getStr.category_word,
+                                      isLink: false,
+                                    ),
+                                  ),
                                 ],
                               ),
-                              SizedBox(
-                                height: 16,
-                              ),
+                              Gap(Dimens.size16),
                               // box thêm ví dụ mới
                               buildExamplesListForEdit(myScreenMediaType: myScreenMediaType, context: context, state: state),
                               buildExamplesListForView(myScreenMediaType: myScreenMediaType, context: context, state: state),
@@ -428,7 +433,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                   labelText: label,
                   labelStyle: MyTextStyle.bodySmall(xMuted: true),
                   border: outlineInputBorder.copyWith(
-                    borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(Dimens.size16),
                   ),
                   contentPadding: MySpacing.all(16),
                   isCollapsed: true,
@@ -487,15 +492,16 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                         labelText: label,
                         labelStyle: MyTextStyle.bodySmall(xMuted: true),
                         border: outlineInputBorder.copyWith(
-                          borderRadius: BorderRadius.circular(25),
+                          borderRadius: BorderRadius.circular(Dimens.size16),
                         ),
                         contentPadding: MySpacing.all(16),
                         isCollapsed: true,
                         floatingLabelBehavior: FloatingLabelBehavior.never,
+                        constraints: constraints,
                         prefixIcon:  Visibility(
                           visible: (enable??true) && isLink,
                           child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding:  EdgeInsets.all(Dimens.size4),
                                   child: IconButton(
                                     style: TextButton.styleFrom(backgroundColor: notifier.whitecolor, foregroundColor: Colors.white),
                                     onPressed: () async {
@@ -505,7 +511,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                     },
                                     icon: Icon(
                                       Icons.cloud_upload_rounded,
-                                      size: 14,
+                                      size: Dimens.size12,
                                       color: ColorConst.mainColor,
                                     ),
                                   ),
@@ -516,7 +522,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                             Visibility(
                               visible: (enable??true) &&  (_state.addWordController?.basicValidator.getController(controller)?.text != ""),
                               child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding:  EdgeInsets.all(Dimens.size4),
                                   child: IconButton(
                                     onPressed: () {
                                       setState(() {
@@ -525,6 +531,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                     },
                                     icon: Icon(
                                       Icons.close_sharp,
+                                      size:Dimens.size12,
                                       color: ColorConst.colorIconGrays,
                                     ),
                                   ),

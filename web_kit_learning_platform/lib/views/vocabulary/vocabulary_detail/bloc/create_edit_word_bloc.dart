@@ -153,6 +153,8 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     state.vocabularyInfo?.traditional = event.state.addWordController?.basicValidator.getController('traditional')?.text;
     state.vocabularyInfo?.pinyinTones = event.state.addWordController?.basicValidator.getController('pinyin_tones')?.text;
     state.vocabularyInfo?.audio = event.state.addWordController?.basicValidator.getController('audio')?.text;
+    state.vocabularyInfo?.categoryWord = event.state.addWordController?.basicValidator.getController('category')?.text;
+
     state.vocabularyInfo?.translationVn = event.state.addWordController?.basicValidator.getController('translation_vn')?.text;
     state.vocabularyInfo?.createdBy = userProfile?.userName??"";
 
@@ -182,7 +184,7 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     state.vocabularyInfo?.simplified =  event.state.addWordController?.basicValidator.getController('simplified')?.text;
     state.vocabularyInfo?.traditional =  event.state.addWordController?.basicValidator.getController('traditional')?.text;
     state.vocabularyInfo?.translationVn =  event.state.addWordController?.basicValidator.getController('translation_vn')?.text;
-
+    state.vocabularyInfo?.categoryWord = event.state.addWordController?.basicValidator.getController('category')?.text;
     state.vocabularyInfo?.pinyinTones =  event.state.addWordController?.basicValidator.getController('pinyin_tones')?.text;
     state.vocabularyInfo?.audio =  event.state.addWordController?.basicValidator.getController('audio')?.text;
     UpdateWordsApi addWordsApi = UpdateWordsApi(word: state.vocabularyInfo!);
