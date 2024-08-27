@@ -7,11 +7,13 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
+import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/user/user_manager/delete_user_api.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:webkit/views/lessson/components/lesson_item_view.dart';
 import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
@@ -258,7 +260,6 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                     child: InkWell(
                         onTap: () {
                           CreateEditLesson(lessonActionType: ActionType.create,).show(context);
-              
                         },
                         child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
                   ),
@@ -289,10 +290,22 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
       lessonData: state.userListResponseModel?.content??[],
       starIndex: (state.searchCommonRequest?.pageNumber??0)* (state.searchCommonRequest?.pageSize??0),
       onDelete: (p0) {
+        ConfirmPopupPage(
+          content: L10nX.getStr.you_want_remove,
+          onAccept: () async {
+/*            MonitorLoading().showLoading("");
+            DeleteUserApi api = DeleteUserApi(info: p0);
+            dynamic data = await api.call();
+            MonitorLoading().dismiss();
+            if(data.runtimeType == String && (data as String).isEmpty)
+              {
+                BlocProvider.of<UserListBloc>(context).add(UserListInitEvent());
+              }*/
+          },
 
+        ).show(context);
       },
       onEdit: (p0) {
-        //CreateEditLesson(lessonActionType: LessonActionType.edit,lessonInfo: p0,).show(context);
         AppPages.routeName(
             Routes.userEdit,
             arguments: {
@@ -302,7 +315,6 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
             });
       },
       onViewDetail: (p0) {
-       // CreateEditLesson(lessonActionType: LessonActionType.view, lessonInfo: p0,).show(context);
        AppPages.routeName(Routes.userEdit,arguments: {'userProfile': p0, 'actionType': ActionType.view, 'editSelfProfile':false});
     },
     );

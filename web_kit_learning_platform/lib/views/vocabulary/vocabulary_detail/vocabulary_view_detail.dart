@@ -26,6 +26,7 @@ class VocabularyViewDetail extends StatefulWidget{
       },
     );
   }
+  
   VocabularyInfo selectVocabularyInfo;
 
   bool? enableCloseButton;

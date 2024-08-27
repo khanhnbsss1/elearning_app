@@ -12,9 +12,10 @@ import 'bloc/role_detail_bloc.dart';
 
 class CreateEditRole extends StatefulWidget {
    RoleInfo? roleInfo;
-   ActionType? roleActionType;
-   CreateEditRole({super.key, this.roleInfo, this.roleActionType}){
-     roleActionType??= ActionType.create;
+   ActionType? actionType;
+   Function()?callBack;
+   CreateEditRole({super.key, this.roleInfo, this.actionType, this.callBack}){
+     actionType??= ActionType.create;
    }
 
   void show(BuildContext context) {
@@ -51,7 +52,7 @@ class _CreateEditRole extends State<CreateEditRole>
   void initState() {
     // TODO: implement initState
     super.initState();
-    enableEdit = widget.roleActionType!=ActionType.view;
+    enableEdit = widget.actionType!=ActionType.view;
 
   }
   @override
@@ -83,7 +84,7 @@ class _CreateEditRole extends State<CreateEditRole>
   Widget roleDetail() {
     return BlocProvider(
       create: (context) {
-        return RoleDetailBloc(RoleDetailState(roleInfo: widget.roleInfo, roleActionType: widget.roleActionType))
+        return RoleDetailBloc(RoleDetailState(roleInfo: widget.roleInfo, roleActionType: widget.actionType))
           ..add(RoleDetailInitEvent());
       },
       child: BlocConsumer<RoleDetailBloc, RoleDetailState>(
@@ -92,10 +93,19 @@ class _CreateEditRole extends State<CreateEditRole>
             case RoleDetailStatus.initial:
               break;
             case RoleDetailStatus.onCreateRole:
+              if(widget.callBack!=null)
+                {
+                  widget.callBack!();
+                }
               Navigator.of(context).pop();
               break;
             case RoleDetailStatus.onUpdateRole:
+              if(widget.callBack!=null)
+              {
+                widget.callBack!();
+              }
               Navigator.of(context).pop();
+              
               break;
             default:
               break;
@@ -137,7 +147,7 @@ class _CreateEditRole extends State<CreateEditRole>
                                   scrollController: scrollController,
                                   enableEdit: true,
                                   onChangePermission: (p0) {
-                                    
+                                    BlocProvider.of<RoleDetailBloc>(context).add(RoleDetailChangePermissionEvent(permissionListResponseModel: p0!));
                                   },
                                 ),
                               ),
@@ -145,6 +155,51 @@ class _CreateEditRole extends State<CreateEditRole>
                           ))
                         ],
                       ),
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Visibility(
+                          visible: widget.actionType != ActionType.view,
+                          child: ActionButton1(
+                            text: widget.actionType == ActionType.create?L10nX.getStr.create_lesson_str:L10nX.getStr.str_update,
+                            width: Dimens.size150,
+                            onTap: () {
+                              switch(widget.actionType){
+                                case ActionType.view:
+                                // TODO: Handle this case.
+                                  break;
+                                case ActionType.edit:
+                                // TODO: Handle this case.
+                                  {
+                                    BlocProvider.of<RoleDetailBloc>(context).add(RoleDetailUpdateEvent(state: _state));
+                                  }
+                                  break;
+                                case ActionType.create:
+                                // TODO: Handle this case.
+                                  {
+                                    BlocProvider.of<RoleDetailBloc>(context).add(RoleDetailCreateEvent(state: _state));
+                                  }
+                                  break;
+                                default:
+                                  break;
+                              }
+                            },
+                          ),
+                        ),
+                        Gap(Dimens.size20),
+                        ActionButton1(
+                          text: L10nX.getStr.close,
+                          width: Dimens.size80,
+                          enableBgColor: ColorConst.whiteColor,
+                          textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.blackColor),
+                          onTap: () {
+                            Navigator.of(context).pop();
+
+                          },
+                        ),
+                      ],
                     ),
                   ],
                 ),
