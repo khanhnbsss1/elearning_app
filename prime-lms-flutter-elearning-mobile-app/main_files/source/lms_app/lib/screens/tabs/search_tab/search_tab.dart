@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/models/tag.dart';
 import 'package:lms_app/screens/search/search_view.dart';
 import 'package:lms_app/screens/tabs/home_tab/home_categories.dart';
+import 'package:lms_app/screens/tabs/home_tab/search_categories.dart';
 import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/screens/tabs/search_tab/popular_tags.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
@@ -83,7 +84,7 @@ class SearchTab extends ConsumerWidget {
         //   error: (e, x) => Text('error: $e, $x'),
         //   loading: () => const LoadingTile(height: 260),
         // )
-      body: const HomeCategories(),
+      body: const SearchCategories(),
     );
   }
 }

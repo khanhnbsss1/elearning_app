@@ -25,10 +25,11 @@ enum GridStyle { grid, box, list }
 final gridStyleProvider = StateProvider<GridStyle>((ref) => GridStyle.grid);
 
 class AllCoursesView extends ConsumerStatefulWidget {
-  const AllCoursesView({super.key, required this.filter});
+  const AllCoursesView({super.key, required this.filter, this.subFilterId});
 
   // final CourseFilterInfo courseFilterInfo;
   final String filter;
+  final String? subFilterId;
 
   @override
   ConsumerState<AllCoursesView> createState() => _AllCoursesViewState();
@@ -47,7 +48,7 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
     super.initState();
     _controller = ScrollController(initialScrollOffset: 0.0);
     _controller.addListener(_scrollListener);
-    _getCourse(widget.filter, _pageNumber);
+    _getCourse(widget.filter, _pageNumber, widget.subFilterId??"");
   }
 
   _scrollListener() async {
@@ -61,15 +62,15 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
   Future<void> _loadMore() async {
     setState(() {
       _pageNumber++;
-      _getCourse(widget.filter, _pageNumber);
+      _getCourse(widget.filter, _pageNumber, widget.subFilterId??"");
     });
   }
 
   Future<void> _getCourse(
-      String filter, int pageNumber) async {
+      String filter, int pageNumber, String subFilterId) async {
     final List<CourseInfo>? courses = await ApiService()
         .getCourseByCategories(
-            pageNumber: pageNumber, filter: filter.replaceAll(" ", "_"));
+            pageNumber: pageNumber, filter: filter.replaceAll(" ", "_"), subFilterId: subFilterId);
     if (_courses != [] && courses != [] && courses != null) {
       setState(() {
         _isLoading = false;
@@ -89,7 +90,7 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
     _courses.clear();
     _hasData = false;
     setState(() {});
-    await _getCourse(widget.filter, 0);
+    await _getCourse(widget.filter, 0, "");
   }
 
   @override
