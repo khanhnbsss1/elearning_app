@@ -90,6 +90,8 @@ dependencies:
   flutter_phoenix: ^1.1.1
   file_picker: ^8.0.7
 
+dependency_overrides:
+  build_web_compilers: ^4.0.11
 
 dev_dependencies:
   flutter_test:
