@@ -33,7 +33,7 @@ dependencies:
   hive_flutter: ^1.1.0
   salomon_bottom_bar: ^3.3.2
   flutter_riverpod: ^2.5.1
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   google_fonts: ^6.2.1
   line_icons: ^2.0.3
   feather_icons: ^1.2.0
@@ -90,6 +90,8 @@ dependencies:
   flutter_phoenix: ^1.1.1
   file_picker: ^8.0.7
 
+dependency_overrides:
+  build_web_compilers: ^4.0.11
 
 dev_dependencies:
   flutter_test:
