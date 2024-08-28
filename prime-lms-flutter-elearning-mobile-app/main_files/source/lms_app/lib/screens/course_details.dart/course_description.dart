@@ -26,7 +26,7 @@ class CourseDescription extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Text(course.introduction!)
+            Text(course.introduction??"")
           ],
         ),
       ),

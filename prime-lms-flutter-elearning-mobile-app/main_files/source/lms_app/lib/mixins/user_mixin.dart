@@ -27,7 +27,7 @@ mixin UserMixin {
     ref.invalidate(userDataProvider);
     ref.invalidate(homeTabControllerProvider);
     ref.invalidate(navBarIndexProvider);
-    NextScreen.closeOthersAnimation(context, const IntroScreen());
+    NextScreen.closeOthersAnimation(context, const LoginScreen());
   }
 
   bool hasEnrolled(UserProfile? user, CourseInfo course) {

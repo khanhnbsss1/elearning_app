@@ -78,7 +78,6 @@ class ApiService {
           filterType: "ALL",
           pageNumber: 0,
           pageSize: 10,
-          gradeId: 2,
         )
     );
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
@@ -92,25 +91,25 @@ class ApiService {
   }
 
   Future<List<CourseInfo>?> getLatestCourses() async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, categoryId: 2, pageNumber: 0, keyword: ""));
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, pageNumber: 0, keyword: ""));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
 
   Future<List<CourseInfo>?> getRelatedCoursesByCategory(CourseInfo course) async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "CATEGORY", pageSize: 10, categoryId: course.categoryId, pageNumber: 0, keyword: ""));
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "CATEGORY", pageSize: 10, pageNumber: 0, keyword: ""));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
 
   Future<List<CourseInfo>?> getFeaturedCourses() async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, categoryId: 2, pageNumber: 0, keyword: ""));
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, pageNumber: 0, keyword: ""));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
 
   Future<List<CourseInfo>?> getFreeCourses() async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "FREE_COURSE",gradeId: 2, categoryId: 2, pageSize: 10, pageNumber: 0, keyword: "",));
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "FREE_COURSE", pageSize: 10, pageNumber: 0, keyword: "",));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
@@ -150,8 +149,8 @@ class ApiService {
   }
 
   Future<List<CourseInfo>?> getCourseByCategories(
-      {required String filter, required int pageNumber}) async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: (filter != "") ? filter.toUpperCase() : "ALL", pageSize: 10, pageNumber: pageNumber, keyword: "",));
+      {required String filter, required int pageNumber, required String subFilterId}) async {
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: (filter != "") ? filter.toUpperCase() : "ALL",subFilterId: subFilterId, pageSize: 10, pageNumber: pageNumber, keyword: "",));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }

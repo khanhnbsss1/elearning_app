@@ -4,9 +4,8 @@ class SearchCommonRequest {
   int? pageNumber;
   String? filterType;
   String? keyword;
-  int?gradeId;
   int?producerId;
-  int?categoryId;
+  String?subFilterId;
   SearchCommonRequest(
       {
         this.userId,
@@ -14,8 +13,7 @@ class SearchCommonRequest {
         this.pageNumber,
         this.filterType,
         this.keyword,
-        this.gradeId,
-        this.categoryId,
+        this.subFilterId,
         this.producerId
       });
 
@@ -25,8 +23,7 @@ class SearchCommonRequest {
     pageNumber = json['pageNumber'];
     filterType = json['filterType'];
     keyword = json['keyword'];
-    gradeId = json['gradeId'];
-    categoryId = json['categoryId'];
+    subFilterId = json['categoryId'];
     producerId = json['producerId'];
 
   }
@@ -38,9 +35,7 @@ class SearchCommonRequest {
     data['pageNumber'] = pageNumber;
     data['filterType'] = filterType??"ALL";
     data['keyword'] = keyword??"";
-    data['gradeId'] = gradeId;
-    data['gradeId'] = categoryId;
-    data['gradeId'] = producerId;
+    data['subFilterId'] = subFilterId;
     return data;
   }
   SearchCommonRequest copyWith({
@@ -49,7 +44,6 @@ class SearchCommonRequest {
     int? pageNumber,
     String? filterType,
     String? keyword,
-    int?gradeId,
     int?producerId,
     int?categoryId,
   }){
@@ -59,9 +53,8 @@ class SearchCommonRequest {
       pageNumber: pageNumber??this.pageNumber,
       filterType: filterType??this.filterType,
       keyword: keyword??this.keyword,
-      gradeId: gradeId??this.gradeId,
       producerId: producerId??this.producerId,
-      categoryId: categoryId??this.categoryId,
+      subFilterId: subFilterId??this.subFilterId,
 
     );
 }
