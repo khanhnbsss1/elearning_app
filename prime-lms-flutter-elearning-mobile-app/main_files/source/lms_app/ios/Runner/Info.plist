@@ -49,6 +49,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FLTEnableImpeller</key>
+	<false/>
 	<key>FacebookAppID</key>
 	<string>87587487737</string>
 	<key>FacebookClientToken</key>

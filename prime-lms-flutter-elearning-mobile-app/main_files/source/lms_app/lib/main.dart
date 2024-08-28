@@ -36,7 +36,6 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      name: "YAX Chinese",
       options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
   initialService();
