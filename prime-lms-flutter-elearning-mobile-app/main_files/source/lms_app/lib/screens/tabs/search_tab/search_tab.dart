@@ -18,22 +18,20 @@ import '../../../components/loading_tile.dart';
 //   return tags;
 // });
 
-final categoriesProvider =
-    FutureProvider.autoDispose<List<TagsInfo>>((ref) async {
-  final List<TagsInfo> categories = await ApiService().getAllCategories();
-  return categories;
-});
+// final categoriesProvider =
+//     FutureProvider.autoDispose<List<TagsInfo>>((ref) async {
+//   final List<TagsInfo> categories = await ApiService().getAllCategories();
+//   return categories;
+// });
 
 class SearchTab extends ConsumerWidget {
   const SearchTab({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categories = ref.watch(categoriesProvider);
-
+    // final categories = ref.watch(categoriesProvider);
     return Scaffold(
         appBar: AppBar(
-          titleSpacing: 0,
           toolbarHeight: 60,
           title: InkWell(
             onTap: () => NextScreen.iOS(context, const SearchScreen()),

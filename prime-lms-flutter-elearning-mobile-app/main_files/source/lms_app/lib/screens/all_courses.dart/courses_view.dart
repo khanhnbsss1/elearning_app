@@ -25,11 +25,11 @@ enum GridStyle { grid, box, list }
 final gridStyleProvider = StateProvider<GridStyle>((ref) => GridStyle.grid);
 
 class AllCoursesView extends ConsumerStatefulWidget {
-  const AllCoursesView({super.key, required this.filter, this.subFilterId});
+  const AllCoursesView({super.key, required this.filter, this.subFilterInfo});
 
   // final CourseFilterInfo courseFilterInfo;
   final String filter;
-  final String? subFilterId;
+  final SubFilterInfo? subFilterInfo;
 
   @override
   ConsumerState<AllCoursesView> createState() => _AllCoursesViewState();
@@ -48,7 +48,11 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
     super.initState();
     _controller = ScrollController(initialScrollOffset: 0.0);
     _controller.addListener(_scrollListener);
-    _getCourse(widget.filter, _pageNumber, widget.subFilterId??"");
+    if (widget.subFilterInfo != null) {
+      _getCourse(widget.filter, _pageNumber, widget.subFilterInfo!.id.toString());
+    } else {
+      _getCourse(widget.filter, _pageNumber, "");
+    }
   }
 
   _scrollListener() async {
@@ -62,7 +66,11 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
   Future<void> _loadMore() async {
     setState(() {
       _pageNumber++;
-      _getCourse(widget.filter, _pageNumber, widget.subFilterId??"");
+      if (widget.subFilterInfo != null) {
+        _getCourse(widget.filter, _pageNumber, widget.subFilterInfo!.id.toString());
+      } else {
+        _getCourse(widget.filter, _pageNumber, "");
+      }
     });
   }
 
@@ -99,7 +107,7 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
     final gridStyle = ref.watch(gridStyleProvider);
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.filter.replaceAll("_", " ")),
+        title: (widget.subFilterInfo == null) ? Text(widget.filter.replaceAll("_", " ")) : Text(widget.subFilterInfo!.name!.toUpperCase()),
         titleTextStyle: Theme.of(context)
             .textTheme
             .titleMedium

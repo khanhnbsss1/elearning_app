@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../base/instance_mananger/instance_mananger.dart';
+import '../base/instance_mananger_elearning/instance_mananger.dart';
 import '../screens/auth/login.dart';
 
 class MainNavigator {

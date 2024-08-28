@@ -89,6 +89,7 @@ dependencies:
   is_first_run: ^1.0.0
   flutter_phoenix: ^1.1.1
   file_picker: ^8.0.7
+  provider: ^6.1.2
 
 dependency_overrides:
   build_web_compilers: ^4.0.11

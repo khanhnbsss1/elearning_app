@@ -48,20 +48,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   bool offsecureText = true;
   IconData lockIcon = LineIcons.lock;
 
-  // Future _handleLoginWithUsernamePassword() async {
-  //   if (formKey.currentState!.validate()) {
-  //     formKey.currentState!.save();
-  //     _btnController.start();
-  //     final UserCredential? user = await AuthService().loginWithEmailPassword(context, "0348074377", "Ll@123456");
-  //     if (user != null) {
-  //       _btnController.success();
-  //       afterSignIn();
-  //     } else {
-  //       _btnController.reset();
-  //     }
-  //   }
-  // }
-
   Future _handleLoginWithUsernamePassword() async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();

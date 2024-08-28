@@ -35,7 +35,7 @@ class SearchCommonRequest {
     data['pageNumber'] = pageNumber;
     data['filterType'] = filterType??"ALL";
     data['keyword'] = keyword??"";
-    data['subFilterId'] = subFilterId;
+    if (subFilterId != null && subFilterId != "") data['subFilterId'] = subFilterId??"";
     return data;
   }
   SearchCommonRequest copyWith({

@@ -33,6 +33,9 @@ class _UserInfoState extends State<UserInfo> {
     return FutureBuilder(
         future: getProfile(),
         builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const LoadingIndicator(indicatorType: Indicator.ballBeat);
+          } else
           if (snapshot.hasData) {
             UserProfile user = snapshot.data!;
             return Column(

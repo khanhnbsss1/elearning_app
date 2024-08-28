@@ -72,15 +72,14 @@ class ApiService {
 
   Future<List<CourseInfo>?> getMyCourses() async {
     int? userId = UserProfile().id;
-    MyCourseApi getCourseListApi = MyCourseApi(
+    MyCourseApi myCourseApi = MyCourseApi(
         searchCommonRequest: SearchCommonRequest(
           userId: userId,
-          filterType: "ALL",
           pageNumber: 0,
           pageSize: 10,
         )
     );
-    CourseResponseModel courseResponseModel = await getCourseListApi.call();
+    CourseResponseModel courseResponseModel = await myCourseApi.call();
     return courseResponseModel.content??[];
   }
 
@@ -97,7 +96,7 @@ class ApiService {
   }
 
   Future<List<CourseInfo>?> getRelatedCoursesByCategory(CourseInfo course) async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "CATEGORY", pageSize: 10, pageNumber: 0, keyword: ""));
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "CATEGORY", pageSize: 10, pageNumber: 0, keyword: "", subFilterId: course.categoryId.toString()));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
@@ -150,7 +149,12 @@ class ApiService {
 
   Future<List<CourseInfo>?> getCourseByCategories(
       {required String filter, required int pageNumber, required String subFilterId}) async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: (filter != "") ? filter.toUpperCase() : "ALL",subFilterId: subFilterId, pageSize: 10, pageNumber: pageNumber, keyword: "",));
+    GetCourseListApi getCourseListApi;
+    if (subFilterId != "") {
+      getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: (filter != "") ? filter.toUpperCase() : "ALL",subFilterId: subFilterId, pageSize: 10, pageNumber: pageNumber, keyword: "",));
+    } else {
+      getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: (filter != "") ? filter.toUpperCase() : "ALL", pageSize: 10, pageNumber: pageNumber, keyword: "",));
+    }
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }

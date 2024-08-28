@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../base/store/cache_storage.dart';
 import '../../base/utils/key_manager.dart';
+import '../services/navigation_service.dart';
+import 'bloc/main_bloc.dart';
 
 class LanguageHelper{
   static final LanguageHelper _singletonLanguageHelper = LanguageHelper._internal();
@@ -38,10 +40,9 @@ class LanguageHelper{
         return _locale!;
       }
   }
-  void changeLanguage(LanguageInfo language, BuildContext context) {
-    Locale locale = LANGUAGE_MAPS[language.languageIndex]!;
+  void changeLanguage(Locale locale, BuildContext context) {
     // AppNotifier().changeLanguage(language, notify: false);
-    // BlocProvider.of<MainBloc>(NavigationService.globalContext!).add(MainChangeLanguageEvent(locale: locale));
+    BlocProvider.of<MainBloc>(NavigationService.globalContext!).add(MainChangeLanguageEvent(locale: locale));
   }
 }
 

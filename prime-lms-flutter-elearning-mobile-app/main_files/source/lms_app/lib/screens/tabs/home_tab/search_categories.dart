@@ -19,6 +19,7 @@ class SearchCategories extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final courseFilterInfo = ref.watch(courseFilterInfoProvider);
+    SubFilterInfo subFilterInfo = SubFilterInfo();
     final categories = ref.watch(homeCategoriesProvider);
     return (categories.value != null && categories.value!.isNotEmpty)
         ? Container(
@@ -36,26 +37,26 @@ class SearchCategories extends ConsumerWidget {
                           .titleLarge
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ).tr(),
-                    TextButton(
-                      onPressed: () {
-                        ref.read(navBarIndexProvider.notifier).state = 1;
-                        ref
-                            .read(homeTabControllerProvider.notifier)
-                            .state
-                            .animateToPage(1,
-                                duration: const Duration(milliseconds: 250),
-                                curve: Curves.easeIn);
-                      },
-                      style: TextButton.styleFrom(
-                          padding: const EdgeInsets.all(0)),
-                      child: Text(
-                        'view-all',
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ).tr(),
-                    )
+                    // TextButton(
+                    //   onPressed: () {
+                    //     ref.read(navBarIndexProvider.notifier).state = 1;
+                    //     ref
+                    //         .read(homeTabControllerProvider.notifier)
+                    //         .state
+                    //         .animateToPage(1,
+                    //             duration: const Duration(milliseconds: 250),
+                    //             curve: Curves.easeIn);
+                    //   },
+                    //   style: TextButton.styleFrom(
+                    //       padding: const EdgeInsets.all(0)),
+                    //   child: Text(
+                    //     'view-all',
+                    //     style: Theme.of(context).textTheme.bodyMedium,
+                    //   ).tr(),
+                    // )
                   ],
                 ),
-                // const SizedBox(height: 10),
+                const SizedBox(height: 10),
                 categories.when(
                     skipLoadingOnRefresh: false,
                     data: (categories) {
@@ -85,6 +86,7 @@ class SearchCategories extends ConsumerWidget {
                                                 ));
                                             }
                                           },
+                                          backgroundColor: (e.name == courseFilterInfo.name) ? Theme.of(context).primaryColor.withOpacity(0.5) : Colors.white,
                                           elevation: 0,
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 6, horizontal: 6),
@@ -115,13 +117,17 @@ class SearchCategories extends ConsumerWidget {
                                   child: Row(
                                     children: courseFilterInfo.subFilter!
                                         .map((e1) => ActionChip(
-                                              onPressed: () => NextScreen.iOS(
-                                                context,
-                                                AllCoursesView(
-                                                  filter: courseFilterInfo.name??"ALL",
-                                                  subFilterId: e1.id.toString(),
-                                                ),
-                                              ),
+                                              onPressed: () {
+                                                subFilterInfo = e1;
+                                                NextScreen.iOS(
+                                                  context,
+                                                  AllCoursesView(
+                                                    filter: courseFilterInfo
+                                                        .name ?? "ALL",
+                                                    subFilterInfo: e1,
+                                                  ),
+                                                );
+                                              },
                                               elevation: 0,
                                               padding:
                                                   const EdgeInsets.symmetric(
@@ -131,7 +137,7 @@ class SearchCategories extends ConsumerWidget {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           20)),
-                                              label: Text(
+                                      label: Text(
                                                 e1.name!,
                                                 style: Theme.of(context)
                                                     .textTheme

@@ -35,10 +35,11 @@ class CategoriesLayout1 extends StatelessWidget {
               return Column(
                 children: data.map((category) {
                   return InkWell(
-                    onTap: () => NextScreen.iOS(
-                      context,
-                      AllCoursesView(courseBy: CourseBy.category, title: category.name, categoryId: category.id),
-                    ),
+                    // onTap: () => NextScreen.iOS(
+                    //   context,
+                    //   AllCoursesView(courseBy: CourseBy.category, title: category.name, categoryId: category.id),
+                    // ),
+                    onTap: () {},
                     child: Stack(
                       alignment: Alignment.center,
                       children: [

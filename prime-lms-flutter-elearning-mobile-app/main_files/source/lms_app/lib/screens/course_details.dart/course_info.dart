@@ -40,22 +40,22 @@ class CourseInfoScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Row(
-            children: [
-              const Icon(FeatherIcons.calendar, size: 20, color: Colors.blueGrey),
-              const SizedBox(width: 5),
-              Text('last-updated- ${course.updatedAt}', style: Theme.of(context).textTheme.bodyLarge).tr(
-                args: [],
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
+          // Row(
+          //   children: [
+          //     const Icon(FeatherIcons.calendar, size: 20, color: Colors.blueGrey),
+          //     const SizedBox(width: 5),
+          //     Text('last-updated-', style: Theme.of(context).textTheme.bodyLarge).tr(
+          //       args: [AppService.getDate((course.updatedAt ?? course.createdAt) as DateTime)],
+          //     ),
+          //   ],
+          // ),
+          // const SizedBox(height: 8),
           Row(
             children: [
               const Icon(FeatherIcons.globe, size: 20, color: Colors.blueGrey),
               const SizedBox(width: 5),
-              // Text('language-', style: Theme.of(context).textTheme.bodyLarge).tr(args: [course.courseMeta.language.toString()]),
-              Text('language-CN', style: Theme.of(context).textTheme.bodyLarge),
+              Text('language-', style: Theme.of(context).textTheme.bodyLarge).tr(args: [course.language.toString()]),
+              // Text('language', style: Theme.of(context).textTheme.bodyLarge),
             ],
           ),
           const SizedBox(height: 8),
@@ -64,7 +64,7 @@ class CourseInfoScreen extends StatelessWidget {
               const Icon(FeatherIcons.clock, size: 20, color: Colors.blueGrey),
               const SizedBox(width: 5),
               // Text('duration-', style: Theme.of(context).textTheme.bodyLarge).tr(args: [course.courseMeta.duration.toString()]),
-              Text('duration-${course.durian}', style: Theme.of(context).textTheme.bodyLarge),
+              Text('duration-', style: Theme.of(context).textTheme.bodyLarge).tr(args: [course.durian??""]),
             ],
           ),
           const SizedBox(height: 8),
@@ -73,7 +73,7 @@ class CourseInfoScreen extends StatelessWidget {
               const Icon(FeatherIcons.book, size: 20, color: Colors.blueGrey),
               const SizedBox(width: 5),
               // Text('count-lesson', style: Theme.of(context).textTheme.bodyLarge).tr(args: [course.lessonsCount.toString()]),
-              Text('count-lesson-${course.totalLectures}', style: Theme.of(context).textTheme.bodyLarge),
+              Text('count-lesson', style: Theme.of(context).textTheme.bodyLarge).tr(args: [course.totalLectures.toString()]),
             ],
           ),
         ],

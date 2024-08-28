@@ -25,7 +25,8 @@ import '../../../providers/user_data_provider.dart';
 //   return courses;
 // }
 // );
-final myCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>?>((ref) async {
+final myCoursesProvider =
+    FutureProvider.autoDispose<List<CourseInfo>?>((ref) async {
   final List<CourseInfo>? courses = await ApiService().getMyCourses();
   return courses;
 });
@@ -37,17 +38,17 @@ class MyCoursesTab extends ConsumerWidget with CourseMixin {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userDataProvider);
     final courses = ref.watch(myCoursesProvider);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('my-courses').tr(),
-        backgroundColor: Theme.of(context).primaryColor,
-        foregroundColor: Colors.white,
-        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.w600, fontSize: 20, color: Colors.white),
-      ),
-      body: RefreshIndicator.adaptive(
-        onRefresh: () async => await ref.refresh(myCoursesProvider),
-        child: user ==
+    return RefreshIndicator.adaptive(
+      onRefresh: () async => await ref.refresh(myCoursesProvider),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('my-courses').tr(),
+          backgroundColor: Theme.of(context).primaryColor,
+          foregroundColor: Colors.white,
+          titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w600, fontSize: 20, color: Colors.white),
+        ),
+        body: user ==
                 null // || user.enrolledCourses == null || user.enrolledCourses!.isEmpty
             ? const EmptyAnimation(
                 animationString: emptyAnimation, title: 'No courses found')

@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -10,52 +8,53 @@ import 'package:lms_app/base/locale_manager/locale_manager.dart';
 import 'package:lms_app/helper/services/navigation_service.dart';
 import 'package:lms_app/routes/app_routes.dart';
 import 'package:lms_app/screens/auth/login.dart';
-import 'package:lms_app/screens/home/home_view.dart';
 import 'package:lms_app/screens/intro.dart';
-import 'package:lms_app/screens/splash.dart';
 import 'package:lms_app/services/app_service.dart';
-import 'package:lms_app/services/hive_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'base/author/author_manager.dart';
-import 'base/device_elearning/device_manager.dart';
+import 'base/base.export.dart';
 import 'base/firebase_manager/firebase_options.dart';
 import 'base/resizer/fetch_pixels.dart';
 import 'base/store/cache_storage.dart';
 import 'base/theme/colors_app.dart';
-import 'base/utils/file_utils.dart';
 import 'configs/app_config.dart';
 import 'configs/language_config.dart';
 import 'core/app.dart';
 import 'enviroments/flavor_settings.dart';
-import 'generated/l10n.dart';
-import 'helper/localizations/language_helper.dart';
-import 'l10n/l10n_extention.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'helper/localizations/bloc/main_bloc.dart';
+import 'helper/localizations/language_helper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      name: "YAX Chinese",
-      options: DefaultFirebaseOptions.currentPlatform);
+      name: "YAX Chinese", options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
   initialService();
-  // HiveService.initHive();
   AppService.svgPrecacheImage();
   bool firstTimeCheck = await getFirstTime();
-  runApp(ProviderScope(
-      child:EasyLocalization(
-          supportedLocales: LanguageConfig.supportedLocales,
-          path: 'assets/translations',
-          fallbackLocale: LanguageConfig.fallbackLocale,
-          startLocale: LanguageConfig.startLocale,
-          child: MyApp(firstTimeCheck: firstTimeCheck, )),
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider<MainBloc>(
+          create: (_) => MainBloc(MainState(mainStatus: MainStatus.initial))
+            ..add(const MainInitEvent()))
+    ],
+    child: ProviderScope(
+      child: EasyLocalization(
+        supportedLocales: LanguageConfig.supportedLocales,
+        path: 'assets/translations',
+        fallbackLocale: LanguageConfig.fallbackLocale,
+        startLocale: LanguageConfig.startLocale,
+        child: MyApp(
+          firstTimeCheck: firstTimeCheck,
+        ),
+      ),
+    ),
   ));
 }
 
 Future<void> initialService() async {
   await SharedPreferencesStorage().initSharedPreferences();
-  //FirebaseManager.getInstance.initialFirebase();
   await FlavorSettings().setProductTypeByFlavor();
   await AuthorManager().init();
   await ScreenUtil.ensureScreenSize();
@@ -75,11 +74,11 @@ Future<bool> getFirstTime() async {
 class MyApp extends StatefulWidget {
   final bool firstTimeCheck;
   final Function(bool)? onUpdate;
-  const MyApp({super.key,required this.firstTimeCheck, this.onUpdate});
+
+  const MyApp({super.key, required this.firstTimeCheck, this.onUpdate});
 
   @override
   State<MyApp> createState() => _MyAppState();
-
 }
 
 class _MyAppState extends State<MyApp> {
@@ -88,21 +87,40 @@ class _MyAppState extends State<MyApp> {
     FetchPixels(context);
     ColorConst.setColorByFlavorType();
     NavigationService.registerContext(context, update: true);
-    return GetMaterialApp(
-      key: LocaleManager.refreshKey,
-      title: AppConfig.appName,
-      debugShowCheckedModeBanner: false,
-      navigatorObservers: [firebaseObserver],
-      supportedLocales: context.supportedLocales,
-      localizationsDelegates: context.localizationDelegates,
-      locale: context.locale,
-      initialRoute: Routes.splashRoute,
-      routingCallback: (value) {
-        if (kDebugMode) {
-          print(value);
+    return BlocConsumer<MainBloc, MainState>(
+      listener: (context, state) {
+        switch (state.mainStatus) {
+          case MainStatus.initial:
+            break;
+          case MainStatus.onchangeLanguage:
+            state.mainStatus = MainStatus.unKnown;
+            break;
+          case MainStatus.unKnown:
+            break;
         }
       },
-      home: widget.firstTimeCheck ? const LoginScreen(popUpScreen: false,) : const IntroScreen(),
+      builder: (context, state) {
+        return GetMaterialApp(
+          key: Key(LanguageHelper().getCurrentLocale().languageCode),
+          title: AppConfig.appName,
+          debugShowCheckedModeBanner: false,
+          navigatorObservers: [firebaseObserver],
+          supportedLocales: context.supportedLocales,
+          localizationsDelegates: context.localizationDelegates,
+          locale: LanguageHelper().getCurrentLocale(),
+          initialRoute: Routes.splashRoute,
+          routingCallback: (value) {
+            if (kDebugMode) {
+              print(value);
+            }
+          },
+          home: widget.firstTimeCheck
+              ? const LoginScreen(
+                  popUpScreen: false,
+                )
+              : const IntroScreen(),
+        );
+      },
     );
   }
 }

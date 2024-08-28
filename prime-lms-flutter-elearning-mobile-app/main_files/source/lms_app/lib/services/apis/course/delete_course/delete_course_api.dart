@@ -1,8 +1,7 @@
 
-import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
-import 'package:webkit/services/apis/tags/models/tag_info.dart';
 
+import '../../../../base/base_request_elearning/BaseApiRequest.dart';
+import '../course_detail/models/course_detail_model.dart';
 
 class DeleteCourseApi extends BaseApiRequest {
   CourseInfo info;

@@ -23,6 +23,14 @@ class HomeTab extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(appSettingsProvider);
+    ref.invalidate(featuredCoursesProvider);
+    ref.invalidate(homeCategoriesProvider);
+    ref.invalidate(freeCoursesProvider);
+    // ref.invalidate(category1CoursessProvider);
+    // ref.invalidate(category2CoursessProvider);
+    // ref.invalidate(category3CoursessProvider);
+    ref.invalidate(topAuthorsProvider);
+    ref.invalidate(homeLatestCoursesProvider);
     return RefreshIndicator.adaptive(
       displacement: 60,
       onRefresh: () async {
@@ -72,7 +80,7 @@ class HomeTab extends ConsumerWidget {
             child: Column(
               children: [
                 Visibility(visible: settings?.featured ?? true, child: const FeaturedCourses()),
-                Visibility(visible: settings?.categories ?? true, child: const HomeCategories()),
+                // Visibility(visible: settings?.categories ?? true, child: const HomeCategories()),
                 Visibility(visible: settings?.freeCourses ?? true, child: const FreeCourses()),
                 if (settings != null && settings.homeCategory1 != null) Category1Courses(category: settings.homeCategory1!),
                 if (settings != null && settings.homeCategory2 != null) Category2Courses(category: settings.homeCategory2!),

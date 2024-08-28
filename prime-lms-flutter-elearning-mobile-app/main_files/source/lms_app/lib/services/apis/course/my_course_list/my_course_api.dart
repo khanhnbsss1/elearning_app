@@ -16,8 +16,8 @@ class MyCourseApi extends BaseApiRequest {
   Future<dynamic> call() async {
     await getAuthorization();
     dynamic result = await postRequestAPI();
-
-    if(result.runtimeType == ResponseCommon)
+    print(result);
+    if(result.runtimeType == ResponseCommon || result == null)
     {
       return CourseResponseModel(content: []);
     }
