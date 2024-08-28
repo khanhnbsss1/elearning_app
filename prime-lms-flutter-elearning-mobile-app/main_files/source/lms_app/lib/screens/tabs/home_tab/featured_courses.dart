@@ -1,4 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' as carousel_slider;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/loading_tile.dart';
@@ -22,11 +22,11 @@ class FeaturedCourses extends ConsumerWidget {
       skipLoadingOnRefresh: false,
       data: (courses) {
         return (courses != null && courses != []) ?
-        CarouselSlider(
+        carousel_slider.CarouselSlider(
           items: courses.map((course) {
             return FeaturedCourseTile(course: course);
           }).toList(),
-          options: CarouselOptions(
+          options: carousel_slider.CarouselOptions(
             height: 300,
             enableInfiniteScroll: true,
             pageSnapping: true,
@@ -34,7 +34,7 @@ class FeaturedCourses extends ConsumerWidget {
             enlargeFactor: 0.2,
             autoPlay: true,
             enlargeCenterPage: true,
-            enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+            enlargeStrategy: carousel_slider.CenterPageEnlargeStrategy.zoom,
           ),
         ) : const SizedBox();
       },
