@@ -39,7 +39,7 @@ class TitleInfo extends ConsumerWidget {
           ),
           const SizedBox(width: 20),
           Text(
-            'count-students',
+            'total-lectures',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
           ).tr(args: [course.totalLectures.toString()]),
         ],

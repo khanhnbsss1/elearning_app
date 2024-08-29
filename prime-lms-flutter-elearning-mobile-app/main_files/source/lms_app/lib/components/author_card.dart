@@ -59,7 +59,7 @@ class AuthorCard extends StatelessWidget{
           const SizedBox(
             height: 15,
           ),
-          Text('count-students', style: Theme.of(context).textTheme.titleSmall,).tr(args: [students.toString()]),
+          Text('total-lectures', style: Theme.of(context).textTheme.titleSmall,).tr(args: [students.toString()]),
           const SizedBox(
             height: 10,
           ),

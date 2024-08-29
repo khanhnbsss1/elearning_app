@@ -60,7 +60,7 @@ class CourseTile extends StatelessWidget {
                     style: const TextStyle(color: Colors.blueAccent),
                   ),
                   const SizedBox(height: 5),
-                  Text('count-students',
+                  Text('total-lectures',
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium

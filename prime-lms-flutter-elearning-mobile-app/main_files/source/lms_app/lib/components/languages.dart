@@ -60,7 +60,7 @@ class _LanguagesState extends State<Languages> {
                 // final engine = WidgetsFlutterBinding.ensureInitialized();
                 await context.setLocale(locale);
                 // await engine.performReassemble();
-                LanguageHelper().changeLanguage(locale, context);
+                // Get.updateLocale(locale);
               },
             ),
           );

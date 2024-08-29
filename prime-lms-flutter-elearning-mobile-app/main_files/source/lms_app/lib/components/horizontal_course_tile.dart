@@ -72,7 +72,7 @@ class HorizontalCourseTile extends StatelessWidget {
                 RatingViewer(rating: (course.ratePoint ?? 0).toDouble()),
                 const SizedBox(height: 3),
                 Text(
-                  'count-students',
+                  'total-lectures',
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium

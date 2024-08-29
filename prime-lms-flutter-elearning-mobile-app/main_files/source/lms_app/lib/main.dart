@@ -33,21 +33,14 @@ Future<void> main() async {
   initialService();
   AppService.svgPrecacheImage();
   bool firstTimeCheck = await getFirstTime();
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider<MainBloc>(
-          create: (_) => MainBloc(MainState(mainStatus: MainStatus.initial))
-            ..add(const MainInitEvent()))
-    ],
-    child: ProviderScope(
-      child: EasyLocalization(
-        supportedLocales: LanguageConfig.supportedLocales,
-        path: 'assets/translations',
-        fallbackLocale: LanguageConfig.fallbackLocale,
-        startLocale: LanguageConfig.startLocale,
-        child: MyApp(
-          firstTimeCheck: firstTimeCheck,
-        ),
+  runApp(ProviderScope(
+    child: EasyLocalization(
+      supportedLocales: LanguageConfig.supportedLocales,
+      path: 'assets/translations',
+      fallbackLocale: LanguageConfig.fallbackLocale,
+      startLocale: LanguageConfig.startLocale,
+      child: MyApp(
+        firstTimeCheck: firstTimeCheck,
       ),
     ),
   ));
@@ -86,22 +79,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     FetchPixels(context);
     ColorConst.setColorByFlavorType();
+    Get.updateLocale(context.locale);
     NavigationService.registerContext(context, update: true);
-    return BlocConsumer<MainBloc, MainState>(
-      listener: (context, state) {
-        switch (state.mainStatus) {
-          case MainStatus.initial:
-            break;
-          case MainStatus.onchangeLanguage:
-            state.mainStatus = MainStatus.unKnown;
-            break;
-          case MainStatus.unKnown:
-            break;
-        }
-      },
-      builder: (context, state) {
-        return GetMaterialApp(
-          key: Key(LanguageHelper().getCurrentLocale().languageCode),
+    return GetMaterialApp(
           title: AppConfig.appName,
           debugShowCheckedModeBanner: false,
           navigatorObservers: [firebaseObserver],
@@ -120,7 +100,5 @@ class _MyAppState extends State<MyApp> {
                 )
               : const IntroScreen(),
         );
-      },
-    );
   }
 }

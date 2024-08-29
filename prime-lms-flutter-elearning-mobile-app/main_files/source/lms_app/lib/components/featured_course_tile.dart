@@ -75,7 +75,7 @@ class FeaturedCourseTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 3),
                   Text(
-                    'count-students',
+                    'total-lectures',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blueGrey),
                   ).tr(args: [course.totalLectures.toString()]),
                   const SizedBox(height: 3),

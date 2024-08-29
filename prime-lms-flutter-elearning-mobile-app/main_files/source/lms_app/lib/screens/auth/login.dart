@@ -15,6 +15,8 @@ import 'package:lms_app/screens/splash.dart';
 import 'package:lms_app/services/auth_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import '../../components/languages.dart';
+import '../../configs/features_config.dart';
 import '../../controller_elearning/auth/login_controller.dart';
 import '../../l10n/l10n_extention.dart';
 import '../../models/user/UserProfile.dart';
@@ -97,10 +99,23 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  'login',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, fontSize: 28),
-                ).tr(),
+                Row(
+                  children: [
+                    Text(
+                      'login',
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, fontSize: 28),
+                    ).tr(),
+                    Spacer(),
+                    Visibility(
+                      visible: isMultilanguageEnbled,
+                      child: IconButton(
+                        padding: const EdgeInsets.only(right: 10),
+                        icon: const Icon(LineIcons.language),
+                        onPressed: () => NextScreen.openBottomSheet(context, const Languages()),
+                      ),
+                    )
+                  ],
+                ),
                 const SizedBox(
                   height: 5,
                 ),
