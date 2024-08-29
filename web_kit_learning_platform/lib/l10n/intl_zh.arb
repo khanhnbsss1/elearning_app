@@ -639,5 +639,7 @@
   "report_new_registered_account": "新注册者",
   "role_edit_str": "编辑角色",
   "role_create_str": "创建新角色",
-  "inactive_str": "不活动"
+  "inactive_str": "不活动",
+  "title_str": "页面",
+  "you_are_ready_register_this_course": "您确定要注册此课程吗？"
 }

@@ -6419,6 +6419,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Title`
+  String get title_str {
+    return Intl.message(
+      'Title',
+      name: 'title_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to register for this course?`
+  String get you_are_ready_register_this_course {
+    return Intl.message(
+      'Are you sure you want to register for this course?',
+      name: 'you_are_ready_register_this_course',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

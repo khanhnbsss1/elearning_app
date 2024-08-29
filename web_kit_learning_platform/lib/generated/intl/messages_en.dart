@@ -738,6 +738,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Login with face"),
         "title_popup_fingerprint":
             MessageLookupByLibrary.simpleMessage("Login with fingerprint"),
+        "title_str": MessageLookupByLibrary.simpleMessage("Title"),
         "title_text": MessageLookupByLibrary.simpleMessage("Title text"),
         "toast": MessageLookupByLibrary.simpleMessage("Toast"),
         "toast_text": MessageLookupByLibrary.simpleMessage("toast_text"),
@@ -879,6 +880,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Are you sure you want to close the test, the test results will not be saved!"),
         "you_are_ready_finish_test": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn nộp bài !"),
+        "you_are_ready_register_this_course":
+            MessageLookupByLibrary.simpleMessage(
+                "Are you sure you want to register for this course?"),
         "you_are_ready_title_close_test":
             MessageLookupByLibrary.simpleMessage("Cancel the test"),
         "you_correct_number":

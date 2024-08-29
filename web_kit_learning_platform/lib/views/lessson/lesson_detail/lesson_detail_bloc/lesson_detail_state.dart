@@ -9,6 +9,7 @@ enum LessonDetailStatus {
   onUpdateLesson,
   onUpdateTestInfo,
   onChangeLesson,
+  onAddVideo,
   unKnown
 }
 
@@ -28,6 +29,7 @@ class LessonDetailState extends Equatable {
   TextEditingController? editingControllerLectureDocuments ;
   TestInfo? testInfo;
   ValueNotifier<CategoryInfo?>? valueListenable = ValueNotifier<CategoryInfo?>(null);
+  int? videoIndex = 0;
 
   LessonDetailState({
     this.blocStatus,
@@ -42,7 +44,8 @@ class LessonDetailState extends Equatable {
     this.editingControllerLectureName,
     this.editingControllerLectureVideoLink,
     this.testInfo,
-    this.valueListenable
+    this.valueListenable,
+    this.videoIndex
   }){
     listOfWord??=[];
     listOfWordAdd??=[];
@@ -53,6 +56,7 @@ class LessonDetailState extends Equatable {
     editingControllerLectureDocuments??=TextEditingController();
     editingControllerLectureContent??=TextEditingController();
     valueListenable ??= ValueNotifier<CategoryInfo?>(null);
+    videoIndex??=0;
   }
 
 
@@ -69,7 +73,8 @@ class LessonDetailState extends Equatable {
     TextEditingController? editingControllerLectureVideoLink,
     TextEditingController? editingControllerLectureDocuments,
     TestInfo? testInfo,
-    ValueNotifier<CategoryInfo?>? valueListenable
+    ValueNotifier<CategoryInfo?>? valueListenable,
+    int? videoIndex
   })
   {
     return LessonDetailState(
@@ -86,6 +91,7 @@ class LessonDetailState extends Equatable {
       editingControllerLectureDocuments: editingControllerLectureDocuments??this.editingControllerLectureDocuments,
       testInfo: testInfo??this.testInfo,
       valueListenable: valueListenable??this.valueListenable,
+      videoIndex: videoIndex??this.videoIndex,
 
 
     );
@@ -103,7 +109,8 @@ class LessonDetailState extends Equatable {
     editingControllerLectureVideoLink,
     editingControllerLectureDocuments,
     testInfo,
-    valueListenable
+    valueListenable,
+    videoIndex
   ];
 
 }

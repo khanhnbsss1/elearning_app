@@ -1,17 +1,15 @@
 
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 
 
-class UpdateLessonStatusApi extends BaseApiRequest {
+class UnlockCourseApi extends BaseApiRequest {
   int courseId;
-  int lectureId;
-  int? progress;
-  
-  UpdateLessonStatusApi({required this.courseId, required this.lectureId, this.progress}):super(
-    serviceType: SERVICE_TYPE.USER,
-    apiName: ApiName.getInstance().updateLessonStatus,
+  int? payment;
+
+  UnlockCourseApi({required this.courseId, this.payment}):super(
+    serviceType: SERVICE_TYPE.Payments,
+    apiName: ApiName.getInstance().unlockCourse,
   );
 
   Future<dynamic> call() async {
@@ -26,12 +24,11 @@ class UpdateLessonStatusApi extends BaseApiRequest {
 
   Future<void> getAuthorization() async {
     UserProfile? userProfile = UserManager().getUserProfile();
-    progress??= 0;
+    payment??= 0;
     await setApiBody({
-      "studentId" : userProfile?.id,
       "courseId" : courseId,
-      "lectureId": lectureId,
-      "progress": progress
+      "userId": userProfile?.id,
+      "payment": payment
     });
   }
 

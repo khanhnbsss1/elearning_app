@@ -183,11 +183,11 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                     L10nX.getStr.subject_name_str,
                     overflow: TextOverflow.ellipsis,
                   ))),
-          GridColumn(
+        /*  GridColumn(
               columnName: L10nX.getStr.lecture_link_str,
               minimumWidth: Dimens.size300,
               label: Container(padding: EdgeInsets.all(8.0), alignment: Alignment.center, child: Text(L10nX.getStr.lecture_link_str))),
-          GridColumn(
+*/          GridColumn(
               columnName: L10nX.getStr.document_str, minimumWidth: Dimens.size200, label: Container(padding: EdgeInsets.all(8.0), alignment: Alignment.center, child: Text(L10nX.getStr.document_str))),
           GridColumn(
               columnName: L10nX.getStr.word_str,
@@ -473,13 +473,13 @@ class LessonDataSource extends DataGridSource {
                 softWrap: true,
                 style: TextStyleConstant.textStyleBlack14w400,
               )),
-          DataGridCell<Widget>(
+/*          DataGridCell<Widget>(
               columnName: L10nX.getStr.lecture_link_str,
               value: Text(
                 e.link ?? "",
                 softWrap: true,
                 style: TextStyleConstant.textStyleBlack14w400,
-              )),
+              )),*/
           DataGridCell<Widget>(
               columnName: L10nX.getStr.document_str,
               value: Text(

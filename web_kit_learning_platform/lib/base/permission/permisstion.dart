@@ -26,7 +26,7 @@ class PermissionManager {
 
   Future<PermissionListResponseModel?> getPermissionModel({bool? isRefresh}) async{
     isRefresh??=false;
-    if(permissionResponseModel==null || isRefresh)
+    if(permissionResponseModel==null || (permissionResponseModel?.content??[]).isEmpty || isRefresh)
       {
         UserProfile? userProfile = UserManager().getUserProfile();
         GetPermissionListByRoleApi courseApi = GetPermissionListByRoleApi(roleId: userProfile?.roleId);

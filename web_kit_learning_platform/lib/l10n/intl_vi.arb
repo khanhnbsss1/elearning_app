@@ -644,5 +644,7 @@
   "report_new_registered_account": "Người đăng ký mới",
   "role_edit_str": "Chỉnh sửa vai trò",
   "role_create_str": "Tạo mới vai trò",
-  "inactive_str": "Chưa kích hoạt"
+  "inactive_str": "Chưa kích hoạt",
+  "title_str": "Tiêu đề",
+  "you_are_ready_register_this_course": "Bạn có chắc chăn muốn đăng ký khóa học này"
 }

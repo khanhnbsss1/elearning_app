@@ -41,6 +41,34 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
         lessonInfo: event.lessonInfo
       ));
     });
+    on<LessonDetailOnAddVideoInfoEvent>((event, emit) {
+      // TODO: implement event handler
+      state.videoIndex = state.videoIndex! +1;
+      state.lessonInfo?.videoInfos?.link?.add(VideoInfo(order: state.videoIndex, videoTitle: "", videoLink: ""));
+      emit(state.copyWith(
+          blocStatus: LessonDetailStatus.onChangeLesson,
+          lessonInfo: state.lessonInfo
+      ));
+    });
+    on<LessonDetailOnRemoveVideoInfoEvent>((event, emit) {
+      // TODO: implement event handler
+      (state.lessonInfo?.videoInfos?.link??[]).removeWhere((element) => element.order == event.videoInfo.order,);
+      emit(state.copyWith(
+          blocStatus: LessonDetailStatus.onChangeLesson,
+          lessonInfo: state.lessonInfo
+      ));
+    });
+
+    on<LessonDetailOnUpdateVideoInfoEvent>((event, emit) {
+      // TODO: implement event handler
+     int index =  (state.lessonInfo?.videoInfos?.link??[]).indexWhere((element) => element.order == event.videoInfo.order,);
+     (state.lessonInfo?.videoInfos?.link??[])[index] = event.videoInfo;
+      emit(state.copyWith(
+          blocStatus: LessonDetailStatus.onChangeLesson,
+          lessonInfo: state.lessonInfo
+      ));
+    });
+    
     on<LessonDetailUpdateLessonEvent>(_onUpdateLesson);
     on<LessonDetailCreateLessonEvent>(_onCreatedLesson);
     on<LessonDetailUploadDocumentEvent>(_onUploadDocument);
@@ -73,20 +101,28 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
         state.editingControllerLectureName?.text = state.lessonInfo?.lectureName??"";
         state.editingControllerLectureDescription?.text = state.lessonInfo?.note??"";
         state.editingControllerLectureContent?.text = state.lessonInfo?.content??"";
-        state.editingControllerLectureVideoLink?.text = state.lessonInfo?.link??"";
+        //state.editingControllerLectureVideoLink?.text = state.lessonInfo?.link??"";
         state.editingControllerLectureDocuments?.text = state.lessonInfo?.docName??"";
         state.testInfo = TestInfo(id: state.lessonInfo?.testId, name: state.lessonInfo?.testName);
         CategoryListResponseModel? categoryListResponseModel = await FilterManager().getCategoryFilter();
         if((categoryListResponseModel?.content??[]).where((element) => element.id == state.lessonInfo?.categoryId).isNotEmpty) {
           state.valueListenable?.value = (categoryListResponseModel?.content??[]).firstWhere((element) => element.id == state.lessonInfo?.categoryId);
         }
-        
+      }
+    if((state.lessonInfo?.videoInfos?.link??[]).isEmpty)
+      {
+        (state.lessonInfo?.videoInfos?.link??[]).add(VideoInfo(order: 0,videoLink: "",videoTitle: ""));
+      }
+    else
+      {
+        state.videoIndex = (state.lessonInfo?.videoInfos?.link??[]).last.order!;
       }
     emit(state.copyWith(
       blocStatus: LessonDetailStatus.initial,
       testInfo: state.testInfo,
       lessonInfo: state.lessonInfo,
-      listOfWord: state.listOfWord
+      listOfWord: state.listOfWord,
+      videoIndex: state.videoIndex
     ));
   }
   Future<void> _onUpdateLesson(
@@ -94,10 +130,18 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
       Emitter<LessonDetailState> emit,
       ) async {
     state.blocStatus = LessonDetailStatus.initial;
+    
     if(state.lessonInfo?.id!=null)
     {
       MonitorLoading().showLoading("");
-      UpdateLessonApi getLessonDetailApi = UpdateLessonApi(lessonInfo: event.lessonInfo);
+      state.lessonInfo = event.lessonInfo;
+      if(!validateVideoInfo())
+      {
+        ToastUtils.showToastError("Vui lòng hoàn thành tất cả thông tin video");
+        MonitorLoading().dismiss();
+        return;
+      }
+      UpdateLessonApi getLessonDetailApi = UpdateLessonApi(lessonInfo: state.lessonInfo!);
       dynamic data = await getLessonDetailApi.call();
       if(data.runtimeType==String && (data as String).isEmpty)
       {
@@ -119,7 +163,14 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
       ) async {
       state.blocStatus = LessonDetailStatus.initial;
       MonitorLoading().showLoading("");
-      AddLessonApi getLessonDetailApi = AddLessonApi(lessonInfo: event.lessonInfo);
+      state.lessonInfo = event.lessonInfo;
+      if(!validateVideoInfo())
+        {
+          ToastUtils.showToastError("Vui lòng hoàn thành tất cả thông tin video");
+          MonitorLoading().dismiss();
+          return;
+        }
+      AddLessonApi getLessonDetailApi = AddLessonApi(lessonInfo: state.lessonInfo!);
       dynamic data = (await getLessonDetailApi.call());
       if(data.runtimeType == int )
         {
@@ -132,7 +183,6 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
           ));
         }
     MonitorLoading().dismiss();
-
   }
 
   Future<void> _onUploadDocument(
@@ -167,9 +217,6 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
     UploadFileResponseInfo? data = await uploadFileApi.call();
     if(data!=null)
     {
-/*      state.lessonInfo?.docName = event.docInfo.fileName;
-      state.lessonInfo?.docId = data.id;
-      state.lessonInfo?.documentUploadInfo = data;*/
     state.editingControllerLectureContent?.text = data.link??"";
       emit(state.copyWith(
           blocStatus: LessonDetailStatus.onUploadDoc,
@@ -201,6 +248,21 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
       LinkTestToLessonApi linkWordApi = LinkTestToLessonApi(lessonId: state.lessonInfo?.id??0, testId: state.testInfo?.id??0);
       dynamic linkData = await linkWordApi.call();
     }
+  }
+  
+  bool validateVideoInfo(){
+    for(int order=0; order< (state.lessonInfo?.videoInfos?.link??[]).length; order++){
+     
+      if(!(state.lessonInfo?.videoInfos?.link??[])[order].isValidate())
+        {
+          return false;
+        }
+      else
+        {
+          (state.lessonInfo?.videoInfos?.link??[])[order].order = order;
+        }
+    }
+    return true;
   }
 }
 

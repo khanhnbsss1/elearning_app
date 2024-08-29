@@ -616,6 +616,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "title_popup_faceid": MessageLookupByLibrary.simpleMessage("刷脸登录"),
         "title_popup_fingerprint":
             MessageLookupByLibrary.simpleMessage("使用指纹登录"),
+        "title_str": MessageLookupByLibrary.simpleMessage("页面"),
         "title_text": MessageLookupByLibrary.simpleMessage("标题文本"),
         "toast": MessageLookupByLibrary.simpleMessage("Toast"),
         "toast_text": MessageLookupByLibrary.simpleMessage("toast_text"),
@@ -736,6 +737,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("您确定要关闭测试，测试结果将不会被保存！"),
         "you_are_ready_finish_test":
             MessageLookupByLibrary.simpleMessage("您确定要提交测试吗？"),
+        "you_are_ready_register_this_course":
+            MessageLookupByLibrary.simpleMessage("您确定要注册此课程吗？"),
         "you_are_ready_title_close_test":
             MessageLookupByLibrary.simpleMessage("取消测试"),
         "you_correct_number": MessageLookupByLibrary.simpleMessage("正确句子的数量"),
