@@ -28,7 +28,8 @@ import 'helper/localizations/language_helper.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      name: "YAX Chinese", options: DefaultFirebaseOptions.currentPlatform);
+      //name: "YAX Chinese",
+      options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
   initialService();
   AppService.svgPrecacheImage();
