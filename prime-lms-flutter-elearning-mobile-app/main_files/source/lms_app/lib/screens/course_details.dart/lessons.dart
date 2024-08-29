@@ -58,7 +58,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                     const SizedBox(height: 4,),
                     InkWell(onTap: (){
                       NextScreen.normal(context, Vocabulary(course: course, sectionId: index));
-                    }, child: Text('Vocabulary', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w400, fontSize: 16))),
+                    }, child: Text('vocabulary', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w400, fontSize: 16)).tr()),
                   ],
                 ),
                 leading: Text(

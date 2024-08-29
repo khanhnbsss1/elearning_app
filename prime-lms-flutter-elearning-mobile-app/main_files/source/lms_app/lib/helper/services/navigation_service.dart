@@ -1,15 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:lms_app/base/instance_mananger_elearning/instance_mananger.dart';
 
+import 'package:flutter/material.dart';
+
 class NavigationService {
   static BuildContext? globalContext;
 
-  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  static final NavigationService _instance = NavigationService._internal();
+  NavigationService._internal();
 
-  static void registerContext(BuildContext context, {bool update = false}) {
-    if (globalContext == null || update) {
-      globalContext = context;
-      InstanceManager().navigatorKey = NavigationService.navigatorKey ;
-    }
+  factory NavigationService() => _instance;
+
+  final GlobalKey<NavigatorState> navigationKey = GlobalKey<NavigatorState>();
+
+  dynamic goBack([dynamic popValue]) {
+    return navigationKey.currentState?.pop(popValue);
   }
+
+  Future<dynamic> navigateToScreen(Widget page, {arguments}) async => navigationKey.currentState?.push(
+    MaterialPageRoute(
+      builder: (_) => page,
+    ),
+  );
+
+  Future<dynamic> replaceScreen(Widget page, {arguments}) async => navigationKey.currentState?.pushReplacement(
+    MaterialPageRoute(
+      builder: (_) => page,
+    ),
+  );
+
+  void popToFirst() => navigationKey.currentState?.popUntil((route) => route.isFirst);
 }
+

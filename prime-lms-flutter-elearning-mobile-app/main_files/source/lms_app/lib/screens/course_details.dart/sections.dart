@@ -15,7 +15,7 @@ final sectionsProvider = FutureProvider.autoDispose.family<List<Section>, String
   return sections;
 });
 //
-// final isSectionExpnadedProvider = StateProvider.autoDispose.family<bool, String>((ref, sectionId) => false);
+final isSectionExpnadedProvider = StateProvider.autoDispose.family<bool, String>((ref, sectionId) => false);
 
 class Sections extends ConsumerWidget {
   const Sections({super.key, required this.course, required this.isInitialSectionOpen});
@@ -57,49 +57,9 @@ class Sections extends ConsumerWidget {
             ),
             initiallyExpanded: index == 0 && isInitialSectionOpen ? true : false,
             children: [Lessons(course: course,)],
-            // onExpansionChanged: (bool value) => ref.read(isSectionExpnadedProvider(section.id).notifier).update((state) => value),
+            onExpansionChanged: (bool value) => ref.read(isSectionExpnadedProvider((section.id??0).toString()).notifier).update((state) => value),
           );
         },
       );
-    // Set<String> listOfSectionName = <String>{};
-    // if (course.lectures != null) {
-    //   course.lectures!.forEach((e) {
-    //     if (e.subName != null) {
-    //       listOfSectionName.add(e.subName!);
-    //     }
-    //   });
-    // }
-    // return ListView.separated(
-    //   padding: const EdgeInsets.symmetric(vertical: 20),
-    //   itemCount: listOfSectionName.length,
-    //   shrinkWrap: true,
-    //   physics: const NeverScrollableScrollPhysics(),
-    //   separatorBuilder: (context, index) => const SizedBox(height: 20),
-    //   itemBuilder: (BuildContext context, int index) {
-    //     return ExpansionTile(
-    //       tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-    //       collapsedShape: RoundedRectangleBorder(
-    //         borderRadius: BorderRadius.circular(5),
-    //         side: BorderSide(color: CustomColor.border),
-    //       ),
-    //       shape: RoundedRectangleBorder(
-    //         borderRadius: BorderRadius.circular(5),
-    //         side: BorderSide(color: CustomColor.border),
-    //       ),
-    //       maintainState: true,
-    //       title: Text(
-    //         '${index + 1}. ${listOfSectionName.elementAt(index)}',
-    //         style: Theme.of(context).textTheme.titleMedium?.copyWith(
-    //             fontWeight: FontWeight.w600,
-    //             color:Theme.of(context).expansionTileTheme.textColor,
-    //             fontSize: 17
-    //         ),
-    //       ),
-    //       initiallyExpanded: index == 0 && isInitialSectionOpen ? true : false,
-    //       children: [Lessons(course: course, lessonId: (index + 1).toString())],
-    //       // onExpansionChanged: (bool value) => ref.read(isSectionExpnadedProvider(section.id).notifier).update((state) => value),
-    //     );
-    //   },
-    // );
   }
 }

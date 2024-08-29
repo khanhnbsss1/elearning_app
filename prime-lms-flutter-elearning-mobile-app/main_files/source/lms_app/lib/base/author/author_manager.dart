@@ -15,7 +15,6 @@ class AuthorManager {
   AuthorManager._internal();
 
   static const String _loggedInUserKey = "isLoggedIn";
-  static const String _themeCustomizerKey = "theme_customizer";
   bool allowCallRefreshToken = true;
   bool isLoggedIn= false;
   Future<void> init() async {

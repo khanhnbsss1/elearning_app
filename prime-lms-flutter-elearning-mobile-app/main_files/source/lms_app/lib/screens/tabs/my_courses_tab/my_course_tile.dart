@@ -22,7 +22,7 @@ class MyCourseTile extends StatelessWidget with UserMixin {
     final heroTag = UniqueKey();
     // List validIds = user.completedLessons!.where((element) => element.toString().contains(course.id.toString())).toList();
     // final double courseProgress = validIds.isEmpty ? 0 : (validIds.length / (course.totalLectures != 0 ? (course.totalLectures??0).toDouble() : 1));
-    final String courseProgressString =  "50"; //(courseProgress * 100).toStringAsFixed(0);
+    const String courseProgressString =  "50"; //(courseProgress * 100).toStringAsFixed(0);
 
     return InkWell(
       onTap: () => NextScreen.iOS(context, CourseDetailsView(courses: course, heroTag: heroTag)),

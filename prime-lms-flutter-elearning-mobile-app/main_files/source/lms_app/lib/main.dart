@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:lms_app/base/locale_manager/locale_manager.dart';
+import 'package:lms_app/helper/navigator_key.dart';
 import 'package:lms_app/helper/services/navigation_service.dart';
 import 'package:lms_app/routes/app_routes.dart';
 import 'package:lms_app/screens/auth/login.dart';
@@ -75,23 +75,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  static final navigatorKey = GlobalKey<NavigatorState>();
-
   @override
   Widget build(BuildContext context) {
-    FetchPixels(context);
-    ColorConst.setColorByFlavorType();
     Get.updateLocale(context.locale);
-    NavigationService.registerContext(context, update: true);
     return GetMaterialApp(
-          key: navigatorKey,
+          navigatorKey: NavigationService().navigationKey,
           title: AppConfig.appName,
           debugShowCheckedModeBanner: false,
           navigatorObservers: [firebaseObserver],
           supportedLocales: context.supportedLocales,
           localizationsDelegates: context.localizationDelegates,
           locale: LanguageHelper().getCurrentLocale(),
-          initialRoute: Routes.splashRoute,
           routingCallback: (value) {
             if (kDebugMode) {
               print(value);

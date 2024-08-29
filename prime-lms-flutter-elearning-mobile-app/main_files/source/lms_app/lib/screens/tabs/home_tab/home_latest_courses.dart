@@ -24,6 +24,7 @@ class HomeLatestCourses extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final courses = ref.watch(homeLatestCoursesProvider);
     return courses.when(
+        skipLoadingOnRefresh: false,
         data: (courses) {
           return (courses.isNotEmpty) ? Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),

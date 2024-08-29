@@ -24,6 +24,7 @@ class TopAuthors extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authors = ref.watch(topAuthorsProvider);
     return authors.when(
+        skipLoadingOnRefresh: false,
         data: (data) {
           return (data!.isNotEmpty) ? Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),

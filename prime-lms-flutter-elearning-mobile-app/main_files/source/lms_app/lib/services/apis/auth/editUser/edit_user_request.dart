@@ -9,6 +9,7 @@ class EditUserRequest {
   String? birthday;
   String? phoneNumber;
   String? typeName;
+  String? countryName;
 
   EditUserRequest(
       {this.avatar,
@@ -20,7 +21,9 @@ class EditUserRequest {
         this.gender,
         this.birthday,
         this.phoneNumber,
-        this.typeName});
+        this.typeName,
+        this.countryName,
+      });
 
   EditUserRequest.fromJson(Map<String, dynamic> json) {
     avatar = json['avatar'];
@@ -33,6 +36,7 @@ class EditUserRequest {
     birthday = json['birthday'];
     phoneNumber = json['phone_number'];
     typeName = json['type_name'];
+    countryName = json['country_name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -47,6 +51,7 @@ class EditUserRequest {
     data['birthday'] = birthday;
     data['phone_number'] = phoneNumber;
     data['type_name'] = typeName;
+    data['country_name'] = countryName;
     return data;
   }
 }

@@ -61,9 +61,9 @@ class EditProfileController extends MyController {
       controller: TextEditingController(),
     );
     basicValidator.addField(
-      'phone_number',
+      'country_name',
       required: true,
-      label: 'Phone number',
+      label: 'Country name',
       controller: TextEditingController(),
     );
     basicValidator.getController('image')!.text = userProfile.imageUrl??"";
@@ -71,7 +71,7 @@ class EditProfileController extends MyController {
     basicValidator.getController('bank_name')!.text = userProfile.bankName??"";
     basicValidator.getController('bank_account')!.text = userProfile.bankAccount??"";
     basicValidator.getController('identity_id')!.text = userProfile.identityId??"";
-    basicValidator.getController('phone_number')!.text = userProfile.phoneNumber??"";
+    basicValidator.getController('country_name')!.text = userProfile.countryName??"";
   }
 
   Future<void> updateImage(UploadFileInfo uploadFileinfo) async {
@@ -86,15 +86,17 @@ class EditProfileController extends MyController {
 
   Future<bool> onUpdate() async {
     EditUserRequest editUserRequest = EditUserRequest(
+      avatar: userProfile.avatar,
       typeName: userProfile.typeName??"User",
       userName: userProfile.userName??"User",
       fullname: basicValidator.getController('fullname')?.text,
       bankAccount: basicValidator.getController('bank_account')?.text,
       bankName: basicValidator.getController('bank_name')?.text,
-      identityId: basicValidator.getController('identity_id')!.text,
-      gender: userProfile.gender??"male",
-      birthday: userProfile.birthday??"",
-      phoneNumber: basicValidator.getController('phone_number')!.text,
+      identityId: basicValidator.getController('identity_id')?.text,
+      gender: userProfile.gender??userProfile.gender,
+      birthday: userProfile.birthday??userProfile.birthday,
+      countryName: basicValidator.getController('country_name')?.text,
+      phoneNumber: userProfile.phoneNumber,
     );
     EditUserApi editUserApi = EditUserApi(editUserRequest: editUserRequest);
     bool data = await editUserApi.call();

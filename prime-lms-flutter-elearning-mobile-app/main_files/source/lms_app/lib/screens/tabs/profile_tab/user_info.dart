@@ -68,7 +68,7 @@ class _UserInfoState extends State<UserInfo> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(user.email ?? ""),
+                      Text(user.countryName ?? ""),
                     ],
                   ),
                   leading: UserAvatar(

@@ -2,9 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lms_app/constants/custom_colors.dart';
+import 'package:lms_app/helper/navigator_key.dart';
+import 'package:lms_app/routes/app_routes.dart';
+import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/services/app_service.dart';
+import '../helper/services/navigation_service.dart';
 import '../routes/app_pages.dart';
-import '../routes/app_routes.dart';
 import '../services/apis/course/course_detail/models/course_detail_model.dart';
 import 'rating_bar.dart';
 import '../models/course.dart';
@@ -23,7 +26,8 @@ class FeaturedCourseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final heroTag = UniqueKey();
     return InkWell(
-      onTap: () =>            AppPages.route(Routes.loginRoute, isReplace: true),
+      // onTap: () => NextScreen.iOS(context, CourseDetailsView(courses: course, heroTag: heroTag)),
+      onTap: () => NavigationService().navigateToScreen(LoginScreen(popUpScreen: false,)),
       child: Container(
         width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),

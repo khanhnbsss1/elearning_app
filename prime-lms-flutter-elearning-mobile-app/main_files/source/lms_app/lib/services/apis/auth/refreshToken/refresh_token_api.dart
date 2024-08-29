@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:lms_app/base/base.export.dart';
 import 'package:lms_app/base/device_elearning/device_manager.dart';
 import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
-import 'package:lms_app/base/locale_manager/locale_manager.dart';
+import 'package:lms_app/helper/services/navigation_service.dart';
+import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/services/apis/auth/login/models/login_response.dart';
 
 import '../../../../base/author/author_manager.dart';
@@ -30,16 +32,18 @@ class RefreshTokenApi extends BaseApiRequest {
        else
          {
            /// neu refresh token het han thi out ra ngoai landing page
-           ToastUtils.showToastError(data.message??"");
            AuthorManager().handleLogout();
-           navigatorKey;
+           NavigationService().navigateToScreen(const LoginScreen(popUpScreen: false,));
+           ToastUtils.showToastError(data.message??"");
          }
 
      }
    else
      {
        /// neu refresh token het han thi out ra ngoai landing page
+       ToastUtils.showToastError(data.message??"");
        AuthorManager().handleLogout();
+       NavigationService().navigateToScreen(const LoginScreen(popUpScreen: false,));
        // AppPages.routeName(Routes.landingPageRoute, isReplace: true);
      }
   }

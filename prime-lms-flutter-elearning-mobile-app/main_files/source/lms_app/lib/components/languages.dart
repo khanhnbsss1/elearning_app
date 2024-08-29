@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:lms_app/base/locale_manager/locale_manager.dart';
 import 'package:lms_app/helper/localizations/language_helper.dart';
 import '../main.dart';
 import 'country_flag.dart';

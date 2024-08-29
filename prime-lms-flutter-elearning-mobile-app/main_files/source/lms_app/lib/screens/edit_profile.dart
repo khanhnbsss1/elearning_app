@@ -205,7 +205,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                 ),
               ),
               const SizedBox(height: 10),
-              const Text('Phone number'),
+              const Text('Country name'),
               const SizedBox(
                 height: 10,
               ),
@@ -215,9 +215,9 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                     : CustomColor.container,
                 child: TextFormField(
                   controller: editProfileController.basicValidator
-                      .getController('phone_number'),
+                      .getController('country_name'),
                   decoration: const InputDecoration(
-                    hintText: 'Enter your phone number',
+                    hintText: 'Enter your country name',
                     border: InputBorder.none,
                     contentPadding:
                     EdgeInsets.symmetric(horizontal: 20, vertical: 12),
