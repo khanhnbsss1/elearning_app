@@ -80,13 +80,13 @@ class SearchCategories extends ConsumerWidget {
                                             // ),
                                             onPressed: () {
                                               ref.read(courseFilterInfoProvider.notifier).state = e;
-                                              // if (e.subFilter?.length == 0) {
-                                              //   return NextScreen.normal(
-                                              //     context,
-                                              //     AllCoursesView(
-                                              //       filter: e.name ?? "",
-                                              //     ));
-                                              // }
+                                              if (e.subFilter?.length == 0) {
+                                                return NextScreen.normal(
+                                                  context,
+                                                  AllCoursesView(
+                                                    filter: e.name ?? "",
+                                                  ));
+                                              }
                                             },
                                             backgroundColor: (e.name == courseFilterInfo.name) ? Theme.of(context).primaryColor.withOpacity(0.5) : Colors.white,
                                             elevation: 0,
@@ -101,7 +101,7 @@ class SearchCategories extends ConsumerWidget {
                                                   .textTheme
                                                   .titleMedium
                                                   ?.copyWith(
-                                                      fontSize: 16,
+                                                      fontSize: 13,
                                                       fontWeight: FontWeight.w600),
                                             ),
                                           ),
@@ -118,38 +118,41 @@ class SearchCategories extends ConsumerWidget {
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
                                       children: courseFilterInfo.subFilter!
-                                          .map((e1) => ActionChip(
-                                                onPressed: () {
-                                                  subFilterInfo = e1;
-                                                  // NextScreen.iOS(
-                                                  //   context,
-                                                  //   AllCoursesView(
-                                                  //     filter: courseFilterInfo
-                                                  //         .name ?? "ALL",
-                                                  //     subFilterInfo: e1,
-                                                  //   ),
-                                                  // );
-                                                },
-                                                elevation: 0,
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 2,
-                                                        horizontal: 2),
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20)),
-                                        label: Text(
-                                                  e1.name!,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleMedium
-                                                      ?.copyWith(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w600),
+                                          .map((e1) => Padding(
+                                            padding: const EdgeInsets.only(right: 4.0),
+                                            child: ActionChip(
+                                                  onPressed: () {
+                                                    subFilterInfo = e1;
+                                                    NextScreen.iOS(
+                                                      context,
+                                                      AllCoursesView(
+                                                        filter: courseFilterInfo
+                                                            .name ?? "ALL",
+                                                        subFilterInfo: e1,
+                                                      ),
+                                                    );
+                                                  },
+                                                  elevation: 0,
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                          vertical: 2,
+                                                          horizontal: 2),
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20)),
+                                                                                    label: Text(
+                                                    e1.name!,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleMedium
+                                                        ?.copyWith(
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight.w600),
+                                                  ),
                                                 ),
-                                              ))
+                                          ))
                                           .toList(),
                                     ),
                                   )
