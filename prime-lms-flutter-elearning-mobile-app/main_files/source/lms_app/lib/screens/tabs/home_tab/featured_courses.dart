@@ -21,7 +21,7 @@ class FeaturedCourses extends ConsumerWidget {
     return courses.when(
       skipLoadingOnRefresh: false,
       data: (courses) {
-        return (courses != null && courses != []) ?
+        return (courses!.isNotEmpty) ?
         carousel_slider.CarouselSlider(
           items: courses.map((course) {
             return FeaturedCourseTile(course: course);

@@ -11,7 +11,7 @@ import '../../home/home_view.dart';
 
 final homeCategoriesProvider = FutureProvider.autoDispose<List<CourseFilterInfo>?>((ref) async {
   final List<CourseFilterInfo>? categories = await ApiService().getHomeCategories();
-  return categories;
+  return categories??[];
 });
 
 class HomeCategories extends ConsumerWidget {

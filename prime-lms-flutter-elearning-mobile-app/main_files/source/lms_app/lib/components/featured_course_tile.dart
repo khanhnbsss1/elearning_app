@@ -26,8 +26,7 @@ class FeaturedCourseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final heroTag = UniqueKey();
     return InkWell(
-      // onTap: () => NextScreen.iOS(context, CourseDetailsView(courses: course, heroTag: heroTag)),
-      onTap: () => NavigationService().navigateToScreen(LoginScreen(popUpScreen: false,)),
+      onTap: () => NextScreen.iOS(context, CourseDetailsView(courses: course, heroTag: heroTag)),
       child: Container(
         width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),

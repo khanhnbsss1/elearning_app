@@ -22,7 +22,7 @@ class SearchCategories extends ConsumerWidget {
     final courseFilterInfo = ref.watch(courseFilterInfoProvider);
     SubFilterInfo? subFilterInfo = SubFilterInfo();
     final categories = ref.watch(homeCategoriesProvider);
-    return (categories.value != null && categories.value!.isNotEmpty)
+    return (categories.hasValue == true)
         ? Container(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
             child: SingleChildScrollView(
