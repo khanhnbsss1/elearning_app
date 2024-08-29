@@ -32,7 +32,7 @@ class RefreshTokenApi extends BaseApiRequest {
            /// neu refresh token het han thi out ra ngoai landing page
            ToastUtils.showToastError(data.message??"");
            AuthorManager().handleLogout();
-           LocaleManager.handleLocaleChanged();
+           navigatorKey;
          }
 
      }

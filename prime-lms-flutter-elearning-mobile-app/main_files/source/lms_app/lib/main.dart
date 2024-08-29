@@ -75,6 +75,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  static final navigatorKey = GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     FetchPixels(context);
@@ -82,7 +84,7 @@ class _MyAppState extends State<MyApp> {
     Get.updateLocale(context.locale);
     NavigationService.registerContext(context, update: true);
     return GetMaterialApp(
-          key: LocaleManager.refreshKey,
+          key: navigatorKey,
           title: AppConfig.appName,
           debugShowCheckedModeBanner: false,
           navigatorObservers: [firebaseObserver],

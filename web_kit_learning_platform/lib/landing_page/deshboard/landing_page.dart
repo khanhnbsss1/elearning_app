@@ -700,7 +700,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                   maxLines: 2,
                 ),
                 SizedBox(
-                  height: Dimens.size10,
+                  height: (ResponsiveInfo.isPhone())?Dimens.size10 : Dimens.size20,
                 ),
                 Text(
                   content ?? "",
