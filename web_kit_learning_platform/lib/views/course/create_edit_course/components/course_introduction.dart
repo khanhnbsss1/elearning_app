@@ -240,18 +240,15 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
             buildPaymentWidget(state: state, context: context),
             SizedBox(
                 width: maxWidthRow*2.6,
-                child: WidgetWithColumnTitleCommon(
-                  title: L10nX.getStr.primary_course,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      buildActive(state: state, context: context),
-                      Gap(Dimens.size20),
-                      buildStandard(state: state, context: context),
-                      Gap(Dimens.size20),
-                      Expanded(child: buildAccompanyCourse(state: state, context: context)),
-                    ],
-                  ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    buildActive(state: state, context: context),
+                    Gap(Dimens.size20),
+                    buildStandard(state: state, context: context),
+                    Gap(Dimens.size20),
+                    Expanded(child: buildAccompanyCourse(state: state, context: context)),
+                  ],
                 )),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -777,7 +774,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         ),
         crossAxisAlignment: CrossAxisAlignment.end,
         child: Text(
-          ' ${L10nX.getStr.active_course}',
+          ' ${L10nX.getStr.active_course} ${L10nX.getStr.course_str.toLowerCase()}',
           style: TextStyleConstant.textStyleBlack14w400,
         ));
   }

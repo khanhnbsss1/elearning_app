@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:webkit/base/services/base_request/models/page_model.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
@@ -44,7 +46,6 @@ class LessonInfo {
   String? subName;
   String? lectureName;
   String? docLink;
-  String? link;
   int? docId;
   String? docName;
   String? mode;
@@ -62,11 +63,12 @@ class LessonInfo {
   List<VocabularyInfo>? vocabularies;
   int? videoDuration;// bien nay chi set khi play video tren web
   bool? isFinnish;
+  LinkInfo? videoInfos;
+  VideoInfo? selectVideoInfo;
   LessonInfo(
       {this.id,
         this.subName,
         this.lectureName,
-        this.link,
         this.docId,
         this.docName,
         this.mode,
@@ -84,14 +86,28 @@ class LessonInfo {
         this.isFinnish,
         this.content,
         this.gradeId,
-        this.categoryId
-      });
+        this.categoryId,
+        this.videoInfos,
+        this.selectVideoInfo
+      }){
+    videoInfos??=LinkInfo(link: []);
+  }
 
   LessonInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     subName = json['sub_name'];
     lectureName = json['lecture_name']?? json['name'];
-    link = json['lecture_link']??json['link'];
+    videoInfos = LinkInfo(link: []);
+    if((json['lecture_link']??json['link']??'').isNotEmpty)
+      {
+        try{
+          videoInfos = LinkInfo.fromJson(jsonDecode(json['lecture_link']??json['link']??''));
+        }
+        catch(e){
+          videoInfos = LinkInfo(link: [VideoInfo(order: 0, videoTitle: "", videoLink:(json['lecture_link']??json['link']??'') )]);
+        }
+        selectVideoInfo??= (videoInfos?.link??[]).isNotEmpty?(videoInfos?.link??[]).first: VideoInfo(videoLink: "", order: 0, videoTitle: "");
+      }
     docId = json['doc_id'];
     docName = json['doc_name'];
     mode = json['mode']??json['lecture_mode'];
@@ -114,7 +130,6 @@ class LessonInfo {
     testId = json['test_id'];
     categoryId = json['category_id'];
     gradeId = json['grade_id'];
-    
     testName = json['test_name'];
     if (json['vocabularies'] != null) {
       vocabularies = <VocabularyInfo>[];
@@ -122,6 +137,7 @@ class LessonInfo {
         vocabularies!.add(new VocabularyInfo.fromJson(v));
       });
     }
+    
   }
 
   Map<String, dynamic> toJson() {
@@ -141,8 +157,8 @@ class LessonInfo {
 /*    if(docName!=null&&docName!.isNotEmpty) {
       data['doc_name'] = docName;
     }*/
-    if(link!=null) {
-      data['link'] = link;
+    if(videoInfos!=null) {
+      data['link'] = jsonEncode(videoInfos?.toJson());
     }
 /*    if(docLink!=null&&docLink!.isNotEmpty) {
       data['doc_link'] = docLink;
@@ -156,8 +172,8 @@ class LessonInfo {
     if(testId!=null) {
       data['test_id'] = testId;
     }
-    data['grade_id'] = gradeId??1;
-    data['category_id'] = categoryId??1;
+    data['grade_id'] = gradeId;
+    data['category_id'] = categoryId;
     
     if(note!=null || content!=null ) {
       data['note'] = "$note&&&&---&&&&$content";
@@ -165,3 +181,53 @@ class LessonInfo {
     return data;
   }
 }
+
+
+class LinkInfo {
+  List<VideoInfo>? link;
+
+  LinkInfo({this.link});
+
+  LinkInfo.fromJson(Map<String, dynamic> json) {
+    if (json['link'] != null) {
+      link = <VideoInfo>[];
+      json['link'].forEach((v) {
+        link!.add(new VideoInfo.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (link != null) {
+      data['link'] = link!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+class VideoInfo {
+  int? order;
+  String? videoTitle;
+  String? videoLink;
+  bool? isFinish;
+
+  VideoInfo({this.order, this.videoTitle, this.videoLink, this.isFinish});
+
+  VideoInfo.fromJson(Map<String, dynamic> json) {
+    order = json['order'];
+    videoTitle = json['videoTitle'];
+    videoLink = json['videoLink'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['order'] = order;
+    data['videoTitle'] = videoTitle;
+    data['videoLink'] = videoLink;
+    return data;
+  }
+  bool isValidate(){
+    return (videoTitle??'').isNotEmpty && (videoLink??'').isNotEmpty;
+  }
+}
+

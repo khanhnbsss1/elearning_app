@@ -644,5 +644,7 @@
   "report_new_registered_account": "New registrant",
   "role_edit_str": "Edit role",
   "role_create_str": "Create new role",
-  "inactive_str": "Inactive"
+  "inactive_str": "Inactive",
+  "title_str": "Title",
+  "you_are_ready_register_this_course": "Are you sure you want to register for this course?"
 }

@@ -224,7 +224,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
               Gap(Dimens.size20),
 
               Visibility(
-                visible: position < 2 && state.courseInfo?.id != 0,
+                visible: position < 1 && state.courseInfo?.id != 0,
                 child: ActionButton1(
                   text: L10nX.getStr.next,
                   onTap: () {

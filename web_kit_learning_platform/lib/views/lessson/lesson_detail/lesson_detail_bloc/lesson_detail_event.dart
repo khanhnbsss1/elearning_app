@@ -60,3 +60,20 @@ class LessonDetailUploadContentDocEvent extends LessonDetailEvent {
   @override
   List<Object?> get props => [docInfo];
 }
+class LessonDetailOnAddVideoInfoEvent extends LessonDetailEvent {
+  LessonDetailOnAddVideoInfoEvent();
+  @override
+  List<Object?> get props => [];
+}
+class LessonDetailOnRemoveVideoInfoEvent extends LessonDetailEvent {
+  VideoInfo videoInfo;
+  LessonDetailOnRemoveVideoInfoEvent({required this.videoInfo});
+  @override
+  List<Object?> get props => [videoInfo];
+}
+class LessonDetailOnUpdateVideoInfoEvent extends LessonDetailEvent {
+  VideoInfo videoInfo;
+  LessonDetailOnUpdateVideoInfoEvent({required this.videoInfo});
+  @override
+  List<Object?> get props => [videoInfo];
+}

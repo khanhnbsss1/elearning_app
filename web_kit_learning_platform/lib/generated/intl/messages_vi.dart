@@ -731,6 +731,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đăng nhập bằng khuôn mặt"),
         "title_popup_fingerprint":
             MessageLookupByLibrary.simpleMessage("Đăng nhập bằng vân tay"),
+        "title_str": MessageLookupByLibrary.simpleMessage("Tiêu đề"),
         "title_text": MessageLookupByLibrary.simpleMessage("Văn bản tiêu đề"),
         "toast": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "toast_text": MessageLookupByLibrary.simpleMessage("toast_text"),
@@ -875,6 +876,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn có chắc chắn muốn đóng bài kiểm tra, kết quả làm bài sẽ không được lưu lại !"),
         "you_are_ready_finish_test": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn nộp bài !"),
+        "you_are_ready_register_this_course":
+            MessageLookupByLibrary.simpleMessage(
+                "Bạn có chắc chăn muốn đăng ký khóa học này"),
         "you_are_ready_title_close_test":
             MessageLookupByLibrary.simpleMessage("Hủy bỏ bài kiểm tra"),
         "you_correct_number":

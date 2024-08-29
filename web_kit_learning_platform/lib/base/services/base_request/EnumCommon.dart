@@ -4,7 +4,8 @@ class CommonEnviroment {
 
 const Map<DOMAIN_TYPE, String> LIVE_DOMAIN = {
   //DOMAIN_TYPE.MAIN: "http://192.168.66.186:8989/api/",
-  DOMAIN_TYPE.MAIN: "https://navitrack.fft.com.vn:8888/api/",
+   //DOMAIN_TYPE.MAIN: "https://navitrack.fft.com.vn:8888/api/",
+  DOMAIN_TYPE.MAIN: "http://fft.camdvr.org:5000/api/",
   DOMAIN_TYPE.PAYMENT: "https://navitrack.fft.com.vn:8899/api/",
 };
 
@@ -54,7 +55,8 @@ enum SERVICE_TYPE {
   Storage,
   Scores,
   DashBoard,
-  Claim
+  Claim,
+  Payments
 }
 
 const Map<SERVICE_TYPE, String> SERVICE = {
@@ -75,7 +77,8 @@ const Map<SERVICE_TYPE, String> SERVICE = {
   SERVICE_TYPE.GRADE: "Grades",
   SERVICE_TYPE.CATEGORY: "Categories",
   SERVICE_TYPE.DashBoard: "DashBoard",
-  SERVICE_TYPE.Claim: "Claim"
+  SERVICE_TYPE.Claim: "Claim",
+  SERVICE_TYPE.Payments: "payments"
 
 };
 

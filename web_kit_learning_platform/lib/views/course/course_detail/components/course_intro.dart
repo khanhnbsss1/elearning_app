@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
+import 'package:webkit/services/apis/payment/unlock_course_api.dart';
 import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
 
 import '../../../../helpers/widgets/my_text.dart';
@@ -148,10 +150,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
               ActionButton1(
                 text: (state.courseInfo?.isPayment??false)?L10nX.getStr.lets_study: L10nX.getStr.register_now,
                 onTap: () {
-                  Navigator.of(context).pop();
-                  CourseStudy1(
-                    courseInfo: state.courseInfo!,
-                  ).show(context);
+                  registeredCourse(state: state);
                 },
               ),
             ],
@@ -198,9 +197,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
               ActionButton1(
                 text: (state.courseInfo?.isPayment??false)?L10nX.getStr.lets_study: L10nX.getStr.register_now,
                 onTap: () {
-                  CourseStudy1(
-                    courseInfo: state.courseInfo!,
-                  ).show(context);
+                  registeredCourse(state: state);
                 },
               ),
       
@@ -570,10 +567,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                           ActionButton1(
                             text: (state.courseInfo?.isPayment??false)?L10nX.getStr.lets_study: L10nX.getStr.register_now,
                             onTap: () {
-                              Navigator.of(context).pop();
-                              CourseStudy1(
-                                courseInfo: state.courseInfo!,
-                              ).show(context);
+                              registeredCourse(state: state);
                             },
                           ),
                         ],
@@ -590,5 +584,27 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
         ),
       ],
     );
+  }
+  
+  void registeredCourse({required CourseDetailState state}){
+    if(state.courseInfo?.isPayment??false){
+      Navigator.of(context).pop();
+      CourseStudy1(
+        courseInfo: state.courseInfo!,
+      ).show(context);
+    }
+    else
+      {
+        ConfirmPopupPage(
+          title: "${L10nX.getStr.register} ${L10nX.getStr.course_str.toLowerCase()}",
+          content: L10nX.getStr.you_are_ready_register_this_course,
+          onAccept: () {
+            Navigator.of(context).pop();
+            CourseStudy1(
+              courseInfo: state.courseInfo!,
+            ).show(context);
+          },
+        ).show(context);
+      }
   }
 }

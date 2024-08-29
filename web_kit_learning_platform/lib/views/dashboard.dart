@@ -468,7 +468,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
           return MyFlex(
             runAlignment: WrapAlignment.start,
             wrapCrossAlignment: WrapCrossAlignment.start,
-            contentPadding: false,
+            contentPadding: true,
             children: [
               MyFlexItem(
                 sizes: "lg-4",
@@ -1029,6 +1029,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisSize: MainAxisSize.max,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

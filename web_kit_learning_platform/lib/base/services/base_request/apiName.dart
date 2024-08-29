@@ -123,5 +123,9 @@ class ApiName {
   final String editRoles = "/edit-role";
   final String deleteRoles = "/delete-role";
 
+  
+  /// payment
+  final String unlockCourse = "/unlock-course";
+
 }
 

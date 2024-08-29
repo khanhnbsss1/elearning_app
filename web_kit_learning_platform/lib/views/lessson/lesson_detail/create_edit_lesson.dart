@@ -6,7 +6,6 @@ import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/constant/dimens_constant.dart';
 import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:file_picker/file_picker.dart';
@@ -136,7 +135,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
                             MySpacing.height(16),
                             buildLectureContent(context: context),
                             MySpacing.height(16),
-                            buildLectureVideoLink(context: context),
+                            buildLectureVideoLink(context: context, state: state),
                             MySpacing.height(16),
                             buildLectureDocuments(context: context),
                             MySpacing.height(16),
@@ -175,7 +174,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
                           state.lessonInfo?.lectureName = state.editingControllerLectureName?.text;
                           state.lessonInfo?.note = state.editingControllerLectureDescription?.text;
                           state.lessonInfo?.content = state.editingControllerLectureContent?.text;
-                          state.lessonInfo?.link = state.editingControllerLectureVideoLink?.text;
+                         // state.lessonInfo?.link = state.editingControllerLectureVideoLink?.text;
                           state.lessonInfo?.docName = state.editingControllerLectureName?.text;
                           state.lessonInfo?.mode = mode;
                           switch(widget.lessonActionType){
@@ -329,10 +328,23 @@ class _CreateEditLesson extends State<CreateEditLesson>
   }
 
   bool enableLectureLink = false;
-  Widget buildLectureVideoLink({required BuildContext context}) {
+  Widget buildLectureVideoLink({required BuildContext context, required LessonDetailState state}) {
     return WidgetWithColumnTitleCommon(
       // title: '${L10nX.getStr.name}: ',
-      title: L10nX.getStr.youtube_link,
+      titleWidget: Row(
+        children: [
+          Text(L10nX.getStr.youtube_link,style: TextStyleConstant.textStyleBlack14w600,),
+          Gap(Dimens.size8),
+          Center(
+            child: InkWell(
+              onTap: () {
+                BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailOnAddVideoInfoEvent());
+              },
+              child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size20,),
+            ),
+          )
+        ],
+      ),
       isRequirement: true,
       enableAttachFile: false,
       enable: enableEdit,
@@ -342,42 +354,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
         });
       },
       // titleStyle: ,
-      child: TextFormField(
-        // validator: state.controller?.basicValidator.getValidation('name'),
-        // controller: state.controller?.basicValidator.getController('name'),
-        keyboardType: TextInputType.text,
-        controller: _state.editingControllerLectureVideoLink,
-        enabled: enableEdit,
-        decoration: InputDecoration(
-          labelText: 'Link or youtube',
-          labelStyle: MyTextStyle.bodySmall(xMuted: true),
-          border: outlineInputBorder,
-          prefixIcon: Icon(
-            LucideIcons.video,
-            size: 20,
-            color: ColorConst.colorIconRed,
-          ),
-          contentPadding: MySpacing.all(16),
-          isCollapsed: true,
-          floatingLabelBehavior: FloatingLabelBehavior.never,
-          suffixIcon: Visibility(
-            visible: enableLectureLink,
-            child: IconButton(
-              icon: Icon(Icons.upload_file),
-              onPressed: () async {
-                FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['png', 'jpg']);
-                MultipartFile file = MultipartFile.fromBytes(
-                    result!.files.first.bytes!.toList(growable: true),
-                    filename: result.names[0]);
-                setState(() {
-                  // state.controller?.basicValidator.getController('image')?.text = result.files.first.name ?? "";
-                });
-                // BlocProvider.of<LessonDetailBloc>(context).add(AddCourseUploadImageEvent(uploadFileInfo: UploadFileInfo(data: SubjectType.courses, file: file)));
-              },
-            ),
-          ),
-        ),
-      ),
+      child: buildVideoList(state: state , context: context),
     );
   }
 
@@ -435,7 +412,6 @@ class _CreateEditLesson extends State<CreateEditLesson>
       ),
     );
   }
-
   Widget buildLectureMode({required BuildContext context, required LessonDetailState state}) {
     return ModeOptionWidget(mode: '',
       onModeChanged: (String? value)
@@ -522,6 +498,166 @@ class _CreateEditLesson extends State<CreateEditLesson>
       },
       enable: state.lessonActionType != ActionType.view,
       inputGradeId: state.lessonInfo?.gradeId
+    );
+  }
+  
+  Widget buildVideoList({required BuildContext context, required LessonDetailState state}){
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(Dimens.size16),
+        border: Border.all(color: ColorConst.colorIconGrays, width: 0.2)
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: (state.lessonInfo?.videoInfos?.link??[]).length,
+            itemBuilder: (context, index) {
+              VideoInfo videoInfo = (state.lessonInfo?.videoInfos?.link??[]).elementAt(index);
+              return LessonVideoItem(
+                videoInfo: videoInfo, 
+                onchangeVideoInfo: (p0) {
+                  BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailOnUpdateVideoInfoEvent(videoInfo: p0));
+                },
+                enableEdit: state.lessonActionType != ActionType.view,
+                onRemove: (p0) {
+                  BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailOnRemoveVideoInfoEvent(videoInfo: p0));
+                },
+              );
+            },),
+        ],
+      )
+    );
+  }
+}
+
+class LessonVideoItem extends StatefulWidget{
+  VideoInfo videoInfo;
+  Function(VideoInfo)? onchangeVideoInfo, onRemove;
+  bool? enableEdit;
+  LessonVideoItem({required this.videoInfo, this.onchangeVideoInfo, this.enableEdit, this.onRemove});
+
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return LessonVideoItemState();
+  }
+
+  
+}
+class LessonVideoItemState extends State<LessonVideoItem> with UIMixin{
+  FocusNode focusNodeTitle = FocusNode();
+  FocusNode focusNodeLink = FocusNode();
+  TextEditingController controllerTitle = TextEditingController();
+  TextEditingController controllerLink = TextEditingController();
+  
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    controllerTitle.text = widget.videoInfo.videoTitle??"";
+    controllerLink.text = widget.videoInfo.videoLink??"";
+
+    focusNodeTitle.addListener(() {
+      if(focusNodeTitle.hasFocus)
+        {
+          if(widget.onchangeVideoInfo!=null)
+          {
+            widget.onchangeVideoInfo!(widget.videoInfo);
+          }
+        }
+    },);
+    focusNodeLink.addListener(() {
+      if(focusNodeLink.hasFocus)
+      {
+        if(widget.onchangeVideoInfo!=null)
+        {
+          widget.onchangeVideoInfo!(widget.videoInfo);
+        }
+      }
+    },);
+  }
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    controllerTitle.text = widget.videoInfo.videoTitle??"";
+    controllerLink.text = widget.videoInfo.videoLink??"";
+  }
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: TextFormField(
+              keyboardType: TextInputType.text,
+              focusNode: focusNodeTitle,
+              enabled:widget.enableEdit,
+              controller: controllerTitle,
+              onChanged: (value) {
+                widget.videoInfo.videoTitle = value;
+                if(widget.onchangeVideoInfo!=null)
+                {
+                  widget.onchangeVideoInfo!(widget.videoInfo);
+                }
+              },
+              decoration: InputDecoration(
+                labelText: L10nX.getStr.title_str,
+                labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                border: outlineInputBorder,
+                prefixIcon: Icon(
+                  Icons.tag,
+                  size: Dimens.size15,
+                  color: ColorConst.colorIconRed,
+                ),
+                contentPadding: MySpacing.all(16),
+                isCollapsed: true,
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+              ),
+            ),),
+          Gap(Dimens.size20),
+          Expanded(
+            child: TextFormField(
+              keyboardType: TextInputType.url,
+              focusNode: focusNodeLink,
+              controller: controllerLink,
+              enabled: widget.enableEdit,
+              onChanged: (value) {
+                widget.videoInfo.videoLink = value;
+                if(widget.onchangeVideoInfo!=null)
+                {
+                  widget.onchangeVideoInfo!(widget.videoInfo);
+                }
+              },
+              decoration: InputDecoration(
+                labelText: L10nX.getStr.video_link,
+                labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                border: outlineInputBorder,
+                prefixIcon: Icon(
+                  LucideIcons.link,
+                  size: Dimens.size15,
+                  color: ColorConst.colorIconRed,
+                ),
+                contentPadding: MySpacing.all(16),
+                isCollapsed: true,
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+              ),
+            ),),
+          IconButton(onPressed: () {
+            if(widget.onRemove!=null)
+              {
+                widget.onRemove!(widget.videoInfo);
+              }
+          }, icon: Icon(
+            Icons.delete_forever,
+            color: ColorConst.mainColor,))
+        ],
+      ),
     );
   }
 }

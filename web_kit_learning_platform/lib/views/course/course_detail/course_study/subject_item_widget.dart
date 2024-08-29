@@ -211,7 +211,7 @@ class TestItemWidgetState extends State<TestItemWidget>{
           child: Container(
             padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size16),
             decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: ColorConst.blackColor, width: 0.2))
+                border: Border(bottom: BorderSide(color: ColorConst.blackColor, width: 0.2), top: BorderSide(color: ColorConst.blackColor, width: 0.2))
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,

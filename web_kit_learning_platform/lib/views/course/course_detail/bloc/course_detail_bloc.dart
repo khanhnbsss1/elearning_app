@@ -74,7 +74,11 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
       return;
     }
     state.awaitCallApi =true;
-    UpdateLessonStatusApi updateLessonStatusApi= UpdateLessonStatusApi(courseId: state.courseInfo?.id??0, lectureId: state.selectLessonInfo?.id??0,);
+    UpdateLessonStatusApi updateLessonStatusApi= UpdateLessonStatusApi(
+      courseId: state.courseInfo?.id??0, 
+      lectureId: state.selectLessonInfo?.id??0,
+      
+    );
     dynamic data = await updateLessonStatusApi.call();
     
     int indexOfSelectLesson = (state.courseInfo?.lectures??[]).indexWhere((element) => element.id == state.selectLessonInfo?.id,);

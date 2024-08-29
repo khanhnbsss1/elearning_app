@@ -210,8 +210,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           child: VideoPlayer(
             videoPlayerModel: VideoPlayerModel(
                 title: "",
-                link: (_state.selectLessonInfo?.link??"").isNotEmpty?(_state.selectLessonInfo?.link??""):
-                "https://www.youtube.com/watch?v=RFu43pM2Nbw" 
+                link: (_state.selectLessonInfo?.selectVideoInfo?.videoLink??"https://www.youtube.com/watch?v=RFu43pM2Nbw")
             ),
             onGetVideoDuration: (duration) {
               if((_state.selectLessonInfo?.videoDuration==null) && duration.inMilliseconds>10)
@@ -229,7 +228,9 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                 {
                   _state.selectLessonInfo?.isFinnish = true;
                   BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailUpdateFinishLessonEvent(
-                      selectLessonInfo: _state.selectLessonInfo!));
+                      selectLessonInfo: _state.selectLessonInfo!,
+                    videoOrder: 0
+                  ));
                 }
             },
           ),
@@ -306,6 +307,15 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                       );
                     },
                   ),
+/*                  Gap(Dimens.size8,),
+                  Row(
+                    children: const [Expanded(
+                        child: Text("--------------------------------------------------------------------------------------------------------------------------------------------------------", 
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                        ))],
+                  ),*/
+                  Gap(Dimens.size8,),
                   TestItemWidget(
                     testInfos: [
                       TestInfo(

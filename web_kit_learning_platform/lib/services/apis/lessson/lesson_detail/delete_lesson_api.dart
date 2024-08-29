@@ -12,7 +12,7 @@ class DeleteLessonApi extends BaseApiRequest {
 
   Future<dynamic> call() async {
     await getAuthorization();
-    dynamic result = await postRequestAPI();
+    dynamic result = await deleteRequestAPI();
     return result;
   }
 
