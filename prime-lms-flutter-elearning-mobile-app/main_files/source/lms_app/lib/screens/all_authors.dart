@@ -9,10 +9,11 @@ import 'package:lms_app/utils/next_screen.dart';
 
 import '../components/user_avatar.dart';
 import '../models/user/UserProfile.dart';
+import '../services/apis/teacher_list/models/landing_page_teacher_list_model.dart';
 
 final authorsProvider = FutureProvider.autoDispose((ref) async {
-  final List<UserProfile> authors = await ApiService().getAllAuthors();
-  return authors;
+  final List<LandingPageUserInfo>? authors = await ApiService().getTopAuthors();
+  return authors??[];
 });
 
 class AllAuthors extends ConsumerWidget {
@@ -20,24 +21,24 @@ class AllAuthors extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authoraRef = ref.watch(authorsProvider);
+    final authorsRef = ref.watch(authorsProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('All Instructors'),
       ),
-      body: authoraRef.when(
+      body: authorsRef.when(
         data: (authors) {
           return ListView.separated(
             padding: const EdgeInsets.all(20),
             itemCount: authors.length,
             separatorBuilder: (BuildContext context, int index) => const Divider(height: 50),
             itemBuilder: (BuildContext context, int index) {
-              final UserProfile author = authors[index];
+              final LandingPageUserInfo author = authors[index];
               return InkWell(
                 onTap: () => NextScreen.iOS(context, AuthorProfile(user: author)),
                 child: Row(
                   children: [
-                    UserAvatar(imageUrl: author.imageUrl, radius: 60, iconSize: 40),
+                    UserAvatar(imageUrl: author.avatar, radius: 60, iconSize: 40),
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 20, right: 20),
@@ -46,16 +47,16 @@ class AllAuthors extends ConsumerWidget {
                           children: [
                             Text(author.id.toString(), style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
                             Visibility(
-                              visible: author.authorInfo?.jobTitle != null,
+                              visible: author.position != null,
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(vertical: 3),
                                 child: Text(
-                                  author.authorInfo?.jobTitle ?? '',
+                                  author.position ?? '',
                                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blueGrey),
                                 ),
                               ),
                             ),
-                            Text('${author.authorInfo?.students ?? 0} Students')
+                            Text('${0} Students')
                           ],
                         ),
                       ),

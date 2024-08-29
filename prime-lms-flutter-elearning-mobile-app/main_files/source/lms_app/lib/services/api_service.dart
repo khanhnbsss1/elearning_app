@@ -14,6 +14,7 @@ import 'package:lms_app/models/review.dart';
 import 'package:lms_app/models/section.dart';
 import 'package:lms_app/models/subscription.dart';
 import 'package:lms_app/models/tag.dart';
+import 'package:lms_app/services/apis/teacher_list/teacher_list/get_landing_page_teacher_list_api.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:lms_app/services/apis/categories/get_categories_api.dart';
 import 'package:lms_app/services/apis/course/course_detail/get_course_detail_api.dart';
@@ -29,6 +30,7 @@ import '../services/apis/course/course_fillter/get_course_fillter_api.dart';
 import '../services/apis/course/course_fillter/models/course_filtter_info.dart';
 import '../services/apis/course/course_list/course_api.dart';
 import '../services/apis/course/course_list/models/course_models.dart';
+import 'apis/teacher_list/models/landing_page_teacher_list_model.dart';
 
 
 class ApiService {
@@ -330,12 +332,10 @@ class ApiService {
     await ref.set(data);
   }
 
-  Future<List<UserProfile>> getTopAuthors({int limit = 5}) async {
-    List<UserProfile> data = [];
-    await firestore.collection('users').where('role', arrayContainsAny: ['author', 'admin']).limit(limit).get().then((QuerySnapshot? snapshot) {
-          data = snapshot!.docs.map((e) => UserProfile.fromFirebase(e)).toList();
-        });
-    return data;
+  Future<List<LandingPageUserInfo>?> getTopAuthors() async {
+    LandingPageTeacherListApi landingPageTeacherListApi = LandingPageTeacherListApi();
+    List<LandingPageUserInfo>? list = await landingPageTeacherListApi.call();
+    return list;
   }
 
   Future<List<UserProfile>> getAllAuthors() async {

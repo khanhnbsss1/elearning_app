@@ -11,6 +11,7 @@ import 'package:lms_app/models/course.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/screens/article_lesson.dart';
 import 'package:lms_app/screens/auth/login.dart';
+import 'package:lms_app/screens/course_details.dart/vocabulary.dart';
 import 'package:lms_app/screens/quiz_lesson/quiz_screen.dart';
 import 'package:lms_app/screens/video_lesson.dart';
 import 'package:lms_app/services/api_service.dart';
@@ -25,10 +26,9 @@ import '../../models/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 
 class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
-  const Lessons({super.key, required this.course, required this.sectionId});
+  const Lessons({super.key, required this.course,});
 
   final CourseInfo course;
-  final String sectionId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -51,7 +51,16 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                   lesson.lectureName!,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w500, fontSize: 18),
                 ),
-                subtitle: Text(lesson.subName!).tr(),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(lesson.subName!).tr(),
+                    const SizedBox(height: 4,),
+                    InkWell(onTap: (){
+                      NextScreen.normal(context, Vocabulary(course: course, sectionId: index));
+                    }, child: Text('Vocabulary', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w400, fontSize: 16))),
+                  ],
+                ),
                 leading: Text(
                   '${index + 1}.',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.blue),

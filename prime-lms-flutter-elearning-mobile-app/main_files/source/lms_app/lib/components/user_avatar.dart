@@ -31,7 +31,7 @@ class UserAvatar extends StatelessWidget {
       child: (imageUrl == null || imageUrl == "" && imageByte == null) ? Icon(
         LineIcons.user,
         size: iconSize ?? 18,
-      ) : SizedBox(),
+      ) : Image.network(imageUrl!),
     );
   }
 }

@@ -82,6 +82,7 @@ class _MyAppState extends State<MyApp> {
     Get.updateLocale(context.locale);
     NavigationService.registerContext(context, update: true);
     return GetMaterialApp(
+          key: LocaleManager.refreshKey,
           title: AppConfig.appName,
           debugShowCheckedModeBanner: false,
           navigatorObservers: [firebaseObserver],

@@ -5,6 +5,7 @@ import 'package:lms_app/constants/custom_colors.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/services/api_service.dart';
 import '../../models/user/UserProfile.dart';
+import '../../services/apis/teacher_list/models/landing_page_teacher_list_model.dart';
 import '../../theme/theme_provider.dart';
 import 'author_courses.dart';
 import 'count_info.dart';
@@ -23,17 +24,17 @@ final authorCoursesCountProvider = FutureProvider.family.autoDispose<int, String
 class AuthorProfile extends ConsumerWidget {
   const AuthorProfile({super.key, required this.user});
 
-  final UserProfile user;
+  final LandingPageUserInfo user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = ref.watch(themeProvider).isDarkMode;
 
-    final String jobTitle = user.authorInfo?.jobTitle ?? '';
-    final String bio = user.authorInfo?.bio ?? '';
-    final int students = user.authorInfo?.students ?? 0;
-    final int reviewsCount = ref.watch(authorReviewsCountProvider(user.id.toString())).value ?? 0;
-    final int courseCount = ref.watch(authorCoursesCountProvider(user.id.toString())).value ?? 0;
+    // final String jobTitle = user.authorInfo?.jobTitle ?? '';
+    // final String bio = user.authorInfo?.bio ?? '';
+    // final int students = user.authorInfo?.students ?? 0;
+    // final int reviewsCount = ref.watch(authorReviewsCountProvider(user.id.toString())).value ?? 0;
+    // final int courseCount = ref.watch(authorCoursesCountProvider(user.id.toString())).value ?? 0;
 
     return Scaffold(
       body: CustomScrollView(
@@ -50,29 +51,29 @@ class AuthorProfile extends ConsumerWidget {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                AuthorProfileInfo(user: user, jobTitle: jobTitle),
+                AuthorProfileInfo(user: user,),
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 25),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AuthorCountInfo(students: students, courseCount: courseCount, reviewsCount: reviewsCount),
+                      AuthorCountInfo(students: 20, courseCount: 20, reviewsCount: 20),
                       const SizedBox(height: 40),
                       Text(
                         'about-me',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                       ).tr(),
                       const SizedBox(height: 10),
-                      Text(
-                        bio,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              height: 1.7,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 16,
-                              color: isDarkMode ? CustomColor.paragraphColorDark : CustomColor.paragraphColor,
-                            ),
-                      ),
-                      const SizedBox(height: 40),
+                      // Text(
+                      //   bio,
+                      //   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      //         height: 1.7,
+                      //         fontWeight: FontWeight.normal,
+                      //         fontSize: 16,
+                      //         color: isDarkMode ? CustomColor.paragraphColorDark : CustomColor.paragraphColor,
+                      //       ),
+                      // ),
+                      // const SizedBox(height: 40),
                       Text(
                         'my-courses',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),

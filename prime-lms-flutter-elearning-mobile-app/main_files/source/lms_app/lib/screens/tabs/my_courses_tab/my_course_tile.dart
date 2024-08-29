@@ -68,7 +68,7 @@ class MyCourseTile extends StatelessWidget with UserMixin {
                   Padding(
                     padding: const EdgeInsets.only(top: 15, bottom: 5),
                     child: LinearProgressIndicator(
-                      value: 50,
+                      value: int.parse(courseProgressString) / 100,
                       borderRadius: BorderRadius.circular(20),
                       minHeight: 8,
                       color: Colors.orange.shade300,

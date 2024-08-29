@@ -10,6 +10,8 @@ import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:pinput/pinput.dart';
 
+import '../../../components/loading_tile.dart';
+
 final homeLatestCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>>((ref) async {
   final List<CourseInfo>? courses = await ApiService().getLatestCourses();
   return courses??[];
@@ -77,6 +79,6 @@ class HomeLatestCourses extends ConsumerWidget {
           ) : const SizedBox();
         },
         error: (e, x) => Text('error: $e, $x'),
-        loading: () => const LoadingIndicatorWidget());
+        loading: () => const LoadingTile(height: 260));
   }
 }

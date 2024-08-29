@@ -5,6 +5,7 @@ import '../../models/course.dart';
 import '../../models/user_model.dart';
 import '../../models/user/UserProfile.dart';
 import '../../services/api_service.dart';
+import '../../services/apis/teacher_list/models/landing_page_teacher_list_model.dart';
 import '../../utils/loading_widget.dart';
 import '../../utils/next_screen.dart';
 import '../all_courses.dart/courses_view.dart';
@@ -18,7 +19,7 @@ final authorCoursesProvider = FutureProvider.autoDispose.family<List<Course>, St
 class AuthorCourses extends ConsumerWidget {
   const AuthorCourses({super.key, required this.user});
 
-  final UserProfile user;
+  final LandingPageUserInfo user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

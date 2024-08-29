@@ -56,7 +56,7 @@ class Sections extends ConsumerWidget {
               ),
             ),
             initiallyExpanded: index == 0 && isInitialSectionOpen ? true : false,
-            children: [Lessons(course: course, sectionId: (section.id??0).toString())],
+            children: [Lessons(course: course,)],
             // onExpansionChanged: (bool value) => ref.read(isSectionExpnadedProvider(section.id).notifier).update((state) => value),
           );
         },

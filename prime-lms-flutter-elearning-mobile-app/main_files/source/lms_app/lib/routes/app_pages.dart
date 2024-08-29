@@ -12,7 +12,7 @@ class AppPages {
   static Map<String, WidgetBuilder> routes = {
     Routes.splashRoute: (context) => const SplashScreen(),
     Routes.introRoute: (context) => const IntroScreen(),
-    Routes.loginRoute: (context) => const HomeView(),
+    Routes.loginRoute: (context) => const LoginScreen(popUpScreen: false,),
   };
 
   static route(String route,

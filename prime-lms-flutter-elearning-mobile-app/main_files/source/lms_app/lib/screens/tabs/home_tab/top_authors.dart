@@ -3,16 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/author_card.dart';
 import 'package:lms_app/components/loading_tile.dart';
+import 'package:lms_app/helper/localizations/language_helper.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/screens/all_authors.dart';
 import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
 import '../../../models/user/UserProfile.dart';
+import '../../../services/apis/teacher_list/models/landing_page_teacher_list_model.dart';
 
-final topAuthorsProvider = FutureProvider.autoDispose<List<UserProfile>>((ref) async {
-  final List<UserProfile> authors = await ApiService().getTopAuthors(limit: 5);
-  return authors;
+final topAuthorsProvider = FutureProvider.autoDispose<List<LandingPageUserInfo>?>((ref) async {
+  final List<LandingPageUserInfo>? teacherList = await ApiService().getTopAuthors();
+  return teacherList;
 });
 
 class TopAuthors extends ConsumerWidget {
@@ -23,7 +25,7 @@ class TopAuthors extends ConsumerWidget {
     final authors = ref.watch(topAuthorsProvider);
     return authors.when(
         data: (data) {
-          return (data.isNotEmpty) ? Padding(
+          return (data!.isNotEmpty) ? Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: Column(
               children: [
@@ -33,7 +35,7 @@ class TopAuthors extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: RichText(
+                        child: (LanguageHelper().getCurrentLocale() != Locale('vi','VN')) ? RichText(
                             text: TextSpan(
                                 text: 'top'.tr(),
                                 style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -43,7 +45,17 @@ class TopAuthors extends ConsumerWidget {
                                 text: 'instructors'.tr(),
                                 style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.blueAccent, fontWeight: FontWeight.bold),
                               )
-                            ])),
+                            ])) : RichText(
+                            text: TextSpan(
+                                text: 'instructors'.tr(),
+                                style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.blueAccent, fontWeight: FontWeight.bold),
+                                children: [
+                                  const TextSpan(text: ' '),
+                                  TextSpan(
+                                    text: 'top'.tr(),
+                                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                                  )
+                                ])),
                       ),
                       TextButton(
                         onPressed: () => NextScreen.normal(context, const AllAuthors()),

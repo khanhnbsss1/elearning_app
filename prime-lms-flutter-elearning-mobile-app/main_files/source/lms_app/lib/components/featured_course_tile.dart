@@ -3,6 +3,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lms_app/constants/custom_colors.dart';
 import 'package:lms_app/services/app_service.dart';
+import '../routes/app_pages.dart';
+import '../routes/app_routes.dart';
 import '../services/apis/course/course_detail/models/course_detail_model.dart';
 import 'rating_bar.dart';
 import '../models/course.dart';
@@ -21,7 +23,7 @@ class FeaturedCourseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final heroTag = UniqueKey();
     return InkWell(
-      onTap: () => NextScreen.iOS(context, CourseDetailsView(courses: course, heroTag: heroTag)),
+      onTap: () =>            AppPages.route(Routes.loginRoute, isReplace: true),
       child: Container(
         width: MediaQuery.of(context).size.width,
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
