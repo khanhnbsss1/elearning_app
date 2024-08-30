@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lms_app/helper/navigator_key.dart';
 import 'package:lms_app/helper/services/navigation_service.dart';
-import 'package:lms_app/routes/app_routes.dart';
 import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/screens/intro.dart';
 import 'package:lms_app/services/app_service.dart';
@@ -14,15 +13,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'base/author/author_manager.dart';
 import 'base/base.export.dart';
 import 'base/firebase_manager/firebase_options.dart';
-import 'base/resizer/fetch_pixels.dart';
 import 'base/store/cache_storage.dart';
-import 'base/theme/colors_app.dart';
 import 'configs/app_config.dart';
 import 'configs/language_config.dart';
 import 'core/app.dart';
 import 'enviroments/flavor_settings.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'helper/localizations/bloc/main_bloc.dart';
 import 'helper/localizations/language_helper.dart';
 
 Future<void> main() async {
