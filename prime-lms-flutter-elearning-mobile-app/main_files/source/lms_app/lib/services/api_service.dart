@@ -14,6 +14,8 @@ import 'package:lms_app/models/review.dart';
 import 'package:lms_app/models/section.dart';
 import 'package:lms_app/models/subscription.dart';
 import 'package:lms_app/models/tag.dart';
+import 'package:lms_app/services/apis/lessson/lesson_detail/get_lesson_detail.dart';
+import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/services/apis/teacher_list/teacher_list/get_landing_page_teacher_list_api.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:lms_app/services/apis/categories/get_categories_api.dart';
@@ -175,18 +177,10 @@ class ApiService {
     return data;
   }
 
-  Future<List<Section>> getSections(String courseId) async {
-    List<Section> data = [];
-    await firestore
-        .collection('courses')
-        .doc(courseId)
-        .collection('sections')
-        .orderBy('order', descending: false)
-        .get()
-        .then((QuerySnapshot? snapshot) {
-      data = snapshot!.docs.map((e) => Section.fromFiresore(e)).toList();
-    });
-    return data;
+  Future<LessonInfo?> getLessonDetail(int lectureId) async {
+    GetLessonDetailApi getLessonDetailApi = GetLessonDetailApi(lectureId: lectureId);
+    LessonInfo? lessonInfo = await getLessonDetailApi.call();
+    return lessonInfo;
   }
 
   Future<List<Lesson>> getLessons(String courseId, String sectionId) async {

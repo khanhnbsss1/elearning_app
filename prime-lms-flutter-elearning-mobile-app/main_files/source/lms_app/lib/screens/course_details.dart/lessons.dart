@@ -12,6 +12,7 @@ import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/screens/article_lesson.dart';
 import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/screens/course_details.dart/vocabulary.dart';
+import 'package:lms_app/screens/pdf_screen.dart';
 import 'package:lms_app/screens/quiz_lesson/quiz_screen.dart';
 import 'package:lms_app/screens/video_lesson.dart';
 import 'package:lms_app/services/api_service.dart';
@@ -20,59 +21,109 @@ import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
-
 import '../../models/lesson.dart';
 import '../../models/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 
+
 class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
-  const Lessons({super.key, required this.course,});
+  const Lessons({
+    super.key,
+    required this.lectures,
+    required this.course,
+  });
 
   final CourseInfo course;
+  final List<LessonInfo> lectures;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userDataProvider);
-    return Column(
-      children: [
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          padding: const EdgeInsets.only(top: 0, bottom: 20),
-          itemCount: course.lectures!.length,
-          itemBuilder: (context, index) {
-            final LessonInfo lesson = course.lectures![index];
-            return ListTile(
-                onTap: () => _onTap(context, lesson, course, user, ref),
-              // onTap: (){},
-                contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                horizontalTitleGap: 10,
-                title: Text(
-                  lesson.lectureName!,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w500, fontSize: 18),
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(lesson.subName!).tr(),
-                    const SizedBox(height: 4,),
-                    InkWell(onTap: (){
-                      NextScreen.normal(context, Vocabulary(course: course, sectionId: index));
-                    }, child: Text('vocabulary', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w400, fontSize: 16)).tr()),
-                  ],
-                ),
-                leading: Text(
-                  '${index + 1}.',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.blue),
-                ),
-                trailing: _trailingIcon(lesson, user));
-          },
-        ),
-      ]
-    );
+    return Column(children: [
+      ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        padding: const EdgeInsets.only(top: 0, bottom: 20),
+        itemCount: lectures.length,
+        itemBuilder: (context, index) {
+          final LessonInfo lesson = lectures[index];
+          return FutureBuilder(
+              future: getLessonDetail(lectures[index].id!),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  LessonInfo lessonDetail = snapshot.data!;
+                  return ListTile(
+                      onTap: () =>
+                          _onTap(context, lessonDetail, course, user, ref),
+                      // onTap: (){},
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20),
+                      horizontalTitleGap: 10,
+                      title: Text(
+                        lessonDetail.lectureName!,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w500, fontSize: 18),
+                      ),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(lessonDetail.subName!).tr(),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          InkWell(
+                              onTap: () {
+                                NextScreen.normal(
+                                    context,
+                                    Vocabulary(
+                                        course: course, sectionId: index));
+                              },
+                              child: Text('vocabulary',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge
+                                          ?.copyWith(
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 16))
+                                  .tr()),
+                          InkWell(
+                              onTap: () {
+                                // if (lessonDetail.docLink != "") {
+                                //   PdfScreen(link: lessonDetail.docLink!, name: lessonDetail.docName??"-");
+                                // }
+                              },
+                              child: Text('document',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge
+                                      ?.copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16))
+                                  .tr()),
+                        ],
+                      ),
+                      leading: Text(
+                        '${index + 1}.',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.bold, color: Colors.blue),
+                      ),
+                      trailing: _trailingIcon(lesson, user));
+                } else {
+                  return const SizedBox();
+                }
+              });
+        },
+      ),
+    ]);
   }
 
-  void _onTap(BuildContext context, LessonInfo lesson, CourseInfo course, UserProfile? user, WidgetRef ref) {
+  Future<LessonInfo?> getLessonDetail(int lectureId) async {
+    final LessonInfo? lessons = await ApiService().getLessonDetail(lectureId);
+    return lessons;
+  }
+
+  void _onTap(BuildContext context, LessonInfo lesson, CourseInfo course,
+      UserProfile? user, WidgetRef ref) {
     // if (user != null) {
     //   if (course.mode == "FREE") {
     //     // Free
@@ -84,7 +135,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
     //   } else {
     //     // Premium
     //     if (hasEnrolled(user, course) && !UserMixin.isExpired(user)) {
-          _openLesson(context, lesson, ref);
+    _openLesson(context, lesson, ref);
     //     } else {
     //       openSnackbar(context, 'Enroll to open lesson');
     //     }
@@ -102,7 +153,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
     // }
     NextScreen.iOS(context, VideoLesson(course: course, lesson: lesson));
     //Placed interstitial ads when open any lesson
-    AdManager.initInterstitailAds(ref);
+    // AdManager.initInterstitailAds(ref);
   }
 
   Icon _trailingIcon(LessonInfo lesson, UserProfile? user) {
@@ -111,7 +162,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
       return const Icon(Icons.check_box, color: Colors.orange);
     } else {
       // if (lesson.contentType == 'video') {
-        return const Icon(FeatherIcons.playCircle);
+      return const Icon(FeatherIcons.playCircle);
       // } else if (lesson.contentType == 'article') {
       //   return const Icon(LineIcons.stickyNote);
       // } else {

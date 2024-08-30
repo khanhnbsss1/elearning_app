@@ -39,7 +39,10 @@ class MyCoursesTab extends ConsumerWidget with CourseMixin {
     final user = ref.watch(userDataProvider);
     final courses = ref.watch(myCoursesProvider);
     return RefreshIndicator.adaptive(
-      onRefresh: () async => await ref.refresh(myCoursesProvider),
+      displacement: 60,
+      onRefresh: () async {
+        ref.invalidate(myCoursesProvider);
+      },
       child: Scaffold(
         appBar: AppBar(
           title: const Text('my-courses').tr(),

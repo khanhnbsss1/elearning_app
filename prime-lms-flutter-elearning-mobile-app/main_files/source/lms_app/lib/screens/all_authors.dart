@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,7 +25,7 @@ class AllAuthors extends ConsumerWidget {
     final authorsRef = ref.watch(authorsProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('All Instructors'),
+        title: const Text('all-Instructors').tr(),
       ),
       body: authorsRef.when(
         data: (authors) {

@@ -2,7 +2,7 @@ name: lms_app
 description: A new Flutter project.
 publish_to: 'none'
 
-version: 1.0.5+19
+version: 1.0.5+20
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
@@ -90,6 +90,8 @@ dependencies:
   flutter_phoenix: ^1.1.1
   file_picker: ^8.0.7
   provider: ^6.1.2
+  syncfusion_flutter_pdfviewer: ^26.2.11
+  open_filex: ^4.5.0
 
 dependency_overrides:
   build_web_compilers: ^4.0.11

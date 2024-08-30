@@ -31,6 +31,7 @@ import 'l10n/l10n_extention.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'landing_page/components/colornotifier.dart';
 
+
 Future<void> main() async {
   setPathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
