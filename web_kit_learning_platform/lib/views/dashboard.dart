@@ -779,7 +779,8 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                   {
                     max = (userRegistrationInfo.totalUser??0).toDouble();
                   }
-                  revenueChart2.add(ChartSampleData(x:"${index<10?'0$index':index}-$year", 
+                  revenueChart2.add(ChartSampleData(
+                      x:"${index<10?'0$index':index}-$year", 
                       y: userRegistrationInfo.totalUser,
                       yValue: userRegistrationInfo.totalUser),);
                   break;
@@ -808,90 +809,72 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
               Column(
                 children: [
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
                     children: [
+                      MyText.titleMedium(
+                        L10nX.getStr.report_new_registered_account,
+                        color: contentTheme.light,
+                        fontWeight: 600,
+                      ),
+                      MySpacing.width(8),
                       Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisSize: MainAxisSize.max,
                         children: [
-                          MyText.titleMedium(
-                            "New Register",
-                            color: contentTheme.light,
-                            fontWeight: 600,
-                          ),
-                          MySpacing.width(8),
-                          MyContainer(
-                            padding: MySpacing.xy(12, 2),
-                            color: contentTheme.success,
-                            child: MyText.bodyMedium(
-                              "Active",
-                              fontSize: 12,
-                              color: contentTheme.onSuccess,
+                          MyDottedLine(
+                            height: 50,
+                            dottedLength: 1,
+                            color: Colors.grey.shade400,
+                            child: Padding(
+                              padding: MySpacing.xy(12, 8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  MyText.bodyMedium(
+                                    "$revenueCurrentMonth",
+                                    fontSize: 20,
+                                    color: contentTheme.light,
+                                  ),
+                                  MySpacing.height(8),
+                                  MyText.bodyMedium(
+                                    L10nX.getStr.current_month,
+                                    color: contentTheme.light,
+                                    fontWeight: 600,
+                                    muted: true,
+                                  ),
+                                ],
+                              ),
                             ),
-                          )
+                          ),
+                          MySpacing.width(16),
+                          MyDottedLine(
+                            height: 50,
+                            dottedLength: 1,
+                            color: Colors.grey.shade400,
+                            child: Padding(
+                              padding: MySpacing.xy(12, 8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  MyText.bodyMedium(
+                                    '${differentCurrentAndPreviousMonth}',
+                                    fontSize: 20,
+                                    color: contentTheme.light,
+                                  ),
+                                  MySpacing.height(8),
+                                  MyText.bodyMedium(
+                                    differentCurrentAndPreviousMonth<0?"Giảm":"Tăng",
+                                    color: contentTheme.light,
+                                    fontWeight: 600,
+                                    muted: true,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
-                      ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            LucideIcons.moveRight,
-                            size: 16,
-                            color: contentTheme.light,
-                          ))
-                    ],
-                  ),
-                  MySpacing.height(16),
-                  Row(
-                    children: [
-                      MyDottedLine(
-                        height: 50,
-                        dottedLength: 1,
-                        color: Colors.grey.shade400,
-                        child: Padding(
-                          padding: MySpacing.xy(12, 8),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              MyText.bodyMedium(
-                                "$revenueCurrentMonth",
-                                fontSize: 20,
-                                color: contentTheme.light,
-                              ),
-                              MySpacing.height(8),
-                              MyText.bodyMedium(
-                                L10nX.getStr.current_month,
-                                color: contentTheme.light,
-                                fontWeight: 600,
-                                muted: true,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      MySpacing.width(16),
-                      MyDottedLine(
-                        height: 50,
-                        dottedLength: 1,
-                        color: Colors.grey.shade400,
-                        child: Padding(
-                          padding: MySpacing.xy(12, 8),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              MyText.bodyMedium(
-                                '${differentCurrentAndPreviousMonth}',
-                                fontSize: 20,
-                                color: contentTheme.light,
-                              ),
-                              MySpacing.height(8),
-                              MyText.bodyMedium(
-                                differentCurrentAndPreviousMonth<0?"Giảm":"Tăng",
-                                color: contentTheme.light,
-                                fontWeight: 600,
-                                muted: true,
-                              ),
-                            ],
-                          ),
-                        ),
                       ),
                     ],
                   ),
@@ -901,29 +884,42 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
               Positioned(
                 right: 0,
                 left: 0,
-                top: 100,
-                child: SfCartesianChart(
-                  plotAreaBorderWidth: 0,
-                  tooltipBehavior: controller.facebook,
-                  primaryXAxis: CategoryAxis(
-                    isVisible: false,
-                    majorGridLines: const MajorGridLines(width: 0),
-                    labelStyle: const TextStyle(fontSize: 0),
-                  ),
-                  primaryYAxis: NumericAxis(isVisible: false, labelStyle: const TextStyle(fontSize: 0), majorGridLines: const MajorGridLines(width: 0)),
-                  series: <CartesianSeries<ChartSampleData, String>>[
-                    ColumnSeries<ChartSampleData, String>(
-                      width: 0.5,
-                      color: contentTheme.primary,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(12),
-                        topRight: Radius.circular(12),
+                top: 0,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 100),
+                  child: SizedBox(
+                    height: 180,
+                    child: SfCartesianChart(
+                      plotAreaBorderWidth: 0,
+                      tooltipBehavior: controller.facebook,
+                      primaryXAxis: CategoryAxis(
+                        isVisible: true,
+                        labelRotation: -45,
+                        majorGridLines: const MajorGridLines(width: 0),
+                        labelStyle: TextStyle(fontSize: 13, color: ColorConst.whiteColor),
                       ),
-                      dataSource: revenueChart2,
-                      xValueMapper: (ChartSampleData data, _) => data.x,
-                      yValueMapper: (ChartSampleData data, _) => data.y,
+                      primaryYAxis: NumericAxis(
+                          isVisible: true, 
+                          labelStyle:  TextStyle(fontSize: 13, color: ColorConst.whiteColor), 
+                          maximum: max,
+                          minimum: 0,
+                          interval: interver<=0?1:interver,
+                          majorGridLines: const MajorGridLines(width: 0)),
+                      series: <CartesianSeries<ChartSampleData, String>>[
+                        ColumnSeries<ChartSampleData, String>(
+                          width: 0.5,
+                          color: contentTheme.primary,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(12),
+                            topRight: Radius.circular(12),
+                          ),
+                          dataSource: revenueChart2,
+                          xValueMapper: (ChartSampleData data, _) => data.x,
+                          yValueMapper: (ChartSampleData data, _) => data.y,
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               )
             ],
