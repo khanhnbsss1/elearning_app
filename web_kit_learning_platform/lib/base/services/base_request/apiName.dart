@@ -114,6 +114,19 @@ class ApiName {
   final String getTopCourses = "/top-courses";
   final String getUserRegistration = "/user-registration";
 
+  final String getTopCourseRevenue = "/top-course-revenue"; ///top khóa học có doanh thu cao nhất -
+  final String getTopCourseUser = "/top-course-user"; ///Top khóa học có người học cao nhất
+  final String getRevenueHistory = "/revenue-history";/// Doanh thu theo tháng, grade, category, - 
+  final String getRegisterMonth= "/register-month";///Số người đăng ký mới theo các tháng -
+  final String getCourseRegistrationHistory = "/course-registration-history";///Lịch sử đăng ký khóa học theo khoảng thời gian 
+  final String getCourseHistory = "/course-history"; ///Lịch sửa tạo/sửa khóa học theo khoảng thời gian
+  final String getRegisterTimePeriod = "/register-time-period"; /// Người đăng ký mới theo khoảng thời gian - 
+
+  
+  final String getRevenueMonth = "/revenue-month";/// Doanh thu  theo các tháng
+
+
+
   /// permisison
   final String getUserPermissionList = "/get-role-claims";
 
