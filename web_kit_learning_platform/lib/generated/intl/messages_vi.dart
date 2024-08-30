@@ -179,6 +179,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "creating_a_detailed_pricing_plan_str":
             MessageLookupByLibrary.simpleMessage(
                 "Việc tạo kế hoạch định giá chi tiết cho khóa học của bạn đòi hỏi phải xem xét nhiều yếu tố khác nhau. Dưới đây là bảng phân tích để giúp bạn cấu trúc mức giá của mình"),
+        "current_month": MessageLookupByLibrary.simpleMessage("Tháng hiện tại"),
         "custom_indicator":
             MessageLookupByLibrary.simpleMessage("Chỉ báo tùy chỉnh"),
         "customers": MessageLookupByLibrary.simpleMessage("Khách hàng"),
@@ -440,6 +441,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "presale_str": MessageLookupByLibrary.simpleMessage("Bán trước"),
         "prev": MessageLookupByLibrary.simpleMessage("Trước"),
         "preview_str": MessageLookupByLibrary.simpleMessage("Xem trước"),
+        "previous_month": MessageLookupByLibrary.simpleMessage("Tháng trước"),
         "price": MessageLookupByLibrary.simpleMessage("Giá"),
         "pricing": MessageLookupByLibrary.simpleMessage("Giá"),
         "pricing_plan_str":
@@ -506,6 +508,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "result": MessageLookupByLibrary.simpleMessage("Kết quả"),
         "revenue": MessageLookupByLibrary.simpleMessage("Doanh thu"),
+        "revenue_month":
+            MessageLookupByLibrary.simpleMessage("Doanh thu theo tháng"),
         "review_str": MessageLookupByLibrary.simpleMessage("Đánh giá"),
         "right": MessageLookupByLibrary.simpleMessage("Phải"),
         "right_answer":
@@ -745,6 +749,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "translation_en_str": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "translation_vn_str":
             MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
+        "trend_str": MessageLookupByLibrary.simpleMessage("Xu hướng"),
         "trending_products":
             MessageLookupByLibrary.simpleMessage("Sản phẩm đang thịnh hành"),
         "type": MessageLookupByLibrary.simpleMessage("Loại"),

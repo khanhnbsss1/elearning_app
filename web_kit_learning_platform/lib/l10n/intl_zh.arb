@@ -641,5 +641,9 @@
   "role_create_str": "创建新角色",
   "inactive_str": "不活动",
   "title_str": "页面",
-  "you_are_ready_register_this_course": "您确定要注册此课程吗？"
+  "you_are_ready_register_this_course": "您确定要注册此课程吗？",
+  "revenue_month": "按月收入",
+  "current_month": "当前月份",
+  "previous_month": "上个月",
+  "trend_str": "趋势"
 }

@@ -6439,6 +6439,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Revenue by month`
+  String get revenue_month {
+    return Intl.message(
+      'Revenue by month',
+      name: 'revenue_month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Current Month`
+  String get current_month {
+    return Intl.message(
+      'Current Month',
+      name: 'current_month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Previous Month`
+  String get previous_month {
+    return Intl.message(
+      'Previous Month',
+      name: 'previous_month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Trend`
+  String get trend_str {
+    return Intl.message(
+      'Trend',
+      name: 'trend_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

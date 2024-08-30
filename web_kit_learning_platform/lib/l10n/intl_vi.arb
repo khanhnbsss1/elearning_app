@@ -646,5 +646,9 @@
   "role_create_str": "Tạo mới vai trò",
   "inactive_str": "Chưa kích hoạt",
   "title_str": "Tiêu đề",
-  "you_are_ready_register_this_course": "Bạn có chắc chăn muốn đăng ký khóa học này"
+  "you_are_ready_register_this_course": "Bạn có chắc chăn muốn đăng ký khóa học này",
+  "revenue_month": "Doanh thu theo tháng",
+  "current_month": "Tháng hiện tại",
+  "previous_month": "Tháng trước",
+  "trend_str": "Xu hướng"
 }

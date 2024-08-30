@@ -1,24 +1,16 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/helper/date_time/date_time_helper.dart';
-import 'package:webkit/services/apis/category/get_category_list.dart';
-import 'package:webkit/services/apis/category/models/category_info.dart';
-import 'package:webkit/services/apis/course/course_fillter/get_course_fillter_api.dart';
-import 'package:webkit/services/apis/course/course_fillter/models/course_filtter_info.dart';
-import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_api.dart';
-import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_model.dart';
-import 'package:webkit/services/apis/darh_board/request_model/dash_board_search_model.dart';
-import 'package:webkit/services/apis/grade/get_grade_list.dart';
-import 'package:webkit/services/apis/grade/models/grade_info.dart';
 
-import '../../../base/widgets/widget_common/widget_with_title_common.dart';
+import 'package:webkit/base/helper/date_time/date_time_helper.dart';
+
+import 'package:webkit/services/apis/darh_board/request_model/dash_board_search_model.dart';
+import 'package:webkit/services/apis/darh_board/revenue_month_api.dart';
 import 'get_data_synthesis_api.dart';
 import 'get_data_synthesis_students_api.dart';
+import 'get_register_month_api.dart';
 import 'get_subscription_purchases_api.dart';
 import 'get_top-courses_api.dart';
 import 'get_user-registration_api.dart';
+import 'models/register_month_info.dart';
+import 'models/revenue_month_info.dart';
 import 'models/subscription_purchases_info.dart';
 import 'models/synthesisInfo.dart';
 import 'models/synthesis_students_info.dart';
@@ -39,7 +31,9 @@ class DashboardManager{
   SynthesisSummaryInfo? synthesisSummaryInfo;
   TopCoursesInfoResponseModel? topCoursesInfoResponseModel;
   UserRegistrationInfoResponseModel? userRegistrationInfoResponseModel;
-  List<bool>calApi = [false,false,false,false,false, ];
+  RevenueMonthResponseModel? revenueMonthResponseModel;
+  RegisterMonthResponseModel?registerMonthResponseModel;
+  List<bool>calApi = [false,false,false,false,false, false, false ];
   Future<void> init()async {
     
   }
@@ -117,5 +111,27 @@ class DashboardManager{
       calApi[4]==false;
     }
     return userRegistrationInfoResponseModel!;
+  }
+
+  Future<RevenueMonthResponseModel> getRevenueMonthResponseModel() async {
+    if(revenueMonthResponseModel==null && calApi[5]==false)
+    {
+      calApi[5]==true;
+      GetRevenueMonthApi response = GetRevenueMonthApi(dashboardSearchModel: DashboardSearchModel());
+      revenueMonthResponseModel = await  response.call();
+      calApi[5]==false;
+    }
+    return revenueMonthResponseModel!;
+  }
+
+  Future<RegisterMonthResponseModel> getRegisterMonthResponseModel() async {
+    if(registerMonthResponseModel==null && calApi[6]==false)
+    {
+      calApi[6]==true;
+      GetRegisterMonthApi response = GetRegisterMonthApi(dashboardSearchModel: DashboardSearchModel(limit: 12));
+      registerMonthResponseModel = await  response.call();
+      calApi[6]==false;
+    }
+    return registerMonthResponseModel!;
   }
 }

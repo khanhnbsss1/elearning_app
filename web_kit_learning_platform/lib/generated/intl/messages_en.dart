@@ -187,6 +187,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "creating_a_detailed_pricing_plan_str":
             MessageLookupByLibrary.simpleMessage(
                 "Creating a detailed pricing plan for your course requires considering various factors. Here’s a breakdown to help you structure your pricing"),
+        "current_month": MessageLookupByLibrary.simpleMessage("Current Month"),
         "custom_indicator":
             MessageLookupByLibrary.simpleMessage("Custom indicator"),
         "customers": MessageLookupByLibrary.simpleMessage("Customers"),
@@ -445,6 +446,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "presale_str": MessageLookupByLibrary.simpleMessage("Presale"),
         "prev": MessageLookupByLibrary.simpleMessage("Prev"),
         "preview_str": MessageLookupByLibrary.simpleMessage("Preview"),
+        "previous_month":
+            MessageLookupByLibrary.simpleMessage("Previous Month"),
         "price": MessageLookupByLibrary.simpleMessage("Price"),
         "pricing": MessageLookupByLibrary.simpleMessage("Pricing"),
         "pricing_plan_str":
@@ -511,6 +514,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Reset password"),
         "result": MessageLookupByLibrary.simpleMessage("Result"),
         "revenue": MessageLookupByLibrary.simpleMessage("Revenue"),
+        "revenue_month":
+            MessageLookupByLibrary.simpleMessage("Revenue by month"),
         "review_str": MessageLookupByLibrary.simpleMessage("Review"),
         "right": MessageLookupByLibrary.simpleMessage("Right"),
         "right_answer": MessageLookupByLibrary.simpleMessage("Correct answer"),
@@ -752,6 +757,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "translation_en_str": MessageLookupByLibrary.simpleMessage("English"),
         "translation_vn_str":
             MessageLookupByLibrary.simpleMessage("Vietnamese"),
+        "trend_str": MessageLookupByLibrary.simpleMessage("Trend"),
         "trending_products":
             MessageLookupByLibrary.simpleMessage("Trending products"),
         "type": MessageLookupByLibrary.simpleMessage("Type"),

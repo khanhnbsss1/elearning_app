@@ -646,5 +646,9 @@
   "role_create_str": "Create new role",
   "inactive_str": "Inactive",
   "title_str": "Title",
-  "you_are_ready_register_this_course": "Are you sure you want to register for this course?"
+  "you_are_ready_register_this_course": "Are you sure you want to register for this course?",
+  "revenue_month": "Revenue by month",
+  "current_month": "Current Month",
+  "previous_month": "Previous Month",
+  "trend_str": "Trend"
 }

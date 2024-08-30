@@ -155,6 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "creating_a_detailed_pricing_plan_str":
             MessageLookupByLibrary.simpleMessage(
                 "为您的课程制定详细的定价计划需要考虑各种因素。以下是帮助您构建定价的细分"),
+        "current_month": MessageLookupByLibrary.simpleMessage("当前月份"),
         "custom_indicator": MessageLookupByLibrary.simpleMessage("自定义指标"),
         "customers": MessageLookupByLibrary.simpleMessage("客户"),
         "danger": MessageLookupByLibrary.simpleMessage("危险"),
@@ -370,6 +371,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "presale_str": MessageLookupByLibrary.simpleMessage("预售"),
         "prev": MessageLookupByLibrary.simpleMessage("上一个"),
         "preview_str": MessageLookupByLibrary.simpleMessage("预览"),
+        "previous_month": MessageLookupByLibrary.simpleMessage("上个月"),
         "price": MessageLookupByLibrary.simpleMessage("价格"),
         "pricing": MessageLookupByLibrary.simpleMessage("定价"),
         "pricing_plan_str": MessageLookupByLibrary.simpleMessage("定价方案"),
@@ -425,6 +427,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "reset_password": MessageLookupByLibrary.simpleMessage("重置密码"),
         "result": MessageLookupByLibrary.simpleMessage("结果"),
         "revenue": MessageLookupByLibrary.simpleMessage("收入"),
+        "revenue_month": MessageLookupByLibrary.simpleMessage("按月收入"),
         "review_str": MessageLookupByLibrary.simpleMessage("评论"),
         "right": MessageLookupByLibrary.simpleMessage("右侧"),
         "right_answer": MessageLookupByLibrary.simpleMessage("正确答案"),
@@ -628,6 +631,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "traditional_str": MessageLookupByLibrary.simpleMessage("传统"),
         "translation_en_str": MessageLookupByLibrary.simpleMessage("英语"),
         "translation_vn_str": MessageLookupByLibrary.simpleMessage("越南语"),
+        "trend_str": MessageLookupByLibrary.simpleMessage("趋势"),
         "trending_products": MessageLookupByLibrary.simpleMessage("热门产品"),
         "type": MessageLookupByLibrary.simpleMessage("类型"),
         "type_email_or_phone_number":
