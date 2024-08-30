@@ -4,8 +4,8 @@ import '../models/lesson_info.dart';
 
 
 class GetLessonDetailApi extends BaseApiRequest {
-  int lessonId;
-  GetLessonDetailApi({required this.lessonId}):super(
+  int lectureId;
+  GetLessonDetailApi({required this.lectureId}):super(
     serviceType: SERVICE_TYPE.LESSON,
     apiName: ApiName.getInstance().getDetailLesson,
   );
@@ -25,7 +25,7 @@ class GetLessonDetailApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    await setParamsAdd({"lectureId":lessonId});
+    await setParamsAdd({"lectureId":lectureId});
   }
 
   @override

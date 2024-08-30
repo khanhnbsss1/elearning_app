@@ -25,10 +25,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'helper/localizations/bloc/main_bloc.dart';
 import 'helper/localizations/language_helper.dart';
 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      //name: "YAX Chinese",
+      name: "YAX Chinese",
       options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
   initialService();

@@ -64,6 +64,10 @@ class AuthorCard extends StatelessWidget{
           const SizedBox(
             height: 10,
           ),
+          Text('total-lectures', style: Theme.of(context).textTheme.titleSmall,).tr(args: [user.id.toString()]),
+          const SizedBox(
+            height: 10,
+          ),
           // Text(
           //   bio,
           //   maxLines: 3,
