@@ -2,8 +2,11 @@ import 'dart:convert';
 import 'package:lms_app/base/author/user_helper.dart';
 import 'package:lms_app/base/base.export.dart';
 
+import '../../helper/services/navigation_service.dart';
+import '../../screens/auth/login.dart';
 import '../../services/apis/auth/login/models/login_response.dart';
 import '../../services/apis/auth/refreshToken/refresh_token_api.dart';
+import '../widgets/toast_common/toast_utils.dart';
 
 class AuthorManager {
   static final AuthorManager _singletonAuthorManager = AuthorManager._internal();
@@ -67,6 +70,10 @@ class AuthorManager {
 
   Future<void> refreshToken() async {
     if(allowCallRefreshToken==false) {
+      AuthorManager().handleLogout();
+      NavigationService().popToFirst();
+      NavigationService().navigateToScreen(const LoginScreen(popUpScreen: false,));
+      ToastUtils.showToastError("Bạn đã bị đăng xuất");
       return;
     }
     allowCallRefreshToken = false;

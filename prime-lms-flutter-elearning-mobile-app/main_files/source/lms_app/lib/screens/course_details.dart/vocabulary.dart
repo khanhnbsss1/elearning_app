@@ -26,9 +26,10 @@ import '../../models/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 
 class Vocabulary extends ConsumerWidget with CourseMixin, UserMixin {
-  const Vocabulary({super.key, required this.course, required this.sectionId});
+  const Vocabulary(
+      {super.key, required this.lessonDetail, required this.sectionId});
 
-  final CourseInfo course;
+  final LessonInfo lessonDetail;
   final int sectionId;
 
   @override
@@ -41,39 +42,53 @@ class Vocabulary extends ConsumerWidget with CourseMixin, UserMixin {
         backgroundColor: Theme.of(context).primaryColor,
         foregroundColor: Colors.white,
         title: Text(
-          '${course.name} - ${course.lectures![sectionId].lectureName}',
+          '${lessonDetail.subName} - ${lessonDetail.lectureName}',
           maxLines: 2,
-          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w600, color: Colors.white),
+          style: Theme.of(context)
+              .textTheme
+              .titleMedium
+              ?.copyWith(fontWeight: FontWeight.w600, color: Colors.white),
         ),
         elevation: 0,
       ),
-      body: Column(
-          children: [
-            (course.lectures![sectionId].vocabularies != null) ? ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.only(top: 0, bottom: 20),
-              itemCount: course.lectures![sectionId].vocabularies!.length,
-              itemBuilder: (context, index) {
-                final VocabularyInfo word = course.lectures![sectionId].vocabularies![index];
-                return ListTile(
-      
-                  contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  horizontalTitleGap: 10,
-                  title: Text(
-                    word.simplified!,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w500, fontSize: 18),
-                  ),
-                  subtitle: Text(word.traditional!).tr(),
-                  leading: Text(
-                    '${index + 1}.',
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold, color: Colors.blue),
-                  ),);
-              },
-            ) : const SizedBox(),
-      
-          ]
+      body: SingleChildScrollView(
+        child: Column(children: [
+          (lessonDetail.vocabularies != null)
+              ? ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.only(top: 0, bottom: 20),
+                  itemCount: lessonDetail.vocabularies!.length,
+                  itemBuilder: (context, index) {
+                    final VocabularyInfo word =
+                        lessonDetail.vocabularies![index];
+                    return ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 20),
+                      horizontalTitleGap: 10,
+                      title: Text(
+                        word.simplified!,
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w500, fontSize: 18),
+                      ),
+                      subtitle: (word.translationVn != "")
+                          ? Text(word.translationVn ?? "-")
+                          : const Text("-"),
+                      leading: Text(
+                        '${index + 1}.',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.bold, color: Colors.blue),
+                      ),
+                      trailing: IconButton(
+                          onPressed: () {
+                            word.audio;
+                          },
+                          icon: const Icon(Icons.volume_up_outlined)),
+                    );
+                  },
+                )
+              : const SizedBox(),
+        ]),
       ),
     );
   }

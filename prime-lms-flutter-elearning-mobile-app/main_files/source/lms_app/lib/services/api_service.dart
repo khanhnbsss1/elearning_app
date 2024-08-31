@@ -69,7 +69,7 @@ class ApiService {
   }
 
   Future<List<CourseInfo>?> getAllCourses({required String keyword}) async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", keyword: keyword, pageSize: 10, pageNumber: 0,));
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", keyword: keyword, pageSize: 10, pageNumber: 0, isActive: 1));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
@@ -94,25 +94,25 @@ class ApiService {
   }
 
   Future<List<CourseInfo>?> getLatestCourses() async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, pageNumber: 0, keyword: ""));
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, pageNumber: 0, keyword: "", isActive: 1));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
 
   Future<List<CourseInfo>?> getRelatedCoursesByCategory(CourseInfo course) async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "CATEGORY", pageSize: 10, pageNumber: 0, keyword: "", subFilterId: course.categoryId.toString()));
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, pageNumber: 0, keyword: "", subFilterId: "", isActive: 1));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
 
   Future<List<CourseInfo>?> getFeaturedCourses() async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, pageNumber: 0, keyword: ""));
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, pageNumber: 0, keyword: "", isActive: 1));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
 
   Future<List<CourseInfo>?> getFreeCourses() async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "FREE_COURSE", pageSize: 10, pageNumber: 0, keyword: "",));
+    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "FREE_COURSE", pageSize: 10, pageNumber: 0, keyword: "", isActive: 1));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
@@ -145,7 +145,7 @@ class ApiService {
     return data;
   }
 
-  Future<List<CourseFilterInfo>?> getHomeCategories() async {
+  Future<List<CourseFilterInfo>> getHomeCategories() async {
     GetCourseFilterApi getCourseFilterApi = GetCourseFilterApi();
     CourseFilterListInfo categories = await getCourseFilterApi.call("");
     return categories.data??[];
@@ -155,9 +155,9 @@ class ApiService {
       {required String filter, required int pageNumber, required String subFilterId}) async {
     GetCourseListApi getCourseListApi;
     if (subFilterId != "") {
-      getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: (filter != "") ? filter.toUpperCase() : "ALL",subFilterId: subFilterId, pageSize: 10, pageNumber: pageNumber, keyword: "",));
+      getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: (filter != "") ? filter.toUpperCase() : "ALL",subFilterId: subFilterId, pageSize: 10, pageNumber: pageNumber, keyword: "", isActive: 1));
     } else {
-      getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: (filter != "") ? filter.toUpperCase() : "ALL", pageSize: 10, pageNumber: pageNumber, keyword: "",));
+      getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: (filter != "") ? filter.toUpperCase() : "ALL", pageSize: 10, pageNumber: pageNumber, keyword: "", isActive: 1));
     }
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
