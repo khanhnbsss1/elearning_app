@@ -143,7 +143,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     ],
                     children: [
                       MenuItem(
-                        title: L10nX.getStr.your_course,
+                        title: L10nX.getStr.registered_str,
                         route:  Routes.courseMyList,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
                         permission: const [
@@ -152,7 +152,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                         ],
                       ),
                       MenuItem(
-                        title: L10nX.getStr.courses_list,
+                        title: L10nX.getStr.all_str,
                         route:  Routes.courseList,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
                         permission: const [
@@ -216,14 +216,14 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     children: [
                       MenuItem(
                         title: L10nX.getStr.course_str,
-                        route:  Routes.vocabularyListNoImage,
+                        route:  Routes.vocabularyListImage ,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
                         permission: const ["vocabulary.get.getlist",],
     
                       ),
                       MenuItem(
-                        title: L10nX.getStr.simplified_str,
-                        route:  Routes.vocabularyListImage,
+                        title: L10nX.getStr.chinese_vietnamese_str,
+                        route:  Routes.vocabularyListNoImage,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
                         permission: const ["vocabulary.get.getlist",],
     

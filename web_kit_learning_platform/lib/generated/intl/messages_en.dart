@@ -52,6 +52,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Adjust your course availability date"),
         "alert": MessageLookupByLibrary.simpleMessage("Alert"),
+        "all_str": MessageLookupByLibrary.simpleMessage("All"),
         "animated": MessageLookupByLibrary.simpleMessage("Animated"),
         "answer_str_1": MessageLookupByLibrary.simpleMessage("Answer"),
         "answer_str_2": MessageLookupByLibrary.simpleMessage("Answer"),
@@ -127,6 +128,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_password_text":
             MessageLookupByLibrary.simpleMessage("Change password"),
         "charts": MessageLookupByLibrary.simpleMessage("Charts"),
+        "chinese_vietnamese_str":
+            MessageLookupByLibrary.simpleMessage("Chinese-Vietnamese"),
         "choose_category_str":
             MessageLookupByLibrary.simpleMessage("Choose category"),
         "choose_quest":
@@ -493,6 +496,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage(
                 "Register to enjoy the best deals for you"),
+        "registered_str": MessageLookupByLibrary.simpleMessage("Registered"),
         "registered_user":
             MessageLookupByLibrary.simpleMessage("New registered user"),
         "remember_me": MessageLookupByLibrary.simpleMessage("Remember Me"),

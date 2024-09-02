@@ -650,5 +650,8 @@
   "revenue_month": "Revenue by month",
   "current_month": "Current Month",
   "previous_month": "Previous Month",
-  "trend_str": "Trend"
+  "trend_str": "Trend",
+  "registered_str": "Registered",
+  "all_str": "All",
+  "chinese_vietnamese_str":"Chinese-Vietnamese"
 }

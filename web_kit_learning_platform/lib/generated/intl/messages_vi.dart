@@ -45,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_products": MessageLookupByLibrary.simpleMessage("Thêm sản phẩm"),
         "add_selection": MessageLookupByLibrary.simpleMessage("Thêm lựa chọn"),
         "add_tags": MessageLookupByLibrary.simpleMessage("Thêm thẻ"),
+        "all_str": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "animated": MessageLookupByLibrary.simpleMessage("Hoạt hình"),
         "answer_str_1": MessageLookupByLibrary.simpleMessage("Câu trả lời"),
         "answer_str_2": MessageLookupByLibrary.simpleMessage("Đáp án"),
@@ -120,6 +121,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_log": MessageLookupByLibrary.simpleMessage("Nhật ký thay đổi"),
         "change_password_text":
             MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
+        "chinese_vietnamese_str":
+            MessageLookupByLibrary.simpleMessage("Hán Việt"),
         "choose_category_str":
             MessageLookupByLibrary.simpleMessage("Chọn danh mục"),
         "choose_quest":
@@ -488,6 +491,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage(
                 "Đăng ký để được hưởng những ưu đãi tốt nhất cho bạn"),
+        "registered_str": MessageLookupByLibrary.simpleMessage("Đã đăng ký"),
         "registered_user":
             MessageLookupByLibrary.simpleMessage("Người dùng đăng ký mới"),
         "remember_me": MessageLookupByLibrary.simpleMessage("Nhớ tôi"),

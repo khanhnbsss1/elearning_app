@@ -645,5 +645,8 @@
   "revenue_month": "按月收入",
   "current_month": "当前月份",
   "previous_month": "上个月",
-  "trend_str": "趋势"
+  "trend_str": "趋势",
+  "registered_str": "已注册",
+  "all_str": "全部",
+  "chinese_vietnamese_str":"汉语拼音"
 }

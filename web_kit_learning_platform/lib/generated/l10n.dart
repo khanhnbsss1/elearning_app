@@ -6479,6 +6479,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Registered`
+  String get registered_str {
+    return Intl.message(
+      'Registered',
+      name: 'registered_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All`
+  String get all_str {
+    return Intl.message(
+      'All',
+      name: 'all_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chinese-Vietnamese`
+  String get chinese_vietnamese_str {
+    return Intl.message(
+      'Chinese-Vietnamese',
+      name: 'chinese_vietnamese_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

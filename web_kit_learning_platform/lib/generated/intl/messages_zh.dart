@@ -45,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "adjust_your_course_availability_date_str":
             MessageLookupByLibrary.simpleMessage("调整课程可用日期"),
         "alert": MessageLookupByLibrary.simpleMessage("警报"),
+        "all_str": MessageLookupByLibrary.simpleMessage("全部"),
         "animated": MessageLookupByLibrary.simpleMessage("动画"),
         "answer_str_1": MessageLookupByLibrary.simpleMessage("回答"),
         "answer_str_2": MessageLookupByLibrary.simpleMessage("回答"),
@@ -110,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_log": MessageLookupByLibrary.simpleMessage("变更日志"),
         "change_password_text": MessageLookupByLibrary.simpleMessage("更改密码"),
         "charts": MessageLookupByLibrary.simpleMessage("图表"),
+        "chinese_vietnamese_str": MessageLookupByLibrary.simpleMessage("汉语拼音"),
         "choose_category_str": MessageLookupByLibrary.simpleMessage("选择类别"),
         "choose_quest": MessageLookupByLibrary.simpleMessage("搜索问题"),
         "choosed_str": MessageLookupByLibrary.simpleMessage("已选择"),
@@ -409,6 +411,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_now": MessageLookupByLibrary.simpleMessage("立即注册"),
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage("注册即可享受最优惠的价格"),
+        "registered_str": MessageLookupByLibrary.simpleMessage("已注册"),
         "registered_user": MessageLookupByLibrary.simpleMessage("新注册用户"),
         "remember_me": MessageLookupByLibrary.simpleMessage("记住我"),
         "remove_course": MessageLookupByLibrary.simpleMessage("删除课程"),

@@ -650,5 +650,8 @@
   "revenue_month": "Doanh thu theo tháng",
   "current_month": "Tháng hiện tại",
   "previous_month": "Tháng trước",
-  "trend_str": "Xu hướng"
+  "trend_str": "Xu hướng",
+  "registered_str": "Đã đăng ký",
+  "all_str": "Tất cả",
+  "chinese_vietnamese_str":"Hán Việt"
 }
