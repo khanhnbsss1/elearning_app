@@ -21,7 +21,7 @@ class QuizListState extends Equatable {
     this.selectInfo
   }){
     listResponseModel??= QuestionListResponseModel(content: [],);
-    searchCommonRequest??= SearchCommonRequest(pageNumber: 0, pageSize: 10, keyword: "");
+    searchCommonRequest??= SearchCommonRequest(pageNumber: 0, pageSize:15, keyword: "");
   }
 
 

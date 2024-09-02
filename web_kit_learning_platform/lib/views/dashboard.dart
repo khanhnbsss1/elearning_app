@@ -550,7 +550,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                     sizes: "lg-4",
                     child: buildRevenueItem(
                       L10nX.getStr.trend_str,
-                      "$differentCurrentAndPreviousMonth (${L10nX.getStr.vnd_str})",
+                      "${differentCurrentAndPreviousMonth.abs()} (${L10nX.getStr.vnd_str})",
                       differentCurrentAndPreviousMonth<0?LucideIcons.cornerRightDown:LucideIcons.cornerRightUp,
                       differentCurrentAndPreviousMonth<0?contentTheme.red:contentTheme.success,
                     ),
@@ -859,7 +859,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   MyText.bodyMedium(
-                                    '${differentCurrentAndPreviousMonth}',
+                                    '${differentCurrentAndPreviousMonth.abs()}',
                                     fontSize: 20,
                                     color: contentTheme.light,
                                   ),

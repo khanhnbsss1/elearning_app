@@ -22,7 +22,7 @@ class GetQuizListApi extends BaseApiRequest {
     }
     else
     {
-      QuestionListResponseModel model = QuestionListResponseModel.fromList(result);
+      QuestionListResponseModel model = QuestionListResponseModel.fromJson(result);
       return model;
     }
   }
