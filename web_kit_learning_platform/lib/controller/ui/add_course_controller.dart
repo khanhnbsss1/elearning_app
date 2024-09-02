@@ -242,7 +242,7 @@ class AddCourseController extends MyController {
     UserProfile? userProfile = UserManager().getUserProfile();
     List<String> infoObject = [];
     List<String> resultObject = [];
-    int? categoryId = getIdFromName(listOfCategoryName, basicValidator.getController('category_name')!.text??"");
+   // int? categoryId = getIdFromName(listOfCategoryName, basicValidator.getController('category_name')!.text??"");
 
     for(TextEditingController textEditingController in getListInfoObjectController())
       {
@@ -270,7 +270,7 @@ class AddCourseController extends MyController {
       durian: basicValidator.getController('durian')!.text,
       courseMode: basicValidator.getController('course_mode')!.text,
       gradeName: basicValidator.getController('grade_name')?.text,
-      categoryId: categoryId,
+    //  categoryId: categoryId,
       isStandard: int.tryParse(basicValidator.getController('is_standard')!.text),
       categoryName: basicValidator.getController('category_name')?.text,
       videoPreview: basicValidator.getController('video_preview')?.text,

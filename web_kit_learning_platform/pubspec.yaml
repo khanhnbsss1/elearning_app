@@ -146,6 +146,7 @@ dependencies:
   flutter_timer_countdown: ^1.0.7
   flutter_downloader: ^1.11.8
   tiengviet: ^1.0.0
+ # pdfrx: ^1.0.83
 dependency_overrides:
  # file_picker: ^8.1.2
  # google_maps_flutter: ^2.7.0

@@ -38,7 +38,6 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   late CourseDetailState _state;
   late BuildContext _blocContext;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
 
   @override
   void initState() {
@@ -513,7 +512,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
     UserProfile? userInfo = UserManager().getUserProfile();
     return userInfo;
   }
-  
+
   Widget buildLessonContent(LessonInfo? selectLessonInfo){
     return (selectLessonInfo?.content??'').isNotEmpty?
      Container(
@@ -525,13 +524,24 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
          // borderRadius: BorderRadius.circular(Dimens.size16)
       ),
       clipBehavior: Clip.hardEdge,
-      child: SfPdfViewer.network(
-        (selectLessonInfo?.content??''),
-        canShowScrollStatus: true,
-        //key: UniqueKey(),
-        //key: _pdfViewerKey,
-      ),
-    )
+      child:
+      StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+        return  SfPdfViewer.network(
+          (selectLessonInfo?.content??''),
+          key: UniqueKey(),
+          canShowScrollStatus: true,
+          onDocumentLoadFailed: (details) {
+            print("object");
+            setState(() {
+              
+            },);
+          },
+          //key: UniqueKey(),
+          //key: _pdfViewerKey,
+        );
+      },
+        
+      ))
     /*FutureBuilder(builder: (context, snapshot) {
         if(snapshot.hasData)
           {
@@ -544,11 +554,11 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                 borderRadius: BorderRadius.circular(Dimens.size16)
               ),
               clipBehavior: Clip.hardEdge,
-              child: SfPdfViewer.memory(
-                snapshot.data!,
-                //key: UniqueKey(),
-                //key: _pdfViewerKey,
-              ),
+              child: PdfView(
+                controller: PdfController(
+                  document: PdfDocument.openData(snapshot.data!),
+                ),
+              )
             );
           }
         else {
@@ -557,7 +567,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
 
       }, 
       future:getContentData((selectLessonInfo?.content??'')),
-    )*/: SizedBox();
+    ))*/:SizedBox();
   }
   Future<Uint8List?> getContentData(String url) async {
     Response res = await get(Uri.parse(url),);

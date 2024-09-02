@@ -206,7 +206,10 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     CourseInfo? courseInfo = await state.controller?.getCourseInfoFromUI(courseInfo: state.courseInfo!);
     courseInfo = courseInfo?.copyWith(
         image: state.courseInfo?.image,
-        videoPreview: state.courseInfo?.videoPreview
+        videoPreview: state.courseInfo?.videoPreview,
+      categoryId: state.courseInfo?.categoryId,
+      gradeId: state.courseInfo?.gradeId,
+      producerName: state.courseInfo?.producerName
     );
     UpdateCourseApi updateCourseApi = UpdateCourseApi(addCourseRequest: courseInfo!);
     dynamic data = await updateCourseApi.call();

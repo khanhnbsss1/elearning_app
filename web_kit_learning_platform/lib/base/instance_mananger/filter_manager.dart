@@ -84,7 +84,9 @@ class FilterManager{
     Function(GradeInfo?)? onChanged,
     bool? enable,
     int? inputGradeId,
+    String? gradeName,
     double? width,
+    
   }){
     enable??=true;
     return FutureBuilder(
@@ -98,6 +100,12 @@ class FilterManager{
         if(data.where((element) => element.id == inputGradeId,).isNotEmpty)
         {
           selectGrade = data.firstWhere((element) => element.id == inputGradeId,);
+        }
+        else if((gradeName??"").isNotEmpty){
+          if(data.where((element) => element.name == gradeName,).isNotEmpty)
+          {
+            selectGrade = data.firstWhere((element) => element.name == gradeName,);
+          }
         }
         else
         {
@@ -224,6 +232,7 @@ class FilterManager{
               child: IgnorePointer(
                 ignoring: !(enable??true),
                 child: DropdownButtonFormField2<CategoryInfo>(
+                  key: UniqueKey(),
                   isExpanded: true,
                   valueListenable: ValueNotifier<CategoryInfo?>(selectCategory),
                   decoration: InputDecoration(

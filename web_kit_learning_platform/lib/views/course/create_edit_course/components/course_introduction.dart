@@ -349,7 +349,6 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         context: context,
       enable: true,
       width: width,
-      
       onChanged: (p0) {
         state.courseInfo?.categoryId = p0?.id;
         BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateCourseInfoEvent(courseInfo: state.courseInfo!));
@@ -567,6 +566,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         context: context,
       width: width,
       inputGradeId: state.courseInfo?.gradeId,
+      gradeName:  state.courseInfo?.gradeId!=null?null:state.courseInfo?.gradeName,
       onChanged: (p0) {
           state.courseInfo?.gradeId = p0?.id;
         BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateCourseInfoEvent(courseInfo: state.courseInfo!));
