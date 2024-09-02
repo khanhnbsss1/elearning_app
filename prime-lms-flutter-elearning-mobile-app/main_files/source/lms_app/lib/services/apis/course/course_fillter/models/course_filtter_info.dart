@@ -6,10 +6,13 @@ class CourseFilterListInfo {
   }
 
   CourseFilterListInfo.fromJson(dynamic json) {
-      data = <CourseFilterInfo>[];
-      json.forEach((v) {
-        data!.add(new CourseFilterInfo.fromJson(v));
-      });
+    if (json != [] && json != null)
+      {
+        data = <CourseFilterInfo>[];
+        json.forEach((v) {
+          data!.add(new CourseFilterInfo.fromJson(v));
+        });
+      }
   }
 
   Map<String, dynamic> toJson() {

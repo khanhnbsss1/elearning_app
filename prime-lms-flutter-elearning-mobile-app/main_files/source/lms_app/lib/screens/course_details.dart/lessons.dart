@@ -25,7 +25,6 @@ import '../../models/lesson.dart';
 import '../../models/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 
-
 class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
   const Lessons({
     super.key,
@@ -76,7 +75,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                                 NextScreen.normal(
                                     context,
                                     Vocabulary(
-                                        course: course, sectionId: index));
+                                        lessonDetail: lessonDetail, sectionId: index));
                               },
                               child: Text('vocabulary',
                                       style: Theme.of(context)
@@ -86,20 +85,26 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                                               fontWeight: FontWeight.w400,
                                               fontSize: 16))
                                   .tr()),
-                          InkWell(
-                              onTap: () {
-                                // if (lessonDetail.docLink != "") {
-                                //   PdfScreen(link: lessonDetail.docLink!, name: lessonDetail.docName??"-");
-                                // }
-                              },
-                              child: Text('document',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleLarge
-                                      ?.copyWith(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16))
-                                  .tr()),
+                          (lessonDetail.docLink != "" && lessonDetail.docLink != null)
+                              ? InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (builder) => PdfScreen(
+                                                link: lessonDetail.docLink!,
+                                                name: lessonDetail.docName ??
+                                                    "-")));
+                                  },
+                                  child: Text('document',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleLarge
+                                              ?.copyWith(
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 16))
+                                      .tr())
+                              : const SizedBox(),
                         ],
                       ),
                       leading: Text(
