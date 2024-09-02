@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'package:tiengviet/tiengviet.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
@@ -373,7 +374,9 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
     if((lessonListResponseModel?.content??[]).isNotEmpty)
       {
         content = [...(lessonListResponseModel?.content??[]).where((element) {
-          return element.lectureName?.toLowerCase().contains(keyWord.toLowerCase())??false;
+         String name = TiengViet.parse((element.lectureName??'').toLowerCase());
+          String keyWordfinal = TiengViet.parse(keyWord.toLowerCase());
+          return name.contains(keyWordfinal)??false;
         },)];
       }
 

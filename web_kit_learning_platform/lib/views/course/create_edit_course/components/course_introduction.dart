@@ -349,11 +349,12 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         context: context,
       enable: true,
       width: width,
+      
       onChanged: (p0) {
         state.courseInfo?.categoryId = p0?.id;
         BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateCourseInfoEvent(courseInfo: state.courseInfo!));
       },
-      inputCategoryId: state.courseInfo?.id
+      inputCategoryId: state.courseInfo?.categoryId
     );
    
   }
@@ -565,6 +566,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
     return FilterManager().buildGrade(
         context: context,
       width: width,
+      inputGradeId: state.courseInfo?.gradeId,
       onChanged: (p0) {
           state.courseInfo?.gradeId = p0?.id;
         BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateCourseInfoEvent(courseInfo: state.courseInfo!));

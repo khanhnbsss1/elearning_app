@@ -118,24 +118,28 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
             Gap(Dimens.size12),
             Visibility(
               visible:widget.questionInfo.questionType == QuestionType.image || widget.questionInfo.questionType == QuestionType.audio, 
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: widget.questionInfo.questionType == QuestionType.image? Dimens.size90:Dimens.size60, 
-                      width: Dimens.size120, 
-                      child: Stack(children:[
-                        Visibility(
+                child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) { 
+                  double imageWidth = 350>constraints.maxWidth/4?300:constraints.maxWidth/4;
+                  return Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                       // height: widget.questionInfo.questionType == QuestionType.image? Dimens.size90:Dimens.size60,
+                        width: imageWidth,
+                        child: Stack(children:[
+                          Visibility(
                             visible: widget.questionInfo.questionType == QuestionType.image,
-                            child: ImageManager().getImageByUrl(widget.questionInfo.questionLink??""),
-                        ),
-                        Visibility(
-                          visible: widget.questionInfo.questionType == QuestionType.audio,
-                          child: AudioSpeaker(url:  widget.questionInfo.questionLink??""),
-                        ),
-                      ] ),),
-                  ],
+                            child: ImageManager().getImageByUrl(widget.questionInfo.questionLink??"", boxFit: BoxFit.contain),
+                          ),
+                          Visibility(
+                            visible: widget.questionInfo.questionType == QuestionType.audio,
+                            child: AudioSpeaker(url:  widget.questionInfo.questionLink??""),
+                          ),
+                        ] ),),
+                    ],
+                  );
+                },
                 )),
             
             Divider(color: ColorConst.greyColor,thickness: 0.1,),
