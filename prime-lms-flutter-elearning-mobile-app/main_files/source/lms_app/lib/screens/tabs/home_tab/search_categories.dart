@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:lms_app/components/loading_tile.dart';
 import 'package:lms_app/screens/all_courses.dart/seach_courses_view.dart';
 import 'package:lms_app/screens/all_courses.dart/search_result.dart';
@@ -40,16 +41,27 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      // Text(
-                      //   'categories',
-                      //   style: Theme.of(context)
-                      //       .textTheme
-                      //       .titleLarge
-                      //       ?.copyWith(fontWeight: FontWeight.bold),
-                      // ).tr(),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 1.0,
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Text(
+                            'Author',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(fontWeight: FontWeight.bold),
+                          ).tr(),
+                        ),
+                      ),
                       // TextButton(
                       //   onPressed: () {
                       //     ref.read(navBarIndexProvider.notifier).state = 1;

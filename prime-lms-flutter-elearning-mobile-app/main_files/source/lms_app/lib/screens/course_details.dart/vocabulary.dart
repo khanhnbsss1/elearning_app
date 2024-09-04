@@ -82,7 +82,7 @@ class Vocabulary extends ConsumerWidget with CourseMixin, UserMixin {
                       ),
                       trailing: AudioSpeaker(
                         url: word.audioLink ?? "",
-                        enableProccessBar: true,
+                        enableProccessBar: false,
                       ),
                     );
                   },

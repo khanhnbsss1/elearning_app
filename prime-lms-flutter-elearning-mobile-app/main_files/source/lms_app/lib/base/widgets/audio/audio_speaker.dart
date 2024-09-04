@@ -29,22 +29,11 @@ class AudioSpeakerState extends State<AudioSpeaker> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return InkWell(onTap: () async {
-      await AudioManager().playAudio(
-        url: widget.url,
-        onChangeProcessingState: (p0) {
-          setState(() {
-            processingState = p0;
-          });
-        },
-        onChangeDuration: (event) {
-          setState(() {
-            event = event;
-          });
-        },
-        onGetLength: (length) {
-          length = length;
-        },
-      );
+      final player = AudioPlayer();
+      final duration = await player.setUrl(
+          widget.url);
+      player.play();
+      await player.play();
     }, child: LayoutBuilder(
       builder: (context, constraints) {
         Widget icon = const SizedBox();
