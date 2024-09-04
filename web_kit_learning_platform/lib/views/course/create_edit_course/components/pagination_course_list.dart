@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 
 class PaginationWidget extends StatefulWidget {
   const PaginationWidget({super.key});
-
   @override
   State<PaginationWidget> createState() => _PaginationWidgetState();
 }
@@ -11,7 +9,6 @@ class PaginationWidget extends StatefulWidget {
 class _PaginationWidgetState extends State<PaginationWidget> {
   int? page = 1;
   bool isSelected = false;
-
   @override
   Widget build(BuildContext context) {
     return Wrap(

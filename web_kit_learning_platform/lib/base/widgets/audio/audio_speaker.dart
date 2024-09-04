@@ -77,7 +77,7 @@ class AudioSpeakerState extends State<AudioSpeaker> {
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Visibility(
+/*            Visibility(
               visible: false,
                 child: Row(
                   children: [
@@ -96,7 +96,7 @@ class AudioSpeakerState extends State<AudioSpeaker> {
                     ),
                     Gap(Dimens.size8),
                   ],
-                )),
+                )),*/
             icon
           ],
         );

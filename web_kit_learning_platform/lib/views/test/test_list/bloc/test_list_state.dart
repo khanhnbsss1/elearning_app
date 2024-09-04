@@ -5,7 +5,6 @@ enum TestListStatus {
   onLoading,
   onSearchByParams,
   onLoadEnd,
-  onSelectTag
 }
 
 @immutable

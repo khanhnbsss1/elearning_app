@@ -59,10 +59,6 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
             switch (state.blocStatus) {
               case UserListStatus.initial:
                 break;
-            // TODO: Handle this case.
-              case UserListStatus.onSelectLesson:
-                {
-                }
                 break;
               default:
                 break;
@@ -286,13 +282,30 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
     },);
   }
   Widget buildUserList({required UserListState state, required BuildContext context}){
-    UserDataSource employeeDataSource = UserDataSource(
-      lessonData: state.userListResponseModel?.content??[],
-      starIndex: (state.searchCommonRequest?.pageNumber??0)* (state.searchCommonRequest?.pageSize??0),
-      onDelete: (p0) {
-        ConfirmPopupPage(
-          content: L10nX.getStr.you_want_remove,
-          onAccept: () async {
+
+    return Padding(
+        padding:  EdgeInsets.all(Dimens.size8),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            switch (state.blocStatus) {
+              case null:
+              // TODO: Handle this case.
+              case UserListStatus.initial:
+              // TODO: Handle this case.
+              case UserListStatus.onLoading:
+              // TODO: Handle this case.           // TODO: Handle this case.
+              case UserListStatus.onSearchByParams:
+              // TODO: Handle this case.
+                return Center(child: CircularProgressIndicator());
+              case UserListStatus.onLoadEnd:
+              // TODO: Handle this case.
+                UserDataSource employeeDataSource = UserDataSource(
+                  lessonData: state.userListResponseModel?.content??[],
+                  starIndex: (state.searchCommonRequest?.pageNumber??0)* (state.searchCommonRequest?.pageSize??0),
+                  onDelete: (p0) {
+                    ConfirmPopupPage(
+                      content: L10nX.getStr.you_want_remove,
+                      onAccept: () async {
 /*            MonitorLoading().showLoading("");
             DeleteUserApi api = DeleteUserApi(info: p0);
             dynamic data = await api.call();
@@ -301,119 +314,123 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
               {
                 BlocProvider.of<UserListBloc>(context).add(UserListInitEvent());
               }*/
-          },
+                      },
 
-        ).show(context);
-      },
-      onEdit: (p0) {
-        AppPages.routeName(
-            Routes.userEdit,
-            arguments: {
-              'userProfile': p0,
-              'actionType': ActionType.edit,
-              'editSelfProfile':false
-            });
-      },
-      onViewDetail: (p0) {
-       AppPages.routeName(Routes.userEdit,arguments: {'userProfile': p0, 'actionType': ActionType.view, 'editSelfProfile':false});
-    },
-    );
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        return SfDataGridTheme(
-          data: SfDataGridThemeData(
-            headerColor: ColorConst.mainColor.withOpacity(0.1),
-          ),
-          child: SfDataGrid(
-            source: employeeDataSource,
-            columnWidthMode: ColumnWidthMode.fill,
-            isScrollbarAlwaysShown: false,
-            gridLinesVisibility: GridLinesVisibility.both,
-            headerGridLinesVisibility: GridLinesVisibility.both,
-            headerRowHeight: Dimens.size60,
-            rowHeight: Dimens.size80,
+                    ).show(context);
+                  },
+                  onEdit: (p0) {
+                    AppPages.routeName(
+                        Routes.userEdit,
+                        arguments: {
+                          'userProfile': p0,
+                          'actionType': ActionType.edit,
+                          'editSelfProfile':false
+                        });
+                  },
+                  onViewDetail: (p0) {
+                    AppPages.routeName(Routes.userEdit,arguments: {'userProfile': p0, 'actionType': ActionType.view, 'editSelfProfile':false});
+                  },
+                );
+                return LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    return SfDataGridTheme(
+                      data: SfDataGridThemeData(
+                        headerColor: ColorConst.mainColor.withOpacity(0.1),
+                      ),
+                      child: SfDataGrid(
+                        source: employeeDataSource,
+                        columnWidthMode: ColumnWidthMode.fill,
+                        isScrollbarAlwaysShown: false,
+                        gridLinesVisibility: GridLinesVisibility.both,
+                        headerGridLinesVisibility: GridLinesVisibility.both,
+                        headerRowHeight: Dimens.size60,
+                        rowHeight: Dimens.size80,
 /*            onQueryRowHeight: (details) {
               return details.getIntrinsicRowHeight(details.rowIndex);
             },*/
-            //defaultColumnWidth: 200,
-            showHorizontalScrollbar: true,
-            columns: <GridColumn>[
-              GridColumn(
-                  columnName: 'id',
-                  maximumWidth: Dimens.size60,
-                  label: Container(
-                      padding: EdgeInsets.all(16.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        'ID',
-                      ))),
-              GridColumn(
-                  columnName: L10nX.getStr.username,
-                  minimumWidth: Dimens.size200,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        L10nX.getStr.username,
-                        overflow: TextOverflow.ellipsis,
-                      ))),
-              GridColumn(
-                  columnName: L10nX.getStr.full_name,
-                  minimumWidth: Dimens.size250,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.full_name))),
-              GridColumn(
-                  columnName: L10nX.getStr.email,
-                  minimumWidth: Dimens.size300,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.email))),
-              GridColumn(
-                  columnName: L10nX.getStr.phone_number,
-                  minimumWidth: Dimens.size120,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.phone_number))),
-              GridColumn(
-                  columnName: L10nX.getStr.gender,
-                  minimumWidth: Dimens.size120,
-                  maximumWidth: Dimens.size120,
+                        //defaultColumnWidth: 200,
+                        showHorizontalScrollbar: true,
+                        columns: <GridColumn>[
+                          GridColumn(
+                              columnName: 'id',
+                              maximumWidth: Dimens.size60,
+                              label: Container(
+                                  padding: EdgeInsets.all(16.0),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'ID',
+                                  ))),
+                          GridColumn(
+                              columnName: L10nX.getStr.username,
+                              minimumWidth: Dimens.size200,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    L10nX.getStr.username,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))),
+                          GridColumn(
+                              columnName: L10nX.getStr.full_name,
+                              minimumWidth: Dimens.size250,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.full_name))),
+                          GridColumn(
+                              columnName: L10nX.getStr.email,
+                              minimumWidth: Dimens.size300,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.email))),
+                          GridColumn(
+                              columnName: L10nX.getStr.phone_number,
+                              minimumWidth: Dimens.size120,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.phone_number))),
+                          GridColumn(
+                              columnName: L10nX.getStr.gender,
+                              minimumWidth: Dimens.size120,
+                              maximumWidth: Dimens.size120,
 
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.gender))),
-              GridColumn(
-                  columnName: L10nX.getStr.positions,
-                  minimumWidth: Dimens.size180,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.positions))),
-              GridColumn(
-                  columnName: L10nX.getStr.type,
-                  maximumWidth: Dimens.size180,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.type))),
-              GridColumn(
-                  columnName: L10nX.getStr.action_str,
-                  minimumWidth: Dimens.size180,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.action_str))),
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.gender))),
+                          GridColumn(
+                              columnName: L10nX.getStr.positions,
+                              minimumWidth: Dimens.size180,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.positions))),
+                          GridColumn(
+                              columnName: L10nX.getStr.type,
+                              maximumWidth: Dimens.size180,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.type))),
+                          GridColumn(
+                              columnName: L10nX.getStr.action_str,
+                              minimumWidth: Dimens.size180,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.action_str))),
 
-            ],
-          ),
-        );
-      },
-    );
+                        ],
+                      ),
+                    );
+                  },
+                );
+            }
+          },
+        ));
+
   }
   
 }

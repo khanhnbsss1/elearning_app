@@ -17,12 +17,6 @@ class UserListBloc extends Bloc<UserListEvent, UserListState> {
   UserListBloc(super.initialState) {
     on<UserListInitEvent>(_onInit);
     on<UserListOnSearchByFilterEvent>(_onSearchByParams);
-    on<UserListOnSelectLessonEvent>((event, emit) async {
-      emit(state.copyWith(
-          selectUserInfo: event.userProfile,
-        blocStatus: UserListStatus.onSelectLesson
-      ));
-    });
   }
 
   Future<void> _onInit(UserListInitEvent event,
@@ -51,10 +45,6 @@ class UserListBloc extends Bloc<UserListEvent, UserListState> {
             blocStatus: UserListStatus.onLoadEnd,
           searchCommonRequest: searchCommonRequest
         ));
-        if((userListResponseModel.content??[]).isNotEmpty) {
-          add(UserListOnSelectLessonEvent(userProfile: (userListResponseModel.content??[]).first));
-        }
-   
 
   }
 }

@@ -78,9 +78,9 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                       color: ColorConst.whiteColor,
                     ),
                       constraints: BoxConstraints(
-                        minHeight: MediaQuery.of(context).size.height
+                        maxHeight: MediaQuery.of(context).size.height
                       ),
-                      child: buildSubjectAndTestList()),
+                      child: buildSubjectAndTestListMobile()),
                   body: Padding(
                     padding:  EdgeInsets.only(top: myScreenMediaType.isMobile?0:50),
                     child: Stack(
@@ -96,6 +96,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                                   thickness: 10,
                                   trackVisibility: true,
                                   thumbVisibility: true,
+                                  radius: Radius.circular(Dimens.size8),
                                   child: SingleChildScrollView(
                                     controller: studySectionScrollController,
                                     scrollDirection: Axis.vertical,
@@ -277,15 +278,15 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                       style: TextStyleConstant.textStyleBlack14w600),
              ),
             Divider(color: ColorConst.blackColor,thickness: 0.1,),
-            Scrollbar(
-              controller: subjectScrollControllerBar ,
-              thickness: 10,
-              trackVisibility: true,
-              thumbVisibility: true,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  ListView.builder(
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Scrollbar(
+                  controller: subjectScrollControllerBar ,
+                  thickness: 10,
+                  trackVisibility: true,
+                  thumbVisibility: true,
+                  child: ListView.builder(
                     controller: subjectScrollControllerBar,
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
@@ -306,25 +307,93 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                       );
                     },
                   ),
-/*                  Gap(Dimens.size8,),
-                  Row(
-                    children: const [Expanded(
-                        child: Text("--------------------------------------------------------------------------------------------------------------------------------------------------------", 
-                          textAlign: TextAlign.center,
-                          maxLines: 1,
-                        ))],
-                  ),*/
+                ),
+                Gap(Dimens.size8,),
+                TestItemWidget(
+                  testInfos: [
+                    TestInfo(
+                        id: _state.courseInfo?.testId, 
+                        courseId: _state.courseInfo?.id,
+                        name:  _state.courseInfo?.testName??""),
+                  ],
+                  subjectIndex: 1, 
+                  onSelectTest: (testInfo ) {  
+                    
+                  },
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  Widget buildSubjectAndTestListMobile({bool? isOnDrawer}) {
+    return Container(
+      width: Dimens.size400,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(0),
+          color: ColorConst.whiteColor
+      ),
+      padding: EdgeInsets.zero,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 16.0, bottom: 16, right: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size16),
+              child: Text(L10nX.getStr.lesson_list,
+                  style: TextStyleConstant.textStyleBlack14w600),
+            ),
+            Divider(color: ColorConst.blackColor,thickness: 0.1,),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                      child: Scrollbar(
+                        //controller: subjectScrollControllerBar ,
+                        thickness: 5,
+                        trackVisibility: true,
+                        thumbVisibility: true,
+                        radius: Radius.circular(Dimens.size5),
+                        child: ListView.builder(
+                          controller: subjectScrollControllerBar,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          padding: EdgeInsets.zero,
+                          itemCount: (_state.courseInfo?.getListSubjectAndLesson() ?? []).length,
+                          itemBuilder: (context, subjectIndex) {
+                            Subjects subject = (_state.courseInfo?.getListSubjectAndLesson()??[]).elementAt(subjectIndex);
+                            return SubjectItemWidget(
+                              onFinishLecture: (p0) {
+              
+                              },
+                              onSelectLesson: (p0) {
+                                BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailSelectLessonEvent(selectLessonInfo: p0));
+                              },
+                              selectLessonInfo: _state.selectLessonInfo,
+                              subject: subject,
+                              subjectIndex: subjectIndex,
+                              subjectScrollController: subjectScrollControllerBar,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
                   Gap(Dimens.size8,),
                   TestItemWidget(
                     testInfos: [
                       TestInfo(
-                          id: _state.courseInfo?.testId, 
+                          id: _state.courseInfo?.testId,
                           courseId: _state.courseInfo?.id,
                           name:  _state.courseInfo?.testName??""),
                     ],
-                    subjectIndex: 1, 
-                    onSelectTest: (testInfo ) {  
-                      
+                    subjectIndex: 1,
+                    onSelectTest: (testInfo ) {
+              
                     },
                   )
                 ],
@@ -335,7 +404,6 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
       ),
     );
   }
-  
   Widget buildStudyUI() {
     return SingleChildScrollView(
       // controller: lessonDetailScrollController,
@@ -444,39 +512,35 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
         Padding(
           padding: const EdgeInsets.only(left: 16.0),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Text('$index.'),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('${word.pinyinTones}'),
-                  Row(
-                    children: [
-                      // Text('$index.'),
-                      Text('${word.simplified} : '),
-                      Text('${word.translationVn}'),
-                      SizedBox(
-                        width: 16,
-                      ),
-                    ],
-                  ),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('${word.pinyinTones}'),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Text('$index.'),
+                        Expanded(child: Text('${word.simplified} : ${word.translationVn}')),
+                        Gap(Dimens.size12),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              Spacer(),
+              Gap(Dimens.size12),
               AudioSpeaker(
                 url: word.audioLink ?? "",
                 enableProccessBar: true,
               ),
-              SizedBox(
-                width: 16,
-              ),
+              Gap(Dimens.size12),
               InkWell(onTap: () {
                 VocabularyViewDetail(selectVocabularyInfo: word,).show(context);
               }, child: Icon(Icons.remove_red_eye_outlined)),
-              SizedBox(
-                width: 16,
-              ),
+              Gap(Dimens.size12),
             ],
           ),
         ),

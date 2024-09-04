@@ -5,7 +5,6 @@ enum QuizListStatus {
   onLoading,
   onSearchByParams,
   onLoadEnd,
-  onSelectTag
 }
 
 @immutable

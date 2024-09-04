@@ -64,10 +64,6 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
               case QuizListStatus.initial:
                 break;
             // TODO: Handle this case.
-              case QuizListStatus.onSelectTag:
-                {
-                }
-                break;
               default:
                 break;
             // TODO: Handle this case.
@@ -303,113 +299,133 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
 
   
   Widget buildTestTableList({required QuizListState state, required BuildContext context}){
-    QuestionDataSource employeeDataSource = QuestionDataSource(
-      lessonData: state.listResponseModel?.content??[],
-      onDelete: (p0) async {
-        ConfirmPopupPage(
-          content: L10nX.getStr.you_want_remove,
-          onAccept: () async {
-            MonitorLoading().showLoading("");
-            DeleteQuizApi api = DeleteQuizApi(info: p0);
-            dynamic data = await api.call();
-            MonitorLoading().dismiss();
-            BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
+    return Padding(
+        padding:  EdgeInsets.all(Dimens.size8),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            switch (state.blocStatus) {
+              case null:
+              // TODO: Handle this case.
+              case QuizListStatus.initial:
+              // TODO: Handle this case.
+              case QuizListStatus.onLoading:
+              // TODO: Handle this case.           // TODO: Handle this case.
+              case QuizListStatus.onSearchByParams:
+              // TODO: Handle this case.
+                return Center(child: CircularProgressIndicator());
+              case QuizListStatus.onLoadEnd:
+              // TODO: Handle this case.
+                QuestionDataSource employeeDataSource = QuestionDataSource(
+                  lessonData: state.listResponseModel?.content??[],
+                  onDelete: (p0) async {
+                    ConfirmPopupPage(
+                      content: L10nX.getStr.you_want_remove,
+                      onAccept: () async {
+                        MonitorLoading().showLoading("");
+                        DeleteQuizApi api = DeleteQuizApi(info: p0);
+                        dynamic data = await api.call();
+                        MonitorLoading().dismiss();
+                        BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
+                      },
+
+                    ).show(context);
+
+                  },
+                  onEdit: (p0) {
+                    QuestionCreateEditDetailPage(
+                      actionType: ActionType.edit,
+                      info: p0,
+                      callBack: () {
+                        BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
+                      },).show(context);
+                  },
+                  onViewDetail: (p0) {
+                    QuestionWorkItem(
+                      questionInfo: p0,
+                      enableCloseButton: true,
+                      enableShowResultAnswer: true,
+                      onChangeAnswer: (p0) {
+
+                      },
+                    ).show(context);
+                  },
+                );
+                return LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    return SfDataGridTheme(
+                      data: SfDataGridThemeData(
+                        headerColor: ColorConst.mainColor.withOpacity(0.1),
+                      ),
+                      child: SfDataGrid(
+                        source: employeeDataSource,
+                        columnWidthMode: ColumnWidthMode.fill,
+                        isScrollbarAlwaysShown: false,
+                        gridLinesVisibility: GridLinesVisibility.both,
+                        headerGridLinesVisibility: GridLinesVisibility.both,
+                        headerRowHeight: Dimens.size60,
+                        //defaultColumnWidth: 200,
+                        showHorizontalScrollbar: true,
+                        columns: <GridColumn>[
+                          GridColumn(
+                              columnName: 'id',
+                              maximumWidth: Dimens.size100,
+                              label: Container(
+                                  padding: EdgeInsets.all(16.0),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'ID',
+                                  ))),
+                          GridColumn(
+                              columnName: L10nX.getStr.question_str,
+                              minimumWidth: Dimens.size150,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    L10nX.getStr.question_str,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))),
+                          GridColumn(
+                              columnName: L10nX.getStr.question_type,
+                              minimumWidth: Dimens.size80,
+                              maximumWidth: Dimens.size120,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.question_type))),
+                          GridColumn(
+                              columnName: L10nX.getStr.grade_str,
+                              maximumWidth: Dimens.size120,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.grade_str))),
+                          GridColumn(
+                              columnName: L10nX.getStr.score_str,
+                              minimumWidth: Dimens.size80,
+                              maximumWidth: Dimens.size120,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.score_str))),
+                          GridColumn(
+                              columnName: L10nX.getStr.action_str,
+                              minimumWidth: Dimens.size180,
+                              maximumWidth: Dimens.size180,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.action_str))),
+
+                        ],
+                      ),
+                    );
+                  },
+                );
+            }
           },
-
-        ).show(context);
-
-      },
-      onEdit: (p0) {
-        QuestionCreateEditDetailPage(
-          actionType: ActionType.edit,
-          info: p0,
-          callBack: () {
-            BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
-          },).show(context);
-      },
-      onViewDetail: (p0) {
-        QuestionWorkItem(
-          questionInfo: p0, 
-          enableCloseButton: true,
-          enableShowResultAnswer: true,
-          onChangeAnswer: (p0) {
-            
-          },
-        ).show(context);
-      },
-    );
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        return SfDataGridTheme(
-          data: SfDataGridThemeData(
-            headerColor: ColorConst.mainColor.withOpacity(0.1),
-          ),
-          child: SfDataGrid(
-            source: employeeDataSource,
-            columnWidthMode: ColumnWidthMode.fill,
-            isScrollbarAlwaysShown: false,
-            gridLinesVisibility: GridLinesVisibility.both,
-            headerGridLinesVisibility: GridLinesVisibility.both,
-            headerRowHeight: Dimens.size60,
-            //defaultColumnWidth: 200,
-            showHorizontalScrollbar: true,
-            columns: <GridColumn>[
-              GridColumn(
-                  columnName: 'id',
-                  maximumWidth: Dimens.size100,
-                  label: Container(
-                      padding: EdgeInsets.all(16.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        'ID',
-                      ))),
-              GridColumn(
-                  columnName: L10nX.getStr.question_str,
-                  minimumWidth: Dimens.size150,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        L10nX.getStr.question_str,
-                        overflow: TextOverflow.ellipsis,
-                      ))),
-              GridColumn(
-                  columnName: L10nX.getStr.question_type,
-                  minimumWidth: Dimens.size80,
-                  maximumWidth: Dimens.size120,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.question_type))),
-              GridColumn(
-                  columnName: L10nX.getStr.grade_str,
-                  maximumWidth: Dimens.size120,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.grade_str))),
-              GridColumn(
-                  columnName: L10nX.getStr.score_str,
-                  minimumWidth: Dimens.size80,
-                  maximumWidth: Dimens.size120,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.score_str))),
-              GridColumn(
-                  columnName: L10nX.getStr.action_str,
-                  minimumWidth: Dimens.size180,
-                  maximumWidth: Dimens.size180,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.action_str))),
-
-            ],
-          ),
-        );
-      },
-    );
+        ));
+   
   }
 
 }

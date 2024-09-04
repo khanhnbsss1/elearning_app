@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/services/apis/lessson/lesson_list/lesson_list_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
@@ -16,12 +17,6 @@ class LessonListBloc extends Bloc<LessonListEvent, LessonListState> {
   LessonListBloc(super.initialState) {
     on<LessonListInitEvent>(_onInit);
     on<LessonListOnSearchByFilterEvent>(_onSearchByParams);
-    on<LessonListOnSelectLessonEvent>((event, emit) async {
-      emit(state.copyWith(
-          selectLessonInfo: event.selectLessonInfo,
-        blocStatus: LessonListStatus.onSelectLesson
-      ));
-    });
   }
 
   Future<void> _onInit(LessonListInitEvent event,
@@ -45,15 +40,11 @@ class LessonListBloc extends Bloc<LessonListEvent, LessonListState> {
 
     GetLessonListApi courseApi = GetLessonListApi(searchCommonRequest: state.searchCommonRequest!);
     LessonListResponseModel lessonListResponseModel = await courseApi.call();
-        emit(state.copyWith(
+    emit(state.copyWith(
             lessonListResponseModel: lessonListResponseModel,
             blocStatus: LessonListStatus.onLoadEnd,
           searchCommonRequest: searchCommonRequest
-        ));
-        if((lessonListResponseModel.content??[]).isNotEmpty) {
-          add(LessonListOnSelectLessonEvent(selectLessonInfo: (lessonListResponseModel.content??[]).first));
-        }
-   
-
+    ));
+        
   }
 }

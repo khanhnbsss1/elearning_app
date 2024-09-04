@@ -102,53 +102,50 @@ class SubjectItemWidgetState extends State<SubjectItemWidget>{
           ? Container(
         margin: EdgeInsets.all(0),
         constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
-        child: SingleChildScrollView(
-           controller:widget.subjectScrollController,
-          child: ListView.builder(
-            shrinkWrap: true,
-             controller: widget.subjectScrollController,
-            itemCount: (subject.lectures ?? []).length,
-            itemBuilder: (context, lectureIndex) {
-              LessonInfo lessonInfo = (subject.lectures ?? []).elementAt(lectureIndex);
-              bool isSelectLesson = lessonInfo.id == widget.selectLessonInfo?.id;
-              bool isFinishLesson = lessonInfo.isFinnish??false;
-              return InkWell(
-                onTap: () {
-                  widget.onSelectLesson(lessonInfo);
-                },
-                child: Column(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 4),
-                      decoration: BoxDecoration(
-                          color: isSelectLesson?ColorConst.greyColor1.withOpacity(0.05): ColorConst.whiteColor,
-                          border: Border(bottom: BorderSide(color: ColorConst.blackColor,width: 0.2))
-                      ),
-                      padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size32),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              '${subjectIndex+1}.${lectureIndex+1}. ${lessonInfo.lectureName}',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          Gap(Dimens.size10),
-                          Center(
-                            child: Icon(
-                              isFinishLesson?Icons.check_box_outlined:Icons.check_box_outline_blank,
-                              color:isFinishLesson? ColorConst.mainColor:ColorConst.colorIconGrays ,
-                            ),
-                          )
-                        ],
-                      ),
+        child: ListView.builder(
+          shrinkWrap: true,
+           controller: widget.subjectScrollController,
+          itemCount: (subject.lectures ?? []).length,
+          itemBuilder: (context, lectureIndex) {
+            LessonInfo lessonInfo = (subject.lectures ?? []).elementAt(lectureIndex);
+            bool isSelectLesson = lessonInfo.id == widget.selectLessonInfo?.id;
+            bool isFinishLesson = lessonInfo.isFinnish??false;
+            return InkWell(
+              onTap: () {
+                widget.onSelectLesson(lessonInfo);
+              },
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 4),
+                    decoration: BoxDecoration(
+                        color: isSelectLesson?ColorConst.greyColor1.withOpacity(0.05): ColorConst.whiteColor,
+                        border: Border(bottom: BorderSide(color: ColorConst.blackColor,width: 0.2))
                     ),
-                  ],
-                ),
-              );
-            },
-          ),
+                    padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size32),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            '${subjectIndex+1}.${lectureIndex+1}. ${lessonInfo.lectureName}',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Gap(Dimens.size10),
+                        Center(
+                          child: Icon(
+                            isFinishLesson?Icons.check_box_outlined:Icons.check_box_outline_blank,
+                            color:isFinishLesson? ColorConst.mainColor:ColorConst.colorIconGrays ,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       )
           : SizedBox(),

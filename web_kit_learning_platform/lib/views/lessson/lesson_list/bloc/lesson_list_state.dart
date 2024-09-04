@@ -5,7 +5,6 @@ enum LessonListStatus {
   onLoading,
   onSearchByParams,
   onLoadEnd,
-  onSelectLesson
 }
 
 @immutable

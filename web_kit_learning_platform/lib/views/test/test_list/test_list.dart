@@ -58,11 +58,6 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
             switch (state.blocStatus) {
               case TestListStatus.initial:
                 break;
-                // TODO: Handle this case.
-              case TestListStatus.onSelectTag:
-                {
-                }
-                break;
               default:
                 break;
                 // TODO: Handle this case.
@@ -288,120 +283,140 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
    },);
   }
   Widget buildTestTableList({required TestListState state, required BuildContext context}){
-    TestDataSource employeeDataSource = TestDataSource(
-      lessonData: state.listResponseModel?.content??[],
-      onDelete: (p0) async {
-        MonitorLoading().showLoading("");
-        DeleteTestApi api = DeleteTestApi(info: p0);
-        dynamic data = await api.call();
-        MonitorLoading().dismiss();
+    return Padding(
+        padding:  EdgeInsets.all(Dimens.size8),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            switch (state.blocStatus) {
+              case null:
+              // TODO: Handle this case.
+              case TestListStatus.initial:
+              // TODO: Handle this case.
+              case TestListStatus.onLoading:
+              // TODO: Handle this case.           // TODO: Handle this case.
+              case TestListStatus.onSearchByParams:
+              // TODO: Handle this case.
+                return Center(child: CircularProgressIndicator());
+              case TestListStatus.onLoadEnd:
+              // TODO: Handle this case.
+                TestDataSource employeeDataSource = TestDataSource(
+                  lessonData: state.listResponseModel?.content??[],
+                  onDelete: (p0) async {
+                    MonitorLoading().showLoading("");
+                    DeleteTestApi api = DeleteTestApi(info: p0);
+                    dynamic data = await api.call();
+                    MonitorLoading().dismiss();
 
-        BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
-      },
-      onEdit: (p0) {
-        CreateEditTest(
-          testActionType: ActionType.edit, 
-          testInfo: p0,
-          callBack: () {
-          BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
-        },).show(context);
-      },
-      onViewDetail: (p0) {
-        TestWorkPage(
-          testInfo: p0,
-          enableCloseButton: true,
-          enableShowResult: true,
-        ).show(context);
-      },
-    );
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) { 
-        return SfDataGridTheme(
-          data: SfDataGridThemeData(
-            headerColor: ColorConst.mainColor.withOpacity(0.1),
-          ),
-          child: SfDataGrid(
-            source: employeeDataSource,
-            columnWidthMode: ColumnWidthMode.fill,
-            isScrollbarAlwaysShown: false,
-            gridLinesVisibility: GridLinesVisibility.both,
-            headerGridLinesVisibility: GridLinesVisibility.both,
-            headerRowHeight: Dimens.size60, 
-            rowHeight: Dimens.size80,
+                    BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
+                  },
+                  onEdit: (p0) {
+                    CreateEditTest(
+                      testActionType: ActionType.edit,
+                      testInfo: p0,
+                      callBack: () {
+                        BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
+                      },).show(context);
+                  },
+                  onViewDetail: (p0) {
+                    TestWorkPage(
+                      testInfo: p0,
+                      enableCloseButton: true,
+                      enableShowResult: true,
+                    ).show(context);
+                  },
+                );
+                return LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    return SfDataGridTheme(
+                      data: SfDataGridThemeData(
+                        headerColor: ColorConst.mainColor.withOpacity(0.1),
+                      ),
+                      child: SfDataGrid(
+                        source: employeeDataSource,
+                        columnWidthMode: ColumnWidthMode.fill,
+                        isScrollbarAlwaysShown: false,
+                        gridLinesVisibility: GridLinesVisibility.both,
+                        headerGridLinesVisibility: GridLinesVisibility.both,
+                        headerRowHeight: Dimens.size60,
+                        rowHeight: Dimens.size80,
 /*            onQueryRowHeight: (details) {
               return details.getIntrinsicRowHeight(details.rowIndex);
             },*/
-            //defaultColumnWidth: 200,
-            showHorizontalScrollbar: true,
-            columns: <GridColumn>[
-              GridColumn(
-                  columnName: 'id',
-                  maximumWidth: Dimens.size60,
-                  label: Container(
-                      padding: EdgeInsets.all(16.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        'ID',
-                      ))),
-              GridColumn(
-                  columnName: L10nX.getStr.test_name,
-                  minimumWidth: Dimens.size200,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        L10nX.getStr.test_name,
-                        overflow: TextOverflow.ellipsis,
-                      ))),
-              GridColumn(
-                  columnName: L10nX.getStr.course_str,
-                  minimumWidth: Dimens.size200,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.course_str))),
-              GridColumn(
-                  columnName: L10nX.getStr.subject_str,
-                  minimumWidth: Dimens.size120,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.subject_str))),
-              GridColumn(
-                  columnName: L10nX.getStr.type,
-                  minimumWidth: Dimens.size120,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.type))),
-              GridColumn(
-                  columnName: L10nX.getStr.question_number,
-                  maximumWidth: Dimens.size120,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.question_number))),
-        
-        /*              GridColumn(
+                        //defaultColumnWidth: 200,
+                        showHorizontalScrollbar: true,
+                        columns: <GridColumn>[
+                          GridColumn(
+                              columnName: 'id',
+                              maximumWidth: Dimens.size60,
+                              label: Container(
+                                  padding: EdgeInsets.all(16.0),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'ID',
+                                  ))),
+                          GridColumn(
+                              columnName: L10nX.getStr.test_name,
+                              minimumWidth: Dimens.size200,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    L10nX.getStr.test_name,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))),
+                          GridColumn(
+                              columnName: L10nX.getStr.course_str,
+                              minimumWidth: Dimens.size200,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.course_str))),
+                          GridColumn(
+                              columnName: L10nX.getStr.subject_str,
+                              minimumWidth: Dimens.size120,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.subject_str))),
+                          GridColumn(
+                              columnName: L10nX.getStr.type,
+                              minimumWidth: Dimens.size120,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.type))),
+                          GridColumn(
+                              columnName: L10nX.getStr.question_number,
+                              maximumWidth: Dimens.size120,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.question_number))),
+
+                          /*              GridColumn(
                   columnName: L10nX.getStr.doing_time_str,
                   minimumWidth: Dimens.size120,
                   label: Container(
                       padding: EdgeInsets.all(8.0),
                       alignment: Alignment.center,
                       child: Text(L10nX.getStr.doing_time_str))),*/
-              GridColumn(
-                  columnName: L10nX.getStr.action_str,
-                  minimumWidth: Dimens.size180,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.action_str))),
-        
-            ],
-          ),
-        );
-      },
-    );
+                          GridColumn(
+                              columnName: L10nX.getStr.action_str,
+                              minimumWidth: Dimens.size180,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.action_str))),
+
+                        ],
+                      ),
+                    );
+                  },
+                );
+
+            }
+          },
+        ));
   }
   
 }
