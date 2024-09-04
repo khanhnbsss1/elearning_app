@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:lms_app/helper/navigator_key.dart';
 import 'package:lms_app/helper/services/navigation_service.dart';
 import 'package:lms_app/screens/auth/login.dart';
+import 'package:lms_app/screens/home/home_view.dart';
 import 'package:lms_app/screens/intro.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -77,6 +78,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     Get.updateLocale(context.locale);
     return GetMaterialApp(
+          theme: ThemeData(
+            primaryColor: const Color(0xF4930202)
+          ),
           navigatorKey: NavigationService().navigationKey,
           title: AppConfig.appName,
           debugShowCheckedModeBanner: false,
@@ -94,6 +98,7 @@ class _MyAppState extends State<MyApp> {
                   popUpScreen: false,
                 )
               : const IntroScreen(),
+      // home: HomeView(),
         );
   }
 }

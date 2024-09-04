@@ -105,7 +105,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       'login',
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, fontSize: 28),
                     ).tr(),
-                    Spacer(),
+                    const Spacer(),
                     Visibility(
                       visible: isMultilanguageEnbled,
                       child: IconButton(

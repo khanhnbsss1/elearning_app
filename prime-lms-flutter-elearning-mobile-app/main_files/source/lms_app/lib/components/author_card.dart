@@ -64,10 +64,6 @@ class AuthorCard extends StatelessWidget{
           const SizedBox(
             height: 10,
           ),
-          Text('total-lectures', style: Theme.of(context).textTheme.titleSmall,).tr(args: [user.id.toString()]),
-          const SizedBox(
-            height: 10,
-          ),
           // Text(
           //   bio,
           //   maxLines: 3,
@@ -82,7 +78,7 @@ class AuthorCard extends StatelessWidget{
                 style: OutlinedButton.styleFrom(elevation: 0, side: BorderSide(color: Theme.of(context).primaryColor)),
                 onPressed: () => NextScreen.iOS(context, AuthorProfile(user: user)),
                 // onPressed: () {},
-                child: const Text('view-profile').tr()),
+                child: Text('view-profile', style: TextStyle(color: Theme.of(context).primaryColor),).tr()),
           )
         ],
       ),

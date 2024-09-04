@@ -6,13 +6,14 @@ import 'package:shimmer/shimmer.dart';
 import '../screens/all_courses.dart/courses_view.dart';
 
 class LoadingGridTile extends StatelessWidget {
-  const LoadingGridTile({super.key, required this.gridStyle});
+  LoadingGridTile({super.key, required this.gridStyle, this.paddingAll});
+  double? paddingAll;
   final GridStyle gridStyle;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(paddingAll??20),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

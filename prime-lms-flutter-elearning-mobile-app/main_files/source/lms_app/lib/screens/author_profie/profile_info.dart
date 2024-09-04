@@ -39,7 +39,7 @@ class AuthorProfileInfo extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white),
           ),
           const SizedBox(height: 20),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -56,7 +56,7 @@ class AuthorProfileInfo extends StatelessWidget {
               //     ),
               //   ),
               // ),
-              const SizedBox(width: 15),
+              SizedBox(width: 15),
               // Visibility(
               //   visible: user.authorInfo != null && user.authorInfo?.fb != null,
               //   child: CircleAvatar(
@@ -70,7 +70,7 @@ class AuthorProfileInfo extends StatelessWidget {
               //     ),
               //   ),
               // ),
-              const SizedBox(width: 15),
+              SizedBox(width: 15),
               // Visibility(
               //   visible: user.authorInfo != null && user.authorInfo?.twitter != null,
               //   child: CircleAvatar(

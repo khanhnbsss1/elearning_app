@@ -23,15 +23,18 @@ class UserAvatar extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: Colors.grey.shade300,
-        image: (imageByte != null) ? DecorationImage(
+        image: (imageUrl != null && imageUrl != "")
+            ? DecorationImage(
+          image: Image.network(imageUrl!, fit: BoxFit.cover).image,
+          fit: BoxFit.cover,
+        )
+            : (imageByte != null)
+            ? DecorationImage(
           image: MemoryImage(imageByte!),
           fit: BoxFit.cover,
-        ) : null
+        )
+            : null,
       ),
-      child: (imageUrl == null || imageUrl == "" && imageByte == null) ? Icon(
-        LineIcons.user,
-        size: iconSize ?? 18,
-      ) : Image.network(imageUrl!),
     );
   }
 }

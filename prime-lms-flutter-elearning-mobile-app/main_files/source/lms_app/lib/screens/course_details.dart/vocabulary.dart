@@ -21,6 +21,7 @@ import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
 
+import '../../base/widgets/audio/audio_speaker.dart';
 import '../../models/lesson.dart';
 import '../../models/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
@@ -42,7 +43,7 @@ class Vocabulary extends ConsumerWidget with CourseMixin, UserMixin {
         backgroundColor: Theme.of(context).primaryColor,
         foregroundColor: Colors.white,
         title: Text(
-          '${lessonDetail.subName} - ${lessonDetail.lectureName}',
+          '${lessonDetail.lectureName}',
           maxLines: 2,
           style: Theme.of(context)
               .textTheme
@@ -79,11 +80,10 @@ class Vocabulary extends ConsumerWidget with CourseMixin, UserMixin {
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.bold, color: Colors.blue),
                       ),
-                      trailing: IconButton(
-                          onPressed: () {
-                            word.audio;
-                          },
-                          icon: const Icon(Icons.volume_up_outlined)),
+                      trailing: AudioSpeaker(
+                        url: word.audioLink ?? "",
+                        enableProccessBar: true,
+                      ),
                     );
                   },
                 )

@@ -84,7 +84,7 @@ class MyCourseTile extends StatelessWidget with UserMixin {
                         side: BorderSide(color: Theme.of(context).primaryColor),
                         textStyle: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)
                         ),
-                    child: Text(CourseMixin.enrollButtonText(course, user)).tr(),
+                    child: Text(CourseMixin.enrollButtonText(course, user), style: TextStyle(color: Theme.of(context).primaryColor),).tr(),
                     onPressed: () => handleOpenCourse(context, user: user, course: course),
                   ),
                 ],
