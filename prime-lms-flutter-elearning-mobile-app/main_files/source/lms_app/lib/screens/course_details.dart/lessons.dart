@@ -66,7 +66,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(lessonDetail.subName!).tr(),
+                          Text(lectures[index].subName??"_").tr(),
                           const SizedBox(
                             height: 4,
                           ),

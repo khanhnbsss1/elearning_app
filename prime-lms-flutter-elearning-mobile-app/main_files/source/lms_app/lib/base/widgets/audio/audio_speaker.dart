@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:just_audio/just_audio.dart';
 
 class AudioSpeaker extends StatefulWidget {
   String url;
@@ -28,25 +29,14 @@ class AudioSpeakerState extends State<AudioSpeaker> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return InkWell(onTap: () async {
-      await AudioManager().playAudio(
-        url: widget.url,
-        onChangeProcessingState: (p0) {
-          setState(() {
-            processingState = p0;
-          });
-        },
-        onChangeDuration: (event) {
-          setState(() {
-            event = event;
-          });
-        },
-        onGetLength: (length) {
-          length = length;
-        },
-      );
+      final player = AudioPlayer();
+      final duration = await player.setUrl(
+          widget.url);
+      player.play();
+      await player.play();
     }, child: LayoutBuilder(
       builder: (context, constraints) {
-        Widget icon = SizedBox();
+        Widget icon = const SizedBox();
         switch (processingState) {
           case ProcessingState.idle:
           // TODO: Handle this case.
@@ -56,44 +46,47 @@ class AudioSpeakerState extends State<AudioSpeaker> {
             // TODO: Handle this case.
             return Icon(
               Icons.volume_down,
-              color: ColorConst.mainColor,
+              size: 24,
+              color: Theme.of(context).primaryColor,
             );
           case ProcessingState.ready:
             // TODO: Handle this case.
             icon=  Icon(
               Icons.volume_up,
-              color: ColorConst.mainColor,
+              size: 24,
+              color: Theme.of(context).primaryColor,
             );
           case ProcessingState.completed:
             // TODO: Handle this case.
             icon=  Icon(
               Icons.volume_down,
-              color: ColorConst.mainColor,
+              size: 24,
+              color: Theme.of(context).primaryColor,
             );
         }
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Visibility(
-              visible: false,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: Dimens.size200,
-                      child: SfSlider(
-                        min: Duration(seconds: 0).inSeconds,
-                        max: length??Duration(seconds: 1).inSeconds,
-                        stepDuration: SliderStepDuration(seconds: 1),
-                        dateFormat: DateFormat.ms(),
-                        dateIntervalType: DateIntervalType.seconds,
-                        showTicks: true,
-                        showLabels: true,
-                        value: (event??Duration(seconds: 0)).inSeconds, onChanged: (value) {  },
-                      ),
-                    ),
-                    Gap(Dimens.size8),
-                  ],
-                )),
+            // Visibility(
+            //   visible: false,
+            //     child: Row(
+            //       children: [
+            //         SizedBox(
+            //           width: Dimens.size200,
+            //           child: SfSlider(
+            //             min: Duration(seconds: 0).inSeconds,
+            //             max: length??Duration(seconds: 1).inSeconds,
+            //             stepDuration: SliderStepDuration(seconds: 1),
+            //             dateFormat: DateFormat.ms(),
+            //             dateIntervalType: DateIntervalType.seconds,
+            //             showTicks: true,
+            //             showLabels: true,
+            //             value: (event??Duration(seconds: 0)).inSeconds, onChanged: (value) {  },
+            //           ),
+            //         ),
+            //         Gap(Dimens.size8),
+            //       ],
+            //     )),
             icon
           ],
         );

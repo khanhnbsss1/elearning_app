@@ -57,7 +57,7 @@ class AuthorProfile extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AuthorCountInfo(students: 20, courseCount: 20, reviewsCount: 20),
+                      const AuthorCountInfo(students: 20, courseCount: 20, reviewsCount: 20),
                       const SizedBox(height: 40),
                       Text(
                         'about-me',

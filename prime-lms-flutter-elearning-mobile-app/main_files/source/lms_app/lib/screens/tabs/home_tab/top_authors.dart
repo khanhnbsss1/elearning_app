@@ -36,7 +36,7 @@ class TopAuthors extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        child: (LanguageHelper().getCurrentLocale() != Locale('vi','VN')) ? RichText(
+                        child: (LanguageHelper().getCurrentLocale() != const Locale('vi','VN')) ? RichText(
                             text: TextSpan(
                                 text: 'top'.tr(),
                                 style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
