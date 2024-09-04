@@ -153,6 +153,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "content_str": MessageLookupByLibrary.simpleMessage("Nội dung"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "FFTSolution - Bản quyền 2022"),
+        "coure_top_revenue": MessageLookupByLibrary.simpleMessage(
+            "Khóa học có doanh thu cao nhất "),
         "coure_top_review": MessageLookupByLibrary.simpleMessage(
             "Khóa học có lượt review cao nhất "),
         "course_category_str":
@@ -424,6 +426,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "overview": MessageLookupByLibrary.simpleMessage("Tổng quan"),
         "pages": MessageLookupByLibrary.simpleMessage("Trang"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+        "payment_people_number":
+            MessageLookupByLibrary.simpleMessage("Số người mua"),
         "payment_str": MessageLookupByLibrary.simpleMessage("Thanh toán"),
         "permission_list_str":
             MessageLookupByLibrary.simpleMessage("Danh sách quyền"),

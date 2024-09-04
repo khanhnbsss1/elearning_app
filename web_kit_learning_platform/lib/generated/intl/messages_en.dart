@@ -160,6 +160,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "content_str": MessageLookupByLibrary.simpleMessage("Content"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "FFTSolution - Copyright 2022"),
+        "coure_top_revenue":
+            MessageLookupByLibrary.simpleMessage("Top-grossing course"),
         "coure_top_review": MessageLookupByLibrary.simpleMessage(
             "The course with the highest number of reviews"),
         "course_category_str":
@@ -426,6 +428,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "overview": MessageLookupByLibrary.simpleMessage("Overview"),
         "pages": MessageLookupByLibrary.simpleMessage("Pages"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "payment_people_number":
+            MessageLookupByLibrary.simpleMessage("Number of buyers"),
         "payment_str": MessageLookupByLibrary.simpleMessage("Payment"),
         "permission_list_str":
             MessageLookupByLibrary.simpleMessage("Permission List"),

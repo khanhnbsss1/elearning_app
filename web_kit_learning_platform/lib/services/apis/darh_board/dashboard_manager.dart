@@ -8,12 +8,14 @@ import 'get_data_synthesis_students_api.dart';
 import 'get_register_month_api.dart';
 import 'get_subscription_purchases_api.dart';
 import 'get_top-courses_api.dart';
+import 'get_top_course_revenue_api.dart';
 import 'get_user-registration_api.dart';
 import 'models/register_month_info.dart';
 import 'models/revenue_month_info.dart';
 import 'models/subscription_purchases_info.dart';
 import 'models/synthesisInfo.dart';
 import 'models/synthesis_students_info.dart';
+import 'models/top_course_revenue_info.dart';
 import 'models/top_courses_info.dart';
 import 'models/user_registration_info.dart';
 
@@ -30,10 +32,11 @@ class DashboardManager{
   SynthesisStudentInfoResponseModel? synthesisStudentInfoResponseModel;
   SynthesisSummaryInfo? synthesisSummaryInfo;
   TopCoursesInfoResponseModel? topCoursesInfoResponseModel;
+  TopCourseRevenueResponseModel? topCourseRevenueResponseModel;
   UserRegistrationInfoResponseModel? userRegistrationInfoResponseModel;
   RevenueMonthResponseModel? revenueMonthResponseModel;
   RegisterMonthResponseModel?registerMonthResponseModel;
-  List<bool>calApi = [false,false,false,false,false, false, false ];
+  List<bool>calApi = [false,false,false,false,false, false, false, false ];
   Future<void> init()async {
     
   }
@@ -81,7 +84,7 @@ class DashboardManager{
     return synthesisSummaryInfo!;
   }
 
-  Future<TopCoursesInfoResponseModel> getTopCourseResponseModel() async {
+  Future<TopCoursesInfoResponseModel> getTopCourseReviewResponseModel() async {
     if(topCoursesInfoResponseModel==null && calApi[3]==false)
     {
       calApi[3]==true;
@@ -91,6 +94,7 @@ class DashboardManager{
     }
     return topCoursesInfoResponseModel!;
   }
+
   Future<UserRegistrationInfoResponseModel> getUserRegistrationModel() async {
     if(userRegistrationInfoResponseModel==null && calApi[4]==false)
     {
@@ -133,5 +137,15 @@ class DashboardManager{
       calApi[6]==false;
     }
     return registerMonthResponseModel!;
+  }
+  Future<TopCourseRevenueResponseModel> getTopCourseRevenueResponseModel() async {
+    if(topCourseRevenueResponseModel==null && calApi[7]==false)
+    {
+      calApi[7]==true;
+      GetTopCourseRevenueApi getTopCourseRevenueApi = GetTopCourseRevenueApi(dashboardSearchModel: DashboardSearchModel(limit: 10));
+      topCourseRevenueResponseModel = await  getTopCourseRevenueApi.call();
+      calApi[7]==false;
+    }
+    return topCourseRevenueResponseModel!;
   }
 }

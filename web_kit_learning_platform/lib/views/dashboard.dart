@@ -4,21 +4,15 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/get_state_manager/src/simple/get_widget_cache.dart';
 import 'package:get/instance_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:webkit/base/base.export.dart';
-import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/controller/dashboard_controller.dart';
-import 'package:webkit/helpers/theme/app_style.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/my_shadow.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb_item.dart';
-import 'package:webkit/helpers/widgets/my_button.dart';
 import 'package:webkit/helpers/widgets/my_card.dart';
 import 'package:webkit/helpers/widgets/my_container.dart';
 import 'package:webkit/helpers/widgets/my_dotted_line.dart';
@@ -27,9 +21,7 @@ import 'package:webkit/helpers/widgets/my_flex_item.dart';
 import 'package:webkit/helpers/widgets/my_list_extension.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
-import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/images.dart';
 import 'package:webkit/services/apis/darh_board/dashboard_manager.dart';
 import 'package:webkit/services/apis/darh_board/models/synthesisInfo.dart';
 import 'package:webkit/services/apis/darh_board/models/top_courses_info.dart';
@@ -38,6 +30,7 @@ import 'package:webkit/views/layouts/layout.dart';
 import '../services/apis/darh_board/models/register_month_info.dart';
 import '../services/apis/darh_board/models/revenue_month_info.dart';
 import '../services/apis/darh_board/models/subscription_purchases_info.dart';
+import '../services/apis/darh_board/models/top_course_revenue_info.dart';
 import '../services/apis/darh_board/models/user_registration_info.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -83,13 +76,13 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                 child: MyFlex(
                   runAlignment: WrapAlignment.start,
                   wrapCrossAlignment: WrapCrossAlignment.start,
-                  // contentPadding: false,
+                   contentPadding: true,
                   children: [
                     MyFlexItem(
                       child: MyFlex(
                         runAlignment: WrapAlignment.start,
                         wrapCrossAlignment: WrapCrossAlignment.start,
-                        contentPadding: false,
+                        contentPadding: true,
                         children: [
                           MyFlexItem(
                               sizes: "lg-8",
@@ -105,80 +98,28 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                       child: MyFlex(
                         runAlignment: WrapAlignment.start,
                         wrapCrossAlignment: WrapCrossAlignment.start,
-                        contentPadding: false,
+                        contentPadding: true,
                         children: [
                           MyFlexItem(
                               sizes: "lg-8 xl-8",
                               child: buildRevenueByMonth()
                           ),
                           MyFlexItem(
-                              sizes: "lg-4",
-                              child: MyCard(
-                                shadow: MyShadow(elevation: 0.5),
-                                paddingAll: 20,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        MyText.titleMedium(
-                                          "Cost BreakDown",
-                                          overflow: TextOverflow.ellipsis,
-                                          fontWeight: 600,
-                                        ),
-                                        IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                              LucideIcons.moveRight,
-                                              size: 20,
-                                            ))
-                                      ],
-                                    ),
-                                    SfCircularChart(
-                                      tooltipBehavior: TooltipBehavior(enable: true),
-                                      series: <CircularSeries>[
-                                        DoughnutSeries<ChartSampleData, String>(
-                                            radius: '80%',
-                                            explode: true,
-                                            explodeOffset: '10%',
-                                            dataSource: controller.circleChart,
-                                            pointColorMapper: (ChartSampleData data, _) => data.pointColor,
-                                            xValueMapper: (ChartSampleData data, _) => data.x,
-                                            yValueMapper: (ChartSampleData data, _) => data.y,
-                                            dataLabelSettings: const DataLabelSettings(isVisible: true)),
-                                      ],
-                                    ),
-                                    // MySpacing.height(12),
-                                    Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [MyText.titleMedium("Top Channel"), MyText.titleMedium("Value")],
-                                        ),
-                                        MySpacing.height(12),
-                                        buildCircleChartData(const Color.fromRGBO(9, 0, 136, 1), "Salary", "\$41,458"),
-                                        MySpacing.height(8),
-                                        buildCircleChartData(const Color.fromRGBO(147, 0, 119, 1), "Bill", "\$48,125"),
-                                        MySpacing.height(8),
-                                        buildCircleChartData(const Color.fromRGBO(228, 0, 124, 1), "Marketing", "\$19,458"),
-                                        MySpacing.height(8),
-                                        buildCircleChartData(const Color.fromRGBO(255, 189, 57, 1), "Other", "\$10,589"),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ))
+                              sizes: "lg-8 xl-4",
+                              child: buildTopCourseRevenue())
                         ],
                       ),
                     ),
                     MyFlexItem(
                       child: MyFlex(
-                        contentPadding: false,
+                        contentPadding: true,
                         children: [
                           MyFlexItem(
                             sizes: "lg-6",
-                            child: buildTopCourseReview(),
+                            child: SizedBox(
+                                height: Dimens.size630,
+                                child: buildTopCourseReview()
+                            ),
                           ),
                           MyFlexItem(
                             sizes: "lg-6",
@@ -316,7 +257,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
       ]),
       child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
         return FutureBuilder(
-            future: DashboardManager().getTopCourseResponseModel(),
+            future: DashboardManager().getTopCourseReviewResponseModel(),
             builder: (context, snapshot) {
               TopCoursesInfoResponseModel? topCoursesInfoResponseModel;
               if (snapshot.hasData) {
@@ -327,7 +268,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                       minHeight: Dimens.size630,
-                    maxWidth: Dimens.size700
+                    //maxWidth: Dimens.size700
                   ),
                   child: Column(
                     children: [
@@ -338,50 +279,6 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                             L10nX.getStr.coure_top_review,
                             fontWeight: 600,
                           ),
-                          Row(
-                            children: [
-                              PopupMenuButton(
-                                onSelected: controller.onSelectedTimeDesign,
-                                itemBuilder: (BuildContext context) {
-                                  return [
-                                    "Year",
-                                    "Month",
-                                    "Week",
-                                    "Day",
-                                    "Hours",
-                                  ].map((behavior) {
-                                    return PopupMenuItem(
-                                      value: behavior,
-                                      height: 32,
-                                      child: MyText.bodySmall(
-                                        behavior.toString(),
-                                        color: theme.colorScheme.onSurface,
-                                        fontWeight: 600,
-                                      ),
-                                    );
-                                  }).toList();
-                                },
-                                color: theme.cardTheme.color,
-                                child: MyContainer.bordered(
-                                  padding: MySpacing.xy(12, 8),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      MyText.labelMedium(
-                                        controller.selectedTimeDesign.toString(),
-                                        color: theme.colorScheme.onSurface,
-                                      ),
-                                      Icon(
-                                        LucideIcons.chevronDown,
-                                        size: 22,
-                                        color: theme.colorScheme.onSurface,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
                         ],
                       ),
                       MySpacing.height(16),
@@ -391,7 +288,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                             scrollDirection: Axis.horizontal,
                             child: MyContainer.bordered(
                               paddingAll: 0,
-                              width: constraints.maxWidth,
+                              //width: constraints.maxWidth,
                               child: DataTable(
                                   sortAscending: true,
                                   columnSpacing: 0,
@@ -430,7 +327,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                                         ),
                                         DataCell(
                                           SizedBox(
-                                            width: constraints.maxWidth  - Dimens.size100 *2,
+                                            width: constraints.maxWidth  - Dimens.size160,
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
@@ -446,8 +343,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                                         ),
                                       ],
                                     ),
-                                  )
-                                      .toList()),
+                                  ).toList()),
                             ),
                           );
                         },);
@@ -462,160 +358,275 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
       ),
     );
   }
+  Widget buildTopCourseRevenue(){
+    return Visibility(
+      visible: UserManager().userContainPermission(permissionList: [
+        "dashboard.get.get_top_course_revenue",
+      ]),
+      child: SizedBox(
+        height: Dimens.size520,
+        child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
+          return FutureBuilder(
+              future: DashboardManager().getTopCourseRevenueResponseModel(),
+              builder: (context, snapshot) {
+                TopCourseRevenueResponseModel? topCoursesInfoResponseModel;
+                if (snapshot.hasData) {
+                  topCoursesInfoResponseModel = snapshot.data;
+                }
+                return MyCard(
+                  shadow: MyShadow(elevation: 0.5),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                        minHeight: Dimens.size420,
+                       // maxWidth: Dimens.size400
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            MyText.titleMedium(
+                              L10nX.getStr.coure_top_revenue,
+                              fontWeight: 600,
+                            ),
+                          ],
+                        ),
+                        MySpacing.height(16),
+                        StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
+                          return LayoutBuilder(builder: (context, constraints) {
+                            return SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: MyContainer.bordered(
+                                paddingAll: 0,
+                                width: constraints.maxWidth,
+                                child: DataTable(
+                                    sortAscending: true,
+                                    columnSpacing: 0,
+                                    onSelectAll: (_) => {},
+                                    headingRowColor: WidgetStatePropertyAll(contentTheme.primary.withAlpha(40)),
+                                    dataRowMaxHeight: 50,
+                                    columns: [
+                                      DataColumn(
+                                        label: SizedBox(
+                                          width: Dimens.size80,
+                                          child: MyText.labelLarge(
+                                            L10nX.getStr.course_str,
+                                          ),
+                                        ),
+                                      ),
+                                      DataColumn(
+                                        label: MyText.labelLarge(
+                                          L10nX.getStr.revenue,
+                                        ),
+                                      ),
+                                      DataColumn(
+                                        label: MyText.labelLarge(
+                                          L10nX.getStr.payment_people_number,
+                                        ),
+                                      ),
+                                    ],
+                                    rows: (topCoursesInfoResponseModel?.data??[])
+                                        .mapIndexed(
+                                          (index, data) => DataRow(
+                                        cells: [
+                                          DataCell(
+                                            SizedBox(
+                                              width: Dimens.size80,
+                                              child: MyText.bodyMedium("${data.courseName}"),
+                                            ),
+                                          ),
+                                          DataCell(
+                                            SizedBox(
+                                              width: constraints.maxWidth  - Dimens.size200,
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                children: [
+                                                  Expanded(child: MyText.bodyMedium("${data.totalUser}", textAlign: TextAlign.start,)),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          DataCell(
+                                            SizedBox(
+                                                width: Dimens.size120,
+                                                child: MyText.bodyMedium("${data.totalAmount}")),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                        .toList()),
+                              ),
+                            );
+                          },);
+                        },
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              });
+        },
+        ),
+      ),
+    );
+  }
+
   Widget buildRevenueByMonth(){
     return Visibility(
       visible: UserManager().userContainPermission(permissionList: [
         "dashboard.get.get_revenue_month",
       ]),
-      child: StatefulBuilder(builder: (context, setState) {
-        return FutureBuilder(
-            
+      child: SizedBox(
+       // height: Dimens.size520,
+        child: StatefulBuilder(builder: (context, setState) {
+          return FutureBuilder(
             future: DashboardManager().getRevenueMonthResponseModel(),
-          builder: (context, snapshot) {
-            List<ChartSampleData> revenueChart2 =[];
-            double max = 0;
-            double revenuePreveiusMonth = 0;
-            double revenueCurrentMonth = 0;
-            if (snapshot.hasData) {
-              RevenueMonthResponseModel? topCoursesInfoResponseModel = snapshot.data;
-              String year = DateTime.now().year.toString();
-              int currentMonth = DateTime.now().month;
-      
-      
-              for(int index = 1; index<=12; index++)
-                {
-                  bool checkExitMonth =false;
-                  for(RevenueMonthInfo userRegistrationInfo in (topCoursesInfoResponseModel?.data??[])){
-                    int? month = int.tryParse((userRegistrationInfo.month??'').split('-').last)??1;
-                    int? year1 = int.tryParse((userRegistrationInfo.month??'').split('-').first)??DateTime.now().year;
-                    if(month == index && year1 == DateTime.now().year)
-                      {
-                        if(month == currentMonth-1)
-                          {
-                            revenuePreveiusMonth = (userRegistrationInfo.totalAmount??0).toDouble();
-                          }
-                        if(month == currentMonth)
+            builder: (context, snapshot) {
+              List<ChartSampleData> revenueChart2 =[];
+              double max = 0;
+              double revenuePreveiusMonth = 0;
+              double revenueCurrentMonth = 0;
+              if (snapshot.hasData) {
+                RevenueMonthResponseModel? topCoursesInfoResponseModel = snapshot.data;
+                String year = DateTime.now().year.toString();
+                int currentMonth = DateTime.now().month;
+        
+        
+                for(int index = 1; index<=12; index++)
+                  {
+                    bool checkExitMonth =false;
+                    for(RevenueMonthInfo userRegistrationInfo in (topCoursesInfoResponseModel?.data??[])){
+                      int? month = int.tryParse((userRegistrationInfo.month??'').split('-').last)??1;
+                      int? year1 = int.tryParse((userRegistrationInfo.month??'').split('-').first)??DateTime.now().year;
+                      if(month == index && year1 == DateTime.now().year)
                         {
-                          revenueCurrentMonth = (userRegistrationInfo.totalAmount??0).toDouble();
-                        }
-                        checkExitMonth = true;
-                        if(max<(userRegistrationInfo.totalAmount??0))
+                          if(month == currentMonth-1)
+                            {
+                              revenuePreveiusMonth = (userRegistrationInfo.totalAmount??0).toDouble();
+                            }
+                          if(month == currentMonth)
                           {
-                            max = (userRegistrationInfo.totalAmount??0).toDouble();
+                            revenueCurrentMonth = (userRegistrationInfo.totalAmount??0).toDouble();
                           }
-                        revenueChart2.add(ChartSampleData(x:"${index<10?'0$index':index}-$year", y: userRegistrationInfo.totalAmount, yValue: userRegistrationInfo.totalAmount),);
-                        break;
-                      }
-                  }
-                  
-                  if(checkExitMonth==false)
-                    {
-                      revenueChart2.add(ChartSampleData(x:"${index<10?'0$index':index}-$year", y: 0, yValue: 0),);
+                          checkExitMonth = true;
+                          if(max<(userRegistrationInfo.totalAmount??0))
+                            {
+                              max = (userRegistrationInfo.totalAmount??0).toDouble();
+                            }
+                          revenueChart2.add(ChartSampleData(x:"${index<10?'0$index':index}-$year", y: userRegistrationInfo.totalAmount, yValue: userRegistrationInfo.totalAmount),);
+                          break;
+                        }
                     }
-                  
-                }
-      
-            }
-            double interver =  (max/5).toInt().toDouble();
-            double differentCurrentAndPreviousMonth = revenueCurrentMonth - revenuePreveiusMonth;
-          return MyCard(
-            shadow: MyShadow(elevation: 0.5),
-            paddingAll: 0,
-            child: Column(
-              children: [
-                Padding(
-                  padding: MySpacing.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    
+                    if(checkExitMonth==false)
+                      {
+                        revenueChart2.add(ChartSampleData(x:"${index<10?'0$index':index}-$year", y: 0, yValue: 0),);
+                      }
+                    
+                  }
+        
+              }
+              double interver =  (max/5).toInt().toDouble();
+              double differentCurrentAndPreviousMonth = revenueCurrentMonth - revenuePreveiusMonth;
+            return MyCard(
+              shadow: MyShadow(elevation: 0.5),
+              paddingAll: 0,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: MySpacing.all(16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: MyText.titleMedium(
+                            L10nX.getStr.revenue_month,
+                            overflow: TextOverflow.ellipsis,
+                            fontWeight: 600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(),
+                  MySpacing.height(12),
+                  MyFlex(
                     children: [
-                      Expanded(
-                        child: MyText.titleMedium(
-                          L10nX.getStr.revenue_month,
-                          overflow: TextOverflow.ellipsis,
-                          fontWeight: 600,
+                      MyFlexItem(
+                        sizes: "lg-4",
+                        child: buildRevenueItem(
+                          L10nX.getStr.current_month,
+                          "$revenueCurrentMonth (${L10nX.getStr.vnd_str})",
+                          differentCurrentAndPreviousMonth<0?LucideIcons.cornerRightDown:LucideIcons.cornerRightUp,
+                          differentCurrentAndPreviousMonth<0?contentTheme.red:contentTheme.success,
+                        ),
+                      ),
+                      MyFlexItem(
+                        sizes: "lg-4",
+                        child: buildRevenueItem(
+                          L10nX.getStr.previous_month,
+                          "$revenuePreveiusMonth (${L10nX.getStr.vnd_str})",
+                          differentCurrentAndPreviousMonth<0?LucideIcons.cornerRightDown:LucideIcons.cornerRightUp,
+                          differentCurrentAndPreviousMonth<0?contentTheme.red:contentTheme.success,
+                        ),
+                      ),
+                      MyFlexItem(
+                        sizes: "lg-4",
+                        child: buildRevenueItem(
+                          L10nX.getStr.trend_str,
+                          "${differentCurrentAndPreviousMonth.abs()} (${L10nX.getStr.vnd_str})",
+                          differentCurrentAndPreviousMonth<0?LucideIcons.cornerRightDown:LucideIcons.cornerRightUp,
+                          differentCurrentAndPreviousMonth<0?contentTheme.red:contentTheme.success,
                         ),
                       ),
                     ],
                   ),
-                ),
-                const Divider(),
-                MySpacing.height(12),
-                MyFlex(
-                  children: [
-                    MyFlexItem(
-                      sizes: "lg-4",
-                      child: buildRevenueItem(
-                        L10nX.getStr.current_month,
-                        "$revenueCurrentMonth (${L10nX.getStr.vnd_str})",
-                        differentCurrentAndPreviousMonth<0?LucideIcons.cornerRightDown:LucideIcons.cornerRightUp,
-                        differentCurrentAndPreviousMonth<0?contentTheme.red:contentTheme.success,
-                      ),
+                  MySpacing.height(12),
+                  const Divider(),
+                  Padding(
+                    padding: MySpacing.all(16),
+                    child: SfCartesianChart(
+                      primaryXAxis: CategoryAxis(),
+                      tooltipBehavior: controller.chart,
+                      axes: <ChartAxis>[
+                        NumericAxis(
+                            numberFormat: NumberFormat.compact(),
+                            majorGridLines: const MajorGridLines(width: 0),
+                            opposedPosition: true,
+                            name: 'yAxis1',
+                            interval: interver<=0?10:interver,
+                            minimum: 0,
+                            maximum: max)
+                      ],
+                      series: <CartesianSeries<ChartSampleData, String>>[
+                        ColumnSeries<ChartSampleData, String>(
+                            animationDuration: 2000,
+                            width: 0.5,
+                            borderRadius: const BorderRadius.only(topLeft: Radius.circular(4), topRight: Radius.circular(4)),
+                            color: contentTheme.primary,
+                            dataSource: revenueChart2,
+                            xValueMapper: (ChartSampleData data, _) => data.x,
+                            yValueMapper: (ChartSampleData data, _) => data.y,
+                            name: 'Unit Sold'),
+                        LineSeries<ChartSampleData, String>(
+                            animationDuration: 4500,
+                            animationDelay: 2000,
+                            dataSource: revenueChart2,
+                            xValueMapper: (ChartSampleData data, _) => data.x,
+                            yValueMapper: (ChartSampleData data, _) => data.yValue,
+                            yAxisName: 'yAxis1',
+                            markerSettings: const MarkerSettings(isVisible: true),
+                            name: 'Total Transaction')
+                      ],
                     ),
-                    MyFlexItem(
-                      sizes: "lg-4",
-                      child: buildRevenueItem(
-                        L10nX.getStr.previous_month,
-                        "$revenuePreveiusMonth (${L10nX.getStr.vnd_str})",
-                        differentCurrentAndPreviousMonth<0?LucideIcons.cornerRightDown:LucideIcons.cornerRightUp,
-                        differentCurrentAndPreviousMonth<0?contentTheme.red:contentTheme.success,
-                      ),
-                    ),
-                    MyFlexItem(
-                      sizes: "lg-4",
-                      child: buildRevenueItem(
-                        L10nX.getStr.trend_str,
-                        "${differentCurrentAndPreviousMonth.abs()} (${L10nX.getStr.vnd_str})",
-                        differentCurrentAndPreviousMonth<0?LucideIcons.cornerRightDown:LucideIcons.cornerRightUp,
-                        differentCurrentAndPreviousMonth<0?contentTheme.red:contentTheme.success,
-                      ),
-                    ),
-                  ],
-                ),
-                MySpacing.height(12),
-                const Divider(),
-                Padding(
-                  padding: MySpacing.all(16),
-                  child: SfCartesianChart(
-                    primaryXAxis: CategoryAxis(),
-                    tooltipBehavior: controller.chart,
-                    axes: <ChartAxis>[
-                      NumericAxis(
-                          numberFormat: NumberFormat.compact(),
-                          majorGridLines: const MajorGridLines(width: 0),
-                          opposedPosition: true,
-                          name: 'yAxis1',
-                          interval: interver<=0?10:interver,
-                          minimum: 0,
-                          maximum: max)
-                    ],
-                    series: <CartesianSeries<ChartSampleData, String>>[
-                      ColumnSeries<ChartSampleData, String>(
-                          animationDuration: 2000,
-                          width: 0.5,
-                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(4), topRight: Radius.circular(4)),
-                          color: contentTheme.primary,
-                          dataSource: revenueChart2,
-                          xValueMapper: (ChartSampleData data, _) => data.x,
-                          yValueMapper: (ChartSampleData data, _) => data.y,
-                          name: 'Unit Sold'),
-                      LineSeries<ChartSampleData, String>(
-                          animationDuration: 4500,
-                          animationDelay: 2000,
-                          dataSource: revenueChart2,
-                          xValueMapper: (ChartSampleData data, _) => data.x,
-                          yValueMapper: (ChartSampleData data, _) => data.yValue,
-                          yAxisName: 'yAxis1',
-                          markerSettings: const MarkerSettings(isVisible: true),
-                          name: 'Total Transaction')
-                    ],
                   ),
-                ),
-              ],
-            ),
-          );
-            },);
-        
-      },),
+                ],
+              ),
+            );
+              },);
+          
+        },),
+      ),
     );
   }
 

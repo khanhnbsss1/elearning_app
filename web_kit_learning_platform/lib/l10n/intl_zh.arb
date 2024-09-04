@@ -627,6 +627,7 @@
   "review_str": "评论",
   "sum_str": "总和",
   "coure_top_review": "评论数量最多的课程",
+  "course_top_revenue": "收入最高的课程",
   "registered_user": "新注册用户",
   "permission_str": "权限",
   "role_str": "角色",
@@ -652,5 +653,6 @@
   "content_manager": "内容管理器",
   "user_manager": "角色和用户",
   "watching_str": "正在观看",
-  "lesson_video_str": "课程视频"
+  "lesson_video_str": "课程视频",
+  "payment_people_number": "买家数量"
 }

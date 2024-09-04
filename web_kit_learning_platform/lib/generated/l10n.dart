@@ -6290,6 +6290,16 @@ class S {
     );
   }
 
+  /// `Top-grossing course`
+  String get coure_top_revenue {
+    return Intl.message(
+      'Top-grossing course',
+      name: 'coure_top_revenue',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `New registered user`
   String get registered_user {
     return Intl.message(
@@ -6545,6 +6555,16 @@ class S {
     return Intl.message(
       'Lesson video',
       name: 'lesson_video_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of buyers`
+  String get payment_people_number {
+    return Intl.message(
+      'Number of buyers',
+      name: 'payment_people_number',
       desc: '',
       args: [],
     );

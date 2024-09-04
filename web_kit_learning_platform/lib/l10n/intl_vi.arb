@@ -632,6 +632,7 @@
   "review_str": "Đánh giá",
   "sum_str": "Tổng",
   "coure_top_review": "Khóa học có lượt review cao nhất ",
+  "coure_top_revenue": "Khóa học có doanh thu cao nhất ",
   "registered_user": "Người dùng đăng ký mới",
   "permission_str": "Quyền",
   "role_str": "Vai trò",
@@ -657,5 +658,7 @@
   "content_manager": "Quản lý nội dung",
   "user_manager": "Vai trò và người dùng",
   "watching_str": "Đang xem",
-  "lesson_video_str": "Video bài học"
+  "lesson_video_str": "Video bài học",
+  "payment_people_number": "Số người mua"
+
 }

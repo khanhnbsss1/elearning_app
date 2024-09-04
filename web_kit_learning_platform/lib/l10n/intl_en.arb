@@ -632,6 +632,7 @@
   "review_str": "Review",
   "sum_str": "Total",
   "coure_top_review": "The course with the highest number of reviews",
+  "coure_top_revenue": "Top-grossing course",
   "registered_user": "New registered user",
   "permission_str": "Permission",
   "role_str": "Role",
@@ -657,6 +658,6 @@
   "content_manager": "Content Management",
   "user_manager": "Roles and Users",
   "watching_str": "Watching",
-
-  "lesson_video_str": "Lesson video"
+  "lesson_video_str": "Lesson video",
+  "payment_people_number": "Number of buyers"
 }

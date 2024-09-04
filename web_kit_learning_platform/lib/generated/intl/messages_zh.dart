@@ -353,6 +353,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "overview": MessageLookupByLibrary.simpleMessage("概述"),
         "pages": MessageLookupByLibrary.simpleMessage("页面"),
         "password": MessageLookupByLibrary.simpleMessage("密码"),
+        "payment_people_number": MessageLookupByLibrary.simpleMessage("买家数量"),
         "payment_str": MessageLookupByLibrary.simpleMessage("付款"),
         "permission_list_str": MessageLookupByLibrary.simpleMessage("权限列表"),
         "permission_str": MessageLookupByLibrary.simpleMessage("权限"),

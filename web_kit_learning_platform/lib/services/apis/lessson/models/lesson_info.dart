@@ -63,6 +63,7 @@ class LessonInfo {
   List<VocabularyInfo>? vocabularies;
   int? videoDuration;// bien nay chi set khi play video tren web
   bool? isFinnish;
+  int? proccess;
   LinkInfo? videoInfos;
   VideoInfo? selectVideoInfo;
   LessonInfo(
@@ -88,7 +89,8 @@ class LessonInfo {
         this.gradeId,
         this.categoryId,
         this.videoInfos,
-        this.selectVideoInfo
+        this.selectVideoInfo,
+        this.proccess
       }){
     videoInfos??=LinkInfo(link: []);
   }
@@ -97,7 +99,10 @@ class LessonInfo {
     id = json['id'];
     subName = json['sub_name'];
     lectureName = json['lecture_name']?? json['name'];
+    isFinnish = json['learning_status']== 'Completed'?true:false;
+    proccess = json['progress'];
     videoInfos = LinkInfo(link: []);
+    
     if((json['lecture_link']??json['link']??'').isNotEmpty)
       {
         try{
@@ -106,7 +111,11 @@ class LessonInfo {
         catch(e){
           videoInfos = LinkInfo(link: [VideoInfo(order: 0, videoTitle: "", videoLink:(json['lecture_link']??json['link']??'') )]);
         }
-        selectVideoInfo??= (videoInfos?.link??[]).isNotEmpty?(videoInfos?.link??[]).first: VideoInfo(videoLink: "", order: 0, videoTitle: "");
+        int selectVideoIndex = ((proccess??0) /100 * ((videoInfos?.link??[]).length)).toInt();
+        selectVideoInfo??= 
+        (videoInfos?.link??[]).length> selectVideoIndex?
+        (videoInfos?.link??[]).elementAt(selectVideoIndex): 
+        VideoInfo(videoLink: "", order: 0, videoTitle: "");
       }
     docId = json['doc_id'];
     docName = json['doc_name'];
@@ -126,7 +135,7 @@ class LessonInfo {
       }
 
     docLink = json['doc_link'];
-    isFinnish = json['learning_status']== 'Completed'?true:false;
+   
     testId = json['test_id'];
     categoryId = json['category_id'];
     gradeId = json['grade_id'];
