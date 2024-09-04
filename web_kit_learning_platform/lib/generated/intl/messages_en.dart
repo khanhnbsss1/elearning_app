@@ -155,6 +155,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmation": MessageLookupByLibrary.simpleMessage("Confirmation?"),
         "contact": MessageLookupByLibrary.simpleMessage("Contact"),
         "contact_us": MessageLookupByLibrary.simpleMessage("Contact us"),
+        "content_manager":
+            MessageLookupByLibrary.simpleMessage("Content Management"),
         "content_str": MessageLookupByLibrary.simpleMessage("Content"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "FFTSolution - Copyright 2022"),
@@ -332,6 +334,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "left_dialog": MessageLookupByLibrary.simpleMessage("Left dialog"),
         "lesson_list": MessageLookupByLibrary.simpleMessage("Lesson list"),
         "lesson_str": MessageLookupByLibrary.simpleMessage("Lesson"),
+        "lesson_video_str":
+            MessageLookupByLibrary.simpleMessage("Lesson video"),
         "lets_study": MessageLookupByLibrary.simpleMessage("Let\'s study"),
         "level_str": MessageLookupByLibrary.simpleMessage("Level"),
         "license_copyright":
@@ -787,6 +791,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "user_create": MessageLookupByLibrary.simpleMessage("Create user"),
         "user_delete_str": MessageLookupByLibrary.simpleMessage("Delete User"),
         "user_detail": MessageLookupByLibrary.simpleMessage("User information"),
+        "user_manager": MessageLookupByLibrary.simpleMessage("Roles and Users"),
         "user_name": MessageLookupByLibrary.simpleMessage("Login name"),
         "user_str": MessageLookupByLibrary.simpleMessage("User"),
         "user_update_str": MessageLookupByLibrary.simpleMessage("Edit User"),
@@ -810,6 +815,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
         "vocabulary_str": MessageLookupByLibrary.simpleMessage("Vocabulary"),
         "warning": MessageLookupByLibrary.simpleMessage("Warning"),
+        "watching_str": MessageLookupByLibrary.simpleMessage("Watching"),
         "we_are_different_because_we_understand_what_you_need":
             MessageLookupByLibrary.simpleMessage(
                 "We are different because we understand what you need"),

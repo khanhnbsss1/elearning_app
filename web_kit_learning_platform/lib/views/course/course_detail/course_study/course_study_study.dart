@@ -176,16 +176,14 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size32),
+                child: buildStudyTitle(),
+              ),
               buildVideo(),
               Padding(
-                padding:  EdgeInsets.symmetric(vertical: 16, horizontal: Dimens.size32),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    buildStudyTitle(),
-                    buildStudyUI(),
-                  ],
-                ),
+                padding:  EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size32),
+                child: buildStudyUI(),
               ),
             ],
           )
@@ -198,42 +196,90 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         print('rebuild build video');
-        return Container(
-         // height: 450,
-          decoration: BoxDecoration(
-              color: Colors.black
-          ),
-          constraints: BoxConstraints(
-            maxHeight: ResponsiveInfo.isPhone()?constraints.maxWidth:MediaQuery.sizeOf(context).height*2/3,
-            maxWidth: constraints.maxWidth
-          ),
-          child: VideoPlayer(
-            videoPlayerModel: VideoPlayerModel(
-                title: "",
-                link: (_state.selectLessonInfo?.selectVideoInfo?.videoLink??"https://www.youtube.com/watch?v=RFu43pM2Nbw")
+        return Column(
+          children: [
+            Container(
+             // height: 450,
+              decoration: BoxDecoration(
+                  color: Colors.black
+              ),
+              constraints: BoxConstraints(
+                maxHeight: ResponsiveInfo.isPhone()?constraints.maxWidth:MediaQuery.sizeOf(context).height*2/3,
+                maxWidth: constraints.maxWidth
+              ),
+              child: VideoPlayer(
+                videoPlayerModel: VideoPlayerModel(
+                    title: "",
+                    link: (_state.selectLessonInfo?.selectVideoInfo?.videoLink??"https://www.youtube.com/watch?v=RFu43pM2Nbw")
+                ),
+                onGetVideoDuration: (duration) {
+                  if((_state.selectLessonInfo?.videoDuration==null) && duration.inMilliseconds>10)
+                    {
+                      _state.selectLessonInfo?.videoDuration = duration.inMilliseconds~/1000;
+                      BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailUpdateInfoSelectLessonEvent(
+                          selectLessonInfo: _state.selectLessonInfo!,
+                        selectVideoInfo: _state.selectLessonInfo!.selectVideoInfo!
+                      ));
+                    }
+                },
+                onGetVideoPosition: (duration) {
+                  print("object");
+                  if((!(_state.selectLessonInfo?.isFinnish??false)) &&
+                      (_state.selectLessonInfo?.videoDuration??0) > 10 &&
+                      duration.inMilliseconds/1000 > (_state.selectLessonInfo?.videoDuration??0) - (60*0.5))
+                    {
+                      _state.selectLessonInfo?.isFinnish = true;
+                      BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailUpdateFinishLessonEvent(
+                          selectLessonInfo: _state.selectLessonInfo!,
+                          selectVideoInfo:_state.selectLessonInfo!.selectVideoInfo!
+                      ));
+                    }
+                },
+              ),
             ),
-            onGetVideoDuration: (duration) {
-              if((_state.selectLessonInfo?.videoDuration==null) && duration.inMilliseconds>10)
-                {
-                  _state.selectLessonInfo?.videoDuration = duration.inMilliseconds~/1000;
-                  BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailUpdateInfoSelectLessonEvent(
-                      selectLessonInfo: _state.selectLessonInfo!));
-                }
-            },
-            onGetVideoPosition: (duration) {
-              print("object");
-              if((!(_state.selectLessonInfo?.isFinnish??false)) &&
-                  (_state.selectLessonInfo?.videoDuration??0) > 10 &&
-                  duration.inMilliseconds/1000 > (_state.selectLessonInfo?.videoDuration??0) - (60*0.5))
-                {
-                  _state.selectLessonInfo?.isFinnish = true;
-                  BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailUpdateFinishLessonEvent(
-                      selectLessonInfo: _state.selectLessonInfo!,
-                    videoOrder: 0
-                  ));
-                }
-            },
-          ),
+            Gap(Dimens.size8),
+            SizedBox(
+                height: Dimens.size100,
+                child: Center(
+                  child: ListView.builder(
+                    itemCount: (_state.selectLessonInfo?.videoInfos?.link??[]).length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      VideoInfo videoInfo = (_state.selectLessonInfo?.videoInfos?.link??[]).elementAt(index);
+                      bool isSelect =  videoInfo.order == _state.selectLessonInfo?.selectVideoInfo?.order;
+                      return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: Dimens.size8,),
+                          child: Stack(
+                            alignment: Alignment.bottomCenter,
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(Dimens.size16),
+                                    border: Border.all(color: ColorConst.colorIconGrays, width: 0.5),
+                                    color: ColorConst.blackColor.withOpacity(isSelect?0.8:1)
+                                ),
+                                width: Dimens.size150,
+                                height: Dimens.size100,
+                                padding: EdgeInsets.all(Dimens.size8),
+                                child: Icon(Icons.video_library_outlined, color: ColorConst.whiteColor, size: Dimens.size40,),
+                              ),
+                              Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                  L10nX.getStr.watching_str,
+                                  style: TextStyleConstant.textStyleBlack13w400.copyWith(color: ColorConst.whiteColor),
+                                  textAlign: TextAlign.center,
+                                ),
+
+                              )
+                            ],
+                          )
+                      );
+                    },),
+                )
+            ),
+            Divider(color: ColorConst.colorIconGrays,thickness: 0.5,),
+          ],
         );
 
       },
@@ -251,6 +297,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
               'Bài giảng: ${_state.selectLessonInfo?.lectureName!}',
               style: TextStyleConstant.textStyleBlack16w600
             ),
+            
           ],
         ),
       ],
@@ -272,15 +319,15 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Padding(
-               padding: EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size16),
-               child: Text(L10nX.getStr.lesson_list,
-                      style: TextStyleConstant.textStyleBlack14w600),
-             ),
-            Divider(color: ColorConst.blackColor,thickness: 0.1,),
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size16),
+                  child: Text("I. ${L10nX.getStr.lesson_list}",
+                      style: TextStyleConstant.textStyleBlack14w600),
+                ),
+                Divider(color: ColorConst.blackColor,thickness: 0.1,),
                 Scrollbar(
                   controller: subjectScrollControllerBar ,
                   thickness: 10,
@@ -309,20 +356,20 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                   ),
                 ),
                 Gap(Dimens.size8,),
-                TestItemWidget(
-                  testInfos: [
-                    TestInfo(
-                        id: _state.courseInfo?.testId, 
-                        courseId: _state.courseInfo?.id,
-                        name:  _state.courseInfo?.testName??""),
-                  ],
-                  subjectIndex: 1, 
-                  onSelectTest: (testInfo ) {  
-                    
-                  },
-                )
               ],
             ),
+            TestItemWidget(
+              testInfos: [
+                TestInfo(
+                    id: _state.courseInfo?.testId,
+                    courseId: _state.courseInfo?.id,
+                    name:  _state.courseInfo?.testName??""),
+              ],
+              subjectIndex: 1,
+              onSelectTest: (testInfo ) {
+
+              },
+            )
           ],
         ),
       ),

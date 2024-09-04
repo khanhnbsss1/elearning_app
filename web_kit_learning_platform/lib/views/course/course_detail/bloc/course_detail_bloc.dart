@@ -53,7 +53,6 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
         true,
       );
     }
-
     emit(state.copyWith(
         blocStatus: AddCourseStatus.initial, 
         courseInfo: state.courseInfo, 
@@ -74,24 +73,41 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
       return;
     }
     state.awaitCallApi =true;
+    
+    int proccess = ((event.selectVideoInfo.order??0) + 1)~/(state.selectLessonInfo?.videoInfos?.link??[]).length;
     UpdateLessonStatusApi updateLessonStatusApi= UpdateLessonStatusApi(
       courseId: state.courseInfo?.id??0, 
       lectureId: state.selectLessonInfo?.id??0,
-      
+      progress: proccess * 100
     );
     dynamic data = await updateLessonStatusApi.call();
     
-    int indexOfSelectLesson = (state.courseInfo?.lectures??[]).indexWhere((element) => element.id == state.selectLessonInfo?.id,);
-    (state.courseInfo?.lectures??[])[indexOfSelectLesson].isFinnish = true;
-    emit(state.copyWith(
-      blocStatus: AddCourseStatus.onUpdateFinishLessonStatus,
-      courseInfo: state.courseInfo,
-    ));
-    state.awaitCallApi =false;
-    if(indexOfSelectLesson<(state.courseInfo?.lectures??[]).length)
-    {
-/*      LessonInfo newSelectionLessonInfo  = (state.courseInfo?.lectures??[]).elementAt(indexOfSelectLesson+1);
-      add(CourseDetailSelectLessonEvent(selectLessonInfo: newSelectionLessonInfo));*/
-    }
+    if((event.selectVideoInfo.order??0)< (state.selectLessonInfo?.videoInfos?.link??[]).length-1)
+      {
+        /// van con video bai hoc chua hoc tu dong next sang video tiep theo cua bai hoc nay
+        state.selectLessonInfo?.selectVideoInfo = (state.selectLessonInfo?.videoInfos?.link??[]).elementAt(event.selectVideoInfo.order=1);
+        emit(state.copyWith(
+          blocStatus: AddCourseStatus.onUpdateFinishLessonStatus,
+          courseInfo: state.courseInfo,
+          selectLessonInfo: state.selectLessonInfo
+        ));
+        
+      }
+    else
+      {
+        int indexOfSelectLesson = (state.courseInfo?.lectures??[]).indexWhere((element) => element.id == state.selectLessonInfo?.id,);
+        (state.courseInfo?.lectures??[])[indexOfSelectLesson].isFinnish = true;
+        emit(state.copyWith(
+          blocStatus: AddCourseStatus.onUpdateFinishLessonStatus,
+          courseInfo: state.courseInfo,
+        ));
+        state.awaitCallApi =false;
+        if(indexOfSelectLesson<(state.courseInfo?.lectures??[]).length)
+        {
+          LessonInfo newSelectionLessonInfo  = (state.courseInfo?.lectures??[]).elementAt(indexOfSelectLesson+1);
+          add(CourseDetailSelectLessonEvent(selectLessonInfo: newSelectionLessonInfo));
+        }
+      }
+
   }
 }

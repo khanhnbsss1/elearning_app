@@ -15,12 +15,26 @@ import 'package:webkit/services/apis/permission/models/permission_info.dart';
 import 'package:webkit/views/permission_manager/permission_list/bloc/permission_list_bloc.dart';
 import 'package:webkit/views/permission_manager/permission_list/components/permission_item_view.dart';
 
+enum PermissionActionType{
+  vieMyselfPermission,
+  editChildRole
+}
 class PermissionGroupListPage extends StatefulWidget {
   ScrollController? scrollController;
   List<PermissionInfo>? childRolePermissions;
   Function(PermissionListResponseModel?)? onChangePermission;
+  PermissionActionType? permissionActionType;
   bool? enableEdit;
-  PermissionGroupListPage({super.key, this.scrollController, this.childRolePermissions, this.enableEdit, this.onChangePermission}){
+  String? roleId;
+  PermissionGroupListPage({
+    super.key, 
+    this.scrollController, 
+    this.childRolePermissions, 
+    this.enableEdit, 
+    this.onChangePermission,
+    this.permissionActionType,
+    this.roleId
+  }){
     scrollController=ScrollController();
     enableEdit??=false;
   }
@@ -52,7 +66,12 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
       permissionList: permission,
       child: BlocProvider(
         create: (context) {
-          return PermissionListBloc(PermissionListState(childRolePermissions: widget.childRolePermissions,enableEdit: widget.enableEdit))..add(PermissionListInitEvent());
+          return PermissionListBloc(
+              PermissionListState(
+                  childRolePermissions: widget.childRolePermissions,
+                  permissionActionType: widget.permissionActionType,
+                  roleId: widget.roleId,
+                  enableEdit: widget.enableEdit))..add(PermissionListInitEvent());
         },
         child: BlocConsumer<PermissionListBloc, PermissionListState>(
           listener: (context, state) {
@@ -246,7 +265,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                 info: info,
                 enableEdit: widget.enableEdit,
                 onChange: (p0) {
-                  int groupIndex = (state.permissionListResponseModel?.content??[]).indexWhere((element) => element.id== p0.id,);
+                  int groupIndex = (state.permissionListResponseModel?.content??[]).indexWhere((element) => element.type== p0.type,);
                   (state.permissionListResponseModel?.content??[])[groupIndex] = p0;
                   if(widget.onChangePermission!=null)
                     {

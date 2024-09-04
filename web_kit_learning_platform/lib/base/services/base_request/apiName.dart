@@ -32,6 +32,7 @@ class ApiName {
   final String deleteCourse = "/delete-course";
   final String getFilterCourse = "/filter-directory";
   final String addCourseDirectory = "/add-course-directory";
+  final String registerCourse = "/regist-course";
 
   ///Lesson
   final String getLessonListFilter = "/get-list-filter";
@@ -43,6 +44,7 @@ class ApiName {
   final String unlinkLesson = "/unlink-lecture-course";
   final String getLessonList = "/get-list";
   final String updateLessonStatus = "/update-status";
+  final String getLecturesFilter = "/filter-lectures-directory";
 
   /// landing page
 
@@ -93,6 +95,8 @@ class ApiName {
   final String updateTest = "/update-test";
   final String deleteTest = "/delete-test";
   final String detailTest = "/get-test-detail";
+  final String getTestFilter = "/filter-tests-directory";
+
 
   final String createQuiz = "/create-question";
   final String deleteQuiz = "/delete-question";
@@ -102,7 +106,8 @@ class ApiName {
   final String unLinkTestFromLesson = "/unlink-lecture-test";
   final String linkTestToCourse = "/link-course-test";
   final String unLinkTestFromCourse = "/unlink-course-test";
-  
+  final String getQuizFilter = "/filter-quizs-directory";
+
   /// score
   final String createScore = "/create_score";
   
@@ -129,6 +134,8 @@ class ApiName {
 
   /// permisison
   final String getUserPermissionList = "/get-role-claims";
+  final String addPermissionListToRole = "/add-role-claims";
+  final String deletePermissionListFromRole = "/delete-role-claim";
 
   /// roles
   final String getUserRolesList = "/get-roles";

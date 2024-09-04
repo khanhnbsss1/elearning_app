@@ -170,6 +170,48 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       ),
                     ],
                   ),
+               
+                  //----------------Tu vung Khoa hoc------------------//
+                  MenuWidget(
+                    iconData: CupertinoIcons.book_solid,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    title: L10nX.getStr.vocabulary_str,
+                    permission: const ["vocabulary.get.getlist",],
+                    children: [
+                      MenuItem(
+                        title: L10nX.getStr.course_str,
+                        route:  Routes.vocabularyListImage ,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        permission: const ["vocabulary.get.getlist",],
+    
+                      ),
+                      MenuItem(
+                        title: L10nX.getStr.chinese_vietnamese_str,
+                        route:  Routes.vocabularyListNoImage,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        permission: const ["vocabulary.get.getlist",],
+    
+                      ),
+                    ],
+                  ),
+                  //-----------------Danh sach giao vien-----------------//
+                  Gap(Dimens.size12),
+                  Visibility(
+                    visible: !ThemeCustomizer().leftBarCondensed &&
+                        (
+                            UserManager().userContainPermission(permissionList: ["landingpages.put.update_ladingpage_course"])|| 
+                            UserManager().userContainPermission(permissionList: ["landingpages.put.update_landingpage_review"])||
+                            UserManager().userContainPermission(permissionList: ["tags.get.get_tags"])||
+                            UserManager().userContainPermission(permissionList: ["grades.get.get_grades"])||
+                            UserManager().userContainPermission(permissionList: ["categories.get.get_categories"])|| 
+                            UserManager().userContainPermission(permissionList: ["landingpages.put.update_landingpage_teacher"])
+                            
+                        ),
+                    child: Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size20, vertical: Dimens.size8),
+                      child: Text(L10nX.getStr.content_manager, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
+                    ),
+                  ),
                   //----------------Bai hoc------------------//
 
                   NavigationItem(
@@ -207,49 +249,52 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       });*/
                     },
                   ),
-                  //----------------Tu vung Khoa hoc------------------//
-                  MenuWidget(
-                    iconData: CupertinoIcons.book_solid,
+                  //----------------Tag------------------//
+                  NavigationItem(
+                    iconData: Icons.tag,
+                    title: L10nX.getStr.tags,
+                    route: Routes.tagList,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.vocabulary_str,
-                    permission: const ["vocabulary.get.getlist",],
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.course_str,
-                        route:  Routes.vocabularyListImage ,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const ["vocabulary.get.getlist",],
-    
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.chinese_vietnamese_str,
-                        route:  Routes.vocabularyListNoImage,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const ["vocabulary.get.getlist",],
-    
-                      ),
-                    ],
+                    permission: const ["tags.get.get_tags"],
+                    onPress: () {
+                    },
                   ),
-                  //-----------------Danh sach giao vien-----------------//
-                  Gap(Dimens.size12),
+                  //----------------Grade------------------//
+                  NavigationItem(
+                    iconData: Icons.grade,
+                    title: L10nX.getStr.grade_str,
+                    route: Routes.gradeList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["grades.get.get_grades"],
+                    onPress: () {
+                    },
+                  ),
+                  
+                  //----------------Category------------------//
+                  NavigationItem(
+                    iconData: Icons.category,
+                    title: L10nX.getStr.category_str,
+                    route: Routes.categoryList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["categories.get.get_categories"],
+                    onPress: () {
+                      /*                        setState(() {
+                        ThemeCustomizer().leftBarCondensed= true;
+                      });*/
+                    },
+                  ),
+
 
                   Visibility(
                     visible: !ThemeCustomizer().leftBarCondensed &&
                         (
-                            UserManager().userContainPermission(permissionList: ["users.get.get_user_list"]) || 
-                            UserManager().userContainPermission(permissionList: ["landingpages.put.update_ladingpage_course"])|| 
-                            UserManager().userContainPermission(permissionList: ["landingpages.put.update_landingpage_review"])||
-                            UserManager().userContainPermission(permissionList: ["tags.get.get_tags"])||
-                            UserManager().userContainPermission(permissionList: ["grades.get.get_grades"])||
-                            UserManager().userContainPermission(permissionList: ["categories.get.get_categories"])|| 
-                            UserManager().userContainPermission(permissionList: ["claim.post.get_claims"])||
-                            UserManager().userContainPermission(permissionList: ["claim.post.get_claims"])||
-                            UserManager().userContainPermission(permissionList: ["landingpages.put.update_landingpage_teacher"])
-                            
+                            UserManager().userContainPermission(permissionList: ["users.get.get_user_list"]) ||
+                                UserManager().userContainPermission(permissionList: ["claim.post.get_claims"])||
+                                UserManager().userContainPermission(permissionList: ["claim.post.get_claims"])
                         ),
                     child: Padding(
                       padding:  EdgeInsets.symmetric(horizontal: Dimens.size20, vertical: Dimens.size8),
-                      child: Text(L10nX.getStr.manage_str, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
+                      child: Text(L10nX.getStr.content_manager, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
                     ),
                   ),
                   MenuWidget(
@@ -275,88 +320,6 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                         permission: const ["users.get.get_user_list"],
                       ),
                     ],
-                  ),
-                  MenuWidget(
-                    iconData: Icons.note_alt_outlined,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.report_str,
-                    permission: const [
-                      "users.get.get_user_list"
-                    ],
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.report_history_register_course,
-                       // route:  Routes.studentList,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const [
-                         // "users.get.get_user_list"
-                        ],
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.report_history_edit_course,
-                       // route:  Routes.teacherList,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const [
-                         // "users.get.get_user_list"
-                        ],
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.report_purchased,
-                        //route:  Routes.teacherList,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const [
-                          // "users.get.get_user_list"
-                        ],
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.report_new_registered_account,
-                       // route:  Routes.teacherList,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const [
-                          // "users.get.get_user_list"
-                        ],
-                      ),
-                    ],
-                  ),
-                  //----------------Tag------------------//
-                  NavigationItem(
-                    iconData: Icons.tag,
-                    title: L10nX.getStr.tags,
-                    route: Routes.tagList,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    permission: const ["tags.get.get_tags"],
-                    onPress: () {
-                      /*                        setState(() {
-                        ThemeCustomizer().leftBarCondensed= true;
-                      });*/
-                    },
-                  ),
-                  //----------------Grade------------------//
-                  NavigationItem(
-                    iconData: Icons.grade,
-                    title: L10nX.getStr.grade_str,
-                    route: Routes.gradeList,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    permission: const ["grades.get.get_grades"],
-                    onPress: () {
-                      /*                        setState(() {
-                        ThemeCustomizer().leftBarCondensed= true;
-                      });*/
-                    },
-                  ),
-                  
-                  //----------------Category------------------//
-                  NavigationItem(
-                    iconData: Icons.category,
-                    title: L10nX.getStr.category_str,
-                    route: Routes.categoryList,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    permission: const ["categories.get.get_categories"],
-                    onPress: () {
-                      /*                        setState(() {
-                        ThemeCustomizer().leftBarCondensed= true;
-                      });*/
-                    },
                   ),
                   //----------------Permission------------------//
                   NavigationItem(
@@ -406,6 +369,65 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                         title: L10nX.getStr.edit_landing_page,
                         route:  Routes.landingPageRoute,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
+                      ),
+                    ],
+                  ),
+
+                  Visibility(
+                    visible: !ThemeCustomizer().leftBarCondensed &&
+                        (
+                            UserManager().userContainPermission(permissionList: ["dashboard.get.get_revenue_history"]) ||
+                                UserManager().userContainPermission(permissionList: ["dashboard.get.get_course_history"])||
+                                UserManager().userContainPermission(permissionList: ["dashboard.get.get_course_registration_history"])||
+                                    UserManager().userContainPermission(permissionList: ["dashboard.get.get_register_time_period"])
+                        ),
+                    child: Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size20, vertical: Dimens.size8),
+                      child: Text(L10nX.getStr.report_str, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
+                    ),
+                  ),
+                  MenuWidget(
+                    iconData: Icons.note_alt_outlined,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    title: L10nX.getStr.report_str,
+                    permission: const [
+                      "dashboard.get.get_revenue_history",
+                      "dashboard.get.get_course_history",
+                      "dashboard.get.get_course_registration_history",
+                      "dashboard.get.get_register_time_period",
+                    ],
+                    children: [
+                      MenuItem(
+                        title: L10nX.getStr.report_history_register_course,
+                        // route:  Routes.studentList,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        permission: const [
+                          // "users.get.get_user_list"
+                        ],
+                      ),
+                      MenuItem(
+                        title: L10nX.getStr.report_history_edit_course,
+                        // route:  Routes.teacherList,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        permission: const [
+                          // "users.get.get_user_list"
+                        ],
+                      ),
+                      MenuItem(
+                        title: L10nX.getStr.report_purchased,
+                        //route:  Routes.teacherList,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        permission: const [
+                          // "users.get.get_user_list"
+                        ],
+                      ),
+                      MenuItem(
+                        title: L10nX.getStr.report_new_registered_account,
+                        // route:  Routes.teacherList,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        permission: const [
+                          // "users.get.get_user_list"
+                        ],
                       ),
                     ],
                   ),
@@ -1014,7 +1036,7 @@ class _MenuWidgetState extends State<MenuWidget>
               });
             },
             child: MyContainer.transparent(
-              margin: MySpacing.fromLTRB(Dimens.size12, 0, Dimens.size16, Dimens.size8),
+              margin: MySpacing.fromLTRB(Dimens.size8, Dimens.size8, Dimens.size16, Dimens.size8),
               color: isActive || isHover
                   ? leftBarTheme.activeItemBackground
                   : Colors.transparent,

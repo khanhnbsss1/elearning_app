@@ -6509,6 +6509,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Content Management`
+  String get content_manager {
+    return Intl.message(
+      'Content Management',
+      name: 'content_manager',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Roles and Users`
+  String get user_manager {
+    return Intl.message(
+      'Roles and Users',
+      name: 'user_manager',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Watching`
+  String get watching_str {
+    return Intl.message(
+      'Watching',
+      name: 'watching_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lesson video`
+  String get lesson_video_str {
+    return Intl.message(
+      'Lesson video',
+      name: 'lesson_video_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

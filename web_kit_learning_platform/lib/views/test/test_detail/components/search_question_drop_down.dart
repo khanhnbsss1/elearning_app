@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
+import 'package:tiengviet/tiengviet.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
@@ -228,9 +229,17 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
     if(keyWord.isEmpty) {
       return [];
     }
-    GetQuizListApi getLessonListApi= GetQuizListApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord, pageSize: 100, pageNumber: 0));
-    QuestionListResponseModel data = await getLessonListApi.call();
-    return data.content??[];
+    QuestionListResponseModel questionListResponseModel =  await FilterManager().getQuestionListAll(keyWord);
+    List<QuestionInfo>? content=[];
+    if((questionListResponseModel.content??[]).isNotEmpty)
+    {
+      content = [...(questionListResponseModel.content??[]).where((element) {
+        String name = TiengViet.parse((element.questionName??'').toLowerCase());
+        String keyWordfinal = TiengViet.parse(keyWord.toLowerCase());
+        return name.contains(keyWordfinal);
+      },)];
+    }
+    return content;
   }
   
 }

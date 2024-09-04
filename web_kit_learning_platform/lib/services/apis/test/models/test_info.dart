@@ -141,5 +141,91 @@ class TestListResponseModel extends PageModel{
     }
     return data;
   }
+  TestListResponseModel.fromTestFilter( FilterResponseModel json) {
+    content = <TestInfo>[];
+    for (TestFilterItem v in (json.data??[])) {
+      for(SubTestFilter subTestFilter in v.subFilter??[]) {
+        content!.add(new TestInfo(id: subTestFilter.id, name: subTestFilter.name));
+      }
+    }
+    }
+}
 
+class FilterResponseModel {
+  List<TestFilterItem>? data;
+
+  FilterResponseModel({this.data});
+
+  FilterResponseModel.fromJson(Map<String, dynamic> json) {
+    if (json['data'] != null) {
+      data = <TestFilterItem>[];
+      json['data'].forEach((v) {
+        data!.add(new TestFilterItem.fromJson(v));
+      });
+    }
+  }
+  FilterResponseModel.fromJsonList(dynamic json) {
+    if (json != null) {
+      data = <TestFilterItem>[];
+      json.forEach((v) {
+        data!.add(new TestFilterItem.fromJson(v));
+      });
+    }
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> dataOutput = <String, dynamic>{};
+    if (data != null) {
+      dataOutput['data'] = data!.map((v) => v.toJson()).toList();
+    }
+    return dataOutput;
+  }
+
+
+}
+
+class TestFilterItem {
+  String? typeName;
+  String? filterType;
+  List<SubTestFilter>? subFilter;
+
+  TestFilterItem({this.typeName, this.filterType, this.subFilter});
+  TestFilterItem.fromJson(Map<String, dynamic> json) {
+    typeName = json['type_name'];
+    filterType = json['filterType'];
+    if (json['subFilter'] != null) {
+      subFilter = <SubTestFilter>[];
+      json['subFilter'].forEach((v) {
+        subFilter!.add(new SubTestFilter.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['type_name'] = typeName;
+    data['filterType'] = filterType;
+    if (subFilter != null) {
+      data['subFilter'] = subFilter!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class SubTestFilter {
+  int? id;
+  String? name;
+
+  SubTestFilter({this.id, this.name});
+
+  SubTestFilter.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    return data;
+  }
 }

@@ -1,44 +1,34 @@
 class CreateRoleRequestInfo {
   String? roleName;
-  List<Claims>? claims;
 
-  CreateRoleRequestInfo({this.roleName, this.claims});
+  CreateRoleRequestInfo({this.roleName,});
 
   CreateRoleRequestInfo.fromJson(Map<String, dynamic> json) {
     roleName = json['roleName'];
-    if (json['claims'] != null) {
-      claims = <Claims>[];
-      json['claims'].forEach((v) {
-        claims!.add(new Claims.fromJson(v));
-      });
-    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['roleName'] = roleName;
-    if (claims != null) {
-      data['claims'] = claims!.map((v) => v.toJson()).toList();
-    }
     return data;
   }
 }
 
-class Claims {
-  String? type;
-  String? value;
+class UpdateRoleRequestInfo {
+  String? roleId;
+  String? newRole;
 
-  Claims({this.type, this.value});
+  UpdateRoleRequestInfo({this.roleId, this.newRole});
 
-  Claims.fromJson(Map<String, dynamic> json) {
-    type = json['type'];
-    value = json['value'];
+  UpdateRoleRequestInfo.fromJson(Map<String, dynamic> json) {
+    roleId = json['roleId'];
+    newRole = json['newRole'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['type'] = type;
-    data['value'] = value;
+    data['roleId'] = roleId;
+    data['newRole'] = newRole;
     return data;
   }
 }

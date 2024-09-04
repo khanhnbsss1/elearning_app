@@ -16,6 +16,7 @@ import 'package:webkit/services/apis/permission/permission_list_api.dart';
 import 'package:webkit/services/apis/tags/delete_tag_api.dart';
 import 'package:webkit/services/apis/tags/get_tag_list.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
+import 'package:webkit/views/permission_manager/permission_list/components/permission_group_list.dart';
 
 part 'permission_list_event.dart';
 
@@ -31,7 +32,7 @@ class PermissionListBloc extends Bloc<PermissionListEvent, PermissionListState> 
     });
     on<PermissionListOnUpdatePermissionModelEvent>((event, emit) async {
       emit(state.copyWith(
-        tagListResponseModel: event.permissionListResponseModel,
+        permissionListResponseModel: event.permissionListResponseModel,
         blocStatus: PermissionListStatus.onChangePermission
       ));
     });
@@ -63,15 +64,57 @@ class PermissionListBloc extends Bloc<PermissionListEvent, PermissionListState> 
   
   Future<void> callPermissionListApi({required SearchCommonRequest searchCommonRequest}) async {
     PermissionListResponseModel? responseModel = await PermissionManager().getPermissionModel(isRefresh: ! (state.enableEdit??false));
+    if(state.permissionActionType == PermissionActionType.editChildRole) /// chinh sua quyen cho role con
+      {
+        /// an het nhung quyen ma role cha bi disable
+        for(PermissionGroupInfo permissionGroupInfo in responseModel?.content??[])
+          {
+            (permissionGroupInfo.permission??[]).removeWhere((element) => element.isActivate==false,);
+            if((permissionGroupInfo.permission??[]).isEmpty)
+              {
+                (responseModel?.content??[]).removeWhere((element) => element.type == permissionGroupInfo.type,);
+              }
+          }
+        
+        /// sau do call lay permission hien tai cua role can chinh sua
+        if((state.roleId??'').isNotEmpty)
+          {
+            GetPermissionListByRoleApi courseApi = GetPermissionListByRoleApi(roleId: state.roleId);
+            PermissionListResponseModel permissionResponseModelChild = await courseApi.call();
+            /// set trang thai quyen cua role con cho role cha de lay ra cac quyen cua role con
+            
+            for(PermissionGroupInfo permissionGroupInfo in responseModel?.content??[])
+              {
+                if((permissionResponseModelChild.content??[]).where((element) => element.id == permissionGroupInfo.id,).isNotEmpty)
+                  {
+                    int pemissionIndexChild = (permissionResponseModelChild.content??[]).indexWhere((element) => element.id == permissionGroupInfo.id,);
+                    for(PermissionInfo  permissionInfo in permissionGroupInfo.permission??[])
+                    {
+                      if(((permissionResponseModelChild.content??[])[pemissionIndexChild].permission??[]).where((element) => element.value == permissionInfo.value,).isEmpty)
+                        {
+                          permissionInfo.isActivate = false;
+                          permissionGroupInfo.isActivate=false;
+                        }
+                    }
+                  }
+                else
+                  {
+                    for(PermissionInfo permissionInfo in permissionGroupInfo.permission??[])
+                      {
+                        permissionInfo.isActivate= false; /// set tat ca cac quyen cua nhom do ve false
+                        permissionGroupInfo.isActivate=false;
+                      }
+                  }
+              }
+            
+          }
+      }
         emit(state.copyWith(
-            tagListResponseModel: responseModel,
+            permissionListResponseModel: responseModel,
             blocStatus: PermissionListStatus.onLoadEnd,
           searchCommonRequest: searchCommonRequest,
           contentView: responseModel?.content
         ));
-        if((responseModel?.content??[]).isNotEmpty) {
-          add(PermissionListOnSelectTagEvent(selectTagInfo:(responseModel?.content??[]).first));       
-        }
   }
 
   Future<void> _onDeletePermission(

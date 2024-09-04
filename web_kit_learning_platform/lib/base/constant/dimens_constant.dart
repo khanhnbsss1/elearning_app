@@ -18,52 +18,52 @@ class Dimens{
  static double size10 = FetchPixels.getPixelHeight(10.0);
 
  static double get size11 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?11.0:13.0);
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?11.0:11.0);
  }
  static double get size12 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?12.0:14.0);
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?12.0:12.0);
  }
  static double get size13 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?13.0:15.0) ;
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?13.0:13.0) ;
  }
  static double get size14 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?14.0:16.0);
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?14.0:14.0);
  }
  static double get size15 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?15.0:17.0) ;
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?15.0:15.0) ;
  }
  static double get size16{
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?16.0:18.0);
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?16.0:16.0);
  }
  static double get size17 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?17.0:19.0);
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?17.0:17.0);
  }
  static double get size18 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?18.0:20.0);
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?18.0:18.0);
  }
  static double get size19 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?19.0:21.0);
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?19.0:19.0);
  }
  static double get size20 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?20.0:22.0);
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?20.0:20.0);
  }
  static double get size21 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?21.0:24.0);
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?21.0:21.0);
  }
  static double get size22 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?22.0:24.0);
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?22.0:22.0);
  }
  static double get size23 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?23.0:25.0);
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?23.0:23.0);
  }
  static double get size24 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?24.0:26.0);
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?24.0:24.0);
  }
  static double get size25 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?25.0:27.0);
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?25.0:25.0);
  }
  static double get size26 {
-  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?26.0:28.0);
+  return FetchPixels.getPixelHeight(!ResponsiveInfo.isTablet()?26.0:26.0);
  }
  static double get size27 { return FetchPixels.getPixelHeight(27.0);}
  static double get size28 { return FetchPixels.getPixelHeight(28.0);}

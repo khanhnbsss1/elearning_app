@@ -20,14 +20,15 @@ class CourseDetailSelectLessonEvent extends CourseDetailEvent {
 
 class CourseDetailUpdateInfoSelectLessonEvent extends CourseDetailEvent {
   LessonInfo selectLessonInfo;
-  CourseDetailUpdateInfoSelectLessonEvent({required this.selectLessonInfo});
+  VideoInfo selectVideoInfo;
+  CourseDetailUpdateInfoSelectLessonEvent({required this.selectLessonInfo, required this.selectVideoInfo});
   @override
-  List<Object?> get props => [selectLessonInfo];
+  List<Object?> get props => [selectLessonInfo, selectVideoInfo];
 }
 class CourseDetailUpdateFinishLessonEvent extends CourseDetailEvent {
   LessonInfo selectLessonInfo;
-  int videoOrder;
-  CourseDetailUpdateFinishLessonEvent({required this.selectLessonInfo, required this.videoOrder});
+  VideoInfo selectVideoInfo;
+  CourseDetailUpdateFinishLessonEvent({required this.selectLessonInfo, required this.selectVideoInfo});
   @override
-  List<Object?> get props => [selectLessonInfo];
+  List<Object?> get props => [selectLessonInfo, selectVideoInfo];
 }

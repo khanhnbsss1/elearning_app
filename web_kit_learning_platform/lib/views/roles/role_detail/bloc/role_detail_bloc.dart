@@ -7,9 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/services/apis/permission/models/permission_info.dart';
 import 'package:webkit/services/apis/permission/permission_list_api.dart';
+import 'package:webkit/services/apis/roles/add_permission_api.dart';
 import 'package:webkit/services/apis/roles/add_role_api.dart';
 import 'package:webkit/services/apis/roles/models/create_role_request_info.dart';
 import 'package:webkit/services/apis/roles/models/roles_info.dart';
+import 'package:webkit/services/apis/roles/remove_permission_api.dart';
+import 'package:webkit/services/apis/roles/update_role_api.dart';
 part 'role_detail_event.dart';
 part 'role_detail_state.dart';
 
@@ -21,67 +24,80 @@ class RoleDetailBloc extends Bloc<RoleDetailEvent, RoleDetailState> {
     on<RoleDetailChangePermissionEvent>((event, emit) async {
       emit(state.copyWith(
         permissionList: event.permissionListResponseModel,
-            blocStatus: RoleDetailStatus.onChangePermission
+            blocStatus: RoleDetailStatus.onUpdateRoleInfo,
       ));
+    });
+    on<RoleDetailUpdateInfoEvent>((event, emit) async {
+      emit(event.state.copyWith(blocStatus: RoleDetailStatus.onUpdateRoleInfo));
     });
   }
   Future<void> _onInit(
       RoleDetailInitEvent event,
       Emitter<RoleDetailState> emit,
       ) async {
-    if(state.roleInfo?.id!=null)
-      {
-        GetPermissionListByRoleApi permissionListApi = GetPermissionListByRoleApi(roleId: state.roleInfo?.id);
-        state.permissionList = await permissionListApi.call();
-      }
     emit(state.copyWith(
-      permissionList: state.permissionList,
       blocStatus: RoleDetailStatus.initial
     ));
   }
   Future<void> _onCreateRole(
       RoleDetailCreateEvent event,
       Emitter<RoleDetailState> emit,
-      ) async {
-     // emit(event.state);
-      
+      ) async {     
       AddRoleApi addRoleApi = AddRoleApi(info: getCreateRoleRequestInfo());
       dynamic data = await addRoleApi.call();
       if(data.runtimeType== String && (data as String).isEmpty)
         {
           emit(state.copyWith(
-              permissionList: state.permissionList,
+             // permissionList: state.permissionList,
               blocStatus: RoleDetailStatus.onCreateRole
           ));
         }
+      await updatePermissionForRole();
 
   }
   Future<void> _onUpdateRole(
       RoleDetailUpdateEvent event,
       Emitter<RoleDetailState> emit,
       ) async {
-    //emit(event.state);
-    
-    AddRoleApi addRoleApi = AddRoleApi(info: getCreateRoleRequestInfo());
+    UpdateRoleApi addRoleApi = UpdateRoleApi(info:UpdateRoleRequestInfo(roleId: event.state.roleInfo!.id, newRole: event.state.editingControllerRoleName?.text));
     dynamic data = await addRoleApi.call();
+   await updatePermissionForRole();
     emit(state.copyWith(
-        permissionList: state.permissionList,
+       // permissionList: state.permissionList,
         blocStatus: RoleDetailStatus.onUpdateRole
     ));
   }
 
   CreateRoleRequestInfo getCreateRoleRequestInfo(){
-    CreateRoleRequestInfo createRoleRequestInfo = CreateRoleRequestInfo(roleName: state.editingControllerRoleName?.text, claims: []);
+    CreateRoleRequestInfo createRoleRequestInfo = CreateRoleRequestInfo(roleName: state.editingControllerRoleName?.text);
+    return createRoleRequestInfo;
+  }
+  Future<void> updatePermissionForRole() async {
+    List<PermissionInfo>listAdd =[];
+    List<PermissionInfo>listRemove =[];
+    if(state.roleInfo?.id==null) {
+      return;
+    }
     for(PermissionGroupInfo permissionGroupInfo in  state.permissionList?.content??[])
     {
       for(PermissionInfo permissionInfo in permissionGroupInfo.permission??[])
       {
+        permissionInfo.roleId = state.roleInfo?.id;
         if(permissionInfo.isActivate??false)
         {
-          createRoleRequestInfo.claims?.add(Claims(type: permissionGroupInfo.type, value: permissionInfo.value));
+          listAdd.add(permissionInfo);
         }
+        else
+          {
+            listRemove.add(permissionInfo);
+          }
       }
     }
-    return createRoleRequestInfo;
+    
+
+    AddPermissionApi addPermissionApi = AddPermissionApi(info: listAdd);
+    dynamic dataAdd = await addPermissionApi.call();
+    RemovePermissionApi removePermissionApi = RemovePermissionApi(info: listAdd, roleId: state.roleInfo!.id!);
+    dynamic dataRemove = await removePermissionApi.call();
   }
 }

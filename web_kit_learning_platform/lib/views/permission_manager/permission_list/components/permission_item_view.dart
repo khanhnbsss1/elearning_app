@@ -63,22 +63,48 @@ class GroupPermissionItemView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    info.type??"",
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyleConstant
-                        .normalTextOnBackGroundColorStyle16w400.copyWith(
-                      color: ColorConst.mainColor,
-                      fontSize: ResponsiveInfo.isPhone()?Dimens.size18:Dimens.size16,
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        info.descriptionType??"",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyleConstant.normalTextOnBackGroundColorStyle16w400.copyWith(
+                          color: ColorConst.mainColor,
+                          fontSize: ResponsiveInfo.isPhone()?Dimens.size18:Dimens.size16,
+                        ),
+                        maxLines: 1,
+                      ),
                     ),
-                    maxLines: 1,
-                  ),
+                    FlutterSwitch(
+                      width: Dimens.size60,
+                      height: Dimens.size30,
+                      valueFontSize: Dimens.size14,
+                      toggleSize: Dimens.size25,
+                      value: info.isActivate??false,
+                      borderRadius: Dimens.size20,
+                      padding: Dimens.size4,
+                      showOnOff: true,
+                      disabled: !(enableEdit??true),
+                      activeColor: Colors.green,
+                      activeIcon: Icon(Icons.check_circle_outline_outlined, color: Colors.green,),
+                      onToggle: (val) {
+                        setState(() {
+                          info.setActiveAllPermission(val);
+                          if(onChange!=null){
+                            onChange!(info);
+                          }
+                        });
+                      },
+                    ),
+                  ],
                 ),
                 Gap(Dimens.size16),
                 GridView.count(
-                  controller: controller,
+                  //controller: controller,
                   crossAxisSpacing: Dimens.size24,
                   childAspectRatio: (constraints.maxWidth/3 -24) / (60),
                   mainAxisSpacing: Dimens.size16,
@@ -132,11 +158,15 @@ class PermissionItemWidgetState extends State<PermissionItemWidget>{
          onToggle: (val) {
            setState(() {
              widget.permissionInfo?.isActivate = val;
+             if(widget.onChange!=null)
+               {
+                 widget.onChange!( widget.permissionInfo!);
+               }
            });
          },
        ),
        Gap(Dimens.size8),
-       Expanded(child: Text(widget.permissionInfo?.value??"", style: TextStyleConstant.textStyleBlack13w400,))
+       Expanded(child: Text(widget.permissionInfo?.descriptionValue??"", style: TextStyleConstant.textStyleBlack13w400,))
      ],
    );
   }

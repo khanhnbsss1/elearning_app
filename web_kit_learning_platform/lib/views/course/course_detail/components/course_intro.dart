@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/services/apis/payment/unlock_course_api.dart';
+import 'package:webkit/services/apis/user/course/register_course_api.dart';
 import 'package:webkit/views/course/course_detail/bloc/course_detail_bloc.dart';
 
 import '../../../../helpers/widgets/my_text.dart';
@@ -598,11 +600,19 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
         ConfirmPopupPage(
           title: "${L10nX.getStr.register} ${L10nX.getStr.course_str.toLowerCase()}",
           content: L10nX.getStr.you_are_ready_register_this_course,
-          onAccept: () {
-            Navigator.of(context).pop();
-            CourseStudy1(
-              courseInfo: state.courseInfo!,
-            ).show(context);
+          onAccept: () async {
+            RegisterCourseApi registerCourseApi = RegisterCourseApi(courseId: state.courseInfo!.id!);
+            dynamic data = await registerCourseApi.call();
+            if(data.runtimeType == String && (data as String).isEmpty)
+              {
+                ConfirmPopupPage(
+                  title: L10nX.getStr.string_notify,
+                  content: "Yêu cầu đăng ký đã được gửi đến quản trị viên và sẽ được xử lý sớm",
+                  onAccept: () async {
+                    Navigator.pop(context);
+                  },
+                ).show(context);
+              }
           },
         ).show(context);
       }

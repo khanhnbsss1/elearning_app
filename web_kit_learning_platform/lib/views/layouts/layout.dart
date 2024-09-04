@@ -1,9 +1,13 @@
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/layouts/layout_controller.dart';
+import 'package:webkit/helpers/localizations/language_helper.dart';
+import 'package:webkit/helpers/services/navigation_service.dart';
 import 'package:webkit/helpers/theme/admin_theme.dart';
+import 'package:webkit/helpers/theme/app_notifier.dart';
 import 'package:webkit/helpers/theme/app_style.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/theme/theme_customizer.dart';
@@ -20,6 +24,8 @@ import 'package:webkit/views/layouts/right_bar.dart';
 import 'package:webkit/views/layouts/top_bar.dart';
 import 'package:webkit/widgets/custom_pop_menu.dart';
 
+import '../../helpers/localizations/bloc/main_bloc.dart';
+
 class Layout extends StatelessWidget {
   final Widget? child;
   Widget? title;
@@ -29,7 +35,8 @@ class Layout extends StatelessWidget {
   final contentTheme = AdminTheme.theme.contentTheme;
   bool? isScroll;
   EdgeInsetsGeometry? padding;
-
+  Function? languageHideFn;
+  LANGUAGE_INDEX mLanguageIndex = LANGUAGE_INDEX.VIETNAMESE;
   Layout(
       {super.key,
       this.child,
@@ -47,48 +54,41 @@ class Layout extends StatelessWidget {
       return GetBuilder(
           init: controller,
           builder: (controller) {
-            return screenMT.isMobile ? mobileScreen() : largeScreen();
+            return screenMT.isMobile ? mobileScreen(context) : largeScreen();
           });
     });
   }
 
-  Widget mobileScreen() {
+  Widget mobileScreen(BuildContext context) {
+    UserProfile? userProfile =  UserManager().getUserProfile();
     return Scaffold(
       key: controller.scaffoldKey,
       appBar: AppBar(
         elevation: 0,
         title: title,
         actions: [
-          InkWell(
-            onTap: () {
-              ThemeCustomizer.setTheme(
-                  ThemeCustomizer.instance.theme == ThemeMode.dark
-                      ? ThemeMode.light
-                      : ThemeMode.dark);
-            },
-            child: Icon(
-              ThemeCustomizer.instance.theme == ThemeMode.dark
-                  ? FeatherIcons.sun
-                  : FeatherIcons.moon,
-              size: 18,
-              color: topBarTheme.onBackground,
-            ),
-          ),
           MySpacing.width(8),
           CustomPopupMenu(
             backdrop: true,
+            hideFn: (_) => languageHideFn = _,
             onChange: (_) {},
-            offsetX: -180,
+            offsetX: -36,
             menu: Padding(
               padding: MySpacing.xy(8, 8),
               child: Center(
-                child: Icon(
-                  FeatherIcons.bell,
-                  size: 18,
+                child: ClipRRect(
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  borderRadius: BorderRadius.circular(2),
+                  child: Image.asset(
+                    "assets/lang/${LanguageHelper().getCurrentLocale().languageCode??'vi'}.png",
+                    width: 24,
+                    height: 18,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
-            menuBuilder: (_) => buildNotifications(),
+            menuBuilder: (_) => buildLanguageSelector(context),
           ),
           MySpacing.width(8),
           CustomPopupMenu(
@@ -100,8 +100,22 @@ class Layout extends StatelessWidget {
               padding: MySpacing.xy(8, 8),
               child: MyContainer.rounded(
                   paddingAll: 0,
-                  child: Image.asset(
-                    Images.avatars[0],
+                  child:
+                  (userProfile!=null && (userProfile.avatar??'').isNotEmpty)?
+                  ImageManager().getImageByUrl(
+                    userProfile.avatar??'',
+                    height: 28,
+                    width: 28,
+                    boxFit: BoxFit.cover,
+                    errorBuilder: Image.asset(
+                      'assets/deshboard/profile.png',
+                      height: 28,
+                      width: 28,
+                      fit: BoxFit.cover,
+                    ),
+                  ):
+                  Image.asset(
+                    'assets/deshboard/profile.png',
                     height: 28,
                     width: 28,
                     fit: BoxFit.cover,
@@ -118,7 +132,48 @@ class Layout extends StatelessWidget {
       body: (isScroll ?? true)?SingleChildScrollView(child: child):child,
     );
   }
-
+  Widget buildLanguageSelector( BuildContext context) {
+    List<Widget> childrenLanguage=[];
+    for(LanguageInfo language in LanguageHelper().supportedLanguages)
+    {
+      childrenLanguage.add(MyButton.text(
+        padding: MySpacing.xy(8, 4),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        splashColor: contentTheme.onBackground.withAlpha(20),
+        onTap: () async {
+          LanguageHelper().changeLanguage(language, context);
+        },
+        child: Row(
+          children: [
+            ClipRRect(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                borderRadius: BorderRadius.circular(2),
+                child: Image.asset(
+                  "assets/lang/${language.languageCode}.png",
+                  width: 18,
+                  height: 14,
+                  fit: BoxFit.cover,
+                )),
+            MySpacing.width(8),
+            MyText.labelMedium(language.language??"")
+          ],
+        ),
+      ));
+    }
+    return MyContainer.bordered(
+      padding: MySpacing.xy(8, 8),
+      width: 125,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: childrenLanguage,
+      ),
+    );
+  }
+  void changeLanguage(LanguageInfo language, BuildContext context) {
+    Locale locale = LANGUAGE_MAPS[language.languageIndex]!;
+    AppNotifier().changeLanguage(language, notify: false);
+    BlocProvider.of<MainBloc>(NavigationService.globalContext!).add(MainChangeLanguageEvent(locale: locale));
+  }
   Widget largeScreen() {
     return Scaffold(
       key: controller.scaffoldKey,
@@ -249,7 +304,10 @@ class Layout extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MyButton(
-                  onTap: () => {},
+                  onTap: () {
+                    AppPages.routeName(Routes.userEdit);
+                  },
+                  // onPressed: () =>
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   borderRadiusAll: AppStyle.buttonRadius.medium,
                   padding: MySpacing.xy(8, 4),
@@ -264,30 +322,7 @@ class Layout extends StatelessWidget {
                       ),
                       MySpacing.width(8),
                       MyText.labelMedium(
-                        "My Account",
-                        fontWeight: 600,
-                      )
-                    ],
-                  ),
-                ),
-                MySpacing.height(4),
-                MyButton(
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  onTap: () => {},
-                  borderRadiusAll: AppStyle.buttonRadius.medium,
-                  padding: MySpacing.xy(8, 4),
-                  splashColor: theme.colorScheme.onSurface.withAlpha(20),
-                  backgroundColor: Colors.transparent,
-                  child: Row(
-                    children: [
-                      Icon(
-                        FeatherIcons.settings,
-                        size: 14,
-                        color: contentTheme.onBackground,
-                      ),
-                      MySpacing.width(8),
-                      MyText.labelMedium(
-                        "Settings",
+                        L10nX.getStr.profile,
                         fontWeight: 600,
                       )
                     ],
@@ -296,15 +331,17 @@ class Layout extends StatelessWidget {
               ],
             ),
           ),
-          Divider(
+          const Divider(
             height: 1,
             thickness: 1,
           ),
           Padding(
             padding: MySpacing.xy(8, 8),
             child: MyButton(
+              key: UniqueKey(),
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              onTap: () {
+              onTap: () async {
+                await AuthorManager().handleLogout();
                 AppPages.routeName(Routes.landingPageRoute, isReplace: true);
               },
               borderRadiusAll: AppStyle.buttonRadius.medium,

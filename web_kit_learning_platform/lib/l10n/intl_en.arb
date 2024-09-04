@@ -653,5 +653,10 @@
   "trend_str": "Trend",
   "registered_str": "Registered",
   "all_str": "All",
-  "chinese_vietnamese_str":"Chinese-Vietnamese"
+  "chinese_vietnamese_str":"Chinese-Vietnamese",
+  "content_manager": "Content Management",
+  "user_manager": "Roles and Users",
+  "watching_str": "Watching",
+
+  "lesson_video_str": "Lesson video"
 }

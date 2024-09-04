@@ -81,9 +81,7 @@ class _TopBarState extends State<TopBar>
                       child: ClipRRect(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         borderRadius: BorderRadius.circular(2),
-                        child:
-
-                        Image.asset(
+                        child: Image.asset(
                           "assets/lang/${LanguageHelper().getCurrentLocale().languageCode??'vi'}.png",
                           width: 24,
                           height: 18,
@@ -94,8 +92,7 @@ class _TopBarState extends State<TopBar>
                   ),
                   menuBuilder: (_) => buildLanguageSelector( context),
                 ),
-                MySpacing.width(6),
-                MySpacing.width(4),
+                MySpacing.width(10),
                 CustomPopupMenu(
                   backdrop: false,
                   onChange: (_) {},
@@ -268,7 +265,7 @@ class _TopBarState extends State<TopBar>
               children: [
                 MyButton(
                   onTap: () {
-                    AppPages.routeName('/contacts/profile');
+                    AppPages.routeName(Routes.userEdit);
                     setState(() {});
                   },
                   // onPressed: () =>
@@ -286,33 +283,7 @@ class _TopBarState extends State<TopBar>
                       ),
                       MySpacing.width(8),
                       MyText.labelMedium(
-                        "My Profile",
-                        fontWeight: 600,
-                      )
-                    ],
-                  ),
-                ),
-                MySpacing.height(4),
-                MyButton(
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  onTap: () {
-                    AppPages.routeName(Routes.userEdit);
-                    setState(() {});
-                  },
-                  borderRadiusAll: AppStyle.buttonRadius.medium,
-                  padding: MySpacing.xy(8, 4),
-                  splashColor: theme.colorScheme.onSurface.withAlpha(20),
-                  backgroundColor: Colors.transparent,
-                  child: Row(
-                    children: [
-                      Icon(
-                        FeatherIcons.edit,
-                        size: 14,
-                        color: contentTheme.onBackground,
-                      ),
-                      MySpacing.width(8),
-                      MyText.labelMedium(
-                        "Edit Profile",
+                        L10nX.getStr.profile,
                         fontWeight: 600,
                       )
                     ],

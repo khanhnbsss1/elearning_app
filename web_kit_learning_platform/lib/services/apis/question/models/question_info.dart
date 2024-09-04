@@ -1,6 +1,7 @@
 
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/models/page_model.dart';
+import 'package:webkit/services/apis/test/models/test_info.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 enum QuestionType{
   text,
@@ -232,6 +233,14 @@ class QuestionListResponseModel extends PageModel{
       json['content'].forEach((v) {
         content!.add(new QuestionInfo.fromJson(v));
       });
+    }
+  }
+  QuestionListResponseModel.fromFilter( FilterResponseModel json) {
+    content = <QuestionInfo>[];
+    for (TestFilterItem v in (json.data??[])) {
+      for(SubTestFilter subTestFilter in v.subFilter??[]) {
+        content!.add(new QuestionInfo(id: subTestFilter.id, questionName: subTestFilter.name));
+      }
     }
   }
   QuestionListResponseModel.fromList( dynamic json) {

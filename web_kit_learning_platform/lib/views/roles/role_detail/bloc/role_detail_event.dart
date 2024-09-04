@@ -13,9 +13,14 @@ class RoleDetailInitEvent extends RoleDetailEvent {
 }
 class RoleDetailChangePermissionEvent extends RoleDetailEvent {
   PermissionListResponseModel permissionListResponseModel;
-  RoleDetailChangePermissionEvent({required this.permissionListResponseModel});
+ // RoleDetailState state;
+  RoleDetailChangePermissionEvent({required this.permissionListResponseModel,
+    //required this.state
+  });
   @override
-  List<Object?> get props => [permissionListResponseModel];
+  List<Object?> get props => [permissionListResponseModel,
+   // state
+  ];
 }
 
 class RoleDetailCreateEvent extends RoleDetailEvent {
@@ -26,6 +31,12 @@ class RoleDetailCreateEvent extends RoleDetailEvent {
 }
 class RoleDetailUpdateEvent extends RoleDetailEvent {
   RoleDetailUpdateEvent({required this.state});
+  RoleDetailState state;
+  @override
+  List<Object?> get props => [state];
+}
+class RoleDetailUpdateInfoEvent extends RoleDetailEvent {
+  RoleDetailUpdateInfoEvent({required this.state});
   RoleDetailState state;
   @override
   List<Object?> get props => [state];

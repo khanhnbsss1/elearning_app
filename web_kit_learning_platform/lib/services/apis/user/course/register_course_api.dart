@@ -1,24 +1,21 @@
 
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/models/user/UserProfile.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/category/models/category_info.dart';
-import 'package:webkit/services/apis/tags/models/tag_info.dart';
-
-import 'models/create_role_request_info.dart';
-import 'models/roles_info.dart';
+import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 
 
-class UpdateRoleApi extends BaseApiRequest {
-  UpdateRoleRequestInfo info;
-  UpdateRoleApi({required this.info}):super(
-    serviceType: SERVICE_TYPE.AUTHEN,
-    apiName: ApiName.getInstance().editRoles,
+class RegisterCourseApi extends BaseApiRequest {
+  int courseId;
+  RegisterCourseApi({required this.courseId}):super(
+    serviceType: SERVICE_TYPE.USER,
+    apiName: ApiName.getInstance().registerCourse,
   );
 
   Future<dynamic> call() async {
     await getAuthorization();
-    dynamic result = await putRequestAPI();
-    if(result.runtimeType == String && (result as String).isEmpty)
+    dynamic result = await postRequestAPI();
+    if(result.runtimeType == int)
     {
       ToastUtils.showToastSuccess(L10nX.getStr.success);
     }
@@ -26,7 +23,9 @@ class UpdateRoleApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    await setApiBody(info.toJson());
+    await setApiBody({
+      "course_id":courseId.toString()
+    });
   }
 
   @override

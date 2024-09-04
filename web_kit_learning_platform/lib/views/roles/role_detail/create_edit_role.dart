@@ -145,9 +145,14 @@ class _CreateEditRole extends State<CreateEditRole>
                                 padding:  EdgeInsets.symmetric(horizontal: 8.0),
                                 child: PermissionGroupListPage(
                                   scrollController: scrollController,
+                                  roleId: state.roleInfo?.id,
+                                  permissionActionType: PermissionActionType.editChildRole,
                                   enableEdit: true,
                                   onChangePermission: (p0) {
-                                    BlocProvider.of<RoleDetailBloc>(context).add(RoleDetailChangePermissionEvent(permissionListResponseModel: p0!));
+                                    BlocProvider.of<RoleDetailBloc>(context).add(RoleDetailChangePermissionEvent(
+                                        permissionListResponseModel: p0!,
+                                      //state: _state
+                                    ));
                                   },
                                 ),
                               ),
@@ -196,7 +201,6 @@ class _CreateEditRole extends State<CreateEditRole>
                           textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.blackColor),
                           onTap: () {
                             Navigator.of(context).pop();
-
                           },
                         ),
                       ],
@@ -221,6 +225,9 @@ class _CreateEditRole extends State<CreateEditRole>
         keyboardType: TextInputType.text,
         controller: _state.editingControllerRoleName,
         enabled: enableEdit,
+        onChanged: (value) {
+        //  BlocProvider.of<RoleDetailBloc>(context).add(RoleDetailUpdateInfoEvent(state: _state));
+        },
         decoration: InputDecoration(
           labelText: L10nX.getStr.role_str,
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
@@ -248,6 +255,9 @@ class _CreateEditRole extends State<CreateEditRole>
         keyboardType: TextInputType.text,
         enabled: enableEdit,
         controller: _state.editingControllerRoleDescription,
+        onChanged: (value) {
+        //  BlocProvider.of<RoleDetailBloc>(context).add(RoleDetailUpdateInfoEvent(state: _state));
+        },
         decoration: InputDecoration(
           labelText: L10nX.getStr.description,
           labelStyle: MyTextStyle.bodySmall(xMuted: true),

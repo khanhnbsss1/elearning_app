@@ -2,22 +2,24 @@
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/services/apis/category/models/category_info.dart';
+import 'package:webkit/services/apis/permission/models/permission_info.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 
 import 'models/create_role_request_info.dart';
 import 'models/roles_info.dart';
 
 
-class UpdateRoleApi extends BaseApiRequest {
-  UpdateRoleRequestInfo info;
-  UpdateRoleApi({required this.info}):super(
-    serviceType: SERVICE_TYPE.AUTHEN,
-    apiName: ApiName.getInstance().editRoles,
+class RemovePermissionApi extends BaseApiRequest {
+  List<PermissionInfo> info;
+  String roleId;
+  RemovePermissionApi({required this.info, required this.roleId}):super(
+    serviceType: SERVICE_TYPE.Claim,
+    apiName: ApiName.getInstance().deletePermissionListFromRole,
   );
 
   Future<dynamic> call() async {
     await getAuthorization();
-    dynamic result = await putRequestAPI();
+    dynamic result = await postRequestAPI();
     if(result.runtimeType == String && (result as String).isEmpty)
     {
       ToastUtils.showToastSuccess(L10nX.getStr.success);
@@ -26,7 +28,10 @@ class UpdateRoleApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    await setApiBody(info.toJson());
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['claims'] = info.map((v) => v.toJson()).toList();
+    data['roleId'] = roleId;
+    await setApiBody(data);
   }
 
   @override

@@ -148,6 +148,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "contact": MessageLookupByLibrary.simpleMessage("Liên hệ"),
         "contact_us":
             MessageLookupByLibrary.simpleMessage("Liên hệ với chúng tôi"),
+        "content_manager":
+            MessageLookupByLibrary.simpleMessage("Quản lý nội dung"),
         "content_str": MessageLookupByLibrary.simpleMessage("Nội dung"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "FFTSolution - Bản quyền 2022"),
@@ -328,6 +330,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lesson_list":
             MessageLookupByLibrary.simpleMessage("Danh sách bài học"),
         "lesson_str": MessageLookupByLibrary.simpleMessage("Bài học"),
+        "lesson_video_str":
+            MessageLookupByLibrary.simpleMessage("Video bài học"),
         "lets_study": MessageLookupByLibrary.simpleMessage("Vào học"),
         "level_str": MessageLookupByLibrary.simpleMessage("Cấp độ"),
         "license_copyright":
@@ -781,6 +785,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xóa người dùng"),
         "user_detail":
             MessageLookupByLibrary.simpleMessage("Thông tin người dùng"),
+        "user_manager":
+            MessageLookupByLibrary.simpleMessage("Vai trò và người dùng"),
         "user_name": MessageLookupByLibrary.simpleMessage("Tên đăng nhập"),
         "user_str": MessageLookupByLibrary.simpleMessage("Người dùng"),
         "user_update_str":
@@ -804,6 +810,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "vnd_str": MessageLookupByLibrary.simpleMessage("VNĐ"),
         "vocabulary_str": MessageLookupByLibrary.simpleMessage("Từ vựng"),
         "warning": MessageLookupByLibrary.simpleMessage("Cảnh báo"),
+        "watching_str": MessageLookupByLibrary.simpleMessage("Đang xem"),
         "we_are_different_because_we_understand_what_you_need":
             MessageLookupByLibrary.simpleMessage(
                 "Chúng tôi khác biệt vì hiểu thứ bạn cần"),

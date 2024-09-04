@@ -44,9 +44,10 @@ class PermissionGroupInfo {
   String? id;
   String? type;
   String? descriptionType;
+  bool?isActivate;
   List<PermissionInfo>? permission;
 
-  PermissionGroupInfo({this.id, this.type, this.descriptionType, this.permission});
+  PermissionGroupInfo({this.id, this.type, this.descriptionType, this.permission, this.isActivate});
 
   PermissionGroupInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -55,7 +56,12 @@ class PermissionGroupInfo {
     if (json['permission'] != null) {
       permission = <PermissionInfo>[];
       json['permission'].forEach((v) {
+        PermissionInfo permissionInfo = new PermissionInfo.fromJson(v);
         permission!.add(new PermissionInfo.fromJson(v));
+        if(!(permissionInfo.isActivate??false))
+          {
+            isActivate = false;
+          }
       });
     }
   }
@@ -70,14 +76,21 @@ class PermissionGroupInfo {
     }
     return data;
   }
+  void setActiveAllPermission(bool isActiveInput){
+    isActivate = isActiveInput;
+    for(PermissionInfo permissionInfo in permission??[]){
+      permissionInfo.isActivate = isActiveInput;
+    }
+  }
 }
 
 class PermissionInfo {
   String? descriptionValue;
   String? value;
   bool? isActivate;
+  String? roleId;
 
-  PermissionInfo({this.descriptionValue, this.value, this.isActivate});
+  PermissionInfo({this.descriptionValue, this.value, this.isActivate, this.roleId});
 
   PermissionInfo.fromJson(Map<String, dynamic> json) {
     descriptionValue = json['description_value'];
@@ -90,6 +103,7 @@ class PermissionInfo {
     data['description_value'] = descriptionValue;
     data['value'] = value;
     data['isActivate'] = isActivate;
+    data['roleId'] = roleId;
     return data;
   }
 }

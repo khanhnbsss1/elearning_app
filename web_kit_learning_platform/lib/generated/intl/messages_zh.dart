@@ -132,6 +132,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmation": MessageLookupByLibrary.simpleMessage("确认吗？"),
         "contact": MessageLookupByLibrary.simpleMessage("联系"),
         "contact_us": MessageLookupByLibrary.simpleMessage("联系我们"),
+        "content_manager": MessageLookupByLibrary.simpleMessage("内容管理器"),
         "content_str": MessageLookupByLibrary.simpleMessage("内容"),
         "copy_right":
             MessageLookupByLibrary.simpleMessage("FFTSolution - 版权所有 2022"),
@@ -276,6 +277,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "left_dialog": MessageLookupByLibrary.simpleMessage("左侧对话框"),
         "lesson_list": MessageLookupByLibrary.simpleMessage("课程列表"),
         "lesson_str": MessageLookupByLibrary.simpleMessage("课程"),
+        "lesson_video_str": MessageLookupByLibrary.simpleMessage("课程视频"),
         "lets_study": MessageLookupByLibrary.simpleMessage("来学习吧"),
         "level_str": MessageLookupByLibrary.simpleMessage("级别"),
         "license_copyright": MessageLookupByLibrary.simpleMessage("许可和版权"),
@@ -655,6 +657,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "user_create": MessageLookupByLibrary.simpleMessage("创建用户"),
         "user_delete_str": MessageLookupByLibrary.simpleMessage("删除用户"),
         "user_detail": MessageLookupByLibrary.simpleMessage("用户信息"),
+        "user_manager": MessageLookupByLibrary.simpleMessage("角色和用户"),
         "user_name": MessageLookupByLibrary.simpleMessage("登录名"),
         "user_str": MessageLookupByLibrary.simpleMessage("用户"),
         "user_update_str": MessageLookupByLibrary.simpleMessage("编辑用户"),
@@ -675,6 +678,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "vnd_str": MessageLookupByLibrary.simpleMessage("VND"),
         "vocabulary_str": MessageLookupByLibrary.simpleMessage("閱讀"),
         "warning": MessageLookupByLibrary.simpleMessage("警告"),
+        "watching_str": MessageLookupByLibrary.simpleMessage("正在观看"),
         "we_are_different_because_we_understand_what_you_need":
             MessageLookupByLibrary.simpleMessage("我们与众不同,因为我们了解您的需求"),
         "website_visits": MessageLookupByLibrary.simpleMessage("网站访问量"),

@@ -217,7 +217,7 @@ class TestItemWidgetState extends State<TestItemWidget>{
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "${widget.testTitle ?? L10nX.getStr.output_test_str} ",
+                      "II. ${widget.testTitle ?? L10nX.getStr.output_test_str} ",
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -333,9 +333,9 @@ class TestItemWidgetState extends State<TestItemWidget>{
     double percent = listQuestionChooesed.length /  (widget.testInfos??[]).length;
     return Center(
       child:  Padding(
-        padding: EdgeInsets.all(15.0),
+        padding: EdgeInsets.symmetric(vertical: 15.0),
         child: new LinearPercentIndicator(
-          width: Dimens.size250,
+          //width: Dimens.size250,
           animation: true,
           lineHeight: Dimens.size20,
           animationDuration: 1000,

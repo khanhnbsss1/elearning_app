@@ -2,17 +2,25 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/services/apis/category/get_category_list.dart';
 import 'package:webkit/services/apis/category/models/category_info.dart';
 import 'package:webkit/services/apis/course/course_fillter/get_course_fillter_api.dart';
 import 'package:webkit/services/apis/course/course_fillter/models/course_filtter_info.dart';
 import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_api.dart';
 import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_model.dart';
+import 'package:webkit/services/apis/filter/get_quiz_filter_api.dart';
+import 'package:webkit/services/apis/filter/get_test_list_filter_api.dart';
 import 'package:webkit/services/apis/grade/get_grade_list.dart';
 import 'package:webkit/services/apis/grade/models/grade_info.dart';
+import 'package:webkit/services/apis/lessson/lesson_list/lesson_list_api.dart';
 import 'package:webkit/services/apis/lessson/lesson_list_filter/lesson_list_filter_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/question/get_quiz_list_api.dart';
+import 'package:webkit/services/apis/question/models/question_info.dart';
+import 'package:webkit/services/apis/test/get_test_list_api.dart';
 
+import '../../services/apis/test/models/test_info.dart';
 import '../widgets/widget_common/widget_with_title_common.dart';
 
 class FilterManager{
@@ -27,8 +35,10 @@ class FilterManager{
   GetAddCourseFilterModel? addCourseFilterModel;
   CategoryListResponseModel? categoryListResponseModel;
   GradeListResponseModel? gradeListResponseModel;
-  LessonListResponseModel? lessonListResponseModel;
+  LessonListResponseModel? lessonListResponseModel = LessonListResponseModel(content: []);
   CourseFilterListInfo courseFilterListInfo = CourseFilterListInfo(data: []);
+  QuestionListResponseModel questionListResponseModel = QuestionListResponseModel(content: []);
+  TestListResponseModel testListResponseModel = TestListResponseModel(content: []);
   Future<void> init()async {
     await getFilterCourse();
    await getCourseFilter();
@@ -44,6 +54,44 @@ class FilterManager{
     GetCourseFilterApi getCourseFilterApi = GetCourseFilterApi();
     return await getCourseFilterApi.call();
   }
+
+  Future<QuestionListResponseModel> getQuestionListAll(String keyword) async {
+    if((questionListResponseModel.content??[]).isNotEmpty) {
+      return questionListResponseModel;
+    }
+    GetQuizListApi getQuizFilterApi = GetQuizListApi(searchCommonRequest: SearchCommonRequest(keyword: keyword));
+    questionListResponseModel = await getQuizFilterApi.call();
+    return questionListResponseModel;
+  }
+  
+  Future<QuestionListResponseModel> getFilterQuestion() async {
+    if((questionListResponseModel.content??[]).isNotEmpty) {
+      return questionListResponseModel;
+    }
+    GetQuizFilterApi getQuizFilterApi = GetQuizFilterApi();
+    questionListResponseModel = await getQuizFilterApi.call();
+    return questionListResponseModel;
+  }
+
+
+  Future<TestListResponseModel> getTestListAll(String keyword) async {
+    if((testListResponseModel.content??[]).isNotEmpty) {
+      return testListResponseModel;
+    }
+    GetTestListApi getTestFilterApi = GetTestListApi(searchCommonRequest: SearchCommonRequest(keyword: keyword));
+    testListResponseModel =  await getTestFilterApi.call();
+    return testListResponseModel;
+  }
+  
+  Future<TestListResponseModel> getFilterTest() async {
+    if((testListResponseModel.content??[]).isNotEmpty) {
+      return testListResponseModel;
+    }
+    GetTestFilterApi getTestFilterApi = GetTestFilterApi();
+    testListResponseModel =  await getTestFilterApi.call();
+    return testListResponseModel;
+  }
+  
   Future<GetAddCourseFilterModel?> getCourseFilter() async {
     if(addCourseFilterModel==null|| (addCourseFilterModel?.data??[]).isEmpty)
       {
@@ -64,18 +112,25 @@ class FilterManager{
   Future<CategoryListResponseModel?> getCategoryFilter() async {
     if(categoryListResponseModel==null|| (categoryListResponseModel?.content??[]).isEmpty)
     {
-      GetCategoryListApi api = GetCategoryListApi();
+      GetCategoryListApi api =GetCategoryListApi();
       categoryListResponseModel = await api.call();
     }
     return categoryListResponseModel;
   }
-
-  Future<LessonListResponseModel?> getLessonFilterInfo() async {
-    if(lessonListResponseModel==null || (lessonListResponseModel?.content??[]).isEmpty)
-    {
-      GetLessonListFilterApi getLessonListApi = GetLessonListFilterApi();
-      lessonListResponseModel = await getLessonListApi.call();
+  Future<LessonListResponseModel?> getLessonListAllInfo(String keyword) async {
+    if((lessonListResponseModel?.content??[]).isNotEmpty) {
+      return lessonListResponseModel;
     }
+    GetLessonListApi getLessonListFilterApi = GetLessonListApi(searchCommonRequest: SearchCommonRequest(keyword: keyword));
+    lessonListResponseModel =  await getLessonListFilterApi.call();
+    return lessonListResponseModel;
+  }
+  Future<LessonListResponseModel?> getLessonFilterInfo() async {
+    if((lessonListResponseModel?.content??[]).isNotEmpty) {
+      return lessonListResponseModel;
+    }
+    GetLessonListFilterApi getLessonListFilterApi = GetLessonListFilterApi();
+    lessonListResponseModel =  await getLessonListFilterApi.call();
     return lessonListResponseModel;
   }
   

@@ -653,5 +653,9 @@
   "trend_str": "Xu hướng",
   "registered_str": "Đã đăng ký",
   "all_str": "Tất cả",
-  "chinese_vietnamese_str":"Hán Việt"
+  "chinese_vietnamese_str":"Hán Việt",
+  "content_manager": "Quản lý nội dung",
+  "user_manager": "Vai trò và người dùng",
+  "watching_str": "Đang xem",
+  "lesson_video_str": "Video bài học"
 }

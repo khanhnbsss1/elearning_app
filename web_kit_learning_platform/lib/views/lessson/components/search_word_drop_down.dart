@@ -48,21 +48,20 @@ class _MyDropdownButtonState extends State<SearchWordDropDown> with SingleTicker
               ]),
           SizedBox(height: 20,),
           Wrap(
-            children: (widget.exitsWords??[]).map((tag) => Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Chip(
-                deleteIconColor: color,
-                label: Text(tag.simplified??''),
-                onDeleted: () {
-                  if(widget.enableEdit??true)
-                    {
-                      setState(() {
-                        widget.onRemoveWords(tag);
-                      });
-                    }
-
-                },
-              ),
+            spacing: Dimens.size4,
+            runSpacing: Dimens.size4,
+            children: (widget.exitsWords??[]).map((tag) => Chip(
+              deleteIconColor: color,
+              label: Text(tag.simplified??''),
+              onDeleted: () {
+                if(widget.enableEdit??true)
+                  {
+                    setState(() {
+                      widget.onRemoveWords(tag);
+                    });
+                  }
+            
+              },
             )).toList(),
           ),
         ]
