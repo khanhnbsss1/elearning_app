@@ -119,7 +119,7 @@ class SubjectItemWidgetState extends State<SubjectItemWidget>{
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 4),
                     decoration: BoxDecoration(
-                        color: isSelectLesson?ColorConst.greyColor1.withOpacity(0.05): ColorConst.whiteColor,
+                        color: isSelectLesson?ColorConst.greyColor1.withOpacity(0.2): ColorConst.whiteColor,
                         border: Border(bottom: BorderSide(color: ColorConst.blackColor,width: 0.2))
                     ),
                     padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size32),

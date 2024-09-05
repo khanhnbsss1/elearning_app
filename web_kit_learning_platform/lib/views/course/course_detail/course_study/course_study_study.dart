@@ -52,10 +52,13 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
         switch (state.blocStatus) {
           case AddCourseStatus.initial:
             break;
+          case AddCourseStatus.onSelectionCurrentVideo:
+            state.blocStatus = AddCourseStatus.unKnown;
+            break;
           default:
             break;
+            
         }
-
       },
       builder: (BuildContext context, state) {
         _blocContext = context;
@@ -197,6 +200,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
       builder: (BuildContext context, BoxConstraints constraints) {
         print('rebuild build video');
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
              // height: 450,
@@ -208,6 +212,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                 maxWidth: constraints.maxWidth
               ),
               child: VideoPlayer(
+                key: Key((_state.selectLessonInfo?.selectVideoInfo?.order??'').toString()),
                 videoPlayerModel: VideoPlayerModel(
                     title: "",
                     link: (_state.selectLessonInfo?.selectVideoInfo?.videoLink??"https://www.youtube.com/watch?v=RFu43pM2Nbw")
@@ -237,55 +242,104 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                 },
               ),
             ),
-            Gap(Dimens.size8),
-           /* SizedBox(
-                height: Dimens.size100,
-                child: Center(
-                  child: ListView.builder(
-                    itemCount: (_state.selectLessonInfo?.videoInfos?.link??[]).length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      VideoInfo videoInfo = (_state.selectLessonInfo?.videoInfos?.link??[]).elementAt(index);
-                      bool isSelect =  videoInfo.order == _state.selectLessonInfo?.selectVideoInfo?.order;
-                      return Padding(
-                          padding: EdgeInsets.symmetric(horizontal: Dimens.size8,),
-                          child: Stack(
-                            alignment: Alignment.bottomCenter,
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(Dimens.size16),
-                                    border: Border.all(color: ColorConst.colorIconGrays, width: 0.5),
-                                    color: ColorConst.blackColor.withOpacity(isSelect?0.8:1)
+            Gap(Dimens.size16),
+            Visibility(
+              visible: (_state.selectLessonInfo?.videoInfos?.link??[]).length>1,
+              child: Padding(
+                padding:  EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size32),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${L10nX.getStr.watching_str.toString()}: ${_state.selectLessonInfo?.selectVideoInfo?.videoTitle}',
+                      style: TextStyleConstant.textStyleBlack16w600,
+                      textAlign: TextAlign.start,
+                    ),
+                    Gap(Dimens.size8),
+                    SizedBox(
+                        height: Dimens.size100,
+                        child: Center(
+                          child: ListView.builder(
+                            itemCount: (_state.selectLessonInfo?.videoInfos?.link??[]).length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              VideoInfo videoInfo = (_state.selectLessonInfo?.videoInfos?.link??[]).elementAt(index);
+                              bool isSelect =  videoInfo.order == _state.selectLessonInfo?.selectVideoInfo?.order;
+                              String? thumb = getYoutubeThumbnail(videoUrl: videoInfo.videoLink??"");
+                              return InkWell(
+                                onTap: () {
+                                  if(!isSelect){
+                                    BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailOnSelectCurrentVideoEvent(
+                                        selectLessonInfo: _state.selectLessonInfo!,
+                                        selectVideoInfo: videoInfo));
+                                  }
+                                  else{
+                                    ToastUtils.showToast("Bạn đang xem video bài giảng này");
+                                  }
+                                },
+                                child: Padding(
+                                    padding: EdgeInsets.symmetric(horizontal: Dimens.size8,),
+                                    child: Stack(
+                                      alignment: Alignment.bottomCenter,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(Dimens.size16),
+                                              border: Border.all(color: ColorConst.colorIconGrays, width: 0.5),
+                                              color: ColorConst.blackColor.withOpacity(isSelect?0.8:1)
+                                          ),
+                                          width: Dimens.size150,
+                                          height: Dimens.size100,
+                                          padding: EdgeInsets.all(Dimens.size8),
+                                          child:
+                                          (thumb??'').isNotEmpty?
+                                          ImageManager().getImageByUrl(
+                                            thumb??"",
+                                            errorBuilder:Icon(Icons.video_library_outlined, color: ColorConst.whiteColor, size: Dimens.size40,),
+                                          ):
+                                          Icon(Icons.video_library_outlined, color: ColorConst.whiteColor, size: Dimens.size40,),
+                                        ),
+                                        Visibility(
+                                          visible: isSelect,
+                                          child: Align(
+                                            alignment: Alignment.bottomCenter,
+                                            child: Text(
+                                              L10nX.getStr.watching_str,
+                                              style: TextStyleConstant.textStyleBlack13w400.copyWith(color: ColorConst.whiteColor),
+                                              textAlign: TextAlign.center,
+                                            ),
+                    
+                                          ),
+                                        )
+                                      ],
+                                    )
                                 ),
-                                width: Dimens.size150,
-                                height: Dimens.size100,
-                                padding: EdgeInsets.all(Dimens.size8),
-                                child: Icon(Icons.video_library_outlined, color: ColorConst.whiteColor, size: Dimens.size40,),
-                              ),
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  L10nX.getStr.watching_str,
-                                  style: TextStyleConstant.textStyleBlack13w400.copyWith(color: ColorConst.whiteColor),
-                                  textAlign: TextAlign.center,
-                                ),
-
-                              )
-                            ],
-                          )
-                      );
-                    },),
-                )
+                              );
+                            },),
+                        )
+                    ),
+                    
+                  ],
+                ),
+              ),
             ),
-            Divider(color: ColorConst.colorIconGrays,thickness: 0.5,),*/
+          
+            Visibility(
+                visible: (_state.selectLessonInfo?.videoInfos?.link??[]).length>1,
+                child: Divider(color: ColorConst.colorIconGrays,thickness: 0.5,)),
           ],
         );
-
       },
     );
   }
+  String? getYoutubeThumbnail({required String videoUrl}) {
+    final Uri? uri = Uri.tryParse(videoUrl);
+    if (uri == null) {
+      return null;
+    }
 
+    return 'https://img.youtube.com/vi/${uri.queryParameters['v']}/0.jpg';
+  }
   Widget buildStudyTitle() {
     return Column(
       children: [
@@ -321,10 +375,12 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
           children: [
             Column(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size16),
                   child: Text("I. ${L10nX.getStr.lesson_list}",
+                      textAlign: TextAlign.start,
                       style: TextStyleConstant.textStyleBlack14w600),
                 ),
                 Divider(color: ColorConst.blackColor,thickness: 0.1,),
@@ -465,21 +521,22 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
             child: Text(_state.selectLessonInfo?.note??"",style: TextStyleConstant.textStyleBlack13w400,),
           ),
           Gap(Dimens.size16),
-          WidgetWithColumnTitleCommon(
-            title: "- ${L10nX.getStr.document_str}: ",
-            childPadding: EdgeInsets.symmetric(horizontal: Dimens.size24),
-
-            titleStyle: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.mainColor),
-
-            child: InkWell(
-                onTap: () {
-                  if((_state.selectLessonInfo?.docLink??"").isNotEmpty) {
-                    FileStoreManager().downloadFileFromStream(url: _state.selectLessonInfo?.docLink??"", fileName:  _state.selectLessonInfo?.docName??"");
-                  }
-                },
-                child: Text(
-                  _state.selectLessonInfo?.docName??'',
-                  style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.blue),)),
+          Visibility(
+            visible: (_state.selectLessonInfo?.docLink??'').isNotEmpty,
+            child: WidgetWithColumnTitleCommon(
+              title: "- ${L10nX.getStr.document_str}: ",
+              childPadding: EdgeInsets.symmetric(horizontal: Dimens.size24),
+              titleStyle: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.mainColor),
+              child: InkWell(
+                  onTap: () {
+                    if((_state.selectLessonInfo?.docLink??"").isNotEmpty) {
+                      FileStoreManager().downloadFileFromStream(url: _state.selectLessonInfo?.docLink??"", fileName:  _state.selectLessonInfo?.docName??"");
+                    }
+                  },
+                  child: Text(
+                    _state.selectLessonInfo?.docName??'',
+                    style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.blue),)),
+            ),
           ), 
           Gap(Dimens.size16),
           Visibility(

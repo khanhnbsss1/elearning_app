@@ -56,9 +56,9 @@ class FilterManager{
   }
 
   Future<QuestionListResponseModel> getQuestionListAll(String keyword) async {
-    if((questionListResponseModel.content??[]).isNotEmpty) {
+/*    if((questionListResponseModel.content??[]).isNotEmpty) {
       return questionListResponseModel;
-    }
+    }*/
     GetQuizListApi getQuizFilterApi = GetQuizListApi(searchCommonRequest: SearchCommonRequest(keyword: keyword));
     questionListResponseModel = await getQuizFilterApi.call();
     return questionListResponseModel;
@@ -75,9 +75,9 @@ class FilterManager{
 
 
   Future<TestListResponseModel> getTestListAll(String keyword) async {
-    if((testListResponseModel.content??[]).isNotEmpty) {
+/*    if((testListResponseModel.content??[]).isNotEmpty) {
       return testListResponseModel;
-    }
+    }*/
     GetTestListApi getTestFilterApi = GetTestListApi(searchCommonRequest: SearchCommonRequest(keyword: keyword));
     testListResponseModel =  await getTestFilterApi.call();
     return testListResponseModel;
@@ -118,9 +118,9 @@ class FilterManager{
     return categoryListResponseModel;
   }
   Future<LessonListResponseModel?> getLessonListAllInfo(String keyword) async {
-    if((lessonListResponseModel?.content??[]).isNotEmpty) {
+/*    if((lessonListResponseModel?.content??[]).isNotEmpty) {
       return lessonListResponseModel;
-    }
+    }*/
     GetLessonListApi getLessonListFilterApi = GetLessonListApi(searchCommonRequest: SearchCommonRequest(keyword: keyword));
     lessonListResponseModel =  await getLessonListFilterApi.call();
     return lessonListResponseModel;

@@ -283,8 +283,74 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       });*/
                     },
                   ),
+                  //----------------Landing Page------------------//
+                  MenuWidget(
+                    iconData: LucideIcons.planeLanding,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    title: L10nX.getStr.landing_page,
+                    permission: const [
+                      "landingpages.put.update_ladingpage_course",
+                      "landingpages.put.update_landingpage_review",
+                      "landingpages.put.update_landingpage_teacher",
+                    ],
+                    children: [
+                      MenuItem(
+                        title: L10nX.getStr.landing_page,
+                        route:  Routes.landingPageRoute,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                      ),
+                      MenuItem(
+                        title: L10nX.getStr.edit_landing_page,
+                        route:  Routes.landingPageRoute,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                      ),
+                    ],
+                  ),
 
 
+                  //----------------report -----------------//
+                  Visibility(
+                    visible: !ThemeCustomizer().leftBarCondensed &&
+                        (
+                            UserManager().userContainPermission(permissionList: ["dashboard.get.get_revenue_history"]) ||
+                                UserManager().userContainPermission(permissionList: ["dashboard.get.get_course_history"])||
+                                UserManager().userContainPermission(permissionList: ["dashboard.get.get_course_registration_history"])||
+                                UserManager().userContainPermission(permissionList: ["dashboard.get.get_register_time_period"])
+                        ),
+                    child: Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size20, vertical: Dimens.size8),
+                      child: Text(L10nX.getStr.report_str, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
+                    ),
+                  ),
+                  NavigationItem(
+                    iconData: Icons.app_registration,
+                    title: L10nX.getStr.report_history_register_course,
+                    // route: Routes.permissionList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["dashboard.get.get_course_registration_history"],
+                  ),
+                  NavigationItem(
+                    iconData: Icons.edit,
+                    title: L10nX.getStr.report_history_edit_course,
+                    // route: Routes.permissionList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["dashboard.get.get_course_history",],
+                  ),
+                  NavigationItem(
+                    iconData: Icons.account_circle,
+                    title: L10nX.getStr.report_new_registered_account,
+                    // route: Routes.permissionList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["dashboard.get.get_register_time_period"],
+                  ),
+                  NavigationItem(
+                    iconData: Icons.monetization_on,
+                    title: L10nX.getStr.report_purchased,
+                    // route: Routes.permissionList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["dashboard.get.get_revenue_history",],
+                  ),
+                  
                   Visibility(
                     visible: !ThemeCustomizer().leftBarCondensed &&
                         (
@@ -294,7 +360,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                         ),
                     child: Padding(
                       padding:  EdgeInsets.symmetric(horizontal: Dimens.size20, vertical: Dimens.size8),
-                      child: Text(L10nX.getStr.content_manager, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
+                      child: Text(L10nX.getStr.user_manager, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
                     ),
                   ),
                   MenuWidget(
@@ -321,6 +387,19 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       ),
                     ],
                   ),
+                  //----------------Role------------------//
+                  NavigationItem(
+                    iconData: Icons.local_police_outlined,
+                    title: L10nX.getStr.role_str,
+                    route: Routes.roleList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["claim.post.get_claims"],
+                    onPress: () {
+                      /*                        setState(() {
+                        ThemeCustomizer().leftBarCondensed= true;
+                      });*/
+                    },
+                  ),
                   //----------------Permission------------------//
                   NavigationItem(
                     iconData: Icons.policy,
@@ -334,103 +413,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       });*/
                     },
                   ),
-
-                  //----------------Permission------------------//
-                  NavigationItem(
-                    iconData: Icons.local_police_outlined,
-                    title: L10nX.getStr.role_str,
-                    route: Routes.roleList,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    permission: const ["claim.post.get_claims"],
-                    onPress: () {
-                      /*                        setState(() {
-                        ThemeCustomizer().leftBarCondensed= true;
-                      });*/
-                    },
-                  ),
                   
-                  //----------------Landing Page------------------//
-                  MenuWidget(
-                    iconData: LucideIcons.planeLanding,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.landing_page,
-                    permission: const [
-                      "landingpages.put.update_ladingpage_course",
-                      "landingpages.put.update_landingpage_review",
-                      "landingpages.put.update_landingpage_teacher",
-                    ],
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.landing_page,
-                        route:  Routes.landingPageRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.edit_landing_page,
-                        route:  Routes.landingPageRoute,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                      ),
-                    ],
-                  ),
-
-                  Visibility(
-                    visible: !ThemeCustomizer().leftBarCondensed &&
-                        (
-                            UserManager().userContainPermission(permissionList: ["dashboard.get.get_revenue_history"]) ||
-                                UserManager().userContainPermission(permissionList: ["dashboard.get.get_course_history"])||
-                                UserManager().userContainPermission(permissionList: ["dashboard.get.get_course_registration_history"])||
-                                    UserManager().userContainPermission(permissionList: ["dashboard.get.get_register_time_period"])
-                        ),
-                    child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size20, vertical: Dimens.size8),
-                      child: Text(L10nX.getStr.report_str, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
-                    ),
-                  ),
-                  MenuWidget(
-                    iconData: Icons.note_alt_outlined,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    title: L10nX.getStr.report_str,
-                    permission: const [
-                      "dashboard.get.get_revenue_history",
-                      "dashboard.get.get_course_history",
-                      "dashboard.get.get_course_registration_history",
-                      "dashboard.get.get_register_time_period",
-                    ],
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.report_history_register_course,
-                        // route:  Routes.studentList,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const [
-                          // "users.get.get_user_list"
-                        ],
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.report_history_edit_course,
-                        // route:  Routes.teacherList,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const [
-                          // "users.get.get_user_list"
-                        ],
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.report_purchased,
-                        //route:  Routes.teacherList,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const [
-                          // "users.get.get_user_list"
-                        ],
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.report_new_registered_account,
-                        // route:  Routes.teacherList,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const [
-                          // "users.get.get_user_list"
-                        ],
-                      ),
-                    ],
-                  ),
                   //-----------------CALENDAR-----------------//
                   Visibility(
                     visible: false,
