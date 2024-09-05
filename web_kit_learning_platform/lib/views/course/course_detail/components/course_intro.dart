@@ -609,8 +609,18 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                   title: L10nX.getStr.string_notify,
                   content: "Yêu cầu đăng ký đã được gửi đến quản trị viên và sẽ được xử lý sớm",
                   onAccept: () async {
-                    Navigator.pop(context);
+                    Navigator.of(context).pop();
+                    CourseStudy1(
+                      courseInfo: state.courseInfo!,
+                    ).show(context);
                   },
+                ).show(context);
+              }
+            else
+              {
+                Navigator.of(context).pop();
+                CourseStudy1(
+                  courseInfo: state.courseInfo!,
                 ).show(context);
               }
           },
