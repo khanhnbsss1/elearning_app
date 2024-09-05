@@ -60,12 +60,11 @@ class LoginController extends MyController {
         {
           await UserManager().saveAccountLoginNearest(IdentifierConst.username);
         }
-        AppPages.routeName(Routes.dashboardRoute);
+        AppPages.routeName(Routes.courseList);
       }
       else
       {
         basicValidator.clearErrors();
-       
       }
     loading = false;
     update();

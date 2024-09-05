@@ -10,6 +10,9 @@ class SearchCommonRequest {
   int?categoryId;
   String? userType;
   bool? isActive;
+  String? startDate;
+  String? endDate;
+  String?status;
   SearchCommonRequest(
       {
         this.userId,
@@ -22,7 +25,10 @@ class SearchCommonRequest {
         this.categoryId,
         this.producerId,
         this.userType,
-        this.isActive
+        this.isActive,
+        this.endDate,
+        this.startDate,
+        this.status
       });
 
   SearchCommonRequest.fromJson(Map<String, dynamic> json) {
@@ -63,9 +69,10 @@ class SearchCommonRequest {
     {
       data['subFilterId'] = subFilter;
     }
-    if(keyword!=null)
+    if(keyword!=null && keyword!.isNotEmpty)
     {
       data['keyword'] = keyword;
+      data['userName'] = keyword;
     }
     if(gradeId!=null)
     {
@@ -87,6 +94,18 @@ class SearchCommonRequest {
     {
       data['isActive'] = (isActive??true)?1:0;
     }
+    if(startDate!=null)
+    {
+      data['startDate'] = startDate;
+    }
+    if(endDate!=null)
+    {
+      data['endDate'] = endDate;
+    }
+    if(status!=null)
+    {
+      data['status'] = status;
+    }
     return data;
   }
   SearchCommonRequest copyWith({
@@ -100,7 +119,10 @@ class SearchCommonRequest {
     int?producerId,
     int?categoryId,
     String? userType,
-    bool? isActive
+    bool? isActive,
+    String? startDate,
+    String? endDate,
+    String?status
   }){
     return SearchCommonRequest(
       userId: userId??this.userId,
@@ -114,6 +136,10 @@ class SearchCommonRequest {
       categoryId: categoryId??this.categoryId,
       userType: userType??this.userType,
       isActive: isActive??this.isActive,
+      startDate: startDate??this.startDate,
+      endDate: endDate??this.endDate,
+      status: status??this.status,
+
     );
 }
 }

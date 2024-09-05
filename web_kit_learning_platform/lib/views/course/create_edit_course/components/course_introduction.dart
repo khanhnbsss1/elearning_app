@@ -360,7 +360,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
 
   Widget buildBackgroundImage({required AddCourseState state, required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
-      title: '${L10nX.getStr.background_image_str}',
+      title: L10nX.getStr.background_image_str,
       // titleStyle: ,
       isRequirement: true,
       child: TextFormField(
@@ -573,14 +573,6 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
       },
       enable: true
     );
-    return WidgetWithColumnTitleCommon(
-        title: L10nX.getStr.grade_str,
-        isRequirement: true,
-        child: DropDownSearch(
-            list: state.controller!.listOfGradeNames,
-            hintText: '${L10nX.getStr.grade_name_str}...',
-            selectItem: (state.courseInfo?.gradeName),
-            controller: state.controller?.basicValidator.getController('grade_name')));
   }
 
   Widget buildIntroduction({required AddCourseState state, required BuildContext context}) {

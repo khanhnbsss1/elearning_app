@@ -21,6 +21,7 @@ import 'package:webkit/services/apis/question/models/question_info.dart';
 import 'package:webkit/services/apis/test/get_test_list_api.dart';
 
 import '../../services/apis/test/models/test_info.dart';
+import '../../services/apis/vocabulary/vocabulary_list/vocabulary_list_api.dart';
 import '../widgets/widget_common/widget_with_title_common.dart';
 
 class FilterManager{
@@ -56,10 +57,10 @@ class FilterManager{
   }
 
   Future<QuestionListResponseModel> getQuestionListAll(String keyword) async {
-/*    if((questionListResponseModel.content??[]).isNotEmpty) {
+    if((questionListResponseModel.content??[]).isNotEmpty) {
       return questionListResponseModel;
-    }*/
-    GetQuizListApi getQuizFilterApi = GetQuizListApi(searchCommonRequest: SearchCommonRequest(keyword: keyword));
+    }
+    GetQuizListApi getQuizFilterApi = GetQuizListApi(searchCommonRequest: SearchCommonRequest(pageNumber: -1));
     questionListResponseModel = await getQuizFilterApi.call();
     return questionListResponseModel;
   }
@@ -75,10 +76,10 @@ class FilterManager{
 
 
   Future<TestListResponseModel> getTestListAll(String keyword) async {
-/*    if((testListResponseModel.content??[]).isNotEmpty) {
+    if((testListResponseModel.content??[]).isNotEmpty) {
       return testListResponseModel;
-    }*/
-    GetTestListApi getTestFilterApi = GetTestListApi(searchCommonRequest: SearchCommonRequest(keyword: keyword));
+    }
+    GetTestListApi getTestFilterApi = GetTestListApi(searchCommonRequest: SearchCommonRequest(pageNumber: -1));
     testListResponseModel =  await getTestFilterApi.call();
     return testListResponseModel;
   }
@@ -118,18 +119,16 @@ class FilterManager{
     return categoryListResponseModel;
   }
   Future<LessonListResponseModel?> getLessonListAllInfo(String keyword) async {
-/*    if((lessonListResponseModel?.content??[]).isNotEmpty) {
-      return lessonListResponseModel;
-    }*/
-    GetLessonListApi getLessonListFilterApi = GetLessonListApi(searchCommonRequest: SearchCommonRequest(keyword: keyword));
-    lessonListResponseModel =  await getLessonListFilterApi.call();
-    return lessonListResponseModel;
-  }
-  Future<LessonListResponseModel?> getLessonFilterInfo() async {
     if((lessonListResponseModel?.content??[]).isNotEmpty) {
       return lessonListResponseModel;
     }
-    GetLessonListFilterApi getLessonListFilterApi = GetLessonListFilterApi();
+    GetLessonListApi getLessonListFilterApi = GetLessonListApi(searchCommonRequest: SearchCommonRequest(pageNumber: -1));
+    lessonListResponseModel =  await getLessonListFilterApi.call();
+    return lessonListResponseModel;
+  }
+
+  Future<LessonListResponseModel?> getVocabularyListAllInfo(String keyword) async {
+    GetListVocabularyApi getLessonListFilterApi = GetListVocabularyApi(searchCommonRequest: SearchCommonRequest(pageNumber: -1));
     lessonListResponseModel =  await getLessonListFilterApi.call();
     return lessonListResponseModel;
   }

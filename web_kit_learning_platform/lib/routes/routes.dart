@@ -81,6 +81,7 @@ import '../views/error_pages/maintenance_page.dart';
 import '../views/extra_pages/faqs_page.dart';
 import '../views/extra_pages/pricing.dart';
 import '../views/extra_pages/time_line_page.dart';
+import '../views/payment/request_register_list/request_register_list.dart';
 import '../views/ui/landing_page.dart';
 import '../views/ui/nft_dashboard.dart';
 import '../views/users_manager/user_detail/edit_user_profile.dart';
@@ -100,92 +101,118 @@ getPageRoute() {
 
     GetPage(
         name: Routes.homeRoute,
+        
         page: () =>  DashboardPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     GetPage(
-        name: Routes.landingPageRoute,
+        name: Routes.landingPageRoute, 
+      
         page: () =>  LandingPageSplash(key: UniqueKey(),),),
     GetPage(name: Routes.faqsRoute, page: () =>  FaqsPage()),
     
     ///--------------- Course ---------------///
     GetPage(
         name: Routes.courseList,
+        popGesture: true,
+        maintainState: false,
         page: () =>  CourseList(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: Routes.courseStudy,
+        maintainState: false,
         page: () {
           final arguments = Get.arguments;
           return CourseStudy1(key: UniqueKey(),courseInfo: arguments['courseInfo'] ,);
         },
+        
         middlewares: [AuthMiddleware()]),
     ///--------------- VocabularyListNonImage ---------------///
     GetPage(
         name: Routes.vocabularyListNoImage,
+        
         page: () =>  VocabularyList(key: UniqueKey(),courseType: VocabularyType.vocabularyNonImage,),
         middlewares: [AuthMiddleware()]),
     ///--------------- VocabularyListNImage ---------------///
     GetPage(
         name: Routes.vocabularyListImage,
+        
         page: () =>  VocabularyList(key: UniqueKey(),courseType: VocabularyType.vocabularyImage,),
         middlewares: [AuthMiddleware()]),
     ///--------------- Course ---------------///
     GetPage(
         name: Routes.lessonList,
+        
         page: () =>  LessonListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     ///--------------- Tags ---------------///
     GetPage(
         name: Routes.tagList,
+        
         page: () =>  TagListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
     ///--------------- Grade ---------------///
     GetPage(
         name: Routes.categoryList,
+        
         page: () =>  CategoryListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
     ///--------------- Category ---------------///
     GetPage(
         name: Routes.gradeList,
+        
         page: () =>  GradeListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
     ///--------------- Permission ---------------///
     GetPage(
         name: Routes.permissionList,
+        
         page: () =>  PermissionListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     
     ///--------------- Permission ---------------///
     GetPage(
         name: Routes.roleList,
+        
         page: () =>  RoleListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     
     ///--------------- Test ---------------///
     GetPage(
         name: Routes.testList,
+        
         page: () =>  TestListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: Routes.quizList,
+        
         page: () =>  QuestionListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
     ///---------------User-------------///
     GetPage(
         name: Routes.studentList,
+        
         page: () =>  StudentList(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: Routes.teacherList,
+        
         page: () =>  TeacherList(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
+    ///--------------- Register request list ---------------///
+    GetPage(
+        name: Routes.requestRegisterList,
+        
+        page: () =>  RequestRegisterListPage(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]),
+    
     GetPage(
         name: Routes.userEdit,
+        
         page: () {
           final arguments = Get.arguments??{};
           return EditUserProfile(
@@ -199,6 +226,7 @@ getPageRoute() {
     
     GetPage(
         name: Routes.videoPlayer,
+        
         page: () {
           final arguments = Get.arguments;
           return VideoPlayer(videoPlayerModel: VideoPlayerModel(
@@ -212,24 +240,32 @@ getPageRoute() {
     
     GetPage(
         name: Routes.courseMyList,
+        
+        maintainState: false,
         page: () =>  MyCourseList(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
     GetPage(
         name: Routes.inActiveCourse,
+        
+        maintainState: false,
         page: () =>  InactiveCourseList(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: Routes.pricingRoute,
+        
         page: () =>  Pricing(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
 
     GetPage(
         name: Routes.starterRoute,
+        
+        
         page: () =>  Starter(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: Routes.dashboardRoute,
+        
         page: () =>  DashboardPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]
     ),

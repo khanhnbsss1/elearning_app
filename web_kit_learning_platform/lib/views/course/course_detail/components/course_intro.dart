@@ -466,18 +466,14 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                 children: [
                   ClipRRect(
                       borderRadius: BorderRadius.circular(16),
-                      child: Image.network(
+                      child: ImageManager().getImageByUrl(
                         (_state.courseInfo?.image??'').isEmpty ? 'assets/deshboard/adventure/adventure5.png' : _state.courseInfo?.image??"",
-                        fit: BoxFit.fill,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Image.network(
+                        boxFit: BoxFit.fill,
+                        errorBuilder: ImageManager().getImageByUrl(
                             'assets/deshboard/adventure/adventure5.png',
-                            fit: BoxFit.fill,
-                            errorBuilder: (context, error, stackTrace) {
-                              return SizedBox();
-                            },
-                          );
-                        },
+                            boxFit: BoxFit.fill,
+                            errorBuilder:  SizedBox()
+                          ),
                       )),
                   SizedBox(
                     height: 16,
@@ -601,13 +597,15 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
           title: "${L10nX.getStr.register} ${L10nX.getStr.course_str.toLowerCase()}",
           content: L10nX.getStr.you_are_ready_register_this_course,
           onAccept: () async {
+            MonitorLoading().showLoading("");
             RegisterCourseApi registerCourseApi = RegisterCourseApi(courseId: state.courseInfo!.id!);
             dynamic data = await registerCourseApi.call();
+            MonitorLoading().dismiss();
             if(data.runtimeType == String && (data as String).isEmpty)
               {
                 ConfirmPopupPage(
                   title: L10nX.getStr.string_notify,
-                  content: "Yêu cầu đăng ký đã được gửi đến quản trị viên và sẽ được xử lý sớm",
+                  content: "Yêu cầu đăng ký đã được gửi đến quản trị viên và sẽ được xử lý sớm !",
                   onAccept: () async {
                     Navigator.of(context).pop();
                     CourseStudy1(

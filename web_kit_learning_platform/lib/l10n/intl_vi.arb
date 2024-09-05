@@ -659,6 +659,10 @@
   "user_manager": "Vai trò và người dùng",
   "watching_str": "Đang xem",
   "lesson_video_str": "Video bài học",
-  "payment_people_number": "Số người mua"
-
+  "payment_people_number": "Số người mua",
+  "list_waiting_register": "Chờ đăng ký",
+  "register_user": "Người đăng ký",
+  "reject_str": "Từ chối",
+  "unlock_course": "Mở khóa khóa học",
+  "your_are_ready_unlock_for_this_user": "Bạn có chắc chắn muốn mở khóa khóa học cho người dùng này!"
 }

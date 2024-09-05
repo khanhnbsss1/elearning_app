@@ -61,7 +61,7 @@ class TestInfo {
     isFinish = json['is_finish'];
     courseName = json['course_name'];
     subName = json['sub_name'];
-    durian = int.tryParse(json['durian'], radix: 10);
+    durian = int.tryParse(json['durian']??'0', radix: 10);
     lectureName = json['lecture_name'];
     createdAt = json['created_at'];
     createdBy = json['created_by'];

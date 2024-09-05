@@ -146,6 +146,8 @@ class ApiName {
   
   /// payment
   final String unlockCourse = "/unlock-course";
+  final String getRequests = "/get-requests";
+
 
 }
 

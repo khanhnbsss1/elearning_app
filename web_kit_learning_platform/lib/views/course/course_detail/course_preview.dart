@@ -22,7 +22,9 @@ class CoursePreview extends StatefulWidget {
     showGeneralDialog(
       context: context,
       pageBuilder: (context, animation, secondaryAnimation) => this,
-    );
+    ).then((value) {
+      print("object");
+    },);
   }
 
   @override
@@ -59,12 +61,33 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
   }
 
   @override
+  void activate() {
+    // TODO: implement activate
+    super.activate();
+  }
+  @override
+  void deactivate() {
+    // TODO: implement deactivate
+    super.deactivate();
+  }
+  @override
+  void didUpdateWidget(covariant CoursePreview oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) {
           return CourseDetailBloc(CourseDetailState(courseInfo: widget.courseInfo))..add(CourseDetailInitEvent());
         },
         child: Layout(
+          key: UniqueKey(),
             title: Text(
               L10nX.getStr.string_back,
               style: TextStyleConstant.textStyleBlack20w700,

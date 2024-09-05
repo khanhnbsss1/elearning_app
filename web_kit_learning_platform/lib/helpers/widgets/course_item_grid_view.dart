@@ -68,17 +68,15 @@ class CourseItemGridView extends StatelessWidget {
                                     Expanded(
                                       child: ClipRRect(
                                           borderRadius: BorderRadius.circular(Dimens.size16),
-                                          child: Image.network(
+                                          child: ImageManager().getImageByUrl(
                                             (courseInfo.image ?? '').isNotEmpty ? (courseInfo.image ?? "") : 'assets/deshboard/adventure/adventure5.png',
-                                            fit: BoxFit.cover,
+                                            boxFit: BoxFit.cover,
                                             //height: 120,
-                                            errorBuilder: (context, error, stackTrace) {
-                                              return Image.asset(
+                                            errorBuilder: Image.asset(
                                                 'assets/deshboard/adventure/adventure5.png',
                                                 fit: BoxFit.cover,
                                                 //height: 150,
-                                              );
-                                            },
+                                              )
                                           )),
                                     ),
                                   ],
@@ -157,17 +155,15 @@ class CourseItemGridView extends StatelessWidget {
                                 width: Dimens.size100,
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(Dimens.size8),
-                                    child: Image.network(
+                                    child: ImageManager().getImageByUrl(
                                       courseInfo.image!.isNotEmpty ? courseInfo.image! : 'assets/deshboard/adventure/adventure5.png',
-                                      fit: BoxFit.fill,
+                                      boxFit: BoxFit.fill,
                                       //height: 120,
-                                      errorBuilder: (context, error, stackTrace) {
-                                        return Image.network(
+                                      errorBuilder: Image.asset(
                                           'assets/deshboard/adventure/adventure5.png',
                                           fit: BoxFit.fill,
                                           //height: 150,
-                                        );
-                                      },
+                                        )
                                     )),
                               ),
                               Gap(Dimens.size8),

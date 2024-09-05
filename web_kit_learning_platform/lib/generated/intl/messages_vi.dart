@@ -340,6 +340,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Giấy phép & bản quyền"),
         "licensing": MessageLookupByLibrary.simpleMessage("Cấp phép"),
         "light": MessageLookupByLibrary.simpleMessage("Ánh sáng"),
+        "list_waiting_register":
+            MessageLookupByLibrary.simpleMessage("Chờ đăng ký"),
         "literacy_rate": MessageLookupByLibrary.simpleMessage("Tỷ lệ biết chữ"),
         "loading_message":
             MessageLookupByLibrary.simpleMessage("Đang xử lý, vui lòng chờ..."),
@@ -499,9 +501,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage(
                 "Đăng ký để được hưởng những ưu đãi tốt nhất cho bạn"),
+        "register_user": MessageLookupByLibrary.simpleMessage("Người đăng ký"),
         "registered_str": MessageLookupByLibrary.simpleMessage("Đã đăng ký"),
         "registered_user":
             MessageLookupByLibrary.simpleMessage("Người dùng đăng ký mới"),
+        "reject_str": MessageLookupByLibrary.simpleMessage("Từ chối"),
         "remember_me": MessageLookupByLibrary.simpleMessage("Nhớ tôi"),
         "remove_course": MessageLookupByLibrary.simpleMessage("Xóa khóa học"),
         "remove_example": MessageLookupByLibrary.simpleMessage("Xóa ví dụ"),
@@ -772,6 +776,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ui": MessageLookupByLibrary.simpleMessage("Giao diện người dùng"),
         "unknown_str": MessageLookupByLibrary.simpleMessage("Không xác định"),
         "unlock": MessageLookupByLibrary.simpleMessage("Mở khóa"),
+        "unlock_course":
+            MessageLookupByLibrary.simpleMessage("Mở khóa khóa học"),
         "upload_file": MessageLookupByLibrary.simpleMessage("Tải file lên"),
         "upload_image_str":
             MessageLookupByLibrary.simpleMessage("Tải hình ảnh lên"),
@@ -913,6 +919,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "you_want_remove":
             MessageLookupByLibrary.simpleMessage("Bạn có muốn xóa"),
         "your_address": MessageLookupByLibrary.simpleMessage("Địa chỉ của bạn"),
+        "your_are_ready_unlock_for_this_user":
+            MessageLookupByLibrary.simpleMessage(
+                "Bạn có chắc chắn muốn mở khóa khóa học cho người dùng này!"),
         "your_course": MessageLookupByLibrary.simpleMessage("Khóa học của bạn"),
         "your_email": MessageLookupByLibrary.simpleMessage("Email của bạn"),
         "your_password_will_be_reset": MessageLookupByLibrary.simpleMessage(

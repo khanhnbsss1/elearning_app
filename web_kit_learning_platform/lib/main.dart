@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:webkit/routes/app_pages.dart';
 import 'package:webkit/routes/routes.dart';
+import 'package:webkit/views/video_player/youtube_player/youtube_layer.dart';
 import 'base/author/author_manager.dart';
 import 'base/device/device_manager.dart';
 import 'base/enviroments/flavor_settings.dart';
@@ -38,8 +40,6 @@ Future<void> main() async {
   await initialService();
   AppStyle.init();
   await ThemeCustomizer.init();
-
-  ColorConst.setColorByFlavorType();
   await DeviceManager().getDeviceInfo();
   runApp( 
       MultiBlocProvider(
@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FetchPixels(context);
-    ColorConst.setColorByFlavorType();
+    ColorConst.setColorByFlavorType(context);
     return BlocConsumer<MainBloc, MainState>(
       listener: (context, state) {
         switch(state.mainStatus){
@@ -97,7 +97,7 @@ class MyApp extends StatelessWidget {
             break;
           case MainStatus.onEnableDarkMode:
           // TODO: Handle this case.
-            ColorConst.setColorByFlavorType();
+            ColorConst.setColorByFlavorType(context);
             state.mainStatus = MainStatus.unKnown;
             break;
         }
@@ -118,16 +118,20 @@ class MyApp extends StatelessWidget {
             },
           ),
           debugShowCheckedModeBanner: false,
+          
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
           themeMode: ThemeCustomizer.instance.theme,
           navigatorKey: NavigationService.navigatorKey,
-          initialRoute: Routes.dashboardRoute,
+          initialRoute: Routes.courseList,
           getPages: getPageRoute(),
           routingCallback: (value) {
             /// call back moi lan chuyen page url
             print(value);
+            YoutubePlayerPage.onFinishVideo();
+            
           },
+          
           builder: (context, child) {
             ScreenUtil.init(context);
             ResponsiveInfo().init(context);

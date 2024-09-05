@@ -74,9 +74,9 @@ class CourseItem extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         child: (courseInfo.image!.isNotEmpty)
-                                            ? Image.network(
+                                            ? ImageManager().getImageByUrl(
                                                 courseInfo.image!,
-                                                fit: BoxFit.cover,
+                                                boxFit: BoxFit.cover,
                                                 //width: constraints.maxWidth * 2,
                                                 //  height: constraints.maxWidth
                                               )

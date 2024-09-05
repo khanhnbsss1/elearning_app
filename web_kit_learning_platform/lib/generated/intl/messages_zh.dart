@@ -283,6 +283,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "license_copyright": MessageLookupByLibrary.simpleMessage("许可和版权"),
         "licensing": MessageLookupByLibrary.simpleMessage("许可"),
         "light": MessageLookupByLibrary.simpleMessage("浅色"),
+        "list_waiting_register": MessageLookupByLibrary.simpleMessage("等待注册"),
         "literacy_rate": MessageLookupByLibrary.simpleMessage("识字率"),
         "loading_message": MessageLookupByLibrary.simpleMessage("正在处理,请稍候..."),
         "locked": MessageLookupByLibrary.simpleMessage("已锁定"),
@@ -414,8 +415,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_now": MessageLookupByLibrary.simpleMessage("立即注册"),
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage("注册即可享受最优惠的价格"),
+        "register_user": MessageLookupByLibrary.simpleMessage("注册"),
         "registered_str": MessageLookupByLibrary.simpleMessage("已注册"),
         "registered_user": MessageLookupByLibrary.simpleMessage("新注册用户"),
+        "reject_str": MessageLookupByLibrary.simpleMessage("拒绝"),
         "remember_me": MessageLookupByLibrary.simpleMessage("记住我"),
         "remove_course": MessageLookupByLibrary.simpleMessage("删除课程"),
         "remove_example": MessageLookupByLibrary.simpleMessage("删除示例"),
@@ -647,6 +650,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ui": MessageLookupByLibrary.simpleMessage("用户界面"),
         "unknown_str": MessageLookupByLibrary.simpleMessage("未知"),
         "unlock": MessageLookupByLibrary.simpleMessage("解锁"),
+        "unlock_course": MessageLookupByLibrary.simpleMessage("解锁课程"),
         "upload_file": MessageLookupByLibrary.simpleMessage("上传文件"),
         "upload_image_str": MessageLookupByLibrary.simpleMessage("上传图片"),
         "upload_sound_file_str": MessageLookupByLibrary.simpleMessage("上传声音文件"),
@@ -763,6 +767,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "you_score": MessageLookupByLibrary.simpleMessage("你的分数"),
         "you_want_remove": MessageLookupByLibrary.simpleMessage("您要删除吗"),
         "your_address": MessageLookupByLibrary.simpleMessage("您的地址"),
+        "your_are_ready_unlock_for_this_user":
+            MessageLookupByLibrary.simpleMessage("您确定要为该用户解锁课程吗！"),
         "your_course": MessageLookupByLibrary.simpleMessage("你的课程"),
         "your_email": MessageLookupByLibrary.simpleMessage("您的电子邮件"),
         "your_password_will_be_reset":

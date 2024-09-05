@@ -6569,6 +6569,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Waiting for registration`
+  String get list_waiting_register {
+    return Intl.message(
+      'Waiting for registration',
+      name: 'list_waiting_register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register`
+  String get register_user {
+    return Intl.message(
+      'Register',
+      name: 'register_user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reject`
+  String get reject_str {
+    return Intl.message(
+      'Reject',
+      name: 'reject_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unlock course`
+  String get unlock_course {
+    return Intl.message(
+      'Unlock course',
+      name: 'unlock_course',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to unlock the course for this user!`
+  String get your_are_ready_unlock_for_this_user {
+    return Intl.message(
+      'Are you sure you want to unlock the course for this user!',
+      name: 'your_are_ready_unlock_for_this_user',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

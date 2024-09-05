@@ -249,7 +249,7 @@ class AppStyle {
       cardRadius: AppStyle.cardRadius.medium,
       buttonRadius: AppStyle.buttonRadius.medium,
       defaultBreadCrumbItem:
-          MyBreadcrumbItem(name: 'Webkit', route: Routes.dashboardRoute),
+          MyBreadcrumbItem(name: 'Webkit', route: Routes.courseList),
     ));
     bool isMobile = true;
     try {

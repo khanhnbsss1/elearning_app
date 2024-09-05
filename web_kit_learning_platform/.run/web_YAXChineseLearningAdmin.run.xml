@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="web_YAXChineseLearningAdmin" type="FlutterRunConfigurationType" factoryName="Flutter">
     <option name="additionalArgs" value="--dart-define=flavor=YAXChineseLearningAdmin" />
-    <option name="attachArgs" value="--web-renderer canvaskit --release" />
+    <option name="attachArgs" value="--web-renderer html" />
     <option name="buildFlavor" value="YAXChineseLearningAdmin" />
     <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
     <method v="2" />

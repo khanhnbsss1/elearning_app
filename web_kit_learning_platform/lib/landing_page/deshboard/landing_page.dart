@@ -585,8 +585,8 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                               children: [
                                 InkWell(
                                   onTap: () {
+                                    Navigator.pop(context,);
                                     LoginPage().show(context);
-                                    //AppPages.route(Paths.dashboardPath);
                                   },
                                   child: Padding(
                                     padding: EdgeInsets.symmetric(vertical: Dimens.size8),
@@ -595,6 +595,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                                 ),
                                 InkWell(
                                   onTap: () {
+                                    Navigator.pop(context,);
                                     Register().show(context);
                                   },
                                   child: Padding(
@@ -613,7 +614,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                             children: [
                               InkWell(
                                 onTap: () {
-                                  userProfile == null ? LoginPage().show(context) : AppPages.routeName(Routes.dashboardRoute);
+                                  userProfile == null ? LoginPage().show(context) : AppPages.routeName(Routes.courseList);
                                 },
                                 child: Row(
                                   children: [
