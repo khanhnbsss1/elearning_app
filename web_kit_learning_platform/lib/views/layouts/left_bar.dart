@@ -75,7 +75,23 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
               // padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
               child: InkWell(
                 onTap: () {
-                  AppPages.routeName(Routes.dashboardRoute);
+                  if(UserManager().userContainPermission(permissionList: [
+                    "dashboard.get.get_course_history",
+                    "dashboard.get.get_course_registration_history",
+                    "dashboard.get.get_datasynthesis",
+                    "dashboard.get.get_last_reviewer",
+                    "dashboard.get.get_register_month",
+                    "dashboard.get.get_register_time_period",
+                    "dashboard.get.get_revenue_history",
+                    "dashboard.get.get_revenue_month",
+                    "dashboard.get.get_subscription_purchases",
+                    "dashboard.get.get_top_course_revenue",
+                    "dashboard.get.get_top_course_user",
+                    "dashboard.get.get_top_courses",
+                    "dashboard.get.get_user_registration",
+                  ])) {
+                    AppPages.routeName(Routes.dashboardRoute);
+                  }
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -96,20 +112,20 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                 ),
               ),
             ),
+            Gap(Dimens.size12),
             Expanded(
                 child: SingleChildScrollView(
-              physics: const PageScrollPhysics(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Gap(Dimens.size24),
+                  Gap(Dimens.size12),
                   NavigationItem(
                     iconData: LucideIcons.layoutDashboard,
                     title: L10nX.getStr.dashboard,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
                     route: Routes.dashboardRoute,
                     permission: const [
-                      "dashboard.get.get_datasynthesis_student",
                       "dashboard.get.get_course_history",
                       "dashboard.get.get_course_registration_history",
                       "dashboard.get.get_datasynthesis",
@@ -405,6 +421,29 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     iconData: Icons.policy,
                     title: L10nX.getStr.permission_str,
                     route: Routes.permissionList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["claim.post.get_claims"],
+                    onPress: () {
+                      /*                        setState(() {
+                        ThemeCustomizer().leftBarCondensed= true;
+                      });*/
+                    },
+                  ),
+
+                  Visibility(
+                    visible: !ThemeCustomizer().leftBarCondensed &&
+                        (
+                            UserManager().userContainPermission(permissionList: ["claim.post.get_claims"])
+                        ),
+                    child: Padding(
+                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size20, vertical: Dimens.size8),
+                      child: Text(L10nX.getStr.payment_str, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
+                    ),
+                  ),
+                  NavigationItem(
+                    iconData: Icons.watch_later_outlined,
+                    title: L10nX.getStr.list_waiting_register,
+                    route: Routes.requestRegisterList,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
                     permission: const ["claim.post.get_claims"],
                     onPress: () {

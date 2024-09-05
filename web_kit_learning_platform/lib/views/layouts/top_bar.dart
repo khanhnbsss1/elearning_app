@@ -132,7 +132,7 @@ class _TopBarState extends State<TopBar>
                     ),
                   ),
                   menuBuilder: (context) {
-                    return  buildAccountMenu();
+                    return  buildAccountMenu(context);
                   },
                 ),
               ],
@@ -251,7 +251,7 @@ class _TopBarState extends State<TopBar>
       ),
     );
   }
-  Widget buildAccountMenu() {
+  Widget buildAccountMenu(BuildContext context) {
     return MyContainer.bordered(
       paddingAll: 0,
       width: 150,
@@ -265,8 +265,8 @@ class _TopBarState extends State<TopBar>
               children: [
                 MyButton(
                   onTap: () {
+                    Navigator.pop(context,);
                     AppPages.routeName(Routes.userEdit);
-                    setState(() {});
                   },
                   // onPressed: () =>
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -302,6 +302,7 @@ class _TopBarState extends State<TopBar>
               key: UniqueKey(),
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onTap: () async {
+                Navigator.pop(context,);
                 await AuthorManager().handleLogout();
                 AppPages.routeName(Routes.landingPageRoute, isReplace: true);
               },

@@ -50,7 +50,7 @@ class _CourseStudyState extends State<CourseStudy1>
       child: Layout(
         title: Text(
           widget.courseInfo.name??'',
-          style: TextStyleConstant.textStyleBlack16w600,
+          style: TextStyleConstant.textStyleBlack18w600,
         ),
         padding: EdgeInsets.zero,
         showBackButton: false,

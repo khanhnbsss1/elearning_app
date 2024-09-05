@@ -111,7 +111,7 @@ class _WidgetWithColumnTitleCommonState extends State<WidgetWithColumnTitleCommo
                       visible: widget.isRequirement??false,
                       child:  Icon(
                         Icons.star,
-                        size: Dimens.size10,
+                        size: Dimens.size12,
                         color: Colors.red,)
                   ),
                   Spacer(),

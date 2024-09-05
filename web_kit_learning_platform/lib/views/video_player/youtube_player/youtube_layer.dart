@@ -9,23 +9,30 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 ///
 
 ///
+
+
 class YoutubePlayerPage extends StatefulWidget {
+  static YoutubePlayerController? youTubeController;
+
   VideoPlayerModel videoPlayerModel;
   Function(Duration duration)? onGetVideoDuration;
   Function(Duration duration)? onGetVideoPosition;
   YoutubePlayerPage({required this.videoPlayerModel, this.onGetVideoDuration, this.onGetVideoPosition});
+  static void onFinishVideo(){
+    YoutubePlayerPage.youTubeController?.stopVideo();
+    YoutubePlayerPage.youTubeController?.close();
+    YoutubePlayerPage.youTubeController = null;
+  }
   @override
   State<YoutubePlayerPage> createState() => _YoutubePlayerPageState();
 }
 
 class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
-  late YoutubePlayerController _controller;
 
   @override
   void initState() {
     super.initState();
-    
-    _controller = YoutubePlayerController(
+    YoutubePlayerPage.youTubeController = YoutubePlayerController(
       params: const YoutubePlayerParams(
         showControls: true,
         mute: false,
@@ -36,13 +43,13 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
       ),
     );
 
-    _controller.setFullScreenListener(
+    YoutubePlayerPage.youTubeController?.setFullScreenListener(
           (isFullScreen) {
         log('${isFullScreen ? 'Entered' : 'Exited'} Fullscreen.');
       },
     );
-    _controller.loadVideoById(videoId: getVideoIdFromVideoUrl());
-    _controller.listen((event) {
+    YoutubePlayerPage.youTubeController?.loadVideoById(videoId: getVideoIdFromVideoUrl());
+    YoutubePlayerPage.youTubeController?.listen((event) {
       switch(event.playerState){
         case PlayerState.unknown:
           // TODO: Handle this case.
@@ -50,7 +57,6 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
           // TODO: Handle this case.
         case PlayerState.ended:
           // TODO: Handle this case.
-          onFinishVideo();
         case PlayerState.playing:
           // TODO: Handle this case.
         case PlayerState.paused:
@@ -72,7 +78,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) { 
         return YoutubePlayerScaffold(
-          controller: _controller,
+          controller: YoutubePlayerPage.youTubeController!,
           backgroundColor: ColorConst.blackColor,
           //aspectRatio: constraints.maxWidth/constraints.maxHeight,
           builder: (context, player) {
@@ -112,13 +118,19 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
 
   @override
   void dispose() {
-    _controller.close();
+    YoutubePlayerPage.youTubeController?.stopVideo();
+    YoutubePlayerPage.youTubeController?.close();
+    YoutubePlayerPage.youTubeController = null;
     super.dispose();
   }
   
-  void onFinishVideo(){
-    
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
   }
+
+  
 }
 
 

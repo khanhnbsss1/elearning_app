@@ -370,7 +370,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
       return [];
     }
     List<LessonInfo>? content=[];
-    LessonListResponseModel? lessonListResponseModel = await FilterManager().getLessonFilterInfo();
+    LessonListResponseModel? lessonListResponseModel = await FilterManager().getLessonListAllInfo(keyWord);
     if((lessonListResponseModel?.content??[]).isNotEmpty)
       {
         content = [...(lessonListResponseModel?.content??[]).where((element) {

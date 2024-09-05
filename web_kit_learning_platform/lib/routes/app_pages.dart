@@ -87,6 +87,7 @@ abstract class Routes {
   static const userEdit = Paths.userEdit;
   static const permissionList = Paths.permissionList;
   static const roleList = Paths.roleList;
+  static const requestRegisterList = Paths.requestRegisterList;
 
   static const uiButtonsRoute = Paths.uiButtonsPath;
   static const uiCardsRoute = Paths.uiCardsPath;
@@ -166,7 +167,9 @@ abstract class Paths {
   static const categoryList = '/category/list';
   static const permissionList = '/permission/list';
   static const roleList = '/role/list';
+  static const requestRegisterList = '/request/list';
 
+  
   static const userEdit = '/user/edit';
 
   static const forgotPasswordPath = '/auth/forgot_password';

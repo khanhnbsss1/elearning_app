@@ -4,10 +4,10 @@ import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 
 
 class UnlockCourseApi extends BaseApiRequest {
-  int courseId;
-  int? payment;
+  int requestId;
+  String status;
 
-  UnlockCourseApi({required this.courseId, this.payment}):super(
+  UnlockCourseApi({required this.requestId, required this.status}):super(
     serviceType: SERVICE_TYPE.Payments,
     apiName: ApiName.getInstance().unlockCourse,
   );
@@ -23,12 +23,9 @@ class UnlockCourseApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    UserProfile? userProfile = UserManager().getUserProfile();
-    payment??= 0;
     await setApiBody({
-      "courseId" : courseId,
-      "userId": userProfile?.id,
-      "payment": payment
+      "requestId" : requestId,
+      "status": status,
     });
   }
 

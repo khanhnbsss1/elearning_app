@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:http/http.dart';
 import 'package:webkit/base/base.export.dart';
 
 class ImageManager {
@@ -75,7 +76,27 @@ class ImageManager {
       }) {
     return InkWell(
       onTap: onTap,
-      child: Image.network(
+      child: 
+/*      FutureBuilder(
+          future: Future.sync(() async {
+            Response res = await get(Uri.parse(url),);
+            if (res.statusCode == 200) {
+              return res.bodyBytes;
+            }
+          },), 
+          builder: (context, snapshot) {
+            
+            return Image.asset(
+              getPngImagePath(image),
+              color: color,
+              width: width,
+              height: height,
+              fit: boxFit,
+              scale: FetchPixels.getScale(),
+            )
+          },
+      )*/
+      Image.network(
         url,
         color: color,
         width: width,

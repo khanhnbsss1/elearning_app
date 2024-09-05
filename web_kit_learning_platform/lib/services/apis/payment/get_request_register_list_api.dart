@@ -7,8 +7,8 @@ import 'models/request_registered_info.dart';
 class GetRequestRegisteredListApi extends BaseApiRequest {
   SearchCommonRequest searchCommonRequest;
   GetRequestRegisteredListApi({required this.searchCommonRequest}):super(
-    serviceType: SERVICE_TYPE.QUIZ,
-    apiName: ApiName.getInstance().getQuizList,
+    serviceType: SERVICE_TYPE.Payments,
+    apiName: ApiName.getInstance().getRequests,
   );
 
   Future<RequestRegisteredListResponseModel> call() async {

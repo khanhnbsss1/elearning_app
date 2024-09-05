@@ -39,7 +39,7 @@ class ResetPasswordController extends MyController {
       loading = true;
       update();
       var errors;
-      AppPages.routeName(Routes.dashboardRoute);
+      AppPages.routeName(Routes.courseList);
       loading = false;
       update();
     }

@@ -344,6 +344,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("License & copyright"),
         "licensing": MessageLookupByLibrary.simpleMessage("Licensing"),
         "light": MessageLookupByLibrary.simpleMessage("Light"),
+        "list_waiting_register":
+            MessageLookupByLibrary.simpleMessage("Waiting for registration"),
         "literacy_rate": MessageLookupByLibrary.simpleMessage("Literacy rate"),
         "loading_message":
             MessageLookupByLibrary.simpleMessage("Processing, please wait..."),
@@ -504,9 +506,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_to_enjoy_the_best_deals_for_you":
             MessageLookupByLibrary.simpleMessage(
                 "Register to enjoy the best deals for you"),
+        "register_user": MessageLookupByLibrary.simpleMessage("Register"),
         "registered_str": MessageLookupByLibrary.simpleMessage("Registered"),
         "registered_user":
             MessageLookupByLibrary.simpleMessage("New registered user"),
+        "reject_str": MessageLookupByLibrary.simpleMessage("Reject"),
         "remember_me": MessageLookupByLibrary.simpleMessage("Remember Me"),
         "remove_course": MessageLookupByLibrary.simpleMessage("Remove course"),
         "remove_example":
@@ -780,6 +784,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ui": MessageLookupByLibrary.simpleMessage("UI"),
         "unknown_str": MessageLookupByLibrary.simpleMessage("Unknown"),
         "unlock": MessageLookupByLibrary.simpleMessage("Unlock"),
+        "unlock_course": MessageLookupByLibrary.simpleMessage("Unlock course"),
         "upload_file": MessageLookupByLibrary.simpleMessage("Upload file"),
         "upload_image_str":
             MessageLookupByLibrary.simpleMessage("Upload image"),
@@ -917,6 +922,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "you_want_remove":
             MessageLookupByLibrary.simpleMessage("Do you want to remove"),
         "your_address": MessageLookupByLibrary.simpleMessage("Your address"),
+        "your_are_ready_unlock_for_this_user":
+            MessageLookupByLibrary.simpleMessage(
+                "Are you sure you want to unlock the course for this user!"),
         "your_course": MessageLookupByLibrary.simpleMessage("Your course"),
         "your_email": MessageLookupByLibrary.simpleMessage("Your Email"),
         "your_password_will_be_reset":

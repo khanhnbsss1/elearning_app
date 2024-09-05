@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tiengviet/tiengviet.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/permission/permisstion.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
@@ -54,8 +55,9 @@ class PermissionListBloc extends Bloc<PermissionListEvent, PermissionListState> 
     ));
     state.contentView= [...(state.permissionListResponseModel?.content??[]).where((element) {
       String keyWord = (state.searchCommonRequest?.keyword??"").toLowerCase();
-      return (element.type??"").toLowerCase().contains(keyWord) ||
-          ((element.permission??[]).where((element) => (element.value??"").toLowerCase().contains(keyWord),).isNotEmpty);
+      String groupName = TiengViet.parse((element.descriptionType??'').toLowerCase());
+      String keyWordFinal = TiengViet.parse(keyWord.toLowerCase());
+      return groupName.contains(keyWordFinal);
     },)];
     emit(state.copyWith(
         blocStatus: PermissionListStatus.onLoadEnd,

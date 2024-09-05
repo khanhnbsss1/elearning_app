@@ -280,12 +280,15 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
             }
             return RawScrollbar(
               controller:widget.scrollController,
-              thumbColor: ColorConst.colorIconRed,
+             // thumbColor: ColorConst.colorIconGrays,
               thickness: Dimens.size10,
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                controller:widget.scrollController,
-                children:  listOfPermissionGroup,
+              child: Padding(
+                padding: EdgeInsets.only(right: Dimens.size10),
+                child: ListView(
+                  scrollDirection: Axis.vertical,
+                  controller:widget.scrollController,
+                  children:  listOfPermissionGroup,
+                ),
               ),
             );
           },
