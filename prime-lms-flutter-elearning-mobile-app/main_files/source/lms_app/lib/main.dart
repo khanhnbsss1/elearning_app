@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:is_first_run/is_first_run.dart';
 import 'package:lms_app/helper/navigator_key.dart';
 import 'package:lms_app/helper/services/navigation_service.dart';
 import 'package:lms_app/screens/auth/login.dart';
@@ -24,11 +25,10 @@ import 'enviroments/flavor_settings.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'helper/localizations/language_helper.dart';
 
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      name: Platform.isAndroid?"YAX Chinese":null,
+      name: Platform.isAndroid ? "YAX Chinese" : null,
       options: DefaultFirebaseOptions.currentPlatform);
   await EasyLocalization.ensureInitialized();
   initialService();
@@ -76,31 +76,52 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  bool? _isFirstRun;
+  bool? _isFirstCall = false;
+
+  void _checkFirstRun() async {
+    bool ifr = await IsFirstRun.isFirstRun();
+    setState(() {
+      _isFirstRun = ifr;
+    });
+  }
+
+  void _checkFirstCall() async {
+    bool ifc = await IsFirstRun.isFirstCall();
+    setState(() {
+      _isFirstCall = ifc;
+    });
+  }
+
+  void _reset() async {
+    await IsFirstRun.reset();
+    _checkFirstRun();
+    _checkFirstCall();
+  }
+
   @override
   Widget build(BuildContext context) {
     Get.updateLocale(context.locale);
     return GetMaterialApp(
-          theme: ThemeData(
-            primaryColor: const Color(0xF4930202)
-          ),
-          navigatorKey: NavigationService().navigationKey,
-          title: AppConfig.appName,
-          debugShowCheckedModeBanner: false,
-          navigatorObservers: [firebaseObserver],
-          supportedLocales: context.supportedLocales,
-          localizationsDelegates: context.localizationDelegates,
-          locale: LanguageHelper().getCurrentLocale(),
-          routingCallback: (value) {
-            if (kDebugMode) {
-              print(value);
-            }
-          },
-          home: widget.firstTimeCheck
-              ? const LoginScreen(
+      theme: ThemeData(primaryColor: const Color(0xF4930202)),
+      navigatorKey: NavigationService().navigationKey,
+      title: AppConfig.appName,
+      debugShowCheckedModeBanner: false,
+      navigatorObservers: [firebaseObserver],
+      supportedLocales: context.supportedLocales,
+      localizationsDelegates: context.localizationDelegates,
+      locale: LanguageHelper().getCurrentLocale(),
+      routingCallback: (value) {
+        if (kDebugMode) {
+          print(value);
+        }
+      },
+      home: _isFirstCall!
+              ? const IntroScreen()
+              : const LoginScreen(
                   popUpScreen: false,
-                )
-              : const IntroScreen(),
-      // home: HomeView(),
-        );
+                ),
+      // home: IntroScreen(),
+    );
   }
 }

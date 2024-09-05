@@ -225,7 +225,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ],
                       ),
                     ),
-                    const PrivacyInfo(),
+                    // const PrivacyInfo(),
                   ],
                 ),
               ],

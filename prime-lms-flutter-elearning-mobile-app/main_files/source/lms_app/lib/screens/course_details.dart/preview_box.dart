@@ -25,7 +25,7 @@ class PreviewBox extends StatelessWidget {
         InkWell(
           onTap: () {
             if (hasVideoPreview) {
-              NextScreen.iOS(context, VideoPlayerScreen(videoUrl: course.videoPreview!));
+              NextScreen.iOS(context, VideoPlayerScreen(link: course.videoPreview!));
             }
           },
           child: Container(

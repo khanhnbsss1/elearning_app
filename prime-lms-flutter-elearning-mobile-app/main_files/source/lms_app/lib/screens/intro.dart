@@ -27,11 +27,12 @@ class IntroScreen extends ConsumerWidget {
     final settings = ref.watch(appSettingsProvider);
     return Scaffold(
       bottomNavigationBar: BottomAppBar(
+        color: const Color(0x0ffff4fc),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 3),
           child: TextButton(
             style: TextButton.styleFrom(
-                backgroundColor: Theme.of(context).primaryColor,
+                backgroundColor: const Color(0xff6854a4),
                 foregroundColor: Colors.white,
                 textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18, fontWeight: FontWeight.w600)),
             child: const Text('get-started').tr(),

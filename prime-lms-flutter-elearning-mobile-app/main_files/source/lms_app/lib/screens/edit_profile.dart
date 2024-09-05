@@ -1,10 +1,12 @@
 import 'dart:typed_data';
 
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/theme/theme_provider.dart';
@@ -12,14 +14,19 @@ import 'package:lms_app/utils/snackbars.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:file_picker/file_picker.dart';
 
+import '../base/constant/dimens_constant.dart';
+import '../base/theme/text_stype_constant.dart';
 import '../components/user_avatar.dart';
 import '../constants/custom_colors.dart';
 import '../controller_elearning/edit_profile_controller.dart';
 import '../models/user/UserProfile.dart';
 import '../providers/user_data_provider.dart';
+import '../services/apis/upload_file/models/upload_file_info.dart';
+import '../services/apis/upload_file/upload_file_api.dart';
 
 class EditProfile extends ConsumerStatefulWidget {
   final Function(bool)? onUpdate;
+
   const EditProfile({super.key, required this.user, this.onUpdate});
 
   final UserProfile user;
@@ -43,17 +50,35 @@ class _EditProfileState extends ConsumerState<EditProfile> {
     if (!initController) {
       editProfileController = EditProfileController(userProfile: widget.user);
       editProfileController.onInit();
-      _imageUrl = editProfileController.basicValidator.getController('image')!.text;
-    };
+      _imageUrl =
+          editProfileController.basicValidator.getController('image')!.text;
+    }
+    ;
   }
 
   Future _pickImage() async {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(withData: true, type: FileType.custom, allowedExtensions: ['png', 'jpg']);
-      MultipartFile file = MultipartFile.fromBytes(result!.files.first.bytes!.toList(growable: true), filename: result.names[0]);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+        withData: true,
+        type: FileType.custom,
+        allowedExtensions: ['png', 'jpg']);
+    MultipartFile file = MultipartFile.fromBytes(
+        result!.files.first.bytes!,
+        filename: result.names[0]);
+    UploadFileApi uploadFileApi = UploadFileApi(
+        fileInfo: UploadFileInfo(
+            data: SubjectType.avatar,
+            fileName: result.files.first.name,
+            file: file));
+    UploadFileResponseInfo? resultUpload = await uploadFileApi.call();
+    if (resultUpload != null) {
       setState(() {
         _selectedImageFile = result.files.first.bytes!;
-        editProfileController.basicValidator.getController('image')?.text = result.files.first.name ?? "";
+        editProfileController.basicValidator.getController('image')?.text =
+            result.files.first.name ?? "";
       });
+    } else {
+      ToastUtils.showSnackBar(context, "Upload avatar failed");
+    }
   }
 
   _handleUpdate() async {
@@ -74,6 +99,8 @@ class _EditProfileState extends ConsumerState<EditProfile> {
     }
   }
 
+  List<String> genderList = ['Male', 'Female', 'Other'];
+
   @override
   Widget build(BuildContext context) {
     final isDarkMode = ref.watch(themeProvider).isDarkMode;
@@ -85,22 +112,21 @@ class _EditProfileState extends ConsumerState<EditProfile> {
       ),
       bottomNavigationBar: BottomAppBar(
         child: RoundedLoadingButton(
-          controller: _btnController,
-          elevation: 0,
-          animateOnTap: false,
-          color: Theme.of(context).primaryColor,
-          child: Text(
-            'update',
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(color: Colors.white),
-          ).tr(),
-          // onPressed: () => _handleUpdate(),
-          onPressed: () {
-            _handleUpdate();
-          }
-        ),
+            controller: _btnController,
+            elevation: 0,
+            animateOnTap: false,
+            color: Theme.of(context).primaryColor,
+            child: Text(
+              'update',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium
+                  ?.copyWith(color: Colors.white),
+            ).tr(),
+            // onPressed: () => _handleUpdate(),
+            onPressed: () {
+              _handleUpdate();
+            }),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -134,6 +160,129 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                       .getController('fullname'),
                   decoration: InputDecoration(
                     hintText: 'enter-name'.tr(),
+                    border: InputBorder.none,
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12),
+                  ),
+                  validator: (value) {
+                    if (value!.isEmpty) return 'Name is required';
+                    return null;
+                  },
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('gender').tr(),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          color: isDarkMode
+                              ? CustomColor.containerDark
+                              : CustomColor.container,
+                          child: DropdownButtonFormField<String>(
+                            decoration: InputDecoration(
+                              hintText: 'gender'.tr(),
+                              border: InputBorder.none,
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 12),
+                            ),
+                            value: editProfileController.basicValidator
+                                        .getController('gender')
+                                        ?.text ==
+                                    ""
+                                ? "Male"
+                                : editProfileController.basicValidator
+                                    .getController('gender')
+                                    ?.text,
+                            onChanged: (newValue) {
+                              editProfileController.basicValidator
+                                  .getController('gender')
+                                  ?.text = newValue!;
+                            },
+                            items: genderList.map((String? value) {
+                              return DropdownMenuItem<String>(
+                                value: value ?? "",
+                                child: Text(value ?? "", style: const TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                ),),
+                              );
+                            }).toList(),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Gender is required';
+                              }
+                              return null;
+                            },
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('birthday').tr(),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          color: isDarkMode
+                              ? CustomColor.containerDark
+                              : CustomColor.container,
+                          child: TextFormField(
+                            controller: editProfileController.basicValidator
+                                .getController('birthday'),
+                            decoration: InputDecoration(
+                              suffix: InkWell(
+                                  child: const Icon(
+                                    Icons.calendar_month,
+                                    size: 16,
+                                  ),
+                                  onTap: () async {
+                                    _selectDate(context);
+                                  }),
+                              hintText: 'birthday'.tr(),
+                              border: InputBorder.none,
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 12),
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) return 'Name is required';
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              const Text('email').tr(),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                color: isDarkMode
+                    ? CustomColor.containerDark
+                    : CustomColor.container,
+                child: TextFormField(
+                  controller: editProfileController.basicValidator
+                      .getController('email'),
+                  decoration: InputDecoration(
+                    hintText: 'email'.tr(),
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 12),
@@ -200,7 +349,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                     hintText: 'Enter your identity id',
                     border: InputBorder.none,
                     contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   ),
                 ),
               ),
@@ -220,7 +369,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                     hintText: 'Enter your country name',
                     border: InputBorder.none,
                     contentPadding:
-                    EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                        EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   ),
                 ),
               ),
@@ -229,5 +378,39 @@ class _EditProfileState extends ConsumerState<EditProfile> {
         ),
       ),
     );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final List<DateTime?>? picked = await showCalendarDatePicker2Dialog(
+      context: context,
+      config: CalendarDatePicker2WithActionButtonsConfig(
+        calendarViewScrollPhysics: const NeverScrollableScrollPhysics(),
+        selectedDayHighlightColor: Colors.blue,
+        closeDialogOnCancelTapped: true,
+        firstDayOfWeek: 1,
+        weekdayLabelTextStyle: const TextStyle(
+          color: Colors.black87,
+          fontWeight: FontWeight.bold,
+        ),
+        controlsTextStyle: const TextStyle(
+          color: Colors.black,
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
+        ),
+        centerAlignModePicker: true,
+        customModePickerIcon: const SizedBox(),
+      ),
+      dialogSize: const Size(350, 300),
+      borderRadius: BorderRadius.circular(15),
+      dialogBackgroundColor: Colors.white,
+    );
+    if (picked != null && picked.isNotEmpty && picked[0] != null) {
+      final DateFormat formatter = DateFormat('yy/MM/dd');
+      final String formattedDate = formatter.format(picked[0]!);
+      setState(() {
+        editProfileController.basicValidator.getController('birthday')!.text =
+            formattedDate;
+      });
+    }
   }
 }

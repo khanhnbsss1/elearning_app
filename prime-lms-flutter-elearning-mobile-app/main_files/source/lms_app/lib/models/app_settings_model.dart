@@ -42,7 +42,7 @@ class AppSettingsModel {
       skipLogin: d['skip_login'] ?? true,
       latestCourses: d['latest_courses'] ?? true,
       tags: d['tags'] ?? true,
-      supportEmail: d['email'],
+      supportEmail: 'fftresourse@gmail.com',
       privacyUrl: d['privacy_url'],
       website: d['website'],
       homeCategory1: d['category1'] != null ? HomeCategory.fromMap(d['category1']) : null,

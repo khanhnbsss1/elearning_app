@@ -66,6 +66,27 @@ class EditProfileController extends MyController {
       label: 'Country name',
       controller: TextEditingController(),
     );
+    basicValidator.addField(
+      'gender',
+      required: true,
+      label: 'Gender',
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'email',
+      required: true,
+      label: 'Email',
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'birthday',
+      required: true,
+      label: 'Birthday',
+      controller: TextEditingController(),
+    );
+    basicValidator.getController('gender')!.text = userProfile.gender??"";
+    basicValidator.getController('email')!.text = userProfile.email??"";
+    basicValidator.getController('birthday')!.text = userProfile.birthday??"";
     basicValidator.getController('image')!.text = userProfile.imageUrl??"";
     basicValidator.getController('fullname')!.text = userProfile.fullName??"";
     basicValidator.getController('bank_name')!.text = userProfile.bankName??"";
@@ -93,9 +114,10 @@ class EditProfileController extends MyController {
       bankAccount: basicValidator.getController('bank_account')?.text,
       bankName: basicValidator.getController('bank_name')?.text,
       identityId: basicValidator.getController('identity_id')?.text,
-      gender: userProfile.gender??userProfile.gender,
-      birthday: userProfile.birthday??userProfile.birthday,
+      gender: basicValidator.getController('gender')?.text,
+      birthday: basicValidator.getController('birthday')?.text,
       countryName: basicValidator.getController('country_name')?.text,
+      email: basicValidator.getController('email')?.text,
       phoneNumber: userProfile.phoneNumber,
     );
     EditUserApi editUserApi = EditUserApi(editUserRequest: editUserRequest);

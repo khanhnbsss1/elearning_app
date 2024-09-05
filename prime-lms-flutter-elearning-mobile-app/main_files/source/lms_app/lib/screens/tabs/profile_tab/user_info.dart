@@ -29,7 +29,6 @@ class UserInfo extends StatefulWidget {
 class _UserInfoState extends State<UserInfo> {
   @override
   Widget build(BuildContext context) {
-    print('rebuilt UserInfo');
     return FutureBuilder(
         future: getProfile(),
         builder: (context, snapshot) {
@@ -68,7 +67,7 @@ class _UserInfoState extends State<UserInfo> {
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(user.countryName ?? ""),
+                      Text(user.email ?? ""),
                     ],
                   ),
                   leading: UserAvatar(
