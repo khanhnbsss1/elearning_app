@@ -238,7 +238,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
               ),
             ),
             Gap(Dimens.size8),
-            SizedBox(
+           /* SizedBox(
                 height: Dimens.size100,
                 child: Center(
                   child: ListView.builder(
@@ -278,7 +278,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                     },),
                 )
             ),
-            Divider(color: ColorConst.colorIconGrays,thickness: 0.5,),
+            Divider(color: ColorConst.colorIconGrays,thickness: 0.5,),*/
           ],
         );
 
