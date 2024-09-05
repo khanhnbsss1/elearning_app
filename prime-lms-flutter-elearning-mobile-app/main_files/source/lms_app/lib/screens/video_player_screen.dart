@@ -2,8 +2,9 @@ import 'dart:convert';
 
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:lms_app/components/video_player_widget.dart';
+import 'package:lms_app/components/list_video_player_widget.dart';
 
+import '../components/video_player_widget.dart';
 import '../utils/custom_cached_image.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
@@ -30,14 +31,19 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   void initState() {
     super.initState();
-    Map<String, dynamic> linkJson = jsonDecode(widget.link);
+    try {
+      Map<String, dynamic> linkJson = jsonDecode(widget.link);
 
-    List<dynamic> linkList = linkJson['link'];
+      List<dynamic> linkList = linkJson['link'];
 
-    for (var video in linkList) {
-      order.add('${video['order']}');
-      videoTitle.add('${video['videoTitle']}');
-      videoLink.add('${video['videoLink']}');
+      for (var video in linkList) {
+        order.add('${video['order']}');
+        videoTitle.add('${video['videoTitle']}');
+        videoLink.add('${video['videoLink']}');
+      }
+    } catch (e) {
+      videoLink.add(widget.link);
+      print(videoLink);
     }
   }
 
@@ -55,12 +61,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           ),
         ),
       ),
-      body: Padding(
+      body: (videoLink.length == videoTitle.length) ? Padding(
           padding: const EdgeInsets.only(bottom: kToolbarHeight),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                VideoPlayerWidget(
+                ListVideoPlayerWidget(
                     videoUrl: videoLink[selectedVideo],
                     videoTitle: videoTitle[selectedVideo]),
                 Padding(
@@ -91,7 +97,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 ),
               ],
             ),
-          )),
+          )) : VideoPlayerWidget(
+        videoUrl: videoLink[0],
+      ),
     );
   }
 

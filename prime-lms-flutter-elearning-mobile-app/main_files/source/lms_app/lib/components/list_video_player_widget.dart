@@ -6,21 +6,23 @@ import 'package:flutter/services.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:pod_player/pod_player.dart';
 
-class VideoPlayerWidget extends StatefulWidget {
-  const VideoPlayerWidget({
+class ListVideoPlayerWidget extends StatefulWidget {
+  const ListVideoPlayerWidget({
     super.key,
     required this.videoUrl,
+    required this.videoTitle,
     this.thumbnailUrl,
   });
 
+  final String videoTitle;
   final String videoUrl;
   final String? thumbnailUrl;
 
   @override
-  State<VideoPlayerWidget> createState() => _VideoPlayerWidgetState();
+  State<ListVideoPlayerWidget> createState() => _ListVideoPlayerWidgetState();
 }
 
-class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
+class _ListVideoPlayerWidgetState extends State<ListVideoPlayerWidget> {
   late final PodPlayerController controller;
 
   @override
@@ -30,8 +32,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         playVideoFrom: videoType == 'network'
             ? PlayVideoFrom.network(widget.videoUrl)
             : videoType == 'vimeo'
-            ? PlayVideoFrom.vimeo(widget.videoUrl)
-            : PlayVideoFrom.youtube(widget.videoUrl),
+                ? PlayVideoFrom.vimeo(widget.videoUrl)
+                : PlayVideoFrom.youtube(widget.videoUrl),
         podPlayerConfig: const PodPlayerConfig(
           autoPlay: false,
           isLooping: false,
@@ -53,23 +55,35 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black.withOpacity(0.1),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: PodVideoPlayer(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        PodVideoPlayer(
           controller: controller,
           alwaysShowProgressBar: true,
           videoThumbnail: widget.thumbnailUrl == null
               ? null
               : DecorationImage(
-            fit: BoxFit.cover,
-            image: CachedNetworkImageProvider(
-              widget.thumbnailUrl!,
-            ),
+                  fit: BoxFit.cover,
+                  image: CachedNetworkImageProvider(
+                    widget.thumbnailUrl!,
+                  ),
+                ),
+        ),
+        const SizedBox(
+          height: 4,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          child: Text(
+            widget.videoTitle,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(color: Theme.of(context).primaryColor),
           ),
         ),
-      ),
+      ],
     );
   }
 }

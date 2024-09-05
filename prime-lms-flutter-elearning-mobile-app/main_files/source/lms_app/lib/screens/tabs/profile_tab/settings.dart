@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:lms_app/mixins/user_mixin.dart';
 import 'package:lms_app/screens/intro.dart';
+import '../../../components/change_password.dart';
 import '../../../configs/features_config.dart';
 import '../../../providers/app_settings_provider.dart';
 import '../../../providers/user_data_provider.dart';
@@ -51,6 +52,17 @@ class AppSettings extends ConsumerWidget with UserMixin {
         //     onChanged: (value) => ref.read(themeProvider.notifier).changeTheme(value),
         //   ),
         // ),
+        user != null ? Column(
+          children: [
+            const Divider(),
+            ListTile(
+              title: const Text('change-password').tr(),
+              leading: const Icon(LineIcons.passport),
+              trailing: const Icon(FeatherIcons.chevronRight),
+              onTap: () => NextScreen.openBottomSheet(context, ChangePassword(userProfile: user,)),
+            ),
+          ],
+        ) : const SizedBox(),
         Visibility(
           visible: isMultilanguageEnbled,
           child: Column(

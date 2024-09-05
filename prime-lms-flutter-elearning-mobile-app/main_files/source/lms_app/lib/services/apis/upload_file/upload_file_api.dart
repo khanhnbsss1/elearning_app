@@ -23,7 +23,7 @@ class UploadFileApi extends BaseApiRequest {
         }
     }
     catch(e){
-      MonitorLoading().dismiss();
+      // MonitorLoading().dismiss();
       return null;
     }
     return null;

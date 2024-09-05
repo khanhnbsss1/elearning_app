@@ -73,7 +73,7 @@ class AuthorManager {
       AuthorManager().handleLogout();
       NavigationService().popToFirst();
       NavigationService().navigateToScreen(const LoginScreen(popUpScreen: false,));
-      ToastUtils.showToastError("Bạn đã bị đăng xuất");
+      ToastUtils.showToastError("log-out-expired-token");
       return;
     }
     allowCallRefreshToken = false;

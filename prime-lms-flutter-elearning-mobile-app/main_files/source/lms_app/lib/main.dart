@@ -102,6 +102,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     Get.updateLocale(context.locale);
+    LanguageHelper().setLocale(context.locale);
     return GetMaterialApp(
       theme: ThemeData(primaryColor: const Color(0xF4930202)),
       navigatorKey: NavigationService().navigationKey,

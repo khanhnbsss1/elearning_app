@@ -42,25 +42,30 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.black,
-                            width: 1.0,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: InkWell(
+                          onTap: () {},
                           child: Text(
-                            'Author',
+                            'Categories',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
                                 ?.copyWith(fontWeight: FontWeight.bold),
                           ).tr(),
                         ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Text(
+                          'Author',
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ).tr(),
                       ),
                       // TextButton(
                       //   onPressed: () {
@@ -85,33 +90,20 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> {
                   categories.when(
                       skipLoadingOnRefresh: false,
                       data: (categories) {
+
                         return Column(
                           children: [
                             SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 children: categories!
-                                    .map((e) => Padding(
+                                    .map((e) => (e.name != "Author") ? Padding(
                                           padding:
                                               const EdgeInsets.only(right: 4.0),
                                           child: ActionChip(
-                                            // onPressed: () =>
-                                            // NextScreen.iOS(
-                                            //   context,
-                                            //   AllCoursesView(
-                                            //     filter: e.name ?? "",
-                                            //   ),
-                                            // ),
                                             onPressed: () {
                                               ref.read(courseFilterInfoProvider.notifier).state = e;
                                               ref.read(subFilterInfoProvider.notifier).state = SubFilterInfo();
-                                              // if (e.subFilter?.length == 0) {
-                                              //   return NextScreen.normal(
-                                              //     context,
-                                              //     AllCoursesView(
-                                              //       filter: e.name ?? "",
-                                              //     ));
-                                              // }
                                             },
                                             backgroundColor: (e.name ==
                                                     courseFilterInfo.name)
@@ -136,7 +128,7 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> {
                                                           FontWeight.w600),
                                             ),
                                           ),
-                                        ))
+                                        ) : const SizedBox())
                                     .toList(),
                               ),
                             ),
@@ -155,14 +147,6 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> {
                                                 child: ActionChip(
                                                   onPressed: () {
                                                     ref.read(subFilterInfoProvider.notifier).state = e1;
-                                                    // NextScreen.iOS(
-                                                    //   context,
-                                                    //   AllCoursesView(
-                                                    //     filter: courseFilterInfo
-                                                    //         .name ?? "ALL",
-                                                    //     subFilterInfo: e1,
-                                                    //   ),
-                                                    // );
                                                   },
                                                   backgroundColor: (e1.name ==
                                                           subFilterInfo.name)

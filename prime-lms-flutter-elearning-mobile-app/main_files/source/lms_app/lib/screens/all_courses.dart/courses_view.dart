@@ -25,7 +25,6 @@ class AllCoursesView extends ConsumerStatefulWidget {
 
 class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
   Widget build(BuildContext context) {
-    print("rebuilt");
     final gridStyle = ref.watch(gridStyleProvider);
     return Scaffold(
       appBar: AppBar(

@@ -113,6 +113,7 @@
     "logout": "注销",
     "logout-title": "确定要注销吗？",
     "logout-subtitle": "您确定要从应用程序中注销吗？",
+    "log-out-expired-token": "您的登录会话已过期",
     "yes": "是",
     "close": "关闭",
     "account-control": "帐户控制",
@@ -138,5 +139,18 @@
     "all-Instructors": "所有教练",
     "document": "文档",
     "birthday": "生日",
-    "gender": "性别"
+    "gender": "性别",
+    "Male": "男性",
+    "Female": "女性",
+    "Other": "其他",
+    "change-password": "更改密码",
+    "confirm": "确认",
+    "old-password": "旧密码",
+    "new-password": "新密码",
+    "confirm-password": "确认新密码",
+    "password-empty": "密码不能为空",
+    "password-not-match": "新密码和确认密码不匹配",
+    "enter-old-password": "输入您的旧密码",
+    "enter-new-password": "输入您的新密码",
+    "confirm-new-password": "确认您的新密码"
 }

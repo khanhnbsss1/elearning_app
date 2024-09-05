@@ -93,6 +93,7 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^26.2.11
   open_filex: ^4.5.0
   just_audio: ^0.9.40
+  dropdown_button2: ^2.3.9
 
 dependency_overrides:
   build_web_compilers: ^4.0.11

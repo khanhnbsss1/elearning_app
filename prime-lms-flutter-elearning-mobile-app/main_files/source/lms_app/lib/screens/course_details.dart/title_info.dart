@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lms_app/base/author/user_helper.dart';
+import 'package:lms_app/base/widgets/my_button.dart';
+import 'package:lms_app/models/user/UserProfile.dart';
 import 'package:lms_app/screens/reviews/rating_form.dart';
 import 'package:lms_app/constants/custom_colors.dart';
 import 'package:lms_app/models/course.dart';
@@ -17,10 +20,10 @@ class TitleInfo extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = ref.watch(themeProvider).isDarkMode;
     final rating = ref.watch(courseRatingProvider(course));
-
+    // UserProfile? user = await UserManager().getUserProfile()
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
-        course.name??"-",
+        course.name ?? "-",
         style: Theme.of(context).textTheme.headlineSmall?.copyWith(
               fontSize: 24,
               height: 1.5,
@@ -29,6 +32,15 @@ class TitleInfo extends ConsumerWidget {
             ),
       ),
       const SizedBox(height: 10),
+      Center(
+        child: MyButton(
+
+            backgroundColor: Theme.of(context).primaryColor,
+            child: Text('register-course'.tr(),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Colors.white,
+                    ))),
+      ),
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -40,7 +52,10 @@ class TitleInfo extends ConsumerWidget {
           const SizedBox(width: 20),
           Text(
             'total-lectures',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(fontWeight: FontWeight.w500),
           ).tr(args: [course.totalLectures.toString()]),
         ],
       ),
@@ -49,7 +64,9 @@ class TitleInfo extends ConsumerWidget {
         course.introduction.toString(),
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               fontSize: 17,
-              color: isDarkMode ? CustomColor.paragraphColorDark : CustomColor.paragraphColor,
+              color: isDarkMode
+                  ? CustomColor.paragraphColorDark
+                  : CustomColor.paragraphColor,
               height: 1.7,
               fontWeight: FontWeight.w400,
             ),

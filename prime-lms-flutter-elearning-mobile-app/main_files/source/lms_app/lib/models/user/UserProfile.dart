@@ -39,6 +39,7 @@ class UserProfile {
   List<String>? permissionList;
   String? permission;
   int? roleId;
+  int? isPayment;
 
   String? imageUrl;
   List? role;
@@ -82,7 +83,8 @@ class UserProfile {
         this.subscription,
         this.completedLessons,
         this.platform,
-        this.reviews
+        this.reviews,
+        this.isPayment
       });
 
   UserProfile.fromJson(Map<String, dynamic> json) {
@@ -123,6 +125,7 @@ class UserProfile {
     completedLessons = json['completedLessons'];
     platform = json['platform'];
     reviews = json['reviews'];
+    isPayment = json['is_payment'];
   }
 
   Map<String, dynamic> toJson() {
@@ -159,6 +162,7 @@ class UserProfile {
     data['completedLessons'] = completedLessons;
     data['platform'] = platform;
     data['reviews'] = reviews;
+    data['isPayment'] = isPayment;
     return data;
   }
   List<String> getPermission(){
@@ -194,6 +198,7 @@ class UserProfile {
     List? completedLessons,
     String? platform,
     List? reviews,
+    int? isPayment,
   }) {
     return UserProfile(
       id: id ?? this.id,
@@ -224,6 +229,7 @@ class UserProfile {
       completedLessons: completedLessons ?? this.completedLessons,
       platform: platform ?? this.platform,
       reviews: reviews ?? this.reviews,
+      isPayment: isPayment ?? this.isPayment,
     );
   }
 

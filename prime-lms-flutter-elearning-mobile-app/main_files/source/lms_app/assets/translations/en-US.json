@@ -113,6 +113,7 @@
     "logout": "Logout",
     "logout-title": "Logout?",
     "logout-subtitle": "Do you really want to logout from the app?",
+    "log-out-expired-token": "Your login session has expired",
     "yes": "Yes",
     "close": "Close",
     "account-control": "Account Control",
@@ -138,5 +139,18 @@
     "all-Instructors": "All Instructors",
     "document": "Document",
     "birthday": "Birthday",
-    "gender": "Gender"
+    "gender": "Gender",
+    "Male": "Male",
+    "Female": "Female",
+    "Other": "Other",
+    "change-password": "Change password",
+    "confirm": "Confirm",
+    "old-password": "Old password",
+    "new-password": "New password",
+    "confirm-password": "Confirm password",
+    "password-empty": "Password cannot be empty",
+    "password-not-match": "New password and confirm password do not match",
+    "enter-old-password": "Enter your old password",
+    "enter-new-password": "Enter your new password",
+    "confirm-new-password": "Confirm your new password"
 }

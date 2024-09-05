@@ -13,6 +13,7 @@ import 'package:lms_app/theme/theme_provider.dart';
 import 'package:lms_app/utils/snackbars.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 import '../base/constant/dimens_constant.dart';
 import '../base/theme/text_stype_constant.dart';
@@ -52,9 +53,17 @@ class _EditProfileState extends ConsumerState<EditProfile> {
       editProfileController.onInit();
       _imageUrl =
           editProfileController.basicValidator.getController('image')!.text;
-    }
-    ;
+    };
+    selectedValue = editProfileController.basicValidator.getController('gender')!.text;
   }
+
+  final List<String> items = [
+    'Male',
+    'Female',
+    'Other',
+  ];
+  String? selectedValue;
+
 
   Future _pickImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -72,9 +81,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
     UploadFileResponseInfo? resultUpload = await uploadFileApi.call();
     if (resultUpload != null) {
       setState(() {
-        _selectedImageFile = result.files.first.bytes!;
-        editProfileController.basicValidator.getController('image')?.text =
-            result.files.first.name ?? "";
+        widget.user.avatar = resultUpload.link;
       });
     } else {
       ToastUtils.showSnackBar(context, "Upload avatar failed");
@@ -187,40 +194,44 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                           color: isDarkMode
                               ? CustomColor.containerDark
                               : CustomColor.container,
-                          child: DropdownButtonFormField<String>(
-                            decoration: InputDecoration(
-                              hintText: 'gender'.tr(),
-                              border: InputBorder.none,
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 12),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton2<String>(
+                              isExpanded: true,
+                              hint: Text(
+                                'Select Item',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: Theme.of(context).hintColor,
+                                ),
+                              ),
+                              items: items
+                                  .map((String item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item.tr(),
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400
+                                  ),
+                                ),
+                              ))
+                                  .toList(),
+                              value: selectedValue == "" ? null : selectedValue,
+                              onChanged: (String? value) {
+                                setState(() {
+                                  selectedValue = value;
+                                  editProfileController.basicValidator.getController('gender')!.text = value!;
+                                });
+                              },
+                              buttonStyleData: const ButtonStyleData(
+                                padding: EdgeInsets.symmetric(horizontal: 16),
+                                height: 40,
+                                width: 140,
+                              ),
+                              menuItemStyleData: const MenuItemStyleData(
+                                height: 40,
+                              ),
                             ),
-                            value: editProfileController.basicValidator
-                                        .getController('gender')
-                                        ?.text ==
-                                    ""
-                                ? "Male"
-                                : editProfileController.basicValidator
-                                    .getController('gender')
-                                    ?.text,
-                            onChanged: (newValue) {
-                              editProfileController.basicValidator
-                                  .getController('gender')
-                                  ?.text = newValue!;
-                            },
-                            items: genderList.map((String? value) {
-                              return DropdownMenuItem<String>(
-                                value: value ?? "",
-                                child: Text(value ?? "", style: const TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                ),),
-                              );
-                            }).toList(),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Gender is required';
-                              }
-                              return null;
-                            },
                           ),
                         )
                       ],
@@ -294,85 +305,85 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                 ),
               ),
               const SizedBox(height: 10),
-              const Text('Bank name'),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                color: isDarkMode
-                    ? CustomColor.containerDark
-                    : CustomColor.container,
-                child: TextFormField(
-                  controller: editProfileController.basicValidator
-                      .getController('bank_name'),
-                  decoration: const InputDecoration(
-                    hintText: 'Enter your bank name',
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Text('Bank account'),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                color: isDarkMode
-                    ? CustomColor.containerDark
-                    : CustomColor.container,
-                child: TextFormField(
-                  controller: editProfileController.basicValidator
-                      .getController('bank_account'),
-                  decoration: const InputDecoration(
-                    hintText: 'Enter your bank account',
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Text('Identity id'),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                color: isDarkMode
-                    ? CustomColor.containerDark
-                    : CustomColor.container,
-                child: TextFormField(
-                  controller: editProfileController.basicValidator
-                      .getController('identity_id'),
-                  decoration: const InputDecoration(
-                    hintText: 'Enter your identity id',
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 10),
-              const Text('Country name'),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                color: isDarkMode
-                    ? CustomColor.containerDark
-                    : CustomColor.container,
-                child: TextFormField(
-                  controller: editProfileController.basicValidator
-                      .getController('country_name'),
-                  decoration: const InputDecoration(
-                    hintText: 'Enter your country name',
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  ),
-                ),
-              ),
+              // const Text('Bank name'),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // Container(
+              //   color: isDarkMode
+              //       ? CustomColor.containerDark
+              //       : CustomColor.container,
+              //   child: TextFormField(
+              //     controller: editProfileController.basicValidator
+              //         .getController('bank_name'),
+              //     decoration: const InputDecoration(
+              //       hintText: 'Enter your bank name',
+              //       border: InputBorder.none,
+              //       contentPadding:
+              //           EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(height: 10),
+              // const Text('Bank account'),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // Container(
+              //   color: isDarkMode
+              //       ? CustomColor.containerDark
+              //       : CustomColor.container,
+              //   child: TextFormField(
+              //     controller: editProfileController.basicValidator
+              //         .getController('bank_account'),
+              //     decoration: const InputDecoration(
+              //       hintText: 'Enter your bank account',
+              //       border: InputBorder.none,
+              //       contentPadding:
+              //           EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(height: 10),
+              // const Text('Identity id'),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // Container(
+              //   color: isDarkMode
+              //       ? CustomColor.containerDark
+              //       : CustomColor.container,
+              //   child: TextFormField(
+              //     controller: editProfileController.basicValidator
+              //         .getController('identity_id'),
+              //     decoration: const InputDecoration(
+              //       hintText: 'Enter your identity id',
+              //       border: InputBorder.none,
+              //       contentPadding:
+              //           EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(height: 10),
+              // const Text('Country name'),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // Container(
+              //   color: isDarkMode
+              //       ? CustomColor.containerDark
+              //       : CustomColor.container,
+              //   child: TextFormField(
+              //     controller: editProfileController.basicValidator
+              //         .getController('country_name'),
+              //     decoration: const InputDecoration(
+              //       hintText: 'Enter your country name',
+              //       border: InputBorder.none,
+              //       contentPadding:
+              //           EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),
