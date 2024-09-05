@@ -10,9 +10,11 @@ class VideoPlayerWidget extends StatefulWidget {
   const VideoPlayerWidget({
     super.key,
     required this.videoUrl,
+    required this.videoTitle,
     this.thumbnailUrl,
   });
 
+  final String videoTitle;
   final String videoUrl;
   final String? thumbnailUrl;
 
@@ -40,13 +42,12 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     super.initState();
   }
 
-
   @override
   void dispose() {
-
     // temporary fix to solve status bar issue on iOS
     if (Platform.isIOS) {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+          overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
     }
     controller.dispose();
     super.dispose();
@@ -54,17 +55,35 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return PodVideoPlayer(
-      controller: controller,
-      alwaysShowProgressBar: true,
-      videoThumbnail: widget.thumbnailUrl == null
-          ? null
-          : DecorationImage(
-              fit: BoxFit.cover,
-              image: CachedNetworkImageProvider(
-                widget.thumbnailUrl!,
-              ),
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        PodVideoPlayer(
+          controller: controller,
+          alwaysShowProgressBar: true,
+          videoThumbnail: widget.thumbnailUrl == null
+              ? null
+              : DecorationImage(
+                  fit: BoxFit.cover,
+                  image: CachedNetworkImageProvider(
+                    widget.thumbnailUrl!,
+                  ),
+                ),
+        ),
+        const SizedBox(
+          height: 4,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          child: Text(
+            widget.videoTitle,
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(color: Theme.of(context).primaryColor),
+          ),
+        ),
+      ],
     );
   }
 }

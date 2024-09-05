@@ -38,7 +38,7 @@ class SearchCommonRequest {
     data['filterType'] = filterType??"ALL";
     data['keyword'] = keyword??"";
     if (subFilterId != null && subFilterId != "") data['subFilterId'] = subFilterId??"";
-    data['isActive'] = isActive??"0";
+    data['isActive'] = isActive??"1";
     return data;
   }
   SearchCommonRequest copyWith({

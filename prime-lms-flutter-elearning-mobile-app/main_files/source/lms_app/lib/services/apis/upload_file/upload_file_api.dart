@@ -15,9 +15,7 @@ class UploadFileApi extends BaseApiRequest {
   Future<UploadFileResponseInfo?> call() async {
     await getAuthorization();
     try{
-      MonitorLoading().showLoading(L10nX.getStr.loading_message);
       dynamic data = await postRequestAPI();
-      MonitorLoading().dismiss();
       if(data!=null && data.runtimeType!= ResponseCommon)
         {
           UploadFileResponseInfo uploadFileResponseInfo = UploadFileResponseInfo.fromJson(data);

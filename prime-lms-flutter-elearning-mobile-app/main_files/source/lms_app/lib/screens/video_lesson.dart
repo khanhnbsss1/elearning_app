@@ -36,7 +36,7 @@ class _VideoLessonState extends ConsumerState<VideoLesson> {
     return Scaffold(
       body: Stack(
         children: [
-          VideoPlayerScreen(videoUrl: widget.lesson.link.toString()),
+          VideoPlayerScreen(link: widget.lesson.link.toString()),
           Align(
             alignment: Alignment.bottomCenter,
             // Visible after 1 sec for video loading time

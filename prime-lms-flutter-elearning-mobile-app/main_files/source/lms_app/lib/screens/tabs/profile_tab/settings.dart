@@ -91,13 +91,13 @@ class AppSettings extends ConsumerWidget with UserMixin {
           child: Column(
             children: [
               const Divider(),
-              ListTile(
-                title: const Text('account-control').tr(),
-                leading: const Icon(LineIcons.userCog),
-                trailing: const Icon(FeatherIcons.chevronRight),
-                onTap: () => NextScreen.iOS(context, const DeleteAccount()),
-              ),
-              const Divider(),
+              // ListTile(
+              //   title: const Text('account-control').tr(),
+              //   leading: const Icon(LineIcons.userCog),
+              //   trailing: const Icon(FeatherIcons.chevronRight),
+              //   onTap: () => NextScreen.iOS(context, const DeleteAccount()),
+              // ),
+              // const Divider(),
               ListTile(
                 title: const Text('logout').tr(),
                 leading: const Icon(FeatherIcons.logOut),

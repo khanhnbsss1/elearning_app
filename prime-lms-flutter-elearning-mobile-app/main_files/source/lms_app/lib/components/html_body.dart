@@ -51,7 +51,7 @@ class HtmlBody extends ConsumerWidget {
           builder: (ExtensionContext eContext) {
             final String videoSource = eContext.attributes['src'].toString();
             if (videoSource.contains('youtu') || videoSource.contains('vimeo')) {
-              return VideoPlayerWidget(videoUrl: videoSource);
+              return VideoPlayerWidget(videoUrl: videoSource, videoTitle: '',);
             } 
             return Container();
           },
@@ -60,7 +60,7 @@ class HtmlBody extends ConsumerWidget {
           tagsToExtend: {"video"},
           builder: (ExtensionContext eContext) {
             final String videoSource = eContext.attributes['src'].toString();
-            return VideoPlayerWidget(videoUrl: videoSource);
+            return VideoPlayerWidget(videoUrl: videoSource, videoTitle: '',);
           },
         ),
         TagExtension(
