@@ -45,18 +45,22 @@
       });
     }
   </script>-->
-  <script src="flutter_bootstrap.js" async></script>
   <!-- This script installs pdf.min.js to render the PDF page as an image in the 
    application and load in syncfusion_flutter_pdfviewer widget -->
-  <img src="img/splash.png" class="center"/>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+<script type="text/javascript"> window.flutterWebRenderer = "html"; </script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
   <script type="text/javascript">
-  pdfjsLib.GlobalWorkerOptions.workerSrc = "//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js";
-      pdfRenderOptions = { 
-      cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.12.313/cmaps/', 
-      cMapPacked: true, 
-    }
-</script>
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js";
+        pdfRenderOptions = { 
+        cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.12.313/cmaps/', 
+        cMapPacked: true, 
+      }
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+
+  <img src="img/splash.png" class="center"/>
+
 
 </body>
 </html>

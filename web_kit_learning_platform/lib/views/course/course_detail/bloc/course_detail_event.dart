@@ -32,3 +32,10 @@ class CourseDetailUpdateFinishLessonEvent extends CourseDetailEvent {
   @override
   List<Object?> get props => [selectLessonInfo, selectVideoInfo];
 }
+class CourseDetailOnSelectCurrentVideoEvent extends CourseDetailEvent {
+  LessonInfo selectLessonInfo;
+  VideoInfo selectVideoInfo;
+  CourseDetailOnSelectCurrentVideoEvent({required this.selectLessonInfo, required this.selectVideoInfo});
+  @override
+  List<Object?> get props => [selectLessonInfo, selectVideoInfo];
+}

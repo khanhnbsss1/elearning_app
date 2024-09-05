@@ -6,6 +6,7 @@ enum AddCourseStatus {
   onLoadingSelectLesson,
   onSelectLesson,
   onUpdateSelectionLesson,
+  onSelectionCurrentVideo,
   onUpdateFinishLessonStatus,
   unKnown
 }
