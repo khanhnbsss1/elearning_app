@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/constants/custom_colors.dart';
-import 'package:lms_app/models/course.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/theme/theme_provider.dart';
-import 'package:lms_app/utils/loading_widget.dart';
-import '../../models/section.dart';
-import '../../services/api_service.dart';
 import 'lessons.dart';
 
 final isSectionExpnadedProvider = StateProvider.autoDispose.family<bool, String>((ref, sectionId) => false);

@@ -13,6 +13,7 @@ class HomeView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final tabController = ref.watch(homeTabControllerProvider);
     return Scaffold(
         bottomNavigationBar: const BottomBar(),

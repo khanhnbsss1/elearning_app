@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/models/tag.dart';
@@ -28,7 +29,15 @@ class CourseTags extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Text(
+              'course-tag',
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+            ).tr(),
+            const SizedBox(
+              height: 10,
+            ),
             (course.tags != null)
                 ? Wrap(
               spacing: 10,

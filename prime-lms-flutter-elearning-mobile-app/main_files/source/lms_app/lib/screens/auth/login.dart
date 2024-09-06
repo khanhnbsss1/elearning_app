@@ -7,6 +7,7 @@ import 'package:lms_app/base/author/user_helper.dart';
 import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
 import 'package:lms_app/components/app_logo.dart';
 import 'package:lms_app/components/privacy_info.dart';
+import 'package:lms_app/core/home.dart';
 // import 'package:lms_app/models/user/UserProfile.dart';
 import 'package:lms_app/screens/auth/reset_password.dart';
 import 'package:lms_app/screens/auth/sign_up.dart';
@@ -21,6 +22,7 @@ import '../../controller_elearning/auth/login_controller.dart';
 import '../../l10n/l10n_extention.dart';
 import '../../models/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
+import '../home/home_bottom_bar.dart';
 import 'social_logins.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -59,7 +61,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         _btnController.success();
         afterSignIn();
       } else {
-        // ToastUtils.showToastError("Your username or password is wrong");
+        ToastUtils.showToastError("Your username or password is wrong");
         _btnController.stop();
       }
     }
@@ -81,6 +83,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   void afterSignIn() async {
     await ref.read(userDataProvider.notifier).getData();
+    ref.invalidate(userDataProvider);
+    ref.invalidate(homeTabControllerProvider);
+    ref.invalidate(navBarIndexProvider);
     NextScreen.closeOthersAnimation(context, const HomeView());
   }
 
@@ -137,8 +142,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     TextFormField(
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                          hintText: 'enter-email'.tr(),
-                          label: const Text('email').tr(),
+                          hintText: 'enter-email-or-phone'.tr(),
+                          label: const Text('email-or-phone').tr(),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(3),
                           ),
@@ -192,8 +197,26 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     //     onPressed: () => NextScreen.openBottomSheet(context, const ResetPassword()),
                     //   ),
                     // ),
-                    SizedBox(
-                      height: 20,
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Checkbox(
+                          activeColor: Theme.of(context).primaryColor,
+                          value: loginController.rememberMe,
+                          onChanged: (value) {
+                            setState(() {
+                              loginController.onChangeRememberMe();
+                            });
+                          },
+                        ),
+                        const Text('remember-me').tr(),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     RoundedLoadingButton(
                       animateOnTap: false,
@@ -228,7 +251,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         ],
                       ),
                     ),
-                    // const PrivacyInfo(),
+                    const PrivacyInfo(),
                   ],
                 ),
               ],

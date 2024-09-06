@@ -33,7 +33,10 @@ class UserAvatar extends StatelessWidget {
           image: MemoryImage(imageByte!),
           fit: BoxFit.cover,
         )
-            : null,
+            : const DecorationImage(
+          image: AssetImage("assets/png/user.png",),
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

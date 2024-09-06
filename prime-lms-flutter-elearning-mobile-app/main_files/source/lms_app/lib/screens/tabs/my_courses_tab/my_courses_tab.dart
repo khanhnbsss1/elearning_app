@@ -37,7 +37,7 @@ class MyCoursesTab extends ConsumerWidget with CourseMixin {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userDataProvider);
-    final courses = ref.watch(myCoursesProvider);
+    final myCourses = ref.watch(myCoursesProvider);
     return RefreshIndicator.adaptive(
       displacement: 60,
       onRefresh: () async {
@@ -55,7 +55,7 @@ class MyCoursesTab extends ConsumerWidget with CourseMixin {
                 null // || user.enrolledCourses == null || user.enrolledCourses!.isEmpty
             ? const EmptyAnimation(
                 animationString: emptyAnimation, title: 'No courses found')
-            : courses.when(
+            : myCourses.when(
                 skipLoadingOnRefresh: false,
                 loading: () => const LoadingListTile(height: 200),
                 error: (error, stackTrace) => Center(

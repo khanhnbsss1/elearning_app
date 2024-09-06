@@ -3,12 +3,6 @@ import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
 
 import 'models/course_detail_model.dart';
 
-enum CourseDetailAction{ 
-  view,
-  edit,
-  add, 
-  delete
-}
 class CourseDetailApi extends BaseApiRequest {
   int courseId;
   CourseDetailApi({required this.courseId}):super(

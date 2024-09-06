@@ -42,9 +42,15 @@ class UserManager{
     SharedPreferencesStorage().removeByKey(Storage.currentUserInfoKey);
   }
   // Config account nearest
-  Future<void> saveAccountLoginNearest(String account) async{
+  Future<void> saveAccountLoginNearest(String account, String password) async{
     // save account login nearest
-    SharedPreferencesStorage().saveString(SharedPre.accountNearest, account.toLowerCase().trim());
+    SharedPreferencesStorage().saveString(SharedPre.accountNearest, account);
+    SharedPreferencesStorage().saveString(SharedPre.passwordNearest, password);
+  }
+
+  Future<void> saveRememberPassword(bool rememberPassword) async{
+    // save account login nearest
+    SharedPreferencesStorage().saveBoolean(SharedPre.rememberPassword, rememberPassword);
   }
 
   String getAccountLoginNearest() {
@@ -52,6 +58,17 @@ class UserManager{
     String account = SharedPreferencesStorage().getString(SharedPre.accountNearest);
     return account;
   }
+
+  String getPasswordLoginNearest() {
+    // get account login nearest
+    String password = SharedPreferencesStorage().getString(SharedPre.passwordNearest);
+    return password;
+  }
+  
+  bool getRememberPassword() {
+    return SharedPreferencesStorage().getBoolean(SharedPre.rememberPassword);
+  }
+
   // Define a function that inserts dogs into the database
   Future<void> insertRecentUserInfo(UserProfile useInfo) async {
     // Get a reference to the database.
@@ -82,6 +99,12 @@ class UserManager{
 
   Future<void> deleteRecentAllUserInfo() async {
     await SharedPreferencesStorage().removeByKey(Storage.recentUserInfoKey);
+  }
+
+  Future<void> deleteAccountNearest() async {
+    await SharedPreferencesStorage().removeByKey(SharedPre.accountNearest);
+    await SharedPreferencesStorage().removeByKey(SharedPre.passwordNearest);
+    await SharedPreferencesStorage().removeByKey(SharedPre.rememberPassword);
   }
 
 }

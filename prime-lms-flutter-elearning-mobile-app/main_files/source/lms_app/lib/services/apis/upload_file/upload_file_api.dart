@@ -33,8 +33,7 @@ class UploadFileApi extends BaseApiRequest {
     // TODO: implement getAuthorization
     await setApiBody({
       'data': fileInfo.getDataType(),
-      'fileName': fileInfo.file?.filename??"",
-      'file': fileInfo.file,
+      'file': fileInfo.file
     });
   }
 

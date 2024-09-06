@@ -339,7 +339,6 @@ class BaseApiRequest {
   }
 
   Future<dynamic> requestPostWithDio() async {
-    var option = Options(headers: await getHeaderAdd());
     String url = await getFullUrl();
     Map<String, dynamic> params = await getParamsFinal();
     dynamic body = await getBodyAdd();

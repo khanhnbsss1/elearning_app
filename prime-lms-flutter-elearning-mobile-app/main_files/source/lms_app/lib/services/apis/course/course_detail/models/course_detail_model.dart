@@ -38,6 +38,7 @@ class CourseInfo {
   String? mode;
   int? gradeId;
   int? imageId;
+  int? isPayment;
 
   CourseInfo(
       {this.id,
@@ -73,7 +74,8 @@ class CourseInfo {
         this.mode,
         this.gradeId,
         this.subjects,
-        this.imageId
+        this.imageId,
+        this.isPayment,
       });
 
   CourseInfo.initial(){
@@ -111,6 +113,7 @@ class CourseInfo {
     lectures = [];
     subjects = [];
     imageId=0;
+    isPayment=0;
   }
   CourseInfo copyWith({
     int? id,
@@ -146,7 +149,8 @@ class CourseInfo {
     String? mode,
     int? gradeId,
     List<Subjects>? subjects,
-    int? imageId
+    int? imageId,
+    int? isPayment
   }){
     return CourseInfo(
       id : id??this.id,
@@ -183,7 +187,7 @@ class CourseInfo {
       gradeId:gradeId??this.gradeId,
       subjects:subjects??this.subjects,
       imageId:imageId??this.imageId,
-
+      isPayment:isPayment??this.isPayment,
 
     );
 
@@ -222,7 +226,7 @@ class CourseInfo {
     mode=json.mode??mode;
     subjects=json.subjects??subjects;
     imageId=json.imageId??imageId;
-
+    isPayment=json.isPayment??isPayment;
   }
 
   CourseInfo.fromJson(Map<String, dynamic> json) {
@@ -271,7 +275,7 @@ class CourseInfo {
       });
     }
     subjects = getListSubjectAndLesson();
-
+    isPayment = json['is_payment'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -390,6 +394,11 @@ class CourseInfo {
       {
         data['tags'] = tagsStr.replaceFirst(',', '',tagsStr.length-1);
       }
+    }
+
+    if((isPayment!=null))
+    {
+      data['is_payment'] = isPayment??0;
     }
     return data;
   }

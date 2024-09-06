@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:lms_app/components/list_video_player_widget.dart';
+import 'package:lms_app/components/video_player.dart';
 
 import '../components/video_player_widget.dart';
 import '../utils/custom_cached_image.dart';
@@ -49,7 +49,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Video'),
@@ -66,7 +65,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                ListVideoPlayerWidget(
+                VideoPlayer(
                     videoUrl: videoLink[selectedVideo],
                     videoTitle: videoTitle[selectedVideo]),
                 Padding(
@@ -114,12 +113,15 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       width: MediaQuery.of(context).size.width,
       child: Row(
         children: [
-          (videoThumbnail != "")
-              ? CustomCacheImage(imageUrl: videoThumbnail, radius: 3)
-              : Center(
-                  child: Image.asset("assets/images/noImage.jpg",
-                      fit: BoxFit.contain),
-                ),
+          SizedBox(
+            width: 150,
+            child: (videoThumbnail != "")
+                ? CustomCacheImage(imageUrl: videoThumbnail, radius: 3)
+                : Center(
+              child: Image.asset("assets/images/noImage.jpg",
+                  fit: BoxFit.fitHeight),
+            ),
+          ),
           Align(
             alignment: Alignment.topCenter,
             child: Padding(

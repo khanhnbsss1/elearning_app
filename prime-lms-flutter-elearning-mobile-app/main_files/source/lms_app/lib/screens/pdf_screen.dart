@@ -17,7 +17,12 @@ class _PdfScreenState extends State<PdfScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.name),
+        leading: IconButton(
+          icon: const Icon(Icons.close, color: Colors.white,),
+          onPressed: () => Navigator.pop(context),
+        ),
+        backgroundColor: Theme.of(context).primaryColor,
+        title: Text(widget.name, style: const TextStyle(color: Colors.white),),
       ),
       body: SfPdfViewer.network(widget.link),
     );

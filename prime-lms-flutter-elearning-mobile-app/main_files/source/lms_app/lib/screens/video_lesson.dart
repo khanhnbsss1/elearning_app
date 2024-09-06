@@ -44,6 +44,7 @@ class _VideoLessonState extends ConsumerState<VideoLesson> {
               future: Future.delayed(const Duration(seconds: 2)),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
+                  return const SizedBox();
                   return MarkCompleteButton(course: widget.course, lesson: widget.lesson);
                 } else {
                   return const SizedBox.shrink();
