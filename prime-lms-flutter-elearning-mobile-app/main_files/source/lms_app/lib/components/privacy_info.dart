@@ -10,6 +10,7 @@ class PrivacyInfo extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(appSettingsProvider);
     final String privacyUrl = settings?.privacyUrl ?? 'https://google.com';
+    return SizedBox();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30),
       child: Column(

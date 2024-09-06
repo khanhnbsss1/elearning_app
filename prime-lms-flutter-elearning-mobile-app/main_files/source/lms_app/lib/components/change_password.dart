@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:lms_app/base/base.export.dart';
 import 'package:lms_app/models/user/UserProfile.dart';
 
 import '../base/widgets/common/alert_dialog/loading.common.dart';
 import '../base/widgets/my_button.dart';
+import '../base/widgets/text_form_show_password.dart';
 import '../base/widgets/toast_common/toast_utils.dart';
 import '../constants/custom_colors.dart';
 import '../services/apis/user/user_manager/update_password_api.dart';
@@ -19,17 +21,22 @@ class ChangePassword extends StatefulWidget {
 }
 
 class _ChangePasswordState extends State<ChangePassword> {
+  IconData lockIcon1 = LineIcons.lock;
+  IconData lockIcon2 = LineIcons.lock;
+  IconData lockIcon3 = LineIcons.lock;
+
   @override
   Widget build(BuildContext context) {
-    bool changePassword = false;
     TextEditingController oldPasswordController = TextEditingController();
     TextEditingController newPassWordController = TextEditingController();
     TextEditingController newPassWordAgainController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('change-password'.tr(),
-        style: Theme.of(context).textTheme.titleLarge,),
+        title: Text(
+          'change-password'.tr(),
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.pop(context),
@@ -45,51 +52,27 @@ class _ChangePasswordState extends State<ChangePassword> {
             const SizedBox(
               height: 10,
             ),
-            Container(
-              color: CustomColor.container,
-              child: TextFormField(
-                controller: oldPasswordController,
-                decoration: InputDecoration(
-                  hintText: "enter-old-password".tr(),
-                  border: InputBorder.none,
-                  contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                ),
-              ),
+            TextFormShowPassword(
+              controller: oldPasswordController,
+              hintText: 'enter-old-password',
             ),
             const SizedBox(height: 10),
             Text("new-password".tr()),
             const SizedBox(
               height: 10,
             ),
-            Container(
-              color: CustomColor.container,
-              child: TextFormField(
-                controller: newPassWordController,
-                decoration: InputDecoration(
-                  hintText: "enter-new-password".tr(),
-                  border: InputBorder.none,
-                  contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                ),
-              ),
+            TextFormShowPassword(
+              controller: newPassWordController,
+              hintText: 'enter-new-password',
             ),
             const SizedBox(height: 10),
             Text("confirm-password".tr()),
             const SizedBox(
               height: 10,
             ),
-            Container(
-              color: CustomColor.container,
-              child: TextFormField(
-                controller: newPassWordAgainController,
-                decoration: InputDecoration(
-                  hintText: "confirm-new-password".tr(),
-                  border: InputBorder.none,
-                  contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                ),
-              ),
+            TextFormShowPassword(
+              controller: newPassWordAgainController,
+              hintText: 'confirm-new-password',
             ),
             const SizedBox(
               height: 10,
@@ -103,48 +86,56 @@ class _ChangePasswordState extends State<ChangePassword> {
                     Navigator.of(context).pop();
                   },
                   elevation: 5,
-                  child: Text('cancel'.tr(), style: const TextStyle(
-                    color: Colors.white,
-                  ),),
+                  child: Text(
+                    'cancel'.tr(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
                 const SizedBox(
-                  width: 10,
+                  width: 50,
                 ),
                 MyButton(
                   backgroundColor: Theme.of(context).primaryColor,
                   onTap: () async {
-                    if(newPassWordAgainController.text.isEmpty ||
+                    if (newPassWordAgainController.text.isEmpty ||
                         newPassWordController.text.isEmpty ||
-                        oldPasswordController.text.isEmpty )
-                    {
+                        oldPasswordController.text.isEmpty) {
                       ToastUtils.showToastError("password-empty".tr());
                       return;
                     }
-                    if(newPassWordAgainController.text != newPassWordController.text)
-                    {
+                    if (newPassWordAgainController.text !=
+                        newPassWordController.text) {
                       ToastUtils.showToastError("password-not-match".tr());
                       return;
                     }
-                    UpdateUpdatePasswordApi updateUpdatePasswordApi = UpdateUpdatePasswordApi(
-                        userName: widget.userProfile.userName??"",
-                        oldpassword: oldPasswordController.text,
-                        newpassword: newPassWordController.text
-                    );
-                    dynamic data = await updateUpdatePasswordApi.call();
-                    if(data.runtimeType == String && (data as String).isEmpty)
-                    {
-                      setState(() {
-                        changePassword = !changePassword;
-                      },);
+                    UpdateUpdatePasswordApi updateUpdatePasswordApi =
+                        UpdateUpdatePasswordApi(
+                            userName: widget.userProfile.userName ?? "",
+                            oldpassword: oldPasswordController.text,
+                            newpassword: newPassWordController.text);
+                    bool data = await updateUpdatePasswordApi.call();
+                    if (data) {
+                      ToastUtils.showSnackBar(context,
+                          'change-password-success'.tr());
+                      Navigator.of(context).pop();
+                    } else {
+                      ToastUtils.showToastError(
+                          'change-password-fail'.tr());
                     }
                   },
-                  elevation: 0,
-                  child: Text('confirm'.tr(), style: const TextStyle(
-                    color: Colors.white,
-                  ),),
+                  elevation: 5,
+                  child: Text(
+                    'confirm'.tr(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ],
-            ),],
+            ),
+          ],
         ),
       ),
     );

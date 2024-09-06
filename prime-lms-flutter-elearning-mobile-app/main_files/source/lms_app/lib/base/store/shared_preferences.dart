@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPre {
   static String isVi = "isVi";
   static String accountNearest = "accountNearest";
+  static String passwordNearest = "passwordNearest";
+  static String rememberPassword = "rememberPassword";
   static const themeStatus = "themeStatus";
 
   static const List<String> keyDeleteWhenLogout = [

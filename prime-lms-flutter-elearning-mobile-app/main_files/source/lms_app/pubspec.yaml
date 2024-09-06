@@ -121,6 +121,7 @@ flutter:
    - assets/animations/
    - assets/images/
    - assets/translations/
+   - assets/png/
 flutter_intl:
    enabled: true
    

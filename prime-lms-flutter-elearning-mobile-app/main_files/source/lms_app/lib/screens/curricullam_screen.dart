@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
-import 'package:lms_app/models/course.dart';
 import 'package:lms_app/screens/course_details.dart/sections.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/utils/empty_animation.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 
 import '../configs/app_assets.dart';
 import '../utils/loading_widget.dart';

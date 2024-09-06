@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/cache_image_filter.dart';
+import '../../components/video_player.dart';
 import '../../models/course.dart';
 import '../../utils/custom_cached_image.dart';
 import '../../utils/next_screen.dart';
@@ -22,44 +23,22 @@ class PreviewBox extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        InkWell(
-          onTap: () {
-            if (hasVideoPreview) {
-              NextScreen.iOS(context, VideoPlayerScreen(link: course.videoPreview!));
-            }
-          },
-          child: Container(
-            height: 200,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
-            width: double.infinity,
-            child: HeroMode(
-              enabled: heroTag != null,
-              child: Hero(
-                tag: heroTag ?? '',
-                child: hasVideoPreview && course.image != ""
-                    ? CustomCacheImageWithDarkFilterFull(imageUrl: course.image!, radius: 5)
-                    // : course.image == ""
-                    : Container(
-                  color: Colors.black,
-                )
-                    // : CustomCacheImage(imageUrl: course.image, radius: 5),
-              ),
-            ),
-          ),
-        ),
-        Visibility(
-          visible: hasVideoPreview,
-          child: const Align(
-            alignment: Alignment.center,
-            child: IgnorePointer(
-              child: Icon(
-                CupertinoIcons.play,
-                size: 45,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        )
+        VideoPlayer(
+            videoUrl: course.videoPreview!,
+            videoTitle: ""),
+        // Visibility(
+        //   visible: hasVideoPreview,
+        //   child: const Align(
+        //     alignment: Alignment.center,
+        //     child: IgnorePointer(
+        //       child: Icon(
+        //         CupertinoIcons.play,
+        //         size: 45,
+        //         color: Colors.white,
+        //       ),
+        //     ),
+        //   ),
+        // )
       ],
     );
   }

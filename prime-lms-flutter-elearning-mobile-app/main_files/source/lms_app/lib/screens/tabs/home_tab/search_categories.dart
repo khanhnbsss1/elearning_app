@@ -45,37 +45,73 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              showCategories = !showCategories;
-                            });
-                          },
-                          child: Text(
-                            'Categories',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(fontWeight: FontWeight.bold),
-                          ).tr(),
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        onTap: () {
+                          setState(() {
+                            showCategories = !showCategories;
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: (showCategories) ? Colors.black : Colors.black.withOpacity(0.1),
+                            ),
+                            borderRadius: const BorderRadius.all(Radius.circular(24)),
+                          ),
+                          padding: const EdgeInsets.all(8),
+                          child:
+                            (showCategories) ? Row(
+                              children: [
+                                Text(
+                                  'Categories',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(fontWeight: FontWeight.bold),
+                                ).tr(),
+                              ],
+                            ) : Text(
+                              'Categories',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(fontWeight: FontWeight.w400),
+                            ).tr(),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              showCategories = !showCategories;
-                            });
-                          },
-                          child: Text(
+                      InkWell(
+                        splashColor: Colors.transparent,
+                        onTap: () {
+                          setState(() {
+                            showCategories = !showCategories;
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: (!showCategories) ? Colors.black : Colors.black.withOpacity(0.1),
+                            ),
+                            borderRadius: const BorderRadius.all(Radius.circular(24)),
+                          ),
+                          padding: const EdgeInsets.all(8),
+                          child:
+                          (!showCategories) ? Row(
+                            children: [
+                              Text(
+                                'Author',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(fontWeight: FontWeight.bold),
+                              ).tr(),
+                            ],
+                          ) : Text(
                             'Author',
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
-                                ?.copyWith(fontWeight: FontWeight.bold),
+                                ?.copyWith(fontWeight: FontWeight.w400),
                           ).tr(),
                         ),
                       ),
@@ -128,7 +164,7 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> {
             children: categories!
                 .map((e) => (e.filterType != "AUTHOR")
                     ? Padding(
-                        padding: const EdgeInsets.only(right: 4.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
                         child: ActionChip(
                           onPressed: () {
                             if (e.id == courseFilterInfo.id) {
@@ -201,7 +237,7 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> {
                                     .textTheme
                                     .titleMedium
                                     ?.copyWith(
-                                        fontSize: 12,
+                                        fontSize: 13,
                                         fontWeight: FontWeight.w600),
                               ),
                             ),
@@ -273,7 +309,7 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> {
                                             .textTheme
                                             .titleMedium
                                             ?.copyWith(
-                                                fontSize: 12,
+                                                fontSize: 13,
                                                 fontWeight: FontWeight.w600),
                                       ),
                                     ),

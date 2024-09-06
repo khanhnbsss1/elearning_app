@@ -32,9 +32,9 @@ class RefreshTokenApi extends BaseApiRequest {
        else
          {
            /// neu refresh token het han thi out ra ngoai landing page
-           AuthorManager().handleLogout();
-           NavigationService().navigateToScreen(const LoginScreen(popUpScreen: false,));
-           ToastUtils.showToastError(data.message??"");
+           // AuthorManager().handleLogout();
+           // NavigationService().navigateToScreen(const LoginScreen(popUpScreen: false,));
+           // ToastUtils.showToastError(data.message??"");
          }
 
      }

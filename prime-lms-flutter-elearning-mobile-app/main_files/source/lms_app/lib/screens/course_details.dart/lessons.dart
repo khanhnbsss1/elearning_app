@@ -1,27 +1,23 @@
+import 'dart:ui';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:lms_app/ads/ad_manager.dart';
-import 'package:lms_app/constants/app_constants.dart';
+import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
 import 'package:lms_app/mixins/course_mixin.dart';
 import 'package:lms_app/mixins/user_mixin.dart';
-import 'package:lms_app/models/course.dart';
-import 'package:lms_app/models/user_model.dart';
-import 'package:lms_app/screens/article_lesson.dart';
-import 'package:lms_app/screens/auth/login.dart';
+import 'package:lms_app/screens/course_details.dart/details_view.dart';
 import 'package:lms_app/screens/course_details.dart/vocabulary.dart';
 import 'package:lms_app/screens/pdf_screen.dart';
-import 'package:lms_app/screens/quiz_lesson/quiz_screen.dart';
+import 'package:lms_app/screens/tabs/my_courses_tab/my_courses_tab.dart';
 import 'package:lms_app/screens/video_lesson.dart';
 import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/next_screen.dart';
-import 'package:lms_app/utils/snackbars.dart';
-import '../../models/lesson.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import '../../models/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 
@@ -37,7 +33,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userDataProvider);
+    // final user = ref.watch(userDataProvider);
     return Column(children: [
       ListView.builder(
         shrinkWrap: true,
@@ -52,8 +48,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                 if (snapshot.hasData) {
                   LessonInfo lessonDetail = snapshot.data!;
                   return ListTile(
-                      onTap: () =>
-                          _onTap(context, lessonDetail, course, user, ref),
+                      onTap: () => _onTap(context, lessonDetail, course, ref),
                       // onTap: (){},
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 20),
@@ -66,45 +61,108 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(lectures[index].subName??"_").tr(),
+                          Text(lectures[index].subName ?? "_").tr(),
                           const SizedBox(
-                            height: 4,
+                            height: 8,
                           ),
-                          InkWell(
-                              onTap: () {
-                                NextScreen.normal(
-                                    context,
-                                    Vocabulary(
-                                        lessonDetail: lessonDetail, sectionId: index));
-                              },
-                              child: Text('vocabulary',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge
-                                          ?.copyWith(
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 16))
-                                  .tr()),
-                          (lessonDetail.docLink != "" && lessonDetail.docLink != null)
-                              ? InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (builder) => PdfScreen(
-                                                link: lessonDetail.docLink!,
-                                                name: lessonDetail.docName ??
-                                                    "-")));
-                                  },
-                                  child: Text('document',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleLarge
-                                              ?.copyWith(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 16))
-                                      .tr())
-                              : const SizedBox(),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                    splashColor: Colors.transparent,
+                                    onTap: () {
+                                      NextScreen.normal(
+                                          context,
+                                          Vocabulary(
+                                              lessonDetail: lessonDetail,
+                                              sectionId: index));
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(12)),
+                                      ),
+                                      padding: const EdgeInsets.all(4),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.menu_book_rounded,
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                          ),
+                                          const SizedBox(
+                                            width: 2,
+                                          ),
+                                          Text('vocabulary',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleLarge
+                                                      ?.copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 16))
+                                              .tr(),
+                                        ],
+                                      ),
+                                    )),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                (lessonDetail.docLink != "" &&
+                                        lessonDetail.docLink != null)
+                                    ? InkWell(
+                                        splashColor: Colors.transparent,
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (builder) =>
+                                                      PdfScreen(
+                                                          link: lessonDetail
+                                                              .docLink!,
+                                                          name: lessonDetail
+                                                                  .docName ??
+                                                              "-")));
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(12)),
+                                          ),
+                                          padding: const EdgeInsets.all(4),
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.menu_book_rounded,
+                                                color: Theme.of(context)
+                                                    .primaryColor,
+                                              ),
+                                              const SizedBox(
+                                                width: 2,
+                                              ),
+                                              Text('document',
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .titleLarge
+                                                          ?.copyWith(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              fontSize: 16))
+                                                  .tr(),
+                                            ],
+                                          ),
+                                        ))
+                                    : const SizedBox(),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                       leading: Text(
@@ -112,9 +170,9 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.bold, color: Colors.blue),
                       ),
-                      trailing: _trailingIcon(lesson, user));
+                      trailing: _trailingIcon(lesson));
                 } else {
-                  return const SizedBox();
+                  return const LoadingIndicator(indicatorType: Indicator.ballGridBeat);
                 }
               });
         },
@@ -127,52 +185,21 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
     return lessons;
   }
 
-  void _onTap(BuildContext context, LessonInfo lesson, CourseInfo course,
-      UserProfile? user, WidgetRef ref) {
-    // if (user != null) {
-    //   if (course.mode == "FREE") {
-    //     // Free
-    //     if (hasEnrolled(user, course)) {
-    //       _openLesson(context, lesson, ref);
-    //     } else {
-    //       openSnackbar(context, 'Enroll to open lesson');
-    //     }
-    //   } else {
-    //     // Premium
-    //     if (hasEnrolled(user, course) && !UserMixin.isExpired(user)) {
-    _openLesson(context, lesson, ref);
-    //     } else {
-    //       openSnackbar(context, 'Enroll to open lesson');
-    //     }
-    //   }
-    // }
+  void _onTap(BuildContext context, LessonInfo lesson, CourseInfo course, WidgetRef ref) {
+    final myCourses = ref.watch(myCoursesProvider);
+    if (CourseDetailsView.checkRegisteredCourse(
+        course, myCourses.value ?? [])) {
+      _openLesson(context, lesson, ref);
+    } else {
+      ToastUtils.showSnackBar(context, 'Please sign up course to learn it');
+    }
   }
 
   void _openLesson(BuildContext context, LessonInfo lesson, WidgetRef ref) {
-    // if (lesson.contentType == 'video' && lesson.videoUrl != null) {
-    //   NextScreen.iOS(context, VideoLesson(course: course, lesson: lesson));
-    // } else if (lesson.contentType == 'article') {
-    //   NextScreen.iOS(context, ArticleLesson(lesson: lesson, course: course));
-    // } else {
-    //   NextScreen.popup(context, QuizLesson(course: course, lesson: lesson));
-    // }
     NextScreen.iOS(context, VideoLesson(course: course, lesson: lesson));
-    //Placed interstitial ads when open any lesson
-    // AdManager.initInterstitailAds(ref);
   }
 
-  Icon _trailingIcon(LessonInfo lesson, UserProfile? user) {
-    // if (isLessonCompleted(lesson, user)) {
-    if (false) {
-      return const Icon(Icons.check_box, color: Colors.orange);
-    } else {
-      // if (lesson.contentType == 'video') {
-      return const Icon(FeatherIcons.playCircle);
-      // } else if (lesson.contentType == 'article') {
-      //   return const Icon(LineIcons.stickyNote);
-      // } else {
-      //   return const Icon(LineIcons.lightbulb);
-      // }
-    }
+  Icon _trailingIcon(LessonInfo lesson) {
+    return const Icon(FeatherIcons.playCircle);
   }
 }

@@ -6,8 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:pod_player/pod_player.dart';
 
-class ListVideoPlayerWidget extends StatefulWidget {
-  const ListVideoPlayerWidget({
+class VideoPlayer extends StatefulWidget {
+  const VideoPlayer({
     super.key,
     required this.videoUrl,
     required this.videoTitle,
@@ -19,10 +19,10 @@ class ListVideoPlayerWidget extends StatefulWidget {
   final String? thumbnailUrl;
 
   @override
-  State<ListVideoPlayerWidget> createState() => _ListVideoPlayerWidgetState();
+  State<VideoPlayer> createState() => _VideoPlayerState();
 }
 
-class _ListVideoPlayerWidgetState extends State<ListVideoPlayerWidget> {
+class _VideoPlayerState extends State<VideoPlayer> {
   late final PodPlayerController controller;
 
   @override
@@ -73,7 +73,7 @@ class _ListVideoPlayerWidgetState extends State<ListVideoPlayerWidget> {
         const SizedBox(
           height: 4,
         ),
-        Padding(
+        (widget.videoTitle != "") ? Padding(
           padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           child: Text(
             widget.videoTitle,
@@ -82,7 +82,7 @@ class _ListVideoPlayerWidgetState extends State<ListVideoPlayerWidget> {
                 .titleLarge
                 ?.copyWith(color: Theme.of(context).primaryColor),
           ),
-        ),
+        ) : const SizedBox(),
       ],
     );
   }

@@ -12,14 +12,14 @@ class UpdateUpdatePasswordApi extends BaseApiRequest {
     apiName: ApiName.getInstance().updatePassword,
   );
 
-  Future<dynamic> call() async {
+  Future<bool> call() async {
     await getAuthorization();
     dynamic result = await putRequestAPI();
     if(result.runtimeType == String && (result as String).isEmpty)
     {
-      ToastUtils.showToastSuccess('success'.tr());
+      return true;
     }
-    return result;
+    return false;
   }
 
   Future<void> getAuthorization() async {

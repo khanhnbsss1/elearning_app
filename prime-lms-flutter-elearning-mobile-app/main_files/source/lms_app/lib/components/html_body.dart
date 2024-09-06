@@ -8,7 +8,7 @@ import 'package:lms_app/theme/theme_provider.dart';
 import '../services/app_service.dart';
 import '../utils/image_preview.dart';
 import '../utils/next_screen.dart';
-import 'list_video_player_widget.dart';
+import 'video_player.dart';
 
 class HtmlBody extends ConsumerWidget {
   const HtmlBody({
@@ -51,7 +51,7 @@ class HtmlBody extends ConsumerWidget {
           builder: (ExtensionContext eContext) {
             final String videoSource = eContext.attributes['src'].toString();
             if (videoSource.contains('youtu') || videoSource.contains('vimeo')) {
-              return ListVideoPlayerWidget(videoUrl: videoSource, videoTitle: '',);
+              return VideoPlayer(videoUrl: videoSource, videoTitle: '',);
             } 
             return Container();
           },
@@ -60,7 +60,7 @@ class HtmlBody extends ConsumerWidget {
           tagsToExtend: {"video"},
           builder: (ExtensionContext eContext) {
             final String videoSource = eContext.attributes['src'].toString();
-            return ListVideoPlayerWidget(videoUrl: videoSource, videoTitle: '',);
+            return VideoPlayer(videoUrl: videoSource, videoTitle: '',);
           },
         ),
         TagExtension(
