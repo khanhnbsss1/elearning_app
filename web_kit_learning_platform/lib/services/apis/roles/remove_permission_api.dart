@@ -15,6 +15,7 @@ class RemovePermissionApi extends BaseApiRequest {
   RemovePermissionApi({required this.info, required this.roleId}):super(
     serviceType: SERVICE_TYPE.Claim,
     apiName: ApiName.getInstance().deletePermissionListFromRole,
+    isShowToastError: false
   );
 
   Future<dynamic> call() async {

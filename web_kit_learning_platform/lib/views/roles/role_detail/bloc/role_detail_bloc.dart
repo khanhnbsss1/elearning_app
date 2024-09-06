@@ -43,27 +43,29 @@ class RoleDetailBloc extends Bloc<RoleDetailEvent, RoleDetailState> {
       RoleDetailCreateEvent event,
       Emitter<RoleDetailState> emit,
       ) async {     
+    MonitorLoading().showLoading("");
       AddRoleApi addRoleApi = AddRoleApi(info: getCreateRoleRequestInfo());
       dynamic data = await addRoleApi.call();
       if(data.runtimeType== String && (data as String).isEmpty)
         {
           emit(state.copyWith(
-             // permissionList: state.permissionList,
               blocStatus: RoleDetailStatus.onCreateRole
           ));
         }
       await updatePermissionForRole();
+      MonitorLoading().dismiss();
 
   }
   Future<void> _onUpdateRole(
       RoleDetailUpdateEvent event,
       Emitter<RoleDetailState> emit,
       ) async {
-   /* UpdateRoleApi addRoleApi = UpdateRoleApi(info:UpdateRoleRequestInfo(roleId: event.state.roleInfo!.id, newRole: event.state.editingControllerRoleName?.text));
-    dynamic data = await addRoleApi.call();*/
+    MonitorLoading().showLoading("");
+    UpdateRoleApi addRoleApi = UpdateRoleApi(info:UpdateRoleRequestInfo(roleId: event.state.roleInfo!.id, newRole: event.state.editingControllerRoleName?.text));
+    dynamic data = await addRoleApi.call();
    await updatePermissionForRole();
+    MonitorLoading().dismiss();
     emit(state.copyWith(
-       // permissionList: state.permissionList,
         blocStatus: RoleDetailStatus.onUpdateRole
     ));
   }
@@ -101,11 +103,11 @@ class RoleDetailBloc extends Bloc<RoleDetailEvent, RoleDetailState> {
         dynamic dataAdd = await addPermissionApi.call();
       }
 
-/*    if(listRemove.isNotEmpty)
+    if(listRemove.isNotEmpty)
       {
         RemovePermissionApi removePermissionApi = RemovePermissionApi(info: listRemove, roleId: state.roleInfo!.id!);
         dynamic dataRemove = await removePermissionApi.call();
-      }*/
+      }
 
   }
 }

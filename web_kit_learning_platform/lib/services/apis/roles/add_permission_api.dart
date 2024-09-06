@@ -15,6 +15,7 @@ class AddPermissionApi extends BaseApiRequest {
   AddPermissionApi({required this.info, this.roleId}):super(
     serviceType: SERVICE_TYPE.Claim,
     apiName: ApiName.getInstance().addPermissionListToRole,
+    isShowToastError: false
   );
 
   Future<dynamic> call() async {
@@ -29,8 +30,8 @@ class AddPermissionApi extends BaseApiRequest {
 
   Future<void> getAuthorization() async {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['claims'] = info.map((v) => v.toJson()).toList();
     data['roleId'] = roleId;
+    data['claims'] = info.map((v) => v.toJson()).toList();
     await setApiBody(data);
   }
 

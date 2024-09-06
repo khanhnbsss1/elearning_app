@@ -22,7 +22,7 @@ enum PermissionActionType{
 class PermissionGroupListPage extends StatefulWidget {
   ScrollController? scrollController;
   List<PermissionInfo>? childRolePermissions;
-  Function(PermissionListResponseModel?)? onChangePermission;
+  Function(PermissionListResponseModel?,)? onChangePermission;
   PermissionActionType? permissionActionType;
   bool? enableEdit;
   String? roleId;

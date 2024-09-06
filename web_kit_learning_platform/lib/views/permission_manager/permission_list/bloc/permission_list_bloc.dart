@@ -87,9 +87,9 @@ class PermissionListBloc extends Bloc<PermissionListEvent, PermissionListState> 
             
             for(PermissionGroupInfo permissionGroupInfo in responseModel?.content??[])
               {
-                if((permissionResponseModelChild.content??[]).where((element) => element.id == permissionGroupInfo.id,).isNotEmpty)
+                if((permissionResponseModelChild.content??[]).where((element) => element.type == permissionGroupInfo.type,).isNotEmpty)
                   {
-                    int pemissionIndexChild = (permissionResponseModelChild.content??[]).indexWhere((element) => element.id == permissionGroupInfo.id,);
+                    int pemissionIndexChild = (permissionResponseModelChild.content??[]).indexWhere((element) => element.type == permissionGroupInfo.type,);
                     for(PermissionInfo  permissionInfo in permissionGroupInfo.permission??[])
                     {
                       if(((permissionResponseModelChild.content??[])[pemissionIndexChild].permission??[]).where((element) => element.value == permissionInfo.value,).isEmpty)
