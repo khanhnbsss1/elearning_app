@@ -95,13 +95,13 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
     if((event.selectVideoInfo.order??0)< (state.selectLessonInfo?.videoInfos?.link??[]).length-1)
       {
         /// van con video bai hoc chua hoc tu dong next sang video tiep theo cua bai hoc nay
-        int finishVideoIndex = (state.selectLessonInfo?.videoInfos?.link??[]).indexWhere((element) => element.order == event.selectVideoInfo.order,);
+/*        int finishVideoIndex = (state.selectLessonInfo?.videoInfos?.link??[]).indexWhere((element) => element.order == event.selectVideoInfo.order,);
         state.selectLessonInfo?.selectVideoInfo = (state.selectLessonInfo?.videoInfos?.link??[]).elementAt(finishVideoIndex+1);
         emit(state.copyWith(
           blocStatus: AddCourseStatus.onUpdateFinishLessonStatus,
           courseInfo: state.courseInfo,
           selectLessonInfo: state.selectLessonInfo
-        ));
+        ));*/
         
       }
     else
@@ -114,8 +114,8 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
         ));
         if(indexOfSelectLesson<(state.courseInfo?.lectures??[]).length)
         {
-          LessonInfo newSelectionLessonInfo  = (state.courseInfo?.lectures??[]).elementAt(indexOfSelectLesson+1);
-          add(CourseDetailSelectLessonEvent(selectLessonInfo: newSelectionLessonInfo));
+         // LessonInfo newSelectionLessonInfo  = (state.courseInfo?.lectures??[]).elementAt(indexOfSelectLesson+1);
+         // add(CourseDetailSelectLessonEvent(selectLessonInfo: newSelectionLessonInfo));
         }
       }
 
