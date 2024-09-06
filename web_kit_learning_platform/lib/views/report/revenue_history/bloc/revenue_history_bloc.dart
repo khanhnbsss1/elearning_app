@@ -41,7 +41,7 @@ class RevenueHistoryListBloc extends Bloc<RevenueHistoryListEvent, RevenueHistor
   
   Future<void> callLessonListApi({required SearchCommonRequest searchCommonRequest}) async {
 
-    GetCourseRegisteredHistoryApi courseApi = GetCourseRegisteredHistoryApi(dashboardSearchModel: state.searchCommonRequest!);
+    GetRevenueHistoryApi courseApi = GetRevenueHistoryApi(dashboardSearchModel: state.searchCommonRequest!);
     RevenueHistoryListResponseModel lessonListResponseModel = await courseApi.call();
     emit(state.copyWith(
             lessonListResponseModel: lessonListResponseModel,

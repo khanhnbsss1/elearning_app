@@ -2,6 +2,7 @@
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 
 import '../../../../base/services/base_request/models/search_common_request.dart';
+import 'models/course_registed_history_info.dart';
 import 'models/revenue_history_info.dart';
 
 class GetCourseRegisteredHistoryApi extends BaseApiRequest {
@@ -11,17 +12,17 @@ class GetCourseRegisteredHistoryApi extends BaseApiRequest {
     apiName: ApiName.getInstance().getCourseRegistrationHistory,
   );
 
-  Future<RevenueHistoryListResponseModel> call() async {
+  Future<CourseRegisteredHistoryListResponseModel> call() async {
     await getAuthorization();
     dynamic result = await postRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {
-      return RevenueHistoryListResponseModel();
+      return CourseRegisteredHistoryListResponseModel();
     }
     else
     {
-      RevenueHistoryListResponseModel responseModel = RevenueHistoryListResponseModel.fromJson(result);
+      CourseRegisteredHistoryListResponseModel responseModel = CourseRegisteredHistoryListResponseModel.fromJson(result);
       return responseModel;
     }
   }

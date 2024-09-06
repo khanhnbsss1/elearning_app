@@ -90,6 +90,7 @@ abstract class Routes {
   static const requestRegisterList = Paths.requestRegisterList;
   static const reportPurchasedCourse = Paths.reportPurchasedCourse;
   static const reportActionCourse = Paths.reportActionCourse;
+  static const reportCourseRegistrationHistory = Paths.reportCourseRegistrationHistory;
 
   
   
@@ -174,7 +175,9 @@ abstract class Paths {
   static const requestRegisterList = '/request/list';
   static const reportPurchasedCourse = '/report/reportPurchasedCourse';
   static const reportActionCourse = '/report/reportActionCourse';
+  static const reportCourseRegistrationHistory = '/report/reportCourseRegistrationHistory';
 
+  
   
   
   static const userEdit = '/user/edit';
