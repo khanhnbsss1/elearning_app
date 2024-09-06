@@ -182,15 +182,18 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         return null;
                       },
                     ),
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        child: const Text(
-                          'forgot-password',
-                          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.blueAccent),
-                        ).tr(),
-                        onPressed: () => NextScreen.openBottomSheet(context, const ResetPassword()),
-                      ),
+                    // Container(
+                    //   alignment: Alignment.centerRight,
+                    //   child: TextButton(
+                    //     child: const Text(
+                    //       'forgot-password',
+                    //       style: TextStyle(fontWeight: FontWeight.w600, color: Colors.blueAccent),
+                    //     ).tr(),
+                    //     onPressed: () => NextScreen.openBottomSheet(context, const ResetPassword()),
+                    //   ),
+                    // ),
+                    SizedBox(
+                      height: 20,
                     ),
                     RoundedLoadingButton(
                       animateOnTap: false,

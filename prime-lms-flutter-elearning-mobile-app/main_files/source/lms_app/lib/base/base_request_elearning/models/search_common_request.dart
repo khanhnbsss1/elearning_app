@@ -39,6 +39,8 @@ class SearchCommonRequest {
     data['keyword'] = keyword??"";
     if (subFilterId != null && subFilterId != "") data['subFilterId'] = subFilterId??"";
     data['isActive'] = isActive??"1";
+    if (producerId != null) data['producerId'] = producerId??"";
+
     return data;
   }
   SearchCommonRequest copyWith({

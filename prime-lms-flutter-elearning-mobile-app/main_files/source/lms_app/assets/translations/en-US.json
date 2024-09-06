@@ -152,5 +152,8 @@
     "password-not-match": "New password and confirm password do not match",
     "enter-old-password": "Enter your old password",
     "enter-new-password": "Enter your new password",
-    "confirm-new-password": "Confirm your new password"
+    "confirm-new-password": "Confirm your new password",
+    "register-course": "Register now",
+    "register": "Register",
+    "register-content-popup": "Do you want to sign up this course"
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:lms_app/base/author/user_helper.dart';
 import 'package:lms_app/base/base.export.dart';
 
@@ -73,7 +74,7 @@ class AuthorManager {
       AuthorManager().handleLogout();
       NavigationService().popToFirst();
       NavigationService().navigateToScreen(const LoginScreen(popUpScreen: false,));
-      ToastUtils.showToastError("log-out-expired-token");
+      ToastUtils.showToastError("log-out-expired-token".tr());
       return;
     }
     allowCallRefreshToken = false;
