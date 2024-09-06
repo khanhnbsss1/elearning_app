@@ -367,7 +367,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                   NavigationItem(
                     iconData: Icons.account_circle,
                     title: L10nX.getStr.report_new_registered_account,
-                    // route: Routes.permissionList,
+                     route: Routes.reportUserRegistrationHistory,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
                     permission: const ["dashboard.get.get_register_time_period"],
                   ),

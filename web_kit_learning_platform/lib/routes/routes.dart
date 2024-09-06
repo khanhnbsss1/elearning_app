@@ -53,6 +53,7 @@ import 'package:webkit/views/other/sfmap_page.dart';
 import 'package:webkit/views/other/synsfusion_chart.dart';
 import 'package:webkit/views/permission_manager/permission_list/permission_list.dart';
 import 'package:webkit/views/question/question_list/question_list.dart';
+import 'package:webkit/views/report/user_registration_history/user_registration_history_list.dart';
 import 'package:webkit/views/roles/role_list/role_list.dart';
 import 'package:webkit/views/starter.dart';
 import 'package:webkit/views/tags/tag_list/tag_list.dart';
@@ -286,6 +287,12 @@ getPageRoute() {
     GetPage(
         name: Routes.reportCourseRegistrationHistory,
         page: () =>  CourseRegistrationHistoryListPage(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]
+    ),
+
+    GetPage(
+        name: Routes.reportUserRegistrationHistory,
+        page: () =>  UserRegistrationHistoryListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]
     ),
     ///--------------- Ecommerce ---------------///
