@@ -6,6 +6,8 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>Need microphone access for play audio</string>
 	<key>CFBundleDisplayName</key>
 	<string>YAXChinese</string>
 	<key>CFBundleExecutable</key>
@@ -14,6 +16,7 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>en</string>
