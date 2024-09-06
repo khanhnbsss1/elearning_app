@@ -80,7 +80,7 @@ class ImagesNameConst {
   static const String  ic_connected = "ic_connected.png";
   static const String  ic_disconnected = "ic_disconnected.png";
   static const String  error = "error.png";
-  static const String  icLoading         = "iconLoading.png"	;
+  static const String  icLoading         = "icLoading.png"	;
   static const String  icNoData         = "icNoData.png"	;
   static const String  ic_resize         = "ic_resize.png"	;
   static const String  ic_battery         = "ic_battery.png"	;

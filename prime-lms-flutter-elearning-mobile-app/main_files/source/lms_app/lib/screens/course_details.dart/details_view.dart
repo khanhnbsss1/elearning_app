@@ -1,11 +1,16 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/ads/ad_manager.dart';
 import 'package:lms_app/ads/banner_ad.dart';
+import 'package:lms_app/base/author/user_helper.dart';
+import 'package:lms_app/base/widgets/common/alert_dialog/loading.common.dart';
+import 'package:lms_app/models/user/UserProfile.dart';
 import 'package:lms_app/screens/course_details.dart/course_info.dart';
 import 'package:lms_app/screens/course_details.dart/course_share_button.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import '../../base/widgets/my_button.dart';
 import '../../services/api_service.dart';
 import '../../services/apis/course/course_detail/models/course_detail_model.dart';
 import '../../utils/loading_widget.dart';
@@ -33,6 +38,11 @@ class CourseDetailsView extends ConsumerWidget {
     return courseInfo;
   }
 
+  Future<UserProfile?> getUserDetail() async {
+    UserProfile? user = await UserManager().getUserProfile();
+    return user;
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
@@ -44,12 +54,13 @@ class CourseDetailsView extends ConsumerWidget {
         ],
       ),
       body: FutureBuilder(
-        future: getCourseDetail(courses),
-        builder: (context, snapshot) {
+        future: Future.wait([getCourseDetail(courses), getUserDetail()]),
+        builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
           } else if (snapshot.hasData) {
-            CourseInfo courseInfo = snapshot.data!;
+            CourseInfo courseInfo = snapshot.data?[0]!;
+            UserProfile userProfile = snapshot.data?[1];
             return CustomScrollView(
               slivers: [
                 SliverAppBar(
@@ -59,9 +70,57 @@ class CourseDetailsView extends ConsumerWidget {
                     onPressed: () => Navigator.pop(context),
                     icon: const Icon(FeatherIcons.chevronLeft),
                   ),
+                  title: MyButton(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text('register'.tr()),
+                              content: Text('register-content-popup'.tr()),
+                              actions: <Widget>[
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    MyButton(
+                                      backgroundColor: Colors.white,
+                                      child: Text('cancel'.tr(), style: const TextStyle(
+                                        color: Colors.black,
+                                      ),),
+                                      onTap: () {
+                                        Navigator.of(context).pop(false);
+                                      },
+                                    ),
+                                    MyButton(
+                                      backgroundColor: Theme.of(context).primaryColor,
+                                      child: Text('confirm'.tr(), style: const TextStyle(
+                                        color: Colors.white,
+                                      ),),
+                                      onTap: () {
+                                        Navigator.of(context).pop(true);
+                                      },
+                                    ),
+                                  ],
+                                )
+                              ],
+                            );
+                          },
+                        ).then((agree) {
+                          if (agree) {
+                            MonitorLoading().showLoading('message');
+                          } else {
+                          }
+                        });
+                      },
+                      backgroundColor: Theme.of(context).primaryColor,
+                      child: Text('register-course'.tr(),
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: Colors.white,
+                          ))),
+                  centerTitle: true,
                   actions: [
-                    BookmarkButton(course: courseInfo),
-                    ReviewButton(course: courseInfo),
+                    // BookmarkButton(course: courseInfo),
+                    // ReviewButton(course: courseInfo),
                     CourseShareButton(course: courseInfo),
                     const SizedBox(width: 10),
                   ],

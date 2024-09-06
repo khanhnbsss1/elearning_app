@@ -152,13 +152,21 @@ class ApiService {
   }
 
   Future<List<CourseInfo>?> getCourseByCategories(
-      {required String filter, required int pageNumber, required String subFilterId}) async {
-    GetCourseListApi getCourseListApi;
-    if (subFilterId != "") {
-      getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: (filter != "") ? filter.toUpperCase() : "ALL",subFilterId: subFilterId, pageSize: 10, pageNumber: pageNumber, keyword: "", isActive: 1));
-    } else {
-      getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: (filter != "") ? filter.toUpperCase() : "ALL", pageSize: 10, pageNumber: pageNumber, keyword: "", isActive: 1));
-    }
+      {required String filter,
+        required int pageNumber,
+        required String subFilterId,
+        int? producerId}) async {
+    GetCourseListApi getCourseListApi = GetCourseListApi(
+        searchCommonRequest: SearchCommonRequest(
+            filterType: (filter != "") ? filter.toUpperCase() : "ALL",
+            subFilterId: subFilterId != "" ? subFilterId : null,
+            pageSize: 10,
+            pageNumber: pageNumber,
+            keyword: "",
+            isActive: 1,
+            producerId: producerId
+        )
+    );
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }

@@ -55,13 +55,13 @@ class HomeTab extends ConsumerWidget {
                 },
                 icon: const Icon(FeatherIcons.search, size: 22),
               ),
-              IconButton(
-                style: IconButton.styleFrom(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-                onPressed: () {
-                  NextScreen.iOS(context, const Wishlist());
-                },
-                icon: const Icon(FeatherIcons.heart, size: 22),
-              ),
+              // IconButton(
+              //   style: IconButton.styleFrom(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+              //   onPressed: () {
+              //     NextScreen.iOS(context, const Wishlist());
+              //   },
+              //   icon: const Icon(FeatherIcons.heart, size: 22),
+              // ),
               // IconButton(
               //   // style: IconButton.styleFrom(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
               //   onPressed: () {

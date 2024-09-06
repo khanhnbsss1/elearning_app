@@ -83,7 +83,7 @@ class SearchTab extends ConsumerWidget {
         //   error: (e, x) => Text('error: $e, $x'),
         //   loading: () => const LoadingTile(height: 260),
         // )
-      body: const SearchCategories2(),
+      body: const SearchCategories(),
     );
   }
 }

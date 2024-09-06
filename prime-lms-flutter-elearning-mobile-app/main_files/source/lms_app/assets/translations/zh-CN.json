@@ -152,5 +152,8 @@
     "password-not-match": "新密码和确认密码不匹配",
     "enter-old-password": "输入您的旧密码",
     "enter-new-password": "输入您的新密码",
-    "confirm-new-password": "确认您的新密码"
+    "confirm-new-password": "确认您的新密码",
+    "register-course": "立即注册",
+    "register": "登记",
+    "register-content-popup": "您想注册该课程吗？"
 }

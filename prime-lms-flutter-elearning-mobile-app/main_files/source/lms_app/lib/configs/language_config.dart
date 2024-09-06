@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class LanguageConfig {
   //Initial Language
-  static const Locale startLocale = Locale('en', 'US');
+  static const Locale startLocale = Locale('vi', 'VN');
 
   //Language if any error happens
-  static const Locale fallbackLocale = Locale('en', 'US');
+  static const Locale fallbackLocale = Locale('vi', 'VN');
 
   // Languages
   static const Map<String, List<String>> languages = {

@@ -20,7 +20,6 @@ class TitleInfo extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = ref.watch(themeProvider).isDarkMode;
     final rating = ref.watch(courseRatingProvider(course));
-    // UserProfile? user = await UserManager().getUserProfile()
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
         course.name ?? "-",
@@ -32,15 +31,6 @@ class TitleInfo extends ConsumerWidget {
             ),
       ),
       const SizedBox(height: 10),
-      Center(
-        child: MyButton(
-
-            backgroundColor: Theme.of(context).primaryColor,
-            child: Text('register-course'.tr(),
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Colors.white,
-                    ))),
-      ),
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

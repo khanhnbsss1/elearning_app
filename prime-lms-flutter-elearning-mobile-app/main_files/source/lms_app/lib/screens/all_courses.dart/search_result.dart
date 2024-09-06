@@ -22,9 +22,11 @@ class SearchResult extends ConsumerStatefulWidget {
         this.paddingAll,
       required this.filter,
       required this.subFilterInfo,
+        this.producerId,
       required this.gridStyle});
 
   double? paddingAll;
+  int? producerId;
   final String filter;
   final SubFilterInfo? subFilterInfo;
   final GridStyle gridStyle;
@@ -44,7 +46,7 @@ class _SearchResultState extends ConsumerState<SearchResult> {
   @override
   void didUpdateWidget(oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.filter != widget.filter || oldWidget.subFilterInfo != widget.subFilterInfo) {
+    if (oldWidget.filter != widget.filter || oldWidget.subFilterInfo != widget.subFilterInfo || oldWidget.producerId != widget.producerId) {
       _onRefresh();
     }
   }
@@ -54,12 +56,7 @@ class _SearchResultState extends ConsumerState<SearchResult> {
     super.initState();
     _controller = ScrollController(initialScrollOffset: 0.0);
     _controller.addListener(_scrollListener);
-    if (widget.subFilterInfo != null && widget.subFilterInfo == SubFilterInfo()) {
-      _getCourse(
-          widget.filter, _pageNumber, widget.subFilterInfo!.id.toString());
-    } else {
-      _getCourse(widget.filter, _pageNumber, "");
-    }
+    _getCourse(widget.filter, _pageNumber);
   }
 
   _scrollListener() async {
@@ -73,21 +70,17 @@ class _SearchResultState extends ConsumerState<SearchResult> {
   Future<void> _loadMore() async {
     setState(() {
       _pageNumber++;
-      if (widget.subFilterInfo != null  && widget.subFilterInfo == SubFilterInfo()) {
-        _getCourse(
-            widget.filter, _pageNumber, widget.subFilterInfo!.id.toString());
-      } else {
-        _getCourse(widget.filter, _pageNumber, "");
-      }
+      _getCourse(widget.filter, _pageNumber);
     });
   }
 
   Future<void> _getCourse(
-      String filter, int pageNumber, String subFilterId) async {
+      String filter, int pageNumber, ) async {
     final List<CourseInfo>? courses = await ApiService().getCourseByCategories(
         pageNumber: pageNumber,
         filter: filter.replaceAll(" ", "_"),
-        subFilterId: subFilterId);
+        producerId: widget.producerId,
+        subFilterId: widget.subFilterInfo!.id == null ? "" : widget.subFilterInfo!.id.toString());
     if (_courses != [] && courses != [] && courses != null) {
       setState(() {
         _isLoading = false;
@@ -107,7 +100,7 @@ class _SearchResultState extends ConsumerState<SearchResult> {
     _courses.clear();
     _hasData = false;
     setState(() {});
-    await _getCourse(widget.filter, 0, "");
+    await _getCourse(widget.filter, 0);
   }
 
   @override
