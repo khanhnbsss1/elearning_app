@@ -610,11 +610,7 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                   "Đăng ký thành công, bây giờ bạn có thế vào học ngay bây giờ ",
                   onAccept: () async {
                     Navigator.of(context).pop();
-                    if((state.courseInfo?.price??0)>0)
-                      {
-                        
-                      }
-                    else
+                    if((state.courseInfo?.price??0)<=0)
                       {
                         CourseStudy1(
                           courseInfo: state.courseInfo!,
