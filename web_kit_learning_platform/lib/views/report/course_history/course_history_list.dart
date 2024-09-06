@@ -7,6 +7,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/date_time/period_of_time_setting.dart';
+import 'package:webkit/base/helper/date_time/date_time_helper.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
@@ -175,6 +176,12 @@ class _CourseHistoryListPageState extends State<CourseHistoryListPage> with Sing
                   PeriodOfTime(
                     initStartDate: DateTime.parse(state.searchCommonRequest?.startDate??""),
                     initEndTime:  DateTime.parse(state.searchCommonRequest?.endDate??""),
+                    onChangeTime: (startTime, endTime) {
+                      state.searchCommonRequest?.startDate = DateTimeHelper.dateFormat(date: startTime, dateType: DateTimeHelper.yyyyMMDD);
+                      state.searchCommonRequest?.endDate = DateTimeHelper.dateFormat(date: endTime, dateType: DateTimeHelper.yyyyMMDD);
+                      BlocProvider.of<CourseHistoryListBloc>(context).add(CourseHistoryListOnSearchByFilterEvent(
+                          searchCommonRequest: state.searchCommonRequest!));
+                    },
                   ),
                   Gap(Dimens.size16),
                   Visibility(

@@ -82,7 +82,7 @@ class PeriodOfTime extends StatelessWidget{
                   },
                 );
               },
-              controller: startTimeController,),
+              controller: endTimeController,),
           ),
         ],
       ),
