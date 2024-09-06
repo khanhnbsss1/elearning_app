@@ -6,20 +6,24 @@ import '../../../helpers/widgets/my_text.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 
 class BuildTextField extends StatefulWidget {
-  final String fieldTitle;
-  final String hintText;
+  final String? fieldTitle;
+  final String? hintText;
+  bool? enableHintText;
   final bool? enableEdit;
   Function()? onTap;
   Widget? suffixIcon;
   TextEditingController? controller;
   BuildTextField({
-    required this.fieldTitle,
-    required this.hintText,
+    this.fieldTitle,
+    this.hintText,
     this.enableEdit,
     this.controller,
     this.onTap,
-    this.suffixIcon
-  });
+    this.suffixIcon,
+    this.enableHintText
+  }){
+    enableHintText??=true;
+  }
 
   @override
   _BuildTextFieldState createState() => _BuildTextFieldState();
@@ -38,9 +42,18 @@ class _BuildTextFieldState extends State<BuildTextField> with TickerProviderStat
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        MyText.labelMedium(widget.fieldTitle),
-        MySpacing.height(8),
+        Visibility(
+          visible: widget.enableHintText??true,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                MyText.labelMedium(widget.fieldTitle??""),
+                MySpacing.height(8),
+              ],
+            )),
         TextFormField(
           controller: widget.controller,
           onTap: widget.onTap,

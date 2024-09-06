@@ -664,5 +664,6 @@
   "register_user": "Register",
   "reject_str": "Reject",
   "unlock_course": "Unlock course",
-  "your_are_ready_unlock_for_this_user": "Are you sure you want to unlock the course for this user!"
+  "your_are_ready_unlock_for_this_user": "Are you sure you want to unlock the course for this user!",
+  "implementer_str": "Implementer"
 }

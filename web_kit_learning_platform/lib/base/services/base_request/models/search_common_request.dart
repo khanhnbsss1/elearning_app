@@ -13,6 +13,12 @@ class SearchCommonRequest {
   String? startDate;
   String? endDate;
   String?status;
+  
+  String? startTime;
+  String? endTime;
+  int? limit;
+  String? type;
+  
   SearchCommonRequest(
       {
         this.userId,
@@ -28,8 +34,14 @@ class SearchCommonRequest {
         this.isActive,
         this.endDate,
         this.startDate,
-        this.status
-      });
+        this.status,
+        this.type, 
+        this.limit,
+        this.startTime,
+        this.endTime
+      }){
+    type??="DESC";
+  }
 
   SearchCommonRequest.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
@@ -77,10 +89,12 @@ class SearchCommonRequest {
     if(gradeId!=null)
     {
       data['gradeId'] = gradeId;
+      data['grade_id'] = gradeId;
     }
     if(categoryId!=null)
     {
       data['categoryId'] = categoryId;
+      data['category_id'] = categoryId;
     }
     if(producerId!=null)
     {
@@ -97,15 +111,30 @@ class SearchCommonRequest {
     if(startDate!=null)
     {
       data['startDate'] = startDate;
+      data['dateTo'] = startDate;
+    }
+    if(startTime!=null)
+    {
+      data['startTime'] = startTime;
     }
     if(endDate!=null)
     {
       data['endDate'] = endDate;
+      data['dateEnd'] = endDate;
+    }
+    if(endTime!=null)
+    {
+      data['endTime'] = endTime;
     }
     if(status!=null)
     {
       data['status'] = status;
     }
+    data['type'] = type;
+    if(limit!=null) {
+      data['limit'] = limit;
+    }
+    
     return data;
   }
   SearchCommonRequest copyWith({

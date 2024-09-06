@@ -88,7 +88,11 @@ abstract class Routes {
   static const permissionList = Paths.permissionList;
   static const roleList = Paths.roleList;
   static const requestRegisterList = Paths.requestRegisterList;
+  static const reportPurchasedCourse = Paths.reportPurchasedCourse;
+  static const reportActionCourse = Paths.reportActionCourse;
 
+  
+  
   static const uiButtonsRoute = Paths.uiButtonsPath;
   static const uiCardsRoute = Paths.uiCardsPath;
   static const uiTabsRoute = Paths.uiTabsPath;
@@ -168,7 +172,10 @@ abstract class Paths {
   static const permissionList = '/permission/list';
   static const roleList = '/role/list';
   static const requestRegisterList = '/request/list';
+  static const reportPurchasedCourse = '/report/reportPurchasedCourse';
+  static const reportActionCourse = '/report/reportActionCourse';
 
+  
   
   static const userEdit = '/user/edit';
 

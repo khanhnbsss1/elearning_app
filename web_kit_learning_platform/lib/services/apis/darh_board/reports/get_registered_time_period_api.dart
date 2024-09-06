@@ -1,18 +1,11 @@
 
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/darh_board/request_model/dash_board_search_model.dart';
+import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 
-import '../models/subscription_purchases_info.dart';
-import '../models/synthesisInfo.dart';
-import '../models/synthesis_students_info.dart';
-import '../models/top_course_revenue_info.dart';
-import '../models/top_courses_info.dart';
-import '../models/user_registration_info.dart';
 import 'models/registered_time_period_info.dart';
-import 'models/revenue_history_info.dart';
 
 class GetRegisterTimePeriodApi extends BaseApiRequest {
-  DashboardSearchModel dashboardSearchModel;
+  SearchCommonRequest dashboardSearchModel;
   GetRegisterTimePeriodApi({required this.dashboardSearchModel}):super(
     serviceType: SERVICE_TYPE.DashBoard,
     apiName: ApiName.getInstance().getRegisterTimePeriod,

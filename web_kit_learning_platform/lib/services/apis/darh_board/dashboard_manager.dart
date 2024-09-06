@@ -1,7 +1,7 @@
 
 import 'package:webkit/base/helper/date_time/date_time_helper.dart';
+import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 
-import 'package:webkit/services/apis/darh_board/request_model/dash_board_search_model.dart';
 import 'package:webkit/services/apis/darh_board/revenue_month_api.dart';
 import 'get_data_synthesis_api.dart';
 import 'get_data_synthesis_students_api.dart';
@@ -52,9 +52,9 @@ class DashboardManager{
         String endTimeStr = DateTimeHelper.dateFormat(date: endTime, dateType: DateTimeHelper.yyyyMMDD);
 
         GetSubscriptionPurchasesApi subscriptionPurchasesApi = GetSubscriptionPurchasesApi(
-          dashboardSearchModel: DashboardSearchModel(
-            startTime: startTimeStr,
-            endTime: endTimeStr
+          dashboardSearchModel: SearchCommonRequest(
+            startDate: startTimeStr,
+            endDate: endTimeStr
           )
         );
         subscriptionPurchasesInfoResponseModel = await  subscriptionPurchasesApi.call();
@@ -106,7 +106,7 @@ class DashboardManager{
       String endTimeStr = DateTimeHelper.dateFormat(date: endTime, dateType: DateTimeHelper.yyyyMMDD);
 
       GetUserRegistrationApi subscriptionPurchasesApi = GetUserRegistrationApi(
-          dashboardSearchModel: DashboardSearchModel(
+          dashboardSearchModel: SearchCommonRequest(
               startTime: startTimeStr,
               endTime: endTimeStr
           )
@@ -121,7 +121,7 @@ class DashboardManager{
     if(revenueMonthResponseModel==null && calApi[5]==false)
     {
       calApi[5]==true;
-      GetRevenueMonthApi response = GetRevenueMonthApi(dashboardSearchModel: DashboardSearchModel());
+      GetRevenueMonthApi response = GetRevenueMonthApi(dashboardSearchModel: SearchCommonRequest());
       revenueMonthResponseModel = await  response.call();
       calApi[5]==false;
     }
@@ -132,7 +132,7 @@ class DashboardManager{
     if(registerMonthResponseModel==null && calApi[6]==false)
     {
       calApi[6]==true;
-      GetRegisterMonthApi response = GetRegisterMonthApi(dashboardSearchModel: DashboardSearchModel(limit: 12));
+      GetRegisterMonthApi response = GetRegisterMonthApi(dashboardSearchModel: SearchCommonRequest(limit: 12));
       registerMonthResponseModel = await  response.call();
       calApi[6]==false;
     }
@@ -142,7 +142,7 @@ class DashboardManager{
     if(topCourseRevenueResponseModel==null && calApi[7]==false)
     {
       calApi[7]==true;
-      GetTopCourseRevenueApi getTopCourseRevenueApi = GetTopCourseRevenueApi(dashboardSearchModel: DashboardSearchModel(limit: 10));
+      GetTopCourseRevenueApi getTopCourseRevenueApi = GetTopCourseRevenueApi(dashboardSearchModel: SearchCommonRequest(limit: 10));
       topCourseRevenueResponseModel = await  getTopCourseRevenueApi.call();
       calApi[7]==false;
     }

@@ -1,13 +1,13 @@
 
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/darh_board/request_model/dash_board_search_model.dart';
+
 
 import 'models/subscription_purchases_info.dart';
 import 'models/synthesisInfo.dart';
 import 'models/synthesis_students_info.dart';
 
 class GetSubscriptionPurchasesApi extends BaseApiRequest {
-  DashboardSearchModel dashboardSearchModel;
+  SearchCommonRequest dashboardSearchModel;
   GetSubscriptionPurchasesApi({required this.dashboardSearchModel}):super(
     serviceType: SERVICE_TYPE.DashBoard,
     apiName: ApiName.getInstance().getSubscriptionPurchases,

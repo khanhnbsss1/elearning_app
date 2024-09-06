@@ -67,6 +67,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
           // TODO: Handle this case.
       }
     },);
+    YoutubePlayerPage.youTubeController?.stopVideo();
   }
   String getVideoIdFromVideoUrl(){
     String videoLink = widget.videoPlayerModel.link;

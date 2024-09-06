@@ -1,6 +1,6 @@
 
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/darh_board/request_model/dash_board_search_model.dart';
+
 
 import 'models/subscription_purchases_info.dart';
 import 'models/synthesisInfo.dart';
@@ -9,7 +9,7 @@ import 'models/top_courses_info.dart';
 import 'models/user_registration_info.dart';
 
 class GetUserRegistrationApi extends BaseApiRequest {
-  DashboardSearchModel dashboardSearchModel;
+  SearchCommonRequest dashboardSearchModel;
   GetUserRegistrationApi({required this.dashboardSearchModel}):super(
     serviceType: SERVICE_TYPE.DashBoard,
     apiName: ApiName.getInstance().getUserRegistration,

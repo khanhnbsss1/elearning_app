@@ -664,5 +664,6 @@
   "register_user": "Người đăng ký",
   "reject_str": "Từ chối",
   "unlock_course": "Mở khóa khóa học",
-  "your_are_ready_unlock_for_this_user": "Bạn có chắc chắn muốn mở khóa khóa học cho người dùng này!"
+  "your_are_ready_unlock_for_this_user": "Bạn có chắc chắn muốn mở khóa khóa học cho người dùng này!",
+  "implementer_str": "Người thực hiện"
 }

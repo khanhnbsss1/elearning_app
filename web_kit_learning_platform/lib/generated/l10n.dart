@@ -6619,6 +6619,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Implementer`
+  String get implementer_str {
+    return Intl.message(
+      'Implementer',
+      name: 'implementer_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

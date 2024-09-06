@@ -483,7 +483,6 @@ class _CreateEditLesson extends State<CreateEditLesson>
         state.lessonInfo?.categoryId = p0?.id;
         //state.valueListenable?.value = value;
         BlocProvider.of<LessonDetailBloc>(context).add(LessonDetailChangeLessonEvent(lessonInfo: state.lessonInfo!));
-
       },
       inputCategoryId: state.lessonInfo?.categoryId,
     );

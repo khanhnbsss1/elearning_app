@@ -15,7 +15,7 @@ import 'models/response_error_objects.dart';
 export  'package:webkit/base/services/base_request/EnumCommon.dart';
 export 'package:webkit/base/services/base_request/apiName.dart';
 export 'package:webkit/base/services/base_request/models/response_error_objects.dart';
-
+export 'package:webkit/base/services/base_request/models/search_common_request.dart';
 enum BodyMethod{
   none,
   formData,

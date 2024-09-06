@@ -360,7 +360,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                   NavigationItem(
                     iconData: Icons.edit,
                     title: L10nX.getStr.report_history_edit_course,
-                    // route: Routes.permissionList,
+                     route: Routes.reportActionCourse,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
                     permission: const ["dashboard.get.get_course_history",],
                   ),
@@ -374,7 +374,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                   NavigationItem(
                     iconData: Icons.monetization_on,
                     title: L10nX.getStr.report_purchased,
-                    // route: Routes.permissionList,
+                    route: Routes.reportPurchasedCourse,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
                     permission: const ["dashboard.get.get_revenue_history",],
                   ),
@@ -441,20 +441,6 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       });*/
                     },
                   ),
-
-/*
-                  Visibility(
-                    visible: !ThemeCustomizer().leftBarCondensed &&
-                        (
-                            UserManager().userContainPermission(permissionList: ["claim.post.get_claims"])
-                        ),
-                    child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size20, vertical: Dimens.size8),
-                      child: Text(L10nX.getStr.payment_str, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
-                    ),
-                  ),
-*/
-
                   
                   //-----------------CALENDAR-----------------//
                   Visibility(

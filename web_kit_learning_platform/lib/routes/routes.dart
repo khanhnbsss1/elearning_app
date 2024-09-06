@@ -82,6 +82,8 @@ import '../views/extra_pages/faqs_page.dart';
 import '../views/extra_pages/pricing.dart';
 import '../views/extra_pages/time_line_page.dart';
 import '../views/payment/request_register_list/request_register_list.dart';
+import '../views/report/course_history/course_history_list.dart';
+import '../views/report/revenue_history/revenue_history_list.dart';
 import '../views/ui/landing_page.dart';
 import '../views/ui/nft_dashboard.dart';
 import '../views/users_manager/user_detail/edit_user_profile.dart';
@@ -269,7 +271,17 @@ getPageRoute() {
         page: () =>  DashboardPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]
     ),
-    
+    GetPage(
+        name: Routes.reportPurchasedCourse,
+        page: () =>  RevenueHistoryListPage(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]
+    ),
+
+    GetPage(
+        name: Routes.reportActionCourse,
+        page: () =>  CourseHistoryListPage(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]
+    ),
     
     ///--------------- Ecommerce ---------------///
     GetPage(

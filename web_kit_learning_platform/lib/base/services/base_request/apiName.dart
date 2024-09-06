@@ -121,6 +121,8 @@ class ApiName {
 
   final String getTopCourseRevenue = "/top-course-revenue"; ///top khóa học có doanh thu cao nhất -
   final String getTopCourseUser = "/top-course-user"; ///Top khóa học có người học cao nhất
+  
+  /// report
   final String getRevenueHistory = "/revenue-history";/// Doanh thu theo tháng, grade, category, - 
   final String getRegisterMonth= "/register-month";///Số người đăng ký mới theo các tháng -
   final String getCourseRegistrationHistory = "/course-registration-history";///Lịch sử đăng ký khóa học theo khoảng thời gian 
@@ -147,6 +149,8 @@ class ApiName {
   /// payment
   final String unlockCourse = "/unlock-course";
   final String getRequests = "/get-requests";
+  
+
 
 
 }
