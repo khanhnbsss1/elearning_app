@@ -97,25 +97,24 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                   ),
                                   padding: EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
                                   child: LayoutBuilder(builder: (context, constraints) {
-                                    return  Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              //height: Dimens.size40,
-                                              constraints: BoxConstraints(
-                                                  maxWidth:  constraints.maxWidth> Dimens.size800?Dimens.size400:Dimens.size250
-                                              ),
-                                              child: Form(
-                                                key: formKey,
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: SizedBox(
-                                                        height:Dimens.size45,
+                                    return  SizedBox(
+                                      height: Dimens.size45,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                constraints: BoxConstraints(
+                                                    maxWidth:  constraints.maxWidth> Dimens.size800?Dimens.size400:Dimens.size250
+                                                ),
+                                                child: Form(
+                                                  key: formKey,
+                                                  child: Row(
+                                                    children: [
+                                                      Expanded(
                                                         child: TextFormField(
                                                           maxLines: 1,
                                                           controller: editingController,
@@ -133,98 +132,96 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                               hintText: L10nX.getStr.search,
                                                               fillColor: ColorConst.whiteColor,
                                                               filled: true,
-                                                              hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                                                              hintStyle: TextStyleConstant.textStyleBlack13w400,
                                                               border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
                                                               enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
                                                               focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
-                                                              prefixIcon: const Align(
+                                                              prefixIcon: Align(
                                                                   alignment: Alignment.center,
                                                                   child: Icon(
                                                                     LucideIcons.search,
-                                                                    size: 14,
+                                                                    size: Dimens.size15,
                                                                   )),
                                                               prefixIconConstraints:  BoxConstraints(
                                                                   minWidth: Dimens.size36,
                                                                   maxWidth: Dimens.size36,
-                                                                  minHeight: Dimens.size32,
-                                                                  maxHeight: Dimens.size32),
+                                                                  minHeight: Dimens.size40,
+                                                                  maxHeight: Dimens.size40),
                                                               contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
                                                               //isCollapsed: true,
                                                               floatingLabelBehavior: FloatingLabelBehavior.auto),
                                                         ),
                                                       ),
-                                                    ),
-                                                    FilterCoursePopupMenu(
-                                                      onSelect: (p0) {
-                                                        BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(
-                                                            searchCommonRequest: state.searchCommonRequest!.copyWith(
-                                                              filterType: p0.filterType,
-                                                              subFilter: p0.selectSubFilter?.id,
-                                                              pageNumber: 0
-                                                            )));
-                                                      },
-                                                    ),
-                                
-                                                  ],
+                                                      FilterCoursePopupMenu(
+                                                        onSelect: (p0) {
+                                                          BlocProvider.of<CourseListBloc>(context).add(CourseListOnSearchByFilterEvent(
+                                                              searchCommonRequest: state.searchCommonRequest!.copyWith(
+                                                                filterType: p0.filterType,
+                                                                subFilter: p0.selectSubFilter?.id,
+                                                                pageNumber: 0
+                                                              )));
+                                                        },
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            Gap(Dimens.size16),
-                                            Visibility(
-                                              visible: constraints.maxWidth> Dimens.size800,
-                                              child: ActionButton1(
-                                                text: L10nX.getStr.search,
-                                                radius: Dimens.size16,
-                                                
-                                                onTap: () {
-                                                  BlocProvider.of<CourseListBloc>(context)
-                                                      .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: editingController.text)));                                         },
-                                              ),
-                                            ),
-                                            Visibility(
-                                              visible: constraints.maxWidth< Dimens.size800,
-                                              child: InkWell(
+                                              Gap(Dimens.size16),
+                                              Visibility(
+                                                visible: constraints.maxWidth> Dimens.size800,
+                                                child: ActionButton1(
+                                                  text: L10nX.getStr.search,
+                                                  radius: Dimens.size16,
                                                   onTap: () {
                                                     BlocProvider.of<CourseListBloc>(context)
-                                                        .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: editingController.text)));                                           },
-                                                  child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
-                                            ),
-                                          ],
-                                        ),
-                                        Visibility(
-                                          visible: state.courseType == CourseType.courseList && 
-                                              UserManager().userContainPermission(permissionList: [
-                                                "courses.post.create_course",
-                                              ]),
-                                          child: Row(
-                                            children: [
-                                              Gap(Dimens.size10),
+                                                        .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: editingController.text)));                                         },
+                                                ),
+                                              ),
                                               Visibility(
                                                 visible: constraints.maxWidth< Dimens.size800,
                                                 child: InkWell(
+                                                    onTap: () {
+                                                      BlocProvider.of<CourseListBloc>(context)
+                                                          .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: editingController.text)));                                           },
+                                                    child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
+                                              ),
+                                            ],
+                                          ),
+                                          Visibility(
+                                            visible: state.courseType == CourseType.courseList && 
+                                                UserManager().userContainPermission(permissionList: [
+                                                  "courses.post.create_course",
+                                                ]),
+                                            child: Row(
+                                              children: [
+                                                Gap(Dimens.size10),
+                                                Visibility(
+                                                  visible: constraints.maxWidth< Dimens.size800,
+                                                  child: InkWell(
+                                                      onTap: () {
+                                                        CreateEditCourse(
+                                                          coursePageType: CoursePageType.create,
+                                                        ).show(context);
+                                                      },
+                                                      child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
+                                                ),
+                                                Visibility(
+                                                  visible: constraints.maxWidth >Dimens.size800,
+                                                  child: ActionButton1(
+                                                    preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,size: Dimens.size15,),
+                                                    text: L10nX.getStr.add_new_str,
                                                     onTap: () {
                                                       CreateEditCourse(
                                                         coursePageType: CoursePageType.create,
                                                       ).show(context);
                                                     },
-                                                    child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
-                                              ),
-                                              Visibility(
-                                                visible: constraints.maxWidth >Dimens.size800,
-                                                child: ActionButton1(
-                                                  preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
-                                                  text: L10nX.getStr.add_new_str,
-                                                  onTap: () {
-                                                    CreateEditCourse(
-                                                      coursePageType: CoursePageType.create,
-                                                    ).show(context);
-                                                  },
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     );
                                   },),
                                 ),

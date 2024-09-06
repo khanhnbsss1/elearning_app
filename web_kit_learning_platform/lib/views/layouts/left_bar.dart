@@ -339,6 +339,18 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     ),
                   ),
                   NavigationItem(
+                    iconData: Icons.watch_later_outlined,
+                    title: L10nX.getStr.list_waiting_register,
+                    route: Routes.requestRegisterList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["claim.post.get_claims"],
+                    onPress: () {
+                      /*                        setState(() {
+                        ThemeCustomizer().leftBarCondensed= true;
+                      });*/
+                    },
+                  ),
+                  NavigationItem(
                     iconData: Icons.app_registration,
                     title: L10nX.getStr.report_history_register_course,
                     // route: Routes.permissionList,
@@ -376,7 +388,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                         ),
                     child: Padding(
                       padding:  EdgeInsets.symmetric(horizontal: Dimens.size20, vertical: Dimens.size8),
-                      child: Text(L10nX.getStr.user_manager, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
+                      child: Text(L10nX.getStr.system, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
                     ),
                   ),
                   MenuWidget(
@@ -430,6 +442,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     },
                   ),
 
+/*
                   Visibility(
                     visible: !ThemeCustomizer().leftBarCondensed &&
                         (
@@ -440,18 +453,8 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       child: Text(L10nX.getStr.payment_str, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
                     ),
                   ),
-                  NavigationItem(
-                    iconData: Icons.watch_later_outlined,
-                    title: L10nX.getStr.list_waiting_register,
-                    route: Routes.requestRegisterList,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
-                    permission: const ["claim.post.get_claims"],
-                    onPress: () {
-                      /*                        setState(() {
-                        ThemeCustomizer().leftBarCondensed= true;
-                      });*/
-                    },
-                  ),
+*/
+
                   
                   //-----------------CALENDAR-----------------//
                   Visibility(

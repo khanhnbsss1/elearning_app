@@ -169,118 +169,120 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
             )
         ),
         padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  //height: Dimens.size40,
-                  constraints: BoxConstraints(
-                      maxWidth:  constraints.maxWidth> 800?400:250
-                  ),
-                  child: Form(
-                    key: formKey,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: SizedBox(
-                            height:Dimens.size45,
-                            child: TextFormField(
-                              maxLines: 1,
-                              controller: textEditingController,
-                              onChanged: (value) {
-                            
-                              },
-                              onFieldSubmitted: (value) {
-                                BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
-                              },
-                              onTapOutside: (event) {
-                              },
-                              style: MyTextStyle.bodyMedium(),
-                              decoration: InputDecoration(
-                                  hintText: L10nX.getStr.search,
-                                  fillColor: ColorConst.whiteColor,
-                                  filled: true,
-                                  hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                                  border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                  enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                  focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                  prefixIcon: const Align(
-                                      alignment: Alignment.center,
-                                      child: Icon(
-                                        LucideIcons.search,
-                                        size: 14,
-                                      )),
-                                  prefixIconConstraints: const BoxConstraints(
-                                      minWidth: 36,
-                                      maxWidth: 36,
-                                      minHeight: 32,
-                                      maxHeight: 32),
-                                  contentPadding: MySpacing.xy(16, 12),
-                                  //isCollapsed: true,
-                                  floatingLabelBehavior: FloatingLabelBehavior.auto),
+        child: SizedBox(
+          height: Dimens.size45,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    //height: Dimens.size40,
+                    constraints: BoxConstraints(
+                        maxWidth:  constraints.maxWidth> 800?400:250
+                    ),
+                    child: Form(
+                      key: formKey,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              height:Dimens.size45,
+                              child: TextFormField(
+                                maxLines: 1,
+                                controller: textEditingController,
+                                onChanged: (value) {
+                              
+                                },
+                                onFieldSubmitted: (value) {
+                                  BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                },
+                                onTapOutside: (event) {
+                                },
+                                style: MyTextStyle.bodyMedium(),
+                                decoration: InputDecoration(
+                                    hintText: L10nX.getStr.search,
+                                    fillColor: ColorConst.whiteColor,
+                                    filled: true,
+                                    hintStyle: TextStyleConstant.textStyleBlack13w400,
+                                    border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                    enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                    focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                    prefixIcon: Align(
+                                        alignment: Alignment.center,
+                                        child: Icon(
+                                          LucideIcons.search,
+                                          size: Dimens.size15,
+                                        )),
+                                    prefixIconConstraints:  BoxConstraints(
+                                      minWidth: Dimens.size40,
+                                      maxWidth: Dimens.size40,
+                                      minHeight: Dimens.size40,
+                                      maxHeight: Dimens.size40,),
+                                    contentPadding: MySpacing.xy(16, 12),
+                                    //isCollapsed: true,
+                                    floatingLabelBehavior: FloatingLabelBehavior.auto),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Gap(Dimens.size16),
-                Visibility(
-                  visible: constraints.maxWidth> 800,
-                  child: ActionButton1(
-                    text: L10nX.getStr.search,
-                    radius: 16,
-                    onTap: () {
-                      BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
-                    },
-                  ),
-                ),
-                Visibility(
-                  visible: constraints.maxWidth< 800,
-                  child: InkWell(
+                  Gap(Dimens.size16),
+                  Visibility(
+                    visible: constraints.maxWidth> 800,
+                    child: ActionButton1(
+                      text: L10nX.getStr.search,
                       onTap: () {
                         BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                       },
-                      child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
-                ),
-              ],
-            ),
-            Visibility(
-              visible: UserManager().userContainPermission(permissionList: ["tags.post.create_tag"]),
-              child: Row(
-                children: [
-                  Gap(Dimens.size10),
+                    ),
+                  ),
                   Visibility(
                     visible: constraints.maxWidth< 800,
                     child: InkWell(
+                        onTap: () {
+                          BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                        },
+                        child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
+                  ),
+                ],
+              ),
+              Visibility(
+                visible: UserManager().userContainPermission(permissionList: ["tags.post.create_tag"]),
+                child: Row(
+                  children: [
+                    Gap(Dimens.size10),
+                    Visibility(
+                      visible: constraints.maxWidth< 800,
+                      child: InkWell(
+                          onTap: () {
+                            AddGradePage(tagPageAction: GradePageAction.create,).show(context, callBack: (p0) {
+                              BlocProvider.of<GradeListBloc>(context).add(GradeListInitEvent());
+                            },);
+                          },
+                          child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
+                    ),
+                    Visibility(
+                      visible: constraints.maxWidth >800,
+                      child: ActionButton1(
+                        preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor, size: Dimens.size15),
+                        text: L10nX.getStr.add_new_str,
                         onTap: () {
                           AddGradePage(tagPageAction: GradePageAction.create,).show(context, callBack: (p0) {
                             BlocProvider.of<GradeListBloc>(context).add(GradeListInitEvent());
                           },);
                         },
-                        child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
-                  ),
-                  Visibility(
-                    visible: constraints.maxWidth >800,
-                    child: ActionButton1(
-                      preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
-                      text: L10nX.getStr.add_new_str,
-                      onTap: () {
-                        AddGradePage(tagPageAction: GradePageAction.create,).show(context, callBack: (p0) {
-                          BlocProvider.of<GradeListBloc>(context).add(GradeListInitEvent());
-                        },);
-                      },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     },);

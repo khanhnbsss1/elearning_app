@@ -83,8 +83,8 @@ class _TopBarState extends State<TopBar>
                         borderRadius: BorderRadius.circular(2),
                         child: Image.asset(
                           "assets/lang/${LanguageHelper().getCurrentLocale().languageCode??'vi'}.png",
-                          width: 24,
-                          height: 18,
+                          width: Dimens.size24,
+                          height: Dimens.size18,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -97,9 +97,9 @@ class _TopBarState extends State<TopBar>
                   backdrop: false,
                   onChange: (_) {},
                   offsetX: -60,
-                  offsetY: 8,
+                  offsetY: Dimens.size8,
                   menu: Padding(
-                    padding: MySpacing.xy(8, 8),
+                    padding: MySpacing.xy(Dimens.size8, Dimens.size8),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -109,25 +109,25 @@ class _TopBarState extends State<TopBar>
                             (userProfile!=null && (userProfile.avatar??'').isNotEmpty)?
                             ImageManager().getImageByUrl(
                               userProfile.avatar??'',
-                              height: 28,
-                              width: 28,
+                              height: Dimens.size28,
+                              width: Dimens.size28,
                               boxFit: BoxFit.cover,
                               errorBuilder: Image.asset(
                                 'assets/deshboard/profile.png',
-                                height: 28,
-                                width: 28,
+                                height: Dimens.size28,
+                                width: Dimens.size28,
                                 fit: BoxFit.cover,
                               ),
                             ):
                             Image.asset(
                               'assets/deshboard/profile.png',
-                              height: 28,
-                              width: 28,
+                              height: Dimens.size28,
+                              width: Dimens.size28,
                               fit: BoxFit.cover,
                             )),
                         MySpacing.width(8),
                         // MyText.labelLarge('${snapshot.data?.fullName}')
-                        MyText.labelLarge(userProfile?.fullName??'')
+                        Text(userProfile?.fullName??'', style: TextStyleConstant.textStyleBlack13w400,)
                       ],
                     ),
                   ),

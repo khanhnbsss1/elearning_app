@@ -605,12 +605,21 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
               {
                 ConfirmPopupPage(
                   title: L10nX.getStr.string_notify,
-                  content: "Yêu cầu đăng ký đã được gửi đến quản trị viên và sẽ được xử lý sớm !",
+                  content: (state.courseInfo?.price??0)>0?
+                  "Yêu cầu đăng ký đã được gửi đến quản trị viên và sẽ được xử lý sớm !":
+                  "Đăng ký thành công, bây giờ bạn có thế vào học ngay bây giờ ",
                   onAccept: () async {
                     Navigator.of(context).pop();
-                    CourseStudy1(
-                      courseInfo: state.courseInfo!,
-                    ).show(context);
+                    if((state.courseInfo?.price??0)>0)
+                      {
+                        
+                      }
+                    else
+                      {
+                        CourseStudy1(
+                          courseInfo: state.courseInfo!,
+                        ).show(context);
+                      }
                   },
                 ).show(context);
               }

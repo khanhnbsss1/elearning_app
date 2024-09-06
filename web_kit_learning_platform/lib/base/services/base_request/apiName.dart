@@ -134,8 +134,8 @@ class ApiName {
 
   /// permisison
   final String getUserPermissionList = "/get-role-claims";
-  final String addPermissionListToRole = "/add-role-claims";
-  final String deletePermissionListFromRole = "/delete-role-claim";
+  final String addPermissionListToRole = "/add-group-claims'";
+  final String deletePermissionListFromRole = "/delete-group-claim";
 
   /// roles
   final String getUserRolesList = "/get-roles";

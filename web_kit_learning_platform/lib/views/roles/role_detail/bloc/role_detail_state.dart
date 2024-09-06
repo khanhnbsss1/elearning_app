@@ -56,7 +56,7 @@ class RoleDetailState extends Equatable {
       blocStatus: blocStatus??this.blocStatus,
       roleInfo: roleInfo??this.roleInfo,
       roleActionType: roleActionType??this.roleActionType,
-      //permissionList: permissionList??this.permissionList,
+      permissionList: permissionList??this.permissionList,
       permissionAdd: permissionAdd??this.permissionAdd,
       permissionRemove: permissionRemove??this.permissionRemove,
       editingControllerRoleName: editingControllerRoleName??this.editingControllerRoleName,

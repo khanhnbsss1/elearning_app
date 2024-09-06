@@ -11,7 +11,8 @@ import 'models/roles_info.dart';
 
 class AddPermissionApi extends BaseApiRequest {
   List<PermissionInfo> info;
-  AddPermissionApi({required this.info}):super(
+  String? roleId;
+  AddPermissionApi({required this.info, this.roleId}):super(
     serviceType: SERVICE_TYPE.Claim,
     apiName: ApiName.getInstance().addPermissionListToRole,
   );
@@ -29,6 +30,7 @@ class AddPermissionApi extends BaseApiRequest {
   Future<void> getAuthorization() async {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['claims'] = info.map((v) => v.toJson()).toList();
+    data['roleId'] = roleId;
     await setApiBody(data);
   }
 

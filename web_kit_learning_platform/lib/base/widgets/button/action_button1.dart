@@ -57,6 +57,7 @@ class ActionButton1 extends StatelessWidget {
         builder: (bool isHovered) { 
           return Card(
             elevation: 5,
+            margin: EdgeInsets.zero,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius??Dimens.size5)),
             child: Container(
               height: height,

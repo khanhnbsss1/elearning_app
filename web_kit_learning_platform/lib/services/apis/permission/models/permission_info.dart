@@ -53,17 +53,23 @@ class PermissionGroupInfo {
     id = json['id'];
     type = json['type'];
     descriptionType = json['description_type'];
+    isActivate = true;
     if (json['permission'] != null) {
       permission = <PermissionInfo>[];
+      
       json['permission'].forEach((v) {
-        PermissionInfo permissionInfo = new PermissionInfo.fromJson(v);
-        permission!.add(new PermissionInfo.fromJson(v));
+        PermissionInfo permissionInfo = new PermissionInfo.fromJson(v, type??"");
+        permission!.add(permissionInfo);
         if(!(permissionInfo.isActivate??false))
           {
             isActivate = false;
           }
       });
     }
+    else
+      {
+        isActivate = false;
+      }
   }
 
   Map<String, dynamic> toJson() {
@@ -89,13 +95,15 @@ class PermissionInfo {
   String? value;
   bool? isActivate;
   String? roleId;
+  String? type;
 
-  PermissionInfo({this.descriptionValue, this.value, this.isActivate, this.roleId});
+  PermissionInfo({this.descriptionValue, this.value, this.isActivate, this.roleId, this.type});
 
-  PermissionInfo.fromJson(Map<String, dynamic> json) {
+  PermissionInfo.fromJson(Map<String, dynamic> json, String typeInput) {
     descriptionValue = json['description_value'];
     value = json['value'];
     isActivate = json['isActivate']?? (UserManager().userContainPermission(permissionList: [value??""]));
+    type = typeInput;
   }
 
   Map<String, dynamic> toJson() {
@@ -104,6 +112,7 @@ class PermissionInfo {
     data['value'] = value;
     data['isActivate'] = isActivate;
     data['roleId'] = roleId;
+    data['type'] = type;
     return data;
   }
 }

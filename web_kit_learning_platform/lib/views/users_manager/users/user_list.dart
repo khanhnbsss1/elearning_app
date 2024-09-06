@@ -2,20 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_pagination/flutter_custom_pagination.dart';
 import 'package:gap/gap.dart';
-import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
 import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
-import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
-import 'package:webkit/services/apis/user/user_manager/delete_user_api.dart';
-import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
-import 'package:webkit/views/lessson/components/lesson_item_view.dart';
 import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
 import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 import '../../../helpers/widgets/my_spacing.dart';
@@ -199,21 +193,21 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                                 hintText: L10nX.getStr.search,
                                 fillColor: ColorConst.whiteColor,
                                 filled: true,
-                                hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                                border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                prefixIcon: const Align(
+                                hintStyle: TextStyleConstant.textStyleBlack13w400,
+                                border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                prefixIcon: Align(
                                     alignment: Alignment.center,
                                     child: Icon(
                                       LucideIcons.search,
-                                      size: 14,
+                                      size: Dimens.size15,
                                     )),
-                                prefixIconConstraints: const BoxConstraints(
-                                    minWidth: 36,
-                                    maxWidth: 36,
-                                    minHeight: 32,
-                                    maxHeight: 32),
+                                prefixIconConstraints:  BoxConstraints(
+                                  minWidth: Dimens.size40,
+                                  maxWidth: Dimens.size40,
+                                  minHeight: Dimens.size40,
+                                  maxHeight: Dimens.size40,),
                                 contentPadding: MySpacing.xy(16, 12),
                                 //isCollapsed: true,
                                 floatingLabelBehavior: FloatingLabelBehavior.auto),
@@ -228,7 +222,6 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                   visible: constraints.maxWidth> 800,
                   child: ActionButton1(
                     text: L10nX.getStr.search,
-                    radius: 16,
                     onTap: () {
                       BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                     },
@@ -262,7 +255,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                   Visibility(
                     visible: constraints.maxWidth >800,
                     child: ActionButton1(
-                      preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
+                      preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,size: Dimens.size15,),
                       text: L10nX.getStr.add_new_str,
                       onTap: () {
                        AppPages.routeName(Routes.userEdit,arguments: {
@@ -306,14 +299,6 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                     ConfirmPopupPage(
                       content: L10nX.getStr.you_want_remove,
                       onAccept: () async {
-/*            MonitorLoading().showLoading("");
-            DeleteUserApi api = DeleteUserApi(info: p0);
-            dynamic data = await api.call();
-            MonitorLoading().dismiss();
-            if(data.runtimeType == String && (data as String).isEmpty)
-              {
-                BlocProvider.of<UserListBloc>(context).add(UserListInitEvent());
-              }*/
                       },
 
                     ).show(context);
@@ -409,7 +394,8 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                                   child: Text(L10nX.getStr.positions))),
                           GridColumn(
                               columnName: L10nX.getStr.type,
-                              maximumWidth: Dimens.size180,
+                              maximumWidth: Dimens.size150,
+                              minimumWidth: Dimens.size120,
                               label: Container(
                                   padding: EdgeInsets.all(8.0),
                                   alignment: Alignment.center,

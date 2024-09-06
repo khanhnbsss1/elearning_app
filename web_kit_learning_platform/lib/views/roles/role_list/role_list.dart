@@ -12,14 +12,8 @@ import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/services/apis/lessson/lesson_detail/delete_lesson_api.dart';
-import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/roles/delete_role_api.dart';
 import 'package:webkit/services/apis/roles/models/roles_info.dart';
-import 'package:webkit/services/apis/user/user_manager/delete_user_api.dart';
-import 'package:webkit/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
-import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
-import 'package:webkit/views/question/question_detail/question_detail_bloc/question_detail_bloc.dart';
 import 'package:webkit/views/roles/role_detail/create_edit_role.dart';
 import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 import '../../../helpers/widgets/my_spacing.dart';
@@ -175,25 +169,25 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
             )
         ),
         padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  //height: Dimens.size40,
-                  constraints: BoxConstraints(
-                      maxWidth:  constraints.maxWidth> 800?400:250
-                  ),
-                  child: Form(
-                    key: formKey,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: SizedBox(
-                            height:Dimens.size45,
+        child: SizedBox(
+          height: Dimens.size45,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    //height: Dimens.size40,
+                    constraints: BoxConstraints(
+                        maxWidth:  constraints.maxWidth> 800?400:250
+                    ),
+                    child: Form(
+                      key: formKey,
+                      child: Row(
+                        children: [
+                          Expanded(
                             child: TextFormField(
                               maxLines: 1,
                               controller: textEditingController,
@@ -210,184 +204,208 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
                                   hintText: L10nX.getStr.search,
                                   fillColor: ColorConst.whiteColor,
                                   filled: true,
-                                  hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                                  border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                  enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                  focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                  prefixIcon: const Align(
+                                  hintStyle: TextStyleConstant.textStyleBlack13w400,
+                                  border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                  enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                  focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                  prefixIcon: Align(
                                       alignment: Alignment.center,
                                       child: Icon(
                                         LucideIcons.search,
-                                        size: 14,
+                                        size: Dimens.size15,
                                       )),
-                                  prefixIconConstraints: const BoxConstraints(
-                                      minWidth: 36,
-                                      maxWidth: 36,
-                                      minHeight: 32,
-                                      maxHeight: 32),
+                                  prefixIconConstraints:  BoxConstraints(
+                                    minWidth: Dimens.size40,
+                                    maxWidth: Dimens.size40,
+                                    minHeight: Dimens.size40,
+                                    maxHeight: Dimens.size40,),
                                   contentPadding: MySpacing.xy(16, 12),
                                   //isCollapsed: true,
                                   floatingLabelBehavior: FloatingLabelBehavior.auto),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Gap(Dimens.size16),
-                Visibility(
-                  visible: constraints.maxWidth> 800,
-                  child: ActionButton1(
-                    text: L10nX.getStr.search,
-                    radius: 16,
-                    onTap: () {
-                      BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
-                    },
-                  ),
-                ),
-                Visibility(
-                  visible: constraints.maxWidth< 800,
-                  child: InkWell(
+                  Gap(Dimens.size16),
+                  Visibility(
+                    visible: constraints.maxWidth> 800,
+                    child: ActionButton1(
+                      text: L10nX.getStr.search,
                       onTap: () {
                         BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                       },
-                      child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
-                ),
-              ],
-            ),
-            Visibility(
-              visible: UserManager().userContainPermission(permissionList: [
-                "account.post.create_role",
-              ]),
-              child: Row(
-                children: [
-                  Gap(Dimens.size10),
+                    ),
+                  ),
                   Visibility(
                     visible: constraints.maxWidth< 800,
                     child: InkWell(
                         onTap: () {
-                          CreateEditRole(
-                            actionType: ActionType.create,
-                            callBack: () {
-                              BlocProvider.of<RoleListBloc>(context).add(RoleListInitEvent());
-                            },
-                          ).show(context);              
+                          BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                         },
-                        child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
-                  ),
-                  Visibility(
-                    visible: constraints.maxWidth >800,
-                    child: ActionButton1(
-                      preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
-                      text: L10nX.getStr.add_new_str,
-                      onTap: () {
-                        CreateEditRole(
-                          actionType: ActionType.create,
-                        ).show(context);
-                      },
-                    ),
+                        child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                   ),
                 ],
               ),
-            ),
-          ],
+              Visibility(
+                visible: UserManager().userContainPermission(permissionList: [
+                  "account.post.create_role",
+                ]),
+                child: Row(
+                  children: [
+                    Gap(Dimens.size10),
+                    Visibility(
+                      visible: constraints.maxWidth< 800,
+                      child: InkWell(
+                          onTap: () {
+                            CreateEditRole(
+                              actionType: ActionType.create,
+                              callBack: () {
+                                BlocProvider.of<RoleListBloc>(context).add(RoleListInitEvent());
+                              },
+                            ).show(context);              
+                          },
+                          child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
+                    ),
+                    Visibility(
+                      visible: constraints.maxWidth >800,
+                      child: ActionButton1(
+                        preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,size: Dimens.size15,),
+                        text: L10nX.getStr.add_new_str,
+                        onTap: () {
+                          CreateEditRole(
+                            actionType: ActionType.create,
+                          ).show(context);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       );
     },);
   }
   Widget buildRoleList({required RoleListState state, required BuildContext context}){
-    RoleDataSource employeeDataSource = RoleDataSource(
-      lessonData: state.contentView??[],
-      starIndex: (state.searchCommonRequest?.pageNumber??0)* (state.searchCommonRequest?.pageSize??0),
-      onDelete: (p0) {
-        ConfirmPopupPage(
-          content: L10nX.getStr.you_want_remove,
-          onAccept: () async {
-            MonitorLoading().showLoading("");
-            DeleteRoleApi api = DeleteRoleApi(info: p0);
-            dynamic data = await api.call();
-            MonitorLoading().dismiss();
+    return Padding(
+        padding:  EdgeInsets.all(Dimens.size8),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            switch (state.blocStatus) {
+              case null:
+              // TODO: Handle this case.
+              case LessonListStatus.initial:
+              // TODO: Handle this case.
+              case LessonListStatus.onLoading:
+              // TODO: Handle this case.           
+            // TODO: Handle this case.
 
-            BlocProvider.of<RoleListBloc>(context).add(RoleListInitEvent());
-          },
-          
-        ).show(context);
-      },
-      onEdit: (p0) {
-        CreateEditRole(
-           actionType: ActionType.edit,
-          roleInfo: p0,
-        ).show(context);
-      },
-      onViewDetail: (p0) {
-        CreateEditRole(
-          actionType: ActionType.view,
-          roleInfo: p0,
-        ).show(context);
-      },
-    );
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        return SfDataGridTheme(
-          data: SfDataGridThemeData(
-            headerColor: ColorConst.mainColor.withOpacity(0.1),
-          ),
-          child: SfDataGrid(
-            source: employeeDataSource,
-            columnWidthMode: ColumnWidthMode.fill,
-            isScrollbarAlwaysShown: false,
-            gridLinesVisibility: GridLinesVisibility.both,
-            headerGridLinesVisibility: GridLinesVisibility.both,
+              case LessonListStatus.onSelectLesson:
+              // TODO: Handle this case.
+              case LessonListStatus.onSearchByParams:
+              // TODO: Handle this case.
+                return Center(child: CircularProgressIndicator());
+              case LessonListStatus.onLoadEnd:
+              // TODO: Handle this case.
+                RoleDataSource employeeDataSource = RoleDataSource(
+                  lessonData: state.contentView??[],
+                  starIndex: (state.searchCommonRequest?.pageNumber??0)* (state.searchCommonRequest?.pageSize??0),
+                  onDelete: (p0) {
+                    ConfirmPopupPage(
+                      content: L10nX.getStr.you_want_remove,
+                      onAccept: () async {
+                        MonitorLoading().showLoading("");
+                        DeleteRoleApi api = DeleteRoleApi(info: p0);
+                        dynamic data = await api.call();
+                        MonitorLoading().dismiss();
+
+                        BlocProvider.of<RoleListBloc>(context).add(RoleListInitEvent());
+                      },
+
+                    ).show(context);
+                  },
+                  onEdit: (p0) {
+                    CreateEditRole(
+                      actionType: ActionType.edit,
+                      roleInfo: p0,
+                    ).show(context);
+                  },
+                  onViewDetail: (p0) {
+                    CreateEditRole(
+                      actionType: ActionType.view,
+                      roleInfo: p0,
+                    ).show(context);
+                  },
+                );
+                return LayoutBuilder(
+                  builder: (BuildContext context, BoxConstraints constraints) {
+                    return SfDataGridTheme(
+                      data: SfDataGridThemeData(
+                        headerColor: ColorConst.mainColor.withOpacity(0.1),
+                      ),
+                      child: SfDataGrid(
+                        source: employeeDataSource,
+                        columnWidthMode: ColumnWidthMode.fill,
+                        isScrollbarAlwaysShown: false,
+                        gridLinesVisibility: GridLinesVisibility.both,
+                        headerGridLinesVisibility: GridLinesVisibility.both,
 /*            onQueryRowHeight: (details) {
               return details.getIntrinsicRowHeight(details.rowIndex);
             },*/
-            headerRowHeight: Dimens.size60,
-            rowHeight: Dimens.size90,
-            //defaultColumnWidth: 200,
-            showHorizontalScrollbar: true,
-            columns: <GridColumn>[
-              GridColumn(
-                  columnName: 'id',
-                  maximumWidth: Dimens.size60,
-                  label: Container(
-                      padding: EdgeInsets.all(16.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        'ID',
-                      ))),
-              GridColumn(
-                  columnName: L10nX.getStr.role_str,
-                  minimumWidth: Dimens.size250,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        L10nX.getStr.role_str,
-                        overflow: TextOverflow.ellipsis,
-                      ))),
-              GridColumn(
-                  columnName: L10nX.getStr.role_str,
-                  minimumWidth: Dimens.size120,
-                  maximumWidth: Dimens.size150,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.role_str))),
-              GridColumn(
-                  columnName: L10nX.getStr.action_str,
-                  minimumWidth: Dimens.size150,
-                  maximumWidth: Dimens.size180,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.action_str))),
+                        headerRowHeight: Dimens.size60,
+                        rowHeight: Dimens.size90,
+                        //defaultColumnWidth: 200,
+                        showHorizontalScrollbar: true,
+                        columns: <GridColumn>[
+                          GridColumn(
+                              columnName: 'id',
+                              maximumWidth: Dimens.size60,
+                              label: Container(
+                                  padding: EdgeInsets.all(16.0),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'ID',
+                                  ))),
+                          GridColumn(
+                              columnName: L10nX.getStr.role_str,
+                              minimumWidth: Dimens.size250,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    L10nX.getStr.role_str,
+                                    overflow: TextOverflow.ellipsis,
+                                  ))),
+                          GridColumn(
+                              columnName: L10nX.getStr.role_str,
+                              minimumWidth: Dimens.size120,
+                              maximumWidth: Dimens.size150,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.role_str))),
+                          GridColumn(
+                              columnName: L10nX.getStr.action_str,
+                              minimumWidth: Dimens.size150,
+                              maximumWidth: Dimens.size200,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.action_str))),
 
-            ],
-          ),
-        );
-      },
-    );
+                        ],
+                      ),
+                    );
+                  },
+                );
+
+            }
+          },
+        ));
+
   }
   
 }

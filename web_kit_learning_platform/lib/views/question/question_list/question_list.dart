@@ -171,25 +171,25 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
             )
         ),
         padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  //height: Dimens.size40,
-                  constraints: BoxConstraints(
-                      maxWidth:  constraints.maxWidth> 800?400:250
-                  ),
-                  child: Form(
-                    key: formKey,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: SizedBox(
-                            height:Dimens.size45,
+        child: SizedBox(
+          height: Dimens.size45,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    //height: Dimens.size40,
+                    constraints: BoxConstraints(
+                        maxWidth:  constraints.maxWidth> 800?400:250
+                    ),
+                    child: Form(
+                      key: formKey,
+                      child: Row(
+                        children: [
+                          Expanded(
                             child: TextFormField(
                               maxLines: 1,
                               controller: textEditingController,
@@ -206,92 +206,91 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
                                   hintText: L10nX.getStr.search,
                                   fillColor: ColorConst.whiteColor,
                                   filled: true,
-                                  hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                                  border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                  enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                  focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                  prefixIcon: const Align(
+                                  hintStyle: TextStyleConstant.textStyleBlack13w400,
+                                  border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                  enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                  focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                  prefixIcon: Align(
                                       alignment: Alignment.center,
                                       child: Icon(
                                         LucideIcons.search,
-                                        size: 14,
+                                        size: Dimens.size15,
                                       )),
-                                  prefixIconConstraints: const BoxConstraints(
-                                      minWidth: 36,
-                                      maxWidth: 36,
-                                      minHeight: 32,
-                                      maxHeight: 32),
+                                  prefixIconConstraints:  BoxConstraints(
+                                    minWidth: Dimens.size40,
+                                    maxWidth: Dimens.size40,
+                                    minHeight: Dimens.size40,
+                                    maxHeight: Dimens.size40,),
                                   contentPadding: MySpacing.xy(16, 12),
                                   //isCollapsed: true,
                                   floatingLabelBehavior: FloatingLabelBehavior.auto),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Gap(Dimens.size16),
-                Visibility(
-                  visible: constraints.maxWidth> 800,
-                  child: ActionButton1(
-                    text: L10nX.getStr.search,
-                    radius: 16,
-                    onTap: () {
-                      BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
-                    },
-                  ),
-                ),
-                Visibility(
-                  visible: constraints.maxWidth< 800,
-                  child: InkWell(
+                  Gap(Dimens.size16),
+                  Visibility(
+                    visible: constraints.maxWidth> 800,
+                    child: ActionButton1(
+                      text: L10nX.getStr.search,
                       onTap: () {
                         BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                       },
-                      child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
-                ),
-              ],
-            ),
-            Visibility(
-              visible: UserManager().userContainPermission(permissionList: [
-                "quizs.post.create_question"
-              ]),
-              child: Row(
-                children: [
-                  Gap(Dimens.size10),
+                    ),
+                  ),
                   Visibility(
                     visible: constraints.maxWidth< 800,
                     child: InkWell(
+                        onTap: () {
+                          BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                        },
+                        child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
+                  ),
+                ],
+              ),
+              Visibility(
+                visible: UserManager().userContainPermission(permissionList: [
+                  "quizs.post.create_question"
+                ]),
+                child: Row(
+                  children: [
+                    Gap(Dimens.size10),
+                    Visibility(
+                      visible: constraints.maxWidth< 800,
+                      child: InkWell(
+                          onTap: () {
+                            QuestionCreateEditDetailPage(
+                              actionType: ActionType.create,
+                                callBack: () {
+                                  BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
+                
+                                },
+                            ).show(context,);
+                          },
+                          child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
+                    ),
+                    Visibility(
+                      visible: constraints.maxWidth >800,
+                      child: ActionButton1(
+                        preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,size: Dimens.size15,),
+                        text: L10nX.getStr.add_new_str,
                         onTap: () {
                           QuestionCreateEditDetailPage(
                             actionType: ActionType.create,
                               callBack: () {
                                 BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
-              
-                              },
+                              }
                           ).show(context,);
                         },
-                        child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
-                  ),
-                  Visibility(
-                    visible: constraints.maxWidth >800,
-                    child: ActionButton1(
-                      preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,),
-                      text: L10nX.getStr.add_new_str,
-                      onTap: () {
-                        QuestionCreateEditDetailPage(
-                          actionType: ActionType.create,
-                            callBack: () {
-                              BlocProvider.of<QuizListBloc>(context).add(QuizListInitEvent());
-                            }
-                        ).show(context,);
-                      },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       );
     },);
@@ -388,7 +387,7 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
                           GridColumn(
                               columnName: L10nX.getStr.question_type,
                               minimumWidth: Dimens.size80,
-                              maximumWidth: Dimens.size120,
+                              maximumWidth: Dimens.size150,
                               label: Container(
                                   padding: EdgeInsets.all(8.0),
                                   alignment: Alignment.center,

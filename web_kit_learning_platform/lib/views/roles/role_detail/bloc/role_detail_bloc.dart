@@ -59,8 +59,8 @@ class RoleDetailBloc extends Bloc<RoleDetailEvent, RoleDetailState> {
       RoleDetailUpdateEvent event,
       Emitter<RoleDetailState> emit,
       ) async {
-    UpdateRoleApi addRoleApi = UpdateRoleApi(info:UpdateRoleRequestInfo(roleId: event.state.roleInfo!.id, newRole: event.state.editingControllerRoleName?.text));
-    dynamic data = await addRoleApi.call();
+   /* UpdateRoleApi addRoleApi = UpdateRoleApi(info:UpdateRoleRequestInfo(roleId: event.state.roleInfo!.id, newRole: event.state.editingControllerRoleName?.text));
+    dynamic data = await addRoleApi.call();*/
    await updatePermissionForRole();
     emit(state.copyWith(
        // permissionList: state.permissionList,
@@ -95,9 +95,17 @@ class RoleDetailBloc extends Bloc<RoleDetailEvent, RoleDetailState> {
     }
     
 
-    AddPermissionApi addPermissionApi = AddPermissionApi(info: listAdd);
-    dynamic dataAdd = await addPermissionApi.call();
-    RemovePermissionApi removePermissionApi = RemovePermissionApi(info: listAdd, roleId: state.roleInfo!.id!);
-    dynamic dataRemove = await removePermissionApi.call();
+    if(listAdd.isNotEmpty)
+      {
+        AddPermissionApi addPermissionApi = AddPermissionApi(info: listAdd, roleId: state.roleInfo?.id);
+        dynamic dataAdd = await addPermissionApi.call();
+      }
+
+/*    if(listRemove.isNotEmpty)
+      {
+        RemovePermissionApi removePermissionApi = RemovePermissionApi(info: listRemove, roleId: state.roleInfo!.id!);
+        dynamic dataRemove = await removePermissionApi.call();
+      }*/
+
   }
 }
