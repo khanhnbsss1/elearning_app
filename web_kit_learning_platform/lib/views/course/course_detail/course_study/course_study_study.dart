@@ -650,7 +650,13 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   Widget buildLessonContent(LessonInfo? selectLessonInfo) {
     String cmd = """http://mozilla.github.io/pdf.js/web/viewer.html?
                   file= ${selectLessonInfo?.content ?? ''}
-                  #toolbar=0&navpanes=0&scrollbar=0&statusbar=0&messages=0&scrollbar=0""";
+                  #toolbar=0&navpanes=0&scrollbar=0&statusbar=0&messages=0""";
+    String cmd1 = """${selectLessonInfo?.content ?? ''}#toolbar=0&navpanes=0&scrollbar=0"
+    type="application/pdf"
+    frameBorder="0"
+    scrolling="auto"
+    height="100%"
+    width="100%""";
     return (selectLessonInfo?.content ?? '').isNotEmpty
         ? Container(
             height: Dimens.size600,
@@ -665,14 +671,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                       (int viewId) =>EmbedElement()
                     ..width = '640'
                     ..height = '360'
-                    ..src = 
-                    """${selectLessonInfo?.content ?? ''}
-                    #toolbar=0&navpanes=0&scrollbar=0"
-                    type="application/pdf"
-                    frameBorder="0"
-                    scrolling="auto"
-                    height="100%"
-                    width="100%""");
+                    ..src = cmd1);
               return HtmlElementView(
                 viewType: 'hello-world-html',
               );
