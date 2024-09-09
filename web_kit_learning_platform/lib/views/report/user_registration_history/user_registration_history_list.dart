@@ -68,7 +68,7 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
                   return Layout(
                       isScroll: false,
                       title: Center(
-                        child: Text(L10nX.getStr.report_purchased,
+                        child: Text(L10nX.getStr.report_new_registered_account,
                           style: TextStyleConstant.textStyleBlack18w600,),),
                       padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
@@ -78,7 +78,7 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
                   return Layout(
                       isScroll: false,
                       title: Center(child: Text(
-                        L10nX.getStr.report_purchased,
+                        L10nX.getStr.report_new_registered_account,
                         style: TextStyleConstant.textStyleBlack18w600,
                       ),),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)

@@ -6,8 +6,10 @@ import 'components/colornotifier.dart';
 import 'deshboard/landing_page.dart';
 
 class LandingPageSplash extends StatefulWidget {
-  const LandingPageSplash({super.key});
-
+  LandingPageSplash({super.key, this.enableEdit}){
+    enableEdit??=false;
+  }
+  bool? enableEdit;
   @override
   State<LandingPageSplash> createState() => _LandingPageSplashState();
 }
@@ -25,10 +27,8 @@ class _LandingPageSplashState extends State<LandingPageSplash> {
     await Future.delayed(
       const Duration(milliseconds: 10),
           () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>  const LandingPageScreen(),
+        Navigator.pushReplacement(context, MaterialPageRoute(
+            builder: (context) =>  LandingPageScreen(enableEdit: widget.enableEdit,),
           ),
         );
       },

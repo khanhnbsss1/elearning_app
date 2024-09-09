@@ -45,7 +45,7 @@ class ReviewLandingPageInfo {
   String? typeName;
   String? avatar;
   int? isShow;
-
+  int? fileId;
   ReviewLandingPageInfo(
       {this.id,
         this.name,
@@ -53,27 +53,37 @@ class ReviewLandingPageInfo {
         this.review,
         this.typeName,
         this.avatar,
-        this.isShow});
+        this.isShow,
+        this.fileId
+      });
 
   ReviewLandingPageInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    
     name = json['name'];
     position = json['position'];
     review = json['review'];
     typeName = json['type_name'];
     avatar = json['avatar'];
     isShow = json['is_show'];
+    fileId = json['file_id'];
+
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
+    if(id!=null)
+      {
+        data['id'] = id;
+      }
     data['name'] = name;
     data['position'] = position;
     data['review'] = review;
     data['type_name'] = typeName;
     data['avatar'] = avatar;
     data['is_show'] = isShow;
+    data['file_id'] = fileId;
+
     return data;
   }
 }

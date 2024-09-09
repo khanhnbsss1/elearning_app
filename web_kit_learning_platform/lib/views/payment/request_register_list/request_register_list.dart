@@ -75,7 +75,7 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                     return Layout(
                         isScroll: false,
                         title: Center(
-                          child: Text(L10nX.getStr.test_list,
+                          child: Text(L10nX.getStr.list_waiting_register,
                             style: TextStyleConstant.textStyleBlack18w600,),),
                         padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
                         child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
@@ -85,7 +85,7 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                     return Layout(
                       isScroll: false,
                         title: Center(
-                          child: Text(L10nX.getStr.test_list,
+                          child: Text(L10nX.getStr.list_waiting_register,
                             style: TextStyleConstant.textStyleBlack18w600,),),
                         child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
                     );

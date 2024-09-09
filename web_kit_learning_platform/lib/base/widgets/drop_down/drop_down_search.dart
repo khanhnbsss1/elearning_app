@@ -10,7 +10,7 @@ class DropDownSearch extends StatelessWidget with UIMixin{
   Map<int, String> list;
   String? hintText;
   TextEditingController? controller;
-  Function(dynamic)? onChange;
+  Function(MapEntry)? onChange;
   dynamic selectItem;
   DropDownSearch({required this.list, this.controller,this.hintText, this.selectItem, this.onChange});
   @override
@@ -60,9 +60,10 @@ class DropDownSearch extends StatelessWidget with UIMixin{
       ),
       onChanged: (value) {
         controller?.text = value ?? "";
+        MapEntry valueOnchange = list.entries.toList().firstWhere((element) => element.value == value,);
         if(onChange!=null)
           {
-            onChange!(value);
+            onChange!(valueOnchange);
           }
       },
     );

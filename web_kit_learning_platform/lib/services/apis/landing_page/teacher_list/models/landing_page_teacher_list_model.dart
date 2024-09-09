@@ -30,33 +30,39 @@ class LandingPageUserListModel {
 
 class LandingPageUserInfo {
   int? id;
-  String? fullname;
+  String? name;
   String? avatar;
   String? position;
   int? isShow;
-
+  int?fileId;
   LandingPageUserInfo(
       {this.id,
-        this.fullname,
+        this.name,
         this.avatar,
         this.position,
         this.isShow});
 
   LandingPageUserInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    fullname = json['name'];
+    name = json['name'];
     avatar = json['avatar'];
     position = json['position'];
     isShow = json['is_show'];
+    fileId = json['file_id'];
+
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = fullname;
+    if(id!=null)
+      {
+        data['id'] = id;
+      }
+    data['name'] = name;
     data['avatar'] = avatar;
     data['position'] = position;
     data['is_show'] = isShow;
+    data['file_id'] = fileId;
     return data;
   }
 }

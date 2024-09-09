@@ -18,7 +18,7 @@ class SearchCommonRequest {
   String? endTime;
   int? limit;
   String? type;
-  
+  String?roleId;
   SearchCommonRequest(
       {
         this.userId,
@@ -38,7 +38,8 @@ class SearchCommonRequest {
         this.type, 
         this.limit,
         this.startTime,
-        this.endTime
+        this.endTime,
+        this.roleId
       }){
     type??="DESC";
   }
@@ -134,7 +135,9 @@ class SearchCommonRequest {
     if(limit!=null) {
       data['limit'] = limit;
     }
-    
+    if((roleId??'').isNotEmpty) {
+      data['roleId'] = roleId;
+    }
     return data;
   }
   SearchCommonRequest copyWith({
@@ -151,7 +154,8 @@ class SearchCommonRequest {
     bool? isActive,
     String? startDate,
     String? endDate,
-    String?status
+    String?status,
+    String?roleId
   }){
     return SearchCommonRequest(
       userId: userId??this.userId,
@@ -168,7 +172,7 @@ class SearchCommonRequest {
       startDate: startDate??this.startDate,
       endDate: endDate??this.endDate,
       status: status??this.status,
-
+      roleId: roleId??this.roleId,
     );
 }
 }

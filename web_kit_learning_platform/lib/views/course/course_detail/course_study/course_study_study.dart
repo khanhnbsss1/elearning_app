@@ -667,13 +667,13 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
             clipBehavior: Clip.hardEdge,
             child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
               ui.platformViewRegistry.registerViewFactory(
-                  'hello-world-html',
+                  "lesson_content_${(selectLessonInfo?.id??"").toString()}",
                       (int viewId) =>EmbedElement()
                     ..width = '640'
                     ..height = '360'
                     ..src = cmd1);
               return HtmlElementView(
-                viewType: 'hello-world-html',
+                viewType: "lesson_content_${(selectLessonInfo?.id??"").toString()}",
               );
             }))
         : SizedBox();

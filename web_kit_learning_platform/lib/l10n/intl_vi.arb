@@ -665,5 +665,17 @@
   "reject_str": "Từ chối",
   "unlock_course": "Mở khóa khóa học",
   "your_are_ready_unlock_for_this_user": "Bạn có chắc chắn muốn mở khóa khóa học cho người dùng này!",
-  "implementer_str": "Người thực hiện"
+  "implementer_str": "Người thực hiện",
+  
+  "add_review_user": "Thêm đánh giá của học viên",
+  "add_review_teacher": "Thêm đánh giá của giáo viên",
+  "add_teacher": "Thêm giáo viên",
+
+  "edit_review_user": "Sửa đánh giá của học viên",
+  "edit_review_tacher": "Sửa đánh giá của giáo viên",
+  "edit_teacher": "Sửa giáo viên",
+
+  "delete_review_user": "Xóa đánh giá của học viên",
+  "delete_review_tacher": "Xóa đánh giá của giáo viên",
+  "delete_teacher": "Xóa giáo viên"
 }

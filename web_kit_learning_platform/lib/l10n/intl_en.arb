@@ -665,5 +665,16 @@
   "reject_str": "Reject",
   "unlock_course": "Unlock course",
   "your_are_ready_unlock_for_this_user": "Are you sure you want to unlock the course for this user!",
-  "implementer_str": "Implementer"
+  "implementer_str": "Implementer",
+  "add_review_user": "Add student review",
+  "add_review_teacher": "Add teacher review",
+  "add_teacher": "Add teacher",
+
+  "edit_review_user": "Edit student review",
+  "edit_review_tacher": "Edit teacher review",
+  "edit_teacher": "Edit teacher",
+
+  "delete_review_user": "Delete student review",
+  "delete_review_tacher": "Delete teacher review",
+  "delete_teacher": "Delete teacher"
 }

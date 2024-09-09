@@ -51,7 +51,15 @@ class ApiName {
   final String getCourseListLandingPage = "/get-landingpage-course";
   final String getTeacherListLandingPage = "/get-landingpage-teacher";
   final String getReviewListLandingPage = "/get-landingpage-review";
-  
+
+  final String createLandingPageReview = "/create-landingpage-review";
+  final String updateLandingPageReview = "/update-landingpage-review";
+  final String deleteLandingPageReview = "/delete-landingpage-review";
+
+
+  final String createLandingPageTeacher = "/create-landingpage-teacher";
+  final String updateLandingPageTeacher = "/update-landingpage-teacher";
+  final String deleteLandingPageTeacher = "/delete-landingpage-teacher";
   /// thong tin nguoi dung
   final String createUser = "/register-role";
   final String editUser = "/edit-user";
@@ -144,6 +152,7 @@ class ApiName {
   final String addRoles = "/create-role";
   final String editRoles = "/edit-role";
   final String deleteRoles = "/delete-role";
+  final String editUserRoles = "/edit-user-role";
 
   
   /// payment

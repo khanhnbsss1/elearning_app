@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/landing_page/mediaquery/mq.dart';
@@ -10,10 +11,13 @@ import 'package:webkit/helpers/widgets/course_item.dart';
 
 import '../colornotifier.dart';
 import 'bloc/landing_page_course_list_bloc.dart';
+import 'edit_course_landingpage/edit_course_landing_page.dart';
 
 class LandingPageCourseList extends StatefulWidget {
-  const LandingPageCourseList({super.key});
-
+  LandingPageCourseList({super.key, this.enableEdit}){
+    enableEdit??=false;
+  }
+  bool? enableEdit;
   @override
   State<LandingPageCourseList> createState() => _LandingPageCourseListState();
 }
@@ -95,13 +99,29 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Center(
-                child: Text(L10nX.getStr.courses_list,
-                    style: TextStyleConstant
-                        .titleTextColorOnBackgroundColorStyle14w400
-                            .copyWith(
-                            fontWeight: FontWeight.bold,
-                            fontSize: constraints.maxWidth < FetchPixels.getPixelHeight(550) ? 28 : 45,
-                            color: notifier.blackcolor))),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(L10nX.getStr.courses_list,
+                        style: TextStyleConstant
+                            .titleTextColorOnBackgroundColorStyle14w400
+                                .copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontSize: constraints.maxWidth < FetchPixels.getPixelHeight(550) ? 28 : 45,
+                                color: notifier.blackcolor)),
+                    Gap(Dimens.size16),
+                    Visibility(
+                      visible: widget.enableEdit??false,
+                      child: InkWell(
+                        onTap: () {
+                          EditCourseLandingPagePage().show(context);
+                        },
+                        child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor, size: Dimens.size30,),
+                      ),
+                    )
+                  ],
+                )),
               Center(
                 child: Text(L10nX.getStr.register_to_enjoy_the_best_deals_for_you,
                     textAlign: TextAlign.center,
@@ -124,7 +144,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                     List<Widget> listOfCourse = List.empty(growable: true);
                     for (CourseInfo courseLandingPageInfo
                         in state.courseListLandingPageResponseModel?.data ?? []) {
-                      listOfCourse.add(CourseItem(constraints: constraints, courseInfo: courseLandingPageInfo));
+                      listOfCourse.add(CourseItem(constraints: constraints, courseInfo: courseLandingPageInfo, enableEdit: widget.enableEdit,));
                     }
                     return SizedBox(
                       height: Dimens.size520,

@@ -43,8 +43,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_new_str": MessageLookupByLibrary.simpleMessage("Thêm mới"),
         "add_product": MessageLookupByLibrary.simpleMessage("Thêm sản phẩm"),
         "add_products": MessageLookupByLibrary.simpleMessage("Thêm sản phẩm"),
+        "add_review_teacher":
+            MessageLookupByLibrary.simpleMessage("Thêm đánh giá của giáo viên"),
+        "add_review_user":
+            MessageLookupByLibrary.simpleMessage("Thêm đánh giá của học viên"),
         "add_selection": MessageLookupByLibrary.simpleMessage("Thêm lựa chọn"),
         "add_tags": MessageLookupByLibrary.simpleMessage("Thêm thẻ"),
+        "add_teacher": MessageLookupByLibrary.simpleMessage("Thêm giáo viên"),
         "all_str": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "animated": MessageLookupByLibrary.simpleMessage("Hoạt hình"),
         "answer_str_1": MessageLookupByLibrary.simpleMessage("Câu trả lời"),
@@ -201,9 +206,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "default_tabs": MessageLookupByLibrary.simpleMessage("Tab mặc định"),
         "delete_lesson_str":
             MessageLookupByLibrary.simpleMessage("Xóa bài học"),
+        "delete_review_tacher":
+            MessageLookupByLibrary.simpleMessage("Xóa đánh giá của giáo viên"),
+        "delete_review_user":
+            MessageLookupByLibrary.simpleMessage("Xóa đánh giá của học viên"),
         "delete_str": MessageLookupByLibrary.simpleMessage("Xóa"),
         "delete_subject_str":
             MessageLookupByLibrary.simpleMessage("Xóa chủ đề"),
+        "delete_teacher": MessageLookupByLibrary.simpleMessage("Xóa giáo viên"),
         "description": MessageLookupByLibrary.simpleMessage("Mô tả"),
         "detail_str": MessageLookupByLibrary.simpleMessage("Chi tiết"),
         "dialog_title":
@@ -235,7 +245,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa landing page"),
         "edit_lesson_str":
             MessageLookupByLibrary.simpleMessage("Chỉnh sửa bài học"),
+        "edit_review_tacher":
+            MessageLookupByLibrary.simpleMessage("Sửa đánh giá của giáo viên"),
+        "edit_review_user":
+            MessageLookupByLibrary.simpleMessage("Sửa đánh giá của học viên"),
         "edit_str": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
+        "edit_teacher": MessageLookupByLibrary.simpleMessage("Sửa giáo viên"),
         "elevated_button": MessageLookupByLibrary.simpleMessage("Nút nâng cao"),
         "elevated_rounded_button":
             MessageLookupByLibrary.simpleMessage("Nút bo tròn nâng cao"),

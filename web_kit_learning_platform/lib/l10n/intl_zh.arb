@@ -660,5 +660,14 @@
   "reject_str": "拒绝",
   "unlock_course": "解锁课程",
   "your_are_ready_unlock_for_this_user": "您确定要为该用户解锁课程吗！",
-  "implementer_str": "实施者"
+  "implementer_str": "实施者",
+  "add_review_user": "添加学生评论",
+  "add_review_teacher": "添加教师评论",
+  "add_teacher": "添加老师",
+  "edit_review_user": "编辑学生评论",
+  "edit_review_tacher": "编辑教师评论",
+  "edit_teacher": "编辑老师",
+  "delete_review_user": "删除学生评论",
+  "delete_review_tacher": "删除教师评论",
+  "delete_teacher": "删除老师"
 }

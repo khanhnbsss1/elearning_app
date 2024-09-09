@@ -28,7 +28,7 @@ class CourseListState extends Equatable {
     this.isActivate
   }){
     courseResponseModel??= CourseResponseModel(content: []);
-    searchCommonRequest??= SearchCommonRequest(filterType: "ALL", pageNumber: 0, pageSize: 30, keyword: "", isActive: isActivate);
+    searchCommonRequest??= SearchCommonRequest(filterType: "ALL", pageNumber: 0, pageSize: 20, keyword: "", isActive: isActivate);
     courseType??= CourseType.courseList;
   }
 

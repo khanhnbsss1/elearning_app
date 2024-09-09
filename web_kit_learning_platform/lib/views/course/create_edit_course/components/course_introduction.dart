@@ -451,7 +451,14 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           list: state.controller!.listOfProduceNames,
           hintText: '${L10nX.getStr.author_str}...',
           selectItem: state.courseInfo?.producerName,
-          controller: state.controller?.basicValidator.getController('producer_name')),
+          controller: state.controller?.basicValidator.getController('producer_name'),
+        onChange: (p0) {
+          print("object");
+          state.courseInfo?.producerName = p0.value;
+          state.courseInfo?.producerId = p0.key;
+          BlocProvider.of<AddCourseBloc>(context).add(AddCourseUpdateCourseInfoEvent(courseInfo: state.courseInfo!));
+        },
+      ),
     );
   }
 
@@ -729,7 +736,11 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         list: state.controller!.listOfAccompanyCourses,
         hintText: "${L10nX.getStr.accompany_course_str}...",
         selectItem: (state.courseInfo?.accompanyCourse ?? '0').toInt(),
-        controller: state.controller?.basicValidator.getController('accompany_course'));
+        controller: state.controller?.basicValidator.getController('accompany_course'),
+      onChange: (p0) {
+        
+      },
+    );
   }
   Widget buildActive({required AddCourseState state, required BuildContext context}) {
     return WidgetWithRowTitleCommon(

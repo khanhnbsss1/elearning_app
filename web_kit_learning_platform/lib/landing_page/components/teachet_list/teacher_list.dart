@@ -5,15 +5,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/services/apis/landing_page/teacher_list/models/landing_page_teacher_list_model.dart';
 
+import '../../../services/apis/landing_page/teacher_list/teacher_detail/delete_teacher_item_api.dart';
 import '../colornotifier.dart';
 import '../../mediaquery/mq.dart';
 import 'bloc/teacher_list_bloc.dart';
+import 'edit_teacher_item.dart';
 
 class TeacherList extends StatefulWidget {
-  const TeacherList({super.key});
-
+   TeacherList({super.key, this.enableEdit}){
+     enableEdit??=false;
+   }
+  bool ? enableEdit;
   @override
   State<TeacherList> createState() => _TeacherListState();
 }
@@ -152,12 +157,37 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Center(
-                        child: Text(L10nX.getStr.teacher_list,
-                            style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
-                                .copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: constraints.maxWidth < 550 ? 28 : 45,
-                                color: notifier.blackcolor)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Text(L10nX.getStr.teacher_list,
+                                style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
+                                    .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                                    color: notifier.blackcolor)),
+                            Gap(Dimens.size16),
+                            Visibility(
+                              visible: widget.enableEdit??false,
+                              child: InkWell(
+                                onTap: () {
+                                  EditTeacherItemPage(
+                                    actionType: ActionType.create,
+                                    info: null,
+                                  ).show(context, callBack: (p0) {
+                                    if(p0==true)
+                                      {
+                                        BlocProvider.of<TeacherListBloc>(context).add(TeacherListInitEvent());
+                                      }
+                                  },);
+                                },
+                                child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor, size: Dimens.size30,),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: constraints.maxWidth < 550 ? 10 : 20,
@@ -265,57 +295,109 @@ class _TeacherListState extends State<TeacherList> with AutomaticKeepAliveClient
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16)
             ),
-            // decoration: BoxDecoration(
-            //   border: Border.all(
-            //     color: Colors.black,
-            //   )
-            // ),
-            child: Column(
+            child: Stack(
+              alignment: Alignment.bottomRight,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: SizedBox(
-                    width: Dimens.size300,
-                    height: Dimens.size340,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: ImageManager().getImageByUrl(
-                          landingPageUserInfo.avatar ?? "",
-                          boxFit: BoxFit.cover),
+                Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: SizedBox(
+                      width: Dimens.size300,
+                      height: Dimens.size340,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: ImageManager().getImageByUrl(
+                            landingPageUserInfo.avatar ?? "",
+                            boxFit: BoxFit.cover),
+                      ),
                     ),
                   ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: ColorConst.whiteColor,
-                        borderRadius: BorderRadius.circular(Dimens.size16)
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: ColorConst.whiteColor,
+                          borderRadius: BorderRadius.circular(Dimens.size16)
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(landingPageUserInfo.name ?? "",
+                                style: TextStyleConstant.titleSmall.copyWith(
+                                    color: notifier.blackcolor,
+                                    )),
+                            Text(
+                              landingPageUserInfo.position ?? "",
+                              style: TextStyleConstant.bodyMedium.copyWith(
+                                color: notifier.blackcolor,)
+                            ),
+                            Gap(Dimens.size20)
+                          ],
+                        ),
+                      ),
                     ),
+                  ),
+                  // SizedBox(height: 10),
+                ],
+              ),
+                Visibility(
+                  visible: (widget.enableEdit ?? false),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
+                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size4),
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(landingPageUserInfo.fullname ?? "",
-                              style: TextStyleConstant.titleSmall.copyWith(
-                                  color: notifier.blackcolor,
-                                  )),
-                          Text(
-                            landingPageUserInfo.position ?? "",
-                            style: TextStyleConstant.bodyMedium.copyWith(
-                              color: notifier.blackcolor,)
+                          Container(
+                            decoration: BoxDecoration(color: ColorConst.mainColor.withOpacity(0.1), borderRadius: BorderRadius.circular(Dimens.size20)),
+                            padding: EdgeInsets.all(Dimens.size8),
+                            child: InkWell(
+                              onTap: () {
+                                EditTeacherItemPage(
+                                  actionType: ActionType.edit,
+                                  info: landingPageUserInfo,
+                                ).show(context,callBack: (p0) {
+                                  if(p0 == true)
+                                    {
+                                      BlocProvider.of<TeacherListBloc>(context).add(TeacherListInitEvent());
+                                    }
+                                },);
+                              },
+                              child: Icon(Icons.edit, color: ColorConst.mainColor,),
+                            ),
                           ),
-                          Gap(Dimens.size20)
+                          Gap(Dimens.size16),
+                          Container(
+                            decoration: BoxDecoration(color: ColorConst.mainColor.withOpacity(0.1), borderRadius: BorderRadius.circular(Dimens.size20)),
+                            padding: EdgeInsets.all(Dimens.size8),
+                            child: InkWell(
+                              onTap: () {
+                                ConfirmPopupPage(
+                                  title: "${L10nX.getStr.delete_str} ${L10nX.getStr.teacher_str.toLowerCase()}",
+                                  onAccept: () async {
+                                    MonitorLoading().showLoading("");
+                                    DeleteTeacherApi tagApi = DeleteTeacherApi(info: landingPageUserInfo);
+                                    dynamic data = await tagApi.call();
+                                    MonitorLoading().dismiss();
+                                    BlocProvider.of<TeacherListBloc>(context).add(TeacherListInitEvent());
+                                  },
+                                ).show(context);
+                              },
+                              child: Icon(Icons.delete, color: ColorConst.mainColor,),
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ),
-                ),
-                // SizedBox(height: 10),
-              ],
+                )
+              ]
             ),
           ),
         );
