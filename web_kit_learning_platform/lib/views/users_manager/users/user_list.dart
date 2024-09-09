@@ -1,3 +1,4 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_pagination/flutter_custom_pagination.dart';
@@ -6,10 +7,14 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
+import 'package:webkit/base/permission/permisstion.dart';
 import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
+import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
+import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
+import 'package:webkit/services/apis/roles/models/roles_info.dart';
 import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
 import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 import '../../../helpers/widgets/my_spacing.dart';
@@ -170,18 +175,19 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                 Container(
                   //height: Dimens.size40,
                   constraints: BoxConstraints(
-                      maxWidth:  constraints.maxWidth> 800?400:250
+                      maxWidth:  constraints.maxWidth> Dimens.size800?Dimens.size600:Dimens.size250
                   ),
                   child: Form(
                     key: formKey,
                     child: Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Expanded(
                           child: TextFormField(
                             maxLines: 1,
                             controller: textEditingController,
                             onChanged: (value) {
-
+                    
                             },
                             onFieldSubmitted: (value) {
                               BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
@@ -213,13 +219,18 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                                 floatingLabelBehavior: FloatingLabelBehavior.auto),
                           ),
                         ),
+                        Gap(Dimens.size12),
+                        roleDropDownSearch(state: state, context: context, onChange: (p0) {
+                          BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(
+                              searchCommonRequest: state.searchCommonRequest!.copyWith(roleId: p0?.id)));
+                        },)
                       ],
                     ),
                   ),
                 ),
                 Gap(Dimens.size16),
                 Visibility(
-                  visible: constraints.maxWidth> 800,
+                  visible: constraints.maxWidth> Dimens.size800,
                   child: ActionButton1(
                     text: L10nX.getStr.search,
                     onTap: () {
@@ -228,7 +239,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                   ),
                 ),
                 Visibility(
-                  visible: constraints.maxWidth< 800,
+                  visible: constraints.maxWidth< Dimens.size800,
                   child: InkWell(
                       onTap: () {
                         BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
@@ -245,7 +256,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                 children: [
                   Gap(Dimens.size10),
                   Visibility(
-                    visible: constraints.maxWidth< 800,
+                    visible: constraints.maxWidth< Dimens.size800,
                     child: InkWell(
                         onTap: () {
                           CreateEditLesson(lessonActionType: ActionType.create,).show(context);
@@ -253,7 +264,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                         child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
                   ),
                   Visibility(
-                    visible: constraints.maxWidth >800,
+                    visible: constraints.maxWidth >Dimens.size800,
                     child: ActionButton1(
                       preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,size: Dimens.size15,),
                       text: L10nX.getStr.add_new_str,
@@ -393,13 +404,21 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                                   alignment: Alignment.center,
                                   child: Text(L10nX.getStr.positions))),
                           GridColumn(
-                              columnName: L10nX.getStr.type,
+                              columnName: L10nX.getStr.role_str,
                               maximumWidth: Dimens.size150,
                               minimumWidth: Dimens.size120,
                               label: Container(
                                   padding: EdgeInsets.all(8.0),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.type))),
+                                  child: Text(L10nX.getStr.role_str))),
+                          GridColumn(
+                              columnName: L10nX.getStr.created_at,
+                              maximumWidth: Dimens.size150,
+                              minimumWidth: Dimens.size120,
+                              label: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  alignment: Alignment.center,
+                                  child: Text(L10nX.getStr.created_at))),
                           GridColumn(
                               columnName: L10nX.getStr.action_str,
                               minimumWidth: Dimens.size180,
@@ -418,7 +437,69 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
         ));
 
   }
-  
+
+ Widget roleDropDownSearch({
+   Function(RoleInfo?)?onChange,
+   required BuildContext context,
+   required UserListState state
+ }) {
+   return SizedBox(
+     width: Dimens.size150,
+     child: FutureBuilder(
+       future: PermissionManager().getRoleModel(),
+       builder: (context, snapshot) {
+         RolesListResponseModel? rolesListResponseModel = RolesListResponseModel(content: []);
+         if(snapshot.hasData){
+           rolesListResponseModel = snapshot.data?? RolesListResponseModel(content: []);
+           if((rolesListResponseModel.content??[]).where((element) => (element.id??'').isEmpty,).isEmpty)
+             {
+               (rolesListResponseModel.content??[]).insert(0, RoleInfo(name: L10nX.getStr.all_str, id: ""));
+             }
+         }
+         return DropdownSearch<RoleInfo>(
+           enabled: true,
+           
+           popupProps: PopupProps.menu(
+             constraints: BoxConstraints(
+               maxHeight: (65 + (rolesListResponseModel.content??[]).length * 50 < 210) ? 65 + (rolesListResponseModel.content??[]).length * 50 : 210,
+             ),
+             showSearchBox: true,
+             searchDelay: Duration(milliseconds: 300),
+             showSelectedItems: false,
+           ),
+           
+           items: (rolesListResponseModel.content??[]).toList(),
+           //selectedItem: selectedItem,
+           dropdownDecoratorProps: DropDownDecoratorProps(
+             dropdownSearchDecoration: InputDecoration(
+               enabled: true,
+               hintText: L10nX.getStr.role_str,
+               //labelText: value,
+               hintTextDirection: TextDirection.ltr,
+               border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+               enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+               focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+               contentPadding: MySpacing.all(Dimens.size16),
+               isCollapsed: true,
+               floatingLabelBehavior: FloatingLabelBehavior.never,
+               
+               constraints: BoxConstraints(
+                 //minHeight: Dimens.size45
+               ),
+             ),
+           ),
+           itemAsString: (item) => item.name??"",
+           onChanged: (value) {
+             if(onChange!=null)
+             {
+               onChange(value);
+             }
+           },
+         );
+       },
+     ),
+   );
+ }
 }
 
 class UserDataSource extends DataGridSource {
@@ -462,7 +543,8 @@ class UserDataSource extends DataGridSource {
             DataGridCell<Widget>(columnName: L10nX.getStr.phone_number, value: Text(e.phoneNumber??"", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.gender, value: Text(e.gender??"", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.positions, value: Text(e.position??"", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.type, value: Text(e.typeName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.role_str, value: Text(e.roleName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.created_at, value: Text(e.createdAt??"", style: TextStyleConstant.textStyleBlack14w400,)),
 
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str,
                 value: ItemViewEditDelete(

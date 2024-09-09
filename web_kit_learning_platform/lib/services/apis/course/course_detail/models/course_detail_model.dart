@@ -10,6 +10,7 @@ class CourseInfo {
   int? totalLectures;
   int? totalSubjects;
   String? producerName;
+  int? producerId;
   String? language;
   String? introduction;
   String? infoObj;
@@ -48,6 +49,7 @@ class CourseInfo {
         this.totalLectures,
         this.totalSubjects,
         this.producerName,
+        this.producerId,
         this.language,
         this.introduction,
         this.infoObj,
@@ -88,6 +90,7 @@ class CourseInfo {
     totalLectures = 0;
     totalSubjects = 0;
     producerName = "";
+    producerId=0;
     language = "";
     introduction = "";
     infoObj = "";
@@ -124,6 +127,7 @@ class CourseInfo {
     int? totalLectures,
     int? totalSubjects,
     String? producerName,
+    int? producerId,
     String? language,
     String? introduction,
     String? infoObj,
@@ -162,6 +166,7 @@ class CourseInfo {
       totalLectures : totalLectures ??this.totalLectures,
       totalSubjects : totalSubjects ??this.totalSubjects,
       producerName : producerName ??this.producerName,
+      producerId : producerId ??this.producerId,
       language : language ??this.language,
       introduction : introduction ??this.introduction,
       infoObj : infoObj ??this.infoObj,
@@ -244,6 +249,7 @@ class CourseInfo {
     totalLectures = json['total_lectures'];
     totalSubjects = json['total_subjects'];
     producerName = json['producer_name'];
+    producerId = json['producer_id'];
     language = json['language'];
     introduction = json['introduction'];
     infoObj = json['info_obj'];
@@ -296,6 +302,7 @@ class CourseInfo {
     data['total_lectures'] = totalLectures??0;
     data['total_subjects'] = totalSubjects??0;
     data['producer_name'] = producerName??"";
+    data['producer_id'] = producerId??0;
     if((language??"").isNotEmpty)
     {
       data['language'] = language??"";

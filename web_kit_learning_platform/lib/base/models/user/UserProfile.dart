@@ -38,6 +38,7 @@ class UserProfile {
   List<String>? permissionList;
   String? permission;
   String?roleId;
+  String?roleName;
   UserProfile(
       {this.id,
         this.fullName,
@@ -60,7 +61,8 @@ class UserProfile {
         this.permissionList,
         this.roleId,
         this.permission,
-        this.password
+        this.password,
+        this.roleName
       });
 
   UserProfile.fromJson(Map<String, dynamic> json) {
@@ -91,6 +93,7 @@ class UserProfile {
         permissionList = (json['permissions'] as String).split(',');
       }
     roleId = json['role_id']??json['roleId'];
+    roleName = json['roleName'];
   }
 
   Map<String, dynamic> toJson() {
@@ -106,7 +109,7 @@ class UserProfile {
     data['birthday'] = birthday??"";
     data['phone_number'] = phoneNumber??"";
     data['avatar'] = avatar??"";
-    data['type_name'] = typeName??"web";
+    data['type_name'] = (typeName??"").isNotEmpty?typeName:"User";
     data['created_at'] = createdAt??"";
     data['created_by'] = createdBy??"";
     data['updated_at'] = updatedAt??"";
@@ -117,6 +120,8 @@ class UserProfile {
     data['password'] = password;
     data['permissions'] = permission;
     data['roleId'] = roleId;
+    data['roleName'] = roleName;
+
     return data;
   }
   List<String> getPermission(){
@@ -145,6 +150,7 @@ class UserProfile {
     List<String>? permissionList,
     String? permission,
     String?roleId,
+    String?roleName,
     String?password
   }) {
     return UserProfile(
@@ -170,6 +176,7 @@ class UserProfile {
       permission: permission ?? this.permission,
       roleId: roleId ?? this.roleId,
       password: password ?? this.password,
+      roleName: roleName ?? this.roleName,
 
     );
   }
