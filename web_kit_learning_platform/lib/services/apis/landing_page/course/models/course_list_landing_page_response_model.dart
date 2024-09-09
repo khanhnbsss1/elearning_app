@@ -63,6 +63,20 @@ class CourseLandingPageInfo extends CourseInfo{
     introduction = json['introduction'];
   }
 
+  CourseLandingPageInfo.fromCourseInfo(CourseInfo courseInfo){
+    id = courseInfo.id;
+    name = courseInfo.name;
+    image = courseInfo.image;
+    producerName = courseInfo.producerName;
+    totalLectures = courseInfo.totalLectures;
+    totalSubjects = courseInfo.totalSubjects;
+    language = courseInfo.language;
+    price = courseInfo.price;
+    createdAt = courseInfo.createdAt;
+    updatedAt = courseInfo.updatedAt;
+    rating = courseInfo.rating;
+    introduction = courseInfo.introduction;
+  }
   @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

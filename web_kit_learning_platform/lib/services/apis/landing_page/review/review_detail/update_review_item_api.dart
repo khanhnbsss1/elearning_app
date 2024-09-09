@@ -1,21 +1,16 @@
 
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-import 'package:webkit/services/apis/category/models/category_info.dart';
-import 'package:webkit/services/apis/tags/models/tag_info.dart';
+import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 
-import 'models/create_role_request_info.dart';
-import 'models/roles_info.dart';
+import '../models/landing_page_review_list_response_model.dart';
 
 
-class UpdateUserRoleApi extends BaseApiRequest {
-  String userId;
-  String roleId;
-  UpdateUserRoleApi({required this.userId, required this.roleId}):super(
-    serviceType: SERVICE_TYPE.AUTHEN,
-    apiName: ApiName.getInstance().editUserRoles,
-    isShowToastError: false,
-    isShowErrorPopup: false
+class UpdateReviewApi extends BaseApiRequest {
+  ReviewLandingPageInfo info;
+  UpdateReviewApi({required this.info}):super(
+    serviceType: SERVICE_TYPE.LandingPages,
+    apiName: ApiName.getInstance().updateLandingPageReview,
   );
 
   Future<dynamic> call() async {
@@ -29,10 +24,7 @@ class UpdateUserRoleApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    await setApiBody({
-      "userId":userId,
-      "roleId":roleId
-    });
+    await setApiBody(info.toJson());
   }
 
   @override

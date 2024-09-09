@@ -6629,6 +6629,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Add student review`
+  String get add_review_user {
+    return Intl.message(
+      'Add student review',
+      name: 'add_review_user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add teacher review`
+  String get add_review_teacher {
+    return Intl.message(
+      'Add teacher review',
+      name: 'add_review_teacher',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add teacher`
+  String get add_teacher {
+    return Intl.message(
+      'Add teacher',
+      name: 'add_teacher',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit student review`
+  String get edit_review_user {
+    return Intl.message(
+      'Edit student review',
+      name: 'edit_review_user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit teacher review`
+  String get edit_review_tacher {
+    return Intl.message(
+      'Edit teacher review',
+      name: 'edit_review_tacher',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit teacher`
+  String get edit_teacher {
+    return Intl.message(
+      'Edit teacher',
+      name: 'edit_teacher',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete student review`
+  String get delete_review_user {
+    return Intl.message(
+      'Delete student review',
+      name: 'delete_review_user',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete teacher review`
+  String get delete_review_tacher {
+    return Intl.message(
+      'Delete teacher review',
+      name: 'delete_review_tacher',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete teacher`
+  String get delete_teacher {
+    return Intl.message(
+      'Delete teacher',
+      name: 'delete_teacher',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

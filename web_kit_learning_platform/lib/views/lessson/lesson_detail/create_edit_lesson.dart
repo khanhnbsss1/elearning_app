@@ -65,7 +65,6 @@ class _CreateEditLesson extends State<CreateEditLesson>
     // TODO: implement initState
     super.initState();
     enableEdit = widget.lessonActionType!=ActionType.view;
-
   }
   @override
   Widget build(BuildContext context) {

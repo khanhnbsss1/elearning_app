@@ -53,6 +53,8 @@ class AppPages {
 }
 abstract class Routes {
   static const landingPageRoute = Paths.landingPagePath;
+  static const editLandingPageRoute = Paths.editLandingPageRoute;
+
   static const homeRoute = Paths.homePath;
   static const loginRoute = Paths.loginPath;
   static const loginRoute1 = Paths.loginPath1;
@@ -151,6 +153,8 @@ abstract class Routes {
 
 abstract class Paths {
   static const landingPagePath = "/landing_page";
+  static const editLandingPageRoute = "/editLandingPageRoute";
+  
   static const homePath = "/";
   static const loginPath = "/auth/login";
   static const loginPath1 = "/auth/login1";

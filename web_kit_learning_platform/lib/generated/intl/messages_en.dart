@@ -46,8 +46,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "add_new_str": MessageLookupByLibrary.simpleMessage("Add new"),
         "add_product": MessageLookupByLibrary.simpleMessage("Add product"),
         "add_products": MessageLookupByLibrary.simpleMessage("Add products"),
+        "add_review_teacher":
+            MessageLookupByLibrary.simpleMessage("Add teacher review"),
+        "add_review_user":
+            MessageLookupByLibrary.simpleMessage("Add student review"),
         "add_selection": MessageLookupByLibrary.simpleMessage("Add choice"),
         "add_tags": MessageLookupByLibrary.simpleMessage("Add tags"),
+        "add_teacher": MessageLookupByLibrary.simpleMessage("Add teacher"),
         "adjust_your_course_availability_date_str":
             MessageLookupByLibrary.simpleMessage(
                 "Adjust your course availability date"),
@@ -209,9 +214,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "default_tabs": MessageLookupByLibrary.simpleMessage("Default tabs"),
         "delete_lesson_str":
             MessageLookupByLibrary.simpleMessage("Delete a lesson"),
+        "delete_review_tacher":
+            MessageLookupByLibrary.simpleMessage("Delete teacher review"),
+        "delete_review_user":
+            MessageLookupByLibrary.simpleMessage("Delete student review"),
         "delete_str": MessageLookupByLibrary.simpleMessage("Delete"),
         "delete_subject_str":
             MessageLookupByLibrary.simpleMessage("Delete a topic"),
+        "delete_teacher":
+            MessageLookupByLibrary.simpleMessage("Delete teacher"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "detail_str": MessageLookupByLibrary.simpleMessage("Detail"),
         "dialog_title": MessageLookupByLibrary.simpleMessage("Dialog title"),
@@ -241,7 +252,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Edit landing page"),
         "edit_lesson_str":
             MessageLookupByLibrary.simpleMessage("Edit a lesson"),
+        "edit_review_tacher":
+            MessageLookupByLibrary.simpleMessage("Edit teacher review"),
+        "edit_review_user":
+            MessageLookupByLibrary.simpleMessage("Edit student review"),
         "edit_str": MessageLookupByLibrary.simpleMessage("Edit"),
+        "edit_teacher": MessageLookupByLibrary.simpleMessage("Edit teacher"),
         "elevated_button":
             MessageLookupByLibrary.simpleMessage("Elevated button"),
         "elevated_rounded_button":

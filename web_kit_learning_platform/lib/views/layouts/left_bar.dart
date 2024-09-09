@@ -317,7 +317,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       ),
                       MenuItem(
                         title: L10nX.getStr.edit_landing_page,
-                        route:  Routes.landingPageRoute,
+                        route:  Routes.editLandingPageRoute,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
                       ),
                     ],

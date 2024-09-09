@@ -197,7 +197,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                     {
                                       if(roleId != widget.userProfile?.roleId)
                                         {
-                                          UpdateUserRoleApi updateUserRoleApi = UpdateUserRoleApi(userId: widget.userProfile!.id!, roleId: roleId!);
+                                          UpdateUserRoleApi updateUserRoleApi = UpdateUserRoleApi(userId: widget.userProfile!.accountId!, roleId: roleId,);
                                           dynamic data = await updateUserRoleApi.call();
                                         }
                                       if(widget.editSelfProfile==true)

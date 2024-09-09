@@ -12,8 +12,10 @@ import '../../mediaquery/mq.dart';
 import 'bloc/teacher_list_bloc.dart';
 
 class TeacherList extends StatefulWidget {
-  const TeacherList({super.key});
-
+   TeacherList({super.key, this.enableEdit}){
+     enableEdit??=false;
+   }
+  bool ? enableEdit;
   @override
   State<TeacherList> createState() => _TeacherListState();
 }

@@ -39,6 +39,7 @@ class UserProfile {
   String? permission;
   String?roleId;
   String?roleName;
+  String? accountId;
   UserProfile(
       {this.id,
         this.fullName,
@@ -62,7 +63,8 @@ class UserProfile {
         this.roleId,
         this.permission,
         this.password,
-        this.roleName
+        this.roleName,
+        this.accountId
       });
 
   UserProfile.fromJson(Map<String, dynamic> json) {
@@ -82,6 +84,7 @@ class UserProfile {
     createdBy = json['created_by'];
     updatedAt = json['updated_at'];
     updatedBy = json['updated_by'];
+    accountId = json['account_id'];
     countryName = json['country_name'];
     position = json['position'];
     email = json['email'];
@@ -100,14 +103,14 @@ class UserProfile {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['fullName'] = fullName??"";
-    data['user_name'] = userName??"";
-    data['username'] = userName??"";
+    data['user_name'] = (userName??"").trim();
+    data['username'] = (userName??"").trim();
     data['bank_account'] = bankAccount??"";
     data['bank_name'] = bankName??"";
     data['identity_id'] = identityId;
     data['gender'] = gender??"";
     data['birthday'] = birthday??"";
-    data['phone_number'] = phoneNumber??"";
+    data['phone_number'] = (phoneNumber??"").trim();
     data['avatar'] = avatar??"";
     data['type_name'] = (typeName??"").isNotEmpty?typeName:"User";
     data['created_at'] = createdAt??"";
@@ -116,11 +119,12 @@ class UserProfile {
     data['updated_by'] = updatedBy??"";
     data['country_name'] = countryName??"";
     data['position'] = position??"";
-    data['email'] = email??"";
+    data['email'] = (email??"").trim();
     data['password'] = password;
     data['permissions'] = permission;
     data['roleId'] = roleId;
-    data['roleName'] = roleName;
+    data['roleName'] = (roleName??'').trim();
+    data['account_id'] = accountId;
 
     return data;
   }

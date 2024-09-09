@@ -29,8 +29,10 @@ enum SampleItem { itemOne, itemTwo, itemThree }
 enum SampleItem2 { itemOne, itemTwo, itemThree, itemfour }
 
 class LandingPageScreen extends StatefulWidget {
-  const LandingPageScreen({super.key});
-
+  LandingPageScreen({super.key, this.enableEdit}){
+    enableEdit??=false;
+  }
+  bool ? enableEdit;
   @override
   State<LandingPageScreen> createState() => _LandingPageScreenState();
 }
@@ -244,7 +246,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
           key: navigationKey[3],
           height: width < Dimens.size550 ? Dimens.size50 : Dimens.size100,
         ),
-        const TeacherList(),
+        TeacherList(enableEdit: widget.enableEdit,),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 1 / 4),
           child: Divider(
@@ -255,7 +257,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
           key: navigationKey[4],
           height: width < Dimens.size550 ? Dimens.size50 : Dimens.size100,
         ),
-        const LandingPageCourseList(),
+        LandingPageCourseList(enableEdit: widget.enableEdit,),
         SizedBox(
           key: navigationKey[5],
           height: width < Dimens.size550 ? Dimens.size50 : Dimens.size100,
@@ -263,6 +265,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
         ReviewList(
           //key: UniqueKey(),
           typeName: UserTypeName.teacher,
+          enableEdit: widget.enableEdit,
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * 1 / 4),
@@ -288,6 +291,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
         ReviewList(
           // key: UniqueKey(),
           typeName: UserTypeName.user,
+          enableEdit: widget.enableEdit,
         ),
         SizedBox(
           key: navigationKey[8],

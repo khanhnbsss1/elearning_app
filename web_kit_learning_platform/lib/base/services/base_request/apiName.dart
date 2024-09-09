@@ -51,7 +51,10 @@ class ApiName {
   final String getCourseListLandingPage = "/get-landingpage-course";
   final String getTeacherListLandingPage = "/get-landingpage-teacher";
   final String getReviewListLandingPage = "/get-landingpage-review";
-  
+
+  final String createLandingPageReview = "/create-landingpage-review";
+  final String updateLandingPageReview = "/update-landingpage-review";
+  final String deleteLandingPageReview = "/delete-landingpage-review";
   /// thong tin nguoi dung
   final String createUser = "/register-role";
   final String editUser = "/edit-user";

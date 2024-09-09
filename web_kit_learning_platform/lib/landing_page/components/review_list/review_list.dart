@@ -5,17 +5,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/landing_page/mediaquery/mq.dart';
 import 'package:readmore/readmore.dart';
 import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 import 'package:webkit/services/apis/landing_page/review/models/landing_page_review_list_response_model.dart';
+import 'package:webkit/services/apis/landing_page/review/review_detail/delete_review_item_api.dart';
 
 import '../colornotifier.dart';
 import 'bloc/review_list_bloc.dart';
+import 'edit_review_item.dart';
 
 class ReviewList extends StatefulWidget {
-  ReviewList({super.key, required this.typeName});
-
+  ReviewList({super.key, required this.typeName, this.enableEdit}){
+    enableEdit??=false;
+  }
+  bool ? enableEdit;
   final UserTypeName typeName;
 
   @override
@@ -62,7 +67,7 @@ class _ReviewListState extends State<ReviewList>
           }, builder: (BuildContext context, state) {
             return LayoutBuilder(
               builder: (context, constraints) {
-                return buildReviewList(constraints: constraints, state: state);
+                return buildReviewList(constraints: constraints, state: state, context: context);
               },
             );
           })),
@@ -70,7 +75,7 @@ class _ReviewListState extends State<ReviewList>
   }
 
   Widget buildReviewList(
-      {required BoxConstraints constraints, required ReviewListState state}) {
+      {required BoxConstraints constraints, required ReviewListState state, required BuildContext context}) {
     int lengthOfView = (state.isExpand ?? false)
         ? constraints.maxWidth < 1300
             ? 6
@@ -102,17 +107,37 @@ class _ReviewListState extends State<ReviewList>
               child: Column(
                 children: [
                   Center(
-                    child: Text(
-                        state.typeName == UserTypeName.teacher
-                            ? L10nX.getStr.teacher_review_list_str
-                            : L10nX.getStr.student_review_list_str,
-                        textAlign: TextAlign.center,
-                        style: TextStyleConstant
-                            .titleTextColorOnBackgroundColorStyle14w400
-                            .copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: constraints.maxWidth < 550 ? 28 : 45,
-                                color: notifier.blackcolor)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                            state.typeName == UserTypeName.teacher
+                                ? L10nX.getStr.teacher_review_list_str
+                                : L10nX.getStr.student_review_list_str,
+                            textAlign: TextAlign.center,
+                            style: TextStyleConstant
+                                .titleTextColorOnBackgroundColorStyle14w400
+                                .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: constraints.maxWidth < 550 ? 28 : 45,
+                                    color: notifier.blackcolor)),
+                        Gap(Dimens.size16),
+                        Visibility(
+                          visible: widget.enableEdit??false,
+                          child: InkWell(
+                            onTap: () {
+                              EditReviewItemPage(
+                                actionType: ActionType.create,
+                                userTypeName: state.typeName,
+                                info: null,
+                              ).show(context);
+                            },
+                            child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor, size: Dimens.size30,),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: constraints.maxWidth < 550 ? 10 : 20,
@@ -124,19 +149,72 @@ class _ReviewListState extends State<ReviewList>
                         List<Widget> listOfReview = List.empty(growable: true);
                         for (ReviewLandingPageInfo reviewLandingPageInfo
                             in state.reviewListLandingPageResponseModel?.data ??
-                                []) {
-                          listOfReview.add(
-                            (state.typeName == UserTypeName.user)
-                                ? buildReviewItemUser(
+                                []) {listOfReview.add(
+                            Stack(
+                              alignment: Alignment.bottomRight,
+                              children: [
+                                (state.typeName == UserTypeName.user)
+                                    ? buildReviewItemUser(
                                     constraints: constraints,
                                     reviewLandingPageInfo:
-                                        reviewLandingPageInfo,
+                                    reviewLandingPageInfo,
                                     state: state)
-                                : buildReviewItemTeacher(
+                                    : buildReviewItemTeacher(
                                     constraints: constraints,
                                     reviewLandingPageInfo:
-                                        reviewLandingPageInfo,
+                                    reviewLandingPageInfo,
                                     state: state),
+                                Visibility(
+                                  visible: (widget.enableEdit ?? false),
+                                  child: Align(
+                                    alignment: Alignment.topCenter,
+                                    child: Padding(
+                                      padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size12),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(color: ColorConst.mainColor.withOpacity(0.1), borderRadius: BorderRadius.circular(Dimens.size20)),
+                                            padding: EdgeInsets.all(Dimens.size8),
+                                            child: InkWell(
+                                              onTap: () {
+                                                EditReviewItemPage(
+                                                  info: reviewLandingPageInfo,
+                                                  userTypeName: state.typeName,
+                                                  actionType: ActionType.edit,
+                                                ).show(context);
+                                              },
+                                              child: Icon(Icons.edit, color: ColorConst.mainColor,),
+                                            ),
+                                          ),
+                                          Gap(Dimens.size16),
+                                          Container(
+                                            decoration: BoxDecoration(color: ColorConst.mainColor.withOpacity(0.1), borderRadius: BorderRadius.circular(Dimens.size20)),
+                                            padding: EdgeInsets.all(Dimens.size8),
+                                            child: InkWell(
+                                              onTap: () {
+                                                ConfirmPopupPage(
+                                                  title: "${L10nX.getStr.delete_str} ${L10nX.getStr.review_str}",
+                                                  onAccept: () async {
+                                                    MonitorLoading().showLoading("");
+                                                    DeleteReviewApi tagApi = DeleteReviewApi(info: reviewLandingPageInfo);
+                                                    dynamic data = await tagApi.call();
+                                                    MonitorLoading().dismiss();
+                                                    BlocProvider.of<ReviewListBloc>(context).add(ReviewListInitEvent());
+                                                  },
+                                                ).show(context);
+                                              },
+                                              child: Icon(Icons.delete, color: ColorConst.mainColor,),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                           
                           );
                         }
                         return Center(
@@ -285,9 +363,11 @@ class _ReviewListState extends State<ReviewList>
                     child: reviewLandingPageInfo.avatar!.isNotEmpty
                         ? ImageManager().getImageByUrl(
                             reviewLandingPageInfo.avatar ?? "",
-                            boxFit: BoxFit.fill)
-                        : Image.asset('assets/deshboard/latestdeals.png',
-                            fit: BoxFit.fill),
+                            height: Dimens.size250,
+                            boxFit: BoxFit.cover)
+                        : Image.asset('assets/deshboard/latestdeals.png', 
+                        height: Dimens.size250,
+                            fit: BoxFit.cover),
                   ),
                 ),
                 Expanded(
@@ -336,7 +416,7 @@ class _ReviewListState extends State<ReviewList>
                                   maxHeight: constraints.maxWidth / 1.5),
                               child: SingleChildScrollView(
                                 child: ReadMoreText(
-                                  ("\"${(reviewLandingPageInfo.review! ) * 10}\" ") ??
+                                  ("\"${(reviewLandingPageInfo.review! )}\" ") ??
                                       "",
                                   trimMode: TrimMode.Line,
                                   trimLines: 3,
@@ -416,7 +496,7 @@ class _ReviewListState extends State<ReviewList>
                   child: Center(
                     child: SingleChildScrollView(
                       child: ReadMoreText(
-                        ("\"${(reviewLandingPageInfo.review! ) * 10}\" ") ??
+                        ("\"${(reviewLandingPageInfo.review! )}\" ") ??
                             "",
                         trimMode: TrimMode.Line,
                         trimLines: 3,
@@ -518,8 +598,8 @@ class _ReviewListState extends State<ReviewList>
                 Expanded(
                     child: Center(
                       child: SingleChildScrollView(
-                                          child: ReadMoreText(
-                      ("\"${("${reviewLandingPageInfo.review!} ") * 20}\"") ?? "",
+                      child: ReadMoreText(
+                      ("\"${("${reviewLandingPageInfo.review!} ")}\"") ?? "",
                       trimMode: TrimMode.Line,
                       trimLines: 2,
                       colorClickableText: Colors.pink,

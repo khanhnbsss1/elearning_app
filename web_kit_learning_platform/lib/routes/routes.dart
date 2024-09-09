@@ -109,9 +109,23 @@ getPageRoute() {
         page: () =>  DashboardPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]),
     GetPage(
-        name: Routes.landingPageRoute, 
-      
-        page: () =>  LandingPageSplash(key: UniqueKey(),),),
+        name: Routes.landingPageRoute,
+        page: () {
+          final arguments = Get.arguments??{};
+          return LandingPageSplash(
+            key: UniqueKey(),
+          );
+        },
+    ),
+    GetPage(
+      name: Routes.editLandingPageRoute,
+      page: () {
+        return LandingPageSplash(
+          key: UniqueKey(),
+          enableEdit: true,
+        );
+      },
+    ),
     GetPage(name: Routes.faqsRoute, page: () =>  FaqsPage()),
     
     ///--------------- Course ---------------///
