@@ -8,6 +8,7 @@ import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/services/apis/landing_page/review/models/landing_page_review_list_response_model.dart';
 import 'package:webkit/services/apis/landing_page/review/review_detail/add_review_item_api.dart';
+import 'package:webkit/services/apis/landing_page/teacher_list/models/landing_page_teacher_list_model.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 import 'package:webkit/services/apis/upload_file/upload_file_api.dart';
 
@@ -15,20 +16,20 @@ import '../../../services/apis/landing_page/review/review_detail/update_review_i
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 
-class EditReviewItemPage extends StatefulWidget{
+import '../../../services/apis/landing_page/teacher_list/teacher_detail/add_teacher_item_api.dart';
+import '../../../services/apis/landing_page/teacher_list/teacher_detail/update_teacher_item_api.dart';
+
+class EditTeacherItemPage extends StatefulWidget{
   ActionType? actionType;
-  UserTypeName? userTypeName;
-  EditReviewItemPage({this.info, this.actionType, this.userTypeName}){
-    info??=ReviewLandingPageInfo();
+  EditTeacherItemPage({this.info, this.actionType}){
+    info??=LandingPageUserInfo();
     actionType??=ActionType.create;
-    userTypeName??=UserTypeName.user;
-    
   }
-  ReviewLandingPageInfo?info;
+  LandingPageUserInfo?info;
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return EditReviewItemPageState();
+    return EditTeacherItemPageState();
   }
   
   
@@ -43,7 +44,7 @@ class EditReviewItemPage extends StatefulWidget{
         }
     },);
   }}
-class EditReviewItemPageState extends State<EditReviewItemPage>with UIMixin {
+class EditTeacherItemPageState extends State<EditTeacherItemPage>with UIMixin {
   TextEditingController nameController = TextEditingController();
   TextEditingController positionController = TextEditingController();
   TextEditingController reviewController = TextEditingController();
@@ -57,7 +58,6 @@ class EditReviewItemPageState extends State<EditReviewItemPage>with UIMixin {
       {
         nameController.text = widget.info?.name??"";
         positionController.text = widget.info?.position??"";
-        reviewController.text = widget.info?.review??"";
         fileController.text = widget.info?.avatar??"";
       }
   }
@@ -65,9 +65,7 @@ class EditReviewItemPageState extends State<EditReviewItemPage>with UIMixin {
   Widget build(BuildContext context) {
     // TODO: implement build
     return AlertDialog(
-      title: Text(widget.actionType ==ActionType.create? (
-      widget.userTypeName == UserTypeName.user?L10nX.getStr.add_review_user: L10nX.getStr.add_review_teacher
-      ): (widget.userTypeName == UserTypeName.user?L10nX.getStr.edit_review_user: L10nX.getStr.edit_review_tacher)),
+      title: Text(widget.actionType ==ActionType.create? L10nX.getStr.add_teacher:  L10nX.getStr.edit_teacher),
       content: Container(
         width: MediaQuery.of(context).size.width/3,
        // height: MediaQuery.of(context).size.height*2/3,
@@ -122,30 +120,6 @@ class EditReviewItemPageState extends State<EditReviewItemPage>with UIMixin {
             ),
             Gap(Dimens.size16),
             WidgetWithColumnTitleCommon(
-              title: L10nX.getStr.review_str,
-              isRequirement: true,
-              child: TextFormField(
-                controller: reviewController,
-                keyboardType: TextInputType.multiline,
-                onChanged: (value) {
-                  widget.info?.position = value;
-                },
-                minLines: 3,
-                maxLines: 7,
-                enabled: widget.actionType != ActionType.view,
-                decoration: InputDecoration(
-                    labelText: L10nX.getStr.review_str,
-                    labelStyle: MyTextStyle.bodySmall(xMuted: true),
-                    border: outlineInputBorder,
-                    contentPadding: EdgeInsets.all(16),
-                    isCollapsed: true,
-                    floatingLabelBehavior:
-                    FloatingLabelBehavior.never),
-              ),
-            ),
-            Gap(Dimens.size16),
-        
-            WidgetWithColumnTitleCommon(
               title: L10nX.getStr.background_image_str,
               isRequirement: true,
               child: TextFormField(
@@ -185,7 +159,6 @@ class EditReviewItemPageState extends State<EditReviewItemPage>with UIMixin {
                           fileController.text = result.files.first.name ?? "";
                           widget.info?.fileId = resultUpload.id  ;
                           widget.info?.avatar = resultUpload.link  ;
-
                         });
                       }
                     },
@@ -211,15 +184,13 @@ class EditReviewItemPageState extends State<EditReviewItemPage>with UIMixin {
 
                   widget.info?.name = nameController.text;
                   widget.info?.position = positionController.text;
-                  widget.info?.review = reviewController.text;
-                  widget.info?.typeName = widget.userTypeName== UserTypeName.user?"User": "Teacher";
                   widget.info?.isShow = 1;
                   if(widget.info?.id==null){ /// th edit tag
-                    tagApi = AddReviewApi(info: widget.info!);
+                    tagApi = AddTeacherApi(info: widget.info!);
                   }
                   else
                   {
-                    tagApi = UpdateReviewApi(info: widget.info!);
+                    tagApi = UpdateTeacherApi(info: widget.info!);
                   }
                   MonitorLoading().showLoading("");
                   dynamic data = await tagApi.call();

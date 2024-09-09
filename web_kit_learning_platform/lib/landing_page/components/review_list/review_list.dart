@@ -131,7 +131,13 @@ class _ReviewListState extends State<ReviewList>
                                 actionType: ActionType.create,
                                 userTypeName: state.typeName,
                                 info: null,
-                              ).show(context);
+                              ).show(context, callBack: (p0) {
+                                if(p0==true)
+                                  {
+                                    BlocProvider.of<ReviewListBloc>(context).add(ReviewListInitEvent());
+
+                                  }
+                              },);
                             },
                             child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor, size: Dimens.size30,),
                           ),
@@ -182,7 +188,12 @@ class _ReviewListState extends State<ReviewList>
                                                   info: reviewLandingPageInfo,
                                                   userTypeName: state.typeName,
                                                   actionType: ActionType.edit,
-                                                ).show(context);
+                                                ).show(context, callBack: (p0) {
+                                                  if(p0==true)
+                                                    {
+                                                      BlocProvider.of<ReviewListBloc>(context).add(ReviewListInitEvent());
+                                                    }
+                                                },);
                                               },
                                               child: Icon(Icons.edit, color: ColorConst.mainColor,),
                                             ),
@@ -202,7 +213,7 @@ class _ReviewListState extends State<ReviewList>
                                                     MonitorLoading().dismiss();
                                                     BlocProvider.of<ReviewListBloc>(context).add(ReviewListInitEvent());
                                                   },
-                                                ).show(context);
+                                                ).show(context,);
                                               },
                                               child: Icon(Icons.delete, color: ColorConst.mainColor,),
                                             ),
