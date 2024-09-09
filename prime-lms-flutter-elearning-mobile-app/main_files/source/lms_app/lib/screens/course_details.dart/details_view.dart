@@ -50,8 +50,6 @@ class CourseDetailsView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    bool check = false;
-    final myCourses = ref.watch(myCoursesProvider);
     return Scaffold(
         bottomNavigationBar: Wrap(
           alignment: WrapAlignment.center,
@@ -78,98 +76,6 @@ class CourseDetailsView extends ConsumerWidget {
                         onPressed: () => Navigator.pop(context),
                         icon: const Icon(FeatherIcons.chevronLeft),
                       ),
-                      title: (!checkRegisteredCourse(
-                              courseInfo, myCourses.value ?? []))
-                          ? MyButton(
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text('register'.tr()),
-                                      content:
-                                          Text('register-content-popup'.tr()),
-                                      actions: <Widget>[
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            MyButton(
-                                              backgroundColor: Colors.white,
-                                              child: Text(
-                                                'cancel'.tr(),
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                              onTap: () {
-                                                Navigator.of(context)
-                                                    .pop(false);
-                                              },
-                                            ),
-                                            MyButton(
-                                              backgroundColor: Theme.of(context)
-                                                  .primaryColor,
-                                              child: Text(
-                                                'confirm'.tr(),
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                              onTap: () async {
-                                                Navigator.of(context).pop(true);
-                                                RegisterCourseApi
-                                                    registerCourseApi =
-                                                    RegisterCourseApi(
-                                                        courseId:
-                                                            courseInfo.id!);
-                                                check =
-                                                    await registerCourseApi
-                                                        .call();
-                                              },
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    );
-                                  },
-                                ).then((confirm) {
-                                  if (confirm) {
-                                    if (courseInfo.isPayment == 0) {
-                                      ToastUtils.showSnackBar(
-                                          context,
-                                          "register-success".tr());
-                                      NavigationService()
-                                          .navigateToScreen(
-                                          CurriculamScreen(
-                                            course: courseInfo,
-                                          ));
-                                    } else {
-                                      ToastUtils.showSnackBar(context, 'message');
-                                    }
-                                  }
-                                });
-                              },
-                              backgroundColor: Theme.of(context).primaryColor,
-                              child: Text('register-course'.tr(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(
-                                        color: Colors.white,
-                                      )))
-                          : MyButton(
-                              onTap: () {
-                                NavigationService().navigateToScreen(CurriculamScreen(course: courseInfo));
-                              },
-                              child: Text('lets-study'.tr(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(
-                                        color: Colors.white,
-                                      ))),
-                      centerTitle: true,
                       actions: [
                         // BookmarkButton(course: courseInfo),
                         // ReviewButton(course: courseInfo),
@@ -203,10 +109,5 @@ class CourseDetailsView extends ConsumerWidget {
                 return const LoadingIndicatorWidget();
               }
             }));
-  }
-
-  static bool checkRegisteredCourse(CourseInfo courseInfo, List<CourseInfo> myCourse) {
-    print(courseInfo.id);
-    return myCourse.any((e) => e.id == courseInfo.id);
   }
 }

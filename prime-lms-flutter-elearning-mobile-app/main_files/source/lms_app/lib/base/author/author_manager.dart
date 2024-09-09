@@ -72,11 +72,6 @@ class AuthorManager {
 
   Future<void> refreshToken() async {
     if(allowCallRefreshToken==false) {
-      AuthorManager().handleLogout();
-      NavigationService().popToFirst();
-      NavigationService().replaceScreen(const LoginScreen(popUpScreen: false,));
-      ToastUtils.showToastError("log-out-expired-token".tr());
-      return;
     }
     allowCallRefreshToken = false;
     AuthInfo? authInfo = getAuthInfo();

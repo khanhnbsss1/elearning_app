@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:lms_app/base/base.export.dart';
 import 'package:lms_app/base/device_elearning/device_manager.dart';
@@ -32,9 +33,11 @@ class RefreshTokenApi extends BaseApiRequest {
        else
          {
            /// neu refresh token het han thi out ra ngoai landing page
-           // AuthorManager().handleLogout();
-           // NavigationService().navigateToScreen(const LoginScreen(popUpScreen: false,));
-           // ToastUtils.showToastError(data.message??"");
+           AuthorManager().handleLogout();
+           NavigationService().popToFirst();
+           NavigationService().replaceScreen(const LoginScreen(popUpScreen: false,));
+           ToastUtils.showToastError("log-out-expired-token".tr());
+           return;
          }
 
      }

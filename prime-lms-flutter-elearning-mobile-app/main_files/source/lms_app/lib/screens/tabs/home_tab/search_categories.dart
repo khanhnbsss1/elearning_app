@@ -1,16 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/adapters.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lms_app/components/loading_tile.dart';
-import 'package:lms_app/screens/all_courses.dart/seach_courses_view.dart';
 import 'package:lms_app/screens/all_courses.dart/search_result.dart';
-import 'package:lms_app/services/api_service.dart';
 import '../../../services/apis/course/course_fillter/models/course_filtter_info.dart';
-import '../../../utils/next_screen.dart';
 import '../../all_courses.dart/courses_view.dart';
-import '../../home/home_bottom_bar.dart';
-import '../../home/home_view.dart';
 import 'home_categories.dart';
 
 final courseFilterInfoProvider =
@@ -29,125 +26,205 @@ class SearchCategories extends ConsumerStatefulWidget {
   ConsumerState<SearchCategories> createState() => _SearchCategoriesState();
 }
 
-class _SearchCategoriesState extends ConsumerState<SearchCategories> {
-  bool showCategories = true;
+class _SearchCategoriesState extends ConsumerState<SearchCategories> with TickerProviderStateMixin {
+  int selectedCategory = 0;
 
+  late TabController _controller;
+  @override
+  void initState() {
+    super.initState();
+    _controller = TabController(length: 2, vsync: this);
+  }
+  List<String> items = [
+    "Category",
+    "Author",
+  ];
+
+  /// List of body icon
+  List<String> icons = [
+    "assets/png/tag.png",
+    "assets/png/school.png"
+  ];
+  int current = 0;
   @override
   Widget build(BuildContext context) {
+
     final categories = ref.watch(homeCategoriesProvider);
     return (categories.hasValue == true)
-        ? Container(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        ? categories.when(
+            skipLoadingOnRefresh: false,
+            data: (categories) {
+              return Container(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        onTap: () {
-                          setState(() {
-                            showCategories = !showCategories;
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: (showCategories) ? Colors.black : Colors.black.withOpacity(0.1),
-                            ),
-                            borderRadius: const BorderRadius.all(Radius.circular(24)),
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          child:
-                            (showCategories) ? Row(
-                              children: [
-                                Text(
-                                  'Categories',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleMedium
-                                      ?.copyWith(fontWeight: FontWeight.bold),
-                                ).tr(),
-                              ],
-                            ) : Text(
-                              'Categories',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(fontWeight: FontWeight.w400),
-                            ).tr(),
-                        ),
-                      ),
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        onTap: () {
-                          setState(() {
-                            showCategories = !showCategories;
-                          });
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: (!showCategories) ? Colors.black : Colors.black.withOpacity(0.1),
-                            ),
-                            borderRadius: const BorderRadius.all(Radius.circular(24)),
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          child:
-                          (!showCategories) ? Row(
-                            children: [
-                              Text(
-                                'Author',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(fontWeight: FontWeight.bold),
-                              ).tr(),
-                            ],
-                          ) : Text(
-                            'Author',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(fontWeight: FontWeight.w400),
-                          ).tr(),
-                        ),
-                      ),
-                      // TextButton(
-                      //   onPressed: () {
-                      //     ref.read(navBarIndexProvider.notifier).state = 1;
-                      //     ref
-                      //         .read(homeTabControllerProvider.notifier)
-                      //         .state
-                      //         .animateToPage(1,
-                      //             duration: const Duration(milliseconds: 250),
-                      //             curve: Curves.easeIn);
-                      //   },
-                      //   style: TextButton.styleFrom(
-                      //       padding: const EdgeInsets.all(0)),
-                      //   child: Text(
-                      //     'view-all',
-                      //     style: Theme.of(context).textTheme.bodyMedium,
-                      //   ).tr(),
-                      // )
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     InkWell(
+                      //       splashColor: Colors.transparent,
+                      //       onTap: () {
+                      //         setState(() {
+                      //           showCategories = !showCategories;
+                      //         });
+                      //       },
+                      //       child: AnimatedContainer(
+                      //         duration: const Duration(milliseconds: 200),
+                      //         decoration: BoxDecoration(
+                      //           border: Border.all(
+                      //             color: (showCategories)
+                      //                 ? Colors.black
+                      //                 : Colors.black.withOpacity(0.1),
+                      //           ),
+                      //           borderRadius:
+                      //               const BorderRadius.all(Radius.circular(24)),
+                      //         ),
+                      //         padding: const EdgeInsets.all(8),
+                      //         child: (showCategories)
+                      //             ? Row(
+                      //                 children: [
+                      //                   Text(
+                      //                     'Categories',
+                      //                     style: Theme.of(context)
+                      //                         .textTheme
+                      //                         .titleMedium
+                      //                         ?.copyWith(
+                      //                             fontWeight: FontWeight.bold),
+                      //                   ).tr(),
+                      //                 ],
+                      //               )
+                      //             : Text(
+                      //                 'Categories',
+                      //                 style: Theme.of(context)
+                      //                     .textTheme
+                      //                     .titleMedium
+                      //                     ?.copyWith(
+                      //                         fontWeight: FontWeight.w400),
+                      //               ).tr(),
+                      //       ),
+                      //     ),
+                      //     InkWell(
+                      //       splashColor: Colors.transparent,
+                      //       onTap: () {
+                      //         setState(() {
+                      //           showCategories = !showCategories;
+                      //         });
+                      //       },
+                      //       child: AnimatedContainer(
+                      //         duration: const Duration(milliseconds: 200),
+                      //         decoration: BoxDecoration(
+                      //           border: Border.all(
+                      //             color: (!showCategories)
+                      //                 ? Colors.black
+                      //                 : Colors.black.withOpacity(0.1),
+                      //           ),
+                      //           borderRadius:
+                      //               const BorderRadius.all(Radius.circular(24)),
+                      //         ),
+                      //         padding: const EdgeInsets.all(8),
+                      //         child: (!showCategories)
+                      //             ? Row(
+                      //                 children: [
+                      //                   Text(
+                      //                     'Author',
+                      //                     style: Theme.of(context)
+                      //                         .textTheme
+                      //                         .titleMedium
+                      //                         ?.copyWith(
+                      //                             fontWeight: FontWeight.bold),
+                      //                   ).tr(),
+                      //                 ],
+                      //               )
+                      //             : Text(
+                      //                 'Author',
+                      //                 style: Theme.of(context)
+                      //                     .textTheme
+                      //                     .titleMedium
+                      //                     ?.copyWith(
+                      //                         fontWeight: FontWeight.w400),
+                      //               ).tr(),
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      Container(
+                          width: double.infinity,
+                          height: 65,
+                          margin: const EdgeInsets.all(5),
+                          child: ListView.builder(
+                              itemCount: 2,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          selectedCategory = index;
+                                        });
+                                      },
+                                      child: AnimatedContainer(
+                                        duration: const Duration(milliseconds: 300),
+                                        margin: const EdgeInsets.all(5),
+                                        width: (MediaQuery.of(context).size.width - 70)/2,
+                                        height: 55,
+                                        decoration: BoxDecoration(
+                                          color: selectedCategory == index
+                                              ? Colors.white70
+                                              : Colors.white54,
+                                          borderRadius: selectedCategory == index
+                                              ? BorderRadius.circular(12)
+                                              : BorderRadius.circular(7),
+                                          border: selectedCategory == index
+                                              ? Border.all(
+                                              color: Theme.of(context).primaryColor,
+                                              width: 2.5)
+                                              : null,
+                                        ),
+                                        child: Center(
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Image.asset(
+                                                icons[index],
+                                                width: 25,
+                                                height: 25,
+                                                color: selectedCategory == index
+                                                    ? Colors.black
+                                                    : Colors.grey.shade400,
+                                              ),
+                                              Text(
+                                                items[index],
+                                                style: GoogleFonts.ubuntu(
+                                                  fontWeight: FontWeight.w500,
+                                                  color: selectedCategory == index
+                                                      ? Colors.black
+                                                      : Colors.grey.shade400,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              })),
+                      // const SizedBox(height: 10),
+                      selectedCategory == 0
+                          ? getCategories(categories)
+                          : getAuthor(categories),
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  categories.when(
-                      skipLoadingOnRefresh: false,
-                      data: (categories) {
-                        return showCategories
-                            ? getCategories(categories)
-                            : getAuthor(categories);
-                      },
-                      error: (e, x) => Text('error: $e, $x'),
-                      loading: () =>
-                          const LoadingTile(height: 100, padding: 0)),
-                ],
-              ),
-            ),
+                ),
+              );
+            },
+            error: (e, x) => Text('error: $e, $x'),
+            loading: () => Container(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                child: const LoadingTile(height: 100, padding: 0)),
           )
         : const SizedBox();
   }
@@ -157,6 +234,7 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> {
     final subFilterInfo = ref.watch(subFilterInfoProvider);
     final authorFilterInfo = ref.watch(authorFilterProvider);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -247,7 +325,7 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> {
               )
             : const SizedBox(),
         const SizedBox(
-          height: 8,
+          height: 10,
         ),
         SearchResult(
           paddingAll: 0,
@@ -265,6 +343,7 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> {
     final subFilterInfo = ref.watch(subFilterInfoProvider);
     final authorFilterInfo = ref.watch(authorFilterProvider);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
@@ -321,6 +400,9 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> {
                 .toList(),
           ),
         ),
+        const SizedBox(
+          height: 10,
+        ),
         SearchResult(
           paddingAll: 0,
           producerId: authorFilterInfo.id,
@@ -332,3 +414,4 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> {
     );
   }
 }
+

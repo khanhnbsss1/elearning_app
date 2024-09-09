@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:lms_app/base/author/author_manager.dart';
 import '../../models/user/UserProfile.dart';
+import '../../services/apis/course/course_detail/models/course_detail_model.dart';
 import '../base.export.dart';
 import '../instance_mananger_elearning/instance_mananger.dart';
 import '../store/shared_preferences.dart';
@@ -105,6 +106,11 @@ class UserManager{
     await SharedPreferencesStorage().removeByKey(SharedPre.accountNearest);
     await SharedPreferencesStorage().removeByKey(SharedPre.passwordNearest);
     await SharedPreferencesStorage().removeByKey(SharedPre.rememberPassword);
+  }
+
+  bool checkRegisteredCourse(CourseInfo courseInfo, List<CourseInfo> myCourse) {
+    print(courseInfo.id);
+    return myCourse.any((e) => e.id == courseInfo.id);
   }
 
 }
