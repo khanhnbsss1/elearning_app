@@ -38,6 +38,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    List<String> notes = [];
     // final user = ref.watch(userDataProvider);
     return Column(children: [
       ListView.builder(
@@ -52,6 +53,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   LessonInfo lessonDetail = snapshot.data!;
+                  if (lessonDetail.note != null) notes = lessonDetail.note!.split('&&&&---&&&&');
                   return ListTile(
                       onTap: () => _onTap(context, lessonDetail, course, ref),
                       // onTap: (){},
@@ -70,103 +72,146 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                           const SizedBox(
                             height: 8,
                           ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                InkWell(
-                                    splashColor: Colors.transparent,
-                                    onTap: () {
-                                      NextScreen.normal(
-                                          context,
-                                          Vocabulary(
-                                              lessonDetail: lessonDetail,
-                                              sectionId: index));
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(12)),
+                          if (notes.length > 1)
+                            InkWell(
+                                splashColor: Colors.transparent,
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (builder) {
+                                            return PdfScreen(
+                                                link: notes[1],
+                                                name: "content".tr());
+                                          }
+                                      ));
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(),
+                                    borderRadius:
+                                    const BorderRadius.all(
+                                        Radius.circular(12)),
+                                  ),
+                                  padding: const EdgeInsets.all(4),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        Icons.menu_book_rounded,
+                                        color: Theme.of(context)
+                                            .primaryColor,
                                       ),
-                                      padding: const EdgeInsets.all(4),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.menu_book_rounded,
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                          ),
-                                          const SizedBox(
-                                            width: 2,
-                                          ),
-                                          Text('vocabulary',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleLarge
-                                                      ?.copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 16))
-                                              .tr(),
-                                        ],
+                                      const SizedBox(
+                                        width: 2,
                                       ),
-                                    )),
-                                const SizedBox(
-                                  width: 16,
-                                ),
-                                (lessonDetail.docLink != "" &&
-                                        lessonDetail.docLink != null)
-                                    ? InkWell(
-                                        splashColor: Colors.transparent,
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (builder) =>
-                                                      PdfScreen(
-                                                          link: lessonDetail
-                                                              .docLink!,
-                                                          name: lessonDetail
-                                                                  .docName ??
-                                                              "-")));
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(12)),
-                                          ),
-                                          padding: const EdgeInsets.all(4),
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Icons.menu_book_rounded,
-                                                color: Theme.of(context)
-                                                    .primaryColor,
-                                              ),
-                                              const SizedBox(
-                                                width: 2,
-                                              ),
-                                              Text('document',
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .titleLarge
-                                                          ?.copyWith(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              fontSize: 16))
-                                                  .tr(),
-                                            ],
-                                          ),
-                                        ))
-                                    : const SizedBox(),
-                              ],
-                            ),
+                                      Text('content',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleLarge
+                                              ?.copyWith(
+                                              fontWeight:
+                                              FontWeight
+                                                  .w400,
+                                              fontSize: 16))
+                                          .tr(),
+                                    ],
+                                  ),
+                                )),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            children: [
+                              InkWell(
+                                  splashColor: Colors.transparent,
+                                  onTap: () {
+                                    NextScreen.normal(
+                                        context,
+                                        Vocabulary(
+                                            lessonDetail: lessonDetail,
+                                            sectionId: index));
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(12)),
+                                    ),
+                                    padding: const EdgeInsets.all(4),
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.menu_book_rounded,
+                                          color:
+                                              Theme.of(context).primaryColor,
+                                        ),
+                                        const SizedBox(
+                                          width: 2,
+                                        ),
+                                        Text('vocabulary',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleLarge
+                                                    ?.copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 16))
+                                            .tr(),
+                                      ],
+                                    ),
+                                  )),
+                              const SizedBox(
+                                width: 16,
+                              ),
+                              if (lessonDetail.docLink != "" &&
+                                      lessonDetail.docLink != null)
+                                  InkWell(
+                                      splashColor: Colors.transparent,
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (builder) =>
+                                                    PdfScreen(
+                                                        link: lessonDetail
+                                                            .docLink!,
+                                                        name: lessonDetail
+                                                                .docName ??
+                                                            "-")));
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(),
+                                          borderRadius:
+                                              const BorderRadius.all(
+                                                  Radius.circular(12)),
+                                        ),
+                                        padding: const EdgeInsets.all(4),
+                                        child: Row(
+                                          children: [
+                                            Icon(
+                                              Icons.menu_book_rounded,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                            ),
+                                            const SizedBox(
+                                              width: 2,
+                                            ),
+                                            Text('document',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleLarge
+                                                        ?.copyWith(
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400,
+                                                            fontSize: 16))
+                                                .tr(),
+                                          ],
+                                        ),
+                                      )),
+                            ],
                           ),
                         ],
                       ),

@@ -2,6 +2,7 @@ class SearchCommonRequest {
   int? userId;
   int? pageSize;
   int? pageNumber;
+  int? testId;
   String? filterType;
   String? keyword;
   int?producerId;
@@ -12,6 +13,7 @@ class SearchCommonRequest {
         this.userId,
         this.pageSize,
         this.pageNumber,
+        this.testId,
         this.filterType,
         this.keyword,
         this.subFilterId,
@@ -23,6 +25,7 @@ class SearchCommonRequest {
     userId = json['userId'];
     pageSize = json['pageSize'];
     pageNumber = json['pageNumber'];
+    testId = json['testId'];
     filterType = json['filterType'];
     keyword = json['keyword'];
     subFilterId = json['categoryId'];
@@ -35,6 +38,7 @@ class SearchCommonRequest {
     data['userId'] = userId;
     data['pageSize'] = pageSize;
     data['pageNumber'] = pageNumber;
+    if (testId != null) data['testId'] = testId;
     data['filterType'] = filterType??"ALL";
     data['keyword'] = keyword??"";
     if (subFilterId != null && subFilterId != "") data['subFilterId'] = subFilterId??"";
@@ -47,6 +51,7 @@ class SearchCommonRequest {
     int? userId,
     int? pageSize,
     int? pageNumber,
+    int? testId,
     String? filterType,
     String? keyword,
     int?producerId,
@@ -57,6 +62,7 @@ class SearchCommonRequest {
       userId: userId??this.userId,
       pageSize: pageSize??this.pageSize,
       pageNumber: pageNumber??this.pageNumber,
+      testId: testId??this.testId,
       filterType: filterType??this.filterType,
       keyword: keyword??this.keyword,
       producerId: producerId??this.producerId,

@@ -50,56 +50,57 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Video'),
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(
-            FeatherIcons.chevronLeft,
-            color: Colors.black,
+        appBar: AppBar(
+          title: const Text('Video'),
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(
+              FeatherIcons.chevronLeft,
+              color: Colors.black,
+            ),
           ),
         ),
-      ),
-      body: (videoLink.length == videoTitle.length) ? Padding(
-          padding: const EdgeInsets.only(bottom: kToolbarHeight),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                VideoPlayer(
-                    videoUrl: videoLink[selectedVideo],
-                    videoTitle: videoTitle[selectedVideo]),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('List of video',
-                          style: Theme.of(context).textTheme.titleMedium),
-                      SizedBox(
-                        height: 600,
-                        child: ListView.builder(
-                            itemCount: order.length,
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      selectedVideo = index;
-                                    });
-                                  },
-                                  child: videoListItem(videoTitle[index], "",
-                                      index == selectedVideo));
-                            }),
-                      ),
-                    ],
+        body: Padding(
+            padding: const EdgeInsets.only(bottom: kToolbarHeight),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  (videoLink.length == videoTitle.length)
+                      ? VideoPlayer(
+                          videoUrl: videoLink[selectedVideo],
+                          videoTitle: videoTitle[selectedVideo])
+                      : VideoPlayerWidget(
+                          videoUrl: videoLink[0],
+                        ),
+                  if (order.isNotEmpty) Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('List of video',
+                            style: Theme.of(context).textTheme.titleMedium),
+                        SizedBox(
+                          height: 600,
+                          child: ListView.builder(
+                              itemCount: order.length,
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        selectedVideo = index;
+                                      });
+                                    },
+                                    child: videoListItem(videoTitle[index], "",
+                                        index == selectedVideo));
+                              }),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          )) : VideoPlayerWidget(
-        videoUrl: videoLink[0],
-      ),
-    );
+                ],
+              ),
+            )));
   }
 
   Widget videoListItem(
@@ -118,9 +119,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
             child: (videoThumbnail != "")
                 ? CustomCacheImage(imageUrl: videoThumbnail, radius: 3)
                 : Center(
-              child: Image.asset("assets/images/noImage.jpg",
-                  fit: BoxFit.fitHeight),
-            ),
+                    child: Image.asset("assets/images/noImage.jpg",
+                        fit: BoxFit.fitHeight),
+                  ),
           ),
           Align(
             alignment: Alignment.topCenter,

@@ -96,7 +96,7 @@ class EditProfileController extends MyController {
   }
 
   Future<void> updateImage(UploadFileInfo uploadFileinfo) async {
-    UploadFileApi uploadFileApi = UploadFileApi(fileInfo: uploadFileinfo);
+    UploadAvatarApi uploadFileApi = UploadAvatarApi(fileInfo: uploadFileinfo);
     UploadFileResponseInfo? data = await uploadFileApi.call();
   }
 

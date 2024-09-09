@@ -5,10 +5,10 @@ import '../../../base/base.export.dart';
 import '../../../base/widgets/common/alert_dialog/loading.common.dart';
 import 'models/upload_file_info.dart';
 
-class UploadFileApi extends BaseApiRequest {
+class UploadAvatarApi extends BaseApiRequest {
   UploadFileInfo fileInfo;
-  UploadFileApi({required this.fileInfo}) : super(
-      serviceType: SERVICE_TYPE.Storage,
+  UploadAvatarApi({required this.fileInfo}) : super(
+      serviceType: SERVICE_TYPE.USER,
       apiName: ApiName().addUploadFile,
     bodyMethod: BodyMethod.formData,
   );
@@ -32,8 +32,7 @@ class UploadFileApi extends BaseApiRequest {
   Future<void> getAuthorization() async {
     // TODO: implement getAuthorization
     await setApiBody({
-      'data': fileInfo.getDataType(),
-      'file': fileInfo.file
+      'avatar': fileInfo.file
     });
   }
 

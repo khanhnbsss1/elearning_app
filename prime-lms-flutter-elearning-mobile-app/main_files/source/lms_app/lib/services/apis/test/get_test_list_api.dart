@@ -13,7 +13,7 @@ class GetTestListApi extends BaseApiRequest {
 
   Future<TestListResponseModel> call() async {
     await getAuthorization();
-    dynamic result = await getRequestAPI();
+    dynamic result = await postRequestAPI();
 
     if(result.runtimeType == ResponseCommon)
     {

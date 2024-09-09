@@ -73,12 +73,12 @@ class _EditProfileState extends ConsumerState<EditProfile> {
     MultipartFile file = MultipartFile.fromBytes(
         result!.files.first.bytes!,
         filename: result.names[0]);
-    UploadFileApi uploadFileApi = UploadFileApi(
+    UploadAvatarApi uploadAvatarApi = UploadAvatarApi(
         fileInfo: UploadFileInfo(
             data: SubjectType.avatar,
             fileName: result.files.first.name,
             file: file));
-    UploadFileResponseInfo? resultUpload = await uploadFileApi.call();
+    UploadFileResponseInfo? resultUpload = await uploadAvatarApi.call();
     if (resultUpload != null) {
       setState(() {
         widget.user.avatar = resultUpload.link;
@@ -269,10 +269,6 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                               contentPadding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 12),
                             ),
-                            validator: (value) {
-                              if (value!.isEmpty) return 'Name is required';
-                              return null;
-                            },
                           ),
                         ),
                       ],
@@ -416,7 +412,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
       dialogBackgroundColor: Colors.white,
     );
     if (picked != null && picked.isNotEmpty && picked[0] != null) {
-      final DateFormat formatter = DateFormat('yy/MM/dd');
+      final DateFormat formatter = DateFormat('yyyy/MM/dd');
       final String formattedDate = formatter.format(picked[0]!);
       setState(() {
         editProfileController.basicValidator.getController('birthday')!.text =

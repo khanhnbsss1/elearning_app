@@ -3,6 +3,8 @@ import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
 import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/services/apis/test/models/test_info.dart';
 
+import 'models/test_detail.dart';
+
 
 class GetTestDetailApi extends BaseApiRequest {
   int testId;
@@ -11,17 +13,17 @@ class GetTestDetailApi extends BaseApiRequest {
     apiName: ApiName.getInstance().detailTest,
   );
 
-  Future<TestInfo?> call() async {
+  Future<dynamic> call() async {
     await getAuthorization();
     dynamic result = await getRequestAPI();
     if(result.runtimeType!=ResponseCommon)
       {
-        TestInfo lessonInfo = TestInfo.fromJson(result);
-        return lessonInfo;
+        TestDetail testDetail = TestDetail.fromJson(result);
+        return testDetail;
       }
     else
       {
-        return null;
+        return TestDetail();
       }
   }
 

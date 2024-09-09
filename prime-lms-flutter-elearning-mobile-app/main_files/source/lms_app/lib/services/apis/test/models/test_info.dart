@@ -111,10 +111,12 @@ class TestListResponseModel extends PageModel{
   }
   TestListResponseModel.fromList( dynamic json) {
     if (json!= null) {
-      content = <TestInfo>[];
-      json.forEach((v) {
-        content!.add(new TestInfo.fromJson(v));
-      });
+      if (json['content'] != null) {
+        content = <TestInfo>[];
+        json['content'].forEach((v) {
+          content!.add(TestInfo.fromJson(v));
+        });
+      }
     }
   }
   Map<String, dynamic> toJson() {

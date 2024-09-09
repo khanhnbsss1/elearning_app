@@ -39,7 +39,6 @@ class _VideoLessonState extends ConsumerState<VideoLesson> {
           VideoPlayerScreen(link: widget.lesson.link.toString()),
           Align(
             alignment: Alignment.bottomCenter,
-            // Visible after 1 sec for video loading time
             child: FutureBuilder(
               future: Future.delayed(const Duration(seconds: 2)),
               builder: (BuildContext context, AsyncSnapshot snapshot) {

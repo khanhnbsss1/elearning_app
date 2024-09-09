@@ -1,60 +1,86 @@
-
-import '../../../../base/base_request_elearning/models/page_model.dart';
-
 class QuestionInfo {
   int? id;
   String? questionName;
   int? weightage;
+  String? subName;
+  String? level;
   String? typeQuestion;
+  int? fileId;
+  int? gradeId;
+  String? gradeName;
+  int? categoryId;
+  String? categoryName;
   String? questionLink;
   String? createdAt;
   String? createdBy;
   String? updatedAt;
-  List<AnswerInfo>? answerGetDetail;
-  List<AnswerUploadInfo>?answerUpload;
+  int? totalRecord;
+  List<AnswerInfo>? answer;
+
   QuestionInfo(
       {this.id,
         this.questionName,
         this.weightage,
+        this.subName,
+        this.level,
         this.typeQuestion,
+        this.fileId,
+        this.gradeId,
+        this.gradeName,
+        this.categoryId,
+        this.categoryName,
         this.questionLink,
         this.createdAt,
         this.createdBy,
         this.updatedAt,
-        this.answerGetDetail,
-        this.answerUpload
-      });
+        this.totalRecord,
+        this.answer});
 
   QuestionInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     questionName = json['question_name'];
     weightage = json['weightage'];
+    subName = json['sub_name'];
+    level = json['level'];
     typeQuestion = json['type_question'];
+    fileId = json['file_id'];
+    gradeId = json['grade_id'];
+    gradeName = json['grade_name'];
+    categoryId = json['category_id'];
+    categoryName = json['category_name'];
     questionLink = json['question_link'];
     createdAt = json['created_at'];
     createdBy = json['created_by'];
     updatedAt = json['updated_at'];
+    totalRecord = json['total_record'];
     if (json['answer'] != null) {
-      answerGetDetail = <AnswerInfo>[];
+      answer = <AnswerInfo>[];
       json['answer'].forEach((v) {
-        answerGetDetail!.add(new AnswerInfo.fromJson(v));
+        answer!.add(new AnswerInfo.fromJson(v));
       });
     }
-
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id']= id;
-    data['question_name']= questionName;
-    data['weightage']= weightage;
-    data['type_question']= typeQuestion;
-    data['question_link']= questionLink;
-    data['created_at']= createdAt;
-    data['created_by']= createdBy;
-    data['updated_at']= updatedAt;
-    if (answerGetDetail != null) {
-      data['answer'] = answerGetDetail!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['question_name'] = this.questionName;
+    data['weightage'] = this.weightage;
+    data['sub_name'] = this.subName;
+    data['level'] = this.level;
+    data['type_question'] = this.typeQuestion;
+    data['file_id'] = this.fileId;
+    data['grade_id'] = this.gradeId;
+    data['grade_name'] = this.gradeName;
+    data['category_id'] = this.categoryId;
+    data['category_name'] = this.categoryName;
+    data['question_link'] = this.questionLink;
+    data['created_at'] = this.createdAt;
+    data['created_by'] = this.createdBy;
+    data['updated_at'] = this.updatedAt;
+    data['total_record'] = this.totalRecord;
+    if (this.answer != null) {
+      data['answer'] = answer!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -63,85 +89,32 @@ class QuestionInfo {
 class AnswerInfo {
   int? answerId;
   String? answer;
+  int? fileId;
   String? typeAnswer;
   int? rightAnswer;
 
-  AnswerInfo({this.answerId, this.answer, this.typeAnswer, this.rightAnswer});
+  AnswerInfo(
+      {this.answerId,
+        this.answer,
+        this.fileId,
+        this.typeAnswer,
+        this.rightAnswer});
 
   AnswerInfo.fromJson(Map<String, dynamic> json) {
     answerId = json['answer_id'];
     answer = json['answer'];
+    fileId = json['file_id'];
     typeAnswer = json['type_answer'];
     rightAnswer = json['right_answer'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['answer_id']= answerId;
-    data['answer']= answer;
-    data['type_answer']= typeAnswer;
-    data['right_answer']= rightAnswer;
+    data['answer_id'] = answerId;
+    data['answer'] = answer;
+    data['file_id'] = fileId;
+    data['type_answer'] = typeAnswer;
+    data['right_answer'] = rightAnswer;
     return data;
   }
-}
-class AnswerUploadInfo {
-  String? name;
-  String? typeAnwer;
-  int? questionId;
-  int? fileId;
-
-  AnswerUploadInfo({this.name, this.typeAnwer, this.questionId, this.fileId});
-
-  AnswerUploadInfo.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    typeAnwer = json['type_anwer'];
-    questionId = json['question_id'];
-    fileId = json['file_id'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['name']= name;
-    data['type_anwer']= typeAnwer;
-    data['question_id']= questionId;
-    data['file_id']= fileId;
-    return data;
-  }
-}
-
-
-class QuestionListResponseModel extends PageModel{
-  List<QuestionInfo>? content;
-
-  QuestionListResponseModel({super.total, super.pageSize, super.pageNumber, this.content});
-  QuestionListResponseModel.fromJson(Map<String, dynamic> json) {
-    total = json['total'];
-    pageSize = json['pageSize'];
-    pageNumber = json['pageNumber'];
-    if (json['content'] != null) {
-      content = <QuestionInfo>[];
-      json['content'].forEach((v) {
-        content!.add(new QuestionInfo.fromJson(v));
-      });
-    }
-  }
-  QuestionListResponseModel.fromList( dynamic json) {
-    if (json!= null) {
-      content = <QuestionInfo>[];
-      json.forEach((v) {
-        content!.add(new QuestionInfo.fromJson(v));
-      });
-    }
-  }
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['total'] = total;
-    data['pageSize'] = pageSize;
-    data['pageNumber'] = pageNumber;
-    if (content != null) {
-      data['content'] = content!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-
 }

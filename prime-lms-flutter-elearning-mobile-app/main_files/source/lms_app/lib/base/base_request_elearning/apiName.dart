@@ -68,7 +68,7 @@ class ApiName {
   final String unlinkVocabulary = "/unlink-multiple-vocabulary";
 
   /// file
-  final String addUploadFile = "/upload-file";
+  final String addUploadFile = "/upload-avatar";
   final String addUploadMultiFile = "/upload-multiple-file";
 
   ///tag

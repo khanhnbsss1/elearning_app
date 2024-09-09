@@ -131,18 +131,16 @@ class ApiService {
     return data;
   }
 
-  Future<List<Course>> getCoursesByAuthorId({int limit = 3, required String authorId}) async {
-    List<Course> data = [];
-    await firestore
-        .collection('courses')
-        .where('author.id', isEqualTo: authorId)
-        .where('status', isEqualTo: 'live')
-        .limit(3)
-        .get()
-        .then((QuerySnapshot? snapshot) {
-      data = snapshot!.docs.map((e) => Course.fromFirestore(e)).toList();
-    });
-    return data;
+  Future<List<CourseInfo>?> getCoursesByAuthorId(int authorId) async {
+    MyCourseApi myCourseApi = MyCourseApi(
+        searchCommonRequest: SearchCommonRequest(
+          userId: authorId,
+          pageNumber: 0,
+          pageSize: 3,
+        )
+    );
+    CourseResponseModel courseResponseModel = await myCourseApi.call();
+    return courseResponseModel.content??[];
   }
 
   Future<List<CourseFilterInfo>> getHomeCategories() async {

@@ -167,5 +167,16 @@
     "change-password-success": "Change password successfully",
     "change-password-fail": "Change password failed",
     "lets-study": "Let's study",
-    "sign-up-course-to-learn": "Please sign up course to start learning"
+    "sign-up-course-to-learn": "Please sign up course to start learning",
+    "do-test": "Tests",
+    "next-question": "Next question",
+    "submit-test": "Submit test",
+    "submit-title": "Submit",
+    "submit-subtitle": "Do you want to submit the test ?",
+    "content": "Content",
+    "time-left": "Time left: ",
+    "Do-test-title": "Are you ready to doing your test",
+    "ready": "Ready",
+    "status": "Status",
+    "type-test": "Test type"
 }

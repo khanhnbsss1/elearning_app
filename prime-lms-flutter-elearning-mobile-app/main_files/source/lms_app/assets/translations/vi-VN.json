@@ -167,5 +167,16 @@
   "change-password-success": "Thay đổi mật khẩu thành công",
   "change-password-fail": "Thay đổi mật khẩu thất bại",
   "lets-study": "Vào học",
-  "sign-up-course-to-learn": "Hãy đăng kí khóa học để bắt đầu học"
+  "sign-up-course-to-learn": "Hãy đăng kí khóa học để bắt đầu học",
+  "do-test": "Các bài kiểm tra",
+  "next-question": "Tiếp tục",
+  "submit-test": "Nộp bài",
+  "submit-title": "Nộp bài",
+  "submit-subtitle": "Bạn có chắc chắn muốn nộp bài kiểm tra",
+  "content": "Nội dung",
+  "time-left": "Thời gian còn lại: ",
+  "Do-test-title": "Bạn đã sẵn sàng làm bài kiểm tra chưa",
+  "ready": "Sẵn sàng",
+  "status": "Trạng thái",
+  "type-test": "Loại bài kiểm tra"
 }

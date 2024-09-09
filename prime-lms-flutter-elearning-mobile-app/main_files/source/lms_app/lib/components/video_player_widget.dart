@@ -53,9 +53,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black.withOpacity(0.1),
-      body: Align(
+    return Align(
         alignment: Alignment.topCenter,
         child: PodVideoPlayer(
           controller: controller,
@@ -69,7 +67,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
