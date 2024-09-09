@@ -4,10 +4,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lms_app/base/author/user_helper.dart';
+import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/widgets/common/alert_dialog/loading.export.dart';
 import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
+import 'package:lms_app/components/loading_tile.dart';
 import 'package:lms_app/mixins/course_mixin.dart';
 import 'package:lms_app/mixins/user_mixin.dart';
 import 'package:lms_app/screens/course_details.dart/details_view.dart';
+import 'package:lms_app/screens/course_details.dart/title_info.dart';
 import 'package:lms_app/screens/course_details.dart/vocabulary.dart';
 import 'package:lms_app/screens/pdf_screen.dart';
 import 'package:lms_app/screens/tabs/my_courses_tab/my_courses_tab.dart';
@@ -172,7 +177,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                       ),
                       trailing: _trailingIcon(lesson));
                 } else {
-                  return const LoadingIndicator(indicatorType: Indicator.ballGridBeat);
+                  return LoadingTile();
                 }
               });
         },
@@ -187,8 +192,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
 
   void _onTap(BuildContext context, LessonInfo lesson, CourseInfo course, WidgetRef ref) {
     final myCourses = ref.watch(myCoursesProvider);
-    if (CourseDetailsView.checkRegisteredCourse(
-        course, myCourses.value ?? [])) {
+    if (UserManager().checkRegisteredCourse(course, myCourses.value??[])) {
       _openLesson(context, lesson, ref);
     } else {
       ToastUtils.showSnackBar(context, 'Please sign up course to learn it');

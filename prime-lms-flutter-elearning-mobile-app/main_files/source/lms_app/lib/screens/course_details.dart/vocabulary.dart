@@ -65,7 +65,7 @@ class Vocabulary extends ConsumerWidget with CourseMixin, UserMixin {
                         lessonDetail.vocabularies![index];
                     return ListTile(
                       contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20),
+                          vertical: 0, horizontal: 20),
                       horizontalTitleGap: 10,
                       title: Text(
                         word.simplified!,
