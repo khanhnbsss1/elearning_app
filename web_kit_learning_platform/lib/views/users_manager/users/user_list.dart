@@ -72,7 +72,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                   return Layout(
                       isScroll: false,
                       title: Center(
-                        child: Text(state.userType == UserType.Teacher? L10nX.getStr.teacher_list:L10nX.getStr.student_list,
+                        child: Text( L10nX.getStr.user_str,
                           style: TextStyleConstant.textStyleBlack18w600,),),
                       padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
@@ -82,7 +82,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                   return Layout(
                       isScroll: false,
                       title: Center(child: Text(
-                        state.userType ==UserType.Teacher? L10nX.getStr.teacher_list:L10nX.getStr.student_list,
+                        L10nX.getStr.user_str,
                         style: TextStyleConstant.textStyleBlack18w600,
                       ),),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)

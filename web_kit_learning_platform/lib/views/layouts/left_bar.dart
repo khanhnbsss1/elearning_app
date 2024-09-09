@@ -391,29 +391,18 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       child: Text(L10nX.getStr.system, style: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.whiteColor),),
                     ),
                   ),
-                  MenuWidget(
+
+                  NavigationItem(
                     iconData: Icons.people,
-                    isCondensed: ThemeCustomizer().leftBarCondensed,
                     title: L10nX.getStr.user_str,
-                    permission: const [
-                      "users.get.get_user_list"
-                    ],
-                    children: [
-                      MenuItem(
-                        title: L10nX.getStr.student_str,
-                        route:  Routes.studentList,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const [
-                          "users.get.get_user_list"
-                        ],
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.teacher_str,
-                        route:  Routes.teacherList,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const ["users.get.get_user_list"],
-                      ),
-                    ],
+                    route: Routes.studentList,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["users.get.get_user_list"],
+                    onPress: () {
+                      /*                        setState(() {
+                        ThemeCustomizer().leftBarCondensed= true;
+                      });*/
+                    },
                   ),
                   //----------------Role------------------//
                   NavigationItem(
