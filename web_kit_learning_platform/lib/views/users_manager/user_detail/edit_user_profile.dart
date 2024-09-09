@@ -24,6 +24,7 @@ import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/my_text_style.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/roles/models/roles_info.dart';
+import 'package:webkit/services/apis/roles/update_user_role_api.dart';
 import 'package:webkit/services/apis/user/get_user_detail_api.dart';
 import 'package:webkit/services/apis/user/update_password_api.dart';
 import 'package:webkit/services/apis/user/user_manager/add_user_api.dart';
@@ -52,7 +53,7 @@ class EditUserProfile extends StatefulWidget {
 class _EditUserProfileState extends State<EditUserProfile>
     with SingleTickerProviderStateMixin, UIMixin {
   late EditProfileController controller;
-
+  late String roleId;
   @override
   void initState() {
     super.initState();
@@ -194,6 +195,11 @@ class _EditUserProfileState extends State<EditUserProfile>
                                     dynamic data = await updateUserApi.call();
                                     if(data.runtimeType == String && (data as String).isEmpty)
                                     {
+                                      if(roleId != widget.userProfile?.roleId)
+                                        {
+                                          UpdateUserRoleApi updateUserRoleApi = UpdateUserRoleApi(userId: widget.userProfile!.id!, roleId: roleId!);
+                                          dynamic data = await updateUserRoleApi.call();
+                                        }
                                       if(widget.editSelfProfile==true)
                                       {
                                         UserManager().deleteUserProfile();
@@ -326,11 +332,11 @@ class _EditUserProfileState extends State<EditUserProfile>
                                       Expanded(
                                         child: StatefulBuilder(
                                           builder: (BuildContext context, void Function(void Function()) setState) {
-                                          return  roleDropDownSearch(
+                                          return roleDropDownSearch(
                                               enableEdit: (widget.editSelfProfile??true)?false:enableEdit,
                                               onChange: (p0) {
                                                 setState(() {
-                                                  widget.userProfile?.roleId = p0?.id;
+                                                  roleId = p0!.id!;
                                                 });
                                               },
                                             );
@@ -764,6 +770,7 @@ class _EditUserProfileState extends State<EditUserProfile>
      billInfoController.text = widget.userProfile?.bankAccount??"";
      backNameController.text = widget.userProfile?.bankName??"";
       emailController.text = widget.userProfile?.email??"";
+      roleId = widget.userProfile?.roleId??'';
 
     return widget.userProfile;
   }

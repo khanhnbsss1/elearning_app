@@ -144,6 +144,7 @@ class ApiName {
   final String addRoles = "/create-role";
   final String editRoles = "/edit-role";
   final String deleteRoles = "/delete-role";
+  final String editUserRoles = "/edit-user-role";
 
   
   /// payment
