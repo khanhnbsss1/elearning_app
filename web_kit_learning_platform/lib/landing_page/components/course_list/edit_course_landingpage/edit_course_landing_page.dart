@@ -68,17 +68,11 @@ class EditCourseLandingPagePageState extends State<EditCourseLandingPagePage>wit
           ),
           child: SearchCourseDropDown(
             allWords: [],
-            onAddWords: (p0) {
+            onSelectCourse: (p0) {
               setState(() {
-                (courseListLandingPageResponseModel.data??[]).add(CourseLandingPageInfo.fromCourseInfo(p0));
+               // (courseListLandingPageResponseModel.data??[]).add(CourseLandingPageInfo.fromCourseInfo(p0));
               });
             },
-            onRemoveWords: (p0) {
-              setState(() {
-                (courseListLandingPageResponseModel.data??[]).removeWhere((element) => element.id == p0.id,);
-              });
-            },
-            exitsQuestion: courseListLandingPageResponseModel.data??[],
             actionType: ActionType.create,
           ),
         );

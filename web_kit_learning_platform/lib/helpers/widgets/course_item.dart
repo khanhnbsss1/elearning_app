@@ -8,6 +8,7 @@ import 'package:webkit/helpers/widgets/my_screen_media_type.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import '../../base/widgets/text/read_more_text_custom.dart';
+import '../../services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
 
 class CourseItem extends StatelessWidget {
   CourseItem({required this.constraints, required this.courseInfo, isGirdView, this.enableEdit, this.onEdit, this.onDelete}){
@@ -16,9 +17,9 @@ class CourseItem extends StatelessWidget {
 
   bool isGirdView = false;
   BoxConstraints constraints;
-  CourseInfo courseInfo;
+  CourseLandingPageInfo courseInfo;
   late ColorNotifier notifier;
-  Function(CourseInfo)? onEdit, onDelete ;
+  Function(CourseLandingPageInfo)? onEdit, onDelete ;
   bool? enableEdit;
   @override
   Widget build(BuildContext context) {
@@ -163,7 +164,7 @@ class CourseItem extends StatelessWidget {
                                   children: [
                                     StarRating(
                                       size: Dimens.size14,
-                                      rating: (courseInfo.rating ?? 0).toDouble(),
+                                      rating: (courseInfo.ratePoint ?? 0).toDouble(),
                                       allowHalfRating: false,
                                       onRatingChanged: (rating) {},
                                     ),
@@ -171,7 +172,7 @@ class CourseItem extends StatelessWidget {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Text(
-                                            "${NumberHelper().numberToString(courseInfo.price??0, decimalDigits: 0).trim()} (${L10nX.getStr.vnd_str})",
+                                            "${NumberHelper().numberToString(courseInfo.payment??0, decimalDigits: 0).trim()} (${L10nX.getStr.vnd_str})",
                                             style: TextStyleConstant
                                                 .textStyleBlack14w500
                                                 .copyWith(
@@ -208,6 +209,19 @@ class CourseItem extends StatelessWidget {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
+                                    Container(
+                                      decoration: BoxDecoration(color: ColorConst.mainColor.withOpacity(0.1), borderRadius: BorderRadius.circular(Dimens.size20)),
+                                      padding: EdgeInsets.all(Dimens.size8),
+                                      child: InkWell(
+                                        onTap: () {
+                                          if (onEdit != null) {
+                                            onEdit!(courseInfo);
+                                          }
+                                        },
+                                        child: Icon(Icons.edit, color: ColorConst.mainColor,),
+                                      ),
+                                    ),
+                                    Gap(Dimens.size16),
                                     Container(
                                       decoration: BoxDecoration(color: ColorConst.mainColor.withOpacity(0.1), borderRadius: BorderRadius.circular(Dimens.size20)),
                                       padding: EdgeInsets.all(Dimens.size8),

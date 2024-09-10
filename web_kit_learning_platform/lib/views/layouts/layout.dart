@@ -25,7 +25,6 @@ import 'package:webkit/views/layouts/top_bar.dart';
 import 'package:webkit/widgets/custom_pop_menu.dart';
 
 import '../../helpers/localizations/bloc/main_bloc.dart';
-
 class Layout extends StatelessWidget {
   final Widget? child;
   Widget? title;
@@ -176,7 +175,7 @@ class Layout extends StatelessWidget {
   }
   Widget largeScreen() {
     return Scaffold(
-      key: controller.scaffoldKey,
+      //key: controller.scaffoldKey,
       endDrawer: RightBar(),
       body: Stack(
         children: [
@@ -195,7 +194,7 @@ class Layout extends StatelessWidget {
                       child: (isScroll ?? true)
                           ? SingleChildScrollView(
                               padding: padding,
-                              key: controller.scrollKey,
+                              //key: controller.scrollKey,
                               child: child,
                             )
                           : Padding(

@@ -18,7 +18,7 @@ class ApiName {
   final String registerTeacherByPhone = "/register-phone-teacher";
   final String refreshToken = "/refresh-token";
   final String deleteAccount = "/delete-account";
-  final String updatePassword = "/update-passwword";
+  final String updatePassword = "/update-password";
   
   
   final String LOGOUT = "/logout";
@@ -60,13 +60,21 @@ class ApiName {
   final String createLandingPageTeacher = "/create-landingpage-teacher";
   final String updateLandingPageTeacher = "/update-landingpage-teacher";
   final String deleteLandingPageTeacher = "/delete-landingpage-teacher";
+  
+  final String createLandingPageCourse = "/create-landingpage-course";
+  final String updateLandingPageCourse = "/update-landingpage-course";
+  final String deleteLandingPageCourse = "/delete-landingpage-course";
   /// thong tin nguoi dung
   final String createUser = "/register-role";
-  final String editUser = "/edit-user";
+  final String editSeftUser = "/edit-user";
+  final String editOtherUser = "/edit-user-information";
+
+  
   final String deleteUser = "/delete-account";
 
   final String getUserDetail = "/get-user";
   final String getUserList = "/get-user-list";
+  
 
  /// them tu dien
   final String addVocabulary = "/create-vocabulary";

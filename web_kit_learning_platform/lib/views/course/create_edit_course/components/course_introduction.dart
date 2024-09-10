@@ -936,7 +936,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
               maxWidth: Dimens.size310,
             ),
             child: WidgetWithRowTitleCommon(
-              title: "${L10nX.getStr.discount_str}",
+              title: L10nX.getStr.discount_str,
               child: Container(
                 constraints: BoxConstraints(
                   maxWidth: Dimens.size200,

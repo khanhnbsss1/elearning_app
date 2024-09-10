@@ -107,24 +107,24 @@ class UserProfile {
     data['username'] = (userName??"").trim();
     data['bank_account'] = bankAccount??"";
     data['bank_name'] = bankName??"";
-    data['identity_id'] = identityId;
+    //data['identity_id'] = identityId;
     data['gender'] = gender??"";
     data['birthday'] = birthday??"";
     data['phone_number'] = (phoneNumber??"").trim();
     data['avatar'] = avatar??"";
     data['type_name'] = (typeName??"").isNotEmpty?typeName:"User";
-    data['created_at'] = createdAt??"";
-    data['created_by'] = createdBy??"";
-    data['updated_at'] = updatedAt??"";
-    data['updated_by'] = updatedBy??"";
+    //data['created_at'] = createdAt??"";
+    //data['created_by'] = createdBy??"";
+    //data['updated_at'] = updatedAt??"";
+    //data['updated_by'] = updatedBy??"";
     data['country_name'] = countryName??"";
     data['position'] = position??"";
     data['email'] = (email??"").trim();
     data['password'] = password;
-    data['permissions'] = permission;
+    //data['permissions'] = permission;
     data['roleId'] = roleId;
-    data['roleName'] = (roleName??'').trim();
-    data['account_id'] = accountId;
+    //data['roleName'] = (roleName??'').trim();
+    //data['account_id'] = accountId;
 
     return data;
   }

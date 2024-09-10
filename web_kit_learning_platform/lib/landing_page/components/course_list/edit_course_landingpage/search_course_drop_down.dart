@@ -17,11 +17,10 @@ import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart'
 
 class SearchCourseDropDown extends StatefulWidget {
   final List<CourseInfo> allWords;
-  final List<CourseInfo>? exitsQuestion;
-  final Function(CourseInfo) onAddWords;
-  final Function(CourseInfo) onRemoveWords;
+  final Function(CourseInfo) onSelectCourse;
+  String? courseName;
   ActionType? actionType;
-  SearchCourseDropDown({required this.allWords, required this.onAddWords, required this.onRemoveWords, this.exitsQuestion, this.actionType}){
+  SearchCourseDropDown({required this.allWords, required this.onSelectCourse, this.actionType,this.courseName}){
     actionType??=ActionType.view;
   }
 
@@ -32,6 +31,12 @@ class SearchCourseDropDown extends StatefulWidget {
 class _MyDropdownButtonState extends State<SearchCourseDropDown> with SingleTickerProviderStateMixin, UIMixin {
   Color color = Color.fromRGBO(163, 20, 19, 1.0);
   final TextEditingController _wordDropdownSearchFieldController = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _wordDropdownSearchFieldController.text = widget.courseName??"";
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,102 +51,19 @@ class _MyDropdownButtonState extends State<SearchCourseDropDown> with SingleTick
                   Expanded(
                       child: courseDropDownSearch(
                         context: context, onSelectWord: (p0) {
-                          if([...(widget.exitsQuestion??[]).where((element) {return element.id == p0.id;},)].isEmpty) 
-                          {
                             setState(() {
                                //widget.exitsQuestion?.add(p0);
-                               widget.onAddWords(p0);
+                               widget.onSelectCourse(p0);
 
                             });
-                    }
                   },)),
                 ]),
           ),
           Gap(Dimens.size16),
-          Expanded(
+/*          Expanded(
             child: buildCourseList()
-          ),
+          ),*/
         ]
-    );
-  }
-  Widget buildCourseList(){
-    CourseDataSource employeeDataSource = CourseDataSource(
-      data: widget.exitsQuestion??[],
-      starIndex: 0,
-      enableDelete: true,
-      onEdit: (p0) {
-      },
-      onDelete: (p0) {
-        setState(() {
-          widget.onRemoveWords(p0);
-        });
-      },
-      onViewDetail: (p0) {
-        CoursePreview(
-          courseInfo: p0,
-        ).show(context);
-      },
-    );
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        return SfDataGridTheme(
-          data: SfDataGridThemeData(
-            headerColor: ColorConst.mainColor.withOpacity(0.1),
-          ),
-          child: SfDataGrid(
-            source: employeeDataSource,
-            columnWidthMode: ColumnWidthMode.fill,
-            isScrollbarAlwaysShown: false,
-            gridLinesVisibility: GridLinesVisibility.both,
-            headerGridLinesVisibility: GridLinesVisibility.both,
-            headerRowHeight: Dimens.size80,
-            showHorizontalScrollbar: true,
-            columns: <GridColumn>[
-              GridColumn(
-                  columnName: 'id',
-                  maximumWidth: Dimens.size50,
-                  label: Container(
-                      padding: EdgeInsets.all(16.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        'ID',
-                      ))),
-              GridColumn(
-                  columnName: L10nX.getStr.course_name,
-                  //minimumWidth: Dimens.size250,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(
-                        L10nX.getStr.course_name,
-                        overflow: TextOverflow.ellipsis,
-                      ))),
-              GridColumn(
-                  columnName: L10nX.getStr.author_str,
-                  maximumWidth: Dimens.size120,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.author_str))),
-              GridColumn(
-                  columnName: L10nX.getStr.grade_str,
-                  maximumWidth: Dimens.size120,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.grade_str))),
-              GridColumn(
-                  columnName: L10nX.getStr.action_str,
-                  maximumWidth: Dimens.size180,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.action_str))),
-        
-            ],
-          ),
-        );
-      },
     );
   }
   Widget courseDropDownSearch({Function(CourseInfo)? onSelectWord,required BuildContext context}) {
@@ -149,45 +71,39 @@ class _MyDropdownButtonState extends State<SearchCourseDropDown> with SingleTick
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            width: Dimens.size350,
-            child: StatefulBuilder(
-              builder: (BuildContext context, void Function(void Function()) setState) {
-                return SearchableDropdown<CourseInfo>(
-                  key: UniqueKey(),
-                  inputDecoration: InputDecoration(
-                    constraints: BoxConstraints(maxHeight: Dimens.size45),
-                    hintTextDirection: AppTheme.textDirection,
-                    labelStyle: TextStyleConstant.textStyleBlack14w400,
-                    hintStyle: TextStyleConstant.textStyleBlack14w400,
-                    border: outlineInputBorder,
-                    labelText: L10nX.getStr.course_name,
-                    prefixIcon: Icon(
-                      Icons.edit_document,
-                      color: ColorConst.colorIconRed,
-                    ),
-                  ),
-                  remoteItems: (search) async {
-                    return await getCourseFilterList(search??"");
-                  },
-                  itemLabelFormatter: (value) {
-                    return value.name??"";
-                  },
-                  onChanged: (CourseInfo? value) {
-                    if(onSelectWord!=null)
-                    {
-                      //_wordDropdownSearchFieldController.text = suggestion.simplified??"";
-                      onSelectWord(value!);
-                    }
-                    else
-                    {
-                      ToastUtils.showToastError(L10nX.getStr.unknown_str);
-                    }
-                    print("object");
-                  },
-                  value: null,
-                );
+          Expanded(
+            child: SearchableDropdown<CourseInfo>(
+              inputDecoration: InputDecoration(
+                constraints: BoxConstraints(maxHeight: Dimens.size45),
+                hintTextDirection: AppTheme.textDirection,
+                labelStyle: TextStyleConstant.textStyleBlack14w400,
+                hintStyle: TextStyleConstant.textStyleBlack14w400,
+                border: outlineInputBorder,
+                labelText: "${L10nX.getStr.search} ${L10nX.getStr.course_str.toLowerCase()}",
+                prefixIcon: Icon(
+                  Icons.edit_document,
+                  color: ColorConst.colorIconRed,
+                ),
+              ),
+              remoteItems: (search) async {
+                return await getCourseFilterList(search??"");
               },
+              itemLabelFormatter: (value) {
+                return value.name??"";
+              },
+              onChanged: (CourseInfo? value) {
+                if(onSelectWord!=null)
+                {
+                  _wordDropdownSearchFieldController.text = value?.name??"";
+                  onSelectWord(value!);
+                }
+                else
+                {
+                  ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                }
+                print("object");
+              },
+              value: null,
             ),
           ),
         ]

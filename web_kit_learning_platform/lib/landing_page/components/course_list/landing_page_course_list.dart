@@ -8,9 +8,13 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/landing_page/mediaquery/mq.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/helpers/widgets/course_item.dart';
+import 'package:webkit/services/apis/landing_page/course/models/course_list_landing_page_response_model.dart';
 
+import '../../../base/widgets/popup_confirm/confirm_popup_page.dart';
+import '../../../services/apis/landing_page/course/course_detail/delete_course_item_api.dart';
 import '../colornotifier.dart';
 import 'bloc/landing_page_course_list_bloc.dart';
+import 'edit_course_landingpage/edit_course_item.dart';
 import 'edit_course_landingpage/edit_course_landing_page.dart';
 
 class LandingPageCourseList extends StatefulWidget {
@@ -62,7 +66,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
           }, builder: (BuildContext context, state) {
             return LayoutBuilder(
               builder: (context, constraints) {
-                return buildCourseList(constraints: constraints, state: state);
+                return buildCourseList(constraints: constraints, state: state, context: context);
               },
             );
           })),
@@ -70,7 +74,7 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
   }
 
   Widget buildCourseList(
-      {required BoxConstraints constraints, required LandingPageCourseListState state}) {
+      {required BoxConstraints constraints, required LandingPageCourseListState state, required BuildContext context}) {
     int lengthOfView = (state.isExpand ?? false)
         ? constraints.maxWidth < FetchPixels.getPixelHeight(1300) ? 6
             : 8 : (state.courseListLandingPageResponseModel?.data ?? []).length;
@@ -115,7 +119,11 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                       visible: widget.enableEdit??false,
                       child: InkWell(
                         onTap: () {
-                          EditCourseLandingPagePage().show(context);
+                          EditCourseItemPage().show(context, callBack: (p0) {
+                            if(p0==true) {
+                              BlocProvider.of<LandingPageCourseListBloc>(context).add(LandingPageCourseListInitEvent());
+                            }
+                          },);
                         },
                         child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor, size: Dimens.size30,),
                       ),
@@ -142,9 +150,36 @@ class _LandingPageCourseListState extends State<LandingPageCourseList> with Auto
                 child: LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
                     List<Widget> listOfCourse = List.empty(growable: true);
-                    for (CourseInfo courseLandingPageInfo
+                    for (CourseLandingPageInfo courseLandingPageInfo
                         in state.courseListLandingPageResponseModel?.data ?? []) {
-                      listOfCourse.add(CourseItem(constraints: constraints, courseInfo: courseLandingPageInfo, enableEdit: widget.enableEdit,));
+                      listOfCourse.add(CourseItem(
+                        constraints: constraints, 
+                        courseInfo: courseLandingPageInfo, 
+                        enableEdit: widget.enableEdit,
+                        onEdit: (p0) {
+                          EditCourseItemPage(
+                            info: p0,
+                            actionType: ActionType.edit,
+                          ).show(context, callBack: (value) {
+                            if(value==true) {
+                              BlocProvider.of<LandingPageCourseListBloc>(context).add(LandingPageCourseListInitEvent());
+                            }
+                          },);
+                        },
+                        onDelete: (p0) {
+                          ConfirmPopupPage(
+                            title: "${L10nX.getStr.delete_str} ${L10nX.getStr.course_str}",
+                            onAccept: () async {
+                              MonitorLoading().showLoading("");
+                              DeleteCourseLandingPageApi tagApi = DeleteCourseLandingPageApi(info: p0);
+                              dynamic data = await tagApi.call();
+                              MonitorLoading().dismiss();
+                              BlocProvider.of<LandingPageCourseListBloc>(context).add(LandingPageCourseListInitEvent());
+                            },
+                          ).show(context,);
+                        },
+                        
+                      ));
                     }
                     return SizedBox(
                       height: Dimens.size520,
