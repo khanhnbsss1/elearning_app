@@ -121,7 +121,7 @@ class UserProfile {
     data['position'] = position??"";
     data['email'] = (email??"").trim();
     data['password'] = password;
-    //data['permissions'] = permission;
+    data['permissions'] = permission;
     data['roleId'] = roleId;
     //data['roleName'] = (roleName??'').trim();
     //data['account_id'] = accountId;
