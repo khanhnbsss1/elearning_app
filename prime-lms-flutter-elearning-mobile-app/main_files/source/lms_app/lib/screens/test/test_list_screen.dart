@@ -25,8 +25,8 @@ class _TestListScreenState extends State<TestListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'test',
+        title: Text(
+          'do-test'.tr(),
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Theme.of(context).primaryColor,
@@ -59,7 +59,7 @@ class _TestListScreenState extends State<TestListScreen> {
                     ),
                     maintainState: true,
                     title: Text(
-                      testList[index].name??"-",
+                      testList[index].subName??"-",
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: isExpanded ? Colors.blueAccent : Theme.of(context).expansionTileTheme.textColor,

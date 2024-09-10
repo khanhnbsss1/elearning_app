@@ -8,6 +8,7 @@ import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
 import 'package:lms_app/components/app_logo.dart';
 import 'package:lms_app/components/privacy_info.dart';
 import 'package:lms_app/core/home.dart';
+
 // import 'package:lms_app/models/user/UserProfile.dart';
 import 'package:lms_app/screens/auth/reset_password.dart';
 import 'package:lms_app/screens/auth/sign_up.dart';
@@ -16,6 +17,7 @@ import 'package:lms_app/screens/splash.dart';
 import 'package:lms_app/services/auth_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import '../../base/widgets/audio/audio_speaker.dart';
 import '../../components/languages.dart';
 import '../../configs/features_config.dart';
 import '../../controller_elearning/auth/login_controller.dart';
@@ -36,6 +38,7 @@ class LoginScreen extends ConsumerStatefulWidget {
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   var formKey = GlobalKey<FormState>();
+
   // var emailCtlr = TextEditingController();
   // var passwordCtrl = TextEditingController();
   final _btnController = RoundedLoadingButtonController();
@@ -61,7 +64,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         _btnController.success();
         afterSignIn();
       } else {
-        ToastUtils.showToastError("Your username or password is wrong");
         _btnController.stop();
       }
     }
@@ -89,14 +91,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     NextScreen.closeOthersAnimation(context, const HomeView());
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: widget.popUpScreen??true,
+      resizeToAvoidBottomInset: widget.popUpScreen ?? true,
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 50),
+          padding:
+              const EdgeInsets.only(left: 25, right: 25, top: 20, bottom: 50),
           child: Form(
             key: formKey,
             child: Column(
@@ -108,7 +110,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   children: [
                     Text(
                       'login',
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold, fontSize: 28),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall
+                          ?.copyWith(fontWeight: FontWeight.bold, fontSize: 28),
                     ).tr(),
                     const Spacer(),
                     Visibility(
@@ -116,7 +121,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       child: IconButton(
                         padding: const EdgeInsets.only(right: 10),
                         icon: const Icon(LineIcons.language),
-                        onPressed: () => NextScreen.openBottomSheet(context, const Languages()),
+                        onPressed: () => NextScreen.openBottomSheet(
+                            context, const Languages()),
                       ),
                     )
                   ],
@@ -126,7 +132,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
                 Text(
                   'login-to-access-features',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.secondary),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.secondary),
                 ).tr(),
                 // SocialLogins(
                 //   afterSignIn: afterSignIn,
@@ -134,14 +141,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 Container(
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: const AppLogo(size: 100,),
+                  child: const AppLogo(
+                    size: 100,
+                  ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextFormField(
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 15),
                           hintText: 'enter-email-or-phone'.tr(),
                           label: const Text('email-or-phone').tr(),
                           border: OutlineInputBorder(
@@ -152,9 +162,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               Icons.clear,
                               size: 20,
                             ),
-                            onPressed: () => loginController.basicValidator.getController('email')?.clear(),
+                            onPressed: () => loginController.basicValidator
+                                .getController('email')
+                                ?.clear(),
                           )),
-                      controller: loginController.basicValidator.getController('email'),
+                      controller:
+                          loginController.basicValidator.getController('email'),
                       keyboardType: TextInputType.emailAddress,
                       validator: (value) {
                         if (value!.isEmpty) return 'Email is required';
@@ -164,7 +177,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     const SizedBox(height: 30),
                     TextFormField(
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                          contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 15),
                           hintText: 'enter-password'.tr(),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(3),
@@ -172,14 +186,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           label: const Text('password').tr(),
                           suffixIcon: IconButton(
                             padding: const EdgeInsets.all(0),
-                            style: IconButton.styleFrom(padding: const EdgeInsets.all(0)),
+                            style: IconButton.styleFrom(
+                                padding: const EdgeInsets.all(0)),
                             icon: Icon(
                               lockIcon,
                               size: 20,
                             ),
                             onPressed: () => _onlockPressed(),
                           )),
-                      controller: loginController.basicValidator.getController('password'),
+                      controller: loginController.basicValidator
+                          .getController('password'),
                       obscureText: offsecureText,
                       keyboardType: TextInputType.visiblePassword,
                       validator: (value) {
@@ -227,7 +243,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       elevation: 0,
                       child: Text(
                         'login',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, color: Colors.white),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white),
                       ).tr(),
                     ),
                     Container(
@@ -239,15 +260,26 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         children: [
                           Text(
                             "no-account",
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.secondary),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary),
                           ).tr(),
                           TextButton(
                               child: Text(
                                 'create-account',
-                                style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600, fontSize: 15),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 15),
                               ).tr(),
-                              onPressed: () => NextScreen.openBottomSheet(context, const SignUpScreen())
-                            ),
+                              onPressed: () => NextScreen.openBottomSheet(
+                                  context, const SignUpScreen())),
                         ],
                       ),
                     ),

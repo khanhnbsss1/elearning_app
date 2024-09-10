@@ -178,5 +178,7 @@
   "Do-test-title": "Bạn đã sẵn sàng làm bài kiểm tra chưa",
   "ready": "Sẵn sàng",
   "status": "Trạng thái",
-  "type-test": "Loại bài kiểm tra"
+  "type-test": "Loại bài kiểm tra",
+  "no-internet": "Vui lòng kiểm tra kết nối internet của bạn",
+  "wrong-pass-or-user": "Tên người dùng hoặc mật khẩu sai"
 }

@@ -178,6 +178,8 @@
     "Do-test-title": "你准备好进行测试了吗？",
     "ready": "准备好",
     "status": "地位",
-    "type-test": "型式试验"
+    "type-test": "型式试验",
+    "no-internet": "请检查您的互联网连接",
+    "wrong-pass-or-user": "用户名或密码错误"
 
 }

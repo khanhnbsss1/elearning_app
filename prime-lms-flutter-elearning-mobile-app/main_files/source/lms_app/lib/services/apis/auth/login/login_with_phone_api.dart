@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:lms_app/base/base.export.dart';
 import 'package:lms_app/base/base_request_elearning/models/search_common_request.dart';
 import 'package:lms_app/base/device_elearning/device_manager.dart';
@@ -42,18 +43,21 @@ class LoginWithPhoneApi extends BaseApiRequest {
            }
            catch(e)
            {
+             ToastUtils.showToastError('$e');
              await AuthorManager().handleLogout();
              return false;
            }
          }
        else
          {
+           ToastUtils.showToastError('wrong-pass-or-user'.tr());
            return false;
          }
 
      }
    else
      {
+       ToastUtils.showToastError('no-internet'.tr());
        return false;
      }
   }

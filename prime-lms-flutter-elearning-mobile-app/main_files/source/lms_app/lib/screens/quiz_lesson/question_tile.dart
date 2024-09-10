@@ -30,56 +30,57 @@ class QuestionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDarkMode = ref.watch(themeProvider).isDarkMode;
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(20),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-        decoration: BoxDecoration(
-          color:
-              isDarkMode ? CustomColor.container1Dark : CustomColor.container1,
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'count-questions',
-              style: Theme.of(context).textTheme.bodyLarge,
-            ).tr(
-                args: ['${currentPageIndex + 1}', questions.length.toString()]),
-            const SizedBox(height: 10),
-            Text('Q${currentPageIndex + 1}. ${question.questionName}',
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(fontWeight: FontWeight.bold)),
-            question.typeQuestion == "Text"
-                ? Text(question.questionName ?? "-")
-                : question.typeQuestion == "Audio"
-                    ? AudioSpeaker(
-                        url: question.questionLink!,
-                        enableProccessBar: true,
-                      )
-                    : Image.network(question.questionLink!),
-            const SizedBox(),
-            const SizedBox(height: 30),
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+          decoration: BoxDecoration(
+            color: CustomColor.container1,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'count-questions',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ).tr(
+                  args: ['${currentPageIndex + 1}', questions.length.toString()]),
+              const SizedBox(height: 10),
+              Text('Q${currentPageIndex + 1}. ${question.questionName}',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(fontWeight: FontWeight.bold)),
+              question.typeQuestion == "Text"
+                  ? Text(question.questionName ?? "-")
+                  : question.typeQuestion == "Audio"
+                      ? AudioSpeaker(
+                          url: question.questionLink!,
+                          enableProccessBar: true,
+                        )
+                      : Image.network(question.questionLink!),
+              const SizedBox(),
+              const SizedBox(height: 30),
 
-            // OPTIONS
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: question.answer!.length,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) {
-                return OptionTile(
-                  ref: ref,
-                  answer: question.answer![index],
-                  questionIndex: questionIndex,
-                  optionIndex: index,
-                  selectedOption: selectedOption,
-                );
-              },
-            ),
-          ],
+              // OPTIONS
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: question.answer!.length,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (BuildContext context, int index) {
+                  return OptionTile(
+                    ref: ref,
+                    answer: question.answer![index],
+                    questionIndex: questionIndex,
+                    optionIndex: index,
+                    selectedOption: selectedOption,
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

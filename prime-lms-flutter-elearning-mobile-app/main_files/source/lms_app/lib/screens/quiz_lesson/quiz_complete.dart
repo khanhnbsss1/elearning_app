@@ -20,8 +20,7 @@ class QuizComplete extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final correctAnswerCount = ref.watch(correctAnswerCountProvider);
-    // final double percentage = (correctAnswerCount / lesson.questions!.length) * 100;
-    final double percentage = 50;
+    final double percentage = (correctAnswerCount / questions!.length) * 100;
     final bool isPassed = percentage >= 50 ? true : false;
 
     return Scaffold(
@@ -45,7 +44,7 @@ class QuizComplete extends ConsumerWidget {
                 onPressed: () {
                   // Placed ads when user failed the test
                   AdManager.initInterstitailAds(ref);
-                  // NextScreen.replaceAnimation(context, QuizLesson(course: course, lesson: lesson));
+                  NextScreen.replaceAnimation(context, QuizLesson(questions: questions,));
                 },
               ),
             ),

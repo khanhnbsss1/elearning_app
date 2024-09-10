@@ -55,7 +55,11 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                   LessonInfo lessonDetail = snapshot.data!;
                   if (lessonDetail.note != null) notes = lessonDetail.note!.split('&&&&---&&&&');
                   return ListTile(
-                      onTap: () => _onTap(context, lessonDetail, course, ref),
+                      onTap: () => {
+                        if (_onCheck(context, lessonDetail, course, ref)) {
+                          _openLesson(context, lesson, ref)
+                        }
+                      },
                       // onTap: (){},
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 20),
@@ -126,11 +130,13 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                               InkWell(
                                   splashColor: Colors.transparent,
                                   onTap: () {
-                                    NextScreen.normal(
-                                        context,
-                                        Vocabulary(
-                                            lessonDetail: lessonDetail,
-                                            sectionId: index));
+                                    if (_onCheck(context, lessonDetail, course, ref)) {
+                                      NextScreen.normal(
+                                          context,
+                                          Vocabulary(
+                                              lessonDetail: lessonDetail,
+                                              sectionId: index));
+                                    }
                                   },
                                   child: Container(
                                     decoration: BoxDecoration(
@@ -169,16 +175,18 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                                   InkWell(
                                       splashColor: Colors.transparent,
                                       onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (builder) =>
-                                                    PdfScreen(
-                                                        link: lessonDetail
-                                                            .docLink!,
-                                                        name: lessonDetail
-                                                                .docName ??
-                                                            "-")));
+                                        if (_onCheck(context, lessonDetail, course, ref)) {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (builder) =>
+                                                      PdfScreen(
+                                                          link: lessonDetail
+                                                              .docLink!,
+                                                          name: lessonDetail
+                                                              .docName ??
+                                                              "-")));
+                                        }
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(
@@ -222,7 +230,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                       ),
                       trailing: _trailingIcon(lesson));
                 } else {
-                  return LoadingTile();
+                  return const LoadingTile();
                 }
               });
         },
@@ -235,12 +243,13 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
     return lessons;
   }
 
-  void _onTap(BuildContext context, LessonInfo lesson, CourseInfo course, WidgetRef ref) {
+  bool _onCheck(BuildContext context, LessonInfo lesson, CourseInfo course, WidgetRef ref) {
     final myCourses = ref.watch(myCoursesProvider);
     if (UserManager().checkRegisteredCourse(course, myCourses.value??[])) {
-      _openLesson(context, lesson, ref);
+      return true;
     } else {
       ToastUtils.showSnackBar(context, 'Please sign up course to learn it');
+      return false;
     }
   }
 

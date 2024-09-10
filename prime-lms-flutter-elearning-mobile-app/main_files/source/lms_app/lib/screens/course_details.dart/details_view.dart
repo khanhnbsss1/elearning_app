@@ -11,6 +11,7 @@ import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
 import 'package:lms_app/models/user/UserProfile.dart';
 import 'package:lms_app/screens/course_details.dart/course_info.dart';
 import 'package:lms_app/screens/course_details.dart/course_share_button.dart';
+import 'package:lms_app/screens/course_details.dart/register_button.dart';
 import 'package:lms_app/screens/curricullam_screen.dart';
 import 'package:lms_app/services/apis/course/register_course/register_course.dart';
 import 'package:loading_indicator/loading_indicator.dart';
@@ -77,6 +78,8 @@ class CourseDetailsView extends ConsumerWidget {
                         icon: const Icon(FeatherIcons.chevronLeft),
                       ),
                       actions: [
+                        RegisterButton(course: courseInfo),
+
                         // BookmarkButton(course: courseInfo),
                         // ReviewButton(course: courseInfo),
                         CourseShareButton(course: courseInfo),

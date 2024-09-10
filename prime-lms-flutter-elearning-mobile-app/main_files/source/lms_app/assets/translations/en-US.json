@@ -178,5 +178,7 @@
     "Do-test-title": "Are you ready to doing your test",
     "ready": "Ready",
     "status": "Status",
-    "type-test": "Test type"
+    "type-test": "Test type",
+    "no-internet": "Please check your internet connection",
+    "wrong-pass-or-user": "Wrong username or password"
 }
