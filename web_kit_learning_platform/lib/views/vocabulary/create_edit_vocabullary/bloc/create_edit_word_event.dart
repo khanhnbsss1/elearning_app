@@ -11,6 +11,7 @@ class CreateEditWordInitEvent extends CreateEditWordEvent {
   @override
   List<Object?> get props => [];
 }
+
 class CreateEditWordUploadAudioEvent extends CreateEditWordEvent {
   UploadFileInfo data; 
   CreateEditWordUploadAudioEvent({required this.data});
@@ -62,4 +63,32 @@ class CreateEditWordOnUpdateVocabularyInfoEvent extends CreateEditWordEvent {
   CreateEditWordOnUpdateVocabularyInfoEvent({required this.vocabularyInfo});
   @override
   List<Object?> get props => [vocabularyInfo];
+}
+
+
+class CreateEditWordOnchangeModeEvent extends CreateEditWordEvent {
+  bool isAddMultiWord;
+  CreateEditWordOnchangeModeEvent({required this.isAddMultiWord});
+  @override
+  List<Object?> get props => [isAddMultiWord];
+}
+
+class CreateEditWordUpdateMultiVocabularyEvent extends CreateEditWordEvent {
+  List<VocabularyInfo> listMultiVocabularyInfo;
+  CreateEditWordUpdateMultiVocabularyEvent({required this.listMultiVocabularyInfo});
+  @override
+  List<Object?> get props => [listMultiVocabularyInfo];
+}
+class CreateEditWordUpdateMultiVocabularyInfoAudioEvent extends CreateEditWordEvent {
+  FilePickerResult listMultiVocabularyInfoAudio;
+  CreateEditWordUpdateMultiVocabularyInfoAudioEvent({required this.listMultiVocabularyInfoAudio});
+  @override
+  List<Object?> get props => [listMultiVocabularyInfoAudio];
+}
+
+
+class CreateEditWordImportMultiVocabularyEvent extends CreateEditWordEvent {
+  CreateEditWordImportMultiVocabularyEvent();
+  @override
+  List<Object?> get props => [];
 }

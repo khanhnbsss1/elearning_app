@@ -481,7 +481,7 @@ class BaseApiRequest {
         await onRequestSuccess(baseAPIResponse.result);
         return baseAPIResponse.result!;
       }
-      else if ((response.statusCode == 401 || response.statusCode == 403) && !url.contains("login"))// qua han token
+/*      else if ((response.statusCode == 401 || response.statusCode == 403) && !url.contains("login"))// qua han token
           {
         await AuthorManager().refreshToken();
         return ResponseCommon(
@@ -490,7 +490,7 @@ class BaseApiRequest {
             success: false,
             data:  null
         );
-      }
+      }*/
       else {
         // If the server did not return a 200 OK response,
         // then throw an exception.

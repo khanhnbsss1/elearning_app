@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart' as dio;
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,8 @@ import 'package:webkit/services/apis/vocabulary/words/add_words_api.dart';
 import 'package:webkit/services/apis/vocabulary/words/get_vocabulary_detail.dart';
 import 'package:webkit/services/apis/vocabulary/words/update_words_api.dart';
 import 'package:webkit/views/vocabulary/create_edit_vocabullary/create_edit_words.dart';
+import 'package:file_picker/file_picker.dart';
+
 part 'create_edit_word_event.dart';
 part 'create_edit_word_state.dart';
 
@@ -24,8 +27,9 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     on<CreateEditWordUploadImageEvent>(_onUploadImage);
     on<CreateEditWordCreateWordEvent>(_onCreateWord);
     on<CreateEditWordUpdateWordEvent>(_onUpdateWord);
-
     on<CreateEditWordOnSaveSentenceEvent>(_onSaveSentenceInfo);
+    on<CreateEditWordImportMultiVocabularyEvent>(_onImportMultiVocabulary);
+
     on<CreateEditWordOnUpdateVocabularyInfoEvent>((event, emit) {
       
       emit(state.copyWith(
@@ -33,6 +37,26 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
           vocabularyInfo: event.vocabularyInfo
       ));
     });
+    on<CreateEditWordOnchangeModeEvent>((event, emit) {
+      emit(state.copyWith(
+          blocStatus: CreateEditWordStatus.onChangeMode,
+          isAddMultiWord: event.isAddMultiWord
+      ));
+    });
+    on<CreateEditWordUpdateMultiVocabularyEvent>((event, emit) {
+      emit(state.copyWith(
+          blocStatus: CreateEditWordStatus.onUpdateMultiVocabulary,
+          listMultiVocabularyInfo: event.listMultiVocabularyInfo
+      ));
+    });
+
+    on<CreateEditWordUpdateMultiVocabularyInfoAudioEvent>((event, emit) {
+      emit(state.copyWith(
+          blocStatus: CreateEditWordStatus.onUpdateMultiVocabularyAudio,
+          listMultiVocabularyInfoAudio: event.listMultiVocabularyInfoAudio
+      ));
+    });
+    
     on<CreateEditWordOnAddNewSentenceEvent>((event, emit) {
       if((state.vocabularyInfo?.sentenceInfos??[]).isNotEmpty && state.vocabularyInfo!.sentenceInfos!.last.isValidate())
         {
@@ -229,6 +253,49 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     emit(state.copyWith(
       blocStatus: CreateEditWordStatus.onSubmit,
       vocabularyInfo: state.vocabularyInfo,
+    ));
+  }
+
+  Future<void> _onImportMultiVocabulary(
+      CreateEditWordImportMultiVocabularyEvent event,
+      Emitter<CreateEditWordState> emit,
+      ) async {
+    emit(state.copyWith(
+      blocStatus: CreateEditWordStatus.onLoading,
+    ));
+
+    MonitorLoading().showLoading("");
+
+    for(VocabularyInfo vocabularyInfo in state.listMultiVocabularyInfo??[])
+      {
+        if(state.listMultiVocabularyInfoAudio!=null)
+          {
+            if((state.listMultiVocabularyInfoAudio?.files??[]).where((element) => element.name == vocabularyInfo.audio,).isNotEmpty)
+              { 
+                /// neu 
+                PlatformFile audioFile = (state.listMultiVocabularyInfoAudio?.files??[]).where((element) => element.name == vocabularyInfo.audio,).first;
+                dio.MultipartFile file = dio.MultipartFile.fromBytes(audioFile.bytes!.toList(growable: true), filename: audioFile.name);
+
+                UploadFileApi uploadFileApi = UploadFileApi(fileInfo: UploadFileInfo(data: SubjectType.vocabulary, fileName: audioFile.name, file:file ));
+                UploadFileResponseInfo? data = await uploadFileApi.call();
+                if(data!=null)
+                  {
+                    vocabularyInfo.audioId = data.id;
+                    vocabularyInfo.audioLink = data.link;
+                  }
+              }
+          }
+        else
+          {
+            print("object");
+          }
+        AddWordsApi addWordsApi = AddWordsApi(word:  vocabularyInfo);
+        dynamic data = await addWordsApi.call();
+      }
+    
+    MonitorLoading().dismiss();
+    emit(state.copyWith(
+      blocStatus: CreateEditWordStatus.onUpdateMultiVocabulary,
     ));
   }
 }

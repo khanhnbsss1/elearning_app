@@ -19,6 +19,7 @@ class AddWordController extends MyController {
       label: "Simplified",
       controller: TextEditingController(text: vocabularyInfo?.simplified??""),
     );
+
     basicValidator.addField(
       'traditional',
       required: true,
@@ -61,6 +62,13 @@ class AddWordController extends MyController {
       required: true,
       controller: TextEditingController(text: vocabularyInfo?.createdBy ??""),
     );
+    basicValidator.addField(
+      'excel',
+      required: true,
+      label: "excel",
+      controller: TextEditingController(),
+    );
+
   }
   
   void setVocabularyInfo(VocabularyInfo ?vocabularyInfoInput) {
