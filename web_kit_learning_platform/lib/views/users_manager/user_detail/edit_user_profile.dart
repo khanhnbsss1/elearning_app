@@ -70,7 +70,7 @@ class _EditUserProfileState extends State<EditUserProfile>
   TextEditingController genderController = TextEditingController();
   TextEditingController birthDayController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController countryController = TextEditingController();
+  TextEditingController positionController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
   TextEditingController oldPasswordController = TextEditingController();
   TextEditingController newPassWordController = TextEditingController();
@@ -168,7 +168,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                 // widget.userProfile?.roleId = roleController.text;
                                 widget.userProfile?.gender = genderController.text;
                                 widget.userProfile?.phoneNumber = phoneNumberController.text;
-                                widget.userProfile?.countryName = countryController.text;
+                                widget.userProfile?.position = positionController.text;
                                 widget.userProfile?.bankAccount = billInfoController.text;
                                 widget.userProfile?.bankName = backNameController.text;
                                 widget.userProfile?.email = emailController.text;
@@ -407,9 +407,9 @@ class _EditUserProfileState extends State<EditUserProfile>
                                   MySpacing.height(20),
                                   BuildTextField(
                                       enableEdit: enableEdit,
-                                      fieldTitle: "Country",
-                                      hintText: "Enter country",
-                                      controller: countryController,),
+                                      fieldTitle: L10nX.getStr.positions,
+                                      hintText: L10nX.getStr.positions,
+                                      controller: positionController,),
                                 ],
                               ),
                             ],
@@ -765,7 +765,7 @@ class _EditUserProfileState extends State<EditUserProfile>
      //roleController.text = widget.userProfile?.roleId.toString()??"";
      genderController.text = widget.userProfile?.gender??"";
      phoneNumberController.text = widget.userProfile?.phoneNumber??"";
-     countryController.text = widget.userProfile?.countryName??"";
+     positionController.text = widget.userProfile?.position??"";
      userNameController.text = widget.userProfile?.userName??"";
      billInfoController.text = widget.userProfile?.bankAccount??"";
      backNameController.text = widget.userProfile?.bankName??"";
