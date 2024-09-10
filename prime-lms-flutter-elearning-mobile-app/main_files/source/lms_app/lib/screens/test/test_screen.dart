@@ -6,6 +6,7 @@ import 'package:lms_app/base/widgets/audio/audio_speaker.dart';
 import 'package:lms_app/components/loading_tile.dart';
 import 'package:lms_app/components/user_avatar.dart';
 import 'package:lms_app/screens/quiz_lesson/question_tile.dart';
+import 'package:lms_app/screens/quiz_lesson/quiz_screen.dart';
 import 'package:lms_app/screens/test/progression_bar.dart';
 import 'package:lms_app/screens/test/question_widget.dart';
 import 'package:lms_app/services/apis/question/models/question_info.dart';
@@ -37,56 +38,46 @@ class _TestScreenState extends State<TestScreen> {
   @override
   Widget build(BuildContext context) {
     var progress = currentQuiz / totalQuiz;
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            'test',
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: Theme.of(context).primaryColor,
-          leading: IconButton(
-            icon: const Icon(Icons.close),
-            color: Colors.white,
-            onPressed: () => Navigator.pop(context),
-          ),
-        ),
-        body: FutureBuilder(
+    return FutureBuilder(
             future: getTestDetail(widget.testId),
             builder: (builder, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const LoadingTile();
               } else {
                 List<QuestionInfo>? questions = snapshot.data?.quizs;
+                return QuizLesson(questions: questions);
                 return Stack(children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      ProgressionBar(
-                        width: MediaQuery.of(context).size.width - 100,
-                        height: 25,
-                        radius: 12,
-                        progress: progress,
-                      ),
-                      CountDownClock(
-                          endTime: _endTime.difference(DateTime.now())),
+                  // Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     const SizedBox(
+                  //       height: 10,
+                  //     ),
+                  //     ProgressionBar(
+                  //       width: MediaQuery.of(context).size.width - 100,
+                  //       height: 25,
+                  //       radius: 12,
+                  //       progress: progress,
+                  //     ),
+                  //     CountDownClock(
+                  //         endTime: _endTime.difference(DateTime.now())),
+                  //
+                  //     // Container(
+                  //     //   padding: EdgeInsets.all(8),
+                  //     //   margin: EdgeInsets.all(8),
+                  //     //   height: MediaQuery.of(context).size.height-200,
+                  //     //   child: ListView.builder(
+                  //     //     scrollDirection: Axis.vertical,
+                  //     //     itemCount: questions?.length,
+                  //     //     itemBuilder: (context, index) {
+                  //     //       return QuestionWidget(question: questions![index], index: index,);
+                  //     //     },
+                  //     //   ),
+                  //     // ),
+                  //
+                  //   ],
+                  // ),
 
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        margin: EdgeInsets.all(8),
-                        height: MediaQuery.of(context).size.height-200,
-                        child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          itemCount: questions?.length,
-                          itemBuilder: (context, index) {
-                            return QuestionWidget(question: questions![index], index: index,);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
                   Positioned(
                       right: 20,
                       left: 20,
@@ -133,7 +124,7 @@ class _TestScreenState extends State<TestScreen> {
                 ]);
                 return SizedBox();
               }
-            }));
+            });
   }
 
   Future<TestDetail> getTestDetail(int testId) async {

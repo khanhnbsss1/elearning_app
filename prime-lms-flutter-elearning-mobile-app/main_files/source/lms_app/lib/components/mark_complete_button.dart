@@ -8,12 +8,12 @@ import 'package:lms_app/services/apis/course/course_detail/models/course_detail_
 import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import '../providers/user_data_provider.dart';
 import '../services/api_service.dart';
+import '../services/apis/question/models/question_info.dart';
 
 class MarkCompleteButton extends ConsumerWidget with CourseMixin {
-  const MarkCompleteButton({super.key, required this.course, required this.lesson});
+  const MarkCompleteButton(this.questions, {super.key, });
 
-  final CourseInfo course;
-  final LessonInfo lesson;
+  final List<QuestionInfo>? questions;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

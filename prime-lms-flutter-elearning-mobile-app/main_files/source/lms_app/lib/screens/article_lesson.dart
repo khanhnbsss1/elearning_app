@@ -40,7 +40,7 @@ class _ArticleLessonState extends ConsumerState<ArticleLesson> {
         titleSpacing: 0,
         titleTextStyle: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
       ),
-      bottomNavigationBar: MarkCompleteButton(course: widget.course, lesson: widget.lesson),
+      // bottomNavigationBar: MarkCompleteButton(course: widget.course, lesson: widget.lesson),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: HtmlBody(description: widget.lesson.note.toString()),
