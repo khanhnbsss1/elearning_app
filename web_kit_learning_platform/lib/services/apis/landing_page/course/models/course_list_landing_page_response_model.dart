@@ -31,68 +31,99 @@ class CourseListResponseModel {
   }
 }
 
-@override
-class CourseLandingPageInfo extends CourseInfo{
-  
+class CourseLandingPageInfo {
+  int? id;
+  String? name;
+  String? image;
+  String? producerName;
+  int? totalLectures;
+  int? totalSubjects;
+  String? language;
+  int? payment;
+  String? createdAt;
+  String? updatedAt;
+  int? ratePoint;
+  String? introduction;
+  int? courseId;
+  int? isShow;
+  String? courseName;
+  int? fileId;
+
   CourseLandingPageInfo(
-      {super.id,
-        super.name,
-        super.image,
-        super.producerName,
-        super.totalLectures,
-        super.totalSubjects,
-        super.language,
-        super.price,
-        super.createdAt,
-        super.updatedAt,
-        super.introduction,
-        super.rating,});
+      {this.id,
+        this.name,
+        this.image,
+        this.producerName,
+        this.totalLectures,
+        this.totalSubjects,
+        this.language,
+        this.payment,
+        this.createdAt,
+        this.updatedAt,
+        this.ratePoint,
+        this.introduction,
+        this.courseId,
+        this.isShow,
+        this.courseName,
+        this.fileId
+      });
 
   CourseLandingPageInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    image = json['image']??"";
+    image = json['image'];
     producerName = json['producer_name'];
-    totalLectures = json['total_lecture']??json['total_lectures'];
-    totalSubjects = json['total_subject']??json['total_subjects'];
+    totalLectures = json['total_lectures'];
+    totalSubjects = json['total_subjects'];
     language = json['language'];
-    price = json['price']??json['payment'];
+    payment = json['payment'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    rating = json["rating"]??json["rate_point"];
+    ratePoint = json['rate_point'];
     introduction = json['introduction'];
+    courseId = json['course_id'];
+    isShow = json['is_show'];
+    courseName = json['course_name'];
+    fileId = json['file_id'];
+
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if(id!=null)
+    {
+      data['id'] =id;
+    }
+    data['name'] =name;
+    data['image'] =image;
+    data['producer_name'] =producerName;
+    data['total_lectures'] =totalLectures;
+    data['total_subjects'] =totalSubjects;
+    data['payment'] =payment;
+    data['rate_point'] =ratePoint;
+    data['introduction'] =introduction;
+    data['course_id'] =courseId;
+    data['is_show'] =isShow;
+    data['course_name'] =courseName;
+    data['file_id'] =fileId;
+
+    return data;
   }
 
   CourseLandingPageInfo.fromCourseInfo(CourseInfo courseInfo){
-    id = courseInfo.id;
+    courseId = courseInfo.id;
+    courseName = courseInfo.name;
     name = courseInfo.name;
     image = courseInfo.image;
     producerName = courseInfo.producerName;
     totalLectures = courseInfo.totalLectures;
     totalSubjects = courseInfo.totalSubjects;
     language = courseInfo.language;
-    price = courseInfo.price;
+    payment = courseInfo.price;
     createdAt = courseInfo.createdAt;
     updatedAt = courseInfo.updatedAt;
-    rating = courseInfo.rating;
+    ratePoint = courseInfo.rating;
     introduction = courseInfo.introduction;
   }
-  @override
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    data['image'] = image;
-    data['producer_name'] = producerName;
-    data['total_lectures'] = totalLectures;
-    data['total_subjects'] = totalSubjects;
-    data['language'] = language;
-    data['payment'] = price;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    data['rate_point'] = rating;
-    data['introduction'] = introduction;
-
-    return data;
-  }
 }
+

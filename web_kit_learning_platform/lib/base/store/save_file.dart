@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:http/http.dart';
 import 'package:universal_html/html.dart' as html;
@@ -43,5 +44,20 @@ class FileStoreManager {
           savedDir: '', // click on notification to open downloaded file (for Android)
         );
       }
+  }
+  Future<void> downloadFileFromLocal({required String url, required String fileName}) async {
+    final byteData = await rootBundle.load(url);
+    final blob = html.Blob([byteData.buffer.asInt8List()]);
+    final urlFile = html.Url.createObjectUrlFromBlob(blob);
+    final anchor = html.document.createElement('a') as html.AnchorElement
+      ..href = urlFile
+      ..style.display = 'none'
+      ..download = fileName;
+    html.document.body?.children.add(anchor);
+
+    anchor.click();
+
+    html.document.body?.children.remove(anchor);
+    html.Url.revokeObjectUrl(url);
   }
 }

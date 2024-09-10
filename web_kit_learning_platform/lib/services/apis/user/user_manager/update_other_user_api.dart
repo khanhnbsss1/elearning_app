@@ -3,11 +3,11 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 
 
-class UpdateUserApi extends BaseApiRequest {
+class UpdateOtherUserApi extends BaseApiRequest {
   UserProfile info;
-  UpdateUserApi({required this.info}):super(
+  UpdateOtherUserApi({required this.info}):super(
     serviceType: SERVICE_TYPE.USER,
-    apiName: ApiName.getInstance().editUser,
+    apiName: ApiName.getInstance().editOtherUser,
   );
 
   Future<dynamic> call() async {

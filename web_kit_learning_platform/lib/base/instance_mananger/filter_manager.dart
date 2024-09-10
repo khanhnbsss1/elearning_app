@@ -128,7 +128,8 @@ class FilterManager{
   }
 
   Future<LessonListResponseModel?> getVocabularyListAllInfo(String keyword) async {
-    GetListVocabularyApi getLessonListFilterApi = GetListVocabularyApi(searchCommonRequest: SearchCommonRequest(pageNumber: -1));
+    GetListVocabularyApi getLessonListFilterApi = GetListVocabularyApi(
+        searchCommonRequest: SearchCommonRequest(pageNumber: -1, type: "Image"));
     lessonListResponseModel =  await getLessonListFilterApi.call();
     return lessonListResponseModel;
   }
@@ -161,7 +162,7 @@ class FilterManager{
             selectGrade = data.firstWhere((element) => element.name == gradeName,);
           }
         }
-        else
+        else if(data.isNotEmpty)
         {
           selectGrade = data.first;
           if(onChanged!=null)

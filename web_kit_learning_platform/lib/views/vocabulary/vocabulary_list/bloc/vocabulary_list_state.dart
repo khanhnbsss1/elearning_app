@@ -28,8 +28,12 @@ class VocabularyListState extends Equatable {
     this.selectVocabularyInfo
   }){
     vocabularyResponseModel??= VocabularyResponseModel(content: []);
-    searchCommonRequest??= SearchCommonRequest( pageNumber: 0, pageSize: 10, keyword: "");
     vocabularyType??= VocabularyType.vocabularyNonImage;
+    searchCommonRequest??= SearchCommonRequest( 
+        pageNumber: 0, 
+        pageSize: 10, 
+        keyword: "", 
+        type: vocabularyType== VocabularyType.vocabularyNonImage? "NoImage":"Image");
   }
 
 

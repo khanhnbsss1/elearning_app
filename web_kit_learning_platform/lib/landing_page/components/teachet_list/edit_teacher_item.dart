@@ -152,7 +152,7 @@ class EditTeacherItemPageState extends State<EditTeacherItemPage>with UIMixin {
                         return;
                       }
                       MultipartFile file = MultipartFile.fromBytes(result.files.first.bytes!.toList(growable: true), filename: result.names[0]);
-                      UploadFileApi uploadFileApi = UploadFileApi(fileInfo: UploadFileInfo(data: SubjectType.vocabulary, fileName: result.files.first.name, file: file));
+                      UploadFileApi uploadFileApi = UploadFileApi(fileInfo: UploadFileInfo(data: SubjectType.landingapge_teacher, fileName: result.files.first.name, file: file));
                       UploadFileResponseInfo? resultUpload = await uploadFileApi.call();
                       if (resultUpload != null) {
                         setState(() {

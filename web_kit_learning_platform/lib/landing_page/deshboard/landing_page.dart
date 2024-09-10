@@ -17,6 +17,7 @@ import 'package:webkit/services/apis/landing_page/review/models/landing_page_rev
 import 'package:webkit/views/auth/login/login.dart';
 import 'package:webkit/views/auth/register.dart';
 
+import '../../views/vocabulary/create_edit_vocabullary/create_edit_words.dart';
 import '../components/colornotifier.dart';
 import '../components/course_list/landing_page_course_list.dart';
 import '../components/who_this_course_is_for/who_this_course_is_for.dart';
@@ -300,7 +301,8 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
         EndOfPage(),
       });
     }
-    return Stack(children: [
+    return Stack(
+        children: [
       SingleChildScrollView(
         controller: _mainController,
         //scrollSpeed: 100,
@@ -320,6 +322,14 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
               hoverColor: Color.fromRGBO(134, 16, 14, 1.0),
               onPressed: () {
                 Scrollable.ensureVisible(GlobalObjectKey(0).currentContext!, duration: Duration(seconds: 1), curve: Curves.easeInOutCubic);
+
+                CreateEditWordsPage(
+                  wordsPageActionType: WordsPageActionType.create,
+                  key: UniqueKey(),
+                  onCreated: () {
+                    //BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListInitEvent());
+                  },
+                ).show(context);
               },
               child: Icon(Icons.arrow_upward),
             );

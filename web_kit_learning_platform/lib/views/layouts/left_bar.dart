@@ -18,7 +18,7 @@ import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/widgets/custom_pop_menu.dart';
 
 typedef LeftbarMenuFunction = void Function(String key);
-
+double scrollPosition = 0;
 class LeftbarObserver {
   static Map<String, LeftbarMenuFunction> observers = {};
 
@@ -49,9 +49,13 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
 
   String path = UrlService.getCurrentUrl();
 
+  late ScrollController scrollController = ScrollController(initialScrollOffset: scrollPosition);
   @override
   void initState() {
     super.initState();
+    scrollController.addListener(() {
+      scrollPosition=  scrollController.offset;
+    },);
   }
 
   @override
@@ -115,6 +119,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
             Gap(Dimens.size12),
             Expanded(
                 child: SingleChildScrollView(
+                  controller: scrollController,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,

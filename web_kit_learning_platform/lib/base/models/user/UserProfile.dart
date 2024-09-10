@@ -113,10 +113,10 @@ class UserProfile {
     data['phone_number'] = (phoneNumber??"").trim();
     data['avatar'] = avatar??"";
     data['type_name'] = (typeName??"").isNotEmpty?typeName:"User";
-    data['created_at'] = createdAt??"";
-    data['created_by'] = createdBy??"";
-    data['updated_at'] = updatedAt??"";
-    data['updated_by'] = updatedBy??"";
+    //data['created_at'] = createdAt??"";
+    //data['created_by'] = createdBy??"";
+    //data['updated_at'] = updatedAt??"";
+    //data['updated_by'] = updatedBy??"";
     data['country_name'] = countryName??"";
     data['position'] = position??"";
     data['email'] = (email??"").trim();

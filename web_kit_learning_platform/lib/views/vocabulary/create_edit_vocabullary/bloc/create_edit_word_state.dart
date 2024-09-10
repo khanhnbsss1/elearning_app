@@ -11,6 +11,10 @@ enum CreateEditWordStatus {
   onCreateNewSentence,
   onUpdateWord,
   onUpdateWordInfo,
+  onChangeMode,
+  onUpdateMultiVocabulary,
+  onUpdateMultiVocabularyAudio,
+  onUploadMultiVocabulary,
   unknown
 }
 
@@ -19,11 +23,14 @@ class CreateEditWordState extends Equatable {
   CreateEditWordStatus? blocStatus;
   UploadFileResponseInfo? documentModel;
   VocabularyInfo? vocabularyInfo;
+  List<VocabularyInfo>? listMultiVocabularyInfo;
   UploadFileResponseInfo? audio;
   UploadFileResponseInfo? image;
   AddWordController? addWordController;
   WordsPageActionType? wordsPageActionType;
+  FilePickerResult? listMultiVocabularyInfoAudio;
   int? exampleIndex =0;
+  bool? isAddMultiWord = false;
   CreateEditWordState({
       this.blocStatus,
     this.documentModel,
@@ -32,9 +39,14 @@ class CreateEditWordState extends Equatable {
     this.audio,
     this.addWordController,
     this.wordsPageActionType,
-    this.exampleIndex
+    this.exampleIndex,
+    this.isAddMultiWord,
+    this.listMultiVocabularyInfo,
+    this.listMultiVocabularyInfoAudio
   }){
     exampleIndex??=-1;
+    isAddMultiWord??=false;
+    listMultiVocabularyInfo??=[];
     if(wordsPageActionType == WordsPageActionType.view)
       {
         vocabularyInfo??=VocabularyInfo(sentenceInfos: []);
@@ -56,7 +68,10 @@ class CreateEditWordState extends Equatable {
     UploadFileResponseInfo? image,
     AddWordController? addWordController,
     WordsPageActionType? wordsPageActionType,
-    int? exampleIndex
+    int? exampleIndex,
+    bool? isAddMultiWord,
+    List<VocabularyInfo>? listMultiVocabularyInfo,
+    FilePickerResult? listMultiVocabularyInfoAudio
   })
   {
     return CreateEditWordState(
@@ -68,6 +83,10 @@ class CreateEditWordState extends Equatable {
       addWordController: addWordController??this.addWordController,
       wordsPageActionType: wordsPageActionType??this.wordsPageActionType,
       exampleIndex: exampleIndex??this.exampleIndex,
+      isAddMultiWord: isAddMultiWord??this.isAddMultiWord,
+      listMultiVocabularyInfo: listMultiVocabularyInfo??this.listMultiVocabularyInfo,
+      listMultiVocabularyInfoAudio: listMultiVocabularyInfoAudio??this.listMultiVocabularyInfoAudio,
+
 
     );
   }
@@ -80,7 +99,10 @@ class CreateEditWordState extends Equatable {
     audio,
     addWordController,
     wordsPageActionType,
-    exampleIndex
+    exampleIndex,
+    isAddMultiWord,
+    listMultiVocabularyInfo,
+    listMultiVocabularyInfoAudio
   ];
 
 }

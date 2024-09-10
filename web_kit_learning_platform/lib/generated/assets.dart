@@ -17,6 +17,8 @@ class Assets {
   static const String assetsLangEs = 'assets/lang/es.json';
   static const String assetsLangFr = 'assets/lang/fr.json';
   static const String assetsLangHi = 'assets/lang/hi.json';
+  static const String assetsPngLogo = 'assets/png/logo.png';
+  static const String assetsVocabularyTmp = 'assets/vocabulary_tmp.xlsx';
   static const String datasAustralia = 'assets/datas/australia.json';
   static const String datasChatData = 'assets/datas/chat_data.json';
   static const String datasContactsData = 'assets/datas/contacts_data.json';
@@ -34,6 +36,7 @@ class Assets {
   static const String datasShoppingProduct = 'assets/datas/shopping_product.json';
   static const String datasWorldMap = 'assets/datas/world_map.json';
   static const String deshboardAvatar = 'assets/deshboard/avatar.png';
+  static const String deshboardBackground = 'assets/deshboard/background.jpg';
   static const String deshboardBeachwalk = 'assets/deshboard/beachwalk.png';
   static const String deshboardBeackwalk = 'assets/deshboard/beackwalk.png';
   static const String deshboardDeshimage = 'assets/deshboard/deshimage.png';
@@ -43,11 +46,11 @@ class Assets {
   static const String deshboardLine = 'assets/deshboard/Line.png';
   static const String deshboardPlayCircle = 'assets/deshboard/playCircle.svg';
   static const String deshboardPlayCircle2 = 'assets/deshboard/playCircle2.svg';
+  static const String deshboardProfile = 'assets/deshboard/profile.png';
   static const String deshboardTravel1 = 'assets/deshboard/travel1.json';
   static const String deshboardTravel2 = 'assets/deshboard/travel2.json';
   static const String deshboardTravel3 = 'assets/deshboard/travel3.json';
   static const String deshboardVideobg = 'assets/deshboard/videobg.png';
-  static const String deshboardWinterlandscape = 'assets/deshboard/winterlandscape.png';
   static const String dummy1 = 'assets/images/dummy/1.jpg';
   static const String dummy10 = 'assets/images/dummy/10.jpg';
   static const String dummy11 = 'assets/images/dummy/11.jpg';
@@ -180,6 +183,8 @@ class Assets {
   static const String iconsTeacherIconDark = 'assets/Icons/teacherIconDark.svg';
   static const String iconsTicketIcon = 'assets/Icons/ticketIcon.svg';
   static const String iconsTicketIconDark = 'assets/Icons/ticketIconDark.svg';
+  static const String imagesPngIcLoading = 'assets/images/png/icLoading.png';
+  static const String imagesPngLoadingOnPage = 'assets/images/png/loading_on_page.png';
   static const String langAr = 'assets/lang/ar.png';
   static const String langEn = 'assets/lang/en.png';
   static const String langEs = 'assets/lang/es.png';
@@ -218,11 +223,13 @@ class Assets {
   static const String placesPlacespic7 = 'assets/deshboard/places/placespic7.png';
   static const String placesPlacespic8 = 'assets/deshboard/places/placespic8.png';
   static const String pngIcInformation = 'assets/images/png/ic_information.png';
-  static const String pngIcLoading = 'assets/images/png/icLoading.png';
+  static const String pngIcLoading = 'assets/png/icLoading.png';
   static const String pngIcNoData = 'assets/images/png/icNoData.png';
-  static const String pngLoadingOnPage = 'assets/images/png/loading_on_page.png';
+  static const String pngInvalid = 'assets/png/invalid.png';
+  static const String pngLoadingOnPage = 'assets/png/loading_on_page.png';
   static const String pngLogo = 'assets/png/logo.jpg';
   static const String pngSearch = 'assets/images/png/search.png';
+  static const String pngUser = 'assets/png/user.png';
   static const String profHostpic1 = 'assets/deshboard/prof/hostpic1.png';
   static const String profHostpic2 = 'assets/deshboard/prof/hostpic2.png';
   static const String profHostpic3 = 'assets/deshboard/prof/hostpic3.png';

@@ -28,7 +28,8 @@ import 'package:webkit/services/apis/roles/update_user_role_api.dart';
 import 'package:webkit/services/apis/user/get_user_detail_api.dart';
 import 'package:webkit/services/apis/user/update_password_api.dart';
 import 'package:webkit/services/apis/user/user_manager/add_user_api.dart';
-import 'package:webkit/services/apis/user/user_manager/update_user_api.dart';
+import 'package:webkit/services/apis/user/user_manager/update_other_user_api.dart';
+import 'package:webkit/services/apis/user/user_manager/update_seft_user_api.dart';
 import 'package:webkit/views/apps/contacts/build_text_field.dart';
 import 'package:webkit/views/layouts/layout.dart';
 import 'package:file_picker/file_picker.dart';
@@ -54,6 +55,8 @@ class _EditUserProfileState extends State<EditUserProfile>
     with SingleTickerProviderStateMixin, UIMixin {
   late EditProfileController controller;
   late String roleId;
+  late String oldRoleId;
+
   @override
   void initState() {
     super.initState();
@@ -172,13 +175,16 @@ class _EditUserProfileState extends State<EditUserProfile>
                                 widget.userProfile?.bankAccount = billInfoController.text;
                                 widget.userProfile?.bankName = backNameController.text;
                                 widget.userProfile?.email = emailController.text;
+                                widget.userProfile?.roleId = roleId;
                                 dynamic updateUserApi;
-
-                                if((widget.editSelfProfile??true)||widget.actionType == ActionType.edit)
+                                if((widget.editSelfProfile??true)){
+                                  updateUserApi = UpdateSeftUserApi(info: widget.userProfile!);
+                                }
+                                else if(!(widget.editSelfProfile??true) && widget.actionType == ActionType.edit)
                                   {
-                                    updateUserApi = UpdateUserApi(info: widget.userProfile!);
+                                    updateUserApi = UpdateOtherUserApi(info: widget.userProfile!);
                                   }
-                                else if(widget.actionType == ActionType.create)
+                                else if(!(widget.editSelfProfile??true) &&  widget.actionType == ActionType.create)
                                   {
                                     if(newPassWordAgainController.text != newPassWordController.text && (widget.editSelfProfile??true))
                                     {
@@ -195,7 +201,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                     dynamic data = await updateUserApi.call();
                                     if(data.runtimeType == String && (data as String).isEmpty)
                                     {
-                                      if(roleId != widget.userProfile?.roleId)
+                                      if(roleId != oldRoleId && widget.userProfile!.id!=null)
                                         {
                                           UpdateUserRoleApi updateUserRoleApi = UpdateUserRoleApi(userId: widget.userProfile!.accountId!, roleId: roleId,);
                                           dynamic data = await updateUserRoleApi.call();
@@ -592,29 +598,15 @@ class _EditUserProfileState extends State<EditUserProfile>
                                           fieldTitle: "Bank Account",
                                           hintText:
                                           "Enter your Bank account",
+                                        controller: billInfoController,
                                       ),
                                       MySpacing.height(20),
                                       BuildTextField(
                                           enableEdit: enableEdit,
                                           fieldTitle: "Bank Name",
+                                          controller: backNameController,
                                           hintText: "Enter your Bank Name",),
                                       MySpacing.height(20),
-                                      Visibility(
-                                        visible:  enableEdit,
-                                        child: MyButton(
-                                          onTap: () {},
-                                          elevation: 0,
-                                          padding: MySpacing.xy(20, 16),
-                                          backgroundColor:
-                                          ColorConst.mainColor,
-                                          borderRadiusAll:
-                                          AppStyle.buttonRadius.medium,
-                                          child: MyText.bodySmall(
-                                            'Change payment method',
-                                            color: ColorConst.whiteColor,
-                                          ),
-                                        ),
-                                      )
                                     ],
                                   ),
                                 ],
@@ -770,6 +762,7 @@ class _EditUserProfileState extends State<EditUserProfile>
      billInfoController.text = widget.userProfile?.bankAccount??"";
      backNameController.text = widget.userProfile?.bankName??"";
       emailController.text = widget.userProfile?.email??"";
+      oldRoleId = widget.userProfile?.roleId??'';
       roleId = widget.userProfile?.roleId??'';
 
     return widget.userProfile;
