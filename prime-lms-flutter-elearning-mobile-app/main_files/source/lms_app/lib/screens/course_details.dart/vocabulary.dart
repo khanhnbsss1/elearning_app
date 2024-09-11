@@ -7,24 +7,9 @@ import 'package:lms_app/ads/ad_manager.dart';
 import 'package:lms_app/constants/app_constants.dart';
 import 'package:lms_app/mixins/course_mixin.dart';
 import 'package:lms_app/mixins/user_mixin.dart';
-import 'package:lms_app/models/course.dart';
-import 'package:lms_app/models/user_model.dart';
-import 'package:lms_app/screens/article_lesson.dart';
-import 'package:lms_app/screens/auth/login.dart';
-import 'package:lms_app/screens/quiz_lesson/quiz_screen.dart';
-import 'package:lms_app/screens/video_lesson.dart';
-import 'package:lms_app/services/api_service.dart';
-import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
-import 'package:lms_app/utils/loading_widget.dart';
-import 'package:lms_app/utils/next_screen.dart';
-import 'package:lms_app/utils/snackbars.dart';
-
 import '../../base/widgets/audio/audio_speaker.dart';
-import '../../models/lesson.dart';
-import '../../models/user/UserProfile.dart';
-import '../../providers/user_data_provider.dart';
 
 class Vocabulary extends ConsumerWidget with CourseMixin, UserMixin {
   const Vocabulary(

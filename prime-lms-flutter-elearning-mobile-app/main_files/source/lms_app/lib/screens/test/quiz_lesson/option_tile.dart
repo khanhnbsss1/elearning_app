@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lms_app/models/question.dart';
 import 'package:lms_app/services/apis/question/models/question_info.dart';
+import 'package:lms_app/services/apis/scores/models/score_info.dart';
 import 'quiz_screen.dart';
 
 class OptionTile extends StatelessWidget {
@@ -24,7 +24,6 @@ class OptionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isSelected =
         selectedOption != null && optionIndex == selectedOption;
-    final bool isCorrectOption = answer.rightAnswer == 1;
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
@@ -44,59 +43,51 @@ class OptionTile extends StatelessWidget {
                         fontWeight: FontWeight.w500),
                   )
                 : Image.network(answer.typeAnswer!),
-            tileColor: _tileColor(context, isSelected, isCorrectOption),
+            tileColor: _tileColor(
+              context,
+              isSelected,
+            ),
             value: optionIndex,
             activeColor: Colors.white,
-            secondary: _trailingIcon(isSelected, isCorrectOption),
+            secondary: _trailingIcon(
+              isSelected,
+            ),
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
             onChanged: selectedOption != null
                 ? null
-                : (int? value) =>
-                    _onChanged(value, ref, questionIndex, isCorrectOption)),
+                : (int? value) => _onChanged(value, ref, questionIndex)),
       ),
     );
   }
 
-  void _onChanged(
-      int? value, WidgetRef ref, int questionIndex, bool isCorrectOption) {
+  void _onChanged(int? value, WidgetRef ref, int questionIndex) {
     ref.read(selectedOptionProvider.notifier).update((state) => value);
 
     //Initiating corrct Answer count
     if (questionIndex == 0) {
       ref.invalidate(correctAnswerCountProvider);
     }
-
-    //updting correct answer count when the answer is correct
-    if (isCorrectOption) {
-      ref
-          .read(correctAnswerCountProvider.notifier)
-          .update((state) => state + 1);
-    }
   }
 
-  Icon? _trailingIcon(bool isSelected, bool isCorrectOption) {
+  Icon? _trailingIcon(
+    bool isSelected,
+  ) {
     if (!isSelected) {
       return null;
     } else {
-      if (isCorrectOption) {
-        return const Icon(Icons.check, color: Colors.white);
-      } else {
-        return const Icon(Icons.clear, color: Colors.white);
-      }
+      return const Icon(Icons.clear, color: Colors.white);
     }
   }
 
   Color _tileColor(
-      BuildContext context, bool isSelected, bool isCorrectOption) {
+    BuildContext context,
+    bool isSelected,
+  ) {
     if (!isSelected) {
       return Theme.of(context).scaffoldBackgroundColor;
     } else {
-      if (isCorrectOption) {
-        return Colors.orangeAccent;
-      } else {
-        return Colors.redAccent;
-      }
+      return Colors.blue;
     }
   }
 }

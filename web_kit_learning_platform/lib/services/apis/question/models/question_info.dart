@@ -22,7 +22,6 @@ Map<QuestionType, String>mapQuestionTypeToStrKey={
   QuestionType.audio:"Audio",
   QuestionType.image:"Image",
   QuestionType.fill:"Fill",
-
 };
 
 Map< String,QuestionType>mapStrKeyQuestionType={

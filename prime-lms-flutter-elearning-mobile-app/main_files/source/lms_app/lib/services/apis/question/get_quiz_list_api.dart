@@ -1,10 +1,7 @@
 
-import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
-// import 'package:webkit/base/services/base_request/models/search_common_request.dart';
-
+import '../../../base/base_request_elearning/BaseApiRequest.dart';
 import '../../../base/base_request_elearning/models/search_common_request.dart';
 import 'models/question_info.dart';
-
 
 class GetQuizListApi extends BaseApiRequest {
   SearchCommonRequest searchCommonRequest;

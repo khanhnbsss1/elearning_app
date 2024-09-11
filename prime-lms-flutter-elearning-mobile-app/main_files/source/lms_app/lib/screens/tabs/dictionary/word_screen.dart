@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../../base/widgets/audio/audio_speaker.dart';
 import '../../../services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 
 class WordScreen extends StatefulWidget {

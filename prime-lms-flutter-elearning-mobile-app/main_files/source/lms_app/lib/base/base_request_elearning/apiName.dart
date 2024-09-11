@@ -91,5 +91,8 @@ class ApiName {
 
   ///categories
   final String getCategories = "/get-categories";
+
+  ///
+  final String createScore = "create_score";
 }
 

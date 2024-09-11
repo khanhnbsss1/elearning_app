@@ -118,10 +118,16 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
             width: 150,
             child: (videoThumbnail != "")
                 ? CustomCacheImage(imageUrl: videoThumbnail, radius: 3)
-                : Center(
-                    child: Image.asset("assets/images/noImage.jpg",
-                        fit: BoxFit.fitHeight),
-                  ),
+                : Stack(
+                  children: [
+                    Center(
+                      child: Image.asset("assets/images/noImage.jpg",
+                          fit: BoxFit.fitHeight,
+                      ),
+                    ),
+                    if (selected) const Positioned(child: Center(child: Icon(Icons.play_arrow, color: Colors.black,))),
+                  ]
+                ),
           ),
           Align(
             alignment: Alignment.topCenter,

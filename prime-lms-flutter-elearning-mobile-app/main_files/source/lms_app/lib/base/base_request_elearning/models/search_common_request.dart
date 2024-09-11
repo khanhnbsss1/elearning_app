@@ -8,6 +8,7 @@ class SearchCommonRequest {
   int?producerId;
   String?subFilterId;
   int? isActive;
+  String? type;
   SearchCommonRequest(
       {
         this.userId,
@@ -18,7 +19,8 @@ class SearchCommonRequest {
         this.keyword,
         this.subFilterId,
         this.producerId,
-        this.isActive
+        this.isActive,
+        this.type
       });
 
   SearchCommonRequest.fromJson(Map<String, dynamic> json) {
@@ -31,6 +33,7 @@ class SearchCommonRequest {
     subFilterId = json['categoryId'];
     producerId = json['producerId'];
     isActive = json['isActive'];
+    type = json['type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -44,7 +47,7 @@ class SearchCommonRequest {
     if (subFilterId != null && subFilterId != "") data['subFilterId'] = subFilterId??"";
     data['isActive'] = isActive??"1";
     if (producerId != null) data['producerId'] = producerId??"";
-
+    if (type != null) data['type'] = type;
     return data;
   }
   SearchCommonRequest copyWith({
@@ -54,9 +57,10 @@ class SearchCommonRequest {
     int? testId,
     String? filterType,
     String? keyword,
-    int?producerId,
-    int?categoryId,
-    int?isActive,
+    int? producerId,
+    int? categoryId,
+    int? isActive,
+    String? type,
   }){
     return SearchCommonRequest(
       userId: userId??this.userId,
@@ -68,6 +72,7 @@ class SearchCommonRequest {
       producerId: producerId??this.producerId,
       subFilterId: subFilterId??this.subFilterId,
       isActive: isActive??this.isActive,
+        type: type??this.type
     );
 }
 }
