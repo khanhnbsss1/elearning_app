@@ -12,8 +12,10 @@ import 'package:lms_app/utils/next_screen.dart';
 import '../../../models/user/UserProfile.dart';
 import '../../../services/apis/teacher_list/models/landing_page_teacher_list_model.dart';
 
-final topAuthorsProvider = FutureProvider.autoDispose<List<LandingPageUserInfo>?>((ref) async {
-  final List<LandingPageUserInfo>? teacherList = await ApiService().getTopAuthors();
+final topAuthorsProvider =
+    FutureProvider.autoDispose<List<LandingPageUserInfo>?>((ref) async {
+  final List<LandingPageUserInfo>? teacherList =
+      await ApiService().getTopAuthors();
   return teacherList;
 });
 
@@ -26,62 +28,54 @@ class TopAuthors extends ConsumerWidget {
     return authors.when(
         skipLoadingOnRefresh: false,
         data: (data) {
-          return (data!.isNotEmpty) ? Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          return (data!.isNotEmpty)
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Column(
                     children: [
-                      Expanded(
-                        child: (LanguageHelper().getCurrentLocale().languageCode != 'vi') ? RichText(
-                            text: TextSpan(
-                                text: 'top'.tr(),
-                                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-                                children: [
-                              const TextSpan(text: ' '),
-                              TextSpan(
-                                text: 'instructors'.tr(),
-                                style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.blueAccent, fontWeight: FontWeight.bold),
-                              )
-                            ])) : RichText(
-                            text: TextSpan(
-                                text: 'instructors'.tr(),
-                                style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.blueAccent, fontWeight: FontWeight.bold),
-                                children: [
-                                  const TextSpan(text: ' '),
-                                  TextSpan(
-                                    text: 'top'.tr(),
-                                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-                                  )
-                                ])),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                                child: Text(
+                              'top-instructor'.tr(),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(
+                                      color: Colors.blueAccent,
+                                      fontWeight: FontWeight.bold),
+                            )),
+                            TextButton(
+                              onPressed: () => NextScreen.normal(
+                                  context, const AllAuthors()),
+                              style: TextButton.styleFrom(
+                                  padding: const EdgeInsets.all(0)),
+                              child: Text(
+                                'view-all',
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ).tr(),
+                            )
+                          ],
+                        ),
                       ),
-                      TextButton(
-                        onPressed: () => NextScreen.normal(context, const AllAuthors()),
-                        style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
-                        child: Text(
-                          'view-all',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ).tr(),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: data.map((user) {
+                            return AuthorCard(user: user);
+                          }).toList(),
+                        ),
                       )
                     ],
                   ),
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: data.map((user) {
-                      return AuthorCard(user: user);
-                    }).toList(),
-                  ),
                 )
-              ],
-            ),
-          ) : const SizedBox();
+              : const SizedBox();
         },
         error: (e, x) => Text('error: $e, $x'),
         loading: () => const LoadingTile(height: 300));

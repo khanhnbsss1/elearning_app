@@ -95,7 +95,7 @@
     "choose-answer": "Please choose your answer",
     "try-again": "Try Again",
     "your-score": "Your Score: ",
-    "score-count": "{} out of 100",
+    "score-count": "{}/100",
     "passed-test": "Congrats! You have passed the test.",
     "failed-test": "Unfortunately, You couldn't pass the test.",
     "iap-title": "Unlock Everything",
@@ -180,5 +180,9 @@
     "status": "Status",
     "type-test": "Test type",
     "no-internet": "Please check your internet connection",
-    "wrong-pass-or-user": "Wrong username or password"
+    "wrong-pass-or-user": "Wrong username or password",
+    "search-word": "Search word",
+    "list-of-video": "Video list",
+    "top-instructor": "Top instructors",
+    "dictionary": "Dictionary"
 }

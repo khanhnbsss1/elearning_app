@@ -13,17 +13,15 @@ import '../curricullam_screen.dart';
 import '../tabs/my_courses_tab/my_courses_tab.dart';
 
 class RegisterButton extends ConsumerWidget {
-  const RegisterButton({super.key, required this.course,});
+  const RegisterButton({super.key, required this.course, required this.myCourses});
   final CourseInfo course;
+  final List<CourseInfo> myCourses;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final myCourse = ref.watch(myCoursesProvider);
-    List<CourseInfo> myCourses = myCourse.value??[];
     bool check;
     return Center(
-      child: (!UserManager().checkRegisteredCourse(
-          course, myCourses ?? []))
+      child: (!UserManager().checkRegisteredCourse(course, myCourses ))
           ? MyButton(
           onTap: () {
             showDialog(

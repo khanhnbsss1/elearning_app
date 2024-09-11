@@ -44,73 +44,81 @@ class CourseDetailsView extends ConsumerWidget {
     return courseInfo;
   }
 
-  Future<UserProfile?> getUserDetail() async {
-    UserProfile? user = await UserManager().getUserProfile();
-    return user;
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-        bottomNavigationBar: Wrap(
-          alignment: WrapAlignment.center,
-          children: [
-            AdManager.isBannerEnbaled(ref)
-                ? const BannerAdWidget()
-                : Container(),
-            // EnrollButton(course: course),
-          ],
-        ),
-        body: FutureBuilder(
-            future: Future.wait([getCourseDetail(courses), getUserDetail()]),
-            builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-              if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
-              } else if (snapshot.hasData) {
-                CourseInfo courseInfo = snapshot.data?[0]!;
-                return CustomScrollView(
-                  slivers: [
-                    SliverAppBar(
-                      pinned: false,
-                      floating: true,
-                      leading: IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: const Icon(FeatherIcons.chevronLeft),
-                      ),
-                      actions: [
-                        RegisterButton(course: courseInfo),
-
-                        // BookmarkButton(course: courseInfo),
-                        // ReviewButton(course: courseInfo),
-                        CourseShareButton(course: courseInfo),
-                        const SizedBox(width: 10),
-                      ],
-                    ),
-                    SliverToBoxAdapter(
-                      child: Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 5, 20, 30),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              PreviewBox(course: courseInfo, heroTag: heroTag),
-                              const SizedBox(height: 20),
-                              TitleInfo(course: courseInfo),
-                              CourseInfoScreen(course: courseInfo),
-                              Learnings(course: courseInfo),
-                              const SizedBox(height: 40),
-                              Curriculam(course: courseInfo),
-                              Requirements(course: courseInfo),
-                              // CourseDescription(course: courseInfo),
-                              CourseTags(course: courseInfo),
-                              RelatedCourses(course: courseInfo),
+    final myCourse = ref.watch(myCoursesProvider);
+    return myCourse.when(
+        data: (myCourses) {
+          return Scaffold(
+              bottomNavigationBar: Wrap(
+                alignment: WrapAlignment.center,
+                children: [
+                  AdManager.isBannerEnbaled(ref)
+                      ? const BannerAdWidget()
+                      : Container(),
+                  // EnrollButton(course: course),
+                ],
+              ),
+              body: FutureBuilder(
+                  future: getCourseDetail(courses),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else if (snapshot.hasData) {
+                      CourseInfo courseInfo = snapshot.data!;
+                      return CustomScrollView(
+                        slivers: [
+                          SliverAppBar(
+                            pinned: false,
+                            floating: true,
+                            leading: IconButton(
+                              onPressed: () => Navigator.pop(context),
+                              icon: const Icon(FeatherIcons.chevronLeft),
+                            ),
+                            actions: [
+                              RegisterButton(
+                                  course: courseInfo,
+                                  myCourses: myCourses ?? []),
+                              // BookmarkButton(course: courseInfo),
+                              // ReviewButton(course: courseInfo),
+                              CourseShareButton(course: courseInfo),
+                              const SizedBox(width: 10),
                             ],
-                          )),
-                    ),
-                  ],
-                );
-              } else {
-                return const LoadingIndicatorWidget();
-              }
-            }));
+                          ),
+                          SliverToBoxAdapter(
+                            child: Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 5, 20, 30),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    PreviewBox(
+                                        course: courseInfo, heroTag: heroTag),
+                                    const SizedBox(height: 20),
+                                    TitleInfo(course: courseInfo),
+                                    CourseInfoScreen(course: courseInfo),
+                                    Learnings(course: courseInfo),
+                                    const SizedBox(height: 40),
+                                    Curriculam(course: courseInfo),
+                                    Requirements(course: courseInfo),
+                                    // CourseDescription(course: courseInfo),
+                                    CourseTags(course: courseInfo),
+                                    RelatedCourses(course: courseInfo),
+                                  ],
+                                )),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return const LoadingIndicatorWidget();
+                    }
+                  }));
+        },
+        error: (error, stackTrace) => Text('error: $error'),
+        loading: () {
+          return const Scaffold(
+            body: LoadingIndicatorWidget(),
+          );
+        });
   }
 }

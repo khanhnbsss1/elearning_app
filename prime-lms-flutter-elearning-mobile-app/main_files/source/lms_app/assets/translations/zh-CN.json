@@ -95,7 +95,7 @@
     "choose-answer": "请选择您的答案",
     "try-again": "重试",
     "your-score": "您的分数：",
-    "score-count": "{} 分（满分100分）",
+    "score-count": "{}/100",
     "passed-test": "恭喜！您已通过测试。",
     "failed-test": "很遗憾，您未通过测试。",
     "iap-title": "解锁所有内容",
@@ -180,6 +180,10 @@
     "status": "地位",
     "type-test": "型式试验",
     "no-internet": "请检查您的互联网连接",
-    "wrong-pass-or-user": "用户名或密码错误"
+    "wrong-pass-or-user": "用户名或密码错误",
+    "search-word": "搜索单词",
+    "list-of-video": "视频列表",
+    "top-instructor": "顶尖导师",
+    "dictionary": "字典"
 
 }

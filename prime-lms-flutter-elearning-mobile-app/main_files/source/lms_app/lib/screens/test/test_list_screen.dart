@@ -68,7 +68,7 @@ class _TestListScreenState extends State<TestListScreen> {
                     ),
                     children: [
                       ListTile(
-                        onTap: () => openDialog(context, testList[index].id!),
+                        onTap: () => openDialog(context, testList[index]),
                         title: Text('${'type-test'.tr()} ${testList[index].typeTest??"-"}'),
                         subtitle: Text('status').tr(),
                       )
@@ -88,7 +88,7 @@ class _TestListScreenState extends State<TestListScreen> {
     return testListResponseModel.content??[];
   }
 
-  Future<void> openDialog(BuildContext context,int testId) {
+  Future<void> openDialog(BuildContext context,TestInfo test) {
     return Dialogs.materialDialog(
       context: context,
       title: 'Do-test-title'.tr(),
@@ -115,7 +115,7 @@ class _TestListScreenState extends State<TestListScreen> {
         IconsOutlineButton(
           onPressed: () {
             Navigator.pop(context);
-            NextScreen.normal(context, TestScreen(testId: testId));
+            NextScreen.normal(context, TestScreen(test: test));
           },
           text: 'ready'.tr(),
           color: Theme

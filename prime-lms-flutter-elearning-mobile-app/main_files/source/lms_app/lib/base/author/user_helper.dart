@@ -109,7 +109,6 @@ class UserManager{
   }
 
   bool checkRegisteredCourse(CourseInfo courseInfo, List<CourseInfo> myCourse) {
-    print(courseInfo.id);
     return myCourse.any((e) => e.id == courseInfo.id);
   }
 

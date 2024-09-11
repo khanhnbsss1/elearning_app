@@ -71,6 +71,7 @@ class QuestionTile extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return OptionTile(
                     ref: ref,
+                    question: question,
                     answer: question.answer![index],
                     questionIndex: questionIndex,
                     optionIndex: index,
