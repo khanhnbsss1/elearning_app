@@ -42,7 +42,8 @@ class VocabularyListState extends Equatable {
     VocabularyStatus? blocStatus,
     SearchCommonRequest? searchCommonRequest,
     VocabularyType? vocabularyType,
-    VocabularyInfo? selectVocabularyInfo
+    VocabularyInfo? selectVocabularyInfo,
+    
   })
   {
     return VocabularyListState(
