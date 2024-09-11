@@ -40,7 +40,7 @@ class UserProfile {
   String? permission;
   int? roleId;
   int? isPayment;
-  String? fileId;
+  int? fileId;
 
   String? imageUrl;
   List? role;
@@ -203,7 +203,7 @@ class UserProfile {
     String? platform,
     List? reviews,
     int? isPayment,
-    String? fileId,
+    int? fileId,
   }) {
     return UserProfile(
       id: id ?? this.id,

@@ -184,6 +184,9 @@
     "search-word": "搜索单词",
     "list-of-video": "视频列表",
     "top-instructor": "顶尖导师",
-    "dictionary": "字典"
-
+    "dictionary": "词典",
+    "simplified": "简体",
+    "traditional": "繁体",
+    "meaning": "意思",
+    "example": "例子"
 }

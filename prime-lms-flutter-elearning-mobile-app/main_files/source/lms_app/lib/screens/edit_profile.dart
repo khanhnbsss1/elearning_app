@@ -46,9 +46,8 @@ class _EditProfileState extends ConsumerState<EditProfile> {
     if (!initController) {
       editProfileController = EditProfileController(userProfile: widget.user);
       editProfileController.onInit();
-      _imageUrl =
-          editProfileController.basicValidator.getController('image')!.text;
-    };
+      _imageUrl = widget.user.avatar;
+    }
     selectedValue = editProfileController.basicValidator.getController('gender')!.text;
   }
 

@@ -71,7 +71,7 @@ class _UserInfoState extends State<UserInfo> {
                     ],
                   ),
                   leading: UserAvatar(
-                      imageUrl: user.imageUrl, radius: 50, iconSize: 25),
+                      imageUrl: user.avatar, radius: 50, iconSize: 25),
                   trailing: const Icon(
                     FeatherIcons.edit3,
                     size: 20,

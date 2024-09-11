@@ -43,7 +43,6 @@ class SearchWordAppBar extends ConsumerWidget with SearchMixin{
           if (value == '' || value.isEmpty) {
             openSnackbar(context, 'Type something!');
           } else {
-            await addToSearchedWordList(value: value, ref: ref);
             ref.read(searchWordStartedProvider.notifier).update((state) => true);
           }
         },

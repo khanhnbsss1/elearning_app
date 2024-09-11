@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/loading_list_tile.dart';
 import 'package:lms_app/configs/app_assets.dart';
+import 'package:lms_app/mixins/search_mixin.dart';
 import 'package:lms_app/screens/tabs/dictionary/search_word/search_word_view.dart';
+import 'package:lms_app/screens/tabs/dictionary/word_screen.dart';
 import 'package:lms_app/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import 'package:lms_app/utils/empty_animation.dart';
+import 'package:lms_app/utils/next_screen.dart';
 import '../../../../base/widgets/audio/audio_speaker.dart';
 
-class SearchedWords extends ConsumerWidget {
+class SearchedWords extends ConsumerWidget with SearchMixin{
   const SearchedWords({super.key});
 
   @override
@@ -24,10 +27,14 @@ class SearchedWords extends ConsumerWidget {
         return ListView.separated(
           padding: const EdgeInsets.all(20),
           itemCount: dictionary.length,
-          separatorBuilder: (context, index) => const Divider(height: 10),
+          separatorBuilder: (context, index) => const Divider(height: 1),
           itemBuilder: (context, index) {
             final VocabularyInfo word = dictionary[index];
             return ListTile(
+              onTap: () async{
+                NextScreen.normal(context, WordScreen(word: word));
+                await addToSearchedWordList(value: word.simplified!, ref: ref);
+              },
               contentPadding:
               const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
               horizontalTitleGap: 10,
@@ -41,10 +48,6 @@ class SearchedWords extends ConsumerWidget {
               subtitle: (word.translationVn != "")
                   ? Text(word.translationVn ?? "-")
                   : const Text("-"),
-              trailing: AudioSpeaker(
-                url: word.audioLink ?? "",
-                enableProccessBar: false,
-              ),
             );
           },
         );

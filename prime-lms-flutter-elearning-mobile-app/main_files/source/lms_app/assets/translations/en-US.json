@@ -184,5 +184,9 @@
     "search-word": "Search word",
     "list-of-video": "Video list",
     "top-instructor": "Top instructors",
-    "dictionary": "Dictionary"
+    "dictionary": "Dictionary",
+    "simplified": " - Simplified",
+    "traditional": " - Traditional",
+    "meaning": " - Meaning",
+    "example": " - Example"
 }

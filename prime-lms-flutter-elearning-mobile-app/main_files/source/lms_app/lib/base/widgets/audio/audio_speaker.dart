@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:just_audio/just_audio.dart';
 
+import '../../../screens/sound.dart';
 import '../../constant/dimens_constant.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -11,7 +14,8 @@ class AudioSpeaker extends StatefulWidget {
   bool? enableProccessBar;
   double? size;
 
-  AudioSpeaker({super.key, required this.url, this.enableProccessBar, this.size}) {
+  AudioSpeaker(
+      {super.key, required this.url, this.enableProccessBar, this.size}) {
     enableProccessBar ??= false;
   }
 
@@ -39,9 +43,24 @@ class AudioSpeakerState extends State<AudioSpeaker> {
     if (widget.enableProccessBar != true) {
       return InkWell(onTap: () async {
         setState(() {
-          processingState = ProcessingState.ready;
-          AudioManager().playAudio(url: widget.url);
+          processingState = ProcessingState.loading;
         });
+        AudioManager().playAudio(
+          url: widget.url,
+          onChangeProcessingState: (state) {
+            setState(() {
+              processingState = state;
+            });
+          },
+          onGetLength: (length) {
+            Timer.periodic(length ?? const Duration(seconds: 0), (Timer t) {
+              setState(() {
+                processingState = ProcessingState.completed;
+              });
+              t.cancel();
+            });
+          },
+        );
       }, child: LayoutBuilder(
         builder: (context, constraints) {
           Widget icon = const SizedBox();
@@ -54,21 +73,17 @@ class AudioSpeakerState extends State<AudioSpeaker> {
               // TODO: Handle this case.
               return icon = Icon(
                 Icons.volume_down,
-                size: widget.size??24,
+                size: widget.size ?? 24,
                 color: Theme.of(context).primaryColor,
               );
             case ProcessingState.ready:
               // TODO: Handle this case.
-              icon = Icon(
-                Icons.volume_up,
-                size: widget.size??24,
-                color: Theme.of(context).primaryColor,
-              );
+              icon = Sound(size: widget.size??24, color: Theme.of(context).primaryColor,);
             case ProcessingState.completed:
               // TODO: Handle this case.
               icon = Icon(
                 Icons.volume_down,
-                size: widget.size??24,
+                size: widget.size ?? 24,
                 color: Theme.of(context).primaryColor,
               );
           }
@@ -76,23 +91,41 @@ class AudioSpeakerState extends State<AudioSpeaker> {
         },
       ));
     } else {
+      AudioManager().playAudio(
+        url: widget.url,
+        onChangeProcessingState: (state) {
+          setState(() {
+            processingState = state;
+          });
+        },
+        onGetLength: (lengthAudio) {
+          setState(() {
+            length = lengthAudio;
+          });
+          Timer.periodic(length ?? const Duration(seconds: 0), (Timer t) {
+            setState(() {
+              processingState = ProcessingState.completed;
+            });
+            t.cancel();
+          });
+        },
+      );
       return InkWell(
         onTap: () {
-          AudioManager().playAudio(url: widget.url);
+
         },
         child: SizedBox(
           width: Dimens.size200,
           child: SfSlider(
             min: Duration(seconds: 0).inSeconds,
-            max: Duration(seconds: 1).inSeconds,
+            max: length??Duration(seconds: 1).inSeconds,
             stepDuration: SliderStepDuration(seconds: 1),
             dateFormat: DateFormat.ms(),
             dateIntervalType: DateIntervalType.seconds,
             showTicks: true,
             showLabels: true,
             value: (event ?? Duration(seconds: 0)).inSeconds,
-            onChanged: (value) {
-            },
+            onChanged: (value) {},
           ),
         ),
       );
@@ -146,6 +179,9 @@ class AudioManager {
           onChangeProcessingState(event.processingState);
         }
         if (event.processingState == ProcessingState.completed) {
+          if (onChangeProcessingState != null) {
+            onChangeProcessingState(event.processingState);
+          }
           await AudioPlayer.clearAssetCache();
         }
       },
