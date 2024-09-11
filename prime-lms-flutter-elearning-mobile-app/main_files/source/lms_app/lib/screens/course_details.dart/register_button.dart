@@ -115,7 +115,7 @@ class RegisterButton extends ConsumerWidget {
                   .textTheme
                   .titleMedium
                   ?.copyWith(
-                color: Colors.white,
+                color: Colors.black,
               ))),
     );
   }

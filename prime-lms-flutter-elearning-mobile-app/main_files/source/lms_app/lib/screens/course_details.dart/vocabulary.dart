@@ -54,8 +54,7 @@ class Vocabulary extends ConsumerWidget with CourseMixin, UserMixin {
       ),
       body: SingleChildScrollView(
         child: Column(children: [
-          (lessonDetail.vocabularies != null)
-              ? ListView.builder(
+          if (lessonDetail.vocabularies != null) ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   padding: const EdgeInsets.only(top: 0, bottom: 20),
@@ -86,8 +85,7 @@ class Vocabulary extends ConsumerWidget with CourseMixin, UserMixin {
                       ),
                     );
                   },
-                )
-              : const SizedBox(),
+                ),
         ]),
       ),
     );

@@ -1,31 +1,19 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:lms_app/base/author/user_helper.dart';
-import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
 import 'package:lms_app/components/app_logo.dart';
 import 'package:lms_app/components/privacy_info.dart';
-import 'package:lms_app/core/home.dart';
 
-// import 'package:lms_app/models/user/UserProfile.dart';
-import 'package:lms_app/screens/auth/reset_password.dart';
 import 'package:lms_app/screens/auth/sign_up.dart';
 import 'package:lms_app/screens/home/home_view.dart';
-import 'package:lms_app/screens/splash.dart';
-import 'package:lms_app/services/auth_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
-import '../../base/widgets/audio/audio_speaker.dart';
 import '../../components/languages.dart';
 import '../../configs/features_config.dart';
 import '../../controller_elearning/auth/login_controller.dart';
-import '../../l10n/l10n_extention.dart';
-import '../../models/user/UserProfile.dart';
 import '../../providers/user_data_provider.dart';
 import '../home/home_bottom_bar.dart';
-import 'social_logins.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key, this.popUpScreen});

@@ -1,9 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lms_app/components/loading_tile.dart';
 import 'package:lms_app/screens/all_courses.dart/search_result.dart';
 import '../../../services/apis/course/course_fillter/models/course_filtter_info.dart';
@@ -35,6 +31,12 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> with Ticker
     super.initState();
     _controller = TabController(length: 2, vsync: this);
   }
+
+  final _tabs = [
+    const Tab(text: 'Categories'),
+    const Tab(text: 'Author'),
+  ];
+
   List<String> items = [
     "Category",
     "Author",
@@ -149,70 +151,104 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> with Ticker
                       //     ),
                       //   ],
                       // ),
+
+
+                      // Container(
+                      //     width: double.infinity,
+                      //     height: 65,
+                      //     margin: const EdgeInsets.all(5),
+                      //     child: ListView.builder(
+                      //         itemCount: 2,
+                      //         scrollDirection: Axis.horizontal,
+                      //         itemBuilder: (context, index) {
+                      //           return Column(
+                      //             children: [
+                      //               GestureDetector(
+                      //                 onTap: () {
+                      //                   setState(() {
+                      //                     selectedCategory = index;
+                      //                   });
+                      //                 },
+                      //                 child: AnimatedContainer(
+                      //                   duration: const Duration(milliseconds: 300),
+                      //                   margin: const EdgeInsets.all(5),
+                      //                   width: (MediaQuery.of(context).size.width - 70)/2,
+                      //                   height: 55,
+                      //                   decoration: BoxDecoration(
+                      //                     color: selectedCategory == index
+                      //                         ? Colors.white70
+                      //                         : Colors.white54,
+                      //                     borderRadius: selectedCategory == index
+                      //                         ? BorderRadius.circular(12)
+                      //                         : BorderRadius.circular(7),
+                      //                     border: selectedCategory == index
+                      //                         ? Border.all(
+                      //                         color: Theme.of(context).primaryColor,
+                      //                         width: 2.5)
+                      //                         : null,
+                      //                   ),
+                      //                   child: Center(
+                      //                     child: Column(
+                      //                       mainAxisAlignment: MainAxisAlignment.center,
+                      //                       children: [
+                      //                         Image.asset(
+                      //                           icons[index],
+                      //                           width: 25,
+                      //                           height: 25,
+                      //                           color: selectedCategory == index
+                      //                               ? Colors.black
+                      //                               : Colors.grey.shade400,
+                      //                         ),
+                      //                         Text(
+                      //                           items[index],
+                      //                           style: GoogleFonts.ubuntu(
+                      //                             fontWeight: FontWeight.w500,
+                      //                             color: selectedCategory == index
+                      //                                 ? Colors.black
+                      //                                 : Colors.grey.shade400,
+                      //                           ),
+                      //                         ),
+                      //                       ],
+                      //                     ),
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //             ],
+                      //           );
+                      //         })),
+
                       Container(
-                          width: double.infinity,
-                          height: 65,
-                          margin: const EdgeInsets.all(5),
-                          child: ListView.builder(
-                              itemCount: 2,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return Column(
-                                  children: [
-                                    GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          selectedCategory = index;
-                                        });
-                                      },
-                                      child: AnimatedContainer(
-                                        duration: const Duration(milliseconds: 300),
-                                        margin: const EdgeInsets.all(5),
-                                        width: (MediaQuery.of(context).size.width - 70)/2,
-                                        height: 55,
-                                        decoration: BoxDecoration(
-                                          color: selectedCategory == index
-                                              ? Colors.white70
-                                              : Colors.white54,
-                                          borderRadius: selectedCategory == index
-                                              ? BorderRadius.circular(12)
-                                              : BorderRadius.circular(7),
-                                          border: selectedCategory == index
-                                              ? Border.all(
-                                              color: Theme.of(context).primaryColor,
-                                              width: 2.5)
-                                              : null,
-                                        ),
-                                        child: Center(
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: [
-                                              Image.asset(
-                                                icons[index],
-                                                width: 25,
-                                                height: 25,
-                                                color: selectedCategory == index
-                                                    ? Colors.black
-                                                    : Colors.grey.shade400,
-                                              ),
-                                              Text(
-                                                items[index],
-                                                style: GoogleFonts.ubuntu(
-                                                  fontWeight: FontWeight.w500,
-                                                  color: selectedCategory == index
-                                                      ? Colors.black
-                                                      : Colors.grey.shade400,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              })),
-                      // const SizedBox(height: 10),
+                        height: kToolbarHeight + 8.0,
+                        padding:
+                        const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(8.0),
+                              topRight: Radius.circular(8.0)),
+                        ),
+                        child: TabBar(
+                          onTap: (value) {
+                            setState(() {
+                              selectedCategory = value;
+                            });
+                          },
+                          controller: _controller,
+                          indicator: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(8.0),
+                                  topRight: Radius.circular(8.0)),
+                              color: Colors.white),
+                          indicatorSize:TabBarIndicatorSize.tab,
+                          labelColor: Colors.black,
+                          unselectedLabelColor: Colors.white,
+                          tabs: const [
+                            Tab(text: 'Categories'),
+                            Tab(text: 'Author'),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10),
                       selectedCategory == 0
                           ? getCategories(categories)
                           : getAuthor(categories),

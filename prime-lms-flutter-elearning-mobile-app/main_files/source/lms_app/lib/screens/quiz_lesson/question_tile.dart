@@ -1,9 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lms_app/models/question.dart';
 import 'package:lms_app/screens/quiz_lesson/option_tile.dart';
-import 'package:lms_app/theme/theme_provider.dart';
 import '../../base/widgets/audio/audio_speaker.dart';
 import '../../constants/custom_colors.dart';
 import '../../services/apis/question/models/question_info.dart';
@@ -28,7 +26,6 @@ class QuestionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode = ref.watch(themeProvider).isDarkMode;
 
     return Center(
       child: SingleChildScrollView(
@@ -53,16 +50,16 @@ class QuestionTile extends StatelessWidget {
                       .textTheme
                       .titleLarge
                       ?.copyWith(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 10),
               question.typeQuestion == "Text"
                   ? Text(question.questionName ?? "-")
                   : question.typeQuestion == "Audio"
                       ? AudioSpeaker(
                           url: question.questionLink!,
-                          enableProccessBar: true,
+                          size: 36,
                         )
                       : Image.network(question.questionLink!),
-              const SizedBox(),
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
 
               // OPTIONS
               ListView.builder(

@@ -24,7 +24,8 @@ import 'grid_course_tile.dart';
 final gridStyleProvider = StateProvider<GridStyle>((ref) => GridStyle.grid);
 
 class SearchCoursesView extends ConsumerStatefulWidget {
-  const SearchCoursesView({super.key, required this.filter, this.subFilterInfo});
+  const SearchCoursesView(
+      {super.key, required this.filter, this.subFilterInfo});
 
   // final CourseFilterInfo courseFilterInfo;
   final String filter;
@@ -48,7 +49,8 @@ class _SearchCoursesViewState extends ConsumerState<SearchCoursesView> {
     _controller = ScrollController(initialScrollOffset: 0.0);
     _controller.addListener(_scrollListener);
     if (widget.subFilterInfo != null) {
-      _getCourse(widget.filter, _pageNumber, widget.subFilterInfo!.id.toString());
+      _getCourse(
+          widget.filter, _pageNumber, widget.subFilterInfo!.id.toString());
     } else {
       _getCourse(widget.filter, _pageNumber, "");
     }
@@ -66,7 +68,8 @@ class _SearchCoursesViewState extends ConsumerState<SearchCoursesView> {
     setState(() {
       _pageNumber++;
       if (widget.subFilterInfo != null) {
-        _getCourse(widget.filter, _pageNumber, widget.subFilterInfo!.id.toString());
+        _getCourse(
+            widget.filter, _pageNumber, widget.subFilterInfo!.id.toString());
       } else {
         _getCourse(widget.filter, _pageNumber, "");
       }
@@ -75,9 +78,10 @@ class _SearchCoursesViewState extends ConsumerState<SearchCoursesView> {
 
   Future<void> _getCourse(
       String filter, int pageNumber, String subFilterId) async {
-    final List<CourseInfo>? courses = await ApiService()
-        .getCourseByCategories(
-        pageNumber: pageNumber, filter: filter.replaceAll(" ", "_"), subFilterId: subFilterId);
+    final List<CourseInfo>? courses = await ApiService().getCourseByCategories(
+        pageNumber: pageNumber,
+        filter: filter.replaceAll(" ", "_"),
+        subFilterId: subFilterId);
     if (_courses != [] && courses != [] && courses != null) {
       setState(() {
         _isLoading = false;
@@ -105,60 +109,59 @@ class _SearchCoursesViewState extends ConsumerState<SearchCoursesView> {
     print("rebuilt");
     final gridStyle = ref.watch(gridStyleProvider);
     return RefreshIndicator(
-        onRefresh: () async => await _onRefresh(),
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          controller: _controller,
-          child: Column(
-            children: [
-              FilterContainer(gridStyle: gridStyle, ref: ref),
-              _isLoading
-                  ? LoadingGridTile(gridStyle: gridStyle)
-                  : _courses.isEmpty
-                  ? EmptyAnimation(
-                  animationString: emptyAnimation,
-                  title: 'no-course'.tr())
-                  : GridView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                padding: const EdgeInsets.all(20),
-                shrinkWrap: true,
-                gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: gridStyle == GridStyle.grid ? 2 : 1,
-                  mainAxisExtent: gridStyle == GridStyle.grid
-                      ? 250
-                      : gridStyle == GridStyle.box
-                      ? 300
-                      : 170,
-                  childAspectRatio: gridStyle == GridStyle.grid
-                      ? 0.68
-                      : gridStyle == GridStyle.box
-                      ? 1.3
-                      : 2.1,
-                  crossAxisSpacing: 15,
-                  mainAxisSpacing: 15,
-                ),
-                itemCount: _courses.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final CourseInfo course = _courses[index];
-                  if (gridStyle == GridStyle.list) {
-                    return GridListCourseTile(course: course);
-                  }
-                  return GridCourseTile(
-                      course: course, gridStyle: gridStyle);
-                },
+      onRefresh: () async => await _onRefresh(),
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        controller: _controller,
+        child: Column(
+          children: [
+            FilterContainer(gridStyle: gridStyle, ref: ref),
+            _isLoading
+                ? LoadingGridTile(gridStyle: gridStyle)
+                : _courses.isEmpty
+                    ? EmptyAnimation(
+                        animationString: emptyAnimation,
+                        title: 'no-course'.tr())
+                    : GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.all(20),
+                        shrinkWrap: true,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: gridStyle == GridStyle.grid ? 2 : 1,
+                          mainAxisExtent: gridStyle == GridStyle.grid
+                              ? 250
+                              : gridStyle == GridStyle.box
+                                  ? 300
+                                  : 170,
+                          childAspectRatio: gridStyle == GridStyle.grid
+                              ? 0.68
+                              : gridStyle == GridStyle.box
+                                  ? 1.3
+                                  : 2.1,
+                          crossAxisSpacing: 15,
+                          mainAxisSpacing: 15,
+                        ),
+                        itemCount: _courses.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          final CourseInfo course = _courses[index];
+                          if (gridStyle == GridStyle.list) {
+                            return GridListCourseTile(course: course);
+                          }
+                          return GridCourseTile(
+                              course: course, gridStyle: gridStyle);
+                        },
+                      ),
+            Opacity(
+              opacity: _hasData ? 1.0 : 0.0,
+              child: const Padding(
+                padding: EdgeInsets.symmetric(vertical: 30),
+                child: LoadingIndicatorWidget(),
               ),
-              Opacity(
-                opacity: _hasData ? 1.0 : 0.0,
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 30),
-                  child: LoadingIndicatorWidget(),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 }
 

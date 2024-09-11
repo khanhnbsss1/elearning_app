@@ -59,7 +59,7 @@ class _TestListScreenState extends State<TestListScreen> {
                     ),
                     maintainState: true,
                     title: Text(
-                      testList[index].subName??"-",
+                      testList[index].name??"-",
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: isExpanded ? Colors.blueAccent : Theme.of(context).expansionTileTheme.textColor,

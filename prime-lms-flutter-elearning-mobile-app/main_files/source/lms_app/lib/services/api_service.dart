@@ -17,6 +17,7 @@ import 'package:lms_app/models/tag.dart';
 import 'package:lms_app/services/apis/lessson/lesson_detail/get_lesson_detail.dart';
 import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/services/apis/teacher_list/teacher_list/get_landing_page_teacher_list_api.dart';
+import 'package:lms_app/services/apis/vocabulary/vocabulary_list/vocabulary_list_api.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:lms_app/services/apis/categories/get_categories_api.dart';
 import 'package:lms_app/services/apis/course/course_detail/get_course_detail_api.dart';
@@ -33,6 +34,7 @@ import '../services/apis/course/course_fillter/models/course_filtter_info.dart';
 import '../services/apis/course/course_list/course_api.dart';
 import '../services/apis/course/course_list/models/course_models.dart';
 import 'apis/teacher_list/models/landing_page_teacher_list_model.dart';
+import 'apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 
 
 class ApiService {
@@ -115,6 +117,12 @@ class ApiService {
     GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "FREE_COURSE", pageSize: 10, pageNumber: 0, keyword: "", isActive: 1));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
+  }
+
+  Future<List<VocabularyInfo>> getDictionary(int pageNumber, String? keyword) async {
+    GetListVocabularyApi getListVocabularyApi = GetListVocabularyApi(searchCommonRequest: SearchCommonRequest(pageSize: 10, pageNumber: pageNumber, keyword: keyword??""));
+    VocabularyResponseModel vocabularyResponseModel = await getListVocabularyApi.call();
+    return vocabularyResponseModel.content??[];
   }
 
   Future<List<Course>> getHomeCategoryCourses(String categoryId, int limit) async {

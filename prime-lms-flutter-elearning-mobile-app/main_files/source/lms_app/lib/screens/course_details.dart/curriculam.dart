@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/screens/course_details.dart/sections.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
-import '../../models/course.dart';
 
 class Curriculam extends ConsumerWidget {
   const Curriculam({

@@ -3,18 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/ads/ad_manager.dart';
 import 'package:lms_app/components/mark_complete_button.dart';
-import 'package:lms_app/models/course.dart';
-import 'package:lms_app/models/lesson.dart';
 import 'package:lms_app/screens/quiz_lesson/quiz_screen.dart';
-import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
-import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
 import '../../services/apis/question/models/question_info.dart';
 
 class QuizComplete extends ConsumerWidget {
   const QuizComplete({super.key, required this.questions});
-
   final List<QuestionInfo>? questions;
 
   @override

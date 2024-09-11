@@ -5,14 +5,10 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/base/author/user_helper.dart';
-import 'package:lms_app/base/base.export.dart';
-import 'package:lms_app/base/widgets/common/alert_dialog/loading.export.dart';
 import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
 import 'package:lms_app/components/loading_tile.dart';
 import 'package:lms_app/mixins/course_mixin.dart';
 import 'package:lms_app/mixins/user_mixin.dart';
-import 'package:lms_app/screens/course_details.dart/details_view.dart';
-import 'package:lms_app/screens/course_details.dart/title_info.dart';
 import 'package:lms_app/screens/course_details.dart/vocabulary.dart';
 import 'package:lms_app/screens/pdf_screen.dart';
 import 'package:lms_app/screens/tabs/my_courses_tab/my_courses_tab.dart';
@@ -20,11 +16,7 @@ import 'package:lms_app/screens/video_lesson.dart';
 import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
-import 'package:lms_app/utils/loading_widget.dart';
 import 'package:lms_app/utils/next_screen.dart';
-import 'package:loading_indicator/loading_indicator.dart';
-import '../../models/user/UserProfile.dart';
-import '../../providers/user_data_provider.dart';
 
 class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
   const Lessons({
@@ -80,15 +72,17 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                             InkWell(
                                 splashColor: Colors.transparent,
                                 onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (builder) {
-                                            return PdfScreen(
-                                                link: notes[1],
-                                                name: "content".tr());
-                                          }
-                                      ));
+                                  if (_onCheck(context, lessonDetail, course, ref)) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (builder) {
+                                              return PdfScreen(
+                                                  link: notes[1],
+                                                  name: "content".tr());
+                                            }
+                                        ));
+                                  }
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(

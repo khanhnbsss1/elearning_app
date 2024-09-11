@@ -1,18 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lms_app/models/course.dart';
-import 'package:lms_app/models/lesson.dart';
-import 'package:lms_app/models/question.dart';
 import 'package:lms_app/screens/quiz_lesson/question_tile.dart';
 import 'package:lms_app/screens/quiz_lesson/quiz_complete.dart';
-import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
-import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
+import 'package:lms_app/screens/test/count_down_clock.dart';
 import 'package:lms_app/services/apis/question/models/question_info.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
-
-import '../../services/apis/test/models/test_detail.dart';
 import '../../services/content_security_service.dart';
 
 final selectedOptionProvider = StateProvider.autoDispose<int?>((ref) => null);
@@ -52,8 +46,17 @@ class _QuizLessonState extends ConsumerState<QuizLesson> {
 
     return Scaffold(
         appBar: AppBar(
-          elevation: 0,
-          title: Text('title'),
+          backgroundColor: Theme.of(context).primaryColor,
+          leading: IconButton(
+            icon: const Icon(Icons.close, color: Colors.white,),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: Text('test'.tr(), style: const TextStyle(color: Colors.white),),
+          actions: [
+            CountDownClock(endTime: Duration(minutes: 10))
+          ],
         ),
         bottomNavigationBar: BottomAppBar(
           padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 12),

@@ -100,7 +100,7 @@ class CourseDetailsView extends ConsumerWidget {
                               const SizedBox(height: 40),
                               Curriculam(course: courseInfo),
                               Requirements(course: courseInfo),
-                              CourseDescription(course: courseInfo),
+                              // CourseDescription(course: courseInfo),
                               CourseTags(course: courseInfo),
                               RelatedCourses(course: courseInfo),
                             ],

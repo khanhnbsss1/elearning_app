@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class CountDownClock extends StatefulWidget {
   const CountDownClock({super.key, required this.endTime});
@@ -40,9 +41,9 @@ class _CountDownClockState extends State<CountDownClock> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const Text('time-left '),
+          Text('time-left'.tr(), style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),),
           Text(
-              '${_remainingTime.inMinutes}:${_remainingTime.inSeconds.remainder(60)}')
+              '${_remainingTime.inMinutes}:${_remainingTime.inSeconds.remainder(60)}',style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),)
         ],
       ),
     );

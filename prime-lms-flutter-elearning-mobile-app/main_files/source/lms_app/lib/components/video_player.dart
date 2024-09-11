@@ -73,7 +73,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
         const SizedBox(
           height: 4,
         ),
-        (widget.videoTitle != "") ? Padding(
+        if (widget.videoTitle != "") Padding(
           padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           child: Text(
             widget.videoTitle,
@@ -82,7 +82,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
                 .titleLarge
                 ?.copyWith(color: Theme.of(context).primaryColor),
           ),
-        ) : const SizedBox(),
+        ),
       ],
     );
   }

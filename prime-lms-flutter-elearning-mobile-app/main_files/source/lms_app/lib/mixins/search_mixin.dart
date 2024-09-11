@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/screens/search/search_view.dart';
+import 'package:lms_app/screens/tabs/dictionary/search_word/search_word_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 mixin SearchMixin {
@@ -17,11 +18,27 @@ mixin SearchMixin {
     ref.read(recentSearchDataProvider.notifier).update((state) => [...searchData]);
   }
 
+  Future addToSearchedWordList({required String value, required WidgetRef ref}) async {
+    final SharedPreferences sp = await SharedPreferences.getInstance();
+    List<String> searchWordData = ref.read(recentSearchWordProvider);
+    searchWordData.add(value);
+    await sp.setStringList('recent_search_word_data', searchWordData);
+    ref.read(recentSearchWordProvider.notifier).update((state) => [...searchWordData]);
+  }
+
   Future removeFromSearchList({required String value, required WidgetRef ref}) async {
     final SharedPreferences sp = await SharedPreferences.getInstance();
     List<String> searchData = ref.read(recentSearchDataProvider);
     searchData.remove(value);
     await sp.setStringList('recent_search_data', searchData);
     ref.read(recentSearchDataProvider.notifier).update((state) => [...searchData]);
+  }
+
+  Future removeFromSearchWordList({required String value, required WidgetRef ref}) async {
+    final SharedPreferences sp = await SharedPreferences.getInstance();
+    List<String> searchWordData = ref.read(recentSearchWordProvider);
+    searchWordData.remove(value);
+    await sp.setStringList('recent_search_data', searchWordData);
+    ref.read(recentSearchWordProvider.notifier).update((state) => [...searchWordData]);
   }
 }

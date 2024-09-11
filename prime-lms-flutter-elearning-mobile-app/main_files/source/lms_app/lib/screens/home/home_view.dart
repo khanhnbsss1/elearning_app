@@ -4,6 +4,7 @@ import 'package:lms_app/screens/home/home_bottom_bar.dart';
 import 'package:lms_app/screens/tabs/home_tab/home_tab.dart';
 import 'package:lms_app/screens/tabs/profile_tab/profile_tab.dart';
 import 'package:lms_app/screens/tabs/search_tab/search_tab.dart';
+import '../tabs/dictionary/dictionary.dart';
 import '../tabs/my_courses_tab/my_courses_tab.dart';
 
 final homeTabControllerProvider = StateProvider<PageController>((ref) => PageController(initialPage: 0));
@@ -25,6 +26,7 @@ class HomeView extends ConsumerWidget {
             HomeTab(),
             SearchTab(),
             MyCoursesTab(),
+            Dictionary(),
             ProfileTab(),
           ],
         ));
