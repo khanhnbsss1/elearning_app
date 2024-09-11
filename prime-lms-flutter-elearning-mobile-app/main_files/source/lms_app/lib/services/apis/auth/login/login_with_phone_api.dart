@@ -43,14 +43,14 @@ class LoginWithPhoneApi extends BaseApiRequest {
            }
            catch(e)
            {
-             ToastUtils.showToastError('$e');
+             ToastUtils.showToastError('wrong-pass-or-user'.tr());
              await AuthorManager().handleLogout();
              return false;
            }
          }
        else
          {
-           ToastUtils.showToastError('wrong-pass-or-user'.tr());
+           ToastUtils.showToastError('no-internet'.tr());
            return false;
          }
 

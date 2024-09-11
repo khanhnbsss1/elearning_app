@@ -45,7 +45,7 @@ class _OptionTileState extends State<OptionTile> {
             groupValue: widget.ref.watch(selectedOptionProvider),
             title: answer.typeAnswer == "Text"
                 ? Text(
-              answer.answer![widget.optionIndex],
+              answer.answer!,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: isSelected
                             ? Colors.white
@@ -83,7 +83,9 @@ class _OptionTileState extends State<OptionTile> {
     ref.read(selectedOptionProvider.notifier).update((state) => value);
     ref.read(selectedAnswerProvider.notifier).update((state)  {
       List<ScoreItem> list = state;
-      list.add(ScoreItem(
+      list.removeWhere((e) => e.questionId == widget.question.id);
+      if (answerText == "") {
+        list.add(ScoreItem(
         questionId: widget.question.id,
         answerId: answer.answerId,
         questionType: widget.question.typeQuestion!.toLowerCase() == "audio" ? QuestionType.audio :
@@ -91,6 +93,15 @@ class _OptionTileState extends State<OptionTile> {
         widget.question.typeQuestion!.toLowerCase() == "image" ? QuestionType.image :
         QuestionType.fill
       ));
+      } else {
+        list.add(ScoreItem(
+            questionId: widget.question.id,
+            answerName: answerText,
+            questionType: widget.question.typeQuestion!.toLowerCase() == "audio" ? QuestionType.audio :
+        widget.question.typeQuestion!.toLowerCase() == "text" ? QuestionType.text :
+        widget.question.typeQuestion!.toLowerCase() == "image" ? QuestionType.image :
+        QuestionType.fill));
+      }
       return list;
     });
   }

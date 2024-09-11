@@ -84,6 +84,13 @@ class EditProfileController extends MyController {
       label: 'Birthday',
       controller: TextEditingController(),
     );
+    basicValidator.addField(
+      'file_id',
+      required: true,
+      label: 'File id',
+      controller: TextEditingController(),
+    );
+    basicValidator.getController('file_id')!.text = userProfile.fileId??"";
     basicValidator.getController('gender')!.text = userProfile.gender??"";
     basicValidator.getController('email')!.text = userProfile.email??"";
     basicValidator.getController('birthday')!.text = userProfile.birthday??"";
@@ -119,6 +126,7 @@ class EditProfileController extends MyController {
       countryName: basicValidator.getController('country_name')?.text,
       email: basicValidator.getController('email')?.text,
       phoneNumber: userProfile.phoneNumber,
+      fileId: basicValidator.getController('file_id')?.text,
     );
     EditUserApi editUserApi = EditUserApi(editUserRequest: editUserRequest);
     bool data = await editUserApi.call();

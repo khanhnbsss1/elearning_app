@@ -67,6 +67,7 @@ class UploadFileResponseInfo {
   String? createdBy;
   String? updatedBy;
   String? fileSize;
+  String? fileName;
 
   UploadFileResponseInfo(
       {this.id,
@@ -77,7 +78,9 @@ class UploadFileResponseInfo {
         this.updatedAt,
         this.createdBy,
         this.updatedBy,
-        this.fileSize});
+        this.fileSize,
+        this.fileName
+      });
 
   UploadFileResponseInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -89,6 +92,7 @@ class UploadFileResponseInfo {
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
     fileSize = json['file_size'];
+    fileName = json['file_name'];
   }
 
   Map<String, dynamic> toJson() {
@@ -102,6 +106,7 @@ class UploadFileResponseInfo {
     data['created_by'] = createdBy;
     data['updated_by'] = updatedBy;
     data['file_size'] = fileSize;
+    data['file_name'] = fileName;
     return data;
   }
 }
