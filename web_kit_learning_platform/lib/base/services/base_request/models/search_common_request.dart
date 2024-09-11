@@ -155,7 +155,8 @@ class SearchCommonRequest {
     String? startDate,
     String? endDate,
     String?status,
-    String?roleId
+    String?roleId,
+    String? type
   }){
     return SearchCommonRequest(
       userId: userId??this.userId,
@@ -173,6 +174,7 @@ class SearchCommonRequest {
       endDate: endDate??this.endDate,
       status: status??this.status,
       roleId: roleId??this.roleId,
+      type: type??this.type,
     );
 }
 }
