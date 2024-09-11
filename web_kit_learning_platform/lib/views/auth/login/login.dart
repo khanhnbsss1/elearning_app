@@ -157,6 +157,10 @@ class _LoginPageState extends State<LoginPage>
                                       .getController('password'),
                                   keyboardType: TextInputType.visiblePassword,
                                   obscureText: !controller.showPassword,
+                                  onFieldSubmitted: (value) {
+                                    print("object");
+                                    controller.onLogin();
+                                  },
                                   decoration: InputDecoration(
                                       labelText: L10nX.getStr.password,
                                       labelStyle:

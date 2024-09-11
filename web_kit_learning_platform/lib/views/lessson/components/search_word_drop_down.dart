@@ -1,7 +1,9 @@
 import 'package:async_searchable_dropdown/async_searchable_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:tiengviet/tiengviet.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
@@ -128,12 +130,27 @@ class _MyDropdownButtonState extends State<SearchWordDropDown> with SingleTicker
     );
   }
   Future<List<VocabularyInfo>>getWordFilterList(String keyWord) async{
+    List<VocabularyInfo>? content=[];
+
     if(keyWord.isEmpty) {
       return [];
     }
-    GetListVocabularyApi getLessonListApi= GetListVocabularyApi(searchCommonRequest: SearchCommonRequest(keyword: keyWord, pageSize: 100, pageNumber: 0));
-    VocabularyResponseModel data = await getLessonListApi.call();
-    return data.content??[];
+    VocabularyResponseModel? data = await FilterManager().getVocabularyListAllInfo(keyWord);
+    if((data?.content??[]).isNotEmpty)
+    {
+      content = [...(data?.content??[]).where((element) {
+        String simplified = TiengViet.parse((element.simplified??'').toLowerCase());
+        String translationVn = TiengViet.parse((element.translationVn??'').toLowerCase());
+        String traditional = TiengViet.parse((element.traditional??'').toLowerCase());
+        
+        String keyWordfinal = TiengViet.parse(keyWord.toLowerCase());
+        return 
+          (simplified.contains(keyWordfinal))||
+            (translationVn.contains(keyWordfinal))||
+              (traditional.contains(keyWordfinal));
+      },)];
+    }
+    return content;
   }
   
 }

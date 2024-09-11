@@ -21,6 +21,7 @@ import 'package:webkit/services/apis/question/models/question_info.dart';
 import 'package:webkit/services/apis/test/get_test_list_api.dart';
 
 import '../../services/apis/test/models/test_info.dart';
+import '../../services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import '../../services/apis/vocabulary/vocabulary_list/vocabulary_list_api.dart';
 import '../widgets/widget_common/widget_with_title_common.dart';
 
@@ -40,12 +41,12 @@ class FilterManager{
   CourseFilterListInfo courseFilterListInfo = CourseFilterListInfo(data: []);
   QuestionListResponseModel questionListResponseModel = QuestionListResponseModel(content: []);
   TestListResponseModel testListResponseModel = TestListResponseModel(content: []);
+  VocabularyResponseModel vocabularyResponseModel = VocabularyResponseModel(content: []);
   Future<void> init()async {
     await getFilterCourse();
    await getCourseFilter();
    await getCategoryFilter();
    await getGradesInfo();
-
   }
 
   Future<CourseFilterListInfo> getFilterCourse() async {
@@ -127,11 +128,14 @@ class FilterManager{
     return lessonListResponseModel;
   }
 
-  Future<LessonListResponseModel?> getVocabularyListAllInfo(String keyword) async {
+  Future<VocabularyResponseModel?> getVocabularyListAllInfo(String keyword) async {
+    if((vocabularyResponseModel.content??[]).isNotEmpty) {
+      return vocabularyResponseModel;
+    }
     GetListVocabularyApi getLessonListFilterApi = GetListVocabularyApi(
-        searchCommonRequest: SearchCommonRequest(pageNumber: -1, type: "Image"));
-    lessonListResponseModel =  await getLessonListFilterApi.call();
-    return lessonListResponseModel;
+        searchCommonRequest: SearchCommonRequest(pageNumber: -1, type: "Image", pageSize: 100));
+    vocabularyResponseModel =  await getLessonListFilterApi.call();
+    return vocabularyResponseModel;
   }
   
   Widget buildGrade({
