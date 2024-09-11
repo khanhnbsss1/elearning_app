@@ -2,22 +2,14 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:lms_app/base/widgets/audio/audio_speaker.dart';
 import 'package:lms_app/components/loading_tile.dart';
-import 'package:lms_app/components/user_avatar.dart';
-import 'package:lms_app/screens/quiz_lesson/question_tile.dart';
-import 'package:lms_app/screens/quiz_lesson/quiz_screen.dart';
-import 'package:lms_app/screens/test/progression_bar.dart';
-import 'package:lms_app/screens/test/question_widget.dart';
-import 'package:lms_app/services/apis/question/models/question_info.dart';
+import 'package:lms_app/screens/test/quiz_lesson/quiz_screen.dart';
 import 'package:lms_app/services/apis/test/get_test_detail.dart';
 import 'package:lms_app/services/apis/test/models/test_detail.dart';
 import 'package:material_dialogs/dialogs.dart';
 import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
 
-import '../../base/widgets/my_button.dart';
-import '../../services/apis/test/models/test_info.dart';
-import 'count_down_clock.dart';
+import '../../services/apis/question/models/question_info.dart';
 
 class TestScreen extends StatefulWidget {
   const TestScreen({super.key, required this.testId});

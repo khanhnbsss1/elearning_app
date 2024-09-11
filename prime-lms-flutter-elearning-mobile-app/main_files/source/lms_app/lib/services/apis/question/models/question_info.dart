@@ -1,3 +1,49 @@
+import '../../../../base/base_request_elearning/models/page_model.dart';
+import '../../test/models/test_info.dart';
+
+enum QuestionType{
+  text,
+  audio,
+  image,
+  fill
+
+}
+enum AnswerType{
+  text,
+  audio,
+  image,
+  selfEssay
+}
+
+Map<QuestionType, String>mapQuestionTypeToStrKey={
+  QuestionType.text:"Text",
+  QuestionType.audio:"Audio",
+  QuestionType.image:"Image",
+  QuestionType.fill:"Fill",
+};
+
+Map< String,QuestionType>mapStrKeyQuestionType={
+  "Text":QuestionType.text,
+  "Audio":QuestionType.audio,
+  "Image":QuestionType.image,
+  "Fill":QuestionType.fill,
+
+};
+
+Map<AnswerType, String>mapAnswerTypeToStrKey={
+  AnswerType.text:"Text",
+  AnswerType.audio:"Audio",
+  AnswerType.image:"Image",
+  AnswerType.selfEssay:"Self_essay",
+
+};
+Map<String,AnswerType>mapStrKeyAnswerType={
+  "Text":AnswerType.text,
+  "Audio":AnswerType.audio,
+  "Image":AnswerType.image,
+  "Self_essay":AnswerType.selfEssay,
+
+};
 class QuestionInfo {
   int? id;
   String? questionName;
@@ -117,4 +163,48 @@ class AnswerInfo {
     data['right_answer'] = rightAnswer;
     return data;
   }
+}
+
+class QuestionListResponseModel extends PageModel{
+  List<QuestionInfo>? content;
+
+  QuestionListResponseModel({super.total, super.pageSize, super.pageNumber, this.content});
+  QuestionListResponseModel.fromJson(Map<String, dynamic> json) {
+    total = json['total']??0;
+    pageSize = json['pageSize']??=10;
+    pageNumber = json['pageNumber']??=0;
+    if (json['content'] != null) {
+      content = <QuestionInfo>[];
+      json['content'].forEach((v) {
+        content!.add(new QuestionInfo.fromJson(v));
+      });
+    }
+  }
+  QuestionListResponseModel.fromFilter(FilterResponseModel json) {
+    content = <QuestionInfo>[];
+    for (TestFilterItem v in (json.data??[])) {
+      for(SubTestFilter subTestFilter in v.subFilter??[]) {
+        content!.add(new QuestionInfo(id: subTestFilter.id, questionName: subTestFilter.name));
+      }
+    }
+  }
+  QuestionListResponseModel.fromList( dynamic json) {
+    if (json!= null) {
+      content = <QuestionInfo>[];
+      json.forEach((v) {
+        content!.add(new QuestionInfo.fromJson(v));
+      });
+    }
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['total'] = total;
+    data['pageSize'] = pageSize;
+    data['pageNumber'] = pageNumber;
+    if (content != null) {
+      data['content'] = content!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+
 }

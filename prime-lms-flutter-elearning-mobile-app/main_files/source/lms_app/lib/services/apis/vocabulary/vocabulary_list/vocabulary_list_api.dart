@@ -31,7 +31,7 @@ class GetListVocabularyApi extends BaseApiRequest {
   Future<void> getAuthorization() async {
     UserProfile? userProfile = await UserManager().getUserProfile();
     if(userProfile!=null) {
-      searchCommonRequest = searchCommonRequest.copyWith(userId: userProfile.id);
+      searchCommonRequest = searchCommonRequest.copyWith(type: "NoImage");
     }
      await setApiBody(searchCommonRequest.toJson());
   }

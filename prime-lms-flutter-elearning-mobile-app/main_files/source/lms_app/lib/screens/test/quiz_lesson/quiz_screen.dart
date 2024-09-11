@@ -1,13 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lms_app/screens/quiz_lesson/question_tile.dart';
-import 'package:lms_app/screens/quiz_lesson/quiz_complete.dart';
 import 'package:lms_app/screens/test/count_down_clock.dart';
+import 'package:lms_app/screens/test/quiz_lesson/question_tile.dart';
+import 'package:lms_app/screens/test/quiz_lesson/quiz_complete.dart';
 import 'package:lms_app/services/apis/question/models/question_info.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
-import '../../services/content_security_service.dart';
+import '../../../services/apis/scores/models/score_info.dart';
+import '../../../services/content_security_service.dart';
 
 final selectedOptionProvider = StateProvider.autoDispose<int?>((ref) => null);
 final questionPageControllerProvider = Provider((ref) => PageController(initialPage: 0));
@@ -54,7 +55,7 @@ class _QuizLessonState extends ConsumerState<QuizLesson> {
             },
           ),
           title: Text('test'.tr(), style: const TextStyle(color: Colors.white),),
-          actions: [
+          actions: const [
             CountDownClock(endTime: Duration(minutes: 10))
           ],
         ),
