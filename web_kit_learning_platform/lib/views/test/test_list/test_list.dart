@@ -7,6 +7,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
+import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
@@ -194,13 +195,15 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                              },
                              onTapOutside: (event) {
                              },
-                             style: MyTextStyle.bodyMedium(),
+                             style: TextStyleConstant.textStyleBlack14w400,
+                             
                              decoration: InputDecoration(
                                  hintText: L10nX.getStr.search,
                                  fillColor: ColorConst.whiteColor,
                                  filled: true,
                                  hintStyle: TextStyleConstant.textStyleBlack13w400,
                                  border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                 
                                  enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
                                  focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),                                 prefixIcon: Align(
                                      alignment: Alignment.center,
@@ -215,7 +218,7 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                                    maxHeight: Dimens.size40,),
                                  contentPadding: MySpacing.xy(16, 12),
                                  //isCollapsed: true,
-                                 floatingLabelBehavior: FloatingLabelBehavior.auto),
+                                 floatingLabelBehavior: FloatingLabelBehavior.always),
                            ),
                          ),
                        ],
@@ -299,13 +302,20 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
               // TODO: Handle this case.
                 TestDataSource employeeDataSource = TestDataSource(
                   lessonData: state.listResponseModel?.content??[],
-                  onDelete: (p0) async {
-                    MonitorLoading().showLoading("");
-                    DeleteTestApi api = DeleteTestApi(info: p0);
-                    dynamic data = await api.call();
-                    MonitorLoading().dismiss();
-
-                    BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
+                  starIndex: (state.searchCommonRequest?.pageNumber??0)* (state.searchCommonRequest?.pageSize??0),
+                  onDelete: (p0)  {
+                    ConfirmPopupPage(
+                      title: "${L10nX.getStr.delete_str} ${L10nX.getStr.test_str.toLowerCase()}",
+                      content: L10nX.getStr.you_want_remove,
+                      onAccept: () async {
+                        MonitorLoading().showLoading("");
+                        DeleteTestApi api = DeleteTestApi(info: p0);
+                        dynamic data = await api.call();
+                        MonitorLoading().dismiss();
+                        BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
+                      },
+                    ).show(context);
+                  
                   },
                   onEdit: (p0) {
                     CreateEditTest(
@@ -313,7 +323,7 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                       testInfo: p0,
                       callBack: () {
                         BlocProvider.of<TestListBloc>(context).add(TestListInitEvent());
-                      },).show(context);
+                      },).show(context,);
                   },
                   onViewDetail: (p0) {
                     TestWorkPage(
@@ -337,75 +347,54 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                         headerGridLinesVisibility: GridLinesVisibility.both,
                         headerRowHeight: Dimens.size60,
                         rowHeight: Dimens.size80,
-/*            onQueryRowHeight: (details) {
-              return details.getIntrinsicRowHeight(details.rowIndex);
-            },*/
-                        //defaultColumnWidth: 200,
                         showHorizontalScrollbar: true,
                         columns: <GridColumn>[
                           GridColumn(
                               columnName: 'id',
-                              maximumWidth: Dimens.size60,
+                              maximumWidth: Dimens.size80,
                               label: Container(
-                                  padding: EdgeInsets.all(16.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
                                     'ID',
+                                    style: TextStyleConstant.textStyleBlack14w500,
                                   ))),
                           GridColumn(
                               columnName: L10nX.getStr.test_name,
                               minimumWidth: Dimens.size200,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
                                     L10nX.getStr.test_name,
                                     overflow: TextOverflow.ellipsis,
+                                    style: TextStyleConstant.textStyleBlack14w500,
                                   ))),
                           GridColumn(
-                              columnName: L10nX.getStr.course_str,
-                              minimumWidth: Dimens.size200,
-                              label: Container(
-                                  padding: EdgeInsets.all(8.0),
-                                  alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.course_str))),
-                          GridColumn(
-                              columnName: L10nX.getStr.subject_str,
-                              minimumWidth: Dimens.size120,
-                              label: Container(
-                                  padding: EdgeInsets.all(8.0),
-                                  alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.subject_str))),
-                          GridColumn(
                               columnName: L10nX.getStr.type,
-                              minimumWidth: Dimens.size120,
+                              maximumWidth: Dimens.size250,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.type))),
+                                  child: Text(
+                                      L10nX.getStr.type,
+                                    style: TextStyleConstant.textStyleBlack14w500,
+                                  ))),
                           GridColumn(
-                              columnName: L10nX.getStr.question_number,
+                              columnName: L10nX.getStr.duration_str,
                               maximumWidth: Dimens.size120,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.question_number))),
-
-                          /*              GridColumn(
-                  columnName: L10nX.getStr.doing_time_str,
-                  minimumWidth: Dimens.size120,
-                  label: Container(
-                      padding: EdgeInsets.all(8.0),
-                      alignment: Alignment.center,
-                      child: Text(L10nX.getStr.doing_time_str))),*/
+                                  child: Text(L10nX.getStr.question_number,style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.action_str,
                               minimumWidth: Dimens.size180,
                               maximumWidth: Dimens.size200,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.action_str))),
+                                  child: Text(L10nX.getStr.action_str,style: TextStyleConstant.textStyleBlack14w500,))),
 
                         ],
                       ),
@@ -440,15 +429,8 @@ class TestDataSource extends DataGridSource {
                 Expanded(child: Text(e.name??"", style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             ) ),
-            DataGridCell<Widget>(columnName: L10nX.getStr.course_str, value: Row(
-              children: [
-                Expanded(child: Text(e.courseName??"", style: TextStyleConstant.textStyleBlack14w400,)),
-              ],
-            )),
-            DataGridCell<Widget>(columnName: L10nX.getStr.subject_str, value: Text(e.subName??"", style: TextStyleConstant.textStyleBlack14w400,)),
-
             DataGridCell<Widget>(columnName: L10nX.getStr.type, value: Text(L10nX().getStringByKey("${mapTestLevelToStrKey[e.testType?? TestType.OUTPUT]}_test_str".toLowerCase()), style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.question_number, value: Text("${(e.quizDTOs??[]).length}", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.duration_str, value: Text("${(e.durian??0)}", style: TextStyleConstant.textStyleBlack14w400,)),
             //DataGridCell<Widget>(columnName: L10nX.getStr.doing_time_str, value: Text("${(e.}", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str, 
                 value: ItemViewEditDelete(

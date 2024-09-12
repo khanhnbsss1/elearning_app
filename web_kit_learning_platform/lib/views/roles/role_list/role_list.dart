@@ -199,7 +199,7 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
                               },
                               onTapOutside: (event) {
                               },
-                              style: MyTextStyle.bodyMedium(),
+                              style: TextStyleConstant.textStyleBlack14w400,
                               decoration: InputDecoration(
                                   hintText: L10nX.getStr.search,
                                   fillColor: ColorConst.whiteColor,
@@ -219,7 +219,7 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
                                     maxWidth: Dimens.size40,
                                     minHeight: Dimens.size40,
                                     maxHeight: Dimens.size40,),
-                                  contentPadding: MySpacing.xy(16, 12),
+                                  contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
                                   //isCollapsed: true,
                                   floatingLabelBehavior: FloatingLabelBehavior.auto),
                             ),
@@ -364,37 +364,37 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
                               columnName: 'id',
                               maximumWidth: Dimens.size60,
                               label: Container(
-                                  padding: EdgeInsets.all(16.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
-                                    'ID',
+                                    'ID', style: TextStyleConstant.textStyleBlack14w500,
                                   ))),
                           GridColumn(
                               columnName: L10nX.getStr.role_str,
                               minimumWidth: Dimens.size250,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
                                     L10nX.getStr.role_str,
-                                    overflow: TextOverflow.ellipsis,
+                                    overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
                                   ))),
                           GridColumn(
                               columnName: L10nX.getStr.role_str,
                               minimumWidth: Dimens.size120,
                               maximumWidth: Dimens.size150,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.role_str))),
+                                  child: Text(L10nX.getStr.role_str, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.action_str,
                               minimumWidth: Dimens.size150,
                               maximumWidth: Dimens.size200,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.action_str))),
+                                  child: Text(L10nX.getStr.action_str, style: TextStyleConstant.textStyleBlack14w500,))),
 
                         ],
                       ),

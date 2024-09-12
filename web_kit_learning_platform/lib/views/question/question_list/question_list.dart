@@ -201,7 +201,7 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
                               },
                               onTapOutside: (event) {
                               },
-                              style: MyTextStyle.bodyMedium(),
+                              style: TextStyleConstant.textStyleBlack14w400,
                               decoration: InputDecoration(
                                   hintText: L10nX.getStr.search,
                                   fillColor: ColorConst.whiteColor,
@@ -369,52 +369,54 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
                               columnName: 'id',
                               maximumWidth: Dimens.size100,
                               label: Container(
-                                  padding: EdgeInsets.all(16.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
                                     'ID',
+                                    style: TextStyleConstant.textStyleBlack14w500,
                                   ))),
                           GridColumn(
                               columnName: L10nX.getStr.question_str,
                               minimumWidth: Dimens.size150,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
                                     L10nX.getStr.question_str,
                                     overflow: TextOverflow.ellipsis,
+                                    style: TextStyleConstant.textStyleBlack14w500,
                                   ))),
                           GridColumn(
                               columnName: L10nX.getStr.question_type,
                               minimumWidth: Dimens.size80,
                               maximumWidth: Dimens.size150,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.question_type))),
+                                  child: Text(L10nX.getStr.question_type, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.grade_str,
                               maximumWidth: Dimens.size120,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.grade_str))),
+                                  child: Text(L10nX.getStr.grade_str, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.score_str,
                               minimumWidth: Dimens.size80,
                               maximumWidth: Dimens.size120,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.score_str))),
+                                  child: Text(L10nX.getStr.score_str, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.action_str,
                               minimumWidth: Dimens.size180,
                               maximumWidth: Dimens.size180,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.action_str))),
+                                  child: Text(L10nX.getStr.action_str, style: TextStyleConstant.textStyleBlack14w500,))),
 
                         ],
                       ),

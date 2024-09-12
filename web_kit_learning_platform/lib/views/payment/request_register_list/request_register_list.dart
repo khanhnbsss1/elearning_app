@@ -198,7 +198,7 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                              },
                              onTapOutside: (event) {
                              },
-                             style: MyTextStyle.bodyMedium(),
+                             style: TextStyleConstant.textStyleBlack14w400,
                              decoration: InputDecoration(
                                  hintText: "${L10nX.getStr.name} ${L10nX.getStr.user_str.toLowerCase()}",
                                  fillColor: ColorConst.whiteColor,
@@ -380,7 +380,7 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                               columnName: 'id',
                               maximumWidth: Dimens.size60,
                               label: Container(
-                                  padding: EdgeInsets.all(16.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
                                     'ID',
@@ -389,7 +389,7 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                               columnName: L10nX.getStr.register_user,
                               minimumWidth: Dimens.size200,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
                                     L10nX.getStr.register_user,
@@ -399,28 +399,28 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                               columnName: L10nX.getStr.course_str,
                               minimumWidth: Dimens.size200,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(L10nX.getStr.course_str))),
                           GridColumn(
                               columnName: L10nX.getStr.created_at,
                               minimumWidth: Dimens.size120,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(L10nX.getStr.created_at))),
                           GridColumn(
                               columnName: L10nX.getStr.status,
                               maximumWidth: Dimens.size120,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(L10nX.getStr.status))),
                           GridColumn(
                               columnName: L10nX.getStr.action_str,
                               maximumWidth: Dimens.size250,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(L10nX.getStr.action_str))),
 

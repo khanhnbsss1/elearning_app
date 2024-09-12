@@ -209,7 +209,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                   },
                   onTapOutside: (event) {
                   },
-                  style: MyTextStyle.bodyMedium(),
+                  style: TextStyleConstant.textStyleBlack14w400,
                   decoration: InputDecoration(
                       hintText: L10nX.getStr.search,
                       fillColor: ColorConst.whiteColor,

@@ -741,6 +741,9 @@ class _EditUserProfileState extends State<EditUserProfile>
                   onChange(value);
                 }
             },
+            dropdownButtonProps: DropdownButtonProps(
+                padding: EdgeInsets.zero
+            ),
           );
         },
       ),

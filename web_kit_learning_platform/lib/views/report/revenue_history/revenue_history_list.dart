@@ -194,7 +194,7 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                                 },
                                 onTapOutside: (event) {
                                 },
-                                style: MyTextStyle.bodyMedium(),
+                                style: TextStyleConstant.textStyleBlack14w400,
                                 decoration: InputDecoration(
                                     hintText: L10nX.getStr.search,
                                     fillColor: ColorConst.whiteColor,
@@ -324,7 +324,7 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                                 padding: EdgeInsets.all(16.0),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'ID',
+                                  'ID', style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.course_name,
@@ -334,7 +334,7 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                                 alignment: Alignment.center,
                                 child: Text(
                                   L10nX.getStr.course_name,
-                                  overflow: TextOverflow.ellipsis,
+                                  overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.category,
@@ -342,14 +342,14 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.category))),
+                                child: Text(L10nX.getStr.category, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.grade_name_str,
                             maximumWidth: Dimens.size100,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.grade_name_str))),
+                                child: Text(L10nX.getStr.grade_name_str, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.register_user,
                             minimumWidth: Dimens.size100,
@@ -358,14 +358,14 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.register_user))),
+                                child: Text(L10nX.getStr.register_user, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.price,
                             maximumWidth: Dimens.size150,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.price))),
+                                child: Text(L10nX.getStr.price, style: TextStyleConstant.textStyleBlack14w500,))),
                       ],
                     ),
                   );

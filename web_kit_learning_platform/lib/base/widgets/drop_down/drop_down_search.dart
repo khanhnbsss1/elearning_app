@@ -25,6 +25,9 @@ class DropDownSearch extends StatelessWidget with UIMixin{
     }
     return DropdownSearch<String>(
       // enabled: (state.courseInfo?.mode??"PREMIUM")=="PREMIUM",
+      dropdownButtonProps: DropdownButtonProps(
+          padding: EdgeInsets.zero
+      ),
       popupProps: PopupProps.menu(
         constraints: BoxConstraints(
           maxHeight: (65 + list.length * 50 < 210) ? 65 + list.length * 50 : 210,

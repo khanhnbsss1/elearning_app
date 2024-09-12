@@ -2,21 +2,13 @@ import 'package:async_searchable_dropdown/async_searchable_dropdown.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:lucide_icons/lucide_icons.dart';
-import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:tiengviet/tiengviet.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/instance_mananger/filter_manager.dart';
-import 'package:webkit/base/services/base_request/models/search_common_request.dart';
-import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
-import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/plugins/screenshot/lib/screenshot.dart';
 import 'package:webkit/services/apis/grade/models/grade_info.dart';
-import 'package:webkit/services/apis/question/get_quiz_list_api.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
 import 'package:webkit/views/question/question_detail/question_detail.dart';
 import 'package:webkit/views/question/question_detail/question_work/question_work_item.dart';
@@ -218,7 +210,11 @@ class _MyDropdownButtonState extends State<SearchQuizDropDown> with SingleTicker
           Gap(Dimens.size16),
           InkWell(
             onTap: () {
-              //CreateEditWordsPage().show(context);
+              QuestionCreateEditDetailPage(
+                actionType: ActionType.create,
+                callBack: () {
+                },
+              ).show(context,);
             },
             child: Icon(Icons.add_circle, color: ColorConst.mainColor,size: Dimens.size40,),
           )

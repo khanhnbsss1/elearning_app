@@ -254,7 +254,7 @@ class _CourseHistoryListPageState extends State<CourseHistoryListPage> with Sing
                                 padding: EdgeInsets.all(16.0),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'ID',
+                                  'ID', style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.course_name,
@@ -264,7 +264,7 @@ class _CourseHistoryListPageState extends State<CourseHistoryListPage> with Sing
                                 alignment: Alignment.center,
                                 child: Text(
                                   L10nX.getStr.course_name,
-                                  overflow: TextOverflow.ellipsis,
+                                  overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.action_str,
@@ -272,14 +272,14 @@ class _CourseHistoryListPageState extends State<CourseHistoryListPage> with Sing
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.action_str))),
+                                child: Text(L10nX.getStr.action_str, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.implementer_str,
                             maximumWidth: Dimens.size180,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.implementer_str))),
+                                child: Text(L10nX.getStr.implementer_str, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.time_str,
                             minimumWidth: Dimens.size100,
@@ -288,7 +288,7 @@ class _CourseHistoryListPageState extends State<CourseHistoryListPage> with Sing
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.time_str))),
+                                child: Text(L10nX.getStr.time_str, style: TextStyleConstant.textStyleBlack14w500,))),
                       ],
                     ),
                   );

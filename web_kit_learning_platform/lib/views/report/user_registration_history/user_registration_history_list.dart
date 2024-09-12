@@ -251,7 +251,7 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
                                 padding: EdgeInsets.all(16.0),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'ID',
+                                  'ID', style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.user_str,
@@ -261,7 +261,7 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
                                 alignment: Alignment.center,
                                 child: Text(
                                   L10nX.getStr.user_str,
-                                  overflow: TextOverflow.ellipsis,
+                                  overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.full_name,
@@ -269,7 +269,7 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.full_name))),
+                                child: Text(L10nX.getStr.full_name, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.time_str,
                             minimumWidth: Dimens.size100,
@@ -278,7 +278,7 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.created_at))),
+                                child: Text(L10nX.getStr.created_at, style: TextStyleConstant.textStyleBlack14w500,))),
                       ],
                     ),
                   );
