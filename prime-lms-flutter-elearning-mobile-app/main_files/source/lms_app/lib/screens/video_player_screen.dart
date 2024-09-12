@@ -1,16 +1,21 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:lms_app/components/video_player.dart';
 
+import '../base/widgets/audio/audio_speaker.dart';
 import '../components/video_player_widget.dart';
+import '../services/apis/lessson/models/lesson_info.dart';
+import '../services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import '../utils/custom_cached_image.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
-  const VideoPlayerScreen({super.key, required this.link});
+  const VideoPlayerScreen({super.key, required this.link, required this.lesson});
 
   final String link;
+  final LessonInfo lesson;
 
   @override
   State<VideoPlayerScreen> createState() => _VideoPlayerScreenState();
@@ -20,9 +25,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   List<String> order = [];
   List<String> videoTitle = [];
   List<String> videoLink = [];
-
   List<Widget> listOfVideo = [];
-
   // for (int i = 0; i < order.length; i++) {
   //   listOfVideo.add(videoListItem(videoTitle[i], ""));
   // }
@@ -49,6 +52,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    LessonInfo lessonDetail = widget.lesson;
     return Scaffold(
         appBar: AppBar(
           title: const Text('Video'),
@@ -78,23 +82,76 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('List of video',
-                            style: Theme.of(context).textTheme.titleMedium),
-                        SizedBox(
-                          height: 600,
-                          child: ListView.builder(
-                              itemCount: order.length,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        selectedVideo = index;
-                                      });
-                                    },
-                                    child: videoListItem(videoTitle[index], "",
-                                        index == selectedVideo));
-                              }),
+                        Theme(
+                          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                          child: ExpansionTile(
+                            initiallyExpanded: true,
+                            title: Text('list-of-video'.tr(),
+                                style: Theme.of(context).textTheme.titleMedium),
+                            children: [
+                              SizedBox(
+                                height: (order.length > 3) ? 300 : (100 * order.length).toDouble(),
+                                child: ListView.builder(
+                                    itemCount: order.length,
+                                    itemBuilder: (context, index) {
+                                      return InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              selectedVideo = index;
+                                            });
+                                          },
+                                          child: videoListItem(videoTitle[index], "",
+                                              index == selectedVideo));
+                                    }),
+                              ),
+                            ],
+                          ),
                         ),
+                        if (lessonDetail.vocabularies != null)
+                          Theme(
+                            data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                            child: ExpansionTile(
+                              initiallyExpanded: false,
+                              title: Text('vocabulary'.tr(),
+                                  style: Theme.of(context).textTheme.titleMedium),
+                              children: [
+                                    SizedBox(
+                                      height: 300,
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        padding: const EdgeInsets.only(top: 0, bottom: 20),
+                                        itemCount: lessonDetail.vocabularies!.length,
+                                        itemBuilder: (context, index) {
+                                          final VocabularyInfo word =
+                                          lessonDetail.vocabularies![index];
+                                          return ListTile(
+                                            contentPadding: const EdgeInsets.symmetric(
+                                                vertical: 0, horizontal: 20),
+                                            horizontalTitleGap: 10,
+                                            title: Text(
+                                              word.simplified!,
+                                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                                  fontWeight: FontWeight.w500, fontSize: 18),
+                                            ),
+                                            subtitle: (word.translationVn != "")
+                                                ? Text(word.translationVn ?? "-")
+                                                : const Text("-"),
+                                            leading: Text(
+                                              '${index + 1}.',
+                                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                                  fontWeight: FontWeight.bold, color: Colors.blue),
+                                            ),
+                                            trailing: AudioSpeaker(
+                                              url: word.audioLink ?? "",
+                                              enableProccessBar: false,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                              ],
+                            ),
+                          ),
                       ],
                     ),
                   ),
@@ -107,9 +164,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       String videoTitle, String? videoThumbnail, bool selected) {
     return Container(
       decoration: BoxDecoration(
-        color: (selected) ? Colors.grey.withOpacity(0.2) : Colors.white,
+        color: (selected) ? Colors.black.withOpacity(0.2) : Colors.white,
       ),
       margin: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 4),
       height: 80,
       width: MediaQuery.of(context).size.width,
       child: Row(
@@ -121,11 +179,15 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 : Stack(
                   children: [
                     Center(
-                      child: Image.asset("assets/images/noImage.jpg",
+                      child: ColorFiltered(
+                        colorFilter: ColorFilter.mode((selected) ? Colors.grey : Colors.white, BlendMode.darken),
+                        child: Image.asset(
+                          "assets/images/noImage.jpg",
                           fit: BoxFit.fitHeight,
-                      ),
+                        ),
+                      )
                     ),
-                    if (selected) const Positioned(child: Center(child: Icon(Icons.play_arrow, color: Colors.black,))),
+                    if (selected) const Positioned(child: Center(child: Icon(Icons.play_arrow, size:48, color: Colors.black,))),
                   ]
                 ),
           ),

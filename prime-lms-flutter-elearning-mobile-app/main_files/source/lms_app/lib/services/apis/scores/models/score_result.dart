@@ -4,7 +4,7 @@ class ScoreResultInfo {
   int? totalRight;
   int? total;
   int? testId;
-  double? point;
+  dynamic point;
   String? createdAt;
   String? updatedAt;
   String? createdBy;

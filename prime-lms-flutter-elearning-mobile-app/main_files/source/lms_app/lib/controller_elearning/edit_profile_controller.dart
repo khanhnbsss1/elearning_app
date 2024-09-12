@@ -84,6 +84,13 @@ class EditProfileController extends MyController {
       label: 'Birthday',
       controller: TextEditingController(),
     );
+    basicValidator.addField(
+      'file_id',
+      required: true,
+      label: 'File id',
+      controller: TextEditingController(),
+    );
+    basicValidator.getController('file_id')!.text = (userProfile.fileId??0).toString();
     basicValidator.getController('gender')!.text = userProfile.gender??"";
     basicValidator.getController('email')!.text = userProfile.email??"";
     basicValidator.getController('birthday')!.text = userProfile.birthday??"";
@@ -106,19 +113,22 @@ class EditProfileController extends MyController {
   }
 
   Future<bool> onUpdate() async {
+    String? birthday =  basicValidator.getController('birthday')?.text;
+    birthday?.replaceAll("/", "-");
     EditUserRequest editUserRequest = EditUserRequest(
       avatar: userProfile.avatar,
-      typeName: userProfile.typeName??"User",
+      typeName: (userProfile.typeName == "" || userProfile.typeName == null) ? "User" : userProfile.typeName,
       userName: userProfile.userName??"User",
       fullname: basicValidator.getController('fullname')?.text,
       bankAccount: basicValidator.getController('bank_account')?.text,
       bankName: basicValidator.getController('bank_name')?.text,
       identityId: basicValidator.getController('identity_id')?.text,
       gender: basicValidator.getController('gender')?.text,
-      birthday: basicValidator.getController('birthday')?.text,
+      birthday: birthday,
       countryName: basicValidator.getController('country_name')?.text,
       email: basicValidator.getController('email')?.text,
       phoneNumber: userProfile.phoneNumber,
+      fileId: basicValidator.getController('file_id')?.text,
     );
     EditUserApi editUserApi = EditUserApi(editUserRequest: editUserRequest);
     bool data = await editUserApi.call();

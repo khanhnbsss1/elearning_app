@@ -37,16 +37,12 @@ class HomeLatestCourses extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: RichText(
-                            text: TextSpan(
-                                text: 'explore'.tr(),
-                                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-                                children: [
-                              const TextSpan(text: ' '),
+                            text:
                               TextSpan(
                                 text: 'latest-courses'.tr(),
                                 style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.blueAccent, fontWeight: FontWeight.bold),
                               )
-                            ])),
+                            ),
                       ),
                       TextButton(
                         // onPressed: () => NextScreen.iOS(

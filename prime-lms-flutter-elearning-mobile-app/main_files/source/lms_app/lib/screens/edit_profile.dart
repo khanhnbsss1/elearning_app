@@ -5,18 +5,12 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
-import 'package:lms_app/models/user_model.dart';
-import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/theme/theme_provider.dart';
 import 'package:lms_app/utils/snackbars.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-
-import '../base/constant/dimens_constant.dart';
-import '../base/theme/text_stype_constant.dart';
 import '../components/user_avatar.dart';
 import '../constants/custom_colors.dart';
 import '../controller_elearning/edit_profile_controller.dart';
@@ -42,6 +36,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
   final formKey = GlobalKey<FormState>();
   bool initController = false;
   Uint8List? _selectedImageFile;
+  String? avatarId;
   String? _imageUrl;
   bool showPassword = false;
 
@@ -51,9 +46,8 @@ class _EditProfileState extends ConsumerState<EditProfile> {
     if (!initController) {
       editProfileController = EditProfileController(userProfile: widget.user);
       editProfileController.onInit();
-      _imageUrl =
-          editProfileController.basicValidator.getController('image')!.text;
-    };
+      _imageUrl = widget.user.avatar;
+    }
     selectedValue = editProfileController.basicValidator.getController('gender')!.text;
   }
 
@@ -79,9 +73,10 @@ class _EditProfileState extends ConsumerState<EditProfile> {
             fileName: result.files.first.name,
             file: file));
     UploadFileResponseInfo? resultUpload = await uploadAvatarApi.call();
-    if (resultUpload != null) {
+    if (resultUpload != UploadFileResponseInfo()) {
       setState(() {
-        widget.user.avatar = resultUpload.link;
+        _imageUrl = resultUpload?.link!;
+        editProfileController.basicValidator.getController('file_id')!.text = resultUpload!.id.toString();
       });
     } else {
       ToastUtils.showSnackBar(context, "Upload avatar failed");

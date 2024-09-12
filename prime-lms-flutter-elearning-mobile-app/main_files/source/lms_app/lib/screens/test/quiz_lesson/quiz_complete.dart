@@ -4,25 +4,27 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/ads/ad_manager.dart';
 import 'package:lms_app/components/mark_complete_button.dart';
 import 'package:lms_app/screens/test/quiz_lesson/quiz_screen.dart';
+import 'package:lms_app/services/apis/test/models/test_detail.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
 import '../../../services/apis/question/models/question_info.dart';
+import '../../../services/apis/scores/models/score_result.dart';
+import '../../../services/apis/test/models/test_info.dart';
 
 
 class QuizComplete extends ConsumerWidget {
-  const QuizComplete({super.key, required this.questions});
+  const QuizComplete({super.key, required this.questions, required this.result, required this.test});
   final List<QuestionInfo>? questions;
+  final ScoreResultInfo result;
+  final TestInfo test;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final correctAnswerCount = ref.watch(correctAnswerCountProvider);
-    final double percentage = (correctAnswerCount / questions!.length) * 100;
-    final bool isPassed = percentage >= 50 ? true : false;
-
+    final bool isPassed = (result.point??0) >= 5.0 ? true : false;
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(context)),
-        title: Text(questions![0].questionName??"-"),
+        title: Text(test.name!),
       ),
       bottomNavigationBar: isPassed
           ? MarkCompleteButton(questions)
@@ -39,8 +41,9 @@ class QuizComplete extends ConsumerWidget {
                 ).tr(),
                 onPressed: () {
                   // Placed ads when user failed the test
+                  ref.invalidate(selectedAnswerProvider);
                   AdManager.initInterstitailAds(ref);
-                  NextScreen.replaceAnimation(context, QuizLesson(questions: questions,));
+                  NextScreen.replaceAnimation(context, QuizLesson(questions: questions, test: test,));
                 },
               ),
             ),
@@ -62,7 +65,7 @@ class QuizComplete extends ConsumerWidget {
                   ).tr(),
                   const SizedBox(height: 10),
                   Text('score-count', style: Theme.of(context).textTheme.displaySmall?.copyWith(color: Colors.green))
-                      .tr(args: [percentage.toStringAsFixed(0)]),
+                      .tr(args: [((result.point??0) * 10).toStringAsFixed(0)]),
                   const SizedBox(height: 20),
                   Text(
                     isPassed ? 'passed-test' : "failed-test",

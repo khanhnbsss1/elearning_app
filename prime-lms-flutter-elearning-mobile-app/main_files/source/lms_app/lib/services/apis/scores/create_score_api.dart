@@ -23,7 +23,6 @@ class CreateScoreApi extends BaseApiRequest {
     }
     else
       {
-        ToastUtils.showToastSuccess('success'.tr());
         ScoreResultInfo scoreResultInfo = ScoreResultInfo.fromJson(result);
         return scoreResultInfo;
       }

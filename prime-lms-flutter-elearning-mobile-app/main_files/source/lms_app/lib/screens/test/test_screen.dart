@@ -10,11 +10,12 @@ import 'package:material_dialogs/dialogs.dart';
 import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
 
 import '../../services/apis/question/models/question_info.dart';
+import '../../services/apis/test/models/test_info.dart';
 
 class TestScreen extends StatefulWidget {
-  const TestScreen({super.key, required this.testId});
+  const TestScreen({super.key, required this.test});
 
-  final int testId;
+  final TestInfo test;
 
   @override
   State<TestScreen> createState() => _TestScreenState();
@@ -31,13 +32,13 @@ class _TestScreenState extends State<TestScreen> {
   Widget build(BuildContext context) {
     var progress = currentQuiz / totalQuiz;
     return FutureBuilder(
-            future: getTestDetail(widget.testId),
+            future: getTestDetail(widget.test.id!),
             builder: (builder, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const LoadingTile();
               } else {
                 List<QuestionInfo>? questions = snapshot.data?.quizs;
-                return QuizLesson(questions: questions);
+                return QuizLesson(questions: questions,test: widget.test,);
                 return Stack(children: [
                   // Column(
                   //   crossAxisAlignment: CrossAxisAlignment.start,

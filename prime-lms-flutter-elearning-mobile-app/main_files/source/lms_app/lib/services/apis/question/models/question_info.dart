@@ -6,7 +6,6 @@ enum QuestionType{
   audio,
   image,
   fill
-
 }
 enum AnswerType{
   text,
@@ -27,7 +26,6 @@ Map< String,QuestionType>mapStrKeyQuestionType={
   "Audio":QuestionType.audio,
   "Image":QuestionType.image,
   "Fill":QuestionType.fill,
-
 };
 
 Map<AnswerType, String>mapAnswerTypeToStrKey={

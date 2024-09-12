@@ -29,7 +29,7 @@ class SearchTab extends ConsumerWidget {
           title: InkWell(
             onTap: () => NextScreen.iOS(context, const SearchScreen()),
             child: Container(
-              margin: const EdgeInsets.all(20),
+              margin: const EdgeInsets.symmetric(vertical: 20),
               alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               width: double.infinity,

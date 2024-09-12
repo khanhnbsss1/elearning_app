@@ -35,15 +35,10 @@ class FreeCourses extends ConsumerWidget {
                       Expanded(
                         child: RichText(
                             text: TextSpan(
-                                text: 'explore'.tr(),
-                                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-                                children: [
-                              const TextSpan(text: ' '),
-                              TextSpan(
                                 text: 'free-courses'.tr(),
                                 style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.blueAccent, fontWeight: FontWeight.bold),
                               )
-                            ])),
+                            ),
                       ),
                       TextButton(
                         onPressed: () => NextScreen.iOS(context, const AllCoursesView(filter: 'Free_course')),

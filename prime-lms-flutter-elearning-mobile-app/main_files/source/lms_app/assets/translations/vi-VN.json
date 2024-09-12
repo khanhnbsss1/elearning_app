@@ -95,7 +95,7 @@
   "choose-answer": "Vui lòng chọn câu trả lời của bạn",
   "try-again": "Thử lại",
   "your-score": "Điểm số của bạn: ",
-  "score-count": "{} trên 100",
+  "score-count": "{}/100",
   "passed-test": "Chúc mừng! Bạn đã vượt qua bài kiểm tra.",
   "failed-test": "Rất tiếc, bạn không thể vượt qua bài kiểm tra.",
   "iap-title": "Mở khóa tất cả",
@@ -180,5 +180,13 @@
   "status": "Trạng thái",
   "type-test": "Loại bài kiểm tra",
   "no-internet": "Vui lòng kiểm tra kết nối internet của bạn",
-  "wrong-pass-or-user": "Tên người dùng hoặc mật khẩu sai"
+  "wrong-pass-or-user": "Tên người dùng hoặc mật khẩu sai",
+  "search-word": "Tìm kiếm từ vựng",
+  "list-of-video": "Danh sách video",
+  "top-instructor": "Giảng viên hàng đầu",
+  "dictionary": "Từ điển",
+  "simplified": " - Giản thế",
+  "traditional": " - Phồn thể",
+  "meaning": " - Nghĩa",
+  "example": " - Ví dụ"
 }

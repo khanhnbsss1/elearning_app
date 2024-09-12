@@ -7,6 +7,7 @@ import 'package:lms_app/services/apis/scores/models/score_info.dart';
 import '../../../base/widgets/audio/audio_speaker.dart';
 import '../../../constants/custom_colors.dart';
 import '../../../services/apis/question/models/question_info.dart';
+import '../../sound.dart';
 
 class QuestionTile extends StatelessWidget {
   const QuestionTile({
@@ -71,6 +72,7 @@ class QuestionTile extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return OptionTile(
                     ref: ref,
+                    question: question,
                     answer: question.answer![index],
                     questionIndex: questionIndex,
                     optionIndex: index,

@@ -39,7 +39,6 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
         padding: const EdgeInsets.only(top: 0, bottom: 20),
         itemCount: lectures.length,
         itemBuilder: (context, index) {
-          final LessonInfo lesson = lectures[index];
           return FutureBuilder(
               future: getLessonDetail(lectures[index].id!),
               builder: (context, snapshot) {
@@ -49,7 +48,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                   return ListTile(
                       onTap: () => {
                         if (_onCheck(context, lessonDetail, course, ref)) {
-                          _openLesson(context, lesson, ref)
+                          _openLesson(context, lessonDetail, ref)
                         }
                       },
                       // onTap: (){},
@@ -222,7 +221,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.bold, color: Colors.blue),
                       ),
-                      trailing: _trailingIcon(lesson));
+                      trailing: _trailingIcon(lessonDetail));
                 } else {
                   return const LoadingTile();
                 }

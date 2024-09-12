@@ -68,7 +68,7 @@ class ApiName {
   final String unlinkVocabulary = "/unlink-multiple-vocabulary";
 
   /// file
-  final String addUploadFile = "/upload-avatar";
+  final String addUploadFile = "/upload-file";
   final String addUploadMultiFile = "/upload-multiple-file";
 
   ///tag
@@ -93,6 +93,6 @@ class ApiName {
   final String getCategories = "/get-categories";
 
   ///
-  final String createScore = "create_score";
+  final String createScore = "/create_score";
 }
 
