@@ -126,7 +126,7 @@ class ApiName {
   final String getQuizFilter = "/filter-quizs-directory";
 
   /// score
-  final String createScore = "/create_score";
+  final String createScore = "/create-score";
   
   /// dashboard
   final String getDataSynthesis = "/get-data-synthesis";
