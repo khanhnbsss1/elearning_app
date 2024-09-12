@@ -252,7 +252,10 @@ class _RegisterState extends State<Register>
                                 Checkbox(
                                   onChanged: controller.onChangeCheckBox,
                                   value: controller.isChecked,
-                                  activeColor: theme.colorScheme.primary,
+                                  activeColor: ColorConst.mainColor,
+                                  fillColor: WidgetStatePropertyAll( controller.isChecked?ColorConst.mainColor: ColorConst.whiteColor,),
+                                  focusColor: ColorConst.greyColor,
+                                  checkColor: ColorConst.whiteColor,
                                   materialTapTargetSize:
                                   MaterialTapTargetSize.shrinkWrap,
                                   visualDensity: getCompactDensity,
@@ -271,7 +274,7 @@ class _RegisterState extends State<Register>
                               onTap: controller.onRegister,
                               elevation: 0,
                               padding: MySpacing.xy(20, 16),
-                              backgroundColor: contentTheme.primary,
+                              backgroundColor: ColorConst.mainColor,
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
