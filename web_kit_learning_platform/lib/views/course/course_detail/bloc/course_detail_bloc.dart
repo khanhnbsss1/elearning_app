@@ -156,6 +156,12 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
         dynamic data = await api.call();
       }
     MonitorLoading().dismiss();
+
+    emit(state.copyWith(
+        blocStatus: AddCourseStatus.onSubmitRating,
+        myRate:event.myRating,
+      ratingState: RatingState.createdRating
+    ));
     await callApiGetRatingList(state.searchCommonRequestRating);
   }
   Future<void> _onRemoveRating(
@@ -169,6 +175,7 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
          id: event.ratingInfo.id
       ));
       dynamic data = await api.call();
+      
     MonitorLoading().dismiss();
     await callApiGetRatingList(state.searchCommonRequestRating);
   }

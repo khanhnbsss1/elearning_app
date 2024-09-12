@@ -97,7 +97,7 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
             isScroll: false,
             child: Container(
               decoration: BoxDecoration(color: ColorConst.whiteColor),
-              padding: EdgeInsets.only(top: Dimens.size50, bottom: Dimens.size16, left: Dimens.size16, right: Dimens.size16),
+              padding: EdgeInsets.only(bottom: Dimens.size16, left: Dimens.size16, right: Dimens.size16),
 
               child: Stack(
                 alignment: AlignmentDirectional.topCenter,

@@ -69,7 +69,7 @@ class _CourseRegistrationHistoryListPageState extends State<CourseRegistrationHi
                       title: Center(
                         child: Text(L10nX.getStr.report_history_register_course,
                           style: TextStyleConstant.textStyleBlack18w600,),),
-                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
+                      padding: EdgeInsets.only(top: Dimens.size60),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
                 }
                 else
@@ -100,49 +100,46 @@ class _CourseRegistrationHistoryListPageState extends State<CourseRegistrationHi
       ){
     return Container(
       color: ColorConst.whiteColor,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
-            Expanded(child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: buildLessonList(state: state, context: context),
-            )),
-            SizedBox(height: 8,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FlutterCustomPagination(
-                  key: GlobalKey(debugLabel: (state.lessonListResponseModel?.total??0).toString()),
-                  currentPage: state.lessonListResponseModel!.getCurrentPage(),
-                  limitPerPage: state.lessonListResponseModel!.pageSize??10,
-                  totalDataCount: state.lessonListResponseModel!.getTotalElement(),
-                  onPreviousPage: (p0) {
-                    BlocProvider.of<CourseRegistrationHistoryListBloc>(context).add(CourseRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onBackToFirstPage: (p0) {
-                    BlocProvider.of<CourseRegistrationHistoryListBloc>(context).add(CourseRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onNextPage: (p0) {
-                    BlocProvider.of<CourseRegistrationHistoryListBloc>(context).add(CourseRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onGoToLastPage: (p0) {
-                    BlocProvider.of<CourseRegistrationHistoryListBloc>(context).add(CourseRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  backgroundColor: ColorConst.whiteColor,
-                  textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
-                  previousPageIcon: Icons.keyboard_arrow_left,
-                  backToFirstPageIcon: Icons.first_page,
-                  nextPageIcon: Icons.keyboard_arrow_right,
-                  goToLastPageIcon: Icons.last_page,
-                ),
-              ],
-            ),
-          ],
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
+          Expanded(child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: buildLessonList(state: state, context: context),
+          )),
+          SizedBox(height: 8,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FlutterCustomPagination(
+                key: GlobalKey(debugLabel: (state.lessonListResponseModel?.total??0).toString()),
+                currentPage: state.lessonListResponseModel!.getCurrentPage(),
+                limitPerPage: state.lessonListResponseModel!.pageSize??10,
+                totalDataCount: state.lessonListResponseModel!.getTotalElement(),
+                onPreviousPage: (p0) {
+                  BlocProvider.of<CourseRegistrationHistoryListBloc>(context).add(CourseRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onBackToFirstPage: (p0) {
+                  BlocProvider.of<CourseRegistrationHistoryListBloc>(context).add(CourseRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onNextPage: (p0) {
+                  BlocProvider.of<CourseRegistrationHistoryListBloc>(context).add(CourseRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onGoToLastPage: (p0) {
+                  BlocProvider.of<CourseRegistrationHistoryListBloc>(context).add(CourseRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                backgroundColor: ColorConst.whiteColor,
+                textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                previousPageIcon: Icons.keyboard_arrow_left,
+                backToFirstPageIcon: Icons.first_page,
+                nextPageIcon: Icons.keyboard_arrow_right,
+                goToLastPageIcon: Icons.last_page,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -250,7 +247,7 @@ class _CourseRegistrationHistoryListPageState extends State<CourseRegistrationHi
                                 padding: EdgeInsets.all(16.0),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'ID',
+                                  'ID', style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.course_name,
@@ -260,7 +257,7 @@ class _CourseRegistrationHistoryListPageState extends State<CourseRegistrationHi
                                 alignment: Alignment.center,
                                 child: Text(
                                   L10nX.getStr.course_name,
-                                  overflow: TextOverflow.ellipsis,
+                                  overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.user_str,
@@ -268,7 +265,7 @@ class _CourseRegistrationHistoryListPageState extends State<CourseRegistrationHi
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.user_str))),
+                                child: Text(L10nX.getStr.user_str, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.time_str,
                             minimumWidth: Dimens.size100,
@@ -277,7 +274,7 @@ class _CourseRegistrationHistoryListPageState extends State<CourseRegistrationHi
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.time_str))),
+                                child: Text(L10nX.getStr.time_str, style: TextStyleConstant.textStyleBlack14w500,))),
                       ],
                     ),
                   );

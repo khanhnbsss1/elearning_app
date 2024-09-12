@@ -10,6 +10,7 @@ enum AddCourseStatus {
   onUpdateFinishLessonStatus,
   getRatingList, 
   onChangeRating, 
+  onRating,
   onSubmitRating,
   unKnown
 }

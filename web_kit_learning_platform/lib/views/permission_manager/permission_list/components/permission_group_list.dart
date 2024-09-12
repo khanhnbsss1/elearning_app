@@ -118,19 +118,16 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
       ){
     return Container(
       color: ColorConst.whiteColor,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
-            Expanded(child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: buildPermissionList(state: state, context: context),
-            )),
-          ],
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
+          Expanded(child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: buildPermissionList(state: state, context: context),
+          )),
+        ],
       ),
     );
   }
@@ -179,7 +176,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                               },
                               onTapOutside: (event) {
                               },
-                              style: MyTextStyle.bodyMedium(),
+                              style: TextStyleConstant.textStyleBlack14w400,
                               decoration: InputDecoration(
                                   hintText: L10nX.getStr.search,
                                   fillColor: ColorConst.whiteColor,

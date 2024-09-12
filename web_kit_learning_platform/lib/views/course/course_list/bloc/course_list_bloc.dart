@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/services/apis/course/course_list/course_api.dart';
 import 'package:webkit/services/apis/course/course_list/models/course_models.dart';
@@ -28,6 +29,7 @@ class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
         blocStatus: CourseStatus.onLoading,
       userProfile: userProfile
     ));
+    await FilterManager().getCourseProccessListInfo(isReload: true);
     await callCourseApi(searchCommonRequest: state.searchCommonRequest!);
   }
 

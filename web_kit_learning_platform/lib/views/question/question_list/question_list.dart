@@ -80,7 +80,7 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
                          L10nX.getStr.quiz_list,
                         style: TextStyleConstant.textStyleBlack18w600,
                       ),
-                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
+                      padding: EdgeInsets.only(top: Dimens.size60),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
                 }
                 else
@@ -111,49 +111,46 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
       ){
     return Container(
       color: ColorConst.whiteColor,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
-            Expanded(child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: buildTestTableList(state: state, context: context),
-            )),
-            SizedBox(height: 8,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FlutterCustomPagination(
-                  key: GlobalKey(debugLabel: (state.listResponseModel?.total??0).toString()),
-                  currentPage: state.listResponseModel!.getCurrentPage(),
-                  limitPerPage: state.listResponseModel!.pageSize??10,
-                  totalDataCount: state.listResponseModel!.getTotalElement(),
-                  onPreviousPage: (p0) {
-                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onBackToFirstPage: (p0) {
-                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onNextPage: (p0) {
-                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onGoToLastPage: (p0) {
-                    BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  backgroundColor: ColorConst.whiteColor,
-                  textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
-                  previousPageIcon: Icons.keyboard_arrow_left,
-                  backToFirstPageIcon: Icons.first_page,
-                  nextPageIcon: Icons.keyboard_arrow_right,
-                  goToLastPageIcon: Icons.last_page,
-                ),
-              ],
-            ),
-          ],
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
+          Expanded(child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: buildTestTableList(state: state, context: context),
+          )),
+          SizedBox(height: 8,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FlutterCustomPagination(
+                key: GlobalKey(debugLabel: (state.listResponseModel?.total??0).toString()),
+                currentPage: state.listResponseModel!.getCurrentPage(),
+                limitPerPage: state.listResponseModel!.pageSize??10,
+                totalDataCount: state.listResponseModel!.getTotalElement(),
+                onPreviousPage: (p0) {
+                  BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onBackToFirstPage: (p0) {
+                  BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onNextPage: (p0) {
+                  BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onGoToLastPage: (p0) {
+                  BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                backgroundColor: ColorConst.whiteColor,
+                textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                previousPageIcon: Icons.keyboard_arrow_left,
+                backToFirstPageIcon: Icons.first_page,
+                nextPageIcon: Icons.keyboard_arrow_right,
+                goToLastPageIcon: Icons.last_page,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   } 
@@ -201,7 +198,7 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
                               },
                               onTapOutside: (event) {
                               },
-                              style: MyTextStyle.bodyMedium(),
+                              style: TextStyleConstant.textStyleBlack14w400,
                               decoration: InputDecoration(
                                   hintText: L10nX.getStr.search,
                                   fillColor: ColorConst.whiteColor,
@@ -369,52 +366,54 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
                               columnName: 'id',
                               maximumWidth: Dimens.size100,
                               label: Container(
-                                  padding: EdgeInsets.all(16.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
                                     'ID',
+                                    style: TextStyleConstant.textStyleBlack14w500,
                                   ))),
                           GridColumn(
                               columnName: L10nX.getStr.question_str,
                               minimumWidth: Dimens.size150,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
                                     L10nX.getStr.question_str,
                                     overflow: TextOverflow.ellipsis,
+                                    style: TextStyleConstant.textStyleBlack14w500,
                                   ))),
                           GridColumn(
                               columnName: L10nX.getStr.question_type,
                               minimumWidth: Dimens.size80,
                               maximumWidth: Dimens.size150,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.question_type))),
+                                  child: Text(L10nX.getStr.question_type, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.grade_str,
                               maximumWidth: Dimens.size120,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.grade_str))),
+                                  child: Text(L10nX.getStr.grade_str, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.score_str,
                               minimumWidth: Dimens.size80,
                               maximumWidth: Dimens.size120,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.score_str))),
+                                  child: Text(L10nX.getStr.score_str, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.action_str,
                               minimumWidth: Dimens.size180,
                               maximumWidth: Dimens.size180,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.action_str))),
+                                  child: Text(L10nX.getStr.action_str, style: TextStyleConstant.textStyleBlack14w500,))),
 
                         ],
                       ),

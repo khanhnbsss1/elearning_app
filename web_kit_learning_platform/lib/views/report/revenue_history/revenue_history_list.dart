@@ -72,7 +72,7 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                       title: Center(
                         child: Text(L10nX.getStr.report_purchased,
                           style: TextStyleConstant.textStyleBlack18w600,),),
-                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
+                      padding: EdgeInsets.only(top: Dimens.size60),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
                 }
                 else
@@ -103,49 +103,46 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
       ){
     return Container(
       color: ColorConst.whiteColor,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-           // buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
-            Expanded(child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: buildLessonList(state: state, context: context),
-            )),
-            SizedBox(height: 8,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FlutterCustomPagination(
-                  key: GlobalKey(debugLabel: (state.lessonListResponseModel?.total??0).toString()),
-                  currentPage: state.lessonListResponseModel!.getCurrentPage(),
-                  limitPerPage: state.lessonListResponseModel!.pageSize??10,
-                  totalDataCount: state.lessonListResponseModel!.getTotalElement(),
-                  onPreviousPage: (p0) {
-                    BlocProvider.of<RevenueHistoryListBloc>(context).add(RevenueHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onBackToFirstPage: (p0) {
-                    BlocProvider.of<RevenueHistoryListBloc>(context).add(RevenueHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onNextPage: (p0) {
-                    BlocProvider.of<RevenueHistoryListBloc>(context).add(RevenueHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onGoToLastPage: (p0) {
-                    BlocProvider.of<RevenueHistoryListBloc>(context).add(RevenueHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  backgroundColor: ColorConst.whiteColor,
-                  textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
-                  previousPageIcon: Icons.keyboard_arrow_left,
-                  backToFirstPageIcon: Icons.first_page,
-                  nextPageIcon: Icons.keyboard_arrow_right,
-                  goToLastPageIcon: Icons.last_page,
-                ),
-              ],
-            ),
-          ],
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+         // buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
+          Expanded(child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: buildLessonList(state: state, context: context),
+          )),
+          SizedBox(height: 8,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FlutterCustomPagination(
+                key: GlobalKey(debugLabel: (state.lessonListResponseModel?.total??0).toString()),
+                currentPage: state.lessonListResponseModel!.getCurrentPage(),
+                limitPerPage: state.lessonListResponseModel!.pageSize??10,
+                totalDataCount: state.lessonListResponseModel!.getTotalElement(),
+                onPreviousPage: (p0) {
+                  BlocProvider.of<RevenueHistoryListBloc>(context).add(RevenueHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onBackToFirstPage: (p0) {
+                  BlocProvider.of<RevenueHistoryListBloc>(context).add(RevenueHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onNextPage: (p0) {
+                  BlocProvider.of<RevenueHistoryListBloc>(context).add(RevenueHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onGoToLastPage: (p0) {
+                  BlocProvider.of<RevenueHistoryListBloc>(context).add(RevenueHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                backgroundColor: ColorConst.whiteColor,
+                textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                previousPageIcon: Icons.keyboard_arrow_left,
+                backToFirstPageIcon: Icons.first_page,
+                nextPageIcon: Icons.keyboard_arrow_right,
+                goToLastPageIcon: Icons.last_page,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -194,7 +191,7 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                                 },
                                 onTapOutside: (event) {
                                 },
-                                style: MyTextStyle.bodyMedium(),
+                                style: TextStyleConstant.textStyleBlack14w400,
                                 decoration: InputDecoration(
                                     hintText: L10nX.getStr.search,
                                     fillColor: ColorConst.whiteColor,
@@ -324,7 +321,7 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                                 padding: EdgeInsets.all(16.0),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'ID',
+                                  'ID', style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.course_name,
@@ -334,7 +331,7 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                                 alignment: Alignment.center,
                                 child: Text(
                                   L10nX.getStr.course_name,
-                                  overflow: TextOverflow.ellipsis,
+                                  overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.category,
@@ -342,14 +339,14 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.category))),
+                                child: Text(L10nX.getStr.category, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.grade_name_str,
                             maximumWidth: Dimens.size100,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.grade_name_str))),
+                                child: Text(L10nX.getStr.grade_name_str, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.register_user,
                             minimumWidth: Dimens.size100,
@@ -358,14 +355,14 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.register_user))),
+                                child: Text(L10nX.getStr.register_user, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.price,
                             maximumWidth: Dimens.size150,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.price))),
+                                child: Text(L10nX.getStr.price, style: TextStyleConstant.textStyleBlack14w500,))),
                       ],
                     ),
                   );

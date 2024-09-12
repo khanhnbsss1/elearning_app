@@ -68,6 +68,9 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                               FloatingLabelBehavior.never,
                             ),
                           ),
+                          dropdownButtonProps: DropdownButtonProps(
+                              padding: EdgeInsets.zero
+                          ),
                           onChanged: (value) {
                             if(value!=null && [...(widget.exitsTags??[]).where((element) {return element.id == value.id;},)].isEmpty)
                               {

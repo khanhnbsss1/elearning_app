@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 
 import '../../../helpers/widgets/my_spacing.dart';
@@ -54,20 +55,31 @@ class _BuildTextFieldState extends State<BuildTextField> with TickerProviderStat
                 MySpacing.height(8),
               ],
             )),
-        TextFormField(
-          controller: widget.controller,
-          onTap: widget.onTap,
-          decoration: InputDecoration(
-            enabled: _enableEdit,
-            hintText: widget.hintText,
-            hintStyle: MyTextStyle.bodySmall(xMuted: true),
-            border: outlineInputBorder,
-            enabledBorder: outlineInputBorder,
-            focusedBorder: focusedInputBorder,
-            contentPadding: MySpacing.all(16),
-            suffixIcon: widget.suffixIcon,
-            isCollapsed: true,
-            floatingLabelBehavior: FloatingLabelBehavior.never,
+        Container(
+          constraints: BoxConstraints(
+            maxHeight: Dimens.size50
+          ),
+          child: TextFormField(
+            controller: widget.controller,
+            onTap: widget.onTap,
+            style: TextStyleConstant.textStyleBlack14w400,
+            decoration: InputDecoration(
+              enabled: _enableEdit,
+              hintText: widget.hintText,
+              hintStyle: MyTextStyle.bodySmall(xMuted: true),
+              border: outlineInputBorder,
+              enabledBorder: outlineInputBorder,
+              focusedBorder: focusedInputBorder,
+              contentPadding: MySpacing.all(Dimens.size16),
+              suffixIcon: widget.suffixIcon,
+              suffixIconConstraints: BoxConstraints(
+                maxWidth: Dimens.size50,
+                maxHeight: Dimens.size50,
+              ),
+              floatingLabelAlignment: FloatingLabelAlignment.center,
+              alignLabelWithHint: true,
+              floatingLabelBehavior: FloatingLabelBehavior.never,
+            ),
           ),
         ),
       ],

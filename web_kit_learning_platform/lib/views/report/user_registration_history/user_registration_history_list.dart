@@ -70,7 +70,7 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
                       title: Center(
                         child: Text(L10nX.getStr.report_new_registered_account,
                           style: TextStyleConstant.textStyleBlack18w600,),),
-                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
+                      padding: EdgeInsets.only(top: Dimens.size60),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
                 }
                 else
@@ -101,49 +101,46 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
       ){
     return Container(
       color: ColorConst.whiteColor,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
-            Expanded(child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: buildLessonList(state: state, context: context),
-            )),
-            SizedBox(height: 8,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FlutterCustomPagination(
-                  key: GlobalKey(debugLabel: (state.lessonListResponseModel?.total??0).toString()),
-                  currentPage: state.lessonListResponseModel!.getCurrentPage(),
-                  limitPerPage: state.lessonListResponseModel!.pageSize??10,
-                  totalDataCount: state.lessonListResponseModel!.getTotalElement(),
-                  onPreviousPage: (p0) {
-                    BlocProvider.of<UserRegistrationHistoryListBloc>(context).add(UserRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onBackToFirstPage: (p0) {
-                    BlocProvider.of<UserRegistrationHistoryListBloc>(context).add(UserRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onNextPage: (p0) {
-                    BlocProvider.of<UserRegistrationHistoryListBloc>(context).add(UserRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onGoToLastPage: (p0) {
-                    BlocProvider.of<UserRegistrationHistoryListBloc>(context).add(UserRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  backgroundColor: ColorConst.whiteColor,
-                  textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
-                  previousPageIcon: Icons.keyboard_arrow_left,
-                  backToFirstPageIcon: Icons.first_page,
-                  nextPageIcon: Icons.keyboard_arrow_right,
-                  goToLastPageIcon: Icons.last_page,
-                ),
-              ],
-            ),
-          ],
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
+          Expanded(child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: buildLessonList(state: state, context: context),
+          )),
+          SizedBox(height: 8,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FlutterCustomPagination(
+                key: GlobalKey(debugLabel: (state.lessonListResponseModel?.total??0).toString()),
+                currentPage: state.lessonListResponseModel!.getCurrentPage(),
+                limitPerPage: state.lessonListResponseModel!.pageSize??10,
+                totalDataCount: state.lessonListResponseModel!.getTotalElement(),
+                onPreviousPage: (p0) {
+                  BlocProvider.of<UserRegistrationHistoryListBloc>(context).add(UserRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onBackToFirstPage: (p0) {
+                  BlocProvider.of<UserRegistrationHistoryListBloc>(context).add(UserRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onNextPage: (p0) {
+                  BlocProvider.of<UserRegistrationHistoryListBloc>(context).add(UserRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onGoToLastPage: (p0) {
+                  BlocProvider.of<UserRegistrationHistoryListBloc>(context).add(UserRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                backgroundColor: ColorConst.whiteColor,
+                textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                previousPageIcon: Icons.keyboard_arrow_left,
+                backToFirstPageIcon: Icons.first_page,
+                nextPageIcon: Icons.keyboard_arrow_right,
+                goToLastPageIcon: Icons.last_page,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -251,7 +248,7 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
                                 padding: EdgeInsets.all(16.0),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'ID',
+                                  'ID', style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.user_str,
@@ -261,7 +258,7 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
                                 alignment: Alignment.center,
                                 child: Text(
                                   L10nX.getStr.user_str,
-                                  overflow: TextOverflow.ellipsis,
+                                  overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.full_name,
@@ -269,7 +266,7 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.full_name))),
+                                child: Text(L10nX.getStr.full_name, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.time_str,
                             minimumWidth: Dimens.size100,
@@ -278,7 +275,7 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.created_at))),
+                                child: Text(L10nX.getStr.created_at, style: TextStyleConstant.textStyleBlack14w500,))),
                       ],
                     ),
                   );

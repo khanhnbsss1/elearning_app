@@ -207,6 +207,11 @@ class ReviewPage extends StatelessWidget with UIMixin {
                                 ActionButton1(
                                   text: L10nX.getStr.review_str,
                                   onTap: () {
+                                    if(state.myRate==0)
+                                      {
+                                        ToastUtils.showToastError("Vui lòng chọn điểm đánh giá");
+                                        return;
+                                      }
                                     BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailOnRatingEvent(
                                         myRating: state.myRate??0, 
                                         comment: ratingTextEditingController.text));
@@ -262,7 +267,7 @@ class ReviewPage extends StatelessWidget with UIMixin {
                             rating:(state.courseInfo?.myRating??0.0),
                           ),
                           Gap(Dimens.size16),
-/*                          InkWell(
+                          InkWell(
                             onTap: () {
                               setState(() {
                                 state.ratingState = RatingState.editRating;
@@ -270,7 +275,7 @@ class ReviewPage extends StatelessWidget with UIMixin {
                               
                             },
                             child: Icon(Icons.edit, size: Dimens.size20, color: ColorConst.mainColor,),
-                          )*/
+                          )
                         ],
                       )),
                   Visibility(

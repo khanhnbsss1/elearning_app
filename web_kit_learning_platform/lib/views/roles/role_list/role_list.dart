@@ -78,7 +78,7 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
                       title: Center(
                         child: Text(L10nX.getStr.role__list_str,
                           style: TextStyleConstant.textStyleBlack18w600,),),
-                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
+                      padding: EdgeInsets.only(top: Dimens.size60),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
                 }
                 else
@@ -109,49 +109,46 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
       ){
     return Container(
       color: ColorConst.whiteColor,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
-            Expanded(child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: buildRoleList(state: state, context: context),
-            )),
-            SizedBox(height: 8,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FlutterCustomPagination(
-                  key: GlobalKey(debugLabel: (state.roleListResponseModel?.total??0).toString()),
-                  currentPage: state.roleListResponseModel!.getCurrentPage(),
-                  limitPerPage: state.roleListResponseModel!.pageSize??10,
-                  totalDataCount: state.roleListResponseModel!.getTotalElement(),
-                  onPreviousPage: (p0) {
-                    BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onBackToFirstPage: (p0) {
-                    BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onNextPage: (p0) {
-                    BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onGoToLastPage: (p0) {
-                    BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  backgroundColor: ColorConst.whiteColor,
-                  textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
-                  previousPageIcon: Icons.keyboard_arrow_left,
-                  backToFirstPageIcon: Icons.first_page,
-                  nextPageIcon: Icons.keyboard_arrow_right,
-                  goToLastPageIcon: Icons.last_page,
-                ),
-              ],
-            ),
-          ],
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
+          Expanded(child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: buildRoleList(state: state, context: context),
+          )),
+          SizedBox(height: 8,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FlutterCustomPagination(
+                key: GlobalKey(debugLabel: (state.roleListResponseModel?.total??0).toString()),
+                currentPage: state.roleListResponseModel!.getCurrentPage(),
+                limitPerPage: state.roleListResponseModel!.pageSize??10,
+                totalDataCount: state.roleListResponseModel!.getTotalElement(),
+                onPreviousPage: (p0) {
+                  BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onBackToFirstPage: (p0) {
+                  BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onNextPage: (p0) {
+                  BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onGoToLastPage: (p0) {
+                  BlocProvider.of<RoleListBloc>(context).add(RoleListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                backgroundColor: ColorConst.whiteColor,
+                textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                previousPageIcon: Icons.keyboard_arrow_left,
+                backToFirstPageIcon: Icons.first_page,
+                nextPageIcon: Icons.keyboard_arrow_right,
+                goToLastPageIcon: Icons.last_page,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -199,7 +196,7 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
                               },
                               onTapOutside: (event) {
                               },
-                              style: MyTextStyle.bodyMedium(),
+                              style: TextStyleConstant.textStyleBlack14w400,
                               decoration: InputDecoration(
                                   hintText: L10nX.getStr.search,
                                   fillColor: ColorConst.whiteColor,
@@ -219,7 +216,7 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
                                     maxWidth: Dimens.size40,
                                     minHeight: Dimens.size40,
                                     maxHeight: Dimens.size40,),
-                                  contentPadding: MySpacing.xy(16, 12),
+                                  contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
                                   //isCollapsed: true,
                                   floatingLabelBehavior: FloatingLabelBehavior.auto),
                             ),
@@ -364,37 +361,37 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
                               columnName: 'id',
                               maximumWidth: Dimens.size60,
                               label: Container(
-                                  padding: EdgeInsets.all(16.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
-                                    'ID',
+                                    'ID', style: TextStyleConstant.textStyleBlack14w500,
                                   ))),
                           GridColumn(
                               columnName: L10nX.getStr.role_str,
                               minimumWidth: Dimens.size250,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
                                     L10nX.getStr.role_str,
-                                    overflow: TextOverflow.ellipsis,
+                                    overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
                                   ))),
                           GridColumn(
                               columnName: L10nX.getStr.role_str,
                               minimumWidth: Dimens.size120,
                               maximumWidth: Dimens.size150,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.role_str))),
+                                  child: Text(L10nX.getStr.role_str, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.action_str,
                               minimumWidth: Dimens.size150,
                               maximumWidth: Dimens.size200,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.action_str))),
+                                  child: Text(L10nX.getStr.action_str, style: TextStyleConstant.textStyleBlack14w500,))),
 
                         ],
                       ),

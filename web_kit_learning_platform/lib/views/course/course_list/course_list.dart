@@ -76,12 +76,12 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                       state.courseType == CourseType.courseList ? L10nX.getStr.courses_list : L10nX.getStr.your_course,
                       style: TextStyleConstant.textStyleBlack18w600,
                     ),
-                    padding: EdgeInsets.only(top: 45 + 16),
+                    padding: EdgeInsets.only(top: Dimens.size60),
+
                     child: Container(
                       decoration: BoxDecoration(
                         color: ColorConst.whiteColor,
                       ),
-                      //padding: EdgeInsets.symmetric(vertical: Dimens.size8,),
                       child: Column(
                         children: [
                           Expanded(
@@ -95,7 +95,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                           bottom: BorderSide(color: ColorConst.dividerColor, width: 0.2)
                                       )
                                   ),
-                                  padding: EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size8),
+                                  padding: EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size16),
                                   child: LayoutBuilder(builder: (context, constraints) {
                                     return  SizedBox(
                                       height: Dimens.size45,
@@ -127,7 +127,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                           },
                                                           onTapOutside: (event) {
                                                           },
-                                                          style: MyTextStyle.bodyMedium(),
+                                                          style: TextStyleConstant.textStyleBlack14w400,
                                                           decoration: InputDecoration(
                                                               hintText: L10nX.getStr.search,
                                                               fillColor: ColorConst.whiteColor,

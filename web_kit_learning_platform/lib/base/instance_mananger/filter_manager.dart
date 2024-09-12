@@ -7,6 +7,8 @@ import 'package:webkit/services/apis/category/get_category_list.dart';
 import 'package:webkit/services/apis/category/models/category_info.dart';
 import 'package:webkit/services/apis/course/course_fillter/get_course_fillter_api.dart';
 import 'package:webkit/services/apis/course/course_fillter/models/course_filtter_info.dart';
+import 'package:webkit/services/apis/course/course_progress/get_course_proccess_list.dart';
+import 'package:webkit/services/apis/course/course_progress/models/course_proccess_info.dart';
 import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_api.dart';
 import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_model.dart';
 import 'package:webkit/services/apis/filter/get_quiz_filter_api.dart';
@@ -42,6 +44,7 @@ class FilterManager{
   QuestionListResponseModel questionListResponseModel = QuestionListResponseModel(content: []);
   TestListResponseModel testListResponseModel = TestListResponseModel(content: []);
   VocabularyResponseModel vocabularyResponseModel = VocabularyResponseModel(content: []);
+  CourseProgressResponseModel courseProgressResponseModel = CourseProgressResponseModel(content: []);
   Future<void> init()async {
     await getFilterCourse();
    await getCourseFilter();
@@ -137,6 +140,17 @@ class FilterManager{
     vocabularyResponseModel =  await getLessonListFilterApi.call();
     return vocabularyResponseModel;
   }
+  Future<CourseProgressResponseModel?> getCourseProccessListInfo({bool? isReload}) async {
+    isReload??=false;
+    if((courseProgressResponseModel.content??[]).isNotEmpty && isReload==false) {
+      return courseProgressResponseModel;
+    }
+    GetCourseProccessListApi getLessonListFilterApi = GetCourseProccessListApi();
+    courseProgressResponseModel =  await getLessonListFilterApi.call();
+    return courseProgressResponseModel;
+  }
+
+  
   
   Widget buildGrade({
     required BuildContext context,

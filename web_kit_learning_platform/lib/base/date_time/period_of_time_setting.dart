@@ -37,7 +37,7 @@ class PeriodOfTime extends StatelessWidget{
             child: BuildTextField(
               enableEdit: true,
               enableHintText: false,
-              suffixIcon: Icon(Icons.calendar_month,),
+              suffixIcon: Icon(Icons.calendar_month,size: Dimens.size30,),
               onTap: () {
                 DateTimePicker.ShowDialogDatePicker(
                   context: context,
@@ -63,7 +63,7 @@ class PeriodOfTime extends StatelessWidget{
             child: BuildTextField(
               enableEdit: true,
               enableHintText: false,
-              suffixIcon: Icon(Icons.calendar_month,),
+              suffixIcon: Icon(Icons.calendar_month, size: Dimens.size30,),
               onTap: () {
                 DateTimePicker.ShowDialogDatePicker(
                   context: context,

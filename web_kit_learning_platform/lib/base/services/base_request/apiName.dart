@@ -33,6 +33,7 @@ class ApiName {
   final String getFilterCourse = "/filter-directory";
   final String addCourseDirectory = "/add-course-directory";
   final String registerCourse = "/regist-course";
+  final String courseProccess = "/get-avg-course-progress-students";
 
   ///Lesson
   final String getLessonListFilter = "/get-list-filter";
@@ -125,7 +126,7 @@ class ApiName {
   final String getQuizFilter = "/filter-quizs-directory";
 
   /// score
-  final String createScore = "/create_score";
+  final String createScore = "/create-score";
   
   /// dashboard
   final String getDataSynthesis = "/get-data-synthesis";

@@ -194,14 +194,13 @@ class _LoginPageState extends State<LoginPage>
                                       child: Row(
                                         children: [
                                           Checkbox(
-                                            onChanged:
-                                                controller.onChangeCheckBox,
+                                            onChanged: controller.onChangeCheckBox,
                                             value: controller.isChecked,
-                                            activeColor:
-                                                theme.colorScheme.primary,
-                                            materialTapTargetSize:
-                                                MaterialTapTargetSize
-                                                    .shrinkWrap,
+                                            activeColor: ColorConst.mainColor,
+                                            fillColor: WidgetStatePropertyAll( controller.isChecked?ColorConst.mainColor: ColorConst.whiteColor,),
+                                            focusColor: ColorConst.greyColor,
+                                            checkColor: ColorConst.whiteColor,
+                                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                             visualDensity: getCompactDensity,
                                           ),
                                           MySpacing.width(16),
@@ -233,7 +232,7 @@ class _LoginPageState extends State<LoginPage>
                                     onTap: controller.onLogin,
                                     elevation: 0,
                                     padding: MySpacing.xy(20, 16),
-                                    backgroundColor: contentTheme.primary,
+                                    backgroundColor: ColorConst.mainColor,
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [

@@ -74,7 +74,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                       title: Center(
                         child: Text( L10nX.getStr.user_str,
                           style: TextStyleConstant.textStyleBlack18w600,),),
-                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
+                      padding: EdgeInsets.only(top: Dimens.size60),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
                 }
                 else
@@ -105,49 +105,46 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
       ){
     return Container(
       color: ColorConst.whiteColor,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
-            Expanded(child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: buildUserList(state: state, context: context),
-            )),
-            SizedBox(height: 8,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FlutterCustomPagination(
-                  key: GlobalKey(debugLabel: (state.userListResponseModel?.total??0).toString()),
-                  currentPage: state.userListResponseModel!.getCurrentPage(),
-                  limitPerPage: state.userListResponseModel!.pageSize??10,
-                  totalDataCount: state.userListResponseModel!.getTotalElement(),
-                  onPreviousPage: (p0) {
-                    BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onBackToFirstPage: (p0) {
-                    BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onNextPage: (p0) {
-                    BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onGoToLastPage: (p0) {
-                    BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  backgroundColor: ColorConst.whiteColor,
-                  textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
-                  previousPageIcon: Icons.keyboard_arrow_left,
-                  backToFirstPageIcon: Icons.first_page,
-                  nextPageIcon: Icons.keyboard_arrow_right,
-                  goToLastPageIcon: Icons.last_page,
-                ),
-              ],
-            ),
-          ],
-        ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
+          Expanded(child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: buildUserList(state: state, context: context),
+          )),
+          SizedBox(height: 8,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FlutterCustomPagination(
+                key: GlobalKey(debugLabel: (state.userListResponseModel?.total??0).toString()),
+                currentPage: state.userListResponseModel!.getCurrentPage(),
+                limitPerPage: state.userListResponseModel!.pageSize??10,
+                totalDataCount: state.userListResponseModel!.getTotalElement(),
+                onPreviousPage: (p0) {
+                  BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onBackToFirstPage: (p0) {
+                  BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onNextPage: (p0) {
+                  BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                onGoToLastPage: (p0) {
+                  BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                },
+                backgroundColor: ColorConst.whiteColor,
+                textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                previousPageIcon: Icons.keyboard_arrow_left,
+                backToFirstPageIcon: Icons.first_page,
+                nextPageIcon: Icons.keyboard_arrow_right,
+                goToLastPageIcon: Icons.last_page,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -165,122 +162,125 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
             )
         ),
         padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  //height: Dimens.size40,
-                  constraints: BoxConstraints(
-                      maxWidth:  constraints.maxWidth> Dimens.size800?Dimens.size600:Dimens.size250
-                  ),
-                  child: Form(
-                    key: formKey,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Expanded(
-                          child: TextFormField(
-                            maxLines: 1,
-                            controller: textEditingController,
-                            onChanged: (value) {
-                    
-                            },
-                            onFieldSubmitted: (value) {
-                              BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
-                            },
-                            onTapOutside: (event) {
-                            },
-                            style: MyTextStyle.bodyMedium(),
-                            decoration: InputDecoration(
-                                hintText: L10nX.getStr.search,
-                                fillColor: ColorConst.whiteColor,
-                                filled: true,
-                                hintStyle: TextStyleConstant.textStyleBlack13w400,
-                                border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
-                                enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
-                                focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
-                                prefixIcon: Align(
-                                    alignment: Alignment.center,
-                                    child: Icon(
-                                      LucideIcons.search,
-                                      size: Dimens.size15,
-                                    )),
-                                prefixIconConstraints:  BoxConstraints(
-                                  minWidth: Dimens.size40,
-                                  maxWidth: Dimens.size40,
-                                  minHeight: Dimens.size40,
-                                  maxHeight: Dimens.size40,),
-                                contentPadding: MySpacing.xy(16, 12),
-                                //isCollapsed: true,
-                                floatingLabelBehavior: FloatingLabelBehavior.auto),
+        child: SizedBox(
+          height: Dimens.size45,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    //height: Dimens.size40,
+                    constraints: BoxConstraints(
+                        maxWidth:  constraints.maxWidth> Dimens.size800?Dimens.size600:Dimens.size250
+                    ),
+                    child: Form(
+                      key: formKey,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Expanded(
+                            child: TextFormField(
+                              maxLines: 1,
+                              controller: textEditingController,
+                              onChanged: (value) {
+                      
+                              },
+                              onFieldSubmitted: (value) {
+                                BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                              },
+                              onTapOutside: (event) {
+                              },
+                              style: TextStyleConstant.textStyleBlack14w400,
+                              decoration: InputDecoration(
+                                  hintText: L10nX.getStr.search,
+                                  fillColor: ColorConst.whiteColor,
+                                  filled: true,
+                                  hintStyle: TextStyleConstant.textStyleBlack13w400,
+                                  border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                  enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                  focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                  prefixIcon: Align(
+                                      alignment: Alignment.center,
+                                      child: Icon(
+                                        LucideIcons.search,
+                                        size: Dimens.size15,
+                                      )),
+                                  prefixIconConstraints:  BoxConstraints(
+                                    minWidth: Dimens.size40,
+                                    maxWidth: Dimens.size40,
+                                    minHeight: Dimens.size40,
+                                    maxHeight: Dimens.size40,),
+                                  contentPadding: MySpacing.xy(16, 12),
+                                  //isCollapsed: true,
+                                  floatingLabelBehavior: FloatingLabelBehavior.auto),
+                            ),
                           ),
-                        ),
-                        Gap(Dimens.size12),
-                        roleDropDownSearch(state: state, context: context, onChange: (p0) {
-                          BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(
-                              searchCommonRequest: state.searchCommonRequest!.copyWith(roleId: p0?.id)));
-                        },)
-                      ],
+                          Gap(Dimens.size12),
+                          roleDropDownSearch(state: state, context: context, onChange: (p0) {
+                            BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(
+                                searchCommonRequest: state.searchCommonRequest!.copyWith(roleId: p0?.id)));
+                          },)
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                Gap(Dimens.size16),
-                Visibility(
-                  visible: constraints.maxWidth> Dimens.size800,
-                  child: ActionButton1(
-                    text: L10nX.getStr.search,
-                    onTap: () {
-                      BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
-                    },
-                  ),
-                ),
-                Visibility(
-                  visible: constraints.maxWidth< Dimens.size800,
-                  child: InkWell(
+                  Gap(Dimens.size16),
+                  Visibility(
+                    visible: constraints.maxWidth> Dimens.size800,
+                    child: ActionButton1(
+                      text: L10nX.getStr.search,
                       onTap: () {
                         BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                       },
-                      child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
-                ),
-              ],
-            ),
-            Visibility(
-              visible: UserManager().userContainPermission(permissionList: [
-                "users.post.create_user"
-              ]),
-              child: Row(
-                children: [
-                  Gap(Dimens.size10),
+                    ),
+                  ),
                   Visibility(
                     visible: constraints.maxWidth< Dimens.size800,
                     child: InkWell(
                         onTap: () {
-                          CreateEditLesson(lessonActionType: ActionType.create,).show(context);
+                          BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                         },
-                        child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
-                  ),
-                  Visibility(
-                    visible: constraints.maxWidth >Dimens.size800,
-                    child: ActionButton1(
-                      preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,size: Dimens.size15,),
-                      text: L10nX.getStr.add_new_str,
-                      onTap: () {
-                       AppPages.routeName(Routes.userEdit,arguments: {
-                         'userProfile':null,
-                         'actionType':ActionType.create,
-                         'editSelfProfile':false
-                       });
-                      },
-                    ),
+                        child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                   ),
                 ],
               ),
-            ),
-          ],
+              Visibility(
+                visible: UserManager().userContainPermission(permissionList: [
+                  "users.post.create_user"
+                ]),
+                child: Row(
+                  children: [
+                    Gap(Dimens.size10),
+                    Visibility(
+                      visible: constraints.maxWidth< Dimens.size800,
+                      child: InkWell(
+                          onTap: () {
+                            CreateEditLesson(lessonActionType: ActionType.create,).show(context);
+                          },
+                          child: Icon(Icons.add_circle_outline, color: ColorConst.mainColor,size: Dimens.size40,)),
+                    ),
+                    Visibility(
+                      visible: constraints.maxWidth >Dimens.size800,
+                      child: ActionButton1(
+                        preIcon: Icon(Icons.add_circle_outline, color: ColorConst.whiteColor,size: Dimens.size15,),
+                        text: L10nX.getStr.add_new_str,
+                        onTap: () {
+                         AppPages.routeName(Routes.userEdit,arguments: {
+                           'userProfile':null,
+                           'actionType':ActionType.create,
+                           'editSelfProfile':false
+                         });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       );
     },);
@@ -351,81 +351,81 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                               columnName: 'id',
                               maximumWidth: Dimens.size60,
                               label: Container(
-                                  padding: EdgeInsets.all(16.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
-                                    'ID',
+                                    'ID', style: TextStyleConstant.textStyleBlack14w500,
                                   ))),
                           GridColumn(
                               columnName: L10nX.getStr.username,
                               minimumWidth: Dimens.size200,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
                                     L10nX.getStr.username,
-                                    overflow: TextOverflow.ellipsis,
+                                    overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
                                   ))),
                           GridColumn(
                               columnName: L10nX.getStr.full_name,
                               minimumWidth: Dimens.size250,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.full_name))),
+                                  child: Text(L10nX.getStr.full_name, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.email,
                               minimumWidth: Dimens.size300,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.email))),
+                                  child: Text(L10nX.getStr.email, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.phone_number,
                               minimumWidth: Dimens.size120,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.phone_number))),
+                                  child: Text(L10nX.getStr.phone_number, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.gender,
                               minimumWidth: Dimens.size120,
                               maximumWidth: Dimens.size120,
 
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.gender))),
+                                  child: Text(L10nX.getStr.gender, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.positions,
                               minimumWidth: Dimens.size180,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.positions))),
+                                  child: Text(L10nX.getStr.positions, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.role_str,
                               maximumWidth: Dimens.size150,
                               minimumWidth: Dimens.size120,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.role_str))),
+                                  child: Text(L10nX.getStr.role_str, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.created_at,
                               maximumWidth: Dimens.size150,
                               minimumWidth: Dimens.size120,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.created_at))),
+                                  child: Text(L10nX.getStr.created_at, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.action_str,
                               minimumWidth: Dimens.size180,
                               label: Container(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.action_str))),
+                                  child: Text(L10nX.getStr.action_str, style: TextStyleConstant.textStyleBlack14w500,))),
 
                         ],
                       ),
@@ -444,7 +444,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
    required UserListState state
  }) {
    return SizedBox(
-     width: Dimens.size150,
+     width: Dimens.size200,
      child: FutureBuilder(
        future: PermissionManager().getRoleModel(),
        builder: (context, snapshot) {
@@ -458,34 +458,56 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
          }
          return DropdownSearch<RoleInfo>(
            enabled: true,
-           
+           dropdownButtonProps: DropdownButtonProps(
+               padding: EdgeInsets.zero
+           ),
            popupProps: PopupProps.menu(
+             searchFieldProps: TextFieldProps(
+               style: TextStyleConstant.textStyleBlack14w400,
+               decoration:  InputDecoration(
+                 floatingLabelAlignment: FloatingLabelAlignment.center,
+                 border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                 enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                 focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                 floatingLabelBehavior: FloatingLabelBehavior.auto,
+                 contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
+                 constraints: BoxConstraints(
+                   minHeight: Dimens.size40,
+                   maxHeight: Dimens.size50,
+                 )
+               ),
+             ),
              constraints: BoxConstraints(
                maxHeight: (65 + (rolesListResponseModel.content??[]).length * 50 < 210) ? 65 + (rolesListResponseModel.content??[]).length * 50 : 210,
              ),
              showSearchBox: true,
              searchDelay: Duration(milliseconds: 300),
              showSelectedItems: false,
+             itemBuilder: (context, item, isSelected) {
+               return Padding(
+                 padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size12),
+                 child: Text(item.name??"", style: TextStyleConstant.textStyleBlack14w400,),
+               );
+             },
            ),
            
            items: (rolesListResponseModel.content??[]).toList(),
            //selectedItem: selectedItem,
            dropdownDecoratorProps: DropDownDecoratorProps(
+             baseStyle: TextStyleConstant.textStyleBlack13w400,
              dropdownSearchDecoration: InputDecoration(
                enabled: true,
                hintText: L10nX.getStr.role_str,
                //labelText: value,
+               hintStyle: TextStyleConstant.textStyleBlack13w400,
                hintTextDirection: TextDirection.ltr,
+               alignLabelWithHint: true,
+               floatingLabelAlignment: FloatingLabelAlignment.center,
                border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
                enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
                focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
-               contentPadding: MySpacing.all(Dimens.size16),
-               isCollapsed: true,
-               floatingLabelBehavior: FloatingLabelBehavior.never,
-               
-               constraints: BoxConstraints(
-                 //minHeight: Dimens.size45
-               ),
+               floatingLabelBehavior: FloatingLabelBehavior.auto,
+               contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
              ),
            ),
            itemAsString: (item) => item.name??"",

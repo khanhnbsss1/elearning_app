@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating/flutter_rating.dart';
 import 'package:gap/gap.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/constant/dimens_constant.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
+import 'package:webkit/services/apis/course/course_progress/models/course_proccess_info.dart';
 import '../../services/apis/course/course_detail/models/course_detail_model.dart';
 
 enum CourseItemAction { viewDetail, edit, delete, study }
@@ -138,6 +141,7 @@ class CourseItemGridView extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              buildProccess(),
                             ],
                           ),
                         ),
@@ -146,75 +150,81 @@ class CourseItemGridView extends StatelessWidget {
                         visible: constraints.maxWidth >= Dimens.size370 || row == 1,
                         child: Padding(
                           padding: EdgeInsets.all(Dimens.size8),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              SizedBox(
-                                width: Dimens.size100,
-                                child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(Dimens.size8),
-                                    child: ImageManager().getImageByUrl(
-                                      courseInfo.image!.isNotEmpty ? courseInfo.image! : 'assets/deshboard/adventure/adventure5.png',
-                                      boxFit: BoxFit.fill,
-                                      //height: 120,
-                                      errorBuilder: Image.asset(
-                                          'assets/deshboard/adventure/adventure5.png',
-                                          fit: BoxFit.fill,
-                                          //height: 150,
-                                        )
-                                    )),
-                              ),
-                              Gap(Dimens.size8),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      '${courseInfo.name} \n' ?? "",
-                                      overflow: TextOverflow.visible,
-                                      style: TextStyleConstant.textStyleBlack14w500.copyWith(fontSize: Dimens.size14, color: ColorConst.mainColor),
-                                      maxLines: 1,
-                                    ),
-                                    Gap(Dimens.size8),
-                                    Text(
-                                      '${courseInfo.totalLectures} bài giảng - ${courseInfo.gradeName ?? ""}',
-                                      style: TextStyleConstant.textStyleBlack12w400.copyWith(
-                                        color: notifier.subgreycolor,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                    ),
-                                    Gap(Dimens.size8),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: Dimens.size100,
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(Dimens.size8),
+                                        child: ImageManager().getImageByUrl(
+                                          courseInfo.image!.isNotEmpty ? courseInfo.image! : 'assets/deshboard/adventure/adventure5.png',
+                                          boxFit: BoxFit.fill,
+                                          //height: 120,
+                                          errorBuilder: Image.asset(
+                                              'assets/deshboard/adventure/adventure5.png',
+                                              fit: BoxFit.fill,
+                                              //height: 150,
+                                            )
+                                        )),
+                                  ),
+                                  Gap(Dimens.size8),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
+                                        Text(
+                                          '${courseInfo.name} \n' ?? "",
+                                          overflow: TextOverflow.visible,
+                                          style: TextStyleConstant.textStyleBlack14w500.copyWith(fontSize: Dimens.size14, color: ColorConst.mainColor),
+                                          maxLines: 1,
+                                        ),
+                                        Gap(Dimens.size8),
+                                        Text(
+                                          '${courseInfo.totalLectures} bài giảng - ${courseInfo.gradeName ?? ""}',
+                                          style: TextStyleConstant.textStyleBlack12w400.copyWith(
+                                            color: notifier.subgreycolor,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                        ),
+                                        Gap(Dimens.size8),
                                         Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            StarRating(
-                                              rating: (courseInfo.rating ?? 0).toDouble(),
-                                              size: Dimens.size15,
-                                              allowHalfRating: true,
-                                              onRatingChanged: (rating) {},
+                                            Row(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                StarRating(
+                                                  rating: (courseInfo.rating ?? 0).toDouble(),
+                                                  size: Dimens.size15,
+                                                  allowHalfRating: true,
+                                                  onRatingChanged: (rating) {},
+                                                ),
+                                              ],
                                             ),
+                                            Text(" ${NumberHelper().numberToString(courseInfo.price, decimalDigits: 0).trim()} (${L10nX.getStr.vnd_str})",
+                                                style: TextStyleConstant.textStyleBlack12w200.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                  // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
+                                                )),
                                           ],
                                         ),
-                                        Text(" ${NumberHelper().numberToString(courseInfo.price, decimalDigits: 0).trim()} (${L10nX.getStr.vnd_str})",
-                                            style: TextStyleConstant.textStyleBlack12w200.copyWith(
-                                              fontWeight: FontWeight.bold,
-                                              // fontSize: ResponsiveInfo.isPhone()?Dimens.size16: width < 1300  ? Dimens.size10 :Dimens.size15,
-                                            )),
                                       ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Gap(Dimens.size12)
+                                ],
                               ),
-                              Gap(Dimens.size12)
+                             buildProccess(),
                             ],
                           ),
                         ),
@@ -274,7 +284,8 @@ class CourseItemGridView extends StatelessWidget {
                             },
                           ),
                         ),
-                      )
+                      ),
+                      
                     ]),
                   );
                 },
@@ -284,5 +295,48 @@ class CourseItemGridView extends StatelessWidget {
         },
       ),
     );
+  }
+  Widget buildProccess(){
+    return LayoutBuilder(builder: (context, constraints) {
+      return FutureBuilder(
+        future: FilterManager().getCourseProccessListInfo(),
+        builder: (context, snapshot) {
+          if(!snapshot.hasData) {
+            return SizedBox.shrink();
+          }
+          CourseProgressResponseModel? courseProgressResponseModel = snapshot.data;
+          if(courseProgressResponseModel==null)
+          {
+            return SizedBox.shrink();
+          }
+
+          if((courseProgressResponseModel.content??[]).where((element) => element.courseId == courseInfo.id,).isNotEmpty){
+            CourseProgressInfo courseProgressInfo = (courseProgressResponseModel.content??[]).where((element) => element.courseId == courseInfo.id,).first;
+            return Column(
+              children: [
+                Gap(Dimens.size12),
+                new LinearPercentIndicator(
+                  animation: true,
+                  lineHeight: Dimens.size15,
+                  padding: EdgeInsets.zero,
+                  animationDuration: 1000,
+                  percent: (courseProgressInfo.progress??0).toDouble()/100,
+                  center: Text(
+                    "${(courseProgressInfo.progress??0).toDouble()} %",
+                    style: TextStyleConstant.textStyleBlack13w400,
+                  ),
+                  barRadius: Radius.circular(Dimens.size8),
+                  progressColor: Colors.yellow,
+                ),
+              ],
+            );
+          }
+          else {
+            return SizedBox.shrink();
+          }
+
+
+        },);
+    },);
   }
 }

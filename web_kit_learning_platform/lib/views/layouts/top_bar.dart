@@ -2,6 +2,7 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/localizations/bloc/main.exports.dart';
 import 'package:webkit/helpers/localizations/language_helper.dart';
@@ -45,9 +46,9 @@ class _TopBarState extends State<TopBar>
     UserProfile? userProfile =  UserManager().getUserProfile();
     return MyCard(
       shadow: MyShadow(position: MyShadowPosition.bottomRight, elevation: 0.5),
-      height: 60,
+      height: Dimens.size60,
       borderRadiusAll: 0,
-      padding: MySpacing.x(24),
+      padding: MySpacing.x(Dimens.size24),
       color: topBarTheme.background.withAlpha(246),
       child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -132,7 +133,7 @@ class _TopBarState extends State<TopBar>
                     ),
                   ),
                   menuBuilder: (context) {
-                    return  buildAccountMenu(context);
+                    return  PointerInterceptor(child: buildAccountMenu(context));
                   },
                 ),
               ],

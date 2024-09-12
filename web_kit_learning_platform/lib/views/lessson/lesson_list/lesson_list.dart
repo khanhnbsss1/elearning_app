@@ -76,7 +76,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                       title: Center(
                         child: Text(L10nX.getStr.lesson_list,
                           style: TextStyleConstant.textStyleBlack18w600,),),
-                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
+                      padding: EdgeInsets.only(top: Dimens.size60),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
                 }
                 else
@@ -108,16 +108,13 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
     return Container(
       color: ColorConst.whiteColor,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        padding:  EdgeInsets.symmetric(vertical: Dimens.size0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
-            Expanded(child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: buildLessonList(state: state, context: context),
-            )),
+            Expanded(child: buildLessonList(state: state, context: context)),
             SizedBox(height: 8,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -166,7 +163,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                 bottom: BorderSide(color: ColorConst.dividerColor, width: 0.2)
             )
         ),
-        padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
+        padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: Dimens.size16),
         child: SizedBox(
           height: Dimens.size45,
           child: Row(
@@ -198,7 +195,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                                 },
                                 onTapOutside: (event) {
                                 },
-                                style: MyTextStyle.bodyMedium(),
+                                style: TextStyleConstant.textStyleBlack14w400,
                                 decoration: InputDecoration(
                                     hintText: L10nX.getStr.search,
                                     fillColor: ColorConst.whiteColor,
@@ -348,10 +345,10 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                             columnName: 'id',
                             maximumWidth: Dimens.size60,
                             label: Container(
-                                padding: EdgeInsets.all(16.0),
+                                padding: EdgeInsets.all(Dimens.size8),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  'ID',
+                                  'ID', style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.lecture_name_str,
@@ -361,7 +358,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                                 alignment: Alignment.center,
                                 child: Text(
                                   L10nX.getStr.lecture_name_str,
-                                  overflow: TextOverflow.ellipsis,
+                                  overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.subject_name_str,
@@ -369,35 +366,35 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.subject_name_str))),
+                                child: Text(L10nX.getStr.subject_name_str, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.document_str,
                             minimumWidth: Dimens.size120,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.document_str))),
+                                child: Text(L10nX.getStr.document_str, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.test_name,
                             minimumWidth: Dimens.size200,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.test_name))),
+                                child: Text(L10nX.getStr.test_name, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.payment_str,
                             maximumWidth: Dimens.size150,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.payment_str))),
+                                child: Text(L10nX.getStr.payment_str, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.vocabulary_str,
                             minimumWidth: Dimens.size200,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.vocabulary_str))),
+                                child: Text(L10nX.getStr.vocabulary_str, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.action_str,
                             minimumWidth: Dimens.size180,
@@ -405,7 +402,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.action_str))),
+                                child: Text(L10nX.getStr.action_str, style: TextStyleConstant.textStyleBlack14w500,))),
 
                       ],
                     ),

@@ -89,7 +89,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                         state.vocabularyType == VocabularyType.vocabularyImage? L10nX.getStr.vocabulary_str: L10nX.getStr.vocabulary_str,
                         style: TextStyleConstant.textStyleBlack18w600,
                       ),),
-                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
+                      padding: EdgeInsets.only(top: Dimens.size60),
                       child: ListBodyCommon(
                         minOfWidthOfListRatio: 0.2,
                         maxOfWidthOfListRatio: 0.3,
@@ -209,7 +209,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                   },
                   onTapOutside: (event) {
                   },
-                  style: MyTextStyle.bodyMedium(),
+                  style: TextStyleConstant.textStyleBlack14w400,
                   decoration: InputDecoration(
                       hintText: L10nX.getStr.search,
                       fillColor: ColorConst.whiteColor,
