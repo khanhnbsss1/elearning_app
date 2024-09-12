@@ -13,7 +13,7 @@ class _SoundState extends State<Sound> with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
-  Icon _icon = const Icon(Icons.volume_down, size: 24);
+  Widget _icon = const Icon(Icons.volume_down, size: 24);
 
   @override
   void initState() {
@@ -26,11 +26,15 @@ class _SoundState extends State<Sound> with TickerProviderStateMixin {
     _animation.addListener(() {
       if (_animation.value < 0.5) {
         setState(() {
-          _icon = Icon(Icons.volume_down, size: widget.size, color: widget.color);
+          _icon = Container(
+            padding: const EdgeInsets.only(left: 0),
+              child: Icon(Icons.volume_down, size: widget.size, color: widget.color));
         });
       } else {
         setState(() {
-          _icon = Icon(Icons.volume_up, size: widget.size, color: widget.color);
+          _icon = Container(
+              padding: EdgeInsets.only(left: widget.size/15),
+              child: Icon(Icons.volume_up, size: widget.size, color: widget.color));
         });
       }
     });

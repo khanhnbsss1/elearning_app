@@ -14,7 +14,7 @@ import 'package:lms_app/mixins/user_mixin.dart';
 import 'package:lms_app/screens/course_details.dart/vocabulary.dart';
 import 'package:lms_app/screens/pdf_screen.dart';
 import 'package:lms_app/screens/tabs/my_courses_tab/my_courses_tab.dart';
-import 'package:lms_app/screens/test/test_screen.dart';
+import 'package:lms_app/screens/test/test_detail_screen.dart';
 import 'package:lms_app/screens/video_lesson.dart';
 import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
@@ -106,7 +106,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(
-                                        Icons.menu_book_rounded,
+                                        Icons.description,
                                         color: Theme.of(context)
                                             .primaryColor,
                                       ),
@@ -152,7 +152,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                                     child: Row(
                                       children: [
                                         Icon(
-                                          Icons.menu_book_rounded,
+                                          Icons.language,
                                           color:
                                               Theme.of(context).primaryColor,
                                         ),
@@ -203,7 +203,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                                         child: Row(
                                           children: [
                                             Icon(
-                                              Icons.menu_book_rounded,
+                                              Icons.folder,
                                               color: Theme.of(context)
                                                   .primaryColor,
                                             ),
@@ -228,13 +228,13 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                           const SizedBox(
                             height: 8,
                           ),
-                          if (lessonDetail.testId != null)
+                          if (lessonDetail.testId != null && course.isPayment == 1)
                             InkWell(
                                 splashColor: Colors.transparent,
                                 onTap: () async {
-                                  // if (_onCheck(context, lessonDetail, course, ref)) {
-                                    openDialog(context, lessonDetail);
-                                  // }
+                                  if (_onCheck(context, lessonDetail, course, ref)) {
+                                    _getTest(context, lessonDetail);
+                                  }
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -248,7 +248,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Icon(
-                                        Icons.menu_book_rounded,
+                                        Icons.quiz,
                                         color: Theme.of(context)
                                             .primaryColor,
                                       ),
@@ -273,7 +273,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                       leading: Text(
                         '${index + 1}.',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.bold, color: Colors.blue),
+                            fontWeight: FontWeight.bold, color: Colors.black),
                       ),
                       trailing: _trailingIcon(lessonDetail));
                 } else {
@@ -314,65 +314,31 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
     return const Icon(FeatherIcons.playCircle);
   }
 
-  Future<void> openDialog(BuildContext context, LessonInfo lessonDetail) {
-    return Dialogs.materialDialog(
-      context: context,
-      title: 'Do-test-title'.tr(),
-      msg: 'Do-test-subtitle'.tr(),
-      titleAlign: TextAlign.center,
-      titleStyle: Theme.of(context).textTheme.titleLarge!,
-      msgAlign: TextAlign.center,
-      msgStyle: Theme.of(context).textTheme.titleMedium,
-      barrierDismissible: true,
-      color: Theme.of(context).scaffoldBackgroundColor,
-      actions: <Widget>[
-        IconsOutlineButton(
-          onPressed: () => Navigator.pop(context),
-          text: 'close'.tr(),
-        ),
-        IconsOutlineButton(
-          onPressed: () async {
-            Navigator.pop(context);
-            EasyLoading.instance
-              ..displayDuration = const Duration(milliseconds: 2000)
-              ..loadingStyle = EasyLoadingStyle.custom
-              ..indicatorSize = 60
-              ..textColor = ColorConst.blackColor
-              ..radius = 20
-              ..backgroundColor = Colors.transparent
-              ..maskColor = Colors.transparent
-              ..indicatorColor = ColorConst.blackColor54
-              ..userInteractions = false
-              ..dismissOnTap = true
-              ..boxShadow = <BoxShadow>[]
-              ..indicatorType = EasyLoadingIndicatorType.cubeGrid;
-            EasyLoading.show(
-              indicator: LoadingLogo(
-                title: "",
-                textSize: 14,
-                assetImage: ImagesNameConst.getPngImage(ImagesNameConst.icLoading),
-                sizeImage: 60,
-                imageColor: Theme.of(context).primaryColor,
-              ),
-            );
-            // MonitorLoading().showLoading('');
-            TestDetail test = await getTestDetail(lessonDetail.testId!);
-            EasyLoading.dismiss();
-            // MonitorLoading().dismiss();
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (builder) {
-                      return TestScreen(test: test, courseId: course.id!, lectureId: lessonDetail.id!,);
-                    }
-                ));
-          },
-          text: 'yes'.tr(),
-          color: Theme.of(context).primaryColor,
-          textStyle:
-          const TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
-        ),
-      ],
+  void _getTest(BuildContext context, LessonInfo lessonDetail) async {
+    EasyLoading.instance
+      ..displayDuration = const Duration(milliseconds: 2000)
+      ..loadingStyle = EasyLoadingStyle.custom
+      ..indicatorSize = 60
+      ..textColor = ColorConst.blackColor
+      ..radius = 20
+      ..backgroundColor = Colors.transparent
+      ..maskColor = Colors.transparent
+      ..indicatorColor = ColorConst.blackColor54
+      ..userInteractions = false
+      ..dismissOnTap = true
+      ..boxShadow = <BoxShadow>[]
+      ..indicatorType = EasyLoadingIndicatorType.cubeGrid;
+    EasyLoading.show(
+      indicator: LoadingLogo(
+        title: "",
+        textSize: 14,
+        assetImage: ImagesNameConst.getPngImage(ImagesNameConst.icLoading),
+        sizeImage: 60,
+        imageColor: Theme.of(context).primaryColor,
+      ),
     );
+    TestDetail test = await getTestDetail(lessonDetail.testId!);
+    EasyLoading.dismiss();
+    NextScreen.normal(context, TestDetailScreen(test: test, courseId: course.id!, lectureId: lessonDetail.id!,));
   }
 }

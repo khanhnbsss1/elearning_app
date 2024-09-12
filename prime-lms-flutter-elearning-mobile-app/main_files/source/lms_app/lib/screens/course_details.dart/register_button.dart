@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lms_app/utils/next_screen.dart';
 
 import '../../base/author/user_helper.dart';
 import '../../base/widgets/my_button.dart';
@@ -81,11 +82,9 @@ class RegisterButton extends ConsumerWidget {
                   ToastUtils.showSnackBar(
                       context,
                       "register-success".tr());
-                  NavigationService()
-                      .navigateToScreen(
-                      CurriculamScreen(
-                        course: course,
-                      ));
+                  NextScreen.replace(context, CurriculamScreen(
+                    course: course,
+                  ));
                 } else {
                   ToastUtils.showSnackBar(context, 'message');
                 }

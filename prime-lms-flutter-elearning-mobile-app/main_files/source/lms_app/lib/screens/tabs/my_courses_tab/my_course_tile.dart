@@ -11,7 +11,7 @@ import '../../../models/user/UserProfile.dart';
 import '../../course_details.dart/details_view.dart';
 import '../../../utils/custom_cached_image.dart';
 import '../../../utils/next_screen.dart';
-import '../../test/test_screen.dart';
+import '../../test/test_detail_screen.dart';
 
 class MyCourseTile extends StatelessWidget with UserMixin {
   const MyCourseTile({super.key, required this.course, required this.user});
@@ -87,20 +87,20 @@ class MyCourseTile extends StatelessWidget with UserMixin {
                     child: Text(CourseMixin.enrollButtonText(course, user), style: TextStyle(color: Theme.of(context).primaryColor),).tr(),
                     onPressed: () => handleOpenCourse(context, user: user, course: course),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                        side: BorderSide(color: Theme.of(context).primaryColor),
-                        textStyle: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)
-                    ),
-                    child: Text('do-test'.tr(), style: TextStyle(color: Theme.of(context).primaryColor),).tr(),
-                    onPressed: () {
-                      NextScreen.normal(context, const TestListScreen());
-                    },
-                  ),
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
+                  // OutlinedButton(
+                  //   style: OutlinedButton.styleFrom(
+                  //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  //       side: BorderSide(color: Theme.of(context).primaryColor),
+                  //       textStyle: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)
+                  //   ),
+                  //   child: Text('do-test'.tr(), style: TextStyle(color: Theme.of(context).primaryColor),).tr(),
+                  //   onPressed: () {
+                  //     NextScreen.normal(context, const TestListScreen());
+                  //   },
+                  // ),
                 ],
               ),
             ),

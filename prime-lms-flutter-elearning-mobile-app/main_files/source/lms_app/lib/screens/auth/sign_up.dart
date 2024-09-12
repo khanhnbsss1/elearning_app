@@ -201,7 +201,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                               Icons.clear,
                               size: 20,
                             ),
-                            onPressed: () => registerController.basicValidator.getController('user_name')?.clear(),
+                            onPressed: () => registerController.basicValidator.getController('phone')?.clear(),
                           )),
                       controller: registerController.basicValidator.getController('phone'),
                       keyboardType: TextInputType.name,

@@ -189,5 +189,12 @@
     "simplified": "简体",
     "traditional": "繁体",
     "meaning": "意思",
-    "example": "例子"
+    "example": "例子",
+    "no-word": "没有找到单词",
+    "test-detail": "测试详情",
+    "test-taking-history": "考试历史",
+    "test-name": "测试名称: {}",
+    "test-durian": "工作时间: {}",
+    "test-type": "测试类型: {}",
+    "test-length": "问题数量: {}"
 }

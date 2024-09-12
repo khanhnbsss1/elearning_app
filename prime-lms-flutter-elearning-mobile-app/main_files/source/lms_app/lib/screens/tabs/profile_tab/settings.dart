@@ -3,6 +3,7 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:lms_app/base/base.export.dart';
 import 'package:lms_app/mixins/user_mixin.dart';
 import 'package:lms_app/screens/intro.dart';
 import '../../../components/change_password.dart';
@@ -23,8 +24,9 @@ class AppSettings extends ConsumerWidget with UserMixin {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bool notificationEnbaled = ref.watch(nProvider);
-    final setttings = ref.watch(appSettingsProvider);
+    final settings = ref.watch(appSettingsProvider);
     final user = ref.watch(userDataProvider);
+    print(settings);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -82,14 +84,14 @@ class AppSettings extends ConsumerWidget with UserMixin {
           title: const Text('privacy-policy').tr(),
           leading: const Icon(LineIcons.lock),
           trailing: const Icon(FeatherIcons.chevronRight),
-          onTap: () => AppService().openLinkWithCustomTab(setttings?.privacyUrl ?? ''),
+          onTap: () => AppService().openLinkWithCustomTab(settings?.privacyUrl ?? ''),
         ),
         const Divider(),
         ListTile(
           title: const Text('contact-us').tr(),
           leading: const Icon(LineIcons.envelope),
           trailing: const Icon(FeatherIcons.chevronRight),
-          onTap: () => AppService().openEmailSupport(setttings?.supportEmail ?? ''),
+          onTap: () => AppService().openEmailSupport(IdentifierConst.supportEmail),
         ),
         const Divider(),
         ListTile(

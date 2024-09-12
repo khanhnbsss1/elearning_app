@@ -2,9 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lms_app/base/base_request_elearning/models/search_common_request.dart';
-import 'package:lms_app/base/widgets/common/alert_dialog/loading.export.dart';
-import 'package:lms_app/components/loading_tile.dart';
-import 'package:lms_app/screens/test/test_screen.dart';
 import 'package:lms_app/services/apis/scores/get_score_api.dart';
 import 'package:lms_app/services/apis/scores/models/test_score_list.dart';
 import 'package:lms_app/services/apis/test/get_test_list_api.dart';
@@ -12,7 +9,6 @@ import 'package:lms_app/services/apis/test/models/test_detail.dart';
 import 'package:lms_app/services/apis/test/models/test_info.dart';
 import 'package:lms_app/utils/empty_animation.dart';
 import 'package:lms_app/utils/loading_widget.dart';
-import 'package:lms_app/utils/next_screen.dart';
 import 'package:material_dialogs/dialogs.dart';
 import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
 
@@ -58,7 +54,7 @@ class _TestListScreenState extends State<TestListScreen> {
                 separatorBuilder: (context, _) => const SizedBox(height: 10),
                 itemBuilder: (BuildContext context, int index) {
                   const bool isExpanded = true;
-                  dynamic point = getPointFromTestScoreId(testScoreList, testList[index].id!);
+                  List<dynamic> point = getPointFromTestScoreId(testScoreList, testList[index].id!);
                   return ExpansionTile(
                     tilePadding: const EdgeInsets.symmetric(horizontal: 20,),
                     collapsedShape: RoundedRectangleBorder(
@@ -100,15 +96,16 @@ class _TestListScreenState extends State<TestListScreen> {
     );
   }
 
-  dynamic getPointFromTestScoreId(TestScoreList testScoreList, dynamic id) {
+  List<dynamic> getPointFromTestScoreId(TestScoreList testScoreList, dynamic id) {
+    List<dynamic> list = [];
       if (testScoreList.list != null) {
         for (TestScore testScore in testScoreList.list!) {
           if (testScore.testId == id) {
-            return testScore.point;
+            list.add(testScore.point);
           }
         }
       }
-    return null;
+    return list;
   }
 
   Future<List<TestInfo>> getTestList() async {
