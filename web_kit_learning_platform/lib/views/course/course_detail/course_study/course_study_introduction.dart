@@ -8,25 +8,28 @@ import '../../../video_player/model/video_model.dart';
 import '../../../video_player/video_player.dart';
 
 class CourseStudyIntroduction extends StatefulWidget {
-
-  const CourseStudyIntroduction({super.key, });
+  const CourseStudyIntroduction({
+    super.key,
+  });
 
   @override
-  State<CourseStudyIntroduction> createState() =>
-      _CourseStudyIntroductionState();
+  State<CourseStudyIntroduction> createState() => _CourseStudyIntroductionState();
 }
 
 class _CourseStudyIntroductionState extends State<CourseStudyIntroduction> {
-
   late CourseDetailState _state;
 
   @override
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CourseDetailBloc, CourseDetailState>(
+      buildWhen: (previous, current) {
+        return current.blocStatus != AddCourseStatus.onChangeRating && current.blocStatus != AddCourseStatus.getRatingList && current.blocStatus != AddCourseStatus.onSubmitRating;
+      },
       listener: (context, state) {
         switch (state.blocStatus) {
           case AddCourseStatus.initial:
@@ -55,7 +58,7 @@ class _CourseStudyIntroductionState extends State<CourseStudyIntroduction> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            buildVideo(),
+            buildVideo(state: _state),
             CourseIntro(),
           ],
         ),
@@ -63,24 +66,18 @@ class _CourseStudyIntroductionState extends State<CourseStudyIntroduction> {
     );
   }
 
-  Widget buildVideo() {
-    return BlocConsumer<CourseDetailBloc, CourseDetailState>(
-  listener: (context, state) {
-  },
-  builder: (context, state) {
+  Widget buildVideo({required CourseDetailState state}) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: 450,
       child: VideoPlayer(
         videoPlayerModel: VideoPlayerModel(
-            title: "",
-            link:
-            // "https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4" 
-            state.courseInfo?.videoPreview ?? "",
+          title: "",
+          link:
+          // "https://www.youtube.com/watch?v=jxAljZD0B7Q&list=PL7K6oq4k49igroleELfyc8BCoZAkgjDmZ&index=4"
+          state.courseInfo?.videoPreview ?? "",
         ),
       ),
     );
-  },
-);
   }
 }

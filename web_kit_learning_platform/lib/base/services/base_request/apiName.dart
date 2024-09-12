@@ -166,8 +166,13 @@ class ApiName {
   /// payment
   final String unlockCourse = "/unlock-course";
   final String getRequests = "/get-requests";
-  
 
+  
+  ///rating
+  final String getRatingList = "/get-ratings";
+  final String addRating = "/create-rating";
+  final String editRating = "/edit-rating";
+  final String deleteRating = "/delete-rating";
 
 
 }

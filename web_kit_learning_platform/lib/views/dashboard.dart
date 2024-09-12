@@ -85,10 +85,10 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                         contentPadding: true,
                         children: [
                           MyFlexItem(
-                              sizes: "lg-8",
+                              sizes: "lg-8 xl-8",
                               child: buildDataSynthesis()),
                           MyFlexItem(
-                            sizes: "lg-4",
+                            sizes: "lg-4 xl-4",
                             child: buildNewRegisterByMonth()
                           ),
                         ],
@@ -298,20 +298,26 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                                   columns: [
                                     DataColumn(
                                       label: SizedBox(
-                                        width: Dimens.size80,
+                                        width: Dimens.size120,
                                         child: MyText.labelLarge(
                                           L10nX.getStr.review_str,
                                         ),
                                       ),
                                     ),
                                     DataColumn(
-                                      label: MyText.labelLarge(
-                                        L10nX.getStr.course_str,
+                                      label: SizedBox(
+                                        width: constraints.maxWidth  - Dimens.size220,
+                                        child: MyText.labelLarge(
+                                          L10nX.getStr.course_str,
+                                        ),
                                       ),
                                     ),
                                     DataColumn(
-                                      label: MyText.labelLarge(
-                                        L10nX.getStr.type,
+                                      label: SizedBox(
+                                        width:Dimens.size100,
+                                        child: MyText.labelLarge(
+                                          L10nX.getStr.type,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -321,13 +327,13 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                                       cells: [
                                         DataCell(
                                           SizedBox(
-                                            width: Dimens.size80,
+                                            width: Dimens.size120,
                                             child: MyText.bodyMedium("${data.ratePoint}"),
                                           ),
                                         ),
                                         DataCell(
                                           SizedBox(
-                                            width: constraints.maxWidth  - Dimens.size160,
+                                            width: constraints.maxWidth  - Dimens.size220,
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
@@ -338,7 +344,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                                         ),
                                         DataCell(
                                           SizedBox(
-                                              width: Dimens.size80,
+                                              width: Dimens.size100,
                                               child: MyText.bodyMedium("${data.mode}")),
                                         ),
                                       ],
@@ -408,20 +414,30 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                                     columns: [
                                       DataColumn(
                                         label: SizedBox(
-                                          width: Dimens.size80,
+                                          width: constraints.maxWidth  - Dimens.size240,
                                           child: MyText.labelLarge(
                                             L10nX.getStr.course_str,
                                           ),
                                         ),
                                       ),
                                       DataColumn(
-                                        label: MyText.labelLarge(
-                                          L10nX.getStr.revenue,
+                                        label: SizedBox(
+                                          width: Dimens.size120,
+                                          child: Expanded(
+                                            child: MyText.labelLarge(
+                                              L10nX.getStr.revenue,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                       DataColumn(
-                                        label: MyText.labelLarge(
-                                          L10nX.getStr.payment_people_number,
+                                        label: SizedBox(
+                                          width: Dimens.size120,
+                                          child: Expanded(
+                                            child: MyText.labelLarge(
+                                              L10nX.getStr.payment_people_number,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -431,13 +447,14 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                                         cells: [
                                           DataCell(
                                             SizedBox(
-                                              width: Dimens.size80,
+                                              width: constraints.maxWidth  - Dimens.size240,
+
                                               child: MyText.bodyMedium("${data.courseName}"),
                                             ),
                                           ),
                                           DataCell(
                                             SizedBox(
-                                              width: constraints.maxWidth  - Dimens.size200,
+                                              width: Dimens.size120,
                                               child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                 children: [
@@ -853,10 +870,12 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        MyText.titleMedium(
-                          L10nX.getStr.report_new_registered_account,
-                          color: contentTheme.light,
-                          fontWeight: 600,
+                        Expanded(
+                          child: MyText.titleMedium(
+                            L10nX.getStr.report_new_registered_account,
+                            color: contentTheme.light,
+                            fontWeight: 600,
+                          ),
                         ),
                         MySpacing.width(8),
                         Row(

@@ -323,22 +323,24 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
       title: L10nX.getStr.name,
       isRequirement: true,
       // titleStyle: ,
-      child: TextFormField(
-        validator: state.controller?.basicValidator.getValidation('name'),
-        controller: state.controller?.basicValidator.getController('name'),
-        keyboardType: TextInputType.text,
-        decoration: InputDecoration(
-          labelText: L10nX.getStr.name,
-          labelStyle: MyTextStyle.bodySmall(xMuted: true),
-          border: outlineInputBorder,
-          prefixIcon: Icon(
-            LucideIcons.user,
-            size: 20,
-            color: ColorConst.colorIconRed,
+      child: SizedBox(
+        child: TextFormField(
+          validator: state.controller?.basicValidator.getValidation('name'),
+          controller: state.controller?.basicValidator.getController('name'),
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+            labelText: L10nX.getStr.name,
+            labelStyle: MyTextStyle.bodySmall(xMuted: true),
+            border: outlineInputBorder,
+            prefixIcon: Icon(
+              LucideIcons.user,
+              size: 20,
+              color: ColorConst.colorIconRed,
+            ),
+            contentPadding: MySpacing.all(16),
+            isCollapsed: true,
+            floatingLabelBehavior: FloatingLabelBehavior.never,
           ),
-          contentPadding: MySpacing.all(16),
-          isCollapsed: true,
-          floatingLabelBehavior: FloatingLabelBehavior.never,
         ),
       ),
     );

@@ -2,12 +2,19 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/services/apis/course/course_detail/get_course_detail_api.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/lessson/lesson_detail/get_lesson_detail.dart';
 import 'package:webkit/services/apis/lessson/lesson_detail/update_study_lesson_proccess.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
+import 'package:webkit/services/apis/rating/add_rating_api.dart';
+import 'package:webkit/services/apis/rating/delete_rating_api.dart';
+import 'package:webkit/services/apis/rating/get_rating_list.dart';
+import 'package:webkit/services/apis/rating/models/rating_info.dart';
 import 'package:webkit/services/apis/topic/model/topic_info.dart';
+import 'package:webkit/views/course/course_detail/components/review_page.dart';
 part 'course_detail_event.dart';
 part 'course_detail_state.dart';
 
@@ -21,6 +28,7 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
       GetLessonDetailApi getLessonDetailApi = GetLessonDetailApi(lessonId: event.selectLessonInfo.id ?? 0);
       state.selectLessonInfo = await getLessonDetailApi.call();
       emit(state.copyWith(blocStatus: AddCourseStatus.onSelectLesson, selectLessonInfo: state.selectLessonInfo));
+      
     });
     
     on<CourseDetailUpdateInfoSelectLessonEvent>((event, emit) async {
@@ -40,6 +48,8 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
     });
     
     on<CourseDetailUpdateFinishLessonEvent>(_onFinishLesson);
+    on<CourseDetailOnRatingEvent>(_onRating);
+    on<CourseDetailOnRemoveRatingEvent>(_onRemoveRating);
 
   }
 
@@ -73,6 +83,7 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
       {
         add(CourseDetailSelectLessonEvent(selectLessonInfo: state.selectLessonInfo!));
       }
+    await callApiGetRatingList(state.searchCommonRequestRating);
   }
 
   Future<void> _onFinishLesson(
@@ -120,4 +131,61 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
       }
 
   }
+  Future<void> _onRating(
+      CourseDetailOnRatingEvent event,
+      Emitter<CourseDetailState> emit,
+      ) async {
+    
+    dynamic api ;
+    MonitorLoading().showLoading("");
+    if(state.courseInfo?.myRating!=0){ /// truong hop nguoi dung sua danh gia
+      api = AddRatingApi(info: RatingInfo(
+        courseId: state.courseInfo?.id,
+        ratePoint: event.myRating,
+        review: event.comment
+      ));
+      dynamic data = await api.call();
+    }
+    else
+      {
+        api = AddRatingApi(info: RatingInfo(
+            courseId: state.courseInfo?.id,
+            ratePoint: event.myRating,
+            review: event.comment
+        ));
+        dynamic data = await api.call();
+      }
+    MonitorLoading().dismiss();
+    await callApiGetRatingList(state.searchCommonRequestRating);
+  }
+  Future<void> _onRemoveRating(
+      CourseDetailOnRemoveRatingEvent event,
+      Emitter<CourseDetailState> emit,
+      ) async {
+
+    dynamic api ;
+    MonitorLoading().showLoading("");
+      api = DeleteRatingApi(info: RatingInfo(
+         id: event.ratingInfo.id
+      ));
+      dynamic data = await api.call();
+    MonitorLoading().dismiss();
+    await callApiGetRatingList(state.searchCommonRequestRating);
+  }
+  Future<void> callApiGetRatingList(SearchCommonRequest? searchCommonRequestRating) async {
+    GetRatingListApi getRatingListApi = GetRatingListApi(searchCommonRequest: state.searchCommonRequestRating!);
+    RatingListResponseModel ratingListResponseModel= await getRatingListApi.call();
+    if(state.courseInfo?.myRating!=0)
+    {
+      state.ratingState = RatingState.createdRating;
+    }
+    
+    emit(state.copyWith(
+      ratingListResponseModel: ratingListResponseModel,
+      blocStatus: AddCourseStatus.getRatingList,
+      ratingState: state.ratingState,
+      myRate:state.courseInfo?.myRating
+    ));
+  }
+  
 }

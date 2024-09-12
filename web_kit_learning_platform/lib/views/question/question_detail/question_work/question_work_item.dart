@@ -155,7 +155,7 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
     if ((widget.questionInfo.answerGetDetail ?? []).isEmpty) {
       return Center(child: NoData());
     }
-    int itemHeight = (widget.questionInfo.answerGetDetail ?? []).first.answerType == AnswerType.image ? 120 : 90;
+    double itemHeight = (widget.questionInfo.answerGetDetail ?? []).first.answerType == AnswerType.image ? Dimens.size120 : Dimens.size90;
     return Padding(
       padding:  EdgeInsets.symmetric(horizontal: Dimens.size16),
       child: LayoutBuilder(
@@ -199,7 +199,6 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
                     ],
                   ),
                   buildCorrectAnswer()
-      
                 ],
               );
             }
@@ -209,8 +208,8 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
             itemCount: (widget.questionInfo.answerGetDetail ?? []).length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              mainAxisSpacing: 16,
-              crossAxisSpacing: 16,
+              mainAxisSpacing: Dimens.size16,
+              crossAxisSpacing: Dimens.size16,
               childAspectRatio: constraints.maxWidth / 2 / itemHeight,
             ),
             itemBuilder: (context, index) {
@@ -227,7 +226,6 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
                       visible: widget.enableShowResultAnswer==true,
                       child: SizedBox(
                         width: Dimens.size20,
-                        height: Dimens.size20,
                         child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) { 
                           bool isRightAnswer=  answerInfo.rightAnswer == 1;
                           int radioState =0; ///0: chọn đúng, 1: Chọn sai, 2, không chọn
@@ -246,7 +244,8 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
                               (radioState==0 || radioState==1?Icons.check_circle : Icons.radio_button_off),
                             color: (radioState ==0 ? Colors.green:
                             (radioState==1?ColorConst.colorIconRed:
-                            ColorConst.colorIconGrays))
+                            ColorConst.colorIconGrays)),
+                            size: Dimens.size20,
                           );
                         },
                         ),
@@ -265,10 +264,10 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
                         },
                         child: SizedBox(
                           width: Dimens.size20,
-                          height: Dimens.size20,
                           child: Icon(
                             isChoose ? Icons.radio_button_checked : Icons.radio_button_off,
                             color: ColorConst.colorIconGrays,
+                            size: Dimens.size20,
                           ),
                         ),
                       ),

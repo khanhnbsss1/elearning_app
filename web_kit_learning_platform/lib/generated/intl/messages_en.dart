@@ -273,6 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enable_validation":
             MessageLookupByLibrary.simpleMessage("Enable validation"),
         "english_text": MessageLookupByLibrary.simpleMessage("English"),
+        "enter_text_str": MessageLookupByLibrary.simpleMessage("Enter"),
         "enter_your_email":
             MessageLookupByLibrary.simpleMessage("Enter your email"),
         "entrance_test_str": MessageLookupByLibrary.simpleMessage("Input test"),
@@ -349,6 +350,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lecture link"),
         "lecture_name_str":
             MessageLookupByLibrary.simpleMessage("Lecture name"),
+        "lecture_str": MessageLookupByLibrary.simpleMessage("Lecture"),
         "left": MessageLookupByLibrary.simpleMessage("Left"),
         "left_dialog": MessageLookupByLibrary.simpleMessage("Left dialog"),
         "lesson_list": MessageLookupByLibrary.simpleMessage("Lesson list"),
@@ -403,6 +405,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "method_str": MessageLookupByLibrary.simpleMessage("Method"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "more_inputs": MessageLookupByLibrary.simpleMessage("More inputs"),
+        "my_rating": MessageLookupByLibrary.simpleMessage("Your rating"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "new_word_str": MessageLookupByLibrary.simpleMessage("New word"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
@@ -485,6 +488,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "primary": MessageLookupByLibrary.simpleMessage("Primary"),
         "primary_course":
             MessageLookupByLibrary.simpleMessage("Primary course"),
+        "proccess_str": MessageLookupByLibrary.simpleMessage("Progress"),
         "product": MessageLookupByLibrary.simpleMessage("Product"),
         "product_a": MessageLookupByLibrary.simpleMessage("Product a"),
         "product_b": MessageLookupByLibrary.simpleMessage("Product b"),
@@ -938,6 +942,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "you_score": MessageLookupByLibrary.simpleMessage("Your score"),
         "you_want_remove":
             MessageLookupByLibrary.simpleMessage("Do you want to remove"),
+        "you_yet_rating": MessageLookupByLibrary.simpleMessage(
+            "You have not rated this course"),
         "your_address": MessageLookupByLibrary.simpleMessage("Your address"),
         "your_are_ready_unlock_for_this_user":
             MessageLookupByLibrary.simpleMessage(

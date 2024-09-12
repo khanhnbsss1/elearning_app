@@ -60,18 +60,21 @@ class AudioSpeakerState extends State<AudioSpeaker> {
             return Icon(
               Icons.volume_down,
               color: ColorConst.mainColor,
+              size: Dimens.size20,
             );
           case ProcessingState.ready:
             // TODO: Handle this case.
             icon=  Icon(
               Icons.volume_up,
               color: ColorConst.mainColor,
+              size: Dimens.size25,
             );
           case ProcessingState.completed:
             // TODO: Handle this case.
             icon=  Icon(
               Icons.volume_down,
               color: ColorConst.mainColor,
+              size: Dimens.size20,
             );
         }
         return Row(

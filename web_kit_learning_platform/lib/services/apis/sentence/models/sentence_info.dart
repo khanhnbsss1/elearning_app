@@ -8,6 +8,7 @@ class SentenceInfo {
   String? audioLink;
   int? audioId;
   UploadFileResponseInfo? audioFileInfo;
+  String? audioName;
   SentenceInfo(
       {
         this.id,
@@ -16,7 +17,8 @@ class SentenceInfo {
         this.translationVn,
         this.audioLink,
         this.audioId,
-        this.audioFileInfo
+        this.audioFileInfo,
+        this.audioName
       }){
     chineseSentence??='';
     pinyionSentence??='';
@@ -33,6 +35,7 @@ class SentenceInfo {
     String? audioLink,
     int? audioId,
     UploadFileResponseInfo? audioFileInfo,
+    String? audioName
   })
   {
     return SentenceInfo(
@@ -42,6 +45,7 @@ class SentenceInfo {
       audioLink: audioLink??this.audioLink,
       audioId: audioId??this.audioId,
       audioFileInfo: audioFileInfo??this.audioFileInfo,
+      audioName: audioName??this.audioName,
     );
   } 
   
@@ -52,6 +56,7 @@ class SentenceInfo {
     translationVn = json['translationvn_sentence'];
     audioLink = json['audio_link'];
     audioId = json['audio_id'];
+    audioName = json['audioName'];
   }
 
   Map<String, dynamic> toJson() {

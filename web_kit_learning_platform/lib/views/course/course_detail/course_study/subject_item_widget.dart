@@ -52,18 +52,19 @@ class SubjectItemWidgetState extends State<SubjectItemWidget>{
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      '${L10nX.getStr.subject_str} ${widget.subjectIndex+1}: ${widget.subject.subName}',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Text(
+                        '${L10nX.getStr.subject_str} ${widget.subjectIndex+1}: ${widget.subject.subName}',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyleConstant.textStyleBlack14w600,
                       ),
                     ),
                     Gap(Dimens.size16),
 
-                    Icon((!showSubject)?Icons.arrow_drop_down:Icons.arrow_drop_up, size: 32,),
+                    Icon((!showSubject)?Icons.arrow_drop_down:Icons.arrow_drop_up, size: Dimens.size30,),
                   ],
                 ),
                 SizedBox(
@@ -71,7 +72,9 @@ class SubjectItemWidgetState extends State<SubjectItemWidget>{
                 ),
                 Row(
                   children: [
-                    (MediaQuery.of(context).size.width > 1050) ? Text('Tiến độ: ') : SizedBox(),
+                    (MediaQuery.of(context).size.width > 1050) ? Text(
+                      '${L10nX.getStr.proccess_str}: ', 
+                      style: TextStyleConstant.textStyleBlack14w400, ) : SizedBox(),
                     Expanded(
                       child: LayoutBuilder(
                         builder: (context, constraints) {
@@ -130,6 +133,7 @@ class SubjectItemWidgetState extends State<SubjectItemWidget>{
                             '${subjectIndex+1}.${lectureIndex+1}. ${lessonInfo.lectureName}',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
+                            style: TextStyleConstant.textStyleBlack14w400,
                           ),
                         ),
                         Gap(Dimens.size10),
@@ -137,6 +141,7 @@ class SubjectItemWidgetState extends State<SubjectItemWidget>{
                           child: Icon(
                             isFinishLesson?Icons.check_box_outlined:Icons.check_box_outline_blank,
                             color:isFinishLesson? ColorConst.mainColor:ColorConst.colorIconGrays ,
+                            size: Dimens.size20,
                           ),
                         )
                       ],
@@ -216,17 +221,17 @@ class TestItemWidgetState extends State<TestItemWidget>{
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "II. ${widget.testTitle ?? L10nX.getStr.output_test_str} ",
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Text(
+                        "II. ${widget.testTitle ?? L10nX.getStr.output_test_str} ",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyleConstant.textStyleBlack16w500,
                       ),
                     ),
                     Gap(Dimens.size16),
 
-                    Icon((!showSubject)?Icons.arrow_drop_down:Icons.arrow_drop_up, size: 32,),
+                    Icon((!showSubject)?Icons.arrow_drop_down:Icons.arrow_drop_up, size: Dimens.size30,),
                   ],
                 ),
                 SizedBox(
@@ -288,6 +293,7 @@ class TestItemWidgetState extends State<TestItemWidget>{
                             '${subjectIndex+1}.${testIndex+1}. ${testInfo.name}',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
+                            style: TextStyleConstant.textStyleBlack14w400,
                           ),
                         ),
                         Gap(Dimens.size10),
@@ -340,7 +346,10 @@ class TestItemWidgetState extends State<TestItemWidget>{
           lineHeight: Dimens.size20,
           animationDuration: 1000,
           percent: percent,
-          center: Text("${L10nX.getStr.finished_str} ${listQuestionChooesed.length} / ${(widget.testInfos??[]).length} ${L10nX.getStr.test_str.toLowerCase()}"),
+          center: Text(
+              "${L10nX.getStr.finished_str} ${listQuestionChooesed.length} / ${(widget.testInfos??[]).length} ${L10nX.getStr.test_str.toLowerCase()}",
+            style: TextStyleConstant.textStyleBlack13w400,
+          ),
           barRadius: Radius.circular(Dimens.size8),
           progressColor: Colors.green,
         ),

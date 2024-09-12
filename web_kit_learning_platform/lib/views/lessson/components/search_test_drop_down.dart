@@ -88,6 +88,7 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
           Expanded(
             child: SizedBox(
               width: Dimens.size300,
+              height: Dimens.size60,
               child: StatefulBuilder(
                 builder: (BuildContext context, void Function(void Function()) setState) {
                   return SearchableDropdown<TestInfo>(

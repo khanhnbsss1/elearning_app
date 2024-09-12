@@ -16,6 +16,11 @@ class LectureList extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return BlocConsumer<CourseDetailBloc, CourseDetailState>(
+        buildWhen: (previous, current) {
+          return current.blocStatus != AddCourseStatus.onChangeRating &&
+              current.blocStatus != AddCourseStatus.getRatingList &&
+              current.blocStatus != AddCourseStatus.onSubmitRating;
+        },
         listener: (context, state) {
           switch (state.blocStatus) {
             case AddCourseStatus.initial:
@@ -88,7 +93,7 @@ class LectureList extends StatelessWidget{
                 children: [
                   Text("-"),
                   Gap(Dimens.size10),
-                  Text('${L10nX.getStr.lecture_name_str} $lessonIndex: ${lessonInfo.lectureName}'),
+                  Text('${L10nX.getStr.lecture_str} $lessonIndex: ${lessonInfo.lectureName}'.trim(), style: TextStyleConstant.textStyleBlack14w400,),
                 ],
               ),
             )

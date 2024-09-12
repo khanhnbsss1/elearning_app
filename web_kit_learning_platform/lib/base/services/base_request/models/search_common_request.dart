@@ -19,6 +19,8 @@ class SearchCommonRequest {
   int? limit;
   String? type;
   String?roleId;
+  int?courseId;
+  
   SearchCommonRequest(
       {
         this.userId,
@@ -39,7 +41,8 @@ class SearchCommonRequest {
         this.limit,
         this.startTime,
         this.endTime,
-        this.roleId
+        this.roleId,
+        this.courseId
       }){
     type??="DESC";
   }
@@ -56,6 +59,7 @@ class SearchCommonRequest {
     categoryId = json['categoryId'];
     producerId = json['producerId'];
     isActive = json['isActive'];
+    courseId = json['courseId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -137,6 +141,9 @@ class SearchCommonRequest {
     }
     if((roleId??'').isNotEmpty) {
       data['roleId'] = roleId;
+    }
+    if(courseId!=null) {
+      data['courseId'] = courseId;
     }
     return data;
   }

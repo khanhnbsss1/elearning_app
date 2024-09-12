@@ -151,7 +151,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
         isScrollbarAlwaysShown: false,
         gridLinesVisibility: GridLinesVisibility.both,
         headerGridLinesVisibility: GridLinesVisibility.both,
-        headerRowHeight: Dimens.size50,
+        headerRowHeight: Dimens.size80,
         rowHeight: Dimens.size80,
         showHorizontalScrollbar: true,
         allowColumnsDragging: true,
@@ -207,6 +207,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
   Widget subjectDropDownSearch({Function(String)? onSelectSubject, required AddCourseState state, required BuildContext context}) {
     return Row(
         mainAxisSize: MainAxisSize.min, 
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
       StatefulBuilder(
         builder: (BuildContext context, void Function(void Function()) setState) {
@@ -227,7 +228,7 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
                 // Add more decoration..
               ),
               hint:  Text(
-                L10nX.getStr.choose_category_str,
+                "${L10nX.getStr.subject_str}",
                 style: TextStyleConstant.textStyleBlack13w400,
               ),
               items: (state.subjectList??[]).map((item) => DropdownItem<String>(
@@ -293,61 +294,65 @@ class _CourseIntroductionPageState extends State<CourseLinkLessonListPage> with 
     ]);
   }
   Widget lessonDropDownSearch({Function(LessonInfo)? onSelectLesson, required AddCourseState state, required BuildContext context}) {
-    
     return StatefulBuilder(
       builder: (BuildContext blocContext, void Function(void Function()) setState) {
-        return Row(mainAxisSize: MainAxisSize.min, children: [
-          SizedBox(
-            width: Dimens.size300,
-            child: SearchableDropdown<LessonInfo>(
-              inputDecoration: InputDecoration(
-                constraints: BoxConstraints(maxHeight: Dimens.size45),
-                hintTextDirection: AppTheme.textDirection,
-                labelStyle: TextStyleConstant.textStyleBlack14w400,
-                hintStyle: TextStyleConstant.textStyleBlack14w400,
-                border: outlineInputBorder,
-                labelText: L10nX.getStr.search_lesson_str,
-                prefixIcon: Icon(
-                  Icons.play_lesson,
-                  color: ColorConst.colorIconRed,
+        return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) { 
+          return Row(mainAxisSize: MainAxisSize.min, children: [
+            SizedBox(
+              width: Dimens.size450,
+              height: Dimens.size60,
+              child: SearchableDropdown<LessonInfo>(
+                inputDecoration: InputDecoration(
+                  constraints: BoxConstraints(maxHeight: Dimens.size45),
+                  hintTextDirection: AppTheme.textDirection,
+                  labelStyle: TextStyleConstant.textStyleBlack14w400,
+                  hintStyle: TextStyleConstant.textStyleBlack14w400,
+                  border: outlineInputBorder,
+                  labelText: L10nX.getStr.search_lesson_str,
+                  helperMaxLines: 1,
+                  prefixIcon: Icon(
+                    Icons.play_lesson,
+                    color: ColorConst.colorIconRed,
+                  ),
                 ),
+                remoteItems: (search) async {
+                  return await getLessonFilterList(search ?? "");
+                },
+                itemLabelFormatter: (value) {
+                  return value.lectureName ?? "";
+                },
+                onChanged: (LessonInfo? value) {
+                  if ((BlocProvider.of<AddCourseBloc>(blocContext).state.currentSubject ?? '').isEmpty) {
+                    ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
+                    return;
+                  }
+                  if (onSelectLesson != null) {
+                    //_lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
+                    onSelectLesson(value!);
+                  } else {
+                    ToastUtils.showToastError(L10nX.getStr.unknown_str);
+                  }
+                  print("object");
+                },
+                value: null,
+                dropDownListHeight: Dimens.size400,
+                dropDownListWidth: Dimens.size300,
               ),
-              remoteItems: (search) async {
-                return await getLessonFilterList(search ?? "");
-              },
-              itemLabelFormatter: (value) {
-                return value.lectureName ?? "";
-              },
-              onChanged: (LessonInfo? value) {
-                if ((BlocProvider.of<AddCourseBloc>(blocContext).state.currentSubject ?? '').isEmpty) {
-                  ToastUtils.showToastError(L10nX.getStr.please_choose_a_subject);
-                  return;
-                }
-                if (onSelectLesson != null) {
-                  //_lessonDropdownSearchFieldController.text = suggestion.lectureName??"";
-                  onSelectLesson(value!);
-                } else {
-                  ToastUtils.showToastError(L10nX.getStr.unknown_str);
-                }
-                print("object");
-              },
-              value: null,
-              dropDownListHeight: Dimens.size400,
-              dropDownListWidth: Dimens.size300,
             ),
-          ),
-          Gap(Dimens.size16),
-          InkWell(
-            onTap: () {
-              CreateEditLesson().show(blocContext);
-            },
-            child: Icon(
-              Icons.add_circle,
-              color: ColorConst.mainColor,
-              size: Dimens.size50,
-            ),
-          )
-        ]);
+            Gap(Dimens.size16),
+            InkWell(
+              onTap: () {
+                CreateEditLesson().show(blocContext);
+              },
+              child: Icon(
+                Icons.add_circle,
+                color: ColorConst.mainColor,
+                size: Dimens.size50,
+              ),
+            )
+          ]);
+        },
+        );
       },
     );
   }

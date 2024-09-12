@@ -129,6 +129,11 @@ class _CourseStudyState extends State<CoursePreview> with SingleTickerProviderSt
 
   Widget buildTitle() {
     return BlocConsumer<CourseDetailBloc, CourseDetailState>(
+        buildWhen: (previous, current) {
+          return current.blocStatus != AddCourseStatus.onChangeRating &&
+              current.blocStatus != AddCourseStatus.getRatingList &&
+              current.blocStatus != AddCourseStatus.onSubmitRating;
+        },
         listener: (context, state) {
           switch (state.blocStatus) {
             case AddCourseStatus.initial:

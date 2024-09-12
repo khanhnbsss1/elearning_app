@@ -39,3 +39,17 @@ class CourseDetailOnSelectCurrentVideoEvent extends CourseDetailEvent {
   @override
   List<Object?> get props => [selectLessonInfo, selectVideoInfo];
 }
+
+class CourseDetailOnRatingEvent extends CourseDetailEvent {
+  double myRating;
+  String comment;
+  CourseDetailOnRatingEvent({required this.myRating, required this.comment});
+  @override
+  List<Object?> get props => [myRating, comment];
+}
+class CourseDetailOnRemoveRatingEvent extends CourseDetailEvent {
+  RatingInfo ratingInfo;
+  CourseDetailOnRemoveRatingEvent({required this.ratingInfo});
+  @override
+  List<Object?> get props => [ratingInfo];
+}

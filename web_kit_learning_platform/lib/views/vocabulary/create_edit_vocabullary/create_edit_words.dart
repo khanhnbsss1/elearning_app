@@ -373,12 +373,18 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                                       {
                                                         String a = object.toString();
                                                         vocabularyInfo.add(VocabularyInfo(
-                                                            simplified: object["simplified"].text,
-                                                            traditional: object["traditional"].text,
-                                                            translationVn: object["translation_vn"].text,
-                                                            pinyinTones: object["pinyin_tones"].text,
-                                                            categoryWord: object["category_word"].text,
-                                                            audio: object["audio"].text
+                                                            simplified: object["simplified"]!=null?object["simplified"].text:"",
+                                                            traditional: object["traditional"]!=null?object["traditional"].text:"",
+                                                            translationVn: object["translation_vn"]!=null?object["translation_vn"].text:"",
+                                                            pinyinTones: object["pinyin_tones"]!=null?object["pinyin_tones"].text:"",
+                                                            categoryWord: object["category_word"]!=null?object["category_word"].text:"",
+                                                            audio: object["audio"]!=null?object["audio"].text:"",
+                                                          sentenceInfos: [SentenceInfo(
+                                                            chineseSentence: object["example_simplified"]!=null?object["example_simplified"].text:"",
+                                                            pinyionSentence: object["example_pinyin_tones"]!=null?object["example_pinyin_tones"].text:"",
+                                                            translationVn: object["example_translation_vn"]!=null?object["example_translation_vn"].text:"",
+                                                            audioName: object["example_audio"]!=null?object["example_audio"].text:"",
+                                                          )]
                                                         ));
                                                         print("object");
                                                       }
@@ -403,7 +409,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                             Gap(Dimens.size16),
                                             Row(
                                               children: [
-                                                Text("Chọn thư mục chứa âm thanh của các từ vựng: "),
+                                                Text("Chọn danh sách file âm thanh của các từ vựng: "),
                                                 Gap(Dimens.size12),
                                                 InkWell(
                                                   onTap:() async {
@@ -481,12 +487,12 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                                             overflow: TextOverflow.ellipsis,
                                                           ))),
                                                   GridColumn(
-                                                      columnName: L10nX.getStr.traditional_str,
+                                                      columnName: L10nX.getStr.chinese_vietnamese_str,
                                                       maximumWidth: Dimens.size150,
                                                       label: Container(
                                                           padding: EdgeInsets.all(8.0),
                                                           alignment: Alignment.center,
-                                                          child: Text(L10nX.getStr.traditional_str))),
+                                                          child: Text(L10nX.getStr.chinese_vietnamese_str))),
                                                   GridColumn(
                                                       columnName: L10nX.getStr.pinyin_tone_str,
                                                       maximumWidth: Dimens.size150,
@@ -518,14 +524,11 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                                 ],
                                               );
                                             },
-                                            
-                                            
                                           ),
                                         )
                                     ),
                                     Center(
                                       child: Visibility(
-                                        
                                         child: ActionButton1(
                                           text: "Nhập dữ liệu",
                                           onTap: () {
@@ -825,7 +828,7 @@ class ImportMultiVocabularyDataSource extends DataGridSource {
                 Expanded(child: Text(e.simplified??"", style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             ) ),
-            DataGridCell<Widget>(columnName: L10nX.getStr.traditional_str, value: Row(
+            DataGridCell<Widget>(columnName: L10nX.getStr.chinese_vietnamese_str, value: Row(
               children: [
                 Expanded(child: Text(e.traditional??"", style: TextStyleConstant.textStyleBlack14w400,)),
               ],

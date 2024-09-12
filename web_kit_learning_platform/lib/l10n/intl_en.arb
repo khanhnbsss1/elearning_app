@@ -676,5 +676,10 @@
 
   "delete_review_user": "Delete student review",
   "delete_review_tacher": "Delete teacher review",
-  "delete_teacher": "Delete teacher"
+  "delete_teacher": "Delete teacher",
+  "enter_text_str":"Enter",
+  "my_rating": "Your rating",
+  "you_yet_rating": "You have not rated this course",
+  "lecture_str": "Lecture",
+  "proccess_str": "Progress"
 }

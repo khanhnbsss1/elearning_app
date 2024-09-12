@@ -6719,6 +6719,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Enter`
+  String get enter_text_str {
+    return Intl.message(
+      'Enter',
+      name: 'enter_text_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your rating`
+  String get my_rating {
+    return Intl.message(
+      'Your rating',
+      name: 'my_rating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have not rated this course`
+  String get you_yet_rating {
+    return Intl.message(
+      'You have not rated this course',
+      name: 'you_yet_rating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lecture`
+  String get lecture_str {
+    return Intl.message(
+      'Lecture',
+      name: 'lecture_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Progress`
+  String get proccess_str {
+    return Intl.message(
+      'Progress',
+      name: 'proccess_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

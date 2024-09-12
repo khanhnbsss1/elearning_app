@@ -219,6 +219,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("通过电子邮件向我们发送您的问题"),
         "enable_validation": MessageLookupByLibrary.simpleMessage("启用验证"),
         "english_text": MessageLookupByLibrary.simpleMessage("英语"),
+        "enter_text_str": MessageLookupByLibrary.simpleMessage("输入"),
         "enter_your_email": MessageLookupByLibrary.simpleMessage("输入您的电子邮件"),
         "entrance_test_str": MessageLookupByLibrary.simpleMessage("入学测试"),
         "example_form": MessageLookupByLibrary.simpleMessage("示例表格"),
@@ -283,6 +284,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "learned_str": MessageLookupByLibrary.simpleMessage("已学习"),
         "lecture_link_str": MessageLookupByLibrary.simpleMessage("讲座链接"),
         "lecture_name_str": MessageLookupByLibrary.simpleMessage("讲座名称"),
+        "lecture_str": MessageLookupByLibrary.simpleMessage("讲座"),
         "left": MessageLookupByLibrary.simpleMessage("左侧"),
         "left_dialog": MessageLookupByLibrary.simpleMessage("左侧对话框"),
         "lesson_list": MessageLookupByLibrary.simpleMessage("课程列表"),
@@ -776,6 +778,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("您尚未注册任何课程"),
         "you_score": MessageLookupByLibrary.simpleMessage("你的分数"),
         "you_want_remove": MessageLookupByLibrary.simpleMessage("您要删除吗"),
+        "you_yet_rating": MessageLookupByLibrary.simpleMessage("您尚未评价这门课程"),
         "your_address": MessageLookupByLibrary.simpleMessage("您的地址"),
         "your_are_ready_unlock_for_this_user":
             MessageLookupByLibrary.simpleMessage("您确定要为该用户解锁课程吗！"),

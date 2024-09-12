@@ -8,6 +8,9 @@ enum AddCourseStatus {
   onUpdateSelectionLesson,
   onSelectionCurrentVideo,
   onUpdateFinishLessonStatus,
+  getRatingList, 
+  onChangeRating, 
+  onSubmitRating,
   unKnown
 }
 
@@ -21,6 +24,10 @@ class CourseDetailState extends Equatable {
   List<bool>? showSubject = [];
   List<List<bool>>?checkLecture = [];
   bool? awaitCallApi;
+  SearchCommonRequest? searchCommonRequestRating;
+  RatingListResponseModel? ratingListResponseModel;
+  RatingState? ratingState = RatingState.notRating;
+  double? myRate ;
   CourseDetailState({
     this.blocStatus,
     this.courseInfo,
@@ -29,13 +36,21 @@ class CourseDetailState extends Equatable {
     this.selectLessonInfo,
     this.checkLecture,
     this.showSubject,
-    this.awaitCallApi
+    this.awaitCallApi,
+    this.searchCommonRequestRating,
+    this.ratingListResponseModel,
+    this.ratingState,
+    this.myRate
 
   }){
     courseInfo??=CourseInfo.initial();
     checkLecture??=[];
     showSubject??=[];
     awaitCallApi??=false;
+    searchCommonRequestRating??=SearchCommonRequest(courseId: courseInfo?.id,pageSize: 20,pageNumber: 0, keyword: "");
+    ratingListResponseModel??= RatingListResponseModel(content: []);
+    ratingState ??= RatingState.notRating;
+    myRate??=0;
   }
 
 
@@ -46,7 +61,11 @@ class CourseDetailState extends Equatable {
     List<String>? courseResult,
     LessonInfo? selectLessonInfo, 
     List<bool>? showSubject, 
-    List<List<bool>>?checkLecture 
+    List<List<bool>>?checkLecture ,
+    SearchCommonRequest? searchCommonRequestRating,
+    RatingListResponseModel? ratingListResponseModel,
+    RatingState? ratingState,
+    double? myRate
   })
   {
     return CourseDetailState(
@@ -57,6 +76,10 @@ class CourseDetailState extends Equatable {
       selectLessonInfo: selectLessonInfo??this.selectLessonInfo,
       showSubject: showSubject??this.showSubject,
       checkLecture: checkLecture??this.checkLecture,
+      searchCommonRequestRating: searchCommonRequestRating??this.searchCommonRequestRating,
+      ratingListResponseModel: ratingListResponseModel??this.ratingListResponseModel,
+      ratingState: ratingState??this.ratingState,
+      myRate: myRate??this.myRate,
 
     );
   }
@@ -68,7 +91,11 @@ class CourseDetailState extends Equatable {
     courseResult,
     selectLessonInfo,
     showSubject,
-    checkLecture
+    checkLecture,
+    searchCommonRequestRating,
+    ratingListResponseModel,
+    ratingState,
+    myRate
   ];
 
 }

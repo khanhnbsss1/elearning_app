@@ -17,6 +17,11 @@ class _CourseStudyTestState extends State<CourseStudyTest> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CourseDetailBloc, CourseDetailState>(
+      buildWhen: (previous, current) {
+        return current.blocStatus != AddCourseStatus.onChangeRating &&
+            current.blocStatus != AddCourseStatus.getRatingList &&
+            current.blocStatus != AddCourseStatus.onSubmitRating;
+      },
       listener: (context, state) {
         switch (state.blocStatus) {
           case AddCourseStatus.initial:

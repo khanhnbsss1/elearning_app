@@ -140,7 +140,7 @@ class EditCourseItemPageState extends State<EditCourseItemPage> with UIMixin {
                   ),
                 ],
                 onChanged: (value) {
-                  widget.info?.ratePoint = int.tryParse(value);
+                  widget.info?.ratePoint = double.tryParse(value);
                 },
 
                 enabled: widget.actionType != ActionType.view,
@@ -219,7 +219,7 @@ class EditCourseItemPageState extends State<EditCourseItemPage> with UIMixin {
                 onTap: () async {
                   dynamic tagApi;
                   widget.info?.introduction = introductionController.text;
-                  widget.info?.ratePoint = int.tryParse((ratingController.text).isNotEmpty ? ratingController.text : "0");
+                  widget.info?.ratePoint = double.tryParse((ratingController.text).isNotEmpty ? ratingController.text : "0");
                   widget.info?.isShow = 1;
                   if (widget.info?.id == null) {
                     /// th edit tag

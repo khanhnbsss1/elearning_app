@@ -669,5 +669,10 @@
   "edit_teacher": "编辑老师",
   "delete_review_user": "删除学生评论",
   "delete_review_tacher": "删除教师评论",
-  "delete_teacher": "删除老师"
+  "delete_teacher": "删除老师",
+  "enter_text_str":"输入",
+  "my_ rating": "您的评分",
+  "you_yet_rating": "您尚未评价这门课程",
+  "lecture_str": "讲座",
+  "process_str": "进度"
 }

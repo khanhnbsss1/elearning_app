@@ -22,7 +22,8 @@ class CourseInfo {
   String? updatedAt;
   String? createdBy;
   String? updatedBy;
-  int? rating;
+  double? rating;
+  double? myRating;
   String? durian;
   String? videoPreview;
   String? courseMode;
@@ -80,7 +81,8 @@ class CourseInfo {
         this.imageId,
         this.testId,
         this.testName,
-        this.isPayment
+        this.isPayment,
+        this.myRating
       });
 
   CourseInfo.initial(){
@@ -119,6 +121,7 @@ class CourseInfo {
     subjects = [];
     imageId=0;
     isPayment=false;
+    myRating = 5;
   }
   CourseInfo copyWith({
     int? id,
@@ -139,7 +142,7 @@ class CourseInfo {
     String? updatedAt,
     String? createdBy,
     String? updatedBy,
-    int? ratePoint,
+    double? ratePoint,
     String? durian,
     String? videoPreview,
     String? courseMode,
@@ -157,7 +160,9 @@ class CourseInfo {
     List<Subjects>? subjects,
     int? imageId,
     int? testId,
-    String? testName
+    String? testName,
+    double? myRating,
+    bool? isPayment
   }){
     return CourseInfo(
       id : id??this.id,
@@ -198,6 +203,7 @@ class CourseInfo {
       testId:testId??this.testId,
       testName:typeName??this.testName,
       isPayment:isPayment??this.isPayment,
+      myRating:myRating??this.myRating,
 
     );
 
@@ -239,6 +245,7 @@ class CourseInfo {
     testName=json.testName??testName;
     testId=json.testId??testId;
     isPayment=json.isPayment??isPayment;
+    myRating=json.myRating??myRating;
 
   }
 
@@ -261,7 +268,8 @@ class CourseInfo {
     updatedAt = json['updated_at'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
-    rating = json['rate_point']??json['rating'];
+    rating = (json['rate_point']??json['rating']??0).toDouble();
+    myRating = (json['rating_point']??0).toDouble();
     durian = json['durian'];
     videoPreview = json['video_preview'];
     courseMode = json['course_mode'];

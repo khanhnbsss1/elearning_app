@@ -46,6 +46,9 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<CourseDetailBloc, CourseDetailState>(
+      buildWhen: (previous, current) {
+        return true;
+      },
       listener: (context, state) {
         switch (state.blocStatus) {
           case AddCourseStatus.initial:
@@ -93,7 +96,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                                       child: (_state.blocStatus != AddCourseStatus.onLoadingSelectLesson)
                                           ? Scrollbar(
                                               controller: studySectionScrollController,
-                                              thickness: 10,
+                                              thickness: Dimens.size10,
                                               trackVisibility: true,
                                               thumbVisibility: true,
                                               radius: Radius.circular(Dimens.size8),
@@ -103,7 +106,9 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                                                 child: Padding(
                                                   padding: const EdgeInsets.only(right: 14.0),
                                                   child: Column(
-                                                    children: [buildStudySection(context)],
+                                                    children: [
+                                                      buildStudySection(context)
+                                                    ],
                                                   ),
                                                 ),
                                               ),
@@ -286,7 +291,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                                             alignment: Alignment.bottomCenter,
                                             child: Text(
                                               L10nX.getStr.watching_str,
-                                              style: TextStyleConstant.textStyleBlack13w400.copyWith(color: ColorConst.whiteColor),
+                                              style: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.whiteColor),
                                               textAlign: TextAlign.center,
                                             ),
                                           ),
@@ -353,7 +358,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size16),
-                  child: Text("I. ${L10nX.getStr.lesson_list}", textAlign: TextAlign.start, style: TextStyleConstant.textStyleBlack14w600),
+                  child: Text("I. ${L10nX.getStr.lesson_list}", textAlign: TextAlign.start, style: TextStyleConstant.textStyleBlack16w600),
                 ),
                 Divider(
                   color: ColorConst.blackColor,
@@ -361,7 +366,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                 ),
                 Scrollbar(
                   controller: subjectScrollControllerBar,
-                  thickness: 10,
+                  thickness: Dimens.size10,
                   trackVisibility: true,
                   thumbVisibility: true,
                   child: ListView.builder(
@@ -428,7 +433,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                   Expanded(
                     child: Scrollbar(
                       //controller: subjectScrollControllerBar ,
-                      thickness: 5,
+                      thickness: Dimens.size10,
                       trackVisibility: true,
                       thumbVisibility: true,
                       radius: Radius.circular(Dimens.size5),
@@ -484,7 +489,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
         titleStyle: TextStyleConstant.textStyleBlack13w600.copyWith(color: ColorConst.mainColor),
         child: Text(
           _state.selectLessonInfo?.note ?? "",
-          style: TextStyleConstant.textStyleBlack13w400,
+          style: TextStyleConstant.textStyleBlack14w400,
         ),
       ),
       Gap(Dimens.size16),
@@ -502,7 +507,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
               },
               child: Text(
                 _state.selectLessonInfo?.docName ?? '',
-                style: TextStyleConstant.textStyleBlack13w400.copyWith(color: Colors.blue),
+                style: TextStyleConstant.textStyleBlack14w400.copyWith(color: Colors.blue),
               )),
         ),
       ),
@@ -555,7 +560,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                       },
                       child: Text(
                         _state.selectLessonInfo?.testName ?? '',
-                        style: TextStyleConstant.textStyleBlack13w400,
+                        style: TextStyleConstant.textStyleBlack14w400,
                       )),
                 ),
                 ActionButton1(
@@ -587,12 +592,12 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('${word.pinyinTones}'),
+                    Text('${word.pinyinTones}', style: TextStyleConstant.textStyleBlack14w400,),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Text('$index.'),
-                        Expanded(child: Text('${word.simplified} : ${word.translationVn}')),
+                        Expanded(child: Text('${word.simplified} : ${word.translationVn}', style:TextStyleConstant.textStyleBlack14w400)),
                         Gap(Dimens.size12),
                       ],
                     ),
@@ -611,7 +616,7 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                       selectVocabularyInfo: word,
                     ).show(context);
                   },
-                  child: Icon(Icons.remove_red_eye_outlined)),
+                  child: Icon(Icons.remove_red_eye_outlined, size: Dimens.size20,)),
               Gap(Dimens.size12),
             ],
           ),

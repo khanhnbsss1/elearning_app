@@ -31,7 +31,8 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: 200,
+                  width: Dimens.size300,
+                  height: Dimens.size60,
                   child: Row(
                     children: [
                       Expanded(

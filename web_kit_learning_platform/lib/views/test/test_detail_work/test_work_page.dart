@@ -17,31 +17,13 @@ import 'bloc/test_work_bloc.dart';
 
 class TestWorkPage extends StatefulWidget {
   void show(BuildContext context) {
-    
-    if(enableShowResult!=true) /// truong hop chua lam bai test
-      {
-        ConfirmPopupPage(
-          content: "${L10nX.getStr.start_test_confirm} ${testInfo.durian??0} (${L10nX.getStr.time_in_minute_str})",
-          onAccept: () {
-            showGeneralDialog(
-                context: context,
-                barrierDismissible: false,
-                pageBuilder: (context, animation, secondaryAnimation) {
-                  return this;
-                },);
-          },
-          
-        ).show(context);
-      }
-    else
-      {
-        showGeneralDialog(
-          context: context,
-          barrierDismissible: false,
-          pageBuilder: (context, animation, secondaryAnimation) {
-            return this;
-          },);
-      }
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return this;
+      },);
+
 
   }
 
@@ -93,6 +75,19 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
               listener: (context, state) {
                 switch (state.blocStatus) {
                   case TestWorkStatus.initial:
+                    if(widget.enableShowResult!=true) /// truong hop chua lam bai test
+                    {
+                      ConfirmPopupPage(
+                        content: "${L10nX.getStr.start_test_confirm} ${state.testInfo?.durian??0} (${L10nX.getStr.time_in_minute_str})",
+                        onAccept: () {
+                        },
+                        onCancel: () {
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        },
+
+                      ).show(context);
+                    }
                     break;
                   case TestWorkStatus.onLoading:
                     // TODO: Handle this case.
@@ -296,7 +291,10 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
                   lineHeight: Dimens.size20,
                   animationDuration: 100,
                   percent: percent,
-                  center: Text("${L10nX.getStr.choosed_str} ${listQuestionChooesed.length} / ${(state.testInfo?.quizDTOs??[]).length} ${L10nX.getStr.question_str}"),
+                  center: Text(
+                      "${L10nX.getStr.choosed_str} ${listQuestionChooesed.length} / ${(state.testInfo?.quizDTOs??[]).length} ${L10nX.getStr.question_str}",
+                    style: TextStyleConstant.textStyleBlack14w400,
+                  ),
                   barRadius: Radius.circular(Dimens.size8),
                   progressColor: Colors.green,
                 ),
@@ -312,6 +310,7 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
   }
   Widget buildTimerTest({required TestWorkState state, required BuildContext context}){
     return SizedBox(
+      key: UniqueKey(),
       height: Dimens.size50,
       child: TimerCountdown(
         format: CountDownTimerFormat.minutesSeconds,

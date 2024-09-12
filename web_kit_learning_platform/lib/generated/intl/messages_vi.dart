@@ -265,10 +265,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "enable_validation":
             MessageLookupByLibrary.simpleMessage("Bật xác thực"),
         "english_text": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
+        "enter_text_str": MessageLookupByLibrary.simpleMessage("Nhập"),
         "enter_your_email":
             MessageLookupByLibrary.simpleMessage("Điền email của bạn"),
         "entrance_test_str":
-            MessageLookupByLibrary.simpleMessage("Bài test đầu vào"),
+            MessageLookupByLibrary.simpleMessage("Bài kiểm tra đầu vào"),
         "example_form": MessageLookupByLibrary.simpleMessage("Mẫu ví dụ"),
         "examples_str": MessageLookupByLibrary.simpleMessage("Ví dụ"),
         "extra_pages": MessageLookupByLibrary.simpleMessage("Trang bổ sung"),
@@ -343,6 +344,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Liên kết bài giảng"),
         "lecture_name_str":
             MessageLookupByLibrary.simpleMessage("Tên bài giảng"),
+        "lecture_str": MessageLookupByLibrary.simpleMessage("Bài giảng"),
         "left": MessageLookupByLibrary.simpleMessage("Trái"),
         "left_dialog":
             MessageLookupByLibrary.simpleMessage("Hộp thoại bên trái"),
@@ -398,6 +400,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "method_str": MessageLookupByLibrary.simpleMessage("Phương pháp"),
         "more": MessageLookupByLibrary.simpleMessage("Thêm"),
         "more_inputs": MessageLookupByLibrary.simpleMessage("Thêm đầu vào"),
+        "my_rating": MessageLookupByLibrary.simpleMessage("Đánh giá của bạn"),
         "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "new_word_str": MessageLookupByLibrary.simpleMessage("Từ mới"),
         "next": MessageLookupByLibrary.simpleMessage("Tiếp theo"),
@@ -441,7 +444,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Phong cách phác thảo"),
         "output": MessageLookupByLibrary.simpleMessage("Đầu ra"),
         "output_test_str":
-            MessageLookupByLibrary.simpleMessage("Bài test đầu ra"),
+            MessageLookupByLibrary.simpleMessage("Bài kiểm tra đầu ra"),
         "overview": MessageLookupByLibrary.simpleMessage("Tổng quan"),
         "pages": MessageLookupByLibrary.simpleMessage("Trang"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
@@ -479,6 +482,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "primary": MessageLookupByLibrary.simpleMessage("Chính"),
         "primary_course":
             MessageLookupByLibrary.simpleMessage("Khóa học chính quy"),
+        "proccess_str": MessageLookupByLibrary.simpleMessage("Tiến độ"),
         "product": MessageLookupByLibrary.simpleMessage("Sản phẩm"),
         "product_a": MessageLookupByLibrary.simpleMessage("Sản phẩm a"),
         "product_b": MessageLookupByLibrary.simpleMessage("Sản phẩm b"),
@@ -528,7 +532,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "remove_example": MessageLookupByLibrary.simpleMessage("Xóa ví dụ"),
         "remove_lesson": MessageLookupByLibrary.simpleMessage("Xóa bài học"),
         "remove_tags": MessageLookupByLibrary.simpleMessage("Xóa thẻ"),
-        "remove_test": MessageLookupByLibrary.simpleMessage("Xóa bài test"),
+        "remove_test": MessageLookupByLibrary.simpleMessage("Xóa bài kiểm tra"),
         "report_history_edit_course":
             MessageLookupByLibrary.simpleMessage("Lịch sửa tạo/sửa khóa học"),
         "report_history_register_course":
@@ -736,14 +740,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("điều khoản và điều kiện"),
         "terms_of_service_text":
             MessageLookupByLibrary.simpleMessage("Điều khoản Dịch vụ"),
-        "test_add": MessageLookupByLibrary.simpleMessage("Tạo bài test"),
-        "test_list": MessageLookupByLibrary.simpleMessage("Danh sách bài test"),
+        "test_add": MessageLookupByLibrary.simpleMessage("Tạo bài kiểm tra"),
+        "test_list":
+            MessageLookupByLibrary.simpleMessage("Danh sách bài kiểm tra"),
         "test_name": MessageLookupByLibrary.simpleMessage("Tên bài kiểm tra"),
-        "test_remove": MessageLookupByLibrary.simpleMessage("Xóa bài test"),
-        "test_result": MessageLookupByLibrary.simpleMessage("Kết quả bài test"),
-        "test_str": MessageLookupByLibrary.simpleMessage("Bài test"),
+        "test_remove": MessageLookupByLibrary.simpleMessage("Xóa bài kiểm tra"),
+        "test_result":
+            MessageLookupByLibrary.simpleMessage("Kết quả bài kiểm tra"),
+        "test_str": MessageLookupByLibrary.simpleMessage("Bài kiểm tra"),
         "test_update":
-            MessageLookupByLibrary.simpleMessage("Cập nhật bài test"),
+            MessageLookupByLibrary.simpleMessage("Cập nhật bài kiểm tra"),
         "text_actions":
             MessageLookupByLibrary.simpleMessage("Hành động văn bản"),
         "text_button": MessageLookupByLibrary.simpleMessage("Nút văn bản"),
@@ -935,6 +941,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "you_score": MessageLookupByLibrary.simpleMessage("Điểm của bạn"),
         "you_want_remove":
             MessageLookupByLibrary.simpleMessage("Bạn có muốn xóa"),
+        "you_yet_rating": MessageLookupByLibrary.simpleMessage(
+            "Bạn chưa đánh giá khóa học này"),
         "your_address": MessageLookupByLibrary.simpleMessage("Địa chỉ của bạn"),
         "your_are_ready_unlock_for_this_user":
             MessageLookupByLibrary.simpleMessage(

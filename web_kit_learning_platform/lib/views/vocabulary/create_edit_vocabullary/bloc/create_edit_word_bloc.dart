@@ -284,6 +284,21 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
                     vocabularyInfo.audioLink = data.link;
                   }
               }
+            if((vocabularyInfo.sentenceInfos??[]).isNotEmpty &&
+                (state.listMultiVocabularyInfoAudio?.files??[]).where((element) => element.name == (vocabularyInfo.sentenceInfos??[]).first.audioName,).isNotEmpty)
+              {
+                /// neu 
+                PlatformFile audioFile = (state.listMultiVocabularyInfoAudio?.files??[]).where((element) => element.name == (vocabularyInfo.sentenceInfos??[]).first.audioName,).first;
+                dio.MultipartFile file = dio.MultipartFile.fromBytes(audioFile.bytes!.toList(growable: true), filename: audioFile.name);
+
+                UploadFileApi uploadFileApi = UploadFileApi(fileInfo: UploadFileInfo(data: SubjectType.vocabulary, fileName: audioFile.name, file:file ));
+                UploadFileResponseInfo? data = await uploadFileApi.call();
+                if(data!=null)
+                {
+                  (vocabularyInfo.sentenceInfos??[]).first.audioId = data.id;
+                  (vocabularyInfo.sentenceInfos??[]).first.audioLink = data.link;
+                }
+              }
           }
         else
           {

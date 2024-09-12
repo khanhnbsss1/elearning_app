@@ -42,7 +42,7 @@ class CourseLandingPageInfo {
   int? payment;
   String? createdAt;
   String? updatedAt;
-  int? ratePoint;
+  double? ratePoint;
   String? introduction;
   int? courseId;
   int? isShow;
@@ -79,7 +79,7 @@ class CourseLandingPageInfo {
     payment = json['payment'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    ratePoint = json['rate_point'];
+    ratePoint = (json['rate_point']??5).toDouble();
     introduction = json['introduction'];
     courseId = json['course_id'];
     isShow = json['is_show'];
