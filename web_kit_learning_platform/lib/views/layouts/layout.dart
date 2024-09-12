@@ -44,7 +44,7 @@ class Layout extends StatelessWidget {
       this.title,
       this.showBackButton}) {
     isScroll ??= true;
-    padding ??= MySpacing.fromLTRB(0, 58 + flexSpacing, 0, flexSpacing);
+    padding = EdgeInsets.only(top: Dimens.size60);
   }
 
   @override
@@ -185,32 +185,23 @@ class Layout extends StatelessWidget {
               LeftBar(),
               Expanded(
                 child: Stack(
+                  alignment: Alignment.topCenter,
                   children: [
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      left: 0,
-                      bottom: 0,
-                      child: (isScroll ?? true)
-                          ? SingleChildScrollView(
-                              padding: padding,
-                              //key: controller.scrollKey,
-                              child: child,
-                            )
-                          : Padding(
-                              padding: padding!,
-                              child: child,
-                            ),
+                    (isScroll ?? true)
+                        ? SingleChildScrollView(
+                            padding: padding,
+                            //key: controller.scrollKey,
+                            child: child,
+                          )
+                        : Padding(
+                            padding: padding!,
+                            child: child,
+                          ),
+                    TopBar(
+                      key: UniqueKey(),
+                      title: title,
+                      showBackButton: showBackButton,
                     ),
-                    Positioned(
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        child: TopBar(
-                          key: UniqueKey(),
-                          title: title,
-                          showBackButton: showBackButton,
-                        )),
                   ],
                 ),
               ),

@@ -207,6 +207,11 @@ class ReviewPage extends StatelessWidget with UIMixin {
                                 ActionButton1(
                                   text: L10nX.getStr.review_str,
                                   onTap: () {
+                                    if(state.myRate==0)
+                                      {
+                                        ToastUtils.showToastError("Vui lòng chọn điểm đánh giá");
+                                        return;
+                                      }
                                     BlocProvider.of<CourseDetailBloc>(context).add(CourseDetailOnRatingEvent(
                                         myRating: state.myRate??0, 
                                         comment: ratingTextEditingController.text));

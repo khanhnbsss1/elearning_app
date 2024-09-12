@@ -76,7 +76,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                       title: Center(
                         child: Text(L10nX.getStr.lesson_list,
                           style: TextStyleConstant.textStyleBlack18w600,),),
-                      padding: EdgeInsets.only(top: 35 + 16, bottom: 0),
+                      padding: EdgeInsets.only(top: Dimens.size60),
                       child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
                 }
                 else
@@ -108,16 +108,13 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
     return Container(
       color: ColorConst.whiteColor,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0),
+        padding:  EdgeInsets.symmetric(vertical: Dimens.size0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
-            Expanded(child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: buildLessonList(state: state, context: context),
-            )),
+            Expanded(child: buildLessonList(state: state, context: context)),
             SizedBox(height: 8,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -166,7 +163,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                 bottom: BorderSide(color: ColorConst.dividerColor, width: 0.2)
             )
         ),
-        padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
+        padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: Dimens.size16),
         child: SizedBox(
           height: Dimens.size45,
           child: Row(
