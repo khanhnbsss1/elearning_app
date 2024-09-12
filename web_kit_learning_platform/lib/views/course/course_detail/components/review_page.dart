@@ -267,7 +267,7 @@ class ReviewPage extends StatelessWidget with UIMixin {
                             rating:(state.courseInfo?.myRating??0.0),
                           ),
                           Gap(Dimens.size16),
-/*                          InkWell(
+                          InkWell(
                             onTap: () {
                               setState(() {
                                 state.ratingState = RatingState.editRating;
@@ -275,7 +275,7 @@ class ReviewPage extends StatelessWidget with UIMixin {
                               
                             },
                             child: Icon(Icons.edit, size: Dimens.size20, color: ColorConst.mainColor,),
-                          )*/
+                          )
                         ],
                       )),
                   Visibility(
