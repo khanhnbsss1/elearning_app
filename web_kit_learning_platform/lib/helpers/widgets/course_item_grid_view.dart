@@ -141,7 +141,6 @@ class CourseItemGridView extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Gap(Dimens.size12),
                               buildProccess(),
                             ],
                           ),
@@ -225,7 +224,6 @@ class CourseItemGridView extends StatelessWidget {
                                   Gap(Dimens.size12)
                                 ],
                               ),
-                             Gap(Dimens.size12),
                              buildProccess(),
                             ],
                           ),
@@ -314,24 +312,21 @@ class CourseItemGridView extends StatelessWidget {
 
           if((courseProgressResponseModel.content??[]).where((element) => element.courseId == courseInfo.id,).isNotEmpty){
             CourseProgressInfo courseProgressInfo = (courseProgressResponseModel.content??[]).where((element) => element.courseId == courseInfo.id,).first;
-            return Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
+            return Column(
               children: [
-                Expanded(
-                  child: new LinearPercentIndicator(
-                    animation: true,
-                    lineHeight: Dimens.size15,
-                    padding: EdgeInsets.zero,
-                    animationDuration: 1000,
-                    percent: (courseProgressInfo.progress??0).toDouble()/100,
-                    center: Text(
-                      "${(courseProgressInfo.progress??0).toDouble()} %",
-                      style: TextStyleConstant.textStyleBlack13w400,
-                    ),
-                    barRadius: Radius.circular(Dimens.size8),
-                    progressColor: Colors.yellow,
+                Gap(Dimens.size12),
+                new LinearPercentIndicator(
+                  animation: true,
+                  lineHeight: Dimens.size15,
+                  padding: EdgeInsets.zero,
+                  animationDuration: 1000,
+                  percent: (courseProgressInfo.progress??0).toDouble()/100,
+                  center: Text(
+                    "${(courseProgressInfo.progress??0).toDouble()} %",
+                    style: TextStyleConstant.textStyleBlack13w400,
                   ),
+                  barRadius: Radius.circular(Dimens.size8),
+                  progressColor: Colors.yellow,
                 ),
               ],
             );
