@@ -57,14 +57,11 @@ class _CourseStudyState extends State<CourseStudy1>
         isScroll: false,
         child: Container(
           decoration: BoxDecoration(color: ColorConst.whiteColor),
-          padding: EdgeInsets.symmetric(vertical: Dimens.size16),
-          child: SafeArea(
-            child: StatefulBuilder(
-              builder:
-                  (BuildContext context, void Function(void Function()) setState) {
-                return CourseStudyStudy();
-              },
-            ),
+          child: StatefulBuilder(
+            builder:
+                (BuildContext context, void Function(void Function()) setState) {
+              return CourseStudyStudy();
+            },
           ),
         ),
       ),

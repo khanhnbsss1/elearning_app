@@ -85,77 +85,70 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                               ),
                               constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
                               child: buildSubjectAndTestListMobile()),
-                          body: Padding(
-                            padding: EdgeInsets.only(top: myScreenMediaType.isMobile ? 0 : 50),
-                            child: Stack(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: (_state.blocStatus != AddCourseStatus.onLoadingSelectLesson)
-                                          ? Scrollbar(
+                          body: Stack(
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: (_state.blocStatus != AddCourseStatus.onLoadingSelectLesson)
+                                        ? Scrollbar(
+                                            controller: studySectionScrollController,
+                                            thickness: Dimens.size10,
+                                            trackVisibility: true,
+                                            thumbVisibility: true,
+                                            radius: Radius.circular(Dimens.size8),
+                                            child: SingleChildScrollView(
                                               controller: studySectionScrollController,
-                                              thickness: Dimens.size10,
-                                              trackVisibility: true,
-                                              thumbVisibility: true,
-                                              radius: Radius.circular(Dimens.size8),
-                                              child: SingleChildScrollView(
-                                                controller: studySectionScrollController,
-                                                scrollDirection: Axis.vertical,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.only(right: 14.0),
-                                                  child: Column(
-                                                    children: [
-                                                      buildStudySection(context)
-                                                    ],
-                                                  ),
-                                                ),
+                                              scrollDirection: Axis.vertical,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(right: 14.0),
+                                                child: buildStudySection(context),
                                               ),
-                                            )
-                                          : Center(
-                                              child: LoadingLogo(
-                                              loadingType: LoadingType.loadOnPage,
-                                            )),
-                                    ),
-                                    Visibility(
-                                        visible: boxConstraints.maxWidth > 800,
-                                        child: Container(
-                                          decoration: BoxDecoration(border: Border(left: BorderSide(color: ColorConst.blackColor, width: 0.2))),
-                                          padding: EdgeInsets.only(left: 0, top: 0),
-                                          constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
-                                          child: SingleChildScrollView(
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                buildSubjectAndTestList(),
-                                              ],
                                             ),
-                                          ),
-                                        )),
-                                  ],
-                                ),
-                                Visibility(
-                                  visible: boxConstraints.maxWidth < 800,
-                                  child: Align(
-                                    alignment: Alignment.bottomRight,
-                                    child: InkWell(
-                                      onTap: () {
-                                        _scaffoldKey.currentState!.openEndDrawer();
-                                      },
+                                          )
+                                        : Center(
+                                            child: LoadingLogo(
+                                            loadingType: LoadingType.loadOnPage,
+                                          )),
+                                  ),
+                                  Visibility(
+                                      visible: boxConstraints.maxWidth > 800,
                                       child: Container(
-                                        decoration: BoxDecoration(color: ColorConst.colorIconRed, borderRadius: BorderRadius.circular(Dimens.size16)),
-                                        padding: EdgeInsets.all(Dimens.size16),
-                                        child: Icon(
-                                          Icons.list,
-                                          color: ColorConst.whiteColor,
+                                        decoration: BoxDecoration(border: Border(left: BorderSide(color: ColorConst.blackColor, width: 0.2))),
+                                        padding: EdgeInsets.only(left: 0, top: 0),
+                                        constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              buildSubjectAndTestList(),
+                                            ],
+                                          ),
                                         ),
+                                      )),
+                                ],
+                              ),
+                              Visibility(
+                                visible: boxConstraints.maxWidth < 800,
+                                child: Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: InkWell(
+                                    onTap: () {
+                                      _scaffoldKey.currentState!.openEndDrawer();
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(color: ColorConst.colorIconRed, borderRadius: BorderRadius.circular(Dimens.size16)),
+                                      padding: EdgeInsets.all(Dimens.size16),
+                                      child: Icon(
+                                        Icons.list,
+                                        color: ColorConst.whiteColor,
                                       ),
                                     ),
                                   ),
-                                )
-                              ],
-                            ),
+                                ),
+                              )
+                            ],
                           ));
                     },
                   )
@@ -167,25 +160,27 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
   }
 
   Widget buildStudySection(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size32),
-                child: buildStudyTitle(),
-              ),
-              buildVideo(),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size32),
-                child: buildStudyUI(),
-              ),
-            ],
-          )
-        ],
+    return Padding(
+      padding:  EdgeInsets.symmetric(horizontal: Dimens.size16),
+      child: SingleChildScrollView(
+        padding: EdgeInsets.zero,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                buildStudyTitle(),
+                Gap(Dimens.size16),
+                buildVideo(),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: Dimens.size16, horizontal: Dimens.size32),
+                  child: buildStudyUI(),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
