@@ -22,7 +22,7 @@ class MarkCompleteButton extends ConsumerWidget with CourseMixin {
     final bool isCompleted = true;
     final IconData icon = isCompleted ? Icons.clear : Icons.done;
     final String buttonText = isCompleted ? 'unmark-complete' : 'mark-complete';
-
+    return SizedBox();
     return BottomAppBar(
       elevation: 0,
       color: Colors.transparent,

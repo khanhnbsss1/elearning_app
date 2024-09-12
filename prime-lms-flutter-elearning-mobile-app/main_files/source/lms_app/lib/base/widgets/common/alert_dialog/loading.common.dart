@@ -41,6 +41,7 @@ class MonitorLoading implements ILoading {
         textSize: Dimens.size14,
         assetImage: ImagesNameConst.getPngImage(ImagesNameConst.icLoading),
         sizeImage: Dimens.size60,
+        imageColor: Colors.red,
       ),
     );
   }
