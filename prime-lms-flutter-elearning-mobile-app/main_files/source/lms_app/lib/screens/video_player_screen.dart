@@ -12,10 +12,12 @@ import '../services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dar
 import '../utils/custom_cached_image.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
-  const VideoPlayerScreen({super.key, required this.link, required this.lesson});
+  const VideoPlayerScreen({super.key, required this.link, required this.lesson, required this.courseId, required this.lectureId, });
 
   final String link;
   final LessonInfo lesson;
+  final int courseId;
+  final int lectureId;
 
   @override
   State<VideoPlayerScreen> createState() => _VideoPlayerScreenState();
@@ -45,7 +47,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         videoLink.add('${video['videoLink']}');
       }
     } catch (e) {
+      order.add('0');
       videoLink.add(widget.link);
+      videoTitle.add(widget.lesson.lectureName??"-");
       print(videoLink);
     }
   }
@@ -70,13 +74,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  (videoLink.length == videoTitle.length)
-                      ? VideoPlayer(
+                      VideoPlayer(
                           videoUrl: videoLink[selectedVideo],
-                          videoTitle: videoTitle[selectedVideo])
-                      : VideoPlayerWidget(
-                          videoUrl: videoLink[0],
-                        ),
+                          videoTitle: videoTitle[selectedVideo],
+                          courseId: widget.courseId,
+                          lectureId: widget.lectureId,
+                      ),
                   if (order.isNotEmpty) Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 8.0, horizontal: 12),

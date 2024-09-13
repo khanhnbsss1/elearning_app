@@ -55,6 +55,8 @@ class LessonInfo {
   String? note;
   int? testId;
   String? testName;
+  bool? isFinnish;
+  int? proccess;
   UploadFileResponseInfo? documentUploadInfo;
   List<VocabularyInfo>? vocabularies;
   LessonInfo(
@@ -74,7 +76,9 @@ class LessonInfo {
         this.vocabularies,
         this.docLink,
         this.testId,
-        this.testName
+        this.testName,
+        this.isFinnish,
+        this.proccess
       });
 
   LessonInfo.fromJson(Map<String, dynamic> json) {
@@ -93,6 +97,8 @@ class LessonInfo {
     docLink = json['doc_link'];
     testId = json['test_id'];
     testName = json['test_name'];
+    proccess = json['progress'];
+    isFinnish = json['learning_status']== 'Completed'?true:false;
     if (json['vocabularies'] != null) {
       vocabularies = <VocabularyInfo>[];
       json['vocabularies'].forEach((v) {
@@ -127,11 +133,11 @@ class LessonInfo {
     if(mode!=null) {
       data['mode'] = mode;
     }
-    
+
     if(testId!=null) {
       data['test_id'] = testId;
     }
-    
+
 /*    if(testName!=null && testName!.isNotEmpty) {
       data['test_name'] = testName;
     }*/

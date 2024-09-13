@@ -25,7 +25,7 @@ class PreviewBox extends StatelessWidget {
       children: [
         VideoPlayer(
             videoUrl: course.videoPreview!,
-            videoTitle: ""),
+            videoTitle: "", courseId: course.id??0, lectureId: 0,),
         // Visibility(
         //   visible: hasVideoPreview,
         //   child: const Align(

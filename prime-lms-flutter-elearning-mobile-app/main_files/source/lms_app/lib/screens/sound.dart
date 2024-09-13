@@ -24,7 +24,7 @@ class _SoundState extends State<Sound> with TickerProviderStateMixin {
     )..repeat();
     _animation = Tween<double>(begin: 0, end: 1).animate(_controller);
     _animation.addListener(() {
-      if (_animation.value < 0.5) {
+      if (_animation.value < 0.0) {
         setState(() {
           _icon = Container(
             padding: const EdgeInsets.only(left: 0),

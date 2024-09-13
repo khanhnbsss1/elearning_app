@@ -78,7 +78,11 @@ class AudioSpeakerState extends State<AudioSpeaker> {
               );
             case ProcessingState.ready:
               // TODO: Handle this case.
-              icon = Sound(size: widget.size??24, color: Theme.of(context).primaryColor,);
+              icon = Icon(
+                Icons.volume_up,
+                size: widget.size ?? 24,
+                color: Theme.of(context).primaryColor,
+              );
             case ProcessingState.completed:
               // TODO: Handle this case.
               icon = Icon(

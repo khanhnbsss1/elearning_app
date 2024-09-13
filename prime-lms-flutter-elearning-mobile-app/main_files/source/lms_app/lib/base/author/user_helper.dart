@@ -26,14 +26,15 @@ class UserManager{
    await SharedPreferencesStorage().saveString(Storage.currentUserInfoKey, json.encode(userInfo.toJson()));
   }
 
-  Future<UserProfile?> getUserProfile() async {
+  UserProfile? getUserProfile() {
     if(AuthorManager().getAuthInfo()==null) {
       return null;
     }
-   String rootUserStr = SharedPreferencesStorage().getString(Storage.currentUserInfoKey);
+    String rootUserStr = SharedPreferencesStorage().getString(Storage.currentUserInfoKey);
     UserProfile? userInfo;
-   if(rootUserStr.isNotEmpty)
+    if(rootUserStr.isNotEmpty)
     {
+
       userInfo = UserProfile.fromJson(jsonDecode(rootUserStr));
     }
     return userInfo;

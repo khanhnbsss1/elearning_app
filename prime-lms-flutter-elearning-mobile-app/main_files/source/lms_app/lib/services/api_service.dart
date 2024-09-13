@@ -33,6 +33,8 @@ import '../services/apis/course/course_fillter/get_course_fillter_api.dart';
 import '../services/apis/course/course_fillter/models/course_filtter_info.dart';
 import '../services/apis/course/course_list/course_api.dart';
 import '../services/apis/course/course_list/models/course_models.dart';
+import 'apis/course_progress/get_course_proccess_list.dart';
+import 'apis/course_progress/models/course_proccess_info.dart';
 import 'apis/teacher_list/get_teacher_lt.dart';
 import 'apis/teacher_list/models/landing_page_teacher_list_model.dart';
 import 'apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
@@ -42,6 +44,8 @@ class ApiService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   static String getUID(String collectionName) => FirebaseFirestore.instance.collection(collectionName).doc().id;
+
+  CourseProgressResponseModel courseProgressResponseModel = CourseProgressResponseModel(content: []);
 
   Future updateStudentCountsOnCourse(bool isIncrement, String courseId) async {
     final DocumentReference docRef = firestore.collection('courses').doc(courseId);
@@ -184,12 +188,14 @@ class ApiService {
     return tagsInfoList;
   }
 
-  Future<List<Tag>> getAllTags(int limit) async {
-    List<Tag> data = [];
-    await firestore.collection('tags').limit(limit).get().then((QuerySnapshot? snapshot) {
-      data = snapshot!.docs.map((e) => Tag.fromFirestore(e)).toList();
-    });
-    return data;
+  Future<CourseProgressResponseModel?> getCourseProccessListInfo({bool? isReload}) async {
+    isReload??=false;
+    if((courseProgressResponseModel.content??[]).isNotEmpty && isReload==false) {
+      return courseProgressResponseModel;
+    }
+    GetCourseProccessListApi getLessonListFilterApi = GetCourseProccessListApi();
+    courseProgressResponseModel =  await getLessonListFilterApi.call();
+    return courseProgressResponseModel;
   }
 
   Future<LessonInfo?> getLessonDetail(int lectureId) async {
