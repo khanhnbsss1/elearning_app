@@ -26,7 +26,10 @@ class DropDownSearch extends StatelessWidget with UIMixin{
     return DropdownSearch<String>(
       // enabled: (state.courseInfo?.mode??"PREMIUM")=="PREMIUM",
       dropdownButtonProps: DropdownButtonProps(
-          padding: EdgeInsets.zero
+          padding: EdgeInsets.zero,
+        style: ButtonStyle(
+          textStyle: WidgetStatePropertyAll(TextStyleConstant.textStyleBlack13w400,)
+        )
       ),
       popupProps: PopupProps.menu(
         constraints: BoxConstraints(
@@ -38,25 +41,33 @@ class DropDownSearch extends StatelessWidget with UIMixin{
       ),
       items: list.values.toList(),
       selectedItem: selectString.isNotEmpty ? selectString : null,
+      dropdownBuilder: (context, selectedItem) {
+        return Text(selectedItem??"",style: TextStyleConstant.textStyleBlack14w400,);
+      },
       dropdownDecoratorProps: DropDownDecoratorProps(
         dropdownSearchDecoration: InputDecoration(
           hintText: hintText,
           labelText: hintText,
+          floatingLabelStyle:  TextStyleConstant.textStyleBlack13w400,
           hintTextDirection: AppTheme.textDirection,
           labelStyle: TextStyleConstant.textStyleBlack14w400,
           hintStyle: TextStyleConstant.textStyleBlack14w400,
           border: outlineInputBorder,
           prefixIcon: Icon(
-            LucideIcons.book,
-            size: 20,
+            Icons.person_outline_outlined,
+            size: Dimens.size20,
             color: ColorConst.colorIconRed,
           ),
           suffixIcon: Icon(
             LucideIcons.search,
-            size: 20,
+            size: Dimens.size20,
             color: ColorConst.colorIconRed,
           ),
-          contentPadding: MySpacing.all(16),
+          constraints: BoxConstraints(
+            minHeight: Dimens.size45,
+            maxHeight: Dimens.size45,
+          ),
+          contentPadding: MySpacing.all(Dimens.size14),
           // isCollapsed: true,
           floatingLabelBehavior: FloatingLabelBehavior.never,
         ),

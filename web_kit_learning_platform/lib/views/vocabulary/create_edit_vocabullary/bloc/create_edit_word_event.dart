@@ -92,3 +92,10 @@ class CreateEditWordImportMultiVocabularyEvent extends CreateEditWordEvent {
   @override
   List<Object?> get props => [];
 }
+
+class CreateEditWordMultiVocabularyOnChangePageEvent extends CreateEditWordEvent {
+  int pageNumber;
+  CreateEditWordMultiVocabularyOnChangePageEvent({required this.pageNumber});
+  @override
+  List<Object?> get props => [pageNumber];
+}

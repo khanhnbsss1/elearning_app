@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
@@ -88,7 +89,7 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
                                 labelText: L10nX.getStr.simplified_str,
                                 labelStyle: MyTextStyle.bodySmall(xMuted: true),
                                 border: outlineInputBorder.copyWith(
-                                  borderRadius: BorderRadius.circular(25),
+                                  borderRadius: BorderRadius.circular(Dimens.size16),
                                 ),
                                 contentPadding: MySpacing.all(16),
                                 isCollapsed: true,
@@ -133,7 +134,7 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
                                 labelText: L10nX.getStr.meaning_str,
                                 labelStyle: MyTextStyle.bodySmall(xMuted: true),
                                 border: outlineInputBorder.copyWith(
-                                  borderRadius: BorderRadius.circular(25),
+                                  borderRadius: BorderRadius.circular(Dimens.size16),
                                 ),
                                 contentPadding: MySpacing.all(16),
                                 isCollapsed: true,
@@ -181,7 +182,7 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
                                 labelText: L10nX.getStr.pinyin_tone_str,
                                 labelStyle: MyTextStyle.bodySmall(xMuted: true),
                                 border: outlineInputBorder.copyWith(
-                                  borderRadius: BorderRadius.circular(25),
+                                  borderRadius: BorderRadius.circular(Dimens.size16),
                                 ),
                                 contentPadding: MySpacing.all(16),
                                 isCollapsed: true,
@@ -230,7 +231,7 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
                                 labelText: (widget.sentenceInfo?.audioFileInfo?.link ?? "").isNotEmpty ? (widget.sentenceInfo?.audioFileInfo?.link ?? "") : 'Upload audio file...',
                                 labelStyle: MyTextStyle.bodySmall(xMuted: true),
                                 border: outlineInputBorder.copyWith(
-                                  borderRadius: BorderRadius.circular(25),
+                                  borderRadius: BorderRadius.circular(Dimens.size16),
                                 ),
                                 contentPadding: MySpacing.all(16),
                                 isCollapsed: true,
@@ -309,6 +310,7 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
                       },
                     ),
                   ),
+                  Gap(Dimens.size12),
                   Visibility(
                     visible: !ResponsiveInfo.isPhone(),
                       child: Row(

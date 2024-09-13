@@ -711,7 +711,7 @@ class _EditUserProfileState extends State<EditUserProfile>
             }
           
           return SizedBox(
-            height: Dimens.size50,
+            height: Dimens.size40,
             child: DropdownSearch<RoleInfo>(
               enabled: enableEdit,
               
@@ -728,7 +728,12 @@ class _EditUserProfileState extends State<EditUserProfile>
               dropdownDecoratorProps: DropDownDecoratorProps(
                 dropdownSearchDecoration: InputDecoration(
                   enabled: enableEdit,
-                  
+                  constraints: BoxConstraints(
+                    maxHeight: Dimens.size40
+                  ),
+                  prefixIconConstraints: BoxConstraints(
+                      maxHeight: Dimens.size40
+                  ),
                   hintText: "Select ${L10nX.getStr.role_str.toLowerCase()}",
                   labelText: value,
                   hintTextDirection: AppTheme.textDirection,

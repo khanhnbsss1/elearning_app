@@ -57,7 +57,7 @@ class _BuildTextFieldState extends State<BuildTextField> with TickerProviderStat
             )),
         Container(
           constraints: BoxConstraints(
-            maxHeight: Dimens.size50
+            maxHeight: Dimens.size40
           ),
           child: TextFormField(
             controller: widget.controller,
@@ -73,8 +73,8 @@ class _BuildTextFieldState extends State<BuildTextField> with TickerProviderStat
               contentPadding: MySpacing.all(Dimens.size16),
               suffixIcon: widget.suffixIcon,
               suffixIconConstraints: BoxConstraints(
-                maxWidth: Dimens.size50,
-                maxHeight: Dimens.size50,
+                maxWidth: Dimens.size40,
+                maxHeight: Dimens.size40,
               ),
               floatingLabelAlignment: FloatingLabelAlignment.center,
               alignLabelWithHint: true,

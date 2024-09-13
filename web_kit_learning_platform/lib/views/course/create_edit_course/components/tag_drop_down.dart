@@ -32,7 +32,7 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
               children: [
                 SizedBox(
                   width: Dimens.size300,
-                  height: Dimens.size60,
+                  height: Dimens.size45,
                   child: Row(
                     children: [
                       Expanded(
@@ -55,21 +55,27 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                           dropdownDecoratorProps: DropDownDecoratorProps(
                             dropdownSearchDecoration: InputDecoration(
                               hintText: 'Select tags',
-                              hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                              hintStyle: TextStyleConstant.textStyleBlack13w400,
+                              alignLabelWithHint: true,
+                              floatingLabelAlignment: FloatingLabelAlignment.center,
                               border: outlineInputBorder,
                               prefixIcon: Icon(
                                 LucideIcons.book,
-                                size: 20,
+                                size: Dimens.size20,
                                 color: ColorConst.colorIconRed,
                               ),
-                              contentPadding: MySpacing.all(16),
-                              isCollapsed: true,
+                              contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
                               floatingLabelBehavior:
                               FloatingLabelBehavior.never,
+                              suffixIconConstraints: BoxConstraints(
+                                minHeight: Dimens.size40,
+                                maxHeight: Dimens.size40,
+                              ),
                             ),
                           ),
                           dropdownButtonProps: DropdownButtonProps(
-                              padding: EdgeInsets.zero
+                              padding: EdgeInsets.zero,
+                            
                           ),
                           onChanged: (value) {
                             if(value!=null && [...(widget.exitsTags??[]).where((element) {return element.id == value.id;},)].isEmpty)

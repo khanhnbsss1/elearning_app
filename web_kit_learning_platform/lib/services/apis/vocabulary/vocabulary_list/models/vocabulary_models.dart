@@ -49,6 +49,7 @@ class VocabularyInfo {
   int? imageId;
   String? categoryWord;
   List<SentenceInfo>? sentenceInfos;
+  bool? isMapAudio;
 
   UploadFileResponseInfo? audioFileInfo;
   UploadFileResponseInfo? imageFileInfo;
@@ -73,8 +74,10 @@ class VocabularyInfo {
         this.audioFileInfo,
         this.sentenceInfos,
         this.imageFileInfo,
+        this.isMapAudio
       }){
     sentenceInfos??=[];
+    isMapAudio??=false;
   }
 
   VocabularyInfo.fromJson(Map<String, dynamic> json) {

@@ -199,17 +199,24 @@ class FilterManager{
               child: IgnorePointer(
                 ignoring: !(enable??true),
                 child: DropdownButtonFormField2<GradeInfo>(
-                  isExpanded: true,
                   valueListenable: ValueNotifier<GradeInfo?>(selectGrade),
                   decoration: InputDecoration(
                     // Add Horizontal padding using menuItemStyleData.padding so it matches
                     // the menu padding when button's width is not specified.
-                    contentPadding:  EdgeInsets.symmetric(vertical: Dimens.size16),
+                    contentPadding:  EdgeInsets.symmetric(vertical: Dimens.size8),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(Dimens.size16),
                     ),
-
-                    // Add more decoration..
+                    constraints: BoxConstraints(
+                      minHeight: Dimens.size30,
+                      maxHeight: Dimens.size40,
+                    ),
+                      suffixIconConstraints: BoxConstraints(
+                    minHeight: Dimens.size30,
+                    maxHeight: Dimens.size30,
+                  ),
+                    labelStyle: TextStyleConstant.textStyleBlack13w400, // 
+                    hintStyle: TextStyleConstant.textStyleBlack13w400, // 
                   ),
                   hint:  Text(
                     L10nX.getStr.grade_str,
@@ -236,7 +243,7 @@ class FilterManager{
                   onSaved: (value) {
                   },
                   buttonStyleData:  ButtonStyleData(
-                    height: Dimens.size40,
+                    height: Dimens.size35,
                     padding: EdgeInsets.only(right: Dimens.size8),
                   ),
                   iconStyleData:  IconStyleData(
@@ -306,7 +313,6 @@ class FilterManager{
                 ignoring: !(enable??true),
                 child: DropdownButtonFormField2<CategoryInfo>(
                   key: UniqueKey(),
-                  isExpanded: true,
                   valueListenable: ValueNotifier<CategoryInfo?>(selectCategory),
                   decoration: InputDecoration(
                     // Add Horizontal padding using menuItemStyleData.padding so it matches
@@ -316,6 +322,14 @@ class FilterManager{
                       borderRadius: BorderRadius.circular(Dimens.size16),
                     ),
 
+                      constraints: BoxConstraints(
+                        minHeight: Dimens.size30,
+                        maxHeight: Dimens.size40,
+                      ),
+                      suffixIconConstraints: BoxConstraints(
+                        minHeight: Dimens.size30,
+                        maxHeight: Dimens.size30,
+                      )
                     // Add more decoration..
                   ),
                   hint:  Text(

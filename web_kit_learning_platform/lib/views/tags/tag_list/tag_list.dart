@@ -166,7 +166,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
         ),
         padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
         child: SizedBox(
-          height:Dimens.size45,
+          height:Dimens.size40,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -177,7 +177,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                   Container(
                     //height: Dimens.size40,
                     constraints: BoxConstraints(
-                        maxWidth:  constraints.maxWidth> 800?400:250
+                        maxWidth:  constraints.maxWidth> Dimens.size800?Dimens.size400:Dimens.size250
                     ),
                     child: Form(
                       key: formKey,
@@ -215,7 +215,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                                     maxWidth: Dimens.size40,
                                     minHeight: Dimens.size40,
                                     maxHeight: Dimens.size40,),
-                                  contentPadding: MySpacing.xy(16, 12),
+                                  contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
                                   //isCollapsed: true,
                                   floatingLabelBehavior: FloatingLabelBehavior.auto),
                             ),

@@ -15,11 +15,6 @@ import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/services/apis/payment/models/request_registered_info.dart';
 import 'package:webkit/services/apis/payment/unlock_course_api.dart';
-import 'package:webkit/services/apis/test/delete_test_api.dart';
-import 'package:webkit/services/apis/test/models/test_info.dart';
-import 'package:webkit/views/test/test_detail/create_edit_test.dart';
-import 'package:webkit/views/test/test_detail_work/test_work_page.dart';
-import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../layouts/layout.dart';
@@ -168,152 +163,155 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
            )
        ),
        padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
-       child: Row(
-         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-         children: [
-           Row(
-             mainAxisSize: MainAxisSize.min,
-             mainAxisAlignment: MainAxisAlignment.start,
-             children: [
-               Container(
-                 constraints: BoxConstraints(
-                     maxWidth:  constraints.maxWidth> 600?400:250
-                 ),
-                 child: Form(
-                   key: formKey,
-                   child: Row(
-                     children: [
-                       Expanded(
-                         child: SizedBox(
-                           height:Dimens.size45,
-                           child: TextFormField(
-                             maxLines: 1,
-                             controller: textEditingController,
-                             onChanged: (value) {
-                           
-                             },
-                             onFieldSubmitted: (value) {
-                               BlocProvider.of<RequestRegisterListBloc>(context).add(
-                                   RequestRegisterListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
-                             },
-                             onTapOutside: (event) {
-                             },
-                             style: TextStyleConstant.textStyleBlack14w400,
-                             decoration: InputDecoration(
-                                 hintText: "${L10nX.getStr.name} ${L10nX.getStr.user_str.toLowerCase()}",
-                                 fillColor: ColorConst.whiteColor,
-                                 filled: true,
-                                 hintStyle: MyTextStyle.bodySmall(xMuted: true),
-                                 border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                 enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                 focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(16)),
-                                 prefixIcon: const Align(
-                                     alignment: Alignment.center,
-                                     child: Icon(
-                                       LucideIcons.search,
-                                       size: 14,
-                                     )),
-                                 prefixIconConstraints: const BoxConstraints(
-                                     minWidth: 36,
-                                     maxWidth: 36,
-                                     minHeight: 32,
-                                     maxHeight: 32),
-                                 contentPadding: MySpacing.xy(16, 12),
-                                 //isCollapsed: true,
-                                 floatingLabelBehavior: FloatingLabelBehavior.auto),
+       child: SizedBox(
+         height: Dimens.size45,
+         child: Row(
+           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+           children: [
+             Row(
+               mainAxisSize: MainAxisSize.min,
+               mainAxisAlignment: MainAxisAlignment.start,
+               children: [
+                 Container(
+                   constraints: BoxConstraints(
+                       maxWidth:  constraints.maxWidth> Dimens.size600?Dimens.size400:Dimens.size250
+                   ),
+                   child: Form(
+                     key: formKey,
+                     child: Row(
+                       children: [
+                         Expanded(
+                           child: SizedBox(
+                             height:Dimens.size40,
+                             child: TextFormField(
+                               maxLines: 1,
+                               controller: textEditingController,
+                               onChanged: (value) {
+                             
+                               },
+                               onFieldSubmitted: (value) {
+                                 BlocProvider.of<RequestRegisterListBloc>(context).add(
+                                     RequestRegisterListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                               },
+                               onTapOutside: (event) {
+                               },
+                               style: TextStyleConstant.textStyleBlack14w400,
+                               decoration: InputDecoration(
+                                   hintText: "${L10nX.getStr.name} ${L10nX.getStr.user_str.toLowerCase()}",
+                                   fillColor: ColorConst.whiteColor,
+                                   filled: true,
+                                   hintStyle: TextStyleConstant.textStyleBlack13w400,
+                                   border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                   enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                   focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+                                   prefixIcon: Align(
+                                       alignment: Alignment.center,
+                                       child: Icon(
+                                         LucideIcons.search,
+                                         size: Dimens.size15,
+                                       )),
+                                   prefixIconConstraints:  BoxConstraints(
+                                     minWidth: Dimens.size40,
+                                     maxWidth: Dimens.size40,
+                                     minHeight: Dimens.size40,
+                                     maxHeight: Dimens.size40,),
+                                   contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
+                                   //isCollapsed: true,
+                                   floatingLabelBehavior: FloatingLabelBehavior.auto),
+                             ),
                            ),
                          ),
-                       ),
-                     ],
+                       ],
+                     ),
                    ),
                  ),
-               ),
-            /*   Gap(Dimens.size16),
-               SizedBox(
-                 //height: Dimens.size35,
-                 width: Dimens.size150,
-                 child: DropdownButtonFormField2<ActionStatus>(
-                   isExpanded: true,
-                   valueListenable: ValueNotifier<ActionStatus?>(state.status),
-                   decoration: InputDecoration(
-                     contentPadding:  EdgeInsets.symmetric(vertical: Dimens.size8),
-                     border: outlineInputBorder,
-                     // Add more decoration..
-                   ),
-                   hint:  Text(
-                     L10nX.getStr.status,
-                     style: TextStyleConstant.textStyleBlack13w400,
-                   ),
-                   items: ActionStatus.values.map((item) => DropdownItem<ActionStatus>(
-                     value: item,
-                     child: Text(
-                       item.name??"",
+              /*   Gap(Dimens.size16),
+                 SizedBox(
+                   //height: Dimens.size35,
+                   width: Dimens.size150,
+                   child: DropdownButtonFormField2<ActionStatus>(
+                     isExpanded: true,
+                     valueListenable: ValueNotifier<ActionStatus?>(state.status),
+                     decoration: InputDecoration(
+                       contentPadding:  EdgeInsets.symmetric(vertical: Dimens.size8),
+                       border: outlineInputBorder,
+                       // Add more decoration..
+                     ),
+                     hint:  Text(
+                       L10nX.getStr.status,
                        style: TextStyleConstant.textStyleBlack13w400,
                      ),
-                   )).toList(),
-                   validator: (value) {
-                     if (value == null) {
-                       return L10nX.getStr.grade_str;
-                     }
-                     return null;
-                   },
-                   onChanged: (value) {
-                     state.status = value;
-                     BlocProvider.of<RequestRegisterListBloc>(context).add(
-                         RequestRegisterListOnSearchByFilterEvent(
-                              state: state,
-                             searchCommonRequest: state.searchCommonRequest!.copyWith(status: mapActionStatusToStr[value],)
-                         ));
-                   },
-                   onSaved: (value) {
-                   },
-                   buttonStyleData:  ButtonStyleData(
-                     height: Dimens.size30,
-                     
-                     padding: EdgeInsets.only(right: Dimens.size8),
-                   ),
-                   iconStyleData:  IconStyleData(
-                     icon: Icon(
-                       Icons.arrow_drop_down,
-                       color: Colors.black45,
+                     items: ActionStatus.values.map((item) => DropdownItem<ActionStatus>(
+                       value: item,
+                       child: Text(
+                         item.name??"",
+                         style: TextStyleConstant.textStyleBlack13w400,
+                       ),
+                     )).toList(),
+                     validator: (value) {
+                       if (value == null) {
+                         return L10nX.getStr.grade_str;
+                       }
+                       return null;
+                     },
+                     onChanged: (value) {
+                       state.status = value;
+                       BlocProvider.of<RequestRegisterListBloc>(context).add(
+                           RequestRegisterListOnSearchByFilterEvent(
+                                state: state,
+                               searchCommonRequest: state.searchCommonRequest!.copyWith(status: mapActionStatusToStr[value],)
+                           ));
+                     },
+                     onSaved: (value) {
+                     },
+                     buttonStyleData:  ButtonStyleData(
+                       height: Dimens.size30,
+                       
+                       padding: EdgeInsets.only(right: Dimens.size8),
                      ),
-                     iconSize: Dimens.size24,
-                   ),
-                   dropdownStyleData: DropdownStyleData(
-                     maxHeight:Dimens.size200,
-                     //width: 150,
-                     decoration: BoxDecoration(
-                       borderRadius: BorderRadius.circular(Dimens.size16),
-                       color: ColorConst.whiteColor,
+                     iconStyleData:  IconStyleData(
+                       icon: Icon(
+                         Icons.arrow_drop_down,
+                         color: Colors.black45,
+                       ),
+                       iconSize: Dimens.size24,
+                     ),
+                     dropdownStyleData: DropdownStyleData(
+                       maxHeight:Dimens.size200,
+                       //width: 150,
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(Dimens.size16),
+                         color: ColorConst.whiteColor,
+                       ),
+                     ),
+                     menuItemStyleData: MenuItemStyleData(
+                       padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
                      ),
                    ),
-                   menuItemStyleData: MenuItemStyleData(
-                     padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
-                   ),
-                 ),
-               ),*/
-               Gap(Dimens.size16),
-               Visibility(
-                 visible: constraints.maxWidth> 600,
-                 child: ActionButton1(
-                   text: L10nX.getStr.search,
-                   radius: 16,
-                   onTap: () {
-                     BlocProvider.of<RequestRegisterListBloc>(context).add(RequestRegisterListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
-                   },
-                 ),
-               ),
-               Visibility(
-                 visible: constraints.maxWidth< 600,
-                 child: InkWell(
+                 ),*/
+                 Gap(Dimens.size16),
+                 Visibility(
+                   visible: constraints.maxWidth> 600,
+                   child: ActionButton1(
+                     text: L10nX.getStr.search,
+                     radius: Dimens.size16,
                      onTap: () {
                        BlocProvider.of<RequestRegisterListBloc>(context).add(RequestRegisterListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
                      },
-                     child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
-               ),
-             ],
-           ),
-         ],
+                   ),
+                 ),
+                 Visibility(
+                   visible: constraints.maxWidth< 600,
+                   child: InkWell(
+                       onTap: () {
+                         BlocProvider.of<RequestRegisterListBloc>(context).add(RequestRegisterListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                       },
+                       child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
+                 ),
+               ],
+             ),
+           ],
+         ),
        ),
      );
    },);
@@ -383,7 +381,7 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                                   padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(
-                                    'ID',
+                                    'ID', style: TextStyleConstant.textStyleBlack14w500,
                                   ))),
                           GridColumn(
                               columnName: L10nX.getStr.register_user,
@@ -393,7 +391,7 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                                   alignment: Alignment.center,
                                   child: Text(
                                     L10nX.getStr.register_user,
-                                    overflow: TextOverflow.ellipsis,
+                                    overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
                                   ))),
                           GridColumn(
                               columnName: L10nX.getStr.course_str,
@@ -401,28 +399,28 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                               label: Container(
                                   padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.course_str))),
+                                  child: Text(L10nX.getStr.course_str, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.created_at,
                               minimumWidth: Dimens.size120,
                               label: Container(
                                   padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.created_at))),
+                                  child: Text(L10nX.getStr.created_at, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.status,
                               maximumWidth: Dimens.size120,
                               label: Container(
                                   padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.status))),
+                                  child: Text(L10nX.getStr.status, style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.action_str,
                               maximumWidth: Dimens.size250,
                               label: Container(
                                   padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.action_str))),
+                                  child: Text(L10nX.getStr.action_str, style: TextStyleConstant.textStyleBlack14w500,))),
 
                         ],
                       ),

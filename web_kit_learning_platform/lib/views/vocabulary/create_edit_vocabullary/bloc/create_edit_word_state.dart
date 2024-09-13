@@ -15,6 +15,8 @@ enum CreateEditWordStatus {
   onUpdateMultiVocabulary,
   onUpdateMultiVocabularyAudio,
   onUploadMultiVocabulary,
+  onCheckAudio,
+  onChangePage,
   unknown
 }
 
@@ -29,6 +31,9 @@ class CreateEditWordState extends Equatable {
   AddWordController? addWordController;
   WordsPageActionType? wordsPageActionType;
   FilePickerResult? listMultiVocabularyInfoAudio;
+  SearchCommonRequest? searchCommonRequestListMultiVocabularyInfo;
+  List<VocabularyInfo>? listMultiVocabularyInfoForView;
+
   int? exampleIndex =0;
   bool? isAddMultiWord = false;
   CreateEditWordState({
@@ -42,7 +47,9 @@ class CreateEditWordState extends Equatable {
     this.exampleIndex,
     this.isAddMultiWord,
     this.listMultiVocabularyInfo,
-    this.listMultiVocabularyInfoAudio
+    this.listMultiVocabularyInfoAudio,
+    this.searchCommonRequestListMultiVocabularyInfo,
+    this.listMultiVocabularyInfoForView
   }){
     exampleIndex??=-1;
     isAddMultiWord??=false;
@@ -57,6 +64,8 @@ class CreateEditWordState extends Equatable {
         vocabularyInfo??=VocabularyInfo();
       }
     addWordController ??= AddWordController(vocabularyInfo: vocabularyInfo);
+    searchCommonRequestListMultiVocabularyInfo??=SearchCommonRequest(pageNumber: 1, pageSize: 20, );
+    listMultiVocabularyInfoForView??=[];
   }
 
 
@@ -71,7 +80,9 @@ class CreateEditWordState extends Equatable {
     int? exampleIndex,
     bool? isAddMultiWord,
     List<VocabularyInfo>? listMultiVocabularyInfo,
-    FilePickerResult? listMultiVocabularyInfoAudio
+    FilePickerResult? listMultiVocabularyInfoAudio,
+    SearchCommonRequest? searchCommonRequestListMultiVocabularyInfo,
+    List<VocabularyInfo>? listMultiVocabularyInfoForView
   })
   {
     return CreateEditWordState(
@@ -86,6 +97,8 @@ class CreateEditWordState extends Equatable {
       isAddMultiWord: isAddMultiWord??this.isAddMultiWord,
       listMultiVocabularyInfo: listMultiVocabularyInfo??this.listMultiVocabularyInfo,
       listMultiVocabularyInfoAudio: listMultiVocabularyInfoAudio??this.listMultiVocabularyInfoAudio,
+      searchCommonRequestListMultiVocabularyInfo: searchCommonRequestListMultiVocabularyInfo??this.searchCommonRequestListMultiVocabularyInfo,
+      listMultiVocabularyInfoForView: listMultiVocabularyInfoForView??this.listMultiVocabularyInfoForView,
 
 
     );
@@ -102,7 +115,9 @@ class CreateEditWordState extends Equatable {
     exampleIndex,
     isAddMultiWord,
     listMultiVocabularyInfo,
-    listMultiVocabularyInfoAudio
+    listMultiVocabularyInfoAudio,
+    searchCommonRequestListMultiVocabularyInfo,
+    listMultiVocabularyInfoForView
   ];
 
 }

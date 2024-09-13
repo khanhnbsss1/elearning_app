@@ -9,8 +9,6 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
 import 'package:webkit/base/permission/permisstion.dart';
 import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
-import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
@@ -18,7 +16,6 @@ import 'package:webkit/services/apis/roles/models/roles_info.dart';
 import 'package:webkit/views/lessson/lesson_detail/create_edit_lesson.dart';
 import 'package:webkit/widgets/item_edit_view_delete/item_edit_view_delete.dart';
 import '../../../helpers/widgets/my_spacing.dart';
-import '../../../helpers/widgets/my_text_style.dart';
 import '../../layouts/layout.dart';
 import 'bloc/user_list_bloc.dart';
 
@@ -472,9 +469,9 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                  floatingLabelBehavior: FloatingLabelBehavior.auto,
                  contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
                  constraints: BoxConstraints(
-                   minHeight: Dimens.size40,
+                   minHeight: Dimens.size50,
                    maxHeight: Dimens.size50,
-                 )
+                 ),
                ),
              ),
              constraints: BoxConstraints(
@@ -506,10 +503,15 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
                enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
                focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
-               floatingLabelBehavior: FloatingLabelBehavior.auto,
+               floatingLabelBehavior: FloatingLabelBehavior.never,
                contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
+               suffixIconConstraints: BoxConstraints(
+                 minHeight: Dimens.size40,
+                 maxHeight: Dimens.size40,
+               ),
              ),
            ),
+           
            itemAsString: (item) => item.name??"",
            onChanged: (value) {
              if(onChange!=null)

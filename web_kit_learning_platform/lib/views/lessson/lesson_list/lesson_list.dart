@@ -176,7 +176,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                   Container(
                     //height: Dimens.size40,
                     constraints: BoxConstraints(
-                        maxWidth:  constraints.maxWidth> 800?400:250
+                        maxWidth:  constraints.maxWidth> Dimens.size800?Dimens.size400:Dimens.size250
                     ),
                     child: Form(
                       key: formKey,
@@ -184,6 +184,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                         children: [
                           Expanded(
                             child: SizedBox(
+                              height:Dimens.size40,
                               child: TextFormField(
                                 maxLines: 1,
                                 controller: textEditingController,
@@ -215,7 +216,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                                         maxWidth: Dimens.size40,
                                         minHeight: Dimens.size40,
                                         maxHeight: Dimens.size40,),
-                                    contentPadding: MySpacing.xy(16, 12),
+                                    contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
                                     //isCollapsed: true,
                                     floatingLabelBehavior: FloatingLabelBehavior.auto),
                               ),
@@ -337,7 +338,7 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
               return details.getIntrinsicRowHeight(details.rowIndex);
             },*/
                       headerRowHeight: Dimens.size60,
-                      rowHeight: Dimens.size90,
+                      rowHeight: Dimens.size70,
                       //defaultColumnWidth: 200,
                       showHorizontalScrollbar: true,
                       columns: <GridColumn>[

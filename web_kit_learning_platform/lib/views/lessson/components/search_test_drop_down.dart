@@ -94,15 +94,27 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
                   return SearchableDropdown<TestInfo>(
                     isEnabled: widget.enableEdit??true,
                     inputDecoration: InputDecoration(
-                      constraints: BoxConstraints(maxHeight: Dimens.size45),
                       hintTextDirection: AppTheme.textDirection,
-                      labelStyle: TextStyleConstant.textStyleBlack14w400,
-                      hintStyle: TextStyleConstant.textStyleBlack14w400,
+                      labelStyle: TextStyleConstant.textStyleBlack13w400,
+                      hintStyle: TextStyleConstant.textStyleBlack13w400,
                       border: outlineInputBorder,
+                      constraints: BoxConstraints(
+                        minHeight: Dimens.size30,
+                        maxHeight: Dimens.size40,
+                      ),
+                      contentPadding: MySpacing.all(Dimens.size16),
+
+                      prefixIconConstraints: BoxConstraints(
+                        minHeight: Dimens.size30,
+                        maxHeight: Dimens.size40,),
                       labelText: L10nX.getStr.test_str,
-                      prefixIcon: Icon(
-                        Icons.quiz,
-                        color: ColorConst.colorIconRed,
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.all(Dimens.size8),
+                        child: Icon(
+                          Icons.quiz,
+                          color: ColorConst.colorIconRed,
+                          
+                        ),
                       ),
                     ),
                     remoteItems: (search) async {

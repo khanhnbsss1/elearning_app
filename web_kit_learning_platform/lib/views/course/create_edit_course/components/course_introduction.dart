@@ -135,12 +135,12 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
     return LayoutBuilder(
       builder: (context, constraints) {
         double maxWidthItem = maxWidthRow;
-        double heightOfItem = 92;
+        double heightOfItem = Dimens.size80;
         int numberRow = ((constraints.maxWidth / maxWidthItem)/2).toInt()*2;
         if(numberRow<1) {
           numberRow=1;
         }
-        double widthItem = (constraints.maxWidth -(50* numberRow))/numberRow;
+        double widthItem = (constraints.maxWidth -(Dimens.size50* numberRow))/numberRow;
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -328,16 +328,22 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           validator: state.controller?.basicValidator.getValidation('name'),
           controller: state.controller?.basicValidator.getController('name'),
           keyboardType: TextInputType.text,
+          style: TextStyleConstant.textStyleBlack13w400,
+
           decoration: InputDecoration(
             labelText: L10nX.getStr.name,
-            labelStyle: MyTextStyle.bodySmall(xMuted: true),
+            labelStyle: TextStyleConstant.textStyleBlack13w400,
             border: outlineInputBorder,
             prefixIcon: Icon(
-              LucideIcons.user,
+              Icons.book,
               size: 20,
               color: ColorConst.colorIconRed,
             ),
-            contentPadding: MySpacing.all(16),
+            contentPadding: MySpacing.all(Dimens.size16),
+            constraints: BoxConstraints(
+              minHeight: Dimens.size30,
+              maxHeight: Dimens.size40,
+            ),
             isCollapsed: true,
             floatingLabelBehavior: FloatingLabelBehavior.never,
           ),
@@ -369,17 +375,29 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         validator: state.controller?.basicValidator.getValidation('image'),
         controller: state.controller?.basicValidator.getController('image'),
         keyboardType: TextInputType.url,
+        style: TextStyleConstant.textStyleBlack13w400,
+
         decoration: InputDecoration(
           labelText: L10nX.getStr.image_str,
-          labelStyle: MyTextStyle.bodySmall(xMuted: true),
+          labelStyle:TextStyleConstant.textStyleBlack13w400,
           border: outlineInputBorder,
-          prefixIcon: Icon(
-            LucideIcons.mail,
-            size: 20,
-            color: ColorConst.colorIconRed,
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              LucideIcons.mail,
+              size: 20,
+              color: ColorConst.colorIconRed,
+            ),
           ),
-          contentPadding: MySpacing.all(16),
-          isCollapsed: true,
+          contentPadding: MySpacing.all(Dimens.size16),
+          constraints: BoxConstraints(
+            minHeight: Dimens.size30,
+            maxHeight: Dimens.size40,
+          ),
+          prefixIconConstraints: BoxConstraints(
+            minHeight: Dimens.size30,
+            maxHeight: Dimens.size40,
+          ),
           floatingLabelBehavior: FloatingLabelBehavior.never,
           suffixIcon: IconButton(
             icon: Icon(Icons.image),
@@ -410,18 +428,30 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         validator: state.controller?.basicValidator.getValidation('video_preview'),
         controller: state.controller?.basicValidator.getController('video_preview'),
         keyboardType: TextInputType.text,
+        style: TextStyleConstant.textStyleBlack13w400,
         decoration: InputDecoration(
           labelText: 'Youtube url',
-          labelStyle: MyTextStyle.bodySmall(xMuted: true),
+          labelStyle:TextStyleConstant.textStyleBlack13w400,
           border: outlineInputBorder,
-          prefixIcon: Icon(
-            LucideIcons.mail,
-            size: 20,
-            color: ColorConst.colorIconRed,
+          hintStyle: TextStyleConstant.textStyleBlack13w400,
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              Icons.video_call,
+              size: 20,
+              color: ColorConst.colorIconRed,
+            ),
           ),
-          contentPadding: MySpacing.all(16),
-          isCollapsed: true,
+          contentPadding: MySpacing.all(Dimens.size16),
           floatingLabelBehavior: FloatingLabelBehavior.never,
+          constraints: BoxConstraints(
+            minHeight: Dimens.size30,
+            maxHeight: Dimens.size40,
+          ),
+          prefixIconConstraints: BoxConstraints(
+            minHeight: Dimens.size30,
+            maxHeight: Dimens.size40,
+          ),
           suffixIcon: IconButton(
               onPressed: () async {
                 return;
@@ -472,17 +502,28 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         validator: state.controller?.basicValidator.getValidation('durian'),
         controller: state.controller?.basicValidator.getController('durian'),
         keyboardType: TextInputType.number,
+        style: TextStyleConstant.textStyleBlack13w400,
         decoration: InputDecoration(
           labelText: '${L10nX.getStr.how_long_does_the_course_last_str} ?',
-          labelStyle: MyTextStyle.bodySmall(xMuted: true),
           border: outlineInputBorder,
-          prefixIcon: Icon(
-            LucideIcons.user,
-            size: 20,
-            color: ColorConst.colorIconRed,
+          labelStyle: TextStyleConstant.textStyleBlack13w400,
+          constraints: BoxConstraints(
+            minHeight: Dimens.size30,
+            maxHeight: Dimens.size40,
           ),
-          contentPadding: MySpacing.all(16),
-          isCollapsed: true,
+          prefixIcon: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(
+              LucideIcons.user,
+              size: Dimens.size20,
+              color: ColorConst.colorIconRed,
+            ),
+          ),
+          prefixIconConstraints: BoxConstraints(
+            minHeight: Dimens.size30,
+            maxHeight: Dimens.size40,
+          ),
+          contentPadding: MySpacing.all(Dimens.size16),
           floatingLabelBehavior: FloatingLabelBehavior.never,
         ),
       ),
@@ -516,16 +557,21 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                 
                             },
                             keyboardType: TextInputType.number,
+                            style: TextStyleConstant.textStyleBlack13w400,
                             decoration: InputDecoration(
                               labelText: L10nX.getStr.who_this_course_is_for,
-                              labelStyle: MyTextStyle.bodySmall(xMuted: true),
                               border: outlineInputBorder,
+                              contentPadding: MySpacing.all(Dimens.size16),
+                              labelStyle: TextStyleConstant.textStyleBlack13w400,
+                              constraints: BoxConstraints(
+                                minHeight: Dimens.size30,
+                                maxHeight: Dimens.size40,
+                              ),
                               prefixIcon: Icon(
                                 LucideIcons.user,
                                 size: 20,
                                 color: ColorConst.colorIconRed,
                               ),
-                              contentPadding: MySpacing.all(16),
                               isCollapsed: true,
                               floatingLabelBehavior: FloatingLabelBehavior.never,
                             ),
@@ -595,9 +641,9 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
             labelText: '${L10nX.getStr.introduction_str} ?',
             alignLabelWithHint: true,
             floatingLabelAlignment: FloatingLabelAlignment.start,
-            labelStyle: MyTextStyle.bodySmall(xMuted: true),
+            labelStyle: TextStyleConstant.textStyleBlack13w400,
             border: outlineInputBorder,
-            contentPadding: MySpacing.all(16),
+            contentPadding: MySpacing.all(Dimens.size16),
             isCollapsed: true,
             floatingLabelBehavior: FloatingLabelBehavior.never),
         minLines: 5,
@@ -632,17 +678,22 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                           onTapOutside: (event) {
               
                           },
+                          style: TextStyleConstant.textStyleBlack13w400,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
                             labelText: L10nX.getStr.what_will_you_achieve_after_the_course_str,
-                            labelStyle: MyTextStyle.bodySmall(xMuted: true),
                             border: outlineInputBorder,
+                            labelStyle: TextStyleConstant.textStyleBlack13w400,
+                            constraints: BoxConstraints(
+                              minHeight: Dimens.size30,
+                              maxHeight: Dimens.size40,
+                            ),
+                            contentPadding: MySpacing.all(Dimens.size16),
                             prefixIcon: Icon(
                               LucideIcons.user,
-                              size: 20,
+                              size: Dimens.size20,
                               color: ColorConst.colorIconRed,
                             ),
-                            contentPadding: MySpacing.all(16),
                             isCollapsed: true,
                             floatingLabelBehavior: FloatingLabelBehavior.never,
                           ),
@@ -810,7 +861,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
         alignment: WrapAlignment.start,
         runAlignment: WrapAlignment.start,
         crossAxisAlignment: WrapCrossAlignment.center,
-        spacing: 20,
+        spacing: Dimens.size20,
         children: [
           Text('${L10nX.getStr.payment_str}: ', style: TextStyleConstant.textStyleBlack13w500.copyWith(fontWeight: FontWeight.w600),),
           SizedBox(
@@ -878,7 +929,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                       ),
                       width: 20,
                       height: 20,
-                      child:  (state.courseInfo?.mode??"PREMIUM")=="PREMIUM"
+                      child:  (state.courseInfo?.mode??"FREE")=="PREMIUM"
                           ? Icon(
                         Icons.check,
                         size: 15,
@@ -916,16 +967,20 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                       RegExp(r'^0+'),
                     ),
                   ],
+                  style: TextStyleConstant.textStyleBlack13w400,
                   decoration: InputDecoration(
                     suffix: Text("VND"),
                     //labelText: 'Result after the course',
-                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                      labelStyle: TextStyleConstant.textStyleBlack13w400,
+                      constraints: BoxConstraints(
+                        minHeight: Dimens.size30,
+                        maxHeight: Dimens.size40,
+                      ),
                       labelText: L10nX.getStr.price,
                       alignLabelWithHint: true,
                       floatingLabelAlignment: FloatingLabelAlignment.start,
                       border: outlineInputBorder,
-                      contentPadding: MySpacing.all(16),
-                      isCollapsed: true,
+                      contentPadding: MySpacing.all(Dimens.size16),
                       floatingLabelBehavior: FloatingLabelBehavior.never),
                   minLines: 1,
                   maxLines: 1,
@@ -951,6 +1006,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                   textInputAction: TextInputAction.go,
                   onChanged: (value) {
                   },
+                  style: TextStyleConstant.textStyleBlack13w400,
                   inputFormatters: [
                     FilteringTextInputFormatter.allow(RegExp("[0-9]")),
                     FilteringTextInputFormatter.deny(
@@ -967,13 +1023,16 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                   decoration: InputDecoration(
                       suffix: Text("%"),
                       //labelText: 'Result after the course',
-                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                      labelStyle: TextStyleConstant.textStyleBlack13w400,
+                      constraints: BoxConstraints(
+                        minHeight: Dimens.size30,
+                        maxHeight: Dimens.size40,
+                      ),
                       labelText: L10nX.getStr.discount_str,
                       alignLabelWithHint: true,
                       floatingLabelAlignment: FloatingLabelAlignment.start,
                       border: outlineInputBorder,
-                      contentPadding: MySpacing.all(16),
-                      isCollapsed: true,
+                      contentPadding: MySpacing.all(Dimens.size16),
                       floatingLabelBehavior: FloatingLabelBehavior.never),
                   minLines: 1,
                   maxLines: 1,
@@ -1089,13 +1148,16 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                         decoration: InputDecoration(
                             suffix: Text("VND"),
                             //labelText: 'Result after the course',
-                            labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                            labelStyle: TextStyleConstant.textStyleBlack13w400,
+                            constraints: BoxConstraints(
+                              minHeight: Dimens.size30,
+                              maxHeight: Dimens.size40,
+                            ),
                             labelText: L10nX.getStr.price,
                             alignLabelWithHint: true,
                             floatingLabelAlignment: FloatingLabelAlignment.start,
                             border: outlineInputBorder,
-                            contentPadding: MySpacing.all(16),
-                            isCollapsed: true,
+                            contentPadding: MySpacing.all(Dimens.size16),
                             floatingLabelBehavior: FloatingLabelBehavior.never),
                         minLines: 1,
                         maxLines: 1,
@@ -1141,13 +1203,16 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                         decoration: InputDecoration(
                             suffix: Text("%"),
                             //labelText: 'Result after the course',
-                            labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                            labelStyle: TextStyleConstant.textStyleBlack13w400,
+                            constraints: BoxConstraints(
+                              minHeight: Dimens.size30,
+                              maxHeight: Dimens.size40,
+                            ),
                             labelText: L10nX.getStr.discount_str,
                             alignLabelWithHint: true,
                             floatingLabelAlignment: FloatingLabelAlignment.start,
                             border: outlineInputBorder,
-                            contentPadding: MySpacing.all(16),
-                            isCollapsed: true,
+                            contentPadding: MySpacing.all(Dimens.size16),
                             floatingLabelBehavior: FloatingLabelBehavior.never),
                         minLines: 1,
                         maxLines: 1,
