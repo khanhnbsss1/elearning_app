@@ -25,42 +25,39 @@ class LoginWithPhoneApi extends BaseApiRequest {
   Future<dynamic> call() async {
     await getAuthorization();
     dynamic data = await postRequestAPI();
-   if(data!=null && data.runtimeType ==ResponseCommon)
-     {
-       if(data.data!=null)
-         {
-           AuthInfo loginResponse = AuthInfo.fromJson(data.data);
-           await AuthorManager().handleLogout();
-           await AuthorManager().saveAuthInfo(loginResponse);
-           GetUserProfileInfoApi getUserProfileInfoApi = GetUserProfileInfoApi();
-           try{
-             UserProfile? userProfile = await getUserProfileInfoApi.call();
-             if (userProfile == null) {
-               return false;
-             } else {
-               return true;
-             }
-           }
-           catch(e)
-           {
-             ToastUtils.showToastError('wrong-pass-or-user'.tr());
-             await AuthorManager().handleLogout();
-             return false;
-           }
-         }
-       else
-         {
-           ToastUtils.showToastError('no-internet'.tr());
-           return false;
-         }
+    if(data!=null && data.runtimeType ==ResponseCommon)
+    {
+      if(data.data!=null)
+      {
+        AuthInfo loginResponse = AuthInfo.fromJson(data.data);
+        await AuthorManager().handleLogout();
+        await AuthorManager().saveAuthInfo(loginResponse);
+        IdentifierConst.username = loginRequest.username??"";
+        GetUserProfileInfoApi getUserProfileInfoApi = GetUserProfileInfoApi();
+        try{
+          await getUserProfileInfoApi.call();
+        }
+        catch(e)
+        {
+          await AuthorManager().handleLogout();
+          return false;
+        }
+        return true;
+      }
+      else
+      {
+        ToastUtils.showToastError(data.message??"");
+        return false;
+      }
 
-     }
-   else
-     {
-       ToastUtils.showToastError('no-internet'.tr());
-       return false;
-     }
+    }
+    else
+    {
+      ToastUtils.showToastError('wrong-pass-or-user'.tr());
+      return false;
+    }
   }
+
   Future<void> getAuthorization() async {
     DeviceInfoModel? deviceInfoModel = await DeviceManager().getDeviceInfo();
     if(deviceInfoModel!=null)

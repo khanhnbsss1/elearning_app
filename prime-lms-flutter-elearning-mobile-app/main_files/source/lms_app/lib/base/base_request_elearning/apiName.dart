@@ -93,6 +93,7 @@ class ApiName {
   final String getCategories = "/get-categories";
 
   ///
-  final String createScore = "/create_score";
+  final String createScore = "/create-score";
+  final String getScore = "/get-score";
 }
 

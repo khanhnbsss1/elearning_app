@@ -128,6 +128,7 @@ class IdentifierConst{
   static BiometricTypeDevice biometricType = BiometricTypeDevice.none;
   static String username = "";
   static String password = "";
+  static String supportEmail = "fftresourse@gmail.com";
 
 }
 // Loại sinh trắc được hỗ trợ trong device_elearning

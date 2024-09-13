@@ -13,22 +13,23 @@ import '../../../services/apis/test/models/test_info.dart';
 
 
 class QuizComplete extends ConsumerWidget {
-  const QuizComplete({super.key, required this.questions, required this.result, required this.test});
+  const QuizComplete({super.key, required this.questions, required this.result, required this.test,required this.courseId,required this.lectureId, });
   final List<QuestionInfo>? questions;
   final ScoreResultInfo result;
-  final TestInfo test;
+  final TestDetail test;
+  final int courseId;
+  final int lectureId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bool isPassed = (result.point??0) >= 5.0 ? true : false;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(icon: const Icon(Icons.close), onPressed: () => Navigator.pop(context)),
-        title: Text(test.name!),
+        leading: IconButton(icon: const Icon(Icons.close, color: Colors.white,), onPressed: () => Navigator.pop(context)),
+        title: Text(test.name!, style: const TextStyle(color: Colors.white),),
+        backgroundColor: Theme.of(context).primaryColor,
       ),
-      bottomNavigationBar: isPassed
-          ? MarkCompleteButton(questions)
-          : BottomAppBar(
+      bottomNavigationBar: BottomAppBar(
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
               child: TextButton(
                 style: TextButton.styleFrom(
@@ -40,10 +41,10 @@ class QuizComplete extends ConsumerWidget {
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: 18, color: Colors.white),
                 ).tr(),
                 onPressed: () {
-                  // Placed ads when user failed the test
+                  ref.invalidate(currentPageIndexProvider);
                   ref.invalidate(selectedAnswerProvider);
                   AdManager.initInterstitailAds(ref);
-                  NextScreen.replaceAnimation(context, QuizLesson(questions: questions, test: test,));
+                  NextScreen.replaceAnimation(context, QuizLesson(questions: questions, test: test, courseId: courseId, lectureId: lectureId,));
                 },
               ),
             ),

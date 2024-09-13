@@ -84,7 +84,7 @@ class _WordScreenState extends State<WordScreen> {
                           child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('simplified'.tr()),
+                          Text('simplified'.tr(), style: Theme.of(context).textTheme.titleMedium,),
                           const SizedBox(
                             height: 8,
                           ),
@@ -92,13 +92,13 @@ class _WordScreenState extends State<WordScreen> {
                             children: [
                               Text(
                                 '${word.simplified}',
-                                style: Theme.of(context).textTheme.titleLarge,
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
                               const SizedBox(
                                 width: 16,
                               ),
                               Text('${word.pinyinTones}',
-                                  style: Theme.of(context).textTheme.titleMedium),
+                                  style: Theme.of(context).textTheme.bodyLarge),
                               const SizedBox(
                                 width: 16,
                               ),
@@ -114,7 +114,7 @@ class _WordScreenState extends State<WordScreen> {
                           child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('traditional'.tr()),
+                          Text('traditional'.tr(), style: Theme.of(context).textTheme.titleMedium,),
                           const SizedBox(
                             height: 8,
                           ),
@@ -129,18 +129,18 @@ class _WordScreenState extends State<WordScreen> {
                   const SizedBox(
                     height: 16,
                   ),
-                  Text('meaning'.tr()),
+                  Text('meaning'.tr(), style: Theme.of(context).textTheme.titleMedium,),
                   const SizedBox(
                     height: 8,
                   ),
                   Text(
                     '${word.translationVn}',
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   const SizedBox(
                     height: 16,
                   ),
-                  Text('example'.tr()),
+                  Text('example'.tr(), style: Theme.of(context).textTheme.titleMedium,),
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,

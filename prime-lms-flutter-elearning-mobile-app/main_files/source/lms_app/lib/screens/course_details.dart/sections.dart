@@ -52,7 +52,7 @@ class Sections extends ConsumerWidget {
               '${index + 1}. ${lessons.keys.elementAt(index)}',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: isExpanded ? Colors.blueAccent : Theme.of(context).expansionTileTheme.textColor,
+                  color: isExpanded ? Colors.black87 : Theme.of(context).expansionTileTheme.textColor,
                   fontSize: 17
               ),
             ),

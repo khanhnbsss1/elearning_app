@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lms_app/screens/test/progression_bar.dart';
 import 'package:lms_app/screens/test/quiz_lesson/option_tile.dart';
 import 'package:lms_app/services/apis/scores/models/score_info.dart';
 

@@ -2,13 +2,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lms_app/base/base_request_elearning/models/search_common_request.dart';
-import 'package:lms_app/screens/test/test_screen.dart';
+import 'package:lms_app/services/apis/scores/get_score_api.dart';
+import 'package:lms_app/services/apis/scores/models/test_score_list.dart';
 import 'package:lms_app/services/apis/test/get_test_list_api.dart';
+import 'package:lms_app/services/apis/test/models/test_detail.dart';
 import 'package:lms_app/services/apis/test/models/test_info.dart';
-import 'package:lms_app/utils/next_screen.dart';
+import 'package:lms_app/utils/empty_animation.dart';
+import 'package:lms_app/utils/loading_widget.dart';
 import 'package:material_dialogs/dialogs.dart';
 import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
 
+import '../../configs/app_assets.dart';
 import '../../constants/custom_colors.dart';
 
 class TestListScreen extends StatefulWidget {
@@ -21,13 +25,14 @@ class TestListScreen extends StatefulWidget {
 class _TestListScreenState extends State<TestListScreen> {
 
   List<TestInfo> testList = [];
+  TestScoreList testScoreList = TestScoreList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'do-test'.tr(),
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: Theme.of(context).primaryColor,
         leading: IconButton(
@@ -37,16 +42,19 @@ class _TestListScreenState extends State<TestListScreen> {
         ),
       ),
       body: FutureBuilder(
-        future: getTestList(),
-        builder: (context,snapshot) {
-          testList = snapshot.data??[];
-          return ListView.separated(
+        future: Future.wait([getScoreList(),getTestList()]),
+        builder: (context,AsyncSnapshot<List<dynamic>> snapshot) {
+          if (snapshot.hasData) {
+            testScoreList = snapshot.data![0];
+            testList = snapshot.data![1];
+            return ListView.separated(
                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 itemCount: testList.length,
                 shrinkWrap: true,
-                separatorBuilder: (context, index) => const SizedBox(height: 10),
+                separatorBuilder: (context, _) => const SizedBox(height: 10),
                 itemBuilder: (BuildContext context, int index) {
                   const bool isExpanded = true;
+                  List<dynamic> point = getPointFromTestScoreId(testScoreList, testList[index].id!);
                   return ExpansionTile(
                     tilePadding: const EdgeInsets.symmetric(horizontal: 20,),
                     collapsedShape: RoundedRectangleBorder(
@@ -68,31 +76,55 @@ class _TestListScreenState extends State<TestListScreen> {
                     ),
                     children: [
                       ListTile(
-                        onTap: () => openDialog(context, testList[index]),
+                        // onTap: () => openDialog(context, testList[index]),
+                        onTap: () {},
                         title: Text('${'type-test'.tr()} ${testList[index].typeTest??"-"}'),
-                        subtitle: Text('status').tr(),
+                        subtitle: Text('$point'),
                       )
                     ],
                     // onExpansionChanged: (bool value) => ref.read(isSectionExpnadedProvider((section.id??0).toString()).notifier).update((state) => value),
                   );
                 },
               );
+          } else if (snapshot.hasError) {
+            return EmptyAnimation(animationString: emptyAnimation, title: 'no-test'.tr());
+          } else {
+            return const Center(child: LoadingIndicatorWidget());
+          }
         }
       ),
     );
   }
 
+  List<dynamic> getPointFromTestScoreId(TestScoreList testScoreList, dynamic id) {
+    List<dynamic> list = [];
+      if (testScoreList.list != null) {
+        for (TestScore testScore in testScoreList.list!) {
+          if (testScore.testId == id) {
+            list.add(testScore.point);
+          }
+        }
+      }
+    return list;
+  }
+
   Future<List<TestInfo>> getTestList() async {
-    GetTestListApi getTestListApi = GetTestListApi(searchCommonRequest: SearchCommonRequest(pageSize: 10, pageNumber: 0,));
+    GetTestListApi getTestListApi = GetTestListApi(searchCommonRequest: SearchCommonRequest(pageSize: 100, pageNumber: 0,));
     TestListResponseModel testListResponseModel = await getTestListApi.call();
     return testListResponseModel.content??[];
   }
 
-  Future<void> openDialog(BuildContext context,TestInfo test) {
+  Future<TestScoreList> getScoreList() async {
+    GetScoreApi getScoreApi = GetScoreApi();
+    TestScoreList testScoreList = await getScoreApi.call();
+    return testScoreList;
+  }
+
+  Future<void> openDialog(BuildContext context,TestDetail test) {
     return Dialogs.materialDialog(
       context: context,
       title: 'Do-test-title'.tr(),
-      // msg: 'do-test-subtitle'.tr(),
+      msg: 'do-test-subtitle'.tr(),
       titleAlign: TextAlign.center,
       titleStyle: Theme
           .of(context)
@@ -115,7 +147,7 @@ class _TestListScreenState extends State<TestListScreen> {
         IconsOutlineButton(
           onPressed: () {
             Navigator.pop(context);
-            NextScreen.normal(context, TestScreen(test: test));
+            // NextScreen.normal(context, TestScreen(test: test));
           },
           text: 'ready'.tr(),
           color: Theme

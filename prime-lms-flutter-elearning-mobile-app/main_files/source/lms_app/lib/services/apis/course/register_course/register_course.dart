@@ -27,7 +27,7 @@ class RegisterCourseApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    Map<String, dynamic> request = {"courseId": courseId.toString()};
+    Map<String, dynamic> request = {"course_id": courseId.toString()};
     await setApiBody(request);
   }
 
