@@ -55,12 +55,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     LessonInfo lessonDetail = widget.lesson;
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Video'),
+          backgroundColor: Theme.of(context).primaryColor,
+          title: Text('${lessonDetail.lectureName}', style: const TextStyle(color: Colors.white),),
           leading: IconButton(
             onPressed: () => Navigator.pop(context),
             icon: const Icon(
               FeatherIcons.chevronLeft,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
         ),
@@ -82,74 +83,91 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Theme(
-                          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-                          child: ExpansionTile(
-                            initiallyExpanded: true,
-                            title: Text('list-of-video'.tr(),
-                                style: Theme.of(context).textTheme.titleMedium),
-                            children: [
-                              SizedBox(
-                                height: (order.length > 3) ? 300 : (100 * order.length).toDouble(),
-                                child: ListView.builder(
-                                    itemCount: order.length,
-                                    itemBuilder: (context, index) {
-                                      return InkWell(
-                                          onTap: () {
-                                            setState(() {
-                                              selectedVideo = index;
-                                            });
-                                          },
-                                          child: videoListItem(videoTitle[index], "",
-                                              index == selectedVideo));
-                                    }),
-                              ),
-                            ],
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.black38
+                            )
                           ),
-                        ),
-                        if (lessonDetail.vocabularies != null)
-                          Theme(
+                          child: Theme(
                             data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
                             child: ExpansionTile(
-                              initiallyExpanded: false,
-                              title: Text('vocabulary'.tr(),
+                              initiallyExpanded: true,
+                              title: Text('list-of-video'.tr(),
                                   style: Theme.of(context).textTheme.titleMedium),
                               children: [
-                                    SizedBox(
-                                      height: 300,
-                                      child: ListView.builder(
-                                        shrinkWrap: true,
-                                        padding: const EdgeInsets.only(top: 0, bottom: 20),
-                                        itemCount: lessonDetail.vocabularies!.length,
-                                        itemBuilder: (context, index) {
-                                          final VocabularyInfo word =
-                                          lessonDetail.vocabularies![index];
-                                          return ListTile(
-                                            contentPadding: const EdgeInsets.symmetric(
-                                                vertical: 0, horizontal: 20),
-                                            horizontalTitleGap: 10,
-                                            title: Text(
-                                              word.simplified!,
-                                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                                  fontWeight: FontWeight.w500, fontSize: 18),
-                                            ),
-                                            subtitle: (word.translationVn != "")
-                                                ? Text(word.translationVn ?? "-")
-                                                : const Text("-"),
-                                            leading: Text(
-                                              '${index + 1}.',
-                                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                                  fontWeight: FontWeight.bold, color: Colors.blue),
-                                            ),
-                                            trailing: AudioSpeaker(
-                                              url: word.audioLink ?? "",
-                                              enableProccessBar: false,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
+                                SizedBox(
+                                  height: (order.length > 3) ? 300 : (100 * order.length).toDouble(),
+                                  child: ListView.builder(
+                                      itemCount: order.length,
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                            onTap: () {
+                                              setState(() {
+                                                selectedVideo = index;
+                                              });
+                                            },
+                                            child: videoListItem(videoTitle[index], "",
+                                                index == selectedVideo));
+                                      }),
+                                ),
                               ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        if (lessonDetail.vocabularies != null)
+                          Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.black38
+                                )
+                            ),
+                            child: Theme(
+                              data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                              child: ExpansionTile(
+                                initiallyExpanded: false,
+                                title: Text('vocabulary'.tr(),
+                                    style: Theme.of(context).textTheme.titleMedium),
+                                children: [
+                                      SizedBox(
+                                        height: 300,
+                                        child: ListView.builder(
+                                          shrinkWrap: true,
+                                          padding: const EdgeInsets.only(top: 0, bottom: 20),
+                                          itemCount: lessonDetail.vocabularies!.length,
+                                          itemBuilder: (context, index) {
+                                            final VocabularyInfo word =
+                                            lessonDetail.vocabularies![index];
+                                            return ListTile(
+                                              contentPadding: const EdgeInsets.symmetric(
+                                                  vertical: 0, horizontal: 20),
+                                              horizontalTitleGap: 10,
+                                              title: Text(
+                                                word.simplified!,
+                                                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                                    fontWeight: FontWeight.w500, fontSize: 18),
+                                              ),
+                                              subtitle: (word.translationVn != "")
+                                                  ? Text(word.translationVn ?? "-")
+                                                  : const Text("-"),
+                                              leading: Text(
+                                                '${index + 1}.',
+                                                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                                    fontWeight: FontWeight.bold, color: Colors.black),
+                                              ),
+                                              trailing: AudioSpeaker(
+                                                url: word.audioLink ?? "",
+                                                enableProccessBar: false,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                ],
+                              ),
                             ),
                           ),
                       ],

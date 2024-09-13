@@ -28,7 +28,7 @@ class SearchResult extends ConsumerStatefulWidget {
   double? paddingAll;
   int? producerId;
   final String filter;
-  final SubFilterInfo? subFilterInfo;
+  final SubFilterInfo subFilterInfo;
   final GridStyle gridStyle;
 
   @override
@@ -80,7 +80,7 @@ class _SearchResultState extends ConsumerState<SearchResult> {
         pageNumber: pageNumber,
         filter: filter.replaceAll(" ", "_"),
         producerId: widget.producerId,
-        subFilterId: widget.subFilterInfo!.id == null ? "" : widget.subFilterInfo!.id.toString());
+        subFilterId: widget.subFilterInfo.id == null ? "" : widget.subFilterInfo.id.toString());
     if (_courses != [] && courses != [] && courses != null) {
       setState(() {
         _isLoading = false;

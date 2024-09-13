@@ -61,7 +61,7 @@ class GridListCourseTile extends StatelessWidget {
                       const SizedBox(height: 5),
                       Text(
                         'By ${course.producerName}',
-                        style: const TextStyle(color: Colors.purpleAccent),
+                        style: const TextStyle(color: Colors.blue),
                       ),
                       const SizedBox(height: 5),
                       Text('total-lectures',

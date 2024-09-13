@@ -192,7 +192,7 @@
     "example": " - Example",
     "no-word": "No words found",
     "test-detail": "Test details",
-    "test-taking-history": "Test-taking history",
+    "test-taking-history": "Test-taking history: ",
     "test-name": "Test name: {}",
     "test-durian": "Working time: {}",
     "test-type": "Type of Test: {}",

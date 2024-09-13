@@ -45,12 +45,8 @@ class HomeLatestCourses extends ConsumerWidget {
                             ),
                       ),
                       TextButton(
-                        // onPressed: () => NextScreen.iOS(
-                        //     context,
-                        //     AllCoursesView(
-                        //       title: 'latest-courses'.tr(),
-                        //     )),
-                        onPressed: (){},
+                        onPressed: () => NextScreen.iOS(context, const AllCoursesView(filter: 'All')),
+                        // onPressed: (){},
                         style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
                         child: Text(
                           'view-all',

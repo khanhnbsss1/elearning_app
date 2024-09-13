@@ -65,16 +65,16 @@ class MyCourseTile extends StatelessWidget with UserMixin {
                     'By ${course.producerName}',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blueAccent),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 15, bottom: 5),
-                    child: LinearProgressIndicator(
-                      value: int.parse(courseProgressString) / 100,
-                      borderRadius: BorderRadius.circular(20),
-                      minHeight: 8,
-                      color: Colors.orange.shade300,
-                    ),
-                  ),
-                  const Text('percent-completed').tr(args: [courseProgressString]),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 15, bottom: 5),
+                  //   child: LinearProgressIndicator(
+                  //     value: int.parse(courseProgressString) / 100,
+                  //     borderRadius: BorderRadius.circular(20),
+                  //     minHeight: 8,
+                  //     color: Colors.orange.shade300,
+                  //   ),
+                  // ),
+                  // const Text('percent-completed').tr(args: [courseProgressString]),
                   const SizedBox(
                     height: 10,
                   ),
