@@ -33,6 +33,7 @@ import '../services/apis/course/course_fillter/get_course_fillter_api.dart';
 import '../services/apis/course/course_fillter/models/course_filtter_info.dart';
 import '../services/apis/course/course_list/course_api.dart';
 import '../services/apis/course/course_list/models/course_models.dart';
+import 'apis/teacher_list/get_teacher_lt.dart';
 import 'apis/teacher_list/models/landing_page_teacher_list_model.dart';
 import 'apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 
@@ -343,6 +344,13 @@ class ApiService {
   Future<List<LandingPageUserInfo>?> getTopAuthors() async {
     LandingPageTeacherListApi landingPageTeacherListApi = LandingPageTeacherListApi();
     List<LandingPageUserInfo>? list = await landingPageTeacherListApi.call();
+    return list;
+  }
+
+  Future<List<LandingPageUserInfo>?> getTopAuthors1() async {
+    GetTeacherList getTeacherList = GetTeacherList(searchCommonRequest: SearchCommonRequest(
+    ));
+    List<LandingPageUserInfo>? list = await getTeacherList.call();
     return list;
   }
 

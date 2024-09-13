@@ -59,6 +59,7 @@ class ApiName {
   final String editUser = "/edit-user";
   final String getUserDetail = "/get-user";
   final String updatePassword = "/update-password";
+  final String getUserList = "/get-user-list";
 
   /// them tu dien
   final String addVocabulary = "/create-vocabulary";

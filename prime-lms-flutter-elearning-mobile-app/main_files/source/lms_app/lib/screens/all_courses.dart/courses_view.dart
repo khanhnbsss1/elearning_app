@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,7 +29,7 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
     final gridStyle = ref.watch(gridStyleProvider);
     return Scaffold(
       appBar: AppBar(
-        title: (widget.subFilterInfo == null) ? Text(widget.filter.replaceAll("_", " ")) : Text(widget.subFilterInfo!.name!.toUpperCase()),
+        title: (widget.filter == "All") ? Text('latest-courses'.tr()) : (widget.subFilterInfo == null) ? Text(widget.filter.replaceAll("_", " ")) : Text(widget.subFilterInfo!.name!.toUpperCase()),
         titleTextStyle: Theme.of(context)
             .textTheme
             .titleMedium
@@ -54,7 +55,7 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
         child: Column(
           children: [
             FilterContainer(gridStyle: gridStyle, ref: ref),
-            SearchResult(filter: widget.filter, subFilterInfo: widget.subFilterInfo, gridStyle: gridStyle,),
+            SearchResult(filter: widget.filter, subFilterInfo: widget.subFilterInfo??SubFilterInfo(), gridStyle: gridStyle,),
           ],
         )
       ),
