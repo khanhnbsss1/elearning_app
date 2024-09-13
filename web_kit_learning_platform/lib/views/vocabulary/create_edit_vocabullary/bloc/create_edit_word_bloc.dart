@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/controller/add_word_controller.dart';
 import 'package:webkit/services/apis/sentence/models/sentence_info.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
@@ -37,23 +38,56 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
           vocabularyInfo: event.vocabularyInfo
       ));
     });
+    
+    
     on<CreateEditWordOnchangeModeEvent>((event, emit) {
       emit(state.copyWith(
           blocStatus: CreateEditWordStatus.onChangeMode,
           isAddMultiWord: event.isAddMultiWord
       ));
     });
-    on<CreateEditWordUpdateMultiVocabularyEvent>((event, emit) {
+    on<CreateEditWordUpdateMultiVocabularyEvent>((event, emit) async {
+
       emit(state.copyWith(
           blocStatus: CreateEditWordStatus.onUpdateMultiVocabulary,
-          listMultiVocabularyInfo: event.listMultiVocabularyInfo
+          listMultiVocabularyInfo: event.listMultiVocabularyInfo,
       ));
+      await _onCheckAudioVocabulary();
     });
 
-    on<CreateEditWordUpdateMultiVocabularyInfoAudioEvent>((event, emit) {
+    on<CreateEditWordUpdateMultiVocabularyInfoAudioEvent>((event, emit) async {
       emit(state.copyWith(
           blocStatus: CreateEditWordStatus.onUpdateMultiVocabularyAudio,
           listMultiVocabularyInfoAudio: event.listMultiVocabularyInfoAudio
+      ));
+      await _onCheckAudioVocabulary();
+    });
+
+    on<CreateEditWordMultiVocabularyOnChangePageEvent>((event, emit) {
+      state.searchCommonRequestListMultiVocabularyInfo?.pageNumber = event.pageNumber;
+      if((state.listMultiVocabularyInfo??[]).length > (event.pageNumber)* (state.searchCommonRequestListMultiVocabularyInfo?.pageSize??20))
+        {
+          state.listMultiVocabularyInfoForView = (state.listMultiVocabularyInfo??[]).sublist(
+            (event.pageNumber-1)* (state.searchCommonRequestListMultiVocabularyInfo?.pageSize??20),
+            (event.pageNumber)* (state.searchCommonRequestListMultiVocabularyInfo?.pageSize??20),
+          );
+        }
+      else if((state.listMultiVocabularyInfo??[]).length > (event.pageNumber - 1)* (state.searchCommonRequestListMultiVocabularyInfo?.pageSize??20))
+          {
+            state.listMultiVocabularyInfoForView = (state.listMultiVocabularyInfo??[]).sublist(
+              (event.pageNumber-1)* (state.searchCommonRequestListMultiVocabularyInfo?.pageSize??20),
+              ((state.listMultiVocabularyInfo??[]).length),
+            );
+          }
+      else
+        {
+          state.listMultiVocabularyInfoForView = [];
+        }
+
+      emit(state.copyWith(
+        blocStatus: CreateEditWordStatus.onChangePage,
+        searchCommonRequestListMultiVocabularyInfo: state.searchCommonRequestListMultiVocabularyInfo, 
+          listMultiVocabularyInfoForView: state.listMultiVocabularyInfoForView
       ));
     });
     
@@ -263,9 +297,7 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
     emit(state.copyWith(
       blocStatus: CreateEditWordStatus.onLoading,
     ));
-
     MonitorLoading().showLoading("");
-
     for(VocabularyInfo vocabularyInfo in state.listMultiVocabularyInfo??[])
       {
         if(state.listMultiVocabularyInfoAudio!=null)
@@ -307,10 +339,52 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
         AddWordsApi addWordsApi = AddWordsApi(word:  vocabularyInfo);
         dynamic data = await addWordsApi.call();
       }
-    
     MonitorLoading().dismiss();
     emit(state.copyWith(
       blocStatus: CreateEditWordStatus.onUpdateMultiVocabulary,
     ));
+  }
+  Future<void> _onCheckAudioVocabulary()async {
+    if(state.listMultiVocabularyInfoAudio!=null && state.listMultiVocabularyInfo!=null)
+      {
+        for(VocabularyInfo vocabularyInfo in state.listMultiVocabularyInfo??[] )
+        {
+          if((state.listMultiVocabularyInfoAudio?.files??[]).where((element) => element.name == vocabularyInfo.audio,).isNotEmpty){
+            vocabularyInfo.isMapAudio =true;
+          }
+          else
+          {
+            vocabularyInfo.isMapAudio =false;
+          }
+          if((vocabularyInfo.sentenceInfos??[]).isNotEmpty && (state.listMultiVocabularyInfoAudio?.files??[]).where((element) => element.name == vocabularyInfo.sentenceInfos?.first.audioName,).isNotEmpty){
+            (vocabularyInfo.sentenceInfos??[]).first.isMapAudio = true;
+          }
+          else
+          {
+            (vocabularyInfo.sentenceInfos??[]).first.isMapAudio = false;
+          }
+        }
+      }
+
+    state.searchCommonRequestListMultiVocabularyInfo?.pageNumber = 1;
+    state.searchCommonRequestListMultiVocabularyInfo?.pageSize = 20;
+    if((state.listMultiVocabularyInfo??[]).length > (state.searchCommonRequestListMultiVocabularyInfo?.pageSize??20))
+    {
+      state.listMultiVocabularyInfoForView = (state.listMultiVocabularyInfo??[]).sublist(
+        ((state.searchCommonRequestListMultiVocabularyInfo?.pageNumber??0)-1)* (state.searchCommonRequestListMultiVocabularyInfo?.pageSize??20),
+        (state.searchCommonRequestListMultiVocabularyInfo?.pageNumber??1)* ((state.searchCommonRequestListMultiVocabularyInfo?.pageSize??20)),
+      );
+    }
+    else
+    {
+      state.listMultiVocabularyInfoForView = (state.listMultiVocabularyInfo??[]);
+    }
+    emit(state.copyWith(
+        blocStatus: CreateEditWordStatus.onCheckAudio,
+        listMultiVocabularyInfoAudio: state.listMultiVocabularyInfoAudio,
+        listMultiVocabularyInfoForView: state.listMultiVocabularyInfoForView,
+        searchCommonRequestListMultiVocabularyInfo: state.searchCommonRequestListMultiVocabularyInfo
+    ));
+    
   }
 }

@@ -9,6 +9,7 @@ class SentenceInfo {
   int? audioId;
   UploadFileResponseInfo? audioFileInfo;
   String? audioName;
+  bool?isMapAudio;
   SentenceInfo(
       {
         this.id,
@@ -18,8 +19,10 @@ class SentenceInfo {
         this.audioLink,
         this.audioId,
         this.audioFileInfo,
-        this.audioName
+        this.audioName,
+        this.isMapAudio
       }){
+    isMapAudio??=false;
     chineseSentence??='';
     pinyionSentence??='';
     translationVn??='';

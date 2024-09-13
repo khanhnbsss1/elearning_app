@@ -68,7 +68,18 @@ class AddWordController extends MyController {
       label: "excel",
       controller: TextEditingController(),
     );
-
+    basicValidator.addField(
+      'excel_file',
+      required: true,
+      label: "excel_file",
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'audio_folder_path',
+      required: true,
+      label: "audio_folder_path",
+      controller: TextEditingController(),
+    );
   }
   
   void setVocabularyInfo(VocabularyInfo ?vocabularyInfoInput) {

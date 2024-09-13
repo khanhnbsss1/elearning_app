@@ -135,65 +135,6 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  ActionButton1(
-                                    text: L10nX.getStr.prev,
-                                    height: Dimens.size40,
-                                    enableBgColor: ColorConst.whiteColor,
-                                    textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.mainColor),
-                                    enable: (state.page??0)>=1,
-                                    onTap: () {
-                                      if((state.page??0)<=0) {
-                                        return;
-                                      }
-                                      BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnChangePageTestEvent(page: (state.page??0)-1));
-                                    },
-                                  ),
-                                  Gap(Dimens.size20),
-                                  Stack(
-                                    children: [
-                                      Visibility(
-                                        visible: (state.page??0)<(state.quizDTOsForView??[]).length-1,
-                                        child: ActionButton1(
-                                          text: L10nX.getStr.next,
-                                          height: Dimens.size40,
-                                          enableBgColor: ColorConst.whiteColor,
-                                          textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.mainColor),
-                                          
-                                          onTap: () {
-                                            if((state.page??0)>=(state.quizDTOsForView??[]).length-1) {
-                                              return;
-                                            }
-                                            BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnChangePageTestEvent(page: (state.page??0)+1));
-                                          },
-                                        ),
-                                      ),
-                                      Visibility(
-                                        visible: (state.page??0)>=(state.quizDTOsForView??[]).length-1,
-                                        child: ActionButton1(
-                                          text: L10nX.getStr.submit,
-                                          height: Dimens.size40,
-                                          enableBgColor: ColorConst.whiteColor,
-                                          textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.mainColor),
-                                          onTap: () {
-                                            ConfirmPopupPage(
-                                              content: L10nX.getStr.you_are_ready_finish_test,
-                                              onAccept: () {
-                                                BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnSubmitResultTestEvent());
-                                              },
-                                            ).show(context);
-                                          },
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Gap(Dimens.size20),
-                                ],
-                              ),
-                              Gap(Dimens.size16),
                               InkWell(
                                 onTap:  () {
                                   ConfirmPopupPage(
@@ -222,6 +163,43 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
                           children: [
                             buildTestProccess(state: state, context: context),
                             Expanded(child: buildQuestionList(state: state, context: context)),
+                            Gap(Dimens.size16),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    if((state.page??0)<=0) {
+                                      return;
+                                    }
+                                    BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnChangePageTestEvent(page: (state.page??0)-1));
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(Dimens.size30),
+                                      color: (state.page??0)<=0?ColorConst.mainColor.withOpacity(0.3):ColorConst.mainColor
+                                    ),
+                                      padding: EdgeInsets.all(Dimens.size10),
+                                      child: Icon(Icons.arrow_back_ios_new_rounded, color: ColorConst.whiteColor, size: Dimens.size15,)),
+                                ),
+                                Gap(Dimens.size20),
+                                InkWell(
+                                  onTap: () {
+                                    if((state.page??0)>=(state.quizDTOsForView??[]).length-1) {
+                                      return;
+                                    }
+                                    BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnChangePageTestEvent(page: (state.page??0)+1));
+                                  },
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(Dimens.size30),
+                                          color: ((state.page??0)>=(state.quizDTOsForView??[]).length-1)?ColorConst.mainColor.withOpacity(0.3):ColorConst.mainColor
+                                      ),
+                                      padding: EdgeInsets.all(Dimens.size10),
+                                      child: Icon(Icons.arrow_forward_ios_rounded, color: ColorConst.whiteColor, size: Dimens.size15,)),
+                                )
+                              ],
+                            )
                           ],
                         ))
 
@@ -278,7 +256,7 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
     return Visibility(
       visible: state.result==null,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Dimens.size34, vertical: Dimens.size16),
+        padding: EdgeInsets.symmetric(horizontal: Dimens.size40, vertical: Dimens.size0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -289,6 +267,7 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
                   // width: Dimens.size350,
                   animation: true,
                   lineHeight: Dimens.size20,
+                  padding: EdgeInsets.zero,
                   animationDuration: 100,
                   percent: percent,
                   center: Text(

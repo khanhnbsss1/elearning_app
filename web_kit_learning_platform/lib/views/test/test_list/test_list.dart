@@ -163,7 +163,7 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
        ),
        padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
        child: SizedBox(
-         height:Dimens.size45,
+         height:Dimens.size40,
          child: Row(
            mainAxisAlignment: MainAxisAlignment.spaceBetween,
            children: [
@@ -174,7 +174,7 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                  Container(
                    //height: Dimens.size40,
                    constraints: BoxConstraints(
-                       maxWidth:  constraints.maxWidth> 600?400:250
+                       maxWidth:  constraints.maxWidth> Dimens.size600?Dimens.size400:Dimens.size250
                    ),
                    child: Form(
                      key: formKey,
@@ -213,7 +213,7 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                                    maxWidth: Dimens.size40,
                                    minHeight: Dimens.size40,
                                    maxHeight: Dimens.size40,),
-                                 contentPadding: MySpacing.xy(16, 12),
+                                 contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
                                  //isCollapsed: true,
                                  floatingLabelBehavior: FloatingLabelBehavior.always),
                            ),
@@ -343,7 +343,7 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                         gridLinesVisibility: GridLinesVisibility.both,
                         headerGridLinesVisibility: GridLinesVisibility.both,
                         headerRowHeight: Dimens.size60,
-                        rowHeight: Dimens.size80,
+                        rowHeight: Dimens.size60,
                         showHorizontalScrollbar: true,
                         columns: <GridColumn>[
                           GridColumn(
@@ -379,11 +379,13 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                                   ))),
                           GridColumn(
                               columnName: L10nX.getStr.duration_str,
-                              maximumWidth: Dimens.size120,
+                              maximumWidth: Dimens.size150,
                               label: Container(
                                   padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.question_number,style: TextStyleConstant.textStyleBlack14w500,))),
+                                  child: Text(
+                                    "${L10nX.getStr.duration_str} (${L10nX.getStr.time_in_minute_str})" ,
+                                    style: TextStyleConstant.textStyleBlack14w500,))),
                           GridColumn(
                               columnName: L10nX.getStr.action_str,
                               minimumWidth: Dimens.size180,

@@ -164,19 +164,19 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     ],
                     children: [
                       MenuItem(
+                        title: L10nX.getStr.all_str,
+                        route:  Routes.courseList,
+                        isCondensed: ThemeCustomizer().leftBarCondensed,
+                        permission: const [
+                          "courses.post.search_course"
+                        ],
+                      ),
+                      MenuItem(
                         title: L10nX.getStr.registered_str,
                         route:  Routes.courseMyList,
                         isCondensed: ThemeCustomizer().leftBarCondensed,
                         permission: const [
                          // "courses.post.get_my_course",
-                          "courses.post.search_course"
-                        ],
-                      ),
-                      MenuItem(
-                        title: L10nX.getStr.all_str,
-                        route:  Routes.courseList,
-                        isCondensed: ThemeCustomizer().leftBarCondensed,
-                        permission: const [
                           "courses.post.search_course"
                         ],
                       ),

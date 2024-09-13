@@ -30,6 +30,7 @@ class PeriodOfTime extends StatelessWidget{
     // TODO: implement build
     return SizedBox(
       width: Dimens.size500,
+      height: Dimens.size40,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -37,7 +38,10 @@ class PeriodOfTime extends StatelessWidget{
             child: BuildTextField(
               enableEdit: true,
               enableHintText: false,
-              suffixIcon: Icon(Icons.calendar_month,size: Dimens.size30,),
+              suffixIcon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(Icons.calendar_month,size: Dimens.size25,),
+              ),
               onTap: () {
                 DateTimePicker.ShowDialogDatePicker(
                   context: context,
@@ -63,7 +67,10 @@ class PeriodOfTime extends StatelessWidget{
             child: BuildTextField(
               enableEdit: true,
               enableHintText: false,
-              suffixIcon: Icon(Icons.calendar_month, size: Dimens.size30,),
+              suffixIcon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(Icons.calendar_month, size: Dimens.size25,),
+              ),
               onTap: () {
                 DateTimePicker.ShowDialogDatePicker(
                   context: context,

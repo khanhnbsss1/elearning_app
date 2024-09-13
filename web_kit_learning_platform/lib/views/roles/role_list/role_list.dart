@@ -167,7 +167,7 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
         ),
         padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
         child: SizedBox(
-          height: Dimens.size45,
+          height: Dimens.size40,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -353,7 +353,7 @@ class _RoleListPageState extends State<RoleListPage> with SingleTickerProviderSt
               return details.getIntrinsicRowHeight(details.rowIndex);
             },*/
                         headerRowHeight: Dimens.size60,
-                        rowHeight: Dimens.size90,
+                        rowHeight: Dimens.size60,
                         //defaultColumnWidth: 200,
                         showHorizontalScrollbar: true,
                         columns: <GridColumn>[

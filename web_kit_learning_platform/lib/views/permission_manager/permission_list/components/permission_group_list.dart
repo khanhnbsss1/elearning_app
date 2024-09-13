@@ -164,7 +164,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                       children: [
                         Expanded(
                           child: SizedBox(
-                            height:Dimens.size45,
+                            height:Dimens.size40,
                             child: TextFormField(
                               maxLines: 1,
                               controller: textEditingController,

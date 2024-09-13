@@ -4,6 +4,7 @@ import 'package:dio/dio.dart' as dio;
 import 'package:excel_to_json/excel_to_json.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_custom_pagination/flutter_custom_pagination.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -43,7 +44,7 @@ class CreateEditWordsPage extends StatefulWidget {
             key: UniqueKey(),
             child: SizedBox(
                 width: MediaQuery.of(context).size.width * (ResponsiveInfo.isTablet() ? 0.6 : 0.9), 
-                height: MediaQuery.of(context).size.height * (ResponsiveInfo.isTablet() ? 0.7 : 0.8),
+                height: MediaQuery.of(context).size.height * (ResponsiveInfo.isTablet() ? 1 : 0.8),
                 child: this),
           );
         });
@@ -111,6 +112,10 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
             case CreateEditWordStatus.onUpdateMultiVocabulary:
             // TODO: Handle this case.
             case CreateEditWordStatus.onUpdateMultiVocabularyAudio:
+            // TODO: Handle this case.
+            case CreateEditWordStatus.onChangePage:
+            // TODO: Handle this case.
+            case CreateEditWordStatus.onCheckAudio:
             // TODO: Handle this case.
             state.blocStatus = CreateEditWordStatus.unknown;
               break;
@@ -443,6 +448,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                     
                                       ],
                                     ),
+
                                     Expanded(
                                         child: SfDataGridTheme(
                                           data: SfDataGridThemeData(
@@ -451,18 +457,15 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                           child: LayoutBuilder(
                                             builder: (BuildContext context, BoxConstraints constraints) {
                                               ImportMultiVocabularyDataSource employeeDataSource = ImportMultiVocabularyDataSource(
-                                                lessonData: state.listMultiVocabularyInfo??[],
-                                                starIndex: 0,
+                                                lessonData: state.listMultiVocabularyInfoForView??[],
+                                                starIndex: ((state.searchCommonRequestListMultiVocabularyInfo?.pageNumber??1)-1) * (state.searchCommonRequestListMultiVocabularyInfo?.pageSize??20),
                                               );
-                                             return SfDataGrid(
+                                              return SfDataGrid(
                                                 source: employeeDataSource,
                                                 columnWidthMode: ColumnWidthMode.fill,
-                                                isScrollbarAlwaysShown: false,
+                                                isScrollbarAlwaysShown: true,
                                                 gridLinesVisibility: GridLinesVisibility.both,
                                                 headerGridLinesVisibility: GridLinesVisibility.both,
-                                                /*            onQueryRowHeight: (details) {
-                                                          return details.getIntrinsicRowHeight(details.rowIndex);
-                                                        },*/
                                                 headerRowHeight: Dimens.size60,
                                                 rowHeight: Dimens.size50,
                                                 showHorizontalScrollbar: true,
@@ -470,6 +473,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                                   GridColumn(
                                                       columnName: 'id',
                                                       maximumWidth: Dimens.size60,
+                                                      minimumWidth: Dimens.size60,
                                                       label: Container(
                                                           padding: EdgeInsets.all(16.0),
                                                           alignment: Alignment.center,
@@ -478,55 +482,127 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                                           ))),
                                                   GridColumn(
                                                       columnName: L10nX.getStr.simplified_str,
-                                                      maximumWidth: Dimens.size150,
+                                                      maximumWidth: Dimens.size180,
+                                                      minimumWidth: Dimens.size160,
                                                       label: Container(
                                                           padding: EdgeInsets.all(8.0),
                                                           alignment: Alignment.center,
                                                           child: Text(
                                                             L10nX.getStr.simplified_str,
                                                             overflow: TextOverflow.ellipsis,
+                                                            style: TextStyleConstant.textStyleBlack14w500,
                                                           ))),
                                                   GridColumn(
                                                       columnName: L10nX.getStr.chinese_vietnamese_str,
-                                                      maximumWidth: Dimens.size150,
+                                                      maximumWidth: Dimens.size180,
+                                                      minimumWidth: Dimens.size160,
                                                       label: Container(
                                                           padding: EdgeInsets.all(8.0),
                                                           alignment: Alignment.center,
-                                                          child: Text(L10nX.getStr.chinese_vietnamese_str))),
+                                                          child: Text(L10nX.getStr.chinese_vietnamese_str, style: TextStyleConstant.textStyleBlack14w500,))),
                                                   GridColumn(
                                                       columnName: L10nX.getStr.pinyin_tone_str,
-                                                      maximumWidth: Dimens.size150,
+                                                      maximumWidth: Dimens.size180,
+                                                      minimumWidth: Dimens.size160,
                                                       label: Container(
                                                           padding: EdgeInsets.all(8.0),
                                                           alignment: Alignment.center,
-                                                          child: Text(L10nX.getStr.pinyin_tone_str))),
+                                                          child: Text(L10nX.getStr.pinyin_tone_str, style: TextStyleConstant.textStyleBlack14w500))),
                                                   GridColumn(
                                                       columnName: L10nX.getStr.translation_vn_str,
                                                       minimumWidth: Dimens.size200,
                                                       label: Container(
                                                           padding: EdgeInsets.all(8.0),
                                                           alignment: Alignment.center,
-                                                          child: Text(L10nX.getStr.translation_vn_str))),
+                                                          child: Text(L10nX.getStr.translation_vn_str, style: TextStyleConstant.textStyleBlack14w500))),
                                                   GridColumn(
                                                       columnName: L10nX.getStr.category_word,
-                                                      maximumWidth: Dimens.size150,
+                                                      maximumWidth: Dimens.size180,
+                                                      minimumWidth: Dimens.size160,
                                                       label: Container(
                                                           padding: EdgeInsets.all(8.0),
                                                           alignment: Alignment.center,
-                                                          child: Text(L10nX.getStr.category_word))),
+                                                          child: Text(L10nX.getStr.category_word, style: TextStyleConstant.textStyleBlack14w500))),
                                                   GridColumn(
                                                       columnName: L10nX.getStr.audio_type_str,
-                                                      maximumWidth: Dimens.size150,
+                                                      maximumWidth: Dimens.size180,
+                                                      minimumWidth: Dimens.size160,
                                                       label: Container(
                                                           padding: EdgeInsets.all(8.0),
                                                           alignment: Alignment.center,
-                                                          child: Text(L10nX.getStr.audio_type_str))),
+                                                          child: Text(L10nX.getStr.audio_type_str, style: TextStyleConstant.textStyleBlack14w500))),
+                                                  GridColumn(
+                                                      columnName: "${L10nX.getStr.examples_str}_${L10nX.getStr.simplified_str}",
+                                                      maximumWidth: Dimens.size180,
+                                                      minimumWidth: Dimens.size160,
+                                                      label: Container(
+                                                          padding: EdgeInsets.all(8.0),
+                                                          alignment: Alignment.center,
+                                                          child: Text(
+                                                              "${L10nX.getStr.examples_str} ${L10nX.getStr.simplified_str}",
+                                                              style: TextStyleConstant.textStyleBlack14w500))),
+                                                  GridColumn(
+                                                      columnName: "${L10nX.getStr.examples_str}_${L10nX.getStr.pinyin_tone_str}",
+                                                      maximumWidth: Dimens.size180,
+                                                      minimumWidth: Dimens.size160,
+                                                      label: Container(
+                                                          padding: EdgeInsets.all(8.0),
+                                                          alignment: Alignment.center,
+                                                          child: Text(
+                                                              "${L10nX.getStr.examples_str} ${L10nX.getStr.pinyin_tone_str}",
+                                                              style: TextStyleConstant.textStyleBlack14w500))),
+                                                  GridColumn(
+                                                      columnName: "${L10nX.getStr.examples_str}_${L10nX.getStr.translation_vn_str}",
+                                                      maximumWidth: Dimens.size250,
+                                                      minimumWidth: Dimens.size160,
+                                                      label: Container(
+                                                          padding: EdgeInsets.all(8.0),
+                                                          alignment: Alignment.center,
+                                                          child: Text(
+                                                              "${L10nX.getStr.examples_str} ${L10nX.getStr.translation_vn_str}",
+                                                              style: TextStyleConstant.textStyleBlack14w500))),
+                                                  GridColumn(
+                                                      columnName: "${L10nX.getStr.examples_str}_${L10nX.getStr.audio_type_str}",
+                                                      maximumWidth: Dimens.size180,
+                                                      minimumWidth: Dimens.size160,
+                                                      label: Container(
+                                                          padding: EdgeInsets.all(8.0),
+                                                          alignment: Alignment.center,
+                                                          child: Text(
+                                                              "${L10nX.getStr.examples_str} ${L10nX.getStr.audio_type_str}",
+                                                              style: TextStyleConstant.textStyleBlack14w500))),
                                                 ],
                                               );
                                             },
                                           ),
                                         )
                                     ),
+                                    Gap(Dimens.size16),
+                                    FlutterCustomPagination(
+                                      currentPage: state.searchCommonRequestListMultiVocabularyInfo!.pageNumber??0,
+                                      limitPerPage: state.searchCommonRequestListMultiVocabularyInfo!.pageSize??20,
+                                      totalDataCount: (state.listMultiVocabularyInfo??[]).length,
+                                      onPreviousPage: (p0) {
+                                        BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordMultiVocabularyOnChangePageEvent(pageNumber: p0));
+                                      },
+                                      onBackToFirstPage: (p0) {
+                                        BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordMultiVocabularyOnChangePageEvent(pageNumber: p0));
+                                      },
+                                      onNextPage: (p0) {
+                                        BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordMultiVocabularyOnChangePageEvent(pageNumber: p0));
+                                      },
+                                      onGoToLastPage: (p0) {
+                                        BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordMultiVocabularyOnChangePageEvent(pageNumber: p0));
+                                      },
+                                      backgroundColor: ColorConst.whiteColor,
+                                      textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                                      previousPageIcon: Icons.keyboard_arrow_left,
+                                      backToFirstPageIcon: Icons.first_page,
+                                      nextPageIcon: Icons.keyboard_arrow_right,
+                                      goToLastPageIcon: Icons.last_page,
+                                    ),
+                                    Gap(Dimens.size16),
+
                                     Center(
                                       child: Visibility(
                                         child: ActionButton1(
@@ -805,48 +881,68 @@ class ImportMultiVocabularyDataSource extends DataGridSource {
 
     _lessonData = lessonData.map<DataGridRow>((e) {
       starIndex = (starIndex ??0)+1;
-      List<Widget> listWord = [];
-/*      for(VocabularyInfo vocabularyInfo in e.vocabularies??[])
+      SentenceInfo? sentenceInfo ;
+      if((e.sentenceInfos??[]).isNotEmpty)
       {
-        listWord.add(Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimens.size16),
-              border: Border.all(color: ColorConst.blackColor, width: 0.2),
-              color: ColorConst.whiteColor
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Text(vocabularyInfo.simplified??"", style: TextStyleConstant.textStyleBlack13w400,),
-        ),
-
-        );
-      }*/
+        sentenceInfo = e.sentenceInfos?.first;
+      }
       return  DataGridRow(
           cells: [
             DataGridCell<Widget>(columnName: 'id', value: Text("$starIndex", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.simplified_str, value:Row(
               children: [
-                Expanded(child: Text(e.simplified??"", style: TextStyleConstant.textStyleBlack14w400,)),
+                Expanded(child: Text(e.simplified??"", textAlign: TextAlign.center,style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             ) ),
             DataGridCell<Widget>(columnName: L10nX.getStr.chinese_vietnamese_str, value: Row(
               children: [
-                Expanded(child: Text(e.traditional??"", style: TextStyleConstant.textStyleBlack14w400,)),
+                Expanded(child: Text(e.traditional??"", textAlign: TextAlign.center, style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
             DataGridCell<Widget>(columnName: L10nX.getStr.pinyin_tone_str, value: Row(
               children: [
-                Expanded(child: Text(e.pinyinTones??"", style: TextStyleConstant.textStyleBlack14w400,)),
+                Expanded(child: Text(e.pinyinTones??"",textAlign: TextAlign.center, style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
+            DataGridCell<Widget>(columnName: L10nX.getStr.category_word, value: Text(e.categoryWord??"", textAlign: TextAlign.center,style: TextStyleConstant.textStyleBlack14w400,)),
 
+            DataGridCell<Widget>(columnName: L10nX.getStr.audio_type_str, value: Row(
+              children: [
+                Expanded(child: Text(e.audio??"", textAlign: TextAlign.center,style: TextStyleConstant.textStyleBlack14w400,)),
+                Gap(Dimens.size8),
+                Visibility(
+                  visible: e.isMapAudio!=true,
+                    child: Tooltip(
+                        message: "Chưa có audio",
+                        child: Icon(Icons.info, color: ColorConst.mainColor,)))
+              ],
+            )),
             DataGridCell<Widget>(columnName: L10nX.getStr.translation_vn_str, value: Row(
               children: [
-                Expanded(child: Text(e.translationVn??"", style: TextStyleConstant.textStyleBlack14w400,)),
+                Expanded(child: Text(e.translationVn??"",textAlign: TextAlign.center, style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
-            DataGridCell<Widget>(columnName: L10nX.getStr.category_word, value: Text(e.categoryWord??"", style: TextStyleConstant.textStyleBlack14w400,)),
-            DataGridCell<Widget>(columnName: L10nX.getStr.audio_type_str, value: Text(e.audio??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: "${L10nX.getStr.examples_str}_${L10nX.getStr.simplified_str}",
+                value: Text(sentenceInfo?.chineseSentence??"", textAlign: TextAlign.center,style: TextStyleConstant.textStyleBlack14w400,)),
 
+            DataGridCell<Widget>(columnName: "${L10nX.getStr.examples_str}_${L10nX.getStr.pinyin_tone_str}",
+                value: Text(sentenceInfo?.pinyionSentence??"",textAlign: TextAlign.center, style: TextStyleConstant.textStyleBlack14w400,)),
+
+            DataGridCell<Widget>(columnName: "${L10nX.getStr.examples_str}_${L10nX.getStr.translation_vn_str}",
+                value: Text(sentenceInfo?.translationVn??"", textAlign: TextAlign.center,style: TextStyleConstant.textStyleBlack14w400,)),
+            
+            DataGridCell<Widget>(columnName: "${L10nX.getStr.examples_str}_${L10nX.getStr.audio_type_str}",
+                value: Row(
+                  children: [
+                    Expanded(child: Text(sentenceInfo?.audioName??"",textAlign: TextAlign.center, style: TextStyleConstant.textStyleBlack14w400,)),
+                    Gap(Dimens.size8),
+                    Visibility(
+                        visible: sentenceInfo?.isMapAudio!=true,
+                        child: Tooltip(
+                          message: "Chưa có audio", 
+                          child: Icon(Icons.info, color: ColorConst.mainColor,)))
+                  ],
+                )),
           ]);
     },).toList();
   }
@@ -868,4 +964,3 @@ class ImportMultiVocabularyDataSource extends DataGridSource {
         }).toList());
   }
 }
-
