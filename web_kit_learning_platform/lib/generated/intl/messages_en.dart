@@ -475,6 +475,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Population growth of various countries"),
         "positions": MessageLookupByLibrary.simpleMessage("Positions"),
+        "pratice_test_str":
+            MessageLookupByLibrary.simpleMessage("Pratice test"),
         "premium_str": MessageLookupByLibrary.simpleMessage("PREMIUM"),
         "presale_str": MessageLookupByLibrary.simpleMessage("Presale"),
         "prev": MessageLookupByLibrary.simpleMessage("Prev"),

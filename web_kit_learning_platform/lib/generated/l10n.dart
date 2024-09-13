@@ -5880,6 +5880,16 @@ class S {
     );
   }
 
+  /// `Pratice test`
+  String get pratice_test_str {
+    return Intl.message(
+      'Pratice test',
+      name: 'pratice_test_str',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Correct answer`
   String get right_answer {
     return Intl.message(
