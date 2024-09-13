@@ -4,15 +4,18 @@ import 'package:webkit/services/apis/question/models/question_info.dart';
 
 
 enum TestType{
-  ENTRANCE,OUTPUT,
+  ENTRANCE,OUTPUT,PRATICE
 }
 Map<TestType, String>mapTestLevelToStrKey={
   TestType.ENTRANCE:"ENTRANCE",
   TestType.OUTPUT:"OUTPUT",
+  TestType.PRATICE:"PRATICE",
+
 };
 Map< String,TestType>mapStrKeyTestLevel={
   "ENTRANCE":TestType.ENTRANCE,
   "OUTPUT":TestType.OUTPUT,
+  "PRATICE":TestType.PRATICE
 };
 class TestInfo {
   int? id;

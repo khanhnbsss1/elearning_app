@@ -17,6 +17,7 @@ enum CreateEditWordStatus {
   onUploadMultiVocabulary,
   onCheckAudio,
   onChangePage,
+  onUpdateUploadProgress,
   unknown
 }
 
@@ -33,7 +34,8 @@ class CreateEditWordState extends Equatable {
   FilePickerResult? listMultiVocabularyInfoAudio;
   SearchCommonRequest? searchCommonRequestListMultiVocabularyInfo;
   List<VocabularyInfo>? listMultiVocabularyInfoForView;
-
+  double? progress;
+  bool? uploading;
   int? exampleIndex =0;
   bool? isAddMultiWord = false;
   CreateEditWordState({
@@ -49,7 +51,9 @@ class CreateEditWordState extends Equatable {
     this.listMultiVocabularyInfo,
     this.listMultiVocabularyInfoAudio,
     this.searchCommonRequestListMultiVocabularyInfo,
-    this.listMultiVocabularyInfoForView
+    this.listMultiVocabularyInfoForView,
+    this.progress,
+    this.uploading
   }){
     exampleIndex??=-1;
     isAddMultiWord??=false;
@@ -66,6 +70,8 @@ class CreateEditWordState extends Equatable {
     addWordController ??= AddWordController(vocabularyInfo: vocabularyInfo);
     searchCommonRequestListMultiVocabularyInfo??=SearchCommonRequest(pageNumber: 1, pageSize: 20, );
     listMultiVocabularyInfoForView??=[];
+    progress??=0;
+    uploading??=false;
   }
 
 
@@ -82,7 +88,9 @@ class CreateEditWordState extends Equatable {
     List<VocabularyInfo>? listMultiVocabularyInfo,
     FilePickerResult? listMultiVocabularyInfoAudio,
     SearchCommonRequest? searchCommonRequestListMultiVocabularyInfo,
-    List<VocabularyInfo>? listMultiVocabularyInfoForView
+    List<VocabularyInfo>? listMultiVocabularyInfoForView,
+    double? progress,
+    bool? uploading
   })
   {
     return CreateEditWordState(
@@ -99,6 +107,8 @@ class CreateEditWordState extends Equatable {
       listMultiVocabularyInfoAudio: listMultiVocabularyInfoAudio??this.listMultiVocabularyInfoAudio,
       searchCommonRequestListMultiVocabularyInfo: searchCommonRequestListMultiVocabularyInfo??this.searchCommonRequestListMultiVocabularyInfo,
       listMultiVocabularyInfoForView: listMultiVocabularyInfoForView??this.listMultiVocabularyInfoForView,
+      progress: progress??this.progress,
+      uploading: uploading??this.uploading,
 
 
     );
@@ -117,7 +127,9 @@ class CreateEditWordState extends Equatable {
     listMultiVocabularyInfo,
     listMultiVocabularyInfoAudio,
     searchCommonRequestListMultiVocabularyInfo,
-    listMultiVocabularyInfoForView
+    listMultiVocabularyInfoForView,
+    progress,
+    uploading
   ];
 
 }

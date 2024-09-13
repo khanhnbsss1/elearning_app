@@ -591,6 +591,7 @@
   "user_str": "User",
   "entrance_test_str": "Input test",
   "output_test_str": "Output test",
+  "pratice_test_str": "Pratice test",
   "right_answer": "Correct answer",
   "edit_landing_page": "Edit landing page",
   "home_str":"Home",
