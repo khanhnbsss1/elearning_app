@@ -55,8 +55,6 @@ class _VideoPlayerState extends State<VideoPlayer> {
     final currentPosition = controller.currentVideoPosition.inSeconds;
     final totalDuration = controller.totalVideoLength.inSeconds;
     int process = ((currentPosition.toDouble() / totalDuration) * 100).floor();
-    print("aaaaaaaaaaaaaaaaaaaaaaa");
-    print(process);
     if (process > 95 && !isVideoWatched) {
       setState(() {
         isVideoWatched = true;

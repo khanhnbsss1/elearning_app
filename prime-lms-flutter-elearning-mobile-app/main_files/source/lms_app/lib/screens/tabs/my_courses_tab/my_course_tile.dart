@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/price_tag.dart';
 import 'package:lms_app/mixins/course_mixin.dart';
 import 'package:lms_app/mixins/user_mixin.dart';
@@ -20,124 +21,100 @@ import '../../../utils/custom_cached_image.dart';
 import '../../../utils/next_screen.dart';
 import '../../test/test_detail_screen.dart';
 
-class MyCourseTile extends StatelessWidget with UserMixin {
-  const MyCourseTile({super.key, required this.course, required this.user});
+final myCoursesDetailProvider = FutureProvider.family
+    .autoDispose<CourseInfo, CourseInfo>((ref, courseInfo) async {
+  CourseInfo courseDetail =
+      await ApiService().getCourseDetail(course: courseInfo);
+  return courseDetail;
+});
 
-  final CourseInfo course;
+class MyCourseTile extends ConsumerWidget with UserMixin {
+  MyCourseTile({required this.courseInfo, required this.user});
+
+  final CourseInfo courseInfo;
   final UserProfile user;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final heroTag = UniqueKey();
-
-    return InkWell(
-      onTap: () => NextScreen.iOS(
-          context, CourseDetailsView(courses: course, heroTag: heroTag)),
-      // onTap: () {},
-      child: FutureBuilder(
-          future: getCourseDetail(course),
-          builder: (context, snapshot) {
-           if (snapshot.hasData) {
-             CourseInfo courseDetail = snapshot.data!;
-             return Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    final courseDetail = ref.watch(myCoursesDetailProvider(courseInfo));
+    return courseDetail.when(
+      data: (courseDetail) {
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              alignment: Alignment.topRight,
               children: [
-                Stack(
-                  alignment: Alignment.topRight,
+                Container(
+                  height: 90,
+                  width: 100,
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(3)),
+                  child: Hero(
+                      tag: heroTag,
+                      child: (courseDetail.image != null && courseDetail.image != "")
+                          ? CustomCacheImage(imageUrl: courseDetail.image, radius: 3)
+                          : Image.asset("assets/images/noImage.jpg",
+                          fit: BoxFit.cover)),
+                ),
+                PremiumTag(course: courseDetail),
+              ],
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      height: 90,
-                      width: 100,
-                      decoration:
-                          BoxDecoration(borderRadius: BorderRadius.circular(3)),
-                      child: Hero(
-                          tag: heroTag,
-                          child: (course.image != null && course.image != "")
-                              ? CustomCacheImage(
-                                  imageUrl: course.image, radius: 3)
-                              : Image.asset("assets/images/noImage.jpg",
-                                  fit: BoxFit.cover)),
+                    Text(
+                      courseDetail.name!,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontWeight: FontWeight.w600),
                     ),
-                    PremiumTag(course: course),
+                    const SizedBox(height: 5),
+                    Text(
+                      'By ${courseDetail.producerName}',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(color: Colors.blueAccent),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    buildProccess(courseDetail),
+                    OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          side: BorderSide(color: Theme.of(context).primaryColor),
+                          textStyle: Theme.of(context)
+                              .textTheme
+                              .titleSmall
+                              ?.copyWith(fontWeight: FontWeight.w600)),
+                      child: Text(
+                        CourseMixin.enrollButtonText(courseDetail, user),
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ).tr(),
+                      onPressed: () =>
+                          handleOpenCourse(context, user: user, courseDetail: courseDetail),
+                    ),
                   ],
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          course.name!,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium
-                              ?.copyWith(fontWeight: FontWeight.w600),
-                        ),
-                        const SizedBox(height: 5),
-                        Text(
-                          'By ${course.producerName}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(color: Colors.blueAccent),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        buildProccess(courseDetail),
-                        OutlinedButton(
-                          style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                              side: BorderSide(
-                                  color: Theme.of(context).primaryColor),
-                              textStyle: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall
-                                  ?.copyWith(fontWeight: FontWeight.w600)),
-                          child: Text(
-                            CourseMixin.enrollButtonText(course, user),
-                            style: TextStyle(
-                                color: Theme.of(context).primaryColor),
-                          ).tr(),
-                          onPressed: () => handleOpenCourse(context,
-                              user: user, course: course),
-                        ),
-                        // const SizedBox(
-                        //   height: 10,
-                        // ),
-                        // OutlinedButton(
-                        //   style: OutlinedButton.styleFrom(
-                        //       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                        //       side: BorderSide(color: Theme.of(context).primaryColor),
-                        //       textStyle: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600)
-                        //   ),
-                        //   child: Text('do-test'.tr(), style: TextStyle(color: Theme.of(context).primaryColor),).tr(),
-                        //   onPressed: () {
-                        //     NextScreen.normal(context, const TestListScreen());
-                        //   },
-                        // ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            );
-           }
-           else {
-             return const LoadingListTile(height: 200);
-           }
-          }),
+              ),
+            ),
+          ],
+        );
+      },
+      loading: () => const LoadingListTile(height: 200),
+      error: (error, stackTrace) => Center(
+        child: Text(error.toString()),
+      ),
     );
-  }
-
-  Future<CourseInfo> getCourseDetail(CourseInfo courseInfo) async {
-    CourseInfo courseDetail =
-        await ApiService().getCourseDetail(course: courseInfo);
-    return courseDetail;
   }
 
   Widget buildProccess(CourseInfo course) {
@@ -149,7 +126,7 @@ class MyCourseTile extends StatelessWidget with UserMixin {
           finished++;
         }
       }
-      process = (finished*100/course.lectures!.length).ceil();
+      process = (finished * 100 / course.lectures!.length).ceil();
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

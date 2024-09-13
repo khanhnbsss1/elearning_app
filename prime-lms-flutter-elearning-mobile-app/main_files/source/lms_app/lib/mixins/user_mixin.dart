@@ -70,7 +70,7 @@ mixin UserMixin {
       if (course.mode == 'FREE') {
         // Free Course
         if (hasEnrolled(user, course)) {
-          NextScreen.popup(context, CurriculamScreen(course: course));
+          NextScreen.popup(context, CurriculamScreen(courseDetail: course));
         } else {
           AdManager.initInterstitailAds(ref);
           await _comfirmEnrollment(context, user, course, ref);
@@ -79,7 +79,7 @@ mixin UserMixin {
         //  Premium Course
         if (user.subscription != null && !isExpired(user)) {
           if (hasEnrolled(user, course)) {
-            NextScreen.popup(context, CurriculamScreen(course: course));
+            NextScreen.popup(context, CurriculamScreen(courseDetail: course));
           } else {
             await _comfirmEnrollment(context, user, course, ref);
           }
@@ -110,13 +110,13 @@ mixin UserMixin {
   Future handleOpenCourse(
     BuildContext context, {
     required UserProfile user,
-    required CourseInfo course,
+    required CourseInfo courseDetail,
   }) async {
-    if (course.mode == 'FREE') {
-      NextScreen.popup(context, CurriculamScreen(course: course));
+    if (courseDetail.mode == 'FREE') {
+      NextScreen.popup(context, CurriculamScreen(courseDetail: courseDetail));
     } else {
       if (true) {
-        NextScreen.popup(context, CurriculamScreen(course: course));
+        NextScreen.popup(context, CurriculamScreen(courseDetail: courseDetail));
       }
       // else {
       //   NextScreen.openBottomSheet(context, const IAPScreen());

@@ -136,7 +136,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                     style: Theme.of(context).textTheme.titleMedium),
                                 children: [
                                       SizedBox(
-                                        height: 300,
+                                        height: (lessonDetail.vocabularies!.length * 75) > 300 ? 300 : lessonDetail.vocabularies!.length * 75.0,
                                         child: ListView.builder(
                                           shrinkWrap: true,
                                           padding: const EdgeInsets.only(top: 0, bottom: 20),

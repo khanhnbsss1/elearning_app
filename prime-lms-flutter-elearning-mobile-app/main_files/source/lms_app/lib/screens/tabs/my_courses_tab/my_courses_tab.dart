@@ -31,7 +31,7 @@ final myCoursesProvider =
   return courses;
 });
 
-class MyCoursesTab extends ConsumerWidget with CourseMixin {
+class MyCoursesTab extends ConsumerWidget {
   const MyCoursesTab({super.key});
 
   @override
@@ -51,8 +51,7 @@ class MyCoursesTab extends ConsumerWidget with CourseMixin {
           titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.w600, fontSize: 20, color: Colors.white),
         ),
-        body: user ==
-                null // || user.enrolledCourses == null || user.enrolledCourses!.isEmpty
+        body: user == null
             ? const EmptyAnimation(
                 animationString: emptyAnimation, title: 'No courses found')
             : myCourses.when(
@@ -71,7 +70,7 @@ class MyCoursesTab extends ConsumerWidget with CourseMixin {
                               const Divider(height: 50),
                           itemBuilder: (context, index) {
                             final CourseInfo course = data[index];
-                            return MyCourseTile(course: course, user: user);
+                            return MyCourseTile(courseInfo: course, user: user);
                           },
                         )
                       : const EmptyAnimation(

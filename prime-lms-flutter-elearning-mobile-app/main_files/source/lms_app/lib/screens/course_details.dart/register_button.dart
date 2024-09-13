@@ -83,7 +83,7 @@ class RegisterButton extends ConsumerWidget {
                       context,
                       "register-success".tr());
                   NextScreen.replace(context, CurriculamScreen(
-                    course: course,
+                    courseDetail: course,
                   ));
                 } else {
                   ToastUtils.showSnackBar(context, 'message');
@@ -102,7 +102,7 @@ class RegisterButton extends ConsumerWidget {
               )))
           : MyButton(
           onTap: () {
-            NavigationService().navigateToScreen(CurriculamScreen(course: course));
+            NavigationService().navigateToScreen(CurriculamScreen(courseDetail: course));
           },
           elevation: 5,
           borderColor: Colors.black,

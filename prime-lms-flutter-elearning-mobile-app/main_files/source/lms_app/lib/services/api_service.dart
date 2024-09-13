@@ -37,6 +37,8 @@ import 'apis/course_progress/get_course_proccess_list.dart';
 import 'apis/course_progress/models/course_proccess_info.dart';
 import 'apis/teacher_list/get_teacher_lt.dart';
 import 'apis/teacher_list/models/landing_page_teacher_list_model.dart';
+import 'apis/test/get_test_detail.dart';
+import 'apis/test/models/test_detail.dart';
 import 'apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 
 
@@ -202,6 +204,12 @@ class ApiService {
     GetLessonDetailApi getLessonDetailApi = GetLessonDetailApi(lectureId: lectureId);
     LessonInfo? lessonInfo = await getLessonDetailApi.call();
     return lessonInfo;
+  }
+
+  Future<TestDetail> getTestDetail(int testId) async {
+    GetTestDetailApi getTestDetailApi = GetTestDetailApi(testId: testId);
+    TestDetail testDetail = await getTestDetailApi.call();
+    return testDetail;
   }
 
   Future<List<Lesson>> getLessons(String courseId, String sectionId) async {

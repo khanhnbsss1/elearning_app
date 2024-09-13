@@ -9,9 +9,9 @@ import 'lessons.dart';
 final isSectionExpnadedProvider = StateProvider.autoDispose.family<bool, String>((ref, sectionId) => false);
 
 class Sections extends ConsumerWidget {
-  const Sections({super.key, required this.course, required this.isInitialSectionOpen});
+  const Sections({super.key, required this.courseDetail, required this.isInitialSectionOpen});
 
-  final CourseInfo course;
+  final CourseInfo courseDetail;
   final bool isInitialSectionOpen;
 
   @override
@@ -20,7 +20,7 @@ class Sections extends ConsumerWidget {
     int sectionCount = 0;
     final Map<String, List<LessonInfo>> lessons = {};
 
-    for (final lesson in course.lectures!) {
+    for (final lesson in courseDetail.lectures!) {
       if (lessons.containsKey(lesson.subName)) {
         lessons[lesson.subName]!.add(lesson);
       } else {
@@ -50,14 +50,14 @@ class Sections extends ConsumerWidget {
             maintainState: true,
             title: Text(
               '${index + 1}. ${lessons.keys.elementAt(index)}',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.w600,
                   color: isExpanded ? Colors.black87 : Theme.of(context).expansionTileTheme.textColor,
-                  fontSize: 17
+                  fontSize: 18
               ),
             ),
             initiallyExpanded: index == 0 && isInitialSectionOpen ? true : false,
-            children: [Lessons(lectures: lessons.entries.elementAt(index).value, course: course,)],
+            children: [Lessons(listLectureInfo: lessons.entries.elementAt(index).value, courseDetail: courseDetail,)],
             // onExpansionChanged: (bool value) => ref.read(isSectionExpnadedProvider((section.id??0).toString()).notifier).update((state) => value),
           );
         },

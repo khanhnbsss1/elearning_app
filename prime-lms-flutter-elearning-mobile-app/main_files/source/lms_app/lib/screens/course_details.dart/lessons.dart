@@ -32,12 +32,12 @@ import '../../services/apis/test/models/test_detail.dart';
 class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
   const Lessons({
     super.key,
-    required this.lectures,
-    required this.course,
+    required this.listLectureInfo,
+    required this.courseDetail,
   });
 
-  final CourseInfo course;
-  final List<LessonInfo> lectures;
+  final CourseInfo courseDetail;
+  final List<LessonInfo> listLectureInfo;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -48,10 +48,10 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.only(top: 0, bottom: 20),
-        itemCount: lectures.length,
+        itemCount: listLectureInfo.length,
         itemBuilder: (context, index) {
           return FutureBuilder(
-              future: getLessonDetail(lectures[index].id!),
+              future: getLessonDetail(listLectureInfo[index].id!),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   LessonInfo lessonDetail = snapshot.data!;
@@ -60,7 +60,8 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                   }
                   return ListTile(
                       onTap: () => {
-                            if (_onCheck(context, lessonDetail, course, ref))
+                            if (_onCheck(
+                                context, lessonDetail, courseDetail, ref))
                               {_openLesson(context, lessonDetail, ref)}
                           },
                       // onTap: (){},
@@ -71,203 +72,236 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                         children: [
                           Text(
                             '${index + 1}.',
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                fontWeight: FontWeight.bold, color: Colors.black),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(color: Colors.black),
                           ),
                           Text(
                             lessonDetail.lectureName!,
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                fontWeight: FontWeight.w500, fontSize: 18),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w500,
+                                ),
                           ),
                         ],
                       ),
-                      subtitle:
-                      Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Text(lectures[index].subName ?? "_").tr(),
-                        // const SizedBox(
-                        //   height: 8,
-                        // ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Wrap(
-                            spacing: 8.0,
-                             runSpacing: 8.0,
-                             children: [
-                               if (notes.length > 1)
-                                 InkWell(
-                                   splashColor: Colors.transparent,
-                                   onTap: () {
-                                     if (_onCheck(context, lessonDetail, course, ref)) {
-                                       Navigator.push(context,
-                                           MaterialPageRoute(builder: (builder) {
-                                             return PdfScreen(
-                                                 link: notes[1], name: "content".tr());
-                                           }));
-                                     }
-                                   },
-                                   child: Container(
-                                     decoration: BoxDecoration(
-                                       border: Border.all(),
-                                       borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                     ),
-                                     padding: const EdgeInsets.all(4),
-                                     child: Row(
-                                       mainAxisSize: MainAxisSize.min,
-                                       children: [
-                                         Icon(
-                                           Icons.description,
-                                           color: Theme.of(context).primaryColor,
-                                         ),
-                                         const SizedBox(
-                                           width: 2,
-                                         ),
-                                         Text('content',
-                                             style: Theme.of(context)
-                                                 .textTheme
-                                                 .titleLarge
-                                                 ?.copyWith(
-                                                 fontWeight: FontWeight.w400,
-                                                 fontSize: 16))
-                                             .tr(),
-                                       ],
-                                     ),
-                                   ),
-                                 ),
-                               const SizedBox(
-                                 height: 8,
-                               ),
-                               InkWell(
-                                 splashColor: Colors.transparent,
-                                 onTap: () {
-                                   if (_onCheck(context, lessonDetail, course, ref)) {
-                                     NextScreen.normal(
-                                         context,
-                                         Vocabulary(
-                                             lessonDetail: lessonDetail,
-                                             sectionId: index));
-                                   }
-                                 },
-                                 child: Container(
-                                   decoration: BoxDecoration(
-                                     border: Border.all(),
-                                     borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                   ),
-                                   padding: const EdgeInsets.all(4),
-                                   child: Row(
-                                     mainAxisSize: MainAxisSize.min,
-                                     children: [
-                                       Icon(
-                                         Icons.language,
-                                         color: Theme.of(context).primaryColor,
-                                       ),
-                                       const SizedBox(
-                                         width: 2,
-                                       ),
-                                       Text('vocabulary',
-                                           style: Theme.of(context)
-                                               .textTheme
-                                               .titleLarge
-                                               ?.copyWith(
-                                               fontWeight: FontWeight.w400,
-                                               fontSize: 16))
-                                           .tr(),
-                                     ],
-                                   ),
-                                 ),
-                               ),
-                               const SizedBox(
-                                 width: 16,
-                               ),
-                               if (lessonDetail.docLink != "" && lessonDetail.docLink != null)
-                                 InkWell(
-                                   splashColor: Colors.transparent,
-                                   onTap: () {
-                                     if (_onCheck(context, lessonDetail, course, ref)) {
-                                       Navigator.push(
-                                           context,
-                                           MaterialPageRoute(
-                                               builder: (builder) => PdfScreen(
-                                                   link: lessonDetail.docLink!,
-                                                   name: lessonDetail.docName ?? "-")));
-                                     }
-                                   },
-                                   child: Container(
-                                     decoration: BoxDecoration(
-                                       border: Border.all(),
-                                       borderRadius: const BorderRadius.all(Radius.circular(12)),
-                                     ),
-                                     padding: const EdgeInsets.all(4),
-                                     child: Row(
-                                       children: [
-                                         Icon(
-                                           Icons.folder,
-                                           color: Theme.of(context).primaryColor,
-                                         ),
-                                         const SizedBox(
-                                           width: 2,
-                                         ),
-                                         Text('document',
-                                             style: Theme.of(context)
-                                                 .textTheme
-                                                 .titleLarge
-                                                 ?.copyWith(
-                                                 fontWeight: FontWeight.w400,
-                                                 fontSize: 16))
-                                             .tr(),
-                                       ],
-                                     ),
-                                   ),
-                                 ),
-                               const SizedBox(
-                                 height: 8,
-                               ),
-                               if (lessonDetail.testId != null &&
-                                   course.isPayment == 1)
-                                 InkWell(
-                                     splashColor: Colors.transparent,
-                                     onTap: () async {
-                                       if (_onCheck(
-                                           context, lessonDetail, course, ref)) {
-                                         _getTest(context, lessonDetail);
-                                       }
-                                     },
-                                     child: Container(
-                                       decoration: BoxDecoration(
-                                         border: Border.all(),
-                                         borderRadius: const BorderRadius.all(
-                                             Radius.circular(12)),
-                                       ),
-                                       padding: const EdgeInsets.all(4),
-                                       child: Row(
-                                         mainAxisSize: MainAxisSize.min,
-                                         children: [
-                                           Icon(
-                                             Icons.quiz,
-                                             color: Theme.of(context).primaryColor,
-                                           ),
-                                           const SizedBox(
-                                             width: 2,
-                                           ),
-                                           Text('do-test',
-                                               style: Theme.of(context)
-                                                   .textTheme
-                                                   .titleLarge
-                                                   ?.copyWith(
-                                                   fontWeight:
-                                                   FontWeight.w400,
-                                                   fontSize: 16))
-                                               .tr(),
-                                         ],
-                                       ),
-                                     )),
-                             ],
-                          ),
-                        )
-                      ],
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Text(lectures[index].subName ?? "_").tr(),
+                          // const SizedBox(
+                          //   height: 8,
+                          // ),
+                          Text('${lessonDetail.isFinnish}'),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Wrap(
+                              spacing: 8.0,
+                              runSpacing: 8.0,
+                              children: [
+                                if (notes.length > 1)
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    onTap: () {
+                                      if (_onCheck(context, lessonDetail,
+                                          courseDetail, ref)) {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (builder) {
+                                          return PdfScreen(
+                                              link: notes[1],
+                                              name: "content".tr());
+                                        }));
+                                      }
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(12)),
+                                      ),
+                                      padding: const EdgeInsets.all(4),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.description,
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                          ),
+                                          const SizedBox(
+                                            width: 2,
+                                          ),
+                                          Text('content',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleLarge
+                                                      ?.copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 16))
+                                              .tr(),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  onTap: () {
+                                    if (_onCheck(context, lessonDetail,
+                                        courseDetail, ref)) {
+                                      NextScreen.normal(
+                                          context,
+                                          Vocabulary(
+                                              lessonDetail: lessonDetail,
+                                              sectionId: index));
+                                    }
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(12)),
+                                    ),
+                                    padding: const EdgeInsets.all(4),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Icon(
+                                          Icons.language,
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                        const SizedBox(
+                                          width: 2,
+                                        ),
+                                        Text('vocabulary',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleLarge
+                                                    ?.copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 16))
+                                            .tr(),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                if (lessonDetail.docLink != "" &&
+                                    lessonDetail.docLink != null)
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    onTap: () {
+                                      if (_onCheck(context, lessonDetail,
+                                          courseDetail, ref)) {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (builder) => PdfScreen(
+                                                    link: lessonDetail.docLink!,
+                                                    name:
+                                                        lessonDetail.docName ??
+                                                            "-")));
+                                      }
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(12)),
+                                      ),
+                                      padding: const EdgeInsets.all(4),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.folder,
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                          ),
+                                          const SizedBox(
+                                            width: 2,
+                                          ),
+                                          Text('document',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleLarge
+                                                      ?.copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 16))
+                                              .tr(),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                if (lessonDetail.testId != null &&
+                                    courseDetail.isPayment == 1)
+                                  InkWell(
+                                      splashColor: Colors.transparent,
+                                      onTap: () async {
+                                        if (_onCheck(context, lessonDetail,
+                                            courseDetail, ref)) {
+                                          _getTest(context, lessonDetail);
+                                        }
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(12)),
+                                        ),
+                                        padding: const EdgeInsets.all(4),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(
+                                              Icons.quiz,
+                                              color: Theme.of(context)
+                                                  .primaryColor,
                                             ),
-                      trailing: _trailingIcon(context, index));
+                                            const SizedBox(
+                                              width: 2,
+                                            ),
+                                            Text('do-test',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleLarge
+                                                        ?.copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontSize: 16))
+                                                .tr(),
+                                          ],
+                                        ),
+                                      )),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      trailing:
+                          (listLectureInfo[index].isFinnish == false)
+                              ? Icon(
+                                  FeatherIcons.playCircle,
+                                  color: Theme.of(context).primaryColor,
+                                )
+                              : Icon(
+                                  FeatherIcons.checkCircle,
+                                  color: Theme.of(context).primaryColor,
+                                ));
                 } else {
                   return const LoadingTile();
                 }
@@ -283,8 +317,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
   }
 
   Future<TestDetail> getTestDetail(int testId) async {
-    GetTestDetailApi getTestDetailApi = GetTestDetailApi(testId: testId);
-    TestDetail testDetail = await getTestDetailApi.call();
+    TestDetail testDetail = await ApiService().getTestDetail(testId);
     return testDetail;
   }
 
@@ -300,13 +333,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
   }
 
   void _openLesson(BuildContext context, LessonInfo lesson, WidgetRef ref) {
-    NextScreen.iOS(context, VideoLesson(course: course, lesson: lesson));
-  }
-
-  Icon _trailingIcon(BuildContext context, int index) {
-    return (course.lectures![index].isFinnish == false)
-        ? Icon(FeatherIcons.playCircle, color: Theme.of(context).primaryColor,)
-        : Icon(FeatherIcons.checkCircle, color: Theme.of(context).primaryColor,);
+    NextScreen.iOS(context, VideoLesson(course: courseDetail, lesson: lesson));
   }
 
   void _getTest(BuildContext context, LessonInfo lessonDetail) async {
@@ -338,7 +365,7 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
         context,
         TestDetailScreen(
           test: test,
-          courseId: course.id!,
+          courseId: courseDetail.id!,
           lectureId: lessonDetail.id!,
         ));
   }

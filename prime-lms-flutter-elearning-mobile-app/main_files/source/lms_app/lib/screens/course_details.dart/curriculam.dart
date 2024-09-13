@@ -22,7 +22,7 @@ class Curriculam extends ConsumerWidget {
           style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ).tr(),
         Sections(
-          course: course,
+          courseDetail: course,
           isInitialSectionOpen: false,
         ),
       ],

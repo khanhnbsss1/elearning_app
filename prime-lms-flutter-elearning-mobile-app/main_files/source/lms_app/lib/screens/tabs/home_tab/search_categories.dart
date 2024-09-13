@@ -22,10 +22,12 @@ class SearchCategories extends ConsumerStatefulWidget {
   ConsumerState<SearchCategories> createState() => _SearchCategoriesState();
 }
 
-class _SearchCategoriesState extends ConsumerState<SearchCategories> with TickerProviderStateMixin {
+class _SearchCategoriesState extends ConsumerState<SearchCategories>
+    with TickerProviderStateMixin {
   int selectedCategory = 0;
 
   late TabController _controller;
+
   @override
   void initState() {
     super.initState();
@@ -43,14 +45,11 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> with Ticker
   ];
 
   /// List of body icon
-  List<String> icons = [
-    "assets/png/tag.png",
-    "assets/png/school.png"
-  ];
+  List<String> icons = ["assets/png/tag.png", "assets/png/school.png"];
   int current = 0;
+
   @override
   Widget build(BuildContext context) {
-
     final categories = ref.watch(homeCategoriesProvider);
     return (categories.hasValue == true)
         ? categories.when(
@@ -62,165 +61,10 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> with Ticker
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     InkWell(
-                      //       splashColor: Colors.transparent,
-                      //       onTap: () {
-                      //         setState(() {
-                      //           showCategories = !showCategories;
-                      //         });
-                      //       },
-                      //       child: AnimatedContainer(
-                      //         duration: const Duration(milliseconds: 200),
-                      //         decoration: BoxDecoration(
-                      //           border: Border.all(
-                      //             color: (showCategories)
-                      //                 ? Colors.black
-                      //                 : Colors.black.withOpacity(0.1),
-                      //           ),
-                      //           borderRadius:
-                      //               const BorderRadius.all(Radius.circular(24)),
-                      //         ),
-                      //         padding: const EdgeInsets.all(8),
-                      //         child: (showCategories)
-                      //             ? Row(
-                      //                 children: [
-                      //                   Text(
-                      //                     'Categories',
-                      //                     style: Theme.of(context)
-                      //                         .textTheme
-                      //                         .titleMedium
-                      //                         ?.copyWith(
-                      //                             fontWeight: FontWeight.bold),
-                      //                   ).tr(),
-                      //                 ],
-                      //               )
-                      //             : Text(
-                      //                 'Categories',
-                      //                 style: Theme.of(context)
-                      //                     .textTheme
-                      //                     .titleMedium
-                      //                     ?.copyWith(
-                      //                         fontWeight: FontWeight.w400),
-                      //               ).tr(),
-                      //       ),
-                      //     ),
-                      //     InkWell(
-                      //       splashColor: Colors.transparent,
-                      //       onTap: () {
-                      //         setState(() {
-                      //           showCategories = !showCategories;
-                      //         });
-                      //       },
-                      //       child: AnimatedContainer(
-                      //         duration: const Duration(milliseconds: 200),
-                      //         decoration: BoxDecoration(
-                      //           border: Border.all(
-                      //             color: (!showCategories)
-                      //                 ? Colors.black
-                      //                 : Colors.black.withOpacity(0.1),
-                      //           ),
-                      //           borderRadius:
-                      //               const BorderRadius.all(Radius.circular(24)),
-                      //         ),
-                      //         padding: const EdgeInsets.all(8),
-                      //         child: (!showCategories)
-                      //             ? Row(
-                      //                 children: [
-                      //                   Text(
-                      //                     'Author',
-                      //                     style: Theme.of(context)
-                      //                         .textTheme
-                      //                         .titleMedium
-                      //                         ?.copyWith(
-                      //                             fontWeight: FontWeight.bold),
-                      //                   ).tr(),
-                      //                 ],
-                      //               )
-                      //             : Text(
-                      //                 'Author',
-                      //                 style: Theme.of(context)
-                      //                     .textTheme
-                      //                     .titleMedium
-                      //                     ?.copyWith(
-                      //                         fontWeight: FontWeight.w400),
-                      //               ).tr(),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-
-
-                      // Container(
-                      //     width: double.infinity,
-                      //     height: 65,
-                      //     margin: const EdgeInsets.all(5),
-                      //     child: ListView.builder(
-                      //         itemCount: 2,
-                      //         scrollDirection: Axis.horizontal,
-                      //         itemBuilder: (context, index) {
-                      //           return Column(
-                      //             children: [
-                      //               GestureDetector(
-                      //                 onTap: () {
-                      //                   setState(() {
-                      //                     selectedCategory = index;
-                      //                   });
-                      //                 },
-                      //                 child: AnimatedContainer(
-                      //                   duration: const Duration(milliseconds: 300),
-                      //                   margin: const EdgeInsets.all(5),
-                      //                   width: (MediaQuery.of(context).size.width - 70)/2,
-                      //                   height: 55,
-                      //                   decoration: BoxDecoration(
-                      //                     color: selectedCategory == index
-                      //                         ? Colors.white70
-                      //                         : Colors.white54,
-                      //                     borderRadius: selectedCategory == index
-                      //                         ? BorderRadius.circular(12)
-                      //                         : BorderRadius.circular(7),
-                      //                     border: selectedCategory == index
-                      //                         ? Border.all(
-                      //                         color: Theme.of(context).primaryColor,
-                      //                         width: 2.5)
-                      //                         : null,
-                      //                   ),
-                      //                   child: Center(
-                      //                     child: Column(
-                      //                       mainAxisAlignment: MainAxisAlignment.center,
-                      //                       children: [
-                      //                         Image.asset(
-                      //                           icons[index],
-                      //                           width: 25,
-                      //                           height: 25,
-                      //                           color: selectedCategory == index
-                      //                               ? Colors.black
-                      //                               : Colors.grey.shade400,
-                      //                         ),
-                      //                         Text(
-                      //                           items[index],
-                      //                           style: GoogleFonts.ubuntu(
-                      //                             fontWeight: FontWeight.w500,
-                      //                             color: selectedCategory == index
-                      //                                 ? Colors.black
-                      //                                 : Colors.grey.shade400,
-                      //                           ),
-                      //                         ),
-                      //                       ],
-                      //                     ),
-                      //                   ),
-                      //                 ),
-                      //               ),
-                      //             ],
-                      //           );
-                      //         })),
-
                       Container(
                         height: kToolbarHeight + 8.0,
-                        padding:
-                        const EdgeInsets.only(top: 16.0, right: 16.0, left: 16.0),
+                        padding: const EdgeInsets.only(
+                            top: 16.0, right: 16.0, left: 16.0),
                         decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
                           borderRadius: const BorderRadius.only(
@@ -239,7 +83,7 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> with Ticker
                                   topLeft: Radius.circular(8.0),
                                   topRight: Radius.circular(8.0)),
                               color: Colors.white),
-                          indicatorSize:TabBarIndicatorSize.tab,
+                          indicatorSize: TabBarIndicatorSize.tab,
                           labelColor: Colors.black,
                           unselectedLabelColor: Colors.white,
                           tabs: const [
@@ -322,7 +166,7 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> with Ticker
                 child: Row(
                   children: courseFilterInfo.subFilter!
                       .map((e1) => Padding(
-                            padding: const EdgeInsets.only(right: 4.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 4),
                             child: ActionChip(
                               onPressed: () {
                                 if (e1.id == subFilterInfo.id) {
@@ -342,7 +186,7 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> with Ticker
                                   : Colors.white,
                               elevation: 0,
                               padding: const EdgeInsets.symmetric(
-                                  vertical: 2, horizontal: 2),
+                                  vertical: 6, horizontal: 6),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                               label: Text(
@@ -384,56 +228,87 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> with Ticker
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: categories!
-                .map((e) => (e.filterType == "AUTHOR")
-                    ? SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: e.subFilter!
-                              .map((e1) => Padding(
-                                    padding: const EdgeInsets.only(right: 4.0),
-                                    child: ActionChip(
-                                      onPressed: () {
-                                        if (e1.id == authorFilterInfo.id) {
-                                          ref
-                                              .refresh(
-                                                  authorFilterProvider.notifier)
-                                              .state;
-                                        } else {
-                                          ref
-                                              .read(
-                                                  authorFilterProvider.notifier)
-                                              .state = e1;
-                                        }
-                                      },
-                                      backgroundColor:
-                                          (e1.id == authorFilterInfo.id)
-                                              ? Theme.of(context)
-                                                  .primaryColor
-                                                  .withOpacity(0.5)
-                                              : Colors.white,
-                                      elevation: 0,
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 2, horizontal: 2),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      label: Text(
-                                        e1.name!,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium
-                                            ?.copyWith(
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w600),
-                                      ),
-                                    ),
-                                  ))
-                              .toList(),
-                        ),
-                      )
-                    : const SizedBox())
-                .toList(),
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: ActionChip(
+                  onPressed: () {
+                    ref.read(authorFilterProvider.notifier).state =
+                        SubFilterInfo();
+                  },
+                  backgroundColor: (authorFilterInfo.id == SubFilterInfo().id)
+                      ? Theme.of(context).primaryColor.withOpacity(0.5)
+                      : Colors.white,
+                  elevation: 0,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  label: Text(
+                    "All",
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(fontSize: 13, fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ),
+              Row(
+                children: categories!
+                    .map((e) => (e.filterType == "AUTHOR")
+                        ? SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: e.subFilter!
+                                  .map((e1) => Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 4),
+                                        child: ActionChip(
+                                          onPressed: () {
+                                            if (e1.id == authorFilterInfo.id) {
+                                              ref
+                                                  .refresh(authorFilterProvider
+                                                      .notifier)
+                                                  .state;
+                                            } else {
+                                              ref
+                                                  .read(authorFilterProvider
+                                                      .notifier)
+                                                  .state = e1;
+                                            }
+                                          },
+                                          backgroundColor:
+                                              (e1.id == authorFilterInfo.id)
+                                                  ? Theme.of(context)
+                                                      .primaryColor
+                                                      .withOpacity(0.5)
+                                                  : Colors.white,
+                                          elevation: 0,
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 6, horizontal: 6),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20)),
+                                          label: Text(
+                                            e1.name!,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium
+                                                ?.copyWith(
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                            ),
+                          )
+                        : const SizedBox())
+                    .toList(),
+              ),
+            ],
           ),
         ),
         const SizedBox(
@@ -450,4 +325,3 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories> with Ticker
     );
   }
 }
-
