@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_pagination/flutter_custom_pagination.dart';
 import 'package:gap/gap.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
@@ -65,8 +66,8 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
   void initState() {
     super.initState();
   }
-  
-  
+
+  GlobalKey proccessKey = GlobalKey();
   late CreateEditWordState _state;
   late ColorNotifier notifier;
   ScrollController controller = ScrollController();
@@ -602,15 +603,36 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                       goToLastPageIcon: Icons.last_page,
                                     ),
                                     Gap(Dimens.size16),
-
+                                    
                                     Center(
-                                      child: Visibility(
-                                        child: ActionButton1(
-                                          text: "Nhập dữ liệu",
-                                          onTap: () {
-                                            BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordImportMultiVocabularyEvent());
-                                          },
-                                        ),
+                                      child: Column(
+                                        children: [
+                                          Visibility(
+                                            visible: state.uploading==false,
+                                            child: ActionButton1(
+                                              text: "Nhập dữ liệu",
+                                              onTap: () {
+                                                BlocProvider.of<CreateEditWordBloc>(context).add(CreateEditWordImportMultiVocabularyEvent());
+                                              },
+                                            ),
+                                          ),
+                                          Visibility(
+                                            visible: state.uploading==true,
+                                            child: LinearPercentIndicator(
+                                              key:proccessKey,
+                                            animation: true,
+                                            lineHeight: Dimens.size20,
+                                            padding: EdgeInsets.zero,
+                                            animationDuration: 0,
+                                            percent: (state.progress??0).toDouble(),
+                                            center: Text(
+                                              "${L10nX.getStr.finish} ${((state.progress??0)*100).toDouble()} %",
+                                              style: TextStyleConstant.textStyleBlack13w400,
+                                            ),
+                                            barRadius: Radius.circular(Dimens.size8),
+                                            progressColor: ColorConst.mainColor,
+                                          ),)
+                                        ],
                                       ),
                                     )
                                   ],

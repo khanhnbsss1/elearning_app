@@ -99,3 +99,9 @@ class CreateEditWordMultiVocabularyOnChangePageEvent extends CreateEditWordEvent
   @override
   List<Object?> get props => [pageNumber];
 }
+class CreateEditWordMultiVocabularyUpdateProccessEvent extends CreateEditWordEvent {
+  double proccess;
+  CreateEditWordMultiVocabularyUpdateProccessEvent({required this.proccess});
+  @override
+  List<Object?> get props => [proccess];
+}

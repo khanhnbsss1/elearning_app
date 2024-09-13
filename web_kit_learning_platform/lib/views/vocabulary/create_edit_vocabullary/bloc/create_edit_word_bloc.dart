@@ -62,7 +62,12 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
       ));
       await _onCheckAudioVocabulary();
     });
-
+    on<CreateEditWordMultiVocabularyUpdateProccessEvent>((event, emit) async {
+      emit(state.copyWith(
+          blocStatus: CreateEditWordStatus.onUpdateUploadProgress,
+        progress: event.proccess
+      ));
+    });
     on<CreateEditWordMultiVocabularyOnChangePageEvent>((event, emit) {
       state.searchCommonRequestListMultiVocabularyInfo?.pageNumber = event.pageNumber;
       if((state.listMultiVocabularyInfo??[]).length > (event.pageNumber)* (state.searchCommonRequestListMultiVocabularyInfo?.pageSize??20))
@@ -296,8 +301,10 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
       ) async {
     emit(state.copyWith(
       blocStatus: CreateEditWordStatus.onLoading,
+      uploading: true
     ));
-    MonitorLoading().showLoading("");
+    int index =0;
+    
     for(VocabularyInfo vocabularyInfo in state.listMultiVocabularyInfo??[])
       {
         if(state.listMultiVocabularyInfoAudio!=null)
@@ -338,10 +345,12 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
           }
         AddWordsApi addWordsApi = AddWordsApi(word:  vocabularyInfo);
         dynamic data = await addWordsApi.call();
+        index++;
+        add(CreateEditWordMultiVocabularyUpdateProccessEvent(proccess: (index/(state.listMultiVocabularyInfo??[]).length)));
       }
-    MonitorLoading().dismiss();
     emit(state.copyWith(
       blocStatus: CreateEditWordStatus.onUpdateMultiVocabulary,
+      uploading: false
     ));
   }
   Future<void> _onCheckAudioVocabulary()async {
