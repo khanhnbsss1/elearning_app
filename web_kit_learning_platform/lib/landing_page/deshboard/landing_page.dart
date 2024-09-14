@@ -322,14 +322,6 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
               hoverColor: Color.fromRGBO(134, 16, 14, 1.0),
               onPressed: () {
                 Scrollable.ensureVisible(GlobalObjectKey(0).currentContext!, duration: Duration(seconds: 1), curve: Curves.easeInOutCubic);
-
-                CreateEditWordsPage(
-                  wordsPageActionType: WordsPageActionType.create,
-                  key: UniqueKey(),
-                  onCreated: () {
-                    //BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListInitEvent());
-                  },
-                ).show(context);
               },
               child: Icon(Icons.arrow_upward),
             );

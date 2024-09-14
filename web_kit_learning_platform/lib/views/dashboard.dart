@@ -103,11 +103,11 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                         contentPadding: true,
                         children: [
                           MyFlexItem(
-                              sizes: "lg-8 xl-8",
+                              sizes: "lg-6 xl-6",
                               child: buildRevenueByMonth()
                           ),
                           MyFlexItem(
-                              sizes: "lg-4",
+                              sizes: "lg-6",
                               child: buildTopCourseRevenue())
                         ],
                       ),
