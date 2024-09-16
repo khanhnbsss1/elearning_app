@@ -13,6 +13,7 @@ import 'package:lms_app/mixins/course_mixin.dart';
 import 'package:lms_app/mixins/user_mixin.dart';
 import 'package:lms_app/screens/course_details.dart/vocabulary.dart';
 import 'package:lms_app/screens/pdf_screen.dart';
+import 'package:lms_app/screens/tabs/dictionary/word_screen.dart';
 import 'package:lms_app/screens/tabs/my_courses_tab/my_courses_tab.dart';
 import 'package:lms_app/screens/test/test_detail_screen.dart';
 import 'package:lms_app/screens/video_lesson.dart';

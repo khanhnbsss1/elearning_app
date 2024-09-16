@@ -10,6 +10,8 @@ import 'package:lms_app/mixins/user_mixin.dart';
 import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import '../../base/widgets/audio/audio_speaker.dart';
+import '../../utils/next_screen.dart';
+import '../tabs/dictionary/word_screen.dart';
 
 class Vocabulary extends ConsumerWidget with CourseMixin, UserMixin {
   const Vocabulary(
@@ -48,6 +50,7 @@ class Vocabulary extends ConsumerWidget with CourseMixin, UserMixin {
                     final VocabularyInfo word =
                         lessonDetail.vocabularies![index];
                     return ListTile(
+                      onTap: () => NextScreen.normal(context, WordScreen(word: word)),
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 0, horizontal: 20),
                       horizontalTitleGap: 10,

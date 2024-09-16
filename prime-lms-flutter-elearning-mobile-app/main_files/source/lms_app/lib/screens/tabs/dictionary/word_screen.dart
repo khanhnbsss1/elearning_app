@@ -24,7 +24,7 @@ class _WordScreenState extends State<WordScreen> {
     List<Widget> wordExample = [];
     VocabularyInfo word = widget.word;
 
-    if (word.sentenceInfos!.isNotEmpty) {
+    if (word.sentenceInfos != null) {
       word.sentenceInfos!.map((e) {
         wordExample.add(exampleItem(e));
       });
@@ -144,7 +144,7 @@ class _WordScreenState extends State<WordScreen> {
                   ListView.builder(
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemCount: word.sentenceInfos!.length,
+                    itemCount: word.sentenceInfos == null ? 0 : word.sentenceInfos!.length,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 0.0),
