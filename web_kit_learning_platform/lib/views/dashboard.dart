@@ -254,7 +254,8 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
               );
             },
           );
-        },),
+        },
+        ),
       ),
     );
   }

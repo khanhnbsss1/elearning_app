@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/static_view/static_view.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
@@ -450,6 +452,161 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                           ),
                   ],
                 ),
+              ),
+              SizedBox(
+                width: constraints.maxWidth < Dimens.size500 ? Dimens.size10 : Dimens.size25,
+              ),
+              InkWell(
+                onTap: () async {
+                  launchUrlString("tel://0123456789");
+                  final Uri smsLaunchUri = Uri(
+                    scheme: 'tel',
+                    path: '0123456789',
+                    queryParameters: <String, String>{
+                    },
+                  );
+                  launchUrl(smsLaunchUri);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Icon(Icons.phone_in_talk, color: Colors.green,),
+                    Gap(Dimens.size8),
+                    Text("0123456789"),
+                  ],
+                ),
+              ),
+              
+              SizedBox(
+                width: constraints.maxWidth < Dimens.size500 ? Dimens.size10 : Dimens.size25,
+              ),
+              PopupMenuButton(
+                tooltip: '',
+                padding: const EdgeInsets.all(0),
+                offset: Offset(Dimens.size120, Dimens.size30),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(Dimens.size16),
+                ),
+                // initialValue: selectedMenu,
+                constraints:  BoxConstraints(
+                  maxWidth:  Dimens.size200,
+                  maxHeight: Dimens.size100,
+                ),
+                color: notifier.whitecolor,
+                child: (constraints.maxWidth > Dimens.size500)?Text(
+                    L10nX.getStr.contact,
+                    style: TextStyleConstant.textStyleBlack14w400
+                ): Icon(Icons.contact_support_outlined, color: ColorConst.mainColor, size: Dimens.size25,),
+                itemBuilder: (BuildContext context) =>
+                <PopupMenuEntry<SampleItem2>>[
+                  PopupMenuItem<SampleItem2>(
+                    enabled: true,
+                    value: SampleItem2.itemOne,
+                    onTap: () {},
+                    child: Container(
+                      padding:  EdgeInsets.all(Dimens.size8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          InkWell(
+                            onTap: () async {
+                              final Uri _url = Uri.parse('https://play.google.com/store/apps/details?id=com.FFTCompany.YAXChinese');
+                              await launchUrl(_url);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(Icons.phone_in_talk, color: Colors.green,),
+                                Gap(Dimens.size8),
+                                Text("0123456789"),
+                                
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: Dimens.size10),
+                          InkWell(
+                            onTap: () async {
+                              final Uri emailLaunchUri = Uri(
+                                  scheme: 'mailto',
+                                  path: 'smith@example.com',
+                                  queryParameters: {
+                                    'subject': ''
+                                  }
+                              );
+                              launchUrl(emailLaunchUri);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                
+                                Icon(Icons.email, color: Colors.blue,),
+                                Gap(Dimens.size8),
+                                Text("hello@gmail.com"),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: constraints.maxWidth < Dimens.size500 ? Dimens.size10 : Dimens.size25,
+              ),
+              PopupMenuButton(
+                tooltip: '',
+                padding: const EdgeInsets.all(0),
+                offset:  Offset(Dimens.size120, Dimens.size30),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(Dimens.size16),
+                ),
+                // initialValue: selectedMenu,
+                constraints:  BoxConstraints(
+                  //maxWidth:  Dimens.size250,
+                  maxHeight: Dimens.size280,
+                ),
+                color: notifier.whitecolor,
+                child: (constraints.maxWidth > Dimens.size500)?Text(
+                  L10nX.getStr.apps,
+                  style: TextStyleConstant.textStyleBlack14w400
+                ):Icon(Icons.download_for_offline_outlined,color:  ColorConst.mainColor, size: Dimens.size25,),
+                itemBuilder: (BuildContext context) =>
+                <PopupMenuEntry<SampleItem2>>[
+                  PopupMenuItem<SampleItem2>(
+                    enabled: true,
+                    value: SampleItem2.itemOne,
+                    onTap: () {},
+                    child: Container(
+                      padding: EdgeInsets.all(Dimens.size8),
+                      child: Column(
+                        children: [
+                          InkWell(
+                            onTap: () async {
+                              final Uri _url = Uri.parse('https://play.google.com/store/apps/details?id=com.FFTCompany.YAXChinese');
+                              await launchUrl(_url);
+                            },
+                            child: SvgPicture.asset(
+                                'assets/deshboard/support/AppStoreBadge.svg', height: Dimens.size40),
+                          ),
+                          SizedBox(height: Dimens.size10),
+                          InkWell(
+                            onTap: () async {
+                              final Uri _url = Uri.parse('https://play.google.com/store/apps/details?id=com.FFTCompany.YAXChinese');
+                              await launchUrl(_url);
+                            },
+                            child: SvgPicture.asset(
+                                'assets/deshboard/support/GooglePlayStoreBadge.svg',
+                                height: Dimens.size40),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: constraints.maxWidth < Dimens.size500 ? Dimens.size10 : Dimens.size25,
               ),
               Row(
                 children: [

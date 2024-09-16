@@ -137,6 +137,8 @@ class TextStyleConstant{
   static 	TextStyle  textStyleBlack17w700 = baseStyle.copyWithCustom(fontSize: fontSize17, color: ColorConst.blackColor, fontWeight: fontWeight700);
   static 	TextStyle  textStyleBlack36w700 = baseStyle.copyWithCustom(fontSize: fontSize36, color: ColorConst.blackColor, fontWeight: fontWeight700);
   static 	TextStyle  textStyleBlack18w600 = baseStyle.copyWithCustom(fontSize: fontSize18, color: ColorConst.blackColor, fontWeight: fontWeight600);
+  static 	TextStyle  textStyleBlack18w400 = baseStyle.copyWithCustom(fontSize: fontSize18, color: ColorConst.blackColor, fontWeight: fontWeight400);
+
   static 	TextStyle  textStyleBlack30w700 = baseStyle.copyWithCustom(fontSize: fontSize30, color: ColorConst.blackColor, fontWeight: fontWeight700);
   static 	TextStyle  textStyleBlack10w500 = baseStyle.copyWithCustom(fontSize: fontSize10, color: ColorConst.blackColor, fontWeight: fontWeight500);
   static 	TextStyle  textStyleBlack30w500 = baseStyle.copyWithCustom(fontSize: fontSize30, color: ColorConst.blackColor, fontWeight: fontWeight500);
@@ -259,7 +261,7 @@ class TextStyleConstant{
      textStyleBlack30w500 = baseStyle.copyWithCustom(fontSize: fontSize30, color: ColorConst.blackColor, fontWeight: fontWeight500);
      textStyleBlack28w700 = baseStyle.copyWithCustom(fontSize: fontSize28, color: ColorConst.blackColor, fontWeight: fontWeight700);
      textStyleBlack15w500 = baseStyle.copyWithCustom(fontSize: fontSize15, color: ColorConst.blackColor, fontWeight: fontWeight500);
-
+    textStyleBlack18w400 = baseStyle.copyWithCustom(fontSize: fontSize18, color: ColorConst.blackColor, fontWeight: fontWeight400);
   }
 }
 extension StringX on TextStyle {

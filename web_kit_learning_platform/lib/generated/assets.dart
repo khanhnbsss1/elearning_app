@@ -19,6 +19,7 @@ class Assets {
   static const String assetsLangHi = 'assets/lang/hi.json';
   static const String assetsPngLogo = 'assets/png/logo.png';
   static const String assetsVocabularyTmp = 'assets/vocabulary_tmp.xlsx';
+  static const String assetsVocabularyTmp  Copy = 'assets/vocabulary_tmp - Copy.xlsx';
   static const String datasAustralia = 'assets/datas/australia.json';
   static const String datasChatData = 'assets/datas/chat_data.json';
   static const String datasContactsData = 'assets/datas/contacts_data.json';

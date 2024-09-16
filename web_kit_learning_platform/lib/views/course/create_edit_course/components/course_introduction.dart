@@ -336,7 +336,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
             border: outlineInputBorder,
             prefixIcon: Icon(
               Icons.book,
-              size: 20,
+              size: Dimens.size20,
               color: ColorConst.colorIconRed,
             ),
             contentPadding: MySpacing.all(Dimens.size16),
@@ -382,25 +382,25 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           labelStyle:TextStyleConstant.textStyleBlack13w400,
           border: outlineInputBorder,
           prefixIcon: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:  EdgeInsets.all(Dimens.size8),
             child: Icon(
               LucideIcons.mail,
-              size: 20,
+              size: Dimens.size20,
               color: ColorConst.colorIconRed,
             ),
           ),
           contentPadding: MySpacing.all(Dimens.size16),
           constraints: BoxConstraints(
-            minHeight: Dimens.size30,
+            minHeight: Dimens.size20,
             maxHeight: Dimens.size40,
           ),
           prefixIconConstraints: BoxConstraints(
-            minHeight: Dimens.size30,
+            minHeight: Dimens.size20,
             maxHeight: Dimens.size40,
           ),
           floatingLabelBehavior: FloatingLabelBehavior.never,
           suffixIcon: IconButton(
-            icon: Icon(Icons.image),
+            icon: Icon(Icons.image, size: Dimens.size20,),
             onPressed: () async {
               FilePickerResult? result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['png', 'jpg']);
               MultipartFile file = MultipartFile.fromBytes(result!.files.first.bytes!.toList(growable: true), filename: result.names[0]);
@@ -435,10 +435,10 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           border: outlineInputBorder,
           hintStyle: TextStyleConstant.textStyleBlack13w400,
           prefixIcon: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:  EdgeInsets.all(Dimens.size8),
             child: Icon(
               Icons.video_call,
-              size: 20,
+              size: Dimens.size20,
               color: ColorConst.colorIconRed,
             ),
           ),
@@ -468,6 +468,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
               },
               icon: Icon(
                 Icons.video_call,
+                size: Dimens.size20,
                 color: ColorConst.colorIconRed,
               )),
         ),
@@ -514,13 +515,13 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
           prefixIcon: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Icon(
-              LucideIcons.user,
+              Icons.timelapse,
               size: Dimens.size20,
               color: ColorConst.colorIconRed,
             ),
           ),
           prefixIconConstraints: BoxConstraints(
-            minHeight: Dimens.size30,
+            minHeight: Dimens.size10,
             maxHeight: Dimens.size40,
           ),
           contentPadding: MySpacing.all(Dimens.size16),
@@ -569,7 +570,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                               ),
                               prefixIcon: Icon(
                                 LucideIcons.user,
-                                size: 20,
+                                size: Dimens.size20,
                                 color: ColorConst.colorIconRed,
                               ),
                               isCollapsed: true,
@@ -888,12 +889,12 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                           color: Colors.black87,
                         ),
                       ),
-                      width: 20,
-                      height: 20,
+                      width: Dimens.size20,
+                      height: Dimens.size20,
                       child: ((state.courseInfo?.mode??"FREE")=="FREE")
                           ? Icon(
                               Icons.check,
-                              size: 15,
+                              size: Dimens.size15,
                               color: ColorConst.colorIconGrays,
                             )
                           : null),
@@ -927,12 +928,12 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                           color: Colors.black87,
                         ),
                       ),
-                      width: 20,
-                      height: 20,
+                      width: Dimens.size20,
+                      height: Dimens.size20,
                       child:  (state.courseInfo?.mode??"FREE")=="PREMIUM"
                           ? Icon(
                         Icons.check,
-                        size: 15,
+                        size: Dimens.size15,
                         color: ColorConst.colorIconGrays,
                       )
                           : null),
@@ -952,6 +953,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
               child: Container(
                 constraints: BoxConstraints(
                   maxWidth: Dimens.size200,
+                  maxHeight: Dimens.size40,
                 ),
                 child: TextFormField(
                   validator: state.controller?.basicValidator.getValidation('payment_value'),
@@ -973,14 +975,15 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                     //labelText: 'Result after the course',
                       labelStyle: TextStyleConstant.textStyleBlack13w400,
                       constraints: BoxConstraints(
-                        minHeight: Dimens.size30,
+                        minHeight: Dimens.size20,
                         maxHeight: Dimens.size40,
                       ),
                       labelText: L10nX.getStr.price,
+                      hintStyle: TextStyleConstant.textStyleBlack13w400,
                       alignLabelWithHint: true,
                       floatingLabelAlignment: FloatingLabelAlignment.start,
                       border: outlineInputBorder,
-                      contentPadding: MySpacing.all(Dimens.size16),
+                      contentPadding: MySpacing.all(Dimens.size12),
                       floatingLabelBehavior: FloatingLabelBehavior.never),
                   minLines: 1,
                   maxLines: 1,
@@ -1024,15 +1027,16 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                       suffix: Text("%"),
                       //labelText: 'Result after the course',
                       labelStyle: TextStyleConstant.textStyleBlack13w400,
+                      hintStyle: TextStyleConstant.textStyleBlack13w400,
                       constraints: BoxConstraints(
-                        minHeight: Dimens.size30,
+                        minHeight: Dimens.size20,
                         maxHeight: Dimens.size40,
                       ),
                       labelText: L10nX.getStr.discount_str,
                       alignLabelWithHint: true,
                       floatingLabelAlignment: FloatingLabelAlignment.start,
                       border: outlineInputBorder,
-                      contentPadding: MySpacing.all(Dimens.size16),
+                      contentPadding: MySpacing.all(Dimens.size12),
                       floatingLabelBehavior: FloatingLabelBehavior.never),
                   minLines: 1,
                   maxLines: 1,
@@ -1069,12 +1073,12 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                                 color: Colors.black87,
                               ),
                             ),
-                            width: 20,
-                            height: 20,
+                            width: Dimens.size20,
+                            height: Dimens.size20,
                             child: !valuePaymentMode
                                 ? Icon(
                               Icons.check,
-                              size: 15,
+                              size: Dimens.size15,
                               color: ColorConst.colorIconGrays,
                             )
                                 : null),
@@ -1101,12 +1105,12 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                                 color: Colors.black87,
                               ),
                             ),
-                            width: 20,
-                            height: 20,
+                            width: Dimens.size20,
+                            height: Dimens.size20,
                             child: valuePaymentMode
                                 ? Icon(
                               Icons.check,
-                              size: 15,
+                              size: Dimens.size15,
                               color: ColorConst.colorIconGrays,
                             )
                                 : null),
@@ -1150,7 +1154,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                             //labelText: 'Result after the course',
                             labelStyle: TextStyleConstant.textStyleBlack13w400,
                             constraints: BoxConstraints(
-                              minHeight: Dimens.size30,
+                              minHeight: Dimens.size20,
                               maxHeight: Dimens.size40,
                             ),
                             labelText: L10nX.getStr.price,
@@ -1205,7 +1209,7 @@ class _CourseIntroductionPageState extends State<CourseIntroductionPage> with Si
                             //labelText: 'Result after the course',
                             labelStyle: TextStyleConstant.textStyleBlack13w400,
                             constraints: BoxConstraints(
-                              minHeight: Dimens.size30,
+                              minHeight: Dimens.size20,
                               maxHeight: Dimens.size40,
                             ),
                             labelText: L10nX.getStr.discount_str,

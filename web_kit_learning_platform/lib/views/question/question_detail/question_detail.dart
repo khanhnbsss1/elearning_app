@@ -148,7 +148,7 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
                         Visibility(
                           visible: widget.actionType != ActionType.view,
                           child: ActionButton1(
-                            text: widget.actionType == ActionType.create?L10nX.getStr.create_lesson_str:L10nX.getStr.str_update,
+                            text: widget.actionType == ActionType.create?L10nX.getStr.question_create:L10nX.getStr.str_update,
                             width: Dimens.size150,
                             onTap: () {
                               state.questionInfo??= QuestionInfo();

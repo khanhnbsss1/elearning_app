@@ -88,7 +88,7 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
           Expanded(
             child: SizedBox(
               width: Dimens.size300,
-              height: Dimens.size60,
+              height: Dimens.size40,
               child: StatefulBuilder(
                 builder: (BuildContext context, void Function(void Function()) setState) {
                   return SearchableDropdown<TestInfo>(
@@ -99,19 +99,20 @@ class _MyDropdownButtonState extends State<SearchTestDropDown> with SingleTicker
                       hintStyle: TextStyleConstant.textStyleBlack13w400,
                       border: outlineInputBorder,
                       constraints: BoxConstraints(
-                        minHeight: Dimens.size30,
+                        minHeight: Dimens.size20,
                         maxHeight: Dimens.size40,
                       ),
                       contentPadding: MySpacing.all(Dimens.size16),
 
                       prefixIconConstraints: BoxConstraints(
-                        minHeight: Dimens.size30,
+                        minHeight: Dimens.size20,
                         maxHeight: Dimens.size40,),
                       labelText: L10nX.getStr.test_str,
                       prefixIcon: Padding(
                         padding: EdgeInsets.all(Dimens.size8),
                         child: Icon(
                           Icons.quiz,
+                          size: Dimens.size20,
                           color: ColorConst.colorIconRed,
                           
                         ),

@@ -249,8 +249,6 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     if(data.runtimeType==int)
     {
       courseInfo.id = data as int;
-      await _onLinkTestToCourse();
-      ToastUtils.showToastSuccess(L10nX.getStr.success);
     }
     else
       {
@@ -260,6 +258,8 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
         blocStatus:  AddCourseStatus.onSubmitAdd,
       courseInfo: courseInfo
     ));
+    await _onLinkTestToCourse();
+    ToastUtils.showToastSuccess(L10nX.getStr.success);
   }
 
   Future<void> _onUploadImage(

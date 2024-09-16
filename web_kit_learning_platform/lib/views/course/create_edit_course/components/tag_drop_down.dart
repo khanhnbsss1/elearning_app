@@ -28,11 +28,11 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
                   width: Dimens.size300,
-                  height: Dimens.size45,
+                  height: Dimens.size40,
                   child: Row(
                     children: [
                       Expanded(
@@ -58,6 +58,7 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                               hintStyle: TextStyleConstant.textStyleBlack13w400,
                               alignLabelWithHint: true,
                               floatingLabelAlignment: FloatingLabelAlignment.center,
+                              hintMaxLines: 1,
                               border: outlineInputBorder,
                               prefixIcon: Icon(
                                 LucideIcons.book,
@@ -65,10 +66,13 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                                 color: ColorConst.colorIconRed,
                               ),
                               contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
-                              floatingLabelBehavior:
-                              FloatingLabelBehavior.never,
+                              floatingLabelBehavior: FloatingLabelBehavior.never,
+                              constraints: BoxConstraints(
+                                minHeight: Dimens.size20,
+                                maxHeight: Dimens.size40,
+                              ),
                               suffixIconConstraints: BoxConstraints(
-                                minHeight: Dimens.size40,
+                                minHeight: Dimens.size20,
                                 maxHeight: Dimens.size40,
                               ),
                             ),
