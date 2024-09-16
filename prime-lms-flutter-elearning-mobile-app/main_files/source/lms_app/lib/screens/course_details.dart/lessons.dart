@@ -96,7 +96,6 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                           // const SizedBox(
                           //   height: 8,
                           // ),
-                          Text('${lessonDetail.isFinnish}'),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Wrap(
