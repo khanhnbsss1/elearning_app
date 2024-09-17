@@ -20,6 +20,7 @@ class SearchCommonRequest {
   String? type;
   String?roleId;
   int?courseId;
+  String? vocabularyType;
   
   SearchCommonRequest(
       {
@@ -42,7 +43,8 @@ class SearchCommonRequest {
         this.startTime,
         this.endTime,
         this.roleId,
-        this.courseId
+        this.courseId,
+        this.vocabularyType
       }){
     type??="DESC";
   }
@@ -136,6 +138,10 @@ class SearchCommonRequest {
       data['status'] = status;
     }
     data['type'] = type;
+    if(vocabularyType!=null)
+      {
+        data['type'] = (vocabularyType??"").isNotEmpty?vocabularyType:null;
+      }
     if(limit!=null) {
       data['limit'] = limit;
     }
@@ -163,7 +169,8 @@ class SearchCommonRequest {
     String? endDate,
     String?status,
     String?roleId,
-    String? type
+    String? type,
+    String? vocabularyType
   }){
     return SearchCommonRequest(
       userId: userId??this.userId,
@@ -182,6 +189,7 @@ class SearchCommonRequest {
       status: status??this.status,
       roleId: roleId??this.roleId,
       type: type??this.type,
+      vocabularyType: vocabularyType??this.vocabularyType,
     );
 }
 }

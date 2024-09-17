@@ -96,7 +96,8 @@ class _MyDropdownButtonState extends State<SearchWordDropDown> with SingleTicker
                       return getWordFilterList(search??"");
                     },
                     itemLabelFormatter: (value) {
-                      return value.simplified??"";
+                     
+                      return  "${value.simplified??""} (${value.vocabularyType==VocabularyType.vocabularyImage? "Image": "NoImage"})";
                     },
                     onChanged: (VocabularyInfo? value) {
                       if(onSelectWord!=null)

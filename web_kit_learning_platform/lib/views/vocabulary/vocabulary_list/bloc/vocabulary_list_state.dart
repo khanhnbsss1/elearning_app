@@ -7,10 +7,7 @@ enum VocabularyStatus {
   onLoadEnd,
   onSelectWord
 }
-enum VocabularyType{
-  vocabularyNonImage,
-  vocabularyImage
-}
+
 
 
 @immutable
@@ -33,7 +30,7 @@ class VocabularyListState extends Equatable {
         pageNumber: 0, 
         pageSize: 10, 
         keyword: "", 
-        type: vocabularyType== VocabularyType.vocabularyNonImage? "NoImage":"Image");
+        vocabularyType: vocabularyType== VocabularyType.vocabularyNonImage? "NoImage":"Image");
   }
 
 

@@ -141,7 +141,7 @@ class FilterManager{
       return vocabularyResponseModel;
     }
     GetListVocabularyApi getLessonListFilterApi = GetListVocabularyApi(
-        searchCommonRequest: SearchCommonRequest(pageNumber: -1, type: "Image", pageSize: 100));
+        searchCommonRequest: SearchCommonRequest(pageNumber: -1, vocabularyType: "", pageSize: 100));
     vocabularyResponseModel =  await getLessonListFilterApi.call();
     return vocabularyResponseModel;
   }
