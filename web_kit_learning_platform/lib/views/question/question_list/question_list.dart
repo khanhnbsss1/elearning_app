@@ -194,7 +194,7 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
                             
                               },
                               onFieldSubmitted: (value) {
-                                BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value, pageNumber: 0)));
                               },
                               onTapOutside: (event) {
                               },
@@ -233,7 +233,7 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
                     child: ActionButton1(
                       text: L10nX.getStr.search,
                       onTap: () {
-                        BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                        BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                       },
                     ),
                   ),
@@ -241,7 +241,7 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
                     visible: constraints.maxWidth< 800,
                     child: InkWell(
                         onTap: () {
-                          BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                          BlocProvider.of<QuizListBloc>(context).add(QuizListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                         },
                         child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                   ),

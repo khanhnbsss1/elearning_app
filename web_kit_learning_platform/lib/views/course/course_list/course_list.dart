@@ -123,7 +123,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                                                           },
                                                           onFieldSubmitted: (value) {
                                                             BlocProvider.of<CourseListBloc>(context)
-                                                                .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                                                .add(CourseListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value, pageNumber: 0)));
                                                           },
                                                           onTapOutside: (event) {
                                                           },

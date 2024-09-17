@@ -194,7 +194,7 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
                               
                                 },
                                 onFieldSubmitted: (value) {
-                                  BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                  BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value, pageNumber: 0)));
                                 },
                                 onTapOutside: (event) {
                                 },
@@ -234,7 +234,7 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
                     child: ActionButton1(
                       text: L10nX.getStr.search,
                       onTap: () {
-                        BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                        BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                       },
                     ),
                   ),
@@ -242,7 +242,7 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
                     visible: constraints.maxWidth< 800,
                     child: InkWell(
                         onTap: () {
-                          BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                          BlocProvider.of<GradeListBloc>(context).add(GradeListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                         },
                         child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                   ),

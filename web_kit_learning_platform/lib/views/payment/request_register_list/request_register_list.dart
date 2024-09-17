@@ -191,7 +191,7 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                                },
                                onFieldSubmitted: (value) {
                                  BlocProvider.of<RequestRegisterListBloc>(context).add(
-                                     RequestRegisterListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                     RequestRegisterListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value, pageNumber: 0)));
                                },
                                onTapOutside: (event) {
                                },
@@ -296,7 +296,7 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                      text: L10nX.getStr.search,
                      radius: Dimens.size16,
                      onTap: () {
-                       BlocProvider.of<RequestRegisterListBloc>(context).add(RequestRegisterListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                       BlocProvider.of<RequestRegisterListBloc>(context).add(RequestRegisterListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                      },
                    ),
                  ),
@@ -304,7 +304,7 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                    visible: constraints.maxWidth< 600,
                    child: InkWell(
                        onTap: () {
-                         BlocProvider.of<RequestRegisterListBloc>(context).add(RequestRegisterListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                         BlocProvider.of<RequestRegisterListBloc>(context).add(RequestRegisterListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                        },
                        child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                  ),

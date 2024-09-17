@@ -172,7 +172,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                             
                               },
                               onFieldSubmitted: (value) {
-                                BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value, pageNumber: 0)));
                               },
                               onTapOutside: (event) {
                               },
@@ -213,7 +213,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                     text: L10nX.getStr.search,
                     radius: 16,
                     onTap: () {
-                      BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                      BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                     },
                   ),
                 ),
@@ -221,7 +221,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                   visible: constraints.maxWidth< 800,
                   child: InkWell(
                       onTap: () {
-                        BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                        BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                       },
                       child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                 ),

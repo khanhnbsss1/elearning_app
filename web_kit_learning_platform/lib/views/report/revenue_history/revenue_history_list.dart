@@ -187,7 +187,7 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                               
                                 },
                                 onFieldSubmitted: (value) {
-                                  BlocProvider.of<RevenueHistoryListBloc>(context).add(RevenueHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                  BlocProvider.of<RevenueHistoryListBloc>(context).add(RevenueHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value, pageNumber: 0)));
                                 },
                                 onTapOutside: (event) {
                                 },
@@ -227,7 +227,7 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                     child: ActionButton1(
                       text: L10nX.getStr.search,
                       onTap: () {
-                        BlocProvider.of<RevenueHistoryListBloc>(context).add(RevenueHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                        BlocProvider.of<RevenueHistoryListBloc>(context).add(RevenueHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                       },
                     ),
                   ),
@@ -235,7 +235,7 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                     visible: constraints.maxWidth< 800,
                     child: InkWell(
                         onTap: () {
-                          BlocProvider.of<RevenueHistoryListBloc>(context).add(RevenueHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                          BlocProvider.of<RevenueHistoryListBloc>(context).add(RevenueHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                         },
                         child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                   ),

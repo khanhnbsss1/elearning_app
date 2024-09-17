@@ -205,7 +205,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                     
                   },
                   onFieldSubmitted: (value) {
-                    BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                    BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value, pageNumber: 0)));
                   },
                   onTapOutside: (event) {
                   },
@@ -238,7 +238,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
             Gap(Dimens.size10),
             InkWell(
                 onTap: () {
-                  BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                  BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                 },
                 child: Icon(Icons.search_rounded, color: ColorConst.mainColor,size: Dimens.size40,)),
             Visibility(

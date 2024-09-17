@@ -188,7 +188,7 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                            
                              },
                              onFieldSubmitted: (value) {
-                               BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                               BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value, pageNumber: 0)));
                              },
                              onTapOutside: (event) {
                              },
@@ -202,7 +202,8 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                                  border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
                                  
                                  enabledBorder: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
-                                 focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),                                 prefixIcon: Align(
+                                 focusedBorder: focusedInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),                                
+                                 prefixIcon: Align(
                                      alignment: Alignment.center,
                                      child: Icon(
                                        LucideIcons.search,
@@ -228,7 +229,7 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                    child: ActionButton1(
                      text: L10nX.getStr.search,
                      onTap: () {
-                       BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                       BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                      },
                    ),
                  ),
@@ -236,7 +237,7 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                    visible: constraints.maxWidth< 600,
                    child: InkWell(
                        onTap: () {
-                         BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                         BlocProvider.of<TestListBloc>(context).add(TestListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                        },
                        child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                  ),
