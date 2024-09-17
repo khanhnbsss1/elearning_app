@@ -79,11 +79,12 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
         courseObject: state.courseObject, 
         courseResult: state.courseResult, 
         selectLessonInfo: state.selectLessonInfo));
-    if(state.selectLessonInfo!=null)
-      {
-        add(CourseDetailSelectLessonEvent(selectLessonInfo: state.selectLessonInfo!));
-      }
+
     await callApiGetRatingList(state.searchCommonRequestRating);
+    if(state.selectLessonInfo!=null)
+    {
+      add(CourseDetailSelectLessonEvent(selectLessonInfo: state.selectLessonInfo!));
+    }
   }
 
   Future<void> _onFinishLesson(
