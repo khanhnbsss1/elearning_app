@@ -220,7 +220,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
   Widget buildLectureName({required BuildContext context}) {
     return WidgetWithColumnTitleCommon(
       // title: '${L10nX.getStr.name}: ',
-      title: L10nX.getStr.lecture_name_str,
+      title: "${L10nX.getStr.name} ${L10nX.getStr.lesson_str.toLowerCase()}",
       isRequirement: true,
       // titleStyle: ,
       child: TextFormField(
@@ -228,7 +228,7 @@ class _CreateEditLesson extends State<CreateEditLesson>
         controller: _state.editingControllerLectureName,
         enabled: enableEdit,
         decoration: InputDecoration(
-          labelText: L10nX.getStr.lecture_name_str,
+          labelText: "${L10nX.getStr.name} ${L10nX.getStr.lesson_str.toLowerCase()}",
           labelStyle: MyTextStyle.bodySmall(xMuted: true),
           border: outlineInputBorder,
           prefixIcon: Icon(

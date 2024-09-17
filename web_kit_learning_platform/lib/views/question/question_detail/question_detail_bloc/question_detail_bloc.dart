@@ -177,7 +177,9 @@ class QuestionDetailBloc extends Bloc<QuestionDetailEvent, QuestionDetailState> 
               questionInfo: state.questionInfo
           ));
         }
+      
     MonitorLoading().dismiss();
+    FilterManager().getQuestionListAll("",isReload: true);
 
   }
 

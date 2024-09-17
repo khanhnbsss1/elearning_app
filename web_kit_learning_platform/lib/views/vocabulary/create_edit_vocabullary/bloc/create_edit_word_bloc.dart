@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/controller/add_word_controller.dart';
 import 'package:webkit/services/apis/sentence/models/sentence_info.dart';
@@ -239,7 +240,7 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
           vocabularyInfo:  state.vocabularyInfo,
         ));
       }
-
+    FilterManager().getVocabularyListAllInfo("", isReload: true);
   }  
   Future<void> _onUpdateWord(
       CreateEditWordUpdateWordEvent event,

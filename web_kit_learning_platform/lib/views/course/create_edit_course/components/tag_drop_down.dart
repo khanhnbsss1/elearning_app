@@ -54,7 +54,7 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                           itemAsString: (item) => item.name??"",
                           dropdownDecoratorProps: DropDownDecoratorProps(
                             dropdownSearchDecoration: InputDecoration(
-                              hintText: 'Select tags',
+                              hintText: L10nX.getStr.tags_select,
                               hintStyle: TextStyleConstant.textStyleBlack13w400,
                               alignLabelWithHint: true,
                               floatingLabelAlignment: FloatingLabelAlignment.center,

@@ -90,7 +90,7 @@ dependencies:
   flutter_phoenix: ^1.1.1
   file_picker: ^8.0.7
   provider: ^6.1.2
-  syncfusion_flutter_pdfviewer: ^26.2.11
+  syncfusion_flutter_pdfviewer: ^26.2.14
   open_filex: ^4.5.0
   just_audio: ^0.9.40
   dropdown_button2: ^2.3.9

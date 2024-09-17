@@ -122,7 +122,7 @@ class _LoginPageState extends State<LoginPage>
                                   ),
                                 ),
                                 MySpacing.height(40),
-                                MyText.bodyMedium(L10nX.getStr.your_email),
+                                MyText.bodyMedium(L10nX.getStr.account_text),
                                 MySpacing.height(8),
                                 TextFormField(
                                   validator: controller.basicValidator

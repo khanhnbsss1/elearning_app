@@ -183,6 +183,8 @@ class LessonDetailBloc extends Bloc<LessonDetailEvent, LessonDetailState> {
           ));
         }
     MonitorLoading().dismiss();
+    FilterManager().getLessonListAllInfo("", isReload: true);
+
   }
 
   Future<void> _onUploadDocument(

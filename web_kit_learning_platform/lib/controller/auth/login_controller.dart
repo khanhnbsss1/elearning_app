@@ -23,18 +23,19 @@ class LoginController extends MyController {
     initUser();
   }
   void initUser() {
-    String userName=  UserManager().getAccountLoginNearest();
-    emailOrPhone = userName;
+    emailOrPhone=  UserManager().getAccountLoginNearest().split("&&_&&").first;
+    password=  UserManager().getAccountLoginNearest().split("&&_&&").last;
+
     basicValidator.addField('email',
         required: true,
         label: "Email",
         validators: [MyEmailValidator()],
-        controller: TextEditingController(text: (kDebugMode) ? "0348074377" : emailOrPhone));
+        controller: TextEditingController(text: emailOrPhone));
     basicValidator.addField('password',
         required: true,
         label: "Password",
         validators: [MyLengthValidator(min: 6, max: 10)],
-        controller: TextEditingController(text: (kDebugMode) ? "Ll@123456" : password));
+        controller: TextEditingController(text: password));
   }
   void onChangeShowPassword() {
     showPassword = !showPassword;
@@ -58,7 +59,7 @@ class LoginController extends MyController {
       {
         if(isChecked)
         {
-          await UserManager().saveAccountLoginNearest(IdentifierConst.username);
+          await UserManager().saveAccountLoginNearest("${IdentifierConst.username}&&_&&${IdentifierConst.password}");
         }
         AppPages.routeName(Routes.courseList);
       }

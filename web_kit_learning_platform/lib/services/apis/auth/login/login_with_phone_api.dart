@@ -28,6 +28,7 @@ class LoginWithPhoneApi extends BaseApiRequest {
            await AuthorManager().handleLogout();
            await AuthorManager().saveAuthInfo(loginResponse);
            IdentifierConst.username = loginRequest.username??"";
+           IdentifierConst.password = loginRequest.password??"";
            GetUserProfileInfoApi getUserProfileInfoApi = GetUserProfileInfoApi();
            try{
              await getUserProfileInfoApi.call();

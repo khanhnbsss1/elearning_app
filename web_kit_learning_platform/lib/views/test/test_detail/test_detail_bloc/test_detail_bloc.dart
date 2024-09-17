@@ -12,6 +12,8 @@ import 'package:webkit/services/apis/test/get_test_detail.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
 import 'package:webkit/services/apis/test/update_test_api.dart';
 
+import '../../../../base/instance_mananger/filter_manager.dart';
+
 part 'test_detail_event.dart';
 part 'test_detail_state.dart';
 
@@ -94,6 +96,7 @@ class TestDetailBloc extends Bloc<TestDetailEvent, TestDetailState> {
           ));
         }
     MonitorLoading().dismiss();
+    FilterManager().getTestListAll("", isReload: true);
 
   }
 }

@@ -60,8 +60,9 @@ class FilterManager{
     return await getCourseFilterApi.call();
   }
 
-  Future<QuestionListResponseModel> getQuestionListAll(String keyword) async {
-    if((questionListResponseModel.content??[]).isNotEmpty) {
+  Future<QuestionListResponseModel> getQuestionListAll(String keyword,{bool? isReload}) async {
+  isReload??=false;
+    if((questionListResponseModel.content??[]).isNotEmpty&& isReload==false) {
       return questionListResponseModel;
     }
     GetQuizListApi getQuizFilterApi = GetQuizListApi(searchCommonRequest: SearchCommonRequest(pageNumber: -1));
@@ -69,8 +70,9 @@ class FilterManager{
     return questionListResponseModel;
   }
   
-  Future<QuestionListResponseModel> getFilterQuestion() async {
-    if((questionListResponseModel.content??[]).isNotEmpty) {
+  Future<QuestionListResponseModel> getFilterQuestion({bool? isReload}) async {
+    isReload??=false;
+    if((questionListResponseModel.content??[]).isNotEmpty && isReload==false) {
       return questionListResponseModel;
     }
     GetQuizFilterApi getQuizFilterApi = GetQuizFilterApi();
@@ -79,8 +81,9 @@ class FilterManager{
   }
 
 
-  Future<TestListResponseModel> getTestListAll(String keyword) async {
-    if((testListResponseModel.content??[]).isNotEmpty) {
+  Future<TestListResponseModel> getTestListAll(String keyword, {bool? isReload}) async {
+    isReload??=false;
+    if((testListResponseModel.content??[]).isNotEmpty&& isReload==false) {
       return testListResponseModel;
     }
     GetTestListApi getTestFilterApi = GetTestListApi(searchCommonRequest: SearchCommonRequest(pageNumber: -1));
@@ -122,8 +125,9 @@ class FilterManager{
     }
     return categoryListResponseModel;
   }
-  Future<LessonListResponseModel?> getLessonListAllInfo(String keyword) async {
-    if((lessonListResponseModel?.content??[]).isNotEmpty) {
+  Future<LessonListResponseModel?> getLessonListAllInfo(String keyword, {bool ?isReload}) async {
+    isReload??=false;
+    if((lessonListResponseModel?.content??[]).isNotEmpty && isReload==false) {
       return lessonListResponseModel;
     }
     GetLessonListApi getLessonListFilterApi = GetLessonListApi(searchCommonRequest: SearchCommonRequest(pageNumber: -1));
@@ -131,8 +135,9 @@ class FilterManager{
     return lessonListResponseModel;
   }
 
-  Future<VocabularyResponseModel?> getVocabularyListAllInfo(String keyword) async {
-    if((vocabularyResponseModel.content??[]).isNotEmpty) {
+  Future<VocabularyResponseModel?> getVocabularyListAllInfo(String keyword, {bool ?isReload}) async {
+    isReload??=false;
+    if((vocabularyResponseModel.content??[]).isNotEmpty && isReload==false) {
       return vocabularyResponseModel;
     }
     GetListVocabularyApi getLessonListFilterApi = GetListVocabularyApi(

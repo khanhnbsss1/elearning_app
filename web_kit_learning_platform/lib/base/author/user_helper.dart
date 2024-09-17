@@ -57,7 +57,7 @@ class UserManager{
   // Config account nearest
   Future<void> saveAccountLoginNearest(String account) async{
     // save account login nearest
-    SharedPreferencesStorage().saveString(SharedPre.accountNearest, account.toLowerCase().trim());
+    SharedPreferencesStorage().saveString(SharedPre.accountNearest, account);
   }
 
   String getAccountLoginNearest() {
