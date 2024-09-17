@@ -6,25 +6,19 @@ import 'package:lms_app/models/user/UserProfile.dart';
 class DeleteAccountApi extends BaseApiRequest {
   DeleteAccountApi()
       : super(
-    serviceType: SERVICE_TYPE.USER,
+    serviceType: SERVICE_TYPE.AUTHEN,
     apiName: ApiName().deleteAccount,
-    bodyMethod: BodyMethod.formData,
   );
 
   Future<void> call() async {
     await getAuthorization();
     dynamic data = await deleteRequestAPI();
-    if (data == ResponseCommon) {
-    } else {
-      ToastUtils.showToastError('error');
-    }
-    // MonitorLoading().dismiss();
   }
 
   Future<void> getAuthorization() async {
     // TODO: implement getAuthorization
     UserProfile? userProfile = UserManager().getUserProfile();
-    await setApiBody({'accountId': userProfile?.accountId});
+    await setParamsAdd({'accountId': userProfile?.accountId});
   }
 
   @override
