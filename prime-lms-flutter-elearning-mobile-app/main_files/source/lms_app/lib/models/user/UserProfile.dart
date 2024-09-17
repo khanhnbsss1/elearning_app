@@ -42,6 +42,7 @@ class UserProfile {
   String? roleName;
   int? isPayment;
   int? fileId;
+  String? accountId;
 
   String? imageUrl;
   List? role;
@@ -78,6 +79,7 @@ class UserProfile {
         this.permission,
         this.imageUrl,
         this.role,
+        this.accountId,
         this.enrolledCourses,
         this.wishList,
         this.isDisabled,
@@ -120,6 +122,7 @@ class UserProfile {
     roleName = json['roleName'];
     imageUrl = json['imageUrl'];
     role = json['role'];
+    accountId = json['account_id'];
     enrolledCourses = json['enrolledCourses'];
     wishList = json['wishList'] ?? [];
     isDisabled = json['isDisabled'];
@@ -156,6 +159,7 @@ class UserProfile {
     data['email'] = email??"";
     data['permissions'] = permission;
     data['role_id'] = roleId;
+    data['account_id'] = accountId;
     data['imageUrl'] = imageUrl;
     data['role'] = role;
     data['enrolledCourses'] = enrolledCourses;
@@ -206,6 +210,7 @@ class UserProfile {
     Subscription? subscription,
     List? completedLessons,
     String? platform,
+    String? accountId,
     List? reviews,
     int? isPayment,
     int? fileId,
@@ -232,6 +237,7 @@ class UserProfile {
       imageUrl: imageUrl ?? this.imageUrl,
       role: role ?? this.role,
       roleName: roleName ?? this.roleName,
+      accountId: accountId ?? this.accountId,
       enrolledCourses: enrolledCourses ?? this.enrolledCourses,
       wishList: wishList ?? this.wishList,
       isDisabled: isDisabled ?? this.isDisabled,

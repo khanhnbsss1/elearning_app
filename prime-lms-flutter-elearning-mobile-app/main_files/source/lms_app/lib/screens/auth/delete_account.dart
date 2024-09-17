@@ -96,7 +96,7 @@ class _DeleteDialog extends ConsumerWidget {
     // await SPService().clearLocalData();
     try {
       DeleteAccountApi deleteAccountApi = DeleteAccountApi();
-      // await deleteAccountApi.call();
+      await deleteAccountApi.call();
       await AuthService().deleteUserAuth();
       await UserManager().deleteAccountNearest();
       await UserManager().deleteUserProfile();

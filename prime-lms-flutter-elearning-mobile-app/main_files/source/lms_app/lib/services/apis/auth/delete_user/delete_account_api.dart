@@ -24,7 +24,7 @@ class DeleteAccountApi extends BaseApiRequest {
   Future<void> getAuthorization() async {
     // TODO: implement getAuthorization
     UserProfile? userProfile = UserManager().getUserProfile();
-    await setApiBody({'username': userProfile!.userName, 'type': userProfile.roleName});
+    await setApiBody({'accountId': userProfile?.accountId});
   }
 
   @override
