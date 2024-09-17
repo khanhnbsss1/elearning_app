@@ -81,6 +81,9 @@ class PermissionListBloc extends Bloc<PermissionListEvent, PermissionListState> 
         /// sau do call lay permission hien tai cua role can chinh sua
         if((state.roleId??'').isNotEmpty)
           {
+            emit(state.copyWith(
+                blocStatus: PermissionListStatus.onLoading,
+            ));
             GetPermissionListByRoleApi courseApi = GetPermissionListByRoleApi(roleId: state.roleId);
             PermissionListResponseModel permissionResponseModelChild = await courseApi.call();
             /// set trang thai quyen cua role con cho role cha de lay ra cac quyen cua role con

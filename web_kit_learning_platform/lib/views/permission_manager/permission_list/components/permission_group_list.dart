@@ -88,7 +88,9 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                 break;
                 // TODO: Handle this case.
             }
-            state.blocStatus= PermissionListStatus.unKnow;
+            if(state.blocStatus!=PermissionListStatus.onLoading) {
+              state.blocStatus= PermissionListStatus.unKnow;
+            }
           },
           builder: (BuildContext context, state) {
             return MyResponsive(
