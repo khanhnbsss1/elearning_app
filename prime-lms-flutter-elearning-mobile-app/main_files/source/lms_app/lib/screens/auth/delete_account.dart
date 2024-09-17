@@ -1,10 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:feather_icons/feather_icons.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:lms_app/base/author/user_helper.dart';
+import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
+import 'package:lms_app/screens/auth/login.dart';
 import 'package:lms_app/screens/home/home_bottom_bar.dart';
 import 'package:lms_app/screens/home/home_view.dart';
+import 'package:lms_app/services/apis/auth/delete_user/delete_account_api.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../providers/user_data_provider.dart';
@@ -84,16 +89,25 @@ class _DeleteDialog extends ConsumerWidget {
 
   void _handleDeleteAccount(context, WidgetRef ref, RoundedLoadingButtonController controller) async {
     controller.start();
-    final user = ref.read(userDataProvider);
-    await ApiService().deleteUserDatafromDatabase(user!.id.toString());
-    await AuthService().deleteUserAuth();
-    await AuthService().googleLogout();
-    await AuthService().userLogOut();
-    await SPService().clearLocalData();
-    ref.invalidate(userDataProvider);
-    ref.invalidate(homeTabControllerProvider);
-    ref.invalidate(navBarIndexProvider);
-    controller.success();
-    NextScreen.closeOthersAnimation(context, const IntroScreen());
+    // final user = ref.read(userDataProvider);
+    // await ApiService().deleteUserDatafromDatabase(user!.id.toString());
+    // await AuthService().googleLogout();
+    // await AuthService().userLogOut();
+    // await SPService().clearLocalData();
+    try {
+      DeleteAccountApi deleteAccountApi = DeleteAccountApi();
+      // await deleteAccountApi.call();
+      await AuthService().deleteUserAuth();
+      await UserManager().deleteAccountNearest();
+      await UserManager().deleteUserProfile();
+      await UserManager().deleteRecentAllUserInfo();
+      ref.invalidate(userDataProvider);
+      ref.invalidate(homeTabControllerProvider);
+      ref.invalidate(navBarIndexProvider);
+      controller.success();
+      NextScreen.closeOthersAnimation(context, const LoginScreen(popUpScreen: false,));
+    } catch (e) {
+      ToastUtils.showToastError(e.toString());
+    }
   }
 }

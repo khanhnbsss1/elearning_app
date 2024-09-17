@@ -39,6 +39,7 @@ class UserProfile {
   List<String>? permissionList;
   String? permission;
   int? roleId;
+  String? roleName;
   int? isPayment;
   int? fileId;
 
@@ -87,6 +88,7 @@ class UserProfile {
         this.reviews,
         this.isPayment,
         this.fileId,
+        this.roleName,
       });
 
   UserProfile.fromJson(Map<String, dynamic> json) {
@@ -115,6 +117,7 @@ class UserProfile {
       permissionList = (json['permissions'] as String).split(',');
     }
     roleId = json['role_id'];
+    roleName = json['roleName'];
     imageUrl = json['imageUrl'];
     role = json['role'];
     enrolledCourses = json['enrolledCourses'];
@@ -162,6 +165,7 @@ class UserProfile {
     data['authorInfo'] = null;
     // data['subscription'] = subscription?.toJson();
     data['subscription'] = null;
+    data['roleName'] = roleName;
     data['completedLessons'] = completedLessons;
     data['platform'] = platform;
     data['reviews'] = reviews;
@@ -193,6 +197,7 @@ class UserProfile {
     String? position,
     String? email,
     String? imageUrl,
+    String? roleName,
     List? role,
     List? enrolledCourses,
     List? wishList,
@@ -226,6 +231,7 @@ class UserProfile {
       email: email ?? this.email,
       imageUrl: imageUrl ?? this.imageUrl,
       role: role ?? this.role,
+      roleName: roleName ?? this.roleName,
       enrolledCourses: enrolledCourses ?? this.enrolledCourses,
       wishList: wishList ?? this.wishList,
       isDisabled: isDisabled ?? this.isDisabled,

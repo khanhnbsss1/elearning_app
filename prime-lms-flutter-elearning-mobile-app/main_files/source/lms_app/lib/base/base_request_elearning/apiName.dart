@@ -17,7 +17,6 @@ class ApiName {
   final String registerTeacherByUserName = "/register-teacher";
   final String registerTeacherByPhone = "/register-phone-teacher";
   final String refreshToken = "/refresh-token";
-  final String deleteAccount = "/delete-account";
 
   //user role
   final String createRole = "/create-role";
@@ -62,6 +61,7 @@ class ApiName {
   final String getUserDetail = "/get-user";
   final String updatePassword = "/update-password";
   final String getUserList = "/get-user-list";
+  final String deleteAccount = "/get-delete-account";
 
   /// them tu dien
   final String addVocabulary = "/create-vocabulary";
