@@ -195,7 +195,7 @@ class _CategoryListPageState extends State<CategoryListPage> with SingleTickerPr
                               
                                 },
                                 onFieldSubmitted: (value) {
-                                  BlocProvider.of<CategoryListBloc>(context).add(CategoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                  BlocProvider.of<CategoryListBloc>(context).add(CategoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value, pageNumber: 0)));
                                 },
                                 onTapOutside: (event) {
                                 },
@@ -235,7 +235,7 @@ class _CategoryListPageState extends State<CategoryListPage> with SingleTickerPr
                     child: ActionButton1(
                       text: L10nX.getStr.search,
                       onTap: () {
-                        BlocProvider.of<CategoryListBloc>(context).add(CategoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                        BlocProvider.of<CategoryListBloc>(context).add(CategoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                       },
                     ),
                   ),
@@ -243,7 +243,7 @@ class _CategoryListPageState extends State<CategoryListPage> with SingleTickerPr
                     visible: constraints.maxWidth< 800,
                     child: InkWell(
                         onTap: () {
-                          BlocProvider.of<CategoryListBloc>(context).add(CategoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                          BlocProvider.of<CategoryListBloc>(context).add(CategoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                         },
                         child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                   ),

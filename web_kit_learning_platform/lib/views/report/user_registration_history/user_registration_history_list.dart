@@ -183,7 +183,7 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
                     child: ActionButton1(
                       text: L10nX.getStr.search,
                       onTap: () {
-                        BlocProvider.of<UserRegistrationHistoryListBloc>(context).add(UserRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                        BlocProvider.of<UserRegistrationHistoryListBloc>(context).add(UserRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                       },
                     ),
                   ),
@@ -191,7 +191,7 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
                     visible: constraints.maxWidth< 800,
                     child: InkWell(
                         onTap: () {
-                          BlocProvider.of<UserRegistrationHistoryListBloc>(context).add(UserRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                          BlocProvider.of<UserRegistrationHistoryListBloc>(context).add(UserRegistrationHistoryListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                         },
                         child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                   ),

@@ -27,6 +27,10 @@ class DropDownSearch extends StatelessWidget with UIMixin{
       // enabled: (state.courseInfo?.mode??"PREMIUM")=="PREMIUM",
       dropdownButtonProps: DropdownButtonProps(
           padding: EdgeInsets.zero,
+        constraints: BoxConstraints(
+        minHeight: Dimens.size20,
+        maxHeight: Dimens.size40,
+      ),
         style: ButtonStyle(
           textStyle: WidgetStatePropertyAll(TextStyleConstant.textStyleBlack13w400,)
         )
@@ -63,11 +67,17 @@ class DropDownSearch extends StatelessWidget with UIMixin{
             size: Dimens.size20,
             color: ColorConst.colorIconRed,
           ),
+          contentPadding: EdgeInsets.symmetric( vertical:  Dimens.size16, horizontal: Dimens.size8),
           constraints: BoxConstraints(
-            minHeight: Dimens.size45,
-            maxHeight: Dimens.size45,
+            minHeight: Dimens.size30,
+            maxHeight: Dimens.size40,
           ),
-          contentPadding: MySpacing.all(Dimens.size14),
+          prefixIconConstraints: BoxConstraints(
+            minHeight: Dimens.size30,
+            maxHeight: Dimens.size40,
+            minWidth: Dimens.size30,
+            maxWidth: Dimens.size40,
+          ),
           // isCollapsed: true,
           floatingLabelBehavior: FloatingLabelBehavior.never,
         ),

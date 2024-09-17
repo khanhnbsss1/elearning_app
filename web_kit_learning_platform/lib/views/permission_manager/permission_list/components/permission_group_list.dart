@@ -88,7 +88,9 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                 break;
                 // TODO: Handle this case.
             }
-            state.blocStatus= PermissionListStatus.unKnow;
+            if(state.blocStatus!=PermissionListStatus.onLoading) {
+              state.blocStatus= PermissionListStatus.unKnow;
+            }
           },
           builder: (BuildContext context, state) {
             return MyResponsive(
@@ -172,7 +174,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                             
                               },
                               onFieldSubmitted: (value) {
-                                BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value)));
+                                BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: value, pageNumber: 0)));
                               },
                               onTapOutside: (event) {
                               },
@@ -213,7 +215,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                     text: L10nX.getStr.search,
                     radius: 16,
                     onTap: () {
-                      BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                      BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                     },
                   ),
                 ),
@@ -221,7 +223,7 @@ class _PermissionGroupListPageState extends State<PermissionGroupListPage> with 
                   visible: constraints.maxWidth< 800,
                   child: InkWell(
                       onTap: () {
-                        BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text)));
+                        BlocProvider.of<PermissionListBloc>(context).add(PermissionListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(keyword: textEditingController.text, pageNumber: 0)));
                       },
                       child: Icon(Icons.search, color: ColorConst.mainColor,size: Dimens.size40,)),
                 ),

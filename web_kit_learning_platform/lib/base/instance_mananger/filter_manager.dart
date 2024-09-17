@@ -47,8 +47,7 @@ class FilterManager{
   CourseProgressResponseModel courseProgressResponseModel = CourseProgressResponseModel(content: []);
   Future<void> init()async {
     await getFilterCourse();
-   await getCourseFilter();
-   await getCategoryFilter();
+    await getCategoryFilter();
    await getGradesInfo();
   }
 

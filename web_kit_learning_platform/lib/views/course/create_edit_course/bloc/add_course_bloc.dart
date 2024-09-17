@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/controller/ui/add_course_controller.dart';
 import 'package:webkit/services/apis/course/add_course/add_course_api.dart';
 import 'package:webkit/services/apis/course/course_detail/get_course_detail_api.dart';
@@ -130,11 +131,9 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     state.controller?.basicValidator.getController('category_name')?.text = state.courseInfo?.categoryName??'';
     state.controller?.basicValidator.getController('video_preview')?.text = state.courseInfo?.videoPreview??'';
     state.controller?.basicValidator.getController('accompany_course')?.text = state.courseInfo?.accompanyCourse??'';
-
     
-    GetAddCourseFilterApi addCourseFilterApi = GetAddCourseFilterApi();
-    GetAddCourseFilterModel addCourseFilterModel = await addCourseFilterApi.call();
-    addCourseFilterModel.data?.forEach((data) {
+    GetAddCourseFilterModel? addCourseFilterModel = await FilterManager().getCourseFilter();
+    addCourseFilterModel?.data?.forEach((data) {
       switch (data.filterType) {
         case 'CATEGORY':
           data.subFilter!.where((e) => e.name != null).forEach((e) {
