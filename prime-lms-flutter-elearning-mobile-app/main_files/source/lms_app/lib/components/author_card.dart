@@ -25,6 +25,7 @@ class AuthorCard extends StatelessWidget{
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.only(right: 15),
       decoration: BoxDecoration(
+        color: Colors.white,
         border: Border.all(color: AppService.isDarkMode(context) ? CustomColor.borderDark : CustomColor.border),
         borderRadius: BorderRadius.circular(5),
       ),

@@ -37,6 +37,7 @@
     "view-all": "查看全部",
     "explore": "探索",
     "free-courses": "免费课程",
+    "free-course": "免费课程",
     "top-courses-in": "热门课程在",
     "top": "热门",
     "instructors": "讲师",
@@ -196,5 +197,7 @@
     "test-name": "测试名称: {}",
     "test-durian": "工作时间: {}",
     "test-type": "测试类型: {}",
-    "test-length": "问题数量: {}"
+    "test-length": "问题数量: {}",
+    "all-courses": "所有课程",
+    "tests": "测试"
 }

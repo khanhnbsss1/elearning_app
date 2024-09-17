@@ -14,6 +14,7 @@ import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
 
 import '../../configs/app_assets.dart';
 import '../../constants/custom_colors.dart';
+import '../../utils/next_screen.dart';
 
 class TestListScreen extends StatefulWidget {
   const TestListScreen({super.key});
@@ -42,11 +43,11 @@ class _TestListScreenState extends State<TestListScreen> {
         ),
       ),
       body: FutureBuilder(
-        future: Future.wait([getScoreList(),getTestList()]),
+        future: Future.wait([getTestList()]),
         builder: (context,AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasData) {
-            testScoreList = snapshot.data![0];
-            testList = snapshot.data![1];
+            // testScoreList = snapshot.data![0];
+            testList = snapshot.data![0];
             return ListView.separated(
                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 itemCount: testList.length,
@@ -54,7 +55,7 @@ class _TestListScreenState extends State<TestListScreen> {
                 separatorBuilder: (context, _) => const SizedBox(height: 10),
                 itemBuilder: (BuildContext context, int index) {
                   const bool isExpanded = true;
-                  List<dynamic> point = getPointFromTestScoreId(testScoreList, testList[index].id!);
+                  // List<dynamic> point = getPointFromTestScoreId(testScoreList, testList[index].id!);
                   return ExpansionTile(
                     tilePadding: const EdgeInsets.symmetric(horizontal: 20,),
                     collapsedShape: RoundedRectangleBorder(
@@ -76,10 +77,10 @@ class _TestListScreenState extends State<TestListScreen> {
                     ),
                     children: [
                       ListTile(
-                        // onTap: () => openDialog(context, testList[index]),
-                        onTap: () {},
+                        onTap: () => openDialog(context),
+                        // onTap: () {},
                         title: Text('${'type-test'.tr()} ${testList[index].typeTest??"-"}'),
-                        subtitle: Text('$point'),
+                        // subtitle: Text('$point'),
                       )
                     ],
                     // onExpansionChanged: (bool value) => ref.read(isSectionExpnadedProvider((section.id??0).toString()).notifier).update((state) => value),
@@ -120,11 +121,11 @@ class _TestListScreenState extends State<TestListScreen> {
     return testScoreList;
   }
 
-  Future<void> openDialog(BuildContext context,TestDetail test) {
+  Future<void> openDialog(BuildContext context,) {
     return Dialogs.materialDialog(
       context: context,
       title: 'Do-test-title'.tr(),
-      msg: 'do-test-subtitle'.tr(),
+      msg: 'Do-test-subtitle'.tr(),
       titleAlign: TextAlign.center,
       titleStyle: Theme
           .of(context)
@@ -147,7 +148,7 @@ class _TestListScreenState extends State<TestListScreen> {
         IconsOutlineButton(
           onPressed: () {
             Navigator.pop(context);
-            // NextScreen.normal(context, TestScreen(test: test));
+            // NextScreen.normal(context, Test(test: test));
           },
           text: 'ready'.tr(),
           color: Theme

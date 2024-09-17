@@ -37,6 +37,7 @@
     "view-all": "view all",
     "explore": "Explore",
     "free-courses": "Free Courses",
+    "free-course": "Free Courses",
     "top-courses-in": "Top Courses in",
     "top": "Top",
     "instructors": "Instructors",
@@ -196,5 +197,7 @@
     "test-name": "Test name: {}",
     "test-durian": "Working time: {}",
     "test-type": "Type of Test: {}",
-    "test-length": "Number of questions: {}"
+    "test-length": "Number of questions: {}",
+    "all-courses": "All courses",
+    "tests": "Tests"
 }

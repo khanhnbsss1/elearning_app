@@ -29,6 +29,7 @@ class HomeView extends ConsumerWidget {
             Dictionary(),
             ProfileTab(),
           ],
-        ));
+        ),
+    );
   }
 }

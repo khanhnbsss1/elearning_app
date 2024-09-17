@@ -29,7 +29,7 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
     final gridStyle = ref.watch(gridStyleProvider);
     return Scaffold(
       appBar: AppBar(
-        title: (widget.filter == "All") ? Text('latest-courses'.tr()) : (widget.subFilterInfo == null) ? Text(widget.filter.replaceAll("_", " ")) : Text(widget.subFilterInfo!.name!.toUpperCase()),
+        title: (widget.filter == "All") ? Text('latest-courses'.tr()) : (widget.subFilterInfo == null) ? Text(widget.filter.replaceAll('_','-').tr()) : Text(widget.subFilterInfo!.name!.toUpperCase()),
         titleTextStyle: Theme.of(context)
             .textTheme
             .titleMedium

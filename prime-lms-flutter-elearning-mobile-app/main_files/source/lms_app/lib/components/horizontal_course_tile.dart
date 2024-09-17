@@ -28,6 +28,7 @@ class HorizontalCourseTile extends StatelessWidget {
       onTap: () => NextScreen.iOS(
           context, CourseDetailsView(courses: course, heroTag: heroTag)),
       child: Container(
+        color: Colors.white,
         width: MediaQuery.of(context).size.width * widthPercentage,
         margin: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
@@ -53,32 +54,32 @@ class HorizontalCourseTile extends StatelessWidget {
                 // PremiumTag(course: course),
               ],
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  course.name!,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleMedium
-                      ?.copyWith(fontWeight: FontWeight.w600),
-                ),
-                const SizedBox(height: 3),
-                RatingViewer(rating: (course.ratePoint ?? 0).toDouble()),
-                const SizedBox(height: 3),
-                Text(
-                  'total-lectures',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.copyWith(color: Colors.blueGrey),
-                ).tr(args: [course.totalLectures.toString()])
-              ],
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    course.name!,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(fontWeight: FontWeight.w600),
+                  ),
+                  const SizedBox(height: 3),
+                  RatingViewer(rating: (course.ratePoint ?? 0).toDouble()),
+                  const SizedBox(height: 3),
+                  Text(
+                    'total-lectures',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(color: Colors.blueGrey),
+                  ).tr(args: [course.totalLectures.toString()])
+                ],
+              ),
             )
           ],
         ),
