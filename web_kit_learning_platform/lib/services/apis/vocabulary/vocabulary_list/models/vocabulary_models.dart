@@ -2,6 +2,7 @@ import 'package:webkit/base/services/base_request/models/page_model.dart';
 import 'package:webkit/services/apis/sentence/models/sentence_info.dart';
 import 'package:webkit/services/apis/upload_file/models/upload_file_info.dart';
 
+
 class VocabularyResponseModel extends PageModel{
   List<VocabularyInfo>? content;
 
@@ -30,6 +31,11 @@ class VocabularyResponseModel extends PageModel{
   }
 
 }
+enum VocabularyType{
+  vocabularyNonImage,
+  vocabularyImage
+}
+
 class VocabularyInfo {
   int? id;
   String? simplified;
@@ -53,6 +59,7 @@ class VocabularyInfo {
 
   UploadFileResponseInfo? audioFileInfo;
   UploadFileResponseInfo? imageFileInfo;
+  VocabularyType? vocabularyType;
   VocabularyInfo(
       {this.id,
         this.simplified,
@@ -74,7 +81,8 @@ class VocabularyInfo {
         this.audioFileInfo,
         this.sentenceInfos,
         this.imageFileInfo,
-        this.isMapAudio
+        this.isMapAudio,
+        this.vocabularyType
       }){
     sentenceInfos??=[];
     isMapAudio??=false;
@@ -86,6 +94,7 @@ class VocabularyInfo {
     traditional = json['traditional'];
     pinyinTones = json['pinyin_tones'];
     translationVn = json['translation_vn'];
+    
     gradeId = json['grade_id'];
     lectureId = json['lecture_id'];
     audio = json['audio'];
@@ -104,7 +113,7 @@ class VocabularyInfo {
         sentenceInfos?.add(new SentenceInfo.fromJson(v));
       });
     }
-
+    vocabularyType = json['type_vocabulary']== "NoImage"? VocabularyType.vocabularyNonImage: VocabularyType.vocabularyImage;
   }
 
   Map<String, dynamic> toJson() {

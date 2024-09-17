@@ -73,6 +73,7 @@ import 'package:webkit/views/video_player/video_player.dart';
 import 'package:webkit/views/vocabulary/vocabulary_list/bloc/vocabulary_list_bloc.dart';
 import 'package:webkit/views/vocabulary/vocabulary_list/vocabulary_list.dart';
 
+import '../services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import '../views/auth/locked_2.dart';
 import '../views/dashboard.dart';
 import '../views/error_pages/coming_soon_page.dart';
