@@ -34,6 +34,7 @@ class FeaturedCourseTile extends StatelessWidget {
           border: Border.all(
             color: AppService.isDarkMode(context) ? CustomColor.borderDark : CustomColor.border
           ),
+          color: Colors.white,
           borderRadius: BorderRadius.circular(5),
         ),
         child: Column(
