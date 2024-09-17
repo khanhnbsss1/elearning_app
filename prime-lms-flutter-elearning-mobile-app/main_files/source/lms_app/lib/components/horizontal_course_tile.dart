@@ -60,8 +60,8 @@ class HorizontalCourseTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    course.name!,
-                    maxLines: 3,
+                    '${course.name!} \n',
+                    maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context)
                         .textTheme

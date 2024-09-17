@@ -3,23 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/loading_tile.dart';
 import 'package:lms_app/models/course.dart';
+import 'package:lms_app/screens/tabs/home_tab/featured_courses.dart';
 import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:lms_app/utils/next_screen.dart';
+import '../../../components/featured_course_tile.dart';
 import '../../../components/horizontal_course_tile.dart';
 import '../../all_courses.dart/courses_view.dart';
 
-final freeCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>>((ref) async {
-  final List<CourseInfo>? courses = await ApiService().getFreeCourses();
-  return courses??[];
-});
-
-class FreeCourses extends ConsumerWidget {
-  const FreeCourses({super.key});
+class FeaturedCoursesSlide extends ConsumerWidget {
+  const FeaturedCoursesSlide({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final courses = ref.watch(freeCoursesProvider);
+    final courses = ref.watch(featuredCoursesProvider);
     return courses.when(
         skipLoadingOnRefresh: false,
         data: (courses) {
@@ -28,20 +25,20 @@ class FreeCourses extends ConsumerWidget {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
                         child: RichText(
                             text: TextSpan(
-                                text: 'free-courses'.tr(),
-                                style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.blueAccent, fontWeight: FontWeight.bold),
-                              )
-                            ),
+                              text: 'featured'.tr(),
+                              style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.blueAccent, fontWeight: FontWeight.bold),
+                            )
+                        ),
                       ),
                       TextButton(
-                        onPressed: () => NextScreen.iOS(context, const AllCoursesView(filter: 'Free_course')),
+                        onPressed: () => NextScreen.iOS(context, const AllCoursesView(filter: '')),
                         // onPressed: () {},
                         style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
                         child: Text(
@@ -58,7 +55,7 @@ class FreeCourses extends ConsumerWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: courses.map((course) {
-                      return HorizontalCourseTile(course: course, widthPercentage: 0.60, imageHeight: 130);
+                      return HorizontalCourseTile(course: course,widthPercentage: 0.60, imageHeight: 130);
                     }).toList(),
                   ),
                 )

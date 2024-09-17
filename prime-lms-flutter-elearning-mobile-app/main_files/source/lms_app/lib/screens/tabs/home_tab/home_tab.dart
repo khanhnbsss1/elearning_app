@@ -7,6 +7,7 @@ import 'package:line_icons/line_icons.dart';
 import 'package:lms_app/base/author/user_helper.dart';
 import 'package:lms_app/components/app_logo.dart';
 import 'package:lms_app/screens/tabs/dictionary/dictionary.dart';
+import 'package:lms_app/screens/tabs/home_tab/featured_courses_slide.dart';
 import 'package:lms_app/screens/tabs/home_tab/top_authors.dart';
 import 'package:lms_app/screens/notifications/notifications.dart';
 import 'package:lms_app/screens/search/search_view.dart';
@@ -117,7 +118,7 @@ class HomeTab extends ConsumerWidget {
                     height: 20,
                   ),
                   Wrap(
-                    spacing: spacing,
+                    spacing: 30,
                     runSpacing: spacing,
                     direction: Axis.horizontal,
                     children: List.generate(
@@ -130,8 +131,11 @@ class HomeTab extends ConsumerWidget {
                             )),
                   ),
                   Visibility(
-                      visible: settings?.featured ?? true,
+                      visible: settings?.featured ?? false,
                       child: const FeaturedCourses()),
+                  Visibility(
+                      visible: settings?.featured ?? true,
+                      child: const FeaturedCoursesSlide()),
                   // Visibility(visible: settings?.categories ?? true, child: const HomeCategories()),
                   Visibility(
                       visible: settings?.freeCourses ?? true,

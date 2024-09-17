@@ -28,7 +28,7 @@ class FeaturedCourseTile extends StatelessWidget {
     return InkWell(
       onTap: () => NextScreen.iOS(context, CourseDetailsView(courses: course, heroTag: heroTag)),
       child: Container(
-        width: MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width * 0.6,
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         decoration: BoxDecoration(
           border: Border.all(

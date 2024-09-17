@@ -7,9 +7,9 @@ import 'package:lms_app/services/api_service.dart';
 import '../../../components/featured_course_tile.dart';
 import '../../../services/apis/course/course_detail/models/course_detail_model.dart';
 
-final featuredCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>?>((ref) async {
+final featuredCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>>((ref) async {
   final List<CourseInfo>? courses = await ApiService().getFeaturedCourses();
-  return courses;
+  return courses??[];
 });
 
 class FeaturedCourses extends ConsumerWidget {
@@ -21,7 +21,7 @@ class FeaturedCourses extends ConsumerWidget {
     return courses.when(
       skipLoadingOnRefresh: false,
       data: (courses) {
-        return (courses!.isNotEmpty) ?
+        return (courses.isNotEmpty) ?
         carousel_slider.CarouselSlider(
           items: courses.map((course) {
             return FeaturedCourseTile(course: course);

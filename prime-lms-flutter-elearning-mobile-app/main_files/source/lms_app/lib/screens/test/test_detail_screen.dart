@@ -5,17 +5,9 @@ import 'package:lms_app/services/apis/test/models/test_detail.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:material_dialogs/dialogs.dart';
 import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
-import '../../base/base_request_elearning/models/search_common_request.dart';
-import '../../configs/app_assets.dart';
-import '../../constants/custom_colors.dart';
-import '../../services/apis/lessson/models/lesson_info.dart';
 import '../../services/apis/question/models/question_info.dart';
 import '../../services/apis/scores/get_score_api.dart';
 import '../../services/apis/scores/models/test_score_list.dart';
-import '../../services/apis/test/get_test_list_api.dart';
-import '../../services/apis/test/models/test_info.dart';
-import '../../utils/empty_animation.dart';
-import '../../utils/loading_widget.dart';
 
 class TestDetailScreen extends StatefulWidget {
   const TestDetailScreen(
@@ -50,14 +42,7 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: FutureBuilder(
-          future: Future.wait([getScoreList()]),
-          builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-            if (snapshot.hasData) {
-              testScoreList = snapshot.data![0];
-              List<TestHistory> point =
-                  getPointFromTestScoreId(testScoreList, widget.test.id!);
-              return Padding(
+      body: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: SingleChildScrollView(
                   child: Column(
@@ -71,7 +56,11 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
                         height: 8,
                       ),
                       Text(
-                        'test-durian'.tr(args: [test.durian ?? "-"]),
+                        'test-durian'.tr(args: [
+                          test.durian == '0' || test.durian == null
+                              ? "10:00"
+                              : test.durian!
+                        ]),
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       const SizedBox(
@@ -92,57 +81,71 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
                       const SizedBox(
                         height: 8,
                       ),
-                      Text(
-                        'test-taking-history'.tr(),
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      ListView.separated(
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 8),
-                        itemCount: point.length,
-                        shrinkWrap: true,
-                        separatorBuilder: (context, _) =>
-                            const SizedBox(height: 10),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                point[point.length - 1 - index].time,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black,
-                                        fontSize: 17),
-                              ),
-                              Text(
-                                '${point[point.length - 1 - index].point}',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black,
-                                        fontSize: 17),
-                              ),
-                            ],
-                          );
-                        },
-                      ),
+                      FutureBuilder(
+                          future: Future.wait([getScoreList()]),
+                          builder:
+                              (context, AsyncSnapshot<List<dynamic>> snapshot) {
+                            if (snapshot.hasData) {
+                              testScoreList = snapshot.data![0];
+                              List<TestHistory> point = getPointFromTestScoreId(
+                                  testScoreList, widget.test.id!);
+                              return Column(
+                                children: [
+                                  Text(
+                                    'test-taking-history'.tr(),
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                  ListView.separated(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 8),
+                                    itemCount: point.length,
+                                    shrinkWrap: true,
+                                    separatorBuilder: (context, _) =>
+                                        const SizedBox(height: 10),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            point[point.length - 1 - index]
+                                                .time,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium
+                                                ?.copyWith(
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.black,
+                                                    fontSize: 17),
+                                          ),
+                                          Text(
+                                            '${point[point.length - 1 - index].point}',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium
+                                                ?.copyWith(
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.black,
+                                                    fontSize: 17),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ],
+                              );
+                            } else {
+                              return const SizedBox();
+                            }
+                          })
                     ],
                   ),
                 ),
-              );
-            } else if (snapshot.hasError) {
-              return EmptyAnimation(
-                  animationString: emptyAnimation, title: 'no-test'.tr());
-            } else {
-              return const Center(child: LoadingIndicatorWidget());
-            }
-          }),
+              ),
       bottomNavigationBar: BottomAppBar(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 12),
         child: TextButton(

@@ -7,6 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/base/author/user_helper.dart';
 import 'package:lms_app/base/widgets/common/alert_dialog/loading.common.dart';
+import 'package:lms_app/base/widgets/my_button.dart';
 import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
 import 'package:lms_app/components/loading_tile.dart';
 import 'package:lms_app/mixins/course_mixin.dart';
@@ -27,8 +28,10 @@ import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
 import '../../base/image_manager/images_constant.dart';
 import '../../base/theme/colors_app.dart';
 import '../../base/widgets/common/alert_dialog/loading_logo.dart';
+import '../../services/apis/question/models/question_info.dart';
 import '../../services/apis/test/get_test_detail.dart';
 import '../../services/apis/test/models/test_detail.dart';
+import '../test/quiz_lesson/quiz_screen.dart';
 
 class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
   const Lessons({
@@ -361,12 +364,167 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
     );
     TestDetail test = await getTestDetail(lessonDetail.testId!);
     EasyLoading.dismiss();
-    NextScreen.normal(
-        context,
-        TestDetailScreen(
-          test: test,
-          courseId: courseDetail.id!,
-          lectureId: lessonDetail.id!,
-        ));
+    showDialog(
+      context: context,
+      builder: (context) => TestDetailDialog(
+        test: test,
+        courseId: courseDetail.id!,
+        lectureId: lessonDetail.id!,
+      ),
+    );
+    // NextScreen.normal(
+    //     context,
+    //     TestDetailScreen(
+    //       test: test,
+    //       courseId: courseDetail.id!,
+    //       lectureId: lessonDetail.id!,
+    //     ));
+  }
+}
+
+class TestDetailDialog extends StatefulWidget {
+  const TestDetailDialog(
+      {super.key,
+        required this.test,
+        required this.courseId,
+        required this.lectureId});
+
+  final TestDetail test;
+  final int courseId;
+  final int lectureId;
+
+  @override
+  State<TestDetailDialog> createState() => _TestDetailDialogState();
+}
+
+class _TestDetailDialogState extends State<TestDetailDialog> {
+  @override
+  Widget build(BuildContext context) {
+    TestDetail test = widget.test;
+    return Dialog(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Text(
+                'test-detail'.tr(),
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Text(
+              'test-name'.tr(args: [test.name ?? "-"]),
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Text(
+              'test-durian'.tr(args: [
+                test.durian == '0' || test.durian == null
+                    ? "10:00"
+                    : test.durian!
+              ]),
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Text(
+              'test-type'.tr(args: [test.typeTest ?? "-"]),
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            Text(
+              'test-length'
+                  .tr(args: [(test.quizs?.length ?? 0).toString()]),
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  MyButton(
+                    backgroundColor: Colors.white,
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('cancel'.tr(), style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).primaryColor
+                    ),),
+                  ),
+                  MyButton(
+                    backgroundColor: Theme.of(context).primaryColor,
+                    onTap: () {
+                        Navigator.pop(context);
+                        List<QuestionInfo>? questions = widget.test.quizs;
+                        NextScreen.replace(
+                            context,
+                            QuizLesson(
+                              questions: questions,
+                              test: widget.test,
+                              courseId: widget.courseId,
+                              lectureId: widget.lectureId,
+                            ));
+                    },
+                    child: Text('do-test'.tr(), style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.white
+                    ),),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> beginTestDialog(BuildContext context) {
+    return Dialogs.materialDialog(
+      context: context,
+      title: 'Do-test-title'.tr(),
+      msg: 'Do-test-subtitle'.tr(),
+      titleAlign: TextAlign.center,
+      titleStyle: Theme.of(context).textTheme.titleLarge!,
+      msgAlign: TextAlign.center,
+      msgStyle: Theme.of(context).textTheme.titleMedium,
+      barrierDismissible: true,
+      color: Theme.of(context).scaffoldBackgroundColor,
+      actions: <Widget>[
+        IconsOutlineButton(
+          onPressed: () => Navigator.pop(context),
+          text: 'close'.tr(),
+        ),
+        IconsOutlineButton(
+          onPressed: () {
+            Navigator.pop(context);
+            List<QuestionInfo>? questions = widget.test.quizs;
+            NextScreen.replace(
+                context,
+                QuizLesson(
+                  questions: questions,
+                  test: widget.test,
+                  courseId: widget.courseId,
+                  lectureId: widget.lectureId,
+                ));
+          },
+          text: 'yes'.tr(),
+          color: Theme.of(context).primaryColor,
+          textStyle:
+          const TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
+        ),
+      ],
+    );
   }
 }

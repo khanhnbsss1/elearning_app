@@ -1,3 +1,4 @@
+import 'package:lms_app/base/base_request_elearning/models/search_common_request.dart';
 import 'package:lms_app/services/apis/scores/models/test_score_list.dart';
 import '../../../base/base_request_elearning/BaseApiRequest.dart';
 
@@ -8,7 +9,7 @@ class GetScoreApi extends BaseApiRequest {
   );
 
   Future<TestScoreList> call() async {
-    dynamic result = await getRequestAPI();
+    dynamic result = await postRequestAPI();
     if(result.runtimeType == ResponseCommon)
     {
       return TestScoreList();
@@ -27,6 +28,10 @@ class GetScoreApi extends BaseApiRequest {
   Future<void> onRequestSuccess(var data) async {
     // TODO: implement onRequestSuccess
     super.onRequestSuccess(data);
+    setApiBody(SearchCommonRequest(
+      pageSize: 100,
+      pageNumber: 0
+    ));
   }
 
   @override
