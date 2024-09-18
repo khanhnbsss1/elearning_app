@@ -90,6 +90,7 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
                   child: Text(
                     "${widget.questionIndex.toString()}. ${(widget.questionInfo.questionName ?? "").isNotEmpty ?
                     (widget.questionInfo.questionName ?? "") : " Đáp án này sau đây là đúng ?"}",
+                    maxLines: 10,
                     style: TextStyleConstant.textStyleBlack14w400,
                   ),
                 ),
@@ -170,7 +171,7 @@ class QuestionWorkItemState extends State<QuestionWorkItem> with UIMixin{
                       Gap(Dimens.size12),
                       Expanded(
                         child: TextFormField(
-                          keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.multiline,
                           controller: controller,
                           onTapOutside: (event) {
                             if(widget.onChangeAnswer!=null && widget.questionInfo.questionType == QuestionType.fill)

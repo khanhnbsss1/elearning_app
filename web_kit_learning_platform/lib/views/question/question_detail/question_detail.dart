@@ -284,7 +284,7 @@ class _CreateEditLesson extends State<QuestionCreateEditDetailPage>
       isRequirement: true,
       // titleStyle: ,
       child: TextFormField(
-        keyboardType: TextInputType.text,
+        keyboardType: TextInputType.multiline,
         controller: _state.editingControllerQuestionName,
         enabled: enableEdit,
         minLines: 3,
