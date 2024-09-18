@@ -144,7 +144,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
             buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
             SizedBox(height: Dimens.size8,),
             Visibility(
-              visible: true, //UserManager().userContainPermission(permissionList: ["vocabulary.delete.delete_vocabulary"]),
+              visible: UserManager().userContainPermission(permissionList: ["vocabulary.delete.delete_vocabulary"]),
               child: Column(
                 children: [
                   Row(
