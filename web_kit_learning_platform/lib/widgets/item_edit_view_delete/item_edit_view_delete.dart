@@ -37,8 +37,8 @@ class ItemViewEditDelete extends StatelessWidget{
                   borderRadius: BorderRadius.circular(Dimens.size20)
               ),
               constraints: BoxConstraints(
-                maxHeight: Dimens.size30,
-                maxWidth: Dimens.size30,
+                maxHeight: Dimens.size35,
+                maxWidth: Dimens.size35,
               ),
               child: Center(
                 child: InkWell(
