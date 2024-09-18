@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/constant/constant.dart';
 import 'package:webkit/base/widgets/static_view/static_view.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/helpers/localizations/language_helper.dart';
@@ -458,10 +459,10 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
               ),
               InkWell(
                 onTap: () async {
-                  launchUrlString("tel://0123456789");
+                  launchUrlString("tel://${Constant().phoneNumber}");
                   final Uri smsLaunchUri = Uri(
                     scheme: 'tel',
-                    path: '0123456789',
+                    path: Constant().phoneNumber,
                     queryParameters: <String, String>{
                     },
                   );
@@ -472,7 +473,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                   children: [
                     Icon(Icons.phone_in_talk, color: Colors.green,),
                     Gap(Dimens.size8),
-                    Text("0123456789"),
+                    Text(Constant().phoneNumber),
                   ],
                 ),
               ),
@@ -510,7 +511,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                         children: [
                           InkWell(
                             onTap: () async {
-                              final Uri _url = Uri.parse('https://play.google.com/store/apps/details?id=com.FFTCompany.YAXChinese');
+                              final Uri _url = Uri.parse(Constant().phoneNumber);
                               await launchUrl(_url);
                             },
                             child: Row(
@@ -518,7 +519,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                               children: [
                                 Icon(Icons.phone_in_talk, color: Colors.green,),
                                 Gap(Dimens.size8),
-                                Text("0123456789"),
+                                Text(Constant().phoneNumber),
                                 
                               ],
                             ),
@@ -528,7 +529,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                             onTap: () async {
                               final Uri emailLaunchUri = Uri(
                                   scheme: 'mailto',
-                                  path: 'smith@example.com',
+                                  path: Constant().email,
                                   queryParameters: {
                                     'subject': ''
                                   }
@@ -541,7 +542,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                                 
                                 Icon(Icons.email, color: Colors.blue,),
                                 Gap(Dimens.size8),
-                                Text("hello@gmail.com"),
+                                Text(Constant().email,),
                               ],
                             ),
                           ),
@@ -563,7 +564,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                 ),
                 // initialValue: selectedMenu,
                 constraints:  BoxConstraints(
-                  //maxWidth:  Dimens.size250,
+                  maxWidth:  Dimens.size200,
                   maxHeight: Dimens.size280,
                 ),
                 color: notifier.whitecolor,
@@ -583,7 +584,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                         children: [
                           InkWell(
                             onTap: () async {
-                              final Uri _url = Uri.parse('https://play.google.com/store/apps/details?id=com.FFTCompany.YAXChinese');
+                              final Uri _url = Uri.parse(Constant().iosAppLink);
                               await launchUrl(_url);
                             },
                             child: SvgPicture.asset(
@@ -592,7 +593,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                           SizedBox(height: Dimens.size10),
                           InkWell(
                             onTap: () async {
-                              final Uri _url = Uri.parse('https://play.google.com/store/apps/details?id=com.FFTCompany.YAXChinese');
+                              final Uri _url = Uri.parse(Constant().androidLink);
                               await launchUrl(_url);
                             },
                             child: SvgPicture.asset(
@@ -1259,7 +1260,7 @@ class CustomDrawer extends StatelessWidget {
 
   List contactsImage = ['assets/Icons/emailicon.svg', 'assets/Icons/phoneicon.svg', 'assets/Icons/gpsicon.svg'];
 
-  List contacts = ['hello@pulse.com', '0932130000', 'Số 26 Đường 57A, phường Tân Tạo, Quận Bình Tân, TPHCM'];
+  List contacts = [Constant().email, Constant().phoneNumber, Constant().address];
 
   List<String> landingPageTitles = ["home_str", "method_str", "subject_str", "instructor_str", "course_str", "feelings_str", "achievements_str"];
 
