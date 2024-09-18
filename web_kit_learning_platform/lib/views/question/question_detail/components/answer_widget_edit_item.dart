@@ -65,7 +65,8 @@ class AnswerWidgetEditItemState extends State<AnswerWidgetEditItem> with UIMixin
           Gap(Dimens.size8),
           Expanded(
             child: TextFormField(
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.multiline,
+              maxLines: 2,
               controller: controller,
               readOnly: widget.answerType!= AnswerType.text,
               onTapOutside: (event) {
@@ -85,6 +86,9 @@ class AnswerWidgetEditItemState extends State<AnswerWidgetEditItem> with UIMixin
               decoration: InputDecoration(
                 labelText: "${L10nX.getStr.answer_str_1}...",
                 labelStyle: MyTextStyle.bodySmall(xMuted: true),
+                constraints: BoxConstraints(
+                  maxHeight: Dimens.size70
+                ),
                 border: outlineInputBorder,
                 suffixIcon: Visibility(
                   visible: widget.answerType !=AnswerType.text,
@@ -127,7 +131,7 @@ class AnswerWidgetEditItemState extends State<AnswerWidgetEditItem> with UIMixin
                     ),
                   ),
                 ),
-                contentPadding: MySpacing.all(16),
+                contentPadding: MySpacing.all(Dimens.size16),
                 isCollapsed: true,
                 floatingLabelBehavior: FloatingLabelBehavior.never,
               ),

@@ -308,6 +308,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                     ConfirmPopupPage(
                       content: L10nX.getStr.you_want_remove,
                       onAccept: () async {
+                        
                       },
 
                     ).show(context);

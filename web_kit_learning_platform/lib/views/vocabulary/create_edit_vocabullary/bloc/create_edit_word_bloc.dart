@@ -291,7 +291,7 @@ class CreateEditWordBloc extends Bloc<CreateEditWordEvent, CreateEditWordState> 
       }
     MonitorLoading().dismiss();
     emit(state.copyWith(
-      blocStatus: CreateEditWordStatus.onSubmit,
+      blocStatus: CreateEditWordStatus.onSaveSentence,
       vocabularyInfo: state.vocabularyInfo,
     ));
   }

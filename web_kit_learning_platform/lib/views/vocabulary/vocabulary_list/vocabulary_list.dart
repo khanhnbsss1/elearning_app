@@ -11,6 +11,7 @@ import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/base/widgets/pages_common/list_body_page_common.dart';
 import 'package:webkit/base/widgets/pagination/pagination_custom.dart';
 import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
+import 'package:webkit/base/widgets/text/text_link.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/theme/theme_customizer.dart';
@@ -135,14 +136,44 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
     return Container(
       color: ColorConst.whiteColor,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.all(Dimens.size16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
+            SizedBox(height: Dimens.size8,),
+            Visibility(
+              visible: UserManager().userContainPermission(permissionList: ["vocabulary.delete.delete_vocabulary"]),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextLink(
+                        text: "${L10nX.getStr.delete_str} ${L10nX.getStr.all_str.toLowerCase()}",
+                        onTap: () {
+                          ConfirmPopupPage(
+                            content: "${L10nX.getStr.you_want_remove} ${L10nX.getStr.all_str.toLowerCase()} ${L10nX.getStr.vocabulary_str.toLowerCase()}",
+                            onAccept: () async {
+                              MonitorLoading().showLoading("");
+                              MonitorLoading().dismiss();
+                      
+                              BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListInitEvent());
+                            },
+                      
+                          ).show(context);
+                        },
+                      ),
+                      Gap(Dimens.size16)
+                    ],
+                  ),
+                  Gap(Dimens.size8)
+                ],
+              ),
+            ),
             Expanded(child: buildVocabularyList(state: state, context: context, myScreenMediaType: myScreenMediaType)),
-            SizedBox(height: 8,),
+            SizedBox(height: Dimens.size8,),
             LayoutBuilder(builder: (context, constraints) {
               return  Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -290,6 +321,7 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
               }
           },
           child: VocabularyItemView(
+            
             vocabularyInfo: vocabularyInfo,
             onDelete: (p0) async {
               ConfirmPopupPage(

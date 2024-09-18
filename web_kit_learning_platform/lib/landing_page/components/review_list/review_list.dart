@@ -48,7 +48,7 @@ class _ReviewListState extends State<ReviewList>
         color: ColorConst.whiteColor,
         image: DecorationImage(
             image: AssetImage('assets/deshboard/landingpage6.jpg'),
-            fit: (width < 1100) ? BoxFit.contain : BoxFit.fill),
+            fit: (width < Dimens.size1100) ? BoxFit.contain : BoxFit.contain),
       ),
       // color: Colors.green,
       child: BlocProvider(

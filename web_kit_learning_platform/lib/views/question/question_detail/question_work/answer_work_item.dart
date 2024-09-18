@@ -41,7 +41,7 @@ class AnswerWorkItemState extends State<AnswerWorkItem>{
                 /// hien thi cho type anser la text
                 Visibility(
                   visible: widget.answerInfo.answerType == AnswerType.text,
-                    child: Text(widget.answerInfo.answer??"", style: TextStyleConstant.textStyleBlack13w400,)),
+                    child: Text(widget.answerInfo.answer??"", style: TextStyleConstant.textStyleBlack13w400, maxLines: 5,)),
                 /// hien thi cho type anser la text
                 Visibility(
                     visible: widget.answerInfo.answerType == AnswerType.image,
