@@ -46,8 +46,8 @@ class RefreshTokenApi extends BaseApiRequest {
       {
         RefreshTokenRequest refreshTokenRequest = RefreshTokenRequest(
           deviceType:  deviceInfoModel.type,
-          accessToken: authInfo?.accessToken,
-          refreshToken: authInfo?.refreshToken
+          accessToken: "${authInfo?.accessToken}",
+          refreshToken: "${authInfo?.refreshToken}"
         );
         print("object");
         await setApiBody(refreshTokenRequest.toJson());

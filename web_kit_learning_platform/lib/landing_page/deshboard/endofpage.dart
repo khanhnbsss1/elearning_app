@@ -3,7 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webkit/base/base.export.dart';
+import 'package:webkit/base/constant/constant.dart';
 import 'package:webkit/base/widgets/responsive/ui_responsive.dart';
 import 'package:webkit/base/widgets/static_view/static_view.dart';
 
@@ -77,9 +79,9 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
     'assets/Icons/gpsicon.svg'
   ];
   List contacts = [
-    'hello@pulse.com',
-    '0932130000',
-    'Số 26 Đường 57A, phường Tân Tạo, Quận Bình Tân, TPHCM'
+    Constant().email,
+    Constant().phoneNumber,
+    Constant().address,
   ];
 
   List<bool> elementsHover = [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
@@ -156,7 +158,8 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                             },
                           ),
                         ),
-                        Text('Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services Powered by ${L10nX.getStr.app_name}',
+                        Text('${L10nX.getStr.copyright_str} ${Constant().companyName}'
+                            '\n| ${L10nX.getStr.designed_by} ${L10nX.getStr.app_name}',
                           style: TextStyleConstant.bodyMedium.copyWith(
                               color: notifier.whitecolor),
                         ),
@@ -271,16 +274,34 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          buildContactInfoItem(
-                              textColor: Colors.white,
-                              contacts: contacts[0],
-                              icon: contactsImage[0]
+                          InkWell(
+                            child: buildContactInfoItem(
+                                textColor: Colors.white,
+                                contacts: contacts[0],
+                                icon: contactsImage[0]
+                            ),
+                            onTap: () {
+                              final Uri emailLaunchUri = Uri(
+                                  scheme: 'mailto',
+                                  path: contacts[0],
+                                  queryParameters: {
+                                    'subject': ''
+                                  }
+                              );
+                              launchUrl(emailLaunchUri);
+                            },
                           ),
                           SizedBox(height: 12,),
-                          buildContactInfoItem(
-                              textColor: Colors.white,
-                              contacts: contacts[1],
-                              icon: contactsImage[1]
+                          InkWell(
+                            onTap: () async {
+                              final Uri _url = Uri.parse(contacts[1]);
+                              await launchUrl(_url);
+                            },
+                            child: buildContactInfoItem(
+                                textColor: Colors.white,
+                                contacts: contacts[1],
+                                icon: contactsImage[1]
+                            ),
                           ),
                           SizedBox(height: 12,),
                           buildContactInfoItem(
@@ -326,7 +347,8 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
                       ),
                       SizedBox(height: 8,),
                       Text(
-                        'Copyright © Make it ${L10nX.getStr.app_name}\n| Designed by Make it Services - Powered by ${L10nX.getStr.app_name}',
+                        '${L10nX.getStr.copyright_str} ${Constant().companyName}'
+                            '\n| ${L10nX.getStr.designed_by} ${L10nX.getStr.app_name}',
                         style: TextStyleConstant.bodySmall.copyWith(
                             color: notifier.whitecolor),
                       ),
@@ -355,7 +377,7 @@ class EndOfPage extends StatelessWidget with ResponsivePage{
               style: TextStyleConstant.bodyMedium.copyWith(
                   color: textColor,
               ),
-              maxLines: 10,
+              maxLines: 2,
             ),
           ),
         ],

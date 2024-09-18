@@ -139,6 +139,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "content_str": MessageLookupByLibrary.simpleMessage("内容"),
         "copy_right":
             MessageLookupByLibrary.simpleMessage("FFTSolution - 版权所有 2022"),
+        "copyright_str": MessageLookupByLibrary.simpleMessage("版权所有 ©"),
         "coure_top_review": MessageLookupByLibrary.simpleMessage("评论数量最多的课程"),
         "course_category_str": MessageLookupByLibrary.simpleMessage("课程类别"),
         "course_create": MessageLookupByLibrary.simpleMessage("创建课程"),
@@ -192,6 +193,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(""),
         "difficulty_str": MessageLookupByLibrary.simpleMessage("困难"),
         "discount_str": MessageLookupByLibrary.simpleMessage("折扣"),
+        "display_str": MessageLookupByLibrary.simpleMessage("显示"),
         "document_list": MessageLookupByLibrary.simpleMessage("文档列表"),
         "document_str": MessageLookupByLibrary.simpleMessage("文档"),
         "documents_str": MessageLookupByLibrary.simpleMessage("文档"),
@@ -348,6 +350,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "您尚未设置指纹登录,请使用密码登录您的账户并设置指纹认证"),
         "oK": MessageLookupByLibrary.simpleMessage("确定"),
         "of_arrivals": MessageLookupByLibrary.simpleMessage("入境人数"),
+        "of_str": MessageLookupByLibrary.simpleMessage("的"),
         "ok": MessageLookupByLibrary.simpleMessage("确定"),
         "on_delivery": MessageLookupByLibrary.simpleMessage("正在交付"),
         "open_source_licenses_text":

@@ -9,6 +9,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
+import 'package:webkit/base/widgets/pagination/pagination_custom.dart';
 import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
@@ -124,7 +125,7 @@ class _QuestionListPageState extends State<QuestionListPage> with SingleTickerPr
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FlutterCustomPagination(
+              PaginationCustom(
                 key: GlobalKey(debugLabel: (state.listResponseModel?.total??0).toString()),
                 currentPage: state.listResponseModel!.getCurrentPage(),
                 limitPerPage: state.listResponseModel!.pageSize??10,

@@ -8,6 +8,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/date_time/period_of_time_setting.dart';
 import 'package:webkit/base/helper/date_time/date_time_helper.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
+import 'package:webkit/base/widgets/pagination/pagination_custom.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
@@ -114,7 +115,7 @@ class _UserRegistrationHistoryListPageState extends State<UserRegistrationHistor
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FlutterCustomPagination(
+              PaginationCustom(
                 key: GlobalKey(debugLabel: (state.lessonListResponseModel?.total??0).toString()),
                 currentPage: state.lessonListResponseModel!.getCurrentPage(),
                 limitPerPage: state.lessonListResponseModel!.pageSize??10,

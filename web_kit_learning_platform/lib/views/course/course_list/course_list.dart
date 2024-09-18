@@ -6,6 +6,7 @@ import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
+import 'package:webkit/base/widgets/pagination/pagination_custom.dart';
 import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
@@ -235,7 +236,7 @@ class _CourseListState extends State<CourseList> with SingleTickerProviderStateM
                             ),
                           ),
                           Center(
-                            child: FlutterCustomPagination(
+                            child: PaginationCustom(
                               key: UniqueKey(),
                               currentPage: state.courseResponseModel!.getCurrentPage(),
                               limitPerPage: state.courseResponseModel!.pageSize ?? 10,

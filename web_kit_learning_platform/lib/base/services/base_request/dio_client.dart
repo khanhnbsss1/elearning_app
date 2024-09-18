@@ -31,7 +31,6 @@ class DioClient{
           if(authInfo!=null)
           {
             options.headers['Authorization'] = 'Bearer ${authInfo.accessToken}';
-
           }
           return handler.next(options);
         },

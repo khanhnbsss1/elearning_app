@@ -481,16 +481,19 @@ class BaseApiRequest {
         await onRequestSuccess(baseAPIResponse.result);
         return baseAPIResponse.result!;
       }
-/*      else if ((response.statusCode == 401 || response.statusCode == 403) && !url.contains("login"))// qua han token
+      else if ((response.statusCode == 401 || response.statusCode == 403) && !url.contains("login"))// qua han token
           {
-        await AuthorManager().refreshToken();
-        return ResponseCommon(
-            errorCode: response.statusCode,
-            message: response.statusMessage,
-            success: false,
-            data:  null
-        );
-      }*/
+            if(!url.contains("refresh-token"))
+              {
+                await AuthorManager().refreshToken();
+                return ResponseCommon(
+                    errorCode: response.statusCode,
+                    message: response.statusMessage,
+                    success: false,
+                    data:  null
+                );
+              }
+      }
       else {
         // If the server did not return a 200 OK response,
         // then throw an exception.
@@ -554,7 +557,9 @@ class BaseApiRequest {
       if(error.response!=null)
       {
         responseErrorCommon = ResponseCommon.fromJson(error.response!.data!);
-        if(error.response!.statusCode !=null && (error.response!.statusCode ==401 ||error.response!.statusCode ==403 )  )
+        if(error.response!.statusCode !=null && 
+            (error.response!.statusCode ==401 ||error.response!.statusCode ==403 ) && 
+            !error.requestOptions.path.contains("refresh-token"))
         {
           await AuthorManager().refreshToken();
         }

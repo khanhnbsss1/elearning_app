@@ -158,6 +158,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "content_str": MessageLookupByLibrary.simpleMessage("Nội dung"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "FFTSolution - Bản quyền 2022"),
+        "copyright_str": MessageLookupByLibrary.simpleMessage("Bản quyền ©"),
         "coure_top_revenue": MessageLookupByLibrary.simpleMessage(
             "Khóa học có doanh thu cao nhất "),
         "coure_top_review": MessageLookupByLibrary.simpleMessage(
@@ -215,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Xóa chủ đề"),
         "delete_teacher": MessageLookupByLibrary.simpleMessage("Xóa giáo viên"),
         "description": MessageLookupByLibrary.simpleMessage("Mô tả"),
+        "designed_by": MessageLookupByLibrary.simpleMessage("Thiết kế bởi "),
         "detail_str": MessageLookupByLibrary.simpleMessage("Chi tiết"),
         "dialog_title":
             MessageLookupByLibrary.simpleMessage("Tiêu đề hộp thoại"),
@@ -229,6 +231,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("trong giảng dạy"),
         "difficulty_str": MessageLookupByLibrary.simpleMessage("Khó"),
         "discount_str": MessageLookupByLibrary.simpleMessage("Giảm giá"),
+        "display_str": MessageLookupByLibrary.simpleMessage("Hiển thị"),
         "document_list":
             MessageLookupByLibrary.simpleMessage("Danh sách tài Liệu"),
         "document_str": MessageLookupByLibrary.simpleMessage("Tài Liệu"),
@@ -426,6 +429,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn chưa cài đặt đăng nhập bằng vân tay. Vui lòng đăng nhập vào tài khoản bằng mật khẩu và cài đặt xác thực vân tay"),
         "oK": MessageLookupByLibrary.simpleMessage("Đồng ý"),
         "of_arrivals": MessageLookupByLibrary.simpleMessage("số lượt đến"),
+        "of_str": MessageLookupByLibrary.simpleMessage("Của"),
         "ok": MessageLookupByLibrary.simpleMessage("Đồng ý"),
         "on_delivery": MessageLookupByLibrary.simpleMessage("Khi giao hàng"),
         "open_source_licenses_text":

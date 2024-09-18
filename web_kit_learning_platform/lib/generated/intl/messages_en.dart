@@ -165,6 +165,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "content_str": MessageLookupByLibrary.simpleMessage("Content"),
         "copy_right": MessageLookupByLibrary.simpleMessage(
             "FFTSolution - Copyright 2022"),
+        "copyright_str": MessageLookupByLibrary.simpleMessage("Copyright ©"),
         "coure_top_revenue":
             MessageLookupByLibrary.simpleMessage("Top-grossing course"),
         "coure_top_review": MessageLookupByLibrary.simpleMessage(
@@ -224,6 +225,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete_teacher":
             MessageLookupByLibrary.simpleMessage("Delete teacher"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "designed_by": MessageLookupByLibrary.simpleMessage("Designed by "),
         "detail_str": MessageLookupByLibrary.simpleMessage("Detail"),
         "dialog_title": MessageLookupByLibrary.simpleMessage("Dialog title"),
         "dialogs": MessageLookupByLibrary.simpleMessage("Dialogs"),
@@ -237,6 +239,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(" in teaching methods"),
         "difficulty_str": MessageLookupByLibrary.simpleMessage("Difficult"),
         "discount_str": MessageLookupByLibrary.simpleMessage("Discount"),
+        "display_str": MessageLookupByLibrary.simpleMessage("Show"),
         "document_list":
             MessageLookupByLibrary.simpleMessage("List of documents"),
         "document_str": MessageLookupByLibrary.simpleMessage("Document"),
@@ -429,6 +432,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "You have not set up fingerprint login. Please log in to your account with a password and set up fingerprint authentication"),
         "oK": MessageLookupByLibrary.simpleMessage("Ok"),
         "of_arrivals": MessageLookupByLibrary.simpleMessage("of arrivals"),
+        "of_str": MessageLookupByLibrary.simpleMessage("Of"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "on_delivery": MessageLookupByLibrary.simpleMessage("On delivery"),
         "open_source_licenses_text":

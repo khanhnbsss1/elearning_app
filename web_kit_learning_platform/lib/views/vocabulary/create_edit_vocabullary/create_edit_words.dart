@@ -13,6 +13,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:webkit/base/instance_mananger/filter_manager.dart';
 import 'package:webkit/base/widgets/audio/audio_speaker.dart';
+import 'package:webkit/base/widgets/pagination/pagination_custom.dart';
 import 'package:webkit/base/widgets/text/text_link.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
@@ -579,7 +580,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
                                         )
                                     ),
                                     Gap(Dimens.size16),
-                                    FlutterCustomPagination(
+                                    PaginationCustom(
                                       currentPage: state.searchCommonRequestListMultiVocabularyInfo!.pageNumber??0,
                                       limitPerPage: state.searchCommonRequestListMultiVocabularyInfo!.pageSize??20,
                                       totalDataCount: (state.listMultiVocabularyInfo??[]).length,
