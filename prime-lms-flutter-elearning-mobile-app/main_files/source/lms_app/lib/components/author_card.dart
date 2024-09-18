@@ -12,7 +12,8 @@ import '../services/apis/teacher_list/models/landing_page_teacher_list_model.dar
 
 class AuthorCard extends StatelessWidget{
   final LandingPageUserInfo user;
-  const AuthorCard({super.key, required this.user});
+  final bool isDarkMode;
+  const AuthorCard({super.key, required this.user, required this.isDarkMode});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class AuthorCard extends StatelessWidget{
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.only(right: 15),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: (isDarkMode != true) ? Colors.white : Colors.black.withOpacity(0.1),
         border: Border.all(color: AppService.isDarkMode(context) ? CustomColor.borderDark : CustomColor.border),
         borderRadius: BorderRadius.circular(5),
       ),
@@ -46,12 +47,14 @@ class AuthorCard extends StatelessWidget{
                     Text(user.fullname??"-",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600, fontSize: 18)),
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600, fontSize: 18, color: (isDarkMode != true) ? Colors.black : Colors.white)),
                     Text(
                       user.position??"-",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: (isDarkMode != true) ? Colors.black : Colors.white
+                      ),
                     )
                   ],
                 ),
@@ -61,7 +64,9 @@ class AuthorCard extends StatelessWidget{
           const SizedBox(
             height: 15,
           ),
-          Text('total-lectures', style: Theme.of(context).textTheme.titleSmall,).tr(args: [user.id.toString()]),
+          Text('total-lectures', style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              color: (isDarkMode != true) ? Colors.black : Colors.white
+          ),).tr(args: [user.id.toString()]),
           const SizedBox(
             height: 10,
           ),

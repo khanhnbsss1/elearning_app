@@ -52,7 +52,8 @@ class CourseTile extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium
-                        ?.copyWith(fontWeight: FontWeight.w600),
+                        ?.copyWith(fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 5),
                   Text(

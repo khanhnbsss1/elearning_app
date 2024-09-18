@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -128,7 +129,10 @@ class IdentifierConst{
   static BiometricTypeDevice biometricType = BiometricTypeDevice.none;
   static String username = "";
   static String password = "";
-  static String supportEmail = "fftresourse@gmail.com";
+  static String supportEmail = "nguyenthuong51899@gmail.com";
+  static String phoneContact = "0939917688";
+  static String hotline = "0903947941";
+  static String address = "address";
 
 }
 // Loại sinh trắc được hỗ trợ trong device_elearning

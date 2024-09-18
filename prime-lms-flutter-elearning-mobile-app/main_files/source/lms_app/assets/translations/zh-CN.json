@@ -1,4 +1,5 @@
 {
+    "address": "胡志明市新平郡新造坊57A路26号",
     "get-started": "开始",
     "skip": "跳过",
     "intro-title1": "解锁移动设备上的学习之力",
@@ -40,7 +41,7 @@
     "free-course": "免费课程",
     "top-courses-in": "热门课程在",
     "top": "热门",
-    "instructors": "讲师",
+    "instructors": "导师名单",
     "view-profile": "查看个人资料",
     "latest-courses": "最新课程",
     "search-course": "搜索课程",
@@ -199,5 +200,6 @@
     "test-type": "测试类型: {}",
     "test-length": "问题数量: {}",
     "all-courses": "所有课程",
-    "tests": "测试"
+    "tests": "测试",
+    "lets_study": "来学习吧"
 }

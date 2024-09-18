@@ -477,7 +477,7 @@ class _TestDetailDialogState extends State<TestDetailDialog> {
                               lectureId: widget.lectureId,
                             ));
                     },
-                    child: Text('do-test'.tr(), style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    child: Text('confirm'.tr(), style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Colors.white
                     ),),
                   ),

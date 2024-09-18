@@ -1,4 +1,5 @@
 {
+  "address": "Số 26, Đường 57A, Phường Tân Tạo, Quận Tân Bình, Thành phố Hồ Chí Minh",
   "get-started": "Bắt đầu",
   "skip": "Bỏ qua",
   "intro-title1": "Mở khóa sức mạnh học tập trên thiết bị di động của bạn",
@@ -40,7 +41,7 @@
   "free-course": "Khóa học miễn phí",
   "top-courses-in": "Khóa học hàng đầu trong",
   "top": "Hàng đầu",
-  "instructors": "Giảng viên",
+  "instructors": "Danh sách giáo viên",
   "view-profile": "Xem hồ sơ",
   "latest-courses": "Khóa học mới nhất",
   "search-course": "Tìm kiếm khóa học",
@@ -199,5 +200,6 @@
   "test-type": "Loại bài kiểm tra: {}",
   "test-length": "Số lượng câu hỏi: {}",
   "all-courses": "Tất cả khóa học",
-  "tests": "Các bài kiểm tra"
+  "tests": "Các bài kiểm tra",
+  "lets_study": "Vào học"
 }

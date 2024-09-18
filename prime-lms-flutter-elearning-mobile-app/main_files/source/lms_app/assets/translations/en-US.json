@@ -1,4 +1,5 @@
 {
+    "address": "No. 26, Street 57A, Tan Tao Ward, Tan Binh District, Ho Chi Minh City",
     "get-started": "Get started",
     "skip": "Skip",
     "intro-title1": "Unlock the Power of Learning on Your Mobile Device",
@@ -40,7 +41,7 @@
     "free-course": "Free Courses",
     "top-courses-in": "Top Courses in",
     "top": "Top",
-    "instructors": "Instructors",
+    "instructors": "Instructor list",
     "view-profile": "View Profile",
     "latest-courses": "Latest Courses",
     "search-course": "Search Course",
@@ -199,5 +200,6 @@
     "test-type": "Type of Test: {}",
     "test-length": "Number of questions: {}",
     "all-courses": "All courses",
-    "tests": "Tests"
+    "tests": "Tests",
+    "lets_study": "Let's study"
 }

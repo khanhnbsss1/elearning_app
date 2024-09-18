@@ -15,8 +15,9 @@ class HorizontalCourseTile extends StatelessWidget {
     required this.course,
     required this.widthPercentage,
     required this.imageHeight,
+    required this.isDarkMode,
   });
-
+  final bool isDarkMode;
   final CourseInfo course;
   final double widthPercentage;
   final double imageHeight;
@@ -24,11 +25,12 @@ class HorizontalCourseTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final heroTag = UniqueKey();
+
     return InkWell(
       onTap: () => NextScreen.iOS(
           context, CourseDetailsView(courses: course, heroTag: heroTag)),
       child: Container(
-        color: Colors.white,
+        color: (isDarkMode != true) ? Colors.white : Colors.black.withOpacity(0.1),
         width: MediaQuery.of(context).size.width * widthPercentage,
         margin: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
@@ -66,7 +68,8 @@ class HorizontalCourseTile extends StatelessWidget {
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium
-                        ?.copyWith(fontWeight: FontWeight.w600),
+                        ?.copyWith(fontWeight: FontWeight.w600,
+                        color: (isDarkMode != true) ? Colors.black : Colors.white),
                   ),
                   const SizedBox(height: 3),
                   RatingViewer(rating: (course.ratePoint ?? 0).toDouble()),
