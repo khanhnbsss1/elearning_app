@@ -43,14 +43,14 @@ class AppSettings extends ConsumerWidget with UserMixin {
         //   ),
         // ),
         // const Divider(),
-        ListTile(
-          leading: const Icon(Icons.dark_mode),
-          title: const Text('dark-mode').tr(),
-          trailing: Switch.adaptive(
-            value: ref.watch(themeProvider).isDarkMode,
-            onChanged: (value) => ref.read(themeProvider.notifier).changeTheme(value),
-          ),
-        ),
+        // ListTile(
+        //   leading: const Icon(Icons.dark_mode),
+        //   title: const Text('dark-mode').tr(),
+        //   trailing: Switch.adaptive(
+        //     value: ref.watch(themeProvider).isDarkMode,
+        //     onChanged: (value) => ref.read(themeProvider.notifier).changeTheme(value),
+        //   ),
+        // ),
         user != null ? Column(
           children: [
             const Divider(),
@@ -120,64 +120,64 @@ class AppSettings extends ConsumerWidget with UserMixin {
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 50, bottom: 20),
-          child: const Text(
-            'social',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ).tr(),
-        ),
-        Visibility(
-          visible: true,
-          child: Column(
-            children: [
-              ListTile(
-                title: const Text('facebook').tr(),
-                leading: const Icon(LineIcons.facebook),
-                trailing: const Icon(FeatherIcons.chevronRight),
-                onTap: () => AppService().openLink(settings!.social!.fb!),
-              ),
-              const Divider(),
-            ],
-          ),
-        ),
-        Visibility(
-          visible: true,
-          child: Column(
-            children: [
-              ListTile(
-                title: const Text('youtube').tr(),
-                leading: const Icon(LineIcons.youtube),
-                trailing: const Icon(FeatherIcons.chevronRight),
-                onTap: () => AppService().openLink(settings!.social!.youtube!),
-              ),
-              const Divider(),
-            ],
-          ),
-        ),
-        Visibility(
-          visible: true,
-          child: Column(
-            children: [
-              ListTile(
-                title: const Text('twitter').tr(),
-                leading: const Icon(FeatherIcons.twitter),
-                trailing: const Icon(FeatherIcons.chevronRight),
-                onTap: () => AppService().openLink(settings!.social!.twitter!),
-              ),
-              const Divider(),
-            ],
-          ),
-        ),
-        Visibility(
-          visible: true,
-          child: ListTile(
-            title: const Text('instagram').tr(),
-            leading: const Icon(FeatherIcons.instagram),
-            trailing: const Icon(FeatherIcons.chevronRight),
-            onTap: () => AppService().openLink(settings!.social!.instagram!),
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.only(top: 50, bottom: 20),
+        //   child: const Text(
+        //     'social',
+        //     style: TextStyle(fontWeight: FontWeight.bold),
+        //   ).tr(),
+        // ),
+        // Visibility(
+        //   visible: true,
+        //   child: Column(
+        //     children: [
+        //       ListTile(
+        //         title: const Text('facebook').tr(),
+        //         leading: const Icon(LineIcons.facebook),
+        //         trailing: const Icon(FeatherIcons.chevronRight),
+        //         onTap: () => AppService().openLink(settings!.social!.fb!),
+        //       ),
+        //       const Divider(),
+        //     ],
+        //   ),
+        // ),
+        // Visibility(
+        //   visible: true,
+        //   child: Column(
+        //     children: [
+        //       ListTile(
+        //         title: const Text('youtube').tr(),
+        //         leading: const Icon(LineIcons.youtube),
+        //         trailing: const Icon(FeatherIcons.chevronRight),
+        //         onTap: () => AppService().openLink(settings!.social!.youtube!),
+        //       ),
+        //       const Divider(),
+        //     ],
+        //   ),
+        // ),
+        // Visibility(
+        //   visible: true,
+        //   child: Column(
+        //     children: [
+        //       ListTile(
+        //         title: const Text('twitter').tr(),
+        //         leading: const Icon(FeatherIcons.twitter),
+        //         trailing: const Icon(FeatherIcons.chevronRight),
+        //         onTap: () => AppService().openLink(settings!.social!.twitter!),
+        //       ),
+        //       const Divider(),
+        //     ],
+        //   ),
+        // ),
+        // Visibility(
+        //   visible: true,
+        //   child: ListTile(
+        //     title: const Text('instagram').tr(),
+        //     leading: const Icon(FeatherIcons.instagram),
+        //     trailing: const Icon(FeatherIcons.chevronRight),
+        //     onTap: () => AppService().openLink(settings!.social!.instagram!),
+        //   ),
+        // ),
       ],
     );
   }

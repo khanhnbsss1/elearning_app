@@ -6,6 +6,7 @@ import 'package:lms_app/screens/tabs/home_tab/home_tab.dart';
 import 'package:lms_app/screens/tabs/profile_tab/profile_tab.dart';
 import 'package:lms_app/screens/tabs/search_tab/search_tab.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import '../../theme/theme_provider.dart';
 import '../tabs/dictionary/dictionary.dart';
 import '../tabs/home_tab/phone_call_button.dart';
 import '../tabs/my_courses_tab/my_courses_tab.dart';
@@ -22,6 +23,7 @@ class HomeView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final tabController = ref.watch(homeTabControllerProvider);
     final showTel = ref.watch(homeShowTelProvider);
+    final isDarkMode = ref.watch(themeProvider).isDarkMode;
     return Scaffold(
       bottomNavigationBar: const BottomBar(),
       body: Stack(children: [

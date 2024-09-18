@@ -18,6 +18,7 @@ import 'package:lms_app/services/apis/lessson/lesson_detail/get_lesson_detail.da
 import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/services/apis/teacher_list/teacher_list/get_landing_page_teacher_list_api.dart';
 import 'package:lms_app/services/apis/vocabulary/vocabulary_list/vocabulary_list_api.dart';
+import 'package:lms_app/services/apis/vocabulary/words/get_vocabulary_detail.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:lms_app/services/apis/categories/get_categories_api.dart';
 import 'package:lms_app/services/apis/course/course_detail/get_course_detail_api.dart';
@@ -130,6 +131,12 @@ class ApiService {
     GetListVocabularyApi getListVocabularyApi = GetListVocabularyApi(searchCommonRequest: SearchCommonRequest(pageSize: 10, pageNumber: pageNumber, keyword: keyword??""));
     VocabularyResponseModel vocabularyResponseModel = await getListVocabularyApi.call();
     return vocabularyResponseModel.content??[];
+  }
+
+  Future<VocabularyInfo> getVocabularyDetail(int vocabularyId) async {
+    GetVocabularyDetailApi getVocabularyDetailApi = GetVocabularyDetailApi(vocabularyId: vocabularyId);
+    VocabularyInfo? vocabularyInfo = await getVocabularyDetailApi.call();
+    return vocabularyInfo??VocabularyInfo();
   }
 
   Future<List<Course>> getHomeCategoryCourses(String categoryId, int limit) async {

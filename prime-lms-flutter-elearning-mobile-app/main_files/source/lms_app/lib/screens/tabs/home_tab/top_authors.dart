@@ -32,7 +32,7 @@ class TopAuthors extends ConsumerWidget {
         data: (data) {
           return (data!.isNotEmpty)
               ? Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  padding: const EdgeInsets.only(right: 20),
                   child: Column(
                     children: [
                       Padding(
@@ -58,7 +58,8 @@ class TopAuthors extends ConsumerWidget {
                               child: Text(
                                 'view-all',
                                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: (isDarkMode != true) ? Colors.black : Colors.white
+                                    // color: (isDarkMode != true) ? Colors.black : Colors.white
+                                    color: Colors.black,
                                 ),
                               ).tr(),
                             )

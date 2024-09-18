@@ -10,9 +10,10 @@ import '../models/user/UserProfile.dart';
 import '../screens/author_profie/author_profile.dart';
 import '../services/apis/teacher_list/models/landing_page_teacher_list_model.dart';
 
-class AuthorCard extends StatelessWidget{
+class AuthorCard extends StatelessWidget {
   final LandingPageUserInfo user;
   final bool isDarkMode;
+
   const AuthorCard({super.key, required this.user, required this.isDarkMode});
 
   @override
@@ -26,8 +27,12 @@ class AuthorCard extends StatelessWidget{
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.only(right: 15),
       decoration: BoxDecoration(
-        color: (isDarkMode != true) ? Colors.white : Colors.black.withOpacity(0.1),
-        border: Border.all(color: AppService.isDarkMode(context) ? CustomColor.borderDark : CustomColor.border),
+        color:
+            (isDarkMode != true) ? Colors.white : Colors.black.withOpacity(0.1),
+        border: Border.all(
+            color: AppService.isDarkMode(context)
+                ? CustomColor.borderDark
+                : CustomColor.border),
         borderRadius: BorderRadius.circular(5),
       ),
       child: Column(
@@ -44,16 +49,26 @@ class AuthorCard extends StatelessWidget{
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(user.fullname??"-",
+                    Text(user.fullname ?? "-",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600, fontSize: 18, color: (isDarkMode != true) ? Colors.black : Colors.white)),
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            // color: (isDarkMode != true)
+                            //     ? Colors.black
+                            //     : Colors.white,
+                            color: Colors.black,
+                        )),
                     Text(
-                      user.position??"-",
+                      user.position ?? "-",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: (isDarkMode != true) ? Colors.black : Colors.white
+                          // color: (isDarkMode != true)
+                          //     ? Colors.black
+                          //     : Colors.white,
+                          color: Colors.black,
                       ),
                     )
                   ],
@@ -64,9 +79,13 @@ class AuthorCard extends StatelessWidget{
           const SizedBox(
             height: 15,
           ),
-          Text('total-lectures', style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              color: (isDarkMode != true) ? Colors.black : Colors.white
-          ),).tr(args: [user.id.toString()]),
+          Text(
+            'total-lectures',
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                // color: (isDarkMode != true) ? Colors.black : Colors.white),
+                color: Colors.black,
+            ),
+          ).tr(args: [user.id.toString()]),
           const SizedBox(
             height: 10,
           ),
@@ -81,10 +100,16 @@ class AuthorCard extends StatelessWidget{
           Padding(
             padding: const EdgeInsets.only(top: 15),
             child: OutlinedButton(
-                style: OutlinedButton.styleFrom(elevation: 0, side: BorderSide(color: Theme.of(context).primaryColor)),
-                onPressed: () => NextScreen.iOS(context, AuthorProfile(user: user)),
+                style: OutlinedButton.styleFrom(
+                    elevation: 0,
+                    side: BorderSide(color: Theme.of(context).primaryColor)),
+                onPressed: () =>
+                    NextScreen.iOS(context, AuthorProfile(user: user)),
                 // onPressed: () {},
-                child: Text('view-profile', style: TextStyle(color: Theme.of(context).primaryColor),).tr()),
+                child: Text(
+                  'view-profile',
+                  style: TextStyle(color: Theme.of(context).primaryColor),
+                ).tr()),
           )
         ],
       ),

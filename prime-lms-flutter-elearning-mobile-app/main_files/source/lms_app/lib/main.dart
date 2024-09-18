@@ -118,22 +118,6 @@ class _MyAppState extends State<MyApp> {
           print(value);
         }
       },
-      builder: (context, child) {
-        ScreenUtil.init(context);
-        ResponsiveInfo().init(context);
-        return EasyLoading.init(builder: (context, child) {
-          return Overlay(
-            initialEntries: [
-              OverlayEntry(builder: (context) {
-                return SelectionArea (
-                  //key: UniqueKey(),
-                    selectionControls: materialTextSelectionControls,
-                    child: child ?? Container());
-              })
-            ],
-          );
-        },)(context,child);
-      },
       home: _isFirstCall!
               ? const IntroScreen()
               : const LoginScreen(

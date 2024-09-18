@@ -46,7 +46,8 @@ class FeaturedCoursesSlide extends ConsumerWidget {
                         child: Text(
                           'view-all',
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: (isDarkMode != true) ? Colors.black : Colors.white
+                              // color: (isDarkMode != true) ? Colors.black : Colors.white
+                              color: Colors.black,
                           ),
                         ).tr(),
                       )

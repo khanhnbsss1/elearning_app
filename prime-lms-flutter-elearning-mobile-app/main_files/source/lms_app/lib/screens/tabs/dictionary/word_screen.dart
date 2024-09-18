@@ -78,53 +78,40 @@ class _WordScreenState extends State<WordScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text('simplified'.tr(), style: Theme.of(context).textTheme.titleMedium,),
+                  const SizedBox(
+                    height: 8,
+                  ),
                   Row(
                     children: [
-                      Expanded(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('simplified'.tr(), style: Theme.of(context).textTheme.titleMedium,),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                '${word.simplified}',
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ),
-                              const SizedBox(
-                                width: 16,
-                              ),
-                              Text('${word.pinyinTones}',
-                                  style: Theme.of(context).textTheme.bodyLarge),
-                              const SizedBox(
-                                width: 16,
-                              ),
-                              AudioSpeaker(
-                                url: word.audioLink!,
-                                size: 30,
-                              ),
-                            ],
-                          ),
-                        ],
-                      )),
-                      Expanded(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('traditional'.tr(), style: Theme.of(context).textTheme.titleMedium,),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            '${word.traditional}',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                        ],
-                      ))
+                      Text(
+                        '${word.simplified}',
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      Text('${word.pinyinTones}',
+                          style: Theme.of(context).textTheme.bodyLarge),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      AudioSpeaker(
+                        url: word.audioLink!,
+                        size: 30,
+                      ),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Text('traditional'.tr(), style: Theme.of(context).textTheme.titleMedium,),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Text(
+                    '${word.traditional}',
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(
                     height: 16,

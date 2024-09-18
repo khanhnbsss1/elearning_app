@@ -1,14 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:lms_app/ads/ad_manager.dart';
+import 'package:lms_app/base/widgets/common/alert_dialog/loading.common.dart';
 import 'package:lms_app/constants/app_constants.dart';
 import 'package:lms_app/mixins/course_mixin.dart';
 import 'package:lms_app/mixins/user_mixin.dart';
+import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/services/apis/lessson/models/lesson_info.dart';
 import 'package:lms_app/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
+import 'package:lms_app/services/apis/vocabulary/vocabulary_list/vocabulary_list_api.dart';
 import '../../base/widgets/audio/audio_speaker.dart';
 import '../../utils/next_screen.dart';
 import '../tabs/dictionary/word_screen.dart';
@@ -50,7 +54,9 @@ class Vocabulary extends ConsumerWidget with CourseMixin, UserMixin {
                     final VocabularyInfo word =
                         lessonDetail.vocabularies![index];
                     return ListTile(
-                      onTap: () => NextScreen.normal(context, WordScreen(word: word)),
+                      onTap: () {
+                        showWord(context, word);
+                      },
                       contentPadding: const EdgeInsets.symmetric(
                           vertical: 0, horizontal: 20),
                       horizontalTitleGap: 10,
@@ -77,5 +83,16 @@ class Vocabulary extends ConsumerWidget with CourseMixin, UserMixin {
         ]),
       ),
     );
+  }
+
+  Future<void> showWord(BuildContext context, VocabularyInfo word) async {
+    MonitorLoading().showLoading('message');
+    VocabularyInfo wordDetail = await ApiService().getVocabularyDetail(word.id??0);
+    MonitorLoading().dismiss();
+    if (wordDetail.simplified != null) {
+      NextScreen.normal(context, WordScreen(word: wordDetail));
+    } else {
+      NextScreen.normal(context, WordScreen(word: word));
+    }
   }
 }

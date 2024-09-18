@@ -78,7 +78,7 @@ class HomeTab extends ConsumerWidget {
         ref.invalidate(homeLatestCoursesProvider);
       },
       child: Container(
-        color: !isDarkMode ? Colors.black.withOpacity(0.05) : Colors.black.withOpacity(0.8),
+        color: (isDarkMode != true) ? Colors.black.withOpacity(0.05) : Colors.black.withOpacity(0.1),
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
@@ -186,17 +186,21 @@ class HomeTab extends ConsumerWidget {
           Container(
             height: 75,
             width: width == null ? 100 : width > 200 ? 120 : width * 2/3,
-              child: (image == null) ? Icon(
-            icon ?? Icons.add_alert_sharp,
-            size: 50,
-            color: Theme.of(context).primaryColor,
-          ) : image),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: (image == null) ? Icon(
+                            icon ?? Icons.add_alert_sharp,
+                            size: 50,
+                            color: Theme.of(context).primaryColor,
+                          ) : image,
+              )),
           Container(
             padding: const EdgeInsets.only(top: 4),
             child: Text(
               text ?? "",
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: (isDarkMode != true) ? Colors.black : Colors.white
+                // color: (isDarkMode != true) ? Colors.black : Colors.white
+                color: Colors.black
               ),
               maxLines: 2,
               overflow: TextOverflow.clip,

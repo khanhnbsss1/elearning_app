@@ -203,7 +203,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       child: ColorFiltered(
                         colorFilter: ColorFilter.mode((selected) ? Colors.grey : Colors.white, BlendMode.darken),
                         child: Image.asset(
-                          "assets/images/noImage.jpg",
+                          "assets/images/noImage1.jpg",
                           fit: BoxFit.fitHeight,
                         ),
                       )

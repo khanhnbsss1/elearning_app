@@ -9,6 +9,7 @@ import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/utils/empty_animation.dart';
 import 'package:quiver/iterables.dart';
 import '../../../services/apis/course/course_detail/models/course_detail_model.dart';
+import '../../../theme/theme_provider.dart';
 import 'my_course_tile.dart';
 import '../../../providers/user_data_provider.dart';
 
@@ -38,12 +39,14 @@ class MyCoursesTab extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userDataProvider);
     final myCourses = ref.watch(myCoursesProvider);
+    final isDarkMode = ref.watch(themeProvider).isDarkMode;
     return RefreshIndicator.adaptive(
       displacement: 60,
       onRefresh: () async {
         ref.invalidate(myCoursesProvider);
       },
       child: Scaffold(
+        backgroundColor: (isDarkMode != true) ? Colors.black.withOpacity(0.05) : Colors.black.withOpacity(0.1),
         appBar: AppBar(
           title: const Text('my-courses').tr(),
           backgroundColor: Theme.of(context).primaryColor,

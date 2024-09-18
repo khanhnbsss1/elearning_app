@@ -48,8 +48,8 @@ class SentenceInfo {
   SentenceInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     chineseSentence = json['chinese_sentence'];
-    pinyionSentence = json['pinyion_sentence'];
-    translationVn = json['translation_vn'];
+    pinyionSentence = json['pinyin_sentence'];
+    translationVn = json['translationvn_sentence'];
     audioLink = json['audio_link'];
     audioId = json['audio_id'];
   }

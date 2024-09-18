@@ -41,7 +41,7 @@ class GridCourseTile extends StatelessWidget {
                       child: (course.image != null && course.image != "")
                           ? CustomCacheImage(imageUrl: course.image, radius: 3)
                           : Center(
-                            child: Image.asset("assets/images/noImage.jpg",
+                            child: Image.asset("assets/images/noImage1.jpg",
                                 fit: BoxFit.contain),
                           )),
                   // PremiumTag(course: course)

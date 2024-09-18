@@ -133,6 +133,8 @@ class IdentifierConst{
   static String phoneContact = "0939917688";
   static String hotline = "0903947941";
   static String address = "address";
+  static String mst ="0317530373";
+  static String companyName =" Công Ty Cổ Phần Giáo Dục Global Connection";
 
 }
 // Loại sinh trắc được hỗ trợ trong device_elearning

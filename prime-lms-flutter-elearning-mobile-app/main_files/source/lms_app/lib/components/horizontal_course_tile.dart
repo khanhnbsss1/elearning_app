@@ -49,7 +49,7 @@ class HorizontalCourseTile extends StatelessWidget {
                               radius: 0,
                             )
                           : Image.asset(
-                              "assets/images/noImage.jpg",
+                              "assets/images/noImage1.jpg",
                               fit: BoxFit.cover,
                             ),
                     )),
@@ -69,7 +69,9 @@ class HorizontalCourseTile extends StatelessWidget {
                         .textTheme
                         .titleMedium
                         ?.copyWith(fontWeight: FontWeight.w600,
-                        color: (isDarkMode != true) ? Colors.black : Colors.white),
+                        // color: (isDarkMode != true) ? Colors.black : Colors.white),
+                        color: Colors.black,
+                    ),
                   ),
                   const SizedBox(height: 3),
                   RatingViewer(rating: (course.ratePoint ?? 0).toDouble()),

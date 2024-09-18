@@ -25,11 +25,12 @@ class BottomBar extends ConsumerWidget {
     final currentIndex = ref.watch(navBarIndexProvider);
     final isDarkMode = ref.watch(themeProvider).isDarkMode;
     return SalomonBottomBar(
+        backgroundColor: (isDarkMode != true) ? Colors.white : Colors.black.withOpacity(0.15),
         itemPadding: const EdgeInsets.all(12),
         curve: Curves.easeIn,
         currentIndex: currentIndex,
         margin: const EdgeInsets.all(12),
-        selectedItemColor: isDarkMode ? Colors.white : Theme.of(context).primaryColor,
+        selectedItemColor: isDarkMode ? Colors.black : Theme.of(context).primaryColor,
         onTap: (int index) {
           ref.read(navBarIndexProvider.notifier).state = index;
           if (_shouldAnimate(currentIndex, index)) {

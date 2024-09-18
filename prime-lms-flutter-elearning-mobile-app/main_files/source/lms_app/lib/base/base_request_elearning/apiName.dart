@@ -69,6 +69,7 @@ class ApiName {
   final String updateVocabulary = "/update-vocabulary";
   final String linkVocabulary = "/link-vocabulary";
   final String unlinkVocabulary = "/unlink-multiple-vocabulary";
+  final String getVocabularyDetail = "/get-vocabulary-detail";
 
   /// file
   final String addUploadFile = "/upload-file";
