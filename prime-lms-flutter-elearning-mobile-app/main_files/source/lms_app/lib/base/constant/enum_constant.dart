@@ -6,12 +6,7 @@ enum DeviceStatus{
   deviceExpired,// het han
   deviceOffline,// Mat ke noi
 }
-Map<DeviceStatus, Color> paymentDeviceStatusToColor={
-  DeviceStatus.deviceAvailable:ColorConst.deviceAvailableColor,
-  DeviceStatus.deviceOffline:ColorConst.deviceFullColor,
-  DeviceStatus.deviceExpired:ColorConst.deviceRepairColor,
-  DeviceStatus.deviceNotActive:ColorConst.deviceNotActiveColor,
-};
+
 Map<DeviceStatus, String> paymentDeviceStatusToStr={
   DeviceStatus.deviceAvailable:"device_online",
   DeviceStatus.deviceOffline:"device_offline",

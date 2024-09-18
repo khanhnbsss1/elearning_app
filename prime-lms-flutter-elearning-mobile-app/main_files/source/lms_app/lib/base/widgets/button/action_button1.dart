@@ -30,8 +30,8 @@ class ActionButton1 extends StatelessWidget {
         this.enableLinearColor,
         this.contentPadding,
       this.enable}) {
-    enableBgColor ??= ColorConst.buttonbgColor;
-    textStype ??= TextStyleConstant.textStyleBlack14w600.copyWith(color: ColorConst.textColorOnMainButton.withOpacity(0.8));
+    enableBgColor ??= ColorConst.mainColor;
+    textStype ??= TextStyleConstant.textStyleBlack14w600.copyWith(color: ColorConst.whiteColor);
     radius ??= Dimens.size22;
     height ??= Dimens.size40;
     enable ??= true;

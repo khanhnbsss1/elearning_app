@@ -169,7 +169,7 @@ class CustomDialog1 extends StatelessWidgetCommon{
                                               child: Icon(
                                                 Icons.arrow_back_ios_rounded,
                                                 size: Dimens.size20,
-                                                color: enableBackButton!?ColorConst.blackColor:Colors.transparent,
+                                                color: enableBackButton!?ColorConst.whiteColor:Colors.transparent,
                                               ),
                                             )),
                                       ),
@@ -182,7 +182,8 @@ class CustomDialog1 extends StatelessWidgetCommon{
                                             Gap(Dimens.size5),
                                             Text(
                                                 title!,
-                                                style: titleStyle??TextStyleConstant.textStyleBlack20w700.copyWith(color: ColorConst.blackColor)),
+                                                style: titleStyle??TextStyleConstant.textStyleBlack20w700.copyWith(color: ColorConst.whiteColor)
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -196,7 +197,7 @@ class CustomDialog1 extends StatelessWidgetCommon{
                                             child: Icon(
                                               Icons.close,
                                               size: Dimens.size20,
-                                              color: ColorConst.blackColor,
+                                              color: ColorConst.whiteColor,
                                             ),
                                           )):
                                       SizedBox(width: Dimens.size20,),

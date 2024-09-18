@@ -73,7 +73,7 @@ class ColorConst{
   static Color bgDialogColor = getLightMode()?ColorLightConst.bgDialogColor:ColorNightConst.bgDialogColor;
   static Color bgSelectButtonColor = getLightMode()?ColorLightConst.bgSelectButtonColor:ColorNightConst.bgSelectButtonColor;
 
-  static void setColorByFlavorType() {
+  static void setColorByFlavorType(BuildContext context) {
     if(getLightMode())
       {
         ColorLightConst.setColorByFlavorType();
@@ -83,7 +83,7 @@ class ColorConst{
         ColorNightConst.setColorByFlavorType();
       }
     resetColor();
-    TextStyleConstant.resetStyle();
+    TextStyleConstant.resetStyle(context);
   }
   
   static void resetColor(){

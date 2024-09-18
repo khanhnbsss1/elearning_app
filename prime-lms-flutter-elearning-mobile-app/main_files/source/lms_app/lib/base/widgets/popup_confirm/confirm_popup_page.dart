@@ -13,7 +13,9 @@ class ConfirmPopupPage extends StatefulWidget{
   void Function()? onAccept;
   String? title;
   String? content;
-  ConfirmPopupPage({super.key, this.onAccept, this.content, this.title});
+  Widget? contentWidget;
+  bool? enableAcceptButton, enableCancelButton;
+  ConfirmPopupPage({super.key, this.onAccept, this.content, this.title, this.contentWidget, this.enableAcceptButton, this.enableCancelButton});
 
   @override
   State<StatefulWidget> createState() {
@@ -59,42 +61,57 @@ class ConfirmPopupPageState extends State<ConfirmPopupPage> with SingleTickerPro
           width: MediaQuery.of(context).size.width*(!isTablet?0.95: 0.7),
           enableBackButton: false,
           enableCloseButton: true,
+          enableHeader: true,
           mainAxisSizeParent: MainAxisSize.min,
-          child: Column(
+          child:
+          Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30),
-                child: Center(
-                  child: Text(
-                      widget.content??"",
-                      textAlign: TextAlign.center,
-                      style: TextStyleConstant.titleTextColorOnBackgroundColorStyle14w400
-                  ),),
+              Visibility(
+                visible: widget.contentWidget==null,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30),
+                  child: Center(
+                    child: Text(
+                        widget.content??"",
+                        textAlign: TextAlign.center,
+                        style: TextStyleConstant.textStyleBlack14w400
+                    ),),
+                ),
               ),
+              Visibility(
+                visible: true,// widget.contentWidget!=null, 
+                 child: widget.contentWidget??const SizedBox()),
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ActionButton1(
-                        width: Dimens.size120,
-                        onTap: () async {
-                          Navigator.of(context).pop();
-                        },
-                        text: S.of(context).str_cancel,
-                        height: Dimens.size40),
+                    Visibility(
+                      visible: widget.enableCancelButton!=false,
+                      child: ActionButton1(
+                          width: Dimens.size120,
+                          onTap: () async {
+                            Navigator.of(context).pop();
+                          },
+                          text: S.of(context).str_cancel,
+                          height: Dimens.size40),
+                    ),
                     Gap(Dimens.size20),
-                    ActionButton1(
-                        width: Dimens.size120,
-                        onTap: () async {
-                          Navigator.of(context).pop();
-                          if(widget.onAccept!=null)
-                            {
-                              widget.onAccept!();
-                            }
-                        },
-                        text: S.of(context).str_accept,
-                        height: Dimens.size40),
+                    Visibility(
+                      visible: widget.enableAcceptButton!=false,
+                      child: ActionButton1(
+                          width: Dimens.size120,
+                          onTap: () async {
+                            Navigator.of(context).pop();
+                            if(widget.onAccept!=null)
+                              {
+                                widget.onAccept!();
+                              }
+                          },
+                          text: S.of(context).str_accept,
+                          height: Dimens.size40),
+                    ),
                   ],
                 ),
               )

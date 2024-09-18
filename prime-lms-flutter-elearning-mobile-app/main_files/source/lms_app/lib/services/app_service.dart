@@ -24,6 +24,20 @@ class AppService {
     }
   }
 
+  Future openPhoneSupport(String supportPhone) async {
+    final Uri smsLaunchUri = Uri(
+      scheme: 'tel',
+      path: supportPhone,
+      queryParameters: <String, String>{
+      },
+    );
+    if (await canLaunchUrl(smsLaunchUri)) {
+      await launchUrl(smsLaunchUri);
+    } else {
+      openToast1("Can't open the email app");
+    }
+  }
+  
   Future openEmailSupport(String supportEmail) async {
     final Uri uri = Uri(
       scheme: 'mailto',

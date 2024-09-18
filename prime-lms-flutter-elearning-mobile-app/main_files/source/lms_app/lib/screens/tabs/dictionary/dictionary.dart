@@ -113,6 +113,7 @@ class _DictionaryState extends ConsumerState<Dictionary> {
         itemCount: _dictionaries.length,
         itemBuilder: (context, index) {
           final VocabularyInfo word = _dictionaries[index];
+          
           return ListTile(
             onTap: () {
               NextScreen.normal(context, WordScreen(word: word));

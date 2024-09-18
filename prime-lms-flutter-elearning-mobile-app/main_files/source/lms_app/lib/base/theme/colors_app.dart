@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:lms_app/theme/text_stype_constant.dart';
 
-import '../base.export.dart';
 import '../store/cache_storage.dart';
 import 'colors_app_light.dart';
 import 'colors_app_night.dart';
@@ -10,13 +10,15 @@ class ColorConst{
   static bool? isDarkMode;
   static Color backGroundColor = getLightMode()?ColorLightConst.backGroundColor:ColorNightConst.backGroundColor;
   static Color primaryColor = getLightMode()?ColorLightConst.primaryColor:ColorNightConst.primaryColor;
+  static Color textColorOnMainColor = getLightMode()?ColorLightConst.textColorOnMainColor:ColorNightConst.textColorOnMainColor;
+
   static Color mainColor = primaryColor;
   static Color mainColorWithOpacity50 = mainColor.withOpacity(0.5);
   static Color iconColor = getLightMode()?ColorLightConst.iconColor:ColorNightConst.iconColor;
   static Color buttonbgColor = getLightMode()?ColorLightConst.buttonbgColor:ColorNightConst.buttonbgColor;
   static Color homeBg =  getLightMode()?ColorLightConst.homeBg:ColorNightConst.homeBg;
   static Color bgColor =  getLightMode()?ColorLightConst.bgColor:ColorNightConst.bgColor;
-  static Color bgColor2 =  getLightMode()?ColorLightConst.bgColor2:ColorNightConst.bgColor2;
+  static Color onHoverColor =  getLightMode()?ColorLightConst.onHoverColor:ColorNightConst.onHoverColor;
   static Color textColorOnMainButton =   getLightMode()?ColorLightConst.textColorOnMainButton:ColorNightConst.textColorOnMainButton;
   static Color buttonColor =  getLightMode()?ColorLightConst.buttonColor:ColorNightConst.buttonColor;
   static Color textColor =   getLightMode()?ColorLightConst.textColor:ColorNightConst.textColor;
@@ -38,6 +40,8 @@ class ColorConst{
   static Color normalTextColorOnMainColor =  getLightMode()?ColorLightConst.normalTextColorOnMainColor:ColorNightConst.normalTextColorOnMainColor;
   static Color colorHintTextSearch =  getLightMode()?ColorLightConst.colorHintTextSearch:ColorNightConst.colorHintTextSearch;
   static Color colorIconGrays = getLightMode()?ColorLightConst.colorIconGrays:ColorNightConst.colorIconGrays;
+  static Color colorIconRed = getLightMode()?ColorLightConst.mainColor:ColorNightConst.mainColor;
+
   static Color bgToastSuccess = getLightMode()?ColorLightConst.bgToastSuccess:ColorNightConst.bgToastSuccess;
   static Color bgToastError = getLightMode()?ColorLightConst.bgToastError:ColorNightConst.bgToastError;
   static Color bgToastDangerous = getLightMode()?ColorLightConst.bgToastDangerous:ColorNightConst.bgToastDangerous;
@@ -48,11 +52,6 @@ class ColorConst{
   static Color greyColor1 =  getLightMode()?ColorLightConst.greyColor1:ColorNightConst.greyColor1;
   static Color greyColor2 = getLightMode()?ColorLightConst.greyColor2:ColorNightConst.greyColor2;
   static Color greyColor = getLightMode()?ColorLightConst.greyColor:ColorNightConst.greyColor;
-  static Color deviceAvailableColor = getLightMode()?ColorLightConst.paymentManagerAvailableColor:ColorNightConst.paymentManagerAvailableColor;
-  static Color deviceFullColor = getLightMode()?ColorLightConst.paymentManagerFullColor:ColorNightConst.paymentManagerFullColor;
-  static Color deviceRepairColor = getLightMode()?ColorLightConst.paymentManagerRepairColor:ColorNightConst.paymentManagerRepairColor;
-  static Color deviceNotActiveColor = getLightMode()?ColorLightConst.paymentManagerNotActiveColor:ColorNightConst.paymentManagerNotActiveColor;
-  static Color deviceClosedColor = getLightMode()?ColorLightConst.paymentManagerClosedColor:ColorNightConst.paymentManagerClosedColor;
   static Color colorLinear1 = getLightMode()?ColorLightConst.colorLinear1:ColorNightConst.colorLinear1;
   static Color colorLinear2 = getLightMode()?ColorLightConst.colorLinear2:ColorNightConst.colorLinear2;
   static Color colorLinear3 = getLightMode()?ColorLightConst.colorLinear3:ColorNightConst.colorLinear3;
@@ -72,7 +71,7 @@ class ColorConst{
   static Color bgDialogColor = getLightMode()?ColorLightConst.bgDialogColor:ColorNightConst.bgDialogColor;
   static Color bgSelectButtonColor = getLightMode()?ColorLightConst.bgSelectButtonColor:ColorNightConst.bgSelectButtonColor;
 
-  static void setColorByFlavorType() {
+  static void setColorByFlavorType(BuildContext context) {
     if(getLightMode())
       {
         ColorLightConst.setColorByFlavorType();
@@ -82,7 +81,7 @@ class ColorConst{
         ColorNightConst.setColorByFlavorType();
       }
     resetColor();
-    TextStyleConstant.resetStyle();
+    TextStyleConstant.resetStyle(context);
   }
   
   static void resetColor(){
@@ -94,10 +93,10 @@ class ColorConst{
     buttonbgColor = getLightMode()?ColorLightConst.buttonbgColor:ColorNightConst.buttonbgColor;
     homeBg =  getLightMode()?ColorLightConst.homeBg:ColorNightConst.homeBg;
     bgColor =  getLightMode()?ColorLightConst.bgColor:ColorNightConst.bgColor;
-    bgColor2 =  getLightMode()?ColorLightConst.bgColor2:ColorNightConst.bgColor2;
     textColorOnMainButton =   getLightMode()?ColorLightConst.textColorOnMainButton:ColorNightConst.textColorOnMainButton;
     buttonColor =  getLightMode()?ColorLightConst.buttonColor:ColorNightConst.buttonColor;
     textColor =   getLightMode()?ColorLightConst.textColor:ColorNightConst.textColor;
+    textColorOnMainColor = getLightMode()?ColorLightConst.textColorOnMainColor:ColorNightConst.textColorOnMainColor;
     subtext = getLightMode()?ColorLightConst.subtext:ColorNightConst.subtext;
     shadowColor =  getLightMode()?ColorLightConst.shadowColor:ColorNightConst.shadowColor;
     borderColor =  getLightMode()?ColorLightConst.borderColor:ColorNightConst.borderColor;
@@ -116,6 +115,7 @@ class ColorConst{
     normalTextColorOnMainColor =  getLightMode()?ColorLightConst.normalTextColorOnMainColor:ColorNightConst.normalTextColorOnMainColor;
     colorHintTextSearch =  getLightMode()?ColorLightConst.colorHintTextSearch:ColorNightConst.colorHintTextSearch;
     colorIconGrays = getLightMode()?ColorLightConst.colorIconGrays:ColorNightConst.colorIconGrays;
+    colorIconRed = getLightMode()?ColorLightConst.mainColor:ColorNightConst.mainColor;
     bgToastSuccess = getLightMode()?ColorLightConst.bgToastSuccess:ColorNightConst.bgToastSuccess;
     bgToastError = getLightMode()?ColorLightConst.bgToastError:ColorNightConst.bgToastError;
     bgToastDangerous = getLightMode()?ColorLightConst.bgToastDangerous:ColorNightConst.bgToastDangerous;
@@ -126,11 +126,7 @@ class ColorConst{
     greyColor1 =  getLightMode()?ColorLightConst.greyColor1:ColorNightConst.greyColor1;
     greyColor2 = getLightMode()?ColorLightConst.greyColor2:ColorNightConst.greyColor2;
     greyColor = getLightMode()?ColorLightConst.greyColor:ColorNightConst.greyColor;
-    deviceAvailableColor = getLightMode()?ColorLightConst.paymentManagerAvailableColor:ColorNightConst.paymentManagerAvailableColor;
-    deviceFullColor = getLightMode()?ColorLightConst.paymentManagerFullColor:ColorNightConst.paymentManagerFullColor;
-    deviceRepairColor = getLightMode()?ColorLightConst.paymentManagerRepairColor:ColorNightConst.paymentManagerRepairColor;
-    deviceNotActiveColor = getLightMode()?ColorLightConst.paymentManagerNotActiveColor:ColorNightConst.paymentManagerNotActiveColor;
-    deviceClosedColor = getLightMode()?ColorLightConst.paymentManagerClosedColor:ColorNightConst.paymentManagerClosedColor;
+    
     colorLinear1 = getLightMode()?ColorLightConst.colorLinear1:ColorNightConst.colorLinear1;
     colorLinear2 = getLightMode()?ColorLightConst.colorLinear2:ColorNightConst.colorLinear2;
     colorLinear3 = getLightMode()?ColorLightConst.colorLinear3:ColorNightConst.colorLinear3;
@@ -149,6 +145,7 @@ class ColorConst{
     bgSettingButtonColor = getLightMode()?ColorLightConst.bgSettingButtonColor:ColorNightConst.bgSettingButtonColor;
     bgDialogColor = getLightMode()?ColorLightConst.bgDialogColor:ColorNightConst.bgDialogColor;
     bgSelectButtonColor = getLightMode()?ColorLightConst.bgSelectButtonColor:ColorNightConst.bgSelectButtonColor;
+    onHoverColor =  getLightMode()?ColorLightConst.onHoverColor:ColorNightConst.onHoverColor;
 }
 
   static bool getLightMode(){

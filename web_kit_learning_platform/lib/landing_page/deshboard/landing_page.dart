@@ -459,7 +459,6 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
               ),
               InkWell(
                 onTap: () async {
-                  launchUrlString("tel://${Constant().phoneNumber}");
                   final Uri smsLaunchUri = Uri(
                     scheme: 'tel',
                     path: Constant().phoneNumber,

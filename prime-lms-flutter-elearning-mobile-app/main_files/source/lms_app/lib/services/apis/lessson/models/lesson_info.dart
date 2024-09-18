@@ -102,7 +102,7 @@ class LessonInfo {
     if (json['vocabularies'] != null) {
       vocabularies = <VocabularyInfo>[];
       json['vocabularies'].forEach((v) {
-        vocabularies!.add(new VocabularyInfo.fromJson(v));
+        vocabularies!.add(VocabularyInfo.fromJson(v));
       });
     }
   }

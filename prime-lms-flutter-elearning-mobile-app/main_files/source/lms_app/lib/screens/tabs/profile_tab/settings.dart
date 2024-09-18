@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:lms_app/base/base.export.dart';
+import 'package:lms_app/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:lms_app/mixins/user_mixin.dart';
-import 'package:lms_app/screens/intro.dart';
+import 'package:lms_app/screens/pdf_screen.dart';
 import '../../../components/change_password.dart';
 import '../../../configs/features_config.dart';
 import '../../../providers/app_settings_provider.dart';
@@ -17,6 +18,7 @@ import '../../../services/notification_service.dart';
 import '../../../theme/theme_provider.dart';
 import '../../../utils/logout_dialog.dart';
 import '../../../utils/next_screen.dart';
+import '../../course_details.dart/lessons.dart';
 
 class AppSettings extends ConsumerWidget with UserMixin {
   const AppSettings({super.key});
@@ -30,7 +32,7 @@ class AppSettings extends ConsumerWidget with UserMixin {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'settings',
           style: TextStyle(fontWeight: FontWeight.bold),
         ).tr(),
@@ -81,14 +83,68 @@ class AppSettings extends ConsumerWidget with UserMixin {
           title: const Text('privacy-policy').tr(),
           leading: const Icon(LineIcons.lock),
           trailing: const Icon(FeatherIcons.chevronRight),
-          onTap: () => AppService().openLinkWithCustomTab(settings?.privacyUrl ?? ''),
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(
+                    builder: (builder) {
+                      return PdfScreen(
+                          link: "assets/files/Chính sách bảo mật YAX.pdf",
+                          pdfType: PdfType.asset,
+                          name: "privacy-policy".tr());
+                    }));
+          },
         ),
         const Divider(),
         ListTile(
           title: const Text('contact-us').tr(),
           leading: const Icon(LineIcons.envelope),
           trailing: const Icon(FeatherIcons.chevronRight),
-          onTap: () => AppService().openEmailSupport(IdentifierConst.supportEmail),
+          onTap: () {
+            
+            ConfirmPopupPage(
+              content: 'contact-us'.tr(),
+              title: 'contact-us'.tr(),
+              enableAcceptButton: false,
+              enableCancelButton: false,
+              contentWidget: Padding(
+                padding:  EdgeInsets.only(top: Dimens.size16, right: Dimens.size16, left: Dimens.size16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Hotline: ${ IdentifierConst.hotline}", style: TextStyleConstant.textStyleBlack14w500,),
+                          Gap(Dimens.size8),
+                          Icon(Icons.phone_in_talk, color: Colors.green,size: Dimens.size30,)
+                        ],
+                      ),
+                      onTap: () {
+                        AppService().openPhoneSupport(IdentifierConst.hotline);
+                      },
+                    ),
+                    Gap(Dimens.size16),
+                    InkWell(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Email: ${ IdentifierConst.supportEmail}", style: TextStyleConstant.textStyleBlack14w400,),
+                          Gap(Dimens.size8),
+                          Icon(Icons.email, color: Colors.green,size: Dimens.size30,)
+                        ],
+                      ),
+                      onTap: () {
+                        AppService().openEmailSupport(IdentifierConst.supportEmail);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ).show(context);
+          },
         ),
         const Divider(),
         ListTile(

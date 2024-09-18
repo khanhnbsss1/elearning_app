@@ -104,6 +104,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     Get.updateLocale(context.locale);
     LanguageHelper().setLocale(context.locale);
+    List<LocalizationsDelegate<dynamic>> delegates=[...[...context.localizationDelegates]];
+    delegates.add(S.delegate,);
+    FetchPixels(context);
+    ColorConst.setColorByFlavorType(context);
     return GetMaterialApp(
       theme: ThemeData(primaryColor: const Color(0xF4930202)),
       navigatorKey: NavigationService().navigationKey,
@@ -111,7 +115,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       navigatorObservers: [firebaseObserver],
       supportedLocales: context.supportedLocales,
-      localizationsDelegates: context.localizationDelegates,
+      localizationsDelegates: delegates,
       locale: LanguageHelper().getCurrentLocale(),
       routingCallback: (value) {
         if (kDebugMode) {

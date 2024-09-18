@@ -123,6 +123,7 @@ flutter:
    - assets/images/
    - assets/translations/
    - assets/png/
+   - assets/files/
 flutter_intl:
    enabled: true
    

@@ -131,20 +131,28 @@ class TextStyleConstant{
   static 	TextStyle  textStyleBlack10w500 = baseStyle.copyWithCustom(fontSize: fontSize10, color: ColorConst.blackColor, fontWeight: fontWeight500);
   static 	TextStyle  textStyleBlack30w500 = baseStyle.copyWithCustom(fontSize: fontSize30, color: ColorConst.blackColor, fontWeight: fontWeight500);
 
-  static void resetStyle(){
-     fontSize36 = Dimens.size36;
-     fontSize35 = Dimens.size35;
-     fontSize30 = Dimens.size30;
-     fontSize24 = Dimens.size24;
-     fontSize20 = Dimens.size22;
-     fontSize18 = Dimens.size19;
-     fontSize17 = Dimens.size18;
-     fontSize16 = Dimens.size17;
-     fontSize15 = Dimens.size16;
-     fontSize14 = Dimens.size15;
-     fontSize13 = Dimens.size14;
-     fontSize12 = Dimens.size13;
-     fontSize10 = Dimens.size11;
+  static void resetStyle(BuildContext context){
+    final ts = MediaQuery.textScalerOf(context);
+    double res = ts.scale(1.0);
+    if(res<0.9) {
+      res=0.9;
+    }
+    if(res>1.2) {
+      res=1.2;
+    }
+    fontSize36 = Dimens.size36/res;
+    fontSize35 = Dimens.size35/res;
+    fontSize30 = Dimens.size30/res;
+    fontSize24 = Dimens.size24/res;
+    fontSize20 = Dimens.size22/res;
+    fontSize18 = Dimens.size19/res;
+    fontSize17 = Dimens.size18/res;
+    fontSize16 = Dimens.size17/res;
+    fontSize15 = Dimens.size15/res;
+    fontSize14 = Dimens.size14/res;
+    fontSize13 = Dimens.size13/res;
+    fontSize12 = Dimens.size12/res;
+    fontSize10 = Dimens.size10/res;
 
      FontWeight fontWeight200 = FontWeight.w200;
      fontWeight300 = FontWeight.w300;

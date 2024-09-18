@@ -2,11 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
+enum PdfType{
+  link,
+  asset
+}
 class PdfScreen extends StatefulWidget {
   final String link;
   final String name;
-
-  const PdfScreen({super.key, required this.link, required this.name});
+   PdfType ?pdfType;
+   PdfScreen({super.key, required this.link, required this.name, this.pdfType}){
+     pdfType;
+   }
 
   @override
   _PdfScreenState createState() => _PdfScreenState();
@@ -22,9 +28,11 @@ class _PdfScreenState extends State<PdfScreen> {
           onPressed: () => Navigator.pop(context),
         ),
         backgroundColor: Theme.of(context).primaryColor,
-        title: Text(widget.name, style: const TextStyle(color: Colors.white),),
+        centerTitle: true,
+        title: Text(widget.name, style: const TextStyle(color: Colors.white, ),textAlign: TextAlign.center,),
+        
       ),
-      body: SfPdfViewer.network(widget.link),
+      body: widget.pdfType == PdfType.link? SfPdfViewer.network(widget.link): SfPdfViewer.asset(widget.link),
     );
   }
 }

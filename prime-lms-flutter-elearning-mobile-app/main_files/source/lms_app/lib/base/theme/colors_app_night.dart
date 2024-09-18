@@ -1,17 +1,15 @@
 
 import 'package:flutter/material.dart';
-import 'package:lms_app/enviroments/flavor_settings.dart';
-
 export 'color_extentions.dart';
 
 class ColorNightConst{
   static Color backGroundColor = Colors.black87;
-  static Color primaryColor = const Color(0xff8DDB90);
+  static Color primaryColor = const Color(0xF4930202);
   static Color mainColor = primaryColor;
   static Color mainColorWithOpacity50 = mainColor.withOpacity(0.5);
-  static Color iconColor = const Color(0xff17721A);
+  static Color iconColor = primaryColor;
 
-  static Color buttonbgColor = const Color(0xffbcf6be);
+  static Color buttonbgColor = primaryColor;
   static Color homeBg =  const Color(0xffBDE3BF);
   static Color bgColor =  const Color(0xFF242A24);
   static Color bgColor2 =  Colors.white24;
@@ -20,6 +18,8 @@ class ColorNightConst{
 
   static Color buttonColor =  const Color(0xff17721A);
   static Color textColor =   Colors.white;
+  static Color textColorOnMainColor =  const Color(0xFFFFFF00);
+
   static Color subtext = Colors.white;
   static Color shadowColor =  const Color(0xffE4EBE4);
   static Color borderColor =  const Color(0xffCFCFCF);
@@ -39,6 +39,7 @@ class ColorNightConst{
   static Color normalTextColorOnMainColor =  blackColor54;
   static Color colorHintTextSearch =  Colors.white;
   static Color colorIconGrays =  Colors.white;
+  static Color colorIconRed =  mainColor.withOpacity(0.6);
   static Color bgToastSuccess = const Color(0xFFE9F7F0);
   static Color bgToastError = const Color(0xFFFFE8E7);
   static Color bgToastDangerous = const Color(0xFFFFF3E9);
@@ -49,25 +50,7 @@ class ColorNightConst{
   static Color greyColor1 =  Colors.grey;
   static Color greyColor2 = const Color(0xFF8E8E8E);
   static Color greyColor = const Color(0xFF808080);
-
-  static Color paymentManagerAvailableColor = const Color(0xFF46af61);
-  static Color paymentManagerFullColor = const Color(0xFFff0000);
-  static Color paymentManagerRepairColor = const Color(0xFFff9e00);
-  static Color paymentManagerNotActiveColor = const Color(0xFFd8d8d8);
-  static Color paymentManagerClosedColor = const Color(0xFF054efa);
-
-
-  static Color paymentManagerConnectorAvailableColor = const Color(0xFF46af61);
-  static Color paymentManagerConnectorInUseColor = const Color(0xFFff9e00);
-  static Color paymentManagerConnectorRepairColor = const Color(0xFF054efa);
-  static Color paymentManagerConnectorBreakColor = const Color(0xFF000000);
-  static Color paymentManagerConnectorNotActiveColor = const Color(0xFFd8d8d8);
-
-  static Color bookingStatusTypeBookedColor = const Color(0xFF0246ba);
-  static Color bookingStatusTypeChargingColor = const Color(0xFF46af61);
-  static Color bookingStatusTypeCompletedColor = const Color(0xFF77ccef);
-  static Color bookingStatusTypeExpiredColor = const Color(0xFF6a6b60);
-  static Color bookingStatusTypeCanceledColor = const Color(0xFFd8d8d8);
+  
   static Color colorLinear1 = const Color(0xffb0dcb1);
   static Color colorLinear2 = const Color(0xff9bdc9e);
   static Color colorLinear3 = const Color(0xff8DDB90);
@@ -87,25 +70,23 @@ class ColorNightConst{
   static Color colorLinear7 = const Color(0xFF80DAF3);
   static Color colorLinear8 = const Color(0xFF3CD0F8);
   static Color colorLinear9 = const Color(0xFF00C5FF);
+  static Color onHoverColor = const Color(0xffd08c8c);
+
   static setColorByFlavorType() {
-    FlavorType flavorType = FlavorSettings().getFlavorType();
-    switch (flavorType) {
-      case FlavorType.elearningLms:
-      // TODO: Handle this case.
-        {
           backGroundColor = Colors.black87;
-          primaryColor = const Color(0xff8DDB90);
+          primaryColor = const Color(0xF4930202);
           mainColor = primaryColor;
           mainColorWithOpacity50 = mainColor.withOpacity(0.5);
-          iconColor = const Color(0xff17721A);
+          iconColor =primaryColor;
+          
 
-          buttonbgColor = const Color(0xffbcf6be);
-          homeBg =  const Color(0xffBDE3BF);
+          buttonbgColor = primaryColor;
+          homeBg =  const Color(0xF4FFF4F4);
           bgColor =  const Color(0xFF242A24);
           bgColor2 =  Colors.white24;
 
           textColorOnMainButton = Colors.black87;
-
+          textColorOnMainColor =  const Color(0xFFFFFF00);
           buttonColor =  const Color(0xff17721A);
           textColor =   Colors.white;
           subtext = Colors.white;
@@ -127,6 +108,7 @@ class ColorNightConst{
           normalTextColorOnMainColor =  blackColor54;
           colorHintTextSearch =  Colors.white60;
           colorIconGrays =  Colors.white;
+          colorIconRed =  mainColor.withOpacity(0.6);
           bgToastSuccess = const Color(0xFFE9F7F0);
           bgToastError = const Color(0xFFFFE8E7);
           bgToastDangerous = const Color(0xFFFFF3E9);
@@ -137,24 +119,7 @@ class ColorNightConst{
           greyColor1 =  Colors.grey;
           greyColor2 = const Color(0xFF8E8E8E);
           greyColor = const Color(0xFF808080);
-
-          paymentManagerAvailableColor = const Color(0xFF46af61);
-          paymentManagerFullColor = const Color(0xFFff0000);
-          paymentManagerRepairColor = const Color(0xFFff9e00);
-          paymentManagerNotActiveColor = const Color(0xFFd8d8d8);
-          paymentManagerClosedColor = const Color(0xFF054efa);
-
-          paymentManagerConnectorAvailableColor = const Color(0xFF46af61);
-          paymentManagerConnectorInUseColor = const Color(0xFFff9e00);
-          paymentManagerConnectorRepairColor = const Color(0xFF054efa);
-          paymentManagerConnectorBreakColor = const Color(0xFF000000);
-          paymentManagerConnectorNotActiveColor = const Color(0xFFd8d8d8);
-
-          bookingStatusTypeBookedColor = const Color(0xFF0246ba);
-          bookingStatusTypeChargingColor = const Color(0xFF46af61);
-          bookingStatusTypeCompletedColor = const Color(0xFF77ccef);
-          bookingStatusTypeExpiredColor = const Color(0xFF6a6b60);
-          bookingStatusTypeCanceledColor = const Color(0xFFd8d8d8);
+          
           colorLinear1 = const Color(0xffb0dcb1);
           colorLinear2 = const Color(0xff9bdc9e);
           colorLinear3 = const Color(0xff8DDB90);
@@ -175,9 +140,7 @@ class ColorNightConst{
           colorLinear7 = const Color(0xFF80DAF3);
           colorLinear8 = const Color(0xFF3CD0F8);
           colorLinear9 = const Color(0xFF00C5FF);
-        }
-        break;
-    }
+          onHoverColor = const Color(0xfffff1f1);
   }
 
 }

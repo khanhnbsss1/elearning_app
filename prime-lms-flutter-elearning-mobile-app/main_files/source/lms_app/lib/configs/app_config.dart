@@ -14,5 +14,5 @@ class AppConfig {
   static const String androidPackageName = "com.FFTCompany.YAXChinese";//;
 
   // iOS App ID
-  static const String iosAppID = '000000';
+  static const String iosAppID = '6504179728';
 }
