@@ -102,52 +102,55 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Wrap(
-                              spacing: 8.0,
+                              spacing: 0,
                               runSpacing: 8.0,
                               children: [
                                 if (notes.length > 1)
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    onTap: () {
-                                      if (_onCheck(context, lessonDetail,
-                                          courseDetail, ref)) {
-                                        Navigator.push(context,
-                                            MaterialPageRoute(
-                                                builder: (builder) {
-                                          return PdfScreen(
-                                              link: notes[1],
-                                              name: "content".tr());
-                                        }));
-                                      }
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(12)),
-                                      ),
-                                      padding: const EdgeInsets.all(4),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Icon(
-                                            Icons.description,
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                          ),
-                                          const SizedBox(
-                                            width: 2,
-                                          ),
-                                          Text('content',
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .titleLarge
-                                                      ?.copyWith(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          fontSize: 16))
-                                              .tr(),
-                                        ],
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 8.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      onTap: () {
+                                        if (_onCheck(context, lessonDetail,
+                                            courseDetail, ref)) {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(
+                                                  builder: (builder) {
+                                            return PdfScreen(
+                                                link: notes[1],
+                                                name: "content".tr());
+                                          }));
+                                        }
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(),
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(12)),
+                                        ),
+                                        padding: const EdgeInsets.all(4),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(
+                                              Icons.description,
+                                              color:
+                                                  Theme.of(context).primaryColor,
+                                            ),
+                                            const SizedBox(
+                                              width: 2,
+                                            ),
+                                            Text('content',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleLarge
+                                                        ?.copyWith(
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            fontSize: 16))
+                                                .tr(),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),

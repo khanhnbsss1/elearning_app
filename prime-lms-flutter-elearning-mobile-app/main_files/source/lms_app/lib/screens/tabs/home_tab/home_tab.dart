@@ -50,7 +50,7 @@ class HomeTab extends ConsumerWidget {
       'dictionary',
       'tests',
       'instructor',
-      'lets_study',
+      'lets-study',
     ];
     List<Image> images = [
       Image.asset('assets/images/online-course.png'),
@@ -78,12 +78,12 @@ class HomeTab extends ConsumerWidget {
         ref.invalidate(homeLatestCoursesProvider);
       },
       child: Container(
-        color: (isDarkMode != true) ? Colors.black.withOpacity(0.05) : Colors.black.withOpacity(0.1),
+        color: Colors.black.withOpacity(0.05),
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
               title: const AppLogo(
-                size: 55,
+                size: 45,
               ),
               pinned: false,
               floating: true,
@@ -176,7 +176,7 @@ class HomeTab extends ConsumerWidget {
         child: Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12), color: (isDarkMode != true) ? Colors.white : Colors.black.withOpacity(0.1)),
+          borderRadius: BorderRadius.circular(10), color: (isDarkMode != true) ? Colors.white : Colors.black.withOpacity(0.1)),
       height: height ?? 120,
       width: width == null ? 150 : width > 200 ? 200 : width,
       child: Column(
@@ -202,7 +202,7 @@ class HomeTab extends ConsumerWidget {
                 // color: (isDarkMode != true) ? Colors.black : Colors.white
                 color: Colors.black
               ),
-              maxLines: 2,
+              maxLines: 1,
               overflow: TextOverflow.clip,
             ),
           )

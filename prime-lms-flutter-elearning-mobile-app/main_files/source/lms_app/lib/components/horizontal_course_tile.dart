@@ -30,7 +30,13 @@ class HorizontalCourseTile extends StatelessWidget {
       onTap: () => NextScreen.iOS(
           context, CourseDetailsView(courses: course, heroTag: heroTag)),
       child: Container(
-        color: (isDarkMode != true) ? Colors.white : Colors.black.withOpacity(0.1),
+        decoration: BoxDecoration(
+          color: (isDarkMode != true) ? Colors.white : Colors.black.withOpacity(0.1),
+          border: Border.all(
+            color: Colors.grey,
+          ),
+          borderRadius: BorderRadius.circular(10)
+        ),
         width: MediaQuery.of(context).size.width * widthPercentage,
         margin: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
@@ -43,15 +49,18 @@ class HorizontalCourseTile extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: Hero(
                       tag: heroTag,
-                      child: (course.image != null && course.image != "")
-                          ? CustomCacheImage(
-                              imageUrl: course.image,
-                              radius: 0,
-                            )
-                          : Image.asset(
-                              "assets/images/noImage1.jpg",
-                              fit: BoxFit.cover,
-                            ),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10)),
+                        child: (course.image != null && course.image != "")
+                            ? CustomCacheImage(
+                          imageUrl: course.image,
+                          radius: 0,
+                        )
+                            : Image.asset(
+                          "assets/images/noImage1.jpg",
+                          fit: BoxFit.cover,
+                        ),
+                      )
                     )),
                 // PremiumTag(course: course),
               ],

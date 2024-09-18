@@ -24,6 +24,7 @@ class Curriculam extends ConsumerWidget {
         Sections(
           courseDetail: course,
           isInitialSectionOpen: false,
+          enabled: false,
         ),
       ],
     );

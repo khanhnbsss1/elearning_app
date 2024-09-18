@@ -3,45 +3,56 @@ import 'package:flutter/material.dart';
 import 'package:lms_app/base/widgets/dialog_common/common_dialog1.dart';
 
 import '../../base.export.dart';
-class ConfirmPopupPage extends StatefulWidget{
+
+class ConfirmPopupPage extends StatefulWidget {
   void show(BuildContext context) {
     showDialog(
-        barrierDismissible: true,
-        context: context,
-        builder: (context) => this);
+        barrierDismissible: true, context: context, builder: (context) => this);
   }
+
   void Function()? onAccept;
   String? title;
   String? content;
   Widget? contentWidget;
   bool? enableAcceptButton, enableCancelButton;
-  ConfirmPopupPage({super.key, this.onAccept, this.content, this.title, this.contentWidget, this.enableAcceptButton, this.enableCancelButton});
+
+  ConfirmPopupPage(
+      {super.key,
+      this.onAccept,
+      this.content,
+      this.title,
+      this.contentWidget,
+      this.enableAcceptButton,
+      this.enableCancelButton});
 
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
     return ConfirmPopupPageState();
   }
-
 }
-class ConfirmPopupPageState extends State<ConfirmPopupPage> with SingleTickerProviderStateMixin {
 
-
+class ConfirmPopupPageState extends State<ConfirmPopupPage>
+    with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    bool  isTablet = ResponsiveInfo.isTablet();
+    bool isTablet = ResponsiveInfo.isTablet();
     return buildUiAll(context, isTablet: isTablet);
   }
-  late AnimationController controller ;
+
+  late AnimationController controller;
+
   late Animation<double> scaleAnimation;
 
   @override
   void initState() {
     super.initState();
 
-    controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 200));
-    scaleAnimation = CurvedAnimation(parent: controller, curve: Curves.easeInOut);
+    controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 200));
+    scaleAnimation =
+        CurvedAnimation(parent: controller, curve: Curves.easeInOut);
 
     controller.addListener(() {
       setState(() {});
@@ -49,46 +60,45 @@ class ConfirmPopupPageState extends State<ConfirmPopupPage> with SingleTickerPro
     controller.forward();
   }
 
-  Widget buildUiAll(BuildContext context, {bool ? isTablet}){
-    isTablet??=false;
-    
+  Widget buildUiAll(BuildContext context, {bool? isTablet}) {
+    isTablet ??= false;
+
     return ScaleTransition(
       scale: scaleAnimation,
       child: CustomDialog1(
           title: widget.title,
           titleAlignment: MainAxisAlignment.center,
           insetPadding: EdgeInsets.zero,
-          width: MediaQuery.of(context).size.width*(!isTablet?0.95: 0.7),
+          width: MediaQuery.of(context).size.width * (!isTablet ? 0.95 : 0.7),
           enableBackButton: false,
           enableCloseButton: true,
           enableHeader: true,
           mainAxisSizeParent: MainAxisSize.min,
-          child:
-          Column(
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Visibility(
-                visible: widget.contentWidget==null,
+                visible: widget.contentWidget == null,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 30),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0, vertical: 30),
                   child: Center(
-                    child: Text(
-                        widget.content??"",
+                    child: Text(widget.content ?? "",
                         textAlign: TextAlign.center,
-                        style: TextStyleConstant.textStyleBlack14w400
-                    ),),
+                        style: TextStyleConstant.textStyleBlack14w400),
+                  ),
                 ),
               ),
               Visibility(
-                visible: true,// widget.contentWidget!=null, 
-                 child: widget.contentWidget??const SizedBox()),
+                  visible: true, // widget.contentWidget!=null,
+                  child: widget.contentWidget ?? const SizedBox()),
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Visibility(
-                      visible: widget.enableCancelButton!=false,
+                      visible: widget.enableCancelButton != false,
                       child: ActionButton1(
                           width: Dimens.size120,
                           onTap: () async {
@@ -99,15 +109,14 @@ class ConfirmPopupPageState extends State<ConfirmPopupPage> with SingleTickerPro
                     ),
                     Gap(Dimens.size20),
                     Visibility(
-                      visible: widget.enableAcceptButton!=false,
+                      visible: widget.enableAcceptButton != false,
                       child: ActionButton1(
                           width: Dimens.size120,
                           onTap: () async {
                             Navigator.of(context).pop();
-                            if(widget.onAccept!=null)
-                              {
-                                widget.onAccept!();
-                              }
+                            if (widget.onAccept != null) {
+                              widget.onAccept!();
+                            }
                           },
                           text: S.of(context).str_accept,
                           height: Dimens.size40),
@@ -116,11 +125,7 @@ class ConfirmPopupPageState extends State<ConfirmPopupPage> with SingleTickerPro
                 ),
               )
             ],
-          )
-      ),
+          )),
     );
   }
-
-  
-
-  }
+}

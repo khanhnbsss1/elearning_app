@@ -46,7 +46,7 @@ class MyCoursesTab extends ConsumerWidget {
         ref.invalidate(myCoursesProvider);
       },
       child: Scaffold(
-        backgroundColor: (isDarkMode != true) ? Colors.black.withOpacity(0.05) : Colors.black.withOpacity(0.1),
+        // backgroundColor: (isDarkMode != true) ? Colors.black.withOpacity(0.05) : Colors.black.withOpacity(0.1),
         appBar: AppBar(
           title: const Text('my-courses').tr(),
           backgroundColor: Theme.of(context).primaryColor,

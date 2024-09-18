@@ -67,7 +67,7 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      courseDetail.name!,
+                      courseDetail.name??"",
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context)
@@ -126,7 +126,7 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
           finished++;
         }
       }
-      process = (finished * 100 / course.lectures!.length).ceil();
+      (course.lectures!.isNotEmpty) ? process = (finished * 100 / (course.lectures!.length)).ceil() : process = 0;
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

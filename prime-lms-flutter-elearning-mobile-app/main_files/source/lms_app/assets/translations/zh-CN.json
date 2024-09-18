@@ -168,7 +168,7 @@
     "remember-me": "记住账号",
     "change-password-success": "修改密码成功",
     "change-password-fail": "更改密码失败",
-    "lets-study": "让我们学习",
+    "lets-study": "来学习吧",
     "sign-up-course-to-learn": "请注册课程开始学习",
     "do-test": "开始测试",
     "next-question": "下一个问题",
@@ -200,6 +200,5 @@
     "test-type": "测试类型: {}",
     "test-length": "问题数量: {}",
     "all-courses": "所有课程",
-    "tests": "测试",
-    "lets_study": "来学习吧"
+    "tests": "测试"
 }

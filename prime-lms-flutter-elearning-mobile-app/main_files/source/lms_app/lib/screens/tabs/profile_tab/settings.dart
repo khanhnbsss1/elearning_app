@@ -100,7 +100,6 @@ class AppSettings extends ConsumerWidget with UserMixin {
           leading: const Icon(LineIcons.envelope),
           trailing: const Icon(FeatherIcons.chevronRight),
           onTap: () {
-            
             ConfirmPopupPage(
               content: 'contact-us'.tr(),
               title: 'contact-us'.tr(),

@@ -9,10 +9,11 @@ import 'lessons.dart';
 final isSectionExpnadedProvider = StateProvider.autoDispose.family<bool, String>((ref, sectionId) => false);
 
 class Sections extends ConsumerWidget {
-  const Sections({super.key, required this.courseDetail, required this.isInitialSectionOpen});
+  Sections({super.key, required this.courseDetail, required this.isInitialSectionOpen,required this.enabled});
 
   final CourseInfo courseDetail;
   final bool isInitialSectionOpen;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,6 +39,7 @@ class Sections extends ConsumerWidget {
         itemBuilder: (BuildContext context, int index) {
           const bool isExpanded = true;
           return ExpansionTile(
+            enabled: enabled,
             tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             collapsedShape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),

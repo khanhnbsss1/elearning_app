@@ -33,7 +33,7 @@ class AuthorCard extends StatelessWidget {
             color: AppService.isDarkMode(context)
                 ? CustomColor.borderDark
                 : CustomColor.border),
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

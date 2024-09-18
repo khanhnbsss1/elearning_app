@@ -10,7 +10,7 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 const Map<int, List> homeTabs = {
   1: ['home', FeatherIcons.home],
   2: ['search', FeatherIcons.search],
-  3: ['my-courses', FeatherIcons.bookOpen],
+  3: ['lets-study', FeatherIcons.bookOpen],
   4: ['dictionary', FeatherIcons.book],
   5: ['profile', FeatherIcons.user],
 };

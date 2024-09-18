@@ -44,6 +44,7 @@ class _CurriculamScreenState extends State<CurriculamScreen> {
               Sections(
                 courseDetail: widget.courseDetail,
                 isInitialSectionOpen: false,
+                enabled: true,
               )
             ],
           ),

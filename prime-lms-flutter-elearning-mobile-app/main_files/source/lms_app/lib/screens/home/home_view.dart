@@ -40,8 +40,8 @@ class HomeView extends ConsumerWidget {
           ],
         ),
         if (showTel) Positioned(
-            bottom: 0,
-            right: 0,
+            bottom: 5,
+            right: 5,
             child: Stack(children: [
               Container(
                   height: 60,
@@ -52,14 +52,12 @@ class HomeView extends ConsumerWidget {
                   ),
                   child: const PhoneCallButton()),
               Positioned(
-                top: 3,
-                right: 3,
+                top: 0,
+                right: 0,
                 child: Container(
                   decoration: BoxDecoration(
+                    color: ColorConst.whiteColor,
                     borderRadius: const BorderRadius.all(Radius.circular(12)),
-                    border: Border.all(
-                      color: Colors.transparent
-                    )
                   ),
                   height: 20,
                   width: 20,
@@ -67,7 +65,7 @@ class HomeView extends ConsumerWidget {
                     onTap: () {
                       ref.read(homeShowTelProvider.notifier).state = false;
                     },
-                    child: Icon(Icons.close, size: 16,color: Colors.white,),
+                    child: const Icon(Icons.close, size: 16,color: Colors.black,),
                   ),
                 ),
               ),

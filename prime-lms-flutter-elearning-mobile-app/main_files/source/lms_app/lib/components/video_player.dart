@@ -41,13 +41,12 @@ class _VideoPlayerState extends State<VideoPlayer> {
         playVideoFrom: videoType == 'network'
             ? PlayVideoFrom.network(widget.videoUrl)
             : videoType == 'vimeo'
-                ? PlayVideoFrom.vimeo(widget.videoUrl)
-                : PlayVideoFrom.youtube(widget.videoUrl),
+            ? PlayVideoFrom.vimeo(widget.videoUrl)
+            : PlayVideoFrom.youtube(widget.videoUrl),
         podPlayerConfig: const PodPlayerConfig(
           autoPlay: false,
           isLooping: false,
-        ))
-      ..initialise();
+        ))..initialise();
     controller.addListener(_checkVideoCompletion);
   }
 
@@ -60,6 +59,19 @@ class _VideoPlayerState extends State<VideoPlayer> {
         isVideoWatched = true;
       });
       _onVideoCompleted(process);
+    }
+  }
+
+  @override
+  void didUpdateWidget(VideoPlayer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.videoUrl != widget.videoUrl) {
+      final String videoType = AppService.getVideoType(widget.videoUrl);
+      controller.changeVideo(playVideoFrom: videoType == 'network'
+          ? PlayVideoFrom.network(widget.videoUrl)
+          : videoType == 'vimeo'
+          ? PlayVideoFrom.vimeo(widget.videoUrl)
+          : PlayVideoFrom.youtube(widget.videoUrl),);
     }
   }
 
