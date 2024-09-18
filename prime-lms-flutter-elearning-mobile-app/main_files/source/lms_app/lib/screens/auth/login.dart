@@ -75,6 +75,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     ref.invalidate(userDataProvider);
     ref.invalidate(homeTabControllerProvider);
     ref.invalidate(navBarIndexProvider);
+    ref.invalidate(homeShowTelProvider);
     await ref.read(userDataProvider.notifier).getData();
     NextScreen.closeOthersAnimation(context, const HomeView());
   }

@@ -25,7 +25,7 @@ class ProfileTab extends ConsumerWidget {
         ),
         const SliverToBoxAdapter(
           child: SingleChildScrollView(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

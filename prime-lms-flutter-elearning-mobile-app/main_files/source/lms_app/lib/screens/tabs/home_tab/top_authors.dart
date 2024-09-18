@@ -11,6 +11,7 @@ import 'package:lms_app/utils/next_screen.dart';
 
 import '../../../models/user/UserProfile.dart';
 import '../../../services/apis/teacher_list/models/landing_page_teacher_list_model.dart';
+import '../../../theme/theme_provider.dart';
 
 final topAuthorsProvider =
     FutureProvider.autoDispose<List<LandingPageUserInfo>?>((ref) async {
@@ -25,6 +26,7 @@ class TopAuthors extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authors = ref.watch(topAuthorsProvider);
+    final isDarkMode = ref.watch(themeProvider).isDarkMode;
     return authors.when(
         skipLoadingOnRefresh: false,
         data: (data) {
@@ -40,7 +42,7 @@ class TopAuthors extends ConsumerWidget {
                           children: [
                             Expanded(
                                 child: Text(
-                              'top-instructor'.tr(),
+                              'instructors'.tr(),
                               style: Theme.of(context)
                                   .textTheme
                                   .titleLarge
@@ -55,7 +57,9 @@ class TopAuthors extends ConsumerWidget {
                                   padding: const EdgeInsets.all(0)),
                               child: Text(
                                 'view-all',
-                                style: Theme.of(context).textTheme.bodyMedium,
+                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: (isDarkMode != true) ? Colors.black : Colors.white
+                                ),
                               ).tr(),
                             )
                           ],
@@ -68,7 +72,7 @@ class TopAuthors extends ConsumerWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: data.map((user) {
-                            return AuthorCard(user: user);
+                            return AuthorCard(user: user, isDarkMode: isDarkMode,);
                           }).toList(),
                         ),
                       )
