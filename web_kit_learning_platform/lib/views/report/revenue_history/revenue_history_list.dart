@@ -7,6 +7,7 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
+import 'package:webkit/base/widgets/pagination/pagination_custom.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
@@ -116,7 +117,7 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FlutterCustomPagination(
+              PaginationCustom(
                 key: GlobalKey(debugLabel: (state.lessonListResponseModel?.total??0).toString()),
                 currentPage: state.lessonListResponseModel!.getCurrentPage(),
                 limitPerPage: state.lessonListResponseModel!.pageSize??10,

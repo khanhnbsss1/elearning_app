@@ -8,6 +8,7 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
 import 'package:webkit/base/permission/permisstion.dart';
+import 'package:webkit/base/widgets/pagination/pagination_custom.dart';
 import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_responsiv.dart';
@@ -115,7 +116,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              FlutterCustomPagination(
+              PaginationCustom(
                 key: GlobalKey(debugLabel: (state.userListResponseModel?.total??0).toString()),
                 currentPage: state.userListResponseModel!.getCurrentPage(),
                 limitPerPage: state.userListResponseModel!.pageSize??10,

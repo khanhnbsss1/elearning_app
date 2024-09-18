@@ -9,6 +9,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
 import 'package:webkit/base/widgets/audio/audio_speaker.dart';
 import 'package:webkit/base/widgets/pages_common/list_body_page_common.dart';
+import 'package:webkit/base/widgets/pagination/pagination_custom.dart';
 import 'package:webkit/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:webkit/base/widgets/widget_common/widget_with_title_common.dart';
 import 'package:webkit/controller/apps/contact/member_list_controller.dart';
@@ -142,35 +143,39 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
             buildListFilter(context: context, state: state, myScreenMediaType: myScreenMediaType, boxConstraints: boxConstraints),
             Expanded(child: buildVocabularyList(state: state, context: context, myScreenMediaType: myScreenMediaType)),
             SizedBox(height: 8,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FlutterCustomPagination(
-                  key: GlobalKey(debugLabel: (state.vocabularyResponseModel?.total??0).toString()),
-                  currentPage: state.vocabularyResponseModel!.getCurrentPage(),
-                  limitPerPage: state.vocabularyResponseModel!.pageSize??10,
-                  totalDataCount: state.vocabularyResponseModel!.getTotalElement(),
-                  onPreviousPage: (p0) {
-                    BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onBackToFirstPage: (p0) {
-                    BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onNextPage: (p0) {
-                    BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  onGoToLastPage: (p0) {
-                    BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
-                  },
-                  backgroundColor: ColorConst.whiteColor,
-                  textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
-                  previousPageIcon: Icons.keyboard_arrow_left,
-                  backToFirstPageIcon: Icons.first_page,
-                  nextPageIcon: Icons.keyboard_arrow_right,
-                  goToLastPageIcon: Icons.last_page,
-                ),
-              ],
-            ),
+            LayoutBuilder(builder: (context, constraints) {
+              return  Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  PaginationCustom(
+                    key: GlobalKey(debugLabel: (state.vocabularyResponseModel?.total??0).toString()),
+                    
+                    currentPage: state.vocabularyResponseModel!.getCurrentPage(),
+                    limitPerPage: state.vocabularyResponseModel!.pageSize??10,
+                    totalDataCount: state.vocabularyResponseModel!.getTotalElement(),
+                    onPreviousPage: (p0) {
+                      BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    },
+                    onBackToFirstPage: (p0) {
+                      BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    },
+                    onNextPage: (p0) {
+                      BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    },
+                    onGoToLastPage: (p0) {
+                      BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListOnSearchByFilterEvent(searchCommonRequest: state.searchCommonRequest!.copyWith(pageNumber: p0 -1)));
+                    },
+                    backgroundColor: ColorConst.whiteColor,
+                    textStyle: TextStyleConstant.textStyleBlack14w700.copyWith(color: ColorConst.mainColor),
+                    previousPageIcon: Icons.keyboard_arrow_left,
+                    backToFirstPageIcon: Icons.first_page,
+                    nextPageIcon: Icons.keyboard_arrow_right,
+                    goToLastPageIcon: Icons.last_page,
+                    enableTotalElement: constraints.maxWidth>Dimens.size450,
+                  ),
+                ],
+              );
+            },)
           ],
         ),
       ),

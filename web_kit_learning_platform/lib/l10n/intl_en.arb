@@ -682,5 +682,10 @@
   "my_rating": "Your rating",
   "you_yet_rating": "You have not rated this course",
   "lecture_str": "Lecture",
-  "proccess_str": "Progress"
+  "proccess_str": "Progress",
+  
+  "copyright_str": "Copyright ©",
+  "designed_by": "Designed by ",
+  "display_str": "Show",
+  "of_str": "Of"
 }

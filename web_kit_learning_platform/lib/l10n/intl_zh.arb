@@ -675,5 +675,9 @@
   "my_ rating": "您的评分",
   "you_yet_rating": "您尚未评价这门课程",
   "lecture_str": "讲座",
-  "process_str": "进度"
+  "process_str": "进度",
+  "copyright_str": "版权所有 ©",
+  "design_by": "设计者",
+  "display_str": "显示",
+  "of_str": "的"
 }

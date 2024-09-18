@@ -490,7 +490,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                 ),
                 // initialValue: selectedMenu,
                 constraints:  BoxConstraints(
-                  maxWidth:  Dimens.size200,
+                  maxWidth:  Dimens.size280,
                   maxHeight: Dimens.size100,
                 ),
                 color: notifier.whitecolor,
@@ -564,7 +564,7 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                 ),
                 // initialValue: selectedMenu,
                 constraints:  BoxConstraints(
-                  maxWidth:  Dimens.size200,
+                  maxWidth:  Dimens.size150,
                   maxHeight: Dimens.size280,
                 ),
                 color: notifier.whitecolor,
