@@ -66,7 +66,7 @@ class QuizComplete extends ConsumerWidget {
                   ).tr(),
                   const SizedBox(height: 10),
                   Text('score-count', style: Theme.of(context).textTheme.displaySmall?.copyWith(color: Colors.green))
-                      .tr(args: [((result.point??0) * 10).toStringAsFixed(0)]),
+                      .tr(args: [((result.point??0)).toStringAsFixed(0)]),
                   const SizedBox(height: 20),
                   Text(
                     isPassed ? 'passed-test' : "failed-test",

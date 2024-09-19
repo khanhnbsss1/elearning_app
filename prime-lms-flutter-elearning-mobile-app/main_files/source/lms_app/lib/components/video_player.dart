@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -14,15 +15,17 @@ class VideoPlayer extends StatefulWidget {
     required this.videoUrl,
     required this.videoTitle,
     this.thumbnailUrl,
-    required this.courseId,
-    required this.lectureId,
+    required this.currentOrder,
+    required this.totalOrder,
+    required this.onCompleted,
   });
 
   final String videoTitle;
   final String videoUrl;
   final String? thumbnailUrl;
-  final int courseId;
-  final int lectureId;
+  final int currentOrder;
+  final int totalOrder;
+  final Function(int)? onCompleted;
 
   @override
   State<VideoPlayer> createState() => _VideoPlayerState();
@@ -31,59 +34,60 @@ class VideoPlayer extends StatefulWidget {
 class _VideoPlayerState extends State<VideoPlayer> {
   late final PodPlayerController controller;
 
-  bool isVideoWatched = false;
+  int count = 0;
 
   @override
   void initState() {
     super.initState();
+
     final String videoType = AppService.getVideoType(widget.videoUrl);
     controller = PodPlayerController(
         playVideoFrom: videoType == 'network'
             ? PlayVideoFrom.network(widget.videoUrl)
             : videoType == 'vimeo'
-            ? PlayVideoFrom.vimeo(widget.videoUrl)
-            : PlayVideoFrom.youtube(widget.videoUrl),
+                ? PlayVideoFrom.vimeo(widget.videoUrl)
+                : PlayVideoFrom.youtube(widget.videoUrl),
         podPlayerConfig: const PodPlayerConfig(
           autoPlay: false,
           isLooping: false,
-        ))..initialise();
+        ))
+      ..initialise();
     controller.addListener(_checkVideoCompletion);
-  }
-
-  void _checkVideoCompletion() {
-    final currentPosition = controller.currentVideoPosition.inSeconds;
-    final totalDuration = controller.totalVideoLength.inSeconds;
-    int process = ((currentPosition.toDouble() / totalDuration) * 100).floor();
-    if (process > 95 && !isVideoWatched) {
-      setState(() {
-        isVideoWatched = true;
-      });
-      _onVideoCompleted(process);
-    }
   }
 
   @override
   void didUpdateWidget(VideoPlayer oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.videoUrl != widget.videoUrl) {
-      final String videoType = AppService.getVideoType(widget.videoUrl);
-      controller.changeVideo(playVideoFrom: videoType == 'network'
-          ? PlayVideoFrom.network(widget.videoUrl)
-          : videoType == 'vimeo'
-          ? PlayVideoFrom.vimeo(widget.videoUrl)
-          : PlayVideoFrom.youtube(widget.videoUrl),);
+      _updateVideo();
     }
   }
 
-  void _onVideoCompleted(
-    int proccess,
-  ) async {
-      UpdateLessonStatusApi updateLessonStatusApi = UpdateLessonStatusApi(
-        courseId: widget.courseId,
-        lectureId: widget.lectureId,
-        progress: proccess,
-      );
-      updateLessonStatusApi.call();
+  Future<void> _updateVideo() async {
+    final String videoType = AppService.getVideoType(widget.videoUrl);
+    await controller.changeVideo(
+      playVideoFrom: videoType == 'network'
+          ? PlayVideoFrom.network(widget.videoUrl)
+          : videoType == 'vimeo'
+              ? PlayVideoFrom.vimeo(widget.videoUrl)
+              : PlayVideoFrom.youtube(widget.videoUrl),
+    );
+
+    controller.addListener(_checkVideoCompletion);
+  }
+
+  void _checkVideoCompletion() {
+    final currentPosition = controller.currentVideoPosition.inSeconds;
+    final totalDuration = controller.totalVideoLength.inSeconds;
+    int progress = currentPosition * 100 ~/ totalDuration;
+    if (widget.currentOrder < widget.totalOrder && progress == 100) {
+      controller.removeListener(_checkVideoCompletion);
+      widget.onCompleted!(widget.currentOrder + 1);
+    } else {
+      if (widget.currentOrder == widget.totalOrder && progress > 95) {
+        widget.onCompleted!(widget.currentOrder);
+      }
+    }
   }
 
   @override
@@ -99,6 +103,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
+    // controller.addListener(_checkVideoCompletion);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

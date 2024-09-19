@@ -11,7 +11,7 @@ class PdfScreen extends StatefulWidget {
   final String name;
    PdfType ?pdfType;
    PdfScreen({super.key, required this.link, required this.name, this.pdfType}){
-     pdfType;
+     pdfType=pdfType??PdfType.link;
    }
 
   @override

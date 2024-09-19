@@ -5,9 +5,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CountDownClock extends StatefulWidget {
-  const CountDownClock({super.key, required this.endTime});
+  const CountDownClock({super.key, required this.endTime, this.timeOut});
 
   final Duration endTime;
+  final Function? timeOut;
+
 
   @override
   State<CountDownClock> createState() => _CountDownClockState();
@@ -31,7 +33,7 @@ class _CountDownClockState extends State<CountDownClock> {
         _remainingTime = _remainingTime - const Duration(seconds: 1);
       });
     }
-    Navigator.of(context).pop();
+    widget.timeOut!();
   }
 
   @override

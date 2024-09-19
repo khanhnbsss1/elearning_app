@@ -9,11 +9,15 @@ import 'package:lms_app/screens/auth/sign_up.dart';
 import 'package:lms_app/screens/home/home_view.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+import '../../base/constant.dart';
 import '../../components/languages.dart';
 import '../../configs/features_config.dart';
 import '../../controller_elearning/auth/login_controller.dart';
 import '../../providers/user_data_provider.dart';
+import '../../services/app_service.dart';
 import '../home/home_bottom_bar.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key, this.popUpScreen});
@@ -279,6 +283,58 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ),
           ),
         ),
+      ),
+      floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: ExpandableFab(
+        type: ExpandableFabType.side,
+        childrenAnimation: ExpandableFabAnimation.rotate,
+        distance: 70,
+        openButtonBuilder: RotateFloatingActionButtonBuilder(
+          child: const Icon(Icons.help_outline),
+          fabSize: ExpandableFabSize.regular,
+          foregroundColor: Colors.white,
+          backgroundColor: Theme.of(context).primaryColor,
+          shape: const CircleBorder(),
+          angle: 3.14 * 2,
+        ),
+        closeButtonBuilder: FloatingActionButtonBuilder(
+          size: 45,
+          builder: (BuildContext context, void Function()? onPressed,
+              Animation<double> progress) {
+            return Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(30)
+              ),
+              child: IconButton(
+                onPressed: onPressed,
+                icon: Icon(
+                  Icons.close,
+                  size: 25,
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+            );
+          },
+        ),
+        children: [
+          FloatingActionButton.small(
+            backgroundColor: Theme.of(context).primaryColor,
+            shape: const CircleBorder(),
+            heroTag: null,
+            onPressed: () => AppService().openPhoneSupport(IdentifierConst.hotline),
+            child: const Icon(Icons.phone_in_talk_outlined, color: Colors.white,),
+          ),
+          FloatingActionButton.small(
+            backgroundColor: Theme.of(context).primaryColor,
+            shape: const CircleBorder(),
+            heroTag: null,
+            onPressed: () => AppService().openEmailSupport(IdentifierConst.supportEmail),
+            child: const Icon(Icons.email, color: Colors.white,),
+          ),
+        ],
       ),
     );
   }

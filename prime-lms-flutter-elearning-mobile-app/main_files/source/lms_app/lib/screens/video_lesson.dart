@@ -39,7 +39,7 @@ class _VideoLessonState extends ConsumerState<VideoLesson> {
     return Scaffold(
       body: Stack(
         children: [
-          VideoPlayerScreen(link: widget.lesson.link.toString(),lesson: widget.lesson, courseId: widget.course.id??0, lectureId: widget.lesson.id??0),
+          VideoPlayerScreen(lesson: widget.lesson, course: widget.course),
           // Align(
           //   alignment: Alignment.bottomCenter,
           //   child: FutureBuilder(

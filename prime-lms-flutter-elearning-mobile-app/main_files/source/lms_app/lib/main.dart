@@ -122,6 +122,7 @@ class _MyAppState extends State<MyApp> {
           print(value);
         }
       },
+      builder: EasyLoading.init(),
       home: _isFirstCall!
               ? const IntroScreen()
               : const LoginScreen(

@@ -64,8 +64,13 @@ class _QuizLessonState extends ConsumerState<QuizLesson> {
             },
           ),
           title: Text('${widget.test.name}', style: const TextStyle(color: Colors.white),),
-          actions: const [
-            CountDownClock(endTime: Duration(minutes: 10))
+          actions: [
+            CountDownClock(
+                endTime: const Duration(seconds: 10),
+                timeOut: () {
+                  _onNextBtnPressed(context, 0, questions.length + 1, questions, ref, pageController);
+                },
+            )
           ],
         ),
         bottomNavigationBar: BottomAppBar(
@@ -125,19 +130,10 @@ class _QuizLessonState extends ConsumerState<QuizLesson> {
         if (result == ScoreResultInfo()) {
           NextScreen.replaceAnimation(context, LoadingView());
         } else {
-          EasyLoading.show(
-            // status: message,
-            indicator: LoadingLogo(
-              title: "",
-              textSize: 14,
-              assetImage: ImagesNameConst.getPngImage(ImagesNameConst.icLoading),
-              sizeImage: 60,
-              imageColor: Theme.of(context).primaryColor,
-            ),
-          );
-        result = await _getResult(ref);
-          EasyLoading.dismiss();
-        NextScreen.replaceAnimation(context, QuizComplete(questions: widget.questions, result: result, test: widget.test, lectureId: widget.lectureId, courseId: widget.courseId));
+          MonitorLoading().showLoading('');
+          result = await _getResult(ref);
+          MonitorLoading().dismiss();
+          NextScreen.replaceAnimation(context, QuizComplete(questions: widget.questions, result: result, test: widget.test, lectureId: widget.lectureId, courseId: widget.courseId));
       }
 
       } else {

@@ -95,68 +95,62 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                       subtitle: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Text(lectures[index].subName ?? "_").tr(),
-                          // const SizedBox(
-                          //   height: 8,
-                          // ),
+                          Text(notes[0]??""),
+                          const SizedBox(
+                            height: 8,
+                          ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(0.0),
                             child: Wrap(
-                              spacing: 0,
+                              spacing:  8.0,
                               runSpacing: 8.0,
                               children: [
                                 if (notes.length > 1)
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      onTap: () {
-                                        if (_onCheck(context, lessonDetail,
-                                            courseDetail, ref)) {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(
-                                                  builder: (builder) {
-                                            return PdfScreen(
-                                                link: notes[1],
-                                                name: "content".tr());
-                                          }));
-                                        }
-                                      },
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(),
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(12)),
-                                        ),
-                                        padding: const EdgeInsets.all(4),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Icon(
-                                              Icons.description,
-                                              color:
-                                                  Theme.of(context).primaryColor,
-                                            ),
-                                            const SizedBox(
-                                              width: 2,
-                                            ),
-                                            Text('content',
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .titleLarge
-                                                        ?.copyWith(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            fontSize: 16))
-                                                .tr(),
-                                          ],
-                                        ),
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    onTap: () {
+                                      if (_onCheck(context, lessonDetail,
+                                          courseDetail, ref)) {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (builder) {
+                                          return PdfScreen(
+                                              link: notes[1],
+                                              name: "content".tr());
+                                        }));
+                                      }
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(12)),
+                                      ),
+                                      padding: const EdgeInsets.all(4),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(
+                                            Icons.description,
+                                            color:
+                                                Theme.of(context).primaryColor,
+                                          ),
+                                          const SizedBox(
+                                            width: 2,
+                                          ),
+                                          Text('content',
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .titleLarge
+                                                      ?.copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 16))
+                                              .tr(),
+                                        ],
                                       ),
                                     ),
                                   ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
                                 InkWell(
                                   splashColor: Colors.transparent,
                                   onTap: () {
@@ -198,9 +192,6 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                                       ],
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 16,
                                 ),
                                 if (lessonDetail.docLink != "" &&
                                     lessonDetail.docLink != null)
@@ -250,9 +241,6 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
                                       ),
                                     ),
                                   ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
                                 if (lessonDetail.testId != null &&
                                     courseDetail.isPayment == 1)
                                   InkWell(
@@ -343,30 +331,9 @@ class Lessons extends ConsumerWidget with CourseMixin, UserMixin {
   }
 
   void _getTest(BuildContext context, LessonInfo lessonDetail) async {
-    EasyLoading.instance
-      ..displayDuration = const Duration(milliseconds: 2000)
-      ..loadingStyle = EasyLoadingStyle.custom
-      ..indicatorSize = 60
-      ..textColor = ColorConst.blackColor
-      ..radius = 20
-      ..backgroundColor = Colors.transparent
-      ..maskColor = Colors.transparent
-      ..indicatorColor = ColorConst.blackColor54
-      ..userInteractions = false
-      ..dismissOnTap = true
-      ..boxShadow = <BoxShadow>[]
-      ..indicatorType = EasyLoadingIndicatorType.cubeGrid;
-    EasyLoading.show(
-      indicator: LoadingLogo(
-        title: "",
-        textSize: 14,
-        assetImage: ImagesNameConst.getPngImage(ImagesNameConst.icLoading),
-        sizeImage: 60,
-        imageColor: Theme.of(context).primaryColor,
-      ),
-    );
+    MonitorLoading().showLoading('');
     TestDetail test = await getTestDetail(lessonDetail.testId!);
-    EasyLoading.dismiss();
+    MonitorLoading().dismiss();
     showDialog(
       context: context,
       builder: (context) => TestDetailDialog(
