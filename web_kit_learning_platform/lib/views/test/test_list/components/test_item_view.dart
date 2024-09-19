@@ -5,6 +5,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/widgets/table_common/animation/animation.exports.dart';
 import 'package:webkit/landing_page/components/colornotifier.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
+import 'package:webkit/views/test/test_list/bloc/test_list_bloc.dart';
 
 import '../../../../widgets/item_edit_view_delete/item_edit_view_delete.dart';
 
@@ -14,8 +15,9 @@ class TestItemView extends StatelessWidget {
     this.onViewDetail,
     this.onEdit,
     this.onDelete,
+    required this.testListType
   });
-
+  TestListType testListType;
   Function(TestInfo)?onViewDetail;
   Function(TestInfo)?onEdit;
   Function(TestInfo)?onDelete;

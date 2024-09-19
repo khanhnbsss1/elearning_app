@@ -8,6 +8,7 @@ import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/services/apis/test/delete_test_api.dart';
 import 'package:webkit/services/apis/test/get_test_list_api.dart';
+import 'package:webkit/services/apis/test/get_test_user_list_api.dart';
 import 'package:webkit/services/apis/test/models/test_info.dart';
 
 part 'test_list_event.dart';
@@ -42,8 +43,15 @@ class TestListBloc extends Bloc<TestListEvent, TestListState> {
   }
   
   Future<void> callTestListApi({required SearchCommonRequest searchCommonRequest}) async {
-
-    GetTestListApi courseApi = GetTestListApi(searchCommonRequest: state.searchCommonRequest!);
+    dynamic courseApi;
+    if(state.testListType == TestListType.editList)
+      {
+        courseApi = GetTestListApi(searchCommonRequest: state.searchCommonRequest!);
+      }
+    else
+      {
+        courseApi = GetTestUserListApi(searchCommonRequest: state.searchCommonRequest!);
+      }
     TestListResponseModel lessonListResponseModel = await courseApi.call();
         emit(state.copyWith(
             listResponseModel: lessonListResponseModel,

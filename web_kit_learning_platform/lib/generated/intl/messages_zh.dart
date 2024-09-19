@@ -448,6 +448,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("新注册者"),
         "report_purchased": MessageLookupByLibrary.simpleMessage("收入"),
         "report_str": MessageLookupByLibrary.simpleMessage("报告"),
+        "request_str": MessageLookupByLibrary.simpleMessage("请求"),
         "reset_password": MessageLookupByLibrary.simpleMessage("重置密码"),
         "result": MessageLookupByLibrary.simpleMessage("结果"),
         "revenue": MessageLookupByLibrary.simpleMessage("收入"),

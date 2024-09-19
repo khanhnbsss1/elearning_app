@@ -24,7 +24,8 @@ import '../../layouts/layout.dart';
 import 'bloc/test_list_bloc.dart';
 
 class TestListPage extends StatefulWidget {
-  TestListPage({super.key});
+  TestListType testListType;
+  TestListPage({super.key, required this.testListType});
   @override
   State<TestListPage> createState() => _TestListPageState();
 }
@@ -53,7 +54,7 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
       permissionList: permission,
       child: BlocProvider(
         create: (context) {
-          return TestListBloc(TestListState())..add(TestListInitEvent());
+          return TestListBloc(TestListState(testListType:  widget.testListType))..add(TestListInitEvent());
         },
         child: BlocConsumer<TestListBloc, TestListState>(
           listener: (context, state) {
@@ -301,6 +302,7 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
               // TODO: Handle this case.
                 TestDataSource employeeDataSource = TestDataSource(
                   lessonData: state.listResponseModel?.content??[],
+                  testListType: state.testListType!,
                   starIndex: (state.searchCommonRequest?.pageNumber??0)* (state.searchCommonRequest?.pageSize??0),
                   onDelete: (p0)  {
                     ConfirmPopupPage(
@@ -329,6 +331,13 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
                       testInfo: p0,
                       enableCloseButton: true,
                       enableShowResult: true,
+                    ).show(context);
+                  },
+                  onStartTest: (p0) {
+                    TestWorkPage(
+                      testInfo: TestInfo(
+                          id: p0.id, 
+                          name:p0.name ?? ''),
                     ).show(context);
                   },
                 );
@@ -411,13 +420,16 @@ class _TestListPageState extends State<TestListPage> with SingleTickerProviderSt
 }
 class TestDataSource extends DataGridSource {
   /// Creates the employee data source class with required details.
-  Function(TestInfo) onViewDetail, onEdit, onDelete;
+  TestListType testListType;
+  Function(TestInfo) onViewDetail, onEdit, onDelete, onStartTest;
   int? starIndex;
   TestDataSource({
     required List<TestInfo> lessonData, 
+    required this.testListType,
     this.starIndex,
     required this.onDelete, 
     required this.onEdit, 
+    required this.onStartTest,
     required this.onViewDetail}) {
     
     _lessonData = lessonData.map<DataGridRow>((e) {
@@ -434,7 +446,9 @@ class TestDataSource extends DataGridSource {
             DataGridCell<Widget>(columnName: L10nX.getStr.duration_str, value: Text("${(e.durian??0)}", style: TextStyleConstant.textStyleBlack14w400,)),
             //DataGridCell<Widget>(columnName: L10nX.getStr.doing_time_str, value: Text("${(e.}", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str, 
-                value: ItemViewEditDelete(
+                value: 
+                    testListType==TestListType.editList?
+                ItemViewEditDelete(
                   itemInfo: e,
                   enableEditDelete: UserManager().userContainPermission(permissionList: ["tests.delete.delete_test"]),
                   enableEdit: UserManager().userContainPermission(permissionList: ["tests.delete.delete_test"]),
@@ -449,7 +463,14 @@ class TestDataSource extends DataGridSource {
                   onDelete: (p0) {
                     onDelete(p0);
                   },
-                )),
+                ): 
+                    ActionButton1(
+                      text: L10nX.getStr.begin_start_test,
+                      onTap: () {
+                        onStartTest(e);
+                      },
+                    )
+            ),
           ]);
     },).toList();
   }

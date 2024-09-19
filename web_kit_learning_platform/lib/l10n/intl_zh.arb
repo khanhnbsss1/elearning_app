@@ -679,5 +679,6 @@
   "copyright_str": "版权所有 ©",
   "design_by": "设计者",
   "display_str": "显示",
-  "of_str": "的"
+  "of_str": "的",
+  "request_str": "请求"
 }

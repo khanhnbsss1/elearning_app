@@ -93,6 +93,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     "dashboard.get.get_top_course_user",
                     "dashboard.get.get_top_courses",
                     "dashboard.get.get_user_registration",
+                    
                   ])) {
                     AppPages.routeName(Routes.dashboardRoute);
                   }
@@ -215,6 +216,16 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                       ),
                     ],
                   ),
+                  //----------------Test------------------//
+                  NavigationItem(
+                    iconData: LucideIcons.library,
+                    title: L10nX.getStr.test_str,
+                    route: Routes.testListUser,
+                    isCondensed: ThemeCustomizer().leftBarCondensed,
+                    permission: const ["tests.get.get_tests_user"],
+                    onPress: () {
+                    },
+                  ),
                   //-----------------Danh sach giao vien-----------------//
                   Gap(Dimens.size12),
                   Visibility(
@@ -257,6 +268,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     onPress: () {
                     },
                   ),
+
                   //----------------Quiz Page------------------//
                   NavigationItem(
                     iconData: Icons.quiz_outlined,

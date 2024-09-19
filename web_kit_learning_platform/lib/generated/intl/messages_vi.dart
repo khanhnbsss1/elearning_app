@@ -547,6 +547,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Người đăng ký mới"),
         "report_purchased": MessageLookupByLibrary.simpleMessage("Doanh thu"),
         "report_str": MessageLookupByLibrary.simpleMessage("Báo cáo"),
+        "request_str": MessageLookupByLibrary.simpleMessage("Yêu cầu"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "result": MessageLookupByLibrary.simpleMessage("Kết quả"),

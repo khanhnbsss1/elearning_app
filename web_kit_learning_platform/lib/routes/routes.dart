@@ -57,6 +57,7 @@ import 'package:webkit/views/report/user_registration_history/user_registration_
 import 'package:webkit/views/roles/role_list/role_list.dart';
 import 'package:webkit/views/starter.dart';
 import 'package:webkit/views/tags/tag_list/tag_list.dart';
+import 'package:webkit/views/test/test_list/bloc/test_list_bloc.dart';
 import 'package:webkit/views/test/test_list/test_list.dart';
 import 'package:webkit/views/ui/buttons_page.dart';
 import 'package:webkit/views/ui/cards_page.dart';
@@ -201,8 +202,11 @@ getPageRoute() {
     ///--------------- Test ---------------///
     GetPage(
         name: Routes.testList,
-        
-        page: () =>  TestListPage(key: UniqueKey(),),
+        page: () =>  TestListPage(key: UniqueKey(),testListType: TestListType.editList,),
+        middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: Routes.testListUser,
+        page: () =>  TestListPage(key: UniqueKey(),testListType: TestListType.workList,),
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: Routes.quizList,

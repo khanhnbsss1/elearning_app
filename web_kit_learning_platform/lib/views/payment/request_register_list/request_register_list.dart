@@ -339,7 +339,17 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                   onDelete: (p0) async {
                   },
                   onReject: (p0) {
-                    
+                    ConfirmPopupPage(
+                      title: L10nX.getStr.reject_str,
+                      content: "${L10nX.getStr.reject_str} ${L10nX.getStr.request_str}",
+                      onAccept: () async {
+                        MonitorLoading().showLoading("");
+                        UnlockCourseApi unlockCourseApi = UnlockCourseApi(status: mapActionStatusToStr[ActionStatus.Decline]!, requestId: p0.id!);
+                        dynamic data = await unlockCourseApi.call();
+                        MonitorLoading().dismiss();
+                        BlocProvider.of<RequestRegisterListBloc>(context).add(RequestRegisterListInitEvent());
+                      },
+                    ).show(context);
                   },
                   onAccept: (p0)  {
                     ConfirmPopupPage(

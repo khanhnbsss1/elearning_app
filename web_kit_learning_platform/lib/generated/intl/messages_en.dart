@@ -553,6 +553,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("New registrant"),
         "report_purchased": MessageLookupByLibrary.simpleMessage("Revenue"),
         "report_str": MessageLookupByLibrary.simpleMessage("Report"),
+        "request_str": MessageLookupByLibrary.simpleMessage("Request"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Reset password"),
         "result": MessageLookupByLibrary.simpleMessage("Result"),

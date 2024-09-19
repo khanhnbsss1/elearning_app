@@ -687,5 +687,6 @@
   "copyright_str": "Copyright ©",
   "designed_by": "Designed by ",
   "display_str": "Show",
-  "of_str": "Of"
+  "of_str": "Of",
+  "request_str": "Request"
 }

@@ -81,6 +81,8 @@ abstract class Routes {
   static const lessonList = Paths.lessonList;
   static const tagList = Paths.tagList;
   static const testList = Paths.testList;
+  static const testListUser = Paths.testListUser;
+
   static const quizList = Paths.quizList;
   static const studentList = Paths.studentList;
   static const teacherList = Paths.teacherList;
@@ -170,6 +172,8 @@ abstract class Paths {
   static const lessonList = '/lessonList/list';
   static const tagList = '/tag/list';
   static const testList = '/test/list';
+  static const testListUser = '/test/listUser';
+
   static const quizList = '/quiz/list';
   static const studentList = '/user/studentList';
   static const teacherList = '/user/teacherList';
