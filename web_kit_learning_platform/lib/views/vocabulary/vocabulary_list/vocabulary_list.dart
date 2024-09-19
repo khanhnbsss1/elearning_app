@@ -24,6 +24,7 @@ import 'package:webkit/services/apis/vocabulary/words/delete_word_api.dart';
 import 'package:webkit/views/vocabulary/create_edit_vocabullary/create_edit_words.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
+import '../../../services/apis/vocabulary/words/delete_all_word_api.dart';
 import '../../layouts/layout.dart';
 import '../components/vocabulary_item_view.dart';
 import '../vocabulary_detail/vocabulary_view_detail.dart';
@@ -157,8 +158,9 @@ class _VocabularyListState extends State<VocabularyList> with SingleTickerProvid
                             content: "${L10nX.getStr.you_want_remove} ${L10nX.getStr.all_str.toLowerCase()} ${L10nX.getStr.vocabulary_str.toLowerCase()}",
                             onAccept: () async {
                               MonitorLoading().showLoading("");
+                              DeleteAllWordApi deleteAllWordApi = DeleteAllWordApi(info: state.vocabularyType!);
+                              await deleteAllWordApi.call();
                               MonitorLoading().dismiss();
-                      
                               BlocProvider.of<VocabularyListBloc>(context).add(VocabularyListInitEvent());
                             },
                       

@@ -16,7 +16,7 @@ class ExampleFrom extends StatefulWidget {
   Function(SentenceInfo)? onRemoveSentenceInfo;
   ScrollController? controller;
   int index;
-  ExampleFrom({this.sentenceInfo, this.onRemoveSentenceInfo, this.onSaveSentenceInfo, this.controller, required this.index});
+  ExampleFrom({super.key,this.sentenceInfo, this.onRemoveSentenceInfo, this.onSaveSentenceInfo, this.controller, required this.index});
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -45,6 +45,19 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
     audioSentenceController.text = oldText.elementAt(3);
   }
 
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    oldText.add(widget.sentenceInfo?.chineseSentence ?? '');
+    oldText.add(widget.sentenceInfo?.translationVn ?? '');
+    oldText.add(widget.sentenceInfo?.pinyionSentence ?? '');
+    oldText.add(widget.sentenceInfo?.audioLink ?? '');
+    chineseSentenceController.text = oldText.elementAt(0);
+    translationVNSentenceController.text = oldText.elementAt(1);
+    pinyionSentenceController.text = oldText.elementAt(2);
+    audioSentenceController.text = oldText.elementAt(3);
+  }
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -110,16 +123,15 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
                                                 ? Icon(
                                                     Icons.close_sharp,
                                                     color: ColorConst.colorIconGrays,
-                                                  )
-                                                : SizedBox()),
+                                                  ) : SizedBox()),
                                   ],
                                 ),
                               ),
                               onChanged: (value) {
-                                updateDataToSentenceInfo();
                                 if (value.isNotEmpty && oldText.elementAt(0).isEmpty || value.isEmpty && oldText.elementAt(0).isNotEmpty) {
                                   setState(() {});
                                 }
+                                updateDataToSentenceInfo();
                               },
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
@@ -328,7 +340,7 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
                   child: Row(
                     children: [
                       SizedBox(
-                        height: 8,
+                        height: Dimens.size8,
                       ),
                       buildSaveDeleteWidget(),
                     ],
@@ -348,43 +360,15 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
             child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Opacity(
-              opacity: enaAbleSaveSentenceInfo ? 1.0 : 0.1,
-              child: IgnorePointer(
-                ignoring: !enaAbleSaveSentenceInfo,
-                child: InkWell(
-                  onTap: () {
-                    if (widget.onSaveSentenceInfo != null) {
-                      widget.sentenceInfo?.chineseSentence = chineseSentenceController.text;
-                      widget.sentenceInfo?.translationVn = translationVNSentenceController.text;
-                      widget.sentenceInfo?.pinyionSentence = pinyionSentenceController.text;
-                      widget.sentenceInfo?.audioLink = audioSentenceController.text;
-                      widget.onSaveSentenceInfo!(widget.sentenceInfo!);
-                    }
-                  },
-                  child: Icon(
-                    Icons.save_as_outlined,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Opacity(
-              opacity: enaAbleSaveSentenceInfo ? 1.0 : 0.1,
-              child: IgnorePointer(
-                child: InkWell(
-                  onTap: () {
-                    if (widget.onRemoveSentenceInfo != null) {
-                      widget.onRemoveSentenceInfo!(widget.sentenceInfo!);
-                    }
-                  },
-                  child: Icon(
-                    Icons.close_sharp,
-                    color: !enaAbleSaveSentenceInfo ? Colors.black : Colors.red,
-                  ),
-                ),
+            InkWell(
+              onTap: () {
+                if (widget.onRemoveSentenceInfo != null) {
+                  widget.onRemoveSentenceInfo!(widget.sentenceInfo!);
+                }
+              },
+              child: Icon(
+                Icons.close_sharp,
+                color: !enaAbleSaveSentenceInfo ? Colors.black : Colors.red,
               ),
             ),
           ],
@@ -395,43 +379,15 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                Opacity(
-                  opacity: enaAbleSaveSentenceInfo ? 1.0 : 0.1,
-                  child: IgnorePointer(
-                    ignoring: !enaAbleSaveSentenceInfo,
-                    child: InkWell(
-                      onTap: () {
-                        if (widget.onSaveSentenceInfo != null) {
-                          widget.sentenceInfo?.chineseSentence = chineseSentenceController.text;
-                          widget.sentenceInfo?.translationVn = translationVNSentenceController.text;
-                          widget.sentenceInfo?.pinyionSentence = pinyionSentenceController.text;
-                          widget.sentenceInfo?.audioLink = audioSentenceController.text;
-                          widget.onSaveSentenceInfo!(widget.sentenceInfo!);
-                        }
-                      },
-                      child: Icon(
-                        Icons.save_as_outlined,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Opacity(
-                  opacity: enaAbleSaveSentenceInfo ? 1.0 : 0.1,
-                  child: IgnorePointer(
-                    child: InkWell(
-                      onTap: () {
-                        if (widget.onRemoveSentenceInfo != null) {
-                          widget.onRemoveSentenceInfo!(widget.sentenceInfo!);
-                        }
-                      },
-                      child: Icon(
-                        Icons.close_sharp,
-                        color: !enaAbleSaveSentenceInfo ? Colors.black : Colors.red,
-                      ),
-                    ),
+                InkWell(
+                  onTap: () {
+                    if (widget.onRemoveSentenceInfo != null) {
+                      widget.onRemoveSentenceInfo!(widget.sentenceInfo!);
+                    }
+                  },
+                  child: Icon(
+                    Icons.close_sharp,
+                    color: !enaAbleSaveSentenceInfo ? Colors.black : Colors.red,
                   ),
                 ),
               ],
@@ -441,9 +397,12 @@ class ExampleFromState extends State<ExampleFrom> with UIMixin {
   }
 
   void updateDataToSentenceInfo() {
-    widget.sentenceInfo?.chineseSentence = chineseSentenceController.text;
-    widget.sentenceInfo?.translationVn = translationVNSentenceController.text;
-    widget.sentenceInfo?.pinyionSentence = pinyionSentenceController.text;
-    widget.sentenceInfo?.audioLink = audioSentenceController.text;
+    if (widget.onSaveSentenceInfo != null) {
+      widget.sentenceInfo?.chineseSentence = chineseSentenceController.text;
+      widget.sentenceInfo?.translationVn = translationVNSentenceController.text;
+      widget.sentenceInfo?.pinyionSentence = pinyionSentenceController.text;
+      widget.sentenceInfo?.audioLink = audioSentenceController.text;
+      widget.onSaveSentenceInfo!(widget.sentenceInfo!);
+    }
   }
 }

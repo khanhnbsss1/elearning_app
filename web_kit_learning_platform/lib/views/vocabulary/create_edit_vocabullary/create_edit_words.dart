@@ -105,6 +105,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
               break;
             case CreateEditWordStatus.onError:
               // TODO: Handle this case.
+              state.blocStatus = CreateEditWordStatus.unknown;
               break;
             case CreateEditWordStatus.onSaveSentence:
               // TODO: Handle this case.
@@ -118,6 +119,7 @@ class _CreateEditWordsPageState extends State<CreateEditWordsPage> with SingleTi
             case CreateEditWordStatus.onChangePage:
             // TODO: Handle this case.
             case CreateEditWordStatus.onCheckAudio:
+            case CreateEditWordStatus.onCreateNewSentence:
             // TODO: Handle this case.
             state.blocStatus = CreateEditWordStatus.unknown;
               break;
