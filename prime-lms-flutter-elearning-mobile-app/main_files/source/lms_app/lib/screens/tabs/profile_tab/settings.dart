@@ -143,7 +143,7 @@ class AppSettings extends ConsumerWidget with UserMixin {
                     Gap(Dimens.size16),
                     InkWell(
                       onTap: () {
-                        // openGoogleMaps();
+                        AppService().openGoogleMaps(IdentifierConst.address.tr());
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
