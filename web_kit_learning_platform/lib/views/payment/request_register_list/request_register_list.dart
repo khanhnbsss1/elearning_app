@@ -336,7 +336,18 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
               // TODO: Handle this case.
                 RequestListDataSource employeeDataSource = RequestListDataSource(
                   lessonData: state.listResponseModel?.content??[],
-                  onDelete: (p0) async {
+                  onRenew: (p0) async {
+                    ConfirmPopupPage(
+                      title:  L10nX.getStr.reset_str,
+                      content: "${L10nX.getStr.reset_str} ${L10nX.getStr.request_str}",
+                      onAccept: () async {
+                        MonitorLoading().showLoading("");
+                        UnlockCourseApi unlockCourseApi = UnlockCourseApi(status: mapActionStatusToStr[ActionStatus.New]!, requestId: p0.id!);
+                        dynamic data = await unlockCourseApi.call();
+                        MonitorLoading().dismiss();
+                        BlocProvider.of<RequestRegisterListBloc>(context).add(RequestRegisterListInitEvent());
+                      },
+                    ).show(context);
                   },
                   onReject: (p0) {
                     ConfirmPopupPage(
@@ -447,12 +458,12 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
 }
 class RequestListDataSource extends DataGridSource {
   /// Creates the employee data source class with required details.
-  Function(RegisteredInfo) onAccept, onReject, onDelete;
+  Function(RegisteredInfo) onAccept, onReject, onRenew;
   int? starIndex;
   RequestListDataSource({
     required List<RegisteredInfo> lessonData, 
     this.starIndex,
-    required this.onDelete, 
+    required this.onRenew, 
     required this.onReject, 
     required this.onAccept
   }) {
@@ -498,6 +509,18 @@ class RequestListDataSource extends DataGridSource {
                       textStype: TextStyleConstant.textStyleBlack16w600,
                       onTap: () {
                         onReject(e);
+                      },
+                    ),
+                    Gap(Dimens.size12),
+                    ActionButton1(
+                      text: L10nX.getStr.reset_str,
+                      height: Dimens.size40,
+                      enable: e.status== "Accept" || e.status== "Decline",
+                      enableBgColor: ColorConst.whiteColor,
+                      borderColor: ColorConst.greyColor,
+                      textStype: TextStyleConstant.textStyleBlack16w600,
+                      onTap: () {
+                        onRenew(e);
                       },
                     ),
                   ],

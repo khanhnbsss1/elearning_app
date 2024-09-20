@@ -688,5 +688,6 @@
   "designed_by": "Designed by ",
   "display_str": "Show",
   "of_str": "Of",
-  "request_str": "Request"
+  "request_str": "Request",
+  "reset_str": "Reset"
 }
