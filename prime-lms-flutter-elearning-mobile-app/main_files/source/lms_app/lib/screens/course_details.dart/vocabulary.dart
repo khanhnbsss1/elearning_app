@@ -86,7 +86,7 @@ class Vocabulary extends ConsumerWidget with CourseMixin, UserMixin {
   }
 
   Future<void> showWord(BuildContext context, VocabularyInfo word) async {
-    MonitorLoading().showLoading('message');
+    MonitorLoading().showLoading('');
     VocabularyInfo wordDetail = await ApiService().getVocabularyDetail(word.id??0);
     MonitorLoading().dismiss();
     if (wordDetail.simplified != null) {

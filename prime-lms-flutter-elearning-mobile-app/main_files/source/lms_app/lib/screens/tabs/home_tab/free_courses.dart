@@ -43,7 +43,7 @@ class FreeCourses extends ConsumerWidget {
                             ),
                       ),
                       TextButton(
-                        onPressed: () => NextScreen.iOS(context, const AllCoursesView(filter: 'Free_course')),
+                        onPressed: () => NextScreen.iOS(context, const AllCoursesView(filter: 'free_course')),
                         // onPressed: () {},
                         style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
                         child: Text(

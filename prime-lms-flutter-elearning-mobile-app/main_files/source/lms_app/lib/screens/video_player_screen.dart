@@ -3,21 +3,30 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:lms_app/components/video_player.dart';
+import 'package:lms_app/screens/tabs/dictionary/word_screen.dart';
 
+import '../base/constant/dimens_constant.dart';
+import '../base/image_manager/images_constant.dart';
+import '../base/theme/colors_app.dart';
 import '../base/widgets/audio/audio_speaker.dart';
+import '../base/widgets/common/alert_dialog/loading.common.dart';
+import '../base/widgets/common/alert_dialog/loading_logo.dart';
 import '../components/video_player_widget.dart';
+import '../services/api_service.dart';
+import '../services/apis/course/course_detail/models/course_detail_model.dart';
+import '../services/apis/lessson/lesson_detail/update_study_lesson_proccess.dart';
 import '../services/apis/lessson/models/lesson_info.dart';
 import '../services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
 import '../utils/custom_cached_image.dart';
+import '../utils/next_screen.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
-  const VideoPlayerScreen({super.key, required this.link, required this.lesson, required this.courseId, required this.lectureId, });
+  const VideoPlayerScreen({super.key, required this.lesson, required this.course,});
 
-  final String link;
   final LessonInfo lesson;
-  final int courseId;
-  final int lectureId;
+  final CourseInfo course;
 
   @override
   State<VideoPlayerScreen> createState() => _VideoPlayerScreenState();
@@ -37,7 +46,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   void initState() {
     super.initState();
     try {
-      Map<String, dynamic> linkJson = jsonDecode(widget.link);
+      Map<String, dynamic> linkJson = jsonDecode(widget.lesson.link??"");
 
       List<dynamic> linkList = linkJson['link'];
 
@@ -48,7 +57,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       }
     } catch (e) {
       order.add('0');
-      videoLink.add(widget.link);
+      videoLink.add(widget.lesson.link??"");
       videoTitle.add(widget.lesson.lectureName??"-");
       print(videoLink);
     }
@@ -77,8 +86,18 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       VideoPlayer(
                           videoUrl: videoLink[selectedVideo],
                           videoTitle: videoTitle[selectedVideo],
-                          courseId: widget.courseId,
-                          lectureId: widget.lectureId,
+                          thumbnailUrl: widget.course.image,
+                          currentOrder: selectedVideo,
+                          totalOrder: order.length,
+                          onCompleted: (value) {
+                            if (selectedVideo < order.length - 1) {
+                              setState(() {
+                                selectedVideo = value;
+                              });
+                            } else {
+                              _onAllVideoCompleted();
+                            }
+                          },
                       ),
                   if (order.isNotEmpty) Padding(
                     padding: const EdgeInsets.symmetric(
@@ -102,6 +121,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                 SizedBox(
                                   height: (order.length > 3) ? 300 : (100 * order.length).toDouble(),
                                   child: ListView.builder(
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemCount: order.length,
                                       itemBuilder: (context, index) {
                                         return InkWell(
@@ -138,6 +158,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                       SizedBox(
                                         height: (lessonDetail.vocabularies!.length * 75) > 300 ? 300 : lessonDetail.vocabularies!.length * 75.0,
                                         child: ListView.builder(
+                                          physics: const NeverScrollableScrollPhysics(),
                                           shrinkWrap: true,
                                           padding: const EdgeInsets.only(top: 0, bottom: 20),
                                           itemCount: lessonDetail.vocabularies!.length,
@@ -145,11 +166,12 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                             final VocabularyInfo word =
                                             lessonDetail.vocabularies![index];
                                             return ListTile(
+                                              onTap: () => showWord(context, word),
                                               contentPadding: const EdgeInsets.symmetric(
                                                   vertical: 0, horizontal: 20),
                                               horizontalTitleGap: 10,
                                               title: Text(
-                                                word.simplified!,
+                                                '${word.simplified!} - ${word.pinyinTones}',
                                                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                                                     fontWeight: FontWeight.w500, fontSize: 18),
                                               ),
@@ -159,7 +181,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                               leading: Text(
                                                 '${index + 1}.',
                                                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                                    fontWeight: FontWeight.bold, color: Colors.black),
+                                                   color: Colors.black),
                                               ),
                                               trailing: AudioSpeaker(
                                                 url: word.audioLink ?? "",
@@ -192,9 +214,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
       height: 80,
       width: MediaQuery.of(context).size.width,
       child: Row(
+        mainAxisSize: MainAxisSize.max,
         children: [
           SizedBox(
-            width: 150,
+            width: 120,
             child: (videoThumbnail != "")
                 ? CustomCacheImage(imageUrl: videoThumbnail, radius: 3)
                 : Stack(
@@ -203,7 +226,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       child: ColorFiltered(
                         colorFilter: ColorFilter.mode((selected) ? Colors.grey : Colors.white, BlendMode.darken),
                         child: Image.asset(
-                          "assets/images/noImage1.jpg",
+                          "assets/images/noImage.jpg",
                           fit: BoxFit.fitHeight,
                         ),
                       )
@@ -228,5 +251,25 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> showWord(BuildContext context, VocabularyInfo word) async {
+    MonitorLoading().showLoading('');
+    VocabularyInfo wordDetail = await ApiService().getVocabularyDetail(word.id??0);
+    MonitorLoading().dismiss();
+    if (wordDetail.simplified != null) {
+      NextScreen.normal(context, WordScreen(word: wordDetail));
+    } else {
+      NextScreen.normal(context, WordScreen(word: word));
+    }
+  }
+
+  void _onAllVideoCompleted() async {
+    UpdateLessonStatusApi updateLessonStatusApi = UpdateLessonStatusApi(
+      courseId: widget.course.id??0,
+      lectureId: widget.lesson.id??0,
+      progress: 100,
+    );
+    updateLessonStatusApi.call();
   }
 }

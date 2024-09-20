@@ -95,6 +95,7 @@ dependencies:
   just_audio: ^0.9.40
   dropdown_button2: ^2.3.9
   syncfusion_flutter_sliders: ^26.2.14
+  flutter_expandable_fab: ^2.3.0
 
 dependency_overrides:
   build_web_compilers: ^4.0.11
