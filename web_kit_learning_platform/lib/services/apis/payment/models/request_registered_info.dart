@@ -49,11 +49,17 @@ class RegisteredInfo {
   int? acceptorId;
   String? createdBy;
   String? createdAt;
+  String? updatedBy;
+  String? updatedAt;
   String? type;
   String? userName;
+  String? fullname;
   String? acceptorName;
   String? courseName;
   int? total;
+  int? totalNew;
+  int? totalAccept;
+  String? totalRegistrations;
 
   RegisteredInfo(
       {this.id,
@@ -63,11 +69,17 @@ class RegisteredInfo {
         this.acceptorId,
         this.createdBy,
         this.createdAt,
+        this.updatedBy,
+        this.updatedAt,
         this.type,
         this.userName,
+        this.fullname,
         this.acceptorName,
         this.courseName,
-        this.total});
+        this.total,
+        this.totalNew,
+        this.totalAccept,
+        this.totalRegistrations});
 
   RegisteredInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -77,27 +89,39 @@ class RegisteredInfo {
     acceptorId = json['acceptor_id'];
     createdBy = json['created_by'];
     createdAt = json['created_at'];
+    updatedBy = json['updated_by'];
+    updatedAt = json['updated_at'];
     type = json['type'];
     userName = json['user_name'];
+    fullname = json['fullname'];
     acceptorName = json['acceptor_name'];
     courseName = json['course_name'];
     total = json['total'];
+    totalNew = json['total_new'];
+    totalAccept = json['total_accept'];
+    totalRegistrations = json['total_registrations'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['user_id'] = userId;
-    data['course_id'] = courseId;
-    data['status'] = status;
-    data['acceptor_id'] = acceptorId;
-    data['created_by'] = createdBy;
-    data['created_at'] = createdAt;
-    data['type'] = type;
-    data['user_name'] = userName;
-    data['acceptor_name'] = acceptorName;
-    data['course_name'] = courseName;
-    data['total'] = total;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['user_id'] = this.userId;
+    data['course_id'] = this.courseId;
+    data['status'] = this.status;
+    data['acceptor_id'] = this.acceptorId;
+    data['created_by'] = this.createdBy;
+    data['created_at'] = this.createdAt;
+    data['updated_by'] = this.updatedBy;
+    data['updated_at'] = this.updatedAt;
+    data['type'] = this.type;
+    data['user_name'] = this.userName;
+    data['fullname'] = this.fullname;
+    data['acceptor_name'] = this.acceptorName;
+    data['course_name'] = this.courseName;
+    data['total'] = this.total;
+    data['total_new'] = this.totalNew;
+    data['total_accept'] = this.totalAccept;
+    data['total_registrations'] = this.totalRegistrations;
     return data;
   }
 }

@@ -550,6 +550,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "request_str": MessageLookupByLibrary.simpleMessage("Yêu cầu"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
+        "reset_str": MessageLookupByLibrary.simpleMessage("Đặt lại"),
         "result": MessageLookupByLibrary.simpleMessage("Kết quả"),
         "revenue": MessageLookupByLibrary.simpleMessage("Doanh thu"),
         "revenue_month":
@@ -771,6 +772,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "time_in_year_str": MessageLookupByLibrary.simpleMessage("Năm"),
         "time_out_connection": MessageLookupByLibrary.simpleMessage(
             "Quá thời gian chờ, vui lòng kiểm tra kết nối mạng của bạn"),
+        "time_register": MessageLookupByLibrary.simpleMessage("Số lần dăng ký"),
         "time_str": MessageLookupByLibrary.simpleMessage("Thời gian"),
         "time_test_end": MessageLookupByLibrary.simpleMessage(
             "Thời gian làm bài đã hết, bạn không thể tiếp tục làm bài nữa, vui lòng nộp bài"),
@@ -788,6 +790,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "top": MessageLookupByLibrary.simpleMessage("Trên cùng"),
         "top_dialog":
             MessageLookupByLibrary.simpleMessage("Hộp thoại trên cùng"),
+        "total_register": MessageLookupByLibrary.simpleMessage("Tổng đăng ký"),
+        "total_register_accept":
+            MessageLookupByLibrary.simpleMessage("Đã duyệt"),
+        "total_register_new": MessageLookupByLibrary.simpleMessage("Mới"),
+        "total_register_reject":
+            MessageLookupByLibrary.simpleMessage("Đã từ chối"),
         "total_revenue": MessageLookupByLibrary.simpleMessage("Tổng doanh thu"),
         "tourism_number":
             MessageLookupByLibrary.simpleMessage("Du lịch - con số"),

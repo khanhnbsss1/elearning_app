@@ -688,5 +688,11 @@
   "designed_by": "Thiết kế bởi ",
   "display_str": "Hiển thị",
   "of_str": "Của",
-  "request_str": "Yêu cầu"
+  "request_str": "Yêu cầu",
+  "reset_str": "Đặt lại",
+  "total_register": "Tổng đăng ký",
+  "total_register_new": "Mới",
+  "total_register_accept": "Đã duyệt",
+  "total_register_reject": "Đã từ chối",
+  "time_register": "Số lần dăng ký"
 }

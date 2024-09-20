@@ -688,5 +688,11 @@
   "designed_by": "Designed by ",
   "display_str": "Show",
   "of_str": "Of",
-  "request_str": "Request"
+  "request_str": "Request",
+  "reset_str": "Reset",
+  "total_register": "Total registrations",
+  "total_register_new": "New",
+  "total_register_accept": "Approved",
+  "total_register_reject": "Rejected",
+  "time_register": "Number of registrations"
 }
