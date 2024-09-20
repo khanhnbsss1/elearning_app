@@ -148,7 +148,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           hintText: 'enter-email-or-phone'.tr(),
                           label: const Text('email-or-phone').tr(),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(3),
+                            borderRadius: BorderRadius.circular(12),
                           ),
                           suffixIcon: IconButton(
                             icon: const Icon(
@@ -174,7 +174,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               horizontal: 20, vertical: 15),
                           hintText: 'enter-password'.tr(),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(3),
+                            borderRadius: BorderRadius.circular(12),
                           ),
                           label: const Text('password').tr(),
                           suffixIcon: IconButton(

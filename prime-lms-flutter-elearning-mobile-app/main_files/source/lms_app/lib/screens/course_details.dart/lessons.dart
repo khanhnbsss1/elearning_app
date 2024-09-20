@@ -406,7 +406,7 @@ class _TestDetailDialogState extends State<TestDetailDialog> {
               height: 8,
             ),
             Text(
-              'test-type'.tr(args: [test.typeTest ?? "-"]),
+              'test-type'.tr(args: [test.typeTest?.tr() ?? "-"]),
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             const SizedBox(

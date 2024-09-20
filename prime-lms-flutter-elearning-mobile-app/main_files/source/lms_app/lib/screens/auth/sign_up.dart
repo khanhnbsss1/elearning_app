@@ -153,7 +153,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                           hintText: 'enter-name'.tr(),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(3)),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                           label: Text.rich(
                             TextSpan(
                               text: 'name'.tr(),
@@ -184,7 +184,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
                           hintText: 'enter-phone'.tr(),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(3)),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                           label: Text.rich(
                             TextSpan(
                               text: 'phone-number'.tr(),
@@ -226,7 +226,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                               ],
                             ),
                           ),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(3)),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                           suffixIcon: IconButton(
                             icon: const Icon(
                               Icons.clear,
@@ -257,7 +257,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                               ],
                             ),
                           ),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(3)),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
                           suffixIcon: IconButton(
                             padding: const EdgeInsets.all(0),
                             style: IconButton.styleFrom(padding: const EdgeInsets.all(0)),

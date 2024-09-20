@@ -26,7 +26,7 @@ class HorizontalCourseTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final heroTag = UniqueKey();
 
-    return InkWell(
+    return GestureDetector(
       onTap: () => NextScreen.iOS(
           context, CourseDetailsView(courses: course, heroTag: heroTag)),
       child: Container(
@@ -50,11 +50,11 @@ class HorizontalCourseTile extends StatelessWidget {
                     child: Hero(
                       tag: heroTag,
                       child: ClipRRect(
-                        borderRadius: const BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10)),
+                        borderRadius: const BorderRadius.only(topRight: Radius.circular(12),topLeft: Radius.circular(12)),
                         child: (course.image != null && course.image != "")
                             ? CustomCacheImage(
                           imageUrl: course.image,
-                          radius: 0,
+                          radius: 12,
                         )
                             : Image.asset(
                           "assets/images/noImage1.jpg",

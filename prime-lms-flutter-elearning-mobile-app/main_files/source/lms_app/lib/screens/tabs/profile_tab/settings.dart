@@ -7,6 +7,7 @@ import 'package:lms_app/base/base.export.dart';
 import 'package:lms_app/base/widgets/popup_confirm/confirm_popup_page.dart';
 import 'package:lms_app/mixins/user_mixin.dart';
 import 'package:lms_app/screens/pdf_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../components/change_password.dart';
 import '../../../configs/features_config.dart';
 import '../../../providers/app_settings_provider.dart';
@@ -97,7 +98,7 @@ class AppSettings extends ConsumerWidget with UserMixin {
         const Divider(),
         ListTile(
           title: const Text('contact-us').tr(),
-          leading: const Icon(LineIcons.envelope),
+          leading: const Icon(Icons.contact_page_outlined),
           trailing: const Icon(FeatherIcons.chevronRight),
           onTap: () {
             ConfirmPopupPage(
@@ -139,6 +140,27 @@ class AppSettings extends ConsumerWidget with UserMixin {
                         AppService().openEmailSupport(IdentifierConst.supportEmail);
                       },
                     ),
+                    Gap(Dimens.size16),
+                    InkWell(
+                      onTap: () {
+                        // openGoogleMaps();
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Text("address_str".tr(args: [IdentifierConst.address]),
+                              style: TextStyleConstant.textStyleBlack14w400,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          Gap(Dimens.size8),
+                          Icon(Icons.location_on, color: Colors.green, size: Dimens.size30,)
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -236,4 +258,6 @@ class AppSettings extends ConsumerWidget with UserMixin {
       ],
     );
   }
+
+
 }

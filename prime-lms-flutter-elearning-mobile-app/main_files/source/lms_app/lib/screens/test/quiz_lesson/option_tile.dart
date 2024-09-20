@@ -39,11 +39,11 @@ class _OptionTileState extends State<OptionTile> {
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 10),
         child: Material(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           child: (answer.typeAnswer != "Fill")
               ? RadioListTile(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5)),
+                      borderRadius: BorderRadius.circular(12)),
                   groupValue: widget.ref.watch(selectedOptionProvider),
                   title: answer.typeAnswer == "Text"
                       ? Text(

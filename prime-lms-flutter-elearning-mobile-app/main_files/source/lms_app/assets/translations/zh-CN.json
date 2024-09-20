@@ -73,6 +73,7 @@
     "about-me": "关于我",
     "website": "网站",
     "created-by": "创建者",
+    "by": "创建者: {}",
     "last-updated-": "上次更新：{}",
     "language-": "语言：{}",
     "duration-": "持续时间：{}",
@@ -200,5 +201,12 @@
     "test-type": "测试类型: {}",
     "test-length": "问题数量: {}",
     "all-courses": "所有课程",
-    "tests": "测试"
+    "tests": "测试",
+    "dictionary1": "课程",
+    "dictionary2": "汉越词典",
+    "profile-updated": "个人资料已更新",
+    "profile-failed": "配置文件更新失败",
+    "OUTPUT": "输出",
+    "ENTRANCE": "输入",
+    "address_str": "地址: {}"
 }

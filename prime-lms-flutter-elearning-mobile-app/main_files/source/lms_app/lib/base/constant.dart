@@ -132,7 +132,7 @@ class IdentifierConst{
   static String supportEmail = "nguyenthuong51899@gmail.com";
   static String phoneContact = "0939917688";
   static String hotline = "0903947941";
-  static String address = "address";
+  static String address = "address".tr();
   static String mst ="0317530373";
   static String companyName =" Công Ty Cổ Phần Giáo Dục Global Connection";
 

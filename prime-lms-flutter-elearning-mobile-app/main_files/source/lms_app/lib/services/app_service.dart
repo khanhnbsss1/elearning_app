@@ -52,6 +52,15 @@ class AppService {
     }
   }
 
+  Future<void> openGoogleMaps(String s) async {
+    final googleMapsUrl = 'https://maps.google.com/maps?q=Ho+Chi+Minh+City';
+    if (await canLaunch(googleMapsUrl)) {
+      await launch(googleMapsUrl);
+    } else {
+      throw 'Could not launch Google Maps';
+    }
+  }
+
   Future openReviewReportEmail(context, Review review, UserProfile? user, String supportEmail) async {
     final String userName = user != null ? user.userName! : 'An user';
     final Uri uri = Uri(

@@ -2,11 +2,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lms_app/screens/tabs/dictionary/dictionary.dart';
 import 'package:lms_app/screens/tabs/dictionary/search_word/recent_searches_word.dart';
 import 'package:lms_app/screens/tabs/dictionary/search_word/search_word_bar.dart';
 import 'package:lms_app/screens/tabs/dictionary/search_word/searched_words.dart';
 import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/services/apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
+import 'package:lms_app/services/apis/vocabulary/vocabulary_list/vocabulary_list_api.dart';
 import 'package:lms_app/utils/empty_icon.dart';
 
 final searchTextWordCtlrProvider = Provider.autoDispose((ref) => TextEditingController());
@@ -15,7 +17,8 @@ final recentSearchWordProvider = StateProvider<List<String>>((ref) => []);
 
 final searchedWordProvider = FutureProvider.autoDispose<List<VocabularyInfo>?>((ref) async {
   final value = ref.watch(searchTextWordCtlrProvider).text;
-  final words = await ApiService().getDictionary(0, value);
+  DictionaryType dictionaryType = ref.watch(dictionaryTypeProvider);
+  final words = await ApiService().getDictionary(0, value, dictionaryType);
   return words;
 });
 

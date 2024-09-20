@@ -23,7 +23,7 @@ class CustomNotificationTile extends StatelessWidget {
             color: isRead ? Colors.blueGrey : Theme.of(context).primaryColor,
             width: 0.5,
           ),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

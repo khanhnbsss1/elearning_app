@@ -73,6 +73,7 @@
   "about-me": "Về tôi",
   "website": "Trang web",
   "created-by": "Tạo bởi",
+  "by": "Tạo bởi {}",
   "last-updated-": "Cập nhật lần cuối: {}",
   "language-": "Ngôn ngữ: {}",
   "duration-": "Thời lượng: {}",
@@ -199,6 +200,13 @@
   "test-durian": "Thời gian làm bài: {}",
   "test-type": "Loại bài kiểm tra: {}",
   "test-length": "Số lượng câu hỏi: {}",
-  "all-courses": "Tất cả khóa học",
-  "tests": "Các bài kiểm tra"
+  "all-courses": "Các khóa học",
+  "tests": "Bài kiểm tra",
+  "dictionary1": "Khóa học",
+  "dictionary2": "Hán việt",
+  "profile-updated": "Hồ sơ đã được cập nhật",
+  "profile-failed": "Hồ sơ cập nhật thất bại",
+  "OUTPUT": "Đầu ra",
+  "ENTRANCE": "Đầu vào",
+  "address_str": "Địa chỉ: {}"
 }

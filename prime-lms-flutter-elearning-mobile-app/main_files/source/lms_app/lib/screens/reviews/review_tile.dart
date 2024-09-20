@@ -23,7 +23,7 @@ class ReviewTile extends ConsumerWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         border: Border.all(color: isDarkMode ? CustomColor.borderDark : CustomColor.border),
-        borderRadius: BorderRadius.circular(10)
+        borderRadius: BorderRadius.circular(12)
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

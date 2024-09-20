@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/screens/tabs/profile_tab/settings.dart';
+import 'package:lms_app/screens/tabs/profile_tab/user_info2.dart';
 import '../../../models/user/UserProfile.dart';
 import '../../../providers/user_data_provider.dart';
 import '../../../services/apis/user/get_user_detail_api.dart';
@@ -38,7 +39,7 @@ class ProfileTab extends ConsumerWidget {
                   Center(
                     child: SizedBox(
                       height: 100,
-                        child: UserInfo()),
+                        child: UserInfo2()),
                   ),
                   AppSettings(),
                 ],

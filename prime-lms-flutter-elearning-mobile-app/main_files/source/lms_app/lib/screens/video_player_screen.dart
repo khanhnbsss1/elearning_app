@@ -219,7 +219,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           SizedBox(
             width: 120,
             child: (videoThumbnail != "")
-                ? CustomCacheImage(imageUrl: videoThumbnail, radius: 3)
+                ? CustomCacheImage(imageUrl: videoThumbnail, radius: 12)
                 : Stack(
                   children: [
                     Center(
