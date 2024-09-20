@@ -56,19 +56,39 @@ class TitleInfo extends ConsumerWidget {
           ).tr(args: [course.totalLectures.toString()]),
         ],
       ),
-      const SizedBox(height: 10,),
-      Text(
-        course.introduction.toString(),
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontSize: 17,
-              color: isDarkMode
-                  ? CustomColor.paragraphColorDark
-                  : CustomColor.paragraphColor,
-              height: 1.7,
-              fontWeight: FontWeight.w400,
+      const SizedBox(
+        height: 8,
+      ),
+      Center(
+        child: Column(
+          children: [
+            Text(
+              '${course.originalPrice ?? 0} VND',
+              style: const TextStyle(
+                  decoration: TextDecoration.lineThrough,
+                  color: Colors.black45,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400),
             ),
-      )
+            const SizedBox(
+              height: 8,
+            ),
+            Text(
+              '${course.payment} VND',
+              style: const TextStyle(
+                  decoration: TextDecoration.underline,
+                  decorationColor: Color(0xFFFFC711),
+                  fontStyle: FontStyle.italic,
+                  color: Color(0xFFFFC711),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+          ],
+        ),
+      ),
     ]);
   }
 }
-

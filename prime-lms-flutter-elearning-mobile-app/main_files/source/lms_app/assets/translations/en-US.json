@@ -200,5 +200,13 @@
     "test-type": "Type of Test: {}",
     "test-length": "Number of questions: {}",
     "all-courses": "All courses",
-    "tests": "Tests"
+    "tests": "Tests",
+    "dictionary1": "Course",
+    "dictionary2": "Chinese-Vietnamese",
+    "by": "Created By {}",
+    "profile-updated": "Profile updated",
+    "profile-failed": "Profile update failed",
+    "OUTPUT": "Output",
+    "ENTRANCE": "Entrance",
+    "address_str": "Address: {}"
 }

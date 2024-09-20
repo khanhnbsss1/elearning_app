@@ -110,6 +110,8 @@ class _MyAppState extends State<MyApp> {
     ColorConst.setColorByFlavorType(context);
     return GetMaterialApp(
       theme: ThemeData(primaryColor: const Color(0xF4930202)),
+      // theme: ThemeData(primaryColor: const Color(0xFFC67D)),
+      // theme: ThemeData(primaryColor: Colors.red),
       navigatorKey: NavigationService().navigationKey,
       title: AppConfig.appName,
       debugShowCheckedModeBanner: false,

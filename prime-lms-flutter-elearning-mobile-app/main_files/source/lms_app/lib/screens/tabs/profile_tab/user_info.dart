@@ -50,9 +50,7 @@ class _UserInfoState extends State<UserInfo> {
                                   user: user,
                                   onUpdate: (value) async {
                                       if (value) {
-                                        setState(() {
-
-                                        });
+                                        setState(() {});
                                       }
                                   },
                                 )));

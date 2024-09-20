@@ -29,11 +29,11 @@ class CourseTile extends StatelessWidget {
                 height: 90,
                 width: 100,
                 decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(3)),
+                    BoxDecoration(borderRadius: BorderRadius.circular(12)),
                 child: Hero(
                     tag: heroTag,
                     child: (course.image != null && course.image != "")
-                        ? CustomCacheImage(imageUrl: course.image, radius: 3)
+                        ? CustomCacheImage(imageUrl: course.image, radius: 12)
                         : Image.asset("assets/images/noImage1.jpg", fit: BoxFit.cover)),
               ),
               // PremiumTag(course: course),

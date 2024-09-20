@@ -11,6 +11,7 @@ import 'package:lms_app/services/apis/course/course_detail/models/course_detail_
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
 
+import '../../constants/custom_colors.dart';
 import '../../models/user/UserProfile.dart';
 
 class CourseInfoScreen extends StatelessWidget {
@@ -24,6 +25,18 @@ class CourseInfoScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            course.introduction.toString(),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              fontSize: 17,
+              // color: isDarkMode
+              //     ? CustomColor.paragraphColorDark
+              color: CustomColor.paragraphColor,
+              height: 1.7,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          const SizedBox(height: 10),
           RichText(
             text: TextSpan(
               text: 'created-by'.tr(),

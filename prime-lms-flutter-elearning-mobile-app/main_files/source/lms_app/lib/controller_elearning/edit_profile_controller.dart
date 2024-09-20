@@ -8,8 +8,10 @@ import '../../helper/widget/my_validators.dart';
 import '../../models/user/UserProfile.dart';
 import '../../services/apis/auth/register/models/register_request.dart';
 import '../../services/apis/auth/register/register_with_phone_api.dart';
+import '../base/author/author_manager.dart';
 import '../services/apis/upload_file/models/upload_file_info.dart';
 import '../services/apis/upload_file/upload_file_api.dart';
+import '../services/apis/user/get_user_detail_api.dart';
 
 class EditProfileController extends MyController {
   MyFormValidator basicValidator = MyFormValidator();
@@ -134,6 +136,8 @@ class EditProfileController extends MyController {
     bool data = await editUserApi.call();
     update();
     if (data == true) {
+      GetUserProfileInfoApi getUserProfileInfoApi = GetUserProfileInfoApi();
+      await getUserProfileInfoApi.call();
       return true;
     } else {
       return false;

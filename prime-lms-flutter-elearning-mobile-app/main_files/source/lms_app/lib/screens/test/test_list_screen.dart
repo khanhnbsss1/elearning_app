@@ -59,11 +59,11 @@ class _TestListScreenState extends State<TestListScreen> {
                   return ExpansionTile(
                     tilePadding: const EdgeInsets.symmetric(horizontal: 20,),
                     collapsedShape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
+                      borderRadius: BorderRadius.circular(12),
                       side: BorderSide(color: CustomColor.border),
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
+                      borderRadius: BorderRadius.circular(12),
                       side: BorderSide(color: CustomColor.border),
                     ),
                     maintainState: true,

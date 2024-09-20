@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lms_app/base/author/user_helper.dart';
 import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
 import 'package:lms_app/theme/theme_provider.dart';
 import 'package:lms_app/utils/snackbars.dart';
@@ -90,13 +91,12 @@ class _EditProfileState extends ConsumerState<EditProfile> {
       bool check = await editProfileController.onUpdate();
       _btnController.reset();
       if (check) {
-        await ref.read(userDataProvider.notifier).getData();
         setState(() => _selectedImageFile = null);
         widget.onUpdate!(true);
         Navigator.pop(context);
-        openSnackbar(context, 'Profile updated');
+        ToastUtils.showToast('profile-updated');
       } else {
-        openSnackbar(context, 'Profile failed');
+        ToastUtils.showToast('profile-failed');
       }
     }
   }

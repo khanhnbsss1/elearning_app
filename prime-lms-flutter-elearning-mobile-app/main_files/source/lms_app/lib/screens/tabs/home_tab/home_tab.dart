@@ -47,26 +47,26 @@ class HomeTab extends ConsumerWidget {
     List<String> title = [
       'all-courses',
       'free-courses',
-      'dictionary',
+      'lets-study',
       'tests',
       'instructor',
-      'lets-study',
+      'dictionary',
     ];
     List<Image> images = [
       Image.asset('assets/images/online-course.png'),
       Image.asset('assets/images/free (2).png'),
-      Image.asset('assets/images/dictionary (1).png'),
+      Image.asset('assets/images/reading.png'),
       Image.asset('assets/images/test.png'),
       Image.asset('assets/images/teacher.png'),
-      Image.asset('assets/images/reading.png'),
+      Image.asset('assets/images/dictionary (1).png'),
     ];
     List<Widget> func = const [
       AllCoursesView(filter: 'All'),
       AllCoursesView(filter: 'free_course'),
-      Dictionary(),
+      MyCoursesTab(),
       TestListScreen(),
       AllAuthors(),
-      MyCoursesTab(),
+      Dictionary(),
     ];
     return RefreshIndicator.adaptive(
       displacement: 60,
@@ -82,9 +82,9 @@ class HomeTab extends ConsumerWidget {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              title: const AppLogo(
-                size: 45,
-              ),
+              // title: const AppLogo(
+              //   size: 45,
+              // ),
               pinned: false,
               floating: true,
               backgroundColor: Theme.of(context).primaryColor,
@@ -92,7 +92,8 @@ class HomeTab extends ConsumerWidget {
               foregroundColor: Colors.white,
               actions: [
                 IconButton(
-                  style: IconButton.styleFrom(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+                  style: IconButton.styleFrom(
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap),
                   onPressed: () {
                     NextScreen.iOS(context, const SearchScreen());
                   },
@@ -131,7 +132,8 @@ class HomeTab extends ConsumerWidget {
                               isDarkMode: isDarkMode,
                               width: itemWidth,
                               text: title[index].tr(),
-                              image: images[index], func: () => NextScreen.iOS(context,func[index] ),
+                              image: images[index],
+                              func: () => NextScreen.iOS(context, func[index]),
                             )),
                   ),
                   Visibility(
@@ -164,50 +166,62 @@ class HomeTab extends ConsumerWidget {
 
   Widget functionItem(
       {required BuildContext context,
-        bool? isDarkMode,
+      bool? isDarkMode,
       double? height,
       double? width,
       String? text,
       IconData? icon,
-        Image? image,
-        required Function() func}) {
-    return InkWell(
-      onTap: func,
+      Image? image,
+      required Function() func}) {
+    return GestureDetector(
+        onTap: func,
         child: Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: (isDarkMode != true) ? Colors.white : Colors.black.withOpacity(0.1)),
-      height: height ?? 120,
-      width: width == null ? 150 : width > 200 ? 200 : width,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            height: 75,
-            width: width == null ? 100 : width > 200 ? 120 : width * 2/3,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: (image == null) ? Icon(
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: (isDarkMode != true)
+                  ? Colors.white
+                  : Colors.black.withOpacity(0.1)),
+          height: height ?? 120,
+          width: width == null
+              ? 150
+              : width > 200
+                  ? 200
+                  : width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                  height: 75,
+                  width: width == null
+                      ? 100
+                      : width > 200
+                          ? 100
+                          : width * 2/3,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: (image == null)
+                        ? Icon(
                             icon ?? Icons.add_alert_sharp,
                             size: 50,
                             color: Theme.of(context).primaryColor,
-                          ) : image,
-              )),
-          Container(
-            padding: const EdgeInsets.only(top: 4),
-            child: Text(
-              text ?? "",
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                // color: (isDarkMode != true) ? Colors.black : Colors.white
-                color: Colors.black
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.clip,
-            ),
-          )
-        ],
-      ),
-    ));
+                          )
+                        : image,
+                  )),
+              Container(
+                padding: const EdgeInsets.only(top: 4),
+                child: Text(
+                  text ?? "",
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      // color: (isDarkMode != true) ? Colors.black : Colors.white
+                      color: Colors.black),
+                  maxLines: 1,
+                  overflow: TextOverflow.clip,
+                ),
+              )
+            ],
+          ),
+        ));
   }
 }

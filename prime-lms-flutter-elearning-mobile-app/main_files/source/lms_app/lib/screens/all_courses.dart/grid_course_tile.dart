@@ -36,10 +36,13 @@ class GridCourseTile extends StatelessWidget {
               Stack(
                 children: [
                   Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(12)
+                      ),
                       height: gridStyle == GridStyle.grid ? 130 : 180,
-                      color: Colors.grey.shade100,
                       child: (course.image != null && course.image != "")
-                          ? CustomCacheImage(imageUrl: course.image, radius: 3)
+                          ? CustomCacheImage(imageUrl: course.image, radius: 12)
                           : Center(
                             child: Image.asset("assets/images/noImage1.jpg",
                                 fit: BoxFit.contain),

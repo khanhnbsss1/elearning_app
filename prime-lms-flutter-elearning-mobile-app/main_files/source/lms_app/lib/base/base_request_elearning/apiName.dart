@@ -99,5 +99,7 @@ class ApiName {
   ///
   final String createScore = "/create-score";
   final String getScore = "/get-score";
+
+  final String getDataSynthesis = "/get-data-synthesis";
 }
 

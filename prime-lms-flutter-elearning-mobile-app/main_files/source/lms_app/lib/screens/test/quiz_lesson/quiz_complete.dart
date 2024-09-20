@@ -57,7 +57,7 @@ class QuizComplete extends ConsumerWidget {
             Container(
               margin: const EdgeInsets.all(30),
               padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
-              decoration: BoxDecoration(border: Border.all(color: Colors.grey.shade400), borderRadius: BorderRadius.circular(10)),
+              decoration: BoxDecoration(border: Border.all(color: Colors.grey.shade400), borderRadius: BorderRadius.circular(12)),
               child: Column(
                 children: [
                   Text(
