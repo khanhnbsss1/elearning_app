@@ -40,34 +40,50 @@ class CourseRegisteredHistoryListResponseModel extends PageModel{
 }
 
 class CourseRegisteredHistoryInfo {
+  int? id;
   int? courseId;
   String? courseName;
   int? userId;
   String? userName;
-  String? timeCreated;
+  String? fullname;
+  String? status;
+  String? timeValue;
+  String? action;
 
   CourseRegisteredHistoryInfo(
-      {this.courseId,
+      {this.id,
+        this.courseId,
         this.courseName,
         this.userId,
         this.userName,
-        this.timeCreated});
+        this.fullname,
+        this.status,
+        this.timeValue,
+        this.action});
 
   CourseRegisteredHistoryInfo.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     courseId = json['course_id'];
     courseName = json['course_name'];
     userId = json['user_id'];
     userName = json['user_name'];
-    timeCreated = json['time_created'];
+    fullname = json['fullname'];
+    status = json['status'];
+    timeValue = json['time_value'];
+    action = json['action'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
     data['course_id'] = this.courseId;
     data['course_name'] = this.courseName;
     data['user_id'] = this.userId;
     data['user_name'] = this.userName;
-    data['time_created'] = this.timeCreated;
+    data['fullname'] = this.fullname;
+    data['status'] = this.status;
+    data['time_value'] = this.timeValue;
+    data['action'] = this.action;
     return data;
   }
 }

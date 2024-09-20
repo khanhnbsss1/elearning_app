@@ -681,5 +681,10 @@
   "display_str": "显示",
   "of_str": "的",
   "request_str": "请求",
-  "reset_str": "重置"
+  "reset_str": "重置",
+  "total_register": "注册总数",
+  "total_register_new": "新",
+  "total_register_accept": "已批准",
+  "total_register_reject": "已拒绝",
+  "time_register": "注册数量"
 }

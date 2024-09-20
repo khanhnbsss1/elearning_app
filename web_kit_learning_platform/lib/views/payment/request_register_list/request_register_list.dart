@@ -226,70 +226,6 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                      ),
                    ),
                  ),
-              /*   Gap(Dimens.size16),
-                 SizedBox(
-                   //height: Dimens.size35,
-                   width: Dimens.size150,
-                   child: DropdownButtonFormField2<ActionStatus>(
-                     isExpanded: true,
-                     valueListenable: ValueNotifier<ActionStatus?>(state.status),
-                     decoration: InputDecoration(
-                       contentPadding:  EdgeInsets.symmetric(vertical: Dimens.size8),
-                       border: outlineInputBorder,
-                       // Add more decoration..
-                     ),
-                     hint:  Text(
-                       L10nX.getStr.status,
-                       style: TextStyleConstant.textStyleBlack13w400,
-                     ),
-                     items: ActionStatus.values.map((item) => DropdownItem<ActionStatus>(
-                       value: item,
-                       child: Text(
-                         item.name??"",
-                         style: TextStyleConstant.textStyleBlack13w400,
-                       ),
-                     )).toList(),
-                     validator: (value) {
-                       if (value == null) {
-                         return L10nX.getStr.grade_str;
-                       }
-                       return null;
-                     },
-                     onChanged: (value) {
-                       state.status = value;
-                       BlocProvider.of<RequestRegisterListBloc>(context).add(
-                           RequestRegisterListOnSearchByFilterEvent(
-                                state: state,
-                               searchCommonRequest: state.searchCommonRequest!.copyWith(status: mapActionStatusToStr[value],)
-                           ));
-                     },
-                     onSaved: (value) {
-                     },
-                     buttonStyleData:  ButtonStyleData(
-                       height: Dimens.size30,
-                       
-                       padding: EdgeInsets.only(right: Dimens.size8),
-                     ),
-                     iconStyleData:  IconStyleData(
-                       icon: Icon(
-                         Icons.arrow_drop_down,
-                         color: Colors.black45,
-                       ),
-                       iconSize: Dimens.size24,
-                     ),
-                     dropdownStyleData: DropdownStyleData(
-                       maxHeight:Dimens.size200,
-                       //width: 150,
-                       decoration: BoxDecoration(
-                         borderRadius: BorderRadius.circular(Dimens.size16),
-                         color: ColorConst.whiteColor,
-                       ),
-                     ),
-                     menuItemStyleData: MenuItemStyleData(
-                       padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
-                     ),
-                   ),
-                 ),*/
                  Gap(Dimens.size16),
                  Visibility(
                    visible: constraints.maxWidth> 600,
@@ -318,6 +254,7 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
    },);
   }
   Widget buildTestTableList({required RequestRegisterListState state, required BuildContext context}){
+    RegisteredInfo? registeredInfo = (state.listResponseModel?.content??[]).isNotEmpty?(state.listResponseModel?.content??[]).first: null;
     return Padding(
         padding:  EdgeInsets.all(Dimens.size8),
         child: LayoutBuilder(
@@ -355,7 +292,7 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                       content: "${L10nX.getStr.reject_str} ${L10nX.getStr.request_str}",
                       onAccept: () async {
                         MonitorLoading().showLoading("");
-                        UnlockCourseApi unlockCourseApi = UnlockCourseApi(status: mapActionStatusToStr[ActionStatus.Decline]!, requestId: p0.id!);
+                        UnlockCourseApi unlockCourseApi = UnlockCourseApi(status: mapActionStatusToStr[ActionStatus.Reject]!, requestId: p0.id!);
                         dynamic data = await unlockCourseApi.call();
                         MonitorLoading().dismiss();
                         BlocProvider.of<RequestRegisterListBloc>(context).add(RequestRegisterListInitEvent());
@@ -378,74 +315,162 @@ class _RequestRegisterListPageState extends State<RequestRegisterListPage> with 
                 );
                 return LayoutBuilder(
                   builder: (BuildContext context, BoxConstraints constraints) {
-                    return SfDataGridTheme(
-                      data: SfDataGridThemeData(
-                        headerColor: ColorConst.mainColor.withOpacity(0.1),
-                      ),
-                      child: SfDataGrid(
-                        source: employeeDataSource,
-                        columnWidthMode: ColumnWidthMode.fill,
-                        isScrollbarAlwaysShown: false,
-                        gridLinesVisibility: GridLinesVisibility.both,
-                        headerGridLinesVisibility: GridLinesVisibility.both,
-                        headerRowHeight: Dimens.size60,
-                        rowHeight: Dimens.size80,
-/*            onQueryRowHeight: (details) {
-              return details.getIntrinsicRowHeight(details.rowIndex);
-            },*/
-                        //defaultColumnWidth: 200,
-                        showHorizontalScrollbar: true,
-                        columns: <GridColumn>[
-                          GridColumn(
-                              columnName: 'id',
-                              maximumWidth: Dimens.size60,
-                              label: Container(
-                                  padding: EdgeInsets.all(Dimens.size8),
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    'ID', style: TextStyleConstant.textStyleBlack14w500,
-                                  ))),
-                          GridColumn(
-                              columnName: L10nX.getStr.register_user,
-                              minimumWidth: Dimens.size200,
-                              label: Container(
-                                  padding: EdgeInsets.all(Dimens.size8),
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    L10nX.getStr.register_user,
-                                    overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
-                                  ))),
-                          GridColumn(
-                              columnName: L10nX.getStr.course_str,
-                              minimumWidth: Dimens.size200,
-                              label: Container(
-                                  padding: EdgeInsets.all(Dimens.size8),
-                                  alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.course_str, style: TextStyleConstant.textStyleBlack14w500,))),
-                          GridColumn(
-                              columnName: L10nX.getStr.created_at,
-                              minimumWidth: Dimens.size120,
-                              label: Container(
-                                  padding: EdgeInsets.all(Dimens.size8),
-                                  alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.created_at, style: TextStyleConstant.textStyleBlack14w500,))),
-                          GridColumn(
-                              columnName: L10nX.getStr.status,
-                              maximumWidth: Dimens.size120,
-                              label: Container(
-                                  padding: EdgeInsets.all(Dimens.size8),
-                                  alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.status, style: TextStyleConstant.textStyleBlack14w500,))),
-                          GridColumn(
-                              columnName: L10nX.getStr.action_str,
-                              maximumWidth: Dimens.size250,
-                              label: Container(
-                                  padding: EdgeInsets.all(Dimens.size8),
-                                  alignment: Alignment.center,
-                                  child: Text(L10nX.getStr.action_str, style: TextStyleConstant.textStyleBlack14w500,))),
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: Dimens.size25,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text("${L10nX.getStr.total_register}: ", 
+                                  style: TextStyleConstant.textStyleBlack15w500,),
+                                Text("${registeredInfo?.total??0}",
+                                  style: TextStyleConstant.textStyleBlack15w400,),
+                                Gap(Dimens.size16),
+                                VerticalDivider(
+                                  thickness: 1,
+                                ),
+                                Gap(Dimens.size16),
+                                Text("${L10nX.getStr.total_register_new}: ",
+                                  style: TextStyleConstant.textStyleBlack15w500,),
+                                Text("${registeredInfo?.totalNew??0}",
+                                  style: TextStyleConstant.textStyleBlack15w400,),
+                                Gap(Dimens.size16),
+                                VerticalDivider(
+                                  thickness: 1,
+                                ),
+                                Gap(Dimens.size16),
+                                Text("${L10nX.getStr.total_register_accept}: ", 
+                                  style: TextStyleConstant.textStyleBlack15w500,),
+                                Text("${registeredInfo?.totalAccept??0}",
+                                  style: TextStyleConstant.textStyleBlack15w400,),
+                                Gap(Dimens.size16),
+                                VerticalDivider(
+                                  thickness: 1,
+                                ),
+                                Gap(Dimens.size16),
+                                Text("${L10nX.getStr.total_register_reject}: ",
+                                   style: TextStyleConstant.textStyleBlack15w500,),
+                                Text("${(registeredInfo?.total??0) - (registeredInfo?.totalNew??0) - (registeredInfo?.totalAccept??0)}",
+                                  style: TextStyleConstant.textStyleBlack15w400,),
+                                Gap(Dimens.size16),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Gap(Dimens.size16),
+                        Expanded(
+                          child: SfDataGridTheme(
+                            data: SfDataGridThemeData(
+                              headerColor: ColorConst.mainColor.withOpacity(0.1),
+                            ),
+                            child: SfDataGrid(
+                              source: employeeDataSource,
+                              columnWidthMode: ColumnWidthMode.fill,
+                              isScrollbarAlwaysShown: false,
+                              gridLinesVisibility: GridLinesVisibility.both,
+                              headerGridLinesVisibility: GridLinesVisibility.both,
+                              headerRowHeight: Dimens.size60,
+                              rowHeight: Dimens.size80,
+                          /*            onQueryRowHeight: (details) {
+                                        return details.getIntrinsicRowHeight(details.rowIndex);
+                                      },*/
+                              //defaultColumnWidth: 200,
+                              showHorizontalScrollbar: true,
+                              columns: <GridColumn>[
+                                GridColumn(
+                                    columnName: 'id',
+                                    maximumWidth: Dimens.size60,
+                                    label: Container(
+                                        padding: EdgeInsets.all(Dimens.size8),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          'ID', style: TextStyleConstant.textStyleBlack14w500,
+                                        ))),
+                                GridColumn(
+                                    columnName: L10nX.getStr.register_user,
+                                    maximumWidth: Dimens.size180,
+                                    minimumWidth: Dimens.size150,
+                                    label: Container(
+                                        padding: EdgeInsets.all(Dimens.size8),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          L10nX.getStr.register_user,
+                                          overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
+                                        ))),
+                                GridColumn(
+                                    columnName: L10nX.getStr.full_name,
+                                    maximumWidth: Dimens.size250,
+                                    minimumWidth: Dimens.size200,
+                                    label: Container(
+                                        padding: EdgeInsets.all(Dimens.size8),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          L10nX.getStr.full_name,
+                                          overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
+                                        ))),
+                                GridColumn(
+                                    columnName: L10nX.getStr.course_str,
+                                    minimumWidth: Dimens.size400,
+                                    label: Container(
+                                        padding: EdgeInsets.all(Dimens.size8),
+                                        alignment: Alignment.center,
+                                        child: Text(L10nX.getStr.course_str, style: TextStyleConstant.textStyleBlack14w500,))),
+                                GridColumn(
+                                    columnName: L10nX.getStr.time_register,
+                                    maximumWidth: Dimens.size120,
+                                    minimumWidth: Dimens.size120,
+                                    label: Container(
+                                        padding: EdgeInsets.all(Dimens.size8),
+                                        alignment: Alignment.center,
+                                        child: Text(L10nX.getStr.time_register, style: TextStyleConstant.textStyleBlack14w500,))),
+                                
+                                GridColumn(
+                                    columnName: L10nX.getStr.created_at,
+                                    maximumWidth: Dimens.size120,
+                                    minimumWidth: Dimens.size120,
 
-                        ],
-                      ),
+                                    label: Container(
+                                        padding: EdgeInsets.all(Dimens.size8),
+                                        alignment: Alignment.center,
+                                        child: Text(L10nX.getStr.created_at, style: TextStyleConstant.textStyleBlack14w500,))),
+                                GridColumn(
+                                    columnName: L10nX.getStr.str_update,
+                                    maximumWidth: Dimens.size120,
+                                    minimumWidth: Dimens.size120,
+
+                                    label: Container(
+                                        padding: EdgeInsets.all(Dimens.size8),
+                                        alignment: Alignment.center,
+                                        child: Text(L10nX.getStr.str_update, style: TextStyleConstant.textStyleBlack14w500,))),
+                          
+                                GridColumn(
+                                    columnName: L10nX.getStr.status,
+                                    maximumWidth: Dimens.size120,
+                                    minimumWidth: Dimens.size120,
+                                    label: Container(
+                                        padding: EdgeInsets.all(Dimens.size8),
+                                        alignment: Alignment.center,
+                                        child: Text(L10nX.getStr.status, style: TextStyleConstant.textStyleBlack14w500,))),
+                                GridColumn(
+                                    columnName: L10nX.getStr.action_str,
+                                    maximumWidth: Dimens.size250,
+                                    minimumWidth: Dimens.size250,
+                                    label: Container(
+                                        padding: EdgeInsets.all(Dimens.size8),
+                                        alignment: Alignment.center,
+                                        child: Text(L10nX.getStr.action_str, style: TextStyleConstant.textStyleBlack14w500,))),
+                          
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     );
                   },
                 );
@@ -478,50 +503,80 @@ class RequestListDataSource extends DataGridSource {
                 Expanded(child: Text(e.userName??"", style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             ) ),
+            DataGridCell<Widget>(columnName: L10nX.getStr.full_name, value:Row(
+              children: [
+                Expanded(child: Text(e.fullname??"", style: TextStyleConstant.textStyleBlack14w400,)),
+              ],
+            ) ),
             DataGridCell<Widget>(columnName: L10nX.getStr.course_str, value: Row(
               children: [
                 Expanded(child: Text(e.courseName??"", style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
+            DataGridCell<Widget>(columnName: L10nX.getStr.time_register, value: Text(e.totalRegistrations??"", style: TextStyleConstant.textStyleBlack14w400,)),
+
             DataGridCell<Widget>(columnName: L10nX.getStr.created_at, value: Text(e.createdAt??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.str_update, value: Text(e.updatedAt??"", style: TextStyleConstant.textStyleBlack14w400,)),
 
             DataGridCell<Widget>(columnName: L10nX.getStr.status, value: Text(e.status??"", style: TextStyleConstant.textStyleBlack14w400,)),
-            //DataGridCell<Widget>(columnName: L10nX.getStr.doing_time_str, value: Text("${(e.}", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str, 
                 value: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ActionButton1(
-                      text: L10nX.getStr.str_accept,
-                      height: Dimens.size40,
-                      enable: e.status== "New",
-                      onTap: () {
-                        onAccept(e);
-                      },
+                    Visibility(
+                      visible: e.status== "New",
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ActionButton1(
+                            text: L10nX.getStr.str_accept,
+                            height: Dimens.size40,
+                            enable: e.status== "New",
+                            onTap: () {
+                              onAccept(e);
+                            },
+                          ),
+                          Gap(Dimens.size12),
+                        ],
+                      ),
                     ),
-                    Gap(Dimens.size12),
-                    ActionButton1(
-                      text: L10nX.getStr.reject_str,
-                      height: Dimens.size40,
-                      enable: e.status== "New",
-                      enableBgColor: ColorConst.whiteColor,
-                      borderColor: ColorConst.greyColor,
-                      textStype: TextStyleConstant.textStyleBlack16w600,
-                      onTap: () {
-                        onReject(e);
-                      },
+                    
+                    Visibility(
+                      visible: e.status== "New",
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ActionButton1(
+                            text: L10nX.getStr.reject_str,
+                            height: Dimens.size40,
+                            enable: e.status== "New",
+                            enableBgColor: ColorConst.whiteColor,
+                            borderColor: ColorConst.greyColor,
+                            textStype: TextStyleConstant.textStyleBlack16w600,
+                            onTap: () {
+                              onReject(e);
+                            },
+                          ),
+                          Gap(Dimens.size12),
+                
+                        ],
+                      ),
                     ),
-                    Gap(Dimens.size12),
-                    ActionButton1(
-                      text: L10nX.getStr.reset_str,
-                      height: Dimens.size40,
-                      enable: e.status== "Accept" || e.status== "Decline",
-                      enableBgColor: ColorConst.whiteColor,
-                      borderColor: ColorConst.greyColor,
-                      textStype: TextStyleConstant.textStyleBlack16w600,
-                      onTap: () {
-                        onRenew(e);
-                      },
+                    Visibility(
+                      visible: e.status== "Accept" || e.status== "Reject",
+                      child: ActionButton1(
+                        text: L10nX.getStr.reset_str,
+                        height: Dimens.size40,
+                        enable: e.status== "Accept" || e.status== "Reject",
+                        enableBgColor: ColorConst.whiteColor,
+                        borderColor: ColorConst.greyColor,
+                        textStype: TextStyleConstant.textStyleBlack16w600,
+                        onTap: () {
+                          onRenew(e);
+                        },
+                      ),
                     ),
                   ],
                 )),

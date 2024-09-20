@@ -68,7 +68,7 @@ class AddCategoryPageState extends State<AddCategoryPage>with UIMixin {
         },
         enabled: widget.tagPageAction != GradePageAction.view,
         decoration: InputDecoration(
-            labelText: L10nX.getStr.add_tags,
+            labelText: L10nX.getStr.category_add_str,
             labelStyle: MyTextStyle.bodySmall(xMuted: true),
             border: outlineInputBorder,
             contentPadding: EdgeInsets.all(16),

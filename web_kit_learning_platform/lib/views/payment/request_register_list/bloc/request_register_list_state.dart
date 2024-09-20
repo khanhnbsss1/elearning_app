@@ -10,12 +10,12 @@ enum RequestRegisterListStatus {
 enum ActionStatus{
   New,
   Accept,
-  Decline
+  Reject
 }
 Map<ActionStatus, String>mapActionStatusToStr={
   ActionStatus.New:"New",
   ActionStatus.Accept:"Accept",
-  ActionStatus.Decline:"Decline",
+  ActionStatus.Reject:"Reject",
 
 };
 

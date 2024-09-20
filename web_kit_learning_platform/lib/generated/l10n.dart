@@ -6829,6 +6829,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Reset`
+  String get reset_str {
+    return Intl.message(
+      'Reset',
+      name: 'reset_str',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total registrations`
+  String get total_register {
+    return Intl.message(
+      'Total registrations',
+      name: 'total_register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New`
+  String get total_register_new {
+    return Intl.message(
+      'New',
+      name: 'total_register_new',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Approved`
+  String get total_register_accept {
+    return Intl.message(
+      'Approved',
+      name: 'total_register_accept',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rejected`
+  String get total_register_reject {
+    return Intl.message(
+      'Rejected',
+      name: 'total_register_reject',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of registrations`
+  String get time_register {
+    return Intl.message(
+      'Number of registrations',
+      name: 'time_register',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

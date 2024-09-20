@@ -556,6 +556,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "request_str": MessageLookupByLibrary.simpleMessage("Request"),
         "reset_password":
             MessageLookupByLibrary.simpleMessage("Reset password"),
+        "reset_str": MessageLookupByLibrary.simpleMessage("Reset"),
         "result": MessageLookupByLibrary.simpleMessage("Result"),
         "revenue": MessageLookupByLibrary.simpleMessage("Revenue"),
         "revenue_month":
@@ -777,6 +778,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "time_in_year_str": MessageLookupByLibrary.simpleMessage("Year"),
         "time_out_connection": MessageLookupByLibrary.simpleMessage(
             "Timeout exceeded, please check your network connection"),
+        "time_register":
+            MessageLookupByLibrary.simpleMessage("Number of registrations"),
         "time_str": MessageLookupByLibrary.simpleMessage("Time"),
         "time_test_end": MessageLookupByLibrary.simpleMessage(
             "The test time has expired, you cannot continue the test, please submit your test"),
@@ -794,6 +797,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "today_sales": MessageLookupByLibrary.simpleMessage("Today sales"),
         "top": MessageLookupByLibrary.simpleMessage("Top"),
         "top_dialog": MessageLookupByLibrary.simpleMessage("Top dialog"),
+        "total_register":
+            MessageLookupByLibrary.simpleMessage("Total registrations"),
+        "total_register_accept":
+            MessageLookupByLibrary.simpleMessage("Approved"),
+        "total_register_new": MessageLookupByLibrary.simpleMessage("New"),
+        "total_register_reject":
+            MessageLookupByLibrary.simpleMessage("Rejected"),
         "total_revenue": MessageLookupByLibrary.simpleMessage("Total revenue"),
         "tourism_number":
             MessageLookupByLibrary.simpleMessage("Tourism - number"),

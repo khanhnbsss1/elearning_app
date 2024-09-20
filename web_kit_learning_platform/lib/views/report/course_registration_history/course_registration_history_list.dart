@@ -268,10 +268,16 @@ class _CourseRegistrationHistoryListPageState extends State<CourseRegistrationHi
                                 alignment: Alignment.center,
                                 child: Text(L10nX.getStr.user_str, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
+                            columnName: L10nX.getStr.full_name,
+                            maximumWidth: Dimens.size250,
+                            label: Container(
+                                padding: EdgeInsets.all(8.0),
+                                alignment: Alignment.center,
+                                child: Text(L10nX.getStr.full_name, style: TextStyleConstant.textStyleBlack14w500,))),
+                        GridColumn(
                             columnName: L10nX.getStr.time_str,
                             minimumWidth: Dimens.size100,
                             maximumWidth: Dimens.size200,
-
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
@@ -315,10 +321,14 @@ class CourseRegisteredHistoryInfoDataSource extends DataGridSource {
                 Expanded(child: Text(e.userName??"", textAlign: TextAlign.center, style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
-
+            DataGridCell<Widget>(columnName: L10nX.getStr.full_name, value: Row(
+              children: [
+                Expanded(child: Text(e.fullname??"", textAlign: TextAlign.center, style: TextStyleConstant.textStyleBlack14w400,)),
+              ],
+            )),
             DataGridCell<Widget>(columnName: L10nX.getStr.time_str, value: Row(
               children: [
-                Expanded(child: Text(e.timeCreated??"", style: TextStyleConstant.textStyleBlack14w400,)),
+                Expanded(child: Text(e.timeValue??"", style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
           ]);

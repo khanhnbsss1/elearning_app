@@ -56,7 +56,7 @@ class AddGradePageState extends State<AddGradePage>with UIMixin {
   Widget build(BuildContext context) {
     // TODO: implement build
     return AlertDialog(
-      title: Text(widget.tagPageAction ==GradePageAction.create? L10nX.getStr.category_add_str: L10nX.getStr.category_update_str),
+      title: Text(widget.tagPageAction ==GradePageAction.create? L10nX.getStr.grade_add_str: L10nX.getStr.grade_update_str),
       content: TextFormField(
         controller: tagController,
         keyboardType: TextInputType.text,
@@ -65,7 +65,7 @@ class AddGradePageState extends State<AddGradePage>with UIMixin {
         },
         enabled: widget.tagPageAction != GradePageAction.view,
         decoration: InputDecoration(
-            labelText: L10nX.getStr.add_tags,
+            labelText: L10nX.getStr.grade_add_str,
             labelStyle: MyTextStyle.bodySmall(xMuted: true),
             border: outlineInputBorder,
             contentPadding: EdgeInsets.all(16),

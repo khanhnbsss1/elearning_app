@@ -450,6 +450,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "report_str": MessageLookupByLibrary.simpleMessage("报告"),
         "request_str": MessageLookupByLibrary.simpleMessage("请求"),
         "reset_password": MessageLookupByLibrary.simpleMessage("重置密码"),
+        "reset_str": MessageLookupByLibrary.simpleMessage("重置"),
         "result": MessageLookupByLibrary.simpleMessage("结果"),
         "revenue": MessageLookupByLibrary.simpleMessage("收入"),
         "revenue_month": MessageLookupByLibrary.simpleMessage("按月收入"),
@@ -635,6 +636,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "time_in_year_str": MessageLookupByLibrary.simpleMessage("年份"),
         "time_out_connection":
             MessageLookupByLibrary.simpleMessage("超时,请检查您的网络连接"),
+        "time_register": MessageLookupByLibrary.simpleMessage("注册数量"),
         "time_str": MessageLookupByLibrary.simpleMessage("时间"),
         "time_test_end":
             MessageLookupByLibrary.simpleMessage("测试时间已结束，无法继续测试，请提交测试"),
@@ -651,6 +653,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "today_sales": MessageLookupByLibrary.simpleMessage("今日销售额"),
         "top": MessageLookupByLibrary.simpleMessage("顶部"),
         "top_dialog": MessageLookupByLibrary.simpleMessage("顶部对话框"),
+        "total_register": MessageLookupByLibrary.simpleMessage("注册总数"),
+        "total_register_accept": MessageLookupByLibrary.simpleMessage("已批准"),
+        "total_register_new": MessageLookupByLibrary.simpleMessage("新"),
+        "total_register_reject": MessageLookupByLibrary.simpleMessage("已拒绝"),
         "total_revenue": MessageLookupByLibrary.simpleMessage("总收入"),
         "tourism_number": MessageLookupByLibrary.simpleMessage("旅游业 - 人数"),
         "traditional_str": MessageLookupByLibrary.simpleMessage("传统"),
