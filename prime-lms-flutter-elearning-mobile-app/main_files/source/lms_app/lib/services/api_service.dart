@@ -127,8 +127,8 @@ class ApiService {
     return courseResponseModel.content??[];
   }
 
-  Future<List<VocabularyInfo>> getDictionary(int pageNumber, String? keyword) async {
-    GetListVocabularyApi getListVocabularyApi = GetListVocabularyApi(searchCommonRequest: SearchCommonRequest(pageSize: 10, pageNumber: pageNumber, keyword: keyword??""));
+  Future<List<VocabularyInfo>> getDictionary(int pageNumber, String? keyword, DictionaryType dictionaryType) async {
+    GetListVocabularyApi getListVocabularyApi = GetListVocabularyApi(searchCommonRequest: SearchCommonRequest(pageSize: 10, pageNumber: pageNumber, keyword: keyword??""), dictionaryType: dictionaryType);
     VocabularyResponseModel vocabularyResponseModel = await getListVocabularyApi.call();
     return vocabularyResponseModel.content??[];
   }

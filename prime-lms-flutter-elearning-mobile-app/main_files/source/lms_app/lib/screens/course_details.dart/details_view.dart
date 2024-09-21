@@ -50,14 +50,44 @@ class CourseDetailsView extends ConsumerWidget {
     return myCourse.when(
         data: (myCourses) {
           return Scaffold(
-              bottomNavigationBar: Wrap(
-                alignment: WrapAlignment.center,
-                children: [
-                  AdManager.isBannerEnbaled(ref)
-                      ? const BannerAdWidget()
-                      : Container(),
-                  // EnrollButton(course: course),
-                ],
+              // bottomNavigationBar: Wrap(
+              //   alignment: WrapAlignment.center,
+              //   children: [
+              //     AdManager.isBannerEnbaled(ref)
+              //         ? const BannerAdWidget()
+              //         : Container(),
+              //     // EnrollButton(course: course),
+              //   ],
+              // ),
+              bottomNavigationBar: SizedBox(
+                height: 50,
+                child: (!UserManager().checkRegisteredCourse(courses, myCourses??[])) ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    if (courses.originalPrice != 0 && courses.originalPrice != null) Text(
+                      '${NumberFormat.decimalPattern('vi').format(courses.originalPrice??0)} VND',
+                      style: const TextStyle(
+                          decoration: TextDecoration.lineThrough,
+                          color: Colors.black45,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    if (courses.payment != 0 && courses.payment != null) Text(
+                      '${NumberFormat.decimalPattern('vi').format(courses.payment??0)} VND',
+                      style: const TextStyle(
+                          decoration: TextDecoration.underline,
+                          decorationColor: Color(0xFFFFC711),
+                          fontStyle: FontStyle.italic,
+                          color: Color(0xFFFFC711),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    RegisterButton(course: courses, myCourses: myCourses ?? [], width: MediaQuery.of(context).size.width * 0.4,),
+                  ],
+                ) :
+                Center(
+                  child: RegisterButton(course: courses, myCourses: myCourses ?? [], width: MediaQuery.of(context).size.width * 0.6,),
+                ),
               ),
               body: FutureBuilder(
                   future: getCourseDetail(courses),
@@ -69,16 +99,19 @@ class CourseDetailsView extends ConsumerWidget {
                       return CustomScrollView(
                         slivers: [
                           SliverAppBar(
+                            backgroundColor: Colors.white,
                             pinned: false,
+                            // forceMaterialTransparency: true,
                             floating: true,
                             leading: IconButton(
                               onPressed: () => Navigator.pop(context),
                               icon: const Icon(FeatherIcons.chevronLeft),
                             ),
                             actions: [
-                              RegisterButton(
-                                  course: courseInfo,
-                                  myCourses: myCourses ?? []),
+                              // RegisterButton(
+                              //     course: courseInfo,
+                              //     myCourses: myCourses ?? [],
+                              // ),
                               // BookmarkButton(course: courseInfo),
                               // ReviewButton(course: courseInfo),
                               CourseShareButton(course: courseInfo),
@@ -96,6 +129,9 @@ class CourseDetailsView extends ConsumerWidget {
                                         course: courseInfo, heroTag: heroTag),
                                     const SizedBox(height: 20),
                                     TitleInfo(course: courseInfo),
+                                    // RegisterButton(
+                                    //     course: courseInfo,
+                                    //     myCourses: myCourses ?? []),
                                     CourseInfoScreen(course: courseInfo),
                                     Learnings(course: courseInfo),
                                     const SizedBox(height: 40),

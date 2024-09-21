@@ -49,11 +49,11 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
                 Container(
                   height: 90,
                   width: 100,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(3)),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
                   child: Hero(
                       tag: heroTag,
                       child: (courseDetail.image != null && courseDetail.image != "")
-                          ? CustomCacheImage(imageUrl: courseDetail.image, radius: 3)
+                          ? CustomCacheImage(imageUrl: courseDetail.image, radius: 12)
                           : Image.asset("assets/images/noImage1.jpg",
                           fit: BoxFit.cover)),
                 ),
@@ -77,12 +77,12 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      'By ${courseDetail.producerName}',
+                      'by',
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium
                           ?.copyWith(color: Colors.blueAccent),
-                    ),
+                    ).tr(args: [courseDetail.producerName??"-"]),
                     const SizedBox(
                       height: 10,
                     ),

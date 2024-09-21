@@ -42,11 +42,11 @@ class Sections extends ConsumerWidget {
             enabled: enabled,
             tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             collapsedShape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(12),
               side: BorderSide(color: isDarkMode ? CustomColor.borderDark : CustomColor.border),
             ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(12),
               side: BorderSide(color: isDarkMode ? CustomColor.borderDark : CustomColor.border),
             ),
             maintainState: true,

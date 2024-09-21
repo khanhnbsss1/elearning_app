@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/constants/custom_colors.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/services/api_service.dart';
+import 'package:lms_app/services/apis/teacher_list/models/synthesisInfo.dart';
+import 'package:lms_app/services/apis/teacher_list/teacher_list/get_data_synthesis_api.dart';
 import '../../models/user/UserProfile.dart';
 import '../../services/apis/teacher_list/models/landing_page_teacher_list_model.dart';
 import '../../theme/theme_provider.dart';
@@ -59,10 +61,13 @@ class AuthorProfile extends ConsumerWidget {
                     children: [
                       const AuthorCountInfo(students: 20, courseCount: 20, reviewsCount: 20),
                       const SizedBox(height: 40),
-                      Text(
-                        'about-me',
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-                      ).tr(),
+                      InkWell(
+                        onTap: () => getData(),
+                        child: Text(
+                          'about-me',
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                        ).tr(),
+                      ),
                       const SizedBox(height: 10),
                       // Text(
                       //   bio,
@@ -91,5 +96,12 @@ class AuthorProfile extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  Future<void> getData() async{
+    GetDataSynthesisApi getDataSynthesisApi = GetDataSynthesisApi();
+    SynthesisSummaryInfo synthesisSummaryInfo = await getDataSynthesisApi.call();
+    synthesisSummaryInfo;
+    return;
   }
 }

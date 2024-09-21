@@ -6,9 +6,15 @@ import '../../../../base/base_request_elearning/models/search_common_request.dar
 import '../../../../models/user/UserProfile.dart';
 import 'models/vocabulary_models.dart';
 
+enum DictionaryType {
+  noImage,
+  Image,
+}
+
 class GetListVocabularyApi extends BaseApiRequest {
+  DictionaryType dictionaryType;
   SearchCommonRequest searchCommonRequest;
-  GetListVocabularyApi({required this.searchCommonRequest}):super(
+  GetListVocabularyApi({required this.searchCommonRequest, required this.dictionaryType}):super(
     serviceType: SERVICE_TYPE.VOCABULARY,
     apiName: ApiName.getInstance().getListVocabulary,
   );
@@ -29,9 +35,9 @@ class GetListVocabularyApi extends BaseApiRequest {
   }
 
   Future<void> getAuthorization() async {
-    UserProfile? userProfile = await UserManager().getUserProfile();
+    UserProfile? userProfile = UserManager().getUserProfile();
     if(userProfile!=null) {
-      searchCommonRequest = searchCommonRequest.copyWith(type: "NoImage");
+      searchCommonRequest = searchCommonRequest.copyWith(type: (dictionaryType == DictionaryType.Image) ? "Image" : "noImage");
     }
      await setApiBody(searchCommonRequest.toJson());
   }

@@ -43,7 +43,7 @@ class _LanguagesState extends State<Languages> {
           final String languageName = LanguageConfig.languages.keys.elementAt(index);
 
           return Container(
-            decoration: BoxDecoration(border: Border.all(width: 0.4, color: Colors.blueGrey), borderRadius: BorderRadius.circular(10)),
+            decoration: BoxDecoration(border: Border.all(width: 0.4, color: Colors.blueGrey), borderRadius: BorderRadius.circular(12)),
             child: ListTile(
               leading: CountryFlag(countryCode: locale.countryCode.toString()),
               horizontalTitleGap: 15,

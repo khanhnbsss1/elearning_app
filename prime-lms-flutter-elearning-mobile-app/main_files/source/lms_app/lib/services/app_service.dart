@@ -52,6 +52,17 @@ class AppService {
     }
   }
 
+  Future<void> openGoogleMaps(String s) async {
+    s.replaceAll(" ", "+");
+    s.replaceAll(",", "");
+    final googleMapsUrl = 'https://maps.google.com/maps?q=${s}';
+    if (await canLaunch(googleMapsUrl)) {
+      await launch(googleMapsUrl);
+    } else {
+      throw 'Could not launch Google Maps';
+    }
+  }
+
   Future openReviewReportEmail(context, Review review, UserProfile? user, String supportEmail) async {
     final String userName = user != null ? user.userName! : 'An user';
     final Uri uri = Uri(
