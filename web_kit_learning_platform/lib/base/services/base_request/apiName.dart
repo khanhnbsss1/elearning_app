@@ -21,7 +21,7 @@ class ApiName {
   final String updatePassword = "/update-password";
   
   
-  final String LOGOUT = "/logout";
+  final String logout = "/logout";
   
   ///course 
   final String createCourse = "/create-course";

@@ -797,8 +797,8 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                               const SizedBox(height: 16),
                               InkWell(
                                 onTap: () {
-                                  AuthorManager().handleLogout();
                                   AppPages.routeName(Routes.landingPageRoute, isReplace: true);
+                                  AuthorManager().handleLogout();
                                 },
                                 child: Row(
                                   children: [

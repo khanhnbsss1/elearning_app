@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/helpers/theme/theme_customizer.dart';
 import 'package:webkit/services/apis/auth/login/login_with_phone_api.dart';
+import 'package:webkit/services/apis/auth/login/logout_api.dart';
 import 'package:webkit/services/apis/auth/login/models/login_response.dart';
 import 'package:webkit/services/apis/auth/refreshToken/refresh_token_api.dart';
 
@@ -89,7 +90,13 @@ class AuthorManager {
     bool isInvalidToken = nowInTimestamp> authInfo.expireAt!;
     return isInvalidToken;
   }
-  Future<void> handleLogout() async {
+  Future<void> handleLogout({bool ? callLogout}) async {
+    if(callLogout??=true)
+      {
+        LoginOutApi loginOutApi = LoginOutApi();
+        await loginOutApi.call();
+      }
+
     await removeAuthInfo();
     AuthorManager().deleteDataWhenLogout();
     UserManager().handleLogoutData();

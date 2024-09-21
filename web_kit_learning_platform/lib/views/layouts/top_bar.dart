@@ -304,7 +304,7 @@ class _TopBarState extends State<TopBar>
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onTap: () async {
                 Navigator.pop(context,);
-                await AuthorManager().handleLogout();
+                AuthorManager().handleLogout();
                 AppPages.routeName(Routes.landingPageRoute, isReplace: true);
               },
               borderRadiusAll: AppStyle.buttonRadius.medium,

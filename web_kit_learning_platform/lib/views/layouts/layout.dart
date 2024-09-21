@@ -331,7 +331,7 @@ class Layout extends StatelessWidget {
               key: UniqueKey(),
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onTap: () async {
-                await AuthorManager().handleLogout();
+                AuthorManager().handleLogout();
                 AppPages.routeName(Routes.landingPageRoute, isReplace: true);
               },
               borderRadiusAll: AppStyle.buttonRadius.medium,

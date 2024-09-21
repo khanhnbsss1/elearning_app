@@ -25,7 +25,7 @@ class LoginWithPhoneApi extends BaseApiRequest {
        if(data.data!=null)
          {
            AuthInfo loginResponse = AuthInfo.fromJson(data.data);
-           await AuthorManager().handleLogout();
+           await AuthorManager().handleLogout(callLogout: false);
            await AuthorManager().saveAuthInfo(loginResponse);
            IdentifierConst.username = loginRequest.username??"";
            IdentifierConst.password = loginRequest.password??"";
@@ -36,7 +36,7 @@ class LoginWithPhoneApi extends BaseApiRequest {
            }
            catch(e)
            {
-             await AuthorManager().handleLogout();
+             await AuthorManager().handleLogout( callLogout: false);
              return false;
            }
            return true;
