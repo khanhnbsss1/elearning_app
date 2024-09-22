@@ -16,7 +16,7 @@ class AddRatingApi extends BaseApiRequest {
     dynamic result = await postRequestAPI();
     if(result.runtimeType == String && (result as String).isEmpty)
     {
-      ToastUtils.showToastSuccess(L10nX.getStr.sucessfully_str);
+      ToastUtils.showToastSuccess('success');
     }
     return result;
   }

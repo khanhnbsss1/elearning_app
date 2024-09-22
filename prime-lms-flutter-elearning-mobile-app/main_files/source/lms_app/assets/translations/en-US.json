@@ -209,5 +209,8 @@
     "profile-failed": "Profile update failed",
     "OUTPUT": "Output",
     "ENTRANCE": "Entrance",
-    "address_str": "Address: {}"
+    "address_str": "Address: {}",
+    "delete-comment": "Delete Comment",
+    "are-you-sure-delete-comment": "Are you sure you want to delete this comment?",
+    "thanks_for_rating": "Thanks for rating!"
 }

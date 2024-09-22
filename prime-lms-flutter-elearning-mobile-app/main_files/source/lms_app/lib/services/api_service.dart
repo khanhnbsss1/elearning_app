@@ -37,6 +37,7 @@ import '../services/apis/course/course_list/models/course_models.dart';
 import 'apis/course_progress/get_course_proccess_list.dart';
 import 'apis/course_progress/models/course_proccess_info.dart';
 import 'apis/rating/add_rating_api.dart';
+import 'apis/rating/delete_rating_api.dart';
 import 'apis/rating/get_rating_list.dart';
 import 'apis/rating/models/rating_info.dart';
 import 'apis/teacher_list/get_teacher_lt.dart';
@@ -156,7 +157,12 @@ class ApiService {
         ratePoint: ratePoint,
         review: comment,
     ));
-    dynamic data = await addRatingApi.call();
+    await addRatingApi.call();
+  }
+
+  Future<void> deleteRating(RatingInfo ratingInfo) async{
+    DeleteRatingApi deleteRatingApi = DeleteRatingApi(info: ratingInfo);
+    await deleteRatingApi.call();
   }
 
 

@@ -1,4 +1,6 @@
 
+import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
+
 import '../../../base/base_request_elearning/BaseApiRequest.dart';
 import 'models/rating_info.dart';
 
@@ -12,6 +14,7 @@ class DeleteRatingApi extends BaseApiRequest {
   Future<dynamic> call() async {
     await getAuthorization();
     dynamic result = await deleteRequestAPI();
+    ToastUtils.showToast('success');
     return result;
   }
 

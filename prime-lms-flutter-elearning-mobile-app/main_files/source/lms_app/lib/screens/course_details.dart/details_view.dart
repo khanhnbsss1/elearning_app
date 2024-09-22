@@ -57,13 +57,13 @@ class CourseDetailsView extends ConsumerWidget {
         data: (myCourses) {
           return FutureBuilder(
               future:
-                  Future.wait([getCourseDetail(courses), getReviewDetail()]),
+                  Future.wait([getCourseDetail(courses),]),
               builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
                 if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}');
                 } else if (snapshot.hasData) {
                   CourseInfo courseDetail = snapshot.data![0];
-                  List<RatingInfo> reviewList = snapshot.data![1] ?? [];
+                  // List<RatingInfo> reviewList = snapshot.data![1] ?? [];
                   return Scaffold(
                       // bottomNavigationBar: Wrap(
                       //   alignment: WrapAlignment.center,
@@ -142,7 +142,6 @@ class CourseDetailsView extends ConsumerWidget {
                               ReviewButton(
                                 contexts: context,
                                 courseDetail: courseDetail,
-                                reviewList: reviewList,
                                 myCourses: myCourses ?? [],
                               ),
                               CourseShareButton(course: courseDetail),
@@ -211,14 +210,5 @@ class CourseDetailsView extends ConsumerWidget {
             body: LoadingIndicatorWidget(),
           );
         });
-  }
-
-  Future<List<RatingInfo>> getReviewDetail() async {
-    List<RatingInfo> list =
-        await ApiService().getRatingList(SearchCommonRequest(
-      pageNumber: 0,
-      pageSize: 10,
-    ));
-    return list ?? [];
   }
 }

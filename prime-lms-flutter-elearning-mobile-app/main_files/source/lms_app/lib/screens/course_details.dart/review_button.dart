@@ -19,10 +19,9 @@ import '../../providers/user_data_provider.dart';
 import '../../services/api_service.dart';
 
 class ReviewButton extends ConsumerWidget with UserMixin {
-  const ReviewButton({super.key, required this.contexts, required this.courseDetail, required this.reviewList, required this.myCourses});
+  const ReviewButton({super.key, required this.contexts, required this.courseDetail, required this.myCourses});
   final BuildContext contexts;
   final CourseInfo courseDetail;
-  final List<RatingInfo> reviewList;
   final List<CourseInfo> myCourses;
 
   @override
@@ -39,12 +38,10 @@ class ReviewButton extends ConsumerWidget with UserMixin {
         } else {
           // final Review? review = await ApiService().getUserReview(courseDetail.id.toString(), user.id.toString());
           // if (!context.mounted) return;
-          NextScreen.openBottomSheet(context, RatingForm(courseDetail: courseDetail, reviewList: reviewList,));
+          NextScreen.openBottomSheet(context, RatingForm(courseDetail: courseDetail,));
         }
       },
-      icon: user != null && (reviewList ?? []).contains(courseDetail.id)
-          ? const Icon(LineIcons.starAlt, size: 22, color: Colors.orange)
-          : const Icon(LineIcons.star, size: 22),
+      icon: const Icon(LineIcons.star, size: 22),
     );
   }
 }

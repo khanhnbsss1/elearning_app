@@ -209,5 +209,8 @@
     "profile-failed": "配置文件更新失败",
     "OUTPUT": "输出",
     "ENTRANCE": "输入",
-    "address_str": "地址: {}"
+    "address_str": "地址: {}",
+    "delete-comment": "删除评论",
+    "are-you-sure-delete-comment": "您确定要删除此评论吗？",
+    "thanks_for_ rating": "感谢您的评分！"
 }

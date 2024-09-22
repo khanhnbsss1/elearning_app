@@ -46,7 +46,6 @@ class _StarRatingState extends State<StarRating> {
             });
             if (widget.onChanged != null) {
               widget.onChanged!(rating);
-              ToastUtils.showToast('thanks_for_rating'.tr());
             }
           },
           ratingWidget: RatingWidget(
