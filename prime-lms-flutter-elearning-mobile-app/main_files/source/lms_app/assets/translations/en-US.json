@@ -73,6 +73,7 @@
     "about-me": "About Me",
     "website": "Website",
     "created-by": "Created By",
+    "created-at": "Created at {}",
     "last-updated-": "Last Updated: {}",
     "language-": "Language: {}",
     "duration-": "Duration: {}",

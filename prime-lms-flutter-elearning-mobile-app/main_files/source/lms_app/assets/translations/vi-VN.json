@@ -73,6 +73,7 @@
   "about-me": "Về tôi",
   "website": "Trang web",
   "created-by": "Tạo bởi",
+  "created-at": "Tạo vào lúc {}",
   "by": "Tạo bởi {}",
   "last-updated-": "Cập nhật lần cuối: {}",
   "language-": "Ngôn ngữ: {}",

@@ -73,6 +73,7 @@
     "about-me": "关于我",
     "website": "网站",
     "created-by": "创建者",
+    "created-at": "创建于 {}",
     "by": "创建者: {}",
     "last-updated-": "上次更新：{}",
     "language-": "语言：{}",

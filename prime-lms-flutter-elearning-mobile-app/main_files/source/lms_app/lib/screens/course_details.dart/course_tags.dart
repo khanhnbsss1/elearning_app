@@ -43,22 +43,12 @@ class CourseTags extends ConsumerWidget {
               spacing: 10,
               runSpacing: 8,
               children: course.tags!.map((tag) {
-                return InkWell(
-                  // onTap: () => NextScreen.iOS(
-                  //   context,
-                  //   AllCoursesView(
-                  //     title: '${tag.name}',
-                  //     tagId: tag.id.toString(),
-                  //   ),
-                  // ),
-                  onTap: () {},
-                  child: Chip(
-                    labelStyle: Theme.of(context).textTheme.titleMedium,
-                    labelPadding: const EdgeInsets.symmetric(horizontal: 15),
-                    label: Text('${tag.name}'),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                    elevation: 0,
-                  ),
+                return Chip(
+                  labelStyle: Theme.of(context).textTheme.titleMedium,
+                  labelPadding: const EdgeInsets.symmetric(horizontal: 15),
+                  label: Text('${tag.name}'),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                  elevation: 0,
                 );
               }).toList(),
             )

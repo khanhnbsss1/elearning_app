@@ -30,16 +30,19 @@ class Dictionary extends ConsumerStatefulWidget {
   _DictionaryState createState() => _DictionaryState();
 }
 
-class _DictionaryState extends ConsumerState<Dictionary> {
+class _DictionaryState extends ConsumerState<Dictionary> with TickerProviderStateMixin {
   List<VocabularyInfo> _dictionaries = [];
   int _pageNumber = 0;
   bool lastPage = false;
   late ScrollController _controller;
   late bool isLoading;
+  late TabController _tabController;
 
+  @override
   void initState() {
     super.initState();
     _controller = ScrollController(initialScrollOffset: 0.0);
+    _tabController = TabController(length: 2, vsync: this);
     _controller.addListener(_scrollListener);
     isLoading = false;
     getWord();
@@ -128,40 +131,73 @@ class _DictionaryState extends ConsumerState<Dictionary> {
       ),
       body: Column(
         children: [
+          // Padding(
+          //   padding: const EdgeInsets.only(right: 20),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.end,
+          //     children: [
+          //       Row(
+          //         children: [
+          //           Checkbox(
+          //             activeColor: Theme.of(context).primaryColor,
+          //             value: ref.watch(dictionaryTypeProvider) == DictionaryType.noImage,
+          //             onChanged: (value) {
+          //               if (value!) {
+          //                 ref.read(dictionaryTypeProvider.notifier).state = DictionaryType.noImage;
+          //               }
+          //             },
+          //           ),
+          //           Text("dictionary1".tr()),
+          //         ],
+          //       ),
+          //       Row(
+          //         children: [
+          //           Checkbox(
+          //             activeColor: Theme.of(context).primaryColor,
+          //             value: ref.watch(dictionaryTypeProvider) == DictionaryType.Image,
+          //             onChanged: (value) {
+          //               if (value!) {
+          //                 ref.read(dictionaryTypeProvider.notifier).state = DictionaryType.Image;
+          //               }
+          //             },
+          //           ),
+          //           Text("dictionary2".tr()),
+          //         ],
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Padding(
-            padding: const EdgeInsets.only(right: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Row(
-                  children: [
-                    Checkbox(
-                      activeColor: Theme.of(context).primaryColor,
-                      value: ref.watch(dictionaryTypeProvider) == DictionaryType.noImage,
-                      onChanged: (value) {
-                        if (value!) {
-                          ref.read(dictionaryTypeProvider.notifier).state = DictionaryType.noImage;
-                        }
-                      },
-                    ),
-                    Text("dictionary1".tr()),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Checkbox(
-                      activeColor: Theme.of(context).primaryColor,
-                      value: ref.watch(dictionaryTypeProvider) == DictionaryType.Image,
-                      onChanged: (value) {
-                        if (value!) {
-                          ref.read(dictionaryTypeProvider.notifier).state = DictionaryType.Image;
-                        }
-                      },
-                    ),
-                    Text("dictionary2".tr()),
-                  ],
-                ),
-              ],
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+            child: Container(
+              height: kToolbarHeight + 8.0,
+              padding: const EdgeInsets.only(
+                  top: 16.0, right: 16.0, left: 16.0),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(8.0),
+                    topRight: Radius.circular(8.0)),
+              ),
+              child: TabBar(
+                onTap: (value) {
+                  if (value == 0) ref.read(dictionaryTypeProvider.notifier).state = DictionaryType.noImage;
+                  if (value == 1) ref.read(dictionaryTypeProvider.notifier).state = DictionaryType.Image;
+                },
+                controller: _tabController,
+                indicator: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8.0),
+                        topRight: Radius.circular(8.0)),
+                    color: Colors.white),
+                indicatorSize: TabBarIndicatorSize.tab,
+                labelColor: Colors.black,
+                unselectedLabelColor: Colors.white,
+                tabs: [
+                  Tab(text: 'dictionary1'.tr()),
+                  Tab(text: 'dictionary2'.tr()),
+                ],
+              ),
             ),
           ),
           Expanded(

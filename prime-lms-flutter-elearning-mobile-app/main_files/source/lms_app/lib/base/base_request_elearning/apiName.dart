@@ -100,6 +100,10 @@ class ApiName {
   final String createScore = "/create-score";
   final String getScore = "/get-score";
 
-  final String getDataSynthesis = "/get-data-synthesis";
+  ///rating
+  final String getRatingList = "/get-ratings";
+  final String addRating = "/create-rating";
+  final String editRating = "/edit-rating";
+  final String deleteRating = "/delete-rating";
 }
 

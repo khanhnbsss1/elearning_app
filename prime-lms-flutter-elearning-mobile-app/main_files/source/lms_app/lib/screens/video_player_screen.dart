@@ -95,6 +95,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                 selectedVideo = value;
                               });
                             } else {
+                              widget.lesson.isFinnish = true;
                               _onAllVideoCompleted();
                             }
                           },

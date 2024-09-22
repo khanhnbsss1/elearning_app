@@ -88,6 +88,8 @@ class RegisterButton extends ConsumerWidget {
                         if (course.isPayment == 0) {
                           ToastUtils.showSnackBar(
                               context, "register-success".tr());
+                          course.isPayment = 1;
+                          ref.read(myCoursesProvider);
                           NextScreen.replace(
                               context,
                               CurriculamScreen(
