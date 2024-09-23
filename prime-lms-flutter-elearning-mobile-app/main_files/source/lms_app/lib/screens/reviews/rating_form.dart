@@ -35,225 +35,239 @@ class _RatingFormState extends ConsumerState<RatingForm> {
   var reviewCtlr = TextEditingController();
   int selected = 0;
   UserProfile? user = UserManager().getUserProfile();
-  int pageNumber = 0;
+  int _pageNumber = 0;
+  bool lastPage = false;
+  bool isLoading = true;
+  late ScrollController _controller;
+  List<RatingInfo> reviewList = [];
 
   @override
   void initState() {
     super.initState();
+    _controller = ScrollController(initialScrollOffset: 0.0);
+    _controller.addListener(_scrollListener);
     _rating = 5.0;
+    _getReviewList();
     reviewCtlr.text = '';
   }
 
   Future<void> _addRating() async {
-    ApiService().addRating(widget.courseDetail, _rating, reviewCtlr.text);
+    await ApiService().addRating(widget.courseDetail, _rating, reviewCtlr.text);
     ToastUtils.showSnackBar(context, 'thanks_for_rating'.tr());
-    List<RatingInfo> data = await getReviewDetail(pageNumber);
-    List<RatingInfo> reviewList = [];
-    for (RatingInfo review in data) {
-      if (widget.courseDetail.id == review.courseId && review.isShow == 1) {
-        if (review.fullname == user?.fullName) {
-          reviewList.insert(0, review);
-        } else {
-          reviewList.add(review);
+  }
+
+  Future<void> _getReviewList() async {
+    List<RatingInfo> data = await getReviewDetail(_pageNumber);
+    if (data.isNotEmpty)
+    {
+      for (RatingInfo review in data) {
+        if (widget.courseDetail.id == review.courseId && review.isShow == 1) {
+          if (review.fullname == user?.fullName) {
+            reviewList.insert(0, review);
+          } else {
+            reviewList.add(review);
+          }
         }
       }
+    } else {
+      lastPage = true;
+    }
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  _scrollListener() async {
+    var isEnd = _controller.offset >= _controller.position.maxScrollExtent &&
+        !_controller.position.outOfRange;
+    if (isEnd) {
+      if (!lastPage) _loadMore();
     }
   }
 
+  Future<void> _loadMore() async {
+    setState(() {
+      _pageNumber++;
+      _getReviewList();
+    });
+  }
+
   Future<void> _deleteRating(RatingInfo ratingInfo) async {
-    ApiService().deleteRating(ratingInfo);
+    await ApiService().deleteRating(ratingInfo);
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: getReviewDetail(pageNumber),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List<RatingInfo> reviewList = [];
-            for (RatingInfo review in snapshot.data!) {
-              if (widget.courseDetail.id == review.courseId &&
-                  review.isShow == 1) {
-                if (review.fullname == user?.fullName) {
-                  reviewList.insert(0, review);
-                } else {
-                  reviewList.add(review);
-                }
-              }
-            }
-            return Scaffold(
-              appBar: AppBar(
-                leading: IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => Navigator.pop(context)),
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+            icon: const Icon(Icons.close),
+            onPressed: () => Navigator.pop(context)),
+      ),
+      // bottomSheet: BottomAppBar(
+      //   child: RoundedLoadingButton(
+      //     animateOnTap: false,
+      //     elevation: 0,
+      //     color: Theme.of(context).primaryColor,
+      //     controller: _btnController,
+      //     child: Text(
+      //       _btnText,
+      //       style: Theme.of(context)
+      //           .textTheme
+      //           .titleMedium
+      //           ?.copyWith(color: Colors.white, fontSize: 18),
+      //     ).tr(),
+      //     onPressed: () => {},
+      //   ),
+      // ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${user?.fullName}',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(color: Theme.of(context).primaryColor),
+            ),
+            const SizedBox(height: 8),
+            const Text('write-review').tr(),
+            const SizedBox(height: 8),
+            TextField(
+              keyboardType: TextInputType.multiline,
+              controller: reviewCtlr,
+              minLines: 3,
+              maxLines: null,
+              decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  hintText: 'write-your-review'.tr()),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  StarRating(
+                    initialRating: (_rating).toDouble(),
+                    size: 24,
+                    onChanged: (value) {
+                      _rating = value;
+                    },
+                  ),
+                  const Spacer(),
+                  SizedBox(
+                    height: 40,
+                    width: 80,
+                    child: FloatingActionButton(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      foregroundColor: Colors.white,
+                      onPressed: () {
+                        _addRating();
+                        setState(() {});
+                      },
+                      child: Text('submit'.tr()),
+                    ),
+                  )
+                ],
               ),
-              // bottomSheet: BottomAppBar(
-              //   child: RoundedLoadingButton(
-              //     animateOnTap: false,
-              //     elevation: 0,
-              //     color: Theme.of(context).primaryColor,
-              //     controller: _btnController,
-              //     child: Text(
-              //       _btnText,
-              //       style: Theme.of(context)
-              //           .textTheme
-              //           .titleMedium
-              //           ?.copyWith(color: Colors.white, fontSize: 18),
-              //     ).tr(),
-              //     onPressed: () => {},
-              //   ),
-              // ),
-              body: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+            ),
+            SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                // runSpacing: 8,
+                child: Row(
                   children: [
-                    Text(
-                      '${user?.fullName}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
-                          ?.copyWith(color: Theme.of(context).primaryColor),
-                    ),
-                    const SizedBox(height: 8),
-                    const Text('write-review').tr(),
-                    const SizedBox(height: 8),
-                    TextField(
-                      keyboardType: TextInputType.multiline,
-                      controller: reviewCtlr,
-                      minLines: 3,
-                      maxLines: null,
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          hintText: 'write-your-review'.tr()),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          StarRating(
-                            initialRating: (_rating).toDouble(),
-                            size: 24,
-                            onChanged: (value) {
-                              _rating = value;
-                            },
-                          ),
-                          const Spacer(),
-                          SizedBox(
-                            height: 40,
-                            width: 80,
-                            child: FloatingActionButton(
-                              backgroundColor: Theme.of(context).primaryColor,
-                              foregroundColor: Colors.white,
-                              onPressed: () {
-                                _addRating();
-                                setState(() {});
-                              },
-                              child: Text('submit'.tr()),
-                            ),
-                          )
-                        ],
+                    ActionChip(
+                      onPressed: () {
+                        setState(() {
+                          selected = 0;
+                        });
+                      },
+                      backgroundColor: (selected == 0)
+                          ? Theme.of(context)
+                          .primaryColor
+                          .withOpacity(0.1)
+                          : Colors.white,
+                      elevation: 0,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 6, horizontal: 6),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      label: Text(
+                        'view-all-reviews'.tr(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600),
                       ),
                     ),
-                    SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        // runSpacing: 8,
-                        child: Row(
+                    ...List.generate(5, (index) {
+                      return ActionChip(
+                        onPressed: () {
+                          setState(() {
+                            selected = index + 1;
+                          });
+                        },
+                        backgroundColor: (selected == index + 1)
+                            ? Theme.of(context)
+                            .primaryColor
+                            .withOpacity(0.1)
+                            : Colors.white,
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 6, horizontal: 6),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        label: Row(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            ActionChip(
-                              onPressed: () {
-                                setState(() {
-                                  selected = 0;
-                                });
-                              },
-                              backgroundColor: (selected == 0)
-                                  ? Theme.of(context)
-                                      .primaryColor
-                                      .withOpacity(0.1)
-                                  : Colors.white,
-                              elevation: 0,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 6, horizontal: 6),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30)),
-                              label: Text(
-                                'view-all-reviews'.tr(),
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600),
-                              ),
+                            Text(
+                              '${5 - index} ',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600),
                             ),
-                            ...List.generate(5, (index) {
-                              return ActionChip(
-                                onPressed: () {
-                                  setState(() {
-                                    selected = index + 1;
-                                  });
-                                },
-                                backgroundColor: (selected == index + 1)
-                                    ? Theme.of(context)
-                                        .primaryColor
-                                        .withOpacity(0.1)
-                                    : Colors.white,
-                                elevation: 0,
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 6, horizontal: 6),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30)),
-                                label: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      '${5 - index} ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600),
-                                    ),
-                                    const Icon(
-                                      Icons.star,
-                                      color: Colors.orange,
-                                      size: 16,
-                                    )
-                                  ],
-                                ),
-                              );
-                            }),
+                            const Icon(
+                              Icons.star,
+                              color: Colors.orange,
+                              size: 16,
+                            )
                           ],
-                        )),
-                    (reviewList.isNotEmpty)
-                        ? Flexible(
-                            child: ListView.builder(
-                                physics: const AlwaysScrollableScrollPhysics(),
-                                itemCount: reviewList.length,
-                                itemBuilder: (context, index) {
-                                  if (6 - selected ==
-                                      reviewList[index].ratePoint?.floor()) {
-                                    return reviewItem(reviewList[index]);
-                                  } else if (selected == 0) {
-                                    return reviewItem(reviewList[index]);
-                                  } else {
-                                    return const SizedBox();
-                                  }
-                                }),
-                          )
-                        : EmptyAnimation(
-                            animationString: reviewAnimation,
-                            title: 'no-review'.tr()),
+                        ),
+                      );
+                    }),
                   ],
-                ),
-              ),
-            );
-          } else {
-            return const LoadingIndicatorWidget();
-          }
-        });
+                )),
+            (isLoading == true) ? const Flexible(child: Center(child: LoadingIndicatorWidget())) : (reviewList.isNotEmpty)
+                ? Flexible(
+              child: ListView.builder(
+                  controller: _controller,
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount: reviewList.length,
+                  itemBuilder: (context, index) {
+                    if (6 - selected ==
+                        reviewList[index].ratePoint?.floor()) {
+                      return reviewItem(reviewList[index]);
+                    } else if (selected == 0) {
+                      return reviewItem(reviewList[index]);
+                    } else {
+                      return const SizedBox();
+                    }
+                  }),
+            )
+                : EmptyAnimation(
+                animationString: reviewAnimation,
+                title: 'no-review'.tr()),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget reviewItem(RatingInfo ratingInfo) {
@@ -273,6 +287,7 @@ class _RatingFormState extends ConsumerState<RatingForm> {
               width: 20,
             ),
             RatingViewer(
+              showText: false,
               rating: ratingInfo.ratePoint ?? 0,
             ),
           ],

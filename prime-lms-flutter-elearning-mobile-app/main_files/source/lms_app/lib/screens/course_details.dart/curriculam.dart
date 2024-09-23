@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/screens/course_details.dart/sections.dart';
 import 'package:lms_app/services/apis/course/course_detail/models/course_detail_model.dart';
 
-class Curriculam extends ConsumerWidget {
-  const Curriculam({
+class CurriculamPreview extends ConsumerWidget {
+  const CurriculamPreview({
     super.key,
     required this.course,
   });

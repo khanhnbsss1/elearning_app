@@ -3,26 +3,17 @@ import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:line_icons/line_icons.dart';
-import 'package:lms_app/base/author/user_helper.dart';
-import 'package:lms_app/components/app_logo.dart';
 import 'package:lms_app/screens/tabs/dictionary/dictionary.dart';
 import 'package:lms_app/screens/tabs/home_tab/featured_courses_slide.dart';
 import 'package:lms_app/screens/tabs/home_tab/top_authors.dart';
-import 'package:lms_app/screens/notifications/notifications.dart';
 import 'package:lms_app/screens/search/search_view.dart';
 import 'package:lms_app/screens/tabs/my_courses_tab/my_courses_tab.dart';
 import 'package:lms_app/screens/test/test_list_screen.dart';
-import 'package:lms_app/screens/wishlist.dart';
 import 'package:lms_app/utils/next_screen.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import '../../../providers/app_settings_provider.dart';
 import '../../../theme/theme_provider.dart';
 import '../../all_authors.dart';
 import '../../all_courses.dart/courses_view.dart';
-import 'category1_courses.dart';
-import 'category2_courses.dart';
-import 'category3_courses.dart';
 import 'featured_courses.dart';
 import 'free_courses.dart';
 import 'home_categories.dart';
@@ -57,7 +48,7 @@ class HomeTab extends ConsumerWidget {
       Image.asset('assets/images/free (2).png'),
       Image.asset('assets/images/reading.png'),
       Image.asset('assets/images/test.png'),
-      Image.asset('assets/images/teacher.png'),
+      Image.asset('assets/images/teacher1.png'),
       Image.asset('assets/images/dictionary (1).png'),
     ];
     List<Widget> func = const [
@@ -77,89 +68,86 @@ class HomeTab extends ConsumerWidget {
         ref.invalidate(topAuthorsProvider);
         ref.invalidate(homeLatestCoursesProvider);
       },
-      child: Container(
-        color: Colors.black.withOpacity(0.05),
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              // title: const AppLogo(
-              //   size: 45,
+      child: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            // title: const AppLogo(
+            //   size: 45,
+            // ),
+            pinned: false,
+            floating: true,
+            backgroundColor: Theme.of(context).primaryColor,
+            elevation: 0,
+            foregroundColor: Colors.white,
+            actions: [
+              IconButton(
+                style: IconButton.styleFrom(
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+                onPressed: () {
+                  NextScreen.iOS(context, const SearchScreen());
+                },
+                icon: const Icon(FeatherIcons.search, size: 22),
+              ),
+              // IconButton(
+              //   style: IconButton.styleFrom(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+              //   onPressed: () {
+              //     NextScreen.iOS(context, const Wishlist());
+              //   },
+              //   icon: const Icon(FeatherIcons.heart, size: 22),
               // ),
-              pinned: false,
-              floating: true,
-              backgroundColor: Theme.of(context).primaryColor,
-              elevation: 0,
-              foregroundColor: Colors.white,
-              actions: [
-                IconButton(
-                  style: IconButton.styleFrom(
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-                  onPressed: () {
-                    NextScreen.iOS(context, const SearchScreen());
-                  },
-                  icon: const Icon(FeatherIcons.search, size: 22),
+              // IconButton(
+              //   // style: IconButton.styleFrom(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
+              //   onPressed: () {
+              //     NextScreen.iOS(context, const Notifications());
+              //   },
+              //   icon: const Icon(LineIcons.bell),
+              // ),
+            ],
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
                 ),
-                // IconButton(
-                //   style: IconButton.styleFrom(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-                //   onPressed: () {
-                //     NextScreen.iOS(context, const Wishlist());
-                //   },
-                //   icon: const Icon(FeatherIcons.heart, size: 22),
-                // ),
-                // IconButton(
-                //   // style: IconButton.styleFrom(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
-                //   onPressed: () {
-                //     NextScreen.iOS(context, const Notifications());
-                //   },
-                //   icon: const Icon(LineIcons.bell),
-                // ),
+                Wrap(
+                  spacing: 30,
+                  runSpacing: spacing,
+                  direction: Axis.horizontal,
+                  children: List.generate(
+                      6,
+                      (index) => functionItem(
+                            context: context,
+                            isDarkMode: isDarkMode,
+                            width: itemWidth,
+                            text: title[index].tr(),
+                            image: images[index],
+                            func: () => NextScreen.iOS(context, func[index]),
+                          )),
+                ),
+                Visibility(
+                    visible: settings?.featured ?? false,
+                    child: const FeaturedCourses()),
+                Visibility(
+                    visible: settings?.featured ?? true,
+                    child: const FeaturedCoursesSlide()),
+                // Visibility(visible: settings?.categories ?? true, child: const HomeCategories()),
+                Visibility(
+                    visible: settings?.freeCourses ?? true,
+                    child: const FreeCourses()),
+                // if (settings != null && settings.homeCategory1 != null) Category1Courses(category: settings.homeCategory1!),
+                // if (settings != null && settings.homeCategory2 != null) Category2Courses(category: settings.homeCategory2!),
+                // if (settings != null && settings.homeCategory3 != null) Category3Courses(category: settings.homeCategory3!),
+                Visibility(
+                    visible: settings?.topAuthors ?? true,
+                    child: const TopAuthors()),
+                Visibility(
+                    visible: settings?.latestCourses ?? true,
+                    child: const HomeLatestCourses()),
               ],
             ),
-            SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Wrap(
-                    spacing: 30,
-                    runSpacing: spacing,
-                    direction: Axis.horizontal,
-                    children: List.generate(
-                        6,
-                        (index) => functionItem(
-                              context: context,
-                              isDarkMode: isDarkMode,
-                              width: itemWidth,
-                              text: title[index].tr(),
-                              image: images[index],
-                              func: () => NextScreen.iOS(context, func[index]),
-                            )),
-                  ),
-                  Visibility(
-                      visible: settings?.featured ?? false,
-                      child: const FeaturedCourses()),
-                  Visibility(
-                      visible: settings?.featured ?? true,
-                      child: const FeaturedCoursesSlide()),
-                  // Visibility(visible: settings?.categories ?? true, child: const HomeCategories()),
-                  Visibility(
-                      visible: settings?.freeCourses ?? true,
-                      child: const FreeCourses()),
-                  // if (settings != null && settings.homeCategory1 != null) Category1Courses(category: settings.homeCategory1!),
-                  // if (settings != null && settings.homeCategory2 != null) Category2Courses(category: settings.homeCategory2!),
-                  // if (settings != null && settings.homeCategory3 != null) Category3Courses(category: settings.homeCategory3!),
-                  Visibility(
-                      visible: settings?.topAuthors ?? true,
-                      child: const TopAuthors()),
-                  Visibility(
-                      visible: settings?.latestCourses ?? true,
-                      child: const HomeLatestCourses()),
-                ],
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
@@ -180,7 +168,7 @@ class HomeTab extends ConsumerWidget {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
               color: (isDarkMode != true)
-                  ? Colors.white
+                  ? Theme.of(context).primaryColor.withOpacity(0.05)
                   : Colors.black.withOpacity(0.1)),
           height: height ?? 120,
           width: width == null

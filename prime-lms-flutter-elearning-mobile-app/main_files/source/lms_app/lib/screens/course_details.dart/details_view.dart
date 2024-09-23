@@ -39,170 +39,165 @@ import 'requirements.dart';
 import 'review_button.dart';
 import 'title_info.dart';
 
+final courseDetailProvider = FutureProvider.family<CourseInfo, CourseInfo>((ref, course) async {
+  CourseInfo courseInfo = await ApiService().getCourseDetail(course: course);
+  return courseInfo;
+});
+
 class CourseDetailsView extends ConsumerWidget {
   const CourseDetailsView({super.key, required this.courses, this.heroTag});
 
   final CourseInfo courses;
   final Object? heroTag;
 
-  Future<CourseInfo> getCourseDetail(CourseInfo courses) async {
-    CourseInfo courseInfo = await ApiService().getCourseDetail(course: courses);
-    return courseInfo;
-  }
+  // Future<CourseInfo> getCourseDetail(CourseInfo courses) async {
+  //   CourseInfo courseInfo = await ApiService().getCourseDetail(course: courses);
+  //   return courseInfo;
+  // }
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final refCourseDetail = ref.watch(courseDetailProvider(courses));
     final myCourse = ref.watch(myCoursesProvider);
     return myCourse.when(
         data: (myCourses) {
-          return FutureBuilder(
-              future:
-                  Future.wait([getCourseDetail(courses),]),
-              builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-                if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else if (snapshot.hasData) {
-                  CourseInfo courseDetail = snapshot.data![0];
-                  // List<RatingInfo> reviewList = snapshot.data![1] ?? [];
-                  return Scaffold(
-                      // bottomNavigationBar: Wrap(
-                      //   alignment: WrapAlignment.center,
-                      //   children: [
-                      //     AdManager.isBannerEnbaled(ref)
-                      //         ? const BannerAdWidget()
-                      //         : Container(),
-                      //     // EnrollButton(course: course),
-                      //   ],
-                      // ),
-                      bottomNavigationBar: SizedBox(
-                        height: 50,
-                        child: (!UserManager().checkRegisteredCourse(
-                                courseDetail, myCourses ?? []))
-                            ? Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  if (courseDetail.originalPrice != 0 &&
-                                      courseDetail.originalPrice != null)
-                                    Text(
-                                      '${NumberFormat.decimalPattern('vi').format(courseDetail.originalPrice ?? 0)} VND',
-                                      style: const TextStyle(
-                                          decoration:
-                                              TextDecoration.lineThrough,
-                                          color: Colors.black45,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  if (courseDetail.payment != 0 &&
-                                      courseDetail.payment != null)
-                                    Text(
-                                      '${NumberFormat.decimalPattern('vi').format(courseDetail.payment ?? 0)} VND',
-                                      style: const TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          decorationColor: Color(0xFFFFC711),
-                                          fontStyle: FontStyle.italic,
-                                          color: Color(0xFFFFC711),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  RegisterButton(
-                                    course: courseDetail,
-                                    myCourses: myCourses ?? [],
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.4,
-                                  ),
-                                ],
-                              )
-                            : Center(
-                                child: RegisterButton(
-                                  course: courseDetail,
-                                  myCourses: myCourses ?? [],
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.6,
-                                ),
-                              ),
+          CourseInfo courseDetail = refCourseDetail.value!;
+          return Scaffold(
+            // bottomNavigationBar: Wrap(
+            //   alignment: WrapAlignment.center,
+            //   children: [
+            //     AdManager.isBannerEnbaled(ref)
+            //         ? const BannerAdWidget()
+            //         : Container(),
+            //     // EnrollButton(course: course),
+            //   ],
+            // ),
+              bottomNavigationBar: SizedBox(
+                height: 50,
+                child: (!UserManager().checkRegisteredCourse(
+                    courseDetail, myCourses ?? []))
+                    ? Row(
+                  mainAxisAlignment:
+                  MainAxisAlignment.spaceEvenly,
+                  children: [
+                    if (courseDetail.originalPrice != 0 &&
+                        courseDetail.originalPrice != null)
+                      Text(
+                        '${NumberFormat.decimalPattern('vi').format(courseDetail.originalPrice ?? 0)} VND',
+                        style: const TextStyle(
+                            decoration:
+                            TextDecoration.lineThrough,
+                            color: Colors.black45,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400),
                       ),
-                      body: CustomScrollView(
-                        slivers: [
-                          SliverAppBar(
-                            backgroundColor: Colors.white,
-                            pinned: false,
-                            // forceMaterialTransparency: true,
-                            floating: true,
-                            leading: IconButton(
-                              onPressed: () => Navigator.pop(context),
-                              icon: const Icon(FeatherIcons.chevronLeft),
+                    if (courseDetail.payment != 0 &&
+                        courseDetail.payment != null)
+                      Text(
+                        '${NumberFormat.decimalPattern('vi').format(courseDetail.payment ?? 0)} VND',
+                        style: const TextStyle(
+                            decoration: TextDecoration.underline,
+                            decorationColor: Color(0xFFFFC711),
+                            fontStyle: FontStyle.italic,
+                            color: Color(0xFFFFC711),
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    RegisterButton(
+                      course: courseDetail,
+                      myCourses: myCourses ?? [],
+                      width:
+                      MediaQuery.of(context).size.width * 0.4,
+                    ),
+                  ],
+                )
+                    : Center(
+                  child: RegisterButton(
+                    course: courseDetail,
+                    myCourses: myCourses ?? [],
+                    width:
+                    MediaQuery.of(context).size.width * 0.6,
+                  ),
+                ),
+              ),
+              body: CustomScrollView(
+                slivers: [
+                  SliverAppBar(
+                    backgroundColor: Colors.white,
+                    pinned: false,
+                    // forceMaterialTransparency: true,
+                    floating: true,
+                    leading: IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(FeatherIcons.chevronLeft),
+                    ),
+                    actions: [
+                      // RegisterButton(
+                      //     course: courseInfo,
+                      //     myCourses: myCourses ?? [],
+                      // ),
+                      // BookmarkButton(course: courseInfo),
+                      ReviewButton(
+                        contexts: context,
+                        courseDetail: courseDetail,
+                        myCourses: myCourses ?? [],
+                      ),
+                      CourseShareButton(course: courseDetail),
+                      const SizedBox(width: 10),
+                    ],
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                        padding:
+                        const EdgeInsets.fromLTRB(20, 5, 20, 30),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            PreviewBox(
+                                course: courseDetail, heroTag: heroTag),
+                            const SizedBox(height: 20),
+                            TitleInfo(
+                              course: courseDetail,
                             ),
-                            actions: [
-                              // RegisterButton(
-                              //     course: courseInfo,
-                              //     myCourses: myCourses ?? [],
-                              // ),
-                              // BookmarkButton(course: courseInfo),
-                              ReviewButton(
-                                contexts: context,
-                                courseDetail: courseDetail,
-                                myCourses: myCourses ?? [],
-                              ),
-                              CourseShareButton(course: courseDetail),
-                              const SizedBox(width: 10),
-                            ],
-                          ),
-                          SliverToBoxAdapter(
-                            child: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(20, 5, 20, 30),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    PreviewBox(
-                                        course: courseDetail, heroTag: heroTag),
-                                    const SizedBox(height: 20),
-                                    TitleInfo(
-                                      course: courseDetail,
-                                    ),
-                                    // RegisterButton(
-                                    //     course: courseInfo,
-                                    //     myCourses: myCourses ?? []),
-                                    CourseInfoScreen(course: courseDetail),
-                                    Learnings(course: courseDetail),
-                                    const SizedBox(height: 40),
-                                    Curriculam(course: courseDetail),
-                                    Requirements(course: courseDetail),
-                                    // CourseDescription(course: courseInfo),
-                                    CourseTags(course: courseDetail),
-                                    // FutureBuilder(
-                                    //   future: getReviewDetail(),
-                                    //   builder: (context, snapshot) {
-                                    //     if (snapshot.hasData) {
-                                    //       List<RatingInfo> reviewList =
-                                    //           snapshot.data ?? [];
-                                    //       return FloatingActionButton(
-                                    //         onPressed: () {
-                                    //           NextScreen.normal(
-                                    //             context,
-                                    //             RatingForm(
-                                    //               reviewList: reviewList,
-                                    //               course: courseDetail,
-                                    //             ),
-                                    //           );
-                                    //         },
-                                    //       );
-                                    //     } else {
-                                    //       return const SizedBox();
-                                    //     }
-                                    //   },
-                                    // ),
-                                    RelatedCourses(course: courseDetail),
-                                  ],
-                                )),
-                          ),
-                        ],
-                      ));
-                } else {
-                  return const LoadingIndicatorWidget();
-                }
-              });
+                            // RegisterButton(
+                            //     course: courseInfo,
+                            //     myCourses: myCourses ?? []),
+                            CourseInfoScreen(course: courseDetail),
+                            Learnings(course: courseDetail),
+                            const SizedBox(height: 40),
+                            CurriculamPreview(course: courseDetail),
+                            Requirements(course: courseDetail),
+                            // CourseDescription(course: courseInfo),
+                            CourseTags(course: courseDetail),
+                            // FutureBuilder(
+                            //   future: getReviewDetail(),
+                            //   builder: (context, snapshot) {
+                            //     if (snapshot.hasData) {
+                            //       List<RatingInfo> reviewList =
+                            //           snapshot.data ?? [];
+                            //       return FloatingActionButton(
+                            //         onPressed: () {
+                            //           NextScreen.normal(
+                            //             context,
+                            //             RatingForm(
+                            //               reviewList: reviewList,
+                            //               course: courseDetail,
+                            //             ),
+                            //           );
+                            //         },
+                            //       );
+                            //     } else {
+                            //       return const SizedBox();
+                            //     }
+                            //   },
+                            // ),
+                            RelatedCourses(course: courseDetail),
+                          ],
+                        )),
+                  ),
+                ],
+              ));
         },
         error: (error, stackTrace) => Text('error: $error'),
         loading: () {
