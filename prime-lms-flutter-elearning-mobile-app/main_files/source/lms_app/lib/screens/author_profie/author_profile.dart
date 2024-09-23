@@ -62,7 +62,8 @@ class AuthorProfile extends ConsumerWidget {
                       const AuthorCountInfo(students: 20, courseCount: 20, reviewsCount: 20),
                       const SizedBox(height: 40),
                       InkWell(
-                        onTap: () => getData(),
+                        // onTap: () => getData(),
+                        onTap: () {},
                         child: Text(
                           'about-me',
                           style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -98,10 +99,10 @@ class AuthorProfile extends ConsumerWidget {
     );
   }
 
-  Future<void> getData() async{
-    GetDataSynthesisApi getDataSynthesisApi = GetDataSynthesisApi();
-    SynthesisSummaryInfo synthesisSummaryInfo = await getDataSynthesisApi.call();
-    synthesisSummaryInfo;
-    return;
-  }
+  // Future<void> getData() async{
+  //   GetDataSynthesisApi getDataSynthesisApi = GetDataSynthesisApi();
+  //   SynthesisSummaryInfo synthesisSummaryInfo = await getDataSynthesisApi.call();
+  //   synthesisSummaryInfo;
+  //   return;
+  // }
 }

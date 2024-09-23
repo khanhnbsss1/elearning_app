@@ -183,7 +183,7 @@ class AppSettings extends ConsumerWidget with UserMixin {
                 title: const Text('account-control').tr(),
                 leading: const Icon(LineIcons.userCog),
                 trailing: const Icon(FeatherIcons.chevronRight),
-                onTap: () => NextScreen.iOS(context, const DeleteAccount()),
+                onTap: () => NextScreen.openBottomSheet(context, const DeleteAccount()),
               ),
               const Divider(),
               ListTile(

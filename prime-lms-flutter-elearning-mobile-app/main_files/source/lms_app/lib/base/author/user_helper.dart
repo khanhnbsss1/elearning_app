@@ -110,7 +110,7 @@ class UserManager{
   }
 
   bool checkRegisteredCourse(CourseInfo courseInfo, List<CourseInfo> myCourse) {
-    return myCourse.any((e) => e.id == courseInfo.id);
+    return (myCourse.any((e) => e.id == courseInfo.id) || courseInfo.isPayment == 1);
   }
 
 }

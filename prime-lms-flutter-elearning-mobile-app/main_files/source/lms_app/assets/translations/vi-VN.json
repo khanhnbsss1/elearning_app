@@ -73,6 +73,7 @@
   "about-me": "Về tôi",
   "website": "Trang web",
   "created-by": "Tạo bởi",
+  "created-at": "Tạo vào lúc {}",
   "by": "Tạo bởi {}",
   "last-updated-": "Cập nhật lần cuối: {}",
   "language-": "Ngôn ngữ: {}",
@@ -208,5 +209,8 @@
   "profile-failed": "Hồ sơ cập nhật thất bại",
   "OUTPUT": "Đầu ra",
   "ENTRANCE": "Đầu vào",
-  "address_str": "Địa chỉ: {}"
+  "address_str": "Địa chỉ: {}",
+  "delete-comment": "Xóa bình luận",
+  "are-you-sure-delete-comment": "Bạn có chắc chắn muốn xóa bình luận này?",
+  "thanks_for_rating": "Cảm ơn đã đánh giá!"
 }

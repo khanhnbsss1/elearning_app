@@ -50,11 +50,11 @@ class HorizontalCourseTile extends StatelessWidget {
                     child: Hero(
                       tag: heroTag,
                       child: ClipRRect(
-                        borderRadius: const BorderRadius.only(topRight: Radius.circular(12),topLeft: Radius.circular(12)),
+                        borderRadius: const BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10)),
                         child: (course.image != null && course.image != "")
                             ? CustomCacheImage(
                           imageUrl: course.image,
-                          radius: 12,
+                          radius: 10,
                         )
                             : Image.asset(
                           "assets/images/noImage1.jpg",

@@ -66,7 +66,7 @@ class _QuizLessonState extends ConsumerState<QuizLesson> {
           title: Text('${widget.test.name}', style: const TextStyle(color: Colors.white),),
           actions: [
             CountDownClock(
-                endTime: const Duration(seconds: 10),
+                endTime: Duration(seconds: int.parse((widget.test.durian != "0" && widget.test.durian != null) ? widget.test.durian! : "600")),
                 timeOut: () {
                   _onNextBtnPressed(context, 0, questions.length + 1, questions, ref, pageController);
                 },

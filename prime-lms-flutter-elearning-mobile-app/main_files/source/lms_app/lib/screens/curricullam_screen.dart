@@ -7,16 +7,16 @@ import 'package:lms_app/utils/empty_animation.dart';
 import '../configs/app_assets.dart';
 import '../utils/loading_widget.dart';
 
-class CurriculamScreen extends StatefulWidget {
-  const CurriculamScreen({super.key, required this.courseDetail});
+class CurriculamStudy extends StatefulWidget {
+  const CurriculamStudy({super.key, required this.courseDetail});
 
   final CourseInfo courseDetail;
 
   @override
-  State<CurriculamScreen> createState() => _CurriculamScreenState();
+  State<CurriculamStudy> createState() => _CurriculamStudyState();
 }
 
-class _CurriculamScreenState extends State<CurriculamScreen> {
+class _CurriculamStudyState extends State<CurriculamStudy> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

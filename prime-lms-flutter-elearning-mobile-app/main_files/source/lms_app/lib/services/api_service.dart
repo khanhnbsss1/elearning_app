@@ -36,6 +36,10 @@ import '../services/apis/course/course_list/course_api.dart';
 import '../services/apis/course/course_list/models/course_models.dart';
 import 'apis/course_progress/get_course_proccess_list.dart';
 import 'apis/course_progress/models/course_proccess_info.dart';
+import 'apis/rating/add_rating_api.dart';
+import 'apis/rating/delete_rating_api.dart';
+import 'apis/rating/get_rating_list.dart';
+import 'apis/rating/models/rating_info.dart';
 import 'apis/teacher_list/get_teacher_lt.dart';
 import 'apis/teacher_list/models/landing_page_teacher_list_model.dart';
 import 'apis/test/get_test_detail.dart';
@@ -90,7 +94,7 @@ class ApiService {
         searchCommonRequest: SearchCommonRequest(
           userId: userId,
           pageNumber: 0,
-          pageSize: 10,
+          pageSize: 100,
         )
     );
     CourseResponseModel courseResponseModel = await myCourseApi.call();
@@ -138,6 +142,29 @@ class ApiService {
     VocabularyInfo? vocabularyInfo = await getVocabularyDetailApi.call();
     return vocabularyInfo??VocabularyInfo();
   }
+
+  Future<List<RatingInfo>> getRatingList(SearchCommonRequest? searchCommonRequestRating) async {
+    GetRatingListApi getRatingListApi = GetRatingListApi(
+        searchCommonRequest: searchCommonRequestRating!);
+    RatingListResponseModel ratingListResponseModel = await getRatingListApi
+        .call();
+    return ratingListResponseModel.content ?? [];
+  }
+
+  Future<void> addRating(CourseInfo courseDetail, double ratePoint, String comment) async{
+    AddRatingApi addRatingApi = AddRatingApi(info: RatingInfo(
+        courseId: courseDetail.id,
+        ratePoint: ratePoint,
+        review: comment,
+    ));
+    await addRatingApi.call();
+  }
+
+  Future<void> deleteRating(RatingInfo ratingInfo) async{
+    DeleteRatingApi deleteRatingApi = DeleteRatingApi(info: ratingInfo);
+    await deleteRatingApi.call();
+  }
+
 
   Future<List<Course>> getHomeCategoryCourses(String categoryId, int limit) async {
     List<Course> data = [];

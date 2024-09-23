@@ -14,24 +14,22 @@ import '../curricullam_screen.dart';
 import '../tabs/my_courses_tab/my_courses_tab.dart';
 
 class RegisterButton extends ConsumerWidget {
-  RegisterButton(
+  const RegisterButton(
       {super.key, required this.course, required this.myCourses, this.width});
-
   final CourseInfo course;
   final List<CourseInfo> myCourses;
-  double? width;
+  final double? width;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    bool check;
     return Center(
       child: (!UserManager().checkRegisteredCourse(course, myCourses))
           ? Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
+                    Theme.of(context).primaryColor,
                     Colors.red,
-                    Colors.redAccent
                   ],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
@@ -75,7 +73,7 @@ class RegisterButton extends ConsumerWidget {
                                     Navigator.of(context).pop(true);
                                     RegisterCourseApi registerCourseApi =
                                         RegisterCourseApi(courseId: course.id!);
-                                    check = await registerCourseApi.call();
+                                    // await registerCourseApi.call();
                                   },
                                 ),
                               ],
@@ -86,15 +84,16 @@ class RegisterButton extends ConsumerWidget {
                     ).then((confirm) {
                       if (confirm) {
                         if (course.isPayment == 0) {
-                          ToastUtils.showSnackBar(
-                              context, "register-success".tr());
+                          ToastUtils.showToast(
+                              "register-success".tr());
+                          course.isPayment = 1;
                           NextScreen.replace(
                               context,
-                              CurriculamScreen(
+                              CurriculamStudy(
                                 courseDetail: course,
                               ));
                         } else {
-                          ToastUtils.showSnackBar(context, 'message');
+                          ToastUtils.showToast('message');
                         }
                       }
                     });
@@ -111,7 +110,7 @@ class RegisterButton extends ConsumerWidget {
               child: MyButton(
                   onTap: () {
                     NavigationService().navigateToScreen(
-                        CurriculamScreen(courseDetail: course));
+                        CurriculamStudy(courseDetail: course));
                   },
                   elevation: 10,
                   borderColor: Colors.black,

@@ -12,13 +12,14 @@ import 'package:lms_app/services/apis/course/course_detail/models/course_detail_
 import 'package:lms_app/theme/theme_provider.dart';
 import '../../base/widgets/toast_common/toast_utils.dart';
 import '../../components/rating_bar.dart';
+import '../../components/rating_star.dart';
 import '../../helper/services/navigation_service.dart';
 import '../../services/apis/course/register_course/register_course.dart';
 import '../curricullam_screen.dart';
 import '../tabs/my_courses_tab/my_courses_tab.dart';
 
 class TitleInfo extends ConsumerWidget {
-  const TitleInfo({super.key, required this.course});
+  const TitleInfo({super.key, required this.course,});
 
   final CourseInfo course;
 
@@ -41,11 +42,7 @@ class TitleInfo extends ConsumerWidget {
       Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              RatingViewer(rating: rating),
-            ],
-          ),
+          RatingViewer(rating: rating),
           const SizedBox(width: 20),
           Text(
             'total-lectures',
@@ -56,6 +53,7 @@ class TitleInfo extends ConsumerWidget {
           ).tr(args: [course.totalLectures.toString()]),
         ],
       ),
+      // StarRating(initialRating: (course.ratePoint ?? 0).toDouble(),),
       const SizedBox(
         height: 8,
       ),
