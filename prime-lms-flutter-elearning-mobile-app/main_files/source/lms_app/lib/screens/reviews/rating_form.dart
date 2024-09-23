@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:lms_app/base/author/user_helper.dart';
+import 'package:lms_app/base/widgets/common/alert_dialog/loading.common.dart';
 import 'package:lms_app/base/widgets/my_button.dart';
 import 'package:lms_app/components/rating_bar.dart';
 import 'package:lms_app/components/rating_star.dart';
@@ -32,6 +33,7 @@ class RatingForm extends ConsumerStatefulWidget {
 
 class _RatingFormState extends ConsumerState<RatingForm> {
   double _rating = 0.0;
+  bool canComment = true;
   var reviewCtlr = TextEditingController();
   int selected = 0;
   UserProfile? user = UserManager().getUserProfile();
@@ -40,6 +42,7 @@ class _RatingFormState extends ConsumerState<RatingForm> {
   bool isLoading = true;
   late ScrollController _controller;
   List<RatingInfo> reviewList = [];
+  RatingInfo yourRating = RatingInfo();
 
   @override
   void initState() {
@@ -53,13 +56,24 @@ class _RatingFormState extends ConsumerState<RatingForm> {
 
   Future<void> _addRating() async {
     await ApiService().addRating(widget.courseDetail, _rating, reviewCtlr.text);
+    yourRating = RatingInfo(
+      ratePoint: _rating,
+      review: reviewCtlr.text,
+      createdAt: DateFormat('MM/dd/yyyy hh:mm:ss a').format(DateTime.now()),
+      fullname: user?.fullName,
+    );
+    if (reviewList.first.fullname == yourRating.fullname) {
+      reviewList.removeAt(0);
+      reviewList.insert(0, yourRating);
+    } else {
+      reviewList.insert(0, yourRating);
+    }
     ToastUtils.showSnackBar(context, 'thanks_for_rating'.tr());
   }
 
   Future<void> _getReviewList() async {
     List<RatingInfo> data = await getReviewDetail(_pageNumber);
-    if (data.isNotEmpty)
-    {
+    if (data.isNotEmpty) {
       for (RatingInfo review in data) {
         if (widget.courseDetail.id == review.courseId && review.isShow == 1) {
           if (review.fullname == user?.fullName) {
@@ -125,51 +139,102 @@ class _RatingFormState extends ConsumerState<RatingForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '${user?.fullName}',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge
-                  ?.copyWith(color: Theme.of(context).primaryColor),
-            ),
-            const SizedBox(height: 8),
-            const Text('write-review').tr(),
-            const SizedBox(height: 8),
-            TextField(
-              keyboardType: TextInputType.multiline,
-              controller: reviewCtlr,
-              minLines: 3,
-              maxLines: null,
-              decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  hintText: 'write-your-review'.tr()),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  StarRating(
-                    initialRating: (_rating).toDouble(),
-                    size: 24,
-                    onChanged: (value) {
-                      _rating = value;
-                    },
-                  ),
-                  const Spacer(),
-                  SizedBox(
-                    height: 40,
-                    width: 80,
+            Visibility(
+                visible: !canComment,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0),
+                  child: SizedBox(
+                    height: 35,
+                    width: 120,
                     child: FloatingActionButton(
                       backgroundColor: Theme.of(context).primaryColor,
                       foregroundColor: Colors.white,
                       onPressed: () {
-                        _addRating();
-                        setState(() {});
+                        setState(() {
+                          canComment = true;
+                        });
                       },
-                      child: Text('submit'.tr()),
+                      child: Text('write-review'.tr()),
                     ),
-                  )
+                  ),
+                ),),
+            Visibility(
+              visible: canComment,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${user?.fullName}',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge
+                        ?.copyWith(color: Theme.of(context).primaryColor),
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      const Text('write-review').tr(),
+                      Spacer(),
+                      StarRating(
+                        initialRating: (_rating).toDouble(),
+                        size: 24,
+                        onChanged: (value) {
+                          _rating = value;
+                        },
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  TextField(
+                    keyboardType: TextInputType.multiline,
+                    controller: reviewCtlr,
+                    minLines: 3,
+                    maxLines: null,
+                    decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        hintText: 'write-your-review'.tr()),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          height: 35,
+                          width: 70,
+                          child: FloatingActionButton(
+                            backgroundColor: Theme.of(context).primaryColor,
+                            foregroundColor: Colors.white,
+                            onPressed: () {
+                              setState(() {
+                                canComment = false;
+                              });
+                            },
+                            child: Text('cancel'.tr()),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        SizedBox(
+                          height: 35,
+                          width: 70,
+                          child: FloatingActionButton(
+                            backgroundColor: Theme.of(context).primaryColor,
+                            foregroundColor: Colors.white,
+                            onPressed: () async {
+                              MonitorLoading().showLoading('');
+                              await _addRating();
+                              MonitorLoading().dismiss();
+                              setState(() {});
+                            },
+                            child: Text('submit'.tr()),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -185,9 +250,7 @@ class _RatingFormState extends ConsumerState<RatingForm> {
                         });
                       },
                       backgroundColor: (selected == 0)
-                          ? Theme.of(context)
-                          .primaryColor
-                          .withOpacity(0.1)
+                          ? Theme.of(context).primaryColor.withOpacity(0.1)
                           : Colors.white,
                       elevation: 0,
                       padding: const EdgeInsets.symmetric(
@@ -200,8 +263,7 @@ class _RatingFormState extends ConsumerState<RatingForm> {
                             .textTheme
                             .titleMedium
                             ?.copyWith(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600),
+                                fontSize: 16, fontWeight: FontWeight.w600),
                       ),
                     ),
                     ...List.generate(5, (index) {
@@ -212,9 +274,7 @@ class _RatingFormState extends ConsumerState<RatingForm> {
                           });
                         },
                         backgroundColor: (selected == index + 1)
-                            ? Theme.of(context)
-                            .primaryColor
-                            .withOpacity(0.1)
+                            ? Theme.of(context).primaryColor.withOpacity(0.1)
                             : Colors.white,
                         elevation: 0,
                         padding: const EdgeInsets.symmetric(
@@ -230,8 +290,8 @@ class _RatingFormState extends ConsumerState<RatingForm> {
                                   .textTheme
                                   .titleMedium
                                   ?.copyWith(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
                             ),
                             const Icon(
                               Icons.star,
@@ -244,26 +304,31 @@ class _RatingFormState extends ConsumerState<RatingForm> {
                     }),
                   ],
                 )),
-            (isLoading == true) ? const Flexible(child: Center(child: LoadingIndicatorWidget())) : (reviewList.isNotEmpty)
-                ? Flexible(
-              child: ListView.builder(
-                  controller: _controller,
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  itemCount: reviewList.length,
-                  itemBuilder: (context, index) {
-                    if (6 - selected ==
-                        reviewList[index].ratePoint?.floor()) {
-                      return reviewItem(reviewList[index]);
-                    } else if (selected == 0) {
-                      return reviewItem(reviewList[index]);
-                    } else {
-                      return const SizedBox();
-                    }
-                  }),
-            )
-                : EmptyAnimation(
-                animationString: reviewAnimation,
-                title: 'no-review'.tr()),
+            const SizedBox(
+              height: 10,
+            ),
+            (isLoading == true)
+                ? const Flexible(child: Center(child: LoadingIndicatorWidget()))
+                : (reviewList.isNotEmpty)
+                    ? Flexible(
+                        child: ListView.builder(
+                            controller: _controller,
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            itemCount: reviewList.length,
+                            itemBuilder: (context, index) {
+                              if (6 - selected ==
+                                  reviewList[index].ratePoint?.floor()) {
+                                return reviewItem(reviewList[index]);
+                              } else if (selected == 0) {
+                                return reviewItem(reviewList[index]);
+                              } else {
+                                return const SizedBox();
+                              }
+                            }),
+                      )
+                    : EmptyAnimation(
+                        animationString: reviewAnimation,
+                        title: 'no-review'.tr()),
           ],
         ),
       ),
