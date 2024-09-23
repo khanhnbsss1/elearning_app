@@ -27,23 +27,20 @@ class ProfileTab extends ConsumerWidget {
               .titleLarge
               ?.copyWith(fontWeight: FontWeight.w600, fontSize: 20),
         ),
-        SliverToBoxAdapter(
-          child: Container(
-            color: (isDarkMode != true) ? Colors.white : Colors.black.withOpacity(0.1),
-            child: const SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // user == null ? const GuestUser() :
-                  Center(
-                    child: SizedBox(
-                      height: 100,
-                        child: UserInfo2()),
-                  ),
-                  AppSettings(),
-                ],
-              ),
+        const SliverToBoxAdapter(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // user == null ? const GuestUser() :
+                Center(
+                  child: SizedBox(
+                    height: 100,
+                      child: UserInfo2()),
+                ),
+                AppSettings(),
+              ],
             ),
           ),
         )
