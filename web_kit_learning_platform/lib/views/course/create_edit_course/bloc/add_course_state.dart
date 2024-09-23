@@ -25,7 +25,6 @@ class AddCourseState extends Equatable {
   CourseInfo? courseInfo;
   CoursePageType? coursePageType;
   AddCourseController? controller;
-  GetAddCourseFilterModel? addCourseFilterModel;
   bool? initial;
   String? currentSubject;
   List<String>?subjectList;
@@ -34,7 +33,6 @@ class AddCourseState extends Equatable {
   TestInfo? testInfo;
   AddCourseState({
     this.blocStatus,
-    this.addCourseFilterModel,
     this.initial,
     this.courseInfo,
     this.controller,
@@ -56,7 +54,6 @@ class AddCourseState extends Equatable {
 
   AddCourseState copyWith({
     AddCourseStatus? blocStatus,
-    GetAddCourseFilterModel? addCourseFilterModel,
     bool? initial,
     CourseInfo? courseInfo,
     AddCourseController? controller,
@@ -70,7 +67,6 @@ class AddCourseState extends Equatable {
   {
     return AddCourseState(
       blocStatus: blocStatus??this.blocStatus,
-      addCourseFilterModel: addCourseFilterModel??this.addCourseFilterModel,
       initial: initial??this.initial,
       courseInfo: courseInfo??this.courseInfo,
       controller: controller??this.controller,
@@ -86,7 +82,6 @@ class AddCourseState extends Equatable {
   @override
   List<Object?> get props => [
     blocStatus, 
-    addCourseFilterModel, 
     initial, courseInfo, 
     controller, coursePageType, 
     currentSubject, subjectList, 

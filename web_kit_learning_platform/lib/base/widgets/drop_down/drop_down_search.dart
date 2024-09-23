@@ -24,39 +24,76 @@ class DropDownSearch extends StatelessWidget with UIMixin{
       selectString = list[selectItem as int] ?? "";
     }
     return DropdownSearch<String>(
-      // enabled: (state.courseInfo?.mode??"PREMIUM")=="PREMIUM",
-      dropdownButtonProps: DropdownButtonProps(
+      suffixProps: DropdownSuffixProps(
+        dropdownButtonProps: DropdownButtonProps(
           padding: EdgeInsets.zero,
-        constraints: BoxConstraints(
-        minHeight: Dimens.size20,
-        maxHeight: Dimens.size40,
+          style: ButtonStyle(
+              textStyle: WidgetStatePropertyAll(TextStyleConstant.textStyleBlack13w400,)
+          ),
+          constraints: BoxConstraints(
+            minHeight: Dimens.size20,
+            maxHeight: Dimens.size40,
+          ),
+        ),
       ),
-        style: ButtonStyle(
-          textStyle: WidgetStatePropertyAll(TextStyleConstant.textStyleBlack13w400,)
-        )
-      ),
+      
       popupProps: PopupProps.menu(
         constraints: BoxConstraints(
-          maxHeight: (65 + list.length * 50 < 210) ? 65 + list.length * 50 : 210,
+          maxHeight: (Dimens.size40 + list.length * Dimens.size50 < Dimens.size210) ?Dimens.size40 + list.length * Dimens.size40 : Dimens.size210,
         ),
         showSearchBox: true,
         searchDelay: Duration(seconds: 0),
         showSelectedItems: true,
+        searchFieldProps: TextFieldProps(
+          decoration: InputDecoration(
+            //hintText: hintText,
+            //labelText: hintText,
+            floatingLabelStyle:  TextStyleConstant.textStyleBlack13w400,
+            //hintTextDirection: AppTheme.textDirection,
+            labelStyle: TextStyleConstant.textStyleBlack14w400,
+            hintStyle: TextStyleConstant.textStyleBlack14w400,
+            helperStyle: TextStyleConstant.textStyleBlack14w400,
+
+            border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+            contentPadding: EdgeInsets.symmetric( vertical:  Dimens.size4, horizontal: Dimens.size16),
+            constraints: BoxConstraints(
+              minHeight: Dimens.size30,
+              maxHeight: Dimens.size40,
+            ),
+            prefixIconConstraints: BoxConstraints(
+              minHeight: Dimens.size30,
+              maxHeight: Dimens.size40,
+              minWidth: Dimens.size30,
+              maxWidth: Dimens.size40,
+            ),
+            // isCollapsed: true,
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+          ),
+        ),
+        itemBuilder: (context, item, isDisabled, isSelected) {
+          return ListTile(
+            title: Text(item??"",
+                maxLines: 1,
+                style: TextStyleConstant.textStyleBlack14w400),
+            titleTextStyle: TextStyleConstant.textStyleBlack14w400,
+          );
+        },
       ),
-      items: list.values.toList(),
+      items: (filter, loadProps) => list.values.toList(),
       selectedItem: selectString.isNotEmpty ? selectString : null,
       dropdownBuilder: (context, selectedItem) {
         return Text(selectedItem??"",style: TextStyleConstant.textStyleBlack14w400,);
       },
-      dropdownDecoratorProps: DropDownDecoratorProps(
-        dropdownSearchDecoration: InputDecoration(
+      decoratorProps: DropDownDecoratorProps(
+        decoration: InputDecoration(
           hintText: hintText,
           labelText: hintText,
           floatingLabelStyle:  TextStyleConstant.textStyleBlack13w400,
           hintTextDirection: AppTheme.textDirection,
           labelStyle: TextStyleConstant.textStyleBlack14w400,
           hintStyle: TextStyleConstant.textStyleBlack14w400,
-          border: outlineInputBorder,
+          border: outlineInputBorder.copyWith(borderRadius: BorderRadius.circular(Dimens.size16)),
+          
           prefixIcon: Icon(
             Icons.person_outline_outlined,
             size: Dimens.size20,
@@ -67,7 +104,7 @@ class DropDownSearch extends StatelessWidget with UIMixin{
             size: Dimens.size20,
             color: ColorConst.colorIconRed,
           ),
-          contentPadding: EdgeInsets.symmetric( vertical:  Dimens.size16, horizontal: Dimens.size8),
+          contentPadding: EdgeInsets.symmetric( vertical:  Dimens.size16, horizontal: Dimens.size16),
           constraints: BoxConstraints(
             minHeight: Dimens.size30,
             maxHeight: Dimens.size40,

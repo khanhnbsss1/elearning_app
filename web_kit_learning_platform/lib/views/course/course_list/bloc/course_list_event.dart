@@ -17,3 +17,9 @@ class CourseListOnSearchByFilterEvent extends CourseListEvent {
   @override
   List<Object?> get props => [searchCommonRequest];
 }
+class CourseListOnCallApiEvent extends CourseListEvent {
+  CourseResponseModel courseResponseModel;
+  CourseListOnCallApiEvent({required this.courseResponseModel});
+  @override
+  List<Object?> get props => [courseResponseModel];
+}

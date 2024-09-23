@@ -3,6 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
+import 'package:webkit/base/widgets/drop_down/drop_down_search.dart';
+import 'package:webkit/base/widgets/drop_down/drop_down_search_custom.dart';
 import 'package:webkit/services/apis/category/get_category_list.dart';
 import 'package:webkit/services/apis/category/models/category_info.dart';
 import 'package:webkit/services/apis/course/course_fillter/get_course_fillter_api.dart';
@@ -20,6 +22,7 @@ import 'package:webkit/services/apis/lessson/lesson_list_filter/lesson_list_filt
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/question/get_quiz_list_api.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
+import 'package:webkit/services/apis/tags/models/tag_info.dart';
 import 'package:webkit/services/apis/test/get_test_list_api.dart';
 
 import '../../services/apis/test/models/test_info.dart';
@@ -45,6 +48,14 @@ class FilterManager{
   TestListResponseModel testListResponseModel = TestListResponseModel(content: []);
   VocabularyResponseModel vocabularyResponseModel = VocabularyResponseModel(content: []);
   CourseProgressResponseModel courseProgressResponseModel = CourseProgressResponseModel(content: []);
+  FilterInfo filterInfo = FilterInfo(
+    listOfAccompanyCourses: {},
+    listOfCategoryName: {},
+    listOfDiscounts: {},
+    listOfGradeNames: {},
+    listOfProduceNames: {},
+    listOfTags: []
+  );
   Future<void> init()async {
     await getFilterCourse();
     await getCategoryFilter();
@@ -99,13 +110,61 @@ class FilterManager{
     return testListResponseModel;
   }
   
-  Future<GetAddCourseFilterModel?> getCourseFilter() async {
+  Future<FilterInfo> getCourseFilter() async {
     if(addCourseFilterModel==null|| (addCourseFilterModel?.data??[]).isEmpty)
       {
         GetAddCourseFilterApi addCourseFilterApi = GetAddCourseFilterApi();
         addCourseFilterModel = await addCourseFilterApi.call();
+        addCourseFilterModel?.data?.forEach((data) {
+          switch (data.filterType) {
+            case 'CATEGORY':
+              data.subFilter!.where((e) => e.name != null).forEach((e) {
+                if (!filterInfo.listOfCategoryName.containsValue(e.name!)) {
+                  filterInfo.listOfCategoryName[e.id!] = e.name!;
+                }
+              });
+              break;
+            case 'AUTHOR':
+              data.subFilter!.where((e) => e.name != null).forEach((e) {
+                if (!filterInfo.listOfProduceNames.containsValue(e.name!)) {
+                  filterInfo.listOfProduceNames[e.id!] = e.name!;
+                }
+              });
+              break;
+            case 'GRADE':
+              data.subFilter!.where((e) => e.name != null).forEach((e) {
+                if (!filterInfo.listOfGradeNames.containsValue(e.name!)) {
+                  filterInfo.listOfGradeNames[e.id!] = e.name!;
+                }
+              });
+              break;
+            case 'ACCOMPANY':
+              data.subFilter!.where((e) => e.name != null).forEach((e) {
+                if (!filterInfo.listOfAccompanyCourses.containsValue(e.name!)) {
+                  filterInfo.listOfAccompanyCourses[e.id!] = e.name!;
+                }
+              });
+              break;
+            case 'TAG':
+              data.subFilter!.where((e) => e.name != null).forEach((e) {
+                if (filterInfo.listOfTags.where((element) => element.id == e.id,).isEmpty) {
+                  filterInfo.listOfTags.add(TagsInfo(id: e.id, name: e.name));
+                }
+              });
+            case 'DISCOUNT':
+              data.subFilter!.where((e) => e.name != null).forEach((e) {
+                if (!filterInfo.listOfDiscounts.containsValue(e.name!)) {
+                  filterInfo.listOfDiscounts[e.id!] = e.name!;
+                }
+              });
+              break;
+            default:
+              break;
+          }
+        });
       }
-    return addCourseFilterModel;
+
+    return filterInfo;
   }
   Future<GradeListResponseModel?> getGradesInfo() async {
     if(gradeListResponseModel==null || (gradeListResponseModel?.content??[]).isEmpty)
@@ -163,6 +222,8 @@ class FilterManager{
     int? inputGradeId,
     String? gradeName,
     double? width,
+    String? title,
+    bool? enableInit,
     
   }){
     enable??=true;
@@ -184,7 +245,7 @@ class FilterManager{
             selectGrade = data.firstWhere((element) => element.name == gradeName,);
           }
         }
-        else if(data.isNotEmpty)
+        else if(data.isNotEmpty && (enableInit??true))
         {
           selectGrade = data.first;
           if(onChanged!=null)
@@ -192,86 +253,58 @@ class FilterManager{
             onChanged(selectGrade);
           }
         }
-        return SizedBox(
-          width: width??Dimens.size200,
-          child: WidgetWithColumnTitleCommon(
-            title: "${L10nX.getStr.grade_str}: ",
-            isRequirement: true,
-            child: SizedBox(
-              height: Dimens.size40,
-              width: width??Dimens.size200,
-              child: IgnorePointer(
-                ignoring: !(enable??true),
-                child: DropdownButtonFormField2<GradeInfo>(
-                  valueListenable: ValueNotifier<GradeInfo?>(selectGrade),
-                  decoration: InputDecoration(
-                    // Add Horizontal padding using menuItemStyleData.padding so it matches
-                    // the menu padding when button's width is not specified.
-                    contentPadding:  EdgeInsets.symmetric(vertical: Dimens.size8),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(Dimens.size16),
-                    ),
-                    constraints: BoxConstraints(
-                      minHeight: Dimens.size30,
-                      maxHeight: Dimens.size40,
-                    ),
-                      suffixIconConstraints: BoxConstraints(
-                    minHeight: Dimens.size30,
-                    maxHeight: Dimens.size30,
-                  ),
-                    labelStyle: TextStyleConstant.textStyleBlack13w400, // 
-                    hintStyle: TextStyleConstant.textStyleBlack13w400, // 
-                  ),
-                  hint:  Text(
-                    L10nX.getStr.grade_str,
-                    style: TextStyleConstant.textStyleBlack13w400,
-                  ),
-                  items: data.map((item) => DropdownItem<GradeInfo>(
-                    value: item,
-                    child: Text(
-                      item.name??"",
-                      style: TextStyleConstant.textStyleBlack13w400,
-                    ),
-                  )).toList(),
-                  validator: (value) {
-                    if (value == null) {
-                      return L10nX.getStr.grade_str;
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {
-                    if(onChanged!=null) {
-                      onChanged(value);
-                    }
-                  },
-                  onSaved: (value) {
-                  },
-                  buttonStyleData:  ButtonStyleData(
-                    height: Dimens.size35,
-                    padding: EdgeInsets.only(right: Dimens.size8),
-                  ),
-                  iconStyleData:  IconStyleData(
-                    icon: Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.black45,
-                    ),
-                    iconSize: Dimens.size24,
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    maxHeight:Dimens.size150,
-                    //width: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimens.size16),
-                      color: ColorConst.whiteColor,
-                    ),
-                  ),
-                  menuItemStyleData: MenuItemStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
-                  ),
+        return StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
+          return SizedBox(
+            width: width??Dimens.size180,
+            child: WidgetWithColumnTitleCommon(
+              title: title??"${L10nX.getStr.grade_str}: ",
+              isRequirement: true,
+              child: SizedBox(
+                height: Dimens.size40,
+                width: width??Dimens.size200,
+                child: IgnorePointer(
+                    ignoring: !(enable??true),
+                    child:
+                    DropDownSearchCustom<GradeInfo>(
+                      items: (filter, loadProps) => data,
+                      itemsData: data,
+                      compareFn: (item1, item2) {
+                        return true;
+                      },
+                      dropDownItemBuilder: (p0, p1, p2, p3) {
+                        return ListTile(
+                          title: Text(p1.name??"",
+                              maxLines: 1,
+                              style: TextStyleConstant.textStyleBlack14w400),
+                          titleTextStyle: TextStyleConstant.textStyleBlack14w400,
+                        );
+                      },
+                      hintText: L10nX.getStr.grade_str,
+                      dropdownBuilder: (p0, p1) {
+                        return Text(
+                          p1?.name??"",
+                          maxLines: 1,
+                          overflow: TextOverflow.visible,
+                          style: TextStyleConstant.textStyleBlack13w400,
+                        );
+                      },
+                      prefixIcon: Icons.grade,
+                      onChanged: (p0) {
+                          if(onChanged!=null)
+                          {
+                            onChanged(p0);
+                          }
+                      },
+                      itemAsString: (item) {
+                        return item.name??"";
+                      },
+                      selectedItem: selectGrade,
+                    )
                 ),
               ),
             ),
-          ),
+          );
+        },
         );
 
       },);
@@ -281,8 +314,10 @@ class FilterManager{
         required BuildContext context,
       Function(CategoryInfo?)? onChanged,
       bool? enable,
+      bool? enableInit,
       int? inputCategoryId,
-        double? width,
+      double? width,
+      String? title,
       }){
     return FutureBuilder(
       future: FilterManager().getCategoryFilter(),
@@ -296,7 +331,7 @@ class FilterManager{
         {
           selectCategory= data.firstWhere((element) => element.id == inputCategoryId,);
         }
-        else
+        else if(enableInit??true)
         {
           selectCategory = data.first;
           if(onChanged!=null)
@@ -308,87 +343,189 @@ class FilterManager{
         return SizedBox(
           width: width??Dimens.size200,
           child: WidgetWithColumnTitleCommon(
-            title: "${L10nX.getStr.category_str}: ",
+            title:title?? "${L10nX.getStr.category_str}: ",
             isRequirement: true,
             child: SizedBox(
               height: Dimens.size40,
-              width:width?? Dimens.size200,
+              width:width?? Dimens.size300,
               child: IgnorePointer(
                 ignoring: !(enable??true),
-                child: DropdownButtonFormField2<CategoryInfo>(
-                  key: UniqueKey(),
-                  valueListenable: ValueNotifier<CategoryInfo?>(selectCategory),
-                  decoration: InputDecoration(
-                    // Add Horizontal padding using menuItemStyleData.padding so it matches
-                    // the menu padding when button's width is not specified.
-                    contentPadding:  EdgeInsets.symmetric(vertical: Dimens.size16),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(Dimens.size16),
-                    ),
-
-                      constraints: BoxConstraints(
-                        minHeight: Dimens.size30,
-                        maxHeight: Dimens.size40,
-                      ),
-                      suffixIconConstraints: BoxConstraints(
-                        minHeight: Dimens.size30,
-                        maxHeight: Dimens.size30,
-                      )
-                    // Add more decoration..
-                  ),
-                  hint:  Text(
-                    L10nX.getStr.choose_category_str,
-                    style: TextStyleConstant.textStyleBlack13w400,
-                  ),
-                  items: data.map((item) => DropdownItem<CategoryInfo>(
-                    value: item,
-                    child: Text(
-                      item.name??"",
+                child: DropDownSearchCustom(
+                  items: (filter, loadProps) => data,
+                  itemsData: data,
+                  compareFn: (item1, item2) {
+                    return true;
+                  },
+                  dropDownItemBuilder: (p0, p1, p2, p3) {
+                    return ListTile(
+                      title: Text(p1.name??"", 
+                          maxLines: 1,
+                          style: TextStyleConstant.textStyleBlack14w400),
+                      titleTextStyle: TextStyleConstant.textStyleBlack14w400,
+                    );
+                  },
+                  hintText: L10nX.getStr.category_str,
+                  dropdownBuilder: (p0, p1) {
+                   return Text(
+                      p1?.name??"",
+                      maxLines: 1,
+                      overflow: TextOverflow.visible,
                       style: TextStyleConstant.textStyleBlack13w400,
-                    ),
-                  )).toList(),
-                  validator: (value) {
-                    if (value == null) {
-                      return L10nX.getStr.choose_category_str;
+                    );
+                  },
+                prefixIcon: Icons.my_library_books_rounded,
+                  onChanged: (p0) {
+                    if(onChanged!=null)
+                    {
+                      onChanged(p0);
                     }
-                    return null;
                   },
-                  onChanged: (value) {
-                   if(onChanged!=null)
-                     {
-                       onChanged(value);
-                     }
+                  itemAsString: (item) {
+                    return item.name??"";
                   },
-                  onSaved: (value) {
-                  },
-                  buttonStyleData:  ButtonStyleData(
-                    height: Dimens.size40,
-                    padding: EdgeInsets.only(right: Dimens.size8),
-                  ),
-                  iconStyleData:  IconStyleData(
-                    icon: Icon(
-                      Icons.arrow_drop_down,
-                      color: Colors.black45,
-                    ),
-                    iconSize: Dimens.size24,
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    maxHeight:Dimens.size150,
-                    //width: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimens.size16),
-                      color: ColorConst.whiteColor,
-                    ),
-                  ),
-                  menuItemStyleData: MenuItemStyleData(
-                    padding: EdgeInsets.symmetric(horizontal: Dimens.size16),
-                  ),
-                ),
+                  selectedItem: selectCategory,
+                )
               ),
             ),
           ),
         );
 
       },);
+  }
+  Widget buildMode(
+      {
+        required BuildContext context,
+        Function(String?)? onChanged,
+        bool? enable,
+        bool? enableInit,
+        String? mode,
+        double? width,
+        String? title,
+      }){
+    List<String> modes = ['Free','Premium' ];
+    String selectMode = "";
+    if(modes.where((element) => element == mode,).isNotEmpty)
+    {
+      selectMode= modes.firstWhere((element) => element == mode,);
+    }
+    else if(enableInit??true)
+    {
+      selectMode = modes.first;
+      if(onChanged!=null)
+      {
+        onChanged(mode);
+      }
+    }
+    return SizedBox(
+      width: width??Dimens.size200,
+      child: WidgetWithColumnTitleCommon(
+        title:title?? "${L10nX.getStr.payment_str}: ",
+        isRequirement: true,
+        child: SizedBox(
+          height: Dimens.size40,
+          child: IgnorePointer(
+              ignoring: !(enable??true),
+              child: DropDownSearchCustom<String>(
+                items: (filter, loadProps) => modes,
+                itemsData: modes,
+                compareFn: (item1, item2) {
+                  return true;
+                },
+                dropDownItemBuilder: (p0, p1, p2, p3) {
+                  return ListTile(
+                    minTileHeight: Dimens.size20,
+                    title: Text((p1??"").isNotEmpty?L10nX().getStringByKey("${p1.toLowerCase()}_str"):"",
+                        maxLines: 1,
+                        style: TextStyleConstant.textStyleBlack14w400),
+                    titleTextStyle: TextStyleConstant.textStyleBlack14w400,
+                  );
+                },
+                hintText: L10nX.getStr.payment_str,
+                dropdownBuilder: (p0, p1) {
+                  return Text(
+                    (p1??"").isNotEmpty?L10nX().getStringByKey("${p1?.toLowerCase()}_str"):"",
+                    maxLines: 1,
+                    overflow: TextOverflow.visible,
+                    style: TextStyleConstant.textStyleBlack13w400,
+                  );
+                },
+                prefixIcon: Icons.attach_money,
+                onChanged: (p0) {
+                  if(onChanged!=null)
+                  {
+                    onChanged(p0);
+                  }
+                },
+                itemAsString: (item) {
+                  return item??"";
+                },
+                selectedItem: selectMode,
+              )
+          ),
+        ),
+      ),
+    );
+  }
+  Widget buildAuthor({
+    required BuildContext context,
+    Function(MapEntry productInfo)? onChanged,
+    bool? enable,
+    String? producerName,
+    double? width,
+    String? title,
+  }) {
+    return SizedBox(
+      width: width??Dimens.size200,
+      child: WidgetWithColumnTitleCommon(
+        title: title??L10nX.getStr.author_str,
+        isRequirement: true,
+        child: FutureBuilder(
+          future: getCourseFilter(), 
+          builder: (context, snapshot) {
+          return SizedBox(
+            height: Dimens.size40,
+            width:width?? Dimens.size200,
+            child: DropDownSearch(
+              list: filterInfo.listOfProduceNames,
+              hintText: '${L10nX.getStr.author_str}...',
+              selectItem: producerName,
+              onChange: (p0) {
+                if(onChanged!=null) {
+                  onChanged(p0);
+                }
+              },
+            ),
+          );
+        },)
+      ),
+    );
+  }
+}
+
+
+
+class FilterInfo {
+  Map<int,String> listOfCategoryName = {};
+  Map<int,String> listOfProduceNames = {};
+  Map<int,String> listOfGradeNames = {};
+  Map<int,String> listOfAccompanyCourses = {};
+  List<TagsInfo> listOfTags = [];
+  Map<int,String> listOfDiscounts = {};
+
+  FilterInfo({
+    required this.listOfAccompanyCourses, 
+    required this.listOfCategoryName,
+    required this.listOfDiscounts, 
+    required this.listOfGradeNames,
+    required this.listOfProduceNames,
+    required this.listOfTags
+  }){
+    listOfAccompanyCourses??={};
+    listOfCategoryName??={};
+    listOfDiscounts??={};
+    listOfGradeNames??={};
+    listOfTags??=[];
+    listOfProduceNames??={};
+
   }
 }

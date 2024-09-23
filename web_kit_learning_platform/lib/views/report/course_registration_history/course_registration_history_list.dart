@@ -252,7 +252,7 @@ class _CourseRegistrationHistoryListPageState extends State<CourseRegistrationHi
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.course_name,
-                            minimumWidth: Dimens.size250,
+                            minimumWidth: Dimens.size450,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
@@ -261,12 +261,12 @@ class _CourseRegistrationHistoryListPageState extends State<CourseRegistrationHi
                                   overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
-                            columnName: L10nX.getStr.user_str,
-                            maximumWidth: Dimens.size180,
+                            columnName: L10nX.getStr.user_name,
+                            maximumWidth: Dimens.size250,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.user_str, style: TextStyleConstant.textStyleBlack14w500,))),
+                                child: Text(L10nX.getStr.user_name, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.full_name,
                             maximumWidth: Dimens.size250,
@@ -274,6 +274,20 @@ class _CourseRegistrationHistoryListPageState extends State<CourseRegistrationHi
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
                                 child: Text(L10nX.getStr.full_name, style: TextStyleConstant.textStyleBlack14w500,))),
+                        GridColumn(
+                            columnName: L10nX.getStr.action_str,
+                            maximumWidth: Dimens.size150,
+                            label: Container(
+                                padding: EdgeInsets.all(8.0),
+                                alignment: Alignment.center,
+                                child: Text(L10nX.getStr.action_str, style: TextStyleConstant.textStyleBlack14w500,))),
+                        GridColumn(
+                            columnName: L10nX.getStr.status,
+                            maximumWidth: Dimens.size150,
+                            label: Container(
+                                padding: EdgeInsets.all(8.0),
+                                alignment: Alignment.center,
+                                child: Text(L10nX.getStr.status, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.time_str,
                             minimumWidth: Dimens.size100,
@@ -316,14 +330,24 @@ class CourseRegisteredHistoryInfoDataSource extends DataGridSource {
                 Expanded(child: Text(e.courseName??"", style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             ) ),
-            DataGridCell<Widget>(columnName: L10nX.getStr.user_str, value: Row(
+            DataGridCell<Widget>(columnName: L10nX.getStr.user_name, value: Row(
               children: [
                 Expanded(child: Text(e.userName??"", textAlign: TextAlign.center, style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
             DataGridCell<Widget>(columnName: L10nX.getStr.full_name, value: Row(
               children: [
-                Expanded(child: Text(e.fullname??"", textAlign: TextAlign.center, style: TextStyleConstant.textStyleBlack14w400,)),
+                Expanded(child: Text(e.fullname??"", textAlign: TextAlign.start, style: TextStyleConstant.textStyleBlack14w400,)),
+              ],
+            )),
+            DataGridCell<Widget>(columnName: L10nX.getStr.action_str, value: Row(
+              children: [
+                Expanded(child: Text(e.action??"", textAlign: TextAlign.center, style: TextStyleConstant.textStyleBlack14w400,)),
+              ],
+            )),
+            DataGridCell<Widget>(columnName: L10nX.getStr.status, value: Row(
+              children: [
+                Expanded(child: Text(e.status??"", textAlign: TextAlign.center, style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
             DataGridCell<Widget>(columnName: L10nX.getStr.time_str, value: Row(

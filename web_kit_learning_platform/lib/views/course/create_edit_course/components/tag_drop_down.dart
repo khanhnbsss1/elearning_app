@@ -43,17 +43,17 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                             ),
                             showSearchBox: true,
                             searchDelay: Duration(seconds: 0),
-                            itemBuilder: (context, item, isSelected) {
+                            itemBuilder: (context, item, isDisabled, isSelected) {
                               return ListTile(
                                 title: Text(item.name??'',style: TextStyleConstant.textStyleBlack14w400,),
                               );
                             },
                             //showSelectedItems: true,
                           ),
-                          items: widget.allTags,
+                          items: (filter, loadProps) => widget.allTags,
                           itemAsString: (item) => item.name??"",
-                          dropdownDecoratorProps: DropDownDecoratorProps(
-                            dropdownSearchDecoration: InputDecoration(
+                          decoratorProps: DropDownDecoratorProps(
+                            decoration: InputDecoration(
                               hintText: L10nX.getStr.tags_select,
                               hintStyle: TextStyleConstant.textStyleBlack13w400,
                               alignLabelWithHint: true,
@@ -77,9 +77,17 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                               ),
                             ),
                           ),
-                          dropdownButtonProps: DropdownButtonProps(
+                          suffixProps: DropdownSuffixProps(
+                            dropdownButtonProps: DropdownButtonProps(
                               padding: EdgeInsets.zero,
-                            
+                              style: ButtonStyle(
+                                  textStyle: WidgetStatePropertyAll(TextStyleConstant.textStyleBlack13w400,)
+                              ),
+                              constraints: BoxConstraints(
+                                minHeight: Dimens.size20,
+                                maxHeight: Dimens.size40,
+                              ),
+                            ),
                           ),
                           onChanged: (value) {
                             if(value!=null && [...(widget.exitsTags??[]).where((element) {return element.id == value.id;},)].isEmpty)

@@ -26,8 +26,8 @@ class ApiName {
   ///course 
   final String createCourse = "/create-course";
   final String updateCourse = "/update-course";
-  final String getCourseList = "/filter-courses";
-  final String getMyCourses = "/get-my-courses";
+  final String getCourseList = "/advanced-filter-courses";
+  final String getMyCourses = "/get-my-courses-v2";
   final String getCourseDetail = "/get-course-detail";
   final String deleteCourse = "/delete-course";
   final String getFilterCourse = "/filter-directory";

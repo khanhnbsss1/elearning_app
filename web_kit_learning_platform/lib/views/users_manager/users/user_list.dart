@@ -457,8 +457,17 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
          }
          return DropdownSearch<RoleInfo>(
            enabled: true,
-           dropdownButtonProps: DropdownButtonProps(
-               padding: EdgeInsets.zero
+           suffixProps: DropdownSuffixProps(
+             dropdownButtonProps: DropdownButtonProps(
+               padding: EdgeInsets.zero,
+               style: ButtonStyle(
+                   textStyle: WidgetStatePropertyAll(TextStyleConstant.textStyleBlack13w400,)
+               ),
+               constraints: BoxConstraints(
+                 minHeight: Dimens.size20,
+                 maxHeight: Dimens.size40,
+               ),
+             ),
            ),
            popupProps: PopupProps.menu(
              searchFieldProps: TextFieldProps(
@@ -482,7 +491,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
              showSearchBox: true,
              searchDelay: Duration(milliseconds: 300),
              showSelectedItems: false,
-             itemBuilder: (context, item, isSelected) {
+             itemBuilder:(context, item, isDisabled, isSelected) {
                return Padding(
                  padding:  EdgeInsets.symmetric(horizontal: Dimens.size16, vertical: Dimens.size12),
                  child: Text(item.name??"", style: TextStyleConstant.textStyleBlack14w400,),
@@ -490,11 +499,11 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
              },
            ),
            
-           items: (rolesListResponseModel.content??[]).toList(),
+           items: (filter, loadProps) => (rolesListResponseModel?.content??[]).toList(),
            //selectedItem: selectedItem,
-           dropdownDecoratorProps: DropDownDecoratorProps(
+           decoratorProps: DropDownDecoratorProps(
              baseStyle: TextStyleConstant.textStyleBlack13w400,
-             dropdownSearchDecoration: InputDecoration(
+             decoration: InputDecoration(
                enabled: true,
                hintText: L10nX.getStr.role_str,
                //labelText: value,

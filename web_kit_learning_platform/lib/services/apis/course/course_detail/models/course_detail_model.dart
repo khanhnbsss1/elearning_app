@@ -18,6 +18,7 @@ class CourseInfo {
   String? dayFrom;
   String? dayTo;
   int? price;
+  int? priceOriginal;
   String? createdAt;
   String? updatedAt;
   String? createdBy;
@@ -82,7 +83,8 @@ class CourseInfo {
         this.testId,
         this.testName,
         this.isPayment,
-        this.myRating
+        this.myRating,
+        this.priceOriginal
       });
 
   CourseInfo.initial(){
@@ -100,6 +102,7 @@ class CourseInfo {
     dayFrom = "";
     dayTo = "";
     price = 0;
+    priceOriginal=0;
     createdAt = "";
     updatedAt = "";
     createdBy = "";
@@ -162,7 +165,8 @@ class CourseInfo {
     int? testId,
     String? testName,
     double? myRating,
-    bool? isPayment
+    bool? isPayment,
+    int? priceOriginal
   }){
     return CourseInfo(
       id : id??this.id,
@@ -204,6 +208,7 @@ class CourseInfo {
       testName:typeName??this.testName,
       isPayment:isPayment??this.isPayment,
       myRating:myRating??this.myRating,
+      priceOriginal:priceOriginal??this.priceOriginal,
 
     );
 
@@ -246,6 +251,7 @@ class CourseInfo {
     testId=json.testId??testId;
     isPayment=json.isPayment??isPayment;
     myRating=json.myRating??myRating;
+    priceOriginal=json.priceOriginal??priceOriginal;
 
   }
 
@@ -264,6 +270,7 @@ class CourseInfo {
     dayFrom = json['day_from'];
     dayTo = json['day_to'];
     price = json['payment']??json['price'];
+    priceOriginal = json['price_original'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     createdBy = json['created_by'];

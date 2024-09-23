@@ -587,14 +587,14 @@ class _CourseIntroState extends State<CourseIntro> with TickerProviderStateMixin
                         child: Column(
                           children: [
                             Text(
-                              '${_state.courseInfo?.price ?? 0 / 0.8} VND',
+                              '${_state.courseInfo?.priceOriginal ?? 0} (${L10nX.getStr.vnd_str})',
                               style: TextStyle(decoration: TextDecoration.lineThrough, color: Colors.black45, fontSize: 14, fontWeight: FontWeight.w400),
                             ),
                             SizedBox(
                               height: 8,
                             ),
                             Text(
-                              '${_state.courseInfo?.price!} VND',
+                              '${_state.courseInfo?.price??0} (${L10nX.getStr.vnd_str})',
                               style: TextStyle(
                                   decoration: TextDecoration.underline,
                                   decorationColor: Color(0xFFFFC711),

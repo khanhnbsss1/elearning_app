@@ -21,7 +21,8 @@ class SearchCommonRequest {
   String?roleId;
   int?courseId;
   String? vocabularyType;
-  
+  String? mode;
+  String?producerName;
   SearchCommonRequest(
       {
         this.userId,
@@ -44,7 +45,9 @@ class SearchCommonRequest {
         this.endTime,
         this.roleId,
         this.courseId,
-        this.vocabularyType
+        this.vocabularyType,
+        this.mode,
+        this.producerName
       }){
     type??="DESC";
   }
@@ -151,6 +154,12 @@ class SearchCommonRequest {
     if(courseId!=null) {
       data['courseId'] = courseId;
     }
+    if((mode??'').isNotEmpty) {
+      data['mode'] = mode;
+    }
+    if((producerName??'').isNotEmpty) {
+      data['producerName'] = producerName;
+    }
     return data;
   }
   SearchCommonRequest copyWith({
@@ -170,7 +179,9 @@ class SearchCommonRequest {
     String?status,
     String?roleId,
     String? type,
-    String? vocabularyType
+    String? vocabularyType,
+    String? mode,
+    String?producerName
   }){
     return SearchCommonRequest(
       userId: userId??this.userId,
@@ -190,6 +201,8 @@ class SearchCommonRequest {
       roleId: roleId??this.roleId,
       type: type??this.type,
       vocabularyType: vocabularyType??this.vocabularyType,
+      mode: mode??this.mode,
+      producerName: producerName??this.producerName,
     );
 }
 }
