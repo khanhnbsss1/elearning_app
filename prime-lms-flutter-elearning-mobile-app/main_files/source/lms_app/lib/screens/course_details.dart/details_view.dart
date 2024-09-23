@@ -39,7 +39,8 @@ import 'requirements.dart';
 import 'review_button.dart';
 import 'title_info.dart';
 
-final courseDetailProvider = FutureProvider.family<CourseInfo, CourseInfo>((ref, course) async {
+final courseDetailProvider =
+    FutureProvider.family<CourseInfo, CourseInfo>((ref, course) async {
   CourseInfo courseInfo = await ApiService().getCourseDetail(course: course);
   return courseInfo;
 });
@@ -55,71 +56,67 @@ class CourseDetailsView extends ConsumerWidget {
   //   return courseInfo;
   // }
 
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final refCourseDetail = ref.watch(courseDetailProvider(courses));
     final myCourse = ref.watch(myCoursesProvider);
+
     return myCourse.when(
-        data: (myCourses) {
-          CourseInfo courseDetail = refCourseDetail.value!;
+      data: (myCourses) => refCourseDetail.when(
+        data: (courseDetail) {
           return Scaffold(
-            // bottomNavigationBar: Wrap(
-            //   alignment: WrapAlignment.center,
-            //   children: [
-            //     AdManager.isBannerEnbaled(ref)
-            //         ? const BannerAdWidget()
-            //         : Container(),
-            //     // EnrollButton(course: course),
-            //   ],
-            // ),
+              // bottomNavigationBar: Wrap(
+              //   alignment: WrapAlignment.center,
+              //   children: [
+              //     AdManager.isBannerEnbaled(ref)
+              //         ? const BannerAdWidget()
+              //         : Container(),
+              //     // EnrollButton(course: course),
+              //   ],
+              // ),
               bottomNavigationBar: SizedBox(
                 height: 50,
-                child: (!UserManager().checkRegisteredCourse(
-                    courseDetail, myCourses ?? []))
+                child: (!UserManager()
+                        .checkRegisteredCourse(courseDetail, myCourses ?? []))
                     ? Row(
-                  mainAxisAlignment:
-                  MainAxisAlignment.spaceEvenly,
-                  children: [
-                    if (courseDetail.originalPrice != 0 &&
-                        courseDetail.originalPrice != null)
-                      Text(
-                        '${NumberFormat.decimalPattern('vi').format(courseDetail.originalPrice ?? 0)} VND',
-                        style: const TextStyle(
-                            decoration:
-                            TextDecoration.lineThrough,
-                            color: Colors.black45,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w400),
-                      ),
-                    if (courseDetail.payment != 0 &&
-                        courseDetail.payment != null)
-                      Text(
-                        '${NumberFormat.decimalPattern('vi').format(courseDetail.payment ?? 0)} VND',
-                        style: const TextStyle(
-                            decoration: TextDecoration.underline,
-                            decorationColor: Color(0xFFFFC711),
-                            fontStyle: FontStyle.italic,
-                            color: Color(0xFFFFC711),
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    RegisterButton(
-                      course: courseDetail,
-                      myCourses: myCourses ?? [],
-                      width:
-                      MediaQuery.of(context).size.width * 0.4,
-                    ),
-                  ],
-                )
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          if (courseDetail.originalPrice != 0 &&
+                              courseDetail.originalPrice != null)
+                            Text(
+                              '${NumberFormat.decimalPattern('vi').format(courseDetail.originalPrice ?? 0)} VND',
+                              style: const TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  color: Colors.black45,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          if (courseDetail.payment != 0 &&
+                              courseDetail.payment != null)
+                            Text(
+                              '${NumberFormat.decimalPattern('vi').format(courseDetail.payment ?? 0)} VND',
+                              style: const TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: Color(0xFFFFC711),
+                                  fontStyle: FontStyle.italic,
+                                  color: Color(0xFFFFC711),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          RegisterButton(
+                            course: courseDetail,
+                            myCourses: myCourses ?? [],
+                            width: MediaQuery.of(context).size.width * 0.4,
+                          ),
+                        ],
+                      )
                     : Center(
-                  child: RegisterButton(
-                    course: courseDetail,
-                    myCourses: myCourses ?? [],
-                    width:
-                    MediaQuery.of(context).size.width * 0.6,
-                  ),
-                ),
+                        child: RegisterButton(
+                          course: courseDetail,
+                          myCourses: myCourses ?? [],
+                          width: MediaQuery.of(context).size.width * 0.6,
+                        ),
+                      ),
               ),
               body: CustomScrollView(
                 slivers: [
@@ -149,13 +146,11 @@ class CourseDetailsView extends ConsumerWidget {
                   ),
                   SliverToBoxAdapter(
                     child: Padding(
-                        padding:
-                        const EdgeInsets.fromLTRB(20, 5, 20, 30),
+                        padding: const EdgeInsets.fromLTRB(20, 5, 20, 30),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            PreviewBox(
-                                course: courseDetail, heroTag: heroTag),
+                            PreviewBox(course: courseDetail, heroTag: heroTag),
                             const SizedBox(height: 20),
                             TitleInfo(
                               course: courseDetail,
@@ -201,9 +196,13 @@ class CourseDetailsView extends ConsumerWidget {
         },
         error: (error, stackTrace) => Text('error: $error'),
         loading: () {
-          return const Scaffold(
-            body: LoadingIndicatorWidget(),
-          );
-        });
+          return Scaffold(body: const LoadingIndicatorWidget()); // display loading indicator
+        },
+      ),
+      error: (error, stackTrace) => Text('error: $error'),
+      loading: () {
+        return Scaffold(body: const LoadingIndicatorWidget()); // display loading indicator
+      },
+    );
   }
 }
