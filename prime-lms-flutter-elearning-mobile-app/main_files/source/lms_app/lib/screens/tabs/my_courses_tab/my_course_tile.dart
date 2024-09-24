@@ -40,13 +40,12 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
     final heroTag = UniqueKey();
 
     return refCourseDetail.when(
-      loading: () => const LoadingListTile(),
+      loading: () => const SizedBox(),
       error: (error, stackTrace) => const SizedBox(),
       data: (courseDetail) {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // This part of the widget does not rely on data changing frequently
             _buildCourseImage(context, courseDetail),
             Expanded(
               child: Padding(
@@ -90,12 +89,9 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
       height: 90,
       width: MediaQuery.of(context).size.width * 0.3,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: (courseDetail.image != null && courseDetail.image != "")
-            ? CustomCacheImage(imageUrl: courseDetail.image, radius: 12)
-            : Image.asset("assets/images/noImage1.jpg", fit: BoxFit.contain),
-      ),
+      child: (courseDetail.image != null && courseDetail.image != "")
+          ? CustomCacheImage(imageUrl: courseDetail.image, radius: 12)
+          : Image.asset("assets/images/noImage1.jpg", fit: BoxFit.contain),
     );
   }
 

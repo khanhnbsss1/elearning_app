@@ -102,22 +102,16 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // Schedule the locale update to happen after the current frame
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Ensure the locale update happens only when necessary
       if (LanguageHelper().getCurrentLocale() != context.locale) {
         Get.updateLocale(context.locale);
         LanguageHelper().setLocale(context.locale);
       }
     });
-
-    // Add localization delegates dynamically
     List<LocalizationsDelegate<dynamic>> delegates = [...context.localizationDelegates];
     delegates.add(S.delegate);
-
-    FetchPixels(context); // Custom method, assuming it adjusts screen settings
-    ColorConst.setColorByFlavorType(context); // Custom method, assuming it adjusts colors
-
+    FetchPixels(context);
+    ColorConst.setColorByFlavorType(context);
     return GetMaterialApp(
       theme: ThemeData(primaryColor: const Color(0xF4930202)),
       navigatorKey: NavigationService().navigationKey,

@@ -16,15 +16,17 @@ class SearchedCourses extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final coursesProvider = ref.watch(searchedCoursesProvider);
+
     return coursesProvider.when(
       loading: () => const LoadingListTile(height: 160),
-      error: (error, stackTrace) => Center(
-        child: Text(error.toString()),
-      ),
+      error: (error, stackTrace) =>
+          Center(child: Text('Error: ${error.toString()}')),
       data: (courses) {
-        if (courses!.isEmpty)
+        if (courses == null || courses.isEmpty) {
           return EmptyAnimation(
               animationString: emptyAnimation, title: 'no-course'.tr());
+        }
+
         return ListView.separated(
           padding: const EdgeInsets.all(20),
           itemCount: courses.length,

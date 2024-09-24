@@ -69,22 +69,26 @@ class MyCoursesTab extends ConsumerWidget {
                 title: 'No courses found',
               );
             }
-            return Expanded(
-              child: ListView.separated(
-                padding: const EdgeInsets.only(
-                  left: 20,
-                  right: 20,
-                  bottom: 50,
-                  top: 25,
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.separated(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      bottom: 50,
+                      top: 25,
+                    ),
+                    itemCount: data.length,
+                    separatorBuilder: (context, index) => const Divider(height: 50),
+                    itemBuilder: (context, index) {
+                      data.length;
+                      final CourseInfo course = data[index];
+                      return MyCourseTile(courseInfo: course, user: user);
+                    },
+                  ),
                 ),
-                itemCount: data.length,
-                separatorBuilder: (context, index) => const Divider(height: 50),
-                itemBuilder: (context, index) {
-                  data.length;
-                  final CourseInfo course = data[index];
-                  return MyCourseTile(courseInfo: course, user: user);
-                },
-              ),
+              ],
             );
           },
         ),
