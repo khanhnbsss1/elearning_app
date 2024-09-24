@@ -88,6 +88,7 @@ import '../views/payment/request_register_list/request_register_list.dart';
 import '../views/report/course_history/course_history_list.dart';
 import '../views/report/course_registration_history/course_registration_history_list.dart';
 import '../views/report/revenue_history/revenue_history_list.dart';
+import '../views/report/user_list_register_course_history/course_list_by_registed_user_page.dart';
 import '../views/ui/landing_page.dart';
 import '../views/ui/nft_dashboard.dart';
 import '../views/users_manager/user_detail/edit_user_profile.dart';
@@ -308,6 +309,12 @@ getPageRoute() {
         page: () =>  CourseRegistrationHistoryListPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]
     ),
+    GetPage(
+        name: Routes.reportCourseListByRegisterdUser,
+        page: () =>  CourseListByRegistedUserPage(key: UniqueKey(),),
+        middlewares: [AuthMiddleware()]
+    ),
+    
 
     GetPage(
         name: Routes.reportUserRegistrationHistory,

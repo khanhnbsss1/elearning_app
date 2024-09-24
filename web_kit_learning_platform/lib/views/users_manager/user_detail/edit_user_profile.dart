@@ -714,7 +714,7 @@ class _EditUserProfileState extends State<EditUserProfile>
             height: Dimens.size40,
             child: DropdownSearch<RoleInfo>(
               enabled: enableEdit,
-              
+              compareFn: (item1, item2) => true,
               popupProps: PopupProps.menu(
                 constraints: BoxConstraints(
                   maxHeight: (65 + (rolesListResponseModel.content??[]).length * 50 < 210) ? 65 + (rolesListResponseModel.content??[]).length * 50 : 210,
@@ -723,10 +723,11 @@ class _EditUserProfileState extends State<EditUserProfile>
                 searchDelay: Duration(milliseconds: 300),
                 showSelectedItems: false,
               ),
-              items: (rolesListResponseModel.content??[]).toList(),
+              items: (filter, loadProps) => (rolesListResponseModel?.content??[]).toList(),
               selectedItem: selectedItem,
-              dropdownDecoratorProps: DropDownDecoratorProps(
-                dropdownSearchDecoration: InputDecoration(
+
+              decoratorProps: DropDownDecoratorProps(
+                decoration: InputDecoration(
                   enabled: enableEdit,
                   constraints: BoxConstraints(
                     maxHeight: Dimens.size40
@@ -749,8 +750,17 @@ class _EditUserProfileState extends State<EditUserProfile>
                     onChange(value);
                   }
               },
-              dropdownButtonProps: DropdownButtonProps(
-                  padding: EdgeInsets.zero
+              suffixProps: DropdownSuffixProps(
+                dropdownButtonProps: DropdownButtonProps(
+                  padding: EdgeInsets.zero,
+                  style: ButtonStyle(
+                      textStyle: WidgetStatePropertyAll(TextStyleConstant.textStyleBlack13w400,)
+                  ),
+                  constraints: BoxConstraints(
+                    minHeight: Dimens.size20,
+                    maxHeight: Dimens.size40,
+                  ),
+                ),
               ),
             ),
           );

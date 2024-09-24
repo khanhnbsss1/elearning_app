@@ -305,7 +305,7 @@ class TestItemWidgetState extends State<TestItemWidget>{
                                   text: L10nX.getStr.view_str,
                                   height: Dimens.size40,
                                   enableBgColor: ColorConst.greyColor,
-                                  textStype: TextStyleConstant.textStyleBlack16w600,
+                                  textStype: TextStyleConstant.textStyleBlack14w600,
                                   onTap: () {
                                     TestWorkPage(
                                       testInfo: testInfo,enableShowResult: true,).show(context);

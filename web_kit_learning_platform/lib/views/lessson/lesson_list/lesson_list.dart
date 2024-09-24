@@ -363,40 +363,40 @@ class _LessonListPageState extends State<LessonListPage> with SingleTickerProvid
                                   overflow: TextOverflow.ellipsis, style: TextStyleConstant.textStyleBlack14w500,
                                 ))),
                         GridColumn(
-                            columnName: L10nX.getStr.subject_name_str,
+                            columnName: L10nX.getStr.content_str,
+                            minimumWidth: Dimens.size400,
+                            label: Container(
+                                padding: EdgeInsets.all(8.0),
+                                alignment: Alignment.center,
+                                child: Text(L10nX.getStr.content_str, style: TextStyleConstant.textStyleBlack14w500,))),
+                        GridColumn(
+                            columnName: L10nX.getStr.category_str,
                             minimumWidth: Dimens.size200,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.subject_name_str, style: TextStyleConstant.textStyleBlack14w500,))),
+                                child: Text(L10nX.getStr.category_str, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
-                            columnName: L10nX.getStr.document_str,
-                            minimumWidth: Dimens.size120,
-                            label: Container(
-                                padding: EdgeInsets.all(8.0),
-                                alignment: Alignment.center,
-                                child: Text(L10nX.getStr.document_str, style: TextStyleConstant.textStyleBlack14w500,))),
-                        GridColumn(
-                            columnName: L10nX.getStr.test_name,
-                            minimumWidth: Dimens.size200,
-                            label: Container(
-                                padding: EdgeInsets.all(8.0),
-                                alignment: Alignment.center,
-                                child: Text(L10nX.getStr.test_name, style: TextStyleConstant.textStyleBlack14w500,))),
-                        GridColumn(
-                            columnName: L10nX.getStr.payment_str,
+                            columnName: L10nX.getStr.grade_str,
                             maximumWidth: Dimens.size150,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.payment_str, style: TextStyleConstant.textStyleBlack14w500,))),
+                                child: Text(L10nX.getStr.grade_str, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
-                            columnName: L10nX.getStr.vocabulary_str,
+                            columnName: L10nX.getStr.type,
+                            maximumWidth: Dimens.size150,
+                            label: Container(
+                                padding: EdgeInsets.all(8.0),
+                                alignment: Alignment.center,
+                                child: Text(L10nX.getStr.type, style: TextStyleConstant.textStyleBlack14w500,))),
+                        GridColumn(
+                            columnName: L10nX.getStr.created_at,
                             minimumWidth: Dimens.size200,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.vocabulary_str, style: TextStyleConstant.textStyleBlack14w500,))),
+                                child: Text(L10nX.getStr.created_at, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.action_str,
                             minimumWidth: Dimens.size180,
@@ -455,30 +455,30 @@ class LessonDataSource extends DataGridSource {
                 Expanded(child: Text(e.lectureName??"", style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             ) ),
-            DataGridCell<Widget>(columnName: L10nX.getStr.subject_name_str, value: Row(
+            DataGridCell<Widget>(columnName: L10nX.getStr.content_str, value: Row(
               children: [
-                Expanded(child: Text(e.subName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+                Expanded(child: Text(e.note??"", style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
-            DataGridCell<Widget>(columnName: L10nX.getStr.document_str, value: Row(
+            DataGridCell<Widget>(columnName: L10nX.getStr.category_str, value: Row(
               children: [
-                Expanded(child: Text(e.docName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+                Expanded(child: Text(e.categoryName??"", style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
 
-            DataGridCell<Widget>(columnName: L10nX.getStr.test_name, value: Row(
+            DataGridCell<Widget>(columnName: L10nX.getStr.grade_str, value: Row(
               children: [
-                Expanded(child: Text(e.testName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+                Expanded(child: Center(child: Text(e.gradeName??"", style: TextStyleConstant.textStyleBlack14w400,))),
               ],
             )),
-            DataGridCell<Widget>(columnName: L10nX.getStr.payment_str, value: Text(e.mode??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.type, value: Text(e.mode??"", style: TextStyleConstant.textStyleBlack14w400,)),
 
-            DataGridCell<Widget>(columnName: L10nX.getStr.vocabulary_str, 
-                value: SingleChildScrollView(
-                  child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: listWord,),
-            )),
+            DataGridCell<Widget>(columnName: L10nX.getStr.created_at, 
+                value: Row(
+                  children: [
+                    Expanded(child: Center(child: Text(e.createdAt??"", style: TextStyleConstant.textStyleBlack14w400,))),
+                  ],
+                )),
             //DataGridCell<Widget>(columnName: L10nX.getStr.doing_time_str, value: Text("${(e.}", style: TextStyleConstant.textStyleBlack14w400,)),
 
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str,

@@ -430,6 +430,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "You have not set up face login. Please log in to your account with a password and set up face authentication"),
         "notify_setup_fingerprint": MessageLookupByLibrary.simpleMessage(
             "You have not set up fingerprint login. Please log in to your account with a password and set up fingerprint authentication"),
+        "number_registered_user":
+            MessageLookupByLibrary.simpleMessage("Number of registered users"),
         "oK": MessageLookupByLibrary.simpleMessage("Ok"),
         "of_arrivals": MessageLookupByLibrary.simpleMessage("of arrivals"),
         "of_str": MessageLookupByLibrary.simpleMessage("Of"),
@@ -835,6 +837,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "use_fingerprint_text":
             MessageLookupByLibrary.simpleMessage("Use fingerprint"),
         "user_add_str": MessageLookupByLibrary.simpleMessage("Create User"),
+        "user_by_course":
+            MessageLookupByLibrary.simpleMessage("User by course"),
         "user_create": MessageLookupByLibrary.simpleMessage("Create user"),
         "user_delete_str": MessageLookupByLibrary.simpleMessage("Delete User"),
         "user_detail": MessageLookupByLibrary.simpleMessage("User information"),

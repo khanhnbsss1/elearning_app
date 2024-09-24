@@ -95,6 +95,8 @@ abstract class Routes {
   static const reportPurchasedCourse = Paths.reportPurchasedCourse;
   static const reportActionCourse = Paths.reportActionCourse;
   static const reportCourseRegistrationHistory = Paths.reportCourseRegistrationHistory;
+  static const reportCourseListByRegisterdUser = Paths.reportCourseListByRegisterdUser;
+
   static const reportUserRegistrationHistory = Paths.reportUserRegistrationHistory;
 
 
@@ -185,6 +187,9 @@ abstract class Paths {
   static const reportPurchasedCourse = '/report/PurchasedCourse';
   static const reportActionCourse = '/report/ActionCourse';
   static const reportCourseRegistrationHistory = '/report/CourseRegistrationHistory';
+  static const reportCourseListByRegisterdUser = '/report/reportCourseListByRegisterdUser';
+
+  
   static const reportUserRegistrationHistory = '/report/UserRegistrationHistory';
 
   

@@ -427,6 +427,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn chưa cài đặt đăng nhập bằng khuôn mặt. Vui lòng đăng nhập vào tài khoản bằng mật khẩu và cài đặt xác thực khuôn mặt"),
         "notify_setup_fingerprint": MessageLookupByLibrary.simpleMessage(
             "Bạn chưa cài đặt đăng nhập bằng vân tay. Vui lòng đăng nhập vào tài khoản bằng mật khẩu và cài đặt xác thực vân tay"),
+        "number_registered_user":
+            MessageLookupByLibrary.simpleMessage("Số người đăng ký"),
         "oK": MessageLookupByLibrary.simpleMessage("Đồng ý"),
         "of_arrivals": MessageLookupByLibrary.simpleMessage("số lượt đến"),
         "of_str": MessageLookupByLibrary.simpleMessage("Của"),
@@ -828,6 +830,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "use_fingerprint_text":
             MessageLookupByLibrary.simpleMessage("Sử dụng dấu vân tay"),
         "user_add_str": MessageLookupByLibrary.simpleMessage("Tạo người dùng"),
+        "user_by_course":
+            MessageLookupByLibrary.simpleMessage("Người dùng theo khóa học"),
         "user_create": MessageLookupByLibrary.simpleMessage("Tạo người dùng"),
         "user_delete_str":
             MessageLookupByLibrary.simpleMessage("Xóa người dùng"),

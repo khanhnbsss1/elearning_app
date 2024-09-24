@@ -19,6 +19,12 @@ class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
   CourseListBloc(super.initialState) {
     on<CourseListInitEvent>(_onInit);
     on<CourseListOnSearchByFilterEvent>(_onSearchByParams);
+    on<CourseListOnCallApiEvent>((event, emit) async {
+      emit(state.copyWith(
+          courseResponseModel: event.courseResponseModel,
+          blocStatus: CourseStatus.onLoadEnd,
+      ));
+    },);
   }
 
   Future<void> _onInit(CourseListInitEvent event,
@@ -47,21 +53,14 @@ class CourseListBloc extends Bloc<CourseListEvent, CourseListState> {
       {
         GetCourseListApi courseApi = GetCourseListApi(searchCommonRequest: state.searchCommonRequest!);
         CourseResponseModel courseResponseModel = await courseApi.call();
-        emit(state.copyWith(
-            courseResponseModel: courseResponseModel,
-            blocStatus: CourseStatus.onLoadEnd,
-          searchCommonRequest: searchCommonRequest
-        ));
+        add(CourseListOnCallApiEvent(courseResponseModel: courseResponseModel));
       }
     else if(state.courseType ==CourseType.myCourseList)
       {
         MyCourseApi myCourseApi = MyCourseApi(searchCommonRequest: searchCommonRequest);
         CourseResponseModel courseResponseModel = await myCourseApi.call();
-        emit(state.copyWith(
-            courseResponseModel: courseResponseModel,
-            blocStatus: CourseStatus.onLoadEnd,
-            searchCommonRequest: searchCommonRequest
-        ));
+        add(CourseListOnCallApiEvent(courseResponseModel: courseResponseModel));
+
       }
   }
 }

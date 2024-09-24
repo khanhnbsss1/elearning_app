@@ -472,7 +472,9 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                   children: [
                     Icon(Icons.phone_in_talk, color: Colors.green,),
                     Gap(Dimens.size8),
-                    Text(Constant().phoneNumber),
+                    Visibility(
+                      visible: ResponsiveInfo.isTablet(),
+                        child: Text(Constant().phoneNumber)),
                   ],
                 ),
               ),

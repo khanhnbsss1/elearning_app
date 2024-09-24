@@ -8,6 +8,7 @@ import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/models/user/UserProfile.dart';
 import 'package:webkit/base/services/base_request/models/search_common_request.dart';
 import 'package:webkit/services/apis/user/user_manager/user_list_api.dart';
+import 'package:webkit/services/apis/user/user_manager/user_list_by_course_api.dart';
 
 part 'user_list_event.dart';
 
@@ -37,8 +38,15 @@ class UserListBloc extends Bloc<UserListEvent, UserListState> {
   }
   
   Future<void> callUserListApi({required SearchCommonRequest searchCommonRequest}) async {
+    dynamic courseApi;
+    if(state.courseId ==null){
+      courseApi = GetUserListApi(searchCommonRequest: state.searchCommonRequest!);
+    }
+    else
+      {
+        courseApi = GetUserListByCourseApi(searchCommonRequest: state.searchCommonRequest!);
 
-    GetUserListApi courseApi = GetUserListApi(searchCommonRequest: state.searchCommonRequest!);
+      }
     UserListResponseModel userListResponseModel = await courseApi.call();
         emit(state.copyWith(
             userListResponseModel: userListResponseModel,

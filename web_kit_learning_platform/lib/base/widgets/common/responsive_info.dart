@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+import 'package:webkit/base/base.export.dart';
 
 class ResponsiveInfo {
   static late MediaQueryData _mediaQueryData;
@@ -37,8 +38,8 @@ class ResponsiveInfo {
     bool isTab = false;
     double height = ScreenUtil().screenHeight;
     double width = ScreenUtil().screenWidth;
-    double realHeightInInch = (height)/160;
-    double realWidthInInch = (width)/160;
+    double realHeightInInch = (height)/Dimens.size160;
+    double realWidthInInch = (width)/Dimens.size160;
     ScreenUtil().pixelRatio;
     double crossLineinInch = sqrt((realHeightInInch*realHeightInInch) + (realWidthInInch*realWidthInInch));
     if(crossLineinInch>=7) {
@@ -54,8 +55,8 @@ class ResponsiveInfo {
     DeviceScreenType deviceType = DeviceScreenType.mobile;
     double height = ScreenUtil().screenHeight;
     double width = ScreenUtil().screenWidth;
-    double realHeightInInch = (height)/160;
-    double realWidthInInch = (width)/160;
+    double realHeightInInch = (height)/Dimens.size160;
+    double realWidthInInch = (width)/Dimens.size160;
     ScreenUtil().pixelRatio;
     double crossLineinInch = sqrt((realHeightInInch*realHeightInInch) + (realWidthInInch*realWidthInInch));
     if(crossLineinInch>=7 && crossLineinInch<13.5) {

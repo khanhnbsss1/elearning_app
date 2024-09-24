@@ -24,6 +24,12 @@ class TestWorkBloc extends Bloc<TestWorkEvent, TestWorkState> {
         page: event.page
       ));
     });
+    on<TestWorkStartTestEvent>((event, emit) {
+      emit(state.copyWith(
+          blocStatus: TestWorkStatus.onStartTest,
+          startTest: true
+      ));
+    });
     on<TestWorkOnUpdateChooseQuestionEvent>(_onUpdateChoosesQuestion);
   }
   Future<void> _onInit(

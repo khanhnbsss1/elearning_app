@@ -57,7 +57,9 @@ class LessonInfo {
   String? content;
   int? testId;
   int? gradeId;
+  String?gradeName;
   int? categoryId;
+  String? categoryName;
   String? testName;
   UploadFileResponseInfo? documentUploadInfo;
   List<VocabularyInfo>? vocabularies;
@@ -90,15 +92,17 @@ class LessonInfo {
         this.categoryId,
         this.videoInfos,
         this.selectVideoInfo,
-        this.proccess
+        this.proccess,
+        this.categoryName,
+        this.gradeName
       }){
     videoInfos??=LinkInfo(link: []);
   }
 
   LessonInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    subName = json['sub_name'];
-    lectureName = json['lecture_name']?? json['name'];
+    subName = (json['sub_name']??"").toString().trim();
+    lectureName = (json['lecture_name']?? json['name']??"").toString().trim();
     isFinnish = json['learning_status']== 'Completed'?true:false;
     proccess = json['progress'];
     videoInfos = LinkInfo(link: []);
@@ -138,7 +142,9 @@ class LessonInfo {
    
     testId = json['test_id'];
     categoryId = json['category_id'];
+    categoryName = json['category_name'];
     gradeId = json['grade_id'];
+    gradeName = json['grade_name'];
     testName = json['test_name'];
     if (json['vocabularies'] != null) {
       vocabularies = <VocabularyInfo>[];

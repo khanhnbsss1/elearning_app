@@ -178,7 +178,7 @@ class _CreateEditCourseState extends State<CreateEditCourse> with SingleTickerPr
                               preIcon: Icon(Icons.remove_red_eye, color: ColorConst.colorIconGrays,),
                               text: L10nX.getStr.preview_str,
                               enable: isExitCourse,
-                              textStype: TextStyleConstant.textStyleBlack16w600,
+                              textStype: TextStyleConstant.textStyleBlack14w600,
                               enableBgColor: ColorConst.whiteColor,
                               onTap: () {
                                 CoursePreview(courseInfo: state.courseInfo!,).show(context);

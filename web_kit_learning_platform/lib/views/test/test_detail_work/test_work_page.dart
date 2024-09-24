@@ -80,6 +80,7 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
                       ConfirmPopupPage(
                         content: "${L10nX.getStr.start_test_confirm} ${state.testInfo?.durian??0} (${L10nX.getStr.time_in_minute_str})",
                         onAccept: () {
+                          BlocProvider.of<TestWorkBloc>(context).add(TestWorkStartTestEvent());
                         },
                         onCancel: () {
                           Navigator.pop(context);
@@ -135,6 +136,21 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
+                              ActionButton1(
+                                text: L10nX.getStr.submit,
+                                height: Dimens.size40,
+                                enableBgColor: ColorConst.whiteColor,
+                                textStype: TextStyleConstant.textStyleBlack14w400.copyWith(color: ColorConst.mainColor),
+                                onTap: () {
+                                  ConfirmPopupPage(
+                                    content: L10nX.getStr.you_are_ready_finish_test,
+                                    onAccept: () {
+                                      BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnSubmitResultTestEvent());
+                                    },
+                                  ).show(context);
+                                },
+                              ),
+                              Gap(Dimens.size16),
                               InkWell(
                                 onTap:  () {
                                   ConfirmPopupPage(
@@ -288,35 +304,38 @@ class TestWorkPageState extends State<TestWorkPage> with UIMixin{
 
   }
   Widget buildTimerTest({required TestWorkState state, required BuildContext context}){
-    return SizedBox(
-      key: UniqueKey(),
-      height: Dimens.size50,
-      child: TimerCountdown(
-        format: CountDownTimerFormat.minutesSeconds,
-        minutesDescription: "m",
-        secondsDescription: "s",
-        enableDescriptions: false,
-        colonsTextStyle: TextStyleConstant.textStyleBlack16w600,
-        timeTextStyle: TextStyleConstant.textStyleBlack16w600,
-        endTime: DateTime.now().add(
-          Duration(
-            minutes: state.testInfo?.durian??10,
+    return Visibility(
+      visible: state.startTest==true,
+      child: SizedBox(
+        key: UniqueKey(),
+        height: Dimens.size50,
+        child: TimerCountdown(
+          format: CountDownTimerFormat.minutesSeconds,
+          minutesDescription: "m",
+          secondsDescription: "s",
+          enableDescriptions: false,
+          colonsTextStyle: TextStyleConstant.textStyleBlack16w600,
+          timeTextStyle: TextStyleConstant.textStyleBlack16w600,
+          endTime: DateTime.now().add(
+            Duration(
+              minutes: state.testInfo?.durian??10,
+            ),
           ),
+          onEnd: () {
+            if((state.testInfo?.durian??0)<=0) {
+              return;
+            }
+            ConfirmPopupPage(
+              content: L10nX.getStr.time_test_end,
+              onAccept: () {
+                BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnSubmitResultTestEvent());
+              },
+              onCancel: () {
+                
+              },
+            ).show(context);
+          },
         ),
-        onEnd: () {
-          if((state.testInfo?.durian??0)<=0) {
-            return;
-          }
-          ConfirmPopupPage(
-            content: L10nX.getStr.time_test_end,
-            onAccept: () {
-              BlocProvider.of<TestWorkBloc>(context).add(TestWorkOnSubmitResultTestEvent());
-            },
-            onCancel: () {
-              
-            },
-          ).show(context);
-        },
       ),
     );
   }

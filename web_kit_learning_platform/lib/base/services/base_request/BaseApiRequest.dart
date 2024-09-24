@@ -481,7 +481,7 @@ class BaseApiRequest {
         await onRequestSuccess(baseAPIResponse.result);
         return baseAPIResponse.result!;
       }
-      else if ((response.statusCode == 401 || response.statusCode == 403) && !url.contains("login"))// qua han token
+      else if ((response.statusCode == 401 || response.statusCode == 403) && !url.contains("login")&& !url.contains("logout"))// qua han token
           {
             if(!url.contains("refresh-token"))
               {

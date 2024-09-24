@@ -107,23 +107,8 @@ class QuestionDetailBloc extends Bloc<QuestionDetailEvent, QuestionDetailState> 
         state.editingControllerAttackFile?.text = state.questionInfo?.questionLink??"";
         state.editingControllerQuestionScore?.text= (state.questionInfo?.weightage??0).toString();
       }
-    GetAddCourseFilterModel? addCourseFilterModel = await FilterManager().getCourseFilter();
-    if(addCourseFilterModel!=null)
-      {
-        addCourseFilterModel.data?.forEach((data) {
-          switch (data.filterType) {
-            case 'GRADE':
-              data.subFilter!.where((e) => e.name != null).forEach((e) {
-                if (!state.listOfGradeNames!.containsValue(e.name!)) {
-                  state.listOfGradeNames![e.id!] = e.name!;
-                }
-              });
-              break;
-            default:
-              break;
-          }
-        });
-      }
+    FilterInfo? addCourseFilterModel = await FilterManager().getCourseFilter();
+    state.listOfGradeNames = addCourseFilterModel.listOfGradeNames;
     emit(state.copyWith(
       blocStatus: QuestionDetailStatus.initial,
       listOfGradeNames: state.listOfGradeNames,

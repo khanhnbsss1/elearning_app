@@ -28,72 +28,75 @@ class PeriodOfTime extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return SizedBox(
-      width: Dimens.size500,
-      height: Dimens.size40,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Expanded(
-            child: BuildTextField(
-              enableEdit: true,
-              enableHintText: false,
-              suffixIcon: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(Icons.calendar_month,size: Dimens.size25,),
-              ),
-              onTap: () {
-                DateTimePicker.ShowDialogDatePicker(
-                  context: context,
-                  widthOfDialog: Dimens.size500,
-                  calendarDatePicker2Type: CalendarDatePicker2Type.single,
-                  initSingleDate: initStartDate,
-                  onDimissCallBack: (p0, p1) {
-                    if(p1.isNotEmpty)
-                    {
-                      initStartDate = p1.first;
-                      if(onChangeTime!=null )
+    return LayoutBuilder(builder: (context, constraints) {
+      return SizedBox(
+        width: Dimens.size500,
+        height: Dimens.size40,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              child: BuildTextField(
+                enableEdit: true,
+                enableHintText: false,
+                suffixIcon: Padding(
+                  padding: EdgeInsets.all(Dimens.size8),
+                  child: Icon(Icons.calendar_month,size: Dimens.size25,),
+                ),
+                onTap: () {
+                  DateTimePicker.ShowDialogDatePicker(
+                    context: context,
+                    widthOfDialog: Dimens.size500,
+                    calendarDatePicker2Type: CalendarDatePicker2Type.single,
+                    initSingleDate: initStartDate,
+                    onDimissCallBack: (p0, p1) {
+                      if(p1.isNotEmpty)
+                      {
+                        initStartDate = p1.first;
+                        if(onChangeTime!=null )
                         {
                           onChangeTime!(initStartDate,initEndTime );
                         }
-                    }
-                  },
-                );
-              },
-              controller: startTimeController,),
-          ),
-          Gap(Dimens.size16),
-          Expanded(
-            child: BuildTextField(
-              enableEdit: true,
-              enableHintText: false,
-              suffixIcon: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Icon(Icons.calendar_month, size: Dimens.size25,),
-              ),
-              onTap: () {
-                DateTimePicker.ShowDialogDatePicker(
-                  context: context,
-                  widthOfDialog: Dimens.size500,
-                  calendarDatePicker2Type: CalendarDatePicker2Type.single,
-                  initSingleDate: initEndTime,
-                  onDimissCallBack: (p0, p1) {
-                    if(p1.isNotEmpty)
-                    {
-                      initEndTime = p1.first;
-                      if(onChangeTime!=null )
-                      {
-                        onChangeTime!(initStartDate,initEndTime );
                       }
-                    }
-                  },
-                );
-              },
-              controller: endTimeController,),
-          ),
-        ],
-      ),
-    );
+                    },
+                  );
+                },
+                controller: startTimeController,),
+            ),
+            Gap(Dimens.size16),
+            Expanded(
+              child: BuildTextField(
+                enableEdit: true,
+                enableHintText: false,
+                suffixIcon: Padding(
+                  padding:  EdgeInsets.all(Dimens.size8),
+                  child: Icon(Icons.calendar_month, size: Dimens.size25,),
+                ),
+                onTap: () {
+                  DateTimePicker.ShowDialogDatePicker(
+                    context: context,
+                    widthOfDialog: Dimens.size500,
+                    calendarDatePicker2Type: CalendarDatePicker2Type.single,
+                    initSingleDate: initEndTime,
+                    onDimissCallBack: (p0, p1) {
+                      if(p1.isNotEmpty)
+                      {
+                        initEndTime = p1.first;
+                        if(onChangeTime!=null )
+                        {
+                          onChangeTime!(initStartDate,initEndTime );
+                        }
+                      }
+                    },
+                  );
+                },
+                controller: endTimeController,),
+            ),
+          ],
+        ),
+      );
+    },);
+   
   }
 
 

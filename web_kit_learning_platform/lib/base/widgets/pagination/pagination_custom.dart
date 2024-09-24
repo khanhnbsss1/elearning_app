@@ -32,7 +32,7 @@ class PaginationCustom extends FlutterCustomPagination {
       children: [
         super.build(context),
         Visibility(
-            visible: enableTotalElement ?? true,
+            visible: enableTotalElement ?? true && !ResponsiveInfo.isPhone(),
             child: Row(
               children: [
                 Gap(Dimens.size16),

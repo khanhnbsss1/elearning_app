@@ -26,8 +26,8 @@ class ApiName {
   ///course 
   final String createCourse = "/create-course";
   final String updateCourse = "/update-course";
-  final String getCourseList = "/filter-courses";
-  final String getMyCourses = "/get-my-courses";
+  final String getCourseList = "/advanced-filter-courses";
+  final String getMyCourses = "/get-my-courses-v2";
   final String getCourseDetail = "/get-course-detail";
   final String deleteCourse = "/delete-course";
   final String getFilterCourse = "/filter-directory";
@@ -75,9 +75,10 @@ class ApiName {
 
   final String getUserDetail = "/get-user";
   final String getUserList = "/get-user-list";
-  
+  final String getUserListCourses = "/get-user-courses";
 
- /// them tu dien
+
+  /// them tu dien
   final String addVocabulary = "/create-vocabulary";
   final String getListVocabulary = "/get-list";
   final String updateVocabulary = "/update-vocabulary";
@@ -148,6 +149,7 @@ class ApiName {
   final String getCourseRegistrationHistory = "/course-registration-history";///Lịch sử đăng ký khóa học theo khoảng thời gian 
   final String getCourseHistory = "/course-history"; ///Lịch sửa tạo/sửa khóa học theo khoảng thời gian
   final String getRegisterTimePeriod = "/register-time-period"; /// Người đăng ký mới theo khoảng thời gian - 
+  final String courseByRegistrationUser = "/get-registered-courses";///Lịch sử đăng ký khóa học theo khoảng thời gian 
 
   
   final String getRevenueMonth = "/revenue-month";/// Doanh thu  theo các tháng

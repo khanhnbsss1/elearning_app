@@ -56,11 +56,11 @@ class RegisterTimePeriodInfo {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['fullname'] = this.fullname;
-    data['user_name'] = this.userName;
-    data['created_at'] = this.createdAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['fullname'] = fullname;
+    data['user_name'] = userName;
+    data['created_at'] = createdAt;
     return data;
   }
 }

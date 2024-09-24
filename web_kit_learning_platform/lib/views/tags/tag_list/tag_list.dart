@@ -119,7 +119,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
             child: buildTagList(state: state, context: context),
           )),
           SizedBox(height: 8,),
-          Row(
+         /* Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               PaginationCustom(
@@ -147,7 +147,7 @@ class _TagListPageState extends State<TagListPage> with SingleTickerProviderStat
                 goToLastPageIcon: Icons.last_page,
               ),
             ],
-          ),
+          ),*/
         ],
       ),
     );

@@ -10,10 +10,8 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/dashboard_controller.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/my_shadow.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my.dart';
 import 'package:webkit/helpers/widgets/my_card.dart';
 import 'package:webkit/helpers/widgets/my_container.dart';
 import 'package:webkit/helpers/widgets/my_dotted_line.dart';
@@ -130,10 +128,9 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    MyFlexItem(
-                                      child: buildRegisterNewest(),
-                                    ),
-                                    MyFlexItem(
+                                    Expanded(child: buildRegisterNewest()),
+                                    Gap(Dimens.size16),
+                                    Expanded(
                                       child: buildSubscriptionPurchases(),
                                     ),
                                   ],
@@ -412,85 +409,93 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                           MySpacing.height(16),
                           StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) {
                             return LayoutBuilder(builder: (context, constraints) {
-                              return MyContainer.bordered(
-                                paddingAll: 0,
-                                width: constraints.maxWidth,
-                                child: DataTable(
-                                    sortAscending: true,
-                                    columnSpacing: 0,
-                                    onSelectAll: (_) => {},
-                                    headingRowColor: WidgetStatePropertyAll(contentTheme.primary.withAlpha(40)),
-                                    dataRowMaxHeight: 50,
-                                    columns: [
-                                      DataColumn(
-                                        label: SizedBox(
-                                          width: constraints.maxWidth  - Dimens.size270,
-                                          child: MyText.labelLarge(
-                                            L10nX.getStr.course_str,
+                              return DataTable(
+                                  sortAscending: true,
+                                  columnSpacing: 0,
+                                  horizontalMargin: 0,
+                                  onSelectAll: (_) => {},
+                                  headingRowColor: WidgetStatePropertyAll(contentTheme.primary.withAlpha(40)),
+                                  dataRowMaxHeight: 50,
+                                  columns: [
+                                    DataColumn(
+                                      label: SizedBox(
+                                        width: constraints.maxWidth  - Dimens.size300,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                          child: Row(
+                                            children: [
+                                              Expanded(child: Text(L10nX.getStr.course_str,style: TextStyleConstant.textStyleBlack16w400,)),
+                                            ],
                                           ),
-                                        ),
+                                        )
                                       ),
-                                      DataColumn(
-                                        label: SizedBox(
-                                          width: Dimens.size120,
+                                    ),
+                                    DataColumn(
+                                      label: SizedBox(
+                                        width: Dimens.size120,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                           child: Row(
                                             children: [
                                               Expanded(
-                                                child: MyText.labelLarge(
+                                                child:Text(
                                                   L10nX.getStr.revenue,
-                                                ),
+                                                  style: TextStyleConstant.textStyleBlack16w400,)
                                               ),
                                             ],
                                           ),
                                         ),
                                       ),
-                                      DataColumn(
-                                        label: SizedBox(
-                                          width: Dimens.size150,
+                                    ),
+                                    DataColumn(
+                                      label: SizedBox(
+                                        width: Dimens.size150,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                           child: Row(
                                             children: [
                                               Expanded(
-                                                child: MyText.labelLarge(
-                                                  L10nX.getStr.payment_people_number,
-                                                ),
+                                                  child:Text(
+                                                    L10nX.getStr.payment_people_number,
+                                                    maxLines: 2,
+                                                    style: TextStyleConstant.textStyleBlack16w400,)
                                               ),
                                             ],
                                           ),
                                         ),
                                       ),
-                                    ],
-                                    rows: (topCoursesInfoResponseModel?.data??[])
-                                        .mapIndexed(
-                                          (index, data) => DataRow(
-                                        cells: [
-                                          DataCell(
-                                            SizedBox(
-                                              width: constraints.maxWidth  - Dimens.size240,
-                                    
-                                              child: MyText.bodyMedium("${data.courseName}"),
+                                    ),
+                                  ],
+                                  rows: (topCoursesInfoResponseModel?.data??[])
+                                      .mapIndexed(
+                                        (index, data) => DataRow(
+                                      cells: [
+                                        DataCell(
+                                          SizedBox(
+                                            width: constraints.maxWidth  - Dimens.size270,
+                                            child: Expanded(child: MyText.bodyMedium("${data.courseName}")),
+                                          ),
+                                        ),
+                                        DataCell(
+                                          SizedBox(
+                                            width: Dimens.size120,
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              children: [
+                                                Expanded(child: MyText.bodyMedium("${data.totalUser}", textAlign: TextAlign.start,)),
+                                              ],
                                             ),
                                           ),
-                                          DataCell(
-                                            SizedBox(
-                                              width: Dimens.size120,
-                                              child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Expanded(child: MyText.bodyMedium("${data.totalUser}", textAlign: TextAlign.start,)),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          DataCell(
-                                            SizedBox(
-                                                width: Dimens.size120,
-                                                child: MyText.bodyMedium("${data.totalAmount}")),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                        .toList()),
-                              );
+                                        ),
+                                        DataCell(
+                                          SizedBox(
+                                              width: Dimens.size150,
+                                              child: Expanded(child: MyText.bodyMedium("${data.totalAmount}"))),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                      .toList());
                             },);
                           },
                           )
@@ -705,12 +710,6 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                           fontWeight: 600,
                         ),
                       ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            LucideIcons.moveRight,
-                            size: 20,
-                          ))
                     ],
                   ),
                   MySpacing.height(16),
@@ -785,12 +784,6 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                             fontWeight: 600,
                           ),
                         ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              LucideIcons.moveRight,
-                              size: 20,
-                            ))
                       ],
                     ),
                     MySpacing.height(16),
@@ -1048,7 +1041,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
           children: [
             MyText.bodyLarge(
               price,
-              fontSize: 20,
+              fontSize: Dimens.size20,
               fontWeight: 600,
               muted: true,
             ),

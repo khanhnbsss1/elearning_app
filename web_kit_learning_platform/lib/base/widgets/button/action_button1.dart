@@ -36,7 +36,7 @@ class ActionButton1 extends StatelessWidget {
         this.preIcon,
       this.enable}) {
     enableBgColor ??= ColorConst.buttonbgColor;
-    textStype ??= TextStyleConstant.textStyleBlack16w600.copyWith(color: ColorConst.whiteColor);
+    textStype ??= TextStyleConstant.textStyleBlack14w600.copyWith(color: ColorConst.whiteColor);
     radius ??= Dimens.size16;
     height ??= Dimens.size40;
     enable ??= true;

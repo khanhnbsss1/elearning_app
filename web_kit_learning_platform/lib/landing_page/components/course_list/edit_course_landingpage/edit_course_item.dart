@@ -240,7 +240,7 @@ class EditCourseItemPageState extends State<EditCourseItemPage> with UIMixin {
             ActionButton1(
               text: L10nX.getStr.close,
               enableBgColor: ColorConst.whiteColor,
-              textStype: TextStyleConstant.textStyleBlack16w600,
+              textStype: TextStyleConstant.textStyleBlack14w600,
               onTap: () {
                 Navigator.of(context).pop();
               },
