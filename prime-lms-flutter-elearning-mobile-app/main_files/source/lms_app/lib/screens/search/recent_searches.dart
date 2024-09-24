@@ -19,7 +19,10 @@ class RecentSearches extends ConsumerWidget with SearchMixin {
         children: [
           Text(
             'recent-searches',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.bold),
           ).tr(),
           const SizedBox(
             height: 15,
@@ -31,14 +34,17 @@ class RecentSearches extends ConsumerWidget with SearchMixin {
                   (e) => ListTile(
                     contentPadding: const EdgeInsets.all(0),
                     title: Text(e),
-                    leading: const Icon(CupertinoIcons.time, color: Colors.blueGrey),
+                    leading:
+                        const Icon(CupertinoIcons.time, color: Colors.blueGrey),
                     trailing: IconButton(
                       icon: const Icon(FeatherIcons.delete, size: 20),
                       onPressed: () => removeFromSearchList(value: e, ref: ref),
                     ),
                     onTap: () {
                       ref.read(searchTextCtlrProvider).text = e;
-                      ref.read(searchStartedProvider.notifier).update((state) => true);
+                      ref
+                          .read(searchStartedProvider.notifier)
+                          .update((state) => true);
                     },
                   ),
                 )

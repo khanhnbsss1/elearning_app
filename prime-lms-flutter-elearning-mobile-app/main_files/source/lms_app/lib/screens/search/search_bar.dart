@@ -5,7 +5,7 @@ import 'package:lms_app/mixins/search_mixin.dart';
 import 'package:lms_app/screens/search/search_view.dart';
 import 'package:lms_app/utils/snackbars.dart';
 
-class SearchAppBar extends ConsumerWidget with SearchMixin{
+class SearchAppBar extends ConsumerWidget with SearchMixin {
   const SearchAppBar({super.key, required this.searchTextCtlr});
 
   final TextEditingController searchTextCtlr;
@@ -35,11 +35,13 @@ class SearchAppBar extends ConsumerWidget with SearchMixin{
               ),
               onPressed: () {
                 searchTextCtlr.clear();
-                ref.read(searchStartedProvider.notifier).update((state) => false);
+                ref
+                    .read(searchStartedProvider.notifier)
+                    .update((state) => false);
               }),
         ),
         textInputAction: TextInputAction.search,
-        onFieldSubmitted: (value) async{
+        onFieldSubmitted: (value) async {
           if (value == '' || value.isEmpty) {
             openSnackbar(context, 'Type something!');
           } else {

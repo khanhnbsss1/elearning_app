@@ -22,7 +22,9 @@ class SearchedCourses extends ConsumerWidget {
         child: Text(error.toString()),
       ),
       data: (courses) {
-        if (courses!.isEmpty) return EmptyAnimation(animationString: emptyAnimation, title: 'no-course'.tr());
+        if (courses!.isEmpty)
+          return EmptyAnimation(
+              animationString: emptyAnimation, title: 'no-course'.tr());
         return ListView.separated(
           padding: const EdgeInsets.all(20),
           itemCount: courses.length,

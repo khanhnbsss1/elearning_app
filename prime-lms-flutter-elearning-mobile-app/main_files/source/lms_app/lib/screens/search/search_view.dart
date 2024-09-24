@@ -11,13 +11,15 @@ import 'package:lms_app/utils/empty_icon.dart';
 
 import '../../services/apis/course/course_detail/models/course_detail_model.dart';
 
-final searchTextCtlrProvider = Provider.autoDispose((ref) => TextEditingController());
+final searchTextCtlrProvider =
+    Provider.autoDispose((ref) => TextEditingController());
 final searchStartedProvider = StateProvider.autoDispose<bool>((ref) => false);
 final recentSearchDataProvider = StateProvider<List<String>>((ref) => []);
 
-final searchedCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>?>((ref) async {
+final searchedCoursesProvider =
+    FutureProvider.autoDispose<List<CourseInfo>?>((ref) async {
   final value = ref.watch(searchTextCtlrProvider).text;
-  final allCourses = await ApiService().getAllCourses(keyword: value??"");
+  final allCourses = await ApiService().getAllCourses(keyword: value ?? "");
   return allCourses;
 });
 
@@ -37,7 +39,8 @@ class SearchScreen extends ConsumerWidget {
         if (recentSearchList.isNotEmpty) {
           return const RecentSearches();
         } else {
-          return EmptyPageWithIcon(icon: FeatherIcons.search, title: 'search-course'.tr());
+          return EmptyPageWithIcon(
+              icon: FeatherIcons.search, title: 'search-course'.tr());
         }
       }
     }
