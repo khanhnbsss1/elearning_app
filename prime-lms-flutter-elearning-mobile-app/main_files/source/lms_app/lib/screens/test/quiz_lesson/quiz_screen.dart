@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/base/widgets/common/alert_dialog/loading.export.dart';
+import 'package:lms_app/screens/curricullam_screen.dart';
+import 'package:lms_app/screens/tabs/my_courses_tab/my_courses_tab.dart';
 import 'package:lms_app/screens/test/count_down_clock.dart';
 import 'package:lms_app/screens/test/quiz_lesson/question_tile.dart';
 import 'package:lms_app/screens/test/quiz_lesson/quiz_complete.dart';
@@ -11,6 +13,8 @@ import 'package:lms_app/services/apis/scores/create_score_api.dart';
 import 'package:lms_app/services/apis/test/models/test_detail.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import 'package:lms_app/utils/snackbars.dart';
+import 'package:material_dialogs/dialogs.dart';
+import 'package:material_dialogs/widgets/buttons/icon_outline_button.dart';
 import '../../../base/image_manager/images_constant.dart';
 import '../../../services/apis/scores/models/score_info.dart';
 import '../../../services/apis/scores/models/score_result.dart';
@@ -60,13 +64,13 @@ class _QuizLessonState extends ConsumerState<QuizLesson> {
           leading: IconButton(
             icon: const Icon(Icons.close, color: Colors.white,),
             onPressed: () {
-              Navigator.pop(context);
+              quitTestDialog(context);
             },
           ),
           title: Text('${widget.test.name}', style: const TextStyle(color: Colors.white),),
           actions: [
             CountDownClock(
-                endTime: Duration(seconds: int.parse((widget.test.durian != "0" && widget.test.durian != null) ? widget.test.durian! : "600")),
+                endTime: Duration(minutes: int.parse((widget.test.durian != "0" && widget.test.durian != null) ? widget.test.durian! : "15")),
                 timeOut: () {
                   _onNextBtnPressed(context, 0, questions.length + 1, questions, ref, pageController);
                 },
@@ -158,5 +162,37 @@ class _QuizLessonState extends ConsumerState<QuizLesson> {
     ));
     ScoreResultInfo? result = await createScoreApi.call();
     return result ?? ScoreResultInfo();
+  }
+
+  Future<void> quitTestDialog(BuildContext context) {
+    return Dialogs.materialDialog(
+      context: context,
+      title: 'quit-test-title'.tr(),
+      msg: 'quit-test-subtitle'.tr(),
+      titleAlign: TextAlign.center,
+      titleStyle: Theme.of(context).textTheme.titleLarge!,
+      msgAlign: TextAlign.center,
+      msgStyle: Theme.of(context).textTheme.titleMedium,
+      barrierDismissible: true,
+      color: Theme.of(context).scaffoldBackgroundColor,
+      actions: <Widget>[
+        IconsOutlineButton(
+          onPressed: () => Navigator.pop(context),
+          text: 'close'.tr(),
+          textStyle:
+          const TextStyle(fontWeight: FontWeight.w600, color: Colors.black),
+        ),
+        IconsOutlineButton(
+          onPressed: () {
+            Navigator.pop(context);
+            Navigator.pop(context);
+          },
+          text: 'confirm'.tr(),
+          color: Theme.of(context).primaryColor,
+          textStyle:
+          const TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
+        ),
+      ],
+    );
   }
 }

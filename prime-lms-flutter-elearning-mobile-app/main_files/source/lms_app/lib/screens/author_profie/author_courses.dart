@@ -9,6 +9,7 @@ import '../../models/user/UserProfile.dart';
 import '../../services/api_service.dart';
 import '../../services/apis/course/course_detail/models/course_detail_model.dart';
 import '../../services/apis/teacher_list/models/landing_page_teacher_list_model.dart';
+import '../../services/apis/teacher_list/models/teacher_model.dart';
 import '../../utils/loading_widget.dart';
 import '../../utils/next_screen.dart';
 import '../all_courses.dart/courses_view.dart';
@@ -20,13 +21,13 @@ final authorCoursesProvider = FutureProvider.autoDispose.family<List<CourseInfo>
 });
 
 class AuthorCourses extends ConsumerWidget {
-  const AuthorCourses({super.key, required this.user});
+  const AuthorCourses({super.key, required this.teacherDetail});
 
-  final LandingPageUserInfo user;
+  final TeacherDetail teacherDetail;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authorCourses = ref.watch(authorCoursesProvider(user.id!));
+    final authorCourses = ref.watch(authorCoursesProvider(teacherDetail.id!));
     return authorCourses.when(
       data: (courses) {
         return Column(
@@ -51,8 +52,8 @@ class AuthorCourses extends ConsumerWidget {
                       AllCoursesView(
                         filter: 'Author',
                         subFilterInfo: SubFilterInfo(
-                          id: user.id,
-                          name: user.fullname,
+                          id: teacherDetail.id,
+                          name: teacherDetail.fullName,
                         ),
                       )),
                   // onPressed: (){},

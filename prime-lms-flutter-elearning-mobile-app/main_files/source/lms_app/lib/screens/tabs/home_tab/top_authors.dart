@@ -11,12 +11,12 @@ import 'package:lms_app/utils/next_screen.dart';
 
 import '../../../models/user/UserProfile.dart';
 import '../../../services/apis/teacher_list/models/landing_page_teacher_list_model.dart';
+import '../../../services/apis/teacher_list/models/teacher_model.dart';
 import '../../../theme/theme_provider.dart';
 
 final topAuthorsProvider =
-    FutureProvider.autoDispose<List<LandingPageUserInfo>?>((ref) async {
-  final List<LandingPageUserInfo>? teacherList =
-      await ApiService().getTopAuthors();
+    FutureProvider.autoDispose<List<TeacherDetail>>((ref) async {
+  final List<TeacherDetail> teacherList = await ApiService().getTopAuthors1();
   return teacherList;
 });
 
@@ -30,7 +30,7 @@ class TopAuthors extends ConsumerWidget {
     return authors.when(
         skipLoadingOnRefresh: false,
         data: (data) {
-          return (data!.isNotEmpty)
+          return (data.isNotEmpty)
               ? Padding(
                   padding: const EdgeInsets.only(right: 20),
                   child: Column(
@@ -52,7 +52,7 @@ class TopAuthors extends ConsumerWidget {
                             )),
                             TextButton(
                               onPressed: () => NextScreen.normal(
-                                  context, const AllAuthors()),
+                                  context, AllAuthors()),
                               style: TextButton.styleFrom(
                                   padding: const EdgeInsets.all(0)),
                               child: Text(
@@ -73,7 +73,7 @@ class TopAuthors extends ConsumerWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: data.map((user) {
-                            return AuthorCard(user: user, isDarkMode: isDarkMode,);
+                            return AuthorCard(teacherDetail: user, isDarkMode: isDarkMode,);
                           }).toList(),
                         ),
                       )

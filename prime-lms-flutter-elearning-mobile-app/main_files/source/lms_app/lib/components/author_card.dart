@@ -9,18 +9,19 @@ import 'package:lms_app/utils/next_screen.dart';
 import '../models/user/UserProfile.dart';
 import '../screens/author_profie/author_profile.dart';
 import '../services/apis/teacher_list/models/landing_page_teacher_list_model.dart';
+import '../services/apis/teacher_list/models/teacher_model.dart';
 
 class AuthorCard extends StatelessWidget {
-  final LandingPageUserInfo user;
+  final TeacherDetail teacherDetail;
   final bool isDarkMode;
 
-  const AuthorCard({super.key, required this.user, required this.isDarkMode});
+  const AuthorCard({super.key, required this.teacherDetail, required this.isDarkMode});
 
   @override
   Widget build(BuildContext context) {
     // final String jobTitle = user.authorInfo?.jobTitle ?? '';
     // final int students = user.authorInfo?.students ?? 0;
-    // final String bio = user.authorInfo?.bio ?? '';
+    teacherDetail.bio = teacherDetail.bio ?? "Giáo viên ${teacherDetail.fullName} giàu kinh nghiệm, tận tâm khơi dậy tiềm năng của học sinh. Đam mê tạo ra các bài học hấp dẫn và nuôi dưỡng tình yêu học tập trong môi trường lớp học hỗ trợ.";
 
     return Container(
       width: MediaQuery.of(context).size.width * 0.75,
@@ -41,7 +42,7 @@ class AuthorCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              UserAvatar(imageUrl: user.avatar, radius: 40),
+              UserAvatar(imageUrl: teacherDetail.avatar, radius: 40),
               const SizedBox(
                 width: 15,
               ),
@@ -49,7 +50,7 @@ class AuthorCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(user.fullname ?? "-",
+                    Text(teacherDetail.fullName ?? "-",
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -61,7 +62,7 @@ class AuthorCard extends StatelessWidget {
                             color: Colors.black,
                         )),
                     Text(
-                      user.position ?? "-",
+                      teacherDetail.position ?? "-",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -79,24 +80,28 @@ class AuthorCard extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          Text(
-            'total-lectures',
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                // color: (isDarkMode != true) ? Colors.black : Colors.white),
-                color: Colors.black,
-            ),
-          ).tr(args: [user.id.toString()]),
+          Row(
+            children: [
+              Text(
+                'courses-str',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    // color: (isDarkMode != true) ? Colors.black : Colors.white),
+                    color: Colors.black,
+                ),
+              ).tr(args: ['${teacherDetail.totalCourse??2} ',]),
+            ],
+          ),
           const SizedBox(
             height: 10,
           ),
-          // Text(
-          //   bio,
-          //   maxLines: 3,
-          //   overflow: TextOverflow.ellipsis,
-          //   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-          //         color: AppService.isDarkMode(context) ? CustomColor.paragraphColorDark : CustomColor.paragraphColor,
-          //       ),
-          // ),
+          Text(
+            teacherDetail.bio??"",
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppService.isDarkMode(context) ? CustomColor.paragraphColorDark : CustomColor.paragraphColor,
+                ),
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 15),
             child: OutlinedButton(
@@ -104,7 +109,7 @@ class AuthorCard extends StatelessWidget {
                     elevation: 0,
                     side: BorderSide(color: Theme.of(context).primaryColor)),
                 onPressed: () =>
-                    NextScreen.iOS(context, AuthorProfile(user: user)),
+                    NextScreen.iOS(context, AuthorProfile(teacherDetail: teacherDetail)),
                 // onPressed: () {},
                 child: Text(
                   'view-profile',

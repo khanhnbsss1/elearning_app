@@ -438,7 +438,7 @@ class _TestDetailDialogState extends State<TestDetailDialog> {
                     onTap: () {
                         Navigator.pop(context);
                         List<QuestionInfo>? questions = widget.test.quizs;
-                        NextScreen.replace(
+                        NextScreen.normal(
                             context,
                             QuizLesson(
                               questions: questions,
@@ -480,14 +480,14 @@ class _TestDetailDialogState extends State<TestDetailDialog> {
           onPressed: () {
             Navigator.pop(context);
             List<QuestionInfo>? questions = widget.test.quizs;
-            NextScreen.replace(
+            Navigator.push(
                 context,
-                QuizLesson(
+                MaterialPageRoute(builder: (context) => QuizLesson(
                   questions: questions,
                   test: widget.test,
                   courseId: widget.courseId,
                   lectureId: widget.lectureId,
-                ));
+                )));
           },
           text: 'yes'.tr(),
           color: Theme.of(context).primaryColor,

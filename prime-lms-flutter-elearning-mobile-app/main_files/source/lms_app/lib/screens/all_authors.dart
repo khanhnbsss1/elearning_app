@@ -5,73 +5,69 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/loading_list_tile.dart';
 import 'package:lms_app/models/user_model.dart';
 import 'package:lms_app/screens/author_profie/author_profile.dart';
+import 'package:lms_app/screens/tabs/home_tab/top_authors.dart';
 import 'package:lms_app/services/api_service.dart';
 import 'package:lms_app/utils/next_screen.dart';
 
 import '../components/user_avatar.dart';
 import '../models/user/UserProfile.dart';
 import '../services/apis/teacher_list/models/landing_page_teacher_list_model.dart';
-
-final authorsProvider = FutureProvider.autoDispose((ref) async {
-  final List<LandingPageUserInfo>? authors = await ApiService().getTopAuthors();
-  return authors??[];
-});
+import '../services/apis/teacher_list/models/teacher_model.dart';
+import '../utils/loading_widget.dart';
 
 class AllAuthors extends ConsumerWidget {
-  const AllAuthors({super.key});
+  const AllAuthors();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authorsRef = ref.watch(authorsProvider);
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('all-Instructors').tr(),
-      ),
-      body: authorsRef.when(
-        data: (authors) {
-          return ListView.separated(
-            padding: const EdgeInsets.all(20),
-            itemCount: authors.length,
-            separatorBuilder: (BuildContext context, int index) => const Divider(height: 50),
-            itemBuilder: (BuildContext context, int index) {
-              final LandingPageUserInfo author = authors[index];
-              return InkWell(
-                onTap: () => NextScreen.iOS(context, AuthorProfile(user: author)),
-                child: Row(
-                  children: [
-                    UserAvatar(imageUrl: author.avatar, radius: 60, iconSize: 40),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(author.fullname.toString(), style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
-                            Visibility(
-                              visible: author.position != null,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 3),
-                                child: Text(
-                                  author.position ?? '',
-                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blueGrey),
-                                ),
+    final authors = ref.watch(topAuthorsProvider);
+    return authors.when(data: (teacherDetailList){
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('all-Instructors').tr(),
+        ),
+        body: ListView.separated(
+          padding: const EdgeInsets.all(20),
+          itemCount: teacherDetailList.length,
+          separatorBuilder: (BuildContext context, int index) => const Divider(height: 50),
+          itemBuilder: (BuildContext context, int index) {
+            final TeacherDetail teacherDetail = teacherDetailList[index];
+            return InkWell(
+              onTap: () => NextScreen.iOS(context, AuthorProfile(teacherDetail: teacherDetail)),
+              child: Row(
+                children: [
+                  UserAvatar(imageUrl: teacherDetail.avatar, radius: 60, iconSize: 40),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(teacherDetail.fullName.toString(), style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                          Visibility(
+                            visible: teacherDetail.position != null,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 3),
+                              child: Text(
+                                teacherDetail.position ?? '',
+                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blueGrey),
                               ),
                             ),
-                            Text('${0} Students')
-                          ],
-                        ),
+                          ),
+                          Text('courses-str').tr(args: ['${teacherDetail.totalCourse??2} ' ])
+                        ],
                       ),
                     ),
-                    const Icon(FeatherIcons.chevronRight),
-                  ],
-                ),
-              );
-            },
-          );
-        },
-        loading: () => const LoadingListTile(height: 130),
-        error: (error, stackTrace) => Center(child: Text(error.toString())),
-      ),
-    );
+                  ),
+                  const Icon(FeatherIcons.chevronRight),
+                ],
+              ),
+            );
+          },
+        ),
+      );
+    },
+    error: (error, stackTrace) => Text('error: $error'),
+    loading: () => const LoadingIndicatorWidget());
   }
 }

@@ -26,7 +26,7 @@ class TestListScreen extends StatefulWidget {
 class _TestListScreenState extends State<TestListScreen> {
 
   List<TestInfo> testList = [];
-  TestScoreList testScoreList = TestScoreList();
+  List<TestScore> testScoreList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,11 +43,11 @@ class _TestListScreenState extends State<TestListScreen> {
         ),
       ),
       body: FutureBuilder(
-        future: Future.wait([getTestList()]),
+        future: Future.wait([getTestList(),getScoreList()]),
         builder: (context,AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.hasData) {
-            // testScoreList = snapshot.data![0];
             testList = snapshot.data![0];
+            // testScoreList = snapshot.data![1];
             return ListView.separated(
                 padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 itemCount: testList.length,
@@ -79,7 +79,12 @@ class _TestListScreenState extends State<TestListScreen> {
                       ListTile(
                         onTap: () => openDialog(context),
                         // onTap: () {},
-                        title: Text('${'type-test'.tr()} ${testList[index].typeTest??"-"}'),
+                        title: Column(
+                          children: [
+                            Text('${'type-test'.tr()} ${testList[index].typeTest??"-"}'),
+                            // Text('${point}'),
+                          ],
+                        ),
                         // subtitle: Text('$point'),
                       )
                     ],
@@ -97,17 +102,17 @@ class _TestListScreenState extends State<TestListScreen> {
     );
   }
 
-  List<dynamic> getPointFromTestScoreId(TestScoreList testScoreList, dynamic id) {
-    List<dynamic> list = [];
-      if (testScoreList.list != null) {
-        for (TestScore testScore in testScoreList.list!) {
-          if (testScore.testId == id) {
-            list.add(testScore.point);
-          }
-        }
-      }
-    return list;
-  }
+  // List<dynamic> getPointFromTestScoreId(List<TestScore> testScoreList, dynamic id) {
+  //   List<dynamic> list = [];
+  //     if (testScoreList.list != null) {
+  //       for (TestScore testScore in testScoreList.list!) {
+  //         if (testScore.testId == id) {
+  //           list.add(testScore.point);
+  //         }
+  //       }
+  //     }
+  //   return list;
+  // }
 
   Future<List<TestInfo>> getTestList() async {
     GetTestListApi getTestListApi = GetTestListApi(searchCommonRequest: SearchCommonRequest(pageSize: 100, pageNumber: 0,));
@@ -115,9 +120,9 @@ class _TestListScreenState extends State<TestListScreen> {
     return testListResponseModel.content??[];
   }
 
-  Future<TestScoreList> getScoreList() async {
+  Future<List<TestScore>> getScoreList() async {
     GetScoreApi getScoreApi = GetScoreApi();
-    TestScoreList testScoreList = await getScoreApi.call();
+    List<TestScore> testScoreList = await getScoreApi.call();
     return testScoreList;
   }
 

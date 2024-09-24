@@ -42,6 +42,7 @@ import 'apis/rating/get_rating_list.dart';
 import 'apis/rating/models/rating_info.dart';
 import 'apis/teacher_list/get_teacher_lt.dart';
 import 'apis/teacher_list/models/landing_page_teacher_list_model.dart';
+import 'apis/teacher_list/models/teacher_model.dart';
 import 'apis/test/get_test_detail.dart';
 import 'apis/test/models/test_detail.dart';
 import 'apis/vocabulary/vocabulary_list/models/vocabulary_models.dart';
@@ -395,11 +396,10 @@ class ApiService {
     return list;
   }
 
-  Future<List<LandingPageUserInfo>?> getTopAuthors1() async {
-    GetTeacherList getTeacherList = GetTeacherList(searchCommonRequest: SearchCommonRequest(
-    ));
-    List<LandingPageUserInfo>? list = await getTeacherList.call();
-    return list;
+  Future<List<TeacherDetail>> getTopAuthors1() async {
+    GetTeacherList getTeacherList = GetTeacherList();
+    List<TeacherDetail>? list = await getTeacherList.call();
+    return list??[];
   }
 
   Future<List<UserProfile>> getAllAuthors() async {

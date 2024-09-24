@@ -3,34 +3,29 @@
 import '../../../../base/base_request_elearning/BaseApiRequest.dart';
 import '../../../base/base_request_elearning/models/search_common_request.dart';
 import 'models/teacher_list_model.dart';
+import 'models/teacher_model.dart';
 
 class GetTeacherList extends BaseApiRequest {
-  SearchCommonRequest searchCommonRequest;
-  GetTeacherList({required this.searchCommonRequest}):super(
+  GetTeacherList():super(
     serviceType: SERVICE_TYPE.USER,
-    apiName: ApiName.getInstance().getUserList,
+    apiName: ApiName.getInstance().getTeacher,
   );
 
-  Future<dynamic> call() async {
+  Future<List<TeacherDetail>> call() async {
     await getAuthorization();
     dynamic result = await getRequestAPI();
     if(result.runtimeType == ResponseCommon)
     {
-      return TeacherListModel(data: []);
+      return [];
     }
     else
     {
-      TeacherListModel teacherListModel = TeacherListModel.fromJsonList(result);
-      return teacherListModel.data;
+      TeacherDetailModel teacherListModel = TeacherDetailModel.fromJsonList(result);
+      return teacherListModel.data??[];
     }
-
-
-
-
   }
 
   Future<void> getAuthorization() async {
-    await setApiBody(searchCommonRequest.toJson());
   }
 
   @override

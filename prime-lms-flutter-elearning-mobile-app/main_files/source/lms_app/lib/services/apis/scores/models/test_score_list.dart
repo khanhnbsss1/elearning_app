@@ -1,3 +1,41 @@
+import '../../../../base/base_request_elearning/models/page_model.dart';
+
+class TestScoreListModel extends PageModel{
+  List<TestScore>? content;
+  TestScoreListModel({super.total, super.pageSize, super.pageNumber, this.content});
+  TestScoreListModel.fromJson(Map<String, dynamic> json) {
+    total = json['total'];
+    pageSize = json['pageSize'];
+    pageNumber = json['pageNumber'];
+    if (json['content'] != null) {
+      content = <TestScore>[];
+      json['content'].forEach((v) {
+        content!.add(new TestScore.fromJson(v));
+      });
+    }
+  }
+
+  TestScoreListModel.fromList( dynamic json) {
+    if (json!= null) {
+      content = <TestScore>[];
+      json.forEach((v) {
+        content!.add(new TestScore.fromJson(v));
+      });
+    }
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['total'] = total;
+    data['pageSize'] = pageSize;
+    data['pageNumber'] = pageNumber;
+    if (content != null) {
+      data['content'] = content!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+
+}
+
 class TestScoreList {
   List<TestScore>? list;
 
@@ -16,10 +54,14 @@ class TestScoreList {
 class TestScore {
   int? id;
   int? userId;
+  int? courseId;
+  int? lectureId;
   int? totalRight;
   int? total;
   int? testId;
+  int? totalNumberTest;
   dynamic point;
+  String? typeTest;
   String? createdAt;
   String? updatedAt;
   String? createdBy;
@@ -32,6 +74,7 @@ class TestScore {
 
   TestScore({this.id,
     this.userId,
+    this.lectureId,
     this.totalRight,
     this.total,
     this.testId,
@@ -62,6 +105,10 @@ class TestScore {
     lectureName = json['lecture_name'];
     language = json['language'];
     testName = json['test_name'];
+    typeTest = json['type_test'];
+    lectureId = json['lecture_id'];
+    courseId = json['course_id'];
+    totalNumberTest = json['totalNumberTest'];
   }
 
   Map<String, dynamic> toJson() {

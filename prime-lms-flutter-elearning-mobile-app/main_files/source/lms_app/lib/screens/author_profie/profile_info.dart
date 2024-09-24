@@ -5,15 +5,17 @@ import '../../components/user_avatar.dart';
 import '../../models/user_model.dart';
 import '../../models/user/UserProfile.dart';
 import '../../services/apis/teacher_list/models/landing_page_teacher_list_model.dart';
+import '../../services/apis/teacher_list/models/teacher_model.dart';
 import '../../services/app_service.dart';
+import 'count_info.dart';
 
 class AuthorProfileInfo extends StatelessWidget {
   const AuthorProfileInfo({
     super.key,
-    required this.user,
+    required this.teacherDetail,
   });
 
-  final LandingPageUserInfo user;
+  final TeacherDetail teacherDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -24,70 +26,116 @@ class AuthorProfileInfo extends StatelessWidget {
       child: Column(
         children: [
           UserAvatar(
-            imageUrl: user.avatar,
+            imageUrl: teacherDetail.avatar,
             radius: 100,
             iconSize: 60,
           ),
           const SizedBox(height: 10),
           Text(
-            user.fullname??"-",
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600, color: Colors.white),
+            teacherDetail.fullName ?? "-",
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.w600, color: Colors.white),
           ),
           const SizedBox(height: 8),
           Text(
-            user.position??"-",
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white),
+            teacherDetail.position ?? "-",
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(color: Colors.white),
           ),
           const SizedBox(height: 20),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Visibility(
-              //   visible: user.authorInfo != null && user.authorInfo?.website != null,
+              EnableDisableWidget(
+                isEnabled: teacherDetail.website != null,
+                child: CircleAvatar(
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  child: IconButton(
+                    icon: Icon(
+                      FontAwesomeIcons.globe,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    onPressed: () => AppService()
+                        .openLink(teacherDetail.website ?? "https://www.google.com/"),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              EnableDisableWidget(
+                isEnabled: teacherDetail.facebook != null,
+                // visible: true,
+                child: CircleAvatar(
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  child: IconButton(
+                    icon: Icon(
+                      FontAwesomeIcons.facebook,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    onPressed: () => AppService()
+                        .openLink(teacherDetail.facebook ?? "https://www.facebook.com/"),
+                  ),
+                ),
+              ),
+              // const SizedBox(width: 15),
+              // EnableDisableWidget(
+              //   isEnabled: user.twitter != null,
+              //   // visible: true,
               //   child: CircleAvatar(
               //     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               //     child: IconButton(
               //       icon: Icon(
-              //         FontAwesomeIcons.globe,
+              //         FontAwesomeIcons.xTwitter,
               //         color: Theme.of(context).primaryColor,
               //       ),
-              //       onPressed: () => AppService().openLink(user.authorInfo!.website!),
+              //       onPressed: () => AppService()
+              //           .openLink(user.twitter ?? "https://x.com/?lang=vi"),
               //     ),
               //   ),
               // ),
-              SizedBox(width: 15),
-              // Visibility(
-              //   visible: user.authorInfo != null && user.authorInfo?.fb != null,
-              //   child: CircleAvatar(
-              //     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              //     child: IconButton(
-              //       icon: Icon(
-              //         FontAwesomeIcons.facebook,
-              //         color: Theme.of(context).primaryColor,
-              //       ),
-              //       onPressed: () => AppService().openLink(user.authorInfo!.fb!),
-              //     ),
-              //   ),
-              // ),
-              SizedBox(width: 15),
-              // Visibility(
-              //   visible: user.authorInfo != null && user.authorInfo?.twitter != null,
-              //   child: CircleAvatar(
-              //     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              //     child: IconButton(
-              //       icon: Icon(
-              //         FontAwesomeIcons.twitter,
-              //         color: Theme.of(context).primaryColor,
-              //       ),
-              //       onPressed: () => AppService().openLink(user.authorInfo!.twitter!),
-              //     ),
-              //   ),
-              // ),
+              const SizedBox(width: 15),
+              EnableDisableWidget(
+                isEnabled: teacherDetail.youtube != null,
+                // visible: true,
+                child: CircleAvatar(
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  child: IconButton(
+                    icon: Icon(
+                      FontAwesomeIcons.youtube,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    onPressed: () => AppService()
+                        .openLink(teacherDetail.youtube ?? "https://www.youtube.com/"),
+                  ),
+                ),
+              ),
             ],
-          )
+          ),
         ],
       ),
     );
+  }
+}
+
+class EnableDisableWidget extends StatelessWidget {
+  final bool isEnabled;
+  final Widget child;
+
+  const EnableDisableWidget({super.key, required this.isEnabled, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return isEnabled
+        ? child
+        : Opacity(
+            opacity: 0.6,
+            child: IgnorePointer(
+              child: child,
+            ),
+          );
   }
 }

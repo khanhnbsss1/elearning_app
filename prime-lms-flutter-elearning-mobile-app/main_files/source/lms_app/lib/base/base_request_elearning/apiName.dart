@@ -61,6 +61,7 @@ class ApiName {
   final String getUserDetail = "/get-user";
   final String updatePassword = "/update-password";
   final String getUserList = "/get-user-list";
+  final String getTeacher = "/get-teacher";
   final String deleteAccount = "/delete-account";
 
   /// them tu dien

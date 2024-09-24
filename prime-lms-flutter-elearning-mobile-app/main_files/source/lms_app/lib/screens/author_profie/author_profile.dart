@@ -8,6 +8,7 @@ import 'package:lms_app/services/apis/teacher_list/models/synthesisInfo.dart';
 import 'package:lms_app/services/apis/teacher_list/teacher_list/get_data_synthesis_api.dart';
 import '../../models/user/UserProfile.dart';
 import '../../services/apis/teacher_list/models/landing_page_teacher_list_model.dart';
+import '../../services/apis/teacher_list/models/teacher_model.dart';
 import '../../theme/theme_provider.dart';
 import 'author_courses.dart';
 import 'count_info.dart';
@@ -24,9 +25,9 @@ final authorCoursesCountProvider = FutureProvider.family.autoDispose<int, String
 });
 
 class AuthorProfile extends ConsumerWidget {
-  const AuthorProfile({super.key, required this.user});
+  const AuthorProfile({super.key, required this.teacherDetail});
 
-  final LandingPageUserInfo user;
+  final TeacherDetail teacherDetail;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,40 +54,36 @@ class AuthorProfile extends ConsumerWidget {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                AuthorProfileInfo(user: user,),
+                AuthorProfileInfo(teacherDetail: teacherDetail,),
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 25),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const AuthorCountInfo(students: 20, courseCount: 20, reviewsCount: 20),
+                      AuthorCountInfo(students: teacherDetail.totalStudent??20, courseCount: teacherDetail.totalCourse??2, reviewsCount: teacherDetail.totalReview??20,),
                       const SizedBox(height: 40),
-                      InkWell(
-                        // onTap: () => getData(),
-                        onTap: () {},
-                        child: Text(
-                          'about-me',
-                          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-                        ).tr(),
-                      ),
+                      Text(
+                        'about-me',
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                      ).tr(),
                       const SizedBox(height: 10),
-                      // Text(
-                      //   bio,
-                      //   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      //         height: 1.7,
-                      //         fontWeight: FontWeight.normal,
-                      //         fontSize: 16,
-                      //         color: isDarkMode ? CustomColor.paragraphColorDark : CustomColor.paragraphColor,
-                      //       ),
-                      // ),
-                      // const SizedBox(height: 40),
+                      Text(
+                        teacherDetail.bio??"",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              height: 1.7,
+                              fontWeight: FontWeight.normal,
+                              fontSize: 16,
+                              color: isDarkMode ? CustomColor.paragraphColorDark : CustomColor.paragraphColor,
+                            ),
+                      ),
+                      const SizedBox(height: 40),
                       Text(
                         'my-courses',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                       ).tr(),
                       const SizedBox(height: 10),
                       AuthorCourses(
-                        user: user,
+                        teacherDetail: teacherDetail,
                       ),
                     ],
                   ),

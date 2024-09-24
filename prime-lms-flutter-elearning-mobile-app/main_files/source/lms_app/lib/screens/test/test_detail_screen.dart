@@ -184,9 +184,9 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
     return list;
   }
 
-  Future<TestScoreList> getScoreList() async {
+  Future<List<TestScore>> getScoreList() async {
     GetScoreApi getScoreApi = GetScoreApi();
-    TestScoreList testScoreList = await getScoreApi.call();
+    List<TestScore> testScoreList = await getScoreApi.call();
     return testScoreList;
   }
 
@@ -210,14 +210,14 @@ class _TestDetailScreenState extends State<TestDetailScreen> {
           onPressed: () async {
             Navigator.pop(context);
             List<QuestionInfo>? questions = widget.test.quizs;
-            NextScreen.replace(
+            Navigator.push(
                 context,
-                QuizLesson(
+                MaterialPageRoute(builder: (context) => QuizLesson(
                   questions: questions,
                   test: widget.test,
                   courseId: widget.courseId,
                   lectureId: widget.lectureId,
-                ));
+                )));
           },
           text: 'yes'.tr(),
           color: Theme.of(context).primaryColor,

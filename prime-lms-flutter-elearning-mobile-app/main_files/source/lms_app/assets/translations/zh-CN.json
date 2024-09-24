@@ -68,6 +68,7 @@
     "recent-searches": "最近搜索",
     "students": "学生",
     "courses": "课程",
+    "courses-str": "{}课程",
     "reviews": "评论",
     "instructor": "讲师",
     "about-me": "关于我",
@@ -212,5 +213,9 @@
     "address_str": "地址: {}",
     "delete-comment": "删除评论",
     "are-you-sure-delete-comment": "您确定要删除此评论吗？",
-    "thanks_for_ rating": "感谢您的评分！"
+    "thanks_for_ rating": "感谢您的评分！",
+    "quit-test-title": "退出测试",
+    "quit-test-subtitle": "你确定要退出测试吗？",
+    "rating-note": "注：每个用户只能对课程评价一次",
+    "no-test": "没有找到测试"
 }

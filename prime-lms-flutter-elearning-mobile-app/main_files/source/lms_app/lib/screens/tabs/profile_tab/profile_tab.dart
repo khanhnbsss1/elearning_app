@@ -32,10 +32,13 @@ class ProfileTab extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // user == null ? const GuestUser() :
-                Center(
-                  child: SizedBox(
-                    height: 100,
-                      child: UserInfo2()),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  child: Center(
+                    child: SizedBox(
+                      height: 100,
+                        child: UserInfo2()),
+                  ),
                 ),
                 AppSettings(),
               ],

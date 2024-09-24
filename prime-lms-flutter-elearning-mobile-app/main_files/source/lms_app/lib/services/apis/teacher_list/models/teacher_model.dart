@@ -1,21 +1,21 @@
-class LandingPageUserListModel {
-  List<LandingPageUserInfo>? data;
+class TeacherDetailModel {
+  List<TeacherDetail>? data;
 
-  LandingPageUserListModel({this.data});
+  TeacherDetailModel({this.data});
 
-  LandingPageUserListModel.fromJson(Map<String, dynamic> json) {
+  TeacherDetailModel.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = <LandingPageUserInfo>[];
+      data = <TeacherDetail>[];
       json['data'].forEach((v) {
-        data!.add(new LandingPageUserInfo.fromJson(v));
+        data!.add(new TeacherDetail.fromJson(v));
       });
     }
   }
-  LandingPageUserListModel.fromJsonList(dynamic json) {
+  TeacherDetailModel.fromJsonList(dynamic json) {
     if (json != null) {
-      data = <LandingPageUserInfo>[];
+      data = <TeacherDetail>[];
       json.forEach((v) {
-        data!.add(new LandingPageUserInfo.fromJson(v));
+        data!.add(new TeacherDetail.fromJson(v));
       });
     }
   }
@@ -28,7 +28,7 @@ class LandingPageUserListModel {
   }
 }
 
-class LandingPageUserInfo {
+class TeacherDetail {
   int? id;
   String? fullName;
   String? userName;
@@ -36,7 +36,7 @@ class LandingPageUserInfo {
   String? gender;
   String? birthday;
   String? phoneNumber;
-  String? fileId;
+  int? fileId;
   String? avatar;
   String? countryName;
   String? position;
@@ -50,10 +50,10 @@ class LandingPageUserInfo {
   String? youtube;
   int? totalStudent;
   int? totalCourse;
-  double? ratePoint;
+  dynamic ratePoint;
   int? totalReview;
 
-  LandingPageUserInfo({
+  TeacherDetail({
     this.id,
     this.fullName,
     this.userName,
@@ -79,7 +79,7 @@ class LandingPageUserInfo {
     this.totalReview,
   });
 
-  LandingPageUserInfo.fromJson(Map<String, dynamic> json) {
+  TeacherDetail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     fullName = json['fullName'];
     userName = json['user_name'];

@@ -114,6 +114,8 @@ class _RatingFormState extends ConsumerState<RatingForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: const Text('reviews').tr(),
         leading: IconButton(
             icon: const Icon(Icons.close),
             onPressed: () => Navigator.pop(context)),
@@ -139,25 +141,36 @@ class _RatingFormState extends ConsumerState<RatingForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: Visibility(
+                visible: false,
+                child: Text(
+                  'rating-note',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ).tr(),
+              ),
+            ),
             Visibility(
-                visible: !canComment,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: SizedBox(
-                    height: 35,
-                    width: 120,
-                    child: FloatingActionButton(
-                      backgroundColor: Theme.of(context).primaryColor,
-                      foregroundColor: Colors.white,
-                      onPressed: () {
-                        setState(() {
-                          canComment = true;
-                        });
-                      },
-                      child: Text('write-review'.tr()),
-                    ),
+              visible: !canComment,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20.0),
+                child: SizedBox(
+                  height: 35,
+                  width: 120,
+                  child: FloatingActionButton(
+                    backgroundColor: Theme.of(context).primaryColor,
+                    foregroundColor: Colors.white,
+                    onPressed: () {
+                      setState(() {
+                        canComment = true;
+                      });
+                    },
+                    child: Text('write-review'.tr()),
                   ),
-                ),),
+                ),
+              ),
+            ),
             Visibility(
               visible: canComment,
               child: Column(

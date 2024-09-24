@@ -68,6 +68,7 @@
   "recent-searches": "Tìm kiếm gần đây",
   "students": "Học viên",
   "courses": "Khóa học",
+  "courses-str": "{}khóa học",
   "reviews": "Đánh giá",
   "instructor": "Giảng viên",
   "about-me": "Về tôi",
@@ -212,5 +213,9 @@
   "address_str": "Địa chỉ: {}",
   "delete-comment": "Xóa bình luận",
   "are-you-sure-delete-comment": "Bạn có chắc chắn muốn xóa bình luận này?",
-  "thanks_for_rating": "Cảm ơn đã đánh giá!"
+  "thanks_for_rating": "Cảm ơn đã đánh giá!",
+  "quit-test-title": "Hủy Bài Kiểm Tra",
+  "quit-test-subtitle": "Bạn có chắc chắn muốn hủy khỏi bài kiểm tra không?",
+  "rating-note": "Lưu ý: Mỗi người dùng chỉ được đánh giá khóa học một lần",
+  "no-test": "Không có bài kiểm tra"
 }
