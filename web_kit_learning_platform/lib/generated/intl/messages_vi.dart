@@ -93,6 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "basic_tables": MessageLookupByLibrary.simpleMessage("Các bảng cơ bản"),
         "begin_start_test":
             MessageLookupByLibrary.simpleMessage("Bắt đầu làm bài"),
+        "biography_str": MessageLookupByLibrary.simpleMessage("Tiểu sử"),
         "blog": MessageLookupByLibrary.simpleMessage("Blog"),
         "border_type": MessageLookupByLibrary.simpleMessage("Loại đường viền"),
         "bordered_indicator":

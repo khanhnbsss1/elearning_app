@@ -688,5 +688,6 @@
   "total_register_reject": "已拒绝",
   "time_register": "注册数量",
   "user_by_course": "按课程划分的用户",
-  "number_registered_user": "注册用户数"
+  "number_registered_user": "注册用户数",
+  "biography_str": "傳記"
 }
