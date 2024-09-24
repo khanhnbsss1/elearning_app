@@ -36,6 +36,7 @@ import '../services/apis/course/course_fillter/models/course_filtter_info.dart';
 import '../services/apis/course/course_list/course_api.dart';
 import '../services/apis/course/course_list/models/course_models.dart';
 import 'apis/course/course_list/course_v2_api.dart';
+import 'apis/course/course_list/featured_course_api.dart';
 import 'apis/course_progress/get_course_proccess_list.dart';
 import 'apis/course_progress/models/course_proccess_info.dart';
 import 'apis/rating/add_rating_api.dart';
@@ -58,7 +59,7 @@ class ApiService {
   CourseProgressResponseModel courseProgressResponseModel = CourseProgressResponseModel(content: []);
 
   Future<List<CourseInfo>?> getAllCourses({required String keyword}) async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", keyword: keyword, pageSize: 10, pageNumber: 0, isActive: 1));
+    GetCourseListV2Api getCourseListApi = GetCourseListV2Api(searchCommonRequestV2: SearchCommonRequestV2(pageNumber: 0, pageSize: 100));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
@@ -83,25 +84,25 @@ class ApiService {
   }
 
   Future<List<CourseInfo>?> getLatestCourses() async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, pageNumber: 0, keyword: "", isActive: 1));
+    GetCourseListV2Api getCourseListApi = GetCourseListV2Api(searchCommonRequestV2: SearchCommonRequestV2(pageNumber: 0, pageSize: 100));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
 
   Future<List<CourseInfo>?> getRelatedCoursesByCategory(CourseInfo course) async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, pageNumber: 0, keyword: "", subFilterId: "", isActive: 1));
+    GetCourseListV2Api getCourseListApi = GetCourseListV2Api(searchCommonRequestV2: SearchCommonRequestV2(gradeId: course.gradeId));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
 
   Future<List<CourseInfo>?> getFeaturedCourses() async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "ALL", pageSize: 10, pageNumber: 0, keyword: "", isActive: 1));
-    CourseResponseModel courseResponseModel = await getCourseListApi.call();
-    return courseResponseModel.content??[];
+    GetFeaturedCourseListApi getFeaturedCourseListApi = GetFeaturedCourseListApi();
+    List<CourseInfo> list = await getFeaturedCourseListApi.call();
+    return list;
   }
 
   Future<List<CourseInfo>?> getFreeCourses() async {
-    GetCourseListApi getCourseListApi = GetCourseListApi(searchCommonRequest: SearchCommonRequest(filterType: "FREE_COURSE", pageSize: 10, pageNumber: 0, keyword: "", isActive: 1));
+    GetCourseListV2Api getCourseListApi = GetCourseListV2Api(searchCommonRequestV2: SearchCommonRequestV2(mode: "Free", pageSize: 10, pageNumber: 0,));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
@@ -186,6 +187,7 @@ class ApiService {
         String? mode,
         String? keyword,
         String? producerName,
+        int? pageSize,
         int? pageNumber}) async {
     GetCourseListV2Api getCourseListV2Api = GetCourseListV2Api(
         searchCommonRequestV2: SearchCommonRequestV2(
@@ -194,7 +196,7 @@ class ApiService {
             producerName: producerName,
             typePayment: typePayment,
             mode: mode,
-            pageSize: 100,
+            pageSize: pageSize??100,
             pageNumber: pageNumber,
             keyword: keyword??"",
             isActive: 1,

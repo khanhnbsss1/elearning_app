@@ -34,23 +34,23 @@ class FeaturedCoursesSlide extends ConsumerWidget {
                       Expanded(
                         child: RichText(
                             text: TextSpan(
-                              text: 'featured'.tr(),
+                              text: 'course-interest'.tr(),
                               style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.blueAccent, fontWeight: FontWeight.bold),
                             )
                         ),
                       ),
-                      TextButton(
-                        onPressed: () => NextScreen.iOS(context, AllCoursesView(typePayment: "High Payment",title: 'featured-courses'.tr(),)),
-                        // onPressed: () {},
-                        style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
-                        child: Text(
-                          'view-all',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              // color: (isDarkMode != true) ? Colors.black : Colors.white
-                              color: Colors.black,
-                          ),
-                        ).tr(),
-                      )
+                      // TextButton(
+                      //   onPressed: () => NextScreen.iOS(context, AllCoursesView(typePayment: "High Payment",title: 'featured-courses'.tr(),)),
+                      //   // onPressed: () {},
+                      //   style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
+                      //   child: Text(
+                      //     'view-all',
+                      //     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      //         // color: (isDarkMode != true) ? Colors.black : Colors.white
+                      //         color: Colors.black,
+                      //     ),
+                      //   ).tr(),
+                      // )
                     ],
                   ),
                 ),
@@ -59,8 +59,8 @@ class FeaturedCoursesSlide extends ConsumerWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: courses.map((course) {
-                      return HorizontalCourseTile(course: course,widthPercentage: 0.60, imageHeight: 130, isDarkMode: isDarkMode,);
+                    children: courses.take(5).map((course) {
+                      return HorizontalCourseTile(course: course,widthPercentage: 0.60, imageHeight: 130, isDarkMode: isDarkMode, isFeatured: true,);
                     }).toList(),
                   ),
                 )

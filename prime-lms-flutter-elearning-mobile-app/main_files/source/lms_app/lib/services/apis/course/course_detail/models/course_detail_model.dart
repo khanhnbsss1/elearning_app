@@ -1,6 +1,8 @@
 import '../../../lessson/models/lesson_info.dart';
 import '../../../tags/models/tag_info.dart';
 import '../../../topic/model/topic_info.dart';
+import 'dart:convert';
+
 
 class CourseInfo {
   int? id;
@@ -473,3 +475,30 @@ class CourseInfo {
     return lectures;
   }
 }
+
+class ListCourseInfoModel {
+  List<CourseInfo>? data;
+
+  ListCourseInfoModel({this.data}){
+    data??=[];
+  }
+
+  ListCourseInfoModel.fromJson(dynamic json) {
+    if (json != [] && json != null)
+    {
+      data = <CourseInfo>[];
+      json.forEach((v) {
+        data!.add(CourseInfo.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> dataOutput = <String, dynamic>{};
+    if (data != null) {
+      dataOutput['data'] = data!.map((v) => v.toJson()).toList();
+    }
+    return dataOutput;
+  }
+}
+

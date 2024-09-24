@@ -60,7 +60,7 @@ class MyCoursesTab extends ConsumerWidget {
             : myCourses.when(
                 skipLoadingOnRefresh: false,
                 loading: () => const LoadingListTile(height: 200),
-                error: (error, stackTrace) => Center(
+                error: (error, stackTrace) => const Center(
                   child: SizedBox(),
                 ),
                 data: (data) {

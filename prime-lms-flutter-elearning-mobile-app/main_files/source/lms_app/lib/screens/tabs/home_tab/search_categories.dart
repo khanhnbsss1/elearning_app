@@ -211,7 +211,7 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories>
           paddingAll: 0,
           gradeId: (courseFilterInfo.name == "Grade" && subFilterInfo.id != null) ? subFilterInfo.id : null,
           categoryId: (courseFilterInfo.name == "Category" && subFilterInfo.id != null) ? subFilterInfo.id : null,
-          typePayment: (courseFilterInfo.name == "High Payment" || courseFilterInfo.name == "Low Payment") ? courseFilterInfo.name : null,
+          typePayment: (courseFilterInfo.name == "High Payment" || courseFilterInfo.name == "Low Payment") ? courseFilterInfo.filterType : null,
           mode: (courseFilterInfo.name == "Free" || courseFilterInfo.name == "Premium") ? courseFilterInfo.name : null,
           producerName: authorFilterInfo.name,
           gridStyle: GridStyle.grid,

@@ -96,6 +96,7 @@ class _SearchResultState extends ConsumerState<SearchResult> {
             mode: widget.mode,
             keyword: widget.keyword,
             pageNumber: _pageNumber,
+            pageSize: 10,
     );
     if (_courses != [] && courses != [] && courses != null) {
       setState(() {

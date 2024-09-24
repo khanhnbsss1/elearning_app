@@ -62,7 +62,7 @@ class FreeCourses extends ConsumerWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: courses.map((course) {
+                    children: courses.take(5).map((course) {
                       return HorizontalCourseTile(course: course, widthPercentage: 0.60, imageHeight: 130, isDarkMode: isDarkMode,);
                     }).toList(),
                   ),

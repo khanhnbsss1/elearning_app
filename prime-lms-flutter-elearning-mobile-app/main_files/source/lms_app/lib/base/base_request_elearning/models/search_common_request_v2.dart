@@ -40,7 +40,7 @@ class SearchCommonRequestV2 {
     data['producerName'] = producerName;
     data['typePayment'] = typePayment;
     data['mode'] = mode;
-    data['isActive'] = isActive;
+    data['isActive'] = isActive??1;
     data['keyword'] = keyword ?? "";
     data['pageSize'] = pageSize;
     data['pageNumber'] = pageNumber;

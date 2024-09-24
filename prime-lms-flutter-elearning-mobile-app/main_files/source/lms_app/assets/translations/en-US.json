@@ -220,5 +220,6 @@
     "quit-test-subtitle": "Are you sure you want to quit the test?",
     "rating-note": "Note: Each user can only rate the course once",
     "no-test": "No test found",
-    "your-website": "About-me page"
+    "your-website": "About-me page",
+    "course-interest": "Interest courses"
 }
