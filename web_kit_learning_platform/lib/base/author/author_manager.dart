@@ -96,7 +96,6 @@ class AuthorManager {
         LoginOutApi loginOutApi = LoginOutApi();
         await loginOutApi.call();
       }
-
     await removeAuthInfo();
     AuthorManager().deleteDataWhenLogout();
     UserManager().handleLogoutData();

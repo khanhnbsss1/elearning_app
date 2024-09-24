@@ -697,5 +697,6 @@
   "time_register": "Number of registrations",
   "user_by_course": "User by course",
   "number_registered_user": "Number of registered users",
-  "biography_str": "Biography"
+  "biography_str": "Biography",
+  "course_care_str": "Most Care"
 }

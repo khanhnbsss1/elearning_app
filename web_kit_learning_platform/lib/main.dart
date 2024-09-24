@@ -123,7 +123,7 @@ class MyApp extends StatelessWidget {
           darkTheme: AppTheme.darkTheme,
           themeMode: ThemeCustomizer.instance.theme,
           navigatorKey: NavigationService.navigatorKey,
-          initialRoute: Routes.courseList,
+          initialRoute: Routes.dashboardRoute,
           getPages: getPageRoute(),
           routingCallback: (value) {
             /// call back moi lan chuyen page url

@@ -740,85 +740,89 @@ class _LandingPageScreenState extends State<LandingPageScreen> with SingleTicker
                     enabled: true,
                     value: SampleItem2.itemOne,
                     onTap: () {},
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Visibility(
-                          visible: userProfile == null,
-                          child: Center(
+                    child: StatefulBuilder(builder: (context, constraints) {
+                      UserProfile? userProfile = UserManager().getUserProfile();
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Visibility(
+                            visible: userProfile == null,
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context,);
+                                      LoginPage().show(context);
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(vertical: Dimens.size8),
+                                      child: Text(L10nX.getStr.login, style: baseStyle.copyWith(fontSize: Dimens.size12, color: notifier.buttoncolor)),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context,);
+                                      Register().show(context);
+                                    },
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(vertical: Dimens.size8),
+                                      child: Text(L10nX.getStr.sign_up, style: baseStyle.copyWith(fontSize: Dimens.size12, color: notifier.buttoncolor)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: userProfile != null,
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    Navigator.pop(context,);
-                                    LoginPage().show(context);
+                                    userProfile == null ? LoginPage().show(context) : AppPages.routeName(Routes.dashboardRoute);
                                   },
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(vertical: Dimens.size8),
-                                    child: Text(L10nX.getStr.login, style: baseStyle.copyWith(fontSize: Dimens.size12, color: notifier.buttoncolor)),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.menu_book_outlined,
+                                        size: Dimens.size20,
+                                        color: ColorConst.mainColor,
+                                      ),
+                                      SizedBox(width: Dimens.size8),
+                                      Text(
+                                        L10nX.getStr.lets_study,
+                                        style: baseStyle,
+                                      ),
+                                    ],
                                   ),
                                 ),
+                                const SizedBox(height: 16),
                                 InkWell(
                                   onTap: () {
-                                    Navigator.pop(context,);
-                                    Register().show(context);
+                                    AuthorManager().handleLogout();
+                                    AppPages.routeName(Routes.landingPageRoute, isReplace: true);
+
                                   },
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(vertical: Dimens.size8),
-                                    child: Text(L10nX.getStr.sign_up, style: baseStyle.copyWith(fontSize: Dimens.size12, color: notifier.buttoncolor)),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.logout,
+                                        size: Dimens.size25,
+                                        color: ColorConst.mainColor,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Text(L10nX.getStr.sign_out_text, style: baseStyle),
+                                    ],
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                        Visibility(
-                          visible: userProfile != null,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  userProfile == null ? LoginPage().show(context) : AppPages.routeName(Routes.courseList);
-                                },
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.menu_book_outlined,
-                                      size: Dimens.size20,
-                                      color: ColorConst.mainColor,
-                                    ),
-                                    SizedBox(width: Dimens.size8),
-                                    Text(
-                                      L10nX.getStr.lets_study,
-                                      style: baseStyle,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 16),
-                              InkWell(
-                                onTap: () {
-                                  AppPages.routeName(Routes.landingPageRoute, isReplace: true);
-                                  AuthorManager().handleLogout();
-                                },
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.logout,
-                                      size: Dimens.size25,
-                                      color: ColorConst.mainColor,
-                                    ),
-                                    const SizedBox(width: 8),
-                                    Text(L10nX.getStr.sign_out_text, style: baseStyle),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      );
+                    },)
                   ),
                 ],
               ),

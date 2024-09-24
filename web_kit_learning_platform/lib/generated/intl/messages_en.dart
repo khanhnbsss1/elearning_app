@@ -171,6 +171,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Top-grossing course"),
         "coure_top_review": MessageLookupByLibrary.simpleMessage(
             "The course with the highest number of reviews"),
+        "course_care_str": MessageLookupByLibrary.simpleMessage("Most Care"),
         "course_category_str":
             MessageLookupByLibrary.simpleMessage("Course category"),
         "course_create": MessageLookupByLibrary.simpleMessage("Create course"),

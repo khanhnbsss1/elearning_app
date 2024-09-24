@@ -16,6 +16,14 @@ class CourseResponseModel extends PageModel{
       });
     }
   }
+  CourseResponseModel.fromJsonList(dynamic json) {
+    if (json != null) {
+      content = <CourseInfo>[];
+      json.forEach((v) {
+        content!.add(new CourseInfo.fromJson(v));
+      });
+    }
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

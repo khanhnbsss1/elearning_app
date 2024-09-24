@@ -164,6 +164,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Khóa học có doanh thu cao nhất "),
         "coure_top_review": MessageLookupByLibrary.simpleMessage(
             "Khóa học có lượt review cao nhất "),
+        "course_care_str":
+            MessageLookupByLibrary.simpleMessage("Quan tâm nhiều nhất"),
         "course_category_str":
             MessageLookupByLibrary.simpleMessage("Danh mục khóa học"),
         "course_create": MessageLookupByLibrary.simpleMessage("Tạo khóa học"),
