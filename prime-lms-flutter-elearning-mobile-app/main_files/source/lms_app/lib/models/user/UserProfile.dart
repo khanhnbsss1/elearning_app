@@ -43,6 +43,10 @@ class UserProfile {
   int? isPayment;
   int? fileId;
   String? accountId;
+  String? website;
+  String? facebook;
+  String? twitter;
+  String? youtube;
 
   String? imageUrl;
   List? role;
@@ -91,6 +95,10 @@ class UserProfile {
         this.isPayment,
         this.fileId,
         this.roleName,
+        this.website,
+        this.facebook,
+        this.youtube,
+        this.twitter
       });
 
   UserProfile.fromJson(Map<String, dynamic> json) {
@@ -135,6 +143,10 @@ class UserProfile {
     reviews = json['reviews'];
     isPayment = json['is_payment'];
     fileId = json['file_id'];
+    website = json['website'];
+    facebook = json['facebook'];
+    twitter = json['twitter'];
+    youtube = json['youtube'];
   }
 
   Map<String, dynamic> toJson() {
@@ -175,6 +187,10 @@ class UserProfile {
     data['reviews'] = reviews;
     data['isPayment'] = isPayment;
     data['file_id'] = fileId;
+    data['website'] = website;
+    data['facebook'] = facebook;
+    data['twitter'] = twitter;
+    data['youtube'] = youtube;
     return data;
   }
   List<String> getPermission(){
@@ -214,6 +230,10 @@ class UserProfile {
     List? reviews,
     int? isPayment,
     int? fileId,
+    String? facebook,
+    String? website,
+    String? youtube,
+    String? twitter,
   }) {
     return UserProfile(
       id: id ?? this.id,
@@ -248,6 +268,10 @@ class UserProfile {
       reviews: reviews ?? this.reviews,
       isPayment: isPayment ?? this.isPayment,
       fileId: fileId ?? this.fileId,
+      facebook: facebook?? this.facebook,
+      website: website ?? this.website,
+      youtube: youtube ?? this.youtube,
+      twitter: twitter ?? this.twitter,
     );
   }
 

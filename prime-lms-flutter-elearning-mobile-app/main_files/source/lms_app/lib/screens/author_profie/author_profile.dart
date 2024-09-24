@@ -14,16 +14,6 @@ import 'author_courses.dart';
 import 'count_info.dart';
 import 'profile_info.dart';
 
-final authorReviewsCountProvider = FutureProvider.family.autoDispose<int, String>((ref, authorId) async {
-  final int count = await ApiService().getAuthorReviewsCount(authorId);
-  return count;
-});
-
-final authorCoursesCountProvider = FutureProvider.family.autoDispose<int, String>((ref, authorId) async {
-  final int count = await ApiService().getAuthorCourseCount(authorId);
-  return count;
-});
-
 class AuthorProfile extends ConsumerWidget {
   const AuthorProfile({super.key, required this.teacherDetail});
 
@@ -54,7 +44,9 @@ class AuthorProfile extends ConsumerWidget {
           SliverToBoxAdapter(
             child: Column(
               children: [
+
                 AuthorProfileInfo(teacherDetail: teacherDetail,),
+
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 25),
                   child: Column(

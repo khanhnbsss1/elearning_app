@@ -76,7 +76,7 @@ class _SearchResultState extends ConsumerState<SearchResult> {
 
   Future<void> _getCourse(
       String filter, int pageNumber, ) async {
-    final List<CourseInfo>? courses = await ApiService().getCourseByCategories(
+    final List<CourseInfo>? courses = await ApiService().getCourseByCategoriesV2(
         pageNumber: pageNumber,
         filter: filter.replaceAll(" ", "_"),
         producerId: widget.producerId,

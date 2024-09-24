@@ -12,6 +12,10 @@ class EditUserRequest {
   String? countryName;
   String? email;
   String? fileId;
+  String? website;
+  String? facebook;
+  String? twitter;
+  String? youtube;
 
   EditUserRequest(
       {this.avatar,
@@ -27,6 +31,10 @@ class EditUserRequest {
         this.countryName,
         this.email,
         this.fileId,
+        this.website,
+        this.facebook,
+        this.youtube,
+        this.twitter
       });
 
   EditUserRequest.fromJson(Map<String, dynamic> json) {
@@ -43,6 +51,10 @@ class EditUserRequest {
     countryName = json['country_name'];
     email = json['email'];
     fileId = json['file_id'];
+    website = json['website'];
+    facebook = json['facebook'];
+    twitter = json['twitter'];
+    youtube = json['youtube'];
   }
 
   Map<String, dynamic> toJson() {
@@ -60,6 +72,10 @@ class EditUserRequest {
     data['country_name'] = countryName;
     data['email'] = email;
     data['file_id'] = fileId;
+    data['website'] = website;
+    data['facebook'] = facebook;
+    data['twitter'] = twitter;
+    data['youtube'] = youtube;
     return data;
   }
 }
