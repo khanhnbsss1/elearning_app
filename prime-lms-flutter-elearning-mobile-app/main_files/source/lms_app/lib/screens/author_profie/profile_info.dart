@@ -51,8 +51,8 @@ class AuthorProfileInfo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.min,
             children: [
-              EnableDisableWidget(
-                isEnabled: teacherDetail.website != null,
+              Visibility(
+                visible: teacherDetail.website != null,
                 child: CircleAvatar(
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   child: IconButton(
@@ -66,8 +66,8 @@ class AuthorProfileInfo extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 15),
-              EnableDisableWidget(
-                isEnabled: teacherDetail.facebook != null,
+              Visibility(
+                visible: teacherDetail.facebook != null,
                 // visible: true,
                 child: CircleAvatar(
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -81,25 +81,25 @@ class AuthorProfileInfo extends StatelessWidget {
                   ),
                 ),
               ),
-              // const SizedBox(width: 15),
-              // EnableDisableWidget(
-              //   isEnabled: user.twitter != null,
-              //   // visible: true,
-              //   child: CircleAvatar(
-              //     backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              //     child: IconButton(
-              //       icon: Icon(
-              //         FontAwesomeIcons.xTwitter,
-              //         color: Theme.of(context).primaryColor,
-              //       ),
-              //       onPressed: () => AppService()
-              //           .openLink(user.twitter ?? "https://x.com/?lang=vi"),
-              //     ),
-              //   ),
-              // ),
               const SizedBox(width: 15),
-              EnableDisableWidget(
-                isEnabled: teacherDetail.youtube != null,
+              Visibility(
+                visible: teacherDetail.twitter != null,
+                // visible: true,
+                child: CircleAvatar(
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  child: IconButton(
+                    icon: Icon(
+                      FontAwesomeIcons.xTwitter,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    onPressed: () => AppService()
+                        .openLink(teacherDetail.twitter ?? "https://x.com/?lang=vi"),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Visibility(
+                visible: teacherDetail.youtube != null,
                 // visible: true,
                 child: CircleAvatar(
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,

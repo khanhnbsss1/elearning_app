@@ -1,5 +1,7 @@
 
 
+import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
+
 import '../../../../base/base_request_elearning/BaseApiRequest.dart';
 import '../../../base/base_request_elearning/models/search_common_request.dart';
 import 'models/teacher_list_model.dart';
@@ -11,7 +13,7 @@ class GetTeacherList extends BaseApiRequest {
     apiName: ApiName.getInstance().getTeacher,
   );
 
-  Future<List<TeacherDetail>> call() async {
+  Future<List<TeacherDetail>?> call() async {
     await getAuthorization();
     dynamic result = await getRequestAPI();
     if(result.runtimeType == ResponseCommon)
@@ -20,8 +22,13 @@ class GetTeacherList extends BaseApiRequest {
     }
     else
     {
-      TeacherDetailModel teacherListModel = TeacherDetailModel.fromJsonList(result);
-      return teacherListModel.data??[];
+      try {
+        TeacherDetailModel teacherListModel = TeacherDetailModel.fromJsonList(result);
+        return teacherListModel.data??[];
+      } on Exception catch (e) {
+        ToastUtils.showToastError(e.toString());
+        return [];
+      }
     }
   }
 

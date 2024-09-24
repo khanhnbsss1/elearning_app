@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lms_app/controller_elearning/my_controller.dart';
 import 'package:lms_app/services/apis/auth/editUser/edit_user_api.dart';
@@ -92,6 +93,30 @@ class EditProfileController extends MyController {
       label: 'File id',
       controller: TextEditingController(),
     );
+    basicValidator.addField(
+      'website',
+      required: true,
+      label: 'website'.tr(),
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'youtube',
+      required: true,
+      label: 'youtube'.tr(),
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'facebook',
+      required: true,
+      label: 'facebook'.tr(),
+      controller: TextEditingController(),
+    );
+    basicValidator.addField(
+      'twitter',
+      required: true,
+      label: 'twitter'.tr(),
+      controller: TextEditingController(),
+    );
     basicValidator.getController('file_id')!.text = (userProfile.fileId??0).toString();
     basicValidator.getController('gender')!.text = userProfile.gender??"";
     basicValidator.getController('email')!.text = userProfile.email??"";
@@ -102,6 +127,10 @@ class EditProfileController extends MyController {
     basicValidator.getController('bank_account')!.text = userProfile.bankAccount??"";
     basicValidator.getController('identity_id')!.text = userProfile.identityId??"";
     basicValidator.getController('country_name')!.text = userProfile.countryName??"";
+    basicValidator.getController('website')!.text = userProfile.website??"";
+    basicValidator.getController('facebook')!.text = userProfile.facebook??"";
+    basicValidator.getController('youtube')!.text = userProfile.youtube??"";
+    basicValidator.getController('twitter')!.text = userProfile.twitter??"";
   }
 
   Future<void> updateImage(UploadFileInfo uploadFileinfo) async {
@@ -131,6 +160,10 @@ class EditProfileController extends MyController {
       email: basicValidator.getController('email')?.text,
       phoneNumber: userProfile.phoneNumber,
       fileId: basicValidator.getController('file_id')?.text,
+      website: basicValidator.getController('website')?.text,
+      facebook: basicValidator.getController('facebook')?.text,
+      youtube: basicValidator.getController('youtube')?.text,
+      twitter: basicValidator.getController('twitter')?.text,
     );
     EditUserApi editUserApi = EditUserApi(editUserRequest: editUserRequest);
     bool data = await editUserApi.call();

@@ -1,5 +1,6 @@
 
 import 'package:lms_app/base/base_request_elearning/BaseApiRequest.dart';
+import 'package:lms_app/base/widgets/toast_common/toast_utils.dart';
 
 import 'models/course_detail_model.dart';
 
@@ -10,7 +11,7 @@ class CourseDetailApi extends BaseApiRequest {
     apiName: ApiName.getInstance().getCourseDetail,
   );
 
-  Future<dynamic> call() async {
+  Future<CourseInfo> call() async {
     await getAuthorization();
     dynamic result = await postRequestAPI();
 
@@ -20,8 +21,13 @@ class CourseDetailApi extends BaseApiRequest {
     }
     else
     {
-      CourseInfo courseInfo = CourseInfo.fromJson(result);
-      return courseInfo;
+      try {
+        CourseInfo courseInfo = CourseInfo.fromJson(result);
+        return courseInfo;
+      } on Exception catch (e) {
+          ToastUtils.showToastError(e.toString());
+          return CourseInfo.initial();
+      }
     }
   }
 

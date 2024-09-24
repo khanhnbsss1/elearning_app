@@ -186,8 +186,6 @@ class _SearchCategoriesState2 extends ConsumerState<SearchCategories2> {
                             ),
                             SearchResult(
                               paddingAll: 0,
-                              filter: courseFilterInfo.name ?? "All",
-                              subFilterInfo: subFilterInfo,
                               gridStyle: GridStyle.grid,
                             )
                           ],

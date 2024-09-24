@@ -15,8 +15,8 @@ import '../../utils/next_screen.dart';
 import '../all_courses.dart/courses_view.dart';
 import '../all_courses.dart/grid_list_course_tile.dart';
 
-final authorCoursesProvider = FutureProvider.autoDispose.family<List<CourseInfo>, int>((ref, authorId) async {
-  final courses = await ApiService().getCoursesByAuthorId(authorId);
+final authorCoursesProvider = FutureProvider.autoDispose.family<List<CourseInfo>, String>((ref, authorName) async {
+  final courses = await ApiService().getCourseByCategoriesV2(producerName: authorName, pageNumber: 0);
   return courses??[];
 });
 
@@ -27,7 +27,7 @@ class AuthorCourses extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final authorCourses = ref.watch(authorCoursesProvider(teacherDetail.id!));
+    final authorCourses = ref.watch(authorCoursesProvider(teacherDetail.fullName!));
     return authorCourses.when(
       data: (courses) {
         return Column(
@@ -50,11 +50,7 @@ class AuthorCourses extends ConsumerWidget {
                   onPressed: () => NextScreen.iOS(
                       context,
                       AllCoursesView(
-                        filter: 'Author',
-                        subFilterInfo: SubFilterInfo(
-                          id: teacherDetail.id,
-                          name: teacherDetail.fullName,
-                        ),
+                        producerName: teacherDetail.fullName,
                       )),
                   // onPressed: (){},
                 ),

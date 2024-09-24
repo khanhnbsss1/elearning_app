@@ -30,7 +30,7 @@ class MyCourseApi extends BaseApiRequest {
 
   Future<void> getAuthorization() async {
     UserProfile? userProfile = await UserManager().getUserProfile();
-    if(userProfile!=null) {
+    if(userProfile!=null && searchCommonRequest.userId == null) {
       searchCommonRequest = searchCommonRequest.copyWith(userId: userProfile.id);
     }
     await setApiBody(searchCommonRequest.toJson());  }

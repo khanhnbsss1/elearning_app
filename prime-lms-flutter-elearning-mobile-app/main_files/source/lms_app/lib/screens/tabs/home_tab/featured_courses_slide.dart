@@ -40,7 +40,7 @@ class FeaturedCoursesSlide extends ConsumerWidget {
                         ),
                       ),
                       TextButton(
-                        onPressed: () => NextScreen.iOS(context, const AllCoursesView(filter: '')),
+                        onPressed: () => NextScreen.iOS(context, AllCoursesView(typePayment: "High Payment",title: 'featured-courses'.tr(),)),
                         // onPressed: () {},
                         style: TextButton.styleFrom(padding: const EdgeInsets.all(0)),
                         child: Text(

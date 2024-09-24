@@ -94,9 +94,9 @@ class _EditProfileState extends ConsumerState<EditProfile> {
         setState(() => _selectedImageFile = null);
         widget.onUpdate!(true);
         Navigator.pop(context);
-        ToastUtils.showToast('profile-updated');
+        ToastUtils.showToast('profile-updated'.tr());
       } else {
-        ToastUtils.showToast('profile-failed');
+        ToastUtils.showToast('profile-failed'.tr());
       }
     }
   }
@@ -289,13 +289,83 @@ class _EditProfileState extends ConsumerState<EditProfile> {
                     contentPadding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 12),
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) return 'Name is required';
-                    return null;
-                  },
                 ),
               ),
               const SizedBox(height: 10),
+              const Text('your-website').tr(),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                color: isDarkMode
+                    ? CustomColor.containerDark
+                    : CustomColor.container,
+                child: TextFormField(
+                  controller: editProfileController.basicValidator
+                      .getController('website'),
+                  decoration: InputDecoration(
+                    hintText: 'website'.tr(),
+                    border: InputBorder.none,
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text('facebook').tr(),
+              Container(
+                color: isDarkMode
+                    ? CustomColor.containerDark
+                    : CustomColor.container,
+                child: TextFormField(
+                  controller: editProfileController.basicValidator
+                      .getController('facebook'),
+                  decoration: InputDecoration(
+                    hintText: 'facebook'.tr(),
+                    border: InputBorder.none,
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12),
+                  ),
+                ),
+              ),const SizedBox(height: 10),
+              const Text('youtube').tr(),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                color: isDarkMode
+                    ? CustomColor.containerDark
+                    : CustomColor.container,
+                child: TextFormField(
+                  controller: editProfileController.basicValidator
+                      .getController('youtube'),
+                  decoration: InputDecoration(
+                    hintText: 'youtube'.tr(),
+                    border: InputBorder.none,
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12),
+                  ),
+                ),
+              ),const SizedBox(height: 10),
+              const Text('twitter').tr(),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                color: isDarkMode
+                    ? CustomColor.containerDark
+                    : CustomColor.container,
+                child: TextFormField(
+                  controller: editProfileController.basicValidator
+                      .getController('twitter'),
+                  decoration: InputDecoration(
+                    hintText: 'twitter'.tr(),
+                    border: InputBorder.none,
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 12),
+                  ),
+                ),
+              ),
               // const Text('Bank name'),
               // const SizedBox(
               //   height: 10,

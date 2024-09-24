@@ -112,7 +112,7 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
       },
       loading: () => const LoadingListTile(),
       error: (error, stackTrace) => Center(
-        child: Text(error.toString()),
+        child: SizedBox(),
       ),
     );
   }

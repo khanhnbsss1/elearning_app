@@ -39,6 +39,8 @@
     "explore": "探索",
     "free-courses": "免费课程",
     "free-course": "免费课程",
+    "featured-courses": "特色课程",
+    "lastest-couress": "最新课程",
     "top-courses-in": "热门课程在",
     "top": "热门",
     "instructors": "导师名单",
@@ -217,5 +219,6 @@
     "quit-test-title": "退出测试",
     "quit-test-subtitle": "你确定要退出测试吗？",
     "rating-note": "注：每个用户只能对课程评价一次",
-    "no-test": "没有找到测试"
+    "no-test": "没有找到测试",
+    "your-website": "自我介绍网站"
 }

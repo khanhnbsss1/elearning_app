@@ -52,12 +52,12 @@ class HomeTab extends ConsumerWidget {
       Image.asset('assets/images/dictionary (1).png'),
     ];
     List<Widget> func = [
-      const AllCoursesView(filter: 'All'),
-      const AllCoursesView(filter: 'free_course'),
-      const MyCoursesTab(),
-      const TestListScreen(),
+      AllCoursesView(),
+      AllCoursesView(mode: "Free",),
+      MyCoursesTab(),
+      TestListScreen(),
       AllAuthors(),
-      const Dictionary(),
+      Dictionary(),
     ];
     return RefreshIndicator.adaptive(
       displacement: 60,

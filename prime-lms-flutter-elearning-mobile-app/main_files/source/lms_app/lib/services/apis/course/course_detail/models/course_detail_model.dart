@@ -20,7 +20,7 @@ class CourseInfo {
   String? updatedAt;
   String? createdBy;
   String? updatedBy;
-  int? ratePoint;
+  dynamic ratePoint;
   String? durian;
   String? videoPreview;
   String? courseMode;
