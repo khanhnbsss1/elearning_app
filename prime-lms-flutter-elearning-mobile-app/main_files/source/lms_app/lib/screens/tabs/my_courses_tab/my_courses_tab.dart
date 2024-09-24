@@ -26,27 +26,26 @@ import '../../../providers/user_data_provider.dart';
 //   return courses;
 // }
 // );
-final myCoursesProvider =
-    FutureProvider.autoDispose<List<CourseInfo>?>((ref) async {
-  final List<CourseInfo>? courses = await ApiService().getMyCourses();
-  return courses;
+
+final myCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>?>((ref) async {
+  return await ApiService().getMyCourses();
 });
 
 class MyCoursesTab extends ConsumerWidget {
-  const MyCoursesTab({super.key});
+  const MyCoursesTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userDataProvider);
     final myCourses = ref.watch(myCoursesProvider);
     final isDarkMode = ref.watch(themeProvider).isDarkMode;
+
     return RefreshIndicator.adaptive(
       displacement: 60,
       onRefresh: () async {
         ref.invalidate(myCoursesProvider);
       },
       child: Scaffold(
-        // backgroundColor: (isDarkMode != true) ? Colors.black.withOpacity(0.05) : Colors.black.withOpacity(0.1),
         appBar: AppBar(
           title: const Text('my-courses').tr(),
           backgroundColor: Theme.of(context).primaryColor,
@@ -56,31 +55,39 @@ class MyCoursesTab extends ConsumerWidget {
         ),
         body: user == null
             ? const EmptyAnimation(
-                animationString: emptyAnimation, title: 'No courses found')
+            animationString: emptyAnimation, title: 'No courses found')
             : myCourses.when(
-                skipLoadingOnRefresh: false,
-                loading: () => const LoadingListTile(height: 200),
-                error: (error, stackTrace) => const Center(
-                  child: SizedBox(),
+          skipLoadingOnRefresh: false,
+          loading: () => const LoadingListTile(height: 200),
+          error: (error, stackTrace) => Center(
+            child: Text('Error: ${error.toString()}'),
+          ),
+          data: (data) {
+            if (data == null || data.isEmpty) {
+              return const EmptyAnimation(
+                animationString: emptyAnimation,
+                title: 'No courses found',
+              );
+            }
+            return Expanded(
+              child: ListView.separated(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  bottom: 50,
+                  top: 25,
                 ),
-                data: (data) {
-                  return (data!.isNotEmpty)
-                      ? ListView.separated(
-                          padding: const EdgeInsets.only(
-                              left: 20, right: 20, bottom: 50, top: 25),
-                          itemCount: data.length,
-                          separatorBuilder: (context, index) =>
-                              const Divider(height: 50),
-                          itemBuilder: (context, index) {
-                            final CourseInfo course = data[index];
-                            return MyCourseTile(courseInfo: course, user: user);
-                          },
-                        )
-                      : const EmptyAnimation(
-                          animationString: emptyAnimation,
-                          title: 'No courses found');
+                itemCount: data.length,
+                separatorBuilder: (context, index) => const Divider(height: 50),
+                itemBuilder: (context, index) {
+                  data.length;
+                  final CourseInfo course = data[index];
+                  return MyCourseTile(courseInfo: course, user: user);
                 },
               ),
+            );
+          },
+        ),
       ),
     );
   }

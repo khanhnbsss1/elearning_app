@@ -36,30 +36,18 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final refCourseDetail = ref.watch(myCoursesDetailProvider(courseInfo));
     final heroTag = UniqueKey();
-    final courseDetail = ref.watch(myCoursesDetailProvider(courseInfo));
-    return courseDetail.when(
+
+    return refCourseDetail.when(
+      loading: () => const LoadingListTile(),
+      error: (error, stackTrace) => const SizedBox(),
       data: (courseDetail) {
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Stack(
-              alignment: Alignment.topRight,
-              children: [
-                Container(
-                  height: 90,
-                  width: 100,
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
-                  child: Hero(
-                      tag: heroTag,
-                      child: (courseDetail.image != null && courseDetail.image != "")
-                          ? CustomCacheImage(imageUrl: courseDetail.image, radius: 12)
-                          : Image.asset("assets/images/noImage1.jpg",
-                          fit: BoxFit.cover)),
-                ),
-                PremiumTag(course: courseDetail),
-              ],
-            ),
+            // This part of the widget does not rely on data changing frequently
+            _buildCourseImage(context, courseDetail),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -67,7 +55,7 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      courseDetail.name??"",
+                      courseDetail.name ?? "",
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context)
@@ -82,27 +70,11 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
                           .textTheme
                           .bodyMedium
                           ?.copyWith(color: Colors.blueAccent),
-                    ).tr(args: [courseDetail.producerName??"-"]),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    ).tr(args: [courseDetail.producerName ?? "-"]),
+                    const SizedBox(height: 10),
+                    // Keep only the dynamic parts here to rebuild
                     buildProccess(courseDetail),
-                    OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          side: BorderSide(color: Theme.of(context).primaryColor),
-                          textStyle: Theme.of(context)
-                              .textTheme
-                              .titleSmall
-                              ?.copyWith(fontWeight: FontWeight.w600)),
-                      child: Text(
-                        CourseMixin.enrollButtonText(courseDetail, user),
-                        style: TextStyle(color: Theme.of(context).primaryColor),
-                      ).tr(),
-                      onPressed: () =>
-                          handleOpenCourse(context, user: user, courseDetail: courseDetail),
-                    ),
+                    _buildEnrollButton(context, courseDetail, user),
                   ],
                 ),
               ),
@@ -110,10 +82,38 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
           ],
         );
       },
-      loading: () => const LoadingListTile(),
-      error: (error, stackTrace) => Center(
-        child: SizedBox(),
+    );
+  }
+
+  Widget _buildCourseImage(BuildContext context, CourseInfo courseDetail) {
+    return Container(
+      height: 90,
+      width: MediaQuery.of(context).size.width * 0.3,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: (courseDetail.image != null && courseDetail.image != "")
+            ? CustomCacheImage(imageUrl: courseDetail.image, radius: 12)
+            : Image.asset("assets/images/noImage1.jpg", fit: BoxFit.contain),
       ),
+    );
+  }
+
+  Widget _buildEnrollButton(BuildContext context, CourseInfo courseDetail, UserProfile user) {
+    return OutlinedButton(
+      style: OutlinedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20)),
+          side: BorderSide(color: Theme.of(context).primaryColor),
+          textStyle: Theme.of(context)
+              .textTheme
+              .titleSmall
+              ?.copyWith(fontWeight: FontWeight.w600)),
+      child: Text(
+        CourseMixin.enrollButtonText(courseDetail, user),
+        style: TextStyle(color: Theme.of(context).primaryColor),
+      ).tr(),
+      onPressed: () => handleOpenCourse(context, user: user, courseDetail: courseDetail),
     );
   }
 
@@ -145,3 +145,4 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
     );
   }
 }
+

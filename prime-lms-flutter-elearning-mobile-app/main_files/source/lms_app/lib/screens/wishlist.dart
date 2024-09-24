@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/loading_list_tile.dart';
 import 'package:lms_app/configs/app_assets.dart';
 import 'package:lms_app/mixins/course_mixin.dart';
+import 'package:lms_app/screens/tabs/home_tab/featured_courses.dart';
 import 'package:lms_app/utils/empty_animation.dart';
 import 'package:quiver/iterables.dart';
 
@@ -12,6 +13,7 @@ import '../components/course_tile.dart';
 import '../models/course.dart';
 import '../providers/user_data_provider.dart';
 import '../services/api_service.dart';
+import '../services/apis/course/course_detail/models/course_detail_model.dart';
 
 final wishlistProvider = FutureProvider.autoDispose<List<Course>>((ref) async {
   final List<Course> courses = [];
@@ -33,7 +35,7 @@ class Wishlist extends ConsumerWidget with CourseMixin {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.watch(userDataProvider);
-    final wishlist = ref.watch(wishlistProvider);
+    final wishlist = ref.watch(featuredCoursesProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('wishlist').tr(),
@@ -42,7 +44,7 @@ class Wishlist extends ConsumerWidget with CourseMixin {
       ),
       body: RefreshIndicator(
         onRefresh: () async => ref.refresh(wishlistProvider),
-        child: user == null || user.wishList == null || user.wishList!.isEmpty
+        child: user == null || wishlist.value == null
             ? EmptyAnimation(animationString: emptyAnimation, title: 'no-course'.tr())
             : wishlist.when(
                 skipLoadingOnRefresh: false,
@@ -56,9 +58,9 @@ class Wishlist extends ConsumerWidget with CourseMixin {
                     itemCount: data.length,
                     separatorBuilder: (context, index) => const Divider(height: 50),
                     itemBuilder: (context, index) {
-                      return null;
-                      // final Course course = data[index];
-                      // return CourseTile(course: course);
+                      // return null;
+                      final CourseInfo course = data[index];
+                      return CourseTile(course: course);
                     },
                   );
                 },

@@ -14,6 +14,7 @@ import '../../../providers/app_settings_provider.dart';
 import '../../../theme/theme_provider.dart';
 import '../../all_authors.dart';
 import '../../all_courses.dart/courses_view.dart';
+import '../../wishlist.dart';
 import 'featured_courses.dart';
 import 'free_courses.dart';
 import 'home_categories.dart';
@@ -95,6 +96,9 @@ class HomeTab extends ConsumerWidget {
               //   },
               //   icon: const Icon(FeatherIcons.heart, size: 22),
               // ),
+              const SizedBox(
+                width: 10,
+              ),
               // IconButton(
               //   // style: IconButton.styleFrom(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
               //   onPressed: () {

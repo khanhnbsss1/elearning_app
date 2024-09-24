@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:feather_icons/feather_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lms_app/base/widgets/common/alert_dialog/loading.common.dart';
 import '../../components/loading_grid_tile.dart';
 import '../../configs/app_assets.dart';
 import '../../constants/custom_colors.dart';
@@ -60,6 +61,7 @@ class _SearchResultState extends ConsumerState<SearchResult> {
         oldWidget.producerName != widget.producerName ||
         oldWidget.mode != widget.mode) {
       _onRefresh();
+
     }
   }
 
@@ -113,11 +115,13 @@ class _SearchResultState extends ConsumerState<SearchResult> {
   }
 
   _onRefresh() async {
+    MonitorLoading().showLoading('');
     _isLoading = true;
     _courses.clear();
     _hasData = false;
     setState(() {});
     await _getCourse();
+    MonitorLoading().dismiss();
   }
 
   @override

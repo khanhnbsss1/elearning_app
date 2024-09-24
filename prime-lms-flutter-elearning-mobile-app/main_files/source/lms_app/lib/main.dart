@@ -102,16 +102,24 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Get.updateLocale(context.locale);
-    LanguageHelper().setLocale(context.locale);
-    List<LocalizationsDelegate<dynamic>> delegates=[...[...context.localizationDelegates]];
-    delegates.add(S.delegate,);
-    FetchPixels(context);
-    ColorConst.setColorByFlavorType(context);
+    // Schedule the locale update to happen after the current frame
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Ensure the locale update happens only when necessary
+      if (LanguageHelper().getCurrentLocale() != context.locale) {
+        Get.updateLocale(context.locale);
+        LanguageHelper().setLocale(context.locale);
+      }
+    });
+
+    // Add localization delegates dynamically
+    List<LocalizationsDelegate<dynamic>> delegates = [...context.localizationDelegates];
+    delegates.add(S.delegate);
+
+    FetchPixels(context); // Custom method, assuming it adjusts screen settings
+    ColorConst.setColorByFlavorType(context); // Custom method, assuming it adjusts colors
+
     return GetMaterialApp(
       theme: ThemeData(primaryColor: const Color(0xF4930202)),
-      // theme: ThemeData(primaryColor: const Color(0xFFC67D)),
-      // theme: ThemeData(primaryColor: Colors.red),
       navigatorKey: NavigationService().navigationKey,
       title: AppConfig.appName,
       debugShowCheckedModeBanner: false,
@@ -119,18 +127,11 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: context.supportedLocales,
       localizationsDelegates: delegates,
       locale: LanguageHelper().getCurrentLocale(),
-      routingCallback: (value) {
-        if (kDebugMode) {
-          print(value);
-        }
-      },
       builder: EasyLoading.init(),
       home: _isFirstCall!
-              ? const IntroScreen()
-              : const LoginScreen(
-                  popUpScreen: false,
-                ),
-      // home: IntroScreen(),
+          ? const IntroScreen()
+          : const LoginScreen(popUpScreen: false),
     );
   }
+
 }
