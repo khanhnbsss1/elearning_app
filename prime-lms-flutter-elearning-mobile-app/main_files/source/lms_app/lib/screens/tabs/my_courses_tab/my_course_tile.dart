@@ -43,42 +43,47 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
       loading: () => const SizedBox(),
       error: (error, stackTrace) => const SizedBox(),
       data: (courseDetail) {
-        return Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildCourseImage(context, courseDetail),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      courseDetail.name ?? "",
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium
-                          ?.copyWith(fontWeight: FontWeight.w600),
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      'by',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(color: Colors.blueAccent),
-                    ).tr(args: [courseDetail.producerName ?? "-"]),
-                    const SizedBox(height: 10),
-                    // Keep only the dynamic parts here to rebuild
-                    buildProccess(courseDetail),
-                    _buildEnrollButton(context, courseDetail, user),
-                  ],
+        return InkWell(
+          splashColor: Colors.transparent,
+          onTap: () => NextScreen.iOS(
+              context, CourseDetailsView(courses: courseDetail, heroTag: heroTag)),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildCourseImage(context, courseDetail),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        courseDetail.name ?? "",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        'by',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(color: Colors.blueAccent),
+                      ).tr(args: [courseDetail.producerName ?? "-"]),
+                      const SizedBox(height: 10),
+                      // Keep only the dynamic parts here to rebuild
+                      buildProccess(courseDetail),
+                      _buildEnrollButton(context, courseDetail, user),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );
