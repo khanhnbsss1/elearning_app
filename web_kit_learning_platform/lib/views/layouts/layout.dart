@@ -181,6 +181,7 @@ class Layout extends StatelessWidget {
       //key: controller.scaffoldKey,
       endDrawer: RightBar(),
       body: Stack(
+        alignment: Alignment.topCenter,
         children: [
           Row(
             children: [
@@ -204,10 +205,13 @@ class Layout extends StatelessWidget {
                           ),
                     Visibility(
                       visible: enableTopBar??true,
-                      child: TopBar(
-                        key: UniqueKey(),
-                        title: title,
-                        showBackButton: showBackButton,
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: TopBar(
+                          key: UniqueKey(),
+                          title: title,
+                          showBackButton: showBackButton,
+                        ),
                       ),
                     ),
                   ],

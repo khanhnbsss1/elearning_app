@@ -364,7 +364,7 @@ class _LeftBarState extends State<LeftBar> with SingleTickerProviderStateMixin, 
                     title: L10nX.getStr.user_by_course,
                     route: Routes.reportCourseListByRegisterdUser,
                     isCondensed: ThemeCustomizer().leftBarCondensed,
-                   // permission: const ["dashboard.get.get_registered_courses"],
+                    permission: const ["courses.post.get_registered_courses"],
                   ),
                   NavigationItem(
                     iconData: Icons.edit,

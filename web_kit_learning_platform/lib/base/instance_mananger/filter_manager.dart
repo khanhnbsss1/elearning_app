@@ -48,7 +48,7 @@ class FilterManager{
   TestListResponseModel testListResponseModel = TestListResponseModel(content: []);
   VocabularyResponseModel vocabularyResponseModel = VocabularyResponseModel(content: []);
   CourseProgressResponseModel courseProgressResponseModel = CourseProgressResponseModel(content: []);
-  List<bool>calApi = [false,false,false,false,false, false, false, false, false, false, false ];
+  List<bool>calApi = [false,false,false,false,false, false, false, false, false, false, false, false ];
 
   FilterInfo filterInfo = FilterInfo(
     listOfAccompanyCourses: {},
