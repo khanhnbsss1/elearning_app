@@ -5,6 +5,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/helper/date_time/date_time_helper.dart';
@@ -67,11 +68,9 @@ class _EditUserProfileState extends State<EditUserProfile>
       }
   }
   bool changePassword = false;
-  TextEditingController birdthdayController = TextEditingController();
+  TextEditingController birthdayController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
-  TextEditingController roleController = TextEditingController();
   TextEditingController genderController = TextEditingController();
-  TextEditingController birthDayController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController positionController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
@@ -80,18 +79,23 @@ class _EditUserProfileState extends State<EditUserProfile>
   TextEditingController newPassWordAgainController = TextEditingController();
   TextEditingController billInfoController = TextEditingController();
   TextEditingController backNameController = TextEditingController();
-
   TextEditingController emailController = TextEditingController();
 
-
+  TextEditingController bioController = TextEditingController();
+  TextEditingController twitterController = TextEditingController();
+  TextEditingController facebookController = TextEditingController();
+  TextEditingController youtubeController = TextEditingController();
+  TextEditingController websiteController = TextEditingController();
+  
   bool enableEdit = false;
 
   
   @override
   Widget build(BuildContext context) {
     return Layout(
-      showBackButton: true,
+      showBackButton: true, 
         isScroll: false,
+      title: Text(L10nX.getStr.string_back,style: TextStyleConstant.textStyleBlack18w600,),
       child: FutureBuilder(
           future: getUserProfile(), 
           builder: (context, snapshot) {
@@ -164,7 +168,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                             visible: enableEdit == true,
                             child: MyButton(
                               onTap: () async {
-                                widget.userProfile?.birthday = birdthdayController.text;
+                                widget.userProfile?.birthday = birthdayController.text;
                                 widget.userProfile?.fullName = fullNameController.text;
                                 // widget.userProfile?.roleId = roleController.text;
                                 widget.userProfile?.gender = genderController.text;
@@ -173,6 +177,12 @@ class _EditUserProfileState extends State<EditUserProfile>
                                 widget.userProfile?.bankAccount = billInfoController.text;
                                 widget.userProfile?.bankName = backNameController.text;
                                 widget.userProfile?.email = emailController.text;
+                                widget.userProfile?.bio = bioController.text;
+                                widget.userProfile?.website = websiteController.text;
+                                widget.userProfile?.twitter = twitterController.text;
+                                widget.userProfile?.facebook = facebookController.text;
+                                widget.userProfile?.youtube = youtubeController.text;
+                                
                                 widget.userProfile?.roleId = roleId;
                                 dynamic updateUserApi;
                                 if((widget.editSelfProfile??true)){
@@ -319,7 +329,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                       );
                                     },
                                   ),
-                                  MySpacing.height(20),
+                                  Gap(Dimens.size20),
                                   Column(
                                     crossAxisAlignment:
                                     CrossAxisAlignment.start,
@@ -333,7 +343,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                                 hintText: "Enter your Fulle Name",
                                                 controller: fullNameController,),
                                           ),
-                                          MySpacing.width(20),
+                                          Gap(Dimens.size20),
                                           Expanded(
                                             child: StatefulBuilder(
                                               builder: (BuildContext context, void Function(void Function()) setState) {
@@ -350,7 +360,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                           ),
                                         ],
                                       ),
-                                      MySpacing.height(20),
+                                      Gap(Dimens.size20),
                                       Row(
                                         children: [
                                           Expanded(
@@ -361,12 +371,15 @@ class _EditUserProfileState extends State<EditUserProfile>
                                                 controller: genderController,
                                             ),
                                           ),
-                                          MySpacing.width(20),
+                                          Gap(Dimens.size20),
                     
                                           Expanded(
                                             child: BuildTextField(
                                               enableEdit: enableEdit,
-                                              suffixIcon: Icon(Icons.calendar_month,),
+                                              suffixIcon: Padding(
+                                                padding: EdgeInsets.all(Dimens.size8),
+                                                child: Icon(Icons.calendar_month,),
+                                              ),
                                               onTap: () {
                                                 DateTimePicker.ShowDialogDatePicker(
                                                   context: context,
@@ -377,19 +390,19 @@ class _EditUserProfileState extends State<EditUserProfile>
                                                     if(p1.isNotEmpty)
                                                     {
                                                       widget.userProfile?.birthday = DateTimeHelper.dateFormat(date: p1.first, dateType: DateTimeHelper.yyyyMMDD);
-                                                      birdthdayController.text= widget.userProfile?.birthday??"";
+                                                      birthdayController.text= widget.userProfile?.birthday??"";
                                                     }
                                                   },
                                                 );
                                               },
                                               fieldTitle: "Birthday",
                                               hintText: "Enter your birthday",
-                                              controller: birdthdayController,),
+                                              controller: birthdayController,),
                                           ),
                                         ],
                                       ),
                     
-                                      MySpacing.height(20),
+                                      Gap(Dimens.size20),
                                       Row(
                                         children: [
                                           Expanded(
@@ -399,7 +412,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                               hintText: "Enter your email",
                                               controller: emailController,),
                                           ),
-                                          MySpacing.width(20),
+                                          Gap(Dimens.size20),
                                           Expanded(
                                             child: BuildTextField(
                                               enableEdit: enableEdit,
@@ -409,12 +422,24 @@ class _EditUserProfileState extends State<EditUserProfile>
                                           ),
                                         ],
                                       ),
-                                      MySpacing.height(20),
+                                      Gap(Dimens.size20),
                                       BuildTextField(
                                           enableEdit: enableEdit,
                                           fieldTitle: L10nX.getStr.positions,
+                                          minLine: 2,
+                                          maxLine: 2,
+                                          maxheight: Dimens.size80,
                                           hintText: L10nX.getStr.positions,
                                           controller: positionController,),
+                                      Gap(Dimens.size20),
+                                      BuildTextField(
+                                        enableEdit: enableEdit,
+                                        fieldTitle: L10nX.getStr.biography_str,
+                                        minLine: 3,
+                                        maxLine: 3,
+                                        maxheight: Dimens.size120,
+                                        hintText: L10nX.getStr.biography_str,
+                                        controller: bioController,),
                                     ],
                                   ),
                                 ],
@@ -435,7 +460,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                         "Account Infomation",
                                         fontWeight: 600,
                                       ),
-                                      MySpacing.height(20),
+                                      Gap(Dimens.size20),
                                       StatefulBuilder(builder: (context, setState) {
                                         return Column(
                                           crossAxisAlignment:
@@ -450,7 +475,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                                 controller: userNameController,
                                               ),
                                             ),
-                                            MySpacing.height(20),
+                                            Gap(Dimens.size20),
                                             Visibility(
                                               visible: !changePassword && enableEdit && (widget.userProfile?.id!=null),
                                               child: MyButton(
@@ -486,7 +511,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                                             "Enter your old password",
                                                             controller: oldPasswordController,
                                                             obscure: true),
-                                                        MySpacing.height(20),
+                                                        Gap(Dimens.size20),
                                                       ],
                                                     ),
                                                   ),
@@ -497,7 +522,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                                       "Enter your new password",
                                                       controller: newPassWordController,
                                                       obscure: true),
-                                                  MySpacing.height(20),
+                                                  Gap(Dimens.size20),
                                                   buildTextField(
                                                       fieldTitle:
                                                       "Confirm New Password",
@@ -505,7 +530,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                                       "Confirm your new password",
                                                       controller: newPassWordAgainController,
                                                       obscure: true),
-                                                  MySpacing.height(20),
+                                                  Gap(Dimens.size20),
                                                   Visibility(
                                                     visible: widget.userProfile?.id!=null,
                                                     child: Row(
@@ -526,7 +551,7 @@ class _EditUserProfileState extends State<EditUserProfile>
                                                             color: ColorConst.mainColor,
                                                           ),
                                                         ),
-                                                        MySpacing.width(20),
+                                                        Gap(Dimens.size20),
                                                         MyButton(
                                                           onTap: () async {
                                                             if(newPassWordAgainController.text.isEmpty || 
@@ -581,31 +606,73 @@ class _EditUserProfileState extends State<EditUserProfile>
                                 MyCard(
                                   shadow: MyShadow(elevation: 0.5),
                                   child: Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       MyText.titleMedium(
                                         "Billing Infomation",
                                         fontWeight: 600,
                                       ),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                      Gap(Dimens.size20),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
-                                          BuildTextField(
-                                              enableEdit: enableEdit,
-                                              fieldTitle: "Bank Account",
-                                              hintText:
-                                              "Enter your Bank account",
-                                            controller: billInfoController,
+                                          Expanded(
+                                            child: BuildTextField(
+                                                enableEdit: enableEdit,
+                                                fieldTitle: "Bank Account",
+                                                hintText:
+                                                "Enter your Bank account",
+                                              controller: billInfoController,
+                                            ),
                                           ),
-                                          MySpacing.height(20),
-                                          BuildTextField(
+                                          Gap(Dimens.size20),
+                                          Expanded(
+                                            child: BuildTextField(
+                                                enableEdit: enableEdit,
+                                                fieldTitle: "Bank Name",
+                                                controller: backNameController,
+                                                hintText: "Enter your Bank Name",),
+                                          ),
+                                        ],
+                                      ),
+                                      Gap(Dimens.size20),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: BuildTextField(
                                               enableEdit: enableEdit,
-                                              fieldTitle: "Bank Name",
-                                              controller: backNameController,
-                                              hintText: "Enter your Bank Name",),
-                                          MySpacing.height(20),
+                                              fieldTitle: "Website",
+                                              hintText: "Enter your website",
+                                              controller: websiteController,),
+                                          ),
+                                          Gap(Dimens.size20),
+                                          Expanded(
+                                            child: BuildTextField(
+                                              enableEdit: enableEdit,
+                                              fieldTitle: "Twitter",
+                                              hintText: "Enter your twitter",
+                                              controller: twitterController,),
+                                          ),
+                                        ],
+                                      ),
+                                      Gap(Dimens.size20),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: BuildTextField(
+                                              enableEdit: enableEdit,
+                                              fieldTitle: "Facebook",
+                                              hintText: "Enter your facebook",
+                                              controller: facebookController,),
+                                          ),
+                                          Gap(Dimens.size20),
+                                          Expanded(
+                                            child: BuildTextField(
+                                              enableEdit: enableEdit,
+                                              fieldTitle: "Youtube",
+                                              hintText: "Enter your youtube",
+                                              controller: youtubeController,),
+                                          ),
                                         ],
                                       ),
                                     ],
@@ -775,7 +842,7 @@ class _EditUserProfileState extends State<EditUserProfile>
         widget.userProfile = UserManager().getUserProfile();
       }
       fullNameController.text = widget.userProfile?.fullName??"";
-      birdthdayController.text = widget.userProfile?.birthday??"";
+      birthdayController.text = widget.userProfile?.birthday??"";
      //roleController.text = widget.userProfile?.roleId.toString()??"";
      genderController.text = widget.userProfile?.gender??"";
      phoneNumberController.text = widget.userProfile?.phoneNumber??"";
@@ -783,9 +850,15 @@ class _EditUserProfileState extends State<EditUserProfile>
      userNameController.text = widget.userProfile?.userName??"";
      billInfoController.text = widget.userProfile?.bankAccount??"";
      backNameController.text = widget.userProfile?.bankName??"";
-      emailController.text = widget.userProfile?.email??"";
-      oldRoleId = widget.userProfile?.roleId??'';
-      roleId = widget.userProfile?.roleId??'';
+     emailController.text = widget.userProfile?.email??"";
+    bioController.text = widget.userProfile?.bio??"";
+    websiteController.text = widget.userProfile?.website??"";
+    twitterController.text = widget.userProfile?.twitter??"";
+    facebookController.text = widget.userProfile?.facebook??"";
+    youtubeController.text = widget.userProfile?.youtube??"";
+
+    oldRoleId = widget.userProfile?.roleId??'';
+     roleId = widget.userProfile?.roleId??'';
 
     return widget.userProfile;
   }

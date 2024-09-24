@@ -41,6 +41,12 @@ class UserProfile {
   String?roleId;
   String?roleName;
   String? accountId;
+  String? bio;
+  String? website;
+  String? twitter;
+  String? facebook;
+  String? youtube;
+
   UserProfile(
       {this.id,
         this.fullName,
@@ -65,7 +71,13 @@ class UserProfile {
         this.permission,
         this.password,
         this.roleName,
-        this.accountId
+        this.accountId,
+        this.bio,
+        this.website,
+        this.facebook,
+        this.twitter,
+        this.youtube,
+
       });
 
   UserProfile.fromJson(Map<String, dynamic> json) {
@@ -91,6 +103,8 @@ class UserProfile {
     email = json['email'];
     password=json['password'];
     permission=json['permissions']??'';
+
+
     permissionList = [];
     if(permission!=null && (permission??'').isNotEmpty)
       {
@@ -98,6 +112,11 @@ class UserProfile {
       }
     roleId = json['role_id']??json['roleId'];
     roleName = json['roleName'];
+    bio=json['bio']??'';
+    website=json['website']??'';
+    twitter=json['twitter']??'';
+    facebook=json['facebook']??'';
+    youtube=json['youtube']??'';
   }
 
   Map<String, dynamic> toJson() {
@@ -125,8 +144,11 @@ class UserProfile {
     data['permissions'] = permission;
     data['roleId'] = roleId;
     data['roleName'] = (roleName??'').trim();
-    data['account_id'] = accountId;
-
+    data['bio'] = bio;
+    data['website'] = website;
+    data['twitter'] = twitter;
+    data['facebook'] = facebook;
+    data['youtube'] = youtube;
     return data;
   }
   List<String> getPermission(){
@@ -156,7 +178,12 @@ class UserProfile {
     String? permission,
     String?roleId,
     String?roleName,
-    String?password
+    String?password,
+    String? bio,
+    String? website,
+    String? twitter,
+    String? facebook,
+    String? youtube
   }) {
     return UserProfile(
       id: id ?? this.id,
@@ -182,6 +209,11 @@ class UserProfile {
       roleId: roleId ?? this.roleId,
       password: password ?? this.password,
       roleName: roleName ?? this.roleName,
+      bio: bio ?? this.bio,
+      website: website ?? this.website,
+      facebook: facebook ?? this.facebook,
+      twitter: twitter ?? this.twitter,
+      youtube: youtube ?? this.youtube,
 
     );
   }

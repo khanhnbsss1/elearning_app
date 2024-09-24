@@ -13,7 +13,10 @@ class BuildTextField extends StatefulWidget {
   final bool? enableEdit;
   Function()? onTap;
   Widget? suffixIcon;
+  int?minLine;
+  int?maxLine;
   TextEditingController? controller;
+  double? maxheight;
   BuildTextField({
     this.fieldTitle,
     this.hintText,
@@ -21,7 +24,9 @@ class BuildTextField extends StatefulWidget {
     this.controller,
     this.onTap,
     this.suffixIcon,
-    this.enableHintText
+    this.enableHintText,this.minLine,
+    this.maxLine,
+    this.maxheight
   }){
     enableHintText??=true;
   }
@@ -57,12 +62,14 @@ class _BuildTextFieldState extends State<BuildTextField> with TickerProviderStat
             )),
         Container(
           constraints: BoxConstraints(
-            maxHeight: Dimens.size40
+            maxHeight: widget.maxheight??Dimens.size40
           ),
           child: TextFormField(
             controller: widget.controller,
             onTap: widget.onTap,
             style: TextStyleConstant.textStyleBlack14w400,
+            minLines: widget.minLine??1,
+            maxLines: widget.maxLine??1,
             decoration: InputDecoration(
               enabled: _enableEdit,
               hintText: widget.hintText,

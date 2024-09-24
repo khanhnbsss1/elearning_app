@@ -43,8 +43,8 @@ dependencies:
   provider: ^6.1.2
   url_launcher: ^6.3.0
 
-  syncfusion_flutter_charts: 
-    path: lib/plugins/syncfusion_flutter_charts-26.2.10
+  syncfusion_flutter_charts: ^27.1.50
+    #path: lib/plugins/syncfusion_flutter_charts-26.2.10
   flutter_blurhash: ^0.8.2
   feather_icons: ^1.2.0
   url_strategy: ^0.3.0
@@ -55,14 +55,14 @@ dependencies:
 
   font_awesome_flutter: ^10.7.0
   table_calendar: ^3.1.2
-  syncfusion_flutter_maps: ^26.2.10
+  syncfusion_flutter_maps: ^27.1.50
   socket_io_client: ^2.0.3+1
   #get: ^5.0.0-release-candidate-6
   get: ^4.6.6
-  syncfusion_flutter_calendar: ^26.2.10
-  syncfusion_flutter_datepicker: ^26.2.10
-  syncfusion_flutter_sliders: ^26.2.10
-  syncfusion_flutter_pdfviewer: ^26.2.13
+  syncfusion_flutter_calendar: ^27.1.50
+  syncfusion_flutter_datepicker: ^27.1.50
+  syncfusion_flutter_sliders: ^27.1.50
+  syncfusion_flutter_pdfviewer: ^27.1.50
   appflowy_board: ^0.1.2
   timelines: ^0.1.0
   countup: ^0.1.4
@@ -78,10 +78,10 @@ dependencies:
   package_info_plus: ^8.0.2
 
   flutter_screenutil: ^5.9.3
-  flutter_local_notifications: ^17.2.2
-  firebase_messaging: ^15.0.4
-  firebase_crashlytics: ^4.0.4
-  firebase_analytics: ^11.2.1
+  flutter_local_notifications: ^17.2.3
+  firebase_messaging: ^15.1.2
+  firebase_crashlytics: ^4.1.2
+  firebase_analytics: ^11.3.2
   easy_localization: ^3.0.7
   universal_html: ^2.2.4
   responsive_builder: ^0.7.1
@@ -92,15 +92,15 @@ dependencies:
   equatable: ^2.0.5
   flash: ^3.1.1
   fluttertoast: ^8.2.8
-  dio: ^5.6.0
+  dio: ^5.7.0
   image_gallery_saver: ^2.0.3
  # share_plus: ^10.0.2
   pull_to_refresh: ^2.0.0
   screenshot:
     path: lib/plugins/screenshot
   pinput: ^5.0.0
-  calendar_date_picker2: ^1.1.5
-  datepicker_dropdown: ^0.1.4
+  calendar_date_picker2: ^1.1.7
+  datepicker_dropdown: ^0.1.5
   connectivity_plus: ^6.0.5
   #flutter_native_splash: ^2.4.1
   dropdown_button2: ^3.0.0-beta.16
@@ -128,18 +128,18 @@ dependencies:
   multi_dropdown: ^3.0.1
   flutter_scroll_to_top: ^2.3.0
   video_player: ^2.9.1
-  youtube_player_flutter: ^9.0.3
-  youtube_player_iframe: ^5.1.5
+  youtube_player_flutter: ^9.1.0
+  youtube_player_iframe: ^5.2.0
   pointer_interceptor: ^0.10.1+2   # widget cho phep de event click tren iframe...
  # flutter_inappwebview: ^6.0.0
   smooth_scroll_multiplatform: 
     path: lib/plugins/smooth_scroll_multiplatform-1.0.8
   flutter_custom_pagination: ^0.2.0
-  amplify_flutter: ^2.4.0
+  amplify_flutter: ^2.4.1
   html: ^0.15.4
   file: ^7.0.0
   just_audio: ^0.9.40
-  syncfusion_flutter_datagrid: ^26.2.10
+  syncfusion_flutter_datagrid: ^27.1.50
   async_searchable_dropdown: 
     path: lib/plugins/async_searchable_dropdown-0.0.7+4
   flutter_rating_bar: ^4.0.1

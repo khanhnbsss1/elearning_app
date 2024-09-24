@@ -87,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "basic_table": MessageLookupByLibrary.simpleMessage("基本表格"),
         "basic_tables": MessageLookupByLibrary.simpleMessage("基本表格"),
         "begin_start_test": MessageLookupByLibrary.simpleMessage("开始测试"),
+        "biography_str": MessageLookupByLibrary.simpleMessage("傳記"),
         "blog": MessageLookupByLibrary.simpleMessage("博客"),
         "border_type": MessageLookupByLibrary.simpleMessage("边框类型"),
         "bordered": MessageLookupByLibrary.simpleMessage("有边框"),

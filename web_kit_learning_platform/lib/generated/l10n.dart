@@ -6909,6 +6909,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Biography`
+  String get biography_str {
+    return Intl.message(
+      'Biography',
+      name: 'biography_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

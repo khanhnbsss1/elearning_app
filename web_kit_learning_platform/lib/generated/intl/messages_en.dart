@@ -101,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "basic_table": MessageLookupByLibrary.simpleMessage("Basic table"),
         "basic_tables": MessageLookupByLibrary.simpleMessage("Basic tables"),
         "begin_start_test": MessageLookupByLibrary.simpleMessage("Start test"),
+        "biography_str": MessageLookupByLibrary.simpleMessage("Biography"),
         "blog": MessageLookupByLibrary.simpleMessage("Blog"),
         "border_type": MessageLookupByLibrary.simpleMessage("Border type"),
         "bordered": MessageLookupByLibrary.simpleMessage("Bordered"),
