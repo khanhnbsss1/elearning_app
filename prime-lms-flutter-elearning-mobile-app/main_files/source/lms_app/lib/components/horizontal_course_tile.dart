@@ -10,22 +10,24 @@ import '../utils/custom_cached_image.dart';
 import '../utils/next_screen.dart';
 
 class HorizontalCourseTile extends StatelessWidget {
-  const HorizontalCourseTile({
+  HorizontalCourseTile({
     super.key,
     required this.course,
     required this.widthPercentage,
     required this.imageHeight,
     required this.isDarkMode,
+    this.isFeatured
   });
   final bool isDarkMode;
   final CourseInfo course;
   final double widthPercentage;
   final double imageHeight;
+  bool? isFeatured;
 
   @override
   Widget build(BuildContext context) {
     final heroTag = UniqueKey();
-
+    isFeatured??=false;
     return GestureDetector(
       onTap: () => NextScreen.iOS(
           context, CourseDetailsView(courses: course, heroTag: heroTag)),
@@ -62,6 +64,17 @@ class HorizontalCourseTile extends StatelessWidget {
                         ),
                       )
                     )),
+                if (isFeatured!) Align(
+                  alignment: Alignment.topRight,
+                  child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(5), color: Theme.of(context).primaryColor.withOpacity(0.8)),
+                      margin: const EdgeInsets.all(20),
+                      child: Text(
+                        'featured',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                      ).tr()),
+                )
                 // PremiumTag(course: course),
               ],
             ),

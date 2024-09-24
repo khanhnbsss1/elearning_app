@@ -469,6 +469,7 @@ class _EditProfileState extends ConsumerState<EditProfile> {
           fontSize: 15,
           fontWeight: FontWeight.bold,
         ),
+        daySplashColor: Colors.transparent,
         centerAlignModePicker: true,
         customModePickerIcon: const SizedBox(),
       ),
