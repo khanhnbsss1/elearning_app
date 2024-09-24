@@ -193,6 +193,7 @@ class ApiService {
             categoryId: categoryId,
             producerName: producerName,
             typePayment: typePayment,
+            mode: mode,
             pageSize: 100,
             pageNumber: pageNumber,
             keyword: keyword??"",

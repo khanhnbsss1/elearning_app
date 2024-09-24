@@ -50,11 +50,7 @@ class AuthorCourses extends ConsumerWidget {
                   onPressed: () => NextScreen.iOS(
                       context,
                       AllCoursesView(
-                        filter: 'Author',
-                        subFilterInfo: SubFilterInfo(
-                          id: teacherDetail.id,
-                          name: teacherDetail.fullName,
-                        ),
+                        producerName: teacherDetail.fullName,
                       )),
                   // onPressed: (){},
                 ),

@@ -209,9 +209,11 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories>
         ),
         SearchResult(
           paddingAll: 0,
-          producerId: authorFilterInfo.id,
-          filter: courseFilterInfo.name ?? "All",
-          subFilterInfo: subFilterInfo,
+          gradeId: (courseFilterInfo.name == "Grade" && subFilterInfo.id != null) ? subFilterInfo.id : null,
+          categoryId: (courseFilterInfo.name == "Category" && subFilterInfo.id != null) ? subFilterInfo.id : null,
+          typePayment: (courseFilterInfo.name == "High Payment" || courseFilterInfo.name == "Low Payment") ? courseFilterInfo.name : null,
+          mode: (courseFilterInfo.name == "Free" || courseFilterInfo.name == "Premium") ? courseFilterInfo.name : null,
+          producerName: authorFilterInfo.name,
           gridStyle: GridStyle.grid,
         )
       ],
@@ -316,9 +318,7 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories>
         ),
         SearchResult(
           paddingAll: 0,
-          producerId: authorFilterInfo.id,
-          filter: courseFilterInfo.name ?? "All",
-          subFilterInfo: subFilterInfo,
+          producerName: authorFilterInfo.name,
           gridStyle: GridStyle.grid,
         )
       ],

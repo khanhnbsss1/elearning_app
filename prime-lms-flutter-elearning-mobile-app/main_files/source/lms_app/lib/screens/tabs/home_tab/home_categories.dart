@@ -57,7 +57,7 @@ class HomeCategories extends ConsumerWidget {
                       .map((e) => ActionChip(
                             onPressed: () => NextScreen.iOS(
                               context,
-                              AllCoursesView(filter: e.name??"",),
+                              AllCoursesView(),
                             ),
                             elevation: 0,
                             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),

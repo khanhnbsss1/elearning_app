@@ -51,9 +51,9 @@ class HomeTab extends ConsumerWidget {
       Image.asset('assets/images/teacher1.png'),
       Image.asset('assets/images/dictionary (1).png'),
     ];
-    List<Widget> func = const [
-      AllCoursesView(filter: 'All'),
-      AllCoursesView(filter: 'free_course'),
+    List<Widget> func = [
+      AllCoursesView(),
+      AllCoursesView(mode: "Free",),
       MyCoursesTab(),
       TestListScreen(),
       AllAuthors(),

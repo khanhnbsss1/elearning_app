@@ -14,11 +14,23 @@ enum GridStyle { grid, box, list }
 final gridStyleProvider = StateProvider<GridStyle>((ref) => GridStyle.grid);
 
 class AllCoursesView extends ConsumerStatefulWidget {
-  const AllCoursesView({super.key, required this.filter, this.subFilterInfo});
+  AllCoursesView(
+      {super.key,
+      this.gradeId,
+      this.categoryId,
+      this.typePayment,
+      this.mode,
+      this.keyword,
+      this.producerName,
+      this.title});
 
-  // final CourseFilterInfo courseFilterInfo;
-  final String filter;
-  final SubFilterInfo? subFilterInfo;
+  int? gradeId;
+  int? categoryId;
+  String? typePayment;
+  String? mode;
+  String? keyword;
+  String? producerName;
+  String? title;
 
   @override
   ConsumerState<AllCoursesView> createState() => _AllCoursesViewState();
@@ -29,7 +41,7 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
     final gridStyle = ref.watch(gridStyleProvider);
     return Scaffold(
       appBar: AppBar(
-        title: (widget.filter == "All") ? Text('latest-courses'.tr()) : (widget.subFilterInfo == null) ? Text(widget.filter.replaceAll('_','-').tr()) : Text(widget.subFilterInfo!.name!.toUpperCase()),
+        title: Text('${widget.title ?? ""}'),
         titleTextStyle: Theme.of(context)
             .textTheme
             .titleMedium
@@ -52,14 +64,19 @@ class _AllCoursesViewState extends ConsumerState<AllCoursesView> {
       bottomNavigationBar:
           AdManager.isBannerEnbaled(ref) ? const BannerAdWidget() : null,
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            FilterContainer(gridStyle: gridStyle, ref: ref),
-            SearchResult(filter: widget.filter, subFilterInfo: widget.subFilterInfo??SubFilterInfo(), gridStyle: gridStyle,),
-          ],
-        )
-      ),
+          child: Column(
+        children: [
+          FilterContainer(gridStyle: gridStyle, ref: ref),
+          SearchResult(
+            gradeId: widget.gradeId,
+            categoryId: widget.categoryId,
+            typePayment: widget.typePayment,
+            mode: widget.mode,
+            keyword: widget.keyword,
+            gridStyle: gridStyle,
+          ),
+        ],
+      )),
     );
   }
 }
-

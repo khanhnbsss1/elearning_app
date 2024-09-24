@@ -17,19 +17,26 @@ import 'grid_course_tile.dart';
 import 'grid_list_course_tile.dart';
 
 class SearchResult extends ConsumerStatefulWidget {
-  SearchResult(
-      {super.key,
-        this.paddingAll,
-      required this.filter,
-      required this.subFilterInfo,
-        this.producerId,
-      required this.gridStyle});
+  SearchResult({
+    super.key,
+    this.paddingAll,
+    this.gradeId,
+    this.categoryId,
+    this.typePayment,
+    this.mode,
+    this.keyword,
+    this.producerName,
+    required this.gridStyle,
+  });
 
   double? paddingAll;
-  int? producerId;
-  final String filter;
-  final SubFilterInfo subFilterInfo;
   final GridStyle gridStyle;
+  int? gradeId;
+  int? categoryId;
+  String? typePayment;
+  String? mode;
+  String? keyword;
+  String? producerName;
 
   @override
   ConsumerState<SearchResult> createState() => _SearchResultState();
@@ -46,7 +53,12 @@ class _SearchResultState extends ConsumerState<SearchResult> {
   @override
   void didUpdateWidget(oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.filter != widget.filter || oldWidget.subFilterInfo != widget.subFilterInfo || oldWidget.producerId != widget.producerId) {
+    if (oldWidget.gradeId != widget.gradeId ||
+        oldWidget.categoryId != widget.categoryId ||
+        oldWidget.typePayment != widget.typePayment ||
+        oldWidget.keyword != widget.keyword ||
+        oldWidget.producerName != widget.producerName ||
+        oldWidget.mode != widget.mode) {
       _onRefresh();
     }
   }
@@ -56,7 +68,7 @@ class _SearchResultState extends ConsumerState<SearchResult> {
     super.initState();
     _controller = ScrollController(initialScrollOffset: 0.0);
     _controller.addListener(_scrollListener);
-    _getCourse(widget.filter, _pageNumber);
+    _getCourse();
   }
 
   _scrollListener() async {
@@ -70,17 +82,21 @@ class _SearchResultState extends ConsumerState<SearchResult> {
   Future<void> _loadMore() async {
     setState(() {
       _pageNumber++;
-      _getCourse(widget.filter, _pageNumber);
+      _getCourse();
     });
   }
 
-  Future<void> _getCourse(
-      String filter, int pageNumber, ) async {
-    final List<CourseInfo>? courses = await ApiService().getCourseByCategoriesV2(
-        pageNumber: pageNumber,
-        filter: filter.replaceAll(" ", "_"),
-        producerId: widget.producerId,
-        subFilterId: widget.subFilterInfo.id == null ? "" : widget.subFilterInfo.id.toString());
+  Future<void> _getCourse() async {
+    final List<CourseInfo>? courses = await ApiService()
+        .getCourseByCategoriesV2(
+            categoryId: widget.categoryId,
+            gradeId: widget.gradeId,
+            producerName: widget.producerName,
+            typePayment: widget.typePayment,
+            mode: widget.mode,
+            keyword: widget.keyword,
+            pageNumber: _pageNumber,
+    );
     if (_courses != [] && courses != [] && courses != null) {
       setState(() {
         _isLoading = false;
@@ -100,7 +116,7 @@ class _SearchResultState extends ConsumerState<SearchResult> {
     _courses.clear();
     _hasData = false;
     setState(() {});
-    await _getCourse(widget.filter, 0);
+    await _getCourse();
   }
 
   @override
@@ -114,14 +130,17 @@ class _SearchResultState extends ConsumerState<SearchResult> {
           children: [
             // FilterContainer(gridStyle: widget.gridStyle, ref: ref),
             _isLoading
-                ? LoadingGridTile(gridStyle: widget.gridStyle, paddingAll: widget.paddingAll,)
+                ? LoadingGridTile(
+                    gridStyle: widget.gridStyle,
+                    paddingAll: widget.paddingAll,
+                  )
                 : _courses.isEmpty
                     ? EmptyAnimation(
                         animationString: emptyAnimation,
                         title: 'no-course'.tr())
                     : GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        padding: EdgeInsets.all(widget.paddingAll??20),
+                        padding: EdgeInsets.all(widget.paddingAll ?? 20),
                         shrinkWrap: true,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount:
