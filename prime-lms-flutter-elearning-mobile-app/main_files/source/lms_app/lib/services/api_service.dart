@@ -90,7 +90,7 @@ class ApiService {
   }
 
   Future<List<CourseInfo>?> getRelatedCoursesByCategory(CourseInfo course) async {
-    GetCourseListV2Api getCourseListApi = GetCourseListV2Api(searchCommonRequestV2: SearchCommonRequestV2(gradeId: course.gradeId));
+    GetCourseListV2Api getCourseListApi = GetCourseListV2Api(searchCommonRequestV2: SearchCommonRequestV2(gradeId: course.gradeId, pageNumber: 0, pageSize: 10));
     CourseResponseModel courseResponseModel = await getCourseListApi.call();
     return courseResponseModel.content??[];
   }
