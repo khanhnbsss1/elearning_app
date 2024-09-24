@@ -8,6 +8,7 @@ enum TestWorkStatus {
   onChangePage,
   onUpdateChooseQuestion,
   onScoreResult,
+  onStartTest, 
   unKnown
 }
 
@@ -16,6 +17,7 @@ class TestWorkState extends Equatable {
   TestWorkStatus? blocStatus;
   TestInfo? testInfo;
   bool? enableShowResult;
+  bool? startTest;
   int? page;
   int? pageSize;
   ScoreResultInfo? result;
@@ -27,10 +29,12 @@ class TestWorkState extends Equatable {
     this.pageSize, 
     this.quizDTOsForView,
     this.page,
-    this.result
+    this.result,
+    this.startTest
   }){
     page??=0;
     pageSize??=8;
+    startTest??=false;
   }
   
   TestWorkState copyWith({
@@ -40,7 +44,8 @@ class TestWorkState extends Equatable {
     int? page,
     int? pageSize,
     List<List<QuestionInfo>>? quizDTOsForView,
-    ScoreResultInfo? result
+    ScoreResultInfo? result,
+    bool? startTest
   })
   {
     return TestWorkState(
@@ -51,6 +56,7 @@ class TestWorkState extends Equatable {
       pageSize: pageSize??this.pageSize,
       quizDTOsForView: quizDTOsForView??this.quizDTOsForView,
       result: result??this.result,
+      startTest: startTest??this.startTest,
 
     );
   }
@@ -62,7 +68,8 @@ class TestWorkState extends Equatable {
     page, 
     pageSize,
     quizDTOsForView,
-    result
+    result,
+    startTest
   ];
 
 }

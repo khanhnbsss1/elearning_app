@@ -121,7 +121,7 @@ class _CategoryListPageState extends State<CategoryListPage> with SingleTickerPr
             child: buildTagList(state: state, context: context),
           )),
           SizedBox(height: 8,),
-          Row(
+          /*Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               PaginationCustom(
@@ -149,7 +149,7 @@ class _CategoryListPageState extends State<CategoryListPage> with SingleTickerPr
                 goToLastPageIcon: Icons.last_page,
               ),
             ],
-          ),
+          ),*/
         ],
       ),
     );

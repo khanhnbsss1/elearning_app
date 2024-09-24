@@ -554,7 +554,7 @@ class RequestListDataSource extends DataGridSource {
                             enable: e.status== "New",
                             enableBgColor: ColorConst.whiteColor,
                             borderColor: ColorConst.greyColor,
-                            textStype: TextStyleConstant.textStyleBlack16w600,
+                            textStype: TextStyleConstant.textStyleBlack14w600,
                             onTap: () {
                               onReject(e);
                             },
@@ -572,7 +572,7 @@ class RequestListDataSource extends DataGridSource {
                         enable: e.status== "Accept" || e.status== "Reject",
                         enableBgColor: ColorConst.whiteColor,
                         borderColor: ColorConst.greyColor,
-                        textStype: TextStyleConstant.textStyleBlack16w600,
+                        textStype: TextStyleConstant.textStyleBlack14w600,
                         onTap: () {
                           onRenew(e);
                         },

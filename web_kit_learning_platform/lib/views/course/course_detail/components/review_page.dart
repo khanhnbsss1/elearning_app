@@ -234,7 +234,7 @@ class ReviewPage extends StatelessWidget with UIMixin {
                             ActionButton1(
                               text: L10nX.getStr.cancel,
                               enableBgColor: ColorConst.whiteColor,
-                              textStype: TextStyleConstant.textStyleBlack16w600,
+                              textStype: TextStyleConstant.textStyleBlack14w600,
                               onTap: () {
                                setState(() {
                                  if(state.courseInfo?.myRating!=0)

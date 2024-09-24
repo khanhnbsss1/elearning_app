@@ -412,7 +412,7 @@ class _CourseListByRegistedUserPageState extends State<CourseListByRegistedUserP
                             label: Container(
                                 padding: EdgeInsets.all(Dimens.size8),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.number_registered_user, style: TextStyleConstant.textStyleBlack14w500,))),
+                                child: Text(L10nX.getStr.number_registered_user, textAlign: TextAlign.center,style: TextStyleConstant.textStyleBlack14w500,))),
                       ],
                     ),
                   );

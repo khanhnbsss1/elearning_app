@@ -336,7 +336,7 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                                 ))),
                         GridColumn(
                             columnName: L10nX.getStr.category,
-                            maximumWidth: Dimens.size180,
+                            maximumWidth: Dimens.size250,
                             minimumWidth: Dimens.size150,
 
                             label: Container(
@@ -411,16 +411,24 @@ class RevenueHistoryDataSource extends DataGridSource {
             )),
             DataGridCell<Widget>(columnName: L10nX.getStr.grade_name_str, value: Row(
               children: [
-                Expanded(child: Text(e.gradeName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+                Expanded(
+                    child: Text(e.gradeName??"",
+                      textAlign: TextAlign.center,
+                  style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
 
             DataGridCell<Widget>(columnName: L10nX.getStr.register_user, value: Row(
               children: [
-                Expanded(child: Text(e.userName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+                Expanded(
+                    child: Text(e.userName??"",
+                  textAlign: TextAlign.center,
+                  style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
-            DataGridCell<Widget>(columnName: L10nX.getStr.price, value: Text((e.amount??0).toString(), style: TextStyleConstant.textStyleBlack14w400,)),
+            DataGridCell<Widget>(columnName: L10nX.getStr.price, 
+                value: Text((e.amount??0).toString(), 
+                  style: TextStyleConstant.textStyleBlack14w400,)),
           ]);
     },).toList();
   }

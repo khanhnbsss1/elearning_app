@@ -97,7 +97,7 @@ class ConfirmPopupPageState extends State<ConfirmPopupPage> with SingleTickerPro
                           },
                           text: widget.cancel??S.of(context).str_cancel,
                           enableBgColor: ColorConst.whiteColor,
-                          textStype: TextStyleConstant.textStyleBlack16w600,
+                          textStype: TextStyleConstant.textStyleBlack14w600,
                           height: Dimens.size40),
                       Gap(Dimens.size20),
                       ActionButton1(

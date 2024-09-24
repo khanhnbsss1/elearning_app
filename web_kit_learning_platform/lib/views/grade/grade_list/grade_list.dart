@@ -120,7 +120,7 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
             child: buildTagList(state: state, context: context),
           )),
           SizedBox(height: 8,),
-          Row(
+          /*Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               PaginationCustom(
@@ -148,7 +148,7 @@ class _GradeListPageState extends State<GradeListPage> with SingleTickerProvider
                 goToLastPageIcon: Icons.last_page,
               ),
             ],
-          ),
+          ),*/
         ],
       ),
     );

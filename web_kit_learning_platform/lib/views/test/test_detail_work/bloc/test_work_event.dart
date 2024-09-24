@@ -11,6 +11,11 @@ class TestWorkInitEvent extends TestWorkEvent {
   @override
   List<Object?> get props => [];
 }
+class TestWorkStartTestEvent extends TestWorkEvent {
+  TestWorkStartTestEvent();
+  @override
+  List<Object?> get props => [];
+}
 class TestWorkOnUpdateChooseQuestionEvent extends TestWorkEvent {
   QuestionInfo questionInfo;
   TestWorkOnUpdateChooseQuestionEvent({required this.questionInfo});

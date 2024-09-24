@@ -81,8 +81,8 @@ class LectureList extends StatelessWidget{
         lessonIndex ++;
         listLesson.add(
             Container(
-              padding: EdgeInsets.symmetric( vertical: 16),
-              margin: EdgeInsets.symmetric(horizontal: 32),
+              padding: EdgeInsets.symmetric( vertical: Dimens.size16),
+              margin: EdgeInsets.symmetric(horizontal: Dimens.size32),
               decoration: BoxDecoration(
                   //border: Border(bottom: BorderSide(color: ColorConst.dividerColor, ))
               ),
@@ -108,18 +108,19 @@ class LectureList extends StatelessWidget{
       borderColor: ColorConst.colorIconGrays.withOpacity(0.1),
       enableDivider: true,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             decoration: BoxDecoration(
               border: Border(left: BorderSide(color: ColorConst.dividerColor))
             ),
             child: Column(
-              
             ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children:listLesson,
           ),
         ],

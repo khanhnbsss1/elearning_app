@@ -101,8 +101,8 @@ class LessonInfo {
 
   LessonInfo.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    subName = json['sub_name'];
-    lectureName = json['lecture_name']?? json['name'];
+    subName = (json['sub_name']??"").toString().trim();
+    lectureName = (json['lecture_name']?? json['name']??"").toString().trim();
     isFinnish = json['learning_status']== 'Completed'?true:false;
     proccess = json['progress'];
     videoInfos = LinkInfo(link: []);

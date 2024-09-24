@@ -10,10 +10,8 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/controller/dashboard_controller.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
 import 'package:webkit/helpers/utils/my_shadow.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my.dart';
 import 'package:webkit/helpers/widgets/my_card.dart';
 import 'package:webkit/helpers/widgets/my_container.dart';
 import 'package:webkit/helpers/widgets/my_dotted_line.dart';
@@ -712,12 +710,6 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                           fontWeight: 600,
                         ),
                       ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            LucideIcons.moveRight,
-                            size: 20,
-                          ))
                     ],
                   ),
                   MySpacing.height(16),
@@ -792,12 +784,6 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                             fontWeight: 600,
                           ),
                         ),
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              LucideIcons.moveRight,
-                              size: 20,
-                            ))
                       ],
                     ),
                     MySpacing.height(16),

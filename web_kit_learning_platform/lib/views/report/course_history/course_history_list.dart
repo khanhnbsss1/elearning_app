@@ -285,11 +285,10 @@ class _CourseHistoryListPageState extends State<CourseHistoryListPage> with Sing
                             columnName: L10nX.getStr.time_str,
                             minimumWidth: Dimens.size100,
                             maximumWidth: Dimens.size200,
-
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
-                                child: Text(L10nX.getStr.time_str, style: TextStyleConstant.textStyleBlack14w500,))),
+                                child: Text(L10nX.getStr.time_str, textAlign: TextAlign.center,style: TextStyleConstant.textStyleBlack14w500,))),
                       ],
                     ),
                   );
@@ -337,7 +336,7 @@ class CourseHistoryDataSource extends DataGridSource {
 
             DataGridCell<Widget>(columnName: L10nX.getStr.time_str, value: Row(
               children: [
-                Expanded(child: Text(e.timeValue??"", style: TextStyleConstant.textStyleBlack14w400,)),
+                Expanded(child: Text(e.timeValue??"", textAlign: TextAlign.center,style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
           ]);
