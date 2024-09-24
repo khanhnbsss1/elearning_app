@@ -289,7 +289,6 @@ getPageRoute() {
         middlewares: [AuthMiddleware()]),
     GetPage(
         name: Routes.dashboardRoute,
-        
         page: () =>  DashboardPage(key: UniqueKey(),),
         middlewares: [AuthMiddleware()]
     ),

@@ -697,5 +697,6 @@
   "time_register": "Số lần dăng ký",
   "user_by_course": "Người dùng theo khóa học",
   "number_registered_user": "Số người đăng ký",
-  "biography_str": "Tiểu sử"
+  "biography_str": "Tiểu sử",
+  "course_care_str": "Quan tâm nhiều nhất"
 }

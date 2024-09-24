@@ -48,6 +48,8 @@ class FilterManager{
   TestListResponseModel testListResponseModel = TestListResponseModel(content: []);
   VocabularyResponseModel vocabularyResponseModel = VocabularyResponseModel(content: []);
   CourseProgressResponseModel courseProgressResponseModel = CourseProgressResponseModel(content: []);
+  List<bool>calApi = [false,false,false,false,false, false, false, false, false, false, false ];
+
   FilterInfo filterInfo = FilterInfo(
     listOfAccompanyCourses: {},
     listOfCategoryName: {},
@@ -58,63 +60,75 @@ class FilterManager{
   );
   Future<void> init()async {
     await getFilterCourse();
-    await getCategoryFilter();
-   await getGradesInfo();
   }
 
   Future<CourseFilterListInfo> getFilterCourse() async {
-    if((courseFilterListInfo.data??[]).isNotEmpty) {
+    if((courseFilterListInfo.data??[]).isNotEmpty || calApi[0]!=false) {
       return courseFilterListInfo;
     }
+    calApi[0]=true;
     GetCourseFilterApi getCourseFilterApi = GetCourseFilterApi();
-    return await getCourseFilterApi.call();
+    courseFilterListInfo = await getCourseFilterApi.call();
+    calApi[0]=false;
+    return courseFilterListInfo;
   }
 
   Future<QuestionListResponseModel> getQuestionListAll(String keyword,{bool? isReload}) async {
   isReload??=false;
-    if((questionListResponseModel.content??[]).isNotEmpty&& isReload==false) {
+    if(((questionListResponseModel.content??[]).isNotEmpty&& isReload==false) || calApi[1]!=false) {
       return questionListResponseModel;
     }
+  calApi[1]=true;
     GetQuizListApi getQuizFilterApi = GetQuizListApi(searchCommonRequest: SearchCommonRequest(pageNumber: -1));
     questionListResponseModel = await getQuizFilterApi.call();
+  calApi[1]=false;
     return questionListResponseModel;
   }
   
   Future<QuestionListResponseModel> getFilterQuestion({bool? isReload}) async {
     isReload??=false;
-    if((questionListResponseModel.content??[]).isNotEmpty && isReload==false) {
+    
+    if(((questionListResponseModel.content??[]).isNotEmpty && isReload==false) || calApi[2]!=false) {
       return questionListResponseModel;
     }
+    calApi[2]=true;
     GetQuizFilterApi getQuizFilterApi = GetQuizFilterApi();
     questionListResponseModel = await getQuizFilterApi.call();
+    calApi[2]=false;
     return questionListResponseModel;
   }
 
 
   Future<TestListResponseModel> getTestListAll(String keyword, {bool? isReload}) async {
     isReload??=false;
-    if((testListResponseModel.content??[]).isNotEmpty&& isReload==false) {
+    if(((testListResponseModel.content??[]).isNotEmpty&& isReload==false) || calApi[3]!=false) {
       return testListResponseModel;
     }
+    calApi[3]=true;
     GetTestListApi getTestFilterApi = GetTestListApi(searchCommonRequest: SearchCommonRequest(pageNumber: -1));
     testListResponseModel =  await getTestFilterApi.call();
+    calApi[3]=false;
     return testListResponseModel;
   }
   
   Future<TestListResponseModel> getFilterTest() async {
-    if((testListResponseModel.content??[]).isNotEmpty) {
+    if((testListResponseModel.content??[]).isNotEmpty || calApi[5]!=false) {
       return testListResponseModel;
     }
+    calApi[5]=true;
     GetTestFilterApi getTestFilterApi = GetTestFilterApi();
     testListResponseModel =  await getTestFilterApi.call();
+    calApi[5]=false;
     return testListResponseModel;
   }
   
   Future<FilterInfo> getCourseFilter() async {
-    if(addCourseFilterModel==null|| (addCourseFilterModel?.data??[]).isEmpty)
+    if((addCourseFilterModel==null|| (addCourseFilterModel?.data??[]).isEmpty) && calApi[6]==false)
       {
+        calApi[6]=true;
         GetAddCourseFilterApi addCourseFilterApi = GetAddCourseFilterApi();
         addCourseFilterModel = await addCourseFilterApi.call();
+        calApi[6]=false;
         addCourseFilterModel?.data?.forEach((data) {
           switch (data.filterType) {
             case 'CATEGORY':
@@ -167,49 +181,59 @@ class FilterManager{
     return filterInfo;
   }
   Future<GradeListResponseModel?> getGradesInfo() async {
-    if(gradeListResponseModel==null || (gradeListResponseModel?.content??[]).isEmpty)
+    if((gradeListResponseModel==null || (gradeListResponseModel?.content??[]).isEmpty) && calApi[7]!=false)
     {
+      calApi[7]=true;
       GetGradeListApi api = GetGradeListApi();
       gradeListResponseModel = await api.call();
+      calApi[7]=false;
     }
     return gradeListResponseModel;
   }
 
   Future<CategoryListResponseModel?> getCategoryFilter() async {
-    if(categoryListResponseModel==null|| (categoryListResponseModel?.content??[]).isEmpty)
+    if((categoryListResponseModel==null|| (categoryListResponseModel?.content??[]).isEmpty)&& calApi[8]==false)
     {
+      calApi[8]=true;
       GetCategoryListApi api =GetCategoryListApi();
       categoryListResponseModel = await api.call();
+      calApi[8]=false;
     }
     return categoryListResponseModel;
   }
   Future<LessonListResponseModel?> getLessonListAllInfo(String keyword, {bool ?isReload}) async {
     isReload??=false;
-    if((lessonListResponseModel?.content??[]).isNotEmpty && isReload==false) {
+    if(((lessonListResponseModel?.content??[]).isNotEmpty && isReload==false)|| calApi[9]!=false) {
       return lessonListResponseModel;
     }
+    calApi[9]=true;
     GetLessonListApi getLessonListFilterApi = GetLessonListApi(searchCommonRequest: SearchCommonRequest(pageNumber: -1));
     lessonListResponseModel =  await getLessonListFilterApi.call();
+    calApi[9]=false;
     return lessonListResponseModel;
   }
 
   Future<VocabularyResponseModel?> getVocabularyListAllInfo(String keyword, {bool ?isReload}) async {
     isReload??=false;
-    if((vocabularyResponseModel.content??[]).isNotEmpty && isReload==false) {
+    if(((vocabularyResponseModel.content??[]).isNotEmpty && isReload==false)||calApi[10]||false) {
       return vocabularyResponseModel;
     }
+    calApi[10]=true;
     GetListVocabularyApi getLessonListFilterApi = GetListVocabularyApi(
         searchCommonRequest: SearchCommonRequest(pageNumber: -1, vocabularyType: "", pageSize: 100));
     vocabularyResponseModel =  await getLessonListFilterApi.call();
+    calApi[10]=false;
     return vocabularyResponseModel;
   }
   Future<CourseProgressResponseModel?> getCourseProccessListInfo({bool? isReload}) async {
     isReload??=false;
-    if((courseProgressResponseModel.content??[]).isNotEmpty && isReload==false) {
+    if(((courseProgressResponseModel.content??[]).isNotEmpty && isReload==false)||calApi[11]!=false) {
       return courseProgressResponseModel;
     }
+    calApi[11]=true;
     GetCourseProccessListApi getLessonListFilterApi = GetCourseProccessListApi();
     courseProgressResponseModel =  await getLessonListFilterApi.call();
+    calApi[11]=false;
     return courseProgressResponseModel;
   }
 
@@ -526,6 +550,5 @@ class FilterInfo {
     listOfGradeNames??={};
     listOfTags??=[];
     listOfProduceNames??={};
-
   }
 }

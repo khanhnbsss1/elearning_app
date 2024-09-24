@@ -181,7 +181,11 @@ class SearchCommonRequest {
     String? type,
     String? vocabularyType,
     String? mode,
-    String?producerName
+    String?producerName,
+    int? limit,
+    String? startTime,
+    String? endTime,
+    int?courseId,
   }){
     return SearchCommonRequest(
       userId: userId??this.userId,
@@ -203,6 +207,11 @@ class SearchCommonRequest {
       vocabularyType: vocabularyType??this.vocabularyType,
       mode: mode??this.mode,
       producerName: producerName??this.producerName,
+      startTime: startTime??this.startTime,
+      limit: limit??this.limit,
+      endTime: endTime??this.endTime,
+      courseId: courseId??this.courseId,
+
     );
 }
 }

@@ -6919,6 +6919,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Most Care`
+  String get course_care_str {
+    return Intl.message(
+      'Most Care',
+      name: 'course_care_str',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

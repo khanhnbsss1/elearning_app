@@ -61,7 +61,7 @@ class LoginController extends MyController {
         {
           await UserManager().saveAccountLoginNearest("${IdentifierConst.username}&&_&&${IdentifierConst.password}");
         }
-        AppPages.routeName(Routes.courseList);
+        AppPages.routeName(Routes.dashboardRoute);
       }
       else
       {

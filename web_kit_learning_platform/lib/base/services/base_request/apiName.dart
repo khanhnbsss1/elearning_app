@@ -28,6 +28,8 @@ class ApiName {
   final String updateCourse = "/update-course";
   final String getCourseList = "/advanced-filter-courses";
   final String getMyCourses = "/get-my-courses-v2";
+  final String getCourseInterestList = "/get-interest-courses";
+
   final String getCourseDetail = "/get-course-detail";
   final String deleteCourse = "/delete-course";
   final String getFilterCourse = "/filter-directory";

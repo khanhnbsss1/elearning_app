@@ -142,6 +142,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("FFTSolution - 版权所有 2022"),
         "copyright_str": MessageLookupByLibrary.simpleMessage("版权所有 ©"),
         "coure_top_review": MessageLookupByLibrary.simpleMessage("评论数量最多的课程"),
+        "course_care_str": MessageLookupByLibrary.simpleMessage("最感興趣"),
         "course_category_str": MessageLookupByLibrary.simpleMessage("课程类别"),
         "course_create": MessageLookupByLibrary.simpleMessage("创建课程"),
         "course_delete": MessageLookupByLibrary.simpleMessage("删除课程"),
