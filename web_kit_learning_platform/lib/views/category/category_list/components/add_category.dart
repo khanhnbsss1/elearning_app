@@ -42,7 +42,8 @@ class AddCategoryPage extends StatefulWidget{
           callBack(value);
         }
     },);
-  }}
+  }
+}
 class AddCategoryPageState extends State<AddCategoryPage>with UIMixin {
   TextEditingController tagController = TextEditingController();
 

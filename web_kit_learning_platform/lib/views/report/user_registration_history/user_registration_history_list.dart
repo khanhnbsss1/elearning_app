@@ -316,7 +316,6 @@ class UserRegisteredHistoryInfoDataSource extends DataGridSource {
                 Expanded(child: Text(e.fullname??"", textAlign: TextAlign.center, style: TextStyleConstant.textStyleBlack14w400,)),
               ],
             )),
-
             DataGridCell<Widget>(columnName: L10nX.getStr.time_str, value: Row(
               children: [
                 Expanded(child: Text(e.createdAt??"", style: TextStyleConstant.textStyleBlack14w400,)),

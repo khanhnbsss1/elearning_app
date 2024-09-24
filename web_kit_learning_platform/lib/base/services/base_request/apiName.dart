@@ -75,9 +75,10 @@ class ApiName {
 
   final String getUserDetail = "/get-user";
   final String getUserList = "/get-user-list";
-  
+  final String getUserListCourses = "/get-user-courses";
 
- /// them tu dien
+
+  /// them tu dien
   final String addVocabulary = "/create-vocabulary";
   final String getListVocabulary = "/get-list";
   final String updateVocabulary = "/update-vocabulary";
@@ -148,6 +149,7 @@ class ApiName {
   final String getCourseRegistrationHistory = "/course-registration-history";///Lịch sử đăng ký khóa học theo khoảng thời gian 
   final String getCourseHistory = "/course-history"; ///Lịch sửa tạo/sửa khóa học theo khoảng thời gian
   final String getRegisterTimePeriod = "/register-time-period"; /// Người đăng ký mới theo khoảng thời gian - 
+  final String courseByRegistrationUser = "/get-registered-courses";///Lịch sử đăng ký khóa học theo khoảng thời gian 
 
   
   final String getRevenueMonth = "/revenue-month";/// Doanh thu  theo các tháng

@@ -37,6 +37,7 @@ class _MyDropdownButtonState extends State<TagDropDown> with SingleTickerProvide
                     children: [
                       Expanded(
                         child: DropdownSearch<TagsInfo>(
+                          compareFn: (item1, item2) => true,
                           popupProps: PopupProps.menu(
                             constraints: BoxConstraints(
                               maxHeight: (65 + widget.allTags.length * 50 < 210) ? 65 + widget.allTags.length * 50 : 210,

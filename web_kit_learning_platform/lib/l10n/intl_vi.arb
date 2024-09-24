@@ -694,5 +694,7 @@
   "total_register_new": "Mới",
   "total_register_accept": "Đã duyệt",
   "total_register_reject": "Đã từ chối",
-  "time_register": "Số lần dăng ký"
+  "time_register": "Số lần dăng ký",
+  "user_by_course": "Người dùng theo khóa học",
+  "number_registered_user": "Số người đăng ký"
 }

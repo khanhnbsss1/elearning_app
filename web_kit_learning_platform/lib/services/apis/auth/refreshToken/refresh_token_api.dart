@@ -45,7 +45,7 @@ class RefreshTokenApi extends BaseApiRequest {
     if(deviceInfoModel!=null && authInfo!=null)
       {
         RefreshTokenRequest refreshTokenRequest = RefreshTokenRequest(
-          deviceType:  deviceInfoModel.type,
+          deviceType: deviceInfoModel.type,
           accessToken: "${authInfo?.accessToken}",
           refreshToken: "${authInfo?.refreshToken}"
         );

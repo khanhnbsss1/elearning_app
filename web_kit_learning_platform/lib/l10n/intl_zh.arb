@@ -686,5 +686,7 @@
   "total_register_new": "新",
   "total_register_accept": "已批准",
   "total_register_reject": "已拒绝",
-  "time_register": "注册数量"
+  "time_register": "注册数量",
+  "user_by_course": "按课程划分的用户",
+  "number_registered_user": "注册用户数"
 }

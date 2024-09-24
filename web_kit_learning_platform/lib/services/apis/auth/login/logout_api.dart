@@ -25,10 +25,10 @@ class LoginOutApi extends BaseApiRequest {
     DeviceInfoModel? deviceInfoModel = await DeviceManager().getDeviceInfo();
     AuthInfo? authInfo = AuthorManager().getAuthInfo();
 
-    if(deviceInfoModel!=null)
+    if(deviceInfoModel!=null && authInfo!=null && (authInfo.refreshToken??"").isNotEmpty)
       {
         await setApiBody({
-          "refreshToken":authInfo?.refreshToken,
+          "refreshToken":authInfo.refreshToken,
           "type":deviceInfoModel.type
         });
       }

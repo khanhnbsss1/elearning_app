@@ -337,6 +337,8 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                         GridColumn(
                             columnName: L10nX.getStr.category,
                             maximumWidth: Dimens.size180,
+                            minimumWidth: Dimens.size150,
+
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
@@ -344,13 +346,15 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                         GridColumn(
                             columnName: L10nX.getStr.grade_name_str,
                             maximumWidth: Dimens.size100,
+                            minimumWidth: Dimens.size100,
+
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
                                 child: Text(L10nX.getStr.grade_name_str, style: TextStyleConstant.textStyleBlack14w500,))),
                         GridColumn(
                             columnName: L10nX.getStr.register_user,
-                            minimumWidth: Dimens.size100,
+                            minimumWidth: Dimens.size150,
                             maximumWidth: Dimens.size200,
 
                             label: Container(
@@ -360,6 +364,8 @@ class _RevenueHistoryListPageState extends State<RevenueHistoryListPage> with Si
                         GridColumn(
                             columnName: L10nX.getStr.price,
                             maximumWidth: Dimens.size150,
+                            minimumWidth: Dimens.size150,
+
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,

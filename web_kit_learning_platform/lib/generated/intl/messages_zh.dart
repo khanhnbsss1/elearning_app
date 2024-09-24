@@ -348,6 +348,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "您尚未设置人脸登录,请使用密码登录您的账户并设置人脸验证,"),
         "notify_setup_fingerprint": MessageLookupByLibrary.simpleMessage(
             "您尚未设置指纹登录,请使用密码登录您的账户并设置指纹认证"),
+        "number_registered_user": MessageLookupByLibrary.simpleMessage("注册用户数"),
         "oK": MessageLookupByLibrary.simpleMessage("确定"),
         "of_arrivals": MessageLookupByLibrary.simpleMessage("入境人数"),
         "of_str": MessageLookupByLibrary.simpleMessage("的"),
@@ -681,6 +682,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploading_file": MessageLookupByLibrary.simpleMessage("正在上传文件......"),
         "use_fingerprint_text": MessageLookupByLibrary.simpleMessage("使用指纹"),
         "user_add_str": MessageLookupByLibrary.simpleMessage("创建用户"),
+        "user_by_course": MessageLookupByLibrary.simpleMessage("按课程划分的用户"),
         "user_create": MessageLookupByLibrary.simpleMessage("创建用户"),
         "user_delete_str": MessageLookupByLibrary.simpleMessage("删除用户"),
         "user_detail": MessageLookupByLibrary.simpleMessage("用户信息"),

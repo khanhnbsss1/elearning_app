@@ -6889,6 +6889,26 @@ class S {
       args: [],
     );
   }
+
+  /// `User by course`
+  String get user_by_course {
+    return Intl.message(
+      'User by course',
+      name: 'user_by_course',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number of registered users`
+  String get number_registered_user {
+    return Intl.message(
+      'Number of registered users',
+      name: 'number_registered_user',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

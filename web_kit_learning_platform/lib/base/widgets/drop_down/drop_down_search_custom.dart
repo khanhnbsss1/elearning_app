@@ -37,7 +37,7 @@ class DropDownSearchCustom<T> extends DropdownSearch<T> with UIMixin{
         super.validator,
         super.selectedItem,
         super.decoratorProps,
-        super.popupProps
+        super.popupProps,
       }){
     super.decoratorProps = DropDownDecoratorProps(
       decoration: InputDecoration(

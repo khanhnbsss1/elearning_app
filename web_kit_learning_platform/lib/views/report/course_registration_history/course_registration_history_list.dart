@@ -244,6 +244,7 @@ class _CourseRegistrationHistoryListPageState extends State<CourseRegistrationHi
                         GridColumn(
                             columnName: 'id',
                             maximumWidth: Dimens.size60,
+                            minimumWidth: Dimens.size50,
                             label: Container(
                                 padding: EdgeInsets.all(16.0),
                                 alignment: Alignment.center,
@@ -263,6 +264,8 @@ class _CourseRegistrationHistoryListPageState extends State<CourseRegistrationHi
                         GridColumn(
                             columnName: L10nX.getStr.user_name,
                             maximumWidth: Dimens.size250,
+                            minimumWidth: Dimens.size200,
+
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
@@ -270,6 +273,8 @@ class _CourseRegistrationHistoryListPageState extends State<CourseRegistrationHi
                         GridColumn(
                             columnName: L10nX.getStr.full_name,
                             maximumWidth: Dimens.size250,
+                            minimumWidth: Dimens.size200,
+
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
@@ -284,6 +289,7 @@ class _CourseRegistrationHistoryListPageState extends State<CourseRegistrationHi
                         GridColumn(
                             columnName: L10nX.getStr.status,
                             maximumWidth: Dimens.size150,
+                            minimumWidth: Dimens.size150,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,

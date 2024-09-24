@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_pagination/flutter_custom_pagination.dart';
 import 'package:gap/gap.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/page_common/permission_page.dart';
@@ -21,8 +22,39 @@ import '../../layouts/layout.dart';
 import 'bloc/user_list_bloc.dart';
 
 class UserListPage extends StatefulWidget {
+  
+  void show(BuildContext context, {Function(dynamic)? callBack}) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return PointerInterceptor(
+          child: CustomDialog1(
+              title: L10nX.getStr.user_by_course,
+              titleStyle: TextStyleConstant.textStyleBlack20w700.copyWith(color: ColorConst.whiteColor),
+              titleAlignment: MainAxisAlignment.center,
+              insetPadding: EdgeInsets.zero,
+              width: MediaQuery.of(context).size.width*(!ResponsiveInfo.isPhone()? 0.8: 1),
+              height: MediaQuery.of(context).size.height*(!ResponsiveInfo.isPhone()? 0.9: 0.9),
+              enableBackButton: false,
+              headerColor: ColorConst.mainColor,
+              enableCloseButton: true,
+              mainAxisSizeParent: MainAxisSize.max,
+              bodyBackGroundColor: ColorConst.whiteColor,
+              enableHeaderDivider: true,
+              child: Expanded(child: this)
+          ),
+        );
+      },
+    ).then((value) {
+      if(callBack!=null && value !=null)
+      {
+        callBack(value);
+      }
+    },);
+  }
   UserType? userType;
-  UserListPage({super.key, this.userType});
+  int? courseId;
+  UserListPage({super.key, this.userType, this.courseId});
   @override
   State<UserListPage> createState() => _UserListPageState();
 }
@@ -49,13 +81,12 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
       permissionList: permission,
       child: BlocProvider(
         create: (context) {
-          return UserListBloc(UserListState(userType: widget.userType))..add(UserListInitEvent());
+          return UserListBloc(UserListState(userType: widget.userType, courseId: widget.courseId))..add(UserListInitEvent());
         },
         child: BlocConsumer<UserListBloc, UserListState>(
           listener: (context, state) {
             switch (state.blocStatus) {
               case UserListStatus.initial:
-                break;
                 break;
               default:
                 break;
@@ -67,24 +98,37 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
               builder: (context , boxConstraints , myScreenMediaType ) {
                 if(!myScreenMediaType.isMobile)
                 {
-                  return Layout(
-                      isScroll: false,
-                      title: Center(
-                        child: Text( L10nX.getStr.user_str,
-                          style: TextStyleConstant.textStyleBlack18w600,),),
-                      padding: EdgeInsets.only(top: Dimens.size60),
-                      child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
+                  if(state.courseId==null)
+                    {
+                      return Layout(
+                          isScroll: false,
+                          title: Center(
+                            child: Text( L10nX.getStr.user_str,
+                              style: TextStyleConstant.textStyleBlack18w600,),),
+                          padding: EdgeInsets.only(top:Dimens.size60),
+                          child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType));
+                    }
+                  else
+                    {
+                      return buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType);
+                    }
+
                 }
                 else
                 {
-                  return Layout(
-                      isScroll: false,
-                      title: Center(child: Text(
-                        L10nX.getStr.user_str,
-                        style: TextStyleConstant.textStyleBlack18w600,
-                      ),),
-                      child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
-                  );
+                  if(state.courseId==null) {
+                    return Layout(
+                        isScroll: false,
+                        title: Center(child: Text(
+                          L10nX.getStr.user_str,
+                          style: TextStyleConstant.textStyleBlack18w600,
+                        ),),
+                        child: buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType)
+                    );
+                  }
+                  else{
+                    return buildLeftPage(state: state, boxConstraints: boxConstraints, context: context, myScreenMediaType: myScreenMediaType);
+                  }
                 }
               },);
 
@@ -161,7 +205,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
         ),
         padding: EdgeInsets.symmetric(vertical: Dimens.size8, horizontal: 16),
         child: SizedBox(
-          height: Dimens.size45,
+          height: Dimens.size40,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -217,10 +261,13 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                             ),
                           ),
                           Gap(Dimens.size12),
-                          roleDropDownSearch(state: state, context: context, onChange: (p0) {
-                            BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(
-                                searchCommonRequest: state.searchCommonRequest!.copyWith(roleId: p0?.id)));
-                          },)
+                          Visibility(
+                            visible: state.courseId==null,
+                            child: roleDropDownSearch(state: state, context: context, onChange: (p0) {
+                              BlocProvider.of<UserListBloc>(context).add(UserListOnSearchByFilterEvent(
+                                  searchCommonRequest: state.searchCommonRequest!.copyWith(roleId: p0?.id)));
+                            },),
+                          )
                         ],
                       ),
                     ),
@@ -248,7 +295,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
               Visibility(
                 visible: UserManager().userContainPermission(permissionList: [
                   "users.post.create_user"
-                ]),
+                ]) && state.courseId==null,
                 child: Row(
                   children: [
                     Gap(Dimens.size10),
@@ -303,6 +350,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
               // TODO: Handle this case.
                 UserDataSource employeeDataSource = UserDataSource(
                   lessonData: state.userListResponseModel?.content??[],
+                  courseId: state.courseId,
                   starIndex: (state.searchCommonRequest?.pageNumber??0)* (state.searchCommonRequest?.pageSize??0),
                   onDelete: (p0) {
                     ConfirmPopupPage(
@@ -410,6 +458,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                                   padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(L10nX.getStr.role_str, style: TextStyleConstant.textStyleBlack14w500,))),
+                          if(state.courseId==null)
                           GridColumn(
                               columnName: L10nX.getStr.created_at,
                               maximumWidth: Dimens.size150,
@@ -418,6 +467,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                                   padding: EdgeInsets.all(Dimens.size8),
                                   alignment: Alignment.center,
                                   child: Text(L10nX.getStr.created_at, style: TextStyleConstant.textStyleBlack14w500,))),
+                          if(state.courseId==null)
                           GridColumn(
                               columnName: L10nX.getStr.action_str,
                               minimumWidth: Dimens.size180,
@@ -457,6 +507,7 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
          }
          return DropdownSearch<RoleInfo>(
            enabled: true,
+           compareFn: (item1, item2) => true,
            suffixProps: DropdownSuffixProps(
              dropdownButtonProps: DropdownButtonProps(
                padding: EdgeInsets.zero,
@@ -480,8 +531,8 @@ class _UserListPageState extends State<UserListPage> with SingleTickerProviderSt
                  floatingLabelBehavior: FloatingLabelBehavior.auto,
                  contentPadding: MySpacing.xy(Dimens.size16, Dimens.size12),
                  constraints: BoxConstraints(
-                   minHeight: Dimens.size50,
-                   maxHeight: Dimens.size50,
+                   minHeight: Dimens.size40,
+                   maxHeight: Dimens.size40,
                  ),
                ),
              ),
@@ -541,12 +592,15 @@ class UserDataSource extends DataGridSource {
   /// Creates the employee data source class with required details.
   Function(UserProfile) onViewDetail, onEdit, onDelete;
   int? starIndex;
+  int?courseId;
   UserDataSource({
     required List<UserProfile> lessonData,
     this.starIndex,
     required this.onDelete,
     required this.onEdit,
-    required this.onViewDetail}) {
+    required this.onViewDetail,
+    this.courseId
+  }) {
     _lessonData = lessonData.map<DataGridRow>((e) {
       starIndex = (starIndex ??0)+1;
       List<Widget> listWord = [];
@@ -579,8 +633,9 @@ class UserDataSource extends DataGridSource {
             DataGridCell<Widget>(columnName: L10nX.getStr.gender, value: Text(e.gender??"", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.positions, value: Text(e.position??"", style: TextStyleConstant.textStyleBlack14w400,)),
             DataGridCell<Widget>(columnName: L10nX.getStr.role_str, value: Text(e.roleName??"", style: TextStyleConstant.textStyleBlack14w400,)),
+            if(courseId==null)
             DataGridCell<Widget>(columnName: L10nX.getStr.created_at, value: Text(e.createdAt??"", style: TextStyleConstant.textStyleBlack14w400,)),
-
+            if(courseId==null)
             DataGridCell<Widget>(columnName: L10nX.getStr.action_str,
                 value: ItemViewEditDelete(
                   itemInfo: e,

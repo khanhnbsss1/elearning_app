@@ -267,6 +267,7 @@ class _CourseHistoryListPageState extends State<CourseHistoryListPage> with Sing
                         GridColumn(
                             columnName: L10nX.getStr.action_str,
                             maximumWidth: Dimens.size100,
+                            minimumWidth: Dimens.size100,
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,
@@ -274,6 +275,8 @@ class _CourseHistoryListPageState extends State<CourseHistoryListPage> with Sing
                         GridColumn(
                             columnName: L10nX.getStr.implementer_str,
                             maximumWidth: Dimens.size180,
+                            minimumWidth: Dimens.size150,
+
                             label: Container(
                                 padding: EdgeInsets.all(8.0),
                                 alignment: Alignment.center,

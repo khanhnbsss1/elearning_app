@@ -35,6 +35,7 @@ class Layout extends StatelessWidget {
   bool? isScroll;
   EdgeInsetsGeometry? padding;
   Function? languageHideFn;
+  bool? enableLeftBar, enableTopBar;
   LANGUAGE_INDEX mLanguageIndex = LANGUAGE_INDEX.VIETNAMESE;
   Layout(
       {super.key,
@@ -42,6 +43,8 @@ class Layout extends StatelessWidget {
       this.isScroll,
       this.padding,
       this.title,
+        this.enableLeftBar,
+        this.enableTopBar,
       this.showBackButton}) {
     isScroll ??= true;
     padding = EdgeInsets.only(top: Dimens.size60);
@@ -62,7 +65,7 @@ class Layout extends StatelessWidget {
     UserProfile? userProfile =  UserManager().getUserProfile();
     return Scaffold(
       key: controller.scaffoldKey,
-      appBar: AppBar(
+      appBar: (enableTopBar??true)? AppBar(
         elevation: 0,
         title: title,
         actions: [
@@ -124,10 +127,10 @@ class Layout extends StatelessWidget {
           ),
           MySpacing.width(20)
         ],
-      ), // endDrawer: RightBar(),
+      ):null, // endDrawer: RightBar(),
       // extendBodyBehindAppBar: true,
       // appBar: TopBar(
-      drawer: LeftBar(),
+      drawer:(enableLeftBar??true)? LeftBar():null,
       body: (isScroll ?? true)?SingleChildScrollView(child: child):child,
     );
   }
@@ -182,7 +185,9 @@ class Layout extends StatelessWidget {
           Row(
             children: [
               //SizedBox(width: Dimens.size70,),
-              LeftBar(),
+              Visibility(
+                visible: enableLeftBar??true,
+                  child: LeftBar()),
               Expanded(
                 child: Stack(
                   alignment: Alignment.topCenter,
@@ -197,10 +202,13 @@ class Layout extends StatelessWidget {
                             padding: padding!,
                             child: child,
                           ),
-                    TopBar(
-                      key: UniqueKey(),
-                      title: title,
-                      showBackButton: showBackButton,
+                    Visibility(
+                      visible: enableTopBar??true,
+                      child: TopBar(
+                        key: UniqueKey(),
+                        title: title,
+                        showBackButton: showBackButton,
+                      ),
                     ),
                   ],
                 ),

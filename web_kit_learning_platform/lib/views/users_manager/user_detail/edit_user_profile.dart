@@ -714,7 +714,7 @@ class _EditUserProfileState extends State<EditUserProfile>
             height: Dimens.size40,
             child: DropdownSearch<RoleInfo>(
               enabled: enableEdit,
-              
+              compareFn: (item1, item2) => true,
               popupProps: PopupProps.menu(
                 constraints: BoxConstraints(
                   maxHeight: (65 + (rolesListResponseModel.content??[]).length * 50 < 210) ? 65 + (rolesListResponseModel.content??[]).length * 50 : 210,
