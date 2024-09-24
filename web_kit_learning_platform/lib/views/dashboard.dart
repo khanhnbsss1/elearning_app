@@ -57,136 +57,132 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
   @override
   Widget build(BuildContext context) {
     return Layout(
-      child: GetBuilder(
-        init: controller,
-        builder: (controller) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Visibility(
-                visible: UserManager().userContainPermission(permissionList: [
-                  "dashboard.get.get_datasynthesis",
-                  "dashboard.get.get_register_month",
-                  "dashboard.get.get_revenue_month",
-                  "dashboard.get.get_top_course_revenue",
-                  "dashboard.get.get_top_courses",
-                  "dashboard.get.get_user_registration",
-                  "dashboard.get.get_subscription_purchases"
-                ]),
-                  child: Column(
-                    children: [
-                      Gap(Dimens.size16),
-
-                      Padding(
-                        padding: MySpacing.x(flexSpacing),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            MyText.titleMedium(
-                              L10nX.getStr.dashboard,
-                              fontSize: 18,
-                              fontWeight: 600,
-                            ),
-                          ],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Visibility(
+              visible: UserManager().userContainPermission(permissionList: [
+                "dashboard.get.get_datasynthesis",
+                "dashboard.get.get_register_month",
+                "dashboard.get.get_revenue_month",
+                "dashboard.get.get_top_course_revenue",
+                "dashboard.get.get_top_courses",
+                "dashboard.get.get_user_registration",
+                "dashboard.get.get_subscription_purchases"
+              ]),
+              child: Column(
+                children: [
+                  Gap(Dimens.size16),
+                  Padding(
+                    padding: MySpacing.x(flexSpacing),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MyText.titleMedium(
+                          L10nX.getStr.dashboard,
+                          fontSize: 18,
+                          fontWeight: 600,
                         ),
-                      ),
-                      MySpacing.height(flexSpacing),
-                      Padding(
-                        padding: MySpacing.x(flexSpacing / 2),
-                        child: MyFlex(
-                          runAlignment: WrapAlignment.start,
-                          wrapCrossAlignment: WrapCrossAlignment.start,
-                          contentPadding: true,
-                          children: [
-                            MyFlexItem(
-                              child: MyFlex(
-                                runAlignment: WrapAlignment.start,
-                                wrapCrossAlignment: WrapCrossAlignment.start,
-                                contentPadding: true,
-                                children: [
-                                  MyFlexItem(
-                                      sizes: "lg-8 xl-8",
-                                      child: buildDataSynthesis()),
-                                  MyFlexItem(
-                                      sizes: "lg-4 xl-4",
-                                      child: buildNewRegisterByMonth()
-                                  ),
-                                ],
+                      ],
+                    ),
+                  ),
+                  MySpacing.height(flexSpacing),
+                  Padding(
+                    padding: MySpacing.x(flexSpacing / 2),
+                    child: MyFlex(
+                      runAlignment: WrapAlignment.start,
+                      wrapCrossAlignment: WrapCrossAlignment.start,
+                      contentPadding: true,
+                      children: [
+                        MyFlexItem(
+                          child: MyFlex(
+                            runAlignment: WrapAlignment.start,
+                            wrapCrossAlignment: WrapCrossAlignment.start,
+                            contentPadding: true,
+                            children: [
+                              MyFlexItem(
+                                  sizes: "lg-8 xl-8",
+                                  child: buildDataSynthesis()),
+                              MyFlexItem(
+                                  sizes: "lg-4 xl-4",
+                                  child: buildNewRegisterByMonth()
                               ),
-                            ),
-                            MyFlexItem(
-                              child: MyFlex(
-                                runAlignment: WrapAlignment.start,
-                                wrapCrossAlignment: WrapCrossAlignment.start,
-                                contentPadding: true,
-                                children: [
-                                  MyFlexItem(
-                                      sizes: "lg-6 xl-6",
-                                      child: buildRevenueByMonth()
-                                  ),
-                                  MyFlexItem(
-                                      sizes: "lg-6",
-                                      child: buildTopCourseRevenue())
-                                ],
-                              ),
-                            ),
-                            MyFlexItem(
-                              child: MyFlex(
-                                contentPadding: true,
-                                children: [
-                                  MyFlexItem(
-                                    sizes: "lg-6",
-                                    child: buildTopCourseReview(),
-                                  ),
-                                  MyFlexItem(
-                                    sizes: "lg-6",
-                                    child: ConstrainedBox(
-                                      constraints: BoxConstraints(
-                                        maxHeight: Dimens.size650,
-                                        minHeight: Dimens.size650,
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(child: buildRegisterNewest()),
-                                          Gap(Dimens.size16),
-                                          Expanded(
-                                            child: buildSubscriptionPurchases(),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-
-                                ],
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      MySpacing.height(flexSpacing),
-                    ],
-                  )
-              ),
-              Padding(
-                  padding: EdgeInsets.only( left: Dimens.size32, right: Dimens.size32, top: Dimens.size16, bottom: Dimens.size16),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    buildCourseCareList(),
-                    MySpacing.height(flexSpacing),
-                    buildCourseRegistedList(),
-                    MySpacing.height(flexSpacing),
-                    buildCourseAllList()
-                  ],
-                ),
-              ),
-            ],
+                        MyFlexItem(
+                          child: MyFlex(
+                            runAlignment: WrapAlignment.start,
+                            wrapCrossAlignment: WrapCrossAlignment.start,
+                            contentPadding: true,
+                            children: [
+                              MyFlexItem(
+                                  sizes: "lg-6 xl-6",
+                                  child: buildRevenueByMonth()
+                              ),
+                              MyFlexItem(
+                                  sizes: "lg-6",
+                                  child: buildTopCourseRevenue())
+                            ],
+                          ),
+                        ),
+                        MyFlexItem(
+                          child: MyFlex(
+                            contentPadding: true,
+                            children: [
+                              MyFlexItem(
+                                sizes: "lg-6",
+                                child: buildTopCourseReview(),
+                              ),
+                              MyFlexItem(
+                                sizes: "lg-6",
+                                child: ConstrainedBox(
+                                  constraints: BoxConstraints(
+                                    maxHeight: Dimens.size650,
+                                    minHeight: Dimens.size650,
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(child: buildRegisterNewest()),
+                                      Gap(Dimens.size16),
+                                      Expanded(
+                                        child: buildSubscriptionPurchases(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
             
-          );
-        },
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  MySpacing.height(flexSpacing),
+                ],
+              )
+          ),
+          Padding(
+            padding: EdgeInsets.only( left: Dimens.size32, right: Dimens.size32, top: Dimens.size16, bottom: Dimens.size16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                buildCourseCareList(),
+                MySpacing.height(flexSpacing),
+                buildCourseFreeList(),
+                MySpacing.height(flexSpacing),
+                buildCourseRegistedList(),
+                MySpacing.height(flexSpacing),
+                buildCourseAllList()
+              ],
+            ),
+          ),
+        ],
+            
       ),
     );
   }
@@ -462,7 +458,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                                   columns: [
                                     DataColumn(
                                       label: SizedBox(
-                                        width: constraints.maxWidth  - Dimens.size300,
+                                        width: (constraints.maxWidth  - Dimens.size300)>50?(constraints.maxWidth  - Dimens.size300): 50,
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                           child: Row(
@@ -1201,9 +1197,8 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
       future: DashboardManager().getCourseCareListResponseModel(),
       builder: (context, snapshot) {
         return LayoutBuilder(builder: (context, constraints) {
-          CourseResponseModel? topCoursesInfoResponseModel= CourseResponseModel(content: []);
           if (snapshot.hasData) {
-            topCoursesInfoResponseModel = snapshot.data;
+            DashboardManager().courseCareResponseModel = snapshot.data;
           }
           double maxWidthItem = Dimens.size260;
           double heightOfItem = Dimens.size240;
@@ -1216,7 +1211,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
             crossAxisSpacing = Dimens.size20;
           }
           return Visibility(
-            visible: (topCoursesInfoResponseModel?.content??[]).isNotEmpty,
+            visible: (DashboardManager().courseCareResponseModel?.content??[]).isNotEmpty,
             child: WidgetWithColumnTitleCommon(
               titleWidget: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1230,38 +1225,39 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                   )
                 ],
               ),
-              child: SizedBox(
-                  height: heightOfItem ,
-                 // width: MediaQuery.of(context).size.width,
-                  child: ListView.builder(
-                    itemCount: (topCoursesInfoResponseModel?.content??[]).length,
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 0, 
-                        vertical: crossAxisSpacing),
-                    
-                    itemBuilder: (context, index) {
-                      CourseInfo courseInfo = (topCoursesInfoResponseModel?.content??[]).elementAt(index);
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: Dimens.size8, vertical: 0),
-                        child: SizedBox(
-                          width: widthItem,
-                          height: heightOfItem,
-                          child: CourseItemGridView(
-                            courseInfo: courseInfo,
-                            enableEdit: false,
-                            row: 2,
-                            onViewDetail: (p0) {
-                              CoursePreview(
-                                courseInfo: courseInfo,
-                              ).show(context);
-                            },
+              child: StatefulBuilder(builder: (context, setState) {
+                return SizedBox(
+                    height: heightOfItem ,
+                    child: ListView.builder(
+                      itemCount: (DashboardManager().courseCareResponseModel?.content??[]).length,
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 0,
+                          vertical: crossAxisSpacing),
+
+                      itemBuilder: (context, index) {
+                        CourseInfo courseInfo = (DashboardManager().courseCareResponseModel?.content??[]).elementAt(index);
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: Dimens.size8, vertical: 0),
+                          child: SizedBox(
+                            width: widthItem,
+                            height: heightOfItem,
+                            child: CourseItemGridView(
+                              courseInfo: courseInfo,
+                              enableEdit: false,
+                              row: 2,
+                              onViewDetail: (p0) {
+                                CoursePreview(
+                                  courseInfo: courseInfo,
+                                ).show(context);
+                              },
+                            ),
                           ),
-                        ),
-                      );
-                    },)
-              ),
+                        );
+                      },)
+                );
+              },)
             ),
           );
         },);
@@ -1273,9 +1269,8 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
       future: DashboardManager().getCourseListRegistedResponseModel(),
       builder: (context, snapshot) {
         return LayoutBuilder(builder: (context, constraints) {
-          CourseResponseModel? topCoursesInfoResponseModel= CourseResponseModel(content: []);
           if (snapshot.hasData) {
-            topCoursesInfoResponseModel = snapshot.data;
+            DashboardManager().courseRegistedResponseModel = snapshot.data;
           }
           double maxWidthItem = Dimens.size260;
           double heightOfItem = Dimens.size240;
@@ -1288,7 +1283,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
             crossAxisSpacing = Dimens.size20;
           }
           return Visibility(
-            visible: (topCoursesInfoResponseModel?.content??[]).isNotEmpty,
+            visible: ( DashboardManager().courseRegistedResponseModel?.content??[]).isNotEmpty,
 
             child: WidgetWithColumnTitleCommon(
               titleWidget: Row(
@@ -1303,38 +1298,40 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                   )
                 ],
               ),
-              child: SizedBox(
-                  height: heightOfItem ,
-                  // width: MediaQuery.of(context).size.width,
-                  child: ListView.builder(
-                    itemCount: (topCoursesInfoResponseModel?.content??[]).length,
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 0,
-                        vertical: crossAxisSpacing),
-            
-                    itemBuilder: (context, index) {
-                      CourseInfo courseInfo = (topCoursesInfoResponseModel?.content??[]).elementAt(index);
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: Dimens.size8, vertical: 0),
-                        child: SizedBox(
-                          width: widthItem,
-                          height: heightOfItem,
-                          child: CourseItemGridView(
-                            courseInfo: courseInfo,
-                            enableEdit: false, 
-                            row: 2,
-                            onViewDetail: (p0) {
-                              CoursePreview(
-                                courseInfo: courseInfo,
-                              ).show(context);
-                            },
+              child: StatefulBuilder(builder: (context, setState) {
+                return  SizedBox(
+                    height: heightOfItem ,
+                    // width: MediaQuery.of(context).size.width,
+                    child: ListView.builder(
+                      itemCount: (DashboardManager().courseRegistedResponseModel?.content??[]).length,
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 0,
+                          vertical: crossAxisSpacing),
+
+                      itemBuilder: (context, index) {
+                        CourseInfo courseInfo = (DashboardManager().courseRegistedResponseModel?.content??[]).elementAt(index);
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: Dimens.size8, vertical: 0),
+                          child: SizedBox(
+                            width: widthItem,
+                            height: heightOfItem,
+                            child: CourseItemGridView(
+                              courseInfo: courseInfo,
+                              enableEdit: false,
+                              row: 2,
+                              onViewDetail: (p0) {
+                                CoursePreview(
+                                  courseInfo: courseInfo,
+                                ).show(context);
+                              },
+                            ),
                           ),
-                        ),
-                      );
-                    },)
-              ),
+                        );
+                      },)
+                );
+              },)
             ),
           );
         },);
@@ -1346,9 +1343,8 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
       future: DashboardManager().getCourseListAllResponseModel(),
       builder: (context, snapshot) {
         return LayoutBuilder(builder: (context, constraints) {
-          CourseResponseModel? topCoursesInfoResponseModel= CourseResponseModel(content: []);
           if (snapshot.hasData) {
-            topCoursesInfoResponseModel = snapshot.data;
+            DashboardManager().courseAllResponseModel = snapshot.data;
           }
           double maxWidthItem = Dimens.size260;
           double heightOfItem = Dimens.size240;
@@ -1361,7 +1357,7 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
             crossAxisSpacing = Dimens.size20;
           }
           return Visibility(
-            visible: (topCoursesInfoResponseModel?.content??[]).isNotEmpty,
+            visible: (DashboardManager().courseAllResponseModel?.content??[]).isNotEmpty,
             child: WidgetWithColumnTitleCommon(
               titleWidget: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1375,37 +1371,113 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                   )
                 ],
               ),
-              child: SizedBox(
-                  height: heightOfItem ,
-                  // width: MediaQuery.of(context).size.width,
-                  child: ListView.builder(
-                    itemCount: (topCoursesInfoResponseModel?.content??[]).length,
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 0,
-                        vertical: crossAxisSpacing),
-            
-                    itemBuilder: (context, index) {
-                      CourseInfo courseInfo = (topCoursesInfoResponseModel?.content??[]).elementAt(index);
-                      return Padding(
-                        padding: EdgeInsets.symmetric(horizontal: Dimens.size8, vertical: 0),
-                        child: SizedBox(
-                          width: widthItem,
-                          height: heightOfItem,
-                          child: CourseItemGridView(
-                            courseInfo: courseInfo,
-                            enableEdit: false,
-                            row: 2,
-                            onViewDetail: (p0) {
-                              CoursePreview(
-                                courseInfo: courseInfo,
-                              ).show(context);
-                            },
+              child: StatefulBuilder(builder: (context, setState) {
+                return SizedBox(
+                    height: heightOfItem ,
+                    // width: MediaQuery.of(context).size.width,
+                    child: ListView.builder(
+                      itemCount: (DashboardManager().courseAllResponseModel?.content??[]).length,
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 0,
+                          vertical: crossAxisSpacing),
+
+                      itemBuilder: (context, index) {
+                        CourseInfo courseInfo = (DashboardManager().courseAllResponseModel?.content??[]).elementAt(index);
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: Dimens.size8, vertical: 0),
+                          child: SizedBox(
+                            width: widthItem,
+                            height: heightOfItem,
+                            child: CourseItemGridView(
+                              courseInfo: courseInfo,
+                              enableEdit: false,
+                              row: 2,
+                              onViewDetail: (p0) {
+                                CoursePreview(
+                                  courseInfo: courseInfo,
+                                ).show(context);
+                              },
+                            ),
                           ),
-                        ),
-                      );
-                    },)
+                        );
+                      },)
+                );
+              },)
+            ),
+          );
+        },);
+      },);
+
+  }
+  Widget buildCourseFreeList(){
+    return FutureBuilder(
+      future: DashboardManager().getCourseFreeListResponseModel(),
+      builder: (context, snapshot) {
+        return LayoutBuilder(builder: (context, constraints) {
+          if (snapshot.hasData) {
+            DashboardManager().courseFreeResponseModel = snapshot.data;
+          }
+          double maxWidthItem = Dimens.size260;
+          double heightOfItem = Dimens.size240;
+          int numberRow = (constraints.maxWidth ~/ (maxWidthItem + Dimens.size10));
+          double widthItem = maxWidthItem;
+          double crossAxisSpacing = (constraints.maxWidth - numberRow * (maxWidthItem + Dimens.size10)) / numberRow;
+          if (crossAxisSpacing > Dimens.size30) {
+            crossAxisSpacing = Dimens.size30;
+          } else if (crossAxisSpacing <= Dimens.size20) {
+            crossAxisSpacing = Dimens.size20;
+          }
+          return Visibility(
+            visible: (DashboardManager().courseFreeResponseModel?.content??[]).isNotEmpty,
+            child: WidgetWithColumnTitleCommon(
+              titleWidget: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("${L10nX.getStr.course_str} ${L10nX.getStr.free_str.toLowerCase()}",style: TextStyleConstant.textStyleBlack18w600,),
+                  TextLink(
+                    text: L10nX.getStr.view_all,
+                    onTap: () {
+                      AppPages.routeName(Routes.courseList);
+                    },
+                  )
+                ],
+              ),
+              child: StatefulBuilder(builder: (BuildContext context, void Function(void Function()) setState) { 
+                return SizedBox(
+                    height: heightOfItem ,
+                    // width: MediaQuery.of(context).size.width,
+                    child: ListView.builder(
+                      itemCount: (DashboardManager().courseFreeResponseModel?.content??[]).length,
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 0,
+                          vertical: crossAxisSpacing),
+
+                      itemBuilder: (context, index) {
+                        CourseInfo courseInfo = (DashboardManager().courseFreeResponseModel?.content??[]).elementAt(index);
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: Dimens.size8, vertical: 0),
+                          child: SizedBox(
+                            width: widthItem,
+                            height: heightOfItem,
+                            child: CourseItemGridView(
+                              courseInfo: courseInfo,
+                              enableEdit: false,
+                              row: 2,
+                              onViewDetail: (p0) {
+                                CoursePreview(
+                                  courseInfo: courseInfo,
+                                ).show(context);
+                              },
+                            ),
+                          ),
+                        );
+                      },)
+                );
+              },
               ),
             ),
           );
@@ -1413,4 +1485,5 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
       },);
 
   }
+
 }

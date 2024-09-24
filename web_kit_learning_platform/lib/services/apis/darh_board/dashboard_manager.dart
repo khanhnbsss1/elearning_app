@@ -40,8 +40,8 @@ class DashboardManager{
   UserRegistrationInfoResponseModel? userRegistrationInfoResponseModel;
   RevenueMonthResponseModel? revenueMonthResponseModel;
   RegisterMonthResponseModel?registerMonthResponseModel;
-  CourseResponseModel?courseCareResponseModel, courseAllResponseModel, courseRegistedResponseModel;
-  List<bool>calApi = [false,false,false,false,false, false, false, false, false, false, false ];
+  CourseResponseModel?courseCareResponseModel, courseAllResponseModel, courseRegistedResponseModel, courseFreeResponseModel;
+  List<bool>calApi = [false,false,false,false,false, false, false, false, false, false, false, false ];
   Future<void> init()async {
     
   }
@@ -155,7 +155,7 @@ class DashboardManager{
   }
 
   Future<CourseResponseModel> getCourseCareListResponseModel() async {
-    if(courseCareResponseModel==null && calApi[8]==false)
+    if(calApi[8]==false)
     {
       calApi[8]=true;
       SearchCommonRequest? searchCommonRequest= SearchCommonRequest(limit: 20);
@@ -167,7 +167,7 @@ class DashboardManager{
   }
 
   Future<CourseResponseModel> getCourseListAllResponseModel() async {
-    if(courseAllResponseModel==null && calApi[9]==false)
+    if(calApi[9]==false)
     {
       calApi[9]=true;
       SearchCommonRequest? searchCommonRequest= SearchCommonRequest(filterType: "ALL", pageNumber: 0, pageSize: 20, keyword: "", isActive: true);
@@ -179,7 +179,7 @@ class DashboardManager{
   }
 
   Future<CourseResponseModel> getCourseListRegistedResponseModel() async {
-    if(courseRegistedResponseModel==null && calApi[10]==false)
+    if(calApi[10]==false)
     {
       calApi[10]=true;
       SearchCommonRequest? searchCommonRequest= SearchCommonRequest(filterType: "ALL", pageNumber: 0, pageSize: 20, keyword: "", isActive: true);
@@ -188,5 +188,17 @@ class DashboardManager{
       calApi[10]=false;
     }
     return courseRegistedResponseModel!;
+  }
+
+  Future<CourseResponseModel> getCourseFreeListResponseModel() async {
+    if(calApi[11]==false)
+    {
+      calApi[11]=true;
+      SearchCommonRequest? searchCommonRequest= SearchCommonRequest(filterType: "ALL", pageNumber: 0, pageSize: 20, keyword: "", isActive: true, mode: "Free");
+      GetCourseListApi courseApi = GetCourseListApi(searchCommonRequest: searchCommonRequest);
+      courseFreeResponseModel = await courseApi.call();
+      calApi[11]=false;
+    }
+    return courseFreeResponseModel!;
   }
 }
