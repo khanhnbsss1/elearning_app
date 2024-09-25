@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webkit/base/base.export.dart';
 import 'package:webkit/base/instance_mananger/filter_manager.dart';
-import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_model.dart';
 import 'package:webkit/services/apis/question/add_quiz_api.dart';
 
 import 'package:webkit/services/apis/question/models/question_info.dart';
