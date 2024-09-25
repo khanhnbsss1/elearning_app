@@ -24,7 +24,6 @@ import '../../../helpers/widgets/course_item_grid_view.dart';
 import '../../../helpers/widgets/my_spacing.dart';
 import '../../../helpers/widgets/my_text_style.dart';
 import '../../layouts/layout.dart';
-import 'components/filter_menu_item.dart';
 
 class CourseList extends StatefulWidget {
   CourseList({super.key, this.courseType, this.isActivate}) {

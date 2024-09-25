@@ -7,21 +7,19 @@ import 'package:webkit/base/widgets/drop_down/drop_down_search.dart';
 import 'package:webkit/base/widgets/drop_down/drop_down_search_custom.dart';
 import 'package:webkit/services/apis/category/get_category_list.dart';
 import 'package:webkit/services/apis/category/models/category_info.dart';
-import 'package:webkit/services/apis/course/course_fillter/get_course_fillter_api.dart';
-import 'package:webkit/services/apis/course/course_fillter/models/course_filtter_info.dart';
 import 'package:webkit/services/apis/course/course_progress/get_course_proccess_list.dart';
 import 'package:webkit/services/apis/course/course_progress/models/course_proccess_info.dart';
-import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_api.dart';
-import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_model.dart';
+import 'package:webkit/services/apis/course/course_fillter/get_course_directory_api.dart';
+import 'package:webkit/services/apis/course/course_fillter/models/get_course_directory_model.dart';
 import 'package:webkit/services/apis/filter/get_quiz_filter_api.dart';
 import 'package:webkit/services/apis/filter/get_test_list_filter_api.dart';
 import 'package:webkit/services/apis/grade/get_grade_list.dart';
 import 'package:webkit/services/apis/grade/models/grade_info.dart';
 import 'package:webkit/services/apis/lessson/lesson_list/lesson_list_api.dart';
-import 'package:webkit/services/apis/lessson/lesson_list_filter/lesson_list_filter_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
 import 'package:webkit/services/apis/question/get_quiz_list_api.dart';
 import 'package:webkit/services/apis/question/models/question_info.dart';
+import 'package:webkit/services/apis/tags/get_tag_list.dart';
 import 'package:webkit/services/apis/tags/models/tag_info.dart';
 import 'package:webkit/services/apis/test/get_test_list_api.dart';
 
@@ -43,36 +41,26 @@ class FilterManager{
   CategoryListResponseModel? categoryListResponseModel;
   GradeListResponseModel? gradeListResponseModel;
   LessonListResponseModel? lessonListResponseModel = LessonListResponseModel(content: []);
-  CourseFilterListInfo courseFilterListInfo = CourseFilterListInfo(data: []);
   QuestionListResponseModel questionListResponseModel = QuestionListResponseModel(content: []);
   TestListResponseModel testListResponseModel = TestListResponseModel(content: []);
   VocabularyResponseModel vocabularyResponseModel = VocabularyResponseModel(content: []);
   CourseProgressResponseModel courseProgressResponseModel = CourseProgressResponseModel(content: []);
-  List<bool>calApi = [false,false,false,false,false, false, false, false, false, false, false, false ];
+  List<bool>calApi = [false,false,false,false,false, false, false, false, false, false, false, false, false ];
 
   FilterInfo filterInfo = FilterInfo(
     listOfAccompanyCourses: {},
-    listOfCategoryName: {},
+    listOfCategoryNameList: CategoryListResponseModel(content: []),
     listOfDiscounts: {},
-    listOfGradeNames: {},
+    listOfGradeNamesList: GradeListResponseModel(content: []),
     listOfProduceNames: {},
-    listOfTags: []
+    listOfTags: [], 
+      listOfCategoryName: {}, 
+      listOfGradeNames: {}
   );
   Future<void> init()async {
-    await getFilterCourse();
+    await getCourseFilter();
   }
-
-  Future<CourseFilterListInfo> getFilterCourse() async {
-    if((courseFilterListInfo.data??[]).isNotEmpty || calApi[0]!=false) {
-      return courseFilterListInfo;
-    }
-    calApi[0]=true;
-    GetCourseFilterApi getCourseFilterApi = GetCourseFilterApi();
-    courseFilterListInfo = await getCourseFilterApi.call();
-    calApi[0]=false;
-    return courseFilterListInfo;
-  }
-
+  
   Future<QuestionListResponseModel> getQuestionListAll(String keyword,{bool? isReload}) async {
   isReload??=false;
     if(((questionListResponseModel.content??[]).isNotEmpty&& isReload==false) || calApi[1]!=false) {
@@ -133,6 +121,9 @@ class FilterManager{
           switch (data.filterType) {
             case 'CATEGORY':
               data.subFilter!.where((e) => e.name != null).forEach((e) {
+                if ((filterInfo.listOfCategoryNameList.content??[]).where((element) => element.id == e.id,).isEmpty) {
+                  (filterInfo.listOfCategoryNameList.content??[]).add(CategoryInfo(id: e.id, name: e.name));
+                }
                 if (!filterInfo.listOfCategoryName.containsValue(e.name!)) {
                   filterInfo.listOfCategoryName[e.id!] = e.name!;
                 }
@@ -147,6 +138,9 @@ class FilterManager{
               break;
             case 'GRADE':
               data.subFilter!.where((e) => e.name != null).forEach((e) {
+                if ((filterInfo.listOfGradeNamesList.content??[]).where((element) => element.id == e.id,).isEmpty) {
+                  (filterInfo.listOfGradeNamesList.content??[]).add(GradeInfo(id: e.id, name: e.name));
+                }
                 if (!filterInfo.listOfGradeNames.containsValue(e.name!)) {
                   filterInfo.listOfGradeNames[e.id!] = e.name!;
                 }
@@ -177,7 +171,6 @@ class FilterManager{
           }
         });
       }
-
     return filterInfo;
   }
   Future<GradeListResponseModel?> getGradesInfo() async {
@@ -236,7 +229,17 @@ class FilterManager{
     calApi[11]=false;
     return courseProgressResponseModel;
   }
-
+  Future<List<TagsInfo>> getTagsInfo() async {
+    if(filterInfo.listOfTags.isEmpty && calApi[12]==false)
+    {
+      calApi[12]=true;
+      GetTagListApi api = GetTagListApi(searchCommonRequest: SearchCommonRequest());
+      TagListResponseModel tagListResponseModel= await api.call();
+      filterInfo.listOfTags = (tagListResponseModel.content??[]);
+      calApi[12]=false;
+    }
+    return filterInfo.listOfTags;
+  }
   
   
   Widget buildGrade({
@@ -252,12 +255,12 @@ class FilterManager{
   }){
     enable??=true;
     return FutureBuilder(
-      future: FilterManager().getGradesInfo(),
+      future: FilterManager().getCourseFilter(),
       builder: (context, snapshot) {
         if(!snapshot.hasData) {
           return SizedBox();
         }
-        List<GradeInfo> data = snapshot.data?.content??[];
+        List<GradeInfo> data = snapshot.data?.listOfGradeNamesList.content??[];
         GradeInfo? selectGrade ;
         if(data.where((element) => element.id == inputGradeId,).isNotEmpty)
         {
@@ -344,12 +347,12 @@ class FilterManager{
       String? title,
       }){
     return FutureBuilder(
-      future: FilterManager().getCategoryFilter(),
+      future: FilterManager().getCourseFilter(),
       builder: (context, snapshot) {
         if(!snapshot.hasData) {
           return SizedBox();
         }
-        List<CategoryInfo> data = snapshot.data?.content??[];
+        List<CategoryInfo> data = snapshot.data?.listOfCategoryNameList.content??[];
         CategoryInfo? selectCategory;
         if(data.where((element) => element.id == inputCategoryId,).isNotEmpty)
         {
@@ -529,8 +532,10 @@ class FilterManager{
 
 
 class FilterInfo {
+  CategoryListResponseModel listOfCategoryNameList = CategoryListResponseModel(content: []);
   Map<int,String> listOfCategoryName = {};
   Map<int,String> listOfProduceNames = {};
+  GradeListResponseModel listOfGradeNamesList = GradeListResponseModel(content: []);
   Map<int,String> listOfGradeNames = {};
   Map<int,String> listOfAccompanyCourses = {};
   List<TagsInfo> listOfTags = [];
@@ -542,13 +547,8 @@ class FilterInfo {
     required this.listOfDiscounts, 
     required this.listOfGradeNames,
     required this.listOfProduceNames,
-    required this.listOfTags
-  }){
-    listOfAccompanyCourses??={};
-    listOfCategoryName??={};
-    listOfDiscounts??={};
-    listOfGradeNames??={};
-    listOfTags??=[];
-    listOfProduceNames??={};
-  }
+    required this.listOfTags,
+    required this.listOfCategoryNameList,
+    required this.listOfGradeNamesList
+  });
 }

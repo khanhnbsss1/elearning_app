@@ -11,7 +11,7 @@ import 'package:webkit/services/apis/course/course_detail/get_course_detail_api.
 import 'package:webkit/services/apis/course/course_detail/link_lesson_api.dart';
 import 'package:webkit/services/apis/course/course_detail/models/course_detail_model.dart';
 import 'package:webkit/services/apis/course/course_detail/ulink_lesson_api.dart';
-import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_api.dart';
+import 'package:webkit/services/apis/course/course_fillter/get_course_directory_api.dart';
 import 'package:webkit/services/apis/course/get_course_dictionary/get_course_directory_model.dart';
 import 'package:webkit/services/apis/course/update_course/update_course_api.dart';
 import 'package:webkit/services/apis/lessson/models/lesson_info.dart';
@@ -133,6 +133,7 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     state.controller?.basicValidator.getController('accompany_course')?.text = state.courseInfo?.accompanyCourse??'';
 
     FilterInfo addCourseFilterModel = await FilterManager().getCourseFilter();
+    //List<TagsInfo> listOfTags = await FilterManager().getTagsInfo();
     state.controller!.listOfCategoryName = addCourseFilterModel.listOfCategoryName;
     state.controller!.listOfProduceNames = addCourseFilterModel.listOfProduceNames;
     state.controller!.listOfGradeNames = addCourseFilterModel.listOfGradeNames;

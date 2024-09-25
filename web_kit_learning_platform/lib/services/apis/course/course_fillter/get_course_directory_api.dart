@@ -1,6 +1,6 @@
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
 
-import 'get_course_directory_model.dart';
+import 'models/get_course_directory_model.dart';
 
 class GetAddCourseFilterApi extends BaseApiRequest {
   GetAddCourseFilterApi():super(
