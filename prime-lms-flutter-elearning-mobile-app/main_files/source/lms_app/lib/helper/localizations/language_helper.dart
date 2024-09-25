@@ -5,7 +5,7 @@ import '../../base/store/cache_storage.dart';
 import '../../base/utils/key_manager.dart';
 import '../services/navigation_service.dart';
 import 'bloc/main_bloc.dart';
-
+import 'package:get/get.dart';
 class LanguageHelper{
   static final LanguageHelper _singletonLanguageHelper = LanguageHelper._internal();
   static LanguageHelper get getInstance => _singletonLanguageHelper;
@@ -23,6 +23,7 @@ class LanguageHelper{
   Locale? _locale;
   void setLocale(Locale inputLocale)  {
     _locale = inputLocale;
+      Get.updateLocale(inputLocale);
      SharedPreferencesStorage().saveString(KeyManager.GetInstance().COUNTRY_CODE_KEY, inputLocale.countryCode!);
      SharedPreferencesStorage().saveString(KeyManager.GetInstance().LANGUAGE_CODE_KEY, inputLocale.languageCode);
   }

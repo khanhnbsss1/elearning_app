@@ -58,6 +58,7 @@ class _LanguagesState extends State<Languages> {
               onTap: () async {
                 // final engine = WidgetsFlutterBinding.ensureInitialized();
                 await context.setLocale(locale);
+                LanguageHelper().setLocale(locale);
                 // await engine.performReassemble();
                 // Get.updateLocale(locale);
               },

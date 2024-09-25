@@ -75,7 +75,7 @@ class MyApp extends StatefulWidget {
   @override
   State<MyApp> createState() => _MyAppState();
 }
-
+List<LocalizationsDelegate<dynamic>> delegates=[];
 class _MyAppState extends State<MyApp> {
   bool? _isFirstRun;
   bool? _isFirstCall = false;
@@ -100,6 +100,12 @@ class _MyAppState extends State<MyApp> {
     _checkFirstCall();
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    
+  }
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
