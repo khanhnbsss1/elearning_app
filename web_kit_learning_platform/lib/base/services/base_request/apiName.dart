@@ -33,7 +33,9 @@ class ApiName {
   final String getCourseDetail = "/get-course-detail";
   final String deleteCourse = "/delete-course";
   final String getFilterCourse = "/filter-directory";
-  final String addCourseDirectory = "/anvanced-filter-directory";
+  final String getCourseFilter = "/anvanced-filter-directory";
+  final String addCourseDirectory = "/add-course-directory";
+
   final String registerCourse = "/regist-course";
   final String courseProccess = "/get-avg-course-progress-students";
 

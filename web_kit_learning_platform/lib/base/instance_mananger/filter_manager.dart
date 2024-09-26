@@ -7,6 +7,7 @@ import 'package:webkit/base/widgets/drop_down/drop_down_search.dart';
 import 'package:webkit/base/widgets/drop_down/drop_down_search_custom.dart';
 import 'package:webkit/services/apis/category/get_category_list.dart';
 import 'package:webkit/services/apis/category/models/category_info.dart';
+import 'package:webkit/services/apis/course/course_fillter/get_add_course_filter_api.dart';
 import 'package:webkit/services/apis/course/course_progress/get_course_proccess_list.dart';
 import 'package:webkit/services/apis/course/course_progress/models/course_proccess_info.dart';
 import 'package:webkit/services/apis/course/course_fillter/get_course_directory_api.dart';
@@ -37,7 +38,7 @@ class FilterManager{
   
   FilterManager._internal();
 
-  GetAddCourseFilterModel? addCourseFilterModel;
+  GetAddCourseFilterModel? courseFilterModel, addCourseFilterModel;
   CategoryListResponseModel? categoryListResponseModel;
   GradeListResponseModel? gradeListResponseModel;
   LessonListResponseModel? lessonListResponseModel = LessonListResponseModel(content: []);
@@ -45,7 +46,7 @@ class FilterManager{
   TestListResponseModel testListResponseModel = TestListResponseModel(content: []);
   VocabularyResponseModel vocabularyResponseModel = VocabularyResponseModel(content: []);
   CourseProgressResponseModel courseProgressResponseModel = CourseProgressResponseModel(content: []);
-  List<bool>calApi = [false,false,false,false,false, false, false, false, false, false, false, false, false ];
+  List<bool>calApi = [false,false,false,false,false, false, false, false, false, false, false, false, false, false ];
 
   FilterInfo filterInfo = FilterInfo(
     listOfAccompanyCourses: {},
@@ -55,6 +56,16 @@ class FilterManager{
     listOfProduceNames: {},
     listOfTags: [], 
       listOfCategoryName: {}, 
+      listOfGradeNames: {}
+  );
+  FilterInfo addFilterInfo = FilterInfo(
+      listOfAccompanyCourses: {},
+      listOfCategoryNameList: CategoryListResponseModel(content: []),
+      listOfDiscounts: {},
+      listOfGradeNamesList: GradeListResponseModel(content: []),
+      listOfProduceNames: {},
+      listOfTags: [],
+      listOfCategoryName: {},
       listOfGradeNames: {}
   );
   Future<void> init()async {
@@ -111,13 +122,13 @@ class FilterManager{
   }
   
   Future<FilterInfo> getCourseFilter() async {
-    if((addCourseFilterModel==null|| (addCourseFilterModel?.data??[]).isEmpty) && calApi[6]==false)
+    if((courseFilterModel==null|| (courseFilterModel?.data??[]).isEmpty) && calApi[6]==false)
       {
         calApi[6]=true;
-        GetAddCourseFilterApi addCourseFilterApi = GetAddCourseFilterApi();
-        addCourseFilterModel = await addCourseFilterApi.call();
+        GetCourseFilterApi addCourseFilterApi = GetCourseFilterApi();
+        courseFilterModel = await addCourseFilterApi.call();
         calApi[6]=false;
-        addCourseFilterModel?.data?.forEach((data) {
+        courseFilterModel?.data?.forEach((data) {
           switch (data.filterType) {
             case 'CATEGORY':
               data.subFilter!.where((e) => e.name != null).forEach((e) {
@@ -173,6 +184,7 @@ class FilterManager{
       }
     return filterInfo;
   }
+
   Future<GradeListResponseModel?> getGradesInfo() async {
     if((gradeListResponseModel==null || (gradeListResponseModel?.content??[]).isEmpty) && calApi[7]!=false)
     {
@@ -239,6 +251,69 @@ class FilterManager{
       calApi[12]=false;
     }
     return filterInfo.listOfTags;
+  }
+  Future<FilterInfo> getAddCourseFilter() async {
+    if((addCourseFilterModel==null|| (addCourseFilterModel?.data??[]).isEmpty) && calApi[13]==false)
+    {
+      calApi[13]=true;
+      GetAddCourseFilterApi addCourseFilterApi = GetAddCourseFilterApi();
+      addCourseFilterModel = await addCourseFilterApi.call();
+      calApi[13]=false;
+      addCourseFilterModel?.data?.forEach((data) {
+        switch (data.filterType) {
+          case 'CATEGORY':
+            data.subFilter!.where((e) => e.name != null).forEach((e) {
+              if ((addFilterInfo.listOfCategoryNameList.content??[]).where((element) => element.id == e.id,).isEmpty) {
+                (addFilterInfo.listOfCategoryNameList.content??[]).add(CategoryInfo(id: e.id, name: e.name));
+              }
+              if (!addFilterInfo.listOfCategoryName.containsValue(e.name!)) {
+                addFilterInfo.listOfCategoryName[e.id!] = e.name!;
+              }
+            });
+            break;
+          case 'AUTHOR':
+            data.subFilter!.where((e) => e.name != null).forEach((e) {
+              if (!addFilterInfo.listOfProduceNames.containsValue(e.name!)) {
+                addFilterInfo.listOfProduceNames[e.id!] = e.name!;
+              }
+            });
+            break;
+          case 'GRADE':
+            data.subFilter!.where((e) => e.name != null).forEach((e) {
+              if ((addFilterInfo.listOfGradeNamesList.content??[]).where((element) => element.id == e.id,).isEmpty) {
+                (addFilterInfo.listOfGradeNamesList.content??[]).add(GradeInfo(id: e.id, name: e.name));
+              }
+              if (!addFilterInfo.listOfGradeNames.containsValue(e.name!)) {
+                addFilterInfo.listOfGradeNames[e.id!] = e.name!;
+              }
+            });
+            break;
+          case 'ACCOMPANY':
+            data.subFilter!.where((e) => e.name != null).forEach((e) {
+              if (!addFilterInfo.listOfAccompanyCourses.containsValue(e.name!)) {
+                addFilterInfo.listOfAccompanyCourses[e.id!] = e.name!;
+              }
+            });
+            break;
+          case 'TAG':
+            data.subFilter!.where((e) => e.name != null).forEach((e) {
+              if (addFilterInfo.listOfTags.where((element) => element.id == e.id,).isEmpty) {
+                addFilterInfo.listOfTags.add(TagsInfo(id: e.id, name: e.name));
+              }
+            });
+          case 'DISCOUNT':
+            data.subFilter!.where((e) => e.name != null).forEach((e) {
+              if (!addFilterInfo.listOfDiscounts.containsValue(e.name!)) {
+                addFilterInfo.listOfDiscounts[e.id!] = e.name!;
+              }
+            });
+            break;
+          default:
+            break;
+        }
+      });
+    }
+    return addFilterInfo;
   }
   
   
@@ -500,6 +575,7 @@ class FilterManager{
     String? producerName,
     double? width,
     String? title,
+    bool?isForAddCourse
   }) {
     return SizedBox(
       width: width??Dimens.size200,
@@ -513,7 +589,7 @@ class FilterManager{
             height: Dimens.size40,
             width:width?? Dimens.size200,
             child: DropDownSearch(
-              list: filterInfo.listOfProduceNames,
+              list: (isForAddCourse??false)?filterInfo.listOfProduceNames: addFilterInfo.listOfProduceNames,
               hintText: '${L10nX.getStr.author_str}...',
               selectItem: producerName,
               onChange: (p0) {

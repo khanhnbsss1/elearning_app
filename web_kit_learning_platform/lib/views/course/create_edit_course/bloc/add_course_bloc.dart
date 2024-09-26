@@ -128,7 +128,7 @@ class AddCourseBloc extends Bloc<AddCourseEvent, AddCourseState> {
     state.controller?.basicValidator.getController('video_preview')?.text = state.courseInfo?.videoPreview??'';
     state.controller?.basicValidator.getController('accompany_course')?.text = state.courseInfo?.accompanyCourse??'';
 
-    FilterInfo addCourseFilterModel = await FilterManager().getCourseFilter();
+    FilterInfo addCourseFilterModel = await FilterManager().getAddCourseFilter();
     //List<TagsInfo> listOfTags = await FilterManager().getTagsInfo();
     state.controller!.listOfCategoryName = addCourseFilterModel.listOfCategoryName;
     state.controller!.listOfProduceNames = addCourseFilterModel.listOfProduceNames;

@@ -15,7 +15,6 @@ class DeviceUtil {
     bool isPhysicalDevice = false;
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     switch (defaultTargetPlatform){
-
       case TargetPlatform.android:
         // TODO: Handle this case.
       {

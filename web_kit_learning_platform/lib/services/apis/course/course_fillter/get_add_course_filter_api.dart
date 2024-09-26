@@ -1,17 +1,15 @@
 import 'package:webkit/base/services/base_request/BaseApiRequest.dart';
-
 import 'models/get_course_directory_model.dart';
 
-class GetCourseFilterApi extends BaseApiRequest {
-  GetCourseFilterApi():super(
+class GetAddCourseFilterApi extends BaseApiRequest {
+  GetAddCourseFilterApi():super(
     serviceType: SERVICE_TYPE.COURSE,
-    apiName: ApiName.getInstance().getCourseFilter,
+    apiName: ApiName.getInstance().addCourseDirectory,
   );
 
   Future<dynamic> call() async {
     await getAuthorization();
     dynamic result = await getRequestAPI();
-
     if(result.runtimeType == ResponseCommon)
     {
       return GetAddCourseFilterModel(data: []);
@@ -23,8 +21,7 @@ class GetCourseFilterApi extends BaseApiRequest {
     }
   }
 
-  Future<void> getAuthorization() async {
-  }
+  Future<void> getAuthorization() async {}
 
   @override
   Future<void> onRequestSuccess(var data) async {
@@ -39,4 +36,3 @@ class GetCourseFilterApi extends BaseApiRequest {
   }
 
 }
-
