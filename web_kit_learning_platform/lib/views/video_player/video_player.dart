@@ -25,6 +25,7 @@ class VideoPlayerState extends  State<VideoPlayer>{
     // TODO: implement build
     if(checkVideoFromYoutube()){
      return YoutubePlayerPage(
+       key: widget.key,
        videoPlayerModel: widget.videoPlayerModel,
        onGetVideoPosition: (duration) {
          if(widget.onGetVideoPosition!=null)

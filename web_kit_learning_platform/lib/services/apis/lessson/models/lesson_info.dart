@@ -104,7 +104,7 @@ class LessonInfo {
     subName = (json['sub_name']??"").toString().trim();
     lectureName = (json['lecture_name']?? json['name']??"").toString().trim();
     isFinnish = json['learning_status']== 'Completed'?true:false;
-    proccess = json['progress'];
+    proccess = json['progress']??0;
     videoInfos = LinkInfo(link: []);
     
     if((json['lecture_link']??json['link']??'').isNotEmpty)
@@ -200,8 +200,8 @@ class LessonInfo {
 
 class LinkInfo {
   List<VideoInfo>? link;
-
-  LinkInfo({this.link});
+  double? proccess;
+  LinkInfo({this.link, this.proccess});
 
   LinkInfo.fromJson(Map<String, dynamic> json) {
     if (json['link'] != null) {
@@ -209,6 +209,13 @@ class LinkInfo {
       json['link'].forEach((v) {
         link!.add(new VideoInfo.fromJson(v));
       });
+      for( VideoInfo videoInfo in link??[])
+        {
+          if((proccess??0)> (videoInfo.order??0 +1)*100/(link??[]).length)
+            {
+              videoInfo.isFinish= true;
+            }
+        }
     }
   }
 
@@ -225,7 +232,6 @@ class VideoInfo {
   String? videoTitle;
   String? videoLink;
   bool? isFinish;
-
   VideoInfo({this.order, this.videoTitle, this.videoLink, this.isFinish});
 
   VideoInfo.fromJson(Map<String, dynamic> json) {

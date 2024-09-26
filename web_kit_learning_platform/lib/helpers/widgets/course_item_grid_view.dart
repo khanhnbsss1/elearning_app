@@ -332,7 +332,9 @@ class CourseItemGridView extends StatelessWidget {
             );
           }
           else {
-            return SizedBox.shrink();
+            return SizedBox(
+              height: Dimens.size30,
+            );
           }
 
 

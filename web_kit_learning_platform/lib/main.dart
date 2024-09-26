@@ -128,7 +128,7 @@ class MyApp extends StatelessWidget {
           routingCallback: (value) {
             /// call back moi lan chuyen page url
             print(value);
-            YoutubePlayerPage.onFinishVideo();
+            YoutubePlayerControllerManager().onFinishVideo();
             
           },
           

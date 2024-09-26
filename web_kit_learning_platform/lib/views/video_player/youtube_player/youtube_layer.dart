@@ -9,65 +9,73 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 ///
 
 ///
+class YoutubePlayerControllerManager{
+  static final YoutubePlayerControllerManager youtubePlayerControllerManager = YoutubePlayerControllerManager._internal();
+  static YoutubePlayerControllerManager get getInstance => youtubePlayerControllerManager;
+  factory YoutubePlayerControllerManager() {
+    return youtubePlayerControllerManager;
+  }
+  YoutubePlayerControllerManager._internal();
+  YoutubePlayerController? youTubeController;
+  void onFinishVideo(){
+    youTubeController?.stopVideo();
+    youTubeController?.close();
+  }
+  void onInitController(){
+    YoutubePlayerControllerManager().youTubeController = YoutubePlayerController(
+      params: const YoutubePlayerParams(
+          showControls: true,
+          mute: false,
+          showFullscreenButton: true,
+          loop: false,
+          enableCaption: true,
+          enableJavaScript: false
+      ),
+    );
 
-
+    YoutubePlayerControllerManager().youTubeController?.setFullScreenListener(
+          (isFullScreen) {
+        log('${isFullScreen ? 'Entered' : 'Exited'} Fullscreen.');
+      },
+    );
+    YoutubePlayerControllerManager().youTubeController?.stopVideo();
+    YoutubePlayerControllerManager().youTubeController?.listen((event) {
+      switch(event.playerState){
+        case PlayerState.unknown:
+        // TODO: Handle this case.
+        case PlayerState.unStarted:
+        // TODO: Handle this case.
+        case PlayerState.ended:
+        // TODO: Handle this case.
+        case PlayerState.playing:
+        // TODO: Handle this case.
+        case PlayerState.paused:
+        // TODO: Handle this case.
+        case PlayerState.buffering:
+        // TODO: Handle this case.
+        case PlayerState.cued:
+        // TODO: Handle this case.
+      }
+    },);
+  }
+}
 class YoutubePlayerPage extends StatefulWidget {
-  static YoutubePlayerController? youTubeController;
-
+  
   VideoPlayerModel videoPlayerModel;
   Function(Duration duration)? onGetVideoDuration;
   Function(Duration duration)? onGetVideoPosition;
-  YoutubePlayerPage({required this.videoPlayerModel, this.onGetVideoDuration, this.onGetVideoPosition});
-  static void onFinishVideo(){
-    YoutubePlayerPage.youTubeController?.stopVideo();
-    YoutubePlayerPage.youTubeController?.close();
-    YoutubePlayerPage.youTubeController = null;
-  }
+  YoutubePlayerPage({super.key, required this.videoPlayerModel, this.onGetVideoDuration, this.onGetVideoPosition});
+  
   @override
   State<YoutubePlayerPage> createState() => _YoutubePlayerPageState();
 }
 
 class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
-
+  late YoutubePlayerController _youTubeController;
   @override
   void initState() {
     super.initState();
-    YoutubePlayerPage.youTubeController = YoutubePlayerController(
-      params: const YoutubePlayerParams(
-        showControls: true,
-        mute: false,
-        showFullscreenButton: true,
-        loop: false,
-        enableCaption: true,
-        enableJavaScript: false
-      ),
-    );
-
-    YoutubePlayerPage.youTubeController?.setFullScreenListener(
-          (isFullScreen) {
-        log('${isFullScreen ? 'Entered' : 'Exited'} Fullscreen.');
-      },
-    );
-    YoutubePlayerPage.youTubeController?.loadVideoById(videoId: getVideoIdFromVideoUrl());
-    YoutubePlayerPage.youTubeController?.listen((event) {
-      switch(event.playerState){
-        case PlayerState.unknown:
-          // TODO: Handle this case.
-        case PlayerState.unStarted:
-          // TODO: Handle this case.
-        case PlayerState.ended:
-          // TODO: Handle this case.
-        case PlayerState.playing:
-          // TODO: Handle this case.
-        case PlayerState.paused:
-          // TODO: Handle this case.
-        case PlayerState.buffering:
-          // TODO: Handle this case.
-        case PlayerState.cued:
-          // TODO: Handle this case.
-      }
-    },);
-    YoutubePlayerPage.youTubeController?.stopVideo();
+    onInitController();
   }
   String getVideoIdFromVideoUrl(){
     String videoLink = widget.videoPlayerModel.link;
@@ -76,12 +84,15 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
   }
   @override
   Widget build(BuildContext context) {
+    //onInitController();
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) { 
         return YoutubePlayerScaffold(
-          controller: YoutubePlayerPage.youTubeController!,
+         // key: widget.key,
+          controller: _youTubeController,
           backgroundColor: ColorConst.blackColor,
           //aspectRatio: constraints.maxWidth/constraints.maxHeight,
+          
           builder: (context, player) {
             return LayoutBuilder(
               builder: (context, constraints) {
@@ -92,6 +103,7 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                     children: [
                       Expanded(child: player),
                       VideoPositionIndicator(
+                        key: widget.key,
                         onGetVideoDuration: (duration) {
                           if(widget.onGetVideoDuration!=null)
                             {
@@ -105,7 +117,6 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
                           }
                         },
                       ),
-                      //const VideoPositionSeeker(),
                     ],
                   ),
                 );
@@ -116,12 +127,52 @@ class _YoutubePlayerPageState extends State<YoutubePlayerPage> {
       },
     );
   }
+  void onInitController(){
+    _youTubeController = YoutubePlayerController(
+      params: const YoutubePlayerParams(
+          showControls: true,
+          mute: false,
+          showFullscreenButton: true,
+          loop: false,
+          enableCaption: true,
+          enableJavaScript: false
+      ),
+    );
 
+    _youTubeController.loadVideoById(videoId: getVideoIdFromVideoUrl());
+    _youTubeController.stopVideo();
+    _youTubeController.setFullScreenListener(
+          (isFullScreen) {
+        log('${isFullScreen ? 'Entered' : 'Exited'} Fullscreen.');
+      },
+    );
+    _youTubeController.listen((event) {
+      switch(event.playerState){
+        case PlayerState.unknown:
+        // TODO: Handle this case.
+        case PlayerState.unStarted:
+        // TODO: Handle this case.
+        case PlayerState.ended:
+        // TODO: Handle this case.
+        case PlayerState.playing:
+        // TODO: Handle this case.
+        case PlayerState.paused:
+        // TODO: Handle this case.
+        case PlayerState.buffering:
+        // TODO: Handle this case.
+        case PlayerState.cued:
+        // TODO: Handle this case.
+      }
+    },);
+  }
+  void onFinishVideo(){
+    _youTubeController.stopVideo();
+    _youTubeController.close();
+  }
+  
   @override
   void dispose() {
-    YoutubePlayerPage.youTubeController?.stopVideo();
-    YoutubePlayerPage.youTubeController?.close();
-    YoutubePlayerPage.youTubeController = null;
+    onFinishVideo();
     super.dispose();
   }
   
@@ -157,6 +208,8 @@ class VideoPositionIndicator extends StatelessWidget {
         if(onGetVideoPosition!=null && snapshot.hasData)
         {
           onGetVideoPosition!(snapshot.data!.position);
+          YoutubePlayerControllerManager().youTubeController = context.ytController;
+          
         }
         return LinearProgressIndicator(
           value: duration == 0 ? 0 : position / duration,
@@ -167,48 +220,3 @@ class VideoPositionIndicator extends StatelessWidget {
   }
 }
 
-///
-class VideoPositionSeeker extends StatelessWidget {
-  ///
-  const VideoPositionSeeker({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    var value = 0.0;
-    return Row(
-      children: [
-        const SizedBox(width: 14),
-        Expanded(
-          child: StreamBuilder<YoutubeVideoState>(
-            stream: context.ytController.videoStateStream,
-            initialData: const YoutubeVideoState(),
-            builder: (context, snapshot) {
-              final position = snapshot.data?.position.inSeconds ?? 0;
-              final duration = context.ytController.metadata.duration.inSeconds;
-
-              value = position == 0 || duration == 0 ? 0 : position / duration;
-
-              return StatefulBuilder(
-                builder: (context, setState) {
-                  return Slider(
-                    value: value,
-                    onChanged: (positionFraction) {
-                      value = positionFraction;
-                      setState(() {});
-                      context.ytController.seekTo(
-                        seconds: (value * duration).toDouble(),
-                        allowSeekAhead: true,
-                      );
-                    },
-                    min: 0,
-                    max: 1,
-                  );
-                },
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-}

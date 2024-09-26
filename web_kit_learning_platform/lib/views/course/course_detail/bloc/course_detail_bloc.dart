@@ -96,7 +96,7 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
     }
     state.awaitCallApi =true;
     
-    int proccess = (((event.selectVideoInfo.order??0) + 1)*100)~/(state.selectLessonInfo?.videoInfos?.link??[]).length;
+    int proccess = (((event.selectVideoInfo.order??0 +1) + 1)*100)~/(state.selectLessonInfo?.videoInfos?.link??[]).length;
     UpdateLessonStatusApi updateLessonStatusApi= UpdateLessonStatusApi(
       courseId: state.courseInfo?.id??0, 
       lectureId: state.selectLessonInfo?.id??0,
@@ -104,17 +104,16 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
     );
     dynamic data = await updateLessonStatusApi.call();
     state.awaitCallApi =false;
-    if((event.selectVideoInfo.order??0)< (state.selectLessonInfo?.videoInfos?.link??[]).length-1)
+    state.selectLessonInfo?.selectVideoInfo?.isFinish= true;
+    if((event.selectVideoInfo.order??0 +1)< (state.selectLessonInfo?.videoInfos?.link??[]).length)
       {
         /// van con video bai hoc chua hoc tu dong next sang video tiep theo cua bai hoc nay
-/*        int finishVideoIndex = (state.selectLessonInfo?.videoInfos?.link??[]).indexWhere((element) => element.order == event.selectVideoInfo.order,);
-        state.selectLessonInfo?.selectVideoInfo = (state.selectLessonInfo?.videoInfos?.link??[]).elementAt(finishVideoIndex+1);
-        emit(state.copyWith(
-          blocStatus: AddCourseStatus.onUpdateFinishLessonStatus,
-          courseInfo: state.courseInfo,
-          selectLessonInfo: state.selectLessonInfo
-        ));*/
         
+        emit(state.copyWith(
+            blocStatus: AddCourseStatus.onUpdateFinishVideoStatus,
+            courseInfo: state.courseInfo,
+            selectLessonInfo: state.selectLessonInfo
+        ));
       }
     else
       {
@@ -123,6 +122,7 @@ class CourseDetailBloc extends Bloc<CourseDetailEvent, CourseDetailState> {
         emit(state.copyWith(
           blocStatus: AddCourseStatus.onUpdateFinishLessonStatus,
           courseInfo: state.courseInfo,
+          selectLessonInfo: state.selectLessonInfo
         ));
         if(indexOfSelectLesson<(state.courseInfo?.lectures??[]).length)
         {

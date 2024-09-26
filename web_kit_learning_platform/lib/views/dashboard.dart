@@ -677,7 +677,9 @@ class DashboardPageState extends State<DashboardPage> with SingleTickerProviderS
                     child: Padding(
                       padding: MySpacing.all(16),
                       child: SfCartesianChart(
-                        primaryXAxis: CategoryAxis(),
+                        primaryXAxis: CategoryAxis(
+                          labelRotation: -75,
+                        ),
                         tooltipBehavior: controller.chart,
                         axes: <ChartAxis>[
                           NumericAxis(

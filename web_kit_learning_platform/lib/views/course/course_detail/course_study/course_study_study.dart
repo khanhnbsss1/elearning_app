@@ -197,8 +197,10 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
               decoration: BoxDecoration(color: Colors.black),
               constraints: BoxConstraints(maxHeight: ResponsiveInfo.isPhone() ? constraints.maxWidth : MediaQuery.sizeOf(context).height * 2 / 3, maxWidth: constraints.maxWidth),
               child: VideoPlayer(
-                key: Key((_state.selectLessonInfo?.selectVideoInfo?.order ?? '').toString()),
-                videoPlayerModel: VideoPlayerModel(title: "", link: (_state.selectLessonInfo?.selectVideoInfo?.videoLink ?? "https://www.youtube.com/watch?v=RFu43pM2Nbw")),
+                key: Key((_state.selectLessonInfo?.selectVideoInfo?.order ?? 0).toString()),
+                videoPlayerModel: VideoPlayerModel(
+                    title: "",
+                    link: (_state.selectLessonInfo?.selectVideoInfo?.videoLink ?? "https://www.youtube.com/watch?v=RFu43pM2Nbw")),
                 onGetVideoDuration: (duration) {
                   if ((_state.selectLessonInfo?.videoDuration == null) && duration.inMilliseconds > 10) {
                     _state.selectLessonInfo?.videoDuration = duration.inMilliseconds ~/ 1000;
@@ -207,9 +209,9 @@ class _CourseStudyStudyState extends State<CourseStudyStudy> with SingleTickerPr
                   }
                 },
                 onGetVideoPosition: (duration) {
-                  print("object");
-                  if ((!(_state.selectLessonInfo?.isFinnish ?? false)) &&
-                      (_state.selectLessonInfo?.videoDuration ?? 0) > 10 &&
+                  //print("object");
+                  if (((_state.selectLessonInfo?.selectVideoInfo?.isFinish!= true))
+                      && 
                       duration.inMilliseconds / 1000 > (_state.selectLessonInfo?.videoDuration ?? 0) - (60 * 0.5)) {
                     _state.selectLessonInfo?.isFinnish = true;
                     BlocProvider.of<CourseDetailBloc>(context)
