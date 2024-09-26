@@ -13,6 +13,7 @@ import 'package:lms_app/screens/intro.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'base/author/author_manager.dart';
+import 'base/author/user_helper.dart';
 import 'base/base.export.dart';
 import 'base/firebase_manager/firebase_options.dart';
 import 'base/store/cache_storage.dart';
@@ -106,6 +107,14 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    try {
+      UserManager().saveUserProfileInfo(UserManager().getUserProfile()!);
+      AuthorManager().saveAuthInfo(AuthorManager().getAuthInfo()!);
+      AuthorManager().setLoggedInUser(true);
+      debugPrint('convertd ${AuthorManager().getAuthInfo()!.accessToken}');
+    } catch (e) {
+      debugPrint('error in convert ${e.toString()}');
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (LanguageHelper().getCurrentLocale() != context.locale) {
         Get.updateLocale(context.locale);
