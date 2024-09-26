@@ -5,6 +5,8 @@ import 'package:lms_app/mixins/search_mixin.dart';
 import 'package:lms_app/screens/home/home_view.dart';
 import 'package:lms_app/services/notification_service.dart';
 
+import '../base/author/author_manager.dart';
+import '../base/author/user_helper.dart';
 import '../providers/user_data_provider.dart';
 import '../utils/disable_user_dialog.dart';
 
@@ -21,6 +23,15 @@ class _HomeState extends ConsumerState<Home> {
     await NotificationService().initFirebasePushNotification(context, ref).then(
           (value) => NotificationService().checkNotificationSubscription(ref),
         );
+    try {
+      UserManager().saveUserProfileInfo(UserManager().getUserProfile()!);
+      AuthorManager().saveAuthInfo(AuthorManager().getAuthInfo()!);
+      await ref.read(userDataProvider.notifier).getData();
+      AuthorManager().setLoggedInUser(true);
+      debugPrint('convertd ${AuthorManager().getAuthInfo()!.accessToken}');
+    } catch (e) {
+      debugPrint('error in convert ${e.toString()}');
+    }
   }
 
   _checkUserAccess() async {

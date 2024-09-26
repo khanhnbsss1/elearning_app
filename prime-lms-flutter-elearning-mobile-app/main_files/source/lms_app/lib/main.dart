@@ -1,17 +1,14 @@
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:is_first_run/is_first_run.dart';
-import 'package:lms_app/helper/navigator_key.dart';
 import 'package:lms_app/helper/services/navigation_service.dart';
 import 'package:lms_app/screens/auth/login.dart';
-import 'package:lms_app/screens/home/home_view.dart';
 import 'package:lms_app/screens/intro.dart';
 import 'package:lms_app/services/app_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +19,7 @@ import 'base/store/cache_storage.dart';
 import 'configs/app_config.dart';
 import 'configs/language_config.dart';
 import 'core/app.dart';
+import 'core/home.dart';
 import 'enviroments/flavor_settings.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'helper/localizations/language_helper.dart';
@@ -104,8 +102,8 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    
   }
+
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -130,7 +128,8 @@ class _MyAppState extends State<MyApp> {
       builder: EasyLoading.init(),
       home: _isFirstCall!
           ? const IntroScreen()
-          : const LoginScreen(popUpScreen: false),
+          : (AuthorManager().isLoggedIn != true) ? const LoginScreen(popUpScreen: false) : const Home()
+      // home: _isFirstCall! ? const IntroScreen() : const LoginScreen(popUpScreen: false,),
     );
   }
 

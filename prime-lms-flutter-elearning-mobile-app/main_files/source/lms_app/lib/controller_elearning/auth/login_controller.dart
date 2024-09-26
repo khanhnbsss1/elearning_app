@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:lms_app/base/author/author_manager.dart';
 import 'package:lms_app/screens/home/home_view.dart';
 
 import '../../base/author/user_helper.dart';
@@ -74,6 +75,7 @@ class LoginController extends MyController {
         LoginWithPhoneApi(loginRequest: loginRequest);
     bool result = await loginWithPhoneApi.call();
     if (result == true) {
+      await AuthorManager().setLoggedInUser(true);
       await UserManager().saveRememberPassword(rememberMe);
       if (rememberMe) {
         await UserManager().saveAccountLoginNearest(

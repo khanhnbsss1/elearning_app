@@ -93,6 +93,7 @@ class AuthorManager {
 
   Future<void> handleLogout() async {
     await removeAuthInfo();
+    await AuthorManager().setLoggedInUser(false);
     AuthorManager().deleteDataWhenLogout();
     UserManager().handleLogoutData();
     setLoggedInUser(false);
