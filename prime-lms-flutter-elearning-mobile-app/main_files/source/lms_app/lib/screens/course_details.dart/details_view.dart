@@ -194,14 +194,17 @@ class CourseDetailsView extends ConsumerWidget {
                 ],
               ));
         },
-        error: (error, stackTrace) => Text('error: $error'),
+        error: (error, stackTrace) => Container(),
         loading: () {
-          return Scaffold(body: const LoadingIndicatorWidget()); // display loading indicator
+          return Scaffold(
+              body:
+                  const LoadingIndicatorWidget()); // display loading indicator
         },
       ),
-      error: (error, stackTrace) => Text('error: $error'),
+      error: (error, stackTrace) => Container(),
       loading: () {
-        return Scaffold(body: const LoadingIndicatorWidget()); // display loading indicator
+        return Scaffold(
+            body: const LoadingIndicatorWidget()); // display loading indicator
       },
     );
   }

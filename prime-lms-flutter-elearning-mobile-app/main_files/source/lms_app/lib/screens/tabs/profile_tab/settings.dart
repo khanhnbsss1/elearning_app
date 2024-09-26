@@ -114,11 +114,11 @@ class AppSettings extends ConsumerWidget with UserMixin {
                     InkWell(
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("Hotline: ${ IdentifierConst.hotline}", style: TextStyleConstant.textStyleBlack14w500,),
+                          Icon(Icons.phone_in_talk, color: Colors.green,size: Dimens.size30,),
                           Gap(Dimens.size8),
-                          Icon(Icons.phone_in_talk, color: Colors.green,size: Dimens.size30,)
+                          Text("Hotline: ${ IdentifierConst.hotline}", style: TextStyleConstant.textStyleBlack14w500,),
                         ],
                       ),
                       onTap: () {
@@ -129,11 +129,11 @@ class AppSettings extends ConsumerWidget with UserMixin {
                     InkWell(
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text("Email: ${ IdentifierConst.supportEmail}", style: TextStyleConstant.textStyleBlack14w400,),
+                          Icon(Icons.email, color: Colors.green,size: Dimens.size30,),
                           Gap(Dimens.size8),
-                          Icon(Icons.email, color: Colors.green,size: Dimens.size30,)
+                          Text("Email: ${ IdentifierConst.supportEmail}", style: TextStyleConstant.textStyleBlack14w400,),
                         ],
                       ),
                       onTap: () {
@@ -147,8 +147,10 @@ class AppSettings extends ConsumerWidget with UserMixin {
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                          Icon(Icons.location_on, color: Colors.green, size: Dimens.size30,),
+                          Gap(Dimens.size8),
                           Flexible(
                             child: Text("address_str".tr(args: [IdentifierConst.address]),
                               style: TextStyleConstant.textStyleBlack14w400,
@@ -156,8 +158,6 @@ class AppSettings extends ConsumerWidget with UserMixin {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          Gap(Dimens.size8),
-                          Icon(Icons.location_on, color: Colors.green, size: Dimens.size30,)
                         ],
                       ),
                     )

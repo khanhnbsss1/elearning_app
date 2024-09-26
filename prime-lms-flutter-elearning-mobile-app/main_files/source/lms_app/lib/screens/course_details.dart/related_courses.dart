@@ -6,8 +6,10 @@ import '../../components/course_tile.dart';
 import '../../services/api_service.dart';
 import '../../services/apis/course/course_detail/models/course_detail_model.dart';
 
-final relatedCoursesProvider = FutureProvider.family.autoDispose<List<CourseInfo>?, CourseInfo>((ref, course) async {
-  List<CourseInfo>? courses = await ApiService().getRelatedCoursesByCategory(course);
+final relatedCoursesProvider = FutureProvider.family
+    .autoDispose<List<CourseInfo>?, CourseInfo>((ref, course) async {
+  List<CourseInfo>? courses =
+      await ApiService().getRelatedCoursesByCategory(course);
   return courses;
 });
 
@@ -32,14 +34,18 @@ class RelatedCourses extends ConsumerWidget {
               children: [
                 Text(
                   'related-courses',
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(fontWeight: FontWeight.bold),
                 ).tr(),
                 ListView.separated(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   itemCount: data.length,
-                  separatorBuilder: (context, index) => const Divider(height: 50),
+                  separatorBuilder: (context, index) =>
+                      const Divider(height: 50),
                   itemBuilder: (context, index) {
                     final CourseInfo course = data[index];
                     return CourseTile(course: course);

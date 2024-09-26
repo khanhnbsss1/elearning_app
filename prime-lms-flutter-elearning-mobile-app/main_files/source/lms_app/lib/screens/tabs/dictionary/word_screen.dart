@@ -78,16 +78,16 @@ class _WordScreenState extends State<WordScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('simplified'.tr(), style: Theme.of(context).textTheme.titleMedium,),
+                  Text('pinyin'.tr(), style: Theme.of(context).textTheme.titleMedium,),
                   const SizedBox(
                     height: 8,
                   ),
                   Row(
                     children: [
-                      Text(
-                        '${word.simplified}',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
+                      // Text(
+                      //   '${word.simplified}',
+                      //   style: Theme.of(context).textTheme.bodyLarge,
+                      // ),
                       const SizedBox(
                         width: 16,
                       ),
@@ -109,9 +109,12 @@ class _WordScreenState extends State<WordScreen> {
                   const SizedBox(
                     height: 8,
                   ),
-                  Text(
-                    '${word.traditional}',
-                    style: Theme.of(context).textTheme.titleMedium,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: Text(
+                      '${word.traditional}',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
                   ),
                   const SizedBox(
                     height: 16,
@@ -120,9 +123,12 @@ class _WordScreenState extends State<WordScreen> {
                   const SizedBox(
                     height: 8,
                   ),
-                  Text(
-                    '${word.translationVn}',
-                    style: Theme.of(context).textTheme.bodyLarge,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: Text(
+                      '${word.translationVn}',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
                   ),
                   const SizedBox(
                     height: 16,

@@ -21,53 +21,68 @@ class AllAuthors extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authors = ref.watch(topAuthorsProvider);
-    return authors.when(data: (teacherDetailList){
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('all-Instructors').tr(),
-        ),
-        body: ListView.separated(
-          padding: const EdgeInsets.all(20),
-          itemCount: teacherDetailList.length,
-          separatorBuilder: (BuildContext context, int index) => const Divider(height: 50),
-          itemBuilder: (BuildContext context, int index) {
-            final TeacherDetail teacherDetail = teacherDetailList[index];
-            return InkWell(
-              onTap: () => NextScreen.iOS(context, AuthorProfile(teacherDetail: teacherDetail)),
-              child: Row(
-                children: [
-                  UserAvatar(imageUrl: teacherDetail.avatar, radius: 60, iconSize: 40),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(teacherDetail.fullName.toString(), style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
-                          Visibility(
-                            visible: teacherDetail.position != null,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 3),
-                              child: Text(
-                                teacherDetail.position ?? '',
-                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.blueGrey),
+    return authors.when(
+        data: (teacherDetailList) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('all-Instructors').tr(),
+            ),
+            body: ListView.separated(
+              padding: const EdgeInsets.all(20),
+              itemCount: teacherDetailList.length,
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(height: 50),
+              itemBuilder: (BuildContext context, int index) {
+                final TeacherDetail teacherDetail = teacherDetailList[index];
+                return InkWell(
+                  onTap: () => NextScreen.iOS(
+                      context, AuthorProfile(teacherDetail: teacherDetail)),
+                  child: Row(
+                    children: [
+                      UserAvatar(
+                          imageUrl: teacherDetail.avatar,
+                          radius: 60,
+                          iconSize: 40),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(teacherDetail.fullName.toString(),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleMedium
+                                      ?.copyWith(fontWeight: FontWeight.bold)),
+                              Visibility(
+                                visible: teacherDetail.position != null,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 3),
+                                  child: Text(
+                                    teacherDetail.position ?? '',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium
+                                        ?.copyWith(color: Colors.blueGrey),
+                                  ),
+                                ),
                               ),
-                            ),
+                              Text('courses-str').tr(
+                                  args: ['${teacherDetail.totalCourse ?? 2} '])
+                            ],
                           ),
-                          Text('courses-str').tr(args: ['${teacherDetail.totalCourse??2} ' ])
-                        ],
+                        ),
                       ),
-                    ),
+                      const Icon(FeatherIcons.chevronRight),
+                    ],
                   ),
-                  const Icon(FeatherIcons.chevronRight),
-                ],
-              ),
-            );
-          },
-        ),
-      );
-    },
-    error: (error, stackTrace) => Text('error: $error'),
-    loading: () => const LoadingIndicatorWidget());
+                );
+              },
+            ),
+          );
+        },
+        error: (error, stackTrace) => Container(),
+        loading: () => const LoadingIndicatorWidget());
   }
 }

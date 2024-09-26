@@ -11,7 +11,7 @@ import 'package:lms_app/utils/empty_animation.dart';
 import 'package:lms_app/utils/next_screen.dart';
 import '../../../../base/widgets/audio/audio_speaker.dart';
 
-class SearchedWords extends ConsumerWidget with SearchMixin{
+class SearchedWords extends ConsumerWidget with SearchMixin {
   const SearchedWords({super.key});
 
   @override
@@ -19,11 +19,11 @@ class SearchedWords extends ConsumerWidget with SearchMixin{
     final coursesProvider = ref.watch(searchedWordProvider);
     return coursesProvider.when(
       loading: () => const LoadingListTile(height: 160),
-      error: (error, stackTrace) => Center(
-        child: Text(error.toString()),
-      ),
+      error: (error, stackTrace) => Container(),
       data: (dictionary) {
-        if (dictionary!.isEmpty) return EmptyAnimation(animationString: emptyAnimation, title: 'no-word'.tr());
+        if (dictionary!.isEmpty)
+          return EmptyAnimation(
+              animationString: emptyAnimation, title: 'no-word'.tr());
         return ListView.separated(
           padding: const EdgeInsets.all(20),
           itemCount: dictionary.length,
@@ -31,12 +31,12 @@ class SearchedWords extends ConsumerWidget with SearchMixin{
           itemBuilder: (context, index) {
             final VocabularyInfo word = dictionary[index];
             return ListTile(
-              onTap: () async{
+              onTap: () async {
                 NextScreen.normal(context, WordScreen(word: word));
                 await addToSearchedWordList(value: word.simplified!, ref: ref);
               },
               contentPadding:
-              const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                  const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
               horizontalTitleGap: 10,
               title: Text(
                 word.simplified!,

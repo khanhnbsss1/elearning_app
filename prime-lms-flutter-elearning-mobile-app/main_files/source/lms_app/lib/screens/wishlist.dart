@@ -21,7 +21,8 @@ final wishlistProvider = FutureProvider.autoDispose<List<Course>>((ref) async {
   final courseIds = user.wishList ?? [];
   final chunks = partition(courseIds, 10);
 
-  final querySnapshots = await Future.wait(chunks.map((chunk) => ApiService().getCoursesQuery(chunk)).toList());
+  final querySnapshots = await Future.wait(
+      chunks.map((chunk) => ApiService().getCoursesQuery(chunk)).toList());
   for (var element in querySnapshots) {
     courses.addAll(element.docs.map((e) => Course.fromFirestore(e)).toList());
   }
@@ -39,24 +40,29 @@ class Wishlist extends ConsumerWidget with CourseMixin {
     return Scaffold(
       appBar: AppBar(
         title: const Text('wishlist').tr(),
-        titleTextStyle: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600, fontSize: 20),
-        leading: IconButton(onPressed: () => Navigator.pop(context), icon: const Icon(FeatherIcons.chevronLeft)),
+        titleTextStyle: Theme.of(context)
+            .textTheme
+            .titleLarge
+            ?.copyWith(fontWeight: FontWeight.w600, fontSize: 20),
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(FeatherIcons.chevronLeft)),
       ),
       body: RefreshIndicator(
         onRefresh: () async => ref.refresh(wishlistProvider),
         child: user == null || wishlist.value == null
-            ? EmptyAnimation(animationString: emptyAnimation, title: 'no-course'.tr())
+            ? EmptyAnimation(
+                animationString: emptyAnimation, title: 'no-course'.tr())
             : wishlist.when(
                 skipLoadingOnRefresh: false,
                 loading: () => const LoadingListTile(height: 160),
-                error: (error, stackTrace) => Center(
-                  child: Text(error.toString()),
-                ),
+                error: (error, stackTrace) => Container(),
                 data: (data) {
                   return ListView.separated(
                     padding: const EdgeInsets.all(20),
                     itemCount: data.length,
-                    separatorBuilder: (context, index) => const Divider(height: 50),
+                    separatorBuilder: (context, index) =>
+                        const Divider(height: 50),
                     itemBuilder: (context, index) {
                       // return null;
                       final CourseInfo course = data[index];

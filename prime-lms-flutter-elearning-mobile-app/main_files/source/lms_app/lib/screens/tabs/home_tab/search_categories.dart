@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lms_app/components/loading_tile.dart';
@@ -86,9 +87,9 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories>
                           indicatorSize: TabBarIndicatorSize.tab,
                           labelColor: Colors.black,
                           unselectedLabelColor: Colors.white,
-                          tabs: const [
-                            Tab(text: 'Categories'),
-                            Tab(text: 'Author'),
+                          tabs: [
+                            Tab(text: 'Categories'.tr()),
+                            Tab(text: 'Author'.tr()),
                           ],
                         ),
                       ),
@@ -125,18 +126,11 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories>
                         padding: const EdgeInsets.symmetric(horizontal: 4),
                         child: ActionChip(
                           onPressed: () {
-                            if (e.id == courseFilterInfo.id) {
-                              ref
-                                  .refresh(courseFilterInfoProvider.notifier)
-                                  .state;
-                              ref.refresh(subFilterInfoProvider.notifier).state;
-                            } else {
                               ref
                                   .read(courseFilterInfoProvider.notifier)
                                   .state = e;
                               ref.read(subFilterInfoProvider.notifier).state =
                                   SubFilterInfo();
-                            }
                           },
                           backgroundColor: (e.name == courseFilterInfo.name)
                               ? Theme.of(context).primaryColor.withOpacity(0.5)
@@ -147,7 +141,7 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories>
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30)),
                           label: Text(
-                            e.name!,
+                            e.name!.tr(),
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium
@@ -248,7 +242,7 @@ class _SearchCategoriesState extends ConsumerState<SearchCategories>
                     borderRadius: BorderRadius.circular(20),
                   ),
                   label: Text(
-                    "All",
+                    "All".tr(),
                     style: Theme.of(context)
                         .textTheme
                         .titleMedium

@@ -27,7 +27,8 @@ import '../../../providers/user_data_provider.dart';
 // }
 // );
 
-final myCoursesProvider = FutureProvider.autoDispose<List<CourseInfo>?>((ref) async {
+final myCoursesProvider =
+    FutureProvider.autoDispose<List<CourseInfo>?>((ref) async {
   return await ApiService().getMyCourses();
 });
 
@@ -55,43 +56,40 @@ class MyCoursesTab extends ConsumerWidget {
         ),
         body: user == null
             ? const EmptyAnimation(
-            animationString: emptyAnimation, title: 'No courses found')
+                animationString: emptyAnimation, title: 'No courses found')
             : myCourses.when(
-          skipLoadingOnRefresh: false,
-          loading: () => const LoadingListTile(height: 200),
-          error: (error, stackTrace) => Center(
-            child: Text('Error: ${error.toString()}'),
-          ),
-          data: (data) {
-            if (data == null || data.isEmpty) {
-              return const EmptyAnimation(
-                animationString: emptyAnimation,
-                title: 'No courses found',
-              );
-            }
-            return Column(
-              children: [
-                Expanded(
-                  child: ListView.separated(
-                    padding: const EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                      bottom: 50,
-                      top: 25,
-                    ),
-                    itemCount: data.length,
-                    separatorBuilder: (context, index) => const Divider(height: 50),
-                    itemBuilder: (context, index) {
-                      data.length;
-                      final CourseInfo course = data[index];
-                      return MyCourseTile(courseInfo: course, user: user);
-                    },
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
+                skipLoadingOnRefresh: false,
+                loading: () => const LoadingListTile(height: 200),
+                error: (error, stackTrace) => Container(),
+                data: (data) {
+                  if (data == null || data.isEmpty) {
+                    return const EmptyAnimation(
+                      animationString: emptyAnimation,
+                      title: 'No courses found',
+                    );
+                  }
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          padding: const EdgeInsets.only(
+                            left: 20,
+                            right: 20,
+                            bottom: 50,
+                            top: 25,
+                          ),
+                          itemCount: data.length,
+                          itemBuilder: (context, index) {
+                            data.length;
+                            final CourseInfo course = data[index];
+                            return MyCourseTile(courseInfo: course, user: user);
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
       ),
     );
   }

@@ -23,7 +23,7 @@ class FeaturedCoursesSlide extends ConsumerWidget {
         skipLoadingOnRefresh: false,
         data: (courses) {
           return (courses.isNotEmpty && courses != []) ? Padding(
-            padding: const EdgeInsets.only(right: 20),
+            padding: const EdgeInsets.only(right: 20, top: 20),
             child: Column(
               children: [
                 Padding(

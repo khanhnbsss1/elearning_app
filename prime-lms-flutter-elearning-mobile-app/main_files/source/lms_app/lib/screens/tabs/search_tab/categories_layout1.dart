@@ -8,7 +8,8 @@ import '../../../utils/cache_image_filter.dart';
 import '../../../utils/next_screen.dart';
 
 class CategoriesLayout1 extends StatelessWidget {
-  const CategoriesLayout1({super.key, 
+  const CategoriesLayout1({
+    super.key,
     required this.categories,
   });
 
@@ -23,14 +24,17 @@ class CategoriesLayout1 extends StatelessWidget {
         children: [
           Text(
             'all-categories',
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
+            style: Theme.of(context)
+                .textTheme
+                .titleLarge
+                ?.copyWith(fontWeight: FontWeight.w700),
           ).tr(),
           const SizedBox(
             height: 10,
           ),
           categories.when(
             loading: () => const CircularProgressIndicator(),
-            error: (error, stackTrace) => Text('error: $error'),
+            error: (error, stackTrace) => Container(),
             data: (data) {
               return Column(
                 children: data.map((category) {
@@ -59,7 +63,10 @@ class CategoriesLayout1 extends StatelessWidget {
                               category.name,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleLarge
+                                  ?.copyWith(
                                     color: Colors.white,
                                     fontSize: 20,
                                   ),

@@ -41,47 +41,51 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
 
     return refCourseDetail.when(
       loading: () => const SizedBox(),
-      error: (error, stackTrace) => const SizedBox(),
+      error: (error, stackTrace) => Container(),
       data: (courseDetail) {
         return InkWell(
           splashColor: Colors.transparent,
-          onTap: () => NextScreen.iOS(
-              context, CourseDetailsView(courses: courseDetail, heroTag: heroTag)),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          onTap: () => NextScreen.iOS(context,
+              CourseDetailsView(courses: courseDetail, heroTag: heroTag)),
+          child: Column(
             children: [
-              _buildCourseImage(context, courseDetail),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        courseDetail.name ?? "",
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(fontWeight: FontWeight.w600),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildCourseImage(context, courseDetail),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            courseDetail.name ?? "",
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(height: 5),
+                          Text(
+                            'by',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(color: Colors.blueAccent),
+                          ).tr(args: [courseDetail.producerName ?? "-"]),
+                          const SizedBox(height: 10),
+                          buildProccess(courseDetail),
+                          _buildEnrollButton(context, courseDetail, user),
+                        ],
                       ),
-                      const SizedBox(height: 5),
-                      Text(
-                        'by',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(color: Colors.blueAccent),
-                      ).tr(args: [courseDetail.producerName ?? "-"]),
-                      const SizedBox(height: 10),
-                      // Keep only the dynamic parts here to rebuild
-                      buildProccess(courseDetail),
-                      _buildEnrollButton(context, courseDetail, user),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
+              const Divider(height: 50),
             ],
           ),
         );
@@ -100,11 +104,12 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
     );
   }
 
-  Widget _buildEnrollButton(BuildContext context, CourseInfo courseDetail, UserProfile user) {
+  Widget _buildEnrollButton(
+      BuildContext context, CourseInfo courseDetail, UserProfile user) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           side: BorderSide(color: Theme.of(context).primaryColor),
           textStyle: Theme.of(context)
               .textTheme
@@ -114,7 +119,8 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
         CourseMixin.enrollButtonText(courseDetail, user),
         style: TextStyle(color: Theme.of(context).primaryColor),
       ).tr(),
-      onPressed: () => handleOpenCourse(context, user: user, courseDetail: courseDetail),
+      onPressed: () =>
+          handleOpenCourse(context, user: user, courseDetail: courseDetail),
     );
   }
 
@@ -127,7 +133,9 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
           finished++;
         }
       }
-      (course.lectures!.isNotEmpty) ? process = (finished * 100 / (course.lectures!.length)).ceil() : process = 0;
+      (course.lectures!.isNotEmpty)
+          ? process = (finished * 100 / (course.lectures!.length)).ceil()
+          : process = 0;
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,4 +154,3 @@ class MyCourseTile extends ConsumerWidget with UserMixin {
     );
   }
 }
-

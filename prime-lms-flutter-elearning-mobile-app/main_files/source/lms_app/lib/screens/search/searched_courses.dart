@@ -19,8 +19,7 @@ class SearchedCourses extends ConsumerWidget {
 
     return coursesProvider.when(
       loading: () => const LoadingListTile(height: 160),
-      error: (error, stackTrace) =>
-          Center(child: Text('Error: ${error.toString()}')),
+      error: (error, stackTrace) => Container(),
       data: (courses) {
         if (courses == null || courses.isEmpty) {
           return EmptyAnimation(
