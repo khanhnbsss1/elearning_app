@@ -83,7 +83,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                      VideoPlayer(
+                  VideoPlayer(
                           videoUrl: videoLink[selectedVideo],
                           videoTitle: videoTitle[selectedVideo],
                           thumbnailUrl: widget.course.image,
