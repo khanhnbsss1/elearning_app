@@ -108,28 +108,28 @@ class RegisterButton extends ConsumerWidget {
                             color: Colors.white,
                           ))),
             )
-          : Container(
-              width: width,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Theme.of(context).primaryColor, Colors.red],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+          : Card(
+              elevation: 10,
+              child: Container(
+                width: width,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                borderRadius: BorderRadius.circular(10),
+                child: MyButton(
+                    borderRadiusAll: 10,
+                    onTap: () {
+                      NavigationService().navigateToScreen(
+                          CurriculamStudy(courseDetail: course));
+                    },
+                    elevation: 10,
+                    backgroundColor: Colors.transparent,
+                    child: Text('lets-study'.tr(),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: Colors.black,
+                                ))),
               ),
-              child: MyButton(
-                borderRadiusAll: 10,
-                  onTap: () {
-                    NavigationService().navigateToScreen(
-                        CurriculamStudy(courseDetail: course));
-                  },
-                  elevation: 10,
-                  backgroundColor: Colors.transparent,
-                  child: Text('lets-study'.tr(),
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Colors.white,
-                          ))),
             ),
     );
   }
