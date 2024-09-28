@@ -20,7 +20,7 @@ class Requirements extends StatelessWidget {
       visible: course.infoObj != null,
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.only(top: 40, bottom: 20),
+        padding: const EdgeInsets.only(top: 20, bottom: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

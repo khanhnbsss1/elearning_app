@@ -14,7 +14,6 @@ class DeleteRatingApi extends BaseApiRequest {
   Future<dynamic> call() async {
     await getAuthorization();
     dynamic result = await deleteRequestAPI();
-    ToastUtils.showToast('success');
     return result;
   }
 

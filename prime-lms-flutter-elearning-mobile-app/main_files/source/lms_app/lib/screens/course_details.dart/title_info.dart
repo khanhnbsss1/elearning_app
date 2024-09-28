@@ -28,65 +28,68 @@ class TitleInfo extends ConsumerWidget {
     bool check = false;
     final isDarkMode = ref.watch(themeProvider).isDarkMode;
     final rating = ref.watch(courseRatingProvider(course));
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text(
-        course.name ?? "-",
-        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              fontSize: 24,
-              height: 1.5,
-              wordSpacing: 3,
-              fontWeight: FontWeight.bold,
-            ),
-      ),
-      const SizedBox(height: 10),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          RatingViewer(rating: rating),
-          const SizedBox(width: 20),
-          Text(
-            'total-lectures',
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium
-                ?.copyWith(fontWeight: FontWeight.w500),
-          ).tr(args: [course.totalLectures.toString()]),
-        ],
-      ),
-      // StarRating(initialRating: (course.ratePoint ?? 0).toDouble(),),
-      const SizedBox(
-        height: 8,
-      ),
-      // Center(
-      //   child: Column(
-      //     children: [
-      //       Text(
-      //         '${course.originalPrice ?? 0} VND',
-      //         style: const TextStyle(
-      //             decoration: TextDecoration.lineThrough,
-      //             color: Colors.black45,
-      //             fontSize: 14,
-      //             fontWeight: FontWeight.w400),
-      //       ),
-      //       const SizedBox(
-      //         height: 8,
-      //       ),
-      //       Text(
-      //         '${course.payment} VND',
-      //         style: const TextStyle(
-      //             decoration: TextDecoration.underline,
-      //             decorationColor: Color(0xFFFFC711),
-      //             fontStyle: FontStyle.italic,
-      //             color: Color(0xFFFFC711),
-      //             fontSize: 18,
-      //             fontWeight: FontWeight.bold),
-      //       ),
-      //       const SizedBox(
-      //         height: 8,
-      //       ),
-      //     ],
-      //   ),
-      // ),
-    ]);
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(
+          course.name ?? "-",
+          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontSize: 24,
+                height: 1.5,
+                wordSpacing: 3,
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            RatingViewer(rating: rating),
+            const SizedBox(width: 20),
+            Text(
+              'total-lectures',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(fontWeight: FontWeight.w500),
+            ).tr(args: [course.totalLectures.toString()]),
+          ],
+        ),
+        // StarRating(initialRating: (course.ratePoint ?? 0).toDouble(),),
+        const SizedBox(
+          height: 8,
+        ),
+        // Center(
+        //   child: Column(
+        //     children: [
+        //       Text(
+        //         '${course.originalPrice ?? 0} VND',
+        //         style: const TextStyle(
+        //             decoration: TextDecoration.lineThrough,
+        //             color: Colors.black45,
+        //             fontSize: 14,
+        //             fontWeight: FontWeight.w400),
+        //       ),
+        //       const SizedBox(
+        //         height: 8,
+        //       ),
+        //       Text(
+        //         '${course.payment} VND',
+        //         style: const TextStyle(
+        //             decoration: TextDecoration.underline,
+        //             decorationColor: Color(0xFFFFC711),
+        //             fontStyle: FontStyle.italic,
+        //             color: Color(0xFFFFC711),
+        //             fontSize: 18,
+        //             fontWeight: FontWeight.bold),
+        //       ),
+        //       const SizedBox(
+        //         height: 8,
+        //       ),
+        //     ],
+        //   ),
+        // ),
+      ]),
+    );
   }
 }

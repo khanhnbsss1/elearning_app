@@ -28,6 +28,6 @@ class CourseShareButton extends StatelessWidget {
 
           Share.share(shareText);
         },
-        icon: const Icon(LineIcons.share));
+        icon: const Icon(LineIcons.share, color: Colors.white,));
   }
 }

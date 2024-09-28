@@ -55,19 +55,23 @@ class _RatingFormState extends ConsumerState<RatingForm> {
   }
 
   Future<void> _addRating() async {
+    MonitorLoading().showLoading('');
     await ApiService().addRating(widget.courseDetail, _rating, reviewCtlr.text);
-    yourRating = RatingInfo(
-      ratePoint: _rating,
-      review: reviewCtlr.text,
-      createdAt: DateFormat('MM/dd/yyyy hh:mm:ss a').format(DateTime.now()),
-      fullname: user?.fullName,
-    );
-    if (reviewList.first.fullname == yourRating.fullname) {
-      reviewList.removeAt(0);
-      reviewList.insert(0, yourRating);
-    } else {
-      reviewList.insert(0, yourRating);
-    }
+    // yourRating = RatingInfo(
+    //   ratePoint: _rating,
+    //   review: reviewCtlr.text,
+    //   createdAt: DateFormat('MM/dd/yyyy hh:mm:ss a').format(DateTime.now()),
+    //   fullname: user?.fullName,
+    // );
+    // if (reviewList.first.fullname == yourRating.fullname) {
+    //   reviewList.removeAt(0);
+    //   reviewList.insert(0, yourRating);
+    // } else {
+    //   reviewList.insert(0, yourRating);
+    // }
+    // setState(() {});
+    _getReviewList();
+    MonitorLoading().dismiss();
     ToastUtils.showSnackBar(context, 'thanks_for_rating'.tr());
   }
 
@@ -237,10 +241,7 @@ class _RatingFormState extends ConsumerState<RatingForm> {
                             backgroundColor: Theme.of(context).primaryColor,
                             foregroundColor: Colors.white,
                             onPressed: () async {
-                              MonitorLoading().showLoading('');
                               await _addRating();
-                              MonitorLoading().dismiss();
-                              setState(() {});
                             },
                             child: Text('submit'.tr()),
                           ),
@@ -453,7 +454,7 @@ class _RatingFormState extends ConsumerState<RatingForm> {
               ),
               onTap: () async {
                 await ApiService().deleteRating(ratingInfo);
-                setState(() {});
+                _getReviewList();
                 Navigator.of(context).pop();
               },
             ),

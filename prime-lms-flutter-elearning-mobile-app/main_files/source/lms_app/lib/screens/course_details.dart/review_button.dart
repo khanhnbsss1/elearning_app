@@ -41,7 +41,7 @@ class ReviewButton extends ConsumerWidget with UserMixin {
           NextScreen.openBottomSheet(context, RatingForm(courseDetail: courseDetail,));
         }
       },
-      icon: const Icon(LineIcons.star, size: 22),
+      icon: const Icon(Icons.comment_outlined, size: 22, color: Colors.white,),
     );
   }
 }

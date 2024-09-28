@@ -16,6 +16,7 @@ import '../tabs/my_courses_tab/my_courses_tab.dart';
 class RegisterButton extends ConsumerWidget {
   const RegisterButton(
       {super.key, required this.course, required this.myCourses, this.width});
+
   final CourseInfo course;
   final List<CourseInfo> myCourses;
   final double? width;
@@ -37,6 +38,7 @@ class RegisterButton extends ConsumerWidget {
               ),
               width: width,
               child: MyButton(
+                  borderRadiusAll: 10,
                   onTap: () {
                     showDialog(
                       context: context,
@@ -49,6 +51,7 @@ class RegisterButton extends ConsumerWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 MyButton(
+                                  borderRadiusAll: 10,
                                   backgroundColor: Colors.white,
                                   child: Text(
                                     'cancel'.tr(),
@@ -61,6 +64,7 @@ class RegisterButton extends ConsumerWidget {
                                   },
                                 ),
                                 MyButton(
+                                  borderRadiusAll: 10,
                                   backgroundColor:
                                       Theme.of(context).primaryColor,
                                   child: Text(
@@ -84,8 +88,7 @@ class RegisterButton extends ConsumerWidget {
                     ).then((confirm) {
                       if (confirm) {
                         if (course.isPayment == 0) {
-                          ToastUtils.showToast(
-                              "register-success".tr());
+                          ToastUtils.showToast("register-success".tr());
                           course.isPayment = 1;
                           NextScreen.replace(
                               context,
@@ -105,19 +108,27 @@ class RegisterButton extends ConsumerWidget {
                             color: Colors.white,
                           ))),
             )
-          : SizedBox(
+          : Container(
               width: width,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Theme.of(context).primaryColor, Colors.red],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: MyButton(
+                borderRadiusAll: 10,
                   onTap: () {
                     NavigationService().navigateToScreen(
                         CurriculamStudy(courseDetail: course));
                   },
                   elevation: 10,
-                  borderColor: Colors.black,
-                  backgroundColor: Colors.white,
+                  backgroundColor: Colors.transparent,
                   child: Text('lets-study'.tr(),
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Colors.black,
+                            color: Colors.white,
                           ))),
             ),
     );

@@ -135,10 +135,10 @@ class _MyAppState extends State<MyApp> {
       localizationsDelegates: delegates,
       locale: LanguageHelper().getCurrentLocale(),
       builder: EasyLoading.init(),
-      home: _isFirstCall!
-          ? const IntroScreen()
-          : (AuthorManager().isLoggedIn != true) ? const LoginScreen(popUpScreen: false) : const Home()
-      // home: _isFirstCall! ? const IntroScreen() : const LoginScreen(popUpScreen: false,),
+      // home: _isFirstCall!
+      //     ? const IntroScreen()
+      //     : (AuthorManager().isLoggedIn != true) ? const LoginScreen(popUpScreen: false) : const Home()
+      home: _isFirstCall! ? const IntroScreen() : const LoginScreen(popUpScreen: false,),
     );
   }
 

@@ -23,7 +23,7 @@ class _HomeState extends ConsumerState<Home> {
     await NotificationService().initFirebasePushNotification(context, ref).then(
           (value) => NotificationService().checkNotificationSubscription(ref),
         );
-    await ref.read(userDataProvider.notifier).getData();
+    // await ref.read(userDataProvider.notifier).getData();
   }
 
   _checkUserAccess() async {

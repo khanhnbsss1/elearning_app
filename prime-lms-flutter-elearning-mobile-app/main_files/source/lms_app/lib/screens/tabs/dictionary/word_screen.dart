@@ -152,8 +152,8 @@ class _WordScreenState extends State<WordScreen> {
                                   if (word.sentenceInfos![index].audioLink != null) AudioSpeaker(url: word.sentenceInfos![index].audioLink!,),
                                 ],
                               ),
-                              if (word.sentenceInfos![index].pinyionSentence != null) Text(' ${word.sentenceInfos![index].pinyionSentence}'),
-                              if (word.sentenceInfos![index].translationVn != null) Text('=> ${word.sentenceInfos![index].translationVn}'),],
+                              if (word.sentenceInfos![index].pinyionSentence != null) Text(' /${word.sentenceInfos![index].pinyionSentence}/', style: TextStyle(fontSize: 14),),
+                              if (word.sentenceInfos![index].translationVn != null) Text(' ${word.sentenceInfos![index].translationVn}'),],
                           ),
                         ),
                       );

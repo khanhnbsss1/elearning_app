@@ -74,8 +74,11 @@ class CourseDetailsView extends ConsumerWidget {
               //     // EnrollButton(course: course),
               //   ],
               // ),
-              bottomNavigationBar: SizedBox(
+              bottomNavigationBar: Container(
                 height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.05)
+                ),
                 child: (!UserManager()
                         .checkRegisteredCourse(courseDetail, myCourses ?? []))
                     ? Row(
@@ -114,20 +117,20 @@ class CourseDetailsView extends ConsumerWidget {
                         child: RegisterButton(
                           course: courseDetail,
                           myCourses: myCourses ?? [],
-                          width: MediaQuery.of(context).size.width * 0.6,
+                          width: MediaQuery.of(context).size.width * 0.4,
                         ),
                       ),
               ),
               body: CustomScrollView(
                 slivers: [
                   SliverAppBar(
-                    backgroundColor: Colors.white,
+                    backgroundColor: Theme.of(context).primaryColor,
                     pinned: false,
                     // forceMaterialTransparency: true,
                     floating: true,
                     leading: IconButton(
                       onPressed: () => Navigator.pop(context),
-                      icon: const Icon(FeatherIcons.chevronLeft),
+                      icon: const Icon(FeatherIcons.chevronLeft, color: Colors.white,),
                     ),
                     actions: [
                       // RegisterButton(
@@ -151,7 +154,6 @@ class CourseDetailsView extends ConsumerWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             PreviewBox(course: courseDetail, heroTag: heroTag),
-                            const SizedBox(height: 20),
                             TitleInfo(
                               course: courseDetail,
                             ),
@@ -160,7 +162,6 @@ class CourseDetailsView extends ConsumerWidget {
                             //     myCourses: myCourses ?? []),
                             CourseInfoScreen(course: courseDetail),
                             Learnings(course: courseDetail),
-                            const SizedBox(height: 40),
                             CurriculamPreview(course: courseDetail),
                             Requirements(course: courseDetail),
                             // CourseDescription(course: courseInfo),

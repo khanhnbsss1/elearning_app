@@ -14,19 +14,22 @@ class CurriculamPreview extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'curricullam',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-        ).tr(),
-        Sections(
-          courseDetail: course,
-          isInitialSectionOpen: false,
-          enabled: false,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'curricullam',
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+          ).tr(),
+          Sections(
+            courseDetail: course,
+            isInitialSectionOpen: false,
+            enabled: false,
+          ),
+        ],
+      ),
     );
   }
 }
